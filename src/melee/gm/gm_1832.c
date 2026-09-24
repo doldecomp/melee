@@ -655,39 +655,23 @@ void fn_80185408(int x, float arg8, float arg9, float argA, float argB)
 extern float MSL_TrigF_80400770[];
 extern float MSL_TrigF_80400774[];
 
-#ifdef MUST_MATCH
-#pragma push
-#pragma dont_inline on
-#endif
-double fn_801855BC(double arg8)
+double fn_801855BC(double x)
 {
-    f64 temp_f2;
-    f64 temp_f2_2;
-    f64 temp_f2_3;
-    f64 temp_f2_4;
-
-    if (arg8 > 0.0) {
-        temp_f2_2 = __frsqrte(arg8);
-        temp_f2_3 =
-            0.5 * temp_f2_2 * -(((f64) arg8 * (temp_f2_2 * temp_f2_2)) - 3.0);
-        temp_f2_4 =
-            0.5 * temp_f2_3 * -(((f64) arg8 * (temp_f2_3 * temp_f2_3)) - 3.0);
-        temp_f2 =
-            0.5 * temp_f2_4 * -(((f64) arg8 * (temp_f2_4 * temp_f2_4)) - 3.0);
-        return arg8 *
-               (0.5 * temp_f2 * -(((f64) arg8 * (temp_f2 * temp_f2)) - 3.0));
-    }
-    if (0.0 == arg8) {
-        return 0.0;
-    }
-    if (arg8) {
+    if (x > 0.0) {
+        double guess = __frsqrte(x);
+        guess = 0.5 * guess * (3.0 - guess * guess * x);
+        guess = 0.5 * guess * (3.0 - guess * guess * x);
+        guess = 0.5 * guess * (3.0 - guess * guess * x);
+        guess = 0.5 * guess * (3.0 - guess * guess * x);
+        return x * guess;
+    } else if (x == 0) {
+        return 0;
+    } else if (x) {
         return MSL_TrigF_80400770[0];
+    } else {
+        return MSL_TrigF_80400774[0];
     }
-    return MSL_TrigF_80400774[0];
 }
-#ifdef MUST_MATCH
-#pragma pop
-#endif
 
 void fn_8018564C(HSD_GObj* gobj)
 {

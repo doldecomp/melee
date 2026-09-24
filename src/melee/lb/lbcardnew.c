@@ -855,6 +855,22 @@ static inline CardTask* setupTask(CardTaskType type, int result_mask)
     return task;
 }
 
+static inline void addTaskEntries(CardTaskType type, int result_mask,
+                                  void* file_entries)
+{
+    CardTask* task = getNewTask();
+    task->type = type;
+    task->result_mask = result_mask;
+    task->file_entries = file_entries;
+}
+
+static inline void addTask(CardTaskType type, int result_mask)
+{
+    CardTask* task = getNewTask();
+    task->type = type;
+    task->result_mask = result_mask;
+}
+
 static inline void lb_8001A4CC_dontinline(const char* filename,
                                           void* file_entries)
 {
@@ -1013,68 +1029,36 @@ int lb_8001BD34(int chan, const char* filename, UNK_T file_entries,
     return result;
 }
 
-#ifdef MUST_MATCH
-#pragma push
-#pragma dont_inline on
-#endif
 int lb_8001BE30(int chan, const char* filename, UNK_T file_entries,
                 char* comment, void* banner, void* icons, UNK_T status_out,
                 UNK_T callback)
 {
-    CardTask* task;
     resetState(chan, 0, status_out, callback);
-
-    task = getNewTask();
-    task->type = LbCardNewTask_Mount;
-    task->result_mask = 0x10000;
-    task = getNewTask();
-    task->type = LbCardNewTask_Check;
-    task->result_mask = 0x201;
-    setTaskFilename(filename, 0);
-    task = getNewTask();
-    task->type = LbCardNewTask_Unk3;
-    task->result_mask = -1;
-    task = getNewTask();
-    task->type = LbCardNewTask_SetStatus;
-    task->result_mask = 2;
+    addTask(LbCardNewTask_Mount, 0x10000);
+    addTask(LbCardNewTask_Check, 0x201);
+    lb_8001A4CC_dontinline(filename, 0);
+    addTask(LbCardNewTask_Unk3, -1);
+    addTask(LbCardNewTask_SetStatus, 2);
     _p(comment) = comment;
     _p(banner) = banner;
     _p(icons) = icons;
-    task = getNewTask();
-    task->type = LbCardNewTask_Write;
-    task->result_mask = 3;
-    task->file_entries = file_entries;
+    addTaskEntries(LbCardNewTask_Write, 3, file_entries);
     return executeNextTask(0x10);
 }
-#ifdef MUST_MATCH
-#pragma pop
-#endif
 
 int lb_8001BF04(int chan, char* filename, void* file_entries, char* comment,
                 void* banner, void* icons, UNK_T status_out)
 {
-    CardTask* task;
     resetState(chan, 0, status_out, 0);
-    task = lb_80019C38_noinline();
-    task->type = LbCardNewTask_Mount;
-    task->result_mask = 0x10000;
-    task = lb_80019C38_noinline();
-    task->type = LbCardNewTask_Check;
-    task->result_mask = resultMask_Ready | resultMask_Malformed;
+    addTask(LbCardNewTask_Mount, 0x10000);
+    addTask(LbCardNewTask_Check, resultMask_Ready | resultMask_Malformed);
     lb_8001A4CC_dontinline(filename, 0);
-    task = lb_80019C38_noinline();
-    task->type = LbCardNewTask_Unk3;
-    task->result_mask = U32_MAX;
-    task = lb_80019C38_noinline();
-    task->type = LbCardNewTask_ReadHeader;
-    task->result_mask = 2;
+    addTask(LbCardNewTask_Unk3, U32_MAX);
+    addTask(LbCardNewTask_ReadHeader, 2);
     _p(comment) = comment;
     _p(banner) = banner;
     _p(icons) = icons;
-    task = lb_80019C38_noinline();
-    task->type = LbCardNewTask_Read;
-    task->result_mask = 3;
-    task->file_entries = file_entries;
+    addTaskEntries(LbCardNewTask_Read, 3, file_entries);
     return executeNextTask(0x10);
 }
 

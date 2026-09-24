@@ -1,5 +1,10 @@
 #include "math.h"
 
+float tanf(float x)
+{
+    return sin__Ff(x) / cos__Ff(x);
+}
+
 float fabsf__Ff(float param_1)
 {
     return fabsf(param_1);

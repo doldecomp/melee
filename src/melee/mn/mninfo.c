@@ -218,10 +218,6 @@ s32 mnInfo_80251D58(mnInfo_GObj* arg0, s32 arg1, u32 arg2, u32 arg3)
                                sp2C, sp28);
 }
 
-#ifdef MUST_MATCH
-#pragma push
-#pragma dont_inline on
-#endif
 void mnInfo_80251F04(mnInfo_GObj* arg0, s32 arg1, u32 arg2)
 {
     s16 sp16;
@@ -244,9 +240,6 @@ void mnInfo_80251F04(mnInfo_GObj* arg0, s32 arg1, u32 arg2)
     un_802FE3F8((s32) arg2, 0x4BD, &sp16, NULL);
     HSD_SisLib_803A6368(text, (s32) (u16) sp16);
 }
-#ifdef MUST_MATCH
-#pragma pop
-#endif
 
 static inline s32 mnInfo_CountUnlocked(void)
 {
@@ -261,23 +254,22 @@ static inline s32 mnInfo_CountUnlocked(void)
     return count;
 }
 
-static inline void mnInfo_CreateEntries(u32 id)
+static inline void mnInfo_CreateEntry(mnInfo_GObj* gobj, s32 i, u32 id)
 {
-    u8* trophy;
+    mnInfo_80251D58(gobj, i, id, *gmMainLib_8015D804(id));
+    mnInfo_80251F04(gobj, i, id);
+}
+
+static inline void mnInfo_CreateEntries(mnInfo_GObj* gobj, int start)
+{
     s32 i;
-    mnInfo_GObj* gobj;
 
-    gobj = mnInfo_804D6C78;
-    trophy = &mnInfo_804A0968[id];
-    (void) trophy;
     for (i = 0; i < 4; i++) {
-        if (mnInfo_80251A08(*trophy) != 0) {
-            id = *trophy;
+        if (isUnlockVisible(mnInfo_804A0968[start + i])) {
+            u32 id = mnInfo_804A0968[start + i];
 
-            mnInfo_80251D58(gobj, i, id, *gmMainLib_8015D804(id));
-            mnInfo_80251F04(gobj, i, id);
+            mnInfo_CreateEntry(gobj, i, id);
         }
-        trophy++;
     }
 }
 
@@ -306,7 +298,7 @@ void fn_80251FE4(void)
     MnInfoData* data;
     u64 buttons;
     s32 count;
-    PAD_STACK(0x18);
+    PAD_STACK(0x8);
 
     data = mnInfo_804D6C78->user_data;
     if (mn_804D6BC8.cooldown != 0) {
@@ -327,25 +319,7 @@ void fn_80251FE4(void)
             data->scroll_idx -= 1;
             sfxMove();
             mnInfo_FreeEntries();
-            {
-                u8* other;
-                u8* trophy;
-                s32 i;
-                mnInfo_GObj* gobj;
-
-                gobj = mnInfo_804D6C78;
-                other = trophy = &mnInfo_804A0968[data->scroll_idx];
-                for (i = 0; i < 4; i++) {
-                    (void) (other == trophy);
-                    if (isUnlockVisible(*trophy)) {
-                        u32 id = *trophy;
-
-                        mnInfo_80251D58(gobj, i, id, *gmMainLib_8015D804(id));
-                        mnInfo_80251F04(gobj, i, id);
-                    }
-                    ++trophy;
-                }
-            }
+            mnInfo_CreateEntries(mnInfo_804D6C78, data->scroll_idx);
         }
     } else if (buttons & MenuInput_Down) {
         count = mnInfo_CountUnlocked();
@@ -353,7 +327,7 @@ void fn_80251FE4(void)
             sfxMove();
             data->scroll_idx += 1;
             mnInfo_FreeEntries();
-            mnInfo_CreateEntries(data->scroll_idx);
+            mnInfo_CreateEntries(mnInfo_804D6C78, data->scroll_idx);
         }
     }
 }

@@ -117,10 +117,6 @@ HSD_GObj* DevText_GetGObj(void)
     return devtext_gobj;
 }
 
-#ifdef MUST_MATCH
-#pragma push
-#pragma dont_inline on
-#endif
 void DevText_InitPool(void)
 {
     DevText* text = devtext_pool.entries;
@@ -134,9 +130,6 @@ void DevText_InitPool(void)
     devtext_poolhead = devtext_pool.entries;
     devtext_drawlist = NULL;
 }
-#ifdef MUST_MATCH
-#pragma pop
-#endif
 
 void DevText_Remove(DevText** ptext)
 {
@@ -275,10 +268,6 @@ void DevText_DrawAll(HSD_GObj* gobj, intptr_t pass)
     }
 }
 
-#ifdef MUST_MATCH
-#pragma push
-#pragma dont_inline on
-#endif
 void DevText_CreateCObj(int classifier, int p_link, int gobj_priority,
                         int gx_link, u8 gx_priority)
 {
@@ -294,16 +283,28 @@ void DevText_CreateCObj(int classifier, int p_link, int gobj_priority,
         }
     }
 }
-#ifdef MUST_MATCH
-#pragma pop
-#endif
+
+static inline void setupSystem(int classifier, int p_link, int priority,
+                               int gx_link, u8 camera_priority)
+{
+    DevText_CreateCObj(classifier, p_link, priority, gx_link, camera_priority);
+    DevText_InitPool();
+}
+
+static inline HSD_GObj* createDrawGObj(void)
+{
+    HSD_GObj* gobj = GObj_Create(devtext_setup_classifier,
+                                 devtext_setup_p_link, devtext_setup_priority);
+    if (gobj) {
+        GObj_SetupGXLink(gobj, DevText_DrawAll, devtext_setup_gx_link,
+                         devtext_setup_render_priority & 0xFF);
+    }
+    return gobj;
+}
 
 HSD_GObj* DevText_Setup(int classifier, int p_link, int priority, int gx_link,
                         int render_priority, u8 camera_priority)
 {
-    HSD_GObj* gobj;
-    PAD_STACK(8);
-
     devtext_setup_classifier = classifier;
     devtext_setup_p_link = p_link;
     devtext_setup_priority = priority;
@@ -311,15 +312,8 @@ HSD_GObj* DevText_Setup(int classifier, int p_link, int priority, int gx_link,
     devtext_setup_render_priority = render_priority;
     devtext_cobj = NULL;
 
-    DevText_CreateCObj(classifier, p_link, priority, gx_link, camera_priority);
-    DevText_InitPool();
-    gobj = GObj_Create(devtext_setup_classifier, devtext_setup_p_link,
-                       devtext_setup_priority);
-    if (gobj) {
-        GObj_SetupGXLink(gobj, DevText_DrawAll, devtext_setup_gx_link,
-                         devtext_setup_render_priority & 0xFF);
-    }
-    devtext_gobj = gobj;
+    setupSystem(classifier, p_link, priority, gx_link, camera_priority);
+    devtext_gobj = createDrawGObj();
     return devtext_gobj;
 }
 

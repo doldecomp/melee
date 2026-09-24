@@ -542,7 +542,8 @@ HSD_GObj* ifStock_802F96D0(int a, int b, float x, float y)
 {
     struct ifStock_804A1378* q = &ifStock_804A1378;
     HSD_GObj* gobj = GObj_Create(14, 15, 0);
-    HSD_JObj* jobj = HSD_JObjLoadJoint((*q->x0)->joint);
+    HSD_Joint* joint = (*q->x0)->joint;
+    HSD_JObj* jobj = HSD_JObjLoadJoint(joint);
     HSD_JObj* jobj2;
     HSD_GObjObject_80390A70(gobj, HSD_GObj_JObjKind, jobj);
     GObj_SetupGXLink(gobj, fn_802F9680, 11, 0);
@@ -746,11 +747,12 @@ void ifStock_802F98E8(u8 player, u8 b)
     }
 }
 
-static inline HSD_GObj* ifStock_802F9F48_inline(int arg)
+HSD_GObj* ifStock_802F9F48(int arg)
 {
     struct ifStock_804A1378* q = &ifStock_804A1378;
     HSD_GObj* gobj = GObj_Create(14, 15, 0);
-    HSD_JObj* jobj = HSD_JObjLoadJoint((*q->x0)->joint);
+    HSD_Joint* joint = (*q->x0)->joint;
+    HSD_JObj* jobj = HSD_JObjLoadJoint(joint);
     HSD_JObj* jobj2;
     HSD_GObjObject_80390A70(gobj, HSD_GObj_JObjKind, jobj);
     GObj_SetupGXLink(gobj, fn_802F95E8, 11, 0);
@@ -770,16 +772,13 @@ static inline HSD_GObj* ifStock_802F9F48_inline(int arg)
     HSD_JObjAnimAll(jobj);
     return gobj;
 }
-HSD_GObj* ifStock_802F9F48(int arg)
-{
-    return ifStock_802F9F48_inline(arg);
-}
 
 HSD_GObj* ifStock_802FA118(int arg)
 {
     struct ifStock_804A1378* q = &ifStock_804A1378;
     HSD_GObj* gobj = GObj_Create(14, 15, 0);
-    HSD_JObj* jobj = HSD_JObjLoadJoint((*q->x0)->joint);
+    HSD_Joint* joint = (*q->x0)->joint;
+    HSD_JObj* jobj = HSD_JObjLoadJoint(joint);
     HSD_JObj* jobj2;
     HSD_GObjObject_80390A70(gobj, HSD_GObj_JObjKind, jobj);
     GObj_SetupGXLink(gobj, fn_802F9548, 11, 0);
@@ -842,9 +841,6 @@ void ifStock_802FA5BC(int arg)
     lb_80011E24(jobj, &ifStock_804A1378.jobj, 0, 1, 2, 3, 4, 5, -1);
 }
 
-#ifdef MUST_MATCH
-#pragma dont_inline on
-#endif
 void fn_802FA6C4(HSD_GObj* arg)
 {
     int i;
@@ -887,9 +883,6 @@ void fn_802FA6C4(HSD_GObj* arg)
         ifStock_804A1774.x0 = 0;
     }
 }
-#ifdef MUST_MATCH
-#pragma dont_inline off
-#endif
 
 void fn_802FA8C0(HSD_GObj* arg)
 {

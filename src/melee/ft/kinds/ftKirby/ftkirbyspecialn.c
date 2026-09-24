@@ -220,7 +220,7 @@ f32 ftKb_SpecialN_800F5B4C(Fighter_GObj* gobj)
 
 void ftKb_SpecialN_800F5B5C(Fighter_GObj* gobj, Vec3* output)
 {
-    Fighter* fp = GET_FIGHTER(gobj);
+    Fighter* fp = getFighterPlus(gobj);
     ftKb_DatAttrs* da = fp->dat_attrs;
     *output = fp->cur_pos;
     output->x += da->specialn_x_offset_inhaled * fp->facing_dir;
@@ -294,16 +294,14 @@ void ftKb_SpecialN_800F5DE8(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftKb_DatAttrs* da = fp->dat_attrs;
-    Vec3 pos = fp->cur_pos;
-    PAD_STACK(20);
+    Vec3 pos;
 
-    pos.x += da->specialn_x_offset_inhaled * fp->facing_dir;
-    pos.y += da->specialn_y_offset_inhaled;
+    ftKb_SpecialN_800F5B5C(gobj, &pos);
     if (it_802F23AC(fp->target_item_gobj, &pos) <
         da->specialn_inhale_velocity * da->specialn_inhale_velocity)
     {
         it_802F2810(fp->target_item_gobj);
-        if (fp->ground_or_air == GA_Air) {
+        if (ftGetGroundAir(fp) == GA_Air) {
             ftKb_SpecialN_800F63EC(gobj);
         } else {
             ftKb_SpecialN_800F6388(gobj);
@@ -315,16 +313,14 @@ void ftKb_SpecialN_800F5EA8(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftKb_DatAttrs* da = fp->dat_attrs;
-    Vec3 pos = fp->cur_pos;
-    PAD_STACK(20);
+    Vec3 pos;
 
-    pos.x += da->specialn_x_offset_inhaled * fp->facing_dir;
-    pos.y += da->specialn_y_offset_inhaled;
+    ftKb_SpecialN_800F5B5C(gobj, &pos);
     if (ftCo_800BD19C(fp->victim_gobj, &pos) <
         da->specialn_inhale_velocity * da->specialn_inhale_velocity)
     {
         ftCo_800BD620(fp->victim_gobj);
-        if (fp->ground_or_air == GA_Air) {
+        if (ftGetGroundAir(fp) == GA_Air) {
             ftKb_SpecialN_800F63EC(gobj);
         } else {
             ftKb_SpecialN_800F6388(gobj);
@@ -429,21 +425,22 @@ static void fn_800F6318(HSD_GObj* gobj)
     ftCommon_8007E2F4(fp, 0x1FF);
 }
 
-void ftKb_SpecialN_800F6388(Fighter_GObj* gobj)
+static inline void enterCaptureState(Fighter_GObj* gobj, FtMotionId msid)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    Fighter_ChangeMotionState(gobj, ftKb_MS_Eat, 0x10, 0.0F, 1.0F, 0.0F, NULL);
+    Fighter_ChangeMotionState(gobj, msid, 0x10, 0.0f, 1.0f, 0.0f, NULL);
     ftKb_SpecialN_800F9070(gobj);
     ftCommon_8007E2F4(fp, 0x1FF);
 }
 
+void ftKb_SpecialN_800F6388(Fighter_GObj* gobj)
+{
+    enterCaptureState(gobj, ftKb_MS_Eat);
+}
+
 void ftKb_SpecialN_800F63EC(Fighter_GObj* gobj)
 {
-    Fighter* fp = GET_FIGHTER(gobj);
-    Fighter_ChangeMotionState(gobj, ftKb_MS_EatAir, 0x10, 0.0F, 1.0F, 0.0F,
-                              NULL);
-    ftKb_SpecialN_800F9070(gobj);
-    ftCommon_8007E2F4(fp, 0x1FF);
+    enterCaptureState(gobj, ftKb_MS_EatAir);
 }
 
 void fn_800F6450(HSD_GObj* gobj)
@@ -781,73 +778,25 @@ void ftKb_SpecialAirNEnd_Anim(Fighter_GObj* gobj)
     }
 }
 
-static inline void ftKb_SpecialNCapture_EnterState(Fighter_GObj* gobj, s32 ms)
-{
-    Fighter* fp = GET_FIGHTER(gobj);
-    Fighter_ChangeMotionState(gobj, ms, 0x10, 0.0f, 1.0f, 0.0f, NULL);
-    ftKb_SpecialN_800F9070(gobj);
-    ftCommon_8007E2F4(fp, 0x1FF);
-}
-
 void ftKb_SpecialNCapture0_Anim(Fighter_GObj* gobj)
-{
-    Fighter* fp = getFighter(gobj);
-    ftKb_DatAttrs* da = fp->dat_attrs;
-    Vec3 pos = fp->cur_pos;
-    u8 _pad[32];
-
-    pos.x += da->specialn_x_offset_inhaled * fp->facing_dir;
-    pos.y += da->specialn_y_offset_inhaled;
-    if (it_802F23AC(fp->target_item_gobj, &pos) <
-        SQ(da->specialn_inhale_velocity))
-    {
-        it_802F2810(fp->target_item_gobj);
-        if (fp->ground_or_air == GA_Air) {
-            ftKb_SpecialNCapture_EnterState(gobj, 0x178);
-        } else {
-            ftKb_SpecialNCapture_EnterState(gobj, 0x166);
-        }
-        fp->facing_dir = fp->facing_dir; // fake match, via permuter
-    }
-}
-
-void ftKb_SpecialNCapture_Anim(Fighter_GObj* gobj)
-{
-    Fighter* fp = getFighter(gobj);
-    ftKb_DatAttrs* da = fp->dat_attrs;
-    Vec3 pos = fp->cur_pos;
-    u8 _pad[32];
-
-    pos.x += da->specialn_x_offset_inhaled * fp->facing_dir;
-    pos.y += da->specialn_y_offset_inhaled;
-    if (ftCo_800BD19C(fp->victim_gobj, &pos) <
-        SQ(da->specialn_inhale_velocity))
-    {
-        ftCo_800BD620(fp->victim_gobj);
-        if (fp->ground_or_air == GA_Air) {
-            ftKb_SpecialNCapture_EnterState(gobj, 0x178);
-        } else {
-            ftKb_SpecialNCapture_EnterState(gobj, 0x166);
-        }
-        fp->facing_dir = fp->facing_dir; // fake match, via permuter
-    }
-}
-
-#ifdef MUST_MATCH
-#pragma dont_inline on
-#endif
-void ftKb_SpecialNCapture1_Anim(Fighter_GObj* gobj)
 {
     ftKb_SpecialN_800F5DE8(gobj);
 }
 
-void ftKb_SpecialAirNCapture_Anim(Fighter_GObj* gobj)
+void ftKb_SpecialNCapture_Anim(Fighter_GObj* gobj)
 {
     ftKb_SpecialN_800F5EA8(gobj);
 }
-#ifdef MUST_MATCH
-#pragma dont_inline off
-#endif
+
+void ftKb_SpecialNCapture1_Anim(Fighter_GObj* gobj)
+{
+    ftKb_SpecialNCapture0_Anim(gobj);
+}
+
+void ftKb_SpecialAirNCapture_Anim(Fighter_GObj* gobj)
+{
+    ftKb_SpecialNCapture_Anim(gobj);
+}
 
 void ftKb_Eat_Anim(HSD_GObj* gobj)
 {

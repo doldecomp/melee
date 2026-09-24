@@ -153,8 +153,9 @@ extern u8 lbl_80431690[0xC];
 extern u16 lbl_8043169C[0xC];
 extern u8 lbl_804316B4[0xC];
 
-static inline s32 hsd_803B5C4C_read(s32 bits, s32 bit_count)
+s32 hsd_803B5C4C(s32 bit_count)
 {
+    s32 bits = 0;
     u8* next_byte;
 
     do {
@@ -187,14 +188,6 @@ static inline s32 hsd_803B5C4C_read(s32 bits, s32 bit_count)
     return bits;
 }
 
-s32 hsd_803B5C4C(s32 bit_count)
-{
-    return hsd_803B5C4C_read(0, bit_count);
-}
-
-#ifdef MUST_MATCH
-#pragma dont_inline on
-#endif
 s32 hsd_803B5D70(s32 ac, s32 component)
 {
     s32 value_idx;
@@ -320,9 +313,6 @@ void hsd_803B5EA0(s32 component)
         }
     }
 }
-#ifdef MUST_MATCH
-#pragma dont_inline off
-#endif
 
 void fn_803B61B4(s32* block)
 {

@@ -119,33 +119,28 @@ void onExitVs(GameModeState* state)
     }
 }
 
-#ifdef MUST_MATCH
-#pragma push
-#pragma dont_inline on
-#endif
 static UNK_T* gm_801BFC60(u32 arg0, s32 arg1, u32 arg2, u32 arg3, UNK_T* arg4)
 {
-    struct un_804A1F48_t* temp_r3;
+    struct un_804A1F48_t* entry;
 
     if (arg1 == 0) {
         if_Scene_Prize_EnterData.x0 = arg0;
         if_Scene_Prize_EnterData.x4 = arg3;
         if_Scene_Prize_EnterData.x2 = arg2;
-        return (&if_Scene_Prize_EnterData.x8);
+        return &if_Scene_Prize_EnterData.x8;
+    } else {
+        entry = HSD_MemAlloc(sizeof(*entry));
+        if (entry != NULL) {
+            entry->x0 = arg0;
+            entry->x4 = arg3;
+            entry->x2 = arg2;
+            *arg4 = entry;
+            return &entry->x8;
+        } else {
+            return arg4;
+        }
     }
-    temp_r3 = HSD_MemAlloc(sizeof(*temp_r3));
-    if (temp_r3 != NULL) {
-        temp_r3->x0 = arg0;
-        temp_r3->x4 = arg3;
-        temp_r3->x2 = arg2;
-        *arg4 = temp_r3;
-        return (&temp_r3->x8);
-    }
-    return arg4;
 }
-#ifdef MUST_MATCH
-#pragma pop
-#endif
 
 static u8 gm_8049E558[0x170];
 

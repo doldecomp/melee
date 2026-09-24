@@ -1845,29 +1845,25 @@ static void fn_801D4220(int dcreq, uintptr_t args, void* buf, bool cancelflag)
     gp->u.stadium.xC4_b1 = false;
 }
 
-#ifdef MUST_MATCH
-#pragma push
-#pragma dont_inline on
-#endif
 bool grStadium_801D42B8(void)
 {
     HSD_GObj* map_gobj;
     Ground* gp;
+    bool result;
 
     map_gobj = Ground_GetMapGObj(2);
     HSD_ASSERT(0x978, map_gobj);
     gp = grStadium_801D4354(map_gobj);
     HSD_ASSERT(0x979, gp);
     if (gp->u.stadium.xC4_b1) {
-        return false;
+        result = false;
+    } else {
+        gp->u.stadium.xD0 =
+            grDatFiles_801C6478(gp->u.stadium.xCC, gp->u.stadium.xC8);
+        result = true;
     }
-    gp->u.stadium.xD0 =
-        grDatFiles_801C6478(gp->u.stadium.xCC, gp->u.stadium.xC8);
-    return true;
+    return result;
 }
-#ifdef MUST_MATCH
-#pragma pop
-#endif
 
 Ground* grStadium_801D4354(Ground_GObj* gobj)
 {
@@ -1880,6 +1876,27 @@ char* datfiles[] = {
     "GrPs3.dat",
     "GrPs4.dat",
 };
+
+static inline void startLoad(int i)
+{
+    HSD_GObj* map_gobj;
+    Ground* gp;
+
+    map_gobj = Ground_GetMapGObj(2);
+    HSD_ASSERT(0x99A, map_gobj);
+    gp = grStadium_801D4354(map_gobj);
+    HSD_ASSERT(0x99B, gp);
+    gp->u.stadium.xC4_b1 = true;
+    lbFile_80016580(datfiles[i], gp->u.stadium.xCC, &gp->u.stadium.xC8,
+                    fn_801D4220, 0);
+}
+
+static inline void waitLoad(Ground* gp)
+{
+    if (grStadium_801D42B8()) {
+        gp->u.stadium.xDC = 2;
+    }
+}
 
 static struct VecScalar {
     Vec3 vec;
@@ -1971,162 +1988,142 @@ void grStadium_801D435C(Ground_GObj* arg0)
 
 void grStadium_801D4548(Ground_GObj* gobj)
 {
-    Ground* temp_r31;
-    Ground_GObj* temp_r3_7;
-    int temp_r0_3;
-    HSD_GObj* temp_r3;
-    int temp_r3_4;
-    HSD_GObj* map_gobj;
-    HSD_GObj* temp_r3_6;
-    int temp_r3_8;
-    int temp_r4_4;
-    int temp_r4_8;
-    HSD_JObj* temp_r27_2;
-    HSD_JObj* temp_r27_3;
-    HSD_JObj* temp_r27_5;
-    HSD_JObj* temp_r30;
-    f32 var_f30;
-    f32 temp_f29;
-    f32 temp_f30;
-    f32 temp_f31;
-    f32 var_f29;
-    s16 temp_r0_2;
-    s32 temp_r0_4;
-    s32 temp_r0_5;
-    s32 temp_r5_2;
-    s32 var_r29;
-    s32 var_r4;
     Ground* gp;
-    HSD_JObj* temp_r27_4;
-    Ground* temp_r3_2;
+    Ground_GObj* new_gobj;
+    int frame;
+    HSD_GObj* display_gobj;
+    int frame2;
+    int frame1;
+    HSD_JObj* jobj_a;
+    HSD_JObj* new_jobj;
+    HSD_JObj* jobj5;
+    HSD_JObj* jobj;
+    f32 offset2;
+    f32 scale_y;
+    f32 min_scale;
+    f32 scale;
+    f32 offset;
+    s16 cur_kind;
+    s32 half;
+    s32 half2;
+    s32 total;
+    s32 idx;
+    s32 kind;
+    HSD_JObj* cur_jobj;
+    Ground* display_gp;
 
-    temp_r31 = GET_GROUND(gobj);
-    temp_f31 = Ground_801C0498();
-    if (gm_8018841C() != 0) {
+    gp = GET_GROUND(gobj);
+    scale = Ground_801C0498();
+    if (gm_8018841C()) {
         return;
     }
 
     if (Stage_80225194() == 0xF0) {
-        temp_r3 = Ground_GetMapGObj(PsType_Display);
-        if (temp_r3 != NULL) {
-            temp_r3_2 = GET_GROUND(temp_r3);
-            if (temp_r3_2 != NULL) {
-                if (temp_r3_2->u.display.xF4 != NULL) {
-                    temp_r3_2->u.display.xF4->state = CmSubjectState_Active;
-                }
+        display_gobj = Ground_GetMapGObj(PsType_Display);
+        if (display_gobj != NULL) {
+            display_gp = GET_GROUND(display_gobj);
+            if (display_gp != NULL && display_gp->u.display.xF4 != NULL) {
+                display_gp->u.display.xF4->state = CmSubjectState_Active;
             }
         }
         return;
     }
 
-    switch (temp_r31->u.stadium.xDC) {
+    switch (gp->u.stadium.xDC) {
     case 0:
-        temp_r3_4 = temp_r31->u.stadium.xD8;
-        temp_r31->u.stadium.xD8 = temp_r3_4 - 1;
-        if (temp_r3_4 < 0) {
-            if (temp_r31->u.stadium.xDE == 5) {
-                int sp60[] = { 3, 4, 6, 9 };
-                int idx;
+        if (gp->u.stadium.xD8-- < 0) {
+            if (gp->u.stadium.xDE == 5) {
+                int kinds[] = { 3, 4, 6, 9 };
+                int r;
                 do {
-                    idx = HSD_Randi(ARRAY_SIZE(sp60));
-                } while (temp_r31->u.stadium.xE2 == (var_r4 = sp60[idx]));
+                    r = HSD_Randi(ARRAY_SIZE(kinds));
+                } while (gp->u.stadium.xE2 == (kind = kinds[r]));
             } else {
-                var_r4 = 5;
+                kind = 5;
             }
-            temp_r31->u.stadium.xE2 = temp_r31->u.stadium.xE0;
-            temp_r31->u.stadium.xE0 = temp_r31->u.stadium.xDE;
-            temp_r31->u.stadium.xDE = var_r4;
+            gp->u.stadium.xE2 = gp->u.stadium.xE0;
+            gp->u.stadium.xE0 = gp->u.stadium.xDE;
+            gp->u.stadium.xDE = kind;
 
-            if (var_r4 == 5) { // default
-                temp_r31->u.stadium.xDC = 2;
+            if (kind == 5) { // default
+                gp->u.stadium.xDC = 2;
                 return;
-            } else if (var_r4 == 3) { // fire
-                var_r29 = 0;
-            } else if (var_r4 == 4) { // grass
-                var_r29 = 1;
-            } else if (var_r4 == 9) { // water
-                var_r29 = 2;
-            } else if (var_r4 == 6) { // rock
-                var_r29 = 3;
+            } else if (kind == 3) { // fire
+                idx = 0;
+            } else if (kind == 4) { // grass
+                idx = 1;
+            } else if (kind == 9) { // water
+                idx = 2;
+            } else if (kind == 6) { // rock
+                idx = 3;
             } else {
                 HSD_ASSERT(0xA44, 0);
             }
-            grAnime_801C65B0(temp_r31->u.stadium.xD0);
-            temp_r31->u.stadium.xD0 = NULL;
-            map_gobj = Ground_GetMapGObj(2);
-            HSD_ASSERT(0x99A, map_gobj);
-            gp = GET_GROUND(map_gobj);
-            HSD_ASSERT(0x99B, gp);
-            gp->u.stadium.xC4_b1 = true;
-            lbFile_80016580(datfiles[var_r29], gp->u.stadium.xCC,
-                            &gp->u.stadium.xC8, fn_801D4220, 0);
-            temp_r31->u.stadium.xDC = 1;
+            grAnime_801C65B0(gp->u.stadium.xD0);
+            gp->u.stadium.xD0 = NULL;
+            startLoad(idx);
+            gp->u.stadium.xDC = 1;
             return;
         }
         break;
     case 1:
-        if (grStadium_801D42B8()) {
-            temp_r31->u.stadium.xDC = 2;
-            return;
-        }
+        waitLoad(gp);
         break;
     case 2:
-        temp_r31->u.display.xD8 = NULL;
-        temp_r3_6 = Ground_GetMapGObj(1);
-        if (temp_r3_6 != NULL) {
-            temp_r0_2 = temp_r31->u.stadium.xDE;
+        gp->u.stadium.xD8 = 0;
+        display_gobj = Ground_GetMapGObj(PsType_Display);
+        if (display_gobj != NULL) {
+            cur_kind = gp->u.stadium.xDE;
 
-            if (temp_r0_2 == 3) {
-                var_r29 = 3;
-            } else if (temp_r0_2 == 4) {
-                var_r29 = 4;
-            } else if (temp_r0_2 == 9) {
-                var_r29 = 5;
-            } else if (temp_r0_2 == 6) {
-                var_r29 = 6;
-            } else if (temp_r0_2 == 5) {
-                var_r29 = 2;
+            if (cur_kind == 3) {
+                idx = 3;
+            } else if (cur_kind == 4) {
+                idx = 4;
+            } else if (cur_kind == 9) {
+                idx = 5;
+            } else if (cur_kind == 6) {
+                idx = 6;
+            } else if (cur_kind == 5) {
+                idx = 2;
             } else {
                 HSD_ASSERT(0xA67, 0);
             }
 
-            grStadium_801D2528(temp_r3_6, var_r29, 0);
+            grStadium_801D2528(display_gobj, idx, 0);
         }
-        temp_r31->u.stadium.xDC = 3;
+        gp->u.stadium.xDC = 3;
         return;
     case 3:
-        if (temp_r31->u.stadium.xD8++ > yakumono_param->x10) {
-            Ground* temp_r6 = GET_GROUND(temp_r31->u.stadium.xE4);
-            temp_r6->u.stadium.xC4_b1 = true;
-            temp_r31->u.stadium.xDC = 4;
-            temp_r31->u.stadium.xD8 = 0;
+        if (gp->u.stadium.xD8++ > yakumono_param->x10) {
+            Ground* cur_gp = GET_GROUND(gp->u.stadium.xE4);
+            cur_gp->u.stadium.xC4_b1 = true;
+            gp->u.stadium.xDC = 4;
+            gp->u.stadium.xD8 = 0;
             Ground_801C53EC(0x75300);
             Ground_801C53EC(0x75301);
             return;
         }
         break;
     case 4:
-        temp_r27_2 = GET_JOBJ(temp_r31->u.stadium.xE4);
-        temp_r30 = temp_r27_2;
-        temp_f29 = HSD_JObjGetScaleY(temp_r30);
-        temp_f29 -= temp_f31 * (0.95f / yakumono_param->x14);
-        temp_f30 = 0.05f * temp_f31;
-        if (temp_f29 > temp_f30) {
-            HSD_JObjSetScaleY(temp_r30, temp_f29);
+        jobj_a = GET_JOBJ(gp->u.stadium.xE4);
+        jobj = jobj_a;
+        scale_y = HSD_JObjGetScaleY(jobj);
+        scale_y -= scale * (0.95f / yakumono_param->x14);
+        min_scale = 0.05f * scale;
+        if (scale_y > min_scale) {
+            HSD_JObjSetScaleY(jobj, scale_y);
         } else {
-            HSD_JObjSetScaleY(temp_r30, 0.05F);
-            temp_r4_4 = temp_r31->u.stadium.xD8;
-            temp_r31->u.stadium.xD8 = temp_r4_4 + 1;
-            if (temp_r4_4 > yakumono_param->x18) {
-                grAnime_801C7A04(temp_r31->u.stadium.xE4, 0, 7, 0.0f);
-                (void) (temp_r27_3 = GET_JOBJ(temp_r3_7 = grStadium_801D10F8(
-                                                  temp_r31->u.stadium.xDE)),
-                        !temp_r27_3);
-                HSD_JObjSetScaleY(temp_r27_3, temp_f30);
-                HSD_JObjSetTranslateY(temp_r27_3, -10.0F);
-                temp_r31->u.stadium.xE8 = temp_r3_7;
-                temp_r31->u.stadium.xD8 = 0;
-                temp_r31->u.stadium.xDC = 5;
+            HSD_JObjSetScaleY(jobj, 0.05F);
+            if (gp->u.stadium.xD8++ > yakumono_param->x18) {
+                grAnime_801C7A04(gp->u.stadium.xE4, 0, 7, 0.0f);
+                (void) (new_jobj = GET_JOBJ(
+                            new_gobj = grStadium_801D10F8(gp->u.stadium.xDE)),
+                        !new_jobj);
+                HSD_JObjSetScaleY(new_jobj, min_scale);
+                HSD_JObjSetTranslateY(new_jobj, -10.0F);
+                gp->u.stadium.xE8 = new_gobj;
+                gp->u.stadium.xD8 = 0;
+                gp->u.stadium.xDC = 5;
                 mpLib_80057528(0x55);
                 mpLib_80057528(0x6F);
             }
@@ -2135,67 +2132,62 @@ void grStadium_801D4548(Ground_GObj* gobj)
         Camera_RequestQuake(QuakeKind_Loop, NULL);
         return;
     case 5:
-        temp_r31->u.stadium.xD8++;
-        temp_r0_3 = temp_r31->u.stadium.xD8;
-        if (temp_r0_3 <= yakumono_param->x14) {
-            float tmp;
-            temp_r30 = temp_r31->u.stadium.xE8->hsd_obj;
-            (void) temp_r30;
-            tmp = 0.95f * temp_r0_3 / yakumono_param->x14 + 0.05F;
-            HSD_JObjSetScaleY(temp_r30, tmp * temp_f31);
-            temp_r4_8 = temp_r31->u.stadium.xD8;
-            temp_r0_4 = yakumono_param->x14 / 2;
-            if (temp_r4_8 < temp_r0_4) {
-                var_f29 =
-                    -10.0f * temp_f31 * (1.0f - ((f32) temp_r4_8 / temp_r0_4));
+        gp->u.stadium.xD8++;
+        frame = gp->u.stadium.xD8;
+        if (frame <= yakumono_param->x14) {
+            f32 tmp;
+            jobj = gp->u.stadium.xE8->hsd_obj;
+            (void) jobj;
+            tmp = 0.95f * frame / yakumono_param->x14 + 0.05F;
+            HSD_JObjSetScaleY(jobj, tmp * scale);
+            frame1 = gp->u.stadium.xD8;
+            half = yakumono_param->x14 / 2;
+            if (frame1 < half) {
+                offset = -10.0f * scale * (1.0f - ((f32) frame1 / half));
             } else {
-                var_f29 = 0.0f;
+                offset = 0.0f;
             }
-            HSD_JObjSetTranslateY(temp_r30, var_f29);
-            temp_r27_4 = temp_r31->u.stadium.xE4->hsd_obj;
-            temp_r5_2 = yakumono_param->x14;
-            (void) temp_r5_2;
-            temp_r3_8 = temp_r31->u.stadium.xD8;
-            temp_r0_5 = temp_r5_2 / 2;
-            if (temp_r3_8 > temp_r0_5) {
-                var_f30 = -10.0f * temp_f31 *
-                          (1.0f - ((f32) (temp_r5_2 - temp_r3_8) /
-                                   (temp_r5_2 - temp_r0_5)));
+            HSD_JObjSetTranslateY(jobj, offset);
+            cur_jobj = gp->u.stadium.xE4->hsd_obj;
+            total = yakumono_param->x14;
+            (void) total;
+            frame2 = gp->u.stadium.xD8;
+            half2 = total / 2;
+            if (frame2 > half2) {
+                offset2 = -10.0f * scale *
+                          (1.0f - ((f32) (total - frame2) / (total - half2)));
             } else {
-                var_f30 = 0.0f;
+                offset2 = 0.0f;
             }
-            HSD_JObjSetTranslateY(temp_r27_4, var_f30);
+            HSD_JObjSetTranslateY(cur_jobj, offset2);
         } else {
-            temp_r27_5 = temp_r31->u.stadium.xE8->hsd_obj;
-            (void) temp_r27_5;
-            HSD_JObjSetScaleY(temp_r27_5, temp_f31);
-            HSD_JObjSetTranslateY(temp_r27_5, 0.0F);
-            temp_r31->u.stadium.xDC = 6;
-            Ground_801C4A08(temp_r31->u.stadium.xE4);
-            temp_r31->u.stadium.xE4 = temp_r31->u.stadium.xE8;
-            temp_r31->u.stadium.xE8 = NULL;
+            jobj5 = gp->u.stadium.xE8->hsd_obj;
+            (void) jobj5;
+            HSD_JObjSetScaleY(jobj5, scale);
+            HSD_JObjSetTranslateY(jobj5, 0.0F);
+            gp->u.stadium.xDC = 6;
+            Ground_801C4A08(gp->u.stadium.xE4);
+            gp->u.stadium.xE4 = gp->u.stadium.xE8;
+            gp->u.stadium.xE8 = NULL;
         }
         grStadium_801D435C(gobj);
         Camera_RequestQuake(QuakeKind_Loop, NULL);
         return;
-    case 6: {
-        Ground* temp_r3_9 = temp_r31->u.stadium.xE4->user_data;
-        PAD_STACK(0xC);
-        temp_r3_9->u.stadium.xC4_b0 = true;
+    case 6:
+        grStadium_801D4354(gp->u.stadium.xE4)->u.stadium.xC4_b0 = true;
         mpLib_80058560();
-        if (temp_r31->u.stadium.xDE == 5) {
-            temp_r31->u.stadium.xD8 =
+        if (gp->u.stadium.xDE == 5) {
+            gp->u.stadium.xD8 =
                 randi_between_2(yakumono_param->x0, yakumono_param->x4);
-            grAnime_801C65B0((void*) temp_r31->u.stadium.xCC);
+            grAnime_801C65B0((void*) gp->u.stadium.xCC);
             mpLib_800575B0(0x55);
             mpLib_800575B0(0x6F);
         } else {
-            temp_r31->u.stadium.xD8 =
+            gp->u.stadium.xD8 =
                 randi_between_2(yakumono_param->x8, yakumono_param->xC);
         }
-        temp_r31->u.stadium.xDC = 0;
+        gp->u.stadium.xDC = 0;
         break;
-    }
     }
 }
 
