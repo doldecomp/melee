@@ -622,9 +622,10 @@ bool ftCo_8008E984(Fighter* fp)
     }
 }
 
-static inline void inlineF0(Fighter_GObj* gobj)
+void ftCo_8008E9D0(Fighter_GObj* gobj)
 {
-    Fighter* fp = GET_FIGHTER(gobj);
+    Fighter* fp = gobj->user_data;
+    float scaled_kb;
     ftCo_800C8D00(gobj);
     if (fp->motion_id == 0xe0 || fp->motion_id == 0xe1) {
         ftCo_800DC284(gobj);
@@ -632,13 +633,6 @@ static inline void inlineF0(Fighter_GObj* gobj)
     if (fp->motion_id == 0xe3 || fp->motion_id == 0xe4) {
         ftCo_800DC3A4(gobj);
     }
-}
-
-void ftCo_8008E9D0(Fighter_GObj* gobj)
-{
-    Fighter* fp = gobj->user_data;
-    float scaled_kb;
-    inlineF0(gobj);
     scaled_kb = ftCo_ScaleBy154(fp->dmg.kb_applied);
     if (ftCo_8008DA4C(gobj, fp->dmg.x1860_element, ftCo_8008D8E8(scaled_kb))) {
         ftCo_800C0408(gobj);
@@ -660,55 +654,12 @@ static bool inlineB0(Fighter* fp)
     return false;
 }
 
-#ifdef MUST_MATCH
-#pragma push
-#pragma inline_depth(0)
-#endif
 void ftCo_8008EB58(Fighter_GObj* gobj)
 {
-    Fighter* tmp_p21265 = gobj->user_data;
-    Fighter* fp = tmp_p21265;
-    float kb_applied = fp->dmg.kb_applied;
-    bool should_update;
-    enum_t kb_level;
-    float scaled_kb;
-    u8 _[0x18] = { 0 };
-
-    if (kb_applied == 0 || (fp->allow_sdi && fp->x221A_b3 &&
-                            kb_applied < fp->dmg.x18A8 + p_ftCommonData->x140))
-    {
-        should_update = true;
-    } else {
-        should_update = false;
-    }
-
-    if (should_update) {
-        ftCo_800C8D00(gobj);
-        if (fp->motion_id == 0xe0 || fp->motion_id == 0xe1) {
-            ftCo_800DC284(gobj);
-        }
-        if (fp->motion_id == 0xe3 || fp->motion_id == 0xe4) {
-            ftCo_800DC3A4(gobj);
-        }
-        scaled_kb = fp->dmg.kb_applied * p_ftCommonData->x154;
-        if (scaled_kb < p_ftCommonData->x158) {
-            kb_level = 0;
-        } else if (scaled_kb < p_ftCommonData->x15C) {
-            kb_level = 1;
-        } else if (scaled_kb < p_ftCommonData->x160) {
-            kb_level = 2;
-        } else {
-            kb_level = 3;
-        }
-        if (ftCo_8008DA4C(gobj, fp->dmg.x1860_element, kb_level)) {
-            ftCo_800C0408(gobj);
-        }
-        ftCommon_800804FC(fp);
+    if (ftCo_8008E984(GET_FIGHTER(gobj))) {
+        ftCo_8008E9D0(gobj);
     }
 }
-#ifdef MUST_MATCH
-#pragma pop
-#endif
 
 static bool inlineB1(Fighter* fp)
 {
