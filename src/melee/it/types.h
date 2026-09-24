@@ -4,6 +4,7 @@
 #include <Runtime/platform.h>
 
 #include <melee/cm/forward.h>
+#include <melee/ef/forward.h>
 #include <melee/it/forward.h> // IWYU pragma: export
 #include <melee/it/kinds/forward.h>
 #include <sysdolphin/baselib/forward.h>
@@ -327,7 +328,7 @@ struct Item {
     // u32 xBB4;
     // u32 xBB8;
     DynamicBoneTable* xBBC_dynamicBoneTable;
-    UNK_T xBC0;
+    EF_QueuedEffect* xBC0;
     GXColor xBC4;
     ItemModStruct xBC8;
     Vec2 xBCC_unk;

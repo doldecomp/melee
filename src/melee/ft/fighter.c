@@ -792,7 +792,7 @@ void Fighter_UnkInitLoad_80068914(Fighter_GObj* gobj,
 
     fp->can_walljump = false;
 
-    fp->x60C = 0;
+    fp->x60C = NULL;
 
     fp->x2225_b3 = 0;
     fp->is_sandbag = 0;

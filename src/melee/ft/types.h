@@ -2,6 +2,7 @@
 #define MELEE_FT_TYPES_H
 #include <Runtime/platform.h>
 
+#include <melee/ef/forward.h>
 #include <melee/ft/forward.h> // IWYU pragma: export
 #include <melee/it/forward.h>
 #include <sysdolphin/baselib/forward.h>
@@ -1391,7 +1392,7 @@ struct Fighter {
     /*  fp+5F4 */ struct {
         /*  fp+5F4 */ s8 prev, idx;
     } x5F4_arr[12];
-    /*  fp+60C */ void* x60C;
+    /*  fp+60C */ EF_QueuedEffect* x60C;
     /*  fp+610 */ GXColor x610_color_rgba[2];
     /*  fp+618 */ u8 pad_port; ///< Physical controller port for this fighter
     /*  fp+619 */ u8 costume_id;

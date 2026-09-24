@@ -1373,36 +1373,36 @@ void efAsync_QueueProcessDeferred(HSD_GObj* gobj,
     HSD_ObjFree(&efAsync_AllocData, queued_effect);
 }
 
-void efAsync_QueueFlush(HSD_GObj* gobj, void* arg_struct)
+void efAsync_QueueFlush(HSD_GObj* gobj, EF_QueuedEffect** head)
 {
     EF_QueuedEffect* temp_r31;
     EF_QueuedEffect* var_r4;
 
-    var_r4 = ((EF_QueuedEffect*) arg_struct)->next;
+    var_r4 = *head;
     while (var_r4 != NULL) {
         temp_r31 = var_r4->next;
         efAsync_QueueProcessDeferred(gobj, var_r4);
         var_r4 = temp_r31;
     }
-    ((EF_QueuedEffect*) arg_struct)->next = NULL;
+    *head = NULL;
 }
 
-void efAsync_QueueClear(void* arg_struct)
+void efAsync_QueueClear(EF_QueuedEffect** head)
 {
     EF_QueuedEffect* temp_r30;
     EF_QueuedEffect* var_r4;
 
-    var_r4 = ((EF_QueuedEffect*) arg_struct)->next;
+    var_r4 = *head;
     while (var_r4 != NULL) {
         temp_r30 = var_r4->next;
         HSD_ObjFree(&efAsync_AllocData, var_r4);
         var_r4 = temp_r30;
     }
-    ((EF_QueuedEffect*) arg_struct)->next = NULL;
+    *head = NULL;
 }
 
-void efAsync_Spawn(HSD_GObj* gobj, void* queue_head, u32 spawn_kind,
-                   u32 gfx_id, HSD_JObj* jobj, ...)
+void efAsync_Spawn(HSD_GObj* gobj, EF_QueuedEffect** queue_head,
+                   u32 spawn_kind, u32 gfx_id, HSD_JObj* jobj, ...)
 {
     va_list vlist;
     Vec3* va_vec3;
@@ -1457,8 +1457,8 @@ void efAsync_Spawn(HSD_GObj* gobj, void* queue_head, u32 spawn_kind,
     if ((HSD_GObj_CurrentInvokedProc != NULL) &&
         (HSD_GObj_CurrentInvokedProc->s_link < 9U))
     {
-        queued->next = ((EF_QueuedEffect*) queue_head)->next;
-        ((EF_QueuedEffect*) queue_head)->next = queued;
+        queued->next = *queue_head;
+        *queue_head = queued;
         return;
     }
     efAsync_QueueProcessDeferred(gobj, queued);
