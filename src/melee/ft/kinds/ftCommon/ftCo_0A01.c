@@ -116,7 +116,7 @@
 /* 0A5CE0 */ static Fighter* ftCo_800A5CE0(Fighter* fp);
 /* 0A5F4C */ static Item* ftCo_800A5F4C(Fighter* fp, ItemKind);
 /* 0A61D8 */ static Item* ftCo_800A61D8(Fighter* fp);
-/* 0A648C */ static int ftCo_800A648C(Fighter* fp);
+/* 0A648C */ static Item* ftCo_800A648C(Fighter* fp);
 /* 0A6700 */ static bool ftCo_800A6700(Fighter* fp, Vec3*, Vec3*);
 /* 0A6A98 */ static s32 ftCo_800A6A98(Fighter* fp, Vec3* arg1);
 /* 0A6D2C */ static s32 ftCo_800A6D2C(Fighter* fp, Vec3* arg1);
@@ -703,7 +703,7 @@ void ftCo_800A101C(Fighter* arg0, int arg1, int arg2, int arg3)
     temp_r30->x40 = 50.0f;
     temp_r30->x44 = NULL;
     temp_r30->x48 = 0;
-    temp_r30->x50 = 0;
+    temp_r30->x50 = NULL;
     temp_r30->x98 = arg0->cur_pos;
     if (ftCo_800A0FB0(&sp50, &sp34, &sp30, &sp44, -1, -1, -1, arg0->cur_pos.x,
                       10.0f + arg0->cur_pos.y, arg0->cur_pos.x,
@@ -3140,7 +3140,7 @@ static inline HSD_GObj* ftCo_800A648C_inline3(HSD_GObj* cur)
     return cur->next;
 }
 
-int ftCo_800A648C(Fighter* fp)
+Item* ftCo_800A648C(Fighter* fp)
 {
     Item* ip;
     Item* closest;
@@ -3149,7 +3149,7 @@ int ftCo_800A648C(Fighter* fp)
     f32 dist;
 
     if (fp == NULL) {
-        return 0;
+        return NULL;
     }
     closest = NULL;
     for (cur = ftCo_800A648C_inline2(); cur != NULL;
@@ -3171,7 +3171,7 @@ int ftCo_800A648C(Fighter* fp)
             }
         }
     }
-    return (int) closest;
+    return closest;
 }
 
 static inline bool ftCo_800A6700_inline0(Fighter* fp, f32 x, f32 y)
