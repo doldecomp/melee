@@ -239,29 +239,26 @@ void HSD_SetupTevStage(HSD_TevDesc* desc)
     GXSetTevKAlphaSel(desc->stage, desc->u.tevconf.kasel);
 }
 
-#ifdef MUST_MATCH
-#pragma push
-#pragma dont_inline on
-#endif
-void HSD_SetupTevStageAll(HSD_TevDesc* desc)
+static inline int setupTevStages(HSD_TevDesc* desc)
 {
     int num = 0;
-    HSD_TevDesc* td;
 
-    for (td = desc; td != NULL; td = td->next) {
-        int tmp = HSD_TevStage2Num(td->stage);
-        if (tmp > num) {
-            num = tmp;
+    while (desc != NULL) {
+        int temp = HSD_TevStage2Num(desc->stage);
+        if (temp > num) {
+            num = temp;
         }
-        HSD_SetupTevStage(td);
+        HSD_SetupTevStage(desc);
+        desc = desc->next;
     }
-    current_tev = num;
-    GXSetNumTevStages(current_tev);
-    current_tev = 0;
+    return num;
 }
-#ifdef MUST_MATCH
-#pragma pop
-#endif
+
+void HSD_SetupTevStageAll(HSD_TevDesc* desc)
+{
+    current_tev = setupTevStages(desc);
+    HSD_StateSetNumTevStages();
+}
 
 int HSD_Channel2Num(int chan)
 {
