@@ -64,7 +64,7 @@
 /* 1CFBD4 */ s32 grCastle_801CFBD4(Ground_GObj* gobj, s32 arg1);
 /* 1D0298 */ bool grCastle_801D0298(Ground_GObj* gobj, s32 arg1);
 /* 1D02B8 */ void grCastle_801D02B8(Ground_GObj* gobj);
-/* 1D0520 */ void grCastle_801D0520(Ground_GObj*, int);
+/* 1D0520 */ void grCastle_801D0520(Ground_GObj*, intptr_t);
 /* 1D0550 */ void grCastle_801D0550(UNK_T, unkCastle*);
 /* 1D059C */ void grCastle_801D059C(UNK_T, unkCastle*);
 /* 1D05E8 */ void grCastle_801D05E8(UNK_T, unkCastle*);

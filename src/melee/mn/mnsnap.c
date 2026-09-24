@@ -519,7 +519,7 @@ s32 mnSnap_80253BE0(u64 buttons, s32* cursor, s32 count)
 }
 
 /// Renders the main content GObj only when in photo-browsing states (>= 4).
-void fn_80253DB4(HSD_GObj* gobj, s32 rendermode)
+void fn_80253DB4(HSD_GObj* gobj, intptr_t rendermode)
 {
     if (mnSnap_804A0A10.state >= 4) {
         HSD_GObj_JObjCallback(gobj, rendermode);
@@ -527,7 +527,7 @@ void fn_80253DB4(HSD_GObj* gobj, s32 rendermode)
 }
 
 /// Renders the arrow/slot selector GObj only during slot selection (state 2).
-void fn_80253DE8(HSD_GObj* gobj, s32 rendermode)
+void fn_80253DE8(HSD_GObj* gobj, intptr_t rendermode)
 {
     if (mnSnap_804A0A10.state == 2) {
         HSD_GObj_JObjCallback(gobj, rendermode);
@@ -535,7 +535,7 @@ void fn_80253DE8(HSD_GObj* gobj, s32 rendermode)
 }
 
 /// Renders the cursor GObj during menu (state 6) or full-screen view (10-11).
-void fn_80253E1C(HSD_GObj* gobj, s32 rendermode)
+void fn_80253E1C(HSD_GObj* gobj, intptr_t rendermode)
 {
     s32 state = mnSnap_804A0A10.state;
     if (state == 6 || (u32) (state - 10) <= 1) {
@@ -544,7 +544,7 @@ void fn_80253E1C(HSD_GObj* gobj, s32 rendermode)
 }
 
 /// Renders the warning/dialog GObj only when a dialog is active.
-void fn_80253E5C(HSD_GObj* gobj, s32 rendermode)
+void fn_80253E5C(HSD_GObj* gobj, intptr_t rendermode)
 {
     if (mnSnap_804A0A10.dlg_active == 1) {
         HSD_GObj_JObjCallback(gobj, rendermode);
@@ -2429,7 +2429,7 @@ void mnSnap_80257F24(void)
     snap->main_gobj = gobj;
     jobj = HSD_JObjLoadJoint((HSD_Joint*) *main_joint);
     HSD_GObjObject_80390A70(gobj, HSD_GObj_JObjKind, jobj);
-    GObj_SetupGXLink(gobj, (GObj_RenderFunc) fn_80253DB4, 4, 0x80);
+    GObj_SetupGXLink(gobj, fn_80253DB4, 4, 0x80);
     HSD_JObjAddAnimAll(jobj, (HSD_AnimJoint*) *main_animjoint,
                        (HSD_MatAnimJoint*) *main_matanim,
                        (HSD_ShapeAnimJoint*) *main_shapeanim);
@@ -2460,7 +2460,7 @@ void mnSnap_80257F24(void)
     jobj = HSD_JObjLoadJoint((HSD_Joint*) *arrows_joint);
     HSD_JObjSetTranslateX(jobj, 3.3F);
     HSD_GObjObject_80390A70(gobj, HSD_GObj_JObjKind, jobj);
-    GObj_SetupGXLink(gobj, (GObj_RenderFunc) fn_80253DE8, 4, 0x80);
+    GObj_SetupGXLink(gobj, fn_80253DE8, 4, 0x80);
     HSD_JObjAddAnimAll(jobj, (HSD_AnimJoint*) *arrows_animjoint,
                        (HSD_MatAnimJoint*) *arrows_matanim,
                        (HSD_ShapeAnimJoint*) *arrows_shapeanim);
@@ -2473,7 +2473,7 @@ void mnSnap_80257F24(void)
     snap->cursor_gobj = gobj;
     jobj = HSD_JObjLoadJoint((HSD_Joint*) *csr_joint);
     HSD_GObjObject_80390A70(gobj, HSD_GObj_JObjKind, jobj);
-    GObj_SetupGXLink(gobj, (GObj_RenderFunc) fn_80253E1C, 6, 0x80);
+    GObj_SetupGXLink(gobj, fn_80253E1C, 6, 0x80);
     HSD_JObjAddAnimAll(jobj, (HSD_AnimJoint*) *csr_animjoint,
                        (HSD_MatAnimJoint*) *csr_matanim,
                        (HSD_ShapeAnimJoint*) *csr_shapeanim);
@@ -2570,7 +2570,7 @@ void mnSnap_80257F24(void)
     snap->warn_gobj = gobj;
     jobj = HSD_JObjLoadJoint((HSD_Joint*) *warn_joint);
     HSD_GObjObject_80390A70(gobj, HSD_GObj_JObjKind, jobj);
-    GObj_SetupGXLink(gobj, (GObj_RenderFunc) fn_80253E5C, 6, 0x80);
+    GObj_SetupGXLink(gobj, fn_80253E5C, 6, 0x80);
     HSD_JObjAddAnimAll(jobj, (HSD_AnimJoint*) *warn_animjoint,
                        (HSD_MatAnimJoint*) *warn_matanim,
                        (HSD_ShapeAnimJoint*) *warn_shapeanim);
