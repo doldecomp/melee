@@ -21,7 +21,7 @@ void fn_800DC070(Fighter_GObj* gobj)
     fp->self_vel.y = p_ftCommonData->x378;
     fp->mv.co.buryjump.x0 = 0;
     ftCo_800DC920(victim, gobj);
-    Fighter_ChangeMotionState(gobj, ftCo_MS_CaptureJump, 0, 0.0F, 1.0F, 0.0F,
+    Fighter_ChangeMotionState(gobj, ftCo_MS_CaptureJump, Ft_MF_None, 0.0F, 1.0F, 0.0F,
                               NULL);
 }
 

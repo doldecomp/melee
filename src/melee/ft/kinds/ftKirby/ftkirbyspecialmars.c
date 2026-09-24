@@ -112,7 +112,7 @@ void ftKb_SpecialNMs_8010B2FC(HSD_GObj* gobj)
                 msid = ftKb_MS_FeSpecialNStart;
             }
         }
-        Fighter_ChangeMotionState(gobj, msid, 0, 0, 1, 0, NULL);
+        Fighter_ChangeMotionState(gobj, msid, Ft_MF_None, 0, 1, 0, NULL);
     }
 
     ftAnim_8006EBA4(gobj);
@@ -154,7 +154,7 @@ void ftKb_SpecialNMs_8010B4A0(HSD_GObj* gobj)
                 msid = ftKb_MS_FeSpecialAirNStart;
             }
         }
-        Fighter_ChangeMotionState(gobj, msid, 0, 0, 1, 0, NULL);
+        Fighter_ChangeMotionState(gobj, msid, Ft_MF_None, 0, 1, 0, NULL);
     }
 
     ftAnim_8006EBA4(gobj);
@@ -572,7 +572,7 @@ void ftKb_SpecialNPe_8010C148(Fighter_GObj* gobj)
                    ? ftKb_MS_MsSpecialNEnd0 + 1
                    : ftKb_MS_FeSpecialNEnd0 + 1;
     }
-    Fighter_ChangeMotionState(gobj, msid, 0x2000, 1.0F, 1.0F, 0.0F, NULL);
+    Fighter_ChangeMotionState(gobj, msid, Ft_MF_KeepAccessory, 1.0F, 1.0F, 0.0F, NULL);
     GET_FIGHTER(gobj)->accessory4_cb = fn_8010B1F4;
 }
 
@@ -590,6 +590,6 @@ void ftKb_SpecialNPe_8010C1E8(Fighter_GObj* gobj)
                    ? ftKb_MS_MsSpecialAirNEnd0 + 1
                    : ftKb_MS_FeSpecialAirNEnd0 + 1;
     }
-    Fighter_ChangeMotionState(gobj, msid, 0x2000, 1.0F, 1.0F, 0.0F, NULL);
+    Fighter_ChangeMotionState(gobj, msid, Ft_MF_KeepAccessory, 1.0F, 1.0F, 0.0F, NULL);
     GET_FIGHTER(gobj)->accessory4_cb = fn_8010B1F4;
 }

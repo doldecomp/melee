@@ -21,7 +21,7 @@ void ftKp_SpecialHi_Enter(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     PAD_STACK(8);
-    Fighter_ChangeMotionState(gobj, 0x167, 0, 0.0f, 1.0f, 0.0f, NULL);
+    Fighter_ChangeMotionState(gobj, 0x167, Ft_MF_None, 0.0f, 1.0f, 0.0f, NULL);
     Fighter_SetDamageCallback(gobj, ftKp_Init_80132B38);
     Fighter_ClearCmdVars(fp);
     fp->self_vel.y = 0.0f;
@@ -39,7 +39,7 @@ void ftKp_SpecialAirHi_Enter(Fighter_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     ftKoopaAttributes* da = fp->dat_attrs;
     PAD_STACK(8);
-    Fighter_ChangeMotionState(gobj, 0x168, 0, 0.0f, 1.0f, 0.0f, NULL);
+    Fighter_ChangeMotionState(gobj, 0x168, Ft_MF_None, 0.0f, 1.0f, 0.0f, NULL);
     Fighter_SetDamageCallback(gobj, ftKp_Init_80132B38);
     Fighter_ClearCmdVars(fp);
     ftCommon_ClampGroundVel(fp, da->x60);

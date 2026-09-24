@@ -113,7 +113,7 @@ void ftSk_SpecialAirHi_Enter(HSD_GObj* gobj)
     fp->cmd_vars[0] = 0;
     fp->mv.sk.specialhi.xC = 0;
     fp->self_vel.y = da->self_vel_y;
-    Fighter_ChangeMotionState(gobj, ftSk_MS_SpecialAirHiStart_0, 0, 0, 1, 0,
+    Fighter_ChangeMotionState(gobj, ftSk_MS_SpecialAirHiStart_0, Ft_MF_None, 0, 1, 0,
                               NULL);
     ftAnim_8006EBA4(gobj);
 }
@@ -442,7 +442,7 @@ void ftSk_SpecialHi_80113838(Fighter_GObj* gobj)
                             cosf(temp_f1_5);
                         fp->gr_vel = fp->facing_dir * temp_f6;
                     }
-                    Fighter_ChangeMotionState(gobj, 0x164, 0, 35.0f, 1.0f,
+                    Fighter_ChangeMotionState(gobj, 0x164, Ft_MF_None, 35.0f, 1.0f,
                                               0.0f, NULL);
                     ftAnim_8006EBA4(gobj);
                     ftAnim_SetAnimRate(gobj, 0.0f);

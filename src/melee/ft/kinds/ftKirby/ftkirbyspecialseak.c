@@ -92,7 +92,7 @@ void ftKb_SpecialNSk_8010612C(Fighter_GObj* gobj)
 {
     int new_var;
     Fighter* fp = GET_FIGHTER(gobj);
-    Fighter_ChangeMotionState(gobj, ftKb_MS_SkSpecialNStart, 0, 0.0F, 1.0F,
+    Fighter_ChangeMotionState(gobj, ftKb_MS_SkSpecialNStart, Ft_MF_None, 0.0F, 1.0F,
                               0.0F, NULL);
     fp->throw_flags_b0 = false;
     new_var = 0;
@@ -115,7 +115,7 @@ void ftKb_SpecialNSk_801061E4(Fighter_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     int new_var2;
     int new_var;
-    Fighter_ChangeMotionState(gobj, ftKb_MS_SkSpecialAirNStart, 0, 0.0F, 1.0F,
+    Fighter_ChangeMotionState(gobj, ftKb_MS_SkSpecialAirNStart, Ft_MF_None, 0.0F, 1.0F,
                               0.0F, NULL);
     fp->throw_flags_b0 = (new_var2 = 0);
     fp->cmd_vars[3] = new_var2;
@@ -141,7 +141,7 @@ void ftKb_SkSpecialNStart_Anim(Fighter_GObj* gobj)
         fp->u.kb.xB8 =
             it_802B19AC(gobj, &fp->cur_pos, 39, It_Kind_Kirby_SeakNeedleHeld,
                         fp->facing_dir);
-        Fighter_ChangeMotionState(gobj, ftKb_MS_SkSpecialNLoop, 0, 0, 1, 0,
+        Fighter_ChangeMotionState(gobj, ftKb_MS_SkSpecialNLoop, Ft_MF_None, 0, 1, 0,
                                   NULL);
         ftKb_SpecialN_set_cbs(gobj);
     }
@@ -209,7 +209,7 @@ void ftKb_SkSpecialAirNStart_Anim(Fighter_GObj* gobj)
         fp->u.kb.xB8 =
             it_802B19AC(new_var, &fp->cur_pos, 39,
                         It_Kind_Kirby_SeakNeedleHeld, fp->facing_dir);
-        Fighter_ChangeMotionState(gobj, ftKb_MS_SkSpecialAirNLoop, 0, 0, 1, 0,
+        Fighter_ChangeMotionState(gobj, ftKb_MS_SkSpecialAirNLoop, Ft_MF_None, 0, 1, 0,
                                   NULL);
         new_var2 = gobj;
         ftKb_SpecialN_set_cbs(new_var2);

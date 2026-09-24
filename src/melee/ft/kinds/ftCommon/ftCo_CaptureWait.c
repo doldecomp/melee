@@ -73,7 +73,7 @@ void fn_800DB790(Fighter_GObj* gobj)
     Fighter* victim_fp;
     Fighter* fp;
 
-    Fighter_ChangeMotionState(gobj, ftCo_MS_CaptureWaitHi, 0, 0.0F, 1.0F, 0.0F,
+    Fighter_ChangeMotionState(gobj, ftCo_MS_CaptureWaitHi, Ft_MF_None, 0.0F, 1.0F, 0.0F,
                               NULL);
 
     if ((victim_fp = GET_FIGHTER((fp = GET_FIGHTER(gobj))->victim_gobj))
@@ -171,7 +171,7 @@ void fn_800DBAE4(Fighter_GObj* gobj)
     Fighter* victim_fp;
     Fighter* fp;
 
-    Fighter_ChangeMotionState(gobj, ftCo_MS_CaptureWaitLw, 0, 0.0F, 1.0F, 0.0F,
+    Fighter_ChangeMotionState(gobj, ftCo_MS_CaptureWaitLw, Ft_MF_None, 0.0F, 1.0F, 0.0F,
                               NULL);
 
     if ((victim_fp = GET_FIGHTER((fp = GET_FIGHTER(gobj))->victim_gobj))

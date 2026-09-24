@@ -96,7 +96,7 @@ static void ftZelda_SpecialLw_StartAction_Helper(HSD_GObj* gobj)
 /// https://decomp.me/scratch/Lw6fO (single function)
 void ftZd_SpecialLw_Enter(HSD_GObj* gobj)
 {
-    Fighter_ChangeMotionState(gobj, 355, 0, 0, 1, 0, NULL);
+    Fighter_ChangeMotionState(gobj, 355, Ft_MF_None, 0, 1, 0, NULL);
 
     ftAnim_8006EBA4(gobj);
 
@@ -109,7 +109,7 @@ void ftZd_SpecialLw_Enter(HSD_GObj* gobj)
 /// https://decomp.me/scratch/8W7ZF (single function)
 void ftZd_SpecialAirLw_Enter(HSD_GObj* gobj)
 {
-    Fighter_ChangeMotionState(gobj, 357, 0, 0, 1.0, 0, NULL);
+    Fighter_ChangeMotionState(gobj, 357, Ft_MF_None, 0, 1.0, 0, NULL);
 
     ftAnim_8006EBA4(gobj);
 
@@ -315,7 +315,7 @@ void ftZd_SpecialLw_8013B4D8(HSD_GObj* gobj)
             msid = 358;
         }
 
-        Fighter_ChangeMotionState(gobj, msid, 0, sa->x80, 1.0, 0, NULL);
+        Fighter_ChangeMotionState(gobj, msid, Ft_MF_None, sa->x80, 1.0, 0, NULL);
     }
     fp->accessory4_cb = &ftZd_SpecialLw_8013AE30;
 }

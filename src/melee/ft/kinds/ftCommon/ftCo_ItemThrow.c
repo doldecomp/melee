@@ -361,7 +361,7 @@ void ftCo_800958FC(HSD_GObj* gobj, FtMotionId msid)
         temp_r4->mv.co.itemthrow.facing_dir = temp_r4->facing_dir;
         break;
     }
-    Fighter_ChangeMotionState(gobj, msid, 0, 0.0F, base_throw_speed, 0.0F,
+    Fighter_ChangeMotionState(gobj, msid, Ft_MF_None, 0.0F, base_throw_speed, 0.0F,
                               NULL);
     ftAnim_8006EBA4(gobj);
 

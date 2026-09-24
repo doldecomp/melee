@@ -17,7 +17,7 @@ void fn_800DA1D8(Fighter_GObj* gobj)
     HSD_JObj* jobj;
     PAD_STACK(8);
     fp->gr_vel = 0.0F;
-    Fighter_ChangeMotionState(gobj, ftCo_MS_CatchWait, 0, 0.0F, 1.0F, 0.0F,
+    Fighter_ChangeMotionState(gobj, ftCo_MS_CatchWait, Ft_MF_None, 0.0F, 1.0F, 0.0F,
                               NULL);
     fp->accessory1_cb = fn_800DA4A0;
     fp->take_dmg_cb = fn_800DA490;
@@ -33,7 +33,7 @@ void fn_800DA1D8(Fighter_GObj* gobj)
 void fn_800DA2B0(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    Fighter_ChangeMotionState(gobj, ftCo_MS_CatchWait, 0, 0.0F, 1.0F, 0.0F,
+    Fighter_ChangeMotionState(gobj, ftCo_MS_CatchWait, Ft_MF_None, 0.0F, 1.0F, 0.0F,
                               NULL);
     fp->accessory1_cb = fn_800DA4A0;
     fp->take_dmg_cb = fn_800DA490;

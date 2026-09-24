@@ -143,7 +143,7 @@ void ftYs_SpecialHi_Enter(Fighter_GObj* gobj)
     fp->u.ys.x2238 = NULL;
     fp->throw_flags = 0;
     fp->cmd_vars[0] = 0;
-    Fighter_ChangeMotionState(gobj, ftYs_MS_SpecialHi, 0, 0.0F, 1.0F, 0.0F,
+    Fighter_ChangeMotionState(gobj, ftYs_MS_SpecialHi, Ft_MF_None, 0.0F, 1.0F, 0.0F,
                               NULL);
     fp = GET_FIGHTER(gobj);
     fp->accessory4_cb = fn_8012E110;
@@ -161,7 +161,7 @@ void ftYs_SpecialAirHi_Enter(Fighter_GObj* gobj)
     fp->u.ys.x2238 = NULL;
     fp->throw_flags = 0;
     fp->cmd_vars[0] = 0;
-    Fighter_ChangeMotionState(gobj, ftYs_MS_SpecialAirHi, 0, 0.0F, 1.0F, 0.0F,
+    Fighter_ChangeMotionState(gobj, ftYs_MS_SpecialAirHi, Ft_MF_None, 0.0F, 1.0F, 0.0F,
                               NULL);
     fp = GET_FIGHTER(gobj);
     fp->accessory4_cb = fn_8012E110;

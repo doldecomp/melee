@@ -387,10 +387,10 @@ void enterAirEndSmash(HSD_GObj* gobj)
     fp->self_vel.x /= da->x68;
     fp->self_vel.y /= da->x6C;
     if (fp->cmd_vars[2] != 0U) {
-        Fighter_ChangeMotionState(gobj, ftPe_MS_SpecialAirSEnd_1, 0, 0.0f,
+        Fighter_ChangeMotionState(gobj, ftPe_MS_SpecialAirSEnd_1, Ft_MF_None, 0.0f,
                                   1.0f, 0.0f, NULL);
     } else {
-        Fighter_ChangeMotionState(gobj, ftPe_MS_SpecialAirSEnd_0, 0, 0.0f,
+        Fighter_ChangeMotionState(gobj, ftPe_MS_SpecialAirSEnd_0, Ft_MF_None, 0.0f,
                                   1.0f, 0.0f, NULL);
     }
     doPostEnd_SmallerStack(gobj);

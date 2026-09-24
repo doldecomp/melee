@@ -30,7 +30,7 @@ void ftSs_SpecialHi_Enter(HSD_GObj* gobj)
 
     u8 _[8];
 
-    Fighter_ChangeMotionState(gobj, 353, 0, 0.0f, 1.0f, 0.0f, NULL);
+    Fighter_ChangeMotionState(gobj, 353, Ft_MF_None, 0.0f, 1.0f, 0.0f, NULL);
     ftSamus_updateDamageDeathCBs(gobj);
     Fighter_SetEffectHitlagCallbacks(fp);
     ftCommon_8007D7FC(fp);
@@ -46,7 +46,7 @@ void ftSs_SpecialAirHi_Enter(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     ftSs_DatAttrs* samus_attr = fp->dat_attrs;
 
-    Fighter_ChangeMotionState(gobj, 354, 0, 0.0f, 1.0f, 0.0f, NULL);
+    Fighter_ChangeMotionState(gobj, 354, Ft_MF_None, 0.0f, 1.0f, 0.0f, NULL);
     ftSamus_updateDamageDeathCBs(gobj);
     Fighter_SetEffectHitlagCallbacks(fp);
     ftCommon_8007D60C(fp);

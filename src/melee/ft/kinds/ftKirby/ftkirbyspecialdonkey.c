@@ -38,13 +38,13 @@ void ftKb_SpecialNDk_800FF8EC(Fighter_GObj* gobj)
     ftKb_DatAttrs* da = fp->dat_attrs;
     PAD_STACK(8);
     if (fp->u.kb.xBC == da->specialn_dk_swings_to_full_charge) {
-        Fighter_ChangeMotionState(gobj, ftKb_MS_DkSpecialNFull, 0, 0, 1, 0,
+        Fighter_ChangeMotionState(gobj, ftKb_MS_DkSpecialNFull, Ft_MF_None, 0, 1, 0,
                                   NULL);
         fp->mv.dk.specialn.x8 = 1;
         fp->mv.dk.specialn.xC = fp->u.kb.xBC;
         fp->u.kb.xBC = 0;
     } else {
-        Fighter_ChangeMotionState(gobj, ftKb_MS_DkSpecialNStart, 0, 0, 1, 0,
+        Fighter_ChangeMotionState(gobj, ftKb_MS_DkSpecialNStart, Ft_MF_None, 0, 1, 0,
                                   NULL);
         fp->mv.dk.specialn.x8 = 0;
         fp->mv.dk.specialn.xC = 0;
@@ -71,13 +71,13 @@ void ftKb_SpecialNDk_800FFA10(Fighter_GObj* gobj)
     ftKb_DatAttrs* da = fp->dat_attrs;
     PAD_STACK(8);
     if (fp->u.kb.xBC == da->specialn_dk_swings_to_full_charge) {
-        Fighter_ChangeMotionState(gobj, ftKb_MS_DkSpecialAirNFull, 0, 0, 1, 0,
+        Fighter_ChangeMotionState(gobj, ftKb_MS_DkSpecialAirNFull, Ft_MF_None, 0, 1, 0,
                                   NULL);
         fp->mv.dk.specialn.x8 = 1;
         fp->mv.dk.specialn.xC = fp->u.kb.xBC;
         fp->u.kb.xBC = 0;
     } else {
-        Fighter_ChangeMotionState(gobj, ftKb_MS_DkSpecialAirNStart, 0, 0, 1, 0,
+        Fighter_ChangeMotionState(gobj, ftKb_MS_DkSpecialAirNStart, Ft_MF_None, 0, 1, 0,
                                   NULL);
         fp->mv.dk.specialn.x8 = 0;
         fp->mv.dk.specialn.xC = 0;
@@ -107,7 +107,7 @@ static inline void ftKb_DkSpecialNStart_Coll_inline(Fighter_GObj* gobj)
 void ftKb_DkSpecialNStart_Anim(Fighter_GObj* gobj)
 {
     if (!ftAnim_IsFramesRemaining(gobj)) {
-        Fighter_ChangeMotionState(gobj, ftKb_MS_DkSpecialNLoop, 0, 0.0F, 1.0F,
+        Fighter_ChangeMotionState(gobj, ftKb_MS_DkSpecialNLoop, Ft_MF_None, 0.0F, 1.0F,
                                   0.0F, NULL);
         ftKb_DkSpecialNStart_Coll_inline(gobj);
     }
@@ -256,7 +256,7 @@ void ftKb_DkSpecialNFull_Anim(Fighter_GObj* gobj)
 void ftKb_DkSpecialAirNStart_Anim(Fighter_GObj* gobj)
 {
     if (!ftAnim_IsFramesRemaining(gobj)) {
-        Fighter_ChangeMotionState(gobj, ftKb_MS_DkSpecialAirNLoop, 0, 0.0F,
+        Fighter_ChangeMotionState(gobj, ftKb_MS_DkSpecialAirNLoop, Ft_MF_None, 0.0F,
                                   1.0F, 0.0F, NULL);
         ftKb_DkSpecialNStart_Coll_inline(gobj);
     }
@@ -393,7 +393,7 @@ void ftKb_DkSpecialNLoop_IASA(Fighter_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     if (!ftCo_8009917C(gobj)) {
         if (fp->input.pressed_buttons & HSD_PAD_B) {
-            Fighter_ChangeMotionState(gobj, ftKb_MS_DkSpecialN, 0, 0.0F, 1.0F,
+            Fighter_ChangeMotionState(gobj, ftKb_MS_DkSpecialN, Ft_MF_None, 0.0F, 1.0F,
                                       0.0F, NULL);
             new_var = fp;
             new_var->mv.dk.specialn.xC = fp->u.kb.xBC;
@@ -405,7 +405,7 @@ void ftKb_DkSpecialNLoop_IASA(Fighter_GObj* gobj)
             fp->mv.dk.specialn.x0 = 1;
         }
         if (fp->cur_anim_frame == 0.0F && fp->mv.dk.specialn.x0) {
-            Fighter_ChangeMotionState(gobj, ftKb_MS_DkSpecialNCancel, 0, 0.0F,
+            Fighter_ChangeMotionState(gobj, ftKb_MS_DkSpecialNCancel, Ft_MF_None, 0.0F,
                                       1.0F, 0.0F, NULL);
             ftKb_DkSpecialNStart_Coll_inline(gobj);
         }
@@ -426,7 +426,7 @@ void ftKb_DkSpecialAirNLoop_IASA(Fighter_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     new_var = fp;
     if (fp->input.pressed_buttons & HSD_PAD_B) {
-        Fighter_ChangeMotionState(gobj, ftKb_MS_DkSpecialAirN, 0, 0.0F, 1.0F,
+        Fighter_ChangeMotionState(gobj, ftKb_MS_DkSpecialAirN, Ft_MF_None, 0.0F, 1.0F,
                                   0.0F, NULL);
         fp->mv.dk.specialn.xC = fp->u.kb.xBC;
         fp->u.kb.xBC = 0;
@@ -437,7 +437,7 @@ void ftKb_DkSpecialAirNLoop_IASA(Fighter_GObj* gobj)
         fp->mv.dk.specialn.x0 = 1;
     }
     if (new_var->cur_anim_frame == 0.0F && fp->mv.dk.specialn.x0) {
-        Fighter_ChangeMotionState(gobj, ftKb_MS_DkSpecialAirNCancel, 0, 0.0F,
+        Fighter_ChangeMotionState(gobj, ftKb_MS_DkSpecialAirNCancel, Ft_MF_None, 0.0F,
                                   1.0F, 0.0F, NULL);
         ftKb_DkSpecialNStart_Coll_inline(gobj);
     }

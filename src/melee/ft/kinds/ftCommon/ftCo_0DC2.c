@@ -11,7 +11,7 @@ void fn_800DB5D8(HSD_GObj*);
 void ftCo_800DC284(Fighter_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
-    Fighter_ChangeMotionState(gobj, ftCo_MS_CaptureDamageHi, 0, 0.0F, 1.0F,
+    Fighter_ChangeMotionState(gobj, ftCo_MS_CaptureDamageHi, Ft_MF_None, 0.0F, 1.0F,
                               0.0F, NULL);
     fp->mv.co.capturedamage.x4 = 0.0F;
     fn_800DB5D8(gobj);
@@ -49,7 +49,7 @@ void fn_800DC384(Fighter_GObj* gobj)
 void ftCo_800DC3A4(Fighter_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
-    Fighter_ChangeMotionState(gobj, ftCo_MS_CaptureDamageLw, 0, 0.0F, 1.0F,
+    Fighter_ChangeMotionState(gobj, ftCo_MS_CaptureDamageLw, Ft_MF_None, 0.0F, 1.0F,
                               0.0F, NULL);
     fp->mv.co.capturedamage.x4 = 0.0F;
     fn_800DB5D8(gobj);

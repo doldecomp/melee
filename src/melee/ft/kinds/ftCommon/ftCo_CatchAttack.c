@@ -12,7 +12,7 @@ void fn_800DA4FC(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     fp->gr_vel = 0.0F;
-    Fighter_ChangeMotionState(gobj, ftCo_MS_CatchAttack, 0, 0.0F, 1.0F, 0.0F,
+    Fighter_ChangeMotionState(gobj, ftCo_MS_CatchAttack, Ft_MF_None, 0.0F, 1.0F, 0.0F,
                               NULL);
     fp->accessory1_cb = fn_800DA678;
     fp->take_dmg_cb = fn_800DA668;

@@ -61,7 +61,7 @@ void fn_800D9CE8(Fighter_GObj* gobj)
     }
 
     fp->throw_flags = 0;
-    Fighter_ChangeMotionState(gobj, nextMotion, 0x4000, startFrame, 1.0f, 0.0f,
+    Fighter_ChangeMotionState(gobj, nextMotion, Ft_MF_UpdateCmd, startFrame, 1.0f, 0.0f,
                               NULL);
     fp->accessory1_cb = fn_800DA190;
     fp->x221B_b7 = 0;

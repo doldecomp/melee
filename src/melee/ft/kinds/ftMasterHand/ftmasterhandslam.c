@@ -62,6 +62,6 @@ void ftMh_MS_380_80155194(HSD_GObj* gobj)
         ftCh_Init_8015A2B0(gobj1);
     }
     fp->x1A5C = gobj1;
-    Fighter_ChangeMotionState(gobj, ftMh_MS_TagCrush, 0, 0, 1, 0, 0);
+    Fighter_ChangeMotionState(gobj, ftMh_MS_TagCrush, Ft_MF_None, 0, 1, 0, 0);
     ftAnim_8006EBA4(gobj);
 }
