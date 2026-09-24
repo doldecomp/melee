@@ -110,12 +110,12 @@ void ftCo_800BFFAC(Fighter* fp)
     lb_80014498(&fp->x488);
 }
 
-bool ftCo_800BFFD0(Fighter* fp, enum_t arg1, bool arg2)
+bool ftCo_800BFFD0(Fighter* fp, FtColAnim arg1, bool arg2)
 {
-    s32 tmp;
-    if (arg1 >= 0x7B) {
-        arg1 -= (tmp = 0x7B);
-        if (lb_800144C8(&fp->x508, Fighter_804D6538, arg1, arg2)) {
+    if (arg1 >= FtColAnim_SpycloakStart) {
+        if (lb_800144C8(&fp->x508, Fighter_804D6538,
+                        arg1 -= FtColAnim_SpycloakStart, arg2))
+        {
             return true;
         }
     } else if (Fighter_804D653C[arg1].unk5 != 0) {
@@ -137,18 +137,7 @@ void ft_800C0098(Fighter* fp)
 {
     lb_80014498(&fp->x508);
     if (fp->x2226_b4) {
-        s32 arg1;
-        if ((arg1 = 0x80) >= 0x7B) {
-            s32 temp = arg1 - 0x7B;
-            lb_800144C8(&fp->x508, Fighter_804D6538, temp, 0);
-        } else {
-            Fighter_804D653C_t* entry;
-            if ((entry = &Fighter_804D653C[arg1])->unk5 != 0) {
-                lb_800144C8(&fp->x488, Fighter_804D653C, arg1, 0);
-            } else {
-                lb_800144C8(&fp->x408, Fighter_804D653C, arg1, 0);
-            }
-        }
+        ftCo_800BFFD0(fp, 0x80, 0);
     }
 }
 
@@ -159,60 +148,44 @@ void ftCo_800C0134(Fighter* fp)
         ftData_UnkMotionStates4[fp->kind](fp->gobj);
     }
     if (ftCo_800C53E4(fp) != 0) {
-        s32 arg1;
-        if ((arg1 = 0x6A) >= 0x7B) {
-            s32 temp = arg1 - 0x7B;
-            lb_800144C8(&fp->x508, Fighter_804D6538, temp, 0);
-        } else {
-            Fighter_804D653C_t* entry;
-            if ((entry = &Fighter_804D653C[arg1])->unk5 != 0) {
-                lb_800144C8(&fp->x488, Fighter_804D653C, arg1, 0);
-            } else {
-                lb_800144C8(&fp->x408, Fighter_804D653C, arg1, 0);
-            }
-        }
+        ftCo_800BFFD0(fp, 0x6A, 0);
     }
 }
 
-#ifdef MUST_MATCH
-#pragma push
-#pragma dont_inline on
-#endif
+static inline void resetColAnimX408(Fighter* fp)
+{
+    lb_80014498(&fp->x408);
+    if (fp->stamina_dead) {
+        ftCo_800BFFD0(fp, 0x7A, 0);
+    }
+    if (fp->dmg.x18F0 != 0) {
+        ftCo_800BFFD0(fp, 8, 0);
+    }
+    if (fp->x221D_b6) {
+        ftCo_800BFFD0(fp, 0x6B, 0);
+    }
+    if (fp->x1994 != 0 || fp->x1990 != 0 || fp->x2221_b0) {
+        ftCo_800BFFD0(fp, 9, 0);
+    }
+}
+
 void ftCo_800C0200(Fighter* fp, int arg1)
 {
-    if (arg1 >= 0x7B) {
+    if (arg1 >= FtColAnim_SpycloakStart) {
         OSReport("don't reset spycloak colanim!\n");
         __assert("ftcolanimlist.c", 0xC1, "0");
         return;
     }
     if (Fighter_804D653C[arg1].unk5 != 0) {
-        lb_80014498(&fp->x488);
-        if (ftData_UnkMotionStates4[fp->kind] != NULL) {
-            ftData_UnkMotionStates4[fp->kind](fp->gobj);
-        }
-        if (ftCo_800C53E4(fp) != 0) {
-            ftCo_800BFFD0(fp, 0x6A, 0);
-        }
+        ftCo_800C0134(fp);
     } else {
-        lb_80014498(&fp->x408);
-        if (fp->stamina_dead) {
-            ftCo_800BFFD0(fp, 0x7A, 0);
-        }
-        if (fp->dmg.x18F0 != 0) {
-            ftCo_800BFFD0(fp, 8, 0);
-        }
-        if (fp->x221D_b6) {
-            ftCo_800BFFD0(fp, 0x6B, 0);
-        }
-        if (fp->x1994 != 0 || fp->x1990 != 0 || fp->x2221_b0) {
-            ftCo_800BFFD0(fp, 9, 0);
-        }
+        resetColAnimX408(fp);
     }
 }
 
 void ftCo_800C0358(Fighter* fp, Fighter* arg1, s32 arg2)
 {
-    if (arg2 >= 0x7B) {
+    if (arg2 >= FtColAnim_SpycloakStart) {
         OSReport("don't reset spycloak colanim!\n");
         __assert("ftcolanimlist.c", 0xDE, "0");
         return;
@@ -228,49 +201,19 @@ void ftCo_800C0408(Fighter_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
     while (lb_80014258(gobj, &fp->x508, ft_800BFF34)) {
-        lb_80014498(&fp->x508);
-        if (fp->x2226_b4) {
-            ftCo_800BFFD0(fp, 0x80, 0);
-        }
+        ft_800C0098(fp);
     }
     while (lb_80014258(gobj, &fp->x408, ft_800BFF34)) {
-        lb_80014498(&fp->x408);
-        if (fp->stamina_dead) {
-            ftCo_800BFFD0(fp, 0x7A, 0);
-        }
-        if (fp->dmg.x18F0 != 0) {
-            ftCo_800BFFD0(fp, 8, 0);
-        }
-        if (fp->x221D_b6) {
-            ftCo_800BFFD0(fp, 0x6B, 0);
-        }
-        if (fp->x1994 != 0 || fp->x1990 != 0 || fp->x2221_b0) {
-            ftCo_800BFFD0(fp, 9, 0);
-        }
+        resetColAnimX408(fp);
     }
     if (fp->x408.x28_colanim.i == 0) {
         while (lb_80014258(gobj, &fp->x488, ft_800BFF34)) {
-            lb_80014498(&fp->x488);
-            if (ftData_UnkMotionStates4[fp->kind] != NULL) {
-                ftData_UnkMotionStates4[fp->kind](fp->gobj);
-            }
-            if (ftCo_800C53E4(fp)) {
-                ftCo_800BFFD0(fp, 0x6A, 0);
-            }
+            ftCo_800C0134(fp);
         }
     } else {
         while (lb_80014258(gobj, &fp->x488, ft_800BFF70)) {
-            lb_80014498(&fp->x488);
-            if (ftData_UnkMotionStates4[fp->kind] != NULL) {
-                ftData_UnkMotionStates4[fp->kind](fp->gobj);
-            }
-            if (ftCo_800C53E4(fp)) {
-                ftCo_800BFFD0(fp, 0x6A, 0);
-            }
+            ftCo_800C0134(fp);
         }
     }
     fp->x2221_b3 = true;
 }
-#ifdef MUST_MATCH
-#pragma pop
-#endif

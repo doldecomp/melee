@@ -235,12 +235,12 @@ melee/pl/plattack.c:
 	.sbss       start:0x804D6480 end:0x804D6488
 
 melee/pl/pltrick.c:
-	.text       start:0x80037B2C end:0x800386D8
+	.text       start:0x80037B2C end:0x80038788
 	.data       start:0x803BCE70 end:0x803BCF20
 	.sdata2     start:0x804D7F18 end:0x804D7F20
 
 melee/pl/plbonus.c:
-	.text       start:0x800386D8 end:0x8003D514
+	.text       start:0x80038788 end:0x8003D514
 	.data       start:0x803BCF20 end:0x803BD0B0
 	.sdata2     start:0x804D7F20 end:0x804D7F58
 
@@ -341,8 +341,11 @@ melee/ft/ftcamera.c:
 	.data       start:0x803C0C08 end:0x803C0C40
 	.sdata2     start:0x804D82D0 end:0x804D82E0
 
+melee/ft/ft_0763.c:
+	.text       start:0x800763C0 end:0x800765E0
+
 melee/ft/ftcoll.c:
-	.text       start:0x800763C0 end:0x8007C114
+	.text       start:0x800765E0 end:0x8007C114
 	.data       start:0x803C0C40 end:0x803C0D58
 	.bss        start:0x80459278 end:0x804598B8
 	.sdata      start:0x804D3A68 end:0x804D3A70
@@ -2363,11 +2366,16 @@ melee/gm/gmregcommon.c:
 	.sdata      start:0x804D4050 end:0x804D4058
 
 melee/gm/gm_17C0.c:
-	.text       start:0x8017C0C8 end:0x8017E424
+	.text       start:0x8017C0C8 end:0x8017DB58
 	.rodata     start:0x803B7C08 end:0x803B7C18
 	.data       start:0x803D7A50 end:0x803D7AC0
-	.bss        start:0x804706C0 end:0x80472C30
-	.sdata2     start:0x804DA428 end:0x804DA448
+	.bss        start:0x804706C0 end:0x804706D8
+	.sdata2     start:0x804DA428 end:0x804DA440
+
+melee/gm/gm_17DB.c:
+	.text       start:0x8017DB58 end:0x8017E424
+	.bss        start:0x804706D8 end:0x80472C30
+	.sdata2     start:0x804DA440 end:0x804DA448
 
 melee/gm/gm_17E4.c:
 	.text       start:0x8017E424 end:0x8017EB30
@@ -4697,11 +4705,18 @@ melee/if/if_2FF2.c:
 	.sdata2     start:0x804DDC28 end:0x804DDC30
 
 melee/if/soundtest.c:
-	.text       start:0x802FF7DC end:0x80301E44
-	.data       start:0x803F9EF0 end:0x803FDC20
-	.sdata      start:0x804D5850 end:0x804D5A00
-	.sbss       start:0x804D6DA8 end:0x804D6E18
-	.sdata2     start:0x804DDC30 end:0x804DDC58
+	.text       start:0x802FF7DC end:0x80300480
+	.data       start:0x803F9EF0 end:0x803FA758
+	.sdata      start:0x804D5850 end:0x804D58D0
+	.sbss       start:0x804D6DA8 end:0x804D6DC8
+	.sdata2     start:0x804DDC30 end:0x804DDC40
+
+melee/if/if_3004.c:
+	.text       start:0x80300480 end:0x80301E44
+	.data       start:0x803FA758 end:0x803FDC20
+	.sdata      start:0x804D58D0 end:0x804D5A00
+	.sbss       start:0x804D6DC8 end:0x804D6E18
+	.sdata2     start:0x804DDC40 end:0x804DDC58
 
 melee/if/textdraw.c:
 	.text       start:0x80301E44 end:0x80302834
@@ -4847,9 +4862,12 @@ melee/sfx/sfx_unk.c:
 	.sdata2     start:0x804DE148 end:0x804DE14C
 
 melee/sfx/crowdsfx.c:
-	.text       start:0x803219AC end:0x80322620
+	.text       start:0x803219AC end:0x80322258
 	.bss        start:0x804A2F08 end:0x804A2F38
 	.sbss       start:0x804D7050 end:0x804D7054
+
+melee/sfx/crowdsfx_1.c:
+	.text       start:0x80322258 end:0x80322620
 	.sdata2     start:0x804DE150 end:0x804DE160
 
 Runtime/__va_arg.c:
@@ -4945,11 +4963,11 @@ MSL/wchar_io.c:
 	.text       start:0x80326098 end:0x80326118
 
 MSL/math_1.c:
-	.text       start:0x80326118 end:0x803261BC
+	.text       start:0x80326118 end:0x80326200
 	.sdata2     start:0x804DE190 end:0x804DE198
 
 MSL/trigf.c:
-	.text       start:0x803261BC end:0x803265A8
+	.text       start:0x80326200 end:0x803265A8
 	.ctors      start:0x803B7244 end:0x803B7248
 	.rodata     start:0x803B8F40 end:0x803B8F50
 	.data       start:0x80400778 end:0x80400788
@@ -5771,10 +5789,15 @@ sysdolphin/baselib/gobjuserdata.c:
 	.data       start:0x80408590 end:0x804085F0
 
 sysdolphin/baselib/gobj.c:
-	.text       start:0x80390C5C end:0x803912E0
-	.data       start:0x804085F0 end:0x80408620
+	.text       start:0x80390C5C end:0x80391044
+	.data       start:0x804085F0 end:0x80408600
 	.bss        start:0x804CE380 end:0x804CE3F8
-	.sbss       start:0x804D7810 end:0x804D7850
+	.sbss       start:0x804D7810 end:0x804D7848
+
+sysdolphin/baselib/hsd_3910.c:
+	.text       start:0x80391044 end:0x803912E0
+	.data       start:0x80408600 end:0x80408620
+	.sbss       start:0x804D7848 end:0x804D7850
 
 sysdolphin/baselib/gobjinit.c:
 	.text       start:0x803912E0 end:0x80391580

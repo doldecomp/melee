@@ -342,10 +342,6 @@ float lb_800103B8(Vec3* a, Vec3* b)
     return lb_800101C8(a, b);
 }
 
-#ifdef MUST_MATCH
-#pragma push
-#pragma dont_inline on
-#endif
 bool lb_800103D8(Vec3* vec, float x0, float x1, float x2, float x3,
                  float offset)
 {
@@ -354,20 +350,18 @@ bool lb_800103D8(Vec3* vec, float x0, float x1, float x2, float x3,
     if (dist0 == dist1) {
         if (dist0 > 1e-10f) {
             return true;
+        } else {
+            return false;
         }
-        return false;
-    }
-    if ((double) dist0 > 0.0 && (double) dist1 < 0.0) {
+    } else if ((double) dist0 > 0.0 && (double) dist1 < 0.0) {
         vec->x = -dist1 / (dist0 - dist1) * (x0 - x2) + x2;
         vec->y = offset;
         vec->z = 0.0f;
         return true;
+    } else {
+        return false;
     }
-    return false;
 }
-#ifdef MUST_MATCH
-#pragma pop
-#endif
 
 static inline bool approximatelyZeroVec3(Vec3 vec)
 {

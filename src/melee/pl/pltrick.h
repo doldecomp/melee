@@ -3,6 +3,8 @@
 
 #include <Runtime/platform.h>
 
+#include <melee/pl/forward.h>
+
 #include <melee/ft/types.h>
 
 struct plActionStats;
@@ -18,5 +20,8 @@ struct plAttackStats;
                               s32, s32);
 /* 0384DC */ void pl_800384DC(HSD_GObj*, int, void*);
 /* 038628 */ bool pl_80038628(HSD_GObj*, int);
+/* 0386D8 */ unsigned int pl_800386D8(plActionStats*, ssize_t);
+/* 0386E8 */ int pl_800386E8(pl_800386E8_arg0_t*);
+/* 038700 */ int fn_80038700(const int*, int, int);
 
 #endif

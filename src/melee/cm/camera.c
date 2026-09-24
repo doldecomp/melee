@@ -743,10 +743,6 @@ void Camera_80029AAC(CameraBounds* bounds, CameraTransformState* transform,
     transform->interest.y += offset_y * lerp_factor;
 }
 
-#ifdef MUST_MATCH
-#pragma push
-#pragma dont_inline on
-#endif
 void Camera_80029BC4(CameraBounds* bounds, CameraTransformState* transform)
 {
     float cam_dist = (bounds->y_max - bounds->y_min) /
@@ -786,9 +782,6 @@ void Camera_80029C88(CameraBounds* unused, CameraTransformState* transform,
     transform->position.y += dist.y * scale;
     transform->position.z += dist.z * scale;
 }
-#ifdef MUST_MATCH
-#pragma pop
-#endif
 
 static inline f32 get_y_bias(f32 spread)
 {
@@ -2183,53 +2176,7 @@ static inline bool get_subject_pos(Vec3* pos, const s8* slot_ptr)
     return valid;
 }
 
-#ifdef MUST_MATCH
-#pragma inline_depth(8)
-#endif
-static inline void get_subject_pos_out(Vec3* pos, const s8* slot_ptr,
-                                       bool* valid_out)
-{
-    CmSubject* subject;
-    HSD_GObj* gobj;
-    s32 slot;
-
-    slot = *slot_ptr;
-    *valid_out = true;
-    if (slot == 0xB) {
-        *valid_out = false;
-    } else if (slot == 0xA) {
-        Stage_UnkSetVec3TCam_Offset(pos);
-    } else {
-        gobj = Player_GetEntity(slot);
-        if (gobj != NULL && (subject = ftLib_80086B74(gobj)) != NULL) {
-            *pos = subject->bone_pos;
-        } else {
-            *valid_out = false;
-        }
-    }
-}
-
-static inline void camera_cddc_select(s8* slot_ptr)
-{
-    Vec3* pos_ptr;
-    bool valid;
-    HSD_GObj* gobj;
-
-    if (*slot_ptr == 11) {
-        return;
-    }
-    pos_ptr = &game_camera.x308;
-    while (*slot_ptr == 10 ||
-           (get_subject_pos_out(pos_ptr, slot_ptr, &valid), !valid) ||
-           (gobj = Player_GetEntity(*slot_ptr)) == NULL ||
-           ftLib_8008701C(gobj))
-    {
-        *slot_ptr = Camera_8002BA00(*slot_ptr, 1);
-    }
-}
-
-static inline Vec3*
-camera_cddc_target_interest(CameraTransformState* transform)
+static inline Vec3* get_target_interest(CameraTransformState* transform)
 {
     return &transform->target_interest;
 }
@@ -2247,7 +2194,8 @@ static inline void track_subject(CameraTransformState* transform,
 
     copy_src = &game_camera.transform.target_interest;
     *copy_src = game_camera.x308;
-    lbVector_Add(camera_cddc_target_interest(transform), &game_camera.x314);
+    lbVector_Add(get_target_interest(&game_camera.transform),
+                 &game_camera.x314);
 
     game_camera.transform.target_position = *copy_src;
     target_pos = &transform->target_position;
@@ -2263,8 +2211,8 @@ static inline void track_subject(CameraTransformState* transform,
     eye_diff->z *= coeff;
     lbVector_Add(position_ptr, eye_diff);
 
-    lbVector_Diff(camera_cddc_target_interest(transform), &transform->interest,
-                  interest_diff);
+    lbVector_Diff(get_target_interest(&game_camera.transform),
+                  &transform->interest, interest_diff);
     coeff = *coeff_ptr;
     interest_diff->x *= coeff;
     interest_diff->y *= coeff;
@@ -2445,7 +2393,7 @@ void Camera_8002CB0C(CameraBounds* bounds)
 void Camera_8002CDDC(void* unused)
 {
     s8* slot_ptr;
-    CameraTransformState* late_transform;
+    CameraTransformState* transform;
     HSD_GObj* gobj;
     CmSubject* subject;
     CameraBounds bounds;
@@ -2459,8 +2407,16 @@ void Camera_8002CDDC(void* unused)
     Camera_800293E0();
     Camera_8002958C(&bounds, &game_camera.transform);
     slot_ptr = &game_camera.x2C4;
-    late_transform = &game_camera.transform;
-    camera_cddc_select(slot_ptr);
+    transform = &game_camera.transform;
+    if (*slot_ptr != 11) {
+        while (*slot_ptr == 10 ||
+               !get_subject_pos(&game_camera.x308, slot_ptr) ||
+               (gobj = Player_GetEntity(*slot_ptr)) == NULL ||
+               ftLib_8008701C(gobj))
+        {
+            *slot_ptr = Camera_8002BA00(*slot_ptr, 1);
+        }
+    }
     Camera_8002CB0C(&bounds);
     if (*slot_ptr != 10 && *slot_ptr != 11 &&
         (gobj = Player_GetEntity(*slot_ptr)) != NULL &&
@@ -2469,7 +2425,7 @@ void Camera_8002CDDC(void* unused)
         Camera_80029124(&subject->bone_pos, 0) == CAM_BOUNDS_INSIDE &&
         ABS(subject->bone_pos.z) < 30.0f)
     {
-        track_subject(late_transform, &interest_diff, &eye_diff);
+        track_subject(transform, &interest_diff, &eye_diff);
         game_camera.transform.target_fov = cm_803BCCA0.x6C;
         delta = game_camera.transform.target_fov - game_camera.transform.fov;
         game_camera.transform.fov += delta * cm_803BCCA0.x70;
@@ -2486,9 +2442,6 @@ void Camera_8002CDDC(void* unused)
     update_avg_bounds_width();
 }
 
-#ifdef MUST_MATCH
-#pragma inline_depth(2)
-#endif
 static inline f32 compute_orbit_distance(s32 slot)
 {
     f32 distance;

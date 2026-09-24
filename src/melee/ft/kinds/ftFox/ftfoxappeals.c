@@ -13,8 +13,8 @@
 #include <melee/ft/types.h>
 #include <melee/gr/grcorneria.h>
 #include <melee/pl/player.h>
-#include <melee/pl/plbonus.h>
 #include <melee/pl/plbonuslib.h>
+#include <melee/pl/pltrick.h>
 
 #define FTFOX_APPEALS_ATTACKID 0x72
 

@@ -47,9 +47,4 @@
 /* 26EA9C */ bool it_8026EA9C(HSD_GObj*, Vec3*, Vec3*, Vec3*, int*,
                               u32* flags_out, s32);
 
-bool it_8026E15C_inline1(Item_GObj* gobj);
-bool it_8026E15C_inline2(Item_GObj* gobj);
-bool it_8026E248_inline(Item_GObj* gobj);
-bool it_8026E32C_inline(Item_GObj* gobj);
-
 #endif

@@ -72,7 +72,7 @@ struct GrPuVtxMapEntry {
 /* 2130C8 */ static bool grPura_802130C8(Vec3* a, int, HSD_JObj*);
 /* 2130D0 */ static void fn_802130D0(HSD_GObj*, intptr_t);
 /* 213128 */ static void grPura_80213128(HSD_DObj*);
-/* 213224 */ static void grPura_80213224(HSD_DObj*);
+/* 213224 */ static inline void grPura_80213224(HSD_DObj*);
 /* 213250 */ static void grPura_80213250(HSD_JObj*);
 
 static StageCallbacks stage_callbacks[] = {
@@ -890,144 +890,40 @@ void fn_802130D0(HSD_GObj* arg0, intptr_t arg1)
     HSD_MObjSetToonTextureImage(0);
 }
 
+static inline void grPura_80213224(HSD_DObj* dobj)
+{
+    if (dobj != NULL) {
+        HSD_MObjCompileTev(dobj->mobj);
+    }
+}
+
+static inline void compileDObjList(HSD_DObj* dobj)
+{
+    for (; dobj != NULL; dobj = dobj->next) {
+        grPura_80213224(dobj);
+    }
+}
+
 void grPura_80213128(HSD_DObj* dobj)
 {
-    HSD_DObj* iter;
-    HSD_DObj* next;
-    HSD_DObj* next2;
-
-    if ((next = dobj->next) != NULL) {
-        if ((next2 = next->next) != NULL) {
-            if (next2->next != NULL) {
-                grPura_80213128(next2->next);
-            }
-            for (iter = next2; iter != NULL; iter = iter->next) {
-                grPura_80213224(iter);
-            }
-            if (next2->mobj != NULL) {
-                HSD_MObjCompileTev(next2->mobj);
-            }
-        }
-        for (iter = next; iter != NULL; iter = iter->next) {
-            if (iter != NULL) {
-                HSD_MObjCompileTev(iter->mobj);
-            }
-        }
-        if (next->mobj != NULL) {
-            HSD_MObjCompileTev(next->mobj);
-        }
+    if (dobj->next != NULL) {
+        grPura_80213128(dobj->next);
     }
-    for (iter = dobj; iter != NULL; iter = iter->next) {
-        if (iter != NULL) {
-            HSD_MObjCompileTev(iter->mobj);
-        }
-    }
+    compileDObjList(dobj);
     if (dobj->mobj != NULL) {
         HSD_MObjCompileTev(dobj->mobj);
     }
 }
 
-#ifdef MUST_MATCH
-#pragma push
-#pragma dont_inline on
-#endif
-void grPura_80213224(HSD_DObj* dobj)
-{
-    if (dobj != 0) {
-        HSD_MObjCompileTev(dobj->mobj);
-    }
-}
-#ifdef MUST_MATCH
-#pragma pop
-#endif
-
 void grPura_80213250(HSD_JObj* jobj)
 {
-    HSD_JObj* _perm_alias16145 = jobj->child;
-    HSD_JObj* child = _perm_alias16145;
-    HSD_DObj* sibling_iter;
-    HSD_DObj* iter;
-    HSD_DObj* next;
-    HSD_DObj* sibling_dobj;
-    HSD_DObj* dobj;
-    HSD_DObj* self_dobj;
-    HSD_DObj* self_iter;
-    HSD_DObj* self_next;
-
-    if (child != NULL) {
-        if (child->child != NULL) {
-            grPura_80213250(child->child);
-        }
-        if (child->next != NULL) {
-            grPura_80213250(child->next);
-        }
-        if (union_type_dobj(child)) {
-            if ((dobj = child->u.dobj) != NULL) {
-                if (dobj->next != NULL) {
-                    grPura_80213128(dobj->next);
-                }
-                for (iter = dobj; iter != NULL; iter = iter->next) {
-                    grPura_80213224(iter);
-                }
-                if (dobj->mobj != NULL) {
-                    HSD_MObjCompileTev(dobj->mobj);
-                }
-            }
-        }
+    if (jobj->child != NULL) {
+        grPura_80213250(jobj->child);
     }
-
-    {
-        HSD_JObj* sibling;
-        if ((sibling = jobj->next) != NULL) {
-            if (sibling->child != NULL) {
-                grPura_80213250(sibling->child);
-            }
-            if (sibling->next != NULL) {
-                grPura_80213250(sibling->next);
-            }
-            if (union_type_dobj(sibling)) {
-                if ((sibling_dobj = sibling->u.dobj) != NULL) {
-                    if (sibling_dobj->next != NULL) {
-                        grPura_80213128(sibling_dobj->next);
-                    }
-                    for (sibling_iter = sibling_dobj; sibling_iter != NULL;
-                         sibling_iter = sibling_iter->next)
-                    {
-                        grPura_80213224(sibling_iter);
-                    }
-                    if (sibling_dobj->mobj != NULL) {
-                        HSD_MObjCompileTev(sibling_dobj->mobj);
-                    }
-                }
-            }
-        }
+    if (jobj->next != NULL) {
+        grPura_80213250(jobj->next);
     }
-
-    if (union_type_dobj(jobj)) {
-        if ((self_dobj = jobj->u.dobj) != NULL) {
-            if ((self_next = self_dobj->next) != NULL) {
-                if (self_next->next != NULL) {
-                    grPura_80213128(self_next->next);
-                }
-                for (self_iter = self_next; self_iter != NULL;
-                     self_iter = self_iter->next)
-                {
-                    grPura_80213224(self_iter);
-                }
-                if (self_next->mobj != NULL) {
-                    HSD_MObjCompileTev(self_next->mobj);
-                }
-            }
-            for (self_iter = self_dobj; self_iter != NULL;
-                 self_iter = self_iter->next)
-            {
-                if (self_iter != NULL) {
-                    HSD_MObjCompileTev(self_iter->mobj);
-                }
-            }
-            if (self_dobj->mobj != NULL) {
-                HSD_MObjCompileTev(self_dobj->mobj);
-            }
-        }
+    if (union_type_dobj(jobj) && jobj->u.dobj != NULL) {
+        grPura_80213128(jobj->u.dobj);
     }
 }
