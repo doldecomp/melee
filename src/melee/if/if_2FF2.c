@@ -97,6 +97,18 @@ static inline int fn_802FF218_inline(HSD_GObj* arg0)
     return -1;
 }
 
+static inline int getScore(int slot)
+{
+    int score;
+
+    gm_8016B774();
+    score = gm_GetMatchEndPlayerScore(slot);
+    if (score > 9999) {
+        score = 9999;
+    }
+    return score;
+}
+
 void fn_802FF218(HSD_GObj* arg0)
 {
     int y;
@@ -107,16 +119,9 @@ void fn_802FF218(HSD_GObj* arg0)
         if ((thing = &un_804A1F58.x8[y])->x10 == 1) {
             HSD_SisLib_803A70A0(thing->x4, thing->x8, "  ");
         } else {
-            int s;
-            int tmp;
-            gm_8016B774();
-            s = gm_GetMatchEndPlayerScore(y);
-            if (s > 9999) {
-                s = 9999;
-            }
-            tmp = s;
+            int s = getScore(y);
             if (thing->xC != s) {
-                HSD_SisLib_803A70A0(thing->x4, thing->x8, "%d", tmp);
+                HSD_SisLib_803A70A0(thing->x4, thing->x8, "%d", s);
                 thing->xC = s;
             }
         }
@@ -125,25 +130,26 @@ void fn_802FF218(HSD_GObj* arg0)
 
 void fn_802FF360(void* arg0) {}
 
+static inline void freeEntry(struct un_804A1F58_x8_t* thing)
+{
+    if (thing->x0 != NULL) {
+        HSD_GObjFree(thing->x0);
+    }
+    if (thing->x4 != NULL) {
+        HSD_SisLib_803A5CC4(thing->x4);
+    }
+}
+
 void un_802FF364(int slot)
 {
     int s;
     Vec3* ifAll;
     struct un_804A1F58_x8_t* thing;
-    HSD_GObj* gobj;
     struct un_804A1F58_t* base = &un_804A1F58;
     PAD_STACK(0x10);
     thing = &base->x8[slot];
     ifAll = ifAll_GetPlayerHUDPosition(slot);
-    gobj = thing->x0;
-    if ((thing && thing) && thing) {
-    }
-    if (gobj) {
-        HSD_GObjFree(gobj);
-    }
-    if (thing->x4) {
-        HSD_SisLib_803A5CC4(thing->x4);
-    }
+    freeEntry(thing);
     thing->x4 = HSD_SisLib_803A6754(2, base->x0);
     thing->x4->default_alignment = 1;
     thing->x4->default_kerning = 1;
@@ -175,12 +181,7 @@ void un_802FF4FC(void)
     for (i = 0; i < 6; i++) {
         struct un_804A1F58_x8_t* thing;
         thing = (0, &base->x8[i]);
-        if (thing->x0) {
-            HSD_GObjFree(thing->x0);
-        }
-        if (thing->x4) {
-            HSD_SisLib_803A5CC4(thing->x4);
-        }
+        freeEntry(thing);
     }
     (void) base;
 }
