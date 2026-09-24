@@ -38,10 +38,10 @@ typedef struct {
 
 void ft_800892D4(Fighter* arg0)
 {
-    union Struct2070 spC;
+    union Struct2070 zero;
 
-    spC.x2070_int = 0;
-    arg0->dmg.x18d4 = spC;
+    zero.x2070_int = 0;
+    arg0->dmg.x18d4 = zero;
     arg0->x2070.x2070_int = arg0->dmg.x18d4.x2070_int;
     arg0->x2074.x2074_vec.x = 0;
     arg0->x2074.x2074_vec.y = 0;

@@ -76,7 +76,7 @@ struct plActionStats {
             u32 x500;
         };
     };
-    /* +504 */ u8 x504[StatsAttack_Count]; ///< related to union Struct2070
+    /* +504 */ u8 x504[StatsAttack_Count]; ///< indexed by Struct2070::x2073
     /* +568 */ u32 x568;
     /* +56C */ u32 x56C;
     /* +570 */ u32 x570;
