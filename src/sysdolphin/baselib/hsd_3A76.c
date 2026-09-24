@@ -13,13 +13,27 @@
 #include <dolphin/types.h>
 #include <melee/lb/lbarchive.h> ///< @todo Circular include
 
+/// Bytes in a saved cursor record, not counting its type byte.
+enum {
+    SIS_SAVED_CURSOR_SIZE = sizeof(u8*)
+};
+
 /// SIS data and saved text state are unaligned big-endian byte streams.
 #if defined(__BYTE_ORDER__) && __BYTE_ORDER__ == __ORDER_LITTLE_ENDIAN__
 #define SIS_GET_U16(p) ((u16) (((p)[0] << 8) | (p)[1]))
 #define SIS_GET_S16(p) ((s16) SIS_GET_U16(p))
-#define SIS_GET_PTR(p)                                                        \
-    ((u8*) (uintptr_t) (((u32) (p)[0] << 24) | ((u32) (p)[1] << 16) |         \
-                        ((u32) (p)[2] << 8) | (p)[3]))
+#define SIS_GET_PTR(p) sisGetPtr(p)
+
+static inline u8* sisGetPtr(const u8* p)
+{
+    uintptr_t value = 0;
+    int i;
+
+    for (i = 0; i < SIS_SAVED_CURSOR_SIZE; i++) {
+        value = (value << 8) | p[i];
+    }
+    return (u8*) value;
+}
 #else
 #define SIS_GET_U16(p) (*(u16*) (p))
 #define SIS_GET_S16(p) (*(s16*) (p))
@@ -157,7 +171,7 @@ void HSD_SisLib_803A7684(HSD_Text* text, const u8* cursor, u8 flags)
         int old_x6E;
 
         old_x6E = text->x6E;
-        if (old_x6E < (s32) (text->x6C + 5)) {
+        if (old_x6E < (s32) (text->x6C + SIS_SAVED_CURSOR_SIZE + 1)) {
             new_x6E = old_x6E + 0x10;
             old_buf = text->string_buffer;
             text->string_buffer = HSD_SisLib_Alloc(new_x6E);
@@ -171,6 +185,16 @@ void HSD_SisLib_803A7684(HSD_Text* text, const u8* cursor, u8 flags)
                 idx += 1;
             }
             HSD_SisLib_Free(old_buf);
+        }
+        if (SIS_SAVED_CURSOR_SIZE > 4) {
+            int shift;
+
+            for (shift = (SIS_SAVED_CURSOR_SIZE - 1) * 8; shift >= 32;
+                 shift -= 8)
+            {
+                text->string_buffer[text->x6C++] =
+                    (u8) ((uintptr_t) cursor >> shift);
+            }
         }
         text->string_buffer[text->x6C++] = (u8) ((uintptr_t) cursor >> 24);
         text->string_buffer[text->x6C++] =
@@ -251,11 +275,11 @@ u8* HSD_SisLib_803A7F0C(HSD_Text* text, s32 flags)
             }
             break;
         case 5:
-            pos -= 4;
+            pos -= SIS_SAVED_CURSOR_SIZE;
             if (target_type == 5) {
                 result = SIS_GET_PTR(text->string_buffer + pos);
                 if (flag_hi == entry_flags) {
-                    remove_size = 5;
+                    remove_size = SIS_SAVED_CURSOR_SIZE + 1;
                 }
                 goto done;
             }
@@ -719,7 +743,7 @@ void HSD_SisLib_803A84BC(HSD_GObj* gobj, int pass)
                             sis_cursor = *(u8**) (sis_cursor + 1) - 1;
                             break;
                         case 10:
-                            if (((u32) text->alloc_data == 0U) || (saved_kerning == 0)) {
+                            if ((text->alloc_data == NULL) || (saved_kerning == 0)) {
                                 HSD_SisLib_803A7684(text, sis_cursor, 1U);
                                 text->x78.x = (f32) SIS_GET_S16(sis_cursor + 1) / 256.0F;
                                 text->x78.y = (f32) SIS_GET_S16(sis_cursor + 3) / 256.0F;
@@ -727,7 +751,7 @@ void HSD_SisLib_803A84BC(HSD_GObj* gobj, int pass)
                             sis_cursor += 4;
                             break;
                         case 11:
-                            if (((u32) text->alloc_data == 0U) || (saved_kerning == 0)) {
+                            if ((text->alloc_data == NULL) || (saved_kerning == 0)) {
                                 HSD_SisLib_803A7F0C(text, 1);
                             }
                             break;
