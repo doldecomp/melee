@@ -64,7 +64,7 @@ struct un_803F9D48 {
     unsigned char x0a : 4;
     unsigned char x0b : 4;
     unsigned char x1;
-    char x2;
+    s8 x2;
     unsigned char x3;
     u16 x4;
     u16 x6;
@@ -89,7 +89,7 @@ struct un_803F9D48 {
 /* 4D6D98 */ static HSD_Archive* un_804D6D98;
 /* 4D6D9C */ static SceneDesc* un_804D6D9C;
 
-void un_802FE3F8(int a, int b, s16* c, s16* d)
+void un_802FE3F8(int a, int b, u16* c, u16* d)
 {
     struct un_803F9B30* x;
     for (x = &un_803F9B30[0]; x->x0 != 66; x++) {
@@ -108,15 +108,27 @@ void un_802FE3F8(int a, int b, s16* c, s16* d)
     }
 }
 
-static inline void un_802FE3F8_inner(int a, int b, s16* c, s16* d)
+static inline int lookupX4(int a)
 {
-    un_802FE3F8(a, b, c, d);
+    struct un_803F9B30* x;
+
+    for (x = &un_803F9B30[0]; x->x0 != 66; x++) {
+        if (x->x0 == a) {
+            return un_803F9A00[x->x4];
+        }
+    }
+    return 0;
 }
 
-/// ifPrize_Scene_OnEnter will inline un_802FE3F8 otherwise
-static inline void un_802FE3F8_noinline(int a, int b, s16* c, s16* d)
+static inline void setX6(int a)
 {
-    un_802FE3F8_inner(a, b, c, d);
+    un_802FE3F8(a, 2, &un_803F9D48.x6, NULL);
+}
+
+static inline void setX4X6(int a)
+{
+    un_803F9D48.x4 = lookupX4(a);
+    setX6(a);
 }
 
 void fn_802FE470(HSD_GObj* gobj)
@@ -167,7 +179,7 @@ void fn_802FE470(HSD_GObj* gobj)
             gm_801A4B60();
             return;
         }
-        HSD_JObjReqAnimAll(jobj, (f32) (s8) un_803F9D48.x2);
+        HSD_JObjReqAnimAll(jobj, (f32) un_803F9D48.x2);
         HSD_DObjReqAnimAll(un_803F9D48.x10->u.dobj, (f32) un_803F9D48.x4);
         HSD_DObjReqAnimAll(HSD_JObjGetChild(un_803F9D48.x10)->u.dobj,
                            (f32) un_803F9D48.x4);
@@ -259,10 +271,8 @@ static inline void un_802FE918_update_x3(unsigned char* x3_ptr, int* r)
 
 void un_802FE918(int a, int b, int c)
 {
-    struct un_803F9B30* x;
     unsigned char* x3_ptr;
     int r;
-    int i;
     char sp1C[0x104];
     HSD_Text** text;
     datetime sp14;
@@ -273,18 +283,10 @@ void un_802FE918(int a, int b, int c)
     r = HSD_Randi(2);
     un_802FE918_update_x3(x3_ptr, &r);
     gmMainLib_8015D8B0(a);
-    for (x = &un_803F9B30[0]; x->x0 != 66; x++) {
-        if (x->x0 == a) {
-            i = un_803F9A00[x->x4];
-            goto found;
-        }
-    }
-    i = 0;
-found:
-    un_803F9D48.x4 = i;
+    un_803F9D48.x4 = lookupX4(a);
     if (a == 0x3E) {
         u16 v_x6;
-        un_802FE3F8(a, 2, (s16*) &un_803F9D48.x6, (s16*) &un_803F9D48.x8);
+        un_802FE3F8(a, 2, &un_803F9D48.x6, &un_803F9D48.x8);
         v_x6 = un_803F9D48.x6;
         r = un_803F9D48.x8;
         HSD_SisLib_803A6530(2, 0x4A, v_x6);
@@ -292,7 +294,7 @@ found:
         HSD_SisLib_803A660C(2, 0x4A, r);
         HSD_SisLib_803A6368(un_803F9D48.x20, 0x4A);
     } else {
-        un_802FE3F8(a, 2, (s16*) &un_803F9D48.x6, NULL);
+        un_802FE3F8(a, 2, &un_803F9D48.x6, NULL);
         HSD_SisLib_803A6368(un_803F9D48.x20, un_803F9D48.x6);
     }
     gm_801692E8(c, &sp14);
@@ -311,8 +313,6 @@ found:
 void ifPrize_Scene_OnEnter(void* arg0_)
 {
     struct un_802FEBE0_OnEnter_arg0* arg0 = arg0_;
-    struct un_803F9B30* x;
-    int i;
     int arg0x4;
     int arg0x0;
 
@@ -321,19 +321,9 @@ void ifPrize_Scene_OnEnter(void* arg0_)
     un_803F9D48.x2C = arg0->x8;
     un_803F9D48.x3 = HSD_Randi(3);
     arg0x4 = arg0->x4;
-    i = 0;
     arg0x0 = arg0->x0;
     un_803F9D48.x0b = 1;
-    for (x = &un_803F9B30[0]; x->x0 != 66; x++) {
-        if (x->x0 == arg0x0) {
-            i = un_803F9A00[x->x4];
-            goto found;
-        }
-    }
-    i = 0;
-found:
-    un_803F9D48.x4 = i;
-    un_802FE3F8_noinline(arg0x0, 2, (s16*) &un_803F9D48.x6, NULL);
+    setX4X6(arg0x0);
     un_803F9D48.x2 = -1;
     un_803F9D48.x1 = 0;
     un_803F9D48.xC = arg0x4;
