@@ -19,12 +19,16 @@ enum {
     SIS_SAVED_CURSOR_SIZE = sizeof(u8*)
 };
 
-/* The retail compiler uses the original loads for packed SIS operands. */
+/**
+ * SIS strings are big-endian byte streams. A jump operand is an archive
+ * pointer slot, which the archive loader relocates in place like every other
+ * archive pointer.
+ */
 #ifdef MWERKS_GEKKO
 #define SIS_GET_U16(p) (*(u16*) (p))
 #define SIS_GET_S16(p) (*(s16*) (p))
 #define SIS_GET_SAVED_CURSOR(p) (*(u8**) (p))
-#define SIS_GET_JUMP_TARGET(p) ((u8*) (uintptr_t) *(u32*) (p))
+#define SIS_GET_JUMP_TARGET(p) (*(u8**) (p))
 #else
 #define SIS_GET_U16(p) ((u16) (((p)[0] << 8) | (p)[1]))
 #define SIS_GET_S16(p) ((s16) SIS_GET_U16(p))
@@ -43,13 +47,13 @@ static inline u8* sisGetSavedCursor(const u8* p)
     return (u8*) value;
 }
 
-/// Archive relocation writes native-endian addresses into four-byte slots.
+/// Jump operands are unaligned within the stream.
 static inline u8* sisGetJumpTarget(const u8* p)
 {
-    u32 address;
+    u8* target;
 
-    memcpy(&address, p, sizeof(address));
-    return (u8*) (uintptr_t) address;
+    memcpy(&target, p, sizeof(target));
+    return target;
 }
 #endif
 

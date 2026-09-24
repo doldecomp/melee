@@ -87,8 +87,8 @@ struct sislib_UnkAlloc3 {
 };
 
 /**
- * Per-font SIS tables: [0] glyph images, [1] glyph widths, then the
- * encoded strings.
+ * Per-font SIS tables of relocated archive pointers: [0] glyph images,
+ * [1] glyph widths, then the encoded strings.
  */
 extern u8** HSD_SisLib_804D1124[5];
 
