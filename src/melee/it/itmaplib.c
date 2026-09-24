@@ -681,94 +681,78 @@ void it_80276FC4(Item_GObj* item_gobj, s32 arg1)
     }
 }
 
-#ifdef MUST_MATCH
-#pragma push
-#pragma dont_inline on
-#endif
+static inline bool checkNormalAngle(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    Vec3 normal;
+    f32 angle;
+
+    it_80276408(gobj, &ip->x378_itemColl, &normal);
+    angle = lbVector_Angle(&normal, &ip->xAC_unk);
+    if (angle < 0.0f) {
+        angle = -angle;
+    }
+    if (angle >= it_804D6D28->xC4 && ip->xC30 == ip->xC2C) {
+        return true;
+    }
+    return false;
+}
 
 bool it_80277040(Item_GObj* item_gobj)
 {
-    UNUSED u8 frame_pad[8];
-    Vec3 sp5C;
-    Vec3 sp50;
-    Vec3 sp44;
-    Vec3 sp38;
-    UNUSED u8 pad[12];
-    Vec3 sp20;
-    Vec3 sp14;
-    UNUSED u8 low_pad[4];
+    UNUSED u8 _top[4];
+    Vec3 normal;
+    Vec3 down;
+    Vec3 cross;
+    Vec3 slope;
+    UNUSED u8 _mid[12];
+    Vec3 up;
     CollData* coll;
-    Item* item2;
     Item* item1;
     f32 temp_f3;
     f32 temp_f31;
     f32 temp_f30;
     f32 angle1;
-    f32 angle2;
-    bool chk;
     s32 int_dir1;
     s32 int_dir3;
     bool ret_val;
     s32 int_dir2;
     s32 int_dir4;
-    PAD_STACK(4);
 
     ret_val = true;
-    item1 = item_gobj->user_data;
+    item1 = GET_ITEM(item_gobj);
     coll = &item1->x378_itemColl;
     if (ABS(item1->xCC_item_attr->x50) < 0.00001f) {
         item1->x88.y = 0.0f;
         item1->x88.x = 0.0f;
         return false;
     }
-    sp20.z = 0.0f;
-    sp20.x = 0.0f;
-    sp20.y = 1.0f;
-    if (coll->env_flags & Collide_LeftWallMask) {
-        sp5C = coll->left_facing_wall.normal;
-    }
-    if (coll->env_flags & Collide_RightWallMask) {
-        sp5C = coll->right_facing_wall.normal;
-    }
-    if (coll->env_flags & Collide_CeilingMask) {
-        sp5C = coll->ceiling.normal;
-    }
-    if (coll->env_flags & Collide_FloorMask) {
-        sp5C = coll->floor.normal;
-    }
+    up.z = 0.0f;
+    up.x = 0.0f;
+    up.y = 1.0f;
+    it_80276408(item_gobj, coll, &normal);
     item1->x94 = item1->x88;
     // item1->x98 = item1->x8C;
     // item1->x9C = item1->x90;
-    angle1 = lbVector_AngleXY(&sp5C, &sp20);
+    angle1 = lbVector_AngleXY(&normal, &up);
     if (angle1 < 0.0f) {
         angle1 = -angle1;
     }
     if (angle1 >= it_804D6D28->xC0) {
-        sp50.z = 0.0f;
-        sp50.x = 0.0f;
-        sp50.y = -1.0f;
-        lbVector_CrossprodNormalized(&sp5C, &sp50, &sp44);
-        lbVector_CrossprodNormalized(&sp44, &sp5C, &sp38);
+        down.z = 0.0f;
+        down.x = 0.0f;
+        down.y = -1.0f;
+        lbVector_CrossprodNormalized(&normal, &down, &cross);
+        lbVector_CrossprodNormalized(&cross, &normal, &slope);
         temp_f3 = item1->xCC_item_attr->x50;
         temp_f31 = item1->x94.x / temp_f3;
         temp_f30 = item1->x94.y / temp_f3;
-        item1->x88.x = sp38.x * temp_f3;
-        item1->x88.y = sp38.y * item1->xCC_item_attr->x50;
-        item2 = item_gobj->user_data;
-        it_80276408(item_gobj, &item2->x378_itemColl, &sp14);
-        angle2 = lbVector_Angle(&sp14, &item2->xAC_unk);
-        if (angle2 < 0.0f) {
-            angle2 = -angle2;
-        }
-        if ((angle2 >= it_804D6D28->xC4) && (item2->xC30 == item2->xC2C)) {
-            chk = true;
-        } else {
-            chk = false;
-        }
-        if (!chk) {
+        item1->x88.x = slope.x * temp_f3;
+        item1->x88.y = slope.y * item1->xCC_item_attr->x50;
+        if (!checkNormalAngle(item_gobj)) {
             temp_f3 = 0.0f;
             if (item1->x94.x != temp_f3 || item1->x94.y != temp_f3) {
-                if (sp38.x < 0.0f) {
+                if (slope.x < 0.0f) {
                     int_dir1 = -1;
                 } else {
                     int_dir1 = 1;
@@ -779,7 +763,7 @@ bool it_80277040(Item_GObj* item_gobj)
                     int_dir2 = 1;
                 }
                 if (int_dir2 == int_dir1) {
-                    if (sp38.y < 0.0f) {
+                    if (slope.y < 0.0f) {
                         int_dir3 = -1;
                     } else {
                         int_dir3 = 1;
@@ -813,10 +797,6 @@ bool it_80277040(Item_GObj* item_gobj)
     }
     return ret_val;
 }
-
-#ifdef MUST_MATCH
-#pragma pop
-#endif
 
 static inline float sqrtf_accurate_store(float x, volatile float* y)
 {
