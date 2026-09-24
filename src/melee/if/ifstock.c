@@ -3,8 +3,6 @@
 #include <melee/gm/forward.h>
 #include <melee/sc/forward.h>
 
-#include <placeholder.h>
-
 #include "ifall.h"
 #include "ifstatus.h"
 #include "types.h"
@@ -307,19 +305,24 @@ static inline int ifStock_802F89F8_digit(int coins, int position)
     return (coins / divisor) % 10;
 }
 
+static inline HSD_JObj* getFirstIconJObj(int player)
+{
+    HSD_JObj* jobj = ifStock_804A1378.player[player].x4[1];
+    return jobj;
+}
+
 void ifStock_802F89F8(HSD_GObj* gobj)
 {
     struct IfStockUserData* user_data = ifStock_802F89F8_get_data(gobj);
     int i;
     int player = user_data->player;
-    HSD_JObj* jobj2 = ifStock_804A1378.player[player].x4[1];
+    HSD_JObj* jobj2 = getFirstIconJObj(player);
     HSD_JObj* jobj = gobj->hsd_obj;
     int coins;
     int count;
     int digit;
     int divisor;
     Player_GetCoins(player);
-    PAD_STACK(16);
     coins = ifStock_804A1378.player[user_data->player].coins =
         Player_GetCoins(user_data->player);
     if ((u32) coins > 99999U) {
@@ -367,6 +370,13 @@ void fn_802F8DB0(HSD_GObj* gobj)
     ifStock_804A1774.x108 = x;
 }
 
+static inline void placeEntry(HSD_JObj* jobj, float x, float y)
+{
+    HSD_JObjSetTranslateZ(jobj, 0.0f);
+    HSD_JObjSetTranslateX(jobj, x);
+    HSD_JObjSetTranslateY(jobj, y);
+}
+
 void fn_802F8E08(HSD_GObj* _gobj)
 {
     struct ifStock_804A1774* stock = &ifStock_804A1774;
@@ -397,9 +407,7 @@ void fn_802F8E08(HSD_GObj* _gobj)
             }
             return;
         } else {
-            HSD_JObjSetTranslateZ(jobj, 0.0f);
-            HSD_JObjSetTranslateX(jobj, x);
-            HSD_JObjSetTranslateY(jobj, y);
+            placeEntry(jobj, x, y);
             counter++;
             x += 2.45f;
             if (counter % 5 == 0) {
@@ -410,35 +418,35 @@ void fn_802F8E08(HSD_GObj* _gobj)
     }
 }
 
+static inline HSD_JObj* getEntryJObj(int i)
+{
+    HSD_GObj* gobj = ifStock_804A1A8C[i];
+    return gobj->hsd_obj;
+}
+
 void fn_802F916C(HSD_GObj* _gobj)
 {
-    HSD_GObj* gobj;
     HSD_JObj* jobj;
     s32 b, a;
     int i;
     int counter = 0;
     float x = -21.0f;
     float y = 11.0f;
-    PAD_STACK(8);
     Ground_801C1DE4(&a, &b);
     for (i = 0; i < 16; i++) {
         if (i >= b) {
             break;
+        }
+        jobj = getEntryJObj(i);
+        if (i >= a) {
+            HSD_JObjSetTranslateZ(jobj, 10000.0f);
         } else {
-            gobj = ifStock_804A1A8C[i];
-            jobj = gobj->hsd_obj;
-            if (i >= a) {
-                HSD_JObjSetTranslateZ(jobj, 10000.0f);
-            } else {
-                HSD_JObjSetTranslateZ(jobj, 0.0f);
-                HSD_JObjSetTranslateX(jobj, x);
-                HSD_JObjSetTranslateY(jobj, y);
-                counter++;
-                x += 2.45f;
-                if (counter % 5 == 0) {
-                    x = -21.0f;
-                    y -= 2.45f;
-                }
+            placeEntry(jobj, x, y);
+            counter++;
+            x += 2.45f;
+            if (counter % 5 == 0) {
+                x = -21.0f;
+                y -= 2.45f;
             }
         }
     }
@@ -559,7 +567,6 @@ void ifStock_802F98E8(u8 player, u8 b)
     HSD_JObj* icon_jobj;
     GXColor c2;
     GXColor c1;
-    PAD_STACK(4);
 
     if (stock->x0 != NULL) {
         ifStock_804A157C[player].player = player;
@@ -686,20 +693,20 @@ void ifStock_802F98E8(u8 player, u8 b)
                 }
                 HSD_JObjAnimAll(jobj);
                 scene_state = gmVs_GetSceneState();
+                if (ifStock_802F98E8_get_match_info(scene_state, player)
+                        ->x4_b1)
                 {
-                    struct lbl_8046B6A0_FighterMatchInfoFlags* match_info =
-                        ifStock_802F98E8_get_match_info(scene_state, player);
-                    if (match_info->x4_b1) {
-                        GXColor* color;
-                        c1 = ifStock_802F98E8_color1;
-                        color = &c1;
-                        ifStock_802FB4EC(player, color);
-                    } else if (match_info->x4_b0) {
-                        GXColor* color;
-                        c2 = ifStock_802F98E8_color2;
-                        color = &c2;
-                        ifStock_802FB4EC(player, color);
-                    }
+                    GXColor* color;
+                    c1 = ifStock_802F98E8_color1;
+                    color = &c1;
+                    ifStock_802FB4EC(player, color);
+                } else if (ifStock_802F98E8_get_match_info(scene_state, player)
+                               ->x4_b0)
+                {
+                    GXColor* color;
+                    c2 = ifStock_802F98E8_color2;
+                    color = &c2;
+                    ifStock_802FB4EC(player, color);
                 }
                 fn_802F9410(gobj); // inlined
             } else {
@@ -876,9 +883,7 @@ void fn_802FA8C0(HSD_GObj* arg)
             }
             return;
         } else {
-            HSD_JObjSetTranslateZ(jobj, 0.0f);
-            HSD_JObjSetTranslateX(jobj, x);
-            HSD_JObjSetTranslateY(jobj, y);
+            placeEntry(jobj, x, y);
             k++;
             x += 2.45f;
             if (k % 5 == 0) {
