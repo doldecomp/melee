@@ -1057,9 +1057,14 @@ struct Fighter_DemoStrings {
 
 /// @todo See if this should likewise be instituted for item->xD94 thru
 /// xDA4_word/xDA8_short
+struct Struct207C {
+    f32 x;
+    s32 y;
+};
+
 /* fp+2074 */ struct Struct2074 {
-    /* fp+2074 */ Vec2 x2074_vec;
-    /* fp+207C */ S32Vec2 x207C;
+    /* fp+2074 */ S32Vec2 x2074_vec;
+    /* fp+207C */ struct Struct207C x207C;
     /* fp+2084 */ union {
         u32 x2084;
         struct {

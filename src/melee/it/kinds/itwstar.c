@@ -177,8 +177,8 @@ void it_802947CC(Item_GObj* gobj, Vec3* pos)
     Vec3 item_pos;
     union Struct2070 saved_xD90;
     volatile u32 saved_xDA4;
-    S32Vec2 saved_xD9C;
-    Vec2 saved_xD94;
+    struct Struct207C saved_xD9C;
+    S32Vec2 saved_xD94;
     u8 _pad2[4];
     u16 saved_xDA8;
 

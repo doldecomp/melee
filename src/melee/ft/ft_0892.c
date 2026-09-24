@@ -43,9 +43,9 @@ void ft_800892D4(Fighter* arg0)
     spC.x2070_int = 0;
     arg0->dmg.x18d4 = spC;
     arg0->x2070.x2070_int = arg0->dmg.x18d4.x2070_int;
-    *(s32*) &arg0->x2074.x2074_vec.x = 0;
-    *(s32*) &arg0->x2074.x2074_vec.y = 0;
-    *(f32*) &arg0->x2074.x207C.x = 0.0f;
+    arg0->x2074.x2074_vec.x = 0;
+    arg0->x2074.x2074_vec.y = 0;
+    arg0->x2074.x207C.x = 0.0f;
     arg0->x2074.x207C.y = 6;
     arg0->x2074.x2084_b0 = 0;
     arg0->x2074.x2085_b3 = 0;
@@ -83,9 +83,9 @@ void ft_800892D4(Fighter* arg0)
 
 void ft_80089460(Fighter* fp)
 {
-    *(s32*) &fp->x2074.x2074_vec.x = 0;
-    *(s32*) &fp->x2074.x2074_vec.y = 0;
-    *(f32*) &fp->x2074.x207C.x = 0.0f;
+    fp->x2074.x2074_vec.x = 0;
+    fp->x2074.x2074_vec.y = 0;
+    fp->x2074.x207C.x = 0.0f;
     fp->x2074.x207C.y = 6;
     fp->x2074.x2084_b0 = 0;
     fp->x2074.x2085_b3 = 0;
@@ -100,7 +100,7 @@ void ft_80089460(Fighter* fp)
     fp->x2074.x2085_b1 = 0;
     fp->x2074.x2085_b2 = 0;
     fp->x2074.x2085_b4 = 0;
-    *(s32*) &fp->x2074.x2074_vec.x = (s32) fp->dmg.x1830_percent;
+    fp->x2074.x2074_vec.x = (s32) fp->dmg.x1830_percent;
     if (fp->is_metal) {
         fp->x2074.x2084_b1 = 1;
     }
@@ -145,7 +145,7 @@ void ft_800895E0(Fighter* fp, int arg1)
     }
     fp->x2070.x2070_int = val.x2070_int;
     ft_80089768(&fp->x2074.x2074_vec);
-    *(s32*) &fp->x2074.x2074_vec.x = (s32) fp->dmg.x1830_percent;
+    fp->x2074.x2074_vec.x = (s32) fp->dmg.x1830_percent;
     if (fp->is_metal) {
         fp->x2074.x2084_b1 = 1;
     }
@@ -166,7 +166,7 @@ void ft_800895E0(Fighter* fp, int arg1)
     }
 }
 
-void ft_80089768(Vec2* ptr)
+void ft_80089768(S32Vec2* ptr)
 {
     UnkStruct89768* s = (UnkStruct89768*) ptr;
     s->x0 = 0;

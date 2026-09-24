@@ -6,7 +6,7 @@
 /* 0892D4 */ void ft_800892D4(Fighter*);
 /* 089460 */ void ft_80089460(Fighter*);
 /* 0895E0 */ void ft_800895E0(Fighter*, int);
-/* 089768 */ void ft_80089768(Vec2*);
+/* 089768 */ void ft_80089768(S32Vec2*);
 /* 089824 */ void ft_80089824(Fighter_GObj* gobj);
 /* 089884 */ union Struct2070* ft_80089884(Fighter_GObj* gobj);
 /* 089890 */ union Struct2070* ft_80089890(Fighter_GObj* gobj);
