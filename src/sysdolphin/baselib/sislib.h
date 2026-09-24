@@ -11,11 +11,6 @@
 #include <dolphin/mtx.h>
 #include <sysdolphin/baselib/archive.h>
 #include <sysdolphin/baselib/cobj.h>
-#include <sysdolphin/baselib/sislib_font.h>
-
-/// How many glyphs the font atlas holds.
-#define HSD_SISLIB_FONT_GLYPHS                                                \
-    (sizeof(HSD_SisLib_FontAtlas) / sizeof(TextGlyphTexture))
 
 struct SisBlock {
     SisBlock* next;

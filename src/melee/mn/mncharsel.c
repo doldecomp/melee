@@ -393,8 +393,7 @@ void mnCharSel_8025BD30(void)
         switch (gmMainLib_GetGameRules()->mode) {
         case Mode_Time:
             if (gmMainLib_GetGameRules()->time_limit != 0) {
-                mnCharSel_8025BC20(dst,
-                                   gmMainLib_GetGameRules()->time_limit);
+                mnCharSel_8025BC20(dst, gmMainLib_GetGameRules()->time_limit);
                 HSD_SisLib_803A660C(0, 0x4A, 0x53);
             } else {
                 HSD_SisLib_803A6530(0, 0x4A, 0x51);
@@ -412,8 +411,7 @@ void mnCharSel_8025BD30(void)
             return;
         case Mode_Coin:
             if (gmMainLib_GetGameRules()->time_limit != 0) {
-                mnCharSel_8025BC20(dst,
-                                   gmMainLib_GetGameRules()->time_limit);
+                mnCharSel_8025BC20(dst, gmMainLib_GetGameRules()->time_limit);
                 HSD_SisLib_803A660C(0, 0x4A, 0x53);
             } else {
                 HSD_SisLib_803A6530(0, 0x4A, 0x51);
@@ -422,8 +420,7 @@ void mnCharSel_8025BD30(void)
             return;
         case Mode_Bonus:
             if (gmMainLib_GetGameRules()->time_limit != 0) {
-                mnCharSel_8025BC20(dst,
-                                   gmMainLib_GetGameRules()->time_limit);
+                mnCharSel_8025BC20(dst, gmMainLib_GetGameRules()->time_limit);
                 HSD_SisLib_803A660C(0, 0x4A, 0x53);
             } else {
                 HSD_SisLib_803A6530(0, 0x4A, 0x51);
