@@ -31,7 +31,7 @@
 #include <sysdolphin/baselib/tobj.h>
 
 static struct ifStock_804A1378 ifStock_804A1378;
-static struct ifStock_804A1378_x204 ifStock_804A157C[6];
+static struct IfStockUserData ifStock_804A157C[6];
 static struct ifStock_804A1774 ifStock_804A1774;
 static HSD_GObj* ifStock_804A1A8C[16];
 static struct ifStock_804A1ACC ifStock_804A1ACC;
@@ -47,8 +47,8 @@ int ifStock_802F7EFC(int arg0, int arg1)
 {
     Vec3 pos;
     struct ifStock_804A1378* stock;
-    struct ifStock_804A1378_x204* arg1_data;
-    struct ifStock_804A1378_x204* arg0_data;
+    struct IfStockUserData* arg1_data;
+    struct IfStockUserData* arg0_data;
     int slot;
     int i, j;
     stock = &ifStock_804A1378;
@@ -850,7 +850,6 @@ void fn_802FA6C4(HSD_GObj* arg)
 void fn_802FA8C0(HSD_GObj* arg)
 {
     struct ifStock_804A1ACC* stock = &ifStock_804A1ACC;
-    HSD_GObj** cur;
     HSD_JObj* jobj;
     int i;
     int k = 0;
@@ -858,9 +857,8 @@ void fn_802FA8C0(HSD_GObj* arg)
     float y = 11.0f;
     signed char* a97c = gm_8016A97C();
     signed char* a98c = gm_8016A98C()->arr1;
-    cur = stock->x10C - (0x10C / sizeof(*cur));
-    for (i = 0; i < 0x82; i++, cur++, a97c++, a98c++) {
-        HSD_GObj* gobj = cur[0x10C / sizeof(*cur)];
+    for (i = 0; i < 0x82; i++, a97c++, a98c++) {
+        HSD_GObj* gobj = stock->x10C[i];
         if (gobj == NULL) {
             return;
         }

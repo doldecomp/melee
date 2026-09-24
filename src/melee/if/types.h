@@ -212,11 +212,6 @@ struct un_80304138_objalloc_t {
 };
 ASSERT_SIZE(struct un_80304138_objalloc_t, 0x20);
 
-struct IfStockUserData {
-    u8 player;
-    u8 mode;
-};
-
 struct ifStock_804A1378_per_player {
     HSD_GObj* x0;
     HSD_JObj* x4[8];
@@ -239,8 +234,7 @@ struct IfStockStealAnim {
     Vec3 end;
 };
 
-/// @todo merge with IfStockUserData
-struct ifStock_804A1378_x204 {
+struct IfStockUserData {
     u8 player;
     u8 mode;
     u8 flag;
