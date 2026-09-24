@@ -1375,28 +1375,28 @@ void efAsync_QueueProcessDeferred(HSD_GObj* gobj,
 
 void efAsync_QueueFlush(HSD_GObj* gobj, EF_QueuedEffect** head)
 {
-    EF_QueuedEffect* temp_r31;
-    EF_QueuedEffect* var_r4;
+    EF_QueuedEffect* next;
+    EF_QueuedEffect* cur;
 
-    var_r4 = *head;
-    while (var_r4 != NULL) {
-        temp_r31 = var_r4->next;
-        efAsync_QueueProcessDeferred(gobj, var_r4);
-        var_r4 = temp_r31;
+    cur = *head;
+    while (cur != NULL) {
+        next = cur->next;
+        efAsync_QueueProcessDeferred(gobj, cur);
+        cur = next;
     }
     *head = NULL;
 }
 
 void efAsync_QueueClear(EF_QueuedEffect** head)
 {
-    EF_QueuedEffect* temp_r30;
-    EF_QueuedEffect* var_r4;
+    EF_QueuedEffect* next;
+    EF_QueuedEffect* cur;
 
-    var_r4 = *head;
-    while (var_r4 != NULL) {
-        temp_r30 = var_r4->next;
-        HSD_ObjFree(&efAsync_AllocData, var_r4);
-        var_r4 = temp_r30;
+    cur = *head;
+    while (cur != NULL) {
+        next = cur->next;
+        HSD_ObjFree(&efAsync_AllocData, cur);
+        cur = next;
     }
     *head = NULL;
 }

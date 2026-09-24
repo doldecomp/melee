@@ -1055,13 +1055,13 @@ struct Fighter_DemoStrings {
     /* fp+2070 */ int x2070_int;
 };
 
-/// @todo See if this should likewise be instituted for item->xD94 thru
-/// xDA4_word/xDA8_short
 struct Struct207C {
     f32 x;
     s32 y;
 };
 
+/// @todo See if this should likewise be instituted for item->xD94 thru
+/// xDA4_word/xDA8_short
 /* fp+2074 */ struct Struct2074 {
     /* fp+2074 */ S32Vec2 x2074_vec;
     /* fp+207C */ struct Struct207C x207C;
