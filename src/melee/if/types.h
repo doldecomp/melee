@@ -135,6 +135,12 @@ struct ifMagnify {
 #define DEVTEXT_FLAG_NOWRAP (0x20)
 #define DEVTEXT_FLAG_SHOWCURSOR (0x10)
 
+struct DevTextGlyph {
+    u8 chr;
+    u8 color : 2;
+    u8 unk : 6;
+};
+
 struct DevText {
     /*  +0 */ s16 x;
     /*  +2 */ s16 y;
@@ -151,7 +157,7 @@ struct DevText {
     /* +26 */ u8 flags;
     /* +27 */ u8 unk : 6;
     /* +27 */ u8 current_color : 2;
-    /* +28 */ char* buf;
+    /* +28 */ DevTextGlyph* buf;
     /* +2C */ struct DevText* prev;
     /* +30 */ struct DevText* next;
 };

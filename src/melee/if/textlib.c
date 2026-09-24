@@ -33,7 +33,17 @@ static inline DevText* find_by_id(char id)
     return NULL;
 }
 
-DevText* DevText_Create(char id, int x, int y, int w, int h, char* buf)
+static inline DevText* alloc_text(void)
+{
+    DevText* text = devtext_poolhead;
+    if (text != NULL) {
+        devtext_poolhead = text->next;
+        return text;
+    }
+    return NULL;
+}
+
+DevText* DevText_Create(char id, int x, int y, int w, int h, void* buf)
 {
     static GXColor const cyan = { 0x60, 0xD0, 0xB0, 0x70 };
     DevText* text;
@@ -41,15 +51,10 @@ DevText* DevText_Create(char id, int x, int y, int w, int h, char* buf)
     GXColor bg = cyan;
     PAD_STACK(0x14);
 
-    if ((text = find_by_id(id))) {
+    if (find_by_id(id) != NULL) {
         return NULL;
     }
-    text = devtext_poolhead;
-    if (text != NULL) {
-        devtext_poolhead = text->next;
-    } else {
-        text = NULL;
-    }
+    text = alloc_text();
     if (text == NULL) {
         HSD_ASSERTREPORT(309, 0, "TW : Screen alloc Fail\n");
     }
@@ -86,15 +91,16 @@ DevText* DevText_Create(char id, int x, int y, int w, int h, char* buf)
 
 void DevText_EraseFirstLine(DevText* text)
 {
-    char* start_of_line = text->buf;
-    int line_length = text->w * 2;
+    DevTextGlyph* start_of_line = text->buf;
+    int line_length = text->w;
+    size_t line_size = line_length * sizeof(DevTextGlyph);
     int line_number;
 
     for (line_number = 0; line_number < text->h - 1; line_number++) {
-        memcpy(start_of_line, start_of_line + line_length, line_length);
+        memcpy(start_of_line, start_of_line + line_length, line_size);
         start_of_line += line_length;
     }
-    memzero(start_of_line, line_length);
+    memzero(start_of_line, line_size);
 }
 
 static inline int DevText_Clamp(int val, int max)
@@ -201,7 +207,7 @@ GXColor DevText_SetBGColor(DevText* text, GXColor color)
 
 void DevText_Erase(DevText* text)
 {
-    memzero(text->buf, 2 * text->w * text->h);
+    memzero(text->buf, sizeof(DevTextGlyph) * text->w * text->h);
 }
 
 static inline void DevText_AdvanceLine(DevText* text)
@@ -214,12 +220,6 @@ static inline void DevText_AdvanceLine(DevText* text)
     }
 }
 
-typedef struct DevTextGlyph {
-    u8 chr;
-    u8 color : 2;
-    u8 unk : 6;
-} DevTextGlyph;
-
 void DevText_Print(DevText* text, char* str)
 {
     char* cur;
@@ -228,8 +228,8 @@ void DevText_Print(DevText* text, char* str)
         while (*cur) {
             if (*cur != '\n') {
                 int index = text->cursor_x + text->cursor_y * text->w;
-                ((DevTextGlyph*) text->buf)[index].chr = *cur;
-                ((DevTextGlyph*) text->buf)[index].color = text->current_color;
+                text->buf[index].chr = *cur;
+                text->buf[index].color = text->current_color;
                 if (text->cursor_x < text->w - 1) {
                     text->cursor_x++;
                 } else if ((text->flags & DEVTEXT_FLAG_NOWRAP) == 0) {

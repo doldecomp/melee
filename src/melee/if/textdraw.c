@@ -228,9 +228,9 @@ void DevText_Draw(DevText* text)
                 s8 chr;
                 u8 color_idx;
                 color_ptr = &color;
-                index = (col + text->w * row) * 2;
-                chr = text->buf[index];
-                color_idx = ((u8) text->buf[index + 1] & 0xC0) >> 6;
+                index = col + text->w * row;
+                chr = text->buf[index].chr;
+                color_idx = text->buf[index].color;
                 if (chr) {
                     color = text->text_colors[color_idx];
                     DrawASCII(chr, x, y, color_ptr);
