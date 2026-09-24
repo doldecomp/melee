@@ -1,4 +1,3 @@
-#include <m2c_macros.h>
 #include <printf.h> // IWYU pragma: keep
 
 #include "cobj.h"
@@ -365,13 +364,12 @@ loop_3:
                 glyph_code = *(u16*) cursor;
                 if (glyph_code < 0x4000U) {
                     u8* pair =
-                        &default_widths[((glyph_code - 0x2000) * 2) & 0x1FFFE];
+                        &default_widths[(u16) (glyph_code - 0x2000) * 2];
                     kern_width = pair[0] + pair[1] - 2;
                     *out_width =
                         -((text->x80.x * (f32) kern_width) - *out_width);
                 } else {
-                    u8* pair =
-                        &glyph_widths[((glyph_code - 0x4000) * 2) & 0x1FFFE];
+                    u8* pair = &glyph_widths[(u16) (glyph_code - 0x4000) * 2];
                     kern_width = pair[0] + pair[1] - 2;
                     *out_width =
                         -((text->x80.x * (f32) kern_width) - *out_width);
@@ -455,7 +453,7 @@ void HSD_SisLib_803A84BC(HSD_GObj* gobj, int pass)
     u16 saved_x6C;
     u8 saved_kerning;
 
-    u8 *data = M2C_BITWISE(u8*, HSD_SisLib_FontAtlas);
+    u8 *default_images = HSD_SisLib_FontAtlas[0].data;
     u8 *default_widths = HSD_SisLib_8040CB00;
 
     if (gobj != NULL) {
@@ -793,7 +791,7 @@ void HSD_SisLib_803A84BC(HSD_GObj* gobj, int pass)
                         default:
                             if (opcode >= 0x20U) {
                                 u16 glyph_idx;
-                                s32 tex_offset;
+                                u16 tex_offset;
                                 f32 glyph_x;
                                 if (line_started == 0U) {
                                     f32 measured_width;
@@ -813,9 +811,9 @@ void HSD_SisLib_803A84BC(HSD_GObj* gobj, int pass)
                                 scale_x = text->font_size.x;
                                 if ( text->kerning != 0) {
                                     if (glyph_idx < 0x4000U) {
-                                        glyph_x = -((scale_x * (text->x80.x * (f32) (default_widths[(tex_offset * 2) & 0x1FFFE] - 1))) - glyph_x);
+                                        glyph_x = -((scale_x * (text->x80.x * (f32) (default_widths[tex_offset * 2] - 1))) - glyph_x);
                                     } else {
-                                        glyph_x = -((scale_x * (text->x80.x * (f32) (glyph_widths[(tex_offset * 2) & 0x1FFFE] - 1))) - glyph_x);
+                                        glyph_x = -((scale_x * (text->x80.x * (f32) (glyph_widths[tex_offset * 2] - 1))) - glyph_x);
                                     }
                                 }
                                 {
@@ -864,9 +862,9 @@ void HSD_SisLib_803A84BC(HSD_GObj* gobj, int pass)
                                     }
                                     {
                                         if (glyph_idx < 0x4000U) {
-                                            GXInitTexObj(&tex_obj, data + ((tex_offset << 9) & 0x01FFFE00), 0x20U, 0x20U, GX_TF_I4, GX_CLAMP, GX_CLAMP, 0U);
+                                            GXInitTexObj(&tex_obj, default_images + tex_offset * sizeof(TextGlyphTexture), 0x20U, 0x20U, GX_TF_I4, GX_CLAMP, GX_CLAMP, 0U);
                                         } else {
-                                            GXInitTexObj(&tex_obj, glyph_images + ((tex_offset << 9) & 0x01FFFE00), 0x20U, 0x20U, GX_TF_I4, GX_CLAMP, GX_CLAMP, 0U);
+                                            GXInitTexObj(&tex_obj, glyph_images + tex_offset * sizeof(TextGlyphTexture), 0x20U, 0x20U, GX_TF_I4, GX_CLAMP, GX_CLAMP, 0U);
                                         }
                                         GXLoadTexObj(&tex_obj, GX_TEXMAP0);
                                         GXSetTevColor(GX_TEVREG0, text->active_color);
@@ -890,10 +888,10 @@ void HSD_SisLib_803A84BC(HSD_GObj* gobj, int pass)
                                     text->current_width = (f32) ((text->x88 * (text->x80.x * (32.0F + text->x78.x))) + text->current_width);
                                     if ( text->kerning != 0) {
                                         if (glyph_idx < 0x4000U) {
-                                            u8 *kern_pair = &default_widths[(tex_offset * 2) & 0x1FFFE];
+                                            u8 *kern_pair = &default_widths[tex_offset * 2];
                                             text->current_width = (-((text->x88 * (text->x80.x * (f32) (kern_pair[0] + kern_pair[1] - 2))) - text->current_width));
                                         } else {
-                                            u8 *kern_pair = &glyph_widths[(tex_offset * 2) & 0x1FFFE];
+                                            u8 *kern_pair = &glyph_widths[tex_offset * 2];
                                             text->current_width = (-((text->x88 * (text->x80.x * (f32) (kern_pair[0] + kern_pair[1] - 2))) - text->current_width));
                                         }
                                     }
