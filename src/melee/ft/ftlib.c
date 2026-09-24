@@ -157,7 +157,7 @@ HSD_GObj* ftLib_FindNearestOpponent(Vec3* pos, HSD_GObj* gobj)
             continue;
         }
 
-        ftLib_GetCameraBonePos(cur, &cur_v);
+        ftLib_GetFighterCameraBonePos(cur, &cur_v);
         dx = pos->x - cur_v.x;
         dy = pos->y - cur_v.y;
         dist = (dx * dx) + (dy * dy);
@@ -206,7 +206,7 @@ Fighter_GObj* ftLib_FindNearestOpponentInDir(Vec3* v, Fighter_GObj* gobj,
         {
             continue;
         }
-        ftLib_GetCameraBonePos(cur, &sp24);
+        ftLib_GetFighterCameraBonePos(cur, &sp24);
 
         if ((facing_dir == -1 && sp24.x > v->x) ||
             (facing_dir == +1 && sp24.x < v->x))
@@ -266,7 +266,7 @@ float ftLib_GetCollectiveFacingDir(Vec3* v, HSD_GObj* gobj)
                 continue;
             }
 
-            ftLib_GetCameraBonePos(cur, &vec);
+            ftLib_GetFighterCameraBonePos(cur, &vec);
             result += sgn(vec.x - v->x);
         }
     }
@@ -313,19 +313,19 @@ HSD_JObj* ftLib_GetPartJObj(HSD_GObj* gobj, Fighter_Part part)
     return fp->parts[part].joint;
 }
 
-void ftLib_GetPos(Fighter_GObj* gobj, Vec3* pos)
+void ftLib_GetFighterCurPos(Fighter_GObj* gobj, Vec3* pos)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     *pos = fp->cur_pos;
 }
 
-void ftLib_SetPos(HSD_GObj* gobj, Vec3* pos)
+void ftLib_SetFighterCurPos(HSD_GObj* gobj, Vec3* pos)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     fp->cur_pos = *pos;
 }
 
-void ftLib_GetPrevPos(HSD_GObj* gobj, Vec3* pos)
+void ftLib_GetFighterPrevPos(HSD_GObj* gobj, Vec3* pos)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     *pos = fp->prev_pos;
@@ -339,7 +339,7 @@ void ftLib_SetScale(HSD_GObj* gobj, float val)
     ftCommon_80080174(fp);
 }
 
-void ftLib_GetCameraBonePos(HSD_GObj* gobj, Vec3* v)
+void ftLib_GetFighterCameraBonePos(HSD_GObj* gobj, Vec3* v)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     struct ftCo_DatAttrs* r4 = &fp->co_attrs;
@@ -347,7 +347,7 @@ void ftLib_GetCameraBonePos(HSD_GObj* gobj, Vec3* v)
     lb_8000B1CC(ftLib_GetPartJObj(gobj, i), &r4->x170, v);
 }
 
-void ftLib_ReleaseItem(HSD_GObj* gobj, HSD_GObj* other)
+void ftLib_HandleFighterItemCollision(HSD_GObj* gobj, HSD_GObj* other)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (fp->item_gobj != NULL || fp->x1978 != NULL) {
