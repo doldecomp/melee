@@ -137,13 +137,13 @@ void hsd_8039D4DC(HSD_Generator* gen)
         if (cur == gen) {
             hsd_804D78F8 = hsd_8039D3AC(gen, hsd_804D78F8);
             if (hsd_804D78F8 != NULL) {
-                while ((hsd_804D78F8)->next != NULL) {
-                    hsd_804D78F8 = (hsd_804D78F8)->next;
+                while (hsd_804D78F8->next != NULL) {
+                    hsd_804D78F8 = hsd_804D78F8->next;
                 }
             } else if (hsd_804D78FC != NULL) {
                 hsd_804D78F8 = hsd_804D78FC;
-                while ((hsd_804D78F8)->next != NULL) {
-                    hsd_804D78F8 = (hsd_804D78F8)->next;
+                while (hsd_804D78F8->next != NULL) {
+                    hsd_804D78F8 = hsd_804D78F8->next;
                 }
             }
             return;
@@ -323,7 +323,7 @@ HSD_Generator* hsd_8039D9C8(void)
         hsd_804D78DA = hsd_804D78E0;
     }
 
-    if (hsd_804D78F8 == NULL || (hsd_804D78F8)->next == NULL) {
+    if (hsd_804D78F8 == NULL || hsd_804D78F8->next == NULL) {
         if (hsd_804D78FC == NULL) {
             gen->next = NULL;
             hsd_804D78FC = gen;
@@ -332,8 +332,8 @@ HSD_Generator* hsd_8039D9C8(void)
             hsd_804D78FC->next = gen;
         }
     } else {
-        gen->next = (hsd_804D78F8)->next->next;
-        (hsd_804D78F8)->next->next = gen;
+        gen->next = hsd_804D78F8->next->next;
+        hsd_804D78F8->next->next = gen;
     }
 
     lbl_804D6368++;
@@ -1001,7 +1001,7 @@ void hsd_8039EE24(u32 mask)
             if (life == 0) {
                 hsd_804D78F8 = hsd_8039D3AC(gen, hsd_804D78F8);
                 if (hsd_804D78F8 != NULL) {
-                    gen = (hsd_804D78F8)->next;
+                    gen = hsd_804D78F8->next;
                 } else {
                     gen = hsd_804D78FC;
                 }
