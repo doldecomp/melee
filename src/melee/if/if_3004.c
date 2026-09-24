@@ -657,14 +657,14 @@ bool un_80300724(enum soundtest_callback_arg0 arg0)
 bool un_80300758(enum soundtest_callback_arg0 arg0)
 {
     if (arg0 == 1) {
-        un_802FFCD0(4, (u8*) &un_803FA258 + 0x10);
+        un_802FFCD0(4, un_803FA258.x10);
     }
 }
 
 bool un_80300790(enum soundtest_callback_arg0 arg0)
 {
     if (arg0 == 1) {
-        un_802FFCD0(4, (u8*) &un_803FA258 + 0x24);
+        un_802FFCD0(4, un_803FA258.x24);
     }
 }
 
@@ -791,8 +791,8 @@ bool un_80300AF4(enum soundtest_callback_arg0 arg0)
         struct un_803FA258_t* data;
         sfxForward();
         data = &un_803FA258;
-        data->x4[1] = 0x3F;
-        data->x4[3] = 0xE;
+        data->x8 = 0x3F;
+        data->x10[0] = 0xE;
         data->x24[1] = 3;
         data->x24[2] = 3;
         data->x24[3] = 3;
@@ -809,8 +809,8 @@ bool un_80300B58(enum soundtest_callback_arg0 arg0)
         sfxForward();
         {
             struct un_803FA258_t* data = &un_803FA258;
-            data->x4[1] = 0x3B;
-            data->x4[3] = 0x2;
+            data->x8 = 0x3B;
+            data->x10[0] = 0x2;
             data->x24[1] = 3;
             data->x24[2] = 3;
             data->x24[3] = 3;
@@ -1768,9 +1768,9 @@ bool un_80301E08(enum soundtest_callback_arg0 update_scene)
     { 1, un_803006BC, un_803FB110, NULL, NULL, 0.0f, 0.0f, 0.0f },
     { 1, un_803006F0, un_803FB120, NULL, NULL, 0.0f, 0.0f, 0.0f },
     { 1, un_80300724, un_803FB130, NULL, NULL, 0.0f, 0.0f, 0.0f },
-    { 2, NULL, un_803FB140, un_803FAF0C, &un_803FA258.x4[1], 0.0f, 86.0f,
+    { 2, NULL, un_803FB140, un_803FAF0C, &un_803FA258.x8, 0.0f, 86.0f,
       0.0f },
-    { 2, NULL, un_803FB14C, un_804D58FC, &un_803FA258.x4[2], 0.0f, 2.0f,
+    { 2, NULL, un_803FB14C, un_804D58FC, &un_803FA258.xC, 0.0f, 2.0f,
       0.0f },
     { 1, un_802FFEA4, un_803FB158, NULL, NULL, 0.0f, 0.0f, 0.0f },
     { 9, NULL, NULL, NULL, NULL, 0.0f, 0.0f, 0.0f },
@@ -1826,15 +1826,15 @@ bool un_80301E08(enum soundtest_callback_arg0 update_scene)
 /* 803FB600 */ char un_803FB600[] = "All Char :";
 /* 803FB60C */ struct un_80304138_objalloc_t_x8 un_803FB60C[7] = {
     { 0, NULL, un_803FB5C0, NULL, NULL, 0.0f, 0.0f, 0.0f },
-    { 2, NULL, un_803FB5D0, un_803FB538, &un_803FA258.x4[3], 0.0f, 34.0f,
+    { 2, NULL, un_803FB5D0, un_803FB538, &un_803FA258.x10[0], 0.0f, 34.0f,
       0.0f },
-    { 2, NULL, un_803FB5DC, un_803FB538, &un_803FA258.x14[0], 0.0f, 34.0f,
+    { 2, NULL, un_803FB5DC, un_803FB538, &un_803FA258.x10[1], 0.0f, 34.0f,
       0.0f },
-    { 2, NULL, un_803FB5E8, un_803FB538, &un_803FA258.x14[1], 0.0f, 34.0f,
+    { 2, NULL, un_803FB5E8, un_803FB538, &un_803FA258.x10[2], 0.0f, 34.0f,
       0.0f },
-    { 2, NULL, un_803FB5F4, un_803FB538, &un_803FA258.x14[2], 0.0f, 34.0f,
+    { 2, NULL, un_803FB5F4, un_803FB538, &un_803FA258.x10[3], 0.0f, 34.0f,
       0.0f },
-    { 2, un_80300758, un_803FB600, un_803FB538, &un_803FA258.x14[3], 0.0f,
+    { 2, un_80300758, un_803FB600, un_803FB538, &un_803FA258.x10[4], 0.0f,
       34.0f, 0.0f },
     { 9, NULL, NULL, NULL, NULL, 0.0f, 0.0f, 0.0f },
 };
@@ -1873,7 +1873,7 @@ bool un_80301E08(enum soundtest_callback_arg0 update_scene)
       0.0f },
     { 2, NULL, un_803FB858, un_803FB818, &un_803FA258.x24[3], 0.0f, 4.0f,
       0.0f },
-    { 2, un_80300790, un_803FB864, un_803FB818, &un_803FA258.x34, 0.0f, 4.0f,
+    { 2, un_80300790, un_803FB864, un_803FB818, &un_803FA258.x24[4], 0.0f, 4.0f,
       0.0f },
     { 9, NULL, NULL, NULL, NULL, 0.0f, 0.0f, 0.0f },
 };

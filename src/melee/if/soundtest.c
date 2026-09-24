@@ -460,7 +460,7 @@ bool un_80300218(enum soundtest_callback_arg0 arg0)
 
 bool un_80300248(enum soundtest_callback_arg0 arg0)
 {
-    if (un_803FA258.x4[0] && arg0 == 1) {
+    if (un_803FA258.x4 && arg0 == 1) {
         sfxForward();
         gmMainLib_8015FB68();
     }
@@ -595,10 +595,11 @@ bool un_80300410(enum soundtest_callback_arg0 arg0)
 };
 /* 803FA258 */ struct un_803FA258_t un_803FA258 = {
     /* 0x000 */ 0,
-    /* 0x004 */ { 0, 32, 0, 6 },
-    /* 0x014 */ { 8, 6, 6, 8 },
-    /* 0x024 */ { 0, 0, 3, 3 },
-    /* 0x034 */ 0,
+    /* 0x004 */ 0,
+    /* 0x008 */ 32,
+    /* 0x00C */ 0,
+    /* 0x010 */ { 6, 8, 6, 6, 8 },
+    /* 0x024 */ { 0, 0, 3, 3, 0 },
     /* 0x038 */ { 0, 0, 0, 0 },
     /* 0x048 */ { 0, 0, 0, 0 },
     /* 0x058 */ { 0, 0, 0, 0 },
@@ -665,7 +666,7 @@ bool un_80300410(enum soundtest_callback_arg0 arg0)
     { 1, un_80301420, un_803FA468, NULL, NULL, 0.0f, 0.0f, 0.0f },
     { 2, un_80300218, un_803FA474, un_804D5888, &un_803FA258.x0, 0.0f, 2.0f,
       0.0f },
-    { 2, un_80300248, un_803FA480, un_804D5880, &un_803FA258.x4[0], 0.0f, 2.0f,
+    { 2, un_80300248, un_803FA480, un_804D5880, &un_803FA258.x4, 0.0f, 2.0f,
       0.0f },
     { 2, NULL, un_803FA48C, un_803FA440, &DbLevel, 0.0f, 5.0f, 0.0f },
     { 3, NULL, un_803FA498, NULL, &db_804D4AF8, 0.0f, 1.0f, 1.0f },

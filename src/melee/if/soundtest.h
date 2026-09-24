@@ -35,10 +35,11 @@ ASSERT_SIZE(struct UnkSoundTestData0, 0xC);
 
 struct un_803FA258_t {
     /* 0x000 */ int x0;
-    /* 0x004 */ int x4[4];
-    /* 0x014 */ int x14[4];
-    /* 0x024 */ int x24[4];
-    /* 0x034 */ int x34;
+    /* 0x004 */ int x4;
+    /* 0x008 */ int x8;
+    /* 0x00C */ int xC;
+    /* 0x010 */ int x10[5];
+    /* 0x024 */ int x24[5];
     /* 0x038 */ int x38[4];
     /* 0x048 */ int x48[4];
     /* 0x058 */ int x58[4];
