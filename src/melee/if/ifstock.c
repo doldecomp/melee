@@ -222,8 +222,7 @@ void ifStock_802F8298(HSD_GObj* gobj)
             HSD_JObjClearFlagsAll(steal_jobj, JOBJ_HIDDEN);
             if (ifStock_804A157C[user_data->player].anim[i] <= 10) {
                 lbVector_8000DE38(
-                    (float (*)[4]) &
-                        ifStock_804A157C[user_data->player].steal[i - 5],
+                    &ifStock_804A157C[user_data->player].steal[i - 5].start,
                     &vecC, 0.1f * ifStock_804A157C[user_data->player].anim[i]);
                 HSD_JObjGetTranslation2(stock->player[user_data->player].x4[0],
                                         &vecD);
