@@ -3,7 +3,7 @@
 #include <Runtime/platform.h>
 
 #include <melee/ft/fighter.h>
-#include "kinds/ftCommon/forward.h"
+#include <melee/ft/kinds/ftMasterHand/forward.h>
 #include <melee/ft/types.h>
 
 void ftCo_800BEFD4(Fighter_GObj* gobj)

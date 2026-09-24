@@ -21,9 +21,9 @@
 #include <melee/ft/ftdevice.h>
 #include <melee/ft/ftlib.h>
 #include <melee/ft/inlines.h>
-#include "kinds/ftCommon/ftCo_Bury.h"
-#include "kinds/ftCommon/ftCo_Guard.h"
-#include "kinds/ftCommon/types.h"
+#include <melee/ft/kinds/ftCommon/ftCo_Bury.h>
+#include <melee/ft/kinds/ftCommon/ftCo_Guard.h>
+#include <melee/ft/kinds/ftMasterHand/types.h>
 #include <melee/ft/types.h>
 #include <dolphin/mtx.h>
 #include <melee/ef/efsync.h>

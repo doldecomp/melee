@@ -10,7 +10,7 @@
 #include <melee/ft/fighter.h>
 #include <melee/ft/ftcoll.h>
 #include <melee/ft/inlines.h>
-#include "kinds/ftCommon/ftCo_HammerWait.h"
+#include <melee/ft/kinds/ftCommon/ftCo_HammerWait.h>
 #include <melee/ft/types.h>
 #include <melee/it/it_26B1.h>
 #include <melee/lb/lb_00B0.h>

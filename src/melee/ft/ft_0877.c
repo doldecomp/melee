@@ -3,7 +3,7 @@
 #include <melee/ft/fighter.h>
 #include <melee/ft/ftcommon.h>
 #include <melee/ft/ftdevice.h>
-#include "kinds/ftCommon/ftCo_0A01.h"
+#include <melee/ft/kinds/ftCommon/ftCo_0A01.h>
 #include <melee/ft/types.h>
 #include <dolphin/mtx.h>
 #include <melee/it/it_26B1.h>

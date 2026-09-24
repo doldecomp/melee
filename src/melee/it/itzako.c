@@ -7,7 +7,7 @@
 #include <melee/it/ithitbox.h>
 #include <melee/it/itmaplib.h>
 #include <melee/it/itmaterial.h>
-#include "kinds/itcoin.h"
+#include <melee/it/kinds/itcoin.h>
 #include <melee/cm/camera.h>
 #include <melee/ft/fighter.h>
 #include <melee/ft/ftlib.h>

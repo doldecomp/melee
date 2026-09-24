@@ -7,8 +7,8 @@
 #include <melee/ft/ftlipstickswing.h>
 #include <melee/ft/ftstarrodswing.h>
 #include <melee/ft/inlines.h>
-#include "kinds/ftCommon/ftCo_FallSpecial.h"
-#include "kinds/ftCommon/ftpickupitem.h"
+#include <melee/ft/kinds/ftCommon/ftCo_FallSpecial.h>
+#include <melee/ft/kinds/ftCommon/ftpickupitem.h>
 #include <melee/ft/types.h>
 #include <sysdolphin/baselib/debug.h>
 

@@ -11,8 +11,8 @@
 #include <melee/ft/ftlib.h>
 #include <melee/ft/ftparts.h>
 #include <melee/ft/inlines.h>
-#include "kinds/ftCommon/ftCo_09F4.h"
-#include "kinds/ftCommon/ftCo_0A01.h"
+#include <melee/ft/kinds/ftCommon/ftCo_09F4.h>
+#include <melee/ft/kinds/ftCommon/ftCo_0A01.h>
 #include <dolphin/mtx.h>
 #include <melee/cm/camera.h>
 #include <melee/lb/lb_00F9.h>

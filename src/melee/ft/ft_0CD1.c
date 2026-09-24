@@ -9,7 +9,7 @@
 #include <melee/ft/ftcommon.h>
 #include <melee/ft/ftswing.h>
 #include <melee/ft/inlines.h>
-#include "kinds/ftCommon/ftCo_Fall.h"
+#include <melee/ft/kinds/ftCommon/ftCo_Fall.h>
 
 void ftCo_800CD140(Fighter_GObj* gobj, int arg1, int arg2, int arg3,
                    float arg4)

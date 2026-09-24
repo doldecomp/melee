@@ -9,10 +9,10 @@
 #include <melee/ft/ftanim.h>
 #include <melee/ft/ftcamera.h>
 #include <melee/ft/ftcommon.h>
-#include "kinds/ftCommon/ftCo_CliffWait.h"
-#include "kinds/ftCommon/ftCo_Fall.h"
-#include "kinds/ftCommon/ftCo_StopCeil.h"
-#include "kinds/ftCommon/types.h"
+#include <melee/ft/kinds/ftCommon/ftCo_CliffWait.h>
+#include <melee/ft/kinds/ftCommon/ftCo_Fall.h>
+#include <melee/ft/kinds/ftCommon/ftCo_StopCeil.h>
+#include <melee/ft/kinds/ftMasterHand/types.h>
 #include <melee/ft/types.h>
 #include <dolphin/mtx.h>
 #include <melee/ef/efasync.h>

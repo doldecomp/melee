@@ -8,7 +8,7 @@
 #include <melee/ft/ftdata.h>
 #include <melee/ft/ftparts.h>
 #include <melee/ft/inlines.h>
-#include "kinds/ftCommon/ftCo_Attack100.h"
+#include <melee/ft/kinds/ftCommon/ftCo_Attack100.h>
 #include <melee/ft/types.h>
 #include <melee/lb/lb_00B0.h>
 #include <melee/lb/lbanim.h>

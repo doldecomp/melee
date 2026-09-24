@@ -6,8 +6,8 @@
 #include <placeholder.h>
 
 #include <melee/ft/inlines.h>
-#include "kinds/ftLink/types.h"
-#include "kinds/ftMars/types.h"
+#include <melee/ft/kinds/ftMasterHand/types.h>
+#include <melee/ft/kinds/ftMasterHand/types.h>
 #include <dolphin/gx.h>
 #include <dolphin/mtx.h>
 #include <melee/it/it_26B1.h>

@@ -5,7 +5,7 @@
 #include <melee/ft/ft_0C8C.h>
 #include <melee/ft/ftCo_800C7CA0.h>
 #include <melee/ft/ftdevice.h>
-#include "kinds/ftCommon/ftCo_09F4.h"
+#include <melee/ft/kinds/ftCommon/ftCo_09F4.h>
 #include <melee/ft/types.h>
 #include <melee/lb/lb_00B0.h>
 #include <melee/lb/lbrefract.h>

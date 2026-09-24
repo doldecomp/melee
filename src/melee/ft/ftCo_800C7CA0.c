@@ -7,10 +7,10 @@
 #include <melee/ft/ftanim.h>
 #include <melee/ft/ftcoll.h>
 #include <melee/ft/ftcommon.h>
-#include "kinds/ftCommon/forward.h"
-#include "kinds/ftCommon/ftCo_DamageFall.h"
-#include "kinds/ftCommon/ftCo_DownBound.h"
-#include "kinds/ftKirby/ftkirby.h"
+#include <melee/ft/kinds/ftMasterHand/forward.h>
+#include <melee/ft/kinds/ftCommon/ftCo_DamageFall.h>
+#include <melee/ft/kinds/ftCommon/ftCo_DownBound.h>
+#include <melee/ft/kinds/ftKirby/ftkirby.h>
 #include <melee/ft/types.h>
 #include <melee/cm/camera.h>
 #include <melee/ef/efasync.h>

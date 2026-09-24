@@ -8,7 +8,7 @@
 #include <melee/ft/forward.h>
 #include <melee/ft/ftcoll.h>
 #include <melee/ft/inlines.h>
-#include "kinds/ftKirby/ftkirby.h"
+#include <melee/ft/kinds/ftKirby/ftkirby.h>
 #include <melee/ft/types.h>
 #include <melee/gr/ground.h>
 #include <melee/lb/lb_00B0.h>

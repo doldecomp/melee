@@ -20,7 +20,7 @@
 #include <melee/ft/ftcommon.h>
 #include <melee/ft/ftdynamics.h>
 #include <melee/ft/ftparts.h>
-#include "kinds/ftCommon/ftCo_09F7.h"
+#include <melee/ft/kinds/ftCommon/ftCo_09F7.h>
 #include <melee/ft/types.h>
 #include <dolphin/mtx.h>
 #include <melee/lb/inlines.h>

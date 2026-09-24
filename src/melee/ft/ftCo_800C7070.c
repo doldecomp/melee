@@ -1,7 +1,7 @@
 #include <melee/ft/ftCo_800C7070.h>
 
 #include <melee/ft/fighter.h>
-#include "kinds/ftCommon/forward.h"
+#include <melee/ft/kinds/ftMasterHand/forward.h>
 #include <melee/ft/types.h>
 
 void ftCo_800C7070(Fighter_GObj* gobj)

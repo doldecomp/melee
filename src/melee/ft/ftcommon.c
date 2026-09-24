@@ -21,11 +21,11 @@
 #include <melee/ft/ftlib.h>
 #include <melee/ft/ftmetal.h>
 #include <melee/ft/ftparts.h>
-#include "kinds/ftCommon/ftCo_Damage.h"
-#include "kinds/ftCommon/ftCo_DamageFall.h"
-#include "kinds/ftCommon/ftCo_Fall.h"
-#include "kinds/ftCommon/ftCo_HammerWait.h"
-#include "kinds/ftCommon/ftpickupitem.h"
+#include <melee/ft/kinds/ftCommon/ftCo_Damage.h>
+#include <melee/ft/kinds/ftCommon/ftCo_DamageFall.h>
+#include <melee/ft/kinds/ftCommon/ftCo_Fall.h>
+#include <melee/ft/kinds/ftCommon/ftCo_HammerWait.h>
+#include <melee/ft/kinds/ftCommon/ftpickupitem.h>
 #include <melee/ft/types.h>
 #include <melee/ef/eflib.h>
 #include <melee/gm/gm_unsplit.h>

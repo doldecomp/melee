@@ -6,10 +6,10 @@
 #include <melee/ft/ftCo_800C78B0.h>
 #include <melee/ft/ftcommon.h>
 #include <melee/ft/inlines.h>
-#include "kinds/ftCommon/forward.h"
-#include "kinds/ftCommon/ftCo_Damage.h"
-#include "kinds/ftCommon/ftCo_DamageFall.h"
-#include "kinds/ftCommon/inlines.h"
+#include <melee/ft/kinds/ftMasterHand/forward.h>
+#include <melee/ft/kinds/ftCommon/ftCo_Damage.h>
+#include <melee/ft/kinds/ftCommon/ftCo_DamageFall.h>
+#include <melee/ft/kinds/ftMasterHand/inlines.h>
 #include <melee/ft/types.h>
 #include <melee/cm/camera.h>
 #include <melee/it/kinds/itleadead.h>

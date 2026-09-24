@@ -24,8 +24,8 @@
 #include <melee/ft/ftdynamics.h>
 #include <melee/ft/ftlib.h>
 #include <melee/ft/ftparts.h>
-#include "kinds/ftCommon/ftCo_09F4.h"
-#include "kinds/ftCommon/ftCo_DemoCallback0.h"
+#include <melee/ft/kinds/ftCommon/ftCo_09F4.h>
+#include <melee/ft/kinds/ftCommon/ftCo_DemoCallback0.h>
 #include <melee/ft/types.h>
 #include <melee/cm/camera.h>
 #include <melee/ef/efasync.h>

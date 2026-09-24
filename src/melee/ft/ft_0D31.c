@@ -11,8 +11,8 @@
 #include <melee/ft/ftlib.h>
 #include <melee/ft/ftmetal.h>
 #include <melee/ft/ftparts.h>
-#include "kinds/ftCommon/ftCo_DamageIce.h"
-#include "kinds/ftCommon/ftCo_Throw.h"
+#include <melee/ft/kinds/ftCommon/ftCo_DamageIce.h>
+#include <melee/ft/kinds/ftCommon/ftCo_Throw.h>
 #include <melee/cm/camera.h>
 #include <melee/ef/efasync.h>
 #include <melee/ef/efsync.h>

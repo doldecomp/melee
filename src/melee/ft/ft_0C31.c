@@ -8,8 +8,8 @@
 #include <melee/ft/ftcolanim.h>
 #include <melee/ft/ftcoll.h>
 #include <melee/ft/ftcommon.h>
-#include "kinds/ftCommon/forward.h"
-#include "kinds/ftCommon/types.h"
+#include <melee/ft/kinds/ftMasterHand/forward.h>
+#include <melee/ft/kinds/ftMasterHand/types.h>
 #include <melee/ft/types.h>
 #include <dolphin/mtx.h>
 #include <melee/ef/efasync.h>

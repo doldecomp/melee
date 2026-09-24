@@ -4,7 +4,7 @@
 #include <melee/ft/ftCo_800C7070.h>
 #include <melee/ft/ftCo_800C7590.h>
 #include <melee/ft/ftdata.h>
-#include "kinds/ftCommon/forward.h"
+#include <melee/ft/kinds/ftMasterHand/forward.h>
 #include <melee/ft/types.h>
 #include <melee/it/kinds/itgreatfoxlaser.h>
 #include <melee/it/kinds/itleadead.h>

@@ -4,9 +4,9 @@
 #include <melee/ft/ftanim.h>
 #include <melee/ft/ftcoll.h>
 #include <melee/ft/ftcommon.h>
-#include "kinds/ftCommon/forward.h"
-#include "kinds/ftCommon/ftCo_Damage.h"
-#include "kinds/ftCommon/inlines.h"
+#include <melee/ft/kinds/ftMasterHand/forward.h>
+#include <melee/ft/kinds/ftCommon/ftCo_Damage.h>
+#include <melee/ft/kinds/ftMasterHand/inlines.h>
 #include <melee/ft/types.h>
 #include <melee/it/it_26B1.h>
 #include <melee/it/kinds/itlikelike.h>

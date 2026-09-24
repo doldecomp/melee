@@ -13,9 +13,9 @@
 #include <melee/ft/ftdata.h>
 #include <melee/ft/ftmetal.h>
 #include <melee/ft/ftparts.h>
-#include "kinds/ftCommon/forward.h"
-#include "kinds/ftGameWatch/ftgamewatch.h"
-#include "kinds/ftKirby/ftkirby.h"
+#include <melee/ft/kinds/ftMasterHand/forward.h>
+#include <melee/ft/kinds/ftGameWatch/ftgamewatch.h>
+#include <melee/ft/kinds/ftKirby/ftkirby.h>
 #include <melee/cm/camera.h>
 #include <melee/cm/types.h>
 #include <melee/ef/efasync.h>

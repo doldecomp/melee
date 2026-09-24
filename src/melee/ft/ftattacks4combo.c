@@ -2,8 +2,8 @@
 #include <melee/ft/ftattacks4combo.h>
 
 #include <melee/ft/fighter.h>
-#include "kinds/ftCommon/ftCo_AttackS4.h"
-#include "kinds/ftCommon/ftCo_Wait.h"
+#include <melee/ft/kinds/ftCommon/ftCo_AttackS4.h>
+#include <melee/ft/kinds/ftCommon/ftCo_Wait.h>
 
 bool ftCo_800CECE8(Fighter_GObj* gobj)
 {
