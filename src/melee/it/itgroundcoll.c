@@ -339,8 +339,6 @@ bool it_8026DDFC(Item_GObj* gobj)
 
 bool it_8026DE98(Item_GObj* gobj)
 {
-    // Keep this body: forwarding to it_8026DDFC redirects the calls in
-    // it_8026E248 and it_8026E7E0 to that function under MWCC auto-inlining.
     Item* ip = GET_ITEM(gobj);
 
     ip->xD50_landNum += 1;
