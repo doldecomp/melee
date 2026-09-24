@@ -662,6 +662,9 @@ s32 PickAutoName(HSD_GObj* arg0)
     PAD_STACK(16);
     return PickAutoNameInline(arg0);
 }
+#ifdef MUST_MATCH
+#pragma pop
+#endif
 
 #line 779 "mnnamenew.c"
 bool NameContainsOnlySpaces(void)
@@ -684,49 +687,34 @@ bool NameContainsOnlySpaces(void)
     return true;
 }
 
-static inline void CopyCurrentNameToNametag(struct NameTagData* nametag)
+s32 WriteCharactersForNameAtIndex(u8 slot, s32 port)
 {
-    s32 idx;
-    u8 ch;
-    u8* text;
-    s8 null_ch;
+    struct NameTagData* nametag = GetPersistentNameData(slot);
     s32 i;
+    s32 ret;
+    u8* ptr;
+    u8 ch;
+    s32 len = 0;
 
-    text = (u8*) mnNameNew_CurrentNameText;
-    idx = 0;
     for (i = 0; i < 4; i++) {
-        u8* ptr;
-
-        null_ch = (s8) *mnNameNew_NullCharacter;
-        if (null_ch == (s8) *text) {
+        if ((s8) *mnNameNew_NullCharacter ==
+            (s8) mnNameNew_CurrentNameText[i * 3])
+        {
             break;
         }
-        ptr = text;
-        while ((null_ch = (s8) *mnNameNew_NullCharacter) != (s8) (ch = *ptr)) {
-            nametag->namedata[idx] = (s8) ch;
-            idx += 1;
-            ptr += 1;
+        ptr = (u8*) &mnNameNew_CurrentNameText[i * 3];
+        while ((s8) *mnNameNew_NullCharacter != (s8) (ch = *ptr)) {
+            nametag->namedata[len] = ch;
+            len++;
+            ptr++;
         }
-        text += 3;
     }
-    nametag->namedata[idx] = (s8) *mnNameNew_NullCharacter;
-}
-
-s32 WriteCharactersForNameAtIndex(u8 arg0, s32 arg1)
-{
-    struct NameTagData* nametag;
-    s32 ret;
-
-    nametag = GetPersistentNameData((s32) arg0);
-    CopyCurrentNameToNametag(nametag);
-    ret = GetRumbleSettingOfPort(arg1);
+    nametag->namedata[len] = *mnNameNew_NullCharacter;
+    ret = GetRumbleSettingOfPort(port);
     nametag->rumble_enabled = ret;
     return ret;
 }
 
-#ifdef MUST_MATCH
-#pragma pop
-#endif
 static inline char** AddCharacterToName_getGlyphs(GlyphRow* arg0, u8 arg1)
 {
     return (char**) &arg0[arg1];
@@ -920,6 +908,38 @@ static inline s32 mnNameNew_CountVariants(GlyphRow* glyphs, u8 selected_key)
     return count;
 }
 
+static inline bool IsNameEmpty(void)
+{
+    if ((s8) mnNameNew_CurrentNameText[0] ==
+        (s8) * ((GlyphChar*) mnNameNew_NullCharacter))
+    {
+        return true;
+    }
+    return false;
+}
+
+static inline bool CanConfirmName(char* name)
+{
+    if (!IsNameEmpty() && !NameContainsOnlySpaces() && !IsNameUnique(name) &&
+        !IsNameNotAllowed(name))
+    {
+        return true;
+    }
+    return false;
+}
+
+static inline void SubmitName(NameNewEntry* data, char* name)
+{
+    if (CanConfirmName(name)) {
+        lbAudioAx_80024030(1);
+        CreateNameAtIndex(data->name_index);
+        WriteCharactersForNameAtIndex(data->name_index, mn_802295AC());
+        mnNameNew_8023B224(1U);
+        return;
+    }
+    lbAudioAx_80024030(3);
+}
+
 void mnNameNew_MainInput(HSD_GObj* arg0)
 {
     char space_lead;
@@ -1095,34 +1115,7 @@ void mnNameNew_MainInput(HSD_GObj* arg0)
             case 0x38:
             case 0x39:
                 copyName(mnNameNew_CurrentNameText, name_buffer);
-
-                if ((s8) mnNameNew_CurrentNameText[0] ==
-                    (s8) * ((GlyphChar*) mnNameNew_NullCharacter))
-                {
-                    n = 1;
-                } else {
-                    n = 0;
-                }
-                if (n == 0 && NameContainsOnlySpaces() == 0 &&
-                    IsNameUnique(name_buffer) == 0 &&
-                    IsNameNotAllowed(name_buffer) == 0)
-                {
-                    n = 1;
-                } else {
-                    n = 0;
-                }
-                if (n != 0) {
-                    lbAudioAx_80024030(1);
-                    {
-                        u8 name_index = data->name_index;
-                        CreateNameAtIndex((s32) name_index);
-                    }
-                    WriteCharactersForNameAtIndex(data->name_index,
-                                                  (s32) mn_802295AC());
-                    mnNameNew_8023B224(1U);
-                    return;
-                }
-                lbAudioAx_80024030(3);
+                SubmitName(data, name_buffer);
                 return;
             }
         }
@@ -1131,31 +1124,7 @@ void mnNameNew_MainInput(HSD_GObj* arg0)
             mn_804A04F0.hovered_selection == 0x39)
         {
             copyName(mnNameNew_CurrentNameText, name_buffer);
-
-            if ((s8) mnNameNew_CurrentNameText[0] ==
-                (s8) * ((GlyphChar*) mnNameNew_NullCharacter))
-            {
-                n = 1;
-            } else {
-                n = 0;
-            }
-            if (n == 0 && NameContainsOnlySpaces() == 0 &&
-                IsNameUnique(name_buffer) == 0 &&
-                IsNameNotAllowed(name_buffer) == 0)
-            {
-                n = 1;
-            } else {
-                n = 0;
-            }
-            if (n != 0) {
-                lbAudioAx_80024030(1);
-                CreateNameAtIndex((s32) data->name_index);
-                WriteCharactersForNameAtIndex(data->name_index,
-                                              (s32) mn_802295AC());
-                mnNameNew_8023B224(1U);
-                return;
-            }
-            lbAudioAx_80024030(3);
+            SubmitName(data, name_buffer);
             return;
         }
         mn_804A04F0.hovered_selection = 0x39;
