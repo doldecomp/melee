@@ -190,18 +190,14 @@ static void getColorPrimEnv(HSD_Particle* pp, GXColor* primCol,
     }
 }
 
-#ifdef MUST_MATCH
-#pragma push
-#pragma dont_inline on
-#endif
 static void getColorMatAmb(HSD_Particle* pp, GXColor* matCol, GXColor* ambCol)
 {
     if (pp->matColCount) {
         int scale = 65536 * pp->matColRemain / pp->matColCount;
-        matCol->r = matCol->g = matCol->b =
-            ((pp->matRGBTarget << 16) +
-             (pp->matRGB - pp->matRGBTarget) * scale) >>
-            16;
+        u8 rgb = ((pp->matRGBTarget << 16) +
+                  (pp->matRGB - pp->matRGBTarget) * scale) >>
+                 16;
+        matCol->r = matCol->g = matCol->b = rgb;
         matCol->a =
             ((pp->matATarget << 16) + (pp->matA - pp->matATarget) * scale) >>
             16;
@@ -211,10 +207,10 @@ static void getColorMatAmb(HSD_Particle* pp, GXColor* matCol, GXColor* ambCol)
     }
     if (pp->ambColCount) {
         int scale = 65536 * pp->ambColRemain / pp->ambColCount;
-        ambCol->r = ambCol->g = ambCol->b =
-            ((pp->ambRGBTarget << 16) +
-             (pp->ambRGB - pp->ambRGBTarget) * scale) >>
-            16;
+        u8 rgb = ((pp->ambRGBTarget << 16) +
+                  (pp->ambRGB - pp->ambRGBTarget) * scale) >>
+                 16;
+        ambCol->r = ambCol->g = ambCol->b = rgb;
         ambCol->a =
             ((pp->ambATarget << 16) + (pp->ambA - pp->ambATarget) * scale) >>
             16;
@@ -223,9 +219,6 @@ static void getColorMatAmb(HSD_Particle* pp, GXColor* matCol, GXColor* ambCol)
         ambCol->a = pp->ambA;
     }
 }
-#ifdef MUST_MATCH
-#pragma pop
-#endif
 
 static inline void getClrTrail(HSD_Particle* pp, GXColor* color)
 {
