@@ -21,10 +21,6 @@
 /* 4D6E40 */ struct un_80304138_objalloc_t* un_804D6E40;
 /* 4A2688 */ static HSD_ObjAllocData un_804A2688;
 
-#ifdef MUST_MATCH
-#pragma push
-#pragma dont_inline on
-#endif
 int un_80302E00(struct un_80304138_objalloc_t_x8* arg0, int arg1)
 {
     int ret = 0;
@@ -41,9 +37,6 @@ int un_80302E00(struct un_80304138_objalloc_t_x8* arg0, int arg1)
     }
     return ret;
 }
-#ifdef MUST_MATCH
-#pragma pop
-#endif
 
 int un_80302EA4(struct un_80304138_objalloc_t_x8* arg0)
 {
@@ -374,53 +367,44 @@ int un_803039A4(unsigned char arg0)
     return ret;
 }
 
+static inline int findPrev(struct un_80304138_objalloc_t* menu)
+{
+    int i;
+    for (i = menu->x0 - 1; i >= 0; i--) {
+        if (menu->x8[i].x0 != 0) {
+            return i;
+        }
+    }
+    return -1;
+}
+
+static inline int findNext(struct un_80304138_objalloc_t* menu)
+{
+    int i;
+    for (i = menu->x0 + 1; i < menu->x4->h; i++) {
+        if (menu->x8[i].x0 != 0) {
+            return i;
+        }
+    }
+    return -1;
+}
+
 void un_80303AC4(struct un_80304138_objalloc_t* arg0)
 {
     int trigger = HSD_PadCopyStatus[0].trigger;
     int stick = un_803039A4(0);
     int buttons = stick | trigger;
-    PAD_STACK(8);
     if (buttons & HSD_PAD_START) {
-        struct un_80304138_objalloc_t_x8* x8 = &arg0->x8[arg0->x0];
-        if (x8->x4 != NULL) {
-            un_804D6E48 = x8;
-            if (x8->x4(6) == 0) {
-                if (un_804D6E44 != NULL && un_804D6E44->xC != NULL) {
-                    un_804D6E44->xC(6);
-                }
-            }
-        } else if (un_804D6E44 != NULL && un_804D6E44->xC) {
-            un_804D6E44->xC(6);
-        }
+        un_80302E00(&arg0->x8[arg0->x0], 6);
     } else if (buttons & (0x10000000 | HSD_PAD_Y)) { // up
-        u8 j = arg0->x0;
-        int i = j;
-        (void) j;
-        for (i--; i >= 0; i--) {
-            if (arg0->x8[i].x0 != 0) {
-                (void) i;
-                goto up_found;
-            }
-        }
-        i = -1;
-    up_found:
+        int i = findPrev(arg0);
         if (i != -1) {
             arg0->x0 = i;
             arg0->x1 = arg0->x1 | 1;
             sfxMove();
         }
     } else if (buttons & (0x20000000 | HSD_PAD_X)) { // down
-        u8 j = arg0->x0;
-        int i = j;
-        (void) j;
-        for (i++; i < arg0->x4->h; i++) {
-            if (arg0->x8[i].x0 != 0) {
-                (void) i;
-                goto down_found;
-            }
-        }
-        i = -1;
-    down_found:
+        int i = findNext(arg0);
         if (i != -1) {
             arg0->x0 = i;
             arg0->x1 = arg0->x1 | 1;
@@ -428,56 +412,16 @@ void un_80303AC4(struct un_80304138_objalloc_t* arg0)
         }
     } else if (buttons & (0x80000000 | HSD_PAD_R)) { // right
         if (un_80303444(arg0)) {
-            struct un_80304138_objalloc_t_x8* x8 = &arg0->x8[arg0->x0];
-            if (x8->x4 != NULL) {
-                un_804D6E48 = x8;
-                if (x8->x4(3) == 0) {
-                    if (un_804D6E44 != NULL && un_804D6E44->xC) {
-                        un_804D6E44->xC(3);
-                    }
-                }
-            } else if (un_804D6E44 != NULL && un_804D6E44->xC) {
-                un_804D6E44->xC(3);
-            }
+            un_80302E00(&arg0->x8[arg0->x0], 3);
         }
     } else if (buttons & (0x40000000 | HSD_PAD_L)) { // left
         if (un_80303720(arg0)) {
-            struct un_80304138_objalloc_t_x8* x8 = &arg0->x8[arg0->x0];
-            if (x8->x4 != NULL) {
-                un_804D6E48 = x8;
-                if (x8->x4(2) == 0) {
-                    if (un_804D6E44 != NULL && un_804D6E44->xC) {
-                        un_804D6E44->xC(2);
-                    }
-                }
-            } else if (un_804D6E44 != NULL && un_804D6E44->xC) {
-                un_804D6E44->xC(2);
-            }
+            un_80302E00(&arg0->x8[arg0->x0], 2);
         }
     } else if (buttons & HSD_PAD_A) {
-        struct un_80304138_objalloc_t_x8* x8 = &arg0->x8[arg0->x0];
-        if (x8->x4 != NULL) {
-            un_804D6E48 = x8;
-            if (x8->x4(1) == 0) {
-                if (un_804D6E44 != NULL && un_804D6E44->xC) {
-                    un_804D6E44->xC(1);
-                }
-            }
-        } else if (un_804D6E44 != NULL && un_804D6E44->xC) {
-            un_804D6E44->xC(1);
-        }
+        un_80302E00(&arg0->x8[arg0->x0], 1);
     } else if (buttons & HSD_PAD_B) {
-        struct un_80304138_objalloc_t_x8* x8 = &arg0->x8[arg0->x0];
-        if (x8->x4 != NULL) {
-            un_804D6E48 = x8;
-            if (x8->x4(0) == 0) {
-                if (un_804D6E44 != NULL && un_804D6E44->xC) {
-                    un_804D6E44->xC(0);
-                }
-            }
-        } else if (un_804D6E44 != NULL && un_804D6E44->xC) {
-            un_804D6E44->xC(0);
-        }
+        un_80302E00(&arg0->x8[arg0->x0], 0);
     }
 }
 
@@ -537,19 +481,25 @@ static inline int un_80303FD4_count(struct un_80304138_objalloc_t_x8* p)
     return n;
 }
 
+static inline void initEntries(struct un_80304138_objalloc_t_x8* p)
+{
+    while (p->x0 != 9) {
+        un_80302E00(p, 4);
+        p++;
+    }
+}
+
 #line 850 "textlib.c"
 void un_80303FD4(HSD_GObj* arg0, struct un_80304138_objalloc_t* arg1,
                  struct un_80304138_objalloc_t_x8* arg2, int arg3, int arg4,
                  int arg5)
 {
-    struct un_80304138_objalloc_t_x8* p2;
-    struct un_80304138_objalloc_t_x8* p;
-    int i;
     int size;
     int count;
     int count2 = 0;
-    int v;
     void* buf;
+    struct un_80304138_objalloc_t_x8* entries;
+    int first;
     struct un_80304138_objalloc_t* un;
 
     arg1->x8 = arg2;
@@ -571,16 +521,14 @@ void un_80303FD4(HSD_GObj* arg0, struct un_80304138_objalloc_t* arg1,
         arg1->x4 = DevText_Create(count2 + 0x78, arg4, arg5, size, count, buf);
         if (arg1->x4 != NULL) {
             DevText_Show(arg0, arg1->x4);
-            arg1->x0 = un_80303FD4_first(arg1->x8);
+            first = un_80303FD4_first(arg1->x8);
+            arg1->x0 = first;
             arg1->xC = NULL;
             DevText_HideCursor(arg1->x4);
             DevText_SetScale(arg1->x4, 10.0f, 17.0f);
             un_804D6E48 = NULL;
-            p2 = arg1->x8;
-            while (p2->x0 != 9) {
-                un_80302E00(p2, 4);
-                p2++;
-            }
+            entries = arg1->x8;
+            initEntries(entries);
         }
     }
 }
