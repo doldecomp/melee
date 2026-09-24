@@ -48,7 +48,7 @@ HSD_GObj* it_80291BE0(Vec3* arg0)
 void itSScope_Logic21_Spawned(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
-    ip->xD4C = *(s32*) ip->xC4_article_data->x4_specialAttributes;
+    ip->xD4C = GET_ATTRS(ip)->x0;
     it_802920B8(gobj);
 }
 
