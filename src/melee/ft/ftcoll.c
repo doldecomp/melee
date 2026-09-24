@@ -83,106 +83,6 @@ static int dmg_log0_idx;
 static int dmg_log1_idx;
 static s8 ftColl_804D6560[8];
 
-/// Combo Count Logic
-void ftColl_800763C0(Fighter_GObj* attacker, Fighter_GObj* victim,
-                     enum_t attack_id)
-{
-    if (attacker != victim) {
-        Fighter* fp = GET_FIGHTER(attacker);
-        Fighter_GObj* fp_x2094 = fp->x2094;
-        if (fp_x2094 == NULL) {
-            fp->x208C = attack_id;
-            fp->x2090 = 1;
-            fp->x2094 = victim;
-        } else if (fp_x2094 == victim) {
-            if (attack_id != 1 && fp->x208C == attack_id) {
-                ++fp->x2090;
-                if (fp->x2090 >= p_ftCommonData->x4C4) {
-                    fp->x2092 = p_ftCommonData->x4D8;
-                }
-            } else {
-                fp->x2090 = 0;
-                fp->x208C = attack_id;
-            }
-        }
-    }
-}
-
-/// Combo Count Logic + Get Attack ID
-void ftColl_80076444(Fighter_GObj* attacker, Fighter_GObj* victim)
-{
-    Fighter* fp = GET_FIGHTER(attacker);
-    ftColl_800763C0(attacker, victim, fp->x2068_attackID);
-}
-
-/// Combo Count Logic w/ Item Owner
-void ftColl_8007646C(Item_GObj* attackItem, Fighter_GObj* victim)
-{
-    Fighter_GObj* owner = itGetOwner(attackItem);
-    enum_t msid = itGetAttackId(attackItem);
-
-    if (ftLib_80086960(owner)) {
-        ftColl_800763C0(owner, victim, msid);
-    }
-}
-
-/// Check to end combo for victim
-void ftColl_800764DC(Fighter_GObj* gobj)
-{
-    /// @todo #GET_FIGHTER adds an instruction
-    Fighter* fp = gobj->user_data;
-    if (fp->x2098 != 0) {
-        fp->x2098--;
-    }
-    if (fp->x2094 != NULL) {
-        Fighter* fp1 = fp->x2094->user_data;
-        if (!fp1->x221C_b6 && fp1->x2098 == 0) {
-            fp->x2094 = NULL;
-        }
-    }
-}
-
-static inline void comboCount_Push(Fighter* fp)
-{
-    Vec3* pos = &fp->coll_data.floor.normal;
-    float temp_f2;
-    float var_f2;
-    if ((int) fp->x2090 < p_ftCommonData->x4C8) {
-        var_f2 = p_ftCommonData->x4D0;
-    } else {
-        var_f2 = p_ftCommonData->x4D4;
-    }
-    temp_f2 = fp->facing_dir * var_f2;
-    fp->cur_pos.x = -(pos->y * temp_f2 - fp->cur_pos.x);
-    fp->cur_pos.y = -(-pos->x * temp_f2 - fp->cur_pos.y);
-}
-
-/// Combo count something + adjust FtPart_TopN
-void ftColl_80076528(Fighter_GObj* gobj)
-{
-    Fighter* fp = GET_FIGHTER(gobj);
-    u16 fp_x2092 = fp->x2092;
-    if (fp_x2092 != 0) {
-        fp->x2092 = (u16) (fp_x2092 - 1);
-        if (fp->victim_gobj == NULL && fp->ground_or_air == GA_Ground) {
-            comboCount_Push(fp);
-        }
-    }
-}
-
-/// Clear victim pointer from attacker upon freeing memory?
-void ftColl_800765AC(Fighter_GObj* victim)
-{
-    Fighter_GObj* cur = HSD_GObjPLinkHead[HSD_GOBJ_PLINK_FIGHTER];
-    while (cur != NULL) {
-        Fighter* fp = GET_FIGHTER(cur);
-        if (victim == fp->x2094) {
-            fp->x2094 = NULL;
-        }
-        cur = cur->next;
-    }
-}
-
 /// Reset hitbox and phantom collision count?
 void ftColl_800765E0(void)
 {
@@ -213,7 +113,6 @@ static int getEnvDmg(float dmg)
 bool ftColl_80076640(Fighter* fp, float* dmg)
 {
     int env_dmg = getEnvDmg(*dmg);
-    PAD_STACK(4);
     if (fp->x221C_b4) {
         fp->dmg.x1834 -= *dmg;
         if (fp->dmg.x1834 < 0) {
@@ -657,6 +556,11 @@ static int hit_effect_ids[] = {
     /* [HitElement_Lipstick] */ -1,
     /* [HitElement_Leadead]  */ 0,
 };
+
+static inline int getHitEffectId(int element)
+{
+    return hit_effect_ids[element];
+}
 
 void ftColl_80077464(Item* item, HitCapsule* hit, Fighter* fp)
 {
@@ -1348,50 +1252,34 @@ void ftColl_800788D4(Fighter_GObj* gobj)
     ftColl_8007861C(0, gobj, 0, -10, 0, 0, 0, 0, 0);
 }
 
-#ifdef MUST_MATCH
-#pragma push
-#pragma dont_inline on
-#endif
 void ftColl_8007891C(Fighter_GObj* arg0, Fighter_GObj* arg1, float arg2)
 {
     Fighter* fp0;
     Fighter* fp1;
-    PAD_STACK(8);
 
     plStale_UpdateStaleMovesFromFighter(arg0, arg1);
     ftColl_80076444(arg0, arg1);
-    fp0 = arg0->user_data;
-    fp1 = arg1->user_data;
+    fp0 = GET_FIGHTER(arg0);
+    fp1 = GET_FIGHTER(arg1);
     pl_8003EB30(arg2, fp0->player_idx, fp0->is_sub_fighter, fp1->player_idx,
                 fp1->is_sub_fighter, fp0->x2070.x2073);
 }
-#ifdef MUST_MATCH
-#pragma pop
-#endif
 
-#ifdef MUST_MATCH
-#pragma push
-#pragma dont_inline on
-#endif
 void ftColl_80078998(HSD_GObj* arg0, HSD_GObj* arg1, float arg2)
 {
     Item* ip;
-    PAD_STACK(16);
 
     plStale_UpdateStaleMovesFromItem(arg0, arg1);
     ftColl_8007646C(arg0, arg1);
     ip = arg0->user_data;
     if (ftLib_80086960(ip->owner)) {
-        Fighter* owner_fp = ip->owner->user_data;
-        Fighter* victim_fp = arg1->user_data;
+        Fighter* owner_fp = GET_FIGHTER(ip->owner);
+        Fighter* victim_fp = GET_FIGHTER(arg1);
         pl_8003EB30(arg2, owner_fp->player_idx, owner_fp->is_sub_fighter,
                     victim_fp->player_idx, victim_fp->is_sub_fighter,
                     ip->xD90.x2073);
     }
 }
-#ifdef MUST_MATCH
-#pragma pop
-#endif
 
 static inline HitCapsule* HitCapsuleGetPtr(Fighter* fp, u32 i)
 {
@@ -3197,136 +3085,19 @@ void ftColl_8007BC90(Fighter_GObj* gobj)
     }
 }
 
-#ifdef MUST_MATCH
-#pragma push
-#pragma dont_inline on
-#endif
 void ftColl_8007BE3C(Fighter_GObj* gobj)
 {
-    Fighter* fp;
-    int* data_ptr;
-    Item* ip;
-    Fighter_GObj* fighter_victim;
-    Fighter_GObj* item_victim;
-    Fighter* src_fp;
-    Fighter* victim_fp;
-    Fighter* owner_fp;
-    int dmg_count;
-    HSD_GObj* source;
-    bool should_process;
-    PAD_STACK(46);
-
-    fp = gobj->user_data;
-    data_ptr = ftColl_803C0C40;
-
-    /* inline getEnvDmg */
-    {
-        float dmg = fp->dmg.x1898;
-        if (dmg) {
-            if ((int) dmg) {
-                dmg_count = dmg;
-            } else {
-                dmg_count = 1;
-            }
-        } else {
-            dmg_count = 0;
-        }
-    }
-
-    if (fp->x221C_b4) {
-        fp->dmg.x1834 = fp->dmg.x1834 - fp->dmg.x1898;
-        if (fp->dmg.x1834 < 0.0f) {
-            fp->dmg.x1898 = -fp->dmg.x1834;
-            fp->x221C_b4 = 0;
-        }
-    }
-
-    if (!fp->x221C_b4) {
-        if (fp->dmg.x1898 > 500.0f) {
-            HSD_ASSERTREPORT(0xB7, 0, "attack power over 500!! %f\n",
-                             fp->dmg.x1898);
-        }
-        fp->dmg.x1838_percentTemp += fp->dmg.x1898;
-        if (dmg_count > fp->dmg.x183C_applied) {
-            fp->dmg.x183C_applied = dmg_count;
-        }
-        should_process = true;
-    } else {
-        should_process = false;
-    }
-
-    if (!should_process) {
-        return;
-    }
-
-    {
-        switch ((source = (HSD_GObj*) fp->dmg.x1894)->classifier) {
+    Fighter* fp = GET_FIGHTER(gobj);
+    if (ftColl_80076640(fp, &fp->dmg.x1898)) {
+        switch (HSD_GObjGetClassifier(fp->dmg.x1894)) {
         case HSD_GOBJ_CLASS_FIGHTER:
-            fighter_victim = fp->gobj;
-            {
-                float dmg_amount = fp->dmg.x1898;
-                HSD_GObj* s2 = source;
-                plStale_UpdateStaleMovesFromFighter(s2, fighter_victim);
-                ftColl_80076444(s2, fighter_victim);
-                src_fp = s2->user_data;
-                victim_fp = fighter_victim->user_data;
-                pl_8003EB30(dmg_amount, src_fp->player_idx,
-                            src_fp->is_sub_fighter, victim_fp->player_idx,
-                            victim_fp->is_sub_fighter, src_fp->x2070.x2073);
-            }
+            ftColl_8007891C(fp->dmg.x1894, fp->gobj, fp->dmg.x1898);
             break;
         case HSD_GOBJ_CLASS_ITEM:
-            item_victim = fp->gobj;
-            {
-                float dmg_amount = fp->dmg.x1898;
-                HSD_GObj* s2 = source;
-                plStale_UpdateStaleMovesFromItem(s2, item_victim);
-                ftColl_8007646C(s2, item_victim);
-                ip = s2->user_data;
-                {
-                    HSD_GObj* tail_owner_gobj = ip->owner;
-                    if (ftLib_80086960(tail_owner_gobj)) {
-                        owner_fp = ip->owner->user_data;
-                        victim_fp = item_victim->user_data;
-                        pl_8003EB30(dmg_amount, owner_fp->player_idx,
-                                    owner_fp->is_sub_fighter,
-                                    victim_fp->player_idx,
-                                    victim_fp->is_sub_fighter, ip->xD90.x2073);
-                    }
-                }
-            }
-            break;
-        default:
+            ftColl_80078998(fp->dmg.x1894, fp->gobj, fp->dmg.x1898);
             break;
         }
-    }
-
-    {
-        float x187c = fp->dmg.x187c;
-        u32 dmg_unsigned = fp->dmg.x1898;
-        u32 x1890 = fp->dmg.x1890;
-        int effect_idx = hit_effect_ids[fp->dmg.x188c];
-        Fighter* vfp = gobj->user_data;
-        switch (effect_idx) {
-        case Ef_Id_Unk1000:
-            ftColl_80078538(gobj, &fp->dmg.x1880, x1890, dmg_unsigned, x187c);
-            break;
-        case Ef_Id_Unk1001:
-        case Ef_Id_Unk1002:
-        case Ef_Id_Unk1004:
-        case Ef_Id_Unk1046:
-        case Ef_Id_Unk1145:
-        case Ef_Id_Unk1255:
-            efSync_Spawn(effect_idx, 0, &fp->dmg.x1880);
-            break;
-        case Ef_Id_Unk1005:
-            efSync_Spawn(effect_idx, 0, &fp->dmg.x1880, &vfp->facing_dir);
-            break;
-        default:
-            break;
-        }
+        spawnHitEffect(gobj, getHitEffectId(fp->dmg.x188c), &fp->dmg.x1880,
+                       fp->dmg.x1890, fp->dmg.x1898, fp->dmg.x187c);
     }
 }
-#ifdef MUST_MATCH
-#pragma pop
-#endif

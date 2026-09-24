@@ -1497,7 +1497,7 @@ struct Fighter {
         /* fp+1880 */ Vec3 x1880;
         /* fp+188C */ int x188c;
         /* fp+1890 */ int x1890;
-        /* fp+1894 */ int x1894;
+        /* fp+1894 */ HSD_GObj* x1894;
         /* fp+1898 */ float x1898;
         /* fp+189C */ float x189C_unk_num_frames;
         /* fp+18A0 */ float x18a0;

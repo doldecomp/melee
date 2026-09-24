@@ -341,8 +341,11 @@ melee/ft/ftcamera.c:
 	.data       start:0x803C0C08 end:0x803C0C40
 	.sdata2     start:0x804D82D0 end:0x804D82E0
 
+melee/ft/ft_0763.c:
+	.text       start:0x800763C0 end:0x800765E0
+
 melee/ft/ftcoll.c:
-	.text       start:0x800763C0 end:0x8007C114
+	.text       start:0x800765E0 end:0x8007C114
 	.data       start:0x803C0C40 end:0x803C0D58
 	.bss        start:0x80459278 end:0x804598B8
 	.sdata      start:0x804D3A68 end:0x804D3A70
