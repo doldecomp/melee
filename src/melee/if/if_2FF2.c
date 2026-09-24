@@ -70,6 +70,8 @@ ASSERT_SIZE(un_803F9E60, 0x38);
 /* 3F9ED4 */ static HSD_LightDesc light1 = {
     NULL, &light0, (1 << 0), 0, { 0xFF, 0xFF, 0xFF, 0xFF }, NULL, NULL, NULL,
 };
+/* 3F9EF0 */ char lbl_803F9EF0[0x20] = "Remove Target %x (n %x) Id %d\n";
+/* 3F9F10 */ char lbl_803F9F10[0x18] = "Remove All Over\n";
 
 /// .bss
 struct un_804A1F58_x8_t {
