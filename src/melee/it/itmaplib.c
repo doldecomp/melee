@@ -407,75 +407,38 @@ void it_80276408(Item_GObj* item_gobj, CollData* coll, Vec3* vec)
 
 f32 it_8027649C(Item_GObj* item_gobj)
 {
-    u8 _pad[4];
-    Vec3 sp20;
-    Vec3 sp14;
+    Vec3 normal;
+    Vec3 up;
     f32 angle;
-    s32 int_dir;
-    Item* item = GET_ITEM(item_gobj);
-    f32 ret; // permuterslop
-    CollData* coll = &item->x378_itemColl;
+    Item* ip = GET_ITEM(item_gobj);
+    CollData* coll = &ip->x378_itemColl;
     PAD_STACK(4);
 
-    sp14.z = 0.0f;
-    sp14.x = 0.0f;
-    sp14.y = 1.0f;
-    it_80276408(item_gobj, coll, &sp20);
-    angle = lbVector_Angle(&sp20, &sp14);
-    if (sp20.x < 0.0f) {
-        int_dir = -1;
-    } else {
-        int_dir = 1;
-    }
-
-    return ret = item->facing_dir * (angle * int_dir);
-}
-
-static inline f32 it_8027649C_ref(Item_GObj* item_gobj, Vec3* sp14, Vec3* sp20)
-{
-    f32 angle;
-    s32 int_dir;
-    Item* item = GET_ITEM(item_gobj);
-    f32 ret; // permuterslop
-    CollData* coll = &item->x378_itemColl;
-    PAD_STACK(4);
-
-    sp14->z = 0.0f;
-    sp14->x = 0.0f;
-    sp14->y = 1.0f;
-    it_80276408(item_gobj, coll, sp20);
-    angle = lbVector_Angle(sp20, sp14);
-    if (sp20->x < 0.0f) {
-        int_dir = -1;
-    } else {
-        int_dir = 1;
-    }
-
-    return ret = item->facing_dir * (angle * int_dir);
+    up.z = 0.0f;
+    up.x = 0.0f;
+    up.y = 1.0f;
+    it_80276408(item_gobj, coll, &normal);
+    angle = lbVector_Angle(&normal, &up);
+    angle = ip->facing_dir * (angle * (normal.x < 0.0f ? -1 : 1));
+    return angle;
 }
 
 void it_802765BC(Item_GObj* item_gobj, enum_t arg1)
 {
-    u8 pad[12];
-    HSD_JObj* jobj;
-    Item* ip;
-    f32 angle;
-    u32 bit_chk;
-    Vec3 v00, v01, v10, v11, v20, v21;
-    PAD_STACK(28);
+    Item* ip = GET_ITEM(item_gobj);
+    HSD_JObj* jobj = it_80272CC0(item_gobj, arg1);
+    u32 bit_chk = ip->xDC8_word.flags.x17;
 
-    ip = item_gobj->user_data;
-    jobj = it_80272CC0(item_gobj, arg1);
-    bit_chk = ip->xDC8_word.flags.x17;
     if (bit_chk == 0) {
-        angle = it_8027649C_ref(item_gobj, &v00, &v01);
-        angle = -ip->facing_dir * angle;
-        HSD_JObjSetRotationZ(jobj, angle);
+        f32 angle = it_8027649C(item_gobj);
+        f32 facing = ip->facing_dir;
+        f32 rot = -facing * angle;
+        HSD_JObjSetRotationZ(jobj, rot);
     } else if (bit_chk == 1) {
-        angle = it_8027649C_ref(item_gobj, &v10, &v11);
+        f32 angle = it_8027649C(item_gobj);
         HSD_JObjSetRotationX(jobj, angle);
     } else {
-        angle = it_8027649C_ref(item_gobj, &v20, &v21);
+        f32 angle = it_8027649C(item_gobj);
         HSD_JObjSetRotationY(jobj, angle);
     }
 }
@@ -558,11 +521,6 @@ void it_80276934(Item_GObj* item_gobj, enum_t arg1)
     }
 }
 
-#ifdef MUST_MATCH
-#pragma push
-#pragma dont_inline on
-#endif
-
 void it_80276CB8(Item_GObj* item_gobj)
 {
     Item* item = item_gobj->user_data;
@@ -571,10 +529,6 @@ void it_80276CB8(Item_GObj* item_gobj)
         it_802765BC(item_gobj, 0);
     }
 }
-
-#ifdef MUST_MATCH
-#pragma pop
-#endif
 
 void it_80276CEC(Item_GObj* item_gobj)
 {
