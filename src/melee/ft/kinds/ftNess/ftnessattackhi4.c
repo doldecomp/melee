@@ -19,6 +19,7 @@
 #include <melee/ft/ftcommon.h>
 #include <melee/ft/kinds/ftCommon/ftCo_Wait.h>
 #include <melee/ft/types.h>
+#include <melee/it/inlines.h>
 #include <melee/it/itYoyo.h>
 #include <melee/it/kinds/itnessyoyo.h>
 #include <melee/it/types.h>
@@ -56,28 +57,29 @@ void ftNs_AttackHi4_YoyoCheckTimedRehit(HSD_GObj* gobj)
     }
 };
 
-#ifdef MUST_MATCH
-#pragma push
-#pragma dont_inline on
-#endif
-/// Apply modified damage to D-Smash Yo-Yo hitbox after charge
-static void ftNs_AttackHi4_YoyoApplyDamage(float unk_float, HSD_GObj* gobj)
+static inline float getSmashChargeFrames(Fighter* fp)
 {
-    Fighter* fp = gobj->user_data;
+    return fp->smash_attrs.x2118_frames;
+}
+
+/// Apply modified damage to D-Smash Yo-Yo hitbox after charge
+static void ftNs_AttackHi4_YoyoApplyDamage(float charge_frames, HSD_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
     ftNessAttributes* ness_attr = fp->dat_attrs;
     float charge_duration;
     float charge_duration2;
     float damage_mul;
     float final_damage;
 
-    if (unk_float != 0.0f) {
+    if (charge_frames != 0.0f) {
         if (fp->x914->state == HitCapsule_Enabled) {
             // Likely 1/256 but won't match.
             // ((float) 1 / 256.0) does not match either.
             float const mul = 0.0039059999398887157f;
 
             charge_duration = ness_attr->xAC_YOYO_CHARGE_DURATION;
-            charge_duration2 = unk_float / charge_duration;
+            charge_duration2 = charge_frames / charge_duration;
             damage_mul = ness_attr->xB0_YOYO_DAMAGE_MUL * mul - 1.0f;
 
             final_damage =
@@ -86,10 +88,7 @@ static void ftNs_AttackHi4_YoyoApplyDamage(float unk_float, HSD_GObj* gobj)
             ftColl_8007ABD0(&fp->x914[0], final_damage, gobj);
         }
     }
-};
-#ifdef MUST_MATCH
-#pragma pop
-#endif
+}
 
 static inline void push_ecb(CollData* a, Vec3* b)
 {
@@ -376,55 +375,23 @@ void ftNs_AttackHi4_YoyoApplySmash(HSD_GObj* gobj)
 
 static Vec3 const YoyoChargePos = { 0 };
 
-/// @remarks The extremely specific float here is also likely 1/256.
 void ftNs_AttackHi4_YoyoSetChargeDamage(HSD_GObj* gobj)
 {
-    Item* item_data;
-    Article* article;
-    Fighter* fp;
-    Fighter* fighter_data2;
-    Vec3 sp30;
-    float smashChargeFrames;
-    HSD_GObj* yoyo_GObj;
-    itYoyoAttributes* yoyo_attr;
-    ftNessAttributes* ness_attr;
+    Fighter* fp = GET_FIGHTER(gobj);
+    HSD_GObj* yoyo_gobj;
 
-    u8 _[16];
-
-    fp = GET_FIGHTER(gobj);
-
-    // Current animation frame, integer
     fp->mv.ns.attackhi4.yoyoCurrentFrame = 14;
-
-    yoyo_GObj = fp->u.ns.yoyo_gobj;
-
-    if (yoyo_GObj) {
-        item_data = yoyo_GObj->user_data;
-        article = item_data->xC4_article_data;
-        yoyo_attr = article->x4_specialAttributes;
-        sp30 = YoyoChargePos;
-        it_802C0010(yoyo_GObj, &sp30);
+    yoyo_gobj = fp->u.ns.yoyo_gobj;
+    if (yoyo_gobj != NULL) {
+        Item* ip = GetItemData(yoyo_gobj);
+        Article* article = ip->xC4_article_data;
+        itYoyoAttributes* yoyo_attr = article->x4_specialAttributes;
+        Vec3 pos = YoyoChargePos;
+        it_802C0010(yoyo_gobj, &pos);
         fp->u.ns.x223C = yoyo_attr->x18_SPIN_TEXANIM_SPEED;
     }
-
-    ft_80088510(fp, 210090, 127, 64);
-    smashChargeFrames = fp->smash_attrs.x2118_frames;
-    fighter_data2 = GET_FIGHTER(gobj);
-    ness_attr = getFtSpecialAttrs(fighter_data2);
-
-    if ((0.0f != smashChargeFrames) &&
-        ((s32) fighter_data2->x914->state == HitCapsule_Enabled))
-    {
-        ftColl_8007ABD0(fighter_data2->x914,
-                        (u32) (fighter_data2->x914->damage *
-                               ((((0.0039059999398887157f *
-                                   ness_attr->xB0_YOYO_DAMAGE_MUL) -
-                                  1.0f) *
-                                 (smashChargeFrames /
-                                  ness_attr->xAC_YOYO_CHARGE_DURATION)) +
-                                1.0f)),
-                        gobj);
-    }
+    ft_80088510(fp, 210090, SFX_VOLUME_MAX, SFX_PAN_MID);
+    ftNs_AttackHi4_YoyoApplyDamage(getSmashChargeFrames(fp), gobj);
 }
 
 static Vec3 const YoyoThinkPos = { 0 };
@@ -970,47 +937,15 @@ void ftNs_AttackHi4Release_Coll(
     }
 }
 
-static itYoyoAttributes* GetYoyoAttr(HSD_GObj* gobj)
-{
-    Item* item_data = gobj->user_data;
-    itYoyoAttributes* yoyo_attr =
-        item_data->xC4_article_data->x4_specialAttributes;
-    return yoyo_attr;
-}
-
 void ftNs_AttackHi4Release_Enter(HSD_GObj* gobj)
 {
-    Vec3 sp34;
-    Fighter* fighter_data2;
-    Fighter* fp;
-    itYoyoAttributes* yoyo_attr;
-    HSD_GObj* yoyo_GObj;
+    Fighter* fp = GET_FIGHTER(gobj);
 
-    u8 _[16];
-
-    fp = GET_FIGHTER(gobj);
     Fighter_ChangeMotionState(gobj, ftNs_MS_AttackHi4Release,
                               Ft_MF_SkipItemVis, 13.0f, 1.0f, 0.0f, NULL);
     ftAnim_8006EBA4(gobj);
-
-    fighter_data2 = getFighter(gobj);
-    fighter_data2 = getFighter(gobj);
-    fighter_data2->mv.ns.attackhi4.yoyoCurrentFrame = 14;
-
-    if ((yoyo_GObj = fighter_data2->u.ns.yoyo_gobj) != NULL) {
-        yoyo_attr = GetYoyoAttr(yoyo_GObj);
-        sp34 = YoyoChargePos;
-        it_802C0010(yoyo_GObj, &sp34);
-        fighter_data2->u.ns.x223C = yoyo_attr->x18_SPIN_TEXANIM_SPEED;
-    }
-
-    ft_80088510(fighter_data2, 210090, SFX_VOLUME_MAX, SFX_PAN_MID);
-
-    ftNs_AttackHi4_YoyoApplyDamage(fighter_data2->smash_attrs.x2118_frames,
-                                   gobj);
-
+    ftNs_AttackHi4_YoyoSetChargeDamage(gobj);
     fp->x2222_b2 = 1;
-
     fp->deal_dmg_cb = ftNs_AttackHi4_YoyoStartTimedRehit;
     fp->accessory4_cb = ftNs_AttackHi4_YoyoUpdateHitPos;
 }
