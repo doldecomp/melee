@@ -247,29 +247,16 @@ bool un_8032201C(u32 arg0, s32 cat)
 {
     CrowdSFX_UnkStruct* data = crowdsfx_ptr;
     HSD_GObj* gobj;
-    PAD_STACK(16);
 
     switch (cat) {
     case 3:
-        if (lbAudioAx_80023710(data->x28) != 0) {
-            lbAudioAx_800236B8(data->x28);
-        }
-        data->x28 = -1;
-        data->x28 = lbAudioAx_8002411C(0x13d);
+        un_80321CA4(0x13d);
         break;
     case 2:
-        if (lbAudioAx_80023710(data->x28) != 0) {
-            lbAudioAx_800236B8(data->x28);
-        }
-        data->x28 = -1;
-        data->x28 = lbAudioAx_8002411C(0x13e);
+        un_80321CA4(0x13e);
         break;
     case 1:
-        if (lbAudioAx_80023710(data->x28) != 0) {
-            lbAudioAx_800236B8(data->x28);
-        }
-        data->x28 = -1;
-        data->x28 = lbAudioAx_8002411C(0x13f);
+        un_80321CA4(0x13f);
         break;
     case 0:
         return false;
@@ -288,199 +275,19 @@ bool un_8032201C(u32 arg0, s32 cat)
 
 void un_80322178(int arg)
 {
-    CrowdSFX_UnkStruct* data;
     PAD_STACK(8);
 
     switch (arg) {
     case 0:
         break;
     case 3:
-        data = crowdsfx_ptr;
-        if (lbAudioAx_80023710(data->x28) != 0) {
-            lbAudioAx_800236B8(data->x28);
-        }
-        data->x28 = -1;
-        data->x28 = lbAudioAx_8002411C(0x13d);
+        un_80321CA4(0x13d);
         break;
     case 2:
-        data = crowdsfx_ptr;
-        if (lbAudioAx_80023710(data->x28) != 0) {
-            lbAudioAx_800236B8(data->x28);
-        }
-        data->x28 = -1;
-        data->x28 = lbAudioAx_8002411C(0x13e);
+        un_80321CA4(0x13e);
         break;
     case 1:
-        data = crowdsfx_ptr;
-        if (lbAudioAx_80023710(data->x28) != 0) {
-            lbAudioAx_800236B8(data->x28);
-        }
-        data->x28 = -1;
-        data->x28 = lbAudioAx_8002411C(0x13f);
+        un_80321CA4(0x13f);
         break;
     }
-}
-
-bool un_80322258(float arg)
-{
-    f32 val2c = gCrowdConfig->horiz_margin;
-
-    if (arg < val2c + mpLib_80458868[1].left ||
-        arg > mpLib_80458868[1].right - val2c)
-    {
-        return 1;
-    }
-    return 0;
-}
-
-s32 un_80322298(float arg)
-{
-    CrowdConfig* vdata = gCrowdConfig;
-    if (arg >= vdata->kb_threshold_high) {
-        return 3;
-    }
-    if (arg >= vdata->kb_threshold_mid) {
-        return 2;
-    }
-    if (arg >= vdata->kb_threshold_low) {
-        return 1;
-    }
-    return 0;
-}
-
-f32 un_803222EC(f32 arg1, f32 arg2)
-{
-    CrowdConfig* vdata = gCrowdConfig;
-    if (!(arg2 > vdata->angle_min)) {
-        return arg1;
-    }
-    if (!(arg2 < vdata->angle_max)) {
-        return arg1;
-    }
-    return arg1 * vdata->angle_mult;
-}
-
-void un_80322314(void)
-{
-    CrowdSFX_UnkStruct* data = crowdsfx_ptr;
-    CrowdConfig* vdata = gCrowdConfig;
-    if (data->x18 >= vdata->max_gasp_count) {
-        return;
-    }
-    data->x1C = 1;
-    data->x20 = 1;
-}
-
-#ifdef MUST_MATCH
-#pragma push
-#pragma dont_inline on
-#endif
-void un_8032233C(u32 arg0, u32 arg1)
-{
-    s32 cat;
-    CrowdSFX_UnkStruct* data = crowdsfx_ptr;
-    HSD_GObj* gobj;
-    f32 kb_mag;
-    PAD_STACK(8);
-
-    gobj = ftLib_8008741C(arg0);
-    kb_mag = ftLib_80087454(ftLib_8008741C(arg1));
-
-    if (kb_mag >= gCrowdConfig->kb_threshold_high) {
-        cat = 3;
-    } else if (kb_mag >= gCrowdConfig->kb_threshold_mid) {
-        cat = 2;
-    } else if (kb_mag >= gCrowdConfig->kb_threshold_low) {
-        cat = 1;
-    } else {
-        cat = 0;
-    }
-
-    if (cat == 0) {
-        return;
-    }
-
-    if (gobj != NULL && ftLib_80087454(gobj) >= 3.0f) {
-        un_80321D30(arg0, kb_mag);
-    } else if (data->x0 == arg0 && (f32) data->x4 < gCrowdConfig->x18) {
-        un_80321D30(arg0, kb_mag > data->x8 ? kb_mag : data->x8);
-    } else {
-        switch (cat) {
-        case 3:
-            un_80321CA4(0x144);
-            break;
-        case 2:
-            un_80321CA4(0x145);
-            break;
-        case 1:
-            un_80321CA4(0x146);
-            break;
-        }
-
-        if (cat == 3 || (cat == 2 && data->xC == arg1)) {
-            un_80321C70();
-        }
-    }
-    data->x4 = 0;
-    data->x0 = arg0;
-    data->x8 = kb_mag;
-}
-#ifdef MUST_MATCH
-#pragma pop
-#endif
-
-bool un_803224DC(s32 spawn_id, f32 pos_x, f32 kb_mag)
-{
-    CrowdConfig* vdata = gCrowdConfig;
-    s32 cat;
-    s32 out_of_bounds;
-    s32 tmp_cat;
-
-    if (kb_mag >= vdata->kb_threshold_high) {
-        tmp_cat = 3;
-    } else if (kb_mag >= vdata->kb_threshold_mid) {
-        tmp_cat = 2;
-    } else if (kb_mag >= vdata->kb_threshold_low) {
-        tmp_cat = 1;
-    } else {
-        tmp_cat = 0;
-    }
-
-    {
-        f32 val2c = vdata->horiz_margin;
-        f32 val18 = mpLib_80458868[1].left;
-        f32 val1c;
-
-        cat = tmp_cat;
-
-        if (pos_x < val2c + val18 || pos_x > mpLib_80458868[1].right - val2c) {
-            out_of_bounds = 1;
-        } else {
-            out_of_bounds = 0;
-        }
-    }
-    if (out_of_bounds != 0) {
-        un_8032201C(spawn_id, cat);
-    } else {
-        return 0;
-    }
-}
-
-int un_80322598(int arg0, float arg1)
-{
-    f32 val14 = mpLib_80458868[1].bottom;
-    s32 cat;
-    CrowdConfig* vdata;
-    if (arg1 >= val14 || arg1 < gCrowdConfig->recovery_y_low + val14) {
-        return 0;
-    }
-    vdata = gCrowdConfig;
-    if (arg1 > vdata->recovery_y_high + val14) {
-        cat = 3;
-    } else if (arg1 > vdata->recovery_y_mid + val14) {
-        cat = 2;
-    } else {
-        cat = 1;
-    }
-    un_8032201C(arg0, cat);
 }

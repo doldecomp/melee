@@ -1622,6 +1622,7 @@ config.libs = [
         [
             Object(Matching, "melee/sfx/sfx_unk.c"),
             Object(Matching, "melee/sfx/crowdsfx.c"),
+            Object(Matching, "melee/sfx/crowdsfx_1.c"),
         ],
     ),
     RuntimeLib(

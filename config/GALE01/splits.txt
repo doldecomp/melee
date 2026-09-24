@@ -4854,9 +4854,12 @@ melee/sfx/sfx_unk.c:
 	.sdata2     start:0x804DE148 end:0x804DE14C
 
 melee/sfx/crowdsfx.c:
-	.text       start:0x803219AC end:0x80322620
+	.text       start:0x803219AC end:0x80322258
 	.bss        start:0x804A2F08 end:0x804A2F38
 	.sbss       start:0x804D7050 end:0x804D7054
+
+melee/sfx/crowdsfx_1.c:
+	.text       start:0x80322258 end:0x80322620
 	.sdata2     start:0x804DE150 end:0x804DE160
 
 Runtime/__va_arg.c:
