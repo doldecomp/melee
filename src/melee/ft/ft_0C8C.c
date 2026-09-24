@@ -1,13 +1,13 @@
-#include "ft_0C8C.h"
+#include <melee/ft/ft_0C8C.h>
 
-#include "fighter.h"
-#include "forward.h"
-#include "ft_0877.h"
-#include "ft_0D4D.h"
-#include "ftCo_800C7CA0.h"
-#include "ftcolanim.h"
-#include "ftcommon.h"
-#include "inlines.h"
+#include <melee/ft/fighter.h>
+#include <melee/ft/forward.h>
+#include <melee/ft/ft_0877.h>
+#include <melee/ft/ft_0D4D.h>
+#include <melee/ft/ftCo_800C7CA0.h>
+#include <melee/ft/ftcolanim.h>
+#include <melee/ft/ftcommon.h>
+#include <melee/ft/inlines.h>
 #include "kinds/ftCommon/ftCo_Attack100.h"
 #include "kinds/ftCommon/ftCo_CaptureCut.h"
 #include "kinds/ftCommon/ftCo_DamageFall.h"
@@ -15,7 +15,7 @@
 #include "kinds/ftCommon/ftCo_Lift.h"
 #include "kinds/ftCrazyHand/ftcrazyhandtaggrab.h"
 #include "kinds/ftMasterHand/ftmasterhanddamage0.h"
-#include "types.h"
+#include <melee/ft/types.h>
 #include <melee/gm/gm_unsplit.h>
 #include <melee/lb/lb_0219.h>
 #include <melee/pl/player.h>

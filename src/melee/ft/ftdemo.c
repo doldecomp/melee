@@ -1,4 +1,4 @@
-#include "ftdemo.h"
+#include <melee/ft/ftdemo.h>
 
 #include <Runtime/platform.h>
 
@@ -6,27 +6,27 @@
 
 #include <math.h>
 
-#include "fighter.h"
-#include "ft_0BEC.h"
-#include "ft_0BEF.h"
-#include "ft_0BF0.h"
-#include "ft_0C88.h"
-#include "ftanim.h"
-#include "ftCo_800C7070.h"
-#include "ftCo_800C70D0.h"
-#include "ftCo_800C7178.h"
-#include "ftCo_800C7220.h"
-#include "ftCo_800C739C.h"
-#include "ftCo_800C7434.h"
-#include "ftcoll.h"
-#include "ftdata.h"
-#include "ftdrawcommon.h"
-#include "ftdynamics.h"
-#include "ftlib.h"
-#include "ftparts.h"
+#include <melee/ft/fighter.h>
+#include <melee/ft/ft_0BEC.h>
+#include <melee/ft/ft_0BEF.h>
+#include <melee/ft/ft_0BF0.h>
+#include <melee/ft/ft_0C88.h>
+#include <melee/ft/ftanim.h>
+#include <melee/ft/ftCo_800C7070.h>
+#include <melee/ft/ftCo_800C70D0.h>
+#include <melee/ft/ftCo_800C7178.h>
+#include <melee/ft/ftCo_800C7220.h>
+#include <melee/ft/ftCo_800C739C.h>
+#include <melee/ft/ftCo_800C7434.h>
+#include <melee/ft/ftcoll.h>
+#include <melee/ft/ftdata.h>
+#include <melee/ft/ftdrawcommon.h>
+#include <melee/ft/ftdynamics.h>
+#include <melee/ft/ftlib.h>
+#include <melee/ft/ftparts.h>
 #include "kinds/ftCommon/ftCo_09F4.h"
 #include "kinds/ftCommon/ftCo_DemoCallback0.h"
-#include "types.h"
+#include <melee/ft/types.h>
 #include <melee/cm/camera.h>
 #include <melee/ef/efasync.h>
 #include <melee/lb/lbshadow.h>

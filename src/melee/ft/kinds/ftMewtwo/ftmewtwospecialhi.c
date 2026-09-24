@@ -1,4 +1,4 @@
-#include "ftmewtwospecialhi.h"
+#include <melee/ft/kinds/ftMewtwo/ftmewtwospecialhi.h>
 
 #include <Runtime/platform.h>
 
@@ -6,8 +6,8 @@
 
 #include <math.h>
 
-#include "forward.h"
-#include "types.h"
+#include <melee/ft/kinds/ftMewtwo/forward.h>
+#include <melee/ft/kinds/ftMewtwo/types.h>
 #include <dolphin/mtx.h>
 #include <melee/ef/efsync.h>
 #include <melee/ft/fighter.h>

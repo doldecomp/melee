@@ -1,17 +1,17 @@
-#include "gmvsmelee.h"
+#include <melee/gm/gmvsmelee.h>
 
 #include <Runtime/platform.h>
 
 #include <melee/pl/forward.h>
 
-#include "forward.h"
-#include "gm_1A3F.h"
-#include "gm_unsplit.h"
-#include "gmmain_lib.h"
-#include "gmresult.h"
-#include "gmresultplayer.h"
-#include "gmvsmode.h"
-#include "types.h"
+#include <melee/gm/forward.h>
+#include <melee/gm/gm_1A3F.h>
+#include <melee/gm/gm_unsplit.h>
+#include <melee/gm/gmmain_lib.h>
+#include <melee/gm/gmresult.h>
+#include <melee/gm/gmresultplayer.h>
+#include <melee/gm/gmvsmode.h>
+#include <melee/gm/types.h>
 #include <melee/lb/inlines.h>
 #include <melee/lb/lb_00B0.h>
 #include <melee/lb/lbaudio_ax.h>

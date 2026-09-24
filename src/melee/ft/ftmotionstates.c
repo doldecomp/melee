@@ -1,19 +1,19 @@
 
-#include "ft_0BEC.h"
-#include "ft_0C31.h"
-#include "ft_0CD1.h"
-#include "ft_0CDD.h"
-#include "ft_0D31.h"
-#include "ft_0D4D.h"
-#include "ftcamera.h"
-#include "ftcliffcommon.h"
-#include "ftCo_800C7590.h"
-#include "ftCo_800C78B0.h"
-#include "ftCo_800C7CA0.h"
-#include "ftcolanim.h"
-#include "ftlipstickswing.h"
-#include "ftstarrodswing.h"
-#include "ftswing.h"
+#include <melee/ft/ft_0BEC.h>
+#include <melee/ft/ft_0C31.h>
+#include <melee/ft/ft_0CD1.h>
+#include <melee/ft/ft_0CDD.h>
+#include <melee/ft/ft_0D31.h>
+#include <melee/ft/ft_0D4D.h>
+#include <melee/ft/ftcamera.h>
+#include <melee/ft/ftcliffcommon.h>
+#include <melee/ft/ftCo_800C7590.h>
+#include <melee/ft/ftCo_800C78B0.h>
+#include <melee/ft/ftCo_800C7CA0.h>
+#include <melee/ft/ftcolanim.h>
+#include <melee/ft/ftlipstickswing.h>
+#include <melee/ft/ftstarrodswing.h>
+#include <melee/ft/ftswing.h>
 #include "kinds/ftCommon/forward.h"
 #include "kinds/ftCommon/ftCo_AppealS.h"
 #include "kinds/ftCommon/ftCo_Attack1.h"
@@ -128,7 +128,7 @@
 #include "kinds/ftMasterHand/ftmasterhandcapturedamagemasterhand.h"
 #include "kinds/ftMasterHand/ftmasterhandcapturemasterhand.h"
 #include "kinds/ftMasterHand/ftmasterhandthrownmasterhand.h"
-#include "types.h"
+#include <melee/ft/types.h>
 
 MotionState ftData_MotionStateList[ftCo_MS_Count] = {
     {

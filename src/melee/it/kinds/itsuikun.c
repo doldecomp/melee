@@ -1,6 +1,6 @@
-#include "itsuikun.h"
+#include <melee/it/kinds/itsuikun.h>
 
-#include "inlines.h"
+#include <melee/it/kinds/inlines.h>
 #include <melee/cm/camera.h>
 #include <melee/ef/eflib.h>
 #include <melee/ef/efsync.h>

@@ -1,6 +1,6 @@
-#include "itlinkbow.h"
+#include <melee/it/kinds/itlinkbow.h>
 
-#include "inlines.h"
+#include <melee/it/kinds/inlines.h>
 #include <melee/ft/ftlib.h>
 #include <melee/ft/kinds/ftKirby/ftkirby.h>
 #include <melee/ft/kinds/ftLink/ftlinkspecialn.h>

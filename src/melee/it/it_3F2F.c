@@ -1,7 +1,7 @@
-#include "it_3F2F.h"
+#include <melee/it/it_3F2F.h>
 
-#include "itdraw.h"
-#include "itzako.h"
+#include <melee/it/itdraw.h>
+#include <melee/it/itzako.h>
 #include "kinds/forward.h"
 #include "kinds/it_2ADA.h"
 #include "kinds/it_2E5A.h"

@@ -1,4 +1,4 @@
-#include "mpcoll.h"
+#include <melee/mp/mpcoll.h>
 
 #include <Runtime/platform.h>
 
@@ -8,8 +8,8 @@
 #include <placeholder.h>
 #include <stdbool.h>
 
-#include "forward.h"
-#include "mplib.h"
+#include <melee/mp/forward.h>
+#include <melee/mp/mplib.h>
 #include <melee/db/db.h>
 #include <melee/ft/ftlib.h>
 #include <melee/gr/grdynamicattr.h>

@@ -1,10 +1,10 @@
-#include "mnsound.h"
+#include <melee/mn/mnsound.h>
 
 #include <melee/it/forward.h>
 
-#include "inlines.h"
-#include "mnmain.h"
-#include "types.h"
+#include <melee/mn/inlines.h>
+#include <melee/mn/mnmain.h>
+#include <melee/mn/types.h>
 #include <melee/gm/gm_1601.h>
 #include <melee/gm/gmmain_lib.h>
 #include <melee/lb/lbarchive.h>

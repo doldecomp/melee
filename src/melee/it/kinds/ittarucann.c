@@ -1,11 +1,11 @@
-#include "ittarucann.h"
+#include <melee/it/kinds/ittarucann.h>
 
 #include <sysdolphin/baselib/forward.h>
 
 #include <math.h>
 
-#include "inlines.h"
-#include "types.h"
+#include <melee/it/kinds/inlines.h>
+#include <melee/it/kinds/types.h>
 #include <melee/cm/camera.h>
 #include <melee/ef/efsync.h>
 #include <melee/ft/ftlib.h>

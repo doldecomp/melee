@@ -1,13 +1,13 @@
-#include "ftmasterhandbackdisappear.h"
+#include <melee/ft/kinds/ftMasterHand/ftmasterhandbackdisappear.h>
 
 #include <Runtime/platform.h>
 
-#include "ftmasterhandtagcancel.h"
-#include "ftmasterhandthrownmasterhand.h"
-#include "ftmasterhandwait11.h"
-#include "ftmasterhandwait12.h"
-#include "inlines.h"
-#include "types.h"
+#include <melee/ft/kinds/ftMasterHand/ftmasterhandtagcancel.h>
+#include <melee/ft/kinds/ftMasterHand/ftmasterhandthrownmasterhand.h>
+#include <melee/ft/kinds/ftMasterHand/ftmasterhandwait11.h>
+#include <melee/ft/kinds/ftMasterHand/ftmasterhandwait12.h>
+#include <melee/ft/kinds/ftMasterHand/inlines.h>
+#include <melee/ft/kinds/ftMasterHand/types.h>
 #include <dolphin/mtx.h>
 #include <melee/ft/fighter.h>
 #include <melee/ft/ft_084E.h>

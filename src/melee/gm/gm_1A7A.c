@@ -1,8 +1,8 @@
-#include "gm_1A7A.h"
+#include <melee/gm/gm_1A7A.h>
 
-#include "gm_unsplit.h"
-#include "gmevent.h"
-#include "gmregtyfall.h"
+#include <melee/gm/gm_unsplit.h>
+#include <melee/gm/gmevent.h>
+#include <melee/gm/gmregtyfall.h>
 #include <melee/lb/lb_00B0.h>
 #include <melee/lb/lbspdisplay.h>
 #include <melee/mn/mnmain.h>

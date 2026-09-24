@@ -1,16 +1,16 @@
-#include "ft_0C31.h"
+#include <melee/ft/ft_0C31.h>
 
 #include <placeholder.h>
 
-#include "fighter.h"
-#include "forward.h"
-#include "ft_081B.h"
-#include "ftcolanim.h"
-#include "ftcoll.h"
-#include "ftcommon.h"
+#include <melee/ft/fighter.h>
+#include <melee/ft/forward.h>
+#include <melee/ft/ft_081B.h>
+#include <melee/ft/ftcolanim.h>
+#include <melee/ft/ftcoll.h>
+#include <melee/ft/ftcommon.h>
 #include "kinds/ftCommon/forward.h"
 #include "kinds/ftCommon/types.h"
-#include "types.h"
+#include <melee/ft/types.h>
 #include <dolphin/mtx.h>
 #include <melee/ef/efasync.h>
 #include <melee/lb/lbaudio_ax.h>

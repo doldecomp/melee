@@ -1,8 +1,8 @@
-#include "ftfoxspecials.h"
+#include <melee/ft/kinds/ftFox/ftfoxspecials.h>
 
 #include <melee/ft/forward.h>
 
-#include "types.h"
+#include <melee/ft/kinds/ftFox/types.h>
 #include <melee/ef/efsync.h>
 #include <melee/ft/fighter.h>
 #include <melee/ft/ft_081B.h>

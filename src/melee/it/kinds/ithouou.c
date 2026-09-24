@@ -1,10 +1,10 @@
-#include "ithouou.h"
+#include <melee/it/kinds/ithouou.h>
 
 #include <Runtime/platform.h>
 
 #include <placeholder.h>
 
-#include "inlines.h"
+#include <melee/it/kinds/inlines.h>
 #include <melee/gr/stage.h>
 #include <melee/it/inlines.h>
 #include <melee/it/it_26B1.h>

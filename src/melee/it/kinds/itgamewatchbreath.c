@@ -1,8 +1,8 @@
-#include "itgamewatchbreath.h"
+#include <melee/it/kinds/itgamewatchbreath.h>
 
 #include <melee/it/forward.h>
 
-#include "inlines.h"
+#include <melee/it/kinds/inlines.h>
 #include <melee/ft/kinds/ftGameWatch/ftgamewatchattackair.h>
 #include <melee/it/inlines.h>
 #include <melee/it/it_26B1.h>

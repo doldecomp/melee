@@ -1,10 +1,10 @@
-#include "gm_19EF.h"
+#include <melee/gm/gm_19EF.h>
 
-#include "gm_1601.h"
-#include "gm_1A36.h"
-#include "gm_1A3F.h"
-#include "gm_unsplit.h"
-#include "gmscene.h"
+#include <melee/gm/gm_1601.h>
+#include <melee/gm/gm_1A36.h>
+#include <melee/gm/gm_1A3F.h>
+#include <melee/gm/gm_unsplit.h>
+#include <melee/gm/gmscene.h>
 #include <dolphin/pad.h>
 #include <melee/lb/lb_00B0.h>
 #include <melee/lb/lbarchive.h>

@@ -1,10 +1,10 @@
-#include "ftpichu.h"
+#include <melee/ft/kinds/ftPichu/ftpichu.h>
 
 #include <Runtime/platform.h>
 
 #include <melee/ft/kinds/ftPikachu/forward.h>
 
-#include "types.h"
+#include <melee/ft/kinds/ftPichu/types.h>
 #include <melee/ft/fighter.h>
 #include <melee/ft/ftcamera.h>
 #include <melee/ft/ftparts.h>

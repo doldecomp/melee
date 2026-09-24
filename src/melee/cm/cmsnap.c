@@ -1,6 +1,6 @@
-#include "cmsnap.h"
+#include <melee/cm/cmsnap.h>
 
-#include "forward.h"
+#include <melee/cm/forward.h>
 #include <melee/lb/lbspdisplay.h>
 #include <sysdolphin/baselib/debug.h>
 #include <sysdolphin/baselib/gobj.h>

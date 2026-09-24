@@ -1,9 +1,9 @@
-#include "itlinkhookshot.h"
+#include <melee/it/kinds/itlinkhookshot.h>
 
 #include <math.h>
 #include <placeholder.h>
 
-#include "inlines.h"
+#include <melee/it/kinds/inlines.h>
 #include <dolphin/mtx.h>
 #include <dolphin/types.h>
 #include <melee/ef/efsync.h>

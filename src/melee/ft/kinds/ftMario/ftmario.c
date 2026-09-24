@@ -1,14 +1,14 @@
-#include "ftmario.h"
+#include <melee/ft/kinds/ftMario/ftmario.h>
 
 #include <melee/ft/kinds/ftCommon/forward.h>
 #include <melee/it/forward.h>
 
-#include "ftmariospecialhi.h"
-#include "ftmariospeciallw.h"
-#include "ftmariospecialn.h"
-#include "ftmariospecials.h"
-#include "ftmariostrings.h"
-#include "types.h"
+#include <melee/ft/kinds/ftMario/ftmariospecialhi.h>
+#include <melee/ft/kinds/ftMario/ftmariospeciallw.h>
+#include <melee/ft/kinds/ftMario/ftmariospecialn.h>
+#include <melee/ft/kinds/ftMario/ftmariospecials.h>
+#include <melee/ft/kinds/ftMario/ftmariostrings.h>
+#include <melee/ft/kinds/ftMario/types.h>
 #include <melee/ft/ftcamera.h>
 #include <melee/ft/ftCo_800C70D0.h>
 #include <melee/ft/ftCo_800C7178.h>

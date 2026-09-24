@@ -1,15 +1,15 @@
-#include "ftmewtwo.h"
+#include <melee/ft/kinds/ftMewtwo/ftmewtwo.h>
 
 #include <Runtime/platform.h>
 
 #include <melee/it/forward.h>
 
-#include "forward.h"
-#include "ftmewtwospecialhi.h"
-#include "ftmewtwospeciallw.h"
-#include "ftmewtwospecialn.h"
-#include "ftmewtwospecials.h"
-#include "types.h"
+#include <melee/ft/kinds/ftMewtwo/forward.h>
+#include <melee/ft/kinds/ftMewtwo/ftmewtwospecialhi.h>
+#include <melee/ft/kinds/ftMewtwo/ftmewtwospeciallw.h>
+#include <melee/ft/kinds/ftMewtwo/ftmewtwospecialn.h>
+#include <melee/ft/kinds/ftMewtwo/ftmewtwospecials.h>
+#include <melee/ft/kinds/ftMewtwo/types.h>
 #include <dolphin/mtx.h>
 #include <melee/ft/ftcamera.h>
 #include <melee/ft/ftcolanim.h>

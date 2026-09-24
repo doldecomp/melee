@@ -1,4 +1,4 @@
-#include "ftmasterhandcapturedamagemasterhand.h"
+#include <melee/ft/kinds/ftMasterHand/ftmasterhandcapturedamagemasterhand.h>
 
 #include <Runtime/platform.h>
 

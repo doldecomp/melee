@@ -1,12 +1,12 @@
-#include "ftpurinspecials.h"
+#include <melee/ft/kinds/ftPurin/ftpurinspecials.h>
 
 #include <melee/ft/forward.h>
 
 #include <math.h>
 #include <placeholder.h>
 
-#include "forward.h"
-#include "types.h"
+#include <melee/ft/kinds/ftPurin/forward.h>
+#include <melee/ft/kinds/ftPurin/types.h>
 #include <melee/ft/fighter.h>
 #include <melee/ft/ft_081B.h>
 #include <melee/ft/ft_084E.h>

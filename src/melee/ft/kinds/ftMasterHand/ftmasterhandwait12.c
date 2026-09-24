@@ -1,12 +1,12 @@
-#include "ftmasterhandwait12.h"
+#include <melee/ft/kinds/ftMasterHand/ftmasterhandwait12.h>
 
 #include <Runtime/platform.h>
 
 #include <sysdolphin/baselib/forward.h>
 
-#include "ftmasterhandwait10.h"
-#include "inlines.h"
-#include "types.h"
+#include <melee/ft/kinds/ftMasterHand/ftmasterhandwait10.h>
+#include <melee/ft/kinds/ftMasterHand/inlines.h>
+#include <melee/ft/kinds/ftMasterHand/types.h>
 #include <melee/ft/fighter.h>
 #include <melee/ft/ftanim.h>
 #include <melee/ft/types.h>

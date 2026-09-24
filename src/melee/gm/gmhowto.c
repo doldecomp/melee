@@ -1,8 +1,8 @@
-#include "gmhowto.h"
+#include <melee/gm/gmhowto.h>
 
-#include "gm_unsplit.h"
-#include "gmmain_lib.h"
-#include "gmopening.h"
+#include <melee/gm/gm_unsplit.h>
+#include <melee/gm/gmmain_lib.h>
+#include <melee/gm/gmopening.h>
 #include <melee/lb/lbaudio_ax.h>
 #include <melee/lb/lbmthp.h>
 #include <melee/mn/inlines.h>

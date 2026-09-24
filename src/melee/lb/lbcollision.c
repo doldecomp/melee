@@ -1,15 +1,15 @@
-#include "lbcollision.h"
+#include <melee/lb/lbcollision.h>
 
 #include <Runtime/platform.h>
 
 #include <math.h>
 #include <placeholder.h>
 
-#include "forward.h"
-#include "lb_00B0.h"
-#include "lbaudio_ax.h"
-#include "lbvector.h"
-#include "types.h"
+#include <melee/lb/forward.h>
+#include <melee/lb/lb_00B0.h>
+#include <melee/lb/lbaudio_ax.h>
+#include <melee/lb/lbvector.h>
+#include <melee/lb/types.h>
 #include <dolphin/gx.h>
 #include <dolphin/mtx.h>
 #include <melee/ft/types.h>

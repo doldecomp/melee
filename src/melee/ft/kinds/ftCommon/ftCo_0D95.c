@@ -1,4 +1,4 @@
-#include "ftCo_Attack100.h"
+#include <melee/ft/kinds/ftCommon/ftCo_Attack100.h>
 #include <melee/ef/efsync.h>
 #include <melee/ft/fighter.h>
 #include <melee/ft/ft_0892.h>

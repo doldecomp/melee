@@ -1,4 +1,4 @@
-#include "itmsbomb.h"
+#include <melee/it/kinds/itmsbomb.h>
 
 #include <melee/it/forward.h>
 

@@ -1,13 +1,13 @@
-#include "itanimlist.h"
+#include <melee/it/itanimlist.h>
 
-#include "forward.h"
-#include "inlines.h"
-#include "it_2725.h"
-#include "it_3F14.h"
-#include "itcoll.h"
-#include "iteffect.h"
-#include "item.h"
-#include "ithitbox.h"
+#include <melee/it/forward.h>
+#include <melee/it/inlines.h>
+#include <melee/it/it_2725.h>
+#include <melee/it/it_3F14.h>
+#include <melee/it/itcoll.h>
+#include <melee/it/iteffect.h>
+#include <melee/it/item.h>
+#include <melee/it/ithitbox.h>
 #include <melee/lb/inlines.h>
 #include <melee/lb/lb_013B.h>
 #include <melee/lb/lbcommand.h>

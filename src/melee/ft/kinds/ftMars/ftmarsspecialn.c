@@ -1,4 +1,4 @@
-#include "ftmarsspecialn.h"
+#include <melee/ft/kinds/ftMars/ftmarsspecialn.h>
 
 #include <Runtime/platform.h>
 
@@ -8,9 +8,9 @@
 
 #include <placeholder.h>
 
-#include "forward.h"
-#include "ftmars.h"
-#include "types.h"
+#include <melee/ft/kinds/ftMars/forward.h>
+#include <melee/ft/kinds/ftMars/ftmars.h>
+#include <melee/ft/kinds/ftMars/types.h>
 #include <dolphin/mtx.h>
 #include <melee/ft/fighter.h>
 #include <melee/ft/ft_081B.h>

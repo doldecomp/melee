@@ -1,4 +1,4 @@
-#include "ftCo_ItemScrew.h"
+#include <melee/ft/kinds/ftCommon/ftCo_ItemScrew.h>
 
 #include <Runtime/platform.h>
 
@@ -6,12 +6,12 @@
 
 #include <stdbool.h>
 
-#include "forward.h"
-#include "ftCo_Fall.h"
-#include "ftCo_FallAerial.h"
-#include "ftCo_FallSpecial.h"
-#include "ftCo_Jump.h"
-#include "ftCo_JumpAerial.h"
+#include <melee/ft/kinds/ftCommon/forward.h>
+#include <melee/ft/kinds/ftCommon/ftCo_Fall.h>
+#include <melee/ft/kinds/ftCommon/ftCo_FallAerial.h>
+#include <melee/ft/kinds/ftCommon/ftCo_FallSpecial.h>
+#include <melee/ft/kinds/ftCommon/ftCo_Jump.h>
+#include <melee/ft/kinds/ftCommon/ftCo_JumpAerial.h>
 #include <melee/ft/fighter.h>
 #include <melee/ft/ft_081B.h>
 #include <melee/ft/ftcommon.h>

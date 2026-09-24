@@ -1,11 +1,11 @@
-#include "mnlanguage.h"
+#include <melee/mn/mnlanguage.h>
 
 #include <melee/gm/forward.h>
 #include <melee/it/forward.h>
 #include <melee/sc/forward.h>
 
-#include "inlines.h"
-#include "mnmain.h"
+#include <melee/mn/inlines.h>
+#include <melee/mn/mnmain.h>
 #include <melee/lb/lbarchive.h>
 #include <melee/lb/lbcardgame.h>
 #include <melee/lb/lblanguage.h>

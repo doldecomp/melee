@@ -1,15 +1,15 @@
-#include "ftbosslib.h"
+#include <melee/ft/ftbosslib.h>
 
 #include <melee/pl/forward.h>
 
 #include <math.h>
 
-#include "ft_0877.h"
-#include "ftlib.h"
-#include "inlines.h"
+#include <melee/ft/ft_0877.h>
+#include <melee/ft/ftlib.h>
+#include <melee/ft/inlines.h>
 #include "kinds/ftCommon/forward.h"
 #include "kinds/ftMasterHand/types.h"
-#include "types.h"
+#include <melee/ft/types.h>
 #include <melee/cm/camera.h>
 #include <melee/it/it_26B1.h>
 #include <melee/lb/lbvector.h>

@@ -1,10 +1,10 @@
-#include "itstarrod.h"
+#include <melee/it/kinds/itstarrod.h>
 
 #include <Runtime/platform.h>
 
 #include <melee/it/forward.h>
 
-#include "itstarrodstar.h"
+#include <melee/it/kinds/itstarrodstar.h>
 #include <melee/it/inlines.h>
 #include <melee/it/it_26B1.h>
 #include <melee/it/it_2725.h>

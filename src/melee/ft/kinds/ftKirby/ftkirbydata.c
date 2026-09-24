@@ -1,4 +1,4 @@
-#include "ftkirby.h"
+#include <melee/ft/kinds/ftKirby/ftkirby.h>
 
 char ftKb_Init_DatFilename[] = "PlKb.dat";
 char ftKb_Init_DataName[] = "ftDataKirby";

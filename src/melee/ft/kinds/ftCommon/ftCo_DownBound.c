@@ -1,17 +1,17 @@
-#include "ftCo_DownBound.h"
+#include <melee/ft/kinds/ftCommon/ftCo_DownBound.h>
 
 #include <Runtime/platform.h>
 
 #include <math.h>
 #include <placeholder.h>
 
-#include "forward.h"
-#include "ftCo_09F7.h"
-#include "ftCo_Down.h"
-#include "ftCo_DownAttack.h"
-#include "ftCo_DownStand.h"
-#include "ftCo_Fall.h"
-#include "types.h"
+#include <melee/ft/kinds/ftCommon/forward.h>
+#include <melee/ft/kinds/ftCommon/ftCo_09F7.h>
+#include <melee/ft/kinds/ftCommon/ftCo_Down.h>
+#include <melee/ft/kinds/ftCommon/ftCo_DownAttack.h>
+#include <melee/ft/kinds/ftCommon/ftCo_DownStand.h>
+#include <melee/ft/kinds/ftCommon/ftCo_Fall.h>
+#include <melee/ft/kinds/ftCommon/types.h>
 #include <dolphin/mtx.h>
 #include <melee/cm/camera.h>
 #include <melee/ef/efasync.h>

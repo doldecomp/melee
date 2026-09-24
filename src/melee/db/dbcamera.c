@@ -1,6 +1,6 @@
 #include <math.h>
 
-#include "db.h"
+#include <melee/db/db.h>
 #include <melee/cm/camera.h>
 #include <melee/ft/inlines.h>
 #include <melee/gm/gm_unsplit.h>

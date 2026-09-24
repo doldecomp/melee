@@ -1,11 +1,11 @@
-#include "ftzeldaspeciallw.h"
+#include <melee/ft/kinds/ftZelda/ftzeldaspeciallw.h>
 
 #include <Runtime/platform.h>
 
 #include <melee/ft/forward.h>
 
-#include "forward.h"
-#include "types.h"
+#include <melee/ft/kinds/ftZelda/forward.h>
+#include <melee/ft/kinds/ftZelda/types.h>
 #include <dolphin/mtx.h>
 #include <melee/ef/efsync.h>
 #include <melee/ft/fighter.h>

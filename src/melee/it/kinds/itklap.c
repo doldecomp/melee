@@ -1,4 +1,4 @@
-#include "itklap.h"
+#include <melee/it/kinds/itklap.h>
 
 #include <math.h>
 

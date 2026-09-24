@@ -1,6 +1,6 @@
 #include <melee/ft/forward.h>
 
-#include "ftkirby.h"
+#include <melee/ft/kinds/ftKirby/ftkirby.h>
 #include <melee/cm/camera.h>
 #include <melee/ft/fighter.h>
 #include <melee/ft/ft_081B.h>

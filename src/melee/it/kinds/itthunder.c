@@ -1,8 +1,8 @@
-#include "itthunder.h"
+#include <melee/it/kinds/itthunder.h>
 
 #include <Runtime/platform.h>
 
-#include "inlines.h"
+#include <melee/it/kinds/inlines.h>
 #include <melee/ef/eflib.h>
 #include <melee/ef/efsync.h>
 #include <melee/gr/stage.h>

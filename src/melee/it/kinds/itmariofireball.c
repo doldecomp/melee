@@ -1,8 +1,8 @@
-#include "itmariofireball.h"
+#include <melee/it/kinds/itmariofireball.h>
 
 #include <math.h>
 
-#include "inlines.h"
+#include <melee/it/kinds/inlines.h>
 #include <dolphin/mtx.h>
 #include <melee/db/db.h>
 #include <melee/ef/efasync.h>

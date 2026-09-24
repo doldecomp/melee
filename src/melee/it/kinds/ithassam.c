@@ -1,10 +1,10 @@
-#include "ithassam.h"
+#include <melee/it/kinds/ithassam.h>
 
 #include <melee/it/forward.h>
 
 #include <math.h>
 
-#include "inlines.h"
+#include <melee/it/kinds/inlines.h>
 #include <melee/cm/camera.h>
 #include <melee/ef/eflib.h>
 #include <melee/ft/ftlib.h>

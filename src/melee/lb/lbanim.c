@@ -1,4 +1,4 @@
-#include "lbanim.h"
+#include <melee/lb/lbanim.h>
 
 #include <placeholder.h>
 

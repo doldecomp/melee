@@ -1,9 +1,9 @@
-#include "ftCo_09C4.h"
+#include <melee/ft/kinds/ftCommon/ftCo_09C4.h>
 
 #include <Runtime/platform.h>
 
-#include "ftCo_Pass.h"
-#include "ftCo_Shouldered.h"
+#include <melee/ft/kinds/ftCommon/ftCo_Pass.h>
+#include <melee/ft/kinds/ftCommon/ftCo_Shouldered.h>
 #include <melee/ft/ftanim.h>
 #include <melee/ft/kinds/ftDonkey/types.h>
 #include <melee/ft/types.h>

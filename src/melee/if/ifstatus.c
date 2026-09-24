@@ -1,12 +1,12 @@
-#include "ifstatus.h"
+#include <melee/if/ifstatus.h>
 
 #include <placeholder.h>
 
-#include "if_2F72.h"
-#include "ifall.h"
-#include "ifcoget.h"
-#include "ifstock.h"
-#include "types.h"
+#include <melee/if/if_2F72.h>
+#include <melee/if/ifall.h>
+#include <melee/if/ifcoget.h>
+#include <melee/if/ifstock.h>
+#include <melee/if/types.h>
 #include <melee/gm/gm_unsplit.h>
 #include <melee/lb/lb_00B0.h>
 #include <melee/lb/lbarchive.h>

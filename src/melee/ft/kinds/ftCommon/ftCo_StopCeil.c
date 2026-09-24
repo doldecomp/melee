@@ -1,9 +1,9 @@
-#include "ftCo_StopCeil.h"
+#include <melee/ft/kinds/ftCommon/ftCo_StopCeil.h>
 
 #include <Runtime/platform.h>
 
-#include "ftCo_Fall.h"
-#include "ftCo_FallSpecial.h"
+#include <melee/ft/kinds/ftCommon/ftCo_Fall.h>
+#include <melee/ft/kinds/ftCommon/ftCo_FallSpecial.h>
 #include <dolphin/mtx.h>
 #include <melee/ft/fighter.h>
 #include <melee/ft/ft_081B.h>

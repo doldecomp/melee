@@ -1,4 +1,4 @@
-#include "itmetalb.h"
+#include <melee/it/kinds/itmetalb.h>
 
 #include <melee/ft/ftlib.h>
 #include <melee/it/inlines.h>

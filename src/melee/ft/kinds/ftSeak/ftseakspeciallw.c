@@ -1,4 +1,4 @@
-#include "ftseakspeciallw.h"
+#include <melee/ft/kinds/ftSeak/ftseakspeciallw.h>
 
 #include <melee/ft/forward.h>
 

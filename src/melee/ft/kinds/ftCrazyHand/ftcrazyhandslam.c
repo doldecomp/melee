@@ -1,4 +1,4 @@
-#include "ftcrazyhandslam.h"
+#include <melee/ft/kinds/ftCrazyHand/ftcrazyhandslam.h>
 
 #include <Runtime/platform.h>
 
@@ -6,10 +6,10 @@
 
 #include <placeholder.h>
 
-#include "ftcrazyhandcapturewaitcrazyhand.h"
-#include "ftcrazyhandtagcancel.h"
-#include "inlines.h"
-#include "types.h"
+#include <melee/ft/kinds/ftCrazyHand/ftcrazyhandcapturewaitcrazyhand.h>
+#include <melee/ft/kinds/ftCrazyHand/ftcrazyhandtagcancel.h>
+#include <melee/ft/kinds/ftCrazyHand/inlines.h>
+#include <melee/ft/kinds/ftCrazyHand/types.h>
 #include <dolphin/mtx.h>
 #include <melee/ft/fighter.h>
 #include <melee/ft/ft_084E.h>

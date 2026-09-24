@@ -1,11 +1,11 @@
-#include "ftdrmario.h"
+#include <melee/ft/kinds/ftDrMario/ftdrmario.h>
 
 #include <melee/ft/kinds/ftCommon/forward.h>
 #include <melee/ft/kinds/ftMario/forward.h>
 
-#include "forward.h"
-#include "ftdrmarioappeals.h"
-#include "types.h"
+#include <melee/ft/kinds/ftDrMario/forward.h>
+#include <melee/ft/kinds/ftDrMario/ftdrmarioappeals.h>
+#include <melee/ft/kinds/ftDrMario/types.h>
 #include <melee/ft/ftcamera.h>
 #include <melee/ft/ftparts.h>
 #include <melee/ft/inlines.h>

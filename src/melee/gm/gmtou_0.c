@@ -1,15 +1,15 @@
-#include "gmtou_0.h"
+#include <melee/gm/gmtou_0.h>
 
 #include <placeholder.h>
 
-#include "forward.h"
-#include "gm_1601.h"
-#include "gm_1A3F.h"
-#include "gm_unsplit.h"
-#include "gmmain_lib.h"
-#include "gmscene.h"
-#include "gmtoulib.h"
-#include "types.h"
+#include <melee/gm/forward.h>
+#include <melee/gm/gm_1601.h>
+#include <melee/gm/gm_1A3F.h>
+#include <melee/gm/gm_unsplit.h>
+#include <melee/gm/gmmain_lib.h>
+#include <melee/gm/gmscene.h>
+#include <melee/gm/gmtoulib.h>
+#include <melee/gm/types.h>
 #include <dolphin/pad.h>
 #include <melee/lb/lbarchive.h>
 #include <melee/lb/lbaudio_ax.h>

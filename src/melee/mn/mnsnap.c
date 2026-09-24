@@ -1,9 +1,9 @@
-#include "mnsnap.h"
+#include <melee/mn/mnsnap.h>
 
 #include <placeholder.h>
 
-#include "inlines.h"
-#include "mnmain.h"
+#include <melee/mn/inlines.h>
+#include <melee/mn/mnmain.h>
 #include <melee/lb/lb_00B0.h>
 #include <melee/lb/lbarchive.h>
 #include <melee/lb/lbaudio_ax.h>

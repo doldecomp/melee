@@ -1,4 +1,4 @@
-#include "db.h"
+#include <melee/db/db.h>
 #include <melee/ef/efdata.h>
 #include <melee/gm/types.h>
 #include <sysdolphin/baselib/generator.h>

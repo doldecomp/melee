@@ -1,10 +1,10 @@
-#include "itgamewatchrescue.h"
+#include <melee/it/kinds/itgamewatchrescue.h>
 
 #include <Runtime/platform.h>
 
 #include <sysdolphin/baselib/forward.h>
 
-#include "inlines.h"
+#include <melee/it/kinds/inlines.h>
 #include <melee/ft/kinds/ftGameWatch/ftgamewatchspecialhi.h>
 #include <melee/it/inlines.h>
 #include <melee/it/it_26B1.h>

@@ -1,11 +1,11 @@
-#include "ftcrazyhandentry.h"
+#include <melee/ft/kinds/ftCrazyHand/ftcrazyhandentry.h>
 
 #include <Runtime/platform.h>
 
 #include <sysdolphin/baselib/forward.h>
 
-#include "ftcrazyhandtagcancel.h"
-#include "types.h"
+#include <melee/ft/kinds/ftCrazyHand/ftcrazyhandtagcancel.h>
+#include <melee/ft/kinds/ftCrazyHand/types.h>
 #include <dolphin/mtx.h>
 #include <melee/ft/fighter.h>
 #include <melee/ft/ft_084E.h>

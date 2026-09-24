@@ -1,16 +1,16 @@
-#include "ftness.h"
+#include <melee/ft/kinds/ftNess/ftness.h>
 
 #include <melee/ft/kinds/ftCommon/forward.h>
 #include <melee/it/forward.h>
 
-#include "ftnessattackhi4.h"
-#include "ftnessattacklw4.h"
-#include "ftnessattacks4.h"
-#include "ftnessspecialhi.h"
-#include "ftnessspeciallw.h"
-#include "ftnessspecialn.h"
-#include "ftnessspecials.h"
-#include "types.h"
+#include <melee/ft/kinds/ftNess/ftnessattackhi4.h>
+#include <melee/ft/kinds/ftNess/ftnessattacklw4.h>
+#include <melee/ft/kinds/ftNess/ftnessattacks4.h>
+#include <melee/ft/kinds/ftNess/ftnessspecialhi.h>
+#include <melee/ft/kinds/ftNess/ftnessspeciallw.h>
+#include <melee/ft/kinds/ftNess/ftnessspecialn.h>
+#include <melee/ft/kinds/ftNess/ftnessspecials.h>
+#include <melee/ft/kinds/ftNess/types.h>
 #include <melee/ft/ftcamera.h>
 #include <melee/ft/ftparts.h>
 #include <melee/ft/inlines.h>

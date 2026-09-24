@@ -1,9 +1,9 @@
-#include "itheiho.h"
+#include <melee/it/kinds/itheiho.h>
 
-#include "inlines.h"
-#include "itfoods.h"
-#include "itfreeze.h"
-#include "types.h"
+#include <melee/it/kinds/inlines.h>
+#include <melee/it/kinds/itfoods.h>
+#include <melee/it/kinds/itfreeze.h>
+#include <melee/it/kinds/types.h>
 #include <melee/gr/stage.h>
 #include <melee/it/inlines.h>
 #include <melee/it/it_26B1.h>

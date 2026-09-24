@@ -1,7 +1,7 @@
-#include "ftCo_0C60.h"
+#include <melee/ft/kinds/ftCommon/ftCo_0C60.h>
 
-#include "ftCo_HammerWait.h"
-#include "ftCo_Pass.h"
+#include <melee/ft/kinds/ftCommon/ftCo_HammerWait.h>
+#include <melee/ft/kinds/ftCommon/ftCo_Pass.h>
 #include <melee/ft/inlines.h>
 #include <melee/ft/types.h>
 

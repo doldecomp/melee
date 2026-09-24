@@ -1,4 +1,4 @@
-#include "itwhispyapple.h"
+#include <melee/it/kinds/itwhispyapple.h>
 
 #include <melee/it/forward.h>
 

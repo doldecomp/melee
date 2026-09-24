@@ -1,4 +1,4 @@
-#include "itsamusbomb.h"
+#include <melee/it/kinds/itsamusbomb.h>
 
 #include <Runtime/platform.h>
 
@@ -6,7 +6,7 @@
 
 #include <math.h>
 
-#include "inlines.h"
+#include <melee/it/kinds/inlines.h>
 #include <melee/db/db.h>
 #include <melee/ft/kinds/ftSamus/ftsamus.h>
 #include <melee/it/inlines.h>

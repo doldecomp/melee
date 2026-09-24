@@ -1,4 +1,4 @@
-#include "itarwinglaser.h"
+#include <melee/it/kinds/itarwinglaser.h>
 
 #include <Runtime/platform.h>
 

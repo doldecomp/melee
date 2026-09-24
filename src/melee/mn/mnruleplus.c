@@ -4,12 +4,12 @@
 
 #include <placeholder.h>
 
-#include "forward.h"
-#include "inlines.h"
-#include "mnmain.h"
-#include "mnmainrule.h"
-#include "mnstagesw.h"
-#include "types.h"
+#include <melee/mn/forward.h>
+#include <melee/mn/inlines.h>
+#include <melee/mn/mnmain.h>
+#include <melee/mn/mnmainrule.h>
+#include <melee/mn/mnstagesw.h>
+#include <melee/mn/types.h>
 #include <melee/gm/gm_1A3F.h>
 #include <melee/gm/gmmain_lib.h>
 #include <melee/gm/types.h>

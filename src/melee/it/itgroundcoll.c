@@ -1,10 +1,10 @@
-#include "itgroundcoll.h"
+#include <melee/it/itgroundcoll.h>
 
-#include "inlines.h"
-#include "it_2725.h"
-#include "it_3F14.h"
-#include "item.h"
-#include "itmaplib.h"
+#include <melee/it/inlines.h>
+#include <melee/it/it_2725.h>
+#include <melee/it/it_3F14.h>
+#include <melee/it/item.h>
+#include <melee/it/itmaplib.h>
 #include <melee/mp/mpcoll.h>
 #include <melee/mp/mplib.h>
 #include <sysdolphin/baselib/random.h>

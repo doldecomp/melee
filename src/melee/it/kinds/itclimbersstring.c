@@ -1,7 +1,7 @@
-#include "itclimbersstring.h"
+#include <melee/it/kinds/itclimbersstring.h>
 
-#include "inlines.h"
-#include "itlinkhookshot.h"
+#include <melee/it/kinds/inlines.h>
+#include <melee/it/kinds/itlinkhookshot.h>
 #include <melee/ft/ftlib.h>
 #include <melee/ft/inlines.h>
 #include <melee/ft/kinds/ftPopo/ftpopospecials.h>

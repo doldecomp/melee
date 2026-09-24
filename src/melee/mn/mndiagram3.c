@@ -1,12 +1,12 @@
-#include "mndiagram3.h"
+#include <melee/mn/mndiagram3.h>
 
-#include "inlines.h"
-#include "mndiagram.h"
-#include "mndiagram2.h"
-#include "mndiagram3.static.h"
-#include "mnmain.h"
-#include "mnname.h"
-#include "types.h"
+#include <melee/mn/inlines.h>
+#include <melee/mn/mndiagram.h>
+#include <melee/mn/mndiagram2.h>
+#include <melee/mn/mndiagram3.static.h>
+#include <melee/mn/mnmain.h>
+#include <melee/mn/mnname.h>
+#include <melee/mn/types.h>
 #include <melee/gm/gmmain_lib.h>
 #include <melee/lb/lb_00B0.h>
 #include <melee/lb/lbaudio_ax.h>

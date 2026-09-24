@@ -1,8 +1,8 @@
-#include "itflipper.h"
+#include <melee/it/kinds/itflipper.h>
 
 #include <math.h>
 
-#include "inlines.h"
+#include <melee/it/kinds/inlines.h>
 #include <melee/ft/ftlib.h>
 #include <melee/it/inlines.h>
 #include <melee/it/it_26B1.h>

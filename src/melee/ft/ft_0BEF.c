@@ -1,10 +1,10 @@
-#include "ft_0BEF.h"
+#include <melee/ft/ft_0BEF.h>
 
 #include <Runtime/platform.h>
 
-#include "fighter.h"
+#include <melee/ft/fighter.h>
 #include "kinds/ftCommon/forward.h"
-#include "types.h"
+#include <melee/ft/types.h>
 
 void ftCo_800BEFD4(Fighter_GObj* gobj)
 {

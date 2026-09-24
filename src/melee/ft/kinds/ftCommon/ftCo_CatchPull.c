@@ -1,6 +1,6 @@
-#include "ftCo_Attack100.h"
-#include "ftCo_Fall.h"
-#include "ftCo_Throw.h"
+#include <melee/ft/kinds/ftCommon/ftCo_Attack100.h>
+#include <melee/ft/kinds/ftCommon/ftCo_Fall.h>
+#include <melee/ft/kinds/ftCommon/ftCo_Throw.h>
 #include <melee/ft/fighter.h>
 #include <melee/ft/ft_081B.h>
 #include <melee/ft/ftcommon.h>

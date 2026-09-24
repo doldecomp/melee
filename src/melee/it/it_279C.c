@@ -1,11 +1,11 @@
-#include "it_279C.h"
+#include <melee/it/it_279C.h>
 
-#include "inlines.h"
-#include "it_2725.h"
-#include "itdraw.h"
-#include "itgroundcoll.h"
-#include "ithitbox.h"
-#include "itzako.h"
+#include <melee/it/inlines.h>
+#include <melee/it/it_2725.h>
+#include <melee/it/itdraw.h>
+#include <melee/it/itgroundcoll.h>
+#include <melee/it/ithitbox.h>
+#include <melee/it/itzako.h>
 #include "kinds/itcerebi.h"
 #include "kinds/itchicorita.h"
 #include "kinds/itentei.h"

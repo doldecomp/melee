@@ -1,4 +1,4 @@
-#include "itpippi.h"
+#include <melee/it/kinds/itpippi.h>
 
 #include <melee/it/inlines.h>
 #include <melee/it/it_26B1.h>

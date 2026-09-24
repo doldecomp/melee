@@ -1,13 +1,13 @@
-#include "ftCo_CliffJump.h"
+#include <melee/ft/kinds/ftCommon/ftCo_CliffJump.h>
 
 #include <Runtime/platform.h>
 
-#include "ftCo_CliffClimb.h"
-#include "ftCo_Fall.h"
-#include "ftCo_FallSpecial.h"
-#include "ftCo_Jump.h"
-#include "inlines.h"
-#include "types.h"
+#include <melee/ft/kinds/ftCommon/ftCo_CliffClimb.h>
+#include <melee/ft/kinds/ftCommon/ftCo_Fall.h>
+#include <melee/ft/kinds/ftCommon/ftCo_FallSpecial.h>
+#include <melee/ft/kinds/ftCommon/ftCo_Jump.h>
+#include <melee/ft/kinds/ftCommon/inlines.h>
+#include <melee/ft/kinds/ftCommon/types.h>
 #include <dolphin/mtx.h>
 #include <melee/ft/fighter.h>
 #include <melee/ft/ft_081B.h>

@@ -1,4 +1,4 @@
-#include "types.h"
+#include <melee/ft/types.h>
 
 /// @todo Proper declarations
 extern ftCo_803C6594_t list0_1, list0_2, list0_3, list0_4, list1_1, list1_2,

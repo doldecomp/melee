@@ -1,9 +1,9 @@
-#include "ityoshiegglay.h"
+#include <melee/it/kinds/ityoshiegglay.h>
 
 #include <melee/it/forward.h>
 
-#include "inlines.h"
-#include "types.h"
+#include <melee/it/kinds/inlines.h>
+#include <melee/it/kinds/types.h>
 #include <melee/ef/efasync.h>
 #include <melee/it/inlines.h>
 #include <melee/it/it_26B1.h>

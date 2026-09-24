@@ -1,9 +1,9 @@
-#include "gm_18A1.h"
+#include <melee/gm/gm_18A1.h>
 
-#include "gmmain_lib.h"
-#include "gmregclear.h"
-#include "gmvs.h"
-#include "types.h"
+#include <melee/gm/gmmain_lib.h>
+#include <melee/gm/gmregclear.h>
+#include <melee/gm/gmvs.h>
+#include <melee/gm/types.h>
 #include <melee/pl/player.h>
 
 /// Classic mode stage data.

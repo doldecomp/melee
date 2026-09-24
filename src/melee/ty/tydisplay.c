@@ -1,4 +1,4 @@
-#include "tydisplay.h"
+#include <melee/ty/tydisplay.h>
 
 #include <Runtime/platform.h>
 
@@ -6,9 +6,9 @@
 #include <placeholder.h>
 #include <stddef.h>
 
-#include "forward.h"
-#include "toy.h"
-#include "types.h"
+#include <melee/ty/forward.h>
+#include <melee/ty/toy.h>
+#include <melee/ty/types.h>
 #include <dolphin/gx.h>
 #include <dolphin/mtx.h>
 #include <dolphin/os.h>

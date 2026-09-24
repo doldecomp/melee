@@ -1,12 +1,12 @@
-#include "ftCo_WarpStar.h"
+#include <melee/ft/kinds/ftCommon/ftCo_WarpStar.h>
 
 #include <Runtime/platform.h>
 
 #include <math.h>
 #include <stdbool.h>
 
-#include "forward.h"
-#include "types.h"
+#include <melee/ft/kinds/ftCommon/forward.h>
+#include <melee/ft/kinds/ftCommon/types.h>
 #include <dolphin/mtx.h>
 #include <melee/cm/camera.h>
 #include <melee/ef/efasync.h>

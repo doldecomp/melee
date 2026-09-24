@@ -1,10 +1,10 @@
 #include <Runtime/platform.h>
 
-#include "fighter.h"
-#include "ftcoll.h"
-#include "ftlib.h"
-#include "inlines.h"
-#include "types.h"
+#include <melee/ft/fighter.h>
+#include <melee/ft/ftcoll.h>
+#include <melee/ft/ftlib.h>
+#include <melee/ft/inlines.h>
+#include <melee/ft/types.h>
 #include <melee/it/it_26B1.h>
 #include <sysdolphin/baselib/gobj.h>
 

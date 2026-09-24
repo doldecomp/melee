@@ -1,14 +1,14 @@
-#include "ft_0BEC.h"
+#include <melee/ft/ft_0BEC.h>
 
 #include <Runtime/platform.h>
 
-#include "fighter.h"
-#include "forward.h"
-#include "ftparts.h"
+#include <melee/ft/fighter.h>
+#include <melee/ft/forward.h>
+#include <melee/ft/ftparts.h>
 #include "kinds/ftCommon/forward.h"
 #include "kinds/ftFox/types.h"
 #include "kinds/ftMario/ftmariospecialn.h"
-#include "types.h"
+#include <melee/ft/types.h>
 #include <dolphin/mtx.h>
 #include <melee/it/it_26B1.h>
 #include <melee/it/kinds/itdrmariopill.h>

@@ -1,11 +1,11 @@
-#include "gmstaffroll.h"
+#include <melee/gm/gmstaffroll.h>
 
 #include <melee/ft/forward.h>
 
 #include <math.h>
 
-#include "gm_unsplit.h"
-#include "gmmain_lib.h"
+#include <melee/gm/gm_unsplit.h>
+#include <melee/gm/gmmain_lib.h>
 #include <melee/ef/efasync.h>
 #include <melee/ef/eflib.h>
 #include <melee/lb/lb_00B0.h>

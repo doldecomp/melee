@@ -1,13 +1,13 @@
-#include "ftdonkeyspecialn.h"
+#include <melee/ft/kinds/ftDonkey/ftdonkeyspecialn.h>
 
 #include <Runtime/platform.h>
 
 #include <melee/ft/forward.h>
 #include <melee/lb/forward.h>
 
-#include "forward.h"
-#include "ftdonkey.h"
-#include "types.h"
+#include <melee/ft/kinds/ftDonkey/forward.h>
+#include <melee/ft/kinds/ftDonkey/ftdonkey.h>
+#include <melee/ft/kinds/ftDonkey/types.h>
 #include <dolphin/mtx.h>
 #include <melee/ef/eflib.h>
 #include <melee/ef/efsync.h>

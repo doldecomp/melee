@@ -1,13 +1,13 @@
-#include "ftmars.h"
+#include <melee/ft/kinds/ftMars/ftmars.h>
 
 #include <Runtime/platform.h>
 
-#include "forward.h"
-#include "ftmarsspecialhi.h"
-#include "ftmarsspeciallw.h"
-#include "ftmarsspecialn.h"
-#include "ftmarsspecials.h"
-#include "types.h"
+#include <melee/ft/kinds/ftMars/forward.h>
+#include <melee/ft/kinds/ftMars/ftmarsspecialhi.h>
+#include <melee/ft/kinds/ftMars/ftmarsspeciallw.h>
+#include <melee/ft/kinds/ftMars/ftmarsspecialn.h>
+#include <melee/ft/kinds/ftMars/ftmarsspecials.h>
+#include <melee/ft/kinds/ftMars/types.h>
 #include <melee/ef/efsync.h>
 #include <melee/ft/ftcamera.h>
 #include <melee/ft/ftlib.h>

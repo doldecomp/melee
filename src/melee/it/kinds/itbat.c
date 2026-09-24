@@ -1,6 +1,6 @@
-#include "itbat.h"
+#include <melee/it/kinds/itbat.h>
 
-#include "inlines.h"
+#include <melee/it/kinds/inlines.h>
 #include <melee/it/inlines.h>
 #include <melee/it/it_26B1.h>
 #include <melee/it/it_2725.h>

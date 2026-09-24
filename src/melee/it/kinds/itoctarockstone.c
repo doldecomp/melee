@@ -1,4 +1,4 @@
-#include "itoctarockstone.h"
+#include <melee/it/kinds/itoctarockstone.h>
 
 #include <melee/it/forward.h>
 

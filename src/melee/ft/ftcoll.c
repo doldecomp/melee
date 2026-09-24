@@ -1,4 +1,4 @@
-#include "ftcoll.h"
+#include <melee/ft/ftcoll.h>
 
 #include <Runtime/platform.h>
 
@@ -9,22 +9,22 @@
 #include <math.h>
 #include <placeholder.h>
 
-#include "fighter.h"
-#include "forward.h"
-#include "ft_081B.h"
-#include "ft_0877.h"
-#include "ft_0881.h"
-#include "ft_0DF0.h"
-#include "ftchangeparam.h"
-#include "ftcolanim.h"
-#include "ftcommon.h"
-#include "ftdevice.h"
-#include "ftlib.h"
-#include "inlines.h"
+#include <melee/ft/fighter.h>
+#include <melee/ft/forward.h>
+#include <melee/ft/ft_081B.h>
+#include <melee/ft/ft_0877.h>
+#include <melee/ft/ft_0881.h>
+#include <melee/ft/ft_0DF0.h>
+#include <melee/ft/ftchangeparam.h>
+#include <melee/ft/ftcolanim.h>
+#include <melee/ft/ftcommon.h>
+#include <melee/ft/ftdevice.h>
+#include <melee/ft/ftlib.h>
+#include <melee/ft/inlines.h>
 #include "kinds/ftCommon/ftCo_Bury.h"
 #include "kinds/ftCommon/ftCo_Guard.h"
 #include "kinds/ftCommon/types.h"
-#include "types.h"
+#include <melee/ft/types.h>
 #include <dolphin/mtx.h>
 #include <melee/ef/efsync.h>
 #include <melee/gm/gm_unsplit.h>

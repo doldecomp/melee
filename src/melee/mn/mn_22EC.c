@@ -1,6 +1,6 @@
-#include "mncharsel.h"
-#include "mnmain.h"
-#include "types.h"
+#include <melee/mn/mncharsel.h>
+#include <melee/mn/mnmain.h>
+#include <melee/mn/types.h>
 #include <dolphin/pad.h>
 #include <melee/gm/gm_unsplit.h>
 #include <melee/gm/gmmain_lib.h>

@@ -1,12 +1,12 @@
-#include "ftmaterial.h"
+#include <melee/ft/ftmaterial.h>
 
-#include "fighter.h"
-#include "forward.h"
-#include "ft_0C8C.h"
-#include "ftCo_800C7CA0.h"
-#include "ftdevice.h"
+#include <melee/ft/fighter.h>
+#include <melee/ft/forward.h>
+#include <melee/ft/ft_0C8C.h>
+#include <melee/ft/ftCo_800C7CA0.h>
+#include <melee/ft/ftdevice.h>
 #include "kinds/ftCommon/ftCo_09F4.h"
-#include "types.h"
+#include <melee/ft/types.h>
 #include <melee/lb/lb_00B0.h>
 #include <melee/lb/lbrefract.h>
 #include <sysdolphin/baselib/class.h>

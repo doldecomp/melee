@@ -1,6 +1,6 @@
-#include "itmewtwoshadowball.h"
+#include <melee/it/kinds/itmewtwoshadowball.h>
 
-#include "inlines.h"
+#include <melee/it/kinds/inlines.h>
 #include <melee/ef/eflib.h>
 #include <melee/ef/efsync.h>
 #include <melee/ft/ftlib.h>

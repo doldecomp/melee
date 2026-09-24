@@ -1,4 +1,4 @@
-#include "itlikelike.h"
+#include <melee/it/kinds/itlikelike.h>
 
 #include <Runtime/platform.h>
 
@@ -7,7 +7,7 @@
 #include <math.h>
 #include <placeholder.h>
 
-#include "inlines.h"
+#include <melee/it/kinds/inlines.h>
 #include <melee/ft/ftCo_800C78B0.h>
 #include <melee/ft/ftlib.h>
 #include <melee/it/inlines.h>

@@ -1,16 +1,16 @@
-#include "lbdvd.h"
+#include <melee/lb/lbdvd.h>
 
 #include <melee/ft/forward.h>
 #include <melee/gm/forward.h>
 
 #include <string.h>
 
-#include "lb_0195.h"
-#include "lbarchive.h"
-#include "lbfile.h"
-#include "lbheap.h"
-#include "lbmemory.h" // IWYU pragma: keep
-#include "types.h"
+#include <melee/lb/lb_0195.h>
+#include <melee/lb/lbarchive.h>
+#include <melee/lb/lbfile.h>
+#include <melee/lb/lbheap.h>
+#include <melee/lb/lbmemory.h> // IWYU pragma: keep
+#include <melee/lb/types.h>
 #include <dolphin/dvd.h>
 #include <melee/db/db.h>
 #include <melee/ef/efasync.h>

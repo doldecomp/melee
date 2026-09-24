@@ -1,11 +1,11 @@
-#include "ftpikachuspeciallw.h"
+#include <melee/ft/kinds/ftPikachu/ftpikachuspeciallw.h>
 
 #include <Runtime/platform.h>
 
 #include <melee/ft/forward.h>
 
-#include "forward.h"
-#include "types.h"
+#include <melee/ft/kinds/ftPikachu/forward.h>
+#include <melee/ft/kinds/ftPikachu/types.h>
 #include <dolphin/mtx.h>
 #include <melee/cm/camera.h>
 #include <melee/ef/efasync.h>

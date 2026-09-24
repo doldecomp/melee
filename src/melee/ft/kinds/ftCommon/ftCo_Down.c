@@ -1,8 +1,8 @@
-#include "ftCo_Down.h"
+#include <melee/ft/kinds/ftCommon/ftCo_Down.h>
 
 #include <Runtime/platform.h>
 
-#include "ftCo_DownAttack.h"
+#include <melee/ft/kinds/ftCommon/ftCo_DownAttack.h>
 #include <dolphin/mtx.h>
 #include <melee/ft/fighter.h>
 #include <melee/ft/ft_081B.h>

@@ -1,4 +1,4 @@
-#include "itporygon2.h"
+#include <melee/it/kinds/itporygon2.h>
 
 #include <melee/it/inlines.h>
 #include <melee/it/it_26B1.h>

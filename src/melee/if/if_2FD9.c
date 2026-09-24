@@ -1,7 +1,7 @@
-#include "if_2FD9.h"
+#include <melee/if/if_2FD9.h>
 
-#include "forward.h"
-#include "ifall.h"
+#include <melee/if/forward.h>
+#include <melee/if/ifall.h>
 #include <melee/gm/gm_unsplit.h>
 #include <melee/lb/lbarchive.h>
 #include <melee/lb/lbaudio_ax.h>

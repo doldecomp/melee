@@ -1,11 +1,11 @@
-#include "ftgamewatchspecials.h"
+#include <melee/ft/kinds/ftGameWatch/ftgamewatchspecials.h>
 
 #include <Runtime/platform.h>
 
 #include <melee/ft/forward.h>
 
-#include "ftgamewatch.h"
-#include "types.h"
+#include <melee/ft/kinds/ftGameWatch/ftgamewatch.h>
+#include <melee/ft/kinds/ftGameWatch/types.h>
 #include <dolphin/mtx.h>
 #include <melee/ft/fighter.h>
 #include <melee/ft/ft_081B.h>

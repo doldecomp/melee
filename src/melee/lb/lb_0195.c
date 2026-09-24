@@ -1,10 +1,10 @@
-#include "lb_0195.h"
+#include <melee/lb/lb_0195.h>
 
-#include "lb_0192.h"
-#include "lbaudio_ax.h"
-#include "lbcardgame.h"
-#include "lbcardnew.h"
-#include "lbsnap.h"
+#include <melee/lb/lb_0192.h>
+#include <melee/lb/lbaudio_ax.h>
+#include <melee/lb/lbcardgame.h>
+#include <melee/lb/lbcardnew.h>
+#include <melee/lb/lbsnap.h>
 #include <dolphin/os.h>
 #include <dolphin/vi.h>
 #include <sysdolphin/baselib/controller.h>

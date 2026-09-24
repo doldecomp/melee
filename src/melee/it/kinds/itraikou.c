@@ -1,6 +1,6 @@
-#include "itraikou.h"
+#include <melee/it/kinds/itraikou.h>
 
-#include "inlines.h"
+#include <melee/it/kinds/inlines.h>
 #include <melee/cm/camera.h>
 #include <melee/ef/eflib.h>
 #include <melee/ef/efsync.h>

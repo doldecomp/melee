@@ -1,4 +1,4 @@
-#include "ftsandbag.h"
+#include <melee/ft/kinds/ftSandbag/ftsandbag.h>
 
 #include <Runtime/platform.h>
 
@@ -6,7 +6,7 @@
 
 #include <math.h>
 
-#include "forward.h"
+#include <melee/ft/kinds/ftSandbag/forward.h>
 #include <melee/ft/fighter.h>
 #include <melee/ft/ft_081B.h>
 #include <melee/ft/ft_084E.h>

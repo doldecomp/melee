@@ -1,12 +1,12 @@
-#include "ftmasterhandslam.h"
+#include <melee/ft/kinds/ftMasterHand/ftmasterhandslam.h>
 
 #include <Runtime/platform.h>
 
 #include <melee/ft/kinds/ftCommon/forward.h>
 
-#include "ftmasterhandthrownmasterhand.h"
-#include "ftmasterhandwait12.h"
-#include "types.h"
+#include <melee/ft/kinds/ftMasterHand/ftmasterhandthrownmasterhand.h>
+#include <melee/ft/kinds/ftMasterHand/ftmasterhandwait12.h>
+#include <melee/ft/kinds/ftMasterHand/types.h>
 #include <melee/ft/fighter.h>
 #include <melee/ft/ft_084E.h>
 #include <melee/ft/ftanim.h>

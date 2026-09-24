@@ -1,15 +1,15 @@
-#include "ifall.h"
+#include <melee/if/ifall.h>
 
-#include "if_2F6E.h"
-#include "if_2F72.h"
-#include "if_2FD9.h"
-#include "ifcoget.h"
-#include "ifhazard.h"
-#include "ifmagnify.h"
-#include "ifnametag.h"
-#include "ifstatus.h"
-#include "ifstock.h"
-#include "iftime.h"
+#include <melee/if/if_2F6E.h>
+#include <melee/if/if_2F72.h>
+#include <melee/if/if_2FD9.h>
+#include <melee/if/ifcoget.h>
+#include <melee/if/ifhazard.h>
+#include <melee/if/ifmagnify.h>
+#include <melee/if/ifnametag.h>
+#include <melee/if/ifstatus.h>
+#include <melee/if/ifstock.h>
+#include <melee/if/iftime.h>
 #include <melee/lb/lb_00B0.h>
 #include <melee/lb/lbarchive.h>
 #include <melee/lb/lbspdisplay.h>

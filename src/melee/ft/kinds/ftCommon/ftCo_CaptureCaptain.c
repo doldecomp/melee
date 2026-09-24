@@ -1,9 +1,9 @@
-#include "ftCo_CaptureCaptain.h"
+#include <melee/ft/kinds/ftCommon/ftCo_CaptureCaptain.h>
 
 #include <Runtime/platform.h>
 
-#include "ftCo_Attack100.h"
-#include "inlines.h"
+#include <melee/ft/kinds/ftCommon/ftCo_Attack100.h>
+#include <melee/ft/kinds/ftCommon/inlines.h>
 #include <melee/ft/fighter.h>
 #include <melee/ft/ft_081B.h>
 #include <melee/ft/ftanim.h>

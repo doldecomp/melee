@@ -1,4 +1,4 @@
-#include "camera.h"
+#include <melee/cm/camera.h>
 
 #include <Runtime/platform.h>
 
@@ -8,8 +8,8 @@
 #include <math.h>
 #include <placeholder.h>
 
-#include "forward.h"
-#include "types.h"
+#include <melee/cm/forward.h>
+#include <melee/cm/types.h>
 #include <dolphin/mtx.h>
 #include <dolphin/pad.h>
 #include <dolphin/types.h>

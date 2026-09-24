@@ -1,4 +1,4 @@
-#include "ftemblem.h"
+#include <melee/ft/kinds/ftEmblem/ftemblem.h>
 
 #include <melee/ft/kinds/ftMars/forward.h>
 

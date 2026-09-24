@@ -1,7 +1,7 @@
-#include "itnokonoko.h"
+#include <melee/it/kinds/itnokonoko.h>
 
-#include "itzgshell.h"
-#include "itzrshell.h"
+#include <melee/it/kinds/itzgshell.h>
+#include <melee/it/kinds/itzrshell.h>
 #include <melee/cm/camera.h>
 #include <melee/ft/ftlib.h>
 #include <melee/it/inlines.h>

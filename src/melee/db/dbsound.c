@@ -1,4 +1,4 @@
-#include "db.h"
+#include <melee/db/db.h>
 #include <dolphin/gx/GXStruct.h>
 #include <melee/if/textdraw.h>
 #include <melee/if/textlib.h>

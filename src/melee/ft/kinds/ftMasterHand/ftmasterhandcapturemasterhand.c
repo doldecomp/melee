@@ -1,11 +1,11 @@
-#include "ftmasterhandcapturemasterhand.h"
+#include <melee/ft/kinds/ftMasterHand/ftmasterhandcapturemasterhand.h>
 
 #include <Runtime/platform.h>
 
 #include <melee/ft/kinds/ftCommon/forward.h>
 
-#include "ftmasterhandbackdisappear.h"
-#include "ftmasterhandcapturedamagemasterhand.h"
+#include <melee/ft/kinds/ftMasterHand/ftmasterhandbackdisappear.h>
+#include <melee/ft/kinds/ftMasterHand/ftmasterhandcapturedamagemasterhand.h>
 #include <melee/ft/fighter.h>
 #include <melee/ft/ftanim.h>
 #include <melee/ft/ftcommon.h>

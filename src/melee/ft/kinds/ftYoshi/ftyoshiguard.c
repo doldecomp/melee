@@ -1,4 +1,4 @@
-#include "ftyoshiguard.h"
+#include <melee/ft/kinds/ftYoshi/ftyoshiguard.h>
 
 #include <melee/ft/forward.h>
 #include <melee/ft/kinds/ftCommon/forward.h>
@@ -6,8 +6,8 @@
 
 #include <placeholder.h>
 
-#include "ftyoshi.h"
-#include "types.h"
+#include <melee/ft/kinds/ftYoshi/ftyoshi.h>
+#include <melee/ft/kinds/ftYoshi/types.h>
 #include <melee/ef/efasync.h>
 #include <melee/ft/fighter.h>
 #include <melee/ft/ft_0877.h>

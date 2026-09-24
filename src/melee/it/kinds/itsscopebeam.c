@@ -1,8 +1,8 @@
-#include "itsscopebeam.h"
+#include <melee/it/kinds/itsscopebeam.h>
 
 #include <math.h>
 
-#include "inlines.h"
+#include <melee/it/kinds/inlines.h>
 #include <melee/db/db.h>
 #include <melee/it/inlines.h>
 #include <melee/it/it_26B1.h>

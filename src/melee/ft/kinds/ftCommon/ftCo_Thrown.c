@@ -1,11 +1,11 @@
-#include "ftCo_Thrown.h"
+#include <melee/ft/kinds/ftCommon/ftCo_Thrown.h>
 
 #include <melee/ft/forward.h>
 
-#include "forward.h"
-#include "ftCo_Attack100.h"
-#include "ftCo_CaptureCut.h"
-#include "ftCo_Damage.h"
+#include <melee/ft/kinds/ftCommon/forward.h>
+#include <melee/ft/kinds/ftCommon/ftCo_Attack100.h>
+#include <melee/ft/kinds/ftCommon/ftCo_CaptureCut.h>
+#include <melee/ft/kinds/ftCommon/ftCo_Damage.h>
 #include <melee/ft/fighter.h>
 #include <melee/ft/ftcamera.h>
 #include <melee/ft/ftcoll.h>

@@ -1,9 +1,9 @@
-#include "iftime.h"
+#include <melee/if/iftime.h>
 
 #include <placeholder.h>
 
-#include "forward.h"
-#include "ifall.h"
+#include <melee/if/forward.h>
+#include <melee/if/ifall.h>
 #include <dolphin/os.h>
 #include <melee/gm/gm_unsplit.h>
 #include <melee/lb/lb_00B0.h>

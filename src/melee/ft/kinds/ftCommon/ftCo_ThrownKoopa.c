@@ -1,11 +1,11 @@
-#include "ftCo_ThrownKoopa.h"
+#include <melee/ft/kinds/ftCommon/ftCo_ThrownKoopa.h>
 
 #include <Runtime/platform.h>
 
 #include <melee/ft/forward.h>
 
-#include "inlines.h"
-#include "types.h"
+#include <melee/ft/kinds/ftCommon/inlines.h>
+#include <melee/ft/kinds/ftCommon/types.h>
 #include <melee/ft/fighter.h>
 #include <melee/ft/ftanim.h>
 #include <melee/ft/ftcommon.h>

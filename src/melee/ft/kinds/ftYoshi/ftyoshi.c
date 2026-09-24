@@ -1,16 +1,16 @@
-#include "ftyoshi.h"
+#include <melee/ft/kinds/ftYoshi/ftyoshi.h>
 
 #include <melee/ft/forward.h>
 #include <melee/ft/kinds/ftCommon/forward.h>
 #include <melee/it/forward.h>
 #include <sysdolphin/baselib/forward.h>
 
-#include "forward.h"
-#include "ftyoshiguard.h"
-#include "ftyoshispecialhi.h"
-#include "ftyoshispecialn.h"
-#include "ftyoshispecials.h"
-#include "types.h"
+#include <melee/ft/kinds/ftYoshi/forward.h>
+#include <melee/ft/kinds/ftYoshi/ftyoshiguard.h>
+#include <melee/ft/kinds/ftYoshi/ftyoshispecialhi.h>
+#include <melee/ft/kinds/ftYoshi/ftyoshispecialn.h>
+#include <melee/ft/kinds/ftYoshi/ftyoshispecials.h>
+#include <melee/ft/kinds/ftYoshi/types.h>
 #include <melee/ft/fighter.h>
 #include <melee/ft/ftanim.h>
 #include <melee/ft/ftcamera.h>

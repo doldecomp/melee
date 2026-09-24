@@ -1,7 +1,7 @@
-#include "lb_0192.h"
+#include <melee/lb/lb_0192.h>
 
-#include "lbaudio_ax.h"
-#include "lblanguage.h"
+#include <melee/lb/lbaudio_ax.h>
+#include <melee/lb/lblanguage.h>
 #include <dolphin/dvd.h>
 #include <melee/gm/gmmain_lib.h>
 #include <melee/gm/types.h>

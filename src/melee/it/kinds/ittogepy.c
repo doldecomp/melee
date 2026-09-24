@@ -1,4 +1,4 @@
-#include "ittogepy.h"
+#include <melee/it/kinds/ittogepy.h>
 
 #include <melee/it/inlines.h>
 #include <melee/it/it_26B1.h>

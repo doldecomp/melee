@@ -1,6 +1,6 @@
-#include "itfoxillusion.h"
+#include <melee/it/kinds/itfoxillusion.h>
 
-#include "inlines.h"
+#include <melee/it/kinds/inlines.h>
 #include <melee/db/db.h>
 #include <melee/ft/ftlib.h>
 #include <melee/ft/kinds/ftFox/ftfoxspecials.h>

@@ -1,9 +1,9 @@
-#include "ftpurinspeciallw.h"
+#include <melee/ft/kinds/ftPurin/ftpurinspeciallw.h>
 
 #include <melee/ft/forward.h>
 
-#include "forward.h"
-#include "ftpurinspecialhi.h"
+#include <melee/ft/kinds/ftPurin/forward.h>
+#include <melee/ft/kinds/ftPurin/ftpurinspecialhi.h>
 #include <melee/ft/fighter.h>
 #include <melee/ft/ft_081B.h>
 #include <melee/ft/ft_084E.h>

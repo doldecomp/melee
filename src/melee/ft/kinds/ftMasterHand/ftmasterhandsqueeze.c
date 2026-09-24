@@ -1,12 +1,12 @@
-#include "ftmasterhandsqueeze.h"
+#include <melee/ft/kinds/ftMasterHand/ftmasterhandsqueeze.h>
 
 #include <Runtime/platform.h>
 
-#include "ftmasterhandcapturemasterhand.h"
-#include "ftmasterhandsqueezing.h"
-#include "ftmasterhandthrow.h"
-#include "inlines.h"
-#include "types.h"
+#include <melee/ft/kinds/ftMasterHand/ftmasterhandcapturemasterhand.h>
+#include <melee/ft/kinds/ftMasterHand/ftmasterhandsqueezing.h>
+#include <melee/ft/kinds/ftMasterHand/ftmasterhandthrow.h>
+#include <melee/ft/kinds/ftMasterHand/inlines.h>
+#include <melee/ft/kinds/ftMasterHand/types.h>
 #include <dolphin/mtx.h>
 #include <melee/ft/fighter.h>
 #include <melee/ft/ftanim.h>

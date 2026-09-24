@@ -1,12 +1,12 @@
-#include "ftgamewatchattack100.h"
+#include <melee/ft/kinds/ftGameWatch/ftgamewatchattack100.h>
 
 #include <melee/ft/forward.h>
 
 #include <stddef.h>
 
-#include "forward.h"
-#include "ftgamewatch.h"
-#include "ftgamewatchattack11.h"
+#include <melee/ft/kinds/ftGameWatch/forward.h>
+#include <melee/ft/kinds/ftGameWatch/ftgamewatch.h>
+#include <melee/ft/kinds/ftGameWatch/ftgamewatchattack11.h>
 #include <melee/ft/fighter.h>
 #include <melee/ft/ft_081B.h>
 #include <melee/ft/ft_084E.h>

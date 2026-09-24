@@ -1,4 +1,4 @@
-#include "gmtoulib.h"
+#include <melee/gm/gmtoulib.h>
 
 #include <melee/ft/forward.h>
 #include <melee/pl/forward.h>
@@ -8,12 +8,12 @@
 #include <stdio.h>
 #include <string.h>
 
-#include "forward.h"
-#include "gm_1601.h"
-#include "gm_unsplit.h"
-#include "gmmain_lib.h"
-#include "gmtoulib.static.h"
-#include "types.h"
+#include <melee/gm/forward.h>
+#include <melee/gm/gm_1601.h>
+#include <melee/gm/gm_unsplit.h>
+#include <melee/gm/gmmain_lib.h>
+#include <melee/gm/gmtoulib.static.h>
+#include <melee/gm/types.h>
 #include <melee/lb/lblanguage.h>
 #include <melee/lb/lbspdisplay.h>
 #include <melee/mn/mnmain.h>

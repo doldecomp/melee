@@ -1,4 +1,4 @@
-#include "types.h"
+#include <melee/lb/types.h>
 #include <dolphin/gx/GXCull.h>
 #include <dolphin/gx/GXGeometry.h>
 #include <dolphin/gx/GXLighting.h>

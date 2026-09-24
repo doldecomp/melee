@@ -1,6 +1,6 @@
-#include "itdkinoko.h"
+#include <melee/it/kinds/itdkinoko.h>
 
-#include "itkinoko.h"
+#include <melee/it/kinds/itkinoko.h>
 #include <melee/it/inlines.h>
 #include <melee/it/it_26B1.h>
 #include <melee/it/it_2725.h>

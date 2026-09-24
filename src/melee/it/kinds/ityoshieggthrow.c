@@ -1,4 +1,4 @@
-#include "ityoshieggthrow.h"
+#include <melee/it/kinds/ityoshieggthrow.h>
 
 #include <melee/ef/efasync.h>
 #include <melee/it/inlines.h>

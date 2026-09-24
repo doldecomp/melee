@@ -1,8 +1,8 @@
-#include "ftkoopaspecialn.h"
+#include <melee/ft/kinds/ftKoopa/ftkoopaspecialn.h>
 
 #include <melee/ft/forward.h>
 
-#include "forward.h"
+#include <melee/ft/kinds/ftKoopa/forward.h>
 #include <melee/cm/camera.h>
 #include <melee/ft/fighter.h>
 #include <melee/ft/ft_081B.h>

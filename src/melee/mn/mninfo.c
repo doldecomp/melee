@@ -1,9 +1,9 @@
-#include "mninfo.h"
+#include <melee/mn/mninfo.h>
 
 #include <placeholder.h>
 
-#include "inlines.h"
-#include "mnmain.h"
+#include <melee/mn/inlines.h>
+#include <melee/mn/mnmain.h>
 #include <melee/gm/gm_1601.h>
 #include <melee/gm/gmmain_lib.h>
 #include <melee/gm/types.h>

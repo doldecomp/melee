@@ -1,10 +1,10 @@
-#include "ftdrmarioappeals.h"
+#include <melee/ft/kinds/ftDrMario/ftdrmarioappeals.h>
 
 #include <Runtime/platform.h>
 
 #include <melee/ft/forward.h>
 
-#include "ftdrmario.h"
+#include <melee/ft/kinds/ftDrMario/ftdrmario.h>
 #include <dolphin/mtx.h>
 #include <melee/ft/ft_081B.h>
 #include <melee/ft/ft_084E.h>

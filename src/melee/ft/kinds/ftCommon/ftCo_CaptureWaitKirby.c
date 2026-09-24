@@ -1,7 +1,7 @@
-#include "ftCo_CaptureWaitKirby.h"
+#include <melee/ft/kinds/ftCommon/ftCo_CaptureWaitKirby.h>
 
-#include "ftCo_Attack100.h"
-#include "ftCo_CaptureCut.h"
+#include <melee/ft/kinds/ftCommon/ftCo_Attack100.h>
+#include <melee/ft/kinds/ftCommon/ftCo_CaptureCut.h>
 #include <melee/ft/fighter.h>
 #include <melee/ft/ftcoll.h>
 #include <melee/ft/ftcommon.h>

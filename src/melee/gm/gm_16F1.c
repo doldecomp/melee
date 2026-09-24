@@ -1,12 +1,12 @@
-#include "gm_16F1.h"
+#include <melee/gm/gm_16F1.h>
 
 #include <melee/pl/forward.h>
 
-#include "gm_1601.h"
-#include "gm_16F1.static.h"
-#include "gm_unsplit.h"
-#include "gmmain_lib.h"
-#include "gmvs.h"
+#include <melee/gm/gm_1601.h>
+#include <melee/gm/gm_16F1.static.h>
+#include <melee/gm/gm_unsplit.h>
+#include <melee/gm/gmmain_lib.h>
+#include <melee/gm/gmvs.h>
 #include <melee/if/textlib.h>
 #include <melee/lb/lb_00B0.h>
 #include <melee/lb/lblanguage.h>

@@ -1,5 +1,5 @@
-#include "db.h"
-#include "dbsound.h"
+#include <melee/db/db.h>
+#include <melee/db/dbsound.h>
 #include <dolphin/card.h>
 #include <dolphin/vi.h>
 #include <melee/ft/ftlib.h>

@@ -1,7 +1,7 @@
-#include "gmapproach.h"
+#include <melee/gm/gmapproach.h>
 
-#include "gm_unsplit.h"
-#include "gmscene.h"
+#include <melee/gm/gm_unsplit.h>
+#include <melee/gm/gmscene.h>
 #include <melee/lb/lbarchive.h>
 #include <melee/lb/lbaudio_ax.h>
 #include <melee/lb/lbspdisplay.h>

@@ -1,4 +1,4 @@
-#include "itgshell.h"
+#include <melee/it/kinds/itgshell.h>
 
 #include <Runtime/platform.h>
 
@@ -6,7 +6,7 @@
 
 #include <placeholder.h>
 
-#include "inlines.h"
+#include <melee/it/kinds/inlines.h>
 #include <melee/ef/efasync.h>
 #include <melee/it/inlines.h>
 #include <melee/it/it_26B1.h>

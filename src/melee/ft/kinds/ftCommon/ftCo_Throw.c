@@ -1,4 +1,4 @@
-#include "ftCo_Throw.h"
+#include <melee/ft/kinds/ftCommon/ftCo_Throw.h>
 
 #include <Runtime/platform.h>
 
@@ -7,10 +7,10 @@
 #include <placeholder.h>
 #include <stdbool.h>
 
-#include "ftCo_CargoWait.h"
-#include "ftCo_Damage.h"
-#include "ftCo_Fall.h"
-#include "ftCo_Thrown.h"
+#include <melee/ft/kinds/ftCommon/ftCo_CargoWait.h>
+#include <melee/ft/kinds/ftCommon/ftCo_Damage.h>
+#include <melee/ft/kinds/ftCommon/ftCo_Fall.h>
+#include <melee/ft/kinds/ftCommon/ftCo_Thrown.h>
 #include <melee/ft/fighter.h>
 #include <melee/ft/ft_081B.h>
 #include <melee/ft/ft_084E.h>

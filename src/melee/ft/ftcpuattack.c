@@ -1,11 +1,11 @@
-#include "ftcpuattack.h"
+#include <melee/ft/ftcpuattack.h>
 
 #include <math.h>
 
-#include "fighter.h"
-#include "ftcmdscript.h"
-#include "ftlib.h"
-#include "inlines.h"
+#include <melee/ft/fighter.h>
+#include <melee/ft/ftcmdscript.h>
+#include <melee/ft/ftlib.h>
+#include <melee/ft/inlines.h>
 #include "kinds/ftCommon/ftCo_09F7.h"
 #include "kinds/ftCommon/ftCo_0A01.h"
 #include "kinds/ftCommon/inlines.h"

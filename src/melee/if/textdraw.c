@@ -1,8 +1,8 @@
-#include "textdraw.h"
+#include <melee/if/textdraw.h>
 
 #include <Runtime/platform.h>
 
-#include "types.h"
+#include <melee/if/types.h>
 #include <dolphin/mtx.h>
 #include <sysdolphin/baselib/cobj.h>
 #include <sysdolphin/baselib/fog.h>

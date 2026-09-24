@@ -1,9 +1,9 @@
-#include "gm_1A33.h"
+#include <melee/gm/gm_1A33.h>
 
-#include "gm_1A36.h"
-#include "gmcamera.h"
-#include "gmscene.h"
-#include "types.h"
+#include <melee/gm/gm_1A36.h>
+#include <melee/gm/gmcamera.h>
+#include <melee/gm/gmscene.h>
+#include <melee/gm/types.h>
 #include <dolphin/pad.h>
 #include <melee/lb/lbsnap.h>
 #include <melee/mn/inlines.h>

@@ -1,13 +1,13 @@
-#include "gmtrainingmode.h"
+#include <melee/gm/gmtrainingmode.h>
 
 #include <melee/lb/forward.h>
 
-#include "gm_1884.h"
-#include "gm_1A3F.h"
-#include "gm_1B03.h"
-#include "gm_unsplit.h"
-#include "gmmain_lib.h"
-#include "types.h"
+#include <melee/gm/gm_1884.h>
+#include <melee/gm/gm_1A3F.h>
+#include <melee/gm/gm_1B03.h>
+#include <melee/gm/gm_unsplit.h>
+#include <melee/gm/gmmain_lib.h>
+#include <melee/gm/types.h>
 #include <dolphin/pad.h>
 #include <melee/lb/lbaudio_ax.h>
 #include <melee/lb/lbcardgame.h>

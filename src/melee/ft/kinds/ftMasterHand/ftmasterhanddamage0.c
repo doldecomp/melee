@@ -1,9 +1,9 @@
-#include "ftmasterhanddamage0.h"
+#include <melee/ft/kinds/ftMasterHand/ftmasterhanddamage0.h>
 
 #include <Runtime/platform.h>
 
-#include "ftmasterhandthrownmasterhand.h"
-#include "types.h"
+#include <melee/ft/kinds/ftMasterHand/ftmasterhandthrownmasterhand.h>
+#include <melee/ft/kinds/ftMasterHand/types.h>
 #include <melee/ft/fighter.h>
 #include <melee/ft/ft_0877.h>
 #include <melee/ft/ft_0881.h>

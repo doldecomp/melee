@@ -1,4 +1,4 @@
-#include "ftCo_0A01.h"
+#include <melee/ft/kinds/ftCommon/ftCo_0A01.h>
 
 #include <Runtime/platform.h>
 
@@ -13,9 +13,9 @@
 #include <math.h>
 #include <placeholder.h>
 
-#include "forward.h"
-#include "ftpickupitem.h"
-#include "inlines.h"
+#include <melee/ft/kinds/ftCommon/forward.h>
+#include <melee/ft/kinds/ftCommon/ftpickupitem.h>
+#include <melee/ft/kinds/ftCommon/inlines.h>
 #include <dolphin/mtx.h>
 #include <melee/cm/camera.h>
 #include <melee/ft/fighter.h>

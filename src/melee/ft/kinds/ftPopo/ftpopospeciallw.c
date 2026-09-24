@@ -1,9 +1,9 @@
-#include "ftpopospeciallw.h"
+#include <melee/ft/kinds/ftPopo/ftpopospeciallw.h>
 
 #include <melee/ft/forward.h>
 
-#include "ftpopo.h"
-#include "ftpopospecialhi.h"
+#include <melee/ft/kinds/ftPopo/ftpopo.h>
+#include <melee/ft/kinds/ftPopo/ftpopospecialhi.h>
 #include <melee/ef/eflib.h>
 #include <melee/ef/efsync.h>
 #include <melee/ft/fighter.h>

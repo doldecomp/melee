@@ -1,11 +1,11 @@
-#include "ftnessattacklw4.h"
+#include <melee/ft/kinds/ftNess/ftnessattacklw4.h>
 
 #include <Runtime/platform.h>
 
 #include <melee/ft/forward.h>
 
-#include "ftnessattackhi4.h"
-#include "types.h"
+#include <melee/ft/kinds/ftNess/ftnessattackhi4.h>
+#include <melee/ft/kinds/ftNess/types.h>
 #include <melee/ft/fighter.h>
 #include <melee/ft/ft_081B.h>
 #include <melee/ft/ft_084E.h>

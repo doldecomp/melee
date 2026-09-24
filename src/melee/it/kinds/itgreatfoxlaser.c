@@ -1,4 +1,4 @@
-#include "itgreatfoxlaser.h"
+#include <melee/it/kinds/itgreatfoxlaser.h>
 
 #include <melee/ft/ftlib.h>
 #include <melee/gr/ground.h>

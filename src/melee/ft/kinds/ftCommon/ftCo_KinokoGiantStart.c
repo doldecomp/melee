@@ -1,4 +1,4 @@
-#include "ftCo_KinokoGiantStart.h"
+#include <melee/ft/kinds/ftCommon/ftCo_KinokoGiantStart.h>
 
 #include <Runtime/platform.h>
 
@@ -6,9 +6,9 @@
 
 #include <stdbool.h>
 
-#include "forward.h"
-#include "ftCo_KinokoSmallEnd.h"
-#include "inlines.h"
+#include <melee/ft/kinds/ftCommon/forward.h>
+#include <melee/ft/kinds/ftCommon/ftCo_KinokoSmallEnd.h>
+#include <melee/ft/kinds/ftCommon/inlines.h>
 #include <melee/ft/fighter.h>
 #include <melee/ft/ft_081B.h>
 #include <melee/ft/ft_0892.h>

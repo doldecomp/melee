@@ -1,18 +1,18 @@
-#include "it_26B1.h"
+#include <melee/it/it_26B1.h>
 
 #include <sysdolphin/baselib/forward.h>
 
 #include <math.h>
 
-#include "forward.h"
-#include "inlines.h"
-#include "it_2725.h"
-#include "it_3F14.h"
-#include "itanimlist.h"
-#include "itCommonItems.h"
-#include "item.h"
-#include "ithitbox.h"
-#include "itspawn.h"
+#include <melee/it/forward.h>
+#include <melee/it/inlines.h>
+#include <melee/it/it_2725.h>
+#include <melee/it/it_3F14.h>
+#include <melee/it/itanimlist.h>
+#include <melee/it/itCommonItems.h>
+#include <melee/it/item.h>
+#include <melee/it/ithitbox.h>
+#include <melee/it/itspawn.h>
 #include "kinds/itbat.h"
 #include "kinds/itbombhei.h"
 #include "kinds/itbox.h"
@@ -27,7 +27,7 @@
 #include "kinds/itsscope.h"
 #include "kinds/itsword.h"
 #include "kinds/ittomato.h"
-#include "types.h"
+#include <melee/it/types.h>
 #include <melee/ft/ftlib.h>
 #include <melee/ft/types.h>
 #include <melee/gm/gm_unsplit.h>

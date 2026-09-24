@@ -1,4 +1,4 @@
-#include "lbvector.h"
+#include <melee/lb/lbvector.h>
 
 #include <Runtime/platform.h>
 

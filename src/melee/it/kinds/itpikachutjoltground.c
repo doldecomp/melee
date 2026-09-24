@@ -1,11 +1,11 @@
-#include "itpikachutjoltground.h"
+#include <melee/it/kinds/itpikachutjoltground.h>
 
 #include <melee/it/forward.h>
 
 #include <math.h>
 
-#include "inlines.h"
-#include "itpikachutjoltair.h"
+#include <melee/it/kinds/inlines.h>
+#include <melee/it/kinds/itpikachutjoltair.h>
 #include <melee/db/db.h>
 #include <melee/ef/eflib.h>
 #include <melee/ef/efsync.h>

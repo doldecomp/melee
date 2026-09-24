@@ -1,14 +1,14 @@
-#include "ftCo_KneeBend.h"
+#include <melee/ft/kinds/ftCommon/ftCo_KneeBend.h>
 
 #include <melee/ft/forward.h>
 
 #include <placeholder.h>
 
-#include "forward.h"
-#include "ftCo_Attack100.h"
-#include "ftCo_AttackHi4.h"
-#include "ftCo_ItemScrew.h"
-#include "ftCo_Jump.h"
+#include <melee/ft/kinds/ftCommon/forward.h>
+#include <melee/ft/kinds/ftCommon/ftCo_Attack100.h>
+#include <melee/ft/kinds/ftCommon/ftCo_AttackHi4.h>
+#include <melee/ft/kinds/ftCommon/ftCo_ItemScrew.h>
+#include <melee/ft/kinds/ftCommon/ftCo_Jump.h>
 #include <melee/ft/fighter.h>
 #include <melee/ft/ft_081B.h>
 #include <melee/ft/ft_084E.h>

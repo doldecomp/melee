@@ -1,4 +1,4 @@
-#include "ftCo_Attack100.h"
+#include <melee/ft/kinds/ftCommon/ftCo_Attack100.h>
 
 #include <Runtime/platform.h>
 
@@ -7,9 +7,9 @@
 #include <placeholder.h>
 #include <stdbool.h>
 
-#include "forward.h"
-#include "ftpickupitem.h"
-#include "types.h"
+#include <melee/ft/kinds/ftCommon/forward.h>
+#include <melee/ft/kinds/ftCommon/ftpickupitem.h>
+#include <melee/ft/kinds/ftCommon/types.h>
 #include <melee/ef/efasync.h>
 #include <melee/ft/fighter.h>
 #include <melee/ft/ft_081B.h>

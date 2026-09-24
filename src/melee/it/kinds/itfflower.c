@@ -1,7 +1,7 @@
-#include "itfflower.h"
+#include <melee/it/kinds/itfflower.h>
 
-#include "inlines.h"
-#include "itlgunbeam.h"
+#include <melee/it/kinds/inlines.h>
+#include <melee/it/kinds/itlgunbeam.h>
 #include <melee/ef/eflib.h>
 #include <melee/ef/efsync.h>
 #include <melee/it/inlines.h>

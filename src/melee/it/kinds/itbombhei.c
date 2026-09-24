@@ -1,9 +1,9 @@
-#include "itbombhei.h"
+#include <melee/it/kinds/itbombhei.h>
 
 #include <math.h>
 
-#include "inlines.h"
-#include "itbombhei.static.h"
+#include <melee/it/kinds/inlines.h>
+#include <melee/it/kinds/itbombhei.static.h>
 #include <melee/it/it_26B1.h>
 #include <melee/it/it_2725.h>
 #include <melee/it/it_3F14.h>

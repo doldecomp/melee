@@ -1,4 +1,4 @@
-#include "itlucky.h"
+#include <melee/it/kinds/itlucky.h>
 
 #include <Runtime/platform.h>
 
@@ -6,7 +6,7 @@
 
 #include <placeholder.h>
 
-#include "itegg.h"
+#include <melee/it/kinds/itegg.h>
 #include <melee/ef/eflib.h>
 #include <melee/it/inlines.h>
 #include <melee/it/it_26B1.h>

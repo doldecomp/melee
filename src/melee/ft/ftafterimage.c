@@ -1,11 +1,11 @@
 /// @file
 /// @brief Creates trailing "afterimages" for swords in motion
 
-#include "ftafterimage.h"
+#include <melee/ft/ftafterimage.h>
 
 #include <placeholder.h>
 
-#include "inlines.h"
+#include <melee/ft/inlines.h>
 #include "kinds/ftLink/types.h"
 #include "kinds/ftMars/types.h"
 #include <dolphin/gx.h>

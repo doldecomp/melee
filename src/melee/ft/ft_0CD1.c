@@ -1,14 +1,14 @@
-#include "ft_0CD1.h"
+#include <melee/ft/ft_0CD1.h>
 
-#include "fighter.h"
-#include "forward.h"
-#include "ft_081B.h"
-#include "ft_084E.h"
-#include "ft_0892.h"
-#include "ftanim.h"
-#include "ftcommon.h"
-#include "ftswing.h"
-#include "inlines.h"
+#include <melee/ft/fighter.h>
+#include <melee/ft/forward.h>
+#include <melee/ft/ft_081B.h>
+#include <melee/ft/ft_084E.h>
+#include <melee/ft/ft_0892.h>
+#include <melee/ft/ftanim.h>
+#include <melee/ft/ftcommon.h>
+#include <melee/ft/ftswing.h>
+#include <melee/ft/inlines.h>
 #include "kinds/ftCommon/ftCo_Fall.h"
 
 void ftCo_800CD140(Fighter_GObj* gobj, int arg1, int arg2, int arg3,

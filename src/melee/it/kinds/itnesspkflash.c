@@ -1,4 +1,4 @@
-#include "itnesspkflash.h"
+#include <melee/it/kinds/itnesspkflash.h>
 
 #include <Runtime/platform.h>
 
@@ -7,8 +7,8 @@
 #include <math.h>
 #include <placeholder.h>
 
-#include "inlines.h"
-#include "itnesspkflashexplode.h"
+#include <melee/it/kinds/inlines.h>
+#include <melee/it/kinds/itnesspkflashexplode.h>
 #include <melee/db/db.h>
 #include <melee/ft/ftlib.h>
 #include <melee/ft/kinds/ftKirby/ftkirby.h>

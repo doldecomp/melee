@@ -1,15 +1,15 @@
-#include "ftswing.h"
+#include <melee/ft/ftswing.h>
 
-#include "fighter.h"
-#include "forward.h"
-#include "ft_081B.h"
-#include "ft_0CD1.h"
-#include "ftlipstickswing.h"
-#include "ftstarrodswing.h"
-#include "inlines.h"
+#include <melee/ft/fighter.h>
+#include <melee/ft/forward.h>
+#include <melee/ft/ft_081B.h>
+#include <melee/ft/ft_0CD1.h>
+#include <melee/ft/ftlipstickswing.h>
+#include <melee/ft/ftstarrodswing.h>
+#include <melee/ft/inlines.h>
 #include "kinds/ftCommon/ftCo_FallSpecial.h"
 #include "kinds/ftCommon/ftpickupitem.h"
-#include "types.h"
+#include <melee/ft/types.h>
 #include <sysdolphin/baselib/debug.h>
 
 int lbl_803C6D70[6][5] = {

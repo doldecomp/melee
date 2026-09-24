@@ -1,4 +1,4 @@
-#include "itnesspkfire.h"
+#include <melee/it/kinds/itnesspkfire.h>
 
 #include <Runtime/platform.h>
 
@@ -6,8 +6,8 @@
 
 #include <placeholder.h>
 
-#include "inlines.h"
-#include "itnesspkfirepillar.h"
+#include <melee/it/kinds/inlines.h>
+#include <melee/it/kinds/itnesspkfirepillar.h>
 #include <melee/db/db.h>
 #include <melee/it/inlines.h>
 #include <melee/it/it_26B1.h>

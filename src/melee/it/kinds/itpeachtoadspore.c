@@ -1,11 +1,11 @@
-#include "itpeachtoadspore.h"
+#include <melee/it/kinds/itpeachtoadspore.h>
 
 #include <melee/it/forward.h>
 #include <sysdolphin/baselib/forward.h>
 
 #include <math.h>
 
-#include "inlines.h"
+#include <melee/it/kinds/inlines.h>
 #include <melee/db/db.h>
 #include <melee/ef/eflib.h>
 #include <melee/ef/efsync.h>

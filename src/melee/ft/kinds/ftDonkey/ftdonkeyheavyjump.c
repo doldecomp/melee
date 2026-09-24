@@ -1,7 +1,7 @@
-#include "ftdonkeyheavyjump.h"
+#include <melee/ft/kinds/ftDonkey/ftdonkeyheavyjump.h>
 
-#include "ftdonkeyheavyfall.h"
-#include "types.h"
+#include <melee/ft/kinds/ftDonkey/ftdonkeyheavyfall.h>
+#include <melee/ft/kinds/ftDonkey/types.h>
 #include <melee/ft/fighter.h>
 #include <melee/ft/ftanim.h>
 #include <melee/ft/kinds/ftCommon/ftCo_ItemThrow.h>

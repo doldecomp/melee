@@ -1,11 +1,11 @@
-#include "ftCo_LandingAir.h"
+#include <melee/ft/kinds/ftCommon/ftCo_LandingAir.h>
 
 #include <Runtime/platform.h>
 
 #include <melee/ft/forward.h>
 
-#include "forward.h"
-#include "ftCo_Landing.h"
+#include <melee/ft/kinds/ftCommon/forward.h>
+#include <melee/ft/kinds/ftCommon/ftCo_Landing.h>
 #include <melee/ft/fighter.h>
 #include <melee/ft/ftanim.h>
 #include <melee/ft/ftcommon.h>

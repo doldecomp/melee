@@ -1,4 +1,4 @@
-#include "ftCo_YoshiEgg.h"
+#include <melee/ft/kinds/ftCommon/ftCo_YoshiEgg.h>
 
 #include <Runtime/platform.h>
 
@@ -7,10 +7,10 @@
 
 #include <placeholder.h>
 
-#include "ftCo_Bury.h"
-#include "ftCo_CaptureKoopa.h"
-#include "ftCo_Fall.h"
-#include "types.h"
+#include <melee/ft/kinds/ftCommon/ftCo_Bury.h>
+#include <melee/ft/kinds/ftCommon/ftCo_CaptureKoopa.h>
+#include <melee/ft/kinds/ftCommon/ftCo_Fall.h>
+#include <melee/ft/kinds/ftCommon/types.h>
 #include <dolphin/mtx.h>
 #include <melee/ef/efasync.h>
 #include <melee/ft/fighter.h>

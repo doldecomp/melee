@@ -1,4 +1,4 @@
-#include "ftpickupitem.h"
+#include <melee/ft/kinds/ftCommon/ftpickupitem.h>
 
 #include <Runtime/platform.h>
 
@@ -7,12 +7,12 @@
 
 #include <placeholder.h>
 
-#include "ftCo_0A01.h"
-#include "ftCo_Fall.h"
-#include "ftCo_HammerWait.h"
-#include "ftCo_Lift.h"
-#include "ftCo_WarpStar.h"
-#include "types.h"
+#include <melee/ft/kinds/ftCommon/ftCo_0A01.h>
+#include <melee/ft/kinds/ftCommon/ftCo_Fall.h>
+#include <melee/ft/kinds/ftCommon/ftCo_HammerWait.h>
+#include <melee/ft/kinds/ftCommon/ftCo_Lift.h>
+#include <melee/ft/kinds/ftCommon/ftCo_WarpStar.h>
+#include <melee/ft/kinds/ftCommon/types.h>
 #include <dolphin/mtx.h>
 #include <melee/ft/fighter.h>
 #include <melee/ft/ft_081B.h>

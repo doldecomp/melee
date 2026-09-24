@@ -1,11 +1,11 @@
-#include "ftCo_DownAttack.h"
+#include <melee/ft/kinds/ftCommon/ftCo_DownAttack.h>
 
 #include <Runtime/platform.h>
 
 #include <melee/ft/forward.h>
 
-#include "ftCo_HammerWait.h"
-#include "ftCo_Passive.h"
+#include <melee/ft/kinds/ftCommon/ftCo_HammerWait.h>
+#include <melee/ft/kinds/ftCommon/ftCo_Passive.h>
 #include <melee/ft/fighter.h>
 #include <melee/ft/ft_081B.h>
 #include <melee/ft/ft_084E.h>

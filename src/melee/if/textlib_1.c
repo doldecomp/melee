@@ -2,9 +2,9 @@
 
 #include <printf.h> // IWYU pragma: keep
 
-#include "textdraw.h"
-#include "textlib.h"
-#include "types.h"
+#include <melee/if/textdraw.h>
+#include <melee/if/textlib.h>
+#include <melee/if/types.h>
 #include <melee/mn/inlines.h>
 #include <sysdolphin/baselib/cobj.h>
 #include <sysdolphin/baselib/controller.h>

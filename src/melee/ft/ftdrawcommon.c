@@ -1,16 +1,16 @@
-#include "ftdrawcommon.h"
+#include <melee/ft/ftdrawcommon.h>
 
 #include <Runtime/platform.h>
 
 #include <placeholder.h>
 
-#include "ft_0C88.h"
-#include "ftafterimage.h"
-#include "ftcommon.h"
-#include "ftdata.h"
-#include "ftlib.h"
-#include "ftparts.h"
-#include "inlines.h"
+#include <melee/ft/ft_0C88.h>
+#include <melee/ft/ftafterimage.h>
+#include <melee/ft/ftcommon.h>
+#include <melee/ft/ftdata.h>
+#include <melee/ft/ftlib.h>
+#include <melee/ft/ftparts.h>
+#include <melee/ft/inlines.h>
 #include "kinds/ftCommon/ftCo_09F4.h"
 #include "kinds/ftCommon/ftCo_0A01.h"
 #include <dolphin/mtx.h>

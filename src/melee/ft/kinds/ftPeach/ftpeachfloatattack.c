@@ -1,11 +1,11 @@
-#include "ftpeachfloatattack.h"
+#include <melee/ft/kinds/ftPeach/ftpeachfloatattack.h>
 
 #include <Runtime/platform.h>
 
 #include <melee/ft/kinds/ftCommon/forward.h>
 
-#include "ftpeachfloat.h"
-#include "types.h"
+#include <melee/ft/kinds/ftPeach/ftpeachfloat.h>
+#include <melee/ft/kinds/ftPeach/types.h>
 #include <melee/ft/ft_081B.h>
 #include <melee/ft/ft_0CDD.h>
 #include <melee/ft/ft_0DF1.h>

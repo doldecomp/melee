@@ -1,10 +1,10 @@
-#include "if_3004.h"
+#include <melee/if/if_3004.h>
 
 #include <melee/gm/forward.h>
 
-#include "soundtest.h"
-#include "textlib.h"
-#include "types.h"
+#include <melee/if/soundtest.h>
+#include <melee/if/textlib.h>
+#include <melee/if/types.h>
 #include <melee/gm/gm_unsplit.h>
 #include <melee/gm/gmmain_lib.h>
 #include <melee/lb/lbaudio_ax.h>

@@ -1,4 +1,4 @@
-#include "ftnessspecialhi.h"
+#include <melee/ft/kinds/ftNess/ftnessspecialhi.h>
 
 #include <Runtime/platform.h>
 
@@ -8,8 +8,8 @@
 #include <math.h>
 #include <placeholder.h>
 
-#include "ftness.h"
-#include "types.h"
+#include <melee/ft/kinds/ftNess/ftness.h>
+#include <melee/ft/kinds/ftNess/types.h>
 #include <dolphin/mtx.h>
 #include <melee/ef/eflib.h>
 #include <melee/ef/efsync.h>

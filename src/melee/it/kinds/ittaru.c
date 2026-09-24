@@ -1,8 +1,8 @@
-#include "ittaru.h"
+#include <melee/it/kinds/ittaru.h>
 
 #include <placeholder.h>
 
-#include "inlines.h"
+#include <melee/it/kinds/inlines.h>
 #include <melee/cm/camera.h>
 #include <melee/ef/efsync.h>
 #include <melee/it/inlines.h>

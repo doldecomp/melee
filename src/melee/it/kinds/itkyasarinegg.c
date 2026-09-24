@@ -1,4 +1,4 @@
-#include "itkyasarinegg.h"
+#include <melee/it/kinds/itkyasarinegg.h>
 
 #include <melee/ef/efsync.h>
 #include <melee/it/inlines.h>

@@ -1,4 +1,4 @@
-#include "ftfoxspecialhi.h"
+#include <melee/ft/kinds/ftFox/ftfoxspecialhi.h>
 
 #include <Runtime/platform.h>
 
@@ -6,7 +6,7 @@
 
 #include <math.h>
 
-#include "types.h"
+#include <melee/ft/kinds/ftFox/types.h>
 #include <dolphin/mtx.h>
 #include <melee/ef/efsync.h>
 #include <melee/ft/fighter.h>

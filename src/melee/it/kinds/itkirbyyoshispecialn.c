@@ -1,4 +1,4 @@
-#include "itkirbyyoshispecialn.h"
+#include <melee/it/kinds/itkirbyyoshispecialn.h>
 
 #include <Runtime/platform.h>
 

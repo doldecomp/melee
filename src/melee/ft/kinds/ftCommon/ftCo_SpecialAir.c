@@ -1,4 +1,4 @@
-#include "ftCo_SpecialAir.h"
+#include <melee/ft/kinds/ftCommon/ftCo_SpecialAir.h>
 
 #include <Runtime/platform.h>
 

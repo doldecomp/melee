@@ -1,4 +1,4 @@
-#include "itdosei.h"
+#include <melee/it/kinds/itdosei.h>
 
 #include <math.h>
 

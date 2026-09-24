@@ -1,9 +1,9 @@
-#include "gmscene.h"
+#include <melee/gm/gmscene.h>
 
-#include "gm_1A36.h"
-#include "gm_unsplit.h"
-#include "gmmain_lib.h"
-#include "gmscdata.h"
+#include <melee/gm/gm_1A36.h>
+#include <melee/gm/gm_unsplit.h>
+#include <melee/gm/gmmain_lib.h>
+#include <melee/gm/gmscdata.h>
 #include <dolphin/os/OSThread.h>
 #include <melee/db/db.h>
 #include <melee/if/ifcoget.h>

@@ -1,10 +1,10 @@
-#include "ftCo_HammerLanding.h"
+#include <melee/ft/kinds/ftCommon/ftCo_HammerLanding.h>
 
 #include <Runtime/platform.h>
 
-#include "ftCo_HammerWait.h"
-#include "ftCo_Landing.h"
-#include "types.h"
+#include <melee/ft/kinds/ftCommon/ftCo_HammerWait.h>
+#include <melee/ft/kinds/ftCommon/ftCo_Landing.h>
+#include <melee/ft/kinds/ftCommon/types.h>
 #include <melee/ft/fighter.h>
 #include <melee/ft/ft_084E.h>
 #include <melee/ft/types.h>

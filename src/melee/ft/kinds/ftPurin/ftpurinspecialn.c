@@ -1,14 +1,14 @@
-#include "ftpurinspecialn.h"
+#include <melee/ft/kinds/ftPurin/ftpurinspecialn.h>
 
 #include <melee/ft/forward.h>
 
 #include <math.h>
 #include <placeholder.h>
 
-#include "forward.h"
-#include "ftpurin.h"
-#include "inlines.h"
-#include "types.h"
+#include <melee/ft/kinds/ftPurin/forward.h>
+#include <melee/ft/kinds/ftPurin/ftpurin.h>
+#include <melee/ft/kinds/ftPurin/inlines.h>
+#include <melee/ft/kinds/ftPurin/types.h>
 #include <melee/cm/camera.h>
 #include <melee/ef/efsync.h>
 #include <melee/ft/fighter.h>

@@ -1,8 +1,8 @@
-#include "itlinkarrow.h"
+#include <melee/it/kinds/itlinkarrow.h>
 
 #include <math.h>
 
-#include "inlines.h"
+#include <melee/it/kinds/inlines.h>
 #include <melee/db/db.h>
 #include <melee/ef/efsync.h>
 #include <melee/ft/ftlib.h>

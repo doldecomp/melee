@@ -1,8 +1,8 @@
-#include "lbmthp.h"
+#include <melee/lb/lbmthp.h>
 
 #include <placeholder.h>
 
-#include "lbfile.h"
+#include <melee/lb/lbfile.h>
 #include <dolphin/dvd.h>
 #include <dolphin/gx/GXTexture.h>
 #include <dolphin/os.h>

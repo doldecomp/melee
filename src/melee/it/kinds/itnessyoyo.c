@@ -1,7 +1,7 @@
-#include "itnessyoyo.h"
+#include <melee/it/kinds/itnessyoyo.h>
 
-#include "inlines.h"
-#include "itlinkhookshot.h"
+#include <melee/it/kinds/inlines.h>
+#include <melee/it/kinds/itlinkhookshot.h>
 #include <melee/ft/ftlib.h>
 #include <melee/ft/inlines.h>
 #include <melee/ft/kinds/ftNess/ftnessattackhi4.h>

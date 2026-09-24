@@ -1,10 +1,10 @@
-#include "ftCo_ShieldBreakFall.h"
+#include <melee/ft/kinds/ftCommon/ftCo_ShieldBreakFall.h>
 
 #include <Runtime/platform.h>
 
 #include <melee/ft/forward.h>
 
-#include "ftCo_ShieldBreakDown.h"
+#include <melee/ft/kinds/ftCommon/ftCo_ShieldBreakDown.h>
 #include <melee/ft/fighter.h>
 #include <melee/ft/ft_081B.h>
 #include <melee/ft/ft_084E.h>

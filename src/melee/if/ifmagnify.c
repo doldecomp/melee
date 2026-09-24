@@ -1,9 +1,9 @@
-#include "ifmagnify.h"
+#include <melee/if/ifmagnify.h>
 
 #include <math.h>
 
-#include "if_2FD9.h"
-#include "ifall.h"
+#include <melee/if/if_2FD9.h>
+#include <melee/if/ifall.h>
 #include <melee/cm/camera.h>
 #include <melee/ft/ftdrawcommon.h>
 #include <melee/ft/ftlib.h>

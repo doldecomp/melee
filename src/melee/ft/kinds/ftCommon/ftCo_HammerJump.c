@@ -1,14 +1,14 @@
-#include "ftCo_HammerJump.h"
+#include <melee/ft/kinds/ftCommon/ftCo_HammerJump.h>
 
 #include <Runtime/platform.h>
 
 #include <melee/ft/forward.h>
 
-#include "forward.h"
-#include "ftCo_HammerFall.h"
-#include "ftCo_HammerKneeBend.h"
-#include "ftCo_HammerWait.h"
-#include "ftCo_Jump.h"
+#include <melee/ft/kinds/ftCommon/forward.h>
+#include <melee/ft/kinds/ftCommon/ftCo_HammerFall.h>
+#include <melee/ft/kinds/ftCommon/ftCo_HammerKneeBend.h>
+#include <melee/ft/kinds/ftCommon/ftCo_HammerWait.h>
+#include <melee/ft/kinds/ftCommon/ftCo_Jump.h>
 #include <melee/ft/fighter.h>
 #include <melee/ft/ftcommon.h>
 

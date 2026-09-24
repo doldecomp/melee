@@ -1,6 +1,6 @@
-#include "gmresult.h"
+#include <melee/gm/gmresult.h>
 
-#include "types.h"
+#include <melee/gm/types.h>
 #include <melee/lb/lb_013B.h>
 
 /// @todo .sdata order hack
@@ -59,10 +59,10 @@ union {
 
 HSD_Archive* lbl_804D65B8;
 
-#include "gm_1601.h"
-#include "gm_1798.h"
-#include "gm_unsplit.h"
-#include "gmresultplayer.h"
+#include <melee/gm/gm_1601.h>
+#include <melee/gm/gm_1798.h>
+#include <melee/gm/gm_unsplit.h>
+#include <melee/gm/gmresultplayer.h>
 #include <dolphin/gx/GXStruct.h>
 #include <dolphin/types.h>
 #include <melee/if/ifcoget.h>

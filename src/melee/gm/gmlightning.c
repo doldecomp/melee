@@ -1,11 +1,11 @@
-#include "gmlightning.h"
+#include <melee/gm/gmlightning.h>
 
-#include "gm_unsplit.h"
-#include "gmmain_lib.h"
-#include "gmmovieend.h"
-#include "gmvsmelee.h"
-#include "gmvsmode.h"
-#include "types.h"
+#include <melee/gm/gm_unsplit.h>
+#include <melee/gm/gmmain_lib.h>
+#include <melee/gm/gmmovieend.h>
+#include <melee/gm/gmvsmelee.h>
+#include <melee/gm/gmvsmode.h>
+#include <melee/gm/types.h>
 #include <melee/if/if_2FD9.h>
 
 GameModeState gm_Mode_LightningVs_States[] = {

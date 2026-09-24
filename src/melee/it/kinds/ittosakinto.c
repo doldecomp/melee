@@ -1,4 +1,4 @@
-#include "ittosakinto.h"
+#include <melee/it/kinds/ittosakinto.h>
 
 #include <Runtime/platform.h>
 

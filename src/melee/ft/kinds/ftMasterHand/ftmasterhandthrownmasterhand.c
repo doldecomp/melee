@@ -1,8 +1,8 @@
-#include "ftmasterhandthrownmasterhand.h"
+#include <melee/ft/kinds/ftMasterHand/ftmasterhandthrownmasterhand.h>
 
 #include <melee/ft/kinds/ftCommon/forward.h>
 
-#include "types.h"
+#include <melee/ft/kinds/ftMasterHand/types.h>
 #include <melee/ft/fighter.h>
 #include <melee/ft/ftanim.h>
 #include <melee/ft/ftcommon.h>

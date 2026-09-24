@@ -1,4 +1,4 @@
-#include "ftCo_StopWall.h"
+#include <melee/ft/kinds/ftCommon/ftCo_StopWall.h>
 
 #include <Runtime/platform.h>
 

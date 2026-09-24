@@ -1,13 +1,13 @@
-#include "ftcaptain.h"
+#include <melee/ft/kinds/ftCaptain/ftcaptain.h>
 
 #include <melee/ft/kinds/ftCommon/forward.h>
 
-#include "forward.h"
-#include "ftcaptainspecialhi.h"
-#include "ftcaptainspeciallw.h"
-#include "ftcaptainspecialn.h"
-#include "ftcaptainspecials.h"
-#include "types.h"
+#include <melee/ft/kinds/ftCaptain/forward.h>
+#include <melee/ft/kinds/ftCaptain/ftcaptainspecialhi.h>
+#include <melee/ft/kinds/ftCaptain/ftcaptainspeciallw.h>
+#include <melee/ft/kinds/ftCaptain/ftcaptainspecialn.h>
+#include <melee/ft/kinds/ftCaptain/ftcaptainspecials.h>
+#include <melee/ft/kinds/ftCaptain/types.h>
 #include <melee/ft/ft_0CD1.h>
 #include <melee/ft/ftcamera.h>
 #include <melee/ft/ftlipstickswing.h>

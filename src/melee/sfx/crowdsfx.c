@@ -1,4 +1,4 @@
-#include "crowdsfx.h"
+#include <melee/sfx/crowdsfx.h>
 
 #include <melee/mp/forward.h>
 

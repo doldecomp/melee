@@ -1,11 +1,11 @@
-#include "ifprize.h"
+#include <melee/if/ifprize.h>
 
 #include <melee/cm/forward.h>
 
 #include <placeholder.h>
 #include <stdio.h>
 
-#include "forward.h"
+#include <melee/if/forward.h>
 #include <dolphin/pad.h>
 #include <melee/gm/gm_unsplit.h>
 #include <melee/gm/gmmain_lib.h>

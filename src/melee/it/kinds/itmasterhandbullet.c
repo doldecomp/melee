@@ -1,4 +1,4 @@
-#include "itmasterhandbullet.h"
+#include <melee/it/kinds/itmasterhandbullet.h>
 
 #include <Runtime/platform.h>
 

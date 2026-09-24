@@ -1,4 +1,4 @@
-#include "ftgkoopa.h"
+#include <melee/ft/kinds/ftGigaKoopa/ftgkoopa.h>
 
 #include <melee/ft/kinds/ftCommon/forward.h>
 #include <melee/ft/kinds/ftKoopa/forward.h>

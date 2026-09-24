@@ -1,4 +1,4 @@
-#include "lbtrigf.h"
+#include <melee/lb/lbtrigf.h>
 
 #include <Runtime/platform.h>
 

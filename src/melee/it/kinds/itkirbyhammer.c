@@ -1,6 +1,6 @@
-#include "itkirbyhammer.h"
+#include <melee/it/kinds/itkirbyhammer.h>
 
-#include "inlines.h"
+#include <melee/it/kinds/inlines.h>
 #include <melee/db/db.h>
 #include <melee/ef/efasync.h>
 #include <melee/ft/kinds/ftKirby/ftkirby.h>

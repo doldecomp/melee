@@ -1,10 +1,10 @@
-#include "itfreeze.h"
+#include <melee/it/kinds/itfreeze.h>
 
 #include <placeholder.h>
 
-#include "forward.h"
-#include "inlines.h"
-#include "itwhitebea.h"
+#include <melee/it/kinds/forward.h>
+#include <melee/it/kinds/inlines.h>
+#include <melee/it/kinds/itwhitebea.h>
 #include <melee/it/inlines.h>
 #include <melee/it/it_26B1.h>
 #include <melee/it/it_2725.h>

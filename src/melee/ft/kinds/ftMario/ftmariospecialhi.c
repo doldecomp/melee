@@ -1,4 +1,4 @@
-#include "ftmariospecialhi.h"
+#include <melee/ft/kinds/ftMario/ftmariospecialhi.h>
 
 #include <Runtime/platform.h>
 
@@ -6,8 +6,8 @@
 
 #include <math.h>
 
-#include "inlines.h"
-#include "types.h"
+#include <melee/ft/kinds/ftMario/inlines.h>
+#include <melee/ft/kinds/ftMario/types.h>
 #include <dolphin/mtx.h>
 #include <melee/ft/fighter.h>
 #include <melee/ft/ft_081B.h>

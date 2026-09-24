@@ -1,8 +1,8 @@
-#include "itlinkboomerang.h"
+#include <melee/it/kinds/itlinkboomerang.h>
 
 #include <placeholder.h>
 
-#include "inlines.h"
+#include <melee/it/kinds/inlines.h>
 #include <melee/ft/ftlib.h>
 #include <melee/ft/kinds/ftLink/ftlinkspecialhi.h>
 #include <melee/ft/kinds/ftLink/ftlinkspecials.h>

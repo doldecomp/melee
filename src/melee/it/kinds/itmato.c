@@ -1,4 +1,4 @@
-#include "itmato.h"
+#include <melee/it/kinds/itmato.h>
 
 #include <Runtime/platform.h>
 

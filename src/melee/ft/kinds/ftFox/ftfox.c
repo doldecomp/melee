@@ -1,16 +1,16 @@
-#include "ftfox.h"
+#include <melee/ft/kinds/ftFox/ftfox.h>
 
 #include <Runtime/platform.h>
 
 #include <melee/ft/forward.h>
 #include <melee/it/forward.h>
 
-#include "ftfoxappeals.h"
-#include "ftfoxspecialhi.h"
-#include "ftfoxspeciallw.h"
-#include "ftfoxspecialn.h"
-#include "ftfoxspecials.h"
-#include "types.h"
+#include <melee/ft/kinds/ftFox/ftfoxappeals.h>
+#include <melee/ft/kinds/ftFox/ftfoxspecialhi.h>
+#include <melee/ft/kinds/ftFox/ftfoxspeciallw.h>
+#include <melee/ft/kinds/ftFox/ftfoxspecialn.h>
+#include <melee/ft/kinds/ftFox/ftfoxspecials.h>
+#include <melee/ft/kinds/ftFox/types.h>
 #include <melee/ft/fighter.h>
 #include <melee/ft/ftanim.h>
 #include <melee/ft/ftcamera.h>

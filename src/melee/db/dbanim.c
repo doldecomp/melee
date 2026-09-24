@@ -1,4 +1,4 @@
-#include "db.h"
+#include <melee/db/db.h>
 #include <melee/ft/ftlib.h>
 #include <melee/ft/inlines.h>
 #include <melee/ft/kinds/ftCommon/ftCo_KinokoGiantEnd.h>

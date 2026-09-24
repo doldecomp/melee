@@ -1,10 +1,10 @@
-#include "itoldkuri.h"
+#include <melee/it/kinds/itoldkuri.h>
 
 #include <Runtime/platform.h>
 
 #include <placeholder.h>
 
-#include "inlines.h"
+#include <melee/it/kinds/inlines.h>
 #include <melee/cm/camera.h>
 #include <melee/ft/ftlib.h>
 #include <melee/it/inlines.h>

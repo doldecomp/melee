@@ -1,17 +1,17 @@
-#include "gmvs.h"
+#include <melee/gm/gmvs.h>
 
 #include <Runtime/platform.h>
 
 #include <string.h>
 
-#include "forward.h"
-#include "gm_1884.h"
-#include "gm_18A1.h"
-#include "gm_unsplit.h"
-#include "gmmain_lib.h"
-#include "gmmultiman.h"
-#include "gmpause.h"
-#include "types.h"
+#include <melee/gm/forward.h>
+#include <melee/gm/gm_1884.h>
+#include <melee/gm/gm_18A1.h>
+#include <melee/gm/gm_unsplit.h>
+#include <melee/gm/gmmain_lib.h>
+#include <melee/gm/gmmultiman.h>
+#include <melee/gm/gmpause.h>
+#include <melee/gm/types.h>
 #include <dolphin/pad.h>
 #include <melee/cm/camera.h>
 #include <melee/db/db.h>

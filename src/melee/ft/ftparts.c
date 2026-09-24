@@ -1,14 +1,14 @@
-#include "ftparts.h"
+#include <melee/ft/ftparts.h>
 
 #include <placeholder.h>
 
-#include "fighter.h"
-#include "forward.h"
-#include "ftdata.h"
-#include "ftmaterial.h"
-#include "ftparts.static.h"
-#include "inlines.h"
-#include "types.h"
+#include <melee/ft/fighter.h>
+#include <melee/ft/forward.h>
+#include <melee/ft/ftdata.h>
+#include <melee/ft/ftmaterial.h>
+#include <melee/ft/ftparts.static.h>
+#include <melee/ft/inlines.h>
+#include <melee/ft/types.h>
 #include <dolphin/mtx.h>
 #include <melee/lb/lbrefract.h>
 #include <sysdolphin/baselib/class.h>

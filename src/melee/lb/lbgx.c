@@ -1,4 +1,4 @@
-#include "lbgx.h"
+#include <melee/lb/lbgx.h>
 
 #include <placeholder.h>
 

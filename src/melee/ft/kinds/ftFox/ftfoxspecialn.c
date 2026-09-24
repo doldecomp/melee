@@ -1,13 +1,13 @@
-#include "ftfoxspecialn.h"
+#include <melee/ft/kinds/ftFox/ftfoxspecialn.h>
 
 #include <melee/ft/forward.h>
 #include <melee/ft/kinds/ftCommon/forward.h>
 
 #include <math.h>
 
-#include "ftfox.h"
-#include "inlines.h"
-#include "types.h"
+#include <melee/ft/kinds/ftFox/ftfox.h>
+#include <melee/ft/kinds/ftFox/inlines.h>
+#include <melee/ft/kinds/ftFox/types.h>
 #include <melee/ft/fighter.h>
 #include <melee/ft/ft_081B.h>
 #include <melee/ft/ft_084E.h>

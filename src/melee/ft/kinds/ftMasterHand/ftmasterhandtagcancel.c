@@ -1,4 +1,4 @@
-#include "ftmasterhandtagcancel.h"
+#include <melee/ft/kinds/ftMasterHand/ftmasterhandtagcancel.h>
 
 #include <Runtime/platform.h>
 

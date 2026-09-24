@@ -1,4 +1,4 @@
-#include "itseakchain.h"
+#include <melee/it/kinds/itseakchain.h>
 
 #include <Runtime/platform.h>
 
@@ -6,9 +6,9 @@
 #include <melee/it/forward.h>
 #include <sysdolphin/baselib/forward.h>
 
-#include "inlines.h"
-#include "itlinkhookshot.h"
-#include "itseakchain.static.h"
+#include <melee/it/kinds/inlines.h>
+#include <melee/it/kinds/itlinkhookshot.h>
+#include <melee/it/kinds/itseakchain.static.h>
 #include <dolphin/mtx.h>
 #include <melee/ft/ftcoll.h>
 #include <melee/ft/ftlib.h>

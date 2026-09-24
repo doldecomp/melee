@@ -1,13 +1,13 @@
-#include "ftCo_CargoTurn.h"
+#include <melee/ft/kinds/ftCommon/ftCo_CargoTurn.h>
 
 #include <Runtime/platform.h>
 
-#include "ftCo_CargoJump.h"
-#include "ftCo_CargoThrow.h"
-#include "ftCo_CargoWait.h"
-#include "ftCo_Shouldered.h"
-#include "ftCo_Turn.h"
-#include "types.h"
+#include <melee/ft/kinds/ftCommon/ftCo_CargoJump.h>
+#include <melee/ft/kinds/ftCommon/ftCo_CargoThrow.h>
+#include <melee/ft/kinds/ftCommon/ftCo_CargoWait.h>
+#include <melee/ft/kinds/ftCommon/ftCo_Shouldered.h>
+#include <melee/ft/kinds/ftCommon/ftCo_Turn.h>
+#include <melee/ft/kinds/ftCommon/types.h>
 #include <melee/ft/ft_084E.h>
 #include <melee/ft/ftanim.h>
 #include <melee/ft/kinds/ftDonkey/types.h>

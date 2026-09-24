@@ -4,12 +4,12 @@
 #include <placeholder.h>
 #include <stddef.h>
 
-#include "forward.h"
-#include "ftkirby.h"
-#include "ftkirbycaptureyoshi.h"
-#include "ftkirbyspecialdonkey.h"
-#include "ftkirbyyoshiegg.h"
-#include "types.h"
+#include <melee/ft/kinds/ftKirby/forward.h>
+#include <melee/ft/kinds/ftKirby/ftkirby.h>
+#include <melee/ft/kinds/ftKirby/ftkirbycaptureyoshi.h>
+#include <melee/ft/kinds/ftKirby/ftkirbyspecialdonkey.h>
+#include <melee/ft/kinds/ftKirby/ftkirbyyoshiegg.h>
+#include <melee/ft/kinds/ftKirby/types.h>
 #include <melee/ft/fighter.h>
 #include <melee/ft/ft_081B.h>
 #include <melee/ft/ft_084E.h>

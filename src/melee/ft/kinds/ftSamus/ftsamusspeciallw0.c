@@ -1,10 +1,10 @@
-#include "ftsamusspeciallw0.h"
+#include <melee/ft/kinds/ftSamus/ftsamusspeciallw0.h>
 
 #include <melee/ft/forward.h>
 
-#include "ftsamus.h"
-#include "ftsamusspeciallw1.h"
-#include "types.h"
+#include <melee/ft/kinds/ftSamus/ftsamus.h>
+#include <melee/ft/kinds/ftSamus/ftsamusspeciallw1.h>
+#include <melee/ft/kinds/ftSamus/types.h>
 #include <dolphin/mtx.h>
 #include <melee/ft/fighter.h>
 #include <melee/ft/ft_081B.h>

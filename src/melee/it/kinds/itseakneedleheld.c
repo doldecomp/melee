@@ -1,8 +1,8 @@
-#include "itseakneedleheld.h"
+#include <melee/it/kinds/itseakneedleheld.h>
 
 #include <melee/ft/forward.h>
 
-#include "inlines.h"
+#include <melee/it/kinds/inlines.h>
 #include <melee/ft/ftlib.h>
 #include <melee/ft/kinds/ftKirby/ftkirbyspecialdonkey.h>
 #include <melee/ft/kinds/ftSeak/ftseakspecials.h>

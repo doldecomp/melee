@@ -1,11 +1,11 @@
-#include "ftclinkappeals.h"
+#include <melee/ft/kinds/ftCLink/ftclinkappeals.h>
 
 #include <Runtime/platform.h>
 
 #include <melee/ft/forward.h>
 
-#include "ftclink.h"
-#include "inlines.h"
+#include <melee/ft/kinds/ftCLink/ftclink.h>
+#include <melee/ft/kinds/ftCLink/inlines.h>
 #include <melee/ft/ft_081B.h>
 #include <melee/ft/ft_084E.h>
 #include <melee/ft/ft_0892.h>

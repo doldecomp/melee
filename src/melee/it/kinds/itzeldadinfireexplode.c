@@ -1,8 +1,8 @@
-#include "itzeldadinfireexplode.h"
+#include <melee/it/kinds/itzeldadinfireexplode.h>
 
 #include <placeholder.h>
 
-#include "inlines.h"
+#include <melee/it/kinds/inlines.h>
 #include <melee/cm/camera.h>
 #include <melee/db/db.h>
 #include <melee/ef/eflib.h>

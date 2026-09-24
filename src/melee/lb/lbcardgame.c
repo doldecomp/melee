@@ -1,8 +1,8 @@
-#include "lbcardgame.h"
+#include <melee/lb/lbcardgame.h>
 
-#include "lbarchive.h"
-#include "lbcardnew.h"
-#include "lblanguage.h"
+#include <melee/lb/lbarchive.h>
+#include <melee/lb/lbcardnew.h>
+#include <melee/lb/lblanguage.h>
 #include <dolphin/card.h>
 #include <dolphin/os.h>
 #include <melee/gm/gm_unsplit.h>

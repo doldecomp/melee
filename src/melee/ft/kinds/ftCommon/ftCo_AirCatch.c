@@ -1,4 +1,4 @@
-#include "ftCo_AirCatch.h"
+#include <melee/ft/kinds/ftCommon/ftCo_AirCatch.h>
 
 #include <Runtime/platform.h>
 
@@ -7,9 +7,9 @@
 
 #include <placeholder.h>
 
-#include "ftCo_FallSpecial.h"
-#include "ftCo_Landing.h"
-#include "types.h"
+#include <melee/ft/kinds/ftCommon/ftCo_FallSpecial.h>
+#include <melee/ft/kinds/ftCommon/ftCo_Landing.h>
+#include <melee/ft/kinds/ftCommon/types.h>
 #include <melee/ft/fighter.h>
 #include <melee/ft/ft_081B.h>
 #include <melee/ft/ft_0877.h>

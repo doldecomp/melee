@@ -1,10 +1,10 @@
-#include "itkyasarin.h"
+#include <melee/it/kinds/itkyasarin.h>
 
 #include <math.h>
 #include <placeholder.h>
 
-#include "forward.h"
-#include "itkyasarinegg.h"
+#include <melee/it/kinds/forward.h>
+#include <melee/it/kinds/itkyasarinegg.h>
 #include <melee/gr/grinishie2.h>
 #include <melee/it/inlines.h>
 #include <melee/it/it_26B1.h>

@@ -1,8 +1,8 @@
-#include "itfoxblaster.h"
+#include <melee/it/kinds/itfoxblaster.h>
 
 #include <stdbool.h>
 
-#include "inlines.h"
+#include <melee/it/kinds/inlines.h>
 #include <melee/ef/eflib.h>
 #include <melee/ef/efsync.h>
 #include <melee/ft/ft_0BF0.h>

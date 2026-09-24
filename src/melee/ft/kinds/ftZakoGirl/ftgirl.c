@@ -1,4 +1,4 @@
-#include "ftgirl.h"
+#include <melee/ft/kinds/ftZakoGirl/ftgirl.h>
 
 #include <Runtime/platform.h>
 

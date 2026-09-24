@@ -1,12 +1,12 @@
-#include "gmregclear.h"
+#include <melee/gm/gmregclear.h>
 
 #include <Runtime/platform.h>
 
 #include <sysdolphin/baselib/forward.h>
 
-#include "forward.h"
-#include "gm_unsplit.h"
-#include "types.h"
+#include <melee/gm/forward.h>
+#include <melee/gm/gm_unsplit.h>
+#include <melee/gm/types.h>
 #include <dolphin/pad.h>
 #include <melee/cm/camera.h>
 #include <melee/gr/ground.h>

@@ -1,4 +1,4 @@
-#include "ftCo_DamageScrew.h"
+#include <melee/ft/kinds/ftCommon/ftCo_DamageScrew.h>
 
 #include <Runtime/platform.h>
 
@@ -6,9 +6,9 @@
 
 #include <stdbool.h>
 
-#include "forward.h"
-#include "ftCo_FallSpecial.h"
-#include "inlines.h"
+#include <melee/ft/kinds/ftCommon/forward.h>
+#include <melee/ft/kinds/ftCommon/ftCo_FallSpecial.h>
+#include <melee/ft/kinds/ftCommon/inlines.h>
 #include <melee/ft/fighter.h>
 #include <melee/ft/ft_081B.h>
 #include <melee/ft/ftcommon.h>

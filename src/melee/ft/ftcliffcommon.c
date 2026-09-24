@@ -1,19 +1,19 @@
-#include "ftcliffcommon.h"
+#include <melee/ft/ftcliffcommon.h>
 
 #include <Runtime/platform.h>
 
-#include "fighter.h"
-#include "ft_081B.h"
-#include "ft_0877.h"
-#include "ft_0881.h"
-#include "ftanim.h"
-#include "ftcamera.h"
-#include "ftcommon.h"
+#include <melee/ft/fighter.h>
+#include <melee/ft/ft_081B.h>
+#include <melee/ft/ft_0877.h>
+#include <melee/ft/ft_0881.h>
+#include <melee/ft/ftanim.h>
+#include <melee/ft/ftcamera.h>
+#include <melee/ft/ftcommon.h>
 #include "kinds/ftCommon/ftCo_CliffWait.h"
 #include "kinds/ftCommon/ftCo_Fall.h"
 #include "kinds/ftCommon/ftCo_StopCeil.h"
 #include "kinds/ftCommon/types.h"
-#include "types.h"
+#include <melee/ft/types.h>
 #include <dolphin/mtx.h>
 #include <melee/ef/efasync.h>
 #include <melee/mp/mplib.h>

@@ -1,8 +1,8 @@
-#include "ifhazard.h"
+#include <melee/if/ifhazard.h>
 
 #include <sysdolphin/baselib/forward.h>
 
-#include "forward.h"
+#include <melee/if/forward.h>
 #include <dolphin/mtx.h>
 #include <melee/gm/gm_unsplit.h>
 #include <melee/sc/types.h>

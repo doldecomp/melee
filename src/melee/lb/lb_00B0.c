@@ -1,4 +1,4 @@
-#include "lb_00B0.h"
+#include <melee/lb/lb_00B0.h>
 
 #include <dolphin/mtx.h>
 #include <melee/sc/types.h> // IWYU pragma: keep

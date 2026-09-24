@@ -1,5 +1,5 @@
 
-#include "ftcaptainspeciallw.h"
+#include <melee/ft/kinds/ftCaptain/ftcaptainspeciallw.h>
 
 #include <Runtime/platform.h>
 
@@ -7,8 +7,8 @@
 
 #include <placeholder.h>
 
-#include "forward.h"
-#include "types.h"
+#include <melee/ft/kinds/ftCaptain/forward.h>
+#include <melee/ft/kinds/ftCaptain/types.h>
 #include <dolphin/mtx.h>
 #include <melee/ef/efasync.h>
 #include <melee/ft/fighter.h>

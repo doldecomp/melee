@@ -1,4 +1,4 @@
-#include "itlinkbomb.h"
+#include <melee/it/kinds/itlinkbomb.h>
 
 #include <melee/it/forward.h>
 #include <sysdolphin/baselib/forward.h>

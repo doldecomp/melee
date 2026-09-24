@@ -1,4 +1,4 @@
-#include "lb_00F9.h"
+#include <melee/lb/lb_00F9.h>
 
 #include <Runtime/platform.h>
 
@@ -8,11 +8,11 @@
 #include <placeholder.h>
 #include <stddef.h>
 
-#include "forward.h"
-#include "lbcollision.h"
-#include "lbspdisplay.h"
-#include "lbvector.h"
-#include "types.h"
+#include <melee/lb/forward.h>
+#include <melee/lb/lbcollision.h>
+#include <melee/lb/lbspdisplay.h>
+#include <melee/lb/lbvector.h>
+#include <melee/lb/types.h>
 #include <dolphin/mtx.h>
 #include <melee/mp/mplib.h>
 #include <sysdolphin/baselib/cobj.h>

@@ -1,17 +1,17 @@
-#include "ftgamewatch.h"
+#include <melee/ft/kinds/ftGameWatch/ftgamewatch.h>
 
 #include <melee/ft/kinds/ftCommon/forward.h>
 
-#include "ftgamewatchattack100.h"
-#include "ftgamewatchattack11.h"
-#include "ftgamewatchattackair.h"
-#include "ftgamewatchattacklw3.h"
-#include "ftgamewatchattacks4.h"
-#include "ftgamewatchspecialhi.h"
-#include "ftgamewatchspeciallw.h"
-#include "ftgamewatchspecialn.h"
-#include "ftgamewatchspecials.h"
-#include "types.h"
+#include <melee/ft/kinds/ftGameWatch/ftgamewatchattack100.h>
+#include <melee/ft/kinds/ftGameWatch/ftgamewatchattack11.h>
+#include <melee/ft/kinds/ftGameWatch/ftgamewatchattackair.h>
+#include <melee/ft/kinds/ftGameWatch/ftgamewatchattacklw3.h>
+#include <melee/ft/kinds/ftGameWatch/ftgamewatchattacks4.h>
+#include <melee/ft/kinds/ftGameWatch/ftgamewatchspecialhi.h>
+#include <melee/ft/kinds/ftGameWatch/ftgamewatchspeciallw.h>
+#include <melee/ft/kinds/ftGameWatch/ftgamewatchspecialn.h>
+#include <melee/ft/kinds/ftGameWatch/ftgamewatchspecials.h>
+#include <melee/ft/kinds/ftGameWatch/types.h>
 #include <dolphin/mtx.h>
 #include <melee/ft/ftcamera.h>
 #include <melee/ft/ftcolanim.h>

@@ -1,4 +1,4 @@
-#include "lbspdisplay.h"
+#include <melee/lb/lbspdisplay.h>
 
 #include <Runtime/platform.h>
 
@@ -8,8 +8,8 @@
 #include <stdarg.h>
 #include <stddef.h>
 
-#include "lbdvd.h"
-#include "types.h"
+#include <melee/lb/lbdvd.h>
+#include <melee/lb/types.h>
 #include <dolphin/gx/GXCull.h>
 #include <dolphin/gx/GXGeometry.h>
 #include <dolphin/gx/GXPixel.h>

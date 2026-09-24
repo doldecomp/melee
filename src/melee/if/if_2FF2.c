@@ -1,7 +1,7 @@
-#include "ifall.h"
-#include "ifcoget.h"
-#include "textdraw.h"
-#include "textlib.h"
+#include <melee/if/ifall.h>
+#include <melee/if/ifcoget.h>
+#include <melee/if/textdraw.h>
+#include <melee/if/textlib.h>
 #include <dolphin/mtx.h>
 #include <melee/gm/gm_unsplit.h>
 #include <melee/lb/lb_00B0.h>

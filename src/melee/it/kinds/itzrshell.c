@@ -1,7 +1,7 @@
-#include "itzrshell.h"
+#include <melee/it/kinds/itzrshell.h>
 
-#include "itnokonoko.h"
-#include "itzgshell.h"
+#include <melee/it/kinds/itnokonoko.h>
+#include <melee/it/kinds/itzgshell.h>
 #include <melee/gr/grzakogenerator.h>
 #include <melee/it/it_26B1.h>
 #include <melee/it/item.h>

@@ -1,11 +1,11 @@
-#include "ftluigispecialn.h"
+#include <melee/ft/kinds/ftLuigi/ftluigispecialn.h>
 
 #include <Runtime/platform.h>
 
 #include <melee/ft/forward.h>
 #include <melee/it/forward.h>
 
-#include "forward.h"
+#include <melee/ft/kinds/ftLuigi/forward.h>
 #include <dolphin/mtx.h>
 #include <melee/ef/efsync.h>
 #include <melee/ft/fighter.h>

@@ -1,15 +1,15 @@
-#include "ftcrazyhandfingerbeam.h"
+#include <melee/ft/kinds/ftCrazyHand/ftcrazyhandfingerbeam.h>
 
 #include <Runtime/platform.h>
 
 #include <sysdolphin/baselib/forward.h>
 
-#include "ftcrazyhandcapturecrazyhand.h"
-#include "ftcrazyhandcapturewaitcrazyhand.h"
-#include "ftcrazyhandfingergun2.h"
-#include "ftcrazyhandtagcancel.h"
-#include "inlines.h"
-#include "types.h"
+#include <melee/ft/kinds/ftCrazyHand/ftcrazyhandcapturecrazyhand.h>
+#include <melee/ft/kinds/ftCrazyHand/ftcrazyhandcapturewaitcrazyhand.h>
+#include <melee/ft/kinds/ftCrazyHand/ftcrazyhandfingergun2.h>
+#include <melee/ft/kinds/ftCrazyHand/ftcrazyhandtagcancel.h>
+#include <melee/ft/kinds/ftCrazyHand/inlines.h>
+#include <melee/ft/kinds/ftCrazyHand/types.h>
 #include <dolphin/mtx.h>
 #include <melee/ft/fighter.h>
 #include <melee/ft/ft_084E.h>

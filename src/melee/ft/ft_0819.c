@@ -1,10 +1,10 @@
-#include "ft_0819.h"
+#include <melee/ft/ft_0819.h>
 
 #include <placeholder.h>
 
-#include "ftCo_800C703C.h"
-#include "inlines.h"
-#include "types.h"
+#include <melee/ft/ftCo_800C703C.h>
+#include <melee/ft/inlines.h>
+#include <melee/ft/types.h>
 #include <melee/it/inlines.h>
 #include <melee/it/it_26B1.h>
 #include <melee/lb/lb_0146.h>

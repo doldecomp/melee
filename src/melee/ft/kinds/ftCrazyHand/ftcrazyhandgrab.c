@@ -1,10 +1,10 @@
-#include "ftcrazyhandgrab.h"
+#include <melee/ft/kinds/ftCrazyHand/ftcrazyhandgrab.h>
 
 #include <Runtime/platform.h>
 
 #include <sysdolphin/baselib/forward.h>
 
-#include "ftcrazyhandcancel.h"
+#include <melee/ft/kinds/ftCrazyHand/ftcrazyhandcancel.h>
 #include <melee/ft/fighter.h>
 #include <melee/ft/ft_084E.h>
 #include <melee/ft/ftbosslib.h>

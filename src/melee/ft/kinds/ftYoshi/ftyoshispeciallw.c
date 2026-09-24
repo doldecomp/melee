@@ -1,12 +1,12 @@
-#include "ftyoshispeciallw.h"
+#include <melee/ft/kinds/ftYoshi/ftyoshispeciallw.h>
 
 #include <melee/ft/forward.h>
 #include <sysdolphin/baselib/forward.h>
 
 #include <placeholder.h>
 
-#include "forward.h"
-#include "types.h"
+#include <melee/ft/kinds/ftYoshi/forward.h>
+#include <melee/ft/kinds/ftYoshi/types.h>
 #include <dolphin/mtx.h>
 #include <melee/ft/fighter.h>
 #include <melee/ft/ft_081B.h>

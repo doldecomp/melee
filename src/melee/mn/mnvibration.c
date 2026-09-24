@@ -1,4 +1,4 @@
-#include "mnvibration.h"
+#include <melee/mn/mnvibration.h>
 
 #include <dolphin/pad.h>
 #include <sysdolphin/baselib/debug.h>
@@ -11,9 +11,9 @@
 #define HSD_ASSERT(line, cond)                                                \
     ((cond) ? ((void) 0) : __assert(__FILE__, line, #cond))
 
-#include "inlines.h"
-#include "mnmain.h"
-#include "types.h"
+#include <melee/mn/inlines.h>
+#include <melee/mn/mnmain.h>
+#include <melee/mn/types.h>
 #include <dolphin/os.h>
 #include <melee/gm/gm_1A36.h>
 #include <melee/gm/gmmain_lib.h>

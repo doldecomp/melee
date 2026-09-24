@@ -1,4 +1,4 @@
-#include "ftcrazyhandgrabunk1b174.h"
+#include <melee/ft/kinds/ftCrazyHand/ftcrazyhandgrabunk1b174.h>
 
 #include <Runtime/platform.h>
 
@@ -6,8 +6,8 @@
 
 #include <math.h>
 
-#include "ftcrazyhandtagcancel.h"
-#include "types.h"
+#include <melee/ft/kinds/ftCrazyHand/ftcrazyhandtagcancel.h>
+#include <melee/ft/kinds/ftCrazyHand/types.h>
 #include <dolphin/mtx.h>
 #include <melee/cm/camera.h>
 #include <melee/ft/fighter.h>

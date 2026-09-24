@@ -1,15 +1,15 @@
-#include "ftkoopa.h"
+#include <melee/ft/kinds/ftKoopa/ftkoopa.h>
 
 #include <melee/it/forward.h>
 
 #include <placeholder.h>
 
-#include "forward.h"
-#include "ftkoopaspecialhi.h"
-#include "ftkoopaspeciallw.h"
-#include "ftkoopaspecialn.h"
-#include "ftkoopaspecials.h"
-#include "types.h"
+#include <melee/ft/kinds/ftKoopa/forward.h>
+#include <melee/ft/kinds/ftKoopa/ftkoopaspecialhi.h>
+#include <melee/ft/kinds/ftKoopa/ftkoopaspeciallw.h>
+#include <melee/ft/kinds/ftKoopa/ftkoopaspecialn.h>
+#include <melee/ft/kinds/ftKoopa/ftkoopaspecials.h>
+#include <melee/ft/kinds/ftKoopa/types.h>
 #include <melee/ft/fighter.h>
 #include <melee/ft/ftcamera.h>
 #include <melee/ft/ftcommon.h>

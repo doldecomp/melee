@@ -1,7 +1,7 @@
-#include "itzgshell.h"
+#include <melee/it/kinds/itzgshell.h>
 
-#include "inlines.h"
-#include "itnokonoko.h"
+#include <melee/it/kinds/inlines.h>
+#include <melee/it/kinds/itnokonoko.h>
 #include <melee/cm/camera.h>
 #include <melee/ef/efasync.h>
 #include <melee/gr/grzakogenerator.h>

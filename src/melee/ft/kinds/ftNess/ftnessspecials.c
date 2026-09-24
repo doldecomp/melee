@@ -1,10 +1,10 @@
-#include "ftnessspecials.h"
+#include <melee/ft/kinds/ftNess/ftnessspecials.h>
 
 #include <Runtime/platform.h>
 
 #include <melee/ft/forward.h>
 
-#include "types.h"
+#include <melee/ft/kinds/ftNess/types.h>
 #include <dolphin/mtx.h>
 #include <melee/ft/fighter.h>
 #include <melee/ft/ft_081B.h>

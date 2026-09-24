@@ -1,12 +1,12 @@
-#include "ftpeachspecialn.h"
+#include <melee/ft/kinds/ftPeach/ftpeachspecialn.h>
 
 #include <Runtime/platform.h>
 
 #include <melee/ft/forward.h>
 #include <sysdolphin/baselib/forward.h>
 
-#include "ftpeach.h"
-#include "types.h"
+#include <melee/ft/kinds/ftPeach/ftpeach.h>
+#include <melee/ft/kinds/ftPeach/types.h>
 #include <dolphin/mtx.h>
 #include <melee/ft/fighter.h>
 #include <melee/ft/ft_081B.h>

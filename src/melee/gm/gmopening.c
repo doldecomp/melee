@@ -1,10 +1,10 @@
-#include "gmopening.h"
+#include <melee/gm/gmopening.h>
 
 #include <stdio.h>
 
-#include "gm_unsplit.h"
-#include "gmmain_lib.h"
-#include "gmtitle.h"
+#include <melee/gm/gm_unsplit.h>
+#include <melee/gm/gmmain_lib.h>
+#include <melee/gm/gmtitle.h>
 #include <melee/lb/lbaudio_ax.h>
 #include <melee/lb/lblanguage.h>
 #include <melee/lb/lbmthp.h>

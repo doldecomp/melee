@@ -1,4 +1,4 @@
-#include "ftnana.h"
+#include <melee/ft/kinds/ftNana/ftnana.h>
 
 #include <Runtime/platform.h>
 

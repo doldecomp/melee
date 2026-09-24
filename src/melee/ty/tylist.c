@@ -1,11 +1,11 @@
-#include "tylist.h"
+#include <melee/ty/tylist.h>
 
 #include <Runtime/platform.h>
 
 #include <placeholder.h>
 
-#include "toy.h"
-#include "types.h"
+#include <melee/ty/toy.h>
+#include <melee/ty/types.h>
 #include <dolphin/mtx.h>
 #include <dolphin/os.h>
 #include <melee/lb/lb_00B0.h>

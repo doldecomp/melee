@@ -1,11 +1,11 @@
-#include "ftlinkspecialhi.h"
+#include <melee/ft/kinds/ftLink/ftlinkspecialhi.h>
 
 #include <Runtime/platform.h>
 
 #include <melee/ft/forward.h>
 #include <sysdolphin/baselib/forward.h>
 
-#include "types.h"
+#include <melee/ft/kinds/ftLink/types.h>
 #include <melee/ef/efsync.h>
 #include <melee/ft/fighter.h>
 #include <melee/ft/ft_081B.h>

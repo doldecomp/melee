@@ -1,13 +1,13 @@
-#include "ft_0DF1.h"
+#include <melee/ft/ft_0DF1.h>
 
 #include <Runtime/platform.h>
 
 #include <stdbool.h>
 
-#include "fighter.h"
-#include "forward.h"
-#include "ftcommon.h"
-#include "types.h"
+#include <melee/ft/fighter.h>
+#include <melee/ft/forward.h>
+#include <melee/ft/ftcommon.h>
+#include <melee/ft/types.h>
 #include <melee/gm/gm_unsplit.h>
 
 static inline bool canUseCstick(Fighter* fp)

@@ -1,4 +1,4 @@
-#include "itdrmariopill.h"
+#include <melee/it/kinds/itdrmariopill.h>
 
 #include <Runtime/platform.h>
 
@@ -9,7 +9,7 @@
 #include <math.h>
 #include <placeholder.h>
 
-#include "inlines.h"
+#include <melee/it/kinds/inlines.h>
 #include <dolphin/mtx.h>
 #include <dolphin/types.h>
 #include <melee/db/db.h>

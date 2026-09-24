@@ -1,10 +1,10 @@
-#include "ftdonkeyheavyfall.h"
+#include <melee/ft/kinds/ftDonkey/ftdonkeyheavyfall.h>
 
 #include <melee/ft/forward.h>
 
-#include "ftdonkeyheavyjump.h"
-#include "ftdonkeyheavywait1.h"
-#include "types.h"
+#include <melee/ft/kinds/ftDonkey/ftdonkeyheavyjump.h>
+#include <melee/ft/kinds/ftDonkey/ftdonkeyheavywait1.h>
+#include <melee/ft/kinds/ftDonkey/types.h>
 #include <melee/ft/fighter.h>
 #include <melee/ft/ft_081B.h>
 #include <melee/ft/ftanim.h>

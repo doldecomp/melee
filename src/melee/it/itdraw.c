@@ -1,7 +1,7 @@
-#include "itdraw.h"
+#include <melee/it/itdraw.h>
 
-#include "inlines.h"
-#include "it_2725.h"
+#include <melee/it/inlines.h>
+#include <melee/it/it_2725.h>
 #include <melee/cm/camera.h>
 #include <melee/ft/ftlib.h>
 #include <melee/lb/lb_0146.h>

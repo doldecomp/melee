@@ -1,23 +1,23 @@
-#include "ftCo_Turn.h"
+#include <melee/ft/kinds/ftCommon/ftCo_Turn.h>
 
 #include <melee/ft/forward.h>
 
 #include <placeholder.h>
 
-#include "forward.h"
-#include "ftCo_AppealS.h"
-#include "ftCo_Attack1.h"
-#include "ftCo_Attack100.h"
-#include "ftCo_AttackHi3.h"
-#include "ftCo_AttackHi4.h"
-#include "ftCo_AttackLw3.h"
-#include "ftCo_AttackLw4.h"
-#include "ftCo_AttackS3.h"
-#include "ftCo_AttackS4.h"
-#include "ftCo_Dash.h"
-#include "ftCo_Guard.h"
-#include "ftCo_Jump.h"
-#include "ftCo_SpecialS.h"
+#include <melee/ft/kinds/ftCommon/forward.h>
+#include <melee/ft/kinds/ftCommon/ftCo_AppealS.h>
+#include <melee/ft/kinds/ftCommon/ftCo_Attack1.h>
+#include <melee/ft/kinds/ftCommon/ftCo_Attack100.h>
+#include <melee/ft/kinds/ftCommon/ftCo_AttackHi3.h>
+#include <melee/ft/kinds/ftCommon/ftCo_AttackHi4.h>
+#include <melee/ft/kinds/ftCommon/ftCo_AttackLw3.h>
+#include <melee/ft/kinds/ftCommon/ftCo_AttackLw4.h>
+#include <melee/ft/kinds/ftCommon/ftCo_AttackS3.h>
+#include <melee/ft/kinds/ftCommon/ftCo_AttackS4.h>
+#include <melee/ft/kinds/ftCommon/ftCo_Dash.h>
+#include <melee/ft/kinds/ftCommon/ftCo_Guard.h>
+#include <melee/ft/kinds/ftCommon/ftCo_Jump.h>
+#include <melee/ft/kinds/ftCommon/ftCo_SpecialS.h>
 #include <melee/ft/fighter.h>
 #include <melee/ft/ft_081B.h>
 #include <melee/ft/ft_084E.h>

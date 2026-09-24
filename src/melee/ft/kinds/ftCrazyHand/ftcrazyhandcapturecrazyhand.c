@@ -1,4 +1,4 @@
-#include "ftcrazyhandcapturecrazyhand.h"
+#include <melee/ft/kinds/ftCrazyHand/ftcrazyhandcapturecrazyhand.h>
 
 #include <Runtime/platform.h>
 

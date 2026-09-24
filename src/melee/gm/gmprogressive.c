@@ -1,9 +1,9 @@
-#include "gmprogressive.h"
+#include <melee/gm/gmprogressive.h>
 
-#include "gm_1A36.h"
-#include "gm_unsplit.h"
-#include "gmmain_lib.h"
-#include "types.h"
+#include <melee/gm/gm_1A36.h>
+#include <melee/gm/gm_unsplit.h>
+#include <melee/gm/gmmain_lib.h>
+#include <melee/gm/types.h>
 #include <dolphin/pad.h>
 #include <melee/lb/lbarchive.h>
 #include <melee/lb/lblanguage.h>

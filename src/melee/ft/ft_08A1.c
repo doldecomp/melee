@@ -1,9 +1,9 @@
-#include "fighter.h"
-#include "ft_0892.h"
-#include "ftcommon.h"
-#include "ftdata.h"
-#include "ftlib.h"
-#include "inlines.h"
+#include <melee/ft/fighter.h>
+#include <melee/ft/ft_0892.h>
+#include <melee/ft/ftcommon.h>
+#include <melee/ft/ftdata.h>
+#include <melee/ft/ftlib.h>
+#include <melee/ft/inlines.h>
 #include "kinds/ftCLink/ftclink.h"
 #include "kinds/ftCommon/ftCo_DownSpot.h"
 #include "kinds/ftCommon/ftCo_HammerWait.h"

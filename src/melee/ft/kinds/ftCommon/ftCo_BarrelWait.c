@@ -1,4 +1,4 @@
-#include "ftCo_BarrelWait.h"
+#include <melee/ft/kinds/ftCommon/ftCo_BarrelWait.h>
 
 #include <Runtime/platform.h>
 
@@ -6,8 +6,8 @@
 
 #include <placeholder.h>
 
-#include "ftCo_Damage.h"
-#include "inlines.h"
+#include <melee/ft/kinds/ftCommon/ftCo_Damage.h>
+#include <melee/ft/kinds/ftCommon/inlines.h>
 #include <melee/ft/fighter.h>
 #include <melee/ft/ftanim.h>
 #include <melee/ft/ftcamera.h>

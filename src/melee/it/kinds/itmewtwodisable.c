@@ -1,4 +1,4 @@
-#include "itmewtwodisable.h"
+#include <melee/it/kinds/itmewtwodisable.h>
 
 #include <Runtime/platform.h>
 

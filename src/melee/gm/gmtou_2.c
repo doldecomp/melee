@@ -4,13 +4,13 @@
 
 #include <placeholder.h>
 
-#include "gm_1601.h"
-#include "gm_1A3F.h"
-#include "gmmain_lib.h"
-#include "gmscene.h"
-#include "gmtoulib.h"
-#include "inlines.h"
-#include "types.h"
+#include <melee/gm/gm_1601.h>
+#include <melee/gm/gm_1A3F.h>
+#include <melee/gm/gmmain_lib.h>
+#include <melee/gm/gmscene.h>
+#include <melee/gm/gmtoulib.h>
+#include <melee/gm/inlines.h>
+#include <melee/gm/types.h>
 #include <dolphin/os.h>
 #include <melee/lb/lbarchive.h>
 #include <melee/lb/lbaudio_ax.h>

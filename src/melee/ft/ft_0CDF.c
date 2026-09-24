@@ -1,9 +1,9 @@
-#include "fighter.h"
-#include "ft_081B.h"
-#include "ft_0877.h"
-#include "ft_0CDD.h"
-#include "ftcommon.h"
-#include "types.h"
+#include <melee/ft/fighter.h>
+#include <melee/ft/ft_081B.h>
+#include <melee/ft/ft_0877.h>
+#include <melee/ft/ft_0CDD.h>
+#include <melee/ft/ftcommon.h>
+#include <melee/ft/types.h>
 #include <melee/ef/efsync.h>
 #include <melee/it/kinds/itlgun.h>
 #include <sysdolphin/baselib/gobj.h>

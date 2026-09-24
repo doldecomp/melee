@@ -3,7 +3,7 @@
  * @copydoc melee/mp/mplib.h
  */
 
-#include "mplib.h"
+#include <melee/mp/mplib.h>
 
 #include <Runtime/platform.h>
 
@@ -15,10 +15,10 @@
 #include <stdbool.h>
 #include <stddef.h>
 
-#include "forward.h"
-#include "mpcoll.h"
-#include "mpisland.h"
-#include "types.h"
+#include <melee/mp/forward.h>
+#include <melee/mp/mpcoll.h>
+#include <melee/mp/mpisland.h>
+#include <melee/mp/types.h>
 #include <dolphin/gx/GXGeometry.h>
 #include <dolphin/gx/GXStruct.h>
 #include <dolphin/gx/GXVert.h>

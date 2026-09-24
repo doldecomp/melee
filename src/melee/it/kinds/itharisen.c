@@ -1,4 +1,4 @@
-#include "itharisen.h"
+#include <melee/it/kinds/itharisen.h>
 
 #include <Runtime/platform.h>
 

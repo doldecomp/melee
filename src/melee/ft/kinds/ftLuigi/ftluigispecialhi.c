@@ -1,4 +1,4 @@
-#include "ftluigispecialhi.h"
+#include <melee/ft/kinds/ftLuigi/ftluigispecialhi.h>
 
 #include <Runtime/platform.h>
 
@@ -6,8 +6,8 @@
 
 #include <math.h>
 
-#include "forward.h"
-#include "types.h"
+#include <melee/ft/kinds/ftLuigi/forward.h>
+#include <melee/ft/kinds/ftLuigi/types.h>
 #include <dolphin/mtx.h>
 #include <melee/ft/fighter.h>
 #include <melee/ft/ft_081B.h>

@@ -1,10 +1,10 @@
-#include "ftCo_0C35.h"
+#include <melee/ft/kinds/ftCommon/ftCo_0C35.h>
 
 #include <Runtime/platform.h>
 
 #include <math.h>
 
-#include "ftCo_Damage.h"
+#include <melee/ft/kinds/ftCommon/ftCo_Damage.h>
 #include <dolphin/mtx.h>
 #include <melee/ft/fighter.h>
 #include <melee/ft/ftcommon.h>

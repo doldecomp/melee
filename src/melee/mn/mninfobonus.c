@@ -1,11 +1,11 @@
-#include "mninfobonus.h"
+#include <melee/mn/mninfobonus.h>
 
 #include <melee/sc/forward.h>
 #include <sysdolphin/baselib/forward.h>
 
-#include "inlines.h"
-#include "mninfobonus.static.h"
-#include "mnmain.h"
+#include <melee/mn/inlines.h>
+#include <melee/mn/mninfobonus.static.h>
+#include <melee/mn/mnmain.h>
 #include <melee/db/db.h>
 #include <melee/gm/gm_16F1.h>
 #include <melee/gm/gmvs.h>

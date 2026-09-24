@@ -1,6 +1,6 @@
-#include "itentei.h"
+#include <melee/it/kinds/itentei.h>
 
-#include "inlines.h"
+#include <melee/it/kinds/inlines.h>
 #include <melee/cm/camera.h>
 #include <melee/ef/eflib.h>
 #include <melee/ef/efsync.h>

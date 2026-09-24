@@ -1,4 +1,4 @@
-#include "ftpopospecialn.h"
+#include <melee/ft/kinds/ftPopo/ftpopospecialn.h>
 
 #include <Runtime/platform.h>
 
@@ -7,8 +7,8 @@
 
 #include <placeholder.h>
 
-#include "ftpopo.h"
-#include "types.h"
+#include <melee/ft/kinds/ftPopo/ftpopo.h>
+#include <melee/ft/kinds/ftPopo/types.h>
 #include <dolphin/mtx.h>
 #include <melee/ft/fighter.h>
 #include <melee/ft/ft_081B.h>
