@@ -26,29 +26,9 @@
 #include <sysdolphin/baselib/random.h>
 #include <sysdolphin/baselib/tobj.h>
 
-typedef struct FlagsX {
-    u32 b80 : 1;
-    u32 b40 : 1;
-    u32 b20 : 1;
-    u32 b10 : 1;
-    u32 b8 : 1;
-    u32 b4 : 2;
-    u32 b1 : 1;
-    u8 x;
-    u16 y;
-} FlagsX;
-
-typedef struct UnkX {
-    u8 filler1[0x10];
-    FlagsX x10_flags;
-    u8 filler2[0x34 - 0x14];
-    Vec4 x34_vec; // or float[4] instead of Vec4
-    Vec4 x44_vec;
-    HSD_JObj* x54_jobj[4];
-} UnkX; // HudIndex
-
-/* 2F491C */ static void ifStatus_PercentOnDeathAnimationThink(UnkX* value,
-                                                               s32, s32);
+/* 2F491C */ static void
+ifStatus_PercentOnDeathAnimationThink(IfDamageState* value, s32,
+                                      IfDamageState*);
 
 /* Color endpoints for damage percentage interpolation (extern from .sdata2) */
 /* Start color (low damage) */
@@ -130,32 +110,33 @@ jobj_flagCheckSetMtxDirtySub(HSD_JObj* jobj) // jobj @ r30 when inlined
     }
 }
 
-static inline void* jobj_get(HSD_JObj* jobj_r30, UnkX* value, s32 i)
+static inline void* jobj_get(HSD_JObj* jobj_r30, IfDamageState* value, s32 i)
 {
-    return value->x54_jobj[i];
+    return value->jobjs[i];
 }
 
-void ifStatus_PercentOnDeathAnimationThink(UnkX* value, s32 arg1, s32 arg2)
+void ifStatus_PercentOnDeathAnimationThink(IfDamageState* value, s32 arg1,
+                                           IfDamageState* arg2)
 {
     s32 i;
 
-    if (value->x10_flags.b40) {
+    if (value->flags.randomize_velocity) {
         for (i = 0; i < 4; i++) // i@r28
         {
-            (&value->x34_vec.x)[i] =
+            value->velocity_x[i] =
                 foo(0.6083f * HSD_Randf(), 0.3041f); // var_f0;
-            (&value->x44_vec.x)[i] = 0.811f * HSD_Randf() + 1.2165f;
+            value->velocity_y[i] = 0.811f * HSD_Randf() + 1.2165f;
         }
-        value->x10_flags.b40 = 0;
+        value->flags.randomize_velocity = 0;
         return;
     }
 
     for (i = 0; i < 4; i++) // i@r31
     {
-        HSD_JObj* jobj_r30 = value->x54_jobj[i];
+        HSD_JObj* jobj_r30 = value->jobjs[i];
         ASSERT_NOT_NULL(jobj_r30, 993);
         if (fabsf_bitwise(jobj_r30->translate.x) < 100.0f) {
-            float f = (&value->x34_vec.x)[i];
+            float f = value->velocity_x[i];
             jobj_r30 = (HSD_JObj*) jobj_get(jobj_r30, value, i);
             ASSERT_NOT_NULL(jobj_r30, 1102);
             jobj_r30->translate.x += f;
@@ -165,13 +146,13 @@ void ifStatus_PercentOnDeathAnimationThink(UnkX* value, s32 arg1, s32 arg2)
         ASSERT_NOT_NULL(jobj_r30, 1006);
 
         if (jobj_r30->translate.y > -100.0f) {
-            float f = (&value->x44_vec.x)[i];
+            float f = value->velocity_y[i];
             jobj_r30 = (HSD_JObj*) jobj_get(jobj_r30, value, i);
             jobj_r30 = (HSD_JObj*) jobj_get(jobj_r30, value, i);
             ASSERT_NOT_NULL(jobj_r30, 1114);
             jobj_r30->translate.y += f;
             jobj_flagCheckSetMtxDirtySub(jobj_r30);
-            (&value->x44_vec.x)[i] -= 0.2028f; // @ lbl_804DDA90
+            value->velocity_y[i] -= 0.2028f; // @ lbl_804DDA90
         }
     }
 }
@@ -398,7 +379,7 @@ void ifStatus_802F4EDC(HSD_GObj* gobj)
 
     /* Check for death animation flag (bit 7 of flags byte at offset 0x10) */
     if (state->flags.explode_animation) {
-        ifStatus_PercentOnDeathAnimationThink((UnkX*) state, i, (u32) ptr);
+        ifStatus_PercentOnDeathAnimationThink(state, i, ptr);
         return;
     }
 
