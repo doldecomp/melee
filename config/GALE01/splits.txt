@@ -235,12 +235,9 @@ melee/pl/plattack.c:
 	.sbss       start:0x804D6480 end:0x804D6488
 
 melee/pl/pltrick.c:
-	.text       start:0x80037B2C end:0x800386D8
+	.text       start:0x80037B2C end:0x80038788
 	.data       start:0x803BCE70 end:0x803BCF20
 	.sdata2     start:0x804D7F18 end:0x804D7F20
-
-melee/pl/pl_0386.c:
-	.text       start:0x800386D8 end:0x80038788
 
 melee/pl/plbonus.c:
 	.text       start:0x80038788 end:0x8003D514

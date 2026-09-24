@@ -625,7 +625,6 @@ config.libs = [
             Object(Matching, "melee/pl/plstale.c"),
             Object(Matching, "melee/pl/plattack.c"),
             Object(Matching, "melee/pl/pltrick.c"),
-            Object(Matching, "melee/pl/pl_0386.c"),
             Object(Matching, "melee/pl/plbonus.c"),
             Object(Matching, "melee/pl/plbonuslib.c"),
             Object(Matching, "melee/pl/pl_040D.c"),

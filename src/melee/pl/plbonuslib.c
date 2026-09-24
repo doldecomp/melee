@@ -10,6 +10,7 @@
 #include "player.h"
 #include "plbonus.h"
 #include "plbonusinline.h"
+#include "pltrick.h"
 #include <melee/ft/ft_0877.h>
 #include <melee/ft/ft_0892.h>
 #include <melee/ft/ftlib.h>
