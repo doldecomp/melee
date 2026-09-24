@@ -120,11 +120,11 @@ typedef struct ifMagnifyPlayer {
 } ifMagnifyPlayer;
 
 struct ifMagnify {
-    DynamicModelDesc* model_desc; // ifMagnify_802fc3c0 accesses 0x804A1DE0
-    int x4;
-    int x8;
-    int xC;
-    int x10;
+    DynamicModelDesc** model_desc;
+    GXColor x4;
+    GXColor x8;
+    GXColor xC;
+    GXColor x10;
     ifMagnifyPlayer player[6];
     HSD_ImageDesc image_descs[5];
     u8 pad[0xF0 - 0xEC];
