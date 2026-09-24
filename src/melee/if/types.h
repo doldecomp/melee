@@ -70,13 +70,13 @@ struct Element_803F9628_x12 {
     u8 x7 : 1;
 };
 
-typedef void (*IfStatusCb)(s32);
+typedef void (*IfStatusCb)(int);
 
 struct Element_803F9628 {
     /* +00 */ HSD_GObj* x0;
     /* +04 */ u32 x4;
     /* +08 */ void (*x8)(HSD_GObj*);
-    /* +0C */ u32 xC;
+    /* +0C */ s32 xC;
     /* +10 */ u8 x10;
     /* +11 */ u8 x11;
     /* +12 */ struct Element_803F9628_x12 x12;
@@ -84,8 +84,8 @@ struct Element_803F9628 {
     /* +14 */ DynamicModelDesc* x14;
     /* +18 */ IfStatusCb x18;
     /* +1C */ IfStatusCb x1C;
-    /* +20 */ u32 x20;
-    /* +24 */ u32 x24;
+    /* +20 */ s32 x20;
+    /* +24 */ s32 x24;
 };
 
 struct Placeholder_8016AE50_flags {
