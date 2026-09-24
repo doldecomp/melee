@@ -313,7 +313,6 @@ static inline void updateClankDamage(Fighter* fp, HitCapsule* hit, int int_dmg,
                 int_dmg * p_ftCommonData->x3D0 + p_ftCommonData->x3D4;
             {
                 float facing_dir;
-                // Preserve the original operand order for matching.
                 if (compare_other_first ? other_pos->x > fp->cur_pos.x
                                         : fp->cur_pos.x < other_pos->x)
                 {
@@ -1832,7 +1831,6 @@ void ftColl_80078C70(Fighter_GObj* this_gobj)
     }
 }
 
-// The extra inline level keeps the clank handler out of line in MWCC.
 static inline void ftColl_80077970_dontinline(Item* item, HitCapsule* item_hit,
                                               Fighter* fp, HitCapsule* hit)
 {

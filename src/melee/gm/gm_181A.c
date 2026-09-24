@@ -281,8 +281,7 @@ void fn_80181C80(s32 arg0)
     }
 }
 
-// Counts occupied slots 1-5 with zero falls; excludes opponents not yet
-// spawned.
+// Counts occupied slots 1-5 with zero falls.
 static inline int countActiveOpponents(void)
 {
     return fn_80181BFC(NULL);

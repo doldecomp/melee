@@ -159,8 +159,6 @@ void itFlipper_AddSpinImpulse(Item_GObj* gobj, Vec3* pos, f32 vel)
     }
 }
 
-// Both speed helpers compute the same value and write the fighter position.
-// Keep the vector-helper and direct forms separate to preserve MWCC inlining.
 static inline f32 spinSpeed(Item_GObj* gobj, HSD_GObj* fighter, Vec3* pos)
 {
     Item* ip = GET_ITEM(gobj);
