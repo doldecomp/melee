@@ -445,9 +445,9 @@ void fn_802F916C(HSD_GObj* _gobj)
     }
 }
 
-static inline void fn_802F9410_inline(HSD_GObj* gobj,
-                                      struct IfStockUserData* p)
+static inline void fn_802F9410_inline(HSD_GObj* gobj)
 {
+    struct IfStockUserData* p = ifStock_802F89F8_get_data(gobj);
     HSD_JObj* jobj = gobj->hsd_obj;
     HSD_JObj* jobj2 = ifStock_804A1378.player[p->player].x4[1];
     HSD_JObjReqAnimAll(jobj2, 0.0f);
@@ -459,13 +459,12 @@ static inline void fn_802F9410_inline(HSD_GObj* gobj,
 void fn_802F9410(HSD_GObj* gobj)
 {
     struct IfStockUserData* p = HSD_GObjGetUserData(gobj);
-    PAD_STACK(0x10);
     switch (p->mode) {
     case 0:
         ifStock_802F8298(gobj);
         break;
     case 1:
-        fn_802F9410_inline(gobj, p);
+        fn_802F9410_inline(gobj);
         break;
     case 2:
         ifStock_802F89F8(gobj);
@@ -561,7 +560,7 @@ void ifStock_802F98E8(u8 player, u8 b)
     HSD_JObj* icon_jobj;
     GXColor c2;
     GXColor c1;
-    PAD_STACK(20);
+    PAD_STACK(4);
 
     if (stock->x0 != NULL) {
         ifStock_804A157C[player].player = player;
