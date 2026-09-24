@@ -1,12 +1,12 @@
-#include "grstory.h"
+#include <gr/grstory.h>
 
-#include "granime.h"
-#include "grlib.h"
-#include "grmaterial.h"
-#include "ground.h"
-#include "grzakogenerator.h"
-#include "inlines.h"
-#include "types.h"
+#include <gr/granime.h>
+#include <gr/grlib.h>
+#include <gr/grmaterial.h>
+#include <gr/ground.h>
+#include <gr/grzakogenerator.h>
+#include <gr/inlines.h>
+#include <gr/types.h>
 #include <melee/it/it_26B1.h>
 #include <melee/it/kinds/itheiho.h>
 #include <melee/lb/lb_00B0.h>

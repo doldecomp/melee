@@ -1,11 +1,11 @@
-#include "grzebesroute.h"
+#include <gr/grzebesroute.h>
 
 #include <placeholder.h>
 
-#include "ground.h"
-#include "grzakogenerator.h"
-#include "inlines.h"
-#include "types.h"
+#include <gr/ground.h>
+#include <gr/grzakogenerator.h>
+#include <gr/inlines.h>
+#include <gr/types.h>
 #include <dolphin/mtx.h>
 #include <melee/cm/camera.h>
 #include <melee/ft/ftlib.h>

@@ -1,9 +1,9 @@
-#include "grtfox.h"
+#include <gr/grtfox.h>
 
-#include "ground.h"
-#include "grzakogenerator.h"
-#include "inlines.h"
-#include "types.h"
+#include <gr/ground.h>
+#include <gr/grzakogenerator.h>
+#include <gr/inlines.h>
+#include <gr/types.h>
 #include <dolphin/mtx.h>
 #include <melee/mp/mplib.h>
 #include <sysdolphin/baselib/gobjproc.h>

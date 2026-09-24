@@ -1,16 +1,16 @@
-#include "plbonuslib.h"
+#include <pl/plbonuslib.h>
 
 #include <Runtime/platform.h>
 
 #include <math.h>
 #include <placeholder.h>
 
-#include "inlines.h"
-#include "pl_040D.h"
-#include "player.h"
-#include "plbonus.h"
-#include "plbonusinline.h"
-#include "pltrick.h"
+#include <pl/inlines.h>
+#include <pl/pl_040D.h>
+#include <pl/player.h>
+#include <pl/plbonus.h>
+#include <pl/plbonusinline.h>
+#include <pl/pltrick.h>
 #include <melee/ft/ft_0877.h>
 #include <melee/ft/ft_0892.h>
 #include <melee/ft/ftlib.h>

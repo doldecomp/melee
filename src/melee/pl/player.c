@@ -1,12 +1,12 @@
-#include "player.h"
+#include <pl/player.h>
 
 #include <melee/ft/forward.h>
 
-#include "forward.h"
-#include "plattack.h"
-#include "plbonus.h"
-#include "plstale.h"
-#include "types.h"
+#include <pl/forward.h>
+#include <pl/plattack.h>
+#include <pl/plbonus.h>
+#include <pl/plstale.h>
+#include <pl/types.h>
 #include <dolphin/mtx.h>
 #include <melee/ft/fighter.h>
 #include <melee/ft/ft_0877.h>

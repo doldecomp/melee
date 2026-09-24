@@ -1,11 +1,11 @@
-#include "grflatzone.h"
+#include <gr/grflatzone.h>
 
-#include "grdynamicattr.h"
-#include "grmaterial.h"
-#include "ground.h"
-#include "inlines.h"
-#include "stage.h"
-#include "types.h"
+#include <gr/grdynamicattr.h>
+#include <gr/grmaterial.h>
+#include <gr/ground.h>
+#include <gr/inlines.h>
+#include <gr/stage.h>
+#include <gr/types.h>
 #include <melee/cm/camera.h>
 #include <melee/it/kinds/ittools.h>
 #include <melee/it/types.h>

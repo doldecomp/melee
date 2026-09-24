@@ -2,11 +2,11 @@
 
 #include <melee/lb/forward.h>
 
-#include "grlib.h"
-#include "ground.h"
-#include "grzakogenerator.h"
-#include "inlines.h"
-#include "types.h"
+#include <gr/grlib.h>
+#include <gr/ground.h>
+#include <gr/grzakogenerator.h>
+#include <gr/inlines.h>
+#include <gr/types.h>
 #include <dolphin/mtx.h>
 #include <melee/ft/ftdevice.h>
 #include <melee/ft/ftlib.h>

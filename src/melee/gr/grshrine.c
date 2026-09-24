@@ -1,14 +1,14 @@
-#include "grshrine.h"
+#include <gr/grshrine.h>
 
 #include <Runtime/platform.h>
 
 #include <math.h>
 
-#include "granime.h"
-#include "ground.h"
-#include "grzakogenerator.h"
-#include "inlines.h"
-#include "types.h"
+#include <gr/granime.h>
+#include <gr/ground.h>
+#include <gr/grzakogenerator.h>
+#include <gr/inlines.h>
+#include <gr/types.h>
 #include <dolphin/mtx.h>
 #include <melee/lb/lb_00B0.h>
 #include <melee/lb/lb_00F9.h>

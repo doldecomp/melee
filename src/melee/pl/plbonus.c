@@ -1,14 +1,14 @@
-#include "plbonus.h"
+#include <pl/plbonus.h>
 
-#include "inlines.h"
-#include "pl_040D.h"
-#include "plattack.h"
-#include "player.h"
-#include "plbonusinline.h"
-#include "plbonuslib.h"
-#include "plstale.h"
-#include "pltrick.h"
-#include "types.h"
+#include <pl/inlines.h>
+#include <pl/pl_040D.h>
+#include <pl/plattack.h>
+#include <pl/player.h>
+#include <pl/plbonusinline.h>
+#include <pl/plbonuslib.h>
+#include <pl/plstale.h>
+#include <pl/pltrick.h>
+#include <pl/types.h>
 #include <melee/cm/camera.h>
 #include <melee/ft/ft_0877.h>
 #include <melee/ft/ft_0892.h>

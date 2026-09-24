@@ -1,14 +1,14 @@
-#include "grtcaptain.h"
+#include <gr/grtcaptain.h>
 
 #include <Runtime/platform.h>
 
 #include <melee/lb/forward.h>
 #include <sysdolphin/baselib/forward.h>
 
-#include "ground.h"
-#include "grzakogenerator.h"
-#include "inlines.h"
-#include "types.h"
+#include <gr/ground.h>
+#include <gr/grzakogenerator.h>
+#include <gr/inlines.h>
+#include <gr/types.h>
 #include <dolphin/mtx.h>
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/gobjproc.h>

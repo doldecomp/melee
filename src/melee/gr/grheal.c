@@ -1,15 +1,15 @@
-#include "grheal.h"
+#include <gr/grheal.h>
 
 #include <Runtime/platform.h>
 
 #include <placeholder.h>
 
-#include "forward.h"
-#include "granime.h"
-#include "ground.h"
-#include "grzakogenerator.h"
-#include "inlines.h"
-#include "stage.h"
+#include <gr/forward.h>
+#include <gr/granime.h>
+#include <gr/ground.h>
+#include <gr/grzakogenerator.h>
+#include <gr/inlines.h>
+#include <gr/stage.h>
 #include <dolphin/types.h>
 #include <melee/gm/gm_18A1.h>
 #include <melee/it/it_26B1.h>

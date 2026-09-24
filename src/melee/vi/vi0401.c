@@ -1,9 +1,9 @@
-#include "vi0401.h"
+#include <vi/vi0401.h>
 
 #include <placeholder.h>
 
-#include "types.h"
-#include "vi.h"
+#include <vi/types.h>
+#include <vi/vi.h>
 #include <dolphin/pad.h>
 #include <melee/ef/efasync.h>
 #include <melee/ef/eflib.h>

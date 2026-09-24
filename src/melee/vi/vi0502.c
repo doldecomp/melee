@@ -1,9 +1,9 @@
-#include "vi0502.h"
+#include <vi/vi0502.h>
 
 #include <melee/ft/forward.h>
 
-#include "types.h"
-#include "vi.h"
+#include <vi/types.h>
+#include <vi/vi.h>
 #include <dolphin/gx.h>
 #include <melee/ef/efasync.h>
 #include <melee/ef/eflib.h>

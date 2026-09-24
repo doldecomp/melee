@@ -1,12 +1,12 @@
-#include "vi0102.h"
+#include <vi/vi0102.h>
 
 #include <melee/sc/forward.h>
 #include <sysdolphin/baselib/forward.h>
 
 #include <placeholder.h>
 
-#include "types.h"
-#include "vi.h"
+#include <vi/types.h>
+#include <vi/vi.h>
 #include <dolphin/gx.h>
 #include <melee/ef/efasync.h>
 #include <melee/ef/eflib.h>

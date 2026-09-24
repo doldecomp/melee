@@ -1,15 +1,15 @@
-#include "grbigblue.h"
+#include <gr/grbigblue.h>
 
 #include <Runtime/platform.h>
 
 #include <placeholder.h>
 
-#include "grbigblue.static.h"
-#include "grdisplay.h"
-#include "grfzerocar.h"
-#include "grmaterial.h"
-#include "ground.h"
-#include "inlines.h"
+#include <gr/grbigblue.static.h>
+#include <gr/grdisplay.h>
+#include <gr/grfzerocar.h>
+#include <gr/grmaterial.h>
+#include <gr/ground.h>
+#include <gr/inlines.h>
 
 #ifdef MUST_MATCH
 #include <MetroTRK/intrinsics.h>
@@ -17,9 +17,9 @@
 
 #include <math.h>
 
-#include "grzakogenerator.h"
-#include "stage.h"
-#include "types.h"
+#include <gr/grzakogenerator.h>
+#include <gr/stage.h>
+#include <gr/types.h>
 #include <melee/cm/camera.h>
 #include <melee/gm/gmscene.h>
 #include <melee/it/it_26B1.h>

@@ -1,7 +1,7 @@
-#include "stage.h"
+#include <gr/stage.h>
 
-#include "ground.h"
-#include "types.h"
+#include <gr/ground.h>
+#include <gr/types.h>
 #include <melee/gm/gm_unsplit.h>
 #include <melee/lb/lbaudio_ax.h>
 #include <melee/lb/lbvector.h>

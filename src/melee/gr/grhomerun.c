@@ -1,4 +1,4 @@
-#include "grhomerun.h"
+#include <gr/grhomerun.h>
 
 #include <Runtime/platform.h>
 
@@ -6,11 +6,11 @@
 
 #include <placeholder.h>
 
-#include "grdatfiles.h"
-#include "ground.h"
-#include "grzakogenerator.h"
-#include "inlines.h"
-#include "stage.h"
+#include <gr/grdatfiles.h>
+#include <gr/ground.h>
+#include <gr/grzakogenerator.h>
+#include <gr/inlines.h>
+#include <gr/stage.h>
 #include <melee/cm/camera.h>
 #include <melee/ft/ftlib.h>
 #include <melee/gm/gmregclear.h>

@@ -1,16 +1,16 @@
-#include "grcastle.h"
+#include <gr/grcastle.h>
 
 #include <placeholder.h>
 
-#include "granime.h"
-#include "grdatfiles.h"
-#include "grdisplay.h"
-#include "grlib.h"
-#include "grmaterial.h"
-#include "ground.h"
-#include "grzakogenerator.h"
-#include "inlines.h"
-#include "types.h"
+#include <gr/granime.h>
+#include <gr/grdatfiles.h>
+#include <gr/grdisplay.h>
+#include <gr/grlib.h>
+#include <gr/grmaterial.h>
+#include <gr/ground.h>
+#include <gr/grzakogenerator.h>
+#include <gr/inlines.h>
+#include <gr/types.h>
 #include <dolphin/mtx.h>
 #include <melee/cm/camera.h>
 #include <melee/ft/ftdevice.h>

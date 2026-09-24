@@ -1,11 +1,11 @@
-#include "grticeclimber.h"
+#include <gr/grticeclimber.h>
 
-#include "granime.h"
-#include "grmaterial.h"
-#include "ground.h"
-#include "grzakogenerator.h"
-#include "inlines.h"
-#include "types.h"
+#include <gr/granime.h>
+#include <gr/grmaterial.h>
+#include <gr/ground.h>
+#include <gr/grzakogenerator.h>
+#include <gr/inlines.h>
+#include <gr/types.h>
 #include <melee/cm/camera.h>
 #include <melee/ef/efsync.h>
 #include <melee/it/inlines.h>

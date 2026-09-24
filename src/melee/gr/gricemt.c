@@ -1,4 +1,4 @@
-#include "gricemt.h"
+#include <gr/gricemt.h>
 
 #include <Runtime/platform.h>
 
@@ -6,15 +6,15 @@
 
 #include <placeholder.h>
 
-#include "forward.h"
-#include "grdatfiles.h"
-#include "grlib.h"
-#include "grmaterial.h"
-#include "ground.h"
-#include "grzakogenerator.h"
-#include "inlines.h"
-#include "stage.h"
-#include "types.h"
+#include <gr/forward.h>
+#include <gr/grdatfiles.h>
+#include <gr/grlib.h>
+#include <gr/grmaterial.h>
+#include <gr/ground.h>
+#include <gr/grzakogenerator.h>
+#include <gr/inlines.h>
+#include <gr/stage.h>
+#include <gr/types.h>
 #include <dolphin/types.h>
 #include <melee/cm/camera.h>
 #include <melee/ef/efsync.h>

@@ -1,15 +1,15 @@
-#include "grgarden.h"
+#include <gr/grgarden.h>
 
 #include <Runtime/platform.h>
 
-#include "granime.h"
-#include "grlib.h"
-#include "grmaterial.h"
-#include "ground.h"
-#include "grzakogenerator.h"
-#include "inlines.h"
-#include "stage.h"
-#include "types.h"
+#include <gr/granime.h>
+#include <gr/grlib.h>
+#include <gr/grmaterial.h>
+#include <gr/ground.h>
+#include <gr/grzakogenerator.h>
+#include <gr/inlines.h>
+#include <gr/stage.h>
+#include <gr/types.h>
 #include <melee/ft/ftdevice.h>
 #include <melee/ft/ftlib.h>
 #include <melee/gm/gmvs.h>

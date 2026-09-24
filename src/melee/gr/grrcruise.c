@@ -1,18 +1,18 @@
-#include "grrcruise.h"
+#include <gr/grrcruise.h>
 
 #include <Runtime/platform.h>
 
 #include <math.h>
 #include <placeholder.h>
 
-#include "grdatfiles.h"
-#include "grdisplay.h"
-#include "grlib.h"
-#include "ground.h"
-#include "grzakogenerator.h"
-#include "inlines.h"
-#include "stage.h"
-#include "types.h"
+#include <gr/grdatfiles.h>
+#include <gr/grdisplay.h>
+#include <gr/grlib.h>
+#include <gr/ground.h>
+#include <gr/grzakogenerator.h>
+#include <gr/inlines.h>
+#include <gr/stage.h>
+#include <gr/types.h>
 #include <melee/cm/camera.h>
 #include <melee/gm/gmscene.h>
 #include <melee/lb/lb_00B0.h>

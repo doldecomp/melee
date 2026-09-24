@@ -1,8 +1,8 @@
-#include "pl_040D.h"
+#include <pl/pl_040D.h>
 
-#include "player.h"
-#include "plbonus.h"
-#include "plbonusinline.h"
+#include <pl/player.h>
+#include <pl/plbonus.h>
+#include <pl/plbonusinline.h>
 #include <melee/gm/gm_unsplit.h>
 
 void pl_80040DDC(int slot)

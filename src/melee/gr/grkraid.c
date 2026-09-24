@@ -1,8 +1,8 @@
-#include "grkraid.h"
+#include <gr/grkraid.h>
 
-#include "forward.h"
-#include "grzakogenerator.h"
-#include "inlines.h"
+#include <gr/forward.h>
+#include <gr/grzakogenerator.h>
+#include <gr/inlines.h>
 #include <melee/cm/camera.h>
 #include <melee/ft/ftlib.h>
 #include <melee/lb/lb_00B0.h>

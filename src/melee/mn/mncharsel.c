@@ -1,16 +1,16 @@
-#include "mncharsel.h"
+#include <mn/mncharsel.h>
 
 #include <melee/ft/forward.h>
 #include <sysdolphin/baselib/forward.h>
 
 #include <math.h>
 
-#include "inlines.h"
-#include "mnmain.h"
-#include "mnmainrule.h"
-#include "mnname.h"
-#include "mnnamenew.h"
-#include "types.h"
+#include <mn/inlines.h>
+#include <mn/mnmain.h>
+#include <mn/mnmainrule.h>
+#include <mn/mnname.h>
+#include <mn/mnnamenew.h>
+#include <mn/types.h>
 #include <melee/gm/gm_1601.h>
 #include <melee/gm/gm_unsplit.h>
 #include <melee/gm/gmmain_lib.h>

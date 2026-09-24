@@ -1,9 +1,9 @@
-#include "grdisplay.h"
+#include <gr/grdisplay.h>
 
 #include <melee/lb/forward.h>
 
-#include "ground.h"
-#include "inlines.h"
+#include <gr/ground.h>
+#include <gr/inlines.h>
 #include <melee/cm/camera.h>
 #include <melee/ft/ftlib.h>
 #include <melee/lb/lbshadow.h>

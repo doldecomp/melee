@@ -1,6 +1,6 @@
-#include "vi0801.h"
+#include <vi/vi0801.h>
 
-#include "vi.h"
+#include <vi/vi.h>
 #include <melee/cm/camera.h>
 #include <melee/ef/efasync.h>
 #include <melee/ef/eflib.h>

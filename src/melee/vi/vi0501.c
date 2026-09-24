@@ -1,8 +1,8 @@
-#include "vi0501.h"
+#include <vi/vi0501.h>
 
-#include "forward.h"
-#include "types.h"
-#include "vi.h"
+#include <vi/forward.h>
+#include <vi/types.h>
+#include <vi/vi.h>
 #include <dolphin/gx.h>
 #include <dolphin/mtx.h>
 #include <melee/ef/efasync.h>

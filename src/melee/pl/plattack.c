@@ -1,7 +1,7 @@
-#include "plattack.h"
+#include <pl/plattack.h>
 
-#include "player.h"
-#include "types.h"
+#include <pl/player.h>
+#include <pl/types.h>
 
 u16 unk_804D6480;
 

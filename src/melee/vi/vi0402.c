@@ -1,8 +1,8 @@
-#include "vi0402.h"
+#include <vi/vi0402.h>
 
 #include <sysdolphin/baselib/forward.h>
 
-#include "vi.h"
+#include <vi/vi.h>
 #include <melee/ef/efasync.h>
 #include <melee/ef/eflib.h>
 #include <melee/gm/gm_unsplit.h>
