@@ -779,43 +779,31 @@ static inline HSD_JObj* mnName_802388D4_noinline(HSD_GObj* gobj, u8 index)
     return mnName_802388D4(gobj, index);
 }
 
-#ifdef __MWERKS__
-#pragma push
-#pragma dont_inline on
-#endif
 HSD_JObj* mnName_802388D4(HSD_GObj* gobj, u8 index)
 {
     u8* p = (u8*) gobj;
-    HSD_JObj* result;
 
     if (index < 0x18) {
-        HSD_JObj* jobj = *(HSD_JObj**) (p + 0x30);
+        HSD_JObj* jobj = HSD_JObjGetChild(*(HSD_JObj**) (p + 0x30));
         s32 i;
 
-        result = (jobj == NULL) ? NULL : jobj->child;
-
         for (i = 0; i < index; i++) {
-            result = (result == NULL) ? NULL : result->next;
+            jobj = HSD_JObjGetNext(jobj);
         }
-
-        return result;
+        return jobj;
+    } else {
+        switch (index) {
+        case 0x18:
+            return *(HSD_JObj**) (p + 0x24);
+        case 0x19:
+            return *(HSD_JObj**) (p + 0x18);
+        case 0x1A:
+            return *(HSD_JObj**) (p + 0x1C);
+        default:
+            return (HSD_JObj*) gobj;
+        }
     }
-
-    switch (index) {
-    case 0x18:
-        return *(HSD_JObj**) (p + 0x24);
-    case 0x19:
-        return *(HSD_JObj**) (p + 0x18);
-    case 0x1A:
-        return *(HSD_JObj**) (p + 0x1C);
-    }
-
-    return (HSD_JObj*) gobj;
 }
-
-#ifdef __MWERKS__
-#pragma pop
-#endif
 
 static inline f32 mnName_80238964_noinline(u8 index, u8 target, u8 flag)
 {
