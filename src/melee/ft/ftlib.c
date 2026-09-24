@@ -32,7 +32,7 @@
 #include <sysdolphin/baselib/random.h>
 #include <sysdolphin/baselib/rumble.h>
 
-s32 ftLib_800860C4(void)
+s32 ftLib_CountFighters(void)
 {
     s32 ret = 0;
     HSD_GObj* cur;
@@ -233,7 +233,7 @@ static inline s32 sgn(float x)
     }
 }
 
-float ftLib_800864A8(Vec3* v, HSD_GObj* gobj)
+float ftLib_GetCollectiveFacingDir(Vec3* v, HSD_GObj* gobj)
 {
     Vec3 vec;
     Fighter* fp;
@@ -280,19 +280,19 @@ float ftLib_800864A8(Vec3* v, HSD_GObj* gobj)
     }
 }
 
-float ftLib_800865C0(HSD_GObj* gobj)
+float ftLib_GetFighterFacingDir(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     return fp->facing_dir;
 }
 
-s32 ftLib_800865CC(HSD_GObj* gobj)
+s32 ftLib_GetFighterGroundOrAir(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     return fp->ground_or_air;
 }
 
-void ftLib_800865D8(HSD_GObj* gobj, float* x, float* y)
+void ftLib_GetFighterLStickInput(HSD_GObj* gobj, float* x, float* y)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     *x = fp->input.lstick[0].x;
@@ -353,7 +353,7 @@ void ftLib_80086724(HSD_GObj* gobj, HSD_GObj* other)
     }
 }
 
-void ftLib_80086764(HSD_GObj* gobj)
+void ftLib_HandleHeldItemSpec(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (fp->x1984_heldItemSpec != NULL) {
@@ -367,7 +367,7 @@ HSD_GObj* ftLib_GetItem(HSD_GObj* gobj)
     return fp->item_gobj;
 }
 
-bool ftLib_800867A0(HSD_GObj* gobj, HSD_GObj* arg1)
+bool ftLib_IsFighterHoldingItem(HSD_GObj* gobj, HSD_GObj* arg1)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (ftLib_GetItem(gobj) == arg1 || fp->x1978 == arg1) {
@@ -424,7 +424,7 @@ void ftLib_EnableAllInput(void)
     }
 }
 
-bool ftLib_800868D4(HSD_GObj* gobj, HSD_GObj* arg1)
+bool ftLib_IsFighterNotHoldingItem(HSD_GObj* gobj, HSD_GObj* arg1)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
@@ -443,7 +443,7 @@ bool ftLib_800868D4(HSD_GObj* gobj, HSD_GObj* arg1)
 }
 
 /// Check if the HSD_GObj* class is a fighter
-bool ftLib_80086960(HSD_GObj* arg)
+bool ftLib_IsGObjFighter(HSD_GObj* arg)
 {
     if (arg != NULL && arg->classifier == HSD_GOBJ_CLASS_FIGHTER) {
         return true;
@@ -465,32 +465,32 @@ static inline void vector_add(Vec3* dst, Vec3* src, float x, float y, float z)
     dst->z = src->z + z;
 }
 
-void ftLib_80086990(HSD_GObj* gobj, Vec3* v)
+void ftLib_GetFighterVerticalCenterPos(HSD_GObj* gobj, Vec3* v)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     float tmp = 0.5f * (fp->coll_data.ecb.top.y + fp->coll_data.ecb.bottom.y);
     vector_add(v, &fp->cur_pos, 0, tmp, 0);
 }
 
-float ftLib_800869D4(HSD_GObj* gobj)
+float ftLib_GetFighterModelScale(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     return ftCommon_GetModelScale(fp);
 }
 
-float ftLib_800869F8(HSD_GObj* gobj)
+float ftLib_GetFighterModelScaleX(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     return fp->x34_scale.x * fp->co_attrs.model_scaling;
 }
 
-float ftLib_80086A0C(HSD_GObj* gobj)
+float ftLib_GetFighterModelScaleY(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     return fp->x34_scale.y;
 }
 
-bool ftLib_80086A18(HSD_GObj* gobj)
+bool ftLib_IsFighterGuarding(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     bool result = false;
@@ -505,7 +505,7 @@ bool ftLib_80086A18(HSD_GObj* gobj)
     return result;
 }
 
-void ftLib_80086A4C(HSD_GObj* gobj, float val)
+void ftLib_SetFighterDamageValue(HSD_GObj* gobj, float val)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     fp->dmg.x1958 = val;
