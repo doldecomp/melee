@@ -339,6 +339,8 @@ bool it_8026DDFC(Item_GObj* gobj)
 
 bool it_8026DE98(Item_GObj* gobj)
 {
+    // Keep this body: forwarding to it_8026DDFC redirects the calls in
+    // it_8026E248 and it_8026E7E0 to that function under MWCC auto-inlining.
     Item* ip = GET_ITEM(gobj);
 
     ip->xD50_landNum += 1;
@@ -462,11 +464,11 @@ static inline bool it_8026E_inline(Item_GObj* gobj)
     return cond;
 }
 
-bool it_8026E15C_inline1(Item_GObj* gobj)
+static bool it_8026E15C_inline1(Item_GObj* gobj)
 {
     return it_8026DDFC(gobj);
 }
-bool it_8026E15C_inline2(Item_GObj* gobj)
+static bool it_8026E15C_inline2(Item_GObj* gobj)
 {
     return it_8026DD5C(gobj);
 }
@@ -493,11 +495,6 @@ void it_8026E15C(Item_GObj* gobj, HSD_GObjEvent arg1)
     }
 }
 
-bool it_8026E248_inline(Item_GObj* gobj)
-{
-    return it_8026DD5C(gobj);
-}
-
 static inline bool land(Item_GObj* gobj)
 {
     if (it_8026DE98(gobj) && it_8026DC24(gobj)) {
@@ -521,7 +518,7 @@ void it_8026E248(Item_GObj* gobj, HSD_GObjEvent arg1)
     }
 }
 
-bool it_8026E32C_inline(Item_GObj* gobj)
+static bool it_8026E32C_inline(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     ip->xD50_landNum += 1;
