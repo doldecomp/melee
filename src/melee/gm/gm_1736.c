@@ -87,7 +87,7 @@ void fn_80173834(u8 ckind, u8 major, bool arg2)
     }
 }
 
-static inline void updateAdventure(UnkAdventureData* data)
+static inline void updateAdventureTrophyUnlocks(UnkAdventureData* data)
 {
     fn_80173834(data->x0.x0.ckind, 4, true);
     if (data->x0.xC.xD == 0 && data->x77 != 0) {
@@ -101,7 +101,7 @@ static inline void updateAdventure(UnkAdventureData* data)
     }
 }
 
-static inline void updateClassic(Unk1PData* data)
+static inline void updateClassicTrophyUnlocks(Unk1PData* data)
 {
     fn_80173834(data->x0.ckind, 3, true);
     if (data->xC.xD == 0 && data->x0.cpu_level >= 3) {
@@ -112,7 +112,7 @@ static inline void updateClassic(Unk1PData* data)
     }
 }
 
-static inline void updateAllStar(Unk1PData* data)
+static inline void updateAllStarTrophyUnlocks(Unk1PData* data)
 {
     fn_80173834(data->x0.ckind, 5, true);
     fn_80172C78(0xBE);
@@ -133,18 +133,18 @@ void gm_8017390C(int arg0, int arg1)
             fn_80172C78(0xE7);
         }
         if (arg1 != 0) {
-            updateAdventure(data);
+            updateAdventureTrophyUnlocks(data);
         }
         break;
     }
     case 1:
         if (arg1 != 0) {
-            updateClassic(fn_8017DEC8(1));
+            updateClassicTrophyUnlocks(fn_8017DEC8(1));
         }
         break;
     case 2:
         if (arg1 != 0) {
-            updateAllStar(fn_8017DEC8(2));
+            updateAllStarTrophyUnlocks(fn_8017DEC8(2));
         }
         break;
     }

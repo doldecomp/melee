@@ -1414,8 +1414,9 @@ static inline HitCapsule* HitCapsuleGetPtr(Fighter* fp, u32 i)
     return &fp->x914[i];
 }
 
-static inline void grabFighter(Fighter* this_fp, HitCapsule* hit,
-                               Fighter* victim_fp)
+static inline void considerFighterGrabCandidate(Fighter* this_fp,
+                                                HitCapsule* hit,
+                                                Fighter* victim_fp)
 {
     float grab_dist;
     ftColl_80076808(this_fp, hit, 0, victim_fp, false);
@@ -1483,8 +1484,8 @@ void ftColl_80078A2C(Fighter_GObj* this_gobj)
                                         if (ft_80084CE4(this_fp, victim_fp) ==
                                             false)
                                         {
-                                            grabFighter(this_fp, this_hit,
-                                                        victim_fp);
+                                            considerFighterGrabCandidate(
+                                                this_fp, this_hit, victim_fp);
                                         }
                                         goto next_gobj;
                                     }
@@ -3290,7 +3291,8 @@ float ftColl_8007BBCC(UNUSED Fighter_GObj* gobj)
     return dmg;
 }
 
-static inline void grabItem(Fighter* fp, HitCapsule* hit, Item* ip)
+static inline void considerItemGrabCandidate(Fighter* fp, HitCapsule* hit,
+                                             Item* ip)
 {
     float dist;
     ftColl_80076808(fp, hit, 0, ip, false);
@@ -3361,7 +3363,7 @@ void ftColl_8007BC90(Fighter_GObj* gobj)
                     if (lbColl_80007ECC(hit, &ip->xACC_itemHurtbox[j], NULL,
                                         fp->x34_scale.y, ip->scl, 0.0f))
                     {
-                        grabItem(fp, hit, ip);
+                        considerItemGrabCandidate(fp, hit, ip);
                         goto next_item;
                     }
                 }

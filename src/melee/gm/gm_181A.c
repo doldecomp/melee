@@ -281,7 +281,9 @@ void fn_80181C80(s32 arg0)
     }
 }
 
-static inline int countRemainingPlayers(void)
+// Counts occupied slots 1-5 with zero falls; excludes opponents not yet
+// spawned.
+static inline int countActiveOpponents(void)
 {
     return fn_80181BFC(NULL);
 }
@@ -338,7 +340,7 @@ void fn_80181E18(void)
             break;
         }
 
-        temp = entry_idx - countRemainingPlayers();
+        temp = entry_idx - countActiveOpponents();
         if (temp < 0) {
             temp = 0;
         }
@@ -349,21 +351,21 @@ void fn_80181E18(void)
 
         switch (mode) {
         case 0x21:
-            temp = entry_idx - countRemainingPlayers();
+            temp = entry_idx - countActiveOpponents();
             if (temp < 0) {
                 temp = 0;
             }
             ifStock_802FA2D0(0xA - (temp + *x4));
             break;
         case 0x22:
-            temp = entry_idx - countRemainingPlayers();
+            temp = entry_idx - countActiveOpponents();
             if (temp < 0) {
                 temp = 0;
             }
             ifStock_802FA2D0(100 - (temp + *x4));
             break;
         default:
-            temp = entry_idx - countRemainingPlayers();
+            temp = entry_idx - countActiveOpponents();
             if (temp < 0) {
                 temp = 0;
             }
@@ -392,7 +394,7 @@ void fn_80181E18(void)
                 *x4 += 1;
             }
             fn_80181C80(data->x54[entry_idx].x0);
-            temp = entry_idx - countRemainingPlayers();
+            temp = entry_idx - countActiveOpponents();
             if (temp < 0) {
                 temp = 0;
             }
