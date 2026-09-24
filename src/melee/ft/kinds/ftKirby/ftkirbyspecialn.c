@@ -428,7 +428,7 @@ static void fn_800F6318(HSD_GObj* gobj)
 static inline void enterCaptureState(Fighter_GObj* gobj, FtMotionId msid)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    Fighter_ChangeMotionState(gobj, msid, 0x10, 0.0f, 1.0f, 0.0f, NULL);
+    Fighter_ChangeMotionState(gobj, msid, JOBJ_HIDDEN, 0.0f, 1.0f, 0.0f, NULL);
     ftKb_SpecialN_800F9070(gobj);
     ftCommon_8007E2F4(fp, 0x1FF);
 }
