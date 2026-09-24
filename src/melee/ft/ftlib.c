@@ -989,7 +989,7 @@ void ftLib_LoadFighterAllCostumes(s8 ft_kind)
     ftData_800857E0(ft_kind);
 }
 
-void ftLib_LoadKirbyHats(u8 arg0)
+void ftLib_ApplySpecialNToAllUnlockedFighters(u8 arg0)
 {
     u8 i;
     for (i = 0; i <= SELKIND_COUNT; i++) {
@@ -1002,14 +1002,12 @@ void ftLib_LoadKirbyHats(u8 arg0)
     }
 }
 
-void ftLib_IsFramesRemaining(HSD_GObj* gobj)
+void ftLib_CheckAnimFramesRemaining(HSD_GObj* gobj)
 {
     ftAnim_IsFramesRemaining(gobj);
 }
 
-/// @note Only checks #SmashState_Charging, so Ness's yo-yo smash
-/// (#ftNs_AttackHi4_YoyoApplySmash) is not covered.
-bool ftLib_IsChargingSmash(HSD_GObj* gobj)
+bool ftLib_IsFighterInSmashState2(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (fp->smash_attrs.state == SmashState_Charging) {
@@ -1019,19 +1017,19 @@ bool ftLib_IsChargingSmash(HSD_GObj* gobj)
     }
 }
 
-s32 ftLib_GetLastHitSourceType(HSD_GObj* gobj)
+s32 ftLib_GetFighterDamageValue1(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     return fp->dmg.x18CC;
 }
 
-s32 ftLib_GetLastHitSourceKind(HSD_GObj* gobj)
+s32 ftLib_GetFighterDamageValue2(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     return fp->dmg.x18D0;
 }
 
-void ftLib_GetGameWatchColor(HSD_GObj* gobj, void* dst)
+void ftLib_InitFighterData1(HSD_GObj* gobj, void* dst)
 {
     if (ftLib_GetKind(gobj) == Ft_Kind_GameWatch) {
         ftGw_Init_8014A7F4(gobj, dst);
@@ -1040,7 +1038,7 @@ void ftLib_GetGameWatchColor(HSD_GObj* gobj, void* dst)
     }
 }
 
-void ftLib_GetGameWatchOutlineColor(HSD_GObj* gobj, void* dst)
+void ftLib_InitFighterData2(HSD_GObj* gobj, void* dst)
 {
     if (ftLib_GetKind(gobj) == Ft_Kind_GameWatch) {
         ftGw_Init_8014A814(gobj, dst);
@@ -1049,7 +1047,7 @@ void ftLib_GetGameWatchOutlineColor(HSD_GObj* gobj, void* dst)
     }
 }
 
-float ftLib_GetGroundSlopeAngle(HSD_GObj* gobj)
+float ftLib_GetFighterFloorNormalAngle(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
@@ -1061,7 +1059,7 @@ float ftLib_GetGroundSlopeAngle(HSD_GObj* gobj)
     }
 }
 
-bool ftLib_IsBeingNudged(HSD_GObj* gobj)
+bool ftLib_IsFighterNudging(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (fp->xF8_playerNudgeVel.x != 0) {
