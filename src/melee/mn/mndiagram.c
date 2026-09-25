@@ -1,5 +1,7 @@
 #include "mndiagram.h"
 
+#include <melee/gm/forward.h>
+
 #include "inlines.h"
 #include "mndiagram2.h"
 #include "mndiagram3.h"
@@ -38,9 +40,9 @@ StaticModelDesc MenMainConB2_Top;
 
 /// Matching overlay for the separately declared fighter and name order tables.
 typedef struct mnDiagram_Assets {
-    /* 0x00 */ u8 sorted_fighters[0x19];
+    /* 0x00 */ u8 sorted_fighters[SELKIND_COUNT];
     /* 0x19 */ u8 pad_19[3];
-    /* 0x1C */ u8 sorted_names[0x78];
+    /* 0x1C */ u8 sorted_names[GM_NAMETAG_COUNT];
 } mnDiagram_Assets;
 ASSERT_SIZE(mnDiagram_Assets, 0x94);
 
@@ -56,7 +58,7 @@ typedef struct mnDiagram_PopupAnimTableHead {
 } mnDiagram_PopupAnimTableHead;
 
 u8 mnDiagram_FighterDisplayOrder[0x1C];
-u8 mnDiagram_NameDisplayOrder[0x78];
+u8 mnDiagram_NameDisplayOrder[GM_NAMETAG_COUNT];
 
 static mnDiagram_PopupAnimTableHead mnDiagram_PopupTextOffsets = {
     {
@@ -178,7 +180,7 @@ s32 mnDiagram_GetPlayPercentage(u8 is_name_mode, u8 player_index)
 
     if (is_name_mode != 0) {
         total_play_time = 0.0f;
-        for (i = 0; i < 0x78; i++) {
+        for (i = 0; i < GM_NAMETAG_COUNT; i++) {
             total_play_time += GetPersistentNameData(i)->stats.play_time;
         }
         if (total_play_time != zero) {
@@ -191,7 +193,7 @@ s32 mnDiagram_GetPlayPercentage(u8 is_name_mode, u8 player_index)
         return 0;
     }
     total_play_time = 0.0f;
-    for (i = 0; i < 0x19; i++) {
+    for (i = 0; i < SELKIND_COUNT; i++) {
         total_play_time += GetPersistentFighterData(i)->stats.play_time;
     }
     if (total_play_time != zero) {
@@ -240,7 +242,7 @@ int mnDiagram_GetNameTotalKOs(u8 field_index)
 {
     int total = 0;
     int i;
-    for (i = 0; i < 0x78; i++) {
+    for (i = 0; i < GM_NAMETAG_COUNT; i++) {
         if (GetNameText(i & 0xFF)) {
             total += getNamePairKOs(field_index, (u8) i);
         }
@@ -259,7 +261,7 @@ static inline int mnDiagram_SumNameFalls(u8 field_index)
 {
     int total = 0;
     int i;
-    for (i = 0; i < 0x78; i++) {
+    for (i = 0; i < GM_NAMETAG_COUNT; i++) {
         if (GetNameText(i & 0xFF)) {
             total += getNamePairKOs((u8) i, field_index);
         }
@@ -343,9 +345,16 @@ void mnDiagram_FormatDecimalNumber(char* buf, u32 val, int decimal_places)
     buf[digit_count] = *mnDiagram_StringTerminator;
 }
 
-void mnDiagram_FormatTime(char* buf, s32 seconds)
+static inline void writeIntegerDigits(char* buf, s32 value, int count)
 {
     int i;
+    for (i = 0; i < count; i++) {
+        buf[i] = mn_GetDigitAt(value, (count - 1) - i) + '0';
+    }
+}
+
+void mnDiagram_FormatTime(char* buf, s32 seconds)
+{
     int digit_count;
     int minutes;
     int secs;
@@ -353,9 +362,7 @@ void mnDiagram_FormatTime(char* buf, s32 seconds)
     minutes = seconds / 60;
     secs = seconds % 60;
     digit_count = mn_GetDigitCount(minutes);
-    for (i = 0; i < digit_count; i++) {
-        buf[i] = mn_GetDigitAt(minutes, (digit_count - 1) - i) + '0';
-    }
+    writeIntegerDigits(buf, minutes, digit_count);
     buf[digit_count++] = ':';
     buf[digit_count++] = (secs / 10) + '0';
     buf[digit_count++] = (secs % 10) + '0';
@@ -364,13 +371,10 @@ void mnDiagram_FormatTime(char* buf, s32 seconds)
 
 void mnDiagram_IntToStr(char* buf, u32 val)
 {
-    int i;
     int digit_count;
 
     digit_count = mn_GetDigitCount(val);
-    for (i = 0; i < digit_count; i++) {
-        buf[i] = mn_GetDigitAt(val, (digit_count - 1) - i) + '0';
-    }
+    writeIntegerDigits(buf, val, digit_count);
     buf[digit_count] = *mnDiagram_StringTerminator;
 }
 
@@ -400,7 +404,7 @@ u8 mnDiagram_GetNextNameIndex(s32 idx)
 
     do {
         i++;
-        if (i >= 0x78) {
+        if (i >= GM_NAMETAG_COUNT) {
             return original;
         }
     } while (GetNameText(i & 0xFF) == NULL);
@@ -464,15 +468,15 @@ typedef struct RankEntry {
     u32 value;
 } RankEntry;
 
-static inline int CheckAllZeroPlayTime(int name_idx)
+static inline bool allPlayTimesZero(s32 name_idx)
 {
     int i;
     for (i = 0; i < SELKIND_COUNT; i++) {
         if (GetPersistentNameData(name_idx)->play_time_by_fighter[i] != 0U) {
-            return 0;
+            return false;
         }
     }
-    return 1;
+    return true;
 }
 
 int mnDiagram_GetRankedFighterForName(int rank, int name_idx,
@@ -484,7 +488,7 @@ int mnDiagram_GetRankedFighterForName(int rank, int name_idx,
 
     (void) _pad;
 
-    if (CheckAllZeroPlayTime(name_idx) != 0) {
+    if (allPlayTimesZero(name_idx) != 0) {
         return SELKIND_COUNT;
     }
 
@@ -549,24 +553,13 @@ int mnDiagram_GetRankedFighterForName(int rank, int name_idx,
     return SELKIND_COUNT;
 }
 
-static inline int mnDiagram_AllPlayTimesZero(u8 name)
-{
-    int i;
-    for (i = 0; i < SELKIND_COUNT; i++) {
-        if (GetPersistentNameData(name)->play_time_by_fighter[i] != 0U) {
-            return 0;
-        }
-    }
-    return 1;
-}
-
 u8 mnDiagram_GetLeastPlayedFighter(u8 name_idx)
 {
     int i;
     int min_fighter;
     int count;
 
-    if (mnDiagram_AllPlayTimesZero(name_idx)) {
+    if (allPlayTimesZero(name_idx)) {
         return SELKIND_COUNT;
     }
 
@@ -593,7 +586,7 @@ u8 mnDiagram_GetLeastPlayedFighter(u8 name_idx)
         }
     }
     if (count >= 2) {
-        return 0x19;
+        return SELKIND_COUNT;
     }
 
     // Check for ties
@@ -609,7 +602,7 @@ u8 mnDiagram_GetLeastPlayedFighter(u8 name_idx)
         }
     }
     if (count != 0) {
-        return 0x19;
+        return SELKIND_COUNT;
     }
 
     return min_fighter;
@@ -674,21 +667,21 @@ void mnDiagram_SortNamesByKOs(void)
     u32* tp;
     u8* candidate;
     int n;
-    u32 totals[0x78];
+    u32 totals[GM_NAMETAG_COUNT];
     PAD_STACK(4);
 
     dst_iter = dst;
     tp = totals;
-    for (n = 0; n < 0x78; n++, dst_iter++, tp++) {
+    for (n = 0; n < GM_NAMETAG_COUNT; n++, dst_iter++, tp++) {
         *dst_iter = (u8) n;
         *tp = mnDiagram_GetNameTotalKOs(n & 0xFF);
     }
 
-    for (i = 0; i < 0x78; i++) {
+    for (i = 0; i < GM_NAMETAG_COUNT; i++) {
         j = i;
         candidate = &mnDiagram_NameDisplayOrder[++j];
         max_idx = i;
-        for (; j < 0x78; candidate++, j++) {
+        for (; j < GM_NAMETAG_COUNT; candidate++, j++) {
             if ((GetNameText(*candidate) != NULL) &&
                 ((totals[mnDiagram_NameDisplayOrder[max_idx]] <
                   totals[*candidate]) ||
@@ -759,8 +752,8 @@ static inline u8 mnDiagram_GetVisibleNameFrom(u8* sorted, int start, int rank)
             idx++;
             p2++;
             p++;
-            if (idx >= 0x78) {
-                return 0x78;
+            if (idx >= GM_NAMETAG_COUNT) {
+                return GM_NAMETAG_COUNT;
             }
         } while (GetNameText(*p2) == NULL);
         remaining--;
@@ -846,7 +839,7 @@ static inline int mnDiagram_FindNextName(s32 cur)
     int found = cur;
     do {
         found++;
-        if (found >= 0x78) {
+        if (found >= GM_NAMETAG_COUNT) {
             return (u8) cur;
         }
     } while (GetNameText(found & 0xFF) == NULL);
@@ -858,8 +851,8 @@ static inline u8 mnDiagram_GetVisibleNameCursorFrom(int start, int rank)
     while (rank > 0) {
         do {
             start++;
-            if (start >= 0x78) {
-                return 0x78;
+            if (start >= GM_NAMETAG_COUNT) {
+                return GM_NAMETAG_COUNT;
             }
         } while (GetNameText(mnDiagram_GetNameByIndex(start)) == NULL);
         rank--;
@@ -889,8 +882,8 @@ static inline u8 mnDiagram_GetVisibleFighterCursorFrom(u8* sorted, int start,
             idx++;
             p2++;
             p++;
-            if (idx >= 0x19) {
-                return 0x19;
+            if (idx >= SELKIND_COUNT) {
+                return SELKIND_COUNT;
             }
         } while (mn_IsFighterUnlocked(*p2) == 0);
         remaining--;
@@ -920,8 +913,8 @@ static inline u8 mnDiagram_GetVisibleFighterColumnForInput(u8* sorted,
             (*index)++;
             p2++;
             p++;
-            if (*index >= 0x19) {
-                return 0x19;
+            if (*index >= SELKIND_COUNT) {
+                return SELKIND_COUNT;
             }
         } while (mn_IsFighterUnlocked(*p2) == 0);
         remaining--;
@@ -956,8 +949,8 @@ static inline u8 mnDiagram_GetVisibleFighterRowForInput(u8* sorted,
             (*index)++;
             p2++;
             p++;
-            if (*index >= 0x19) {
-                return 0x19;
+            if (*index >= SELKIND_COUNT) {
+                return SELKIND_COUNT;
             }
         } while (mn_IsFighterUnlocked(*p2) == 0);
         remaining--;
@@ -986,8 +979,8 @@ static inline u8 mnDiagram_GetVisibleFighterFromPointer(const u8* sorted,
             idx++;
             p2++;
             p++;
-            if (idx >= 0x19) {
-                return 0x19;
+            if (idx >= SELKIND_COUNT) {
+                return SELKIND_COUNT;
             }
         } while (mn_IsFighterUnlocked(*p2) == 0);
         remaining--;
@@ -1198,7 +1191,7 @@ void mnDiagram_InputProc(HSD_GObj* gobj)
                 next_name = (u8) mnDiagram_FindNextName(cur);
                 if (cur != next_name) {
                     col_result3 = mnDiagram_GetVisibleNameCursorFrom(cur, 0xA);
-                    if (col_result3 != 0x78) {
+                    if (col_result3 != GM_NAMETAG_COUNT) {
                         sfxMove();
                         data->name_cursor_pos =
                             (data->name_cursor_pos & 0xFF00) | next_name;
@@ -1242,7 +1235,7 @@ void mnDiagram_InputProc(HSD_GObj* gobj)
                 next_name = (u8) mnDiagram_FindNextName(cur);
                 if (cur != next_name) {
                     row_result3 = mnDiagram_GetVisibleNameCursorFrom(cur, 7);
-                    if (row_result3 != 0x78) {
+                    if (row_result3 != GM_NAMETAG_COUNT) {
                         sfxMove();
                         data->name_cursor_pos =
                             ((u8) data->name_cursor_pos) | (next_name << 8);
@@ -1295,7 +1288,7 @@ void mnDiagram_InputProc(HSD_GObj* gobj)
                 col_result4 = mnDiagram_GetVisibleFighterFromPointer(
                     sorted, nav_ptr, cur, 0xA);
 
-                if (col_result4 != 0x19) {
+                if (col_result4 != SELKIND_COUNT) {
                     sfxMove();
                     data->fighter_cursor_pos =
                         (data->fighter_cursor_pos & 0xFF00) | found;
@@ -1340,7 +1333,7 @@ void mnDiagram_InputProc(HSD_GObj* gobj)
                 row_result4 = mnDiagram_GetVisibleFighterFromPointer(
                     sorted, nav_ptr, cur, 7);
 
-                if (row_result4 != 0x19) {
+                if (row_result4 != SELKIND_COUNT) {
                     sfxMove();
                     data->fighter_cursor_pos =
                         ((u8) data->fighter_cursor_pos) | (found << 8);
@@ -1784,11 +1777,11 @@ void mnDiagram_UpdateScrollArrows(HSD_GObj* gobj)
     if (data->is_name_mode != 0) {
         result = mnDiagram_GetVisibleNameFrom(sorted,
                                               (u8) data->name_cursor_pos, 10);
-        setArrowVisible(jobj, (u8) result != 0x78);
+        setArrowVisible(jobj, (u8) result != GM_NAMETAG_COUNT);
     } else {
         result = mnDiagram_GetVisibleFighterCursorFrom(
             sorted, (u8) data->fighter_cursor_pos, 10);
-        setArrowVisible(jobj, (u8) result != 0x19);
+        setArrowVisible(jobj, (u8) result != SELKIND_COUNT);
     }
 
     // Left arrow (jobjs[4])
@@ -1825,8 +1818,8 @@ void mnDiagram_UpdateScrollArrows(HSD_GObj* gobj)
                 i++;
                 ptr2++;
                 ptr++;
-                if (i >= 0x78) {
-                    result = 0x78;
+                if (i >= GM_NAMETAG_COUNT) {
+                    result = GM_NAMETAG_COUNT;
                     goto dn_name_done;
                 }
             } while (GetNameText(*ptr2) == NULL);
@@ -1836,7 +1829,7 @@ void mnDiagram_UpdateScrollArrows(HSD_GObj* gobj)
         ptr += i;
         result = ptr[0x1C];
     dn_name_done:
-        setArrowVisible(jobj3, (u8) result != 0x78);
+        setArrowVisible(jobj3, (u8) result != GM_NAMETAG_COUNT);
     } else {
         // Fighter mode - check if 7 more rows exist
         count = 7;
@@ -1852,15 +1845,15 @@ void mnDiagram_UpdateScrollArrows(HSD_GObj* gobj)
                 i++;
                 ptr++;
                 ptr2++;
-                if (i >= 0x19) {
-                    result2 = 0x19;
+                if (i >= SELKIND_COUNT) {
+                    result2 = SELKIND_COUNT;
                     goto dn_fc_done;
                 }
             } while (mn_IsFighterUnlocked(*ptr) == 0);
             count--;
         } while (count >= 0);
     dn_fc_done:
-        setArrowVisible(jobj3, result2 != 0x19);
+        setArrowVisible(jobj3, result2 != SELKIND_COUNT);
     }
 }
 
