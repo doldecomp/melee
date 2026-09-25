@@ -4260,9 +4260,8 @@ bool Camera_80030BBC(Vec3* arg0, S32Vec2* arg1)
     Scissor scissor;
     s32 px;
     s32 py;
-    PAD_STACK(4);
 
-    cobj = GET_COBJ(game_camera.gobj);
+    cobj = GET_COBJ(Camera_80030A50());
     if (lbVector_WorldToScreen(cobj, arg0, &point, 1) == NULL) {
         return false;
     }
@@ -4303,9 +4302,8 @@ bool Camera_80030CFC(CmSubject* cam_box, f32 tolerance)
     u8 _PAD[12];
     Vec3 sp20;
     f32 range;
-    PAD_STACK(2);
 
-    cobj = GET_COBJ(game_camera.gobj);
+    cobj = GET_COBJ(Camera_80030A50());
     HSD_CObjGetEyePosition(cobj, &eye_pos);
     HSD_CObjGetInterest(cobj, &interest);
     if (lbVector_8000E838(&interest, &eye_pos, &cam_box->bone_pos, &sp38) <
