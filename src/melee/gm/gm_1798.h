@@ -4,7 +4,7 @@
 #include <melee/ft/forward.h>
 #include <sysdolphin/baselib/forward.h>
 
-#include "gmresultplayer.h"
+#include <melee/gm/gmresultplayer.h>
 
 /* 179854 */ void fn_80179854(void);
 /* 179990 */ void fn_80179990(HSD_GObj*, int, int);
