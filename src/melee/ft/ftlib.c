@@ -492,10 +492,9 @@ float ftLib_GetScale(HSD_GObj* gobj)
     return fp->x34_scale.y;
 }
 
-/// True in #ftCo_MS_GuardOn, #ftCo_MS_Guard and #ftCo_MS_GuardSetOff only
-/// (not GuardOff, GuardReflect or Yoshi's GuardHold). Its one caller keeps a
-/// Link arrow stuck to the shield while this holds.
-bool ftLib_80086A18(HSD_GObj* gobj)
+/// @note Only #ftCo_MS_GuardOn, #ftCo_MS_Guard and #ftCo_MS_GuardSetOff:
+/// not GuardOff, GuardReflect or Yoshi's #ftYs_MS_GuardHold.
+bool ftLib_IsShielding(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     bool result = false;
@@ -1010,9 +1009,9 @@ void ftLib_IsFramesRemaining(HSD_GObj* gobj)
     ftAnim_IsFramesRemaining(gobj);
 }
 
-/// True while @c smash_attrs.state is #SmashState_Charging (does not cover
-/// e.g. Ness's yo-yo smash).
-bool ftLib_800876D4(HSD_GObj* gobj)
+/// @note Only checks #SmashState_Charging, so Ness's yo-yo smash
+/// (#ftNs_AttackHi4_YoyoApplySmash) is not covered.
+bool ftLib_IsChargingSmash(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (fp->smash_attrs.state == SmashState_Charging) {

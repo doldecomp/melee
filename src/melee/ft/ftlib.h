@@ -47,7 +47,7 @@
 /* 0869D4 */ float ftLib_GetModelScale(HSD_GObj*);
 /* 0869F8 */ float ftLib_800869F8(HSD_GObj*);
 /* 086A0C */ float ftLib_GetScale(HSD_GObj*);
-/* 086A18 */ bool ftLib_80086A18(HSD_GObj*);
+/* 086A18 */ bool ftLib_IsShielding(HSD_GObj*);
 /* 086A4C */ void ftLib_80086A4C(HSD_GObj*, float);
 /* 086A58 */ bool ftLib_GetScreenPos(HSD_GObj*, S32Vec2*);
 /* 086A8C */ bool ftLib_UpdateScreenVisibility(HSD_GObj*);
@@ -108,7 +108,7 @@
 /// /* 087574 */ void ftLib_LoadFighterAllCostumes(FighterKind);
 /* 087610 */ void ftLib_LoadKirbyHats(u8);
 /* 0876B4 */ void ftLib_IsFramesRemaining(HSD_GObj*);
-/* 0876D4 */ bool ftLib_800876D4(HSD_GObj*);
+/* 0876D4 */ bool ftLib_IsChargingSmash(HSD_GObj*);
 /* 0876F4 */ s32 ftLib_GetLastHitSourceType(HSD_GObj*);
 /* 087700 */ s32 ftLib_GetLastHitSourceKind(HSD_GObj*);
 /* 08770C */ void ftLib_GetGameWatchColor(HSD_GObj*, void* dst);
