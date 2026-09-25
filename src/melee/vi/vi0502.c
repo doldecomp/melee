@@ -118,9 +118,8 @@ void vi0502_8031E304(HSD_GObj* gobj)
 
 static void vi0502_GObj_OnRender(HSD_GObj* gobj, UNUSED intptr_t code)
 {
-    PAD_STACK(8);
     lbShadow_8000F38C(0);
-    vi_RunCamera(gobj, (u8*) &erase_colors_vi0502, 0x281);
+    vi_RunCamera(gobj, &erase_colors_vi0502, 0x281);
 }
 
 void vi0502_GObj_OnProc(HSD_GObj* gobj)

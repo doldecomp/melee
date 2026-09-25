@@ -120,10 +120,8 @@ void fn_8031F548(HSD_GObj* gobj)
 
 static void fn_8031F56C(HSD_GObj* gobj, intptr_t unused)
 {
-    PAD_STACK(8);
-
     lbShadow_8000F38C(0);
-    vi_RunCamera(gobj, (u8*) &un_804D5B08, 0x281);
+    vi_RunCamera(gobj, &un_804D5B08, 0x281);
 }
 
 void fn_8031F600(HSD_GObj* gobj)

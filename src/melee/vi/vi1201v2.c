@@ -175,9 +175,8 @@ void un_803207C4(void)
 
 void un_803208F0(HSD_GObj* gobj, UNUSED intptr_t code)
 {
-    PAD_STACK(8);
     lbShadow_8000F38C(0);
-    vi_RunCamera(gobj, (u8*) &un_804D7028, 0x881);
+    vi_RunCamera(gobj, &un_804D7028, 0x881);
 }
 
 void un_80320984(HSD_GObj* gobj)

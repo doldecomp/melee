@@ -119,11 +119,10 @@ void fn_8031FAA8(HSD_GObj* gobj)
 }
 void fn_8031FB90(HSD_GObj* gobj, UNUSED intptr_t code)
 {
-    PAD_STACK(8);
     if (un_804D7000 != NULL) {
         lbShadow_8000F38C(0);
     }
-    vi_RunCamera(gobj, (u8*) &un_804D6FF4, 0x881);
+    vi_RunCamera(gobj, &un_804D6FF4, 0x881);
 }
 
 void fn_8031FC30(HSD_GObj* gobj)

@@ -3,8 +3,6 @@
 #include <melee/sc/forward.h>
 #include <sysdolphin/baselib/forward.h>
 
-#include <placeholder.h>
-
 #include "types.h"
 #include "vi.h"
 #include <dolphin/gx.h>
@@ -81,9 +79,8 @@ void vi0102_JObjCallback(HSD_GObj* gobj)
 
 void vi0102_CameraCallback(HSD_GObj* gobj, intptr_t unused)
 {
-    PAD_STACK(8);
     lbShadow_8000F38C(0);
-    vi_RunCamera(gobj, (u8*) &erase_colors_vi0102, 0x881);
+    vi_RunCamera(gobj, &erase_colors_vi0102, 0x881);
 }
 
 /// Used to force float ordering of file
