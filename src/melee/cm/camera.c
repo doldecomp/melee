@@ -2934,12 +2934,16 @@ bool Camera_8002E234(void)
     return ret;
 }
 
+static inline f32 getX378(void)
+{
+    return game_camera.x378.f32_v;
+}
+
 void Camera_8002E490(void* unused)
 {
     Vec3 sp1C;
     Vec3 sp10;
     s32 var_r29;
-    PAD_STACK(4);
 
     Camera_80030DF8();
 
@@ -3008,7 +3012,7 @@ void Camera_8002E490(void* unused)
     case 2:
         game_camera.x378.f32_v +=
             (1.0f - game_camera.x378.f32_v) * game_camera.x37C.f32_v;
-        if (game_camera.x378.f32_v > 0.999f) {
+        if (getX378() > 0.999f) {
             game_camera.x378.f32_v = 1.0f;
         }
         break;
