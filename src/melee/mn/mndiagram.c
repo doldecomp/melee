@@ -207,27 +207,31 @@ s32 mnDiagram_GetPlayPercentage(u8 is_name_mode, u8 player_index)
 
 s32 mnDiagram_GetAveragePlayerCount(u8 is_name_mode, u8 player_index)
 {
-    f32 temp_f31;
-    f32 temp_f31_2;
+    f32 match_count;
 
     if (is_name_mode != 0) {
         if (GetPersistentNameData(player_index)->stats.match_count != 0) {
-            temp_f31_2 =
+            match_count =
                 (f32) GetPersistentNameData(player_index)->stats.match_count;
             return (s32) (100.0f * ((f32) GetPersistentNameData(player_index)
                                         ->stats.total_player_count /
-                                    temp_f31_2));
+                                    match_count));
         }
         return 0;
     }
     if (GetPersistentFighterData(player_index)->stats.match_count != 0) {
-        temp_f31 =
+        match_count =
             (f32) GetPersistentFighterData(player_index)->stats.match_count;
         return (s32) (100.0f * ((f32) GetPersistentFighterData(player_index)
                                     ->stats.total_player_count /
-                                temp_f31));
+                                match_count));
     }
     return 0;
+}
+
+static inline int getNamePairKOs(u8 name, u8 opponent)
+{
+    return GetPersistentNameData(name)->vs_kos[opponent];
 }
 
 /// @brief Gets total KOs scored by a name against all other names.
@@ -239,7 +243,7 @@ int mnDiagram_GetNameTotalKOs(u8 field_index)
     int i;
     for (i = 0; i < 0x78; i++) {
         if (GetNameText(i & 0xFF)) {
-            total += GetPersistentNameData(field_index)->vs_kos[(u8) i];
+            total += getNamePairKOs(field_index, (u8) i);
         }
     }
     return total;
@@ -258,7 +262,7 @@ static inline int mnDiagram_SumNameFalls(u8 field_index)
     int i;
     for (i = 0; i < 0x78; i++) {
         if (GetNameText(i & 0xFF)) {
-            total += GetPersistentNameData((u8) i)->vs_kos[field_index];
+            total += getNamePairKOs((u8) i, field_index);
         }
     }
     if (total > 999999) {
@@ -672,7 +676,7 @@ void mnDiagram_SortNamesByKOs(void)
     u8* candidate;
     int n;
     u32 totals[0x78];
-    PAD_STACK(12);
+    PAD_STACK(4);
 
     dst_iter = dst;
     tp = totals;
@@ -1164,7 +1168,7 @@ void mnDiagram_InputProc(HSD_GObj* gobj)
     }
     if (data->is_name_mode != 0) {
         count = GetNameCount();
-        if (input & 1) {
+        if (input & MenuInput_Up) {
             col = (u8) mn_804A04F0.hovered_selection;
             if ((col > 0) && (count > (col - 1))) {
                 sfxMove();
@@ -1185,7 +1189,7 @@ void mnDiagram_InputProc(HSD_GObj* gobj)
                                           data->name_cursor_pos >> 8);
                 }
             }
-        } else if (input & 2) {
+        } else if (input & MenuInput_Down) {
             u8 next_name;
             col = (u8) mn_804A04F0.hovered_selection;
             if ((col < 9) && (count > (col + 1))) {
@@ -1210,7 +1214,7 @@ void mnDiagram_InputProc(HSD_GObj* gobj)
                     }
                 }
             }
-        } else if (input & 4) {
+        } else if (input & MenuInput_Left) {
             row3 = mn_804A04F0.hovered_selection >> 8;
             if ((0 < row3) && (count > (row3 - 1))) {
                 sfxMove();
@@ -1230,7 +1234,7 @@ void mnDiagram_InputProc(HSD_GObj* gobj)
                                           data->name_cursor_pos >> 8);
                 }
             }
-        } else if (input & 8) {
+        } else if (input & MenuInput_Right) {
             u8 next_name;
             row4 = mn_804A04F0.hovered_selection >> 8;
             if ((row4 < 6) && (count > (row4 + 1))) {
@@ -1258,7 +1262,7 @@ void mnDiagram_InputProc(HSD_GObj* gobj)
     } else {
         count2 = mnDiagram_CountUnlockedFighters();
 
-        if (input & 1) {
+        if (input & MenuInput_Up) {
             col = (u8) mn_804A04F0.hovered_selection;
             if ((col > 0) && (count2 > (col - 1))) {
                 sfxMove();
@@ -1279,7 +1283,7 @@ void mnDiagram_InputProc(HSD_GObj* gobj)
                                           data->fighter_cursor_pos >> 8);
                 }
             }
-        } else if (input & 2) {
+        } else if (input & MenuInput_Down) {
             u8* nav_ptr;
             col = (u8) mn_804A04F0.hovered_selection;
             if ((col < 9) && (count2 > (col + 1))) {
@@ -1306,7 +1310,7 @@ void mnDiagram_InputProc(HSD_GObj* gobj)
                                           data->fighter_cursor_pos >> 8);
                 }
             }
-        } else if (input & 4) {
+        } else if (input & MenuInput_Left) {
             row5 = mn_804A04F0.hovered_selection >> 8;
             if ((row5 > 0) && (count2 > (row5 - 1))) {
                 sfxMove();
@@ -1326,7 +1330,7 @@ void mnDiagram_InputProc(HSD_GObj* gobj)
                                           data->fighter_cursor_pos >> 8);
                 }
             }
-        } else if (input & 8) {
+        } else if (input & MenuInput_Right) {
             u8* nav_ptr;
             row6 = mn_804A04F0.hovered_selection >> 8;
             if ((row6 < 6) && (count2 > (row6 + 1))) {
@@ -2118,8 +2122,6 @@ void mnDiagram_DrawGridValues(HSD_GObj* arg0, s32 row_start, s32 col_start,
     int col_name;
     int row_fighter;
     u8 col_fighter;
-    // Preserve the original gap before the saved registers.
-    PAD_STACK(16);
 
     for (row = 0; row <= 0xA; row += 1) {
         if (row == 0xA) {
@@ -2161,8 +2163,7 @@ void mnDiagram_DrawGridValues(HSD_GObj* arg0, s32 row_start, s32 col_start,
                             int ko_count;
                             col_name = mnDiagram_GetVisibleNameCursorFrom(
                                 col_start, name_col);
-                            ko_count = GetPersistentNameData((u8) row_name)
-                                           ->vs_kos[col_name];
+                            ko_count = getNamePairKOs((u8) row_name, col_name);
                             mnDiagram_DrawCellValue(arg0, (u8) name_col,
                                                     (u8) row, ko_count);
                         }
