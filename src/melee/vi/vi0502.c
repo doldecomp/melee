@@ -63,8 +63,9 @@ void vi0502_8031E124(CharacterKind player_kind, int player_costume,
     HSD_JObj* jobj;
     HSD_JObj* jobj2;
     VecMtxPtr pmtx;
+    Vec3 pos;
 
-    PAD_STACK(32);
+    PAD_STACK(16);
     Stage_InitScene(St_Kind_Greens, 0);
     Item_80266FA8();
     Item_80266FCC();
@@ -98,7 +99,8 @@ void vi0502_8031E124(CharacterKind player_kind, int player_costume,
     HSD_JObjAnimAll(jobj);
     jobj2 = GET_JOBJ(kirby_gobj);
     pmtx = grLib_801C9A10();
-    HSD_JObjGetTranslation2(jobj2, &pmtx[1]);
+    HSD_JObjGetTranslation(jobj2, &pos);
+    pmtx[1] = pos;
 
     HSD_JObjReqAnimAll(jobj, 0.0f);
 

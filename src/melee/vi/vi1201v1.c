@@ -115,7 +115,7 @@ void fn_8031FAA8(HSD_GObj* gobj)
     }
     lb_80011E24(jobj, &child, 1, -1);
     jobj = child;
-    HSD_JObjGetTranslation2(jobj, &pos);
+    HSD_JObjGetTranslation(jobj, &pos);
     scale_x = 0.0f;
     scale_y = 1.0f;
 
