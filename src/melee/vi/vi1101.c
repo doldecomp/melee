@@ -57,7 +57,7 @@ void un_8031F294(s32 arg0, s32 arg1)
 {
     HSD_JObj* jobj;
     VecMtxPtr pmtx;
-    PAD_STACK(16);
+    Vec3 pos;
 
     Stage_InitScene(St_Kind_Battle, 0);
     Item_80266FA8();
@@ -88,7 +88,8 @@ void un_8031F294(s32 arg0, s32 arg1)
     jobj = GET_JOBJ(un_804D6FD0.unk0);
     HSD_JObjReqAnimAll(jobj, un_804DE0E0);
     HSD_JObjAnimAll(jobj);
-    pmtx[1] = un_80400200.spawns[1];
+    pos = un_80400200.spawns[1];
+    pmtx[1] = pos;
     HSD_JObjReqAnimAll(jobj, un_804DE0DC);
     if (gm_IsCKindUnlocked(CKind_Luigi) != 0) {
         Player_80036E20(CKind_Luigi, un_804D6FCC, 5);
@@ -104,7 +105,8 @@ void un_8031F294(s32 arg0, s32 arg1)
         jobj = GET_JOBJ(un_804D6FD0.unk4);
         HSD_JObjReqAnimAll(jobj, un_804DE0E0);
         HSD_JObjAnimAll(jobj);
-        pmtx[2] = un_80400200.spawns[2];
+        pos = un_80400200.spawns[2];
+        pmtx[2] = pos;
         HSD_JObjReqAnimAll(jobj, un_804DE0DC);
     }
     lbAudioAx_80026F2C(0x1C);
