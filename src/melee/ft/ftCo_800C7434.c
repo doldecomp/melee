@@ -6,7 +6,6 @@
 #include "ftdata.h"
 #include "kinds/ftCommon/forward.h"
 #include "types.h"
-#include <melee/it/kinds/itgreatfoxlaser.h>
 #include <melee/it/kinds/itleadead.h>
 
 static inline void inlineB0(Fighter_GObj* gobj)
