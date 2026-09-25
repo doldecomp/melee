@@ -1008,17 +1008,14 @@ static inline u8 mnDiagram_GetVisibleFighterRowForInput(u8* sorted,
             break;
         }
         p2 = p;
-    loop:
-        (*index)++;
-        p2++;
-        p++;
-        if (*index >= 0x19) {
-            result = 0x19;
-            break;
-        }
-        if (mn_IsFighterUnlocked(*p2) == 0) {
-            goto loop;
-        }
+        do {
+            (*index)++;
+            p2++;
+            p++;
+            if (*index >= 0x19) {
+                return 0x19;
+            }
+        } while (mn_IsFighterUnlocked(*p2) == 0);
         remaining--;
     }
     return result;
@@ -1076,32 +1073,6 @@ static inline Diagram* mnDiagram_GetCurrentDiagramData(void)
     return mnDiagram_ScreenGObj->user_data;
 }
 
-static inline u8 mnDiagram_GetVisibleNameColumnForInput(int start, int rank)
-{
-    while (rank > 0) {
-        do {
-            start++;
-            if (start >= 0x78) {
-                return 0x78;
-            }
-        } while (GetNameText(mnDiagram_GetNameByIndex(start)) == NULL);
-        rank--;
-    }
-    return mnDiagram_GetNameByIndex(start);
-}
-
-static inline s32 mnDiagram_CountUnlockedFightersForInput(void)
-{
-    int i;
-    s32 count = 0;
-    for (i = 0; i < 0x19; i++) {
-        if (mn_IsFighterUnlocked(i) != 0) {
-            count++;
-        }
-    }
-    return count;
-}
-
 /// @brief Per-frame input handler for the VS Records "diagram" grid screen.
 ///
 /// Dispatches the current frame's menu input:
@@ -1129,10 +1100,9 @@ void mnDiagram_InputProc(HSD_GObj* gobj)
     u8* sorted = mnDiagram_FighterDisplayOrder;
     Diagram* data = mnDiagram_GetCurrentDiagramData();
     u32 input = mn_80229624(4);
-    s32 count;
+    int count;
     s32 col;
     int row;
-    s32 new_var2;
     int row3;
     int row4;
     int row5;
@@ -1148,7 +1118,8 @@ void mnDiagram_InputProc(HSD_GObj* gobj)
     s32 cur;
     int cursor_pos;
     int count2;
-    PAD_STACK(24);
+    // Preserve the original 0x80-byte frame.
+    PAD_STACK(32);
     mn_804A04F0.buttons = input;
     count2 = 0;
     if (input & MenuInput_Confirm) {
@@ -1160,7 +1131,7 @@ void mnDiagram_InputProc(HSD_GObj* gobj)
         if (data->is_name_mode != 0) {
             col = mn_804A04F0.hovered_selection;
             cur = col;
-            col_result = mnDiagram_GetVisibleNameColumnForInput(
+            col_result = mnDiagram_GetVisibleNameCursorFrom(
                 (u8) data->name_cursor_pos, (u8) cur);
             row = mn_804A04F0.hovered_selection >> 8;
             cursor_pos = data->name_cursor_pos;
@@ -1235,19 +1206,17 @@ void mnDiagram_InputProc(HSD_GObj* gobj)
                                   data->name_cursor_pos >> 8);
             return;
         }
-        count = mnDiagram_CountUnlockedFightersForInput();
+        count = mnDiagram_CountUnlockedFighters();
 
-        new_var2 = count;
-        if (((u8) mn_804A04F0.hovered_selection) >= new_var2) {
+        if (((u8) mn_804A04F0.hovered_selection) >= count) {
             mn_804A04F0.hovered_selection =
-                (mn_804A04F0.hovered_selection & 0xFF00) |
-                ((u8) (new_var2 - 1));
+                (mn_804A04F0.hovered_selection & 0xFF00) | ((u8) (count - 1));
         }
-        if ((mn_804A04F0.hovered_selection >> 8) >= new_var2) {
+        if ((mn_804A04F0.hovered_selection >> 8) >= count) {
             mn_804A04F0.hovered_selection =
-                ((u8) mn_804A04F0.hovered_selection) | ((new_var2 - 1) << 8);
+                ((u8) mn_804A04F0.hovered_selection) | ((count - 1) << 8);
         }
-        mnDiagram_UpdateScrollArrowVisibility(mnDiagram_ScreenGObj, new_var2);
+        mnDiagram_UpdateScrollArrowVisibility(mnDiagram_ScreenGObj, count);
         mnDiagram_RefreshGrid(mnDiagram_ScreenGObj,
                               (u8) data->fighter_cursor_pos,
                               data->fighter_cursor_pos >> 8);
