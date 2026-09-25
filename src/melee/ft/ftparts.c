@@ -6,7 +6,6 @@
 #include "forward.h"
 #include "ftdata.h"
 #include "ftmaterial.h"
-#include "ftparts.static.h"
 #include "inlines.h"
 #include "types.h"
 #include <dolphin/mtx.h>
@@ -20,6 +19,13 @@
 #include <sysdolphin/baselib/perf.h>
 #include <sysdolphin/baselib/pobj.h>
 #include <sysdolphin/baselib/util.h>
+
+/// .bss
+struct {
+    Mtx mtx;
+    u8 has_z_scale : 1;
+    char unk_31[7];
+} ft_jobj_scale;
 
 HSD_JObjInfo ftJObj = { ftParts_JObjInfoInit };
 HSD_JObjInfo ftIntpJObj = { ftParts_IntpJObjInfoInit };

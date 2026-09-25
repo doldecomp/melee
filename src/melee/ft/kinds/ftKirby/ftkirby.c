@@ -2,7 +2,6 @@
 
 #include <stddef.h>
 
-#include "ftKb_Init.static.h"
 #include "ftkirbyattackdash.h"
 #include "ftkirbyspecialdonkey.h"
 #include "ftkirbyspecialgamewatch.h"
@@ -37,6 +36,13 @@
 #include <sysdolphin/baselib/id.h>
 #include <sysdolphin/baselib/jobj.h>
 #include <sysdolphin/baselib/random.h>
+
+typedef struct ftKirby_CostumeArchive {
+    /* +0 */ HSD_Joint* joint;
+    /* +4 */ HSD_MatAnimJoint* matanim;
+} ftKirby_CostumeArchive;
+
+extern HSD_GObjEvent ftKb_Init_803C9CC8[];
 
 /* 459C10 */ UnkCostumeStruct ftKb_CostumeList[6];
 /* 459B88 */ struct ft_80459B88_t ft_80459B88;

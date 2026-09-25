@@ -75,7 +75,6 @@ static void sdata2_order(void)
 #define CollisionFlagAir_PlatformPassCallback 0x2
 #define CollisionFlagAir_CanGrabLedge 0x4
 
-/// 80041C78 https://decomp.me/scratch/V6eYQ
 void mpColl_80041C78(void)
 {
     mpColl_804D64A0 = NULL;
@@ -83,7 +82,6 @@ void mpColl_80041C78(void)
     mpColl_804D64A8 = 0;
 }
 
-/// 80041C8C https://decomp.me/scratch/VvSaI
 void mpCollPrev(CollData* cd)
 {
     u8 _[8];
@@ -113,7 +111,6 @@ void mpCollPrev(CollData* cd)
     cd->x28_vec = cd->cur_pos;
 }
 
-/// 80041DD0 https://decomp.me/scratch/1KPLe
 static inline void clamp_above(float* value, float min)
 {
     if (*value < min) {
@@ -163,7 +160,6 @@ void mpCollCheckBounding(CollData* cd, u32 flags)
     mpBoundingCheck(left, bottom, right, top);
 }
 
-/// 80041EE4 https://decomp.me/scratch/j2TXK
 /// CollDataInit
 void mpColl_80041EE4(CollData* cd)
 {
@@ -216,7 +212,6 @@ void mpColl_80041EE4(CollData* cd)
     memzero(&cd->x64_ecb, sizeof(ftECB));
 }
 
-/// 80042078 https://decomp.me/scratch/hM7h8
 void mpColl_SetECBSource_JObj(CollData* cd, HSD_GObj* gobj, HSD_JObj* arg1,
                               HSD_JObj* arg2, HSD_JObj* arg3, HSD_JObj* arg4,
                               HSD_JObj* arg5, HSD_JObj* arg6, HSD_JObj* arg7,
@@ -253,7 +248,6 @@ void mpColl_SetECBSource_JObj(CollData* cd, HSD_GObj* gobj, HSD_JObj* arg1,
     cd->x50 = 0.0F;
 }
 
-/// 8004220C https://decomp.me/scratch/nOinn
 void mpColl_SetECBSource_Fixed(CollData* cd, HSD_GObj* gobj, float arg1,
                                float arg2, float arg3, float arg4)
 {
@@ -281,7 +275,6 @@ void mpColl_SetECBSource_Fixed(CollData* cd, HSD_GObj* gobj, float arg1,
     cd->facing_dir = -1;
 }
 
-/// 80042374 https://decomp.me/scratch/SgKfv
 void mpColl_SetLedgeSnap(CollData* coll, float ledge_snap_x,
                          float ledge_snap_y, float ledge_snap_height)
 {
@@ -290,7 +283,6 @@ void mpColl_SetLedgeSnap(CollData* coll, float ledge_snap_x,
     coll->ledge_snap_height = ledge_snap_height;
 }
 
-/// 80042384 https://decomp.me/scratch/P8djI
 void mpColl_80042384(CollData* cd)
 {
     if (ABS(cd->desired_ecb.top.y - cd->desired_ecb.bottom.y) < 1.0F) {
@@ -332,7 +324,6 @@ void mpColl_80042384(CollData* cd)
     }
 }
 
-/// 800424DC https://decomp.me/scratch/DhzDB
 static inline void update_min_max(float* min, float* max, float val)
 {
     if (*min > val) {
@@ -455,7 +446,6 @@ void mpColl_LoadECB_JObj(CollData* coll, u32 flags)
     coll->x34_flags.b0 = 0;
 }
 
-/// 8004293C https://decomp.me/scratch/H4EUT
 static inline void update_min_max_2(float* min, float* max, float val)
 {
     if (*max < val) {
@@ -642,7 +632,6 @@ static inline void mpColl_LoadECB_inline(CollData* coll, enum_t i)
     mpColl_80042384(coll);
 }
 
-/// 80042D24 https://decomp.me/scratch/2MnVj
 void mpColl_LoadECB(CollData* coll)
 {
     float saved_bottom_x;
@@ -664,7 +653,6 @@ void mpColl_LoadECB(CollData* coll)
     mpColl_80042384(coll);
 }
 
-/// 80042DB0 https://decomp.me/scratch/GbMpk
 static inline void Vec2_Interpolate(float time, Vec2* dest, Vec2* src)
 {
     dest->x += time * (src->x - dest->x);
@@ -910,7 +898,6 @@ void mpColl_800436E4(CollData* coll, float arg1)
     }
 }
 
-/// 80043754 https://decomp.me/scratch/JEEcj
 static inline float max_inline(float a, float b)
 {
     return (a > b) ? a : b;
@@ -991,7 +978,6 @@ bool mpColl_80043754(mpColl_Callback cb, CollData* coll, u32 flags)
     return ret;
 }
 
-/// 800439FC https://decomp.me/scratch/T1yAJ
 void mpColl_800439FC(CollData* coll)
 {
     float right_dx; // f31

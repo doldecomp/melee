@@ -407,7 +407,6 @@ Fighter_CostumeStrings ftMs_Init_CostumeStrings[] = {
 };
 
 /// 80136258 00132E38
-/// https://decomp.me/scratch/6RQ5w
 void ftMs_Init_OnDeath(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
@@ -425,7 +424,6 @@ void ftMs_Init_OnItemPickup(HSD_GObj* gobj, bool flag)
 
 /// 80136390 00132F70
 /// ftMs_Init_OnItemInvisible
-/// https://decomp.me/scratch/BksNr
 void ftMs_Init_OnItemInvisible(HSD_GObj* gobj)
 {
     Fighter_OnItemInvisible(gobj, 0);
@@ -433,7 +431,6 @@ void ftMs_Init_OnItemInvisible(HSD_GObj* gobj)
 
 /// 801363D8 00132FB8
 /// ftMs_Init_OnItemVisible
-/// https://decomp.me/scratch/9zuEy
 void ftMs_Init_OnItemVisible(HSD_GObj* gobj)
 {
     Fighter_OnItemVisible(gobj, 0);
@@ -441,21 +438,18 @@ void ftMs_Init_OnItemVisible(HSD_GObj* gobj)
 
 /// 80136420 00133000
 /// ftMs_Init_OnItemDrop
-/// https://decomp.me/scratch/Ws8ow
 void ftMs_Init_OnItemDrop(HSD_GObj* gobj, bool flag)
 {
     Fighter_OnItemDrop(gobj, flag, 0, 1);
 }
 
 /// 80136474 00133054
-/// https://decomp.me/scratch/2TlGi
 void ftMs_Init_OnLoadForRoy(Fighter* fp)
 {
     PUSH_ATTRS(fp, MarsAttributes);
 }
 
 /// 801364AC 0013308C
-/// https://decomp.me/scratch/9UJHY
 void ftMs_Init_OnLoad(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
@@ -463,7 +457,6 @@ void ftMs_Init_OnLoad(HSD_GObj* gobj)
 }
 
 /// 801364E8 001330C8
-/// https://decomp.me/scratch/tfzFL
 void ftMs_Init_LoadSpecialAttrs(HSD_GObj* gobj)
 {
     COPY_ATTRS(gobj, MarsAttributes);
@@ -471,21 +464,18 @@ void ftMs_Init_LoadSpecialAttrs(HSD_GObj* gobj)
 
 /// 80136520 00133100
 /// ftMs_Init_OnKnockbackEnter
-/// https://decomp.me/scratch/rgfFA
 void ftMs_Init_OnKnockbackEnter(HSD_GObj* gobj)
 {
     Fighter_OnKnockbackEnter(gobj, 1);
 }
 
 /// 80136564 00133144
-/// https://decomp.me/scratch/Jqd2A
 void ftMs_Init_OnKnockbackExit(HSD_GObj* gobj)
 {
     Fighter_OnKnockbackExit(gobj, 1);
 }
 
 /// 801365A8 00133188
-/// https://decomp.me/scratch/Jqd2A
 void ftMs_SpecialN_801365A8(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
@@ -509,7 +499,6 @@ void ftMs_SpecialN_801365A8(HSD_GObj* gobj)
 }
 
 /// 8013666C 0013324C
-/// https://decomp.me/scratch/Jqd2A
 void ftMs_SpecialN_8013666C(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
@@ -533,7 +522,6 @@ void ftMs_SpecialN_8013666C(HSD_GObj* gobj)
 }
 
 /// 80136730 00133310
-/// https://decomp.me/scratch/Jqd2A
 void ftMs_SpecialN_80136730(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;

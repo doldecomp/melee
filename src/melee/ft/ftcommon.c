@@ -1696,7 +1696,6 @@ bool ftCommon_80080144(Fighter* fp)
     return false;
 }
 
-/// https://decomp.me/scratch/Jjkwx
 void ftCommon_80080174(Fighter* fp)
 {
     float phi_f2;

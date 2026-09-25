@@ -2218,9 +2218,7 @@ void grCorneria_801E1878(Ground_GObj* gobj)
     HSD_JObj* target_jobj = tmp;
 
     /// @remarks Splitting the pad around a scoped @c pos places the vector
-    /// at sp+0x18 as in the target; a function-scope @c pos with a single
-    /// PAD_STACK(16) leaves it at sp+0x24 (six reg-save/load instructions
-    /// arg-mismatch, 99.90%).
+    /// at sp+0x18 as in the target.
     PAD_STACK(8);
     {
         Vec3 pos;
