@@ -11,7 +11,7 @@ typedef jmp_t jtbl_t[];
 
 #ifndef MWERKS_GEKKO
 /* Reciprocal sqrt estimate; callers Newton-refine it as 1/sqrt. */
-#define __frsqrte(x) (1.0 / sqrt((double) (x)))
+#define __frsqrte(x) (1.0 / sqrt(x))
 #define sqrtf__Ff(x) sqrtf(x)
 #define sqrtf_accurate(x) sqrtf(x)
 #define __fabs(f) fabsf(f)
