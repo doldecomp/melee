@@ -1,5 +1,6 @@
+#include "mndiagram.h"
+
 #include "inlines.h"
-#include "mndiagram.static.h"
 #include "mndiagram2.h"
 #include "mndiagram3.h"
 #include "mnmain.h"

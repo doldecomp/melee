@@ -7,7 +7,6 @@
 #include "gm_1798.h"
 #include "gm_unsplit.h"
 #include "gmresult.h"
-#include "gmresultplayer.static.h"
 #include "gmscene.h"
 #include "types.h"
 #include <melee/if/ifcoget.h>

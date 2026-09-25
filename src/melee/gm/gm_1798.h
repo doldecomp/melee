@@ -4,6 +4,8 @@
 #include <melee/ft/forward.h>
 #include <sysdolphin/baselib/forward.h>
 
+#include "gmresultplayer.h"
+
 /* 179854 */ void fn_80179854(void);
 /* 179990 */ void fn_80179990(HSD_GObj*, int, int);
 /* 179D3C */ void fn_80179D3C(HSD_GObj*, intptr_t);
@@ -22,5 +24,7 @@
 /* 17A67C */ Fighter_GObj* fn_8017A67C(CharacterKind c_kind, int, int);
 /* 17A9B4 */ void fn_8017A9B4(int);
 /* 17AA78 */ void fn_8017AA78(const u8*);
+
+extern lbl_8046E3AC_t lbl_8046E3AC;
 
 #endif
