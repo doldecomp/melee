@@ -1383,13 +1383,9 @@ void Camera_8002B0E0(void)
 {
     f32 var_f1;
     f32 var_f2;
-    PAD_STACK(8);
 
     if ((gm_IsCurrently1PMode_inline() != 0) && (game_camera.x2C0 > 0.0f)) {
-        {
-            s32 idx = Player_GetPadPort(0) & 0xFF;
-            var_f1 = HSD_PadCopyStatus[idx].nml_subStickY;
-        }
+        var_f1 = HSD_PadGetNmlSubStickY(Player_GetPadPort(0));
         var_f2 = var_f1;
         if (var_f2 < 0.0f) {
             var_f1 = -var_f1;
@@ -1579,6 +1575,16 @@ static inline f32 get_stick_y(HSD_PadStatus* arg0)
     return arg0->nml_stickY;
 }
 
+static inline f32 get_substick_x(HSD_PadStatus* arg0)
+{
+    return arg0->nml_subStickX;
+}
+
+static inline f32 get_substick_y(HSD_PadStatus* arg0)
+{
+    return arg0->nml_subStickY;
+}
+
 void Camera_8002B694(CameraInputs* inputs, s32 slot)
 {
     HSD_PadStatus* pad;
@@ -1592,7 +1598,6 @@ void Camera_8002B694(CameraInputs* inputs, s32 slot)
     s32 i;
     s32 idx;
     u64 temp_ret;
-    PAD_STACK(16);
 
     if (slot == 5) {
         inputs->stick_x = 0.0f;
@@ -1604,12 +1609,8 @@ void Camera_8002B694(CameraInputs* inputs, s32 slot)
         return;
     }
 
-    /// @todo some notes on this weird thing: Slot 4 reads all ports at once:
-    /// the stick and substick each
-    // come from the first controller deflected past 0.85 on either axis (zero
-    // if none), and the buttons are merged across all controllers.
-    // there is probably an inline for the stick comparisons that would fix the
-    // PAD_STACK
+    // Slot 4 takes each stick from the first port deflected past 0.85 and
+    // merges the buttons of every port.
     if (slot == 4) {
         for (current_slot = 0; current_slot < PAD_MAX_CONTROLLERS;
              current_slot++)
@@ -1641,8 +1642,8 @@ void Camera_8002B694(CameraInputs* inputs, s32 slot)
         idx = 0;
         for (i = 0; i < PAD_MAX_CONTROLLERS; i++, idx = (u8) i) {
             pad = &HSD_PadCopyStatus[idx];
-            temp_x = pad->nml_subStickX;
-            temp_y = pad->nml_subStickY;
+            temp_x = get_substick_x(pad);
+            temp_y = get_substick_y(pad);
             substick_x = temp_x;
             substick_y = temp_y;
             if (temp_x < 0.0f) {
@@ -1676,10 +1677,10 @@ void Camera_8002B694(CameraInputs* inputs, s32 slot)
     }
 
     pad = get_slot_pad(slot);
-    inputs->stick_x = pad->nml_stickX;
-    inputs->stick_y = pad->nml_stickY;
-    inputs->substick_x = pad->nml_subStickX;
-    inputs->substick_y = pad->nml_subStickY;
+    inputs->stick_x = get_stick_x(pad);
+    inputs->stick_y = get_stick_y(pad);
+    inputs->substick_x = get_substick_x(pad);
+    inputs->substick_y = get_substick_y(pad);
     temp_ret = gm_GetButtonsPressed(slot);
     inputs->buttons_pressed = temp_ret;
     temp_ret = gm_GetButtonsTriggered(slot);
@@ -3403,14 +3404,14 @@ void fn_8002F360(HSD_GObj* x)
     }
 }
 
+static inline HSD_GObj* getCameraGObj(void)
+{
+    return game_camera.gobj;
+}
+
 void Camera_8002F3AC(void)
 {
-    HSD_GObj* gobj = game_camera.gobj;
-    PAD_STACK(1);
-
-    if (cm_803BCB18.callback[game_camera.mode] != NULL) {
-        cm_803BCB18.callback[game_camera.mode](gobj);
-    }
+    fn_8002F360(getCameraGObj());
     game_camera.transform.position = game_camera.transform.target_position;
     game_camera.transform.interest = game_camera.transform.target_interest;
     game_camera.transform.fov = game_camera.transform.target_fov;
