@@ -93,7 +93,7 @@ void fn_80179854(void)
     }
 }
 
-extern s32 ftLib_800876B4(HSD_GObj*);
+extern s32 ftLib_IsFramesRemaining(HSD_GObj*);
 
 static inline int get_big_loser(int slot, MatchEnd* match_end)
 {
@@ -191,7 +191,7 @@ void fn_80179990(HSD_GObj* arg0, int arg1, int arg2)
                     fn_80179990_img_at(disp->player_img2, arg2);
             }
         } else {
-            if (ftLib_800876B4(Player_GetEntity(arg2)) == 0) {
+            if (ftLib_IsFramesRemaining(Player_GetEntity(arg2)) == 0) {
                 if (disp->state.player_flags[arg2] == 0 && disp->state.x0_6) {
                     fn_80179990_set_erase_color(match_end, arg2);
                     HSD_CObjEraseScreen(cobj, 1, 0, 0);

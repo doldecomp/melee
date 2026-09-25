@@ -167,7 +167,7 @@ void it_802ADF10(HSD_GObj* item_gobj)
         item->xDD4_itemVar.foxblaster.gfx_spawn_var)
     {
         item->xDD4_itemVar.foxblaster.gfx_spawn_var = false;
-        ftLib_80086644(item->xDD4_itemVar.foxblaster.owner, &ft_cur_pos);
+        ftLib_GetPos(item->xDD4_itemVar.foxblaster.owner, &ft_cur_pos);
 
         switch (item->kind) {
         case It_Kind_Fox_Blaster:
@@ -520,11 +520,11 @@ Item_GObj* it_802AE994(Fighter_GObj* owner_gobj, Fighter_Part ft_part,
     if (owner_gobj != NULL) {
         spawn.kind = it_kind;
 
-        ftLib_80086644(owner_gobj, &sp18);
+        ftLib_GetPos(owner_gobj, &sp18);
         Item_InitSpawnPosition(&spawn, &sp18, true);
 
         Item_InitSpawnCommonFields(&spawn, owner_gobj,
-                                   ftLib_800865C0(owner_gobj), false);
+                                   ftLib_GetFacingDir(owner_gobj), false);
 
         item_gobj = Item_80268B18(
             &spawn); // Item spawn prefunction - spawn airborne [sets

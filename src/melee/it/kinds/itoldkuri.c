@@ -441,7 +441,7 @@ bool it_802D8098(Item_GObj* gobj)
         it_802D813C(gobj);
     }
     Item_8026AE84(ip, 0x12E, 0x7F, 0x40);
-    ftLib_80086D40(ip->xCFC, 0xC, 0x0);
+    ftLib_StartItemRumble(ip->xCFC, 0xC, 0x0);
     return false;
 }
 

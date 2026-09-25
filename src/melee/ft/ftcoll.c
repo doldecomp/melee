@@ -763,7 +763,7 @@ void ftColl_80077688(Item* item, HitCapsule* hurt, Fighter* fp, Vec3* pos,
         fp->x19A0_shieldDamageTaken += clamped_total;
     }
 
-    if (ftLib_80086960(item->owner)) {
+    if (ftLib_IsFighter(item->owner)) {
         Fighter* owner_fp = item->owner->user_data;
         fp->x19BC_shieldDamageTaken3 = owner_fp->player_idx;
         fp->x221F_b6 = owner_fp->is_sub_fighter;
@@ -1235,7 +1235,7 @@ void ftColl_800787B4(Item_GObj* arg0, Fighter_GObj* arg1, int arg2)
                     (u16) ip->x1C);
     }
 
-    if (ftLib_80086960(owner)) {
+    if (ftLib_IsFighter(owner)) {
         ftColl_8007861C(owner, arg1, 2, ip->kind, ip->xD90.x2070_int,
                         &ip->xD94, ip->xDA8_short, (UNK_T) arg2, 0);
     } else if (pl_8003D60C(ip->kind)) {
@@ -1272,7 +1272,7 @@ void ftColl_80078998(HSD_GObj* arg0, HSD_GObj* arg1, float arg2)
     plStale_UpdateStaleMovesFromItem(arg0, arg1);
     ftColl_8007646C(arg0, arg1);
     ip = arg0->user_data;
-    if (ftLib_80086960(ip->owner)) {
+    if (ftLib_IsFighter(ip->owner)) {
         Fighter* owner_fp = GET_FIGHTER(ip->owner);
         Fighter* victim_fp = GET_FIGHTER(arg1);
         pl_8003EB30(arg2, owner_fp->player_idx, owner_fp->is_sub_fighter,
@@ -1319,7 +1319,7 @@ void ftColl_80078A2C(Fighter_GObj* this_gobj)
     this_fp->unk_grab_val = F32_MAX;
     victim_gobj = HSD_GObjPLinkHead[HSD_GOBJ_PLINK_FIGHTER];
     while (victim_gobj != NULL) {
-        if (!ftLib_80086FD4(this_gobj, victim_gobj)) {
+        if (!ftLib_IsSamePlayer(this_gobj, victim_gobj)) {
             victim_fp = victim_gobj->user_data;
             if ((!victim_fp->x2219_b1 &&
                  (!victim_fp->x222A_b0 &&
@@ -1752,7 +1752,7 @@ void ftColl_8007925C(Fighter_GObj* gobj)
             continue;
         }
 
-        if (ftLib_80086FD4(gobj, item->owner)) {
+        if (ftLib_IsSamePlayer(gobj, item->owner)) {
             if (!item->xDCD_flag.b5) {
                 continue;
             }
@@ -1768,7 +1768,7 @@ void ftColl_8007925C(Fighter_GObj* gobj)
             hit_count = 0;
 
             if (fp->x1064_thrownHitbox.owner == NULL ||
-                ((!ftLib_80086FD4(fp->x1064_thrownHitbox.owner,
+                ((!ftLib_IsSamePlayer(fp->x1064_thrownHitbox.owner,
                                   item->owner) ||
                   item->xDCD_flag.b5) &&
                  (!gm_8016B168() || gm_8016B0D4() || item->xDCD_flag.b6 ||
@@ -2253,7 +2253,7 @@ void ftColl_8007A06C(Fighter_GObj* gobj, void* dmg_ptr, void* log, size_t idx,
             HSD_GObj* owner = item->owner;
             float attack;
 
-            if (ftLib_80086960(owner)) {
+            if (ftLib_IsFighter(owner)) {
                 attack = Player_GetAttackRatio(
                     ((Fighter*) owner->user_data)->player_idx);
             } else {
@@ -2407,7 +2407,7 @@ void ftColl_8007A06C(Fighter_GObj* gobj, void* dmg_ptr, void* log, size_t idx,
             pl_80041B08(player_id, (UNK_T) (uintptr_t) b4, (u16) ip->x1C);
         }
 
-        if (ftLib_80086960(tail_owner_gobj)) {
+        if (ftLib_IsFighter(tail_owner_gobj)) {
             ftColl_8007861C(tail_owner_gobj, gobj, 2, ip->kind,
                             ip->xD90.x2070_int, &ip->xD94, ip->xDA8_short,
                             dmg_ptr, 0);

@@ -186,7 +186,7 @@ void grZebesRoute_8020B42C(Ground_GObj* gobj)
 
     fighter = Ground_GetP1Fighter();
     if (fighter != NULL) {
-        ftLib_80086644(fighter, &pos);
+        ftLib_GetPos(fighter, &pos);
         if (pos.y < -50.0f) {
             pos.y = -50.0f;
         }

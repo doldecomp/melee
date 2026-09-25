@@ -92,11 +92,12 @@ void mpCollPrev(CollData* cd)
         if (!(cd->cur_pos.x < 45000.0F) || !(cd->cur_pos.x > -45000.0F) ||
             !(cd->cur_pos.y < 45000.0F) || !(cd->cur_pos.y > -45000.0F))
         {
-            if (ftLib_80086960(cd->x0_gobj)) {
+            if (ftLib_IsFighter(cd->x0_gobj)) {
                 OSReport(
                     "%s:%d: Error: mpCollPrev() pos(%f,%f) player=%d ms=%d\n",
                     "mpcoll.c", 203, cd->cur_pos.x, cd->cur_pos.y,
-                    ftLib_80086BE0(cd->x0_gobj), ftLib_800874BC(cd->x0_gobj));
+                    ftLib_GetPlayerIndex(cd->x0_gobj),
+                    ftLib_IsSubFighter(cd->x0_gobj));
             } else {
                 OSReport("%s:%d: Error: mpCollPrev() pos(%f,%f) gobj_id=%d\n",
                          "mpcoll.c", 212, cd->x0_gobj->classifier,
@@ -796,13 +797,13 @@ void mpCollEnd(CollData* coll, bool arg1, bool arg2)
         if (!(coll->cur_pos.x < 45000.0F && coll->cur_pos.x > -45000.0F &&
               coll->cur_pos.y < 45000.0F && coll->cur_pos.y > -45000.0F))
         {
-            if (ftLib_80086960(coll->x0_gobj)) {
+            if (ftLib_IsFighter(coll->x0_gobj)) {
                 OSReport("%s:%d: Error: mpCollEnd() last(%f,%f) pos(%f,%f) "
                          "ply=%d ms=%d\n",
                          __FILE__, 1350, coll->last_pos.x, coll->last_pos.y,
                          coll->cur_pos.x, coll->cur_pos.y,
-                         ftLib_80086BE0(coll->x0_gobj),
-                         ftLib_800874BC(coll->x0_gobj));
+                         ftLib_GetPlayerIndex(coll->x0_gobj),
+                         ftLib_IsSubFighter(coll->x0_gobj));
             } else {
                 s32 gobjid = coll->x0_gobj->classifier;
                 OSReport("%s:%d: Error: mpCollEnd() last(%f,%f) pos(%f,%f) "

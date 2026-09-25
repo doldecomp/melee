@@ -32,7 +32,7 @@
 #include <sysdolphin/baselib/random.h>
 #include <sysdolphin/baselib/rumble.h>
 
-s32 ftLib_800860C4(void)
+s32 ftLib_CountFighters(void)
 {
     s32 ret = 0;
     HSD_GObj* cur;
@@ -76,7 +76,7 @@ bool ftLib_IsCrazyHandPresent(void)
     return false;
 }
 
-HSD_GObj* ftLib_80086198(HSD_GObj* gobj)
+HSD_GObj* ftLib_FindLowestPercentOpponent(HSD_GObj* gobj)
 {
     /// @todo Figure out how these are really declared
     Fighter* fp;
@@ -96,7 +96,7 @@ HSD_GObj* ftLib_80086198(HSD_GObj* gobj)
     for (cur = HSD_GObjPLinkHead[HSD_GOBJ_PLINK_FIGHTER]; cur != NULL;
          cur = cur->next)
     {
-        if (!ftLib_80086FD4(gobj, cur)) {
+        if (!ftLib_IsSamePlayer(gobj, cur)) {
             // If not same player
             Fighter* cur_fp = GET_FIGHTER(cur);
             if (cur_fp->is_sleeping) {
@@ -118,8 +118,8 @@ HSD_GObj* ftLib_80086198(HSD_GObj* gobj)
     return result;
 }
 
-/// get closest opposing fp?
-HSD_GObj* ftLib_8008627C(Vec3* pos, HSD_GObj* gobj)
+/// Closest opponent to @p pos (squared x/y distance), skipping teammates.
+HSD_GObj* ftLib_FindNearestOpponent(Vec3* pos, HSD_GObj* gobj)
 {
     Vec3 cur_v;
     float dist;
@@ -145,7 +145,7 @@ HSD_GObj* ftLib_8008627C(Vec3* pos, HSD_GObj* gobj)
          cur = cur->next)
     {
         // skip if same player
-        if (ftLib_80086FD4(gobj, cur)) {
+        if (ftLib_IsSamePlayer(gobj, cur)) {
             continue;
         }
 
@@ -157,7 +157,7 @@ HSD_GObj* ftLib_8008627C(Vec3* pos, HSD_GObj* gobj)
             continue;
         }
 
-        ftLib_800866DC(cur, &cur_v);
+        ftLib_GetCameraBonePos(cur, &cur_v);
         dx = pos->x - cur_v.x;
         dy = pos->y - cur_v.y;
         dist = (dx * dx) + (dy * dy);
@@ -170,8 +170,10 @@ HSD_GObj* ftLib_8008627C(Vec3* pos, HSD_GObj* gobj)
     return result;
 }
 
-/// get closest opposing fp, on given side (left/right)
-Fighter_GObj* ftLib_80086368(Vec3* v, Fighter_GObj* gobj, float facing_dir)
+/// Like #ftLib_FindNearestOpponent, but only opponents on the @p facing_dir
+/// side of @p v.
+Fighter_GObj* ftLib_FindNearestOpponentInDir(Vec3* v, Fighter_GObj* gobj,
+                                             float facing_dir)
 {
     Vec3 sp24;
     float dx, dy, diff;
@@ -194,7 +196,7 @@ Fighter_GObj* ftLib_80086368(Vec3* v, Fighter_GObj* gobj, float facing_dir)
     for (cur = HSD_GObjPLinkHead[HSD_GOBJ_PLINK_FIGHTER]; cur != NULL;
          cur = cur->next)
     {
-        if (ftLib_80086FD4(gobj, cur)) {
+        if (ftLib_IsSamePlayer(gobj, cur)) {
             continue;
         }
 
@@ -204,7 +206,7 @@ Fighter_GObj* ftLib_80086368(Vec3* v, Fighter_GObj* gobj, float facing_dir)
         {
             continue;
         }
-        ftLib_800866DC(cur, &sp24);
+        ftLib_GetCameraBonePos(cur, &sp24);
 
         if ((facing_dir == -1 && sp24.x > v->x) ||
             (facing_dir == +1 && sp24.x < v->x))
@@ -233,7 +235,7 @@ static inline s32 sgn(float x)
     }
 }
 
-float ftLib_800864A8(Vec3* v, HSD_GObj* gobj)
+float ftLib_GetOpponentsDir(Vec3* v, HSD_GObj* gobj)
 {
     Vec3 vec;
     Fighter* fp;
@@ -252,7 +254,7 @@ float ftLib_800864A8(Vec3* v, HSD_GObj* gobj)
     for (cur = HSD_GObjPLinkHead[HSD_GOBJ_PLINK_FIGHTER]; cur != NULL;
          cur = cur->next)
     {
-        if (ftLib_80086FD4(gobj, cur)) {
+        if (ftLib_IsSamePlayer(gobj, cur)) {
             continue;
         }
 
@@ -264,7 +266,7 @@ float ftLib_800864A8(Vec3* v, HSD_GObj* gobj)
                 continue;
             }
 
-            ftLib_800866DC(cur, &vec);
+            ftLib_GetCameraBonePos(cur, &vec);
             result += sgn(vec.x - v->x);
         }
     }
@@ -280,50 +282,50 @@ float ftLib_800864A8(Vec3* v, HSD_GObj* gobj)
     }
 }
 
-float ftLib_800865C0(HSD_GObj* gobj)
+float ftLib_GetFacingDir(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     return fp->facing_dir;
 }
 
-s32 ftLib_800865CC(HSD_GObj* gobj)
+s32 ftLib_GetGroundAir(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     return fp->ground_or_air;
 }
 
-void ftLib_800865D8(HSD_GObj* gobj, float* x, float* y)
+void ftLib_GetLStick(HSD_GObj* gobj, float* x, float* y)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     *x = fp->input.lstick[0].x;
     *y = fp->input.lstick[0].y;
 }
 
-HSD_JObj* ftLib_800865F0(HSD_GObj* gobj)
+HSD_JObj* ftLib_GetHipJObj(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    return fp->parts[ftParts_GetBoneIndex(fp, 4)].joint;
+    return fp->parts[ftParts_GetBoneIndex(fp, FtPart_HipN)].joint;
 }
 
-HSD_JObj* ftLib_80086630(HSD_GObj* gobj, Fighter_Part part)
+HSD_JObj* ftLib_GetPartJObj(HSD_GObj* gobj, Fighter_Part part)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     return fp->parts[part].joint;
 }
 
-void ftLib_80086644(Fighter_GObj* gobj, Vec3* pos)
+void ftLib_GetPos(Fighter_GObj* gobj, Vec3* pos)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     *pos = fp->cur_pos;
 }
 
-void ftLib_80086664(HSD_GObj* gobj, Vec3* pos)
+void ftLib_SetPos(HSD_GObj* gobj, Vec3* pos)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     fp->cur_pos = *pos;
 }
 
-void ftLib_80086684(HSD_GObj* gobj, Vec3* pos)
+void ftLib_GetPrevPos(HSD_GObj* gobj, Vec3* pos)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     *pos = fp->prev_pos;
@@ -337,15 +339,15 @@ void ftLib_SetScale(HSD_GObj* gobj, float val)
     ftCommon_80080174(fp);
 }
 
-void ftLib_800866DC(HSD_GObj* gobj, Vec3* v)
+void ftLib_GetCameraBonePos(HSD_GObj* gobj, Vec3* v)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     struct ftCo_DatAttrs* r4 = &fp->co_attrs;
     s32 i = fp->ft_data->x0->camera_zoom_target_bone;
-    lb_8000B1CC(ftLib_80086630(gobj, i), &r4->x170, v);
+    lb_8000B1CC(ftLib_GetPartJObj(gobj, i), &r4->x170, v);
 }
 
-void ftLib_80086724(HSD_GObj* gobj, HSD_GObj* other)
+void ftLib_ReleaseItem(HSD_GObj* gobj, HSD_GObj* other)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (fp->item_gobj != NULL || fp->x1978 != NULL) {
@@ -353,7 +355,7 @@ void ftLib_80086724(HSD_GObj* gobj, HSD_GObj* other)
     }
 }
 
-void ftLib_80086764(HSD_GObj* gobj)
+void ftLib_ClearHeldSpecialItem(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (fp->x1984_heldItemSpec != NULL) {
@@ -367,7 +369,7 @@ HSD_GObj* ftLib_GetItem(HSD_GObj* gobj)
     return fp->item_gobj;
 }
 
-bool ftLib_800867A0(HSD_GObj* gobj, HSD_GObj* arg1)
+bool ftLib_IsHoldingItem(HSD_GObj* gobj, HSD_GObj* arg1)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (ftLib_GetItem(gobj) == arg1 || fp->x1978 == arg1) {
@@ -377,7 +379,7 @@ bool ftLib_800867A0(HSD_GObj* gobj, HSD_GObj* arg1)
     }
 }
 
-HSD_GObj* ftLib_800867CC(HSD_GObj* gobj)
+HSD_GObj* ftLib_GetHeldSpecialItem(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     return fp->x1984_heldItemSpec;
@@ -424,7 +426,7 @@ void ftLib_EnableAllInput(void)
     }
 }
 
-bool ftLib_800868D4(HSD_GObj* gobj, HSD_GObj* arg1)
+bool ftLib_IsItemVisible(HSD_GObj* gobj, HSD_GObj* arg1)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
@@ -443,7 +445,7 @@ bool ftLib_800868D4(HSD_GObj* gobj, HSD_GObj* arg1)
 }
 
 /// Check if the HSD_GObj* class is a fighter
-bool ftLib_80086960(HSD_GObj* arg)
+bool ftLib_IsFighter(HSD_GObj* arg)
 {
     if (arg != NULL && arg->classifier == HSD_GOBJ_CLASS_FIGHTER) {
         return true;
@@ -452,7 +454,7 @@ bool ftLib_80086960(HSD_GObj* arg)
     }
 }
 
-CollData* ftLib_80086984(HSD_GObj* gobj)
+CollData* ftLib_GetCollData(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     return Fighter_GetCollData(fp);
@@ -465,14 +467,14 @@ static inline void vector_add(Vec3* dst, Vec3* src, float x, float y, float z)
     dst->z = src->z + z;
 }
 
-void ftLib_80086990(HSD_GObj* gobj, Vec3* v)
+void ftLib_GetECBCenter(HSD_GObj* gobj, Vec3* v)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     float tmp = 0.5f * (fp->coll_data.ecb.top.y + fp->coll_data.ecb.bottom.y);
     vector_add(v, &fp->cur_pos, 0, tmp, 0);
 }
 
-float ftLib_800869D4(HSD_GObj* gobj)
+float ftLib_GetModelScale(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     return ftCommon_GetModelScale(fp);
@@ -484,13 +486,15 @@ float ftLib_800869F8(HSD_GObj* gobj)
     return fp->x34_scale.x * fp->co_attrs.model_scaling;
 }
 
-float ftLib_80086A0C(HSD_GObj* gobj)
+float ftLib_GetScale(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     return fp->x34_scale.y;
 }
 
-bool ftLib_80086A18(HSD_GObj* gobj)
+/// @note Only #ftCo_MS_GuardOn, #ftCo_MS_Guard and #ftCo_MS_GuardSetOff:
+/// not GuardOff, GuardReflect or Yoshi's #ftYs_MS_GuardHold.
+bool ftLib_IsShielding(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     bool result = false;
@@ -511,7 +515,7 @@ void ftLib_80086A4C(HSD_GObj* gobj, float val)
     fp->dmg.x1958 = val;
 }
 
-bool ftLib_80086A58(HSD_GObj* gobj, S32Vec2* x)
+bool ftLib_GetScreenPos(HSD_GObj* gobj, S32Vec2* x)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
@@ -522,7 +526,7 @@ bool ftLib_80086A58(HSD_GObj* gobj, S32Vec2* x)
     return false;
 }
 
-bool ftLib_80086A8C(HSD_GObj* gobj)
+bool ftLib_UpdateScreenVisibility(HSD_GObj* gobj)
 {
     HSD_GObj* camera_gobj;
 
@@ -549,13 +553,13 @@ bool ftLib_80086A8C(HSD_GObj* gobj)
     return true;
 }
 
-bool ftLib_80086B64(HSD_GObj* gobj)
+bool ftLib_IsOffscreen(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     return fp->x221F_b0;
 }
 
-CmSubject* ftLib_80086B74(HSD_GObj* gobj)
+CmSubject* ftLib_GetCameraSubject(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     return fp->x890_cameraBox;
@@ -563,28 +567,28 @@ CmSubject* ftLib_80086B74(HSD_GObj* gobj)
 
 float ftLib_80086B80(HSD_GObj* gobj)
 {
-    return ftLib_80086B74(gobj)->target_ext.v.z;
+    return ftLib_GetCameraSubject(gobj)->target_ext.v.z;
 }
 
-void ftLib_80086B90(HSD_GObj* gobj, Vec3* v)
+void ftLib_GetCameraSubjectBonePos(HSD_GObj* gobj, Vec3* v)
 {
-    CmSubject* cam = ftLib_80086B74(gobj);
+    CmSubject* cam = ftLib_GetCameraSubject(gobj);
     *v = cam->bone_pos;
 }
 
-bool ftLib_80086BB4(HSD_GObj* gobj)
+bool ftLib_IsCameraSubjectInBounds(HSD_GObj* gobj)
 {
-    CmSubject* cam = ftLib_80086B74(gobj);
+    CmSubject* cam = ftLib_GetCameraSubject(gobj);
     return Camera_80031154(&cam->pos);
 }
 
-u8 ftLib_80086BE0(HSD_GObj* gobj)
+u8 ftLib_GetPlayerIndex(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     return fp->player_idx;
 }
 
-void ftLib_80086BEC(HSD_GObj* gobj, Vec3* v)
+void ftLib_GetPosDelta(HSD_GObj* gobj, Vec3* v)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     *v = fp->pos_delta;
@@ -609,12 +613,12 @@ static inline void helper(HSD_GObj* gobj, s32 arg1, s32 arg2, s32 val)
     }
 }
 
-void ftLib_80086C18(HSD_GObj* gobj, s32 arg1, s32 arg2)
+void ftLib_StartRumble(HSD_GObj* gobj, s32 arg1, s32 arg2)
 {
     helper(gobj, arg1, arg2, 0);
 }
 
-void ftLib_80086C9C(s32 arg0, s32 arg1)
+void ftLib_StartRumbleAll(s32 arg0, s32 arg1)
 {
     u8 _[16];
 
@@ -622,16 +626,16 @@ void ftLib_80086C9C(s32 arg0, s32 arg1)
     for (cur = HSD_GObjPLinkHead[HSD_GOBJ_PLINK_FIGHTER]; cur != NULL;
          cur = cur->next)
     {
-        ftLib_80086C18(cur, arg0, arg1);
+        ftLib_StartRumble(cur, arg0, arg1);
     }
 }
 
-void ftLib_80086D40(HSD_GObj* arg0, s32 arg1, s32 arg2)
+void ftLib_StartItemRumble(HSD_GObj* arg0, s32 arg1, s32 arg2)
 {
     helper(arg0, arg1, arg2, 1);
 }
 
-void ftLib_80086DC4(s32 arg0, s32 arg1)
+void ftLib_StartItemRumbleAll(s32 arg0, s32 arg1)
 {
     u8 _[16];
 
@@ -639,11 +643,11 @@ void ftLib_80086DC4(s32 arg0, s32 arg1)
     for (cur = HSD_GObjPLinkHead[HSD_GOBJ_PLINK_FIGHTER]; cur != NULL;
          cur = cur->next)
     {
-        ftLib_80086D40(cur, arg0, arg1);
+        ftLib_StartItemRumble(cur, arg0, arg1);
     }
 }
 
-void ftLib_80086E68(HSD_GObj* gobj)
+void ftLib_StopItemRumble(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (Player_8003544C(fp->player_idx, fp->is_sub_fighter)) {
@@ -652,19 +656,19 @@ void ftLib_80086E68(HSD_GObj* gobj)
 }
 
 /// Get fighter's team ID
-s32 ftLib_80086EB4(HSD_GObj* gobj)
+s32 ftLib_GetTeam(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     return fp->team;
 }
 
-bool ftLib_80086EC0(HSD_GObj* gobj)
+bool ftLib_IsInHitstun(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     return fp->x221C_b6;
 }
 
-bool ftLib_80086ED0(HSD_GObj* gobj)
+bool ftLib_CanBeMagnified(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (fp->invisible || fp->x221E_b2 ||
@@ -687,7 +691,7 @@ bool ftLib_80086F4C(HSD_GObj* gobj)
     return false;
 }
 
-float ftLib_80086F80(HSD_GObj* gobj)
+float ftLib_GetNameTagHeight(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (fp->invisible) {
@@ -697,7 +701,7 @@ float ftLib_80086F80(HSD_GObj* gobj)
     return fp->co_attrs.name_tag_height;
 }
 
-bool ftLib_80086FA8(HSD_GObj* gobj)
+bool ftLib_IsSwordSwing(HSD_GObj* gobj)
 {
     switch (ftLib_GetMotionId(gobj)) {
     case ftCo_MS_SwordSwing1:
@@ -710,7 +714,7 @@ bool ftLib_80086FA8(HSD_GObj* gobj)
     return false;
 }
 
-bool ftLib_80086FD4(HSD_GObj* gobj0, HSD_GObj* gobj1)
+bool ftLib_IsSamePlayer(HSD_GObj* gobj0, HSD_GObj* gobj1)
 {
     if (gobj0 != NULL && gobj1 != NULL) {
         if (gobj0 == gobj1) {
@@ -729,23 +733,23 @@ bool ftLib_80086FD4(HSD_GObj* gobj0, HSD_GObj* gobj1)
     return false;
 }
 
-bool ftLib_8008701C(HSD_GObj* gobj)
+bool ftLib_IsSleeping(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     return fp->is_sleeping;
 }
 
-void ftLib_8008702C(s32 arg0)
+void ftLib_IncFighterRefCount(s32 arg0)
 {
     ftData_80085560(arg0, 1);
 }
 
-void ftLib_80087050(s32 arg0)
+void ftLib_DecFighterRefCount(s32 arg0)
 {
     ftData_80085560(arg0, -1);
 }
 
-bool ftLib_80087074(HSD_GObj* gobj, Vec3* v)
+bool ftLib_GetShakeOffset(HSD_GObj* gobj, Vec3* v)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (fp->dmg.x18B8 || fp->dmg.x18BC) {
@@ -757,7 +761,7 @@ bool ftLib_80087074(HSD_GObj* gobj, Vec3* v)
     return false;
 }
 
-bool ftLib_800870BC(HSD_GObj* gobj, GXColor* val)
+bool ftLib_GetSubColor(HSD_GObj* gobj, GXColor* val)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (fp->sub_color) {
@@ -767,13 +771,13 @@ bool ftLib_800870BC(HSD_GObj* gobj, GXColor* val)
     return false;
 }
 
-void ftLib_800870F0(HSD_GObj* gobj, s32 x)
+void ftLib_SetPercent(HSD_GObj* gobj, s32 x)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     fp->dmg.x1830_percent = x;
 }
 
-s32 ftLib_80087120(HSD_GObj* gobj)
+s32 ftLib_GetPercent(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     s32 result = fp->dmg.x1830_percent;
@@ -791,7 +795,7 @@ void ftLib_80087140(HSD_GObj* gobj)
     }
 }
 
-void ftLib_800871A8(Fighter_GObj* gobj, Item_GObj* item_gobj)
+void ftLib_ApplyMetalBox(Fighter_GObj* gobj, Item_GObj* item_gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     HSD_ASSERT(1117, itGetKind(item_gobj) == It_Kind_MetalB);
@@ -803,6 +807,8 @@ void ftLib_800871A8(Fighter_GObj* gobj, Item_GObj* item_gobj)
     ft_PlaySFX(fp, 0x121, 0x7F, 0x40);
 }
 
+/// Unbounded: true for every motion state from #ftCo_MS_LightThrowF4 on.
+/// The flipper's thrown code uses it to pick its smash-throw duration.
 bool ftLib_80087284(HSD_GObj* gobj)
 {
     if (ftLib_GetMotionId(gobj) >= ftCo_MS_LightThrowF4) {
@@ -818,36 +824,36 @@ FighterKind ftLib_GetKind(HSD_GObj* gobj)
     return fp->kind;
 }
 
-LbShadow* ftLib_800872B0(HSD_GObj* gobj)
+LbShadow* ftLib_GetShadow(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     return &fp->x20A4;
 }
 
-bool ftLib_800872BC(HSD_GObj* gobj)
+bool ftLib_CastsShadow(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     return !fp->x221E_b1 && !fp->x2226_b4 && !fp->is_sub_fighter;
 }
 
-s32 ftLib_80087300(HSD_GObj* gobj)
+s32 ftLib_GetLastAttackerSlot(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     return fp->dmg.x18c4_source_ply;
 }
 
-s32 ftLib_8008730C(HSD_GObj* gobj)
+s32 ftLib_IsLastAttackerSubFighter(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     return fp->x221F_b5;
 }
 
-s32 ftLib_8008731C(HSD_GObj* gobj)
+s32 ftLib_IsSleeping_8008731C(HSD_GObj* gobj)
 {
-    return ftLib_8008701C(gobj);
+    return ftLib_IsSleeping(gobj);
 }
 
-bool ftLib_8008732C(HSD_GObj* gobj)
+bool ftLib_IsDead(HSD_GObj* gobj)
 {
     FtMotionId msid = ftLib_GetMotionId(gobj);
     if (msid >= ftCo_MS_DeadDown && msid <= ftCo_MS_DeadUpFallHitCameraIce) {
@@ -857,7 +863,7 @@ bool ftLib_8008732C(HSD_GObj* gobj)
     return false;
 }
 
-bool ftLib_80087354(HSD_GObj* gobj)
+bool ftLib_IsDeadUp(HSD_GObj* gobj)
 {
     FtMotionId msid = ftLib_GetMotionId(gobj);
     if (msid >= ftCo_MS_DeadUp && msid <= ftCo_MS_DeadUpFallHitCameraIce) {
@@ -867,7 +873,7 @@ bool ftLib_80087354(HSD_GObj* gobj)
     return false;
 }
 
-bool ftLib_8008737C(HSD_GObj* gobj)
+bool ftLib_IsDeadUpStar(HSD_GObj* gobj)
 {
     FtMotionId msid = ftLib_GetMotionId(gobj);
     if (msid >= ftCo_MS_DeadUpStar && msid <= ftCo_MS_DeadUpStarIce) {
@@ -877,7 +883,7 @@ bool ftLib_8008737C(HSD_GObj* gobj)
     return false;
 }
 
-bool ftLib_800873A4(HSD_GObj* gobj)
+bool ftLib_IsDeadUpFall(HSD_GObj* gobj)
 {
     FtMotionId msid = ftLib_GetMotionId(gobj);
     if (msid >= ftCo_MS_DeadUpFall && msid <= ftCo_MS_DeadUpFallHitCameraIce) {
@@ -887,7 +893,7 @@ bool ftLib_800873A4(HSD_GObj* gobj)
     return false;
 }
 
-bool ftLib_800873CC(HSD_GObj* gobj)
+bool ftLib_IsRebirth(HSD_GObj* gobj)
 {
     FtMotionId msid = ftLib_GetMotionId(gobj);
     if (msid >= ftCo_MS_Rebirth && msid <= ftCo_MS_RebirthWait) {
@@ -897,7 +903,7 @@ bool ftLib_800873CC(HSD_GObj* gobj)
     return false;
 }
 
-bool ftLib_800873F4(HSD_GObj* gobj)
+bool ftLib_IsEntry(HSD_GObj* gobj)
 {
     FtMotionId msid = ftLib_GetMotionId(gobj);
     if (msid >= ftCo_MS_Entry && msid <= ftCo_MS_EntryEnd) {
@@ -907,7 +913,7 @@ bool ftLib_800873F4(HSD_GObj* gobj)
     return false;
 }
 
-HSD_GObj* ftLib_8008741C(u32 i)
+HSD_GObj* ftLib_FindBySpawnNum(u32 i)
 {
     HSD_GObj* cur;
     for (cur = HSD_GObjPLinkHead[HSD_GOBJ_PLINK_FIGHTER]; cur != NULL;
@@ -923,13 +929,15 @@ HSD_GObj* ftLib_8008741C(u32 i)
     return NULL;
 }
 
-float ftLib_80087454(HSD_GObj* gobj)
+/// Knockback reweighted by the crowd config's angle multiplier
+/// (#un_803222EC); only the crowd sound code reads it.
+float ftLib_GetCrowdKnockback(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     return fp->dmg.x18A4_knockbackMagnitude;
 }
 
-u32 ftLib_80087460(HSD_GObj* gobj)
+u32 ftLib_GetSpawnNum(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     return fp->x8_spawnNum;
@@ -946,7 +954,7 @@ s32 ftLib_8008746C(HSD_GObj* gobj)
     return fp->ft_data->x4C_sfx->x34;
 }
 
-s32 ftLib_800874BC(HSD_GObj* gobj)
+s32 ftLib_IsSubFighter(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     return fp->is_sub_fighter;
@@ -958,8 +966,8 @@ void ftLib_800874CC(HSD_GObj* gobj, void* arg1, s32 arg2)
     pl_8003E4A4(fp->player_idx, fp->is_sub_fighter, arg1, arg2);
 }
 
-void ftLib_80087508(s8 ft_kind, u8 arg1)
-/// void ftLib_80087508(FighterKind ft_kind, u8 arg1)
+void ftLib_LoadFighterCostume(s8 ft_kind, u8 arg1)
+/// void ftLib_LoadFighterCostume(FighterKind ft_kind, u8 arg1)
 {
     ftData_8008572C(ft_kind);
     efAsync_LoadSync(ftData_UnkBytePerCharacter[ft_kind]);
@@ -968,8 +976,8 @@ void ftLib_80087508(s8 ft_kind, u8 arg1)
     ftData_800857E0(ft_kind);
 }
 
-void ftLib_80087574(s8 ft_kind)
-/// void ftLib_80087574(FighterKind ft_kind)
+void ftLib_LoadFighterAllCostumes(s8 ft_kind)
+/// void ftLib_LoadFighterAllCostumes(FighterKind ft_kind)
 {
     u8 i;
     ftData_8008572C(ft_kind);
@@ -983,7 +991,7 @@ void ftLib_80087574(s8 ft_kind)
     ftData_800857E0(ft_kind);
 }
 
-void ftLib_80087610(u8 arg0)
+void ftLib_LoadKirbyHats(u8 arg0)
 {
     u8 i;
     for (i = 0; i <= SELKIND_COUNT; i++) {
@@ -996,34 +1004,36 @@ void ftLib_80087610(u8 arg0)
     }
 }
 
-void ftLib_800876B4(HSD_GObj* gobj)
+void ftLib_IsFramesRemaining(HSD_GObj* gobj)
 {
     ftAnim_IsFramesRemaining(gobj);
 }
 
-bool ftLib_800876D4(HSD_GObj* gobj)
+/// @note Only checks #SmashState_Charging, so Ness's yo-yo smash
+/// (#ftNs_AttackHi4_YoyoApplySmash) is not covered.
+bool ftLib_IsChargingSmash(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if (fp->smash_attrs.state == 2) {
+    if (fp->smash_attrs.state == SmashState_Charging) {
         return true;
     } else {
         return false;
     }
 }
 
-s32 ftLib_800876F4(HSD_GObj* gobj)
+s32 ftLib_GetLastHitSourceType(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     return fp->dmg.x18CC;
 }
 
-s32 ftLib_80087700(HSD_GObj* gobj)
+s32 ftLib_GetLastHitSourceKind(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     return fp->dmg.x18D0;
 }
 
-void ftLib_8008770C(HSD_GObj* gobj, void* dst)
+void ftLib_GetGameWatchColor(HSD_GObj* gobj, void* dst)
 {
     if (ftLib_GetKind(gobj) == Ft_Kind_GameWatch) {
         ftGw_Init_8014A7F4(gobj, dst);
@@ -1032,7 +1042,7 @@ void ftLib_8008770C(HSD_GObj* gobj, void* dst)
     }
 }
 
-void ftLib_80087744(HSD_GObj* gobj, void* dst)
+void ftLib_GetGameWatchOutlineColor(HSD_GObj* gobj, void* dst)
 {
     if (ftLib_GetKind(gobj) == Ft_Kind_GameWatch) {
         ftGw_Init_8014A814(gobj, dst);
@@ -1041,7 +1051,7 @@ void ftLib_80087744(HSD_GObj* gobj, void* dst)
     }
 }
 
-float ftLib_8008777C(HSD_GObj* gobj)
+float ftLib_GetGroundSlopeAngle(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
@@ -1053,7 +1063,7 @@ float ftLib_8008777C(HSD_GObj* gobj)
     }
 }
 
-bool ftLib_800877D4(HSD_GObj* gobj)
+bool ftLib_IsBeingNudged(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (fp->xF8_playerNudgeVel.x != 0) {

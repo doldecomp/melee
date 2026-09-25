@@ -760,7 +760,7 @@ void ftCommon_8007DD7C(HSD_GObj* gobj, Vec3* v)
          cur = cur->next)
     {
         temp_r31 = &arg_ft->x2C4;
-        if (cur != gobj && !ftLib_80086FD4(cur, gobj)) {
+        if (cur != gobj && !ftLib_IsSamePlayer(cur, gobj)) {
             cur_ft = cur->user_data;
             if (cur_ft->is_sleeping || cur_ft->ground_or_air != GA_Ground ||
                 cur_ft->victim_gobj != NULL || cur_ft->is_sub_fighter)
@@ -1166,7 +1166,7 @@ void ftCommon_8007EA90(Fighter* fp, s32 arg1)
     } else {
         phi_f31 = M_PI / 2;
         phi_f30 = p_ftCommonData->x5C0;
-        ftLib_800866DC(fp->gobj, &sp10);
+        ftLib_GetCameraBonePos(fp->gobj, &sp10);
     }
     temp_r31 = it_802E5F8C(fp->gobj, &sp10, arg1, 1, phi_f31, phi_f30);
     if (fp->dmg.x18c4_source_ply != 6) {

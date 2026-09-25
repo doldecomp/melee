@@ -134,7 +134,7 @@ void grPushOn_80218330(void)
     grPushOn_802183E4(2);
     gobj = Ground_GetP1Fighter();
     if (gobj != NULL) {
-        ftLib_80086644(gobj, &vec);
+        ftLib_GetPos(gobj, &vec);
         Ground_801C38BC(vec.x, vec.y);
         Camera_8002F3AC();
     }
@@ -265,7 +265,7 @@ void grPushOn_802186C8(Ground_GObj* gobj)
     {
         HSD_GObj* gobj2 = Ground_GetP1Fighter();
         if (gobj2 != NULL) {
-            ftLib_80086644(gobj2, &vec);
+            ftLib_GetPos(gobj2, &vec);
             Ground_801C0498();
             if (vec.y < 0.0f) {
                 Ground_801C0498();
@@ -340,7 +340,7 @@ void grPushOn_80218888(Ground_GObj* gobj)
     gp = GET_GROUND(gobj);
     player = Ground_GetP1Fighter();
     if (player != NULL) {
-        ftLib_80086644(player, &player_pos);
+        ftLib_GetPos(player, &player_pos);
     } else {
         player_pos.z = 0.0f;
         player_pos.y = 0.0f;
@@ -687,7 +687,7 @@ s32 fn_802192A4(void* arg0, HSD_GObj* gobj, s32* result)
     f32 scale = Ground_801C0498();
     s32 i;
 
-    ftLib_80086644(gobj, &sp14);
+    ftLib_GetPos(gobj, &sp14);
     for (i = 0; i < 4; i++) {
         if ((scale * grPushOn_803E7CCC[i * 3] < sp14.x) &&
             (scale * grPushOn_803E7CCC[i * 3 + 1] > sp14.x) &&

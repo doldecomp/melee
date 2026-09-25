@@ -909,13 +909,13 @@ s32 it_802EA674(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     s32 result = 0;
-    HSD_GObj* fighter = ftLib_8008627C(&ip->pos, NULL);
+    HSD_GObj* fighter = ftLib_FindNearestOpponent(&ip->pos, NULL);
     PAD_STACK(4);
     if (fighter != NULL) {
         Vec3 v;
         f32 facing;
         PAD_STACK(4);
-        ftLib_80086644(fighter, &v);
+        ftLib_GetPos(fighter, &v);
         if (ip->pos.x < v.x) {
             facing = 1.0f;
         } else {
@@ -939,13 +939,13 @@ s32 it_802EA6F4(Item_GObj* gobj)
     attr = ip->xC4_article_data->x4_specialAttributes;
     if (ip->xDD4_itemVar.leadead.x4C == 0) {
         if (HSD_Randi(attr->x1E) == 0) {
-            HSD_GObj* fighter = ftLib_8008627C(&ip->pos, NULL);
+            HSD_GObj* fighter = ftLib_FindNearestOpponent(&ip->pos, NULL);
             if (fighter != NULL) {
                 f32 dx, dy;
                 if (it_8027CA7C(fighter) != 0) {
                     return 0;
                 }
-                ftLib_80086644(fighter, &sp18);
+                ftLib_GetPos(fighter, &sp18);
                 dx = sp18.x - ip->pos.x;
                 if (dx < 0.0f) {
                     dx = -dx;
@@ -1063,7 +1063,7 @@ void it_802EAAEC(Item_GObj* gobj, Fighter_GObj* fobj, int part, f32 ignored)
     HSD_JObjSetTranslateZ(jobj, it_802EAAEC_inline(ip2));
     it_80274ECC(gobj, 1);
     Item_8026AE84(ip, 0x135, 0x7F, 0x40);
-    ftLib_80086644(fobj, &sp24);
+    ftLib_GetPos(fobj, &sp24);
     if (ip->pos.x < sp24.x) {
         ip->facing_dir = 1.0f;
     } else {
@@ -1094,8 +1094,8 @@ void it_802EAC8C(Item_GObj* gobj)
     offset.z = -ip->xDD4_itemVar.leadead.x3C;
     offset.y = 0.0f;
     offset.x = 0.0f;
-    lb_8000B1CC(ftLib_80086630(ip->xDD4_itemVar.leadead.x38,
-                               ip->xDD4_itemVar.leadead.xE14),
+    lb_8000B1CC(ftLib_GetPartJObj(ip->xDD4_itemVar.leadead.x38,
+                                  ip->xDD4_itemVar.leadead.xE14),
                 &offset, &sp1C);
     ip->pos = sp1C;
     it_802759DC(gobj, ip->xDD4_itemVar.leadead.x38);

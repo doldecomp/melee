@@ -112,7 +112,7 @@ void ftMh_WalkLoop_Anim(HSD_GObj* gobj)
 
     PAD_STACK(4);
 
-    ftLib_800866DC(ftBossLib_8015C244(gobj, &fp->cur_pos), &pos);
+    ftLib_GetCameraBonePos(ftBossLib_8015C244(gobj, &fp->cur_pos), &pos);
     lbVector_Diff(&pos, &fp->cur_pos, &vel);
 
     if (my_lbVector_Len(&vel) < da->x4C) {
