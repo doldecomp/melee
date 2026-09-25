@@ -146,27 +146,26 @@ u32 mnDiagram_ConvertDistanceForDisplay(u32 distance)
 
 s32 mnDiagram_GetHitPercentage(u8 is_name_mode, u8 player_index)
 {
-    f32 player_attacks;
-    f32 tag_player_attacks;
+    f32 total_attacks;
 
     if (is_name_mode != 0) {
         if (GetPersistentNameData(player_index)->stats.attacks_total != 0) {
-            tag_player_attacks =
+            total_attacks =
                 GetPersistentNameData(player_index)->stats.attacks_total;
             return (100.0f *
                     (100.0f *
                      (GetPersistentNameData(player_index)->stats.attacks_hit /
-                      tag_player_attacks)));
+                      total_attacks)));
         }
         return 0;
     }
     if (GetPersistentFighterData(player_index)->stats.attacks_total != 0) {
-        player_attacks =
+        total_attacks =
             GetPersistentFighterData(player_index)->stats.attacks_total;
         return (100.0f *
                 (100.0f *
                  (GetPersistentFighterData(player_index)->stats.attacks_hit /
-                  player_attacks)));
+                  total_attacks)));
     }
     return 0;
 }
@@ -901,7 +900,7 @@ static inline u8 mnDiagram_GetVisibleFighterCursorFrom(u8* sorted, int start,
 
 static inline u8 mnDiagram_GetVisibleFighterColumnForInput(u8* sorted,
                                                            int start, int rank,
-                                                           s32* index)
+                                                           int* index)
 {
     u8 result;
     u8* p;
@@ -933,7 +932,7 @@ static inline u8 mnDiagram_GetVisibleFighterColumnForInput(u8* sorted,
 static inline u8 mnDiagram_GetVisibleFighterRowForInput(u8* sorted,
                                                         Diagram* data,
                                                         const u16* selection,
-                                                        s32* index)
+                                                        int* index)
 {
     u16 selected_word;
     u16 cursor_word;
@@ -1018,6 +1017,15 @@ static inline Diagram* mnDiagram_GetCurrentDiagramData(void)
     return mnDiagram_ScreenGObj->user_data;
 }
 
+static inline void saveCursorPositions(Diagram* data)
+{
+    gmMainLib_GetGameRules()->xE = (u8) (data->fighter_cursor_pos >> 8);
+    gmMainLib_GetGameRules()->xF = (u8) data->fighter_cursor_pos;
+    gmMainLib_GetGameRules()->unk_x10 = (u8) (data->name_cursor_pos >> 8);
+    gmMainLib_GetGameRules()->x11 = (u8) data->name_cursor_pos;
+    gmMainLib_GetGameRules()->xD = data->is_name_mode;
+}
+
 /// @brief Per-frame input handler for the VS Records "diagram" grid screen.
 ///
 /// Dispatches the current frame's menu input:
@@ -1039,13 +1047,13 @@ void mnDiagram_InputProc(HSD_GObj* gobj)
 {
     HSD_GObjProc* proc;
     u8 row_result;
-    s32 i;
+    int i;
     u16* selection;
     u8* sorted = mnDiagram_FighterDisplayOrder;
     Diagram* data = mnDiagram_GetCurrentDiagramData();
     u32 input = mn_80229624(4);
     int count;
-    s32 col;
+    int col;
     int row;
     int row3;
     int row4;
@@ -1059,7 +1067,7 @@ void mnDiagram_InputProc(HSD_GObj* gobj)
     u8 row_result3;
     u8 row_result4;
     int found;
-    s32 cur;
+    int cur;
     int cursor_pos;
     int count2;
     // Preserve the original 0x80-byte frame.
@@ -1097,33 +1105,19 @@ void mnDiagram_InputProc(HSD_GObj* gobj)
     if (input & MenuInput_Back) {
         sfxBack();
         mn_804A04F0.entering_menu = count2;
-        {
-            Diagram* d = mnDiagram_GetCurrentDiagramData();
-            gmMainLib_GetGameRules()->xE = (u8) (d->fighter_cursor_pos >> 8);
-            gmMainLib_GetGameRules()->xF = (u8) d->fighter_cursor_pos;
-            gmMainLib_GetGameRules()->unk_x10 = (u8) (d->name_cursor_pos >> 8);
-            gmMainLib_GetGameRules()->x11 = (u8) d->name_cursor_pos;
-            gmMainLib_GetGameRules()->xD = d->is_name_mode;
-            mn_80229894(0x1C, 0, 3);
-        }
+        saveCursorPositions(mnDiagram_GetCurrentDiagramData());
+        mn_80229894(0x1C, 0, 3);
         return;
     }
     if (input & (MenuInput_LTrigger | MenuInput_RTrigger)) {
         sfxForward();
-        {
-            Diagram* d = mnDiagram_GetCurrentDiagramData();
-            gmMainLib_GetGameRules()->xE = (u8) (d->fighter_cursor_pos >> 8);
-            gmMainLib_GetGameRules()->xF = (u8) d->fighter_cursor_pos;
-            gmMainLib_GetGameRules()->unk_x10 = (u8) (d->name_cursor_pos >> 8);
-            gmMainLib_GetGameRules()->x11 = (u8) d->name_cursor_pos;
-            gmMainLib_GetGameRules()->xD = d->is_name_mode;
-            HSD_GObjFree(gobj);
-            if (input & MenuInput_LTrigger) {
-                mnDiagram3_Init(0L);
-                return;
-            }
-            mnDiagram2_Init();
+        saveCursorPositions(mnDiagram_GetCurrentDiagramData());
+        HSD_GObjFree(gobj);
+        if (input & MenuInput_LTrigger) {
+            mnDiagram3_Init(0L);
+            return;
         }
+        mnDiagram2_Init();
         return;
     }
     if (input & (MenuInput_XButton | MenuInput_YButton)) {
@@ -1753,6 +1747,15 @@ void mnDiagram_RefreshGrid(HSD_GObj* arg0, int arg1, int arg2)
     }
 }
 
+static inline void setArrowVisible(HSD_JObj* arrow, bool visible)
+{
+    if (visible) {
+        HSD_JObjClearFlagsAll(arrow, JOBJ_HIDDEN);
+    } else {
+        HSD_JObjSetFlagsAll(arrow, JOBJ_HIDDEN);
+    }
+}
+
 /// @brief Updates scroll arrow visibility based on cursor position and
 ///        available entries beyond the visible range.
 /// @param[in] gobj The diagram GObj containing arrow JObjs in user_data.
@@ -1781,19 +1784,11 @@ void mnDiagram_UpdateScrollArrows(HSD_GObj* gobj)
     if (data->is_name_mode != 0) {
         result = mnDiagram_GetVisibleNameFrom(sorted,
                                               (u8) data->name_cursor_pos, 10);
-        if ((u8) result != 0x78) {
-            HSD_JObjClearFlagsAll(jobj, JOBJ_HIDDEN);
-        } else {
-            HSD_JObjSetFlagsAll(jobj, JOBJ_HIDDEN);
-        }
+        setArrowVisible(jobj, (u8) result != 0x78);
     } else {
         result = mnDiagram_GetVisibleFighterCursorFrom(
             sorted, (u8) data->fighter_cursor_pos, 10);
-        if ((u8) result != 0x19) {
-            HSD_JObjClearFlagsAll(jobj, JOBJ_HIDDEN);
-        } else {
-            HSD_JObjSetFlagsAll(jobj, JOBJ_HIDDEN);
-        }
+        setArrowVisible(jobj, (u8) result != 0x19);
     }
 
     // Left arrow (jobjs[4])
@@ -1804,11 +1799,7 @@ void mnDiagram_UpdateScrollArrows(HSD_GObj* gobj)
     } else {
         result = (u8) data->fighter_cursor_pos;
     }
-    if (result != 0) {
-        HSD_JObjClearFlagsAll(jobj2, JOBJ_HIDDEN);
-    } else {
-        HSD_JObjSetFlagsAll(jobj2, JOBJ_HIDDEN);
-    }
+    setArrowVisible(jobj2, result != 0);
 
     // Up arrow (jobjs[5])
     jobj2 = data->jobjs[5];
@@ -1818,11 +1809,7 @@ void mnDiagram_UpdateScrollArrows(HSD_GObj* gobj)
     } else {
         i = data->fighter_cursor_pos >> 8;
     }
-    if (i != 0) {
-        HSD_JObjClearFlagsAll(jobj2, JOBJ_HIDDEN);
-    } else {
-        HSD_JObjSetFlagsAll(jobj2, JOBJ_HIDDEN);
-    }
+    setArrowVisible(jobj2, i != 0);
 
     // Down arrow (jobjs[6])
     jobj3 = data->jobjs[6];
@@ -1849,11 +1836,7 @@ void mnDiagram_UpdateScrollArrows(HSD_GObj* gobj)
         ptr += i;
         result = ptr[0x1C];
     dn_name_done:
-        if ((u8) result != 0x78) {
-            HSD_JObjClearFlagsAll(jobj3, JOBJ_HIDDEN);
-        } else {
-            HSD_JObjSetFlagsAll(jobj3, JOBJ_HIDDEN);
-        }
+        setArrowVisible(jobj3, (u8) result != 0x78);
     } else {
         // Fighter mode - check if 7 more rows exist
         count = 7;
@@ -1877,11 +1860,7 @@ void mnDiagram_UpdateScrollArrows(HSD_GObj* gobj)
             count--;
         } while (count >= 0);
     dn_fc_done:
-        if (result2 != 0x19) {
-            HSD_JObjClearFlagsAll(jobj3, JOBJ_HIDDEN);
-        } else {
-            HSD_JObjSetFlagsAll(jobj3, JOBJ_HIDDEN);
-        }
+        setArrowVisible(jobj3, result2 != 0x19);
     }
 }
 
