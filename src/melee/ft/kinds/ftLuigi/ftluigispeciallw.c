@@ -26,7 +26,7 @@
         Ft_MF_SkipModelPartVis | Ft_MF_SkipModelFlags | Ft_MF_Unk27
 
 /// 0x801445C4
-/// https://decomp.me/scratch/TTyNT // Luigi Cyclone Rotation Update
+/// Luigi Cyclone Rotation Update
 void ftLg_SpecialLw_UpdateRot(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -54,7 +54,7 @@ static inline void ftLuigi_SpecialLw_SetGFX(HSD_GObj* gobj)
 }
 
 /// 0x801445F0
-/// https://decomp.me/scratch/ // Luigi's grounded Cyclone Motion State handler
+/// Luigi's grounded Cyclone Motion State handler
 void ftLg_SpecialLw_Enter(HSD_GObj* gobj)
 {
     Fighter* fp;
@@ -81,7 +81,7 @@ void ftLg_SpecialLw_Enter(HSD_GObj* gobj)
 }
 
 /// 0x80144708
-/// https://decomp.me/scratch/egaIB // Luigi's aerial Cyclone Motion State
+/// Luigi's aerial Cyclone Motion State
 /// handler
 void ftLg_SpecialAirLw_Enter(HSD_GObj* gobj)
 {
@@ -171,7 +171,7 @@ static inline void ftLuigi_SpecialLw_GroundToAir(HSD_GObj* gobj)
 }
 
 /// 0x80144958
-/// https://decomp.me/scratch/pXs3o // Luigi's grounded Cyclone Physics
+/// Luigi's grounded Cyclone Physics
 /// callback
 void ftLg_SpecialLw_Phys(HSD_GObj* gobj)
 {
@@ -204,7 +204,7 @@ void ftLg_SpecialLw_Phys(HSD_GObj* gobj)
 }
 
 /// 0x80144A74C
-/// https://decomp.me/scratch/85hbq // Luigi's aerial Cyclone Physics callback
+/// Luigi's aerial Cyclone Physics callback
 void ftLg_SpecialAirLw_Phys(HSD_GObj* gobj)
 {
     u8 _[8];
@@ -301,7 +301,7 @@ static inline void ftLuigi_SpecialAirLw_AirToGround(HSD_GObj* gobj)
 }
 
 /// 0x80144CEC
-/// https://decomp.me/scratch/fdQ4f // Luigi's aerial Cyclone Collision
+/// Luigi's aerial Cyclone Collision
 /// callback
 void ftLg_SpecialAirLw_Coll(HSD_GObj* gobj)
 {

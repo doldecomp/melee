@@ -15,7 +15,6 @@
 #include <melee/ft/types.h>
 
 /// 0x8011659C
-/// https://decomp.me/scratch/xVTx7
 void ftNs_AttackLw4_Enter(
     HSD_GObj* gobj) // Ness's Down Smash Motion State handler
 {
@@ -33,7 +32,6 @@ void ftNs_AttackLw4_Enter(
 }
 
 /// 0x80116638
-/// https://decomp.me/scratch/NO0Pa
 void ftNs_AttackLw4_Anim(
     HSD_GObj* gobj) // Ness's Down Smash Animation callback
 {
@@ -55,7 +53,6 @@ void ftNs_AttackLw4_Anim(
 }
 
 /// 0x801166D4
-/// https://decomp.me/scratch/Kq53f
 void ftNs_AttackLw4_IASA(HSD_GObj* gobj) // Ness's Down Smash IASA callback
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -69,7 +66,6 @@ void ftNs_AttackLw4_IASA(HSD_GObj* gobj) // Ness's Down Smash IASA callback
 }
 
 /// 0x80116718
-/// https://decomp.me/scratch/rrVAL
 void ftNs_AttackLw4_Phys(HSD_GObj* gobj) // Ness's Down Smash Physics callback
 {
     ft_80084F3C(gobj);
@@ -77,7 +73,6 @@ void ftNs_AttackLw4_Phys(HSD_GObj* gobj) // Ness's Down Smash Physics callback
 }
 
 /// 0x8011674C
-/// https://decomp.me/scratch/IcIJj
 void ftNs_AttackLw4_Coll(
     HSD_GObj* gobj) // Ness's Down Smash Collision callback
 {
@@ -90,7 +85,6 @@ void ftNs_AttackLw4_Coll(
 }
 
 /// 0x80116798
-/// https://decomp.me/scratch/H7nP6
 void ftNs_AttackLw4Charge_Anim(
     HSD_GObj* gobj) // Ness's Down Smash Charge Animation callback
 {
@@ -112,7 +106,6 @@ void ftNs_AttackLw4Charge_Anim(
 }
 
 /// 0x80116828
-/// https://decomp.me/scratch/803jK
 void ftNs_AttackLw4Charge_IASA(
     HSD_GObj* gobj) // Ness's Down Smash Charge IASA callback
 {
@@ -124,7 +117,6 @@ void ftNs_AttackLw4Charge_IASA(
 }
 
 /// 0x80116858
-/// https://decomp.me/scratch/aMuVK
 void ftNs_AttackLw4Charge_Phys(
     HSD_GObj* gobj) // Ness's Down Smash Charge Physics callback
 {
@@ -132,7 +124,6 @@ void ftNs_AttackLw4Charge_Phys(
 }
 
 /// 0x80116878
-/// https://decomp.me/scratch/XNQHN
 void ftNs_AttackLw4Charge_Coll(
     HSD_GObj* gobj) // Ness's Down Smash Charge Collision callback
 {
@@ -145,7 +136,6 @@ void ftNs_AttackLw4Charge_Coll(
 }
 
 /// 0x801168C4
-/// https://decomp.me/scratch/KJ6kU
 void ftNs_AttackLw4Charge_Enter(
     HSD_GObj* gobj) // Ness's Down Smash Charge Motion State handler
 {
@@ -162,7 +152,6 @@ void ftNs_AttackLw4Charge_Enter(
 }
 
 /// 0x80116958
-/// https://decomp.me/scratch/zksU7
 void ftNs_AttackLw4Release_Anim(
     HSD_GObj* gobj) // Ness's Down Smash Post-Charge Animation callback
 {
@@ -181,7 +170,6 @@ void ftNs_AttackLw4Release_Anim(
 }
 
 /// 0x801169BC
-/// https://decomp.me/scratch/dC4m7
 void ftNs_AttackLw4Release_IASA(
     HSD_GObj* gobj) // Ness's Down Smash Post-Charge IASA callback
 {
@@ -192,7 +180,6 @@ void ftNs_AttackLw4Release_IASA(
 }
 
 /// 0x801169EC
-/// https://decomp.me/scratch/AkDxO
 void ftNs_AttackLw4Release_Phys(
     HSD_GObj* gobj) // Ness's Down Smash Post-Charge Physics callback
 {
@@ -221,7 +208,6 @@ void ftNs_AttackLw4Release_Phys(
 }
 
 /// 0x801169EC
-/// https://decomp.me/scratch/mD95b
 void ftNs_AttackLw4Release_Coll(
     HSD_GObj* gobj) // Ness's Down Smash Post-Charge Collision callback
 {
@@ -234,7 +220,6 @@ void ftNs_AttackLw4Release_Coll(
 }
 
 /// 0x80116AE8
-/// https://decomp.me/scratch/qsqMH
 void ftNs_AttackLw4Release_Enter(
     HSD_GObj* gobj) // Ness's Down Smash Post-Charge Motion State handler
 {

@@ -334,8 +334,6 @@ void Player_80031FB0(int slot, s32 entity_index)
     }
 }
 
-/// new match decomp.me/scratch/oHfiV  @todo
-//// old match decomp.me/scratch/8otnq
 void Player_80032070(int slot, bool bool_arg)
 {
     StaticPlayer* player;
@@ -466,8 +464,7 @@ s8 Player_800325C8(CharacterKind kind, bool b)
 }
 
 s8 Player_80032610(s32 slot, bool arg1)
-{ //// decomp.me/scratch/pHTx2
-
+{
     StaticPlayer* player;
     s32 error_value = -1;
 
@@ -1270,7 +1267,7 @@ s32 Player_GetRemainingHPByIndex(s32 slot, s32 index)
 }
 
 s32 Player_GetFalls(s32 slot)
-{ /// decomp.me/scratch/8ijor
+{
     StaticPlayer* player;
     Player_CheckSlot(slot);
     player = &player_slots[slot];

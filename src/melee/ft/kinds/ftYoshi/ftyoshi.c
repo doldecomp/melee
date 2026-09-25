@@ -343,7 +343,6 @@ extern char* ftYs_Unk2_804D3E68;
 extern char* ftYs_Unk2_804D3E70;
 extern char* ftYs_Unk2_804D3E78;
 
-/// https://decomp.me/scratch/ufrFK
 void ftYs_Init_8012B6E8(Fighter* fp, struct S_UNK_YOSHI1* unk_struct_arg)
 {
     u8 _[12];
@@ -443,7 +442,6 @@ void ftYs_Init_OnDeath(HSD_GObj* gobj)
     fp->u.ys.x2238 = 0;
 }
 
-/// https://decomp.me/scratch/5TPxg
 void ftYs_Init_OnLoad(HSD_GObj* gobj)
 {
     void** item_list;
