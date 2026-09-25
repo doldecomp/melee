@@ -1,7 +1,5 @@
 #include "vi0401.h"
 
-#include <placeholder.h>
-
 #include "types.h"
 #include "vi.h"
 #include <dolphin/pad.h>
@@ -123,9 +121,9 @@ void vi0401_Scene_OnEnter(void* data)
     HSD_JObj* jobj2;
     HSD_GObj* cam_gobj2;
     ViCharaDesc* desc;
+    GXColor color;
 
     desc = data;
-    PAD_STACK(8);
 
     lbAudioAx_800236DC();
     efLib_Init();
@@ -143,7 +141,8 @@ void vi0401_Scene_OnEnter(void* data)
     fog = HSD_FogLoadDesc(un_804D6F48->fogs->desc);
     HSD_GObjObject_80390A70(fog_gobj, HSD_GObj_FogKind, fog);
     GObj_SetupGXLink(fog_gobj, HSD_GObj_FogCallback, 0, 0);
-    erase_colors_vi0401 = fog->color;
+    color = fog->color;
+    erase_colors_vi0401 = color;
 
     light_gobj = GObj_Create(0xB, 3, 0);
     lobj = lb_80011AC4(un_804D6F48->lights);
