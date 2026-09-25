@@ -183,10 +183,19 @@ struct Camera {
             u8 b1 : 1;
             u8 b2 : 1;
             u8 pad;
-            s16 x2;
-        } bits;
+            s16 distance;
+            f32 pitch;
+            f32 yaw;
+        } orbit;
     } x35C;
-    /* 0x368 */ Vec3 x368;
+    /* 0x368 */ union {
+        Vec3 vec;
+        struct {
+            s16 distance;
+            f32 pitch;
+            f32 yaw;
+        } orbit;
+    } x368;
     /* 0x374 */ f32 x374;
     /* 0x378 */ union {
         f32 f32_v;

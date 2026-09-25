@@ -112,7 +112,7 @@ void un_8031D9F8(CharacterKind char_kind, int costume, int spawn_mode,
         jobj = GET_JOBJ(un_804A2E98[i - 1]);
         HSD_JObjReqAnimAll(jobj, 140.0f);
         HSD_JObjAnimAll(jobj);
-        HSD_JObjGetTranslation2((HSD_JObj*) un_804A2E98[i - 1]->hsd_obj, &v);
+        HSD_JObjGetTranslation((HSD_JObj*) un_804A2E98[i - 1]->hsd_obj, &v);
         scale = getScale();
         v.x *= scale;
         v.y *= scale;
@@ -128,9 +128,8 @@ void un_8031D9F8(CharacterKind char_kind, int costume, int spawn_mode,
 
 void vi_8031DC80(HSD_GObj* gobj, intptr_t unused)
 {
-    PAD_STACK(8);
     lbShadow_8000F38C(0);
-    vi_RunCamera(gobj, (u8*) &erase_colors_vi0501, 0x281);
+    vi_RunCamera(gobj, &erase_colors_vi0501, 0x281);
 }
 
 void fn_8031DD14(HSD_GObj* gobj)

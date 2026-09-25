@@ -3,7 +3,8 @@
 #include "platform.h" // IWYU pragma: keep
 
 #ifdef MWERKS_GEKKO
-#define ALIGN(addr, size) (((uintptr_t) (addr) + ((size) - 1)) & ~((size) - 1))
+#define ALIGN(addr, size)                                                     \
+    ((char*) (((uintptr_t) (addr) + ((size) - 1)) & ~((size) - 1)))
 #endif
 
 void* __va_arg(va_list v_list, unsigned char type)
@@ -20,8 +21,8 @@ void* __va_arg(va_list v_list, unsigned char type)
     int regsize = 4;
 
     if (type == 4) {
-        addr = (char*) ALIGN(v_list->input_arg_area, 16);
-        v_list->input_arg_area = addr + 0x10;
+        addr = ALIGN(v_list->input_arg_area, 16);
+        v_list->input_arg_area = addr + 16;
         return addr;
     }
     if (type == 3) {
@@ -46,7 +47,7 @@ void* __va_arg(va_list v_list, unsigned char type)
     } else {
         *reg = 8;
         addr = v_list->input_arg_area;
-        addr = (char*) ALIGN(addr, size);
+        addr = ALIGN(addr, size);
         v_list->input_arg_area = addr + size;
     }
     if (type == 0) {
