@@ -53,19 +53,11 @@ typedef struct mnDiagram_Assets {
 } mnDiagram_Assets;
 ASSERT_SIZE(mnDiagram_Assets, 0x118);
 
-/// User data structure for mnDiagram_PopupCleanup callback.
-/// Overlay of Diagram - only accesses text array.
-typedef struct mnDiagram_CleanupData {
-    /* 0x00 */ char jobjs_reserved[0x38]; ///< JObj array (unused by cleanup)
-    /* 0x38 */ HSD_Text* text[6];         ///< Text objects to free
-} mnDiagram_CleanupData;
-
-/// User data structure for mnDiagram_ExitAnimProc callback.
-/// Overlay of Diagram - only accesses jobj at offset 0x0C.
-typedef struct mnDiagram_AnimData {
-    /* 0x00 */ char header_reserved[0x0C]; ///< menu state (unused by anim)
-    /* 0x0C */ HSD_JObj* jobj;             ///< JObj for exit animation
-} mnDiagram_AnimData;
+typedef struct mnDiagram_PopupData {
+    /* 0x00 */ HSD_JObj* jobjs[14];
+    /* 0x38 */ HSD_Text* text[5];
+} mnDiagram_PopupData;
+ASSERT_SIZE(mnDiagram_PopupData, 0x4C);
 
 /// Head label for the contiguous mnDiagram popup animation data run.
 typedef struct mnDiagram_PopupAnimTableHead {
@@ -313,19 +305,6 @@ int mnDiagram_GetFighterTotalKOs(u8 field_index)
     return total;
 }
 
-static inline int mnDiagram_SumFighterKOs(u8 field_index)
-{
-    int total = 0;
-    int i;
-    for (i = 0; i < SELKIND_COUNT; i++) {
-        if (mn_IsFighterUnlocked(i) != 0) {
-            total +=
-                GetPersistentFighterData(field_index)->fighter_kos[(u8) i];
-        }
-    }
-    return total;
-}
-
 /// @brief Gets total falls (deaths) of a fighter against all other fighters.
 /// @details Iterates through all unlocked fighters and sums how many times
 ///          each fighter KO'd the target fighter. This is the column sum
@@ -497,18 +476,13 @@ typedef struct RankEntry {
 
 static inline int CheckAllZeroPlayTime(int name_idx)
 {
-    int i = 0;
-    int offset = i;
-    while (1) {
+    int i;
+    for (i = 0; i < SELKIND_COUNT; i++) {
         if (GetPersistentNameData(name_idx)->play_time_by_fighter[i] != 0U) {
             return 0;
         }
-        i++;
-        offset += 4;
-        if (i >= SELKIND_COUNT) {
-            return 1;
-        }
     }
+    return 1;
 }
 
 int mnDiagram_GetRankedFighterForName(int rank, int name_idx,
@@ -588,20 +562,12 @@ int mnDiagram_GetRankedFighterForName(int rank, int name_idx,
 static inline int mnDiagram_AllPlayTimesZero(u8 name)
 {
     int i;
-    int offset;
-
-    i = 0;
-    offset = i;
-    for (;;) {
+    for (i = 0; i < SELKIND_COUNT; i++) {
         if (GetPersistentNameData(name)->play_time_by_fighter[i] != 0U) {
             return 0;
         }
-        i++;
-        offset += 4;
-        if (i >= 0x19) {
-            return 1;
-        }
     }
+    return 1;
 }
 
 u8 mnDiagram_GetLeastPlayedFighter(u8 name_idx)
@@ -674,7 +640,7 @@ void mnDiagram_SortFightersByKOs(void)
         *dst_iter = mnDiagram_DefaultFighterOrder[i];
         fighter = mnDiagram_DefaultFighterOrder[i];
         totals[mnDiagram_DefaultFighterOrder[i]] =
-            mnDiagram_SumFighterKOs(fighter);
+            mnDiagram_GetFighterTotalKOs(fighter);
     }
 
     for (i = 0; i < SELKIND_COUNT; i++) {
@@ -706,19 +672,6 @@ void mnDiagram_SortFightersByKOs(void)
     }
 }
 
-static inline int mnDiagram_SumNameKOs(u8 field_index)
-{
-    int total;
-    int j;
-    total = 0;
-    for (j = total; j < 0x78; j++) {
-        if (GetNameText(j & 0xFF)) {
-            total += GetPersistentNameData(field_index)->vs_kos[(u8) j];
-        }
-    }
-    return total;
-}
-
 void mnDiagram_SortNamesByKOs(void)
 {
     int j;
@@ -738,7 +691,7 @@ void mnDiagram_SortNamesByKOs(void)
     tp = totals;
     for (n = 0; n < 0x78; n++, dst_iter++, tp++) {
         *dst_iter = (u8) n;
-        *tp = mnDiagram_SumNameKOs(n & 0xFF);
+        *tp = mnDiagram_GetNameTotalKOs(n & 0xFF);
     }
 
     for (i = 0; i < 0x78; i++) {
@@ -1510,7 +1463,7 @@ void mnDiagram_InputProc(HSD_GObj* gobj)
 
 void mnDiagram_PopupCleanup(void* arg0)
 {
-    mnDiagram_CleanupData* data = arg0;
+    mnDiagram_PopupData* data = arg0;
 
     if (data->text[0] != NULL) {
         HSD_SisLib_803A5CC4(data->text[0]);
@@ -1529,17 +1482,6 @@ void mnDiagram_PopupCleanup(void* arg0)
     }
     HSD_Free(arg0);
 }
-
-typedef struct mnDiagram_PopupData {
-    /* 0x00 */ HSD_JObj* jobjs[14];
-    /* 0x38 */ HSD_Text* text[5];
-} mnDiagram_PopupData;
-ASSERT_SIZE(mnDiagram_PopupData, 0x4C);
-
-typedef struct mnDiagram_MainOverlay {
-    /* 0x00 */ HSD_JObj* jobjs[14];
-    /* 0x38 */ HSD_Text* text[6];
-} mnDiagram_MainOverlay;
 
 static inline Vec3* mnDiagram_PopupAnimProc_Inline(mnDiagram_AnimTable* arg0,
                                                    int arg1)
@@ -1911,38 +1853,33 @@ void mnDiagram_CreatePopup(s32 arg0, s32 arg1, s32 use_nametag)
     }
 }
 
-static inline void* mnDiagram_GetUserData(HSD_GObj* gobj)
-{
-    return gobj->user_data;
-}
-
 void mnDiagram_ClearGrid(HSD_GObj* arg0)
 {
-    mnDiagram_MainOverlay* data = mnDiagram_GetUserData(arg0);
+    Diagram* data = arg0->user_data;
     HSD_JObj* child;
 
+    child = HSD_JObjGetChild(data->jobjs[7]);
+    if (child != NULL) {
+        HSD_JObjRemoveAll(child);
+    }
+
     child = HSD_JObjGetChild(data->jobjs[9]);
-    if (child) {
+    if (child != NULL) {
         HSD_JObjRemoveAll(child);
     }
 
     child = HSD_JObjGetChild(data->jobjs[11]);
-    if (child) {
+    if (child != NULL) {
         HSD_JObjRemoveAll(child);
     }
 
-    child = HSD_JObjGetChild(data->jobjs[13]);
-    if (child) {
-        HSD_JObjRemoveAll(child);
+    if (data->col_header_text != NULL) {
+        HSD_SisLib_803A5CC4(data->col_header_text);
+        data->col_header_text = NULL;
     }
-
-    if (data->text[4] != NULL) {
-        HSD_SisLib_803A5CC4(data->text[4]);
-        data->text[4] = NULL;
-    }
-    if (data->text[5] != NULL) {
-        HSD_SisLib_803A5CC4(data->text[5]);
-        data->text[5] = NULL;
+    if (data->row_header_text != NULL) {
+        HSD_SisLib_803A5CC4(data->row_header_text);
+        data->row_header_text = NULL;
     }
 }
 
@@ -2092,12 +2029,12 @@ void mnDiagram_UpdateScrollArrows(HSD_GObj* gobj)
 
 void mnDiagram_ExitAnimProc(HSD_GObj* gobj)
 {
-    mnDiagram_AnimData* data;
+    Diagram* data;
     HSD_JObj* jobj;
 
     data = gobj->user_data;
     mnDiagram_UpdateScrollArrows(gobj);
-    jobj = data->jobj;
+    jobj = data->jobjs[1];
     if (mn_8022ED6C(jobj, &mnDiagram_PopupExitAnim) >=
         mnDiagram_PopupExitAnim.end_frame)
     {
