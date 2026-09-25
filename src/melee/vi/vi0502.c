@@ -48,16 +48,13 @@ static HSD_Archive* un_804D6F98;
 static HSD_Archive* un_804D6F9C;
 static GXColor erase_colors_vi0502;
 static HSD_GObj* kirby_gobj;
-ViCharaDesc* un_804D6FA8[2];
+u8 un_804D6FA8[8]; ///< @todo #ViCharaDesc?
 
 void un_8031E110(int arg0, int arg1, int arg2)
 {
-    u8* p;
-
-    *(u8*) &un_804D6FA8 = arg0;
-    p = (u8*) &un_804D6FA8;
-    p[1] = arg1;
-    p[3] = arg2;
+    un_804D6FA8[0] = arg0;
+    un_804D6FA8[1] = arg1;
+    un_804D6FA8[3] = arg2;
 }
 
 void vi0502_8031E124(CharacterKind player_kind, int player_costume,

@@ -11,6 +11,6 @@
 /* 31E3BC */ void vi0502_GObj_OnProc(HSD_GObj*);
 /* 31E444 */ void vi0502_Scene_OnEnter(void* arg);
 /* 31E6CC */ void vi0502_Scene_OnFrame(void);
-/* 4D6FA8 */ extern ViCharaDesc* un_804D6FA8[2];
+/* 4D6FA8 */ extern u8 un_804D6FA8[8];
 
 #endif

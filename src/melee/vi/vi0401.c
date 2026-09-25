@@ -42,8 +42,8 @@ u8 un_804D6F60[8]; ///< @todo #ViCharaDesc?
 
 void vi0401_8031D020(int arg0, int arg1)
 {
-    ((u8*) &un_804D6F60)[0] = arg0;
-    ((u8*) &un_804D6F60)[1] = arg1;
+    un_804D6F60[0] = arg0;
+    un_804D6F60[1] = arg1;
 }
 
 void un_8031D030(CharacterKind char_kind, int costume)

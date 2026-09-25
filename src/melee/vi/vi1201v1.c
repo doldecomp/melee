@@ -100,10 +100,9 @@ void fn_8031FAA8(HSD_GObj* gobj)
     f32 scale_x;
     f32 scale_y;
     HSD_JObj* child;
-    PAD_STACK(4);
 
-    HSD_JObjAnimAll(gobj->hsd_obj);
-    jobj = gobj->hsd_obj;
+    HSD_JObjAnimAll(GET_JOBJ(gobj));
+    jobj = GET_JOBJ(gobj);
     if (mn_8022F298(jobj) != 120.0f) {
         return;
     }
