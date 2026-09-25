@@ -590,7 +590,7 @@ bool it_802E8420(Item_GObj* gobj)
         break;
     case 1:
     case 3:
-        if (ip->x40_vel.x * ftLib_800865C0(gobj) < 0.0f) {
+        if (ip->x40_vel.x * ftLib_GetFacingDir(gobj) < 0.0f) {
             ip->facing_dir = -ip->facing_dir;
         }
         break;

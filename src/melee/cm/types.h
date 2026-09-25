@@ -52,7 +52,7 @@ struct CmSubject {
     /// Anchor point of the subject's framing box. Only x/y are read.
     /* +10 */ Vec3 pos;
 
-    /// Position of the owning fighter's camera bone (#ftLib_800866DC).
+    /// Position of the owning fighter's camera bone (#ftLib_GetCameraBonePos).
     /* +1C */ Vec3 bone_pos;
 
     /* +28 */ float facing_dir; ///< Facing direction of the subject (±1).

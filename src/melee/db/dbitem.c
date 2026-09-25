@@ -298,7 +298,7 @@ void fn_ToggleItemCollisionBubbles(void)
 void db_80225DD8(Item_GObj* item, Fighter_GObj* owner)
 {
     Item* it = GET_ITEM(item);
-    if (ftLib_80086960(owner) == 0) {
+    if (ftLib_IsFighter(owner) == 0) {
         it = GET_ITEM(item);
         it->xDAA_byte |= db_ShowItemCollisionBubbles;
         // db_80225D64(item, owner); // stack too big

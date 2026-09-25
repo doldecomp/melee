@@ -965,10 +965,10 @@ void it_80279C48(Item_GObj* item_gobj)
 {
     Vec3 v;
     Item* item = GET_ITEM(item_gobj);
-    HSD_GObj* gobj = ftLib_8008627C(&item->pos, item->owner);
+    HSD_GObj* gobj = ftLib_FindNearestOpponent(&item->pos, item->owner);
     f32 dir;
     if (gobj != NULL) {
-        ftLib_80086644(gobj, &v);
+        ftLib_GetPos(gobj, &v);
         if ((item->pos.x - v.x) > 0.0f) {
             item->facing_dir = -1.0f;
             return;
@@ -1415,7 +1415,7 @@ bool it_8027AB64(Item_GObj* item_gobj)
             spawn.kind--;
         }
         if (spawn.kind == (enum ItemKind) Pokemon_ID_Metamon &&
-            (it_8026B3C0(It_PKind_Metamon) != 0 || ftLib_800860C4() == 4))
+            (it_8026B3C0(It_PKind_Metamon) != 0 || ftLib_CountFighters() == 4))
         {
             spawn.kind = (enum ItemKind) Pokemon_ID_Tosakinto;
         }
@@ -1518,8 +1518,8 @@ void it_8027B0C4(Item_GObj* item_gobj, SpawnItem* spawn)
     u8 _2[8];
     union Struct2070 sp24;
 
-    if (ftLib_80086960(spawn->x0_parent_gobj)) {
-        if (ftLib_80086960(spawn->x4_parent_gobj2)) {
+    if (ftLib_IsFighter(spawn->x0_parent_gobj)) {
+        if (ftLib_IsFighter(spawn->x4_parent_gobj2)) {
             it_8027B070(item_gobj, spawn->x4_parent_gobj2);
         } else {
             Item* owner_item = spawn->x4_parent_gobj2->user_data;
@@ -1554,7 +1554,7 @@ void it_8027B1F4(Item_GObj* item_gobj)
     item->xD8C_attack_instance = 0;
     item->xD90 = sp10;
     item->xDA8_short = 0;
-    if (ftLib_80086960(item->owner)) {
+    if (ftLib_IsFighter(item->owner)) {
         struct Struct2074* temp_r3 = ft_800898A8((Fighter_GObj*) item->owner);
         item->xD94 = temp_r3->x2074_vec;
         item->xD9C = temp_r3->x207C;
@@ -1577,7 +1577,7 @@ void it_8027B288(Item_GObj* item_gobj, volatile u32 arg1)
         item->xDA8_short = plAttack_80037B08();
     }
     item->xD90 = sp14;
-    if (ftLib_80086960(item->owner)) {
+    if (ftLib_IsFighter(item->owner)) {
         temp_r3 = ft_800898A8(item->owner);
         item->xD94 = temp_r3->x2074_vec;
         item->xD9C = temp_r3->x207C;
@@ -1605,8 +1605,8 @@ void it_8027B378(Fighter_GObj* fighter_gobj, Item_GObj* item_gobj, f32 arg2)
 
     if (it_8026B6C8(item_gobj)) {
         temp_r30 = ft_80089884(fighter_gobj)->x2073;
-        temp_r31 = ftLib_800874BC(fighter_gobj);
-        temp_r3 = ftLib_80086BE0(fighter_gobj);
+        temp_r31 = ftLib_IsSubFighter(fighter_gobj);
+        temp_r3 = ftLib_GetPlayerIndex(fighter_gobj);
         pl_8003EB30(arg2, temp_r3, temp_r31, 6, 0, temp_r30);
     }
 }
@@ -1619,10 +1619,10 @@ void it_8027B408(Item_GObj* item_gobj1, Item_GObj* item_gobj2, f32 arg8)
 
     if (it_8026B6C8(item_gobj2)) {
         item1 = item_gobj1->user_data;
-        if (ftLib_80086960(item1->owner)) {
+        if (ftLib_IsFighter(item1->owner)) {
             HSD_GObj* owner = item1->owner;
-            temp_r31 = ftLib_800874BC(owner);
-            temp_r3 = ftLib_80086BE0(owner);
+            temp_r31 = ftLib_IsSubFighter(owner);
+            temp_r3 = ftLib_GetPlayerIndex(owner);
             pl_8003EB30(arg8, temp_r3, temp_r31, 6, 0, item1->xD90.x2073);
         }
     }
@@ -1642,7 +1642,7 @@ void it_8027B508(Item_GObj* item_gobj1, Item_GObj* item_gobj2)
 {
     if (it_8026B6C8(item_gobj2)) {
         Item* item1 = GET_ITEM(item_gobj1);
-        if (ftLib_80086960(item1->owner)) {
+        if (ftLib_IsFighter(item1->owner)) {
             pl_800384DC(item1->owner, item1->xD90.x2073, &item1->xD94);
         }
     }
@@ -1654,7 +1654,7 @@ void it_8027B564(Item_GObj* item_gobj)
     Item* item;
 
     item = GET_ITEM(item_gobj);
-    if (ftLib_80086960(item->owner)) {
+    if (ftLib_IsFighter(item->owner)) {
         sp10 = item->xD90;
         pl_80037DF4(item->owner, &sp10);
     }

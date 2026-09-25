@@ -324,9 +324,9 @@ HSD_GObj* it_8026B5E4(Vec3* vector, Vec3* vector2, HSD_GObj* gobj)
 {
     HSD_GObj* unk_gobj;
 
-    unk_gobj = ftLib_8008627C(vector, gobj);
+    unk_gobj = ftLib_FindNearestOpponent(vector, gobj);
     if (unk_gobj != NULL) {
-        ftLib_800866DC(unk_gobj, vector2);
+        ftLib_GetCameraBonePos(unk_gobj, vector2);
     }
     return unk_gobj;
 }
@@ -334,9 +334,9 @@ HSD_GObj* it_8026B5E4(Vec3* vector, Vec3* vector2, HSD_GObj* gobj)
 /// Unknown item camera check 2?
 Fighter_GObj* it_8026B634(Vec3* arg0, Vec3* arg1, Item_GObj* arg2, f32 farg0)
 {
-    Fighter_GObj* gobj = ftLib_80086368(arg0, arg2, farg0);
+    Fighter_GObj* gobj = ftLib_FindNearestOpponentInDir(arg0, arg2, farg0);
     if (gobj != NULL) {
-        ftLib_800866DC(gobj, arg1);
+        ftLib_GetCameraBonePos(gobj, arg1);
     }
     return gobj;
 }
@@ -344,13 +344,13 @@ Fighter_GObj* it_8026B634(Vec3* arg0, Vec3* arg1, Item_GObj* arg2, f32 farg0)
 /// Get facing direction of fighter (?) with #NULL
 float it_8026B684(Vec3* pos)
 {
-    return ftLib_800864A8(pos, NULL);
+    return ftLib_GetOpponentsDir(pos, NULL);
 }
 
 /// Get facing direction of fighter (?) with variable argument
 float it_8026B6A8(Vec3* pos, HSD_GObj* arg1)
 {
-    return ftLib_800864A8(pos, arg1);
+    return ftLib_GetOpponentsDir(pos, arg1);
 }
 
 /// Check if item is a stage item?
@@ -656,7 +656,7 @@ void it_8026BB44(HSD_GObj* gobj)
 /// Adjust item's position to fp bone
 void it_8026BB68(HSD_GObj* fighter_gobj, Vec3* pos)
 {
-    ftLib_80086990(fighter_gobj, pos);
+    ftLib_GetECBCenter(fighter_gobj, pos);
 }
 
 /// Adjust item's position based on ECB?
@@ -696,7 +696,7 @@ void it_8026BBCC(HSD_GObj* gobj, Vec3* pos)
 void it_8026BC14(HSD_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
-    if (ip->owner != NULL && ftLib_80086960(ip->owner)) {
+    if (ip->owner != NULL && ftLib_IsFighter(ip->owner)) {
         ftLib_80086A4C(ip->owner, ip->xCBC_hitlagFrames - 1);
     }
 }
@@ -729,8 +729,8 @@ void it_8026BC90(HSD_GObj* gobj, Vec3* pos)
     pos->y = 0;
     pos->x = 0;
 
-    if (gobj != NULL && ftLib_80086960(gobj)) {
-        ftLib_80086644(gobj, pos);
+    if (gobj != NULL && ftLib_IsFighter(gobj)) {
+        ftLib_GetPos(gobj, pos);
     }
 }
 
@@ -1006,7 +1006,7 @@ CollData* it_8026C100(HSD_GObj* gobj)
 
     switch (it_80272D40(gobj)) {
     case 0:
-        collDataPtr = ftLib_80086984(gobj);
+        collDataPtr = ftLib_GetCollData(gobj);
         break;
     case 1: {
         Item* ip = GET_ITEM(gobj);
@@ -1061,7 +1061,7 @@ bool it_8026C1E8(HSD_GObj* gobj)
 void it_8026C220(HSD_GObj* gobj, HSD_GObj* fighter_gobj)
 {
     Item* ip = GET_ITEM(gobj);
-    ip->xCB0_source_ply = ftLib_80086BE0(fighter_gobj);
+    ip->xCB0_source_ply = ftLib_GetPlayerIndex(fighter_gobj);
 }
 
 /// Find the closest item to the given position?

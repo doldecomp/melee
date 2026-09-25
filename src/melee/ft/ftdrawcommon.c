@@ -40,7 +40,7 @@ static inline MtxPtr ftDrawCommon_8008051C_inline(HSD_GObj* gobj, Vec3* sp54,
 {
     v->x = v->y = v->z = 0.0F;
     sp54->x = sp54->y = sp54->z = 0.0F;
-    if (ftLib_80087074(gobj, sp54)) {
+    if (ftLib_GetShakeOffset(gobj, sp54)) {
         HSD_CObj* current = HSD_CObjGetCurrent();
         MtxPtr mtx = current->view_mtx;
         PSMTXIdentity(sp18);
@@ -62,7 +62,7 @@ MtxPtr ftDrawCommon_8008051C(HSD_GObj* arg1, MtxPtr arg2)
     v.x = v.y = v.z = 0.0F;
     sp54.x = sp54.y = sp54.z = 0.0F;
 
-    if (ftLib_80087074(arg1, &sp54)) {
+    if (ftLib_GetShakeOffset(arg1, &sp54)) {
         HSD_CObj* current = HSD_CObjGetCurrent();
         MtxPtr mtx = current->view_mtx;
         PSMTXIdentity(sp18);
@@ -380,7 +380,7 @@ void ftDrawCommon_80080E18(HSD_GObj* gobj, intptr_t arg1)
 {
     Fighter* fp = gobj->user_data;
 
-    if (!fp->is_sleeping && ftLib_80086A8C(gobj)) {
+    if (!fp->is_sleeping && ftLib_UpdateScreenVisibility(gobj)) {
         switch (Camera_80031060()) {
         case 1:
             if (fp->x2220_b7) {

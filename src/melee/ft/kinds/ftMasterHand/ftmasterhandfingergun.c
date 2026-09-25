@@ -75,7 +75,7 @@ void ftMh_FingerGun1_Anim(HSD_GObj* gobj)
                 ftMasterHand_SpecialAttrs* da = data->ext_attr;
                 ftMh_MS_364_801533CC(gobj);
 
-                if (ftLib_80087120(gobj) > da->xEC) {
+                if (ftLib_GetPercent(gobj) > da->xEC) {
                     fp->mv.mh.unk0.x54 = da->xF0;
                 } else {
                     fp->mv.mh.unk0.x54 = 1;
@@ -166,7 +166,7 @@ void ftMh_MS_364_801533CC(HSD_GObj* gobj)
     ftMasterHand_SpecialAttrs* da = fp->ft_data->ext_attr;
     Fighter_ChangeMotionState(gobj, ftMh_MS_FingerGun2, 0, 0, 1, 0, 0);
     ftAnim_8006EBA4(gobj);
-    if (ftLib_80087120(gobj) > da->xEC) {
+    if (ftLib_GetPercent(gobj) > da->xEC) {
         ftAnim_SetAnimRate(gobj, da->xF4);
     }
     fp->self_vel.x = 0;
@@ -180,7 +180,7 @@ static inline void lbl_8015346C_inline(HSD_GObj* gobj)
     ftMasterHand_SpecialAttrs* da = fp->ft_data->ext_attr;
     Fighter_ChangeMotionState(gobj, ftMh_MS_FingerGun2, 0, 0, 1, 0, 0);
     ftAnim_8006EBA4(gobj);
-    if (ftLib_80087120(gobj) > da->xEC) {
+    if (ftLib_GetPercent(gobj) > da->xEC) {
         ftAnim_SetAnimRate(gobj, da->xF4);
     }
     fp->self_vel.x = 0;
@@ -252,7 +252,7 @@ void ftMh_MS_365_8015364C(HSD_GObj* gobj, HSD_JObj* arg1, float arg2,
             vec0.x += arg2;
             vec0.y += arg3;
 
-            if (ftLib_80087120(gobj) > da->xEC) {
+            if (ftLib_GetPercent(gobj) > da->xEC) {
                 b = true;
             }
 

@@ -93,7 +93,7 @@ bool it_802DC83C(Item_GObj* gobj)
     it_802DCFBC(gobj);
     Camera_RequestQuake(QuakeKind_Small, &ip->pos);
     Item_8026AE84(ip, 0x12E, 0x7F, 0x40);
-    ftLib_80086D40(ip->xCFC, 0xC, 0);
+    ftLib_StartItemRumble(ip->xCFC, 0xC, 0);
     return 0;
 }
 

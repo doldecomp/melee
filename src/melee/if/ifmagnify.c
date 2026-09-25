@@ -202,7 +202,7 @@ void ifMagnify_802FB8C0(HSD_GObj* gobj, intptr_t code)
     if (should_display && player->state.is_offscreen) {
         fighter_gobj = Player_GetEntity(slot);
         if (fighter_gobj != NULL) {
-            ftLib_80086A58(fighter_gobj, &screen_pos);
+            ftLib_GetScreenPos(fighter_gobj, &screen_pos);
             dir.x = screen_pos.x - 320.0f;
             dir.y = -((f32) screen_pos.y - 240.0f);
 
@@ -315,7 +315,8 @@ void ifMagnify_802FBBDC(HSD_GObj* gobj, intptr_t code)
             player = &magnify->player[i];
             fighter_gobj = Player_GetEntity(i);
             if (player->state.ignore_offscreen || fighter_gobj == NULL ||
-                !ftLib_80086B64(fighter_gobj) || !ftLib_80086ED0(fighter_gobj))
+                !ftLib_IsOffscreen(fighter_gobj) ||
+                !ftLib_CanBeMagnified(fighter_gobj))
             {
                 continue;
             }
@@ -323,7 +324,7 @@ void ifMagnify_802FBBDC(HSD_GObj* gobj, intptr_t code)
             scale = ftLib_80086B80(fighter_gobj) / 8.0f;
             HSD_CObjSetOrtho(cobj, top * scale, bottom * scale, left * scale,
                              right * scale);
-            ftLib_80086B90(fighter_gobj, &interest_pos);
+            ftLib_GetCameraSubjectBonePos(fighter_gobj, &interest_pos);
             HSD_CObjSetInterest(cobj, &interest_pos);
             interest_pos.z = 300.0f;
             HSD_CObjSetEyePosition(cobj, &interest_pos);

@@ -307,7 +307,7 @@ void it_80289BE8(Item_GObj* gobj, s32 arg1, s32 food_weight, s32 arg3)
             }
         }
     }
-    if (ftLib_80086960(ip->owner)) {
+    if (ftLib_IsFighter(ip->owner)) {
         ftLib_800874CC(ip->owner, spawned, i);
     }
 }
