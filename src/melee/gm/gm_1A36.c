@@ -7,10 +7,6 @@
 #include <dolphin/pad.h>
 #include <sysdolphin/baselib/controller.h>
 
-/// @todo Move to C file
-#ifndef __GALE01_1A3680
-#define __GALE01_1A3680
-
 struct gm_controller_map {
     /* 00 */ u64 button;
     /* 08 */ u64 trigger; ///< buttons pressed this frame, maybe rename?
@@ -31,8 +27,6 @@ static struct controller_map {
     /* FC */ u16 xFC;
     /* FE */ u8 xFE;
 } controller_map;
-
-#endif
 
 u64 gm_GetButtonsPressed(u8 idx)
 {
