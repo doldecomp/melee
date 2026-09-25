@@ -1,7 +1,5 @@
 #include "vi0401.h"
 
-#include <placeholder.h>
-
 #include "types.h"
 #include "vi.h"
 #include <dolphin/pad.h>
@@ -42,8 +40,8 @@ u8 un_804D6F60[8]; ///< @todo #ViCharaDesc?
 
 void vi0401_8031D020(int arg0, int arg1)
 {
-    ((u8*) &un_804D6F60)[0] = arg0;
-    ((u8*) &un_804D6F60)[1] = arg1;
+    un_804D6F60[0] = arg0;
+    un_804D6F60[1] = arg1;
 }
 
 void un_8031D030(CharacterKind char_kind, int costume)
@@ -66,7 +64,7 @@ void un_8031D030(CharacterKind char_kind, int costume)
     Player_SetSlottype(0, Gm_PKind_Demo);
     Player_SetFacingDirection(0, 1.0f);
 
-    HSD_JObjGetTranslation2(un_804D6F58, &pos);
+    HSD_JObjGetTranslation(un_804D6F58, &pos);
     Player_80032768(0, &pos);
     Player_80036F34(0, 8);
 
@@ -89,8 +87,7 @@ static void vi0401_8031D18C(HSD_GObj* gobj)
 
 static void vi0401_8031D1B0(HSD_GObj* gobj, intptr_t unused)
 {
-    PAD_STACK(8);
-    vi_RunCamera(gobj, (u8*) &erase_colors_vi0401, 0x281);
+    vi_RunCamera(gobj, &erase_colors_vi0401, 0x281);
 }
 
 static void vi0401_8031D23C(HSD_GObj* gobj)
@@ -124,9 +121,9 @@ void vi0401_Scene_OnEnter(void* data)
     HSD_JObj* jobj2;
     HSD_GObj* cam_gobj2;
     ViCharaDesc* desc;
+    GXColor color;
 
     desc = data;
-    PAD_STACK(8);
 
     lbAudioAx_800236DC();
     efLib_Init();
@@ -144,7 +141,8 @@ void vi0401_Scene_OnEnter(void* data)
     fog = HSD_FogLoadDesc(un_804D6F48->fogs->desc);
     HSD_GObjObject_80390A70(fog_gobj, HSD_GObj_FogKind, fog);
     GObj_SetupGXLink(fog_gobj, HSD_GObj_FogCallback, 0, 0);
-    erase_colors_vi0401 = fog->color;
+    color = fog->color;
+    erase_colors_vi0401 = color;
 
     light_gobj = GObj_Create(0xB, 3, 0);
     lobj = lb_80011AC4(un_804D6F48->lights);

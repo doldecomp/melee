@@ -48,16 +48,13 @@ static HSD_Archive* un_804D6F98;
 static HSD_Archive* un_804D6F9C;
 static GXColor erase_colors_vi0502;
 static HSD_GObj* kirby_gobj;
-ViCharaDesc* un_804D6FA8[2];
+u8 un_804D6FA8[8]; ///< @todo #ViCharaDesc?
 
 void un_8031E110(int arg0, int arg1, int arg2)
 {
-    u8* p;
-
-    *(u8*) &un_804D6FA8 = arg0;
-    p = (u8*) &un_804D6FA8;
-    p[1] = arg1;
-    p[3] = arg2;
+    un_804D6FA8[0] = arg0;
+    un_804D6FA8[1] = arg1;
+    un_804D6FA8[3] = arg2;
 }
 
 void vi0502_8031E124(CharacterKind player_kind, int player_costume,
@@ -66,8 +63,9 @@ void vi0502_8031E124(CharacterKind player_kind, int player_costume,
     HSD_JObj* jobj;
     HSD_JObj* jobj2;
     VecMtxPtr pmtx;
+    Vec3 pos;
 
-    PAD_STACK(32);
+    PAD_STACK(16);
     Stage_InitScene(St_Kind_Greens, 0);
     Item_80266FA8();
     Item_80266FCC();
@@ -101,7 +99,8 @@ void vi0502_8031E124(CharacterKind player_kind, int player_costume,
     HSD_JObjAnimAll(jobj);
     jobj2 = GET_JOBJ(kirby_gobj);
     pmtx = grLib_801C9A10();
-    HSD_JObjGetTranslation2(jobj2, &pmtx[1]);
+    HSD_JObjGetTranslation(jobj2, &pos);
+    pmtx[1] = pos;
 
     HSD_JObjReqAnimAll(jobj, 0.0f);
 
@@ -118,9 +117,8 @@ void vi0502_8031E304(HSD_GObj* gobj)
 
 static void vi0502_GObj_OnRender(HSD_GObj* gobj, UNUSED intptr_t code)
 {
-    PAD_STACK(8);
     lbShadow_8000F38C(0);
-    vi_RunCamera(gobj, (u8*) &erase_colors_vi0502, 0x281);
+    vi_RunCamera(gobj, &erase_colors_vi0502, 0x281);
 }
 
 void vi0502_GObj_OnProc(HSD_GObj* gobj)
