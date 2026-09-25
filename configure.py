@@ -337,6 +337,7 @@ cflags_runtime = [
     "-use_lmw_stmw on",
     "-str reuse,pool,readonly",
     "-common off",
+    "-inline auto,deferred",
 ]
 
 # Metrowerks libc flags

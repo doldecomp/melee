@@ -2,12 +2,26 @@
 
 #include "platform.h"
 
-SECTION_INIT static void __fill_mem(void* dst, int val, size_t n);
-
-SECTION_INIT void* memset(void* dst, int val, size_t n)
+SECTION_INIT void* memcpy(void* dst, const void* src, size_t n)
 {
-    __fill_mem(dst, val, n);
+    const u8* s = src;
+    u8* d = dst;
 
+    if ((uintptr_t) src >= (uintptr_t) dst) {
+        s--;
+        d--;
+        n++;
+        while (--n != 0) {
+            *++d = *++s;
+        }
+    } else {
+        s += n;
+        d += n;
+        n++;
+        while (--n != 0) {
+            *--d = *--s;
+        }
+    }
     return dst;
 }
 
@@ -67,25 +81,9 @@ SECTION_INIT static void __fill_mem(void* dst, int val, size_t n)
     }
 }
 
-SECTION_INIT void* memcpy(void* dst, const void* src, size_t n)
+SECTION_INIT void* memset(void* dst, int val, size_t n)
 {
-    const u8* s = src;
-    u8* d = dst;
+    __fill_mem(dst, val, n);
 
-    if ((uintptr_t) src >= (uintptr_t) dst) {
-        s--;
-        d--;
-        n++;
-        while (--n != 0) {
-            *++d = *++s;
-        }
-    } else {
-        s += n;
-        d += n;
-        n++;
-        while (--n != 0) {
-            *--d = *--s;
-        }
-    }
     return dst;
 }

@@ -14,14 +14,6 @@ static asm char* GetR2(void)
 } // clang-format on
 #endif
 
-void __fini_cpp_exceptions(void)
-{
-    if (fragmentID != -2) {
-        __unregister_fragment(fragmentID);
-        fragmentID = -2;
-    }
-}
-
 void __init_cpp_exceptions(void)
 {
 #ifdef MWERKS_GEKKO
@@ -29,6 +21,14 @@ void __init_cpp_exceptions(void)
         fragmentID = __register_fragment(_eti_init_info, GetR2());
     }
 #endif
+}
+
+void __fini_cpp_exceptions(void)
+{
+    if (fragmentID != -2) {
+        __unregister_fragment(fragmentID);
+        fragmentID = -2;
+    }
 }
 
 SECTION_CTORS void* const __init_cpp_exceptions_reference =
