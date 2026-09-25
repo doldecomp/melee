@@ -67,14 +67,14 @@ void un_8032233C(u32 arg0, u32 arg1)
     PAD_STACK(8);
 
     gobj = ftLib_FindBySpawnNum(arg0);
-    kb_mag = ftLib_GetKnockbackMagnitude(ftLib_FindBySpawnNum(arg1));
+    kb_mag = ftLib_GetCrowdKnockback(ftLib_FindBySpawnNum(arg1));
 
     cat = un_80322298(kb_mag);
     if (cat == 0) {
         return;
     }
 
-    if (gobj != NULL && ftLib_GetKnockbackMagnitude(gobj) >= 3.0f) {
+    if (gobj != NULL && ftLib_GetCrowdKnockback(gobj) >= 3.0f) {
         un_80321D30(arg0, kb_mag);
     } else if (data->x0 == arg0 && (f32) data->x4 < gCrowdConfig->x18) {
         un_80321D30(arg0, kb_mag > data->x8 ? kb_mag : data->x8);

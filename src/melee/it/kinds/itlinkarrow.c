@@ -553,7 +553,7 @@ bool itLinkarrow_UnkMotion2_Anim(Item_GObj* gobj)
     Item* item;
     f32 pad[1];
     item = GET_ITEM(gobj);
-    if (ftLib_IsShielding(item->xDD4_itemVar.linkarrow.xC4) != 1) {
+    if (ftLib_80086A18(item->xDD4_itemVar.linkarrow.xC4) != 1) {
         return true;
     }
     return it_802A8330_inline(gobj);

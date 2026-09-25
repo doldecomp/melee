@@ -299,7 +299,7 @@ void itFlipper_Thrown(Item_GObj* gobj)
     Item* ip = GET_ITEM(gobj);
     itFlipper_DatAttrs* attrs = ip->xC4_article_data->x4_specialAttributes;
     if (ip->owner != NULL) {
-        if (ftLib_IsSmashThrow(ip->owner)) {
+        if (ftLib_80087284(ip->owner)) {
             ip->xDD4_itemVar.flipper.xDD4_flightTimer =
                 attrs->x4_smashThrowDuration;
         } else {

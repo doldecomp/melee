@@ -492,7 +492,10 @@ float ftLib_GetScale(HSD_GObj* gobj)
     return fp->x34_scale.y;
 }
 
-bool ftLib_IsShielding(HSD_GObj* gobj)
+/// True in #ftCo_MS_GuardOn, #ftCo_MS_Guard and #ftCo_MS_GuardSetOff only
+/// (not GuardOff, GuardReflect or Yoshi's GuardHold). Its one caller keeps a
+/// Link arrow stuck to the shield while this holds.
+bool ftLib_80086A18(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     bool result = false;
@@ -805,7 +808,9 @@ void ftLib_ApplyMetalBox(Fighter_GObj* gobj, Item_GObj* item_gobj)
     ft_PlaySFX(fp, 0x121, 0x7F, 0x40);
 }
 
-bool ftLib_IsSmashThrow(HSD_GObj* gobj)
+/// Unbounded: true for every motion state from #ftCo_MS_LightThrowF4 on.
+/// The flipper's thrown code uses it to pick its smash-throw duration.
+bool ftLib_80087284(HSD_GObj* gobj)
 {
     if (ftLib_GetMotionId(gobj) >= ftCo_MS_LightThrowF4) {
         return true;
@@ -925,7 +930,9 @@ HSD_GObj* ftLib_FindBySpawnNum(u32 i)
     return NULL;
 }
 
-float ftLib_GetKnockbackMagnitude(HSD_GObj* gobj)
+/// Knockback reweighted by the crowd config's angle multiplier
+/// (#un_803222EC); only the crowd sound code reads it.
+float ftLib_GetCrowdKnockback(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     return fp->dmg.x18A4_knockbackMagnitude;
@@ -1003,7 +1010,9 @@ void ftLib_IsFramesRemaining(HSD_GObj* gobj)
     ftAnim_IsFramesRemaining(gobj);
 }
 
-bool ftLib_IsChargingSmash(HSD_GObj* gobj)
+/// True while @c smash_attrs.state is #SmashState_Charging (does not cover
+/// e.g. Ness's yo-yo smash).
+bool ftLib_800876D4(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (fp->smash_attrs.state == SmashState_Charging) {
