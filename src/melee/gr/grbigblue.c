@@ -3575,7 +3575,6 @@ typedef union grBigBlue_CarPhysics {
     } data;
 } grBigBlue_CarPhysics;
 
-/// @todo The collision scratch vector sits four bytes low.
 void grBigBlue_801ED694(Ground_GObj* gobj, s32 lane)
 {
     grBigBlue_CarPhysics* gp = gobj->user_data;

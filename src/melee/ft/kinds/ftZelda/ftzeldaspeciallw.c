@@ -100,7 +100,6 @@ void ftZd_SpecialLw_Enter(HSD_GObj* gobj)
 
 /// Zelda_AS_357_Transform_Aerial
 /// 8013AFA4 - 8013B068 (196 bytes)
-/// For a scratch using helper function, see the above function.
 void ftZd_SpecialAirLw_Enter(HSD_GObj* gobj)
 {
     Fighter_ChangeMotionState(gobj, 357, 0, 0, 1.0, 0, NULL);

@@ -771,7 +771,6 @@ HSD_JObj* HSD_JObjRemove(HSD_JObj* jobj)
     return child;
 }
 
-/// @todo Regswaps
 void HSD_JObjRemoveAll(HSD_JObj* jobj)
 {
     HSD_JObj* prev;

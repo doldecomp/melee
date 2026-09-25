@@ -392,9 +392,6 @@ static inline float my_sqrtf(float x)
 
 void ftSk_SpecialHi_80113838(Fighter_GObj* gobj)
 {
-    // Almost completely matching, might need more inlining to get fully all
-    // the way there
-
     Fighter* fp = GET_FIGHTER(gobj);
     ftSeakAttributes* attributes = fp->dat_attrs;
     CollData* coll = &fp->coll_data;

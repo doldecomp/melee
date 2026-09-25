@@ -231,7 +231,6 @@ static void sdata2_order(void)
 }
 #endif
 
-/// @todo Only differs by register allocation.
 void it_80289BE8(Item_GObj* gobj, s32 arg1, s32 food_weight, s32 arg3)
 {
     Item* ip = GET_ITEM(gobj);
