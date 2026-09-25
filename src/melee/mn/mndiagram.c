@@ -767,65 +767,6 @@ static inline u8 mnDiagram_GetVisibleNameFrom(u8* sorted, int start, int rank)
     return p[0x1C];
 }
 
-static inline u8 mnDiagram_GetVisibleNameRowForInput(u8* sorted, int start,
-                                                     int rank)
-{
-    u8* p;
-    u8* p2;
-    int remaining;
-    int idx;
-
-    remaining = rank;
-    p = sorted;
-    p = p + start;
-    idx = start;
-    p = p + 0x1C;
-    while (remaining > 0) {
-        p2 = p;
-        do {
-            idx++;
-            p2++;
-            p++;
-            if (idx >= 0x78) {
-                return 0x78;
-            }
-        } while (GetNameText(*p2) == NULL);
-        remaining--;
-    }
-    p = sorted;
-    p += idx;
-    return p[0x1C];
-}
-
-static inline u8 mnDiagram_GetVisibleNameFrom2(u8* sorted, int start, int rank)
-{
-    int remaining;
-    int idx;
-    u8* p;
-    u8* p2;
-
-    p = sorted;
-    p = p + start;
-    remaining = rank;
-    idx = start;
-    p = p + 0x1C;
-    while (remaining > 0) {
-        p2 = p;
-        do {
-            idx++;
-            p2++;
-            p++;
-            if (idx >= 0x78) {
-                return 0x78;
-            }
-        } while (GetNameText(*p2) == NULL);
-        remaining--;
-    }
-    p = sorted;
-    p += idx;
-    return p[0x1C];
-}
-
 static inline s32 mnDiagram_FindPrevFighter(u8* sorted,
                                             SelectableCharacterKind cur)
 {
@@ -1135,8 +1076,8 @@ void mnDiagram_InputProc(HSD_GObj* gobj)
                 (u8) data->name_cursor_pos, (u8) cur);
             row = mn_804A04F0.hovered_selection >> 8;
             cursor_pos = data->name_cursor_pos;
-            row_result = mnDiagram_GetVisibleNameRowForInput(
-                sorted, cursor_pos >> 8, row);
+            row_result =
+                mnDiagram_GetVisibleNameCursorFrom(cursor_pos >> 8, row);
             mnDiagram_CreatePopup(col_result, row_result, 1);
             return;
         }
@@ -1259,8 +1200,7 @@ void mnDiagram_InputProc(HSD_GObj* gobj)
                 cur = (u8) data->name_cursor_pos;
                 next_name = (u8) mnDiagram_FindNextName(cur);
                 if (cur != next_name) {
-                    col_result3 =
-                        mnDiagram_GetVisibleNameFrom(sorted, cur, 0xA);
+                    col_result3 = mnDiagram_GetVisibleNameCursorFrom(cur, 0xA);
                     if (col_result3 != 0x78) {
                         sfxMove();
                         data->name_cursor_pos =
@@ -1304,7 +1244,7 @@ void mnDiagram_InputProc(HSD_GObj* gobj)
                 cur = data->name_cursor_pos >> 8;
                 next_name = (u8) mnDiagram_FindNextName(cur);
                 if (cur != next_name) {
-                    row_result3 = mnDiagram_GetVisibleNameFrom(sorted, cur, 7);
+                    row_result3 = mnDiagram_GetVisibleNameCursorFrom(cur, 7);
                     if (row_result3 != 0x78) {
                         sfxMove();
                         data->name_cursor_pos =
@@ -2310,11 +2250,9 @@ static inline void mnDiagram_TextSetPos(HSD_Text* text, f32 x, f32 y, f32 z)
 void mnDiagram_DrawNameHeaders(HSD_GObj* arg0, s32 arg1, s32 arg2)
 {
     Diagram* data = arg0->user_data;
-    u8* sorted = mnDiagram_FighterDisplayOrder;
     HSD_Text* row_text;
     u8 name_byte;
     int name_id;
-    Vec2 pos;
 
     // Column headers
     {
@@ -2335,7 +2273,7 @@ void mnDiagram_DrawNameHeaders(HSD_GObj* arg0, s32 arg1, s32 arg2)
             for (i = 0; i < 7; i++) {
                 if (GetNameCount() > i) {
                     f32 x_spacing;
-                    name_byte = mnDiagram_GetVisibleNameFrom(sorted, arg2, i);
+                    name_byte = mnDiagram_GetVisibleNameCursorFrom(arg2, i);
                     name_id = name_byte;
                     x_spacing = HSD_JObjGetTranslationX(data->jobjs[8]) -
                                 HSD_JObjGetTranslationX(data->jobjs[7]);
@@ -2354,10 +2292,9 @@ void mnDiagram_DrawNameHeaders(HSD_GObj* arg0, s32 arg1, s32 arg2)
     {
         HSD_JObj* j = data->jobjs[9];
         f32 z = HSD_JObjGetTranslationZ(j);
-        pos.y = -0.5f - HSD_JObjGetTranslationY(j);
-        pos.x = -1.3f + HSD_JObjGetTranslationX(j);
-        row_text->pos_x = pos.x;
-        row_text->pos_y = pos.y;
+        f32 y = -0.5f - HSD_JObjGetTranslationY(j);
+        row_text->pos_x = -1.3f + HSD_JObjGetTranslationX(j);
+        row_text->pos_y = y;
         row_text->pos_z = z;
     }
 
@@ -2366,8 +2303,7 @@ void mnDiagram_DrawNameHeaders(HSD_GObj* arg0, s32 arg1, s32 arg2)
         for (i = 0; i < 0xA; i++) {
             if (GetNameCount() > i) {
                 f32 y_spacing;
-                name_id = mnDiagram_GetVisibleNameFrom2(sorted, arg1, i) &
-                          0xFFFFFFFFFFFFFFFFu;
+                name_id = mnDiagram_GetVisibleNameCursorFrom(arg1, i);
                 y_spacing = HSD_JObjGetTranslationY(data->jobjs[10]) -
                             HSD_JObjGetTranslationY(data->jobjs[9]);
                 HSD_SisLib_803A6B98(row_text, 0.0f, -((y_spacing * i) / 0.03f),
@@ -2539,8 +2475,7 @@ void mnDiagram_CursorProc(HSD_GObj* gobj)
     data = mnDiagram_GetCurrentDiagramData();
     lb_80011E24(gobj->hsd_obj, &sp_jobj, 3, -1);
 
-    selection = (u16*) &mn_804A04F0;
-    col = *++selection >> 8;
+    col = *(selection = &mn_804A04F0.hovered_selection) >> 8;
     x_spacing = HSD_JObjGetTranslationX(data->jobjs[8]) -
                 HSD_JObjGetTranslationX(data->jobjs[7]);
     HSD_JObjSetTranslateX(sp_jobj, x_spacing * (col - 3));
