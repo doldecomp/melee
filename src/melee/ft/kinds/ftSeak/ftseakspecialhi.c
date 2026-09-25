@@ -264,8 +264,6 @@ void ftSk_SpecialHiStart_1_Coll(HSD_GObj* gobj)
     }
 }
 
-/* Kipcode66's scratch at https://decomp.me/scratch/fE7Dq matches this, someone
- * else had to add includes to code to get it to work */
 void ftSk_SpecialAirHiStart_1_Coll(HSD_GObj* gobj)
 {
     s32 var_r0;
@@ -335,13 +333,6 @@ void ftSk_SpecialHi_8011374C(Fighter_GObj* gobj)
 }
 
 /// AS_SheikUpBLand
-/*
-Vicious Grasshopper (anon)'s scratch at https://decomp.me/scratch/p2npY
-seems to match this.
-
-Scratch had several warnings at the end about structs not
-being defined, if that's of note
-*/
 void ftSk_SpecialHi_801137C8(Fighter_GObj* gobj)
 {
     u32 fighterFlags;

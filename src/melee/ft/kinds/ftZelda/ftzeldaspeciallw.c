@@ -24,7 +24,6 @@
 #include <melee/lb/lb_00F9.h>
 
 /// 8013ADB4 - 8013AE30 (124 bytes)
-/// https://decomp.me/scratch/LbMVE
 void ftZd_SpecialLw_8013ADB4(HSD_GObj* gobj)
 {
     Fighter* fp;
@@ -40,7 +39,6 @@ void ftZd_SpecialLw_8013ADB4(HSD_GObj* gobj)
 }
 
 /// 8013AE30 - 8013AEAC (124 bytes)
-/// https://decomp.me/scratch/iojLO
 void ftZd_SpecialLw_8013AE30(HSD_GObj* gobj)
 {
     Fighter* fp;
@@ -57,7 +55,6 @@ void ftZd_SpecialLw_8013AE30(HSD_GObj* gobj)
 
 /// Zelda_TransformToSubcharacter
 /// 8013AEAC - 8013AEE0 (52 bytes)
-/// https://decomp.me/scratch/iINH1
 void ftZd_SpecialLw_8013AEAC(HSD_GObj* gobj)
 {
     Fighter* fp;
@@ -92,8 +89,6 @@ static void ftZelda_SpecialLw_StartAction_Helper(HSD_GObj* gobj)
 
 /// Zelda_AS_355_Transform_Grounded
 /// 8013AEE0 - 8013AFA4 (196 bytes)
-/// https://decomp.me/scratch/jZJgg (with helper)
-/// https://decomp.me/scratch/Lw6fO (single function)
 void ftZd_SpecialLw_Enter(HSD_GObj* gobj)
 {
     Fighter_ChangeMotionState(gobj, 355, 0, 0, 1, 0, NULL);
@@ -106,7 +101,6 @@ void ftZd_SpecialLw_Enter(HSD_GObj* gobj)
 /// Zelda_AS_357_Transform_Aerial
 /// 8013AFA4 - 8013B068 (196 bytes)
 /// For a scratch using helper function, see the above function.
-/// https://decomp.me/scratch/8W7ZF (single function)
 void ftZd_SpecialAirLw_Enter(HSD_GObj* gobj)
 {
     Fighter_ChangeMotionState(gobj, 357, 0, 0, 1.0, 0, NULL);
@@ -117,7 +111,6 @@ void ftZd_SpecialAirLw_Enter(HSD_GObj* gobj)
 }
 
 /// 8013B068 - 8013B0A8 (64 bytes)
-/// https://decomp.me/scratch/DrRr5
 void ftZd_SpecialLw_Anim(HSD_GObj* gobj)
 {
     Fighter* fp;
@@ -129,7 +122,6 @@ void ftZd_SpecialLw_Anim(HSD_GObj* gobj)
 }
 
 /// 8013B0A8 - 8013B0E8 (64 bytes)
-/// https://decomp.me/scratch/DrRr5
 void ftZd_SpecialAirLw_Anim(HSD_GObj* gobj)
 {
     Fighter* fp;
@@ -156,7 +148,6 @@ void ftZd_SpecialLw_Phys(HSD_GObj* gobj)
 }
 
 /// 8013B110 - 8013B154 (68 bytes)
-/// https://decomp.me/scratch/Nm958
 void ftZd_SpecialAirLw_Phys(HSD_GObj* gobj)
 {
     Fighter* fp;
@@ -172,7 +163,6 @@ void ftZd_SpecialAirLw_Phys(HSD_GObj* gobj)
 }
 
 /// 8013B154 - 8013B190 (60 bytes)
-/// https://decomp.me/scratch/8ceOO
 void ftZd_SpecialLw_Coll(HSD_GObj* gobj)
 {
     if (ft_80082708(gobj) == 0) {
@@ -181,7 +171,6 @@ void ftZd_SpecialLw_Coll(HSD_GObj* gobj)
 }
 
 /// 8013B190 - 8013B1CC (60 bytes)
-/// https://decomp.me/scratch/8ceOO
 void ftZd_SpecialAirLw_Coll(HSD_GObj* gobj)
 {
     if (ft_80081D0C(gobj) != 0) {
@@ -190,7 +179,6 @@ void ftZd_SpecialAirLw_Coll(HSD_GObj* gobj)
 }
 
 /// 8013B1CC - 8013B238 (108 bytes)
-/// https://decomp.me/scratch/w04qW
 void ftZd_SpecialLw_8013B1CC(HSD_GObj* gobj)
 {
     Fighter* fp;
@@ -242,7 +230,6 @@ void ftZd_SpecialLw2_Phys(HSD_GObj* gobj)
 }
 
 /// 8013B344 - 8013B388 (68 bytes)
-/// https://decomp.me/scratch/r3T6y
 void ftZd_SpecialAirLw2_Phys(HSD_GObj* gobj)
 {
     Fighter* fp;
@@ -258,7 +245,6 @@ void ftZd_SpecialAirLw2_Phys(HSD_GObj* gobj)
 }
 
 /// 8013B388 - 8013B3C4 (60 bytes)
-/// https://decomp.me/scratch/t8hrY
 void ftZd_SpecialLw2_Coll(HSD_GObj* gobj)
 {
     if (ft_80082708(gobj) == 0) {
@@ -267,7 +253,6 @@ void ftZd_SpecialLw2_Coll(HSD_GObj* gobj)
 }
 
 /// 8013B3C4 - 8013B400 (60 bytes)
-/// https://decomp.me/scratch/t8hrY
 void ftZd_SpecialAirLw2_Coll(HSD_GObj* gobj)
 {
     if (ft_80081D0C(gobj) != 0) {
@@ -276,7 +261,6 @@ void ftZd_SpecialAirLw2_Coll(HSD_GObj* gobj)
 }
 
 /// 8013B400 - 8013B46C (108 bytes)
-/// https://decomp.me/scratch/EZlpO
 void ftZd_SpecialLw_8013B400(HSD_GObj* gobj)
 {
     Fighter* fp;
@@ -287,7 +271,6 @@ void ftZd_SpecialLw_8013B400(HSD_GObj* gobj)
 }
 
 /// 8013B46C - 8013B4D8 (108 bytes)
-/// https://decomp.me/scratch/EZlpO
 void ftZd_SpecialLw_8013B46C(HSD_GObj* gobj)
 {
     Fighter* fp;
@@ -299,7 +282,6 @@ void ftZd_SpecialLw_8013B46C(HSD_GObj* gobj)
 
 /// AS_ZeldaFinishTransformation
 /// 8013B4D8 - 8013B540 (104 bytes)
-/// https://decomp.me/scratch/wpEbJ
 void ftZd_SpecialLw_8013B4D8(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -321,7 +303,6 @@ void ftZd_SpecialLw_8013B4D8(HSD_GObj* gobj)
 }
 
 /// 8013B540 - 8013B574 (52 bytes)
-/// https://decomp.me/scratch/L6UUI
 s32 ftZd_SpecialLw_8013B540(HSD_GObj* gobj)
 {
     s32 actionStateIndex;
@@ -339,8 +320,6 @@ s32 ftZd_SpecialLw_8013B540(HSD_GObj* gobj)
 }
 
 /// 8013B574 - 8013B5C4 (80 bytes)
-/// https://decomp.me/scratch/tgIRc (fork of below)
-/// https://decomp.me/scratch/pTAiQ
 bool ftZd_SpecialLw_8013B574(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -361,7 +340,6 @@ bool ftZd_SpecialLw_8013B574(HSD_GObj* gobj)
 }
 
 /// 8013B5C4 - 8013B5EC ( bytes)
-/// https://decomp.me/scratch/VdBYJ
 void ftZd_SpecialLw_8013B5C4(HSD_GObj* gobj)
 {
     Fighter* fp;
@@ -376,7 +354,6 @@ void ftZd_SpecialLw_8013B5C4(HSD_GObj* gobj)
 }
 
 /// 8013B5EC - 8013B638 (76 bytes)
-/// https://decomp.me/scratch/8QoCa
 void ftZd_SpecialLw_8013B5EC(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
