@@ -2893,24 +2893,24 @@ bool Camera_8002E234(void)
         break;
     case 2:
         ret = true;
-        if (game_camera.x35C.bits.b1) {
-            ret &= Camera_8002E158(&sp10, game_camera.x368.vec.y,
-                                   game_camera.x35C.vec.y);
+        if (game_camera.x35C.orbit.b1) {
+            ret &= Camera_8002E158(&sp10, game_camera.x368.orbit.pitch,
+                                   game_camera.x35C.orbit.pitch);
         }
-        if (game_camera.x35C.bits.b2) {
-            ret &= Camera_8002E158(&spC, game_camera.x368.vec.z,
-                                   game_camera.x35C.vec.z);
+        if (game_camera.x35C.orbit.b2) {
+            ret &= Camera_8002E158(&spC, game_camera.x368.orbit.yaw,
+                                   game_camera.x35C.orbit.yaw);
         }
-        if (game_camera.x35C.bits.b0) {
-            ret &= Camera_8002E158(&sp8, game_camera.x368.s16_v,
-                                   game_camera.x35C.bits.x2);
+        if (game_camera.x35C.orbit.b0) {
+            ret &= Camera_8002E158(&sp8, game_camera.x368.orbit.distance,
+                                   game_camera.x35C.orbit.distance);
         }
         sp14.y = 0.0f;
         sp14.x = 0.0f;
         sp14.z = 1.0f;
-        lbVector_Rotate(&sp14, 1, -game_camera.x35C.vec.y);
-        lbVector_Rotate(&sp14, 2, game_camera.x35C.vec.z);
-        temp_f31 = game_camera.x35C.bits.x2;
+        lbVector_Rotate(&sp14, 1, -game_camera.x35C.orbit.pitch);
+        lbVector_Rotate(&sp14, 2, game_camera.x35C.orbit.yaw);
+        temp_f31 = game_camera.x35C.orbit.distance;
         lbVector_Normalize(&sp14);
         sp14.x *= temp_f31;
         sp14.y *= temp_f31;
@@ -3166,12 +3166,12 @@ void Camera_8002EB5C(float arg0)
 
     if (game_camera.x341_b3_b4 != 2) {
         game_camera.x341_b3_b4 = 2;
-        game_camera.x35C.bits.b0 = 0;
-        game_camera.x35C.bits.b2 = 0;
+        game_camera.x35C.orbit.b0 = 0;
+        game_camera.x35C.orbit.b2 = 0;
     }
 
-    game_camera.x35C.vec.y = arg0;
-    game_camera.x35C.bits.b1 = 1;
+    game_camera.x35C.orbit.pitch = arg0;
+    game_camera.x35C.orbit.b1 = 1;
 
     switch (game_camera.x341_b3_b4) {
     case 1:
@@ -3199,12 +3199,12 @@ void Camera_8002EC7C(float arg0)
 
     if (game_camera.x341_b3_b4 != 2) {
         game_camera.x341_b3_b4 = 2;
-        game_camera.x35C.bits.b0 = 0;
-        game_camera.x35C.bits.b1 = 0;
+        game_camera.x35C.orbit.b0 = 0;
+        game_camera.x35C.orbit.b1 = 0;
     }
 
-    game_camera.x35C.vec.z = arg0;
-    game_camera.x35C.bits.b2 = 1;
+    game_camera.x35C.orbit.yaw = arg0;
+    game_camera.x35C.orbit.b2 = 1;
 
     switch (game_camera.x341_b3_b4) {
     case 1:
@@ -3232,12 +3232,12 @@ void Camera_8002ED9C(float arg0)
 
     if (game_camera.x341_b3_b4 != 2) {
         game_camera.x341_b3_b4 = 2;
-        game_camera.x35C.bits.b1 = 0;
-        game_camera.x35C.bits.b2 = 0;
+        game_camera.x35C.orbit.b1 = 0;
+        game_camera.x35C.orbit.b2 = 0;
     }
 
-    game_camera.x35C.bits.x2 = arg0;
-    game_camera.x35C.bits.b0 = 1;
+    game_camera.x35C.orbit.distance = arg0;
+    game_camera.x35C.orbit.b0 = 1;
 
     switch (game_camera.x341_b3_b4) {
     case 1:
@@ -3366,10 +3366,10 @@ void Camera_8002F0E4(s32 arg0)
                       &game_camera.transform.interest, &spC);
         temp_f30 = atan2f(spC.y, sqrtf__Ff(spC.x * spC.x + spC.z * spC.z));
         temp_f31 = atan2f(spC.x, spC.z);
-        game_camera.x368.s16_v =
+        game_camera.x368.orbit.distance =
             (s16) sqrtf__Ff(spC.z * spC.z + (spC.x * spC.x + spC.y * spC.y));
-        game_camera.x368.vec.y = temp_f30;
-        game_camera.x368.vec.z = temp_f31;
+        game_camera.x368.orbit.pitch = temp_f30;
+        game_camera.x368.orbit.yaw = temp_f31;
         break;
     }
     }
