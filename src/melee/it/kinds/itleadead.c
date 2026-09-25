@@ -1138,3 +1138,8 @@ void it_802EAE80(Item_GObj* gobj)
         it_802E9308_inline(gobj);
     }
 }
+
+HSD_GObj* it_802EAF28(Item_GObj* item_gobj)
+{
+    return GET_ITEM(item_gobj)->xDD4_itemVar.leadead.x38;
+}

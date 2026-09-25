@@ -18,12 +18,6 @@ ItemStateTable it_803F8FD0[] = {
       NULL },
 };
 
-s32 it_802EAF28(Item_GObj* item_gobj)
-{
-    // can't use xDD4_itemVar.greatfoxlaser.x38, which is an s16
-    return GET_ITEM(item_gobj)->xDD4_itemVar.likelike.x38;
-}
-
 Item_GObj* it_802EAF34(HSD_GObj* owner, Vec3* offset, int type)
 {
     Item_GObj* item_gobj;
