@@ -2787,8 +2787,7 @@ void Camera_8002DDC4(void* unused)
     Camera_ApplyQuake(&bounds, &cam->transform);
 }
 
-s32 Camera_8002DFE4(Vec3* arg0, Vec3* interest,
-                    CameraTransformState* transform)
+s32 Camera_8002DFE4(Vec3* start, Vec3* end, Vec3* out)
 {
     Vec3 sp14;
     f32 var_f31;
@@ -2815,15 +2814,15 @@ s32 Camera_8002DFE4(Vec3* arg0, Vec3* interest,
         break;
     }
     if (var_r31 != 0) {
-        transform->interest = *interest;
+        *out = *end;
 
     } else {
-        lbVector_Diff(interest, arg0, &sp14);
+        lbVector_Diff(end, start, &sp14);
         sp14.x *= var_f31;
         sp14.y *= var_f31;
         sp14.z *= var_f31;
-        lbVector_Add(&sp14, arg0);
-        transform->interest = sp14;
+        lbVector_Add(&sp14, start);
+        *out = sp14;
     }
     return var_r31;
 }
@@ -2879,22 +2878,22 @@ bool Camera_8002E234(void)
     case 0:
     case 1:
     case 3:
-        ret = Camera_8002DFE4(
-            &game_camera.x368, &game_camera.transform.target_position,
-            (CameraTransformState*) &game_camera.transform.position);
+        ret = Camera_8002DFE4(&game_camera.x368.vec,
+                              &game_camera.transform.target_position,
+                              &game_camera.transform.position);
         break;
     case 2:
         ret = true;
         if (game_camera.x35C.bits.b1) {
-            ret &= Camera_8002E158(&sp10, game_camera.x368.y,
+            ret &= Camera_8002E158(&sp10, game_camera.x368.vec.y,
                                    game_camera.x35C.vec.y);
         }
         if (game_camera.x35C.bits.b2) {
-            ret &= Camera_8002E158(&spC, game_camera.x368.z,
+            ret &= Camera_8002E158(&spC, game_camera.x368.vec.z,
                                    game_camera.x35C.vec.z);
         }
         if (game_camera.x35C.bits.b0) {
-            ret &= Camera_8002E158(&sp8, *(s16*) &game_camera.x368,
+            ret &= Camera_8002E158(&sp8, game_camera.x368.s16_v,
                                    game_camera.x35C.bits.x2);
         }
         sp14.y = 0.0f;
@@ -2982,7 +2981,7 @@ void Camera_8002E490(void* unused)
     case 3:
         var_r29 = Camera_8002DFE4(&game_camera.x350,
                                   &game_camera.transform.target_interest,
-                                  &game_camera.transform);
+                                  &game_camera.transform.interest);
         break;
     }
     var_r29 &= Camera_8002E234();
@@ -3295,7 +3294,7 @@ void Camera_8002EF14(void)
     case 3:
         Camera_8002DFE4(&game_camera.x350,
                         &game_camera.transform.target_interest,
-                        &game_camera.transform);
+                        &game_camera.transform.interest);
         break;
     }
 
@@ -3347,17 +3346,17 @@ void Camera_8002F0E4(s32 arg0)
     case 0:
     case 1:
     case 3:
-        game_camera.x368 = game_camera.transform.position;
+        game_camera.x368.vec = game_camera.transform.position;
         break;
     case 2: {
         lbVector_Diff(&game_camera.transform.position,
                       &game_camera.transform.interest, &spC);
         temp_f30 = atan2f(spC.y, sqrtf__Ff(spC.x * spC.x + spC.z * spC.z));
         temp_f31 = atan2f(spC.x, spC.z);
-        *(s16*) &game_camera.x368 =
+        game_camera.x368.s16_v =
             (s16) sqrtf__Ff(spC.z * spC.z + (spC.x * spC.x + spC.y * spC.y));
-        game_camera.x368.y = temp_f30;
-        game_camera.x368.z = temp_f31;
+        game_camera.x368.vec.y = temp_f30;
+        game_camera.x368.vec.z = temp_f31;
         break;
     }
     }
@@ -3769,8 +3768,8 @@ void Camera_8002FE38(void)
 
     game_camera.x350 = game_camera.transform.interest;
     game_camera.transform.target_interest = game_camera.x350;
-    game_camera.x368 = game_camera.transform.position;
-    game_camera.transform.target_position = game_camera.x368;
+    game_camera.x368.vec = game_camera.transform.position;
+    game_camera.transform.target_position = game_camera.x368.vec;
     game_camera.transform.target_fov = game_camera.x374 =
         game_camera.transform.fov;
 }
