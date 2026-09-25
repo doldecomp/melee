@@ -1037,7 +1037,6 @@ void mnDiagram_InputProc(HSD_GObj* gobj)
     u8 row_result;
     s32 i;
     u16* selection;
-    s16 new_var;
     u8* sorted = mnDiagram_FighterDisplayOrder;
     Diagram* data = mnDiagram_GetCurrentDiagramData();
     u32 input = mn_80229624(4);
@@ -1257,12 +1256,11 @@ void mnDiagram_InputProc(HSD_GObj* gobj)
             }
         }
     } else {
-        new_var = 0;
         count2 = mnDiagram_CountUnlockedFighters();
 
         if (input & 1) {
             col = (u8) mn_804A04F0.hovered_selection;
-            if ((col > new_var) && (count2 > (col - 1))) {
+            if ((col > 0) && (count2 > (col - 1))) {
                 sfxMove();
                 mn_804A04F0.hovered_selection =
                     (mn_804A04F0.hovered_selection & 0xFF00) |
@@ -1310,7 +1308,7 @@ void mnDiagram_InputProc(HSD_GObj* gobj)
             }
         } else if (input & 4) {
             row5 = mn_804A04F0.hovered_selection >> 8;
-            if ((row5 > new_var) && (count2 > (row5 - 1))) {
+            if ((row5 > 0) && (count2 > (row5 - 1))) {
                 sfxMove();
                 mn_804A04F0.hovered_selection =
                     ((u8) mn_804A04F0.hovered_selection) | ((row5 - 1) << 8);
@@ -1385,26 +1383,29 @@ static inline Vec3* mnDiagram_PopupAnimProc_Inline(mnDiagram_AnimTable* arg0,
     return &arg0->points[arg1];
 }
 
+static inline void mnDiagram_TextSetPos(HSD_Text* text, f32 x, f32 y, f32 z)
+{
+    text->pos_x = x;
+    text->pos_y = y;
+    text->pos_z = z;
+}
+
 void mnDiagram_PopupAnimProc(HSD_GObj* arg0)
 {
     mnDiagram_PopupData* data = arg0->user_data;
     HSD_Text* text;
     mnDiagram_AnimTable* tbl = GET_DIAGRAM_ANIM_TABLE();
     Vec3 pos;
-    float new_var;
     f32 anim_frame;
-    PAD_STACK(0x18);
 
     HSD_JObjAnimAll(data->jobjs[5]);
 
     text = data->text[0];
     lb_8000B1CC(data->jobjs[8], mnDiagram_PopupAnimProc_Inline(tbl, 0), &pos);
     {
-        f32 y = pos.y;
+        f32 y = -pos.y;
         f32 z = pos.z;
-        text->pos_x = pos.x;
-        text->pos_y = (new_var = -y);
-        text->pos_z = z;
+        mnDiagram_TextSetPos(text, pos.x, y, z);
     }
     text->default_alignment = 0;
 
@@ -1415,12 +1416,10 @@ void mnDiagram_PopupAnimProc(HSD_GObj* arg0)
         f32 z;
         lb_8000B1CC(data->jobjs[11], mnDiagram_PopupAnimProc_Inline(tbl, 1),
                     &pos);
-        y = pos.y;
+        y = -pos.y;
         z = pos.z;
         t = data->text[1];
-        t->pos_x = pos.x;
-        t->pos_y = (new_var = -y);
-        t->pos_z = z;
+        mnDiagram_TextSetPos(t, pos.x, y, z);
         text->default_alignment = 1;
     }
     if (data->text[2] != NULL) {
@@ -1429,12 +1428,10 @@ void mnDiagram_PopupAnimProc(HSD_GObj* arg0)
         f32 z;
         lb_8000B1CC(data->jobjs[10], mnDiagram_PopupAnimProc_Inline(tbl, 2),
                     &pos);
-        y = pos.y;
+        y = -pos.y;
         z = pos.z;
         t = data->text[2];
-        t->pos_x = pos.x;
-        t->pos_y = (new_var = -y);
-        t->pos_z = z;
+        mnDiagram_TextSetPos(t, pos.x, y, z);
         text->default_alignment = 1;
     }
 
@@ -1445,12 +1442,10 @@ void mnDiagram_PopupAnimProc(HSD_GObj* arg0)
         f32 z;
         lb_8000B1CC(data->jobjs[3], mnDiagram_PopupAnimProc_Inline(tbl, 1),
                     &pos);
-        y = pos.y;
+        y = -pos.y;
         z = pos.z;
         t = data->text[3];
-        t->pos_x = pos.x;
-        t->pos_y = (new_var = -y);
-        t->pos_z = z;
+        mnDiagram_TextSetPos(t, pos.x, y, z);
     }
     text->default_alignment = 1;
 
@@ -1460,12 +1455,10 @@ void mnDiagram_PopupAnimProc(HSD_GObj* arg0)
         f32 z;
         lb_8000B1CC(data->jobjs[2], mnDiagram_PopupAnimProc_Inline(tbl, 2),
                     &pos);
-        y = pos.y;
+        y = -pos.y;
         z = pos.z;
         t = data->text[4];
-        t->pos_x = pos.x;
-        t->pos_y = (new_var = -y);
-        t->pos_z = z;
+        mnDiagram_TextSetPos(t, pos.x, y, z);
         text->default_alignment = 1;
     }
 
@@ -1476,12 +1469,10 @@ void mnDiagram_PopupAnimProc(HSD_GObj* arg0)
         f32 z;
         lb_8000B1CC(data->jobjs[13], mnDiagram_PopupAnimProc_Inline(tbl, 1),
                     &pos);
-        y = pos.y;
+        y = -pos.y;
         z = pos.z;
         t = data->text[3];
-        t->pos_x = pos.x;
-        t->pos_y = (new_var = -y);
-        t->pos_z = z;
+        mnDiagram_TextSetPos(t, pos.x, y, z);
     }
     text->default_alignment = 1;
 
@@ -1501,11 +1492,19 @@ static inline void mnDiagram_FormatPopupNumber(char* buf, u32 val)
     buf[digit_count] = *mnDiagram_StringTerminator;
 }
 
+static inline void setPopupTextPosition(HSD_Text* text, const Vec3* pos)
+{
+    f32 y = -pos->y;
+    f32 z = pos->z;
+    text->pos_x = pos->x;
+    text->pos_y = y;
+    text->pos_z = z;
+}
+
 void mnDiagram_CreatePopupTexts(HSD_GObj* arg0, s32 selkind_or_nametag_slot_id,
                                 s32 arg2, s32 use_nametag)
 {
     mnDiagram_PopupData* data = arg0->user_data;
-    float new_var;
     Point3d pos;
     char buf[8];
     u32 kos;
@@ -1517,13 +1516,7 @@ void mnDiagram_CreatePopupTexts(HSD_GObj* arg0, s32 selkind_or_nametag_slot_id,
     lb_8000B1CC(data->jobjs[8], &mnDiagram_PopupTextOffsets.points[0], &pos);
     text->font_size.x = 0.0521f;
     text->font_size.y = 0.0521f;
-    {
-        f32 y = pos.y;
-        f32 z = pos.z;
-        text->pos_x = pos.x;
-        text->pos_y = (new_var = -y);
-        text->pos_z = z;
-    }
+    setPopupTextPosition(text, &pos);
     text->default_alignment = 0;
     text->text_color = mnDiagram_PopupTextColor;
 
@@ -1545,13 +1538,7 @@ void mnDiagram_CreatePopupTexts(HSD_GObj* arg0, s32 selkind_or_nametag_slot_id,
                         &pos);
             label_text->font_size.x = 0.035f;
             label_text->font_size.y = 0.05f;
-            {
-                f32 y = pos.y;
-                f32 z = pos.z;
-                label_text->pos_x = pos.x;
-                label_text->pos_y = (new_var = -y);
-                label_text->pos_z = z;
-            }
+            setPopupTextPosition(label_text, &pos);
             label_text->default_alignment = 1;
             HSD_SisLib_803A6B98(label_text, 0.0f, 0.0f,
                                 GetNameText(arg2 & 0xFF));
@@ -1566,13 +1553,7 @@ void mnDiagram_CreatePopupTexts(HSD_GObj* arg0, s32 selkind_or_nametag_slot_id,
                         &pos);
             label_text->font_size.x = 0.035f;
             label_text->font_size.y = 0.05f;
-            {
-                f32 y = pos.y;
-                f32 z = pos.z;
-                label_text->pos_x = pos.x;
-                label_text->pos_y = (new_var = -y);
-                label_text->pos_z = z;
-            }
+            setPopupTextPosition(label_text, &pos);
             label_text->default_alignment = 1;
             HSD_SisLib_803A6B98(label_text, 0.0f, 0.0f,
                                 GetNameText((u8) arg2));
@@ -1587,13 +1568,7 @@ void mnDiagram_CreatePopupTexts(HSD_GObj* arg0, s32 selkind_or_nametag_slot_id,
         text->font_size.x = 0.0521f;
         text->font_size.y = 0.0521f;
         text->default_alignment = 1;
-        {
-            f32 y = pos.y;
-            f32 z = pos.z;
-            text->pos_x = pos.x;
-            text->pos_y = (new_var = -y);
-            text->pos_z = z;
-        }
+        setPopupTextPosition(text, &pos);
 
         if (use_nametag != 0) {
             kos = GetPersistentNameData((u8) selkind_or_nametag_slot_id)
@@ -1615,13 +1590,7 @@ void mnDiagram_CreatePopupTexts(HSD_GObj* arg0, s32 selkind_or_nametag_slot_id,
         text->font_size.x = 0.0521f;
         text->font_size.y = 0.0521f;
         text->default_alignment = 1;
-        {
-            f32 y = pos.y;
-            f32 z = pos.z;
-            text->pos_x = pos.x;
-            text->pos_y = (new_var = -y);
-            text->pos_z = z;
-        }
+        setPopupTextPosition(text, &pos);
         if (use_nametag != 0) {
             sd_count = GetPersistentNameData((u8) selkind_or_nametag_slot_id)
                            ->stats.sd_count;
@@ -1641,13 +1610,7 @@ void mnDiagram_CreatePopupTexts(HSD_GObj* arg0, s32 selkind_or_nametag_slot_id,
         text->font_size.x = 0.0521f;
         text->font_size.y = 0.0521f;
         text->default_alignment = 1;
-        {
-            f32 y = pos.y;
-            f32 z = pos.z;
-            text->pos_x = pos.x;
-            text->pos_y = (new_var = -y);
-            text->pos_z = z;
-        }
+        setPopupTextPosition(text, &pos);
         if (use_nametag != 0) {
             u32 count = GetPersistentNameData((u8) arg2)
                             ->vs_kos[(u8) selkind_or_nametag_slot_id];
@@ -2238,13 +2201,6 @@ void mnDiagram_DrawGridValues(HSD_GObj* arg0, s32 row_start, s32 col_start,
             }
         }
     }
-}
-
-static inline void mnDiagram_TextSetPos(HSD_Text* text, f32 x, f32 y, f32 z)
-{
-    text->pos_x = x;
-    text->pos_y = y;
-    text->pos_z = z;
 }
 
 void mnDiagram_DrawNameHeaders(HSD_GObj* arg0, s32 arg1, s32 arg2)
