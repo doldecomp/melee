@@ -63,14 +63,21 @@ void un_8031F9B4(HSD_GObj* gobj)
     HSD_JObjAnimAll(GET_JOBJ(gobj));
 }
 
-/// @todo .sdata2 order hack
-#ifdef MUST_MATCH
-static void order_sdata2(void)
+static void setupStandChild(HSD_JObj* child)
 {
-    (void) 0.55f;
-    (void) 1.0f;
+    f32 scale;
+
+    HSD_JObjSetTranslateXWithMtxDirty(child, -Toy_803060BC(0x1E, 0));
+    HSD_JObjSetTranslateYWithMtxDirty(child, -Toy_803060BC(0x1E, 1));
+    HSD_JObjSetTranslateZWithMtxDirty(child, -Toy_803060BC(0x1E, 2));
+    HSD_JObjSetRotationYWithMtxDirty(child, -Toy_803060BC(0x1E, 5));
+
+    scale = 0.55f * (Toy_803060BC(0x1E, 4) * (1.0f / Toy_803060BC(0x1E, 3)));
+
+    HSD_JObjSetScaleXWithMtxDirty(child, scale);
+    HSD_JObjSetScaleYWithMtxDirty(child, scale);
+    HSD_JObjSetScaleZWithMtxDirty(child, scale);
 }
-#endif
 
 void un_8031F9D8(CharacterKind char_index, int costume_id)
 {
@@ -225,7 +232,6 @@ static inline void un_8031FD18_SetupStand(void)
     HSD_GObj* stand_gobj;
     HSD_JObj* jobj;
     HSD_JObj* child;
-    f32 scale;
 
     stand_gobj = GObj_Create(0xE, 0xF, 0);
     jobj = HSD_JObjLoadJoint(un_804D6FE4->models[0]->joint);
@@ -234,31 +240,11 @@ static inline void un_8031FD18_SetupStand(void)
     HSD_GObj_SetupProc(stand_gobj, un_8031F990, 0);
 
     child = HSD_JObjGetChild(jobj);
-
-    HSD_JObjSetTranslateXWithMtxDirty(child, -Toy_803060BC(0x1E, 0));
-    HSD_JObjSetTranslateYWithMtxDirty(child, -Toy_803060BC(0x1E, 1));
-    HSD_JObjSetTranslateZWithMtxDirty(child, -Toy_803060BC(0x1E, 2));
-
-    scale = -Toy_803060BC(0x1E, 5);
-    HSD_JObjSetRotationYWithMtxDirty(child, scale);
-
-    scale = 0.55f * (Toy_803060BC(0x1E, 4) * (1.0f / Toy_803060BC(0x1E, 3)));
-
-    HSD_JObjSetScaleXWithMtxDirty(child, scale);
-    HSD_JObjSetScaleYWithMtxDirty(child, scale);
-    HSD_JObjSetScaleZWithMtxDirty(child, scale);
+    setupStandChild(child);
 
     lb_8000C1C0(jobj, un_804D6FF0);
     lb_8000C290(jobj, un_804D6FF0);
 }
-
-/// @todo .data order hack
-#ifdef MUST_MATCH
-static void order_data(void)
-{
-    (void) "!(jobj->flags & JOBJ_USE_QUATERNION)";
-}
-#endif
 
 void vi1201v1_Scene_OnEnter(void* arg)
 {
