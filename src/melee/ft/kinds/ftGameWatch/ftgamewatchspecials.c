@@ -25,7 +25,7 @@ static void ftGw_SpecialS_ItemJudgementExitHitlag(HSD_GObj* gobj);
 static void ftGw_SpecialS_ItemJudgementEnterHitlag(HSD_GObj* gobj);
 
 /// 0x8014C46C
-/// https://decomp.me/scratch/ohXu0 // Create Judgement item
+/// Create Judgement item
 void ftGw_SpecialS_ItemJudgementSetup(HSD_GObj* gobj)
 {
     Vec3 sp20;
@@ -60,7 +60,7 @@ void ftGw_SpecialS_ItemJudgementSetup(HSD_GObj* gobj)
 }
 
 /// 0x8014C590
-/// https://decomp.me/scratch/KIUEJ // Set Judgement flags + clear pointers
+/// Set Judgement flags + clear pointers
 void ftGw_SpecialS_ItemJudgementSetFlag(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -72,7 +72,7 @@ void ftGw_SpecialS_ItemJudgementSetFlag(HSD_GObj* gobj)
 }
 
 /// 0x8014C5CC
-/// https://decomp.me/scratch/jU9ji // Remove Judgement item
+/// Remove Judgement item
 void ftGw_SpecialS_ItemJudgementRemove(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -84,7 +84,7 @@ void ftGw_SpecialS_ItemJudgementRemove(HSD_GObj* gobj)
 }
 
 /// 0x8014C62C
-/// https://decomp.me/scratch/vFist // Apply hitlag to Judgement item
+/// Apply hitlag to Judgement item
 static void ftGw_SpecialS_ItemJudgementEnterHitlag(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -103,7 +103,7 @@ static void ftGw_SpecialS_ItemJudgementExitHitlag(HSD_GObj* gobj)
 }
 
 /// 0x8014C68C
-/// https://decomp.me/scratch/MTdOC // Check if Mr. Game & Watch is in any of
+/// Check if Mr. Game & Watch is in any of
 /// his SpecialS Motion States
 bool ftGw_SpecialS_ItemCheckJudgementRemove(HSD_GObj* gobj)
 {
@@ -172,7 +172,6 @@ static inline void ftGameWatch_SpecialS_SetVars(HSD_GObj* gobj)
 }
 
 /// 0x8014C7A0
-/// https://decomp.me/scratch/PnafK
 void ftGw_SpecialS_Enter(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -191,7 +190,6 @@ void ftGw_SpecialS_Enter(HSD_GObj* gobj)
 }
 
 /// 0x8014C828
-/// https://decomp.me/scratch/IzXqX
 void ftGw_SpecialAirS_Enter(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -211,7 +209,7 @@ void ftGw_SpecialAirS_Enter(HSD_GObj* gobj)
 }
 
 /// 0x8014C8BC
-/// https://decomp.me/scratch/xcOet // Mr. Game & Watch's Grounded Judgement
+/// Mr. Game & Watch's Grounded Judgement
 /// Animation callback
 void ftGw_SpecialS_Anim(HSD_GObj* gobj)
 {
@@ -241,7 +239,7 @@ void ftGw_SpecialAirS_IASA(HSD_GObj* gobj)
 }
 
 /// 0x8014C93C
-/// https://decomp.me/scratch/ulBEx // Mr. Game & Watch's Grounded Judgement
+/// Mr. Game & Watch's Grounded Judgement
 /// Physics callback
 void ftGw_SpecialS_Phys(HSD_GObj* gobj)
 {
@@ -255,7 +253,7 @@ void ftGw_SpecialS_Phys(HSD_GObj* gobj)
 }
 
 /// 0x8014C974
-/// https://decomp.me/scratch/kDevS // Mr. Game & Watch's Aerial Judgement
+/// Mr. Game & Watch's Aerial Judgement
 /// Physics callback
 void ftGw_SpecialAirS_Phys(HSD_GObj* gobj)
 {
@@ -288,7 +286,7 @@ static void ftGw_SpecialS_GroundToAir(HSD_GObj*);
 static void ftGw_SpecialAirS_AirToGround(HSD_GObj*);
 
 /// 0x8014CA10
-/// https://decomp.me/scratch/G9OvA // Mr. Game & Watch's Grounded Judgement
+/// Mr. Game & Watch's Grounded Judgement
 /// Collision callback
 void ftGw_SpecialS_Coll(HSD_GObj* gobj)
 {

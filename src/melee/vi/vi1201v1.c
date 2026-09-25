@@ -63,14 +63,21 @@ void un_8031F9B4(HSD_GObj* gobj)
     HSD_JObjAnimAll(GET_JOBJ(gobj));
 }
 
-/// @todo .sdata2 order hack
-#ifdef MUST_MATCH
-static void order_sdata2(void)
+static void setupStandChild(HSD_JObj* child)
 {
-    (void) 0.55f;
-    (void) 1.0f;
+    f32 scale;
+
+    HSD_JObjSetTranslateXWithMtxDirty(child, -Toy_803060BC(0x1E, 0));
+    HSD_JObjSetTranslateYWithMtxDirty(child, -Toy_803060BC(0x1E, 1));
+    HSD_JObjSetTranslateZWithMtxDirty(child, -Toy_803060BC(0x1E, 2));
+    HSD_JObjSetRotationYWithMtxDirty(child, -Toy_803060BC(0x1E, 5));
+
+    scale = 0.55f * (Toy_803060BC(0x1E, 4) * (1.0f / Toy_803060BC(0x1E, 3)));
+
+    HSD_JObjSetScaleXWithMtxDirty(child, scale);
+    HSD_JObjSetScaleYWithMtxDirty(child, scale);
+    HSD_JObjSetScaleZWithMtxDirty(child, scale);
 }
-#endif
 
 void un_8031F9D8(CharacterKind char_index, int costume_id)
 {
@@ -100,16 +107,15 @@ void fn_8031FAA8(HSD_GObj* gobj)
     f32 scale_x;
     f32 scale_y;
     HSD_JObj* child;
-    PAD_STACK(4);
 
-    HSD_JObjAnimAll(gobj->hsd_obj);
-    jobj = gobj->hsd_obj;
+    HSD_JObjAnimAll(GET_JOBJ(gobj));
+    jobj = GET_JOBJ(gobj);
     if (mn_8022F298(jobj) != 120.0f) {
         return;
     }
     lb_80011E24(jobj, &child, 1, -1);
     jobj = child;
-    HSD_JObjGetTranslation2(jobj, &pos);
+    HSD_JObjGetTranslation(jobj, &pos);
     scale_x = 0.0f;
     scale_y = 1.0f;
 
@@ -119,11 +125,10 @@ void fn_8031FAA8(HSD_GObj* gobj)
 }
 void fn_8031FB90(HSD_GObj* gobj, UNUSED intptr_t code)
 {
-    PAD_STACK(8);
     if (un_804D7000 != NULL) {
         lbShadow_8000F38C(0);
     }
-    vi_RunCamera(gobj, (u8*) &un_804D6FF4, 0x881);
+    vi_RunCamera(gobj, &un_804D6FF4, 0x881);
 }
 
 void fn_8031FC30(HSD_GObj* gobj)
@@ -227,7 +232,6 @@ static inline void un_8031FD18_SetupStand(void)
     HSD_GObj* stand_gobj;
     HSD_JObj* jobj;
     HSD_JObj* child;
-    f32 scale;
 
     stand_gobj = GObj_Create(0xE, 0xF, 0);
     jobj = HSD_JObjLoadJoint(un_804D6FE4->models[0]->joint);
@@ -235,36 +239,12 @@ static inline void un_8031FD18_SetupStand(void)
     GObj_SetupGXLink(stand_gobj, HSD_GObj_JObjCallback, 0xB, 0);
     HSD_GObj_SetupProc(stand_gobj, un_8031F990, 0);
 
-    if (jobj == NULL) {
-        child = NULL;
-    } else {
-        child = jobj->child;
-    }
-
-    HSD_JObjSetTranslateXWithMtxDirty(child, -Toy_803060BC(0x1E, 0));
-    HSD_JObjSetTranslateYWithMtxDirty(child, -Toy_803060BC(0x1E, 1));
-    HSD_JObjSetTranslateZWithMtxDirty(child, -Toy_803060BC(0x1E, 2));
-
-    scale = -Toy_803060BC(0x1E, 5);
-    HSD_JObjSetRotationYWithMtxDirty(child, scale);
-
-    scale = 0.55f * (Toy_803060BC(0x1E, 4) * (1.0f / Toy_803060BC(0x1E, 3)));
-
-    HSD_JObjSetScaleXWithMtxDirty(child, scale);
-    HSD_JObjSetScaleYWithMtxDirty(child, scale);
-    HSD_JObjSetScaleZWithMtxDirty(child, scale);
+    child = HSD_JObjGetChild(jobj);
+    setupStandChild(child);
 
     lb_8000C1C0(jobj, un_804D6FF0);
     lb_8000C290(jobj, un_804D6FF0);
 }
-
-/// @todo .data order hack
-#ifdef MUST_MATCH
-static void order_data(void)
-{
-    (void) "!(jobj->flags & JOBJ_USE_QUATERNION)";
-}
-#endif
 
 void vi1201v1_Scene_OnEnter(void* arg)
 {
@@ -273,7 +253,6 @@ void vi1201v1_Scene_OnEnter(void* arg)
     HSD_GObj* fog_gobj;
     HSD_LObj* lobj;
     HSD_GObj* light_gobj;
-    PAD_STACK(8);
 
     un_804D6FFC = input[0];
     un_804D6FFD = input[1];
