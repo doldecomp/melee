@@ -1905,6 +1905,11 @@ static inline void Camera_8002C1A8_inline(void)
     }
 }
 
+static inline f32 getPauseScale(void)
+{
+    return game_camera.x32C * cm_803BCCA0.x8C + cm_803BCCA0.x90;
+}
+
 void Camera_8002C1A8(void)
 {
     CameraInputs inputs;
@@ -1920,7 +1925,6 @@ void Camera_8002C1A8(void)
     f32 scale;
     s32 dir;
     s8 slot;
-    PAD_STACK(4);
 
     if (game_camera.x305 == 5) {
         return;
@@ -1987,7 +1991,7 @@ void Camera_8002C1A8(void)
     }
 
     if (dir != 0) {
-        scale = game_camera.x32C * cm_803BCCA0.x8C + cm_803BCCA0.x90;
+        scale = getPauseScale();
         game_camera.x304 = Camera_8002BA00(game_camera.x304, dir);
         slot = game_camera.x304;
         game_camera.x314.x = game_camera.x314.y = game_camera.x314.z = 0.0f;
@@ -2288,6 +2292,11 @@ void Camera_8002C908(void* arg0)
     Camera_ApplyQuake(&bounds, &game_camera.transform);
 }
 
+static inline f32 absf(f32 x)
+{
+    return ABS(x);
+}
+
 /// Camera_PauseThink
 void Camera_8002CB0C(CameraBounds* bounds)
 {
@@ -2305,7 +2314,6 @@ void Camera_8002CB0C(CameraBounds* bounds)
     f32 stick_y;
     f32 z_init;
     f32 abs_f1;
-    PAD_STACK(8);
 
     camera = &game_camera;
 
@@ -2340,12 +2348,12 @@ void Camera_8002CB0C(CameraBounds* bounds)
         }
     }
 
-    abs_f1 = ABS(stick_x);
+    abs_f1 = absf(stick_x);
     if (abs_f1 > 0.125) {
         x_val = stick_x;
     }
 
-    abs_f1 = ABS(stick_y);
+    abs_f1 = absf(stick_y);
     if (abs_f1 > 0.125) {
         y_val = stick_y;
     }
@@ -3646,7 +3654,7 @@ void Camera_8002F9E4(s8 arg0, s8 arg1)
     game_camera.x2D0.angle_right = Stage_GetCamAngleRadiansRight();
     game_camera.x2D0.angle_left = Stage_GetCamAngleRadiansLeft();
 
-    scale = game_camera.x32C * cm_803BCCA0.x8C + cm_803BCCA0.x90;
+    scale = getPauseScale();
     game_camera.x2D0.unk28 = scale * cm_803BCCA0.x94;
     game_camera.x2D0.unk2C = scale * cm_803BCCA0.x98;
     game_camera.x2D0.callback = (void (*)(Camera_x2D0*))(Event) fn_8002F908;
