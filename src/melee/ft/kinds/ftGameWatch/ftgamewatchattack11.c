@@ -19,7 +19,7 @@
 #include <melee/lb/lb_00B0.h>
 
 /// 0x8014BDB0
-/// https://decomp.me/scratch/7BADg // Create Insecticide Spray Item
+/// Create Insecticide Spray Item
 void ftGw_Attack11_ItemGreenhouseSetup(HSD_GObj* gobj)
 {
     Vec3 sp10;
@@ -49,7 +49,7 @@ void ftGw_Attack11_ItemGreenhouseSetup(HSD_GObj* gobj)
 }
 
 /// 0x8014BE84
-/// https://decomp.me/scratch/H3n4O // Decide Jab attack
+/// Decide Jab attack
 void ftGw_Attack11_DecideAction(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -80,7 +80,7 @@ void ftGw_Attack11_DecideAction(HSD_GObj* gobj)
 }
 
 /// 0x8014BF48
-/// https://decomp.me/scratch/zLba7 // Set flags on Mr. Game & Watch's
+/// Set flags on Mr. Game & Watch's
 /// Insecticide Sprayer
 void ftGw_Attack11_ItemGreenhouseSetFlag(HSD_GObj* gobj)
 {
@@ -91,7 +91,7 @@ void ftGw_Attack11_ItemGreenhouseSetFlag(HSD_GObj* gobj)
 }
 
 /// 0x8014BF7C
-/// https://decomp.me/scratch/2RDRo // Remove Mr. Game & Watch's Insecticide
+/// Remove Mr. Game & Watch's Insecticide
 /// Sprayer
 void ftGw_Attack11_ItemGreenhouseRemove(HSD_GObj* gobj)
 {
@@ -106,7 +106,7 @@ void ftGw_Attack11_ItemGreenhouseRemove(HSD_GObj* gobj)
 }
 
 /// 0x8014BFD4
-/// https://decomp.me/scratch/zVtUN // Apply hitlag to Mr. Game & Watch's
+/// Apply hitlag to Mr. Game & Watch's
 /// Insecticide Sprayer
 void ftGw_Attack11_ItemGreenhouseEnterHitlag(HSD_GObj* gobj)
 {
@@ -126,7 +126,7 @@ void ftGw_Attack11_ItemGreenhouseExitHitlag(HSD_GObj* gobj)
 }
 
 /// 0x8014C034
-/// https://decomp.me/scratch/Nkgz4 // Check if Mr. Game & Watch is in any of
+/// Check if Mr. Game & Watch is in any of
 /// his jab action states
 bool ftGw_Attack11_ItemGreenhouse_CheckAll(HSD_GObj* gobj)
 {
@@ -147,7 +147,7 @@ bool ftGw_Attack11_ItemGreenhouse_CheckAttack11(HSD_GObj* gobj)
 }
 
 /// 0x8014C07C
-/// https://decomp.me/scratch/OYf9U // Mr. Game & Watch's Jab Motion State
+/// Mr. Game & Watch's Jab Motion State
 /// handler
 void ftGw_Attack11_Enter(HSD_GObj* gobj)
 {
@@ -171,7 +171,7 @@ void ftGw_Attack11_Enter(HSD_GObj* gobj)
 }
 
 /// 0x8014C138
-/// https://decomp.me/scratch/BKUIu // Mr. Game & Watch's Jab Animation
+/// Mr. Game & Watch's Jab Animation
 /// callback
 void ftGw_Attack11_Anim(HSD_GObj* gobj)
 {

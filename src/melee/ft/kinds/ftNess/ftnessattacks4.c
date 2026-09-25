@@ -25,7 +25,6 @@ void ftNs_AttackS4_OnReflect(
 };
 
 /// 0x80114C24
-/// https://decomp.me/scratch/66eaB
 void ftNs_AttackS4_Enter(HSD_GObj* gobj) // Ness's F-Smash Motion State handler
 {
     Fighter* fp;
@@ -56,7 +55,6 @@ void ftNs_AttackS4_Enter(HSD_GObj* gobj) // Ness's F-Smash Motion State handler
 };
 
 /// 0x80114CC0
-/// https://decomp.me/scratch/E8Nsh
 bool ftNs_AttackS4_CheckNessBatRemove(
     HSD_GObj* gobj) // Check if Ness is in F-Smash + has Baseball Bat item
 {
@@ -74,7 +72,6 @@ bool ftNs_AttackS4_CheckNessBatRemove(
 };
 
 /// 0x80114CF4
-/// https://decomp.me/scratch/mpl3X
 void ftNs_AttackS4_ItemNessBatRemove(HSD_GObj* gobj) // Remove Baseball Bat
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -86,7 +83,6 @@ void ftNs_AttackS4_ItemNessBatRemove(HSD_GObj* gobj) // Remove Baseball Bat
 };
 
 /// 0x80114D34
-/// https://decomp.me/scratch/6ulYB
 void ftNs_AttackS4_ItemNessBatSetNULL(
     HSD_GObj* gobj) // Clear Baseball Bat GObj pointer
 {
@@ -98,7 +94,6 @@ void ftNs_AttackS4_ItemNessBatSetNULL(
 };
 
 /// 0x80114D50
-/// https://decomp.me/scratch/M8dFk
 void ftNs_AttackS4_Anim(HSD_GObj* gobj) // Ness's F-Smash Animation callback
 {
     Fighter* fighter_data1 = GET_FIGHTER(gobj);
@@ -132,7 +127,6 @@ void ftNs_AttackS4_Anim(HSD_GObj* gobj) // Ness's F-Smash Animation callback
 }
 
 /// 0x80114E04
-/// https://decomp.me/scratch/HTgCI
 void ftNs_AttackS4_IASA(HSD_GObj* gobj) // Ness's F-Smash IASA Callback
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -149,7 +143,6 @@ void ftNs_AttackS4_IASA(HSD_GObj* gobj) // Ness's F-Smash IASA Callback
 };
 
 /// 0x80114E64
-/// https://decomp.me/scratch/wQc4r
 void ftNs_AttackS4_Phys(HSD_GObj* gobj) // Ness's F-Smash Physics Callback
 
 {
@@ -158,7 +151,6 @@ void ftNs_AttackS4_Phys(HSD_GObj* gobj) // Ness's F-Smash Physics Callback
 };
 
 /// 0x80114E98
-/// https://decomp.me/scratch/nJ4hj
 void ftNs_AttackS4_Coll(HSD_GObj* gobj) // Ness's F-Smash Collision Callback
 {
     ft_80084104(gobj);

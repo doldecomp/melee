@@ -1922,7 +1922,7 @@ bool grIceMt_801FA364(struct grIceMt_FA364_State* state, f32* out,
 }
 
 int fn_801FA4CC(int num)
-{ // https://decomp.me/scratch/pSJNA
+{
     if (num == 1) {
         Ground_801C5740(num);
         num = 1;

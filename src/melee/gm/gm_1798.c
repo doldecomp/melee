@@ -7,7 +7,6 @@
 #include "gm_unsplit.h"
 #include "gmresult.h"
 #include "gmresultplayer.h"
-#include "gmresultplayer.static.h"
 #include "types.h"
 #include <melee/cm/camera.h>
 #include <melee/ef/efasync.h>
