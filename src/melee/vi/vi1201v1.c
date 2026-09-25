@@ -233,11 +233,7 @@ static inline void un_8031FD18_SetupStand(void)
     GObj_SetupGXLink(stand_gobj, HSD_GObj_JObjCallback, 0xB, 0);
     HSD_GObj_SetupProc(stand_gobj, un_8031F990, 0);
 
-    if (jobj == NULL) {
-        child = NULL;
-    } else {
-        child = jobj->child;
-    }
+    child = HSD_JObjGetChild(jobj);
 
     HSD_JObjSetTranslateXWithMtxDirty(child, -Toy_803060BC(0x1E, 0));
     HSD_JObjSetTranslateYWithMtxDirty(child, -Toy_803060BC(0x1E, 1));
@@ -271,7 +267,6 @@ void vi1201v1_Scene_OnEnter(void* arg)
     HSD_GObj* fog_gobj;
     HSD_LObj* lobj;
     HSD_GObj* light_gobj;
-    PAD_STACK(8);
 
     un_804D6FFC = input[0];
     un_804D6FFD = input[1];
