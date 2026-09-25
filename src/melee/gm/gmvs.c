@@ -475,7 +475,7 @@ MatchEnd* gm_8016B774(void)
     return &controller.state.x24C;
 }
 
-void fn_8016B784(void)
+void fn_8016B784(int arg0)
 {
     gmVs_GetSceneController()->state.hud_enabled = 1;
     grStadium_801D4150();
@@ -492,7 +492,7 @@ void fn_8016B7B4(int arg0)
     un_802FD404();
 }
 
-void fn_8016B7F8(void)
+void fn_8016B7F8(int arg0)
 {
     VsSceneController* tmp = gmVs_GetSceneController();
     PAD_STACK(4);
@@ -2055,9 +2055,9 @@ void gm_Scene_Vs_OnEnter(void* arg0)
     StartMeleeData* tmp = arg0;
     fn_8016E730(tmp);
     if (tmp->rules.x1_2) {
-        ifStatus_802F6EA4(8, -1, -1, 0, (void*) fn_8016B7B4, fn_8016B7F8);
+        ifStatus_802F6EA4(8, -1, -1, 0, fn_8016B7B4, fn_8016B7F8);
     } else {
-        ifStatus_802F6EA4(3, -1, -1, 0, (void*) fn_8016B7B4, fn_8016B7F8);
+        ifStatus_802F6EA4(3, -1, -1, 0, fn_8016B7B4, fn_8016B7F8);
     }
     ifTime_CreateTimers();
     ifStatus_802F665C(tmp->rules.x0_3);
@@ -2138,7 +2138,7 @@ void gm_Scene_SuddenDeath_OnEnter(void* user_data)
     StartMeleeData* data = user_data;
     data->rules.x6 = true;
     fn_8016E730(data);
-    ifStatus_802F6EA4(1, -1, -1, 0, (void*) fn_8016B7B4, fn_8016B7F8);
+    ifStatus_802F6EA4(1, -1, -1, 0, fn_8016B7B4, fn_8016B7F8);
     ifTime_CreateTimers();
     ifStatus_802F665C(data->rules.x0_3);
 }
