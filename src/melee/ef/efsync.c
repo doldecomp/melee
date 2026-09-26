@@ -6,6 +6,7 @@
 #include "efasync.h"
 #include "efdata.h"
 #include "eflib.h"
+#include "inlines.h"
 #include "types.h"
 #include <melee/ft/inlines.h>
 #include <sysdolphin/baselib/generator.h>
@@ -162,13 +163,7 @@ void* efSync_Spawn(s32 gfx_id, HSD_GObj* gobj, ...)
             efLib_Create_Attach_Scale(0x1F42, gobj, va_arg(vlist, HSD_JObj*));
         effect = ret_obj;
         if (effect != NULL) {
-            if (*va_arg(vlist, f32*) < 0.0f) {
-                half_pi = -M_PI_2;
-            } else {
-                half_pi = M_PI_2;
-            }
-            va_f32_1 = half_pi;
-            HSD_JObjSetRotationY(GET_JOBJ(effect->gobj), va_f32_1);
+            Effect_SetFacingDir(effect, *va_arg(vlist, f32*));
             jobj_2 = GET_JOBJ(effect->gobj);
             HSD_JObjAnimAll(jobj_2);
         }
@@ -178,13 +173,7 @@ void* efSync_Spawn(s32 gfx_id, HSD_GObj* gobj, ...)
             efLib_Create_Attach_Scale(0x1F43, gobj, va_arg(vlist, HSD_JObj*));
         effect = ret_obj;
         if (effect != NULL) {
-            if (*va_arg(vlist, f32*) < 0.0f) {
-                half_pi = -M_PI_2;
-            } else {
-                half_pi = M_PI_2;
-            }
-            va_f32_1 = half_pi;
-            HSD_JObjSetRotationY(GET_JOBJ(effect->gobj), va_f32_1);
+            Effect_SetFacingDir(effect, *va_arg(vlist, f32*));
             jobj_2 = GET_JOBJ(effect->gobj);
             HSD_JObjAnimAll(jobj_2);
         }
