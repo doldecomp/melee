@@ -1122,7 +1122,7 @@ void* efAsync_Dispatch(s32 gfx_id, HSD_GObj* gobj, va_list vlist)
     while (efLib_AnimCount != 0) {
         count = efLib_AnimCount - 1;
         efLib_AnimCount = count;
-        HSD_JObjAnimAll(((HSD_JObj**) efLib_AnimQueue)[count]);
+        HSD_JObjAnimAll(efLib_AnimQueue[count]);
     }
 #if 1
 #else
@@ -1272,20 +1272,19 @@ void efAsync_LoadAsync(int index)
 
 void efAsync_OnLoad(HSD_Archive* archive, u8* data, u32 length, int index)
 {
-    EF_DAT_Entry* result;
+    EF_DataTable* table;
 
     lbArchive_InitializeDAT(archive, data, length);
-    result = HSD_ArchiveGetPublicAddress(
+    table = HSD_ArchiveGetPublicAddress(
         archive, efAsync_DatEntries[index].effDataTable_name);
-    if ((u32) result->ef_DAT_file | (u32) result->effDataTable_name) {
-        psInitDataBankLocate((HSD_Archive*) result->ef_DAT_file,
-                             (HSD_Archive*) result->effDataTable_name, NULL);
+    if ((uintptr_t) table->ptcl | (uintptr_t) table->texg) {
+        psInitDataBankLocate(table->ptcl, table->texg, NULL);
     }
 }
 
 void efAsync_LoadSync(int idx)
 {
-    EF_DAT_Entry* spC;
+    EF_DataTable* table;
     EF_DAT_Entry* lookup;
     lookup = &efAsync_DatEntries[idx];
 
@@ -1299,18 +1298,16 @@ void efAsync_LoadSync(int idx)
         return;
     }
     {
-        bool chk = lbArchive_80017040(NULL, lookup->ef_DAT_file, &spC,
+        bool chk = lbArchive_80017040(NULL, lookup->ef_DAT_file, &table,
                                       lookup->effDataTable_name, 0);
-        if ((u32) spC->ef_DAT_file | (u32) spC->effDataTable_name) {
+        if ((uintptr_t) table->ptcl | (uintptr_t) table->texg) {
             if (chk) {
-                psInitDataBankLoad(idx, (void*) spC->ef_DAT_file,
-                                   (void*) spC->effDataTable_name, NULL, NULL);
+                psInitDataBankLoad(idx, table->ptcl, table->texg, NULL, NULL);
             } else {
-                psInitDataBank(idx, (void*) spC->ef_DAT_file,
-                               (void*) spC->effDataTable_name, NULL, NULL);
+                psInitDataBank(idx, table->ptcl, table->texg, NULL, NULL);
             }
         }
-        lookup->data = &spC->data;
+        lookup->data = table->effects;
     }
 }
 

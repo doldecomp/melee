@@ -1,11 +1,3 @@
-/*
- * TODO: I looked at the strings in the ASM, I think there was only
- *       ever eflib.c and efasync.c (?) The files in this folder
- *       and splits / symbols should be adjusted accordingly with time,
- *       but for the sake of matching files %, we can leave these
- *       separate for now. Also I dont know if anyone cares as long
- *       as it matches lol.
- */
 #include "eflib.h"
 
 #include <math.h>
@@ -32,9 +24,6 @@
 #include <sysdolphin/baselib/psdisp.h>
 #include <sysdolphin/baselib/psstructs.h>
 #include <sysdolphin/baselib/state.h>
-// externs
-
-extern EF_DAT_Entry efAsync_DatEntries[51];
 
 // forward declarations to avoid sdata2 pollution
 void HSD_MtxGetScale(Mtx, Vec3*);
@@ -373,7 +362,7 @@ void efLib_Update(HSD_GObj* gobj)
         }
     }
     if (effect->scale_flags != EF_SCALE_NO_INHERIT) {
-        if ((effect->attach_jobj) != NULL) {
+        if (effect->attach_jobj != NULL) {
             Vec3 scale;
             if (HSD_JObjGetParent(effect->attach_jobj) != NULL) {
                 HSD_JObj* attach_jobj = effect->attach_jobj;
@@ -399,14 +388,16 @@ void efLib_Update(HSD_GObj* gobj)
     }
 }
 
+/// Effect jobjs created this frame, animated once their spawn call returns.
+/* 458EE0 */ HSD_JObj* efLib_AnimQueue[32];
+
 EF_Effect* efLib_Create(int gfx_id, HSD_GObj* parent_gobj)
 {
     EF_Effect* effect;
     EF_EffectDesc* desc;
     u8 p_link;
 
-    desc = &((EF_EffectDesc*) efAsync_DatEntries[gfx_id / 1000]
-                 .data)[gfx_id % 1000];
+    desc = &efAsync_DatEntries[gfx_id / 1000].data[gfx_id % 1000];
 
     if (efLib_LoadKind == EF_LOADKIND_ASYNC) {
         if (efLib_EffectCount >= 64) {
@@ -492,7 +483,7 @@ EF_Effect* efLib_Create(int gfx_id, HSD_GObj* parent_gobj)
                 {
                     s32 temp_r5_2 = efLib_AnimCount;
                     efLib_AnimCount++;
-                    ((HSD_JObj**) efLib_AnimQueue)[temp_r5_2] = jobj;
+                    efLib_AnimQueue[temp_r5_2] = jobj;
                     if (efLib_AnimCount >= 32) {
                         HSD_ASSERTREPORT(224, 0, "Over Anime Call\n");
                     }
@@ -1080,13 +1071,12 @@ void efLib_Cb_SetRotYAndTransition(EF_Effect* effect)
     f64 temp_d;
     f32 rotate_y;
     HSD_JObj* eff_jobj;
-    HSD_JObj* user_data;
+    Fighter* fp;
 
-    user_data = (HSD_JObj*) effect->user_data;
+    fp = effect->user_data;
     eff_jobj = GET_JOBJ(effect->gobj);
-    (void) user_data;
-    if (user_data != NULL) {
-        if (user_data->scale.x < 0.0F) {
+    if (fp != NULL) {
+        if (fp->facing_dir < 0.0F) {
             temp_d = -M_PI_2;
         } else {
             temp_d = M_PI_2;
@@ -1216,15 +1206,14 @@ void efLib_Cb_SetScaleRotY_FromFighter(EF_Effect* effect)
     HSD_JObj* jobj_2;
     f32 rotate_y;
     HSD_JObj* jobj_1;
-    void* user_data;
+    Fighter* fp;
     HSD_GObj* gobj_1;
     PAD_STACK(0xC);
 
     gobj_1 = effect->parent_gobj;
     jobj_1 = GET_JOBJ(gobj_1);
     jobj_2 = GET_JOBJ(effect->gobj);
-    user_data = gobj_1->user_data;
-    user_data = (void*) GET_FIGHTER(gobj_1);
+    fp = GET_FIGHTER(gobj_1);
     HSD_JObjGetScale(jobj_1, &scale_1);
     HSD_JObjGetScale(jobj_2, &scale_2);
     scale_1.x *= scale_2.x;
@@ -1232,7 +1221,7 @@ void efLib_Cb_SetScaleRotY_FromFighter(EF_Effect* effect)
     scale_1.z *= scale_2.z;
     HSD_JObjSetScale(jobj_2, &scale_1);
 
-    if (((Fighter*) user_data)->facing_dir < 0.0F) {
+    if (fp->facing_dir < 0.0F) {
         half_pi = -M_PI_2;
     } else {
         half_pi = M_PI_2;
@@ -1371,70 +1360,49 @@ void efLib_SetTevKonstColor(HSD_JObj* jobj, s32 count, u32 konst, u32 tev0)
     tobj->tev->tev0.b = tev0 & 0xFF;
 }
 
-// JObj animation queue!
-
-// Effect JObjs are appended during efLib_Create, then HSD_JObjAnimAll is
-// called on each at end-of-frame. Currently you have to cast to HSD_JObj**
-// while keeping its type as EF_ParamEntry[0x10] for matching purposes...
-// (compiler bases the efLib_ParamTable address off this array for some reason
-// (???), so both must be the same type x_X ... if you can figure out a way
-// around this pls fix ty).
-
-/* 458EE0 */ EF_ParamEntry efLib_AnimQueue[0x10];
-
-// Stores gobj effect params (gfx_id, alpha)
-// Used by efLib_Cb_ApplyStoredAlpha to set TEV konst alpha.
-
-/* 458F60 */ EF_ParamEntry efLib_ParamTable[0x8];
+/// Per-gobj TEV konst alpha and gfx id, read by efLib_Cb_ApplyStoredAlpha.
+/* 458F60 */ EF_ParamEntry efLib_ParamTable[8];
 
 void efLib_SetParamAlpha(HSD_GObj* gobj, u8 alpha)
 {
-    s32 idx;
+    s32 i;
 
-    // WHY
-    EF_ParamEntry* base = efLib_AnimQueue + 0x10;
-
-    for (idx = 0; idx < 8; idx++) {
-        if (base[idx].gobj == gobj) {
+    for (i = 0; i < 8; i++) {
+        if (efLib_ParamTable[i].gobj == gobj) {
             goto found;
         }
     }
-    for (idx = 0; idx < 8; idx++) {
-        if (base[idx].gobj == NULL) {
+    for (i = 0; i < 8; i++) {
+        if (efLib_ParamTable[i].gobj == NULL) {
             goto found;
         }
     }
     return;
 
 found:
-    // WHY
-    efLib_AnimQueue[idx + 0x10].gobj = gobj;
-    efLib_AnimQueue[idx + 0x10].alpha = alpha;
+    efLib_ParamTable[i].gobj = gobj;
+    efLib_ParamTable[i].alpha = alpha;
 }
 
 void efLib_SetParamGfxId(HSD_GObj* gobj, s32 gfx_id)
 {
-    s32 idx;
+    s32 i;
 
-    // WHY
-    EF_ParamEntry* base = efLib_AnimQueue + 0x10;
-
-    for (idx = 0; idx < 8; idx++) {
-        if (base[idx].gobj == gobj) {
+    for (i = 0; i < 8; i++) {
+        if (efLib_ParamTable[i].gobj == gobj) {
             goto found;
         }
     }
-    for (idx = 0; idx < 8; idx++) {
-        if (base[idx].gobj == NULL) {
+    for (i = 0; i < 8; i++) {
+        if (efLib_ParamTable[i].gobj == NULL) {
             goto found;
         }
     }
     return;
 
 found:
-    // WHY
-    efLib_AnimQueue[idx + 0x10].gobj = gobj;
-    efLib_AnimQueue[idx + 0x10].gfx_id = gfx_id;
+    efLib_ParamTable[i].gobj = gobj;
+    efLib_ParamTable[i].gfx_id = gfx_id;
 }
 
 void efLib_Cb_ApplyStoredAlpha(EF_Effect* effect)

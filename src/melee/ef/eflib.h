@@ -9,7 +9,7 @@
 #include <dolphin/mtx.h>
 
 typedef struct EF_ParamEntry {
-    /* 0x0 */ void* gobj;
+    /* 0x0 */ HSD_GObj* gobj;
     /* 0x4 */ u16 gfx_id;
     /* 0x6 */ u16 alpha;
 } EF_ParamEntry; /* size = 0x8 */
@@ -118,7 +118,7 @@ efLib_CreateGenerator_AppSRT_SetFacingDirScale(s32 gfx_id, va_list vlist);
                                                             HSD_JObj* jobj,
                                                             Vec3* vec);
 
-extern EF_ParamEntry efLib_AnimQueue[0x10];
-extern EF_ParamEntry efLib_ParamTable[0x8];
+extern HSD_JObj* efLib_AnimQueue[32];
+extern EF_ParamEntry efLib_ParamTable[8];
 
 #endif

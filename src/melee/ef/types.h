@@ -88,10 +88,17 @@ struct EF_QueuedEffect {
     /* +20 */ f32 extra2;  // second extra float used depending on spawn_kind
 }; /* size = 0x24 */
 
+/// Public root of an effect archive, e.g. `effCommonDataTable`.
+typedef struct EF_DataTable {
+    /* 0x0 */ void* ptcl; ///< Particle command bank
+    /* 0x4 */ void* texg; ///< Particle texture bank
+    /* 0x8 */ EF_EffectDesc effects[];
+} EF_DataTable;
+
 typedef struct EF_DAT_Entry {
     /* 0x0 */ char* ef_DAT_file;       // ex. "EfCoData.dat"
     /* 0x4 */ char* effDataTable_name; // ex. "effCommonDataTable"
-    /* 0x8 */ void* data;              // loaded data pointer
+    /* 0x8 */ EF_EffectDesc* data;     // loaded data table's effects
 } EF_DAT_Entry;                        /* size = 0xC */
 ASSERT_SIZE(EF_DAT_Entry, 0xC);
 
