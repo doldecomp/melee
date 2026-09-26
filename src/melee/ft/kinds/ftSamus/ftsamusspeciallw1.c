@@ -82,13 +82,14 @@ void ftSs_SpecialLw_Enter(HSD_GObj* gobj)
 
     fp->gr_vel *= samus_attr->x6C;
     if (fp->motion_id == 0x28) {
-        Fighter_ChangeMotionState(gobj, 0x163, 0, 3.0f, 1.0f, 0.0f, NULL);
+        Fighter_ChangeMotionState(gobj, 0x163, Ft_MF_None, 3.0f, 1.0f, 0.0f,
+                                  NULL);
         ftSamus_SpecialLw_StartAction_inner(gobj);
         fp->cmd_vars[1] = 2;
         ftSs_SpecialLw_8012B5F0(gobj);
         return;
     }
-    Fighter_ChangeMotionState(gobj, 0x163, 0, 0.0f, 1.0f, 0.0f, NULL);
+    Fighter_ChangeMotionState(gobj, 0x163, Ft_MF_None, 0.0f, 1.0f, 0.0f, NULL);
     ftAnim_8006EBA4(gobj);
     ftSamus_SpecialLw_StartAction_inner(gobj);
 }
@@ -103,7 +104,7 @@ void ftSs_SpecialAirLw_Enter(HSD_GObj* gobj)
     fp->self_vel.x *= samus_attr->x70;
     fp->self_vel.y = samus_attr->x58;
 
-    Fighter_ChangeMotionState(gobj, 0x164, 0, 0.0f, 1.0f, 0.0f, NULL);
+    Fighter_ChangeMotionState(gobj, 0x164, Ft_MF_None, 0.0f, 1.0f, 0.0f, NULL);
     ftAnim_8006EBA4(gobj);
     ftSamus_SpecialLw_StartAction_inner(gobj);
 }

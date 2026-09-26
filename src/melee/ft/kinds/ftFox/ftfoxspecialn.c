@@ -243,7 +243,8 @@ void ftFx_SpecialN_Enter(HSD_GObj* gobj)
 
     ftCommon_8007D7FC(fp);
 
-    Fighter_ChangeMotionState(gobj, ftFx_MS_SpecialNStart, 0, 0, 1, 0, NULL);
+    Fighter_ChangeMotionState(gobj, ftFx_MS_SpecialNStart, Ft_MF_None, 0, 1, 0,
+                              NULL);
     ftFox_SpecialN_InitializeState(gobj, fp);
 
     fp->gr_vel = 0;
@@ -260,8 +261,8 @@ void ftFx_SpecialAirN_Enter(HSD_GObj* gobj)
     Fighter* fp = fp = GET_FIGHTER(gobj);
     ftFox_DatAttrs* da = fp->dat_attrs;
 
-    Fighter_ChangeMotionState(gobj, ftFx_MS_SpecialAirNStart, 0, 0, 1, 0,
-                              NULL);
+    Fighter_ChangeMotionState(gobj, ftFx_MS_SpecialAirNStart, Ft_MF_None, 0, 1,
+                              0, NULL);
     ftFox_SpecialN_InitializeState(gobj, fp);
 
     fp->mv.fx.SpecialN.isBlasterLoop = false;

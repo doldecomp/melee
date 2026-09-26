@@ -35,7 +35,8 @@ void ftMh_RockCrushDown_Coll(HSD_GObj* gobj) {}
 void ftMh_MS_357_801526D8(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    Fighter_ChangeMotionState(gobj, ftMh_MS_PaperCrush, 0, 0, 1, 0, 0);
+    Fighter_ChangeMotionState(gobj, ftMh_MS_PaperCrush, Ft_MF_None, 0, 1, 0,
+                              0);
     ftAnim_8006EBA4(gobj);
     fp->mv.mh.unk0.x0 = 0;
 }

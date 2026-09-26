@@ -92,7 +92,8 @@ void ftFx_SpecialLw_Enter(HSD_GObj* gobj)
 {
     u8 _[8];
 
-    Fighter_ChangeMotionState(gobj, ftFx_MS_SpecialLwStart, 0, 0, 1, 0, NULL);
+    Fighter_ChangeMotionState(gobj, ftFx_MS_SpecialLwStart, Ft_MF_None, 0, 1,
+                              0, NULL);
     ftAnim_8006EBA4(gobj);
 
     ftFox_SpecialLw_SetVars(gobj);
@@ -106,8 +107,8 @@ void ftFx_SpecialAirLw_Enter(HSD_GObj* gobj)
     fp->self_vel.y = 0;
     fp->self_vel.x /= da->xA8_FOX_REFLECTOR_MOMENTUM_PRESERVE_X;
 
-    Fighter_ChangeMotionState(gobj, ftFx_MS_SpecialAirLwStart, 0, 0, 1, 0,
-                              NULL);
+    Fighter_ChangeMotionState(gobj, ftFx_MS_SpecialAirLwStart, Ft_MF_None, 0,
+                              1, 0, NULL);
     ftAnim_8006EBA4(gobj);
 
     ftFox_SpecialLw_SetVars(gobj);
@@ -800,7 +801,7 @@ void ftFx_SpecialLwHit_Enter(HSD_GObj* gobj)
         msid = ftFx_MS_SpecialAirLwHit;
     }
 
-    Fighter_ChangeMotionState(gobj, msid, 0, 0, 1, 0, NULL);
+    Fighter_ChangeMotionState(gobj, msid, Ft_MF_None, 0, 1, 0, NULL);
     ftFx_SpecialLwHit_SetCall(gobj);
 
     fp->accessory4_cb = ftFx_SpecialLw_CreateReflectGFX;
@@ -912,11 +913,13 @@ void ftFx_SpecialAirLwEnd_AirToGround(HSD_GObj* gobj)
 /// Motion State handler
 void ftFx_SpecialLwEnd_Enter(HSD_GObj* gobj)
 {
-    Fighter_ChangeMotionState(gobj, ftFx_MS_SpecialLwEnd, 0, 0, 1, 0, NULL);
+    Fighter_ChangeMotionState(gobj, ftFx_MS_SpecialLwEnd, Ft_MF_None, 0, 1, 0,
+                              NULL);
 }
 
 /// 0x800E9DC0 - Fox & Falco's aerial Reflector End Motion State handler
 void ftFx_SpecialAirLwEnd_Enter(HSD_GObj* gobj)
 {
-    Fighter_ChangeMotionState(gobj, ftFx_MS_SpecialAirLwEnd, 0, 0, 1, 0, NULL);
+    Fighter_ChangeMotionState(gobj, ftFx_MS_SpecialAirLwEnd, Ft_MF_None, 0, 1,
+                              0, NULL);
 }

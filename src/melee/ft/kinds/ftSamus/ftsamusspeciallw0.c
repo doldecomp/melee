@@ -112,7 +112,7 @@ void ftSs_Init_80128B1C(HSD_GObj* gobj, float angle, float arg9, float argA)
     if (fp->ground_or_air == GA_Ground) {
         ftCommon_8007D5D4(fighter2);
     }
-    Fighter_ChangeMotionState(gobj, 0x156, 0, arg9, argA, 0.0f, 0);
+    Fighter_ChangeMotionState(gobj, 0x156, Ft_MF_None, arg9, argA, 0.0f, 0);
     ftAnim_8006EBA4(gobj);
 }
 
@@ -249,7 +249,7 @@ void ftSs_SpecialLw_80129048(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftCommon_8007D5D4(fp);
-    Fighter_ChangeMotionState(gobj, 0x156, 0x10, fp->cur_anim_frame,
+    Fighter_ChangeMotionState(gobj, 0x156, JOBJ_HIDDEN, fp->cur_anim_frame,
                               fp->frame_speed_mul, 0.0f, 0);
 }
 
@@ -257,7 +257,7 @@ void ftSs_SpecialLw_801290A4(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftCommon_8007D7FC(fp);
-    Fighter_ChangeMotionState(gobj, 0x155, 0x10, fp->cur_anim_frame,
+    Fighter_ChangeMotionState(gobj, 0x155, JOBJ_HIDDEN, fp->cur_anim_frame,
                               fp->frame_speed_mul, 0.0f, 0);
 }
 

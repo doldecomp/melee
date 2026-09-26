@@ -140,8 +140,8 @@ void ftKb_SpecialNYs_8010941C(Fighter_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     KirbyHatStruct* ys_hat = ft_80459B88.hats[Ft_Kind_Samus];
     fp->cmd_vars[0] = 0;
-    Fighter_ChangeMotionState(gobj, ftKb_MS_YsSpecialN1, 0, 0.0F, 1.0F, 0.0F,
-                              NULL);
+    Fighter_ChangeMotionState(gobj, ftKb_MS_YsSpecialN1, Ft_MF_None, 0.0F,
+                              1.0F, 0.0F, NULL);
     ftAnim_8006EBA4(gobj);
     HSD_JObjAddAnimAll(fp->u.kb.hat.jobj,
                        (HSD_AnimJoint*) ys_hat->hat_dynamics[1], 0, 0);
@@ -161,8 +161,8 @@ void ftKb_SpecialNYs_801094FC(Fighter_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     KirbyHatStruct* ys_hat = ft_80459B88.hats[Ft_Kind_Samus];
     fp->cmd_vars[0] = 0;
-    Fighter_ChangeMotionState(gobj, ftKb_MS_YsSpecialAirNCapture2, 0, 0.0F,
-                              1.0F, 0.0F, NULL);
+    Fighter_ChangeMotionState(gobj, ftKb_MS_YsSpecialAirNCapture2, Ft_MF_None,
+                              0.0F, 1.0F, 0.0F, NULL);
     ftAnim_8006EBA4(gobj);
     HSD_JObjAddAnimAll(fp->u.kb.hat.jobj,
                        (HSD_AnimJoint*) ys_hat->hat_dynamics[3], 0, 0);

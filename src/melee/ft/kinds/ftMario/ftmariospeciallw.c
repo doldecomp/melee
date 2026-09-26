@@ -79,7 +79,8 @@ void ftMr_SpecialLw_Enter(HSD_GObj* gobj)
     u8 _[28];
 
     setCmdVar2(gobj);
-    Fighter_ChangeMotionState(gobj, ftMr_MS_SpecialAirLw, 0, 0, 1, 0, NULL);
+    Fighter_ChangeMotionState(gobj, ftMr_MS_SpecialAirLw, Ft_MF_None, 0, 1, 0,
+                              NULL);
     ftAnim_8006EBA4(gobj);
     fp->self_vel.y = sa->speciallw.vel_y - sa->speciallw.tap_y_vel_max;
     ftCommon_ClampSelfVelX(fp, sa->speciallw.air_momentum_x);
@@ -97,7 +98,8 @@ void ftMr_SpecialAirLw_Enter(HSD_GObj* gobj)
     u8 _[28];
 
     setCmdVar2(gobj);
-    Fighter_ChangeMotionState(gobj, ftMr_MS_SpecialAirLw, 0, 0, 1, 0, NULL);
+    Fighter_ChangeMotionState(gobj, ftMr_MS_SpecialAirLw, Ft_MF_None, 0, 1, 0,
+                              NULL);
     ftAnim_8006EBA4(gobj);
     if ((s32) fp->u.mr.x2234_tornadoCharge != 0) {
         sub_val = 0;
