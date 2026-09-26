@@ -1141,15 +1141,13 @@ void efLib_Cb_LifetimeEndSpawn(EF_Effect* effect)
 
 void efLib_Cb_SetScaleRotY_FromFighter(EF_Effect* effect)
 {
-    f64 half_pi;
     Vec3 scale_1;
     Vec3 scale_2;
     HSD_JObj* jobj_2;
-    f32 rotate_y;
     HSD_JObj* jobj_1;
     Fighter* fp;
     HSD_GObj* gobj_1;
-    PAD_STACK(0xC);
+    PAD_STACK(4);
 
     gobj_1 = effect->parent_gobj;
     jobj_1 = GET_JOBJ(gobj_1);
@@ -1162,13 +1160,7 @@ void efLib_Cb_SetScaleRotY_FromFighter(EF_Effect* effect)
     scale_1.z *= scale_2.z;
     HSD_JObjSetScale(jobj_2, &scale_1);
 
-    if (fp->facing_dir < 0.0F) {
-        half_pi = -M_PI_2;
-    } else {
-        half_pi = M_PI_2;
-    }
-    rotate_y = half_pi;
-    HSD_JObjSetRotationY(jobj_2, rotate_y);
+    HSD_JObjSetRotationY(jobj_2, Effect_GetFacingRotationY(fp->facing_dir));
 }
 
 void efLib_Cb_SetRotYZ_FromParamZ_FighterDir(EF_Effect* effect)
