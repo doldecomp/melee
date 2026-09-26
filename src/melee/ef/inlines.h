@@ -13,7 +13,7 @@
 #define GET_EFFECT(gobj) ((EF_Effect*) HSD_GObjGetUserData(gobj))
 #endif
 
-static inline void Effect_SetFacingDir(EF_Effect* effect, f32 facing_dir)
+static inline f32 Effect_GetFacingRotationY(f32 facing_dir)
 {
     f64 rotation;
 
@@ -22,7 +22,13 @@ static inline void Effect_SetFacingDir(EF_Effect* effect, f32 facing_dir)
     } else {
         rotation = M_PI_2;
     }
-    HSD_JObjSetRotationY(GET_JOBJ(effect->gobj), rotation);
+    return rotation;
+}
+
+static inline void Effect_SetFacingDir(EF_Effect* effect, f32 facing_dir)
+{
+    HSD_JObjSetRotationY(GET_JOBJ(effect->gobj),
+                         Effect_GetFacingRotationY(facing_dir));
 }
 
 #endif

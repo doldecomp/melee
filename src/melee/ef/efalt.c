@@ -24,7 +24,7 @@ void* efAlt_Spawn(s32 gfx_id, HSD_GObj* gobj, va_list vlist)
 
     ret_obj = NULL;
     efLib_LoadKind = EF_LOADKIND_SYNC;
-    PAD_STACK(64);
+    PAD_STACK(24);
 
     switch (gfx_id) {
     case 0x479:

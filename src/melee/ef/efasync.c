@@ -59,7 +59,7 @@ void* efAsync_Dispatch(s32 gfx_id, HSD_GObj* gobj, va_list vlist)
     Vec3* va_vec3;
     s32 count;
 
-    PAD_STACK(40);
+    PAD_STACK(16);
 
     ret_obj = NULL;
     switch (gfx_id) {
