@@ -149,12 +149,11 @@ bool mnDiagram_IsDistanceOverflow(u32 distance)
             return true;
         }
         return false;
-    } else {
-        if (distance >= 0x186A0) {
-            return true;
-        }
-        return false;
     }
+    if (distance >= 0x186A0) {
+        return true;
+    }
+    return false;
 }
 
 u32 mnDiagram_ConvertDistanceForDisplay(u32 distance)
@@ -2252,25 +2251,19 @@ void mnDiagram_DrawNameHeaders(HSD_GObj* arg0, s32 arg1, s32 arg2)
 
 HSD_JObj* mnDiagram_CreateFighterIcon(int idx, int arg1)
 {
-    HSD_JObj* sp10;
+    HSD_JObj* child;
     StaticModelDesc* model = &MenMainFaceB_Top;
-    HSD_JObj* temp_r3;
-    f32 var_f1;
+    HSD_JObj* jobj;
 
-    temp_r3 = HSD_JObjLoadJoint(model->joint);
-    HSD_JObjAddAnimAll(temp_r3, model->animjoint, model->matanim_joint,
+    jobj = HSD_JObjLoadJoint(model->joint);
+    HSD_JObjAddAnimAll(jobj, model->animjoint, model->matanim_joint,
                        model->shapeanim_joint);
-    if (arg1 != 0) {
-        var_f1 = 1.0f;
-    } else {
-        var_f1 = 0.0f;
-    }
-    HSD_JObjReqAnimAll(temp_r3, var_f1);
-    HSD_JObjAnimAll(temp_r3);
-    lb_80011E24(temp_r3, &sp10, 2, -1);
-    HSD_JObjReqAnimAll(sp10, idx);
-    HSD_JObjAnimAll(sp10);
-    return temp_r3;
+    HSD_JObjReqAnimAll(jobj, arg1 != 0 ? 1.0f : 0.0f);
+    HSD_JObjAnimAll(jobj);
+    lb_80011E24(jobj, &child, 2, -1);
+    HSD_JObjReqAnimAll(child, idx);
+    HSD_JObjAnimAll(child);
+    return jobj;
 }
 
 static inline HSD_JObj* mnDiagram_LoadHeaderIcon(StaticModelDesc* joint_data,
