@@ -166,7 +166,7 @@ HSD_GObj* it_802C5000(Item_GObj* parent, Vec3* pos, s32 bone, s32 kind,
             (0.5f * ip->xDD4_itemVar.mewtwoshadowball.x48);
         ip->xDD4_itemVar.mewtwoshadowball.x4C = 0;
         ip->xDD4_itemVar.mewtwoshadowball.x50 = 0.0f;
-        ip->xDD4_itemVar.mewtwoshadowball.x54 = ftLib_800869D4(parent);
+        ip->xDD4_itemVar.mewtwoshadowball.x54 = ftLib_GetModelScale(parent);
         ip->xDD4_itemVar.mewtwoshadowball.x58.z = 0.0f;
         ip->xDD4_itemVar.mewtwoshadowball.x58.y = 0.0f;
         ip->xDD4_itemVar.mewtwoshadowball.x58.x = 0.0f;
@@ -215,7 +215,7 @@ Item_GObj* it_802C519C(Item_GObj* parent, Vec3* pos, s32 kind, s32 max_charge,
         ip->xDD4_itemVar.mewtwoshadowball.x44 = 0.0f;
         ip->xDD4_itemVar.mewtwoshadowball.x4C = 0;
         ip->xDD4_itemVar.mewtwoshadowball.x50 = 1.0f;
-        ip->xDD4_itemVar.mewtwoshadowball.x54 = ftLib_800869D4(parent);
+        ip->xDD4_itemVar.mewtwoshadowball.x54 = ftLib_GetModelScale(parent);
         ip->xDD4_itemVar.mewtwoshadowball.x58.z = 0.0f;
         ip->xDD4_itemVar.mewtwoshadowball.x58.y = 0.0f;
         ip->xDD4_itemVar.mewtwoshadowball.x58.x = 0.0f;
@@ -279,7 +279,7 @@ void it_802C53F0(Item_GObj* gobj, Vec3* pos, float angle, float charge,
     {
         it_802C5B18(gobj, ip->xDD4_itemVar.mewtwoshadowball.x2C);
         HSD_MtxGetRotation(
-            ftLib_80086630(ip->xDD4_itemVar.mewtwoshadowball.x2C, ip->xDC4)
+            ftLib_GetPartJObj(ip->xDD4_itemVar.mewtwoshadowball.x2C, ip->xDC4)
                 ->mtx,
             &rot);
         tr.x = tr.y = tr.z = 0.0f;
@@ -306,7 +306,8 @@ void it_802C53F0(Item_GObj* gobj, Vec3* pos, float angle, float charge,
                 base;
         }
         ip->xDD4_itemVar.mewtwoshadowball.x20 = 0;
-        ip->facing_dir = ftLib_800865C0(ip->xDD4_itemVar.mewtwoshadowball.x2C);
+        ip->facing_dir =
+            ftLib_GetFacingDir(ip->xDD4_itemVar.mewtwoshadowball.x2C);
         ip->pos = *pos;
         ip->xDD4_itemVar.mewtwoshadowball.x28 = 0;
         ip->x40_vel.x = ip->xDD4_itemVar.mewtwoshadowball.x4.y *

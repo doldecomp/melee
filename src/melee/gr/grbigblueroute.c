@@ -186,7 +186,7 @@ void grBigBlueRoute_8020B920(void)
 
     fighter = Ground_GetP1Fighter();
     if (fighter != NULL) {
-        ftLib_80086644(fighter, &fighter_pos);
+        ftLib_GetPos(fighter, &fighter_pos);
         grBigBlueRoute_8020DED4(&fighter_pos);
         Camera_8002F3AC();
     }
@@ -391,9 +391,9 @@ void grBigBlueRoute_8020BF38(Ground_GObj* gobj)
     Ground_801C3D44(0, 30.0f, 4000.0f);
 
     if (fighter != NULL) {
-        ftLib_80086644(fighter, &fighter_pos);
+        ftLib_GetPos(fighter, &fighter_pos);
 
-        if (ftLib_80086EC0(fighter) == 0) {
+        if (ftLib_IsInHitstun(fighter) == 0) {
             grBigBlueRoute_8020DED4(&fighter_pos);
 
             for (i = 0; i < 3; i++) {
@@ -764,7 +764,7 @@ void grBigBlueRoute_8020CD20(Ground_GObj* gobj)
 
     fighter = Ground_GetP1Fighter();
     if (fighter != NULL) {
-        ftLib_80086644(fighter, &fighter_pos);
+        ftLib_GetPos(fighter, &fighter_pos);
     } else {
         return;
     }

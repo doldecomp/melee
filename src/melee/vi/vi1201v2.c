@@ -30,15 +30,6 @@
 #include <sysdolphin/baselib/gobjplink.h>
 #include <sysdolphin/baselib/gobjproc.h>
 
-/// @todo .sdata2 order hack
-#ifdef MUST_MATCH
-static void order_sdata2(void)
-{
-    (void) 0.55f;
-    (void) 1.0f;
-}
-#endif
-
 Vec3 un_804002F8 = { 0.0f, 0.0f, 0.0f };
 Vec3 un_80400304 = { 0.0f, 0.0f, 0.0f };
 
@@ -68,6 +59,22 @@ void un_803204C0(HSD_GObj* gobj)
 void un_803204E4(HSD_GObj* gobj)
 {
     HSD_JObjAnimAll(GET_JOBJ(gobj));
+}
+
+static void setupStandChild(HSD_JObj* child)
+{
+    f32 scale;
+
+    HSD_JObjSetTranslateXWithMtxDirty(child, -Toy_803060BC(0x1E, 0));
+    HSD_JObjSetTranslateYWithMtxDirty(child, -Toy_803060BC(0x1E, 1));
+    HSD_JObjSetTranslateZWithMtxDirty(child, -Toy_803060BC(0x1E, 2));
+    HSD_JObjSetRotationYWithMtxDirty(child, -Toy_803060BC(0x1E, 5));
+
+    scale = 0.55f * (Toy_803060BC(0x1E, 4) * (1.0f / Toy_803060BC(0x1E, 3)));
+
+    HSD_JObjSetScaleXWithMtxDirty(child, scale);
+    HSD_JObjSetScaleYWithMtxDirty(child, scale);
+    HSD_JObjSetScaleZWithMtxDirty(child, scale);
 }
 
 void un_80320508(CharacterKind char_kind, int costume)
@@ -175,9 +182,8 @@ void un_803207C4(void)
 
 void un_803208F0(HSD_GObj* gobj, UNUSED intptr_t code)
 {
-    PAD_STACK(8);
     lbShadow_8000F38C(0);
-    vi_RunCamera(gobj, (u8*) &un_804D7028, 0x881);
+    vi_RunCamera(gobj, &un_804D7028, 0x881);
 }
 
 void un_80320984(HSD_GObj* gobj)
@@ -257,7 +263,6 @@ static inline void un_80320A40_SetupStand(void)
     HSD_GObj* gobj;
     HSD_JObj* jobj;
     HSD_JObj* child;
-    f32 scale;
 
     gobj = GObj_Create(0xE, 0xF, 0);
     un_804D7034 = gobj;
@@ -266,36 +271,12 @@ static inline void un_80320A40_SetupStand(void)
     GObj_SetupGXLink(gobj, HSD_GObj_JObjCallback, 0xB, 0);
     HSD_GObj_SetupProc(gobj, un_803204C0, 0x17);
 
-    if (jobj == NULL) {
-        child = NULL;
-    } else {
-        child = jobj->child;
-    }
-
-    HSD_JObjSetTranslateXWithMtxDirty(child, -Toy_803060BC(0x1E, 0));
-    HSD_JObjSetTranslateYWithMtxDirty(child, -Toy_803060BC(0x1E, 1));
-    HSD_JObjSetTranslateZWithMtxDirty(child, -Toy_803060BC(0x1E, 2));
-
-    scale = -Toy_803060BC(0x1E, 5);
-    HSD_JObjSetRotationYWithMtxDirty(child, scale);
-
-    scale = 0.55f * (Toy_803060BC(0x1E, 4) * (1.0f / Toy_803060BC(0x1E, 3)));
-
-    HSD_JObjSetScaleXWithMtxDirty(child, scale);
-    HSD_JObjSetScaleYWithMtxDirty(child, scale);
-    HSD_JObjSetScaleZWithMtxDirty(child, scale);
+    child = HSD_JObjGetChild(jobj);
+    setupStandChild(child);
 
     lb_8000C1C0(jobj, un_804D7024);
     lb_8000C290(jobj, un_804D7024);
 }
-
-/// @todo .data order hack
-#ifdef MUST_MATCH
-static void order_data(void)
-{
-    (void) "!(jobj->flags & JOBJ_USE_QUATERNION)";
-}
-#endif
 
 void vi1201v2_Scene_OnEnter(void* arg)
 {

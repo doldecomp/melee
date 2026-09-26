@@ -65,9 +65,9 @@ static void ftMh_MS_343_801511FC(HSD_GObj* gobj)
     u8 _[16];
     switch (fp->mv.mh.unk4.x0) {
     case ftMh_UnkEnum0_Unk00: {
-        HSD_GObj* enemy_gobj = ftLib_8008627C(&fp->cur_pos, gobj);
+        HSD_GObj* enemy_gobj = ftLib_FindNearestOpponent(&fp->cur_pos, gobj);
         if (enemy_gobj != NULL) {
-            Camera_8002E6FC((int) ftLib_80086BE0(enemy_gobj));
+            Camera_8002E6FC((int) ftLib_GetPlayerIndex(enemy_gobj));
         } else {
             Camera_8002E6FC(0);
         }

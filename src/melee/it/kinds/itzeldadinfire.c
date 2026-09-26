@@ -243,7 +243,7 @@ void itZeldadinfire_UnkMotion0_Phys(Item_GObj* gobj)
             float *f3, *f4;
             f3 = &f1;
             f4 = &f2;
-            ftLib_800865D8(ip->xDD4_itemVar.zeldadinfire.xDE0, f4, f3);
+            ftLib_GetLStick(ip->xDD4_itemVar.zeldadinfire.xDE0, f4, f3);
             if (ABS(f1) > attrs->x20) {
                 ip->xDD4_itemVar.zeldadinfire.xDE8 =
                     ip->facing_dir * (attrs->x24 * f1) +

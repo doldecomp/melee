@@ -325,7 +325,7 @@ s32 it_80272D40(Item_GObj* item_gobj)
 {
     bool chk;
 
-    if (ftLib_80086960(item_gobj)) {
+    if (ftLib_IsFighter(item_gobj)) {
         return 0;
     }
     if ((item_gobj != NULL) &&
@@ -556,22 +556,22 @@ void it_80273500(Item_GObj* item_gobj, Vec3* arg1)
 void it_80273598(Item_GObj* item_gobj, s32 arg1, s32 arg2)
 {
     Item* item = GET_ITEM(item_gobj);
-    if (item->owner != NULL && ftLib_80086960(item->owner)) {
-        ftLib_80086D40(item->owner, arg1, arg2);
+    if (item->owner != NULL && ftLib_IsFighter(item->owner)) {
+        ftLib_StartItemRumble(item->owner, arg1, arg2);
     }
 }
 
 void it_80273600(Item_GObj* item_gobj)
 {
     Item* item = GET_ITEM(item_gobj);
-    if (item->owner != NULL && ftLib_80086960(item->owner)) {
-        ftLib_80086E68(item->owner);
+    if (item->owner != NULL && ftLib_IsFighter(item->owner)) {
+        ftLib_StopItemRumble(item->owner);
     }
 }
 
 void it_80273648(Item_GObj* item_gobj, s32 arg1, s32 arg2)
 {
-    ftLib_80086DC4(arg1, arg2);
+    ftLib_StartItemRumbleAll(arg1, arg2);
 }
 
 void it_80273670(Item_GObj* item_gobj, int arg1, f32 arg8)
@@ -684,9 +684,9 @@ void it_80273748(Item_GObj* item_gobj, Vec3* pos, Vec3* vel)
         sp3C.x = -sp3C.x;
         sp3C.y = -sp3C.y;
         sp3C.z = -sp3C.z;
-        lb_8000B1CC(ftLib_80086630((Fighter_GObj*) owner, item->xDC4), &sp3C,
-                    &sp54);
-        lb_8000B1CC(ftLib_80086630((Fighter_GObj*) owner, item->xDC4), NULL,
+        lb_8000B1CC(ftLib_GetPartJObj((Fighter_GObj*) owner, item->xDC4),
+                    &sp3C, &sp54);
+        lb_8000B1CC(ftLib_GetPartJObj((Fighter_GObj*) owner, item->xDC4), NULL,
                     &sp48);
         sp3C.x = sp54.x - sp48.x;
         sp3C.y = sp54.y - sp48.y;
@@ -704,10 +704,10 @@ static inline void getOwnerJointPosition(Item* item, HSD_GObj* owner_gobj,
                                          Vec3* offset, Vec3* world_pos)
 {
     if (offset != NULL) {
-        lb_8000B1CC(ftLib_80086630((Fighter_GObj*) owner_gobj, item->xDC4),
+        lb_8000B1CC(ftLib_GetPartJObj((Fighter_GObj*) owner_gobj, item->xDC4),
                     offset, world_pos);
     } else {
-        lb_8000B1CC(ftLib_80086630((Fighter_GObj*) owner_gobj, item->xDC4),
+        lb_8000B1CC(ftLib_GetPartJObj((Fighter_GObj*) owner_gobj, item->xDC4),
                     NULL, world_pos);
     }
 }
@@ -827,7 +827,7 @@ void it_80273F34(Item_GObj* item_gobj, HSD_GObj* arg_gobj2)
         HSD_JObjSetRotationY(item_jobj, rotate);
     }
 
-    if (ftLib_80086960(arg_gobj2)) {
+    if (ftLib_IsFighter(arg_gobj2)) {
         Item_8026A848(item_gobj, arg_gobj2);
         it_8027B070(item_gobj, arg_gobj2);
     }
@@ -926,8 +926,8 @@ void it_802742F4(Item_GObj* item_gobj, HSD_GObj* gobj, Fighter_Part ftpart)
     item = item_gobj->user_data;
     lb_8000B804(item_gobj->hsd_obj, item->xC8_joint);
     Item_8026849C(item_gobj);
-    if (ftLib_80086960(gobj)) {
-        u32 bit_idx = ftLib_80086BE0(gobj);
+    if (ftLib_IsFighter(gobj)) {
+        u32 bit_idx = ftLib_GetPlayerIndex(gobj);
         item->xDC8_word.flags.xF |= 1 << bit_idx;
         if (!item->xDC8_word.flags.x0) {
             item->owner = gobj;
@@ -935,7 +935,7 @@ void it_802742F4(Item_GObj* item_gobj, HSD_GObj* gobj, Fighter_Part ftpart)
             item->x51C = gobj;
         }
         item->xDC4 = ftpart;
-        item->x20_team_id = ftLib_80086EB4(gobj);
+        item->x20_team_id = ftLib_GetTeam(gobj);
         item->xD50_landNum = 0;
         item->xDC8_word.flags.x13 = 1;
         HSD_JObjClearFlagsAll(HSD_JObjGetChild(item_gobj->hsd_obj),
@@ -996,7 +996,7 @@ void it_80274594(Item_GObj* item_gobj)
     HSD_JObj* item_jobj = GET_JOBJ(item_gobj);
     PAD_STACK(4);
 
-    item->scl *= ftLib_80086A0C(item->owner);
+    item->scl *= ftLib_GetScale(item->owner);
     sp18.z = item->scl;
     sp18.y = item->scl;
     sp18.x = item->scl;
@@ -1321,7 +1321,7 @@ void it_80274F48(Item_GObj* item_gobj, s32 bone_id, HSD_GObj* arg2_gobj,
 {
     u8 _[8];
     HSD_JObj* jobj = get_bone_by_id(item_gobj, bone_id);
-    lb_8000C2F8(jobj, ftLib_80086630(arg2_gobj, part_idx));
+    lb_8000C2F8(jobj, ftLib_GetPartJObj(arg2_gobj, part_idx));
 }
 
 void it_80274FDC(Item_GObj* item_gobj, s32 bone_id, Fighter_GObj* arg2_gobj,
@@ -1329,7 +1329,7 @@ void it_80274FDC(Item_GObj* item_gobj, s32 bone_id, Fighter_GObj* arg2_gobj,
 {
     u8 _[8];
     HSD_JObj* jobj = get_bone_by_id(item_gobj, bone_id);
-    lb_8000C1C0(jobj, ftLib_80086630(arg2_gobj, part_idx));
+    lb_8000C1C0(jobj, ftLib_GetPartJObj(arg2_gobj, part_idx));
 }
 
 void it_80275070(Item_GObj* item_gobj, s32 bone_id)

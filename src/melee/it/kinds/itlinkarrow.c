@@ -201,7 +201,7 @@ HSD_GObj* it_802A83E0(f32 facing_dir, Fighter_GObj* arg1, Vec3* arg2,
         item->xDD4_itemVar.linkarrow.xB4[0] = NULL;
         item->xDD4_itemVar.linkarrow.xE0 = arg1;
         item->xDD4_itemVar.linkarrow.xC0 =
-            ftLib_800869D4(item->xDD4_itemVar.linkarrow.xE0);
+            ftLib_GetModelScale(item->xDD4_itemVar.linkarrow.xE0);
         item->xDD4_itemVar.linkarrow.xE4 = -1;
         item->xDD4_itemVar.linkarrow.xEC = 0.0f;
         item->xDD4_itemVar.linkarrow.xE8 = 0.0f;
@@ -266,7 +266,7 @@ bool itLinkArrow_802A850C(Item_GObj* gobj, Vec3* arg1, Vec3* arg2, f32 arg3,
     {
         it_802A8C7C(gobj);
         HSD_MtxGetRotation(
-            ftLib_80086630(ip->xDD4_itemVar.linkarrow.xE0, ip->xDC4)->mtx,
+            ftLib_GetPartJObj(ip->xDD4_itemVar.linkarrow.xE0, ip->xDC4)->mtx,
             &rot);
         pos.x = pos.y = pos.z = 0.0f;
         it_8027429C(gobj, &pos);
@@ -276,7 +276,7 @@ bool itLinkArrow_802A850C(Item_GObj* gobj, Vec3* arg1, Vec3* arg2, f32 arg3,
             (arg4 * ((attr->x8 - attr->x4) / arg5)) + attr->x4;
         ip->xDD4_itemVar.linkarrow.xA4 =
             (arg4 * ((attr->x10 - attr->xC) / arg5)) + attr->xC;
-        ip->facing_dir = ftLib_800865C0(ip->xDD4_itemVar.linkarrow.xE0);
+        ip->facing_dir = ftLib_GetFacingDir(ip->xDD4_itemVar.linkarrow.xE0);
         HSD_JObjSetRotationY(jobj, M_PI_2 * ip->facing_dir);
         ip->pos = *arg1;
         ip->xDD4_itemVar.linkarrow.x18 = *arg2;
@@ -553,7 +553,7 @@ bool itLinkarrow_UnkMotion2_Anim(Item_GObj* gobj)
     Item* item;
     f32 pad[1];
     item = GET_ITEM(gobj);
-    if (ftLib_80086A18(item->xDD4_itemVar.linkarrow.xC4) != 1) {
+    if (ftLib_IsShielding(item->xDD4_itemVar.linkarrow.xC4) != 1) {
         return true;
     }
     return it_802A8330_inline(gobj);
@@ -566,7 +566,7 @@ void itLinkarrow_UnkMotion2_Phys(HSD_GObj* gobj)
     item->xDD4_itemVar.linkarrow.xD4 =
         (ftCo_80094098(item->xDD4_itemVar.linkarrow.xC4,
                        &item->xDD4_itemVar.linkarrow.xC8) *
-         ftLib_800869D4(item->xDD4_itemVar.linkarrow.xC4));
+         ftLib_GetModelScale(item->xDD4_itemVar.linkarrow.xC4));
     item->pos.x = (item->xDD4_itemVar.linkarrow.xD4 *
                    cosf(item->xDD4_itemVar.linkarrow.xD8)) +
                   item->xDD4_itemVar.linkarrow.xC8;
@@ -787,7 +787,7 @@ bool itLinkArrow_Logic98_HitShield(Item_GObj* gobj)
             f32 temp_f31;
             itLinkArrow_Logic98_HitShield_inline(gobj, &scale);
             ip->xDD4_itemVar.linkarrow.xC4 = ip->xCF4_fighterGObjUnk;
-            temp_f31 = ftLib_800869D4(ip->xDD4_itemVar.linkarrow.xC4);
+            temp_f31 = ftLib_GetModelScale(ip->xDD4_itemVar.linkarrow.xC4);
             ip->xDD4_itemVar.linkarrow.xD4 =
                 temp_f31 * ftCo_80094098(ip->xDD4_itemVar.linkarrow.xC4,
                                          &ip->xDD4_itemVar.linkarrow.xC8);

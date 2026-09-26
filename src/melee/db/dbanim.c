@@ -79,7 +79,7 @@ void fn_ToggleMiscFighterVisuals(void)
 
 u8 fn_8022697C(Fighter_GObj* owner)
 {
-    if (ftLib_80086960(owner) != 0) {
+    if (ftLib_IsFighter(owner) != 0) {
         Fighter* ft = GET_FIGHTER(owner);
         return ft->x21FC_flag.byte;
     } else {

@@ -2680,7 +2680,8 @@ int ftCo_800BB220(Fighter* fp, Item* ip, Vec3* arg2, f32 arg3)
     if (ip->owner == fp->gobj) {
         return 0;
     }
-    if (ftLib_80086960(ip->owner) && ftCo_IsAlly(fp, GET_FIGHTER(ip->owner))) {
+    if (ftLib_IsFighter(ip->owner) && ftCo_IsAlly(fp, GET_FIGHTER(ip->owner)))
+    {
         return 0;
     }
     switch (ip->kind) {

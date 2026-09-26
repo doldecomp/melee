@@ -1160,8 +1160,8 @@ bool grGreatBay_801F6708(u32 unk, HSD_GObj* gobj)
     f32 arg;
     PAD_STACK(8);
 
-    ftLib_80086644(gobj, &current);
-    ftLib_80086684(gobj, &previous);
+    ftLib_GetPos(gobj, &current);
+    ftLib_GetPrevPos(gobj, &previous);
     if (ft_80087838(gobj) == false) {
         if (current.y < -5.0f) {
             if (previous.y > -5.0f) {

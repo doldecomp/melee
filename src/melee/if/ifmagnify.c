@@ -202,7 +202,7 @@ void ifMagnify_802FB8C0(HSD_GObj* gobj, intptr_t code)
     if (should_display && player->state.is_offscreen) {
         fighter_gobj = Player_GetEntity(slot);
         if (fighter_gobj != NULL) {
-            ftLib_80086A58(fighter_gobj, &screen_pos);
+            ftLib_GetScreenPos(fighter_gobj, &screen_pos);
             dir.x = screen_pos.x - 320.0f;
             dir.y = -((f32) screen_pos.y - 240.0f);
 
@@ -269,9 +269,9 @@ static inline void ifMagnify_GetCornerColors(GXColor* colors, Vec3* world_pos)
     }
 }
 
-void ifMagnify_802FBBDC(HSD_GObj* gobj)
+void ifMagnify_802FBBDC(HSD_GObj* gobj, intptr_t code)
 {
-    UNUSED u8 top_pad[8];
+    UNUSED u8 top_pad[4];
     int i;
     ifMagnify* magnify;
     HSD_CObj* cobj;
@@ -296,7 +296,6 @@ void ifMagnify_802FBBDC(HSD_GObj* gobj)
     f32 mix1;
     f32 mix2;
     f32 mix3;
-    bool should_display;
     bool is_outside;
 
     magnify = &ifMagnify_804A1DE0;
@@ -304,8 +303,7 @@ void ifMagnify_802FBBDC(HSD_GObj* gobj)
         magnify->player[i].state.is_offscreen = 0;
     }
 
-    should_display = ifMagnify_IsHUDVisible();
-    if (should_display) {
+    if (ifMagnify_IsHUDVisible()) {
         cobj = gobj->hsd_obj;
         HSD_CObjGetOrtho(cobj, &top, &bottom, &left, &right);
         if (HSD_CObjSetCurrent(cobj) != 0) {
@@ -317,7 +315,8 @@ void ifMagnify_802FBBDC(HSD_GObj* gobj)
             player = &magnify->player[i];
             fighter_gobj = Player_GetEntity(i);
             if (player->state.ignore_offscreen || fighter_gobj == NULL ||
-                !ftLib_80086B64(fighter_gobj) || !ftLib_80086ED0(fighter_gobj))
+                !ftLib_IsOffscreen(fighter_gobj) ||
+                !ftLib_CanBeMagnified(fighter_gobj))
             {
                 continue;
             }
@@ -325,7 +324,7 @@ void ifMagnify_802FBBDC(HSD_GObj* gobj)
             scale = ftLib_80086B80(fighter_gobj) / 8.0f;
             HSD_CObjSetOrtho(cobj, top * scale, bottom * scale, left * scale,
                              right * scale);
-            ftLib_80086B90(fighter_gobj, &interest_pos);
+            ftLib_GetCameraSubjectBonePos(fighter_gobj, &interest_pos);
             HSD_CObjSetInterest(cobj, &interest_pos);
             interest_pos.z = 300.0f;
             HSD_CObjSetEyePosition(cobj, &interest_pos);
@@ -444,13 +443,14 @@ void ifMagnify_802FBBDC(HSD_GObj* gobj)
     }
 }
 
-void ifMagnify_802FC3BC(void) {}
+void ifMagnify_802FC3BC(void* user_data) {}
 
 void ifMagnify_802FC3C0(s32 slot)
 {
     ifMagnifyPlayer* player;
     HSD_GObj* gobj;
     HSD_JObj* jobj;
+    HSD_ImageDesc* images;
     HSD_JObj* child;
     HSD_MObj* mobj;
 
@@ -460,7 +460,7 @@ void ifMagnify_802FC3C0(s32 slot)
     }
 
     gobj = GObj_Create(HSD_GOBJ_CLASS_UI, 15, 0);
-    GObj_InitUserData(gobj, 0xE, (void (*)(void*)) ifMagnify_802FC3BC, player);
+    GObj_InitUserData(gobj, 0xE, ifMagnify_802FC3BC, player);
 
     jobj = HSD_JObjLoadJoint((*ifMagnify_804A1DE0.model_desc)->joint);
     HSD_GObjObject_80390A70(gobj, HSD_GObj_JObjKind, jobj);
@@ -470,13 +470,10 @@ void ifMagnify_802FC3C0(s32 slot)
     if (slot == 0) {
         player->idesc = child->u.dobj->next->mobj->tobj->imagedesc;
     } else {
-        ifMagnify* base = &ifMagnify_804A1DE0;
-
-        base->image_descs[slot - 1] = *ifMagnify_804A1DE0.player[0].idesc;
-        player->idesc =
-            (base = (ifMagnify*) ((HSD_ImageDesc*) &ifMagnify_804A1DE0 +
-                                  (slot - 1)))
-                ->image_descs;
+        ifMagnify_804A1DE0.image_descs[slot - 1] =
+            *ifMagnify_804A1DE0.player[0].idesc;
+        images = ifMagnify_804A1DE0.image_descs;
+        player->idesc = &images[slot - 1];
         player->idesc->image_ptr = HSD_MemAlloc(
             (GXGetTexBufferSize(player->idesc->width, player->idesc->height,
                                 player->idesc->format, 0, 0) +
@@ -515,18 +512,18 @@ void ifMagnify_802FC618(void)
     HSD_ImageDesc* idesc;
     f32 half_height;
     f32 half_width;
-    int pad;
+    f32 scale = 0.1f;
     HSD_RectS16 viewport;
 
     gobj = GObj_Create(HSD_GOBJ_CLASS_UI, 15, 0);
     cobj = lb_80013B14((HSD_CameraDescPerspective*) &ifMagnify_803F97E8);
     HSD_GObjObject_80390A70(gobj, HSD_GObj_CameraKind, cobj);
-    GObj_SetupGXLinkMax(gobj, (GObj_RenderFunc) (Event) ifMagnify_802FBBDC, 0);
+    GObj_SetupGXLinkMax(gobj, ifMagnify_802FBBDC, 0);
     gobj->gxlink_prios = 0x10;
 
     idesc = player0->idesc;
-    half_height = 0.1f * idesc->height;
-    half_width = 0.1f * idesc->width;
+    half_height = scale * idesc->height;
+    half_width = scale * idesc->width;
     HSD_CObjSetOrtho(cobj, half_height, -half_height, -half_width, half_width);
 
     viewport.xmin = 0;
@@ -597,10 +594,10 @@ void ifMagnify_802FC870(void)
     HSD_Archive** archive;
     s32 i;
 
-    memzero(&ifMagnify_804A1DE0, 0x74);
+    memzero(&ifMagnify_804A1DE0, offsetof(ifMagnify, image_descs));
     ifMagnify_802FC7C0(&ifMagnify_804A1DE0);
     archive = ifAll_GetArchive();
-    lbArchive_LoadSections(*archive, (void**) &ifMagnify_804A1DE0,
+    lbArchive_LoadSections(*archive, &ifMagnify_804A1DE0.model_desc,
                            ifMagnify_804D57E8, 0);
     for (i = 0; i < 6; i++) {
         ifMagnify_802FC3C0(i);

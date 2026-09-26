@@ -35,7 +35,7 @@ static void ftGw_AttackLw3_ItemManholeExitHitlag(HSD_GObj*);
 static void ftGw_AttackLw3_ItemManholeEnterHitlag(HSD_GObj*);
 
 /// 0x8014AB48
-/// https://decomp.me/scratch/x73Hx // Create Manhole Item
+/// Create Manhole Item
 void ftGw_AttackLw3_ItemManholeSetup(HSD_GObj* gobj)
 {
     Vec3 sp10;
@@ -71,7 +71,7 @@ void ftGw_AttackLw3_ItemManholeSetup(HSD_GObj* gobj)
 }
 
 /// 0x8014AC40
-/// https://decomp.me/scratch/JEvaL // Swap item GObj pointers
+/// Swap item GObj pointers
 void ftGw_AttackLw3_ItemManholeRemove(HSD_GObj* gobj)
 {
     HSD_GObj* manholeGObj;
@@ -90,7 +90,7 @@ void ftGw_AttackLw3_ItemManholeRemove(HSD_GObj* gobj)
 }
 
 /// 0x8014ACB0
-/// https://decomp.me/scratch/09CUB // Remove Manhole on damage
+/// Remove Manhole on damage
 void ftGw_AttackLw3_ItemManholeOnDamage(HSD_GObj* gobj)
 {
     u8 _[8];
@@ -104,7 +104,7 @@ void ftGw_AttackLw3_ItemManholeOnDamage(HSD_GObj* gobj)
 }
 
 /// 0x8014AD38
-/// https://decomp.me/scratch/Kw1d3 // Apply hitlag to Manhole item
+/// Apply hitlag to Manhole item
 static void ftGw_AttackLw3_ItemManholeEnterHitlag(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -123,7 +123,7 @@ static void ftGw_AttackLw3_ItemManholeExitHitlag(HSD_GObj* gobj)
 }
 
 /// 0x8014AD98
-/// https://decomp.me/scratch/IERdX // Check if Mr. Game & Watch is performing
+/// Check if Mr. Game & Watch is performing
 /// Down Tilt - remove if returns true
 bool ftGw_AttackLw3_ItemCheckManholeRemove(HSD_GObj* gobj)
 {
@@ -135,7 +135,7 @@ bool ftGw_AttackLw3_ItemCheckManholeRemove(HSD_GObj* gobj)
 }
 
 /// 0x8014ADB8
-/// https://decomp.me/scratch/rGgyM // Mr. Game & Watch's Down Tilt Motion
+/// Mr. Game & Watch's Down Tilt Motion
 /// State Handler
 void ftGw_AttackLw3_Enter(HSD_GObj* gobj)
 {
@@ -151,7 +151,7 @@ void ftGw_AttackLw3_Enter(HSD_GObj* gobj)
 }
 
 /// 0x8014AE3C
-/// https://decomp.me/scratch/h03Ja // Mr. Game & Watch's Down Tilt Animation
+/// Mr. Game & Watch's Down Tilt Animation
 /// callback
 void ftGw_AttackLw3_Anim(HSD_GObj* gobj)
 {
@@ -183,7 +183,7 @@ void ftGw_AttackLw3_IASA(HSD_GObj* gobj)
 }
 
 /// 0x8014AF6C
-/// https://decomp.me/scratch/Xp4C5 // Mr. Game & Watch's Down Tilt Physics
+/// Mr. Game & Watch's Down Tilt Physics
 /// callback
 void ftGw_AttackLw3_Phys(HSD_GObj* gobj)
 {
@@ -191,7 +191,7 @@ void ftGw_AttackLw3_Phys(HSD_GObj* gobj)
 }
 
 /// 0x8014AF8C
-/// https://decomp.me/scratch/0stMN // Mr. Game & Watch's Down Tilt Collision
+/// Mr. Game & Watch's Down Tilt Collision
 /// callback
 void ftGw_AttackLw3_Coll(HSD_GObj* gobj)
 {
