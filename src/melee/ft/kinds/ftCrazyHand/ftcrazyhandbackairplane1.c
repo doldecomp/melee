@@ -23,7 +23,7 @@ void ftCh_Init_801592D4(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     ftCrazyHand_DatAttrs* da = fp->ft_data->ext_attr;
     fp->cmd_vars[1] = 0;
-    Fighter_ChangeMotionState(gobj, 0x16F, Ft_MF_None, 0.0f, 1.0f, 0.0f, NULL);
+    Fighter_ChangeMotionState(gobj, 0x16F, 0, 0.0f, 1.0f, 0.0f, NULL);
     ftAnim_8006EBA4(gobj);
     fp->x2222_b2 = true;
     ftCommon_8007E2F4(fp, 511);

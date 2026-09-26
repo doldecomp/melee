@@ -58,8 +58,8 @@ void ftMt_SpecialLw_Enter(HSD_GObj* gobj)
     fp->cmd_vars[0] = 0;
     fp->u.mt.x222C_disableGObj = NULL;
 
-    Fighter_ChangeMotionState(gobj, ftMt_MS_SpecialLw, Ft_MF_None, 0.0f, 1.0f,
-                              0.0f, NULL);
+    Fighter_ChangeMotionState(gobj, ftMt_MS_SpecialLw, 0, 0.0f, 1.0f, 0.0f,
+                              NULL);
     ftAnim_8006EBA4(gobj);
 
     fp->accessory4_cb = ftMt_SpecialLw_CreateDisable;
@@ -79,8 +79,8 @@ void ftMt_SpecialAirLw_Enter(HSD_GObj* gobj)
     fp->u.mt.x222C_disableGObj = NULL;
     fp->self_vel.y = 0.0f;
 
-    Fighter_ChangeMotionState(gobj, ftMt_MS_SpecialAirLw, Ft_MF_None, 0.0f,
-                              1.0f, 0.0f, NULL);
+    Fighter_ChangeMotionState(gobj, ftMt_MS_SpecialAirLw, 0, 0.0f, 1.0f, 0.0f,
+                              NULL);
     ftAnim_8006EBA4(gobj);
 
     fp->accessory4_cb = ftMt_SpecialLw_CreateDisable;

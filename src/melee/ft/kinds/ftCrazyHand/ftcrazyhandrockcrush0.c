@@ -45,7 +45,7 @@ void ftCh_Init_80157DF8(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     ftCrazyHand_DatAttrs* da = fp->ft_data->ext_attr;
     PAD_STACK(8);
-    Fighter_ChangeMotionState(gobj, 0x163, Ft_MF_None, 0.0f, 1.0f, 0.0f, NULL);
+    Fighter_ChangeMotionState(gobj, 0x163, 0, 0.0f, 1.0f, 0.0f, NULL);
     ftAnim_8006EBA4(gobj);
     fp->mv.ch.unk13.x0 = da->x58 + HSD_Randi(da->x54 - da->x58);
     fp->mv.ch.unk13.x4 = 0;
@@ -64,8 +64,7 @@ void ftCh_RockCrushUp_Anim(HSD_GObj* gobj)
 
             {
                 Fighter* fp = GET_FIGHTER(gobj);
-                Fighter_ChangeMotionState(gobj, 0x164, Ft_MF_None, 0, 1.0f,
-                                          0.0f, NULL);
+                Fighter_ChangeMotionState(gobj, 0x164, 0, 0, 1.0f, 0.0f, NULL);
                 ftAnim_8006EBA4(gobj);
                 ft_PlaySFX(fp, 0x4E207, 127, 64);
             }

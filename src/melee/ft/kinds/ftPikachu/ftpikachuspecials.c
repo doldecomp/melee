@@ -29,7 +29,7 @@ void ftPk_SpecialS_Enter(HSD_GObj* gobj)
     fp->x21EC = ftPk_SpecialN_80124DC8;
 
     fp->gr_vel /= sa->x30;
-    Fighter_ChangeMotionState(gobj, 343, Ft_MF_None, 0, 1, 0, 0);
+    Fighter_ChangeMotionState(gobj, 343, 0, 0, 1, 0, 0);
     ftAnim_8006EBA4(gobj);
 }
 
@@ -44,7 +44,7 @@ void ftPk_SpecialAirS_Enter(HSD_GObj* gobj)
 
     fp->self_vel.x /= sa->x30;
     fp->self_vel.y = 0;
-    Fighter_ChangeMotionState(gobj, 348, Ft_MF_None, 0, 1, 0, 0);
+    Fighter_ChangeMotionState(gobj, 348, 0, 0, 1, 0, 0);
     ftAnim_8006EBA4(gobj);
 }
 
@@ -334,7 +334,7 @@ void ftPk_SpecialS_ChangeMotion_Unk08(HSD_GObj* gobj)
 {
     u8 _[8];
 
-    Fighter_ChangeMotionState(gobj, 347, Ft_MF_None, 0, 1, 0, 0);
+    Fighter_ChangeMotionState(gobj, 347, 0, 0, 1, 0, 0);
     {
         Fighter* fp = GET_FIGHTER(gobj);
         fp->cmd_vars[0] = 0;
@@ -347,7 +347,7 @@ void ftPk_SpecialS_ChangeMotion_Unk09(HSD_GObj* gobj)
 {
     u8 _[8];
 
-    Fighter_ChangeMotionState(gobj, 352, Ft_MF_None, 0, 1, 0, 0);
+    Fighter_ChangeMotionState(gobj, 352, 0, 0, 1, 0, 0);
 
     {
         Fighter* fp = GET_FIGHTER(gobj);
@@ -497,7 +497,7 @@ void ftPk_SpecialS_ChangeMotion_Unk11(HSD_GObj* gobj)
     fp->cmd_vars[0] = 0;
     fp->gr_vel /= sa->x50;
 
-    Fighter_ChangeMotionState(gobj, 346, Ft_MF_None, 0, 1, 0, 0);
+    Fighter_ChangeMotionState(gobj, 346, 0, 0, 1, 0, 0);
 }
 
 void ftPk_SpecialS_ChangeMotion_Unk12(HSD_GObj* gobj)
@@ -510,5 +510,5 @@ void ftPk_SpecialS_ChangeMotion_Unk12(HSD_GObj* gobj)
     fp->cmd_vars[0] = 0;
     fp->self_vel.x /= sa->x50;
 
-    Fighter_ChangeMotionState(gobj, 351, Ft_MF_None, 0, 1, 0, 0);
+    Fighter_ChangeMotionState(gobj, 351, 0, 0, 1, 0, 0);
 }

@@ -33,7 +33,7 @@ void ftKb_SpecialNCa_800F99BC(Fighter_GObj* gobj)
     if (fp->u.kb.hat.kind != Ft_Kind_Captain) {
         msid = ftKb_MS_GnSpecialN;
     }
-    Fighter_ChangeMotionState(gobj, msid, Ft_MF_None, 0.0f, 1.0f, 0.0f, NULL);
+    Fighter_ChangeMotionState(gobj, msid, 0, 0.0f, 1.0f, 0.0f, NULL);
     Fighter_SetEffectHitlagCallbacks(fp);
     ftAnim_8006EBA4(gobj);
 }
@@ -50,7 +50,7 @@ void ftKb_SpecialNCa_800F9A54(Fighter_GObj* gobj)
     if (fp->u.kb.hat.kind != Ft_Kind_Captain) {
         msid = ftKb_MS_GnSpecialAirN;
     }
-    Fighter_ChangeMotionState(gobj, msid, Ft_MF_None, 0.0f, 1.0f, 0.0f, NULL);
+    Fighter_ChangeMotionState(gobj, msid, 0, 0.0f, 1.0f, 0.0f, NULL);
     Fighter_SetEffectHitlagCallbacks(fp);
     ftAnim_8006EBA4(gobj);
 }

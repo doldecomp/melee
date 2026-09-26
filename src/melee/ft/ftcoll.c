@@ -23,7 +23,7 @@
 #include "inlines.h"
 #include "kinds/ftCommon/ftCo_Bury.h"
 #include "kinds/ftCommon/ftCo_Guard.h"
-#include "kinds/ftMasterHand/types.h"
+#include "kinds/ftCommon/types.h"
 #include "types.h"
 #include <dolphin/mtx.h>
 #include <melee/ef/efsync.h>

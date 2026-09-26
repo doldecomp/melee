@@ -13,7 +13,7 @@
 void ftCh_GrabUnk1_8015B778(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    Fighter_ChangeMotionState(gobj, 0x152, Ft_MF_None, 0.0f, 1.0f, 0.0f, NULL);
+    Fighter_ChangeMotionState(gobj, 0x152, 0, 0.0f, 1.0f, 0.0f, NULL);
     fp->invisible = true;
     ftCommon_8007E2F4(fp, 511);
     fp->x2220_b3 = true;

@@ -41,8 +41,8 @@ void ftCo_800CED30(Fighter_GObj* gobj)
     }
 third:
     fp->allow_interrupt = false;
-    Fighter_ChangeMotionState(gobj, ftLk_MS_AttackS42, Ft_MF_None, 0.0F, 1.0F,
-                              0.0F, NULL);
+    Fighter_ChangeMotionState(gobj, ftLk_MS_AttackS42, 0, 0.0F, 1.0F, 0.0F,
+                              NULL);
     ftAnim_8006EBA4(gobj);
 }
 

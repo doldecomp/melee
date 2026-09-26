@@ -3,7 +3,7 @@
 #include "fighter.h"
 #include "ftCo_800C7070.h"
 #include "ftdata.h"
-#include "kinds/ftMasterHand/forward.h"
+#include "kinds/ftCommon/forward.h"
 #include "types.h"
 
 static inline void inlineB0(Fighter_GObj* gobj)
@@ -33,7 +33,7 @@ void ftCo_800C70D0(Fighter_GObj* gobj)
         inlineB2(gobj);
         return;
     }
-    Fighter_ChangeMotionState(gobj, ms, Ft_MF_None, 0.0F, 1.0F, 0.0F, NULL);
+    Fighter_ChangeMotionState(gobj, ms, 0, 0.0F, 1.0F, 0.0F, NULL);
     fp->x2219_b2 = true;
     fp->x2219_b1 = true;
 }

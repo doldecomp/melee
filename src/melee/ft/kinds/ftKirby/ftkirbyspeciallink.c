@@ -281,7 +281,7 @@ void ftKb_SpecialNLk800FB880(Fighter_GObj* gobj)
     default:
         break;
     }
-    Fighter_ChangeMotionState(gobj, msid, Ft_MF_None, 0.0F, 1.0F, 0.0F, NULL);
+    Fighter_ChangeMotionState(gobj, msid, 0, 0.0F, 1.0F, 0.0F, NULL);
     ftKb_SpecialN_set_cbs(gobj);
     switch (fp->u.kb.hat.kind) {
     case Ft_Kind_Link:
@@ -322,7 +322,7 @@ void ftKb_SpecialNLk800FBA00(Fighter_GObj* gobj)
     default:
         break;
     }
-    Fighter_ChangeMotionState(gobj, msid, Ft_MF_None, 0.0F, 1.0F, 0.0F, NULL);
+    Fighter_ChangeMotionState(gobj, msid, 0, 0.0F, 1.0F, 0.0F, NULL);
     ftKb_SpecialN_set_cbs(gobj);
     switch (fp->u.kb.hat.kind) {
     case Ft_Kind_Link:

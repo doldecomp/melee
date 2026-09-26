@@ -12,7 +12,7 @@
 #include "kinds/ftCommon/ftCo_CliffWait.h"
 #include "kinds/ftCommon/ftCo_Fall.h"
 #include "kinds/ftCommon/ftCo_StopCeil.h"
-#include "kinds/ftMasterHand/types.h"
+#include "kinds/ftCommon/types.h"
 #include "types.h"
 #include <dolphin/mtx.h>
 #include <melee/ef/efasync.h>
@@ -70,7 +70,7 @@ void ftCliffCommon_80081370(Fighter_GObj* gobj)
         }
         ftCommon_8007D780(fp);
         ftCommon_8007D5D4(fp);
-        Fighter_ChangeMotionState(gobj, 252, Ft_MF_None, 0, 1, 0, NULL);
+        Fighter_ChangeMotionState(gobj, 252, 0, 0, 1, 0, NULL);
         ftAnim_8006EBA4(gobj);
         ftCommon_8007D5D4(fp);
         ftCommon_8007EFC0(fp, p_ftCommonData->x5F0);

@@ -15,13 +15,13 @@
 #include "ftcliffcommon.h"
 #include "ftcommon.h"
 #include "ftwalljump.h"
+#include "kinds/ftCommon/forward.h"
 #include "kinds/ftCommon/ftCo_Fall.h"
 #include "kinds/ftCommon/ftCo_Landing.h"
 #include "kinds/ftCommon/ftCo_MissFoot.h"
 #include "kinds/ftCommon/ftCo_Ottotto.h"
 #include "kinds/ftCommon/ftCo_StopCeil.h"
 #include "kinds/ftCommon/ftCo_StopWall.h"
-#include "kinds/ftMasterHand/forward.h"
 #include "types.h"
 #include <dolphin/mtx.h>
 #include <melee/lb/types.h>

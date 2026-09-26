@@ -35,7 +35,7 @@ void ftMs_SpecialLw_Enter(HSD_GObj* gobj)
     Fighter* fp0 = GET_FIGHTER(gobj);
     fp0->self_vel.y = 0;
 
-    Fighter_ChangeMotionState(gobj, 369, Ft_MF_None, 0, 1, 0, NULL);
+    Fighter_ChangeMotionState(gobj, 369, 0, 0, 1, 0, NULL);
     ftAnim_8006EBA4(gobj);
 
     {
@@ -56,7 +56,7 @@ void ftMs_SpecialAirLw_Enter(HSD_GObj* gobj)
         fp->self_vel.y = 0;
     }
 
-    Fighter_ChangeMotionState(gobj, 371, Ft_MF_None, 0, 1, 0, NULL);
+    Fighter_ChangeMotionState(gobj, 371, 0, 0, 1, 0, NULL);
     ftAnim_8006EBA4(gobj);
 
     {
@@ -338,7 +338,7 @@ void ftMs_SpecialLw_80139140(HSD_GObj* gobj)
                 msid = 372;
             }
 
-            Fighter_ChangeMotionState(gobj, msid, Ft_MF_None, 0, 1, 0, NULL);
+            Fighter_ChangeMotionState(gobj, msid, 0, 0, 1, 0, NULL);
         }
     }
 

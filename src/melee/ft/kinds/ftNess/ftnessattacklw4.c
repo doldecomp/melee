@@ -23,8 +23,8 @@ void ftNs_AttackLw4_Enter(
     fp->allow_interrupt = 0;
     fp->mv.ns.attacklw4.isChargeDisable = false;
     ftNs_AttackHi4_YoyoSetVarAll(gobj);
-    Fighter_ChangeMotionState(gobj, ftNs_MS_AttackLw4, Ft_MF_None, 0.0f, 1.0f,
-                              0.0f, NULL);
+    Fighter_ChangeMotionState(gobj, ftNs_MS_AttackLw4, 0, 0.0f, 1.0f, 0.0f,
+                              NULL);
     ftAnim_8006EBA4(gobj);
     fp->x2222_b2 = 1;
     fp->deal_dmg_cb = ftNs_AttackHi4_YoyoStartTimedRehit;

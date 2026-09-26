@@ -1,9 +1,8 @@
 #include "it_3F2F.h"
 
-#include <melee/ft/kinds/ftMasterHand/forward.h>
-
 #include "itdraw.h"
 #include "itzako.h"
+#include "kinds/forward.h"
 #include "kinds/it_2ADA.h"
 #include "kinds/it_2E5A.h"
 #include "kinds/it_2F28.h"
@@ -94,7 +93,7 @@
 #include "kinds/itzeldadinfireexplode.h"
 #include "kinds/itzgshell.h"
 #include "kinds/itzrshell.h"
-#include <melee/ft/kinds/ftMasterHand/types.h>
+#include "kinds/types.h"
 
 /// Character-specific items
 struct sdata_ItemGXLink it_803F2F28[118] = {

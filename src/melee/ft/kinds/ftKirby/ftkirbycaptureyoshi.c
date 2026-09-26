@@ -25,7 +25,7 @@ void fn_8010A930(Fighter_GObj* gobj, Fighter_GObj* attacker_gobj)
     fp->x221B_b7 = false;
     fp->facing_dir = -attacker_fp->facing_dir;
     ftCo_800DB368(attacker_fp, fp);
-    Fighter_ChangeMotionState(gobj, 0x14B, Ft_MF_None, 0.0f, 1.0f, 0.0f, NULL);
+    Fighter_ChangeMotionState(gobj, 0x14B, 0, 0.0f, 1.0f, 0.0f, NULL);
     fp->accessory1_cb = ftCo_800DB464;
     ftCommon_8007D5D4(fp);
     ftCommon_8007E2F4(fp, 0x1FF);

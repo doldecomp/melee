@@ -51,7 +51,7 @@ void ftCh_GrabUnk1_8015ADD0(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     fp->cmd_vars[0] = 0;
     func_8015ADD0_inline(gobj);
-    Fighter_ChangeMotionState(gobj, 0x181, Ft_MF_None, 0, 1.0f, 0.0f, NULL);
+    Fighter_ChangeMotionState(gobj, 0x181, 0, 0, 1.0f, 0.0f, NULL);
     ftAnim_8006EBA4(gobj);
     ft_800881D8(fp, 0x4E217, 127, 64);
     ft_PlaySFX(fp, 0x4E219, 127, 64);
@@ -74,8 +74,7 @@ void ftCh_TagGrab_Anim(HSD_GObj* gobj)
         fp->cmd_vars[0] = 0;
     }
     if (fp->mv.ch.unk0.x8 > 0 && !ftAnim_IsFramesRemaining(gobj)) {
-        Fighter_ChangeMotionState(gobj, 0x182, Ft_MF_None, 0, 1.0f, 0.0f,
-                                  NULL);
+        Fighter_ChangeMotionState(gobj, 0x182, 0, 0, 1.0f, 0.0f, NULL);
         ftAnim_8006EBA4(gobj);
     }
     if (--fp->mv.ch.unk0.x8 == 0) {
@@ -98,8 +97,7 @@ void ftCh_TagSqueeze_Anim(HSD_GObj* gobj)
         fp->cmd_vars[0] = 0;
     }
     if (fp->mv.ch.unk0.x8 > 0 && !ftAnim_IsFramesRemaining(gobj)) {
-        Fighter_ChangeMotionState(gobj, 0x182, Ft_MF_None, 0, 1.0f, 0.0f,
-                                  NULL);
+        Fighter_ChangeMotionState(gobj, 0x182, 0, 0, 1.0f, 0.0f, NULL);
         ftAnim_8006EBA4(gobj);
     }
     if (--fp->mv.ch.unk0.x8 == 0) {

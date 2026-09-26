@@ -65,7 +65,7 @@ void ftSk_SpecialLw_Enter(Fighter_GObj* gobj)
 
     u8 _[16];
 
-    Fighter_ChangeMotionState(gobj, 0x169, Ft_MF_None, 0.0F, 1.0F, 0.0F, NULL);
+    Fighter_ChangeMotionState(gobj, 0x169, 0, 0.0F, 1.0F, 0.0F, NULL);
     ftAnim_8006EBA4(gobj);
 
     fp = GET_FIGHTER(gobj);
@@ -88,7 +88,7 @@ void ftSk_SpecialAirLw_Enter(Fighter_GObj* gobj)
 
     u8 _[16];
 
-    Fighter_ChangeMotionState(gobj, 0x16B, Ft_MF_None, 0.0F, 1.0F, 0.0F, NULL);
+    Fighter_ChangeMotionState(gobj, 0x16B, 0, 0.0F, 1.0F, 0.0F, NULL);
     ftAnim_8006EBA4(gobj);
 
     fp = GET_FIGHTER(gobj);
@@ -250,7 +250,7 @@ void ftSk_SpecialLw_80114758(Fighter_GObj* gobj)
     } else {
         var_r4 = 0x16C;
     }
-    Fighter_ChangeMotionState(gobj, var_r4, Ft_MF_None, attributes->x70, 1.0F,
-                              0.0F, NULL);
+    Fighter_ChangeMotionState(gobj, var_r4, 0, attributes->x70, 1.0F, 0.0F,
+                              NULL);
     fp->accessory4_cb = fn_801140B0;
 }

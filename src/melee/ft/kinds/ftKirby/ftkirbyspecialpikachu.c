@@ -34,7 +34,7 @@ static void doEnter(Fighter_GObj* gobj, ftKirby_MotionState pk_msid,
     default:
         break;
     }
-    Fighter_ChangeMotionState(gobj, msid, Ft_MF_None, 0.0f, 1.0f, 0.0f, NULL);
+    Fighter_ChangeMotionState(gobj, msid, 0, 0.0f, 1.0f, 0.0f, NULL);
     fp->cmd_vars[ftPk_SpecialN_Cmd0] = fp->cmd_vars[ftPk_SpecialN_Cmd1] =
         fp->cmd_vars[ftPk_SpecialN_Cmd2] = fp->cmd_vars[ftPk_SpecialN_Cmd3] =
             false;

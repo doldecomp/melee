@@ -37,8 +37,7 @@ void ftDk_SpecialHi_Enter(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftDonkeyAttributes* donkey_attr = getFtSpecialAttrs(fp);
-    Fighter_ChangeMotionState(gobj, ftDk_MS_SpecialHi, Ft_MF_None, 0, 1, 0,
-                              NULL);
+    Fighter_ChangeMotionState(gobj, ftDk_MS_SpecialHi, 0, 0, 1, 0, NULL);
     setCallbacks(gobj);
     Fighter_ClearCmdVars(fp);
     ftCommon_ClampGroundVel(
@@ -55,8 +54,7 @@ void ftDk_SpecialAirHi_Enter(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     ftDonkeyAttributes* donkey_attr = fp->dat_attrs;
     u8 _[8];
-    Fighter_ChangeMotionState(gobj, ftDk_MS_SpecialAirHi, Ft_MF_None, 0, 1, 0,
-                              NULL);
+    Fighter_ChangeMotionState(gobj, ftDk_MS_SpecialAirHi, 0, 0, 1, 0, NULL);
     setCallbacks(gobj);
     Fighter_ClearCmdVars(fp);
     ftCommon_ClampSelfVelX(

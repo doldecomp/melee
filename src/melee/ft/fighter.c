@@ -53,7 +53,7 @@
 #include "kinds/ftCrazyHand/ftcrazyhandwait10.h"
 #include "kinds/ftKirby/ftkirby.h"
 #include "kinds/ftMasterHand/ftmasterhandwait10.h"
-#include "kinds/ftMasterHand/types.h"
+#include "kinds/ftPeach/types.h"
 #include "types.h"
 #include <dolphin/gx.h>
 #include <dolphin/mtx.h>

@@ -52,7 +52,7 @@ void ftKp_SpecialLw_Enter(Fighter_GObj* gobj)
     PAD_STACK(16);
     fp->self_vel.x = fp->self_vel.y = 0.0f;
     ftCommon_8007D5D4(fp);
-    Fighter_ChangeMotionState(gobj, 0x169, Ft_MF_None, 0.0f, 1.0f, 0.0f, NULL);
+    Fighter_ChangeMotionState(gobj, 0x169, 0, 0.0f, 1.0f, 0.0f, NULL);
     ftAnim_8006EBA4(gobj);
     ftKp_SpecialLw_Enter_inline(gobj);
 }
@@ -64,7 +64,7 @@ void ftKp_SpecialAirLw_Enter(Fighter_GObj* gobj)
     PAD_STACK(16);
     fp->self_vel.x *= da->x80;
     fp->self_vel.y *= da->x84;
-    Fighter_ChangeMotionState(gobj, 0x16A, Ft_MF_None, 0.0f, 1.0f, 0.0f, NULL);
+    Fighter_ChangeMotionState(gobj, 0x16A, 0, 0.0f, 1.0f, 0.0f, NULL);
     ftAnim_8006EBA4(gobj);
     ftKp_SpecialLw_Enter_inline(gobj);
 }

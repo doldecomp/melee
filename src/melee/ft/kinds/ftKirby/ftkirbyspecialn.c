@@ -345,8 +345,7 @@ void ftKb_SpecialN_800F5F68(HSD_GObj* gobj)
     fp->u.kb.xEC = lbAnim_8001E8F8(ftData_80085E50(fp, ftCo_MS_HammerJump));
     fp->u.kb.xF0 = lbAnim_8001E8F8(ftData_80085E50(fp, ftCo_MS_HammerLanding));
 
-    Fighter_ChangeMotionState(gobj, ftKb_MS_SpecialN, Ft_MF_None, 0, 1, 0,
-                              NULL);
+    Fighter_ChangeMotionState(gobj, ftKb_MS_SpecialN, 0, 0, 1, 0, NULL);
     fp->x2222_b2 = true;
     ftAnim_8006EBA4(gobj);
     {
@@ -370,8 +369,7 @@ void ftKb_SpecialN_800F6070(HSD_GObj* gobj)
     fp->u.kb.xEC = lbAnim_8001E8F8(ftData_80085E50(fp, ftCo_MS_HammerJump));
     fp->u.kb.xF0 = lbAnim_8001E8F8(ftData_80085E50(fp, ftCo_MS_HammerLanding));
 
-    Fighter_ChangeMotionState(gobj, ftKb_MS_SpecialAirN, Ft_MF_None, 0, 1, 0,
-                              NULL);
+    Fighter_ChangeMotionState(gobj, ftKb_MS_SpecialAirN, 0, 0, 1, 0, NULL);
     fp->x2222_b2 = true;
     ftAnim_8006EBA4(gobj);
     {
@@ -430,7 +428,7 @@ static void fn_800F6318(HSD_GObj* gobj)
 static inline void enterCaptureState(Fighter_GObj* gobj, FtMotionId msid)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    Fighter_ChangeMotionState(gobj, msid, JOBJ_HIDDEN, 0.0f, 1.0f, 0.0f, NULL);
+    Fighter_ChangeMotionState(gobj, msid, 0x10, 0.0f, 1.0f, 0.0f, NULL);
     ftKb_SpecialN_800F9070(gobj);
     ftCommon_8007E2F4(fp, 0x1FF);
 }
@@ -1104,8 +1102,8 @@ void ftKb_SpecialNLoop_IASA(Fighter_GObj* gobj)
     }
 
     if ((fp->input.held_buttons[0] & 0x200) == 0) {
-        Fighter_ChangeMotionState(gobj, ftKb_MS_SpecialNEnd, Ft_MF_None, 0.0f,
-                                  1.0f, 0.0f, NULL);
+        Fighter_ChangeMotionState(gobj, ftKb_MS_SpecialNEnd, 0, 0.0f, 1.0f,
+                                  0.0f, NULL);
     }
 }
 
@@ -1119,8 +1117,8 @@ void ftKb_SpecialAirNLoop_IASA(Fighter_GObj* gobj)
     }
 
     if ((fp->input.held_buttons[0] & 0x200) == 0) {
-        Fighter_ChangeMotionState(gobj, ftKb_MS_SpecialAirNEnd, Ft_MF_None,
-                                  0.0f, 1.0f, 0.0f, NULL);
+        Fighter_ChangeMotionState(gobj, ftKb_MS_SpecialAirNEnd, 0, 0.0f, 1.0f,
+                                  0.0f, NULL);
     }
 }
 
@@ -1134,8 +1132,7 @@ static inline bool ftKb_EatWait_ItemEat(Fighter_GObj* gobj)
         ((fp->input.lstick[0].y < -da->specialn_y_axis_range_jump) &&
          fp->target_item_gobj != NULL))
     {
-        Fighter_ChangeMotionState(gobj, 0x170, Ft_MF_KeepGfx, 0.0f, 1.0f, 0.0f,
-                                  NULL);
+        Fighter_ChangeMotionState(gobj, 0x170, 2, 0.0f, 1.0f, 0.0f, NULL);
         fp->x2222_b2 = true;
         ftKb_SpecialN_800F9070(gobj);
         ftAnim_8006EBA4(gobj);
@@ -1169,8 +1166,7 @@ static inline bool ftKb_EatWait_FighterEat(Fighter_GObj* gobj)
         ((fp->input.lstick[0].y < -da->specialn_y_axis_range_jump) &&
          fp->victim_gobj != NULL))
     {
-        Fighter_ChangeMotionState(gobj, 0x16F, Ft_MF_KeepGfx, 0.0f, 1.0f, 0.0f,
-                                  NULL);
+        Fighter_ChangeMotionState(gobj, 0x16F, 2, 0.0f, 1.0f, 0.0f, NULL);
         fp->x2222_b2 = true;
         ftKb_SpecialN_800F9070(gobj);
         ftAnim_8006EBA4(gobj);
@@ -1281,8 +1277,7 @@ static inline bool ftKb_SpecialAirNCaptureWait_ItemEat(Fighter_GObj* gobj)
         ((fp->input.lstick[0].y < -da->specialn_y_axis_range_jump) &&
          fp->target_item_gobj != NULL))
     {
-        Fighter_ChangeMotionState(gobj, 0x17B, Ft_MF_KeepGfx, 0.0f, 1.0f, 0.0f,
-                                  NULL);
+        Fighter_ChangeMotionState(gobj, 0x17B, 2, 0.0f, 1.0f, 0.0f, NULL);
         fp->x2222_b2 = true;
         ftKb_SpecialN_800F9070(gobj);
         ftAnim_8006EBA4(gobj);
@@ -1316,8 +1311,7 @@ static inline bool ftKb_SpecialAirNCaptureWait_FighterEat(Fighter_GObj* gobj)
         ((fp->input.lstick[0].y < -da->specialn_y_axis_range_jump) &&
          fp->victim_gobj != NULL))
     {
-        Fighter_ChangeMotionState(gobj, 0x17A, Ft_MF_KeepGfx, 0.0f, 1.0f, 0.0f,
-                                  NULL);
+        Fighter_ChangeMotionState(gobj, 0x17A, 2, 0.0f, 1.0f, 0.0f, NULL);
         fp->x2222_b2 = true;
         ftKb_SpecialN_800F9070(gobj);
         ftAnim_8006EBA4(gobj);

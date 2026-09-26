@@ -51,8 +51,8 @@ void ftCh_Init_80158B3C(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftCrazyHand_DatAttrs* da = fp->ft_data->ext_attr;
-    Fighter_ChangeMotionState(gobj, 0x16A, Ft_MF_None, fp->cur_anim_frame,
-                              1.0f, 0.0f, NULL);
+    Fighter_ChangeMotionState(gobj, 0x16A, 0, fp->cur_anim_frame, 1.0f, 0.0f,
+                              NULL);
     ftAnim_SetAnimRate(gobj, da->xCC_pos.x);
     fp->mv.ch.unk0.x8 = da->xC4_pos.y;
 }
@@ -70,8 +70,7 @@ void ftCh_FingerBeamLoop_Anim(HSD_GObj* gobj)
     }
 
     if (!ftAnim_IsFramesRemaining(gobj)) {
-        Fighter_ChangeMotionState(gobj, 0x16A, Ft_MF_None, 0, 1.0f, 0.0f,
-                                  NULL);
+        Fighter_ChangeMotionState(gobj, 0x16A, 0, 0, 1.0f, 0.0f, NULL);
         ftAnim_8006EBA4(gobj);
     }
 }
@@ -121,7 +120,7 @@ void ftCh_FingerBeamLoop_Coll(HSD_GObj* gobj) {}
 void ftCh_Init_80158DFC(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    Fighter_ChangeMotionState(gobj, 0x16B, Ft_MF_None, 0, 1.0f, 0.0f, NULL);
+    Fighter_ChangeMotionState(gobj, 0x16B, 0, 0, 1.0f, 0.0f, NULL);
     ftAnim_8006EBA4(gobj);
     ftCommon_8007E2D0(fp, 0x100, fn_80159288, NULL, fn_8015B548);
     fp->mv.ch.unk0.x20 = 0;
@@ -155,7 +154,7 @@ void ftCh_Init_80158F34(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftCrazyHand_DatAttrs* da = fp->ft_data->ext_attr;
-    Fighter_ChangeMotionState(gobj, 0x172, Ft_MF_None, 0.0f, 1.0f, 0.0f, NULL);
+    Fighter_ChangeMotionState(gobj, 0x172, 0, 0.0f, 1.0f, 0.0f, NULL);
     ftAnim_8006EBA4(gobj);
     fp->mv.ch.unk0.xC.x = da->x18;
     fp->mv.ch.unk0.xC.y = da->x1C;
@@ -190,7 +189,7 @@ void ftCh_Init_80159098(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftCrazyHand_DatAttrs* da = fp->ft_data->ext_attr;
-    Fighter_ChangeMotionState(gobj, 0x16C, Ft_MF_None, 0.0f, 1.0f, 0.0f, NULL);
+    Fighter_ChangeMotionState(gobj, 0x16C, 0, 0.0f, 1.0f, 0.0f, NULL);
     ftAnim_8006EBA4(gobj);
     fp->mv.ch.unk0.x24 = da->xD8;
     fp->cmd_vars[0] = 1;

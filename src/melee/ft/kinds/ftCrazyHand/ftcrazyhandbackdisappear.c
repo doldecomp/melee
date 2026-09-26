@@ -19,7 +19,7 @@ void fn_80159908(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     ftCrazyHand_DatAttrs* da = fp->ft_data->ext_attr;
     Vec3 pos;
-    Fighter_ChangeMotionState(gobj, 0x174, Ft_MF_None, 0.0f, 1.0f, 0.0f, NULL);
+    Fighter_ChangeMotionState(gobj, 0x174, 0, 0.0f, 1.0f, 0.0f, NULL);
     ftAnim_8006EBA4(gobj);
     fp->mv.ch.unk0.x0 = da->xF0;
     ftBossLib_8015C208(gobj, &pos);

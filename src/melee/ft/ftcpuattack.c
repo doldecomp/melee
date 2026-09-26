@@ -8,8 +8,13 @@
 #include "inlines.h"
 #include "kinds/ftCommon/ftCo_09F7.h"
 #include "kinds/ftCommon/ftCo_0A01.h"
-#include "kinds/ftMasterHand/forward.h"
-#include "kinds/ftMasterHand/inlines.h"
+#include "kinds/ftCommon/inlines.h"
+#include "kinds/ftDonkey/forward.h"
+#include "kinds/ftKirby/forward.h"
+#include "kinds/ftKoopa/forward.h"
+#include "kinds/ftSamus/forward.h"
+#include "kinds/ftYoshi/forward.h"
+#include "kinds/ftZelda/forward.h"
 #include <melee/gr/ground.h>
 #include <melee/it/inlines.h>
 #include <melee/it/it_26B1.h>

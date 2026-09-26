@@ -27,8 +27,7 @@ void ftDk_SpecialS_Enter(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     u8 _[8];
-    Fighter_ChangeMotionState(gobj, ftDk_MS_SpecialS, Ft_MF_None, 0, 1, 0,
-                              NULL);
+    Fighter_ChangeMotionState(gobj, ftDk_MS_SpecialS, 0, 0, 1, 0, NULL);
     ftAnim_8006EBA4(gobj);
     Fighter_UnsetCmdVar0(gobj);
     fp->accessory4_cb = ftDk_SpecialLw_8010E0CC;
@@ -40,8 +39,7 @@ void ftDk_SpecialAirS_Enter(HSD_GObj* gobj)
     ftDonkeyAttributes* donkey_attr = fp->dat_attrs;
     fp->self_vel.x /= donkey_attr->SpecialS.x3C_MIN_STICK_X_MOMENTUM;
     fp->self_vel.y = 0;
-    Fighter_ChangeMotionState(gobj, ftDk_MS_SpecialAirS, Ft_MF_None, 0, 1, 0,
-                              NULL);
+    Fighter_ChangeMotionState(gobj, ftDk_MS_SpecialAirS, 0, 0, 1, 0, NULL);
     ftAnim_8006EBA4(gobj);
     Fighter_UnsetCmdVar0(gobj);
     fp->accessory4_cb = &ftDk_SpecialLw_8010E148;

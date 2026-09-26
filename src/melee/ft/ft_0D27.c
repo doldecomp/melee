@@ -13,13 +13,13 @@
 #include "ftcommon.h"
 #include "ftlib.h"
 #include "inlines.h"
+#include "kinds/ftCommon/forward.h"
 #include "kinds/ftCommon/ftCo_Attack100.h"
 #include "kinds/ftCommon/ftCo_CaptureCut.h"
 #include "kinds/ftCommon/ftCo_Fall.h"
 #include "kinds/ftCommon/ftCo_FallAerial.h"
 #include "kinds/ftCommon/ftCo_FallSpecial.h"
 #include "kinds/ftCommon/ftCo_Lift.h"
-#include "kinds/ftMasterHand/forward.h"
 #include "types.h"
 #include <melee/it/kinds/itkinoko.h>
 #include <sysdolphin/baselib/jobj.h>
