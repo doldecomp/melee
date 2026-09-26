@@ -589,14 +589,11 @@ EF_Effect* efLib_Create_Attach_Scale_FacingDir(u32 gfx_id, HSD_GObj* gobj,
 
 EF_Effect* efLib_Create_Attach_Pos(u32 gfx_id, HSD_GObj* gobj, Vec3* position)
 {
-    HSD_JObj* jobj;
     EF_Effect* effect;
 
     effect = efLib_Create(gfx_id, gobj);
     if (effect != NULL) {
-        jobj = GET_JOBJ(effect->gobj);
-        (void) jobj;
-        HSD_JObjSetTranslate(jobj, position);
+        HSD_JObjSetTranslate(GET_JOBJ(effect->gobj), position);
     }
     return effect;
 }

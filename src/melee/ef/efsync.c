@@ -201,9 +201,7 @@ void* efSync_Spawn(s32 gfx_id, HSD_GObj* gobj, ...)
         ret_obj = efLib_Create_Attach_Pos(0x1F46U, gobj, va_arg(vlist, Vec3*));
         if (ret_obj != NULL) {
             effect = ret_obj;
-            jobj_1 = gobj->hsd_obj;
-            (void) jobj_1;
-            HSD_JObjGetScale(jobj_1, &scale);
+            HSD_JObjGetScale(jobj_1 = gobj->hsd_obj, &scale);
             HSD_JObjSetScale(GET_JOBJ(effect->gobj), &scale);
             effect->update = efLib_Cb_SetRotY_FromFighterDir;
         }
