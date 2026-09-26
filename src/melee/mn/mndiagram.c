@@ -275,6 +275,25 @@ int mnDiagram_GetNameTotalKOs(u8 field_index)
     return total;
 }
 
+static inline int sumNameKOs(u8 field_index, bool falls)
+{
+    int total = 0;
+    int i;
+    for (i = 0; i < GM_NAMETAG_COUNT; i++) {
+        if (GetNameText(i & 0xFF)) {
+            if (falls) {
+                total += getNamePairKOs((u8) i, field_index);
+            } else {
+                total += getNamePairKOs(field_index, (u8) i);
+            }
+        }
+    }
+    if (falls && total > 999999) {
+        total = 999999;
+    }
+    return total;
+}
+
 /// @brief Gets total falls (deaths) of a name against all other names.
 /// @details Iterates through all names and sums how many times each name
 ///          KO'd the target name. This is the column sum of the KO matrix.
@@ -282,25 +301,9 @@ int mnDiagram_GetNameTotalKOs(u8 field_index)
 /// @param field_index Index of the name tag to query.
 /// @return Sum of times this name was KO'd by all existing names (capped at
 /// 999999).
-static inline int mnDiagram_SumNameFalls(u8 field_index)
-{
-    int total = 0;
-    int i;
-    for (i = 0; i < GM_NAMETAG_COUNT; i++) {
-        if (GetNameText(i & 0xFF)) {
-            total += getNamePairKOs((u8) i, field_index);
-        }
-    }
-    if (total > 999999) {
-        total = 999999;
-    }
-    return total;
-}
-
 int mnDiagram_GetNameTotalFalls(u8 field_index)
 {
-    PAD_STACK(16);
-    return mnDiagram_SumNameFalls(field_index);
+    return sumNameKOs(field_index, true);
 }
 
 /// @brief Gets total KOs scored by a fighter against all other fighters.
@@ -2091,9 +2094,6 @@ void mnDiagram_DrawGridValues(HSD_GObj* arg0, s32 row_start, s32 col_start,
 {
     int name_col;
     u8 is_name_mode = arg3;
-    int unlocked_count;
-    int col_unlocked_count;
-    int bottom_unlocked_count;
     int bottom_col;
     int fighter_col;
     int row;
@@ -2112,13 +2112,13 @@ void mnDiagram_DrawGridValues(HSD_GObj* arg0, s32 row_start, s32 col_start,
                     if (entry_count > bottom_col) {
                         mnDiagram_DrawCellValue(
                             arg0, (u8) bottom_col, (u8) row,
-                            mnDiagram_SumNameFalls(
-                                mnDiagram_GetVisibleNameCursorFrom(
-                                    col_start, bottom_col)));
+                            sumNameKOs(mnDiagram_GetVisibleNameCursorFrom(
+                                           col_start, bottom_col),
+                                       true));
                     }
                 } else {
-                    bottom_unlocked_count = mnDiagram_CountUnlockedFighters();
-                    if (bottom_unlocked_count > bottom_col) {
+                    entry_count = mnDiagram_CountUnlockedFighters();
+                    if (entry_count > bottom_col) {
                         mnDiagram_DrawCellValue(
                             arg0, (u8) bottom_col, (u8) row,
                             mnDiagram_SumFighterFalls(
@@ -2137,7 +2137,7 @@ void mnDiagram_DrawGridValues(HSD_GObj* arg0, s32 row_start, s32 col_start,
                         row_name =
                             mnDiagram_GetVisibleNameCursorFrom(row_start, row);
                         if (name_col == 7) {
-                            total_kos = mnDiagram_GetNameTotalKOs(row_name);
+                            total_kos = sumNameKOs(row_name, false);
                             mnDiagram_DrawCellValue(arg0, (u8) name_col,
                                                     (u8) row, total_kos);
                         } else {
@@ -2152,13 +2152,12 @@ void mnDiagram_DrawGridValues(HSD_GObj* arg0, s32 row_start, s32 col_start,
                 }
             }
         } else {
-            unlocked_count = mnDiagram_CountUnlockedFighters();
-            if (unlocked_count > row) {
+            entry_count = mnDiagram_CountUnlockedFighters();
+            if (entry_count > row) {
                 for (fighter_col = 0; fighter_col <= 7; fighter_col += 1) {
                     if ((fighter_col == 7) ||
-                        (col_unlocked_count =
-                             mnDiagram_CountUnlockedFighters(),
-                         (col_unlocked_count > fighter_col)))
+                        (entry_count = mnDiagram_CountUnlockedFighters(),
+                         (entry_count > fighter_col)))
                     {
                         row_fighter = mnDiagram_GetVisibleFighterCursorFrom2(
                             row_start, row);
