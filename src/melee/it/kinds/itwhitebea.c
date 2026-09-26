@@ -1,10 +1,10 @@
-#include <melee/it/kinds/itwhitebea.h>
+#include "itwhitebea.h"
 
 #include <math.h> // IWYU pragma: keep
 #include <placeholder.h>
 
-#include <melee/it/kinds/inlines.h>
-#include <melee/it/kinds/itfreeze.h>
+#include "inlines.h"
+#include "itfreeze.h"
 #include <melee/gr/gricemt.h>
 #include <melee/gr/stage.h>
 #include <melee/it/inlines.h>

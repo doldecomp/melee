@@ -1,6 +1,6 @@
-#include <melee/it/kinds/itmarumine.h>
+#include "itmarumine.h"
 
-#include <melee/it/kinds/inlines.h>
+#include "inlines.h"
 #include <dolphin/mtx.h>
 #include <melee/ef/efsync.h>
 #include <melee/it/inlines.h>

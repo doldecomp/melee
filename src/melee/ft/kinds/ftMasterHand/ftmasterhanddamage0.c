@@ -1,9 +1,9 @@
-#include <melee/ft/kinds/ftMasterHand/ftmasterhanddamage0.h>
+#include "ftmasterhanddamage0.h"
 
 #include <Runtime/platform.h>
 
-#include <melee/ft/kinds/ftMasterHand/ftmasterhandthrownmasterhand.h>
-#include <melee/ft/kinds/ftMasterHand/types.h>
+#include "ftmasterhandthrownmasterhand.h"
+#include "types.h"
 #include <melee/ft/fighter.h>
 #include <melee/ft/ft_0877.h>
 #include <melee/ft/ft_0881.h>
@@ -81,7 +81,8 @@ void ftMh_Damage_Anim(HSD_GObj* gobj)
         fp->cmd_vars[0] = 0;
     }
     if (fp->mv.mh.unk0.x8 > 0 && !ftAnim_IsFramesRemaining(gobj)) {
-        Fighter_ChangeMotionState(gobj, ftMh_MS_Damage2, Ft_MF_None, 0, 1, 0, 0);
+        Fighter_ChangeMotionState(gobj, ftMh_MS_Damage2, Ft_MF_None, 0, 1, 0,
+                                  0);
         ftAnim_8006EBA4(gobj);
     }
     if (--fp->mv.mh.unk0.x8 == 0) {
@@ -102,7 +103,8 @@ void ftMh_MS_345_Anim(HSD_GObj* gobj)
         fp->cmd_vars[0] = 0;
     }
     if (fp->mv.mh.unk0.x8 > 0 && !ftAnim_IsFramesRemaining(gobj)) {
-        Fighter_ChangeMotionState(gobj, ftMh_MS_Damage2, Ft_MF_None, 0, 1, 0, 0);
+        Fighter_ChangeMotionState(gobj, ftMh_MS_Damage2, Ft_MF_None, 0, 1, 0,
+                                  0);
         ftAnim_8006EBA4(gobj);
     }
     if (--fp->mv.mh.unk0.x8 == 0) {

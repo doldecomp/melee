@@ -1,4 +1,4 @@
-#include <melee/it/kinds/it_2ADA.h>
+#include "it_2ADA.h"
 
 #include <Runtime/platform.h>
 

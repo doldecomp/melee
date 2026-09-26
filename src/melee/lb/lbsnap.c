@@ -1,12 +1,12 @@
-#include <melee/lb/lbsnap.h>
+#include "lbsnap.h"
 
 #include <placeholder.h>
 #include <stdio.h>
 
-#include <melee/lb/lbarchive.h>
-#include <melee/lb/lbcardnew.h>
-#include <melee/lb/lblanguage.h>
-#include <melee/lb/types.h>
+#include "lbarchive.h"
+#include "lbcardnew.h"
+#include "lblanguage.h"
+#include "types.h"
 #include <melee/it/types.h>
 #ifdef MUST_MATCH
 #include <MetroTRK/intrinsics.h>

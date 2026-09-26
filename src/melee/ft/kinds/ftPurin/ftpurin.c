@@ -1,15 +1,15 @@
-#include <melee/ft/kinds/ftPurin/ftpurin.h>
+#include "ftpurin.h"
 
 #include <melee/ft/kinds/ftCommon/forward.h>
 
 #include <placeholder.h>
 
-#include <melee/ft/kinds/ftPurin/forward.h>
-#include <melee/ft/kinds/ftPurin/ftpurinspecialhi.h>
-#include <melee/ft/kinds/ftPurin/ftpurinspeciallw.h>
-#include <melee/ft/kinds/ftPurin/ftpurinspecialn.h>
-#include <melee/ft/kinds/ftPurin/ftpurinspecials.h>
-#include <melee/ft/kinds/ftPurin/types.h>
+#include "forward.h"
+#include "ftpurinspecialhi.h"
+#include "ftpurinspeciallw.h"
+#include "ftpurinspecialn.h"
+#include "ftpurinspecials.h"
+#include "types.h"
 #include <melee/ef/efsync.h>
 #include <melee/ft/fighter.h>
 #include <melee/ft/ftanim.h>

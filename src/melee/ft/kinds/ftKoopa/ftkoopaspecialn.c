@@ -1,8 +1,8 @@
-#include <melee/ft/kinds/ftKoopa/ftkoopaspecialn.h>
+#include "ftkoopaspecialn.h"
 
 #include <melee/ft/forward.h>
 
-#include <melee/ft/kinds/ftKoopa/forward.h>
+#include "forward.h"
 #include <melee/cm/camera.h>
 #include <melee/ft/fighter.h>
 #include <melee/ft/ft_081B.h>
@@ -250,7 +250,8 @@ void ftKp_SpecialN_IASA(Fighter_GObj* gobj)
                 ftKp_SpecialLw_80134ACC(gobj);
             }
         } else {
-            Fighter_ChangeMotionState(gobj, 0x157, Ft_MF_None, 0.0f, 1.0f, 0.0f, NULL);
+            Fighter_ChangeMotionState(gobj, 0x157, Ft_MF_None, 0.0f, 1.0f,
+                                      0.0f, NULL);
         }
     } else if (!fp->mv.kp.specialn.x0) {
         ftKp_SpecialLw_80134ACC(gobj);
@@ -292,7 +293,8 @@ void ftKp_SpecialAirN_IASA(Fighter_GObj* gobj)
                 ftKp_SpecialLw_80134ACC(gobj);
             }
         } else {
-            Fighter_ChangeMotionState(gobj, 0x15a, Ft_MF_None, 0.0f, 1.0f, 0.0f, NULL);
+            Fighter_ChangeMotionState(gobj, 0x15a, Ft_MF_None, 0.0f, 1.0f,
+                                      0.0f, NULL);
         }
     } else if (!fp->mv.kp.specialn.x0) {
         ftKp_SpecialLw_80134ACC(gobj);

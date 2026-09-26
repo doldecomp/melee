@@ -1,4 +1,4 @@
-#include <melee/ft/kinds/ftZelda/ftzeldaspecialhi.h>
+#include "ftzeldaspecialhi.h"
 
 #include <Runtime/platform.h>
 
@@ -6,7 +6,7 @@
 
 #include <math.h>
 
-#include <melee/ft/kinds/ftZelda/types.h>
+#include "types.h"
 #include <dolphin/mtx.h>
 #include <melee/ef/efsync.h>
 #include <melee/ft/fighter.h>
@@ -428,7 +428,8 @@ void ftZd_SpecialHi_8013A058(HSD_GObj* gobj)
                           cosf(temp_f5);
                 fp->gr_vel = fp->facing_dir * temp_f6;
 
-                Fighter_ChangeMotionState(gobj, 350, Ft_MF_None, 35.0, 1.0, 0, NULL);
+                Fighter_ChangeMotionState(gobj, 350, Ft_MF_None, 35.0, 1.0, 0,
+                                          NULL);
                 ftAnim_8006EBA4(gobj);
                 ftAnim_SetAnimRate(gobj, 0);
 

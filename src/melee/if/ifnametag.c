@@ -1,7 +1,7 @@
-#include <melee/if/ifnametag.h>
+#include "ifnametag.h"
 
-#include <melee/if/forward.h>
-#include <melee/if/ifall.h>
+#include "forward.h"
+#include "ifall.h"
 #include <dolphin/mtx.h>
 #include <melee/cm/camera.h>
 #include <melee/gm/gm_unsplit.h>

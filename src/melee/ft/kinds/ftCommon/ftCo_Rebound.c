@@ -1,8 +1,8 @@
-#include <melee/ft/kinds/ftCommon/ftCo_Rebound.h>
+#include "ftCo_Rebound.h"
 
 #include <Runtime/platform.h>
 
-#include <melee/ft/kinds/ftCommon/types.h>
+#include "types.h"
 #include <melee/ft/fighter.h>
 #include <melee/ft/ft_081B.h>
 #include <melee/ft/ft_084E.h>

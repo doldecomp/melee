@@ -1,11 +1,11 @@
-#include <melee/ft/kinds/ftNess/ftnessattacks4.h>
+#include "ftnessattacks4.h"
 
 #include <Runtime/platform.h>
 
 #include <melee/ft/forward.h>
 
-#include <melee/ft/kinds/ftNess/ftness.h>
-#include <melee/ft/kinds/ftNess/types.h>
+#include "ftness.h"
+#include "types.h"
 #include <melee/ft/fighter.h>
 #include <melee/ft/ft_081B.h>
 #include <melee/ft/ft_084E.h>
@@ -39,8 +39,8 @@ void ftNs_AttackS4_Enter(HSD_GObj* gobj) // Ness's F-Smash Motion State handler
 
     fp->cmd_vars[0] = false;
 
-    Fighter_ChangeMotionState(gobj, ftNs_MS_AttackS4, Ft_MF_None, 0.0f, 1.0f, 0.0f,
-                              NULL);
+    Fighter_ChangeMotionState(gobj, ftNs_MS_AttackS4, Ft_MF_None, 0.0f, 1.0f,
+                              0.0f, NULL);
 
     ftAnim_8006EBA4(gobj);
 

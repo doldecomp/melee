@@ -1,4 +1,4 @@
-#include <melee/ft/kinds/ftMario/ftmariospecialhi.h>
+#include "ftmariospecialhi.h"
 
 #include <Runtime/platform.h>
 
@@ -6,8 +6,8 @@
 
 #include <math.h>
 
-#include <melee/ft/kinds/ftMario/inlines.h>
-#include <melee/ft/kinds/ftMario/types.h>
+#include "inlines.h"
+#include "types.h"
 #include <dolphin/mtx.h>
 #include <melee/ft/fighter.h>
 #include <melee/ft/ft_081B.h>
@@ -26,7 +26,8 @@ void ftMr_SpecialHi_Enter(HSD_GObj* gobj)
     fp = GET_FIGHTER(gobj);
     fp->cmd_vars[0] = 0;
     fp->throw_flags = 0;
-    Fighter_ChangeMotionState(gobj, ftMr_MS_SpecialHi, Ft_MF_None, 0, 1, 0, NULL);
+    Fighter_ChangeMotionState(gobj, ftMr_MS_SpecialHi, Ft_MF_None, 0, 1, 0,
+                              NULL);
     ftAnim_8006EBA4(gobj);
 }
 
@@ -41,7 +42,8 @@ void ftMr_SpecialAirHi_Enter(HSD_GObj* gobj)
     fp->throw_flags = 0;
     fp->self_vel.y = 0;
     fp->self_vel.x = fp->self_vel.x * sa->specialhi.vel_x;
-    Fighter_ChangeMotionState(gobj, ftMr_MS_SpecialAirHi, Ft_MF_None, 0, 1, 0, NULL);
+    Fighter_ChangeMotionState(gobj, ftMr_MS_SpecialAirHi, Ft_MF_None, 0, 1, 0,
+                              NULL);
     ftAnim_8006EBA4(gobj);
 }
 

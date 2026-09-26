@@ -1,25 +1,32 @@
 #include "list.h"
+
 #include <Runtime/platform.h>
+
 #include <string.h>
+
 #include "debug.h"
 
 HSD_ObjAllocData slist_alloc_data;
 HSD_ObjAllocData dlist_alloc_data;
 
-void HSD_HSD_ListInitAllocData(void) {
+void HSD_HSD_ListInitAllocData(void)
+{
     HSD_ObjAllocInit(&slist_alloc_data, sizeof(HSD_SList), 4);
     HSD_ObjAllocInit(&dlist_alloc_data, sizeof(HSD_DList), 4);
 }
 
-HSD_ObjAllocData* HSD_SListGetAllocData(void) {
+HSD_ObjAllocData* HSD_SListGetAllocData(void)
+{
     return &slist_alloc_data;
 }
 
-HSD_ObjAllocData* HSD_DListGetAllocData(void) {
+HSD_ObjAllocData* HSD_DListGetAllocData(void)
+{
     return &dlist_alloc_data;
 }
 
-HSD_SList* HSD_SListAlloc(void) {
+HSD_SList* HSD_SListAlloc(void)
+{
     HSD_SList* list = HSD_ObjAlloc(HSD_SListGetAllocData());
 
     if (list) {
@@ -29,7 +36,8 @@ HSD_SList* HSD_SListAlloc(void) {
     return list;
 }
 
-HSD_SList* HSD_SListAllocAndAppend(HSD_SList* next, void* data) {
+HSD_SList* HSD_SListAllocAndAppend(HSD_SList* next, void* data)
+{
     HSD_SList* list = HSD_SListAlloc();
     if (list) {
         list->data = data;
@@ -38,7 +46,8 @@ HSD_SList* HSD_SListAllocAndAppend(HSD_SList* next, void* data) {
     return HSD_SListAppendList(next, list);
 }
 
-HSD_SList* HSD_SListAllocAndPrepend(HSD_SList* next, void* data) {
+HSD_SList* HSD_SListAllocAndPrepend(HSD_SList* next, void* data)
+{
     HSD_SList* list = HSD_SListAlloc();
     if (list) {
         list->data = data;
@@ -47,7 +56,8 @@ HSD_SList* HSD_SListAllocAndPrepend(HSD_SList* next, void* data) {
     return HSD_SListPrependList(next, list);
 }
 
-HSD_SList* HSD_SListAppendList(HSD_SList* list, HSD_SList* next) {
+HSD_SList* HSD_SListAppendList(HSD_SList* list, HSD_SList* next)
+{
     HSD_ASSERT(179, next);
 
     if (list != NULL) {
@@ -60,13 +70,15 @@ HSD_SList* HSD_SListAppendList(HSD_SList* list, HSD_SList* next) {
     }
 }
 
-HSD_SList* HSD_SListPrependList(HSD_SList* list, HSD_SList* prev) {
+HSD_SList* HSD_SListPrependList(HSD_SList* list, HSD_SList* prev)
+{
     HSD_ASSERT(202, prev);
     prev->next = list;
     return prev;
 }
 
-HSD_SList* HSD_SListRemove(HSD_SList* list) {
+HSD_SList* HSD_SListRemove(HSD_SList* list)
+{
     HSD_SList* next = NULL;
 
     HSD_ASSERT(list, "List is NULL");

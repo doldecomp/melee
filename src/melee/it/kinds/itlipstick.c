@@ -1,7 +1,7 @@
-#include <melee/it/kinds/itlipstick.h>
+#include "itlipstick.h"
 
-#include <melee/it/kinds/forward.h>
-#include <melee/it/kinds/itlipstickspore.h>
+#include "forward.h"
+#include "itlipstickspore.h"
 #include <melee/it/inlines.h>
 #include <melee/it/it_26B1.h>
 #include <melee/it/it_2725.h>

@@ -1,14 +1,14 @@
-#include <mn/mndiagram2.h>
+#include "mndiagram2.h"
 
 #include <sysdolphin/baselib/forward.h>
 
 #include <stdbool.h>
 
-#include <mn/inlines.h>
-#include <mn/mndiagram.h>
-#include <mn/mndiagram3.h>
-#include <mn/mnmain.h>
-#include <mn/types.h>
+#include "inlines.h"
+#include "mndiagram.h"
+#include "mndiagram3.h"
+#include "mnmain.h"
+#include "types.h"
 #include <melee/gm/gm_1601.h>
 #include <melee/gm/gmmain_lib.h>
 #include <melee/lb/lb_00B0.h>

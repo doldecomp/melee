@@ -1,9 +1,9 @@
-#include <melee/it/kinds/itpikachuthunder.h>
+#include "itpikachuthunder.h"
 
 #include <placeholder.h>
 
-#include <melee/it/kinds/forward.h>
-#include <melee/it/kinds/inlines.h>
+#include "forward.h"
+#include "inlines.h"
 #include <melee/db/db.h>
 #include <melee/ft/kinds/ftPikachu/ftpikachuspeciallw.h>
 #include <melee/it/inlines.h>

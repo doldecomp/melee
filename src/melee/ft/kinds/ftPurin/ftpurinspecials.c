@@ -1,12 +1,12 @@
-#include <melee/ft/kinds/ftPurin/ftpurinspecials.h>
+#include "ftpurinspecials.h"
 
 #include <melee/ft/forward.h>
 
 #include <math.h>
 #include <placeholder.h>
 
-#include <melee/ft/kinds/ftPurin/forward.h>
-#include <melee/ft/kinds/ftPurin/types.h>
+#include "forward.h"
+#include "types.h"
 #include <melee/ft/fighter.h>
 #include <melee/ft/ft_081B.h>
 #include <melee/ft/ft_084E.h>
@@ -46,8 +46,8 @@ static float calcAngleRadians(HSD_GObj* gobj, float lstick_y)
 void ftPr_SpecialS_Enter(Fighter_GObj* fighter_gobj)
 {
     Fighter* fighter = GET_FIGHTER(fighter_gobj);
-    Fighter_ChangeMotionState(fighter_gobj, ftPr_MS_SpecialS, Ft_MF_None, 0.0f, 1.0f,
-                              0.0f, NULL);
+    Fighter_ChangeMotionState(fighter_gobj, ftPr_MS_SpecialS, Ft_MF_None, 0.0f,
+                              1.0f, 0.0f, NULL);
     ftAnim_8006EBA4(fighter_gobj);
     Fighter_ClearCmdVars(fighter);
 }
@@ -56,8 +56,8 @@ void ftPr_SpecialAirS_Enter(Fighter_GObj* fighter_gobj)
 {
     Fighter* fighter = GET_FIGHTER(fighter_gobj);
 
-    Fighter_ChangeMotionState(fighter_gobj, ftPr_MS_SpecialAirS, Ft_MF_None, 0.0f, 1.0f,
-                              0.0f, NULL);
+    Fighter_ChangeMotionState(fighter_gobj, ftPr_MS_SpecialAirS, Ft_MF_None,
+                              0.0f, 1.0f, 0.0f, NULL);
     ftAnim_8006EBA4(fighter_gobj);
     Fighter_ClearCmdVars(fighter);
 }

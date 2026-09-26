@@ -1,11 +1,11 @@
-#include <melee/it/itmaplib.h>
+#include "itmaplib.h"
 
-#include <melee/it/inlines.h>
-#include <melee/it/it_26B1.h>
-#include <melee/it/it_2725.h>
-#include <melee/it/it_3F14.h>
-#include <melee/it/iteffect.h>
-#include <melee/it/ithitbox.h>
+#include "inlines.h"
+#include "it_26B1.h"
+#include "it_2725.h"
+#include "it_3F14.h"
+#include "iteffect.h"
+#include "ithitbox.h"
 #include <melee/lb/lbvector.h>
 #include <melee/mp/mpcoll.h>
 #include <melee/mp/mplib.h>

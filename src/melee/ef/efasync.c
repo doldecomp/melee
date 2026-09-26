@@ -1,12 +1,12 @@
-#include <melee/ef/efasync.h>
+#include "efasync.h"
 
 #include <math.h>
 #include <stdarg.h>
 
-#include <melee/ef/efdata.h>
-#include <melee/ef/eflib.h>
-#include <melee/ef/efsync.h>
-#include <melee/ef/types.h>
+#include "efdata.h"
+#include "eflib.h"
+#include "efsync.h"
+#include "types.h"
 #include <melee/cm/camera.h>
 #include <melee/lb/lb_00B0.h>
 #include <melee/lb/lbarchive.h>

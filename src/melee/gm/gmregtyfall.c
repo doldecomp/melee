@@ -1,7 +1,7 @@
-#include <melee/gm/gmregtyfall.h>
+#include "gmregtyfall.h"
 
-#include <melee/gm/forward.h>
-#include <melee/gm/gm_unsplit.h>
+#include "forward.h"
+#include "gm_unsplit.h"
 #include <dolphin/pad.h>
 #include <melee/cm/camera.h>
 #include <melee/ef/efasync.h>

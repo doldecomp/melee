@@ -1,11 +1,11 @@
-#include <melee/ft/fighter.h>
-#include <melee/ft/ft_081B.h>
-#include <melee/ft/ft_0877.h>
-#include <melee/ft/ft_0881.h>
-#include <melee/ft/ft_0892.h>
-#include <melee/ft/ft_0CDD.h>
-#include <melee/ft/ftcommon.h>
-#include <melee/ft/inlines.h>
+#include "fighter.h"
+#include "ft_081B.h"
+#include "ft_0877.h"
+#include "ft_0881.h"
+#include "ft_0892.h"
+#include "ft_0CDD.h"
+#include "ftcommon.h"
+#include "inlines.h"
 #include <melee/ef/efsync.h>
 #include <melee/it/kinds/itfflower.h>
 #include <melee/lb/lb_00B0.h>
@@ -22,8 +22,8 @@ void ftCo_800CE3E0(Fighter_GObj* fighter_gobj)
     fighter->mv.co.itemthrow.xC = 0;
     fighter->mv.co.itemthrow.x10 = 0.0f;
     fighter->mv.co.itemthrow.x14 = 0;
-    Fighter_ChangeMotionState(fighter_gobj, ftCo_MS_FireFlowerShoot, Ft_MF_None, 0.0f,
-                              1.0f, 0.0f, NULL);
+    Fighter_ChangeMotionState(fighter_gobj, ftCo_MS_FireFlowerShoot,
+                              Ft_MF_None, 0.0f, 1.0f, 0.0f, NULL);
     ftAnim_8006EBA4(fighter_gobj);
     fighter->accessory4_cb = ftCo_800CE650;
     fighter->take_dmg_cb = ftCo_800CE620;
@@ -39,8 +39,8 @@ void ftCo_800CE480(Fighter_GObj* fighter_gobj)
     fighter->mv.co.itemthrow.xC = 0;
     fighter->mv.co.itemthrow.x10 = 0.0f;
     fighter->mv.co.itemthrow.x14 = 0;
-    Fighter_ChangeMotionState(fighter_gobj, ftCo_MS_FireFlowerShootAir, Ft_MF_None,
-                              0.0f, 1.0f, 0.0f, NULL);
+    Fighter_ChangeMotionState(fighter_gobj, ftCo_MS_FireFlowerShootAir,
+                              Ft_MF_None, 0.0f, 1.0f, 0.0f, NULL);
     ftAnim_8006EBA4(fighter_gobj);
     ftCommon_ClampAirDrift(fighter);
     fighter->accessory4_cb = ftCo_800CE650;

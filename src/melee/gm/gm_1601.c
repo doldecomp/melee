@@ -1,4 +1,4 @@
-#include <melee/gm/gm_1601.h>
+#include "gm_1601.h"
 
 #include <Runtime/platform.h>
 
@@ -8,13 +8,13 @@
 #include <placeholder.h>
 #include <stddef.h>
 
-#include <melee/gm/forward.h>
-#include <melee/gm/gm_1601.static.h>
-#include <melee/gm/gm_unsplit.h>
-#include <melee/gm/gmmain_lib.h>
-#include <melee/gm/gmscene.h>
-#include <melee/gm/gmstamina.h>
-#include <melee/gm/types.h>
+#include "forward.h"
+#include "gm_1601.static.h"
+#include "gm_unsplit.h"
+#include "gmmain_lib.h"
+#include "gmscene.h"
+#include "gmstamina.h"
+#include "types.h"
 #include <dolphin/pad.h>
 #include <melee/cm/camera.h>
 #include <melee/gr/ground.h>

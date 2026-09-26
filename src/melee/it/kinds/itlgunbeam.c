@@ -1,11 +1,11 @@
-#include <melee/it/kinds/itlgunbeam.h>
+#include "itlgunbeam.h"
 
 #include <melee/it/forward.h>
 
 #include <math.h>
 #include <placeholder.h>
 
-#include <melee/it/kinds/inlines.h>
+#include "inlines.h"
 #include <melee/db/db.h>
 #include <melee/ef/eflib.h>
 #include <melee/ef/efsync.h>

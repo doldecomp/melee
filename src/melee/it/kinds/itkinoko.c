@@ -1,4 +1,4 @@
-#include <melee/it/kinds/itkinoko.h>
+#include "itkinoko.h"
 
 #include <melee/it/inlines.h>
 #include <melee/it/it_26B1.h>

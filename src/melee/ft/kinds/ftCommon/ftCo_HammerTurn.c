@@ -1,13 +1,13 @@
-#include <melee/ft/kinds/ftCommon/ftCo_HammerTurn.h>
+#include "ftCo_HammerTurn.h"
 
 #include <Runtime/platform.h>
 
 #include <math.h>
 
-#include <melee/ft/kinds/ftCommon/ftCo_HammerJump.h>
-#include <melee/ft/kinds/ftCommon/ftCo_HammerWait.h>
-#include <melee/ft/kinds/ftCommon/ftCo_Turn.h>
-#include <melee/ft/kinds/ftCommon/types.h>
+#include "ftCo_HammerJump.h"
+#include "ftCo_HammerWait.h"
+#include "ftCo_Turn.h"
+#include "types.h"
 #include <melee/ft/fighter.h>
 #include <melee/ft/ft_084E.h>
 #include <melee/ft/ftparts.h>

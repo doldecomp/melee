@@ -1,8 +1,8 @@
-#include <melee/it/kinds/itclimbersice.h>
+#include "itclimbersice.h"
 
 #include <placeholder.h>
 
-#include <melee/it/kinds/inlines.h>
+#include "inlines.h"
 #include <melee/db/db.h>
 #include <melee/ef/efasync.h>
 #include <melee/ef/eflib.h>

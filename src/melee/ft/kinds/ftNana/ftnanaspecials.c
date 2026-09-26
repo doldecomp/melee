@@ -4,7 +4,7 @@
 
 #include <math.h>
 
-#include <melee/ft/kinds/ftNana/ftnana.h>
+#include "ftnana.h"
 #include <dolphin/mtx.h>
 #include <melee/ft/fighter.h>
 #include <melee/ft/ft_081B.h>

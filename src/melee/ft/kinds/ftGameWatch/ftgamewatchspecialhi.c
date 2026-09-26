@@ -1,4 +1,4 @@
-#include <melee/ft/kinds/ftGameWatch/ftgamewatchspecialhi.h>
+#include "ftgamewatchspecialhi.h"
 
 #include <Runtime/platform.h>
 
@@ -6,8 +6,8 @@
 
 #include <math.h>
 
-#include <melee/ft/kinds/ftGameWatch/ftgamewatch.h>
-#include <melee/ft/kinds/ftGameWatch/types.h>
+#include "ftgamewatch.h"
+#include "types.h"
 #include <dolphin/mtx.h>
 #include <melee/ft/fighter.h>
 #include <melee/ft/ft_081B.h>
@@ -130,8 +130,8 @@ void ftGw_SpecialHi_Enter(HSD_GObj* gobj)
     fp->x74_self_accel.y = 0.0f;
     fp->self_vel.y = 0.0f;
     ftCommon_8007D60C(fp);
-    Fighter_ChangeMotionState(gobj, ftGw_MS_SpecialHi, Ft_MF_None, 0.0f, 1.0f, 0.0f,
-                              NULL);
+    Fighter_ChangeMotionState(gobj, ftGw_MS_SpecialHi, Ft_MF_None, 0.0f, 1.0f,
+                              0.0f, NULL);
     ftGameWatch_SpecialHi_SetVars(gobj);
     ftAnim_8006EBA4(gobj);
     ft_80088510(fp, 290066, 127, 64);
@@ -145,8 +145,8 @@ void ftGw_SpecialAirHi_Enter(HSD_GObj* gobj)
     u8 _[24];
 
     ftCommon_8007D60C(fp);
-    Fighter_ChangeMotionState(gobj, ftGw_MS_SpecialAirHi, Ft_MF_None, 0.0f, 1.0f, 0.0f,
-                              NULL);
+    Fighter_ChangeMotionState(gobj, ftGw_MS_SpecialAirHi, Ft_MF_None, 0.0f,
+                              1.0f, 0.0f, NULL);
     ftGameWatch_SpecialHi_SetVars(gobj);
     ftAnim_8006EBA4(gobj);
     ft_80088510(fp, 290066, 127, 64);

@@ -1,4 +1,4 @@
-#include <melee/it/kinds/itnesspkfirepillar.h>
+#include "itnesspkfirepillar.h"
 
 #include <melee/db/db.h>
 #include <melee/it/inlines.h>

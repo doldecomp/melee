@@ -1,11 +1,11 @@
-#include <melee/ft/kinds/ftCommon/ftCo_PassiveStand.h>
+#include "ftCo_PassiveStand.h"
 
 #include <Runtime/platform.h>
 
 #include <melee/ft/forward.h>
 
-#include <melee/ft/kinds/ftCommon/ftCo_DownAttack.h>
-#include <melee/ft/kinds/ftCommon/inlines.h>
+#include "ftCo_DownAttack.h"
+#include "inlines.h"
 #include <dolphin/mtx.h>
 #include <melee/ft/fighter.h>
 #include <melee/ft/ft_081B.h>

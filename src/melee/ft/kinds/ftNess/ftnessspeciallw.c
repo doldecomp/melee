@@ -1,11 +1,11 @@
-#include <melee/ft/kinds/ftNess/ftnessspeciallw.h>
+#include "ftnessspeciallw.h"
 
 #include <Runtime/platform.h>
 
 #include <melee/ft/forward.h>
 
-#include <melee/ft/kinds/ftNess/ftness.h>
-#include <melee/ft/kinds/ftNess/types.h>
+#include "ftness.h"
+#include "types.h"
 #include <dolphin/mtx.h>
 #include <melee/ef/efasync.h>
 #include <melee/ft/fighter.h>
@@ -50,7 +50,8 @@ void ftNs_SpecialLwStart_Enter(HSD_GObj* gobj) // Ness's grounded PSI Magnet
     temp_fp->mv.ns.speciallw.gravityDelay =
         ness_attr->x84_PSI_MAGNET_FRAMES_BEFORE_GRAVITY;
     temp_fp->mv.ns.speciallw.x10 = 0;
-    Fighter_ChangeMotionState(gobj, ftNs_MS_SpecialLwStart, Ft_MF_None, 0, 1, 0, NULL);
+    Fighter_ChangeMotionState(gobj, ftNs_MS_SpecialLwStart, Ft_MF_None, 0, 1,
+                              0, NULL);
     ftAnim_8006EBA4(gobj);
 }
 
@@ -74,8 +75,8 @@ void ftNs_SpecialAirLwStart_Enter(
     temp_fp->mv.ns.speciallw.x10 = 0;
     temp_fp->self_vel.y = 0.0f;
     temp_fp->self_vel.x /= ness_attr->x88_PSI_MAGNET_MOMENTUM_PRESERVATION;
-    Fighter_ChangeMotionState(gobj, ftNs_MS_SpecialAirLwStart, Ft_MF_None, 0.0f, 1.0f,
-                              0.0f, NULL);
+    Fighter_ChangeMotionState(gobj, ftNs_MS_SpecialAirLwStart, Ft_MF_None,
+                              0.0f, 1.0f, 0.0f, NULL);
     ftAnim_8006EBA4(gobj);
 }
 
@@ -1060,8 +1061,8 @@ void ftNs_SpecialAirLwEnd_AirToGround(
 void ftNs_SpecialLwEnd_Enter(
     HSD_GObj* gobj) // Ness's grounded PSI Magnet End Motion State handler
 {
-    Fighter_ChangeMotionState(gobj, ftNs_MS_SpecialLwEnd, Ft_MF_None, 0.0f, 1.0f, 0.0f,
-                              NULL);
+    Fighter_ChangeMotionState(gobj, ftNs_MS_SpecialLwEnd, Ft_MF_None, 0.0f,
+                              1.0f, 0.0f, NULL);
 }
 
 /// 0x8011B4E4
@@ -1069,6 +1070,6 @@ void ftNs_SpecialLwEnd_Enter(
 void ftNs_SpecialAirLwEnd_Enter(
     HSD_GObj* gobj) // Ness's aerial PSI Magnet End Motion State handler
 {
-    Fighter_ChangeMotionState(gobj, ftNs_MS_SpecialAirLwEnd, Ft_MF_None, 0.0f, 1.0f,
-                              0.0f, NULL);
+    Fighter_ChangeMotionState(gobj, ftNs_MS_SpecialAirLwEnd, Ft_MF_None, 0.0f,
+                              1.0f, 0.0f, NULL);
 }

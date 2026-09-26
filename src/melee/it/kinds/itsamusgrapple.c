@@ -1,12 +1,12 @@
-#include <melee/it/kinds/itsamusgrapple.h>
+#include "itsamusgrapple.h"
 
 #include <melee/ft/forward.h>
 #include <sysdolphin/baselib/forward.h>
 
 #include <placeholder.h>
 
-#include <melee/it/kinds/inlines.h>
-#include <melee/it/kinds/itlinkhookshot.h>
+#include "inlines.h"
+#include "itlinkhookshot.h"
 #include <dolphin/types.h>
 #include <melee/ef/efsync.h>
 #include <melee/ft/fighter.h>

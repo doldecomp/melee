@@ -1,14 +1,14 @@
-#include <gr/grtfalco.h>
+#include "grtfalco.h"
 
 #include <melee/mp/forward.h>
 
 #include <placeholder.h>
 
-#include <gr/granime.h>
-#include <gr/ground.h>
-#include <gr/grzakogenerator.h>
-#include <gr/inlines.h>
-#include <gr/types.h>
+#include "granime.h"
+#include "ground.h"
+#include "grzakogenerator.h"
+#include "inlines.h"
+#include "types.h"
 #include <melee/mp/mplib.h>
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/gobjproc.h>

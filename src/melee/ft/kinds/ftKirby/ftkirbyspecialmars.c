@@ -1,13 +1,13 @@
-#include <melee/ft/kinds/ftKirby/ftkirbyspecialmars.h>
+#include "ftkirbyspecialmars.h"
 
 #include <melee/ft/forward.h>
 
 #include <placeholder.h>
 #include <stddef.h>
 
-#include <melee/ft/kinds/ftKirby/forward.h>
-#include <melee/ft/kinds/ftKirby/ftkirby.h>
-#include <melee/ft/kinds/ftKirby/types.h>
+#include "forward.h"
+#include "ftkirby.h"
+#include "types.h"
 #include <melee/ef/efsync.h>
 #include <melee/ft/fighter.h>
 #include <melee/ft/ft_081B.h>
@@ -572,7 +572,8 @@ void ftKb_SpecialNPe_8010C148(Fighter_GObj* gobj)
                    ? ftKb_MS_MsSpecialNEnd0 + 1
                    : ftKb_MS_FeSpecialNEnd0 + 1;
     }
-    Fighter_ChangeMotionState(gobj, msid, Ft_MF_KeepAccessory, 1.0F, 1.0F, 0.0F, NULL);
+    Fighter_ChangeMotionState(gobj, msid, Ft_MF_KeepAccessory, 1.0F, 1.0F,
+                              0.0F, NULL);
     GET_FIGHTER(gobj)->accessory4_cb = fn_8010B1F4;
 }
 
@@ -590,6 +591,7 @@ void ftKb_SpecialNPe_8010C1E8(Fighter_GObj* gobj)
                    ? ftKb_MS_MsSpecialAirNEnd0 + 1
                    : ftKb_MS_FeSpecialAirNEnd0 + 1;
     }
-    Fighter_ChangeMotionState(gobj, msid, Ft_MF_KeepAccessory, 1.0F, 1.0F, 0.0F, NULL);
+    Fighter_ChangeMotionState(gobj, msid, Ft_MF_KeepAccessory, 1.0F, 1.0F,
+                              0.0F, NULL);
     GET_FIGHTER(gobj)->accessory4_cb = fn_8010B1F4;
 }

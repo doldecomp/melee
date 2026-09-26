@@ -1,9 +1,9 @@
-#include <melee/ft/kinds/ftCommon/ftCo_CaptureYoshi.h>
+#include "ftCo_CaptureYoshi.h"
 
 #include <Runtime/platform.h>
 
-#include <melee/ft/kinds/ftCommon/ftCo_Attack100.h>
-#include <melee/ft/kinds/ftCommon/inlines.h>
+#include "ftCo_Attack100.h"
+#include "inlines.h"
 #include <melee/ft/fighter.h>
 #include <melee/ft/ftanim.h>
 #include <melee/ft/ftcommon.h>

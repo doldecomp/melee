@@ -1,6 +1,6 @@
 #include <string.h>
 
-#include <melee/db/db.h>
+#include "db.h"
 #include <melee/gm/gm_unsplit.h>
 #include <sysdolphin/baselib/controller.h>
 #include <sysdolphin/baselib/debug.h>

@@ -1,8 +1,8 @@
-#include <melee/ft/ftcamera.h>
+#include "ftcamera.h"
 
-#include <melee/ft/fighter.h>
-#include <melee/ft/ftlib.h>
-#include <melee/ft/types.h>
+#include "fighter.h"
+#include "ftlib.h"
+#include "types.h"
 #include <dolphin/mtx.h>
 #include <melee/gr/stage.h>
 #include <sysdolphin/baselib/debug.h>

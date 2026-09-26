@@ -1,4 +1,4 @@
-#include <melee/lb/lblanguage.h>
+#include "lblanguage.h"
 
 #include <melee/gm/gmmain_lib.h>
 #include <melee/gm/types.h>

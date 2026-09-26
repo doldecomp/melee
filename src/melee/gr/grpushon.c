@@ -1,16 +1,16 @@
-#include <gr/grpushon.h>
+#include "grpushon.h"
 
 #include <Runtime/platform.h>
 
 #include <math.h>
 #include <placeholder.h>
 
-#include <gr/granime.h>
-#include <gr/ground.h>
-#include <gr/grzakogenerator.h>
-#include <gr/inlines.h>
-#include <gr/stage.h>
-#include <gr/types.h>
+#include "granime.h"
+#include "ground.h"
+#include "grzakogenerator.h"
+#include "inlines.h"
+#include "stage.h"
+#include "types.h"
 #include <melee/cm/camera.h>
 #include <melee/ft/ftdevice.h>
 #include <melee/ft/ftlib.h>

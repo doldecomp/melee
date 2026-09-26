@@ -1,10 +1,10 @@
-#include <melee/ft/ftcolanim.h>
+#include "ftcolanim.h"
 
-#include <melee/ft/fighter.h>
-#include <melee/ft/ft_0D4D.h>
-#include <melee/ft/ftaction.h>
-#include <melee/ft/ftdata.h>
-#include <melee/ft/kinds/ftCommon/ftCo_HammerWait.h>
+#include "fighter.h"
+#include "ft_0D4D.h"
+#include "ftaction.h"
+#include "ftdata.h"
+#include "kinds/ftCommon/ftCo_HammerWait.h"
 #include <melee/gm/gm_1601.h>
 #include <melee/lb/lb_013B.h>
 #include <melee/pl/player.h>

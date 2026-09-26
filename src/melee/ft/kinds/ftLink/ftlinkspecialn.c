@@ -1,4 +1,4 @@
-#include <melee/ft/kinds/ftLink/ftlinkspecialn.h>
+#include "ftlinkspecialn.h"
 
 #include <Runtime/platform.h>
 
@@ -8,9 +8,9 @@
 #include <math.h>
 #include <placeholder.h>
 
-#include <melee/ft/kinds/ftLink/forward.h>
-#include <melee/ft/kinds/ftLink/ftlink.h>
-#include <melee/ft/kinds/ftLink/types.h>
+#include "forward.h"
+#include "ftlink.h"
+#include "types.h"
 #include <dolphin/mtx.h>
 #include <melee/ft/fighter.h>
 #include <melee/ft/ft_081B.h>

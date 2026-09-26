@@ -1,8 +1,8 @@
-#include <melee/it/kinds/itwstar.h>
+#include "itwstar.h"
 
 #include <placeholder.h>
 
-#include <melee/it/kinds/inlines.h>
+#include "inlines.h"
 #include <melee/ef/efasync.h>
 #include <melee/ef/eflib.h>
 #include <melee/it/inlines.h>

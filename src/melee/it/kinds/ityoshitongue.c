@@ -1,4 +1,4 @@
-#include <melee/it/kinds/ityoshitongue.h>
+#include "ityoshitongue.h"
 
 #include <Runtime/platform.h>
 

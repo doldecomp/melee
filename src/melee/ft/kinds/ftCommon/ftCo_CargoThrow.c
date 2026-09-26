@@ -1,14 +1,14 @@
-#include <melee/ft/kinds/ftCommon/ftCo_CargoThrow.h>
+#include "ftCo_CargoThrow.h"
 
 #include <Runtime/platform.h>
 
 #include <melee/ft/forward.h>
 
-#include <melee/ft/kinds/ftCommon/ftCo_CargoFall.h>
-#include <melee/ft/kinds/ftCommon/ftCo_CargoWait.h>
-#include <melee/ft/kinds/ftCommon/ftCo_Damage.h>
-#include <melee/ft/kinds/ftCommon/ftCo_Throw.h>
-#include <melee/ft/kinds/ftCommon/ftCo_Thrown.h>
+#include "ftCo_CargoFall.h"
+#include "ftCo_CargoWait.h"
+#include "ftCo_Damage.h"
+#include "ftCo_Throw.h"
+#include "ftCo_Thrown.h"
 #include <dolphin/mtx.h>
 #include <melee/ft/fighter.h>
 #include <melee/ft/ft_081B.h>

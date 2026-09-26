@@ -1,14 +1,14 @@
-#include <melee/gm/gmvsmode.h>
+#include "gmvsmode.h"
 
 #include <melee/lb/forward.h>
 
-#include <melee/gm/forward.h>
-#include <melee/gm/gm_1A3F.h>
-#include <melee/gm/gm_unsplit.h>
-#include <melee/gm/gmmovieend.h>
-#include <melee/gm/gmresult.h>
-#include <melee/gm/gmvsmelee.h>
-#include <melee/gm/types.h>
+#include "forward.h"
+#include "gm_1A3F.h"
+#include "gm_unsplit.h"
+#include "gmmovieend.h"
+#include "gmresult.h"
+#include "gmvsmelee.h"
+#include "types.h"
 #include <melee/if/if_2FD9.h>
 #include <melee/lb/types.h>
 #include <melee/mn/types.h>

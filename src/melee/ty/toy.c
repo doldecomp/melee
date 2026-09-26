@@ -1,4 +1,4 @@
-#include <melee/ty/toy.h>
+#include "toy.h"
 
 #include <Runtime/platform.h>
 
@@ -9,8 +9,8 @@
 #include <stddef.h>
 #include <string.h>
 
-#include <melee/ty/tylist.h>
-#include <melee/ty/types.h>
+#include "tylist.h"
+#include "types.h"
 #include <dolphin/gx.h>
 #include <dolphin/mtx.h>
 #include <dolphin/os.h>

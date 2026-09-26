@@ -1,20 +1,15 @@
-#include <melee/ft/ftcpuattack.h>
+#include "ftcpuattack.h"
 
 #include <math.h>
 
-#include <melee/ft/fighter.h>
-#include <melee/ft/ftcmdscript.h>
-#include <melee/ft/ftlib.h>
-#include <melee/ft/inlines.h>
-#include <melee/ft/kinds/ftCommon/ftCo_09F7.h>
-#include <melee/ft/kinds/ftCommon/ftCo_0A01.h>
-#include <melee/ft/kinds/ftMasterHand/inlines.h>
-#include <melee/ft/kinds/ftMasterHand/forward.h>
-#include <melee/ft/kinds/ftMasterHand/forward.h>
-#include <melee/ft/kinds/ftMasterHand/forward.h>
-#include <melee/ft/kinds/ftMasterHand/forward.h>
-#include <melee/ft/kinds/ftMasterHand/forward.h>
-#include <melee/ft/kinds/ftMasterHand/forward.h>
+#include "fighter.h"
+#include "ftcmdscript.h"
+#include "ftlib.h"
+#include "inlines.h"
+#include "kinds/ftCommon/ftCo_09F7.h"
+#include "kinds/ftCommon/ftCo_0A01.h"
+#include "kinds/ftMasterHand/forward.h"
+#include "kinds/ftMasterHand/inlines.h"
 #include <melee/gr/ground.h>
 #include <melee/it/inlines.h>
 #include <melee/it/it_26B1.h>

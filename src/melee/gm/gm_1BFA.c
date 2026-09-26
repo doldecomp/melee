@@ -1,12 +1,12 @@
-#include <melee/gm/gm_1BFA.h>
+#include "gm_1BFA.h"
 
 #include <melee/lb/forward.h>
 
-#include <melee/gm/forward.h>
-#include <melee/gm/gm_unsplit.h>
-#include <melee/gm/gmmain_lib.h>
-#include <melee/gm/gmvsmelee.h>
-#include <melee/gm/types.h>
+#include "forward.h"
+#include "gm_unsplit.h"
+#include "gmmain_lib.h"
+#include "gmvsmelee.h"
+#include "types.h"
 #include <melee/if/if_2FD9.h>
 #include <melee/lb/inlines.h>
 #include <melee/lb/lb_00B0.h>

@@ -1,4 +1,4 @@
-#include <melee/ft/kinds/ftMario/ftmariostrings.h>
+#include "ftmariostrings.h"
 
 #include <melee/ft/types.h>
 

@@ -1,4 +1,4 @@
-#include <melee/it/kinds/itspycloak.h>
+#include "itspycloak.h"
 
 #include <Runtime/platform.h>
 

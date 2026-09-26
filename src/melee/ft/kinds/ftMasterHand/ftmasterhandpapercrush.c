@@ -1,7 +1,7 @@
-#include <melee/ft/kinds/ftMasterHand/ftmasterhandpapercrush.h>
+#include "ftmasterhandpapercrush.h"
 
-#include <melee/ft/kinds/ftMasterHand/ftmasterhandwait12.h>
-#include <melee/ft/kinds/ftMasterHand/types.h>
+#include "ftmasterhandwait12.h"
+#include "types.h"
 #include <dolphin/mtx.h>
 #include <melee/ft/fighter.h>
 #include <melee/ft/ft_084E.h>
@@ -35,7 +35,8 @@ void ftMh_RockCrushDown_Coll(HSD_GObj* gobj) {}
 void ftMh_MS_357_801526D8(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    Fighter_ChangeMotionState(gobj, ftMh_MS_PaperCrush, Ft_MF_None, 0, 1, 0, 0);
+    Fighter_ChangeMotionState(gobj, ftMh_MS_PaperCrush, Ft_MF_None, 0, 1, 0,
+                              0);
     ftAnim_8006EBA4(gobj);
     fp->mv.mh.unk0.x0 = 0;
 }

@@ -1,10 +1,10 @@
-#include <melee/ft/kinds/ftMasterHand/ftmasterhandwalk.h>
+#include "ftmasterhandwalk.h"
 
 #include <placeholder.h>
 
-#include <melee/ft/kinds/ftMasterHand/forward.h>
-#include <melee/ft/kinds/ftMasterHand/ftmasterhandslap.h>
-#include <melee/ft/kinds/ftMasterHand/ftmasterhandwait12.h>
+#include "forward.h"
+#include "ftmasterhandslap.h"
+#include "ftmasterhandwait12.h"
 #include <dolphin/mtx.h>
 #include <melee/ft/fighter.h>
 #include <melee/ft/ft_084E.h>
@@ -126,7 +126,8 @@ void ftMh_WalkLoop_Anim(HSD_GObj* gobj)
     }
 
     if (!ftAnim_IsFramesRemaining(gobj)) {
-        Fighter_ChangeMotionState(gobj, ftMh_MS_WalkLoop, Ft_MF_None, 0, 1, 0, 0);
+        Fighter_ChangeMotionState(gobj, ftMh_MS_WalkLoop, Ft_MF_None, 0, 1, 0,
+                                  0);
         ftAnim_8006EBA4(gobj);
     }
 }

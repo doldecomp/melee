@@ -1,13 +1,13 @@
-#include <melee/ft/kinds/ftPikachu/ftpikachu.h>
+#include "ftpikachu.h"
 
 #include <Runtime/platform.h>
 
-#include <melee/ft/kinds/ftPikachu/forward.h>
-#include <melee/ft/kinds/ftPikachu/ftpikachuspecialhi.h>
-#include <melee/ft/kinds/ftPikachu/ftpikachuspeciallw.h>
-#include <melee/ft/kinds/ftPikachu/ftpikachuspecialn.h>
-#include <melee/ft/kinds/ftPikachu/ftpikachuspecials.h>
-#include <melee/ft/kinds/ftPikachu/types.h>
+#include "forward.h"
+#include "ftpikachuspecialhi.h"
+#include "ftpikachuspeciallw.h"
+#include "ftpikachuspecialn.h"
+#include "ftpikachuspecials.h"
+#include "types.h"
 #include <dolphin/mtx.h>
 #include <melee/ft/ftcamera.h>
 #include <melee/ft/ftparts.h>

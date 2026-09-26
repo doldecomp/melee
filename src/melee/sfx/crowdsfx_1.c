@@ -2,7 +2,7 @@
 
 #include <placeholder.h>
 
-#include <melee/sfx/crowdsfx.h>
+#include "crowdsfx.h"
 #include <melee/ft/ftlib.h>
 #include <melee/mp/mplib.h>
 #include <sysdolphin/baselib/gobj.h>

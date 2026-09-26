@@ -1,15 +1,15 @@
-#include <melee/ft/ftanim.h>
+#include "ftanim.h"
 
 #include <placeholder.h>
 
-#include <melee/ft/fighter.h>
-#include <melee/ft/ftaction.h>
-#include <melee/ft/ftcommon.h>
-#include <melee/ft/ftdata.h>
-#include <melee/ft/ftparts.h>
-#include <melee/ft/inlines.h>
-#include <melee/ft/kinds/ftCommon/ftCo_Attack100.h>
-#include <melee/ft/types.h>
+#include "fighter.h"
+#include "ftaction.h"
+#include "ftcommon.h"
+#include "ftdata.h"
+#include "ftparts.h"
+#include "inlines.h"
+#include "kinds/ftCommon/ftCo_Attack100.h"
+#include "types.h"
 #include <melee/lb/lb_00B0.h>
 #include <melee/lb/lbanim.h>
 #include <melee/lb/lbvector.h>

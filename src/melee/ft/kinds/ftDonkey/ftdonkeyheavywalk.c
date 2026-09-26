@@ -1,12 +1,12 @@
-#include <melee/ft/kinds/ftDonkey/ftdonkeyheavywalk.h>
+#include "ftdonkeyheavywalk.h"
 
 #include <Runtime/platform.h>
 
 #include <melee/ft/forward.h>
 
-#include <melee/ft/kinds/ftDonkey/ftdonkeyheavyfall.h>
-#include <melee/ft/kinds/ftDonkey/ftdonkeyheavywait0.h>
-#include <melee/ft/kinds/ftDonkey/types.h>
+#include "ftdonkeyheavyfall.h"
+#include "ftdonkeyheavywait0.h"
+#include "types.h"
 #include <melee/ft/ftwalkcommon.h>
 #include <melee/ft/inlines.h>
 #include <melee/ft/kinds/ftCommon/ftCo_ItemThrow.h>

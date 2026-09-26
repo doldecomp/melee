@@ -1,14 +1,14 @@
-#include <melee/ft/kinds/ftCommon/ftCo_CliffWait.h>
+#include "ftCo_CliffWait.h"
 
 #include <Runtime/platform.h>
 
 #include <melee/ft/forward.h>
 
-#include <melee/ft/kinds/ftCommon/ftCo_CliffAttack.h>
-#include <melee/ft/kinds/ftCommon/ftCo_CliffClimb.h>
-#include <melee/ft/kinds/ftCommon/ftCo_CliffJump.h>
-#include <melee/ft/kinds/ftCommon/ftCo_DamageFall.h>
-#include <melee/ft/kinds/ftCommon/types.h>
+#include "ftCo_CliffAttack.h"
+#include "ftCo_CliffClimb.h"
+#include "ftCo_CliffJump.h"
+#include "ftCo_DamageFall.h"
+#include "types.h"
 #include <melee/ft/fighter.h>
 #include <melee/ft/ftcliffcommon.h>
 #include <melee/ft/ftcoll.h>

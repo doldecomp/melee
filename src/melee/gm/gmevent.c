@@ -1,13 +1,13 @@
-#include <melee/gm/gmevent.h>
+#include "gmevent.h"
 
 #include <melee/ft/forward.h>
 #include <melee/pl/forward.h>
 
-#include <melee/gm/gm_1601.h>
-#include <melee/gm/gm_16F1.h>
-#include <melee/gm/gm_unsplit.h>
-#include <melee/gm/gmmain_lib.h>
-#include <melee/gm/types.h>
+#include "gm_1601.h"
+#include "gm_16F1.h"
+#include "gm_unsplit.h"
+#include "gmmain_lib.h"
+#include "types.h"
 #include <melee/cm/camera.h>
 #include <melee/ft/ftbosslib.h>
 #include <melee/ft/ftlib.h>

@@ -1,9 +1,9 @@
 #include <melee/mn/forward.h>
 
-#include <melee/gm/gm_1A3F.h>
-#include <melee/gm/gm_unsplit.h>
-#include <melee/gm/gmresultplayer.h>
-#include <melee/gm/types.h>
+#include "gm_1A3F.h"
+#include "gm_unsplit.h"
+#include "gmresultplayer.h"
+#include "types.h"
 #include <dolphin/types.h>
 #include <melee/if/if_3004.h>
 #include <melee/if/soundtest.h>

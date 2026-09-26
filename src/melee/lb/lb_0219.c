@@ -6,14 +6,14 @@
  * overlay owned by lbbgflash.c.
  */
 
-#include <melee/lb/lb_0219.h>
+#include "lb_0219.h"
 
 #include <placeholder.h>
 
-#include <melee/lb/lb_013B.h>
-#include <melee/lb/lbarchive.h>
-#include <melee/lb/lbbgflash.h>
-#include <melee/lb/types.h>
+#include "lb_013B.h"
+#include "lbarchive.h"
+#include "lbbgflash.h"
+#include "types.h"
 #include <dolphin/gx/GXStruct.h>
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/gobjobject.h>

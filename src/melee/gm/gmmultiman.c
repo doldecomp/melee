@@ -2,11 +2,11 @@
  * @todo also contains Target scenes, maybe gmstadium is a better name,
  * since these are all in the single player "stadium" menu
  */
-#include <melee/gm/gmmultiman.h>
+#include "gmmultiman.h"
 
-#include <melee/gm/gm_unsplit.h>
-#include <melee/gm/gmmain_lib.h>
-#include <melee/gm/types.h>
+#include "gm_unsplit.h"
+#include "gmmain_lib.h"
+#include "types.h"
 #include <melee/gr/ground.h>
 #include <melee/lb/lbcardgame.h>
 #include <melee/lb/lbcardnew.h>

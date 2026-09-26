@@ -1,13 +1,13 @@
-#include <melee/ft/kinds/ftCommon/ftCo_AttackS3.h>
+#include "ftCo_AttackS3.h"
 
 #include <Runtime/platform.h>
 
 #include <melee/ft/forward.h>
 
-#include <melee/ft/kinds/ftCommon/forward.h>
-#include <melee/ft/kinds/ftCommon/ftCo_ItemThrow.h>
-#include <melee/ft/kinds/ftCommon/ftCo_Wait.h>
-#include <melee/ft/kinds/ftCommon/ftpickupitem.h>
+#include "forward.h"
+#include "ftCo_ItemThrow.h"
+#include "ftCo_Wait.h"
+#include "ftpickupitem.h"
 #include <dolphin/mtx.h>
 #include <melee/ft/fighter.h>
 #include <melee/ft/ft_081B.h>

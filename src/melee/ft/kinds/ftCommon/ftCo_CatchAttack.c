@@ -1,6 +1,6 @@
-#include <melee/ft/kinds/ftCommon/ftCo_Attack100.h>
-#include <melee/ft/kinds/ftCommon/ftCo_Fall.h>
-#include <melee/ft/kinds/ftCommon/ftCo_Throw.h>
+#include "ftCo_Attack100.h"
+#include "ftCo_Fall.h"
+#include "ftCo_Throw.h"
 #include <melee/ft/fighter.h>
 #include <melee/ft/ft_081B.h>
 #include <melee/ft/ftcommon.h>
@@ -12,8 +12,8 @@ void fn_800DA4FC(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     fp->gr_vel = 0.0F;
-    Fighter_ChangeMotionState(gobj, ftCo_MS_CatchAttack, Ft_MF_None, 0.0F, 1.0F, 0.0F,
-                              NULL);
+    Fighter_ChangeMotionState(gobj, ftCo_MS_CatchAttack, Ft_MF_None, 0.0F,
+                              1.0F, 0.0F, NULL);
     fp->accessory1_cb = fn_800DA678;
     fp->take_dmg_cb = fn_800DA668;
     ftCommon_8007E2F4(fp, 0x1FF);

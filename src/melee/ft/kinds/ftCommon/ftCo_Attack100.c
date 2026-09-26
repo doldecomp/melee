@@ -1,4 +1,4 @@
-#include <melee/ft/kinds/ftCommon/ftCo_Attack100.h>
+#include "ftCo_Attack100.h"
 
 #include <Runtime/platform.h>
 
@@ -7,9 +7,9 @@
 #include <placeholder.h>
 #include <stdbool.h>
 
-#include <melee/ft/kinds/ftCommon/forward.h>
-#include <melee/ft/kinds/ftCommon/ftpickupitem.h>
-#include <melee/ft/kinds/ftCommon/types.h>
+#include "forward.h"
+#include "ftpickupitem.h"
+#include "types.h"
 #include <melee/ef/efasync.h>
 #include <melee/ft/fighter.h>
 #include <melee/ft/ft_081B.h>
@@ -148,7 +148,8 @@ void ftCo_800D6B00(Fighter_GObj* gobj, enum_t msid)
     Fighter* fp = GET_FIGHTER(gobj);
     if (!ftpickupitem_80094790(gobj)) {
         fp->throw_flags = 0;
-        Fighter_ChangeMotionState(gobj, msid, Ft_MF_None, 0.0F, 1.0F, 0.0F, NULL);
+        Fighter_ChangeMotionState(gobj, msid, Ft_MF_None, 0.0F, 1.0F, 0.0F,
+                                  NULL);
         ftAnim_8006EBA4(gobj);
         fp->mv.co.attack100.x0 = false;
         fp->mv.co.attack100.x4 = false;
@@ -214,8 +215,8 @@ void ftCo_Attack100Loop_Anim(Fighter_GObj* gobj)
     }
     if (var_r0) {
         if (fp->mv.co.attack100.x0 && !fp->mv.co.attack100.x4) {
-            Fighter_ChangeMotionState(gobj, ftCo_MS_Attack100End, Ft_MF_None, 0.0F,
-                                      1.0F, 0.0F, NULL);
+            Fighter_ChangeMotionState(gobj, ftCo_MS_Attack100End, Ft_MF_None,
+                                      0.0F, 1.0F, 0.0F, NULL);
         } else if (!ftpickupitem_80094790(gobj)) {
             fp->mv.co.attack100.x4 = false;
         }

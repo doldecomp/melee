@@ -1,4 +1,4 @@
-#include <melee/it/kinds/ittincle.h>
+#include "ittincle.h"
 
 #include <melee/gr/ground.h>
 #include <melee/it/inlines.h>

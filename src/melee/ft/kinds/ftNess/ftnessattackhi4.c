@@ -1,11 +1,11 @@
-#include <melee/ft/kinds/ftNess/ftnessattackhi4.h>
+#include "ftnessattackhi4.h"
 
 #include <melee/ft/forward.h>
 #include <melee/ft/kinds/ftCommon/forward.h>
 #include <melee/lb/forward.h>
 
-#include <melee/ft/kinds/ftNess/ftness.h>
-#include <melee/ft/kinds/ftNess/types.h>
+#include "ftness.h"
+#include "types.h"
 #include <dolphin/mtx.h>
 #include <melee/ft/fighter.h>
 #include <melee/ft/ft_081B.h>
@@ -597,8 +597,8 @@ void ftNs_AttackHi4_Enter(HSD_GObj* gobj)
         fp->u.ns.x223C = 0.0f;
     }
 
-    Fighter_ChangeMotionState(gobj, ftNs_MS_AttackHi4, Ft_MF_None, 0.0f, 1.0f, 0.0f,
-                              NULL);
+    Fighter_ChangeMotionState(gobj, ftNs_MS_AttackHi4, Ft_MF_None, 0.0f, 1.0f,
+                              0.0f, NULL);
 
     ftAnim_8006EBA4(gobj);
     fp->x2222_b2 = 1;

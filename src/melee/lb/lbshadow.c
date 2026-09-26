@@ -1,7 +1,7 @@
-#include <melee/lb/lbshadow.h>
+#include "lbshadow.h"
 
-#include <melee/lb/lbvector.h>
-#include <melee/lb/types.h>
+#include "lbvector.h"
+#include "types.h"
 #include <dolphin/gx/GXVert.h>
 #include <melee/cm/types.h>
 #include <melee/ft/ftdrawcommon.h>

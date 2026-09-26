@@ -1,13 +1,13 @@
-#include <melee/ft/kinds/ftMasterHand/ftmasterhandsqueezing.h>
+#include "ftmasterhandsqueezing.h"
 
 #include <melee/ft/kinds/ftCommon/forward.h>
 
-#include <melee/ft/kinds/ftMasterHand/ftmasterhandbackdisappear.h>
-#include <melee/ft/kinds/ftMasterHand/ftmasterhandsqueeze.h>
-#include <melee/ft/kinds/ftMasterHand/ftmasterhandthrownmasterhand.h>
-#include <melee/ft/kinds/ftMasterHand/ftmasterhandwait12.h>
-#include <melee/ft/kinds/ftMasterHand/inlines.h>
-#include <melee/ft/kinds/ftMasterHand/types.h>
+#include "ftmasterhandbackdisappear.h"
+#include "ftmasterhandsqueeze.h"
+#include "ftmasterhandthrownmasterhand.h"
+#include "ftmasterhandwait12.h"
+#include "inlines.h"
+#include "types.h"
 #include <melee/ft/fighter.h>
 #include <melee/ft/ftanim.h>
 #include <melee/ft/ftbosslib.h>

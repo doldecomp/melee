@@ -1,13 +1,13 @@
-#include <melee/if/ifstock.h>
+#include "ifstock.h"
 
 #include <melee/gm/forward.h>
 #include <melee/sc/forward.h>
 
 #include <placeholder.h>
 
-#include <melee/if/ifall.h>
-#include <melee/if/ifstatus.h>
-#include <melee/if/types.h>
+#include "ifall.h"
+#include "ifstatus.h"
+#include "types.h"
 #include <melee/ef/efsync.h>
 #include <melee/gm/gm_unsplit.h>
 #include <melee/gm/gmregclear.h>

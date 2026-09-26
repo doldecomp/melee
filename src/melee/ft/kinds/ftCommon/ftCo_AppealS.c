@@ -1,20 +1,20 @@
-#include <melee/ft/kinds/ftCommon/ftCo_AppealS.h>
+#include "ftCo_AppealS.h"
 
 #include <Runtime/platform.h>
 
 #include <melee/ft/forward.h>
 
-#include <melee/ft/kinds/ftCommon/ftCo_Attack1.h>
-#include <melee/ft/kinds/ftCommon/ftCo_Attack100.h>
-#include <melee/ft/kinds/ftCommon/ftCo_AttackHi3.h>
-#include <melee/ft/kinds/ftCommon/ftCo_AttackHi4.h>
-#include <melee/ft/kinds/ftCommon/ftCo_AttackLw3.h>
-#include <melee/ft/kinds/ftCommon/ftCo_AttackLw4.h>
-#include <melee/ft/kinds/ftCommon/ftCo_AttackS3.h>
-#include <melee/ft/kinds/ftCommon/ftCo_AttackS4.h>
-#include <melee/ft/kinds/ftCommon/ftCo_Escape.h>
-#include <melee/ft/kinds/ftCommon/ftCo_Guard.h>
-#include <melee/ft/kinds/ftCommon/ftCo_SpecialS.h>
+#include "ftCo_Attack1.h"
+#include "ftCo_Attack100.h"
+#include "ftCo_AttackHi3.h"
+#include "ftCo_AttackHi4.h"
+#include "ftCo_AttackLw3.h"
+#include "ftCo_AttackLw4.h"
+#include "ftCo_AttackS3.h"
+#include "ftCo_AttackS4.h"
+#include "ftCo_Escape.h"
+#include "ftCo_Guard.h"
+#include "ftCo_SpecialS.h"
 #include <melee/db/db.h>
 #include <melee/ft/fighter.h>
 #include <melee/ft/ft_081B.h>
@@ -80,9 +80,11 @@ void ftCo_800DEAE8(Fighter_GObj* gobj, FtMotionId msid0, FtMotionId msid1)
                           : &fp->x1C_actionStateList[msid1];
     fp->allow_interrupt = false;
     if (fp->facing_dir == -1.0f && ftData_80085FD4(fp, ms->anim_id)->x8 != 0) {
-        Fighter_ChangeMotionState(gobj, msid1, Ft_MF_None, 0.0f, 1.0f, 0.0f, NULL);
+        Fighter_ChangeMotionState(gobj, msid1, Ft_MF_None, 0.0f, 1.0f, 0.0f,
+                                  NULL);
     } else {
-        Fighter_ChangeMotionState(gobj, msid0, Ft_MF_None, 0.0f, 1.0f, 0.0f, NULL);
+        Fighter_ChangeMotionState(gobj, msid0, Ft_MF_None, 0.0f, 1.0f, 0.0f,
+                                  NULL);
     }
 }
 

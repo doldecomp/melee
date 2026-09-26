@@ -1,10 +1,10 @@
-#include <melee/it/kinds/itbox.h>
+#include "itbox.h"
 
 #include <Runtime/platform.h>
 
 #include <placeholder.h>
 
-#include <melee/it/kinds/inlines.h>
+#include "inlines.h"
 #include <melee/cm/camera.h>
 #include <melee/ef/efsync.h>
 #include <melee/gr/grkongo.h>

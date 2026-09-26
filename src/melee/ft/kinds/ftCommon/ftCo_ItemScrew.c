@@ -1,4 +1,4 @@
-#include <melee/ft/kinds/ftCommon/ftCo_ItemScrew.h>
+#include "ftCo_ItemScrew.h"
 
 #include <Runtime/platform.h>
 
@@ -6,12 +6,12 @@
 
 #include <stdbool.h>
 
-#include <melee/ft/kinds/ftCommon/forward.h>
-#include <melee/ft/kinds/ftCommon/ftCo_Fall.h>
-#include <melee/ft/kinds/ftCommon/ftCo_FallAerial.h>
-#include <melee/ft/kinds/ftCommon/ftCo_FallSpecial.h>
-#include <melee/ft/kinds/ftCommon/ftCo_Jump.h>
-#include <melee/ft/kinds/ftCommon/ftCo_JumpAerial.h>
+#include "forward.h"
+#include "ftCo_Fall.h"
+#include "ftCo_FallAerial.h"
+#include "ftCo_FallSpecial.h"
+#include "ftCo_Jump.h"
+#include "ftCo_JumpAerial.h"
 #include <melee/ft/fighter.h>
 #include <melee/ft/ft_081B.h>
 #include <melee/ft/ftcommon.h>
@@ -22,8 +22,8 @@ void ftCo_ItemScrew_Enter(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftCommon_8007D5D4(fp);
-    Fighter_ChangeMotionState(gobj, ftCo_MS_ItemScrew, Ft_MF_None, 0.0F, 1.0F, 0.0F,
-                              NULL);
+    Fighter_ChangeMotionState(gobj, ftCo_MS_ItemScrew, Ft_MF_None, 0.0F, 1.0F,
+                              0.0F, NULL);
     ftCo_800CB110(gobj, false, p_ftCommonData->x800);
     fp->x2227_b0 = true;
 }

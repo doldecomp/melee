@@ -1,28 +1,28 @@
-#include <melee/ft/kinds/ftCrazyHand/ftcrazyhandwait10.h>
+#include "ftcrazyhandwait10.h"
 
 #include <Runtime/platform.h>
 
 #include <sysdolphin/baselib/forward.h>
 
-#include <melee/ft/kinds/ftCrazyHand/ftcrazyhandbackcrush.h>
-#include <melee/ft/kinds/ftCrazyHand/ftcrazyhandbackdisappear.h>
-#include <melee/ft/kinds/ftCrazyHand/ftcrazyhanddamage0.h>
-#include <melee/ft/kinds/ftCrazyHand/ftcrazyhanddrill.h>
-#include <melee/ft/kinds/ftCrazyHand/ftcrazyhandentry.h>
-#include <melee/ft/kinds/ftCrazyHand/ftcrazyhandfingerbeam.h>
-#include <melee/ft/kinds/ftCrazyHand/ftcrazyhandfingerbeam0.h>
-#include <melee/ft/kinds/ftCrazyHand/ftcrazyhandgrab.h>
-#include <melee/ft/kinds/ftCrazyHand/ftcrazyhandgrabunk1b174.h>
-#include <melee/ft/kinds/ftCrazyHand/ftcrazyhandpoke.h>
-#include <melee/ft/kinds/ftCrazyHand/ftcrazyhandrockcrush0.h>
-#include <melee/ft/kinds/ftCrazyHand/ftcrazyhandrockcrush1.h>
-#include <melee/ft/kinds/ftCrazyHand/ftcrazyhandsweep.h>
-#include <melee/ft/kinds/ftCrazyHand/ftcrazyhandsweepwait.h>
-#include <melee/ft/kinds/ftCrazyHand/ftcrazyhandtagcancel.h>
-#include <melee/ft/kinds/ftCrazyHand/ftcrazyhandtagrockpaper.h>
-#include <melee/ft/kinds/ftCrazyHand/ftcrazyhandwait11.h>
-#include <melee/ft/kinds/ftCrazyHand/ftcrazyhandwalk.h>
-#include <melee/ft/kinds/ftCrazyHand/types.h>
+#include "ftcrazyhandbackcrush.h"
+#include "ftcrazyhandbackdisappear.h"
+#include "ftcrazyhanddamage0.h"
+#include "ftcrazyhanddrill.h"
+#include "ftcrazyhandentry.h"
+#include "ftcrazyhandfingerbeam.h"
+#include "ftcrazyhandfingerbeam0.h"
+#include "ftcrazyhandgrab.h"
+#include "ftcrazyhandgrabunk1b174.h"
+#include "ftcrazyhandpoke.h"
+#include "ftcrazyhandrockcrush0.h"
+#include "ftcrazyhandrockcrush1.h"
+#include "ftcrazyhandsweep.h"
+#include "ftcrazyhandsweepwait.h"
+#include "ftcrazyhandtagcancel.h"
+#include "ftcrazyhandtagrockpaper.h"
+#include "ftcrazyhandwait11.h"
+#include "ftcrazyhandwalk.h"
+#include "types.h"
 #include <dolphin/mtx.h>
 #include <melee/ft/fighter.h>
 #include <melee/ft/ft_084E.h>
@@ -84,11 +84,11 @@ static void ftCh_Init_80156018(HSD_GObj* gobj)
         fp->u.mh.x2240_pos = fp->cur_pos;
     }
     if (fp->u.mh.x2258 == 0x184) {
-        Fighter_ChangeMotionState(gobj, ftMh_MS_Wait1_0, Ft_MF_None, fp->cur_anim_frame,
-                                  1.0f, 0.0f, NULL);
+        Fighter_ChangeMotionState(gobj, ftMh_MS_Wait1_0, Ft_MF_None,
+                                  fp->cur_anim_frame, 1.0f, 0.0f, NULL);
     } else {
-        Fighter_ChangeMotionState(gobj, ftMh_MS_Wait1_0, Ft_MF_None, 0, 1.0f, 0.0f,
-                                  NULL);
+        Fighter_ChangeMotionState(gobj, ftMh_MS_Wait1_0, Ft_MF_None, 0, 1.0f,
+                                  0.0f, NULL);
     }
     fp->u.mh.x2258 = ftMh_MS_Wait1_0;
 }
@@ -102,10 +102,11 @@ static void ftCh_Init_801560D8(HSD_GObj* gobj)
         fp->u.mh.x2240_pos = fp->cur_pos;
     }
     if (fp->u.mh.x2258 == 0x185) {
-        Fighter_ChangeMotionState(gobj, 0x156, Ft_MF_None, fp->cur_anim_frame, 1.0f,
-                                  0.0f, NULL);
+        Fighter_ChangeMotionState(gobj, 0x156, Ft_MF_None, fp->cur_anim_frame,
+                                  1.0f, 0.0f, NULL);
     } else {
-        Fighter_ChangeMotionState(gobj, 0x156, Ft_MF_None, 0, 1.0f, 0.0f, NULL);
+        Fighter_ChangeMotionState(gobj, 0x156, Ft_MF_None, 0, 1.0f, 0.0f,
+                                  NULL);
     }
     fp->u.mh.x2258 = 0x156;
 }
@@ -142,10 +143,11 @@ static inline void doAnim0(HSD_GObj* gobj)
         fp->u.mh.x2240_pos = fp->cur_pos;
     }
     if (fp->u.mh.x2258 == 0x185) {
-        Fighter_ChangeMotionState(gobj, 0x156, Ft_MF_None, fp->cur_anim_frame, 1.0f,
-                                  0.0f, NULL);
+        Fighter_ChangeMotionState(gobj, 0x156, Ft_MF_None, fp->cur_anim_frame,
+                                  1.0f, 0.0f, NULL);
     } else {
-        Fighter_ChangeMotionState(gobj, 0x156, Ft_MF_None, 0.0f, 1.0f, 0.0f, NULL);
+        Fighter_ChangeMotionState(gobj, 0x156, Ft_MF_None, 0.0f, 1.0f, 0.0f,
+                                  NULL);
     }
     fp->u.mh.x2258 = 0x156;
 }

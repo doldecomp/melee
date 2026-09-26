@@ -1,7 +1,7 @@
-#include <melee/ft/kinds/ftDonkey/ftdonkeyheavywait1.h>
+#include "ftdonkeyheavywait1.h"
 
-#include <melee/ft/kinds/ftDonkey/ftdonkeyheavywait0.h>
-#include <melee/ft/kinds/ftDonkey/types.h>
+#include "ftdonkeyheavywait0.h"
+#include "types.h"
 #include <melee/ft/ft_084E.h>
 #include <melee/ft/ftanim.h>
 #include <melee/ft/inlines.h>

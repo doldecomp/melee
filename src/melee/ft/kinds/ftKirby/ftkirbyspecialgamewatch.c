@@ -1,13 +1,13 @@
-#include <melee/ft/kinds/ftKirby/ftkirbyspecialgamewatch.h>
+#include "ftkirbyspecialgamewatch.h"
 
 #include <melee/ft/forward.h>
 
 #include <placeholder.h>
 #include <stddef.h>
 
-#include <melee/ft/kinds/ftKirby/forward.h>
-#include <melee/ft/kinds/ftKirby/ftkirby.h>
-#include <melee/ft/kinds/ftKirby/types.h>
+#include "forward.h"
+#include "ftkirby.h"
+#include "types.h"
 #include <melee/ft/fighter.h>
 #include <melee/ft/ft_081B.h>
 #include <melee/ft/ft_084E.h>
@@ -172,8 +172,8 @@ void ftKb_SpecialNGw_8010D188(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     fp->self_vel.y = 0.0F;
-    Fighter_ChangeMotionState(gobj, ftKb_MS_GwSpecialN, Ft_MF_None, 0.0F, 1.0F, 0.0F,
-                              NULL);
+    Fighter_ChangeMotionState(gobj, ftKb_MS_GwSpecialN, Ft_MF_None, 0.0F, 1.0F,
+                              0.0F, NULL);
     ftAnim_8006EBA4(gobj);
     setGwVars(gobj);
 }
@@ -182,7 +182,8 @@ void ftKb_SpecialNGw_8010D204(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     fp->self_vel.y = 0;
-    Fighter_ChangeMotionState(gobj, ftKb_MS_GwSpecialAirN, Ft_MF_None, 0, 1, 0, NULL);
+    Fighter_ChangeMotionState(gobj, ftKb_MS_GwSpecialAirN, Ft_MF_None, 0, 1, 0,
+                              NULL);
     ftAnim_8006EBA4(gobj);
     setGwVars(gobj);
 }

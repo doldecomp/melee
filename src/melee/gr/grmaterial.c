@@ -1,9 +1,9 @@
-#include <gr/grmaterial.h>
+#include "grmaterial.h"
 
 #include <melee/lb/forward.h>
 #include <sysdolphin/baselib/forward.h>
 
-#include <gr/types.h>
+#include "types.h"
 #include <dolphin/os.h>
 #include <melee/it/it_2725.h>
 #include <melee/it/item.h>

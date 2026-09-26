@@ -1,16 +1,16 @@
-#include <gr/grkinokoroute.h>
+#include "grkinokoroute.h"
 
 #include <Runtime/platform.h>
 
 #include <math.h>
 
-#include <gr/grdisplay.h>
-#include <gr/grlib.h>
-#include <gr/grmaterial.h>
-#include <gr/ground.h>
-#include <gr/grzakogenerator.h>
-#include <gr/inlines.h>
-#include <gr/stage.h>
+#include "grdisplay.h"
+#include "grlib.h"
+#include "grmaterial.h"
+#include "ground.h"
+#include "grzakogenerator.h"
+#include "inlines.h"
+#include "stage.h"
 #include <melee/cm/camera.h>
 #include <melee/ef/efsync.h>
 #include <melee/ft/ftdevice.h>

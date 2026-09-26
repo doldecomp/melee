@@ -1,10 +1,10 @@
-#include <melee/ft/kinds/ftPeach/ftpeachspecials.h>
+#include "ftpeachspecials.h"
 
 #include <Runtime/platform.h>
 
 #include <melee/ft/forward.h>
 
-#include <melee/ft/kinds/ftPeach/types.h>
+#include "types.h"
 #include <dolphin/mtx.h>
 #include <melee/ft/fighter.h>
 #include <melee/ft/ft_081B.h>
@@ -387,11 +387,11 @@ void enterAirEndSmash(HSD_GObj* gobj)
     fp->self_vel.x /= da->x68;
     fp->self_vel.y /= da->x6C;
     if (fp->cmd_vars[2] != 0U) {
-        Fighter_ChangeMotionState(gobj, ftPe_MS_SpecialAirSEnd_1, Ft_MF_None, 0.0f,
-                                  1.0f, 0.0f, NULL);
+        Fighter_ChangeMotionState(gobj, ftPe_MS_SpecialAirSEnd_1, Ft_MF_None,
+                                  0.0f, 1.0f, 0.0f, NULL);
     } else {
-        Fighter_ChangeMotionState(gobj, ftPe_MS_SpecialAirSEnd_0, Ft_MF_None, 0.0f,
-                                  1.0f, 0.0f, NULL);
+        Fighter_ChangeMotionState(gobj, ftPe_MS_SpecialAirSEnd_0, Ft_MF_None,
+                                  0.0f, 1.0f, 0.0f, NULL);
     }
     doPostEnd_SmallerStack(gobj);
 }

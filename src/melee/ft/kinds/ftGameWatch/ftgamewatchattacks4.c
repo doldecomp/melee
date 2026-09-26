@@ -1,11 +1,11 @@
-#include <melee/ft/kinds/ftGameWatch/ftgamewatchattacks4.h>
+#include "ftgamewatchattacks4.h"
 
 #include <Runtime/platform.h>
 
 #include <melee/ft/forward.h>
 
-#include <melee/ft/kinds/ftGameWatch/ftgamewatch.h>
-#include <melee/ft/kinds/ftGameWatch/types.h>
+#include "ftgamewatch.h"
+#include "types.h"
 #include <dolphin/mtx.h>
 #include <melee/ft/fighter.h>
 #include <melee/ft/ft_081B.h>
@@ -112,8 +112,8 @@ void ftGw_AttackS4_Enter(HSD_GObj* gobj)
 
     fp->allow_interrupt = 0;
     fp->cmd_vars[0] = 0;
-    Fighter_ChangeMotionState(gobj, ftGw_MS_AttackS4, Ft_MF_None, 0.0f, 1.0f, 0.0f,
-                              NULL);
+    Fighter_ChangeMotionState(gobj, ftGw_MS_AttackS4, Ft_MF_None, 0.0f, 1.0f,
+                              0.0f, NULL);
     ftAnim_8006EBA4(gobj);
     fp->accessory4_cb = ftGw_ItemTorchSetup;
 }

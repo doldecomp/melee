@@ -1,9 +1,9 @@
-#include <melee/gm/gmallstar.h>
+#include "gmallstar.h"
 
-#include <melee/gm/gm_18A1.h>
-#include <melee/gm/gm_unsplit.h>
-#include <melee/gm/gmmain_lib.h>
-#include <melee/gm/gmregcommon.h>
+#include "gm_18A1.h"
+#include "gm_unsplit.h"
+#include "gmmain_lib.h"
+#include "gmregcommon.h"
 #include <dolphin/types.h>
 #include <melee/gr/ground.h>
 #include <melee/lb/lbaudio_ax.h>

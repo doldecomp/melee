@@ -1,11 +1,11 @@
-#include <melee/ft/kinds/ftZelda/ftzeldaspecialn.h>
+#include "ftzeldaspecialn.h"
 
 #include <Runtime/platform.h>
 
 #include <melee/ft/forward.h>
 
-#include <melee/ft/kinds/ftZelda/forward.h>
-#include <melee/ft/kinds/ftZelda/types.h>
+#include "forward.h"
+#include "types.h"
 #include <dolphin/mtx.h>
 #include <melee/ef/efsync.h>
 #include <melee/ft/fighter.h>
@@ -65,7 +65,8 @@ void ftZd_SpecialN_Enter(HSD_GObj* gobj)
     temp_f1 = 0;
     fp = GET_FIGHTER(gobj);
 
-    Fighter_ChangeMotionState(gobj, 341, Ft_MF_None, temp_f1, 1.0, temp_f1, NULL);
+    Fighter_ChangeMotionState(gobj, 341, Ft_MF_None, temp_f1, 1.0, temp_f1,
+                              NULL);
     ftAnim_8006EBA4(gobj);
     startActionHelper(gobj);
     fp->accessory4_cb = &ftZd_SpecialN_8013A830;

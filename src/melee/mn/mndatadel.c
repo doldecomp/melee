@@ -1,11 +1,11 @@
-#include <melee/mn/mndatadel.h>
+#include "mndatadel.h"
 
 #include <placeholder.h>
 
-#include <melee/mn/inlines.h>
-#include <melee/mn/mndatadel.static.h>
-#include <melee/mn/mnmain.h>
-#include <melee/mn/mnmainrule.h>
+#include "inlines.h"
+#include "mndatadel.static.h"
+#include "mnmain.h"
+#include "mnmainrule.h"
 #include <melee/gm/gm_1601.h>
 #include <melee/gm/gm_16F1.h>
 #include <melee/gm/gm_1A36.h>

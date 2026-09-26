@@ -1,7 +1,7 @@
-#include <melee/ft/kinds/ftMasterHand/ftmasterhandslap.h>
+#include "ftmasterhandslap.h"
 
-#include <melee/ft/kinds/ftMasterHand/forward.h>
-#include <melee/ft/kinds/ftMasterHand/ftmasterhandwait12.h>
+#include "forward.h"
+#include "ftmasterhandwait12.h"
 #include <dolphin/mtx.h>
 #include <melee/ft/fighter.h>
 #include <melee/ft/ft_084E.h>

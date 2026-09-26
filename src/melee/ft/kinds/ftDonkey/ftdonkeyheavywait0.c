@@ -1,11 +1,11 @@
-#include <melee/ft/kinds/ftDonkey/ftdonkeyheavywait0.h>
+#include "ftdonkeyheavywait0.h"
 
 #include <melee/ft/forward.h>
 
-#include <melee/ft/kinds/ftDonkey/ftdonkeyheavyfall.h>
-#include <melee/ft/kinds/ftDonkey/ftdonkeyheavyturn.h>
-#include <melee/ft/kinds/ftDonkey/ftdonkeyms3450.h>
-#include <melee/ft/kinds/ftDonkey/types.h>
+#include "ftdonkeyheavyfall.h"
+#include "ftdonkeyheavyturn.h"
+#include "ftdonkeyms3450.h"
+#include "types.h"
 #include <melee/ft/fighter.h>
 #include <melee/ft/ft_081B.h>
 #include <melee/ft/ft_084E.h>
@@ -32,8 +32,8 @@ void ftDk_MS_341_800DF980(HSD_GObj* gobj)
     }
     {
         ftDonkeyAttributes* donkey_attr = getFtSpecialAttrs2CC(fp);
-        Fighter_ChangeMotionState(gobj, donkey_attr->motion_state, Ft_MF_None, 0, 1, 0,
-                                  NULL);
+        Fighter_ChangeMotionState(gobj, donkey_attr->motion_state, Ft_MF_None,
+                                  0, 1, 0, NULL);
     }
 }
 

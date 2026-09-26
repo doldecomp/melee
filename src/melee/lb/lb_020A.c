@@ -7,12 +7,12 @@
  * plant a fighter's legs on the ground.
  */
 
-#include <melee/lb/lb_020A.h>
+#include "lb_020A.h"
 
 #include <math.h>
 #include <placeholder.h>
 
-#include <melee/lb/lbvector.h>
+#include "lbvector.h"
 #include <dolphin/mtx.h>
 #include <melee/ft/types.h>
 #include <sysdolphin/baselib/jobj.h>

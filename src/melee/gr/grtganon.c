@@ -1,11 +1,11 @@
-#include <gr/grtganon.h>
+#include "grtganon.h"
 
 #include <melee/mp/forward.h>
 
-#include <gr/ground.h>
-#include <gr/grzakogenerator.h>
-#include <gr/inlines.h>
-#include <gr/types.h>
+#include "ground.h"
+#include "grzakogenerator.h"
+#include "inlines.h"
+#include "types.h"
 #include <melee/lb/types.h>
 #include <melee/mp/mplib.h>
 #include <sysdolphin/baselib/gobj.h>

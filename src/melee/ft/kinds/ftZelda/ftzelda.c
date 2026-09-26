@@ -1,11 +1,11 @@
-#include <melee/ft/kinds/ftZelda/ftzelda.h>
+#include "ftzelda.h"
 
-#include <melee/ft/kinds/ftZelda/forward.h>
-#include <melee/ft/kinds/ftZelda/ftzeldaspecialhi.h>
-#include <melee/ft/kinds/ftZelda/ftzeldaspeciallw.h>
-#include <melee/ft/kinds/ftZelda/ftzeldaspecialn.h>
-#include <melee/ft/kinds/ftZelda/ftzeldaspecials.h>
-#include <melee/ft/kinds/ftZelda/types.h>
+#include "forward.h"
+#include "ftzeldaspecialhi.h"
+#include "ftzeldaspeciallw.h"
+#include "ftzeldaspecialn.h"
+#include "ftzeldaspecials.h"
+#include "types.h"
 #include <melee/ft/ftcamera.h>
 #include <melee/ft/ftparts.h>
 #include <melee/ft/inlines.h>

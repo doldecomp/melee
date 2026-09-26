@@ -1,4 +1,4 @@
-#include <melee/ft/kinds/ftMars/ftmarsspeciallw.h>
+#include "ftmarsspeciallw.h"
 
 #include <Runtime/platform.h>
 
@@ -7,7 +7,7 @@
 
 #include <math.h>
 
-#include <melee/ft/kinds/ftMars/types.h>
+#include "types.h"
 #include <dolphin/mtx.h>
 #include <melee/ef/efsync.h>
 #include <melee/ft/fighter.h>

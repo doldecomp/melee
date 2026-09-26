@@ -1,15 +1,15 @@
-#include <melee/ft/ftwalkcommon.h>
+#include "ftwalkcommon.h"
 
 #include <sysdolphin/baselib/forward.h>
 
-#include <melee/ft/fighter.h>
-#include <melee/ft/forward.h>
-#include <melee/ft/ft_081B.h>
-#include <melee/ft/ftanim.h>
-#include <melee/ft/ftcommon.h>
-#include <melee/ft/kinds/ftMasterHand/forward.h>
-#include <melee/ft/kinds/ftMasterHand/types.h>
-#include <melee/ft/types.h>
+#include "fighter.h"
+#include "forward.h"
+#include "ft_081B.h"
+#include "ftanim.h"
+#include "ftcommon.h"
+#include "kinds/ftMasterHand/forward.h"
+#include "kinds/ftMasterHand/types.h"
+#include "types.h"
 #include <dolphin/mtx.h>
 #include <sysdolphin/baselib/debug.h>
 

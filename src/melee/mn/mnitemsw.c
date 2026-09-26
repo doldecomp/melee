@@ -1,10 +1,10 @@
-#include <melee/mn/mnitemsw.h>
+#include "mnitemsw.h"
 
 #include <Runtime/platform.h>
 
-#include <melee/mn/inlines.h>
-#include <melee/mn/mnmain.h>
-#include <melee/mn/mnmainrule.h>
+#include "inlines.h"
+#include "mnmain.h"
+#include "mnmainrule.h"
 #include <melee/gm/gm_1601.h>
 #include <melee/gm/gm_1A3F.h>
 #include <melee/gm/gmmain_lib.h>

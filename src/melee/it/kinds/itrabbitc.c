@@ -1,9 +1,9 @@
-#include <melee/it/kinds/itrabbitc.h>
+#include "itrabbitc.h"
 
 #include <melee/it/forward.h>
 
-#include <melee/it/kinds/inlines.h>
-#include <melee/it/kinds/types.h>
+#include "inlines.h"
+#include "types.h"
 #include <melee/it/it_26B1.h>
 #include <melee/it/it_2725.h>
 #include <melee/it/item.h>

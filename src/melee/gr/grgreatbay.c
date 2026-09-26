@@ -1,17 +1,17 @@
-#include <gr/grgreatbay.h>
+#include "grgreatbay.h"
 
 #include <Runtime/platform.h>
 
 #include <placeholder.h>
 
-#include <gr/forward.h>
-#include <gr/granime.h>
-#include <gr/grdisplay.h>
-#include <gr/grlib.h>
-#include <gr/ground.h>
-#include <gr/grzakogenerator.h>
-#include <gr/inlines.h>
-#include <gr/stage.h>
+#include "forward.h"
+#include "granime.h"
+#include "grdisplay.h"
+#include "grlib.h"
+#include "ground.h"
+#include "grzakogenerator.h"
+#include "inlines.h"
+#include "stage.h"
 #include <melee/ft/ft_0877.h>
 #include <melee/ft/ftdevice.h>
 #include <melee/ft/ftlib.h>

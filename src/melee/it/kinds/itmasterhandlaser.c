@@ -1,4 +1,4 @@
-#include <melee/it/kinds/itmasterhandlaser.h>
+#include "itmasterhandlaser.h"
 
 #include <Runtime/platform.h>
 
@@ -8,7 +8,7 @@
 
 #include <placeholder.h>
 
-#include <melee/it/kinds/inlines.h>
+#include "inlines.h"
 #include <melee/db/db.h>
 #include <melee/ef/efsync.h>
 #include <melee/ft/inlines.h>

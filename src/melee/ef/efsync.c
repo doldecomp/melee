@@ -1,12 +1,12 @@
-#include <melee/ef/efsync.h>
+#include "efsync.h"
 
 #include <math.h>
 
-#include <melee/ef/efalt.h>
-#include <melee/ef/efasync.h>
-#include <melee/ef/efdata.h>
-#include <melee/ef/eflib.h>
-#include <melee/ef/types.h>
+#include "efalt.h"
+#include "efasync.h"
+#include "efdata.h"
+#include "eflib.h"
+#include "types.h"
 #include <melee/ft/inlines.h>
 #include <sysdolphin/baselib/generator.h>
 #include <sysdolphin/baselib/gobj.h>

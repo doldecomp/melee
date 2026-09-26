@@ -1,9 +1,9 @@
-#include <melee/ft/kinds/ftMasterHand/ftmasterhandbackcrush0.h>
+#include "ftmasterhandbackcrush0.h"
 
 #include <Runtime/platform.h>
 
-#include <melee/ft/kinds/ftMasterHand/ftmasterhandwait12.h>
-#include <melee/ft/kinds/ftMasterHand/types.h>
+#include "ftmasterhandwait12.h"
+#include "types.h"
 #include <dolphin/mtx.h>
 #include <melee/ft/fighter.h>
 #include <melee/ft/ftanim.h>

@@ -1,10 +1,10 @@
-#include <melee/ft/ftCo_800C739C.h>
+#include "ftCo_800C739C.h"
 
-#include <melee/ft/fighter.h>
-#include <melee/ft/ftCo_800C7070.h>
-#include <melee/ft/ftdata.h>
-#include <melee/ft/kinds/ftMasterHand/forward.h>
-#include <melee/ft/types.h>
+#include "fighter.h"
+#include "ftCo_800C7070.h"
+#include "ftdata.h"
+#include "kinds/ftMasterHand/forward.h"
+#include "types.h"
 
 static inline void inlineB0(Fighter_GObj* gobj)
 {

@@ -1,8 +1,8 @@
-#include <melee/mn/mnstagesw.h>
+#include "mnstagesw.h"
 
-#include <melee/mn/inlines.h>
-#include <melee/mn/mnmain.h>
-#include <melee/mn/mnruleplus.h>
+#include "inlines.h"
+#include "mnmain.h"
+#include "mnruleplus.h"
 #include <melee/gm/gm_1601.h>
 #include <melee/gm/gm_1A3F.h>
 #include <melee/lb/lbaudio_ax.h>

@@ -1,8 +1,8 @@
-#include <melee/it/kinds/itgamewatchmanhole.h>
+#include "itgamewatchmanhole.h"
 
 #include <melee/it/forward.h>
 
-#include <melee/it/kinds/inlines.h>
+#include "inlines.h"
 #include <melee/ft/kinds/ftGameWatch/ftgamewatchattacklw3.h>
 #include <melee/it/inlines.h>
 #include <melee/it/it_26B1.h>

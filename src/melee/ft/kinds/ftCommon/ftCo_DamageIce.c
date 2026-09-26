@@ -1,4 +1,4 @@
-#include <melee/ft/kinds/ftCommon/ftCo_DamageIce.h>
+#include "ftCo_DamageIce.h"
 
 #include <Runtime/platform.h>
 
@@ -8,19 +8,19 @@
 
 #include <placeholder.h>
 
-#include <melee/ft/kinds/ftCommon/forward.h>
-#include <melee/ft/kinds/ftCommon/ftCo_DamageFall.h>
-#include <melee/ft/kinds/ftCommon/ftCo_DownAttack.h>
-#include <melee/ft/kinds/ftCommon/ftCo_DownBound.h>
-#include <melee/ft/kinds/ftCommon/ftCo_Fall.h>
-#include <melee/ft/kinds/ftCommon/ftCo_FallSpecial.h>
-#include <melee/ft/kinds/ftCommon/ftCo_HammerJump.h>
-#include <melee/ft/kinds/ftCommon/ftCo_HammerWait.h>
-#include <melee/ft/kinds/ftCommon/ftCo_Lift.h>
-#include <melee/ft/kinds/ftCommon/ftCo_PassiveStand.h>
-#include <melee/ft/kinds/ftCommon/ftCo_Throw.h>
-#include <melee/ft/kinds/ftCommon/inlines.h>
-#include <melee/ft/kinds/ftCommon/types.h>
+#include "forward.h"
+#include "ftCo_DamageFall.h"
+#include "ftCo_DownAttack.h"
+#include "ftCo_DownBound.h"
+#include "ftCo_Fall.h"
+#include "ftCo_FallSpecial.h"
+#include "ftCo_HammerJump.h"
+#include "ftCo_HammerWait.h"
+#include "ftCo_Lift.h"
+#include "ftCo_PassiveStand.h"
+#include "ftCo_Throw.h"
+#include "inlines.h"
+#include "types.h"
 #include <dolphin/mtx.h>
 #include <melee/cm/camera.h>
 #include <melee/ef/efasync.h>

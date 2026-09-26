@@ -1,8 +1,8 @@
-#include <melee/it/kinds/itluigifireball.h>
+#include "itluigifireball.h"
 
 #include <Runtime/platform.h>
 
-#include <melee/it/kinds/inlines.h>
+#include "inlines.h"
 #include <dolphin/mtx.h>
 #include <melee/db/db.h>
 #include <melee/ef/efasync.h>

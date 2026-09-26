@@ -1,8 +1,8 @@
-#include <melee/ft/ft_0892.h>
+#include "ft_0892.h"
 
-#include <melee/ft/fighter.h>
-#include <melee/ft/inlines.h>
-#include <melee/ft/kinds/ftFox/ftfoxappeals.h>
+#include "fighter.h"
+#include "inlines.h"
+#include "kinds/ftFox/ftfoxappeals.h"
 #include <melee/it/it_26B1.h>
 #include <melee/pl/plattack.h>
 #include <melee/pl/pltrick.h>

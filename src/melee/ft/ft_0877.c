@@ -1,10 +1,10 @@
-#include <melee/ft/ft_0877.h>
+#include "ft_0877.h"
 
-#include <melee/ft/fighter.h>
-#include <melee/ft/ftcommon.h>
-#include <melee/ft/ftdevice.h>
-#include <melee/ft/kinds/ftCommon/ftCo_0A01.h>
-#include <melee/ft/types.h>
+#include "fighter.h"
+#include "ftcommon.h"
+#include "ftdevice.h"
+#include "kinds/ftCommon/ftCo_0A01.h"
+#include "types.h"
 #include <dolphin/mtx.h>
 #include <melee/it/it_26B1.h>
 #include <melee/lb/lbaudio_ax.h>

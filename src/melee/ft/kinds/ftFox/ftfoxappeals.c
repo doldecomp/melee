@@ -1,10 +1,10 @@
-#include <melee/ft/kinds/ftFox/ftfoxappeals.h>
+#include "ftfoxappeals.h"
 
 #include <Runtime/platform.h>
 
 #include <melee/ft/forward.h>
 
-#include <melee/ft/kinds/ftFox/types.h>
+#include "types.h"
 #include <melee/ft/fighter.h>
 #include <melee/ft/ft_081B.h>
 #include <melee/ft/ft_084E.h>
@@ -99,8 +99,8 @@ void ftFx_AppealS_Enter(HSD_GObj* gobj)
     actionDir = fp->mv.fx.AppealS.facingDir;
     animCount = fp->mv.fx.AppealS.animCount;
 
-    Fighter_ChangeMotionState(gobj, ASID_AppealS[actionDir][animCount], Ft_MF_None,
-                              0.0f, 1.0f, 0.0f, NULL);
+    Fighter_ChangeMotionState(gobj, ASID_AppealS[actionDir][animCount],
+                              Ft_MF_None, 0.0f, 1.0f, 0.0f, NULL);
 }
 
 /// Fox & Falco's Special Taunt OnTakeDamage/OnDeath callback

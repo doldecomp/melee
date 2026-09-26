@@ -1,7 +1,7 @@
-#include <melee/ft/kinds/ftMasterHand/ftmasterhandbackairplane3.h>
+#include "ftmasterhandbackairplane3.h"
 
-#include <melee/ft/kinds/ftMasterHand/ftmasterhandwait12.h>
-#include <melee/ft/kinds/ftMasterHand/types.h>
+#include "ftmasterhandwait12.h"
+#include "types.h"
 #include <dolphin/mtx.h>
 #include <melee/ft/fighter.h>
 #include <melee/ft/ft_084E.h>

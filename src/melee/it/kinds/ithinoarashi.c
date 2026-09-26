@@ -1,9 +1,9 @@
-#include <melee/it/kinds/ithinoarashi.h>
+#include "ithinoarashi.h"
 
 #include <math.h>
 
-#include <melee/it/kinds/inlines.h>
-#include <melee/it/kinds/itmaril.h>
+#include "inlines.h"
+#include "itmaril.h"
 #include <melee/ef/eflib.h>
 #include <melee/ef/efsync.h>
 #include <melee/it/inlines.h>

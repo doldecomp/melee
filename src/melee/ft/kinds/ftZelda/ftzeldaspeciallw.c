@@ -1,11 +1,11 @@
-#include <melee/ft/kinds/ftZelda/ftzeldaspeciallw.h>
+#include "ftzeldaspeciallw.h"
 
 #include <Runtime/platform.h>
 
 #include <melee/ft/forward.h>
 
-#include <melee/ft/kinds/ftZelda/forward.h>
-#include <melee/ft/kinds/ftZelda/types.h>
+#include "forward.h"
+#include "types.h"
 #include <dolphin/mtx.h>
 #include <melee/ef/efsync.h>
 #include <melee/ft/fighter.h>
@@ -315,7 +315,8 @@ void ftZd_SpecialLw_8013B4D8(HSD_GObj* gobj)
             msid = 358;
         }
 
-        Fighter_ChangeMotionState(gobj, msid, Ft_MF_None, sa->x80, 1.0, 0, NULL);
+        Fighter_ChangeMotionState(gobj, msid, Ft_MF_None, sa->x80, 1.0, 0,
+                                  NULL);
     }
     fp->accessory4_cb = &ftZd_SpecialLw_8013AE30;
 }

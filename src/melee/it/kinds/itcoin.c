@@ -1,8 +1,8 @@
-#include <melee/it/kinds/itcoin.h>
+#include "itcoin.h"
 
 #include <melee/it/forward.h>
 
-#include <melee/it/kinds/inlines.h>
+#include "inlines.h"
 #include <melee/cm/camera.h>
 #include <melee/gm/gm_unsplit.h>
 #include <melee/gr/grfigureget.h>

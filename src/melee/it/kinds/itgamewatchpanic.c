@@ -1,6 +1,6 @@
-#include <melee/it/kinds/itgamewatchpanic.h>
+#include "itgamewatchpanic.h"
 
-#include <melee/it/kinds/inlines.h>
+#include "inlines.h"
 #include <melee/ft/ftlib.h>
 #include <melee/ft/kinds/ftGameWatch/ftgamewatchspeciallw.h>
 #include <melee/it/inlines.h>

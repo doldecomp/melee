@@ -1,8 +1,8 @@
-#include <melee/gm/gm_1A36.h>
+#include "gm_1A36.h"
 
-#include <melee/gm/gm_1A36.static.h>
-#include <melee/gm/gmscdata.h>
-#include <melee/gm/types.h>
+#include "gm_1A36.static.h"
+#include "gmscdata.h"
+#include "types.h"
 #include <sysdolphin/baselib/controller.h>
 
 u64 gm_GetButtonsPressed(u8 idx)

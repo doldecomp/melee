@@ -1,12 +1,12 @@
-#include <melee/mn/mnhyaku.h>
+#include "mnhyaku.h"
 
 #include <melee/gm/forward.h>
 #include <melee/it/forward.h>
 #include <melee/sc/forward.h>
 
-#include <melee/mn/inlines.h>
-#include <melee/mn/mnmain.h>
-#include <melee/mn/types.h>
+#include "inlines.h"
+#include "mnmain.h"
+#include "types.h"
 #include <melee/lb/lbarchive.h>
 #include <melee/lb/lbaudio_ax.h>
 #include <melee/sc/types.h>

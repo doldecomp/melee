@@ -1,12 +1,12 @@
-#include <melee/ft/kinds/ftCommon/ftCo_CargoFall.h>
+#include "ftCo_CargoFall.h"
 
 #include <Runtime/platform.h>
 
 #include <melee/ft/forward.h>
 
-#include <melee/ft/kinds/ftCommon/ftCo_CargoLanding.h>
-#include <melee/ft/kinds/ftCommon/ftCo_CargoThrow.h>
-#include <melee/ft/kinds/ftCommon/ftCo_Shouldered.h>
+#include "ftCo_CargoLanding.h"
+#include "ftCo_CargoThrow.h"
+#include "ftCo_Shouldered.h"
 #include <melee/ft/fighter.h>
 #include <melee/ft/ft_081B.h>
 #include <melee/ft/ftanim.h>

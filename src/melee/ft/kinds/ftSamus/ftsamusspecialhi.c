@@ -1,4 +1,4 @@
-#include <melee/ft/kinds/ftSamus/ftsamusspecialhi.h>
+#include "ftsamusspecialhi.h"
 
 #include <Runtime/platform.h>
 
@@ -6,8 +6,8 @@
 
 #include <math.h>
 
-#include <melee/ft/kinds/ftSamus/inlines.h>
-#include <melee/ft/kinds/ftSamus/types.h>
+#include "inlines.h"
+#include "types.h"
 #include <dolphin/mtx.h>
 #include <melee/ef/eflib.h>
 #include <melee/ef/efsync.h>

@@ -1,4 +1,4 @@
-#include <melee/gm/gmcamera.h>
+#include "gmcamera.h"
 
 #include <Runtime/platform.h>
 
@@ -6,11 +6,11 @@
 
 #include <placeholder.h>
 
-#include <melee/gm/gm_1601.h>
-#include <melee/gm/gmpause.h>
-#include <melee/gm/gmscene.h>
-#include <melee/gm/gmvs.h>
-#include <melee/gm/types.h>
+#include "gm_1601.h"
+#include "gmpause.h"
+#include "gmscene.h"
+#include "gmvs.h"
+#include "types.h"
 #include <dolphin/pad.h>
 #include <melee/cm/cmsnap.h>
 #include <melee/if/ifall.h>

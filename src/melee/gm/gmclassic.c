@@ -1,8 +1,8 @@
-#include <melee/gm/gmclassic.h>
+#include "gmclassic.h"
 
-#include <melee/gm/gm_unsplit.h>
-#include <melee/gm/gmmain_lib.h>
-#include <melee/gm/gmregcommon.h>
+#include "gm_unsplit.h"
+#include "gmmain_lib.h"
+#include "gmregcommon.h"
 #include <melee/gr/ground.h>
 #include <melee/gr/stage.h>
 #include <melee/lb/lbaudio_ax.h>

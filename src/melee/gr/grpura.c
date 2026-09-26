@@ -1,15 +1,15 @@
-#include <gr/grpura.h>
+#include "grpura.h"
 
 #include <Runtime/platform.h>
 
 #include <melee/cm/forward.h>
 
-#include <gr/grdisplay.h>
-#include <gr/ground.h>
-#include <gr/grzakogenerator.h>
-#include <gr/inlines.h>
-#include <gr/stage.h>
-#include <gr/types.h>
+#include "grdisplay.h"
+#include "ground.h"
+#include "grzakogenerator.h"
+#include "inlines.h"
+#include "stage.h"
+#include "types.h"
 #include <dolphin/mtx.h>
 #include <melee/cm/camera.h>
 #include <melee/cm/types.h>

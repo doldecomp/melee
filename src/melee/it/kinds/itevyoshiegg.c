@@ -1,4 +1,4 @@
-#include <melee/it/kinds/itevyoshiegg.h>
+#include "itevyoshiegg.h"
 
 #include <Runtime/platform.h>
 
@@ -6,8 +6,8 @@
 
 #include <placeholder.h>
 
-#include <melee/it/kinds/forward.h>
-#include <melee/it/kinds/inlines.h>
+#include "forward.h"
+#include "inlines.h"
 #include <melee/ef/efsync.h>
 #include <melee/gm/gmevent.h>
 #include <melee/it/inlines.h>

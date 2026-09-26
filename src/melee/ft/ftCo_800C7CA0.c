@@ -1,17 +1,17 @@
-#include <melee/ft/ftCo_800C7CA0.h>
+#include "ftCo_800C7CA0.h"
 
 #include <placeholder.h>
 
-#include <melee/ft/fighter.h>
-#include <melee/ft/ft_081B.h>
-#include <melee/ft/ftanim.h>
-#include <melee/ft/ftcoll.h>
-#include <melee/ft/ftcommon.h>
-#include <melee/ft/kinds/ftMasterHand/forward.h>
-#include <melee/ft/kinds/ftCommon/ftCo_DamageFall.h>
-#include <melee/ft/kinds/ftCommon/ftCo_DownBound.h>
-#include <melee/ft/kinds/ftKirby/ftkirby.h>
-#include <melee/ft/types.h>
+#include "fighter.h"
+#include "ft_081B.h"
+#include "ftanim.h"
+#include "ftcoll.h"
+#include "ftcommon.h"
+#include "kinds/ftCommon/ftCo_DamageFall.h"
+#include "kinds/ftCommon/ftCo_DownBound.h"
+#include "kinds/ftKirby/ftkirby.h"
+#include "kinds/ftMasterHand/forward.h"
+#include "types.h"
 #include <melee/cm/camera.h>
 #include <melee/ef/efasync.h>
 #include <sysdolphin/baselib/dobj.h>

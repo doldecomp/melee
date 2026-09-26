@@ -1,6 +1,6 @@
-#include <melee/mn/mngallery.h>
+#include "mngallery.h"
 
-#include <melee/mn/inlines.h>
+#include "inlines.h"
 #include <melee/gm/gmhowto.h>
 #include <melee/gm/gmmain_lib.h>
 #include <melee/lb/lbarchive.h>

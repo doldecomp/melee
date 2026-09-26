@@ -1,12 +1,12 @@
-#include <melee/ft/kinds/ftMasterHand/ftmasterhandentry.h>
+#include "ftmasterhandentry.h"
 
 #include <Runtime/platform.h>
 
 #include <math.h>
 
-#include <melee/ft/kinds/ftMasterHand/ftmasterhanddamage0.h>
-#include <melee/ft/kinds/ftMasterHand/ftmasterhandwait12.h>
-#include <melee/ft/kinds/ftMasterHand/types.h>
+#include "ftmasterhanddamage0.h"
+#include "ftmasterhandwait12.h"
+#include "types.h"
 #include <dolphin/mtx.h>
 #include <melee/cm/camera.h>
 #include <melee/ft/fighter.h>

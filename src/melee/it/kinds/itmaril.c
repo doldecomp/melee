@@ -1,8 +1,8 @@
-#include <melee/it/kinds/itmaril.h>
+#include "itmaril.h"
 
 #include <math.h>
 
-#include <melee/it/kinds/ithinoarashi.h>
+#include "ithinoarashi.h"
 #include <melee/ef/eflib.h>
 #include <melee/it/inlines.h>
 #include <melee/it/it_26B1.h>

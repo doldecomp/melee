@@ -1,4 +1,4 @@
-#include <melee/ft/kinds/ftCommon/ftCo_09F7.h>
+#include "ftCo_09F7.h"
 
 #include <math.h>
 #include <placeholder.h>

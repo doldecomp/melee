@@ -1,4 +1,4 @@
-#include <melee/it/kinds/itfushigibana.h>
+#include "itfushigibana.h"
 
 #include <Runtime/platform.h>
 

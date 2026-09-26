@@ -1,6 +1,6 @@
-#include <melee/it/kinds/itpeachturnip.h>
+#include "itpeachturnip.h"
 
-#include <melee/it/kinds/inlines.h>
+#include "inlines.h"
 #include <melee/ft/kinds/ftPeach/ftpeachspeciallw.h>
 #include <melee/it/inlines.h>
 #include <melee/it/it_26B1.h>

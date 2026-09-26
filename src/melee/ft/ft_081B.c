@@ -1,4 +1,4 @@
-#include <melee/ft/ft_081B.h>
+#include "ft_081B.h"
 
 #include <Runtime/platform.h>
 
@@ -7,22 +7,22 @@
 #include <placeholder.h>
 #include <stdbool.h>
 
-#include <melee/ft/fighter.h>
-#include <melee/ft/forward.h>
-#include <melee/ft/ft_0819.h>
-#include <melee/ft/ft_0892.h>
-#include <melee/ft/ftchangeparam.h>
-#include <melee/ft/ftcliffcommon.h>
-#include <melee/ft/ftcommon.h>
-#include <melee/ft/ftwalljump.h>
-#include <melee/ft/kinds/ftMasterHand/forward.h>
-#include <melee/ft/kinds/ftCommon/ftCo_Fall.h>
-#include <melee/ft/kinds/ftCommon/ftCo_Landing.h>
-#include <melee/ft/kinds/ftCommon/ftCo_MissFoot.h>
-#include <melee/ft/kinds/ftCommon/ftCo_Ottotto.h>
-#include <melee/ft/kinds/ftCommon/ftCo_StopCeil.h>
-#include <melee/ft/kinds/ftCommon/ftCo_StopWall.h>
-#include <melee/ft/types.h>
+#include "fighter.h"
+#include "forward.h"
+#include "ft_0819.h"
+#include "ft_0892.h"
+#include "ftchangeparam.h"
+#include "ftcliffcommon.h"
+#include "ftcommon.h"
+#include "ftwalljump.h"
+#include "kinds/ftCommon/ftCo_Fall.h"
+#include "kinds/ftCommon/ftCo_Landing.h"
+#include "kinds/ftCommon/ftCo_MissFoot.h"
+#include "kinds/ftCommon/ftCo_Ottotto.h"
+#include "kinds/ftCommon/ftCo_StopCeil.h"
+#include "kinds/ftCommon/ftCo_StopWall.h"
+#include "kinds/ftMasterHand/forward.h"
+#include "types.h"
 #include <dolphin/mtx.h>
 #include <melee/lb/types.h>
 #include <melee/mp/mpcoll.h>

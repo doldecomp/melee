@@ -1,9 +1,9 @@
-#include <melee/ft/ftcmdscript.h>
+#include "ftcmdscript.h"
 
 #include <math.h>
 
-#include <melee/ft/fighter.h>
-#include <melee/ft/types.h>
+#include "fighter.h"
+#include "types.h"
 #include <melee/lb/lb_00CE.h>
 #include <sysdolphin/baselib/debug.h>
 

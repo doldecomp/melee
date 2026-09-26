@@ -4,9 +4,9 @@
 #include <placeholder.h>
 #include <stddef.h>
 
-#include <melee/ft/kinds/ftKirby/forward.h>
-#include <melee/ft/kinds/ftKirby/ftkirby.h>
-#include <melee/ft/kinds/ftKirby/types.h>
+#include "forward.h"
+#include "ftkirby.h"
+#include "types.h"
 #include <melee/ef/efsync.h>
 #include <melee/ft/fighter.h>
 #include <melee/ft/ft_081B.h>
@@ -99,8 +99,8 @@ void ftKb_SpecialS_Enter(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     fp->cmd_vars[0] = 0;
-    Fighter_ChangeMotionState(gobj, ftKb_MS_SpecialS, Ft_MF_None, 0.0f, 1.0f, 0.0f,
-                              NULL);
+    Fighter_ChangeMotionState(gobj, ftKb_MS_SpecialS, Ft_MF_None, 0.0f, 1.0f,
+                              0.0f, NULL);
     ftAnim_8006EBA4(gobj);
     fp->accessory4_cb = &fn_800F53AC;
 }
@@ -115,8 +115,8 @@ void ftKb_SpecialAirS_Enter(Fighter_GObj* gobj)
         fp->self_vel.y = da->specials_aerial_vertical_momentum;
         fp->u.kb.x64 = true;
     }
-    Fighter_ChangeMotionState(gobj, ftKb_MS_SpecialAirS, Ft_MF_None, 0.0f, 1.0f, 0.0f,
-                              NULL);
+    Fighter_ChangeMotionState(gobj, ftKb_MS_SpecialAirS, Ft_MF_None, 0.0f,
+                              1.0f, 0.0f, NULL);
     ftAnim_8006EBA4(gobj);
     fp->accessory4_cb = &fn_800F53AC;
 }

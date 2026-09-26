@@ -1,8 +1,8 @@
-#include <melee/ft/kinds/ftCommon/ftCo_DemoCallback0.h>
+#include "ftCo_DemoCallback0.h"
 
 #include <Runtime/platform.h>
 
-#include <melee/ft/kinds/ftCommon/forward.h>
+#include "forward.h"
 #include <melee/ft/fighter.h>
 #include <melee/ft/types.h>
 

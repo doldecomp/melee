@@ -1,4 +1,4 @@
-#include <melee/it/kinds/itcapsule.h>
+#include "itcapsule.h"
 
 #include <Runtime/platform.h>
 

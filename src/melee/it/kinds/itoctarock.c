@@ -1,9 +1,9 @@
-#include <melee/it/kinds/itoctarock.h>
+#include "itoctarock.h"
 
 #include <placeholder.h>
 
-#include <melee/it/kinds/inlines.h>
-#include <melee/it/kinds/itoctarockstone.h>
+#include "inlines.h"
+#include "itoctarockstone.h"
 #include <melee/ft/ftlib.h>
 #include <melee/it/inlines.h>
 #include <melee/it/it_26B1.h>

@@ -1,4 +1,4 @@
-#include <melee/it/kinds/itmetamon.h>
+#include "itmetamon.h"
 
 #include <Runtime/platform.h>
 
