@@ -124,7 +124,7 @@ void* efAlt_Spawn(s32 gfx_id, HSD_GObj* gobj, va_list vlist)
         if (ret_obj != NULL) {
             effect = ret_obj;
             HSD_JObjSetRotationY(GET_JOBJ(effect->gobj), M_PI_2);
-            HSD_JObjSetRotationZ(GET_JOBJ(effect->gobj), *va_arg(vlist, f32*));
+            Effect_SetRotationZ(effect, *va_arg(vlist, f32*));
         }
         break;
     }
@@ -353,7 +353,7 @@ void* efAlt_Spawn(s32 gfx_id, HSD_GObj* gobj, va_list vlist)
         if (ret_obj != NULL) {
             effect = ret_obj;
             HSD_JObjSetRotationY(GET_JOBJ(effect->gobj), M_PI_2);
-            HSD_JObjSetRotationZ(GET_JOBJ(effect->gobj), *va_arg(vlist, f32*));
+            Effect_SetRotationZ(effect, *va_arg(vlist, f32*));
         }
         break;
     }

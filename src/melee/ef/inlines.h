@@ -44,4 +44,9 @@ static inline void Effect_SetGeneratorScale(HSD_Generator* generator,
         generator->appsrt->scale.z = scale;
 }
 
+static inline void Effect_SetRotationZ(EF_Effect* effect, f32 rotation)
+{
+    HSD_JObjSetRotationZ(GET_JOBJ(effect->gobj), rotation);
+}
+
 #endif
