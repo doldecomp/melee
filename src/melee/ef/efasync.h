@@ -6,6 +6,8 @@
 
 #include <stdarg.h>
 
+#include <melee/ef/types.h>
+
 /* 063930 */ void* efAsync_Dispatch(s32 gfx_id, HSD_GObj* gobj, va_list vlist);
 /* 06729C */ void efAsync_LoadAsync(int index);
 /* 06730C */ void efAsync_OnLoad(HSD_Archive* archive, u8* data, u32 length,
@@ -19,5 +21,7 @@
                                 u32 spawn_kind, u32 gfx_id, HSD_JObj* jobj,
                                 ...);
 /* 0676F0 */ void efAsync_QueueInit(void);
+
+extern EF_DAT_Entry efAsync_DatEntries[51];
 
 #endif
