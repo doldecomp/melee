@@ -31,6 +31,14 @@ static inline void efAsync_SetEffectRandomRotationZ(EF_Effect* effect)
     HSD_JObjSetRotationZ(GET_JOBJ(effect->gobj), M_TAU * HSD_Randf());
 }
 
+static inline void efAsync_SetStoredAlphaEffect(EF_Effect* effect,
+                                                HSD_GObj* gobj, s32 gfx_id)
+{
+    effect->scale_flags |= EF_SCALE_INHERIT;
+    efLib_SetParamGfxId(gobj, gfx_id);
+    effect->update = efLib_Cb_ApplyStoredAlpha;
+}
+
 void* efAsync_Dispatch(s32 gfx_id, HSD_GObj* gobj, va_list vlist)
 {
     u32 id;
@@ -383,9 +391,7 @@ void* efAsync_Dispatch(s32 gfx_id, HSD_GObj* gobj, va_list vlist)
                 konst = 0xFFFFFF;
             }
             efLib_SetTevKonstColor(jobj_2, 1, konst, tev0);
-            effect->scale_flags |= EF_SCALE_INHERIT;
-            efLib_SetParamGfxId(gobj, gfx_id);
-            effect->update = efLib_Cb_ApplyStoredAlpha;
+            efAsync_SetStoredAlphaEffect(effect, gobj, gfx_id);
         }
         break;
     case 0x418:
@@ -402,9 +408,7 @@ void* efAsync_Dispatch(s32 gfx_id, HSD_GObj* gobj, va_list vlist)
                 konst = 0xFFFFFF;
             }
             efLib_SetTevKonstColor(jobj_2, 0, konst, tev0);
-            effect->scale_flags |= EF_SCALE_INHERIT;
-            efLib_SetParamGfxId(gobj, gfx_id);
-            effect->update = efLib_Cb_ApplyStoredAlpha;
+            efAsync_SetStoredAlphaEffect(effect, gobj, gfx_id);
         }
         break;
     case 0x419: {
@@ -436,9 +440,7 @@ void* efAsync_Dispatch(s32 gfx_id, HSD_GObj* gobj, va_list vlist)
             efLib_SetTevKonstColor(jobj_1, 0, konst, tev0);
             jobj_1 = HSD_JObjGetNext(jobj_1);
             efLib_SetTevKonstColor(jobj_1, 0, konst, tev0);
-            effect->scale_flags |= EF_SCALE_INHERIT;
-            efLib_SetParamGfxId(gobj, gfx_id);
-            effect->update = efLib_Cb_ApplyStoredAlpha;
+            efAsync_SetStoredAlphaEffect(effect, gobj, gfx_id);
         }
         break;
     }
@@ -456,9 +458,7 @@ void* efAsync_Dispatch(s32 gfx_id, HSD_GObj* gobj, va_list vlist)
                 konst = 0xFFFFFF;
             }
             efLib_SetTevKonstColor(jobj_2, 0, konst, tev0);
-            effect->scale_flags |= EF_SCALE_INHERIT;
-            efLib_SetParamGfxId(gobj, gfx_id);
-            effect->update = efLib_Cb_ApplyStoredAlpha;
+            efAsync_SetStoredAlphaEffect(effect, gobj, gfx_id);
         }
         break;
     case 0x41B: {
