@@ -693,7 +693,6 @@ void mnDiagram_SortNamesByKOs(void)
     u8* candidate;
     int n;
     u32 totals[GM_NAMETAG_COUNT];
-    PAD_STACK(4);
 
     dst_iter = dst;
     tp = totals;
@@ -708,10 +707,9 @@ void mnDiagram_SortNamesByKOs(void)
         max_idx = i;
         for (; j < GM_NAMETAG_COUNT; candidate++, j++) {
             if ((GetNameText(*candidate) != NULL) &&
-                ((totals[mnDiagram_NameDisplayOrder[max_idx]] <
+                ((totals[mnDiagram_GetNameByIndex(max_idx)] <
                   totals[*candidate]) ||
-                 ((GetNameText((0, mnDiagram_NameDisplayOrder[max_idx])) ==
-                   NULL) &&
+                 ((GetNameText(mnDiagram_GetNameByIndex(max_idx)) == NULL) &&
                   (GetNameText(*candidate) != NULL))))
             {
                 max_idx = j;
