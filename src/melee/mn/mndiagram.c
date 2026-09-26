@@ -69,9 +69,34 @@ static mnDiagram_PopupAnimTableHead mnDiagram_PopupTextOffsets = {
 };
 
 static u8 mnDiagram_DefaultFighterOrder[0x1C] = {
-    8,    1,    6,    0x10, 0x11, 4,   2,   0xD, 0xB, 0,
-    5,    0xC,  0xE,  0x12, 7,    0xF, 0xA, 9,   3,   0x15,
-    0x18, 0x13, 0x14, 0x17, 0x16, 0,   0,   0,
+    SELKIND_MARIO,
+    SELKIND_DONKEY,
+    SELKIND_LINK,
+    SELKIND_SAMUS,
+    SELKIND_YOSHI,
+    SELKIND_KIRBY,
+    SELKIND_FOX,
+    SELKIND_PIKACHU,
+    SELKIND_NESS,
+    SELKIND_CAPTAIN,
+    SELKIND_KOOPA,
+    SELKIND_PEACH,
+    SELKIND_POPONANA,
+    SELKIND_ZELDA_SEAK,
+    SELKIND_LUIGI,
+    SELKIND_PURIN,
+    SELKIND_MEWTWO,
+    SELKIND_MARS,
+    SELKIND_GAMEWATCH,
+    SELKIND_DRMARIO,
+    SELKIND_GANON,
+    SELKIND_FALCO,
+    SELKIND_CLINK,
+    SELKIND_PICHU,
+    SELKIND_EMBLEM,
+    0,
+    0,
+    0,
 };
 
 static AnimLoopSettings mnDiagram_IntroAnim = { 0.0f, 9.0f, -0.1f };
@@ -1346,25 +1371,22 @@ void mnDiagram_InputProc(HSD_GObj* gobj)
     }
 }
 
+static inline void removeText(HSD_Text* text)
+{
+    if (text != NULL) {
+        HSD_SisLib_803A5CC4(text);
+    }
+}
+
 void mnDiagram_PopupCleanup(void* arg0)
 {
     mnDiagram_PopupData* data = arg0;
 
-    if (data->text[0] != NULL) {
-        HSD_SisLib_803A5CC4(data->text[0]);
-    }
-    if (data->text[1] != NULL) {
-        HSD_SisLib_803A5CC4(data->text[1]);
-    }
-    if (data->text[2] != NULL) {
-        HSD_SisLib_803A5CC4(data->text[2]);
-    }
-    if (data->text[3] != NULL) {
-        HSD_SisLib_803A5CC4(data->text[3]);
-    }
-    if (data->text[4] != NULL) {
-        HSD_SisLib_803A5CC4(data->text[4]);
-    }
+    removeText(data->text[0]);
+    removeText(data->text[1]);
+    removeText(data->text[2]);
+    removeText(data->text[3]);
+    removeText(data->text[4]);
     HSD_Free(arg0);
 }
 
@@ -1728,16 +1750,22 @@ void mnDiagram_ClearGrid(HSD_GObj* arg0)
     }
 }
 
+static inline void refreshGrid(HSD_GObj* gobj, int row_start, int col_start,
+                               Diagram* data)
+{
+    mnDiagram_ClearGrid(gobj);
+    mnDiagram_DrawGridValues(gobj, row_start, col_start,
+                             (u8) (data->is_name_mode == 1));
+    if (data->is_name_mode == 0) {
+        mnDiagram_DrawFighterHeaders(gobj, row_start, col_start);
+    } else {
+        mnDiagram_DrawNameHeaders(gobj, row_start, col_start);
+    }
+}
+
 void mnDiagram_RefreshGrid(HSD_GObj* arg0, int arg1, int arg2)
 {
-    Diagram* data = GET_DIAGRAM(arg0);
-    mnDiagram_ClearGrid(arg0);
-    mnDiagram_DrawGridValues(arg0, arg1, arg2, (u8) (data->is_name_mode == 1));
-    if (data->is_name_mode == 0) {
-        mnDiagram_DrawFighterHeaders(arg0, arg1, arg2);
-    } else {
-        mnDiagram_DrawNameHeaders(arg0, arg1, arg2);
-    }
+    refreshGrid(arg0, arg1, arg2, GET_DIAGRAM(arg0));
 }
 
 static inline void setArrowVisible(HSD_JObj* arrow, bool visible)
@@ -1872,15 +1900,8 @@ void mnDiagram_ExitAnimProc(HSD_GObj* gobj)
     }
 }
 
-/// @brief Updates scroll arrow visibility based on entry count.
-/// @details Hides vertical arrows if count <= 7 (fits in visible rows).
-///          Hides horizontal arrows if count <= 10 (fits in visible columns).
-/// @param gobj The diagram GObj containing arrow JObjs in user_data.
-/// @param count Number of entries (fighters or names) to display.
-void mnDiagram_UpdateScrollArrowVisibility(HSD_GObj* gobj, int count)
+static inline void updateScrollArrowVisibility(Diagram* data, int count)
 {
-    Diagram* data = gobj->user_data;
-    PAD_STACK(8);
     if (count <= 7) {
         HSD_JObjSetFlagsAll(data->jobjs[5], JOBJ_HIDDEN);
         HSD_JObjSetFlagsAll(data->jobjs[6], JOBJ_HIDDEN);
@@ -1895,6 +1916,18 @@ void mnDiagram_UpdateScrollArrowVisibility(HSD_GObj* gobj, int count)
         HSD_JObjClearFlagsAll(data->jobjs[4], JOBJ_HIDDEN);
         HSD_JObjClearFlagsAll(data->jobjs[3], JOBJ_HIDDEN);
     }
+}
+
+/// @brief Updates scroll arrow visibility based on entry count.
+/// @details Hides vertical arrows if count <= 7 (fits in visible rows).
+///          Hides horizontal arrows if count <= 10 (fits in visible columns).
+/// @param gobj The diagram GObj containing arrow JObjs in user_data.
+/// @param count Number of entries (fighters or names) to display.
+void mnDiagram_UpdateScrollArrowVisibility(HSD_GObj* gobj, int count)
+{
+    Diagram* data = gobj->user_data;
+    PAD_STACK(8);
+    updateScrollArrowVisibility(data, count);
 }
 
 static inline int getEntryCount(Diagram* data)
@@ -1978,20 +2011,7 @@ void mnDiagram_OnFrame(HSD_GObj* gobj)
                 count = getFighterCount();
             }
             data2 = gobj->user_data;
-            if (count <= 7) {
-                HSD_JObjSetFlagsAll(data2->jobjs[5], JOBJ_HIDDEN);
-                HSD_JObjSetFlagsAll(data2->jobjs[6], JOBJ_HIDDEN);
-            } else {
-                HSD_JObjClearFlagsAll(data2->jobjs[5], JOBJ_HIDDEN);
-                HSD_JObjClearFlagsAll(data2->jobjs[6], JOBJ_HIDDEN);
-            }
-            if (count <= 10) {
-                HSD_JObjSetFlagsAll(data2->jobjs[4], JOBJ_HIDDEN);
-                HSD_JObjSetFlagsAll(data2->jobjs[3], JOBJ_HIDDEN);
-            } else {
-                HSD_JObjClearFlagsAll(data2->jobjs[4], JOBJ_HIDDEN);
-                HSD_JObjClearFlagsAll(data2->jobjs[3], JOBJ_HIDDEN);
-            }
+            updateScrollArrowVisibility(data2, count);
         } else {
             HSD_JObjSetFlagsAll(jobj, JOBJ_HIDDEN);
         }
@@ -2500,34 +2520,20 @@ void mnDiagram_CreateScreen(u8 arg0)
 
         count = getEntryCount(user_data);
 
-        mnDiagram_UpdateScrollArrowVisibility(gobj, count);
+        updateScrollArrowVisibility(GET_DIAGRAM(gobj), count);
 
         if (user_data->is_name_mode != 0) {
             indices = user_data->name_cursor_pos;
             row_idx = indices >> 8;
             col_idx = indices & 0xFF;
             d = GET_DIAGRAM(gobj);
-            mnDiagram_ClearGrid(gobj);
-            mnDiagram_DrawGridValues(gobj, col_idx, row_idx,
-                                     (u8) (d->is_name_mode == 1));
-            if (d->is_name_mode == 0) {
-                mnDiagram_DrawFighterHeaders(gobj, col_idx, row_idx);
-            } else {
-                mnDiagram_DrawNameHeaders(gobj, col_idx, row_idx);
-            }
+            refreshGrid(gobj, col_idx, row_idx, d);
         } else {
             indices = user_data->fighter_cursor_pos;
             row_idx2 = indices >> 8;
             col_idx2 = indices & 0xFF;
             d2 = GET_DIAGRAM(gobj);
-            mnDiagram_ClearGrid(gobj);
-            mnDiagram_DrawGridValues(gobj, col_idx2, row_idx2,
-                                     (u8) (d2->is_name_mode == 1));
-            if (d2->is_name_mode == 0) {
-                mnDiagram_DrawFighterHeaders(gobj, col_idx2, row_idx2);
-            } else {
-                mnDiagram_DrawNameHeaders(gobj, col_idx2, row_idx2);
-            }
+            refreshGrid(gobj, col_idx2, row_idx2, d2);
         }
     }
 }
