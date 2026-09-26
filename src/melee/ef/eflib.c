@@ -281,8 +281,8 @@ void efLib_RemoveLast(void)
         next = gobj->next;
         efLib_Destroy(gobj);
         {
-            u32 check = efLib_EffectCount, value = 0x40U;
-            if (check < value) {
+            u32 count = efLib_EffectCount, limit = 64;
+            if (count < limit) {
                 return;
             }
         }
@@ -294,8 +294,8 @@ void efLib_RemoveLast(void)
         next = gobj->next;
         efLib_Destroy(gobj);
         {
-            u32 check = efLib_EffectCount, value = 0x40U;
-            if (check < value) {
+            u32 count = efLib_EffectCount, limit = 64;
+            if (count < limit) {
                 return;
             }
         }
