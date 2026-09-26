@@ -2301,16 +2301,18 @@ static inline HSD_JObj* mnDiagram_LoadHeaderIcon(StaticModelDesc* joint_data,
 }
 
 /// @pre rank is nonnegative.
-static inline int getVisibleFighter(int start, int rank)
+static inline void getVisibleFighter(int start, int rank, int* fighter)
 {
     while (rank >= 0) {
         if (rank == 0) {
-            return mnDiagram_FighterDisplayOrder[start];
+            *fighter = mnDiagram_FighterDisplayOrder[start];
+            return;
         }
         do {
             start++;
             if (start >= SELKIND_COUNT) {
-                return SELKIND_COUNT;
+                *fighter = SELKIND_COUNT;
+                return;
             }
         } while (mn_IsFighterUnlocked(mnDiagram_GetFighterByIndex(start)) ==
                  0);
@@ -2320,14 +2322,9 @@ static inline int getVisibleFighter(int start, int rank)
 
 void mnDiagram_DrawFighterHeaders(HSD_GObj* arg0, int arg1, int arg2)
 {
-    u8* sorted;
-    u8* row_next;
     int row_fighter;
     s32 unlocked_count;
     StaticModelDesc* joint_data;
-    u8* row_cursor;
-    int row_idx;
-    int row_remaining;
     Diagram* data = GET_DIAGRAM(arg0);
     int col_fighter;
     HSD_JObj* col_jobj;
@@ -2344,7 +2341,7 @@ void mnDiagram_DrawFighterHeaders(HSD_GObj* arg0, int arg1, int arg2)
         unlocked_count = mnDiagram_CountUnlockedFighters();
         if (unlocked_count > i) {
             HSD_JObj* child;
-            col_fighter = getVisibleFighter(arg2, i);
+            getVisibleFighter(arg2, i, &col_fighter);
             col_jobj =
                 mnDiagram_LoadHeaderIcon(joint_data, col_fighter, &child);
             {
@@ -2360,31 +2357,10 @@ void mnDiagram_DrawFighterHeaders(HSD_GObj* arg0, int arg1, int arg2)
     // Row headers (fighter icons)
     joint_data = &MenMainFaceB_Top;
     for (i = 0; i < 10; i++) {
-        sorted = mnDiagram_FighterDisplayOrder;
         unlocked_count = mnDiagram_CountUnlockedFighters();
         if (unlocked_count > i) {
             HSD_JObj* row_child;
-            row_remaining = i;
-            row_idx = arg1;
-            row_cursor = sorted + row_idx;
-            while (row_remaining >= 0) {
-                if (row_remaining == 0) {
-                    row_fighter = sorted[row_idx];
-                    break;
-                }
-                row_next = row_cursor;
-                do {
-                    row_idx++;
-                    row_next++;
-                    row_cursor++;
-                    if (row_idx >= SELKIND_COUNT) {
-                        row_fighter = SELKIND_COUNT;
-                        goto row_found;
-                    }
-                } while (mn_IsFighterUnlocked(*row_next) == 0);
-                row_remaining--;
-            }
-        row_found:
+            getVisibleFighter(arg1, i, &row_fighter);
             row_jobj = HSD_JObjLoadJoint(joint_data->joint);
             HSD_JObjAddAnimAll(row_jobj, joint_data->animjoint,
                                joint_data->matanim_joint,
