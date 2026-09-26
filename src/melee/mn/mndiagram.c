@@ -757,18 +757,16 @@ void mnDiagram_PopupInputProc(HSD_GObj* gobj)
     }
 }
 
-static inline u8 mnDiagram_GetVisibleNameFrom(u8* sorted, int start, int rank)
+static inline u8 mnDiagram_GetVisibleNameFrom(int start, int rank)
 {
     u8* p;
     u8* p2;
     int remaining;
     int idx;
 
-    p = sorted;
-    p = p + start;
+    p = mnDiagram_NameDisplayOrder + start;
     remaining = rank;
     idx = start;
-    p = p + 0x1C;
     while (remaining > 0) {
         p2 = p;
         do {
@@ -781,9 +779,7 @@ static inline u8 mnDiagram_GetVisibleNameFrom(u8* sorted, int start, int rank)
         } while (GetNameText(*p2) == NULL);
         remaining--;
     }
-    p = sorted;
-    p += idx;
-    return p[0x1C];
+    return mnDiagram_GetNameByIndex(idx);
 }
 
 static inline s32 mnDiagram_FindPrevFighter(u8* sorted,
@@ -1795,14 +1791,12 @@ void mnDiagram_UpdateScrollArrows(HSD_GObj* gobj)
     int name_count;
     HSD_JObj* jobj2;
     HSD_JObj* jobj3;
-    PAD_STACK(8);
 
     // Right arrow (jobjs[3])
     jobj = data->jobjs[3];
     mn_8022ED6C(jobj, &mnDiagram_ArrowAnim);
     if (data->is_name_mode != 0) {
-        result = mnDiagram_GetVisibleNameFrom(sorted,
-                                              (u8) data->name_cursor_pos, 10);
+        result = mnDiagram_GetVisibleNameFrom((u8) data->name_cursor_pos, 10);
         setArrowVisible(jobj, (u8) result != GM_NAMETAG_COUNT);
     } else {
         result = mnDiagram_GetVisibleFighterCursorFrom(
@@ -1836,8 +1830,7 @@ void mnDiagram_UpdateScrollArrows(HSD_GObj* gobj)
     if (data->is_name_mode != 0) {
         name_count = 7;
         i = data->name_cursor_pos >> 8;
-        ptr = sorted + i;
-        ptr = ptr + 0x1C;
+        ptr = mnDiagram_NameDisplayOrder + i;
         while (name_count > 0) {
             ptr2 = ptr;
             do {
@@ -1851,9 +1844,7 @@ void mnDiagram_UpdateScrollArrows(HSD_GObj* gobj)
             } while (GetNameText(*ptr2) == NULL);
             name_count--;
         }
-        ptr = sorted;
-        ptr += i;
-        result = ptr[0x1C];
+        result = mnDiagram_GetNameByIndex(i);
     dn_name_done:
         setArrowVisible(jobj3, (u8) result != GM_NAMETAG_COUNT);
     } else {
