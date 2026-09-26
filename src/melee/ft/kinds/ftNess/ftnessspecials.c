@@ -80,8 +80,8 @@ void ftNs_SpecialS_Enter(
     fp = GET_FIGHTER(gobj);
     fp->throw_flags = 0; // Set projectile summon flag to 0
     fp->cmd_vars[0] = 0; // Set ftcmd flag0 to 0; _ in PK Fire?
-    Fighter_ChangeMotionState(gobj, ftNs_MS_SpecialS, Ft_MF_None, 0.0f, 1.0f,
-                              0.0f, NULL);
+    Fighter_ChangeMotionState(gobj, ftNs_MS_SpecialS, 0, 0.0f, 1.0f, 0.0f,
+                              NULL);
     ftAnim_8006EBA4(gobj);
     fp->accessory4_cb =
         ftNs_SpecialS_ItemPKFireSpawn; // Store PK Fire spawn function
@@ -96,8 +96,8 @@ void ftNs_SpecialAirS_Enter(
     fp = GET_FIGHTER(gobj);
     fp->throw_flags = 0; // Set projectile summon flag to 0
     fp->cmd_vars[0] = 0; // Set ftcmd flag0 to 0; _ in PK Fire?
-    Fighter_ChangeMotionState(gobj, ftNs_MS_SpecialAirS, Ft_MF_None, 0.0f,
-                              1.0f, 0.0f, NULL);
+    Fighter_ChangeMotionState(gobj, ftNs_MS_SpecialAirS, 0, 0.0f, 1.0f, 0.0f,
+                              NULL);
     ftAnim_8006EBA4(gobj);
     fp->accessory4_cb = ftNs_SpecialS_ItemPKFireSpawn;
 }

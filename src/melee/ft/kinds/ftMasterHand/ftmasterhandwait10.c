@@ -56,11 +56,10 @@ static void ftMh_MS_341_8014FE5C(HSD_GObj* gobj)
         fp->u.mh.x2240_pos = fp->cur_pos;
     }
     if (fp->u.mh.x2258 == ftMh_MS_Wait1_2) {
-        Fighter_ChangeMotionState(gobj, ftMh_MS_Wait1_0, Ft_MF_None,
-                                  fp->cur_anim_frame, 1, 0, 0);
+        Fighter_ChangeMotionState(gobj, ftMh_MS_Wait1_0, 0, fp->cur_anim_frame,
+                                  1, 0, 0);
     } else {
-        Fighter_ChangeMotionState(gobj, ftMh_MS_Wait1_0, Ft_MF_None, 0, 1, 0,
-                                  0);
+        Fighter_ChangeMotionState(gobj, ftMh_MS_Wait1_0, 0, 0, 1, 0, 0);
     }
     fp->u.mh.x2258 = ftMh_MS_Wait1_0;
 }
@@ -74,11 +73,10 @@ void ftMh_MS_341_8014FF1C(HSD_GObj* gobj)
         fp->u.mh.x2240_pos = fp->cur_pos;
     }
     if (fp->u.mh.x2258 == ftMh_MS_Wait2_1) {
-        Fighter_ChangeMotionState(gobj, ftMh_MS_Wait2_0, Ft_MF_None,
-                                  fp->cur_anim_frame, 1, 0, 0);
+        Fighter_ChangeMotionState(gobj, ftMh_MS_Wait2_0, 0, fp->cur_anim_frame,
+                                  1, 0, 0);
     } else {
-        Fighter_ChangeMotionState(gobj, ftMh_MS_Wait2_0, Ft_MF_None, 0, 1, 0,
-                                  0);
+        Fighter_ChangeMotionState(gobj, ftMh_MS_Wait2_0, 0, 0, 1, 0, 0);
     }
     fp->u.mh.x2258 = ftMh_MS_Wait2_0;
 }
@@ -96,11 +94,10 @@ void ftMh_MS_341_8014FFDC(HSD_GObj* gobj)
             fp->u.mh.x2240_pos = fp->cur_pos;
         }
         if (fp->u.mh.x2258 == ftMh_MS_Wait2_1) {
-            Fighter_ChangeMotionState(gobj, ftMh_MS_Wait2_0, Ft_MF_None,
+            Fighter_ChangeMotionState(gobj, ftMh_MS_Wait2_0, 0,
                                       fp->cur_anim_frame, 1, 0, 0);
         } else {
-            Fighter_ChangeMotionState(gobj, ftMh_MS_Wait2_0, Ft_MF_None, 0, 1,
-                                      0, 0);
+            Fighter_ChangeMotionState(gobj, ftMh_MS_Wait2_0, 0, 0, 1, 0, 0);
         }
         fp->u.mh.x2258 = ftMh_MS_Wait2_0;
     } else {
@@ -112,11 +109,10 @@ void ftMh_MS_341_8014FFDC(HSD_GObj* gobj)
             fp->u.mh.x2240_pos = fp->cur_pos;
         }
         if (fp->u.mh.x2258 == ftMh_MS_Wait1_2) {
-            Fighter_ChangeMotionState(gobj, ftMh_MS_Wait1_0, Ft_MF_None,
+            Fighter_ChangeMotionState(gobj, ftMh_MS_Wait1_0, 0,
                                       fp->cur_anim_frame, 1, 0, 0);
         } else {
-            Fighter_ChangeMotionState(gobj, ftMh_MS_Wait1_0, Ft_MF_None, 0, 1,
-                                      0, 0);
+            Fighter_ChangeMotionState(gobj, ftMh_MS_Wait1_0, 0, 0, 1, 0, 0);
         }
         fp->u.mh.x2258 = ftMh_MS_Wait1_0;
     }
@@ -140,11 +136,10 @@ static void ifStage251(HSD_GObj* gobj)
             fp->u.mh.x2240_pos = fp->cur_pos;
         }
         if (fp->u.mh.x2258 == ftMh_MS_Wait1_2) {
-            Fighter_ChangeMotionState(gobj, ftMh_MS_Wait1_0, Ft_MF_None,
+            Fighter_ChangeMotionState(gobj, ftMh_MS_Wait1_0, 0,
                                       fp->cur_anim_frame, 1, 0, 0);
         } else {
-            Fighter_ChangeMotionState(gobj, ftMh_MS_Wait1_0, Ft_MF_None, 0, 1,
-                                      0, 0);
+            Fighter_ChangeMotionState(gobj, ftMh_MS_Wait1_0, 0, 0, 1, 0, 0);
         }
         fp->u.mh.x2258 = ftMh_MS_Wait1_0;
     }
@@ -183,11 +178,10 @@ static inline void doAnim0(HSD_GObj* gobj)
         fp->u.mh.x2240_pos = fp->cur_pos;
     }
     if (fp->u.mh.x2258 == ftMh_MS_Wait2_1) {
-        Fighter_ChangeMotionState(gobj, ftMh_MS_Wait2_0, Ft_MF_None,
-                                  fp->cur_anim_frame, 1, 0, 0);
+        Fighter_ChangeMotionState(gobj, ftMh_MS_Wait2_0, 0, fp->cur_anim_frame,
+                                  1, 0, 0);
     } else {
-        Fighter_ChangeMotionState(gobj, ftMh_MS_Wait2_0, Ft_MF_None, 0, 1, 0,
-                                  0);
+        Fighter_ChangeMotionState(gobj, ftMh_MS_Wait2_0, 0, 0, 1, 0, 0);
     }
     fp->u.mh.x2258 = ftMh_MS_Wait2_0;
 }

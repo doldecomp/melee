@@ -112,7 +112,7 @@ bool ftMr_SpecialS_CheckItemCapeRemove(HSD_GObj* gobj)
 
 static void changeAction(HSD_GObj* gobj, ftMario_MotionState msid)
 {
-    Fighter_ChangeMotionState(gobj, msid, Ft_MF_None, 0, 1, 0, NULL);
+    Fighter_ChangeMotionState(gobj, msid, 0, 0, 1, 0, NULL);
     ftAnim_8006EBA4(gobj);
 
     {

@@ -49,8 +49,7 @@ void ftNs_SpecialLwStart_Enter(HSD_GObj* gobj) // Ness's grounded PSI Magnet
     temp_fp->mv.ns.speciallw.gravityDelay =
         ness_attr->x84_PSI_MAGNET_FRAMES_BEFORE_GRAVITY;
     temp_fp->mv.ns.speciallw.x10 = 0;
-    Fighter_ChangeMotionState(gobj, ftNs_MS_SpecialLwStart, Ft_MF_None, 0, 1,
-                              0, NULL);
+    Fighter_ChangeMotionState(gobj, ftNs_MS_SpecialLwStart, 0, 0, 1, 0, NULL);
     ftAnim_8006EBA4(gobj);
 }
 
@@ -73,8 +72,8 @@ void ftNs_SpecialAirLwStart_Enter(
     temp_fp->mv.ns.speciallw.x10 = 0;
     temp_fp->self_vel.y = 0.0f;
     temp_fp->self_vel.x /= ness_attr->x88_PSI_MAGNET_MOMENTUM_PRESERVATION;
-    Fighter_ChangeMotionState(gobj, ftNs_MS_SpecialAirLwStart, Ft_MF_None,
-                              0.0f, 1.0f, 0.0f, NULL);
+    Fighter_ChangeMotionState(gobj, ftNs_MS_SpecialAirLwStart, 0, 0.0f, 1.0f,
+                              0.0f, NULL);
     ftAnim_8006EBA4(gobj);
 }
 
@@ -903,7 +902,7 @@ void ftNs_AbsorbThink_DecideAction(
             msid = ftNs_MS_SpecialAirLwHit;
         }
 
-        Fighter_ChangeMotionState(gobj, msid, Ft_MF_KeepGfx, 0, 1, 0, NULL);
+        Fighter_ChangeMotionState(gobj, msid, 2, 0, 1, 0, NULL);
         ftColl_CreateAbsorbHit(gobj, &sa->x98_PSI_MAGNET_ABSORPTION);
     }
 }
@@ -1021,14 +1020,14 @@ void ftNs_SpecialAirLwEnd_AirToGround(
 void ftNs_SpecialLwEnd_Enter(
     HSD_GObj* gobj) // Ness's grounded PSI Magnet End Motion State handler
 {
-    Fighter_ChangeMotionState(gobj, ftNs_MS_SpecialLwEnd, Ft_MF_None, 0.0f,
-                              1.0f, 0.0f, NULL);
+    Fighter_ChangeMotionState(gobj, ftNs_MS_SpecialLwEnd, 0, 0.0f, 1.0f, 0.0f,
+                              NULL);
 }
 
 /// 0x8011B4E4
 void ftNs_SpecialAirLwEnd_Enter(
     HSD_GObj* gobj) // Ness's aerial PSI Magnet End Motion State handler
 {
-    Fighter_ChangeMotionState(gobj, ftNs_MS_SpecialAirLwEnd, Ft_MF_None, 0.0f,
-                              1.0f, 0.0f, NULL);
+    Fighter_ChangeMotionState(gobj, ftNs_MS_SpecialAirLwEnd, 0, 0.0f, 1.0f,
+                              0.0f, NULL);
 }

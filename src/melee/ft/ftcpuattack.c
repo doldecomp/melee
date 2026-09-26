@@ -8,6 +8,13 @@
 #include "inlines.h"
 #include "kinds/ftCommon/ftCo_09F7.h"
 #include "kinds/ftCommon/ftCo_0A01.h"
+#include "kinds/ftCommon/inlines.h"
+#include "kinds/ftDonkey/forward.h"
+#include "kinds/ftKirby/forward.h"
+#include "kinds/ftKoopa/forward.h"
+#include "kinds/ftSamus/forward.h"
+#include "kinds/ftYoshi/forward.h"
+#include "kinds/ftZelda/forward.h"
 #include <melee/gr/ground.h>
 #include <melee/it/inlines.h>
 #include <melee/it/it_26B1.h>
@@ -824,12 +831,12 @@ bool ftCo_800B630C(Fighter* fp)
     }
     if (fp->kind == Ft_Kind_Donkey) {
         // Any of DK's common moves, or cargo carry / throw
-        if (fp->motion_id <= ftCo_MS_ThrownFLw) {
+        if (fp->motion_id <= ftDk_MS_ThrowAirFLw) {
             return false;
         }
     } else if (fp->kind == Ft_Kind_Kirby) {
         // Any of Kirby's common moves, or air jump / dash attack?
-        if (fp->motion_id <= ftCo_MS_AttackDash) {
+        if (fp->motion_id <= ftKb_MS_AttackDashAir) {
             return false;
         }
     } else if (fp->kind == Ft_Kind_Peach) {
@@ -932,16 +939,16 @@ void ftCo_800B658C(Fighter* fp)
             return;
         }
     } else if (fp->kind == Ft_Kind_Samus) {
-        if (fp->motion_id == ftNs_MS_SpecialNHold) {
+        if (fp->motion_id == ftSs_MS_SpecialNHold) {
             ftCo_CpuTapRAndWaitFiveFrames(fp);
         }
     } else if (fp->kind == Ft_Kind_Donkey) {
-        if (fp->motion_id == ftLk_MS_SpecialNLoop) {
+        if (fp->motion_id == ftDk_MS_SpecialNLoop) {
             ftCo_CpuTapRAndWaitFiveFrames(fp);
         }
     } else if (fp->kind == Ft_Kind_Zelda) {
         if (fp->motion_id >= ftZd_MS_SpecialSLoop &&
-            fp->motion_id <= ftFx_MS_SpecialAirSEnd)
+            fp->motion_id <= ftZd_MS_SpecialAirSEnd)
         {
             ftCo_800B9504(fp);
             return;
@@ -1949,7 +1956,7 @@ void ftCo_800B9020(Fighter* fp)
         }
     } else if (fp->kind == Ft_Kind_Zelda) {
         if (fp->motion_id >= ftZd_MS_SpecialSLoop &&
-            fp->motion_id <= ftFx_MS_SpecialAirSEnd)
+            fp->motion_id <= ftZd_MS_SpecialAirSEnd)
         {
             ftCo_800B9504(fp);
             return;

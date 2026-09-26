@@ -3,8 +3,8 @@
 #include <Runtime/platform.h>
 
 #include "fighter.h"
+#include "kinds/ftCommon/forward.h"
 #include "kinds/ftCommon/ftCo_PassiveWall.h"
-#include "kinds/ftMasterHand/forward.h"
 #include "types.h"
 #include <dolphin/mtx.h>
 #include <melee/mp/mplib.h>

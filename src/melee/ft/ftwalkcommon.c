@@ -7,8 +7,8 @@
 #include "ft_081B.h"
 #include "ftanim.h"
 #include "ftcommon.h"
-#include "kinds/ftMasterHand/forward.h"
-#include "kinds/ftMasterHand/types.h"
+#include "kinds/ftCommon/forward.h"
+#include "kinds/ftCommon/types.h"
 #include "types.h"
 #include <dolphin/mtx.h>
 #include <sysdolphin/baselib/debug.h>

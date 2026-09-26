@@ -183,8 +183,8 @@ void ftGw_SpecialS_Enter(HSD_GObj* gobj)
     /// @todo Shared @c inline with #ftGw_SpecialAirS_Enter.
     ftGw_SpecialS_GetRandomInt(gobj);
     Fighter_ChangeMotionState(gobj,
-                              fp->u.gw.x222C_judgeVar1 + ftGw_MS_SpecialS1,
-                              Ft_MF_None, 0.0f, 1.0f, 0.0f, NULL);
+                              fp->u.gw.x222C_judgeVar1 + ftGw_MS_SpecialS1, 0,
+                              0.0f, 1.0f, 0.0f, NULL);
     ftAnim_8006EBA4(gobj);
     ftGameWatch_SpecialS_SetVars(gobj);
 }
@@ -203,7 +203,7 @@ void ftGw_SpecialAirS_Enter(HSD_GObj* gobj)
     ftGw_SpecialS_GetRandomInt(gobj);
     Fighter_ChangeMotionState(gobj,
                               fp->u.gw.x222C_judgeVar1 + ftGw_MS_SpecialAirS1,
-                              Ft_MF_None, 0.0f, 1.0f, 0.0f, NULL);
+                              0, 0.0f, 1.0f, 0.0f, NULL);
     ftAnim_8006EBA4(gobj);
     ftGameWatch_SpecialS_SetVars(gobj);
 }

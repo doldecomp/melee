@@ -19,8 +19,7 @@ void ftMh_Poke1_Coll(HSD_GObj* gobj) {}
 void ftMh_MS_359_80152BCC(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    Fighter_ChangeMotionState(gobj, ftMh_MS_FingerBeamStart, Ft_MF_None, 0, 1,
-                              0, 0);
+    Fighter_ChangeMotionState(gobj, ftMh_MS_FingerBeamStart, 0, 0, 1, 0, 0);
     ftAnim_8006EBA4(gobj);
     fp->mv.mh.unk0.x28 = -1;
     fp->mv.mh.unk0.x2C = -1;
@@ -52,8 +51,7 @@ void ftMh_FingerBeamStart_Coll(HSD_GObj* gobj) {}
 void ftMh_MS_361_80152CD8(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    Fighter_ChangeMotionState(gobj, ftMh_MS_FingerBeamLoop, Ft_MF_None, 0, 1,
-                              0, 0);
+    Fighter_ChangeMotionState(gobj, ftMh_MS_FingerBeamLoop, 0, 0, 1, 0, 0);
     ftAnim_8006EBA4(gobj);
     fp->accessory4_cb = ftMh_MS_362_80152E28;
     fp->cmd_vars[0] = 1;
@@ -128,8 +126,7 @@ void ftMh_MS_362_80152E28(HSD_GObj* gobj)
 static void ftMh_MS_362_80152F80(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    Fighter_ChangeMotionState(gobj, ftMh_MS_FingerBeamEnd, Ft_MF_None, 0, 1, 0,
-                              0);
+    Fighter_ChangeMotionState(gobj, ftMh_MS_FingerBeamEnd, 0, 0, 1, 0, 0);
     ftAnim_8006EBA4(gobj);
     lbAudioAx_800236B8(fp->mv.mh.unk0.x28);
     lbAudioAx_800236B8(fp->mv.mh.unk0.x2C);

@@ -5,9 +5,9 @@
 #include "fighter.h"
 #include "forward.h"
 #include "ftparts.h"
+#include "kinds/ftCommon/forward.h"
+#include "kinds/ftFox/types.h"
 #include "kinds/ftMario/ftmariospecialn.h"
-#include "kinds/ftMasterHand/forward.h"
-#include "kinds/ftMasterHand/types.h"
 #include "types.h"
 #include <dolphin/mtx.h>
 #include <melee/it/it_26B1.h>

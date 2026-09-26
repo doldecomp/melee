@@ -6,10 +6,10 @@
 #include "ftCo_800C78B0.h"
 #include "ftcommon.h"
 #include "inlines.h"
+#include "kinds/ftCommon/forward.h"
 #include "kinds/ftCommon/ftCo_Damage.h"
 #include "kinds/ftCommon/ftCo_DamageFall.h"
-#include "kinds/ftMasterHand/forward.h"
-#include "kinds/ftMasterHand/inlines.h"
+#include "kinds/ftCommon/inlines.h"
 #include "types.h"
 #include <melee/cm/camera.h>
 #include <melee/it/kinds/itleadead.h>
@@ -89,8 +89,8 @@ void ftCo_800C7800(Fighter_GObj* gobj)
     } else {
         fp->self_vel.x = -fp->facing_dir * p_ftCommonData->x370;
     }
-    Fighter_ChangeMotionState(gobj, ftCo_MS_CaptureCut, Ft_MF_None, 0.0F, 1.0F,
-                              0.0F, NULL);
+    Fighter_ChangeMotionState(gobj, ftCo_MS_CaptureCut, 0, 0.0F, 1.0F, 0.0F,
+                              NULL);
     fp->capture_timer = p_ftCommonData->x73C;
 }
 

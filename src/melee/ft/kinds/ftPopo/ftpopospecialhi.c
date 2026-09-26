@@ -569,12 +569,12 @@ void ftPp_SpecialHi_80121D40(Fighter_GObj* gobj)
 
 void ftPp_SpecialHi_80121DA0(Fighter_GObj* gobj)
 {
-    Fighter_ChangeMotionState(gobj, 0x15C, Ft_MF_None, 0.0f, 1.0f, 0.0f, NULL);
+    Fighter_ChangeMotionState(gobj, 0x15C, 0, 0.0f, 1.0f, 0.0f, NULL);
 }
 
 void ftPp_SpecialHi_80121DD8(Fighter_GObj* gobj)
 {
-    Fighter_ChangeMotionState(gobj, 0x161, Ft_MF_None, 0.0f, 1.0f, 0.0f, NULL);
+    Fighter_ChangeMotionState(gobj, 0x161, 0, 0.0f, 1.0f, 0.0f, NULL);
 }
 
 void ftPp_SpecialHiStart_1_Anim(Fighter_GObj* gobj)
@@ -656,15 +656,15 @@ void ftPp_SpecialHi_80122038(Fighter_GObj* gobj)
 void ftPp_SpecialHi_80122098(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    Fighter_ChangeMotionState(gobj, 0x15E, Ft_MF_None, fp->cur_anim_frame,
-                              1.0f, 0.0f, NULL);
+    Fighter_ChangeMotionState(gobj, 0x15E, 0, fp->cur_anim_frame, 1.0f, 0.0f,
+                              NULL);
 }
 
 void ftPp_SpecialHi_801220D4(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    Fighter_ChangeMotionState(gobj, 0x163, Ft_MF_None, fp->cur_anim_frame,
-                              1.0f, 0.0f, NULL);
+    Fighter_ChangeMotionState(gobj, 0x163, 0, fp->cur_anim_frame, 1.0f, 0.0f,
+                              NULL);
 }
 
 void ftPp_SpecialHiThrow_1_Anim(Fighter_GObj* gobj)
@@ -738,7 +738,7 @@ void ftPp_SpecialHi_80122348(Fighter_GObj* arg0)
 
 void ftPp_SpecialHi_80122380(Fighter_GObj* gobj)
 {
-    Fighter_ChangeMotionState(gobj, 0x164, Ft_MF_None, 0.0f, 1.0f, 0.0f, NULL);
+    Fighter_ChangeMotionState(gobj, 0x164, 0, 0.0f, 1.0f, 0.0f, NULL);
 }
 
 void ftPp_SpecialHiThrow2_Anim(Fighter_GObj* gobj)
@@ -884,6 +884,6 @@ void ftPp_SpecialHi_8012280C(Fighter_GObj* gobj)
         fp->x1968_jumpsUsed = co->max_jumps;
     }
     ftPp_SpecialS_80120E68(gobj);
-    Fighter_ChangeMotionState(gobj, 0x162, Ft_MF_None, 0.0f, 1.0f, 0.0f, NULL);
+    Fighter_ChangeMotionState(gobj, 0x162, 0, 0.0f, 1.0f, 0.0f, NULL);
     fp->x21F8 = ftCommon_8007F76C;
 }

@@ -38,6 +38,6 @@ void ftMh_MS_348_80151BB8(HSD_GObj* gobj)
 {
     u8 _[8];
 
-    Fighter_ChangeMotionState(gobj, ftMh_MS_Slap, Ft_MF_None, 0, 1, 0, 0);
+    Fighter_ChangeMotionState(gobj, ftMh_MS_Slap, 0, 0, 1, 0, 0);
     ftAnim_8006EBA4(gobj);
 }

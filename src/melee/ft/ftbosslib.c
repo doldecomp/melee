@@ -7,7 +7,7 @@
 #include "ft_0877.h"
 #include "ftlib.h"
 #include "inlines.h"
-#include "kinds/ftMasterHand/forward.h"
+#include "kinds/ftCommon/forward.h"
 #include "kinds/ftMasterHand/types.h"
 #include "types.h"
 #include <melee/cm/camera.h>
