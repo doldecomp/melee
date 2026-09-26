@@ -4,9 +4,7 @@
 #include "ftCo_800C7070.h"
 #include "ftCo_800C7590.h"
 #include "ftdata.h"
-#include "kinds/ftMasterHand/forward.h"
 #include "types.h"
-#include <melee/it/kinds/itgreatfoxlaser.h>
 #include <melee/it/kinds/itleadead.h>
 
 static inline void inlineB0(Fighter_GObj* gobj)

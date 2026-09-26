@@ -106,7 +106,7 @@ static void itDrMarioPill_802C061C(Item_GObj* gobj)
     HSD_JObj* jobj = gobj->hsd_obj;
     if (ip->xDD4_itemVar.drmariopill.x4) {
         Vec3 v;
-        ftLib_80086644(ip->xDD4_itemVar.drmariopill.x4, &v);
+        ftLib_GetPos(ip->xDD4_itemVar.drmariopill.x4, &v);
         ip->pos = v;
         HSD_JObjSetTranslate(jobj, &v);
         HSD_JObjSetRotationY(jobj, (M_PI_2 * ip->xDD4_itemVar.drmariopill.x0));
@@ -325,7 +325,7 @@ static bool itDrMarioPill_Motion2_Anim(Item_GObj* gobj)
             ip->xDAC_itcmd_var0 =
                 ftDr_Init_801498EC(ip->xDD4_itemVar.drmariopill.x4);
             if (ip->owner == ip->xDD4_itemVar.drmariopill.x4) {
-                mag = ftLib_800869D4(ip->xDD4_itemVar.drmariopill.x4);
+                mag = ftLib_GetModelScale(ip->xDD4_itemVar.drmariopill.x4);
                 scale.x = scale.y = scale.z = mag;
                 HSD_JObjSetScale(hobj, &scale);
             } else if (itDrMarioPill_Motion2_Anim_sub(gobj)) {

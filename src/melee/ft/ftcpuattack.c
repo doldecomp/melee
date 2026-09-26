@@ -8,8 +8,6 @@
 #include "inlines.h"
 #include "kinds/ftCommon/ftCo_09F7.h"
 #include "kinds/ftCommon/ftCo_0A01.h"
-#include "kinds/ftMasterHand/forward.h"
-#include "kinds/ftMasterHand/inlines.h"
 #include <melee/gr/ground.h>
 #include <melee/it/inlines.h>
 #include <melee/it/it_26B1.h>
@@ -826,12 +824,12 @@ bool ftCo_800B630C(Fighter* fp)
     }
     if (fp->kind == Ft_Kind_Donkey) {
         // Any of DK's common moves, or cargo carry / throw
-        if (fp->motion_id <= ftDk_MS_ThrowAirFLw) {
+        if (fp->motion_id <= ftCo_MS_ThrownFLw) {
             return false;
         }
     } else if (fp->kind == Ft_Kind_Kirby) {
         // Any of Kirby's common moves, or air jump / dash attack?
-        if (fp->motion_id <= ftKb_MS_AttackDashAir) {
+        if (fp->motion_id <= ftCo_MS_AttackDash) {
             return false;
         }
     } else if (fp->kind == Ft_Kind_Peach) {
@@ -934,16 +932,16 @@ void ftCo_800B658C(Fighter* fp)
             return;
         }
     } else if (fp->kind == Ft_Kind_Samus) {
-        if (fp->motion_id == ftSs_MS_SpecialNHold) {
+        if (fp->motion_id == ftNs_MS_SpecialNHold) {
             ftCo_CpuTapRAndWaitFiveFrames(fp);
         }
     } else if (fp->kind == Ft_Kind_Donkey) {
-        if (fp->motion_id == ftDk_MS_SpecialNLoop) {
+        if (fp->motion_id == ftLk_MS_SpecialNLoop) {
             ftCo_CpuTapRAndWaitFiveFrames(fp);
         }
     } else if (fp->kind == Ft_Kind_Zelda) {
         if (fp->motion_id >= ftZd_MS_SpecialSLoop &&
-            fp->motion_id <= ftZd_MS_SpecialAirSEnd)
+            fp->motion_id <= ftFx_MS_SpecialAirSEnd)
         {
             ftCo_800B9504(fp);
             return;
@@ -1951,7 +1949,7 @@ void ftCo_800B9020(Fighter* fp)
         }
     } else if (fp->kind == Ft_Kind_Zelda) {
         if (fp->motion_id >= ftZd_MS_SpecialSLoop &&
-            fp->motion_id <= ftZd_MS_SpecialAirSEnd)
+            fp->motion_id <= ftFx_MS_SpecialAirSEnd)
         {
             ftCo_800B9504(fp);
             return;
@@ -2680,7 +2678,8 @@ int ftCo_800BB220(Fighter* fp, Item* ip, Vec3* arg2, f32 arg3)
     if (ip->owner == fp->gobj) {
         return 0;
     }
-    if (ftLib_80086960(ip->owner) && ftCo_IsAlly(fp, GET_FIGHTER(ip->owner))) {
+    if (ftLib_IsFighter(ip->owner) && ftCo_IsAlly(fp, GET_FIGHTER(ip->owner)))
+    {
         return 0;
     }
     switch (ip->kind) {

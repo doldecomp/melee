@@ -77,8 +77,7 @@ void db_Setup(void)
             db_ButtonStates[i].current = 0;
         }
 
-        lbArchive_LoadSymbols("DbCo.dat", (void**) &commonData,
-                              "dbLoadCommonData", 0);
+        lbArchive_LoadSymbols("DbCo.dat", &commonData, "dbLoadCommonData", 0);
 
         db_bonus_names = commonData->bonus_names;
         db_motionstate_names = commonData->motionstate_names;

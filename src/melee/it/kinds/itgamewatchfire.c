@@ -98,7 +98,7 @@ bool itGamewatchFire_Motion0_Anim(Item_GObj* item_gobj)
         return true;
     }
     if (item->owner != NULL) {
-        if (ftLib_800876D4(item->owner) != 0) {
+        if (ftLib_IsChargingSmash(item->owner) != 0) {
             if (item->x5D0_animFrameSpeed != 0.0f) {
                 item->x5D0_animFrameSpeed = 0.0f;
                 lb_8000BA0C(jobj, item->x5D0_animFrameSpeed);

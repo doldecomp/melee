@@ -294,12 +294,12 @@ void ftCo_RebirthWait_IASA(Fighter_GObj* gobj)
         HSD_GObj* companion = Player_GetEntityAtIndex(fp->player_idx, 1);
         if (companion != NULL &&
             !((Fighter*) companion->user_data)->is_sleeping &&
-            ftLib_800873CC(companion) == 0)
+            ftLib_IsRebirth(companion) == 0)
         {
             var_r30 = 1;
         }
     } else {
-        if (ftLib_800873CC(Player_GetEntityAtIndex(fp->player_idx, 0)) != 0) {
+        if (ftLib_IsRebirth(Player_GetEntityAtIndex(fp->player_idx, 0)) != 0) {
             return;
         }
         var_r30 = 1;
@@ -379,5 +379,5 @@ void ftCo_Rebirth_Cam(Fighter_GObj* gobj)
     camera_box->pos.x = fp->mv.co.common.x4.x;
     camera_box->pos.y = fp->mv.co.common.x4.y + spC.x0.x;
     camera_box->pos.z = 0.0f;
-    ftLib_800866DC(gobj, &camera_box->bone_pos);
+    ftLib_GetCameraBonePos(gobj, &camera_box->bone_pos);
 }

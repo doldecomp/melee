@@ -15,7 +15,6 @@
 #include "ftparts.h"
 #include "kinds/ftGameWatch/ftgamewatch.h"
 #include "kinds/ftKirby/ftkirby.h"
-#include "kinds/ftMasterHand/forward.h"
 #include <melee/cm/camera.h>
 #include <melee/cm/types.h>
 #include <melee/ef/efasync.h>
@@ -76,7 +75,7 @@ bool ftLib_IsCrazyHandPresent(void)
     return false;
 }
 
-HSD_GObj* ftLib_80086198(HSD_GObj* gobj)
+HSD_GObj* ftLib_FindLowestPercentOpponent(HSD_GObj* gobj)
 {
     /// @todo Figure out how these are really declared
     Fighter* fp;
@@ -118,8 +117,8 @@ HSD_GObj* ftLib_80086198(HSD_GObj* gobj)
     return result;
 }
 
-/// get closest opposing fp?
-HSD_GObj* ftLib_8008627C(Vec3* pos, HSD_GObj* gobj)
+/// Closest opponent to @p pos (squared x/y distance), skipping teammates.
+HSD_GObj* ftLib_FindNearestOpponent(Vec3* pos, HSD_GObj* gobj)
 {
     Vec3 cur_v;
     float dist;
@@ -170,8 +169,10 @@ HSD_GObj* ftLib_8008627C(Vec3* pos, HSD_GObj* gobj)
     return result;
 }
 
-/// get closest opposing fp, on given side (left/right)
-Fighter_GObj* ftLib_80086368(Vec3* v, Fighter_GObj* gobj, float facing_dir)
+/// Like #ftLib_FindNearestOpponent, but only opponents on the @p facing_dir
+/// side of @p v.
+Fighter_GObj* ftLib_FindNearestOpponentInDir(Vec3* v, Fighter_GObj* gobj,
+                                             float facing_dir)
 {
     Vec3 sp24;
     float dx, dy, diff;
@@ -299,13 +300,13 @@ void ftLib_GetFighterLStickInput(HSD_GObj* gobj, float* x, float* y)
     *y = fp->input.lstick[0].y;
 }
 
-HSD_JObj* ftLib_800865F0(HSD_GObj* gobj)
+HSD_JObj* ftLib_GetHipJObj(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    return fp->parts[ftParts_GetBoneIndex(fp, 4)].joint;
+    return fp->parts[ftParts_GetBoneIndex(fp, FtPart_HipN)].joint;
 }
 
-HSD_JObj* ftLib_80086630(HSD_GObj* gobj, Fighter_Part part)
+HSD_JObj* ftLib_GetPartJObj(HSD_GObj* gobj, Fighter_Part part)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     return fp->parts[part].joint;
@@ -342,7 +343,7 @@ void ftLib_GetFighterCameraBonePos(HSD_GObj* gobj, Vec3* v)
     Fighter* fp = GET_FIGHTER(gobj);
     struct ftCo_DatAttrs* r4 = &fp->co_attrs;
     s32 i = fp->ft_data->x0->camera_zoom_target_bone;
-    lb_8000B1CC(ftLib_80086630(gobj, i), &r4->x170, v);
+    lb_8000B1CC(ftLib_GetPartJObj(gobj, i), &r4->x170, v);
 }
 
 void ftLib_HandleFighterItemCollision(HSD_GObj* gobj, HSD_GObj* other)
@@ -377,7 +378,7 @@ bool ftLib_IsFighterHoldingItem(HSD_GObj* gobj, HSD_GObj* arg1)
     }
 }
 
-HSD_GObj* ftLib_800867CC(HSD_GObj* gobj)
+HSD_GObj* ftLib_GetHeldSpecialItem(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     return fp->x1984_heldItemSpec;
@@ -452,7 +453,7 @@ bool ftLib_IsGObjFighter(HSD_GObj* arg)
     }
 }
 
-CollData* ftLib_80086984(HSD_GObj* gobj)
+CollData* ftLib_GetCollData(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     return Fighter_GetCollData(fp);
@@ -818,7 +819,7 @@ FighterKind ftLib_GetKind(HSD_GObj* gobj)
     return fp->kind;
 }
 
-LbShadow* ftLib_800872B0(HSD_GObj* gobj)
+LbShadow* ftLib_GetShadow(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     return &fp->x20A4;
@@ -907,7 +908,7 @@ bool ftLib_IsFighterEntering(HSD_GObj* gobj)
     return false;
 }
 
-HSD_GObj* ftLib_8008741C(u32 i)
+HSD_GObj* ftLib_FindBySpawnNum(u32 i)
 {
     HSD_GObj* cur;
     for (cur = HSD_GObjPLinkHead[HSD_GOBJ_PLINK_FIGHTER]; cur != NULL;
@@ -1004,7 +1005,7 @@ void ftLib_CheckAnimFramesRemaining(HSD_GObj* gobj)
 bool ftLib_IsFighterInSmashState2(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if (fp->smash_attrs.state == 2) {
+    if (fp->smash_attrs.state == SmashState_Charging) {
         return true;
     } else {
         return false;

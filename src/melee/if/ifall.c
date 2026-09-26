@@ -76,49 +76,49 @@ static inline void ifAll_802F343C_inline(int i)
     ifAll_804A0FD8.x18[i].x *= 0.65F;
 }
 
-void ifAll_802F343C(int arg0)
+void ifAll_802F343C(int count)
 {
     HSD_JObj* jobj;
     int i;
-    HSD_JObj* spC;
+    HSD_JObj* child;
 
     jobj = ifAll_804A0FD8.x8;
-    switch (arg0) {
+    switch (count) {
     case 1:
-        lb_80011E24(jobj, &spC, 9, -1);
-        lb_8000B1CC(spC, NULL, &ifAll_804A0FD8.x18[0]);
+        lb_80011E24(jobj, &child, 9, -1);
+        lb_8000B1CC(child, NULL, &ifAll_804A0FD8.x18[0]);
         break;
     case 2:
-        for (i = 0; i < arg0; i++) {
-            lb_80011E24(jobj, &spC, i + 11, -1);
-            lb_8000B1CC(spC, NULL, &ifAll_804A0FD8.x18[i]);
+        for (i = 0; i < count; i++) {
+            lb_80011E24(jobj, &child, i + 11, -1);
+            lb_8000B1CC(child, NULL, &ifAll_804A0FD8.x18[i]);
         }
         break;
     case 3:
-        for (i = 0; i < arg0; i++) {
-            lb_80011E24(jobj, &spC, i + 8, -1);
-            lb_8000B1CC(spC, NULL, &ifAll_804A0FD8.x18[i]);
+        for (i = 0; i < count; i++) {
+            lb_80011E24(jobj, &child, i + 8, -1);
+            lb_8000B1CC(child, NULL, &ifAll_804A0FD8.x18[i]);
         }
         break;
     case 4:
-        for (i = 0; i < arg0; i++) {
-            lb_80011E24(jobj, &spC, i + 2, -1);
-            lb_8000B1CC(spC, NULL, &ifAll_804A0FD8.x18[i]);
+        for (i = 0; i < count; i++) {
+            lb_80011E24(jobj, &child, i + 2, -1);
+            lb_8000B1CC(child, NULL, &ifAll_804A0FD8.x18[i]);
         }
         break;
     case 5:
     case 6:
-        lb_80011E24(jobj, &spC, 6, -1);
-        lb_8000B1CC(spC, NULL, &ifAll_804A0FD8.x18[0]);
+        lb_80011E24(jobj, &child, 6, -1);
+        lb_8000B1CC(child, NULL, &ifAll_804A0FD8.x18[0]);
         ifAll_802F343C_inline(0);
 
-        lb_80011E24(jobj, &spC, 7, -1);
-        lb_8000B1CC(spC, NULL, &ifAll_804A0FD8.x18[5]);
+        lb_80011E24(jobj, &child, 7, -1);
+        lb_8000B1CC(child, NULL, &ifAll_804A0FD8.x18[5]);
         ifAll_802F343C_inline(5);
 
         for (i = 1; i < 5; i++) {
-            lb_80011E24(jobj, &spC, i + 1, -1);
-            lb_8000B1CC(spC, NULL, &ifAll_804A0FD8.x18[i]);
+            lb_80011E24(jobj, &child, i + 1, -1);
+            lb_8000B1CC(child, NULL, &ifAll_804A0FD8.x18[i]);
             ifAll_802F343C_inline(i);
         }
         break;
@@ -156,76 +156,79 @@ static void fn_802F36B8(HSD_GObj* gobj, intptr_t unused)
     }
 }
 
-static void ifAll_802F370C(SceneDesc* arg0)
+static void ifAll_802F370C(SceneDesc* scene)
 {
-    HSD_JObj* spC;
+    HSD_JObj* child;
     HSD_GObj* gobj;
     HSD_JObj* jobj;
     int i;
 
     gobj = GObj_Create(0xE, 0xF, 0);
-    jobj = HSD_JObjLoadJoint(arg0->models[0]->joint);
+    jobj = HSD_JObjLoadJoint(scene->models[0]->joint);
     ifAll_804A0FD8.x8 = jobj;
-    lb_80011E24(jobj, &spC, 0xD, -1);
-    lb_8000B1CC(spC, NULL, ifAll_GetTimerPosition());
+    lb_80011E24(jobj, &child, 0xD, -1);
+    lb_8000B1CC(child, NULL, ifAll_GetTimerPosition());
 
-    lb_80011E24(jobj, &spC, 2, -1);
-    lb_8000B1CC(spC, NULL, ifAll_GetPlayerHUDPosition(0));
-    lb_80011E24(jobj, &spC, 3, -1);
-    lb_8000B1CC(spC, NULL, ifAll_GetPlayerHUDPosition(1));
-    lb_80011E24(jobj, &spC, 4, -1);
-    lb_8000B1CC(spC, NULL, ifAll_GetPlayerHUDPosition(2));
-    lb_80011E24(jobj, &spC, 5, -1);
-    lb_8000B1CC(spC, NULL, ifAll_GetPlayerHUDPosition(3));
-    lb_80011E24(jobj, &spC, 6, -1);
-    lb_8000B1CC(spC, NULL, ifAll_GetPlayerHUDPosition(4));
-    lb_80011E24(jobj, &spC, 7, -1);
-    lb_8000B1CC(spC, NULL, ifAll_GetPlayerHUDPosition(5));
+    lb_80011E24(jobj, &child, 2, -1);
+    lb_8000B1CC(child, NULL, ifAll_GetPlayerHUDPosition(0));
+    lb_80011E24(jobj, &child, 3, -1);
+    lb_8000B1CC(child, NULL, ifAll_GetPlayerHUDPosition(1));
+    lb_80011E24(jobj, &child, 4, -1);
+    lb_8000B1CC(child, NULL, ifAll_GetPlayerHUDPosition(2));
+    lb_80011E24(jobj, &child, 5, -1);
+    lb_8000B1CC(child, NULL, ifAll_GetPlayerHUDPosition(3));
+    lb_80011E24(jobj, &child, 6, -1);
+    lb_8000B1CC(child, NULL, ifAll_GetPlayerHUDPosition(4));
+    lb_80011E24(jobj, &child, 7, -1);
+    lb_8000B1CC(child, NULL, ifAll_GetPlayerHUDPosition(5));
 
     for (i = 0; i < 3; i++) {
-        lb_80011E24(jobj, &spC, i + 8, -1);
-        lb_8000B1CC(spC, NULL, &ifAll_804A0FD8.x60[i]);
+        lb_80011E24(jobj, &child, i + 8, -1);
+        lb_8000B1CC(child, NULL, &ifAll_804A0FD8.x60[i]);
     }
     for (i = 0; i < 2; i++) {
-        lb_80011E24(jobj, &spC, i + 11, -1);
-        lb_8000B1CC(spC, NULL, &ifAll_804A0FD8.x84[i]);
+        lb_80011E24(jobj, &child, i + 11, -1);
+        lb_8000B1CC(child, NULL, &ifAll_804A0FD8.x84[i]);
     }
     HSD_GObjFree(gobj);
 }
 
+static inline HSD_GObj* createCamera(HSD_CObjDesc* desc)
+{
+    HSD_GObj* gobj = GObj_Create(0x13, 0x14, 0);
+    HSD_CObj* cobj = lb_80013B14(&desc->perspective);
+    HSD_GObjObject_80390A70(gobj, HSD_GObj_CameraKind, cobj);
+    GObj_SetupGXLinkMax(gobj, fn_802F36B8, 8);
+    gobj->gxlink_prios = 0xD00;
+    return gobj;
+}
+
+static inline void createLight(SceneDesc* scene)
+{
+    HSD_LightDesc* desc = scene->lights[0]->desc;
+    HSD_GObj* gobj = GObj_Create(0xE, 3, 0);
+    HSD_LObj* lobj = HSD_LObjLoadDesc(desc);
+    HSD_GObjObject_80390A70(gobj, HSD_GObj_LightKind, lobj);
+    GObj_SetupGXLink(gobj, HSD_GObj_LObjCallback, 0xA, 0);
+    ifAll_804A0FD8.gobj_2 = gobj;
+}
+
+static inline void loadScene(SceneDesc** scene)
+{
+    HSD_Archive** archive = ifAll_GetArchive();
+    lbArchive_80016F80(archive, "IfAll");
+    lbArchive_LoadSections(*archive, scene, "ScInfDmg_scene_data", 0);
+}
+
 void ifAll_802F390C(void)
 {
-    SceneDesc* sp14;
-
-    HSD_LightDesc* lightdesc;
-    HSD_Archive** parchive = ifAll_GetArchive();
-
-    PAD_STACK(0xC);
+    SceneDesc* scene;
 
     ifAll_ShowHUD();
-    lbArchive_80016F80(parchive, "IfAll");
-    lbArchive_LoadSections(*parchive, (void**) &sp14, "ScInfDmg_scene_data",
-                           0);
-    ifAll_802F370C(sp14);
-
-    {
-        HSD_CObjDesc* desc = sp14->cameras[0].desc;
-        HSD_GObj* gobj = GObj_Create(0x13, 0x14, 0);
-        HSD_CObj* cobj = lb_80013B14(&desc->perspective);
-        HSD_GObjObject_80390A70(gobj, HSD_GObj_CameraKind, cobj);
-        GObj_SetupGXLinkMax(gobj, fn_802F36B8, 8);
-        gobj->gxlink_prios = 0xD00;
-        ifAll_804A0FD8.gobj = gobj;
-    }
-
-    lightdesc = sp14->lights[0]->desc;
-    {
-        HSD_GObj* gobj = GObj_Create(0xE, 3, 0);
-        HSD_LObj* lobj = HSD_LObjLoadDesc(lightdesc);
-        HSD_GObjObject_80390A70(gobj, HSD_GObj_LightKind, lobj);
-        GObj_SetupGXLink(gobj, HSD_GObj_LObjCallback, 0xA, 0);
-        ifAll_804A0FD8.gobj_2 = gobj;
-    }
+    loadScene(&scene);
+    ifAll_802F370C(scene);
+    ifAll_804A0FD8.gobj = createCamera(scene->cameras[0].desc);
+    createLight(scene);
 
     ifStatus_802F7134();
     ifStatus_802F66A4();

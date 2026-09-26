@@ -46,7 +46,7 @@ static inline void vLoadSections(HSD_Archive* archive, void** symbol,
     }
 }
 
-void lbArchive_LoadSections(HSD_Archive* archive, void** symbol, ...)
+void lbArchive_LoadSections(HSD_Archive* archive, void* symbol, ...)
 {
     va_list symbols;
 
