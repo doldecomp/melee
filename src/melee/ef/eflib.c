@@ -132,6 +132,24 @@ void efLib_SetFlags(HSD_GObj* gobj, s32 expire_flags)
     }
 }
 
+static inline void efLib_ClearParams(HSD_GObj* gobj)
+{
+    int i;
+
+    for (i = 0; i < 8; i++) {
+        if (efLib_ParamTable[i].gobj == gobj) {
+            efLib_ParamTable[i].gobj = NULL;
+        }
+    }
+}
+
+static inline void efLib_RemoveJObjGenerators(HSD_GObj* gobj)
+{
+    if (gobj->obj_kind == HSD_GObj_JObjKind) {
+        HSD_JObjWalkTree(gobj->hsd_obj, hsd_8039D688, NULL);
+    }
+}
+
 void efLib_Destroy(HSD_GObj* gobj)
 {
     EF_Effect* effect = gobj->user_data;
@@ -162,11 +180,7 @@ void efLib_DestroyAll(HSD_GObj* gobj)
     int i;
     PAD_STACK(48);
 
-    for (i = 0; i < 8; i++) {
-        if (efLib_ParamTable[i].gobj == gobj) {
-            efLib_ParamTable[i].gobj = NULL;
-        }
-    }
+    efLib_ClearParams(gobj);
     gobj_1 = HSD_GObjPLinkHead[HSD_GOBJ_PLINK_EFFECT_UNK0];
     while (gobj_1 != NULL) {
         HSD_GObj* gobj_2;
@@ -176,9 +190,7 @@ void efLib_DestroyAll(HSD_GObj* gobj)
         if (((effect_1 = GET_EFFECT(gobj_1)) != NULL) &&
             (effect_1->parent_gobj == gobj))
         {
-            if (effect_1->gobj->obj_kind == HSD_GObj_JObjKind) {
-                HSD_JObjWalkTree(effect_1->gobj->hsd_obj, hsd_8039D688, NULL);
-            }
+            efLib_RemoveJObjGenerators(effect_1->gobj);
             HSD_GObjFree(effect_1->gobj);
         }
         gobj_1 = gobj_2;
@@ -192,15 +204,11 @@ void efLib_DestroyAll(HSD_GObj* gobj)
         gobj_2 = gobj_2->next;
         if ((effect_2 != NULL) && (effect_2->parent_gobj == gobj)) {
             gobj_3 = effect_2->gobj;
-            if (gobj_3->obj_kind == HSD_GObj_JObjKind) {
-                HSD_JObjWalkTree(gobj_3->hsd_obj, hsd_8039D688, NULL);
-            }
+            efLib_RemoveJObjGenerators(gobj_3);
             HSD_GObjFree(effect_2->gobj);
         }
     }
-    if (gobj->obj_kind == HSD_GObj_JObjKind) {
-        HSD_JObjWalkTree(gobj->hsd_obj, hsd_8039D688, NULL);
-    }
+    efLib_RemoveJObjGenerators(gobj);
 }
 
 void efLib_PauseAll(HSD_GObj* gobj)

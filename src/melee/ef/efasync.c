@@ -33,6 +33,7 @@ static inline void efAsync_SetEffectRandomRotationZ(EF_Effect* effect)
 
 void* efAsync_Dispatch(s32 gfx_id, HSD_GObj* gobj, va_list vlist)
 {
+    u32 id;
     Vec3 translate;
     Vec3 scale;
     HSD_Generator* generator;
@@ -662,17 +663,17 @@ void* efAsync_Dispatch(s32 gfx_id, HSD_GObj* gobj, va_list vlist)
         ret_obj = efLib_CreateGenerator(0x14D, va_arg(vlist, Vec3*));
         break;
     case 0x435:
-        tev0 = 0x14E;
+        id = 0x14E;
         goto set_generator_rotation;
     case 0x436:
-        tev0 = 0x153;
+        id = 0x153;
         goto set_generator_rotation;
     case 0x437:
-        tev0 = 0x156;
+        id = 0x156;
     set_generator_rotation: {
         HSD_Generator* result;
 
-        result = efLib_CreateGenerator_AddAppSRT(tev0);
+        result = efLib_CreateGenerator_AddAppSRT(id);
         if (result != NULL) {
             Effect_SetGeneratorPos(result, va_arg(vlist, Vec3*));
             result->appsrt->rot.y = M_PI_2;
