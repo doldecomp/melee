@@ -1041,6 +1041,16 @@ static inline void saveCursorPositions(Diagram* data)
     gmMainLib_GetGameRules()->xD = data->is_name_mode;
 }
 
+static inline s32 getHoveredRow(void)
+{
+    return mn_804A04F0.hovered_selection >> 8;
+}
+
+static inline u8 getHoveredColumn(void)
+{
+    return (u8) mn_804A04F0.hovered_selection;
+}
+
 /// @brief Per-frame input handler for the VS Records "diagram" grid screen.
 ///
 /// Dispatches the current frame's menu input:
@@ -1070,25 +1080,12 @@ void mnDiagram_InputProc(HSD_GObj* gobj)
     int count;
     int col;
     int row;
-    int row3;
-    int row4;
-    int row5;
-    int row6;
     u8 col_result;
-    u8 col_result2;
-    u8 row_result2;
-    u8 col_result3;
-    u8 col_result4;
-    u8 row_result3;
-    u8 row_result4;
     int found;
     int cur;
     int cursor_pos;
-    int count2;
-    // Preserve the original 0x80-byte frame.
-    PAD_STACK(32);
     mn_804A04F0.buttons = input;
-    count2 = 0;
+    count = 0;
     if (input & MenuInput_Confirm) {
         sfxForward();
         HSD_GObjProc_RemoveProc(HSD_GObj_CurrentInvokedProc);
@@ -1100,7 +1097,7 @@ void mnDiagram_InputProc(HSD_GObj* gobj)
             cur = col;
             col_result = mnDiagram_GetVisibleNameCursorFrom(
                 (u8) data->name_cursor_pos, (u8) cur);
-            row = mn_804A04F0.hovered_selection >> 8;
+            row = getHoveredRow();
             cursor_pos = data->name_cursor_pos;
             row_result =
                 mnDiagram_GetVisibleNameCursorFrom(cursor_pos >> 8, row);
@@ -1108,18 +1105,18 @@ void mnDiagram_InputProc(HSD_GObj* gobj)
             return;
         }
         selection = &mn_804A04F0.hovered_selection;
-        row_result2 = (u8) data->fighter_cursor_pos;
-        col_result2 = mnDiagram_GetVisibleFighterColumnForInput(
-            sorted, row_result2, (u8) *selection, &i);
-        row_result2 = mnDiagram_GetVisibleFighterRowForInput(sorted, data,
-                                                             selection, &col);
+        row_result = (u8) data->fighter_cursor_pos;
+        col_result = mnDiagram_GetVisibleFighterColumnForInput(
+            sorted, row_result, (u8) *selection, &i);
+        row_result = mnDiagram_GetVisibleFighterRowForInput(sorted, data,
+                                                            selection, &col);
 
-        mnDiagram_CreatePopup(col_result2, row_result2, 0);
+        mnDiagram_CreatePopup(col_result, row_result, 0);
         return;
     }
     if (input & MenuInput_Back) {
         sfxBack();
-        mn_804A04F0.entering_menu = count2;
+        mn_804A04F0.entering_menu = count;
         saveCursorPositions(mnDiagram_GetCurrentDiagramData());
         mn_80229894(0x1C, 0, 3);
         return;
@@ -1141,15 +1138,15 @@ void mnDiagram_InputProc(HSD_GObj* gobj)
             return;
         }
         sfxForward();
-        data->is_name_mode = (data->is_name_mode == 0) ? 1 : count2;
+        data->is_name_mode = (data->is_name_mode == 0) ? 1 : count;
         if (data->is_name_mode != 0) {
             cur = GetNameCount();
-            if (((u8) mn_804A04F0.hovered_selection) >= cur) {
+            if (getHoveredColumn() >= cur) {
                 mn_804A04F0.hovered_selection =
                     (mn_804A04F0.hovered_selection & 0xFF00) |
                     ((u8) (cur - 1));
             }
-            if ((mn_804A04F0.hovered_selection >> 8) >= cur) {
+            if (getHoveredRow() >= cur) {
                 mn_804A04F0.hovered_selection =
                     ((u8) mn_804A04F0.hovered_selection) | ((cur - 1) << 8);
             }
@@ -1161,11 +1158,11 @@ void mnDiagram_InputProc(HSD_GObj* gobj)
         }
         count = mnDiagram_CountUnlockedFighters();
 
-        if (((u8) mn_804A04F0.hovered_selection) >= count) {
+        if (getHoveredColumn() >= count) {
             mn_804A04F0.hovered_selection =
                 (mn_804A04F0.hovered_selection & 0xFF00) | ((u8) (count - 1));
         }
-        if ((mn_804A04F0.hovered_selection >> 8) >= count) {
+        if (getHoveredRow() >= count) {
             mn_804A04F0.hovered_selection =
                 ((u8) mn_804A04F0.hovered_selection) | ((count - 1) << 8);
         }
@@ -1178,7 +1175,7 @@ void mnDiagram_InputProc(HSD_GObj* gobj)
     if (data->is_name_mode != 0) {
         count = GetNameCount();
         if (input & MenuInput_Up) {
-            col = (u8) mn_804A04F0.hovered_selection;
+            col = getHoveredColumn();
             if ((col > 0) && (count > (col - 1))) {
                 sfxMove();
                 mn_804A04F0.hovered_selection =
@@ -1200,7 +1197,7 @@ void mnDiagram_InputProc(HSD_GObj* gobj)
             }
         } else if (input & MenuInput_Down) {
             u8 next_name;
-            col = (u8) mn_804A04F0.hovered_selection;
+            col = getHoveredColumn();
             if ((col < 9) && (count > (col + 1))) {
                 sfxMove();
                 mn_804A04F0.hovered_selection =
@@ -1212,8 +1209,8 @@ void mnDiagram_InputProc(HSD_GObj* gobj)
                 cur = (u8) data->name_cursor_pos;
                 next_name = (u8) mnDiagram_FindNextName(cur);
                 if (cur != next_name) {
-                    col_result3 = mnDiagram_GetVisibleNameCursorFrom(cur, 0xA);
-                    if (col_result3 != GM_NAMETAG_COUNT) {
+                    col_result = mnDiagram_GetVisibleNameCursorFrom(cur, 0xA);
+                    if (col_result != GM_NAMETAG_COUNT) {
                         sfxMove();
                         data->name_cursor_pos =
                             (data->name_cursor_pos & 0xFF00) | next_name;
@@ -1224,11 +1221,11 @@ void mnDiagram_InputProc(HSD_GObj* gobj)
                 }
             }
         } else if (input & MenuInput_Left) {
-            row3 = mn_804A04F0.hovered_selection >> 8;
-            if ((0 < row3) && (count > (row3 - 1))) {
+            row = getHoveredRow();
+            if ((0 < row) && (count > (row - 1))) {
                 sfxMove();
                 mn_804A04F0.hovered_selection =
-                    ((u8) mn_804A04F0.hovered_selection) | ((row3 - 1) << 8);
+                    ((u8) mn_804A04F0.hovered_selection) | ((row - 1) << 8);
                 return;
             }
             if (count > 7) {
@@ -1245,19 +1242,19 @@ void mnDiagram_InputProc(HSD_GObj* gobj)
             }
         } else if (input & MenuInput_Right) {
             u8 next_name;
-            row4 = mn_804A04F0.hovered_selection >> 8;
-            if ((row4 < 6) && (count > (row4 + 1))) {
+            row = getHoveredRow();
+            if ((row < 6) && (count > (row + 1))) {
                 sfxMove();
                 mn_804A04F0.hovered_selection =
-                    ((u8) mn_804A04F0.hovered_selection) | ((row4 + 1) << 8);
+                    ((u8) mn_804A04F0.hovered_selection) | ((row + 1) << 8);
                 return;
             }
             if (count > 7) {
                 cur = data->name_cursor_pos >> 8;
                 next_name = (u8) mnDiagram_FindNextName(cur);
                 if (cur != next_name) {
-                    row_result3 = mnDiagram_GetVisibleNameCursorFrom(cur, 7);
-                    if (row_result3 != GM_NAMETAG_COUNT) {
+                    row_result = mnDiagram_GetVisibleNameCursorFrom(cur, 7);
+                    if (row_result != GM_NAMETAG_COUNT) {
                         sfxMove();
                         data->name_cursor_pos =
                             ((u8) data->name_cursor_pos) | (next_name << 8);
@@ -1269,18 +1266,18 @@ void mnDiagram_InputProc(HSD_GObj* gobj)
             }
         }
     } else {
-        count2 = mnDiagram_CountUnlockedFighters();
+        count = mnDiagram_CountUnlockedFighters();
 
         if (input & MenuInput_Up) {
-            col = (u8) mn_804A04F0.hovered_selection;
-            if ((col > 0) && (count2 > (col - 1))) {
+            col = getHoveredColumn();
+            if ((col > 0) && (count > (col - 1))) {
                 sfxMove();
                 mn_804A04F0.hovered_selection =
                     (mn_804A04F0.hovered_selection & 0xFF00) |
                     ((col - 1) & 0xFF);
                 return;
             }
-            if (count2 > 0xA) {
+            if (count > 0xA) {
                 cur = (u8) data->fighter_cursor_pos;
                 found = (u8) mnDiagram_FindPrevFighter(sorted, cur);
                 if (cur != found) {
@@ -1294,23 +1291,22 @@ void mnDiagram_InputProc(HSD_GObj* gobj)
             }
         } else if (input & MenuInput_Down) {
             u8* nav_ptr;
-            col = (u8) mn_804A04F0.hovered_selection;
-            if ((col < 9) && (count2 > (col + 1))) {
+            col = getHoveredColumn();
+            if ((col < 9) && (count > (col + 1))) {
                 sfxMove();
                 mn_804A04F0.hovered_selection =
                     (mn_804A04F0.hovered_selection & 0xFF00) |
                     ((col + 1) & 0xFF);
                 return;
             }
-            if (count2 > 0xA) {
+            if (count > 0xA) {
                 cur = (u8) data->fighter_cursor_pos;
                 nav_ptr = sorted + cur;
-                row5 = mnDiagram_FindNextFighter(sorted, cur);
-                found = row5;
-                col_result4 = mnDiagram_GetVisibleFighterFromPointer(
+                found = mnDiagram_FindNextFighter(sorted, cur);
+                col_result = mnDiagram_GetVisibleFighterFromPointer(
                     sorted, nav_ptr, cur, 0xA);
 
-                if (col_result4 != SELKIND_COUNT) {
+                if (col_result != SELKIND_COUNT) {
                     sfxMove();
                     data->fighter_cursor_pos =
                         (data->fighter_cursor_pos & 0xFF00) | found;
@@ -1320,14 +1316,14 @@ void mnDiagram_InputProc(HSD_GObj* gobj)
                 }
             }
         } else if (input & MenuInput_Left) {
-            row5 = mn_804A04F0.hovered_selection >> 8;
-            if ((row5 > 0) && (count2 > (row5 - 1))) {
+            row = getHoveredRow();
+            if ((row > 0) && (count > (row - 1))) {
                 sfxMove();
                 mn_804A04F0.hovered_selection =
-                    ((u8) mn_804A04F0.hovered_selection) | ((row5 - 1) << 8);
+                    ((u8) mn_804A04F0.hovered_selection) | ((row - 1) << 8);
                 return;
             }
-            if (count2 > 7) {
+            if (count > 7) {
                 cur = data->fighter_cursor_pos >> 8;
                 found = (u8) mnDiagram_FindPrevFighterWrap(sorted, cur);
                 if (cur != found) {
@@ -1341,21 +1337,21 @@ void mnDiagram_InputProc(HSD_GObj* gobj)
             }
         } else if (input & MenuInput_Right) {
             u8* nav_ptr;
-            row6 = mn_804A04F0.hovered_selection >> 8;
-            if ((row6 < 6) && (count2 > (row6 + 1))) {
+            row = getHoveredRow();
+            if ((row < 6) && (count > (row + 1))) {
                 sfxMove();
                 mn_804A04F0.hovered_selection =
-                    ((u8) mn_804A04F0.hovered_selection) | ((row6 + 1) << 8);
+                    ((u8) mn_804A04F0.hovered_selection) | ((row + 1) << 8);
                 return;
             }
-            if (count2 > 7) {
+            if (count > 7) {
                 cur = data->fighter_cursor_pos >> 8;
                 nav_ptr = sorted + cur;
                 found = mnDiagram_FindNextFighter(sorted, cur);
-                row_result4 = mnDiagram_GetVisibleFighterFromPointer(
+                row_result = mnDiagram_GetVisibleFighterFromPointer(
                     sorted, nav_ptr, cur, 7);
 
-                if (row_result4 != SELKIND_COUNT) {
+                if (row_result != SELKIND_COUNT) {
                     sfxMove();
                     data->fighter_cursor_pos =
                         ((u8) data->fighter_cursor_pos) | (found << 8);
@@ -2321,7 +2317,7 @@ static inline void getVisibleFighter(int start, int rank, int* fighter)
 void mnDiagram_DrawFighterHeaders(HSD_GObj* arg0, int arg1, int arg2)
 {
     int row_fighter;
-    s32 unlocked_count;
+    int unlocked_count;
     StaticModelDesc* joint_data;
     Diagram* data = GET_DIAGRAM(arg0);
     int col_fighter;
@@ -2330,8 +2326,6 @@ void mnDiagram_DrawFighterHeaders(HSD_GObj* arg0, int arg1, int arg2)
     f32 x_spacing;
     f32 y_spacing;
     int i;
-    // Preserve the original gap before the integer-to-float conversion slot.
-    PAD_STACK(8);
 
     // Column headers (fighter icons)
     for (i = 0; i < 7; i++) {
@@ -2343,7 +2337,7 @@ void mnDiagram_DrawFighterHeaders(HSD_GObj* arg0, int arg1, int arg2)
             col_jobj =
                 mnDiagram_LoadHeaderIcon(joint_data, col_fighter, &child);
             {
-                f32 reference_x = HSD_JObjGetTranslationX(data->jobjs[7]);
+                f32 reference_x = getColumnReferenceX(data);
                 x_spacing =
                     HSD_JObjGetTranslationX(data->jobjs[8]) - reference_x;
             }
@@ -2368,11 +2362,8 @@ void mnDiagram_DrawFighterHeaders(HSD_GObj* arg0, int arg1, int arg2)
             lb_80011E24(row_jobj, &row_child, 2, -1);
             HSD_JObjReqAnimAll(row_child, (f32) (row_fighter & 0xFF));
             HSD_JObjAnimAll(row_child);
-            {
-                f32 reference_y = HSD_JObjGetTranslationY(data->jobjs[9]);
-                y_spacing =
-                    HSD_JObjGetTranslationY(data->jobjs[10]) - reference_y;
-            }
+            y_spacing = HSD_JObjGetTranslationY(data->jobjs[9]);
+            y_spacing = HSD_JObjGetTranslationY(data->jobjs[10]) - y_spacing;
             HSD_JObjSetTranslateY(row_jobj, y_spacing * i);
             HSD_JObjAddChild(data->jobjs[9], row_jobj);
         }
