@@ -1500,11 +1500,7 @@ static inline void mnDiagram_FormatPopupNumber(char* buf, u32 val)
 
 static inline void setPopupTextPosition(HSD_Text* text, const Vec3* pos)
 {
-    f32 y = -pos->y;
-    f32 z = pos->z;
-    text->pos_x = pos->x;
-    text->pos_y = y;
-    text->pos_z = z;
+    mnDiagram_TextSetPos(text, pos->x, -pos->y, pos->z);
 }
 
 void mnDiagram_CreatePopupTexts(HSD_GObj* arg0, s32 selkind_or_nametag_slot_id,
@@ -1517,7 +1513,6 @@ void mnDiagram_CreatePopupTexts(HSD_GObj* arg0, s32 selkind_or_nametag_slot_id,
     u32 sd_count;
 
     HSD_Text* text = HSD_SisLib_803A6754(0, 1);
-    u8 sp[24];
     data->text[0] = text;
     lb_8000B1CC(data->jobjs[8], &mnDiagram_PopupTextOffsets.points[0], &pos);
     text->font_size.x = 0.0521f;
@@ -1913,8 +1908,7 @@ static inline void updateScrollArrowVisibility(Diagram* data, int count)
 /// @param count Number of entries (fighters or names) to display.
 void mnDiagram_UpdateScrollArrowVisibility(HSD_GObj* gobj, int count)
 {
-    Diagram* data = gobj->user_data;
-    PAD_STACK(8);
+    Diagram* data = GET_DIAGRAM(gobj);
     updateScrollArrowVisibility(data, count);
 }
 
