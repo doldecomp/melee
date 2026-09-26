@@ -1044,11 +1044,7 @@ void efLib_Cb_SetJObjOffsetZ(EF_Effect* effect)
     HSD_JObj* eff_jobj;
 
     eff_jobj = GET_JOBJ(effect->gobj);
-    if (eff_jobj == NULL) {
-        eff_jobj_child = NULL;
-    } else {
-        eff_jobj_child = eff_jobj->child;
-    }
+    eff_jobj_child = HSD_JObjGetChild(eff_jobj);
     translate_z = 2.0F + HSD_JObjGetTranslationZ(eff_jobj_child);
     HSD_JObjSetTranslateZ(eff_jobj_child, translate_z);
 }
@@ -1189,8 +1185,8 @@ void efLib_Cb_ftMr_SpecialLw(EF_Effect* effect)
     Fighter* fighter;
 
     eff_jobj = GET_JOBJ(effect->gobj);
-    eff_child_jobj = eff_jobj == NULL ? NULL : eff_jobj->child;
-    eff_child_nxt_jobj = eff_child_jobj == NULL ? NULL : eff_child_jobj->next;
+    eff_child_jobj = HSD_JObjGetChild(eff_jobj);
+    eff_child_nxt_jobj = HSD_JObjGetNext(eff_child_jobj);
 
     fighter = GET_FIGHTER(effect->parent_gobj);
 
@@ -1217,8 +1213,8 @@ void efLib_Cb_ftLg_SpecialLw(EF_Effect* effect)
     Fighter* fighter;
 
     eff_jobj = GET_JOBJ(effect->gobj);
-    eff_child_jobj = eff_jobj == NULL ? NULL : eff_jobj->child;
-    eff_child_nxt_jobj = eff_child_jobj == NULL ? NULL : eff_child_jobj->next;
+    eff_child_jobj = HSD_JObjGetChild(eff_jobj);
+    eff_child_nxt_jobj = HSD_JObjGetNext(eff_child_jobj);
 
     fighter = GET_FIGHTER(effect->parent_gobj);
 
@@ -1273,10 +1269,15 @@ void efLib_Cb_ftCo_Bury(EF_Effect* effect)
 // TEV is the GC GPU per-pixel color/alpha blending system.
 // konst = constant color register, tev0 = computed color register.
 // Color values packed as 0xRRGGBB.
+static inline HSD_MObj* efLib_GetDObjMObj(HSD_DObj* dobj)
+{
+    return dobj != NULL ? dobj->mobj : NULL;
+}
+
 void efLib_SetTevKonstColor(HSD_JObj* jobj, s32 count, u32 konst, u32 tev0)
 {
     HSD_DObj* dobj = HSD_JObjGetDObj(jobj);
-    HSD_MObj* mobj = dobj != NULL ? dobj->mobj : NULL;
+    HSD_MObj* mobj = efLib_GetDObjMObj(dobj);
     HSD_TObj* tobj = HSD_MObjGetTObj(mobj);
 
     while (count != 0) {
@@ -1344,20 +1345,16 @@ void efLib_Cb_ApplyStoredAlpha(EF_Effect* effect)
     HSD_JObj* jobj;
     HSD_MObj* mobj;
     HSD_TObj* tobj;
-    HSD_JObj* hsd_obj;
-    EF_ParamEntry* entry;
-    PAD_STACK(8);
+    PAD_STACK(4);
 
-    hsd_obj = GET_JOBJ(effect->gobj);
-    jobj = hsd_obj == NULL ? NULL : hsd_obj->child;
+    jobj = HSD_JObjGetChild(GET_JOBJ(effect->gobj));
     dobj = HSD_JObjGetDObj(jobj);
-    mobj = dobj != NULL ? dobj->mobj : NULL;
+    mobj = efLib_GetDObjMObj(dobj);
     tobj = HSD_MObjGetTObj(mobj);
     {
         s32 i;
-        entry = &efLib_ParamTable[0];
-        for (i = 0; i != 8; ++i) {
-            if (entry->gobj == effect->parent_gobj) {
+        for (i = 0; i < 8; i++) {
+            if (efLib_ParamTable[i].gobj == effect->parent_gobj) {
                 if (efLib_ParamTable[i].gfx_id == 0x417) {
                     tobj = tobj->next;
                 }
@@ -1367,14 +1364,13 @@ void efLib_Cb_ApplyStoredAlpha(EF_Effect* effect)
                     for (j = 0; j < 6; j++) {
                         jobj = jobj->next;
                         dobj = HSD_JObjGetDObj(jobj);
-                        mobj = dobj != NULL ? dobj->mobj : NULL;
+                        mobj = efLib_GetDObjMObj(dobj);
                         tobj = HSD_MObjGetTObj(mobj);
                         tobj->tev->konst.a = efLib_ParamTable[i].alpha;
                     }
                 }
                 break;
             }
-            entry++;
         }
     }
 }

@@ -376,11 +376,7 @@ void* efAsync_Dispatch(s32 gfx_id, HSD_GObj* gobj, va_list vlist)
             effect = ret_obj;
             jobj_1 = GET_JOBJ(effect->gobj);
             tev0 = va_arg(vlist, u32);
-            if (jobj_1 == NULL) {
-                jobj_2 = NULL;
-            } else {
-                jobj_2 = jobj_1->child;
-            }
+            jobj_2 = HSD_JObjGetChild(jobj_1);
             if (tev0 == 0x606060) {
                 konst = 0x808080;
             } else {
@@ -399,11 +395,7 @@ void* efAsync_Dispatch(s32 gfx_id, HSD_GObj* gobj, va_list vlist)
             effect = ret_obj;
             jobj_1 = GET_JOBJ(effect->gobj);
             tev0 = va_arg(vlist, u32);
-            if (jobj_1 == NULL) {
-                jobj_2 = NULL;
-            } else {
-                jobj_2 = jobj_1->child;
-            }
+            jobj_2 = HSD_JObjGetChild(jobj_1);
             if (tev0 == 0x606060) {
                 konst = 0x808080;
             } else {
@@ -457,11 +449,7 @@ void* efAsync_Dispatch(s32 gfx_id, HSD_GObj* gobj, va_list vlist)
             effect = ret_obj;
             jobj_1 = GET_JOBJ(effect->gobj);
             tev0 = va_arg(vlist, u32);
-            if (jobj_1 == NULL) {
-                jobj_2 = NULL;
-            } else {
-                jobj_2 = jobj_1->child;
-            }
+            jobj_2 = HSD_JObjGetChild(jobj_1);
             if (tev0 == 0x606060) {
                 konst = 0x808080;
             } else {
@@ -579,11 +567,7 @@ void* efAsync_Dispatch(s32 gfx_id, HSD_GObj* gobj, va_list vlist)
             f32_2 = *va_arg(vlist, f32*);
             scale.x = scale.y = scale.z = f32_2;
             HSD_JObjSetScale(setter_jobj, &scale);
-            if (jobj_1 == NULL) {
-                jobj_2 = NULL;
-            } else {
-                jobj_2 = jobj_1->child;
-            }
+            jobj_2 = HSD_JObjGetChild(jobj_1);
             efLib_SetTevKonstColor(jobj_2, 0, va_arg(vlist, u32),
                                    va_arg(vlist, u32));
         }
