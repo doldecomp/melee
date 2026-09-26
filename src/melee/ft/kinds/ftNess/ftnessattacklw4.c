@@ -1,11 +1,11 @@
-#include <melee/ft/kinds/ftNess/ftnessattacklw4.h>
+#include "ftnessattacklw4.h"
 
 #include <Runtime/platform.h>
 
 #include <melee/ft/forward.h>
 
-#include <melee/ft/kinds/ftNess/ftnessattackhi4.h>
-#include <melee/ft/kinds/ftNess/types.h>
+#include "ftnessattackhi4.h"
+#include "types.h"
 #include <melee/ft/fighter.h>
 #include <melee/ft/ft_081B.h>
 #include <melee/ft/ft_084E.h>
@@ -24,8 +24,8 @@ void ftNs_AttackLw4_Enter(
     fp->allow_interrupt = 0;
     fp->mv.ns.attacklw4.isChargeDisable = false;
     ftNs_AttackHi4_YoyoSetVarAll(gobj);
-    Fighter_ChangeMotionState(gobj, ftNs_MS_AttackLw4, Ft_MF_None, 0.0f, 1.0f, 0.0f,
-                              NULL);
+    Fighter_ChangeMotionState(gobj, ftNs_MS_AttackLw4, Ft_MF_None, 0.0f, 1.0f,
+                              0.0f, NULL);
     ftAnim_8006EBA4(gobj);
     fp->x2222_b2 = 1;
     fp->deal_dmg_cb = ftNs_AttackHi4_YoyoStartTimedRehit;

@@ -1,10 +1,10 @@
-#include <melee/mn/inlines.h>
-#include <melee/mn/mndiagram.static.h>
-#include <melee/mn/mndiagram2.h>
-#include <melee/mn/mndiagram3.h>
-#include <melee/mn/mnmain.h>
-#include <melee/mn/mnname.h>
-#include <melee/mn/types.h>
+#include "inlines.h"
+#include "mndiagram.static.h"
+#include "mndiagram2.h"
+#include "mndiagram3.h"
+#include "mnmain.h"
+#include "mnname.h"
+#include "types.h"
 #include <dolphin/types.h>
 #include <melee/gm/gm_1601.h>
 #include <melee/gm/gmmain_lib.h>

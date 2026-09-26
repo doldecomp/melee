@@ -1,11 +1,11 @@
-#include <melee/it/itspawn.h>
+#include "itspawn.h"
 
 #include <placeholder.h>
 
-#include <melee/it/it_26B1.h>
-#include <melee/it/it_2725.h>
-#include <melee/it/it_3F14.h>
-#include <melee/it/item.h>
+#include "it_26B1.h"
+#include "it_2725.h"
+#include "it_3F14.h"
+#include "item.h"
 #include <melee/db/db.h>
 #include <melee/ef/efsync.h>
 #include <melee/gm/gm_unsplit.h>

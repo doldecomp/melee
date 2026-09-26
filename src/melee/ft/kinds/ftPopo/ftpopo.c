@@ -1,11 +1,11 @@
-#include <melee/ft/kinds/ftPopo/ftpopo.h>
+#include "ftpopo.h"
 
-#include <melee/ft/kinds/ftPopo/forward.h>
-#include <melee/ft/kinds/ftPopo/ftpopospecialhi.h>
-#include <melee/ft/kinds/ftPopo/ftpopospeciallw.h>
-#include <melee/ft/kinds/ftPopo/ftpopospecialn.h>
-#include <melee/ft/kinds/ftPopo/ftpopospecials.h>
-#include <melee/ft/kinds/ftPopo/types.h>
+#include "forward.h"
+#include "ftpopospecialhi.h"
+#include "ftpopospeciallw.h"
+#include "ftpopospecialn.h"
+#include "ftpopospecials.h"
+#include "types.h"
 #include <melee/ft/ftcamera.h>
 #include <melee/ft/ftparts.h>
 #include <melee/ft/inlines.h>

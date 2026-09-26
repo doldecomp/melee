@@ -1,14 +1,14 @@
-#include <gr/granime.h>
+#include "granime.h"
 
 #include <Runtime/platform.h>
 
 #include <setjmp.h>
 #include <stdarg.h>
 
-#include <gr/grdatfiles.h>
-#include <gr/grmaterial.h>
-#include <gr/ground.h>
-#include <gr/inlines.h>
+#include "grdatfiles.h"
+#include "grmaterial.h"
+#include "ground.h"
+#include "inlines.h"
 #include <melee/lb/lb_00B0.h>
 #include <melee/lb/lbarchive.h>
 #include <melee/lb/lbheap.h>

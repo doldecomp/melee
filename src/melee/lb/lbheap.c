@@ -1,5 +1,5 @@
-#include <melee/lb/lbheap.static.h>
-#include <melee/lb/lbmemory.h>
+#include "lbheap.static.h"
+#include "lbmemory.h"
 #include <sysdolphin/baselib/debug.h>
 #include <sysdolphin/baselib/initialize.h>
 #include <sysdolphin/baselib/memory.h>

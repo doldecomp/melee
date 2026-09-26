@@ -1,4 +1,4 @@
-#include <melee/lb/lbarq.h>
+#include "lbarq.h"
 
 #include <placeholder.h>
 

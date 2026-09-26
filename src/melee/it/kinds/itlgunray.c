@@ -1,11 +1,11 @@
-#include <melee/it/kinds/itlgunray.h>
+#include "itlgunray.h"
 
 #include <math.h>
 #include <placeholder.h>
 #include <stdbool.h>
 
-#include <melee/it/kinds/inlines.h>
-#include <melee/it/kinds/itfoxlaser.h>
+#include "inlines.h"
+#include "itfoxlaser.h"
 #include <melee/db/db.h>
 #include <melee/it/inlines.h>
 #include <melee/it/it_26B1.h>

@@ -1,12 +1,12 @@
-#include <melee/lb/lbfile.h>
+#include "lbfile.h"
 
 #include <placeholder.h>
 #include <string.h>
 
-#include <melee/lb/lb_0195.h>
-#include <melee/lb/lbdvd.h>
-#include <melee/lb/lbheap.h>
-#include <melee/lb/lblanguage.h>
+#include "lb_0195.h"
+#include "lbdvd.h"
+#include "lbheap.h"
+#include "lblanguage.h"
 #include <dolphin/dvd.h>
 #include <sysdolphin/baselib/debug.h>
 #include <sysdolphin/baselib/devcom.h>

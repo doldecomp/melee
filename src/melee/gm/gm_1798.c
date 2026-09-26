@@ -1,14 +1,14 @@
-#include <melee/gm/gm_1798.h>
+#include "gm_1798.h"
 
 #include <placeholder.h>
 
-#include <melee/gm/forward.h>
-#include <melee/gm/gm_1601.h>
-#include <melee/gm/gm_unsplit.h>
-#include <melee/gm/gmresult.h>
-#include <melee/gm/gmresultplayer.h>
-#include <melee/gm/gmresultplayer.static.h>
-#include <melee/gm/types.h>
+#include "forward.h"
+#include "gm_1601.h"
+#include "gm_unsplit.h"
+#include "gmresult.h"
+#include "gmresultplayer.h"
+#include "gmresultplayer.static.h"
+#include "types.h"
 #include <melee/cm/camera.h>
 #include <melee/ef/efasync.h>
 #include <melee/ef/eflib.h>

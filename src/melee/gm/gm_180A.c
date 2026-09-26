@@ -2,9 +2,9 @@
 
 #include <sysdolphin/baselib/forward.h>
 
-#include <melee/gm/gm_unsplit.h>
-#include <melee/gm/gmmain_lib.h>
-#include <melee/gm/gmregclear.h>
+#include "gm_unsplit.h"
+#include "gmmain_lib.h"
+#include "gmregclear.h"
 #include <melee/gr/ground.h>
 #include <melee/if/iftime.h>
 #include <melee/lb/lbarchive.h>

@@ -1,4 +1,4 @@
-#include <melee/ft/kinds/ftFalco/ftfalco.h>
+#include "ftfalco.h"
 
 #include <Runtime/platform.h>
 

@@ -1,11 +1,11 @@
-#include <melee/ft/kinds/ftSeak/ftseak.h>
+#include "ftseak.h"
 
-#include <melee/ft/kinds/ftSeak/forward.h>
-#include <melee/ft/kinds/ftSeak/ftseakspecialhi.h>
-#include <melee/ft/kinds/ftSeak/ftseakspeciallw.h>
-#include <melee/ft/kinds/ftSeak/ftseakspecialn.h>
-#include <melee/ft/kinds/ftSeak/ftseakspecials.h>
-#include <melee/ft/kinds/ftSeak/types.h>
+#include "forward.h"
+#include "ftseakspecialhi.h"
+#include "ftseakspeciallw.h"
+#include "ftseakspecialn.h"
+#include "ftseakspecials.h"
+#include "types.h"
 #include <melee/ft/ftcamera.h>
 #include <melee/ft/ftcolanim.h>
 #include <melee/ft/ftparts.h>

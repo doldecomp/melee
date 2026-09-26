@@ -1,4 +1,4 @@
-#include <melee/ft/kinds/ftLuigi/ftluigispecialhi.h>
+#include "ftluigispecialhi.h"
 
 #include <Runtime/platform.h>
 
@@ -6,8 +6,8 @@
 
 #include <math.h>
 
-#include <melee/ft/kinds/ftLuigi/forward.h>
-#include <melee/ft/kinds/ftLuigi/types.h>
+#include "forward.h"
+#include "types.h"
 #include <dolphin/mtx.h>
 #include <melee/ft/fighter.h>
 #include <melee/ft/ft_081B.h>
@@ -28,8 +28,8 @@ void ftLg_SpecialHi_Enter(HSD_GObj* gobj)
 
     fp->cmd_vars[0] = 0;
     fp->throw_flags = 0;
-    Fighter_ChangeMotionState(gobj, ftLg_MS_SpecialHi, Ft_MF_None, 0.0f, 1.0f, 0.0f,
-                              NULL);
+    Fighter_ChangeMotionState(gobj, ftLg_MS_SpecialHi, Ft_MF_None, 0.0f, 1.0f,
+                              0.0f, NULL);
     ftAnim_8006EBA4(gobj);
 }
 
@@ -45,8 +45,8 @@ void ftLg_SpecialAirHi_Enter(HSD_GObj* gobj)
     fp->throw_flags = 0;
     fp->self_vel.y = 0.0f;
     fp->self_vel.x *= luigiAttrs->x64_LUIGI_SUPERJUMP_VEL_X;
-    Fighter_ChangeMotionState(gobj, ftLg_MS_SpecialAirHi, Ft_MF_None, 0.0f, 1.0f, 0.0f,
-                              NULL);
+    Fighter_ChangeMotionState(gobj, ftLg_MS_SpecialAirHi, Ft_MF_None, 0.0f,
+                              1.0f, 0.0f, NULL);
     ftAnim_8006EBA4(gobj);
 }
 

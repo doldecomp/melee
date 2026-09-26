@@ -1,14 +1,14 @@
-#include <melee/ft/kinds/ftLuigi/ftluigi.h>
+#include "ftluigi.h"
 
 #include <melee/ft/kinds/ftCommon/forward.h>
 #include <melee/it/forward.h>
 
-#include <melee/ft/kinds/ftLuigi/forward.h>
-#include <melee/ft/kinds/ftLuigi/ftluigispecialhi.h>
-#include <melee/ft/kinds/ftLuigi/ftluigispeciallw.h>
-#include <melee/ft/kinds/ftLuigi/ftluigispecialn.h>
-#include <melee/ft/kinds/ftLuigi/ftluigispecials.h>
-#include <melee/ft/kinds/ftLuigi/types.h>
+#include "forward.h"
+#include "ftluigispecialhi.h"
+#include "ftluigispeciallw.h"
+#include "ftluigispecialn.h"
+#include "ftluigispecials.h"
+#include "types.h"
 #include <melee/ft/ftcamera.h>
 #include <melee/ft/ftCo_800C70D0.h>
 #include <melee/ft/ftCo_800C7178.h>

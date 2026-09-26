@@ -1,4 +1,4 @@
-#include <melee/ft/kinds/ftKirby/ftkirbyspecialzelda.h>
+#include "ftkirbyspecialzelda.h"
 
 #include <melee/ft/forward.h>
 #include <melee/ft/kinds/ftZelda/forward.h>
@@ -6,8 +6,8 @@
 #include <placeholder.h>
 #include <stddef.h>
 
-#include <melee/ft/kinds/ftKirby/forward.h>
-#include <melee/ft/kinds/ftKirby/ftkirbyspecialdonkey.h>
+#include "forward.h"
+#include "ftkirbyspecialdonkey.h"
 #include <melee/ef/efsync.h>
 #include <melee/ft/fighter.h>
 #include <melee/ft/ft_081B.h>
@@ -68,8 +68,8 @@ void ftKb_SpecialNZd_80105B2C(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     PAD_STACK(8);
-    Fighter_ChangeMotionState(gobj, ftKb_MS_ZdSpecialN, Ft_MF_None, 0.0f, 1.0f, 0.0f,
-                              NULL);
+    Fighter_ChangeMotionState(gobj, ftKb_MS_ZdSpecialN, Ft_MF_None, 0.0f, 1.0f,
+                              0.0f, NULL);
     ftAnim_8006EBA4(gobj);
     ftKb_SpecialNZd_Helper(gobj);
     fp->accessory4_cb = fn_80105A34;
@@ -85,8 +85,8 @@ void ftKb_SpecialNZd_80105BA8(Fighter_GObj* gobj)
     fp->self_vel.x =
         fp->self_vel.x / da->specialn_zd_horizontal_momentum_preservation;
 
-    Fighter_ChangeMotionState(gobj, ftKb_MS_ZdSpecialAirN, Ft_MF_None, 0.0f, 1.0f, 0.0f,
-                              NULL);
+    Fighter_ChangeMotionState(gobj, ftKb_MS_ZdSpecialAirN, Ft_MF_None, 0.0f,
+                              1.0f, 0.0f, NULL);
     ftAnim_8006EBA4(gobj);
 
     ftKb_SpecialNZd_Helper(gobj);

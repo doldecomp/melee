@@ -1,11 +1,11 @@
-#include <melee/ft/kinds/ftCommon/ftCo_HammerWalk.h>
+#include "ftCo_HammerWalk.h"
 
 #include <Runtime/platform.h>
 
-#include <melee/ft/kinds/ftCommon/ftCo_0C60.h>
-#include <melee/ft/kinds/ftCommon/ftCo_HammerJump.h>
-#include <melee/ft/kinds/ftCommon/ftCo_HammerWait.h>
-#include <melee/ft/kinds/ftCommon/types.h>
+#include "ftCo_0C60.h"
+#include "ftCo_HammerJump.h"
+#include "ftCo_HammerWait.h"
+#include "types.h"
 #include <dolphin/mtx.h>
 #include <melee/ft/fighter.h>
 #include <melee/ft/ftanim.h>

@@ -1,6 +1,6 @@
-#include <melee/it/kinds/itcerebi.h>
+#include "itcerebi.h"
 
-#include <melee/it/kinds/inlines.h>
+#include "inlines.h"
 #include <melee/ef/efsync.h>
 #include <melee/gr/stage.h>
 #include <melee/it/inlines.h>

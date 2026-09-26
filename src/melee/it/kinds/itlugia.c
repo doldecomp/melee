@@ -1,9 +1,9 @@
-#include <melee/it/kinds/itlugia.h>
+#include "itlugia.h"
 
 #include <math.h>
 #include <placeholder.h>
 
-#include <melee/it/kinds/inlines.h>
+#include "inlines.h"
 #include <melee/ef/eflib.h>
 #include <melee/gr/stage.h>
 #include <melee/it/inlines.h>

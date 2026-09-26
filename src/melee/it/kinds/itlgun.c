@@ -1,9 +1,9 @@
-#include <melee/it/kinds/itlgun.h>
+#include "itlgun.h"
 
 #include <stdbool.h>
 
-#include <melee/it/kinds/inlines.h>
-#include <melee/it/kinds/itlgunray.h>
+#include "inlines.h"
+#include "itlgunray.h"
 #include <melee/it/inlines.h>
 #include <melee/it/it_26B1.h>
 #include <melee/it/it_2725.h>

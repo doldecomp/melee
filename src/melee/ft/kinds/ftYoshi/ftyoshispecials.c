@@ -1,4 +1,4 @@
-#include <melee/ft/kinds/ftYoshi/ftyoshispecials.h>
+#include "ftyoshispecials.h"
 
 #include <melee/ft/forward.h>
 #include <melee/ft/kinds/ftCommon/forward.h>
@@ -8,9 +8,9 @@
 #include <math.h>
 #include <placeholder.h>
 
-#include <melee/ft/kinds/ftYoshi/ftyoshi.h>
-#include <melee/ft/kinds/ftYoshi/ftYs_SpecialS.static.h>
-#include <melee/ft/kinds/ftYoshi/types.h>
+#include "ftyoshi.h"
+#include "ftYs_SpecialS.static.h"
+#include "types.h"
 #include <dolphin/mtx.h>
 #include <melee/cm/camera.h>
 #include <melee/ef/efsync.h>

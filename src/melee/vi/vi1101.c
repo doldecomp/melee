@@ -1,6 +1,6 @@
-#include <vi/vi1101.h>
+#include "vi1101.h"
 
-#include <vi/vi.h>
+#include "vi.h"
 #include <dolphin/gx/GXStruct.h>
 #include <melee/ef/efasync.h>
 #include <melee/ef/eflib.h>

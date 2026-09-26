@@ -1,11 +1,11 @@
-#include <melee/ft/kinds/ftCrazyHand/ftcrazyhandwalk.h>
+#include "ftcrazyhandwalk.h"
 
 #include <Runtime/platform.h>
 
 #include <sysdolphin/baselib/forward.h>
 
-#include <melee/ft/kinds/ftCrazyHand/ftcrazyhandtagcancel.h>
-#include <melee/ft/kinds/ftCrazyHand/types.h>
+#include "ftcrazyhandtagcancel.h"
+#include "types.h"
 #include <dolphin/mtx.h>
 #include <melee/ft/fighter.h>
 #include <melee/ft/ft_084E.h>
@@ -17,8 +17,8 @@
 
 void fn_801578E8(HSD_GObj* gobj)
 {
-    Fighter_ChangeMotionState(gobj, ftMh_MS_WalkLoop, Ft_MF_None, 0.0f, 1.0f, 0.0f,
-                              NULL);
+    Fighter_ChangeMotionState(gobj, ftMh_MS_WalkLoop, Ft_MF_None, 0.0f, 1.0f,
+                              0.0f, NULL);
     ftAnim_8006EBA4(gobj);
 }
 
@@ -49,8 +49,8 @@ void ftCh_WalkLoop_Coll(HSD_GObj* gobj) {}
 
 void ftCh_Init_801579F4(HSD_GObj* gobj)
 {
-    Fighter_ChangeMotionState(gobj, ftMh_MS_WalkWait, Ft_MF_None, 0.0f, 1.0f, 0.0f,
-                              NULL);
+    Fighter_ChangeMotionState(gobj, ftMh_MS_WalkWait, Ft_MF_None, 0.0f, 1.0f,
+                              0.0f, NULL);
     ftAnim_8006EBA4(gobj);
 }
 
@@ -61,7 +61,8 @@ void ftCh_WalkWait_Anim(HSD_GObj* gobj)
         ftCh_Init_80157B58(gobj);
     }
     if (!ftAnim_IsFramesRemaining(gobj)) {
-        Fighter_ChangeMotionState(gobj, 0x160, Ft_MF_None, 0, 1.0f, 0.0f, NULL);
+        Fighter_ChangeMotionState(gobj, 0x160, Ft_MF_None, 0, 1.0f, 0.0f,
+                                  NULL);
         ftAnim_8006EBA4(gobj);
     }
 }
@@ -90,7 +91,8 @@ void ftCh_Init_80157B58(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     fp->self_vel.x = 0;
-    Fighter_ChangeMotionState(gobj, ftMh_MS_WalkShoot, Ft_MF_None, 0, 1.0f, 0.0f, NULL);
+    Fighter_ChangeMotionState(gobj, ftMh_MS_WalkShoot, Ft_MF_None, 0, 1.0f,
+                              0.0f, NULL);
     ftAnim_8006EBA4(gobj);
 }
 

@@ -1,12 +1,12 @@
-#include <melee/it/kinds/itzeldadinfire.h>
+#include "itzeldadinfire.h"
 
 #include <melee/it/forward.h>
 #include <sysdolphin/baselib/forward.h>
 
 #include <math.h>
 
-#include <melee/it/kinds/inlines.h>
-#include <melee/it/kinds/itzeldadinfireexplode.h>
+#include "inlines.h"
+#include "itzeldadinfireexplode.h"
 #include <melee/db/db.h>
 #include <melee/ef/eflib.h>
 #include <melee/ef/efsync.h>

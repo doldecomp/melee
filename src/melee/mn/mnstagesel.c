@@ -1,10 +1,10 @@
-#include <melee/mn/mnstagesel.h>
+#include "mnstagesel.h"
 
 #include <placeholder.h>
 
-#include <melee/mn/forward.h>
-#include <melee/mn/inlines.h>
-#include <melee/mn/mnmain.h>
+#include "forward.h"
+#include "inlines.h"
+#include "mnmain.h"
 #include <melee/gm/gm_unsplit.h>
 #include <melee/gm/gmmain_lib.h>
 #include <melee/lb/lb_00B0.h>

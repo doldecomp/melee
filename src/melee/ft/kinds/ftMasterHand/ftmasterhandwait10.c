@@ -1,27 +1,27 @@
-#include <melee/ft/kinds/ftMasterHand/ftmasterhandwait10.h>
+#include "ftmasterhandwait10.h"
 
 #include <Runtime/platform.h>
 
-#include <melee/ft/kinds/ftMasterHand/ftmasterhandbackairplane3.h>
-#include <melee/ft/kinds/ftMasterHand/ftmasterhandbackcrush0.h>
-#include <melee/ft/kinds/ftMasterHand/ftmasterhandbackcrush1.h>
-#include <melee/ft/kinds/ftMasterHand/ftmasterhandbackdisappear.h>
-#include <melee/ft/kinds/ftMasterHand/ftmasterhanddrill.h>
-#include <melee/ft/kinds/ftMasterHand/ftmasterhandentry.h>
-#include <melee/ft/kinds/ftMasterHand/ftmasterhandfingerbeam.h>
-#include <melee/ft/kinds/ftMasterHand/ftmasterhandfingergun.h>
-#include <melee/ft/kinds/ftMasterHand/ftmasterhandfingergun3.h>
-#include <melee/ft/kinds/ftMasterHand/ftmasterhandpapercrush.h>
-#include <melee/ft/kinds/ftMasterHand/ftmasterhandpoke.h>
-#include <melee/ft/kinds/ftMasterHand/ftmasterhandrockcrush.h>
-#include <melee/ft/kinds/ftMasterHand/ftmasterhandslam.h>
-#include <melee/ft/kinds/ftMasterHand/ftmasterhandsweep.h>
-#include <melee/ft/kinds/ftMasterHand/ftmasterhandsweepwait.h>
-#include <melee/ft/kinds/ftMasterHand/ftmasterhandtagapplaud.h>
-#include <melee/ft/kinds/ftMasterHand/ftmasterhandtagcrush.h>
-#include <melee/ft/kinds/ftMasterHand/ftmasterhandwait12.h>
-#include <melee/ft/kinds/ftMasterHand/ftmasterhandwalk.h>
-#include <melee/ft/kinds/ftMasterHand/types.h>
+#include "ftmasterhandbackairplane3.h"
+#include "ftmasterhandbackcrush0.h"
+#include "ftmasterhandbackcrush1.h"
+#include "ftmasterhandbackdisappear.h"
+#include "ftmasterhanddrill.h"
+#include "ftmasterhandentry.h"
+#include "ftmasterhandfingerbeam.h"
+#include "ftmasterhandfingergun.h"
+#include "ftmasterhandfingergun3.h"
+#include "ftmasterhandpapercrush.h"
+#include "ftmasterhandpoke.h"
+#include "ftmasterhandrockcrush.h"
+#include "ftmasterhandslam.h"
+#include "ftmasterhandsweep.h"
+#include "ftmasterhandsweepwait.h"
+#include "ftmasterhandtagapplaud.h"
+#include "ftmasterhandtagcrush.h"
+#include "ftmasterhandwait12.h"
+#include "ftmasterhandwalk.h"
+#include "types.h"
 #include <dolphin/mtx.h>
 #include <melee/ft/fighter.h>
 #include <melee/ft/ft_084E.h>
@@ -56,10 +56,11 @@ static void ftMh_MS_341_8014FE5C(HSD_GObj* gobj)
         fp->u.mh.x2240_pos = fp->cur_pos;
     }
     if (fp->u.mh.x2258 == ftMh_MS_Wait1_2) {
-        Fighter_ChangeMotionState(gobj, ftMh_MS_Wait1_0, Ft_MF_None, fp->cur_anim_frame,
-                                  1, 0, 0);
+        Fighter_ChangeMotionState(gobj, ftMh_MS_Wait1_0, Ft_MF_None,
+                                  fp->cur_anim_frame, 1, 0, 0);
     } else {
-        Fighter_ChangeMotionState(gobj, ftMh_MS_Wait1_0, Ft_MF_None, 0, 1, 0, 0);
+        Fighter_ChangeMotionState(gobj, ftMh_MS_Wait1_0, Ft_MF_None, 0, 1, 0,
+                                  0);
     }
     fp->u.mh.x2258 = ftMh_MS_Wait1_0;
 }
@@ -73,10 +74,11 @@ void ftMh_MS_341_8014FF1C(HSD_GObj* gobj)
         fp->u.mh.x2240_pos = fp->cur_pos;
     }
     if (fp->u.mh.x2258 == ftMh_MS_Wait2_1) {
-        Fighter_ChangeMotionState(gobj, ftMh_MS_Wait2_0, Ft_MF_None, fp->cur_anim_frame,
-                                  1, 0, 0);
+        Fighter_ChangeMotionState(gobj, ftMh_MS_Wait2_0, Ft_MF_None,
+                                  fp->cur_anim_frame, 1, 0, 0);
     } else {
-        Fighter_ChangeMotionState(gobj, ftMh_MS_Wait2_0, Ft_MF_None, 0, 1, 0, 0);
+        Fighter_ChangeMotionState(gobj, ftMh_MS_Wait2_0, Ft_MF_None, 0, 1, 0,
+                                  0);
     }
     fp->u.mh.x2258 = ftMh_MS_Wait2_0;
 }
@@ -97,7 +99,8 @@ void ftMh_MS_341_8014FFDC(HSD_GObj* gobj)
             Fighter_ChangeMotionState(gobj, ftMh_MS_Wait2_0, Ft_MF_None,
                                       fp->cur_anim_frame, 1, 0, 0);
         } else {
-            Fighter_ChangeMotionState(gobj, ftMh_MS_Wait2_0, Ft_MF_None, 0, 1, 0, 0);
+            Fighter_ChangeMotionState(gobj, ftMh_MS_Wait2_0, Ft_MF_None, 0, 1,
+                                      0, 0);
         }
         fp->u.mh.x2258 = ftMh_MS_Wait2_0;
     } else {
@@ -112,7 +115,8 @@ void ftMh_MS_341_8014FFDC(HSD_GObj* gobj)
             Fighter_ChangeMotionState(gobj, ftMh_MS_Wait1_0, Ft_MF_None,
                                       fp->cur_anim_frame, 1, 0, 0);
         } else {
-            Fighter_ChangeMotionState(gobj, ftMh_MS_Wait1_0, Ft_MF_None, 0, 1, 0, 0);
+            Fighter_ChangeMotionState(gobj, ftMh_MS_Wait1_0, Ft_MF_None, 0, 1,
+                                      0, 0);
         }
         fp->u.mh.x2258 = ftMh_MS_Wait1_0;
     }
@@ -139,7 +143,8 @@ static void ifStage251(HSD_GObj* gobj)
             Fighter_ChangeMotionState(gobj, ftMh_MS_Wait1_0, Ft_MF_None,
                                       fp->cur_anim_frame, 1, 0, 0);
         } else {
-            Fighter_ChangeMotionState(gobj, ftMh_MS_Wait1_0, Ft_MF_None, 0, 1, 0, 0);
+            Fighter_ChangeMotionState(gobj, ftMh_MS_Wait1_0, Ft_MF_None, 0, 1,
+                                      0, 0);
         }
         fp->u.mh.x2258 = ftMh_MS_Wait1_0;
     }
@@ -178,10 +183,11 @@ static inline void doAnim0(HSD_GObj* gobj)
         fp->u.mh.x2240_pos = fp->cur_pos;
     }
     if (fp->u.mh.x2258 == ftMh_MS_Wait2_1) {
-        Fighter_ChangeMotionState(gobj, ftMh_MS_Wait2_0, Ft_MF_None, fp->cur_anim_frame,
-                                  1, 0, 0);
+        Fighter_ChangeMotionState(gobj, ftMh_MS_Wait2_0, Ft_MF_None,
+                                  fp->cur_anim_frame, 1, 0, 0);
     } else {
-        Fighter_ChangeMotionState(gobj, ftMh_MS_Wait2_0, Ft_MF_None, 0, 1, 0, 0);
+        Fighter_ChangeMotionState(gobj, ftMh_MS_Wait2_0, Ft_MF_None, 0, 1, 0,
+                                  0);
     }
     fp->u.mh.x2258 = ftMh_MS_Wait2_0;
 }

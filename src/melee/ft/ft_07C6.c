@@ -1,9 +1,9 @@
-#include <melee/ft/ft_07C6.h>
+#include "ft_07C6.h"
 
-#include <melee/ft/fighter.h>
-#include <melee/ft/ftcoll.h>
-#include <melee/ft/ftlib.h>
-#include <melee/ft/types.h>
+#include "fighter.h"
+#include "ftcoll.h"
+#include "ftlib.h"
+#include "types.h"
 #include <melee/ef/efsync.h>
 #include <melee/gm/gm_unsplit.h>
 #include <melee/it/inlines.h>

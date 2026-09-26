@@ -1,11 +1,11 @@
-#include <melee/ft/kinds/ftMasterHand/ftmasterhandcapturemasterhand.h>
+#include "ftmasterhandcapturemasterhand.h"
 
 #include <Runtime/platform.h>
 
 #include <melee/ft/kinds/ftCommon/forward.h>
 
-#include <melee/ft/kinds/ftMasterHand/ftmasterhandbackdisappear.h>
-#include <melee/ft/kinds/ftMasterHand/ftmasterhandcapturedamagemasterhand.h>
+#include "ftmasterhandbackdisappear.h"
+#include "ftmasterhandcapturedamagemasterhand.h"
 #include <melee/ft/fighter.h>
 #include <melee/ft/ftanim.h>
 #include <melee/ft/ftcommon.h>
@@ -23,8 +23,8 @@ void ftMh_CaptureMasterHand_Coll(HSD_GObj* gobj) {}
 void ftMh_CaptureMasterHand_80155B80(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    Fighter_ChangeMotionState(gobj, ftCo_MS_CaptureDamageMasterHand, Ft_MF_None, 0, 1,
-                              0, 0);
+    Fighter_ChangeMotionState(gobj, ftCo_MS_CaptureDamageMasterHand,
+                              Ft_MF_None, 0, 1, 0, 0);
     fp->invisible = true;
     fp->x2220_b3 = true;
     fp->accessory1_cb = ftCo_800DB464;

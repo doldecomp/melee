@@ -1,4 +1,4 @@
-#include <melee/it/kinds/itscball.h>
+#include "itscball.h"
 
 #include <sysdolphin/baselib/forward.h>
 

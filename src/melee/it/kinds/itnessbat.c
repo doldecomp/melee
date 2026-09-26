@@ -1,10 +1,10 @@
-#include <melee/it/kinds/itnessbat.h>
+#include "itnessbat.h"
 
 #include <Runtime/platform.h>
 
 #include <placeholder.h>
 
-#include <melee/it/kinds/inlines.h>
+#include "inlines.h"
 #include <melee/ft/ft_0BF0.h>
 #include <melee/ft/ftlib.h>
 #include <melee/ft/kinds/ftNess/ftnessattacks4.h>

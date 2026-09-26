@@ -1,13 +1,13 @@
-#include <melee/ft/kinds/ftMasterHand/ftmasterhandtagrockpaper.h>
+#include "ftmasterhandtagrockpaper.h"
 
 #include <Runtime/platform.h>
 
 #include <melee/ft/kinds/ftCommon/forward.h>
 
-#include <melee/ft/kinds/ftMasterHand/ftmasterhandthrownmasterhand.h>
-#include <melee/ft/kinds/ftMasterHand/ftmasterhandwait12.h>
-#include <melee/ft/kinds/ftMasterHand/inlines.h>
-#include <melee/ft/kinds/ftMasterHand/types.h>
+#include "ftmasterhandthrownmasterhand.h"
+#include "ftmasterhandwait12.h"
+#include "inlines.h"
+#include "types.h"
 #include <dolphin/mtx.h>
 #include <melee/ft/fighter.h>
 #include <melee/ft/ft_084E.h>

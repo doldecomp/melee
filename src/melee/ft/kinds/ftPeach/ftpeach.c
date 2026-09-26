@@ -1,4 +1,4 @@
-#include <melee/ft/kinds/ftPeach/ftpeach.h>
+#include "ftpeach.h"
 
 #include <Runtime/platform.h>
 
@@ -7,15 +7,15 @@
 
 #include <placeholder.h>
 
-#include <melee/ft/kinds/ftPeach/ftpeachattacks4.h>
-#include <melee/ft/kinds/ftPeach/ftpeachfloat.h>
-#include <melee/ft/kinds/ftPeach/ftpeachfloatattack.h>
-#include <melee/ft/kinds/ftPeach/ftpeachfloatfall.h>
-#include <melee/ft/kinds/ftPeach/ftpeachspecialhi.h>
-#include <melee/ft/kinds/ftPeach/ftpeachspeciallw.h>
-#include <melee/ft/kinds/ftPeach/ftpeachspecialn.h>
-#include <melee/ft/kinds/ftPeach/ftpeachspecials.h>
-#include <melee/ft/kinds/ftPeach/types.h>
+#include "ftpeachattacks4.h"
+#include "ftpeachfloat.h"
+#include "ftpeachfloatattack.h"
+#include "ftpeachfloatfall.h"
+#include "ftpeachspecialhi.h"
+#include "ftpeachspeciallw.h"
+#include "ftpeachspecialn.h"
+#include "ftpeachspecials.h"
+#include "types.h"
 #include <melee/ft/ftcamera.h>
 #include <melee/ft/ftdata.h>
 #include <melee/ft/ftparts.h>

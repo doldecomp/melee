@@ -6,7 +6,7 @@
  * Called from game mode code (gmallstar.c, gmregclear.c, gm_1A7A.c, etc).
  */
 
-#include <melee/lb/lbbgflash.h>
+#include "lbbgflash.h"
 
 #include <placeholder.h>
 

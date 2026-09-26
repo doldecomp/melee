@@ -1,10 +1,10 @@
-#include <melee/ft/kinds/ftCrazyHand/ftcrazyhandtagrockpaper.h>
+#include "ftcrazyhandtagrockpaper.h"
 
 #include <Runtime/platform.h>
 
 #include <sysdolphin/baselib/forward.h>
 
-#include <melee/ft/kinds/ftCrazyHand/ftcrazyhandtagcancel.h>
+#include "ftcrazyhandtagcancel.h"
 #include <melee/ft/fighter.h>
 #include <melee/ft/ftbosslib.h>
 #include <melee/ft/inlines.h>
@@ -14,8 +14,8 @@
 void fn_8015AAC8(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    Fighter_ChangeMotionState(gobj, 0x180, Ft_MF_None, fp->cur_anim_frame, 1.0f, 0.0f,
-                              NULL);
+    Fighter_ChangeMotionState(gobj, 0x180, Ft_MF_None, fp->cur_anim_frame,
+                              1.0f, 0.0f, NULL);
 }
 
 void ftCh_TagRockPaper_Anim(HSD_GObj* gobj)
@@ -24,7 +24,8 @@ void ftCh_TagRockPaper_Anim(HSD_GObj* gobj)
         ftCh_GrabUnk1_8015BC88(gobj);
     }
     if (!ftAnim_IsFramesRemaining(gobj)) {
-        Fighter_ChangeMotionState(gobj, 0x180, Ft_MF_None, 0.0f, 1.0f, 0.0f, NULL);
+        Fighter_ChangeMotionState(gobj, 0x180, Ft_MF_None, 0.0f, 1.0f, 0.0f,
+                                  NULL);
         ftAnim_8006EBA4(gobj);
     }
 }

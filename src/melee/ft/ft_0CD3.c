@@ -1,8 +1,8 @@
-#include <melee/ft/fighter.h>
-#include <melee/ft/ft_0CD1.h>
-#include <melee/ft/ftanim.h>
-#include <melee/ft/ftcommon.h>
-#include <melee/ft/inlines.h>
+#include "fighter.h"
+#include "ft_0CD1.h"
+#include "ftanim.h"
+#include "ftcommon.h"
+#include "inlines.h"
 #include <melee/it/kinds/itharisen.h>
 
 void ftCo_800CD350(Fighter_GObj* gobj, int arg1, int arg2, float arg3)

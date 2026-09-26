@@ -1,4 +1,4 @@
-#include <melee/ft/kinds/ftKirby/ftkirbycaptureyoshi.h>
+#include "ftkirbycaptureyoshi.h"
 
 #include <melee/ft/forward.h>
 

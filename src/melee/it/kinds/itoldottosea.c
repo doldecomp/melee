@@ -1,8 +1,8 @@
-#include <melee/it/kinds/itoldottosea.h>
+#include "itoldottosea.h"
 
-#include <melee/it/kinds/inlines.h>
-#include <melee/it/kinds/itfreeze.h>
-#include <melee/it/kinds/itwhitebea.h>
+#include "inlines.h"
+#include "itfreeze.h"
+#include "itwhitebea.h"
 #include <melee/gm/gmvs.h>
 #include <melee/it/inlines.h>
 #include <melee/it/it_26B1.h>

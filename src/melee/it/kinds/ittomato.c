@@ -1,6 +1,6 @@
-#include <melee/it/kinds/ittomato.h>
+#include "ittomato.h"
 
-#include <melee/it/kinds/inlines.h>
+#include "inlines.h"
 #include <melee/gm/gm_18A1.h>
 #include <melee/it/inlines.h>
 #include <melee/it/it_26B1.h>

@@ -1,11 +1,11 @@
-#include <melee/ft/kinds/ftPikachu/ftpikachuspeciallw.h>
+#include "ftpikachuspeciallw.h"
 
 #include <Runtime/platform.h>
 
 #include <melee/ft/forward.h>
 
-#include <melee/ft/kinds/ftPikachu/forward.h>
-#include <melee/ft/kinds/ftPikachu/types.h>
+#include "forward.h"
+#include "types.h"
 #include <dolphin/mtx.h>
 #include <melee/cm/camera.h>
 #include <melee/ef/efasync.h>
@@ -220,7 +220,8 @@ void ftPk_SpecialLwStart_Anim(HSD_GObj* gobj)
     if (!ftAnim_IsFramesRemaining(gobj)) {
         Fighter* fighter_copy;
         Fighter* fp = GET_FIGHTER(gobj);
-        Fighter_ChangeMotionState(gobj, 360, Ft_MF_SkipRumble, 0.0f, 1.0f, 0.0f, 0);
+        Fighter_ChangeMotionState(gobj, 360, Ft_MF_SkipRumble, 0.0f, 1.0f,
+                                  0.0f, 0);
         fighter_copy = GET_FIGHTER(gobj);
         fighter_copy->throw_flags = 0;
         fighter_copy->take_dmg_cb = &ftPk_SpecialLw_SetState_Unk1;
@@ -235,7 +236,8 @@ void ftPk_SpecialAirLwStart_Anim(HSD_GObj* gobj)
     if (!ftAnim_IsFramesRemaining(gobj)) {
         Fighter* fighter_copy;
         Fighter* fp = GET_FIGHTER(gobj);
-        Fighter_ChangeMotionState(gobj, 364, Ft_MF_SkipRumble, 0.0f, 1.0f, 0.0f, 0);
+        Fighter_ChangeMotionState(gobj, 364, Ft_MF_SkipRumble, 0.0f, 1.0f,
+                                  0.0f, 0);
         fighter_copy = GET_FIGHTER(gobj);
         fighter_copy->throw_flags = 0;
         fighter_copy->take_dmg_cb = &ftPk_SpecialLw_SetState_Unk1;

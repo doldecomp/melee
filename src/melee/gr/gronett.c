@@ -1,15 +1,15 @@
-#include <gr/gronett.h>
+#include "gronett.h"
 
 #include <Runtime/platform.h>
 
 #include <placeholder.h>
 
-#include <gr/grdatfiles.h>
-#include <gr/grlib.h>
-#include <gr/grmaterial.h>
-#include <gr/grzakogenerator.h>
-#include <gr/inlines.h>
-#include <gr/types.h>
+#include "grdatfiles.h"
+#include "grlib.h"
+#include "grmaterial.h"
+#include "grzakogenerator.h"
+#include "inlines.h"
+#include "types.h"
 #include <melee/cm/camera.h>
 #include <melee/cm/types.h>
 #include <melee/ft/ftlib.h>

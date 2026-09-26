@@ -1,11 +1,11 @@
-#include <melee/it/iteffect.h>
+#include "iteffect.h"
 
 #include <math.h>
 
-#include <melee/it/forward.h>
-#include <melee/it/it_2725.h>
-#include <melee/it/it_3F14.h>
-#include <melee/it/types.h>
+#include "forward.h"
+#include "it_2725.h"
+#include "it_3F14.h"
+#include "types.h"
 #include <melee/ef/efasync.h>
 #include <melee/ef/efsync.h>
 #include <melee/lb/lb_00B0.h>

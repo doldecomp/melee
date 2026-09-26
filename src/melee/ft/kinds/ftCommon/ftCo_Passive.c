@@ -1,10 +1,10 @@
-#include <melee/ft/kinds/ftCommon/ftCo_Passive.h>
+#include "ftCo_Passive.h"
 
 #include <Runtime/platform.h>
 
 #include <sysdolphin/baselib/forward.h>
 
-#include <melee/ft/kinds/ftCommon/inlines.h>
+#include "inlines.h"
 #include <melee/ft/fighter.h>
 #include <melee/ft/ft_081B.h>
 #include <melee/ft/ft_084E.h>

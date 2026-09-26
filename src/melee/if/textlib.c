@@ -1,4 +1,4 @@
-#include <melee/if/textlib.h>
+#include "textlib.h"
 
 #include <Runtime/platform.h>
 
@@ -8,8 +8,8 @@
 #include <stdio.h>
 #include <string.h>
 
-#include <melee/if/textdraw.h>
-#include <melee/if/types.h>
+#include "textdraw.h"
+#include "types.h"
 #include <melee/lb/lb_00B0.h>
 #include <sysdolphin/baselib/debug.h>
 

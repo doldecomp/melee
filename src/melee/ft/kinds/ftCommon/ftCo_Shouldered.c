@@ -1,4 +1,4 @@
-#include <melee/ft/kinds/ftCommon/ftCo_Shouldered.h>
+#include "ftCo_Shouldered.h"
 
 #include <Runtime/platform.h>
 
@@ -6,10 +6,10 @@
 
 #include <placeholder.h>
 
-#include <melee/ft/kinds/ftCommon/ftCo_Attack100.h>
-#include <melee/ft/kinds/ftCommon/ftCo_Damage.h>
-#include <melee/ft/kinds/ftCommon/ftCo_Throw.h>
-#include <melee/ft/kinds/ftCommon/types.h>
+#include "ftCo_Attack100.h"
+#include "ftCo_Damage.h"
+#include "ftCo_Throw.h"
+#include "types.h"
 #include <dolphin/mtx.h>
 #include <melee/ft/fighter.h>
 #include <melee/ft/ftanim.h>

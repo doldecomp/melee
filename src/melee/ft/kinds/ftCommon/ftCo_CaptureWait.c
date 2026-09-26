@@ -1,5 +1,5 @@
-#include <melee/ft/kinds/ftCommon/ftCo_Attack100.h>
-#include <melee/ft/kinds/ftCommon/ftCo_CaptureCut.h>
+#include "ftCo_Attack100.h"
+#include "ftCo_CaptureCut.h"
 #include <melee/ft/fighter.h>
 #include <melee/ft/ft_081B.h>
 #include <melee/ft/ftcoll.h>
@@ -73,8 +73,8 @@ void fn_800DB790(Fighter_GObj* gobj)
     Fighter* victim_fp;
     Fighter* fp;
 
-    Fighter_ChangeMotionState(gobj, ftCo_MS_CaptureWaitHi, Ft_MF_None, 0.0F, 1.0F, 0.0F,
-                              NULL);
+    Fighter_ChangeMotionState(gobj, ftCo_MS_CaptureWaitHi, Ft_MF_None, 0.0F,
+                              1.0F, 0.0F, NULL);
 
     if ((victim_fp = GET_FIGHTER((fp = GET_FIGHTER(gobj))->victim_gobj))
             ->kind == Ft_Kind_Yoshi)
@@ -171,8 +171,8 @@ void fn_800DBAE4(Fighter_GObj* gobj)
     Fighter* victim_fp;
     Fighter* fp;
 
-    Fighter_ChangeMotionState(gobj, ftCo_MS_CaptureWaitLw, Ft_MF_None, 0.0F, 1.0F, 0.0F,
-                              NULL);
+    Fighter_ChangeMotionState(gobj, ftCo_MS_CaptureWaitLw, Ft_MF_None, 0.0F,
+                              1.0F, 0.0F, NULL);
 
     if ((victim_fp = GET_FIGHTER((fp = GET_FIGHTER(gobj))->victim_gobj))
             ->kind == Ft_Kind_Yoshi)

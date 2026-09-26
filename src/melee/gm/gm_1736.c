@@ -1,12 +1,12 @@
 #include <melee/ft/forward.h>
 
-#include <melee/gm/gm_1601.h>
-#include <melee/gm/gm_16F1.h>
-#include <melee/gm/gm_1A3F.h>
-#include <melee/gm/gmevent.h>
-#include <melee/gm/gmmain_lib.h>
-#include <melee/gm/gmregclear.h>
-#include <melee/gm/types.h>
+#include "gm_1601.h"
+#include "gm_16F1.h"
+#include "gm_1A3F.h"
+#include "gmevent.h"
+#include "gmmain_lib.h"
+#include "gmregclear.h"
+#include "types.h"
 #include <melee/if/textlib.h>
 #include <melee/lb/lb_00B0.h>
 #include <melee/lb/lblanguage.h>

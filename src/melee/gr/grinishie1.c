@@ -1,13 +1,13 @@
-#include <gr/grinishie1.h>
+#include "grinishie1.h"
 
 #include <Runtime/platform.h>
 
-#include <gr/grlib.h>
-#include <gr/grmaterial.h>
-#include <gr/grzakogenerator.h>
-#include <gr/inlines.h>
-#include <gr/stage.h>
-#include <gr/types.h>
+#include "grlib.h"
+#include "grmaterial.h"
+#include "grzakogenerator.h"
+#include "inlines.h"
+#include "stage.h"
+#include "types.h"
 #include <dolphin/types.h>
 #include <melee/cm/camera.h>
 #include <melee/ef/efsync.h>

@@ -1,12 +1,12 @@
-#include <melee/gm/gm_1884.h>
+#include "gm_1884.h"
 
 #include <melee/it/forward.h>
 
-#include <melee/gm/gm_1601.h>
-#include <melee/gm/gm_1A36.h>
-#include <melee/gm/gm_unsplit.h>
-#include <melee/gm/gmscene.h>
-#include <melee/gm/types.h>
+#include "gm_1601.h"
+#include "gm_1A36.h"
+#include "gm_unsplit.h"
+#include "gmscene.h"
+#include "types.h"
 #include <dolphin/pad.h>
 #include <melee/gr/stage.h>
 #include <melee/if/ifall.h>

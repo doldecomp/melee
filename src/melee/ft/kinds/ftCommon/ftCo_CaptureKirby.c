@@ -1,9 +1,9 @@
-#include <melee/ft/kinds/ftCommon/ftCo_CaptureKirby.h>
+#include "ftCo_CaptureKirby.h"
 
 #include <melee/ft/forward.h>
 
-#include <melee/ft/kinds/ftCommon/inlines.h>
-#include <melee/ft/kinds/ftCommon/types.h>
+#include "inlines.h"
+#include "types.h"
 #include <melee/ft/fighter.h>
 #include <melee/ft/ftanim.h>
 #include <melee/ft/ftcommon.h>

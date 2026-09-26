@@ -1,14 +1,14 @@
 /// @file
 /// @todo A lot of duplicate code here, can maybe be cleaned up with inlines.
-#include <melee/it/kinds/itsword.h>
+#include "itsword.h"
 
 #include <Runtime/platform.h>
 
 #include <placeholder.h>
 
-#include <melee/it/kinds/forward.h>
-#include <melee/it/kinds/inlines.h>
-#include <melee/it/kinds/types.h> // IWYU pragma: keep
+#include "forward.h"
+#include "inlines.h"
+#include "types.h" // IWYU pragma: keep
 #include <melee/ft/ftlib.h>
 #include <melee/it/inlines.h>
 #include <melee/it/it_26B1.h>

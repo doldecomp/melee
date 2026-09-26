@@ -1,4 +1,4 @@
-#include <melee/it/kinds/itparasol.h>
+#include "itparasol.h"
 
 #include <dolphin/mtx.h>
 #include <melee/it/inlines.h>

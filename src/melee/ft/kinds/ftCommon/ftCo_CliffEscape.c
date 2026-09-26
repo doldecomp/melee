@@ -1,9 +1,9 @@
-#include <melee/ft/kinds/ftCommon/ftCo_CliffEscape.h>
+#include "ftCo_CliffEscape.h"
 
 #include <Runtime/platform.h>
 
-#include <melee/ft/kinds/ftCommon/ftCo_CliffClimb.h>
-#include <melee/ft/kinds/ftCommon/inlines.h>
+#include "ftCo_CliffClimb.h"
+#include "inlines.h"
 #include <melee/ft/fighter.h>
 #include <melee/ft/ftcliffcommon.h>
 #include <melee/ft/types.h>

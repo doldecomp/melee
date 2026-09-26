@@ -1,11 +1,11 @@
-#include <melee/lb/lbarchive.h>
+#include "lbarchive.h"
 
 #include <stdarg.h>
 #include <string.h>
 
-#include <melee/lb/lbdvd.h>
-#include <melee/lb/lbfile.h>
-#include <melee/lb/lbheap.h>
+#include "lbdvd.h"
+#include "lbfile.h"
+#include "lbheap.h"
 #include <dolphin/os.h>
 #include <sysdolphin/baselib/archive.h>
 #include <sysdolphin/baselib/debug.h>

@@ -1,13 +1,13 @@
-#include <melee/it/itzako.h>
+#include "itzako.h"
 
-#include <melee/it/inlines.h>
-#include <melee/it/it_2725.h>
-#include <melee/it/it_3F14.h>
-#include <melee/it/itgroundcoll.h>
-#include <melee/it/ithitbox.h>
-#include <melee/it/itmaplib.h>
-#include <melee/it/itmaterial.h>
-#include <melee/it/kinds/itcoin.h>
+#include "inlines.h"
+#include "it_2725.h"
+#include "it_3F14.h"
+#include "itgroundcoll.h"
+#include "ithitbox.h"
+#include "itmaplib.h"
+#include "itmaterial.h"
+#include "kinds/itcoin.h"
 #include <melee/cm/camera.h>
 #include <melee/ft/fighter.h>
 #include <melee/ft/ftlib.h>

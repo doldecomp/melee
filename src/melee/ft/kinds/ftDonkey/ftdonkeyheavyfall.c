@@ -1,10 +1,10 @@
-#include <melee/ft/kinds/ftDonkey/ftdonkeyheavyfall.h>
+#include "ftdonkeyheavyfall.h"
 
 #include <melee/ft/forward.h>
 
-#include <melee/ft/kinds/ftDonkey/ftdonkeyheavyjump.h>
-#include <melee/ft/kinds/ftDonkey/ftdonkeyheavywait1.h>
-#include <melee/ft/kinds/ftDonkey/types.h>
+#include "ftdonkeyheavyjump.h"
+#include "ftdonkeyheavywait1.h"
+#include "types.h"
 #include <melee/ft/fighter.h>
 #include <melee/ft/ft_081B.h>
 #include <melee/ft/ftanim.h>
@@ -46,8 +46,8 @@ void ftDk_MS_347_800E03C0(HSD_GObj* gobj)
     ftDonkeyAttributes* donkey_attr;
     ftCommon_8007D5D4(fp);
     donkey_attr = getFtSpecialAttrs2CC(fp);
-    Fighter_ChangeMotionState(gobj, donkey_attr->motion_state + 7, Ft_MF_None, 0, 1, 0,
-                              NULL);
+    Fighter_ChangeMotionState(gobj, donkey_attr->motion_state + 7, Ft_MF_None,
+                              0, 1, 0, NULL);
     ftAnim_SetAnimRate(gobj, 0);
     ftCo_800CB110(gobj, true, 1);
 }

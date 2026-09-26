@@ -6,15 +6,15 @@
  *       separate for now. Also I dont know if anyone cares as long
  *       as it matches lol.
  */
-#include <melee/ef/eflib.h>
+#include "eflib.h"
 
 #include <math.h>
 #include <stdarg.h>
 
-#include <melee/ef/efasync.h>
-#include <melee/ef/efdata.h>
-#include <melee/ef/inlines.h>
-#include <melee/ef/types.h>
+#include "efasync.h"
+#include "efdata.h"
+#include "inlines.h"
+#include "types.h"
 #include <dolphin/mtx.h>
 #include <melee/ft/inlines.h>
 #include <melee/ft/kinds/ftCommon/ftCo_Bury.h>

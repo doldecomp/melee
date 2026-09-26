@@ -1,14 +1,14 @@
-#include <melee/ft/kinds/ftKirby/ftkirbyspecialiceclimber.h>
+#include "ftkirbyspecialiceclimber.h"
 
 #include <melee/ft/forward.h>
 
 #include <placeholder.h>
 #include <stddef.h>
 
-#include <melee/ft/kinds/ftKirby/forward.h>
-#include <melee/ft/kinds/ftKirby/ftkirby.h>
-#include <melee/ft/kinds/ftKirby/ftkirbyspecialdonkey.h>
-#include <melee/ft/kinds/ftKirby/types.h>
+#include "forward.h"
+#include "ftkirby.h"
+#include "ftkirbyspecialdonkey.h"
+#include "types.h"
 #include <melee/ft/fighter.h>
 #include <melee/ft/ft_081B.h>
 #include <melee/ft/ft_084E.h>
@@ -58,8 +58,8 @@ void ftKb_SpecialNIc_80108D64(Fighter_GObj* gobj)
     fp->throw_flags = 0;
     fp->cmd_vars[0] = new_var;
     fp->u.kb.xC0 = NULL;
-    Fighter_ChangeMotionState(gobj, ftKb_MS_PpSpecialN, Ft_MF_None, 0.0F, 1.0F, 0.0F,
-                              NULL);
+    Fighter_ChangeMotionState(gobj, ftKb_MS_PpSpecialN, Ft_MF_None, 0.0F, 1.0F,
+                              0.0F, NULL);
     ftAnim_8006EBA4(gobj);
     fp->accessory4_cb = fn_801090D4;
     {
@@ -87,8 +87,8 @@ void ftKb_SpecialNIc_80108E14(Fighter_GObj* gobj)
     } else {
         fp->u.kb.xC8 = -10.0F;
     }
-    Fighter_ChangeMotionState(gobj, ftKb_MS_PpSpecialAirN, Ft_MF_None, 0.0F, 1.0F, 0.0F,
-                              NULL);
+    Fighter_ChangeMotionState(gobj, ftKb_MS_PpSpecialAirN, Ft_MF_None, 0.0F,
+                              1.0F, 0.0F, NULL);
     ftAnim_8006EBA4(gobj);
     fp->accessory4_cb = fn_801090D4;
     {

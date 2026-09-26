@@ -1,8 +1,8 @@
-#include <melee/it/kinds/itunknown.h>
+#include "itunknown.h"
 
 #include <math.h>
 
-#include <melee/it/kinds/inlines.h>
+#include "inlines.h"
 #include <melee/cm/camera.h>
 #include <melee/gr/stage.h>
 #include <melee/it/inlines.h>

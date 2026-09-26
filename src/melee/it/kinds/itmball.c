@@ -1,8 +1,8 @@
-#include <melee/it/kinds/itmball.h>
+#include "itmball.h"
 
 #include <Runtime/platform.h>
 
-#include <melee/it/kinds/forward.h>
+#include "forward.h"
 #include <dolphin/mtx.h>
 #include <melee/ef/efasync.h>
 #include <melee/it/inlines.h>

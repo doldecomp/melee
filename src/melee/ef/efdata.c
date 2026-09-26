@@ -1,4 +1,4 @@
-#include <melee/ef/efdata.h>
+#include "efdata.h"
 
 /* 458EB0 */ HSD_ObjAllocData efLib_AllocData;
 

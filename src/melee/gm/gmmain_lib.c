@@ -1,13 +1,13 @@
-#include <melee/gm/gmmain_lib.h>
+#include "gmmain_lib.h"
 
 #include <Runtime/platform.h>
 
 #include <placeholder.h>
 
-#include <melee/gm/forward.h>
-#include <melee/gm/gm_unsplit.h>
-#include <melee/gm/gmhomerun.h>
-#include <melee/gm/types.h>
+#include "forward.h"
+#include "gm_unsplit.h"
+#include "gmhomerun.h"
+#include "types.h"
 #include <dolphin/os/OSReset.h>
 #include <dolphin/pad.h>
 #include <melee/db/db.h>

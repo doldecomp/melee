@@ -1,10 +1,10 @@
-#include <melee/gm/gm_17AD.h>
+#include "gm_17AD.h"
 
 #include <melee/pl/forward.h>
 
-#include <melee/gm/gmresult.h>
-#include <melee/gm/inlines.h>
-#include <melee/gm/types.h>
+#include "gmresult.h"
+#include "inlines.h"
+#include "types.h"
 #include <melee/lb/lblanguage.h>
 
 s32 fn_8017AD04(s32 arg0, s32 arg1)

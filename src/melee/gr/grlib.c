@@ -1,12 +1,12 @@
-#include <gr/grlib.h>
+#include "grlib.h"
 
 #include <sysdolphin/baselib/forward.h>
 
-#include <gr/grbigblue.h>
-#include <gr/gricemt.h>
-#include <gr/ground.h>
-#include <gr/grrcruise.h>
-#include <gr/types.h>
+#include "grbigblue.h"
+#include "gricemt.h"
+#include "ground.h"
+#include "grrcruise.h"
+#include "types.h"
 #include <melee/cm/camera.h>
 #include <melee/ft/inlines.h>
 #include <melee/ft/types.h>

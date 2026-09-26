@@ -1,16 +1,16 @@
-#include <melee/ft/ftCo_800C7590.h>
+#include "ftCo_800C7590.h"
 
-#include <melee/ft/fighter.h>
-#include <melee/ft/ft_081B.h>
-#include <melee/ft/ftCo_800C7434.h>
-#include <melee/ft/ftCo_800C78B0.h>
-#include <melee/ft/ftcommon.h>
-#include <melee/ft/inlines.h>
-#include <melee/ft/kinds/ftMasterHand/forward.h>
-#include <melee/ft/kinds/ftCommon/ftCo_Damage.h>
-#include <melee/ft/kinds/ftCommon/ftCo_DamageFall.h>
-#include <melee/ft/kinds/ftMasterHand/inlines.h>
-#include <melee/ft/types.h>
+#include "fighter.h"
+#include "ft_081B.h"
+#include "ftCo_800C7434.h"
+#include "ftCo_800C78B0.h"
+#include "ftcommon.h"
+#include "inlines.h"
+#include "kinds/ftCommon/ftCo_Damage.h"
+#include "kinds/ftCommon/ftCo_DamageFall.h"
+#include "kinds/ftMasterHand/forward.h"
+#include "kinds/ftMasterHand/inlines.h"
+#include "types.h"
 #include <melee/cm/camera.h>
 #include <melee/it/kinds/itleadead.h>
 #include <melee/pl/player.h>
@@ -89,8 +89,8 @@ void ftCo_800C7800(Fighter_GObj* gobj)
     } else {
         fp->self_vel.x = -fp->facing_dir * p_ftCommonData->x370;
     }
-    Fighter_ChangeMotionState(gobj, ftCo_MS_CaptureCut, Ft_MF_None, 0.0F, 1.0F, 0.0F,
-                              NULL);
+    Fighter_ChangeMotionState(gobj, ftCo_MS_CaptureCut, Ft_MF_None, 0.0F, 1.0F,
+                              0.0F, NULL);
     fp->capture_timer = p_ftCommonData->x73C;
 }
 

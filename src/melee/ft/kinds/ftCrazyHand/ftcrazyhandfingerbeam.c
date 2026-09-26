@@ -1,15 +1,15 @@
-#include <melee/ft/kinds/ftCrazyHand/ftcrazyhandfingerbeam.h>
+#include "ftcrazyhandfingerbeam.h"
 
 #include <Runtime/platform.h>
 
 #include <sysdolphin/baselib/forward.h>
 
-#include <melee/ft/kinds/ftCrazyHand/ftcrazyhandcapturecrazyhand.h>
-#include <melee/ft/kinds/ftCrazyHand/ftcrazyhandcapturewaitcrazyhand.h>
-#include <melee/ft/kinds/ftCrazyHand/ftcrazyhandfingergun2.h>
-#include <melee/ft/kinds/ftCrazyHand/ftcrazyhandtagcancel.h>
-#include <melee/ft/kinds/ftCrazyHand/inlines.h>
-#include <melee/ft/kinds/ftCrazyHand/types.h>
+#include "ftcrazyhandcapturecrazyhand.h"
+#include "ftcrazyhandcapturewaitcrazyhand.h"
+#include "ftcrazyhandfingergun2.h"
+#include "ftcrazyhandtagcancel.h"
+#include "inlines.h"
+#include "types.h"
 #include <dolphin/mtx.h>
 #include <melee/ft/fighter.h>
 #include <melee/ft/ft_084E.h>
@@ -51,8 +51,8 @@ void ftCh_Init_80158B3C(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftCrazyHand_DatAttrs* da = fp->ft_data->ext_attr;
-    Fighter_ChangeMotionState(gobj, 0x16A, Ft_MF_None, fp->cur_anim_frame, 1.0f, 0.0f,
-                              NULL);
+    Fighter_ChangeMotionState(gobj, 0x16A, Ft_MF_None, fp->cur_anim_frame,
+                              1.0f, 0.0f, NULL);
     ftAnim_SetAnimRate(gobj, da->xCC_pos.x);
     fp->mv.ch.unk0.x8 = da->xC4_pos.y;
 }
@@ -70,7 +70,8 @@ void ftCh_FingerBeamLoop_Anim(HSD_GObj* gobj)
     }
 
     if (!ftAnim_IsFramesRemaining(gobj)) {
-        Fighter_ChangeMotionState(gobj, 0x16A, Ft_MF_None, 0, 1.0f, 0.0f, NULL);
+        Fighter_ChangeMotionState(gobj, 0x16A, Ft_MF_None, 0, 1.0f, 0.0f,
+                                  NULL);
         ftAnim_8006EBA4(gobj);
     }
 }

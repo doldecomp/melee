@@ -1,17 +1,17 @@
-#include <melee/it/it_2725.h>
+#include "it_2725.h"
 
 #include <math.h>
 
-#include <melee/it/inlines.h>
-#include <melee/it/it_26B1.h>
-#include <melee/it/it_279C.h>
-#include <melee/it/it_3F14.h>
-#include <melee/it/itanimlist.h>
-#include <melee/it/itcoll.h>
-#include <melee/it/iteffect.h>
-#include <melee/it/item.h>
-#include <melee/it/ithitbox.h>
-#include <melee/it/itmaplib.h>
+#include "inlines.h"
+#include "it_26B1.h"
+#include "it_279C.h"
+#include "it_3F14.h"
+#include "itanimlist.h"
+#include "itcoll.h"
+#include "iteffect.h"
+#include "item.h"
+#include "ithitbox.h"
+#include "itmaplib.h"
 #include <melee/db/db.h>
 #include <melee/ef/efsync.h>
 #include <melee/ft/ftlib.h>

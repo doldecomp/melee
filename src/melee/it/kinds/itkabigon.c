@@ -1,6 +1,6 @@
-#include <melee/it/kinds/itkabigon.h>
+#include "itkabigon.h"
 
-#include <melee/it/kinds/inlines.h>
+#include "inlines.h"
 #include <melee/cm/camera.h>
 #include <melee/ef/efsync.h>
 #include <melee/gr/stage.h>

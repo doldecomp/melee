@@ -1,4 +1,4 @@
-#include <melee/it/kinds/itstar.h>
+#include "itstar.h"
 
 #include <dolphin/mtx.h>
 #include <melee/it/inlines.h>

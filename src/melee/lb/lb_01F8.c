@@ -1,7 +1,7 @@
 #include <string.h>
 
-#include <melee/lb/lbfile.h>
-#include <melee/lb/lbmthp.h>
+#include "lbfile.h"
+#include "lbmthp.h"
 #include <dolphin/thp/thp.h>
 #include <sysdolphin/baselib/memory.h>
 #include <sysdolphin/baselib/sobjlib.h>

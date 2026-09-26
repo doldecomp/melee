@@ -1,4 +1,4 @@
-#include <melee/ft/kinds/ftKirby/ftkirbyspecialhi.h>
+#include "ftkirbyspecialhi.h"
 
 #include <melee/ft/forward.h>
 
@@ -6,9 +6,9 @@
 #include <placeholder.h>
 #include <stddef.h>
 
-#include <melee/ft/kinds/ftKirby/forward.h>
-#include <melee/ft/kinds/ftKirby/inlines.h>
-#include <melee/ft/kinds/ftKirby/types.h>
+#include "forward.h"
+#include "inlines.h"
+#include "types.h"
 #include <melee/ef/eflib.h>
 #include <melee/ef/efsync.h>
 #include <melee/ft/fighter.h>
@@ -68,8 +68,8 @@ void ftKb_SpecialHi_Enter(Fighter_GObj* gobj)
     fp->mv.kb.specialhi.x4 = 0;
     fp->mv.kb.specialhi.x8.i = 0;
     fp->mv.kb.specialhi.xC = 0;
-    Fighter_ChangeMotionState(gobj, ftKb_MS_SpecialHi1, Ft_MF_None, 0.0f, 1.0f, 0.0f,
-                              NULL);
+    Fighter_ChangeMotionState(gobj, ftKb_MS_SpecialHi1, Ft_MF_None, 0.0f, 1.0f,
+                              0.0f, NULL);
     ftAnim_8006EBA4(gobj);
     fp = GET_FIGHTER(gobj);
     efSync_Spawn(0x494, gobj);
@@ -85,8 +85,8 @@ void ftKb_SpecialAirHi_Enter(Fighter_GObj* gobj)
     fp->mv.kb.specialhi.x4 = 0;
     fp->mv.kb.specialhi.x8.i = 0;
     fp->mv.kb.specialhi.xC = 0;
-    Fighter_ChangeMotionState(gobj, ftKb_MS_SpecialAirHi1, Ft_MF_None, 0.0f, 1.0f, 0.0f,
-                              NULL);
+    Fighter_ChangeMotionState(gobj, ftKb_MS_SpecialAirHi1, Ft_MF_None, 0.0f,
+                              1.0f, 0.0f, NULL);
     ftAnim_8006EBA4(gobj);
     fp = GET_FIGHTER(gobj);
     efSync_Spawn(0x494, gobj);

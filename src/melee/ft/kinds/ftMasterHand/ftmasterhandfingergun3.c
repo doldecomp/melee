@@ -1,9 +1,9 @@
-#include <melee/ft/kinds/ftMasterHand/ftmasterhandfingergun3.h>
+#include "ftmasterhandfingergun3.h"
 
 #include <melee/ft/forward.h>
 
-#include <melee/ft/kinds/ftMasterHand/forward.h>
-#include <melee/ft/kinds/ftMasterHand/ftmasterhandwait12.h>
+#include "forward.h"
+#include "ftmasterhandwait12.h"
 #include <melee/ft/fighter.h>
 #include <melee/ft/ft_084E.h>
 #include <melee/ft/ftanim.h>
@@ -34,6 +34,7 @@ void ftMh_FingerGun3_Coll(HSD_GObj* gobj) {}
 
 void ftMh_MS_366_80153820(HSD_GObj* gobj)
 {
-    Fighter_ChangeMotionState(gobj, ftMh_MS_BackAirplane1, Ft_MF_None, 0, 1, 0, 0);
+    Fighter_ChangeMotionState(gobj, ftMh_MS_BackAirplane1, Ft_MF_None, 0, 1, 0,
+                              0);
     ftAnim_8006EBA4(gobj);
 }

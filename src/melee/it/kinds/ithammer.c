@@ -1,8 +1,8 @@
-#include <melee/it/kinds/ithammer.h>
+#include "ithammer.h"
 
 #include <Runtime/platform.h>
 
-#include <melee/it/kinds/ithammerhead.h>
+#include "ithammerhead.h"
 #include <dolphin/mtx.h>
 #include <melee/it/inlines.h>
 #include <melee/it/it_26B1.h>

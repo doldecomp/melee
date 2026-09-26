@@ -1,4 +1,4 @@
-#include <melee/ft/kinds/ftCommon/ftCo_09F4.h>
+#include "ftCo_09F4.h"
 
 #include <Runtime/platform.h>
 

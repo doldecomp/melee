@@ -1,4 +1,4 @@
-#include <melee/ft/kinds/ftPeach/ftpeachspeciallw.h>
+#include "ftpeachspeciallw.h"
 
 #include <Runtime/platform.h>
 
@@ -7,8 +7,8 @@
 #include <melee/it/forward.h>
 #include <sysdolphin/baselib/forward.h>
 
-#include <melee/ft/kinds/ftPeach/ftpeach.h>
-#include <melee/ft/kinds/ftPeach/types.h>
+#include "ftpeach.h"
+#include "types.h"
 #include <dolphin/mtx.h>
 #include <melee/ef/efsync.h>
 #include <melee/ft/fighter.h>

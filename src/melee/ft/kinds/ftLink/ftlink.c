@@ -1,12 +1,12 @@
-#include <melee/ft/kinds/ftLink/ftlink.h>
+#include "ftlink.h"
 
 #include <melee/ft/kinds/ftCommon/forward.h>
 
-#include <melee/ft/kinds/ftLink/ftlinkspecialhi.h>
-#include <melee/ft/kinds/ftLink/ftlinkspeciallw.h>
-#include <melee/ft/kinds/ftLink/ftlinkspecialn.h>
-#include <melee/ft/kinds/ftLink/ftlinkspecials.h>
-#include <melee/ft/kinds/ftLink/types.h>
+#include "ftlinkspecialhi.h"
+#include "ftlinkspeciallw.h"
+#include "ftlinkspecialn.h"
+#include "ftlinkspecials.h"
+#include "types.h"
 #include <dolphin/mtx.h>
 #include <melee/ft/fighter.h>
 #include <melee/ft/ft_081B.h>

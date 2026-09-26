@@ -1,11 +1,11 @@
-#include <melee/ft/kinds/ftCommon/ftCo_CaptureKoopa.h>
+#include "ftCo_CaptureKoopa.h"
 
 #include <Runtime/platform.h>
 
-#include <melee/ft/kinds/ftCommon/ftCo_Attack100.h>
-#include <melee/ft/kinds/ftCommon/ftCo_CaptureDamageKoopa.h>
-#include <melee/ft/kinds/ftCommon/inlines.h>
-#include <melee/ft/kinds/ftCommon/types.h>
+#include "ftCo_Attack100.h"
+#include "ftCo_CaptureDamageKoopa.h"
+#include "inlines.h"
+#include "types.h"
 #include <dolphin/mtx.h>
 #include <melee/ft/fighter.h>
 #include <melee/ft/ftanim.h>

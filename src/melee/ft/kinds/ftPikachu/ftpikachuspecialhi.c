@@ -1,4 +1,4 @@
-#include <melee/ft/kinds/ftPikachu/ftpikachuspecialhi.h>
+#include "ftpikachuspecialhi.h"
 
 #include <Runtime/platform.h>
 
@@ -7,8 +7,8 @@
 
 #include <math.h>
 
-#include <melee/ft/kinds/ftPikachu/forward.h>
-#include <melee/ft/kinds/ftPikachu/types.h>
+#include "forward.h"
+#include "types.h"
 #include <dolphin/mtx.h>
 #include <melee/ef/efsync.h>
 #include <melee/ft/fighter.h>
@@ -503,7 +503,8 @@ void ftPk_SpecialHi_80126C0C(HSD_GObj* gobj)
                 // multiply ground velocity by second_zip_decay
                 fp->gr_vel *= pika_attr->x98;
 
-                Fighter_ChangeMotionState(gobj, 354, Ft_MF_KeepGfx, 12.0f, 1.0f, 0.0f, 0);
+                Fighter_ChangeMotionState(gobj, 354, Ft_MF_KeepGfx, 12.0f,
+                                          1.0f, 0.0f, 0);
                 ftAnim_8006EBA4(gobj);
             }
             Fighter_ChangeMotionState(gobj, 354, 10, 13.0f, 1.0f, 0.0f, 0);
@@ -590,7 +591,8 @@ void ftPk_SpecialHi_80126E1C(HSD_GObj* gobj)
         fp->self_vel.x *= pika_attr->x98;
         fp->self_vel.y *= pika_attr->x98;
 
-        Fighter_ChangeMotionState(gobj, 357, Ft_MF_KeepGfx, 12.0f, 1.0f, 0.0f, 0);
+        Fighter_ChangeMotionState(gobj, 357, Ft_MF_KeepGfx, 12.0f, 1.0f, 0.0f,
+                                  0);
         ftAnim_8006EBA4(gobj);
     }
     Fighter_ChangeMotionState(gobj, 357, 10, 13.0f, 1.0f, 0.0f, 0);

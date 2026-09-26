@@ -1,4 +1,4 @@
-#include <melee/it/kinds/itkirby_2F23.h>
+#include "itkirby_2F23.h"
 
 #include <melee/ft/kinds/ftKirby/ftkirby.h>
 #include <melee/it/inlines.h>

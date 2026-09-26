@@ -1,6 +1,6 @@
-#include <melee/it/kinds/itmariocape.h>
+#include "itmariocape.h"
 
-#include <melee/it/kinds/inlines.h>
+#include "inlines.h"
 #include <melee/ef/efasync.h>
 #include <melee/ft/ftlib.h>
 #include <melee/ft/kinds/ftMario/ftmariospecials.h>

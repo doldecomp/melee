@@ -1,12 +1,12 @@
-#include <mn/mnsoundtest.h>
+#include "mnsoundtest.h"
 
 #include <Runtime/platform.h>
 
 #include <sysdolphin/baselib/forward.h>
 
-#include <mn/forward.h>
-#include <mn/inlines.h>
-#include <mn/types.h>
+#include "forward.h"
+#include "inlines.h"
+#include "types.h"
 #include <dolphin/os.h>
 #include <melee/gm/gm_unsplit.h>
 #include <melee/gm/gmmain_lib.h>

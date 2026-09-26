@@ -1,4 +1,4 @@
-#include <melee/ft/kinds/ftCommon/ftCo_Throw.h>
+#include "ftCo_Throw.h"
 
 #include <Runtime/platform.h>
 
@@ -7,10 +7,10 @@
 #include <placeholder.h>
 #include <stdbool.h>
 
-#include <melee/ft/kinds/ftCommon/ftCo_CargoWait.h>
-#include <melee/ft/kinds/ftCommon/ftCo_Damage.h>
-#include <melee/ft/kinds/ftCommon/ftCo_Fall.h>
-#include <melee/ft/kinds/ftCommon/ftCo_Thrown.h>
+#include "ftCo_CargoWait.h"
+#include "ftCo_Damage.h"
+#include "ftCo_Fall.h"
+#include "ftCo_Thrown.h"
 #include <melee/ft/fighter.h>
 #include <melee/ft/ft_081B.h>
 #include <melee/ft/ft_084E.h>
@@ -138,7 +138,8 @@ void ftCo_800DD398(Fighter_GObj* gobj, FtMotionId msid, FtMotionId victim_msid,
     fp->throw_flags = 0;
     fp->mv.co.fighterthrow.x4 = 0;
     fp->mv.co.fighterthrow.x8 = 0;
-    Fighter_ChangeMotionState(gobj, msid, Ft_MF_None, 0.0f, anim_speed, 0.0f, NULL);
+    Fighter_ChangeMotionState(gobj, msid, Ft_MF_None, 0.0f, anim_speed, 0.0f,
+                              NULL);
     ftAnim_8006EBA4(gobj);
     ftCommon_8007E2F4(fp, 0x1FF);
     ftCo_800DE3FC(fp->victim_gobj, victim_msid, anim_speed);

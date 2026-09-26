@@ -1,9 +1,9 @@
-#include <melee/ft/kinds/ftCommon/ftCo_DownSpot.h>
+#include "ftCo_DownSpot.h"
 
 #include <melee/ft/forward.h>
 
-#include <melee/ft/kinds/ftCommon/forward.h>
-#include <melee/ft/kinds/ftCommon/ftCo_DownBound.h>
+#include "forward.h"
+#include "ftCo_DownBound.h"
 #include <melee/ft/fighter.h>
 #include <melee/ft/ft_081B.h>
 #include <melee/ft/ft_084E.h>

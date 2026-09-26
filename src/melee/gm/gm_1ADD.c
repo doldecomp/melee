@@ -1,6 +1,6 @@
-#include <melee/gm/gm_1ADD.h>
+#include "gm_1ADD.h"
 
-#include <melee/gm/gm_unsplit.h>
+#include "gm_unsplit.h"
 #include <melee/lb/lb_00B0.h>
 #include <melee/lb/lbarchive.h>
 #include <melee/lb/lblanguage.h>

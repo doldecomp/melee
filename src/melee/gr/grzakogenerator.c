@@ -1,14 +1,14 @@
-#include <gr/grzakogenerator.h>
+#include "grzakogenerator.h"
 
 #include <sysdolphin/baselib/forward.h>
 
 #include <placeholder.h>
 
-#include <gr/grlib.h>
-#include <gr/ground.h>
-#include <gr/grzakogenerator.static.h>
-#include <gr/stage.h>
-#include <gr/types.h>
+#include "grlib.h"
+#include "ground.h"
+#include "grzakogenerator.static.h"
+#include "stage.h"
+#include "types.h"
 #include <melee/it/inlines.h>
 #include <melee/it/it_26B1.h>
 #include <melee/it/item.h>

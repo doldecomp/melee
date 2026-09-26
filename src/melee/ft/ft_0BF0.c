@@ -1,12 +1,12 @@
-#include <melee/ft/ft_0BF0.h>
+#include "ft_0BF0.h"
 
-#include <melee/ft/fighter.h>
-#include <melee/ft/forward.h>
-#include <melee/ft/ftparts.h>
-#include <melee/ft/kinds/ftMasterHand/forward.h>
-#include <melee/ft/kinds/ftMasterHand/types.h>
-#include <melee/ft/kinds/ftMario/ftmariospecialn.h>
-#include <melee/ft/types.h>
+#include "fighter.h"
+#include "forward.h"
+#include "ftparts.h"
+#include "kinds/ftMario/ftmariospecialn.h"
+#include "kinds/ftMasterHand/forward.h"
+#include "kinds/ftMasterHand/types.h"
+#include "types.h"
 #include <melee/it/kinds/itdrmariopill.h>
 #include <melee/it/kinds/itfoxblaster.h>
 #include <melee/it/kinds/itnessbat.h>

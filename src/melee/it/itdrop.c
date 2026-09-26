@@ -1,12 +1,12 @@
-#include <melee/it/itdrop.h>
+#include "itdrop.h"
 
-#include <melee/it/inlines.h>
-#include <melee/it/it_26B1.h>
-#include <melee/it/it_2725.h>
-#include <melee/it/it_3F14.h>
-#include <melee/it/item.h>
-#include <melee/it/itspawn.h>
-#include <melee/it/kinds/it_2E5A.h>
+#include "inlines.h"
+#include "it_26B1.h"
+#include "it_2725.h"
+#include "it_3F14.h"
+#include "item.h"
+#include "itspawn.h"
+#include "kinds/it_2E5A.h"
 #include <melee/ft/ftlib.h>
 #include <melee/gm/gm_unsplit.h>
 #include <sysdolphin/baselib/random.h>

@@ -1,4 +1,4 @@
-#include <melee/ft/kinds/ftGanon/ftganon.h>
+#include "ftganon.h"
 
 #include <melee/ft/kinds/ftCaptain/forward.h>
 #include <melee/ft/kinds/ftCommon/forward.h>

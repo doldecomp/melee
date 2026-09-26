@@ -1,4 +1,4 @@
-#include <melee/it/kinds/itchicorita.h>
+#include "itchicorita.h"
 
 #include <melee/it/forward.h>
 

@@ -1,11 +1,11 @@
-#include <melee/it/kinds/itleadead.h>
+#include "itleadead.h"
 
 #include <Runtime/platform.h>
 
 #include <math.h>
 #include <placeholder.h>
 
-#include <melee/it/kinds/inlines.h>
+#include "inlines.h"
 #include <melee/cm/camera.h>
 #include <melee/ft/ftCo_800C7590.h>
 #include <melee/ft/ftlib.h>

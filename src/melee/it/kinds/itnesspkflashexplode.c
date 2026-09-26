@@ -1,4 +1,4 @@
-#include <melee/it/kinds/itnesspkflashexplode.h>
+#include "itnesspkflashexplode.h"
 
 #include <Runtime/platform.h>
 
@@ -6,7 +6,7 @@
 
 #include <placeholder.h>
 
-#include <melee/it/kinds/inlines.h>
+#include "inlines.h"
 #include <melee/cm/camera.h>
 #include <melee/db/db.h>
 #include <melee/it/inlines.h>

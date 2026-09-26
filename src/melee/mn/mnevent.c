@@ -1,12 +1,12 @@
-#include <melee/mn/mnevent.h>
+#include "mnevent.h"
 
 #include <melee/ft/forward.h>
 
 #include <placeholder.h>
 
-#include <melee/mn/inlines.h>
-#include <melee/mn/mnmain.h>
-#include <melee/mn/types.h>
+#include "inlines.h"
+#include "mnmain.h"
+#include "types.h"
 #include <melee/db/db.h>
 #include <melee/gm/gm_1601.h>
 #include <melee/gm/gmevent.h>

@@ -1,21 +1,21 @@
-#include <melee/ft/kinds/ftCommon/ftCo_Jump.h>
+#include "ftCo_Jump.h"
 
 #include <melee/ft/forward.h>
 
-#include <melee/ft/kinds/ftCommon/forward.h>
-#include <melee/ft/kinds/ftCommon/ftCo_AirCatch.h>
-#include <melee/ft/kinds/ftCommon/ftCo_Attack100.h>
-#include <melee/ft/kinds/ftCommon/ftCo_AttackAir.h>
-#include <melee/ft/kinds/ftCommon/ftCo_EscapeAir.h>
-#include <melee/ft/kinds/ftCommon/ftCo_Fall.h>
-#include <melee/ft/kinds/ftCommon/ftCo_FallSpecial.h>
-#include <melee/ft/kinds/ftCommon/ftCo_HammerJump.h>
-#include <melee/ft/kinds/ftCommon/ftCo_HammerWait.h>
-#include <melee/ft/kinds/ftCommon/ftCo_ItemParasolOpen.h>
-#include <melee/ft/kinds/ftCommon/ftCo_ItemThrow.h>
-#include <melee/ft/kinds/ftCommon/ftCo_JumpAerial.h>
-#include <melee/ft/kinds/ftCommon/ftCo_KneeBend.h>
-#include <melee/ft/kinds/ftCommon/ftCo_SpecialAir.h>
+#include "forward.h"
+#include "ftCo_AirCatch.h"
+#include "ftCo_Attack100.h"
+#include "ftCo_AttackAir.h"
+#include "ftCo_EscapeAir.h"
+#include "ftCo_Fall.h"
+#include "ftCo_FallSpecial.h"
+#include "ftCo_HammerJump.h"
+#include "ftCo_HammerWait.h"
+#include "ftCo_ItemParasolOpen.h"
+#include "ftCo_ItemThrow.h"
+#include "ftCo_JumpAerial.h"
+#include "ftCo_KneeBend.h"
+#include "ftCo_SpecialAir.h"
 #include <melee/ft/fighter.h>
 #include <melee/ft/ft_081B.h>
 #include <melee/ft/ft_0877.h>

@@ -1,10 +1,10 @@
-#include <melee/ft/kinds/ftCommon/ftCo_PassiveCeil.h>
+#include "ftCo_PassiveCeil.h"
 
-#include <melee/ft/kinds/ftCommon/forward.h>
-#include <melee/ft/kinds/ftCommon/ftCo_DamageFall.h>
-#include <melee/ft/kinds/ftCommon/ftCo_DownAttack.h>
-#include <melee/ft/kinds/ftCommon/ftCo_Fall.h>
-#include <melee/ft/kinds/ftCommon/ftCo_FallSpecial.h>
+#include "forward.h"
+#include "ftCo_DamageFall.h"
+#include "ftCo_DownAttack.h"
+#include "ftCo_Fall.h"
+#include "ftCo_FallSpecial.h"
 #include <dolphin/mtx.h>
 #include <melee/ef/efasync.h>
 #include <melee/ft/fighter.h>

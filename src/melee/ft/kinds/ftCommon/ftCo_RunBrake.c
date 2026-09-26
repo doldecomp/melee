@@ -1,13 +1,13 @@
-#include <melee/ft/kinds/ftCommon/ftCo_RunBrake.h>
+#include "ftCo_RunBrake.h"
 
 #include <melee/ft/forward.h>
 
 #include <placeholder.h>
 
-#include <melee/ft/kinds/ftCommon/forward.h>
-#include <melee/ft/kinds/ftCommon/ftCo_Jump.h>
-#include <melee/ft/kinds/ftCommon/ftCo_Squat.h>
-#include <melee/ft/kinds/ftCommon/ftCo_TurnRun.h>
+#include "forward.h"
+#include "ftCo_Jump.h"
+#include "ftCo_Squat.h"
+#include "ftCo_TurnRun.h"
 #include <melee/ft/fighter.h>
 #include <melee/ft/ft_081B.h>
 #include <melee/ft/ft_0877.h>

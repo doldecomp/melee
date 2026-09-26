@@ -1,14 +1,14 @@
-#include <melee/ft/kinds/ftCommon/ftCo_RunDirect.h>
+#include "ftCo_RunDirect.h"
 
 #include <melee/ft/forward.h>
 
-#include <melee/ft/kinds/ftCommon/ftCo_AppealS.h>
-#include <melee/ft/kinds/ftCommon/ftCo_Attack100.h>
-#include <melee/ft/kinds/ftCommon/ftCo_AttackDash.h>
-#include <melee/ft/kinds/ftCommon/ftCo_Guard.h>
-#include <melee/ft/kinds/ftCommon/ftCo_Jump.h>
-#include <melee/ft/kinds/ftCommon/ftCo_Run.h>
-#include <melee/ft/kinds/ftCommon/ftCo_SpecialS.h>
+#include "ftCo_AppealS.h"
+#include "ftCo_Attack100.h"
+#include "ftCo_AttackDash.h"
+#include "ftCo_Guard.h"
+#include "ftCo_Jump.h"
+#include "ftCo_Run.h"
+#include "ftCo_SpecialS.h"
 #include <melee/ft/fighter.h>
 #include <melee/ft/ft_0892.h>
 #include <melee/ft/inlines.h>

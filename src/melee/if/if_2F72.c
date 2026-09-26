@@ -1,9 +1,9 @@
-#include <melee/if/if_2F72.h>
+#include "if_2F72.h"
 
-#include <melee/if/if_2F6E.h>
-#include <melee/if/ifall.h>
-#include <melee/if/ifstatus.h>
-#include <melee/if/types.h>
+#include "if_2F6E.h"
+#include "ifall.h"
+#include "ifstatus.h"
+#include "types.h"
 #include <melee/gm/gm_1601.h>
 #include <melee/gm/gmvs.h>
 #include <melee/lb/lb_00B0.h>

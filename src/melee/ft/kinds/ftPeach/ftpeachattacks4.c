@@ -1,10 +1,10 @@
-#include <melee/ft/kinds/ftPeach/ftpeachattacks4.h>
+#include "ftpeachattacks4.h"
 
 #include <Runtime/platform.h>
 
 #include <melee/ft/forward.h>
 
-#include <melee/ft/kinds/ftPeach/types.h>
+#include "types.h"
 #include <melee/ft/fighter.h>
 #include <melee/ft/ft_081B.h>
 #include <melee/ft/ft_084E.h>

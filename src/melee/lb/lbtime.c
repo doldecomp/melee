@@ -1,4 +1,4 @@
-#include <melee/lb/lbtime.h>
+#include "lbtime.h"
 
 #define UINT_MAX 0xFFFFFFFF
 

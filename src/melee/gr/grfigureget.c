@@ -1,4 +1,4 @@
-#include <gr/grfigureget.h>
+#include "grfigureget.h"
 
 #include <Runtime/platform.h>
 
@@ -6,12 +6,12 @@
 #include <melee/lb/forward.h>
 #include <sysdolphin/baselib/forward.h>
 
-#include <gr/granime.h>
-#include <gr/ground.h>
-#include <gr/grzakogenerator.h>
-#include <gr/inlines.h>
-#include <gr/stage.h>
-#include <gr/types.h>
+#include "granime.h"
+#include "ground.h"
+#include "grzakogenerator.h"
+#include "inlines.h"
+#include "stage.h"
+#include "types.h"
 #include <dolphin/mtx.h>
 #include <melee/ft/ftlib.h>
 #include <melee/gm/gmregclear.h>

@@ -1,4 +1,4 @@
-#include <melee/ft/kinds/ftCommon/ftCo_Furafura.h>
+#include "ftCo_Furafura.h"
 
 #include <Runtime/platform.h>
 

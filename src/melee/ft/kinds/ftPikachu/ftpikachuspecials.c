@@ -1,12 +1,12 @@
-#include <melee/ft/kinds/ftPikachu/ftpikachuspecials.h>
+#include "ftpikachuspecials.h"
 
 #include <Runtime/platform.h>
 
 #include <melee/ft/forward.h>
 #include <melee/lb/forward.h>
 
-#include <melee/ft/kinds/ftPikachu/ftpikachuspecialn.h>
-#include <melee/ft/kinds/ftPikachu/types.h>
+#include "ftpikachuspecialn.h"
+#include "types.h"
 #include <dolphin/mtx.h>
 #include <melee/ft/fighter.h>
 #include <melee/ft/ft_081B.h>

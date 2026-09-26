@@ -1,23 +1,23 @@
-#include <melee/it/item.h>
+#include "item.h"
 
 #include <melee/lb/forward.h>
 
 #include <math.h>
 
-#include <melee/it/inlines.h>
-#include <melee/it/it_26B1.h>
-#include <melee/it/it_2725.h>
-#include <melee/it/it_279C.h>
-#include <melee/it/it_3F14.h>
-#include <melee/it/it_3F2F.h>
-#include <melee/it/itanimlist.h>
-#include <melee/it/itcoll.h>
-#include <melee/it/iteffect.h>
-#include <melee/it/itgroundcoll.h>
-#include <melee/it/ithitbox.h>
-#include <melee/it/itmaplib.h>
-#include <melee/it/itmaterial.h>
-#include <melee/it/types.h>
+#include "inlines.h"
+#include "it_26B1.h"
+#include "it_2725.h"
+#include "it_279C.h"
+#include "it_3F14.h"
+#include "it_3F2F.h"
+#include "itanimlist.h"
+#include "itcoll.h"
+#include "iteffect.h"
+#include "itgroundcoll.h"
+#include "ithitbox.h"
+#include "itmaplib.h"
+#include "itmaterial.h"
+#include "types.h"
 #include <dolphin/mtx.h>
 #include <melee/cm/camera.h>
 #include <melee/db/db.h>

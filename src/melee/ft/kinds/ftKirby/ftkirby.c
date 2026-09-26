@@ -1,19 +1,19 @@
-#include <melee/ft/kinds/ftKirby/ftkirby.h>
+#include "ftkirby.h"
 
 #include <stddef.h>
 
-#include <melee/ft/kinds/ftKirby/ftKb_Init.static.h>
-#include <melee/ft/kinds/ftKirby/ftkirbyattackdash.h>
-#include <melee/ft/kinds/ftKirby/ftkirbyspecialdonkey.h>
-#include <melee/ft/kinds/ftKirby/ftkirbyspecialgamewatch.h>
-#include <melee/ft/kinds/ftKirby/ftkirbyspecialhi.h>
-#include <melee/ft/kinds/ftKirby/ftkirbyspecialiceclimber.h>
-#include <melee/ft/kinds/ftKirby/ftkirbyspecialmars.h>
-#include <melee/ft/kinds/ftKirby/ftkirbyspecialmewtwo.h>
-#include <melee/ft/kinds/ftKirby/ftkirbyspecialpeach.h>
-#include <melee/ft/kinds/ftKirby/ftkirbyspecialpikachu.h>
-#include <melee/ft/kinds/ftKirby/ftkirbyspecialpurin.h>
-#include <melee/ft/kinds/ftKirby/ftkirbyspecialzelda.h>
+#include "ftKb_Init.static.h"
+#include "ftkirbyattackdash.h"
+#include "ftkirbyspecialdonkey.h"
+#include "ftkirbyspecialgamewatch.h"
+#include "ftkirbyspecialhi.h"
+#include "ftkirbyspecialiceclimber.h"
+#include "ftkirbyspecialmars.h"
+#include "ftkirbyspecialmewtwo.h"
+#include "ftkirbyspecialpeach.h"
+#include "ftkirbyspecialpikachu.h"
+#include "ftkirbyspecialpurin.h"
+#include "ftkirbyspecialzelda.h"
 #include <melee/ef/efasync.h>
 #include <melee/ft/fighter.h>
 #include <melee/ft/ft_0877.h>

@@ -1,7 +1,7 @@
-#include <gr/grdatfiles.h>
+#include "grdatfiles.h"
 
-#include <gr/ground.h>
-#include <gr/types.h>
+#include "ground.h"
+#include "types.h"
 #include <melee/lb/lb_00B0.h>
 #include <melee/lb/lbarchive.h>
 #include <melee/lb/lbheap.h>

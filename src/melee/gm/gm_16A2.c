@@ -1,8 +1,8 @@
-#include <melee/gm/gm_16A2.h>
+#include "gm_16A2.h"
 
 #include <stddef.h>
 
-#include <melee/gm/gm_unsplit.h>
+#include "gm_unsplit.h"
 #include <melee/gr/ground.h>
 #include <melee/gr/stage.h>
 #include <melee/if/ifnametag.h>

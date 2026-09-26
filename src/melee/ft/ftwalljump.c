@@ -1,11 +1,11 @@
-#include <melee/ft/ftwalljump.h>
+#include "ftwalljump.h"
 
 #include <Runtime/platform.h>
 
-#include <melee/ft/fighter.h>
-#include <melee/ft/kinds/ftMasterHand/forward.h>
-#include <melee/ft/kinds/ftCommon/ftCo_PassiveWall.h>
-#include <melee/ft/types.h>
+#include "fighter.h"
+#include "kinds/ftCommon/ftCo_PassiveWall.h"
+#include "kinds/ftMasterHand/forward.h"
+#include "types.h"
 #include <dolphin/mtx.h>
 #include <melee/mp/mplib.h>
 

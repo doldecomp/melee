@@ -1,4 +1,4 @@
-#include <melee/ft/kinds/ftCommon/ftCo_DownStand.h>
+#include "ftCo_DownStand.h"
 
 #include <Runtime/platform.h>
 

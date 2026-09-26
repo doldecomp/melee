@@ -1,4 +1,4 @@
-#include <melee/lb/lbmemory.h>
+#include "lbmemory.h"
 
 #include <Runtime/platform.h>
 

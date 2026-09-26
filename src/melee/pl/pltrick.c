@@ -1,10 +1,10 @@
-#include <pl/pltrick.h>
+#include "pltrick.h"
 
-#include <pl/pl_040D.h>
-#include <pl/player.h>
-#include <pl/plbonus.h>
-#include <pl/plbonuslib.h>
-#include <pl/types.h>
+#include "pl_040D.h"
+#include "player.h"
+#include "plbonus.h"
+#include "plbonuslib.h"
+#include "types.h"
 #include <melee/ft/ft_0892.h>
 #include <melee/ft/ftdata.h>
 #include <melee/ft/inlines.h>

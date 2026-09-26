@@ -1,13 +1,13 @@
-#include <melee/ty/tyfigupon.h>
+#include "tyfigupon.h"
 
 #include <Runtime/platform.h>
 
 #include <placeholder.h>
 #include <stddef.h>
 
-#include <melee/ty/inlines.h>
-#include <melee/ty/toy.h>
-#include <melee/ty/types.h>
+#include "inlines.h"
+#include "toy.h"
+#include "types.h"
 #include <dolphin/mtx.h>
 #include <dolphin/os.h>
 #include <melee/gm/gm_1601.h>

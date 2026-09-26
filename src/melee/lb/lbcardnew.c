@@ -1,4 +1,4 @@
-#include <melee/lb/lbcardnew.h>
+#include "lbcardnew.h"
 
 #include <Runtime/platform.h>
 
@@ -7,7 +7,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include <melee/lb/types.h>
+#include "types.h"
 #include <dolphin/card.h>
 #include <sysdolphin/baselib/card.h>
 #include <sysdolphin/baselib/debug.h>

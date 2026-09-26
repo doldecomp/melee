@@ -1,12 +1,12 @@
-#include <melee/mn/mnname.h>
+#include "mnname.h"
 
 #include <placeholder.h>
 
-#include <melee/mn/inlines.h>
-#include <melee/mn/mnmain.h>
-#include <melee/mn/mnmainrule.h>
-#include <melee/mn/mnname.static.h>
-#include <melee/mn/mnnamenew.h>
+#include "inlines.h"
+#include "mnmain.h"
+#include "mnmainrule.h"
+#include "mnname.static.h"
+#include "mnnamenew.h"
 #include <dolphin/gx/GXStruct.h>
 #include <melee/gm/gmmain_lib.h>
 #include <melee/lb/lb_00B0.h>

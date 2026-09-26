@@ -1,4 +1,4 @@
-#include <melee/it/kinds/itnesspkthundertrail.h>
+#include "itnesspkthundertrail.h"
 
 #include <Runtime/platform.h>
 
@@ -7,8 +7,8 @@
 #include <math.h>
 #include <placeholder.h>
 
-#include <melee/it/kinds/inlines.h>
-#include <melee/it/kinds/itnesspkthunderball.h>
+#include "inlines.h"
+#include "itnesspkthunderball.h"
 #include <melee/db/db.h>
 #include <melee/it/inlines.h>
 #include <melee/it/it_26B1.h>

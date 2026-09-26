@@ -1,4 +1,4 @@
-#include <melee/sfx/crowdsfx.h>
+#include "crowdsfx.h"
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/gobjproc.h>
 

@@ -1,15 +1,15 @@
-#include <melee/ft/kinds/ftCommon/ftCo_DownDamage.h>
+#include "ftCo_DownDamage.h"
 
 #include <Runtime/platform.h>
 
-#include <melee/ft/kinds/ftCommon/ftCo_Damage.h>
-#include <melee/ft/kinds/ftCommon/ftCo_DamageFall.h>
-#include <melee/ft/kinds/ftCommon/ftCo_DownBound.h>
-#include <melee/ft/kinds/ftCommon/ftCo_DownStand.h>
-#include <melee/ft/kinds/ftCommon/ftCo_Fall.h>
-#include <melee/ft/kinds/ftCommon/ftCo_FlyReflect.h>
-#include <melee/ft/kinds/ftCommon/ftCo_PassiveWall.h>
-#include <melee/ft/kinds/ftCommon/types.h>
+#include "ftCo_Damage.h"
+#include "ftCo_DamageFall.h"
+#include "ftCo_DownBound.h"
+#include "ftCo_DownStand.h"
+#include "ftCo_Fall.h"
+#include "ftCo_FlyReflect.h"
+#include "ftCo_PassiveWall.h"
+#include "types.h"
 #include <melee/ft/fighter.h>
 #include <melee/ft/ft_081B.h>
 #include <melee/ft/ftanim.h>

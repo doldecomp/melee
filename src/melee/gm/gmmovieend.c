@@ -3,12 +3,12 @@
  * which should probably be split out into a separate file
  */
 
-#include <melee/gm/gmmovieend.h>
+#include "gmmovieend.h"
 
-#include <melee/gm/gm_unsplit.h>
-#include <melee/gm/gmmain_lib.h>
-#include <melee/gm/gmopening.h>
-#include <melee/gm/types.h>
+#include "gm_unsplit.h"
+#include "gmmain_lib.h"
+#include "gmopening.h"
+#include "types.h"
 #include <dolphin/pad.h>
 #include <melee/if/ifcoget.h>
 #include <melee/if/textlib.h>

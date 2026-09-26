@@ -1,4 +1,4 @@
-#include <melee/ft/kinds/ftCommon/ftCo_ThrownMewtwo.h>
+#include "ftCo_ThrownMewtwo.h"
 
 #include <Runtime/platform.h>
 
@@ -6,8 +6,8 @@
 
 #include <placeholder.h>
 
-#include <melee/ft/kinds/ftCommon/ftCo_Thrown.h>
-#include <melee/ft/kinds/ftCommon/types.h>
+#include "ftCo_Thrown.h"
+#include "types.h"
 #include <melee/ft/fighter.h>
 #include <melee/ft/ftanim.h>
 #include <melee/ft/ftcommon.h>

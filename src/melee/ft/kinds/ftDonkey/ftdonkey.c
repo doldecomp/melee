@@ -1,22 +1,22 @@
-#include <melee/ft/kinds/ftDonkey/ftdonkey.h>
+#include "ftdonkey.h"
 
 #include <Runtime/platform.h>
 
 #include <melee/lb/forward.h>
 
-#include <melee/ft/kinds/ftDonkey/forward.h>
-#include <melee/ft/kinds/ftDonkey/ftdonkeyheavyfall.h>
-#include <melee/ft/kinds/ftDonkey/ftdonkeyheavyjump.h>
-#include <melee/ft/kinds/ftDonkey/ftdonkeyheavylanding.h>
-#include <melee/ft/kinds/ftDonkey/ftdonkeyheavyturn.h>
-#include <melee/ft/kinds/ftDonkey/ftdonkeyheavywait0.h>
-#include <melee/ft/kinds/ftDonkey/ftdonkeyheavywait1.h>
-#include <melee/ft/kinds/ftDonkey/ftdonkeyheavywalk.h>
-#include <melee/ft/kinds/ftDonkey/ftdonkeyspecialhi.h>
-#include <melee/ft/kinds/ftDonkey/ftdonkeyspeciallw.h>
-#include <melee/ft/kinds/ftDonkey/ftdonkeyspecialn.h>
-#include <melee/ft/kinds/ftDonkey/ftdonkeyspecials.h>
-#include <melee/ft/kinds/ftDonkey/types.h>
+#include "forward.h"
+#include "ftdonkeyheavyfall.h"
+#include "ftdonkeyheavyjump.h"
+#include "ftdonkeyheavylanding.h"
+#include "ftdonkeyheavyturn.h"
+#include "ftdonkeyheavywait0.h"
+#include "ftdonkeyheavywait1.h"
+#include "ftdonkeyheavywalk.h"
+#include "ftdonkeyspecialhi.h"
+#include "ftdonkeyspeciallw.h"
+#include "ftdonkeyspecialn.h"
+#include "ftdonkeyspecials.h"
+#include "types.h"
 #include <dolphin/mtx.h>
 #include <melee/ft/ftcamera.h>
 #include <melee/ft/ftcolanim.h>

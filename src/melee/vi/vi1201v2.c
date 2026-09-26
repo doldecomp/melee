@@ -1,8 +1,8 @@
-#include <vi/vi1201v2.h>
+#include "vi1201v2.h"
 
 #include <sysdolphin/baselib/forward.h>
 
-#include <vi/vi.h>
+#include "vi.h"
 #include <melee/ef/efasync.h>
 #include <melee/ef/eflib.h>
 #include <melee/ft/ftdemo.h>

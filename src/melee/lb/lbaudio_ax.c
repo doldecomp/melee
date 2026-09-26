@@ -1,13 +1,13 @@
-#include <melee/lb/lbaudio_ax.h>
+#include "lbaudio_ax.h"
 
 #include <stdbool.h>
 #include <stddef.h>
 #include <string.h>
 
-#include <melee/lb/lb_0195.h>
-#include <melee/lb/lbarchive.h>
-#include <melee/lb/lbaudio_ax.static.h>
-#include <melee/lb/lblanguage.h>
+#include "lb_0195.h"
+#include "lbarchive.h"
+#include "lbaudio_ax.static.h"
+#include "lblanguage.h"
 #include <dolphin/ai.h>
 #include <dolphin/ar.h>
 #include <dolphin/ax.h>

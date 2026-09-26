@@ -1,4 +1,4 @@
-#include <melee/lb/lb_00CE.h>
+#include "lb_00CE.h"
 
 #ifdef MUST_MATCH
 #include <placeholder.h>

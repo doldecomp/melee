@@ -1,9 +1,9 @@
-#include <melee/ft/ftwaitanim.h>
+#include "ftwaitanim.h"
 
-#include <melee/ft/ftanim.h>
-#include <melee/ft/ftdata.h>
-#include <melee/ft/ftdynamics.h>
-#include <melee/ft/inlines.h>
+#include "ftanim.h"
+#include "ftdata.h"
+#include "ftdynamics.h"
+#include "inlines.h"
 #include <melee/it/it_26B1.h>
 #include <sysdolphin/baselib/debug.h>
 #include <sysdolphin/baselib/random.h>

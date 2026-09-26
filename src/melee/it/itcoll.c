@@ -1,4 +1,4 @@
-#include <melee/it/itcoll.h>
+#include "itcoll.h"
 
 #include <Runtime/platform.h>
 
@@ -6,13 +6,13 @@
 
 #include <placeholder.h>
 
-#include <melee/it/inlines.h>
-#include <melee/it/it_26B1.h>
-#include <melee/it/it_2725.h>
-#include <melee/it/it_279C.h>
-#include <melee/it/it_3F14.h>
-#include <melee/it/item.h>
-#include <melee/it/types.h>
+#include "inlines.h"
+#include "it_26B1.h"
+#include "it_2725.h"
+#include "it_279C.h"
+#include "it_3F14.h"
+#include "item.h"
+#include "types.h"
 #include <melee/ef/efsync.h>
 #include <melee/ft/fighter.h>
 #include <melee/ft/ft_0881.h>

@@ -1,13 +1,13 @@
-#include <melee/ft/kinds/ftKirby/ftkirbyspecialpeach.h>
+#include "ftkirbyspecialpeach.h"
 
 #include <melee/ft/forward.h>
 
 #include <placeholder.h>
 #include <stddef.h>
 
-#include <melee/ft/kinds/ftKirby/forward.h>
-#include <melee/ft/kinds/ftKirby/ftkirby.h>
-#include <melee/ft/kinds/ftKirby/types.h>
+#include "forward.h"
+#include "ftkirby.h"
+#include "types.h"
 #include <melee/ft/fighter.h>
 #include <melee/ft/ft_081B.h>
 #include <melee/ft/ft_084E.h>

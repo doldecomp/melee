@@ -1,15 +1,15 @@
-#include <gr/grzebes.h>
+#include "grzebes.h"
 
 #include <Runtime/platform.h>
 
-#include <gr/forward.h>
-#include <gr/granime.h>
-#include <gr/grdatfiles.h>
-#include <gr/grdisplay.h>
-#include <gr/grlib.h>
-#include <gr/grmaterial.h>
-#include <gr/grzakogenerator.h>
-#include <gr/inlines.h>
+#include "forward.h"
+#include "granime.h"
+#include "grdatfiles.h"
+#include "grdisplay.h"
+#include "grlib.h"
+#include "grmaterial.h"
+#include "grzakogenerator.h"
+#include "inlines.h"
 #include <dolphin/mtx.h>
 #include <dolphin/os.h>
 #include <melee/cm/camera.h>

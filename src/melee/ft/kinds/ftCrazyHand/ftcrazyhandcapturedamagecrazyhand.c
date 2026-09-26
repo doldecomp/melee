@@ -1,11 +1,11 @@
-#include <melee/ft/kinds/ftCrazyHand/ftcrazyhandcapturedamagecrazyhand.h>
+#include "ftcrazyhandcapturedamagecrazyhand.h"
 
 #include <Runtime/platform.h>
 
 #include <sysdolphin/baselib/forward.h>
 
-#include <melee/ft/kinds/ftCrazyHand/ftcrazyhandcapturewaitcrazyhand.h>
-#include <melee/ft/kinds/ftCrazyHand/ftcrazyhandfingerbeam.h>
+#include "ftcrazyhandcapturewaitcrazyhand.h"
+#include "ftcrazyhandfingerbeam.h"
 #include <melee/ft/fighter.h>
 #include <melee/ft/ftcommon.h>
 #include <melee/ft/inlines.h>

@@ -1,8 +1,8 @@
-#include <melee/ft/kinds/ftMasterHand/ftmasterhandfingerbeam.h>
+#include "ftmasterhandfingerbeam.h"
 
 #include <sysdolphin/baselib/forward.h>
 
-#include <melee/ft/kinds/ftMasterHand/types.h>
+#include "types.h"
 #include <dolphin/mtx.h>
 #include <melee/ft/fighter.h>
 #include <melee/ft/ft_084E.h>
@@ -19,7 +19,8 @@ void ftMh_Poke1_Coll(HSD_GObj* gobj) {}
 void ftMh_MS_359_80152BCC(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    Fighter_ChangeMotionState(gobj, ftMh_MS_FingerBeamStart, Ft_MF_None, 0, 1, 0, 0);
+    Fighter_ChangeMotionState(gobj, ftMh_MS_FingerBeamStart, Ft_MF_None, 0, 1,
+                              0, 0);
     ftAnim_8006EBA4(gobj);
     fp->mv.mh.unk0.x28 = -1;
     fp->mv.mh.unk0.x2C = -1;
@@ -51,7 +52,8 @@ void ftMh_FingerBeamStart_Coll(HSD_GObj* gobj) {}
 void ftMh_MS_361_80152CD8(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    Fighter_ChangeMotionState(gobj, ftMh_MS_FingerBeamLoop, Ft_MF_None, 0, 1, 0, 0);
+    Fighter_ChangeMotionState(gobj, ftMh_MS_FingerBeamLoop, Ft_MF_None, 0, 1,
+                              0, 0);
     ftAnim_8006EBA4(gobj);
     fp->accessory4_cb = ftMh_MS_362_80152E28;
     fp->cmd_vars[0] = 1;
@@ -126,7 +128,8 @@ void ftMh_MS_362_80152E28(HSD_GObj* gobj)
 static void ftMh_MS_362_80152F80(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    Fighter_ChangeMotionState(gobj, ftMh_MS_FingerBeamEnd, Ft_MF_None, 0, 1, 0, 0);
+    Fighter_ChangeMotionState(gobj, ftMh_MS_FingerBeamEnd, Ft_MF_None, 0, 1, 0,
+                              0);
     ftAnim_8006EBA4(gobj);
     lbAudioAx_800236B8(fp->mv.mh.unk0.x28);
     lbAudioAx_800236B8(fp->mv.mh.unk0.x2C);

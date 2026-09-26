@@ -1,14 +1,14 @@
-#include <melee/ft/kinds/ftSamus/ftsamus.h>
+#include "ftsamus.h"
 
 #include <melee/ft/kinds/ftCommon/forward.h>
 
-#include <melee/ft/kinds/ftSamus/forward.h>
-#include <melee/ft/kinds/ftSamus/ftsamusspecialhi.h>
-#include <melee/ft/kinds/ftSamus/ftsamusspeciallw0.h>
-#include <melee/ft/kinds/ftSamus/ftsamusspeciallw1.h>
-#include <melee/ft/kinds/ftSamus/ftsamusspecialn.h>
-#include <melee/ft/kinds/ftSamus/ftsamusspecials.h>
-#include <melee/ft/kinds/ftSamus/types.h>
+#include "forward.h"
+#include "ftsamusspecialhi.h"
+#include "ftsamusspeciallw0.h"
+#include "ftsamusspeciallw1.h"
+#include "ftsamusspecialn.h"
+#include "ftsamusspecials.h"
+#include "types.h"
 #include <dolphin/mtx.h>
 #include <melee/ft/ft_081B.h>
 #include <melee/ft/ftcamera.h>

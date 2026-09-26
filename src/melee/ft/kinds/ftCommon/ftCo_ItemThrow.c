@@ -1,4 +1,4 @@
-#include <melee/ft/kinds/ftCommon/ftCo_ItemThrow.h>
+#include "ftCo_ItemThrow.h"
 
 #include <Runtime/platform.h>
 
@@ -8,11 +8,11 @@
 #include <math.h>
 #include <placeholder.h>
 
-#include <melee/ft/kinds/ftCommon/forward.h>
-#include <melee/ft/kinds/ftCommon/ftCo_Fall.h>
-#include <melee/ft/kinds/ftCommon/ftCo_FallSpecial.h>
-#include <melee/ft/kinds/ftCommon/ftCo_Lift.h>
-#include <melee/ft/kinds/ftCommon/types.h>
+#include "forward.h"
+#include "ftCo_Fall.h"
+#include "ftCo_FallSpecial.h"
+#include "ftCo_Lift.h"
+#include "types.h"
 #include <melee/ft/fighter.h>
 #include <melee/ft/ft_081B.h>
 #include <melee/ft/ft_084E.h>
@@ -361,8 +361,8 @@ void ftCo_800958FC(HSD_GObj* gobj, FtMotionId msid)
         temp_r4->mv.co.itemthrow.facing_dir = temp_r4->facing_dir;
         break;
     }
-    Fighter_ChangeMotionState(gobj, msid, Ft_MF_None, 0.0F, base_throw_speed, 0.0F,
-                              NULL);
+    Fighter_ChangeMotionState(gobj, msid, Ft_MF_None, 0.0F, base_throw_speed,
+                              0.0F, NULL);
     ftAnim_8006EBA4(gobj);
 
     fp->accessory4_cb = ftCo_80095EFC;

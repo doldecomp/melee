@@ -1,6 +1,7 @@
 #include "debug.h"
 
 #include <stdio.h>
+
 #include <dolphin/os.h>
 
 struct DebugContext {
@@ -17,7 +18,7 @@ static __io_proc logFunc;
 #endif
 
 static int report_func(__file_handle arg0, unsigned char* arg1, size_t* arg2,
-                        __idle_proc arg3)
+                       __idle_proc arg3)
 {
     if (reportCallback != NULL) {
         reportCallback(arg1, *arg2);

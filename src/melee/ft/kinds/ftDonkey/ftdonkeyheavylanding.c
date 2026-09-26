@@ -1,12 +1,12 @@
-#include <melee/ft/kinds/ftDonkey/ftdonkeyheavylanding.h>
+#include "ftdonkeyheavylanding.h"
 
 #include <Runtime/platform.h>
 
 #include <melee/ft/forward.h>
 
-#include <melee/ft/kinds/ftDonkey/ftdonkeyheavyturn.h>
-#include <melee/ft/kinds/ftDonkey/ftdonkeyheavywait0.h>
-#include <melee/ft/kinds/ftDonkey/types.h>
+#include "ftdonkeyheavyturn.h"
+#include "ftdonkeyheavywait0.h"
+#include "types.h"
 #include <dolphin/mtx.h>
 #include <melee/ft/ft_081B.h>
 #include <melee/ft/ft_084E.h>

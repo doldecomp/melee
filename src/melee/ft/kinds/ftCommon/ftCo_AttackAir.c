@@ -1,16 +1,16 @@
-#include <melee/ft/kinds/ftCommon/ftCo_AttackAir.h>
+#include "ftCo_AttackAir.h"
 
 #include <Runtime/platform.h>
 
 #include <melee/ft/forward.h>
 
-#include <melee/ft/kinds/ftCommon/forward.h>
-#include <melee/ft/kinds/ftCommon/ftCo_AirCatch.h>
-#include <melee/ft/kinds/ftCommon/ftCo_Attack100.h>
-#include <melee/ft/kinds/ftCommon/ftCo_Fall.h>
-#include <melee/ft/kinds/ftCommon/ftCo_ItemThrow.h>
-#include <melee/ft/kinds/ftCommon/ftCo_JumpAerial.h>
-#include <melee/ft/kinds/ftCommon/ftCo_LandingAir.h>
+#include "forward.h"
+#include "ftCo_AirCatch.h"
+#include "ftCo_Attack100.h"
+#include "ftCo_Fall.h"
+#include "ftCo_ItemThrow.h"
+#include "ftCo_JumpAerial.h"
+#include "ftCo_LandingAir.h"
 #include <dolphin/mtx.h>
 #include <melee/ft/fighter.h>
 #include <melee/ft/ft_081B.h>

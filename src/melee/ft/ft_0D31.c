@@ -1,18 +1,18 @@
-#include <melee/ft/ft_0D31.h>
+#include "ft_0D31.h"
 
-#include <melee/ft/fighter.h>
-#include <melee/ft/ft_0877.h>
-#include <melee/ft/ft_0881.h>
-#include <melee/ft/ft_0C88.h>
-#include <melee/ft/ft_0D4D.h>
-#include <melee/ft/ftcamera.h>
-#include <melee/ft/ftcolanim.h>
-#include <melee/ft/ftcommon.h>
-#include <melee/ft/ftlib.h>
-#include <melee/ft/ftmetal.h>
-#include <melee/ft/ftparts.h>
-#include <melee/ft/kinds/ftCommon/ftCo_DamageIce.h>
-#include <melee/ft/kinds/ftCommon/ftCo_Throw.h>
+#include "fighter.h"
+#include "ft_0877.h"
+#include "ft_0881.h"
+#include "ft_0C88.h"
+#include "ft_0D4D.h"
+#include "ftcamera.h"
+#include "ftcolanim.h"
+#include "ftcommon.h"
+#include "ftlib.h"
+#include "ftmetal.h"
+#include "ftparts.h"
+#include "kinds/ftCommon/ftCo_DamageIce.h"
+#include "kinds/ftCommon/ftCo_Throw.h"
 #include <melee/cm/camera.h>
 #include <melee/ef/efasync.h>
 #include <melee/ef/efsync.h>
@@ -389,8 +389,8 @@ void ftCo_800D40B8(Fighter_GObj* gobj)
     ftCo_800D331C(gobj);
     fp->mv.co.unk_deadup.x40 = *temp_r31;
     fp->mv.co.unk_deadup.x44 = 0.0F;
-    Fighter_ChangeMotionState(gobj, ftCo_MS_DeadUpStar, Ft_MF_None, 0.0F, 1.0F, 0.0F,
-                              NULL);
+    Fighter_ChangeMotionState(gobj, ftCo_MS_DeadUpStar, Ft_MF_None, 0.0F, 1.0F,
+                              0.0F, NULL);
     ftCo_800D40B8_inline(gobj);
     ftCommon_8007EFC0(fp, true);
     new_var = fp;
@@ -410,8 +410,8 @@ void ftCo_800D41C4(Fighter_GObj* gobj)
         ftCo_800D331C(gobj);
         fp2->mv.co.unk_deadup.x40 = *temp_r31;
         fp2->mv.co.unk_deadup.x44 = 0;
-        Fighter_ChangeMotionState(gobj, ftCo_MS_DeadUpStarIce, Ft_MF_None, 0.0F, 1.0F,
-                                  0.0F, NULL);
+        Fighter_ChangeMotionState(gobj, ftCo_MS_DeadUpStarIce, Ft_MF_None,
+                                  0.0F, 1.0F, 0.0F, NULL);
         ftCo_800D40B8_inline(gobj);
         ftCommon_8007EFC0(fp2, true);
         new_var = fp2;

@@ -1,11 +1,11 @@
-#include <melee/ft/kinds/ftCommon/ftCo_Barrel.h>
+#include "ftCo_Barrel.h"
 
 #include <melee/ft/forward.h>
 
-#include <melee/ft/kinds/ftCommon/forward.h>
-#include <melee/ft/kinds/ftCommon/ftCo_Damage.h>
-#include <melee/ft/kinds/ftCommon/inlines.h>
-#include <melee/ft/kinds/ftCommon/types.h>
+#include "forward.h"
+#include "ftCo_Damage.h"
+#include "inlines.h"
+#include "types.h"
 #include <melee/ft/fighter.h>
 #include <melee/ft/ftcoll.h>
 #include <melee/ft/ftcommon.h>

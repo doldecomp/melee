@@ -1,4 +1,4 @@
-#include <melee/ft/kinds/ftCrazyHand/ftcrazyhandrockcrush0.h>
+#include "ftcrazyhandrockcrush0.h"
 
 #include <Runtime/platform.h>
 
@@ -6,8 +6,8 @@
 
 #include <placeholder.h>
 
-#include <melee/ft/kinds/ftCrazyHand/ftcrazyhandtagcancel.h>
-#include <melee/ft/kinds/ftCrazyHand/types.h>
+#include "ftcrazyhandtagcancel.h"
+#include "types.h"
 #include <dolphin/mtx.h>
 #include <melee/ft/fighter.h>
 #include <melee/ft/ft_084E.h>
@@ -64,7 +64,8 @@ void ftCh_RockCrushUp_Anim(HSD_GObj* gobj)
 
             {
                 Fighter* fp = GET_FIGHTER(gobj);
-                Fighter_ChangeMotionState(gobj, 0x164, Ft_MF_None, 0, 1.0f, 0.0f, NULL);
+                Fighter_ChangeMotionState(gobj, 0x164, Ft_MF_None, 0, 1.0f,
+                                          0.0f, NULL);
                 ftAnim_8006EBA4(gobj);
                 ft_PlaySFX(fp, 0x4E207, 127, 64);
             }

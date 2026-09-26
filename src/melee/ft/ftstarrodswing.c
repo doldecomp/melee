@@ -1,8 +1,8 @@
-#include <melee/ft/ftstarrodswing.h>
+#include "ftstarrodswing.h"
 
-#include <melee/ft/ft_0877.h>
-#include <melee/ft/ft_0CD1.h>
-#include <melee/ft/inlines.h>
+#include "ft_0877.h"
+#include "ft_0CD1.h"
+#include "inlines.h"
 #include <melee/ef/efasync.h>
 #include <melee/it/kinds/itstarrod.h>
 #include <melee/lb/lb_00B0.h>

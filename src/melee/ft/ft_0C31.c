@@ -1,16 +1,16 @@
-#include <melee/ft/ft_0C31.h>
+#include "ft_0C31.h"
 
 #include <placeholder.h>
 
-#include <melee/ft/fighter.h>
-#include <melee/ft/forward.h>
-#include <melee/ft/ft_081B.h>
-#include <melee/ft/ftcolanim.h>
-#include <melee/ft/ftcoll.h>
-#include <melee/ft/ftcommon.h>
-#include <melee/ft/kinds/ftMasterHand/forward.h>
-#include <melee/ft/kinds/ftMasterHand/types.h>
-#include <melee/ft/types.h>
+#include "fighter.h"
+#include "forward.h"
+#include "ft_081B.h"
+#include "ftcolanim.h"
+#include "ftcoll.h"
+#include "ftcommon.h"
+#include "kinds/ftMasterHand/forward.h"
+#include "kinds/ftMasterHand/types.h"
+#include "types.h"
 #include <dolphin/mtx.h>
 #include <melee/ef/efasync.h>
 #include <melee/lb/lbaudio_ax.h>
@@ -38,7 +38,8 @@ void ftCo_800C61B0(Fighter_GObj* gobj)
     HSD_JObjSetScale(jobj, &fp->mv.co.entry.x14);
 
     fp->mv.co.common.x4.x = fp->cur_pos.y;
-    Fighter_ChangeMotionState(gobj, ftCo_MS_Entry, Ft_MF_None, 0.0F, 1.0F, 0.0F, NULL);
+    Fighter_ChangeMotionState(gobj, ftCo_MS_Entry, Ft_MF_None, 0.0F, 1.0F,
+                              0.0F, NULL);
     fp->invisible = true;
     fp->x2219_b1 = true;
     fp->x221E_b1 = true;
@@ -94,8 +95,8 @@ void ftCo_800C6408(Fighter_GObj* gobj)
 
     temp_r31 = GET_FIGHTER(gobj);
     temp_r31->mv.co.entry.timer = p_ftCommonData->x6BC;
-    Fighter_ChangeMotionState(gobj, ftCo_MS_EntryStart, Ft_MF_None, 0.0F, 1.0F, 0.0F,
-                              NULL);
+    Fighter_ChangeMotionState(gobj, ftCo_MS_EntryStart, Ft_MF_None, 0.0F, 1.0F,
+                              0.0F, NULL);
     temp_r31->x2219_b1 = true;
     if (!temp_r31->is_sub_fighter) {
         ftCommon_SetAccessory(temp_r31, Fighter_804D6514);

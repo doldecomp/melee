@@ -1,12 +1,12 @@
-#include <melee/ft/kinds/ftKirby/ftkirbyyoshiegg.h>
+#include "ftkirbyyoshiegg.h"
 
 #include <melee/ft/forward.h>
 
 #include <placeholder.h>
 #include <stddef.h>
 
-#include <melee/ft/kinds/ftKirby/ftkirbyspecialdonkey.h>
-#include <melee/ft/kinds/ftKirby/types.h>
+#include "ftkirbyspecialdonkey.h"
+#include "types.h"
 #include <melee/ef/efasync.h>
 #include <melee/ft/fighter.h>
 #include <melee/ft/ft_081B.h>

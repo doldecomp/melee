@@ -1,7 +1,7 @@
-#include <pl/plstale.h>
+#include "plstale.h"
 
-#include <pl/player.h>
-#include <pl/types.h>
+#include "player.h"
+#include "types.h"
 #include <melee/ft/ftlib.h>
 #include <melee/ft/inlines.h>
 #include <melee/ft/types.h>

@@ -1,8 +1,8 @@
-#include <melee/it/ithitbox.h>
+#include "ithitbox.h"
 
-#include <melee/it/inlines.h>
-#include <melee/it/it_2725.h>
-#include <melee/it/itcoll.h>
+#include "inlines.h"
+#include "it_2725.h"
+#include "itcoll.h"
 
 void it_802753DC(Item_GObj* item_gobj)
 {

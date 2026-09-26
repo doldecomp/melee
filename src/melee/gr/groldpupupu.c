@@ -1,15 +1,15 @@
-#include <gr/groldpupupu.h>
+#include "groldpupupu.h"
 
 #include <sysdolphin/baselib/forward.h>
 
 #include <placeholder.h>
 
-#include <gr/forward.h>
-#include <gr/granime.h>
-#include <gr/grmaterial.h>
-#include <gr/ground.h>
-#include <gr/grzakogenerator.h>
-#include <gr/inlines.h>
+#include "forward.h"
+#include "granime.h"
+#include "grmaterial.h"
+#include "ground.h"
+#include "grzakogenerator.h"
+#include "inlines.h"
 #include <melee/cm/camera.h>
 #include <melee/ft/ftdevice.h>
 #include <melee/ft/ftlib.h>

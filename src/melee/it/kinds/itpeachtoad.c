@@ -1,9 +1,9 @@
-#include <melee/it/kinds/itpeachtoad.h>
+#include "itpeachtoad.h"
 
 #include <melee/it/forward.h>
 #include <sysdolphin/baselib/forward.h>
 
-#include <melee/it/kinds/inlines.h>
+#include "inlines.h"
 #include <melee/ft/kinds/ftKirby/ftkirbyspecialpeach.h>
 #include <melee/ft/kinds/ftPeach/ftpeachspecialn.h>
 #include <melee/it/inlines.h>

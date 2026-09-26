@@ -1,6 +1,6 @@
 #include <stdarg.h>
 
-#include <melee/db/db.h>
+#include "db.h"
 #include <dolphin/base/PPCArch.h>
 #include <dolphin/db.h>
 #include <dolphin/os.h>

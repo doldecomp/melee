@@ -1,4 +1,4 @@
-#include <melee/ft/kinds/ftCommon/ftCo_Attack100.h>
+#include "ftCo_Attack100.h"
 #include <melee/ft/fighter.h>
 #include <melee/ft/ft_081B.h>
 #include <melee/ft/ft_0CDD.h>
@@ -24,7 +24,8 @@ void fn_800D874C(Fighter_GObj* gobj)
     msid = fn_800D769C(fp, ftCo_MS_ItemScopeAirEnd);
     zero = 0.0F;
     temp_gobj = gobj;
-    Fighter_ChangeMotionState(temp_gobj, msid, Ft_MF_None, 0.0F, 1.0F, zero, NULL);
+    Fighter_ChangeMotionState(temp_gobj, msid, Ft_MF_None, 0.0F, 1.0F, zero,
+                              NULL);
     ftCommon_ClampAirDrift(fp);
     fp->take_dmg_cb = fn_800D8378;
 }

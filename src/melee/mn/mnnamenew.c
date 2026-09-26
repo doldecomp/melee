@@ -1,10 +1,10 @@
-#include <melee/mn/mnnamenew.h>
+#include "mnnamenew.h"
 
-#include <melee/mn/inlines.h>
-#include <melee/mn/mncharsel.h>
-#include <melee/mn/mnmain.h>
-#include <melee/mn/mnname.h>
-#include <melee/mn/types.h>
+#include "inlines.h"
+#include "mncharsel.h"
+#include "mnmain.h"
+#include "mnname.h"
+#include "types.h"
 #include <dolphin/gx/GXStruct.h>
 #include <melee/gm/gm_1A3F.h>
 #include <melee/gm/gmmain_lib.h>

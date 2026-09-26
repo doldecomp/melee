@@ -1,13 +1,12 @@
 /// @file
 /// @brief Creates trailing "afterimages" for swords in motion
 
-#include <melee/ft/ftafterimage.h>
+#include "ftafterimage.h"
 
 #include <placeholder.h>
 
-#include <melee/ft/inlines.h>
-#include <melee/ft/kinds/ftMasterHand/types.h>
-#include <melee/ft/kinds/ftMasterHand/types.h>
+#include "inlines.h"
+#include "kinds/ftMasterHand/types.h"
 #include <dolphin/gx.h>
 #include <dolphin/mtx.h>
 #include <melee/it/it_26B1.h>

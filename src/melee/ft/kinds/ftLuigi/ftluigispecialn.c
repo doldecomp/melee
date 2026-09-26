@@ -1,11 +1,11 @@
-#include <melee/ft/kinds/ftLuigi/ftluigispecialn.h>
+#include "ftluigispecialn.h"
 
 #include <Runtime/platform.h>
 
 #include <melee/ft/forward.h>
 #include <melee/it/forward.h>
 
-#include <melee/ft/kinds/ftLuigi/forward.h>
+#include "forward.h"
 #include <dolphin/mtx.h>
 #include <melee/ef/efsync.h>
 #include <melee/ft/fighter.h>
@@ -30,8 +30,8 @@ void ftLg_SpecialN_Enter(HSD_GObj* gobj)
 
     fp->cmd_vars[0] = 0;
     fp->throw_flags = 0;
-    Fighter_ChangeMotionState(gobj, ftLg_MS_SpecialN, Ft_MF_None, 0.0f, 1.0f, 0.0f,
-                              NULL);
+    Fighter_ChangeMotionState(gobj, ftLg_MS_SpecialN, Ft_MF_None, 0.0f, 1.0f,
+                              0.0f, NULL);
     ftAnim_8006EBA4(gobj);
     fp->accessory4_cb = &ftLg_SpecialN_FireSpawn;
 }
@@ -43,8 +43,8 @@ void ftLg_SpecialAirN_Enter(HSD_GObj* gobj)
 
     fp->cmd_vars[0] = 0;
     fp->throw_flags = 0;
-    Fighter_ChangeMotionState(gobj, ftLg_MS_SpecialAirN, Ft_MF_None, 0.0f, 1.0f, 0.0f,
-                              NULL);
+    Fighter_ChangeMotionState(gobj, ftLg_MS_SpecialAirN, Ft_MF_None, 0.0f,
+                              1.0f, 0.0f, NULL);
     ftAnim_8006EBA4(gobj);
     fp->accessory4_cb = &ftLg_SpecialN_FireSpawn;
 }

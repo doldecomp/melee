@@ -1,14 +1,14 @@
-#include <melee/gm/gmcameramode.h>
+#include "gmcameramode.h"
 
 #include <melee/lb/forward.h>
 
-#include <melee/gm/gm_1A3F.h>
-#include <melee/gm/gm_1B03.h>
-#include <melee/gm/gm_unsplit.h>
-#include <melee/gm/gmcamera.h>
-#include <melee/gm/gmmain_lib.h>
-#include <melee/gm/gmvsmelee.h>
-#include <melee/gm/types.h>
+#include "gm_1A3F.h"
+#include "gm_1B03.h"
+#include "gm_unsplit.h"
+#include "gmcamera.h"
+#include "gmmain_lib.h"
+#include "gmvsmelee.h"
+#include "types.h"
 #include <dolphin/os.h>
 #include <melee/lb/lbaudio_ax.h>
 #include <melee/lb/lbcardnew.h>

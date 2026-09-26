@@ -1,11 +1,11 @@
-#include <melee/it/kinds/it_2F28.h>
+#include "it_2F28.h"
 
 #include <melee/it/forward.h>
 
 #include <math.h>
 
-#include <melee/it/kinds/inlines.h>
-#include <melee/it/kinds/types.h>
+#include "inlines.h"
+#include "types.h"
 #include <melee/it/inlines.h>
 #include <melee/it/it_26B1.h>
 #include <melee/it/it_2725.h>

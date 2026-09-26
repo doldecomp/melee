@@ -1,9 +1,9 @@
-#include <melee/gm/gmmenu.h>
+#include "gmmenu.h"
 
-#include <melee/gm/gm_18A1.h>
-#include <melee/gm/gm_unsplit.h>
-#include <melee/gm/gmevent.h>
-#include <melee/gm/types.h>
+#include "gm_18A1.h"
+#include "gm_unsplit.h"
+#include "gmevent.h"
+#include "types.h"
 #include <dolphin/types.h>
 
 void gm_Mode_ClassicGOver_OnLoad(void)

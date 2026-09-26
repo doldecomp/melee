@@ -1,6 +1,6 @@
-#include <melee/it/kinds/itclinkmilk.h>
+#include "itclinkmilk.h"
 
-#include <melee/it/kinds/inlines.h>
+#include "inlines.h"
 #include <melee/ft/ftlib.h>
 #include <melee/ft/kinds/ftCLink/ftclink.h>
 #include <melee/it/inlines.h>

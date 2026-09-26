@@ -1,8 +1,8 @@
-#include <melee/it/kinds/ithitodeman.h>
+#include "ithitodeman.h"
 
 #include <math.h>
 
-#include <melee/it/kinds/inlines.h>
+#include "inlines.h"
 #include <melee/ef/efsync.h>
 #include <melee/ft/ftlib.h>
 #include <melee/it/inlines.h>

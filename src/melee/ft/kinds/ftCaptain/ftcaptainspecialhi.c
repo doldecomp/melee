@@ -1,4 +1,4 @@
-#include <melee/ft/kinds/ftCaptain/ftcaptainspecialhi.h>
+#include "ftcaptainspecialhi.h"
 
 #include <Runtime/platform.h>
 
@@ -6,7 +6,7 @@
 
 #include <math.h>
 
-#include <melee/ft/kinds/ftCaptain/types.h>
+#include "types.h"
 #include <dolphin/mtx.h>
 #include <melee/ft/fighter.h>
 #include <melee/ft/ft_081B.h>
@@ -205,7 +205,8 @@ void ftCa_SpecialLw_800E5128(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     Fighter* vic_fp = GET_FIGHTER(fp->victim_gobj);
-    Fighter_ChangeMotionState(gobj, ftCa_MS_SpecialHiCatch, Ft_MF_KeepGfx, 0, 1, 0, NULL);
+    Fighter_ChangeMotionState(gobj, ftCa_MS_SpecialHiCatch, Ft_MF_KeepGfx, 0,
+                              1, 0, NULL);
     fp->x2222_b2 = true;
     ftCommon_8007E2F4(fp, 511);
     ftCommon_8007E2FC(gobj);

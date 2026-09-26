@@ -1,14 +1,14 @@
-#include <gr/grvenom.h>
+#include "grvenom.h"
 
 #include <Runtime/platform.h>
 
-#include <gr/grcorneria.h>
-#include <gr/grdisplay.h>
-#include <gr/grmaterial.h>
-#include <gr/grzakogenerator.h>
-#include <gr/inlines.h>
-#include <gr/stage.h>
-#include <gr/types.h>
+#include "grcorneria.h"
+#include "grdisplay.h"
+#include "grmaterial.h"
+#include "grzakogenerator.h"
+#include "inlines.h"
+#include "stage.h"
+#include "types.h"
 #include <melee/if/ifcoget.h>
 #include <melee/if/ifstatus.h>
 #include <melee/it/kinds/itarwinglaser.h>

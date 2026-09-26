@@ -1,7 +1,7 @@
-#include <mn/mnmainrule.h>
+#include "mnmainrule.h"
 
-#include <mn/inlines.h>
-#include <mn/mnmain.h>
+#include "inlines.h"
+#include "mnmain.h"
 #include <melee/gm/gm_1A36.h>
 #include <melee/gm/gm_1A3F.h>
 #include <melee/gm/gmmain_lib.h>

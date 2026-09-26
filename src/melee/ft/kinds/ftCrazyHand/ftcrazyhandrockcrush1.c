@@ -1,11 +1,11 @@
-#include <melee/ft/kinds/ftCrazyHand/ftcrazyhandrockcrush1.h>
+#include "ftcrazyhandrockcrush1.h"
 
 #include <Runtime/platform.h>
 
 #include <sysdolphin/baselib/forward.h>
 
-#include <melee/ft/kinds/ftCrazyHand/ftcrazyhandtagcancel.h>
-#include <melee/ft/kinds/ftCrazyHand/types.h>
+#include "ftcrazyhandtagcancel.h"
+#include "types.h"
 #include <dolphin/mtx.h>
 #include <melee/ft/fighter.h>
 #include <melee/ft/ft_084E.h>
@@ -21,8 +21,8 @@ void fn_80158144(HSD_GObj* gobj)
 
     u8 _[8];
 
-    Fighter_ChangeMotionState(gobj, ftMh_MS_RockCrushDown, Ft_MF_None, 0, 1.0f, 0.0f,
-                              NULL);
+    Fighter_ChangeMotionState(gobj, ftMh_MS_RockCrushDown, Ft_MF_None, 0, 1.0f,
+                              0.0f, NULL);
     ftAnim_8006EBA4(gobj);
     fp->mv.ch.unk0.x0 = 107;
 }

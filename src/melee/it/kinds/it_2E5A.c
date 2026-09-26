@@ -1,10 +1,10 @@
-#include <melee/it/kinds/it_2E5A.h>
+#include "it_2E5A.h"
 
 #include <melee/it/forward.h>
 
 #include <math.h>
 
-#include <melee/it/kinds/types.h>
+#include "types.h"
 #include <melee/db/db.h>
 #include <melee/gm/gm_unsplit.h>
 #include <melee/it/inlines.h>

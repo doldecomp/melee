@@ -1,4 +1,4 @@
-#include <vi/vi.h>
+#include "vi.h"
 
 #include <dolphin/pad.h>
 #include <melee/cm/camera.h>

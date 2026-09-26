@@ -1,7 +1,7 @@
-#include <melee/it/itmaterial.h>
+#include "itmaterial.h"
 
-#include <melee/it/forward.h>
-#include <melee/it/inlines.h>
+#include "forward.h"
+#include "inlines.h"
 #include <melee/ft/ftdevice.h>
 #include <melee/lb/lb_00B0.h>
 #include <sysdolphin/baselib/class.h>
