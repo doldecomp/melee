@@ -86,7 +86,8 @@ void ftMt_SpecialHiStart_Enter(HSD_GObj* gobj)
         fp1->self_vel.x = 0;
     }
 
-    Fighter_ChangeMotionState(gobj, ftMt_MS_SpecialHiStart, Ft_MF_None, 0, 1, 0, NULL);
+    Fighter_ChangeMotionState(gobj, ftMt_MS_SpecialHiStart, Ft_MF_None, 0, 1,
+                              0, NULL);
     ftAnim_8006EBA4(gobj);
 
     fp0->cmd_vars[0] = 0;
@@ -105,8 +106,8 @@ void ftMt_SpecialAirHiStart_Enter(HSD_GObj* gobj)
     fp->self_vel.x /= mewtwoAttrs->x40_MEWTWO_TELEPORT_VEL_DIV_X;
     fp->self_vel.y /= mewtwoAttrs->x44_MEWTWO_TELEPORT_VEL_DIV_Y;
 
-    Fighter_ChangeMotionState(gobj, ftMt_MS_SpecialAirHiStart, Ft_MF_None, 0, 1, 0,
-                              NULL);
+    Fighter_ChangeMotionState(gobj, ftMt_MS_SpecialAirHiStart, Ft_MF_None, 0,
+                              1, 0, NULL);
     ftAnim_8006EBA4(gobj);
 
     fp->cmd_vars[0] = 0;
@@ -434,8 +435,8 @@ void ftMt_SpecialHi_Enter(HSD_GObj* gobj)
                   mewtwoAttrs->x60_MEWTWO_TELEPORT_MOMENTUM_ADD) *
                  cosf(vel));
 
-            Fighter_ChangeMotionState(gobj, ftMt_MS_SpecialHiLost, Ft_MF_None, 35, 1, 0,
-                                      NULL);
+            Fighter_ChangeMotionState(gobj, ftMt_MS_SpecialHiLost, Ft_MF_None,
+                                      35, 1, 0, NULL);
 
             ftAnim_8006EBA4(gobj);
 
@@ -509,8 +510,8 @@ void ftMt_SpecialAirHi_Enter(HSD_GObj* gobj)
                       mewtwoAttrs->x60_MEWTWO_TELEPORT_MOMENTUM_ADD) *
                      sinf(floatVar);
 
-    Fighter_ChangeMotionState(gobj, ftMt_MS_SpecialAirHiLost, Ft_MF_None, 35, 1, 0,
-                              NULL);
+    Fighter_ChangeMotionState(gobj, ftMt_MS_SpecialAirHiLost, Ft_MF_None, 35,
+                              1, 0, NULL);
 
     ftAnim_8006EBA4(gobj);
 
@@ -623,7 +624,8 @@ void ftMt_SpecialHiLost_Enter(HSD_GObj* gobj)
     Fighter* fp = getFighter(gobj);
     ftMewtwoAttributes* mewtwoAttrs = getFtSpecialAttrsD(fp);
 
-    Fighter_ChangeMotionState(gobj, ftMt_MS_SpecialHi, Ft_MF_None, 0, 1, 0, NULL);
+    Fighter_ChangeMotionState(gobj, ftMt_MS_SpecialHi, Ft_MF_None, 0, 1, 0,
+                              NULL);
     ftAnim_8006EBA4(gobj);
 
     ftMewtwo_SpecialHiLost_SetVars(gobj);
@@ -638,7 +640,8 @@ void ftMt_SpecialAirHiLost_Enter(HSD_GObj* gobj)
     Fighter* fp = getFighter(gobj);
     ftMewtwoAttributes* mewtwoAttrs = getFtSpecialAttrsD(fp);
 
-    Fighter_ChangeMotionState(gobj, ftMt_MS_SpecialAirHi, Ft_MF_None, 0, 1, 0, NULL);
+    Fighter_ChangeMotionState(gobj, ftMt_MS_SpecialAirHi, Ft_MF_None, 0, 1, 0,
+                              NULL);
     ftAnim_8006EBA4(gobj);
 
     ftMewtwo_SpecialHiLost_SetVars(gobj);

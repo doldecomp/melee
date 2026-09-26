@@ -220,7 +220,8 @@ void ftPk_SpecialLwStart_Anim(HSD_GObj* gobj)
     if (!ftAnim_IsFramesRemaining(gobj)) {
         Fighter* fighter_copy;
         Fighter* fp = GET_FIGHTER(gobj);
-        Fighter_ChangeMotionState(gobj, 360, Ft_MF_SkipRumble, 0.0f, 1.0f, 0.0f, 0);
+        Fighter_ChangeMotionState(gobj, 360, Ft_MF_SkipRumble, 0.0f, 1.0f,
+                                  0.0f, 0);
         fighter_copy = GET_FIGHTER(gobj);
         fighter_copy->throw_flags = 0;
         fighter_copy->take_dmg_cb = &ftPk_SpecialLw_SetState_Unk1;
@@ -235,7 +236,8 @@ void ftPk_SpecialAirLwStart_Anim(HSD_GObj* gobj)
     if (!ftAnim_IsFramesRemaining(gobj)) {
         Fighter* fighter_copy;
         Fighter* fp = GET_FIGHTER(gobj);
-        Fighter_ChangeMotionState(gobj, 364, Ft_MF_SkipRumble, 0.0f, 1.0f, 0.0f, 0);
+        Fighter_ChangeMotionState(gobj, 364, Ft_MF_SkipRumble, 0.0f, 1.0f,
+                                  0.0f, 0);
         fighter_copy = GET_FIGHTER(gobj);
         fighter_copy->throw_flags = 0;
         fighter_copy->take_dmg_cb = &ftPk_SpecialLw_SetState_Unk1;

@@ -250,7 +250,7 @@ void ftSk_SpecialLw_80114758(Fighter_GObj* gobj)
     } else {
         var_r4 = 0x16C;
     }
-    Fighter_ChangeMotionState(gobj, var_r4, Ft_MF_None, attributes->x70, 1.0F, 0.0F,
-                              NULL);
+    Fighter_ChangeMotionState(gobj, var_r4, Ft_MF_None, attributes->x70, 1.0F,
+                              0.0F, NULL);
     fp->accessory4_cb = fn_801140B0;
 }

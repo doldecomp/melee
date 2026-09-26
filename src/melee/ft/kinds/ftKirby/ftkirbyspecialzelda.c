@@ -68,8 +68,8 @@ void ftKb_SpecialNZd_80105B2C(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     PAD_STACK(8);
-    Fighter_ChangeMotionState(gobj, ftKb_MS_ZdSpecialN, Ft_MF_None, 0.0f, 1.0f, 0.0f,
-                              NULL);
+    Fighter_ChangeMotionState(gobj, ftKb_MS_ZdSpecialN, Ft_MF_None, 0.0f, 1.0f,
+                              0.0f, NULL);
     ftAnim_8006EBA4(gobj);
     ftKb_SpecialNZd_Helper(gobj);
     fp->accessory4_cb = fn_80105A34;
@@ -85,8 +85,8 @@ void ftKb_SpecialNZd_80105BA8(Fighter_GObj* gobj)
     fp->self_vel.x =
         fp->self_vel.x / da->specialn_zd_horizontal_momentum_preservation;
 
-    Fighter_ChangeMotionState(gobj, ftKb_MS_ZdSpecialAirN, Ft_MF_None, 0.0f, 1.0f, 0.0f,
-                              NULL);
+    Fighter_ChangeMotionState(gobj, ftKb_MS_ZdSpecialAirN, Ft_MF_None, 0.0f,
+                              1.0f, 0.0f, NULL);
     ftAnim_8006EBA4(gobj);
 
     ftKb_SpecialNZd_Helper(gobj);

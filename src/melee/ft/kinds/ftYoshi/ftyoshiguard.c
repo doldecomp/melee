@@ -90,8 +90,8 @@ static void ftYs_Init_8012BECC_sub(HSD_GObj* gobj)
 void ftYs_Init_8012BECC(Fighter_GObj* gobj)
 {
     PAD_STACK(8);
-    Fighter_ChangeMotionState(gobj, ftYs_MS_GuardOn_0, Ft_MF_None, 0.0f, 1.0f, 0.0f,
-                              NULL);
+    Fighter_ChangeMotionState(gobj, ftYs_MS_GuardOn_0, Ft_MF_None, 0.0f, 1.0f,
+                              0.0f, NULL);
     ftAnim_8006EBA4(gobj);
     ftCo_80092450(gobj);
     ftYs_Init_8012BECC_sub(gobj);
@@ -314,8 +314,8 @@ void ftYs_GuardDamage_Coll(Fighter_GObj* gobj)
 void ftYs_Shield_8012C850(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    Fighter_ChangeMotionState(gobj, ftYs_MS_GuardOn_1, Ft_MF_SkipModel, fp->cur_anim_frame,
-                              1, 0, NULL);
+    Fighter_ChangeMotionState(gobj, ftYs_MS_GuardOn_1, Ft_MF_SkipModel,
+                              fp->cur_anim_frame, 1, 0, NULL);
     fp->active_timer.trigger = 254;
     fp->x221A_b7 = false;
     fp->x221B_b0 = false;
@@ -350,8 +350,8 @@ static inline void ftYs_Shield_8012C914_inline(Fighter_GObj* gobj)
 void ftYs_Shield_8012C914(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    Fighter_ChangeMotionState(gobj, ftYs_MS_GuardOn_1, Ft_MF_None, 0.0F, 1.0F, 0.0F,
-                              NULL);
+    Fighter_ChangeMotionState(gobj, ftYs_MS_GuardOn_1, Ft_MF_None, 0.0F, 1.0F,
+                              0.0F, NULL);
     ftAnim_8006EBA4(gobj);
     fp->active_timer.trigger = 254;
     fp->x221C_b3 = true;

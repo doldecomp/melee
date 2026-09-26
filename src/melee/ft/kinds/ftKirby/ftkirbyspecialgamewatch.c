@@ -172,8 +172,8 @@ void ftKb_SpecialNGw_8010D188(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     fp->self_vel.y = 0.0F;
-    Fighter_ChangeMotionState(gobj, ftKb_MS_GwSpecialN, Ft_MF_None, 0.0F, 1.0F, 0.0F,
-                              NULL);
+    Fighter_ChangeMotionState(gobj, ftKb_MS_GwSpecialN, Ft_MF_None, 0.0F, 1.0F,
+                              0.0F, NULL);
     ftAnim_8006EBA4(gobj);
     setGwVars(gobj);
 }
@@ -182,7 +182,8 @@ void ftKb_SpecialNGw_8010D204(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     fp->self_vel.y = 0;
-    Fighter_ChangeMotionState(gobj, ftKb_MS_GwSpecialAirN, Ft_MF_None, 0, 1, 0, NULL);
+    Fighter_ChangeMotionState(gobj, ftKb_MS_GwSpecialAirN, Ft_MF_None, 0, 1, 0,
+                              NULL);
     ftAnim_8006EBA4(gobj);
     setGwVars(gobj);
 }

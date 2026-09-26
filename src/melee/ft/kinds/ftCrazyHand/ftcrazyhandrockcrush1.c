@@ -21,8 +21,8 @@ void fn_80158144(HSD_GObj* gobj)
 
     u8 _[8];
 
-    Fighter_ChangeMotionState(gobj, ftMh_MS_RockCrushDown, Ft_MF_None, 0, 1.0f, 0.0f,
-                              NULL);
+    Fighter_ChangeMotionState(gobj, ftMh_MS_RockCrushDown, Ft_MF_None, 0, 1.0f,
+                              0.0f, NULL);
     ftAnim_8006EBA4(gobj);
     fp->mv.ch.unk0.x0 = 107;
 }

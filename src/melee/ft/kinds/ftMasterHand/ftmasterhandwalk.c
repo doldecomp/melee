@@ -126,7 +126,8 @@ void ftMh_WalkLoop_Anim(HSD_GObj* gobj)
     }
 
     if (!ftAnim_IsFramesRemaining(gobj)) {
-        Fighter_ChangeMotionState(gobj, ftMh_MS_WalkLoop, Ft_MF_None, 0, 1, 0, 0);
+        Fighter_ChangeMotionState(gobj, ftMh_MS_WalkLoop, Ft_MF_None, 0, 1, 0,
+                                  0);
         ftAnim_8006EBA4(gobj);
     }
 }

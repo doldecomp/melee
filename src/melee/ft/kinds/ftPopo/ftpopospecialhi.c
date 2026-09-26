@@ -656,15 +656,15 @@ void ftPp_SpecialHi_80122038(Fighter_GObj* gobj)
 void ftPp_SpecialHi_80122098(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    Fighter_ChangeMotionState(gobj, 0x15E, Ft_MF_None, fp->cur_anim_frame, 1.0f, 0.0f,
-                              NULL);
+    Fighter_ChangeMotionState(gobj, 0x15E, Ft_MF_None, fp->cur_anim_frame,
+                              1.0f, 0.0f, NULL);
 }
 
 void ftPp_SpecialHi_801220D4(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    Fighter_ChangeMotionState(gobj, 0x163, Ft_MF_None, fp->cur_anim_frame, 1.0f, 0.0f,
-                              NULL);
+    Fighter_ChangeMotionState(gobj, 0x163, Ft_MF_None, fp->cur_anim_frame,
+                              1.0f, 0.0f, NULL);
 }
 
 void ftPp_SpecialHiThrow_1_Anim(Fighter_GObj* gobj)

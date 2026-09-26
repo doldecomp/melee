@@ -99,8 +99,8 @@ void ftFx_SpecialSStart_Enter(HSD_GObj* gobj)
 
     fp->gr_vel /= da->x28_FOX_ILLUSION_GROUND_VEL_X;
 
-    Fighter_ChangeMotionState(gobj, ftFx_MS_SpecialSStart, Ft_MF_None, 0.0f, 1.0f, 0.0f,
-                              NULL);
+    Fighter_ChangeMotionState(gobj, ftFx_MS_SpecialSStart, Ft_MF_None, 0.0f,
+                              1.0f, 0.0f, NULL);
     ftAnim_8006EBA4(gobj);
 }
 
@@ -122,8 +122,8 @@ void ftFx_SpecialAirSStart_Enter(HSD_GObj* gobj)
     fp->self_vel.y = 0.0f;
     fp->self_vel.x /= da->x28_FOX_ILLUSION_GROUND_VEL_X;
 
-    Fighter_ChangeMotionState(gobj, ftFx_MS_SpecialAirSStart, Ft_MF_None, 0.0f, 1.0f,
-                              0.0f, NULL);
+    Fighter_ChangeMotionState(gobj, ftFx_MS_SpecialAirSStart, Ft_MF_None, 0.0f,
+                              1.0f, 0.0f, NULL);
     ftAnim_8006EBA4(gobj);
 
     fp->x1968_jumpsUsed = fp->co_attrs.max_jumps;

@@ -60,8 +60,8 @@ void ftGw_Attack100Loop_Enter(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    Fighter_ChangeMotionState(gobj, ftGw_MS_Attack100Loop, Ft_MF_None, 0.0f, 1.0f, 0.0f,
-                              NULL);
+    Fighter_ChangeMotionState(gobj, ftGw_MS_Attack100Loop, Ft_MF_None, 0.0f,
+                              1.0f, 0.0f, NULL);
     fp->accessory4_cb = ftGw_Attack11_DecideAction;
 }
 
@@ -97,8 +97,8 @@ void ftGw_Attack100End_Enter(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    Fighter_ChangeMotionState(gobj, ftGw_MS_Attack100End, Ft_MF_None, 0.0f, 1.0f, 0.0f,
-                              NULL);
+    Fighter_ChangeMotionState(gobj, ftGw_MS_Attack100End, Ft_MF_None, 0.0f,
+                              1.0f, 0.0f, NULL);
     fp->accessory4_cb = ftGw_Attack11_DecideAction;
 }
 

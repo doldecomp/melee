@@ -28,10 +28,12 @@ void ftSs_SpecialS_Enter(HSD_GObj* gobj)
     fp->gr_vel /= samus_attr->x2C;
     fp->self_vel.y = 0.0f;
     if (fp->active_sticky.lstick.x < samus_attr->x28) {
-        Fighter_ChangeMotionState(gobj, 0x15E, Ft_MF_None, 0.0f, 1.0f, 0.0f, NULL);
+        Fighter_ChangeMotionState(gobj, 0x15E, Ft_MF_None, 0.0f, 1.0f, 0.0f,
+                                  NULL);
         ftAnim_8006EBA4(gobj);
     } else {
-        Fighter_ChangeMotionState(gobj, 0x15D, Ft_MF_None, 0.0f, 1.0f, 0.0f, NULL);
+        Fighter_ChangeMotionState(gobj, 0x15D, Ft_MF_None, 0.0f, 1.0f, 0.0f,
+                                  NULL);
         ftAnim_8006EBA4(gobj);
     }
     ftSamus_ClearThrowFlagsUnk(gobj);
@@ -43,10 +45,12 @@ void ftSs_SpecialAirS_Enter(HSD_GObj* gobj)
     ftSs_DatAttrs* samus_attr = getFtSpecialAttrs(fp);
     fp->self_vel.x /= samus_attr->x2C;
     if (fp->active_sticky.lstick.x < samus_attr->x28) {
-        Fighter_ChangeMotionState(gobj, 0x160, Ft_MF_None, 0.0f, 1.0f, 0.0f, NULL);
+        Fighter_ChangeMotionState(gobj, 0x160, Ft_MF_None, 0.0f, 1.0f, 0.0f,
+                                  NULL);
         ftAnim_8006EBA4(gobj);
     } else {
-        Fighter_ChangeMotionState(gobj, 0x15F, Ft_MF_None, 0.0f, 1.0f, 0.0f, NULL);
+        Fighter_ChangeMotionState(gobj, 0x15F, Ft_MF_None, 0.0f, 1.0f, 0.0f,
+                                  NULL);
         ftAnim_8006EBA4(gobj);
     }
     ftSamus_ClearThrowFlagsUnk(gobj);

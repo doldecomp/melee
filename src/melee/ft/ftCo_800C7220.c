@@ -27,7 +27,8 @@ void ftCo_800C7220(Fighter_GObj* gobj)
     if (fp->kind != Ft_Kind_Kirby) {
         inlineB2(gobj);
     } else {
-        Fighter_ChangeMotionState(gobj, ftCo_MS_Wait, Ft_MF_None, 0, 1, 0, NULL);
+        Fighter_ChangeMotionState(gobj, ftCo_MS_Wait, Ft_MF_None, 0, 1, 0,
+                                  NULL);
         fp->x2219_b2 = true;
         fp->x2219_b1 = true;
     }
@@ -39,7 +40,8 @@ void ftCo_800C7294(Fighter_GObj* gobj)
     if (fp->kind != Ft_Kind_Kirby) {
         inlineB2(gobj);
     } else {
-        Fighter_ChangeMotionState(gobj, ftCo_MS_WalkSlow, Ft_MF_None, 0, 1, 0, NULL);
+        Fighter_ChangeMotionState(gobj, ftCo_MS_WalkSlow, Ft_MF_None, 0, 1, 0,
+                                  NULL);
         fp->x2219_b2 = true;
         fp->x2219_b1 = true;
     }
@@ -51,7 +53,8 @@ void ftCo_800C7308(Fighter_GObj* gobj)
     if (fp->kind != Ft_Kind_Kirby) {
         inlineB2(gobj);
     } else {
-        Fighter_ChangeMotionState(gobj, ftCo_MS_WalkMiddle, Ft_MF_None, 0, 1, 0, NULL);
+        Fighter_ChangeMotionState(gobj, ftCo_MS_WalkMiddle, Ft_MF_None, 0, 1,
+                                  0, NULL);
         fp->x2219_b2 = true;
         fp->x2219_b1 = true;
     }

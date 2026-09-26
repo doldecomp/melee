@@ -276,6 +276,7 @@ void ftNn_Init_801237F8(Fighter_GObj* nana_gobj)
     nana_fp->self_vel.y = attrs->x13C * sinf(attrs->x140);
     nana_fp->cur_pos.x += 4.0f * nana_fp->facing_dir * nana_fp->x34_scale.y;
     nana_fp->cur_pos.y += 7.0f * nana_fp->x34_scale.y;
-    Fighter_ChangeMotionState(nana_gobj, 365, Ft_MF_None, 0.0f, 1.0f, 0.0f, NULL);
+    Fighter_ChangeMotionState(nana_gobj, 365, Ft_MF_None, 0.0f, 1.0f, 0.0f,
+                              NULL);
     nana_fp->accessory4_cb = fn_80123218;
 }

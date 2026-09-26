@@ -315,7 +315,8 @@ void ftZd_SpecialLw_8013B4D8(HSD_GObj* gobj)
             msid = 358;
         }
 
-        Fighter_ChangeMotionState(gobj, msid, Ft_MF_None, sa->x80, 1.0, 0, NULL);
+        Fighter_ChangeMotionState(gobj, msid, Ft_MF_None, sa->x80, 1.0, 0,
+                                  NULL);
     }
     fp->accessory4_cb = &ftZd_SpecialLw_8013AE30;
 }

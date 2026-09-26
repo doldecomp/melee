@@ -39,7 +39,8 @@ void ftZd_SpecialS_Enter(HSD_GObj* gobj)
 
     temp_f1 = 0;
     fp = GET_FIGHTER(gobj);
-    Fighter_ChangeMotionState(gobj, 343, Ft_MF_None, temp_f1, 1.0, temp_f1, NULL);
+    Fighter_ChangeMotionState(gobj, 343, Ft_MF_None, temp_f1, 1.0, temp_f1,
+                              NULL);
     Fighter_ClearCmdVars(fp);
     fighter2 = GET_FIGHTER(gobj);
     attributes = fighter2->dat_attrs;
@@ -66,7 +67,8 @@ void ftZd_SpecialAirS_Enter(HSD_GObj* gobj)
 
     temp_f1 = 0;
     fp = GET_FIGHTER(gobj);
-    Fighter_ChangeMotionState(gobj, 346, Ft_MF_None, temp_f1, 1.0, temp_f1, NULL);
+    Fighter_ChangeMotionState(gobj, 346, Ft_MF_None, temp_f1, 1.0, temp_f1,
+                              NULL);
     Fighter_ClearCmdVars(fp);
     fp->self_vel.y = 0.0F;
     fighter2 = GET_FIGHTER(gobj);
@@ -118,7 +120,8 @@ void ftZd_SpecialSStart_Anim(HSD_GObj* gobj)
 
     if (!ftAnim_IsFramesRemaining(gobj)) {
         temp_f1 = 0;
-        Fighter_ChangeMotionState(gobj, 344, Ft_MF_None, temp_f1, 1.0, temp_f1, NULL);
+        Fighter_ChangeMotionState(gobj, 344, Ft_MF_None, temp_f1, 1.0, temp_f1,
+                                  NULL);
         fp->x1968_jumpsUsed = fp->co_attrs.max_jumps;
     }
 }
@@ -171,8 +174,8 @@ void ftZd_SpecialSLoop_Anim(HSD_GObj* gobj)
     if (temp_r3_u32 == NULL) {
         if (fp->mv.zd.specials.x0 <= 0 && fp->mv.zd.specials.x4 <= 0) {
             temp_f1 = 0;
-            Fighter_ChangeMotionState(gobj, 345, Ft_MF_None, temp_f1, 1.0, temp_f1,
-                                      NULL);
+            Fighter_ChangeMotionState(gobj, 345, Ft_MF_None, temp_f1, 1.0,
+                                      temp_f1, NULL);
         }
     } else {
         temp_r3 = itZeldaDinFire_GetOwner(fp->u.zd.x222C);
@@ -246,7 +249,8 @@ void ftZd_SpecialAirSStart_Anim(HSD_GObj* gobj)
 
     if (!ftAnim_IsFramesRemaining(gobj)) {
         temp_f1 = 0;
-        Fighter_ChangeMotionState(gobj, 347, Ft_MF_None, temp_f1, 1.0, temp_f1, NULL);
+        Fighter_ChangeMotionState(gobj, 347, Ft_MF_None, temp_f1, 1.0, temp_f1,
+                                  NULL);
         fp->x1968_jumpsUsed = fp->co_attrs.max_jumps;
     }
 }
@@ -297,8 +301,8 @@ void ftZd_SpecialAirSLoop_Anim(HSD_GObj* gobj)
     if (fp->u.zd.x222C == 0U) {
         if (fp->mv.zd.specials.x0 <= 0 && fp->mv.zd.specials.x4 <= 0) {
             temp_f1 = 0;
-            Fighter_ChangeMotionState(gobj, 348, Ft_MF_None, temp_f1, 1.0, temp_f1,
-                                      NULL);
+            Fighter_ChangeMotionState(gobj, 348, Ft_MF_None, temp_f1, 1.0,
+                                      temp_f1, NULL);
         }
     } else {
         temp_r3 = itZeldaDinFire_GetOwner(fp->u.zd.x222C);
@@ -364,7 +368,8 @@ void ftZd_SpecialSLoop_IASA(HSD_GObj* gobj)
 
     if ((var_r0 == 1) && !(fp->input.held_buttons[0] & 512)) {
         temp_f1 = 0;
-        Fighter_ChangeMotionState(gobj, 345, Ft_MF_None, temp_f1, 1.0, temp_f1, NULL);
+        Fighter_ChangeMotionState(gobj, 345, Ft_MF_None, temp_f1, 1.0, temp_f1,
+                                  NULL);
     }
 }
 
@@ -392,7 +397,8 @@ void ftZd_SpecialAirSLoop_IASA(HSD_GObj* gobj)
 
     if (var_r0 == 1 && !(fp->input.held_buttons[0] & 512)) {
         temp_f1 = 0;
-        Fighter_ChangeMotionState(gobj, 348, Ft_MF_None, temp_f1, 1.0, temp_f1, NULL);
+        Fighter_ChangeMotionState(gobj, 348, Ft_MF_None, temp_f1, 1.0, temp_f1,
+                                  NULL);
     }
 }
 

@@ -57,7 +57,8 @@ void ftCa_SpecialS_Enter(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     resetCmdVarsGround(gobj);
-    Fighter_ChangeMotionState(gobj, ftCa_MS_SpecialSStart, Ft_MF_None, 0, 1, 0, NULL);
+    Fighter_ChangeMotionState(gobj, ftCa_MS_SpecialSStart, Ft_MF_None, 0, 1, 0,
+                              NULL);
     setCallbacks(gobj);
     ftAnim_8006EBA4(gobj);
     switch (ftLib_GetKind(gobj)) {
@@ -89,8 +90,8 @@ static inline void setupAirStart(HSD_GObj* gobj)
         u32* vars = &fp->cmd_vars[0];
         vars[0] = vars[1] = vars[2] = vars[3] = 0;
     }
-    Fighter_ChangeMotionState(gobj, ftCa_MS_SpecialAirSStart, Ft_MF_None, 0, 1, 0,
-                              NULL);
+    Fighter_ChangeMotionState(gobj, ftCa_MS_SpecialAirSStart, Ft_MF_None, 0, 1,
+                              0, NULL);
     setCallbacks(gobj);
     ftAnim_8006EBA4(gobj);
     switch (ftLib_GetKind(gobj)) {

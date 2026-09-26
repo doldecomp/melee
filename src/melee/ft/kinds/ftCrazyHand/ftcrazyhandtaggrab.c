@@ -74,7 +74,8 @@ void ftCh_TagGrab_Anim(HSD_GObj* gobj)
         fp->cmd_vars[0] = 0;
     }
     if (fp->mv.ch.unk0.x8 > 0 && !ftAnim_IsFramesRemaining(gobj)) {
-        Fighter_ChangeMotionState(gobj, 0x182, Ft_MF_None, 0, 1.0f, 0.0f, NULL);
+        Fighter_ChangeMotionState(gobj, 0x182, Ft_MF_None, 0, 1.0f, 0.0f,
+                                  NULL);
         ftAnim_8006EBA4(gobj);
     }
     if (--fp->mv.ch.unk0.x8 == 0) {
@@ -97,7 +98,8 @@ void ftCh_TagSqueeze_Anim(HSD_GObj* gobj)
         fp->cmd_vars[0] = 0;
     }
     if (fp->mv.ch.unk0.x8 > 0 && !ftAnim_IsFramesRemaining(gobj)) {
-        Fighter_ChangeMotionState(gobj, 0x182, Ft_MF_None, 0, 1.0f, 0.0f, NULL);
+        Fighter_ChangeMotionState(gobj, 0x182, Ft_MF_None, 0, 1.0f, 0.0f,
+                                  NULL);
         ftAnim_8006EBA4(gobj);
     }
     if (--fp->mv.ch.unk0.x8 == 0) {

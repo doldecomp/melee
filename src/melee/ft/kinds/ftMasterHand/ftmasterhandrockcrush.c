@@ -13,7 +13,8 @@ void ftMh_Drill_Coll(HSD_GObj* gobj) {}
 
 void ftMh_MS_354_80152370(HSD_GObj* gobj)
 {
-    Fighter_ChangeMotionState(gobj, ftMh_MS_RockCrushUp, Ft_MF_None, 0, 1, 0, 0);
+    Fighter_ChangeMotionState(gobj, ftMh_MS_RockCrushUp, Ft_MF_None, 0, 1, 0,
+                              0);
     ftAnim_8006EBA4(gobj);
 }
 
@@ -44,7 +45,8 @@ void ftMh_RockCrushUp_Coll(HSD_GObj* gobj) {}
 
 void ftMh_MS_355_8015247C(HSD_GObj* gobj)
 {
-    Fighter_ChangeMotionState(gobj, ftMh_MS_RockCrushWait, Ft_MF_None, 0, 1, 0, 0);
+    Fighter_ChangeMotionState(gobj, ftMh_MS_RockCrushWait, Ft_MF_None, 0, 1, 0,
+                              0);
     ftAnim_8006EBA4(gobj);
 }
 
@@ -55,7 +57,8 @@ void ftMh_RockCrushWait_Anim(HSD_GObj* gobj)
         ftMh_MS_356_801525E0(gobj);
     }
     if (!ftAnim_IsFramesRemaining(gobj)) {
-        Fighter_ChangeMotionState(gobj, ftMh_MS_RockCrushWait, Ft_MF_None, 0, 1, 0, 0);
+        Fighter_ChangeMotionState(gobj, ftMh_MS_RockCrushWait, Ft_MF_None, 0,
+                                  1, 0, 0);
         ftAnim_8006EBA4(gobj);
     }
 }
@@ -84,6 +87,7 @@ void ftMh_MS_356_801525E0(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     fp->self_vel.x = 0;
-    Fighter_ChangeMotionState(gobj, ftMh_MS_RockCrushDown, Ft_MF_None, 0, 1, 0, 0);
+    Fighter_ChangeMotionState(gobj, ftMh_MS_RockCrushDown, Ft_MF_None, 0, 1, 0,
+                              0);
     ftAnim_8006EBA4(gobj);
 }

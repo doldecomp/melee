@@ -23,7 +23,8 @@ void ftDk_SpecialLw_Enter(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     fp->mv.dk.speciallw.x0 = 0;
-    Fighter_ChangeMotionState(gobj, ftDk_MS_SpecialLwStart, Ft_MF_None, 0, 1, 0, NULL);
+    Fighter_ChangeMotionState(gobj, ftDk_MS_SpecialLwStart, Ft_MF_None, 0, 1,
+                              0, NULL);
     ftAnim_8006EBA4(gobj);
 }
 
@@ -108,7 +109,8 @@ static void doAnim(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     fp->x21EC = callback;
     fp->throw_flags = 0;
-    Fighter_ChangeMotionState(gobj, ftDk_MS_SpecialLwLoop, Ft_MF_None, 0, 1, 0, NULL);
+    Fighter_ChangeMotionState(gobj, ftDk_MS_SpecialLwLoop, Ft_MF_None, 0, 1, 0,
+                              NULL);
     ftDonkey_8010DE88_inner(gobj);
     fp->accessory4_cb = ftDk_Init_8010DB3C;
 }
@@ -137,7 +139,8 @@ void ftDk_SpecialLwEnd0_Coll(HSD_GObj* gobj)
 
 static void doTransition(HSD_GObj* gobj)
 {
-    Fighter_ChangeMotionState(gobj, ftDk_MS_SpecialLwEnd0, Ft_MF_None, 0, 1, 0, NULL);
+    Fighter_ChangeMotionState(gobj, ftDk_MS_SpecialLwEnd0, Ft_MF_None, 0, 1, 0,
+                              NULL);
 }
 
 void ftDk_SpecialLwEnd1_Anim(HSD_GObj* gobj)

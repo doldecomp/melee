@@ -178,13 +178,13 @@ static inline void inlineB0(Fighter_GObj* gobj)
     if (ftNn_Init_80123954(Player_GetEntityAtIndex(fp->player_idx, 1),
                            fp->ground_or_air) == GA_Air)
     {
-        Fighter_ChangeMotionState(gobj, ftPp_MS_SpecialAirS1, Ft_MF_None, 0, 1, 0,
-                                  NULL);
+        Fighter_ChangeMotionState(gobj, ftPp_MS_SpecialAirS1, Ft_MF_None, 0, 1,
+                                  0, NULL);
         fp->x1A5C = NULL;
         fp->self_vel.y = da->x20;
     } else {
-        Fighter_ChangeMotionState(gobj, ftPp_MS_SpecialAirS2, Ft_MF_None, 0, 1, 0,
-                                  NULL);
+        Fighter_ChangeMotionState(gobj, ftPp_MS_SpecialAirS2, Ft_MF_None, 0, 1,
+                                  0, NULL);
         fp->x1A5C = Player_GetEntityAtIndex(fp->player_idx, 1);
         fp->self_vel.y = da->x24;
     }

@@ -157,7 +157,8 @@ void ftGw_SpecialLw_Enter(HSD_GObj* gobj)
 
     fp->self_vel.y = 0;
 
-    Fighter_ChangeMotionState(gobj, ftGw_MS_SpecialLw, Ft_MF_None, 0, 1, 0, NULL);
+    Fighter_ChangeMotionState(gobj, ftGw_MS_SpecialLw, Ft_MF_None, 0, 1, 0,
+                              NULL);
 
     ftAnim_8006EBA4(gobj);
     ftGameWatch_SpecialLw_SetVars(gobj);
@@ -176,7 +177,8 @@ void ftGw_SpecialAirLw_Enter(HSD_GObj* gobj)
     fp->self_vel.x /= sa->x64_GAMEWATCH_PANIC_MOMENTUM_PRESERVE;
     fp->self_vel.y = 0;
 
-    Fighter_ChangeMotionState(gobj, ftGw_MS_SpecialAirLw, Ft_MF_None, 0, 1, 0, NULL);
+    Fighter_ChangeMotionState(gobj, ftGw_MS_SpecialAirLw, Ft_MF_None, 0, 1, 0,
+                              NULL);
 
     ftAnim_8006EBA4(gobj);
     ftGameWatch_SpecialLw_SetVars(gobj);
@@ -665,7 +667,8 @@ void ftGw_SpecialLwShoot_ReleaseOil(HSD_GObj* gobj)
     /// @todo Shared @c inline with #ftGw_SpecialAirLwShoot_ReleaseOil
     /// @todo Please for the love of god stop copy-pasting code
 
-    Fighter_ChangeMotionState(gobj, ftGw_MS_SpecialLwShoot, Ft_MF_None, 0, 1, 0, NULL);
+    Fighter_ChangeMotionState(gobj, ftGw_MS_SpecialLwShoot, Ft_MF_None, 0, 1,
+                              0, NULL);
 
     ftAnim_8006EBA4(gobj);
 
@@ -698,8 +701,8 @@ void ftGw_SpecialAirLwShoot_ReleaseOil(HSD_GObj* gobj)
 {
     u8 _[8];
 
-    Fighter_ChangeMotionState(gobj, ftGw_MS_SpecialAirLwShoot, Ft_MF_None, 0, 1, 0,
-                              NULL);
+    Fighter_ChangeMotionState(gobj, ftGw_MS_SpecialAirLwShoot, Ft_MF_None, 0,
+                              1, 0, NULL);
 
     ftAnim_8006EBA4(gobj);
 

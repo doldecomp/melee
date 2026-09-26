@@ -389,8 +389,8 @@ void ftCo_800D40B8(Fighter_GObj* gobj)
     ftCo_800D331C(gobj);
     fp->mv.co.unk_deadup.x40 = *temp_r31;
     fp->mv.co.unk_deadup.x44 = 0.0F;
-    Fighter_ChangeMotionState(gobj, ftCo_MS_DeadUpStar, Ft_MF_None, 0.0F, 1.0F, 0.0F,
-                              NULL);
+    Fighter_ChangeMotionState(gobj, ftCo_MS_DeadUpStar, Ft_MF_None, 0.0F, 1.0F,
+                              0.0F, NULL);
     ftCo_800D40B8_inline(gobj);
     ftCommon_8007EFC0(fp, true);
     new_var = fp;
@@ -410,8 +410,8 @@ void ftCo_800D41C4(Fighter_GObj* gobj)
         ftCo_800D331C(gobj);
         fp2->mv.co.unk_deadup.x40 = *temp_r31;
         fp2->mv.co.unk_deadup.x44 = 0;
-        Fighter_ChangeMotionState(gobj, ftCo_MS_DeadUpStarIce, Ft_MF_None, 0.0F, 1.0F,
-                                  0.0F, NULL);
+        Fighter_ChangeMotionState(gobj, ftCo_MS_DeadUpStarIce, Ft_MF_None,
+                                  0.0F, 1.0F, 0.0F, NULL);
         ftCo_800D40B8_inline(gobj);
         ftCommon_8007EFC0(fp2, true);
         new_var = fp2;

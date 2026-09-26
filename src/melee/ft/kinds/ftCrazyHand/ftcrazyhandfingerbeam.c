@@ -51,8 +51,8 @@ void ftCh_Init_80158B3C(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftCrazyHand_DatAttrs* da = fp->ft_data->ext_attr;
-    Fighter_ChangeMotionState(gobj, 0x16A, Ft_MF_None, fp->cur_anim_frame, 1.0f, 0.0f,
-                              NULL);
+    Fighter_ChangeMotionState(gobj, 0x16A, Ft_MF_None, fp->cur_anim_frame,
+                              1.0f, 0.0f, NULL);
     ftAnim_SetAnimRate(gobj, da->xCC_pos.x);
     fp->mv.ch.unk0.x8 = da->xC4_pos.y;
 }
@@ -70,7 +70,8 @@ void ftCh_FingerBeamLoop_Anim(HSD_GObj* gobj)
     }
 
     if (!ftAnim_IsFramesRemaining(gobj)) {
-        Fighter_ChangeMotionState(gobj, 0x16A, Ft_MF_None, 0, 1.0f, 0.0f, NULL);
+        Fighter_ChangeMotionState(gobj, 0x16A, Ft_MF_None, 0, 1.0f, 0.0f,
+                                  NULL);
         ftAnim_8006EBA4(gobj);
     }
 }

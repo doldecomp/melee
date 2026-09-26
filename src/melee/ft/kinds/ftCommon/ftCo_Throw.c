@@ -138,7 +138,8 @@ void ftCo_800DD398(Fighter_GObj* gobj, FtMotionId msid, FtMotionId victim_msid,
     fp->throw_flags = 0;
     fp->mv.co.fighterthrow.x4 = 0;
     fp->mv.co.fighterthrow.x8 = 0;
-    Fighter_ChangeMotionState(gobj, msid, Ft_MF_None, 0.0f, anim_speed, 0.0f, NULL);
+    Fighter_ChangeMotionState(gobj, msid, Ft_MF_None, 0.0f, anim_speed, 0.0f,
+                              NULL);
     ftAnim_8006EBA4(gobj);
     ftCommon_8007E2F4(fp, 0x1FF);
     ftCo_800DE3FC(fp->victim_gobj, victim_msid, anim_speed);
