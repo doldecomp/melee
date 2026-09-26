@@ -508,11 +508,11 @@ void* efAlt_Spawn(s32 gfx_id, HSD_GObj* gobj, va_list vlist)
 
         ret_obj =
             efLib_Create_AttachChild(0x5208U, gobj, va_arg(vlist, HSD_JObj*));
-        goto lbl_4B6_4B7_shared;
+        goto copy_gobj_scale;
     case 0x4B7:
         ret_obj =
             efLib_Create_AttachChild(0x5209U, gobj, va_arg(vlist, HSD_JObj*));
-    lbl_4B6_4B7_shared:
+    copy_gobj_scale:
         if (ret_obj != NULL) {
             effect = ret_obj;
             HSD_JObjGetScale(GET_JOBJ(gobj), &scale);

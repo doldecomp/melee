@@ -446,11 +446,11 @@ void* efSync_Spawn(s32 gfx_id, HSD_GObj* gobj, ...)
 
         ret_obj =
             efLib_Create_AttachChild(0x4268U, gobj, va_arg(vlist, HSD_JObj*));
-        goto block_297;
+        goto copy_gobj_scale;
     case 0x4F5:
         ret_obj =
             efLib_Create_AttachChild(0x4269U, gobj, va_arg(vlist, HSD_JObj*));
-    block_297:
+    copy_gobj_scale:
         if (ret_obj != NULL) {
             HSD_JObjGetScale((jobj_2 = GET_JOBJ(gobj)), &scale);
             effect = ret_obj;

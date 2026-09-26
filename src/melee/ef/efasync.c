@@ -717,13 +717,13 @@ void* efAsync_Dispatch(s32 gfx_id, HSD_GObj* gobj, va_list vlist)
         break;
     case 0x435:
         tev0 = 0x14E;
-        goto block_515;
+        goto set_generator_rotation;
     case 0x436:
         tev0 = 0x153;
-        goto block_515;
+        goto set_generator_rotation;
     case 0x437:
         tev0 = 0x156;
-    block_515: {
+    set_generator_rotation: {
         HSD_Generator* result;
 
         result = efLib_CreateGenerator_AddAppSRT(tev0);
@@ -866,13 +866,13 @@ void* efAsync_Dispatch(s32 gfx_id, HSD_GObj* gobj, va_list vlist)
         break;
     case 0x44A:
         f32_2 = 0.5f;
-        goto block_636;
+        goto set_generator_scale;
     case 0x44B:
         f32_2 = 1.0f;
-        goto block_636;
+        goto set_generator_scale;
     case 0x44C:
         f32_2 = 2.0f;
-    block_636: {
+    set_generator_scale: {
         HSD_Generator* result;
 
         result = efLib_CreateGenerator_AddAppSRT(0x237);

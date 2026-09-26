@@ -945,9 +945,11 @@ void efLib_Cb_ParticleRender(HSD_Particle* particle)
     }
 }
 
-// must be placed here for data ordering reasons...
-void (*lbl_803BF810[0x03])(HSD_Particle* particle) = { efLib_Cb_ParticleRender,
-                                                       NULL, NULL };
+static void (*particleCallbacks[3])(HSD_Particle* particle) = {
+    efLib_Cb_ParticleRender,
+    NULL,
+    NULL,
+};
 
 // Global particle callback. Checks if the particle cmdList matches
 // bank 0 refs (0x96, 0x97, 0x98, 0x21B). If matched, attaches an
@@ -956,16 +958,16 @@ void (*lbl_803BF810[0x03])(HSD_Particle* particle) = { efLib_Cb_ParticleRender,
 void efLib_Cb_PtclAppSRTHook(HSD_Generator* gen)
 {
     if (gen->cmdList == ptclref_804D0E5C[0][0x96]->cmdList) {
-        hsd_8039D1E4(gen, lbl_803BF810);
+        hsd_8039D1E4(gen, particleCallbacks);
     }
     if (gen->cmdList == ptclref_804D0E5C[0][0x97]->cmdList) {
-        hsd_8039D1E4(gen, lbl_803BF810);
+        hsd_8039D1E4(gen, particleCallbacks);
     }
     if (gen->cmdList == ptclref_804D0E5C[0][0x98]->cmdList) {
-        hsd_8039D1E4(gen, lbl_803BF810);
+        hsd_8039D1E4(gen, particleCallbacks);
     }
     if (gen->cmdList == ptclref_804D0E5C[0][0x21B]->cmdList) {
-        hsd_8039D1E4(gen, lbl_803BF810);
+        hsd_8039D1E4(gen, particleCallbacks);
     }
 }
 
