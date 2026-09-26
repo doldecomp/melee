@@ -2185,11 +2185,20 @@ void mnDiagram_DrawGridValues(HSD_GObj* arg0, s32 row_start, s32 col_start,
     }
 }
 
+static inline f32 getColumnReferenceX(Diagram* data)
+{
+    return HSD_JObjGetTranslationX(data->jobjs[7]);
+}
+
+static inline f32 getRowReferenceY(Diagram* data)
+{
+    return HSD_JObjGetTranslationY(data->jobjs[9]);
+}
+
 void mnDiagram_DrawNameHeaders(HSD_GObj* arg0, s32 arg1, s32 arg2)
 {
     Diagram* data = arg0->user_data;
     HSD_Text* row_text;
-    u8 name_byte;
     int name_id;
 
     // Column headers
@@ -2211,10 +2220,10 @@ void mnDiagram_DrawNameHeaders(HSD_GObj* arg0, s32 arg1, s32 arg2)
             for (i = 0; i < 7; i++) {
                 if (GetNameCount() > i) {
                     f32 x_spacing;
-                    name_byte = mnDiagram_GetVisibleNameCursorFrom(arg2, i);
-                    name_id = name_byte;
-                    x_spacing = HSD_JObjGetTranslationX(data->jobjs[8]) -
-                                HSD_JObjGetTranslationX(data->jobjs[7]);
+                    name_id = mnDiagram_GetVisibleNameCursorFrom(arg2, i);
+                    x_spacing = getColumnReferenceX(data);
+                    x_spacing =
+                        HSD_JObjGetTranslationX(data->jobjs[8]) - x_spacing;
                     HSD_SisLib_803A6B98(text, (x_spacing * i) / 0.02f, 0.0f,
                                         GetNameText(name_id));
                 }
@@ -2242,8 +2251,9 @@ void mnDiagram_DrawNameHeaders(HSD_GObj* arg0, s32 arg1, s32 arg2)
             if (GetNameCount() > i) {
                 f32 y_spacing;
                 name_id = mnDiagram_GetVisibleNameCursorFrom(arg1, i);
-                y_spacing = HSD_JObjGetTranslationY(data->jobjs[10]) -
-                            HSD_JObjGetTranslationY(data->jobjs[9]);
+                y_spacing = getRowReferenceY(data);
+                y_spacing =
+                    HSD_JObjGetTranslationY(data->jobjs[10]) - y_spacing;
                 HSD_SisLib_803A6B98(row_text, 0.0f, -((y_spacing * i) / 0.03f),
                                     GetNameText(name_id));
             }
@@ -2379,7 +2389,6 @@ void mnDiagram_CursorProc(HSD_GObj* gobj)
     f32 x_spacing;
     f32 y_spacing;
     Diagram* data;
-    PAD_STACK(8);
 
     if ((mn_804A04F0.cur_menu != 0x1E) || (mn_804A04F0.x10 != 0)) {
         HSD_GObjFree(gobj);
@@ -2390,14 +2399,14 @@ void mnDiagram_CursorProc(HSD_GObj* gobj)
     lb_80011E24(gobj->hsd_obj, &sp_jobj, 3, -1);
 
     col = *(selection = &mn_804A04F0.hovered_selection) >> 8;
-    x_spacing = HSD_JObjGetTranslationX(data->jobjs[8]) -
-                HSD_JObjGetTranslationX(data->jobjs[7]);
+    x_spacing = getColumnReferenceX(data);
+    x_spacing = HSD_JObjGetTranslationX(data->jobjs[8]) - x_spacing;
     HSD_JObjSetTranslateX(sp_jobj, x_spacing * (col - 3));
 
     lb_80011E24(gobj->hsd_obj, &sp_jobj, 4, -1);
     row = *selection & 0xFF;
-    y_spacing = HSD_JObjGetTranslationY(data->jobjs[10]) -
-                HSD_JObjGetTranslationY(data->jobjs[9]);
+    y_spacing = getRowReferenceY(data);
+    y_spacing = HSD_JObjGetTranslationY(data->jobjs[10]) - y_spacing;
     HSD_JObjSetTranslateY(sp_jobj, y_spacing * (row - 4.5) - 0.1F);
 
     lb_80011E24(gobj->hsd_obj, &sp_jobj, 2, -1);
