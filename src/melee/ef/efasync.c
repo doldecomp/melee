@@ -59,7 +59,7 @@ void* efAsync_Dispatch(s32 gfx_id, HSD_GObj* gobj, va_list vlist)
     Vec3* va_vec3;
     s32 count;
 
-    PAD_STACK(16);
+    PAD_STACK(8);
 
     ret_obj = NULL;
     switch (gfx_id) {
@@ -112,8 +112,7 @@ void* efAsync_Dispatch(s32 gfx_id, HSD_GObj* gobj, va_list vlist)
         if (ret_obj != NULL) {
             generator = efLib_CreateGenerator_AddAppSRT(0x54);
             if (generator != NULL) {
-                psAppSRT = generator->appsrt;
-                psAppSRT->translate = translate;
+                Effect_SetGeneratorPos(generator, &translate);
                 if (*va_arg(vlist, f32*) < 0.0f) {
                     rot_y = 0.0;
                 } else {
@@ -293,9 +292,7 @@ void* efAsync_Dispatch(s32 gfx_id, HSD_GObj* gobj, va_list vlist)
 
         result = efLib_CreateGenerator_AddAppSRT(0x3E);
         if (result != NULL) {
-            va_vec3 = va_arg(vlist, Vec3*);
-            psAppSRT = result->appsrt;
-            psAppSRT->translate = *va_vec3;
+            Effect_SetGeneratorPos(result, va_arg(vlist, Vec3*));
             f32_1 = *va_arg(vlist, f32*);
             ret_obj = result;
             result->appsrt->rot.z = f32_1;
@@ -310,9 +307,7 @@ void* efAsync_Dispatch(s32 gfx_id, HSD_GObj* gobj, va_list vlist)
 
         result = efLib_CreateGenerator_AddAppSRT(0x241);
         if (result != NULL) {
-            va_vec3 = va_arg(vlist, Vec3*);
-            psAppSRT = result->appsrt;
-            psAppSRT->translate = *va_vec3;
+            Effect_SetGeneratorPos(result, va_arg(vlist, Vec3*));
             f32_1 = *va_arg(vlist, f32*);
             ret_obj = result;
             result->appsrt->rot.z = f32_1;
@@ -324,9 +319,7 @@ void* efAsync_Dispatch(s32 gfx_id, HSD_GObj* gobj, va_list vlist)
 
         result = efLib_CreateGenerator_AddAppSRT(0x242);
         if (result != NULL) {
-            va_vec3 = va_arg(vlist, Vec3*);
-            psAppSRT = result->appsrt;
-            psAppSRT->translate = *va_vec3;
+            Effect_SetGeneratorPos(result, va_arg(vlist, Vec3*));
             f32_1 = *va_arg(vlist, f32*);
             ret_obj = result;
             result->appsrt->rot.z = f32_1;
@@ -339,13 +332,10 @@ void* efAsync_Dispatch(s32 gfx_id, HSD_GObj* gobj, va_list vlist)
     case 0x40D: {
         generator = efLib_CreateGenerator_AddAppSRT(0x19);
         if (generator != NULL) {
-            va_vec3 = va_arg(vlist, Vec3*);
-            psAppSRT = generator->appsrt;
-            psAppSRT->translate = *va_vec3;
+            Effect_SetGeneratorPos(generator, va_arg(vlist, Vec3*));
             HSD_JObjGetScale(jobj_1 = GET_JOBJ(gobj), &scale);
             ret_obj = generator;
-            generator->appsrt->scale.x = generator->appsrt->scale.y =
-                generator->appsrt->scale.z = scale.y;
+            Effect_SetGeneratorScale(generator, scale.y);
         }
         break;
     }
@@ -498,8 +488,7 @@ void* efAsync_Dispatch(s32 gfx_id, HSD_GObj* gobj, va_list vlist)
             jobj = va_arg(vlist, HSD_JObj*);
             lb_8000B1CC(jobj, NULL, &result->appsrt->translate);
             HSD_JObjGetScale(jobj, &scale);
-            result->appsrt->scale.x = result->appsrt->scale.y =
-                result->appsrt->scale.z = scale.y;
+            Effect_SetGeneratorScale(result, scale.y);
         }
         break;
     }
@@ -666,12 +655,9 @@ void* efAsync_Dispatch(s32 gfx_id, HSD_GObj* gobj, va_list vlist)
 
         result = efLib_CreateGenerator_AddAppSRT(0x145);
         if (result != NULL) {
-            va_vec3 = va_arg(vlist, Vec3*);
-            psAppSRT = result->appsrt;
-            psAppSRT->translate = *va_vec3;
+            Effect_SetGeneratorPos(result, va_arg(vlist, Vec3*));
             f32_1 = *va_arg(vlist, f32*);
-            result->appsrt->scale.x = result->appsrt->scale.y =
-                result->appsrt->scale.z = f32_1;
+            Effect_SetGeneratorScale(result, f32_1);
         }
         break;
     }
@@ -694,9 +680,7 @@ void* efAsync_Dispatch(s32 gfx_id, HSD_GObj* gobj, va_list vlist)
 
         result = efLib_CreateGenerator_AddAppSRT(tev0);
         if (result != NULL) {
-            va_vec3 = va_arg(vlist, Vec3*);
-            psAppSRT = result->appsrt;
-            psAppSRT->translate = *va_vec3;
+            Effect_SetGeneratorPos(result, va_arg(vlist, Vec3*));
             result->appsrt->rot.y = M_PI_2;
             f32_1 = *va_arg(vlist, f32*);
             ret_obj = result;
@@ -761,12 +745,9 @@ void* efAsync_Dispatch(s32 gfx_id, HSD_GObj* gobj, va_list vlist)
         efLib_LoadKind = EF_LOADKIND_SYNC;
         result = efLib_CreateGenerator_AddAppSRT(0xCA);
         if (result != NULL) {
-            va_vec3 = va_arg(vlist, Vec3*);
-            psAppSRT = result->appsrt;
-            psAppSRT->translate = *va_vec3;
+            Effect_SetGeneratorPos(result, va_arg(vlist, Vec3*));
             f32_1 = *va_arg(vlist, f32*);
-            result->appsrt->scale.x = result->appsrt->scale.y =
-                result->appsrt->scale.z = f32_1;
+            Effect_SetGeneratorScale(result, f32_1);
         }
         break;
     }
@@ -788,12 +769,9 @@ void* efAsync_Dispatch(s32 gfx_id, HSD_GObj* gobj, va_list vlist)
 
         result = efLib_CreateGenerator_AddAppSRT(0x1F1);
         if (result != NULL) {
-            va_vec3 = va_arg(vlist, Vec3*);
-            psAppSRT = result->appsrt;
-            psAppSRT->translate = *va_vec3;
+            Effect_SetGeneratorPos(result, va_arg(vlist, Vec3*));
             f32_1 = *va_arg(vlist, f32*);
-            result->appsrt->scale.x = result->appsrt->scale.y =
-                result->appsrt->scale.z = f32_1;
+            Effect_SetGeneratorScale(result, f32_1);
         }
         break;
     }
@@ -855,11 +833,8 @@ void* efAsync_Dispatch(s32 gfx_id, HSD_GObj* gobj, va_list vlist)
 
         result = efLib_CreateGenerator_AddAppSRT(0x237);
         if (result != NULL) {
-            va_vec3 = va_arg(vlist, Vec3*);
-            psAppSRT = result->appsrt;
-            psAppSRT->translate = *va_vec3;
-            result->appsrt->scale.x = result->appsrt->scale.y =
-                result->appsrt->scale.z = f32_2;
+            Effect_SetGeneratorPos(result, va_arg(vlist, Vec3*));
+            Effect_SetGeneratorScale(result, f32_2);
         }
         break;
     }
@@ -891,8 +866,7 @@ void* efAsync_Dispatch(s32 gfx_id, HSD_GObj* gobj, va_list vlist)
         if (result != NULL) {
             f32_1 = *va_arg(vlist, f32*);
             ret_obj = result;
-            result->appsrt->scale.x = result->appsrt->scale.y =
-                result->appsrt->scale.z = f32_1;
+            Effect_SetGeneratorScale(result, f32_1);
         }
         break;
     }
@@ -905,8 +879,7 @@ void* efAsync_Dispatch(s32 gfx_id, HSD_GObj* gobj, va_list vlist)
         if (result != NULL) {
             f32_1 = *va_arg(vlist, f32*);
             ret_obj = result;
-            result->appsrt->scale.x = result->appsrt->scale.y =
-                result->appsrt->scale.z = f32_1;
+            Effect_SetGeneratorScale(result, f32_1);
         }
         break;
     }
@@ -919,8 +892,7 @@ void* efAsync_Dispatch(s32 gfx_id, HSD_GObj* gobj, va_list vlist)
         if (result != NULL) {
             f32_1 = *va_arg(vlist, f32*);
             ret_obj = result;
-            result->appsrt->scale.x = result->appsrt->scale.y =
-                result->appsrt->scale.z = f32_1;
+            Effect_SetGeneratorScale(result, f32_1);
         }
         break;
     }
@@ -933,8 +905,7 @@ void* efAsync_Dispatch(s32 gfx_id, HSD_GObj* gobj, va_list vlist)
         if (result != NULL) {
             f32_1 = *va_arg(vlist, f32*);
             ret_obj = result;
-            result->appsrt->scale.x = result->appsrt->scale.y =
-                result->appsrt->scale.z = f32_1;
+            Effect_SetGeneratorScale(result, f32_1);
         }
         break;
     }
@@ -947,8 +918,7 @@ void* efAsync_Dispatch(s32 gfx_id, HSD_GObj* gobj, va_list vlist)
                         &result->appsrt->translate);
             f32_1 = *va_arg(vlist, f32*);
             ret_obj = result;
-            result->appsrt->scale.x = result->appsrt->scale.y =
-                result->appsrt->scale.z = f32_1;
+            Effect_SetGeneratorScale(result, f32_1);
         }
         break;
     }
@@ -967,8 +937,7 @@ void* efAsync_Dispatch(s32 gfx_id, HSD_GObj* gobj, va_list vlist)
                         &result->appsrt->translate);
             f32_1 = *va_arg(vlist, f32*);
             ret_obj = result;
-            result->appsrt->scale.x = result->appsrt->scale.y =
-                result->appsrt->scale.z = f32_1;
+            Effect_SetGeneratorScale(result, f32_1);
         }
         break;
     }
@@ -981,8 +950,7 @@ void* efAsync_Dispatch(s32 gfx_id, HSD_GObj* gobj, va_list vlist)
                         &result->appsrt->translate);
             f32_1 = *va_arg(vlist, f32*);
             ret_obj = result;
-            result->appsrt->scale.x = result->appsrt->scale.y =
-                result->appsrt->scale.z = f32_1;
+            Effect_SetGeneratorScale(result, f32_1);
         }
         break;
     }
@@ -1053,8 +1021,7 @@ void* efAsync_Dispatch(s32 gfx_id, HSD_GObj* gobj, va_list vlist)
             lb_8000B1CC(va_arg(vlist, HSD_JObj*), NULL,
                         &generator->appsrt->translate);
             f32_1 = *va_arg(vlist, f32*);
-            generator->appsrt->scale.x = generator->appsrt->scale.y =
-                generator->appsrt->scale.z = f32_1;
+            Effect_SetGeneratorScale(generator, f32_1);
             f32_2 = HSD_JObjGetRotationY(jobj_3 = GET_JOBJ(gobj));
             ret_obj = generator;
             generator->appsrt->rot.y = jobj_3->rotate.y;
@@ -1076,8 +1043,7 @@ void* efAsync_Dispatch(s32 gfx_id, HSD_GObj* gobj, va_list vlist)
             lb_8000B1CC(va_arg(vlist, HSD_JObj*), NULL,
                         &generator->appsrt->translate);
             f32_1 = *va_arg(vlist, f32*);
-            generator->appsrt->scale.x = generator->appsrt->scale.y =
-                generator->appsrt->scale.z = f32_1;
+            Effect_SetGeneratorScale(generator, f32_1);
             f32_2 = HSD_JObjGetRotationY(jobj_3 = gobj->hsd_obj);
             ret_obj = generator;
             generator->appsrt->rot.y = jobj_3->rotate.y;

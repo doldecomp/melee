@@ -709,8 +709,7 @@ HSD_Generator* efLib_CreateGenerator_AppSRT_SetScale(s32 gfx_id, va_list vlist)
     if ((generator = efLib_CreateGenerator_Attach_AddAppSRT(
              gfx_id, va_arg(vlist, HSD_JObj*))) != NULL)
     {
-        generator->appsrt->scale.x = generator->appsrt->scale.y =
-            generator->appsrt->scale.z = *va_arg(vlist, f32*);
+        Effect_SetGeneratorScale(generator, *va_arg(vlist, f32*));
     }
     return generator;
 }
@@ -744,8 +743,7 @@ HSD_Generator* efLib_CreateGenerator_AppSRT_SetFacingDirScale(s32 gfx_id,
     {
         direction = *va_arg(vlist, f32*);
         generator->appsrt->rot.y = direction < 0.0F ? -M_PI_2 : M_PI_2;
-        generator->appsrt->scale.x = generator->appsrt->scale.y =
-            generator->appsrt->scale.z = *va_arg(vlist, f32*);
+        Effect_SetGeneratorScale(generator, *va_arg(vlist, f32*));
     }
     return generator;
 }

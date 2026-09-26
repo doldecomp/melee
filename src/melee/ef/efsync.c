@@ -15,19 +15,6 @@
 #include <sysdolphin/baselib/psstructs.h>
 #include <sysdolphin/baselib/random.h>
 
-static inline void efSync_SetGeneratorScale(HSD_Generator* generator,
-                                            f32 scale)
-{
-    generator->appsrt->scale.x = generator->appsrt->scale.y =
-        generator->appsrt->scale.z = scale;
-}
-
-static inline void efSync_SetGeneratorPos(HSD_Generator* generator, Vec3* pos)
-{
-    HSD_psAppSRT* appsrt = generator->appsrt;
-    appsrt->translate = *pos;
-}
-
 // Routes gfx_id to a specific spawn handler:
 //
 // .--------------------------------------------.
@@ -60,7 +47,7 @@ void* efSync_Spawn(s32 gfx_id, HSD_GObj* gobj, ...)
     Fighter* fp;
     s32 cnt_2;
     f32 rand_rot_x;
-    PAD_STACK(0x20);
+    PAD_STACK(0x30);
 
     efLib_AnimCount = efLib_LoadKind = (u32) (ret_obj = NULL);
     va_start(vlist, gobj);
@@ -136,7 +123,7 @@ void* efSync_Spawn(s32 gfx_id, HSD_GObj* gobj, ...)
     case 0x4C3: {
         HSD_Generator* gen = efLib_CreateGenerator_AddAppSRT(0x24CU);
         if (gen != NULL) {
-            efSync_SetGeneratorPos(gen, va_arg(vlist, Vec3*));
+            Effect_SetGeneratorPos(gen, va_arg(vlist, Vec3*));
             ret_obj = gen;
         }
         break;
@@ -295,10 +282,10 @@ void* efSync_Spawn(s32 gfx_id, HSD_GObj* gobj, ...)
     case 0x4D8: {
         HSD_Generator* generator = efLib_CreateGenerator_AddAppSRT(0x61U);
         if (generator != NULL) {
-            efSync_SetGeneratorPos(generator, va_arg(vlist, Vec3*));
+            Effect_SetGeneratorPos(generator, va_arg(vlist, Vec3*));
             HSD_JObjGetScale((jobj_2 = GET_JOBJ(gobj)), &scale);
             ret_obj = generator;
-            efSync_SetGeneratorScale(generator, scale.y);
+            Effect_SetGeneratorScale(generator, scale.y);
             generator->appsrt->rot.y = M_PI_2;
         }
         break;
@@ -507,20 +494,20 @@ void* efSync_Spawn(s32 gfx_id, HSD_GObj* gobj, ...)
     case 0x504: {
         HSD_Generator* generator = efLib_CreateGenerator_AddAppSRT(0x6DU);
         if (generator != NULL) {
-            efSync_SetGeneratorPos(generator, va_arg(vlist, Vec3*));
+            Effect_SetGeneratorPos(generator, va_arg(vlist, Vec3*));
             HSD_JObjGetScale((jobj_2 = GET_JOBJ(gobj)), &scale);
             ret_obj = generator;
-            efSync_SetGeneratorScale(generator, scale.y);
+            Effect_SetGeneratorScale(generator, scale.y);
         }
         break;
     }
     case 0x505: {
         HSD_Generator* generator = efLib_CreateGenerator_AddAppSRT(0x79U);
         if (generator != NULL) {
-            efSync_SetGeneratorPos(generator, va_arg(vlist, Vec3*));
+            Effect_SetGeneratorPos(generator, va_arg(vlist, Vec3*));
             HSD_JObjGetScale((jobj_2 = gobj->hsd_obj), &scale);
             ret_obj = generator;
-            efSync_SetGeneratorScale(generator, scale.y);
+            Effect_SetGeneratorScale(generator, scale.y);
         }
         break;
     }
