@@ -5,8 +5,8 @@
 #include "gmresultplayer.h"
 #include "types.h"
 #include <dolphin/types.h>
+#include <melee/if/if_2FFC.h>
 #include <melee/if/if_3004.h>
-#include <melee/if/soundtest.h>
 #include <melee/lb/lbaudio_ax.h>
 #include <melee/mn/inlines.h>
 #include <melee/mn/types.h>

@@ -697,7 +697,7 @@ static void Item_80267AA8(HSD_GObj* gobj, SpawnItem* spawnItem)
     it_80275504(gobj);
     it_80274EF8(gobj);
 
-    if (ftLib_80086960(spawnItem->x0_parent_gobj)) {
+    if (ftLib_IsFighter(spawnItem->x0_parent_gobj)) {
         item_data->xDC8_word.flags.x1 = false;
     } else {
         item_data->xDC8_word.flags.x1 = true;
@@ -724,8 +724,8 @@ static void Item_80267AA8(HSD_GObj* gobj, SpawnItem* spawnItem)
 
     if (spawnItem->x0_parent_gobj == NULL) {
         item_data->x20_team_id = -1;
-    } else if (ftLib_80086960(spawnItem->x0_parent_gobj)) {
-        item_data->x20_team_id = ftLib_80086EB4(spawnItem->x0_parent_gobj);
+    } else if (ftLib_IsFighter(spawnItem->x0_parent_gobj)) {
+        item_data->x20_team_id = ftLib_GetTeam(spawnItem->x0_parent_gobj);
     } else if (it_80272D1C(spawnItem->x0_parent_gobj)) {
         item_data->x20_team_id = itGetTeamId(spawnItem->x0_parent_gobj);
     } else {
@@ -892,11 +892,11 @@ static void foobar2(HSD_GObj* gobj)
     Item* it = GET_ITEM(gobj);
     // Check if item is a character item with an owner
     if (it->kind >= It_Kind_Mario_Fire && it->kind < It_Kind_Unk4 &&
-        ftLib_80086960(it->owner))
+        ftLib_IsFighter(it->owner))
     {
         it->xDC8_word.flags.xE = 1;
         it->ecb_lock = ftLib_GetKind(it->owner);
-        ftLib_8008702C(it->ecb_lock);
+        ftLib_IncFighterRefCount(it->ecb_lock);
     }
 }
 
@@ -1611,11 +1611,11 @@ static bool Item_80269F14(HSD_GObj* gobj)
         if (temp_item->kind == It_Kind_M_Ball) {
             if (temp_item->xDCC_flag.b2 == 0) {
                 temp_item->owner = temp_item->xC64_reflectGObj;
-                temp_item->x20_team_id = ftLib_80086EB4(temp_item->owner);
+                temp_item->x20_team_id = ftLib_GetTeam(temp_item->owner);
             }
         } else {
             temp_item->owner = temp_item->xC64_reflectGObj;
-            temp_item->x20_team_id = ftLib_80086EB4(temp_item->owner);
+            temp_item->x20_team_id = ftLib_GetTeam(temp_item->owner);
         }
     }
 
@@ -1894,11 +1894,11 @@ void Item_8026A848(HSD_GObj* gobj, HSD_GObj* fighter_gobj)
         temp_item->kind != It_Kind_Peach_Turnip &&
         temp_item->kind != It_Kind_Peach_Parasol)
     {
-        if (ftLib_800867CC(fighter_gobj) == gobj) {
-            ftLib_80086764(fighter_gobj);
+        if (ftLib_GetHeldSpecialItem(fighter_gobj) == gobj) {
+            ftLib_ClearHeldSpecialItem(fighter_gobj);
         }
-    } else if (ftLib_800867A0(fighter_gobj, gobj)) {
-        ftLib_80086724(fighter_gobj, gobj);
+    } else if (ftLib_IsHoldingItem(fighter_gobj, gobj)) {
+        ftLib_ReleaseItem(fighter_gobj, gobj);
     }
 }
 
@@ -1911,11 +1911,11 @@ static void DestroyItemInline(HSD_GObj* gobj, Item* other_ip)
         ip->kind != It_Kind_CLink_Bomb && ip->kind != It_Kind_Peach_Turnip &&
         ip->kind != It_Kind_Peach_Parasol)
     {
-        if (ftLib_800867CC(other) == gobj) {
-            ftLib_80086764(other);
+        if (ftLib_GetHeldSpecialItem(other) == gobj) {
+            ftLib_ClearHeldSpecialItem(other);
         }
-    } else if (ftLib_800867A0(other, gobj)) {
-        ftLib_80086724(other, gobj);
+    } else if (ftLib_IsHoldingItem(other, gobj)) {
+        ftLib_ReleaseItem(other, gobj);
     }
 }
 
@@ -1954,7 +1954,7 @@ static void func_8026A8EC_inline1(HSD_GObj* gobj)
     Item* ip = GET_ITEM(gobj);
 
     if (ip->xDC8_word.flags.xE) {
-        ftLib_80087050(ip->ecb_lock);
+        ftLib_DecFighterRefCount(ip->ecb_lock);
         ip->xDC8_word.flags.xE = false;
         ip->ecb_lock = -1;
     }
@@ -1997,7 +1997,7 @@ void Item_8026A8EC(Item_GObj* gobj)
     func_8026A8EC_inline2(gobj);
 
     if (ip->xDC8_word.flags.x13 && ip->owner != NULL &&
-        ftLib_80086960(ip->owner))
+        ftLib_IsFighter(ip->owner))
     {
         DestroyItemInline(gobj, ip);
     }

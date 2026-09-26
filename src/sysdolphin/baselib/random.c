@@ -25,5 +25,4 @@ void _HSD_RandForgetMemory(void* low, void* high)
     if (low <= (void*) HSD_RandSeedPtr && (void*) HSD_RandSeedPtr < high) {
         HSD_RandSeedPtr = &seed;
     }
-    return;
 }

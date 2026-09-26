@@ -77,7 +77,7 @@ bool it_8026F3D4(Item_GObj* item_gobj, struct it_8026F3D4_arg1_t* arg1,
             cnt2++;
         }
     }
-    if (ftLib_80086960(item->owner)) {
+    if (ftLib_IsFighter(item->owner)) {
         s32 n = cnt2;
         if (n != 0) {
             ftLib_800874CC(item->owner, &sp30, n);

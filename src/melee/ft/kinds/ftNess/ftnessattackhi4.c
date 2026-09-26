@@ -680,7 +680,6 @@ void ftNs_AttackHi4_Anim(HSD_GObj* gobj)
 }
 
 /// 0x80115E74
-/// https://decomp.me/scratch/0Hcrg
 void ftNs_AttackHi4_IASA(HSD_GObj* gobj) // Ness's Up Smash IASA callback
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -697,7 +696,6 @@ void ftNs_AttackHi4_IASA(HSD_GObj* gobj) // Ness's Up Smash IASA callback
 }
 
 /// 0x80115EB8
-/// https://decomp.me/scratch/e4x3x
 void ftNs_AttackHi4_Phys(HSD_GObj* gobj) // Ness's Up Smash Physics callback
 {
     ft_80084F3C(gobj);
@@ -713,7 +711,6 @@ GetFighterData_x222C(HSD_GObj* gobj) // Yet another inline needed to match
 }
 
 /// 0x80115F14
-/// https://decomp.me/scratch/W7Ug6
 void ftNs_AttackHi4_Coll(HSD_GObj* gobj) // Ness's Up Smash Collision callback
 {
     Fighter* fp;
@@ -743,7 +740,6 @@ static inline HSD_GObj* GetYoyoGObj(Fighter* fp)
 };
 
 /// 0x80115F88
-/// https://decomp.me/scratch/3Af8Z
 void ftNs_AttackHi4Charge_Anim(
     HSD_GObj* gobj) // Ness's Up Smash Charge Animation callback
 {
@@ -790,7 +786,6 @@ void ftNs_AttackHi4Charge_Anim(
 }
 
 /// 0x801160B4
-/// https://decomp.me/scratch/cU6sU
 void ftNs_AttackHi4Charge_IASA(
     HSD_GObj* gobj) // Ness's Up Smash Charge IASA callback
 {
@@ -801,7 +796,6 @@ void ftNs_AttackHi4Charge_IASA(
 }
 
 /// 0x801160E4
-/// https://decomp.me/scratch/Te2bU
 void ftNs_AttackHi4Charge_Phys(
     HSD_GObj* gobj) // Ness's Up Smash Charge Physics callback
 {
@@ -809,7 +803,6 @@ void ftNs_AttackHi4Charge_Phys(
 }
 
 /// 0x80116104
-/// https://decomp.me/scratch/TJd8i
 void ftNs_AttackHi4Charge_Coll(
     HSD_GObj* gobj) // Ness's Up Smash Charge Collision callback
 {
@@ -832,7 +825,6 @@ void ftNs_AttackHi4Charge_Coll(
 }
 
 /// 0x80116178
-/// https://decomp.me/scratch/dY1wZ
 void ftNs_AttackHi4Charge_Enter(
     HSD_GObj* gobj) // Ness's Up Smash Charge Motion State handler
 {
@@ -849,7 +841,6 @@ void ftNs_AttackHi4Charge_Enter(
 }
 
 /// 0x8011620C
-/// https://decomp.me/scratch/QRdS1
 void ftNs_AttackHi4Release_Anim(
     HSD_GObj* gobj) // Ness's Up Smash Post-Charge Animation callback
 {
@@ -880,7 +871,6 @@ void ftNs_AttackHi4Release_Anim(
 }
 
 /// 0x801162B0
-/// https://decomp.me/scratch/TowF9
 void ftNs_AttackHi4Release_IASA(
     HSD_GObj* gobj) // Ness's Up Smash Post-Charge IASA
 {
@@ -891,7 +881,6 @@ void ftNs_AttackHi4Release_IASA(
 }
 
 /// 0x801162E0
-/// https://decomp.me/scratch/U8Bk1
 void ftNs_AttackHi4Release_Phys(
     HSD_GObj* gobj) // Ness's Up Smash Post-Charge Physics callback
 {
@@ -915,7 +904,6 @@ void ftNs_AttackHi4Release_Phys(
 }
 
 /// 0x80116420
-/// https://decomp.me/scratch/TQPrT
 void ftNs_AttackHi4Release_Coll(
     HSD_GObj* gobj) // Ness's Up Smash Post-Charge Collision callback
 {

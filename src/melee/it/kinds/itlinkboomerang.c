@@ -245,7 +245,8 @@ void it_802A0534(Item_GObj* gobj, Vec3* arg1, f32 angle)
     ip->xDD4_itemVar.linkboomerang.xF74 = angle;
     norm_xF74_from_angle(ip, angle);
     ip->xB8_itemLogicTable->thrown(gobj);
-    mtx = (ftLib_80086630(ip->xDD4_itemVar.linkboomerang.xF98, ip->xDC4))->mtx;
+    mtx = (ftLib_GetPartJObj(ip->xDD4_itemVar.linkboomerang.xF98, ip->xDC4))
+              ->mtx;
     HSD_MtxGetRotation(mtx, (Vec3*) &stack.quad); // kinda sus
     it_8027429C(gobj, arg1);
     it_8026B3A8(gobj);
@@ -862,7 +863,7 @@ bool it_802A20E8(Item_GObj* gobj)
         }
         ip->xDD4_itemVar.linkboomerang.xDE8 = 1;
         ip->xD44_lifeTimer = ip->xD48_halfLifeTimer;
-        ftLib_800866DC(gobj2, &sp14);
+        ftLib_GetCameraBonePos(gobj2, &sp14);
         dy = it_802A20E8_inline(ip) - sp14.x;
         dx = ip->pos.y - sp14.y;
         ip->xDD4_itemVar.linkboomerang.xF74 = atan2f(dx, dy);

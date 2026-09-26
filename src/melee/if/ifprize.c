@@ -2,7 +2,6 @@
 
 #include <melee/cm/forward.h>
 
-#include <placeholder.h>
 #include <stdio.h>
 
 #include "forward.h"
@@ -64,7 +63,7 @@ struct un_803F9D48 {
     unsigned char x0a : 4;
     unsigned char x0b : 4;
     unsigned char x1;
-    char x2;
+    s8 x2;
     unsigned char x3;
     u16 x4;
     u16 x6;
@@ -89,7 +88,7 @@ struct un_803F9D48 {
 /* 4D6D98 */ static HSD_Archive* un_804D6D98;
 /* 4D6D9C */ static SceneDesc* un_804D6D9C;
 
-void un_802FE3F8(int a, int b, s16* c, s16* d)
+void un_802FE3F8(int a, int b, u16* c, u16* d)
 {
     struct un_803F9B30* x;
     for (x = &un_803F9B30[0]; x->x0 != 66; x++) {
@@ -108,15 +107,27 @@ void un_802FE3F8(int a, int b, s16* c, s16* d)
     }
 }
 
-static inline void un_802FE3F8_inner(int a, int b, s16* c, s16* d)
+static inline int lookupX4(int a)
 {
-    un_802FE3F8(a, b, c, d);
+    struct un_803F9B30* x;
+
+    for (x = &un_803F9B30[0]; x->x0 != 66; x++) {
+        if (x->x0 == a) {
+            return un_803F9A00[x->x4];
+        }
+    }
+    return 0;
 }
 
-/// ifPrize_Scene_OnEnter will inline un_802FE3F8 otherwise
-static inline void un_802FE3F8_noinline(int a, int b, s16* c, s16* d)
+static inline void setX6(int a)
 {
-    un_802FE3F8_inner(a, b, c, d);
+    un_802FE3F8(a, 2, &un_803F9D48.x6, NULL);
+}
+
+static inline void setX4X6(int a)
+{
+    un_803F9D48.x4 = lookupX4(a);
+    setX6(a);
 }
 
 void fn_802FE470(HSD_GObj* gobj)
@@ -167,7 +178,7 @@ void fn_802FE470(HSD_GObj* gobj)
             gm_801A4B60();
             return;
         }
-        HSD_JObjReqAnimAll(jobj, (f32) (s8) un_803F9D48.x2);
+        HSD_JObjReqAnimAll(jobj, (f32) un_803F9D48.x2);
         HSD_DObjReqAnimAll(un_803F9D48.x10->u.dobj, (f32) un_803F9D48.x4);
         HSD_DObjReqAnimAll(HSD_JObjGetChild(un_803F9D48.x10)->u.dobj,
                            (f32) un_803F9D48.x4);
@@ -175,23 +186,36 @@ void fn_802FE470(HSD_GObj* gobj)
     }
 }
 
+static inline void setTextColor(HSD_Text* text, GXColor* color)
+{
+    text->text_color = *color;
+}
+
+static inline HSD_GObj* createCamera(void)
+{
+    HSD_GObj* gobj = GObj_Create(HSD_GOBJ_CLASS_CAMERA, 20, 0);
+    HSD_GObjObject_80390A70(gobj, HSD_GObj_CameraKind & 0xFF,
+                            HSD_CObjLoadDesc(un_804D6D9C->cameras[0].desc));
+    GObj_SetupGXLinkMax(gobj, HSD_GObj_803910D8, 8);
+    gobj->gxlink_prios = 0xC00;
+    return gobj;
+}
+
+static inline HSD_GObj* createLight(void)
+{
+    HSD_GObj* gobj = GObj_Create(HSD_GOBJ_CLASS_LIGHT, 3, 0);
+    HSD_GObjObject_80390A70(gobj, HSD_GObj_LightKind & 0xFF,
+                            lb_80011AC4(un_804D6D9C->lights));
+    GObj_SetupGXLink(gobj, HSD_GObj_LObjCallback, 10, 0);
+    return gobj;
+}
+
 void un_802FE6A8(void)
 {
-    HSD_GObj* gobj_camera;
-    HSD_GObj* gobj_light;
     HSD_GObj* gobj_ui;
     HSD_JObj* jobj_ui;
-    gobj_camera = GObj_Create(HSD_GOBJ_CLASS_CAMERA, 20, 0);
-    HSD_GObjObject_80390A70(gobj_camera, HSD_GObj_CameraKind & 0xFF,
-                            HSD_CObjLoadDesc(un_804D6D9C->cameras[0].desc));
-    GObj_SetupGXLinkMax(gobj_camera, HSD_GObj_803910D8, 8);
-    gobj_camera->gxlink_prios = 0xC00;
-    un_803F9D48.x18 = gobj_camera;
-    gobj_light = GObj_Create(HSD_GOBJ_CLASS_LIGHT, 3, 0);
-    HSD_GObjObject_80390A70(gobj_light, HSD_GObj_LightKind & 0xFF,
-                            lb_80011AC4(un_804D6D9C->lights));
-    GObj_SetupGXLink(gobj_light, HSD_GObj_LObjCallback, 10, 0);
-    un_803F9D48.x1C = gobj_light;
+    un_803F9D48.x18 = createCamera();
+    un_803F9D48.x1C = createLight();
     gobj_ui = GObj_Create(HSD_GOBJ_CLASS_UI, 15, 0);
     jobj_ui = HSD_JObjLoadJoint(un_804D6D9C->models[0]->joint);
     HSD_GObjObject_80390A70(gobj_ui, HSD_GObj_JObjKind, jobj_ui);
@@ -204,7 +228,6 @@ void un_802FE6A8(void)
     un_803F9D48.x14 = gobj_ui;
     {
         GXColor color = { 0x5A, 0x5A, 0x5A, 0xFF };
-        PAD_STACK(0x14);
 
         HSD_SisLib_803A611C(2, 0, 9, 20, 0, 14, 0, 18);
         un_803F9D48.x20 =
@@ -214,7 +237,7 @@ void un_802FE6A8(void)
         un_803F9D48.x24 = HSD_SisLib_803A6754(2, 0);
         un_803F9D48.x24->default_alignment = 1;
         un_803F9D48.x24->default_kerning = 1;
-        un_803F9D48.x24->text_color = color;
+        setTextColor(un_803F9D48.x24, &color);
     }
 }
 
@@ -259,10 +282,8 @@ static inline void un_802FE918_update_x3(unsigned char* x3_ptr, int* r)
 
 void un_802FE918(int a, int b, int c)
 {
-    struct un_803F9B30* x;
     unsigned char* x3_ptr;
     int r;
-    int i;
     char sp1C[0x104];
     HSD_Text** text;
     datetime sp14;
@@ -273,18 +294,10 @@ void un_802FE918(int a, int b, int c)
     r = HSD_Randi(2);
     un_802FE918_update_x3(x3_ptr, &r);
     gmMainLib_8015D8B0(a);
-    for (x = &un_803F9B30[0]; x->x0 != 66; x++) {
-        if (x->x0 == a) {
-            i = un_803F9A00[x->x4];
-            goto found;
-        }
-    }
-    i = 0;
-found:
-    un_803F9D48.x4 = i;
+    un_803F9D48.x4 = lookupX4(a);
     if (a == 0x3E) {
         u16 v_x6;
-        un_802FE3F8(a, 2, (s16*) &un_803F9D48.x6, (s16*) &un_803F9D48.x8);
+        un_802FE3F8(a, 2, &un_803F9D48.x6, &un_803F9D48.x8);
         v_x6 = un_803F9D48.x6;
         r = un_803F9D48.x8;
         HSD_SisLib_803A6530(2, 0x4A, v_x6);
@@ -292,7 +305,7 @@ found:
         HSD_SisLib_803A660C(2, 0x4A, r);
         HSD_SisLib_803A6368(un_803F9D48.x20, 0x4A);
     } else {
-        un_802FE3F8(a, 2, (s16*) &un_803F9D48.x6, NULL);
+        un_802FE3F8(a, 2, &un_803F9D48.x6, NULL);
         HSD_SisLib_803A6368(un_803F9D48.x20, un_803F9D48.x6);
     }
     gm_801692E8(c, &sp14);
@@ -311,8 +324,6 @@ found:
 void ifPrize_Scene_OnEnter(void* arg0_)
 {
     struct un_802FEBE0_OnEnter_arg0* arg0 = arg0_;
-    struct un_803F9B30* x;
-    int i;
     int arg0x4;
     int arg0x0;
 
@@ -321,19 +332,9 @@ void ifPrize_Scene_OnEnter(void* arg0_)
     un_803F9D48.x2C = arg0->x8;
     un_803F9D48.x3 = HSD_Randi(3);
     arg0x4 = arg0->x4;
-    i = 0;
     arg0x0 = arg0->x0;
     un_803F9D48.x0b = 1;
-    for (x = &un_803F9B30[0]; x->x0 != 66; x++) {
-        if (x->x0 == arg0x0) {
-            i = un_803F9A00[x->x4];
-            goto found;
-        }
-    }
-    i = 0;
-found:
-    un_803F9D48.x4 = i;
-    un_802FE3F8_noinline(arg0x0, 2, (s16*) &un_803F9D48.x6, NULL);
+    setX4X6(arg0x0);
     un_803F9D48.x2 = -1;
     un_803F9D48.x1 = 0;
     un_803F9D48.xC = arg0x4;

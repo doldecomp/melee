@@ -392,7 +392,7 @@ void it_3F14_Logic5_Dropped(Item_GObj* gobj)
     f32 facing;
     it_802969D8(gobj);
     it_80275444(gobj);
-    facing = ftLib_800865C0(ip->owner);
+    facing = ftLib_GetFacingDir(ip->owner);
     ip->facing_dir = facing;
     ip->x40_vel.x = 0.5f * facing;
 }

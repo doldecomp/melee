@@ -20,7 +20,7 @@
 #include <melee/ft/types.h>
 
 /// 0x80143FC8
-/// https://decomp.me/scratch/MAoxx // Luigi's grounded Super Jump Punch Action
+/// Luigi's grounded Super Jump Punch Action
 /// State handler
 void ftLg_SpecialHi_Enter(HSD_GObj* gobj)
 {
@@ -79,7 +79,7 @@ void ftLg_SpecialAirHi_Anim(HSD_GObj* gobj)
 }
 
 /// 0x80144158
-/// https://decomp.me/scratch/M9q8b // Luigi's grounded Super Jump Punch IASA
+/// Luigi's grounded Super Jump Punch IASA
 /// callback
 void ftLg_SpecialHi_IASA(HSD_GObj* gobj)
 {
@@ -195,7 +195,7 @@ void ftLg_SpecialAirHi_IASA(HSD_GObj* gobj)
 }
 
 /// 0x801443E8
-/// https://decomp.me/scratch/TmnDt // Luigi's grounded Super Jump Punch
+/// Luigi's grounded Super Jump Punch
 /// Physics callback
 void ftLg_SpecialHi_Phys(HSD_GObj* gobj)
 {
@@ -207,7 +207,7 @@ void ftLg_SpecialHi_Phys(HSD_GObj* gobj)
 }
 
 /// 0x80144420
-/// https://decomp.me/scratch/vIYcm // Luigi's aerial Super Jump Punch Physics
+/// Luigi's aerial Super Jump Punch Physics
 /// callback
 void ftLg_SpecialAirHi_Phys(HSD_GObj* gobj)
 {
@@ -228,7 +228,7 @@ void ftLg_SpecialAirHi_Phys(HSD_GObj* gobj)
 }
 
 /// 0x801444B4
-/// https://decomp.me/scratch/l7min // Luigi's Super Jump Punch Landing check
+/// Luigi's Super Jump Punch Landing check
 void ftLg_SpecialHi_CheckLanding(HSD_GObj* gobj)
 {
     ftCo_LandingFallSpecial_Enter(
@@ -238,7 +238,7 @@ void ftLg_SpecialHi_CheckLanding(HSD_GObj* gobj)
 }
 
 /// 0x801444E4
-/// https://decomp.me/scratch/5aRWp // Luigi's grounded Super Jump Punch
+/// Luigi's grounded Super Jump Punch
 /// Collision callback
 void ftLg_SpecialHi_Coll(HSD_GObj* gobj)
 {
@@ -256,7 +256,7 @@ void ftLg_SpecialHi_Coll(HSD_GObj* gobj)
 }
 
 /// 0x80144554
-/// https://decomp.me/scratch/h03kd // Luigi's aerial Super Jump Punch
+/// Luigi's aerial Super Jump Punch
 /// Collision callback
 void ftLg_SpecialAirHi_Coll(HSD_GObj* gobj)
 {

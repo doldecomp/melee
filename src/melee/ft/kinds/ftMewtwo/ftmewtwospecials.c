@@ -39,7 +39,7 @@
         Ft_MF_SkipModelFlags | Ft_MF_Unk27
 
 /// 0x8014665C
-/// https://decomp.me/scratch/ktG8y // Set flags
+/// Set flags
 static void ftMt_SpecialS_SetFlags(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -63,7 +63,7 @@ static inline void ftMewtwo_SpecialS_SetGrab(HSD_GObj* gobj)
 }
 
 /// 0x801466C4
-/// https://decomp.me/scratch/X6OTU // Mewtwo's grounded Confusion Motion State
+/// Mewtwo's grounded Confusion Motion State
 /// handler
 void ftMt_SpecialS_Enter(HSD_GObj* gobj)
 {
@@ -97,7 +97,7 @@ static inline void ftMewtwo_SpecialAirS_SetGrab(HSD_GObj* gobj)
 }
 
 /// 0x8014677C
-/// https://decomp.me/scratch/4DvVc // Mewtwo's aerial Confusion Motion State
+/// Mewtwo's aerial Confusion Motion State
 /// handler
 void ftMt_SpecialAirS_Enter(HSD_GObj* gobj)
 {
@@ -142,7 +142,7 @@ static inline void ftMewtwo_SetGrabVictim(HSD_GObj* gobj)
 }
 
 /// 0x80146858
-/// https://decomp.me/scratch/PYxCI // Mewtwo's grounded Confusion Animation
+/// Mewtwo's grounded Confusion Animation
 /// callback
 void ftMt_SpecialS_Anim(HSD_GObj* gobj)
 {
@@ -154,7 +154,7 @@ void ftMt_SpecialS_Anim(HSD_GObj* gobj)
 }
 
 /// 0x801468EC
-/// https://decomp.me/scratch/rpTDv // Mewtwo's aerial Confusion Animation
+/// Mewtwo's aerial Confusion Animation
 /// callback
 void ftMt_SpecialAirS_Anim(HSD_GObj* gobj)
 {
@@ -178,7 +178,7 @@ void ftMt_SpecialAirS_IASA(HSD_GObj* gobj)
 }
 
 /// 0x80146988
-/// https://decomp.me/scratch/o5TC6 // Mewtwo's grounded Confusion Physics
+/// Mewtwo's grounded Confusion Physics
 /// callback
 void ftMt_SpecialS_Phys(HSD_GObj* gobj)
 {
@@ -187,7 +187,7 @@ void ftMt_SpecialS_Phys(HSD_GObj* gobj)
 }
 
 /// 0x801469BC
-/// https://decomp.me/scratch/o5TC6 // Mewtwo's aerial Confusion Physics
+/// Mewtwo's aerial Confusion Physics
 /// callback
 void ftMt_SpecialAirS_Phys(HSD_GObj* gobj)
 {
@@ -206,7 +206,7 @@ static inline void ftMewtwo_SpecialS_SetReflect(HSD_GObj* gobj)
 }
 
 /// 0x801469F0
-/// https://decomp.me/scratch/W9wyx // Mewtwo's ground -> air Confusion Action
+/// Mewtwo's ground -> air Confusion Action
 /// State handler
 void ftMt_SpecialS_GroundToAir(HSD_GObj* gobj)
 {
@@ -225,7 +225,7 @@ void ftMt_SpecialS_GroundToAir(HSD_GObj* gobj)
 }
 
 /// 0x80146AD4
-/// https://decomp.me/scratch/gv2WK // Mewtwo's air -> ground Confusion Action
+/// Mewtwo's air -> ground Confusion Action
 /// State handler
 void ftMt_SpecialAirS_AirToGround(HSD_GObj* gobj)
 {
@@ -256,7 +256,7 @@ void ftMt_SpecialAirS_Coll(HSD_GObj* gobj)
 }
 
 /// 0x80146C08
-/// https://decomp.me/scratch/BDCzb // Confusion Reflect think function
+/// Confusion Reflect think function
 void ftMt_SpecialS_ReflectThink(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);

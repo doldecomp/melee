@@ -14,7 +14,7 @@
 #include <melee/ft/kinds/ftCommon/ftCo_Attack100.h>
 
 /// 0x8014C1E8
-/// https://decomp.me/scratch/AyScb // Mr. Game & Watch's Rapid Jab Start
+/// Mr. Game & Watch's Rapid Jab Start
 /// Action State handler
 void ftGw_Attack100Start_Enter(HSD_GObj* gobj)
 {
@@ -25,7 +25,7 @@ void ftGw_Attack100Start_Enter(HSD_GObj* gobj)
 }
 
 /// 0x8014C224
-/// https://decomp.me/scratch/sBY5w // Mr. Game & Watch's Rapid Jab Start
+/// Mr. Game & Watch's Rapid Jab Start
 /// Animation callback
 void ftGw_Attack100Start_Anim(HSD_GObj* gobj)
 {
@@ -54,7 +54,7 @@ void ftGw_Attack100Start_Coll(HSD_GObj* gobj)
 }
 
 /// 0x8014C2B8
-/// https://decomp.me/scratch/npI0e // Mr. Game & Watch's Rapid Jab Loop Acion
+/// Mr. Game & Watch's Rapid Jab Loop Acion
 /// State handler
 void ftGw_Attack100Loop_Enter(HSD_GObj* gobj)
 {
@@ -66,7 +66,7 @@ void ftGw_Attack100Loop_Enter(HSD_GObj* gobj)
 }
 
 /// 0x8014C308
-/// https://decomp.me/scratch/39K2l // Mr. Game & Watch's Rapid Jab Loop
+/// Mr. Game & Watch's Rapid Jab Loop
 /// Animation callback
 void ftGw_Attack100Loop_Anim(HSD_GObj* gobj)
 {

@@ -76,14 +76,14 @@ void un_80321AF4(HSD_GObj* gobj)
     cur = HSD_GObjPLinkHead[HSD_GOBJ_PLINK_FIGHTER];
 
     while (cur != NULL) {
-        if (ftLib_8008732C(cur) == 0) {
-            if (ftLib_8008731C(cur) == 0) {
-                ftLib_80086644(cur, &pos);
+        if (ftLib_IsDead(cur) == 0) {
+            if (ftLib_IsSleeping_8008731C(cur) == 0) {
+                ftLib_GetPos(cur, &pos);
 
                 if (pos.y < gCrowdConfig->blastzone_y_offset + box[1].bottom) {
                     data->x24 = data->x24 + 1;
                 } else {
-                    if (data->xC == ftLib_80087460(cur)) {
+                    if (data->xC == ftLib_GetSpawnNum(cur)) {
                         flag = 1;
                     }
                 }
@@ -192,17 +192,17 @@ bool un_80321EBC(u32 arg0, f32 arg1)
     u32 arg0_copy = arg0;
 
     data = crowdsfx_ptr;
-    gobj = ftLib_8008741C(arg0_copy);
+    gobj = ftLib_FindBySpawnNum(arg0_copy);
     if (gobj == NULL) {
         goto skip;
     }
 
-    port = ftLib_800874BC(gobj);
-    if (Player_8003248C(ftLib_80086BE0(gobj), port) == 1) {
+    port = ftLib_IsSubFighter(gobj);
+    if (Player_8003248C(ftLib_GetPlayerIndex(gobj), port) == 1) {
         goto skip;
     }
 
-    if (ftLib_80087120(gobj) < gCrowdConfig->x1C) {
+    if (ftLib_GetPercent(gobj) < gCrowdConfig->x1C) {
         goto skip;
     }
     if (data->x10 < gCrowdConfig->cheer_limit) {
@@ -237,8 +237,8 @@ bool un_80321EBC(u32 arg0, f32 arg1)
     data->xC = arg0;
     data->x18 = 0;
 
-    port = ftLib_800874BC(gobj);
-    pl_8003FDA0(ftLib_80086BE0(gobj), port);
+    port = ftLib_IsSubFighter(gobj);
+    pl_8003FDA0(ftLib_GetPlayerIndex(gobj), port);
 
     return 1;
 }
@@ -267,8 +267,8 @@ bool un_8032201C(u32 arg0, s32 cat)
             un_80321C70();
         }
 
-        gobj = ftLib_8008741C(arg0);
-        pl_8003FDC8(ftLib_80086BE0(gobj), ftLib_800874BC(gobj));
+        gobj = ftLib_FindBySpawnNum(arg0);
+        pl_8003FDC8(ftLib_GetPlayerIndex(gobj), ftLib_IsSubFighter(gobj));
     }
     return true;
 }
