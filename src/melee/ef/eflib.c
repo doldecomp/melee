@@ -72,6 +72,23 @@ static inline void eflib_create_generator_add_appsrt(HSD_Generator** generator,
     }
 }
 
+static inline HSD_Generator* efLib_AddGeneratorAppSRT(HSD_Generator* generator,
+                                                      s32 status)
+{
+    HSD_psAppSRT* appsrt;
+
+    if (generator != NULL) {
+        if ((appsrt = generator->appsrt) == NULL) {
+            appsrt = psAddGeneratorAppSRT_begin(generator, status);
+        }
+        if (appsrt == NULL) {
+            hsd_8039D4DC(generator);
+            return NULL;
+        }
+    }
+    return generator;
+}
+
 void efLib_Init(void)
 {
     HSD_GObj* gobj;
@@ -615,20 +632,9 @@ HSD_Generator* efLib_CreateGenerator(s32 gfx_id, Vec3* pos)
 
 HSD_Generator* efLib_CreateGenerator_AddAppSRT(s32 gfx_id)
 {
-    HSD_Generator* generator;
-    HSD_psAppSRT* appsrt;
+    HSD_Generator* generator = hsd_8039F05C(0, gfx_id / 1000, gfx_id);
 
-    generator = hsd_8039F05C(0, (gfx_id / 1000), gfx_id);
-    if (generator != NULL) {
-        if ((appsrt = generator->appsrt) == NULL) {
-            appsrt = psAddGeneratorAppSRT_begin(generator, 1);
-        }
-        if (appsrt == NULL) {
-            hsd_8039D4DC(generator);
-            return NULL;
-        }
-    }
-    return generator;
+    return efLib_AddGeneratorAppSRT(generator, 1);
 }
 
 HSD_Generator* efLib_CreateGenerator_Translate_FacingDir(s32 gfx_id,
@@ -636,18 +642,9 @@ HSD_Generator* efLib_CreateGenerator_Translate_FacingDir(s32 gfx_id,
                                                          f32 direction)
 {
     HSD_Generator* generator;
-    HSD_psAppSRT* appsrt;
 
-    generator = hsd_8039F05C(0, (gfx_id / 1000), gfx_id);
-    if (generator != NULL) {
-        if ((appsrt = generator->appsrt) == NULL) {
-            appsrt = psAddGeneratorAppSRT_begin(generator, 1);
-        }
-        if (appsrt == NULL) {
-            hsd_8039D4DC(generator);
-            generator = NULL;
-        }
-    }
+    generator =
+        efLib_AddGeneratorAppSRT(hsd_8039F05C(0, gfx_id / 1000, gfx_id), 1);
     if (generator != NULL) {
         generator->appsrt->translate.x = translation->x;
         generator->appsrt->translate.y = translation->y;
@@ -828,7 +825,9 @@ void efLib_SpawnParticleEffect(int bank, s32 gfx_id, HSD_JObj* jobj, bool flag)
     case 0x170:
     case 0x7E2: {
         // standalone, inherit root rot.y + translation
-        if ((generator = efLib_CreateGenerator_AddAppSRT(gfx_id)) != NULL) {
+        if ((generator = efLib_AddGeneratorAppSRT(
+                 hsd_8039F05C(0, gfx_id / 1000, gfx_id), 1)) != NULL)
+        {
             while (HSD_JObjGetParent(root) != NULL) {
                 root = HSD_JObjGetParent(root);
             }
@@ -879,7 +878,9 @@ void efLib_SpawnParticleEffect(int bank, s32 gfx_id, HSD_JObj* jobj, bool flag)
     }
     case 0xE3: {
         // standalone, root translate + root scale
-        if ((generator = efLib_CreateGenerator_AddAppSRT(gfx_id)) != NULL) {
+        if ((generator = efLib_AddGeneratorAppSRT(
+                 hsd_8039F05C(0, gfx_id / 1000, gfx_id), 1)) != NULL)
+        {
             lb_8000B1CC(jobj, NULL, &generator->appsrt->translate);
             while (HSD_JObjGetParent(root) != NULL) {
                 root = HSD_JObjGetParent(root);
