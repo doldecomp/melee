@@ -170,36 +170,36 @@ void* efAlt_Spawn(s32 gfx_id, HSD_GObj* gobj, va_list vlist)
     }
     case 0x494: {
         Fighter* fp;
-        HSD_JObj* jobj;
-        HSD_JObj* jobj_2;
+        HSD_JObj* r3rd_joint;
+        HSD_JObj* trans_joint;
         EF_Effect* effect_1;
         EF_Effect* effect_2;
         EF_Effect* next_eff;
-        u16 effect_flags;
+        u16 lifetime;
 
-        effect_flags = 0x41;
+        lifetime = 0x41;
         fp = gobj->user_data;
-        jobj = fp->parts[FtPart_R3rdNa].joint;
-        jobj_2 = fp->parts[FtPart_TransN].joint;
-        ret_obj = efLib_Create_AttachChild(0x1388U, gobj, jobj);
+        r3rd_joint = fp->parts[FtPart_R3rdNa].joint;
+        trans_joint = fp->parts[FtPart_TransN].joint;
+        ret_obj = efLib_Create_AttachChild(0x1388, gobj, r3rd_joint);
         if (ret_obj != NULL) {
             effect_1 = ret_obj;
             effect_1->update = efLib_Cb_SetRotYAndTransition;
-            effect_1->lifetime = effect_flags;
+            effect_1->lifetime = lifetime;
             effect_1->user_data = NULL;
-            next_eff = efLib_Create_Attach(0x1389U, gobj, jobj);
+            next_eff = efLib_Create_Attach(0x1389, gobj, r3rd_joint);
             effect_1->next = next_eff;
             if (next_eff != NULL) {
                 effect_2 = effect_1->next;
                 effect_2->update = efLib_Cb_SetRotYAndTransition;
-                effect_2->lifetime = effect_flags;
+                effect_2->lifetime = lifetime;
                 effect_2->user_data = fp;
-                next_eff = efLib_Create_Attach(0x138AU, gobj, jobj_2);
+                next_eff = efLib_Create_Attach(0x138A, gobj, trans_joint);
                 effect_2->next = next_eff;
                 if (next_eff != NULL) {
                     effect_1 = effect_2->next;
                     effect_1->update = efLib_Cb_SetRotYAndTransition;
-                    effect_1->lifetime = effect_flags;
+                    effect_1->lifetime = lifetime;
                     effect_1->user_data = fp;
                 }
             }

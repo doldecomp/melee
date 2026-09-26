@@ -474,13 +474,13 @@ void* efSync_Spawn(s32 gfx_id, HSD_GObj* gobj, ...)
         break;
     case 0x4FF:
     case 0x500:
-        ret_obj = efLib_Create_Attach_Scale(0x426D, gobj,
-                                            GET_FIGHTER(gobj)->parts[1].joint);
+        ret_obj = efLib_Create_Attach_Scale(
+            0x426D, gobj, GET_FIGHTER(gobj)->parts[FtPart_TransN].joint);
         break;
     case 0x501:
         fp = GET_FIGHTER(gobj);
-        ret_obj = efLib_Create_Attach_Scale(0x426E, gobj,
-                                            GET_FIGHTER(gobj)->parts[1].joint);
+        ret_obj = efLib_Create_Attach_Scale(
+            0x426E, gobj, GET_FIGHTER(gobj)->parts[FtPart_TransN].joint);
         if (ret_obj != NULL) {
             effect = ret_obj;
             if (fp->facing_dir < 0.0f) {
