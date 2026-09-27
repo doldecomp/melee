@@ -149,12 +149,11 @@ bool mnDiagram_IsDistanceOverflow(u32 distance)
             return true;
         }
         return false;
-    } else {
-        if (distance >= 0x186A0) {
-            return true;
-        }
-        return false;
     }
+    if (distance >= 0x186A0) {
+        return true;
+    }
+    return false;
 }
 
 u32 mnDiagram_ConvertDistanceForDisplay(u32 distance)
@@ -1500,11 +1499,7 @@ static inline void mnDiagram_FormatPopupNumber(char* buf, u32 val)
 
 static inline void setPopupTextPosition(HSD_Text* text, const Vec3* pos)
 {
-    f32 y = -pos->y;
-    f32 z = pos->z;
-    text->pos_x = pos->x;
-    text->pos_y = y;
-    text->pos_z = z;
+    mnDiagram_TextSetPos(text, pos->x, -pos->y, pos->z);
 }
 
 void mnDiagram_CreatePopupTexts(HSD_GObj* arg0, s32 selkind_or_nametag_slot_id,
@@ -1517,7 +1512,6 @@ void mnDiagram_CreatePopupTexts(HSD_GObj* arg0, s32 selkind_or_nametag_slot_id,
     u32 sd_count;
 
     HSD_Text* text = HSD_SisLib_803A6754(0, 1);
-    u8 sp[24];
     data->text[0] = text;
     lb_8000B1CC(data->jobjs[8], &mnDiagram_PopupTextOffsets.points[0], &pos);
     text->font_size.x = 0.0521f;
@@ -1629,15 +1623,6 @@ void mnDiagram_CreatePopupTexts(HSD_GObj* arg0, s32 selkind_or_nametag_slot_id,
         HSD_SisLib_803A6B98(text, 0.0f, 0.0f, buf);
     }
 }
-
-/// @todo .sdata2 order hack
-#ifdef MUST_MATCH
-static void order_sdata2(void)
-{
-    (void) -1.0f;
-    (void) S32_TO_F32;
-}
-#endif
 
 void mnDiagram_CreatePopup(s32 arg0, s32 arg1, s32 use_nametag)
 {
@@ -1913,8 +1898,7 @@ static inline void updateScrollArrowVisibility(Diagram* data, int count)
 /// @param count Number of entries (fighters or names) to display.
 void mnDiagram_UpdateScrollArrowVisibility(HSD_GObj* gobj, int count)
 {
-    Diagram* data = gobj->user_data;
-    PAD_STACK(8);
+    Diagram* data = GET_DIAGRAM(gobj);
     updateScrollArrowVisibility(data, count);
 }
 
@@ -2007,7 +1991,12 @@ void mnDiagram_OnFrame(HSD_GObj* gobj)
     mnDiagram_UpdateScrollArrows(gobj);
 }
 
-void mnDiagram_DrawCellValue(HSD_GObj* arg0, u8 arg1, u8 arg2, int arg3)
+static void requestIntegerAnimFrame(HSD_JObj* jobj, int frame)
+{
+    HSD_JObjReqAnimAll(jobj, (f32) frame);
+}
+
+void mnDiagram_DrawCellValue(HSD_GObj* arg0, u8 col, u8 row, int arg3)
 {
     Diagram* data_alias;
     f32 row_offset_adj;
@@ -2024,8 +2013,6 @@ void mnDiagram_DrawCellValue(HSD_GObj* arg0, u8 arg1, u8 arg2, int arg3)
     f32 rowf;
     f32 row_offset;
     f32 col_offset;
-    u8 col = arg1;
-    u8 row = arg2;
     f32 y_offset;
 
     data = arg0->user_data;
@@ -2061,8 +2048,7 @@ void mnDiagram_DrawCellValue(HSD_GObj* arg0, u8 arg1, u8 arg2, int arg3)
         jobj = HSD_JObjLoadJoint(model->joint);
         HSD_JObjAddAnimAll(jobj, model->animjoint, model->matanim_joint,
                            model->shapeanim_joint);
-        base = (f32) digit;
-        HSD_JObjReqAnimAll(jobj, base);
+        requestIntegerAnimFrame(jobj, digit);
         HSD_JObjAnimAll(jobj);
         if (col < 7) {
             HSD_JObjSetTranslateX(jobj, (x_spacing * (f32) i) + col_offset);
@@ -2258,25 +2244,19 @@ void mnDiagram_DrawNameHeaders(HSD_GObj* arg0, s32 arg1, s32 arg2)
 
 HSD_JObj* mnDiagram_CreateFighterIcon(int idx, int arg1)
 {
-    HSD_JObj* sp10;
+    HSD_JObj* child;
     StaticModelDesc* model = &MenMainFaceB_Top;
-    HSD_JObj* temp_r3;
-    f32 var_f1;
+    HSD_JObj* jobj;
 
-    temp_r3 = HSD_JObjLoadJoint(model->joint);
-    HSD_JObjAddAnimAll(temp_r3, model->animjoint, model->matanim_joint,
+    jobj = HSD_JObjLoadJoint(model->joint);
+    HSD_JObjAddAnimAll(jobj, model->animjoint, model->matanim_joint,
                        model->shapeanim_joint);
-    if (arg1 != 0) {
-        var_f1 = 1.0f;
-    } else {
-        var_f1 = 0.0f;
-    }
-    HSD_JObjReqAnimAll(temp_r3, var_f1);
-    HSD_JObjAnimAll(temp_r3);
-    lb_80011E24(temp_r3, &sp10, 2, -1);
-    HSD_JObjReqAnimAll(sp10, idx);
-    HSD_JObjAnimAll(sp10);
-    return temp_r3;
+    HSD_JObjReqAnimAll(jobj, arg1 != 0 ? 1.0f : 0.0f);
+    HSD_JObjAnimAll(jobj);
+    lb_80011E24(jobj, &child, 2, -1);
+    requestIntegerAnimFrame(child, idx);
+    HSD_JObjAnimAll(child);
+    return jobj;
 }
 
 static inline HSD_JObj* mnDiagram_LoadHeaderIcon(StaticModelDesc* joint_data,
