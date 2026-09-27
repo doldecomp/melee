@@ -1624,15 +1624,6 @@ void mnDiagram_CreatePopupTexts(HSD_GObj* arg0, s32 selkind_or_nametag_slot_id,
     }
 }
 
-/// @todo .sdata2 order hack
-#ifdef MUST_MATCH
-static void order_sdata2(void)
-{
-    (void) -1.0f;
-    (void) S32_TO_F32;
-}
-#endif
-
 void mnDiagram_CreatePopup(s32 arg0, s32 arg1, s32 use_nametag)
 {
     int i;
@@ -2000,7 +1991,12 @@ void mnDiagram_OnFrame(HSD_GObj* gobj)
     mnDiagram_UpdateScrollArrows(gobj);
 }
 
-void mnDiagram_DrawCellValue(HSD_GObj* arg0, u8 arg1, u8 arg2, int arg3)
+static void requestIntegerAnimFrame(HSD_JObj* jobj, int frame)
+{
+    HSD_JObjReqAnimAll(jobj, (f32) frame);
+}
+
+void mnDiagram_DrawCellValue(HSD_GObj* arg0, u8 col, u8 row, int arg3)
 {
     Diagram* data_alias;
     f32 row_offset_adj;
@@ -2017,8 +2013,6 @@ void mnDiagram_DrawCellValue(HSD_GObj* arg0, u8 arg1, u8 arg2, int arg3)
     f32 rowf;
     f32 row_offset;
     f32 col_offset;
-    u8 col = arg1;
-    u8 row = arg2;
     f32 y_offset;
 
     data = arg0->user_data;
@@ -2054,8 +2048,7 @@ void mnDiagram_DrawCellValue(HSD_GObj* arg0, u8 arg1, u8 arg2, int arg3)
         jobj = HSD_JObjLoadJoint(model->joint);
         HSD_JObjAddAnimAll(jobj, model->animjoint, model->matanim_joint,
                            model->shapeanim_joint);
-        base = (f32) digit;
-        HSD_JObjReqAnimAll(jobj, base);
+        requestIntegerAnimFrame(jobj, digit);
         HSD_JObjAnimAll(jobj);
         if (col < 7) {
             HSD_JObjSetTranslateX(jobj, (x_spacing * (f32) i) + col_offset);
@@ -2261,7 +2254,7 @@ HSD_JObj* mnDiagram_CreateFighterIcon(int idx, int arg1)
     HSD_JObjReqAnimAll(jobj, arg1 != 0 ? 1.0f : 0.0f);
     HSD_JObjAnimAll(jobj);
     lb_80011E24(jobj, &child, 2, -1);
-    HSD_JObjReqAnimAll(child, idx);
+    requestIntegerAnimFrame(child, idx);
     HSD_JObjAnimAll(child);
     return jobj;
 }
