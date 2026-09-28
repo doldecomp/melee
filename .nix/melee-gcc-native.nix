@@ -1,6 +1,6 @@
 {
-  lib,
   stdenv,
+  lib,
   cmake,
   aurora-src,
 }:

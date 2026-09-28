@@ -1,6 +1,6 @@
 {
-  lib,
   stdenvNoCC,
+  lib,
   decomp-toolkit,
   devkitppc,
   fetchurl,
