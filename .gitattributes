@@ -1,10 +1,8 @@
-# Auto detect text files and perform LF normalization
-* text=auto
-
-# Enforce Unix-style line endings.
-text eol=lf
+# Auto detect text files and enforce Unix-style line endings.
+* text=auto eol=lf
 
 # Always use CRLF for Windows batch scripts
+# (Don't think this is respected by the pre-commit 'editorconfig-checker' check)
 *.bat  text eol=crlf
 # Never use CRLF for Unix bash scripts
 *.sh -crlf
