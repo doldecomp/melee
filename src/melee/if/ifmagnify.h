@@ -10,8 +10,8 @@
 /* 2FB73C */ ifMagnifyPlayer* ifMagnify_802FB73C(ifMagnifyPlayer*, Vec2*,
                                                  Vec2*);
 /* 2FB8C0 */ void ifMagnify_802FB8C0(HSD_GObj*, intptr_t);
-/* 2FBBDC */ void ifMagnify_802FBBDC(HSD_GObj*);
-/* 2FC3BC */ void ifMagnify_802FC3BC(void);
+/* 2FBBDC */ void ifMagnify_802FBBDC(HSD_GObj*, intptr_t);
+/* 2FC3BC */ void ifMagnify_802FC3BC(void*);
 /* 2FC3C0 */ void ifMagnify_802FC3C0(s32 slot);
 /* 2FC618 */ void ifMagnify_802FC618(void);
 /* 2FC750 */ void ifMagnify_802FC750(void);

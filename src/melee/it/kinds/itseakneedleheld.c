@@ -122,7 +122,7 @@ bool itSeakneedleheld_UnkMotion0_Anim(Item_GObj* gobj)
     it_802B18B0(gobj);
 
     scale.x = scale.y = scale.z =
-        ftLib_800869D4(ip->xDD4_itemVar.seakneedleheld.owner);
+        ftLib_GetModelScale(ip->xDD4_itemVar.seakneedleheld.owner);
     HSD_JObjSetScale(needle, &scale);
     goto ret_false;
 

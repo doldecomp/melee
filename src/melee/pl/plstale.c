@@ -76,7 +76,7 @@ void plStale_UpdateStaleMovesFromItem(HSD_GObj* gobj, HSD_GObj* gobj_2)
 
     it = GET_ITEM(gobj);
     owner = it->owner;
-    if (ftLib_80086960(owner) && owner != gobj_2) {
+    if (ftLib_IsFighter(owner) && owner != gobj_2) {
         instance = it->xD8C_attack_instance;
         attack_id = it->xD88_attackID;
         smtp =

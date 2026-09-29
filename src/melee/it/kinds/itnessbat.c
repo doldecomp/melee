@@ -81,9 +81,10 @@ Item_GObj* it_802AD590(Fighter_GObj* gobj, Fighter_Part part)
 
     if (gobj != NULL) {
         spawn.kind = It_Kind_Ness_Bat;
-        ftLib_80086644(gobj, &pos);
+        ftLib_GetPos(gobj, &pos);
         Item_InitSpawnPosition(&spawn, &pos, true);
-        Item_InitSpawnCommonFields(&spawn, gobj, ftLib_800865C0(gobj), false);
+        Item_InitSpawnCommonFields(&spawn, gobj, ftLib_GetFacingDir(gobj),
+                                   false);
 
         bat = Item_80268B18(&spawn);
         if (bat != NULL) {

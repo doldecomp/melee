@@ -2,7 +2,6 @@
 
 #include <Runtime/platform.h>
 
-#include <placeholder.h>
 #include <printf.h> // IWYU pragma: keep
 #include <stdarg.h>
 #include <stdio.h>
@@ -12,15 +11,6 @@
 #include "types.h"
 #include <melee/lb/lb_00B0.h>
 #include <sysdolphin/baselib/debug.h>
-
-struct unk_series {
-    s16 values[26];
-};
-
-/// ?
-/* 4D6E18 */ extern DevText* devtext_drawlist;
-/* 4D6E38 */ extern DevText* devtext_poolhead;
-/* 4DDC88 */ extern GXColor un_804DDC88;
 
 static inline DevText* find_by_id(char id)
 {
@@ -33,23 +23,31 @@ static inline DevText* find_by_id(char id)
     return NULL;
 }
 
-DevText* DevText_Create(char id, int x, int y, int w, int h, char* buf)
+static inline DevText* alloc_text(void)
+{
+    DevText* text = devtext_poolhead;
+    if (text != NULL) {
+        devtext_poolhead = text->next;
+        return text;
+    }
+    return NULL;
+}
+
+static inline void set_color(GXColor* dst, GXColor color)
+{
+    *dst = color;
+}
+
+DevText* DevText_Create(char id, int x, int y, int w, int h, void* buf)
 {
     static GXColor const cyan = { 0x60, 0xD0, 0xB0, 0x70 };
     DevText* text;
-    UNUSED u32 pad;
     GXColor bg = cyan;
-    PAD_STACK(0x14);
 
-    if ((text = find_by_id(id))) {
+    if (find_by_id(id) != NULL) {
         return NULL;
     }
-    text = devtext_poolhead;
-    if (text != NULL) {
-        devtext_poolhead = text->next;
-    } else {
-        text = NULL;
-    }
+    text = alloc_text();
     if (text == NULL) {
         HSD_ASSERTREPORT(309, 0, "TW : Screen alloc Fail\n");
     }
@@ -66,11 +64,11 @@ DevText* DevText_Create(char id, int x, int y, int w, int h, char* buf)
         text->cursor_y = 0;
         text->scale_x = 10.0f;
         text->scale_y = 16.0f;
-        text->bg_color = bg;
-        text->text_colors[0] = white;
-        text->text_colors[1] = red;
-        text->text_colors[2] = green;
-        text->text_colors[3] = blue;
+        set_color(&text->bg_color, bg);
+        set_color(&text->text_colors[0], white);
+        set_color(&text->text_colors[1], red);
+        set_color(&text->text_colors[2], green);
+        set_color(&text->text_colors[3], blue);
         text->id = (int) id;
         text->line_width = 10;
         text->flags = DEVTEXT_FLAG_SHOWCURSOR;
@@ -86,15 +84,16 @@ DevText* DevText_Create(char id, int x, int y, int w, int h, char* buf)
 
 void DevText_EraseFirstLine(DevText* text)
 {
-    char* start_of_line = text->buf;
-    int line_length = text->w * 2;
+    DevTextGlyph* start_of_line = text->buf;
+    int line_length = text->w;
+    size_t line_size = line_length * sizeof(DevTextGlyph);
     int line_number;
 
     for (line_number = 0; line_number < text->h - 1; line_number++) {
-        memcpy(start_of_line, start_of_line + line_length, line_length);
+        memcpy(start_of_line, start_of_line + line_length, line_size);
         start_of_line += line_length;
     }
-    memzero(start_of_line, line_length);
+    memzero(start_of_line, line_size);
 }
 
 static inline int DevText_Clamp(int val, int max)
@@ -110,18 +109,8 @@ static inline int DevText_Clamp(int val, int max)
 
 void DevText_SetCursorXY(DevText* text, int x, int y)
 {
-    if (text->w <= x) {
-        x = text->w - 1;
-    } else if (x < 0) {
-        x = 0;
-    }
-    text->cursor_x = x;
-    if (text->h <= y) {
-        y = text->h - 1;
-    } else if (y < 0) {
-        y = 0;
-    }
-    text->cursor_y = y;
+    text->cursor_x = DevText_Clamp(x, text->w);
+    text->cursor_y = DevText_Clamp(y, text->h);
 }
 
 void DevText_SetCursorX(DevText* text, int x)
@@ -131,32 +120,32 @@ void DevText_SetCursorX(DevText* text, int x)
 
 void DevText_HideCursor(DevText* text)
 {
-    text->flags &= ~(1 << 4);
+    text->flags &= ~DEVTEXT_FLAG_SHOWCURSOR;
 }
 
 void DevText_80302AC0(DevText* text)
 {
-    text->flags |= (1 << 5);
+    text->flags |= DEVTEXT_FLAG_NOWRAP;
 }
 
 void DevText_ShowBackground(DevText* text)
 {
-    text->flags &= ~(1 << 6);
+    text->flags &= ~DEVTEXT_FLAG_HIDEBACKGROUND;
 }
 
 void DevText_HideBackground(DevText* text)
 {
-    text->flags |= (1 << 6);
+    text->flags |= DEVTEXT_FLAG_HIDEBACKGROUND;
 }
 
 void DevText_ShowText(DevText* text)
 {
-    text->flags &= ~(1 << 7);
+    text->flags &= ~DEVTEXT_FLAG_HIDETEXT;
 }
 
 void DevText_HideText(DevText* text)
 {
-    text->flags |= (1 << 7);
+    text->flags |= DEVTEXT_FLAG_HIDETEXT;
 }
 
 void DevText_SetScale(DevText* text, f32 x, f32 y)
@@ -201,7 +190,7 @@ GXColor DevText_SetBGColor(DevText* text, GXColor color)
 
 void DevText_Erase(DevText* text)
 {
-    memzero(text->buf, 2 * text->w * text->h);
+    memzero(text->buf, sizeof(DevTextGlyph) * text->w * text->h);
 }
 
 static inline void DevText_AdvanceLine(DevText* text)
@@ -214,12 +203,6 @@ static inline void DevText_AdvanceLine(DevText* text)
     }
 }
 
-typedef struct DevTextGlyph {
-    u8 chr;
-    u8 color : 2;
-    u8 unk : 6;
-} DevTextGlyph;
-
 void DevText_Print(DevText* text, char* str)
 {
     char* cur;
@@ -228,8 +211,8 @@ void DevText_Print(DevText* text, char* str)
         while (*cur) {
             if (*cur != '\n') {
                 int index = text->cursor_x + text->cursor_y * text->w;
-                ((DevTextGlyph*) text->buf)[index].chr = *cur;
-                ((DevTextGlyph*) text->buf)[index].color = text->current_color;
+                text->buf[index].chr = *cur;
+                text->buf[index].color = text->current_color;
                 if (text->cursor_x < text->w - 1) {
                     text->cursor_x++;
                 } else if ((text->flags & DEVTEXT_FLAG_NOWRAP) == 0) {

@@ -106,7 +106,7 @@ mnDiagram_GetNamePlayTimeByFighter(int name_idx,
 /* 241B4C */ void mnDiagram_UpdateScrollArrowVisibility(HSD_GObj* gobj,
                                                         int count);
 /* 241BF8 */ void mnDiagram_OnFrame(HSD_GObj* gobj);
-/* 241E78 */ void mnDiagram_DrawCellValue(HSD_GObj* arg0, u8 arg1, u8 arg2,
+/* 241E78 */ void mnDiagram_DrawCellValue(HSD_GObj* arg0, u8 col, u8 row,
                                           int arg3);
 /* 24227C */ void mnDiagram_DrawGridValues(HSD_GObj* arg0, s32 arg1, s32 arg2,
                                            u8 arg3);

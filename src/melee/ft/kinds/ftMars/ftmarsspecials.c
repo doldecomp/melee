@@ -40,7 +40,7 @@ void ftMs_SpecialS_Enter(HSD_GObj* gobj)
                 msid = 358;
             }
 
-            Fighter_ChangeMotionState(gobj, msid, 0, 0, 1, 0, 0);
+            Fighter_ChangeMotionState(gobj, msid, Ft_MF_None, 0, 1, 0, 0);
         }
     }
 
@@ -74,7 +74,7 @@ void ftMs_SpecialAirS_Enter(HSD_GObj* gobj)
                 msid = 358;
             }
 
-            Fighter_ChangeMotionState(gobj, msid, 0, 0, 1, 0, 0);
+            Fighter_ChangeMotionState(gobj, msid, Ft_MF_None, 0, 1, 0, 0);
         }
     }
 

@@ -295,13 +295,13 @@ s32 it_802E52E0(Item_GObj* gobj)
     Item* ip = GET_ITEM(gobj);
     itOctarockAttributes* attr = ip->xC4_article_data->x4_specialAttributes;
     s32 result = 0;
-    HSD_GObj* fighter = ftLib_8008627C(&ip->pos, NULL);
+    HSD_GObj* fighter = ftLib_FindNearestOpponent(&ip->pos, NULL);
 
     if (fighter != NULL) {
         f32 facing;
         Vec3 v;
         PAD_STACK(4);
-        ftLib_80086644(fighter, &v);
+        ftLib_GetPos(fighter, &v);
         if (ABS(v.x - ip->pos.x) <= attr->x8) {
             if (ABS(v.y - ip->pos.y) <= attr->xC) {
                 if (ip->pos.x < v.x) {

@@ -151,13 +151,13 @@ Item_GObj* itHassam_802CDE1C(Vec3* vec, Item_GObj* gobj)
     for (cur_fgobj = HSD_GObjPLinkHead[HSD_GOBJ_PLINK_FIGHTER];
          cur_fgobj != NULL; cur_fgobj = cur_fgobj->next)
     {
-        if (ftLib_80086FD4(gobj, cur_fgobj) == false) {
+        if (ftLib_IsSamePlayer(gobj, cur_fgobj) == false) {
             cur_fp = GET_FIGHTER(cur_fgobj);
             if ((cur_fp->is_sleeping == false) &&
                 ((gm_8016B168() == false) || (fp == NULL) ||
                  (cur_fp->team != fp->team)))
             {
-                ftLib_800866DC(cur_fgobj, &sp20);
+                ftLib_GetCameraBonePos(cur_fgobj, &sp20);
                 y_dist = vec->y - sp20.y;
                 x_dist = vec->x - sp20.x;
                 temp_f0 = (x_dist * x_dist) + (y_dist * y_dist);
@@ -169,7 +169,7 @@ Item_GObj* itHassam_802CDE1C(Vec3* vec, Item_GObj* gobj)
         }
     }
     if (closest_fgobj == NULL) {
-        closest_fgobj = ftLib_8008627C(vec, gobj);
+        closest_fgobj = ftLib_FindNearestOpponent(vec, gobj);
     }
     return closest_fgobj;
 }
@@ -187,7 +187,7 @@ void itHassam_802CDF28(Item_GObj* gobj)
     if (var_r3 == NULL) {
         var_r3 = ip->owner;
     }
-    ftLib_800866DC(var_r3, &sp1C);
+    ftLib_GetCameraBonePos(var_r3, &sp1C);
     sp1C.y += attr->x8;
     lbVector_Diff(&sp1C, &ip->pos, &sp10);
     ip->xDD4_itemVar.hassam.x5C.x = attr->x4;

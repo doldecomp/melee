@@ -118,8 +118,9 @@ bool itMetalB_Logic32_DmgReceived(Item_GObj* gobj)
 
     if (go != NULL) {
         if (go->classifier == HSD_GOBJ_CLASS_FIGHTER && it->xDCF_flag.b6) {
-            ftLib_800871A8(go, gobj);
-            pl_8003E17C(ftLib_80086BE0(go) & 0xFF, ftLib_800874BC(go), gobj);
+            ftLib_ApplyMetalBox(go, gobj);
+            pl_8003E17C(ftLib_GetPlayerIndex(go) & 0xFF,
+                        ftLib_IsSubFighter(go), gobj);
             return true;
         } else {
             it->xCEC_fighterGObj = NULL;

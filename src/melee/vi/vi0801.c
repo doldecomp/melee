@@ -37,14 +37,12 @@ s32 un_80400128[23][2] = { { 1, 2 }, { 1, 3 }, { 1, 4 },  { 1, 5 },  { 1, 6 },
 
 static void vi0801_8031ED70(HSD_GObj* gobj, intptr_t unused)
 {
-    GXColor* colors;
+    HSD_CObj* cobj = GET_COBJ(gobj);
 
-    PAD_STACK(8);
-
-    if (HSD_CObjSetCurrent(gobj->hsd_obj) != 0) {
-        colors = &un_804D6FBC;
-        HSD_SetEraseColor(colors->r, colors->g, colors->b, colors->a);
-        HSD_CObjEraseScreen(gobj->hsd_obj, 1, 0, 1);
+    if (HSD_CObjSetCurrent(cobj)) {
+        HSD_SetEraseColor(un_804D6FBC.r, un_804D6FBC.g, un_804D6FBC.b,
+                          un_804D6FBC.a);
+        HSD_CObjEraseScreen(GET_COBJ(gobj), 1, 0, 1);
         Camera_800310A0(2);
         gobj->gxlink_prios = 9;
         HSD_GObj_80390ED0(gobj, 7);

@@ -1587,6 +1587,7 @@ config.libs = [
             Object(Matching, "melee/if/ifcoget.c"),
             Object(Matching, "melee/if/if_2FF2.c"),
             Object(Matching, "melee/if/soundtest.c"),
+            Object(Matching, "melee/if/if_2FFC.c"),
             Object(Matching, "melee/if/if_3004.c"),
             Object(Matching, "melee/if/textdraw.c"),
             Object(Matching, "melee/if/textlib.c"),

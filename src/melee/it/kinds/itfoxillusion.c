@@ -114,7 +114,7 @@ void it_8029CFF0(Item_GObj* item_gobj)
     item->xDD4_itemVar.foxillusion.xDD4 =
         item->xC4_article_data->x10_modelDesc->x0_joint;
     it_8026B3A8(item_gobj);
-    if (ftLib_800865CC(item->owner) == 1) {
+    if (ftLib_GetGroundAir(item->owner) == 1) {
         Item_80268E5C(item_gobj, 1, ITEM_ANIM_UPDATE);
     } else {
         Item_80268E5C(item_gobj, 0, ITEM_ANIM_UPDATE);

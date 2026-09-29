@@ -67,7 +67,7 @@ void it_2725_Logic41_PickedUp(Item_GObj* gobj)
     Item* ip = GET_ITEM(gobj);
     ip->xDAC_itcmd_var0 = ip->xDB0_itcmd_var1 = 0;
     if (ip->owner != NULL) {
-        if (ftLib_800865CC(gobj) != 1) {
+        if (ftLib_GetGroundAir(gobj) != 1) {
             Item_80268E5C(gobj, 0, ITEM_ANIM_UPDATE);
         } else {
             Item_80268E5C(gobj, 1, ITEM_ANIM_UPDATE);

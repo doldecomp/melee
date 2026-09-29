@@ -293,8 +293,8 @@ void itNesspkflash_UnkMotion0_Phys(Item_GObj* gobj)
             if (holding == true) {
                 f32 stick_y;
                 f32 stick_x;
-                ftLib_800865D8(ip->xDD4_itemVar.pkflush.xDE0_PKFlash_Owner,
-                               &stick_x, &stick_y);
+                ftLib_GetLStick(ip->xDD4_itemVar.pkflush.xDE0_PKFlash_Owner,
+                                &stick_x, &stick_y);
                 if (ABS(stick_x) > 0.2f) {
                     ip->x40_vel.x += stick_x * attr->x18_FLASH_CONTROL;
                     if (ABS(ip->x40_vel.x) > attr->x20_FLASH_UNK2) {

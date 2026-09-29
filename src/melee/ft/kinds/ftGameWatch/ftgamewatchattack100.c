@@ -14,7 +14,7 @@
 #include <melee/ft/kinds/ftCommon/ftCo_Attack100.h>
 
 /// 0x8014C1E8
-/// https://decomp.me/scratch/AyScb // Mr. Game & Watch's Rapid Jab Start
+/// Mr. Game & Watch's Rapid Jab Start
 /// Action State handler
 void ftGw_Attack100Start_Enter(HSD_GObj* gobj)
 {
@@ -25,7 +25,7 @@ void ftGw_Attack100Start_Enter(HSD_GObj* gobj)
 }
 
 /// 0x8014C224
-/// https://decomp.me/scratch/sBY5w // Mr. Game & Watch's Rapid Jab Start
+/// Mr. Game & Watch's Rapid Jab Start
 /// Animation callback
 void ftGw_Attack100Start_Anim(HSD_GObj* gobj)
 {
@@ -54,19 +54,19 @@ void ftGw_Attack100Start_Coll(HSD_GObj* gobj)
 }
 
 /// 0x8014C2B8
-/// https://decomp.me/scratch/npI0e // Mr. Game & Watch's Rapid Jab Loop Acion
+/// Mr. Game & Watch's Rapid Jab Loop Acion
 /// State handler
 void ftGw_Attack100Loop_Enter(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    Fighter_ChangeMotionState(gobj, ftGw_MS_Attack100Loop, 0, 0.0f, 1.0f, 0.0f,
-                              NULL);
+    Fighter_ChangeMotionState(gobj, ftGw_MS_Attack100Loop, Ft_MF_None, 0.0f,
+                              1.0f, 0.0f, NULL);
     fp->accessory4_cb = ftGw_Attack11_DecideAction;
 }
 
 /// 0x8014C308
-/// https://decomp.me/scratch/39K2l // Mr. Game & Watch's Rapid Jab Loop
+/// Mr. Game & Watch's Rapid Jab Loop
 /// Animation callback
 void ftGw_Attack100Loop_Anim(HSD_GObj* gobj)
 {
@@ -97,8 +97,8 @@ void ftGw_Attack100End_Enter(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    Fighter_ChangeMotionState(gobj, ftGw_MS_Attack100End, 0, 0.0f, 1.0f, 0.0f,
-                              NULL);
+    Fighter_ChangeMotionState(gobj, ftGw_MS_Attack100End, Ft_MF_None, 0.0f,
+                              1.0f, 0.0f, NULL);
     fp->accessory4_cb = ftGw_Attack11_DecideAction;
 }
 

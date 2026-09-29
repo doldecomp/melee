@@ -70,13 +70,13 @@ struct Element_803F9628_x12 {
     u8 x7 : 1;
 };
 
-typedef void (*IfStatusCb)(s32);
+typedef void (*IfStatusCb)(int);
 
 struct Element_803F9628 {
     /* +00 */ HSD_GObj* x0;
     /* +04 */ u32 x4;
     /* +08 */ void (*x8)(HSD_GObj*);
-    /* +0C */ u32 xC;
+    /* +0C */ s32 xC;
     /* +10 */ u8 x10;
     /* +11 */ u8 x11;
     /* +12 */ struct Element_803F9628_x12 x12;
@@ -84,8 +84,8 @@ struct Element_803F9628 {
     /* +14 */ DynamicModelDesc* x14;
     /* +18 */ IfStatusCb x18;
     /* +1C */ IfStatusCb x1C;
-    /* +20 */ u32 x20;
-    /* +24 */ u32 x24;
+    /* +20 */ s32 x20;
+    /* +24 */ s32 x24;
 };
 
 struct Placeholder_8016AE50_flags {
@@ -135,6 +135,12 @@ struct ifMagnify {
 #define DEVTEXT_FLAG_NOWRAP (0x20)
 #define DEVTEXT_FLAG_SHOWCURSOR (0x10)
 
+struct DevTextGlyph {
+    u8 chr;
+    u8 color : 2;
+    u8 unk : 6;
+};
+
 struct DevText {
     /*  +0 */ s16 x;
     /*  +2 */ s16 y;
@@ -151,7 +157,7 @@ struct DevText {
     /* +26 */ u8 flags;
     /* +27 */ u8 unk : 6;
     /* +27 */ u8 current_color : 2;
-    /* +28 */ char* buf;
+    /* +28 */ DevTextGlyph* buf;
     /* +2C */ struct DevText* prev;
     /* +30 */ struct DevText* next;
 };
@@ -192,7 +198,14 @@ struct un_80304138_objalloc_t_x8 {
     soundtest_callback x4;
     char* x8;
     char** xC;
-    void* x10;
+    union {
+        void* any;
+        int* i;
+        u8* b;
+        u16* h;
+        u32* w;
+        f32* f;
+    } x10;
     float x14;
     float x18;
     float x1C;
@@ -211,11 +224,6 @@ struct un_80304138_objalloc_t {
     struct un_80304138_objalloc_t* next;
 };
 ASSERT_SIZE(struct un_80304138_objalloc_t, 0x20);
-
-struct IfStockUserData {
-    u8 player;
-    u8 mode;
-};
 
 struct ifStock_804A1378_per_player {
     HSD_GObj* x0;
@@ -239,8 +247,7 @@ struct IfStockStealAnim {
     Vec3 end;
 };
 
-/// @todo merge with IfStockUserData
-struct ifStock_804A1378_x204 {
+struct IfStockUserData {
     u8 player;
     u8 mode;
     u8 flag;
@@ -260,7 +267,6 @@ struct ifStock_804A1378 {
     HSD_JObj* jobj_b;
     HSD_JObj* jobj_c;
     HSD_JObj* jobj_d;
-    struct ifStock_804A1378_x204 x204[6];
 };
 
 struct ifStock_804A1774 {
@@ -277,15 +283,6 @@ struct ifStock_804A1ACC {
     signed char x83[133];
     HSD_GObj* x108;
     HSD_GObj* x10C[130];
-};
-
-struct IfStockData {
-    u8 x0[0xC];
-    struct IfStockStealAnim anim[2];
-};
-
-struct IfStockDataOffset {
-    u8 x0[0x204];
 };
 
 #endif

@@ -2392,7 +2392,7 @@ static inline bool inlineD1(Fighter* fp)
 {
     Fighter_GObj* gobj = fp->gobj;
     if (fp->is_sleeping || fp->stamina_dead || ftCo_800A0F00(gobj) ||
-        ftLib_8008732C(gobj))
+        ftLib_IsDead(gobj))
     {
         return true;
     } else {

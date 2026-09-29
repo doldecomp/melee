@@ -68,7 +68,7 @@ void ftPe_8011BB6C(HSD_GObj* gobj, bool arg1)
     ftPe_DatAttrs* da = fp->dat_attrs;
     HSD_JObj* joint;
 
-    Fighter_ChangeMotionState(gobj, ftPe_MS_Float, 0, 0, 1, 0, NULL);
+    Fighter_ChangeMotionState(gobj, ftPe_MS_Float, Ft_MF_None, 0, 1, 0, NULL);
     fp->u.pe.has_float = false;
     if (arg1) {
         fp->u.pe.x4 = da->xC;

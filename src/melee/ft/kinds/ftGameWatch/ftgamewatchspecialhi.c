@@ -29,7 +29,7 @@ static void ftGw_SpecialHi_ItemRescueEnterHitlag(HSD_GObj* gobj);
 static void ftGw_SpecialHi_ItemRescueExitHitlag(HSD_GObj* gobj);
 
 /// 0x8014DEF0
-/// https://decomp.me/scratch/6Vtu9 // Create Fire Rescue item
+/// Create Fire Rescue item
 void ftGw_SpecialHi_ItemRescueSetup(HSD_GObj* gobj)
 {
     Vec3 sp10;
@@ -55,7 +55,7 @@ void ftGw_SpecialHi_ItemRescueSetup(HSD_GObj* gobj)
 }
 
 /// 0x8014DFB8
-/// https://decomp.me/scratch/Wu4WV // Check if Mr. Game & Watch is performing
+/// Check if Mr. Game & Watch is performing
 /// Fire Rescue
 bool ftGw_SpecialHi_ItemCheckRescueRemove(HSD_GObj* gobj)
 {
@@ -119,7 +119,7 @@ static inline void ftGameWatch_SpecialHi_SetVars(HSD_GObj* gobj)
 }
 
 /// 0x8014E0AC
-/// https://decomp.me/scratch/4Dc4b // Mr. Game & Watch's grounded Fire Rescue
+/// Mr. Game & Watch's grounded Fire Rescue
 /// Motion State handler
 void ftGw_SpecialHi_Enter(HSD_GObj* gobj)
 {
@@ -130,8 +130,8 @@ void ftGw_SpecialHi_Enter(HSD_GObj* gobj)
     fp->x74_self_accel.y = 0.0f;
     fp->self_vel.y = 0.0f;
     ftCommon_8007D60C(fp);
-    Fighter_ChangeMotionState(gobj, ftGw_MS_SpecialHi, 0, 0.0f, 1.0f, 0.0f,
-                              NULL);
+    Fighter_ChangeMotionState(gobj, ftGw_MS_SpecialHi, Ft_MF_None, 0.0f, 1.0f,
+                              0.0f, NULL);
     ftGameWatch_SpecialHi_SetVars(gobj);
     ftAnim_8006EBA4(gobj);
     ft_80088510(fp, 290066, 127, 64);
@@ -145,8 +145,8 @@ void ftGw_SpecialAirHi_Enter(HSD_GObj* gobj)
     u8 _[24];
 
     ftCommon_8007D60C(fp);
-    Fighter_ChangeMotionState(gobj, ftGw_MS_SpecialAirHi, 0, 0.0f, 1.0f, 0.0f,
-                              NULL);
+    Fighter_ChangeMotionState(gobj, ftGw_MS_SpecialAirHi, Ft_MF_None, 0.0f,
+                              1.0f, 0.0f, NULL);
     ftGameWatch_SpecialHi_SetVars(gobj);
     ftAnim_8006EBA4(gobj);
     ft_80088510(fp, 290066, 127, 64);
@@ -159,7 +159,7 @@ void ftGw_SpecialHi_Anim(HSD_GObj* gobj)
 }
 
 /// 0x8014E218
-/// https://decomp.me/scratch/QRkS8 // Mr. Game & Watch's aerial Fire Rescue
+/// Mr. Game & Watch's aerial Fire Rescue
 /// Animation callback
 void ftGw_SpecialAirHi_Anim(HSD_GObj* gobj)
 {
@@ -185,7 +185,7 @@ void ftGw_SpecialHi_IASA(HSD_GObj* gobj)
 }
 
 /// 0x8014E2B0
-/// https://decomp.me/scratch/2aEQN // Mr. Game & Watch's aerial Fire Rescue
+/// Mr. Game & Watch's aerial Fire Rescue
 /// IASA callback
 void ftGw_SpecialAirHi_IASA(HSD_GObj* gobj)
 {
@@ -237,7 +237,7 @@ void ftGw_SpecialHi_Coll(HSD_GObj* gobj)
 }
 
 /// 0x8014E3D4
-/// https://decomp.me/scratch/4IC4C // Mr. Game & Watch's aerial Fire Rescue
+/// Mr. Game & Watch's aerial Fire Rescue
 /// Collision callback
 void ftGw_SpecialAirHi_Coll(HSD_GObj* gobj)
 {

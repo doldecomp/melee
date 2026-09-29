@@ -309,7 +309,8 @@ void Player_80031EBC(int slot)
     for (i = 0; i < 2; i++) {
         StaticPlayer* player = &player_slots[slot];
         if ((player->player_entity[player->transformed[i]])) {
-            if (!ftLib_8008701C(player->player_entity[player->transformed[i]]))
+            if (!ftLib_IsSleeping(
+                    player->player_entity[player->transformed[i]]))
             {
                 ftCo_800D4F24(player->player_entity[player->transformed[i]],
                               1);
@@ -334,8 +335,6 @@ void Player_80031FB0(int slot, s32 entity_index)
     }
 }
 
-/// new match decomp.me/scratch/oHfiV  @todo
-//// old match decomp.me/scratch/8otnq
 void Player_80032070(int slot, bool bool_arg)
 {
     StaticPlayer* player;
@@ -347,7 +346,7 @@ void Player_80032070(int slot, bool bool_arg)
 
         if (player->flags.b2 &&
             !ftMapping_list[player->ckind].has_transformation &&
-            ftLib_8008701C(player->player_entity[player->transformed[1]]))
+            ftLib_IsSleeping(player->player_entity[player->transformed[1]]))
         {
             ftCo_800D4FF4(player->player_entity[player->transformed[1]]);
         }
@@ -356,7 +355,7 @@ void Player_80032070(int slot, bool bool_arg)
         return;
     }
 
-    if (ftLib_800873CC(player->player_entity[player->transformed[0]])) {
+    if (ftLib_IsRebirth(player->player_entity[player->transformed[0]])) {
         ftCo_800D4FF4(player->player_entity[player->transformed[1]]);
     }
 }
@@ -366,7 +365,7 @@ bool Player_8003219C(int slot)
     StaticPlayer* player;
     Player_CheckSlot(slot);
     player = &player_slots[slot];
-    return ftLib_8008701C(player->player_entity[player->transformed[0]]);
+    return ftLib_IsSleeping(player->player_entity[player->transformed[0]]);
 }
 
 bool Player_8003221C(int slot)
@@ -377,7 +376,7 @@ bool Player_8003221C(int slot)
         Player_CheckSlot(slot);
         player = &player_slots[slot];
 
-        if (!ftLib_8008701C(player->player_entity[player->transformed[0]])) {
+        if (!ftLib_IsSleeping(player->player_entity[player->transformed[0]])) {
             return true;
         }
     }
@@ -466,8 +465,7 @@ s8 Player_800325C8(CharacterKind kind, bool b)
 }
 
 s8 Player_80032610(s32 slot, bool arg1)
-{ //// decomp.me/scratch/pHTx2
-
+{
     StaticPlayer* player;
     s32 error_value = -1;
 
@@ -574,8 +572,8 @@ void Player_80032A04(int slot, Vec3* arg_vec)
         player->player_poses.byIndex[player->transformed[i]] = *arg_vec;
 
         if (player->player_entity[player->transformed[i]]) {
-            ftLib_80086664(player->player_entity[player->transformed[i]],
-                           arg_vec);
+            ftLib_SetPos(player->player_entity[player->transformed[i]],
+                         arg_vec);
         }
     }
 }
@@ -1072,8 +1070,8 @@ void Player_SetHUDDamage(s32 slot, s32 arg1)
         player = &player_slots[slot];
         player->staminas.byIndex[player->transformed[i]] = arg1;
         if (player->player_entity[player->transformed[i]]) {
-            ftLib_800870F0(player->player_entity[player->transformed[i]],
-                           arg1);
+            ftLib_SetPercent(player->player_entity[player->transformed[i]],
+                             arg1);
         }
     }
 }
@@ -1270,7 +1268,7 @@ s32 Player_GetRemainingHPByIndex(s32 slot, s32 index)
 }
 
 s32 Player_GetFalls(s32 slot)
-{ /// decomp.me/scratch/8ijor
+{
     StaticPlayer* player;
     Player_CheckSlot(slot);
     player = &player_slots[slot];
@@ -1690,7 +1688,8 @@ float Player_800360D8(s32 slot)
     StaticPlayer* player;
     Player_CheckSlot(slot);
     player = &player_slots[slot];
-    return ftLib_80086F80(player->player_entity[player->transformed[0]]);
+    return ftLib_GetNameTagHeight(
+        player->player_entity[player->transformed[0]]);
 }
 
 void Player_SetStructFunc(s32 slot, void* arg_func)
@@ -1766,7 +1765,7 @@ s32 Player_80036428(s32 slot)
     entity = player->player_entity[player->transformed[0]];
 
     if (entity) {
-        return ftLib_80087300(entity);
+        return ftLib_GetLastAttackerSlot(entity);
     }
     return 6;
 }
@@ -1859,7 +1858,8 @@ bool Player_800368F8(int slot)
     StaticPlayer* player;
     Player_CheckSlot(slot);
     player = &player_slots[slot];
-    return ftLib_80086BB4(player->player_entity[player->transformed[0]]);
+    return ftLib_IsCameraSubjectInBounds(
+        player->player_entity[player->transformed[0]]);
 }
 
 void Player_80036978(s32 slot, Vec3* pos)
@@ -1871,7 +1871,8 @@ void Player_80036978(s32 slot, Vec3* pos)
     Player_CheckSlot(slot);
     player = &player_slots[slot];
 
-    ftLib_80086B90(player->player_entity[player->transformed[0]], pos);
+    ftLib_GetCameraSubjectBonePos(
+        player->player_entity[player->transformed[0]], pos);
 }
 
 void Player_InitOrResetPlayer(s32 slot)
@@ -2046,7 +2047,7 @@ HSD_JObj* Player_80036EA0(s32 slot)
     entity = player->player_entity[player->transformed[0]];
 
     if (entity) {
-        return ftLib_800865F0(entity);
+        return ftLib_GetHipJObj(entity);
     }
 
     return NULL;

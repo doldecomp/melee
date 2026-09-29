@@ -7,7 +7,7 @@
 #include <sysdolphin/baselib/hsd_3933.h>
 #include <sysdolphin/baselib/video.h>
 
-/* 2289F8 */ static int fn_802289F8(char* arg0, int arg1, int arg2);
+/* 2289F8 */ static int fn_802289F8(char* arg0, void* arg1, int arg2);
 /* 4D6B94 */ int db_ScreenshotNumber;
 /* 4D6B90 */ unsigned int db_ScreenshotPending;
 /* 4D6B8C */ UnkFlagStruct db_5xSpeedStatus;
@@ -67,28 +67,28 @@ void db_TakeScreenshotIfPending(void)
     int temp_r3;
     int temp_r5;
     int temp_ret;
-    void* var_r30;
+    void* xfb;
 
     if (db_ScreenshotPending != 0) {
         HSD_VIWaitXFBFlush();
         temp_ret = HSD_VIGetXFBLastDrawDone();
         temp_r3 = temp_ret;
         if (temp_r3 != -1) {
-            var_r30 = HSD_VIData.xfb[temp_r3].buffer;
+            xfb = HSD_VIData.xfb[temp_r3].buffer;
         } else {
             HSD_ASSERTREPORT(61, 0, "cant find xfb!\n");
         }
         temp_r5 = db_ScreenshotNumber;
         db_ScreenshotNumber = temp_r5 + 1;
         sprintf(spC, "USB:shot/screenshot%02d.frb", temp_r5);
-        fn_802289F8(spC, (int) var_r30,
+        fn_802289F8(spC, xfb,
                     HSD_VIData.current.vi.rmode.fbWidth *
                         HSD_VIData.current.vi.rmode.xfbHeight * 2);
         db_ScreenshotPending = 0;
     }
 }
 
-static int fn_802289F8(char* arg0, int arg1, int arg2)
+static int fn_802289F8(char* arg0, void* arg1, int arg2)
 {
     if (strncmp(arg0, "USB:", 4) == 0) {
         return hsd_80393A5C(arg0 + 4, arg1, arg2);

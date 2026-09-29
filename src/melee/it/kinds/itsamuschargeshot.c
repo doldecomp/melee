@@ -78,7 +78,7 @@ HSD_GObj* it_802B55C8(Fighter_GObj* gobj, Vec3* pos, enum Fighter_Part arg2,
         ip->xDD4_itemVar.samuschargeshot.xDE0 = 0.0f;
         ip->xDD4_itemVar.samuschargeshot.xDFC = 0.0f;
         ip->xDD4_itemVar.samuschargeshot.xE00 = gobj;
-        ip->xDD4_itemVar.samuschargeshot.xE04 = ftLib_800869D4(gobj);
+        ip->xDD4_itemVar.samuschargeshot.xE04 = ftLib_GetModelScale(gobj);
         ip->xDD4_itemVar.samuschargeshot.xE2C = 0.0f;
         ip->xDD4_itemVar.samuschargeshot.xE30 = 0.0f;
         ip->xDD4_itemVar.samuschargeshot.xE34 = 0.0f;
@@ -113,7 +113,8 @@ void it_802B56E4(Item_GObj* gobj, Vec3* vec, f32 farg0, f32 farg1, f32 farg2)
             Vec3 sp20;
 
             HSD_MtxGetRotation(
-                ftLib_80086630(ip->xDD4_itemVar.samuschargeshot.xE00, ip->xDC4)
+                ftLib_GetPartJObj(ip->xDD4_itemVar.samuschargeshot.xE00,
+                                  ip->xDC4)
                     ->mtx,
                 &sp2C);
             sp20.x = sp20.y = sp20.z = 0.0f;
@@ -132,7 +133,8 @@ void it_802B56E4(Item_GObj* gobj, Vec3* vec, f32 farg0, f32 farg1, f32 farg2)
               ip->xDD4_itemVar.samuschargeshot.xDF0)) +
             attr->x18;
         ip->xDD4_itemVar.samuschargeshot.xDF4 = 0;
-        ip->facing_dir = ftLib_800865C0(ip->xDD4_itemVar.samuschargeshot.xE00);
+        ip->facing_dir =
+            ftLib_GetFacingDir(ip->xDD4_itemVar.samuschargeshot.xE00);
         ip->pos = *vec;
         ip->xDD4_itemVar.samuschargeshot.xDFC = 0;
         ip->x40_vel.x = ip->xDD4_itemVar.samuschargeshot.xDDC *

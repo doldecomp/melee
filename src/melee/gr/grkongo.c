@@ -1399,7 +1399,7 @@ static int fn_801D8134(HSD_GObj* arg0, HSD_GObj* arg1)
 
     if (gp->u.kongo3.xC6 == 0) {
         Ground_801C4DA0(&pos_gnd, &unk);
-        ftLib_80086644(arg1, &pos_ft);
+        ftLib_GetPos(arg1, &pos_ft);
 
         if ((pos_gnd.x - pos_ft.x) * (pos_gnd.x - pos_ft.x) +
                 (pos_gnd.y - pos_ft.y) * (pos_gnd.y - pos_ft.y) +
@@ -1414,7 +1414,7 @@ static int fn_801D8134(HSD_GObj* arg0, HSD_GObj* arg1)
             Ground_801C5440(gp, 0, 0x129U);
             grMaterial_801C9604(arg0, yakumono_param->unk84, 0);
             efSync_Spawn(0x405, arg0, &pos_ft);
-            ftLib_80086C18(arg1, 0xD, 0x1E);
+            ftLib_StartRumble(arg1, 0xD, 0x1E);
             return 1;
         }
     }

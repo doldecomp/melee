@@ -5,7 +5,6 @@
 
 #include <melee/it/kinds/types.h>
 
-/* 2EAF28 */ s32 it_802EAF28(Item_GObj* gobj);
 /* 2EAF34 */ Item_GObj* it_802EAF34(HSD_GObj*, Vec3*, int);
 /* 2EB1EC */ void it_802EB1EC(Item_GObj*);
 /* 2EB268 */ void it_802EB268(Item_GObj* gobj);

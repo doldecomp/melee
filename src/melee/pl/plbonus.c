@@ -1161,7 +1161,7 @@ void fn_8003CC84(int player)
                     break;
                 }
             }
-            if (ftLib_8008732C(temp_r29) == 0) {
+            if (ftLib_IsDead(temp_r29) == 0) {
                 if (ft_800898C0(temp_r29) != 0) {
                     setFlag(player, 0x8B);
                 }

@@ -298,7 +298,7 @@ void itNesspkthunderball_UnkMotion0_Phys(Item_GObj* gobj)
     {
         itNesspkthunderball_ShiftAngles(ip);
 
-        ftLib_800865D8(ip->xDD4_itemVar.pkthunder.xF04, &stick.x, &stick.y);
+        ftLib_GetLStick(ip->xDD4_itemVar.pkthunder.xF04, &stick.x, &stick.y);
         stick.z = 0.0f;
 
         if (ABS(stick.x) > attr->xC_PKTHUNDER_STICK_THRESHOLD ||

@@ -98,8 +98,7 @@ void gm_Scene_CameraVs_OnEnter(void* arg0)
 {
     u32* state = arg0;
 
-    /// @todo Required for the retail 0x20-byte stack frame; without this pad,
-    /// focused checkdiff differs only in five stack-frame offsets (99.72222%).
+    /// @todo Required for the retail 0x20-byte stack frame.
     PAD_STACK(8);
 
     gmCamera_VsCameraTextLayout.x0 = state;

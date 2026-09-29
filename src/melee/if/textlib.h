@@ -9,7 +9,7 @@
 #include <dolphin/gx.h>
 #include <melee/if/types.h>
 
-/* 302834 */ DevText* DevText_Create(char, int, int, int, int, char*);
+/* 302834 */ DevText* DevText_Create(char, int, int, int, int, void*);
 /* 3029B4 */ void DevText_EraseFirstLine(DevText* text);
 /* 302A3C */ void DevText_SetCursorXY(DevText* text, int x, int y);
 /* 302A88 */ void DevText_SetCursorX(DevText* text, int x);

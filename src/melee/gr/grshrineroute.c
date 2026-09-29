@@ -419,7 +419,7 @@ void grShrineRoute_80208F70(Ground_GObj* gobj)
 
     player = Ground_GetP1Fighter();
     if (player != NULL) {
-        ftLib_80086644(player, &sp7C);
+        ftLib_GetPos(player, &sp7C);
     } else {
         sp7C.x = sp7C.y = sp7C.z = 0.0f;
     }
@@ -443,7 +443,7 @@ void grShrineRoute_80208F70(Ground_GObj* gobj)
                     s32 mid = ((Ground*) gp->u.map.symbol[(u32) ix]->user_data)
                                   ->map_id;
                     if (player != NULL) {
-                        Player_80031790((s32) ftLib_80086BE0(player));
+                        Player_80031790((s32) ftLib_GetPlayerIndex(player));
                     }
                     if (mid == 3) {
                         gp->u.shrineroute.xC4 = 6;
@@ -716,10 +716,10 @@ void grShrineRoute_80208F70(Ground_GObj* gobj)
 
     if (track_plat == 0) {
         if (player != NULL) {
-            if (ftLib_80086EC0(player) != 0) {
+            if (ftLib_IsInHitstun(player) != 0) {
                 Stage_UnkSetVec3TCam_Offset(&sp5C);
                 gp->u.shrineroute.xCE = 0x3C;
-            } else if (ftLib_8008732C(player) != 0) {
+            } else if (ftLib_IsDead(player) != 0) {
                 Stage_UnkSetVec3TCam_Offset(&sp5C);
                 gp->u.shrineroute.xCE = 0;
             } else {
@@ -958,7 +958,7 @@ void grShrineRoute_8020A21C(Ground_GObj* gobj)
     gp = GET_GROUND(gobj);
     player = Ground_GetP1Fighter();
     if (player != NULL) {
-        ftLib_80086644(player, &player_pos);
+        ftLib_GetPos(player, &player_pos);
     } else {
         player_pos.z = 0.0f;
         player_pos.y = 0.0f;
@@ -1434,12 +1434,12 @@ void onJointCollision(void* user_data, int joint_id, CollData* coll,
     PAD_STACK(8);
 
     if ((int) coll->x34_flags.b1234 == 1 && ground_kind == 2) {
-        slot = ftLib_80086BE0(coll->x0_gobj);
+        slot = ftLib_GetPlayerIndex(coll->x0_gobj);
         if (coll->x0_gobj == Player_GetEntity(slot)) {
             gp->u.shrineroute.xCA = 1;
             pgobj = Player_GetEntityAtIndex(slot, 1);
             if (pgobj) {
-                if (!ftLib_8008731C(pgobj)) {
+                if (!ftLib_IsSleeping_8008731C(pgobj)) {
                     return;
                 }
             }
@@ -1478,7 +1478,7 @@ s32 grShrineRoute_8020AE08(HSD_GObj* gobj, HSD_GObj* player_gobj, s32* out)
     hi.y *= scale;
     hi.z *= scale;
 
-    ftLib_80086644(player_gobj, &pos);
+    ftLib_GetPos(player_gobj, &pos);
 
     if (pos.y < lo.y) {
         if (lo.x < pos.x && pos.x < hi.x) {
@@ -1523,7 +1523,7 @@ void grShrineRoute_8020AF38(HSD_GObj* gobj, s32 arg1)
         Ground_801C4A08(gp->u.map.symbol[ix]);
         *symbolp = NULL;
         if (pgobj != NULL) {
-            ftLib_80086C18(pgobj, 0xB, 0x1E);
+            ftLib_StartRumble(pgobj, 0xB, 0x1E);
         }
     }
 }

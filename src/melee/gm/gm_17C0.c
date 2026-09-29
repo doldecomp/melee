@@ -241,7 +241,7 @@ void fn_8017C71C(void)
     tmp->x8 = 0;
     tmp->xC = ftBossLib_8015C530(gm_8017E068());
     Player_SetOtherStamina(2, tmp->xC);
-    ftLib_80087508(Ft_Kind_CrezyH, 0);
+    ftLib_LoadFighterCostume(Ft_Kind_CrezyH, 0);
 }
 
 void fn_8017C7A0(void)
@@ -297,7 +297,7 @@ void gm_8017C838(void)
         } else {
             var_r3 = 0;
         }
-        ftLib_80087610(var_r3);
+        ftLib_LoadKirbyHats(var_r3);
         break;
     case 0x48:
         sp10[0] = 0xC;
@@ -320,7 +320,7 @@ void gm_8017C838(void)
 
     for (i = 0; i < 3; i++) {
         if (*var_r31 != Ft_Kind_Max) {
-            ftLib_80087574(*var_r31);
+            ftLib_LoadFighterAllCostumes(*var_r31);
         }
         var_r31++;
     }

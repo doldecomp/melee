@@ -493,7 +493,7 @@ Item_GObj* it_802B7C18(Fighter_GObj* owner, Vec3* pos, f32 facing_dir)
         } else {
             type = 0;
         }
-        if (it_802B75FC(ip, ftLib_80086630(owner, FtPart_ThrowN), type,
+        if (it_802B75FC(ip, ftLib_GetPartJObj(owner, FtPart_ThrowN), type,
                         fp->x34_scale.y) == NULL)
         {
             Item_8026A8EC(item_gobj);

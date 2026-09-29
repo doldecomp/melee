@@ -14,8 +14,8 @@ void ftCo_800DA698(Fighter_GObj* gobj, bool arg1)
     } else {
         fp->gr_vel = -fp->facing_dir * p_ftCommonData->x370;
     }
-    Fighter_ChangeMotionState(gobj, ftCo_MS_CatchCut, 0, 0.0F, 1.0F, 0.0F,
-                              NULL);
+    Fighter_ChangeMotionState(gobj, ftCo_MS_CatchCut, Ft_MF_None, 0.0F, 1.0F,
+                              0.0F, NULL);
     if (arg1) {
         ftCo_CaptureCut_Enter(fp->victim_gobj);
     }

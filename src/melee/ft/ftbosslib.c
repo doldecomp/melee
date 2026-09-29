@@ -147,12 +147,12 @@ void ftBossLib_8015C208(HSD_GObj* arg0, Vec3* arg1)
 {
     Fighter* fp = GET_FIGHTER(arg0);
     HSD_GObj* gobj = ftBossLib_8015C244(arg0, &fp->cur_pos);
-    ftLib_80086644(gobj, arg1);
+    ftLib_GetPos(gobj, arg1);
 }
 
 HSD_GObj* ftBossLib_8015C244(HSD_GObj* arg0, Vec3* arg1)
 {
-    return ftLib_8008627C(arg1, arg0);
+    return ftLib_FindNearestOpponent(arg1, arg0);
 }
 
 bool ftBossLib_IsMasterHandEntry(void)

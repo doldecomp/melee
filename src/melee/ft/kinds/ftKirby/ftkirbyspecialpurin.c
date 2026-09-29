@@ -279,7 +279,7 @@ void ftKb_SpecialNPr_80101560(Fighter_GObj* gobj)
     } else {
         msid = ftKb_MS_PrSpecialNStartL;
     }
-    Fighter_ChangeMotionState(gobj, msid, 0, 0.0f, 1.0f, 0.0f, NULL);
+    Fighter_ChangeMotionState(gobj, msid, Ft_MF_None, 0.0f, 1.0f, 0.0f, NULL);
     Fighter_ClearCmdVars(fp);
     ftAnim_8006EBA4(gobj);
     ftKb_SpecialNPr_8010131C(gobj);
@@ -300,7 +300,7 @@ void ftKb_SpecialNPr_80101618(Fighter_GObj* gobj)
     } else {
         msid = ftKb_MS_PrSpecialAirNStartL;
     }
-    Fighter_ChangeMotionState(gobj, msid, 0, 0.0f, 1.0f, 0.0f, NULL);
+    Fighter_ChangeMotionState(gobj, msid, Ft_MF_None, 0.0f, 1.0f, 0.0f, NULL);
     Fighter_ClearCmdVars(fp);
     ftAnim_8006EBA4(gobj);
     ftKb_SpecialNPr_8010131C(gobj);

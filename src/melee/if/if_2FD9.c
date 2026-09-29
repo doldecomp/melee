@@ -51,7 +51,7 @@ void un_802FD91C(void)
 
 void un_802FD928(unsigned char slot, u8 arg1, GXColor* arg2)
 {
-    struct un_804A1F10_t* tmp = &un_804A1F10;
+    struct un_804A1F10_t* p = &un_804A1F10;
     int i;
 
     if (slot >= 4) {
@@ -59,35 +59,31 @@ void un_802FD928(unsigned char slot, u8 arg1, GXColor* arg2)
     }
 
     for (i = 0; i < 4; i++) {
-        Gm_PKind type = Player_GetPlayerSlotType(slot);
-        if (type == Gm_PKind_Cpu) {
+        if (Player_GetPlayerSlotType(slot) == Gm_PKind_Cpu) {
             continue;
         }
-        {
-            if (tmp->x28[i] != 0) {
-                continue;
-            }
-        }
-        if (un_804A1F10.x24[slot] != 0) {
+        if (p->x28[i] != 0) {
             continue;
         }
-        un_804A1F10.x24[slot] = 1;
-        un_804A1F10.x2C[i] = slot;
-        un_804A1F10.x28[i] = arg1;
-        un_804A1F10.x14[i] = *arg2;
+        if (p->x24[slot] != 0) {
+            continue;
+        }
+        p->x24[slot] = 1;
+        p->x2C[i] = slot;
+        p->x28[i] = arg1;
+        p->x14[i] = *arg2;
         return;
     }
 }
 
 void un_802FD9D8(unsigned char slot)
 {
+    struct un_804A1F10_t* p = &un_804A1F10;
     int i;
     for (i = 0; i < 4; i++) {
-        if (un_804A1F10.x2C[i] == slot) {
-            un_804A1F10.x24[slot] = 0;
-            un_804A1F10.x28[i] = 0;
-            i++;
-            i--;
+        if (p->x2C[i] == slot) {
+            p->x24[slot] = 0;
+            p->x28[i] = 0;
         }
     }
 }
@@ -99,39 +95,34 @@ void fn_802FDA4C(HSD_GObj* gobj, intptr_t pass)
     }
 }
 
+static inline void setDiffuse(HSD_MObj* mobj, GXColor* color)
+{
+    mobj->mat->diffuse.r = color->r;
+    mobj->mat->diffuse.g = color->g;
+    mobj->mat->diffuse.b = color->b;
+    mobj->mat->diffuse.a = color->a;
+}
+
+static inline f32 getOffsetY(float* v, u8 j, u8 k)
+{
+    return 2.6f * j + v[k != 0 ? k - 1 : 0];
+}
+
 void fn_802FDA78(HSD_GObj* gobj)
 {
     struct un_804A1F10_t* p = &un_804A1F10;
     int i;
     float v[] = { 0.0, -1.3, -2.6, -3.9 };
     HSD_JObj* jobj = HSD_GObjGetHSDObj(gobj);
-    unsigned char* pslot = gobj->user_data;
+    unsigned char const* pslot = HSD_GObjGetUserData(gobj);
     unsigned char slot = *pslot;
     u8 j = 0;
     u8 k = 0;
     HSD_JObjSetTranslateZ(jobj, 0.0);
-    PAD_STACK(12);
-    {
-        HSD_MObj* m = jobj->child->u.dobj->mobj;
-        m->mat->diffuse.r = p->x14[slot].r;
-        m->mat->diffuse.g = p->x14[slot].g;
-        m->mat->diffuse.b = p->x14[slot].b;
-        m->mat->diffuse.a = p->x14[slot].a;
-    }
-    {
-        HSD_MObj* m = jobj->child->u.dobj->next->mobj;
-        m->mat->diffuse.r = p->x14[slot].r;
-        m->mat->diffuse.g = p->x14[slot].g;
-        m->mat->diffuse.b = p->x14[slot].b;
-        m->mat->diffuse.a = p->x14[slot].a;
-    }
-    {
-        HSD_MObj* m = jobj->child->u.dobj->next->next->mobj;
-        m->mat->diffuse.r = p->x14[slot].r;
-        m->mat->diffuse.g = p->x14[slot].g;
-        m->mat->diffuse.b = p->x14[slot].b;
-        m->mat->diffuse.a = p->x14[slot].a;
-    }
+
+    setDiffuse(jobj->child->u.dobj->mobj, &p->x14[slot]);
+    setDiffuse(jobj->child->u.dobj->next->mobj, &p->x14[slot]);
+    setDiffuse(jobj->child->u.dobj->next->next->mobj, &p->x14[slot]);
     if (!p->x28[0] && !p->x28[1] && !p->x28[2] && !p->x28[3]) {
         p->x31 = -1;
         p->x32 = 0;
@@ -160,7 +151,7 @@ void fn_802FDA78(HSD_GObj* gobj)
             }
         }
         HSD_JObjSetRotationZ(jobj, 0.0);
-        HSD_JObjSetTranslateY(jobj, 2.6f * j + v[k != 0 ? k - 1 : 0]);
+        HSD_JObjSetTranslateY(jobj, getOffsetY(v, j, k));
         HSD_JObjSetTranslateX(jobj, -25.0);
         break;
     case 2:
@@ -183,7 +174,7 @@ void fn_802FDA78(HSD_GObj* gobj)
             }
         }
         HSD_JObjSetRotationZ(jobj, 3.1415927);
-        HSD_JObjSetTranslateY(jobj, 2.6f * j + v[k != 0 ? k - 1 : 0]);
+        HSD_JObjSetTranslateY(jobj, getOffsetY(v, j, k));
         HSD_JObjSetTranslateX(jobj, 25.0);
         break;
     }
@@ -198,7 +189,7 @@ void un_802FE260(void)
     HSD_JObj* jobj;
 
     un_804D6D90 = 0;
-    lbArchive_LoadSections(*ifAll_GetArchive(), (void*) &un_804A1F10.x0,
+    lbArchive_LoadSections(*ifAll_GetArchive(), &un_804A1F10.x0,
                            "Stc_rarwmdls", 0);
     for (i = 0; i < 4; i++) {
         gobj = GObj_Create(HSD_GOBJ_CLASS_UI, 15, 0);
@@ -221,12 +212,12 @@ void un_802FE260(void)
 
 void un_802FE390(void)
 {
+    struct un_804A1F10_t* p = &un_804A1F10;
     int i;
-    PAD_STACK(8);
     for (i = 0; i < 4; i++) {
-        if (un_804A1F10.x4[i] != 0) {
-            HSD_GObjFree(un_804A1F10.x4[i]);
-            un_804A1F10.x4[i] = 0;
+        if (p->x4[i] != NULL) {
+            HSD_GObjFree(p->x4[i]);
+            p->x4[i] = NULL;
         }
     }
 }

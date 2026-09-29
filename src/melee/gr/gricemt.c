@@ -818,8 +818,9 @@ void stageGObj10_GObjProc(Ground_GObj* arg0)
         if (gp->u.icemt10.x14_b4) {
             fighter_gobj = Ground_GetP1Fighter();
             if (fighter_gobj != NULL) {
-                ftLib_80086644(fighter_gobj, &sp24);
-                if (!gp->u.icemt10.x14_b1 && !ftLib_80086EC0(fighter_gobj) &&
+                ftLib_GetPos(fighter_gobj, &sp24);
+                if (!gp->u.icemt10.x14_b1 &&
+                    !ftLib_IsInHitstun(fighter_gobj) &&
                     sp24.y > yakumono_param->ft_max_y)
                 {
                     gp->u.icemt10.x14_b1 = true;
@@ -1921,7 +1922,7 @@ bool grIceMt_801FA364(struct grIceMt_FA364_State* state, f32* out,
 }
 
 int fn_801FA4CC(int num)
-{ // https://decomp.me/scratch/pSJNA
+{
     if (num == 1) {
         Ground_801C5740(num);
         num = 1;

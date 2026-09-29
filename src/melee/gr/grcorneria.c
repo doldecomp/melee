@@ -2137,7 +2137,7 @@ void grCorneria_801E1348(Ground_GObj* gobj)
         {
             HSD_GObj* fighter = HSD_GObjPLinkHead[HSD_GOBJ_PLINK_FIGHTER];
             while (fighter != NULL) {
-                ftLib_80086644(fighter, &fighter_pos);
+                ftLib_GetPos(fighter, &fighter_pos);
                 if (ABS(cannon_pos.y - fighter_pos.y) <= 10.0f) {
                     found = 1;
                     break;
@@ -2218,9 +2218,7 @@ void grCorneria_801E1878(Ground_GObj* gobj)
     HSD_JObj* target_jobj = tmp;
 
     /// @remarks Splitting the pad around a scoped @c pos places the vector
-    /// at sp+0x18 as in the target; a function-scope @c pos with a single
-    /// PAD_STACK(16) leaves it at sp+0x24 (six reg-save/load instructions
-    /// arg-mismatch, 99.90%).
+    /// at sp+0x18 as in the target.
     PAD_STACK(8);
     {
         Vec3 pos;

@@ -151,25 +151,25 @@ void un_80302FFC(struct un_80304138_objalloc_t* arg0)
         DevText_SetCursorXY(arg0->x4, cursor_x, cursor_y);
         switch (x8->x0) {
         case 2:
-            DevText_Print(arg0->x4, x8->xC[*(int*) x8->x10]);
+            DevText_Print(arg0->x4, x8->xC[*x8->x10.i]);
             break;
         case 3:
-            DevText_PrintInt(arg0->x4, *(int*) x8->x10);
+            DevText_PrintInt(arg0->x4, *x8->x10.i);
             break;
         case 4:
-            DevText_Printf(arg0->x4, "%d", *(int*) x8->x10);
+            DevText_Printf(arg0->x4, "%d", *x8->x10.i);
             break;
         case 5:
-            DevText_Printf(arg0->x4, "%02x", *(unsigned char*) x8->x10);
+            DevText_Printf(arg0->x4, "%02x", *x8->x10.b);
             break;
         case 6:
-            DevText_Printf(arg0->x4, "%04x", *(u16*) x8->x10);
+            DevText_Printf(arg0->x4, "%04x", *x8->x10.h);
             break;
         case 7:
-            DevText_Printf(arg0->x4, "%08x", *(int*) x8->x10);
+            DevText_Printf(arg0->x4, "%08x", *x8->x10.w);
             break;
         case 8:
-            DevText_Printf(arg0->x4, "%3.2f", *(float*) x8->x10);
+            DevText_Printf(arg0->x4, "%3.2f", *x8->x10.f);
             break;
         }
         x8++;
@@ -181,27 +181,27 @@ bool un_80303444(struct un_80304138_objalloc_t* arg0)
     bool ret = false;
     switch (arg0->x8[arg0->x0].x0) {
     case 2: {
-        int* q = arg0->x8[arg0->x0].x10;
+        int* q = arg0->x8[arg0->x0].x10.i;
         if (*q < arg0->x8[arg0->x0].x18 - 1.0f) {
             *q += 1;
             ret = true;
-            arg0->x1 = arg0->x1 | 1;
+            arg0->x1 |= 1;
             sfxMove();
         }
         break;
     }
     case 3: {
-        int* q = arg0->x8[arg0->x0].x10;
+        int* q = arg0->x8[arg0->x0].x10.i;
         if (*q + arg0->x8[arg0->x0].x1C <= arg0->x8[arg0->x0].x18) {
             ret = true;
             *q += arg0->x8[arg0->x0].x1C;
-            arg0->x1 = arg0->x1 | 1;
+            arg0->x1 |= 1;
             sfxMove();
         }
         break;
     }
     case 5: {
-        unsigned char* q = arg0->x8[arg0->x0].x10;
+        u8* q = arg0->x8[arg0->x0].x10.b;
         int idk = arg0->x8[arg0->x0].x1C;
         if (*q + (idk & 0xFF) <= 0xFF) {
             *q += idk;
@@ -209,12 +209,12 @@ bool un_80303444(struct un_80304138_objalloc_t* arg0)
             *q -= 0x100 - idk;
         }
         ret = true;
-        arg0->x1 = arg0->x1 | 1;
+        arg0->x1 |= 1;
         sfxMove();
         break;
     }
     case 6: {
-        u16* q = arg0->x8[arg0->x0].x10;
+        u16* q = arg0->x8[arg0->x0].x10.h;
         int idk = arg0->x8[arg0->x0].x1C;
         if (*q + (idk & 0xFFFF) <= 0xFFFF) {
             *q += idk;
@@ -222,13 +222,13 @@ bool un_80303444(struct un_80304138_objalloc_t* arg0)
             *q -= 0x10000 - idk;
         }
         ret = true;
-        arg0->x1 = arg0->x1 | 1;
+        arg0->x1 |= 1;
         sfxMove();
         break;
     }
     case 4:
     case 7: {
-        unsigned int* q = arg0->x8[arg0->x0].x10;
+        u32* q = arg0->x8[arg0->x0].x10.w;
         unsigned int idk = arg0->x8[arg0->x0].x1C;
         if (*q + (idk & 0xFFFFFFFF) <= 0xFFFFFFFF) {
             *q += idk;
@@ -236,16 +236,16 @@ bool un_80303444(struct un_80304138_objalloc_t* arg0)
             *q -= (unsigned int) (0x100000000 - idk);
         }
         ret = true;
-        arg0->x1 = arg0->x1 | 1;
+        arg0->x1 |= 1;
         sfxMove();
         break;
     }
     case 8: {
-        float* q = arg0->x8[arg0->x0].x10;
+        f32* q = arg0->x8[arg0->x0].x10.f;
         if (*q + arg0->x8[arg0->x0].x1C <= arg0->x8[arg0->x0].x18) {
             *q += arg0->x8[arg0->x0].x1C;
             ret = true;
-            arg0->x1 = arg0->x1 | 1;
+            arg0->x1 |= 1;
             sfxMove();
         }
         break;
@@ -259,27 +259,27 @@ bool un_80303720(struct un_80304138_objalloc_t* arg0)
     bool ret = false;
     switch (arg0->x8[arg0->x0].x0) {
     case 2: {
-        int* q = arg0->x8[arg0->x0].x10;
+        int* q = arg0->x8[arg0->x0].x10.i;
         if (*q > arg0->x8[arg0->x0].x14) {
             *q -= 1;
             ret = true;
-            arg0->x1 = arg0->x1 | 1;
+            arg0->x1 |= 1;
             sfxMove();
         }
         break;
     }
     case 3: {
-        int* q = arg0->x8[arg0->x0].x10;
+        int* q = arg0->x8[arg0->x0].x10.i;
         if (*q - arg0->x8[arg0->x0].x1C >= arg0->x8[arg0->x0].x14) {
             ret = true;
             *q -= arg0->x8[arg0->x0].x1C;
-            arg0->x1 = arg0->x1 | 1;
+            arg0->x1 |= 1;
             sfxMove();
         }
         break;
     }
     case 5: {
-        unsigned char* q = arg0->x8[arg0->x0].x10;
+        u8* q = arg0->x8[arg0->x0].x10.b;
         int idk = arg0->x8[arg0->x0].x1C;
         if (*q - (idk & 0xFF) >= 0) {
             *q -= idk;
@@ -287,12 +287,12 @@ bool un_80303720(struct un_80304138_objalloc_t* arg0)
             *q += 0x100 - idk;
         }
         ret = true;
-        arg0->x1 = arg0->x1 | 1;
+        arg0->x1 |= 1;
         sfxMove();
         break;
     }
     case 6: {
-        u16* q = arg0->x8[arg0->x0].x10;
+        u16* q = arg0->x8[arg0->x0].x10.h;
         int idk = arg0->x8[arg0->x0].x1C;
         if (*q - (idk & 0xFFFF) >= 0) {
             *q -= idk;
@@ -300,13 +300,13 @@ bool un_80303720(struct un_80304138_objalloc_t* arg0)
             *q += 0x10000 - idk;
         }
         ret = true;
-        arg0->x1 = arg0->x1 | 1;
+        arg0->x1 |= 1;
         sfxMove();
         break;
     }
     case 4:
     case 7: {
-        unsigned int* q = arg0->x8[arg0->x0].x10;
+        u32* q = arg0->x8[arg0->x0].x10.w;
         unsigned int idk = arg0->x8[arg0->x0].x1C;
         if (*q - (idk & 0xFFFFFFFF) >= 0) {
             *q -= idk;
@@ -314,16 +314,16 @@ bool un_80303720(struct un_80304138_objalloc_t* arg0)
             *q += (unsigned int) (0x100000000 - idk);
         }
         ret = true;
-        arg0->x1 = arg0->x1 | 1;
+        arg0->x1 |= 1;
         sfxMove();
         break;
     }
     case 8: {
-        float* q = arg0->x8[arg0->x0].x10;
+        f32* q = arg0->x8[arg0->x0].x10.f;
         if (*q - arg0->x8[arg0->x0].x1C >= arg0->x8[arg0->x0].x14) {
             *q -= arg0->x8[arg0->x0].x1C;
             ret = true;
-            arg0->x1 = arg0->x1 | 1;
+            arg0->x1 |= 1;
             sfxMove();
         }
         break;
@@ -400,14 +400,14 @@ void un_80303AC4(struct un_80304138_objalloc_t* arg0)
         int i = findPrev(arg0);
         if (i != -1) {
             arg0->x0 = i;
-            arg0->x1 = arg0->x1 | 1;
+            arg0->x1 |= 1;
             sfxMove();
         }
     } else if (buttons & (0x20000000 | HSD_PAD_X)) { // down
         int i = findNext(arg0);
         if (i != -1) {
             arg0->x0 = i;
-            arg0->x1 = arg0->x1 | 1;
+            arg0->x1 |= 1;
             sfxMove();
         }
     } else if (buttons & (0x80000000 | HSD_PAD_R)) { // right
@@ -438,12 +438,12 @@ void fn_80303EF4(HSD_GObj* gobj)
             if (q->x1 & 1) {
                 DevText_Erase(q->x4);
                 un_80302FFC(q);
-                q->x1 = q->x1 & ~1;
+                q->x1 &= ~1;
             } else {
                 un_80302FFC(q);
             }
             if (q->x1 & 2) {
-                q->x1 = q->x1 & ~2;
+                q->x1 &= ~2;
             } else if ((q->x1 & 0x10) == 0) {
                 un_80303AC4(q);
             }
@@ -457,7 +457,6 @@ void fn_80303EF4(HSD_GObj* gobj)
     }
 }
 
-#line 828 "textlib.c"
 static inline int un_80303FD4_first(struct un_80304138_objalloc_t_x8* p)
 {
     int i;
@@ -470,7 +469,6 @@ static inline int un_80303FD4_first(struct un_80304138_objalloc_t_x8* p)
     return 0;
 }
 
-#line 840 "textlib.c"
 static inline int un_80303FD4_count(struct un_80304138_objalloc_t_x8* p)
 {
     int n = 0;
@@ -489,7 +487,6 @@ static inline void initEntries(struct un_80304138_objalloc_t_x8* p)
     }
 }
 
-#line 850 "textlib.c"
 void un_80303FD4(HSD_GObj* arg0, struct un_80304138_objalloc_t* arg1,
                  struct un_80304138_objalloc_t_x8* arg2, int arg3, int arg4,
                  int arg5)
@@ -570,17 +567,17 @@ struct un_80304138_objalloc_t* un_80304210(struct un_80304138_objalloc_t* arg0,
             un_80303FD4(arg0->x10, obj, arg1, arg2, text->x + x_pos,
                         text->y + y_pos);
         }
-        arg0->x1 = arg0->x1 | 0x10;
+        arg0->x1 |= 0x10;
         arg0->prev = obj;
         obj->next = arg0;
-        obj->x1 = obj->x1 | 2;
+        obj->x1 |= 2;
     }
     return obj;
 }
 
 void un_80304334(struct un_80304138_objalloc_t* arg0)
 {
-    arg0->x1 |= (1 << 7);
+    arg0->x1 |= 0x80;
 }
 
 void un_80304344(struct un_80304138_objalloc_t* arg0)
@@ -590,7 +587,7 @@ void un_80304344(struct un_80304138_objalloc_t* arg0)
     struct un_80304138_objalloc_t_x8* r4;
     soundtest_callback q;
     if (next) {
-        next->x1 = next->x1 & ~0x10;
+        next->x1 &= ~0x10;
         next->prev = NULL;
     }
     while (arg0) {

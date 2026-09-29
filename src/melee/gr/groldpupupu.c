@@ -527,7 +527,7 @@ bool fn_802112F4(Ground_GObj* gobj, HSD_GObj* fighter_gobj, Vec3* vel)
     Vec3 pos;
     Ground* gp;
 
-    ftLib_80086644(fighter_gobj, &pos);
+    ftLib_GetPos(fighter_gobj, &pos);
     vel->y = 0.0F;
     vel->z = 0.0F;
 
@@ -653,7 +653,7 @@ void grOldPupupu_802113E0(Ground_GObj* gobj)
 
                 gp->u.oldpupupu.xCC = 0;
                 HSD_JObjGetTranslation(gobj->hsd_obj, &stack.pos);
-                if (ftLib_800864A8(&stack.pos, NULL) == 1.0F) {
+                if (ftLib_GetOpponentsDir(&stack.pos, NULL) == 1.0F) {
                     side = 1;
                 } else {
                     side = 0;

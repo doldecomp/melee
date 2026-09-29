@@ -218,7 +218,7 @@ void grYorster_80202428(HSD_GObj* item_gobj, Ground* gp, Vec3* pos,
     Ground* gp2 = (Ground*) ((s32) gp + 0);
     int i;
 
-    if (ftLib_80086960(fighter_gobj)) {
+    if (ftLib_IsFighter(fighter_gobj)) {
         ftLib_80086A4C(fighter_gobj, (f32) grYt_804D6A20.x0->x14);
     }
 
@@ -245,7 +245,7 @@ void grYorster_802024F0(void* user_data, int joint_id, CollData* coll,
         return;
     }
 
-    if (env == 1 && ftLib_800873F4((0, coll->x0_gobj))) {
+    if (env == 1 && ftLib_IsEntry((0, coll->x0_gobj))) {
         return;
     }
 
@@ -253,7 +253,7 @@ void grYorster_802024F0(void* user_data, int joint_id, CollData* coll,
     case 1: {
         Vec3 pos;
 
-        ftLib_80086BEC(gobj, &pos);
+        ftLib_GetPosDelta(gobj, &pos);
         delta_y = pos.y;
         if (delta_y >= grYt_804D6A20.x0->x00) {
             ftLib_80086A4C(gobj, (f32) grYt_804D6A20.x0->x10);

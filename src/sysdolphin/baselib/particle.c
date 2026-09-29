@@ -19,18 +19,24 @@ typedef struct {
     } content;
 } PerfDispItem;
 
+#include <Runtime/platform.h>
+
 #include <math.h>
 #include <string.h>
 
 #include "cobj.h"
 #include "gobjobject.h"
 #include "mtx.h"
-#include "particle.static.h"
 #include "psappsrt.h"
 #include "psstructs.h"
 #include "random.h"
 #include <dolphin/gx.h>
 #include <dolphin/os.h>
+
+// .data
+
+/* 4D78D0 */ static u32 hsd_804D78D0;
+/* 4D78D4 */ static int (**psCallback)(HSD_Particle* part);
 
 /* 4D78D8 */ u16 hsd_804D78D8 = 0;
 /* 4D78DA */ u16 hsd_804D78DA = 0;

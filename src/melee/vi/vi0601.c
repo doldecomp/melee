@@ -82,7 +82,6 @@ void un_8031E9B8(void)
     HSD_GObj* gobj;
     HSD_JObj* jobj;
     s32 i;
-    PAD_STACK(2 * 4);
 
     gobj = GObj_Create(0xE, 0xF, 0);
     jobj = HSD_JObjLoadJoint((*un_804D6FB0->models)->joint);
@@ -96,10 +95,11 @@ void un_8031E9B8(void)
     i = 0;
     while (un_804D6FB0->models[i] != NULL) {
         if ((u32) (i - 1) <= 2) {
-            if ((gobj = grCorneria_801E1BF0())->hsd_obj == NULL) {
+            gobj = grCorneria_801E1BF0();
+            jobj = GET_JOBJ(gobj);
+            if (jobj == NULL) {
                 child = NULL;
             } else {
-                jobj = gobj->hsd_obj;
                 child = jobj->child;
             }
             HSD_GObj_SetupProc(gobj, fn_8031E800, 2);

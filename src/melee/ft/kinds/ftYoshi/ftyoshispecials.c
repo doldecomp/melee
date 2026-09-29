@@ -1,5 +1,7 @@
 #include "ftyoshispecials.h"
 
+#include <Runtime/platform.h>
+
 #include <melee/ft/forward.h>
 #include <melee/ft/kinds/ftCommon/forward.h>
 #include <melee/lb/forward.h>
@@ -9,7 +11,6 @@
 #include <placeholder.h>
 
 #include "ftyoshi.h"
-#include "ftYs_SpecialS.static.h"
 #include "types.h"
 #include <dolphin/mtx.h>
 #include <melee/cm/camera.h>
@@ -31,6 +32,11 @@
 #include <melee/lb/lb_00B0.h>
 #include <melee/mp/mplib.h>
 #include <sysdolphin/baselib/gobj.h>
+
+/* 3CED48 */ static bool ftYs_Unk3_803CED48[] = {
+    false, true, false, false, false, true, true, false,
+    false, true, true,  true,  false, true, true,
+};
 
 static MotionFlags const ftYs_MF_SpecialS_Coll =
     ftCommon_GroundAirColl_MF | Ft_MF_KeepGfx | Ft_MF_SkipModel;

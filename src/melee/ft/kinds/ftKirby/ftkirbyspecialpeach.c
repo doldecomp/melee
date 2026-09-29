@@ -115,7 +115,7 @@ static void inlineA0(HSD_GObj* gobj)
 
 static void inlineA1(HSD_GObj* gobj, ftKirby_MotionState msid)
 {
-    Fighter_ChangeMotionState(gobj, msid, 0, 0, 1, 0, NULL);
+    Fighter_ChangeMotionState(gobj, msid, Ft_MF_None, 0, 1, 0, NULL);
     ftAnim_8006EBA4(gobj);
     inlineA0(gobj);
 }
@@ -384,7 +384,7 @@ void fn_8010CD88(HSD_GObj* gobj)
         } else {
             msid = ftKb_MS_PeSpecialAirLwHit;
         }
-        Fighter_ChangeMotionState(gobj, msid, 0, 9, 1, 0, 0);
+        Fighter_ChangeMotionState(gobj, msid, Ft_MF_None, 9, 1, 0, 0);
     }
     ftAnim_8006EBA4(gobj);
     if (fp->u.kb.xD0 != NULL) {

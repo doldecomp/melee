@@ -186,7 +186,7 @@ bool ftpickupitem_8009447C(Fighter_GObj* gobj, Item_GObj* item_gobj)
             ftCommon_8007FA58(gobj, item_gobj);
             break;
         case It_Kind_MetalB:
-            ftLib_800871A8(gobj, item_gobj);
+            ftLib_ApplyMetalBox(gobj, item_gobj);
             Item_8026A8EC(item_gobj);
             break;
         case It_Kind_Spycloak:
@@ -378,7 +378,7 @@ void ftpickupitem_80094B6C(Fighter_GObj* gobj, Item_GObj* item_gobj)
             ftCommon_8007FA58(gobj, item_gobj);
             return;
         case It_Kind_MetalB:
-            ftLib_800871A8(gobj, item_gobj);
+            ftLib_ApplyMetalBox(gobj, item_gobj);
             Item_8026A8EC(item_gobj);
             return;
         case It_Kind_Spycloak:

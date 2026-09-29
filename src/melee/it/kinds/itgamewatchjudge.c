@@ -50,7 +50,7 @@ void it_802C78B8(Item_GObj* item_gobj)
     Item* ip = GET_ITEM(item_gobj);
     HSD_JObj* jobj = GET_JOBJ(item_gobj);
     if (ip->owner != NULL) {
-        f32 facing = ftLib_800865C0(ip->owner);
+        f32 facing = ftLib_GetFacingDir(ip->owner);
         HSD_JObj* child = HSD_JObjGetChild(HSD_JObjGetChild(jobj));
         if (facing == 1.0f) {
             HSD_JObjSetRotationY(child, M_PI);

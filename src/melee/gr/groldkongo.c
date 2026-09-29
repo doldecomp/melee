@@ -536,7 +536,7 @@ bool grOldKongo_80210454(Ground_GObj* ground_gobj, Fighter_GObj* keep)
     }
 
     Ground_801C4DA0(&pos_gnd, &unk);
-    ftLib_80086644(keep, &pos_ft);
+    ftLib_GetPos(keep, &pos_ft);
 
     if (!((pos_gnd.x - pos_ft.x) * (pos_gnd.x - pos_ft.x) +
               (pos_gnd.y - pos_ft.y) * (pos_gnd.y - pos_ft.y) +
@@ -557,7 +557,7 @@ bool grOldKongo_80210454(Ground_GObj* ground_gobj, Fighter_GObj* keep)
     grAnime_801C7FF8(ground_gobj, 2, 7, 1, 0.0f, 1.0f);
     grMaterial_801C9604(ground_gobj, yakumono_param->x6C, 0);
     efSync_Spawn(0x405, ground_gobj, &pos_ft);
-    ftLib_80086C18(keep, 0xD, 0x1E);
+    ftLib_StartRumble(keep, 0xD, 0x1E);
     return true;
 done:
     return false;

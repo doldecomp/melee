@@ -235,8 +235,8 @@ void it_802EF548(Item_GObj* gobj)
     new_damage = ip->xCA0;
     dir = -1.0f * ip->xCCC_incDamageDirection;
     if (fighter != NULL) {
-        if (ftLib_80086960(fighter)) {
-            ftLib_800866DC(fighter, &fighter_pos);
+        if (ftLib_IsFighter(fighter)) {
+            ftLib_GetCameraBonePos(fighter, &fighter_pos);
         } else {
             return;
         }

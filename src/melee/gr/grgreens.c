@@ -407,7 +407,7 @@ bool fn_80213B1C(Ground_GObj* ground_gobj, Fighter_GObj* fighter_gobj,
 {
     Vec vec2;
     PAD_STACK(4);
-    ftLib_80086644(fighter_gobj, &vec2);
+    ftLib_GetPos(fighter_gobj, &vec2);
     vec->y = 0.0f;
     vec->z = 0.0f;
     switch (GET_GROUND(ground_gobj)->u.greens2.x18) {
@@ -438,7 +438,7 @@ static inline int get_whispy_dir(Ground_GObj* gobj, Vec3* pos)
 {
     HSD_JObj* jobj = gobj->hsd_obj;
     HSD_JObjGetTranslation(jobj, pos);
-    return ftLib_800864A8(pos, NULL) == 1.0f ? 1 : 0;
+    return ftLib_GetOpponentsDir(pos, NULL) == 1.0f ? 1 : 0;
 }
 
 void grGreens_80213C10(Ground_GObj* gobj)
@@ -506,7 +506,7 @@ void grGreens_80213C10(Ground_GObj* gobj)
             gp->u.greens2.x8 = 0;
             jobj = gobj->hsd_obj;
             HSD_JObjGetTranslation(jobj, &pos);
-            if (ftLib_800864A8(&pos, NULL) == 1.0f) {
+            if (ftLib_GetOpponentsDir(&pos, NULL) == 1.0f) {
                 dir = 1;
             } else {
                 dir = 0;

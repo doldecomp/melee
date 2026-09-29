@@ -580,7 +580,7 @@ void grOnett_801E43E0(Ground_GObj* gobj)
                 gp->u.onettcar.x108 -= 1;
                 iter = HSD_GObjPLinkHead[HSD_GOBJ_PLINK_FIGHTER];
                 while (iter != NULL) {
-                    ftLib_80086644(iter, &pos);
+                    ftLib_GetPos(iter, &pos);
                     if (pos.y <= 1.0f) {
                         s32 rank = gm_8016C6C0(iter);
                         if (fighter_count == 1 || rank == 0) {
@@ -649,7 +649,7 @@ void grOnett_801E43E0(Ground_GObj* gobj)
                 {
                     iter = HSD_GObjPLinkHead[HSD_GOBJ_PLINK_FIGHTER];
                     while (iter != NULL) {
-                        ftLib_80086644(iter, &pos);
+                        ftLib_GetPos(iter, &pos);
                         if (pos.y <= 1.0f) {
                             s8 car = saved_car;
 

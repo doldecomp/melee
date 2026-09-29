@@ -120,7 +120,7 @@ void grKinokoRoute_80207490(void)
     Vec3 pos;
     HSD_GObj* gobj = Ground_GetP1Fighter();
     if (gobj != NULL) {
-        ftLib_80086644(gobj, &pos);
+        ftLib_GetPos(gobj, &pos);
         Ground_801C38BC(pos.x, 20.0f + pos.y);
         Camera_8002F3AC();
     }
@@ -254,7 +254,7 @@ void grKinokoRoute_802078F0(Ground_GObj* gobj)
 
     fighter = Ground_GetP1Fighter();
     if (fighter != NULL) {
-        ftLib_80086644(fighter, &pos);
+        ftLib_GetPos(fighter, &pos);
     } else {
         return;
     }
@@ -363,15 +363,15 @@ void grKinokoRoute_80207C88(Ground_GObj* gobj)
     scale = Ground_801C0498();
     fighter = Ground_GetP1Fighter();
     if (fighter != NULL) {
-        ftLib_80086644(fighter, &fighter_pos);
+        ftLib_GetPos(fighter, &fighter_pos);
     } else {
         return;
     }
     if (gp->u.kinokoroute2.phase != 2) {
-        if (ftLib_80086EC0(fighter)) {
+        if (ftLib_IsInHitstun(fighter)) {
             Stage_UnkSetVec3TCam_Offset(&cam_target);
             gp->u.kinokoroute2.cam_timer = 0x3C;
-        } else if (ftLib_8008732C(fighter)) {
+        } else if (ftLib_IsDead(fighter)) {
             Stage_UnkSetVec3TCam_Offset(&cam_target);
             gp->u.kinokoroute2.cam_timer = 0;
         } else {
@@ -618,8 +618,8 @@ bool grKinokoRoute_80208660(int unused, Fighter_GObj* gobj)
     Vec3 pos;
     Vec3 vel;
 
-    ftLib_80086644(gobj, &pos);
-    ftLib_80086684(gobj, &vel);
+    ftLib_GetPos(gobj, &pos);
+    ftLib_GetPrevPos(gobj, &vel);
 
     if (pos.y < 5.5F && vel.y > 5.5F) {
         f32 scale = ftLib_80086B80(gobj) / 10.0F;

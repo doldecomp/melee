@@ -1495,8 +1495,6 @@ typedef struct Lbl804799D8Text {
     char x4E[20];
 } Lbl804799D8Text;
 
-/// @todo All instructions match; only the callee-saved register assignment
-/// is permuted against the target.
 void fn_8019A158(void)
 {
     Lbl804799D8Text* base_ptr;

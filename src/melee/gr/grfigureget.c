@@ -230,7 +230,7 @@ void grFigureGet_80219898(Ground_GObj* gobj)
     for (var_r28 = HSD_GObjPLinkHead[HSD_GOBJ_PLINK_FIGHTER]; var_r28 != NULL;
          var_r28 = var_r28->next)
     {
-        ftLib_80086984(var_r28)->joint_id_skip = 0;
+        ftLib_GetCollData(var_r28)->joint_id_skip = 0;
     }
     if (gp->u.figureget.x4 < yakumono_param->x8) {
         temp_r3 = gp->u.figureget.x0;

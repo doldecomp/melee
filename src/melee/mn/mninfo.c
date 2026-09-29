@@ -220,7 +220,7 @@ s32 mnInfo_80251D58(mnInfo_GObj* arg0, s32 arg1, u32 arg2, u32 arg3)
 
 void mnInfo_80251F04(mnInfo_GObj* arg0, s32 arg1, u32 arg2)
 {
-    s16 sp16;
+    u16 sp16;
     s16 unused;
     HSD_Text** slot;
     HSD_Text* text;
@@ -238,7 +238,7 @@ void mnInfo_80251F04(mnInfo_GObj* arg0, s32 arg1, u32 arg2)
     text->font_size.y = 0.035f;
     text->default_fitting = 1;
     un_802FE3F8((s32) arg2, 0x4BD, &sp16, NULL);
-    HSD_SisLib_803A6368(text, (s32) (u16) sp16);
+    HSD_SisLib_803A6368(text, sp16);
 }
 
 static inline s32 mnInfo_CountUnlocked(void)

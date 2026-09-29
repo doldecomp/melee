@@ -26,7 +26,7 @@ void ftCh_GrabUnk1_8015B174(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftCrazyHand_DatAttrs* da = fp->ft_data->ext_attr;
-    Fighter_ChangeMotionState(gobj, 0x183, 0, 0.0f, 1.0f, 0.0f, NULL);
+    Fighter_ChangeMotionState(gobj, 0x183, Ft_MF_None, 0.0f, 1.0f, 0.0f, NULL);
     ftAnim_8006EBA4(gobj);
     fp->cur_pos.x = da->x18;
     fp->cur_pos.y = da->x1C;
@@ -64,9 +64,9 @@ void fn_8015B2C0(HSD_GObj* gobj)
     u8 _[16];
     switch (fp->mv.ch.unk4.x0) {
     case 0: {
-        HSD_GObj* enemy_gobj = ftLib_8008627C(&fp->cur_pos, gobj);
+        HSD_GObj* enemy_gobj = ftLib_FindNearestOpponent(&fp->cur_pos, gobj);
         if (enemy_gobj != NULL) {
-            Camera_8002E6FC((int) ftLib_80086BE0(enemy_gobj));
+            Camera_8002E6FC((int) ftLib_GetPlayerIndex(enemy_gobj));
         } else {
             Camera_8002E6FC(0);
         }

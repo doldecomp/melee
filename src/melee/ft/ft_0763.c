@@ -46,7 +46,7 @@ void ftColl_8007646C(Item_GObj* attackItem, Fighter_GObj* victim)
     Fighter_GObj* owner = itGetOwner(attackItem);
     enum_t msid = itGetAttackId(attackItem);
 
-    if (ftLib_80086960(owner)) {
+    if (ftLib_IsFighter(owner)) {
         ftColl_800763C0(owner, victim, msid);
     }
 }

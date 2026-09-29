@@ -11,33 +11,23 @@ SECTION_INIT void* memset(void* dst, int val, size_t n)
     return dst;
 }
 
-#ifdef __MWERKS__
-#define INCREMENT_ASSIGN(ptr, type, value) (*++((type*) (ptr)) = (value))
-#else
-#define INCREMENT_ASSIGN(ptr, type, value)                                    \
-    do {                                                                      \
-        type* __INCREMENT_ASSIGN_tmp;                                         \
-        (ptr) = ((type*) (ptr)) + 1;                                          \
-        __INCREMENT_ASSIGN_tmp = ((type*) (ptr));                             \
-        *__INCREMENT_ASSIGN_tmp = (value);                                    \
-    } while (false);
-#endif
-
 SECTION_INIT static void __fill_mem(void* dst, int val, size_t n)
 {
+    u8* cp = dst;
     u32 v = (u8) val;
     size_t i;
+    u32* wp;
 
-    dst = ((unsigned char*) dst) - 1;
+    cp--;
 
     if (n >= 32) {
-        i = (~(uintptr_t) dst) & 3;
+        i = ~(uintptr_t) cp & 3;
 
         if (i) {
             n -= i;
 
             do {
-                INCREMENT_ASSIGN(dst, unsigned char, v);
+                *++cp = v;
             } while (--i);
         }
 
@@ -45,7 +35,7 @@ SECTION_INIT static void __fill_mem(void* dst, int val, size_t n)
             v |= v << 24 | v << 16 | v << 8;
         }
 
-        dst = ((u32*) (((u8*) dst) + 1)) - 1;
+        wp = (u32*) (cp + 1) - 1;
 
         i = n >> 5;
 
@@ -53,7 +43,7 @@ SECTION_INIT static void __fill_mem(void* dst, int val, size_t n)
             do {
                 int j;
                 for (j = 0; j < 8; j++) {
-                    INCREMENT_ASSIGN(dst, u32, v);
+                    *++wp = v;
                 }
             } while (--i);
         }
@@ -62,40 +52,36 @@ SECTION_INIT static void __fill_mem(void* dst, int val, size_t n)
 
         if (i) {
             do {
-                INCREMENT_ASSIGN(dst, u32, v);
+                *++wp = v;
             } while (--i);
         }
 
-        dst = ((u8*) (((u32*) dst) + 1)) - 1;
+        cp = (u8*) (wp + 1) - 1;
         n &= 3;
     }
 
     if (n) {
         do {
-            INCREMENT_ASSIGN(dst, unsigned char, v);
+            *++cp = v;
         } while (--n);
     }
-
-    return;
 }
-
-#undef INCREMENT_ASSIGN
 
 SECTION_INIT void* memcpy(void* dst, const void* src, size_t n)
 {
-    const unsigned char* s;
-    unsigned char* d;
+    const u8* s = src;
+    u8* d = dst;
 
     if ((uintptr_t) src >= (uintptr_t) dst) {
-        s = (const unsigned char*) src - 1;
-        d = (unsigned char*) dst - 1;
+        s--;
+        d--;
         n++;
         while (--n != 0) {
             *++d = *++s;
         }
     } else {
-        s = (const unsigned char*) src + n;
-        d = (unsigned char*) dst + n;
+        s += n;
+        d += n;
         n++;
         while (--n != 0) {
             *--d = *--s;

@@ -284,7 +284,7 @@ Vec3* lbVector_Lerp(Vec3* a, Vec3* b, Vec3* result, float f)
     return result;
 }
 
-Vec3* lbVector_8000DE38(Mtx m, Vec3* v, float c)
+Vec3* lbVector_8000DE38(const Vec3 points[3], Vec3* v, float c)
 {
     float var1;
     float var2;
@@ -295,17 +295,17 @@ Vec3* lbVector_8000DE38(Mtx m, Vec3* v, float c)
         c = 0.0f;
     }
 
-    var1 = m[0][0] * 2.0f - m[0][3] * 4.0f + m[1][2] * 2.0f;
-    var2 = m[0][0] * -3.0f + m[0][3] * 4.0f - m[1][2];
-    v->x = m[0][0] + (var1 * c * c + var2 * c);
+    var1 = points[0].x * 2.0f - points[1].x * 4.0f + points[2].x * 2.0f;
+    var2 = points[0].x * -3.0f + points[1].x * 4.0f - points[2].x;
+    v->x = points[0].x + (var1 * c * c + var2 * c);
 
-    var1 = m[0][1] * 2.0f - m[1][0] * 4.0f + m[1][3] * 2.0f;
-    var2 = m[0][1] * -3.0f + m[1][0] * 4.0f - m[1][3];
-    v->y = m[0][1] + (var1 * c * c + var2 * c);
+    var1 = points[0].y * 2.0f - points[1].y * 4.0f + points[2].y * 2.0f;
+    var2 = points[0].y * -3.0f + points[1].y * 4.0f - points[2].y;
+    v->y = points[0].y + (var1 * c * c + var2 * c);
 
-    var1 = m[0][2] * 2.0f - m[1][1] * 4.0f + m[2][0] * 2.0f;
-    var2 = m[0][2] * -3.0f + m[1][1] * 4.0f - m[2][0];
-    v->z = m[0][2] + (var1 * c * c + var2 * c);
+    var1 = points[0].z * 2.0f - points[1].z * 4.0f + points[2].z * 2.0f;
+    var2 = points[0].z * -3.0f + points[1].z * 4.0f - points[2].z;
+    v->z = points[0].z + (var1 * c * c + var2 * c);
 
     return v;
 }

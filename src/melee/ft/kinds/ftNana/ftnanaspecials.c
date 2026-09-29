@@ -133,7 +133,7 @@ void ftNn_Init_80123B3C(Fighter_GObj* gobj)
     PAD_STACK(8);
     Fighter_ClearCmdVars(fp);
     ftNn_Init_80123B3C_inline(gobj);
-    Fighter_ChangeMotionState(gobj, 359, 0, 0.0f, 1.0f, 0.0f, NULL);
+    Fighter_ChangeMotionState(gobj, 359, Ft_MF_None, 0.0f, 1.0f, 0.0f, NULL);
     ftNn_Init_80123B3C_inline(gobj);
     ftAnim_8006EBA4(gobj);
     fp->x74_self_accel.y = 0.0f;
@@ -146,7 +146,7 @@ void ftNn_Init_80123BF0(Fighter_GObj* gobj)
     PAD_STACK(8);
     Fighter_ClearCmdVars(fp);
     ftNn_Init_80123B3C_inline(gobj);
-    Fighter_ChangeMotionState(gobj, 360, 0, 0.0f, 1.0f, 0.0f, NULL);
+    Fighter_ChangeMotionState(gobj, 360, Ft_MF_None, 0.0f, 1.0f, 0.0f, NULL);
     ftNn_Init_80123B3C_inline(gobj);
     ftAnim_8006EBA4(gobj);
     fp->x74_self_accel.y = 0.0f;

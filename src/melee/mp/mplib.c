@@ -6300,7 +6300,7 @@ void mpLib_DrawSnapping(void)
         GXLoadPosMtxImm(spDC, 0);
         var_r31 = true;
         for (; ft_r27 != NULL; ft_r27 = ft_r27->next) {
-            CollData* cd = ftLib_80086984(ft_r27);
+            CollData* cd = ftLib_GetCollData(ft_r27);
 
             if (!cd->x35_flags.b0 || cd->x38 != mpColl_804D64AC) {
                 continue;

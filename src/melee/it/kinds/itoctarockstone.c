@@ -140,9 +140,9 @@ void it_802E89D0(Item_GObj* gobj, f32 horiz_speed, f32 min_vy, f32 max_vy)
     ip->x40_vel.x = horiz_speed * ip->facing_dir;
     ip->x40_vel.z = 0.0f;
 
-    gp = ftLib_8008627C(&ip->pos, NULL);
+    gp = ftLib_FindNearestOpponent(&ip->pos, NULL);
     if (gp != NULL) {
-        ftLib_800866DC(gp, &pos);
+        ftLib_GetCameraBonePos(gp, &pos);
         x = getX(ip->pos.x, pos.x);
         speed = x / horiz_speed;
         x = (new_var = ip->xCC_item_attr->x10_fall_speed * (speed * speed));

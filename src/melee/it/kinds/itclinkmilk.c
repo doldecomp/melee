@@ -114,7 +114,8 @@ bool itClinkmilk_UnkMotion1_Anim(Item_GObj* gobj)
         } else {
             ip->xDAC_itcmd_var0 =
                 ftCl_Init_801492F4(ip->xDD4_itemVar.clinkmilk.x0);
-            sv.x = sv.y = sv.z = ftLib_800869D4(ip->xDD4_itemVar.clinkmilk.x0);
+            sv.x = sv.y = sv.z =
+                ftLib_GetModelScale(ip->xDD4_itemVar.clinkmilk.x0);
             HSD_JObjSetScale(child, &sv);
         }
     } else {

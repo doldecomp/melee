@@ -97,7 +97,7 @@ void it_802D43EC(Item_GObj* gobj)
     f32 randf;
     f32 diff;
 
-    owner_gobj = ftLib_80086198(ip->owner);
+    owner_gobj = ftLib_FindLowestPercentOpponent(ip->owner);
     if (owner_gobj != NULL) {
         ip->xDD4_itemVar.hitodeman.x90 = owner_gobj;
     } else {
@@ -159,7 +159,7 @@ bool it_802D4564(Item_GObj* gobj)
             HSD_JObj* jobj = gobj->hsd_obj;
             Vec3 target_pos;
             PAD_STACK(8);
-            ftLib_80086644(ip->xDD4_itemVar.hitodeman.x90, &target_pos);
+            ftLib_GetPos(ip->xDD4_itemVar.hitodeman.x90, &target_pos);
             if (target_pos.x < ip->pos.x) {
                 ip->facing_dir = -1.0f;
             } else {
@@ -194,7 +194,7 @@ void it_802D472C(Item_GObj* gobj)
     f32 dist;
 
     if (ip->xDD4_itemVar.hitodeman.x90 != NULL) {
-        ftLib_80086644(ip->xDD4_itemVar.hitodeman.x90, &target_pos);
+        ftLib_GetPos(ip->xDD4_itemVar.hitodeman.x90, &target_pos);
         target_pos.x += ip->xDD4_itemVar.hitodeman.x60;
         target_pos.y += ip->xDD4_itemVar.hitodeman.x64;
         target_pos.z = 0.0f;

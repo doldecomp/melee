@@ -1366,7 +1366,7 @@ bool grStadium_801D32D0(Ground_GObj* gobj)
         player_gobj = Player_GetEntity(gp->u.display.xEE);
         if (player_gobj != NULL && !Player_8003219C(gp->u.display.xEE)) {
             if ((wrapper = gp->u.display.xDC->user_data)) {
-                ftLib_80086B90(player_gobj, &sp28);
+                ftLib_GetCameraSubjectBonePos(player_gobj, &sp28);
                 lbVector_WorldToScreen(cobj, &sp28, &sp1C, 0);
                 sp1C.x -= 62.0f;
                 if (sp1C.x < cobj->viewport.xmin) {

@@ -1334,7 +1334,7 @@ s32 grZebes_801DA528(HSD_GObj* arg0, void* arg1, s32 arg2, s32 arg3)
                 frame = 30.0f;
                 st->x01_next = 1;
                 Ground_801C53EC(0x61A86);
-                ftLib_80086C9C(1, 0x5A);
+                ftLib_StartRumbleAll(1, 0x5A);
             } else {
                 frame = (f32) ((f64) (dmg * thr) / 30.0);
             }
@@ -2376,8 +2376,8 @@ bool grZebes_801DCBFC(Ground_GObj* gobj, HSD_GObj* fobj, void* arg)
     f32 slope, intercept;
 
     Ground_801C4368(&slope, &intercept);
-    ftLib_80086644(fobj, &pos);
-    ftLib_80086684(fobj, &prev);
+    ftLib_GetPos(fobj, &pos);
+    ftLib_GetPrevPos(fobj, &prev);
     prev.y += intercept;
     if (pos.y < slope) {
         *(void**) arg = ((HSD_GObj*) yakumono_param)->user_data;

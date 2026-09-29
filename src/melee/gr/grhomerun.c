@@ -324,15 +324,15 @@ void grHomeRun_8021D680(Ground_GObj* gobj)
     gp = gobj->user_data;
     fighter = Ground_GetP1Fighter();
     if (fighter != NULL) {
-        ftLib_80086644(fighter, &pos0);
-        subject = ftLib_80086B74(fighter);
+        ftLib_GetPos(fighter, &pos0);
+        subject = ftLib_GetCameraSubject(fighter);
         if (subject != NULL) {
             subject->state = CmSubjectState_Inactive;
             subject->force_inactive = 1;
         }
         fighter = Ground_GetP1Fighter2();
         if (fighter != NULL) {
-            subject = ftLib_80086B74(fighter);
+            subject = ftLib_GetCameraSubject(fighter);
             if (subject != NULL) {
                 subject->state = CmSubjectState_Inactive;
                 subject->force_inactive = 1;
@@ -344,7 +344,7 @@ void grHomeRun_8021D680(Ground_GObj* gobj)
     {
         HSD_GObj* sandbag_gobj = gm_80180AF4();
         if (sandbag_gobj != NULL) {
-            ftLib_80086644(sandbag_gobj, &pos1);
+            ftLib_GetPos(sandbag_gobj, &pos1);
             grHomeRun_8021EA30(&pos1.x);
             if (pos1.y < 4.0F && gp->u.homerun.xE8_flags.b0 != 0) {
                 grHomeRun_8021EAF8();

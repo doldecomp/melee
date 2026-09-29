@@ -318,7 +318,7 @@ bool it_802E0F1C(Item_GObj* gobj)
     PAD_STACK(8);
     it_802E11E0(gobj);
     Item_8026AE84(ip, 0x12E, 0x7F, 0x40);
-    ftLib_80086D40(ip->xCFC, 12, 0);
+    ftLib_StartItemRumble(ip->xCFC, 12, 0);
     return false;
 }
 

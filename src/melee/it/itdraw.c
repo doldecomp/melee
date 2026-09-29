@@ -184,8 +184,8 @@ static inline Item* it_8026EECC_inline_0(HSD_GObj* gobj, Vec3* pos)
 {
     Item* ip = GET_ITEM(gobj);
     ip->xDCF_flag.b7 = 0;
-    if ((ip->owner != NULL) && ftLib_80086960(ip->owner)) {
-        if (ftLib_80087074(ip->owner, pos)) {
+    if ((ip->owner != NULL) && ftLib_IsFighter(ip->owner)) {
+        if (ftLib_GetShakeOffset(ip->owner, pos)) {
             ip->xDCF_flag.b7 = 1;
         }
     } else {
@@ -221,8 +221,8 @@ void it_8026EECC(HSD_GObj* gobj, intptr_t arg1)
     if (ip->xDAA_flag.b7) {
         pos.x = pos.y = pos.z = 0.0F;
         if (ip->xDC8_word.flags.x13) {
-            if ((ip->owner == NULL) || !ftLib_80086960(ip->owner) ||
-                ftLib_800868D4(ip->owner, gobj))
+            if ((ip->owner == NULL) || !ftLib_IsFighter(ip->owner) ||
+                ftLib_IsItemVisible(ip->owner, gobj))
             {
                 ip = it_8026EECC_inline_0(gobj, &pos);
                 it_8026EECC_inline_sw(gobj, arg1, &pos);

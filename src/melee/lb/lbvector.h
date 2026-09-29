@@ -34,7 +34,7 @@ void lbVector_Rotate(Vec3* v, int axis, float angle);
 void lbVector_Mirror(Vec3* a, Vec3* b);
 float lbVector_CosAngle(Vec3* a, Vec3* b);
 Vec3* lbVector_Lerp(Vec3* a, Vec3* b, Vec3* result, float f);
-Vec3* lbVector_8000DE38(Mtx m, Vec3* v, float c);
+Vec3* lbVector_8000DE38(const Vec3 points[3], Vec3* v, float c);
 
 Vec3* lbVector_EulerAnglesFromONB(Vec3* result_angles, Vec3* a, Vec3* b,
                                   Vec3* c);

@@ -5,6 +5,7 @@
 #define HSD_GOBJ_CLASS_TEXT 17
 
 typedef struct DevText DevText;
+typedef struct DevTextGlyph DevTextGlyph;
 typedef struct Element_803F9628 Element_803F9628;
 typedef struct Element_803F9628_Obj_14 Element_803F9628_Obj_14;
 typedef struct IfDamageFlags IfDamageFlags;

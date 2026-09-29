@@ -39,7 +39,7 @@ void ftKb_SpecialN_800F9110(Fighter_GObj* gobj)
             msid = (new_var = 0x200);
         }
     }
-    Fighter_ChangeMotionState(gobj, msid, 0, 0.0f, 1.0f, 0.0f, NULL);
+    Fighter_ChangeMotionState(gobj, msid, Ft_MF_None, 0.0f, 1.0f, 0.0f, NULL);
     ftAnim_8006EBA4(gobj);
     fp->accessory4_cb = fn_800F9260;
 }
@@ -139,7 +139,7 @@ void ftKb_SpecialNMr_800F93CC(Fighter_GObj* gobj)
     if (GET_FIGHTER(gobj)->u.kb.hat.kind != Ft_Kind_Mario) {
         msid = ftKb_MS_DrSpecialAirN;
     }
-    Fighter_ChangeMotionState(gobj, msid, 0, 0.0F, 1.0F, 0.0F, NULL);
+    Fighter_ChangeMotionState(gobj, msid, Ft_MF_None, 0.0F, 1.0F, 0.0F, NULL);
     ftAnim_8006EBA4(gobj);
     fp->accessory4_cb = fn_800F9260;
 }

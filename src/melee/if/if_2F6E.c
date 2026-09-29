@@ -18,28 +18,28 @@
 #include <sysdolphin/baselib/jobj.h>
 
 /* 3F9628 */ Element_803F9628 ifStatus_803F9628[8] = {
-    { NULL, 0, if_802F74D0, 0x7C860U, 8, 0, { 0 }, 0, NULL, NULL, 0, 0 },
-    { NULL, 0, if_802F73C4, 0xC351U, 0, 0, { 0 }, 0, NULL, NULL, 0, 0 },
-    { NULL, 0, if_802F74D0, 0x7C85EU, 0, 0, { 0 }, 0, NULL, NULL, 0, 0 },
-    { NULL, 0, if_802F73C4, 0x7C85DU, 0, 0, { 0 }, 0, NULL, NULL, 0, 0 },
-    { NULL, 0, if_802F73C4, 0x7C857U, 10, 0, { 0 }, 0, NULL, NULL, 0, 0 },
-    { NULL, 0, if_802F74D0, 0x7C855U, 8, 0, { 0 }, 0, NULL, NULL, 0, 0 },
-    { NULL, 0, if_802F74D0, 0x9C48U, 0, 0, { 0 }, 0, NULL, NULL, 0, 0 },
-    { NULL, 0, if_802F74D0, 0x9C46U, 0, 0, { 0 }, 0, NULL, NULL, 0, 0 },
+    { NULL, 0, if_802F74D0, 0x7C860, 8, 0, { 0 }, 0, NULL, NULL, 0, 0 },
+    { NULL, 0, if_802F73C4, 0xC351, 0, 0, { 0 }, 0, NULL, NULL, 0, 0 },
+    { NULL, 0, if_802F74D0, 0x7C85E, 0, 0, { 0 }, 0, NULL, NULL, 0, 0 },
+    { NULL, 0, if_802F73C4, 0x7C85D, 0, 0, { 0 }, 0, NULL, NULL, 0, 0 },
+    { NULL, 0, if_802F73C4, 0x7C857, 10, 0, { 0 }, 0, NULL, NULL, 0, 0 },
+    { NULL, 0, if_802F74D0, 0x7C855, 8, 0, { 0 }, 0, NULL, NULL, 0, 0 },
+    { NULL, 0, if_802F74D0, 0x9C48, 0, 0, { 0 }, 0, NULL, NULL, 0, 0 },
+    { NULL, 0, if_802F74D0, 0x9C46, 0, 0, { 0 }, 0, NULL, NULL, 0, 0 },
 };
 
-void ifStatus_802F6EA4(int arg0, int arg1, int arg2, int arg3, Event arg4,
-                       Event arg5)
+void ifStatus_802F6EA4(int arg0, int arg1, int arg2, int arg3, IfStatusCb arg4,
+                       IfStatusCb arg5)
 {
     HSD_GObj* gobj;
     HSD_JObj* jobj;
 
     if (arg0 == 8) {
         if (arg4 != NULL) {
-            ((IfStatusCb) arg4)(-1);
+            arg4(-1);
         }
         if (arg5 != NULL) {
-            ((IfStatusCb) arg5)(-1);
+            arg5(-1);
         }
         if (arg1 >= 0) {
             lbAudioAx_800237A8(arg1, 0x7F, 0x40);
@@ -71,12 +71,12 @@ void ifStatus_802F6EA4(int arg0, int arg1, int arg2, int arg3, Event arg4,
         e->x12.x1 = 0;
         e->x12.x2 = 0;
         e->x0 = gobj;
-        e->x18 = (IfStatusCb) arg4;
-        e->x1C = (IfStatusCb) arg5;
+        e->x18 = arg4;
+        e->x1C = arg5;
     }
 }
 
-void ifStatus_802F7034(UNK_T arg0)
+void ifStatus_802F7034(IfStatusCb arg0)
 {
     VsSceneController* big_thing;
     int a;

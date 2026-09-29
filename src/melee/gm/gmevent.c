@@ -1022,16 +1022,16 @@ void gm_801BC00C(void)
     case 35:
         if (ev->x20 == 0) {
             event_entry = event_levels[idx]->evstage_table->entries[2];
-            ftLib_80087508(
+            ftLib_LoadFighterCostume(
                 Player_800325C8((CharacterKind) event_entry->c_kind, 0),
                 event_entry->color);
             event_entry = event_levels[idx]->evstage_table->entries[3];
-            ftLib_80087508(
+            ftLib_LoadFighterCostume(
                 Player_800325C8((CharacterKind) event_entry->c_kind, 0),
                 event_entry->color);
         } else {
             event_entry = event_levels[idx]->evstage_table->entries[4];
-            ftLib_80087508(
+            ftLib_LoadFighterCostume(
                 Player_800325C8(gm_801BC00C_GetCharacterKind(event_entry), 0),
                 event_entry->color);
         }
@@ -1039,7 +1039,7 @@ void gm_801BC00C(void)
     case 43:
         chr = gm_801BC00C_GetCharacter(
             (gm_801BAB40_src*) event_levels[idx]->x4->x4);
-        ftLib_80087508(chr, ev->x50[2]);
+        ftLib_LoadFighterCostume(chr, ev->x50[2]);
         if ((s8) ev->x0 == 4) {
             Player_80031DA8(chr, ev->x1);
         }
@@ -1682,7 +1682,7 @@ void gm_801BD46C(HSD_GObj* gobj)
     for (i = 1; i < 3; i++) {
         p = Player_GetEntityAtIndex(i, 1);
         if (p != NULL) {
-            var_r30 = ftLib_8008731C(p);
+            var_r30 = ftLib_IsSleeping_8008731C(p);
         }
         if (var_r30 != 0) {
             count++;
