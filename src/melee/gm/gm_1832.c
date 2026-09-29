@@ -36,7 +36,7 @@
 #include <sysdolphin/baselib/util.h>
 #include <sysdolphin/baselib/wobj.h>
 
-static struct {
+static struct lbl_804735A8_t {
     int x0;
     HSD_JObj* x4[13];
     u16 x38;
@@ -45,7 +45,7 @@ static struct {
     u16 x3E;
 } lbl_804735A8;
 /// @brief related to 1p splash screen
-static struct {
+static struct lbl_804735E8_t {
     HSD_ImageDesc x40[3];
     HSD_ImageDesc x88[3];
     u8 xD0[10]; ///< image descriptor indices for splash effect
@@ -124,7 +124,7 @@ typedef struct {
 } ClassicSplashRow;
 ASSERT_SIZE(ClassicSplashRow, 0x30);
 
-static struct {
+static struct lbl_804D6604_t {
     /* 0x000 */ ClassicSlotVals x00[2];
     /* 0x018 */ ClassicSlotVals x18[3];
     /* 0x03C */ ClassicSlotVals x3C[4];
@@ -1173,13 +1173,13 @@ typedef struct ClassicModeEnterData {
     /* 0x04 */ int x4;
     /* 0x08 */ int x8;
     /* 0x0C */ int xC;
-    /* 0x10 */ union {
+    /* 0x10 */ union ClassicModeEnterData_x10 {
         int x10_int;
-        struct {
+        struct ClassicModeEnterData_x10_x0 {
             u8 x10;
             u8 x11;
-        };
-    };
+        } x0;
+    } x10_u;
     /* 0x14 */ int x14;
     /* 0x18 */ int x18;
     /* 0x1C */ int x1C;
@@ -1189,7 +1189,7 @@ void gm_Scene_IntroEasy_OnEnter(void* arg0_)
 {
     ClassicModeEnterData* arg0 = arg0_;
 
-    if (arg0->x10 == 0x1A || arg0->x11 == 0x1A) {
+    if (arg0->x10_u.x0.x10 == 0x1A || arg0->x10_u.x0.x11 == 0x1A) {
         lbl_804735A8.x0 = 1;
         return;
     }

@@ -36,7 +36,7 @@ Item_GObj* it_802AF940(Item_GObj* owner, Item_GObj* flash, Vec3* pos,
     spawn.vel.x = spawn.vel.y = spawn.vel.z = 0.0f;
     spawn.x0_parent_gobj = owner;
     spawn.x4_parent_gobj2 = flash;
-    spawn.x44_flag.b0 = true;
+    spawn.x44_flag.x0.b0 = true;
     spawn.x40 = 0;
 
     explode = Item_80268B18(&spawn);

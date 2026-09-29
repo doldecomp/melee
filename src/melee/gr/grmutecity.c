@@ -44,7 +44,7 @@ typedef struct grMc_CarEntry {
     /* 0x10 */ f32 x10;
     /* 0x14 */ Vec3 pos;
     /* 0x20 */ u16 x20;
-    struct {
+    struct grMc_CarEntry_x22_flags {
         u8 b0 : 1;
         u8 b1 : 1;
     } x22_flags;

@@ -260,7 +260,7 @@ void grMaterial_801C8E28(HSD_GObj* gobj)
 bool grMaterial_801C8E48(HSD_GObj* gobj)
 {
     Item* it = gobj->user_data;
-    if (it->x524_cmd.u != NULL) {
+    if (it->x524_cmd.x8.u != NULL) {
         return false;
     }
     return true;
@@ -509,7 +509,7 @@ void grMaterial_801C9470(Item_GObj* gobj, CommandInfo* cmd)
 void grMaterial_801C9490(Item_GObj* gobj, CommandInfo* cmd)
 {
     Ground* gp = gobj->user_data;
-    u32 val = (*(u16*) cmd->ptr[0] >> 2) & 0xFF;
+    u32 val = (*(u16*) cmd->x8.ptr[0] >> 2) & 0xFF;
     gp->xC0 = (f32) val;
     gp->x10_flags.b6 = 1;
 }

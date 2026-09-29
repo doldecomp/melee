@@ -125,7 +125,7 @@ GameModeState gm_Mode_Vs_States[] = {
     { GM_GAMEMODESTATE_TERMINATE },
 };
 
-enum {
+enum state_debug {
     state_debug_vs = 1,
     state_debug_results = 3,
 };

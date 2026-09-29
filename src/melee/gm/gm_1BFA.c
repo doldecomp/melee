@@ -14,7 +14,7 @@
 #include <melee/ty/toy.h>
 #include <sysdolphin/baselib/memory.h>
 
-enum {
+enum state {
     state_approach,
     state_vs,
     state_prize,

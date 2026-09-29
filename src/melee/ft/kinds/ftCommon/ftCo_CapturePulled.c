@@ -43,8 +43,8 @@ void fn_800DA8E4(Fighter_GObj* gobj, Fighter_GObj* victim_gobj, s32 arg2)
     ftCo_ReleaseItemAndVictim(gobj);
     fp->x1A5C = victim_gobj;
     fp->victim_gobj = victim_gobj;
-    fp->x221B_b5 = 0;
-    fp->x221B_b7 = 0;
+    fp->x221B.x221B_b5 = 0;
+    fp->x221B.x221B_b7 = 0;
     fp->facing_dir = -victim->facing_dir;
     cd = p_ftCommonData;
     cd2 = &cd->x360;

@@ -111,7 +111,7 @@ Item_GObj* it_802EE200(HSD_GObj* parent, Vec3* pos, f32 threshold1,
     spawn.vel.y = 0.0f;
     spawn.vel.x = 0.0f;
     spawn.x0_parent_gobj = NULL;
-    spawn.x44_flag.b0 = 0;
+    spawn.x44_flag.x0.b0 = 0;
     spawn.x40 = 0;
     if (it_8026D3CC() == false) {
         rand -= threshold2;

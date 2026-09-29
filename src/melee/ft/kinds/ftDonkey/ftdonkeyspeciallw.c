@@ -108,7 +108,7 @@ static void doAnim(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     fp->x21EC = callback;
-    fp->throw_flags = 0;
+    fp->x2210.throw_flags = 0;
     Fighter_ChangeMotionState(gobj, ftDk_MS_SpecialLwLoop, Ft_MF_None, 0, 1, 0,
                               NULL);
     ftDonkey_8010DE88_inner(gobj);

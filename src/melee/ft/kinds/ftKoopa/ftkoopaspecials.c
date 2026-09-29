@@ -51,7 +51,7 @@ void ftKp_SpecialS_Enter(HSD_GObj* gobj)
     {
         Fighter* fp = GET_FIGHTER(gobj);
 
-        fp->throw_flags = 0;
+        fp->x2210.throw_flags = 0;
         fp->cmd_vars[0] = 0;
         fp->mv.kp.unk1.x4 = 0;
         fp->mv.kp.unk1.xC = 0;
@@ -76,7 +76,7 @@ void ftKp_SpecialAirS_Enter(HSD_GObj* gobj)
     {
         Fighter* fp = GET_FIGHTER(gobj);
 
-        fp->throw_flags = 0;
+        fp->x2210.throw_flags = 0;
         fp->cmd_vars[0] = 0;
         fp->mv.kp.unk1.x4 = 0;
         fp->mv.kp.unk1.xC = 0;
@@ -483,7 +483,7 @@ ftKoopa_SpecialS_ChangeAction(HSD_GObj* gobj, ftKoopa_MotionState kp_msid_f,
                               ftCommon_MotionState victim_msid_b)
 {
     Fighter* fp = fp = GET_FIGHTER(gobj);
-    fp->throw_flags = 0;
+    fp->x2210.throw_flags = 0;
     fp->cmd_vars[0] = 0;
     if (fp->mv.kp.specials.facing_dir == +1) {
         Fighter_ChangeMotionState(gobj, kp_msid_f, Ft_MF_Unk19, 0, 1, 0, NULL);

@@ -94,7 +94,7 @@ void ftKb_SpecialNSk_8010612C(Fighter_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     Fighter_ChangeMotionState(gobj, ftKb_MS_SkSpecialNStart, Ft_MF_None, 0.0F,
                               1.0F, 0.0F, NULL);
-    fp->throw_flags_b0 = false;
+    fp->x2210.x0.throw_flags_b0 = false;
     new_var = 0;
     fp->cmd_vars[3] = new_var;
     fp->cmd_vars[2] = new_var;
@@ -117,7 +117,7 @@ void ftKb_SpecialNSk_801061E4(Fighter_GObj* gobj)
     int new_var;
     Fighter_ChangeMotionState(gobj, ftKb_MS_SkSpecialAirNStart, Ft_MF_None,
                               0.0F, 1.0F, 0.0F, NULL);
-    fp->throw_flags_b0 = (new_var2 = 0);
+    fp->x2210.x0.throw_flags_b0 = (new_var2 = 0);
     fp->cmd_vars[3] = new_var2;
     fp->cmd_vars[2] = 0;
     new_var = 0;

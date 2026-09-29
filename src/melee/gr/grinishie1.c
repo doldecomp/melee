@@ -544,7 +544,7 @@ void grInishie1_801FB0AC(HSD_GObj* gobj, u32 ix)
     }
 }
 
-enum {
+enum HATENA_APPEAR {
     HATENA_APPEAR_CHECKLOOP = 0x14
 };
 

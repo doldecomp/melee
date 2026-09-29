@@ -28,7 +28,7 @@ void ftKb_SpecialNCa_800F99BC(Fighter_GObj* gobj)
     (void) MTXDegToRad(1);
     fp->cmd_vars[1] = 0;
     fp->cmd_vars[0] = 0;
-    fp->throw_flags = 0;
+    fp->x2210.throw_flags = 0;
     fp = GET_FIGHTER(gobj);
     if (fp->u.kb.hat.kind != Ft_Kind_Captain) {
         msid = ftKb_MS_GnSpecialN;
@@ -45,7 +45,7 @@ void ftKb_SpecialNCa_800F9A54(Fighter_GObj* gobj)
     PAD_STACK(8);
     fp->cmd_vars[1] = 0;
     fp->cmd_vars[0] = 0;
-    fp->throw_flags = 0;
+    fp->x2210.throw_flags = 0;
     fp = GET_FIGHTER(gobj);
     if (fp->u.kb.hat.kind != Ft_Kind_Captain) {
         msid = ftKb_MS_GnSpecialAirN;
@@ -117,8 +117,8 @@ void ftKb_CaSpecialN_Phys(Fighter_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     bool throw_b1;
     s64 pad;
-    if (fp->throw_flags_b1) {
-        fp->throw_flags_b1 = false;
+    if (fp->x2210.x0.throw_flags_b1) {
+        fp->x2210.x0.throw_flags_b1 = false;
         throw_b1 = true;
     } else {
         throw_b1 = false;
@@ -151,8 +151,8 @@ void ftKb_CaSpecialAirN_Phys(Fighter_GObj* gobj)
     ftKb_DatAttrs* da = fp->dat_attrs;
     bool throw_b1;
     PAD_STACK(16);
-    if (fp->throw_flags_b1) {
-        fp->throw_flags_b1 = false;
+    if (fp->x2210.x0.throw_flags_b1) {
+        fp->x2210.x0.throw_flags_b1 = false;
         throw_b1 = true;
     } else {
         throw_b1 = false;

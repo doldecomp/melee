@@ -2,7 +2,6 @@
 
 #include <Runtime/platform.h>
 
-#include <printf.h> // IWYU pragma: keep
 #include <stdarg.h>
 #include <stdio.h>
 #include <string.h>

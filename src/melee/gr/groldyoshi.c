@@ -53,7 +53,7 @@ StageData grOy_StageData = {
     0,
 };
 
-static struct {
+static struct groldyoshi_yakumono_param_t {
     s16 x0;
     s16 x2;
     float x4;

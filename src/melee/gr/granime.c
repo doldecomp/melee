@@ -481,13 +481,13 @@ void fn_801C6F2C(HSD_AObj* aobj)
     HSD_AObjSetFlags(aobj, AOBJ_LOOP);
 }
 
-enum {
+enum ARG_TYPE {
     ARG_TYPE_DOBJ = 3,
     ARG_TYPE_MOBJ = 8,
     ARG_TYPE_POBJ = 9,
     ARG_TYPE_TOBJ = 11,
 };
-enum {
+enum CALL_ON {
     CALL_ON_DOBJ = 1 << (ARG_TYPE_DOBJ - 1),
     CALL_ON_MOBJ = 1 << (ARG_TYPE_MOBJ - 1),
     CALL_ON_POBJ = 1 << (ARG_TYPE_POBJ - 1),

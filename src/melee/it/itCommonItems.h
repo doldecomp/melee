@@ -275,8 +275,8 @@ typedef struct itDosei_ItemVars {
 
 typedef struct itHeart_ItemVars {
     s32 xDD4_heal;
-    union {
-        struct {
+    union itHeart_ItemVars_xDD8 {
+        struct itHeart_ItemVars_xDD8_x0 {
             s8 b0 : 1;
             u8 b1 : 1;
             u8 b2 : 1;
@@ -285,7 +285,7 @@ typedef struct itHeart_ItemVars {
             u8 b5 : 1;
             u8 b6 : 1;
             u8 b7 : 1;
-        };
+        } x0;
         u32 flags;
     } xDD8;
     s32 xDDC;
@@ -296,8 +296,8 @@ typedef struct itHeart_ItemVars {
 
 typedef struct HeartContainerAttr {
     s32 x0_heal; // [100]
-    union {
-        struct {
+    union HeartContainerAttr_x4 {
+        struct HeartContainerAttr_x4_bits {
             u8 b0 : 1;
             u8 b1 : 1;
             u8 b2 : 1;
@@ -640,7 +640,7 @@ typedef struct {
 } itMBallAttributes;
 
 typedef struct {
-    union {
+    union itLikelikeAttributes_x0 {
         Vec3* x0_f32;
         S32Vec3* x0_s32;
     } x0;
@@ -884,10 +884,10 @@ typedef struct {
     int x64;
     f32 x68;
     f32 x6C;
-    union {
+    union itPokemon_ItemVars_x70 {
         f32 xE44;
         s32 xE44_s32;
-    };
+    } x70;
 } itPokemon_ItemVars;
 
 typedef struct {
@@ -1196,8 +1196,8 @@ typedef struct itMarilAttributes {
 
 typedef struct itMaril_ItemVars {
     u8 pad[0x60];
-    union {
-        struct {
+    union itMaril_ItemVars_x60 {
+        struct itMaril_ItemVars_x60_x0 {
             u8 x0 : 1;
             u8 x1 : 1;
             u8 x2 : 1;
@@ -1206,7 +1206,7 @@ typedef struct itMaril_ItemVars {
             u8 x5 : 1;
             u8 x6 : 1;
             u8 x7 : 1;
-        };
+        } x0_s;
         u32 flags;
     } x60;
     f32 x64;
@@ -1474,10 +1474,10 @@ typedef struct it_802E5FXX_struct { // used for it_802E5F00 and it_802E5F8C
 typedef struct itYaku_ItemVars {
     /*  +0 ip+DD4 */ s16 x0;
     /*  +2 ip+DD6 */ s16 x2; // type of union: 1=jobj, 2=vec
-    union {
+    union itYaku_ItemVars_x4 {
         /*  +4 ip+DD8 */ HSD_JObj* x4;
         /*  +4 ip+DD8 */ Vec3 x4_vec;
-    };
+    } x4_u;
     /* +10 ip+DE4 */ Ground* x10;
     /* +14 ip+DE8 */ void (*x14)(Item_GObj*, Ground*);
     /* +18 ip+DEC */ void (*x18)(Item_GObj*, Ground*, Vec3*, HSD_GObj*, f32);
@@ -1498,7 +1498,7 @@ typedef struct itWhiteBea_ItemVars {
 } itWhiteBea_ItemVars;
 
 typedef struct itWhiteBeaAttributes {
-    /* +0 */ struct {
+    /* +0 */ struct itWhiteBeaAttributes_x0 {
         s32 x0;
         f32 x4;
     }* x0;
@@ -1662,7 +1662,7 @@ typedef struct itPatapataAttributes {
 } itPatapataAttributes;
 
 typedef struct itOldottoseaAttributes {
-    /* 0x00 */ struct {
+    /* 0x00 */ struct itOldottoseaAttributes_x0 {
         s32 x0;
         f32 x4;
     }* x0;
@@ -1766,16 +1766,16 @@ typedef struct itOldkuri_ItemVars {
 typedef struct itUnknown_ItemVars {
     /* +00 ip+DD4 */ char pad_0[0x60];
     /* +60 ip+E34 */ f32 x60;
-    /* +64 ip+E38 */ union {
+    /* +64 ip+E38 */ union itUnknown_ItemVars_x64 {
         f32 f;
         s32 i;
     } x64;
-    /* +68 ip+E3C */ union {
+    /* +68 ip+E3C */ union itUnknown_ItemVars_x68 {
         f32 f;
         s32 i;
     } x68;
     /* +6C ip+E40 */ Vec3 x6C;
-    /* +78 ip+E4C */ union {
+    /* +78 ip+E4C */ union itUnknown_ItemVars_x78 {
         Vec3 vec;
         s32 dir;
     } x78;
@@ -1790,7 +1790,7 @@ typedef struct itGreatFoxLaser_Attrs {
 } itGreatFoxLaser_Attrs;
 
 typedef struct itUnknownAttributes {
-    /* +00 */ union {
+    /* +00 */ union itUnknownAttributes_x0 {
         f32 f;
         s32 i;
     } x0;
@@ -1799,15 +1799,15 @@ typedef struct itUnknownAttributes {
     /* +0C */ f32 xC;
     /* +10 */ f32 x10;
     /* +14 */ f32 x14;
-    /* +18 */ union {
+    /* +18 */ union itUnknownAttributes_x18 {
         f32 f;
         s32 i;
     } x18;
-    /* +1C */ union {
+    /* +1C */ union itUnknownAttributes_x1C {
         f32 f;
         s32 i;
     } x1C;
-    /* +20 */ union {
+    /* +20 */ union itUnknownAttributes_x20 {
         f32 f;
         s32 i;
     } x20;

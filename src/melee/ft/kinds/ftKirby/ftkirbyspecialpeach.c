@@ -145,11 +145,11 @@ static inline void doPeAnim(HSD_GObj* gobj, HSD_GObjEvent cb)
         fp->cmd_vars[1] = 2;
         ftColl_8007B1B8(gobj, (ShieldDesc*) &da->specialn_pe_absorbdesc,
                         fn_8010CD88);
-        fp->x221B_b3 = true;
+        fp->x221B.x221B_b3 = true;
         fp->shield_unk0 = da->specialn_pe_unk3;
         fp->shield_unk1 = da->specialn_pe_unk3;
     } else if (cmd_var1 == 0) {
-        fp->x221B_b0 = false;
+        fp->x221B.x221B_b0 = false;
     }
 
     if (!ftAnim_IsFramesRemaining(gobj)) {
@@ -248,7 +248,7 @@ void ftKb_SpecialNPe_8010C8D8(HSD_GObj* gobj)
         if (fp->cmd_vars[1] == 2) {
             ftColl_8007B1B8(gobj, (ShieldDesc*) &da->specialn_pe_absorbdesc,
                             fn_8010CD88);
-            fp->x221B_b3 = true;
+            fp->x221B.x221B_b3 = true;
         }
     }
 }
@@ -279,7 +279,7 @@ void ftKb_SpecialNPe_8010C9CC(HSD_GObj* gobj)
         if (fp->cmd_vars[1] == 2) {
             ftColl_8007B1B8(gobj, (ShieldDesc*) &da->specialn_pe_absorbdesc,
                             fn_8010CD88);
-            fp->x221B_b3 = true;
+            fp->x221B.x221B_b3 = true;
         }
     }
 }

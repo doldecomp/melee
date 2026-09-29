@@ -18,14 +18,16 @@ void* TRK_memset(void* dest, int val, size_t count)
     return dest;
 }
 
+union TRK_fill_mem_dstu {
+    u8* cpd;
+    u32* lpd;
+};
+
 void TRK_fill_mem(void* dest, int val, size_t count)
 {
     u32 v = (u8) val;
     u32 i;
-    union {
-        u8* cpd;
-        u32* lpd;
-    } dstu;
+    union TRK_fill_mem_dstu dstu;
 
     dstu.cpd = (u8*) dest - 1;
 

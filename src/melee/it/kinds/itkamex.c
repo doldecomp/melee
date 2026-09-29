@@ -35,7 +35,7 @@ void it_802CA49C(Item_GObj* gobj)
 
     it_80279C48(gobj);
     ip->xDD4_itemVar.pokemon.timer = -1;
-    ip->xDBC_itcmd_var4.flags.x0 = false;
+    ip->xDBC.xDBC_itcmd_var4.flags.x0 = false;
     ip->xDD4_itemVar.pokemon.x64 = 0;
     ip->xDD4_itemVar.pokemon.x68 = 0.0f;
     ip->xDD4_itemVar.pokemon.x6C = 0.0f;
@@ -154,10 +154,10 @@ bool itKamex_UnkMotion1_Coll(Item_GObj* gobj)
 void it_802CA8DC(Item_GObj* gobj)
 {
     Item* ip = gobj->user_data;
-    if (ip->xDBC_itcmd_var4.flags.x0) {
+    if (ip->xDBC.xDBC_itcmd_var4.flags.x0) {
         it_802CAB10(gobj);
         ip->x40_vel.x = ip->xDD4_itemVar.pokemon.x68 * -ip->facing_dir;
-        ip->xDBC_itcmd_var4.flags.x0 = false;
+        ip->xDBC.xDBC_itcmd_var4.flags.x0 = false;
     }
 }
 
@@ -240,7 +240,7 @@ void it_802CAB10(Item_GObj* gobj)
     ip->xDD4_itemVar.pokemon.x64 ^= 1;
     spawn.x0_parent_gobj = ip->owner;
     spawn.x4_parent_gobj2 = (HSD_GObj*) gobj;
-    spawn.x44_flag.b0 = true;
+    spawn.x44_flag.x0.b0 = true;
     spawn.x40 = 0;
     if (Item_80268B18(&spawn) != NULL) {
         if (ip->facing_dir == 1.0f) {

@@ -35,7 +35,7 @@ void plAttack_8003759C(u32 slot)
 
     clearAttackStats(&stats->attacks);
     clearAttackStats(&stats->hits);
-    clearAttackStats(&stats->x358_hits);
+    clearAttackStats(&stats->x358.x358_hits);
 
     for (i = 0; i < StatsAttack_Count; i++) {
         stats->x504[i] = 0;

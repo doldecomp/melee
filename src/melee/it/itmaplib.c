@@ -124,7 +124,7 @@ void it_80275BC8(Item_GObj* item_gobj, HSD_GObj* arg_gobj)
 
     ip->xC0C = ip->xC1C;
 
-    if (ip->xDCE_flag.b7 == 1) {
+    if (ip->xDCE_flag.x0.b7 == 1) {
         it_80275D5C(item_gobj, &sp24);
     }
     it_80276100(item_gobj, &sp14);
@@ -231,7 +231,7 @@ void it_80275E98(Item_GObj* item_gobj, SpawnItem* spawn)
     }
     mpCollSetFacingDir(&item2->x378_itemColl, int_dir);
     coll->x50 = attr->x1C_damage_mul;
-    if (spawn->x44_flag.b0 == 1) {
+    if (spawn->x44_flag.x0.b0 == 1) {
         if (spawn->x48_ground_or_air == GA_Air) {
             it_80276100(item_gobj, &spawn->pos);
             return;
@@ -278,7 +278,7 @@ void it_80276214(Item_GObj* item_gobj)
     item = item_gobj->user_data;
     item->x378_itemColl.last_pos = item->x378_itemColl.cur_pos;
     item->x378_itemColl.cur_pos = item->pos;
-    if (item->xDCE_flag.b7 == 1) {
+    if (item->xDCE_flag.x0.b7 == 1) {
         it_80276278(item_gobj);
     }
 }
@@ -1039,7 +1039,7 @@ void it_80277C40(Item_GObj* item_gobj, s32 arg1)
         sp20.x = coll->ecb.bottom.x;
         sp20.y = coll->ecb.bottom.y;
     }
-    if (!item->xDCF_flag.b0) {
+    if (!item->xDCF_flag.x0.b0) {
         it_80278800(item_gobj, 0x405, 0, &sp20, &sp14, 0U, 0.0f);
     }
 }

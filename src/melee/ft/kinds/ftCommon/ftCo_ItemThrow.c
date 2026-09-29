@@ -323,7 +323,7 @@ void ftCo_800957F4(Fighter_GObj* gobj, int msid)
 
     fp->cmd_vars[0] = 0;
     fp->cmd_vars[1] = 0;
-    fp->throw_flags = 0;
+    fp->x2210.throw_flags = 0;
 
     fp->mv.co.itemthrow4.anim_spd = anim_spd = getAnimSpeed(gobj, msid);
     ftCo_80095700(gobj, msid);
@@ -344,7 +344,7 @@ void ftCo_800958FC(HSD_GObj* gobj, FtMotionId msid)
     fp = GET_FIGHTER(gobj);
     fp->cmd_vars[0] = 0;
     fp->cmd_vars[1] = 0;
-    fp->throw_flags = 0;
+    fp->x2210.throw_flags = 0;
 
     base_throw_speed = getAnimSpeed(gobj, msid);
     temp_r4 = GET_FIGHTER(gobj);
@@ -507,6 +507,10 @@ void ftCo_ItemThrow_Anim(Fighter_GObj* gobj)
     }
 }
 
+struct ftCo_80095EFC_scale {
+    /* +0 */ float value;
+};
+
 void ftCo_80095EFC(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -523,9 +527,7 @@ void ftCo_80095EFC(Fighter_GObj* gobj)
                 u32 cmd_var1 = fp->cmd_vars[1];
                 ftCo_DatAttrs* co_attrs = &fp->co_attrs;
                 // Aggregate storage preserves MWCC register allocation.
-                struct {
-                    /* +0 */ float value;
-                } scale;
+                struct ftCo_80095EFC_scale scale;
                 scale.value = 1;
                 if (cmd_var1 != 0) {
                     scale.value = 0.01f * (cmd_var1 & 0x3FFFFF);

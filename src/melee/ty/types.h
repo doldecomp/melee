@@ -43,10 +43,10 @@ ASSERT_SIZE(ToyAnimState, 0x14);
 /* Used by _Toy_803109A0 for table lookup */
 struct ToyEntry {
     s32 id;
-    union {
+    union ToyEntry_x4 {
         s8 value_byte;
         s32 value;
-    };
+    } x4;
 };
 
 /* Trophy metadata entry. Size: 0x24 bytes. */
@@ -182,10 +182,10 @@ struct Toy26B8 {
     /* 0x3EA */ s16 selectedTrophyId;
     /* 0x3EC */ s16 trophy_count;
     /* 0x3EE */ u8 pad_3EE[0x3F0 - 0x3EE];
-    /* 0x3F0 */ union {
+    /* 0x3F0 */ union Toy26B8_x3F0 {
         ToyAnimState anim;
         HSD_GObj* x3F0;
-    };
+    } x3F0_u;
 };
 
 struct _Toy_804A26B8_t {
@@ -341,22 +341,6 @@ struct ToyNameData {
     s16 x6;
     s16 x8;
     s16 xA;
-};
-
-struct TyLightSymbolEntry {
-    char* name;
-    void* unk;
-};
-
-struct TyLightIndexEntry {
-    s32 idx;
-    u8 pad[8];
-};
-
-struct TyLightFile {
-    u8 pad0[0xCC];
-    TyLightSymbolEntry symbols[6];
-    TyLightIndexEntry entries[1];
 };
 
 struct tyUnkStruct {
@@ -604,11 +588,11 @@ struct PosArrayFull {
 };
 
 struct lbl_803FDDE4_t {
-    struct {
+    struct lbl_803FDDE4_t_symbols {
         char* name;
         UNK_T empty;
     } symbols[6];
-    struct {
+    struct lbl_803FDDE4_t_values {
         int index;
         GXColor color;
         bool flag;

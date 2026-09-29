@@ -923,7 +923,7 @@ void grHomeRun_8021ED74(void)
     bobomb_rain.x4 = NULL;
     bobomb_rain.x14 = 0xB;
     bobomb_rain.x18 = 0;
-    bobomb_rain.x1C.b0 = 1;
+    bobomb_rain.x1C.x0.b0 = 1;
     lb_8000B1CC(jobj, NULL, &bobomb_rain.x8_vec);
     it_8026BE84(&bobomb_rain);
 }

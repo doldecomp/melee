@@ -4,12 +4,12 @@
 #include <melee/ft/forward.h>
 
 typedef struct WaitStruct {
-    union {
-        struct {
+    union WaitStruct_u {
+        struct WaitStruct_u_p {
             int* x;
             int* y;
         } p;
-        struct {
+        struct WaitStruct_u_i {
             int x;
             int y;
         } i;

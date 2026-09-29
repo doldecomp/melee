@@ -37,7 +37,7 @@ void it_802F2F34(HSD_GObj* gobj, itYoshiEggLay_DatAttrs* attr)
     spawn.vel = attr->vel;
     spawn.x0_parent_gobj = 0;
     spawn.x4_parent_gobj2 = 0;
-    spawn.x44_flag.b0 = 1;
+    spawn.x44_flag.x0.b0 = 1;
     spawn.x40 = 0;
     item_gobj = Item_80268B18(&spawn);
     if (item_gobj != NULL) {
@@ -56,7 +56,7 @@ void it_802F3020(HSD_GObj* item_gobj)
     item = GET_ITEM(item_gobj);
     it_8026B3A8(item_gobj);
     Item_80268E5C(item_gobj, 1, ITEM_ANIM_UPDATE);
-    item->xDCE_flag.b7 = 0;
+    item->xDCE_flag.x0.b7 = 0;
 }
 
 bool it_27CF_UnkMotion1_Anim(HSD_GObj* gobj)

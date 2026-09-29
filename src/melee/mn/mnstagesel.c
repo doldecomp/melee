@@ -315,13 +315,15 @@ void mnStageSel_80259ED8(int id)
     }
 }
 
+struct StagePreviewUserData {
+    u32 x0;
+    u32 x4;
+};
+
 void fn_8025A090(HSD_GObj* gobj)
 {
     u32 var_r3;
-    struct {
-        u32 x0;
-        u32 x4;
-    }* temp_r30;
+    struct StagePreviewUserData* temp_r30;
     HSD_JObj* jobj;
 
     jobj = GET_JOBJ(gobj);
@@ -410,9 +412,7 @@ void fn_8025A310(HSD_GObj* gobj)
 
 void fn_8025A560(HSD_GObj* gobj)
 {
-    struct StageSelUserData {
-        int x0;
-    }* temp_r30;
+    s32* temp_r30;
     Vec3 sp10;
     HSD_JObj* jobj = GET_JOBJ(gobj);
     temp_r30 = HSD_GObjGetUserData(gobj);
@@ -435,8 +435,8 @@ void fn_8025A560(HSD_GObj* gobj)
         HSD_JObjAnimAll(jobj);
         return;
     }
-    if (++temp_r30->x0 >= 10) {
-        temp_r30->x0 = 0;
+    if (++*temp_r30 >= 10) {
+        *temp_r30 = 0;
         HSD_JObjReqAnimAll(jobj, 0.0F);
         HSD_JObjAnimAll(jobj);
     }
@@ -799,9 +799,7 @@ void mnStageSel_Scene_OnEnter(void* arg0)
             {
                 HSD_GObj* g;
                 HSD_JObj* jobj;
-                struct foo {
-                    int x0, x4;
-                }* temp_r3_14;
+                struct StagePreviewUserData* temp_r3_14;
                 g = gobj;
                 jobj = GET_JOBJ(g);
                 temp_r3_14 = HSD_MemAlloc(sizeof(*temp_r3_14));

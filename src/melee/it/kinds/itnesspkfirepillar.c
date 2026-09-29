@@ -44,7 +44,7 @@ static inline void itNesspkfirepillar_INLINE_SpawnItem_Init(
     spawnitem->x3C_damage = 0;
     spawnitem->x0_parent_gobj = parent2_gobj;
     spawnitem->x4_parent_gobj2 = parent1_gobj;
-    spawnitem->x44_flag.b0 = true;
+    spawnitem->x44_flag.x0.b0 = true;
     spawnitem->x40 = 0;
 }
 

@@ -37,12 +37,13 @@ void ftSs_Init_80128944(HSD_GObj* gobj, float farg1, float farg2)
     u8 _[8];
 
     if (!ftColl_8007B868(gobj)) {
-        switch (fp->x2070.x2071_b0_3) {
+        switch (fp->x2070.x0.x2071_b0_3) {
         case 0:
         case 2:
         case 3:
         case 4:
-            if ((fp->x2070.x2073 == 0x14) || ((fp->x2070.x2071_b5) == 0)) {
+            if ((fp->x2070.x0.x2073 == 0x14) || ((fp->x2070.x0.x2071_b5) == 0))
+            {
                 if (fp->x5F4_arr[0].idx == 2) {
                     ftSs_Init_80128B1C(gobj, float_result, da->x0, 1.0f);
                 } else {
@@ -293,7 +294,7 @@ s32 ftSs_SpecialLw_80129158(HSD_GObj* gobj)
         case 0x15A:
         case 0x15B:
         case 0x15C:
-            if (fp->x2070.x2071_b6) {
+            if (fp->x2070.x0.x2071_b6) {
                 return 1;
             }
             return 0;

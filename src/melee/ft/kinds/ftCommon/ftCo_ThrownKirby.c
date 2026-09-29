@@ -65,7 +65,7 @@ void ftCo_800BDA50(Fighter_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     if (fp->u.kb.hat.kind != Ft_Kind_Kirby) {
         /// @todo Which @c mv is this?
-        fp->mv.co.thrownkirby.x18_b1 = true;
+        fp->mv.co.thrownkirby.x18_u.x0.x18_b1 = true;
     }
 }
 
@@ -121,8 +121,8 @@ static inline void inlineB2(Fighter_GObj* gobj, Fighter* fp,
     ftCommon_InitGrab(fp, 0, get_float(thrower_gobj));
     ftAnim_8006EBA4(gobj);
     ftCommon_8007D5D4(fp);
-    fp->mv.co.thrownkirby.x18_b0 = x18_b0;
-    fp->mv.co.thrownkirby.x18_b1 = false;
+    fp->mv.co.thrownkirby.x18_u.x0.x18_b0 = x18_b0;
+    fp->mv.co.thrownkirby.x18_u.x0.x18_b1 = false;
     ftCommon_SetAccessory(fp, ftKb_SpecialN_800F5898(thrower_gobj));
     scale->x = scale->y = scale->z = inlineB0(gobj);
     HSD_JObjSetScale(fp->x20A0_accessory, scale);
@@ -260,7 +260,7 @@ void ftCo_800BE494(Fighter_GObj* gobj)
     ftCommon_8007E2F4(fp, 0x1FF);
     fp->invisible = false;
     ftColl_8007B62C(gobj, 0);
-    if (!fp->mv.co.thrownkirby.x18_b0) {
+    if (!fp->mv.co.thrownkirby.x18_u.x0.x18_b0) {
         Vec2 self_vel;
         ftKb_SpecialN_800F5874(&self_vel);
         fp->self_vel.y = self_vel.y;
@@ -269,8 +269,8 @@ void ftCo_800BE494(Fighter_GObj* gobj)
         } else {
             fp->self_vel.x = self_vel.x * (fp->self_vel.x < 0 ? -1 : +1);
         }
-    } else if (fp->kind == Ft_Kind_Kirby && fp->mv.co.thrownkirby.x18_b1 &&
-               !fp->u.kb.hat.x8_b0)
+    } else if (fp->kind == Ft_Kind_Kirby &&
+               fp->mv.co.thrownkirby.x18_u.x0.x18_b1 && !fp->u.kb.hat.x8_b0)
     {
         ftKb_SpecialN_800F190C(gobj, fp->u.kb.hat.kind);
         ftKb_SpecialN_800EEEC4(gobj, fp->u.kb.hat.kind);
@@ -299,7 +299,7 @@ void ftCo_ThrownKirby_Phys(Fighter_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     PAD_STACK(28);
     fp->grab_timer -= ftKb_SpecialN_800F5AC0();
-    if (!fp->mv.co.thrownkirby.x18_b0) {
+    if (!fp->mv.co.thrownkirby.x18_u.x0.x18_b0) {
         if (fp->grab_timer <= 0) {
             inlineC0(gobj);
         }

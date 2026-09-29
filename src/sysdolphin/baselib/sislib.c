@@ -1,6 +1,5 @@
 #include "sislib.h"
 
-#include <printf.h> // IWYU pragma: keep
 #include <stdio.h>
 
 #include "cobj.h"

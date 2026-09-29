@@ -44,7 +44,7 @@ void ftLg_SpecialS_SetVars(HSD_GObj* gobj)
     if (fp->active_sticky.lstick.x < sa->x4_LUIGI_GREENMISSILE_SMASH) {
         fp->mv.lg.SpecialS.chargeFrames =
             sa->x8_LUIGI_GREENMISSILE_CHARGE_RATE;
-        fp->x2070.count_thrown_items = true;
+        fp->x2070.x0.count_thrown_items = true;
     } else {
         fp->mv.lg.SpecialS.chargeFrames = 0;
     }

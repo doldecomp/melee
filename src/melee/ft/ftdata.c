@@ -1341,7 +1341,7 @@ ftData_UnkModelStruct ftData_UnkIntBoolFunc0 = {
     },
 };
 
-struct {
+struct ftdata_ftData_UnkCallbackPairs0_t {
     HSD_GObjEvent x0;
     void (*x4)(Fighter_GObj*, int, float frame);
 } ftData_UnkCallbackPairs0[Ft_Kind_Max] = {

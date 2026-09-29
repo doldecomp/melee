@@ -729,8 +729,8 @@ typedef struct ftData_x30 {
 } ftData_x30;
 
 typedef struct _ThrowFlags {
-    union {
-        struct {
+    union _ThrowFlags_x0 {
+        struct _ThrowFlags_x0_x0 {
             u8 b0 : 1;
             u8 b1 : 1;
             u8 b2 : 1;
@@ -739,9 +739,9 @@ typedef struct _ThrowFlags {
             u8 b5 : 1;
             u8 b6 : 1;
             u8 b7 : 1;
-        };
+        } x0;
         u32 flags;
-    };
+    } x0;
 } ThrowFlags;
 
 struct ftCo_DatAttrs_xBC_t {
@@ -909,8 +909,8 @@ struct ftData {
 struct FighterBone {
     /* +0 */ HSD_JObj* joint;
     /* +4 */ HSD_JObj* x4_jobj2; ///< used for interpolation
-    union {
-        struct {
+    union FighterBone_x8 {
+        struct FighterBone_x8_x0 {
             /* +8:0 */ u8 flags_b0 : 1;
             /* +8:1 */ u8 flags_b1 : 1;
             /* +8:2 */ u8 flags_b2 : 1;
@@ -927,20 +927,20 @@ struct FighterBone {
             /* +9:5 */ u8 flags2_b5 : 1;
             /* +9:6 */ u8 flags2_b6 : 1;
             /* +9:7 */ u8 flags2_b7 : 1;
-        };
-        struct {
+        } x0;
+        struct FighterBone_x8_x0_1 {
             u8 hi;
             u8 lo;
-        };
+        } x0_1;
         u16 flags8;
-    };
-    union {
-        struct {
+    } x8;
+    union FighterBone_xC {
+        struct FighterBone_xC_x0 {
             /* +C */ u8 xC;
             /* +D */ u8 xD : 7;
-        };
+        } x0;
         u32 flagsC;
-    };
+    } xC_u;
 };
 ASSERT_SIZE(struct FighterBone, 0x10);
 
@@ -993,12 +993,12 @@ struct MotionState {
 
     enum_t x4_flags;
 
-    union {
+    union MotionState_x8 {
         /// @todo Try to match without this being a @c union.
         u32 _;
-        struct {
+        struct MotionState_x8_x0 {
             u8 move_id : 8;
-            struct {
+            struct MotionState_x8_x0_x1 {
                 u8 x9_b0 : 1;
                 u8 x9_b1 : 1;
                 u8 x9_b2 : 1;
@@ -1007,11 +1007,11 @@ struct MotionState {
                 u8 x9_b5 : 1;
                 u8 x9_b6 : 1;
                 u8 x9_b7 : 1;
-            };
+            } x1;
             u8 xA;
             u8 xB;
-        };
-    };
+        } x0;
+    } x8;
 
     HSD_GObjEvent anim_cb;
     HSD_GObjEvent input_cb;
@@ -1035,7 +1035,7 @@ struct Fighter_DemoStrings {
 
 /// @todo Rename this and its members; investigate using it elsewhere.
 /* fp+2070 */ union Struct2070 {
-    /* fp+2070 */ struct {
+    /* fp+2070 */ struct Struct2070_x0 {
         /* fp+2070 */ s8 x2070;
         /* fp+2071:0 */ u8 x2071_b0_3 : 4;
         /* fp+2071:4 */ u8 x2071_b4 : 1;
@@ -1051,7 +1051,7 @@ struct Fighter_DemoStrings {
         /* fp+2072:6 */ u8 count_x1A0 : 1;
         /* fp+2072:7 */ u8 count_specials : 1;
         /* fp+2073 */ u8 x2073;
-    };
+    } x0;
     /* fp+2070 */ int x2070_int;
 };
 
@@ -1065,9 +1065,9 @@ struct Struct207C {
 /* fp+2074 */ struct Struct2074 {
     /* fp+2074 */ S32Vec2 x2074_vec;
     /* fp+207C */ struct Struct207C x207C;
-    /* fp+2084 */ union {
+    /* fp+2084 */ union Struct2074_x10 {
         u32 x2084;
-        struct {
+        struct Struct2074_x10_x0 {
             u8 x2084_b0 : 1;
             u8 x2084_b1 : 1;
             u8 x2084_b2 : 1;
@@ -1084,8 +1084,8 @@ struct Struct207C {
             u8 x2085_b5 : 1;
             u8 x2085_b6 : 1;
             u8 x2085_b7 : 1;
-        };
-    };
+        } x0;
+    } x10;
     /* fp+2088 */ u16 x2088;
 };
 
@@ -1356,8 +1356,8 @@ struct Fighter {
     /*  fp+588 */ HSD_LObj* x588;
     /*  fp+58C */ u32 x58C;
     /*  fp+590 */ FigaTree* x590;
-    /*  fp+594 */ union {
-        struct {
+    /*  fp+594 */ union Fighter_x594 {
+        struct Fighter_x594_x0 {
             /* fp+594:0 */ u8 x594_b0 : 1;
             /* fp+594:1 */ u8 x594_b1_loop : 1;
             /* fp+594:2 */ u8 x594_b2 : 1;
@@ -1366,19 +1366,19 @@ struct Fighter {
             /* fp+594:5 */ u8 x594_b5 : 1;
             /* fp+594:6 */ u8 x594_b6 : 1;
             /* fp+594:7 */ u8 x594_b7 : 1;
-            /* fp+596 */ struct {
+            /* fp+596 */ struct Fighter_x594_x0_x596_bits {
                 /* fp+596:0 */ u8 x0 : 7;
                 /* fp+596:7 */ u16 x7 : 3;
             } x596_bits;
-        };
-        struct {
+        } x0;
+        struct Fighter_x594_x0_1 {
             u32 x594_pad : 10;
             u32 x594_bits : 13;
             u32 x594_pad2 : 3;
             u32 x597_bits : 6; // FighterKind of this fighter's x590 FigaTree
-        };
+        } x0_1;
         /* fp+594 */ s32 x594_s32;
-    };
+    } x594;
     /*  fp+598 */ FigaTree* x598;
     /*  fp+59C */ struct Fighter_x59C_t* x59C;
     /*  fp+5A0 */ struct Fighter_x59C_t* x5A0;
@@ -1388,7 +1388,7 @@ struct Fighter {
     /*  fp+5CC */ CostumeTObjList tobj_list;
     /*  fp+5E8 */ FighterBone* parts;
     /*  fp+5EC */ DObjList dobj_list;
-    /*  fp+5F4 */ struct {
+    /*  fp+5F4 */ struct Fighter_x5F4_arr {
         /*  fp+5F4 */ s8 prev, idx;
     } x5F4_arr[12];
     /*  fp+60C */ EF_QueuedEffect* x60C;
@@ -1400,7 +1400,7 @@ struct Fighter {
     /*  fp+61C */ s8 x61C;
     /*  fp+61D */ u8 x61D;
     /*  fp+61E */ u8 filler_x61E[0x620 - 0x61E];
-    /*  fp+620 */ struct {
+    /*  fp+620 */ struct Fighter_input {
         /*  fp+620 */ Vec2 lstick[3];          ///< lstick buffer
         /*  fp+638 */ Vec2 cstick[3];          ///< cstick buffer
         /*  fp+650 */ float triggers[3];       ///< analog trigger buffer
@@ -1567,7 +1567,7 @@ struct Fighter {
     /* fp+19C0 */ HitResult shield_hit;
     /* fp+19E4 */ HitResult reflect_hit;
     /* fp+1A08 */ HitResult absorb_hit;
-    /* fp+1A2C */ struct {
+    /* fp+1A2C */ struct Fighter_ReflectAttr {
         /* fp+1A2C */ float x1A2C_reflectHitDirection;
         /* fp+1A30 */ s32 x1A30_maxDamage;
         /* fp+1A34 */ float x1A34_damageMul;
@@ -1575,7 +1575,7 @@ struct Fighter {
         /// % damage over the maximum reflectable damage threshold
         /* fp+1A3C */ s32 x1A3C_damageOver;
     } ReflectAttr;
-    /* fp+1A40 */ struct {
+    /* fp+1A40 */ struct Fighter_AbsorbAttr {
         /* fp+1A40 */ float x1A40_absorbHitDirection;
         /// unconfirmed?
         /* fp+1A44 */ s32 x1A44_damageTaken;
@@ -1697,9 +1697,9 @@ struct Fighter {
     /* fp+21FC */ UnkFlagStruct x21FC_flag;
     /* fp+21FC */ u8 filler_x21FC[0x2200 - 0x21FD];
     /* fp+2200 */ u32 cmd_vars[4];
-    /* fp+2210 */ union {
+    /* fp+2210 */ union Fighter_x2210 {
         u32 throw_flags;
-        struct {
+        struct Fighter_x2210_x0 {
             u8 throw_flags_b0 : 1;
             u8 throw_flags_b1 : 1;
             u8 throw_flags_b2 : 1;
@@ -1708,8 +1708,8 @@ struct Fighter {
             u8 throw_flags_b5 : 1;
             u8 throw_flags_b6 : 1;
             u8 throw_flags_b7 : 1;
-        };
-    };
+        } x0;
+    } x2210;
     /* fp+2214 */ float cmd_timer;
     /* fp+2218:0 */ u8 allow_interrupt : 1;
     /* fp+2218:1 */ u8 x2218_b1 : 1;
@@ -1738,7 +1738,7 @@ struct Fighter {
     /* fp+221A:6 */ u8 x221A_b6 : 1;
     /* fp+221A:7 */ u8 x221A_b7 : 1;
 
-    /* fp+221B */ struct {
+    /* fp+221B */ struct Fighter_x221B {
         /* fp+221B:0 */ u8 x221B_b0 : 1;
         /* fp+221B:1 */ u8 x221B_b1 : 1;
         /* fp+221B:2 */ u8 x221B_b2 : 1;
@@ -1747,7 +1747,7 @@ struct Fighter {
         /* fp+221B:5 */ u8 x221B_b5 : 1;
         /* fp+221B:6 */ u8 x221B_b6 : 1;
         /* fp+221B:7 */ u8 x221B_b7 : 1;
-    };
+    } x221B;
 
     /* fp+221C:0 */ u16 x221C_b0 : 1;
     /* fp+221C:1 */ u16 x221C_b1 : 1;
@@ -1971,10 +1971,10 @@ struct ArticleDynamicBones {
 
 struct ftDynamics {
     /// @todo Very similar to #ItemDynamics.
-    struct {
+    struct ftDynamics_x0 {
         /*  +0 */ int dynamicsNum;
         /*  +4 */ ArticleDynamicBones* ftDynamicBones;
-    };
+    } x0;
     /*  +8 */ int x4;
     /*  +C */ struct ftData_x38* x8;
     /* +10 */ FigaTree*** x10;
@@ -2022,15 +2022,15 @@ typedef struct DmgLogEntry {
     /*  +4 */ FighterKind kind;
     /*  +8 */ HSD_GObj* gobj;
     /// @todo Might be a fake union
-    /*  +C */ union {
+    /*  +C */ union DmgLogEntry_xC {
         HitCapsule* hit0;
         DynamicsDesc* unk_anim0;
-    };
+    } xC;
     /// @todo Might be a fake union
-    /* +10 */ union {
+    /* +10 */ union DmgLogEntry_x10 {
         HitCapsule* hit1;
         FighterHurtCapsule* hurt1;
-    };
+    } x10;
     /* +14 */ Vec3 pos;
     /* +20 */ float x20;
     /* +24 */ size_t size_of_xC;

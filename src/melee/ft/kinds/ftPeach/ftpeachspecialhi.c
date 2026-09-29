@@ -146,7 +146,7 @@ static void doEnter(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     fp->cmd_vars[0] = fp->cmd_vars[1] = fp->cmd_vars[2] = 0;
-    fp->throw_flags = 0;
+    fp->x2210.throw_flags = 0;
     fp->mv.pe.specialhi.kind = It_Kind_Start;
     fp->x2222_b2 = true;
     {

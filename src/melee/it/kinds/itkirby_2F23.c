@@ -49,7 +49,7 @@ void it_802F23EC(Item_GObj* gobj, Fighter_GObj* owner_gobj, f32 facing_dir)
     ip->atk_victim = owner_gobj;
     ip->grab_victim = owner_gobj;
     it_8026C220(gobj, owner_gobj);
-    ip->xDD0_flag.b1 = false;
+    ip->xDD0_flag.x0.b1 = false;
     ip->facing_dir = facing_dir;
     ip->xBC_itemStateContainer = it_803F9450;
     Item_80268E5C(gobj, 0, 0);

@@ -101,10 +101,10 @@ HSD_GObj* GObj_Create(u16 classifier, u8 p_link, u8 priority)
 void HSD_GObjFree(HSD_GObj* gobj)
 {
     HSD_ASSERT(0x171, gobj);
-    if (!HSD_GObj_DelayedProcInfo.in_delayed_proc &&
+    if (!HSD_GObj_DelayedProcInfo.x0.x0.in_delayed_proc &&
         gobj == HSD_GObj_CurrentInvokedProcGObj)
     {
-        HSD_GObj_DelayedProcInfo.delay_remove_gobj = 1;
+        HSD_GObj_DelayedProcInfo.x0.x0.delay_remove_gobj = 1;
         return;
     }
     GObj_RemoveUserData(gobj);
@@ -138,10 +138,10 @@ void HSD_GObjPLink_ChangeGObjPri_Unk(u32 arg0, HSD_GObj* gobj, u8 p_link,
     u8 _[8];
 
     HSD_ASSERT(0x1A3, p_link <= HSD_GObjLibInitData.p_link_max);
-    if (!HSD_GObj_DelayedProcInfo.in_delayed_proc &&
+    if (!HSD_GObj_DelayedProcInfo.x0.x0.in_delayed_proc &&
         gobj == HSD_GObj_CurrentInvokedProcGObj)
     {
-        HSD_GObj_DelayedProcInfo.delay_change_gobj_pri = 1;
+        HSD_GObj_DelayedProcInfo.x0.x0.delay_change_gobj_pri = 1;
         HSD_GObj_DelayedProcInfo.type = arg0;
         HSD_GObj_DelayedProcInfo.p_link = p_link;
         HSD_GObj_DelayedProcInfo.p_prio = priority;

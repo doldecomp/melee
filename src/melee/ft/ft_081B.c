@@ -998,12 +998,14 @@ void ft_80083DCC(Fighter_GObj* gobj)
     ft_80081A00(gobj);
 }
 
+struct ft_80083E64_inline_sp {
+    u8 pad[8];
+    ftCollisionBox collbox;
+};
+
 static inline bool ft_80083E64_inline(Fighter_GObj* gobj, ftCollisionBox* ecb)
 {
-    struct {
-        u8 pad[8];
-        ftCollisionBox collbox;
-    } sp;
+    struct ft_80083E64_inline_sp sp;
     bool temp_r31;
     Fighter* fp = GET_FIGHTER(gobj);
     CollData* coll = &fp->coll_data;

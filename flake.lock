@@ -17,6 +17,36 @@
         "type": "github"
       }
     },
+    "compilers": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1763496356,
+        "narHash": "sha256-M+pz/o+3vt0yIGrRJuVs5Ga9QHtVAicWtu1SugbLWH4=",
+        "type": "tarball",
+        "url": "https://files.decomp.dev/compilers_20251118.zip"
+      },
+      "original": {
+        "type": "tarball",
+        "url": "https://files.decomp.dev/compilers_20251118.zip"
+      }
+    },
+    "decomp-toolkit": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1772429804,
+        "narHash": "sha256-MMD6iY6IpRPycRCoSnXKkcwpVnrDTKw0EDqgyPOAjcM=",
+        "owner": "encounter",
+        "repo": "decomp-toolkit",
+        "rev": "e4219e7644fb7b96d920d5bc3d1d950f5569dcaf",
+        "type": "github"
+      },
+      "original": {
+        "owner": "encounter",
+        "ref": "v1.8.3",
+        "repo": "decomp-toolkit",
+        "type": "github"
+      }
+    },
     "nixpkgs": {
       "locked": {
         "lastModified": 1786599213,
@@ -33,11 +63,45 @@
         "type": "github"
       }
     },
+    "objdiff": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1769751602,
+        "narHash": "sha256-h7+VIMB1lCgO/e24sowiDy/W4uvwiXODC5Lm+siF+Hg=",
+        "owner": "encounter",
+        "repo": "objdiff",
+        "rev": "66c879a95d45c1170a0834071cab58655fd9773b",
+        "type": "github"
+      },
+      "original": {
+        "owner": "encounter",
+        "ref": "v3.6.1",
+        "repo": "objdiff",
+        "type": "github"
+      }
+    },
     "root": {
       "inputs": {
         "aurora-src": "aurora-src",
+        "compilers": "compilers",
+        "decomp-toolkit": "decomp-toolkit",
         "nixpkgs": "nixpkgs",
-        "treefmt-nix": "treefmt-nix"
+        "objdiff": "objdiff",
+        "sjiswrap": "sjiswrap",
+        "treefmt-nix": "treefmt-nix",
+        "wibo": "wibo"
+      }
+    },
+    "sjiswrap": {
+      "flake": false,
+      "locked": {
+        "narHash": "sha256-rtBcpKyACwu2vDsnrppfJntsx8rlhQemlisnB+w3kAQ=",
+        "type": "file",
+        "url": "https://github.com/encounter/sjiswrap/releases/download/v1.2.2/sjiswrap-windows-x86.exe"
+      },
+      "original": {
+        "type": "file",
+        "url": "https://github.com/encounter/sjiswrap/releases/download/v1.2.2/sjiswrap-windows-x86.exe"
       }
     },
     "treefmt-nix": {
@@ -57,6 +121,23 @@
       "original": {
         "owner": "numtide",
         "repo": "treefmt-nix",
+        "type": "github"
+      }
+    },
+    "wibo": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1755273904,
+        "narHash": "sha256-PEqfvpS3p8Zooee7k59SN2UiSZWfITuB/VULIrfup4w=",
+        "owner": "decompals",
+        "repo": "wibo",
+        "rev": "6d0bff464ac998a9c68964e3bab13f9bd53ef329",
+        "type": "github"
+      },
+      "original": {
+        "owner": "decompals",
+        "ref": "0.7.0",
+        "repo": "wibo",
         "type": "github"
       }
     }

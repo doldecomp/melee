@@ -115,10 +115,10 @@ void plBonusLib_8003D514(int arg0)
         temp_r31_2 = Player_GetStaleMoveTableIndexPtr2(var_r29);
         ftLib_GetPos(temp_r30, &spC);
         temp_f1 = ftLib_GetFacingDir(temp_r30);
-        temp_r31_2->xDD1.bit6 = 1;
+        temp_r31_2->xDD1.x0.bit6 = 1;
 
         if ((temp_f1 * sp18.x) > (temp_f1 * spC.x)) {
-            temp_r31_2->xDD1.bit7 = 1;
+            temp_r31_2->xDD1.x0.bit7 = 1;
         }
     }
 }
@@ -177,16 +177,16 @@ void pl_8003D644(int arg0, int arg1, int arg2, int arg3)
             temp_r26->x0_staleMoveTable.xC94++;
         }
         if (ftLib_IsDeadUp(temp_r3) != 0) {
-            temp_r26->xDD1.bit2 = true;
+            temp_r26->xDD1.x0.bit2 = true;
         }
         if (temp_r27 == 0) {
-            temp_r26->xDD1.bit3 = true;
+            temp_r26->xDD1.x0.bit3 = true;
         }
         if (temp_r27 == 2) {
-            temp_r26->xDD1.bit0 = true;
+            temp_r26->xDD1.x0.bit0 = true;
         }
         if (temp_r27 == 1) {
-            temp_r26->xDD1.bit1 = true;
+            temp_r26->xDD1.x0.bit1 = true;
         }
         if (ft_80087858(temp_r3) != 0) {
             pl_80038788(arg0, 0x83, 1);
@@ -272,28 +272,28 @@ void pl_8003D644(int arg0, int arg1, int arg2, int arg3)
             switch (temp_r28) {
             case 1:
             case 2:
-                if (temp_r30->x2073 >= 1 && temp_r30->x2073 <= 3) {
+                if (temp_r30->x0.x2073 >= 1 && temp_r30->x0.x2073 <= 3) {
                     pl_80038824(temp_r23, 0x6E);
                 }
-                if (temp_r30->x2073 >= 0x40 && temp_r30->x2073 <= 0x43) {
+                if (temp_r30->x0.x2073 >= 0x40 && temp_r30->x0.x2073 <= 0x43) {
                     pl_80038824(temp_r23, 0xC0);
                 }
-                if (temp_r30->x2073 == 0x46) {
+                if (temp_r30->x0.x2073 == 0x46) {
                     pl_80038824(temp_r23, 0xC1);
                 }
-                if (temp_r30->x2073 == 0x5F) {
+                if (temp_r30->x0.x2073 == 0x5F) {
                     pl_80038824(temp_r23, 0xAD);
                 }
-                if (temp_r30->x2073 == 0x63) {
+                if (temp_r30->x0.x2073 == 0x63) {
                     pl_80038824(temp_r23, 0x70);
                 }
-                if (temp_r30->x2073 == 0x61) {
+                if (temp_r30->x0.x2073 == 0x61) {
                     pl_80038824(temp_r23, 0xC6);
                 }
-                if (temp_r30->count_specials) {
+                if (temp_r30->x0.count_specials) {
                     pl_80038824(temp_r23, 0x6F);
                 }
-                if (temp_r28 == 2 && temp_r30->count_x1A4) {
+                if (temp_r28 == 2 && temp_r30->x0.count_x1A4) {
                     pl_80038824(temp_r23, 0x72);
                 }
                 if (temp_r31->x11_b0) {
@@ -341,7 +341,7 @@ void pl_8003D644(int arg0, int arg1, int arg2, int arg3)
                     pl_80038824(temp_r23, 0x73);
                 }
                 if (temp_r28 == 2) {
-                    if (temp_r30->x2073 == 0x62) {
+                    if (temp_r30->x0.x2073 == 0x62) {
                         switch (temp_r29) {
                         case 0:
                         case 3:
@@ -770,8 +770,8 @@ void fn_8003EE2C(int arg0, int arg1)
     } else {
         temp_r31->xD24++;
     }
-    temp_r28 = ft_80089884(temp_r30)->x2073;
-    if (ft_80089884(temp_r30)->x2072_b1) {
+    temp_r28 = ft_80089884(temp_r30)->x0.x2073;
+    if (ft_80089884(temp_r30)->x0.x2072_b1) {
         temp_r31->xD18++;
         if (temp_r31->xD18 >= pl_804D6470->x64) {
             temp_r31->xD14++;
@@ -799,22 +799,22 @@ void fn_8003EE2C(int arg0, int arg1)
     temp_r3_3 = ifMagnify_802FB6E8(arg0);
     if (temp_r3_3 != 0) {
         temp_r31->xD30++;
-        temp_r31->xDD0.bit7 = true;
+        temp_r31->xDD0.x0.bit7 = true;
     } else {
-        temp_r31->xDD0.bit7 = false;
+        temp_r31->xDD0.x0.bit7 = false;
     }
     switch (temp_r3_3) {
     case 1:
-        temp_r31->xDD0.bit5 = true;
+        temp_r31->xDD0.x0.bit5 = true;
         break;
     case 2:
-        temp_r31->xDD0.bit4 = true;
+        temp_r31->xDD0.x0.bit4 = true;
         break;
     case 3:
-        temp_r31->xDD0.bit6 = true;
+        temp_r31->xDD0.x0.bit6 = true;
         break;
     case 4:
-        temp_r31->xDD0.bit3 = true;
+        temp_r31->xDD0.x0.bit3 = true;
         break;
     }
     if (ft_800878BC(temp_r30)) {
@@ -932,10 +932,10 @@ void fn_8003F294(int slot, int index)
         u32 xb8 = pl_804D6470->xB8;
         if (xb8 == v) {
             if (table->xD5C <= xb8) {
-                table->xDD1.bit5 = 1;
+                table->xDD1.x0.bit5 = 1;
             }
-        } else if (table->xDD1.bit5 && table->xD5C > xb8) {
-            table->xDD1.bit5 = 0;
+        } else if (table->xDD1.x0.bit5 && table->xD5C > xb8) {
+            table->xDD1.x0.bit5 = 0;
         }
         table->xD5C = -1;
     }
@@ -951,10 +951,10 @@ void fn_8003F53C(int arg0, int arg1)
         if ((ft_800877F8(temp_r30, 0x100) == 0) &&
             (ft_800877F8(temp_r30, 0x200) == 0))
         {
-            temp_r31->xDD0.bit1 = 1;
+            temp_r31->xDD0.x0.bit1 = 1;
         }
         if (ft_800877F8(temp_r30, 0x80000000) != 0) {
-            temp_r31->xDD0.bit2 = 1;
+            temp_r31->xDD0.x0.bit2 = 1;
         }
         if ((ft_80087818(temp_r30, 0x100) != 0) ||
             (ft_80087818(temp_r30, 0x200) != 0))
@@ -1124,7 +1124,7 @@ void pl_8003FC44(int slot, int arg1)
 {
     pl_StaleMoveTableExt_t* temp_r3 = Player_GetStaleMoveTableIndexPtr2(slot);
     RETURN_IF(arg1 != 0);
-    temp_r3->xDD0.bit0 = 1;
+    temp_r3->xDD0.x0.bit0 = 1;
 }
 
 void pl_8003FC88(int arg0, int arg1, int arg2)
@@ -1231,7 +1231,7 @@ void pl_8003FF44(int arg0, int arg1, int arg2)
     if ((arg1 == 0) && (arg2 >= 1) && (arg2 <= 0x10) &&
         (ft_80087A8C(temp_r3) > pl_804D6470->x38))
     {
-        temp_r31->xDD1.bit4 = 1;
+        temp_r31->xDD1.x0.bit4 = 1;
     }
 }
 
@@ -1451,7 +1451,7 @@ void pl_80040688(int arg0, int arg1, int arg2)
         xCC0 = &temp_r3->x0_staleMoveTable.xCC0;
 
         if (!unk_cond(arg1, temp_r0)) {
-            temp_r0_2 = bits->x2073;
+            temp_r0_2 = bits->x0.x2073;
             if (temp_r0_2 >= 0x33 && temp_r0_2 <= 0x3D) {
                 pl_80038788(temp_r0, 0x2A, 1);
             }
@@ -1501,7 +1501,7 @@ int pl_800408DC(int arg0)
 
 int pl_80040900(int arg0)
 {
-    return Player_GetActionStats(arg0)->x358_hits.total;
+    return Player_GetActionStats(arg0)->x358.x358_hits.total;
 }
 
 int pl_80040924(int arg0)
@@ -1516,7 +1516,7 @@ float pl_80040948(int arg0)
     PAD_STACK(0x10);
 
     total = Player_GetActionStats(arg0)->attacks.total;
-    temp_r30 = Player_GetActionStats(arg0)->x358_hits.total;
+    temp_r30 = Player_GetActionStats(arg0)->x358.x358_hits.total;
     if (total != 0) {
         return pl_CalculateAverage(temp_r30, total);
     }

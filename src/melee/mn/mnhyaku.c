@@ -216,7 +216,7 @@ void mnHyaku_8024CD64(u8 arg0)
     lbAudioAx_80027648();
     archive = mn_804D6BB8;
     lbArchive_LoadSections(
-        archive, (void**) &mnHyaku_804A08E8, "MenMainConKm_Top_joint",
+        archive, &mnHyaku_804A08E8.joint, "MenMainConKm_Top_joint",
         &mnHyaku_804A08E8.animjoint, "MenMainConKm_Top_animjoint",
         &mnHyaku_804A08E8.matanim_joint, "MenMainConKm_Top_matanim_joint",
         &mnHyaku_804A08E8.shapeanim_joint, "MenMainConKm_Top_shapeanim_joint",

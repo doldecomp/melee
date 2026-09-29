@@ -61,7 +61,7 @@ struct HSD_LObj {
     /* 0x14 */ GXColor hw_color;
     /* 0x18 */ HSD_WObj* position;
     /* 0x1C */ HSD_WObj* interest;
-    /* 0x20 - 0x34 */ union {
+    /* 0x20 - 0x34 */ union HSD_LObj_u {
         HSD_LightPoint point;
         HSD_LightSpot spot;
         HSD_LightAttn attn;
@@ -83,7 +83,7 @@ struct HSD_LightDesc {
     /* 0x0C */ GXColor color;
     /* 0x10 */ HSD_WObjDesc* position;
     /* 0x14 */ HSD_WObjDesc* interest;
-    union {
+    union HSD_LightDesc_u {
         void* p;
         f32* shininess;
         HSD_LightPointDesc* point;

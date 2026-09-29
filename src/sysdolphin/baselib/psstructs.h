@@ -266,7 +266,7 @@ struct HSD_Generator {
     HSD_psAppSRT* appsrt;                 // 0x54
     HSD_PSUserFunc* userfunc;             // 0x58
     int (*callback)(HSD_Generator* part); // 0x5C
-    union {
+    union HSD_Generator_aux {
         auxDisc disc;
         auxLine line;
         auxTornado tornado;

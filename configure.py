@@ -19,6 +19,7 @@ import sys
 from pathlib import Path
 from typing import cast
 
+from tools.download_tool import TOOLS
 from tools.project import (
     BuildConfig,
     BuildConfigUnit,
@@ -240,13 +241,29 @@ if not args.asm:
 
 config.generate_compile_commands = False  # Handled internally
 
-# Tool versions
+# Tool versions, pinned by the flake inputs of the same name
+with open("flake.lock", encoding="utf-8") as f:
+    flake_inputs = json.load(f)["nodes"]
+
+
+def flake_tag(name: str, tool: str | None = None) -> str:
+    original = flake_inputs[name]["original"]
+    if tool is None:
+        return original["ref"]
+    # A file input fetches the URL download_tool builds for its tag
+    prefix, suffix = TOOLS[tool]("\0").split("\0")
+    url: str = original["url"]
+    if not (url.startswith(prefix) and url.endswith(suffix)):
+        sys.exit(f"flake.lock: {name} is not a {tool} download: {url}")
+    return url[len(prefix) : len(url) - len(suffix)]
+
+
 config.binutils_tag = "2.42-2"
-config.compilers_tag = "20251118"
-config.dtk_tag = "v1.8.3"
-config.objdiff_tag = "v3.6.1"
-config.sjiswrap_tag = "v1.2.2"
-config.wibo_tag = "0.7.0"
+config.compilers_tag = flake_tag("compilers", "compilers")
+config.dtk_tag = flake_tag("decomp-toolkit")
+config.objdiff_tag = flake_tag("objdiff")
+config.sjiswrap_tag = flake_tag("sjiswrap", "sjiswrap")
+config.wibo_tag = flake_tag("wibo")
 
 # Project
 config.config_path = Path("config") / config.version / "config.yml"

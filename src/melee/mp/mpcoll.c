@@ -220,13 +220,13 @@ void mpColl_SetECBSource_JObj(CollData* cd, HSD_GObj* gobj, HSD_JObj* arg1,
 {
     cd->x0_gobj = gobj;
     cd->ecb_source.kind = ECBSource_JObj;
-    cd->ecb_source.x108_joint = arg1;
-    cd->ecb_source.x10C_joint[0] = arg2;
-    cd->ecb_source.x10C_joint[1] = arg3;
-    cd->ecb_source.x10C_joint[2] = arg4;
-    cd->ecb_source.x10C_joint[3] = arg5;
-    cd->ecb_source.x10C_joint[4] = arg6;
-    cd->ecb_source.x10C_joint[5] = arg7;
+    cd->ecb_source.x4.x0.x108_joint = arg1;
+    cd->ecb_source.x4.x0.x10C_joint[0] = arg2;
+    cd->ecb_source.x4.x0.x10C_joint[1] = arg3;
+    cd->ecb_source.x4.x0.x10C_joint[2] = arg4;
+    cd->ecb_source.x4.x0.x10C_joint[3] = arg5;
+    cd->ecb_source.x4.x0.x10C_joint[4] = arg6;
+    cd->ecb_source.x4.x0.x10C_joint[5] = arg7;
     cd->ecb_source.x124 = arg9;
     cd->ecb_source.x128 = 10.0F;
     cd->ecb_source.x12C = 10.0F;
@@ -254,11 +254,11 @@ void mpColl_SetECBSource_Fixed(CollData* cd, HSD_GObj* gobj, float arg1,
 {
     cd->x0_gobj = gobj;
     cd->ecb_source.kind = ECBSource_Fixed;
-    cd->ecb_source.up = arg1;
-    cd->ecb_source.down = arg2;
-    cd->ecb_source.front = arg3;
-    cd->ecb_source.back = arg4;
-    cd->ecb_source.angle = 0.0F;
+    cd->ecb_source.x4.x0_1.up = arg1;
+    cd->ecb_source.x4.x0_1.down = arg2;
+    cd->ecb_source.x4.x0_1.front = arg3;
+    cd->ecb_source.x4.x0_1.back = arg4;
+    cd->ecb_source.x4.x0_1.angle = 0.0F;
     if (cd->x34_flags.b0) {
         cd->ecb.top.x = 0.0F;
         cd->ecb.top.y = 8.0F;
@@ -363,7 +363,7 @@ void mpColl_LoadECB_JObj(CollData* coll, u32 flags)
     {
         float temp_x = coll->cur_pos.x;
         float temp_y = coll->cur_pos.y;
-        lb_8000B1CC(coll->ecb_source.x10C_joint[0], NULL, &vec);
+        lb_8000B1CC(coll->ecb_source.x4.x0.x10C_joint[0], NULL, &vec);
         left_x = right_x = vec.x - temp_x;
         bottom_y = top_y = vec.y - temp_y;
 
@@ -374,11 +374,11 @@ void mpColl_LoadECB_JObj(CollData* coll, u32 flags)
     update_min_max(&left_x, &right_x, dx);                                    \
     update_min_max(&bottom_y, &top_y, dy);
 
-        EXPAND_ECB_FOR(coll->ecb_source.x10C_joint[1]);
-        EXPAND_ECB_FOR(coll->ecb_source.x10C_joint[2]);
-        EXPAND_ECB_FOR(coll->ecb_source.x10C_joint[3]);
-        EXPAND_ECB_FOR(coll->ecb_source.x10C_joint[4]);
-        EXPAND_ECB_FOR(coll->ecb_source.x10C_joint[5]);
+        EXPAND_ECB_FOR(coll->ecb_source.x4.x0.x10C_joint[1]);
+        EXPAND_ECB_FOR(coll->ecb_source.x4.x0.x10C_joint[2]);
+        EXPAND_ECB_FOR(coll->ecb_source.x4.x0.x10C_joint[3]);
+        EXPAND_ECB_FOR(coll->ecb_source.x4.x0.x10C_joint[4]);
+        EXPAND_ECB_FOR(coll->ecb_source.x4.x0.x10C_joint[5]);
     }
 
     if (!(flags & CollisionFlagAir_CanGrabLedge)) {
@@ -498,7 +498,7 @@ void mpColl_LoadECB_Fixed(CollData* coll)
     float rot_left_y;
     float rot_left_x;
 
-    angle = coll->ecb_source.angle;
+    angle = coll->ecb_source.x4.x0_1.angle;
     if (coll->x130_flags & CollData_X130_Clear) {
         coll->ecb.top.x = 0.0F;
         coll->ecb.top.y = 0.0F;
@@ -512,15 +512,15 @@ void mpColl_LoadECB_Fixed(CollData* coll)
     }
     coll->xE4_ecb = coll->ecb;
 
-    bottom_y = -coll->ecb_source.down;
-    top_y = coll->ecb_source.up;
+    bottom_y = -coll->ecb_source.x4.x0_1.down;
+    top_y = coll->ecb_source.x4.x0_1.up;
 
     if (coll->facing_dir == 1) {
-        right_x = coll->ecb_source.front;
-        left_x = -coll->ecb_source.back;
+        right_x = coll->ecb_source.x4.x0_1.front;
+        left_x = -coll->ecb_source.x4.x0_1.back;
     } else {
-        right_x = coll->ecb_source.back;
-        left_x = -coll->ecb_source.front;
+        right_x = coll->ecb_source.x4.x0_1.back;
+        left_x = -coll->ecb_source.x4.x0_1.front;
     }
 
     if (angle != 0.0F) {
@@ -890,7 +890,7 @@ void mpColl_800436E4(CollData* coll, float arg1)
         } else if (var_f1 < -M_TAU) {
             var_f1 += M_TAU;
         }
-        coll->ecb_source.angle = var_f1;
+        coll->ecb_source.x4.x0_1.angle = var_f1;
     } else {
         OSReport("not support rotate at JObj type coll\n");
         while (1) {

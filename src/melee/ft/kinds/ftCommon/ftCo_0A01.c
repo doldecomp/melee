@@ -4487,16 +4487,18 @@ static inline bool ftCo_IsNearlyZero(float x)
         }                                                                     \
     } while (0)
 
+struct ftCo_800A9904_ceiling {
+    u32 pad;
+    u32 flags;
+    int line_id;
+    Vec3 normal;
+    Vec3 pos;
+};
+
 void ftCo_800A9904(Fighter* fp)
 {
     UNUSED u8 _top[8];
-    struct {
-        u32 pad;
-        u32 flags;
-        int line_id;
-        Vec3 normal;
-        Vec3 pos;
-    } ceiling;
+    struct ftCo_800A9904_ceiling ceiling;
     f32 sqrt_time_store;
     f32 sqrt_terminal_store;
     UNUSED u8 _[0x1C];
@@ -5331,6 +5333,11 @@ static inline void ftCo_800ABBA8_blk155144r(Fighter* fp, Fighter** target)
     *target = data->x44;
 }
 
+struct ftCo_800ABBA8_sp50 {
+    Vec3 v;
+    u8 _[4];
+};
+
 void ftCo_800ABBA8(Fighter* fp)
 {
     struct CpuFighter* data = &fp->cpu;
@@ -5341,10 +5348,7 @@ void ftCo_800ABBA8(Fighter* fp)
     Vec3 sp68;
     int line_id;
     u32 flags;
-    struct {
-        Vec3 v;
-        u8 _[4];
-    } sp50;
+    struct ftCo_800ABBA8_sp50 sp50;
     u8 sqrt_gap[0xC];
     float sqrt_tmp[4];
     s32 result;
@@ -6164,7 +6168,7 @@ static bool ftCo_800ADE48(Fighter* fp)
             data->xF8_b5 = false;
         }
     }
-    if (!fp->x221B_b5) {
+    if (!fp->x221B.x221B_b5) {
         data->x94 = 0;
     }
     if (data->x18 != 0x12) {

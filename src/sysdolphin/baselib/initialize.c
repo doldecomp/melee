@@ -278,25 +278,29 @@ void HSD_ObjInit(void)
 static char str_pix_fmt_neq_gx_pf_rgb565_z16[] = "pix_fmt != GX_PF_RGB565_Z16";
 #endif
 
+struct HSD_ObjDumpStat_types {
+    HSD_ObjAllocData* (*func)(void);
+    char* label;
+};
+
 void HSD_ObjDumpStat(void)
 {
-    struct {
-        HSD_ObjAllocData* (*func)(void);
-        char* label;
-    } types[] = { { HSD_AObjGetAllocData, "aobj" },
-                  { HSD_FObjGetAllocData, "fobj" },
-                  { HSD_IDGetAllocData, "id" },
-                  { HSD_SListGetAllocData, "slist" },
-                  { HSD_DListGetAllocData, "dlist" },
-                  { HSD_VecGetAllocData, "vec" },
-                  { HSD_MtxGetAllocData, "mtx" },
-                  { HSD_RObjGetAllocData, "robj" },
-                  { HSD_RvalueObjGetAllocData, "rval" },
-                  { HSD_ShadowGetAllocData, "shadow" },
-                  { HSD_RenderGetAllocData, "render" },
-                  { HSD_ChanGetAllocData, "chan" },
-                  { HSD_TevRegGetAllocData, "tevreg" },
-                  { NULL, NULL } };
+    struct HSD_ObjDumpStat_types types[] = {
+        { HSD_AObjGetAllocData, "aobj" },
+        { HSD_FObjGetAllocData, "fobj" },
+        { HSD_IDGetAllocData, "id" },
+        { HSD_SListGetAllocData, "slist" },
+        { HSD_DListGetAllocData, "dlist" },
+        { HSD_VecGetAllocData, "vec" },
+        { HSD_MtxGetAllocData, "mtx" },
+        { HSD_RObjGetAllocData, "robj" },
+        { HSD_RvalueObjGetAllocData, "rval" },
+        { HSD_ShadowGetAllocData, "shadow" },
+        { HSD_RenderGetAllocData, "render" },
+        { HSD_ChanGetAllocData, "chan" },
+        { HSD_TevRegGetAllocData, "tevreg" },
+        { NULL, NULL }
+    };
     int i;
 
     for (i = 0; types[i].label; i++) {

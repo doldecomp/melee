@@ -339,7 +339,7 @@ void it_802CC1CC(Item_GObj* gobj, ItemKind kind)
     spawn.kind = kind;
     spawn.x0_parent_gobj = ip->owner;
     spawn.x4_parent_gobj2 = gobj;
-    spawn.x44_flag.b0 = 1;
+    spawn.x44_flag.x0.b0 = 1;
     spawn.x40 = 0;
     if (Item_80268B18(&spawn) != NULL) {
         ip->xDD4_itemVar.lizardon.x6C ^= 1;

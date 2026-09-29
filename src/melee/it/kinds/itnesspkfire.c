@@ -35,7 +35,7 @@ void it_802AA054(Item_GObj* gobj, Vec3* pos, Vec3* vel, f32 facing_dir,
     spawn.x3C_damage = 0;
     spawn.x0_parent_gobj = gobj;
     spawn.x4_parent_gobj2 = spawn.x0_parent_gobj;
-    spawn.x44_flag.b0 = true;
+    spawn.x44_flag.x0.b0 = true;
     spawn.x40 = 0;
 
     {

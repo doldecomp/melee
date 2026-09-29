@@ -41,26 +41,26 @@ struct HSD_CObj {
     /* +1C */ Scissor scissor;
     /* +24 */ HSD_WObj* eyepos;
     /* +28 */ HSD_WObj* interest;
-    union {
+    union HSD_CObj_u {
         /* +2C */ f32 roll;
         /* +2C */ Vec3 up;
     } u;
     /* +38 */ f32 near;
     /* +3C */ f32 far;
-    union {
-        struct {
+    union HSD_CObj_projection_param {
+        struct HSD_CObj_projection_param_perspective {
             f32 fov;
             f32 aspect;
         } perspective;
 
-        struct {
+        struct HSD_CObj_projection_param_frustum {
             f32 top;
             f32 bottom;
             f32 left;
             f32 right;
         } frustum;
 
-        struct {
+        struct HSD_CObj_projection_param_ortho {
             f32 top;
             f32 bottom;
             f32 left;

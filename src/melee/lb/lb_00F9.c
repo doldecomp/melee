@@ -34,7 +34,7 @@ struct lb_Collider {
     /* 0x24 */ char pad_24[0x04];
 };
 
-const struct {
+const struct lb_803B7280_t {
     Vec3 v0;
     Vec3 v1;
     Vec3 v2;

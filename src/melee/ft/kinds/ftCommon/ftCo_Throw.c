@@ -45,7 +45,7 @@ void ftCo_800DD100(Fighter_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     Fighter_GObj* victim = fp->victim_gobj;
     if (victim != NULL) {
-        if (fp->x221B_b5) {
+        if (fp->x221B.x221B_b5) {
             ftCo_800DC920(gobj, victim);
         } else {
             ftCo_800DC920(victim, gobj);
@@ -59,7 +59,7 @@ void ftCo_800DD168(Fighter_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     Fighter_GObj* victim = fp->victim_gobj;
     if (victim != NULL) {
-        if (fp->x221B_b5) {
+        if (fp->x221B.x221B_b5) {
             ftCo_800DCFD4(victim);
             ftCo_800DC920(gobj, victim);
         } else {
@@ -135,7 +135,7 @@ void ftCo_800DD398(Fighter_GObj* gobj, FtMotionId msid, FtMotionId victim_msid,
     Fighter* fp = GET_FIGHTER(gobj);
     PAD_STACK(0x10);
     fp->cmd_vars[0] = 0;
-    fp->throw_flags = 0;
+    fp->x2210.throw_flags = 0;
     fp->mv.co.fighterthrow.x4 = 0;
     fp->mv.co.fighterthrow.x8 = 0;
     Fighter_ChangeMotionState(gobj, msid, Ft_MF_None, 0.0f, anim_speed, 0.0f,
@@ -245,8 +245,8 @@ bool fn_800DD6E4(Fighter_GObj* gobj, int arg)
 
 static inline bool ftCo_800DD724_inline1(Fighter* fp)
 {
-    if (fp->throw_flags_b4) {
-        fp->throw_flags_b4 = 0;
+    if (fp->x2210.x0.throw_flags_b4) {
+        fp->x2210.x0.throw_flags_b4 = 0;
         return true;
     }
     return false;
@@ -254,8 +254,8 @@ static inline bool ftCo_800DD724_inline1(Fighter* fp)
 
 static inline bool ftCo_800DD724_inline2(Fighter* fp)
 {
-    if (fp->throw_flags_b3) {
-        fp->throw_flags_b3 = 0;
+    if (fp->x2210.x0.throw_flags_b3) {
+        fp->x2210.x0.throw_flags_b3 = 0;
         return true;
     }
     return false;
@@ -516,7 +516,7 @@ void ftCo_800DDDE4(Fighter_GObj* gobj, Fighter_GObj* gobj2, bool arg)
     CollData* cd;
     HSD_JObj* jobj;
     PAD_STACK(0x14);
-    if (fp->x221B_b7) {
+    if (fp->x221B.x221B_b7) {
         fp3 = fp2;
         fp4 = fp;
     } else {
@@ -525,8 +525,8 @@ void ftCo_800DDDE4(Fighter_GObj* gobj, Fighter_GObj* gobj2, bool arg)
     }
     fp->x1A5C = NULL;
     fp->victim_gobj = NULL;
-    fp->x221B_b5 = 0;
-    fp->x221B_b7 = 0;
+    fp->x221B.x221B_b5 = 0;
+    fp->x221B.x221B_b7 = 0;
     ftColl_8007891C(gobj, gobj2, hit[0].damage);
     if (fp2->x1988 != 0) {
         ftColl_8007B62C(gobj2, 0);
@@ -579,7 +579,7 @@ void ftCo_800DDDE4(Fighter_GObj* gobj, Fighter_GObj* gobj2, bool arg)
     }
     fp2->x1A5C = NULL;
     fp2->victim_gobj = NULL;
-    fp2->x221B_b7 = 0;
+    fp2->x221B.x221B_b7 = 0;
 }
 
 void ftCo_800DE2A8(Fighter_GObj* gobj, Fighter_GObj* other)

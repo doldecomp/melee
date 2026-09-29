@@ -2201,7 +2201,7 @@ typedef struct TmData_80194F30 {
     u8 pad_x0[0x2E];
     u8 x2E;
     u8 pad_x2F[0x37 - 0x2F];
-    struct {
+    struct TmData_80194F30_x37 {
         u8 x0;
         u8 x1;
         u8 x2;

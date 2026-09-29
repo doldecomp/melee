@@ -450,6 +450,13 @@ static inline TySortElem* tyDisplay_GetGridSortElem(size_t offset,
     return (TySortElem*) ((size_t) grid + offset + 0x14);
 }
 
+struct _tyDisplay_80319540_sort_temps {
+    u8 pad0[4];
+    TySortElem tmp2;
+    u8 pad1[4];
+    TySortElem tmp1, tmp0;
+};
+
 static inline void _tyDisplay_80319540_sort(TyDspConfig* cfg, TyDspGrid* grid)
 {
     s32 n2;
@@ -458,12 +465,7 @@ static inline void _tyDisplay_80319540_sort(TyDspConfig* cfg, TyDspGrid* grid)
     if (cfg->x08 > 1) {
         n2 = (cfg->x08 / 3) * 2;
         if (n2 > 0) {
-            struct {
-                u8 pad0[4];
-                TySortElem tmp2;
-                u8 pad1[4];
-                TySortElem tmp1, tmp0;
-            } temps;
+            struct _tyDisplay_80319540_sort_temps temps;
             s32 mid = n2 / 2;
             TyDspGrid* cur;
             s32 pivot, n;
@@ -503,6 +505,13 @@ static inline void _tyDisplay_80319540_sort(TyDspConfig* cfg, TyDspGrid* grid)
     }
 }
 
+struct _tyDisplay_80319994_sort_temps {
+    u8 pad0[4];
+    TySortElem tmp2;
+    u8 pad1[4];
+    TySortElem tmp1, tmp0;
+};
+
 static inline void _tyDisplay_80319994_sort(TyDspConfig* cfg, TyDspGrid* grid)
 {
     s32 pivot;
@@ -512,12 +521,7 @@ static inline void _tyDisplay_80319994_sort(TyDspConfig* cfg, TyDspGrid* grid)
     if (cfg->x08 > 1) {
         n2 = (cfg->x08 / 3) * 2;
         if (n2 > 0) {
-            struct {
-                u8 pad0[4];
-                TySortElem tmp2;
-                u8 pad1[4];
-                TySortElem tmp1, tmp0;
-            } temps;
+            struct _tyDisplay_80319994_sort_temps temps;
             s32 mid = n2 / 2;
             TyDspGrid* cur;
             s32 n;
@@ -557,6 +561,12 @@ static inline void _tyDisplay_80319994_sort(TyDspConfig* cfg, TyDspGrid* grid)
     }
 }
 
+struct _tyDisplay_80318CB4_sort_temps {
+    TySortElem tmp2;
+    u8 pad1[4];
+    TySortElem tmp1, tmp0;
+};
+
 static inline void _tyDisplay_80318CB4_sort(TyDspConfig* cfg, TyDspGrid* grid)
 {
     s32 n2;
@@ -565,11 +575,7 @@ static inline void _tyDisplay_80318CB4_sort(TyDspConfig* cfg, TyDspGrid* grid)
     if (cfg->x08 > 1) {
         n2 = (cfg->x08 / 3) * 2;
         if (0 < n2) {
-            struct {
-                TySortElem tmp2;
-                u8 pad1[4];
-                TySortElem tmp1, tmp0;
-            } temps;
+            struct _tyDisplay_80318CB4_sort_temps temps;
             s32 mid = n2 / 2;
             TyDspGrid* cur;
             s32 pivot, n;
@@ -609,6 +615,12 @@ static inline void _tyDisplay_80318CB4_sort(TyDspConfig* cfg, TyDspGrid* grid)
     }
 }
 
+struct _tyDisplay_80319994_sort_pos_temps {
+    TyDspPos tmp2;
+    u8 pad1[4];
+    TyDspPos tmp1, tmp0;
+};
+
 static inline void _tyDisplay_80319994_sort_pos(TyDspGrid* grid, s32 count)
 {
     if (count > 1) {
@@ -618,11 +630,7 @@ static inline void _tyDisplay_80319994_sort_pos(TyDspGrid* grid, s32 count)
         n2 = count - 1;
         base = grid;
         if (n2 > 0) {
-            struct {
-                TyDspPos tmp2;
-                u8 pad1[4];
-                TyDspPos tmp1, tmp0;
-            } temps;
+            struct _tyDisplay_80319994_sort_pos_temps temps;
             s32 mid = n2 / 2;
             TyDspPos* p;
             TyDspGrid* cur;
@@ -663,17 +671,19 @@ static inline void _tyDisplay_80319994_sort_pos(TyDspGrid* grid, s32 count)
     }
 }
 
+struct _tyDisplay_80318CB4_sort_pos_temps {
+    TyDspPos tmp2;
+    u8 pad1[4];
+    TyDspPos tmp1, tmp0;
+};
+
 static inline void _tyDisplay_80318CB4_sort_pos(TyDspGrid* grid, s32 n2)
 {
     s32 pivot;
     TyDspGrid* base;
     base = grid;
     {
-        struct {
-            TyDspPos tmp2;
-            u8 pad1[4];
-            TyDspPos tmp1, tmp0;
-        } temps;
+        struct _tyDisplay_80318CB4_sort_pos_temps temps;
         s32 mid = n2 / 2;
         TyDspPos* p;
         TyDspGrid* cur;
@@ -758,6 +768,12 @@ static inline f32 _tyDisplay_80318CB4_sqrt_store(f32 x, volatile f32* rounded)
 #define _tyDisplay_80318CB4_sqrt_store(x, rounded) sqrtf(x)
 #endif
 
+struct _tyDisplay_80318CB4_rounded {
+    u8 pad0[0x14];
+    f32 value;
+    u8 pad1[0x10];
+};
+
 void _tyDisplay_80318CB4(s32 arg0)
 {
     s32 sort_end;
@@ -778,11 +794,7 @@ void _tyDisplay_80318CB4(s32 arg0)
     TyDspConfig* cfg = _tyDisplay_804D6F18;
 
     /* Preserve the first sqrtf rounding slot at frame offset 0x78. */
-    struct {
-        u8 pad0[0x14];
-        f32 value;
-        u8 pad1[0x10];
-    } rounded;
+    struct _tyDisplay_80318CB4_rounded rounded;
 
     memzero(grid, sizeof(*grid));
     grid->x08_min_z = -3.5f;
@@ -1800,7 +1812,7 @@ static inline void tyDisplay_SetGridSize(TyDspConfig* cfg, TyDspGrid* grid)
 
 void tyDisplay_Scene_OnEnter(void* arg0)
 {
-    s32 sp18;
+    HSD_Joint* sp18;
     TyDspConfig* cfg;
     TyDspBgData* data;
     TyDspGrid* grid;

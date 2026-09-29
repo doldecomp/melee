@@ -980,11 +980,13 @@ void gm_8019ECAC_OnEnter_inline(void)
     HSD_SisLib_803A62A0(0, fn_8018F5F0(), "SIS_TournamentData");
 }
 
+struct Indices {
+    s32 values[4];
+};
+
 void gm_8019E634(void)
 {
-    struct Indices {
-        s32 values[4];
-    } indices;
+    struct Indices indices;
     s32 results[4];
     TmData* tmd;
     s32 hmn_cpu;
@@ -1108,13 +1110,15 @@ void gm_8019E634(void)
     }
 }
 
+struct gm_Scene_TouAlt_OnEnter_local {
+    StKind stkind;
+    CharacterKind char_id[4];
+    u32 color[4];
+};
+
 void gm_Scene_TouAlt_OnEnter(void* arg0)
 {
-    struct {
-        StKind stkind;
-        CharacterKind char_id[4];
-        u32 color[4];
-    } local;
+    struct gm_Scene_TouAlt_OnEnter_local local;
     TmData* tmd;
     s32 i;
     u64 audio_mask;

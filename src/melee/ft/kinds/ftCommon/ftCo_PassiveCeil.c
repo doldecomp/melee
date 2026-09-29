@@ -33,7 +33,7 @@ void ftCo_800C23FC(Fighter_GObj* gobj)
     Vec3 ef_offset;
     Fighter* fp = GET_FIGHTER(gobj);
     ftCommon_8007E2FC(gobj);
-    fp->throw_flags = 0;
+    fp->x2210.throw_flags = 0;
     ef_offset.x = 0;
     ef_offset.y = fp->coll_data.ecb.top.y;
     ef_offset.z = 0;

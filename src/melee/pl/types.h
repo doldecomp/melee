@@ -11,7 +11,7 @@ struct plAllocInfo {
     FighterKind internal_id;
     u8 slot;
     s8 x5;
-    struct {
+    struct plAllocInfo_x6 {
         u8 b0 : 1;
         u8 has_transformation : 1;
         u8 b2 : 1;
@@ -20,7 +20,7 @@ struct plAllocInfo {
         u8 b5 : 1;
         u8 b6 : 1;
         u8 b7 : 1;
-    };
+    } x6;
 };
 
 /// @todo Probably the same struct as #plAllocInfo, figure out how to make them
@@ -31,7 +31,7 @@ struct plAllocInfo2 {
     FighterKind internal_id;
     u8 slot;
     enum_t unk8;
-    struct {
+    struct plAllocInfo2_xC {
         u8 b0 : 1;
         u8 has_transformation : 1;
         u8 b2 : 1;
@@ -40,7 +40,7 @@ struct plAllocInfo2 {
         u8 b5 : 1;
         u8 b6 : 1;
         u8 b7 : 1;
-    };
+    } xC;
 };
 
 struct plAttackStats {
@@ -62,9 +62,9 @@ struct plActionStats {
     // the pattern for plAttackStats... but pl_800386D8 directly references
     // x3E8. it doesnt really make sense that it would split the enum at
     // StatsAttack_KbSpecialNMt
-    /* +358 */ union {
+    /* +358 */ union plActionStats_x358 {
         struct plAttackStats x358_hits;
-        struct {
+        struct plActionStats_x358_x0 {
             u32 total;
             u32 by_attack_lo[35];
             u32 by_attack_hi[65];
@@ -74,8 +74,8 @@ struct plActionStats {
             u32 x4F8_count;
             u32 x4FC_count;
             u32 x500;
-        };
-    };
+        } x0;
+    } x358;
     /* +504 */ u8 x504[StatsAttack_Count]; ///< indexed by Struct2070::x2073
     /* +568 */ u32 x568;
     /* +56C */ u32 x56C;
@@ -99,7 +99,7 @@ struct plActionStats {
 
 struct pl_x8C0_t {
     int x0;
-    struct {
+    struct pl_x8C0_t_x4 {
         u16 x0;
         u8 x2;
         u8 x3_b0 : 1;
@@ -108,7 +108,7 @@ struct pl_x8C0_t {
 
 struct pl_x8D8_t {
     int x0;
-    struct {
+    struct pl_x8D8_t_x4 {
         u32 x0;
         u8 x4_b0 : 1;
         u8 x4_b1 : 1;
@@ -120,7 +120,7 @@ struct pl_x5EC_t {
     f32 x4;
     u32 x8;
     u32 xC;
-    struct {
+    struct pl_x5EC_t_x10 {
         float x0; ///< combo damage?
         s16 x4;
         u16 x6;
@@ -136,7 +136,7 @@ struct pl_x5EC_t {
 
 struct StaleMoveTable {
     /*   +0 */ int current_index;
-    /*   +4 */ struct {
+    /*   +4 */ struct StaleMoveTable_StaleMoves {
         u16 move_id;
         u16 attack_instance;
     } StaleMoves[10];
@@ -237,9 +237,9 @@ struct pl_StaleMoveTableExt_t {
     /* +DC4 */ int xDC4;
     /* +DC8 */ int xDC8;
     /* +DCC */ int xDCC;
-    /* +DD0 */ union {
+    /* +DD0 */ union pl_StaleMoveTableExt_t_xDD0 {
         u8 xDD0_value;
-        struct {
+        struct pl_StaleMoveTableExt_t_xDD0_x0 {
             u8 bit0 : 1;
             u8 bit1 : 1;
             u8 bit2 : 1;
@@ -248,11 +248,11 @@ struct pl_StaleMoveTableExt_t {
             u8 bit5 : 1;
             u8 bit6 : 1;
             u8 bit7 : 1;
-        };
+        } x0;
     } xDD0;
-    /* +DD1 */ union {
+    /* +DD1 */ union pl_StaleMoveTableExt_t_xDD1 {
         u8 xDD1_value;
-        struct {
+        struct pl_StaleMoveTableExt_t_xDD1_x0 {
             u8 bit0 : 1;
             u8 bit1 : 1;
             u8 bit2 : 1;
@@ -261,7 +261,7 @@ struct pl_StaleMoveTableExt_t {
             u8 bit5 : 1;
             u8 bit6 : 1;
             u8 bit7 : 1;
-        };
+        } x0;
     } xDD1;
 }; // UNKNOWN SIZE
 

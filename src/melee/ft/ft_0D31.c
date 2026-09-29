@@ -83,7 +83,7 @@ void ftCo_800D331C(Fighter_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
 
     if (fp->victim_gobj != NULL) {
-        if (fp->x221B_b5) {
+        if (fp->x221B.x221B_b5) {
             Fighter* temp_r3_2 = GET_FIGHTER(fp->victim_gobj);
             if (!temp_r3_2->is_sub_fighter) {
                 temp_r3_2->x2180 = fp->player_idx;
@@ -131,7 +131,7 @@ void ftCo_800D331C(Fighter_GObj* gobj)
     }
     ftCommon_8007DB24(gobj);
     fp->mv.co.unk_800D331C.x6C = fp->motion_id;
-    fp->mv.co.unk_800D331C.x70 = fp->x2070.x2073;
+    fp->mv.co.unk_800D331C.x70 = fp->x2070.x0.x2073;
 }
 
 void ftCo_800D34E0(Fighter_GObj* gobj)

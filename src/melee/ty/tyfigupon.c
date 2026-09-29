@@ -297,7 +297,7 @@ void _tyFigupon_803152BC(HSD_GObj* arg0)
 }
 
 typedef union {
-    struct {
+    struct TyFiguponDigitInit_s {
         s32 x0, x4, x8, xC;
     } s;
     s32 digits[4];
@@ -1146,6 +1146,11 @@ void _tyFigupon_80316C24(HSD_GObj* arg0)
 };
 /* 4D5AA0 */ static u16 _tyFigupon_804D5AA0[2] = { 12, 0 };
 
+union _tyFigupon_8031753C_panel {
+    HSD_Joint* joint;
+    GObj_RenderFunc render_cb;
+};
+
 void _tyFigupon_8031753C(void)
 {
     s32 remaining;
@@ -1153,10 +1158,7 @@ void _tyFigupon_8031753C(void)
     HSD_Joint* joint;
     HSD_Joint* bet_joint;
     HSD_Joint* par_joint;
-    union {
-        HSD_Joint* joint;
-        GObj_RenderFunc render_cb;
-    } panel;
+    union _tyFigupon_8031753C_panel panel;
     HSD_JObj* jobj;
     struct un_804D6EF4_t* ef4 = _tyFigupon_804D6EF4;
     s32 i;
@@ -1437,7 +1439,7 @@ void tyFigupon_Scene_OnEnter(void* arg0)
     HSD_JObj* jobj;
     void* ud;
     char* archive_name;
-    void* sp20;
+    HSD_Joint* sp20;
     u8 kind;
     PAD_STACK(16);
 

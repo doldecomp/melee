@@ -624,7 +624,7 @@ void it_8026B9A8(HSD_GObj* gobj, HSD_GObj* arg1, Fighter_Part arg2)
     }
 
     HSD_JObjRemoveAnimAll(jobj0);
-    ip->x524_cmd.u = NULL;
+    ip->x524_cmd.x8.u = NULL;
 }
 
 /// Multiply item's scale
@@ -705,7 +705,7 @@ void it_8026BC14(HSD_GObj* gobj)
 bool it_8026BC68(HSD_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
-    return ip->xDD0_flag.b0;
+    return ip->xDD0_flag.x0.b0;
 }
 
 /// @returns #Item::owner of @p gobj.
@@ -738,21 +738,21 @@ void it_8026BC90(HSD_GObj* gobj, Vec3* pos)
 void it_8026BCF4(HSD_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
-    ip->xDCD_flag.b2 = false;
+    ip->xDCD_flag.x0.b2 = false;
 }
 
 /// Sets #Item::xDCD_flag::bits::b2 of @p gobj.
 void it_8026BD0C(HSD_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
-    ip->xDCD_flag.b2 = true;
+    ip->xDCD_flag.x0.b2 = true;
 }
 
 /// Sets #Item::xDD0_flag::bits::b3 of @p gobj.
 void it_8026BD24(HSD_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
-    ip->xDD0_flag.b3 = true;
+    ip->xDD0_flag.x0.b3 = true;
 }
 
 /// Sets #Item::xDCC_flag::bits::b3 of @p gobj.
@@ -773,14 +773,14 @@ void it_8026BD54(HSD_GObj* gobj)
 void it_8026BD6C(HSD_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
-    ip->xDCD_flag.b3 = true;
+    ip->xDCD_flag.x0.b3 = true;
 }
 
 /// Sets #Item::xDCD_flag::bits::b4 of @p gobj.
 void it_8026BD84(HSD_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
-    ip->xDCD_flag.b4 = true;
+    ip->xDCD_flag.x0.b4 = true;
 }
 
 /// Sets #Item::xDC8_word::flags::x1A of @p gobj.
@@ -803,7 +803,7 @@ void it_8026BDCC(HSD_GObj* gobj)
     /// @todo Each of these is an inlined function. Some are already defined.
     {
         Item* ip = GET_ITEM(gobj);
-        ip->xDD0_flag.b3 = false;
+        ip->xDD0_flag.x0.b3 = false;
     }
 
     {
@@ -813,12 +813,12 @@ void it_8026BDCC(HSD_GObj* gobj)
 
     {
         Item* ip = GET_ITEM(gobj);
-        ip->xDCD_flag.b3 = false;
+        ip->xDCD_flag.x0.b3 = false;
     }
 
     {
         Item* ip = GET_ITEM(gobj);
-        ip->xDCD_flag.b4 = false;
+        ip->xDCD_flag.x0.b4 = false;
     }
 
     {
@@ -833,7 +833,7 @@ void it_8026BE28(HSD_GObj* gobj)
     /// @todo Each of these is an inlined function. Some are already defined.
     {
         Item* ip = GET_ITEM(gobj);
-        ip->xDD0_flag.b3 = true;
+        ip->xDD0_flag.x0.b3 = true;
     }
 
     {
@@ -843,12 +843,12 @@ void it_8026BE28(HSD_GObj* gobj)
 
     {
         Item* ip = GET_ITEM(gobj);
-        ip->xDCD_flag.b3 = true;
+        ip->xDCD_flag.x0.b3 = true;
     }
 
     {
         Item* ip = GET_ITEM(gobj);
-        ip->xDCD_flag.b4 = true;
+        ip->xDCD_flag.x0.b4 = true;
     }
 
     {
@@ -979,18 +979,18 @@ HSD_GObj* it_8026BE84(BobOmbRain* bobOmbRain)
         break;
     }
 
-    if (gobj != NULL && bobOmbRain->x1C.b0) {
+    if (gobj != NULL && bobOmbRain->x1C.x0.b0) {
         ip = gobj->user_data;
-        ip->xDD0_flag.b3 = true;
+        ip->xDD0_flag.x0.b3 = true;
 
         item_data_2 = gobj->user_data;
         item_data_2->xDCC_flag.b3 = false;
 
         item_data_3 = gobj->user_data;
-        item_data_3->xDCD_flag.b3 = true;
+        item_data_3->xDCD_flag.x0.b3 = true;
 
         item_data_4 = gobj->user_data;
-        item_data_4->xDCD_flag.b4 = true;
+        item_data_4->xDCD_flag.x0.b4 = true;
 
         item_data_5 = gobj->user_data;
         item_data_5->xDC8_word.flags.x1A = false;
