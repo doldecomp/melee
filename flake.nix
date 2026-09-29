@@ -8,6 +8,28 @@
       url = "github:r-burns/aurora/e6a6f02ace4146e8a2f648d5c274dbb7dd89665c";
       flake = false;
     };
+
+    # Tools; configure.py reads their versions from flake.lock
+    compilers = {
+      url = "https://files.decomp.dev/compilers_20251118.zip";
+      flake = false;
+    };
+    decomp-toolkit = {
+      url = "github:encounter/decomp-toolkit/v1.8.3";
+      flake = false;
+    };
+    objdiff = {
+      url = "github:encounter/objdiff/v3.6.1";
+      flake = false;
+    };
+    sjiswrap = {
+      url = "file+https://github.com/encounter/sjiswrap/releases/download/v1.2.2/sjiswrap-windows-x86.exe";
+      flake = false;
+    };
+    wibo = {
+      url = "github:decompals/wibo/0.7.0";
+      flake = false;
+    };
   };
 
   outputs =
@@ -17,7 +39,7 @@
       treefmt-nix,
       aurora-src,
       ...
-    }:
+    }@inputs:
     let
       inherit (nixpkgs) lib;
 
@@ -41,10 +63,12 @@
           ];
 
           devkitppc = pkgsMinPython.callPackage ./.nix/devkitppc.nix { };
-          decomp-toolkit = pkgs.callPackage ./.nix/decomp-toolkit.nix { };
-          mwcc = pkgsMinPython.callPackage ./.nix/mwcc.nix { };
-          objdiff = pkgs.callPackage ./.nix/objdiff.nix { };
-          wibo = pkgs.pkgsi686Linux.callPackage ./.nix/wibo.nix { };
+          decomp-toolkit = pkgs.callPackage ./.nix/decomp-toolkit.nix {
+            src = inputs.decomp-toolkit;
+          };
+          mwcc = inputs.compilers;
+          objdiff = pkgs.callPackage ./.nix/objdiff.nix { src = inputs.objdiff; };
+          wibo = pkgs.pkgsi686Linux.callPackage ./.nix/wibo.nix { src = inputs.wibo; };
 
           main-dol = pkgsMinPython.requireFile {
             name = "main.dol";
@@ -69,6 +93,7 @@
                 wibo
                 main-dol
                 ;
+              sjiswrap = inputs.sjiswrap;
               python3 = pkgs.python3.withPackages (ps: [
                 ps.pyelftools
                 ps.pcpp
