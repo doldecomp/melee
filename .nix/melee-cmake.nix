@@ -5,11 +5,12 @@
   aurora-src,
 }:
 stdenv.mkDerivation {
-  name = "melee-gcc-native";
+  name = "melee-cmake";
 
   src = lib.fileset.toSource {
     root = ../.;
     fileset = lib.fileset.unions [
+      ../CMakeLists.txt
       ../src/sysdolphin
       ../src/melee
       ../src/Runtime
@@ -17,10 +18,6 @@ stdenv.mkDerivation {
       ../src/m2c_macros.h
     ];
   };
-
-  postPatch = ''
-    cp ${./CMakeLists.txt} CMakeLists.txt
-  '';
 
   nativeBuildInputs = [
     cmake

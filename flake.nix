@@ -77,7 +77,7 @@
 
             default = melee;
 
-            melee-gcc-native = pkgsMinPython.pkgsi686Linux.callPackage ./.nix/melee-gcc-native.nix {
+            melee-cmake = pkgsMinPython.pkgsi686Linux.callPackage ./.nix/melee-cmake.nix {
               inherit aurora-src;
             };
 
@@ -120,7 +120,7 @@
       overlays.default = final: prev: {
         inherit (self.packages.${final.system})
           melee
-          melee-gcc-native
+          melee-cmake
           melee-docs
           m2c
           ;
