@@ -23,6 +23,10 @@ build.ninja
 __pycache__
 .mypy_cache
 .cache/
+CMakeCache.txt
+CMakeFiles/
+Makefile
+cmake_install.cmake
 
 # Original files
 orig/*/*
