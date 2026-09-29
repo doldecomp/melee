@@ -81,6 +81,12 @@
               inherit aurora-src;
             };
 
+            melee-dwarf = pkgs.callPackage ./.nix/melee-cmake.nix {
+              inherit aurora-src;
+              dwarf = true;
+              inherit (pkgs.pkgsCross.ppc-embedded) newlib;
+            };
+
             melee-docs =
               (pkgs.callPackage ./.nix/melee-docs.nix {
                 inherit mwcc;
@@ -113,7 +119,19 @@
             packages = [
               pkgs.pre-commit
               m2c
-            ];
+              pkgs.cmake
+              pkgs.ninja
+              pkgs.llvmPackages_22.clang-unwrapped
+              pkgs.llvmPackages_22.bintools-unwrapped
+            ]
+            # The native CMake preset builds 32-bit
+            ++ lib.optionals pkgs.stdenv.hostPlatform.isx86_64 [ pkgs.gcc_multi ];
+
+            # Used by the CMake presets
+            env = {
+              AURORA_SRC = "${aurora-src}";
+              NEWLIB_INCLUDE = "${pkgs.pkgsCross.ppc-embedded.newlib}/powerpc-none-eabi/include";
+            };
           };
         };
     in
@@ -122,6 +140,7 @@
         inherit (self.packages.${final.system})
           melee-dtk
           melee-cmake
+          melee-dwarf
           melee-docs
           m2c
           ;

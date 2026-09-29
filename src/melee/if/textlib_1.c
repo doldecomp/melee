@@ -1,7 +1,5 @@
 #include <Runtime/platform.h>
 
-#include <printf.h> // IWYU pragma: keep
-
 #include "textdraw.h"
 #include "textlib.h"
 #include "types.h"
