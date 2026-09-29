@@ -65,9 +65,7 @@ def parse_args() -> list[Path]:
 
 def rewrite_file(src_path: Path) -> None:
     logging.debug("Opening `%s`", src_path)
-    # text = src_path.read_text(encoding="utf-8", errors="strict", newline="")  # Newline arg only works on Python 3.13+, but our Python venv is set to 3.12.5 in \.venv\pyvenv.cfg
-    with src_path.open(mode="r", encoding="utf-8", errors="strict", newline="") as f:
-        text = f.read()
+    text = src_path.read_text(encoding="utf-8", errors="strict", newline="")
     local_root = src_path.parent.resolve(strict=True)
     in_roots = [local_root, *IN_ROOTS]
     out_roots = [*OUT_ROOTS]
