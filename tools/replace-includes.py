@@ -65,7 +65,7 @@ def parse_args() -> list[Path]:
 
 def rewrite_file(src_path: Path) -> None:
     logging.debug("Opening `%s`", src_path)
-    text = src_path.read_text(encoding="utf-8", errors="strict")
+    text = src_path.read_text(encoding="utf-8", errors="strict", newline="")
     local_root = src_path.parent.resolve(strict=True)
     in_roots = [local_root, *IN_ROOTS]
     out_roots = [*OUT_ROOTS]
@@ -147,7 +147,7 @@ def rewrite_file(src_path: Path) -> None:
         return s
 
     _ = src_path.write_text(
-        INCLUDE_RE.sub(repl, text), encoding="utf-8", errors="strict"
+        INCLUDE_RE.sub(repl, text), encoding="utf-8", errors="strict", newline=""
     )
 
 
