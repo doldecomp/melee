@@ -60,7 +60,7 @@
         in
         {
           packages = rec {
-            melee = pkgs.callPackage ./.nix/melee.nix {
+            melee-dtk = pkgs.callPackage ./.nix/melee-dtk.nix {
               inherit
                 decomp-toolkit
                 devkitppc
@@ -75,7 +75,7 @@
               ]);
             };
 
-            default = melee;
+            default = melee-dtk;
 
             melee-cmake = pkgsMinPython.pkgsi686Linux.callPackage ./.nix/melee-cmake.nix {
               inherit aurora-src;
@@ -101,13 +101,13 @@
             }).config.build.wrapper;
 
           devShells.default = pkgs.mkShellNoCC {
-            shellHook = self.packages.${system}.melee.postPatch + ''
+            shellHook = self.packages.${system}.default.postPatch + ''
               export PRE_COMMIT_HOME="$PWD/build/pre-commit"
               mkdir -p "$PRE_COMMIT_HOME"
-              ./configure.py ${lib.escapeShellArgs self.packages.${system}.melee.configureFlags}
+              ./configure.py ${lib.escapeShellArgs self.packages.${system}.default.configureFlags}
             '';
 
-            inputsFrom = [ self.packages.${system}.melee ];
+            inputsFrom = [ self.packages.${system}.default ];
 
             packages = [
               pkgs.pre-commit
@@ -119,7 +119,7 @@
     {
       overlays.default = final: prev: {
         inherit (self.packages.${final.system})
-          melee
+          melee-dtk
           melee-cmake
           melee-docs
           m2c
