@@ -47,6 +47,48 @@ static inline float my_sqrtf(float x)
 
 /* 03D514 */ static void plBonusLib_8003D514(int);
 
+/// Static Functions
+
+static inline Pl_ItemLog match_item_kind(ItemKind kind)
+{
+    if (kind >= It_Kind_Common_Start && kind < It_Kind_Common_End) {
+        return (Pl_ItemLog) kind;
+    } else {
+        switch (kind) {
+        case It_Kind_Lucky_Egg:
+            return Pl_ItemLog_Unk35;
+        case It_Kind_WhispyApple:
+            return Pl_ItemLog_Unk36;
+        case It_Kind_WhispyHealApple:
+            return Pl_ItemLog_Unk37;
+        case It_Kind_Hammer_Head:
+            return Pl_ItemLog_Unk38;
+        default:
+            return -1;
+        }
+    }
+}
+
+static inline bool unk_cond(int arg0, int temp_r23)
+{
+    if (temp_r23 == 6 || temp_r23 == arg0 ||
+        pl_CheckIfSameTeam(arg0, temp_r23))
+    {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+static inline bool pokemon_item_kind_check(int x)
+{
+    if (x >= It_Kind_Pokemon_Start && x < It_Kind_Pokemon_End) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
 void plBonusLib_8003D514(int arg0)
 {
     Vec3 sp18;
@@ -86,26 +128,6 @@ bool pl_8003D60C(int arg0)
     if (((arg0 >= 0xA0) && (arg0 < 0xA1)) ||
         ((arg0 >= 0xEA) && (arg0 < 0xEE)) || (arg0 == 0xE1))
     {
-        return true;
-    } else {
-        return false;
-    }
-}
-
-static inline bool unk_cond(int arg0, int temp_r23)
-{
-    if (temp_r23 == 6 || temp_r23 == arg0 ||
-        pl_CheckIfSameTeam(arg0, temp_r23))
-    {
-        return true;
-    } else {
-        return false;
-    }
-}
-
-static inline bool between_A1_D0(int x)
-{
-    if (x >= 0xA1 && x < 0xD0) {
         return true;
     } else {
         return false;
@@ -211,7 +233,7 @@ void pl_8003D644(int arg0, int arg1, int arg2, int arg3)
         if (temp_r23 == 6 && temp_r28 == 2 && temp_r29 == 6) {
             pl_80038788(arg0, 0xC7, 1);
         }
-        if (temp_r28 != 2 || !between_A1_D0(temp_r29)) {
+        if (temp_r28 != 2 || !pokemon_item_kind_check(temp_r29)) {
             if (unk_cond(arg0, temp_r23)) {
                 if (temp_r23 == arg0) {
                     pl_80041744(temp_r23, temp_r22, temp_r24);
@@ -341,7 +363,7 @@ void pl_8003D644(int arg0, int arg1, int arg2, int arg3)
                             break;
                         }
                     }
-                    if (between_A1_D0(temp_r29)) {
+                    if (pokemon_item_kind_check(temp_r29)) {
                         pl_80038824(temp_r23, 0xCB);
                     }
                     if (pl_8003D60C(temp_r29)) {
@@ -434,35 +456,15 @@ void pl_8003E17C(
     pl_StaleMoveTableExt_t* temp_r31 =
         Player_GetStaleMoveTableIndexPtr2(player_id);
     ItemKind kind = itGetKind(item_gobj);
-    ItemKind kind2;
+    Pl_ItemLog kind2;
 
-    if ((kind >= It_Kind_Capsule) && (kind < It_Kind_L_Gun_Ray)) {
-        kind2 = kind;
-    } else { // Not one of the common items
-        switch (kind) {
-        case It_Kind_Lucky_Egg:
-            kind2 = It_Kind_L_Gun_Ray;
-            break;
-        case It_Kind_WhispyApple:
-            kind2 = It_Kind_StarRod_Star;
-            break;
-        case It_Kind_WhispyHealApple:
-            kind2 = It_Kind_LipStick_Spore;
-            break;
-        case It_Kind_Hammer_Head:
-            kind2 = It_Kind_S_Scope_Beam;
-            break;
-        default:
-            kind2 = -1;
-            break;
-        }
-    }
+    kind2 = match_item_kind(kind);
 
     // If item kind is one of the reassigned types from the switch statement
     // above (aka not a common item)
     if (kind2 != -1 &&
-        (kind2 == It_Kind_L_Gun_Ray || kind2 == It_Kind_Egg ||
-         kind2 == It_Kind_S_Scope_Beam || it_8026B7E8(item_gobj) == 1))
+        (kind2 == Pl_ItemLog_Unk35 || kind2 == Pl_ItemLog_Unk03 ||
+         kind2 == Pl_ItemLog_Unk38 || it_8026B7E8(item_gobj) == 1))
     {
         int cnt;
 
@@ -529,32 +531,13 @@ u32 pl_8003E420(int arg0)
     return sum;
 }
 
-static inline int match_item_kind(int kind)
-{
-    if (kind >= It_Common_Start && kind < It_Common_End) {
-        return kind;
-    } else {
-        switch (kind) {
-        case It_Kind_Lucky_Egg:
-            return Pl_ItemLog_Unk35;
-        case It_Kind_WhispyApple:
-            return Pl_ItemLog_Unk36;
-        case It_Kind_WhispyHealApple:
-            return Pl_ItemLog_Unk37;
-        case It_Kind_Hammer_Head:
-            return Pl_ItemLog_Unk38;
-        default:
-            return -1;
-        }
-    }
-}
-
-void pl_8003E4A4(int slot, bool arg1, void* arg2, int count)
+void pl_8003E4A4(int slot, bool arg1, ItemKind arg2[], int count)
 {
     pl_StaleMoveTableExt_t* table = Player_GetStaleMoveTableIndexPtr2(slot);
-    int* moves = arg2;
+    ItemKind* moves = arg2;
     u32 seen[Pl_ItemLog_Terminate];
     int i;
+    PAD_STACK(4);
 
     for (i = 0; i < Pl_ItemLog_Terminate; i++) {
         seen[i] = 0;

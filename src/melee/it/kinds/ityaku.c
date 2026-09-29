@@ -116,7 +116,7 @@ Item_GObj* it_802E6AEC(Ground* arg0, int arg1, int arg2, HSD_JObj* arg3,
     spawn.x4_parent_gobj2 = spawn.x0_parent_gobj;
     spawn.x44_flag.b0 = arg5 ? 1 : 0;
     spawn.x40 = 0;
-    it_804D6D38[spawn.kind - It_Kind_Kuriboh]->x0_common_attr = &it_803F8C08;
+    it_804D6D38[spawn.kind - It_Kind_Item_End]->x0_common_attr = &it_803F8C08;
 
     item_gobj = Item_80268B18(&spawn);
     if (item_gobj != NULL) {

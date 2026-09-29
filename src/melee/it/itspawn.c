@@ -1,5 +1,7 @@
 #include "itspawn.h"
 
+#include <Runtime/platform.h>
+
 #include <placeholder.h>
 
 #include "it_26B1.h"
@@ -33,15 +35,16 @@ static void sdata2_order(void)
 }
 #endif
 
+/// Only called by lbSnap_8001DC0C (a snapshot-related function)
 void it_8026C47C(struct it_8026C47C_arg0_t* arg_struct)
 {
-    u32 it_kind;
+    ItemKind it_kind;
     u32 unused;
     s32 bit_idx;
     s32* word;
     PAD_STACK(8);
 
-    it_kind = (unused = It_Kind_Capsule);
+    it_kind = (unused = It_Kind_Start); // set to 0
     bit_idx = 0;
     word = &arg_struct->unk0;
     arg_struct->unk0 = 0;
@@ -52,7 +55,8 @@ void it_8026C47C(struct it_8026C47C_arg0_t* arg_struct)
     arg_struct->unk14 = 0;
     arg_struct->unk18 = 0;
     arg_struct->unk1C = 0;
-    while (it_kind < 238) {
+
+    while ((u32) it_kind < It_Kind_Max_Check) {
         if (it_80272828(it_kind)) {
             *word |= 1 << bit_idx;
         }
@@ -207,7 +211,7 @@ void it_8026CA4C(ItemPickTable* alloc, s32* arg1, u64 arg2, s32 arg3, f32 arg4)
     s32 i = arg3;
     s32 sum = 0;
 
-    while (i < It_Kind_L_Gun_Ray) {
+    while (i < It_Kind_Common_End) {
         if (mask & 1) {
             sum += arg4 * *p + 0.99f;
         }
@@ -250,7 +254,7 @@ void it_8026CB9C(s32* counts, u64 mask, f32 weight)
     p = counts;
     it_kind = 0;
     cnt = 0;
-    while (it_kind < It_Kind_L_Gun_Ray) {
+    while (it_kind < It_Kind_Common_End) {
         if ((mask & 1) && *p != 0) {
             cnt++;
         }
@@ -267,7 +271,7 @@ void it_8026CB9C(s32* counts, u64 mask, f32 weight)
     p2 = counts;
     it_kind2 = 0;
     cumulative = 0;
-    while (it_kind2 < It_Kind_L_Gun_Ray) {
+    while (it_kind2 < It_Kind_Common_End) {
         if ((mask & 1) && *p2 != 0) {
             (*item_kinds)[cnt2] = it_kind2;
             (*weights)[idx] = cumulative;
@@ -301,10 +305,10 @@ void it_8026CD50(s32* counts, u64 mask, f32 weight)
     u64 backup;
 
     backup = mask;
-    p = counts + It_Kind_BombHei;
+    p = counts + It_Kind_Container_End;
     cnt = 0;
-    it_kind = It_Kind_BombHei;
-    while (it_kind < It_Kind_L_Gun_Ray) {
+    it_kind = It_Kind_Container_End;
+    while (it_kind < It_Kind_Common_End) {
         if ((mask & 1) && *p != 0) {
             cnt++;
         }
@@ -326,10 +330,10 @@ void it_8026CD50(s32* counts, u64 mask, f32 weight)
 
     idx = (cnt2 = 0);
     mask = backup;
-    p2 = counts + It_Kind_BombHei;
+    p2 = counts + It_Kind_Container_End;
     cumulative = 0;
-    it_kind2 = It_Kind_BombHei;
-    while (it_kind2 < It_Kind_L_Gun_Ray) {
+    it_kind2 = It_Kind_Container_End;
+    while (it_kind2 < It_Kind_Common_End) {
         if ((mask & 1) && *p2 != 0) {
             (*item_kinds)[cnt2] = it_kind2;
             (*weights)[idx] = cumulative;
@@ -368,7 +372,7 @@ void it_8026CF04(void)
         item_common = it_804D6D28;
         cumulative = 0;
         for (; i < 4; i++, idx++) {
-            it_804A0E60.x4[i] = It_Kind_Kuriboh + i;
+            it_804A0E60.x4[i] = It_Kind_Monster_Start + i;
             it_804A0E60.xC[idx] = cumulative;
             (void) it_804A0E60.xC[(u32) (p = &item_common->x128[idx])];
             cumulative += *p;

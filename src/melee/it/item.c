@@ -166,18 +166,20 @@ void Item_80266FCC(void)
 
 static void ItUnkHoldKind(HSD_GObj* gobj)
 {
-    Item* it = HSD_GObjGetUserData(gobj);
+    Item* it = GET_ITEM(gobj);
 
     switch (it->hold_kind) {
-    case 4:
-    case 5:
-    case 6:
-    case 7: {
+    case ITEM_HOLD_4:
+    case ITEM_HOLD_5:
+    case ITEM_HOLD_6:
+    case ITEM_HOLD_7: {
         int temp_r3 = gm_8017E068();
         if (temp_r3 >= 0) {
             it->xC3C = it_804D6D28->x80_float[temp_r3];
         }
     }
+    default:
+        break;
     }
 }
 
@@ -296,27 +298,27 @@ static void Item_802674AC(SpawnItem* spawnItem)
         return;
     }
 
-    if (kind < It_Kind_L_Gun_Ray) {
+    if (kind < It_Kind_Common_End) {
         spawnItem->hold_kind = 0;
         return;
     }
 
-    if (kind < It_Kind_Kuriboh) {
+    if (kind < It_Kind_Item_End) {
         spawnItem->hold_kind = 1;
         return;
     }
 
-    if (kind < It_Kind_Octarock_Stone) {
+    if (kind < It_Kind_Monster_End) {
         spawnItem->hold_kind = 6;
         return;
     }
 
-    if (kind < It_Kind_Mario_Fire) {
+    if (kind < It_Kind_Character_Start) { // If item is It_Kind_Octarock_Stone
         spawnItem->hold_kind = 7;
         return;
     }
 
-    if (kind < It_Kind_Unk4) {
+    if (kind < It_Kind_Character_End) {
         spawnItem->hold_kind = 8;
         return;
     }
@@ -326,7 +328,7 @@ static void Item_802674AC(SpawnItem* spawnItem)
         return;
     }
 
-    if (kind < It_PKind_Random) {
+    if (kind < It_Kind_Misc_End) {
         spawnItem->hold_kind = 11;
         return;
     }
@@ -336,12 +338,12 @@ static void Item_802674AC(SpawnItem* spawnItem)
         return;
     }
 
-    if (kind < It_Kind_Old_Kuri) {
+    if (kind < It_PKind_Related_End) {
         spawnItem->hold_kind = 10;
         return;
     }
 
-    if (kind < It_Kind_Arwing_Laser) {
+    if (kind < It_Kind_Stage_End) {
         spawnItem->hold_kind = 4;
         return;
     }
@@ -351,46 +353,46 @@ static void Item_802674AC(SpawnItem* spawnItem)
 
 static void Item_802675A8(HSD_GObj* gobj)
 {
-    Item* item_data = gobj->user_data;
+    Item* item_data = GET_ITEM(gobj);
 
     switch (item_data->hold_kind) {
-    case 0:
+    case ITEM_HOLD_0:
         Item_804A0C64.x0--;
         break;
-    case 1:
+    case ITEM_HOLD_1:
         Item_804A0C64.x8--;
         break;
-    case 2:
+    case ITEM_HOLD_2:
         Item_804A0C64.x10--;
         break;
-    case 3:
+    case ITEM_HOLD_3:
         Item_804A0C64.x58--;
         break;
-    case 4:
+    case ITEM_HOLD_4:
         Item_804A0C64.x3C--;
         break;
-    case 5:
+    case ITEM_HOLD_5:
         Item_804A0C64.x40--;
         break;
-    case 6:
+    case ITEM_HOLD_6:
         Item_804A0C64.x2C--;
         break;
-    case 7:
+    case ITEM_HOLD_7:
         Item_804A0C64.x34--;
         break;
-    case 8:
+    case ITEM_HOLD_8:
         Item_804A0C64.x18--;
         break;
-    case 9:
+    case ITEM_HOLD_9:
         Item_804A0C64.x1C--;
         break;
-    case 10:
+    case ITEM_HOLD_10:
         Item_804A0C64.x24--;
         break;
-    case 11:
+    case ITEM_HOLD_11:
         Item_804A0C64.x48--;
         break;
-    case 12:
+    case ITEM_HOLD_12:
         Item_804A0C64.x50--;
         break;
     }
@@ -404,7 +406,7 @@ static void Item_802676F4(HSD_GObj* gobj)
 {
     Item* item_data = gobj->user_data;
     switch (item_data->hold_kind) {
-    case 0:
+    case ITEM_HOLD_0:
         Item_804A0C64.x0++;
 
         if (item_data->kind == It_Kind_M_Ball) {
@@ -412,39 +414,41 @@ static void Item_802676F4(HSD_GObj* gobj)
         }
 
         break;
-    case 1:
+    case ITEM_HOLD_1:
         Item_804A0C64.x8++;
         break;
-    case 2:
+    case ITEM_HOLD_2:
         Item_804A0C64.x10++;
         it_80274EE8();
         break;
-    case 3:
+    case ITEM_HOLD_3:
         Item_804A0C64.x58++;
         break;
-    case 4:
+    case ITEM_HOLD_4:
         Item_804A0C64.x3C++;
         break;
-    case 5:
+    case ITEM_HOLD_5:
         Item_804A0C64.x40++;
         break;
-    case 6:
+    case ITEM_HOLD_6:
         Item_804A0C64.x2C++;
         break;
-    case 7:
+    case ITEM_HOLD_7:
         Item_804A0C64.x34++;
         break;
-    case 8:
+    case ITEM_HOLD_8:
         Item_804A0C64.x18++;
         break;
-    case 10:
+    case ITEM_HOLD_10:
         Item_804A0C64.x24++;
         break;
-    case 11:
+    case ITEM_HOLD_11:
         Item_804A0C64.x48++;
         break;
-    case 12:
+    case ITEM_HOLD_12:
         Item_804A0C64.x50++;
+        break;
+    default:
         break;
     }
 
@@ -535,23 +539,23 @@ static bool Item_8026784C(enum_t dropItem, int _)
 void Item_80267978(HSD_GObj* gobj)
 {
     Item* item_data = gobj->user_data;
-    if (item_data->kind < It_Kind_Kuriboh) {
-        // Common items
+    if (item_data->kind < It_Kind_Item_End) {
+        // Common or item-related items
         item_data->xC4_article_data = it_804D6D24[item_data->kind];
         item_data->xB8_itemLogicTable = &it_803F14C4[item_data->kind];
     } else if (item_data->kind < It_PKind_Start) {
-        // Character items
-        int idx = item_data->kind - It_Kind_Kuriboh;
+        // Character or Monster items
+        int idx = item_data->kind - It_Kind_Monster_Start;
         item_data->xC4_article_data = it_804D6D38[idx];
         item_data->xB8_itemLogicTable = &it_803F3100[idx];
-    } else if (item_data->kind < It_Kind_Old_Kuri) {
-        // Pokemon
-        int idx = item_data->kind - It_PKind_Start;
+    } else if (item_data->kind < It_Kind_Pokemon_End) {
+        // Pokemon and related items
+        int idx = item_data->kind - It_Kind_Pokemon_Start;
         item_data->xC4_article_data = it_804D6D30[idx];
         item_data->xB8_itemLogicTable = &it_803F23CC[idx];
     } else {
-        // Stage items
-        int idx = item_data->kind - It_Kind_Old_Kuri;
+        // Stage or Monster 2 items
+        int idx = item_data->kind - It_Kind_Monster2_Start;
         item_data->xC4_article_data = it_804A0F60[idx];
         item_data->xB8_itemLogicTable = &it_803F4D20[idx];
         if (item_data->xC4_article_data == NULL) {
@@ -870,8 +874,8 @@ static void foobar(HSD_GObj* gobj)
 {
     Item* it = GET_ITEM(gobj);
     switch (it->hold_kind) {
-    case 0:
-    case 6:
+    case ITEM_HOLD_0:
+    case ITEM_HOLD_6:
         if (it->xD0C == 2) {
             it->xDD0_flag.b7 = 1;
         }
@@ -891,8 +895,8 @@ static void foobar2(HSD_GObj* gobj)
 {
     Item* it = GET_ITEM(gobj);
     // Check if item is a character item with an owner
-    if (it->kind >= It_Kind_Mario_Fire && it->kind < It_Kind_Unk4 &&
-        ftLib_IsFighter(it->owner))
+    if (it->kind >= It_Kind_Character_Start &&
+        it->kind < It_Kind_Character_End && ftLib_IsFighter(it->owner))
     {
         it->xDC8_word.flags.xE = 1;
         it->ecb_lock = ftLib_GetKind(it->owner);
@@ -934,21 +938,21 @@ static HSD_GObj* Item_8026862C(SpawnItem* spawnItem)
     if (gobj == NULL) {
         return NULL;
     }
-    if (spawnItem->kind < It_Kind_Kuriboh) {
-        // Common items
+    if (spawnItem->kind < It_Kind_Item_End) {
+        // Common or item-related items
         GObj_SetupGXLink(gobj, it_803F1418[spawnItem->kind].x0_renderFunc, 6,
                          0);
-    } else if (spawnItem->kind < It_PKind_Start) {
-        // Character items
-        int idx = spawnItem->kind - It_Kind_Kuriboh;
+    } else if (spawnItem->kind < It_Kind_Pokemon_Start) {
+        // Character or Monster items
+        int idx = spawnItem->kind - It_Kind_Monster_Start;
         GObj_SetupGXLink(gobj, it_803F2F28[idx].x0_renderFunc, 6, 0);
-    } else if (spawnItem->kind < It_Kind_Old_Kuri) {
-        // Pokemon
-        int idx = spawnItem->kind - It_PKind_Start;
+    } else if (spawnItem->kind < It_Kind_Pokemon_End) {
+        // Pokemon and related items
+        int idx = spawnItem->kind - It_Kind_Pokemon_Start;
         GObj_SetupGXLink(gobj, it_803F2310[idx].x0_renderFunc, 6, 0);
     } else {
-        // Stage items
-        int idx = spawnItem->kind - It_Kind_Old_Kuri;
+        // Stage and Monster 2 items
+        int idx = spawnItem->kind - It_Kind_Monster2_Start;
         GObj_SetupGXLink(gobj, it_803F4CA8[idx].x0_renderFunc, 6, 0);
     }
     user_data = HSD_ObjAlloc(&item_alloc_data);
@@ -1318,7 +1322,7 @@ static void Item_80269528(HSD_GObj* gobj)
         }
     }
     if (item_data->xDC8_word.flags.x15 != 0 &&
-        item_data->kind < It_Kind_L_Gun_Ray && !item_data->xDD0_flag.b3)
+        item_data->kind < It_Kind_Common_End && !item_data->xDD0_flag.b3)
     {
         item_data->xD44_lifeTimer -= 1.0f;
         if (item_data->xD44_lifeTimer <= 0.0f) {
@@ -1562,7 +1566,7 @@ static bool Item_80269DC8(HSD_GObj* gobj)
     HSD_GObjPredicate hit_shield;
     Item* item_data = gobj->user_data;
 
-    if (item_data->xDCE_flag.b5 && item_data->ground_or_air == 1 &&
+    if (item_data->xDCE_flag.b5 && item_data->ground_or_air == GA_Air &&
         (item_data->xDCE_flag.b4 ||
          item_data->xC54 < (f32) M_PI / 180 * (90 + it_804D6D28->unk_degrees)))
     {
@@ -1889,7 +1893,8 @@ void Item_8026A848(HSD_GObj* gobj, HSD_GObj* fighter_gobj)
 {
     Item* temp_item = GET_ITEM(gobj);
 
-    if (temp_item->hold_kind == 8 && temp_item->kind != It_Kind_Link_Bomb &&
+    if (temp_item->hold_kind == ITEM_HOLD_8 &&
+        temp_item->kind != It_Kind_Link_Bomb &&
         temp_item->kind != It_Kind_CLink_Bomb &&
         temp_item->kind != It_Kind_Peach_Turnip &&
         temp_item->kind != It_Kind_Peach_Parasol)
@@ -1904,10 +1909,10 @@ void Item_8026A848(HSD_GObj* gobj, HSD_GObj* fighter_gobj)
 
 static void DestroyItemInline(HSD_GObj* gobj, Item* other_ip)
 {
-    Item* ip = gobj->user_data;
+    Item* ip = GET_ITEM(gobj);
     HSD_GObj* other = other_ip->owner;
 
-    if (ip->hold_kind == 8 && ip->kind != It_Kind_Link_Bomb &&
+    if (ip->hold_kind == ITEM_HOLD_8 && ip->kind != It_Kind_Link_Bomb &&
         ip->kind != It_Kind_CLink_Bomb && ip->kind != It_Kind_Peach_Turnip &&
         ip->kind != It_Kind_Peach_Parasol)
     {

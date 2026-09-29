@@ -36,7 +36,7 @@
 void ftPe_SpecialHi_8011D424(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if (fp->mv.pe.specialhi.kind == It_Kind_Capsule) {
+    if (fp->mv.pe.specialhi.kind == It_Kind_Start) {
         fp->mv.pe.specialhi.kind = It_Kind_Peach_Parasol;
         if (fp->u.pe.parasol_gobj_0 == NULL) {
             Vec3 pos;
@@ -147,7 +147,7 @@ static void doEnter(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     fp->cmd_vars[0] = fp->cmd_vars[1] = fp->cmd_vars[2] = 0;
     fp->throw_flags = 0;
-    fp->mv.pe.specialhi.kind = It_Kind_Capsule;
+    fp->mv.pe.specialhi.kind = It_Kind_Start;
     fp->x2222_b2 = true;
     {
         HSD_GObj* igobj = fp->item_gobj;

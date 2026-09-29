@@ -17,7 +17,7 @@ static void sdata2_order(void)
     (void) 1.0f;
     (void) 0.5f;
     (void) 0.0f;
-    (void) 1.5707963267948966;
+    (void) M_PI_2;
     (void) 0.785398185f;
     (void) 1.57079637f;
     (void) 3.1415926535897931;

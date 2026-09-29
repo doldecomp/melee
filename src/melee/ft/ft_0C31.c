@@ -111,7 +111,7 @@ void ftCo_800C6408(Fighter_GObj* gobj)
         sp2C.w = 0.0F;
         sp2C.z = 0.0F;
         sp2C.x = 0.0F;
-        sp2C.y = 1.5707963267948966 * temp_r31->facing_dir;
+        sp2C.y = M_PI_2 * temp_r31->facing_dir;
 
         HSD_JObjSetRotation(temp_r31->x20A0_accessory, &sp2C);
 

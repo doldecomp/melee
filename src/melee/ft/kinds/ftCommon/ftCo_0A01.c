@@ -236,7 +236,7 @@ static void sdata2_order(void)
  * for which items the CPU should prefer to target.
  * Higher numbers are preferred.
  */
-int ftCo_803C5A68[] = {
+int ftCo_803C5A68[It_Kind_Common_End] = {
     1, 0, 0, 1, 0, 0, 0, 1, 7, 6, 5, 4, 4, 3, 1, 1, 2, 1,
     5, 2, 2, 2, 3, 3, 3, 4, 0, 0, 8, 4, 1, 4, 4, 5, 5,
 };
@@ -3029,14 +3029,14 @@ Item* ftCo_800A5F4C(Fighter* fp, ItemKind arg1)
             continue;
         }
 
-        /// Passing It_Kind_L_Gun_Ray means to target any common item
-        if (arg1 != It_Kind_L_Gun_Ray && cur_ip->kind != arg1) {
+        /// Passing It_Kind_Common_End means to target any common item
+        if (arg1 != It_Kind_Common_End && cur_ip->kind != arg1) {
             continue;
         }
         if (inlineD0_it(fp, cur_ip)) {
             continue;
         }
-        if (cur_ip->kind >= It_Kind_L_Gun_Ray) {
+        if (cur_ip->kind >= It_Kind_Common_End) {
             continue;
         }
         if (ftCo_803C5A68[cur_ip->kind] < data->x2C) {
@@ -3094,7 +3094,7 @@ Item* ftCo_800A61D8(Fighter* fp)
         if (inlineD0_it(fp, ip)) {
             continue;
         }
-        if (ip->kind >= It_Common_End) {
+        if (ip->kind >= It_Kind_Common_End) {
             continue;
         }
         if (ftCo_803C5A68[ip->kind] < data->x2C) {
@@ -3118,7 +3118,7 @@ Item* ftCo_800A61D8(Fighter* fp)
 
 static inline bool ftCo_800A648C_inline1(Item* ip)
 {
-    if (ip->kind >= It_Kind_Kuriboh && ip->kind < It_Kind_Octarock_Stone) {
+    if (ip->kind >= It_Kind_Monster_Start && ip->kind < It_Kind_Monster_End) {
         return true;
     }
     if (ip->kind == It_Kind_Nokonoko ||
@@ -6424,7 +6424,7 @@ static inline void ftCo_CpuUpdateCommonItemTarget(Fighter* fp)
         if (fp->x2168 != 0) {
             data->x4C = NULL;
         } else {
-            data->x4C = ftCo_800A5F4C(fp, It_Kind_L_Gun_Ray);
+            data->x4C = ftCo_800A5F4C(fp, It_Kind_Common_End);
         }
     }
 }
@@ -6806,7 +6806,7 @@ static inline void ftCo_CpuUpdateFoodItemTarget(Fighter* fp, bool* is_food)
     if (fp->x2168 != 0) {
         data->x4C = NULL;
     } else {
-        data->x4C = ftCo_800A5F4C(fp, It_Kind_L_Gun_Ray);
+        data->x4C = ftCo_800A5F4C(fp, It_Kind_Common_End);
     }
 }
 

@@ -234,7 +234,7 @@ struct Item {
 
     ItemKind kind;
 
-    enum_t hold_kind;
+    Item_HoldKinds hold_kind;
 
     s32 x18;
     s32 x1C;
@@ -655,7 +655,7 @@ struct SpawnItem {
 
     /// @brief Defines the behavior of the item, such as thrown and pickup.
     /// @todo 0 = capsule.
-    /*  +C */ enum_t hold_kind;
+    /*  +C */ Item_HoldKinds hold_kind;
 
     /* +10 */ s32 x10;
     /* +14 */ Vec3 pos;
