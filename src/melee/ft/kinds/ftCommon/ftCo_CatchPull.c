@@ -60,11 +60,11 @@ void fn_800D9CE8(Fighter_GObj* gobj)
         break;
     }
 
-    fp->throw_flags = 0;
+    fp->x2210.throw_flags = 0;
     Fighter_ChangeMotionState(gobj, nextMotion, Ft_MF_UpdateCmd, startFrame,
                               1.0f, 0.0f, NULL);
     fp->accessory1_cb = fn_800DA190;
-    fp->x221B_b7 = 0;
+    fp->x221B.x221B_b7 = 0;
 }
 
 void ftCo_CatchPull_Anim(Fighter_GObj* gobj)
@@ -102,8 +102,8 @@ void ftCo_CatchPull_Anim(Fighter_GObj* gobj)
     default:
         if (ftAnim_IsFramesRemaining(gobj) != 0) {
             int result;
-            if (fp->throw_flags_b3) {
-                fp->throw_flags_b3 = 0;
+            if (fp->x2210.x0.throw_flags_b3) {
+                fp->x2210.x0.throw_flags_b3 = 0;
                 result = 1;
             } else {
                 result = 0;

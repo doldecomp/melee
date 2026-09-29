@@ -220,12 +220,14 @@ static void loop_lb_8000BA0C_gobj_1(Item_GObj* gobj, HSD_JObj* hobj)
     }
 }
 
+struct it_802A0534_stack {
+    u32 pad;
+    Quaternion quad;
+};
+
 void it_802A0534(Item_GObj* gobj, Vec3* arg1, f32 angle)
 {
-    struct {
-        u32 pad;
-        Quaternion quad;
-    } stack;
+    struct it_802A0534_stack stack;
     Item* ip = gobj->user_data;
     itLinkBoomerangAttributes* attrs =
         ip->xC4_article_data->x4_specialAttributes;
@@ -419,7 +421,7 @@ void it_802A0E70(Item_GObj* gobj)
     HSD_JObjReqAnimAll(hobj, 0.0f);
     HSD_JObjAnimAll(hobj);
     HSD_JObjRemoveAnimAll(hobj);
-    ip->x524_cmd.u = NULL;
+    ip->x524_cmd.x8.u = NULL;
     Item_80268E5C(gobj, 0, ITEM_ANIM_UPDATE);
 }
 

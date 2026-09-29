@@ -168,7 +168,7 @@ Item_GObj* it_802E72E0(Item_GObj* parent, HSD_JObj* bone, s32 type, f32 scale,
     spawn.vel.y = 0.0f;
     spawn.vel.x = 0.0f;
     spawn.x0_parent_gobj = NULL;
-    spawn.x44_flag.b0 = false;
+    spawn.x44_flag.x0.b0 = false;
     spawn.x40 = 0;
     new_gobj = Item_80268B18(&spawn);
     if (new_gobj != NULL) {
@@ -257,7 +257,7 @@ Item_GObj* it_802E7654(Item_GObj* owner, HSD_JObj* bone, Vec3* target,
     spawn.vel.y = 0.0f;
     spawn.vel.x = 0.0f;
     spawn.x0_parent_gobj = NULL;
-    spawn.x44_flag.b0 = false;
+    spawn.x44_flag.x0.b0 = false;
     spawn.x40 = 0;
     sp = &spawn;
     new_gobj = Item_80268B18(sp);

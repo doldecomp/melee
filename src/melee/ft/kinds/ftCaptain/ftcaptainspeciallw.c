@@ -29,8 +29,8 @@
 
 static inline bool ftCa_Special_Inline_Check_Flag(Fighter* fp)
 {
-    if (fp->throw_flags_b1) {
-        fp->throw_flags_b1 = 0;
+    if (fp->x2210.x0.throw_flags_b1) {
+        fp->x2210.x0.throw_flags_b1 = 0;
         return 1;
     } else {
         return 0;
@@ -99,7 +99,7 @@ void ftCa_SpecialLw_Enter(HSD_GObj* gobj)
     fp->cmd_vars[2] = 0;
     fp->cmd_vars[1] = 0;
     fp->cmd_vars[0] = 0;
-    fp->throw_flags = 0;
+    fp->x2210.throw_flags = 0;
     fp->mv.ca.speciallw.x0 = 0.0F;
     fp->mv.ca.speciallw.friction = 1.0F;
     Fighter_ChangeMotionState(gobj, ftCa_MS_SpecialLw, Ft_MF_None, 0.0F, 1.0F,
@@ -116,7 +116,7 @@ void ftCa_SpecialAirLw_Enter(HSD_GObj* gobj)
     fp->cmd_vars[2] = 0;
     fp->cmd_vars[1] = 0;
     fp->cmd_vars[0] = 0;
-    fp->throw_flags = 0;
+    fp->x2210.throw_flags = 0;
     Fighter_ChangeMotionState(gobj, ftCa_MS_SpecialAirLw, Ft_MF_None, 0, 1, 0,
                               NULL);
     ftAnim_8006EBA4(gobj);
@@ -130,7 +130,7 @@ static inline void ftCa_SpecialLw_Anim_inline(HSD_GObj* gobj, s32 condition)
     fp->cmd_vars[2] = 0;
     fp->cmd_vars[1] = 0;
     fp->cmd_vars[0] = 0;
-    fp->throw_flags = 0;
+    fp->x2210.throw_flags = 0;
     if (condition == 0) {
         ftCommon_8007D7FC(fp);
         Fighter_ChangeMotionState(gobj, ftCa_MS_SpecialLwEnd, Ft_MF_None, 0,
@@ -176,7 +176,7 @@ static inline void ftCa_SpecialAirLw_Anim_inline(HSD_GObj* gobj)
     fp->cmd_vars[2] = 0;
     fp->cmd_vars[1] = 0;
     fp->cmd_vars[0] = 0;
-    fp->throw_flags = 0;
+    fp->x2210.throw_flags = 0;
 }
 
 void ftCa_SpecialAirLw_Anim(HSD_GObj* gobj)
@@ -325,7 +325,7 @@ void ftCa_SpecialLw_Coll(HSD_GObj* gobj)
         {
             fp = GET_FIGHTER(gobj);
             ftCa_Special_Inline_SetFlags(gobj);
-            fp->throw_flags = 0;
+            fp->x2210.throw_flags = 0;
             ftCommon_8007D5D4(fp);
             Fighter_ChangeMotionState(gobj, ftCa_MS_SpecialHiThrow1,
                                       Ft_MF_None, 0, 1, 0, NULL);
@@ -358,7 +358,7 @@ static void resetCmdAndThrow(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     fp->cmd_vars[0] = fp->cmd_vars[1] = fp->cmd_vars[2] = 0;
-    fp->throw_flags = 0;
+    fp->x2210.throw_flags = 0;
 }
 
 static void doColl(Fighter_GObj* gobj, ftCaptain_MotionState msid)

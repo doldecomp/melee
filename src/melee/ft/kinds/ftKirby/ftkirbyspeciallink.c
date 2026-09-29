@@ -114,7 +114,7 @@ bool ftKb_SpecialNLk800FB470(Fighter_GObj* gobj)
                 case ftKb_MS_LkSpecialAirNStart:
                 case ftKb_MS_LkSpecialAirNLoop:
                 case ftKb_MS_LkSpecialAirNEnd:
-                    if (!fp->x2070.x2071_b6) {
+                    if (!fp->x2070.x0.x2071_b6) {
                         return false;
                     }
                 }
@@ -127,7 +127,7 @@ bool ftKb_SpecialNLk800FB470(Fighter_GObj* gobj)
                 case ftKb_MS_ClSpecialAirNStart:
                 case ftKb_MS_ClSpecialAirNLoop:
                 case ftKb_MS_ClSpecialAirNEnd:
-                    if (!fp->x2070.x2071_b6) {
+                    if (!fp->x2070.x0.x2071_b6) {
                         return false;
                     }
                 }

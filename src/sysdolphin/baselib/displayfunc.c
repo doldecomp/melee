@@ -23,7 +23,7 @@ typedef struct _HSD_ZList {
     HSD_JObj* jobj;
     u32 rendermode;
 
-    struct {
+    struct _HSD_ZList_sort {
         struct _HSD_ZList* texedge;
         struct _HSD_ZList* xlu;
     } sort;

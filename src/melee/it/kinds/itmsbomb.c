@@ -107,7 +107,7 @@ void itMSBomb_Logic19_Thrown(Item_GObj* gobj)
     Item_80268E5C(gobj, 3, 6);
     ip->xBFC = ecb = attrs->x8;
     it_80275D5C(gobj, &ecb);
-    ip->xDCE_flag.b7 = 0;
+    ip->xDCE_flag.x0.b7 = 0;
 }
 
 void itMsbomb_UnkMotion3_Phys(Item_GObj* gobj)
@@ -126,7 +126,7 @@ void it_80290238(Item_GObj* gobj)
     Item* ip = GET_ITEM(gobj);
     itMsBomb_Attrs* attrs = ip->xC4_article_data->x4_specialAttributes;
     PAD_STACK(0x18);
-    ip->xDCE_flag.b3 = 1;
+    ip->xDCE_flag.x0.b3 = 1;
     if (it_802763B8(gobj) != 1) {
         if (it_802763E0(gobj) == 2) {
             ip->pos.y += ip->scl * (attrs->x8.top - attrs->x8.bottom);
@@ -191,7 +191,7 @@ void it_8029047C(Item_GObj* gobj)
     Item_80268E5C(gobj, 5, 0x11);
     it_802762BC(ip);
     it_80290314_inline(gobj);
-    ip->xDCE_flag.b3 = 0;
+    ip->xDCE_flag.x0.b3 = 0;
 }
 
 void itMsbomb_UnkMotion5_Phys(Item_GObj* gobj)

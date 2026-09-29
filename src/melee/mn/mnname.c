@@ -210,12 +210,14 @@ static inline u8 unsignedCharacter(s32 character)
     return (u8) character;
 }
 
+union CompareNameStrings_string1 {
+    char* signed_characters;
+    u8* unsigned_characters;
+};
+
 s32 CompareNameStrings(char* str1, char* str2)
 {
-    union {
-        char* signed_characters;
-        u8* unsigned_characters;
-    } string1;
+    union CompareNameStrings_string1 string1;
     u8* unsigned_str1;
     s8 terminator = (s8) *mnName_StringTerminator;
     s32 i = 0;
@@ -962,13 +964,15 @@ void mnName_80238AE0(HSD_GObj* gobj, u8 index, u8 arg2)
     HSD_JObjAnimAll(jobj);
 }
 
+struct AnimTable {
+    AnimLoopSettings* entries[6];
+};
+
 static inline AnimLoopSettings*
 mnName_FindAnimLoop(AnimLoopSettings* const* tableBase, f32 frame)
 {
     s32 i;
-    struct AnimTable {
-        AnimLoopSettings* entries[6];
-    } table;
+    struct AnimTable table;
 
     table = *(struct AnimTable*) tableBase;
 

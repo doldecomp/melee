@@ -101,7 +101,7 @@ void ftCo_800DC920(Fighter_GObj* arg0, Fighter_GObj* gobj)
     var_r31 = GET_FIGHTER(arg0);
     Fighter_UnkSetFlag_8006CFBC(arg0);
     Fighter_UnkSetFlag_8006CFBC(gobj);
-    if (var_r31->x221B_b7) {
+    if (var_r31->x221B.x221B_b7) {
         var_r30 = var_r31;
         var_r31 = GET_FIGHTER(gobj);
     } else {
@@ -110,8 +110,8 @@ void ftCo_800DC920(Fighter_GObj* arg0, Fighter_GObj* gobj)
     var_r31->x1A5C = NULL;
     var_r29 = false;
     var_r31->victim_gobj = NULL;
-    var_r31->x221B_b5 = false;
-    var_r31->x221B_b7 = false;
+    var_r31->x221B.x221B_b5 = false;
+    var_r31->x221B.x221B_b7 = false;
     if (var_r30->x2226_b2) {
         if (var_r31->kind == Ft_Kind_Kirby &&
             (var_r31->motion_id == ftKb_MS_SpecialNCapture0 ||
@@ -191,15 +191,15 @@ void ftCo_800DC920(Fighter_GObj* arg0, Fighter_GObj* gobj)
     }
     var_r30->x1A5C = NULL;
     var_r30->victim_gobj = NULL;
-    var_r30->x221B_b5 = false;
-    var_r30->x221B_b7 = false;
+    var_r30->x221B.x221B_b5 = false;
+    var_r30->x221B.x221B_b7 = false;
 }
 
 void ftCo_800DCE34(Fighter_GObj* gobj0, Fighter_GObj* gobj1)
 {
     Fighter* fp1 = GET_FIGHTER(gobj1);
     ftCo_800DC920(gobj0, gobj1);
-    if (fp1->x221B_b7) {
+    if (fp1->x221B.x221B_b7) {
         Fighter* fp0 = GET_FIGHTER(gobj0);
         HSD_JObjSetTranslate(GET_JOBJ(gobj0), &fp0->cur_pos);
     } else {

@@ -46,7 +46,7 @@ static inline void ftYoshi_SpecialLw_SetVars(HSD_GObj* arg0)
     Fighter* fp = GET_FIGHTER(arg0);
 
     fp->cmd_vars[0] = fp->cmd_vars[1] = 0;
-    fp->throw_flags_b0 = false;
+    fp->x2210.x0.throw_flags_b0 = false;
     fp->self_vel.x = fp->self_vel.y = 0;
     fp->x6A4_transNOffset.y = 0;
     fp->x2223_b4 = true;
@@ -69,7 +69,7 @@ static inline void reset(Fighter_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
 
     fp->cmd_vars[0] = fp->cmd_vars[1] = false;
-    fp->throw_flags_b0 = false;
+    fp->x2210.x0.throw_flags_b0 = false;
     fp->self_vel.y = 0.0f;
     fp->self_vel.x = 0.0f;
     fp->x6A4_transNOffset.y = 0.0f;

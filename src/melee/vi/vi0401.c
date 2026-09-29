@@ -103,6 +103,10 @@ static void vi0401_8031D23C(HSD_GObj* gobj)
     }
 }
 
+struct vi0401_Scene_OnEnter_idx {
+    int i;
+};
+
 void vi0401_Scene_OnEnter(void* data)
 {
     HSD_CObj* cobj;
@@ -112,9 +116,7 @@ void vi0401_Scene_OnEnter(void* data)
     HSD_GObj* light_gobj;
     HSD_Fog* fog;
     HSD_GObj* fog_gobj;
-    struct {
-        int i;
-    } idx;
+    struct vi0401_Scene_OnEnter_idx idx;
     HSD_JObj* jobj;
     HSD_GObj* gobj2;
     HSD_GObj* gobj;

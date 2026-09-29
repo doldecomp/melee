@@ -4168,12 +4168,14 @@ static inline u32 mpLineGetKindInline(int line_id)
     return groundCollLine[line_id].flags & LINE_FLAG_KIND;
 }
 
+struct mpFloorGetRight_w {
+    int id;
+};
+
 void mpFloorGetRight(int line_id, Vec3* pos_out)
 {
     u32 kind;
-    struct {
-        int id;
-    } w;
+    struct mpFloorGetRight_w w;
     int line_offset;
 
     LINEID_CHECK(4465, line_id);
@@ -4205,12 +4207,14 @@ done: {
 }
 }
 
+struct mpFloorGetLeft_w {
+    int id;
+};
+
 void mpFloorGetLeft(int line_id, Vec3* pos_out)
 {
     u32 kind;
-    struct {
-        int id;
-    } w;
+    struct mpFloorGetLeft_w w;
     int line_offset;
 
     LINEID_CHECK(4474, line_id);
@@ -4242,12 +4246,14 @@ done: {
 }
 }
 
+struct mpCeilingGetRight_w {
+    int id;
+};
+
 void mpCeilingGetRight(int line_id, Vec3* pos_out)
 {
     u32 kind;
-    struct {
-        int id;
-    } w;
+    struct mpCeilingGetRight_w w;
     int line_offset;
 
     LINEID_CHECK(4483, line_id);
@@ -4282,12 +4288,14 @@ done: {
 }
 }
 
+struct mpCeilingGetLeft_w {
+    int id;
+};
+
 void mpCeilingGetLeft(int line_id, Vec3* pos_out)
 {
     u32 kind;
-    struct {
-        int id;
-    } w;
+    struct mpCeilingGetLeft_w w;
     int line_offset;
 
     LINEID_CHECK(4492, line_id);
@@ -4322,12 +4330,14 @@ done: {
 }
 }
 
+struct mpLeftWallGetTop_w {
+    int id;
+};
+
 void mpLeftWallGetTop(int line_id, Vec3* pos_out)
 {
     u32 kind;
-    struct {
-        int id;
-    } w;
+    struct mpLeftWallGetTop_w w;
     int line_offset;
 
     LINEID_CHECK(4501, line_id);
@@ -4362,12 +4372,14 @@ done: {
 }
 }
 
+struct mpLeftWallGetBottom_w {
+    int id;
+};
+
 void mpLeftWallGetBottom(int line_id, Vec3* pos_out)
 {
     u32 kind;
-    struct {
-        int id;
-    } w;
+    struct mpLeftWallGetBottom_w w;
     int line_offset;
 
     LINEID_CHECK(4510, line_id);
@@ -4402,12 +4414,14 @@ done: {
 }
 }
 
+struct mpRightWallGetTop_w {
+    int id;
+};
+
 void mpRightWallGetTop(int line_id, Vec3* pos_out)
 {
     u32 kind;
-    struct {
-        int id;
-    } w;
+    struct mpRightWallGetTop_w w;
     int line_offset;
 
     LINEID_CHECK(4519, line_id);
@@ -4442,12 +4456,14 @@ done: {
 }
 }
 
+struct mpRightWallGetBottom_w {
+    int id;
+};
+
 void mpRightWallGetBottom(int line_id, Vec3* pos_out)
 {
     int line_offset;
-    struct {
-        int id;
-    } w;
+    struct mpRightWallGetBottom_w w;
     u32 kind;
 
     LINEID_CHECK(4528, line_id);
@@ -5665,6 +5681,10 @@ static inline void mpLib_GetJointVtxRange(CollJoint* joint, int* start,
     *count = map_joint->vtx_count;
 }
 
+struct mpLib_800581DC_ln {
+    CollLine* p;
+};
+
 void mpLib_800581DC(int joint_id0, int joint_id1)
 {
     CollJoint* j0_r9;
@@ -5674,9 +5694,7 @@ void mpLib_800581DC(int joint_id0, int joint_id1)
     int i;
     int vcount0;
     int vstart0;
-    struct {
-        CollLine* p;
-    } ln;
+    struct mpLib_800581DC_ln ln;
 
     j0_r9 = &groundCollJoint[joint_id0];
     j1_r10 = &groundCollJoint[joint_id1];
@@ -6818,6 +6836,21 @@ void mpLib_80059554(void)
     }
 }
 
+struct mpLib_80059E60_sp28 {
+    mpIsland_Palette palette;
+    u8 pad[4];
+    GXColor line_color;
+    GXColor basic_color;
+};
+
+struct mpLib_80059E60_colors {
+    u8 pad[0x10];
+    GXColor ledge;
+    GXColor platform;
+    GXColor ledge_platform;
+    GXColor none;
+};
+
 void mpLib_80059E60(void)
 {
     Mtx sp104;
@@ -6833,12 +6866,7 @@ void mpLib_80059E60(void)
     GXLoadPosMtxImm(sp104, 0U);
     if (Camera_80030B50()) {
         // terrain draw
-        struct {
-            mpIsland_Palette palette;
-            u8 pad[4];
-            GXColor line_color;
-            GXColor basic_color;
-        } sp28;
+        struct mpLib_80059E60_sp28 sp28;
         GXColor* line_color;
         mpIsland_PaletteEntry* entry;
         sp28.palette = mpIsland_TerrainPalette;
@@ -6856,13 +6884,7 @@ void mpLib_80059E60(void)
         mpLib_DrawMatchingLines(mp_Terrain_Basic, 0xFF, &sp28.basic_color);
     } else if (Camera_80030B7C()) {
         // platform/ledge draw
-        struct {
-            u8 pad[0x10];
-            GXColor ledge;
-            GXColor platform;
-            GXColor ledge_platform;
-            GXColor none;
-        } colors;
+        struct mpLib_80059E60_colors colors;
         colors.ledge = mpLib_804D80F0;
         mpLib_DrawMatchingLines(LINE_FLAG_LEDGE, LINE_FLAG_LEDGE,
                                 &colors.ledge);
@@ -6929,7 +6951,7 @@ static const GXColor mpLib_804D8134 = { 0xFF, 0x40, 0x40, 0xFF };
 static const GXColor mpLib_804D8138 = { 0xFF, 0x40, 0xC0, 0xFF };
 static const GXColor mpLib_804D813C = { 0xFF, 0xFF, 0xFF, 0xFF };
 
-enum {
+enum mpLib {
     mpLib_EnemySpawnVtxIds = 0x16,
     mpLib_TrophySpawnVtxIds = 0x66,
     mpLib_ExitVtxIds = 0x80,

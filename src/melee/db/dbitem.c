@@ -21,7 +21,7 @@
 /* 4D6B38 */ static DevText* db_ItemAndPokemonMenuText;
 /* 4D6B3C */ static int db_ShowItemCollisionBubbles;
 
-static struct {
+static struct db_ItemAndPokemonMenu_t {
     unsigned int DisplayStatus; // 0=uninitialized, 1=visible, 2=hidden
     unsigned int DisplayFadeTimer;
     int ItemSpawnsEnabled;
@@ -170,7 +170,7 @@ void fn_EnableShowCoinPickupRange(void)
     while (item_gobj != NULL) {
         it = GET_ITEM(item_gobj);
         if (it->kind == It_Kind_Unk4) {
-            it->xDAA_flag.b0 = 1;
+            it->xDAA.xDAA_flag.x0.b0 = 1;
         }
         item_gobj = item_gobj->next;
     }
@@ -186,7 +186,7 @@ void fn_DisableShowCoinPickupRange(void)
     while (item_gobj != NULL) {
         it = GET_ITEM(item_gobj);
         if (it->kind == It_Kind_Unk4) {
-            it->xDAA_flag.b0 = 0;
+            it->xDAA.xDAA_flag.x0.b0 = 0;
         }
         item_gobj = item_gobj->next;
     }
@@ -201,8 +201,8 @@ void fn_EnableShowEnemyStompRange(void)
     item_gobj = HSD_GObjPLinkHead[HSD_GOBJ_PLINK_ITEM];
     while (item_gobj != NULL) {
         it = GET_ITEM(item_gobj);
-        if (it->xDD0_flag.b0) {
-            it->xDAA_flag.b3 = 1;
+        if (it->xDD0_flag.x0.b0) {
+            it->xDAA.xDAA_flag.x0.b3 = 1;
         }
         item_gobj = item_gobj->next;
     }
@@ -217,7 +217,7 @@ void fn_DisableShowEnemyStompRange(void)
     item_gobj = HSD_GObjPLinkHead[HSD_GOBJ_PLINK_ITEM];
     while (item_gobj != NULL) {
         it = item_gobj->user_data;
-        it->xDAA_flag.b3 = 0;
+        it->xDAA.xDAA_flag.x0.b3 = 0;
         item_gobj = item_gobj->next;
     }
     db_ItemAndPokemonMenu.ShowEnemyStompRange = 0;
@@ -231,7 +231,7 @@ void fn_EnableShowItemPickupRange(void)
     item_gobj = HSD_GObjPLinkHead[HSD_GOBJ_PLINK_ITEM];
     while (item_gobj != NULL) {
         it = item_gobj->user_data;
-        it->xDAA_flag.b4 = 1;
+        it->xDAA.xDAA_flag.x0.b4 = 1;
         item_gobj = item_gobj->next;
     }
     db_ItemAndPokemonMenu.ShowItemPickupRange = 1;
@@ -245,7 +245,7 @@ void fn_DisableShowItemPickupRange(void)
     item_gobj = HSD_GObjPLinkHead[HSD_GOBJ_PLINK_ITEM];
     while (item_gobj != NULL) {
         it = item_gobj->user_data;
-        it->xDAA_flag.b4 = 0;
+        it->xDAA.xDAA_flag.x0.b4 = 0;
         item_gobj = item_gobj->next;
     }
     db_ItemAndPokemonMenu.ShowItemPickupRange = 0;
@@ -274,7 +274,7 @@ s32 db_AreItemSpawnsEnabled(void)
 void db_80225D64(Item_GObj* item, Fighter_GObj* owner)
 {
     Item* it = GET_ITEM(item);
-    it->xDAA_byte |= db_ShowItemCollisionBubbles;
+    it->xDAA.xDAA_byte |= db_ShowItemCollisionBubbles;
 }
 
 void fn_ToggleItemCollisionBubbles(void)
@@ -289,8 +289,8 @@ void fn_ToggleItemCollisionBubbles(void)
     item_gobj = HSD_GObjPLinkHead[HSD_GOBJ_PLINK_ITEM];
     while (item_gobj != NULL) {
         it = item_gobj->user_data;
-        it->xDAA_byte &= 0xFC;
-        it->xDAA_byte |= db_ShowItemCollisionBubbles;
+        it->xDAA.xDAA_byte &= 0xFC;
+        it->xDAA.xDAA_byte |= db_ShowItemCollisionBubbles;
         item_gobj = item_gobj->next;
     }
 }
@@ -300,14 +300,14 @@ void db_80225DD8(Item_GObj* item, Fighter_GObj* owner)
     Item* it = GET_ITEM(item);
     if (ftLib_IsFighter(owner) == 0) {
         it = GET_ITEM(item);
-        it->xDAA_byte |= db_ShowItemCollisionBubbles;
+        it->xDAA.xDAA_byte |= db_ShowItemCollisionBubbles;
         // db_80225D64(item, owner); // stack too big
     } else {
         int x;
-        it->xDAA_byte &= 0xFC;
+        it->xDAA.xDAA_byte &= 0xFC;
         x = fn_8022697C(owner);
         if (x != 0) {
-            it->xDAA_byte |= x & 3;
+            it->xDAA.xDAA_byte |= x & 3;
         }
     }
 }
@@ -475,7 +475,7 @@ void db_CheckAndSpawnItem(int player)
     spawnItem.vel.x = spawnItem.vel.y = spawnItem.vel.z = 0.0F;
     spawnItem.x0_parent_gobj = NULL;
     spawnItem.x4_parent_gobj2 = spawnItem.x0_parent_gobj;
-    spawnItem.x44_flag.b0 = 1;
+    spawnItem.x44_flag.x0.b0 = 1;
     spawnItem.x40 = 0;
     if (spawnItem.kind < It_Common_End &&
         Item_804A0C64.x0 >= (u32) it_804D6D28->x0)
@@ -497,7 +497,7 @@ void db_CheckAndSpawnItem(int player)
             {
                 HSD_GObj* gobj = Item_80268B18(&spawnItem);
                 if (gobj != NULL) {
-                    GET_ITEM(gobj)->xDAA_flag.byte |=
+                    GET_ITEM(gobj)->xDAA.xDAA_flag.byte |=
                         db_ShowItemCollisionBubbles;
                     efSync_Spawn(0x420, gobj, &spawnItem.prev_pos);
                 }

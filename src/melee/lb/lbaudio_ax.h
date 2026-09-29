@@ -12,7 +12,7 @@
 /// @todo Create an @c enum for SFX IDs.
 #define SFX_NONE -1
 
-enum {
+enum AUDIO_MODE {
     AUDIO_MODE_UNK0,
     AUDIO_MODE_UNK1,
 };

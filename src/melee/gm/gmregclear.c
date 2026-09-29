@@ -619,14 +619,16 @@ void fn_8017FE54(HSD_GObj* gobj)
     }
 }
 
+union fn_8017FF1C_data {
+    struct lbl_80472D28_t* state;
+    fn_8017FA1C_arg* arg;
+};
+
 void fn_8017FF1C(HSD_GObj* gobj)
 {
     HSD_JObj* jobj;
     /// @todo Consolidate these split-derived views of the same state object.
-    union {
-        struct lbl_80472D28_t* state;
-        fn_8017FA1C_arg* arg;
-    } data;
+    union fn_8017FF1C_data data;
     s32 result;
     s32 i;
     u8 mask;
@@ -898,6 +900,11 @@ static inline u8 fn_80180630_GetX118(const struct lbl_80472D28_t* state)
     return state->x118;
 }
 
+union fn_80180630_data {
+    struct lbl_80472D28_t* state;
+    fn_8017FA1C_arg* model;
+};
+
 void fn_80180630(int arg0, int arg1, int arg2, bool arg3, MatchEnd* arg4)
 {
     s32 sp64;
@@ -910,10 +917,7 @@ void fn_80180630(int arg0, int arg1, int arg2, bool arg3, MatchEnd* arg4)
     VsSceneController* temp;
     s32 total;
     s32 var_r4;
-    union {
-        struct lbl_80472D28_t* state;
-        fn_8017FA1C_arg* model;
-    } data;
+    union fn_80180630_data data;
     s32 special_score;
     s32 var_r3;
     struct lbl_80472D28_t* state;

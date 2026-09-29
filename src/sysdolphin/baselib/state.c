@@ -37,7 +37,7 @@ static u8 state_dst_alpha;
 static u8 state_before_tex;
 static u8 state_dither;
 
-static struct {
+static struct matstate_t {
     GXColor ambient;
     GXColor diffuse;
     GXColor specular;
@@ -126,7 +126,7 @@ HSD_Chan HSD_State_80405A38_F0 = {
     /* attn_fn    = */ 2,
 };
 
-struct {
+struct invalidate_funcs_t {
     int mask;
     void (*func)(void);
 } invalidate_funcs[] = {

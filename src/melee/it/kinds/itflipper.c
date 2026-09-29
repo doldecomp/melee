@@ -367,7 +367,7 @@ void itFlipper_Settle(Item_GObj* gobj)
     ip->xD5C = 0;
     ip->x40_vel.x = 0.0f;
     ip->x40_vel.y = 0.0f;
-    ip->xDD1_flag.b1 = 1;
+    ip->xDD1_flag.x0.b1 = 1;
     ip->xDD4_itemVar.flipper.xDD8_isSettled = 1;
     it_80275444(gobj);
     it_802725D4(gobj);

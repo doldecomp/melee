@@ -15,7 +15,7 @@ void ftCo_800CD140(Fighter_GObj* gobj, int arg1, int arg2, int arg3,
                    float arg4)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    fp->throw_flags = 0;
+    fp->x2210.throw_flags = 0;
     Fighter_ChangeMotionState(gobj, arg1, arg2, 0.0f, arg4, 0.0f, NULL);
     ftAnim_8006EBA4(gobj);
     fp->mv.co.swing.x0 = 1;

@@ -29,7 +29,7 @@ typedef struct _gmCameraUnkStruct {
 } gmCameraUnkStruct;
 
 typedef struct _gmCameraUnkFuncTable {
-    /*0x00*/ struct {
+    /*0x00*/ struct _gmCameraUnkFuncTable_flags {
         u8 x0;
         u16 x2;
     } flags;

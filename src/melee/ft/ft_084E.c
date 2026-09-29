@@ -80,7 +80,7 @@ void ft_80085004(Fighter_GObj* gobj)
 void ft_80085030(Fighter_GObj* gobj, float gr_friction, float facing_dir)
 {
     Fighter* fp = gobj->user_data;
-    if (fp->x594_b0) {
+    if (fp->x594.x0.x594_b0) {
         fp->xE4_ground_accel_1 =
             fp->x6A4_transNOffset.z * facing_dir - fp->gr_vel;
     } else {
@@ -110,7 +110,7 @@ void ft_800850B4(Fighter_GObj* gobj)
 void ft_800850E0(Fighter_GObj* gobj, float arg8, float arg9)
 {
     Fighter* fp = gobj->user_data;
-    if (fp->x594_b0) {
+    if (fp->x594.x0.x594_b0) {
         fp->gr_vel = fp->x6A4_transNOffset.z * arg9;
     } else {
         ftCommon_CalcGroundAccel_Deaccel(fp, arg8);

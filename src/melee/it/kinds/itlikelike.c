@@ -683,7 +683,7 @@ void it_802DAD18(HSD_GObj* gobj)
     PAD_STACK(0x20);
 
     HSD_JObjSetRotationZ(GET_JOBJ(gobj), M_PI);
-    ip->xDCE_flag.b7 = 1;
+    ip->xDCE_flag.x0.b7 = 1;
     Item_80268E5C(gobj, 3, ITEM_ANIM_UPDATE);
 }
 
@@ -865,7 +865,7 @@ void it_802DB358(Item_GObj* gobj)
 {
     Item* ip = gobj->user_data;
     ip->xDD4_itemVar.likelike.x50 = ip->grab_victim;
-    ip->xDD0_flag.b5 = false;
+    ip->xDD0_flag.x0.b5 = false;
     it_80274ECC(gobj, true);
 }
 

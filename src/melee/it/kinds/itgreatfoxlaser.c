@@ -34,7 +34,7 @@ Item_GObj* it_802EAF34(HSD_GObj* owner, Vec3* offset, int type)
     spawn.vel.x = spawn.vel.y = spawn.vel.z = 0.0f;
     spawn.x0_parent_gobj = NULL;
     spawn.x4_parent_gobj2 = NULL;
-    spawn.x44_flag.b0 = false;
+    spawn.x44_flag.x0.b0 = false;
     spawn.x40 = 0;
     HSD_JObjGetRotation(jobj, &unused); // ???
     item_gobj = Item_80268B18(&spawn);

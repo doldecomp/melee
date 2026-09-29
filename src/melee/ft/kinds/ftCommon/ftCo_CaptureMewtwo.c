@@ -19,8 +19,8 @@ static inline void doEnter(Fighter_GObj* gobj, Fighter_GObj* victim_gobj,
     ftCo_ReleaseItemAndVictim(gobj);
     fp->x1A5C = victim_gobj;
     fp->victim_gobj = victim_gobj;
-    fp->x221B_b5 = false;
-    fp->x221B_b7 = false;
+    fp->x221B.x221B_b5 = false;
+    fp->x221B.x221B_b7 = false;
     fp->facing_dir = victim_fp->facing_dir;
     ftCo_800DB368(victim_fp, fp);
     Fighter_ChangeMotionState(gobj, msid, Ft_MF_None, 0, 1, 0,

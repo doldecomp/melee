@@ -83,7 +83,7 @@ void it_802944AC(Item_GObj* gobj, ftCollisionBox* box)
 void itWStar_Logic29_Spawned(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
-    ip->xDCE_flag.b7 = 0;
+    ip->xDCE_flag.x0.b7 = 0;
     ip->xDD4_itemVar.wstar.xDD8 = 1.0f;
     ip->xDD4_itemVar.wstar.xDD4 = 1.0f;
     it_80294624(gobj);

@@ -375,7 +375,7 @@ static struct lbl_803D5168_t {
     { 0x31, 0x18 }, { 0x3A, 0x19 }, { 0x48, 0x00 }, { 0 },
 };
 
-static struct {
+static struct lbl_803D51A0_t {
     /* 0 */ u8 ncolors;
     /* 1 */ u8 x1;
     /* 2 */ u8 x2;
@@ -3133,7 +3133,7 @@ void gm_80166378(MatchEnd* arg0_raw)
             arg0->player_standings[i].ckind = Player_GetPlayerCharacter(i);
             arg0->player_standings[i].ftkind = Player_80036394(i);
             arg0->player_standings[i].stocks = Player_GetStocks(i);
-            arg0->player_standings[i].x3_b0 = Player_GetCostumeId(i);
+            arg0->player_standings[i].x3_u.x0.x3_b0 = Player_GetCostumeId(i);
             arg0->player_standings[i].x4 = Player_GetNametagSlotID(i);
             arg0->player_standings[i].x1C = Player_GetCoins(i);
             arg0->player_standings[i].x28 = Player_GetMatchFrameCount(i);
@@ -3145,8 +3145,9 @@ void gm_80166378(MatchEnd* arg0_raw)
             arg0->player_standings[i].x24 = Player_GetFalls(i);
             arg0->player_standings[i].team = Player_GetTeam(i);
             arg0->player_standings[i].percent = Player_GetDamage(i);
-            arg0->player_standings[i].x3_b6 = Player_800353BC(i);
-            arg0->player_standings[i].x3_b7 = Player_GetMoreFlagsBit2(i);
+            arg0->player_standings[i].x3_u.x0.x3_b6 = Player_800353BC(i);
+            arg0->player_standings[i].x3_u.x0.x3_b7 =
+                Player_GetMoreFlagsBit2(i);
             arg0->player_standings[i].x9 = (s8) Player_GetRemainingHP(i);
             cnt = Player_GetJoystickCountByIndex(i, 0);
             sp48_y = (a = 0.031f) * ((f32) cnt * fn_8016B5B0());
@@ -3281,7 +3282,7 @@ s32 gm_80166A98(MatchEnd* arg0, u8 arg1, s8 arg2, u8 arg3, s8 arg4, u8 arg5,
 
     // Apply player color to all 4 players?
     for (i = 0; i < 4; i++) {
-        arg0->player_standings[i].x3_b0 = arg1;
+        arg0->player_standings[i].x3_u.x0.x3_b0 = arg1;
     }
 
     arg0->player_standings[0].score = score0;
@@ -4036,14 +4037,16 @@ void fn_801689E4(HSD_JObj* arg0, DynamicModelDesc* arg1, int idx)
     HSD_JObjAddAnimAll(arg0, anim, matanim, shapeanim);
 }
 
+struct fn_80168A6C_src {
+    /* 0x00 */ s32** x0;
+    /* 0x04 */ s32* x4;
+    /* 0x08 */ s32 x8;
+    /* 0x0C */ s32 xC;
+};
+
 void fn_80168A6C(void* arg0, void* arg1, s32 idx)
 {
-    struct {
-        /* 0x00 */ s32** x0;
-        /* 0x04 */ s32* x4;
-        /* 0x08 */ s32 x8;
-        /* 0x0C */ s32 xC;
-    }* src = arg0;
+    struct fn_80168A6C_src* src = arg0;
 
     memzero(arg1, 0x20);
 

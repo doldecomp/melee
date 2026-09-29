@@ -55,7 +55,7 @@ void ftKb_SpecialNIc_80108D64(Fighter_GObj* gobj)
     int new_var;
     Fighter* fp = GET_FIGHTER(gobj);
     new_var = 0;
-    fp->throw_flags = 0;
+    fp->x2210.throw_flags = 0;
     fp->cmd_vars[0] = new_var;
     fp->u.kb.xC0 = NULL;
     Fighter_ChangeMotionState(gobj, ftKb_MS_PpSpecialN, Ft_MF_None, 0.0F, 1.0F,
@@ -77,7 +77,7 @@ void ftKb_SpecialNIc_80108E14(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftKb_DatAttrs* da = fp->dat_attrs;
-    fp->throw_flags = 0;
+    fp->x2210.throw_flags = 0;
     fp->cmd_vars[0] = 0;
     fp->u.kb.xC0 = NULL;
     if ((s32) fp->u.kb.xC4 == 0) {

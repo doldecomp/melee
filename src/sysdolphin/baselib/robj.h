@@ -37,7 +37,7 @@ struct HSD_IKHintDesc {
 };
 
 struct HSD_Exp {
-    union {
+    union HSD_Exp_expr {
         f32 (*func)(void*);
         u8* bytecode;
     } expr;
@@ -59,7 +59,7 @@ struct HSD_ByteCodeExpDesc {
 struct HSD_RObj {
     HSD_RObj* next;
     u32 flags;
-    union {
+    union HSD_RObj_u {
         HSD_JObj* jobj;
         HSD_Exp exp;
         f32 limit;
@@ -71,7 +71,7 @@ struct HSD_RObj {
 struct HSD_RObjDesc {
     HSD_RObjDesc* next;
     u32 flags; // 0x04
-    union {
+    union HSD_RObjDesc_u {
         u32 i;
         HSD_ExpDesc* exp;
         HSD_ByteCodeExpDesc* bcexp;

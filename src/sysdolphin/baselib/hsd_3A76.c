@@ -14,7 +14,7 @@
 #include <melee/lb/lbarchive.h> ///< @todo Circular include
 
 /// Bytes in a saved cursor record, not counting its type byte.
-enum {
+enum SIS_SAVED_CURSOR {
     SIS_SAVED_CURSOR_SIZE = sizeof(u8*)
 };
 

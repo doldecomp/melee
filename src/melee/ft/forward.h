@@ -430,7 +430,7 @@ typedef enum ftCommon_BuryType {
     BuryType_Unk3,
 } ftCommon_BuryType;
 
-enum {
+enum Ft_Dynamics {
     Ft_Dynamics_NumMax = 10,
 };
 

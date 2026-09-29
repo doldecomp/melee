@@ -183,7 +183,7 @@ void it_802E8ADC(Item_GObj* gobj, Vec3* pos, s32 dir, f32 horiz_speed,
     spawn.x3C_damage = 0;
     spawn.x0_parent_gobj = NULL;
     spawn.x4_parent_gobj2 = gobj;
-    spawn.x44_flag.b0 = true;
+    spawn.x44_flag.x0.b0 = true;
     spawn.x40 = 0;
     stone_gobj = Item_80268B18(&spawn);
     if (stone_gobj != NULL) {

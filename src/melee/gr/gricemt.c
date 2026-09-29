@@ -202,7 +202,7 @@ static HSD_GObj* grIm_804D69F0;
 static struct grIceMt_YakumonoParam* yakumono_param;
 
 typedef struct GrIm825C {
-    struct {
+    struct GrIm825C_hi {
         u16 x0;
         u16 x2;
         u16 x4;
@@ -1006,13 +1006,15 @@ void stageGObj2_Callback3(Ground_GObj* gobj)
     }
 }
 
+struct stageGObj3_OnInit_sp14 {
+    GrIm588 x0;
+    GrIm588 x4;
+};
+
 void stageGObj3_OnInit(Ground_GObj* arg0)
 {
     Ground* gp = GET_GROUND(arg0);
-    struct {
-        GrIm588 x0;
-        GrIm588 x4;
-    } sp14;
+    struct stageGObj3_OnInit_sp14 sp14;
     PAD_STACK(4);
     Ground_InitMapColl(arg0->hsd_obj, gp->map_id);
     grAnime_801C8138(arg0, gp->map_id, 0);
@@ -1060,6 +1062,11 @@ void stageGObj3_Callback3(Ground_GObj* gobj)
     }
 }
 
+struct stageGObj4_OnInit_sp14 {
+    GrIm588 x0;
+    GrIm588 x4;
+};
+
 void stageGObj4_OnInit(Ground_GObj* arg0)
 {
     HSD_JObj* jobj3;
@@ -1067,10 +1074,7 @@ void stageGObj4_OnInit(Ground_GObj* arg0)
     HSD_JObj* jobj = arg0->hsd_obj;
     HSD_JObj* jobj2;
     s32 r;
-    struct {
-        GrIm588 x0;
-        GrIm588 x4;
-    } sp14;
+    struct stageGObj4_OnInit_sp14 sp14;
     PAD_STACK(0x4);
     Ground_801C0498();
     Ground_InitMapColl(jobj, gp->map_id);
@@ -1178,13 +1182,15 @@ void stageGObj5_Callback3(Ground_GObj* gobj)
     }
 }
 
+struct stageGObj6_OnInit_sp14 {
+    GrIm588 x0;
+    GrIm588 x4;
+};
+
 void stageGObj6_OnInit(Ground_GObj* arg0)
 {
     Ground* gp = GET_GROUND(arg0);
-    struct {
-        GrIm588 x0;
-        GrIm588 x4;
-    } sp14;
+    struct stageGObj6_OnInit_sp14 sp14;
     PAD_STACK(4);
     Ground_InitMapColl(arg0->hsd_obj, gp->map_id);
     grAnime_801C8138(arg0, gp->map_id, 0);
@@ -2038,7 +2044,7 @@ void onJointCollision(void* user_data, int joint_id, CollData* coll,
         if (gobj != NULL) {
             gp2 = gobj->user_data;
             if (gp2 != NULL) {
-                ((UnkFlagStruct*) &gp2->u.icemt.x14)->b4 = 1;
+                ((UnkFlagStruct*) &gp2->u.icemt.x14)->x0.b4 = 1;
             }
         }
     }

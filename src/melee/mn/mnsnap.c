@@ -985,14 +985,16 @@ static inline s32 mnSnap_ReadCardStatus(s32 slot)
     return mnSnap_804A0A10.card_status[slot];
 }
 
+struct fn_802545C4_cursor {
+    int index;
+};
+
 /// Main per-frame update for the Snap menu. Handles all state transitions
 /// including slot selection, photo browsing, copy/move/delete operations,
 /// and dialog confirmations via a large switch on snap->state.
 void fn_802545C4(void)
 {
-    struct {
-        int index;
-    } cursor;
+    struct fn_802545C4_cursor cursor;
     u64 buttons;
     s32 state;
     f32 t;

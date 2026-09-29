@@ -59,7 +59,7 @@ typedef struct {
 
 union mn_802307F8_value_view {
     struct mn_802307F8_t fields;
-    struct {
+    struct mn_802307F8_value_view_indexed {
         u8 x0;
         u8 x1;
         u8 values[7];
@@ -410,9 +410,10 @@ void mn_8022FB88(u8 arg0, void* arg1)
         for (hide_count = 0, hide_digit = digit_indices; hide_count < 4;
              hide_count++, hide_digit++)
         {
-            HSD_JObjSetFlagsAll(data->x34[1].joints[*hide_digit], JOBJ_HIDDEN);
+            HSD_JObjSetFlagsAll(data->xC_u.x0.x34[1].joints[*hide_digit],
+                                JOBJ_HIDDEN);
         }
-        disabled_clock = data->x34[1].joints[4];
+        disabled_clock = data->xC_u.x0.x34[1].joints[4];
         HSD_JObjReqAnimAll(disabled_clock, mn_804D4B90);
         HSD_JObjAnimAll(disabled_clock);
         return;
@@ -420,12 +421,13 @@ void mn_8022FB88(u8 arg0, void* arg1)
     for (show_count = 0, show_digit = digit_indices; show_count < 4;
          show_count++, show_digit++)
     {
-        HSD_JObjClearFlagsAll(data->x34[1].joints[*show_digit], JOBJ_HIDDEN);
+        HSD_JObjClearFlagsAll(data->xC_u.x0.x34[1].joints[*show_digit],
+                              JOBJ_HIDDEN);
     }
-    enabled_clock = data->x34[1].joints[4];
+    enabled_clock = data->xC_u.x0.x34[1].joints[4];
     HSD_JObjReqAnimAll(enabled_clock, mn_804D6BD8);
     HSD_JObjAnimAll(enabled_clock);
-    digits = data->x34[1].joints;
+    digits = data->xC_u.x0.x34[1].joints;
     time = arg0;
     minutes_tens = digits[2];
     HSD_JObjReqAnimAll(minutes_tens, (f32) (u8) (time / 10));
@@ -466,22 +468,24 @@ void mn_8022FD18(u8 arg0)
     time_indices = mn_804DBE08;
     if (arg0 != 0) {
         for (i = 0, ptr0 = stock_digits.idx; i < 2; i++, ptr0++) {
-            HSD_JObjSetFlagsAll(data->x34[1].joints[*ptr0], JOBJ_HIDDEN);
+            HSD_JObjSetFlagsAll(data->xC_u.x0.x34[1].joints[*ptr0],
+                                JOBJ_HIDDEN);
         }
         for (i = 0, ptr1 = time_indices.idx; i < 5; i++, ptr1++) {
-            HSD_JObjClearFlagsAll(data->x34[1].joints[*ptr1], JOBJ_HIDDEN);
+            HSD_JObjClearFlagsAll(data->xC_u.x0.x34[1].joints[*ptr1],
+                                  JOBJ_HIDDEN);
         }
         mn_8022FB88(data2->x3, data2);
         return;
     }
     for (i = 0, ptr2 = stock_digits.idx; i < 2; i++, ptr2++) {
-        HSD_JObjClearFlagsAll(data->x34[1].joints[*ptr2], JOBJ_HIDDEN);
+        HSD_JObjClearFlagsAll(data->xC_u.x0.x34[1].joints[*ptr2], JOBJ_HIDDEN);
     }
     for (i = 0, ptr3 = time_indices.idx; i < 5; i++, ptr3++) {
-        HSD_JObjSetFlagsAll(data->x34[1].joints[*ptr3], JOBJ_HIDDEN);
+        HSD_JObjSetFlagsAll(data->xC_u.x0.x34[1].joints[*ptr3], JOBJ_HIDDEN);
     }
     val = data->x9;
-    jobjs = data->x34[1].joints;
+    jobjs = data->xC_u.x0.x34[1].joints;
     jobj = jobjs[7];
     HSD_JObjReqAnimAll(jobj, (f32) (u8) (data->x9 / 10));
     HSD_JObjAnimAll(jobj);
@@ -499,9 +503,9 @@ static inline void mn_8022FEC8_AnimDigit(HSD_JObj* jobj, u8 digit)
 static inline void mn_8022FEC8_AnimDamageDigits(u8 value,
                                                 struct mn_802307F8_t* data)
 {
-    mn_8022FEC8_AnimDigit(HSD_JObjGetChild(data->x34[3].joints[2]),
+    mn_8022FEC8_AnimDigit(HSD_JObjGetChild(data->xC_u.x0.x34[3].joints[2]),
                           (u8) (value / 10));
-    mn_8022FEC8_AnimDigit(HSD_JObjGetChild(data->x34[3].joints[3]),
+    mn_8022FEC8_AnimDigit(HSD_JObjGetChild(data->xC_u.x0.x34[3].joints[3]),
                           (u8) (value % 10));
 }
 
@@ -523,7 +527,7 @@ static inline void mn_8022FEC8_AnimStockDigits(struct mn_802307F8_t* data,
     HSD_JObj** digit_jobjs;
     HSD_JObj* digit_jobj;
     HSD_JObj* digit_jobj2;
-    digit_jobjs = data->x34[1].joints;
+    digit_jobjs = data->xC_u.x0.x34[1].joints;
     digit_jobj = digit_jobjs[7];
     mn_8022FEC8_AnimDigit(digit_jobj, (u8) (value / 10));
     digit_jobj2 = digit_jobjs[8];
@@ -654,7 +658,7 @@ static inline void mn_80230274_InitOptionRoots(HSD_JObj** option_roots,
                     visible++;
                 }
             }
-            p = (HSD_JObj*) data->xC[base[(u8) visible]];
+            p = (HSD_JObj*) data->xC_u.xC[base[(u8) visible]];
             if (p == NULL) {
                 v = NULL;
             } else {
@@ -754,9 +758,9 @@ void mn_80230274(HSD_GObj* arg0, int arg1, int arg2)
     }
 
     if (arg2 != 0) {
-        mn_8022FEC8(arg0, data->x34[mn_804A04F0.hovered_selection].joints[0],
-                    mn_804A04F0.hovered_selection,
-                    mn_804A04F0.confirmed_selection);
+        mn_8022FEC8(
+            arg0, data->xC_u.x0.x34[mn_804A04F0.hovered_selection].joints[0],
+            mn_804A04F0.hovered_selection, mn_804A04F0.confirmed_selection);
     }
 
     for (i = 0; i < count; i++) {
@@ -782,7 +786,7 @@ void mn_80230274(HSD_GObj* arg0, int arg1, int arg2)
             }
             mn_8022ED6C(roots[2], settings);
             mn_8022ED6C(roots[8], &submenu_arrow_anim);
-            mn_80230198(arg0, data->x34[i].joints[0], i);
+            mn_80230198(arg0, data->xC_u.x0.x34[i].joints[0], i);
             if (i == 1 && arg2 != 0 && focus == 0) {
                 if (mn_804A04F0.confirmed_selection == 1) {
                     HSD_JObjReqAnim(roots[7], mn_804D4B88[0]);
@@ -886,7 +890,7 @@ void fn_802309F0(HSD_GObj* arg0)
             data->xA = 2;
         }
         state = data->xA;
-        jobj = data->xC[2];
+        jobj = data->xC_u.xC[2];
         switch (state) {
         case 1:
             anim = &mn_803EC770[5];
@@ -912,7 +916,7 @@ void fn_802309F0(HSD_GObj* arg0)
 
     state = data->xA;
     if (state != 0) {
-        jobj = data->xC[2];
+        jobj = data->xC_u.xC[2];
         switch (state) {
         case 1:
             anim = &mn_803EC770[5];
@@ -1015,7 +1019,7 @@ s32 mn_80230D18(struct mn_802307F8_t* arg0, HSD_JObj* arg1, int arg2)
 
     ret = 0;
     for (i = 0; i < 10; i++) {
-        ret = lb_80011E24(arg1, &arg0->xC[i], i, -1);
+        ret = lb_80011E24(arg1, &arg0->xC_u.xC[i], i, -1);
     }
     return ret;
 }
@@ -1096,7 +1100,7 @@ HSD_GObj* mn_80230E38(int arg0)
     }
 
     if ((u8) arg0 != 0) {
-        HSD_JObj* anim_jobj = user_data->xC[2];
+        HSD_JObj* anim_jobj = user_data->xC_u.xC[2];
         switch ((s32) user_data->xA) {
         case 2:
             break;
@@ -1115,7 +1119,7 @@ HSD_GObj* mn_80230E38(int arg0)
     for (i = 0; i < (s32) num_options; i++) {
         vis_before = mn_80230E38_CountVisible((u8) i);
 
-        option_jobj = user_data->xC[mn_803EC600[(u8) vis_before]];
+        option_jobj = user_data->xC_u.xC[mn_803EC600[(u8) vis_before]];
         vis_total = mn_80230E38_CountVisible(7);
 
         HSD_JObjReqAnim(option_jobj, (f32) vis_total);
@@ -1172,8 +1176,8 @@ HSD_GObj* mn_80230E38(int arg0)
                 HSD_JObjAnimAll(value_jobj);
 
                 for (j = 0; j < sub_count_ptr[i]; j++) {
-                    lb_80011E24(value_jobj, &user_data->x34[i].joints[j], j,
-                                -1);
+                    lb_80011E24(value_jobj,
+                                &user_data->xC_u.x0.x34[i].joints[j], j, -1);
                 }
 
                 switch (i) {
@@ -1189,8 +1193,9 @@ HSD_GObj* mn_80230E38(int arg0)
                         HSD_JObjAddAnimAll(text, MenMainNmRl_Top.animjoint,
                                            MenMainNmRl_Top.matanim_joint,
                                            MenMainNmRl_Top.shapeanim_joint);
-                        HSD_JObjAddChild(user_data->x34[1].joints[*index_ptr],
-                                         text);
+                        HSD_JObjAddChild(
+                            user_data->xC_u.x0.x34[1].joints[*index_ptr],
+                            text);
                     }
                     mn_8022FD18(
                         (u8) (((struct mn_802307F8_t*) mn_804D6BD0->user_data)
@@ -1213,15 +1218,18 @@ HSD_GObj* mn_80230E38(int arg0)
                         HSD_JObjAddAnimAll(text, MenMainNmRl_Top.animjoint,
                                            MenMainNmRl_Top.matanim_joint,
                                            MenMainNmRl_Top.shapeanim_joint);
-                        HSD_JObjAddChild(user_data->x34[3].joints[*index_ptr],
-                                         text);
+                        HSD_JObjAddChild(
+                            user_data->xC_u.x0.x34[3].joints[*index_ptr],
+                            text);
                     }
                     digit_jobj = (HSD_JObj*) mn_80231634(
-                        (struct mn_80231634_t*) user_data->x34[3].joints[2]);
+                        (struct mn_80231634_t*) user_data->xC_u.x0.x34[3]
+                            .joints[2]);
                     HSD_JObjReqAnimAll(digit_jobj, (f32) (u8) (value / 10));
                     HSD_JObjAnimAll(digit_jobj);
                     digit_jobj = (HSD_JObj*) mn_80231634(
-                        (struct mn_80231634_t*) user_data->x34[3].joints[3]);
+                        (struct mn_80231634_t*) user_data->xC_u.x0.x34[3]
+                            .joints[3]);
                     HSD_JObjReqAnimAll(digit_jobj, (f32) (u8) (value % 10));
                     HSD_JObjAnimAll(digit_jobj);
                     break;
@@ -1243,9 +1251,9 @@ HSD_GObj* mn_80230E38(int arg0)
                             value_als = &mn_803EC734[value - 1];
                         }
                     }
-                    HSD_JObjReqAnimAll(user_data->x34[i].joints[0],
+                    HSD_JObjReqAnimAll(user_data->xC_u.x0.x34[i].joints[0],
                                        value_als->end_frame);
-                    HSD_JObjAnimAll(user_data->x34[i].joints[0]);
+                    HSD_JObjAnimAll(user_data->xC_u.x0.x34[i].joints[0]);
                     break;
                 }
                 }

@@ -61,7 +61,7 @@ HSD_GObj* it_802896CC(Vec3* arg0)
 void itKusudama_Logic4_Spawned(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
-    ip->xDCE_flag.b7 = 0;
+    ip->xDCE_flag.x0.b7 = 0;
     ip->xDAC_itcmd_var0 = 0;
     ip->xDB0_itcmd_var1 = 0;
     ip->xDB4_itcmd_var2 = 0;
@@ -445,7 +445,7 @@ static inline void itKusudama_UnkMotion3_inline(Item_GObj* gobj)
     ip->x40_vel.y = 0.0f;
     ip->x40_vel.x = 0.0f;
     ip->xDD4_itemVar.kusudama.x4 = 0x5A;
-    ip->xDD1_flag.b1 = 1;
+    ip->xDD1_flag.x0.b1 = 1;
     it_8026B3A8(gobj);
     rot_y = HSD_JObjGetRotationY(jobj);
     Item_80268E5C(gobj, 1, ITEM_ANIM_UPDATE);
@@ -587,7 +587,7 @@ void it_8028AC74(Item_GObj* gobj)
     it_8027518C(gobj);
     ip->x40_vel.x = 0.0f;
     ip->x40_vel.y = 0.0f;
-    ip->xDCF_flag.b2 = true;
+    ip->xDCF_flag.x0.b2 = true;
     ip->xDD4_itemVar.kusudama.x0 = true;
     ip->xDD4_itemVar.kusudama.x4 = 0x28;
     it_80275444(gobj);
@@ -614,7 +614,7 @@ void it_8028AD44(Item_GObj* gobj)
     it_802756D0(gobj);
     ip->x40_vel.x = 0.0f;
     ip->x40_vel.y = 0.0f;
-    ip->xDCF_flag.b2 = true;
+    ip->xDCF_flag.x0.b2 = true;
     ip->xDD4_itemVar.kusudama.x0 = true;
     ip->xDD4_itemVar.kusudama.x4 = 0x55;
     it_8026B3A8(gobj);

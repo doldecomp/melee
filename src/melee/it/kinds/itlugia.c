@@ -380,7 +380,7 @@ void it_802D1DD8(Item_GObj* gobj)
         ip = GET_ITEM(gobj);
         Item_80268E5C(gobj, 1, ITEM_ANIM_UPDATE);
         Item_SetEffectHitlagCallbacks(ip);
-        old_ip->xDD1_flag.b1 = 1;
+        old_ip->xDD1_flag.x0.b1 = 1;
     }
 }
 
@@ -402,7 +402,7 @@ Item_GObj* it_802D1E8C(Item_GObj* gobj, ItemKind kind, f32 param)
     spawn.kind = kind;
     spawn.x0_parent_gobj = ip->owner;
     spawn.x4_parent_gobj2 = gobj;
-    spawn.x44_flag.b0 = 1;
+    spawn.x44_flag.x0.b0 = 1;
     spawn.x40 = 0;
     return Item_80268B18(&spawn);
 }

@@ -40,7 +40,7 @@ static IntroData gm_804D68E0;
 /// Scene IDs for ::gm_Mode_Adventure_States and ::gm_803DE650. Each stage
 /// of Adventure Mode owns one block of eight IDs; #gm_8017BE84 turns an ID
 /// back into its stage number.
-enum {
+enum ADVENTURE {
     /* Stage 1: Mushroom Kingdom */
     /* 0x00 */ ADVENTURE_INTRO = 0x00,
     /* 0x01 */ ADVENTURE_MUSHROOM_KINGDOM, ///< Yoshi team

@@ -68,7 +68,7 @@ typedef struct {
 typedef struct _DispItem {
     /* 0x00 */ struct _DispItem* next;
     /* 0x04 */ s32 type;
-    /* 0x08 */ union {
+    /* 0x08 */ union _DispItem_content {
         char text[128];
         DispBar bars[1];
         u8 gradient[8];

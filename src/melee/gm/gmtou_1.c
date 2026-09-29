@@ -1495,6 +1495,10 @@ typedef struct Lbl804799D8Text {
     char x4E[20];
 } Lbl804799D8Text;
 
+struct fn_8019A158_state {
+    s32 slot;
+};
+
 void fn_8019A158(void)
 {
     Lbl804799D8Text* base_ptr;
@@ -1510,9 +1514,7 @@ void fn_8019A158(void)
     s32 i;
     int k;
     MatchEnd* me;
-    struct {
-        s32 slot;
-    } state;
+    struct fn_8019A158_state state;
     u8* cursor;
     s32 local1, local2;
     PAD_STACK(4);
@@ -1995,9 +1997,6 @@ u8 const lbl_803B7D04[20] = { 0 };
 /// Handles match countdown, audio transitions, and end conditions.
 void fn_8019AF50(s32* arg0, u32 arg1, u32 arg2)
 {
-    typedef struct {
-        s32 d[5];
-    } TimerFmt;
     TimerFmt sp_buf;
     u32 buttons;
     TmData* tm = (TmData*) arg0;
@@ -2223,13 +2222,15 @@ static inline void setupScene(TmData* tm, struct Lbl804799D8_t* d8)
     fn_8018FA24();
 }
 
+struct Preload {
+    s32 stage;
+    s32 char_ids[4];
+    s32 costumes[4];
+};
+
 void fn_8019B458(s32* arg0)
 {
-    struct Preload {
-        s32 stage;
-        s32 char_ids[4];
-        s32 costumes[4];
-    } req;
+    struct Preload req;
     TmData* tm = (TmData*) arg0;
     struct Lbl804799D8_t* d8 = &lbl_804799D8;
     s32 i;

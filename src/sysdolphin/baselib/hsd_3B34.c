@@ -784,6 +784,12 @@ void hsd_803B4D64(u32 arg0, u32 arg1)
     longjmp(hsd_804D2648.buf, 1);
 }
 
+struct hsd_803B51C8_inline_state {
+    u8* base;
+    JpegWork* work;
+    u8* quant_table;
+};
+
 static inline s32
 hsd_803B51C8_inline(s32 image, s32 image_height, s32 image_width,
                     const char* output, s32 output_capacity,
@@ -802,11 +808,7 @@ hsd_803B51C8_inline(s32 image, s32 image_height, s32 image_width,
     u16 scratch_r0;
     u8 scratch_r6_3;
     u8 scratch_r7_3;
-    struct {
-        u8* base;
-        JpegWork* work;
-        u8* quant_table;
-    } state;
+    struct hsd_803B51C8_inline_state state;
     u32 scratch_r23;
     u32 comment_size;
     s32 width;

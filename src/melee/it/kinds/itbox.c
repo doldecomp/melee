@@ -63,7 +63,7 @@ Item_GObj* it_80286088(Item_GObj* parent_gobj)
         spawn.vel.x = 0.0F;
         spawn.x0_parent_gobj = NULL;
         spawn.x4_parent_gobj2 = spawn.x0_parent_gobj;
-        spawn.x44_flag.b0 = 0;
+        spawn.x44_flag.x0.b0 = 0;
         spawn.x40 = 0;
 
         result = Item_80268B18(&spawn);
@@ -91,7 +91,7 @@ Item_GObj* it_80286088(Item_GObj* parent_gobj)
 void itBox_Logic1_Spawned(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
-    ip->xDCE_flag.b7 = 0;
+    ip->xDCE_flag.x0.b7 = 0;
     ip->xDD4_itemVar.box.opened = 0;
     ip->xDD4_itemVar.box.spawned_gobj = NULL;
     it_8028655C(gobj);
@@ -384,7 +384,7 @@ void it_80286AA4(Item_GObj* gobj)
 
     ip->x40_vel.x = 0.0F;
     ip->x40_vel.y = 0.0F;
-    ip->xDCF_flag.b2 = 1;
+    ip->xDCF_flag.x0.b2 = 1;
     ip->xDD4_itemVar.box.opened = 1;
     ip->xDD4_itemVar.box.despawn_timer = 40;
 
@@ -426,7 +426,7 @@ void it_80286BA0(Item_GObj* gobj)
 
     ip->x40_vel.x = 0.0F;
     ip->x40_vel.y = 0.0F;
-    ip->xDCF_flag.b2 = 1;
+    ip->xDCF_flag.x0.b2 = 1;
     ip->xDD4_itemVar.box.opened = 1;
     ip->xDD4_itemVar.box.despawn_timer = 40;
 

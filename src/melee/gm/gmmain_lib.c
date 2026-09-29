@@ -376,7 +376,8 @@ s32 gmMainLib_8015CFCC(u8 arg0)
 
 void gmMainLib_8015D00C(u8 arg0)
 {
-    GetPersistentFighterDataBase(gmMainLib_GetCardData())[arg0].x7A.b0 = true;
+    GetPersistentFighterDataBase(gmMainLib_GetCardData())[arg0].x7A.x0.b0 =
+        true;
     gmMainLib_8015ED98()->xC |= selkind_mask(arg0);
 }
 

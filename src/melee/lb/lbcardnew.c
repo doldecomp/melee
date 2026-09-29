@@ -101,7 +101,7 @@ ASSERT_OFFSET(CardTask, new_filename, 0x31);
 /* 01B068 */ static int taskReadHeader(void);
 /* 01B14C */ static int taskListSnapshots(void);
 /* 01B614 */ static int taskFindFile(const char* filename);
-/* 432A68 */ static struct {
+/* 432A68 */ static struct lbcardnew_state_t {
     /* 0x000 */ void* work_area;
     /* 0x004 */ void* lib_area;
     /* 0x008 */ int chan;

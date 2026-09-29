@@ -584,6 +584,12 @@ static inline void grOldPupupu_Advance(Ground_GObj* gobj)
     gp->u.oldpupupu.xD4 = 1;
 }
 
+struct grOldPupupu_802113E0_stack {
+    u8 pad[148];
+    Vec3 pos;
+    u8 tail[16];
+};
+
 void grOldPupupu_802113E0(Ground_GObj* gobj)
 {
     Ground* gp = gobj->user_data;
@@ -643,11 +649,7 @@ void grOldPupupu_802113E0(Ground_GObj* gobj)
 
         case 1:
             if (gp->u.oldpupupu.xD4 != 0) {
-                struct {
-                    u8 pad[148];
-                    Vec3 pos;
-                    u8 tail[16];
-                } stack;
+                struct grOldPupupu_802113E0_stack stack;
                 s32 side;
                 f32 side_f;
 

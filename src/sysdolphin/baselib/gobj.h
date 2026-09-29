@@ -51,15 +51,15 @@ typedef struct _HSD_GObjLibInitDataType {
 } HSD_GObjLibInitDataType;
 
 extern struct _unk_gobj_struct {
-    union {
+    union _unk_gobj_struct_x0 {
         u32 flags;
-        struct {
+        struct _unk_gobj_struct_x0_x0 {
             u32 in_delayed_proc : 1;
             u32 delay_remove_gobj : 1;
             u32 delay_remove_proc : 1;
             u32 delay_change_gobj_pri : 1;
-        };
-    };
+        } x0;
+    } x0;
     u32 type;
     u8 p_link;
     u8 p_prio;

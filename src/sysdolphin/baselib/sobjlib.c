@@ -198,14 +198,14 @@ HSD_SObj* HSD_SObjLib_803A477C(HSD_GObj* gobj, HSD_SObjDesc* desc,
     sobj->x18 = 0.0F;
     sobj->x20 = 1.0F;
     sobj->x1C = 1.0F;
-    sobj->x3F = 0xFF;
-    sobj->x3E = 0xFF;
-    sobj->x3D = 0xFF;
-    sobj->x3C = 0xFF;
-    sobj->x3B = 0xFF;
-    sobj->x3A = 0xFF;
-    sobj->x39 = 0xFF;
-    sobj->x38 = 0xFF;
+    sobj->x3C_u.x0.x3F = 0xFF;
+    sobj->x3C_u.x0.x3E = 0xFF;
+    sobj->x3C_u.x0.x3D = 0xFF;
+    sobj->x3C_u.x0.x3C = 0xFF;
+    sobj->x38_u.x0.x3B = 0xFF;
+    sobj->x38_u.x0.x3A = 0xFF;
+    sobj->x38_u.x0.x39 = 0xFF;
+    sobj->x38_u.x0.x38 = 0xFF;
     sobj->x40 = 0;
     sobj->x48 = 0;
     sobj->x4C_callback = NULL;
@@ -402,7 +402,7 @@ void HSD_SObjLib_803A4A68(HSD_SObj* sobj)
         GXSetAlphaCompare(GX_ALWAYS, 0, GX_AOP_OR, GX_ALWAYS, 0);
 
         if (sobj->x40 & 4) {
-            GXSetTevColor(GX_TEVREG0, sobj->x3C_color);
+            GXSetTevColor(GX_TEVREG0, sobj->x3C_u.x3C_color);
             GXSetTevColorIn(GX_TEVSTAGE0, GX_CC_ZERO, GX_CC_TEXC, GX_CC_C0,
                             GX_CC_ZERO);
             GXSetTevColorOp(GX_TEVSTAGE0, GX_TEV_ADD, GX_TB_ZERO,
@@ -425,8 +425,8 @@ void HSD_SObjLib_803A4A68(HSD_SObj* sobj)
             switch (tex_fmt) {
             case GX_TF_I4:
             case GX_TF_I8:
-                GXSetTevColor(GX_TEVREG0, sobj->x38_color);
-                GXSetTevColor(GX_TEVREG1, sobj->x3C_color);
+                GXSetTevColor(GX_TEVREG0, sobj->x38_u.x38_color);
+                GXSetTevColor(GX_TEVREG1, sobj->x3C_u.x3C_color);
                 GXSetTevColorIn(GX_TEVSTAGE0, GX_CC_C0, GX_CC_C1, GX_CC_TEXC,
                                 GX_CC_ZERO);
                 GXSetTevColorOp(GX_TEVSTAGE0, GX_TEV_ADD, GX_TB_ZERO,
@@ -438,8 +438,8 @@ void HSD_SObjLib_803A4A68(HSD_SObj* sobj)
                 break;
             case GX_TF_IA4:
             case GX_TF_IA8:
-                GXSetTevColor(GX_TEVREG0, sobj->x38_color);
-                GXSetTevColor(GX_TEVREG1, sobj->x3C_color);
+                GXSetTevColor(GX_TEVREG0, sobj->x38_u.x38_color);
+                GXSetTevColor(GX_TEVREG1, sobj->x3C_u.x3C_color);
                 GXSetTevColorIn(GX_TEVSTAGE0, GX_CC_C0, GX_CC_C1, GX_CC_TEXC,
                                 GX_CC_ZERO);
                 GXSetTevColorOp(GX_TEVSTAGE0, GX_TEV_ADD, GX_TB_ZERO,
@@ -450,7 +450,7 @@ void HSD_SObjLib_803A4A68(HSD_SObj* sobj)
                                 GX_CS_SCALE_1, GX_TRUE, GX_TEVPREV);
                 break;
             case GX_TF_RGB565:
-                GXSetTevColor(GX_TEVREG0, sobj->x3C_color);
+                GXSetTevColor(GX_TEVREG0, sobj->x3C_u.x3C_color);
                 GXSetTevColorIn(GX_TEVSTAGE0, GX_CC_ZERO, GX_CC_TEXC, GX_CC_C0,
                                 GX_CC_ZERO);
                 GXSetTevColorOp(GX_TEVSTAGE0, GX_TEV_ADD, GX_TB_ZERO,
@@ -466,7 +466,7 @@ void HSD_SObjLib_803A4A68(HSD_SObj* sobj)
             case GX_TF_C8:
             case GX_TF_C14X2:
             case GX_TF_CMPR:
-                GXSetTevColor(GX_TEVREG0, sobj->x3C_color);
+                GXSetTevColor(GX_TEVREG0, sobj->x3C_u.x3C_color);
                 GXSetTevColorIn(GX_TEVSTAGE0, GX_CC_ZERO, GX_CC_TEXC, GX_CC_C0,
                                 GX_CC_ZERO);
                 GXSetTevColorOp(GX_TEVSTAGE0, GX_TEV_ADD, GX_TB_ZERO,
@@ -482,8 +482,8 @@ void HSD_SObjLib_803A4A68(HSD_SObj* sobj)
         }
     }
 
-    (void) discard_color(sobj->x38_color);
-    (void) discard_color(sobj->x3C_color);
+    (void) discard_color(sobj->x38_u.x38_color);
+    (void) discard_color(sobj->x3C_u.x3C_color);
 
     sin_half = 0.5F * sinf(sobj->x18);
     angle = sobj->x18;

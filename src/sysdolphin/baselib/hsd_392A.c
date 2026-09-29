@@ -12,14 +12,14 @@
 typedef struct {
     /* 0x00 */ void* next;
     /* 0x04 */ s32 type;
-    /* 0x08 */ union {
+    /* 0x08 */ union PerfDispItem_content {
         u8 bytes[0x80];
         char text[0x80];
-        struct {
+        struct PerfDispItem_content_bars {
             s32 count;
             u32 color;
         } bars[16];
-        struct {
+        struct PerfDispItem_content_gradient {
             f32 pos;
             u32 color;
         } gradient[16];

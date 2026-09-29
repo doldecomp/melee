@@ -132,7 +132,7 @@ void itFire_UnkMotion0_Phys(Item_GObj* gobj)
         it_80273454(gobj);
         ip->x40_vel.y = attrs->x4;
         itFire_UnkMotion0_Phys_inline(gobj);
-        ip->xDD1_flag.b1 = 1;
+        ip->xDD1_flag.x0.b1 = 1;
     }
 }
 

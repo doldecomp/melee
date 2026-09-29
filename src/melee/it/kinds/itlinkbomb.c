@@ -64,7 +64,7 @@ void it_8029D9A4(HSD_GObj* gobj, enum_t msid, Item_StateChangeFlags arg2)
     jobj = item->xBBC_dynamicBoneTable->bones[3];
     y = HSD_JObjGetTranslationY(jobj);
     x = HSD_JObjGetRotationX(jobj);
-    if (item->xDD4_itemVar.linkbomb.x0.b0) {
+    if (item->xDD4_itemVar.linkbomb.x0.x0.b0) {
         Item_80268E5C(gobj, msid, arg2 | ITEM_CMD_UPDATE);
     } else {
         Item_80268E5C(gobj, msid, arg2 | ITEM_ANIM_UPDATE);
@@ -85,7 +85,7 @@ static inline void it_8029DB5C_Inline_AnimAddWithMtxDirty(HSD_GObj* gobj)
     HSD_JObj* temp_r31_2;
 
     item_2 = GET_ITEM(gobj);
-    if (item_2->xDD4_itemVar.linkbomb.x0.b0 == 0) {
+    if (item_2->xDD4_itemVar.linkbomb.x0.x0.b0 == 0) {
         temp_f31 = item_2->xDD4_itemVar.linkbomb.x8;
         temp_r31_2 = item_2->xBBC_dynamicBoneTable->bones[3];
         HSD_JObjAddTranslationYWithMtxDirty(temp_r31_2, temp_f31);
@@ -102,7 +102,7 @@ static inline void it_8029DB5C_Inline_Matching(HSD_GObj* gobj, Item* item,
     HSD_JObj* jobj;
 
     if ((item->xD44_lifeTimer <= sa->xC) &&
-        item->xDD4_itemVar.linkbomb.x0.b0 == 0)
+        item->xDD4_itemVar.linkbomb.x0.x0.b0 == 0)
     {
         jobj = gobj->hsd_obj;
         item->xD0_itemStateDesc = &article->xC_itemStates->x0_itemStateDesc[3];
@@ -111,7 +111,7 @@ static inline void it_8029DB5C_Inline_Matching(HSD_GObj* gobj, Item* item,
             Item_80268D34(gobj, item_state_desc);
         }
         HSD_JObjAnimAll(jobj);
-        item->xDD4_itemVar.linkbomb.x0.b0 = true;
+        item->xDD4_itemVar.linkbomb.x0.x0.b0 = true;
     }
     item->xD44_lifeTimer = item->xD44_lifeTimer - 1.0f;
     it_8029DB5C_Inline_AnimAddWithMtxDirty(gobj);
@@ -126,7 +126,7 @@ static inline void it_8029DB5C_Inline_AnimAdd_Part(HSD_GObj* gobj)
     HSD_JObj* temp_r31_2;
 
     item_2 = GET_ITEM(gobj);
-    if (item_2->xDD4_itemVar.linkbomb.x0.b0 == 0) {
+    if (item_2->xDD4_itemVar.linkbomb.x0.x0.b0 == 0) {
         temp_f31 = item_2->xDD4_itemVar.linkbomb.x8;
         temp_r31_2 = item_2->xBBC_dynamicBoneTable->bones[3];
         HSD_JObjAddTranslationY(temp_r31_2, temp_f31);
@@ -144,7 +144,7 @@ static inline void it_8029DB5C_Inline_TimerCheck_Part(HSD_GObj* gobj,
     ItemStateDesc* item_state_desc;
 
     if ((item->xD44_lifeTimer <= sa->xC) &&
-        item->xDD4_itemVar.linkbomb.x0.b0 == 0)
+        item->xDD4_itemVar.linkbomb.x0.x0.b0 == 0)
     {
         jobj = gobj->hsd_obj;
         item->xD0_itemStateDesc = &article->xC_itemStates->x0_itemStateDesc[3];
@@ -153,7 +153,7 @@ static inline void it_8029DB5C_Inline_TimerCheck_Part(HSD_GObj* gobj,
             Item_80268D34(gobj, item_state_desc);
         }
         HSD_JObjAnimAll(jobj);
-        item->xDD4_itemVar.linkbomb.x0.b0 = true;
+        item->xDD4_itemVar.linkbomb.x0.x0.b0 = true;
     }
     item->xD44_lifeTimer -= 1.0F;
 }
@@ -181,9 +181,9 @@ static inline void it_8029DD58_inline(Item* item, itLinkBombAttributes* attr,
 {
     f32 temp_f2;
     it_80275158(temp_r3, attr->lifetime);
-    item->xDD4_itemVar.linkbomb.x0.b0 = false;
+    item->xDD4_itemVar.linkbomb.x0.x0.b0 = false;
     item->xDD4_itemVar.linkbomb.x10 = fighter_gobj;
-    item->xDD4_itemVar.linkbomb.x0.b2 = false;
+    item->xDD4_itemVar.linkbomb.x0.x0.b2 = false;
     temp_f2 = attr->lifetime - attr->xC;
     item->xDD4_itemVar.linkbomb.x8 = (-2.8000002f / temp_f2) * item->scl;
     item->xDD4_itemVar.linkbomb.xC = (-0.15707964f / temp_f2) * item->scl;
@@ -209,7 +209,7 @@ HSD_GObj* it_8029DD58(Item_GObj* fighter_gobj, Vec3* arg1, u32 arg2, int arg3,
     spawn.vel.x = 0.0F;
     spawn.x0_parent_gobj = fighter_gobj;
     spawn.x4_parent_gobj2 = spawn.x0_parent_gobj;
-    spawn.x44_flag.b0 = true;
+    spawn.x44_flag.x0.b0 = true;
     spawn.x40 = 0;
     temp_r3 = Item_80268B18(&spawn);
     if (temp_r3 != NULL) {
@@ -473,10 +473,10 @@ void it_8029F18C(HSD_GObj* gobj)
         mpCollSetFacingDir(
             &item->x378_itemColl,
             float_sign_int_inline(item->xDD4_itemVar.linkbomb.x4));
-        item->xDD4_itemVar.linkbomb.x0.b1 = true;
+        item->xDD4_itemVar.linkbomb.x0.x0.b1 = true;
 #ifdef MUST_MATCH
     } else {
-        item->xDD4_itemVar.linkbomb.x0.b1 = false;
+        item->xDD4_itemVar.linkbomb.x0.x0.b1 = false;
         itResetVelocity(item);
     }
 #endif
@@ -513,7 +513,7 @@ void itLinkbomb_UnkMotion4_Phys(HSD_GObj* gobj)
 
     item = GET_ITEM(gobj);
     sa = item->xC4_article_data->x4_specialAttributes;
-    if (item->xDD4_itemVar.linkbomb.x0.b1) {
+    if (item->xDD4_itemVar.linkbomb.x0.x0.b1) {
         temp_f2 = item->x40_vel.x;
         if (temp_f2 != zero) {
             item->x40_vel.x =
@@ -615,7 +615,7 @@ bool itLinkBomb_Logic16_DmgReceived(Item_GObj* gobj)
     if (item->msid != 5) {
         if (item->xCA0 >= sa->x10) {
             it_8029F69C(gobj);
-        } else if (!item->xDD4_itemVar.linkbomb.x0.b2) {
+        } else if (!item->xDD4_itemVar.linkbomb.x0.x0.b2) {
             if (item->x40_vel.x > sa->x30) {
                 item->facing_dir = -item->xCCC_incDamageDirection;
                 item->x40_vel.x = sa->x14 * item->facing_dir;
@@ -626,7 +626,7 @@ bool itLinkBomb_Logic16_DmgReceived(Item_GObj* gobj)
                 it_80272980(gobj);
             }
             item->x40_vel.y = sa->x18 * item->facing_dir;
-            item->xDD4_itemVar.linkbomb.x0.b2 = true;
+            item->xDD4_itemVar.linkbomb.x0.x0.b2 = true;
         }
     }
     return 0;

@@ -26,8 +26,8 @@ void ftMh_MS_388_80155A58(HSD_GObj* gobj_1, HSD_GObj* gobj_2)
     ftCo_800DD168(gobj_1);
     ft_1->x1A5C = gobj_2;
     ft_1->victim_gobj = gobj_2;
-    ft_1->x221B_b5 = false;
-    ft_1->x221B_b7 = false;
+    ft_1->x221B.x221B_b5 = false;
+    ft_1->x221B.x221B_b7 = false;
     ft_1->facing_dir = ft_2->facing_dir;
     ftCommon_InitGrab(ft_1, 0, ftCo_800DA824(ft_2));
     ftCo_800DB368(ft_2, ft_1);

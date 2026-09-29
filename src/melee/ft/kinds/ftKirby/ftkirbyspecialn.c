@@ -334,7 +334,7 @@ void ftKb_SpecialN_800F5F68(HSD_GObj* gobj)
     ftKb_DatAttrs* da = fp->dat_attrs;
     PAD_STACK(4 * 12);
 
-    fp->throw_flags = 0;
+    fp->x2210.throw_flags = 0;
     fp->cmd_vars[0] = fp->cmd_vars[1] = 0;
     fp->u.kb.xE0 = 4;
 
@@ -362,7 +362,7 @@ void ftKb_SpecialN_800F6070(HSD_GObj* gobj)
     ftKb_DatAttrs* da = fp->dat_attrs;
     PAD_STACK(4 * 12);
 
-    fp->throw_flags = 0;
+    fp->x2210.throw_flags = 0;
     fp->cmd_vars[0] = fp->cmd_vars[1] = 0;
     fp->u.kb.xE0 = 4;
     fp->u.kb.xE4 = da->jumpaerial_unk;

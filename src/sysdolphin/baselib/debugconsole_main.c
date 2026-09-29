@@ -1216,7 +1216,7 @@ void hsd_80395644(void)
     *p = saved;
 }
 
-static struct {
+static struct lbl_8040B8C4_t {
     ExcptNode* x0;
     UNK_T x4;
     UNK_T x8;
@@ -2400,14 +2400,15 @@ void hsd_80397520(void* node_ptr)
     }
 }
 
+struct ParticleInputState {
+    u8 _pad[0x54];
+    PADStatus pads[8];
+    s32 port;
+    s32 repeat;
+};
+
 void hsd_803975D4(void)
 {
-    struct ParticleInputState {
-        u8 _pad[0x54];
-        PADStatus pads[8];
-        s32 port;
-        s32 repeat;
-    };
     struct ParticleScreenState* sp = &hsd_804CF810;
     PADStatus* cur_pads;
     PADStatus* pads;

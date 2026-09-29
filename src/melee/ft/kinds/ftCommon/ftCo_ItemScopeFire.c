@@ -14,7 +14,7 @@ void fn_800D8140(Fighter_GObj* gobj, int arg1)
     Fighter* fp = GET_FIGHTER(gobj);
     FtMotionId msid;
 
-    fp->throw_flags = 0;
+    fp->x2210.throw_flags = 0;
     msid = fn_800D769C(fp, ftCo_MS_ItemScopeFire);
     {
         HSD_GObj* gobj2 = gobj;
@@ -32,7 +32,7 @@ void fn_800D81D0(Fighter_GObj* gobj, int arg1)
     Fighter* fp = GET_FIGHTER(gobj);
     FtMotionId msid;
 
-    fp->throw_flags = 0;
+    fp->x2210.throw_flags = 0;
     msid = fn_800D769C(fp, ftCo_MS_ItemScopeAirFire);
     {
         HSD_GObj* gobj2 = gobj;

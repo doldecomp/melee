@@ -39,7 +39,7 @@ bool ftCo_800D27C4(Fighter* fp)
     if (!var_r0) {
         return false;
     }
-    switch (fp->x2070.x2071_b0_3) {
+    switch (fp->x2070.x0.x2071_b0_3) {
     case 12:
     case 13:
         return false;
@@ -59,8 +59,8 @@ bool fn_800D2818(Fighter* fp)
     {
         return false;
     }
-    tmp = fp->x2070.x2071_b0_3;
-    if (tmp != 5 && (tmp >= 5 || tmp != 0) && !fp->x2070.x2071_b4) {
+    tmp = fp->x2070.x0.x2071_b0_3;
+    if (tmp != 5 && (tmp >= 5 || tmp != 0) && !fp->x2070.x0.x2071_b4) {
         return false;
     } else {
         return true;
@@ -98,7 +98,7 @@ void fn_800D290C(Fighter_GObj* gobj)
 
     victim = getFtVictim(fp);
     if (victim != NULL) {
-        if (fp->x221B_b5) {
+        if (fp->x221B.x221B_b5) {
             ftCo_CaptureCut_Enter(victim);
         } else {
             HSD_GObj* tmp = victim;

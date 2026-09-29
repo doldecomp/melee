@@ -71,7 +71,7 @@ void ftMt_SpecialS_Enter(HSD_GObj* gobj)
 
     u8 _[8];
 
-    fp->throw_flags = 0;
+    fp->x2210.throw_flags = 0;
     fp->cmd_vars[0] = 0;
     fp->cmd_vars[1] = 0;
     fp->mv.mt.SpecialS.isConfusionReflect = false;
@@ -107,7 +107,7 @@ void ftMt_SpecialAirS_Enter(HSD_GObj* gobj)
 
     u8 _[8];
 
-    fp->throw_flags = 0;
+    fp->x2210.throw_flags = 0;
     fp->cmd_vars[0] = 0;
     fp->cmd_vars[1] = 0;
     fp->mv.mt.SpecialS.isConfusionReflect = false;

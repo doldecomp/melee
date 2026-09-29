@@ -170,7 +170,7 @@ static inline void it_8026C88C_inline(RandomItemSpawner* alloc)
                     spawn.vel.x = spawn.vel.y = spawn.vel.z = 0.0F;
                     spawn.x0_parent_gobj = NULL;
                     spawn.x4_parent_gobj2 = spawn.x0_parent_gobj;
-                    spawn.x44_flag.b0 = chk;
+                    spawn.x44_flag.x0.b0 = chk;
                     spawn.x40 = 0;
                 } else {
                     chk = false;
@@ -460,7 +460,7 @@ bool it_8026D258(Vec3* pos, ItemKind kind)
         spawn.vel.x = 0.0f;
         spawn.x0_parent_gobj = NULL;
         spawn.x4_parent_gobj2 = spawn.x0_parent_gobj;
-        spawn.x44_flag.b0 = 1;
+        spawn.x44_flag.x0.b0 = 1;
         spawn.x40 = 0;
         Item_80268B9C(&spawn);
         item_spawn_chk = true;

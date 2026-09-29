@@ -16,16 +16,18 @@ HSD_ClassInfo hsdFogAdj = { FogAdjInfoInit };
 
 const GXColor HSD_Fog_804DE6F0 = { 0 };
 
+struct HSD_FogSet_proj {
+    f32 x0;
+    f32 v[6];
+};
+
 void HSD_FogSet(HSD_Fog* fog)
 {
     GXFogAdjTable tbl;
     f32 v[6];
     HSD_CObj* cobj;
     s32 range;
-    struct {
-        f32 x0;
-        f32 v[6];
-    } proj;
+    struct HSD_FogSet_proj proj;
 
     if (fog == NULL) {
         GXSetFog(0, 0.0F, 0.0F, 0.0F, 0.0F, HSD_Fog_804DE6F0);

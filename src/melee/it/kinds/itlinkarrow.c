@@ -697,7 +697,7 @@ bool itLinkarrow_UnkMotion4_Anim(Item_GObj* gobj)
             it_802756D0(gobj);
         }
         it_8026BB44(gobj);
-        ip->xDCF_flag.b2 = 1;
+        ip->xDCF_flag.x0.b2 = 1;
         ip->xDD4_itemVar.linkarrow.xF0 += 1;
         if (ip->xDD4_itemVar.linkarrow.xF0 > 0x12C) {
             return true;

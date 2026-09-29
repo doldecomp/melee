@@ -68,6 +68,10 @@ static inline void efAsync_SetEffectFacingDir(EF_Effect* effect,
     HSD_JObjSetRotationY(GET_JOBJ(effect->gobj), rotation);
 }
 
+struct efAsync_Dispatch_state {
+    HSD_Generator* generator;
+};
+
 void* efAsync_Dispatch(s32 gfx_id, HSD_GObj* gobj, va_list vlist)
 {
     Vec3 translate;
@@ -89,9 +93,7 @@ void* efAsync_Dispatch(s32 gfx_id, HSD_GObj* gobj, va_list vlist)
     HSD_JObj* jobj_3;
     Vec3* va_vec3;
     s32 count;
-    struct {
-        HSD_Generator* generator;
-    } state;
+    struct efAsync_Dispatch_state state;
 
     ret_obj = NULL;
     switch (gfx_id) {

@@ -114,7 +114,7 @@ Item_GObj* it_802E6AEC(Ground* arg0, int arg1, int arg2, HSD_JObj* arg3,
     spawn.vel.x = spawn.vel.y = spawn.vel.z = 0.0f;
     spawn.x0_parent_gobj = 0;
     spawn.x4_parent_gobj2 = spawn.x0_parent_gobj;
-    spawn.x44_flag.b0 = arg5 ? 1 : 0;
+    spawn.x44_flag.x0.b0 = arg5 ? 1 : 0;
     spawn.x40 = 0;
     it_804D6D38[spawn.kind - It_Kind_Kuriboh]->x0_common_attr = &it_803F8C08;
 
@@ -123,10 +123,10 @@ Item_GObj* it_802E6AEC(Ground* arg0, int arg1, int arg2, HSD_JObj* arg3,
         Item* item = GET_ITEM((HSD_GObj*) item_gobj);
         if (arg3 != 0) {
             item->xDD4_itemVar.yaku.x2 = 1;
-            item->xDD4_itemVar.yaku.x4 = arg3;
+            item->xDD4_itemVar.yaku.x4_u.x4 = arg3;
         } else if (pos != 0) {
             item->xDD4_itemVar.yaku.x2 = 2;
-            item->xDD4_itemVar.yaku.x4_vec = *pos;
+            item->xDD4_itemVar.yaku.x4_u.x4_vec = *pos;
         }
 
         item->xDD4_itemVar.yaku.x0 = arg1;
@@ -159,12 +159,12 @@ void it_2E6A_UnkMotion19_Phys(HSD_GObj* item_gobj)
     item = GET_ITEM((HSD_GObj*) item_gobj);
     item_jobj = item_gobj->hsd_obj;
     if (item->xDD4_itemVar.yaku.x2 == 1) {
-        lb_8000B1CC(item->xDD4_itemVar.yaku.x4, NULL, &sp24);
+        lb_8000B1CC(item->xDD4_itemVar.yaku.x4_u.x4, NULL, &sp24);
         item->pos = sp24;
-        jobj1 = item->xDD4_itemVar.yaku.x4;
+        jobj1 = item->xDD4_itemVar.yaku.x4_u.x4;
         HSD_JObjGetScale(jobj1, &sp24);
         HSD_JObjSetScale(item_jobj, &sp24);
-        jobj2 = item->xDD4_itemVar.yaku.x4;
+        jobj2 = item->xDD4_itemVar.yaku.x4_u.x4;
         HSD_JObjGetRotation(jobj2, &sp14);
         HSD_JObjSetRotation(item_jobj, &sp14);
     } else if (item->xDD4_itemVar.yaku.x2 != 2) {

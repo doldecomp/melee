@@ -52,7 +52,7 @@ itMewtwoDisable_Logic67_SpawnMewtwoDisable(Fighter_GObj* fighter_gobj,
     vel->x = 0.0f;
     spawnitem.x0_parent_gobj = fighter_gobj;
     spawnitem.x4_parent_gobj2 = spawnitem.x0_parent_gobj;
-    spawnitem.x44_flag.b0 = true;
+    spawnitem.x44_flag.x0.b0 = true;
     spawnitem.x40 = 0;
 
     if ((item_gobj = Item_80268B18(&spawnitem)) != NULL) {

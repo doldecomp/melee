@@ -100,10 +100,10 @@ void fn_80277D8C(HSD_MObj* mobj, u32 rendermode_arg, u32 unused_arg)
     if (item->x5C9 != 0xFF) {
         rendermode |= RENDER_BLENDING;
     }
-    if (item->xDCF_flag.b4 && !item->xDCF_flag.b5) {
+    if (item->xDCF_flag.x0.b4 && !item->xDCF_flag.x0.b5) {
         rendermode |= RENDER_NO_ZUPDATE;
     }
-    if (item->xDCF_flag.b5 && (item->x5C9 == 0xFF)) {
+    if (item->xDCF_flag.x0.b5 && (item->x5C9 == 0xFF)) {
         pe_desc.flags = 0x38;
         pe_desc.dst_alpha = 0;
         pe_desc.type = 0;
@@ -133,7 +133,7 @@ HSD_TExp* it_80277F90(Item* item, HSD_MObj* mobj, HSD_TExp* arg2)
     s32 reg;
     int chk;
 
-    if (!item->xDCF_flag.b4 && item->x548_colorOverlay.x7C_flag2 &&
+    if (!item->xDCF_flag.x0.b4 && item->x548_colorOverlay.x7C_flag2 &&
         item->x548_colorOverlay.x7C_light_enable)
     {
         arg2->cnst = info->texp_tmpl;
@@ -181,17 +181,17 @@ void it_80278108(Item* item, HSD_MObj* mobj, HSD_TExp* texp)
     ColorOverlay* overlay;
     struct it_MObjInfo* info = &it_mobj;
 
-    if (item->xDCF_flag.b5) {
+    if (item->xDCF_flag.x0.b5) {
         return;
     }
     overlay = &item->x548_colorOverlay;
     chk1 = false;
-    if (item->xDCF_flag.b3) {
+    if (item->xDCF_flag.x0.b3) {
         if (item->owner != NULL && item->xDC8_word.flags.x13) {
             overlay = ftCo_800C0674(item->owner);
         }
     }
-    if (item->xDCF_flag.b4) {
+    if (item->xDCF_flag.x0.b4) {
         chk1 = true;
         sp168 = item->xBC8.x0_unk;
     } else if (item->x5C8) {

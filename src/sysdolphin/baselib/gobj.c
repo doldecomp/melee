@@ -93,12 +93,13 @@ void HSD_GObj_RunProcs(void)
                     HSD_GObj_CurrentInvokedProc = proc;
                     proc->on_invoke(proc->gobj);
                     HSD_GObj_NextInvokedProc = proc->next;
-                    if (HSD_GObj_DelayedProcInfo.flags != 0) {
-                        HSD_GObj_DelayedProcInfo.in_delayed_proc = 1;
-                        if (HSD_GObj_DelayedProcInfo.delay_remove_gobj) {
+                    if (HSD_GObj_DelayedProcInfo.x0.flags != 0) {
+                        HSD_GObj_DelayedProcInfo.x0.x0.in_delayed_proc = 1;
+                        if (HSD_GObj_DelayedProcInfo.x0.x0.delay_remove_gobj) {
                             HSD_GObjFree(proc->gobj);
                         } else {
-                            if (HSD_GObj_DelayedProcInfo.delay_change_gobj_pri)
+                            if (HSD_GObj_DelayedProcInfo.x0.x0
+                                    .delay_change_gobj_pri)
                             {
                                 HSD_GObjPLink_ChangeGObjPri_Unk(
                                     HSD_GObj_DelayedProcInfo.type, proc->gobj,
@@ -106,11 +107,13 @@ void HSD_GObj_RunProcs(void)
                                     HSD_GObj_DelayedProcInfo.p_prio,
                                     HSD_GObj_DelayedProcInfo.gobj);
                             }
-                            if (HSD_GObj_DelayedProcInfo.delay_remove_proc) {
+                            if (HSD_GObj_DelayedProcInfo.x0.x0
+                                    .delay_remove_proc)
+                            {
                                 HSD_GObjProc_RemoveProc(proc);
                             }
                         }
-                        HSD_GObj_DelayedProcInfo.flags = 0;
+                        HSD_GObj_DelayedProcInfo.x0.flags = 0;
                     }
                     HSD_GObj_CurrentInvokedProcGObj = NULL;
                     HSD_GObj_CurrentInvokedProc = NULL;
