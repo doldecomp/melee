@@ -1352,7 +1352,7 @@ void mn_80231804(HSD_Archive* archive, int arg1)
     HSD_SisLib_803A5E70();
 
     lbArchive_LoadSections(
-        archive, (void**) &MenMainBack_Top.joint, "MenMainBack_Top_joint",
+        archive, &MenMainBack_Top.joint, "MenMainBack_Top_joint",
         &MenMainBack_Top.animjoint, "MenMainBack_Top_animjoint",
         &MenMainBack_Top.matanim_joint, "MenMainBack_Top_matanim_joint",
         &MenMainBack_Top.shapeanim_joint, "MenMainBack_Top_shapeanim_joint",

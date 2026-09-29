@@ -346,8 +346,8 @@ void mnInfoBonus_80252F8C(void)
     *mnInfoBonus_804D6C80 = 0;
     archive = mn_804D6BB8;
     lbArchive_LoadSections(
-        archive, (void**) &o->x50.joint, "MenMainConBo_Top_joint",
-        &o->x50.animjoint, "MenMainConBo_Top_animjoint", &o->x50.matanim_joint,
+        archive, &o->x50.joint, "MenMainConBo_Top_joint", &o->x50.animjoint,
+        "MenMainConBo_Top_animjoint", &o->x50.matanim_joint,
         "MenMainConBo_Top_matanim_joint", &o->x50.shapeanim_joint,
         "MenMainConBo_Top_shapeanim_joint", 0);
     mnInfoBonus_inline_SetGObjFlag(

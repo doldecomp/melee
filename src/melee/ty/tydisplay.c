@@ -1812,7 +1812,7 @@ static inline void tyDisplay_SetGridSize(TyDspConfig* cfg, TyDspGrid* grid)
 
 void tyDisplay_Scene_OnEnter(void* arg0)
 {
-    s32 sp18;
+    HSD_Joint* sp18;
     TyDspConfig* cfg;
     TyDspBgData* data;
     TyDspGrid* grid;

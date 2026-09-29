@@ -718,7 +718,7 @@ void mnEvent_8024E838(int event_idx, bool first_time)
     archive = mn_804D6BB8;
 
     lbArchive_LoadSections(
-        archive, (void*) &MenMainConEv.joint, "MenMainConEv_Top_joint",
+        archive, &MenMainConEv.joint, "MenMainConEv_Top_joint",
         &MenMainConEv.animjoint, "MenMainConEv_Top_animjoint",
         &MenMainConEv.matanim_joint, "MenMainConEv_Top_matanim_joint",
         &MenMainConEv.shapeanim_joint, "MenMainConEv_Top_shapeanim_joint",

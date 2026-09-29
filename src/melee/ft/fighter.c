@@ -176,38 +176,67 @@ void Fighter_FirstInitialize_80067A84(void)
     HSD_ObjAllocInit(&fighter_x59C_alloc_data, 0x8000, 0x20);
 }
 
+/// The @c ftLoadCommonData root of @c PlCo.dat: the tables every fighter
+/// shares, copied into the globals of the same types.
+typedef struct ftLoadCommonData {
+    /* +00 */ ftCommonData* common;
+    /* +04 */ int** x4;
+    /* +08 */ float (*x8)[5];
+    /* +0C */ float* xC;
+    /* +10 */ FighterPartsTable** parts_table;
+    /* +14 */ struct Fighter_804D6540_t** x14;
+    /* +18 */ struct Fighter_804D653C_t* x18;
+    /* +1C */ struct Fighter_804D653C_t* x1C;
+    /* +20 */ UNK_T x20;
+    /* +24 */ Vec2** x24;
+    /* +28 */ struct Fighter_ShakeTable_t* grab_mash_shake;
+    /* +2C */ struct Fighter_ShakeTable_t* smash_charge_shake;
+    /* +30 */ struct Fighter_804D6524_t* x30;
+    /* +34 */ struct Fighter_804D6520_t* x34;
+    /* +38 */ struct Fighter_804D651C_t* x38;
+    /* +3C */ struct Fighter_804D6518_t* x3C;
+    /* +40 */ HSD_Joint* x40;
+    /* +44 */ UNK_T x44;
+    /* +48 */ u8* x48;
+    /* +4C */ u8* x4C;
+    /* +50 */ HSD_Joint* x50;
+    /* +54 */ CrowdConfig* crowd_config;
+    /* +58 */ struct Fighter_804D64FC_t* x58;
+} ftLoadCommonData;
+ASSERT_SIZE(ftLoadCommonData, 0x5C);
+
 void Fighter_LoadCommonData(void)
 {
-    void** pData;
-    lbArchive_LoadSymbols("PlCo.dat", (void**) &pData, "ftLoadCommonData", 0);
+    ftLoadCommonData* data;
+    lbArchive_LoadSymbols("PlCo.dat", &data, "ftLoadCommonData", 0);
 
     // copy 23 4-byte chunks from pData to p_ftCommonData in reverse order,
     // equivalent to this: for(i=0; i<23; i++)
     //   (&Fighter_804D64FC)[23-1-i] = pData[i];
     // loop unrolling doesn't work (only up to 8 elements)
-    p_ftCommonData = pData[0]; // p_ftCommonData
-    Fighter_804D6550 = pData[1];
-    Fighter_804D654C = pData[2];
-    Fighter_804D6548 = pData[3];
-    ftPartsTable = pData[4];
-    Fighter_804D6540 = pData[5];
-    Fighter_804D653C = pData[6];
-    Fighter_804D6538 = pData[7];
-    Fighter_804D6534 = pData[8];
-    Fighter_804D6530 = pData[9];
-    Fighter_GrabMashShake = pData[10];
-    Fighter_SmashChargeShakeTable = pData[11];
-    Fighter_804D6524 = pData[12];
-    Fighter_804D6520 = pData[13];
-    Fighter_804D651C = pData[14];
-    Fighter_804D6518 = pData[15];
-    Fighter_804D6514 = pData[16];
-    Fighter_804D6510 = pData[17];
-    Fighter_804D650C = pData[18];
-    Fighter_804D6508 = pData[19];
-    Fighter_804D6504 = pData[20];
-    gCrowdConfig = pData[21];
-    Fighter_804D64FC = pData[22];
+    p_ftCommonData = data->common; // p_ftCommonData
+    Fighter_804D6550 = data->x4;
+    Fighter_804D654C = data->x8;
+    Fighter_804D6548 = data->xC;
+    ftPartsTable = data->parts_table;
+    Fighter_804D6540 = data->x14;
+    Fighter_804D653C = data->x18;
+    Fighter_804D6538 = data->x1C;
+    Fighter_804D6534 = data->x20;
+    Fighter_804D6530 = data->x24;
+    Fighter_GrabMashShake = data->grab_mash_shake;
+    Fighter_SmashChargeShakeTable = data->smash_charge_shake;
+    Fighter_804D6524 = data->x30;
+    Fighter_804D6520 = data->x34;
+    Fighter_804D651C = data->x38;
+    Fighter_804D6518 = data->x3C;
+    Fighter_804D6514 = data->x40;
+    Fighter_804D6510 = data->x44;
+    Fighter_804D650C = data->x48;
+    Fighter_804D6508 = data->x4C;
+    Fighter_804D6504 = data->x50;
+    gCrowdConfig = data->crowd_config;
+    Fighter_804D64FC = data->x58;
 }
 
 void Fighter_UpdateModelScale(Fighter_GObj* gobj)
