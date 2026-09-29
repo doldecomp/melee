@@ -145,6 +145,7 @@ __pycache__
 
 # CMake
 cmake-build-*/
+CMakeUserPresets.json
 
 # Mongo Explorer plugin
 .idea/**/mongoSettings.xml

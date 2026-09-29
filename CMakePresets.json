@@ -1,0 +1,60 @@
+{
+  "version": 6,
+  "cmakeMinimumRequired": {
+    "major": 3,
+    "minor": 25,
+    "patch": 0
+  },
+  "configurePresets": [
+    {
+      "name": "base",
+      "hidden": true,
+      "generator": "Ninja",
+      "binaryDir": "${sourceDir}/build/${presetName}",
+      "installDir": "${sourceDir}/build/${presetName}/install"
+    },
+    {
+      "name": "debug",
+      "hidden": true,
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Debug"
+      }
+    },
+    {
+      "name": "native",
+      "displayName": "Native",
+      "description": "32-bit host build against aurora",
+      "inherits": [
+        "base"
+      ],
+      "toolchainFile": "${sourceDir}/cmake/i686-gcc.cmake"
+    },
+    {
+      "name": "ppc-dwarf",
+      "displayName": "PPC DWARF",
+      "description": "32-bit big-endian PowerPC build emitting DWARF type information",
+      "inherits": [
+        "debug",
+        "base"
+      ],
+      "toolchainFile": "${sourceDir}/cmake/ppc32-clang.cmake",
+      "cacheVariables": {
+        "MELEE_DWARF": {
+          "type": "BOOL",
+          "value": true
+        },
+        "NEWLIB_INCLUDE": "$env{NEWLIB_INCLUDE}"
+      }
+    }
+  ],
+  "buildPresets": [
+    {
+      "name": "native",
+      "configurePreset": "native"
+    },
+    {
+      "name": "ppc-dwarf",
+      "configurePreset": "ppc-dwarf"
+    }
+  ]
+}

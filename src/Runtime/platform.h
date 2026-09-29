@@ -5,6 +5,7 @@
 #include <stddef.h>  // IWYU pragma: export
 
 #include <dolphin/types.h> // IWYU pragma: export
+#include <sys/types.h>     // IWYU pragma: export
 
 /// @typedef bool
 /// @note Dolphin's #BOOL macro is not supported.
@@ -26,9 +27,6 @@
 
 /// The underlying type of an @c enum, used as a placeholder
 typedef int enum_t;
-
-/// Signed variant of ::size_t
-typedef signed int ssize_t;
 
 /// A @c void callback with no arguments.
 typedef void (*Event)(void);

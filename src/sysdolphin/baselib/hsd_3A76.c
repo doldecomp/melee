@@ -1,4 +1,3 @@
-#include <printf.h> // IWYU pragma: keep
 #include <string.h>
 
 #include "cobj.h"
