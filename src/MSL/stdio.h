@@ -129,6 +129,7 @@ int printf(const char* format, ...);
 int sprintf(char* s, const char* format, ...);
 int vprintf(const char* format, va_list arg);
 int vsprintf(char* s, const char* format, va_list arg);
+int vsnprintf(char* s, size_t n, const char* format, va_list arg);
 
 size_t fwrite(const void*, size_t memb_size, size_t num_memb, FILE*);
 
