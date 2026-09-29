@@ -29,14 +29,7 @@ static u8 mnSoundTest_804D6C44;
 static s32 mnSoundTest_804D6C48;
 static s32 mnSoundTest_804D6C4C;
 
-typedef struct {
-    void* joint;
-    void* animjoint;
-    void* matanim_joint;
-    void* shapeanim_joint;
-} SoundTestModelDesc;
-
-static SoundTestModelDesc mnSoundTest_804A08C8;
+static StaticModelDesc mnSoundTest_804A08C8;
 
 AnimLoopSettings vec_0 = {
     0,
@@ -120,10 +113,6 @@ s32 data_4[] = { 25, 8,  1,  6,  16, 17, 4,  2,  13, 0,  11, 5,  12, 14, 18,
 static char mnSoundTest_803EF4F4[] = "Can't get user_data.\n";
 static char mnSoundTest_803EF50C[] = "mnsoundtest.c";
 static char mnSoundTest_803EF51C[] = "user_data";
-static char mnSoundTest_803EF528[] = "MenMainConTs_Top_joint";
-static char mnSoundTest_803EF540[] = "MenMainConTs_Top_animjoint";
-static char mnSoundTest_803EF55C[] = "MenMainConTs_Top_matanim_joint";
-static char mnSoundTest_803EF57C[] = "MenMainConTs_Top_shapeanim_joint";
 
 void mnSoundTest_8024A790(mnSoundTest_GObj* arg0)
 {
@@ -792,7 +781,7 @@ void mnSoundTest_8024BCA0(int arg0)
     mnSoundTest_GObj* gobj;
     HSD_GObjProc* proc;
     HSD_JObj* category_jobj;
-    SoundTestModelDesc* model_desc;
+    StaticModelDesc* model_desc;
     soundtest_user_data* user_data;
     soundtest_user_data* text_user_data;
     u32 pad2;
@@ -866,10 +855,11 @@ HSD_GObjProc* mnSoundTest_8024BEE0(s32 arg0)
     archive = mn_804D6BB8;
     mnSoundTest_804D6C44 = 1;
     lbArchive_LoadSections(
-        archive, (&mnSoundTest_804A08C8.joint), mnSoundTest_803EF528,
-        &mnSoundTest_804A08C8.animjoint, mnSoundTest_803EF540,
-        &mnSoundTest_804A08C8.matanim_joint, mnSoundTest_803EF55C,
-        &mnSoundTest_804A08C8.shapeanim_joint, mnSoundTest_803EF57C, 0);
+        archive, &mnSoundTest_804A08C8.joint, "MenMainConTs_Top_joint",
+        &mnSoundTest_804A08C8.animjoint, "MenMainConTs_Top_animjoint",
+        &mnSoundTest_804A08C8.matanim_joint, "MenMainConTs_Top_matanim_joint",
+        &mnSoundTest_804A08C8.shapeanim_joint,
+        "MenMainConTs_Top_shapeanim_joint", 0);
     mnSoundTest_8024BCA0(arg0);
     proc = HSD_GObj_SetupProc(GObj_Create(0U, 1U, 0x80U), fn_8024B2B0, 0U);
     proc->flags_3 = (u16) HSD_GObj_804D783C;

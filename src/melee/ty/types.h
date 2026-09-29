@@ -343,22 +343,6 @@ struct ToyNameData {
     s16 xA;
 };
 
-struct TyLightSymbolEntry {
-    char* name;
-    void* unk;
-};
-
-struct TyLightIndexEntry {
-    s32 idx;
-    u8 pad[8];
-};
-
-struct TyLightFile {
-    u8 pad0[0xCC];
-    TyLightSymbolEntry symbols[6];
-    TyLightIndexEntry entries[1];
-};
-
 struct tyUnkStruct {
     /* 0x00 */ HSD_GObj* x0;
     /* 0x04 */ void* x4;

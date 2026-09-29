@@ -477,7 +477,7 @@ void mnGallery_80259868(void)
     archive = mn_804D6BB8;
 
     lbArchive_LoadSections(
-        archive, (void*) &mnGallery_804A0BA0.joint, "MenMainConGa_Top_joint",
+        archive, &mnGallery_804A0BA0.joint, "MenMainConGa_Top_joint",
         &mnGallery_804A0BA0.animjoint, "MenMainConGa_Top_animjoint",
         &mnGallery_804A0BA0.matanim_joint, "MenMainConGa_Top_matanim_joint",
         &mnGallery_804A0BA0.shapeanim_joint,

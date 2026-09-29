@@ -2790,12 +2790,13 @@ void ftKb_SpecialN_800EED50(s32 arg0, s32 arg1)
                 costumes = ftKb_Init_803CB3E8[arg0];
                 cs = &ftKb_Init_803CB3E8[arg0][arg1];
                 if (cs->matanim_joint_name != NULL) {
-                    lbArchive_80017040(NULL, costumes[arg1].dat_filename, item,
-                                       cs->joint_name, &item->matanim,
-                                       cs->matanim_joint_name, 0);
+                    lbArchive_80017040(NULL, costumes[arg1].dat_filename,
+                                       &item->joint, cs->joint_name,
+                                       &item->matanim, cs->matanim_joint_name,
+                                       0);
                 } else {
-                    lbArchive_80017040(NULL, costumes[arg1].dat_filename, item,
-                                       cs->joint_name, 0);
+                    lbArchive_80017040(NULL, costumes[arg1].dat_filename,
+                                       &item->joint, cs->joint_name, 0);
                     item->matanim = NULL;
                 }
             }

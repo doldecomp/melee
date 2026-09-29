@@ -1014,7 +1014,7 @@ void fn_80180630(int arg0, int arg1, int arg2, bool arg3, MatchEnd* arg4)
 
     PAD_STACK(0x18);
     {
-        void* scene_data;
+        SceneDesc* scene_data;
 
         archive = lbArchive_80016DBC("GmRegClr", &scene_data,
                                      "ScGamRegClear_scene_data", 0);

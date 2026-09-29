@@ -941,7 +941,7 @@ void mnDataDel_80250170(void)
     mnDataDel_804D6C6C = NULL;
     archive = mn_804D6BB8;
     lbArchive_LoadSections(
-        archive, (void**) &assets[0].joint, "MenMainConDl_Top_joint",
+        archive, &assets[0].joint, "MenMainConDl_Top_joint",
         &assets[0].animjoint, "MenMainConDl_Top_animjoint",
         &assets[0].matanim_joint, "MenMainConDl_Top_matanim_joint",
         &assets[0].shapeanim_joint, "MenMainConDl_Top_shapeanim_joint",

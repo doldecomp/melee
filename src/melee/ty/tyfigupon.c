@@ -1439,7 +1439,7 @@ void tyFigupon_Scene_OnEnter(void* arg0)
     HSD_JObj* jobj;
     void* ud;
     char* archive_name;
-    void* sp20;
+    HSD_Joint* sp20;
     u8 kind;
     PAD_STACK(16);
 
