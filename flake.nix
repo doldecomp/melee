@@ -104,6 +104,7 @@
             shellHook = self.packages.${system}.default.postPatch + ''
               export PRE_COMMIT_HOME="$PWD/build/pre-commit"
               mkdir -p "$PRE_COMMIT_HOME"
+              pre-commit install --install-hooks
               ./configure.py ${lib.escapeShellArgs self.packages.${system}.default.configureFlags}
             '';
 
