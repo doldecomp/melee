@@ -1,11 +1,8 @@
 {
   stdenvNoCC,
   lib,
-  buildEnv,
-  fetchFromGitHub,
   fetchpatch,
   makeWrapper,
-  overrideCC,
   pkgsCross,
 }:
 
@@ -14,17 +11,7 @@ let
 
   tag = "devkitPPC_r${version}";
 
-  ppcCrossGcc = pkgsCross.ppc-embedded.buildPackages.gcc.cc;
   ppcCrossBinutils = pkgsCross.ppc-embedded.buildPackages.binutils-unwrapped;
-
-  gcc' = ppcCrossGcc.overrideAttrs (oa: {
-    patches = oa.patches ++ [
-      (fetchpatch {
-        url = "https://raw.githubusercontent.com/devkitPro/buildscripts/${tag}/patches/gcc-15.2.0-7.patch";
-        hash = "sha256-o+R4TSAXJAi2Wgry/hozm83atJjku6JyKwIWfhk8QXk=";
-      })
-    ];
-  });
 
   bintools' = ppcCrossBinutils.overrideAttrs (oa: {
     patches = oa.patches ++ [
@@ -41,7 +28,7 @@ stdenvNoCC.mkDerivation {
   nativeBuildInputs = [
     makeWrapper
   ];
-  #for bindir in '${lib.getBin gcc'}/bin' '${lib.getBin bintools'}/bin'; do
+
   buildCommand = ''
     for bindir in '${lib.getBin bintools'}/bin'; do
       cd "$bindir"

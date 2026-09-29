@@ -1,15 +1,16 @@
 {
-  lib,
   stdenv,
+  lib,
   cmake,
   aurora-src,
 }:
 stdenv.mkDerivation {
-  name = "melee-gcc-native";
+  name = "melee-cmake";
 
   src = lib.fileset.toSource {
     root = ../.;
     fileset = lib.fileset.unions [
+      ../CMakeLists.txt
       ../src/sysdolphin
       ../src/melee
       ../src/Runtime
@@ -18,17 +19,13 @@ stdenv.mkDerivation {
     ];
   };
 
-  postPatch = ''
-    cp ${./CMakeLists.txt} CMakeLists.txt
-  '';
-
   nativeBuildInputs = [
     cmake
   ];
 
   makeFlags = [ "-k" ];
 
-  env.AURORA_SRC = aurora-src;
+  env.AURORA_SRC = "${aurora-src}";
 
   __structuredAttrs = true;
 }

@@ -1,9 +1,8 @@
 {
-  lib,
   stdenvNoCC,
+  lib,
   doxygen,
   python3,
-  runCommand,
   wibo,
   mwcc,
   # Shown on the cleanup index page; the flake passes its own metadata since

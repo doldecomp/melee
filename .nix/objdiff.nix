@@ -1,10 +1,10 @@
 {
+  stdenvNoCC,
   lib,
   fetchFromGitHub,
   fontconfig,
   pkg-config,
   rustPlatform,
-  stdenv,
   srcOnly,
 }:
 
@@ -20,6 +20,7 @@ rustPlatform.buildRustPackage (finalAttrs: {
       rev = "v${finalAttrs.version}";
       hash = "sha256-ycO1koQDRA1WlRmLJrI0xxrIdd+v6IfW+JVAg0cuBa0=";
     };
+    stdenv = stdenvNoCC;
     patches = [
       ./duplicate-similar-dep.patch
     ];
