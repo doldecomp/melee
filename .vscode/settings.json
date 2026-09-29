@@ -1,7 +1,6 @@
 {
   "[c]": {
     "files.encoding": "utf8",
-    "files.eol": "\n",
     "editor.defaultFormatter": "llvm-vs-code-extensions.vscode-clangd"
   },
   "[cpp]": {
