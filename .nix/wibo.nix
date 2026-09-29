@@ -1,21 +1,15 @@
 {
   stdenv,
   lib,
-  fetchFromGitHub,
   mimalloc,
   cmake,
+  src,
 }:
 
 stdenv.mkDerivation (finalAttrs: {
   pname = "wibo";
-  version = "0.7.0";
-
-  src = fetchFromGitHub {
-    owner = "decompals";
-    repo = "wibo";
-    rev = finalAttrs.version;
-    hash = "sha256-PEqfvpS3p8Zooee7k59SN2UiSZWfITuB/VULIrfup4w=";
-  };
+  version = src.shortRev;
+  inherit src;
 
   patches = [
     ./wibo-no-case-insensitive.patch
