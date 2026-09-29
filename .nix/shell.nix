@@ -19,7 +19,7 @@ melee.overrideAttrs (oa: {
   nativeBuildInputs = oa.nativeBuildInputs ++ [
     pkgs.clang-tools
     pkgs.clang.cc.python
-    (pkgs.python3.withPackages (ps: [
+    (pkgs.python3.withPackages (ps: with ps; [
       m2c
       pyelftools
       pcpp

@@ -1,9 +1,9 @@
 {
+  stdenvNoCC,
   lib,
   fetchFromGitHub,
   git,
   rustPlatform,
-  stdenv,
 }:
 
 rustPlatform.buildRustPackage rec {
@@ -16,6 +16,8 @@ rustPlatform.buildRustPackage rec {
     rev = "v${version}";
     hash = "sha256-MMD6iY6IpRPycRCoSnXKkcwpVnrDTKw0EDqgyPOAjcM=";
   };
+
+  stdenv = stdenvNoCC;
 
   nativeBuildInputs = [
     git

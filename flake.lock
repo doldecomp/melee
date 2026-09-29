@@ -1,5 +1,22 @@
 {
   "nodes": {
+    "aurora-src": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1786866164,
+        "narHash": "sha256-jvnfdnRF5HtZ792lwUs0WYASwG/dHIkp9JaisLdntUc=",
+        "owner": "r-burns",
+        "repo": "aurora",
+        "rev": "e6a6f02ace4146e8a2f648d5c274dbb7dd89665c",
+        "type": "github"
+      },
+      "original": {
+        "owner": "r-burns",
+        "repo": "aurora",
+        "rev": "e6a6f02ace4146e8a2f648d5c274dbb7dd89665c",
+        "type": "github"
+      }
+    },
     "nixpkgs": {
       "locked": {
         "lastModified": 1786599213,
@@ -18,6 +35,7 @@
     },
     "root": {
       "inputs": {
+        "aurora-src": "aurora-src",
         "nixpkgs": "nixpkgs",
         "treefmt-nix": "treefmt-nix"
       }

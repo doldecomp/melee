@@ -196,7 +196,7 @@ jobs:
     - uses: cachix/cachix-action@v17
       with:
         name: doldecomp-melee
-    - run: nix build .#melee-gcc-native -L
+    - run: nix build .#melee-cmake -L
 
   build-nix:
     name: Build matching DOL with nix
