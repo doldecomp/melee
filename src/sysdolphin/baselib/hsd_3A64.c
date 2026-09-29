@@ -1,3 +1,4 @@
+#include <printf.h> // IWYU pragma: export
 #include <stdarg.h>
 #include <stdio.h>
 

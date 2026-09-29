@@ -2,8 +2,8 @@
 
 #include <Runtime/platform.h>
 
+#include <printf.h> // IWYU pragma: export
 #include <stdarg.h>
-#include <stdio.h>
 #include <string.h>
 
 #include "textdraw.h"
