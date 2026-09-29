@@ -1,13 +1,13 @@
 {
-  lib,
   stdenvNoCC,
+  lib,
   decomp-toolkit,
   devkitppc,
   fetchurl,
   mwcc,
   objdiff,
   ninja,
-  python3Minimal,
+  python3,
   wibo,
   main-dol,
 }:
@@ -43,7 +43,7 @@ stdenvNoCC.mkDerivation (finalAttrs: {
     decomp-toolkit
     devkitppc
     ninja
-    python3Minimal
+    python3
     wibo
   ];
 
