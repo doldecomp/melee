@@ -3,6 +3,11 @@
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     treefmt-nix.url = "github:numtide/treefmt-nix";
     treefmt-nix.inputs.nixpkgs.follows = "nixpkgs";
+
+    aurora-src = {
+      url = "github:r-burns/aurora/e6a6f02ace4146e8a2f648d5c274dbb7dd89665c";
+      flake = false;
+    };
   };
 
   outputs =
@@ -10,6 +15,7 @@
       self,
       nixpkgs,
       treefmt-nix,
+      aurora-src,
       ...
     }:
     let
@@ -26,20 +32,67 @@
           pkgs = import nixpkgs {
             inherit system;
             config.allowUnfree = true;
-            overlays = [ self.overlays.default ];
           };
+
+          pkgsMinPython = pkgs.appendOverlays [
+            (final: prev: {
+              python3 = prev.python3Minimal;
+            })
+          ];
+
+          devkitppc = pkgsMinPython.callPackage ./.nix/devkitppc.nix { };
+          decomp-toolkit = pkgs.callPackage ./.nix/decomp-toolkit.nix { };
+          mwcc = pkgsMinPython.callPackage ./.nix/mwcc.nix { };
+          objdiff = pkgs.callPackage ./.nix/objdiff.nix { };
+          wibo = pkgs.pkgsi686Linux.callPackage ./.nix/wibo.nix { };
+
+          main-dol = pkgsMinPython.requireFile {
+            name = "main.dol";
+            message = ''
+              Add melee's main.dol to your nix store with:
+                nix-store --add-fixed sha256 main.dol
+            '';
+            hash = "sha256-3CFQRRNCQ1C9oXp8ZegjcbRREqXfwenydJqLerDv9kY=";
+          };
+
+          m2c = pkgs.python3Packages.callPackage ./.nix/m2c.nix { };
+
         in
         {
-          packages = {
-            default = pkgs.melee;
-            melee-docs = pkgs.melee-docs.override {
-              rev = self.rev or self.dirtyRev or "unknown";
-              lastModifiedDate = self.lastModifiedDate or "";
+          packages = rec {
+            melee = pkgs.callPackage ./.nix/melee.nix {
+              inherit
+                decomp-toolkit
+                devkitppc
+                mwcc
+                objdiff
+                wibo
+                main-dol
+                ;
+              python3 = pkgs.python3.withPackages (ps: [
+                ps.pyelftools
+                ps.pcpp
+              ]);
             };
+
+            default = melee;
+
+            melee-gcc-native = pkgsMinPython.pkgsi686Linux.callPackage ./.nix/melee-gcc-native.nix {
+              inherit aurora-src;
+            };
+
+            melee-docs =
+              (pkgs.callPackage ./.nix/melee-docs.nix {
+                inherit mwcc;
+              }).override
+                {
+                  rev = self.rev or self.dirtyRev or "unknown";
+                  lastModifiedDate = self.lastModifiedDate or "";
+                };
           };
 
           formatter =
-            (treefmt-nix.lib.evalModule pkgs {
+            (treefmt-nix.lib.evalModule pkgsMinPython {
               config = {
                 enableDefaultExcludes = true;
                 projectRootFile = "flake.nix";
@@ -48,29 +101,31 @@
             }).config.build.wrapper;
 
           devShells.default = pkgs.mkShellNoCC {
-            shellHook = pkgs.melee.postPatch + ''
+            shellHook = self.packages.${system}.melee.postPatch + ''
               export PRE_COMMIT_HOME="$PWD/build/pre-commit"
               mkdir -p "$PRE_COMMIT_HOME"
-              ./configure.py ${lib.escapeShellArgs pkgs.melee.configureFlags}
+              ./configure.py ${lib.escapeShellArgs self.packages.${system}.melee.configureFlags}
             '';
-            inputsFrom = [ pkgs.melee ];
+
+            inputsFrom = [ self.packages.${system}.melee ];
+
             packages = [
-              pkgs.clang-tools-minimal
-              pkgs.clang.cc.python
               pkgs.pre-commit
-              (pkgs.python3.withPackages (
-                ps: with ps; [
-                  m2c
-                  pcpp
-                  pyelftools
-                ]
-              ))
+              m2c
             ];
           };
         };
     in
     {
-      overlays.default = import .nix/overlay.nix;
+      overlays.default = final: prev: {
+        inherit (self.packages.${final.system})
+          melee
+          melee-gcc-native
+          melee-docs
+          m2c
+          ;
+        default = self.packages.${final.system}.default;
+      };
 
       packages = lib.genAttrs supportedSystems (s: (perSystem s).packages);
       devShells = lib.genAttrs supportedSystems (s: (perSystem s).devShells);

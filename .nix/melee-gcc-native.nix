@@ -28,7 +28,7 @@ stdenv.mkDerivation {
 
   makeFlags = [ "-k" ];
 
-  env.AURORA_SRC = aurora-src;
+  env.AURORA_SRC = "${aurora-src}";
 
   __structuredAttrs = true;
 }
