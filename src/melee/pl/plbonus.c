@@ -193,23 +193,23 @@ void pl_8003891C(int player)
     temp_r31->xDC4 = 0;
     temp_r31->xDC8 = 0;
     temp_r31->xDCC = 0;
-    temp_r31->xDD0.bit0 = 0;
-    temp_r31->xDD0.bit1 = 0;
-    temp_r31->xDD0.bit2 = 0;
-    temp_r31->xDD0.bit3 = 0;
-    temp_r31->xDD0.bit4 = 0;
-    temp_r31->xDD0.bit5 = 0;
-    temp_r31->xDD0.bit6 = 0;
-    temp_r31->xDD0.bit7 = 0;
-    temp_r31->xDD1.bit0 = 0;
-    temp_r31->xDD1.bit1 = 0;
-    temp_r31->xDD1.bit2 = 0;
-    temp_r31->xDD1.bit3 = 0;
+    temp_r31->xDD0.x0.bit0 = 0;
+    temp_r31->xDD0.x0.bit1 = 0;
+    temp_r31->xDD0.x0.bit2 = 0;
+    temp_r31->xDD0.x0.bit3 = 0;
+    temp_r31->xDD0.x0.bit4 = 0;
+    temp_r31->xDD0.x0.bit5 = 0;
+    temp_r31->xDD0.x0.bit6 = 0;
+    temp_r31->xDD0.x0.bit7 = 0;
+    temp_r31->xDD1.x0.bit0 = 0;
+    temp_r31->xDD1.x0.bit1 = 0;
+    temp_r31->xDD1.x0.bit2 = 0;
+    temp_r31->xDD1.x0.bit3 = 0;
     temp_r31->xDB8 = 0;
-    temp_r31->xDD1.bit4 = 0;
-    temp_r31->xDD1.bit5 = 0;
-    temp_r31->xDD1.bit6 = 0;
-    temp_r31->xDD1.bit7 = 0;
+    temp_r31->xDD1.x0.bit4 = 0;
+    temp_r31->xDD1.x0.bit5 = 0;
+    temp_r31->xDD1.x0.bit6 = 0;
+    temp_r31->xDD1.x0.bit7 = 0;
 }
 
 void pl_80038F10(int player)
@@ -369,15 +369,15 @@ void pl_80039450(int player)
     fn_8003CC84(player);
     fn_8003D2EC(player);
 
-    if (!table->xDD0.bit1) {
+    if (!table->xDD0.x0.bit1) {
         setFlag(player, 0x4F);
     }
 
-    if (!gm_8016B0FC() && !table->xDD0.bit2) {
+    if (!gm_8016B0FC() && !table->xDD0.x0.bit2) {
         setFlag(player, 0x55);
     }
 
-    if (table->xDCC != 0U && table->xDD1.bit5) {
+    if (table->xDCC != 0U && table->xDD1.x0.bit5) {
         setFlag(player, 0x4E);
     }
 }
@@ -393,14 +393,14 @@ void fn_80039618(int player)
     u32 atk_x1A8 = stats->attacks.x1A8;
     u32* hit_counts = stats->hits.by_attack_counts;
     u32 hit_thrown = stats->hits.thrown_item_count;
-    u32* x358_counts = stats->x358_hits.by_attack_counts;
+    u32* x358_counts = stats->x358.x358_hits.by_attack_counts;
     u32 hit_specials = stats->hits.specials_count;
     u32 hit_x1A0 = stats->hits.x1A0_count;
     u32 hit_x1A8 = stats->hits.x1A8;
-    u32 x358_x1A8 = stats->x358_hits.x1A8;
+    u32 x358_x1A8 = stats->x358.x358_hits.x1A8;
     u32 attacks_total = stats->attacks.total;
     u32 hits_total = stats->hits.total;
-    u32 x358_total = stats->x358_hits.total;
+    u32 x358_total = stats->x358.x358_hits.total;
     int i;
     int j;
     int k;
@@ -588,8 +588,8 @@ void fn_80039618(int player)
             setFlag(player, 0x66);
         }
     }
-    if (table->xDD1.bit0 && table->xDD1.bit1 && table->xDD1.bit2 &&
-        table->xDD1.bit3)
+    if (table->xDD1.x0.bit0 && table->xDD1.x0.bit1 && table->xDD1.x0.bit2 &&
+        table->xDD1.x0.bit3)
     {
         setFlag(player, 0x86);
     }
@@ -628,8 +628,8 @@ void fn_80039618(int player)
     }
     {
         u32 sum_attacks = fn_80038700((int*) stats, 1, 0x10);
-        u32 sum_x358 = fn_80038700((int*) &stats->x358_hits, 1, 0x10);
-        if (sum_x358 != 0 && sum_attacks == sum_x358 && !table->xDD1.bit4) {
+        u32 sum_x358 = fn_80038700((int*) &stats->x358.x358_hits, 1, 0x10);
+        if (sum_x358 != 0 && sum_attacks == sum_x358 && !table->xDD1.x0.bit4) {
             setFlag(player, 0x23);
         }
     }
@@ -733,7 +733,7 @@ void fn_8003B044(int player)
             setFlag(player, 0x3A);
         }
     }
-    if (!temp_r31->xDD0.bit0 && temp_r3->x5BC_b3) {
+    if (!temp_r31->xDD0.x0.bit0 && temp_r3->x5BC_b3) {
         setFlag(player, 0x39);
     }
     if ((pl_800386D8(temp_r3, 0x6C) != 0) && (pl_800386D8(temp_r3, 0x6D) == 0))
@@ -805,7 +805,7 @@ void fn_8003B044(int player)
             setFlag(player, 0x6C);
         }
     }
-    if (temp_r31->xDD1.bit6 && !temp_r31->xDD1.bit7) {
+    if (temp_r31->xDD1.x0.bit6 && !temp_r31->xDD1.x0.bit7) {
         setFlag(player, 0x5A);
     }
 }
@@ -911,8 +911,8 @@ void fn_8003BD60(int player)
             setFlag(player, 0x5D);
         }
     }
-    if (temp_r31->xDD0.bit3 && temp_r31->xDD0.bit4 && temp_r31->xDD0.bit5 &&
-        temp_r31->xDD0.bit6)
+    if (temp_r31->xDD0.x0.bit3 && temp_r31->xDD0.x0.bit4 &&
+        temp_r31->xDD0.x0.bit5 && temp_r31->xDD0.x0.bit6)
     {
         setFlag(player, 0x5E);
     }

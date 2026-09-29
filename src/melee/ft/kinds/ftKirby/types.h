@@ -383,12 +383,12 @@ union ftKb_MotionVars {
     struct ftKb_SpecialHiVars {
         /* fp+2340 */ int x0;
         /* fp+2344 */ int x4;
-        /* fp+2348 */ union {
+        /* fp+2348 */ union ftKb_SpecialHiVars_x8 {
             int i;
             float f;
         } x8; ///< Used as both int and float
         /* fp+234C */ int xC;
-        /* fp+2350 */ union {
+        /* fp+2350 */ union ftKb_SpecialHiVars_x10 {
             int i;
             float f;
         } x10; ///< Used as both int and float

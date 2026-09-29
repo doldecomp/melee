@@ -316,7 +316,7 @@ void it_802D2C78(Item_GObj* gobj)
         ip2 = GET_ITEM(gobj);
         Item_80268E5C(gobj, 1, ITEM_ANIM_UPDATE);
         Item_SetEffectHitlagCallbacks(ip2);
-        ip->xDD1_flag.b1 = true;
+        ip->xDD1_flag.x0.b1 = true;
     }
 }
 
@@ -350,7 +350,7 @@ void it_802D2D2C(Item_GObj* gobj)
         spawn.kind = It_Kind_Houou_SacredFire;
         spawn.x0_parent_gobj = ip->owner;
         spawn.x4_parent_gobj2 = gobj;
-        spawn.x44_flag.b0 = true;
+        spawn.x44_flag.x0.b0 = true;
         spawn.x40 = 0;
         new_gobj = Item_80268B18(&spawn);
         GET_ITEM(new_gobj)->xDD4_itemVar.houou.timer = line_id;

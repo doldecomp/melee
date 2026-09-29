@@ -9,13 +9,13 @@
     do {                                                                      \
         int i;                                                                \
         for (i = 0; i < (n); i++) {                                           \
-            ++(cmd)->u;                                                       \
+            ++(cmd)->x8.u;                                                    \
         }                                                                     \
     } while (0);
 
 #define NEXT_CMD(cmd)                                                         \
     do {                                                                      \
-        ++(cmd)->u;                                                           \
+        ++(cmd)->x8.u;                                                        \
     } while (0);
 
 static inline void lbCardGame_SetupArchive(void)

@@ -69,7 +69,7 @@ struct ImageDesc_Array {
 /* 3DB2D4 */ Vec3 gm_803DB2D4 = { 0.0f, 125, 0.0f };
 /* 3DB2E0 */ Vec3 gm_803DB2E0 = { 0.5f, -7.0f, 0.0f };
 
-static struct {
+static struct gm_804D4278_t {
     u8 x0, x1, x2, x3;
 } gm_804D4278 = { 0xAA, 0xAA, 0xFF, 0xFF };
 
@@ -131,9 +131,9 @@ void fn_801A6664(HSD_GObj* arg0)
             }
         }
         if (gm_804D6750 > 0xFF) {
-            temp_r3->x3F = 0xFF;
+            temp_r3->x3C_u.x0.x3F = 0xFF;
         } else {
-            temp_r3->x3F = gm_804D6750;
+            temp_r3->x3C_u.x0.x3F = gm_804D6750;
         }
     }
     if (gm_804D6780 != 0) {
@@ -149,16 +149,16 @@ void fn_801A6664(HSD_GObj* arg0)
             HSD_SObjLib_803A477C(gm_804D677C, &gm_804D6788, 0, 0, 0x80, 0);
         temp_r3_2->x10 = 60.0f;
         temp_r3_2->x14 = 0.0f;
-        temp_r3_2->x3C = gm_804D4278.x0;
-        temp_r3_2->x3D = gm_804D4278.x1;
-        temp_r3_2->x3E = gm_804D4278.x2;
+        temp_r3_2->x3C_u.x0.x3C = gm_804D4278.x0;
+        temp_r3_2->x3C_u.x0.x3D = gm_804D4278.x1;
+        temp_r3_2->x3C_u.x0.x3E = gm_804D4278.x2;
         if (gm_804D6794 < 0xBE) {
             gm_804D6794 += 0xA;
             if (gm_804D6794 > 0xBE) {
                 gm_804D6794 = 0xBE;
             }
         }
-        temp_r3_2->x3F = gm_804D6794;
+        temp_r3_2->x3C_u.x0.x3F = gm_804D6794;
         gm_804D6784 = gm_804D6784 == 0;
     }
 }

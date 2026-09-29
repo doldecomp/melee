@@ -50,7 +50,7 @@ void it_8029A114(Fighter_GObj* gobj, Vec3* pos, f32 facing_dir, s32 arg4)
     spawn.vel.x = spawn.vel.y = spawn.vel.z = 0.0f;
     spawn.x0_parent_gobj = gobj;
     spawn.x4_parent_gobj2 = spawn.x0_parent_gobj;
-    spawn.x44_flag.b0 = 1;
+    spawn.x44_flag.x0.b0 = 1;
     spawn.x40 = 0;
     item_gobj = Item_80268B18(&spawn);
     if (item_gobj != NULL) {
@@ -76,7 +76,7 @@ void it_8029A218(HSD_GObj* owner, Vec3* pos, f32 facing_dir, s32 arg4)
     spawn.vel.x = 0.0f;
     spawn.x0_parent_gobj = owner;
     spawn.x4_parent_gobj2 = spawn.x0_parent_gobj;
-    spawn.x44_flag.b0 = 1;
+    spawn.x44_flag.x0.b0 = 1;
     spawn.x40 = 0;
     item_gobj = Item_80268B18(&spawn);
     if (item_gobj != NULL) {
@@ -120,7 +120,7 @@ void it_8029A31C(Item_GObj* gobj, Fighter_GObj* owner, Item* unused)
         it_80272460(hit, attr->x14, gobj);
         break;
     }
-    ip->xDCE_flag.b7 = false;
+    ip->xDCE_flag.x0.b7 = false;
 }
 
 void it_8029A498(Item_GObj* gobj, Fighter_GObj* owner)
@@ -133,7 +133,7 @@ void it_8029A498(Item_GObj* gobj, Fighter_GObj* owner)
     it_80275158(gobj, 5.0f);
     Item_80268E5C(gobj, 1, 2);
 
-    ip->xDCE_flag.b7 = false;
+    ip->xDCE_flag.x0.b7 = false;
 }
 
 bool itLipstickspore_UnkMotion0_Anim(Item_GObj* gobj)

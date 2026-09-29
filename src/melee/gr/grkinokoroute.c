@@ -28,7 +28,7 @@
 #include <sysdolphin/baselib/psstructs.h>
 #include <sysdolphin/baselib/random.h>
 
-static struct {
+static struct yakumono_param_t {
     int x0;
     grZakoGenerator_SpawnDesc x4;
 }* yakumono_param;
@@ -39,10 +39,10 @@ typedef struct grNKr_Depths {
 
 typedef union grNKr_Flags {
     u8 flags;
-    struct {
+    struct grNKr_Flags_x0 {
         u8 b7 : 1;
         u8 b0123456 : 7;
-    };
+    } x0;
 } grNKr_Flags;
 
 static const Vec3 grNKr_803B82E8 = { 0.0f, 0.0f, 0.0f };
@@ -239,13 +239,15 @@ bool grKinokoRoute_802078E8(Ground_GObj* arg)
     return false;
 }
 
+union grKinokoRoute_802078F0_cursor {
+    Ground* gp;
+    struct grKinokoRoute_GroundVars_Entry* entry;
+};
+
 void grKinokoRoute_802078F0(Ground_GObj* gobj)
 {
     s32 i;
-    union {
-        Ground* gp;
-        struct grKinokoRoute_GroundVars_Entry* entry;
-    } cursor;
+    union grKinokoRoute_802078F0_cursor cursor;
     Vec3 pos;
     HSD_GObj* fighter;
     f32 scale;
@@ -564,14 +566,16 @@ bool grKinokoRoute_80208480(int arg)
     return 0;
 }
 
+struct grKinokoRoute_802084B4_gp {
+    char pad[0xDD8];
+    HSD_JObj* jobj;
+};
+
 void grKinokoRoute_802084B4(HSD_GObj* gobj)
 {
     HSD_GObj* gobj2;
     Vec3 sp_vec;
-    struct {
-        char pad[0xDD8];
-        HSD_JObj* jobj;
-    }* gp = gobj->user_data;
+    struct grKinokoRoute_802084B4_gp* gp = gobj->user_data;
 
     HSD_JObjSetFlagsAll(gp->jobj, JOBJ_HIDDEN);
 
@@ -579,7 +583,7 @@ void grKinokoRoute_802084B4(HSD_GObj* gobj)
     if (gobj2 != NULL) {
         void* gp2 = gobj2->user_data;
         if (gp2 != NULL) {
-            ((UnkFlagStruct*) ((u8*) gp2 + 0xC4))->b0 = 1;
+            ((UnkFlagStruct*) ((u8*) gp2 + 0xC4))->x0.b0 = 1;
         }
     }
 

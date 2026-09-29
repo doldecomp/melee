@@ -120,7 +120,7 @@ Item_GObj* itKoopaFlame_Spawn(Fighter_GObj* parent, Vec* pos, f32 facing_dir,
     spawn.vel.x = spawn.vel.y = spawn.vel.z = 0.0f;
     spawn.x0_parent_gobj = parent;
     spawn.x4_parent_gobj2 = spawn.x0_parent_gobj;
-    spawn.x44_flag.b0 = 1;
+    spawn.x44_flag.x0.b0 = 1;
     spawn.x40 = unk;
     gobj = Item_80268B18(&spawn);
     if (gobj != NULL) {
@@ -255,10 +255,10 @@ bool itKoopaFlame_UnkMotion0_Coll(Item_GObj* gobj)
     int flags2;
     PAD_STACK(0x1E0);
     Item_ClampAngle(&it->xDD4_itemVar.koopaflame.x24_angle);
-    it->x378_itemColl.ecb_source.up = 3.0f;
-    it->x378_itemColl.ecb_source.down = 3.0f;
-    it->x378_itemColl.ecb_source.front = 3.0f;
-    it->x378_itemColl.ecb_source.back = 3.0f;
+    it->x378_itemColl.ecb_source.x4.x0_1.up = 3.0f;
+    it->x378_itemColl.ecb_source.x4.x0_1.down = 3.0f;
+    it->x378_itemColl.ecb_source.x4.x0_1.front = 3.0f;
+    it->x378_itemColl.ecb_source.x4.x0_1.back = 3.0f;
     flags = 0;
     it_8026D9A0(gobj);
     if (it->x378_itemColl.env_flags & Collide_FloorMask) {

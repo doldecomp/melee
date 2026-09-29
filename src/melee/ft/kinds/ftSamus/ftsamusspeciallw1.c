@@ -67,7 +67,7 @@ static void ftSamus_SpecialLw_StartAction_inner(HSD_GObj* gobj)
     fp->cmd_vars[2] = 0;
     fp->cmd_vars[1] = 0;
     fp->cmd_vars[0] = 0;
-    fp->throw_flags_b0 = 0;
+    fp->x2210.x0.throw_flags_b0 = 0;
     fp->mv.ss.unk6.x0 = 0;
     if (fp->cur_anim_frame == 3.0f) {
         fp->cmd_vars[1] = 1;

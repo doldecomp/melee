@@ -114,7 +114,7 @@ Item_GObj* it_8026F5C8(Item_GObj* item_gobj, ItemKind kind, Vec3* pos)
     spawn.vel.y = zero_init[0];
     spawn.vel.x = zero_init[0];
     spawn.x3C_damage = 0;
-    spawn.x44_flag.b0 = 1;
+    spawn.x44_flag.x0.b0 = 1;
     spawn.prev_pos = *pos;
     spawn.prev_pos.z = zero_init[0];
     spawn.x40 = 0;

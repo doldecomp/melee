@@ -51,7 +51,7 @@ static void initFighter(HSD_GObj* gobj, plAllocInfo2* alloc_info)
     struct plAllocInfo temp1;
     temp1.internal_id = alloc_info->internal_id;
     temp1.slot = alloc_info->slot;
-    temp1.b0 = alloc_info->has_transformation;
+    temp1.x6.b0 = alloc_info->xC.has_transformation;
     Fighter_UnkInitLoad_80068914(gobj, &temp1);
 }
 
@@ -71,7 +71,7 @@ Fighter_GObj* ftDemo_CreateFighter(plAllocInfo2* alloc_info)
         fp->x24 = fp->ft_data->x14;
         fp->x28 = fp->ft_data->x18;
         efAsync_LoadSync(ftData_UnkBytePerCharacter[fp->kind]);
-        if (!alloc_info->b0) {
+        if (!alloc_info->xC.b0) {
             ftData_80085820(fp->kind, fp->costume_id);
         } else {
             ftData_800858E4(fp->kind, fp->costume_id);

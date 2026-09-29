@@ -2491,12 +2491,12 @@ void _Toy_80307F64(s32 arg0, s32 arg1)
     HSD_JObj* jobj2;
 
     base = (Toy26B8*) &_Toy_804A26B8;
-    state = &base->anim;
-    idx = base->anim.x0E;
-    jobj1 = base->anim.jobj[(s32) idx];
-    jobj2 = base->anim.jobj[(s32) (idx ^ 1)];
+    state = &base->x3F0_u.anim;
+    idx = base->x3F0_u.anim.x0E;
+    jobj1 = base->x3F0_u.anim.jobj[(s32) idx];
+    jobj2 = base->x3F0_u.anim.jobj[(s32) (idx ^ 1)];
 
-    if (base->anim.x0F == 0) {
+    if (base->x3F0_u.anim.x0F == 0) {
         if (arg1 != 0) {
             if (arg0 != state->x11) {
                 HSD_JObjRemoveAnimAll(jobj1);
@@ -2971,7 +2971,7 @@ void _Toy_80308F04(HSD_CObj* cobj)
 
     data = (void*) &_Toy_804A26B8;
     state = _Toy_sbss_804D6E68;
-    jobj_ptr = data->x3F0->hsd_obj;
+    jobj_ptr = data->x3F0_u.x3F0->hsd_obj;
 
     top = HSD_CObjGetTop(cobj);
     bottom = HSD_CObjGetBottom(cobj);
@@ -3155,18 +3155,31 @@ static inline void _Toy_ReadTrigger(u32* out)
     }
 }
 
+struct _Toy_80309404_unused_eye {
+    Vec3 pos;
+    u8 pad[0x10];
+};
+
+struct _Toy_80309404_eye_pos {
+    Vec3 pos;
+    u8 pad[0x14];
+};
+
+struct _Toy_80309404_archive_symbols {
+    void* next;
+    void* next_wrap;
+    u8 pad[4];
+    void* prev;
+    void* prev_wrap;
+    u8 trailing_pad[0x78];
+};
+
 void _Toy_80309404(HSD_GObj* gobj)
 {
-    struct {
-        Vec3 pos;
-        u8 pad[0x10];
-    } unused_eye;
+    struct _Toy_80309404_unused_eye unused_eye;
     Vec3 transition_eye;
     Vec3 transition_interest;
-    struct {
-        Vec3 pos;
-        u8 pad[0x14];
-    } eye_pos;
+    struct _Toy_80309404_eye_pos eye_pos;
     ToyCameraControl* ed4;
     HSD_CObj* cobj;
     Toy26B8* base;
@@ -3181,14 +3194,7 @@ void _Toy_80309404(HSD_GObj* gobj)
     u32 trigger;
     u32 button;
     s32 sign;
-    struct {
-        void* next;
-        void* next_wrap;
-        u8 pad[4];
-        void* prev;
-        void* prev_wrap;
-        u8 trailing_pad[0x78];
-    } archive_symbols;
+    struct _Toy_80309404_archive_symbols archive_symbols;
 
     PAD_STACK(172);
 
@@ -3196,7 +3202,7 @@ void _Toy_80309404(HSD_GObj* gobj)
     base = (Toy26B8*) &_Toy_804A26B8;
     ed8 = Toy_sbss_804D6ED8;
     state = _Toy_sbss_804D6E68;
-    anim = &base->anim;
+    anim = &base->x3F0_u.anim;
     ed4 = Toy_sbss_804D6ED4;
     zoom_update = 0.0f;
     movement_update = 0.0f;
@@ -3860,6 +3866,34 @@ void _Toy_80309404(HSD_GObj* gobj)
     state->x4C = state->x44;
 }
 
+union _Toy_8030B530_abs_x2 {
+    f32 f;
+    u32 u;
+};
+
+union _Toy_8030B530_abs_y2 {
+    f32 f;
+    u32 u;
+};
+
+union _Toy_8030B530_abs_x3 {
+    f32 f;
+    u32 u;
+};
+
+union _Toy_8030B530_abs_y3 {
+    f32 f;
+    u32 u;
+};
+
+struct _Toy_8030B530_archive_symbols {
+    void* next;
+    void* next_wrap;
+    void* prev;
+    void* prev_wrap;
+    u8 trailing_pad[40];
+};
+
 /// trophy/lighting debug viewer
 void _Toy_8030B530(HSD_GObj* arg0)
 {
@@ -3869,9 +3903,9 @@ void _Toy_8030B530(HSD_GObj* arg0)
     Toy6E68* state = _Toy_sbss_804D6E68;
     ToyED8Data* ed8 = Toy_sbss_804D6ED8;
     ToyCameraControl* ed4 = Toy_sbss_804D6ED4;
-    ToyAnimState* anim = &base->anim;
+    ToyAnimState* anim = &base->x3F0_u.anim;
 
-    if (base->x3F0 != NULL) {
+    if (base->x3F0_u.x3F0 != NULL) {
         HSD_JObj* n2;
         HSD_JObj* jobj_child;
         HSD_JObj* jobj_next;
@@ -4104,10 +4138,7 @@ void _Toy_8030B530(HSD_GObj* arg0)
                 angle = lb_8000D008(adj_y, adj_x);
 
                 if (state->x18 < -25.0f) {
-                    union {
-                        f32 f;
-                        u32 u;
-                    } abs_x2;
+                    union _Toy_8030B530_abs_x2 abs_x2;
                     abs_x2.f = adj_x;
                     abs_x2.u &= ~0x80000000;
                     if (abs_x2.f > 0.8f) {
@@ -4117,10 +4148,7 @@ void _Toy_8030B530(HSD_GObj* arg0)
                                       HSD_JObjGetTranslationX(jobj_next));
                     }
                     {
-                        union {
-                            f32 f;
-                            u32 u;
-                        } abs_y2;
+                        union _Toy_8030B530_abs_y2 abs_y2;
                         abs_y2.f = adj_y;
                         abs_y2.u &= ~0x80000000;
                         if (abs_y2.f > 0.8f) {
@@ -4132,10 +4160,7 @@ void _Toy_8030B530(HSD_GObj* arg0)
                         }
                     }
                 } else {
-                    union {
-                        f32 f;
-                        u32 u;
-                    } abs_x3;
+                    union _Toy_8030B530_abs_x3 abs_x3;
                     abs_x3.f = adj_x;
                     abs_x3.u &= ~0x80000000;
                     if (abs_x3.f > 0.8f) {
@@ -4145,10 +4170,7 @@ void _Toy_8030B530(HSD_GObj* arg0)
                                       HSD_JObjGetTranslationX(jobj_next));
                     }
                     {
-                        union {
-                            f32 f;
-                            u32 u;
-                        } abs_y3;
+                        union _Toy_8030B530_abs_y3 abs_y3;
                         abs_y3.f = adj_y;
                         abs_y3.u &= ~0x80000000;
                         if (abs_y3.f > 0.8f) {
@@ -4271,13 +4293,7 @@ void _Toy_8030B530(HSD_GObj* arg0)
         }
 
         {
-            struct {
-                void* next;
-                void* next_wrap;
-                void* prev;
-                void* prev_wrap;
-                u8 trailing_pad[40];
-            } archive_symbols;
+            struct _Toy_8030B530_archive_symbols archive_symbols;
 
             PAD_STACK(188);
 
@@ -4510,22 +4526,26 @@ void _Toy_8030B530(HSD_GObj* arg0)
     }
 }
 
+struct _Toy_8030E110_sp140 {
+    Vec3 vec;
+    u8 pad[12];
+};
+
+struct _Toy_8030E110_archive_symbols {
+    void* next;
+    void* next_wrap;
+    u8 pad[4];
+    void* prev;
+    void* prev_wrap;
+    u8 trailing_pad[0x4C];
+};
+
 void _Toy_8030E110(HSD_GObj* arg0)
 {
-    struct {
-        Vec3 vec;
-        u8 pad[12];
-    } sp140;
+    struct _Toy_8030E110_sp140 sp140;
     Vec3 sp134;
     Vec3 sp128;
-    struct {
-        void* next;
-        void* next_wrap;
-        u8 pad[4];
-        void* prev;
-        void* prev_wrap;
-        u8 trailing_pad[0x4C];
-    } archive_symbols;
+    struct _Toy_8030E110_archive_symbols archive_symbols;
     Toy26B8* base;
     ToyCameraControl* ed4;
     HSD_CObj* cobj;
@@ -4545,7 +4565,7 @@ void _Toy_8030E110(HSD_GObj* arg0)
     PAD_STACK(56);
 
     base = (Toy26B8*) &_Toy_804A26B8;
-    anim = &base->anim;
+    anim = &base->x3F0_u.anim;
     state = _Toy_sbss_804D6E68;
     ed4 = Toy_sbss_804D6ED4;
     cobj = arg0->hsd_obj;
@@ -5549,7 +5569,7 @@ void Toy_80310324(void)
     }
 
     if (var_r0 != 0) {
-        memzero(&toy->anim, sizeof(toy->anim));
+        memzero(&toy->x3F0_u.anim, sizeof(toy->x3F0_u.anim));
         _Toy_8030FE48(Toy_sbss_804D6EE0, 0);
         tg6 = (ToyGlobalsS_*) Toy_sbss_804D6EE0;
         Toy_803087F4(tg6->x140);
@@ -5778,12 +5798,12 @@ void _Toy_803109A0(s32 arg0, s32 arg1, s32 arg2)
 
     if (arg0 == 8) {
         s32 ret = Toy_80304B94(arg0);
-        sprintf(buf, "Rea_%c %3d/%3d", table.entries[idx].value_byte, arg1,
+        sprintf(buf, "Rea_%c %3d/%3d", table.entries[idx].x4.value_byte, arg1,
                 ret);
     } else {
         s32 ret = Toy_80304B94(arg0);
-        sprintf(buf, "Rea_%c %3d/%3d\n", table.entries[idx].value_byte, arg1,
-                ret);
+        sprintf(buf, "Rea_%c %3d/%3d\n", table.entries[idx].x4.value_byte,
+                arg1, ret);
     }
     DevText_Printf(_Toy_sbss_804D6E98, buf);
 }

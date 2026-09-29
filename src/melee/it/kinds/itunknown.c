@@ -242,7 +242,7 @@ void it_802CED54(Item_GObj* gobj)
     spawn.kind = It_Kind_Unknown_Swarm;
     spawn.x0_parent_gobj = ip->owner;
     spawn.x4_parent_gobj2 = gobj;
-    spawn.x44_flag.b0 = false;
+    spawn.x44_flag.x0.b0 = false;
     Item_80268B18(&spawn);
 }
 

@@ -22,27 +22,27 @@ void ft_800C8170(Fighter* fp)
     PAD_STACK(8);
 
     for (i = 0; i < ftPartsTable[fp->kind]->parts_num; i++) {
-        if (fp->parts[i].flags_b1) {
+        if (fp->parts[i].x8.x0.flags_b1) {
             FighterBone* bone = &fp->parts[i];
             jobj = bone->joint;
             dobj = HSD_JObjGetDObj(jobj);
             flags = 0;
-            if (bone->flags_b7) {
+            if (bone->x8.x0.flags_b7) {
                 flags |= JOBJ_LIGHTING;
             }
-            if (bone->flags2_b0) {
+            if (bone->x8.x0.flags2_b0) {
                 flags |= JOBJ_TEXGEN;
             }
-            if (bone->flags2_b1) {
+            if (bone->x8.x0.flags2_b1) {
                 flags |= JOBJ_SPECULAR;
             }
-            if (bone->flags2_b2) {
+            if (bone->x8.x0.flags2_b2) {
                 flags |= JOBJ_UNK_B18;
             }
-            if (bone->flags2_b3) {
+            if (bone->x8.x0.flags2_b3) {
                 flags |= JOBJ_UNK_B20;
             }
-            if (bone->flags2_b4) {
+            if (bone->x8.x0.flags2_b4) {
                 flags |= JOBJ_UNK_B19;
             }
             HSD_JObjClearFlags(jobj, 0x50180);
@@ -82,7 +82,7 @@ static inline void enableMetal(Fighter* fp)
     HSD_JObj* jobj;
 
     for (i = 0; i < ftPartsTable[fp->kind]->parts_num; i++) {
-        if (fp->parts[i].flags_b1) {
+        if (fp->parts[i].x8.x0.flags_b1) {
             jobj = fp->parts[i].joint;
             dobj = HSD_JObjGetDObj(jobj);
             HSD_JObjSetFlags(jobj, 0x50180);
@@ -189,7 +189,7 @@ void ft_800C85B8(Fighter_GObj* gobj)
             dobj = HSD_DObjLoadDesc(sp20->u.dobjdesc);
             if (dobj != NULL) {
                 dobj_iter = HSD_JObjGetDObj(part_jobj);
-                fp->parts[part_idx].flags2_b5 = true;
+                fp->parts[part_idx].x8.x0.flags2_b5 = true;
                 HSD_DObjResolveRefsAll(dobj, sp20->u.dobjdesc);
                 if (dobj_iter == NULL) {
                     HSD_JObjAddDObj(part_jobj, dobj);
@@ -224,8 +224,8 @@ void ft_800C85B8(Fighter_GObj* gobj)
                 if (i >= 0x80) {
                     HSD_ASSERTREPORT(0x106, 0, "fighter dobj num over!\n");
                 }
-                fp->parts[part_idx].xD = dobj_count - 1;
-                fp->parts[part_idx].flags2_b6 = true;
+                fp->parts[part_idx].xC_u.x0.xD = dobj_count - 1;
+                fp->parts[part_idx].x8.x0.flags2_b6 = true;
             }
             part_idx += 1;
             ftAnim_GetNextJointInTree(&sp20, &sp1C);

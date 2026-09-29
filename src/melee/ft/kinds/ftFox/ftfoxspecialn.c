@@ -115,7 +115,7 @@ bool ftFx_SpecialN_CheckBlasterAction(HSD_GObj* gobj)
         case ftCo_MS_ThrowHi:
         case ftCo_MS_ThrowLw:
 
-            if (fp->x2070.x2071_b6) {
+            if (fp->x2070.x0.x2071_b6) {
                 return true;
             }
             return false;

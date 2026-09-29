@@ -190,7 +190,7 @@ typedef struct CardGetStatusArgs {
 typedef struct CardCmd {
     /* 0x00 */ CardCmdType type;
     /* 0x04 */ CardState* state;
-    union {
+    union CardCmd_x8 {
         /* 0x08 */ CardWriteArgs write;
         /* 0x08 */ CardReadArgs read;
         /* 0x08 */ CardVerifyArgs verify;
@@ -200,7 +200,7 @@ typedef struct CardCmd {
         /* 0x08 */ CardHeaderArgs header;
         /* 0x08 */ CardReadHeaderArgs read_header;
         /* 0x08 */ CardGetStatusArgs get_status;
-    };
+    } x8;
 } CardCmd;
 ASSERT_SIZE(CardCmd, 0x24);
 
@@ -255,13 +255,13 @@ typedef struct CardHeaderReqArgs {
 typedef struct CardRequest {
     /* 0x00 */ CardRequestType type;
     /* 0x04 */ CardState* state;
-    union {
+    union CardRequest_x8 {
         /* 0x08 */ CardFileReqArgs file;
         /* 0x08 */ CardCreateReqArgs create;
         /* 0x08 */ CardStatusReqArgs status;
         /* 0x08 */ CardOpenReqArgs open;
         /* 0x08 */ CardHeaderReqArgs header;
-    };
+    } x8;
     /* 0x14 */ CardCallback callback;
 } CardRequest;
 ASSERT_SIZE(CardRequest, 0x18);

@@ -9,12 +9,12 @@
 #include <melee/if/textlib.h>
 #include <melee/pl/player.h>
 
-static struct {
+static struct db_AnimationInfo_t {
     DevText* text;
     char buf[0x5A4];
 } db_AnimationInfo;
 
-static struct {
+static struct db_804D6B48_t {
     u32 ShowFighterCollisionBubbles : 3;
     u32 MiscFighterVisualsStatus : 6;
     u32 ShowAnimationInfo : 1;

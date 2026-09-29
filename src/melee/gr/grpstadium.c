@@ -1644,16 +1644,18 @@ static inline u8 grStadium_ScaleColor(u8 value)
     return scaled;
 }
 
+union grStadium_801D3BBC_colors {
+    StadiumColor entries[5];
+    struct grStadium_801D3BBC_colors_s {
+        StadiumColor head;
+        StadiumAlphaPresets presets;
+    } s;
+};
+
 void grStadium_801D3BBC(Ground_GObj* arg0)
 {
     UNUSED u64 pad;
-    union {
-        StadiumColor entries[5];
-        struct {
-            StadiumColor head;
-            StadiumAlphaPresets presets;
-        } s;
-    } colors;
+    union grStadium_801D3BBC_colors colors;
     HSD_Text* dynamic_text;
     HSD_GObj* player_gobj;
     HSD_GObj* current_player_gobj;

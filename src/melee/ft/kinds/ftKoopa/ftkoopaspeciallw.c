@@ -41,7 +41,7 @@ static void ftKp_SpecialLw_Enter_inline(Fighter_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     fp->cmd_vars[1] = 0;
     fp->cmd_vars[0] = 0;
-    fp->throw_flags_b0 = false;
+    fp->x2210.x0.throw_flags_b0 = false;
     fp->x6A4_transNOffset.y = 0.0f;
     fp->x2223_b4 = true;
 }

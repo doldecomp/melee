@@ -38,11 +38,11 @@ void it_802EFA44(Item_GObj* catherine, Vec* pos, float dir)
                 direction = 1;
             }
             mpCollSetFacingDir(&eggData->x378_itemColl, direction);
-            eggData->xDD0_flag.b6 = 0;
+            eggData->xDD0_flag.x0.b6 = 0;
             eggData->xD40 = 0.0f;
             eggData->xDD4_itemVar.kyasarinEgg.x20 = 0;
             it_80279BBC(eggData);
-            if (eggData->xDD0_flag.b7 == 0) {
+            if (eggData->xDD0_flag.x0.b7 == 0) {
                 it_802756E0(egg);
             }
             it_802EFB0C(egg);

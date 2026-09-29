@@ -51,14 +51,16 @@ static inline void mpIsland_AssertSeg(mp_UnkStruct0* mpisp)
     HSD_ASSERT(62, mpisp);
 }
 
+struct mpIsland_8005A728_seg {
+    mp_UnkStruct0* p;
+};
+
 void mpIsland_8005A728(void)
 {
     MapCollData* map;
     CollLine* lines;
     CollVtx* vtx;
-    struct {
-        mp_UnkStruct0* p;
-    } seg;
+    struct mpIsland_8005A728_seg seg;
     float z_val;
     int count;
     int line_idx;

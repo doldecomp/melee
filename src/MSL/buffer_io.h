@@ -3,7 +3,7 @@
 
 #include <stdio.h>
 
-enum {
+enum __align_buffer_Enum {
     __align_buffer,
     __dont_align_buffer
 };

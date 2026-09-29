@@ -557,7 +557,7 @@ typedef struct itPeachToadSporeAttributes {
 typedef struct itPeachTurnipAttributes {
     f32 x0_lifetime;
     s32 x4_length; // length of x8, should be 8 for the number of turnip types
-    struct {
+    struct itPeachTurnipAttributes_x8 {
         s32 x0_odds;
         s32 x4_damage;
     } x8[8];

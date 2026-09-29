@@ -36,7 +36,7 @@ void ftPp_SpecialLw_Enter(Fighter_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
     PAD_STACK(8);
-    fp->throw_flags = 0;
+    fp->x2210.throw_flags = 0;
     fp->cmd_vars[0] = 0;
     fp->cmd_vars[3] = 0;
     fp->mv.pp.speciallw.x0 = 0;
@@ -51,7 +51,7 @@ void ftPp_SpecialAirLw_Enter(Fighter_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
     PAD_STACK(8);
-    fp->throw_flags = 0;
+    fp->x2210.throw_flags = 0;
     fp->cmd_vars[0] = 0;
     fp->cmd_vars[3] = 0;
     fp->mv.pp.speciallw.x0 = 0;

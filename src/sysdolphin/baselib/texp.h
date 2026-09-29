@@ -85,7 +85,7 @@ typedef struct HSD_TExpRes {
     int failed;
     int texmap;
     int cnst_remain;
-    struct {
+    struct HSD_TExpRes_reg {
         u8 color;
         u8 alpha;
     } reg[8];
@@ -102,9 +102,9 @@ typedef struct _HSD_TevDesc {
     u32 coord;
     u32 map;
     u32 color;
-    union {
+    union _HSD_TevDesc_u {
         HSD_TevConf tevconf;
-        struct {
+        struct _HSD_TevDesc_u_tevop {
             u32 tevmode;
         } tevop;
     } u;

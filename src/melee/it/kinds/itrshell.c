@@ -424,7 +424,7 @@ bool itRshell_UnkMotion3_Anim(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     if (ip->xDD4_itemVar.rshell.xDD8 <= 0.0f) {
-        if (!ip->xDCD_flag.b5) {
+        if (!ip->xDCD_flag.x0.b5) {
             it_80275444(gobj);
         }
     } else {
@@ -458,7 +458,7 @@ bool itRshell_UnkMotion4_Anim(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     if (ip->xDD4_itemVar.rshell.xDD8 <= 0.0f) {
-        if (!ip->xDCD_flag.b5) {
+        if (!ip->xDCD_flag.x0.b5) {
             it_80275444(gobj);
         }
     } else {
@@ -516,7 +516,7 @@ bool itRshell_UnkMotion5_Anim(Item_GObj* gobj)
     }
     ip->xDD4_itemVar.rshell.xDD4 -= 1.0f;
     if (ip->xDD4_itemVar.rshell.xDD8 <= 0.0f) {
-        if (!ip->xDCD_flag.b5) {
+        if (!ip->xDCD_flag.x0.b5) {
             it_80275444(gobj);
         }
     } else {

@@ -28,7 +28,7 @@ static void itFushigibana_UnkMotion1_Anim_inline1(Item_GObj* gobj)
     Item_80268E5C(gobj, 1, ITEM_ANIM_UPDATE);
     item->entered_hitlag = efLib_PauseAll;
     item->exited_hitlag = efLib_ResumeAll;
-    item->xDD4_itemVar.fushigibana.x60.b0 = true;
+    item->xDD4_itemVar.fushigibana.x60.x0.b0 = true;
 }
 
 static bool itFushigibana_UnkMotion1_Anim_inline2(Item_GObj* gobj)
@@ -50,7 +50,7 @@ void itFushigibana_Logic29_Spawned(Item_GObj* gobj)
     it_80279CDC(gobj, attrs->x0);
     Item_8026AE84(item, 0x272f, 0x7f, 0x40);
     it_80275158(gobj, attrs->x4);
-    item->xDD4_itemVar.fushigibana.x60.b0 = false;
+    item->xDD4_itemVar.fushigibana.x60.x0.b0 = false;
     item->xDD4_itemVar.fushigibana.x64 = attrs->x8;
     it_802D70A4(gobj);
 }
@@ -58,7 +58,7 @@ void itFushigibana_Logic29_Spawned(Item_GObj* gobj)
 void it_802D705C(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
-    ip->xDCE_flag.b7 = 0;
+    ip->xDCE_flag.x0.b7 = 0;
     it_80273454(gobj);
     it_802D718C(gobj);
 }
@@ -91,7 +91,7 @@ void it_802D718C(Item_GObj* gobj)
     Item* item = GET_ITEM(gobj);
     Item_80268E5C(gobj, 1, ITEM_ANIM_UPDATE);
     Item_SetEffectHitlagCallbacks(item);
-    item->xDD4_itemVar.fushigibana.x60.b0 = true;
+    item->xDD4_itemVar.fushigibana.x60.x0.b0 = true;
 }
 
 bool itFushigibana_UnkMotion1_Anim(Item_GObj* gobj)

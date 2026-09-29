@@ -265,7 +265,7 @@ void it_8028C018(Item_GObj* gobj)
 bool itGshell_UnkMotion1_Anim(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
-    if (ip->xDD4_itemVar.gshell.xDEC_b3 && ip->xDD0_flag.b0 != 1) {
+    if (ip->xDD4_itemVar.gshell.xDEC_b3 && ip->xDD0_flag.x0.b0 != 1) {
         if (ip->xDD4_itemVar.gshell.xDE4 <= 0.0f) {
             it_80274CAC(gobj);
             ip->jumped_on = it_8028CF68;
@@ -401,7 +401,7 @@ bool itGshell_UnkMotion6_Anim(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     if (ip->xDD4_itemVar.gshell.xDD8 <= 0.0f) {
-        if (!ip->xDCD_flag.b5) {
+        if (!ip->xDCD_flag.x0.b5) {
             it_80275444(gobj);
         }
     } else {

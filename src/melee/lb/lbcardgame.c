@@ -33,7 +33,7 @@ typedef enum {
     statex10_1,
 } statex10;
 
-/* 433318 */ static struct {
+/* 433318 */ static struct state_t {
     /* +0  */ bool probe_status;
     /* +4  */ bool unk_status;
     /* +8  */ LbCardStatus card_status;
@@ -52,7 +52,7 @@ typedef enum {
 
 #define _p(x) (state.x)
 
-static struct {
+static struct lb_803BAB60_t {
     u32 x0, x4, x8;
     u32 pad[2];
 } lb_803BAB60 = {

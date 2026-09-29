@@ -247,7 +247,7 @@ struct StartMeleeRules {
     Event on_frame_end;               ///< ingame post-frame callback
     void (*on_match_end)(u8 outcome); ///< on VS match end callback.
                                       ///< @param outcome ::MatchOutcome
-    struct {
+    struct StartMeleeRules_x54 {
         u8 pad_x0[0x10];
         u8 x10_b0 : 1;
         u8 x10_b1 : 1;

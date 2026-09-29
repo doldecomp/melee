@@ -68,7 +68,7 @@ bool ftKb_SpecialNMt_80106F9C(Fighter_GObj* gobj)
         case ftKb_MS_MtSpecialAirNLoopFull:
         case ftKb_MS_MtSpecialAirNCancel:
         case ftKb_MS_MtSpecialAirNEnd:
-            if (fp->x2070.x2071_b6) {
+            if (fp->x2070.x0.x2071_b6) {
                 return true;
             }
             return false;

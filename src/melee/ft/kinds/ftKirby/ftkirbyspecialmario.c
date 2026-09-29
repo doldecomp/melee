@@ -32,7 +32,7 @@ void ftKb_SpecialN_800F9110(Fighter_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     ftKirby_MotionState msid = ftKb_MS_MrSpecialN;
     fp->cmd_vars[0] = 0;
-    fp->throw_flags = 0;
+    fp->x2210.throw_flags = 0;
     {
         Fighter* fp = GET_FIGHTER(gobj);
         if (fp->u.kb.hat.kind != Ft_Kind_Mario) {
@@ -135,7 +135,7 @@ void ftKb_SpecialNMr_800F93CC(Fighter_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     s32 msid = ftKb_MS_MrSpecialAirN;
     fp->cmd_vars[0] = 0;
-    fp->throw_flags = 0;
+    fp->x2210.throw_flags = 0;
     if (GET_FIGHTER(gobj)->u.kb.hat.kind != Ft_Kind_Mario) {
         msid = ftKb_MS_DrSpecialAirN;
     }

@@ -48,7 +48,7 @@ static struct gm_1832_804736C0_t {
     u8 pad_C[0x28];
     u16 x34;
     gm_1832_StageState x36;
-    struct {
+    struct gm_1832_804736C0_t_x37 {
         u8 frame_counter : 4;
         u8 anim_state : 2;
         u8 state2 : 2;

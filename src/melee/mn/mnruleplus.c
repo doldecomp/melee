@@ -1,3 +1,5 @@
+#include "mnruleplus.h"
+
 #include <Runtime/platform.h>
 
 #include <sysdolphin/baselib/forward.h>
@@ -37,39 +39,6 @@ extern MenuKindData mn_803EB6B0[];
 f32 mn_804D6BE4;
 HSD_GObj* mn_804D6BE0;
 
-typedef struct _MenuRulesPlusData {
-    MenuKind8 menu_kind;
-    u8 hovered_selection;
-    union {
-        struct {
-            u8 time_limit;
-            u8 friendly_fire;
-            u8 pause;
-            u8 score;
-            u8 sd_penalty;
-        };
-        u8 values[5];
-    } rule_values;
-    u8 x7;
-    MenuState8 state;
-    HSD_JObj* xC[10];
-    HSD_JObj* x34[6][7];
-    HSD_Text* description;
-} MenuRulesPlusData;
-
-typedef struct mn_803ED1D0_t {
-    u16 x0[7];
-    u16 pad_E;
-    u16 x10[6];
-    float text_start_frames[12];
-    AnimLoopSettings x4C;
-    AnimLoopSettings x58;
-    AnimLoopSettings x64[2];
-    AnimLoopSettings x7C[2];
-    AnimLoopSettings x94;
-} mn_803ED1D0_t;
-ASSERT_SIZE(mn_803ED1D0_t, 0xA0);
-
 mn_803ED1D0_t mn_803ED1D0 = {
     { 3, 4, 5, 6, 7, 8, 9 },
     0,
@@ -93,7 +62,7 @@ AnimLoopSettings mn_803ED294[7] = {
     { 50.0f, 69.0f, -0.1f },
 };
 
-struct {
+struct mn_803ED2E8_t {
     /* 0x00 */ u8 stat[6][2];
     /* 0x0C */ u8 desc[6][3];
     /* 0x1E */ u8 pad[2];
@@ -142,11 +111,13 @@ static inline u8 mnRulePlus_GetDescIdx(u8 sel, u8 confirmed)
 static inline void mnRulePlus_SaveRules(void)
 {
     MenuRulesPlusData* data = mn_804D6BE0->user_data;
-    gmMainLib_GetGameRules()->stock_time_limit = data->rule_values.time_limit;
-    gmMainLib_GetGameRules()->friendly_fire = data->rule_values.friendly_fire;
-    gmMainLib_GetGameRules()->pause = data->rule_values.pause;
-    gmMainLib_GetGameRules()->score_display = data->rule_values.score;
-    gmMainLib_GetGameRules()->unk_xc = data->rule_values.sd_penalty;
+    gmMainLib_GetGameRules()->stock_time_limit =
+        data->rule_values.x0.time_limit;
+    gmMainLib_GetGameRules()->friendly_fire =
+        data->rule_values.x0.friendly_fire;
+    gmMainLib_GetGameRules()->pause = data->rule_values.x0.pause;
+    gmMainLib_GetGameRules()->score_display = data->rule_values.x0.score;
+    gmMainLib_GetGameRules()->unk_xc = data->rule_values.x0.sd_penalty;
 }
 
 /// @brief Check if a given option is visible (not hidden by game mode).
@@ -769,12 +740,12 @@ void fn_80232F44(HSD_GObj* gobj)
             mn_804A04F0.confirmed_selection;
         data2 = gobj->user_data;
         gmMainLib_GetGameRules()->stock_time_limit =
-            data2->rule_values.time_limit;
+            data2->rule_values.x0.time_limit;
         gmMainLib_GetGameRules()->friendly_fire =
-            data2->rule_values.friendly_fire;
-        gmMainLib_GetGameRules()->pause = data2->rule_values.pause;
-        gmMainLib_GetGameRules()->score_display = data2->rule_values.score;
-        gmMainLib_GetGameRules()->unk_xc = data2->rule_values.sd_penalty;
+            data2->rule_values.x0.friendly_fire;
+        gmMainLib_GetGameRules()->pause = data2->rule_values.x0.pause;
+        gmMainLib_GetGameRules()->score_display = data2->rule_values.x0.score;
+        gmMainLib_GetGameRules()->unk_xc = data2->rule_values.x0.sd_penalty;
     }
 }
 
@@ -856,14 +827,14 @@ HSD_GObj* mn_80233218(MenuState state)
     GObj_InitUserData(gobj, 0, HSD_Free, user_data);
     user_data->menu_kind = mn_804A04F0.cur_menu;
     user_data->hovered_selection = (u8) mn_804A04F0.hovered_selection;
-    user_data->rule_values.time_limit =
+    user_data->rule_values.x0.time_limit =
         gmMainLib_GetGameRules()->stock_time_limit;
-    user_data->rule_values.friendly_fire =
+    user_data->rule_values.x0.friendly_fire =
         gmMainLib_GetGameRules()->friendly_fire;
-    user_data->rule_values.pause = gmMainLib_GetGameRules()->pause;
-    user_data->rule_values.score = gmMainLib_GetGameRules()->score_display;
+    user_data->rule_values.x0.pause = gmMainLib_GetGameRules()->pause;
+    user_data->rule_values.x0.score = gmMainLib_GetGameRules()->score_display;
     rules = gmMainLib_GetGameRules();
-    user_data->rule_values.sd_penalty = rules->unk_xc;
+    user_data->rule_values.x0.sd_penalty = rules->unk_xc;
     user_data->state = (u8) state;
     user_data->description = NULL;
 
@@ -1006,7 +977,8 @@ HSD_GObj* mn_80233218(MenuState state)
                         HSD_JObjAddChild(user_data->x34[0][*index_ptr],
                                          num_jobj);
                     }
-                    mn_802324E4(user_data->rule_values.time_limit, user_data);
+                    mn_802324E4(user_data->rule_values.x0.time_limit,
+                                user_data);
                     break;
                 }
                 case 1:

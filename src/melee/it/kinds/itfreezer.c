@@ -164,7 +164,7 @@ static void itFreezer_UnkMotion0_Phys_inline1(Item_GObj* gobj)
     Item* item = GET_ITEM(gobj);
     it_80273454(gobj);
     itFreezer_UnkMotion0_Phys_inline2(gobj);
-    item->xDD1_flag.b1 = true;
+    item->xDD1_flag.x0.b1 = true;
 }
 
 void itFreezer_UnkMotion0_Phys(Item_GObj* gobj)

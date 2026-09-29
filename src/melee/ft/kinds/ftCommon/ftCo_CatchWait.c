@@ -21,7 +21,7 @@ void fn_800DA1D8(Fighter_GObj* gobj)
                               0.0F, NULL);
     fp->accessory1_cb = fn_800DA4A0;
     fp->take_dmg_cb = fn_800DA490;
-    fp->x221B_b7 = false;
+    fp->x221B.x221B_b7 = false;
     jobj = fp->parts[fp->ft_data->x8->x11].joint;
     fp->mv.co.capturedamage.x18 = jobj;
     efAsync_Spawn(gobj, &GET_FIGHTER(gobj)->x60C, 1, 0x41D, jobj);

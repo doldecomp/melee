@@ -563,7 +563,7 @@ void ftCommon_UseAllJumps(Fighter* fp)
 
 void ftCommon_8007D6A4(Fighter* fp)
 {
-    if (fp->x594_b0) {
+    if (fp->x594.x0.x594_b0) {
         fp->self_vel.x = fp->x6A4_transNOffset.z * fp->facing_dir;
     }
     ftCommon_ClampGroundVel(fp, fp->co_attrs.ground_max_horizontal_velocity);

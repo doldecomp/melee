@@ -19,14 +19,14 @@ enum RulePlusOption {
 typedef struct _MenuRulesPlusData {
     MenuKind8 menu_kind;
     u8 hovered_selection;
-    union {
-        struct {
+    union _MenuRulesPlusData_rule_values {
+        struct _MenuRulesPlusData_rule_values_x0 {
             u8 time_limit;
             u8 friendly_fire;
             u8 pause;
             u8 score;
             u8 sd_penalty;
-        };
+        } x0;
         u8 values[5];
     } rule_values;
     u8 x7;
@@ -38,7 +38,8 @@ typedef struct _MenuRulesPlusData {
 
 typedef struct mn_803ED1D0_t {
     u16 x0[7]; ///< option jobj mapping?
-    u16 xE[6]; ///< value jobj mapping?
+    u16 pad_E;
+    u16 x10[6]; ///< value jobj mapping?
     float text_start_frames[12];
     AnimLoopSettings x4C;
     AnimLoopSettings x58;

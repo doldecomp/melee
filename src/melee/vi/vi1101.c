@@ -48,7 +48,7 @@ static SceneDesc* un_804D6FC0;
 static SceneDesc* un_804D6FC4;
 static HSD_Archive* un_804D6FC8;
 static HSD_Archive* un_804D6FCC;
-static struct {
+static struct un_804D6FD0_t {
     HSD_GObj* unk0;
     HSD_GObj* unk4;
 } un_804D6FD0;

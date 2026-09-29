@@ -25,16 +25,16 @@ void gmCamera_801A33BC(void)
     s32 spC;
 
     gmCamera_801A25C8();
-    gmCamera_VsCameraTextLayout.slot_a =
+    gmCamera_VsCameraTextLayout.x4.x0.slot_a =
         gmCamera_801A2334(0, gmCamera_803DA758[2], gmCamera_803DA758[3],
                           gmCamera_803DA758[0], gmCamera_803DA758[1]);
-    gmCamera_VsCameraTextLayout.slot_b =
+    gmCamera_VsCameraTextLayout.x4.x0.slot_b =
         gmCamera_801A2334(1, gmCamera_803DA758[6], gmCamera_803DA758[7],
                           gmCamera_803DA758[4], gmCamera_803DA758[5]);
     gmCamera_801A253C(&sp10, &spC);
     text = HSD_SisLib_803A5ACC(3, gmCamera_801A2640(), gmCamera_803DA758[10],
                                gmCamera_803DA758[11], 0.0f, 914.2857f, 64.0f);
-    gmCamera_VsCameraTextLayout.bottom_text = text;
+    gmCamera_VsCameraTextLayout.x4.x0.bottom_text = text;
     text->default_alignment = 1;
     text->default_kerning = 1;
     text->default_fitting = 1;
@@ -68,9 +68,9 @@ void gm_Scene_CameraVs_OnFrame(void)
     data = &gmCamera_VsCameraTextLayout;
     if ((lbSnap_8001D338(0) != 0) || (lbSnap_8001D338(1) != 0)) {
         for (i = 0; i < 3; i++) {
-            if (data->text[i] != NULL) {
-                HSD_SisLib_803A5CC4(data->text[i]);
-                data->text[i] = NULL;
+            if (data->x4.text[i] != NULL) {
+                HSD_SisLib_803A5CC4(data->x4.text[i]);
+                data->x4.text[i] = NULL;
             }
         }
         gmCamera_801A33BC();
@@ -103,9 +103,9 @@ void gm_Scene_CameraVs_OnEnter(void* arg0)
 
     gmCamera_VsCameraTextLayout.x0 = state;
     gmCamera_801A2650();
-    gmCamera_VsCameraTextLayout.slot_a = NULL;
-    gmCamera_VsCameraTextLayout.slot_b = NULL;
-    gmCamera_VsCameraTextLayout.bottom_text = NULL;
+    gmCamera_VsCameraTextLayout.x4.x0.slot_a = NULL;
+    gmCamera_VsCameraTextLayout.x4.x0.slot_b = NULL;
+    gmCamera_VsCameraTextLayout.x4.x0.bottom_text = NULL;
     gmCamera_801A33BC();
 }
 

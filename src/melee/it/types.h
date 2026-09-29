@@ -28,7 +28,7 @@ struct PokemonSelectionState {
 };
 
 struct CameraBoxFlags {
-    struct {
+    struct CameraBoxFlags_x0 {
         u8 b01 : 2;
         u8 b2 : 1;
         u8 b3 : 1;
@@ -36,11 +36,11 @@ struct CameraBoxFlags {
         u8 b5 : 1;
         u8 b6 : 1;
         u8 b7 : 1;
-    };
+    } x0;
 };
 
 struct flag32 {
-    struct {
+    struct flag32_flags {
         u32 x0 : 1;
         u32 x1 : 1;
         u32 x2 : 1;
@@ -475,22 +475,22 @@ struct Item {
     struct Struct207C xD9C;
     u32 xDA4_word;
     u16 xDA8_short;
-    union {
+    union Item_xDAA {
         UnkFlagStruct xDAA_flag; // Develop mode stuff?
         u8 xDAA_byte;
-    };
+    } xDAA;
     u32 xDAC_itcmd_var0;
     u32 xDB0_itcmd_var1;
     u32 xDB4_itcmd_var2;
     u32 xDB8_itcmd_var3;
-    union {
+    union Item_xDBC {
         flag32 xDBC_itcmd_var4;
         u32 xDBC_itcmd_var4_word;
-    };
+    } xDBC;
     u32 xDC0;
     u32 xDC4;
     flag32 xDC8_word;
-    struct {
+    struct Item_xDCC_flag {
         u8 b0 : 1;
         u8 b1 : 1;
         u8 b2 : 1;

@@ -86,13 +86,15 @@ void fn_80180C14(HSD_GObj* gobj)
     }
 }
 
+/// ::lbl_80472E48 followed by the four words at 0x80472EC8
+typedef struct {
+    struct lbl_80472E48_t x0;
+    s32 x80[4];
+} lbl_80472E48_with_ec8;
+
 void fn_80180C60(HSD_GObj* gobj)
 {
-    typedef struct fn_80180C60_state {
-        struct lbl_80472E48_t e48;
-        s32 ec8[4];
-    } fn_80180C60_state;
-    fn_80180C60_state* state = (fn_80180C60_state*) &lbl_80472E48;
+    lbl_80472E48_with_ec8* state = (lbl_80472E48_with_ec8*) &lbl_80472E48;
     s32 d;
     s32* max_dist;
     s32 dist;
@@ -106,65 +108,64 @@ void fn_80180C60(HSD_GObj* gobj)
         dist = 0;
     }
 
-    state->ec8[0] = dist;
-    b76 = state->e48.b76;
+    state->x80[0] = dist;
+    b76 = state->x0.b76;
 
-    if (b76 != 0 && state->e48.b54) {
+    if (b76 != 0 && state->x0.b54) {
         ifTime_HideTimers();
-        if (state->ec8[0] == state->ec8[1]) {
-            state->ec8[3] = state->ec8[3] + 1;
+        if (state->x80[0] == state->x80[1]) {
+            state->x80[3] = state->x80[3] + 1;
         } else {
-            state->ec8[3] = 0;
+            state->x80[3] = 0;
         }
-        if (state->ec8[3] > 0x3C) {
-            state->e48.b32 = 1;
-            if (dist == 0 && !state->e48.b10) {
-                state->e48.b10 = 1;
+        if (state->x80[3] > 0x3C) {
+            state->x0.b32 = 1;
+            if (dist == 0 && !state->x0.b10) {
+                state->x0.b10 = 1;
             }
         }
     } else {
         if (b76 != 0) {
             ifTime_HideTimers();
-            if (state->ec8[0] == state->ec8[1]) {
-                state->ec8[3] = state->ec8[3] + 1;
+            if (state->x80[0] == state->x80[1]) {
+                state->x80[3] = state->x80[3] + 1;
             } else {
-                state->ec8[3] = 0;
+                state->x80[3] = 0;
             }
-            if (state->ec8[3] > 0x78) {
-                state->e48.b32 = 1;
-                if (!state->e48.b10) {
-                    state->e48.b10 = 1;
+            if (state->x80[3] > 0x78) {
+                state->x0.b32 = 1;
+                if (!state->x0.b10) {
+                    state->x0.b10 = 1;
                 }
             }
         } else if (gm_8016AEEC() == 0 && gm_8016AEFC() == 0x3B) {
-            state->e48.b76 = 1;
+            state->x0.b76 = 1;
             ifTime_HideTimers();
             Player_80031790(0);
         }
         if (Ground_801C1DC0() != 0) {
-            if (!state->e48.b76) {
-                state->e48.b76 = 1;
+            if (!state->x0.b76) {
+                state->x0.b76 = 1;
                 ifTime_HideTimers();
                 Player_80031790(0);
             }
-            if (!state->e48.b54) {
-                state->e48.b54 = 1;
+            if (!state->x0.b54) {
+                state->x0.b54 = 1;
                 Player_80031790(0);
             }
-            state->ec8[3] = 0;
+            state->x80[3] = 0;
         }
     }
 
-    if (!state->e48.b32) {
+    if (!state->x0.b32) {
         HSD_JObjReqAnimAll(jobj, 0.0f);
-    } else if (state->e48.b10) {
+    } else if (state->x0.b10) {
         HSD_JObjSetFlagsAll(jobj, JOBJ_HIDDEN);
-    } else if (dist > state->e48.x14[gm_CKindToSelKind((u8) state->e48.unk_4)])
-    {
+    } else if (dist > state->x0.x14[gm_CKindToSelKind((u8) state->x0.unk_4)]) {
         if (lbl_804D65D4 == 0) {
             lbAudioAx_800237A8(0x9C40, 0x7F, 0x40);
             lbAudioAx_800237A8(0x144, 0x7F, 0x40);
-            gm_80167858((s32) (s8) state->e48.x10,
+            gm_80167858((s32) (s8) state->x0.x10,
                         (s32) Player_GetNametagSlotID(0), 0xD, 0x5A);
             lbl_804D65D4 = 1;
         }
@@ -235,20 +236,16 @@ void fn_80180C60(HSD_GObj* gobj)
     }
 
     HSD_JObjAnimAll(jobj);
-    state->ec8[1] = state->ec8[0];
-    max_dist = &state->ec8[2];
-    if (state->ec8[0] > *max_dist + 0xA) {
-        *max_dist = state->ec8[0];
+    state->x80[1] = state->x80[0];
+    max_dist = &state->x80[2];
+    if (state->x80[0] > *max_dist + 0xA) {
+        *max_dist = state->x80[0];
         lbAudioAx_80023870(0xBB, 0x7F, 0x40, 0x8A);
     }
 }
 
 void fn_80181598(void)
 {
-    typedef struct {
-        struct lbl_80472E48_t x0;
-        int x80[4];
-    } lbl_80472E48_with_ec8;
     lbl_80472E48_with_ec8* state = (lbl_80472E48_with_ec8*) &lbl_80472E48;
     s32* unk_4;
     s32 val;
@@ -303,10 +300,6 @@ void fn_80181598(void)
 void fn_80181708(void)
 {
     HSD_GObj* new_var;
-    typedef struct {
-        struct lbl_80472E48_t x0;
-        int x80[4];
-    } lbl_80472E48_with_ec8;
     HSD_JObj* jobj;
     HSD_GObj* gobj;
     lbl_80472E48_with_ec8* state = (lbl_80472E48_with_ec8*) &lbl_80472E48;

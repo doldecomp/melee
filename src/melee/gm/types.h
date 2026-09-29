@@ -24,7 +24,7 @@
 /// @deprecated Replace with inline bitfields
 typedef union UnkFlagStruct {
     u8 byte;
-    struct {
+    struct UnkFlagStruct_x0 {
         u8 b0 : 1;
         u8 b1 : 1;
         u8 b2 : 1;
@@ -33,7 +33,7 @@ typedef union UnkFlagStruct {
         u8 b5 : 1;
         u8 b6 : 1;
         u8 b7 : 1;
-    };
+    } x0;
 } UnkFlagStruct;
 
 struct UnkMultimanData {
@@ -173,7 +173,7 @@ struct FighterData {
     /* 0x79 */ s8 x79;
     /* 0x7A */ UnkFlagStruct x7A;
     /* 0x7B */ s8 x7B;
-    /* 0x7C */ struct {
+    /* 0x7C */ struct FighterData_x7C {
         u16 b0 : 1;
         u16 b1 : 1;
         u16 b2 : 1;
@@ -480,8 +480,8 @@ struct VsSceneFighter {
     u8 x1;
     u8 slot_type;
     s8 spawn_point;
-    union {
-        struct {
+    union VsSceneFighter_x4 {
+        struct VsSceneFighter_x4_x0 {
             u8 x4_b0 : 1; ///< metal
             u8 x4_b1 : 1;
             u8 x4_b2 : 1; ///< invisible
@@ -490,9 +490,9 @@ struct VsSceneFighter {
             u8 x4_b5 : 1;
             u8 x4_b6 : 1;
             u8 x4_b7 : 1;
-        };
+        } x0;
         struct lbl_8046B6A0_FighterMatchInfoFlags flags;
-    };
+    } x4;
     u8 x5;
     u16 x6;
     u8 x8;
@@ -540,14 +540,14 @@ struct MatchPlayerData {
     u8 pkind;  ///< ::Gm_PKind
     s8 ckind;  ///< ::CharacterKind
     s8 ftkind; ///< ::FighterKind
-    union {
-        struct {
+    union MatchPlayerData_x3 {
+        struct MatchPlayerData_x3_x0 {
             u8 x3_b0 : 6;
             u8 x3_b6 : 1;
             u8 x3_b7 : 1;
-        };
+        } x0;
         u8 x3;
-    };
+    } x3_u;
     u8 x4;
     u8 is_big_loser;
     u8 is_small_loser;
@@ -816,14 +816,14 @@ struct NameData {
 
 struct CameraVsData {
     u32* x0; ///< state? gets set on button presses in OnFrame
-    union {
-        struct {
+    union CameraVsData_x4 {
+        struct CameraVsData_x4_x0 {
             HSD_Text* slot_a;
             HSD_Text* slot_b;
             HSD_Text* bottom_text;
-        };
+        } x0;
         HSD_Text* text[3];
-    };
+    } x4;
 };
 
 struct TmVsData {
@@ -1043,26 +1043,26 @@ struct Lbl804799B8_t {
 };
 
 struct Lbl804799D8_t {
-    u32 x0;       // 0x00 counter
-    u32 x4;       // 0x04 frame counter
-    s32 x8;       // 0x08
-    s32 xC;       // 0x0C
-    u16 x10;      // 0x10
-    u16 x12[4];   // 0x12 per-player u16 counters
-    u8 x1A;       // 0x1A
-    u8 x1B;       // 0x1B
-    u8 x1C;       // 0x1C
-    u8 x1D[4];    // 0x1D per-player bytes
-    u8 x21[4];    // 0x21 per-player anim counters
-    u8 x25[4];    // 0x25 per-player bytes
-    u8 x29;       // 0x29
-    struct {      // 0x2A per-player anim data (stride 6)
-        u8 start; // +0
-        u8 cur;   // +1
-        u8 end;   // +2
-        u8 state; // +3
-        u8 done;  // +4
-        u8 loop;  // +5
+    u32 x0;                    // 0x00 counter
+    u32 x4;                    // 0x04 frame counter
+    s32 x8;                    // 0x08
+    s32 xC;                    // 0x0C
+    u16 x10;                   // 0x10
+    u16 x12[4];                // 0x12 per-player u16 counters
+    u8 x1A;                    // 0x1A
+    u8 x1B;                    // 0x1B
+    u8 x1C;                    // 0x1C
+    u8 x1D[4];                 // 0x1D per-player bytes
+    u8 x21[4];                 // 0x21 per-player anim counters
+    u8 x25[4];                 // 0x25 per-player bytes
+    u8 x29;                    // 0x29
+    struct Lbl804799D8_t_x2A { // 0x2A per-player anim data (stride 6)
+        u8 start;              // +0
+        u8 cur;                // +1
+        u8 end;                // +2
+        u8 state;              // +3
+        u8 done;               // +4
+        u8 loop;               // +5
     } x2A[4];
     u8 _pad0[2];          // 0x42-0x43
     u8 x44[4];            // 0x44 per-player state
@@ -1087,7 +1087,7 @@ struct TmAnimTimers {
     u8 pad_x14[0x18 - 0x14];
     u8 x18[4];
     u8 x1C;
-    struct {
+    struct TmAnimTimers_x1D {
         u8 a;
         u8 b;
         u8 c;

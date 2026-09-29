@@ -36,7 +36,7 @@ struct HSD_PObjDesc {
     u16 flags;
     u16 n_display;
     u8* display;
-    union {
+    union HSD_PObjDesc_u {
         HSD_Joint* joint;
         HSD_ShapeSetDesc* shape_set;
         HSD_EnvelopeDesc** envelope_p;
@@ -73,7 +73,7 @@ struct HSD_ShapeSet {
     s32 nb_normal_index;
     HSD_VtxDescList* normal_desc;
     u8** normal_idx_list;
-    union {
+    union HSD_ShapeSet_blend {
         f32* bp;
         f32 bl;
     } blend;

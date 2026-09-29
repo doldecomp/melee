@@ -267,7 +267,7 @@ f32 gm_8016B248(void)
 
 bool gm_8016B258(int arg0)
 {
-    return gmVs_GetSceneController()->state.fighters[arg0].x4_b3;
+    return gmVs_GetSceneController()->state.fighters[arg0].x4.x0.x4_b3;
 }
 
 void gm_SetGameSpeed(float speed)
@@ -1598,7 +1598,7 @@ void fn_8016D8AC(int arg0, struct PlayerInitData* arg1)
         } else {
             Player_SetPlayerCharacter(arg0, CKind_Zelda);
         }
-        tmp->state.fighters[arg0].x4_b4 = true;
+        tmp->state.fighters[arg0].x4.x0.x4_b4 = true;
     }
 
     tmp->state.fighters[arg0].spawn_point = arg1->spawn_pos;
@@ -1637,14 +1637,14 @@ void fn_8016D8AC(int arg0, struct PlayerInitData* arg1)
         Player_SetMoreFlagsBit1(arg0, 0);
     }
 
-    tmp->state.fighters[arg0].x4_b1 = arg1->xC_b3;
-    tmp->state.fighters[arg0].x4_b0 = arg1->vs_metal;
+    tmp->state.fighters[arg0].x4.x0.x4_b1 = arg1->xC_b3;
+    tmp->state.fighters[arg0].x4.x0.x4_b0 = arg1->vs_metal;
     if (arg1->vs_metal) {
         Player_SetFlagsBit5(arg0, true);
     } else {
         Player_SetFlagsBit5(arg0, false);
     }
-    tmp->state.fighters[arg0].x4_b2 = arg1->vs_invisible;
+    tmp->state.fighters[arg0].x4.x0.x4_b2 = arg1->vs_invisible;
     if (arg1->vs_invisible) {
         Player_SetFlagsBit6(arg0, 1);
         Player_SetFlagsBit7(arg0, 0);
@@ -1668,10 +1668,10 @@ void fn_8016D8AC(int arg0, struct PlayerInitData* arg1)
     } else {
         Player_SetMoreFlagsBit5(arg0, 0);
     }
-    tmp->state.fighters[arg0].x4_b3 = arg1->xD_b1;
+    tmp->state.fighters[arg0].x4.x0.x4_b3 = arg1->xD_b1;
     Player_SetMoreFlagsBit6(arg0, arg1->xB);
     Player_SetFacingDirection(arg0, arg1->spawn_dir);
-    tmp->state.fighters[arg0].x4_b5 = arg1->xD_b0;
+    tmp->state.fighters[arg0].x4.x0.x4_b5 = arg1->xD_b0;
 }
 
 void fn_8016DCC0(StartMeleeData* arg0)
@@ -1924,7 +1924,7 @@ void fn_8016E2BC(void)
                                Player_GetPadPort(0), Player_GetTeam(0),
                                single_is_teams, Player_GetPlayerSlotType(0))));
         Player_80031AD0(0);
-        if (controller.state.fighters[0].x4_b4) {
+        if (controller.state.fighters[0].x4.x0.x4_b4) {
             lbAudioAx_800237A8(0x41F4E, 0x7F, 0x40);
         }
         fn_80169C54(Player_GetPlayerCharacter(0), Player_GetCostumeId(0));
@@ -1954,7 +1954,7 @@ void fn_8016E2BC(void)
                                                Player_GetTeam(i), is_teams,
                                                Player_GetPlayerSlotType(i))));
                 Player_80031AD0(i);
-                if (tmp->state.fighters[i].x4_b4) {
+                if (tmp->state.fighters[i].x4.x0.x4_b4) {
                     lbAudioAx_800237A8(0x41F4E, 0x7F, 0x40);
                 }
             }
@@ -2219,7 +2219,7 @@ bool gm_8016EDDC(int arg0, PlayerInitData* arg1)
         Player_80032768(arg0, &sp18);
         setPlayerUnk45(arg0);
         Player_80031AD0(arg0);
-        if (controller.state.fighters[arg0].x4_b4) {
+        if (controller.state.fighters[arg0].x4.x0.x4_b4) {
             lbAudioAx_800237A8(0x41F4E, 0x7F, 0x40);
         }
         fn_8016E124();

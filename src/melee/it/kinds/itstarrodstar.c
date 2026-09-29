@@ -69,7 +69,7 @@ void it_802989C8(Item_GObj* ig, Fighter_GObj* fg)
         it_80272460(hit, attrs->x14, ig);
     }
     ip->xDD4_itemVar.starrodstar.x4 = attrs->x1C * ip->facing_dir;
-    ip->xDCE_flag.b7 = 0;
+    ip->xDCE_flag.x0.b7 = 0;
 }
 
 bool itStarrodstar_UnkMotion0_Anim(Item_GObj* gobj)

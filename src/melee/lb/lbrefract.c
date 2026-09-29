@@ -26,7 +26,7 @@
 /* 022650 */ static void fn_80022650(void);
 /* 022940 */ static void fn_80022940(void);
 
-static struct {
+static struct lbl_804336D0_t {
     int refractionUserCount;
     void* image_ptr;
     HSD_ImageDesc* imagedesc;
@@ -34,7 +34,7 @@ static struct {
     Mtx texture_mtx;
 } lbl_804336D0;
 
-static struct {
+static struct refract_data_t {
     u8 x0;
     f32* x4;
 }* refract_data;
@@ -350,17 +350,18 @@ HSD_TObjDesc tobjdesc1 = {
     NULL,
 };
 
+struct lbRefract_DataLayout {
+    Mtx texture_mtx;
+    f32 texture_offset[6];
+    HSD_ImageDesc imagedesc0;
+};
+
 void lbRefract_800222A4(void)
 {
     int const image_width = 320;
     int const image_height = 240;
 
     /// @todo Refactor data members into a struct
-    struct lbRefract_DataLayout {
-        Mtx texture_mtx;
-        f32 texture_offset[6];
-        HSD_ImageDesc imagedesc0;
-    };
 
     lbRefract_CallbackData cb;
     struct lbRefract_DataLayout* data =

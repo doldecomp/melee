@@ -89,7 +89,7 @@ void ftCa_SpecialN_Enter(HSD_GObj* gobj)
     u8 _[4];
     fp->cmd_vars[1] = 0;
     fp->cmd_vars[0] = 0;
-    fp->throw_flags = 0;
+    fp->x2210.throw_flags = 0;
     Fighter_ChangeMotionState(gobj, ftCa_MS_SpecialN, Ft_MF_None, 0, 1, 0,
                               NULL);
     Fighter_SetEffectHitlagCallbacks(fp);
@@ -102,7 +102,7 @@ void ftCa_SpecialAirN_Enter(HSD_GObj* gobj)
     u8 _[8];
     fp->cmd_vars[1] = 0;
     fp->cmd_vars[0] = 0;
-    fp->throw_flags = 0;
+    fp->x2210.throw_flags = 0;
     Fighter_ChangeMotionState(gobj, ftCa_MS_SpecialAirN, Ft_MF_None, 0, 1, 0,
                               NULL);
     Fighter_SetEffectHitlagCallbacks(fp);
@@ -145,8 +145,8 @@ static inline void doPhys(HSD_GObj* gobj)
 {
     bool throw_b1;
     Fighter* fp = GET_FIGHTER(gobj);
-    if (fp->throw_flags_b1) {
-        fp->throw_flags_b1 = false;
+    if (fp->x2210.x0.throw_flags_b1) {
+        fp->x2210.x0.throw_flags_b1 = false;
         throw_b1 = true;
     } else {
         throw_b1 = false;

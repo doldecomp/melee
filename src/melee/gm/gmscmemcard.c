@@ -13,7 +13,7 @@
 typedef struct {
     bool unk0;
     u8 mode_id;
-} exitData;
+} MemCardExitData;
 
 struct enterData_x0_t {
     int unk0; ///< ::LbLanguage?
@@ -47,7 +47,7 @@ typedef enum {
 
 typedef struct {
     struct enterData_x0_t unk0;
-    exitData unk8;
+    MemCardExitData unk8;
     int unk10;
     tickDecision decision;
     bool unk18;
@@ -489,7 +489,7 @@ void gm_Scene_MemCard_OnEnter(void* user_data)
 
 void gm_Scene_MemCard_OnExit(void* user_data)
 {
-    exitData* data = user_data;
+    MemCardExitData* data = user_data;
     if (data != NULL) {
         *data = enter_data.unk8;
     }

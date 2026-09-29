@@ -256,13 +256,15 @@ static void inlineA1(Fighter_GObj* gobj)
                                           fp->self_vel.y + fp->x8c_kb_vel.y));
 }
 
+struct ftCo_8008DCE0_scaled_kb {
+    float v;
+};
+
 void ftCo_8008DCE0(Fighter_GObj* gobj, int arg1, float facing_dir)
 {
     float scaled_kb_154;
     /// @todo One-field aggregate to order this web against the @c x154 temp.
-    struct {
-        float v;
-    } scaled_kb;
+    struct ftCo_8008DCE0_scaled_kb scaled_kb;
     Vec3 pos;
     float sp40;
     float floor_angle;
@@ -733,7 +735,7 @@ void ftCo_8008EC90(Fighter_GObj* gobj)
     }
     if (!ftCo_800C44CC(gobj) && !ftCo_800D2FA4(gobj)) {
         if (fp->victim_gobj != NULL) {
-            if (!fp->x221B_b5) {
+            if (!fp->x221B.x221B_b5) {
                 Fighter_GObj* other_gobj = fp->victim_gobj;
                 Fighter* other_fp = other_gobj->user_data;
                 if (!ret0 && inlineB1(fp)) {
@@ -1088,7 +1090,7 @@ void ftCo_DamageFly_Phys(Fighter_GObj* gobj)
     if (fp->motion_id == ftCo_MS_DamageFlyRoll) {
         doFlyRoll(gobj);
     }
-    if (fp->x1064_thrownHitbox.owner != NULL &&
+    if (fp->x1064_thrownHitbox.x134.owner != NULL &&
         sqrtf(VEC3_SQ_LEN(fp->x8c_kb_vel)) < p_ftCommonData->x1C8)
     {
         ftColl_8007AFF8(gobj);
@@ -1152,7 +1154,7 @@ void ftCo_DamageFlyRoll_Phys(Fighter_GObj* gobj)
     if (fp->motion_id == ftCo_MS_DamageFlyRoll) {
         doFlyRoll(gobj);
     }
-    if (fp->x1064_thrownHitbox.owner != NULL) {
+    if (fp->x1064_thrownHitbox.x134.owner != NULL) {
         if (sqrtf__Ff(VEC3_SQ_LEN(fp->x8c_kb_vel)) < p_ftCommonData->x1C8) {
             ftColl_8007AFF8(gobj);
         }

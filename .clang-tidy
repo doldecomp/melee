@@ -2,6 +2,8 @@
 Checks: >
   -*,
   custom-ban-primitive-c-types,
+  custom-ban-function-local-types,
+  custom-ban-anonymous-types,
   misc-include-cleaner,
   portability-restrict-system-includes,
   readability-duplicate-include,
@@ -34,5 +36,27 @@ CustomChecks:
     Diagnostic:
       - BindName: forbidden_primitive
         Message: "Do not use primitive short/long types. Use fixed-length types from <dolphin/types.h>."
+        Level: Warning
+  - Name: ban-function-local-types
+    Query: |
+      match decl(anyOf(
+        tagDecl(hasDeclContext(functionDecl())),
+        typedefNameDecl(hasDeclContext(functionDecl()))
+      )).bind("local_type")
+    Diagnostic:
+      - BindName: local_type
+        Message: "Declare types at file scope, not inside a function."
+        Level: Warning
+  # Anonymous types trip up tooling that introspects them; a typedef counts
+  # as a name
+  - Name: ban-anonymous-types
+    Query: |
+      match tagDecl(
+        isDefinition(),
+        matchesName("(anonymous|unnamed)")
+      ).bind("anonymous_type")
+    Diagnostic:
+      - BindName: anonymous_type
+        Message: "Give this type a tag or a typedef name."
         Level: Warning
 ---

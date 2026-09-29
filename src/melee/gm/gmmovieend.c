@@ -51,12 +51,14 @@ void gm_ModeState_Prize_OnExit(GameModeState* arg0)
     gm_SetNextGameModeStateId(0);
 }
 
+struct gm_Scene_DebugMenu_OnEnter_arg0 {
+    UNK_T unk0;
+    UNK_T unk4;
+};
+
 void gm_Scene_DebugMenu_OnEnter(void* arg0_)
 {
-    struct {
-        UNK_T unk0;
-        UNK_T unk4;
-    }* arg0 = arg0_;
+    struct gm_Scene_DebugMenu_OnEnter_arg0* arg0 = arg0_;
     un_802FF710();
     un_802FF6A0();
     un_80304168(arg0->unk0, 0, 0xA, 0xA);

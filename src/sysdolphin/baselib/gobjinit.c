@@ -84,7 +84,7 @@ void HSD_GObjInit(HSD_GObjLibInitDataType* arg0)
     HSD_GObj_804D783C = 0;
     HSD_GObj_CurrentInvokedProcGObj = NULL;
     HSD_GObj_CurrentInvokedProc = NULL;
-    HSD_GObj_DelayedProcInfo.flags = 0;
+    HSD_GObj_DelayedProcInfo.x0.flags = 0;
     HSD_GObj_804D7818 = NULL;
     HSD_GObj_804D7814 = NULL;
 }

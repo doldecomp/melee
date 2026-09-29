@@ -137,7 +137,7 @@ void itMatadogas_UnkMotion2_Phys(Item_GObj* gobj)
             (HSD_JObjSetMtxDirty)(jobj);
         }
         item2->on_accessory = (HSD_GObjEvent) it_802CB2B0;
-        item->xDD1_flag.b1 = 1;
+        item->xDD1_flag.x0.b1 = 1;
     }
 }
 
@@ -163,7 +163,7 @@ void it_802CB4F0(Item_GObj* gobj, s32 kind, f32 radius)
     spawn.kind = kind;
     spawn.x0_parent_gobj = ip->owner;
     spawn.x4_parent_gobj2 = gobj;
-    spawn.x44_flag.b0 = 1;
+    spawn.x44_flag.x0.b0 = 1;
     spawn.x40 = 0;
 
     if (Item_80268B18(&spawn) != NULL) {

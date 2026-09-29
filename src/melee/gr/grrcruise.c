@@ -773,18 +773,19 @@ void grRCruise_80200B48(Ground_GObj* gobj)
     }
 }
 
+struct grRCruise_EntryFlags {
+    u8 b0 : 1;
+    u8 b1 : 1;
+    u8 b2 : 1;
+    u8 b3 : 1;
+    u8 b4 : 1;
+    u8 b5 : 1;
+    u8 b6 : 1;
+    u8 b7 : 1;
+};
+
 void grRCruise_80200C04(Ground_GObj* gobj)
 {
-    struct grRCruise_EntryFlags {
-        u8 b0 : 1;
-        u8 b1 : 1;
-        u8 b2 : 1;
-        u8 b3 : 1;
-        u8 b4 : 1;
-        u8 b5 : 1;
-        u8 b6 : 1;
-        u8 b7 : 1;
-    };
     Ground* gp;
     int i;
 

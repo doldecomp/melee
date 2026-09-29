@@ -3,7 +3,7 @@
 #include <melee/if/textlib.h>
 #include <melee/pl/player.h>
 
-static struct {
+static struct db_CpuHandicapInfo_t {
     DevText* text;
     char buf[0x34C];
 } db_CpuHandicapInfo;
@@ -13,7 +13,7 @@ UnkFlagStruct db_ShowCpuHandicapInfo;
 void fn_SetupCpuHandicapInfo(void)
 {
     HSD_GObj* gobj = DevText_GetGObj();
-    db_ShowCpuHandicapInfo.b0 = 0;
+    db_ShowCpuHandicapInfo.x0.b0 = 0;
     db_CpuHandicapInfo.text =
         DevText_Create(6, 20, 20, 60, 7, db_CpuHandicapInfo.buf);
     if (db_CpuHandicapInfo.text != NULL) {
@@ -34,7 +34,7 @@ void fn_UpdateCpuHandicapInfo(void)
     StaticPlayer* player;
     s32 slot;
 
-    if (db_ShowCpuHandicapInfo.b0) {
+    if (db_ShowCpuHandicapInfo.x0.b0) {
         text = db_CpuHandicapInfo.text;
         DevText_Erase(text);
         DevText_SetCursorXY(text, 0, 0);
@@ -54,8 +54,8 @@ void fn_CheckCpuHandicapInfo(int player)
     if ((db_ButtonsDown(player) & HSD_PAD_B) &&
         (db_ButtonsPressed(player) & HSD_PAD_DPADDOWN))
     {
-        db_ShowCpuHandicapInfo.b0 ^= 1;
-        if (db_ShowCpuHandicapInfo.b0 == 0) {
+        db_ShowCpuHandicapInfo.x0.b0 ^= 1;
+        if (db_ShowCpuHandicapInfo.x0.b0 == 0) {
             DevText_HideBackground(db_CpuHandicapInfo.text);
             DevText_HideText(db_CpuHandicapInfo.text);
             return;
