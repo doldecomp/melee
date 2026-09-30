@@ -194,7 +194,7 @@ typedef enum Gr_Homerun_Parts {
 typedef void (*unkCastleCallback)(void*, struct unkCastle*);
 typedef void (*unkCastleCallback2)(void*, struct unkCastle*, Ground_GObj*);
 typedef int (*GrIceMtSegmentLookup)(Ground_GObj*);
-typedef DynamicsDesc* (*GrTouchLineCallback)(int index);
+typedef lbColl_80008D30_arg1* (*GrTouchLineCallback)(int index);
 typedef bool (*GrCheckShadowRenderCallback)(Vec3* fighter_pos, int,
                                             HSD_JObj* jobj);
 

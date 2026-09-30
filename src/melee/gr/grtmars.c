@@ -25,7 +25,7 @@
 /* 22219C */ static bool stageGObj1_Callback1(Ground_GObj*);
 /* 2221A4 */ static void stageGObj1_GObjProc(Ground_GObj*);
 /* 2221C4 */ static void stageGObj1_Callback3(Ground_GObj*);
-/* 2221C8 */ static DynamicsDesc* grTMars_802221C8(enum_t);
+/* 2221C8 */ static lbColl_80008D30_arg1* grTMars_802221C8(enum_t);
 /* 2221D0 */ static bool grTMars_802221D0(Vec3*, int, HSD_JObj*);
 
 static StageCallbacks stage_callbacks[] = {
@@ -149,7 +149,7 @@ static void stageGObj1_GObjProc(Ground_GObj* gobj)
 
 static void stageGObj1_Callback3(Ground_GObj* arg0) {}
 
-static DynamicsDesc* grTMars_802221C8(enum_t arg0)
+static lbColl_80008D30_arg1* grTMars_802221C8(enum_t arg0)
 {
     return NULL;
 }

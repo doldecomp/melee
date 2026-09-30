@@ -1184,7 +1184,7 @@ void fn_80201BE0(HSD_GObj* gobj, intptr_t pass)
     grDisplay_801C5DB0(gobj, pass);
 }
 
-DynamicsDesc* grRCruise_80201C50(enum_t arg)
+lbColl_80008D30_arg1* grRCruise_80201C50(enum_t arg)
 {
     return NULL;
 }

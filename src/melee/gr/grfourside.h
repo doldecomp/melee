@@ -42,7 +42,7 @@
 /* 1F3F0C */ void grFourside_801F3F0C(Ground_GObj*);
 /* 1F3F10 */ int grFourside_801F3F10(void);
 /* 1F3F74 */ void fn_801F3F74(HSD_GObj*, intptr_t);
-/* 1F41E0 */ DynamicsDesc* grFourside_801F41E0(enum_t);
+/* 1F41E0 */ lbColl_80008D30_arg1* grFourside_801F41E0(enum_t);
 /* 1F41E8 */ bool grFourside_801F41E8(Vec3* a, int arg, HSD_JObj* joint);
 /* 3E3D94 */ extern StageData grFs_StageData;
 

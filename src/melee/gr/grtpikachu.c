@@ -140,7 +140,7 @@ void grTPikachu_8022314C(Ground_GObj* gobj)
     return;
 }
 
-DynamicsDesc* grTPikachu_80223150(enum_t unused)
+lbColl_80008D30_arg1* grTPikachu_80223150(enum_t unused)
 {
     return NULL;
 }

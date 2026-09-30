@@ -779,7 +779,7 @@ s32 grInishie2_801FDFB4(s32 arg0)
 
 void grInishie2_801FDFE4(Ground_GObj* gobj) {}
 
-DynamicsDesc* grInishie2_801FDFE8(enum_t arg)
+lbColl_80008D30_arg1* grInishie2_801FDFE8(enum_t arg)
 {
     return NULL;
 }

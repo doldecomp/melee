@@ -29,7 +29,7 @@
 /* 223DF0 */ static bool grTYoshi_80223DF0(Ground_GObj*);
 /* 223DF8 */ static void stageGObj1_GObjProc(Ground_GObj*);
 /* 223E18 */ static void grTYoshi_80223E18(Ground_GObj*);
-/* 223E1C */ static DynamicsDesc* grTYoshi_OnTouchLine(enum_t);
+/* 223E1C */ static lbColl_80008D30_arg1* grTYoshi_OnTouchLine(enum_t);
 /* 223E24 */ static bool grTYoshi_OnCheckShadowRender(Vec3*, int, HSD_JObj*);
 
 static StageCallbacks grTYs_StageCallbacks[] = {
@@ -156,7 +156,7 @@ static void stageGObj1_GObjProc(Ground_GObj* arg0)
 
 static void grTYoshi_80223E18(Ground_GObj* arg0) {}
 
-static DynamicsDesc* grTYoshi_OnTouchLine(enum_t arg0)
+static lbColl_80008D30_arg1* grTYoshi_OnTouchLine(enum_t arg0)
 {
     return NULL;
 }

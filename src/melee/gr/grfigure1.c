@@ -32,7 +32,7 @@
 /* 20E250 */ static bool grFigure1_8020E250(Ground_GObj*);
 /* 20E258 */ static void grFigure1_8020E258(Ground_GObj*);
 /* 20E25C */ static void grFigure1_8020E25C(Ground_GObj*);
-/* 20E260 */ static DynamicsDesc* grFigure1_OnTouchLine(enum_t);
+/* 20E260 */ static lbColl_80008D30_arg1* grFigure1_OnTouchLine(enum_t);
 /* 20E268 */ static bool grFigure1_OnCheckShadowRender(Vec3*, int, HSD_JObj*);
 
 static StageCallbacks grEF1_StageCallbacks[3] = {
@@ -153,7 +153,7 @@ static void grFigure1_8020E258(Ground_GObj* gobj) {}
 
 static void grFigure1_8020E25C(Ground_GObj* arg0) {}
 
-static DynamicsDesc* grFigure1_OnTouchLine(enum_t arg0)
+static lbColl_80008D30_arg1* grFigure1_OnTouchLine(enum_t arg0)
 {
     return NULL;
 }

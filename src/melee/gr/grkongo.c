@@ -39,7 +39,7 @@ static struct grKongo_YakumonoParam* yakumono_param;
                                      mpLib_GroundEnum ground_kind,
                                      float delta_y);
 /* 1D8134 */ static int fn_801D8134(HSD_GObj* arg0, HSD_GObj* arg1);
-/* 1D8444 */ static DynamicsDesc* grKongo_801D8444(enum_t);
+/* 1D8444 */ static lbColl_80008D30_arg1* grKongo_801D8444(enum_t);
 
 GrJoint grKg_803E16E0[] = {
     { 2, 10, 19 }, { 3, 10, 22 }, { 5, 10, 43 },
@@ -1506,7 +1506,7 @@ f32 grKongo_801D8314(void)
     return var_f31;
 }
 
-DynamicsDesc* grKongo_801D8444(enum_t arg)
+lbColl_80008D30_arg1* grKongo_801D8444(enum_t arg)
 {
     return NULL;
 }

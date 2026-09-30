@@ -62,8 +62,8 @@ static inline void setupStartAccessory(HSD_GObj* gobj, Vec3* scale)
     KirbyHatStruct* mars_hat;
     KirbyHatStruct* fe_hat;
 
-    mars_hat = ft_80459B88.hats[Ft_Kind_Mars - 1]; ///< @todo kirby hat enum
-    fe_hat = ft_80459B88.hats[Ft_Kind_Emblem - 1];
+    mars_hat = ft_80459B88.copies[Ft_Kind_Mars]; ///< @todo kirby hat enum
+    fe_hat = ft_80459B88.copies[Ft_Kind_Emblem];
 
     if (fp->u.kb.hat.kind == Ft_Kind_Mars) {
         ftCommon_SetAccessory(fp, (HSD_Joint*) mars_hat->hat_dynamics[0]);

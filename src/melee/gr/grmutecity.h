@@ -103,7 +103,7 @@
 /* 1F28A8 */ DynamicModelDesc* grMuteCity_801F28A8(void);
 /* 1F290C */ void grMuteCity_801F290C(Ground_GObj*);
 /* 1F2AB0 */ HSD_Generator* grMuteCity_801F2AB0(s32, HSD_JObj*);
-/* 1F2BBC */ DynamicsDesc* grMuteCity_801F2BBC(enum_t);
+/* 1F2BBC */ lbColl_80008D30_arg1* grMuteCity_801F2BBC(enum_t);
 /* 1F2C10 */ bool grMuteCity_801F2C10(Vec3*, int arg, HSD_JObj* jobj);
 /* 3E33DC */ extern StageData grMc_StageData;
 

@@ -1816,7 +1816,7 @@ s32 grVenom_80206D10(s32 arg0)
     return 0;
 }
 
-DynamicsDesc* grVenom_80206D74(enum_t arg)
+lbColl_80008D30_arg1* grVenom_80206D74(enum_t arg)
 {
     return NULL;
 }

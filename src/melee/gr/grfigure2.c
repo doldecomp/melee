@@ -29,7 +29,7 @@
 /* 20E4E4 */ static bool grFigure2_8020E4E4(Ground_GObj*);
 /* 20E4EC */ static void grFigure2_8020E4EC(Ground_GObj* gobj);
 /* 20E4F0 */ static void grFigure2_8020E4F0(Ground_GObj*);
-/* 20E4F4 */ static DynamicsDesc* grFigure2_8020E4F4(enum_t arg0);
+/* 20E4F4 */ static lbColl_80008D30_arg1* grFigure2_8020E4F4(enum_t arg0);
 /* 20E4FC */ static bool grFigure2_8020E4FC(Vec3* vector, int number,
                                             HSD_JObj* jobj);
 
@@ -145,7 +145,7 @@ static void grFigure2_8020E4EC(Ground_GObj* gobj) {}
 
 static void grFigure2_8020E4F0(Ground_GObj* arg0) {}
 
-static DynamicsDesc* grFigure2_8020E4F4(enum_t arg0)
+static lbColl_80008D30_arg1* grFigure2_8020E4F4(enum_t arg0)
 {
     return NULL;
 }

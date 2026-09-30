@@ -647,7 +647,7 @@ void grKinokoRoute_802086EC(Vec3* arg0, f32 arg8)
     }
 }
 
-DynamicsDesc* grKinokoRoute_80208754(enum_t arg)
+lbColl_80008D30_arg1* grKinokoRoute_80208754(enum_t arg)
 {
     return NULL;
 }

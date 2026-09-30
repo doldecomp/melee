@@ -1598,15 +1598,16 @@ void ftData_80085820(FighterKind kind, int costume_id)
         if (ftData_803C2360[kind][costume_id].matanim_joint_name != NULL) {
             lbArchive_80017040(
                 &temp_r5->x14_archive,
-                ftData_803C2360[kind][costume_id].dat_filename, temp_r5,
-                ftData_803C2360[kind][costume_id].joint_name, &temp_r5->x4,
+                ftData_803C2360[kind][costume_id].dat_filename,
+                &temp_r5->joint, ftData_803C2360[kind][costume_id].joint_name,
+                &temp_r5->x4,
                 ftData_803C2360[kind][costume_id].matanim_joint_name, 0);
         } else {
             lbArchive_80017040(
                 &temp_r5->x14_archive,
-                ftData_803C2360[kind][costume_id].dat_filename, temp_r5,
-                ftData_803C2360[kind][costume_id].joint_name, 0,
-                ftData_803C2360[kind][costume_id].matanim_joint_name);
+                ftData_803C2360[kind][costume_id].dat_filename,
+                &temp_r5->joint, ftData_803C2360[kind][costume_id].joint_name,
+                0, ftData_803C2360[kind][costume_id].matanim_joint_name);
             CostumeListsForeachCharacter[kind].costume_list[costume_id].x4 =
                 NULL;
         }
@@ -1621,15 +1622,16 @@ void ftData_800858E4(FighterKind kind, int costume_id)
         if (ftData_803C2360[kind][costume_id].matanim_joint_name != NULL) {
             lbArchive_80017040(
                 &temp_r5->x14_archive,
-                ftData_803C2360[kind][costume_id].dat_filename, temp_r5,
-                ftData_803C2360[kind][costume_id].joint_name, &temp_r5->x4,
+                ftData_803C2360[kind][costume_id].dat_filename,
+                &temp_r5->joint, ftData_803C2360[kind][costume_id].joint_name,
+                &temp_r5->x4,
                 ftData_803C2360[kind][costume_id].matanim_joint_name, 0);
         } else {
             lbArchive_80017040(
                 &temp_r5->x14_archive,
-                ftData_803C2360[kind][costume_id].dat_filename, temp_r5,
-                ftData_803C2360[kind][costume_id].joint_name, 0,
-                ftData_803C2360[kind][costume_id].matanim_joint_name);
+                ftData_803C2360[kind][costume_id].dat_filename,
+                &temp_r5->joint, ftData_803C2360[kind][costume_id].joint_name,
+                0, ftData_803C2360[kind][costume_id].matanim_joint_name);
             CostumeListsForeachCharacter[kind].costume_list[costume_id].x4 =
                 NULL;
         }

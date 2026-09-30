@@ -7,7 +7,6 @@ use std::{
     borrow::Cow,
     env, fs,
     path::{Path, PathBuf},
-    range::RangeInclusive,
 };
 use typed_path::Utf8UnixPathBuf;
 
@@ -18,24 +17,18 @@ pub struct ProjectConfig {
     pub include: Vec<String>,
     #[serde(with = "unix_path")]
     pub symbols: Utf8UnixPathBuf,
-    pub samples: Vec<SampleConfig>,
+    pub samples: SamplesConfig,
 }
 
+/// Where `samples` writes, and how it compiles.
 #[derive(Serialize, Deserialize, Debug, Clone)]
-pub struct SampleConfig {
+pub struct SamplesConfig {
+    /// Everything generated: `target/`, `src/`, `base/`, `objdiff.json`.
     #[serde(with = "unix_path")]
-    pub archive: Utf8UnixPathBuf,
+    pub dir: Utf8UnixPathBuf,
+    /// A game object in `build.ninja`; samples compile with its command.
     #[serde(with = "unix_path")]
-    pub unit: Utf8UnixPathBuf,
-    pub symbols: Vec<SymbolConfig>,
-}
-
-#[derive(Serialize, Deserialize, Debug, Clone)]
-pub struct SymbolConfig {
-    pub name: String,
-    pub max_depth: Option<usize>,
-    #[serde(with = "vec_range_as_tuples")]
-    pub ranges: Vec<RangeInclusive<usize>>,
+    pub compile_like: Utf8UnixPathBuf,
 }
 
 pub fn get_config(

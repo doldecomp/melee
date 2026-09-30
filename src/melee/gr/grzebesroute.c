@@ -299,7 +299,7 @@ void grZebesRoute_8020B548(void)
     }
 }
 
-DynamicsDesc* grZebesRoute_8020B854(enum_t arg)
+lbColl_80008D30_arg1* grZebesRoute_8020B854(enum_t arg)
 {
     return NULL;
 }

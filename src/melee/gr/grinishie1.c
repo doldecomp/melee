@@ -70,7 +70,7 @@
                                      mpLib_GroundEnum ground_kind,
                                      float delta_y);
 /* 1FCB10 */ static void grInishie1_801FCB10(HSD_GObj*);
-/* 1FCBB0 */ static DynamicsDesc* grInishie1_801FCBB0(enum_t);
+/* 1FCBB0 */ static lbColl_80008D30_arg1* grInishie1_801FCBB0(enum_t);
 /* 1FCBB8 */ static bool grInishie1_801FCBB8(Vec3*, int arg, HSD_JObj* jobj);
 
 #ifdef MUST_MATCH
@@ -1180,7 +1180,7 @@ void grInishie1_801FCB10(HSD_GObj* gobj)
     }
 }
 
-DynamicsDesc* grInishie1_801FCBB0(enum_t arg)
+lbColl_80008D30_arg1* grInishie1_801FCBB0(enum_t arg)
 {
     return NULL;
 }

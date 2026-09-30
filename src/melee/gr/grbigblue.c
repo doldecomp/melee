@@ -4682,7 +4682,7 @@ void fn_801EFB9C(HSD_GObj* gobj, intptr_t pass)
     grDisplay_801C5DB0(gobj, pass);
 }
 
-DynamicsDesc* grBigBlue_801EFC0C(enum_t arg)
+lbColl_80008D30_arg1* grBigBlue_801EFC0C(enum_t arg)
 {
     return NULL;
 }

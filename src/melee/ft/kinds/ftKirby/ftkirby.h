@@ -29,7 +29,7 @@ typedef struct ftKirby_CopyName {
 /* 0EEA6C */ void ftKb_Init_OnItemDrop(Fighter_GObj* gobj, bool);
 /* 0EEAC0 */ void ftKb_Init_LoadSpecialAttrs(Fighter_GObj* gobj);
 /* 0EEB00 */ void ftKb_Init_800EEB00(Fighter_GObj* gobj,
-                                     ArticleDynamicBones**);
+                                     BoneDynamicsTemplate**);
 /* 0EEB1C */ void ftKb_Init_800EEB1C(Fighter_GObj* gobj, s32* arg1);
 /* 0EEB38 */ void ftKb_Init_OnKnockbackEnter(Fighter_GObj* gobj);
 /* 0EEB7C */ void ftKb_Init_OnKnockbackExit(Fighter_GObj* gobj);
