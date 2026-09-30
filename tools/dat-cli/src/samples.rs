@@ -20,6 +20,7 @@ use crate::{
     walk::Walk,
 };
 use anyhow::{Context, Result, bail};
+use globset::GlobSet;
 use object::{
     Architecture, BinaryFormat, Endianness, RelocationFlags, SectionKind,
     SymbolFlags, SymbolKind, SymbolScope,
@@ -145,9 +146,13 @@ pub struct Picker<'a> {
     graph: &'a TypeGraph,
     canonical: &'a Canonical,
     renderer: Renderer<'a>,
-    /// By type and variant.
-    best: BTreeMap<(String, Vec<String>), Sample>,
+    /// By type and variant, and in [`Picker::all`] mode by location too.
+    best: BTreeMap<(String, Vec<String>, Option<(usize, u32)>), Sample>,
     skipped: BTreeMap<String, &'static str>,
+    /// Keep every instance, not the best of each type and variant.
+    all: bool,
+    /// Types never sampled, by name.
+    exclude: GlobSet,
 }
 
 impl<'a> Picker<'a> {
@@ -158,7 +163,17 @@ impl<'a> Picker<'a> {
             renderer: Renderer::new(graph, canonical),
             best: BTreeMap::new(),
             skipped: BTreeMap::new(),
+            all: false,
+            exclude: GlobSet::empty(),
         }
+    }
+
+    /// Keep every instance of every type, except the types `exclude`
+    /// matches.
+    pub fn select(mut self, all: bool, exclude: GlobSet) -> Self {
+        self.all = all;
+        self.exclude = exclude;
+        self
     }
 
     /// Consider every object one archive's walk typed.
@@ -239,6 +254,11 @@ impl<'a> Picker<'a> {
                 member_name = Some(name.to_owned());
                 die = member_ty;
             }
+            if self.exclude.is_match(&key_name)
+                || self.exclude.is_match(&lookup)
+            {
+                continue;
+            }
             let Some(size) = self.member_size(die) else {
                 continue;
             };
@@ -302,7 +322,8 @@ impl<'a> Picker<'a> {
             // A clean instance if there is one, so that a sample fails
             // only where its type is wrong everywhere; then the one that
             // exercises the most: pointers, then data
-            let key = (key_name, candidate.variant.clone());
+            let at = self.all.then_some((archive_offset, offset));
+            let key = (key_name, candidate.variant.clone(), at);
             let better = self.best.get(&key).is_none_or(|best| {
                 (candidate.clean, candidate.relocs, candidate.nonzero)
                     > (best.clean, best.relocs, best.nonzero)
@@ -370,7 +391,7 @@ impl<'a> Picker<'a> {
             .skipped
             .into_iter()
             .filter(|(name, _)| {
-                !self.best.keys().any(|(t, _)| {
+                !self.best.keys().any(|(t, _, _)| {
                     t == name
                         || t.strip_prefix(name.as_str())
                             .is_some_and(|m| m.starts_with('.'))

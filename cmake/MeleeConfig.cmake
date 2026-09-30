@@ -3,9 +3,18 @@ include_guard(GLOBAL)
 
 get_filename_component(_melee_root "${CMAKE_CURRENT_LIST_DIR}/.." ABSOLUTE)
 
+# From the dev shell's environment when it has it, else as cached: ninja
+# re-runs CMake from wherever it is started (e.g. objdiff)
+if(DEFINED ENV{AURORA_SRC})
+    set(AURORA_SRC "$ENV{AURORA_SRC}" CACHE PATH "Aurora's source" FORCE)
+endif()
+if(NOT AURORA_SRC)
+    message(FATAL_ERROR "AURORA_SRC is not set: configure from the dev shell")
+endif()
+
 add_library(melee_game_headers INTERFACE)
 target_include_directories(melee_game_headers INTERFACE
-    $ENV{AURORA_SRC}/include
+    ${AURORA_SRC}/include
     ${_melee_root}/src
     ${_melee_root}/libs/doldecomp/include
 )
