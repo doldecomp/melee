@@ -4,11 +4,21 @@ include_guard(GLOBAL)
 
 # LINT enables the same layout-affecting pragmas as MUST_MATCH without its
 # MWCC-specific code, and turns ASSERT_SIZE/ASSERT_OFFSET into static asserts
+# The game version: its defines can change code paths and types, so each
+# version has its own DWARF. Same list and numbering as configure.py's
+# VERSIONS
+set(MELEE_VERSIONS GALE01)
+set(MELEE_VERSION GALE01 CACHE STRING "Game version (${MELEE_VERSIONS})")
+list(FIND MELEE_VERSIONS "${MELEE_VERSION}" MELEE_VERSION_NUM)
+if(MELEE_VERSION_NUM EQUAL -1)
+    message(FATAL_ERROR "Unknown MELEE_VERSION ${MELEE_VERSION}; one of: ${MELEE_VERSIONS}")
+endif()
+
 target_compile_definitions(melee PRIVATE
     LINT
     DAT_ANNOTATIONS
-    VERSION_GALE01
-    BUILD_VERSION=0
+    VERSION_${MELEE_VERSION}
+    BUILD_VERSION=${MELEE_VERSION_NUM}
 )
 target_compile_options(melee PRIVATE
     # Aurora's headers in their console layout, like the game's: TARGET_PC

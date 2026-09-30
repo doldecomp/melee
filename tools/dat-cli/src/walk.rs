@@ -220,6 +220,10 @@ impl<'a> Walker<'a> {
             return;
         }
         self.walk.objects.entry(offset).or_default().insert(id);
+        self.walk
+            .paths
+            .entry(offset)
+            .or_insert_with(|| name.to_owned());
         let room = (self.data.len() as u64).saturating_sub(offset.into());
         let count = count.unwrap_or_else(|| {
             let end = self
@@ -385,7 +389,9 @@ impl<'a> Walker<'a> {
                     Choice::Member(member) => {
                         if let (Some(id), Some(index)) = (
                             self.canonical.of(die),
-                            members.iter().position(|m| std::ptr::eq(m, member)),
+                            members
+                                .iter()
+                                .position(|m| std::ptr::eq(m, member)),
                         ) {
                             self.walk.choices.insert((offset, id), index);
                         }
@@ -498,6 +504,10 @@ impl<'a> Walker<'a> {
                     return;
                 }
                 self.walk.objects.entry(value).or_default().insert(id);
+                self.walk
+                    .paths
+                    .entry(value)
+                    .or_insert_with(|| format!("{path}->"));
                 (value, raw, format!("{path}->"))
             }
             _ => return self.layout(offset, array, path, parent),
@@ -965,6 +975,10 @@ impl<'a> Walker<'a> {
             return;
         }
         self.walk.objects.entry(value).or_default().insert(id);
+        self.walk
+            .paths
+            .entry(value)
+            .or_insert_with(|| format!("{path}->"));
         let env = self.env.clone();
         for i in 0.. {
             let at = value + (i * size) as u32;

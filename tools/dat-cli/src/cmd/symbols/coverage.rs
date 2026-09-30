@@ -31,6 +31,8 @@ pub enum Format {
     Table,
     /// A report shaped like objdiff's `report.json`
     Json,
+    /// The tables, as Markdown
+    Markdown,
 }
 
 /// Counts shared by the whole report, categories and units.
@@ -279,7 +281,10 @@ pub fn run(args: args::Coverage) -> Result<()> {
             writeln!(out)?;
         }
         Format::Table => {
-            table(&mut out, &report, args.by, args.top, args.list)?
+            table(&mut out, &report, args.by, args.top, args.list, false)?
+        }
+        Format::Markdown => {
+            table(&mut out, &report, args.by, args.top, args.list, true)?
         }
     }
     Ok(())
@@ -291,8 +296,29 @@ fn table(
     view: View,
     top: usize,
     list: bool,
+    markdown: bool,
 ) -> Result<()> {
     let limit = |n: usize| if top == 0 { n } else { n.min(top) };
+    let digits = if markdown { 2 } else { 1 };
+    if markdown {
+        let m = &report.measures;
+        writeln!(out, "### Dat coverage\n")?;
+        writeln!(
+            out,
+            concat!(
+                "**Explained relocations**: {:.2}% of {} ",
+                "({:.2}% of those reachable)\n",
+            ),
+            m.explained_relocations_percent,
+            m.total_relocations,
+            m.reachable_relocations_percent
+        )?;
+        writeln!(
+            out,
+            "**Typed publics**: {:.2}% of {}\n",
+            m.typed_publics_percent, m.total_publics
+        )?;
+    }
     let measures_header = [
         "archives",
         "publics",
@@ -308,13 +334,13 @@ fn table(
         vec![
             format!("{}/{}", m.walked_units, m.total_units),
             m.total_publics.to_string(),
-            format!("{:.1}%", m.typed_publics_percent),
+            format!("{:.digits$}%", m.typed_publics_percent),
             m.total_relocations.to_string(),
-            format!("{:.1}%", m.explained_relocations_percent),
+            format!("{:.digits$}%", m.explained_relocations_percent),
             m.gap_relocations.to_string(),
             m.trailing_relocations.to_string(),
             m.unreferenced_relocations.to_string(),
-            format!("{:.1}%", m.reachable_relocations_percent),
+            format!("{:.digits$}%", m.reachable_relocations_percent),
         ]
     };
     let mut rows: Vec<Vec<String>> = Vec::new();
@@ -432,10 +458,13 @@ fn table(
         row.extend(m);
         rows.push(row);
     }
-    print_rows(out, &rows)?;
+    print_rows(out, &rows, markdown)?;
 
     if list {
         writeln!(out)?;
+        if markdown {
+            writeln!(out, "#### Unexplained relocations\n")?;
+        }
         let mut rows = vec![
             ["archive", "offset", "status", "after", "type", "path"]
                 .map(String::from)
@@ -456,13 +485,44 @@ fn table(
                 ]);
             }
         }
-        print_rows(out, &rows)?;
+        print_rows(out, &rows, markdown)?;
     }
     Ok(())
 }
 
-/// Columns padded to their widest cell; numbers right-aligned.
-fn print_rows(out: &mut impl Write, rows: &[Vec<String>]) -> Result<()> {
+/// Columns padded to their widest cell, numbers right-aligned; or a
+/// Markdown table, the first row its header.
+fn print_rows(
+    out: &mut impl Write,
+    rows: &[Vec<String>],
+    markdown: bool,
+) -> Result<()> {
+    if markdown {
+        let header = rows.first().cloned().unwrap_or_default();
+        // Columns of names from the code and data, which go in backticks
+        let code: Vec<bool> = header
+            .iter()
+            .map(|h| {
+                ["family", "archive", "type", "path", "after", "offset"]
+                    .contains(&h.as_str())
+            })
+            .collect();
+        for (i, row) in rows.iter().enumerate() {
+            let cells: Vec<String> = row
+                .iter()
+                .enumerate()
+                .map(|(c, cell)| match i {
+                    0 => capitalize(cell),
+                    _ => markdown_cell(cell, code.get(c) == Some(&true)),
+                })
+                .collect();
+            writeln!(out, "| {} |", cells.join(" | "))?;
+            if i == 0 {
+                writeln!(out, "| {} |", vec!["-"; row.len()].join(" | "))?;
+            }
+        }
+        return Ok(());
+    }
     let columns = rows.iter().map(Vec::len).max().unwrap_or(0);
     let widths: Vec<usize> = (0..columns)
         .map(|c| {
@@ -489,4 +549,23 @@ fn print_rows(out: &mut impl Write, rows: &[Vec<String>]) -> Result<()> {
         writeln!(out, "{}", cells.join("  ").trim_end())?;
     }
     Ok(())
+}
+
+/// A table cell as Markdown: names from the code and data in backticks,
+/// the total in bold.
+fn markdown_cell(cell: &str, code: bool) -> String {
+    let cell = cell.replace('|', "\\|");
+    match cell.as_str() {
+        "total" => "**Total**".to_owned(),
+        "" | "-" | "(none)" => cell,
+        _ if code => format!("`{cell}`"),
+        _ => cell,
+    }
+}
+
+fn capitalize(word: &str) -> String {
+    let mut chars = word.chars();
+    chars
+        .next()
+        .map_or(String::new(), |c| c.to_uppercase().chain(chars).collect())
 }

@@ -67,6 +67,7 @@ melee-dat symbols coverage --by public        # public symbols with no type
 melee-dat symbols coverage -a 'Pl??.dat'      # only matching archives
 melee-dat symbols coverage -a PlMr.dat --list # every unexplained relocation
 melee-dat symbols coverage --format json      # everything, like objdiff's report.json
+melee-dat symbols coverage --format markdown  # the tables, for a PR or issue
 ```
 
 `--top N` limits table rows (default 25, 0 for all). The JSON report has
@@ -101,31 +102,59 @@ blobs in `config.yml`.
 
 ## Samples
 
-Archives are too large to diff whole, so each type the walk finds is
-sampled once: the instance with no findings of its own that has the most
-pointers. Both sides are generated, under `build/GALE01/dat` (not
-committed):
+Samples check that the types explain the archives' data. Each archive is a
+unit: its best-typed instance of each type (and of each variant its tagged
+unions choose) is sliced into a target object, and C generated from the
+current types must compile to the same bytes and relocations.
 
-- `target/<unit>.o`: the instance's bytes from the archive, with its
-  pointers as relocations to externs named after their targets
-  (`dat_PlMr_1A40`)
-- `src/<unit>.c`: C initializers generated from the current types, compiled
-  to `base/<unit>.o` with the same command as `samples.compile_like`
-
-A unit is the header that declares the types. A pointer the type has as
-an integer is written as its raw value, so objdiff shows the missing
-relocation; so does data in padding, a layout MWCC disagrees with, or a
-float that doesn't round-trip.
+They build in their own CMake preset, in the dev shell:
 
 ```sh
-melee-dat samples build   # regenerate everything
-melee-dat samples report  # samples that don't match
-melee-dat samples list    # which instance stands for each type
+cmake --preset dat
+cmake --build --preset dat
+melee-dat samples report build/GALE01/dat
 ```
 
-To check a type change: edit the header, `cmake --build --preset
-ppc-dwarf`, then `samples build` and `samples report`. The directory is an
-objdiff project, so the objdiff GUI can open it too.
+`build/GALE01/dat` holds everything, and is an objdiff project:
+
+- `melee.elf`: the DWARF build for that game version
+- `types.bin`: its types, deduplicated once for every step
+- `target/<archive>.o`: the sampled objects from the archive, named as the
+  archive names them (its public symbol, else `x<OFFSET>`), with pointers as
+  relocations; `target/<archive>.samples` says what each is
+- `src/<archive>/<root>.{h,c}`: per root of the archive (the public
+  symbol its samples were reached from), a header declaring its samples and
+  the other data they point to, and designated initializers generated from
+  the types; pointers into other roots include those roots' headers
+- `src/<archive>.c`: the unit, which includes every root's source; all of
+  `src` is generated into `gen` and formatted with the repository's
+  `.clang-format`
+- `base/<archive>.o`: that C, compiled with the DWARF build's flags
+
+`compile_commands.json` there gives clangd the same flags as the build.
+
+Each unit is four steps (`samples slice`, `samples codegen`, format,
+compile), and `samples project` writes `objdiff.json` from all of them. The archives come
+from `orig/GALE01/files` (`MELEE_DAT_FILES`); `MELEE_DAT` takes a prebuilt
+`melee-dat`, else the build compiles it with cargo.
+
+A pointer the type has as an integer is written as its raw value, so
+objdiff shows the missing relocation; so does data in padding, or a float
+that doesn't round-trip. A union is written through the member its tag
+chose; a union object is declared as that member (`typeof(((union U *)
+0)->member)`), since the archive only holds that member's bytes.
+
+Use `samples report` for the verdict: objdiff's own report measures data
+per section and misses relocation differences. To check a type change, edit
+the header and rebuild the preset.
+
+In nix, `melee-dat-samples` is the same build, given the game's files in the
+store:
+
+```sh
+nix store add --name melee-GALE01-files orig/GALE01/files
+nix build .#melee-dat-samples
+```
 
 ## Annotations
 

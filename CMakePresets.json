@@ -45,6 +45,23 @@
         },
         "NEWLIB_INCLUDE": "$env{NEWLIB_INCLUDE}"
       }
+    },
+    {
+      "name": "dat",
+      "displayName": "Dat samples (GALE01)",
+      "description": "The PPC DWARF build plus samples of the .dat archives' types, as an objdiff project in its build directory",
+      "inherits": [
+        "ppc-dwarf"
+      ],
+      "binaryDir": "${sourceDir}/build/GALE01/dat",
+      "installDir": "${sourceDir}/build/GALE01/dat/install",
+      "cacheVariables": {
+        "MELEE_VERSION": "GALE01",
+        "MELEE_DAT_SAMPLES": {
+          "type": "BOOL",
+          "value": true
+        }
+      }
     }
   ],
   "buildPresets": [
@@ -55,6 +72,10 @@
     {
       "name": "ppc-dwarf",
       "configurePreset": "ppc-dwarf"
+    },
+    {
+      "name": "dat",
+      "configurePreset": "dat"
     }
   ]
 }
