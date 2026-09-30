@@ -24,7 +24,7 @@ void ftDk_HeavyTurn_Anim(HSD_GObj* gobj)
 void ftDk_HeavyTurn_IASA(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if (fp->mv.dk.unk5.x0 && !ftCo_80094EA4(gobj)) {
+    if (fp->mv.dk.cargo_turn.x0 && !ftCo_80094EA4(gobj)) {
         if (ftDk_MS_347_800E0378(gobj)) {
             return;
         }

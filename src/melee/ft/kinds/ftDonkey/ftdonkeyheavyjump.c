@@ -29,9 +29,9 @@ void ftDk_MS_348_800E04A4(HSD_GObj* gobj, s32 arg1)
     Fighter* fp = gobj->user_data;
     ftDonkeyAttributes* donkey_attr = getFtSpecialAttrs2CC(fp);
     ftDonkeyAttributes* donkey_attr2;
-    fp->mv.dk.unk7.x4 = arg1;
-    fp->mv.dk.unk7.x0 = 0;
-    fp->mv.dk.unk7.x8 = donkey_attr->cargo_hold.x24_JUMP_STARTUP_LAG;
+    fp->mv.dk.cargo_jump.x4 = arg1;
+    fp->mv.dk.cargo_jump.x0 = 0;
+    fp->mv.dk.cargo_jump.x8 = donkey_attr->cargo_hold.x24_JUMP_STARTUP_LAG;
     donkey_attr2 = getFtSpecialAttrs2CC(fp);
     Fighter_ChangeMotionState(gobj, donkey_attr2->motion_state + 5, Ft_MF_None,
                               0, 1, 0, NULL);
@@ -41,8 +41,8 @@ void ftDk_MS_348_800E04A4(HSD_GObj* gobj, s32 arg1)
 void ftDk_HeavyWait1_Anim(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if (fp->mv.dk.unk7.x8 <= 0) {
+    if (fp->mv.dk.cargo_jump.x8 <= 0) {
         ftDk_MS_347_800E03C0(gobj);
     }
-    fp->mv.dk.unk7.x8 -= 1;
+    fp->mv.dk.cargo_jump.x8 -= 1;
 }

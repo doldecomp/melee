@@ -22,25 +22,22 @@ union ftDonkey_MotionVars {
         s32 x0;
     } speciallw;
 
-    /// @todo Rename to correct state.
-    struct ftDonkey_State5Vars {
+    struct ftDonkey_CargoTurnVars {
         bool x0;
         s32 x4;
         float x8;
-    } unk5;
+    } cargo_turn;
 
-    /// @todo Rename to correct state.
-    struct ftDonkey_State7Vars {
+    struct ftDonkey_CargoJumpVars {
         s32 x0;
         s32 x4;
         float x8;
-    } unk7;
+    } cargo_jump;
 
-    /// @todo Rename to correct state.
-    struct ftDonkey_State8Vars {
+    struct ftDonkey_CargoWaitVars {
         s32 x0;
         float x4;
-    } unk8;
+    } cargo_wait;
 };
 
 typedef struct _ftDonkeyAttributes {

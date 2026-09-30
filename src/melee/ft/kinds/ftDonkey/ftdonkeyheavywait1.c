@@ -31,7 +31,7 @@ void ftDk_MS_346_800E05E4(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftDonkeyAttributes* donkey_attr = getFtSpecialAttrs2CC(fp);
-    fp->mv.dk.unk8.x4 = donkey_attr->cargo_hold.x28_LANDING_LAG;
+    fp->mv.dk.cargo_wait.x4 = donkey_attr->cargo_hold.x28_LANDING_LAG;
     donkey_attr = getFtSpecialAttrs2CC(fp);
     ftCo_Landing_Enter(gobj, donkey_attr->motion_state + 8, true, Ft_MF_None,
                        0.0F, 1.0F);
@@ -41,8 +41,8 @@ void ftDk_MS_346_800E05E4(HSD_GObj* gobj)
 void ftDk_HeavyLanding_Anim(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if (fp->mv.dk.unk8.x4 <= 0) {
+    if (fp->mv.dk.cargo_wait.x4 <= 0) {
         ftDk_MS_341_800DF980(gobj);
     }
-    fp->mv.dk.unk8.x4 -= 1;
+    fp->mv.dk.cargo_wait.x4 -= 1;
 }
