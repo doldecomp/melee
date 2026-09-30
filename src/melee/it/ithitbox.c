@@ -1,9 +1,18 @@
+/**
+ * @file ithitbox.c
+ * @brief Item hitbox management
+ * @details Handles the activation, scaling, and damage adjustment of offensive item hitboxes.
+ * Module prefix: it
+ */
 #include "ithitbox.h"
 
 #include "inlines.h"
 #include "it_2725.h"
 #include "itcoll.h"
 
+/**
+ * @brief Resets item damage dealt and hitbox scaling modifiers.
+ */
 void it_802753DC(Item_GObj* item_gobj)
 {
     Item* item;
@@ -19,6 +28,9 @@ void it_802753DC(Item_GObj* item_gobj)
     item->xDCE_flag.x0.b6 = 0;
 }
 
+/**
+ * @brief Enables a specific collision/hitbox flag (xDCD_flag b7).
+ */
 void it_80275414(Item_GObj* item_gobj)
 {
     Item* item;
@@ -27,6 +39,9 @@ void it_80275414(Item_GObj* item_gobj)
     item->xDCD_flag.x0.b7 = 1;
 }
 
+/**
+ * @brief Disables a specific collision/hitbox flag (xDCD_flag b7).
+ */
 void it_8027542C(Item_GObj* item_gobj)
 {
     Item* item;
@@ -35,6 +50,9 @@ void it_8027542C(Item_GObj* item_gobj)
     item->xDCD_flag.x0.b7 = 0;
 }
 
+/**
+ * @brief Enables multiple collision flags in xDCD_flag.
+ */
 void it_80275444(Item_GObj* item_gobj)
 {
     Item* item;
@@ -45,6 +63,9 @@ void it_80275444(Item_GObj* item_gobj)
     item->xDCD_flag.x0.b6 = 1;
 }
 
+/**
+ * @brief Disables multiple collision flags in xDCD_flag.
+ */
 void it_80275474(Item_GObj* item_gobj)
 {
     Item* item;
@@ -55,6 +76,9 @@ void it_80275474(Item_GObj* item_gobj)
     item->xDCD_flag.x0.b6 = 0;
 }
 
+/**
+ * @brief Enables a specific collision/hitbox flag (xDCE_flag b2).
+ */
 void it_802754A4(Item_GObj* item_gobj)
 {
     Item* item;
@@ -63,6 +87,9 @@ void it_802754A4(Item_GObj* item_gobj)
     item->xDCE_flag.x0.b2 = 1;
 }
 
+/**
+ * @brief Disables a specific collision/hitbox flag (xDCE_flag b2).
+ */
 void it_802754BC(Item_GObj* item_gobj)
 {
     Item* item;
@@ -71,6 +98,9 @@ void it_802754BC(Item_GObj* item_gobj)
     item->xDCE_flag.x0.b2 = 0;
 }
 
+/**
+ * @brief Enables multiple collision flags in xDCE_flag.
+ */
 void it_802754D4(Item_GObj* item_gobj)
 {
     Item* item;
@@ -81,6 +111,9 @@ void it_802754D4(Item_GObj* item_gobj)
     item->xDCE_flag.x0.b1 = 1;
 }
 
+/**
+ * @brief Disables multiple collision flags in xDCE_flag.
+ */
 void it_80275504(Item_GObj* item_gobj)
 {
     Item* item;
@@ -91,21 +124,27 @@ void it_80275504(Item_GObj* item_gobj)
     item->xDCE_flag.x0.b1 = 0;
 }
 
+/**
+ * @brief Sets the scale for all active hitboxes of an item.
+ */
 void it_80275534(Item_GObj* item_gobj, f32 scale)
 {
     Item* item;
     HitCapsule* hitcapsule;
-    u32 var_ctr;
+    u32 i;
 
     item = item_gobj->user_data;
-    for (var_ctr = 0U; var_ctr < 4U; var_ctr++) {
-        hitcapsule = &item->x5D4_hitboxes[var_ctr].hit;
+    for (i = 0U; i < 4U; i++) {
+        hitcapsule = &item->x5D4_hitboxes[i].hit;
         if (hitcapsule->state != HitCapsule_Disabled) {
             hitcapsule->scale = scale;
         }
     }
 }
 
+/**
+ * @brief Multiplies the scale of a specific item hitbox.
+ */
 void it_80275594(Item_GObj* item_gobj, s32 idx, f32 mult)
 {
     Item* item;
@@ -118,22 +157,28 @@ void it_80275594(Item_GObj* item_gobj, s32 idx, f32 mult)
     }
 }
 
+/**
+ * @brief Multiplies the scale for all active hitboxes of an item.
+ */
 void it_802755C0(Item_GObj* item_gobj, f32 scale)
 {
     Item* item;
     HitCapsule* hitcapsule;
-    u32 var_ctr;
+    u32 i;
 
     item = item_gobj->user_data;
-    for (var_ctr = 0U; var_ctr < 4U; var_ctr++) {
-        hitcapsule = &item->x5D4_hitboxes[var_ctr].hit;
+    for (i = 0U; i < 4U; i++) {
+        hitcapsule = &item->x5D4_hitboxes[i].hit;
         if (hitcapsule->state != HitCapsule_Disabled) {
             hitcapsule->scale *= scale;
         }
     }
 }
 
-void it_80275640(Item_GObj* item_gobj, f32 arg1)
+/**
+ * @brief Multiplies the damage of all active hitboxes of an item.
+ */
+void it_80275640(Item_GObj* item_gobj, f32 damage_mul)
 {
     Item* item = GET_ITEM(item_gobj);
     u32 i;
@@ -141,22 +186,31 @@ void it_80275640(Item_GObj* item_gobj, f32 arg1)
     for (i = 0; i < 4; i++) {
         HitCapsule* hitcapsule = &item->x5D4_hitboxes[i].hit;
         if (hitcapsule->state != HitCapsule_Disabled) {
-            it_80272460(hitcapsule, hitcapsule->damage * arg1, item_gobj);
+            it_80272460(hitcapsule, hitcapsule->damage * damage_mul, item_gobj);
         }
     }
 }
 
+/**
+ * @brief Sets an item collision/hitlag state variable to 2.
+ */
 void it_802756D0(Item_GObj* item_gobj)
 {
     ((Item*) item_gobj->user_data)->xD0C = 2;
 }
 
+/**
+ * @brief Clears an item collision/hitlag state variable and updates collision logic.
+ */
 void it_802756E0(Item_GObj* item_gobj)
 {
     ((Item*) item_gobj->user_data)->xD0C = 0;
     it_802714C0(item_gobj);
 }
 
+/**
+ * @brief Disables a flag (x40_b0) on a specific item hitbox.
+ */
 void it_8027570C(Item_GObj* item_gobj, s32 idx)
 {
     Item* item;
@@ -165,6 +219,9 @@ void it_8027570C(Item_GObj* item_gobj, s32 idx)
     item->x5D4_hitboxes[idx].hit.x40_b0 = 0;
 }
 
+/**
+ * @brief Enables a flag (x40_b0) on a specific item hitbox.
+ */
 void it_8027572C(Item_GObj* item_gobj, s32 idx)
 {
     Item* item;
@@ -173,6 +230,9 @@ void it_8027572C(Item_GObj* item_gobj, s32 idx)
     item->x5D4_hitboxes[idx].hit.x40_b0 = 1;
 }
 
+/**
+ * @brief Updates position and collision boundaries for the item hitboxes.
+ */
 void it_8027574C(Item_GObj* item_gobj)
 {
     Item* item = item_gobj->user_data;
@@ -180,17 +240,20 @@ void it_8027574C(Item_GObj* item_gobj)
     it_80274D6C(item_gobj);
 }
 
+/**
+ * @brief Sets all active hitboxes to a specific state (e.g. interpolated).
+ */
 void it_80275788(Item_GObj* item_gobj)
 {
     Item* item;
     HitCapsule* hitcapsule;
     HitCapsuleState state;
-    u32 var_ctr;
+    u32 i;
 
     item = item_gobj->user_data;
     state = HitCapsule_Unk4;
-    for (var_ctr = 0U; var_ctr < 4U; var_ctr++) {
-        hitcapsule = (0, &item->x5D4_hitboxes[var_ctr].hit);
+    for (i = 0U; i < 4U; i++) {
+        hitcapsule = (0, &item->x5D4_hitboxes[i].hit);
         if (hitcapsule->state != HitCapsule_Disabled) {
             hitcapsule->state = state;
             item->xDAA.xDAA_flag.x0.b2 = 1;
@@ -198,7 +261,10 @@ void it_80275788(Item_GObj* item_gobj)
     }
 }
 
-void it_80275820(Item_GObj* item_gobj, Vec3* arg1, Vec3* arg2, s32 idx)
+/**
+ * @brief Sets the primary and secondary coordinate vectors for a specific hitbox.
+ */
+void it_80275820(Item_GObj* item_gobj, Vec3* pos1, Vec3* pos2, s32 idx)
 {
     Item* item;
     HitCapsule* hitcapsule;
@@ -206,20 +272,23 @@ void it_80275820(Item_GObj* item_gobj, Vec3* arg1, Vec3* arg2, s32 idx)
     item = item_gobj->user_data;
     hitcapsule = &item->x5D4_hitboxes[idx].hit;
     if (hitcapsule->state != HitCapsule_Disabled) {
-        hitcapsule->x58 = *arg2;
-        hitcapsule->x4C = *arg1;
+        hitcapsule->x58 = *pos2;
+        hitcapsule->x4C = *pos1;
     }
 }
 
+/**
+ * @brief Checks if the item has any active hitboxes.
+ */
 bool it_80275870(Item_GObj* item_gobj)
 {
     Item* item;
     HitCapsule* hitcapsule;
-    u32 var_ctr;
+    u32 i;
 
     item = item_gobj->user_data;
-    for (var_ctr = 0U; var_ctr < 4U; var_ctr++) {
-        hitcapsule = &item->x5D4_hitboxes[var_ctr].hit;
+    for (i = 0U; i < 4U; i++) {
+        hitcapsule = &item->x5D4_hitboxes[i].hit;
         if (hitcapsule->state != HitCapsule_Disabled) {
             return true;
         }
@@ -227,18 +296,21 @@ bool it_80275870(Item_GObj* item_gobj)
     return false;
 }
 
+/**
+ * @brief Gets the maximum damage value across all active hitboxes on the item.
+ */
 f32 it_802758D4(Item_GObj* item_gobj)
 {
     Item* item;
     HitCapsule* hitcapsule;
-    u32 var_ctr;
+    u32 i;
     f32 damage;
     bool disable_chk;
 
     item = item_gobj->user_data;
     damage = 0.0f;
-    for (var_ctr = 0U; var_ctr < 4U; var_ctr++) {
-        hitcapsule = &item->x5D4_hitboxes[var_ctr].hit;
+    for (i = 0U; i < 4U; i++) {
+        hitcapsule = &item->x5D4_hitboxes[i].hit;
         if (hitcapsule->state != HitCapsule_Disabled) {
             disable_chk = true;
             break;
@@ -248,8 +320,8 @@ f32 it_802758D4(Item_GObj* item_gobj)
     }
 
     if (disable_chk) {
-        for (var_ctr = 0U; var_ctr < 4U; var_ctr++) {
-            hitcapsule = &item->x5D4_hitboxes[var_ctr].hit;
+        for (i = 0U; i < 4U; i++) {
+            hitcapsule = &item->x5D4_hitboxes[i].hit;
             if (hitcapsule->state != HitCapsule_Disabled) {
                 if (damage <= hitcapsule->damage) {
                     damage = hitcapsule->damage;
