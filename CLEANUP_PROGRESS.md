@@ -90,4 +90,17 @@
 - ✅ sysdolphin/baselib/fobj.c — Frame Object (FObj) keyframe tracks
 - ✅ sysdolphin/baselib/displayfunc.c — Display dispatch and render passes
 - ✅ sysdolphin/baselib/controller.c — GameCube controller input polling
-- ❌ sysdolphin/baselib/gobj.c — Game Object (GObj) entity base class
+- ✅ sysdolphin/baselib/archive.c — DAT archive file parser, pointer relocation, symbol lookup
+- ✅ sysdolphin/baselib/class.c — Object-oriented class hierarchy, vtables, memory pooling
+- ✅ sysdolphin/baselib/gobj.c — Game Object (GObj) entity base class
+- ✅ sysdolphin/baselib/robj.c — Reference/Constraint Object for IK
+- ✅ sysdolphin/baselib/texp.c — TEV expression compiler
+- ✅ sysdolphin/baselib/objalloc.c — Fixed-block memory pool allocator
+- ✅ sysdolphin/baselib/shadow.c — Circular floor shadow projection
+- ✅ sysdolphin/baselib/video.c — GX framebuffer configuration
+- ✅ sysdolphin/baselib/axdriver.c — DSP audio hardware interface
+- ✅ sysdolphin/baselib/bytecode.c — Event script virtual machine
+- ✅ sysdolphin/baselib/gobjproc.c — Game Object process callbacks
+- ✅ sysdolphin/baselib/gobjgxlink.c — Game Object rendering queues
+- ✅ sysdolphin/baselib/gobjplink.c — Game Object priority lists
+- ✅ sysdolphin/baselib/random.c — Linear congruential generator (LCG)
