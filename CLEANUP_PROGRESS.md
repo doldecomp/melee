@@ -76,5 +76,12 @@
 ### src/melee/ty/ (Trophy) — ❌ Not Started
 ### src/melee/vi/ (Video) — ❌ Not Started
 
-## Phase 2: Engine (src/sysdolphin/) — ❌ Not Started
 ## Phase 3: SDK/Runtime — ❌ Not Started
+
+## Phase 2: Engine (src/sysdolphin/baselib/)
+- ❌ sysdolphin/baselib/cobj.c — Camera Object (CObj) rendering and viewport parameters
+- ❌ sysdolphin/baselib/dobj.c — Display Object (DObj) node structure
+- ❌ sysdolphin/baselib/jobj.c — Joint Object (JObj) skeletal transform hierarchy
+- ❌ sysdolphin/baselib/mobj.c — Material Object (MObj) textures and shaders
+- ❌ sysdolphin/baselib/pobj.c — Polygon Object (PObj) mesh and vertex data
+- ❌ sysdolphin/baselib/aobj.c — Animation Object (AObj) track interpolation
