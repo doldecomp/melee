@@ -24,7 +24,7 @@
         void** da = &(fp)->dat_attrs;                                         \
         *(attributeName*) (fp)->dat_attrs_backup = *src;                      \
         *da = backup;                                                         \
-    } while (0)
+    } while (false)
 
 /// @todo Remove declarations. Doesn't really need to be a macro.
 #define COPY_ATTRS(gobj, attributeName)                                       \

@@ -441,12 +441,13 @@ Fighter_DemoStrings ftNs_Init_DemoMotionFilenames = {
     "ftDemoViWaitMotionFileNess",
 };
 
-Fighter_CostumeStrings ftNs_Init_CostumeStrings[] = {
-    { ftNs_Init_803CCAE8, ftNs_Init_803CCAF4, ftNs_Init_803CCB0C },
-    { ftNs_Init_803CCB2C, ftNs_Init_803CCB38, ftNs_Init_803CCB50 },
-    { ftNs_Init_803CCB70, ftNs_Init_803CCB7C, ftNs_Init_803CCB94 },
-    { ftNs_Init_803CCBB4, ftNs_Init_803CCBC0, ftNs_Init_803CCBD8 },
-};
+Fighter_CostumeStrings
+    ftNs_Init_CostumeStrings[ARRAY_SIZE(ftNs_CostumeList)] = {
+        { ftNs_Init_803CCAE8, ftNs_Init_803CCAF4, ftNs_Init_803CCB0C },
+        { ftNs_Init_803CCB2C, ftNs_Init_803CCB38, ftNs_Init_803CCB50 },
+        { ftNs_Init_803CCB70, ftNs_Init_803CCB7C, ftNs_Init_803CCB94 },
+        { ftNs_Init_803CCBB4, ftNs_Init_803CCBC0, ftNs_Init_803CCBD8 },
+    };
 
 void ftNs_Init_OnDeath(HSD_GObj* gobj)
 {
@@ -499,22 +500,22 @@ float ftNs_Init_GetAbsorbHeal(Fighter* fp)
 
 void ftNs_Init_OnItemPickup(HSD_GObj* gobj, bool catchItemFlag)
 {
-    Fighter_OnItemPickup(gobj, catchItemFlag, 1, 1);
+    Fighter_OnItemPickup(gobj, catchItemFlag, true, true);
 }
 
 void ftNs_Init_OnItemInvisible(HSD_GObj* gobj)
 {
-    Fighter_OnItemInvisible(gobj, 1);
+    Fighter_OnItemInvisible(gobj, true);
 }
 
 void ftNs_Init_OnItemVisible(HSD_GObj* gobj)
 {
-    Fighter_OnItemVisible(gobj, 1);
+    Fighter_OnItemVisible(gobj, true);
 }
 
 void ftNs_Init_OnItemDrop(HSD_GObj* gobj, bool dropItemFlag)
 {
-    Fighter_OnItemDrop(gobj, dropItemFlag, 1, 1);
+    Fighter_OnItemDrop(gobj, dropItemFlag, true, true);
 }
 
 void ftNs_Init_LoadSpecialAttrs(HSD_GObj* gobj)

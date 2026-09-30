@@ -80,6 +80,7 @@ struct EF_EffectDesc {
 
 struct EF_QueuedEffect {
     /* +0 */ EF_QueuedEffect* next;
+    /// @todo change spawn_kind to enum
     /* +4 */ u8 spawn_kind; // EF_SpawnKind
     /* +8 */ s32 gfx_id;
     /* +C */ HSD_JObj* jobj;

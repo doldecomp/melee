@@ -26,9 +26,10 @@ Fighter_DemoStrings ftGl_Init_DemoStrings = {
 #pragma pop
 #endif
 
-Fighter_CostumeStrings ftGl_Init_CostumeStrings[] = {
-    { ftGl_Init_803D3580, ftGl_Init_803D358C, NULL },
-};
+Fighter_CostumeStrings
+    ftGl_Init_CostumeStrings[ARRAY_SIZE(ftGl_CostumeList)] = {
+        { ftGl_Init_803D3580, ftGl_Init_803D358C, NULL },
+    };
 
 void ftGl_Init_OnDeath(HSD_GObj* gobj)
 {
@@ -38,30 +39,34 @@ void ftGl_Init_OnDeath(HSD_GObj* gobj)
 void ftGl_Init_OnLoad(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
+    /// @todo: replace with attributes struct (create new or use existing
+    /// ftZakoboyAttributes?)
     PUSH_ATTRS(fp, s32);
 }
 
 void ftGl_Init_OnItemPickup(HSD_GObj* gobj, bool flag)
 {
-    Fighter_OnItemPickup(gobj, flag, 0, 0);
+    Fighter_OnItemPickup(gobj, flag, false, false);
 }
 
 void ftGl_Init_OnItemInvisible(HSD_GObj* gobj)
 {
-    Fighter_OnItemInvisible(gobj, 0);
+    Fighter_OnItemInvisible(gobj, false);
 }
 
 void ftGl_Init_OnItemVisible(HSD_GObj* gobj)
 {
-    Fighter_OnItemVisible(gobj, 0);
+    Fighter_OnItemVisible(gobj, false);
 }
 
 void ftGl_Init_OnItemDrop(HSD_GObj* gobj, bool flag)
 {
-    Fighter_OnItemDrop(gobj, flag, 0, 0);
+    Fighter_OnItemDrop(gobj, flag, false, false);
 }
 
 void ftGl_Init_LoadSpecialAttrs(HSD_GObj* gobj)
 {
+    /// @todo: replace with attributes struct (create new or use existing
+    /// ftZakoboyAttributes?)
     COPY_ATTRS(gobj, s32);
 }

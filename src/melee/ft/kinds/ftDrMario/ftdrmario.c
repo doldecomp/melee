@@ -161,22 +161,23 @@ Fighter_DemoStrings ftDr_Init_DemoMotionFilenames = {
     "ftDemoViWaitMotionFileDrmario",
 };
 
-Fighter_CostumeStrings ftDr_Init_CostumeStrings[] = {
-    { ftDr_Init_803D15F4, ftDr_Init_803D1600, ftDr_Init_803D161C },
-    { ftDr_Init_803D1640, ftDr_Init_803D164C, ftDr_Init_803D1668 },
-    { ftDr_Init_803D168C, ftDr_Init_803D1698, ftDr_Init_803D16B4 },
-    { ftDr_Init_803D16D8, ftDr_Init_803D16E4, ftDr_Init_803D1700 },
-    { ftDr_Init_803D1724, ftDr_Init_803D1730, ftDr_Init_803D174C },
-};
+Fighter_CostumeStrings
+    ftDr_Init_CostumeStrings[ARRAY_SIZE(ftDr_CostumeList)] = {
+        { ftDr_Init_803D15F4, ftDr_Init_803D1600, ftDr_Init_803D161C },
+        { ftDr_Init_803D1640, ftDr_Init_803D164C, ftDr_Init_803D1668 },
+        { ftDr_Init_803D168C, ftDr_Init_803D1698, ftDr_Init_803D16B4 },
+        { ftDr_Init_803D16D8, ftDr_Init_803D16E4, ftDr_Init_803D1700 },
+        { ftDr_Init_803D1724, ftDr_Init_803D1730, ftDr_Init_803D174C },
+    };
 
 void ftDr_Init_OnDeath(HSD_GObj* gobj)
 {
     Fighter* fp = (Fighter*) gobj->user_data;
     ftParts_80074A4C(gobj, 0, 0);
-    fp->u.mr.x2234_tornadoCharge = 0;
+    fp->u.mr.x2234_tornadoCharge = false;
     fp->u.mr.x2238_isCapeBoost = false;
     fp->u.mr.x223C_capeGObj = NULL;
-    fp->u.mr.x2240 = 0;
+    fp->u.mr.x2240 = NULL;
 }
 
 void ftDr_Init_OnLoad(HSD_GObj* gobj)
@@ -192,7 +193,7 @@ void ftDr_Init_OnLoad(HSD_GObj* gobj)
     ftMr_Init_OnLoadForDrMario(fp);
     sa = fp->dat_attrs;
     it_8026B3F8(items[1], It_Kind_DrMario_Vitamin);
-    it_8026B3F8(items[3], sa->x14);
+    it_8026B3F8(items[3], sa->cape_kind);
 }
 
 void ftDr_Init_80149540(HSD_GObj* gobj)
@@ -202,22 +203,22 @@ void ftDr_Init_80149540(HSD_GObj* gobj)
 
 void ftDr_Init_OnItemPickup(HSD_GObj* gobj, bool flag)
 {
-    Fighter_OnItemPickup(gobj, flag, 1, 1);
+    Fighter_OnItemPickup(gobj, flag, true, true);
 }
 
 void ftDr_Init_OnItemInvisible(HSD_GObj* gobj)
 {
-    Fighter_OnItemInvisible(gobj, 1);
+    Fighter_OnItemInvisible(gobj, true);
 }
 
 void ftDr_Init_OnItemVisible(HSD_GObj* gobj)
 {
-    Fighter_OnItemVisible(gobj, 1);
+    Fighter_OnItemVisible(gobj, true);
 }
 
 void ftDr_Init_OnItemDrop(HSD_GObj* gobj, bool bool1)
 {
-    Fighter_OnItemDrop(gobj, bool1, 1, 1);
+    Fighter_OnItemDrop(gobj, bool1, true, true);
 }
 
 void ftDr_Init_LoadSpecialAttrs(HSD_GObj* gobj)
@@ -243,17 +244,17 @@ void ftDr_Init_801497CC(HSD_GObj* gobj)
 
     if (gobj != NULL) {
         fp = gobj->user_data;
-        if (fp != NULL && fp->u.mr.x2240 != 0) {
+        if (fp != NULL && fp->u.mr.x2240 != NULL) {
             itDrMarioPill_802C0DBC(fp->u.mr.x2240);
-            fp->u.mr.x2240 = 0;
+            fp->u.mr.x2240 = NULL;
         }
     }
 
     if (gobj != NULL) {
         fp = gobj->user_data;
         if (fp != NULL) {
-            fp->take_dmg_cb = 0;
-            fp->death2_cb = 0;
+            fp->take_dmg_cb = NULL;
+            fp->death2_cb = NULL;
         }
     }
 }
@@ -274,7 +275,7 @@ bool ftDr_Init_80149844(HSD_GObj* gobj)
     if (tmp != 0x155 && tmp != 0x156) {
         return true;
     }
-    if (fp->u.mr.x2240 == 0) {
+    if (fp->u.mr.x2240 == NULL) {
         return true;
     }
     return false;
@@ -286,15 +287,15 @@ void ftDr_Init_801498A0(HSD_GObj* gobj)
 
     if (gobj != NULL) {
         fp = gobj->user_data;
-        if (fp != NULL && fp->u.mr.x2240 != 0) {
-            fp->u.mr.x2240 = 0;
+        if (fp != NULL && fp->u.mr.x2240 != NULL) {
+            fp->u.mr.x2240 = NULL;
         }
     }
     if (gobj != NULL) {
         fp = gobj->user_data;
         if (fp != NULL) {
-            fp->take_dmg_cb = 0;
-            fp->death2_cb = 0;
+            fp->take_dmg_cb = NULL;
+            fp->death2_cb = NULL;
         }
     }
 }

@@ -391,18 +391,19 @@ Fighter_DemoStrings ftPe_Init_DemoMotionFilenames = {
     "ftDemoViWaitMotionFilePeach",
 };
 
-Fighter_CostumeStrings ftPe_Init_CostumeStrings[] = {
-    { str_PlPeNr_dat, str_PlyPeach5K_Share_joint,
-      str_PlyPeach5K_Share_matanim_joint },
-    { str_PlPeYe_dat, str_PlyPeach5KYe_Share_joint,
-      str_PlyPeach5KYe_Share_matanim_joint },
-    { str_PlPeWh_dat, str_PlyPeach5KWh_Share_joint,
-      str_PlyPeach5KWh_Share_matanim_joint },
-    { str_PlPeBu_dat, str_PlyPeach5KBu_Share_joint,
-      str_PlyPeach5KBu_Share_matanim_joint },
-    { str_PlPeGr_dat, str_PlyPeach5KGr_Share_joint,
-      str_PlyPeach5KGr_Share_matanim_joint },
-};
+Fighter_CostumeStrings
+    ftPe_Init_CostumeStrings[ARRAY_SIZE(ftPe_CostumeList)] = {
+        { str_PlPeNr_dat, str_PlyPeach5K_Share_joint,
+          str_PlyPeach5K_Share_matanim_joint },
+        { str_PlPeYe_dat, str_PlyPeach5KYe_Share_joint,
+          str_PlyPeach5KYe_Share_matanim_joint },
+        { str_PlPeWh_dat, str_PlyPeach5KWh_Share_joint,
+          str_PlyPeach5KWh_Share_matanim_joint },
+        { str_PlPeBu_dat, str_PlyPeach5KBu_Share_joint,
+          str_PlyPeach5KBu_Share_matanim_joint },
+        { str_PlPeGr_dat, str_PlyPeach5KGr_Share_joint,
+          str_PlyPeach5KGr_Share_matanim_joint },
+    };
 
 void ftPe_Init_OnDeath(HSD_GObj* gobj)
 {
@@ -459,22 +460,22 @@ void ftPe_Init_OnDeath2(HSD_GObj* gobj)
 
 void ftPe_Init_OnItemPickup(HSD_GObj* gobj, bool flag)
 {
-    Fighter_OnItemPickup(gobj, flag, 1, 1);
+    Fighter_OnItemPickup(gobj, flag, true, true);
 }
 
 void ftPe_Init_OnItemInvisible(HSD_GObj* gobj)
 {
-    Fighter_OnItemInvisible(gobj, 1);
+    Fighter_OnItemInvisible(gobj, true);
 }
 
 void ftPe_Init_OnItemVisible(HSD_GObj* gobj)
 {
-    Fighter_OnItemVisible(gobj, 1);
+    Fighter_OnItemVisible(gobj, true);
 }
 
 void ftPe_Init_OnItemDrop(HSD_GObj* gobj, bool flag)
 {
-    Fighter_OnItemDrop(gobj, flag, 1, 1);
+    Fighter_OnItemDrop(gobj, flag, true, true);
 }
 
 void ftPe_Init_LoadSpecialAttrs(HSD_GObj* gobj)

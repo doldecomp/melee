@@ -1,5 +1,6 @@
 #include "ftkirby.h"
 
+#include <stdbool.h>
 #include <stddef.h>
 
 #include "ftkirbyattackdash.h"
@@ -2563,7 +2564,7 @@ void ftKb_Init_OnDeath(HSD_GObj* gobj)
     if (Player_GetFlagsBit1(fp->player_idx) &&
         Player_GetUnk4D(fp->player_idx) != 4)
     {
-        ftKb_SpecialN_800F1BAC(gobj, Player_GetUnk4D(fp->player_idx), 0);
+        ftKb_SpecialN_800F1BAC(gobj, Player_GetUnk4D(fp->player_idx), false);
     }
 }
 
@@ -2614,23 +2615,23 @@ void ftKb_Init_UnkMotionStates4(HSD_GObj* gobj)
     switch (fp->u.kb.hat.kind) {
     case Ft_Kind_Donkey:
         if (fp->u.kb.xBC == da->specialn_dk_swings_to_full_charge) {
-            ftCo_800BFFD0(fp, 58, 0);
+            ftCo_800BFFD0(fp, 58, false);
         }
         break;
     case Ft_Kind_Samus:
         if (fp->u.kb.xA8 == da->specialn_ss_charge_time) {
-            ftCo_800BFFD0(fp, 54, 0);
+            ftCo_800BFFD0(fp, 54, false);
         }
         break;
     case Ft_Kind_Mewtwo:
         if (fp->u.kb.x9C == da->specialn_mt_charge_time) {
-            ftCo_800BFFD0(fp, 93, 0);
+            ftCo_800BFFD0(fp, 93, false);
             return;
         }
         break;
     case Ft_Kind_Seak:
         if (fp->u.kb.xB4 == 6) {
-            ftCo_800BFFD0(fp, 87, 0);
+            ftCo_800BFFD0(fp, 87, false);
         }
         break;
     default:
@@ -2664,19 +2665,19 @@ void ftKb_Init_OnItemPickup(HSD_GObj* gobj, bool arg1)
 void ftKb_Init_OnItemInvisible(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if (itIsHeavy(fp->item_gobj) == 0) {
+    if (itIsHeavy(fp->item_gobj) == false) {
         ftAnim_80070CC4(gobj, 1);
     }
 }
 
 void ftKb_Init_OnItemVisible(HSD_GObj* gobj)
 {
-    Fighter_OnItemVisible(gobj, 1);
+    Fighter_OnItemVisible(gobj, true);
 }
 
 void ftKb_Init_OnItemDrop(HSD_GObj* gobj, bool bool1)
 {
-    Fighter_OnItemDrop(gobj, bool1, 1, 1);
+    Fighter_OnItemDrop(gobj, bool1, true, true);
 }
 
 void ftKb_Init_LoadSpecialAttrs(HSD_GObj* gobj)

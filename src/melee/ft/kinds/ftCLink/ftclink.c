@@ -291,13 +291,14 @@ Fighter_DemoStrings ftCl_Init_DemoMotionFilenames = {
     "ftDemoViWaitMotionFileClink",
 };
 
-Fighter_CostumeStrings ftCl_Init_CostumeStrings[] = {
-    { ftCl_Init_803D1258, ftCl_Init_803D1264, ftCl_Init_803D127C },
-    { ftCl_Init_803D129C, ftCl_Init_803D12A8, ftCl_Init_803D12C4 },
-    { ftCl_Init_803D12E8, ftCl_Init_803D12F4, ftCl_Init_803D1310 },
-    { ftCl_Init_803D1334, ftCl_Init_803D1340, ftCl_Init_803D135C },
-    { ftCl_Init_803D1380, ftCl_Init_803D138C, ftCl_Init_803D13A8 },
-};
+Fighter_CostumeStrings
+    ftCl_Init_CostumeStrings[ARRAY_SIZE(ftCl_CostumeList)] = {
+        { ftCl_Init_803D1258, ftCl_Init_803D1264, ftCl_Init_803D127C },
+        { ftCl_Init_803D129C, ftCl_Init_803D12A8, ftCl_Init_803D12C4 },
+        { ftCl_Init_803D12E8, ftCl_Init_803D12F4, ftCl_Init_803D1310 },
+        { ftCl_Init_803D1334, ftCl_Init_803D1340, ftCl_Init_803D135C },
+        { ftCl_Init_803D1380, ftCl_Init_803D138C, ftCl_Init_803D13A8 },
+    };
 
 void ftCl_Init_OnDeath(Fighter_GObj* gobj)
 {
@@ -307,10 +308,10 @@ void ftCl_Init_OnDeath(Fighter_GObj* gobj)
     ftParts_80074A4C(gobj, 2, 0);
     fp->u.lk.used_boomerang = false;
     fp->u.lk.boomerang_gobj = NULL;
-    fp->u.lk.xC = 0;
+    fp->u.lk.xC = NULL;
     fp->u.lk.arrow_gobj = NULL;
     fp->u.lk.x14 = NULL;
-    fp->u.lk.xC = 0;
+    fp->u.lk.xC = NULL;
     fp->u.lk.x18 = NULL;
 }
 
@@ -353,12 +354,12 @@ void ftCl_Init_OnItemPickupExt(HSD_GObj* gobj, bool flag)
 
 void ftCl_Init_OnItemInvisible(HSD_GObj* gobj)
 {
-    Fighter_OnItemInvisible(gobj, 1);
+    Fighter_OnItemInvisible(gobj, true);
 }
 
 void ftCl_Init_OnItemVisible(HSD_GObj* gobj)
 {
-    Fighter_OnItemVisible(gobj, 1);
+    Fighter_OnItemVisible(gobj, true);
 }
 
 void ftCl_Init_OnItemDropExt(HSD_GObj* gobj, bool flag)
@@ -377,13 +378,13 @@ void ftCl_Init_OnItemDropExt(HSD_GObj* gobj, bool flag)
 
 void ftCl_Init_OnItemPickup(HSD_GObj* gobj, bool flag)
 {
-    Fighter_OnItemPickup(gobj, flag, 1, 1);
+    Fighter_OnItemPickup(gobj, flag, true, true);
 }
 
 void ftCl_Init_OnItemDrop(HSD_GObj* gobj, bool flag)
 {
     u8 _[8];
-    Fighter_OnItemDrop(gobj, flag, 1, 1);
+    Fighter_OnItemDrop(gobj, flag, true, true);
 }
 
 void ftCl_Init_LoadSpecialAttrs(HSD_GObj* gobj)
@@ -393,12 +394,12 @@ void ftCl_Init_LoadSpecialAttrs(HSD_GObj* gobj)
 
 void ftCl_Init_OnKnockbackEnter(HSD_GObj* gobj)
 {
-    Fighter_OnKnockbackEnter(gobj, 1);
+    Fighter_OnKnockbackEnter(gobj, true);
 }
 
 void ftCl_Init_OnKnockbackExit(HSD_GObj* gobj)
 {
-    Fighter_OnKnockbackExit(gobj, 1);
+    Fighter_OnKnockbackExit(gobj, true);
 }
 
 void ftCl_Init_80149114(HSD_GObj* gobj)
@@ -446,7 +447,7 @@ bool ftCl_Init_8014920C(HSD_GObj* gobj)
     if (temp_r0 != 342 && temp_r0 != 343) {
         return true;
     }
-    if (fp->u.lk.x18 == 0) {
+    if (fp->u.lk.x18 == NULL) {
         return true;
     }
     return false;
@@ -463,8 +464,8 @@ void ftCl_Init_801492C4(HSD_GObj* gobj)
 {
     if (gobj != NULL) {
         Fighter* fp = GET_FIGHTER(gobj);
-        if (fp != NULL && fp->u.lk.x18 != 0) {
-            fp->u.lk.x18 = 0;
+        if (fp != NULL && fp->u.lk.x18 != NULL) {
+            fp->u.lk.x18 = NULL;
         };
 
         if (gobj == NULL) {

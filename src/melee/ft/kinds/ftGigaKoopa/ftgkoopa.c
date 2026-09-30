@@ -295,13 +295,16 @@ char ftGk_Init_803D3910[] = "PlyGkoopa5K_Share_joint";
 char ftGk_Init_803D3928[] = "PlyGkoopa5K_Share_matanim_joint";
 char ftGk_Init_AnimDatFilename[] = "PlGkAJ.dat";
 
-Fighter_DemoStrings ftGk_Init_DemoMotionFilenames = { 0 };
+Fighter_DemoStrings ftGk_Init_DemoMotionFilenames = { NULL };
 
-char* ftGk_Init_803D3984[] = { "ftDemoVi1201V2MotionFileGkoopa" };
+char* ftGk_Init_803D3984[] = {
+    "ftDemoVi1201V2MotionFileGkoopa"
+}; // Does this not belong in ftGk_Init_DemoMotionFilenames?
 
-Fighter_CostumeStrings ftGk_Init_CostumeStrings[] = {
-    { ftGk_Init_803D3904, ftGk_Init_803D3910, ftGk_Init_803D3928 },
-};
+Fighter_CostumeStrings
+    ftGk_Init_CostumeStrings[ARRAY_SIZE(ftGk_CostumeList)] = {
+        { ftGk_Init_803D3904, ftGk_Init_803D3910, ftGk_Init_803D3928 },
+    };
 
 void ftGk_Init_OnDeath(HSD_GObj* gobj)
 {

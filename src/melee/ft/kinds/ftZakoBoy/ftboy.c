@@ -26,9 +26,10 @@ Fighter_DemoStrings ftBo_Init_DemoStrings = {
 #pragma pop
 #endif
 
-Fighter_CostumeStrings ftBo_Init_CostumeStrings[] = {
-    { ftBo_Init_803D3500, ftBo_Init_803D350C, NULL },
-};
+Fighter_CostumeStrings
+    ftBo_Init_CostumeStrings[ARRAY_SIZE(ftBo_CostumeList)] = {
+        { ftBo_Init_803D3500, ftBo_Init_803D350C, NULL },
+    };
 
 void ftBo_Init_OnDeath(HSD_GObj* gobj)
 {
@@ -37,22 +38,22 @@ void ftBo_Init_OnDeath(HSD_GObj* gobj)
 
 void ftBo_Init_OnItemPickup(HSD_GObj* gobj, bool flag)
 {
-    Fighter_OnItemPickup(gobj, flag, 0, 0);
+    Fighter_OnItemPickup(gobj, flag, false, false);
 }
 
 void ftBo_Init_OnItemInvisible(HSD_GObj* gobj)
 {
-    Fighter_OnItemInvisible(gobj, 0);
+    Fighter_OnItemInvisible(gobj, false);
 }
 
 void ftBo_Init_OnItemVisible(HSD_GObj* gobj)
 {
-    Fighter_OnItemVisible(gobj, 0);
+    Fighter_OnItemVisible(gobj, false);
 }
 
 void ftBo_Init_OnItemDrop(HSD_GObj* gobj, bool bool1)
 {
-    Fighter_OnItemDrop(gobj, bool1, 0, 0);
+    Fighter_OnItemDrop(gobj, bool1, false, false);
 }
 
 void ftBo_Init_OnLoad(HSD_GObj* gobj)

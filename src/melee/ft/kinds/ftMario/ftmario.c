@@ -162,7 +162,7 @@ void ftMr_Init_OnDeath(HSD_GObj* gobj)
     fp->u.mr.x2234_tornadoCharge = false;
     fp->u.mr.x2238_isCapeBoost = false;
     fp->u.mr.x223C_capeGObj = NULL;
-    fp->u.mr.x2240 = 0;
+    fp->u.mr.x2240 = NULL;
 }
 
 void ftMr_Init_OnLoadForDrMario(Fighter* fp)
@@ -196,22 +196,22 @@ void ftMr_Init_OnTakeDamage(HSD_GObj* gobj)
 
 void ftMr_Init_OnItemPickup(HSD_GObj* gobj, bool flag)
 {
-    Fighter_OnItemPickup(gobj, flag, 1, 1);
+    Fighter_OnItemPickup(gobj, flag, true, true);
 }
 
 void ftMr_Init_OnItemInvisible(HSD_GObj* gobj)
 {
-    Fighter_OnItemInvisible(gobj, 1);
+    Fighter_OnItemInvisible(gobj, true);
 }
 
 void ftMr_Init_OnItemVisible(HSD_GObj* gobj)
 {
-    Fighter_OnItemVisible(gobj, 1);
+    Fighter_OnItemVisible(gobj, true);
 }
 
 void ftMr_Init_OnItemDrop(HSD_GObj* gobj, bool flag)
 {
-    Fighter_OnItemDrop(gobj, flag, 1, 1);
+    Fighter_OnItemDrop(gobj, flag, true, true);
 }
 
 void ftMr_Init_LoadSpecialAttrs(HSD_GObj* gobj)

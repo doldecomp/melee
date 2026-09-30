@@ -35,7 +35,8 @@ char* ftMr_Init_DemoViMotionFilenames[] = {
     "ftDemoVi1101MotionFileMario",
 };
 
-Fighter_CostumeStrings ftMr_Init_CostumeStrings[] = {
+Fighter_CostumeStrings ftMr_Init_CostumeStrings[ARRAY_SIZE(
+    ftMr_CostumeList)] = {
     { ftMr_Strings_803C57E8, ftMr_Strings_803C57F4, ftMr_Strings_803C580C },
     { ftMr_Strings_803C582C, ftMr_Strings_803C5838, ftMr_Strings_803C5854 },
     { ftMr_Strings_803C5878, ftMr_Strings_803C5884, ftMr_Strings_803C58A0 },
