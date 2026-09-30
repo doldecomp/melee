@@ -111,5 +111,5 @@
 - ❌ it/itcoll.c — Item entity collision
 - ✅ it/itgroundcoll.c — Item environmental collision (map/ground)
 - ✅ it/ithitbox.c — Item offensive hitbox interactions
-- ❌ it/itspawn.c — Item spawning/drop mechanisms
+- ✅ it/itspawn.c — Item spawning/drop mechanisms
 - ✅ it/itdraw.c — Item rendering routines
