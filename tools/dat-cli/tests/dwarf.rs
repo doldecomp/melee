@@ -184,7 +184,8 @@ fn root_witnesses() {
         return;
     }
     let graph = TypeGraph::load(&path).unwrap();
-    let roots = roots(&graph);
+    let canonical = Canonical::new(&graph);
+    let roots = roots(&graph, &canonical);
     let root = roots
         .iter()
         .find(|r| r.name == RootName::Literal("MenMainBack_Top_joint".into()))

@@ -36,7 +36,7 @@
 /* 20F2A4 */ void grOldYoshi_8020F2A4(Ground_GObj*);
 /* 20F31C */ float grOldYoshi_8020F31C(float, float, float, float, float,
                                        float);
-/* 20F404 */ DynamicsDesc* grOldYoshi_8020F404(enum_t);
+/* 20F404 */ lbColl_80008D30_arg1* grOldYoshi_8020F404(enum_t);
 /* 20F40C */ bool grOldYoshi_8020F40C(Vec3*, int arg, HSD_JObj* jobj);
 /* 3E650C */ extern StageData grOy_StageData;
 

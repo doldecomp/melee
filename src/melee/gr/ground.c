@@ -3166,7 +3166,7 @@ void Ground_801C5694(Ground* gp, s32 i, f32 val)
     }
 }
 
-DynamicsDesc* Ground_801C5700(int i)
+lbColl_80008D30_arg1* Ground_801C5700(int i)
 {
     if (stage_info.on_touch_line != NULL) {
         return stage_info.on_touch_line(i);

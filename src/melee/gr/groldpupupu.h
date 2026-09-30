@@ -49,7 +49,7 @@
 /* 211C14 */ bool grOldPupupu_80211C14(Ground_GObj*);
 /* 211C1C */ void grOldPupupu_80211C1C(Ground_GObj*);
 /* 211C9C */ void grOldPupupu_80211C9C(Ground_GObj*);
-/* 211CA0 */ DynamicsDesc* grOldPupupu_80211CA0(enum_t);
+/* 211CA0 */ lbColl_80008D30_arg1* grOldPupupu_80211CA0(enum_t);
 /* 211CA8 */ bool grOldPupupu_80211CA8(Vec3*, int, HSD_JObj*);
 /* 3E6748 */ extern StageData grOp_StageData;
 

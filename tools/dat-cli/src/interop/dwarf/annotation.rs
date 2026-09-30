@@ -3,10 +3,10 @@
 use super::expr::{Expr, expr, identifier};
 use winnow::{
     ModalResult, Parser,
-    ascii::{multispace0, multispace1},
+    ascii::{digit1, multispace0, multispace1},
     combinator::{
         alt, cut_err, delimited, dispatch, empty, eof, fail, preceded, repeat,
-        separated,
+        separated, terminated,
     },
     token::{any, rest, take_while},
 };
@@ -29,6 +29,17 @@ pub enum DatTag {
     /// `DAT_BIND`: a name given a value for everything reached through the
     /// member.
     Bind(String, Expr),
+    /// `DAT_SCRIPT`: the pointer refers to a command script.
+    Script(Script),
+}
+
+/// How to read a `DAT_SCRIPT` command script.
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub struct Script {
+    /// The array in the code holding the lengths of the other opcodes.
+    pub table: String,
+    /// The lengths in words of the first opcodes.
+    pub lengths: Vec<u64>,
 }
 
 /// The name argument of an archive loader call.
@@ -57,6 +68,7 @@ fn tag(input: &mut &str) -> ModalResult<DatTag> {
         "type" => raw_args.map(|t: &str| DatTag::Type(t.trim().to_owned())),
         "root" => root.map(DatTag::Root),
         "bind" => args(bind).map(|(name, value)| DatTag::Bind(name, value)),
+        "script" => args(script).map(DatTag::Script),
         _ => fail,
     }
     .parse_next(input)
@@ -72,6 +84,24 @@ fn args<'i, O>(
 ) -> impl Parser<&'i str, O, winnow::error::ErrMode<winnow::error::ContextError>>
 {
     delimited('(', inner, cut_err((')', eof)))
+}
+
+/// `table, length, length, ...`.
+fn script(input: &mut &str) -> ModalResult<Script> {
+    let table =
+        delimited(multispace0, identifier, multispace0).parse_next(input)?;
+    let lengths: Vec<u64> = repeat(
+        0..,
+        preceded(
+            (',', multispace0),
+            terminated(digit1.try_map(str::parse::<u64>), multispace0),
+        ),
+    )
+    .parse_next(input)?;
+    Ok(Script {
+        table: table.to_owned(),
+        lengths,
+    })
 }
 
 /// `name, expr`.
@@ -191,6 +221,13 @@ mod tests {
     #[test]
     fn tags() {
         assert_eq!(DatTag::parse("dat:nullterm"), Some(DatTag::NullTerm));
+        assert_eq!(
+            DatTag::parse("dat:script(lengths, 1, 2 ,1)"),
+            Some(DatTag::Script(Script {
+                table: "lengths".into(),
+                lengths: vec![1, 2, 1],
+            }))
+        );
         assert_eq!(DatTag::parse("dat:extent"), Some(DatTag::Extent));
         assert_eq!(
             DatTag::parse("dat:count(n)"),

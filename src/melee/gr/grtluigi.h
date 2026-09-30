@@ -21,7 +21,7 @@
 /* 221E64 */ void grTLuigi_80221E64(Ground_GObj*);
 /* 221EB8 */ bool grTLuigi_80221EB8(Ground_GObj*);
 /* 221EE0 */ void grTLuigi_80221EE0(Ground_GObj*);
-/* 221EE4 */ DynamicsDesc* grTLuigi_80221EE4(enum_t);
+/* 221EE4 */ lbColl_80008D30_arg1* grTLuigi_80221EE4(enum_t);
 /* 221EEC */ bool grTLuigi_80221EEC(Vec3*, int, HSD_JObj*);
 /* 3E8E4C */ extern StageData grTLg_StageData;
 

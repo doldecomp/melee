@@ -60,7 +60,7 @@
 /* 206BF0 */ bool grVenom_80206BF0(int);
 /* 206CB0 */ void grVenom_80206CB0(s32);
 /* 206D10 */ s32 grVenom_80206D10(s32);
-/* 206D74 */ DynamicsDesc* grVenom_80206D74(enum_t);
+/* 206D74 */ lbColl_80008D30_arg1* grVenom_80206D74(enum_t);
 /* 206D7C */ bool grVenom_80206D7C(Vec3*, int, HSD_JObj*);
 /* 3E54CC */ extern StageData grVe_StageData;
 

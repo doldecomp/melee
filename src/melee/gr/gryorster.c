@@ -423,7 +423,7 @@ void grYorster_8020266C(HSD_GObj* gobj)
     }
 }
 
-DynamicsDesc* grYorster_80202B5C(enum_t unused)
+lbColl_80008D30_arg1* grYorster_80202B5C(enum_t unused)
 {
     return NULL;
 }

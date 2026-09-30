@@ -64,9 +64,9 @@ void ftKb_SpecialNIc_80108D64(Fighter_GObj* gobj)
     fp->accessory4_cb = fn_801090D4;
     {
         Fighter* fp2 = GET_FIGHTER(gobj);
-        ftCommon_SetAccessory(
-            fp2,
-            (HSD_Joint*) (&ft_80459B88)->hats[Ft_Kind_Peach]->hat_dynamics[1]);
+        ftCommon_SetAccessory(fp2, (HSD_Joint*) (&ft_80459B88)
+                                       ->copies[Ft_Kind_Popo]
+                                       ->hat_dynamics[1]);
         lb_8000C2F8(
             fp2->x20A0_accessory,
             fp2->parts[ftParts_GetBoneIndex(fp2, FtPart_LThumbNb)].joint);
@@ -95,7 +95,7 @@ void ftKb_SpecialNIc_80108E14(Fighter_GObj* gobj)
         Fighter* fp2 = GET_FIGHTER(gobj);
         ftCommon_SetAccessory(
             fp2,
-            (HSD_Joint*) ft_80459B88.hats[Ft_Kind_Peach]->hat_dynamics[1]);
+            (HSD_Joint*) ft_80459B88.copies[Ft_Kind_Popo]->hat_dynamics[1]);
         lb_8000C2F8(
             fp2->x20A0_accessory,
             fp2->parts[ftParts_GetBoneIndex(fp2, FtPart_LThumbNb)].joint);

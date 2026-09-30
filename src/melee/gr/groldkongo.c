@@ -84,7 +84,7 @@ struct grOldKongo_YakumonoParam {
 /* 210450 */ static void stageGObj2_Callback3(Ground_GObj*);
 /* 210454 */ static bool grOldKongo_80210454(Ground_GObj*, Fighter_GObj* keep);
 /* 210650 */ static f32 grOldKongo_80210650(void);
-/* 210780 */ static DynamicsDesc* grOldKongo_80210780(enum_t);
+/* 210780 */ static lbColl_80008D30_arg1* grOldKongo_80210780(enum_t);
 /* 210788 */ static bool grOldKongo_80210788(Vec3*, int, HSD_JObj*);
 
 static struct grOldKongo_YakumonoParam* yakumono_param;
@@ -627,7 +627,7 @@ f32 grOldKongo_80210650(void)
     return result;
 }
 
-DynamicsDesc* grOldKongo_80210780(enum_t gobj)
+lbColl_80008D30_arg1* grOldKongo_80210780(enum_t gobj)
 {
     return NULL;
 }

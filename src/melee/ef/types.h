@@ -95,6 +95,16 @@ typedef struct EF_DAT_Entry {
 } EF_DAT_Entry;                        /* size = 0xC */
 ASSERT_SIZE(EF_DAT_Entry, 0xC);
 
+/// The effect data table named by an #EF_DAT_Entry, as stored in its
+/// archive.
+///
+/// @todo The particle banks are followed by records of an @c f32 and four
+///       pointers, presumably effect models.
+typedef struct EffectDataTable {
+    /* 0x0 */ int* cmd_bank;
+    /* 0x4 */ int* tex_bank;
+} EffectDataTable;
+
 struct EF_QueuedEffect_ObjAlloc {
     char pad_0[0x24];
 };

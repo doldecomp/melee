@@ -17,8 +17,7 @@ fn dat_paths() -> Vec<PathBuf> {
         .filter_map(|e| Some(e.ok()?.path()))
         .filter(|p| {
             let name = p.file_name().unwrap_or_default().to_string_lossy();
-            // TODO: Support AnimJoint archives
-            name.ends_with(".dat") && !name.ends_with("AJ.dat")
+            name.ends_with(".dat")
         })
         .collect();
     paths.sort();
@@ -34,13 +33,16 @@ fn size_matches_header() {
     }
     for path in paths {
         let bytes = std::fs::read(&path).unwrap();
-        let archive = Archive::parse(&bytes)
+        let archives = Archive::parse_packed(&bytes)
             .unwrap_or_else(|e| panic!("{}: {e}", path.display()));
-        assert_eq!(
-            archive.header.file_size as usize,
-            bytes.len(),
-            "{}",
-            path.display()
+        let (at, last) = archives.last().expect("no archives");
+        // The last archive may be padded to 32 bytes like the others
+        let end = at + last.header.file_size as usize;
+        assert!(
+            (end..=end.next_multiple_of(32)).contains(&bytes.len()),
+            "{}: archives end at {end:#X}, file is {:#X}",
+            path.display(),
+            bytes.len()
         );
     }
 }
