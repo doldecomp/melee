@@ -24,7 +24,7 @@
 #### Core Sources
 - ❌ ft/fighter.c — Fighter initialization, state machine, main loop
 - ✅ ft/ftaction.c — Action state transition logic
-- ❌ ft/ftanim.c — Animation system
+- ✅ ft/ftanim.c — Animation system
 - ✅ ft/ftcoll.c — Fighter collision detection
 - ✅ ft/ftcommon.c — Common fighter utilities
 - ✅ ft/ftdata.c — Fighter data loading
@@ -34,7 +34,7 @@
 - ✅ ft/ftdynamics.c — Physics/bone dynamics
 - ✅ ft/ftcamera.c — Fighter camera tracking
 - ❌ ft/ftchangeparam.c — Parameter modification (items, etc.)
-- ❌ ft/ftcliffcommon.c — Ledge grab mechanics
+- ✅ ft/ftcliffcommon.c — Ledge grab mechanics
 - ❌ ft/ftcolanim.c — Color/material animation
 - ❌ ft/ftcpuattack.c — CPU AI attack logic
 - ❌ ft/ftdemo.c — Demo/replay playback
