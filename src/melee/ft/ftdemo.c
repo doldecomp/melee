@@ -1,3 +1,10 @@
+/**
+ * @file ftdemo.c
+ * @brief Fighter Demo / Replay logic
+ * @details Handles the initialization and mechanics for fighters during
+ * title screen demos and replays (playback of recorded inputs).
+ * Module prefix: ftDemo
+ */
 #include "ftdemo.h"
 
 #include <Runtime/platform.h>
@@ -46,13 +53,19 @@ static HSD_GObjEvent on_create_fighter[16] = {
 
 static void initFighter(HSD_GObj* gobj, plAllocInfo2* alloc_info)
 {
-    struct plAllocInfo temp1;
-    temp1.internal_id = alloc_info->internal_id;
-    temp1.slot = alloc_info->slot;
-    temp1.x6.b0 = alloc_info->xC.has_transformation;
-    Fighter_UnkInitLoad_80068914(gobj, &temp1);
+    struct plAllocInfo alloc_wrapper;
+    alloc_wrapper.internal_id = alloc_info->internal_id;
+    alloc_wrapper.slot = alloc_info->slot;
+    alloc_wrapper.x6.b0 = alloc_info->xC.has_transformation;
+    Fighter_UnkInitLoad_80068914(gobj, &alloc_wrapper);
 }
 
+
+/**
+ * @brief Creates a fighter specifically for demo/replay playback
+ * @param alloc_info Initialization struct with demo parameters
+ * @return GObj of the newly created demo fighter
+ */
 Fighter_GObj* ftDemo_CreateFighter(plAllocInfo2* alloc_info)
 {
     Fighter_GObj* gobj = GObj_Create(HSD_GOBJ_CLASS_FIGHTER, 8, 0);
@@ -76,23 +89,23 @@ Fighter_GObj* ftDemo_CreateFighter(plAllocInfo2* alloc_info)
         }
         Fighter_UnkUpdateCostumeJoint_800686E4(gobj);
         {
-            enum_t a, b;
+            enum_t start_motion, end_motion;
             if (alloc_info->unk8 >= 9) {
-                ftData_UnkDemoCallbacks0[fp->kind](alloc_info->unk8, &a, &b);
+                ftData_UnkDemoCallbacks0[fp->kind](alloc_info->unk8, &start_motion, &end_motion);
             } else if (alloc_info->unk8 >= 8) {
-                b = 13;
-                a = 13;
+                end_motion = 13;
+                start_motion = 13;
             } else if (alloc_info->unk8 >= 7) {
-                b = 12;
-                a = 12;
+                end_motion = 12;
+                start_motion = 12;
             } else if (alloc_info->unk8 >= 5) {
-                a = 10;
-                b = 11;
+                start_motion = 10;
+                end_motion = 11;
             } else {
-                a = 0;
-                b = 9;
+                start_motion = 0;
+                end_motion = 9;
             }
-            ftData_80085B98(fp, a, b);
+            ftData_80085B98(fp, start_motion, end_motion);
         }
         ftParts_80074E58(fp);
         ftParts_SetupParts(gobj);
@@ -121,16 +134,29 @@ Fighter_GObj* ftDemo_CreateFighter(plAllocInfo2* alloc_info)
     if (on_create_fighter[alloc_info->unk8] != NULL) {
         on_create_fighter[alloc_info->unk8](gobj);
     }
+    
+    // Disable standard controller input for demo characters
     ftLib_DisableInput(gobj);
     return gobj;
 }
 
+
+/**
+ * @brief Initializes the HSD_ObjAlloc memory pools for demo fighters
+ */
 void ftDemo_ObjAllocInit(void)
 {
     Fighter_800679B0();
     HSD_ObjAllocInit(&fighter_x59C_alloc_data, 0xB000, 0x20);
 }
 
+
+/**
+ * @brief Sets animation archive data pointers for a demo fighter
+ * @param pairs_idx Index into the character data table
+ * @param archive The loaded archive containing the animations
+ * @param arr_idx The specific animation subset index
+ */
 void ftDemo_SetArchiveData(int pairs_idx, HSD_Archive* archive, int arr_idx)
 {
     static int ints[5] = { 9, 10, 11, 14, 15 };
@@ -147,6 +173,13 @@ void ftDemo_SetArchiveData(int pairs_idx, HSD_Archive* archive, int arr_idx)
     }
 }
 
+
+/**
+ * @brief Resolves the motion file symbol string for a character's demo action
+ * @param cb_idx Character-specific callback index
+ * @param cb_arg Argument passed to the character's filename callback
+ * @return String name of the motion file/symbol
+ */
 char* ftDemo_GetMotionFileString(int cb_idx, int cb_arg)
 {
     if (ftData_803C24EC[cb_idx] != NULL) {
@@ -156,9 +189,17 @@ char* ftDemo_GetMotionFileString(int cb_idx, int cb_arg)
     }
 }
 
+
+/**
+ * @brief Forcibly sets the visual facing direction of a demo fighter
+ * @param gobj Fighter GObj
+ * @param facing_dir +1.0 for right, -1.0 for left
+ */
 void ftDemo_SetFacingDirection(Fighter_GObj* gobj, float facing_dir)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     fp->facing_dir = facing_dir;
+    
+    // Rotate the root bone (TopN) to face the specified direction
     ftPartSetRotY(fp, 0, M_PI_2 * fp->facing_dir);
 }
