@@ -1,146 +1,53 @@
-#include "ftanim.h"
-
-#include <placeholder.h>
-
-#include "fighter.h"
-#include "ftaction.h"
-#include "ftcommon.h"
-#include "ftdata.h"
-#include "ftparts.h"
-#include "inlines.h"
-#include "kinds/ftCommon/ftCo_Attack100.h"
-#include "types.h"
-#include <melee/lb/lb_00B0.h>
-#include <melee/lb/lbanim.h>
-#include <melee/lb/lbvector.h>
-#include <sysdolphin/baselib/aobj.h>
-#include <sysdolphin/baselib/gobj.h>
-#include <sysdolphin/baselib/jobj.h>
-#include <sysdolphin/baselib/mtx.h>
-#include <sysdolphin/baselib/object.h>
-
-static HSD_AnimJoint* ftAnim_804590D8[30];
-static HSD_MatAnimJoint* ftAnim_804590D8_unk[30];
-static HSD_Joint* ftAnim_804590D8_F0[30];
-
-void ftAnim_GetNextAnimJointInTree(HSD_AnimJoint** panimjoint, int* pdepth)
-{
-    HSD_AnimJoint* temp_r28 = *panimjoint;
-    HSD_AnimJoint* var_r0;
-    int i = *pdepth;
-
-    if (temp_r28->child != NULL) {
-        ftAnim_804590D8[i++] = temp_r28;
-        if (i >= 30) {
-            HSD_ASSERTREPORT(46, 0, "fighter joint depth num over!\n");
-        }
-        var_r0 = temp_r28->child;
-    } else {
-        if (temp_r28->next != NULL) {
-            var_r0 = temp_r28->next;
-        } else {
-            while (1) {
-                if (i == 0) {
-                    var_r0 = NULL;
-                    break;
-                }
-                if (ftAnim_804590D8[i - 1]->next != NULL) {
-                    var_r0 = ftAnim_804590D8[--i]->next;
-                    break;
-                }
-                i--;
-            }
-        }
-    }
-    *panimjoint = var_r0;
-    *pdepth = i;
-}
-
-void ftAnim_GetNextMatAnimJointInTree(HSD_MatAnimJoint** pjoint, int* pdepth)
-{
-    HSD_MatAnimJoint* temp_r28;
-    HSD_MatAnimJoint* var_r0;
-    s32 i;
-
-    temp_r28 = *pjoint;
-    i = *pdepth;
-    if (temp_r28->child != NULL) {
-        ftAnim_804590D8_unk[i++] = temp_r28;
-        if (i >= 30) {
-            HSD_ASSERTREPORT(87, 0, "fighter joint depth num over!\n");
-        }
-        var_r0 = temp_r28->child;
-    } else {
-        if (temp_r28->next != NULL) {
-            var_r0 = temp_r28->next;
-        } else {
-            while (1) {
-                if (i == 0) {
-                    var_r0 = NULL;
-                    break;
-                }
-                if (ftAnim_804590D8_unk[i - 1]->next != 0U) {
-                    var_r0 = ftAnim_804590D8_unk[--i]->next;
-                    break;
-                }
-                i--;
-            }
-        }
-    }
-    *pjoint = var_r0;
-    *pdepth = i;
-}
-
 void ftAnim_GetNextJointInTree(HSD_Joint** pjoint, s32* pdepth)
 {
-    HSD_Joint* temp_r28;
-    HSD_Joint* var_r0;
-    int i;
+    HSD_Joint* curr_joint;
+    HSD_Joint* next_joint;
+    int depth;
 
-    temp_r28 = *pjoint;
-    i = *pdepth;
-    if (temp_r28->child != NULL) {
-        ftAnim_804590D8_F0[i++] = temp_r28;
-        if (i >= 30) {
+    curr_joint = *pjoint;
+    depth = *pdepth;
+    if (curr_joint->child != NULL) {
+        ftAnim_804590D8_F0[depth++] = curr_joint;
+        if (depth >= 30) {
             HSD_ASSERTREPORT(128, 0, "fighter joint depth num over!\n");
         }
-        var_r0 = temp_r28->child;
+        next_joint = curr_joint->child;
     } else {
-        if (temp_r28->next != NULL) {
-            var_r0 = temp_r28->next;
+        if (curr_joint->next != NULL) {
+            next_joint = curr_joint->next;
         } else {
             while (1) {
-                if (i == 0) {
-                    var_r0 = NULL;
+                if (depth == 0) {
+                    next_joint = NULL;
                     break;
                 }
-                if (ftAnim_804590D8_F0[i - 1]->next != 0U) {
-                    var_r0 = ftAnim_804590D8_F0[--i]->next;
+                if (ftAnim_804590D8_F0[depth - 1]->next != 0U) {
+                    next_joint = ftAnim_804590D8_F0[--depth]->next;
                     break;
                 }
-                i--;
+                depth--;
             }
         }
     }
-    *pjoint = var_r0;
-    *pdepth = i;
+    *pjoint = next_joint;
+    *pdepth = depth;
 }
 
 void ftAnim_8006DF0C(Fighter* fp)
 {
-    HSD_JObj* temp_r31;
-    HSD_JObj* temp_r30;
+    HSD_JObj* dest_joint;
+    HSD_JObj* src_joint;
     Mtx mtx;
     Vec3 vec;
 
     if (fp->x2221_b2) {
-        temp_r30 = fp->parts[0].joint;
-        temp_r31 = fp->parts[fp->ft_data->x8->x10].joint;
+        src_joint = fp->parts[0].joint;
+        dest_joint = fp->parts[fp->ft_data->x8->x10].joint;
         lb_8000B1CC(fp->parts[ftParts_GetBoneIndex(fp, FtPart_HipN)].joint,
                     &p_ftCommonData->x808, &vec);
-        HSD_MtxInverse(HSD_JObjGetMtxPtr(temp_r30), mtx);
+        HSD_MtxInverse(HSD_JObjGetMtxPtr(src_joint), mtx);
         PSMTXMultVec(mtx, &vec, &vec);
-        HSD_JObjSetTranslate(temp_r31, &vec);
+        HSD_JObjSetTranslate(dest_joint, &vec);
     }
 }
 
@@ -153,12 +60,12 @@ static void scale_inline(float scale, Vec3* sp38)
     sp38->z *= f1;
 }
 
-void ftAnim_8006E054(Fighter* fp, HSD_JObj* jobj, HSD_JObj* arg2,
-                     HSD_JObj* arg3)
+void ftAnim_8006E054(Fighter* fp, HSD_JObj* curr_joint, HSD_JObj* trans_jobj,
+                     HSD_JObj* rot_jobj)
 {
-    Vec3 sp5C;
-    Vec3 sp50;
-    Vec3 sp44;
+    Vec3 trans_diff;
+    Vec3 zero_vec1;
+    Vec3 zero_vec2;
     Vec3 sp38;
     Vec3 sp2C;
     u32 temp_r4;
@@ -168,13 +75,13 @@ void ftAnim_8006E054(Fighter* fp, HSD_JObj* jobj, HSD_JObj* arg2,
 
     HSD_AObjInitEndCallBack();
 
-    while (jobj != NULL) {
-        if (jobj == arg2) {
-            if (jobj != NULL) {
-                sp50.x = sp50.y = sp50.z = 0.0F;
-                HSD_JObjAnim(jobj);
+    while (curr_joint != NULL) {
+        if (curr_joint == trans_jobj) {
+            if (curr_joint != NULL) {
+                zero_vec1.x = zero_vec1.y = zero_vec1.z = 0.0F;
+                HSD_JObjAnim(curr_joint);
                 fp->x698 = fp->x68C_transNPos;
-                HSD_JObjGetTranslation(jobj, &fp->x68C_transNPos);
+                HSD_JObjGetTranslation(curr_joint, &fp->x68C_transNPos);
                 if (!fp->x594.x0.x594_b6) {
                     float temp_f1 = ftCommon_GetModelScale(fp);
                     fp->x68C_transNPos.x *= temp_f1;
@@ -189,14 +96,14 @@ void ftAnim_8006E054(Fighter* fp, HSD_JObj* jobj, HSD_JObj* arg2,
                 fp->x6B0 = fp->x6A4_transNOffset;
                 lbVector_Diff(&fp->x68C_transNPos, &fp->x698,
                               &fp->x6A4_transNOffset);
-                HSD_JObjSetTranslate(jobj, &sp50);
+                HSD_JObjSetTranslate(curr_joint, &zero_vec1);
             }
-        } else if (fp->x594.x0.x594_b5 && jobj == arg3) {
-            if (jobj != NULL) {
-                sp44.x = sp44.y = sp44.z = 0.0F;
-                HSD_JObjAnim(jobj);
+        } else if (fp->x594.x0.x594_b5 && curr_joint == rot_jobj) {
+            if (curr_joint != NULL) {
+                zero_vec2.x = zero_vec2.y = zero_vec2.z = 0.0F;
+                HSD_JObjAnim(curr_joint);
                 fp->x6CC = fp->x6C0;
-                HSD_JObjGetTranslation(jobj, &fp->x6C0);
+                HSD_JObjGetTranslation(curr_joint, &fp->x6C0);
                 if (!fp->x594.x0.x594_b6) {
                     float temp_f1_3 = ftCommon_GetModelScale(fp);
                     fp->x6C0.x *= temp_f1_3;
@@ -210,46 +117,46 @@ void ftAnim_8006E054(Fighter* fp, HSD_JObj* jobj, HSD_JObj* arg2,
                 }
                 fp->x6E4 = fp->x6D8;
                 lbVector_Diff(&fp->x6C0, &fp->x6CC, &fp->x6D8);
-                HSD_JObjSetTranslate(jobj, &sp44);
+                HSD_JObjSetTranslate(curr_joint, &zero_vec2);
             }
         } else {
-            HSD_JObjAnim(jobj);
+            HSD_JObjAnim(curr_joint);
         }
 
-        if (!(HSD_JObjGetFlags(jobj) & 0x1000) &&
-            HSD_JObjGetChild(jobj) != NULL)
+        if (!(HSD_JObjGetFlags(curr_joint) & 0x1000) &&
+            HSD_JObjGetChild(curr_joint) != NULL)
         {
-            jobj = HSD_JObjGetChild(jobj);
-        } else if (HSD_JObjGetNext(jobj) != NULL) {
-            jobj = HSD_JObjGetNext(jobj);
+            curr_joint = HSD_JObjGetChild(curr_joint);
+        } else if (HSD_JObjGetNext(curr_joint) != NULL) {
+            curr_joint = HSD_JObjGetNext(curr_joint);
         } else {
             while (1) {
-                if (HSD_JObjGetParent(jobj) == NULL) {
-                    jobj = NULL;
+                if (HSD_JObjGetParent(curr_joint) == NULL) {
+                    curr_joint = NULL;
                     break;
                 }
-                if (HSD_JObjGetNext(HSD_JObjGetParent(jobj)) != NULL) {
-                    jobj = HSD_JObjGetNext(HSD_JObjGetParent(jobj));
+                if (HSD_JObjGetNext(HSD_JObjGetParent(curr_joint)) != NULL) {
+                    curr_joint = HSD_JObjGetNext(HSD_JObjGetParent(curr_joint));
                     break;
                 }
-                jobj = HSD_JObjGetParent(jobj);
+                curr_joint = HSD_JObjGetParent(curr_joint);
             }
         }
     }
     if (fp->x594.x0.x594_b5) {
-        sp5C.x = fp->x68C_transNPos.x - fp->x6C0.x;
-        sp5C.y = fp->x68C_transNPos.y - fp->x6C0.y;
-        sp5C.z = fp->x68C_transNPos.z - fp->x6C0.z;
-        HSD_JObjSetTranslate(arg2, &sp5C);
+        trans_diff.x = fp->x68C_transNPos.x - fp->x6C0.x;
+        trans_diff.y = fp->x68C_transNPos.y - fp->x6C0.y;
+        trans_diff.z = fp->x68C_transNPos.z - fp->x6C0.z;
+        HSD_JObjSetTranslate(trans_jobj, &trans_diff);
         fp->x68C_transNPos = fp->x6C0;
         fp->x698 = fp->x6CC;
         fp->x6A4_transNOffset = fp->x6D8;
         fp->x6B0 = fp->x6E4;
     }
     if (!fp->x2226_b2 && fp->x2221_b2) {
-        jobj = fp->parts[fp->ft_data->x8->x10].joint;
+        curr_joint = fp->parts[fp->ft_data->x8->x10].joint;
         ftCommon_GetModelScale(fp);
-        HSD_JObjGetTranslation(jobj, &sp2C);
+        HSD_JObjGetTranslation(curr_joint, &sp2C);
         sp38 = fp->x68C_transNPos;
         if (!fp->x594.x0.x594_b6) {
             scale_inline(ftCommon_GetModelScale(fp), &sp38);
@@ -257,7 +164,7 @@ void ftAnim_8006E054(Fighter* fp, HSD_JObj* jobj, HSD_JObj* arg2,
             scale_inline(fp->co_attrs.model_scaling, &sp38);
         }
         lbVector_Sub(&sp2C, &sp38);
-        HSD_JObjSetTranslate(jobj, &sp2C);
+        HSD_JObjSetTranslate(curr_joint, &sp2C);
     }
     HSD_AObjInvokeCallBacks();
 }
@@ -311,6 +218,10 @@ void ftAnim_8006E7B8(Fighter* fp, Fighter_Part part)
     HSD_AObjInvokeCallBacks();
 }
 
+/**
+ * @brief Main animation playback update loop. Updates anim frame based on frame_speed_mul and applies blending over animBlendFrames.
+ * @param gobj Fighter GObj
+ */
 void ftAnim_8006E9B4(Fighter_GObj* gobj)
 {
     Fighter* fp;
@@ -377,6 +288,10 @@ void ftAnim_8006E9B4(Fighter_GObj* gobj)
 }
 
 /// Process animation?
+/**
+ * @brief Main fighter animation processing loop called each frame. Invokes blend routines, physics action callbacks, etc.
+ * @param gobj Fighter GObj
+ */
 void ftAnim_8006EBA4(Fighter_GObj* gobj)
 {
     ftAnim_8006E9B4(gobj);
@@ -385,6 +300,13 @@ void ftAnim_8006EBA4(Fighter_GObj* gobj)
     ftCo_800DB500(gobj);
 }
 
+/**
+ * @brief Starts playing a new animation on the fighter. Initializes tree, blending, and loop flags.
+ * @param gobj Fighter GObj
+ * @param anim_start Starting frame of animation
+ * @param anim_rate Playback speed multiplier (e.g. 1.0 = normal)
+ * @param anim_blend_frames Number of frames to blend from current animation
+ */
 void ftAnim_8006EBE8(HSD_GObj* gobj, float anim_start, float anim_rate,
                      float anim_blend_frames)
 {
@@ -427,21 +349,28 @@ void ftAnim_8006EBE8(HSD_GObj* gobj, float anim_start, float anim_rate,
     fp->x8A8_anim_frame = 0;
 }
 
-void ftAnim_8006EDD0(Fighter* fp, int arg1, float arg8, float arg9)
+/**
+ * @brief Sets the animation based on a specific action ID.
+ * @param fp Fighter instance
+ * @param arg1 Action ID/Anim ID
+ * @param arg8 Starting frame
+ * @param arg9 Playback speed multiplier
+ */
+void ftAnim_8006EDD0(Fighter* fp, int action_id, float anim_start, float anim_rate)
 {
     struct ftData_80085FD4_ret* temp_ret;
     HSD_JObj* jobj = fp->x8AC_animSkeleton;
     ftAnim_80070758(jobj);
     ftAnim_8006FB88(fp, FtPart_TransN, fp->x108_costume_joint->child);
-    ftAnim_80070A10(fp, FtPart_TopN, ftData_80085E50(fp, arg1));
-    ftAnim_80070710(jobj, arg8);
-    temp_ret = ftData_80085FD4(fp, arg1);
+    ftAnim_80070A10(fp, FtPart_TopN, ftData_80085E50(fp, action_id));
+    ftAnim_80070710(jobj, anim_start);
+    temp_ret = ftData_80085FD4(fp, action_id);
     if (temp_ret->x10_b1) {
         HSD_ForeachAnim(jobj, JOBJ_TYPE, 0xFB7F, HSD_AObjSetFlags, AOBJ_ARG_AU,
                         AOBJ_LOOP);
     }
     HSD_ForeachAnim(jobj, JOBJ_TYPE, 0xFB7F, HSD_AObjSetRate, AOBJ_ARG_AF,
-                    arg9);
+                    anim_rate);
 }
 
 void ftAnim_8006EED4(Fighter* fp, Fighter_Part arg1, FigaTree* arg2,
@@ -493,6 +422,11 @@ static inline void ftAnim_8006F0FC_inline(HSD_JObj* jobj, float anim_rate)
                     anim_rate);
 }
 
+/**
+ * @brief Sets the playback rate (frame_speed_mul) for all anim objects on the fighter.
+ * @param gobj Fighter GObj
+ * @param anim_rate Framerate multiplier
+ */
 void ftAnim_8006F0FC(Fighter_GObj* gobj, float anim_rate)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -502,6 +436,11 @@ void ftAnim_8006F0FC(Fighter_GObj* gobj, float anim_rate)
     fp->frame_speed_mul = anim_rate;
 }
 
+/**
+ * @brief Sets the framerate/animation rate for the fighter.
+ * @param gobj Fighter GObj
+ * @param anim_rate Framerate multiplier
+ */
 void ftAnim_SetAnimRate(Fighter_GObj* gobj, float anim_rate)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -512,6 +451,11 @@ void ftAnim_SetAnimRate(Fighter_GObj* gobj, float anim_rate)
     ftAnim_8006F0FC(gobj, anim_rate);
 }
 
+/**
+ * @brief Checks if there are animation frames remaining to play.
+ * @param gobj Fighter GObj
+ * @return true if frames are remaining
+ */
 bool ftAnim_IsFramesRemaining(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -551,6 +495,11 @@ bool ftAnim_8006F368(Fighter* fp, Fighter_Part part)
     return false;
 }
 
+/**
+ * @brief Gets the current frame of the fighter's animation.
+ * @param fighter_gobj Fighter GObj
+ * @return Current animation frame number
+ */
 float ftAnim_8006F3DC(Fighter_GObj* fighter_gobj)
 {
     Fighter* fp = GET_FIGHTER(fighter_gobj);
@@ -572,6 +521,11 @@ float ftAnim_8006F3DC(Fighter_GObj* fighter_gobj)
     }
 }
 
+/**
+ * @brief Gets the total duration / end frame of the fighter's animation.
+ * @param fighter_gobj Fighter GObj
+ * @return End frame number
+ */
 float ftAnim_8006F484(Fighter_GObj* fighter_gobj)
 {
     Fighter* fp = GET_FIGHTER(fighter_gobj);
@@ -1022,6 +976,10 @@ void ftAnim_80070200(Fighter* fp, ftData_x8_x8* r4, CostumeTObjList* r5,
     }
 }
 
+/**
+ * @brief Loads and applies costume model and material/texture animations for the fighter.
+ * @param fighter_gobj Fighter GObj
+ */
 void ftAnim_80070308(Fighter_GObj* fighter_gobj)
 {
     Fighter* fp = GET_FIGHTER(fighter_gobj);

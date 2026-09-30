@@ -1,3 +1,9 @@
+/**
+ * @file ftanim.h
+ * @brief Fighter animation system
+ * @details Handles the application of 3D skeletal animations (FigaTree) to fighter models, animation playback speed, looping, and blending.
+ * Module prefix: ft
+ */
 #ifndef MELEE_FTANIM_H
 #define MELEE_FTANIM_H
 
@@ -6,24 +12,86 @@
 
 #include <melee/ft/types.h>
 
+/**
+ * @brief Gets the next HSD_AnimJoint in the tree traversal
+ * @param panimjoint Pointer to current joint pointer, updated to next joint
+ * @param pdepth Pointer to current depth, updated to new depth
+ */
 /* 06DBF4 */ void ftAnim_GetNextAnimJointInTree(HSD_AnimJoint**, int*);
+/**
+ * @brief Gets the next HSD_MatAnimJoint in the tree traversal
+ * @param pjoint Pointer to current joint pointer, updated to next joint
+ * @param pdepth Pointer to current depth, updated to new depth
+ */
 /* 06DCF4 */ void ftAnim_GetNextMatAnimJointInTree(HSD_MatAnimJoint**, int*);
+/**
+ * @brief Gets the next HSD_Joint in the tree traversal
+ * @param pjoint Pointer to current joint pointer, updated to next joint
+ * @param pdepth Pointer to current depth, updated to new depth
+ */
 /* 06DE00 */ void ftAnim_GetNextJointInTree(HSD_Joint**, s32* pdepth);
 /* 06DF0C */ void ftAnim_8006DF0C(Fighter*);
 /* 06E054 */ void ftAnim_8006E054(Fighter*, HSD_JObj*, HSD_JObj*, HSD_JObj*);
 /* 06E7B8 */ void ftAnim_8006E7B8(Fighter*, Fighter_Part);
+/**
+ * @brief Main animation playback update loop. Updates anim frame based on frame_speed_mul and applies blending over animBlendFrames.
+ * @param gobj Fighter GObj
+ */
 /* 06E9B4 */ void ftAnim_8006E9B4(Fighter_GObj*);
+/**
+ * @brief Main fighter animation processing loop called each frame. Invokes blend routines, physics action callbacks, etc.
+ * @param gobj Fighter GObj
+ */
 /* 06EBA4 */ void ftAnim_8006EBA4(Fighter_GObj*);
+/**
+ * @brief Starts playing a new animation on the fighter. Initializes tree, blending, and loop flags.
+ * @param gobj Fighter GObj
+ * @param anim_start Starting frame of animation
+ * @param anim_rate Playback speed multiplier (e.g. 1.0 = normal)
+ * @param anim_blend_frames Number of frames to blend from current animation
+ */
 /* 06EBE8 */ void ftAnim_8006EBE8(HSD_GObj*, float anim_start, float anim_rate,
                                   float anim_blend_frames);
+/**
+ * @brief Sets the animation based on a specific action ID.
+ * @param fp Fighter instance
+ * @param arg1 Action ID/Anim ID
+ * @param arg8 Starting frame
+ * @param arg9 Playback speed multiplier
+ */
 /* 06EDD0 */ void ftAnim_8006EDD0(Fighter*, int, float, float);
 /* 06EED4 */ void ftAnim_8006EED4(Fighter*, Fighter_Part, FigaTree*, float,
                                   float);
+/**
+ * @brief Sets the playback rate (frame_speed_mul) for all anim objects on the fighter.
+ * @param gobj Fighter GObj
+ * @param anim_rate Framerate multiplier
+ */
 /* 06F0FC */ void ftAnim_8006F0FC(Fighter_GObj*, float anim_rate);
+/**
+ * @brief Sets the framerate/animation rate for the fighter.
+ * @param gobj Fighter GObj
+ * @param anim_rate Framerate multiplier
+ */
 /* 06F190 */ void ftAnim_SetAnimRate(Fighter_GObj*, float);
+/**
+ * @brief Checks if there are animation frames remaining to play.
+ * @param gobj Fighter GObj
+ * @return true if frames are remaining
+ */
 /* 06F238 */ bool ftAnim_IsFramesRemaining(Fighter_GObj*);
 /* 06F368 */ bool ftAnim_8006F368(Fighter*, Fighter_Part);
+/**
+ * @brief Gets the current frame of the fighter's animation.
+ * @param fighter_gobj Fighter GObj
+ * @return Current animation frame number
+ */
 /* 06F3DC */ float ftAnim_8006F3DC(Fighter_GObj*);
+/**
+ * @brief Gets the total duration / end frame of the fighter's animation.
+ * @param fighter_gobj Fighter GObj
+ * @return End frame number
+ */
 /* 06F484 */ float ftAnim_8006F484(Fighter_GObj*);
 /* 06F4C8 */ void ftAnim_8006F4C8(Fighter*, bool, FigaTree*);
 /* 06F628 */ void ftAnim_8006F628(Fighter*, Fighter_Part, bool);
@@ -44,6 +112,10 @@
                                   HSD_Joint*);
 /* 070200 */ void ftAnim_80070200(Fighter*, ftData_x8_x8*, CostumeTObjList*,
                                   DObjList*);
+/**
+ * @brief Loads and applies costume model and material/texture animations for the fighter.
+ * @param fighter_gobj Fighter GObj
+ */
 /* 070308 */ void ftAnim_80070308(Fighter_GObj*);
 /* 070458 */ void ftAnim_80070458(Fighter*, CostumeTObjList*, u32 tobj_idx,
                                   float frame);
