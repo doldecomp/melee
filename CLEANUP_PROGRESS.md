@@ -22,7 +22,7 @@
 - ❌ ft/dobjlist.h
 
 #### Core Sources
-- ❌ ft/fighter.c — Fighter initialization, state machine, main loop
+- ✅ ft/fighter.c — Fighter initialization, state machine, main loop
 - ✅ ft/ftaction.c — Action state transition logic
 - ✅ ft/ftanim.c — Animation system
 - ✅ ft/ftcoll.c — Fighter collision detection
@@ -39,7 +39,7 @@
 - ✅ ft/ftcpuattack.c — CPU AI attack logic
 - ✅ ft/ftdemo.c — Demo/replay playback
 - ✅ ft/ftdevice.c — Device/stage interaction
-- ❌ ft/ftdrawcommon.c — Common draw routines
+- ✅ ft/ftdrawcommon.c — Common draw routines
 - ✅ ft/ftmaterial.c — Material/texture handling
 - ✅ ft/ftmetal.c — Metal form effects
 - ✅ ft/ftwalljump.c — Wall jump mechanics
