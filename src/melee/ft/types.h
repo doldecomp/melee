@@ -1,3 +1,10 @@
+/**
+ * @file types.h
+ * @brief Core data structures for Melee fighters
+ * @details This module defines the central Fighter structure, common data from PlCo.dat, and per-character attributes. These are the most important structs for understanding gameplay mechanics.
+ * Module prefix: ft
+ */
+
 #ifndef MELEE_FT_TYPES_H
 #define MELEE_FT_TYPES_H
 #include <Runtime/platform.h>
@@ -77,9 +84,11 @@ typedef struct FallCommon {
 /// @todo Determine size and add remaining members.
 struct ftCommonData {
     /// @datvalue{GALE01, PlCo.dat, 0.28}
+    /// @brief The absolute stick deadzone, always applied. X/Y inputs below this are ignored.
     /*   +0 */ float horizontal_stick_deadzone;
 
     /// @datvalue{GALE01, PlCo.dat, 0.28}
+    /// @brief The absolute stick deadzone, always applied. X/Y inputs below this are ignored.
     /*   +4 */ float vertical_stick_deadzone;
 
     /// @datvalue{GALE01, PlCo.dat, 0.25}
@@ -92,20 +101,24 @@ struct ftCommonData {
      */
 
     /// Surprisingly these smash deadzones are 0.25 in vanilla, which is lower
-
     /// than the absolute stick deadzone above (0.28), which is always applied.
+    /// @brief Stick threshold for initiating smash attacks/dashes.
     /*   +8 */ float horizontal_stick_smash_deadzone;
 
     /// @datvalue{GALE01, PlCo.dat, 0.25}
+    /// @brief Stick threshold for initiating smash attacks/drops.
     /*   +C */ float vertical_stick_smash_deadzone;
 
     /// @datvalue{GALE01, PlCo.dat, 0.3}
+    /// @brief L/R trigger deadzone. Values below this register as no press.
     /*  +10 */ float analog_shoulder_deadzone;
 
     /// @datvalue{GALE01, PlCo.dat, 0.35}
+    /// @brief Equivalent lightshield analog value applied when Z is pressed.
     /*  +14 */ float z_press_analog_value;
 
     /// @datvalue{GALE01, PlCo.dat, 0.25}
+    /// @brief Trigger threshold to bring up the shield.
     /*  +18 */ float shield_press_threshold;
 
     /*  +1C */ int x1C;
@@ -226,7 +239,7 @@ struct ftCommonData {
     /* +118 */ float x118;
     /* +11C */ float x11C;
     /* +120 */ float x120;
-    /* +124 */ float kb_squat_mul;
+    /* +124 */ float kb_squat_mul; // Crouch cancel knockback multiplier (0.67x)
     /* +128 */ float x128;
     /* +12C */ float x12C;
     /* +130 */ int x130;
@@ -260,7 +273,7 @@ struct ftCommonData {
     /* +1A0 */ float x1A0;
     /* +1A4 */ float x1A4;
     /* +1A8 */ float x1A8;
-    /* +1AC */ float x1AC;
+    /* +1AC */ float x1AAC;
     /* +1B0 */ float x1B0;
     /* +1B4 */ float x1B4;
     /* +1B8 */ int x1B8;
@@ -283,7 +296,7 @@ struct ftCommonData {
     /* +1FC */ float
         aerial_friction_oob; // friction when velocity exceeds maximum
     /* +200 */ float x200;
-    /* +204 */ float x204_knockbackFrameDecay;
+    /* +204 */ float x204_knockbackFrameDecay; // Hitstun = knockback * 0.4 frames
     /* +208 */ float x208;
     /* +20C */ float x20C;
     /* +210 */ float x210;
@@ -306,7 +319,7 @@ struct ftCommonData {
     /* +254 */ float x254;
     /* +258 */ float x258;
     /* +25C */ float x25C;
-    /* +260 */ float x260_startShieldHealth;
+    /* +260 */ float x260_startShieldHealth; // Default 60.0
     /* +264 */ float x264;
     /* +268 */ float x268;
     /* +26C */ float x26C;
@@ -363,10 +376,10 @@ struct ftCommonData {
     /* +320 */ int x320;
     /* +324 */ int x324;
     /* +328 */ float x328;
-    /* +32C */ Vec2 escapeair_deadzone;
+    /* +32C */ Vec2 escapeair_deadzone; // Airdodge stick deadzone
     /* +334 */ int x334;
-    /* +338 */ float escapeair_force;
-    /* +33C */ float escapeair_decay;
+    /* +338 */ float escapeair_force;   // Airdodge initial velocity
+    /* +33C */ float escapeair_decay;   // Airdodge velocity decay multiplier
     /* +340 */ float x340;
     /* +344 */ float x344;
     /* +348 */ int x348;
@@ -454,9 +467,9 @@ struct ftCommonData {
     /* +4A4 */ float x4A4;
     /* +4A8 */ float x4A8;
     /* +4AC */ float x4AC;
-    /* +4B0 */ float sdi_min_stick_mag;
+    /* +4B0 */ float sdi_min_stick_mag; // Minimum stick magnitude for Smash DI
     /* +4B4 */ int sdi_stick_window;
-    /* +4B8 */ float sdi_pos_scale;
+    /* +4B8 */ float sdi_pos_scale; // How far you travel per SDI input
     /* +4BC */ float x4BC;
     /* +4C0 */ float x4C0;
     /* +4C4 */ int x4C4;
@@ -506,7 +519,7 @@ struct ftCommonData {
     /* +5C4 */ int x5C4;
     /* +5C8 */ int x5C8;
     /* +5CC */ float x5CC;
-    /* +5D0 */ int rebirth_countdown;
+    /* +5D0 */ int rebirth_countdown; // Frames until you auto-descend from angel platform
     /* +5D4 */ int rebirth_wait;
     /* +5D8 */ int x5D8;
     /* +5DC */ u32 bury_timer_unk1;
@@ -576,7 +589,7 @@ struct ftCommonData {
     /* +6DC */ GXColor
         sub_colors[5]; ///< Array of tint colors, see #gm_SetupSubColors and
                        ///< #Fighter_UnkInitLoad_80068914
-    /* +6F0 */ float metal_armor;
+    /* +6F0 */ float metal_armor; // KB threshold for flinching while Metal
     /* +6F4 */ int x6F4_unkDamage;
     /* +6F8 */ int x6F8;
     /* +6FC */ int x6FC;
@@ -586,7 +599,7 @@ struct ftCommonData {
     /* +70C */ float x70C;
     /* +710 */ float x710;
     /* +714 */ float x714;
-    /* +718 */ float kb_ice_mul;
+    /* +718 */ float kb_ice_mul; // Knockback multiplier while frozen
     /* +71C */ float x71C;
     /* +720 */ float x720;
     /* +724 */ float x724;
@@ -634,11 +647,11 @@ struct ftCommonData {
     /* +7B8 */ float x7B8;
     /* +7BC */ float x7BC;
     /* +7C0 */ float x7C0;
-    /* +7C4 */ float kb_smashcharge_mul;
+    /* +7C4 */ float kb_smashcharge_mul; // 1.2x KB multiplier for fully charged smash
     /* +7C8 */ float x7C8;
     /* +7CC */ int x7CC;
     /* +7D0 */ int x7D0;
-    /* +7D4 */ float hit_weight_mul;
+    /* +7D4 */ float hit_weight_mul; // Weight multiplier when calculating hits
     /* +7D8 */ GXColor x7D8;
     /* +7DC */ int x7DC;
     /* +7E0 */ int x7E0;
@@ -761,42 +774,42 @@ typedef struct ftCo_DatAttrs {
     /// @brief Base walk acceleration, always applied when walking.
     /* +004 fp+114 */ float walk_accel_base;
 
-    /* +008 fp+118 */ float walk_max_vel;
+    /* +008 fp+118 */ float walk_max_vel; // Cap for walking horizontal speed
     /* +00C fp+11C */ float slow_walk_max;
     /* +010 fp+120 */ float mid_walk_point;
     /* +014 fp+124 */ float fast_walk_min;
-    /* +018 fp+128 */ float ground_friction;
-    /* +01C fp+12C */ float dash_initial_velocity;
-    /* +020 fp+130 */ float dash_accel_mul;
-    /* +024 fp+134 */ float dash_accel_base;
-    /* +028 fp+138 */ float dash_max_velocity;
+    /* +018 fp+128 */ float ground_friction; // Base ground friction applied per frame
+    /* +01C fp+12C */ float dash_initial_velocity; // Speed applied frame 1 of dash
+    /* +020 fp+130 */ float dash_accel_mul; // Multiplicative run acceleration
+    /* +024 fp+134 */ float dash_accel_base; // Base run acceleration
+    /* +028 fp+138 */ float dash_max_velocity; // Cap for running horizontal speed
     /* +02C fp+13C */ float run_animation_scaling;
     /* +030 fp+140 */ float max_run_brake_frames;
     /* +034 fp+144 */ float ground_max_horizontal_velocity;
-    /* +038 fp+148 */ float jump_startup_time;
-    /* +03C fp+14C */ float jump_h_initial_velocity;
-    /* +040 fp+150 */ float jump_v_initial_velocity;
-    /* +044 fp+154 */ float ground_to_air_jump_momentum_multiplier;
-    /* +048 fp+158 */ float jump_h_max_velocity;
-    /* +04C fp+15C */ float hop_v_initial_velocity;
-    /* +050 fp+160 */ float air_jump_v_multiplier;
-    /* +054 fp+164 */ float air_jump_h_multiplier;
-    /* +058 fp+168 */ int max_jumps;
-    /* +05C fp+16C */ float gravity;
-    /* +060 fp+170 */ float terminal_velocity;
-    /* +064 fp+174 */ float air_drift_stick_mul;
-    /* +068 fp+178 */ float aerial_drift_base;
-    /* +06C fp+17C */ float air_drift_max;
-    /* +070 fp+180 */ float aerial_friction;
-    /* +074 fp+184 */ float fast_fall_velocity;
+    /* +038 fp+148 */ float jump_startup_time; // Jumpsquat frames (e.g. Fox=3, Falco=5, Bowser=8)
+    /* +03C fp+14C */ float jump_h_initial_velocity; // Horizontal base speed when jumping
+    /* +040 fp+150 */ float jump_v_initial_velocity; // Vertical speed applied frame 1 of jump
+    /* +044 fp+154 */ float ground_to_air_jump_momentum_multiplier; // Ground X velocity kept when jumping
+    /* +048 fp+158 */ float jump_h_max_velocity; // Horizontal max air speed when drifting
+    /* +04C fp+15C */ float hop_v_initial_velocity; // Short hop vertical velocity
+    /* +050 fp+160 */ float air_jump_v_multiplier; // Air jump vertical multiplier (typically 1.0)
+    /* +054 fp+164 */ float air_jump_h_multiplier; // Air jump horizontal multiplier
+    /* +058 fp+168 */ int max_jumps; // 2 for most, 5 for Kirby/Jigglypuff
+    /* +05C fp+16C */ float gravity; // Constant subtracted from Y vel per frame in air
+    /* +060 fp+170 */ float terminal_velocity; // Maximum downward speed
+    /* +064 fp+174 */ float air_drift_stick_mul; // Air acceleration (stick-dependent)
+    /* +068 fp+178 */ float aerial_drift_base; // Air acceleration base value
+    /* +06C fp+17C */ float air_drift_max; // Air max speed
+    /* +070 fp+180 */ float aerial_friction; // Air friction applied per frame (X and Y)
+    /* +074 fp+184 */ float fast_fall_velocity; // Fast fall downward max speed
     /* +078 fp+188 */ float air_max_horizontal_velocity;
-    /* +07C fp+18C */ float jab_2_input_window;
-    /* +080 fp+190 */ float jab_3_input_window;
+    /* +07C fp+18C */ float jab_2_input_window; // Frames to input jab 2 after jab 1
+    /* +080 fp+190 */ float jab_3_input_window; // Frames to input jab 3 after jab 2
     /* +084 fp+194 */ float standing_turn_frames;
-    /* +088 fp+198 */ float weight;
-    /* +08C fp+19C */ float model_scaling;
-    /* +090 fp+1A0 */ float initial_shield_size;
-    /* +094 fp+1A4 */ float shield_break_initial_velocity;
+    /* +088 fp+198 */ float weight; // Character weight for knockback (e.g. Bowser=117, Fox=75, Pichu=55)
+    /* +08C fp+19C */ float model_scaling; // Visual scale of the model
+    /* +090 fp+1A0 */ float initial_shield_size; // Shield size at 60 HP
+    /* +094 fp+1A4 */ float shield_break_initial_velocity; // How high you launch when shield broken
     /* +098 fp+1A8 */ int rapid_jab_window;
     /* +09C fp+1AC */ float clank_animation_length;
 
@@ -806,8 +819,8 @@ typedef struct ftCo_DatAttrs {
     /// @brief Not used anywhere in the codebase.
     /* +0A4 fp+1B4 */ int unused_0;
 
-    /* +0A8 fp+1B8 */ float ledge_jump_horizontal_velocity;
-    /* +0AC fp+1BC */ float ledge_jump_vertical_velocity;
+    /* +0A8 fp+1B8 */ float ledge_jump_horizontal_velocity; // Ledge jump X velocity
+    /* +0AC fp+1BC */ float ledge_jump_vertical_velocity; // Ledge jump Y velocity
     /* +0B0 fp+1C0 */ float item_throw_velocity_multiplier;
     /* +0B4 fp+1C4 */ float heavy_throw_velocity_multiplier;
 
@@ -820,14 +833,14 @@ typedef struct ftCo_DatAttrs {
 
     /* +0BC fp+1CC */ ftCo_DatAttrs_xBC_t xBC;
     /* +0DC fp+1EC */ float xDC;
-    /* +0E0 fp+1F0 */ float kirby_b_star_damage;
-    /* +0E4 fp+1F4 */ float normal_landing_lag;
-    /* +0E8 fp+1F8 */ float landingairn_lag;
-    /* +0EC fp+1FC */ float landingairf_lag;
-    /* +0F0 fp+200 */ float landingairb_lag;
-    /* +0F4 fp+204 */ float landingairhi_lag;
-    /* +0F8 fp+208 */ float landingairlw_lag;
-    /* +0FC fp+20C */ float name_tag_height;
+    /* +0E0 fp+1F0 */ float kirby_b_star_damage; // Kirby star spit damage
+    /* +0E4 fp+1F4 */ float normal_landing_lag; // Empty landing lag frames
+    /* +0E8 fp+1F8 */ float landingairn_lag; // NAir landing lag (uncanceled)
+    /* +0EC fp+1FC */ float landingairf_lag; // FAir landing lag (uncanceled)
+    /* +0F0 fp+200 */ float landingairb_lag; // BAir landing lag (uncanceled)
+    /* +0F4 fp+204 */ float landingairhi_lag; // UAir landing lag (uncanceled)
+    /* +0F8 fp+208 */ float landingairlw_lag; // DAir landing lag (uncanceled)
+    /* +0FC fp+20C */ float name_tag_height; // Height of player name tag
     /* +100 fp+210 */ float passivewall_vel_x;
     /* +104 fp+214 */ float wall_jump_horizontal_velocity;
     /* +108 fp+218 */ float wall_jump_vertical_velocity;
@@ -858,7 +871,7 @@ typedef struct ftCo_DatAttrs {
     /* +16C fp+27C */ int camera_zoom_target_bone;
     /* +170 fp+280 */ Vec3 x170;
     /* +17C fp+28C */ float x17C;
-    /* +180 fp+290 */ u8 weight_independent_throws_mask;
+    /* +180 fp+290 */ u8 weight_independent_throws_mask; // Bitmask for throw weight dependence
 } ftCo_DatAttrs;
 
 typedef struct Fighter_WaitAnimData {
@@ -1295,52 +1308,52 @@ typedef struct FtInputTimers {
 } FtInputTimers;
 
 struct Fighter {
-    /*    fp+0 */ HSD_GObj* gobj;
-    /*    fp+4 */ FighterKind kind;
+    /*    fp+0 */ HSD_GObj* gobj; // Game Object holding this fighter
+    /*    fp+4 */ FighterKind kind; // Character ID (e.g. Mario=0, Fox=1)
     /*    fp+8 */ s32 x8_spawnNum;
     /*    fp+C */ u8
         player_idx; ///< Index into player_slots[Gm_Player_NumMax];
-    /*   fp+10 */ FtMotionId motion_id;
-    /*   fp+14 */ enum_t anim_id;
+    /*   fp+10 */ FtMotionId motion_id; // Current action state (e.g. Wait, Dash)
+    /*   fp+14 */ enum_t anim_id; // Animation ID linked to the current action state
     /*   fp+18 */ s32 x18;
     /*   fp+1C */ MotionState* x1C_actionStateList;
     /*   fp+20 */ MotionState* x20_actionStateList;
     /*   fp+24 */ struct Fighter_WaitAnimData* x24;
     /*   fp+28 */ u8 (*x28)[2];
-    /*   fp+2C */ float facing_dir;
-    /*   fp+30 */ float facing_dir1;
-    /*   fp+34 */ Vec3 x34_scale;
+    /*   fp+2C */ float facing_dir; // 1.0 is Right, -1.0 is Left
+    /*   fp+30 */ float facing_dir1; // Temporary facing direction
+    /*   fp+34 */ Vec3 x34_scale; // Model visual scale
     /*   fp+40 */ float x40;
     /*   fp+44 */ Mtx x44_mtx;
-    /*   fp+74 */ Vec3 x74_self_accel;
-    /*   fp+80 */ Vec3 self_vel;
-    /*   fp+8C */ Vec3 x8c_kb_vel;
-    /*   fp+98 */ Vec3 x98_atk_shield_kb;
-    /*   fp+A4 */ Vec3 xA4_unk_vel;
-    /*   fp+B0 */ Vec3 cur_pos;
-    /*   fp+BC */ Vec3 prev_pos;
-    /*   fp+C8 */ Vec3 pos_delta;
+    /*   fp+74 */ Vec3 x74_self_accel; // Acceleration components currently applied
+    /*   fp+80 */ Vec3 self_vel; // Core X/Y/Z velocity (e.g. movement, dash, fall)
+    /*   fp+8C */ Vec3 x8c_kb_vel; // Knockback velocity vector applied to this fighter
+    /*   fp+98 */ Vec3 x98_atk_shield_kb; // Pushback velocity from hitting an opponent's shield
+    /*   fp+A4 */ Vec3 xA4_unk_vel; // Additional velocity vector
+    /*   fp+B0 */ Vec3 cur_pos; // Current World X/Y/Z Coordinates
+    /*   fp+BC */ Vec3 prev_pos; // World position on the previous frame
+    /*   fp+C8 */ Vec3 pos_delta; // Difference between cur_pos and prev_pos
     /*   fp+D4 */ Vec3 xD4_unk_vel;
-    /*   fp+E0 */ GroundOrAir ground_or_air;
+    /*   fp+E0 */ GroundOrAir ground_or_air; // 0 = Grounded, 1 = Aerial
     /*   fp+E4 */ float xE4_ground_accel_1;
     /*   fp+E8 */ float xE8_ground_accel_2;
-    /*   fp+EC */ float gr_vel;
-    /*   fp+F0 */ float xF0_ground_kb_vel;
+    /*   fp+EC */ float gr_vel; // 1D ground movement speed
+    /*   fp+F0 */ float xF0_ground_kb_vel; // Knockback applied along the ground
     /*   fp+F4 */ float xF4_ground_attacker_shield_kb_vel;
-    /*   fp+F8 */ Vec2 xF8_playerNudgeVel;
+    /*   fp+F8 */ Vec2 xF8_playerNudgeVel; // Push velocity from player collision
     /*  fp+100 */ float x100;
     /*  fp+104 */ u8 x104;
     /*  fp+105 */ s8 x105;
     /*  fp+106 */ s8 x106;
     /*  fp+107 */ s8 x107;
     /*  fp+108 */ HSD_Joint* x108_costume_joint;
-    /*  fp+10C */ ftData* ft_data;
-    /*  fp+110 */ ftCo_DatAttrs co_attrs;
+    /*  fp+10C */ ftData* ft_data; // Pointer to core fighter properties
+    /*  fp+110 */ ftCo_DatAttrs co_attrs; // Copied per-character attributes (weight, walk speed, etc.)
     /*  fp+294 */ itPickup x294_itPickup;
     /*  fp+2C4 */ Vec2 x2C4;
     /*  fp+2CC */ ftDonkeyAttributes* x2CC;
     /*  fp+2D0 */ Fighter_x2D0_t* x2D0; ///< multi jump stats
-    /*  fp+2D4 */ void* dat_attrs;
+    /*  fp+2D4 */ void* dat_attrs; // Per-character special attributes struct
     /*  fp+2D8 */ void* dat_attrs_backup;
     /*  fp+2DC */ float x2DC;
     /*  fp+2E0 */ float x2E0;
@@ -1349,10 +1362,10 @@ struct Fighter {
     /*  fp+2EC */ float x2EC;
     /*  fp+2F0 */ BoneDynamicsDesc dynamic_bone_sets[Ft_Dynamics_NumMax];
     /*  fp+3E0 */ int dynamics_num;
-    /*  fp+3E4 */ CommandInfo x3E4_fighterCmdScript;
-    /*  fp+408 */ ColorOverlay x408;
-    /*  fp+488 */ ColorOverlay x488;
-    /*  fp+508 */ ColorOverlay x508;
+    /*  fp+3E4 */ CommandInfo x3E4_fighterCmdScript; // Processes animation scripts (hitboxes, IASA, etc.)
+    /*  fp+408 */ ColorOverlay x408; // Flash effects (e.g. hitlag)
+    /*  fp+488 */ ColorOverlay x488; // Flash effects (e.g. invincibility)
+    /*  fp+508 */ ColorOverlay x508; // Flash effects
     /*  fp+588 */ HSD_LObj* x588;
     /*  fp+58C */ u32 x58C;
     /*  fp+590 */ FigaTree* x590;
@@ -1386,7 +1399,7 @@ struct Fighter {
     /*  fp+5A8 */ uintptr_t x5A8;
     /*  fp+5AC */ FtPartsVis x5AC;
     /*  fp+5CC */ CostumeTObjList tobj_list;
-    /*  fp+5E8 */ FighterBone* parts;
+    /*  fp+5E8 */ FighterBone* parts; // Array of character bones/joints
     /*  fp+5EC */ DObjList dobj_list;
     /*  fp+5F4 */ struct Fighter_x5F4_arr {
         /*  fp+5F4 */ s8 prev, idx;
@@ -1394,14 +1407,14 @@ struct Fighter {
     /*  fp+60C */ EF_QueuedEffect* x60C;
     /*  fp+610 */ GXColor x610_color_rgba[2];
     /*  fp+618 */ u8 pad_port; ///< Physical controller port for this fighter
-    /*  fp+619 */ u8 costume_id;
+    /*  fp+619 */ u8 costume_id; // Current character color (e.g. red fox, green fox)
     /*  fp+61A */ u8 sub_color;
-    /*  fp+61B */ u8 team;
+    /*  fp+61B */ u8 team; // 0=Red, 1=Blue, 2=Green
     /*  fp+61C */ s8 x61C;
     /*  fp+61D */ u8 x61D;
     /*  fp+61E */ u8 filler_x61E[0x620 - 0x61E];
     /*  fp+620 */ struct Fighter_input {
-        /*  fp+620 */ Vec2 lstick[3];          ///< lstick buffer
+        /*  fp+620 */ Vec2 lstick[3];          ///< lstick buffer (current, prev1, prev2)
         /*  fp+638 */ Vec2 cstick[3];          ///< cstick buffer
         /*  fp+650 */ float triggers[3];       ///< analog trigger buffer
         /*  fp+65C */ HSD_Pad held_buttons[3]; ///< buttons buffer
@@ -1442,25 +1455,25 @@ struct Fighter {
     /*  fp+6CC */ Vec3 x6CC;
     /*  fp+6D8 */ Vec3 x6D8;
     /*  fp+6E4 */ Vec3 x6E4;
-    /*  fp+6F0 */ CollData coll_data;
+    /*  fp+6F0 */ CollData coll_data; // ECB and collision box properties
     /*  fp+88C */ s32 ecb_lock;
     /*  fp+890 */ CmSubject* x890_cameraBox;
-    /*  fp+894 */ float cur_anim_frame;
+    /*  fp+894 */ float cur_anim_frame; // Progress through current animation state
     /*  fp+898 */ float x898_unk;
-    /*  fp+89C */ float frame_speed_mul;
+    /*  fp+89C */ float frame_speed_mul; // Multiplier to advance anim frames (e.g., L-cancel sets to 2.0 or half depending on calculation)
     /*  fp+8A0 */ float x8A0_unk;
     /*  fp+8A4 */ float x8A4_animBlendFrames;
     /*  fp+8A8 */ float x8A8_anim_frame;
     /*  fp+8AC */ HSD_JObj* x8AC_animSkeleton;
     /*  fp+8B0 */ Fighter_x8B0_t x8B0[5];
-    /*  fp+914 */ HitCapsule x914[4];
-    /*  fp+DF4 */ HitCapsule xDF4[2];
-    /* fp+1064 */ HitCapsule x1064_thrownHitbox;
+    /*  fp+914 */ HitCapsule x914[4]; // Attack hitboxes currently active (normal hitboxes)
+    /*  fp+DF4 */ HitCapsule xDF4[2]; // Throw hitboxes currently active
+    /* fp+1064 */ HitCapsule x1064_thrownHitbox; // Item/thrown related hitbox
     /* fp+119C */ u8 x119C_teamUnk;
     /* fp+119D */ u8 grabber_unk1;
-    /* fp+119E */ u8 hurt_capsules_len;
+    /* fp+119E */ u8 hurt_capsules_len; // Number of hurtboxes active
     /* fp+119F */ u8 x119F;
-    /* fp+11A0 */ FighterHurtCapsule hurt_capsules[15];
+    /* fp+11A0 */ FighterHurtCapsule hurt_capsules[15]; // The player's active hurtboxes
     /* fp+1614 */ Fighter_x1614_t x1614[2];
     /* fp+166C */ u8 x166C; ///< number of valid entries in x1670 array
     /* fp+1670 */ Fighter_x1670_t x1670[1]; ///< @todo figure out proper size
@@ -1468,19 +1481,19 @@ struct Fighter {
     /* fp+1828 */ enum_t x1828;
     /* fp+182C */ struct dmg {
         /* fp+182C */ float x182c_behavior;
-        /* fp+1830 */ float x1830_percent;
+        /* fp+1830 */ float x1830_percent; // The player's current damage percent (0-999)
         /* fp+1834 */ float x1834;
         /* fp+1838 */ float x1838_percentTemp;
         /* fp+183C */ int x183C_applied;
         /* fp+1840 */ int x1840;
-        /* fp+1844 */ float facing_dir_1;
-        /* fp+1848 */ int x1848_kb_angle;
+        /* fp+1844 */ float facing_dir_1; // Opponent relative facing direction
+        /* fp+1848 */ int x1848_kb_angle; // Angle of incoming attack knockback
         /* fp+184C */ int x184c_damaged_hurtbox;
-        /* fp+1850 */ float kb_applied;
-        /* fp+1854 */ Vec3 x1854_collpos;
-        /* fp+1860 */ u32 x1860_element;
+        /* fp+1850 */ float kb_applied; // Knockback to be applied after calculations
+        /* fp+1854 */ Vec3 x1854_collpos; // Where the hit occurred
+        /* fp+1860 */ u32 x1860_element; // Hit element (e.g. fire, electric)
         /* fp+1864 */ int x1864;
-        /* fp+1868 */ HSD_GObj* x1868_source;
+        /* fp+1868 */ HSD_GObj* x1868_source; // Who hit this player
         /* fp+186C */ int x186c;
         /* fp+1870 */ struct DmgLogEntry* x1870;
         /* fp+1874 */ int x1874;
@@ -1494,7 +1507,7 @@ struct Fighter {
         /* fp+189C */ float x189C_unk_num_frames;
         /* fp+18A0 */ float x18a0;
         /// kb magnitude
-        /* fp+18A4 */ float x18A4_knockbackMagnitude;
+        /* fp+18A4 */ float x18A4_knockbackMagnitude; // Base calculated knockback magnitude
         /* fp+18A8 */ float x18A8;
         /// in frames
         /* fp+18AC */ int x18ac_time_since_hit;
@@ -1537,15 +1550,15 @@ struct Fighter {
         /* fp+1950 */ bool x1950;
         /* fp+1954 */ float x1954;
         /* fp+1958 */ float x1958;
-        /* fp+195C */ float x195c_hitlag_frames;
+        /* fp+195C */ float x195c_hitlag_frames; // Frames of hitlag applied
     } dmg;
     /* fp+1960 */ float x1960_vibrateMult;
     /* fp+1964 */ float x1964;
-    /* fp+1968 */ u8 x1968_jumpsUsed;
-    /* fp+1969 */ u8 x1969_walljumpUsed;
-    /* fp+196C */ float hitlag_mul;
+    /* fp+1968 */ u8 x1968_jumpsUsed; // Counter for aerial jumps used
+    /* fp+1969 */ u8 x1969_walljumpUsed; // Counter for walljumps used (caps at 254 without refreshing)
+    /* fp+196C */ float hitlag_mul; // e.g. 1.0 normally, affects hitstun duration frame calculations
     /* fp+1970 */ enum_t unk_msid;
-    /* fp+1974 */ Item_GObj* item_gobj;
+    /* fp+1974 */ Item_GObj* item_gobj; // Associated item (if any)
     /* fp+1978 */ Item_GObj* x1978; // held item
     /* fp+197C */ HSD_GObj* x197C;  ///< bunny hood
     /* fp+1980 */ HSD_GObj* x1980;
@@ -1554,9 +1567,9 @@ struct Fighter {
     /* fp+198C */ s32 x198C;
     /* fp+1990 */ s32 x1990;
     /* fp+1994 */ int x1994;
-    /* fp+1998 */ float shield_health;
-    /* fp+199C */ float lightshield_amount;
-    /* fp+19A0 */ s32 x19A0_shieldDamageTaken;
+    /* fp+1998 */ float shield_health; // Current HP of shield (caps at 60 usually, decays over time)
+    /* fp+199C */ float lightshield_amount; // Current analog intensity of shield
+    /* fp+19A0 */ s32 x19A0_shieldDamageTaken; // How much damage the shield just absorbed
     /* fp+19A4 */ int x19A4;
     /* fp+19A8 */ HSD_GObj* x19A8;
     /* fp+19AC */ float specialn_facing_dir;
@@ -1588,8 +1601,8 @@ struct Fighter {
     /* fp+1A52 */ u8 x1A52;
     /* fp+1A53 */ u8 x1A53;
     /* fp+1A54 */ s32 x1A54;
-    /* fp+1A58 */ Fighter_GObj* victim_gobj;
-    /* fp+1A5C */ Fighter_GObj* x1A5C;
+    /* fp+1A58 */ Fighter_GObj* victim_gobj; // Pointer to the Fighter GObj currently being grabbed
+    /* fp+1A5C */ Fighter_GObj* x1A5C; // Pointer to the Fighter GObj who is grabbing this player
     /* fp+1A60 */ Item_GObj* target_item_gobj;
     /* fp+1A64 */ UNK_T x1A64;
     /* fp+1A68 */ u16 x1A68;
@@ -1609,14 +1622,14 @@ struct Fighter {
     /* fp+2021 */ s8 x2021;
     /* fp+2022 */ s8 x2022;
     /* fp+2024 */ s32 x2024;
-    /* fp+2028 */ int metal_timer;
+    /* fp+2028 */ int metal_timer; // Frames remaining in metal box status
     /* fp+202C */ int metal_health;
     /* fp+2030 */ s32 x2030;
     /* fp+2034 */ s32 x2034;
     /* fp+2038 */ s32 x2038;
     /* fp+203C */ DObjList x203C;
     /* fp+2044 */ u8 filler_x2044[0x2064 - 0x2044];
-    /* fp+2064 */ int x2064_ledgeCooldown;
+    /* fp+2064 */ int x2064_ledgeCooldown; // Frames until you can grab ledge again
     /* fp+2068 */ s32 x2068_attackID;
     /* fp+206C */ u16 x206C_attack_instance;
     /* fp+206E */ s16 x206E;
@@ -1642,7 +1655,7 @@ struct Fighter {
     /* fp+2102 */ s8 x2102;
     /* fp+2103 */ s8 x2103;
     /* fp+2104 */ int x2104;
-    /* fp+2108 */ int capture_timer;
+    /* fp+2108 */ int capture_timer; // Frames remaining in grab, trap, or sleep
     /* fp+210C */ u8 wall_jump_input_timer;
     /* fp+210C */ u8 filler_x210C[3];
     /* fp+2110 */ float x2110_walljumpWallSide;
@@ -1669,34 +1682,34 @@ struct Fighter {
     /* fp+2190 */ HSD_GObjEvent grab_cb;
     /* fp+2194 */ HSD_GObjEvent x2194;
     /* fp+2198 */ HSD_GObjInteraction grabbed_cb;
-    /* fp+219C */ HSD_GObjEvent input_cb;
-    /* fp+21A0 */ HSD_GObjEvent anim_cb;
-    /* fp+21A4 */ HSD_GObjEvent phys_cb;
-    /* fp+21A8 */ HSD_GObjEvent coll_cb;
-    /* fp+21AC */ HSD_GObjEvent cam_cb;
+    /* fp+219C */ HSD_GObjEvent input_cb; // Executes input logic
+    /* fp+21A0 */ HSD_GObjEvent anim_cb; // Executes animation logic (hitboxes, script vars)
+    /* fp+21A4 */ HSD_GObjEvent phys_cb; // Executes physics updates (velocity, gravity)
+    /* fp+21A8 */ HSD_GObjEvent coll_cb; // Executes collision detection against stages/ ECB
+    /* fp+21AC */ HSD_GObjEvent cam_cb; // Updates camera tracking target box
     /* fp+21B0 */ HSD_GObjEvent accessory1_cb;
     /* fp+21B4 */ HSD_GObjEvent accessory2_cb;
     /* fp+21B8 */ HSD_GObjEvent accessory3_cb;
     /* fp+21BC */ HSD_GObjEvent accessory4_cb;
-    /* fp+21C0 */ HSD_GObjEvent deal_dmg_cb;
+    /* fp+21C0 */ HSD_GObjEvent deal_dmg_cb; // Triggered when this fighter deals damage
     /* fp+21C4 */ HSD_GObjEvent shield_hit_cb;
     /* fp+21C8 */ HSD_GObjEvent reflect_hit_cb;
     /* fp+21CC */ HSD_GObjEvent x21CC;
     /* fp+21D0 */ HSD_GObjEvent hitlag_cb;
     /* fp+21D4 */ HSD_GObjEvent pre_hitlag_cb;
     /* fp+21D8 */ HSD_GObjEvent post_hitlag_cb;
-    /* fp+21DC */ HSD_GObjEvent take_dmg_cb;
+    /* fp+21DC */ HSD_GObjEvent take_dmg_cb; // Triggered when this fighter takes damage
     /* fp+21E0 */ HSD_GObjEvent death1_cb;
     /// @remarks Used. Internally Dead_Proc as evidenced by 800F5430.
     /* fp+21E4 */ HSD_GObjEvent death2_cb;
     /* fp+21E8 */ HSD_GObjEvent death3_cb;
     /* fp+21EC */ HSD_GObjEvent x21EC;
     /* fp+21F0 */ HSD_GObjEvent take_dmg_2_cb;
-    /* fp+21F4 */ HSD_GObjEvent hurtbox_detect_cb;
+    /* fp+21F4 */ HSD_GObjEvent hurtbox_detect_cb; // Checks hurtboxes against active hitboxes
     /* fp+21F8 */ HSD_GObjEvent x21F8;
     /* fp+21FC */ UnkFlagStruct x21FC_flag;
     /* fp+21FC */ u8 filler_x21FC[0x2200 - 0x21FD];
-    /* fp+2200 */ u32 cmd_vars[4];
+    /* fp+2200 */ u32 cmd_vars[4]; // Action state specific script variables (e.g. used for IASA tracking)
     /* fp+2210 */ union Fighter_x2210 {
         u32 throw_flags;
         struct Fighter_x2210_x0 {
@@ -1710,11 +1723,11 @@ struct Fighter {
             u8 throw_flags_b7 : 1;
         } x0;
     } x2210;
-    /* fp+2214 */ float cmd_timer;
-    /* fp+2218:0 */ u8 allow_interrupt : 1;
+    /* fp+2214 */ float cmd_timer; // Frame counter used by action state script routines
+    /* fp+2218:0 */ u8 allow_interrupt : 1; // Determines if IASA (Interruptible As Soon As) is active
     /* fp+2218:1 */ u8 x2218_b1 : 1;
     /* fp+2218:2 */ u8 x2218_b2 : 1;
-    /* fp+2218:3 */ u8 reflecting : 1;
+    /* fp+2218:3 */ u8 reflecting : 1; // Is reflecting? (e.g. Fox shine)
     /* fp+2218:4 */ u8 x2218_b4 : 1;
     /* fp+2218:5 */ u8 x2218_b5 : 1;
     /* fp+2218:6 */ u8 x2218_b6 : 1;
@@ -1731,9 +1744,9 @@ struct Fighter {
 
     /* fp+221A:0 */ u8 x221A_b0 : 1;
     /* fp+221A:1 */ u8 x221A_b1 : 1;
-    /* fp+221A:2 */ u8 allow_sdi : 1;
+    /* fp+221A:2 */ u8 allow_sdi : 1; // True during hitlag window when SDI can be read
     /* fp+221A:3 */ u8 x221A_b3 : 1;
-    /* fp+221A:4 */ u8 fall_fast : 1;
+    /* fp+221A:4 */ u8 fall_fast : 1; // True if fast falling
     /* fp+221A:5 */ u8 x221A_b5 : 1;
     /* fp+221A:6 */ u8 x221A_b6 : 1;
     /* fp+221A:7 */ u8 x221A_b7 : 1;
@@ -1758,13 +1771,13 @@ struct Fighter {
     /* fp+221C:6 */ u16 x221C_b6 : 1;
     /* fp+221C:7 */ u16 x221C_u16_y : 3;
     /* fp+221D:2 */ u16 x221D_b2 : 1;
-    /* fp+221D:3 */ u16 has_prev_input : 1;
-    /* fp+221D:4 */ u16 input_disabled : 1;
+    /* fp+221D:3 */ u16 has_prev_input : 1; // Has previous inputs stored?
+    /* fp+221D:4 */ u16 input_disabled : 1; // Are player inputs frozen?
     /* fp+221D:5 */ u16 x221D_b5 : 1;
     /* fp+221D:6 */ u16 x221D_b6 : 1;
     /* fp+221D:7 */ u16 x221D_b7 : 1;
 
-    /* fp+221E:0 */ u8 invisible : 1;
+    /* fp+221E:0 */ u8 invisible : 1; // True when cloaking device is active or during specific state frames
     /* fp+221E:1 */ u8 x221E_b1 : 1;
     /* fp+221E:2 */ u8 x221E_b2 : 1;
     /* fp+221E:3 */ u8 x221E_b3 : 1;
@@ -1776,8 +1789,8 @@ struct Fighter {
     /* fp+221F:0 */ u8 x221F_b0 : 1;
     /* fp+221F:1 */ u8 x221F_b1 : 1;
     /* fp+221F:2 */ u8 x221F_b2 : 1;
-    /* fp+221F:3 */ u8 is_sleeping : 1;
-    /* fp+221F:4 */ u8 is_sub_fighter : 1;
+    /* fp+221F:3 */ u8 is_sleeping : 1; // Sleeping status effect
+    /* fp+221F:4 */ u8 is_sub_fighter : 1; // True for Nana (Ice Climbers)
     /* fp+221F:5 */ u8 x221F_b5 : 1;
     /* fp+221F:6 */ u8 x221F_b6 : 1;
     /* fp+221F:7 */ u8 x221F_b7 : 1;
@@ -1814,16 +1827,16 @@ struct Fighter {
     /* fp+2223:4 */ u8 x2223_b4 : 1;
     /* fp+2223:5 */ u8 x2223_b5 : 1;
     /* fp+2223:6 */ u8 is_always_metal : 1; ///< e.g. classic metal mario
-    /* fp+2223:7 */ u8 is_metal : 1;
+    /* fp+2223:7 */ u8 is_metal : 1; // Currently has metal box active
 
     /* fp+2224:0 */ u8 x2224_b0 : 1;
     /* fp+2224:1 */ u8 x2224_b1 : 1;
-    /* fp+2224:2 */ u8 stamina_dead : 1;
+    /* fp+2224:2 */ u8 stamina_dead : 1; // HP hit 0 in stamina mode
     /* fp+2224:3 */ u8 x2224_b3 : 1;
     /* fp+2224:4 */ u8 x2224_b4 : 1;
     /* fp+2224:5 */ u8 x2224_b5 : 1;
     /* fp+2224:6 */ u8 x2224_b6 : 1;
-    /* fp+2224:7 */ u8 can_walljump : 1;
+    /* fp+2224:7 */ u8 can_walljump : 1; // Character property (Fox, Falco, Mario, etc.)
 
     /* fp+2225:0 */ u8 x2225_b0 : 1;
     /* fp+2225:1 */ u8 x2225_b1 : 1;
@@ -1857,7 +1870,7 @@ struct Fighter {
     /* fp+2228:2 */ u8 is_sandbag : 1;
     /* fp+2228:3 */ u8 x2228_b3 : 2;
     /* fp+2228:5 */ u8 x2228_b5 : 1;
-    /* fp+2228:6 */ u8 used_tether : 1;
+    /* fp+2228:6 */ u8 used_tether : 1; // Grapple recovery has been used
     /* fp+2228:7 */ u8 x2228_b7 : 1;
 
     /* fp+2229:0 */ u8 x2229_b0 : 1;
@@ -1867,7 +1880,7 @@ struct Fighter {
     /* fp+2229:4 */ u8 x2229_b4 : 1;
     /* fp+2229:5 */ u8 no_normal_motion : 1;
     /* fp+2229:6 */ u8 x2229_b6 : 1;
-    /* fp+2229:7 */ u8 no_kb : 1;
+    /* fp+2229:7 */ u8 no_kb : 1; // Suppress knockback handling completely
 
     /* fp+222A:0 */ u8 x222A_b0 : 1;
     /* fp+222A:1 */ u8 x222A_b1 : 1;
