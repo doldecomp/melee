@@ -104,3 +104,12 @@
 - ✅ sysdolphin/baselib/gobjgxlink.c — Game Object rendering queues
 - ✅ sysdolphin/baselib/gobjplink.c — Game Object priority lists
 - ✅ sysdolphin/baselib/random.c — Linear congruential generator (LCG)
+
+## Phase 3: Items (src/melee/it/)
+- ❌ it/types.h — Item struct and common data
+- ❌ it/item.c — Core item lifecycle and logic
+- ❌ it/itcoll.c — Item entity collision
+- ✅ it/itgroundcoll.c — Item environmental collision (map/ground)
+- ✅ it/ithitbox.c — Item offensive hitbox interactions
+- ❌ it/itspawn.c — Item spawning/drop mechanisms
+- ✅ it/itdraw.c — Item rendering routines
