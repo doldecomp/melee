@@ -1,3 +1,9 @@
+/**
+ * @file ftparts.c
+ * @brief Fighter model parts and joint management
+ * @details Handles the dynamic linking of models, joints, and DObjs for Melee fighters.
+ * Module prefix: ft
+ */
 #include "ftparts.h"
 
 #include <placeholder.h>
@@ -31,6 +37,12 @@ HSD_JObjInfo ftJObj = { ftParts_JObjInfoInit };
 HSD_JObjInfo ftIntpJObj = { ftParts_IntpJObjInfoInit };
 HSD_PObjInfo ftPObj = { ftParts_PObjInfoInit };
 
+/**
+ * @brief Creates a position matrix for a fighter\'s JObj, taking global Z-scale into account.
+ * @param jobj The JObj to make the matrix for
+ * @param mtx The input transform matrix
+ * @param rmtx The resulting transform matrix
+ */
 void ftParts_JObjMakePositionMtx(HSD_JObj* jobj, Mtx mtx, Mtx rmtx)
 {
     Fighter* fighter = (Fighter*) HSD_GObj_804D7814->user_data;
@@ -52,6 +64,9 @@ void ftParts_JObjMakePositionMtx(HSD_JObj* jobj, Mtx mtx, Mtx rmtx)
     }
 }
 
+/**
+ * @brief Initializes the custom JObj class used by fighters.
+ */
 void ftParts_JObjInfoInit(void)
 {
     hsdInitClassInfo(HSD_CLASS_INFO(&ftJObj), HSD_CLASS_INFO(&hsdJObj),
@@ -60,11 +75,22 @@ void ftParts_JObjInfoInit(void)
     HSD_JOBJ_INFO(&ftJObj)->make_pmtx = ftParts_JObjMakePositionMtx;
 }
 
+/**
+ * @brief Changes a given JObj to use the fighter\'s custom JObj class.
+ * @param jobj The JObj to update
+ */
 void ftParts_80073758(HSD_JObj* jobj)
 {
     hsdChangeClass(jobj, &ftJObj);
 }
 
+/**
+ * @brief Loads a joint into an interpolated JObj.
+ * @param jobj The JObj to load into
+ * @param joint The joint data
+ * @param parent The parent JObj
+ * @return 0 on success
+ */
 s32 ftParts_IntpJObjLoad(HSD_JObj* jobj, HSD_Joint* joint, HSD_JObj* parent)
 {
     HSD_DObjDesc* dobjdesc = joint->u.dobjdesc;
@@ -75,6 +101,9 @@ s32 ftParts_IntpJObjLoad(HSD_JObj* jobj, HSD_Joint* joint, HSD_JObj* parent)
     return ret;
 }
 
+/**
+ * @brief Initializes the custom interpolated JObj class used by fighters.
+ */
 void ftParts_IntpJObjInfoInit(void)
 {
     hsdInitClassInfo(HSD_CLASS_INFO(&ftIntpJObj), HSD_CLASS_INFO(&hsdJObj),
@@ -126,6 +155,13 @@ static inline void ftPartsSetupTexMtx(Mtx mtx, GXTexMtx id)
     HSD_PerfCountMtxLoad();
 }
 
+/**
+ * @brief Sets up a rigid matrix for a PObj during rendering.
+ * @param pobj The polygon object
+ * @param vmtx The view matrix
+ * @param pmtx The position matrix
+ * @param rendermode Rendering mode flags
+ */
 void ftPartsSetupRigidMtx(HSD_PObj* pobj, Mtx vmtx, Mtx pmtx, u32 rendermode)
 {
     HSD_JObj* jobj;
@@ -157,6 +193,13 @@ void ftPartsSetupRigidMtx(HSD_PObj* pobj, Mtx vmtx, Mtx pmtx, u32 rendermode)
     }
 }
 
+/**
+ * @brief Sets up a shared vertex matrix for a PObj during rendering.
+ * @param pobj The polygon object
+ * @param vmtx The view matrix
+ * @param pmtx The position matrix
+ * @param rendermode Rendering mode flags
+ */
 void ftPartsSetupSharedVtxMtx(HSD_PObj* pobj, MtxPtr vmtx, MtxPtr pmtx,
                               u32 rendermode)
 {
@@ -227,6 +270,13 @@ void ftPartsSetupSharedVtxMtx(HSD_PObj* pobj, MtxPtr vmtx, MtxPtr pmtx,
     }
 }
 
+/**
+ * @brief Sets up an envelope matrix for a skinning PObj during rendering.
+ * @param pobj The polygon object
+ * @param vmtx The view matrix
+ * @param pmtx The position matrix
+ * @param rendermode Rendering mode flags
+ */
 void ftPartsSetupEnvelopeMtx(HSD_PObj* pobj, MtxPtr vmtx, MtxPtr pmtx,
                              u32 rendermode)
 {
@@ -302,6 +352,13 @@ void ftPartsSetupEnvelopeMtx(HSD_PObj* pobj, MtxPtr vmtx, MtxPtr pmtx,
     }
 }
 
+/**
+ * @brief Sets up matrices for a PObj based on its specific skinning/envelope type.
+ * @param pobj The polygon object
+ * @param vmtx The view matrix
+ * @param pmtx The position matrix
+ * @param rendermode Rendering mode flags
+ */
 void ftParts_PObjSetupMtx(HSD_PObj* pobj, Mtx vmtx, Mtx pmtx, u32 rendermode)
 {
     if (!ft_jobj_scale.has_z_scale) {
@@ -325,6 +382,9 @@ void ftParts_PObjSetupMtx(HSD_PObj* pobj, Mtx vmtx, Mtx pmtx, u32 rendermode)
     }
 }
 
+/**
+ * @brief Initializes the custom PObj class used by fighters.
+ */
 void ftParts_PObjInfoInit(void)
 {
     hsdInitClassInfo(HSD_CLASS_INFO(&ftPObj), HSD_CLASS_INFO(&hsdPObj),
@@ -334,16 +394,30 @@ void ftParts_PObjInfoInit(void)
     HSD_POBJ_INFO(&ftPObj)->setup_mtx = ftParts_PObjSetupMtx;
 }
 
+/**
+ * @brief Sets the default PObj class to the fighter\'s custom PObj class.
+ */
 void ftPartsPObjSetDefaultClass(void)
 {
     HSD_PObjSetDefaultClass(&ftPObj);
 }
 
+/**
+ * @brief Clears the default PObj class.
+ */
 void ftPartsPObjClearDefaultClass(void)
 {
     HSD_PObjSetDefaultClass(NULL);
 }
 
+/**
+ * @brief Traverses a JObj and updates the bone and dobj arrays.
+ * @param fighter The fighter
+ * @param bone The bone struct to populate
+ * @param jobj The current JObj being processed
+ * @param dobj_index Pointer to the running index of dobjs
+ * @param tree_depth The current depth in the skeletal tree
+ */
 void ftParts_80074194(Fighter* fighter, FighterBone* bone, HSD_JObj* jobj,
                       int* dobj_index, u32 tree_depth)
 {
@@ -395,6 +469,10 @@ void ftParts_80074194(Fighter* fighter, FighterBone* bone, HSD_JObj* jobj,
     bone->x8.x0.flags2_b6 = dobj_count != 0 ? true : false;
 }
 
+/**
+ * @brief Sets up the parts structure for a fighter gobj, building out the bone list.
+ * @param fighter_obj The fighter\'s GObj
+ */
 void ftParts_SetupParts(Fighter_GObj* fighter_obj)
 {
     HSD_JObj* jobj = GET_JOBJ(fighter_obj);
@@ -460,6 +538,10 @@ void ftParts_SetupParts(Fighter_GObj* fighter_obj)
     }
 }
 
+/**
+ * @brief Sets up the animation skeleton secondary jobj references for a fighter.
+ * @param gobj The fighter\'s GObj
+ */
 void ftParts_8007462C(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -503,6 +585,11 @@ void ftParts_8007462C(Fighter_GObj* gobj)
     }
 }
 
+/**
+ * @brief Loads a joint into the custom IntpJObj class.
+ * @param joint The joint to load
+ * @return The allocated JObj
+ */
 HSD_JObj* ftParts_8007482C(HSD_Joint* joint)
 {
     HSD_JObj* jobj;
@@ -512,6 +599,14 @@ HSD_JObj* ftParts_8007482C(HSD_Joint* joint)
     return jobj;
 }
 
+/**
+ * @brief Initializes the visibility table for a fighter costume.
+ * @param desc The parts description struct
+ * @param vis The visibility tracking struct
+ * @param costume_id The selected costume ID
+ * @param arg3 Primary DObj list
+ * @param arg4 Secondary DObj list
+ */
 void ftParts_8007487C(FtPartsDesc* desc, FtPartsVis* vis, u32 costume_id,
                       DObjList* arg3, DObjList* arg4)
 {
@@ -545,6 +640,10 @@ void ftParts_8007487C(FtPartsDesc* desc, FtPartsVis* vis, u32 costume_id,
     ftParts_80074D7C(vis, 4, arg3);
 }
 
+/**
+ * @brief Fully sets up the part visibility for a fighter model based on their costume.
+ * @param gobj The fighter\'s GObj
+ */
 void ftParts_800749CC(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -558,6 +657,12 @@ void ftParts_800749CC(Fighter_GObj* gobj)
     ftParts_80074ACC(gobj);
 }
 
+/**
+ * @brief Sets the pending part model index for a specific model group.
+ * @param gobj The fighter GObj
+ * @param model_idx The model group index
+ * @param val The pending value to set
+ */
 void ftParts_80074A4C(Fighter_GObj* gobj, int model_idx, int val)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -565,12 +670,22 @@ void ftParts_80074A4C(Fighter_GObj* gobj, int model_idx, int val)
     fp->x221D_b2 = true;
 }
 
+/**
+ * @brief Gets the pending part model index for a specific model group.
+ * @param gobj The fighter GObj
+ * @param model_idx The model group index
+ * @return The pending index
+ */
 int ftParts_80074A74(Fighter_GObj* gobj, int model_idx)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     return fp->x5F4_arr[model_idx].prev;
 }
 
+/**
+ * @brief Commits the pending part model indices into the active indices.
+ * @param gobj The fighter GObj
+ */
 void ftParts_80074A8C(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -582,6 +697,10 @@ void ftParts_80074A8C(Fighter_GObj* gobj)
     fp->x221D_b2 = false;
 }
 
+/**
+ * @brief Clears the active model indices, effectively hiding model groups.
+ * @param gobj The fighter GObj
+ */
 void ftParts_80074ACC(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -593,6 +712,12 @@ void ftParts_80074ACC(Fighter_GObj* gobj)
     fp->x221D_b2 = false;
 }
 
+/**
+ * @brief Sets a part model index and immediately updates DObj visibility flags.
+ * @param gobj The fighter GObj
+ * @param model_idx The model group index
+ * @param val The model index to set
+ */
 void ftParts_80074B0C(Fighter_GObj* gobj, int model_idx, int val)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -603,6 +728,13 @@ void ftParts_80074B0C(Fighter_GObj* gobj, int model_idx, int val)
     }
 }
 
+/**
+ * @brief Updates DObj visibility for a given visibility index, hiding parts that don\'t match the active state.
+ * @param fp The fighter
+ * @param vis The visibility struct
+ * @param idx The visibility lookup index
+ * @param dobj_list The list of DObjs to apply visibility to
+ */
 void ftParts_80074B6C(Fighter* fp, FtPartsVis* vis, int idx,
                       DObjList* dobj_list)
 {
@@ -632,6 +764,12 @@ void ftParts_80074B6C(Fighter* fp, FtPartsVis* vis, int idx,
     }
 }
 
+/**
+ * @brief Clears (hides) all DObjs associated with a given visibility lookup index.
+ * @param vis The visibility struct
+ * @param idx The visibility lookup index
+ * @param dobj_list The list of DObjs
+ */
 void ftParts_80074CA0(FtPartsVis* vis, int idx, DObjList* dobj_list)
 {
     FtPartsVisLookup* lookup = vis->xC[idx]; // r0
@@ -654,6 +792,12 @@ void ftParts_80074CA0(FtPartsVis* vis, int idx, DObjList* dobj_list)
     }
 }
 
+/**
+ * @brief Sets (shows) all DObjs associated with a given visibility lookup index.
+ * @param vis The visibility struct
+ * @param idx The visibility lookup index
+ * @param dobj_list The list of DObjs
+ */
 void ftParts_80074D7C(FtPartsVis* vis, int idx, DObjList* dobj_list)
 {
     FtPartsVisLookup* lookup = vis->xC[idx]; // r0
@@ -676,6 +820,10 @@ void ftParts_80074D7C(FtPartsVis* vis, int idx, DObjList* dobj_list)
     }
 }
 
+/**
+ * @brief Allocates the parts and dobj_list arrays for a newly created fighter.
+ * @param fp The fighter
+ */
 void ftParts_80074E58(Fighter* fp)
 {
     int i;
@@ -698,11 +846,24 @@ void ftParts_80074E58(Fighter* fp)
     fp->parts[ftParts_GetBoneIndex(fp, 0x35)].x8.x0.flags_b4 = true;
 }
 
+/**
+ * @brief Gets the actual internal bone index given a canonical Fighter_Part identifier.
+ * @param fp The fighter
+ * @param part The canonical part (e.g. FtPart_TransN)
+ * @return The mapped bone index
+ */
 Fighter_Part ftParts_GetBoneIndex(Fighter* fp, Fighter_Part part)
 {
     return ftPartsTable[fp->kind]->part_to_joint[part];
 }
 
+/**
+ * @brief Remaps a joint index from one fighter\'s parts table to another.
+ * @param to_table_idx Target table index
+ * @param from_table_idx Source table index
+ * @param joint_idx Joint index to remap
+ * @return The mapped joint index, or FTPART_INVALID
+ */
 int ftPartsRemap(size_t to_table_idx, size_t from_table_idx, size_t joint_idx)
 {
     FighterPartsTable* from_table = ftPartsTable[from_table_idx];
@@ -715,17 +876,23 @@ int ftPartsRemap(size_t to_table_idx, size_t from_table_idx, size_t joint_idx)
     return FTPART_INVALID;
 }
 
+/**
+ * @brief Checks if a specific part is excluded or disabled for a fighter kind.
+ * @param ftkind The fighter kind (e.g. Fox, Mario)
+ * @param part The part index
+ * @return A bitmask if the part is disabled, 0 otherwise
+ */
 u32 ftParts_8007506C(enum FighterKind ftkind, int part)
 {
-    Fighter_804D6540_x0_t* var_r3;
+    Fighter_804D6540_x0_t* part_desc;
     int i;
-    Fighter_804D6540_t* temp_r3;
+    Fighter_804D6540_t* ft_data;
 
-    temp_r3 = Fighter_804D6540[ftkind];
-    if (temp_r3 != NULL && temp_r3->x4 != 0) {
-        var_r3 = temp_r3->x0;
-        for (i = 0; i < temp_r3->x4; i++, var_r3++) {
-            if (var_r3->x0 == part) {
+    ft_data = Fighter_804D6540[ftkind];
+    if (ft_data != NULL && ft_data->x4 != 0) {
+        part_desc = ft_data->x0;
+        for (i = 0; i < ft_data->x4; i++, part_desc++) {
+            if (part_desc->x0 == part) {
                 return 1 << i;
             }
         }
@@ -733,6 +900,12 @@ u32 ftParts_8007506C(enum FighterKind ftkind, int part)
     return 0;
 }
 
+/**
+ * @brief Applies model events and visibility updates for a fighter.
+ * @param fp The fighter
+ * @param arg1 Event type index
+ * @param arg2 True to show, false to hide
+ */
 void ftParts_800750C8(Fighter* fp, enum_t arg1, bool arg2)
 {
     if (arg1 == 2) {
@@ -764,6 +937,12 @@ void ftParts_800750C8(Fighter* fp, enum_t arg1, bool arg2)
     }
 }
 
+/**
+ * @brief Finds the n-th TObj within a DObjList.
+ * @param arg0 The list of DObjs
+ * @param n The zero-based index of the TObj to find
+ * @return Pointer to the TObj
+ */
 HSD_TObj* ftParts_80075240(DObjList* arg0, int n)
 {
     int tobj_i;
@@ -880,50 +1059,61 @@ void ftParts_80075304(u8 type, HSD_JObj* root, HSD_JObj* new_jobj)
     }
 }
 
-void ftParts_800753D4(Fighter* arg0, struct Fighter_804D6540_x0_t* arg1,
-                      HSD_Joint* arg2)
+/**
+ * @brief Dynamically attaches a joint (like an item or weapon) to a fighter bone.
+ * @param arg0 The fighter
+ * @param arg1 Info detailing where and how to attach
+ * @param arg2 The joint to attach
+ */
+void ftParts_800753D4(Fighter* fighter, struct Fighter_804D6540_x0_t* attach_info,
+                      HSD_Joint* joint)
 {
-    HSD_Joint* sp6C;
-    HSD_Joint sp2C;
+    HSD_Joint* curr_joint;
+    HSD_Joint joint_copy;
 
-    HSD_JObj* temp_r31;
-    HSD_JObj* temp_r30;
+    HSD_JObj* anim_jobj;
+    HSD_JObj* main_jobj;
     int i;
     u32 tree_depth;
     int dobj_index;
 
-    sp6C = arg2;
-    if (arg1->x3 != 0xFF) {
+    curr_joint = joint;
+    if (attach_info->x3 != 0xFF) {
         s32 depth = 0;
-        for (i = 0; i < arg1->x3; i++) {
-            ftAnim_GetNextJointInTree(&sp6C, &depth);
+        for (i = 0; i < attach_info->x3; i++) {
+            ftAnim_GetNextJointInTree(&curr_joint, &depth);
         }
     }
-    sp2C = *sp6C;
-    sp2C.next = 0;
-    sp2C.child = 0;
+    joint_copy = *curr_joint;
+    joint_copy.next = 0;
+    joint_copy.child = 0;
 
-    temp_r30 = ftParts_8007482C(&sp2C);
-    temp_r31 = ftParts_8007482C(&sp2C);
+    main_jobj = ftParts_8007482C(&joint_copy);
+    anim_jobj = ftParts_8007482C(&joint_copy);
 
-    ftParts_80075304(arg1->x2, arg0->parts[arg1->x1].joint, temp_r30);
-    ftParts_80075304(arg1->x2, arg0->parts[arg1->x1].x4_jobj2, temp_r31);
+    ftParts_80075304(attach_info->x2, fighter->parts[attach_info->x1].joint, main_jobj);
+    ftParts_80075304(attach_info->x2, fighter->parts[attach_info->x1].x4_jobj2, anim_jobj);
 
-    tree_depth = arg0->parts[arg1->x1].xC_u.x0.xC;
-    if (arg1->x2 == 0 || arg1->x2 == 1) {
+    tree_depth = fighter->parts[attach_info->x1].xC_u.x0.xC;
+    if (attach_info->x2 == 0 || attach_info->x2 == 1) {
         tree_depth++;
     }
     dobj_index = 0;
-    ftParts_80074194(arg0, &arg0->parts[arg1->x0], temp_r30, &dobj_index,
+    ftParts_80074194(fighter, &fighter->parts[attach_info->x0], main_jobj, &dobj_index,
                      tree_depth);
 
-    arg0->parts[arg1->x0].x4_jobj2 = temp_r31;
-    arg0->parts[arg1->x0].x8.x0.flags_b2 = true;
+    fighter->parts[attach_info->x0].x4_jobj2 = anim_jobj;
+    fighter->parts[attach_info->x0].x8.x0.flags_b2 = true;
 }
 
-void ftParts_800755E8(Fighter* fp, struct Fighter_804D6540_x0_t* arg1)
+/**
+ * @brief Removes a dynamically attached joint from a fighter bone.
+ * @param fp The fighter
+ * @param arg1 Info detailing what to remove
+ */
+void ftParts_800755E8(Fighter* fp, struct Fighter_804D6540_x0_t* attach_info)
 {
-    FighterBone* bone = &fp->parts[arg1->x0];
+    FighterBone* bone = &fp->parts[attach_info->x0];
     HSD_JObjRemove(bone->joint);
     HSD_JObjRemove(bone->x4_jobj2);
     bone->joint = NULL;
@@ -932,39 +1122,45 @@ void ftParts_800755E8(Fighter* fp, struct Fighter_804D6540_x0_t* arg1)
     bone->x8.x0.flags_b2 = false;
 }
 
-void ftParts_80075650(Fighter_GObj* arg0, HSD_JObj* jobj, DObjList* arg2)
+/**
+ * @brief Gathers DObjs from a dynamically attached JObj hierarchy.
+ * @param arg0 Unused fighter gobj
+ * @param jobj The root JObj of the attachment
+ * @param arg2 List to populate
+ */
+void ftParts_80075650(Fighter_GObj* fighter_gobj, HSD_JObj* jobj, DObjList* dobj_list)
 {
-    s32 var_r30;
+    s32 dobj_index;
     HSD_DObj* dobj;
 
-    HSD_DObj* var_r0;
-    HSD_MObj* temp_r0;
+    HSD_DObj* next_dobj;
+    HSD_MObj* mobj;
 
     PAD_STACK(8);
 
-    var_r30 = 0;
+    dobj_index = 0;
     while (jobj != NULL) {
         dobj = HSD_JObjGetDObj(jobj);
         while (true) {
             if (dobj == NULL) {
                 break;
             }
-            if (var_r30 >= 0x20) {
+            if (dobj_index >= 0x20) {
                 HSD_ASSERTREPORT(1063, 0,
                                  "fighter parts model dobj num over!\n");
             }
-            arg2->data[var_r30] = dobj;
-            temp_r0 = dobj->mobj;
-            if (temp_r0 != NULL) {
-                hsdChangeClass(temp_r0, &ftMObj);
+            dobj_list->data[dobj_index] = dobj;
+            mobj = dobj->mobj;
+            if (mobj != NULL) {
+                hsdChangeClass(mobj, &ftMObj);
             }
             if (dobj != NULL) {
-                var_r0 = dobj->next;
+                next_dobj = dobj->next;
             } else {
-                var_r0 = NULL;
+                next_dobj = NULL;
             }
-            dobj = var_r0;
-            var_r30 += 1;
+            dobj = next_dobj;
+            dobj_index += 1;
         }
         if (!(HSD_JObjGetFlags(jobj) & JOBJ_INSTANCE) &&
             HSD_JObjGetChild(jobj) != NULL)
@@ -990,12 +1186,23 @@ void ftParts_80075650(Fighter_GObj* arg0, HSD_JObj* jobj, DObjList* arg2)
     }
 }
 
+/**
+ * @brief Sets the rotation of a JObj and clears its quaternion flag.
+ * @param jobj The JObj
+ * @param quat Quaternion rotation
+ */
 void ftParts_JObjSetRotation(HSD_JObj* jobj, Vec4* quat)
 {
     HSD_JObjSetRotation(jobj, quat);
     HSD_JObjClearFlags(jobj, JOBJ_USE_QUATERNION);
 }
 
+/**
+ * @brief Sets the X rotation for a specific fighter part.
+ * @param fp The fighter
+ * @param part_idx The bone/part index
+ * @param rotate_x Rotation angle in radians
+ */
 void ftPartSetRotX(Fighter* fp, int part_idx, f32 rotate_x)
 {
     HSD_JObj* jobj = fp->parts[part_idx].joint;
@@ -1010,6 +1217,12 @@ void ftPartSetRotX(Fighter* fp, int part_idx, f32 rotate_x)
     }
 }
 
+/**
+ * @brief Sets the Y rotation for a specific fighter part.
+ * @param fp The fighter
+ * @param part_idx The bone/part index
+ * @param rotate_y Rotation angle in radians
+ */
 void ftPartSetRotY(Fighter* fp, int part_idx, f32 rotate_y)
 {
     HSD_JObj* jobj = fp->parts[part_idx].joint;
@@ -1024,6 +1237,12 @@ void ftPartSetRotY(Fighter* fp, int part_idx, f32 rotate_y)
     }
 }
 
+/**
+ * @brief Sets the Z rotation for a specific fighter part.
+ * @param arg0 The fighter
+ * @param part_idx The bone/part index
+ * @param rotate_z Rotation angle in radians
+ */
 void ftPartSetRotZ(Fighter* arg0, int part_idx, f32 rotate_z)
 {
     HSD_JObj* jobj;
@@ -1041,6 +1260,12 @@ void ftPartSetRotZ(Fighter* arg0, int part_idx, f32 rotate_z)
     }
 }
 
+/**
+ * @brief Gets the X rotation of a specific fighter part.
+ * @param fp The fighter
+ * @param part_idx The bone/part index
+ * @return Rotation angle in radians
+ */
 f32 ftPartGetRotX(Fighter* fp, int part_idx)
 {
     HSD_JObj* jobj = fp->parts[part_idx].joint;
@@ -1054,6 +1279,13 @@ f32 ftPartGetRotX(Fighter* fp, int part_idx)
     return HSD_JObjGetRotationX(jobj);
 }
 
+/**
+ * @brief Gets the Z rotation of a specific fighter part.
+ * @note Actually returns RotationY from the internal structure.
+ * @param fp The fighter
+ * @param part_idx The bone/part index
+ * @return Rotation angle in radians
+ */
 f32 ftPartGetRotZ(Fighter* fp, int part_idx)
 {
     HSD_JObj* jobj = fp->parts[part_idx].joint;

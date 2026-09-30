@@ -1,3 +1,10 @@
+/**
+ * @file ftcolanim.c
+ * @brief Handles Fighter Color and Material Animations
+ * @details Manages flashing colors for hitstun, invincibility, metal form, cloaking device, and sleep state transitions.
+ * Module prefix: ft (Fighter)
+ */
+
 #include "ftcolanim.h"
 
 #include "fighter.h"
@@ -32,6 +39,10 @@ FtCmd ftCo_803C6ADC[3] = {
     ftCo_800BFF14,
 };
 
+/**
+ * @brief Enters the Sleep motion state and sets the fighter to invisible/sleeping
+ * @param gobj Fighter GObj
+ */
 void ftCo_800BFD04(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -46,6 +57,10 @@ void ftCo_800BFD04(Fighter_GObj* gobj)
     fp->x221F_b1 = true;
 }
 
+/**
+ * @brief Enters the Sleep motion state, handling subfighters (Ice Climbers) and game mode notification
+ * @param gobj Fighter GObj
+ */
 void ftCo_800BFD9C(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -59,8 +74,16 @@ void ftCo_800BFD9C(Fighter_GObj* gobj)
     gm_80167320(fp->player_idx, fp->is_sub_fighter);
 }
 
+/**
+ * @brief Animation callback for the Sleep motion state
+ * @param gobj Fighter GObj
+ */
 void ftCo_Sleep_Anim(Fighter_GObj* gobj) {}
 
+/**
+ * @brief IASA (Interruptible As Soon As) callback for the Sleep motion state
+ * @param gobj Fighter GObj
+ */
 void ftCo_Sleep_IASA(Fighter_GObj* gobj) {}
 
 static void ftCo_800BFE74(Fighter_GObj* gobj, CommandInfo* cmd)
@@ -93,54 +116,80 @@ static void ftCo_800BFF14(Fighter_GObj* gobj, CommandInfo* cmd)
     ftAction_80073108(gobj, cmd);
 }
 
-static void ft_800BFF34(Fighter_GObj* gobj, CommandInfo* cmd, int arg2)
+static void ft_800BFF34(Fighter_GObj* gobj, CommandInfo* cmd, int cmd_id)
 {
-    int i = arg2 - 0x15;
+    int i = cmd_id - 0x15;
     ftCo_803C6AD0[i](gobj, cmd);
 }
 
-static void ft_800BFF70(Fighter_GObj* gobj, CommandInfo* cmd, int arg0)
+static void ft_800BFF70(Fighter_GObj* gobj, CommandInfo* cmd, int cmd_id)
 {
-    int i = arg0 - 21;
+    int i = cmd_id - 21;
     ftCo_803C6ADC[i](gobj, cmd);
 }
 
+/**
+ * @brief Resets the secondary color animation state (invincibility, metal, etc.)
+ * @param fp Fighter instance data
+ */
 void ftCo_800BFFAC(Fighter* fp)
 {
     lb_80014498(&fp->x488);
 }
 
-bool ftCo_800BFFD0(Fighter* fp, FtColAnim arg1, bool arg2)
+/**
+ * @brief Applies a color animation to the fighter
+ * @param fp Fighter instance data
+ * @param anim_id ID of the color animation to apply
+ * @param unk Unknown boolean flag
+ * @return True if successful
+ */
+bool ftCo_800BFFD0(Fighter* fp, FtColAnim anim_id, bool unk)
 {
-    if (arg1 >= FtColAnim_SpycloakStart) {
+    // Cloaking Device (Spycloak) starts at a specific index
+    if (anim_id >= FtColAnim_SpycloakStart) {
         if (lb_800144C8(&fp->x508, Fighter_804D6538,
-                        arg1 -= FtColAnim_SpycloakStart, arg2))
+                        anim_id -= FtColAnim_SpycloakStart, unk))
         {
             return true;
         }
-    } else if (Fighter_804D653C[arg1].unk5 != 0) {
-        if (lb_800144C8(&fp->x488, Fighter_804D653C, arg1, arg2)) {
+    } else if (Fighter_804D653C[anim_id].unk5 != 0) {
+        // Secondary color animations (invincibility, metal, etc.)
+        if (lb_800144C8(&fp->x488, Fighter_804D653C, anim_id, unk)) {
             return true;
         }
-    } else if (lb_800144C8(&fp->x408, Fighter_804D653C, arg1, arg2)) {
+    } else if (lb_800144C8(&fp->x408, Fighter_804D653C, anim_id, unk)) {
+        // Primary color animations (hitstun, shield breaks, damage flashes)
         return true;
     }
     return false;
 }
 
+/**
+ * @brief Resets the primary color animation state (damage/hitstun flashes)
+ * @param fp Fighter instance data
+ */
 void ftCo_800C0074(Fighter* fp)
 {
     lb_80014498(&fp->x408);
 }
 
+/**
+ * @brief Resets the cloaking device (Spycloak) color animation state
+ * @param fp Fighter instance data
+ */
 void ft_800C0098(Fighter* fp)
 {
     lb_80014498(&fp->x508);
     if (fp->x2226_b4) {
-        ftCo_800BFFD0(fp, 0x80, 0);
+        ftCo_800BFFD0(fp, 0x80, 0); // Re-apply base spycloak if still active
     }
 }
 
+/**
+ * @brief Resets the secondary color animation state and invokes character-specific callbacks
+ * @param fp Fighter instance data
+ */
 void ftCo_800C0134(Fighter* fp)
 {
     lb_80014498(&fp->x488);
@@ -155,6 +204,7 @@ void ftCo_800C0134(Fighter* fp)
 static inline void resetColAnimX408(Fighter* fp)
 {
     lb_80014498(&fp->x408);
+    // Restore relevant status flashes if they should still be active
     if (fp->stamina_dead) {
         ftCo_800BFFD0(fp, 0x7A, 0);
     }
@@ -169,43 +219,64 @@ static inline void resetColAnimX408(Fighter* fp)
     }
 }
 
-void ftCo_800C0200(Fighter* fp, int arg1)
+/**
+ * @brief Resets a specific color animation based on the provided animation ID
+ * @param fp Fighter instance data
+ * @param anim_id ID of the color animation
+ */
+void ftCo_800C0200(Fighter* fp, int anim_id)
 {
-    if (arg1 >= FtColAnim_SpycloakStart) {
+    if (anim_id >= FtColAnim_SpycloakStart) {
         OSReport("don't reset spycloak colanim!\n");
         __assert("ftcolanimlist.c", 0xC1, "0");
         return;
     }
-    if (Fighter_804D653C[arg1].unk5 != 0) {
+    if (Fighter_804D653C[anim_id].unk5 != 0) {
         ftCo_800C0134(fp);
     } else {
         resetColAnimX408(fp);
     }
 }
 
-void ftCo_800C0358(Fighter* fp, Fighter* arg1, s32 arg2)
+/**
+ * @brief Copies color animation state from one fighter to another (e.g., during Zelda/Sheik transformation)
+ * @param fp Source Fighter instance data
+ * @param target_fp Target Fighter instance data
+ * @param anim_id ID of the color animation
+ */
+void ftCo_800C0358(Fighter* fp, Fighter* target_fp, s32 anim_id)
 {
-    if (arg2 >= FtColAnim_SpycloakStart) {
+    if (anim_id >= FtColAnim_SpycloakStart) {
         OSReport("don't reset spycloak colanim!\n");
         __assert("ftcolanimlist.c", 0xDE, "0");
         return;
     }
-    if (Fighter_804D653C[arg2].unk5 != 0) {
-        arg1->x488 = fp->x488;
+    if (Fighter_804D653C[anim_id].unk5 != 0) {
+        target_fp->x488 = fp->x488;
     } else {
-        arg1->x408 = fp->x408;
+        target_fp->x408 = fp->x408;
     }
 }
 
+/**
+ * @brief Updates all active color animations on the fighter for the current frame
+ * @param gobj Fighter GObj
+ */
 void ftCo_800C0408(Fighter_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
+
+    // Process cloaking device (Spycloak) animations
     while (lb_80014258(gobj, &fp->x508, ft_800BFF34)) {
         ft_800C0098(fp);
     }
+
+    // Process primary color animations (hitstun, etc.)
     while (lb_80014258(gobj, &fp->x408, ft_800BFF34)) {
         resetColAnimX408(fp);
     }
+
+    // Process secondary color animations (metal, invincibility, etc.)
     if (fp->x408.x28_colanim.i == 0) {
         while (lb_80014258(gobj, &fp->x488, ft_800BFF34)) {
             ftCo_800C0134(fp);
