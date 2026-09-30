@@ -1,3 +1,12 @@
+/**
+ * @file ftcoll.c
+ * @brief Fighter collision detection, hitbox/hurtbox interactions, and damage calculation.
+ * @details Implements the Melee collision engine: hitbox-to-hurtbox contact, phantom hits,
+ * clanking/rebound mechanics, shield collisions and powershielding, grab detection, reflector
+ * and absorber bubbles, knockback calculation, and ECB environment collision updates.
+ * Module prefix: ft (Fighter)
+ */
+
 #include "ftcoll.h"
 
 #include <Runtime/platform.h>
@@ -47,6 +56,9 @@
 
 /// @todo .sdata2 order hack
 #ifdef MUST_MATCH
+/**
+ * @brief Dummy function to force compiler float literals into .sdata2 matching order.
+ */
 static void sdata2_order(void)
 {
     (void) 0.0f;
@@ -84,12 +96,24 @@ static int dmg_log1_idx;
 static s8 ftColl_804D6560[8];
 
 /// Reset hitbox and phantom collision count?
+/**
+ * @brief Resets per-frame damage log indices.
+ * @details Clears dmg_log0_idx (normal hits) and dmg_log1_idx (phantom / tip hits)
+ * at the start of each frame's attack collision detection phase.
+ */
 void ftColl_800765E0(void)
 {
     dmg_log0_idx = 0;
     dmg_log1_idx = 0;
 }
 
+/**
+ * @brief Computes scaled damage factoring grab victim state, frozen ice, and behavior multipliers.
+ * @param fp Attacking fighter instance data
+ * @param victim Defending fighter GObj receiving the hit
+ * @param arg2 Base incoming attack damage
+ * @return Scaled damage amount
+ */
 float ftColl_800765F0(Fighter* fp, Fighter_GObj* victim, float arg2)
 {
     Fighter_GObj* cur = fp->victim_gobj;
@@ -102,6 +126,11 @@ float ftColl_800765F0(Fighter* fp, Fighter_GObj* victim, float arg2)
     return arg2 * fp->dmg.x182c_behavior;
 }
 
+/**
+ * @brief Converts floating-point damage to integer environment / combat damage.
+ * @param dmg Float damage amount
+ * @return Integer damage value (minimum 1 if dmg > 0)
+ */
 static int getEnvDmg(float dmg)
 {
     if (dmg) {
@@ -110,6 +139,14 @@ static int getEnvDmg(float dmg)
     return 0;
 }
 
+/**
+ * @brief Applies incoming damage to fighter percent buffer or armor pool.
+ * @details If damage-absorbing armor is active (fp->x221C_b4), subtracts damage from
+ * armor HP (fp->dmg.x1834). If armor breaks or is absent, adds to fp->dmg.x1838_percentTemp.
+ * @param fp Defending fighter data
+ * @param dmg In/out damage amount (reduced if partially absorbed by armor)
+ * @return True if damage reached the fighter percent; false if fully absorbed
+ */
 bool ftColl_80076640(Fighter* fp, float* dmg)
 {
     int env_dmg = getEnvDmg(*dmg);
@@ -133,6 +170,15 @@ bool ftColl_80076640(Fighter* fp, float* dmg)
     return false;
 }
 
+/**
+ * @brief Records an environmental / stage damage collision event into dmg_log0.
+ * @param arg0 Collision source type index
+ * @param arg1 Collision sub-kind
+ * @param arg2 Source entity GObj
+ * @param arg3 Dynamics descriptor pointer
+ * @param fp Defending fighter data
+ * @param hurt Hurtbox capsule that was struck
+ */
 void ftColl_80076764(int arg0, enum_t arg1, Fighter_GObj* arg2,
                      DynamicsDesc* arg3, Fighter* fp, FighterHurtCapsule* hurt)
 {
@@ -152,6 +198,17 @@ void ftColl_80076764(int arg0, enum_t arg1, Fighter_GObj* arg2,
     }
 }
 
+/**
+ * @brief Logs a phantom hit / glancing blow entry into dmg_log1.
+ * @details A phantom hit occurs when a hitbox grazes a hurtbox within 0.01 units.
+ * It deals half damage (0.5x) with zero knockback and zero hitstun.
+ * @param kind Entity kind of attacker
+ * @param gobj Attacker GObj
+ * @param hit0 Attacker hitbox capsule
+ * @param hit1 Defending hurtbox capsule
+ * @param len Phantom hit duration / count
+ * @param temp_dmg Half-damage amount dealt by glancing blow
+ */
 static void tiplog(int kind, HSD_GObj* gobj, HitCapsule* hit0,
                    HitCapsule* hit1, int len, float temp_dmg)
 {
@@ -172,6 +229,16 @@ static void tiplog(int kind, HSD_GObj* gobj, HitCapsule* hit0,
     }
 }
 
+/**
+ * @brief Registers a victim entity across all hitboxes sharing the same attack group ID.
+ * @details Prevents multiple hitbox capsules belonging to the same attack move (hit->x4)
+ * from striking the same victim multiple times in a single frame.
+ * @param fp Attacking fighter data
+ * @param hit Hitbox capsule that connected
+ * @param arg2 Target classification index
+ * @param victim Pointer to victim entity
+ * @param arg4 Flag indicating whether to clear hitbox pending state
+ */
 void ftColl_80076808(Fighter* fp, HitCapsule* hit, int arg2, void* victim,
                      bool arg4)
 {
@@ -187,6 +254,11 @@ void ftColl_80076808(Fighter* fp, HitCapsule* hit, int arg2, void* victim,
     }
 }
 
+/**
+ * @brief Copies hit victim history between hitboxes sharing the same attack group ID.
+ * @param fp Attacking fighter data
+ * @param dst Destination hitbox capsule to receive the copied history
+ */
 void ftColl_800768A0(Fighter* fp, HitCapsule* dst)
 {
     size_t i;
@@ -202,12 +274,23 @@ void ftColl_800768A0(Fighter* fp, HitCapsule* dst)
     lbColl_80008440(dst);
 }
 
+/**
+ * @brief Calculates clank / rebound recoil frames when two attacks clash.
+ * @details If clanking on the ground and clankable (hit->x40_b1), computes recoil:
+ * Recoil frames = damage * p_ftCommonData->x3D0 + p_ftCommonData->x3D4.
+ * @param fp Attacking fighter data
+ * @param hit Offensive hitbox capsule
+ * @param int_dmg Integer attack damage
+ * @param other_pos World position of opposing entity
+ * @param compare_other_first Facing direction comparison order
+ */
 static inline void updateClankDamage(Fighter* fp, HitCapsule* hit, int int_dmg,
                                      Vec3* other_pos, bool compare_other_first)
 {
     if (int_dmg > fp->dmg.int_value) {
         fp->dmg.int_value = int_dmg;
         if (hit->x40_b1 == true && fp->ground_or_air == GA_Ground) {
+            // Clank recoil frames formula: recoil = damage * mult + base
             fp->dmg.x191C =
                 int_dmg * p_ftCommonData->x3D0 + p_ftCommonData->x3D4;
             {
@@ -225,6 +308,17 @@ static inline void updateClankDamage(Fighter* fp, HitCapsule* hit, int int_dmg,
     }
 }
 
+/**
+ * @brief Evaluates hitbox-on-hitbox clanking (rebound) between two fighters.
+ * @details In Melee, grounded attacks clank if damage difference < 9% (p_ftCommonData->x3CC).
+ * Both fighters enter rebound recoil unless one deals >= 9% more damage than the other.
+ * Spawns clank spark effect (1052) at the contact midpoint.
+ * @param fp0 Fighter 0 data
+ * @param hit0 Hitbox capsule 0
+ * @param fp1 Fighter 1 data
+ * @param hit1 Hitbox capsule 1
+ * @return True if clank occurred
+ */
 bool ftColl_8007699C(Fighter* fp0, HitCapsule* hit0, Fighter* fp1,
                      HitCapsule* hit1)
 {
@@ -237,6 +331,7 @@ bool ftColl_8007699C(Fighter* fp0, HitCapsule* hit0, Fighter* fp1,
 
     {
         float dmg = hit1->damage;
+        // In Melee, grounded attacks clank if damage difference < 9% (p_ftCommonData->x3CC)
         if ((int) dmg - p_ftCommonData->x3CC < (int) hit0->damage) {
             int int_dmg = getEnvDmg(dmg);
             ftColl_80076808(fp1, hit1, 3, fp0, true);
@@ -260,6 +355,14 @@ bool ftColl_8007699C(Fighter* fp0, HitCapsule* hit0, Fighter* fp1,
     return false;
 }
 
+/**
+ * @brief Resolves attack hitbox contact with an opponent's active shield bubble.
+ * @details Calculates shield damage taken, shield pushback on attacker (lightshield_amount * dmg),
+ * and powershield reflections (spawning SFX 104 and powershield effect 27).
+ * @param fp0 Attacking fighter data
+ * @param hit0 Offensive hitbox capsule
+ * @param fp1 Defending fighter with active shield
+ */
 void ftColl_80076CBC(Fighter* fp0, HitCapsule* hit0, Fighter* fp1)
 {
     ftColl_80076808(fp0, hit0, 1, fp1, false);
@@ -269,6 +372,7 @@ void ftColl_80076CBC(Fighter* fp0, HitCapsule* hit0, Fighter* fp1)
         if (int_dmg > fp0->dmg.x1924) {
             fp0->dmg.x1924 = int_dmg;
             if (fp0->ground_or_air == GA_Ground) {
+                // Shield pushback on attacker: pushback = lightshield_amount * damage
                 fp0->dmg.x1928 = fp1->lightshield_amount * int_dmg;
                 {
                     float facing_dir;
@@ -305,6 +409,7 @@ void ftColl_80076CBC(Fighter* fp0, HitCapsule* hit0, Fighter* fp1)
             fp1->x221F_b6 = fp0->is_sub_fighter;
             efSync_Spawn(1052, NULL, &hit0->hurt_coll_pos);
         } else {
+            // Powershield triggered: plays SFX 104 and spawns reflection spark (effect 27)
             ftCo_80094138(fp1);
             ftCo_800BFFD0(fp1, 118, 0);
             ft_PlaySFX(fp1, 104, 0x7F, 0x40);
@@ -323,6 +428,9 @@ void ftColl_80076CBC(Fighter* fp0, HitCapsule* hit0, Fighter* fp1)
 }
 
 /// @todo #ftColl_80076808
+/**
+ * @brief Helper to register a hit target on all group-matching hitboxes.
+ */
 static inline void inlineB0(Fighter* fp0, HitCapsule* hitbox, Fighter* fp1,
                             int arg3)
 {
@@ -336,6 +444,12 @@ static inline void inlineB0(Fighter* fp0, HitCapsule* hitbox, Fighter* fp1,
 }
 
 /// Loop through phantom hit victims
+/**
+ * @brief Searches phantom hit victim history for an existing victim record.
+ * @param victim Target victim pointer
+ * @param hit Hitbox capsule
+ * @return HitCapsule_Enabled if already recorded; HitCapsule_Disabled if new
+ */
 static inline HitCapsuleState checkTipLog(UNK_T victim, HitCapsule* hit)
 {
     HitVictim* hit_victims = hit->victims_2;
@@ -350,6 +464,11 @@ static inline HitCapsuleState checkTipLog(UNK_T victim, HitCapsule* hit)
                                            : HitCapsule_Enabled;
 }
 
+/**
+ * @brief Tests if collision distance is within the phantom hit (glancing blow) threshold.
+ * @param hit0 Hitbox capsule
+ * @return True if distance < p_ftCommonData->x7A8 (0.01 units)
+ */
 static inline bool inlineB1(HitCapsule* hit0)
 {
     bool var_r0;
@@ -361,6 +480,13 @@ static inline bool inlineB1(HitCapsule* hit0)
     return var_r0;
 }
 
+/**
+ * @brief Adds damage to temporary percent accumulator if armor is inactive.
+ * @param fp1 Defending fighter data
+ * @param dmg Damage amount
+ * @param var_r24_3 Integer damage value
+ * @return True if damage applied; false if absorbed
+ */
 static inline bool inlineB2(Fighter* fp1, float dmg, int var_r24_3)
 {
     if (fp1->x221C_b4 == 0) {
@@ -376,6 +502,13 @@ static inline bool inlineB2(Fighter* fp1, float dmg, int var_r24_3)
     return false;
 }
 
+/**
+ * @brief Computes scaled damage from hit0 applied to fp1 factoring grab and ice states.
+ * @param fp0 Attacker data
+ * @param hit0 Hitbox capsule
+ * @param fp1 Defender data
+ * @return Scaled damage float
+ */
 static inline float inlineB3(Fighter* fp0, HitCapsule* hit0, Fighter* fp1)
 {
     HSD_GObj* victim_gobj = fp1->victim_gobj;
@@ -405,6 +538,18 @@ struct ftColl_80076ED8_dmg_count {
     int v;
 };
 
+/**
+ * @brief Resolves hitbox vs hurtbox contact, handling phantom hits and full impacts.
+ * @details Evaluates collision distance:
+ * - Phantom hit: if distance < 0.01 units, deals half damage (0.5x), zero knockback,
+ *   zero hitstun, and logs to dmg_log1.
+ * - Full hit: accumulates damage and logs to dmg_log0 for highest-knockback selection.
+ * @param fp0 Attacking fighter data
+ * @param hit0 Offensive hitbox capsule
+ * @param fp1 Defending fighter data
+ * @param hit1 Defending hurtbox capsule
+ * @return True if hit registered (phantom or full)
+ */
 bool ftColl_80076ED8(Fighter* fp0, HitCapsule* hit0, Fighter* fp1,
                      HitCapsule* hit1)
 {
@@ -413,6 +558,7 @@ bool ftColl_80076ED8(Fighter* fp0, HitCapsule* hit0, Fighter* fp1,
     if (inlineB1(hit0)) {
         if (dmg_log0_idx == 0 && !fp1->dmg.x189C_unk_num_frames) {
             if (checkTipLog(fp1, hit0) == HitCapsule_Disabled) {
+                // Phantom hit (glancing blow): deals half damage (0.5x) with zero knockback
                 float temp_dmg;
                 if (!((int) (temp_dmg = 0.5f * dmg)) && dmg) {
                     temp_dmg = 1;
@@ -563,11 +709,25 @@ static int hit_effect_ids[] = {
     /* [HitElement_Leadead]  */ 0,
 };
 
+/**
+ * @brief Maps HitElement enum to visual impact particle effect ID.
+ * @param element HitElement identifier (fire, electric, slash, coin, etc.)
+ * @return Particle effect ID
+ */
 static inline int getHitEffectId(int element)
 {
     return hit_effect_ids[element];
 }
 
+/**
+ * @brief Resolves item / projectile contact with a fighter's reflector bubble.
+ * @details Checks if projectile damage exceeds reflector maxDamage (fp->ReflectAttr.x1A30_maxDamage).
+ * If exceeded, breaks reflector; otherwise reverses projectile velocity, multiplies speed (x1A38)
+ * and damage (x1A34), and transfers projectile ownership to the reflecting fighter.
+ * @param item Item / projectile data
+ * @param hit Item hitbox capsule
+ * @param fp Reflecting fighter data
+ */
 void ftColl_80077464(Item* item, HitCapsule* hit, Fighter* fp)
 {
     s32 damage;
@@ -585,6 +745,7 @@ void ftColl_80077464(Item* item, HitCapsule* hit, Fighter* fp)
         damage = 0;
     }
 
+    // If projectile damage exceeds maxDamage threshold, reflector breaks
     if (damage > fp->ReflectAttr.x1A30_maxDamage) {
         f32 dir;
 
@@ -668,6 +829,15 @@ void ftColl_80077464(Item* item, HitCapsule* hit, Fighter* fp)
     }
 }
 
+/**
+ * @brief Resolves item / projectile impact on a fighter's active shield bubble.
+ * @details Accumulates shield damage, applies pushback velocity, and tests powershield reflection.
+ * @param item Incoming item data
+ * @param hurt Item hitbox capsule
+ * @param fp Defending fighter data
+ * @param pos Contact point vector
+ * @param val Angle / shield parameter
+ */
 void ftColl_80077688(Item* item, HitCapsule* hurt, Fighter* fp, Vec3* pos,
                      f32 val)
 {
@@ -797,6 +967,14 @@ void ftColl_80077688(Item* item, HitCapsule* hurt, Fighter* fp, Vec3* pos,
     efSync_Spawn(0x41C, NULL, &hurt->hurt_coll_pos);
 }
 
+/**
+ * @brief Records item clank event and triggers clank sparks at collision midpoint.
+ * @param item Item data
+ * @param hit Item hitbox capsule
+ * @param fp Attacking fighter data
+ * @param effect_pos World position for particle effect
+ * @param dmg Attack damage float
+ */
 static inline void recordItemClank(Item* item, HitCapsule* hit, Fighter* fp,
                                    Vec3* effect_pos, float dmg)
 {
@@ -836,6 +1014,14 @@ static inline void recordItemClank(Item* item, HitCapsule* hit, Fighter* fp,
     efSync_Spawn(0x41C, NULL, effect_pos);
 }
 
+/**
+ * @brief Clanks an item / projectile hitbox against a fighter's attack hitbox.
+ * @details Checks 9% clank threshold (p_ftCommonData->x3CC) to determine if projectile clanks.
+ * @param item Item data
+ * @param hit1 Item hitbox capsule
+ * @param fp Attacking fighter data
+ * @param hit2 Fighter attack hitbox capsule
+ */
 void ftColl_80077970(Item* item, HitCapsule* hit1, Fighter* fp,
                      HitCapsule* hit2)
 {
@@ -864,6 +1050,16 @@ void ftColl_80077970(Item* item, HitCapsule* hit1, Fighter* fp,
     }
 }
 
+/**
+ * @brief Resolves item / projectile hitbox contact with a fighter's hurtbox.
+ * @details Handles consumable powerup items (Starman invincibility, Super Mushroom growth,
+ * Poison Mushroom shrink), phantom hits, and full damage logging.
+ * @param item Item data
+ * @param hit Item hitbox capsule
+ * @param fp Defending fighter data
+ * @param hit2 Defending hurtbox capsule
+ * @return True if item hit registered
+ */
 bool ftColl_80077C60(Item* item, HitCapsule* hit, Fighter* fp,
                      HitCapsule* hit2)
 {
@@ -1101,11 +1297,20 @@ bool ftColl_80077C60(Item* item, HitCapsule* hit, Fighter* fp,
     return false;
 }
 
+/**
+ * @brief Retrieves character-specific damage adjustment offset.
+ */
 static inline int getUnkVal(Fighter* fp, int i)
 {
     return i + fp->player_idx * 2 + fp->is_sub_fighter;
 }
 
+/**
+ * @brief Updates hurtbox hit reaction status and elemental effect flags.
+ * @param fp Defending fighter data
+ * @param arg1 Hurtbox capsule struck
+ * @param arg2 Offensive hitbox that connected
+ */
 void ftColl_80078384(Fighter* fp, FighterHurtCapsule* arg1, HitCapsule* arg2)
 {
     bool var_r0;
@@ -1126,11 +1331,21 @@ void ftColl_80078384(Fighter* fp, FighterHurtCapsule* arg1, HitCapsule* arg2)
     }
 }
 
+/**
+ * @brief Plays impact audio and triggers camera shake for a registered hit.
+ * @param fp Defending fighter data
+ */
 void ftColl_80078488(Fighter* fp)
 {
     ft_PlaySFX(fp, 85, 0x7F, 0x40);
 }
 
+/**
+ * @brief Records clank event between two colliding hitboxes.
+ * @param arg0 Attacking fighter data
+ * @param arg1 First hitbox capsule
+ * @param arg2 Second hitbox capsule
+ */
 void ftColl_800784B4(Fighter* arg0, HitCapsule* arg1, HitCapsule* arg2)
 {
     if (arg1->element == HitElement_Slash && arg2->element == HitElement_Slash)
@@ -1142,6 +1357,14 @@ void ftColl_800784B4(Fighter* arg0, HitCapsule* arg1, HitCapsule* arg2)
 }
 
 // dmg is probably a u32?
+/**
+ * @brief Spawns directional hit spark effects scaled by knockback magnitude.
+ * @param gobj Fighter GObj
+ * @param pos Contact world position
+ * @param dmg Hit severity level
+ * @param ignored Unused float parameter
+ * @param scale Calculated knockback scaling factor
+ */
 void ftColl_80078538(Fighter_GObj* gobj, Vec3* pos, u32 dmg, float ignored,
                      float scale)
 {
@@ -1168,6 +1391,11 @@ void ftColl_80078538(Fighter_GObj* gobj, Vec3* pos, u32 dmg, float ignored,
     }
 }
 
+/**
+ * @brief Records combat hit statistics to player match tracking data.
+ * @param arg0 Attacker fighter GObj
+ * @param gobj Defender fighter GObj
+ */
 void ftColl_8007861C(Fighter_GObj* arg0, Fighter_GObj* gobj, int arg2,
                      int arg3, int arg4, UNK_T arg5, u16 arg6, UNK_T arg7,
                      int arg8)
@@ -1205,6 +1433,12 @@ void ftColl_8007861C(Fighter_GObj* arg0, Fighter_GObj* gobj, int arg2,
                 prev_source_ply);
 }
 
+/**
+ * @brief Releases a captured victim from grab hold (grab release / break).
+ * @param arg0 Grabber fighter GObj
+ * @param arg1 Victim fighter GObj
+ * @param arg2 Release type flag
+ */
 void ftColl_80078710(Fighter_GObj* arg0, Fighter_GObj* arg1, UNK_T arg2)
 {
     Fighter* fp = GET_FIGHTER(arg0);
@@ -1213,6 +1447,12 @@ void ftColl_80078710(Fighter_GObj* arg0, Fighter_GObj* arg1, UNK_T arg2)
                     fp->x2074.x2088, arg2, 0);
 }
 
+/**
+ * @brief Binds a captured victim to the grabber entity upon successful grab connection.
+ * @param arg0 Grabber fighter GObj
+ * @param arg1 Victim fighter GObj
+ * @param arg2 Unused flag
+ */
 void ftColl_80078754(Fighter_GObj* arg0, Fighter_GObj* arg1, bool arg2)
 {
     Fighter* fp0;
@@ -1229,6 +1469,12 @@ void ftColl_80078754(Fighter_GObj* arg0, Fighter_GObj* arg1, bool arg2)
     fp1->dmg.x18C8 = -1;
 }
 
+/**
+ * @brief Binds an item to a fighter during item grab / pickup.
+ * @param arg0 Item GObj being picked up
+ * @param arg1 Fighter GObj picking up the item
+ * @param arg2 Grab slot index
+ */
 void ftColl_800787B4(Item_GObj* arg0, Fighter_GObj* arg1, int arg2)
 {
     Item* ip = arg0->user_data;
@@ -1253,11 +1499,21 @@ void ftColl_800787B4(Item_GObj* arg0, Fighter_GObj* arg1, int arg2)
     }
 }
 
+/**
+ * @brief Deactivates and clears all active attack hitboxes for a fighter.
+ * @param gobj Fighter GObj
+ */
 void ftColl_800788D4(Fighter_GObj* gobj)
 {
     ftColl_8007861C(0, gobj, 0, -10, 0, 0, 0, 0, 0);
 }
 
+/**
+ * @brief Applies horizontal pushing separation between two overlapping grounded fighters.
+ * @param arg0 First fighter GObj
+ * @param arg1 Second fighter GObj
+ * @param arg2 Pushback displacement distance
+ */
 void ftColl_8007891C(Fighter_GObj* arg0, Fighter_GObj* arg1, float arg2)
 {
     Fighter* fp0;
@@ -1271,6 +1527,12 @@ void ftColl_8007891C(Fighter_GObj* arg0, Fighter_GObj* arg1, float arg2)
                 fp1->is_sub_fighter, fp0->x2070.x0.x2073);
 }
 
+/**
+ * @brief Applies horizontal separation between two overlapping HSD_GObjs.
+ * @param arg0 First entity GObj
+ * @param arg1 Second entity GObj
+ * @param arg2 Displacement amount
+ */
 void ftColl_80078998(HSD_GObj* arg0, HSD_GObj* arg1, float arg2)
 {
     Item* ip;
@@ -1287,11 +1549,23 @@ void ftColl_80078998(HSD_GObj* arg0, HSD_GObj* arg1, float arg2)
     }
 }
 
+/**
+ * @brief Helper returning a pointer to hitbox capsule i.
+ * @param fp Fighter data
+ * @param i Hitbox index (0-3)
+ * @return Pointer to HitCapsule
+ */
 static inline HitCapsule* HitCapsuleGetPtr(Fighter* fp, u32 i)
 {
     return &fp->x914[i];
 }
 
+/**
+ * @brief Evaluates grab distance and records the closest victim as the active grab target.
+ * @param this_fp Attacking fighter data
+ * @param hit Grab hitbox capsule
+ * @param victim_fp Potential victim fighter data
+ */
 static inline void updateFighterGrabTarget(Fighter* this_fp, HitCapsule* hit,
                                            Fighter* victim_fp)
 {
@@ -1311,6 +1585,12 @@ static inline void updateFighterGrabTarget(Fighter* this_fp, HitCapsule* hit,
 }
 
 /// Checks for grabbable targets
+/**
+ * @brief Tests grab hitboxes against all opposing fighters on the stage.
+ * @details Called from procGrabColl (priority 12). Tests hitboxes with element HitElement_Catch
+ * against opponent hurtboxes with is_grabbable set, selecting the closest valid victim.
+ * @param this_gobj Attacking fighter GObj performing the grab check
+ */
 void ftColl_80078A2C(Fighter_GObj* this_gobj)
 {
     Fighter* this_fp;
@@ -1378,6 +1658,14 @@ void ftColl_80078A2C(Fighter_GObj* this_gobj)
     }
 }
 
+/**
+ * @brief Main combat collision loop testing attack hitboxes against opponents, shields, reflectors, and hurtboxes.
+ * @details Called from procAttackColl (priority 13). Tests active hitboxes against all other fighters:
+ * 1. Clank check: grounded hitbox vs grounded hitbox within 9% damage threshold (ftColl_8007699C).
+ * 2. Shield check: hitbox vs active shield bubble with facing direction test (ftColl_80076CBC).
+ * 3. Hurtbox check: hitbox vs hurtbox capsules, testing phantom vs full hits (ftColl_80076ED8).
+ * @param this_gobj Attacking fighter GObj
+ */
 void ftColl_80078C70(Fighter_GObj* this_gobj)
 {
     Fighter* this_fp;
@@ -1729,12 +2017,19 @@ void ftColl_80078C70(Fighter_GObj* this_gobj)
     }
 }
 
+/**
+ * @brief Non-inlined wrapper for item clanking check.
+ */
 static inline void ftColl_80077970_dontinline(Item* item, HitCapsule* item_hit,
                                               Fighter* fp, HitCapsule* hit)
 {
     ftColl_80077970(item, item_hit, fp, hit);
 }
 
+/**
+ * @brief Tests active item and projectile hitboxes against the fighter's shields, reflectors, and hurtboxes.
+ * @param gobj Defending fighter GObj
+ */
 void ftColl_8007925C(Fighter_GObj* gobj)
 { // clang-format off
     u32 i, j, n, m;
@@ -2057,6 +2352,14 @@ void ftColl_8007925C(Fighter_GObj* gobj)
 
 /// Select the accumulated-damage count for knockback (shared by the
 /// ftColl_80079AB0 family).
+/**
+ * @brief Returns accumulated damage percent used in the Melee knockback formula.
+ * @details In Stamina Mode (fp->x2225_b7), substitutes fixed stamina damage constants
+ * (ftd->x6D4 / x6D8) instead of percentage.
+ * @param fp Fighter data
+ * @param ftd Pointer to common fighter data
+ * @return Accumulated damage percent or stamina constant
+ */
 static inline s32 ftColl_GetDamageCount(Fighter* fp, ftCommonData* ftd)
 {
     if (fp->x2225_b7) {
@@ -2081,6 +2384,23 @@ static inline s32 ftColl_GetDamageCount(Fighter* fp, ftCommonData* ftd)
                    (ftd)->x120)) +                                            \
                  (hit)->x2C))))
 
+/**
+ * @brief Evaluates the core Melee knockback formula.
+ * @details Formula:
+ * Knockback = defense * attack * match_ratio * (0.01 * KBG * (scaling_terms) + BKB)
+ * Where scaling_terms incorporates target percent, attack damage, and victim weight:
+ *   weight_term = (ftd->xF8 - (w * ftd->xF8) / (1.0 + w))
+ * If fixed/set knockback is defined (hit->x28 != 0), it replaces the percent scaling terms.
+ * Total knockback is clamped to ftd->x108.
+ * @param fp Defending fighter data
+ * @param hit Offensive hitbox capsule
+ * @param unk_count Stale move scaling factor
+ * @param arg3 Match damage ratio multiplier (gm_8016B248)
+ * @param attack Attacker attack ratio multiplier (handicap)
+ * @param defense Defender defense ratio multiplier (handicap)
+ * @param weight Defender character weight
+ * @return Calculated knockback velocity magnitude (capped at ftd->x108)
+ */
 float ftColl_80079AB0(Fighter* fp, HitCapsule* hit, u32 unk_count, float arg3,
                       float attack, float defense, float weight)
 {
@@ -2116,6 +2436,14 @@ float ftColl_80079AB0(Fighter* fp, HitCapsule* hit, u32 unk_count, float arg3,
     return result;
 }
 
+/**
+ * @brief Computes knockback for a fighter-on-fighter combat hit.
+ * @param fp Defending fighter data
+ * @param attacker Attacking fighter data
+ * @param hit Offensive hitbox capsule
+ * @param unk_count Move staleness factor
+ * @return Calculated knockback magnitude
+ */
 float ftColl_80079C70(Fighter* fp, Fighter* attacker, HitCapsule* hit,
                       int unk_count)
 {
@@ -2125,6 +2453,13 @@ float ftColl_80079C70(Fighter* fp, Fighter* attacker, HitCapsule* hit,
                            Player_GetDefenseRatio(fp->player_idx), co->weight);
 }
 
+/**
+ * @brief Computes unscaled raw knockback magnitude (attack=1, defense=1, ratio=1).
+ * @param fp Defending fighter data
+ * @param hit Offensive hitbox capsule
+ * @param unk_count Staleness multiplier
+ * @return Raw knockback magnitude
+ */
 float ftColl_80079EA8(Fighter* fp, HitCapsule* hit, u32 unk_count)
 {
     ftCommonData* ftd = p_ftCommonData;
@@ -2165,6 +2500,15 @@ float ftColl_80079EA8(Fighter* fp, HitCapsule* hit, u32 unk_count)
     return result;
 }
 
+/**
+ * @brief Spawns visual impact particles (sparks, fire, slash, electric, etc.) based on hit element and severity.
+ * @param gobj Fighter GObj
+ * @param effect Particle effect ID
+ * @param pos Contact world position
+ * @param severity Hit severity level
+ * @param dmg Damage amount
+ * @param kb Calculated knockback magnitude
+ */
 static inline void spawnHitEffect(Fighter_GObj* gobj, int effect, Vec3* pos,
                                   u32 severity, u32 dmg, float kb)
 {
@@ -2206,6 +2550,18 @@ struct ftColl_8007A06C_best_kb {
     float v;
 };
 
+/**
+ * @brief Resolves simultaneous hits on a fighter, selecting the attack producing highest knockback.
+ * @details In Melee, when multiple hitboxes connect on the same frame, the game evaluates all
+ * candidates in the damage log and applies the hit with maximum knockback (best_kb).
+ * - Angle 362 (0x16A): Radial trajectory away from hitbox center (atan2(dy, abs_dx)).
+ * - Electric element: Multiplies hitlag vibration by 1.5x (p_ftCommonData->x1A4).
+ * @param gobj Defending fighter GObj
+ * @param dmg_ptr Pointer to output DmgResult structure
+ * @param log Array of DmgLogEntry records
+ * @param idx Number of logged hits
+ * @param arg4 Effect spawn flag
+ */
 void ftColl_8007A06C(Fighter_GObj* gobj, void* dmg_ptr, void* log, size_t idx,
                      int arg4)
 {
@@ -2359,6 +2715,7 @@ void ftColl_8007A06C(Fighter_GObj* gobj, void* dmg_ptr, void* log, size_t idx,
         break;
     }
 
+    // Angle 362 (0x16A): Radial knockback trajectory away from hitbox center
     if ((u32) best_entry->xC.hit0->kb_angle == 0x16A) {
         FighterHurtCapsule* hurt = best_entry->x10.hurt1;
         float dx, dy, abs_dx;
@@ -2442,17 +2799,26 @@ void ftColl_8007A06C(Fighter_GObj* gobj, void* dmg_ptr, void* log, size_t idx,
         break;
     }
 
+    // Electric element: Multiplies hitlag vibration duration by 1.5x (p_ftCommonData->x1A4)
     if (out->element == HitElement_Electric) {
         fp->x1960_vibrateMult = p_ftCommonData->x1A4;
     }
 }
 
+/**
+ * @brief Updates bone-relative hitbox world positions from skeletal joint transforms.
+ * @param gobj Pointer to fighter GObj
+ */
 void ftColl_8007AB48(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftColl_8007A06C(gobj, &fp->dmg.facing_dir_1, dmg_log0, dmg_log0_idx, 1);
 }
 
+/**
+ * @brief Updates hitboxes and performs capsule sweep interpolation between frames.
+ * @param gobj Pointer to fighter GObj
+ */
 void ftColl_8007AB80(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -2461,6 +2827,12 @@ void ftColl_8007AB80(Fighter_GObj* gobj)
     fp->dmg.x18a0 = fp->dmg.x187c;
 }
 
+/**
+ * @brief Scales hitbox base damage by character scale factor and stale-move reduction queue.
+ * @param arg0 Hitbox capsule to update
+ * @param arg1 Base unscaled damage integer
+ * @param arg2 Fighter GObj owning the hitbox
+ */
 void ftColl_8007ABD0(HitCapsule* arg0, u32 arg1, Fighter_GObj* arg2)
 {
     Fighter* fp;
@@ -2479,6 +2851,13 @@ void ftColl_8007ABD0(HitCapsule* arg0, u32 arg1, Fighter_GObj* arg2)
                                (s32) fp->x206C_attack_instance, scaled_dmg);
 }
 
+/**
+ * @brief Tests if knockback angle is a meteor smash or spike angle.
+ * @details Returns true if kb_angle is not 361 (Sakurai angle) and lies within meteor range
+ * (p_ftCommonData->unk_kb_angle_min to unk_kb_angle_max, typically 230 to 310 degrees).
+ * @param kb_angle Knockback trajectory angle in degrees
+ * @return True if meteor smash / spike angle
+ */
 bool ftColl_8007AC68(u32 kb_angle)
 {
     if (kb_angle != 361 && p_ftCommonData->unk_kb_angle_min <= kb_angle &&
@@ -2489,6 +2868,12 @@ bool ftColl_8007AC68(u32 kb_angle)
     return false;
 }
 
+/**
+ * @brief Sets hitbox knockback trajectory angle and flags meteor smash status.
+ * @param arg0 Hitbox capsule
+ * @param arg1 Angle in degrees (0-360, or 361 for Sakurai angle)
+ * @param arg2 Fighter GObj owning the hitbox
+ */
 void ftColl_8007AC9C(HitCapsule* arg0, int arg1, Fighter_GObj* arg2)
 {
     Fighter* fp = arg2->user_data;
@@ -2502,6 +2887,11 @@ void ftColl_8007AC9C(HitCapsule* arg0, int arg1, Fighter_GObj* arg2)
     }
 }
 
+/**
+ * @brief Updates previous and current hitbox world position coordinates (x4C, x58).
+ * @param fp Fighter data
+ * @param arg1 Hitbox capsule
+ */
 void ftColl_8007AD18(Fighter* fp, HitCapsule* arg1)
 {
     Vec3 sp10;
@@ -2542,6 +2932,11 @@ void ftColl_8007AD18(Fighter* fp, HitCapsule* arg1)
     }
 }
 
+/**
+ * @brief Updates hurtbox capsule world positions from skeletal joint matrices.
+ * @details Called from procCollPos (priority 9) to sync hurtboxes with current animation pose.
+ * @param gobj Pointer to fighter GObj
+ */
 void ftColl_8007AE80(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -2551,21 +2946,37 @@ void ftColl_8007AE80(Fighter_GObj* gobj)
     }
 }
 
+/**
+ * @brief Toggles hurtbox active state.
+ * @param gobj Pointer to fighter GObj
+ */
 void ftColl_8007AEE0(Fighter_GObj* gobj)
 {
     GET_FIGHTER(gobj)->shield_hit.skip_update_pos = false;
 }
 
+/**
+ * @brief Enables reflector bubble collision update.
+ * @param gobj Pointer to fighter GObj
+ */
 void ftColl_8007AEF8(Fighter_GObj* gobj)
 {
     GET_FIGHTER(gobj)->reflect_hit.skip_update_pos = false;
 }
 
+/**
+ * @brief Enables absorber bubble collision update (PSI Magnet, Oil Panic bucket).
+ * @param gobj Pointer to fighter GObj
+ */
 void ftColl_8007AF10(Fighter_GObj* gobj)
 {
     GET_FIGHTER(gobj)->absorb_hit.skip_update_pos = false;
 }
 
+/**
+ * @brief Deactivates all hitboxes upon motion state transition.
+ * @param gobj Pointer to fighter GObj
+ */
 void ftColl_8007AF28(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -2575,6 +2986,10 @@ void ftColl_8007AF28(Fighter_GObj* gobj)
     }
 }
 
+/**
+ * @brief Deactivates hitboxes without clearing persistent hitbox flags.
+ * @param gobj Pointer to fighter GObj
+ */
 void ftColl_8007AF60(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -2586,11 +3001,20 @@ void ftColl_8007AF60(Fighter_GObj* gobj)
     }
 }
 
+/**
+ * @brief Deactivates a specific hitbox capsule by array index.
+ * @param gobj Pointer to fighter GObj
+ * @param hit_idx Hitbox array index (0-3)
+ */
 void ftColl_8007AFC8(Fighter_GObj* gobj, int hit_idx)
 {
     lbColl_80008428(&GET_FIGHTER(gobj)->x914[hit_idx]);
 }
 
+/**
+ * @brief Disables all attack hitboxes on a fighter.
+ * @param gobj Pointer to fighter GObj
+ */
 void ftColl_8007AFF8(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -2601,6 +3025,11 @@ void ftColl_8007AFF8(Fighter_GObj* gobj)
     fp->x2219_b3 = false;
 }
 
+/**
+ * @brief Sets hitbox state flags across all active hitboxes.
+ * @param gobj Pointer to fighter GObj
+ * @param arg1 Hitbox state flags
+ */
 void ftColl_8007B064(Fighter_GObj* gobj, int arg1)
 {
     HitCapsule* capsule;
@@ -2611,6 +3040,15 @@ void ftColl_8007B064(Fighter_GObj* gobj, int arg1)
     fp->x2219_b3 = true;
 }
 
+/**
+ * @brief Sets vulnerability state for all hurtboxes on a fighter.
+ * @details States:
+ * - HurtCapsule_Normal (0): Vulnerable to attacks
+ * - HurtCapsule_Invincible (1): Takes no damage, attacks bounce/spark
+ * - HurtCapsule_Intangible (2): Attacks pass completely through (phasing)
+ * @param gobj Pointer to fighter GObj
+ * @param arg1 Desired HurtCapsuleState
+ */
 void ftColl_8007B0C0(Fighter_GObj* gobj, HurtCapsuleState arg1)
 {
     Fighter* fp = gobj->user_data;
@@ -2627,6 +3065,12 @@ void ftColl_8007B0C0(Fighter_GObj* gobj, HurtCapsuleState arg1)
 }
 
 /// Set hurt capsule state
+/**
+ * @brief Sets vulnerability state for a specific bone hurtbox.
+ * @param fighter_gobj Pointer to fighter GObj
+ * @param bone_id Bone index identifying the target hurtbox
+ * @param state Desired HurtCapsuleState
+ */
 void ftColl_8007B128(Fighter_GObj* fighter_gobj, int bone_id,
                      HurtCapsuleState state)
 {
@@ -2649,6 +3093,12 @@ void ftColl_8007B128(Fighter_GObj* fighter_gobj, int bone_id,
 }
 
 /// @todo @p shield is #AbsorbDesc, and #AbsorbDesc is part of #ShieldDesc
+/**
+ * @brief Configures shield bubble collision description and callback.
+ * @param gobj Pointer to fighter GObj
+ * @param shield Pointer to shield descriptor parameters
+ * @param cb Event callback when shield is struck
+ */
 void ftColl_8007B1B8(Fighter_GObj* gobj, ShieldDesc* shield, HSD_GObjEvent cb)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -2663,6 +3113,12 @@ void ftColl_8007B1B8(Fighter_GObj* gobj, ShieldDesc* shield, HSD_GObjEvent cb)
     fp->shield_hit.offset = shield->pos;
 }
 
+/**
+ * @brief Configures reflector bubble collision description and callback.
+ * @param gobj Pointer to fighter GObj
+ * @param reflect Pointer to reflector descriptor parameters
+ * @param cb Event callback triggered when reflection occurs
+ */
 void ftColl_CreateReflectHit(Fighter_GObj* gobj, ReflectDesc* reflect,
                              HSD_GObjEvent cb)
 {
@@ -2679,6 +3135,11 @@ void ftColl_CreateReflectHit(Fighter_GObj* gobj, ReflectDesc* reflect,
     fp->reflect_hit.offset = reflect->x8_offset;
 }
 
+/**
+ * @brief Configures absorber bubble collision description (PSI Magnet, Bucket).
+ * @param gobj Pointer to fighter GObj
+ * @param absorb Pointer to absorber descriptor parameters
+ */
 void ftColl_CreateAbsorbHit(Fighter_GObj* gobj, AbsorbDesc* absorb)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -2689,6 +3150,10 @@ void ftColl_CreateAbsorbHit(Fighter_GObj* gobj, AbsorbDesc* absorb)
     fp->absorb_hit.offset = absorb->x4_offset;
 }
 
+/**
+ * @brief Allocates and initializes hurtbox capsule arrays from character data.
+ * @param gobj Pointer to fighter GObj
+ */
 void ftColl_8007B320(Fighter_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
@@ -2730,6 +3195,10 @@ void ftColl_8007B320(Fighter_GObj* gobj)
     }
 }
 
+/**
+ * @brief Reinitializes hurtbox skeletal joint and bone references.
+ * @param gobj Pointer to fighter GObj
+ */
 void ftColl_8007B4E0(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -2752,6 +3221,12 @@ void ftColl_8007B4E0(Fighter_GObj* gobj)
     fp->x221A_b6 = false;
 }
 
+/**
+ * @brief Initializes a single hurtbox capsule structure from initialization descriptor.
+ * @param fp Fighter instance data
+ * @param hurt Destination FighterHurtCapsule structure
+ * @param init Initialization descriptor from character data
+ */
 void ftColl_HurtboxInit(Fighter* fp, FighterHurtCapsule* hurt,
                         ftHurtboxInit* init)
 {
@@ -2766,6 +3241,11 @@ void ftColl_HurtboxInit(Fighter* fp, FighterHurtCapsule* hurt,
     fp->x221A_b6 = true;
 }
 
+/**
+ * @brief Updates hurtbox vulnerability state based on motion state bitflags.
+ * @param gobj Pointer to fighter GObj
+ * @param arg1 Motion state vulnerability flags
+ */
 void ftColl_8007B62C(Fighter_GObj* gobj, enum_t arg1)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -2783,6 +3263,10 @@ void ftColl_8007B62C(Fighter_GObj* gobj, enum_t arg1)
     }
 }
 
+/**
+ * @brief Resets all hurtbox vulnerability states to default (HurtCapsule_Normal).
+ * @param gobj Pointer to fighter GObj
+ */
 void ftColl_8007B6A0(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -2792,11 +3276,18 @@ void ftColl_8007B6A0(Fighter_GObj* gobj)
     ftCo_800BFFD0(fp, 9, false);
 }
 
+/**
+ * @brief Helper returning default hurtbox state.
+ */
 static inline enum_t inlineC0(Fighter* fp)
 {
     return ftCo_800C0694(fp);
 }
 
+/**
+ * @brief Updates Environment Collision Box (ECB) position and terrain collision flags.
+ * @param gobj Pointer to fighter GObj
+ */
 void ftColl_8007B6EC(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -2816,6 +3307,11 @@ void ftColl_8007B6EC(Fighter_GObj* gobj)
     }
 }
 
+/**
+ * @brief Modifies hurtbox vulnerability state.
+ * @param gobj Pointer to fighter GObj
+ * @param arg1 State flag
+ */
 void ftColl_8007B760(Fighter_GObj* gobj, int arg1)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -2826,6 +3322,11 @@ void ftColl_8007B760(Fighter_GObj* gobj, int arg1)
     ftCo_800BFFD0(fp, 9, 0);
 }
 
+/**
+ * @brief Modifies hurtbox vulnerability state for a specific bone.
+ * @param gobj Pointer to fighter GObj
+ * @param arg1 Target bone ID
+ */
 void ftColl_8007B7A4(Fighter_GObj* gobj, int arg1)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -2836,6 +3337,11 @@ void ftColl_8007B7A4(Fighter_GObj* gobj, int arg1)
     ftCo_800BFFD0(fp, 9, 0);
 }
 
+/**
+ * @brief Sets collision hit status integer flag.
+ * @param fp Fighter instance data
+ * @param arg1 Hit status flag
+ */
 void ftColl_8007B7FC(Fighter* fp, int arg1)
 {
     fp->x221D_b6 = true;
@@ -2846,6 +3352,11 @@ void ftColl_8007B7FC(Fighter* fp, int arg1)
     }
 }
 
+/**
+ * @brief Returns the fighter's current composite hit status.
+ * @param gobj Pointer to fighter GObj
+ * @return Hit status integer (0 = normal, 1 = invincible, 2 = intangible)
+ */
 s32 ftColl_8007B868(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -2859,12 +3370,22 @@ s32 ftColl_8007B868(Fighter_GObj* gobj)
     return ret;
 }
 
+/**
+ * @brief Updates world position of a hitbox capsule.
+ * @param hit Hitbox capsule to update
+ * @param vec World offset vector
+ */
 void ftColl_8007B8A8(HitCapsule* hit, Vec3* vec)
 {
     hit->jobj = NULL;
     hit->b_offset = *vec;
 }
 
+/**
+ * @brief Sets the grabber fighter GObj on a grabbed victim.
+ * @param fp Defending victim fighter data
+ * @param grabber_gobj Attacking grabber fighter GObj
+ */
 void ftColl_8007B8CC(Fighter* fp, Fighter_GObj* grabber_gobj)
 {
     Fighter* grabber_fp = GET_FIGHTER(grabber_gobj);
@@ -2873,6 +3394,10 @@ void ftColl_8007B8CC(Fighter* fp, Fighter_GObj* grabber_gobj)
     fp->grabber_unk1 = grabber_fp->player_idx;
 }
 
+/**
+ * @brief Frees and deallocates all collision resources attached to a fighter.
+ * @param gobj Pointer to fighter GObj being destroyed
+ */
 void ftColl_8007B8E8(Fighter_GObj* gobj)
 {
     Fighter_GObj* curr;
@@ -2890,6 +3415,11 @@ void ftColl_8007B8E8(Fighter_GObj* gobj)
 
 s32 func_800C0A28(HSD_GObj*, u32, s32); /* extern */
 
+/**
+ * @brief Computes wind offset displacement vector acting on a fighter.
+ * @param fgp Fighter GObj pointer
+ * @param out_wind Vector to store resultant wind velocity
+ */
 void ftColl_GetWindOffsetVec(HSD_GObj* fgp, Vec3* out_wind)
 {
     Fighter* fp = GET_FIGHTER(fgp);
@@ -2912,6 +3442,10 @@ void ftColl_GetWindOffsetVec(HSD_GObj* fgp, Vec3* out_wind)
     }
 }
 
+/**
+ * @brief Checks subterranean stage bury devices.
+ * @param gobj Pointer to fighter GObj
+ */
 void ftColl_8007BA0C(Fighter_GObj* gobj)
 {
     if (!GET_FIGHTER(gobj)->x2219_b1) {
@@ -2932,6 +3466,11 @@ void ftColl_8007BA0C(Fighter_GObj* gobj)
     }
 }
 
+/**
+ * @brief Returns composite hit vulnerability status.
+ * @param fp Fighter data
+ * @return Hit status integer (0 = normal, 1 = invincible, 2 = intangible)
+ */
 static inline int ftColl_GetHitStatus(Fighter* fp)
 {
     int ret = fp->x221D_b6 ? 1 : 0;
@@ -2944,6 +3483,10 @@ static inline int ftColl_GetHitStatus(Fighter* fp)
     return ret;
 }
 
+/**
+ * @brief Tests active item and projectile hitboxes against the fighter.
+ * @param gobj Pointer to defending fighter GObj
+ */
 void ftColl_8007BAC0(Fighter_GObj* gobj)
 {
     int max;
@@ -2985,6 +3528,12 @@ void ftColl_8007BAC0(Fighter_GObj* gobj)
     }
 }
 
+/**
+ * @brief Computes Lip's Stick flower damage accumulation.
+ * @details If hit by Lip's Stick (HitElement_Lipstick), accumulates damage for flower effect.
+ * @param gobj Pointer to fighter GObj
+ * @return Accumulated Lip's Stick damage float
+ */
 float ftColl_8007BBCC(UNUSED Fighter_GObj* gobj)
 {
     float dmg = 0;
@@ -3016,6 +3565,12 @@ float ftColl_8007BBCC(UNUSED Fighter_GObj* gobj)
     return dmg;
 }
 
+/**
+ * @brief Evaluates distance to a grabbable item and stores closest item as target.
+ * @param fp Fighter data
+ * @param hit Hitbox capsule
+ * @param ip Item data
+ */
 static inline void updateItemGrabTarget(Fighter* fp, HitCapsule* hit, Item* ip)
 {
     float dist;
@@ -3033,6 +3588,10 @@ static inline void updateItemGrabTarget(Fighter* fp, HitCapsule* hit, Item* ip)
     }
 }
 
+/**
+ * @brief Tests grab hitboxes against nearby grabbable items on the stage.
+ * @param gobj Pointer to fighter GObj
+ */
 void ftColl_8007BC90(Fighter_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
@@ -3097,6 +3656,10 @@ void ftColl_8007BC90(Fighter_GObj* gobj)
     }
 }
 
+/**
+ * @brief Applies collision pushback and spawns directional hit effects.
+ * @param gobj Pointer to fighter GObj
+ */
 void ftColl_8007BE3C(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);

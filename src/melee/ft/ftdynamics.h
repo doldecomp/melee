@@ -1,3 +1,9 @@
+/**
+ * @file ftdynamics.h
+ * @brief Fighter secondary bone dynamics simulation
+ * @details Handles physics simulation for hair, capes, scarves, and clothing.
+ * Module prefix: ftCo (Common)
+ */
 #ifndef GALE01_09CB40
 #define GALE01_09CB40
 
@@ -6,12 +12,28 @@
 #include <melee/ft/forward.h>
 #include <melee/ft/kinds/ftKirby/forward.h>
 
+/**
+ * @brief Initialize base dynamics for a fighter
+ * @param fp Fighter state
+ */
 /* 09CF84 */ void ftCo_8009CF84(Fighter* fp);
+
 /* 09D074 */ void ftCo_8009D074(Fighter* fp);
 /* 09D704 */ void ftCo_8009D704(Fighter* fp);
 /* 09DC54 */ void ftCo_8009DC54(Fighter* fp);
+
+/**
+ * @brief Process bone dynamics updates for the current frame
+ * @param gobj Fighter GObj
+ */
 /* 09E0A8 */ void ftCo_8009E0A8(HSD_GObj* gobj);
+
+/**
+ * @brief Clean up and unload dynamic bones
+ * @param fp Fighter state
+ */
 /* 09E0D4 */ void ftCo_UnloadDynamicBones(Fighter* fp);
+
 /* 09E140 */ void ftCo_8009E140(Fighter* fp, bool);
 /* 09E318 */ enum_t ftCo_8009E318(Fighter_GObj*, Fighter_Part, float);
 /* 09E714 */ bool ftCo_8009E714(Fighter_GObj* gobj, Fighter_Part part,

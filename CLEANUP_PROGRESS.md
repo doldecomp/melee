@@ -25,12 +25,12 @@
 - ❌ ft/fighter.c — Fighter initialization, state machine, main loop
 - ✅ ft/ftaction.c — Action state transition logic
 - ❌ ft/ftanim.c — Animation system
-- ❌ ft/ftcoll.c — Fighter collision detection
+- ✅ ft/ftcoll.c — Fighter collision detection
 - ❌ ft/ftcommon.c — Common fighter utilities
 - ✅ ft/ftdata.c — Fighter data loading
 - ❌ ft/ftlib.c — Fighter library functions
 - ❌ ft/ftparts.c — Fighter model parts management
-- ❌ ft/ftcmdscript.c — Subaction command script interpreter
+- ✅ ft/ftcmdscript.c — CPU command script interpreter & input VM
 - ❌ ft/ftdynamics.c — Physics/bone dynamics
 - ❌ ft/ftcamera.c — Fighter camera tracking
 - ❌ ft/ftchangeparam.c — Parameter modification (items, etc.)

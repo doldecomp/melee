@@ -1,3 +1,9 @@
+/**
+ * @file ftdynamics.c
+ * @brief Fighter secondary bone dynamics simulation
+ * @details Handles physics simulation for hair, capes, scarves, and clothing.
+ * Module prefix: ftCo (Common)
+ */
 #include "ftdynamics.h"
 
 #include <Runtime/platform.h>
@@ -83,6 +89,11 @@ void ftCo_8009CB40(Fighter* fp, ssize_t bone_idx, bool arg2, FigaTree* arg3)
     }
 }
 
+
+/**
+ * @brief Initialize base dynamics for a fighter
+ * @param fp Fighter state
+ */
 void ftCo_8009CF84(Fighter* fp)
 {
     ftData* data = fp->ft_data;
@@ -362,7 +373,7 @@ void ftCo_8009DC54(Fighter* fp)
     }
 }
 
-void ftCo_8009DD94(Fighter_GObj* gobj, bool arg1)
+static void ftCo_8009DD94(Fighter_GObj* gobj, bool arg1)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ssize_t dynamics_num = fp->dynamics_num;
@@ -436,11 +447,21 @@ void ftCo_8009DD94(Fighter_GObj* gobj, bool arg1)
     }
 }
 
+
+/**
+ * @brief Process bone dynamics updates for the current frame
+ * @param gobj Fighter GObj
+ */
 void ftCo_8009E0A8(Fighter_GObj* gobj)
 {
     ftCo_8009DD94(gobj, GET_FIGHTER(gobj)->x2228_b1);
 }
 
+
+/**
+ * @brief Clean up and unload dynamic bones
+ * @param fp Fighter state
+ */
 void ftCo_UnloadDynamicBones(Fighter* fp)
 {
     ssize_t i;
@@ -466,7 +487,7 @@ void ftCo_8009E140(Fighter* fp, bool arg1)
     }
 }
 
-HSD_JObj* ftCo_8009E1D4(HSD_JObj* arg0, HSD_JObj* arg1, HSD_JObj* arg2)
+static HSD_JObj* ftCo_8009E1D4(HSD_JObj* arg0, HSD_JObj* arg1, HSD_JObj* arg2)
 {
     HSD_JObj* temp;
     if (arg0 == arg2) {
@@ -527,7 +548,7 @@ exit_false: {
 }
 }
 
-void ftCo_8009E4A8(Fighter* fp)
+static void ftCo_8009E4A8(Fighter* fp)
 {
     float frame = fp->cur_anim_frame;
     float speed = fp->frame_speed_mul;
@@ -558,7 +579,7 @@ void ftCo_8009E4A8(Fighter* fp)
     }
 }
 
-void ftCo_8009E614(Fighter* fp)
+static void ftCo_8009E614(Fighter* fp)
 {
     if ((fp->kind == Ft_Kind_Mars || fp->kind == Ft_Kind_Emblem) &&
         !fp->x2227_b6)
