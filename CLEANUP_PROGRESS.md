@@ -119,7 +119,7 @@
 - ❌ it/itanimlist.c — Item animation lists
 - ❌ it/itdrop.c — Item dropping logic
 - ❌ it/iteffect.c — Item particle effects
-- ❌ it/itzako.c — Fighting Wireframe items logic
+- ✅ it/itzako.c — Fighting Wireframe items logic
 - ❌ it/it_26B1.c — Item physics state group 1
 - ❌ it/it_2725.c — Item physics state group 2
 - ❌ it/it_279C.c — Item physics state group 3
