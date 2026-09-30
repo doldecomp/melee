@@ -1,3 +1,9 @@
+/**
+ * @file ftmaterial.c
+ * @brief Fighter material and texture state system implementation
+ * @details Handles the material and texture state for fighters, including color overlays, visibility, and rendering modes like metal or shadows.
+ * Module prefix: ft
+ */
 #include "ftmaterial.h"
 
 #include "fighter.h"
@@ -47,6 +53,9 @@ static HSD_TECnst ftMaterial_803C6A44 = {
     HSD_TE_CNST, NULL, NULL, HSD_TE_RGB, HSD_TE_U8, 0xFF, 0xFF, 0, 0,
 };
 
+/**
+ * @brief Initializes the fighter MObj info struct with custom setup callbacks.
+ */
 void ftMaterial_800BF260(void)
 {
     hsdInitClassInfo(&ftMObj.parent, &hsdMObj.parent,
@@ -55,6 +64,12 @@ void ftMaterial_800BF260(void)
     ftMObj.setup = (HSD_MObjSetupFunc) (Event) ftMaterial_800BF2B8;
 }
 
+/**
+ * @brief Main material setup callback for fighter meshes. Configures rendering flags for metal, shadow, toon, and custom overlays.
+ * @param mobj The material object being set up
+ * @param rendermode The current render mode flags
+ * @param unused Unused parameter
+ */
 void ftMaterial_800BF2B8(HSD_MObj* mobj, u32 rendermode, u32 unused)
 {
     Fighter* fp;
@@ -62,8 +77,8 @@ void ftMaterial_800BF2B8(HSD_MObj* mobj, u32 rendermode, u32 unused)
     HSD_TExp texp;
     HSD_PEDesc pe;
     HSD_TObj** cur_tobj;
-    HSD_TExp* texp1;
-    HSD_PEDesc* pe_p;
+    HSD_TExp* new_texp;
+    HSD_PEDesc* pe_desc;
 
     fp = GET_FIGHTER(HSD_GObj_804D7814);
 
@@ -115,10 +130,10 @@ void ftMaterial_800BF2B8(HSD_MObj* mobj, u32 rendermode, u32 unused)
                 rendermode |= RENDER_NO_ZUPDATE | RENDER_XLU;
             }
             {
-                HSD_TExp* new_texp =
+                HSD_TExp* temp_texp =
                     ftMaterial_800BF534(fp, mobj, &texp, rendermode);
-                texp1 = new_texp;
-                ftMaterial_800BF6BC(fp, mobj, texp1);
+                new_texp = temp_texp;
+                ftMaterial_800BF6BC(fp, mobj, new_texp);
                 if (fp->x2223_b2 && !fp->x2223_b3) {
                     rendermode |= RENDER_NO_ZUPDATE;
                 }
@@ -128,7 +143,7 @@ void ftMaterial_800BF2B8(HSD_MObj* mobj, u32 rendermode, u32 unused)
                         pe.dst_alpha = 0;
                         pe.type = 0;
                         pe.src_factor = 4;
-                        pe_p = &pe;
+                        pe_desc = &pe;
                         pe.dst_factor = 5;
                         pe.logic_op = 15;
                         pe.z_comp = 3;
@@ -138,11 +153,11 @@ void ftMaterial_800BF2B8(HSD_MObj* mobj, u32 rendermode, u32 unused)
                         pe.alpha_comp1 = 7;
                         pe.ref1 = 0;
                     } else {
-                        pe_p = mobj->pe;
+                        pe_desc = mobj->pe;
                     }
-                    HSD_SetupRenderModeWithCustomPE(rendermode, pe_p);
+                    HSD_SetupRenderModeWithCustomPE(rendermode, pe_desc);
                 }
-                if (texp1 == NULL) {
+                if (new_texp == NULL) {
                     ftCo_8009F75C(fp, true);
                 }
             }
@@ -153,24 +168,32 @@ void ftMaterial_800BF2B8(HSD_MObj* mobj, u32 rendermode, u32 unused)
     }
 }
 
+/**
+ * @brief Configures TEV registers for fighter lighting overlays.
+ * @param fp Fighter instance
+ * @param mobj Material object
+ * @param texp Texture expression struct
+ * @param rendermode Render mode flags
+ * @return Updated texture expression pointer, or NULL
+ */
 HSD_TExp* ftMaterial_800BF534(Fighter* fp, HSD_MObj* mobj, HSD_TExp* texp,
                               u32 rendermode)
 {
     HSD_TevDesc sp_tevdesc;
-    s32 reg;
-    bool chk;
+    s32 color_reg;
+    bool is_reg_free;
     struct ft_MObjInfo* info = (struct ft_MObjInfo*) &ftMObj;
     ColorOverlay* overlay = ftCo_800C0658(fp);
 
     if (overlay->x7C_flag2 && overlay->x7C_light_enable) {
         if (!(rendermode & RENDER_XLU) && !fp->x2223_b2) {
             texp->cnst = info->texp_tmpl;
-            chk = lbGetFreeColorRegister(0, mobj, NULL);
-            reg = chk;
-            if (reg == -1) {
+            is_reg_free = lbGetFreeColorRegister(0, mobj, NULL);
+            color_reg = is_reg_free;
+            if (color_reg == -1) {
                 HSD_ASSERTREPORT(240, 0, "can't find free color register!\n");
             }
-            texp->cnst.reg = (u8) reg;
+            texp->cnst.reg = (u8) color_reg;
             texp->cnst.val = &overlay->x50_light_color;
             HSD_TExpSetReg(texp);
 
@@ -178,15 +201,15 @@ HSD_TExp* ftMaterial_800BF534(Fighter* fp, HSD_MObj* mobj, HSD_TExp* texp,
             sp_tevdesc.stage = HSD_StateAssignTev();
             sp_tevdesc.color = 2;
             sp_tevdesc.u.tevconf.clr_a = GX_CC_ZERO;
-            sp_tevdesc.u.tevconf.clr_b = lb_8000CC8C(reg);
+            sp_tevdesc.u.tevconf.clr_b = lb_8000CC8C(color_reg);
             sp_tevdesc.u.tevconf.clr_c = GX_CC_RASA;
-            chk = false;
+            is_reg_free = false;
             sp_tevdesc.u.tevconf.clr_d = GX_CC_CPREV;
-            if (reg < 4) {
-                chk = true;
+            if (color_reg < 4) {
+                is_reg_free = true;
             }
-            if (chk) {
-                sp_tevdesc.u.tevconf.kcsel = lb_8000CCA4(reg);
+            if (is_reg_free) {
+                sp_tevdesc.u.tevconf.kcsel = lb_8000CCA4(color_reg);
             }
             HSD_SetupTevStage(&sp_tevdesc);
             return texp;
@@ -196,9 +219,15 @@ HSD_TExp* ftMaterial_800BF534(Fighter* fp, HSD_MObj* mobj, HSD_TExp* texp,
     return NULL;
 }
 
+/**
+ * @brief Configures TEV registers for fighter coloring and opacity states (e.g. damage flash, invisible).
+ * @param fp Fighter instance
+ * @param mobj Material object
+ * @param texp Texture expression struct
+ */
 void ftMaterial_800BF6BC(Fighter* fp, HSD_MObj* mobj, HSD_TExp* texp)
 {
-    GXColor sp168;
+    GXColor overlay_color;
     u8 _padA[84];
     HSD_TECnst sp_cnst1;
     u8 _padB[84];
@@ -206,30 +235,30 @@ void ftMaterial_800BF6BC(Fighter* fp, HSD_MObj* mobj, HSD_TExp* texp)
     HSD_TevDesc sp_tevdesc;
     GXColor color;
 
-    s32 chk1;
+    s32 has_overlay;
     s32 var_r0;
-    s32 reg1;
-    s32 reg2;
+    s32 free_color_reg1;
+    s32 free_color_reg2;
     s32 var_r3;
     ColorOverlay* overlay;
-    s32 var_r5;
+    s32 sub_color_idx;
     struct ft_MObjInfo* info = (struct ft_MObjInfo*) &ftMObj;
 
     if (!fp->x2223_b3) {
         overlay = ftCo_800C0658(fp);
-        chk1 = 0;
-        var_r5 = fp->sub_color;
+        has_overlay = 0;
+        sub_color_idx = fp->sub_color;
         if (fp->x2228_b0 && fp->x2224_b0) {
             if (fp->is_metal) {
-                var_r5 = 4;
+                sub_color_idx = 4;
             } else if (fp->x2227_b3) {
-                var_r5 = 5;
+                sub_color_idx = 5;
             }
         }
         if (fp->x2223_b2) {
-            chk1 = 1;
-            sp168 = fp->x610_color_rgba[1];
-        } else if (var_r5 != 0) {
+            has_overlay = 1;
+            overlay_color = fp->x610_color_rgba[1];
+        } else if (sub_color_idx != 0) {
             if (overlay->x7C_color_enable) {
                 u32 temp_alpha;
                 s32 inv_alpha;
@@ -241,21 +270,21 @@ void ftMaterial_800BF6BC(Fighter* fp, HSD_MObj* mobj, HSD_TExp* texp)
                 temp_alpha =
                     ((0xFF - fp_color->a) * (0xFF - color_hex->a)) / 255;
                 if ((s32) temp_alpha == 0xFF) {
-                    sp168 = overlay->x2C_hex;
+                    overlay_color = overlay->x2C_hex;
                 } else {
                     inv_alpha = 0xFF - temp_alpha;
                     temp_r8 = fp_color->r;
                     temp_r8 += (color_hex->a * (color_hex->r - temp_r8)) / 255;
                     temp_r7 = temp_r8 * 0xFF;
-                    sp168.r = (u8) (temp_r7 / inv_alpha);
-                    if (sp168.r != 0) {
-                        sp168.a = temp_r7 / sp168.r;
+                    overlay_color.r = (u8) (temp_r7 / inv_alpha);
+                    if (overlay_color.r != 0) {
+                        overlay_color.a = temp_r7 / overlay_color.r;
                     } else {
-                        sp168.a = ((inv_alpha - temp_r8) * 0xFF) / 255;
+                        overlay_color.a = ((inv_alpha - temp_r8) * 0xFF) / 255;
                     }
                     {
                         u8 temp_r8_3 = fp_color->g;
-                        sp168.g =
+                        overlay_color.g =
                             ((temp_r8_3 +
                               ((color_hex->a * (color_hex->g - temp_r8_3)) /
                                255)) *
@@ -264,7 +293,7 @@ void ftMaterial_800BF6BC(Fighter* fp, HSD_MObj* mobj, HSD_TExp* texp)
                     }
                     {
                         u8 temp_r6 = fp_color->b;
-                        sp168.b =
+                        overlay_color.b =
                             ((temp_r6 +
                               ((color_hex->a * (color_hex->b - temp_r6)) /
                                255)) *
@@ -272,26 +301,26 @@ void ftMaterial_800BF6BC(Fighter* fp, HSD_MObj* mobj, HSD_TExp* texp)
                             inv_alpha;
                     }
                 }
-                chk1 = 1;
+                has_overlay = 1;
             } else {
-                chk1 = 1;
-                sp168 = p_ftCommonData->sub_colors[var_r5 - 1];
+                has_overlay = 1;
+                overlay_color = p_ftCommonData->sub_colors[sub_color_idx - 1];
             }
         } else if (overlay->x7C_color_enable) {
-            chk1 = 1;
-            sp168 = overlay->x2C_hex;
+            has_overlay = 1;
+            overlay_color = overlay->x2C_hex;
         }
-        if (chk1 != 0) {
+        if (has_overlay != 0) {
             sp_cnst1 = info->texp_tmpl;
-            reg1 = lbGetFreeColorRegister(0, mobj, texp);
-            if (reg1 == -1) {
+            free_color_reg1 = lbGetFreeColorRegister(0, mobj, texp);
+            if (free_color_reg1 == -1) {
                 HSD_ASSERTREPORT(352, 0, "can't find free color register!\n");
             }
-            sp_cnst1.reg = (u8) reg1;
-            sp_cnst1.val = &sp168;
+            sp_cnst1.reg = (u8) free_color_reg1;
+            sp_cnst1.val = &overlay_color;
             HSD_TExpSetReg((HSD_TExp*) &sp_cnst1);
             sp_cnst1.next = texp;
-            if (reg1 < 4) {
+            if (free_color_reg1 < 4) {
                 var_r0 = 1;
             } else {
                 var_r0 = 0;
@@ -301,14 +330,14 @@ void ftMaterial_800BF6BC(Fighter* fp, HSD_MObj* mobj, HSD_TExp* texp)
             } else {
                 var_r3 = 0;
             }
-            reg2 = lbGetFreeColorRegister(var_r3, mobj, (HSD_TExp*) &sp_cnst1);
-            if (reg2 == -1) {
+            free_color_reg2 = lbGetFreeColorRegister(var_r3, mobj, (HSD_TExp*) &sp_cnst1);
+            if (free_color_reg2 == -1) {
                 HSD_ASSERTREPORT(366, 0,
                                  "can't find free color ratio register!\n");
             }
             if (fp->x61D != 0xFF) {
                 sp_cnst2 = info->texp_tmpl;
-                sp_cnst2.reg = (u8) reg2;
+                sp_cnst2.reg = (u8) free_color_reg2;
                 sp_cnst2.comp = 5;
                 sp_cnst2.idx = 3;
                 sp_cnst2.val = &fp->x61D;
@@ -316,42 +345,42 @@ void ftMaterial_800BF6BC(Fighter* fp, HSD_MObj* mobj, HSD_TExp* texp)
             } else {
                 sp_cnst1.next = NULL;
             }
-            sp_cnst1.reg = (u8) reg2;
-            color.r = sp168.a;
-            color.g = sp168.a;
-            color.b = sp168.a;
+            sp_cnst1.reg = (u8) free_color_reg2;
+            color.r = overlay_color.a;
+            color.g = overlay_color.a;
+            color.b = overlay_color.a;
             sp_cnst1.val = &color;
             HSD_TExpSetReg((HSD_TExp*) &sp_cnst1);
             sp_tevdesc = info->tevdesc_tmpl;
             sp_tevdesc.stage = HSD_StateAssignTev();
-            sp_tevdesc.u.tevconf.clr_b = lb_8000CC8C(reg1);
-            sp_tevdesc.u.tevconf.clr_c = lb_8000CC8C(reg2);
-            if (reg1 < 4) {
+            sp_tevdesc.u.tevconf.clr_b = lb_8000CC8C(free_color_reg1);
+            sp_tevdesc.u.tevconf.clr_c = lb_8000CC8C(free_color_reg2);
+            if (free_color_reg1 < 4) {
                 var_r0 = 1;
             } else {
                 var_r0 = 0;
             }
             if (var_r0 != 0) {
-                sp_tevdesc.u.tevconf.kcsel = lb_8000CCA4(reg1);
+                sp_tevdesc.u.tevconf.kcsel = lb_8000CCA4(free_color_reg1);
             } else {
-                if (reg2 < 4) {
+                if (free_color_reg2 < 4) {
                     var_r0 = 1;
                 } else {
                     var_r0 = 0;
                 }
                 if (var_r0 != 0) {
-                    sp_tevdesc.u.tevconf.kcsel = lb_8000CCA4(reg2);
+                    sp_tevdesc.u.tevconf.kcsel = lb_8000CCA4(free_color_reg2);
                 }
             }
             if (fp->x61D != 0xFF) {
-                sp_tevdesc.u.tevconf.alpha_d = lb_8000CD90(reg2);
-                if (reg2 < 4) {
+                sp_tevdesc.u.tevconf.alpha_d = lb_8000CD90(free_color_reg2);
+                if (free_color_reg2 < 4) {
                     var_r0 = 1;
                 } else {
                     var_r0 = 0;
                 }
                 if (var_r0 != 0) {
-                    sp_tevdesc.u.tevconf.kasel = lb_8000CDA8(reg2);
+                    sp_tevdesc.u.tevconf.kasel = lb_8000CDA8(free_color_reg2);
                 }
             }
             HSD_SetupTevStage(&sp_tevdesc);
@@ -359,71 +388,76 @@ void ftMaterial_800BF6BC(Fighter* fp, HSD_MObj* mobj, HSD_TExp* texp)
     }
 }
 
+/**
+ * @brief Iterates through all JObjs and DObjs of the fighter and forcefully overrides their diffuse color.
+ * @param gobj Fighter GObj
+ * @param diffuse The diffuse color to apply
+ */
 void ftMaterial_800BFB4C(Fighter_GObj* gobj, GXColor* diffuse)
 {
-    HSD_JObj* cur = GET_JOBJ(gobj);
+    HSD_JObj* curr_jobj = GET_JOBJ(gobj);
 
-    while (cur != NULL) {
-        HSD_DObj* dobj = HSD_JObjGetDObj(cur);
-        while (dobj != NULL) {
-            HSD_MObj* mobj = dobj != NULL ? dobj->mobj : NULL;
+    while (curr_jobj != NULL) {
+        HSD_DObj* curr_dobj = HSD_JObjGetDObj(curr_jobj);
+        while (curr_dobj != NULL) {
+            HSD_MObj* mobj = curr_dobj != NULL ? curr_dobj->mobj : NULL;
             if (mobj != NULL) {
                 if (mobj->mat != NULL) {
                     HSD_Material* mat = mobj->mat;
                     mat->diffuse = *diffuse;
                 }
             }
-            dobj = dobj != NULL ? dobj->next : NULL;
+            curr_dobj = curr_dobj != NULL ? curr_dobj->next : NULL;
         }
-        if (!(HSD_JObjGetFlags(cur) & JOBJ_INSTANCE)) {
+        if (!(HSD_JObjGetFlags(curr_jobj) & JOBJ_INSTANCE)) {
             HSD_JObj* child;
-            if (cur == NULL) {
+            if (curr_jobj == NULL) {
                 child = NULL;
             } else {
-                child = cur->child;
+                child = curr_jobj->child;
             }
             if (child != NULL) {
                 HSD_JObj* child;
-                if (cur == NULL) {
+                if (curr_jobj == NULL) {
                     child = NULL;
                 } else {
-                    child = cur->child;
+                    child = curr_jobj->child;
                 }
-                cur = child;
+                curr_jobj = child;
                 continue;
             }
         }
         {
             HSD_JObj* next;
-            if (cur == NULL) {
+            if (curr_jobj == NULL) {
                 next = NULL;
             } else {
-                next = cur->next;
+                next = curr_jobj->next;
             }
             if (next != NULL) {
                 HSD_JObj* next;
-                if (cur == NULL) {
+                if (curr_jobj == NULL) {
                     next = NULL;
                 } else {
-                    next = cur->next;
+                    next = curr_jobj->next;
                 }
-                cur = next;
+                curr_jobj = next;
             } else {
                 while (true) {
                     HSD_JObj* parent;
-                    if (cur == NULL) {
+                    if (curr_jobj == NULL) {
                         parent = NULL;
                     } else {
-                        parent = cur->parent;
+                        parent = curr_jobj->parent;
                     }
                     if (parent == NULL) {
-                        cur = NULL;
+                        curr_jobj = NULL;
                     } else {
                         HSD_JObj* parent;
-                        if (cur == NULL) {
+                        if (curr_jobj == NULL) {
                             parent = NULL;
                         } else {
-                            parent = cur->parent;
+                            parent = curr_jobj->parent;
                         }
                         {
                             HSD_JObj* next;
@@ -434,10 +468,10 @@ void ftMaterial_800BFB4C(Fighter_GObj* gobj, GXColor* diffuse)
                             }
                             if (next != NULL) {
                                 HSD_JObj* parent;
-                                if (cur == NULL) {
+                                if (curr_jobj == NULL) {
                                     parent = NULL;
                                 } else {
-                                    parent = cur->parent;
+                                    parent = curr_jobj->parent;
                                 }
                                 {
                                     HSD_JObj* next;
@@ -446,16 +480,16 @@ void ftMaterial_800BFB4C(Fighter_GObj* gobj, GXColor* diffuse)
                                     } else {
                                         next = parent->next;
                                     }
-                                    cur = next;
+                                    curr_jobj = next;
                                 }
                             } else {
                                 HSD_JObj* parent;
-                                if (cur == NULL) {
+                                if (curr_jobj == NULL) {
                                     parent = NULL;
                                 } else {
-                                    parent = cur->parent;
+                                    parent = curr_jobj->parent;
                                 }
-                                cur = parent;
+                                curr_jobj = parent;
                                 continue;
                             }
                         }
