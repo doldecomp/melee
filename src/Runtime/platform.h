@@ -113,8 +113,10 @@ typedef bool (*Predicate)(void);
     struct {                                                                  \
         int x[1 - 2 * !(cond)];                                               \
     };
-#else
+#elif defined(LINT)
 #define STATIC_ASSERT(cond) _Static_assert((cond), "(" #cond ") failed")
+#else
+#define STATIC_ASSERT(cond)
 #endif
 
 #if defined(MUST_MATCH) || defined(LINT)
@@ -150,6 +152,9 @@ typedef bool (*Predicate)(void);
 #define SECTION_DTORS
 #define ATTRIBUTE_RESTRICT
 #endif
+
+#define M_PI 3.14159265358979323846
+#define M_PI_2 (M_PI / 2)
 
 #define M_TAU 6.283185307179586
 #define M_PI_3 (M_PI / 3)

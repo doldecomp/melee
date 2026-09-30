@@ -2,8 +2,6 @@
 
 #include <melee/ft/forward.h>
 
-#include <math.h>
-
 #include "ftnana.h"
 #include <dolphin/mtx.h>
 #include <melee/ft/fighter.h>

@@ -4,8 +4,6 @@
 
 #include <melee/it/forward.h>
 
-#include <math.h>
-
 #include "ftCo_DamageFall.h"
 #include "ftCo_Fall.h"
 #include "ftCo_ItemThrow.h"

@@ -1771,7 +1771,8 @@ void ftData_80085CD8(Fighter* fp, Fighter* arg1, int msid)
                                          "HSD_ArchiveParse error! %x\n", msid);
                     }
                 }
-                fp->x590 = HSD_ArchiveGetPublicAddress(&sp14, temp_r3->x0);
+                fp->x590 =
+                    HSD_ArchiveGetPublicAs(FigaTree, &sp14, temp_r3->x0);
             } else {
                 fp->x590 = NULL;
             }
@@ -1822,7 +1823,8 @@ FigaTree* ftData_80085E50(Fighter* arg0, int msid)
                                          "HSD_ArchiveParse error! %x\n", msid);
                     }
                 }
-                arg0->x598 = HSD_ArchiveGetPublicAddress(&sp10, temp_r3->x0);
+                arg0->x598 =
+                    HSD_ArchiveGetPublicAs(FigaTree, &sp10, temp_r3->x0);
             } else {
                 arg0->x598 = 0;
             }

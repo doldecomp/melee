@@ -6,6 +6,8 @@
 #include <melee/ft/forward.h>
 #include <melee/it/forward.h>
 
+#include <dat_macros.h>
+
 #include <melee/it/kinds/types.h>
 #include <melee/it/types.h>
 
@@ -21,9 +23,14 @@ typedef struct it_804D6D40_t {
 
 typedef struct it_804D6D20_t {
     ItemCommonData* x0;
-    Article** x4;
-    Article** x8;
-    Article** xC;
+    /// Common items, by kind.
+    Article** x4 DAT_COUNT(It_Kind_Kuriboh) DAT_BIND(Article::kind, _index);
+    /// Monsters and fighter items, by kind from #It_Kind_Kuriboh.
+    Article** x8 DAT_COUNT(It_PKind_Start - It_Kind_Kuriboh)
+        DAT_BIND(Article::kind, It_Kind_Kuriboh + _index);
+    /// Pokemon, by kind from #It_PKind_Start.
+    Article** xC DAT_COUNT(It_Kind_Old_Kuri - It_PKind_Start)
+        DAT_BIND(Article::kind, It_PKind_Start + _index);
     it_804D6D40_t* x10;
     Fighter_804D653C_t* x14;
 } it_804D6D20_t;

@@ -316,15 +316,16 @@ void grRCruise_801FF7A4(Ground_GObj* gobj)
     Ground* gp = GET_GROUND(stage_gobj);
     HSD_JObj* jobj = GET_JOBJ(gobj);
     UnkArchiveStruct* archive;
-    DynamicsDesc* data;
+    DynamicsTemplate* data;
 
     Ground_InitMapColl(jobj, gp->map_id);
     grAnime_801C8138(stage_gobj, gp->map_id, 0);
     grAnime_801C752C(jobj, 1, 30628, HSD_AObjSetFlags, 3, AOBJ_LOOP);
     archive = grDatFiles_GetArchive();
-    if (archive != NULL && (data = HSD_ArchiveGetPublicAddress(
-                                archive->unk0, "dynamicsdata_shipflag"),
-                            data != NULL))
+    if (archive != NULL &&
+        (data = HSD_ArchiveGetPublicAs(DynamicsTemplate, archive->unk0,
+                                       "dynamicsdata_shipflag"),
+         data != NULL))
     {
         grLib_801C9B20(Ground_801C3FA4(stage_gobj, 23), data,
                        &gp->u.rcruise2.xC4);

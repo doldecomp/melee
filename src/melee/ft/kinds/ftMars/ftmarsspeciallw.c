@@ -5,8 +5,6 @@
 #include <melee/ft/forward.h>
 #include <melee/lb/forward.h>
 
-#include <math.h>
-
 #include "types.h"
 #include <dolphin/mtx.h>
 #include <melee/ef/efsync.h>

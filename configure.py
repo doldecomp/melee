@@ -376,6 +376,7 @@ cflags_trk = [
 
 includes_base = [
     "src",
+    "libs/doldecomp/include",
     "src/MSL",
     "libs/dolphin/include",
     f"build/{config.version}/include",
@@ -386,7 +387,7 @@ config.linker_version = "GC/1.3.2"
 
 # Native compiler flags
 
-clang_includes = ["src"]
+clang_includes = ["src", "libs/doldecomp/include"]
 
 clang_system_includes = [
     "src/MSL",

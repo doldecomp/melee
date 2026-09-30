@@ -554,8 +554,8 @@ void HSD_SisLib_803A62A0(s32 font_idx, char* archive_name, char* symbol_name)
         OSPanic(__FILE__, 0x24A, "");
     }
     {
-        u8** sis = HSD_ArchiveGetPublicAddress(HSD_SisLib_804D1110[font_idx],
-                                               symbol_name);
+        u8** sis = HSD_ArchiveGetPublicAs(u8*, HSD_SisLib_804D1110[font_idx],
+                                          symbol_name);
         HSD_SisLib_804D1124[font_idx] = sis;
         if (sis == NULL) {
             OSReport("Cannot find symbol %s.\n", symbol_name);

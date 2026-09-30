@@ -5,7 +5,7 @@ use regex::Regex;
 
 #[derive(Parser)]
 #[command(author, version, about, long_about = None)]
-struct Args {
+pub struct Args {
     flags: Vec<String>,
 
     #[arg(short, long)]

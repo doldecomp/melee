@@ -2,8 +2,6 @@
 
 #include <Runtime/platform.h>
 
-#include <math.h>
-
 #include "granime.h"
 #include "ground.h"
 #include "grzakogenerator.h"

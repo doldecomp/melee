@@ -4,7 +4,6 @@
 
 #include <melee/it/forward.h>
 
-#include <math.h>
 #include <placeholder.h>
 
 #include "inlines.h"

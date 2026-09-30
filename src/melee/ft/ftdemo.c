@@ -4,8 +4,6 @@
 
 #include <melee/pl/forward.h>
 
-#include <math.h>
-
 #include "fighter.h"
 #include "ft_0BEC.h"
 #include "ft_0BEF.h"

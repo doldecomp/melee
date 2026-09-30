@@ -24,7 +24,7 @@ static struct gm_80480D98_t {
     u8 xE;
 } gm_80480D98;
 
-UNK_T gmVsMelee_ApproachData[2];
+struct VsApproachData gmVsMelee_ApproachData;
 
 static void fn_801AD920(HSD_GObj* gobj)
 {

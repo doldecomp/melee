@@ -2,7 +2,6 @@
 
 #include <melee/lb/forward.h>
 
-#include <math.h>
 #include <placeholder.h>
 
 #include "inlines.h"

@@ -2,8 +2,6 @@
 
 #include <melee/lb/forward.h>
 
-#include <math.h>
-
 #include "inlines.h"
 #include "it_26B1.h"
 #include "it_2725.h"
@@ -855,7 +853,7 @@ static void Item_80268560(HSD_GObj* gobj)
     }
     ip->x374_dynamicBonesNum = article_data->x14_dynamics->count;
     for (i = 0; i < article_data->x14_dynamics->count; i++) {
-        BoneDynamicsDesc* desc = &article_data->x14_dynamics->dyn_descs[i];
+        BoneDynamicsTemplate* desc = &article_data->x14_dynamics->dyn_descs[i];
         HSD_JObj* jobj = ip->xBBC_dynamicBoneTable->bones[desc->bone_id];
         lb_8000FD48(jobj, &ip->xD4_dynamicBones[i].dyn_desc,
                     desc->dyn_desc.count);

@@ -1675,7 +1675,8 @@ void _tyDisplay_8031B1FC(void)
         ptr->gobj4 = NULL;
     }
 
-    joint = HSD_ArchiveGetPublicAddress(ptr->archive, "ToyDspBg_Top_joint");
+    joint =
+        HSD_ArchiveGetPublicAs(HSD_Joint, ptr->archive, "ToyDspBg_Top_joint");
     if (joint != NULL) {
         ptr->gobj4 = GObj_Create(9, 9, zero);
         jobj = HSD_JObjLoadJoint(joint);
@@ -1743,8 +1744,8 @@ void _tyDisplay_8031B328(void)
         OSPanic(__FILE__, 1113, "");
     }
 
-    if ((lightData = HSD_ArchiveGetPublicAddress(
-             temp3->archive, "ScMenDisplay_scene_lights")) != NULL)
+    if ((lightData = HSD_ArchiveGetPublicAs(
+             LightList*, temp3->archive, "ScMenDisplay_scene_lights")) != NULL)
     {
         scene->x00 = GObj_Create(2, 3, 0);
         lobj = Toy_LoadLObjList(lightData, 0);
@@ -1758,8 +1759,8 @@ void _tyDisplay_8031B328(void)
 
     /// @todo .data order hack
     (void) "ScMenDisplay_cam_int1_camera";
-    if ((fogDesc = HSD_ArchiveGetPublicAddress(temp3->archive,
-                                               "ScMenDisplay_fog")) != NULL)
+    if ((fogDesc = HSD_ArchiveGetPublicAs(HSD_FogDesc, temp3->archive,
+                                          "ScMenDisplay_fog")) != NULL)
     {
         scene->x08 = GObj_Create(3, 4, 0);
         HSD_GObjObject_80390A70(scene->x08, temp2 = HSD_GObj_FogKind,
@@ -1887,8 +1888,9 @@ void tyDisplay_Scene_OnEnter(void* arg0)
 
     {
         cfg2 = _tyDisplay_804D6F18;
-        cobj = lb_80013B14(HSD_ArchiveGetPublicAddress(
-            _tyDisplay_804D6F1C->archive, "ScMenDisplay_cam_int1_camera"));
+        cobj = lb_80013B14(HSD_ArchiveGetPublicAs(
+            HSD_CameraDescPerspective, _tyDisplay_804D6F1C->archive,
+            "ScMenDisplay_cam_int1_camera"));
 
         cfg2->x00 = GObj_Create(1, 2, 0);
         HSD_GObjObject_80390A70(cfg2->x00, kind = HSD_GObj_CameraKind, cobj);
@@ -2225,7 +2227,7 @@ HSD_GObj* _tyDisplay_8031BC54(s32 arg0)
         const char* temp;
         temp = jobj_names.entries[(s8) cat];
         child = HSD_JObjLoadJoint(
-            HSD_ArchiveGetPublicAddress(data->archives[c], temp));
+            HSD_ArchiveGetPublicAs(HSD_Joint, data->archives[c], temp));
     }
 
     HSD_JObjAddChild(root, child);
@@ -2248,8 +2250,9 @@ HSD_GObj* _tyDisplay_8031BC54(s32 arg0)
     HSD_JObjSetTranslateX(child, entry->x08);
     HSD_JObjSetTranslateZ(child, entry->x0C);
 
-    HSD_JObjAddChild(root, HSD_JObjLoadJoint(HSD_ArchiveGetPublicAddress(
-                               data->archives[41], _tyDisplay_803FF01C)));
+    HSD_JObjAddChild(root,
+                     HSD_JObjLoadJoint(HSD_ArchiveGetPublicAs(
+                         HSD_Joint, data->archives[41], _tyDisplay_803FF01C)));
 
     if (_tyDisplay_804D6F24 != NULL) {
         DevText_Erase(_tyDisplay_804D6F24);

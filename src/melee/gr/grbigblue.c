@@ -2,14 +2,33 @@
 
 #include <Runtime/platform.h>
 
+#include <math.h>
 #include <placeholder.h>
 
 #include "grdisplay.h"
 #include "grfzerocar.h"
 #include "grmaterial.h"
 #include "ground.h"
+#include "grzakogenerator.h"
 #include "inlines.h"
+#include "stage.h"
+#include "types.h"
 #include <dolphin/mtx.h>
+#include <melee/cm/camera.h>
+#include <melee/gm/gmscene.h>
+#include <melee/it/it_26B1.h>
+#include <melee/it/itspawn.h>
+#include <melee/it/types.h>
+#include <melee/lb/lb_00B0.h>
+#include <melee/lb/lb_00F9.h>
+#include <melee/lb/lbvector.h>
+#include <melee/mp/mplib.h>
+#include <sysdolphin/baselib/debug.h>
+#include <sysdolphin/baselib/gobjgxlink.h>
+#include <sysdolphin/baselib/gobjproc.h>
+#include <sysdolphin/baselib/jobj.h>
+#include <sysdolphin/baselib/memory.h>
+#include <sysdolphin/baselib/random.h>
 
 typedef struct grBb_LineIds {
     s32 v[32];
@@ -107,27 +126,6 @@ typedef struct grBb_YakumonoParam {
 #ifdef MUST_MATCH
 #include <MetroTRK/intrinsics.h>
 #endif
-
-#include <math.h>
-
-#include "grzakogenerator.h"
-#include "stage.h"
-#include "types.h"
-#include <melee/cm/camera.h>
-#include <melee/gm/gmscene.h>
-#include <melee/it/it_26B1.h>
-#include <melee/it/itspawn.h>
-#include <melee/it/types.h>
-#include <melee/lb/lb_00B0.h>
-#include <melee/lb/lb_00F9.h>
-#include <melee/lb/lbvector.h>
-#include <melee/mp/mplib.h>
-#include <sysdolphin/baselib/debug.h>
-#include <sysdolphin/baselib/gobjgxlink.h>
-#include <sysdolphin/baselib/gobjproc.h>
-#include <sysdolphin/baselib/jobj.h>
-#include <sysdolphin/baselib/memory.h>
-#include <sysdolphin/baselib/random.h>
 
 /* 1E8560 */ static void fn_801E8560(void* user_data, int joint_id,
                                      CollData* coll, int coll_x50,
@@ -1621,8 +1619,8 @@ void grBigBlue_801E8D64(Ground_GObj* gobj)
     HSD_JObjSetTranslateZ(jobj, 0.0F);
 
     *(f32*) ((u8*) gp + 0xD8) = 0.0F;
-    *(s32*) ((u8*) gp + 0xC8) = (s32) (yakumono_param->xD8);
-    *(u8*) ((u8*) gp + 0xC4) = 2;
+    *(s32*) ((u8*) gp + 0xC8) = (s32) yakumono_param->xD8;
+    *((u8*) gp + 0xC4) = 2;
 
     grAnime_801C8138(gobj, gp->map_id, 0);
 

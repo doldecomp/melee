@@ -1,7 +1,5 @@
 #include "iteffect.h"
 
-#include <math.h>
-
 #include "forward.h"
 #include "it_2725.h"
 #include "it_3F14.h"

@@ -7,6 +7,7 @@ add_library(melee_game_headers INTERFACE)
 target_include_directories(melee_game_headers INTERFACE
     $ENV{AURORA_SRC}/include
     ${_melee_root}/src
+    ${_melee_root}/libs/doldecomp/include
 )
 target_compile_definitions(melee_game_headers INTERFACE
     TARGET_PC

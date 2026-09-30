@@ -1,7 +1,5 @@
 #include "it_2725.h"
 
-#include <math.h>
-
 #include "inlines.h"
 #include "it_26B1.h"
 #include "it_279C.h"
