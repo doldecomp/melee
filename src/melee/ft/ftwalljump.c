@@ -1,3 +1,10 @@
+/**
+ * @file ftwalljump.c
+ * @brief Handles wall jump physics and collision checks
+ * @details Evaluates controller inputs and collision environments to trigger wall jumps, accommodating for moving walls/platforms.
+ * Module prefix: ft (Fighter)
+ */
+
 #include "ftwalljump.h"
 
 #include <Runtime/platform.h>
@@ -11,112 +18,115 @@
 
 static int const max_input_frames = 254;
 
-/// UnclePunch Map file: Interrupt_Walljump
-/// @returns: @c true if this function started a walljump, otherwise @c false.
+/**
+ * @brief Checks and executes a wall jump if conditions are met (Interrupt_Walljump)
+ * @param gobj Fighter GObj
+ * @return True if a wall jump was started, false otherwise
+ */
 bool ftWallJump_8008169C(HSD_GObj* gobj)
 {
-    Fighter* fp0 = GET_FIGHTER(gobj);
+    Fighter* fp = GET_FIGHTER(gobj);
 
-    if (fp0->can_walljump) {
-        CollData* coll_data = &fp0->coll_data;
-        if ((fp0->coll_data.env_flags & Collide_RightWallHug) ||
+    if (fp->can_walljump) {
+        CollData* coll_data = &fp->coll_data;
+        if ((fp->coll_data.env_flags & Collide_RightWallHug) ||
             (coll_data->env_flags & Collide_LeftWallHug))
         {
-            s32 env_flags = coll_data->env_flags & Collide_RightWallHug;
+            // Collide_RightWallHug means hugging a right-facing wall (a wall on the player's left)
+            s32 hugging_right_facing_wall = coll_data->env_flags & Collide_RightWallHug;
 
-            // side of the collision?
-            float wall_dir = env_flags ? -1.f : +1.f;
+            // Identifies which side the wall is on (-1.f for left wall, +1.f for right wall)
+            float wall_dir = hugging_right_facing_wall ? -1.f : +1.f;
 
-            // wall_jump_input_timer = some walljump animation/input timer?
-            // is initialized in the else-block when the user does the right
-            // inputs. gets incremented here every frame.
-            if ((fp0->wall_jump_input_timer < max_input_frames) &&
-                (wall_dir == fp0->x2110_walljumpWallSide))
+            // Increment the wall jump input timer if the player is maintaining contact
+            // with the same wall. Otherwise, evaluate initial contact conditions.
+            if ((fp->wall_jump_input_timer < max_input_frames) &&
+                (wall_dir == fp->x2110_walljumpWallSide))
             {
-                fp0->wall_jump_input_timer++;
+                fp->wall_jump_input_timer++;
             } else {
-                Vec3 wall_pos, ecb;
+                Vec3 ecb_pos;
+                Vec3 wall_vel;
 
-                u8 _[8];
+                u8 _[8]; // Padding/unused
 
-                if (env_flags) {
-                    // compute absolte position of the ECB's left vertex?
-                    ecb.x = coll_data->ecb.left.x;
-                    ecb.y = coll_data->ecb.left.y;
-                    ecb.z = 0.0f;
-                    ecb.x += fp0->cur_pos.x;
-                    ecb.y += fp0->cur_pos.y;
-                    ecb.z += fp0->cur_pos.z;
-                    // compute distance to the wall?
-                    if (!mpGetSpeed(coll_data->right_facing_wall.index, &ecb,
-                                    &wall_pos))
+                if (hugging_right_facing_wall) {
+                    // Compute absolute position of the ECB's left vertex
+                    ecb_pos.x = coll_data->ecb.left.x;
+                    ecb_pos.y = coll_data->ecb.left.y;
+                    ecb_pos.z = 0.0f;
+                    ecb_pos.x += fp->cur_pos.x;
+                    ecb_pos.y += fp->cur_pos.y;
+                    ecb_pos.z += fp->cur_pos.z;
+                    
+                    // Fetch the velocity of the wall (e.g., if it's a moving platform)
+                    if (!mpGetSpeed(coll_data->right_facing_wall.index, &ecb_pos,
+                                    &wall_vel))
                     {
-                        wall_pos.x = 0.0f;
+                        wall_vel.x = 0.0f;
                     }
                 } else {
-                    // compute absolte position of the ECB's right vertex?
-                    ecb.x = coll_data->ecb.right.x;
-                    ecb.y = coll_data->ecb.right.y;
-                    ecb.z = 0.0f;
-                    ecb.x += fp0->cur_pos.x;
-                    ecb.y += fp0->cur_pos.y;
-                    ecb.z += fp0->cur_pos.z;
-                    // compute distance to the wall?
-                    if (!mpGetSpeed(coll_data->left_facing_wall.index, &ecb,
-                                    &wall_pos))
+                    // Compute absolute position of the ECB's right vertex
+                    ecb_pos.x = coll_data->ecb.right.x;
+                    ecb_pos.y = coll_data->ecb.right.y;
+                    ecb_pos.z = 0.0f;
+                    ecb_pos.x += fp->cur_pos.x;
+                    ecb_pos.y += fp->cur_pos.y;
+                    ecb_pos.z += fp->cur_pos.z;
+                    
+                    // Fetch the velocity of the wall (e.g., if it's a moving platform)
+                    if (!mpGetSpeed(coll_data->left_facing_wall.index, &ecb_pos,
+                                    &wall_vel))
                     {
-                        wall_pos.x = 0.0f;
+                        wall_vel.x = 0.0f;
                     }
                 }
 
                 {
-                    // This is relative to the wall, presumably because you can
-                    // walljump off of moving platforms
+                    // Calculate approach speed relative to the wall to account for moving stages
                     float wall_relative_velocity =
-                        fp0->pos_delta.x - wall_pos.x;
+                        fp->pos_delta.x - wall_vel.x;
                     wall_relative_velocity = wall_relative_velocity < 0
                                                  ? -wall_relative_velocity
                                                  : wall_relative_velocity;
 
+                    // If approaching fast enough, begin the wall jump input window
                     if (wall_relative_velocity >
-                        fp0->co_attrs.wall_jump_min_approach_speed)
+                        fp->co_attrs.wall_jump_min_approach_speed)
                     {
-                        // walljump input phase one completed, now start the
-                        // walljump input timer and check for the control stick
-                        // movement away from the wall in the next phase
-                        fp0->x2110_walljumpWallSide = wall_dir;
-                        fp0->wall_jump_input_timer = 0U;
+                        fp->x2110_walljumpWallSide = wall_dir;
+                        fp->wall_jump_input_timer = 0U;
                     }
                 }
             }
 
             if (
-                // walljump timer within limits?
-                fp0->wall_jump_input_timer < p_ftCommonData->x768 &&
+                // Is the wall jump input timer within the allowed window?
+                fp->wall_jump_input_timer < p_ftCommonData->x768 &&
                 ((
-                     // left wall & control stick right?
-                     fp0->x2110_walljumpWallSide == -1 &&
-                     fp0->input.lstick[0].x >= p_ftCommonData->x76C) ||
+                     // Wall on the left & control stick smashed right?
+                     fp->x2110_walljumpWallSide == -1 &&
+                     fp->input.lstick[0].x >= p_ftCommonData->x76C) ||
                  (
-                     // right wall & control stick left?
-                     fp0->x2110_walljumpWallSide == +1 &&
-                     fp0->input.lstick[0].x <= -p_ftCommonData->x76C)) &&
-                // control stick didn't stay too long in the tilt area?
-                fp0->active_timer.lstick.x < p_ftCommonData->x770)
+                     // Wall on the right & control stick smashed left?
+                     fp->x2110_walljumpWallSide == +1 &&
+                     fp->input.lstick[0].x <= -p_ftCommonData->x76C)) &&
+                // Has the control stick been smashed recently (prevent holding it)?
+                fp->active_timer.lstick.x < p_ftCommonData->x770)
             {
-                // do a walljump!
+                // Execute the wall jump
                 ftCo_800C1E64(gobj, ftCo_MS_PassiveWallJump,
-                              p_ftCommonData->x774, fp0->x1969_walljumpUsed,
-                              fp0->x2110_walljumpWallSide);
+                              p_ftCommonData->x774, fp->x1969_walljumpUsed,
+                              fp->x2110_walljumpWallSide);
 
-                fp0->wall_jump_input_timer = max_input_frames;
-                if (fp0->x1969_walljumpUsed < 255) {
-                    fp0->x1969_walljumpUsed++;
+                fp->wall_jump_input_timer = max_input_frames;
+                if (fp->x1969_walljumpUsed < 255) {
+                    fp->x1969_walljumpUsed++;
                 }
                 return true;
             }
         } else {
-            fp0->wall_jump_input_timer = max_input_frames;
+            fp->wall_jump_input_timer = max_input_frames;
         }
     }
 
