@@ -74,15 +74,13 @@ typedef struct _ftPikachuAttributes {
 } ftPikachuAttributes;
 
 union ftPikachu_MotionVars {
-    /// @todo Proper state name.
-    struct ftPikachu_State2Vars {
+    struct ftPikachu_SpecialNVars {
         s32 x0;
-    } unk2;
+    } specialn;
 
-    /// @todo Proper state name.
-    struct ftPikachu_State3Vars {
+    struct ftPikachu_SpecialSVars {
         s32 x0;
-    } unk3;
+    } specials;
 
     struct ftPikachu_SpecialHiVars {
         int x0;
