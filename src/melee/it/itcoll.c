@@ -1,3 +1,15 @@
+/**
+ * @file itcoll.c
+ * @brief Item collision detection and response implementation.
+ * @details Implements collision detection for items in Super Smash Bros. Melee:
+ * - Item-to-item collisions: hitbox clanking (recoil, spark effect), damage exchanges
+ * - Item-to-fighter collisions: fighter attacks hitting items, catch/grab hitboxes
+ * - Environmental Collision Box (ECB) mutual pushing and horizontal nudge physics
+ * - Damage accumulation, knockback formula, and elemental hit effect dispatch
+ * - Dynamic collision bones and hurtbox initialization
+ * Module prefix: it (Item)
+ */
+
 #include "itcoll.h"
 
 #include <Runtime/platform.h>
@@ -37,8 +49,14 @@
 /* 271D2C */ static void it_80271D2C(Item_GObj* arg_item_gobj);
 /* 271F78 */ static void it_80271F78(Item_GObj* arg_item_gobj);
 
-/** @returns `true` if (@p pos_x, @p pos_y), expanded by the sum of two ECBs,
- * encloses target.
+/**
+ * @brief Checks if a target position falls within the combined bounding box of two ECBs.
+ * @param pos_x Center X coordinate
+ * @param pos_y Center Y coordinate
+ * @param ecb_a Pointer to first Environmental Collision Box
+ * @param ecb_b Pointer to second Environmental Collision Box
+ * @param target Pointer to target 3D point
+ * @return true if target is enclosed within the combined ECB dimensions
  */
 static bool itColl_chkECBOverlap(f32 pos_x, f32 pos_y, itECB* ecb_a,
                                  itECB* ecb_b, Vec3* target)
@@ -60,31 +78,45 @@ static bool itColl_chkECBOverlap(f32 pos_x, f32 pos_y, itECB* ecb_a,
     }
 }
 
+/// Unit quaternion defining rotation axis along Z {0, 0, 1, 0}
 const Quaternion it_803B8560 = { 0.0f, 0.0f, 1.0f, 0.0f };
 
+/// Descriptor for item dynamic collision sphere
 typedef struct ItCollDynamicsDesc {
-    s32 bone_id;
-    Vec3 offset;
-    f32 size;
+    s32 bone_id;    ///< Target bone index
+    Vec3 offset;    ///< Offset vector from bone origin
+    f32 size;       ///< Collision sphere radius
 } ItCollDynamicsDesc;
 
+/// Header for list of item dynamic collision spheres
 typedef struct ItCollDynamics {
     u8 _pad[8];
-    s32 count;
-    ItCollDynamicsDesc* descs;
+    s32 count;                  ///< Number of dynamic collision descriptors
+    ItCollDynamicsDesc* descs;  ///< Array of dynamic collision descriptors
 } ItCollDynamics;
 
+/**
+ * @brief Resets the global item damage log counter to zero.
+ */
 void it_8026F9A0(void)
 {
     it_804D6D18 = 0;
 }
 
-void it_8026F9AC(s32 arg0, void* fighter, HitCapsule* hit, Item* arg_item,
+/**
+ * @brief Records a hit interaction into the global item damage log array.
+ * @param hit_type Damage source type (1 = fighter attack, 2 = item collision)
+ * @param fighter Pointer to striking entity (Fighter or Item)
+ * @param hit Pointer to offensive HitCapsule that connected
+ * @param arg_item Pointer to victim Item instance
+ * @param hurt Pointer to defensive HurtCapsule that was struck
+ */
+void it_8026F9AC(s32 hit_type, void* fighter, HitCapsule* hit, Item* arg_item,
                  HurtCapsule* hurt)
 {
     const int log_size = ARRAY_SIZE(it_804A0E70);
     if (it_804D6D18 < log_size) {
-        it_804A0E70[it_804D6D18].x0 = arg0;
+        it_804A0E70[it_804D6D18].x0 = hit_type;
         it_804A0E70[it_804D6D18].x4 = fighter;
         it_804A0E70[it_804D6D18].x8 = hit;
         it_804A0E70[it_804D6D18].xC = hurt;
@@ -95,7 +127,7 @@ void it_8026F9AC(s32 arg0, void* fighter, HitCapsule* hit, Item* arg_item,
     HSD_ASSERT(105, 0);
 }
 
-// EF IDs spawned on hit, indexed by HitElement (-1 = no effect)
+/// Particle effect IDs spawned on hit, indexed by HitElement (-1 = no effect)
 static s32 hit_effect_ids[17] = {
     /* [HitElement_Normal]   */ Ef_Id_Unk1000,
     /* [HitElement_Fire]     */ Ef_Id_Unk1002,
@@ -116,6 +148,14 @@ static s32 hit_effect_ids[17] = {
     /* [HitElement_Leadead]  */ 0,
 };
 
+/**
+ * @brief Resets hit tracking on matching item hitboxes when clanking or hitting.
+ * @param arg_item0 Pointer to Item instance
+ * @param arg_hit Pointer to reference HitCapsule
+ * @param arg2 Interaction type
+ * @param arg_item3 Target victim item
+ * @param arg_chk Flag indicating whether to clear hitbox hit tracking
+ */
 void it_8026FA2C(Item* arg_item0, HitCapsule* arg_hit, s32 arg2,
                  Item* arg_item3, bool arg_chk)
 {
@@ -132,6 +172,14 @@ void it_8026FA2C(Item* arg_item0, HitCapsule* arg_hit, s32 arg2,
     }
 }
 
+/**
+ * @brief Resets hit tracking across all items sharing an ignoreItemID group.
+ * @param arg_item0 Pointer to Item instance
+ * @param arg_hit Pointer to reference HitCapsule
+ * @param arg2 Interaction type
+ * @param arg3 Target victim pointer
+ * @param chk Flag indicating whether to clear hitbox hit tracking
+ */
 void it_8026FAC4(Item* arg_item0, HitCapsule* arg_hit, s32 arg2, void* arg3,
                  bool chk)
 {
@@ -153,6 +201,13 @@ void it_8026FAC4(Item* arg_item0, HitCapsule* arg_hit, s32 arg2, void* arg3,
     }
 }
 
+/**
+ * @brief Inlined helper to record fighter hit interaction across item hitboxes.
+ * @param arg_item Pointer to Item instance
+ * @param arg_hit Pointer to reference HitCapsule
+ * @param arg2 Interaction type
+ * @param arg3 Pointer to striking Fighter
+ */
 static void it_8026FC00_inline(Item* arg_item, HitCapsule* arg_hit, int arg2,
                                Fighter* arg3)
 {
@@ -165,6 +220,13 @@ static void it_8026FC00_inline(Item* arg_item, HitCapsule* arg_hit, int arg2,
     }
 }
 
+/**
+ * @brief Records a fighter hit interaction across all hitboxes of an item group.
+ * @param arg_item Pointer to Item instance
+ * @param arg_hit Pointer to reference HitCapsule
+ * @param arg2 Interaction type
+ * @param arg3 Pointer to striking Fighter
+ */
 void it_8026FC00(Item* arg_item, HitCapsule* arg_hit, s32 arg2, Fighter* arg3)
 {
     PAD_STACK(8);
@@ -185,6 +247,11 @@ void it_8026FC00(Item* arg_item, HitCapsule* arg_hit, s32 arg2, Fighter* arg3)
     }
 }
 
+/**
+ * @brief Updates item hitbox collision interpolation or copies state from matching active hitboxes.
+ * @param arg_item Pointer to Item instance
+ * @param arg_hit Pointer to HitCapsule to update
+ */
 void it_8026FCF8(Item* arg_item, HitCapsule* arg_hit)
 {
     HSD_GObj* item_gobj;
@@ -232,13 +299,22 @@ static void order_sdata2_0(void)
 }
 #endif
 
+/**
+ * @brief Resolves item-to-item hitbox clanking when two active hitboxes collide.
+ * @details Compares damage values against clank threshold (it_804D6D28->xB4),
+ * spawns clank spark effect (0x41C), and calculates recoil damage direction.
+ * @param arg_item0 Pointer to first Item
+ * @param hit1 Pointer to first Item's HitCapsule
+ * @param arg_item2 Pointer to second Item
+ * @param hit3 Pointer to second Item's HitCapsule
+ */
 void it_8026FE68(Item* arg_item0, HitCapsule* hit1, Item* arg_item2,
                  HitCapsule* hit3)
 {
-    Vec3 sp48;
-    f32 dmg3;
-    s32 var_r26;
-    f32 dmg1;
+    Vec3 spark_pos;
+    f32 dmg_b;
+    s32 clank_type;
+    f32 dmg_a;
     f32 vel_x;
     f32 vel_x_mag;
     f32 pos_x;
@@ -246,18 +322,21 @@ void it_8026FE68(Item* arg_item0, HitCapsule* hit1, Item* arg_item2,
     s32 dmg_int;
     PAD_STACK(28);
 
-    sp48.x = 0.5f * (hit1->hurt_coll_pos.x + hit3->hurt_coll_pos.x);
-    sp48.y = 0.5f * (hit1->hurt_coll_pos.y + hit3->hurt_coll_pos.y);
-    sp48.z = 0.5f * (hit1->hurt_coll_pos.z + hit3->hurt_coll_pos.z);
-    dmg3 = hit3->damage;
-    if (((s32) dmg3 - it_804D6D28->xB4) < (s32) hit1->damage) {
-        dmg_int = dmg3;
+    /* Midpoint between colliding capsules for spawning spark effect */
+    spark_pos.x = 0.5f * (hit1->hurt_coll_pos.x + hit3->hurt_coll_pos.x);
+    spark_pos.y = 0.5f * (hit1->hurt_coll_pos.y + hit3->hurt_coll_pos.y);
+    spark_pos.z = 0.5f * (hit1->hurt_coll_pos.z + hit3->hurt_coll_pos.z);
+
+    /* Check if hit3 damage overcomes hit1 (within clank threshold) */
+    dmg_b = hit3->damage;
+    if (((s32) dmg_b - it_804D6D28->xB4) < (s32) hit1->damage) {
+        dmg_int = dmg_b;
         if (hit3->x41_b5) {
-            var_r26 = 4;
+            clank_type = 4;
         } else {
-            var_r26 = 3;
+            clank_type = 3;
         }
-        it_8026FAC4(arg_item2, hit3, var_r26, arg_item0, true);
+        it_8026FAC4(arg_item2, hit3, clank_type, arg_item0, true);
         if (dmg_int > arg_item2->xC48) {
             arg_item2->xC48 = dmg_int;
             arg_item2->xCF4_fighterGObjUnk = NULL;
@@ -284,17 +363,19 @@ void it_8026FE68(Item* arg_item0, HitCapsule* hit1, Item* arg_item2,
             }
             arg_item2->xCB8_outDamageDirection = dir;
         }
-        efSync_Spawn(0x41C, arg_item2->entity, &sp48);
+        efSync_Spawn(0x41C, arg_item2->entity, &spark_pos);
     }
-    dmg1 = hit1->damage;
-    if (((s32) dmg1 - it_804D6D28->xB4) < (s32) hit3->damage) {
-        dmg_int = dmg1;
+
+    /* Check if hit1 damage overcomes hit3 (within clank threshold) */
+    dmg_a = hit1->damage;
+    if (((s32) dmg_a - it_804D6D28->xB4) < (s32) hit3->damage) {
+        dmg_int = dmg_a;
         if (hit1->x41_b5) {
-            var_r26 = 4;
+            clank_type = 4;
         } else {
-            var_r26 = 3;
+            clank_type = 3;
         }
-        it_8026FAC4(arg_item0, hit1, var_r26, arg_item2, false);
+        it_8026FAC4(arg_item0, hit1, clank_type, arg_item2, false);
         if (dmg_int > arg_item0->xC48) {
             arg_item0->xC48 = dmg_int;
             arg_item0->xCF4_fighterGObjUnk = NULL;
@@ -321,7 +402,7 @@ void it_8026FE68(Item* arg_item0, HitCapsule* hit1, Item* arg_item2,
             }
             arg_item0->xCB8_outDamageDirection = dir;
         }
-        efSync_Spawn(0x41C, arg_item0->entity, &sp48);
+        efSync_Spawn(0x41C, arg_item0->entity, &spark_pos);
     }
 }
 
@@ -331,6 +412,12 @@ static void it_8026FAC4_noinline(Item* ip, HitCapsule* hit, s32 arg2,
     it_8026FAC4(ip, hit, arg2, arg3, chk);
 }
 
+/**
+ * @brief Detects item grab / catch hitboxes connecting with fighters.
+ * @details Checks catch-element hitboxes against grabbable fighter hurtboxes
+ * and records the grab victim if valid.
+ * @param gobj Pointer to Item GObj
+ */
 void it_802701BC(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
@@ -352,29 +439,29 @@ void it_802701BC(Item_GObj* gobj)
             u32 it_hit_index = 0U;
             while (it_hit_index < 4U) {
                 HitCapsule* arg_hit = &ip->x5D4_hitboxes[it_hit_index].hit;
-                HitCapsule* new_var = arg_hit;
-                if ((new_var->state != HitCapsule_Disabled) &&
-                    (new_var->element == HitElement_Catch) &&
-                    ((new_var->x40_b2 && (fp->ground_or_air == GA_Air)) ||
-                     (new_var->x40_b3 && (fp->ground_or_air == GA_Ground))) &&
-                    !lbColl_8000ACFC(fp, new_var))
+                HitCapsule* hit = arg_hit;
+                if ((hit->state != HitCapsule_Disabled) &&
+                    (hit->element == HitElement_Catch) &&
+                    ((hit->x40_b2 && (fp->ground_or_air == GA_Air)) ||
+                     (hit->x40_b3 && (fp->ground_or_air == GA_Ground))) &&
+                    !lbColl_8000ACFC(fp, hit))
                 {
                     u32 ft_hit_index = 0U;
                     while (ft_hit_index < fp->hurt_capsules_len) {
                         if (fp->hurt_capsules[ft_hit_index].is_grabbable &&
                             lbColl_80007ECC(
-                                new_var,
+                                hit,
                                 &fp->hurt_capsules[ft_hit_index].capsule,
                                 ftCommon_8007F804(fp), ip->scl,
                                 fp->x34_scale.y, fp->cur_pos.z))
                         {
-                            f32 pos_x;
-                            it_8026FAC4_noinline(ip, new_var, 0, fp, 0);
-                            pos_x = ABS(fp->cur_pos.x - ip->pos.x);
-                            if (pos_x < ip->xD10) {
+                            f32 dist_x;
+                            it_8026FAC4_noinline(ip, hit, 0, fp, 0);
+                            dist_x = ABS(fp->cur_pos.x - ip->pos.x);
+                            if (dist_x < ip->xD10) {
                                 ip->grab_victim = ip->atk_victim = fp->gobj;
                                 ip->xDD0_flag.x0.b1 = 1;
-                                ip->xD10 = pos_x;
+                                ip->xD10 = dist_x;
                             }
                             return;
                         }
@@ -394,6 +481,12 @@ static void it_8026F9AC_noinline(s32 arg0, void* fighter, HitCapsule* hit,
     it_8026F9AC(arg0, fighter, hit, arg_item, hurt);
 }
 
+/**
+ * @brief Checks fighter attack hitboxes colliding with an item's defensive hurtboxes.
+ * @details Handles team checks, friendly fire, damage accumulation, damage logging,
+ * and hit sound effects.
+ * @param arg_item_gobj Pointer to Item GObj
+ */
 void it_802703E8(Item_GObj* arg_item_gobj)
 {
     Item* arg_item;
@@ -474,9 +567,9 @@ void it_802703E8(Item_GObj* arg_item_gobj)
                     {
                         lbAudioAx_800237A8(0x61A87, 0x7FU, 0x40U);
                     } else if ((kind != It_PKind_Random) ||
-                               (arg_item->xDD4_itemVar.pokemon.x0 != 8) ||
-                               ((hit->sfx_kind != 1U) &&
-                                (hit->sfx_kind != 2U)))
+                                (arg_item->xDD4_itemVar.pokemon.x0 != 8) ||
+                                ((hit->sfx_kind != 1U) &&
+                                 (hit->sfx_kind != 2U)))
                     {
                         lbColl_80005BB0(hit, -1);
                     }
@@ -489,6 +582,13 @@ void it_802703E8(Item_GObj* arg_item_gobj)
     }
 }
 
+/**
+ * @brief Subroutine applying damage to an item when struck by another item's hitbox.
+ * @param item Attacking Item
+ * @param arg_item Victim Item
+ * @param hit Connecting offensive HitCapsule
+ * @param arg_hurt Struck defensive HurtCapsule
+ */
 static inline void it_802706D0_sub3(Item* item, Item* arg_item,
                                     HitCapsule* hit, HurtCapsule* arg_hurt)
 {
@@ -533,6 +633,12 @@ static inline void it_802706D0_sub3(Item* item, Item* arg_item,
     }
 }
 
+/**
+ * @brief Master item-to-item collision detection routine.
+ * @details Tests all active item pairs for hitbox vs hitbox clanking, hitbox vs hurtbox
+ * damage, and inert collision touches.
+ * @param arg_item_gobj Pointer to Item GObj
+ */
 void it_802706D0(Item_GObj* arg_item_gobj)
 {
     u32 hit_index;
@@ -596,7 +702,7 @@ void it_802706D0(Item_GObj* arg_item_gobj)
             }
             if (chk && !arg_item->xDD0_flag.x0.b1 && (count != 0)) {
                 u32 i;
-                bool chk2 = false;
+                bool hitbox_clanked = false;
                 for (i = 0; i < 4U; i++) {
                     if (it_804D6D1C[i] != 0) {
                         HitCapsule* arg_hit = &arg_item->x5D4_hitboxes[i].hit;
@@ -615,7 +721,7 @@ void it_802706D0(Item_GObj* arg_item_gobj)
                                     arg_item->xDCE_flag.x0.b6 = 1;
                                     arg_item->toucher = item->entity;
                                 }
-                                chk2 = true;
+                                hitbox_clanked = true;
                                 break;
                             }
                         } else if ((hit->x40_b0 == 1) &&
@@ -624,12 +730,12 @@ void it_802706D0(Item_GObj* arg_item_gobj)
                                                    arg_item->scl))
                         {
                             it_8026FE68(item, hit, arg_item, tmp_hit);
-                            chk2 = true;
+                            hitbox_clanked = true;
                             break;
                         }
                     }
                 }
-                if (chk2) {
+                if (hitbox_clanked) {
                     continue;
                 }
             }
@@ -665,14 +771,23 @@ void it_802706D0(Item_GObj* arg_item_gobj)
     }
 }
 
+/**
+ * @brief Computes knockback for an item from a hit capsule based on item attributes.
+ * @details Knockback formula:
+ * KB = 0.01 * bks * (p11 * (dmg_mul * (p8 * dmg_accum + p9 * (dmg * dmg_accum))) + p12) + kbg
+ * Clamped to max knockback threshold (it_804D6D28->x80_float[7]).
+ * @param ip Pointer to Item instance
+ * @param hit Pointer to connecting HitCapsule
+ * @return Computed knockback value, clamped to maximum
+ */
 f32 it_80270CD8(Item* ip, HitCapsule* hit)
 {
     ItemAttr* attr = ip->xCC_item_attr;
     f32 f0;
-    f32 f1;
+    f32 knockback;
 
     if (hit->x28 != 0) {
-        f1 = (0.01f * hit->x24 *
+        knockback = (0.01f * hit->x24 *
               ((it_804D6D28->x80_float[11] *
                 (attr->x1C_damage_mul *
                  ((it_804D6D28->x80_float[10] * it_804D6D28->x80_float[8]) +
@@ -681,7 +796,7 @@ f32 it_80270CD8(Item* ip, HitCapsule* hit)
                it_804D6D28->x80_float[12])) +
              hit->x2C;
     } else {
-        f1 = ((0.01f * hit->x24) *
+        knockback = ((0.01f * hit->x24) *
               ((it_804D6D28->x80_float[11] *
                 (attr->x1C_damage_mul *
                  ((it_804D6D28->x80_float[8] * (ip->xC9C + (f32) ip->xCA0)) +
@@ -690,10 +805,10 @@ f32 it_80270CD8(Item* ip, HitCapsule* hit)
                it_804D6D28->x80_float[12])) +
              hit->x2C;
     }
-    if (f1 >= it_804D6D28->x80_float[7]) {
-        f1 = it_804D6D28->x80_float[7];
+    if (knockback >= it_804D6D28->x80_float[7]) {
+        knockback = it_804D6D28->x80_float[7];
     }
-    return f1;
+    return knockback;
 }
 
 struct it_80270E30_hurt_pos {
@@ -708,6 +823,13 @@ struct it_80270E30_hurt_pos_p {
     Vec3* v;
 };
 
+/**
+ * @brief Processes damage log entries, applies maximum knockback, and spawns elemental hit effects.
+ * @details Evaluates all logged hits, determines the highest knockback attack, spawns
+ * element-specific particles (Fire, Electric, Slash, Coin, Ice, Dark, etc.), and updates
+ * attacker identity and knockback angle on the item.
+ * @param arg_item_gobj Pointer to Item GObj
+ */
 void it_80270E30(Item_GObj* arg_item_gobj)
 {
     Item* arg_item;
@@ -723,13 +845,13 @@ void it_80270E30(Item_GObj* arg_item_gobj)
     UNUSED f32 unused_float2;
     UNUSED f32 unused_float3;
     UNUSED f32 unused_float4;
-    f32 sp18;
+    f32 dmg_f32;
     UNUSED s32 unused_int0;
     s32 element;
     Item* item;
-    DamageLogEntry* temp_r29;
+    DamageLogEntry* dominant_hit;
     struct it_80270E30_hurt_pos_p hurt_pos_p;
-    u32 index2;
+    u32 max_kb_idx;
     HitCapsule* hit2;
     ItemAttr* attr;
     Vec3* hurt_coll_pos;
@@ -780,7 +902,7 @@ void it_80270E30(Item_GObj* arg_item_gobj)
                     if ((arg_item->hold_kind == ITEM_HOLD_4) ||
                         (arg_item->hold_kind == ITEM_HOLD_6))
                     {
-                        sp18 = hit->damage;
+                        dmg_f32 = hit->damage;
                         hit2 = damage_log.v->x8;
                         arg_item2 = arg_item_gobj->user_data;
                         hurt_coll_pos = &hit2->hurt_coll_pos;
@@ -788,7 +910,7 @@ void it_80270E30(Item_GObj* arg_item_gobj)
                         switch (element) {
                         case Ef_Id_Unk1000:
                             efSync_Spawn(Ef_Id_Unk1000, arg_item_gobj,
-                                         hurt_coll_pos, &sp18);
+                                         hurt_coll_pos, &dmg_f32);
                             break;
                         case Ef_Id_Unk1001:
                         case Ef_Id_Unk1002:
@@ -813,16 +935,16 @@ void it_80270E30(Item_GObj* arg_item_gobj)
                 }
                 if (knockback > max_knockback) {
                     max_knockback = knockback;
-                    index2 = index;
+                    max_kb_idx = index;
                 }
                 damage_log.v++;
                 index++;
             }
         }
-        temp_r29 = &it_804A0E70[index2];
-        switch (temp_r29->x0) {
+        dominant_hit = &it_804A0E70[max_kb_idx];
+        switch (dominant_hit->x0) {
         case 1:
-            fighter = temp_r29->x4;
+            fighter = dominant_hit->x4;
             arg_item->xCB0_source_ply = (s32) fighter->player_idx;
             arg_item->xCEC_fighterGObj = fighter->gobj;
             arg_item->xCF0_itemGObj = NULL;
@@ -835,7 +957,7 @@ void it_80270E30(Item_GObj* arg_item_gobj)
             it_8027B4A4(fighter->gobj, arg_item_gobj);
             break;
         case 2:
-            item = temp_r29->x4;
+            item = dominant_hit->x4;
             item_owner_gobj = item->owner;
             if ((item_owner_gobj != NULL) && ftLib_IsFighter(item_owner_gobj))
             {
@@ -865,13 +987,18 @@ void it_80270E30(Item_GObj* arg_item_gobj)
             it_8027B508(item->entity, arg_item_gobj);
             break;
         }
-        arg_item->xCAC_angle = temp_r29->x8->kb_angle;
+        arg_item->xCAC_angle = dominant_hit->x8->kb_angle;
         arg_item->xCC8_knockback = max_knockback;
-        arg_item->xCC4 = temp_r29->x8->element;
-        arg_item->xDCF_flag.x0.b6 = temp_r29->x8->x43_b0;
+        arg_item->xCC4 = dominant_hit->x8->element;
+        arg_item->xDCF_flag.x0.b6 = dominant_hit->x8->x43_b0;
     }
 }
 
+/**
+ * @brief Updates position and advances interpolation state for a single item hitbox.
+ * @param arg_item_gobj Pointer to Item GObj
+ * @param index Index of the hitbox (0-3)
+ */
 void it_8027129C(Item_GObj* arg_item_gobj, s32 index)
 {
     HitCapsuleState state;
@@ -902,6 +1029,10 @@ void it_8027129C(Item_GObj* arg_item_gobj, s32 index)
     }
 }
 
+/**
+ * @brief Updates world positions and advances interpolation states for all hitboxes on an item.
+ * @param arg_item_gobj Pointer to Item GObj
+ */
 void it_8027137C(Item_GObj* arg_item_gobj)
 {
     u32 index;
@@ -934,6 +1065,10 @@ void it_8027137C(Item_GObj* arg_item_gobj)
     }
 }
 
+/**
+ * @brief Clears hit status and disables all hitboxes on an item.
+ * @param item_gobj Pointer to Item GObj
+ */
 void it_8027146C(Item_GObj* item_gobj)
 {
     int i;
@@ -943,6 +1078,10 @@ void it_8027146C(Item_GObj* item_gobj)
     }
 }
 
+/**
+ * @brief Resets the skip position update flag on all hurtboxes of an item.
+ * @param item_gobj Pointer to Item GObj
+ */
 void it_802714C0(Item_GObj* item_gobj)
 {
     u32 index;
@@ -959,6 +1098,11 @@ void it_802714C0(Item_GObj* item_gobj)
     item->xDAA.xDAA_flag.x0.b1 = 1;
 }
 
+/**
+ * @brief Sets the hurtbox state (enabled, disabled, invulnerable) across all item hurtboxes.
+ * @param item_gobj Pointer to Item GObj
+ * @param state HurtCapsuleState to apply
+ */
 void it_80271508(Item_GObj* item_gobj, HurtCapsuleState state)
 {
     u32 index;
@@ -974,6 +1118,12 @@ void it_80271508(Item_GObj* item_gobj, HurtCapsuleState state)
     }
 }
 
+/**
+ * @brief Copies hurtbox offsets and scale from argument into the specified item hurtbox.
+ * @param item_gobj Pointer to Item GObj
+ * @param index Hurtbox index
+ * @param arg_hurt Source HurtCapsule containing offsets and scale
+ */
 void it_80271534(Item_GObj* item_gobj, s32 index, HurtCapsule* arg_hurt)
 {
     HurtCapsule* hurt;
@@ -988,10 +1138,16 @@ void it_80271534(Item_GObj* item_gobj, s32 index, HurtCapsule* arg_hurt)
     }
 }
 
+/**
+ * @brief Reads hurtbox offsets and scale from the specified item hurtbox into argument.
+ * @param item_gobj Pointer to Item GObj
+ * @param index Hurtbox index
+ * @param arg_hurt Destination HurtCapsule to receive offsets and scale
+ */
 void it_80271590(Item_GObj* item_gobj, s32 index, HurtCapsule* arg_hurt)
 {
     u8 _[8];
-    Vec3 sp18;
+    Vec3 zero_vec;
     HurtCapsule* hurt;
     Item* item;
 
@@ -1003,12 +1159,16 @@ void it_80271590(Item_GObj* item_gobj, s32 index, HurtCapsule* arg_hurt)
         arg_hurt->scale = hurt->scale;
         return;
     }
-    sp18.x = sp18.y = sp18.z = 0.0f;
-    arg_hurt->a_offset = sp18;
-    arg_hurt->b_offset = sp18;
+    zero_vec.x = zero_vec.y = zero_vec.z = 0.0f;
+    arg_hurt->a_offset = zero_vec;
+    arg_hurt->b_offset = zero_vec;
     arg_hurt->scale = 0.0f;
 }
 
+/**
+ * @brief Initializes item hurtboxes and dynamic collision bones from Article data.
+ * @param item_gobj Pointer to Item GObj
+ */
 void it_8027163C(Item_GObj* item_gobj)
 {
     Item* item;
@@ -1075,14 +1235,19 @@ void it_8027163C(Item_GObj* item_gobj)
     }
 }
 
+/**
+ * @brief Rotates an item's Environmental Collision Box (ECB) around the Z axis.
+ * @param item Pointer to Item instance
+ * @param angle Rotation angle in radians
+ */
 void it_80271830(Item* item, f32 angle)
 {
-    Vec3 sp68;
-    Vec3 sp5C;
-    Vec3 sp50;
-    Vec3 sp44;
+    Vec3 top_vec;
+    Vec3 bottom_vec;
+    Vec3 right_vec;
+    Vec3 left_vec;
     UNUSED unsigned char _pad[24];
-    Vec3 sp20 = *(Vec3*) &it_803B8560;
+    Vec3 unit_z = *(Vec3*) &it_803B8560;
     f32 left_pos;
     f32 top_pos;
     f32 right_pos;
@@ -1094,36 +1259,40 @@ void it_80271830(Item* item, f32 angle)
     while (angle > (M_TAU)) {
         angle -= M_TAU;
     }
-    sp68.y = item->xBEC.top;
-    sp68.x = sp68.z = 0.0f;
-    lbVector_RotateAboutUnitAxis(&sp68, &sp20, angle);
-    sp5C.y = item->xBEC.bottom;
-    sp5C.x = sp5C.z = 0.0f;
-    lbVector_RotateAboutUnitAxis(&sp5C, &sp20, angle);
-    sp50.x = item->xBEC.right;
-    sp50.y = sp50.z = 0.0f;
-    lbVector_RotateAboutUnitAxis(&sp50, &sp20, angle);
-    sp44.x = item->xBEC.left;
-    sp44.y = sp44.z = 0.0f;
-    lbVector_RotateAboutUnitAxis(&sp44, &sp20, angle);
-    left_pos = (sp68.x > sp5C.x) ? sp68.x : sp5C.x;
-    left_pos = (left_pos > sp50.x) ? left_pos : sp50.x;
-    left_pos = (left_pos > sp44.x) ? left_pos : sp44.x;
+    top_vec.y = item->xBEC.top;
+    top_vec.x = top_vec.z = 0.0f;
+    lbVector_RotateAboutUnitAxis(&top_vec, &unit_z, angle);
+    bottom_vec.y = item->xBEC.bottom;
+    bottom_vec.x = bottom_vec.z = 0.0f;
+    lbVector_RotateAboutUnitAxis(&bottom_vec, &unit_z, angle);
+    right_vec.x = item->xBEC.right;
+    right_vec.y = right_vec.z = 0.0f;
+    lbVector_RotateAboutUnitAxis(&right_vec, &unit_z, angle);
+    left_vec.x = item->xBEC.left;
+    left_vec.y = left_vec.z = 0.0f;
+    lbVector_RotateAboutUnitAxis(&left_vec, &unit_z, angle);
+    left_pos = (top_vec.x > bottom_vec.x) ? top_vec.x : bottom_vec.x;
+    left_pos = (left_pos > right_vec.x) ? left_pos : right_vec.x;
+    left_pos = (left_pos > left_vec.x) ? left_pos : left_vec.x;
     item->xBEC.left = left_pos;
-    top_pos = (sp68.y > sp5C.y) ? sp68.y : sp5C.y;
-    top_pos = (top_pos > sp50.y) ? top_pos : sp50.y;
-    top_pos = (top_pos > sp44.y) ? top_pos : sp44.y;
+    top_pos = (top_vec.y > bottom_vec.y) ? top_vec.y : bottom_vec.y;
+    top_pos = (top_pos > right_vec.y) ? top_pos : right_vec.y;
+    top_pos = (top_pos > left_vec.y) ? top_pos : left_vec.y;
     item->xBEC.top = top_pos;
-    right_pos = (sp68.x < sp5C.x) ? sp68.x : sp5C.x;
-    right_pos = (right_pos < sp50.x) ? right_pos : sp50.x;
-    right_pos = (right_pos < sp44.x) ? right_pos : sp44.x;
+    right_pos = (top_vec.x < bottom_vec.x) ? top_vec.x : bottom_vec.x;
+    right_pos = (right_pos < right_vec.x) ? right_pos : right_vec.x;
+    right_pos = (right_pos < left_vec.x) ? right_pos : left_vec.x;
     item->xBEC.right = right_pos;
-    bottom_pos = (sp68.y < sp5C.y) ? sp68.y : sp5C.y;
-    bottom_pos = (bottom_pos < sp50.y) ? bottom_pos : sp50.y;
-    bottom_pos = (bottom_pos < sp44.y) ? bottom_pos : sp44.y;
+    bottom_pos = (top_vec.y < bottom_vec.y) ? top_vec.y : bottom_vec.y;
+    bottom_pos = (bottom_pos < right_vec.y) ? bottom_pos : right_vec.y;
+    bottom_pos = (bottom_pos < left_vec.y) ? bottom_pos : left_vec.y;
     item->xBEC.bottom = bottom_pos;
 }
 
+/**
+ * @brief Computes rotated Environmental Collision Box (ECB) from joint rotation.
+ * @param item_gobj Pointer to Item GObj
+ */
 void it_80271A58(Item_GObj* item_gobj)
 {
     f32 rotate;
@@ -1148,13 +1317,17 @@ void it_80271A58(Item_GObj* item_gobj)
     it_80271830(item, rotate);
 }
 
+/**
+ * @brief Checks item ECB overlap against active fighters and applies nudge velocity.
+ * @param item_gobj Pointer to Item GObj
+ */
 void it_80271B60(Item_GObj* item_gobj)
 {
     f32 x_pos;
     itECB* ecb;
     UNUSED Item_FtTrack* unused_ft_track;
     f32 x_float;
-    Vec3 sp24;
+    Vec3 item_pos;
     f32 y_pos;
     f32 x_float_mag;
     HSD_JObj* item_jobj;
@@ -1166,22 +1339,22 @@ void it_80271B60(Item_GObj* item_gobj)
     item_jobj = GET_JOBJ(item_gobj);
     item = GET_ITEM(item_gobj);
     if (Item_804A0CCC.x154.x0.b0 != 1) {
-        HSD_JObjGetTranslation(item_jobj, &sp24);
+        HSD_JObjGetTranslation(item_jobj, &item_pos);
         cnt = 0U;
 
         while (cnt < Item_804A0CCC.count) {
             ecb = &Item_804A0CCC.ecb_offset_arr[cnt];
             y_pos = Item_804A0CCC.ft_pos_arr[cnt].y;
             x_pos = Item_804A0CCC.ft_pos_arr[cnt].x;
-            if (itColl_chkECBOverlap(x_pos, y_pos, &item->xBEC, ecb, &sp24)) {
-                if (ABS(sp24.x - x_pos) < 0.001f) {
+            if (itColl_chkECBOverlap(x_pos, y_pos, &item->xBEC, ecb, &item_pos)) {
+                if (ABS(item_pos.x - x_pos) < 0.001f) {
                     if (HSD_Randi(2) != 0) {
                         dir = 1.0f;
                     } else {
                         dir = -1.0f;
                     }
                 } else {
-                    if (sp24.x - x_pos < 0.0f) {
+                    if (item_pos.x - x_pos < 0.0f) {
                         dir = -1.0f;
                     } else {
                         dir = 1.0f;
@@ -1195,20 +1368,24 @@ void it_80271B60(Item_GObj* item_gobj)
     }
 }
 
+/**
+ * @brief Checks item ECB overlap against other grounded items and applies mutual nudge velocity.
+ * @param arg_item_gobj Pointer to Item GObj
+ */
 void it_80271D2C(Item_GObj* arg_item_gobj)
 {
     u8 _pad[12];
     HSD_JObj* arg_item_jobj = GET_JOBJ(arg_item_gobj);
     Item* arg_item = GET_ITEM(arg_item_gobj);
-    Vec3 sp34;
-    Vec3 sp28;
+    Vec3 item_a_pos;
+    Vec3 item_b_pos;
     HSD_GObj* item_gobj;
     f32 dir;
     HSD_JObj* item_jobj;
     Item* item;
     PAD_STACK(4);
 
-    HSD_JObjGetTranslation(arg_item_jobj, &sp34);
+    HSD_JObjGetTranslation(arg_item_jobj, &item_a_pos);
     item_gobj = HSD_GObjPLinkHead[HSD_GOBJ_PLINK_ITEM];
 
     while (item_gobj != NULL) {
@@ -1222,11 +1399,11 @@ void it_80271D2C(Item_GObj* arg_item_gobj)
                   .x1E)) // hold_kind 3 is open palm, facing down(?)
         )
         {
-            HSD_JObjGetTranslation(item_jobj, &sp28);
-            if (itColl_chkECBOverlap(sp28.x, sp28.y, &arg_item->xBEC,
-                                     &item->xBEC, &sp34))
+            HSD_JObjGetTranslation(item_jobj, &item_b_pos);
+            if (itColl_chkECBOverlap(item_b_pos.x, item_b_pos.y, &arg_item->xBEC,
+                                     &item->xBEC, &item_a_pos))
             {
-                if (ABS(sp34.x - sp28.x) < 0.001f) {
+                if (ABS(item_a_pos.x - item_b_pos.x) < 0.001f) {
                     if (!item->xDC8_word.flags.x1B) {
                         if (item->x70_nudge.x < 0.0f) {
                             dir = 1.0f;
@@ -1238,7 +1415,7 @@ void it_80271D2C(Item_GObj* arg_item_gobj)
                     } else {
                         dir = -1.0f;
                     }
-                } else if (sp34.x - sp28.x < 0.0f) {
+                } else if (item_a_pos.x - item_b_pos.x < 0.0f) {
                     dir = -1.0f;
                 } else {
                     dir = 1.0f;
@@ -1251,20 +1428,24 @@ void it_80271D2C(Item_GObj* arg_item_gobj)
     }
 }
 
+/**
+ * @brief Checks heavy item ECB overlap and applies horizontal nudge velocity to lighter items.
+ * @param gobj Pointer to Item GObj
+ */
 void it_80271F78(Item_GObj* gobj)
 {
     u8 _pad[12];
     HSD_JObj* jobj = GET_JOBJ(gobj);
     Item* arg_item = GET_ITEM(gobj);
-    Vec3 sp34;
-    Vec3 sp28;
+    Vec3 item_a_pos;
+    Vec3 item_b_pos;
     HSD_GObj* item_gobj;
     f32 dir;
     HSD_JObj* item_jobj;
     Item* item;
     PAD_STACK(4);
 
-    HSD_JObjGetTranslation(jobj, &sp34);
+    HSD_JObjGetTranslation(jobj, &item_a_pos);
     item_gobj = HSD_GObjPLinkHead[HSD_GOBJ_PLINK_ITEM];
 
     while (item_gobj != NULL) {
@@ -1274,11 +1455,11 @@ void it_80271F78(Item_GObj* gobj)
             (item->ground_or_air == GA_Ground) && !item->xDD1_flag.x0.b0 &&
             (itIsHeavy(item_gobj) == 1))
         {
-            HSD_JObjGetTranslation(item_jobj, &sp28);
-            if (itColl_chkECBOverlap(sp28.x, sp28.y, &arg_item->xBEC,
-                                     &item->xBEC, &sp34))
+            HSD_JObjGetTranslation(item_jobj, &item_b_pos);
+            if (itColl_chkECBOverlap(item_b_pos.x, item_b_pos.y, &arg_item->xBEC,
+                                     &item->xBEC, &item_a_pos))
             {
-                if (ABS(sp34.x - sp28.x) < 0.001f) {
+                if (ABS(item_a_pos.x - item_b_pos.x) < 0.001f) {
                     if (!item->xDC8_word.flags.x1B) {
                         if (item->x70_nudge.x < 0.0f) {
                             dir = 1.0f;
@@ -1290,7 +1471,7 @@ void it_80271F78(Item_GObj* gobj)
                     } else {
                         dir = -1.0f;
                     }
-                } else if (sp34.x - sp28.x < 0.0f) {
+                } else if (item_a_pos.x - item_b_pos.x < 0.0f) {
                     dir = -1.0f;
                 } else {
                     dir = 1.0f;
@@ -1303,6 +1484,12 @@ void it_80271F78(Item_GObj* gobj)
     }
 }
 
+/**
+ * @brief Master ECB collision update for grounded items.
+ * @details Evaluates ECB overlap against fighters, other grounded items, and heavy items,
+ * applying mutual horizontal nudge velocities.
+ * @param item_gobj Pointer to Item GObj
+ */
 void it_802721B8(Item_GObj* item_gobj)
 {
     u8 temp_r3;
@@ -1332,6 +1519,10 @@ void it_802721B8(Item_GObj* item_gobj)
     }
 }
 
+/**
+ * @brief Clears ECB nudge random flag (x1B) on an item.
+ * @param item_gobj Pointer to Item GObj
+ */
 void it_80272280(Item_GObj* item_gobj)
 {
     Item* item;
@@ -1340,6 +1531,10 @@ void it_80272280(Item_GObj* item_gobj)
     item->xDC8_word.flags.x1B = 0;
 }
 
+/**
+ * @brief Sets ECB nudge random flag (x1B) on an item.
+ * @param item_gobj Pointer to Item GObj
+ */
 void it_80272298(Item_GObj* item_gobj)
 {
     Item* item;
@@ -1348,6 +1543,10 @@ void it_80272298(Item_GObj* item_gobj)
     item->xDC8_word.flags.x1B = 1;
 }
 
+/**
+ * @brief Updates fighter ECB tracking cache if item is head of item list.
+ * @param item_gobj Pointer to Item GObj
+ */
 void it_802722B0(Item_GObj* item_gobj)
 {
     if (item_gobj == HSD_GObjPLinkHead[HSD_GOBJ_PLINK_ITEM]) {
@@ -1356,16 +1555,25 @@ void it_802722B0(Item_GObj* item_gobj)
     }
 }
 
+/**
+ * @brief Updates world space transform positions for dynamic collision bones.
+ * @param item_gobj Pointer to Item GObj
+ */
 void it_80272304(Item_GObj* item_gobj)
 {
     u32 i;
     Item* item = GET_ITEM(item_gobj);
     for (i = 0; i < item->xB68; i++) {
-        struct xB6C_t* tmp = &item->xB6C_vars[i];
-        lb_8000B1CC(tmp->xB7C, &tmp->xB6C, &tmp->xB84);
+        struct xB6C_t* bone_var = &item->xB6C_vars[i];
+        lb_8000B1CC(bone_var->xB7C, &bone_var->xB6C, &bone_var->xB84);
     }
 }
 
+/**
+ * @brief Updates item owner and team ID from last attacking fighter or item.
+ * @param arg_item_gobj Pointer to Item GObj
+ * @return Pointer to resolved owner HSD_GObj
+ */
 HSD_GObj* it_8027236C(Item_GObj* arg_item_gobj)
 {
     HSD_GObj* fighter_gobj;
@@ -1391,6 +1599,11 @@ HSD_GObj* it_8027236C(Item_GObj* arg_item_gobj)
     return arg_item->owner;
 }
 
+/**
+ * @brief Updates item owner and team ID from xCFC fighter pointer.
+ * @param arg_item_gobj Pointer to Item GObj
+ * @return Pointer to resolved owner HSD_GObj
+ */
 HSD_GObj* it_802723FC(Item_GObj* arg_item_gobj)
 {
     Item* arg_item;
@@ -1406,6 +1619,13 @@ HSD_GObj* it_802723FC(Item_GObj* arg_item_gobj)
     return arg_item->owner;
 }
 
+/**
+ * @brief Calculates scaled and staled damage for an item hitbox based on owning fighter.
+ * @details Accounts for giant/tiny scale factors and move staling.
+ * @param hitbox Pointer to HitCapsule to update
+ * @param damage Base damage value
+ * @param arg_item_gobj Pointer to Item GObj
+ */
 void it_80272460(HitCapsule* hitbox, u32 damage, Item_GObj* arg_item_gobj)
 {
     HSD_GObj* owner_gobj;
