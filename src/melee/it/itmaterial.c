@@ -1,3 +1,9 @@
+/**
+ * @file itmaterial.c
+ * @brief Item Material module
+ * @details Handles custom material and TEV setup for items, including color overlays, toon shading, and flashing effects.
+ * Module prefix: it
+ */
 #include "itmaterial.h"
 
 #include "forward.h"
@@ -49,6 +55,9 @@ struct it_MObjInfo it_mobj = {
     { HSD_TE_CNST, NULL, NULL, HSD_TE_RGB, HSD_TE_U8, 0xFF, 0xFF },
 };
 
+/**
+ * @brief Initializes the HSD_MObjInfo structure for items.
+ */
 void it_80277D08(void)
 {
     hsdInitClassInfo(HSD_CLASS_INFO(&it_mobj), HSD_CLASS_INFO(&hsdMObj),
@@ -61,6 +70,9 @@ void it_80277D08(void)
     it_mobj.make_texp = hsdMObj.make_texp;
 }
 
+/**
+ * @brief Custom setup function for item materials (shadows, toon shading, blending).
+ */
 void fn_80277D8C(HSD_MObj* mobj, u32 rendermode_arg, u32 unused_arg)
 {
     HSD_TObj* tobj2;
@@ -126,6 +138,9 @@ void fn_80277D8C(HSD_MObj* mobj, u32 rendermode_arg, u32 unused_arg)
     }
 }
 
+/**
+ * @brief Sets up TEV expression data to apply item color overlays (e.g., flashing).
+ */
 HSD_TExp* it_80277F90(Item* item, HSD_MObj* mobj, HSD_TExp* arg2)
 {
     HSD_TevDesc desc;
@@ -164,6 +179,9 @@ HSD_TExp* it_80277F90(Item* item, HSD_MObj* mobj, HSD_TExp* arg2)
     return NULL;
 }
 
+/**
+ * @brief Applies complex color blending to the material based on item color overlays.
+ */
 void it_80278108(Item* item, HSD_MObj* mobj, HSD_TExp* texp)
 {
     GXColor sp168;
@@ -261,9 +279,9 @@ void it_80278108(Item* item, HSD_MObj* mobj, HSD_TExp* texp)
             var_r0 = 0;
         }
         if (var_r0 != 0) {
-            var_r3 = 4;
+            curr_dobj = 4;
         } else {
-            var_r3 = 0;
+            curr_dobj = 0;
         }
         reg2 = lbGetFreeColorRegister(var_r3, mobj, (HSD_TExp*) &spFC);
         if (reg2 == -1) {
@@ -322,9 +340,12 @@ void it_80278108(Item* item, HSD_MObj* mobj, HSD_TExp* texp)
     }
 }
 
-void it_80278574(HSD_GObj* gobj, GXColor* arg1)
+/**
+ * @brief Recursively sets the diffuse color for all materials in the item\'s JObj tree.
+ */
+void it_80278574(HSD_GObj* gobj, GXColor* diffuse_color)
 {
-    HSD_DObj* var_r3;
+    HSD_DObj* curr_dobj;
     HSD_JObj* var_r0;
     HSD_JObj* var_r0_2;
     HSD_JObj* var_r0_3;
@@ -333,70 +354,70 @@ void it_80278574(HSD_GObj* gobj, GXColor* arg1)
     HSD_JObj* var_r0_6;
     HSD_JObj* var_r0_7;
     HSD_JObj* var_r0_8;
-    HSD_JObj* var_r31;
+    HSD_JObj* curr_jobj;
     HSD_JObj* var_r3_2;
     HSD_JObj* var_r3_3;
-    HSD_MObj* temp_r4;
-    HSD_Material* temp_r4_2;
+    HSD_MObj* curr_mobj;
+    HSD_Material* curr_mat;
     PAD_STACK(4);
 
-    // var_r31 = GET_JOBJ(gobj->hsd_obj);
-    var_r31 = gobj->hsd_obj;
-    while (var_r31 != NULL) {
-        var_r3 = HSD_JObjGetDObj(var_r31);
-        while (var_r3 != NULL) {
-            temp_r4 = var_r3->mobj;
-            if (temp_r4 != NULL) {
-                temp_r4_2 = temp_r4->mat;
-                if (temp_r4_2 != NULL) {
-                    temp_r4_2->diffuse = *arg1;
+    // curr_jobj = GET_JOBJ(gobj->hsd_obj);
+    curr_jobj = gobj->hsd_obj;
+    while (curr_jobj != NULL) {
+        curr_dobj = HSD_JObjGetDObj(curr_jobj);
+        while (curr_dobj != NULL) {
+            curr_mobj = curr_dobj->mobj;
+            if (curr_mobj != NULL) {
+                curr_mat = curr_mobj->mat;
+                if (curr_mat != NULL) {
+                    curr_mat->diffuse = *diffuse_color;
                 }
             }
-            if (var_r3 != NULL) {
-                var_r3 = var_r3->next;
+            if (curr_dobj != NULL) {
+                curr_dobj = curr_dobj->next;
             } else {
-                var_r3 = NULL;
+                curr_dobj = NULL;
             }
         }
-        if (var_r31 == NULL) {
+        if (curr_jobj == NULL) {
             var_r0 = NULL;
         } else {
-            var_r0 = var_r31->child;
+            var_r0 = curr_jobj->child;
         }
         if (var_r0 != NULL) {
-            if (var_r31 == NULL) {
+            if (curr_jobj == NULL) {
                 var_r0_2 = NULL;
             } else {
-                var_r0_2 = var_r31->child;
+                var_r0_2 = curr_jobj->child;
             }
-            var_r31 = var_r0_2;
+            curr_jobj = var_r0_2;
         } else {
-            if (var_r31 == NULL) {
+            if (curr_jobj == NULL) {
                 var_r0_3 = NULL;
             } else {
-                var_r0_3 = var_r31->next;
+                var_r0_3 = curr_jobj->next;
             }
             if (var_r0_3 != NULL) {
-                if (var_r31 == NULL) {
+                if (curr_jobj == NULL) {
                     var_r0_4 = NULL;
                 } else {
-                    var_r0_4 = var_r31->next;
+                    var_r0_4 = curr_jobj->next;
                 }
-                var_r31 = var_r0_4;
+                curr_jobj = var_r0_4;
             } else {
             loop_25:
-                if (var_r31 == NULL) {
+                if (curr_jobj == NULL) {
                     var_r0_5 = NULL;
                 } else {
-                    var_r0_5 = var_r31->parent;
+                    var_r0_5 = curr_jobj->parent;
                 }
                 if (var_r0_5 == NULL) {
-                    var_r31 = NULL;
+                    curr_jobj = NULL;
                 } else {
-                    if (var_r31 == NULL) {
+                    if (curr_jobj == NULL) {
                         var_r3_2 = NULL;
                     } else {
-                        var_r3_2 = var_r31->parent;
+                        var_r3_2 = curr_jobj->parent;
                     }
                     if (var_r3_2 == NULL) {
                         var_r0_6 = NULL;
@@ -404,24 +425,24 @@ void it_80278574(HSD_GObj* gobj, GXColor* arg1)
                         var_r0_6 = var_r3_2->next;
                     }
                     if (var_r0_6 != NULL) {
-                        if (var_r31 == NULL) {
+                        if (curr_jobj == NULL) {
                             var_r3_3 = NULL;
                         } else {
-                            var_r3_3 = var_r31->parent;
+                            var_r3_3 = curr_jobj->parent;
                         }
                         if (var_r3_3 == NULL) {
                             var_r0_7 = NULL;
                         } else {
                             var_r0_7 = var_r3_3->next;
                         }
-                        var_r31 = var_r0_7;
+                        curr_jobj = var_r0_7;
                     } else {
-                        if (var_r31 == NULL) {
+                        if (curr_jobj == NULL) {
                             var_r0_8 = NULL;
                         } else {
-                            var_r0_8 = var_r31->parent;
+                            var_r0_8 = curr_jobj->parent;
                         }
-                        var_r31 = var_r0_8;
+                        curr_jobj = var_r0_8;
                         goto loop_25;
                     }
                 }
