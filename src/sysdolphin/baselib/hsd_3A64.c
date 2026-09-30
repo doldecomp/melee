@@ -1,7 +1,6 @@
 #include <stdarg.h>
 #include <stdio.h>
 
-#include "cobj.h"
 #include "gobjobject.h"
 #include "sislib.h"
 #include "sislib_font.h"

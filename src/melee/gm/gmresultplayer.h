@@ -4,7 +4,7 @@
 #include <sysdolphin/baselib/forward.h>
 
 #include <melee/gm/types.h>
-#include <sysdolphin/baselib/cobj.h>
+#include <sysdolphin/baselib/cobj.h> // IWYU pragma: keep
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/jobj.h>
 #include <sysdolphin/baselib/tobj.h>

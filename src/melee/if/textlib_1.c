@@ -4,7 +4,6 @@
 #include "textlib.h"
 #include "types.h"
 #include <melee/mn/inlines.h>
-#include <sysdolphin/baselib/cobj.h>
 #include <sysdolphin/baselib/controller.h>
 #include <sysdolphin/baselib/fog.h>
 #include <sysdolphin/baselib/gobj.h>

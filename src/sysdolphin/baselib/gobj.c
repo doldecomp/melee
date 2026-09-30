@@ -1,6 +1,5 @@
 #include "gobj.h"
 
-#include "cobj.h"
 #include "fog.h"
 #include "gobjplink.h"
 #include "gobjproc.h"

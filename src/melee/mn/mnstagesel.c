@@ -14,6 +14,7 @@
 #include <melee/lb/lbdvd.h>
 #include <melee/lb/lblanguage.h>
 #include <melee/lb/types.h>
+#include <sysdolphin/baselib/cobj.h> // IWYU pragma: keep
 #include <sysdolphin/baselib/controller.h>
 #include <sysdolphin/baselib/fog.h>
 #include <sysdolphin/baselib/gobj.h>
