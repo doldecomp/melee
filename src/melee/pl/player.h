@@ -313,4 +313,9 @@ void Player_SetFlagsAEBit0(s32 slot, u8 bit0);
 s32 Player_80033BB8(int slot);
 /* 4D6470 */ extern pl_804D6470_t* pl_804D6470;
 
+/// The @c plLoadCommonData root of @c PdPm.dat.
+struct plLoadCommonData {
+    /* +0 */ pl_804D6470_t* x0;
+};
+
 #endif

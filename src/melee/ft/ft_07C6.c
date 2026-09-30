@@ -21,11 +21,11 @@ void ft_8007C630(Fighter_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     int i;
     for (i = 0; i < (signed) ARRAY_SIZE(fp->x1614); i++) {
-        struct ftData_x38* temp_r6 = &fp->ft_data->x38[i];
+        AbsorbDesc* temp_r6 = &fp->ft_data->x38[i];
         struct Fighter_x1614_t* temp_r27 = &fp->x1614[i];
-        fp->x1614[i].x4 = fp->parts[temp_r6->x0].joint;
-        fp->x1614[i].x0 = temp_r6->x10;
-        lb_8000B1CC(temp_r27->x4, &temp_r6->x4, &temp_r27->x8);
+        fp->x1614[i].x4 = fp->parts[temp_r6->x0_bone_id].joint;
+        fp->x1614[i].x0 = temp_r6->x10_size;
+        lb_8000B1CC(temp_r27->x4, &temp_r6->x4_offset, &temp_r27->x8);
         temp_r27->x8.z = 0.0F;
         temp_r27->x14 = temp_r27->x8;
     }
@@ -39,10 +39,10 @@ void ft_8007C6DC(Fighter_GObj* gobj)
     if (gm_8016B0B4()) {
         fp = GET_FIGHTER(gobj);
         for (i = 0; i < (signed) ARRAY_SIZE(fp->x1614); i++) {
-            struct ftData_x38* temp_r6 = &fp->ft_data->x38[i];
+            AbsorbDesc* temp_r6 = &fp->ft_data->x38[i];
             struct Fighter_x1614_t* temp_r27 = &fp->x1614[i];
             temp_r27->x14 = temp_r27->x8;
-            lb_8000B1CC(temp_r27->x4, &temp_r6->x4, &temp_r27->x8);
+            lb_8000B1CC(temp_r27->x4, &temp_r6->x4_offset, &temp_r27->x8);
             temp_r27->x8.z = 0.0F;
         }
     }

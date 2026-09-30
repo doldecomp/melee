@@ -1312,7 +1312,7 @@ void grIceMt_801F8CDC(Ground_GObj* gobj, s16* joint_indices, int block_num,
         UnkArchiveStruct* archive;
 
         archive = grDatFiles_GetArchive();
-        jobj_desc = archive->unk4->unk8[7].unk0;
+        jobj_desc = archive->unk4->unk8[7].joint;
 
         HSD_ASSERT(2004, block_num<=BLOCK_COLL_JOBJ_MAX);
 

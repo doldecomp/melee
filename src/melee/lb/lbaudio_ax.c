@@ -584,12 +584,7 @@ int lbAudioAx_80023870(int id, int vol, int pan, int track)
     return fn_80023750(id, vol, pan, track, 7);
 }
 
-static struct lbl_804D6454_t {
-    int** x0;
-    int** x4;
-    int** x8;
-    int** xC;
-}* lbl_804D6454;
+static struct lbl_804D6454_t* lbl_804D6454;
 
 void lbAudioAx_8002392C(void)
 {
