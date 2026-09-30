@@ -205,7 +205,7 @@ mod tests {
             Some(DatTag::Type("HSD_Joint".into()))
         );
         assert!(matches!(
-            DatTag::parse("dat:bind(Article::kind, _index + It_Kind_Kuriboh)"),
+            DatTag::parse("dat:bind(Article::kind, _index + It_Kind_Monster_Start)"),
             Some(DatTag::Bind(name, _)) if name == "Article::kind"
         ));
         assert_eq!(DatTag::parse("dat:bind(kind)"), None);

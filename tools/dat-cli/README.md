@@ -80,7 +80,7 @@ s32 unk4;
 
 HSD_Spline* spline DAT_IF((flags & JOBJ_SPLINE) != 0);
 
-Article** x4 DAT_COUNT(It_Kind_Kuriboh) DAT_BIND(Article::kind, _index);
+Article** x4 DAT_COUNT(It_Kind_Monster_Start) DAT_BIND(Article::kind, _index);
 ItCapsuleAttr capsule DAT_IF(Article::kind == It_Kind_Capsule);
 ```
 
