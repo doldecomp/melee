@@ -1,3 +1,10 @@
+/**
+ * @file robj.c
+ * @brief Reference/Constraint Object (RObj) subsystem for SysDolphin
+ * @details Implements constraint objects and effectors used for Inverse Kinematics (IK).
+ * Defines bone chain endpoints, angular limits, and position targets that the JObj IK solver 
+ * uses to procedurally position limbs. Supports bytecode evaluation for complex constraints.
+ */
 #include "robj.h"
 
 #include <math.h>
@@ -24,6 +31,9 @@ HSD_ObjAllocData rvalue_alloc_data; // rvalue_alloc_data
 static float* arg_buf;
 static u32 arg_buf_size;
 
+/**
+ * @brief Initializes/Allocates operations for HSD_RObjInitAllocData
+ */
 void HSD_RObjInitAllocData(void)
 {
     HSD_ObjAllocInit(&robj_alloc_data, sizeof(HSD_RObj), 4);
@@ -40,6 +50,11 @@ HSD_ObjAllocData* HSD_RvalueObjGetAllocData(void)
     return &rvalue_alloc_data;
 }
 
+/**
+ * @brief Sets operations for HSD_RObjSetFlags
+ * @param robj
+ * @param flags
+ */
 void HSD_RObjSetFlags(HSD_RObj* robj, u32 flags)
 {
     if (robj != NULL) {
@@ -75,7 +90,14 @@ HSD_RObj* HSD_RObjGetByType(HSD_RObj* robj, u32 type, u32 subtype)
     return NULL;
 }
 
-static void RObjUpdateFunc(void* obj, enum_t type, HSD_ObjData* val)
+/**
+ * @brief Handles operations for RObjUpdateFunc
+ * @param obj
+ * @param type
+ * @param val
+ * @return static void
+ */
+static void RObjUpdateFunc(void* robj_ptr, enum_t anim_type, HSD_ObjData* val)
 {
     HSD_RObj* robj;
 
@@ -95,6 +117,10 @@ static void RObjUpdateFunc(void* obj, enum_t type, HSD_ObjData* val)
     robj->flags = robj->flags & 0x7fffffff;
 }
 
+/**
+ * @brief Processes animation for operations for HSD_RObjAnim
+ * @param robj
+ */
 void HSD_RObjAnim(HSD_RObj* robj)
 {
     if (robj == NULL) {
@@ -104,6 +130,10 @@ void HSD_RObjAnim(HSD_RObj* robj)
     HSD_AObjInterpretAnim(robj->aobj, robj, RObjUpdateFunc);
 }
 
+/**
+ * @brief Processes animation for operations for HSD_RObjAnimAll
+ * @param robj
+ */
 void HSD_RObjAnimAll(HSD_RObj* robj)
 {
     HSD_RObj* curr;
@@ -117,6 +147,11 @@ void HSD_RObjAnimAll(HSD_RObj* robj)
     }
 }
 
+/**
+ * @brief Removes/Frees operations for HSD_RObjRemoveAnimByFlags
+ * @param robj
+ * @param flags
+ */
 void HSD_RObjRemoveAnimByFlags(HSD_RObj* robj, u32 flags)
 {
     if (robj == NULL) {
@@ -129,6 +164,11 @@ void HSD_RObjRemoveAnimByFlags(HSD_RObj* robj, u32 flags)
     }
 }
 
+/**
+ * @brief Removes/Frees operations for HSD_RObjRemoveAnimAllByFlags
+ * @param robj
+ * @param flags
+ */
 void HSD_RObjRemoveAnimAllByFlags(HSD_RObj* robj, u32 flags)
 {
     if (robj == NULL) {
@@ -140,11 +180,21 @@ void HSD_RObjRemoveAnimAllByFlags(HSD_RObj* robj, u32 flags)
     }
 }
 
+/**
+ * @brief Removes/Frees operations for HSD_RObjRemoveAnimAll
+ * @param robj
+ */
 void HSD_RObjRemoveAnimAll(HSD_RObj* robj)
 {
     HSD_RObjRemoveAnimAllByFlags(robj, 0x7FF);
 }
 
+/**
+ * @brief Processes animation for operations for HSD_RObjReqAnimByFlags
+ * @param robj
+ * @param startframe
+ * @param flags
+ */
 void HSD_RObjReqAnimByFlags(HSD_RObj* robj, f32 startframe, u32 flags)
 {
     if (robj == NULL) {
@@ -156,6 +206,12 @@ void HSD_RObjReqAnimByFlags(HSD_RObj* robj, f32 startframe, u32 flags)
     }
 }
 
+/**
+ * @brief Processes animation for operations for HSD_RObjReqAnimAllByFlags
+ * @param robj
+ * @param startframe
+ * @param flags
+ */
 void HSD_RObjReqAnimAllByFlags(HSD_RObj* robj, f32 startframe, u32 flags)
 {
     if (robj == NULL) {
@@ -167,11 +223,21 @@ void HSD_RObjReqAnimAllByFlags(HSD_RObj* robj, f32 startframe, u32 flags)
     }
 }
 
+/**
+ * @brief Processes animation for operations for HSD_RObjReqAnimAll
+ * @param robj
+ * @param startframe
+ */
 void HSD_RObjReqAnimAll(HSD_RObj* robj, f32 startframe)
 {
     HSD_RObjReqAnimAllByFlags(robj, startframe, 0x7FF);
 }
 
+/**
+ * @brief Processes animation for operations for HSD_RObjAddAnim
+ * @param robj
+ * @param anim
+ */
 void HSD_RObjAddAnim(HSD_RObj* robj, HSD_RObjAnimJoint* anim)
 {
     if (robj == NULL || anim == NULL) {
@@ -184,6 +250,11 @@ void HSD_RObjAddAnim(HSD_RObj* robj, HSD_RObjAnimJoint* anim)
     robj->aobj = HSD_AObjLoadDesc(anim->aobjdesc);
 }
 
+/**
+ * @brief Processes animation for operations for HSD_RObjAddAnimAll
+ * @param robj
+ * @param anim
+ */
 void HSD_RObjAddAnimAll(HSD_RObj* robj, HSD_RObjAnimJoint* anim)
 {
     HSD_RObj* i;
@@ -199,6 +270,11 @@ void HSD_RObjAddAnimAll(HSD_RObj* robj, HSD_RObjAnimJoint* anim)
     }
 }
 
+/**
+ * @brief Retrieves operations for HSD_RObjGetConstraintType
+ * @param robj
+ * @return static u32
+ */
 static u32 HSD_RObjGetConstraintType(HSD_RObj* robj)
 {
     if (robj == NULL) {
@@ -208,6 +284,13 @@ static u32 HSD_RObjGetConstraintType(HSD_RObj* robj)
     return robj->flags & 0x0FFFFFFF;
 }
 
+/**
+ * @brief Retrieves operations for HSD_RObjGetGlobalPosition
+ * @param robj
+ * @param type
+ * @param p
+ * @return int
+ */
 int HSD_RObjGetGlobalPosition(HSD_RObj* robj, int type, Vec3* p)
 {
     Vec3 v = { 0, 0, 0 };
@@ -240,8 +323,17 @@ int HSD_RObjGetGlobalPosition(HSD_RObj* robj, int type, Vec3* p)
     return n;
 }
 
+/**
+ * @brief Handles operations for set_dirup_matrix
+ * @param dir_ptr
+ * @param uv_ptr
+ * @param scale_ptr
+ * @param obj
+ * @param update_func
+ * @return static void
+ */
 static void set_dirup_matrix(Vec3* dir_ptr, Vec3* uv_ptr, Vec3* scale_ptr,
-                             void* obj, HSD_ObjUpdateFunc update_func)
+                             void* robj_ptr, HSD_ObjUpdateFunc update_func)
 {
     Vec3 z_vec;
     Vec3 v;
@@ -270,7 +362,14 @@ static void set_dirup_matrix(Vec3* dir_ptr, Vec3* uv_ptr, Vec3* scale_ptr,
     update_func(obj, 55, NULL);
 }
 
-static void resolveCnsDirUp(HSD_RObj* robj, void* obj,
+/**
+ * @brief Resolves constraint/IK references for operations for resolveCnsDirUp
+ * @param robj
+ * @param obj
+ * @param update_func
+ * @return static void
+ */
+static void resolveCnsDirUp(HSD_RObj* robj, void* robj_ptr,
                             HSD_ObjUpdateFunc update_func)
 {
     Vec3 this_scale = { 1.0f, 1.0f, 1.0f };
@@ -280,9 +379,9 @@ static void resolveCnsDirUp(HSD_RObj* robj, void* obj,
     f32 k;
 
     if (HSD_RObjGetGlobalPosition(robj, 2, &this_pos) != 0) {
-        dir.x = ((HSD_JObj*) obj)->mtx[0][3];
-        dir.y = ((HSD_JObj*) obj)->mtx[1][3];
-        dir.z = ((HSD_JObj*) obj)->mtx[2][3];
+        dir.x = ((HSD_JObj*) robj_ptr)->mtx[0][3];
+        dir.y = ((HSD_JObj*) robj_ptr)->mtx[1][3];
+        dir.z = ((HSD_JObj*) robj_ptr)->mtx[2][3];
         PSVECSubtract(&this_pos, &dir, &this_pos);
         if (HSD_RObjGetGlobalPosition(robj, 3, &up) != 0) {
             PSVECSubtract(&up, &dir, &up);
@@ -295,8 +394,8 @@ static void resolveCnsDirUp(HSD_RObj* robj, void* obj,
             }
         }
 
-        if (((HSD_JObj*) obj)->scl != NULL) {
-            this_scale = *((HSD_JObj*) obj)->scl;
+        if (((HSD_JObj*) robj_ptr)->scl != NULL) {
+            this_scale = *((HSD_JObj*) robj_ptr)->scl;
         }
         set_dirup_matrix(&this_pos, &up, &this_scale, obj, update_func);
     }
@@ -341,7 +440,16 @@ static inline HSD_RObj* inlined_HSD_RObjGetByType(HSD_RObj* robj, u32 type,
     return NULL;
 }
 
-static void resolveCnsOrientation(HSD_RObj* robj, void* obj,
+/**
+ * @brief Resolves constraint/IK references for operations for resolveCnsOrientation
+ * @param robj
+ * @param obj
+ * @param (update_func)(void
+ * @param int
+ * @param HSD_ObjData)
+ * @return static void
+ */
+static void resolveCnsOrientation(HSD_RObj* robj, void* robj_ptr,
                                   void (*update_func)(void*, int,
                                                       HSD_ObjData*))
 {
@@ -437,10 +545,17 @@ static void resolveCnsOrientation(HSD_RObj* robj, void* obj,
     update_func(obj, 0x37, NULL);
 }
 
-static void resolveLimits(HSD_RObj* robj, void* obj,
+/**
+ * @brief Resolves constraint/IK references for operations for resolveLimits
+ * @param robj
+ * @param obj
+ * @param update_func
+ * @return static void
+ */
+static void resolveLimits(HSD_RObj* robj, void* robj_ptr,
                           HSD_ObjUpdateFunc update_func)
 {
-    HSD_JObj* jobj = (HSD_JObj*) obj;
+    HSD_JObj* jobj = (HSD_JObj*) robj_ptr;
     HSD_RObj* rp;
     bool update_mtx = false;
 
@@ -541,10 +656,20 @@ static void resolveLimits(HSD_RObj* robj, void* obj,
     }
 }
 
-static void expEvaluate(HSD_Exp* exp, u32 type, void* obj,
+/**
+ * @brief Evaluates constraint expression/bytecode for operations for expEvaluate
+ * @param exp
+ * @param type
+ * @param obj
+ * @param robj
+ * @param obj
+ * @param update_func
+ * @return static void
+ */
+static void expEvaluate(HSD_Exp* exp, u32 eval_type, void* robj_ptr,
                         HSD_ObjUpdateFunc update_func);
 
-void HSD_RObjUpdateAll(HSD_RObj* robj, void* obj,
+void HSD_RObjUpdateAll(HSD_RObj* robj, void* robj_ptr,
                        HSD_ObjUpdateFunc update_func)
 {
     HSD_RObj* rp;
@@ -568,6 +693,11 @@ void HSD_RObjUpdateAll(HSD_RObj* robj, void* obj,
     }
 }
 
+/**
+ * @brief Resolves constraint/IK references for operations for HSD_RObjResolveRefs
+ * @param robj
+ * @param desc
+ */
 void HSD_RObjResolveRefs(HSD_RObj* robj, HSD_RObjDesc* desc)
 {
     if (robj != NULL && desc != NULL) {
@@ -585,6 +715,11 @@ void HSD_RObjResolveRefs(HSD_RObj* robj, HSD_RObjDesc* desc)
     }
 }
 
+/**
+ * @brief Resolves constraint/IK references for operations for HSD_RObjResolveRefsAll
+ * @param robj
+ * @param desc
+ */
 void HSD_RObjResolveRefsAll(HSD_RObj* robj, HSD_RObjDesc* desc)
 {
     for (; robj != NULL && desc != NULL; robj = robj->next, desc = desc->next)
@@ -593,6 +728,13 @@ void HSD_RObjResolveRefsAll(HSD_RObj* robj, HSD_RObjDesc* desc)
     }
 }
 
+/**
+ * @brief Handles operations for bcexpLoadDesc
+ * @param exp
+ * @param exp
+ * @param robjdesc
+ * @return static void
+ */
 static void bcexpLoadDesc(HSD_Exp* exp, HSD_ByteCodeExpDesc* desc);
 static void expLoadDesc(HSD_Exp* exp, HSD_ExpDesc* desc);
 
@@ -642,6 +784,10 @@ HSD_RObj* HSD_RObjLoadDesc(HSD_RObjDesc* robjdesc)
     return NULL;
 }
 
+/**
+ * @brief Removes/Frees operations for HSD_RObjRemove
+ * @param robj
+ */
 void HSD_RObjRemove(HSD_RObj* robj)
 {
     // s32 flags;
@@ -660,6 +806,10 @@ void HSD_RObjRemove(HSD_RObj* robj)
     }
 }
 
+/**
+ * @brief Removes/Frees operations for HSD_RObjRemoveAll
+ * @param robj
+ */
 void HSD_RObjRemoveAll(HSD_RObj* robj)
 {
     HSD_RObj* next;
@@ -678,6 +828,10 @@ HSD_RObj* HSD_RObjAlloc(void)
     return new;
 }
 
+/**
+ * @brief Removes/Frees operations for HSD_RObjFree
+ * @param robj
+ */
 void HSD_RObjFree(HSD_RObj* robj)
 {
     HSD_ObjFree(HSD_RObjGetAllocData(), robj);
@@ -685,7 +839,15 @@ void HSD_RObjFree(HSD_RObj* robj)
 
 static char HSD_RObj_80406F14[] = "(ptr && nitems) || !ptr";
 
-static void expEvaluate(HSD_Exp* exp, u32 type, void* obj,
+/**
+ * @brief Evaluates constraint expression/bytecode for operations for expEvaluate
+ * @param exp
+ * @param type
+ * @param obj
+ * @param update_func
+ * @return static void
+ */
+static void expEvaluate(HSD_Exp* exp, u32 eval_type, void* robj_ptr,
                         HSD_ObjUpdateFunc update_func)
 {
     HSD_Rvalue* rvalue;
@@ -697,7 +859,7 @@ static void expEvaluate(HSD_Exp* exp, u32 type, void* obj,
     Vec3 sp2C;
     u8 _[4]; ///< @todo should HSD_ObjData be 4 bytes larger?
     HSD_ObjData sp1C;
-    HSD_RObj* robj = (HSD_RObj*) obj;
+    HSD_RObj* robj = (HSD_RObj*) robj_ptr;
 
     if (exp->nb_args == -1) {
         u32 nb_args = 0;
@@ -820,6 +982,10 @@ HSD_Rvalue* HSD_RvalueAlloc(void)
     return rvalue;
 }
 
+/**
+ * @brief Removes/Frees operations for HSD_RvalueRemove
+ * @param rvalue
+ */
 void HSD_RvalueRemove(HSD_Rvalue* rvalue)
 {
     if (rvalue != NULL) {
@@ -828,6 +994,10 @@ void HSD_RvalueRemove(HSD_Rvalue* rvalue)
     }
 }
 
+/**
+ * @brief Removes/Frees operations for HSD_RvalueRemoveAll
+ * @param rvalue
+ */
 void HSD_RvalueRemoveAll(HSD_Rvalue* rvalue)
 {
     HSD_Rvalue* next;
@@ -857,6 +1027,12 @@ static HSD_Rvalue* loadRvalue(HSD_RvalueList* list)
     return (HSD_Rvalue*) rv.next;
 }
 
+/**
+ * @brief Handles operations for expLoadDesc
+ * @param exp
+ * @param desc
+ * @return static void
+ */
 static void expLoadDesc(HSD_Exp* exp, HSD_ExpDesc* desc)
 {
     memset(exp, 0, sizeof(HSD_Exp));
@@ -871,6 +1047,12 @@ static void expLoadDesc(HSD_Exp* exp, HSD_ExpDesc* desc)
     }
 }
 
+/**
+ * @brief Handles operations for bcexpLoadDesc
+ * @param exp
+ * @param desc
+ * @return static void
+ */
 static void bcexpLoadDesc(HSD_Exp* exp, HSD_ByteCodeExpDesc* desc)
 {
     memset(exp, 0, sizeof(HSD_Exp));
@@ -886,6 +1068,11 @@ static void bcexpLoadDesc(HSD_Exp* exp, HSD_ByteCodeExpDesc* desc)
     }
 }
 
+/**
+ * @brief Resolves constraint/IK references for operations for HSD_RvalueResolveRefs
+ * @param rvalue
+ * @param list
+ */
 void HSD_RvalueResolveRefs(HSD_Rvalue* rvalue, HSD_RvalueList* list)
 {
     if (rvalue != NULL && list != NULL) {
@@ -896,6 +1083,11 @@ void HSD_RvalueResolveRefs(HSD_Rvalue* rvalue, HSD_RvalueList* list)
     }
 }
 
+/**
+ * @brief Resolves constraint/IK references for operations for HSD_RvalueResolveRefsAll
+ * @param rvalue
+ * @param list
+ */
 void HSD_RvalueResolveRefsAll(HSD_Rvalue* rvalue, HSD_RvalueList* list)
 {
     if (list == NULL) {
@@ -908,6 +1100,11 @@ void HSD_RvalueResolveRefsAll(HSD_Rvalue* rvalue, HSD_RvalueList* list)
     }
 }
 
+/**
+ * @brief Sets operations for HSD_RObjSetConstraintObj
+ * @param robj
+ * @param o
+ */
 void HSD_RObjSetConstraintObj(HSD_RObj* robj, void* o)
 {
     bool isDesc;
