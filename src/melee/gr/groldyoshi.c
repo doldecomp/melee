@@ -457,7 +457,7 @@ float grOldYoshi_8020F31C(float param1, float param2, float param3,
     return param1;
 }
 
-DynamicsDesc* grOldYoshi_8020F404(enum_t arg)
+lbColl_80008D30_arg1* grOldYoshi_8020F404(enum_t arg)
 {
     return NULL;
 }

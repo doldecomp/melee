@@ -11,6 +11,10 @@ target_compile_definitions(melee PRIVATE
     BUILD_VERSION=0
 )
 target_compile_options(melee PRIVATE
+    # Aurora's headers in their console layout, like the game's: TARGET_PC
+    # makes GXBool a bool (an int, with bool=int) and grows GXTexObj and
+    # GXTlutObj
+    -UTARGET_PC
     # Before C23, <stdbool.h> redefines bool as the 1-byte _Bool, overriding
     # bool=int and shrinking every bool field relative to MWCC
     -std=gnu23

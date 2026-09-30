@@ -12,7 +12,8 @@
 /* 0C0874 */ void ftCo_800C0874(Fighter_GObj* gobj, UNK_T arg1,
                                 ftCommon_BuryType arg2);
 /* 0C08A0 */ void ftCo_800C08A0(Fighter_GObj* gobj, Fighter_GObj* arg1,
-                                DynamicsDesc* arg2, ftCommon_BuryType arg3);
+                                lbColl_80008D30_arg1* arg2,
+                                ftCommon_BuryType arg3);
 /* 0C09B4 */ void ftCo_800C09B4(Fighter_GObj* gobj);
 /* 0C0A28 */ bool ftCo_800C0A28(Fighter_GObj* gobj, UNK_T arg1,
                                 ftCommon_BuryType arg2);

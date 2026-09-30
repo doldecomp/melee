@@ -73,9 +73,11 @@ struct HSD_RObj {
 struct HSD_RObjDesc {
     HSD_RObjDesc* next;
     u32 flags; // 0x04
+    /// A pointer member first, so C89 initializers, which go through the
+    /// first member, can hold every variant
     union HSD_RObjDesc_u {
-        u32 i DAT_IF(false);
         HSD_ExpDesc* exp DAT_IF((flags & ROBJ_TYPE_MASK) == REFTYPE_EXP);
+        u32 i DAT_IF(false);
         HSD_ByteCodeExpDesc* bcexp DAT_IF((flags & ROBJ_TYPE_MASK) ==
                                           REFTYPE_BYTECODE);
         HSD_IKHintDesc* ik_hint DAT_IF((flags & ROBJ_TYPE_MASK) ==

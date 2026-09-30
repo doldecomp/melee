@@ -36,7 +36,7 @@
 /* 221208 */ static void grTIceClimber_80221208(Item_GObj*, Ground*, Vec3*,
                                                 HSD_GObj*, f32);
 /* 221288 */ static void grTIceClimber_80221288(HSD_GObj*);
-/* 221354 */ static DynamicsDesc* grTIceClimber_80221354(enum_t);
+/* 221354 */ static lbColl_80008D30_arg1* grTIceClimber_80221354(enum_t);
 /* 22135C */ static bool grTIceClimber_8022135C(Vec3*, int, HSD_JObj*);
 
 static StageCallbacks stage_callbacks[] = {
@@ -207,7 +207,7 @@ void grTIceClimber_80221288(HSD_GObj* ground_gobj)
     }
 }
 
-DynamicsDesc* grTIceClimber_80221354(enum_t gobj)
+lbColl_80008D30_arg1* grTIceClimber_80221354(enum_t gobj)
 {
     return NULL;
 }

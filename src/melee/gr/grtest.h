@@ -21,7 +21,7 @@
 /* 2073FC */ bool grTest_802073FC(Ground_GObj*);
 /* 207404 */ void grTest_80207404(Ground_GObj*);
 /* 207408 */ void grTest_80207408(Ground_GObj*);
-/* 20740C */ struct DynamicsDesc* grTest_8020740C(enum_t);
+/* 20740C */ lbColl_80008D30_arg1* grTest_8020740C(enum_t);
 /* 207414 */ bool grTest_80207414(Vec3* a, int id, HSD_JObj* jobj);
 /* 3E5764 */ extern StageData grTe_StageData;
 

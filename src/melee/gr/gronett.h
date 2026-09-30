@@ -39,7 +39,7 @@
 /* 1E5214 */ void grOnett_801E5214(Ground_GObj*);
 /* 1E5538 */ void grOnett_801E5538(Ground_GObj*);
 /* 1E56FC */ DynamicModelDesc* grOnett_801E56FC(void);
-/* 1E5760 */ DynamicsDesc* grOnett_801E5760(enum_t);
+/* 1E5760 */ lbColl_80008D30_arg1* grOnett_801E5760(enum_t);
 /* 1E5768 */ bool grOnett_801E5768(Vec3*, int, HSD_JObj*);
 /* 3E2858 */ extern StageData grOt_StageData;
 

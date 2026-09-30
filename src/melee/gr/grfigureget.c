@@ -56,7 +56,7 @@ static Vec3 const grFigureGet_803B8470 = { 0.0f, 0.0f, 0.0f };
                                               CollData* coll, int coll_x50,
                                               mpLib_GroundEnum ground_kind,
                                               float delta_y);
-/* 219C88 */ static DynamicsDesc* grFigureGet_OnTouchLine(enum_t);
+/* 219C88 */ static lbColl_80008D30_arg1* grFigureGet_OnTouchLine(enum_t);
 /* 219C90 */ static bool grFigureGet_OnCheckShadowRender(Vec3*, int,
                                                          HSD_JObj*);
 
@@ -347,7 +347,7 @@ bool grFigureGet_80219C50(HSD_GObj* gobj)
     return false;
 }
 
-DynamicsDesc* grFigureGet_OnTouchLine(enum_t arg0)
+lbColl_80008D30_arg1* grFigureGet_OnTouchLine(enum_t arg0)
 {
     return NULL;
 }

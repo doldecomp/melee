@@ -82,7 +82,7 @@ struct StageInfo {
     u8 xA4_pad[0x12C - 0xA4];
     HSD_GObj* x12C;
     Vec3 x130, x13C, x148, x154, x160, x16C;
-    DynamicsDesc* (*on_touch_line)(int);
+    lbColl_80008D30_arg1* (*on_touch_line)(int);
     bool (*on_check_shadow_render)(Vec3* fighter_pos, int, HSD_JObj*);
     Ground_GObj* map_gobjs[64];
     HSD_JObj* x280[261];

@@ -2218,7 +2218,7 @@ void fn_801D5074(Ground_GObj* gobj, intptr_t arg1)
     grDisplay_801C5DB0(gobj, arg1);
 }
 
-DynamicsDesc* grStadium_OnTouchLine(enum_t unused)
+lbColl_80008D30_arg1* grStadium_OnTouchLine(enum_t unused)
 {
     return NULL;
 }

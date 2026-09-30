@@ -859,7 +859,7 @@ void grIzumi_801CD220(HSD_GObj* gobj, intptr_t renderpass)
     grDisplay_801C5DB0(gobj, renderpass);
 }
 
-DynamicsDesc* grIzumi_801CD278(enum_t x)
+lbColl_80008D30_arg1* grIzumi_801CD278(enum_t x)
 {
     return NULL;
 }
