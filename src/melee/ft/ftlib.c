@@ -1,3 +1,10 @@
+/**
+ * @file ftlib.c
+ * @brief Fighter library helper functions and accessors
+ * @details This module provides an API to access and modify fighter state,
+ * calculate positions, check conditions, and interface with the rest of the game engine.
+ * Module prefix: ft
+ */
 #include "ftlib.h"
 
 #include <melee/it/forward.h>
@@ -32,6 +39,11 @@
 #include <sysdolphin/baselib/random.h>
 #include <sysdolphin/baselib/rumble.h>
 
+
+/**
+ * @brief Returns the total number of active fighters in the match
+ * @return Number of fighters
+ */
 s32 ftLib_CountFighters(void)
 {
     s32 ret = 0;
@@ -119,6 +131,13 @@ HSD_GObj* ftLib_FindLowestPercentOpponent(HSD_GObj* gobj)
 }
 
 /// Closest opponent to @p pos (squared x/y distance), skipping teammates.
+
+/**
+ * @brief Finds the closest opponent to a given position
+ * @param pos Vector position to check distance from
+ * @param gobj The searching Fighter GObj
+ * @return GObj of the nearest opponent fighter
+ */
 HSD_GObj* ftLib_FindNearestOpponent(Vec3* pos, HSD_GObj* gobj)
 {
     Vec3 cur_v;
@@ -594,6 +613,12 @@ void ftLib_GetPosDelta(HSD_GObj* gobj, Vec3* v)
     *v = fp->pos_delta;
 }
 
+
+/**
+ * @brief Returns the current action state (Motion ID) of the fighter
+ * @param gobj Fighter GObj
+ * @return Current Motion ID
+ */
 enum_t ftLib_GetMotionId(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -771,12 +796,24 @@ bool ftLib_GetSubColor(HSD_GObj* gobj, GXColor* val)
     return false;
 }
 
+
+/**
+ * @brief Sets the damage percentage of the fighter
+ * @param gobj Fighter GObj
+ * @param x New damage percent
+ */
 void ftLib_SetPercent(HSD_GObj* gobj, s32 x)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     fp->dmg.x1830_percent = x;
 }
 
+
+/**
+ * @brief Gets the current damage percentage of the fighter
+ * @param gobj Fighter GObj
+ * @return Damage percent as an integer
+ */
 s32 ftLib_GetPercent(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -853,6 +890,12 @@ s32 ftLib_IsSleeping_8008731C(HSD_GObj* gobj)
     return ftLib_IsSleeping(gobj);
 }
 
+
+/**
+ * @brief Checks if the fighter is currently in a dead state
+ * @param gobj Fighter GObj
+ * @return true if dead, false otherwise
+ */
 bool ftLib_IsDead(HSD_GObj* gobj)
 {
     FtMotionId msid = ftLib_GetMotionId(gobj);
@@ -1011,6 +1054,12 @@ void ftLib_IsFramesRemaining(HSD_GObj* gobj)
 
 /// @note Only checks #SmashState_Charging, so Ness's yo-yo smash
 /// (#ftNs_AttackHi4_YoyoApplySmash) is not covered.
+
+/**
+ * @brief Checks if the fighter is currently charging a smash attack
+ * @param gobj Fighter GObj
+ * @return true if charging a smash attack, false otherwise
+ */
 bool ftLib_IsChargingSmash(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);

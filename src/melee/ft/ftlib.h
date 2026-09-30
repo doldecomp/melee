@@ -1,3 +1,10 @@
+/**
+ * @file ftlib.h
+ * @brief Fighter library helper functions and accessors
+ * @details This module provides an API to access and modify fighter state,
+ * calculate positions, check conditions, and interface with the rest of the game engine.
+ * Module prefix: ft
+ */
 #ifndef GALE01_0860C4
 #define GALE01_0860C4
 
@@ -9,10 +16,21 @@
 #include <dolphin/gx/GXStruct.h>
 #include <dolphin/mtx.h>
 
+/**
+ * @brief Returns the total number of active fighters in the match
+ * @return Number of fighters
+ */
 /* 0860C4 */ s32 ftLib_CountFighters(void);
 /* 0860E8 */ bool ftLib_IsMasterHandPresent(void);
 /* 086140 */ bool ftLib_IsCrazyHandPresent(void);
 /* 086198 */ HSD_GObj* ftLib_FindLowestPercentOpponent(HSD_GObj*);
+
+/**
+ * @brief Finds the closest opponent to a given position
+ * @param pos Vector position to check distance from
+ * @param gobj The searching Fighter GObj
+ * @return GObj of the nearest opponent fighter
+ */
 /* 08627C */ HSD_GObj* ftLib_FindNearestOpponent(Vec3* pos, HSD_GObj*);
 /* 086368 */ Fighter_GObj* ftLib_FindNearestOpponentInDir(Vec3*, Fighter_GObj*,
                                                           float);
@@ -39,7 +57,11 @@
 /* 0868A4 */ void ftLib_EnableAllInput(void);
 /* 0868D4 */ bool ftLib_IsItemVisible(HSD_GObj*, HSD_GObj*);
 
-/// @returns @c true if @p gobj is a #Fighter, otherwise @c false.
+/**
+ * @brief Checks if a GObj is a fighter
+ * @param gobj The GObj to check
+ * @return true if it is a fighter, false otherwise
+ */
 /* 086960 */ bool ftLib_IsFighter(HSD_GObj* gobj);
 
 /* 086984 */ CollData* ftLib_GetCollData(HSD_GObj*);
@@ -59,7 +81,11 @@
 /* 086BE0 */ u8 ftLib_GetPlayerIndex(HSD_GObj*);
 /* 086BEC */ void ftLib_GetPosDelta(HSD_GObj*, Vec3*);
 
-/// @returns A fighter action state ID.
+/**
+ * @brief Returns the current action state (Motion ID) of the fighter
+ * @param gobj Fighter GObj
+ * @return Current Motion ID
+ */
 /* 086C0C */ enum_t ftLib_GetMotionId(HSD_GObj*);
 
 /* 086C18 */ void ftLib_StartRumble(HSD_GObj*, s32, s32);
@@ -79,7 +105,19 @@
 /* 087050 */ void ftLib_DecFighterRefCount(s32);
 /* 087074 */ bool ftLib_GetShakeOffset(HSD_GObj*, Vec3*);
 /* 0870BC */ bool ftLib_GetSubColor(HSD_GObj*, GXColor*);
+
+/**
+ * @brief Sets the damage percentage of the fighter
+ * @param gobj Fighter GObj
+ * @param percent New damage percent
+ */
 /* 0870F0 */ void ftLib_SetPercent(HSD_GObj*, s32);
+
+/**
+ * @brief Gets the current damage percentage of the fighter
+ * @param gobj Fighter GObj
+ * @return Damage percent as an integer
+ */
 /* 087120 */ s32 ftLib_GetPercent(HSD_GObj*);
 /* 087140 */ void ftLib_80087140(HSD_GObj*);
 /* 0871A8 */ void ftLib_ApplyMetalBox(Fighter_GObj*, Item_GObj*);
@@ -90,6 +128,12 @@
 /* 087300 */ s32 ftLib_GetLastAttackerSlot(HSD_GObj*);
 /* 08730C */ s32 ftLib_IsLastAttackerSubFighter(HSD_GObj*);
 /* 08731C */ s32 ftLib_IsSleeping_8008731C(HSD_GObj*);
+
+/**
+ * @brief Checks if the fighter is currently in a dead state
+ * @param gobj Fighter GObj
+ * @return true if dead, false otherwise
+ */
 /* 08732C */ bool ftLib_IsDead(HSD_GObj*);
 /* 087354 */ bool ftLib_IsDeadUp(HSD_GObj*);
 /* 08737C */ bool ftLib_IsDeadUpStar(HSD_GObj*);
@@ -108,6 +152,12 @@
 /// /* 087574 */ void ftLib_LoadFighterAllCostumes(FighterKind);
 /* 087610 */ void ftLib_LoadKirbyHats(u8);
 /* 0876B4 */ void ftLib_IsFramesRemaining(HSD_GObj*);
+
+/**
+ * @brief Checks if the fighter is currently charging a smash attack
+ * @param gobj Fighter GObj
+ * @return true if charging a smash attack, false otherwise
+ */
 /* 0876D4 */ bool ftLib_IsChargingSmash(HSD_GObj*);
 /* 0876F4 */ s32 ftLib_GetLastHitSourceType(HSD_GObj*);
 /* 087700 */ s32 ftLib_GetLastHitSourceKind(HSD_GObj*);
