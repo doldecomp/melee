@@ -32,7 +32,7 @@
 - ❌ ft/ftparts.c — Fighter model parts management
 - ✅ ft/ftcmdscript.c — CPU command script interpreter & input VM
 - ✅ ft/ftdynamics.c — Physics/bone dynamics
-- ❌ ft/ftcamera.c — Fighter camera tracking
+- ✅ ft/ftcamera.c — Fighter camera tracking
 - ❌ ft/ftchangeparam.c — Parameter modification (items, etc.)
 - ❌ ft/ftcliffcommon.c — Ledge grab mechanics
 - ❌ ft/ftcolanim.c — Color/material animation
