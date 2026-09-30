@@ -1,3 +1,8 @@
+/**
+ * @file tobj.c
+ * @brief Texture Object management system (TObj)
+ * @details TObjs define texture images, wrapping modes, filtering, LOD, texture coordinate generation, and TEV color combine stages for the GameCube's GX graphics pipeline.
+ */
 #include "tobj.h"
 
 #include <placeholder.h>
@@ -24,6 +29,9 @@ static HSD_TObjInfo* default_class = NULL;
 
 HSD_TObj* tobj_head;
 
+/**
+ * @brief Removes animation from a single TObj.
+ */
 void HSD_TObjRemoveAnim(HSD_TObj* tobj)
 {
     if (tobj == NULL) {
@@ -34,6 +42,9 @@ void HSD_TObjRemoveAnim(HSD_TObj* tobj)
     tobj->aobj = NULL;
 }
 
+/**
+ * @brief Removes animation objects from a TObj and all subsequent TObjs in the list.
+ */
 void HSD_TObjRemoveAnimAll(HSD_TObj* tobj)
 {
     HSD_TObj* tp;
@@ -45,6 +56,9 @@ void HSD_TObjRemoveAnimAll(HSD_TObj* tobj)
     }
 }
 
+/**
+ * @brief Looks up a texture animation by ID.
+ */
 static HSD_TexAnim* lookupTextureAnim(s32 id, HSD_TexAnim* texanim)
 {
     HSD_TexAnim* ta;
@@ -56,6 +70,9 @@ static HSD_TexAnim* lookupTextureAnim(s32 id, HSD_TexAnim* texanim)
     return NULL;
 }
 
+/**
+ * @brief Adds a texture animation to a single TObj.
+ */
 void HSD_TObjAddAnim(HSD_TObj* tobj, HSD_TexAnim* texanim)
 {
     s32 i;
@@ -91,6 +108,9 @@ void HSD_TObjAddAnim(HSD_TObj* tobj, HSD_TexAnim* texanim)
     }
 }
 
+/**
+ * @brief Adds texture animations to a TObj and all subsequent TObjs in the list.
+ */
 void HSD_TObjAddAnimAll(HSD_TObj* tobj, HSD_TexAnim* texanim)
 {
     HSD_TObj* tp;
@@ -102,6 +122,9 @@ void HSD_TObjAddAnimAll(HSD_TObj* tobj, HSD_TexAnim* texanim)
     }
 }
 
+/**
+ * @brief Requests an animation state for a single TObj based on flags.
+ */
 void HSD_TObjReqAnimByFlags(HSD_TObj* tobj, f32 startframe, u32 flags)
 {
     if (tobj != NULL) {
@@ -111,6 +134,9 @@ void HSD_TObjReqAnimByFlags(HSD_TObj* tobj, f32 startframe, u32 flags)
     }
 }
 
+/**
+ * @brief Requests an animation state for a TObj and all subsequent TObjs based on flags.
+ */
 void HSD_TObjReqAnimAllByFlags(HSD_TObj* tobj, f32 startframe, u32 flags)
 {
     HSD_TObj* tp;
@@ -122,16 +148,25 @@ void HSD_TObjReqAnimAllByFlags(HSD_TObj* tobj, f32 startframe, u32 flags)
     }
 }
 
+/**
+ * @brief Requests an animation state for a single TObj.
+ */
 void HSD_TObjReqAnim(HSD_TObj* tobj, f32 startframe)
 {
     HSD_TObjReqAnimByFlags(tobj, startframe, TOBJ_ANIM);
 }
 
+/**
+ * @brief Requests an animation state for a TObj and all subsequent TObjs.
+ */
 void HSD_TObjReqAnimAll(HSD_TObj* tobj, f32 startframe)
 {
     HSD_TObjReqAnimAllByFlags(tobj, startframe, TOBJ_ANIM);
 }
 
+/**
+ * @brief Callback to update TObj fields during animation.
+ */
 static void TObjUpdateFunc(void* obj, enum_t type, HSD_ObjData* val)
 {
     HSD_TObj* tobj = obj;
@@ -226,6 +261,9 @@ static void TObjUpdateFunc(void* obj, enum_t type, HSD_ObjData* val)
     }
 }
 
+/**
+ * @brief Advances the animation for a single TObj.
+ */
 void HSD_TObjAnim(HSD_TObj* tobj)
 {
     if (tobj == NULL) {
@@ -235,6 +273,9 @@ void HSD_TObjAnim(HSD_TObj* tobj)
     HSD_AObjInterpretAnim(tobj->aobj, tobj, TObjUpdateFunc);
 }
 
+/**
+ * @brief Advances the animation for a TObj and all subsequent TObjs.
+ */
 void HSD_TObjAnimAll(HSD_TObj* tobj)
 {
     HSD_TObj* i;
@@ -248,6 +289,9 @@ void HSD_TObjAnimAll(HSD_TObj* tobj)
     }
 }
 
+/**
+ * @brief Loads a TObj descriptor.
+ */
 static int TObjLoad(HSD_TObj* tobj, HSD_TObjDesc* td)
 {
     tobj->next = HSD_TObjLoadDesc(td->next);
@@ -277,6 +321,9 @@ static int TObjLoad(HSD_TObj* tobj, HSD_TObjDesc* td)
     return 0;
 }
 
+/**
+ * @brief Allocates and loads a TObj from a descriptor.
+ */
 HSD_TObj* HSD_TObjLoadDesc(HSD_TObjDesc* td)
 {
     if (td != NULL) {
@@ -296,6 +343,9 @@ HSD_TObj* HSD_TObjLoadDesc(HSD_TObjDesc* td)
     }
 }
 
+/**
+ * @brief Allocates and loads a Tlut (Texture Palette) from a descriptor.
+ */
 HSD_Tlut* HSD_TlutLoadDesc(HSD_TlutDesc* tlutdesc)
 {
     if (tlutdesc != NULL) {
@@ -306,6 +356,9 @@ HSD_Tlut* HSD_TlutLoadDesc(HSD_TlutDesc* tlutdesc)
     return NULL;
 }
 
+/**
+ * @brief Allocates and loads a TObjTev (TEV Configuration) from a descriptor.
+ */
 HSD_TObjTev* HSD_TObjTevLoadDesc(HSD_TObjTevDesc* tevdesc)
 {
     if (tevdesc != NULL) {
@@ -316,6 +369,9 @@ HSD_TObjTev* HSD_TObjTevLoadDesc(HSD_TObjTevDesc* tevdesc)
     return NULL;
 }
 
+/**
+ * @brief Retrieves the next TObj in the list matching a specific texture coordinate mapping type.
+ */
 HSD_TObj* _HSD_TObjGetCurrentByType(HSD_TObj* from, u32 mapping)
 {
     HSD_TObj* tp;
@@ -337,6 +393,9 @@ END:
     return tp;
 }
 
+/**
+ * @brief Maps a GXTexMapID to a Post-Transform Texture Matrix ID.
+ */
 static u32 HSD_TexMapID2PTTexMtx(GXTexMapID id)
 {
     switch (id) {
@@ -362,10 +421,13 @@ static u32 HSD_TexMapID2PTTexMtx(GXTexMapID id)
     return 0;
 }
 
+/**
+ * @brief Generates the texture matrix for a TObj based on its scale, rotation, and translation.
+ */
 static void MakeTextureMtx(HSD_TObj* tobj)
 {
     Vec3 scale;
-    Mtx m;
+    Mtx scale_rot_mtx;
     Vec3 trans;
     Quaternion rot;
 
@@ -390,12 +452,15 @@ static void MakeTextureMtx(HSD_TObj* tobj)
     trans.z = tobj->translate.z;
 
     MTXTrans(tobj->mtx, trans.x, trans.y, trans.z);
-    HSD_MkRotationMtx(m, (Vec3*) &rot);
-    MTXConcat(m, tobj->mtx, tobj->mtx);
-    MTXScale(m, scale.x, scale.y, scale.z);
-    MTXConcat(m, tobj->mtx, tobj->mtx);
+    HSD_MkRotationMtx(scale_rot_mtx, (Vec3*) &rot);
+    MTXConcat(scale_rot_mtx, tobj->mtx, tobj->mtx);
+    MTXScale(scale_rot_mtx, scale.x, scale.y, scale.z);
+    MTXConcat(scale_rot_mtx, tobj->mtx, tobj->mtx);
 }
 
+/**
+ * @brief Sets up the GX texture matrix for a TObj.
+ */
 static void TObjSetupMtx(HSD_TObj* tobj)
 {
     int i;
@@ -430,13 +495,13 @@ static void TObjSetupMtx(HSD_TObj* tobj)
             HSD_CObj* cobj;
             Vec3 ldir, half;
             Mtx mtx;
-            MtxPtr vmtx;
+            MtxPtr view_mtx;
 
             cobj = HSD_CObjGetCurrent();
             HSD_ASSERT(0x2A8, cobj);
-            vmtx = HSD_CObjGetViewingMtxPtrDirect(cobj);
+            view_mtx = HSD_CObjGetViewingMtxPtrDirect(cobj);
             HSD_LObjGetLightVector(lobj, &ldir);
-            MTXMultVecSR(vmtx, &ldir, &ldir);
+            MTXMultVecSR(view_mtx, &ldir, &ldir);
             ldir.z += -1.0F;
 
             VECNormalize(&ldir, &half);
@@ -482,6 +547,9 @@ static void TObjSetupMtx(HSD_TObj* tobj)
     }
 }
 
+/**
+ * @brief Configures GX texture coordinate generation.
+ */
 static void setupTextureCoordGen(HSD_TObj* tobj)
 {
     u32 mtxid;
@@ -508,6 +576,9 @@ static void setupTextureCoordGen(HSD_TObj* tobj)
     }
 }
 
+/**
+ * @brief Configures GX texture coordinate generation for bump mapping.
+ */
 static void setupTextureCoordGenBump(HSD_TObj* bump)
 {
     u32 mask;
@@ -532,12 +603,18 @@ static void setupTextureCoordGenBump(HSD_TObj* bump)
                      HSD_TexCoordID2TexGenSrc(bump->coord), GX_IDENTITY);
 }
 
+/**
+ * @brief Configures GX texture coordinate generation for toon shading.
+ */
 static void setupTextureCoordGenToon(HSD_TObj* toon)
 {
     GXTexGenSrc src = toon->src;
     GXSetTexCoordGen(toon->coord, GX_TG_SRTG, src, GX_IDENTITY);
 }
 
+/**
+ * @brief Sets up GX texture coordinate generation for a TObj.
+ */
 void HSD_TObjSetupTextureCoordGen(HSD_TObj* tobj)
 {
     for (; tobj != NULL; tobj = tobj->next) {
@@ -555,6 +632,9 @@ void HSD_TObjSetupTextureCoordGen(HSD_TObj* tobj)
     }
 }
 
+/**
+ * @brief Sets up TEV stages for shadow modulation.
+ */
 static void TObjSetupTevModulateShadow(HSD_TObj* shadow)
 {
     static HSD_TevDesc tevdesc = {
@@ -577,6 +657,9 @@ static void TObjSetupTevModulateShadow(HSD_TObj* shadow)
     }
 }
 
+/**
+ * @brief Sets up TEV stages for emboss bump mapping.
+ */
 static void SetupEmbossBumpTev(HSD_TObj* bump)
 {
     static HSD_TevDesc tevdesc = {
@@ -604,6 +687,9 @@ static void SetupEmbossBumpTev(HSD_TObj* bump)
     HSD_SetupTevStage(&tevdesc);
 }
 
+/**
+ * @brief Sets up volatile TEV state (e.g. shadow modulation, bump mapping) for a TObj.
+ */
 void HSD_TObjSetupVolatileTev(HSD_TObj* tobj, u32 rendermode)
 {
     for (; tobj; tobj = tobj->next) {
@@ -627,7 +713,7 @@ static void MakeColorGenTExp(u32 lightmap, HSD_TObj* tobj, HSD_TExp** c,
 {
     HSD_TObjTev* tev = tobj->tev;
     u8* in;
-    HSD_TExp *e0, *tmp;
+    HSD_TExp *main_exp, *tmp;
     int i;
 
     HSD_TExp* konst_rgb;
@@ -739,8 +825,8 @@ static void MakeColorGenTExp(u32 lightmap, HSD_TObj* tobj, HSD_TExp** c,
         reg1_a = HSD_TExpCnst(&tobj->tev->tev1.a, HSD_TE_X, HSD_TE_U8, list);
     }
 
-    e0 = HSD_TExpTev(list);
-    HSD_TExpOrder(e0, tobj, GX_COLOR_NULL);
+    main_exp = HSD_TExpTev(list);
+    HSD_TExpOrder(main_exp, tobj, GX_COLOR_NULL);
 
     if (tev->active & TOBJ_TEVREG_ACTIVE_COLOR_TEV) {
         HSD_TEInput sel[4];
@@ -840,12 +926,12 @@ static void MakeColorGenTExp(u32 lightmap, HSD_TObj* tobj, HSD_TExp** c,
             }
         }
 
-        HSD_TExpColorOp(e0, (GXTevOp) tev->color_op,
+        HSD_TExpColorOp(main_exp, (GXTevOp) tev->color_op,
                         (GXTevBias) tev->color_bias,
                         (GXTevScale) tev->color_scale, tev->color_clamp);
-        HSD_TExpColorIn(e0, sel[0], exp[0], sel[1], exp[1], sel[2], exp[2],
+        HSD_TExpColorIn(main_exp, sel[0], exp[0], sel[1], exp[1], sel[2], exp[2],
                         sel[3], exp[3]);
-        *c = e0;
+        *c = main_exp;
     }
 
     if (tev->active & TOBJ_TEVREG_ACTIVE_ALPHA_TEV) {
@@ -908,20 +994,20 @@ static void MakeColorGenTExp(u32 lightmap, HSD_TObj* tobj, HSD_TExp** c,
             }
         }
 
-        HSD_TExpAlphaOp(e0, (GXTevOp) tev->alpha_op,
+        HSD_TExpAlphaOp(main_exp, (GXTevOp) tev->alpha_op,
                         (GXTevBias) tev->alpha_bias,
                         (GXTevScale) tev->alpha_scale, tev->alpha_clamp);
-        HSD_TExpAlphaIn(e0, sel[0], exp[0], sel[1], exp[1], sel[2], exp[2],
+        HSD_TExpAlphaIn(main_exp, sel[0], exp[0], sel[1], exp[1], sel[2], exp[2],
                         sel[3], exp[3]);
 
-        *a = e0;
+        *a = main_exp;
     }
 }
 
 static void TObjMakeTExp(HSD_TObj* tobj, u32 lightmap, u32 lightmap_done,
                          HSD_TExp** c, HSD_TExp** a, HSD_TExp** list)
 {
-    HSD_TExp *e0, *e1;
+    HSD_TExp *main_exp, *e1;
     HSD_TExp *c_src, *a_src;
     HSD_TEInput c_sel, a_sel;
     int repeat = (lightmap_done & tobj_lightmap(tobj));
@@ -932,7 +1018,7 @@ static void TObjMakeTExp(HSD_TObj* tobj, u32 lightmap, u32 lightmap_done,
     a_src = HSD_TEXP_TEX;
     a_sel = HSD_TE_A;
 
-    e0 = HSD_TExpTev(list);
+    main_exp = HSD_TExpTev(list);
 
     if (tobj->tev && (tobj->tev->active & (TOBJ_TEVREG_ACTIVE_COLOR_TEV |
                                            TOBJ_TEVREG_ACTIVE_ALPHA_TEV)))
@@ -940,111 +1026,114 @@ static void TObjMakeTExp(HSD_TObj* tobj, u32 lightmap, u32 lightmap_done,
         MakeColorGenTExp(lightmap, tobj, &c_src, &a_src, list, repeat);
     }
 
-    HSD_TExpOrder(e0, tobj, GX_COLOR_NULL);
+    HSD_TExpOrder(main_exp, tobj, GX_COLOR_NULL);
 
     switch (tobj_colormap(tobj)) {
     case TEX_COLORMAP_ALPHA_MASK:
-        HSD_TExpColorOp(e0, GX_TEV_ADD, GX_TB_ZERO, GX_CS_SCALE_1, GX_ENABLE);
-        HSD_TExpColorIn(e0, HSD_TE_RGB, *c, c_sel, c_src, a_sel, a_src,
+        HSD_TExpColorOp(main_exp, GX_TEV_ADD, GX_TB_ZERO, GX_CS_SCALE_1, GX_ENABLE);
+        HSD_TExpColorIn(main_exp, HSD_TE_RGB, *c, c_sel, c_src, a_sel, a_src,
                         HSD_TE_0, HSD_TEXP_ZERO);
         break;
     case TEX_COLORMAP_RGB_MASK:
-        HSD_TExpColorOp(e0, GX_TEV_ADD, GX_TB_ZERO, GX_CS_SCALE_1, GX_ENABLE);
-        HSD_TExpColorIn(e0, HSD_TE_RGB, *c, c_sel, c_src, c_sel, c_src,
+        HSD_TExpColorOp(main_exp, GX_TEV_ADD, GX_TB_ZERO, GX_CS_SCALE_1, GX_ENABLE);
+        HSD_TExpColorIn(main_exp, HSD_TE_RGB, *c, c_sel, c_src, c_sel, c_src,
                         HSD_TE_0, HSD_TEXP_ZERO);
         break;
     case TEX_COLORMAP_BLEND:
-        e1 = HSD_TExpCnst(&tobj->blending, HSD_TE_X, HSD_TE_F32, list);
-        HSD_TExpColorOp(e0, GX_TEV_ADD, GX_TB_ZERO, GX_CS_SCALE_1, GX_ENABLE);
-        HSD_TExpColorIn(e0, HSD_TE_RGB, *c, c_sel, c_src, HSD_TE_X, e1,
+        blend_exp = HSD_TExpCnst(&tobj->blending, HSD_TE_X, HSD_TE_F32, list);
+        HSD_TExpColorOp(main_exp, GX_TEV_ADD, GX_TB_ZERO, GX_CS_SCALE_1, GX_ENABLE);
+        HSD_TExpColorIn(main_exp, HSD_TE_RGB, *c, c_sel, c_src, HSD_TE_X, blend_exp,
                         HSD_TE_0, HSD_TEXP_ZERO);
         break;
     case TEX_COLORMAP_MODULATE:
-        HSD_TExpColorOp(e0, GX_TEV_ADD, GX_TB_ZERO, GX_CS_SCALE_1, GX_ENABLE);
-        HSD_TExpColorIn(e0, HSD_TE_0, HSD_TEXP_ZERO, HSD_TE_RGB, *c, c_sel,
+        HSD_TExpColorOp(main_exp, GX_TEV_ADD, GX_TB_ZERO, GX_CS_SCALE_1, GX_ENABLE);
+        HSD_TExpColorIn(main_exp, HSD_TE_0, HSD_TEXP_ZERO, HSD_TE_RGB, *c, c_sel,
                         c_src, HSD_TE_0, HSD_TEXP_ZERO);
         break;
     case TEX_COLORMAP_REPLACE:
-        HSD_TExpColorOp(e0, GX_TEV_ADD, GX_TB_ZERO, GX_CS_SCALE_1, GX_ENABLE);
-        HSD_TExpColorIn(e0, HSD_TE_0, HSD_TEXP_ZERO, HSD_TE_0, HSD_TEXP_ZERO,
+        HSD_TExpColorOp(main_exp, GX_TEV_ADD, GX_TB_ZERO, GX_CS_SCALE_1, GX_ENABLE);
+        HSD_TExpColorIn(main_exp, HSD_TE_0, HSD_TEXP_ZERO, HSD_TE_0, HSD_TEXP_ZERO,
                         HSD_TE_0, HSD_TEXP_ZERO, c_sel, c_src);
         break;
     case TEX_COLORMAP_NONE:
     case TEX_COLORMAP_PASS:
-        HSD_TExpColorOp(e0, GX_TEV_ADD, GX_TB_ZERO, GX_CS_SCALE_1, GX_ENABLE);
-        HSD_TExpColorIn(e0, HSD_TE_0, HSD_TEXP_ZERO, HSD_TE_0, HSD_TEXP_ZERO,
+        HSD_TExpColorOp(main_exp, GX_TEV_ADD, GX_TB_ZERO, GX_CS_SCALE_1, GX_ENABLE);
+        HSD_TExpColorIn(main_exp, HSD_TE_0, HSD_TEXP_ZERO, HSD_TE_0, HSD_TEXP_ZERO,
                         HSD_TE_0, HSD_TEXP_ZERO, HSD_TE_RGB, *c);
         break;
     case TEX_COLORMAP_ADD:
-        HSD_TExpColorOp(e0, GX_TEV_ADD, GX_TB_ZERO, GX_CS_SCALE_1, GX_ENABLE);
-        HSD_TExpColorIn(e0, c_sel, c_src, HSD_TE_0, HSD_TEXP_ZERO, HSD_TE_0,
+        HSD_TExpColorOp(main_exp, GX_TEV_ADD, GX_TB_ZERO, GX_CS_SCALE_1, GX_ENABLE);
+        HSD_TExpColorIn(main_exp, c_sel, c_src, HSD_TE_0, HSD_TEXP_ZERO, HSD_TE_0,
                         HSD_TEXP_ZERO, HSD_TE_RGB, *c);
         break;
     case TEX_COLORMAP_SUB:
-        HSD_TExpColorOp(e0, GX_TEV_SUB, GX_TB_ZERO, GX_CS_SCALE_1, GX_ENABLE);
-        HSD_TExpColorIn(e0, c_sel, c_src, HSD_TE_0, HSD_TEXP_ZERO, HSD_TE_0,
+        HSD_TExpColorOp(main_exp, GX_TEV_SUB, GX_TB_ZERO, GX_CS_SCALE_1, GX_ENABLE);
+        HSD_TExpColorIn(main_exp, c_sel, c_src, HSD_TE_0, HSD_TEXP_ZERO, HSD_TE_0,
                         HSD_TEXP_ZERO, HSD_TE_RGB, *c);
         break;
     default:
         HSD_ASSERT(1372, 0);
     }
-    *c = e0;
+    *c = main_exp;
 
     if (!repeat) {
         switch (tobj_alphamap(tobj)) {
         case TEX_ALPHAMAP_ALPHA_MASK:
-            HSD_TExpAlphaOp(e0, GX_TEV_ADD, GX_TB_ZERO, GX_CS_SCALE_1,
+            HSD_TExpAlphaOp(main_exp, GX_TEV_ADD, GX_TB_ZERO, GX_CS_SCALE_1,
                             GX_ENABLE);
-            HSD_TExpAlphaIn(e0, HSD_TE_A, *a, a_sel, a_src, a_sel, a_src,
+            HSD_TExpAlphaIn(main_exp, HSD_TE_A, *a, a_sel, a_src, a_sel, a_src,
                             HSD_TE_0, HSD_TEXP_ZERO);
             break;
         case TEX_ALPHAMAP_BLEND:
-            e1 = HSD_TExpCnst(&tobj->blending, HSD_TE_X, HSD_TE_F32, list);
-            HSD_TExpAlphaOp(e0, GX_TEV_ADD, GX_TB_ZERO, GX_CS_SCALE_1,
+            blend_exp = HSD_TExpCnst(&tobj->blending, HSD_TE_X, HSD_TE_F32, list);
+            HSD_TExpAlphaOp(main_exp, GX_TEV_ADD, GX_TB_ZERO, GX_CS_SCALE_1,
                             GX_ENABLE);
-            HSD_TExpAlphaIn(e0, HSD_TE_A, *a, a_sel, a_src, HSD_TE_X, e1,
+            HSD_TExpAlphaIn(main_exp, HSD_TE_A, *a, a_sel, a_src, HSD_TE_X, blend_exp,
                             HSD_TE_0, HSD_TEXP_ZERO);
             break;
         case TEX_ALPHAMAP_MODULATE:
-            HSD_TExpAlphaOp(e0, GX_TEV_ADD, GX_TB_ZERO, GX_CS_SCALE_1,
+            HSD_TExpAlphaOp(main_exp, GX_TEV_ADD, GX_TB_ZERO, GX_CS_SCALE_1,
                             GX_ENABLE);
-            HSD_TExpAlphaIn(e0, HSD_TE_0, HSD_TEXP_ZERO, HSD_TE_A, *a, a_sel,
+            HSD_TExpAlphaIn(main_exp, HSD_TE_0, HSD_TEXP_ZERO, HSD_TE_A, *a, a_sel,
                             a_src, HSD_TE_0, HSD_TEXP_ZERO);
             break;
         case TEX_ALPHAMAP_REPLACE:
-            HSD_TExpAlphaOp(e0, GX_TEV_ADD, GX_TB_ZERO, GX_CS_SCALE_1,
+            HSD_TExpAlphaOp(main_exp, GX_TEV_ADD, GX_TB_ZERO, GX_CS_SCALE_1,
                             GX_ENABLE);
-            HSD_TExpAlphaIn(e0, HSD_TE_0, HSD_TEXP_ZERO, HSD_TE_0,
+            HSD_TExpAlphaIn(main_exp, HSD_TE_0, HSD_TEXP_ZERO, HSD_TE_0,
                             HSD_TEXP_ZERO, HSD_TE_0, HSD_TEXP_ZERO, a_sel,
                             a_src);
             break;
         case TEX_ALPHAMAP_NONE:
         case TEX_ALPHAMAP_PASS:
-            HSD_TExpAlphaOp(e0, GX_TEV_ADD, GX_TB_ZERO, GX_CS_SCALE_1,
+            HSD_TExpAlphaOp(main_exp, GX_TEV_ADD, GX_TB_ZERO, GX_CS_SCALE_1,
                             GX_ENABLE);
-            HSD_TExpAlphaIn(e0, HSD_TE_0, HSD_TEXP_ZERO, HSD_TE_0,
+            HSD_TExpAlphaIn(main_exp, HSD_TE_0, HSD_TEXP_ZERO, HSD_TE_0,
                             HSD_TEXP_ZERO, HSD_TE_0, HSD_TEXP_ZERO, HSD_TE_A,
                             *a);
             break;
         case TEX_ALPHAMAP_ADD:
-            HSD_TExpAlphaOp(e0, GX_TEV_ADD, GX_TB_ZERO, GX_CS_SCALE_1,
+            HSD_TExpAlphaOp(main_exp, GX_TEV_ADD, GX_TB_ZERO, GX_CS_SCALE_1,
                             GX_ENABLE);
-            HSD_TExpAlphaIn(e0, a_sel, a_src, HSD_TE_0, HSD_TEXP_ZERO,
+            HSD_TExpAlphaIn(main_exp, a_sel, a_src, HSD_TE_0, HSD_TEXP_ZERO,
                             HSD_TE_0, HSD_TEXP_ZERO, HSD_TE_A, *a);
             break;
         case TEX_ALPHAMAP_SUB:
-            HSD_TExpAlphaOp(e0, GX_TEV_SUB, GX_TB_ZERO, GX_CS_SCALE_1,
+            HSD_TExpAlphaOp(main_exp, GX_TEV_SUB, GX_TB_ZERO, GX_CS_SCALE_1,
                             GX_ENABLE);
-            HSD_TExpAlphaIn(e0, a_sel, a_src, HSD_TE_0, HSD_TEXP_ZERO,
+            HSD_TExpAlphaIn(main_exp, a_sel, a_src, HSD_TE_0, HSD_TEXP_ZERO,
                             HSD_TE_0, HSD_TEXP_ZERO, HSD_TE_A, *a);
             break;
         default:
             HSD_ASSERT(1430, 0);
         }
-        *a = e0;
+        *a = main_exp;
     }
 }
 
+/**
+ * @brief Assigns hardware GX resources (TexMap, TexMtx, TexCoord) for a chain of TObjs.
+ */
 s32 HSD_TObjAssignResources(HSD_TObj* tobj_top)
 {
     HSD_TObj* tobj;
@@ -1125,6 +1214,9 @@ s32 HSD_TObjAssignResources(HSD_TObj* tobj_top)
     return (int) texcoord_no;
 }
 
+/**
+ * @brief Checks if two Tlut (texture palette) objects differ.
+ */
 static int DifferentTluts(HSD_Tlut* t0, HSD_Tlut* t1)
 {
     return
@@ -1134,11 +1226,14 @@ static int DifferentTluts(HSD_Tlut* t0, HSD_Tlut* t1)
         (t0->n_entries != t1->n_entries);
 }
 
+/**
+ * @brief Configures the GX hardware state for a TObj chain.
+ */
 void HSD_TObjSetup(HSD_TObj* tobj)
 {
     GXTlutObj tlutobj;
     GXTexObj texobj;
-    int num;
+    int num_texcoords;
     HSD_Tlut* tluts[8];
     int nb_tluts = 0;
     u32 tlut_name = GX_TLUT0;
@@ -1151,9 +1246,9 @@ void HSD_TObjSetup(HSD_TObj* tobj)
         return;
     }
 
-    num = HSD_TObjAssignResources(tobj);
-    if (num > 0) {
-        HSD_StateRegisterTexGen(HSD_Index2TexCoord(num - 1));
+    num_texcoords = HSD_TObjAssignResources(tobj);
+    if (num_texcoords > 0) {
+        HSD_StateRegisterTexGen(HSD_Index2TexCoord(num_texcoords - 1));
     }
 
     for (; tobj; tobj = tobj->next) {
@@ -1247,6 +1342,9 @@ void HSD_TObjSetup(HSD_TObj* tobj)
     }
 }
 
+/**
+ * @brief Converts a GXTexGenSrc to an internal index.
+ */
 u32 HSD_TGTex2Index(GXTexGenSrc tgtex)
 {
     switch (tgtex) {
@@ -1272,6 +1370,9 @@ u32 HSD_TGTex2Index(GXTexGenSrc tgtex)
     return GX_TG_TEX0;
 }
 
+/**
+ * @brief Converts a GXTexCoordID to a GXTexGenSrc.
+ */
 GXTexGenSrc HSD_TexCoordID2TexGenSrc(GXTexCoordID coord)
 {
     switch (coord) {
@@ -1296,6 +1397,9 @@ GXTexGenSrc HSD_TexCoordID2TexGenSrc(GXTexCoordID coord)
     return GX_TG_TEXCOORD0;
 }
 
+/**
+ * @brief Converts a GXTexCoordID to an internal index.
+ */
 u32 HSD_TexCoord2Index(GXTexCoordID coord_id)
 {
     switch (coord_id) {
@@ -1321,6 +1425,9 @@ u32 HSD_TexCoord2Index(GXTexCoordID coord_id)
     return GX_TEXCOORD0;
 }
 
+/**
+ * @brief Converts an internal index to a GXTexCoordID.
+ */
 GXTexCoordID HSD_Index2TexCoord(u32 index)
 {
     switch (index) {
@@ -1346,6 +1453,9 @@ GXTexCoordID HSD_Index2TexCoord(u32 index)
     return GX_TEXCOORD0;
 }
 
+/**
+ * @brief Converts a GXTexMtx to an internal index.
+ */
 u32 HSD_TexMtx2Index(GXTexMtx texmtx)
 {
     switch (texmtx) {
@@ -1377,6 +1487,9 @@ u32 HSD_TexMtx2Index(GXTexMtx texmtx)
     return (u32) -1;
 }
 
+/**
+ * @brief Converts an internal index to a GXTexMtx.
+ */
 GXTexMtx HSD_Index2TexMtx(u32 index)
 {
     switch (index) {
@@ -1409,6 +1522,9 @@ GXTexMtx HSD_Index2TexMtx(u32 index)
     return GX_IDENTITY;
 }
 
+/**
+ * @brief Converts an internal index to a GXTexMapID.
+ */
 GXTexMapID HSD_Index2TexMap(u32 index)
 {
     switch (index) {
@@ -1434,6 +1550,9 @@ GXTexMapID HSD_Index2TexMap(u32 index)
     return GX_TEXMAP0;
 }
 
+/**
+ * @brief Converts a GXTexMapID to an internal index.
+ */
 u32 HSD_TexMap2Index(GXTexMapID mapid)
 {
     switch (mapid) {
@@ -1459,11 +1578,17 @@ u32 HSD_TexMap2Index(GXTexMapID mapid)
     return 0;
 }
 
+/**
+ * @brief Removes (frees) a single TObj.
+ */
 void HSD_TObjRemove(HSD_TObj* tobj)
 {
     hsdDelete(tobj);
 }
 
+/**
+ * @brief Removes (frees) a TObj and all subsequent TObjs in the list.
+ */
 void HSD_TObjRemoveAll(HSD_TObj* tobj)
 {
     while (tobj) {
@@ -1473,6 +1598,9 @@ void HSD_TObjRemoveAll(HSD_TObj* tobj)
     }
 }
 
+/**
+ * @brief Gets the next TObj in the list.
+ */
 HSD_TObj* HSD_TObjGetNext(HSD_TObj* tobj)
 {
     if (tobj == NULL) {
@@ -1482,6 +1610,9 @@ HSD_TObj* HSD_TObjGetNext(HSD_TObj* tobj)
     return tobj->next;
 }
 
+/**
+ * @brief Sets the default TObj class info.
+ */
 void HSD_TObjSetDefaultClass(HSD_TObjInfo* info)
 {
     if (info) {
@@ -1490,11 +1621,17 @@ void HSD_TObjSetDefaultClass(HSD_TObjInfo* info)
     default_class = info;
 }
 
+/**
+ * @brief Gets the default TObj class info.
+ */
 HSD_TObjInfo* HSD_TObjGetDefaultClass(void)
 {
     return default_class ? default_class : &hsdTObj;
 }
 
+/**
+ * @brief Allocates a new TObj.
+ */
 HSD_TObj* HSD_TObjAlloc(void)
 {
     HSD_TObj* new = hsdNew(&HSD_TObjGetDefaultClass()->parent);
@@ -1502,6 +1639,9 @@ HSD_TObj* HSD_TObjAlloc(void)
     return new;
 }
 
+/**
+ * @brief Frees a TObj structure.
+ */
 void HSD_TObjFree(HSD_TObj* tobj)
 {
     if (tobj) {
@@ -1509,6 +1649,9 @@ void HSD_TObjFree(HSD_TObj* tobj)
     }
 }
 
+/**
+ * @brief Allocates a new Tlut.
+ */
 HSD_Tlut* HSD_TlutAlloc(void)
 {
     HSD_Tlut* tlut = hsdAllocMemPiece(sizeof(HSD_Tlut));
@@ -1517,11 +1660,17 @@ HSD_Tlut* HSD_TlutAlloc(void)
     return tlut;
 }
 
+/**
+ * @brief Frees a Tlut.
+ */
 void HSD_TlutFree(HSD_Tlut* tlut)
 {
     hsdFreeMemPiece(tlut, sizeof(HSD_Tlut));
 }
 
+/**
+ * @brief Removes and frees a Tlut.
+ */
 void HSD_TlutRemove(HSD_Tlut* tlut)
 {
     if (tlut) {
@@ -1529,6 +1678,9 @@ void HSD_TlutRemove(HSD_Tlut* tlut)
     }
 }
 
+/**
+ * @brief Allocates a new TObjTev.
+ */
 HSD_TObjTev* HSD_TObjTevAlloc(void)
 {
     HSD_TObjTev* tev = hsdAllocMemPiece(sizeof(HSD_TObjTev));
@@ -1537,11 +1689,17 @@ HSD_TObjTev* HSD_TObjTevAlloc(void)
     return tev;
 }
 
+/**
+ * @brief Frees a TObjTev.
+ */
 void HSD_TObjTevFree(HSD_TObjTev* tev)
 {
     hsdFreeMemPiece(tev, sizeof(HSD_TObjTev));
 }
 
+/**
+ * @brief Removes and frees a TObjTev.
+ */
 void HSD_TObjTevRemove(HSD_TObjTev* tev)
 {
     if (tev) {
@@ -1549,6 +1707,9 @@ void HSD_TObjTevRemove(HSD_TObjTev* tev)
     }
 }
 
+/**
+ * @brief Allocates a new ImageDesc.
+ */
 HSD_ImageDesc* HSD_ImageDescAlloc(void)
 {
     HSD_ImageDesc* idesc = hsdAllocMemPiece(sizeof(HSD_ImageDesc));
@@ -1557,6 +1718,9 @@ HSD_ImageDesc* HSD_ImageDescAlloc(void)
     return idesc;
 }
 
+/**
+ * @brief Frees an ImageDesc.
+ */
 void HSD_ImageDescFree(HSD_ImageDesc* idesc)
 {
     hsdFreeMemPiece(idesc, sizeof(HSD_ImageDesc));
@@ -1582,6 +1746,9 @@ void HSD_ImageDescCopyFromEFB(HSD_ImageDesc* idesc, u16 origx, u16 origy,
     }
 }
 
+/**
+ * @brief Class release method for TObj.
+ */
 static void TObjRelease(HSD_Class* o)
 {
     HSD_TObj* tobj = HSD_TOBJ(o);
@@ -1600,6 +1767,9 @@ static void TObjRelease(HSD_Class* o)
     HSD_PARENT_INFO(&hsdTObj)->release(o);
 }
 
+/**
+ * @brief Class amnesia method for TObj.
+ */
 static void TObjAmnesia(HSD_ClassInfo* info)
 {
     if (info == HSD_CLASS_INFO(default_class)) {
@@ -1611,6 +1781,9 @@ static void TObjAmnesia(HSD_ClassInfo* info)
     HSD_PARENT_INFO(&hsdTObj)->amnesia(info);
 }
 
+/**
+ * @brief Initializes the TObj class info.
+ */
 static void TObjInfoInit(void)
 {
     hsdInitClassInfo(HSD_CLASS_INFO(&hsdTObj), HSD_CLASS_INFO(&hsdObj),

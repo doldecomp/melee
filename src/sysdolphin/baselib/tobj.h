@@ -1,3 +1,8 @@
+/**
+ * @file tobj.h
+ * @brief Texture Object management system (TObj)
+ * @details TObjs define texture images, wrapping modes, filtering, LOD, texture coordinate generation, and TEV color combine stages for the GameCube's GX graphics pipeline.
+ */
 #ifndef _hsd_tobj_h_
 #define _hsd_tobj_h_
 
@@ -264,51 +269,174 @@ extern HSD_TObjInfo hsdTObj;
 #define HSD_TOBJ_INFO(i) ((HSD_TObjInfo*) (i))
 #define HSD_TOBJ_METHOD(o) HSD_TOBJ_INFO(HSD_OBJECT_METHOD(o))
 
+/**
+ * @brief Removes animation objects from a TObj and all subsequent TObjs in the list.
+ */
 void HSD_TObjRemoveAnimAll(HSD_TObj* tobj);
+/**
+ * @brief Adds a texture animation to a single TObj.
+ */
 void HSD_TObjAddAnim(HSD_TObj* tobj, HSD_TexAnim* texanim);
+/**
+ * @brief Adds texture animations to a TObj and all subsequent TObjs in the list.
+ */
 void HSD_TObjAddAnimAll(HSD_TObj* tobj, HSD_TexAnim* texanim);
+/**
+ * @brief Requests an animation state for a TObj and all subsequent TObjs based on flags.
+ */
 void HSD_TObjReqAnimAllByFlags(HSD_TObj* tobj, f32 startframe, u32 flags);
+/**
+ * @brief Requests an animation state for a single TObj.
+ */
 void HSD_TObjReqAnim(HSD_TObj* tobj, f32 startframe);
+/**
+ * @brief Requests an animation state for a TObj and all subsequent TObjs.
+ */
 void HSD_TObjReqAnimAll(HSD_TObj* tobj, f32 startframe);
+/**
+ * @brief Advances the animation for a single TObj.
+ */
 void HSD_TObjAnim(HSD_TObj* tobj);
+/**
+ * @brief Advances the animation for a TObj and all subsequent TObjs.
+ */
 void HSD_TObjAnimAll(HSD_TObj* tobj);
 
+/**
+ * @brief Allocates and loads a TObj from a descriptor.
+ */
 HSD_TObj* HSD_TObjLoadDesc(HSD_TObjDesc* td);
+/**
+ * @brief Allocates and loads a Tlut (Texture Palette) from a descriptor.
+ */
 HSD_Tlut* HSD_TlutLoadDesc(HSD_TlutDesc* tlutdesc);
+/**
+ * @brief Allocates and loads a TObjTev (TEV Configuration) from a descriptor.
+ */
 HSD_TObjTev* HSD_TObjTevLoadDesc(HSD_TObjTevDesc* tevdesc);
+/**
+ * @brief Retrieves the next TObj in the list matching a specific texture coordinate mapping type.
+ */
 HSD_TObj* _HSD_TObjGetCurrentByType(HSD_TObj* from, u32 mapping);
 
+/**
+ * @brief Removes (frees) a single TObj.
+ */
 void HSD_TObjRemove(HSD_TObj* tobj);
+/**
+ * @brief Removes (frees) a TObj and all subsequent TObjs in the list.
+ */
 void HSD_TObjRemoveAll(HSD_TObj* tobj);
+/**
+ * @brief Gets the next TObj in the list.
+ */
 HSD_TObj* HSD_TObjGetNext(HSD_TObj* tobj);
+/**
+ * @brief Allocates a new TObj.
+ */
 HSD_TObj* HSD_TObjAlloc(void);
+/**
+ * @brief Frees a TObj structure.
+ */
 void HSD_TObjFree(HSD_TObj* tobj);
+/**
+ * @brief Sets the default TObj class info.
+ */
 void HSD_TObjSetDefaultClass(HSD_TObjInfo* info);
+/**
+ * @brief Gets the default TObj class info.
+ */
 HSD_TObjInfo* HSD_TObjGetDefaultClass(void);
+/**
+ * @brief Allocates a new Tlut.
+ */
 HSD_Tlut* HSD_TlutAlloc(void);
+/**
+ * @brief Frees a Tlut.
+ */
 void HSD_TlutFree(HSD_Tlut* tlut);
+/**
+ * @brief Removes and frees a Tlut.
+ */
 void HSD_TlutRemove(HSD_Tlut* tlut);
+/**
+ * @brief Allocates a new TObjTev.
+ */
 HSD_TObjTev* HSD_TObjTevAlloc(void);
+/**
+ * @brief Frees a TObjTev.
+ */
 void HSD_TObjTevFree(HSD_TObjTev* tev);
+/**
+ * @brief Removes and frees a TObjTev.
+ */
 void HSD_TObjTevRemove(HSD_TObjTev* tev);
+/**
+ * @brief Allocates a new ImageDesc.
+ */
 HSD_ImageDesc* HSD_ImageDescAlloc(void);
+/**
+ * @brief Frees an ImageDesc.
+ */
 void HSD_ImageDescFree(HSD_ImageDesc* idesc);
 void HSD_ImageDescCopyFromEFB(HSD_ImageDesc* idesc, u16 origx, u16 origy,
                               GXBool clear, bool sync);
+/**
+ * @brief Sets up GX texture coordinate generation for a TObj.
+ */
 void HSD_TObjSetupTextureCoordGen(HSD_TObj* tobj);
+/**
+ * @brief Sets up volatile TEV state (e.g. shadow modulation, bump mapping) for a TObj.
+ */
 void HSD_TObjSetupVolatileTev(HSD_TObj* tobj, u32 rendermode);
+/**
+ * @brief Assigns hardware GX resources (TexMap, TexMtx, TexCoord) for a chain of TObjs.
+ */
 s32 HSD_TObjAssignResources(HSD_TObj* tobj_top);
+/**
+ * @brief Configures the GX hardware state for a TObj chain.
+ */
 void HSD_TObjSetup(HSD_TObj* tobj);
+/**
+ * @brief Converts a GXTexGenSrc to an internal index.
+ */
 u32 HSD_TGTex2Index(GXTexGenSrc tgtex);
+/**
+ * @brief Converts a GXTexCoordID to a GXTexGenSrc.
+ */
 GXTexGenSrc HSD_TexCoordID2TexGenSrc(GXTexCoordID coord);
+/**
+ * @brief Converts a GXTexCoordID to an internal index.
+ */
 u32 HSD_TexCoord2Index(GXTexCoordID coord_id);
+/**
+ * @brief Converts an internal index to a GXTexCoordID.
+ */
 GXTexCoordID HSD_Index2TexCoord(u32 index);
+/**
+ * @brief Converts a GXTexMtx to an internal index.
+ */
 u32 HSD_TexMtx2Index(GXTexMtx texmtx);
+/**
+ * @brief Converts an internal index to a GXTexMtx.
+ */
 GXTexMtx HSD_Index2TexMtx(u32 index);
+/**
+ * @brief Converts an internal index to a GXTexMapID.
+ */
 GXTexMapID HSD_Index2TexMap(u32 index);
+/**
+ * @brief Converts a GXTexMapID to an internal index.
+ */
 u32 HSD_TexMap2Index(GXTexMapID mapid);
 
+/**
+ * @brief Removes animation from a single TObj.
+ */
 void HSD_TObjRemoveAnim(HSD_TObj* tobj);
+/**
+ * @brief Requests an animation state for a single TObj based on flags.
+ */
 void HSD_TObjReqAnimByFlags(HSD_TObj* tobj, f32 startframe, u32 flags);
 
 #endif
