@@ -1,3 +1,9 @@
+/**
+ * @file shadow.c
+ * @brief Circular shadow rendering system
+ * @details Handles the projection of circular shadows beneath characters and items onto the ground.
+ */
+
 #include "shadow.h"
 
 #include <math.h>
@@ -23,18 +29,33 @@
 
 HSD_ObjAllocData shadow_alloc_data;
 
+/**
+ * @brief Generates the projection matrix mapping the shadow texture onto the surface
+ * @param shadow The shadow instance
+ */
 static void makeMatrix(HSD_Shadow* shadow);
 
+/**
+ * @brief Retrieves the shadow allocation data object
+ * @return Pointer to the shadow HSD_ObjAllocData
+ */
 HSD_ObjAllocData* HSD_ShadowGetAllocData(void)
 {
     return &shadow_alloc_data;
 }
 
+/**
+ * @brief Initializes the shadow memory allocator
+ */
 void HSD_ShadowInitAllocData(void)
 {
     HSD_ObjAllocInit(HSD_ShadowGetAllocData(), sizeof(HSD_Shadow), 4);
 }
 
+/**
+ * @brief Internal helper to allocate a generic texture object for shadows
+ * @return A new HSD_TObj for the shadow
+ */
 HSD_TObj* makeShadowTObj(void)
 {
     HSD_TObj* shadowTObj;
@@ -47,6 +68,10 @@ HSD_TObj* makeShadowTObj(void)
     return shadowTObj;
 }
 
+/**
+ * @brief Allocates and initializes a new HSD_Shadow instance
+ * @return A new shadow instance
+ */
 HSD_Shadow* HSD_ShadowAlloc(void)
 {
     HSD_Shadow* shadow;
@@ -72,17 +97,21 @@ HSD_Shadow* HSD_ShadowAlloc(void)
     return shadow;
 }
 
+/**
+ * @brief Frees a shadow instance and cleans up its camera and textures
+ * @param shadow The shadow instance
+ */
 void HSD_ShadowRemove(HSD_Shadow* shadow)
 {
-    HSD_CObj* cobj;
-    HSD_TObj* tobj;
+    HSD_CObj* camera;
+    HSD_TObj* texture;
 
     if (shadow == NULL) {
         return;
     }
-    if ((cobj = shadow->camera) != NULL) {
-        if (ref_DEC(cobj)) {
-            hsdDelete(cobj);
+    if ((camera = shadow->camera) != NULL) {
+        if (ref_DEC(camera)) {
+            hsdDelete(camera);
         }
     }
     HSD_ShadowDeleteObject(shadow, 0);
@@ -92,53 +121,67 @@ void HSD_ShadowRemove(HSD_Shadow* shadow)
     if (shadow->texture->imagedesc->image_ptr != NULL) {
         HSD_Free(shadow->texture->imagedesc->image_ptr);
     }
-    tobj = shadow->texture;
-    HSD_ImageDescFree(tobj->imagedesc);
-    HSD_TObjFree(tobj);
+    texture = shadow->texture;
+    HSD_ImageDescFree(texture->imagedesc);
+    HSD_TObjFree(texture);
     HSD_ObjFree(HSD_ShadowGetAllocData(), shadow);
 }
 
+/**
+ * @brief Configures GX hardware copying state for the shadow texture
+ * @param shadow The shadow instance
+ */
 void HSD_ShadowInit(HSD_Shadow* shadow)
 {
-    HSD_ImageDesc* imagedesc;
+    HSD_ImageDesc* image_desc;
 
     HSD_ASSERT(245, shadow);
-    imagedesc = shadow->texture->imagedesc;
-    GXSetTexCopySrc(0, 0, imagedesc->width, imagedesc->height);
-    GXSetTexCopyDst(imagedesc->width, imagedesc->height, 0x20, 0);
+    image_desc = shadow->texture->imagedesc;
+    GXSetTexCopySrc(0, 0, image_desc->width, image_desc->height);
+    GXSetTexCopyDst(image_desc->width, image_desc->height, 0x20, 0);
 }
 
+/**
+ * @brief Updates the shadow texture resolution
+ * @param shadow The shadow instance
+ * @param width New width
+ * @param height New height
+ */
 void HSD_ShadowSetSize(HSD_Shadow* shadow, u16 width, u16 height)
 {
     u32 size;
-    HSD_ImageDesc* idesc;
+    HSD_ImageDesc* image_desc;
 
     HSD_ASSERT(277, shadow);
     HSD_ASSERT(278, width > 0);
     HSD_ASSERT(279, height > 0);
 
-    idesc = shadow->texture->imagedesc;
-    if (!idesc->image_ptr || idesc->width != width || idesc->height != height)
+    image_desc = shadow->texture->imagedesc;
+    if (!image_desc->image_ptr || image_desc->width != width || image_desc->height != height)
     {
-        if (idesc->image_ptr) {
-            HSD_Free(idesc->image_ptr);
+        if (image_desc->image_ptr) {
+            HSD_Free(image_desc->image_ptr);
         }
 
         size = GXGetTexBufferSize(width, height, GX_TF_I4, GX_FALSE, 0);
         HSD_ASSERT(0x122, size > 0);
-        idesc->image_ptr = HSD_MemAlloc(size);
-        idesc->width = width;
-        idesc->height = height;
+        image_desc->image_ptr = HSD_MemAlloc(size);
+        image_desc->width = width;
+        image_desc->height = height;
 
         HSD_CObjSetViewportfx4(shadow->camera, 0, width, 0, height);
         HSD_CObjSetScissorx4(shadow->camera, 0, width, 0, height);
     }
 }
 
+/**
+ * @brief Draws a background quad to act as a backstop/clear color for the shadow pass
+ * @param shadow The shadow instance
+ */
 static void drawBackgroundRect(HSD_Shadow* shadow)
 {
     f32 top, bottom, left, right, near;
-    HSD_CObj* cobj = shadow->camera;
+    HSD_CObj* camera = shadow->camera;
 
     GXLoadPosMtxImm(HSD_identityMtx, GX_PNMTX0);
     HSD_PerfCountMtxLoad();
@@ -148,11 +191,11 @@ static void drawBackgroundRect(HSD_Shadow* shadow)
     GXSetVtxAttrFmt(GX_VTXFMT0, GX_VA_POS, GX_POS_XYZ, GX_F32, 0);
     HSD_StateSetCullMode(GX_CULL_BACK);
 
-    top = HSD_CObjGetTop(cobj);
-    bottom = HSD_CObjGetBottom(cobj);
-    left = HSD_CObjGetLeft(cobj);
-    right = HSD_CObjGetRight(cobj);
-    near = HSD_CObjGetNear(cobj);
+    top = HSD_CObjGetTop(camera);
+    bottom = HSD_CObjGetBottom(camera);
+    left = HSD_CObjGetLeft(camera);
+    right = HSD_CObjGetRight(camera);
+    near = HSD_CObjGetNear(camera);
 
     top *= 1.20000004768f;
     bottom *= 1.20000004768f;
@@ -170,23 +213,27 @@ static void drawBackgroundRect(HSD_Shadow* shadow)
     GXEnd();
 }
 
+/**
+ * @brief Begins the shadow rendering pass, configuring the TEV and rendering objects
+ * @param shadow The shadow instance
+ */
 void HSD_ShadowStartRender(HSD_Shadow* shadow)
 {
-    HSD_CObj* cobj;
-    HSD_ImageDesc* idesc;
-    HSD_SList* list;
+    HSD_CObj* camera;
+    HSD_ImageDesc* image_desc;
+    HSD_SList* current_node;
 
     HSD_ASSERT(359, shadow);
     HSD_ASSERT(360, shadow->camera);
     HSD_ASSERT(361, shadow->texture);
     HSD_ASSERT(362, shadow->texture->imagedesc);
 
-    list = shadow->objects;
-    cobj = shadow->camera;
-    idesc = shadow->texture->imagedesc;
+    current_node = shadow->objects;
+    camera = shadow->camera;
+    image_desc = shadow->texture->imagedesc;
 
-    if (list != NULL) {
-        HSD_CObjSetCurrent(cobj);
+    if (current_node != NULL) {
+        HSD_CObjSetCurrent(camera);
         {
             static HSD_Chan chan = {
                 NULL,           GX_COLOR0A0,      0,
@@ -236,7 +283,7 @@ void HSD_ShadowStartRender(HSD_Shadow* shadow)
             chan.mat_color.b = 255;
 
             HSD_SetupChannelAll(&chan);
-            GXSetScissor(0, 0, idesc->width, idesc->height);
+            GXSetScissor(0, 0, image_desc->width, image_desc->height);
 
             drawBackgroundRect(shadow);
 
@@ -245,11 +292,11 @@ void HSD_ShadowStartRender(HSD_Shadow* shadow)
             chan.mat_color.b = shadow->intensity;
 
             HSD_SetupChannelAll(&chan);
-            GXSetScissor(2, 2, idesc->width - 4, idesc->height - 4);
+            GXSetScissor(2, 2, image_desc->width - 4, image_desc->height - 4);
         }
 
-        for (list = shadow->objects; list != NULL; list = list->next) {
-            HSD_JObjDispAll(list->data, NULL,
+        for (current_node = shadow->objects; current_node != NULL; current_node = current_node->next) {
+            HSD_JObjDispAll(current_node->data, NULL,
                             (HSD_TrspMask) (HSD_TRSP_OPA | HSD_TRSP_TEXEDGE),
                             RENDER_SHADOW);
         }
@@ -258,18 +305,22 @@ void HSD_ShadowStartRender(HSD_Shadow* shadow)
     }
 }
 
+/**
+ * @brief Ends the shadow rendering pass, syncing GX pixels and copying to the texture
+ * @param shadow The shadow instance
+ */
 void HSD_ShadowEndRender(HSD_Shadow* shadow)
 {
-    HSD_ImageDesc* idesc;
+    HSD_ImageDesc* image_desc;
 
     HSD_ASSERT(501, shadow);
 
-    idesc = shadow->texture->imagedesc;
-    if (!idesc->image_ptr) {
-        HSD_ShadowSetSize(shadow, idesc->width, idesc->height);
+    image_desc = shadow->texture->imagedesc;
+    if (!image_desc->image_ptr) {
+        HSD_ShadowSetSize(shadow, image_desc->width, image_desc->height);
     }
 
-    GXCopyTex(idesc->image_ptr, GX_TRUE);
+    GXCopyTex(image_desc->image_ptr, GX_TRUE);
     GXPixModeSync();
 
     GXInvalidateTexAll();
@@ -277,9 +328,14 @@ void HSD_ShadowEndRender(HSD_Shadow* shadow)
     makeMatrix(shadow);
 }
 
+/**
+ * @brief Toggles the active state of a shadow
+ * @param shadow The shadow instance
+ * @param active Non-zero to activate, zero to deactivate
+ */
 void HSD_ShadowSetActive(HSD_Shadow* shadow, int active)
 {
-    HSD_ImageDesc* idesc;
+    HSD_ImageDesc* image_desc;
 
     HSD_ASSERT(580, shadow);
 
@@ -289,9 +345,9 @@ void HSD_ShadowSetActive(HSD_Shadow* shadow, int active)
 
     shadow->active = active;
     if (active) {
-        idesc = shadow->texture->imagedesc;
-        if (!idesc->image_ptr) {
-            HSD_ShadowSetSize(shadow, idesc->width, idesc->height);
+        image_desc = shadow->texture->imagedesc;
+        if (!image_desc->image_ptr) {
+            HSD_ShadowSetSize(shadow, image_desc->width, image_desc->height);
         }
 
         HSD_MObjAddShadowTexture(shadow->texture);
@@ -302,16 +358,21 @@ void HSD_ShadowSetActive(HSD_Shadow* shadow, int active)
 
 static char distAssert[16] = "distance > 0.0F";
 
+/**
+ * @brief Adds a JObj (joint object) to the list of objects receiving this shadow
+ * @param shadow The shadow instance
+ * @param jobj The JObj to cast the shadow on
+ */
 void HSD_ShadowAddObject(HSD_Shadow* shadow, HSD_JObj* jobj)
 {
-    HSD_SList* list;
+    HSD_SList* current_node;
 
     if (!shadow || !jobj) {
         return;
     }
 
-    for (list = shadow->objects; list; list = list->next) {
-        if (list->data == jobj) {
+    for (current_node = shadow->objects; current_node; current_node = current_node->next) {
+        if (current_node->data == jobj) {
             return;
         }
     }
@@ -319,6 +380,11 @@ void HSD_ShadowAddObject(HSD_Shadow* shadow, HSD_JObj* jobj)
     HSD_JObjRef(jobj);
 }
 
+/**
+ * @brief Removes a JObj from the list of objects receiving this shadow
+ * @param shadow The shadow instance
+ * @param jobj The JObj to remove, or NULL to clear all
+ */
 void HSD_ShadowDeleteObject(HSD_Shadow* shadow, HSD_JObj* jobj)
 {
     if (!shadow) {
@@ -326,11 +392,11 @@ void HSD_ShadowDeleteObject(HSD_Shadow* shadow, HSD_JObj* jobj)
     }
 
     if (jobj) {
-        HSD_SList** list = &(shadow->objects);
-        for (; *list; list = &((*list)->next)) {
-            if ((*list)->data == jobj) {
+        HSD_SList** current_node = &(shadow->objects);
+        for (; *current_node; current_node = &((*current_node)->next)) {
+            if ((*current_node)->data == jobj) {
                 HSD_JObjUnref(jobj);
-                (*list) = HSD_SListRemove(*list);
+                (*current_node) = HSD_SListRemove(*current_node);
                 return;
             }
         }
@@ -342,6 +408,10 @@ void HSD_ShadowDeleteObject(HSD_Shadow* shadow, HSD_JObj* jobj)
     }
 }
 
+/**
+ * @brief Generates the projection matrix mapping the shadow texture onto the surface
+ * @param shadow The shadow instance
+ */
 static void makeMatrix(HSD_Shadow* shadow)
 {
     Mtx Mprj;
@@ -383,19 +453,27 @@ static void makeMatrix(HSD_Shadow* shadow)
 #define HSD_ASSERT2(line, text, cond)                                         \
     ((cond) ? ((void) 0) : __assert(__FILE__, line, text))
 
+/**
+ * @brief Adjusts the shadow camera viewing volume (frustum/ortho/perspective)
+ * @param shadow The shadow instance
+ * @param top Top bound
+ * @param bottom Bottom bound
+ * @param left Left bound
+ * @param right Right bound
+ */
 void HSD_ShadowSetViewingRect(HSD_Shadow* shadow, float top, float bottom,
                               float left, float right)
 {
-    HSD_CObj* cobj;
+    HSD_CObj* camera;
     float distance;
 
     HSD_ASSERT(721, shadow);
 
-    cobj = shadow->camera;
-    distance = HSD_CObjGetEyeDistance(cobj);
+    camera = shadow->camera;
+    distance = HSD_CObjGetEyeDistance(camera);
     HSD_ASSERT2(725, distAssert, distance > 0.0F);
 
-    switch (HSD_CObjGetProjectionType(cobj)) {
+    switch (HSD_CObjGetProjectionType(camera)) {
     case PROJ_PERSPECTIVE: {
         float width, height;
 
@@ -409,18 +487,18 @@ void HSD_ShadowSetViewingRect(HSD_Shadow* shadow, float top, float bottom,
         } else {
             height = fabsf_bitwise(right);
         }
-        HSD_CObjSetAspect(cobj, height / width);
-        HSD_CObjSetFov(cobj, atan2f(height, distance));
+        HSD_CObjSetAspect(camera, height / width);
+        HSD_CObjSetFov(camera, atan2f(height, distance));
     } break;
 
     case PROJ_ORTHO:
-        HSD_CObjSetOrtho(cobj, top, bottom, left, right);
+        HSD_CObjSetOrtho(camera, top, bottom, left, right);
         break;
 
     case PROJ_FRUSTUM: {
-        float scale = HSD_CObjGetNear(cobj) / distance;
+        float scale = HSD_CObjGetNear(camera) / distance;
         HSD_ASSERT(754, scale > 0.0F);
-        HSD_CObjSetFrustum(cobj, scale * top, scale * bottom, scale * left,
+        HSD_CObjSetFrustum(camera, scale * top, scale * bottom, scale * left,
                            scale * right);
     } break;
 
@@ -429,6 +507,14 @@ void HSD_ShadowSetViewingRect(HSD_Shadow* shadow, float top, float bottom,
     }
 }
 
+/**
+ * @brief Initializes a viewing rect structure based on camera properties
+ * @param rect Pointer to the viewing rect to initialize
+ * @param position Camera position
+ * @param interest Camera interest/look-at point
+ * @param upvector Camera up vector
+ * @param perspective Perspective mode indicator
+ */
 void HSD_ViewingRectInit(HSD_ViewingRect* rect, Vec3* position, Vec3* interest,
                          Vec3* upvector, int perspective)
 {
@@ -448,12 +534,26 @@ void HSD_ViewingRectInit(HSD_ViewingRect* rect, Vec3* position, Vec3* interest,
     rect->perspective = perspective;
 }
 
+/**
+ * @brief Checks if a viewing rect is valid (top > bottom and right > left)
+ * @param rect Pointer to the viewing rect
+ * @return Non-zero if valid, zero if invalid
+ */
 int HSD_ViewingRectCheck(HSD_ViewingRect* rect)
 {
     HSD_ASSERT(818, rect);
     return rect->top > rect->bottom && rect->right > rect->left;
 }
 
+/**
+ * @brief Expands the viewing rect boundaries to encompass the provided rectangle
+ * @param rect Pointer to the viewing rect
+ * @param position Local origin of the sub-rect
+ * @param top Local top
+ * @param bottom Local bottom
+ * @param left Local left
+ * @param right Local right
+ */
 void HSD_ViewingRectAddRect(HSD_ViewingRect* rect, Vec3* position, float top,
                             float bottom, float left, float right)
 {

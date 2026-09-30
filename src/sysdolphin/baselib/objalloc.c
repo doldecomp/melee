@@ -1,3 +1,8 @@
+/**
+ * @file objalloc.c
+ * @brief Memory pool allocator
+ * @details Manages fixed-size memory pools for efficient allocation of engine objects like JObj, DObj, and Fighter.
+ */
 #include "objalloc.h"
 
 #include <string.h>
@@ -10,6 +15,9 @@ static objheap obj_heap = { 0, 0, -1, -1 };
 
 static HSD_ObjAllocData* alloc_datas;
 
+/**
+ * @brief Sets the global heap used for block allocations.
+ */
 void HSD_ObjSetHeap(u32 size, void* ptr)
 {
     obj_heap.curr = (uintptr_t) ptr;
@@ -18,6 +26,9 @@ void HSD_ObjSetHeap(u32 size, void* ptr)
     obj_heap.size = size;
 }
 
+/**
+ * @brief Adds new free blocks to the allocator pool.
+ */
 s32 HSD_ObjAllocAddFree(HSD_ObjAllocData* data, u32 num)
 {
     uintptr_t pool_end;
@@ -68,6 +79,9 @@ s32 HSD_ObjAllocAddFree(HSD_ObjAllocData* data, u32 num)
     return num;
 }
 
+/**
+ * @brief Allocates a block from the object pool.
+ */
 void* HSD_ObjAlloc(HSD_ObjAllocData* data)
 {
     HSD_ObjAllocLink* cur;
@@ -116,6 +130,9 @@ void* HSD_ObjAlloc(HSD_ObjAllocData* data)
     return cur;
 }
 
+/**
+ * @brief Frees a block back into the object pool.
+ */
 void HSD_ObjFree(HSD_ObjAllocData* data, void* obj)
 {
     HSD_ObjAllocLink* link = obj;
@@ -125,6 +142,9 @@ void HSD_ObjFree(HSD_ObjAllocData* data, void* obj)
     data->used -= 1;
 }
 
+/**
+ * @brief Internal function to remove an allocator from the global list.
+ */
 static inline void removeAll(HSD_ObjAllocData* data)
 {
     HSD_ObjAllocData** cur = &alloc_datas;
@@ -137,6 +157,9 @@ static inline void removeAll(HSD_ObjAllocData* data)
     }
 }
 
+/**
+ * @brief Initializes an object pool allocator.
+ */
 void HSD_ObjAllocInit(HSD_ObjAllocData* data, size_t size, u32 align)
 {
     HSD_ASSERT(0x185, data);
@@ -155,6 +178,9 @@ void HSD_ObjAllocInit(HSD_ObjAllocData* data, size_t size, u32 align)
     alloc_datas = data;
 }
 
+/**
+ * @brief Forgets memory allocations within a specific range.
+ */
 void _HSD_ObjAllocForgetMemory(void* low, void* high)
 {
     alloc_datas = NULL;

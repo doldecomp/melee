@@ -1,3 +1,9 @@
+/**
+ * @file texp.h
+ * @brief Texture Expression (TExp) compilation system
+ * @details Implements the TEV color combiner expression tree compiler for GameCube GX hardware.
+ * Module prefix: HSD_TExp
+ */
 #ifndef _texp_h_
 #define _texp_h_
 
@@ -172,29 +178,139 @@ union HSD_TExp {
     struct _HSD_TECnst cnst;
 };
 
+/**
+ * @brief Returns the expression node type (TEV, TEX, RAS, CNST, etc.).
+ * @param texp Texture expression node
+ * @return Node type enum
+ */
 HSD_TExpType HSD_TExpGetType(HSD_TExp* texp);
+/**
+ * @brief Allocates and initializes a TEV stage expression node, prepending it to the given list.
+ * @param list Pointer to the expression list head
+ * @return The new TEV expression node
+ */
 HSD_TExp* HSD_TExpTev(HSD_TExp**);
+/**
+ * @brief Finds or allocates a constant color/alpha expression node.
+ * @param val Pointer to the constant value
+ * @param comp Component type (RGB, A, X)
+ * @param type Data type of val
+ * @param list Pointer to the expression list head
+ * @return The constant expression node
+ */
 HSD_TExp* HSD_TExpCnst(void*, HSD_TEInput, HSD_TEType, HSD_TExp**);
+/**
+ * @brief Sets the texture object and color channel order for a TEV expression.
+ * @param texp TEV expression node
+ * @param tex Texture object (TObj)
+ * @param chan Color channel ID
+ */
 void HSD_TExpOrder(HSD_TExp*, HSD_TObj*, GXChannelID);
 
+/**
+ * @brief Sets the color operation, bias, scale, and clamp for a TEV expression.
+ * @param texp TEV expression node
+ * @param op TEV color operation
+ * @param bias TEV bias
+ * @param scale TEV scale
+ * @param clamp Clamp enable flag
+ */
 void HSD_TExpColorOp(HSD_TExp*, GXTevOp, GXTevBias, GXTevScale, u8);
+/**
+ * @brief Maps inputs (A, B, C, D) for the TEV color stage equation.
+ * @param texp TEV expression node
+ * @param sel_a Selector for input A
+ * @param exp_a Expression for input A
+ * @param sel_b Selector for input B
+ * @param exp_b Expression for input B
+ * @param sel_c Selector for input C
+ * @param exp_c Expression for input C
+ * @param sel_d Selector for input D
+ * @param exp_d Expression for input D
+ */
 void HSD_TExpColorIn(HSD_TExp*, HSD_TEInput, HSD_TExp*, HSD_TEInput, HSD_TExp*,
                      HSD_TEInput, HSD_TExp*, HSD_TEInput, HSD_TExp*);
+/**
+ * @brief Sets the alpha operation, bias, scale, and clamp for a TEV expression.
+ * @param texp TEV expression node
+ * @param op TEV alpha operation
+ * @param bias TEV bias
+ * @param scale TEV scale
+ * @param clamp Clamp enable flag
+ */
 void HSD_TExpAlphaOp(HSD_TExp*, GXTevOp, GXTevBias, GXTevScale, u8);
+/**
+ * @brief Maps inputs (A, B, C, D) for the TEV alpha stage equation.
+ * @param texp TEV expression node
+ * @param sel_a Selector for input A
+ * @param exp_a Expression for input A
+ * @param sel_b Selector for input B
+ * @param exp_b Expression for input B
+ * @param sel_c Selector for input C
+ * @param exp_c Expression for input C
+ * @param sel_d Selector for input D
+ * @param exp_d Expression for input D
+ */
 void HSD_TExpAlphaIn(HSD_TExp* texp, HSD_TEInput sel_a, HSD_TExp* exp_a,
                      HSD_TEInput sel_b, HSD_TExp* exp_b, HSD_TEInput sel_c,
                      HSD_TExp* exp_c, HSD_TEInput sel_d, HSD_TExp* exp_d);
 
+/**
+ * @brief Frees a TEV descriptor list.
+ * @param desc Pointer to TEV descriptor list
+ */
 void HSD_TExpFreeTevDesc(HSD_TExpTevDesc*);
+/**
+ * @brief Frees an expression list, selectively keeping referenced nodes if free_all is 0.
+ * @param texp_list Expression list head
+ * @param type Node type to free (or HSD_TE_ALL)
+ * @param free_all If non-zero, unconditionally frees nodes matching the type
+ * @return Updated expression list head
+ */
 HSD_TExp* HSD_TExpFreeList(HSD_TExp*, HSD_TExpType, s32);
+/**
+ * @brief Compiles the expression tree into GX TEV descriptors.
+ * @param texp Root of the expression tree
+ * @param desc Pointer to store the compiled TEV descriptors
+ * @param list Pointer to expression list to manage lifecycle
+ * @return Status flag (0 on success)
+ */
 int HSD_TExpCompile(HSD_TExp*, HSD_TExpTevDesc**, HSD_TExp**);
+/**
+ * @brief Loads compiled TEV descriptors into GX hardware registers.
+ * @param desc TEV descriptor list
+ * @param texp Associated expression tree
+ */
 void HSD_TExpSetupTev(HSD_TExpTevDesc*, HSD_TExp*);
 
+/**
+ * @brief Frees a single expression node.
+ * @param texp Expression node
+ */
 void HSD_TExpFree(HSD_TExp* texp);
+/**
+ * @brief Increments the reference count of an expression node.
+ * @param texp Expression node
+ * @param sel Color/Alpha selector flag
+ */
 void HSD_TExpRef(HSD_TExp* texp, u8 sel);
+/**
+ * @brief Decrements the reference count of an expression node and frees descendants if zero.
+ * @param texp Expression node
+ * @param sel Color/Alpha selector flag
+ */
 void HSD_TExpUnref(HSD_TExp* texp, u8 sel);
+/**
+ * @brief Applies constant register values to the GX hardware.
+ * @param texp Constant expression node
+ */
 void HSD_TExpSetReg(HSD_TExp* texp);
 
+/**
+ * @brief Checks if the color operation is a pass-through (A+B where A=0, B=0).
+ * @param texp TEV expression node
+ * @return true if pass-through
+ */
 static inline bool IsThroughColor(HSD_TExp* texp)
 {
     return texp->tev.c_op == GX_TEV_ADD && texp->tev.c_in[0].sel == HSD_TE_0 &&
@@ -202,6 +318,11 @@ static inline bool IsThroughColor(HSD_TExp* texp)
            texp->tev.c_scale == 0;
 }
 
+/**
+ * @brief Checks if the alpha operation is a pass-through.
+ * @param texp TEV expression node
+ * @return true if pass-through
+ */
 static inline bool IsThroughAlpha(HSD_TExp* texp)
 {
     return texp->tev.a_op == GX_TEV_ADD && texp->tev.a_in[0].sel == HSD_TE_0 &&

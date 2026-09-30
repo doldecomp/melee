@@ -1,3 +1,8 @@
+/**
+ * @file gobjplink.c
+ * @brief Game Object Priority Link management
+ * @details Manages the priority-linked list of GObjs which dictates the main execution order of objects in the game loop.
+ */
 #include "gobjplink.h"
 
 #include "debug.h"
@@ -8,6 +13,9 @@
 #include "gobjuserdata.h"
 #include "objalloc.h"
 
+/**
+ * @brief Reorders a Game Object immediately before another Game Object in the list.
+ */
 void GObj_PReorder(HSD_GObj* gobj, HSD_GObj* hiprio_gobj)
 {
     u8 link = gobj->p_link;
@@ -26,33 +34,45 @@ void GObj_PReorder(HSD_GObj* gobj, HSD_GObj* hiprio_gobj)
     }
 }
 
+/**
+ * @brief Allocates a GObj from the global object allocator pool.
+ */
 static inline HSD_GObj* gobj_allocate(void)
 {
     return HSD_ObjAlloc(&gobj_alloc_data);
 }
 
+/**
+ * @brief Inserts a GObj at the end of its priority group.
+ */
 static inline void gobj_first_lower_prio(HSD_GObj* gobj)
 {
-    HSD_GObj* var_r4 = plinklow_gobjs[gobj->p_link];
-    while (var_r4 != NULL && var_r4->p_priority > gobj->p_priority) {
-        var_r4 = var_r4->prev;
+    HSD_GObj* curr_gobj = plinklow_gobjs[gobj->p_link];
+    while (curr_gobj != NULL && curr_gobj->p_priority > gobj->p_priority) {
+        curr_gobj = curr_gobj->prev;
     }
-    GObj_PReorder(gobj, var_r4);
+    GObj_PReorder(gobj, curr_gobj);
 }
 
+/**
+ * @brief Inserts a GObj at the beginning of its priority group.
+ */
 static inline void gobj_first_higher_prio(HSD_GObj* gobj)
 {
-    HSD_GObj* var_r4 = HSD_GObjPLinkHead[gobj->p_link];
-    while (var_r4 != NULL && var_r4->p_priority < gobj->p_priority) {
-        var_r4 = var_r4->next;
+    HSD_GObj* curr_gobj = HSD_GObjPLinkHead[gobj->p_link];
+    while (curr_gobj != NULL && curr_gobj->p_priority < gobj->p_priority) {
+        curr_gobj = curr_gobj->next;
     }
-    GObj_PReorder(gobj, var_r4 != NULL ? var_r4->prev
+    GObj_PReorder(gobj, curr_gobj != NULL ? curr_gobj->prev
                                        : plinklow_gobjs[gobj->p_link]);
 }
 
 extern char lbl_804084B8[];
 extern char lbl_804084C4[];
-HSD_GObj* CreateGObj(s32 where, u16 classifier, u8 p_link, u8 priority,
+/**
+ * @brief Creates a Game Object with specific priority link configuration.
+ */
+HSD_GObj* CreateGObj(s32 insert_type, u16 classifier, u8 p_link, u8 priority,
                      HSD_GObj* position)
 {
     HSD_GObj* gobj;
@@ -76,7 +96,7 @@ HSD_GObj* CreateGObj(s32 where, u16 classifier, u8 p_link, u8 priority,
     gobj->hsd_obj = NULL;
     gobj->user_data = NULL;
     gobj->user_data_remove_func = NULL;
-    switch (where) {
+    switch (insert_type) {
     case 0:
         gobj_first_lower_prio(gobj);
         break;
@@ -93,11 +113,17 @@ HSD_GObj* CreateGObj(s32 where, u16 classifier, u8 p_link, u8 priority,
     return gobj;
 }
 
+/**
+ * @brief Creates a Game Object and places it at the end of its priority group.
+ */
 HSD_GObj* GObj_Create(u16 classifier, u8 p_link, u8 priority)
 {
     return CreateGObj(0, classifier, p_link, priority, NULL);
 }
 
+/**
+ * @brief Frees a Game Object and cleans up its linked resources.
+ */
 void HSD_GObjFree(HSD_GObj* gobj)
 {
     HSD_ASSERT(0x171, gobj);
@@ -126,7 +152,10 @@ void HSD_GObjFree(HSD_GObj* gobj)
     HSD_ObjFree(&gobj_alloc_data, gobj);
 }
 
-void HSD_GObjPLink_ChangeGObjPri_Unk(u32 arg0, HSD_GObj* gobj, u8 p_link,
+/**
+ * @brief Changes the priority of a Game Object within the Priority Link lists.
+ */
+void HSD_GObjPLink_ChangeGObjPri_Unk(u32 insert_type, HSD_GObj* gobj, u8 p_link,
                                      u8 priority, HSD_GObj* position)
 {
     HSD_GObjProc* proc_cur;
@@ -142,7 +171,7 @@ void HSD_GObjPLink_ChangeGObjPri_Unk(u32 arg0, HSD_GObj* gobj, u8 p_link,
         gobj == HSD_GObj_CurrentInvokedProcGObj)
     {
         HSD_GObj_DelayedProcInfo.x0.x0.delay_change_gobj_pri = 1;
-        HSD_GObj_DelayedProcInfo.type = arg0;
+        HSD_GObj_DelayedProcInfo.type = insert_type;
         HSD_GObj_DelayedProcInfo.p_link = p_link;
         HSD_GObj_DelayedProcInfo.p_prio = priority;
         HSD_GObj_DelayedProcInfo.gobj = position;
@@ -170,7 +199,7 @@ void HSD_GObjPLink_ChangeGObjPri_Unk(u32 arg0, HSD_GObj* gobj, u8 p_link,
     }
     gobj->p_link = p_link;
     gobj->p_priority = priority;
-    switch (arg0) {
+    switch (insert_type) {
     case 0:
         gobj_first_lower_prio(gobj);
         break;

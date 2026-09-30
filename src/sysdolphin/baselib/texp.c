@@ -1,3 +1,9 @@
+/**
+ * @file texp.c
+ * @brief Texture Expression (TExp) compilation system implementation
+ * @details Implements the TEV color combiner expression tree compiler for GameCube GX hardware.
+ * Module prefix: HSD_TExp
+ */
 #include "texp.h"
 
 #include <string.h>
@@ -8,6 +14,11 @@
 #include "texpdag.h"
 #include "tobj.h"
 
+/**
+ * @brief Returns the expression node type (TEV, TEX, RAS, CNST, etc.).
+ * @param texp Texture expression node
+ * @return Node type enum
+ */
 HSD_TExpType HSD_TExpGetType(HSD_TExp* texp)
 {
     if (texp == NULL) {
@@ -22,6 +33,10 @@ HSD_TExpType HSD_TExpGetType(HSD_TExp* texp)
     return texp->type;
 }
 
+/**
+ * @brief Allocates a new TEV node.
+ * @return Pointer to new HSD_TExp
+ */
 static HSD_TExp* TevAlloc(void)
 {
     HSD_TExp* texp = hsdAllocMemPiece(sizeof(HSD_TETev));
@@ -29,6 +44,10 @@ static HSD_TExp* TevAlloc(void)
     return texp;
 }
 
+/**
+ * @brief Allocates a new constant node.
+ * @return Pointer to new HSD_TExp
+ */
 static HSD_TExp* CnstAlloc(void)
 {
     HSD_TExp* texp = hsdAllocMemPiece(sizeof(HSD_TECnst));
@@ -36,6 +55,10 @@ static HSD_TExp* CnstAlloc(void)
     return texp;
 }
 
+/**
+ * @brief Frees a single expression node.
+ * @param texp Expression node
+ */
 void HSD_TExpFree(HSD_TExp* texp)
 {
     switch (HSD_TExpGetType(texp)) {
@@ -50,6 +73,11 @@ void HSD_TExpFree(HSD_TExp* texp)
     }
 }
 
+/**
+ * @brief Increments the reference count of an expression node.
+ * @param texp Expression node
+ * @param sel Color/Alpha selector flag
+ */
 void HSD_TExpRef(HSD_TExp* texp, u8 sel)
 {
     HSD_TExpType type = HSD_TExpGetType(texp);
@@ -71,6 +99,11 @@ void HSD_TExpRef(HSD_TExp* texp, u8 sel)
     }
 }
 
+/**
+ * @brief Decrements the reference count of an expression node and frees descendants if zero.
+ * @param texp Expression node
+ * @param sel Color/Alpha selector flag
+ */
 void HSD_TExpUnref(HSD_TExp* texp, u8 sel)
 {
     s32 i;
@@ -103,42 +136,49 @@ void HSD_TExpUnref(HSD_TExp* texp, u8 sel)
     }
 }
 
+/**
+ * @brief Frees an expression list, selectively keeping referenced nodes if free_all is 0.
+ * @param texp_list Expression list head
+ * @param type Node type to free (or HSD_TE_ALL)
+ * @param free_all If non-zero, unconditionally frees nodes matching the type
+ * @return Updated expression list head
+ */
 HSD_TExp* HSD_TExpFreeList(HSD_TExp* texp_list, HSD_TExpType type, s32 all)
 {
     HSD_TExp** handle;
-    HSD_TExp* ptr;
-    HSD_TExp* next;
+    HSD_TExp* curr_texp;
+    HSD_TExp* next_texp;
 
     handle = &texp_list;
 
-    if (all != 0) {
+    if (free_all != 0) {
         while (*handle != NULL) {
             if (type == HSD_TE_ALL || type == (*handle)->type) {
                 switch ((*handle)->type) {
                 case HSD_TE_TEV:
-                    next = (*handle)->tev.next;
+                    next_texp = (*handle)->tev.next_texp;
                     HSD_TExpFree(*handle);
-                    *handle = next;
+                    *handle = next_texp;
                     continue;
                 case HSD_TE_CNST:
-                    next = (*handle)->tev.next;
+                    next_texp = (*handle)->tev.next_texp;
                     HSD_TExpFree(*handle);
-                    *handle = next;
+                    *handle = next_texp;
                     continue;
                 default:
                     HSD_ASSERT(219, 0);
                 }
             }
-            handle = &(*handle)->tev.next;
+            handle = &(*handle)->tev.next_texp;
         }
     } else {
         if (type == HSD_TE_ALL || type == HSD_TE_TEV) {
-            for (ptr = texp_list; ptr != NULL; ptr = ptr->tev.next) {
-                switch (ptr->type) {
+            for (curr_texp = texp_list; curr_texp != NULL; curr_texp = curr_texp->tev.next_texp) {
+                switch (curr_texp->type) {
                 case HSD_TE_TEV:
-                    if (ptr->tev.c_ref == 0 && ptr->tev.c_ref == 0) {
-                        HSD_TExpUnref(ptr, 1);
-                        HSD_TExpUnref(ptr, 5);
+                    if (curr_texp->tev.c_ref == 0 && curr_texp->tev.c_ref == 0) {
+                        HSD_TExpUnref(curr_texp, 1);
+                        HSD_TExpUnref(curr_texp, 5);
                     }
                     break;
                 default:
@@ -155,29 +195,34 @@ HSD_TExp* HSD_TExpFreeList(HSD_TExp* texp_list, HSD_TExpType type, s32 all)
                     {
                         break;
                     }
-                    next = (*handle)->tev.next;
+                    next_texp = (*handle)->tev.next_texp;
                     HSD_TExpFree(*handle);
-                    *handle = next;
+                    *handle = next_texp;
                     continue;
                 case HSD_TE_CNST:
                     if ((*handle)->cnst.ref != 0) {
                         break;
                     }
-                    next = (*handle)->tev.next;
+                    next_texp = (*handle)->tev.next_texp;
                     HSD_TExpFree(*handle);
-                    *handle = next;
+                    *handle = next_texp;
                     continue;
                 default:
                     HSD_ASSERT(267, 0);
                 }
             }
-            handle = &(*handle)->tev.next;
+            handle = &(*handle)->tev.next_texp;
         }
     }
 
     return texp_list;
 }
 
+/**
+ * @brief Allocates and initializes a TEV stage expression node, prepending it to the given list.
+ * @param texp_list Pointer to the expression list head
+ * @return The new TEV expression node
+ */
 HSD_TExp* HSD_TExpTev(HSD_TExp** texp_list)
 {
     int i;
@@ -199,6 +244,14 @@ HSD_TExp* HSD_TExpTev(HSD_TExp** texp_list)
     return texp;
 }
 
+/**
+ * @brief Finds or allocates a constant color/alpha expression node.
+ * @param val Pointer to the constant value
+ * @param comp Component type (RGB, A, X)
+ * @param type Data type of val
+ * @param texp_list Pointer to the expression list head
+ * @return The constant expression node
+ */
 HSD_TExp* HSD_TExpCnst(void* val, HSD_TEInput comp, HSD_TEType type,
                        HSD_TExp** texp_list)
 {
@@ -237,6 +290,14 @@ HSD_TExp* HSD_TExpCnst(void* val, HSD_TEInput comp, HSD_TEType type,
     return texp;
 }
 
+/**
+ * @brief Sets the color operation, bias, scale, and clamp for a TEV expression.
+ * @param texp TEV expression node
+ * @param op TEV color operation
+ * @param bias TEV bias
+ * @param scale TEV scale
+ * @param clamp Clamp enable flag
+ */
 void HSD_TExpColorOp(HSD_TExp* texp, GXTevOp op, GXTevBias bias,
                      GXTevScale scale, u8 clamp)
 {
@@ -254,6 +315,14 @@ void HSD_TExpColorOp(HSD_TExp* texp, GXTevOp op, GXTevBias bias,
     }
 }
 
+/**
+ * @brief Sets the alpha operation, bias, scale, and clamp for a TEV expression.
+ * @param texp TEV expression node
+ * @param op TEV alpha operation
+ * @param bias TEV bias
+ * @param scale TEV scale
+ * @param clamp Clamp enable flag
+ */
 void HSD_TExpAlphaOp(HSD_TExp* texp, GXTevOp op, GXTevBias bias,
                      GXTevScale scale, u8 clamp)
 {
@@ -271,6 +340,13 @@ void HSD_TExpAlphaOp(HSD_TExp* texp, GXTevOp op, GXTevBias bias,
     }
 }
 
+/**
+ * @brief Subroutine to map a single color input in the TEV stage.
+ * @param tev TEV node
+ * @param sel Input selector
+ * @param exp Expression
+ * @param idx Input index (0-3)
+ */
 static void HSD_TExpColorInSub(HSD_TETev* tev, HSD_TEInput sel, HSD_TExp* exp,
                                s32 idx)
 {
@@ -464,6 +540,18 @@ static void HSD_TExpColorInSub(HSD_TETev* tev, HSD_TEInput sel, HSD_TExp* exp,
     HSD_TExpUnref(prev.exp, prev.sel);
 }
 
+/**
+ * @brief Maps inputs (A, B, C, D) for the TEV color stage equation.
+ * @param texp TEV expression node
+ * @param sel_a Selector for input A
+ * @param exp_a Expression for input A
+ * @param sel_b Selector for input B
+ * @param exp_b Expression for input B
+ * @param sel_c Selector for input C
+ * @param exp_c Expression for input C
+ * @param sel_d Selector for input D
+ * @param exp_d Expression for input D
+ */
 void HSD_TExpColorIn(HSD_TExp* texp, HSD_TEInput sel_a, HSD_TExp* exp_a,
                      HSD_TEInput sel_b, HSD_TExp* exp_b, HSD_TEInput sel_c,
                      HSD_TExp* exp_c, HSD_TEInput sel_d, HSD_TExp* exp_d)
@@ -480,6 +568,13 @@ void HSD_TExpColorIn(HSD_TExp* texp, HSD_TEInput sel_a, HSD_TExp* exp_a,
     HSD_TExpColorInSub(tev, sel_d, exp_d, 3);
 }
 
+/**
+ * @brief Subroutine to map a single alpha input in the TEV stage.
+ * @param tev TEV node
+ * @param sel Input selector
+ * @param exp Expression
+ * @param idx Input index (0-3)
+ */
 static void HSD_TExpAlphaInSub(HSD_TETev* tev, HSD_TEInput sel, HSD_TExp* exp,
                                s32 idx)
 {
@@ -581,6 +676,18 @@ static void HSD_TExpAlphaInSub(HSD_TETev* tev, HSD_TEInput sel, HSD_TExp* exp,
     HSD_TExpUnref(prev.exp, prev.sel);
 }
 
+/**
+ * @brief Maps inputs (A, B, C, D) for the TEV alpha stage equation.
+ * @param texp TEV expression node
+ * @param sel_a Selector for input A
+ * @param exp_a Expression for input A
+ * @param sel_b Selector for input B
+ * @param exp_b Expression for input B
+ * @param sel_c Selector for input C
+ * @param exp_c Expression for input C
+ * @param sel_d Selector for input D
+ * @param exp_d Expression for input D
+ */
 void HSD_TExpAlphaIn(HSD_TExp* texp, HSD_TEInput sel_a, HSD_TExp* exp_a,
                      HSD_TEInput sel_b, HSD_TExp* exp_b, HSD_TEInput sel_c,
                      HSD_TExp* exp_c, HSD_TEInput sel_d, HSD_TExp* exp_d)
@@ -597,6 +704,12 @@ void HSD_TExpAlphaIn(HSD_TExp* texp, HSD_TEInput sel_a, HSD_TExp* exp_a,
     HSD_TExpAlphaInSub(tev, sel_d, exp_d, 3);
 }
 
+/**
+ * @brief Sets the texture object and color channel order for a TEV expression.
+ * @param texp TEV expression node
+ * @param tex Texture object (TObj)
+ * @param chan Color channel ID
+ */
 void HSD_TExpOrder(HSD_TExp* texp, HSD_TObj* tex, GXChannelID chan)
 {
     HSD_ASSERT(837, texp);
@@ -610,7 +723,14 @@ void HSD_TExpOrder(HSD_TExp* texp, HSD_TObj* tex, GXChannelID chan)
     texp->tev.chan = chan;
 }
 
-static int AssignColorReg(HSD_TETev* tev, int idx, HSD_TExpRes* res)
+/**
+ * @brief Assigns a color register for the given TEV input.
+ * @param tev TEV node
+ * @param in_idx Input index
+ * @param texp_res Resources state tracking
+ * @return 0 on success, -1 on failure
+ */
+static int AssignColorReg(HSD_TETev* tev, int in_idx, HSD_TExpRes* texp_res)
 {
     static GXTevColorArg a_in[4] = { GX_CC_A0, GX_CC_A1, GX_CC_A2,
                                      GX_CC_APREV };
@@ -620,38 +740,38 @@ static int AssignColorReg(HSD_TETev* tev, int idx, HSD_TExpRes* res)
     HSD_TECnst* cnst;
     int j;
 
-    cnst = &tev->c_in[idx].exp->cnst;
+    cnst = &tev->c_in[in_idx].exp->cnst;
     if (cnst->reg != HSD_TE_UNDEF) {
         if (cnst->reg < 4) {
             return -1;
         }
-        tev->c_in[idx].type = HSD_TE_IMM;
+        tev->c_in[in_idx].type = HSD_TE_IMM;
         if (cnst->comp == HSD_TE_X) {
-            tev->c_in[idx].arg = a_in[cnst->reg - 4];
+            tev->c_in[in_idx].arg = a_in[cnst->reg - 4];
         } else {
-            tev->c_in[idx].arg = c_in[cnst->reg - 4];
+            tev->c_in[in_idx].arg = c_in[cnst->reg - 4];
         }
         return 0;
     } else {
         if (cnst->comp == HSD_TE_X) {
             for (j = 4; j < 8; ++j) {
-                if (res->reg[j].alpha == 0) {
-                    res->reg[j].alpha = 1;
+                if (texp_res->reg[j].alpha == 0) {
+                    texp_res->reg[j].alpha = 1;
                     cnst->reg = j;
-                    cnst->idx = 3;
-                    tev->c_in[idx].type = HSD_TE_IMM;
-                    tev->c_in[idx].arg = a_in[j - 4];
+                    cnst->in_idx = 3;
+                    tev->c_in[in_idx].type = HSD_TE_IMM;
+                    tev->c_in[in_idx].arg = a_in[j - 4];
                     return 0;
                 }
             }
         } else {
             for (j = 4; j < 8; ++j) {
-                if (res->reg[j].color == 0) {
-                    res->reg[j].color = 3;
+                if (texp_res->reg[j].color == 0) {
+                    texp_res->reg[j].color = 3;
                     cnst->reg = j;
-                    cnst->idx = 0;
-                    tev->c_in[idx].type = HSD_TE_IMM;
-                    tev->c_in[idx].arg = c_in[j - 4];
+                    cnst->in_idx = 0;
+                    tev->c_in[in_idx].type = HSD_TE_IMM;
+                    tev->c_in[in_idx].arg = c_in[j - 4];
                     return 0;
                 }
             }
@@ -660,29 +780,36 @@ static int AssignColorReg(HSD_TETev* tev, int idx, HSD_TExpRes* res)
     return -1;
 }
 
-static int AssignAlphaReg(HSD_TETev* tev, int idx, HSD_TExpRes* res)
+/**
+ * @brief Assigns an alpha register for the given TEV input.
+ * @param tev TEV node
+ * @param in_idx Input index
+ * @param texp_res Resources state tracking
+ * @return 0 on success, -1 on failure
+ */
+static int AssignAlphaReg(HSD_TETev* tev, int in_idx, HSD_TExpRes* texp_res)
 {
     static GXTevAlphaArg in[4] = { GX_CA_A0, GX_CA_A1, GX_CA_A2, GX_CA_APREV };
 
     HSD_TECnst* cnst;
     int j;
 
-    cnst = &tev->a_in[idx].exp->cnst;
+    cnst = &tev->a_in[in_idx].exp->cnst;
     if (cnst->reg != HSD_TE_UNDEF) {
         if (cnst->reg < 4) {
             return -1;
         }
-        tev->a_in[idx].type = HSD_TE_IMM;
-        tev->a_in[idx].arg = in[cnst->reg - 4];
+        tev->a_in[in_idx].type = HSD_TE_IMM;
+        tev->a_in[in_idx].arg = in[cnst->reg - 4];
         return 0;
     } else {
         for (j = 4; j < 8; ++j) {
-            if (res->reg[j].alpha == 0) {
-                res->reg[j].alpha = 1;
+            if (texp_res->reg[j].alpha == 0) {
+                texp_res->reg[j].alpha = 1;
                 cnst->reg = j;
-                cnst->idx = 3;
-                tev->a_in[idx].type = HSD_TE_IMM;
-                tev->a_in[idx].arg = in[j - 4];
+                cnst->in_idx = 3;
+                tev->a_in[in_idx].type = HSD_TE_IMM;
+                tev->a_in[in_idx].arg = in[j - 4];
                 return 0;
             }
         }
@@ -690,7 +817,14 @@ static int AssignAlphaReg(HSD_TETev* tev, int idx, HSD_TExpRes* res)
     return -1;
 }
 
-static int AssignColorKonst(HSD_TETev* tev, int idx, HSD_TExpRes* res)
+/**
+ * @brief Assigns a KColor register for the given TEV input.
+ * @param tev TEV node
+ * @param in_idx Input index
+ * @param texp_res Resources state tracking
+ * @return 0 on success, -1 on failure
+ */
+static int AssignColorKonst(HSD_TETev* tev, int in_idx, HSD_TExpRes* texp_res)
 {
     static GXTevKColorSel xsel[4][4] = {
         { GX_TEV_KCSEL_K0_R, GX_TEV_KCSEL_K0_G, GX_TEV_KCSEL_K0_B,
@@ -709,54 +843,54 @@ static int AssignColorKonst(HSD_TETev* tev, int idx, HSD_TExpRes* res)
     HSD_TECnst* cnst;
     int j;
 
-    cnst = &tev->c_in[idx].exp->cnst;
+    cnst = &tev->c_in[in_idx].exp->cnst;
     if (cnst->reg != HSD_TE_UNDEF) {
         if (cnst->reg >= 4) {
             return -1;
         }
         if (cnst->comp == HSD_TE_X) {
-            tev->kcsel = xsel[cnst->reg][cnst->idx];
-            tev->c_in[idx].type = HSD_TE_KONST;
-            tev->c_in[idx].arg = GX_CC_KONST;
+            tev->kcsel = xsel[cnst->reg][cnst->in_idx];
+            tev->c_in[in_idx].type = HSD_TE_KONST;
+            tev->c_in[in_idx].arg = GX_CC_KONST;
         } else {
             tev->kcsel = csel[cnst->reg];
-            tev->c_in[idx].type = HSD_TE_KONST;
-            tev->c_in[idx].arg = GX_CC_KONST;
+            tev->c_in[in_idx].type = HSD_TE_KONST;
+            tev->c_in[in_idx].arg = GX_CC_KONST;
         }
         return 0;
     } else {
         if (cnst->comp == HSD_TE_X) {
             for (j = 1; j < 4; j++) {
-                if (res->reg[j].alpha == 0) {
-                    res->reg[j].alpha = 1;
+                if (texp_res->reg[j].alpha == 0) {
+                    texp_res->reg[j].alpha = 1;
                     cnst->reg = j;
-                    cnst->idx = 3;
-                    tev->kcsel = xsel[cnst->reg][cnst->idx];
-                    tev->c_in[idx].type = HSD_TE_KONST;
-                    tev->c_in[idx].arg = GX_CC_KONST;
+                    cnst->in_idx = 3;
+                    tev->kcsel = xsel[cnst->reg][cnst->in_idx];
+                    tev->c_in[in_idx].type = HSD_TE_KONST;
+                    tev->c_in[in_idx].arg = GX_CC_KONST;
                     return 0;
                 }
             }
 
             for (j = 0; j < 4; j++) {
-                if (res->reg[j].color < 3) {
+                if (texp_res->reg[j].color < 3) {
                     cnst->reg = j;
-                    cnst->idx = res->reg[j].color++;
-                    tev->kcsel = xsel[cnst->reg][cnst->idx];
-                    tev->c_in[idx].type = HSD_TE_KONST;
-                    tev->c_in[idx].arg = GX_CC_KONST;
+                    cnst->in_idx = texp_res->reg[j].color++;
+                    tev->kcsel = xsel[cnst->reg][cnst->in_idx];
+                    tev->c_in[in_idx].type = HSD_TE_KONST;
+                    tev->c_in[in_idx].arg = GX_CC_KONST;
                     return 0;
                 }
             }
         } else {
             for (j = 0; j < 4; j++) {
-                if (res->reg[j].color == 0) {
-                    res->reg[j].color = 3;
+                if (texp_res->reg[j].color == 0) {
+                    texp_res->reg[j].color = 3;
                     cnst->reg = j;
-                    cnst->idx = 0;
+                    cnst->in_idx = 0;
                     tev->kcsel = csel[cnst->reg];
-                    tev->c_in[idx].type = HSD_TE_KONST;
-                    tev->c_in[idx].arg = GX_CC_KONST;
+                    tev->c_in[in_idx].type = HSD_TE_KONST;
+                    tev->c_in[in_idx].arg = GX_CC_KONST;
                     return 0;
                 }
             }
@@ -765,7 +899,14 @@ static int AssignColorKonst(HSD_TETev* tev, int idx, HSD_TExpRes* res)
     return -1;
 }
 
-static int AssignAlphaKonst(HSD_TETev* tev, int idx, HSD_TExpRes* res)
+/**
+ * @brief Assigns a KAlpha register for the given TEV input.
+ * @param tev TEV node
+ * @param in_idx Input index
+ * @param texp_res Resources state tracking
+ * @return 0 on success, -1 on failure
+ */
+static int AssignAlphaKonst(HSD_TETev* tev, int in_idx, HSD_TExpRes* texp_res)
 {
     static GXTevKAlphaSel sel[4][4] = {
         { GX_TEV_KASEL_K0_R, GX_TEV_KASEL_K0_G, GX_TEV_KASEL_K0_B,
@@ -781,35 +922,35 @@ static int AssignAlphaKonst(HSD_TETev* tev, int idx, HSD_TExpRes* res)
     HSD_TECnst* cnst;
     int j;
 
-    cnst = &tev->a_in[idx].exp->cnst;
+    cnst = &tev->a_in[in_idx].exp->cnst;
     if (cnst->reg != HSD_TE_UNDEF) {
         if (cnst->reg >= 4) {
             return -1;
         }
-        tev->kasel = sel[cnst->reg][cnst->idx];
-        tev->a_in[idx].type = HSD_TE_KONST;
-        tev->a_in[idx].arg = GX_CA_KONST;
+        tev->kasel = sel[cnst->reg][cnst->in_idx];
+        tev->a_in[in_idx].type = HSD_TE_KONST;
+        tev->a_in[in_idx].arg = GX_CA_KONST;
         return 0;
     } else {
         for (j = 1; j < 4; j++) {
-            if (res->reg[j].alpha == 0) {
-                res->reg[j].alpha = 1;
+            if (texp_res->reg[j].alpha == 0) {
+                texp_res->reg[j].alpha = 1;
                 cnst->reg = j;
-                cnst->idx = 3;
-                tev->kasel = sel[cnst->reg][cnst->idx];
-                tev->a_in[idx].type = HSD_TE_KONST;
-                tev->a_in[idx].arg = GX_CA_KONST;
+                cnst->in_idx = 3;
+                tev->kasel = sel[cnst->reg][cnst->in_idx];
+                tev->a_in[in_idx].type = HSD_TE_KONST;
+                tev->a_in[in_idx].arg = GX_CA_KONST;
                 return 0;
             }
         }
 
         for (j = 0; j < 4; j++) {
-            if (res->reg[j].color < 3) {
+            if (texp_res->reg[j].color < 3) {
                 cnst->reg = j;
-                cnst->idx = res->reg[j].color++;
-                tev->kasel = sel[cnst->reg][cnst->idx];
-                tev->a_in[idx].type = HSD_TE_KONST;
-                tev->a_in[idx].arg = GX_CA_KONST;
+                cnst->in_idx = texp_res->reg[j].color++;
+                tev->kasel = sel[cnst->reg][cnst->in_idx];
+                tev->a_in[in_idx].type = HSD_TE_KONST;
+                tev->a_in[in_idx].arg = GX_CA_KONST;
                 return 0;
             }
         }
@@ -817,6 +958,12 @@ static int AssignAlphaKonst(HSD_TETev* tev, int idx, HSD_TExpRes* res)
     return -1;
 }
 
+/**
+ * @brief Allocates hardware registers to expression nodes during compilation.
+ * @param texp Expression node
+ * @param res Resources tracking
+ * @return 0 on success
+ */
 static int TExpAssignReg(HSD_TExp* texp, HSD_TExpRes* res)
 {
     HSD_TETev* tev = (HSD_TETev*) texp;
@@ -916,6 +1063,13 @@ static int TExpAssignReg(HSD_TExp* texp, HSD_TExpRes* res)
     return 0;
 }
 
+/**
+ * @brief Converts an expression node to a hardware-ready TEV descriptor.
+ * @param texp Expression node
+ * @param desc Output TEV descriptor
+ * @param init_cprev Pointer to initialization flag for cprev
+ * @param init_aprev Pointer to initialization flag for aprev
+ */
 static void TExp2TevDesc(HSD_TExp* texp, HSD_TExpTevDesc* desc,
                          int* init_cprev, int* init_aprev)
 {
@@ -1034,6 +1188,10 @@ static GXTevKColorID id1[4] = { GX_KCOLOR0, GX_KCOLOR1, GX_KCOLOR2,
                                 GX_KCOLOR3 };
 static GXTevRegID id2[3] = { GX_TEVREG0, GX_TEVREG1, GX_TEVREG2 };
 
+/**
+ * @brief Applies constant register values to the GX hardware.
+ * @param texp Constant expression node
+ */
 void HSD_TExpSetReg(HSD_TExp* texp)
 {
     int i;
@@ -1165,6 +1323,11 @@ void HSD_TExpSetReg(HSD_TExp* texp)
     }
 }
 
+/**
+ * @brief Loads compiled TEV descriptors into GX hardware registers.
+ * @param desc TEV descriptor list
+ * @param texp Associated expression tree
+ */
 void HSD_TExpSetupTev(HSD_TExpTevDesc* tevdesc, HSD_TExp* texp)
 {
     HSD_TExpSetReg(texp);
@@ -1178,17 +1341,24 @@ void HSD_TExpSetupTev(HSD_TExpTevDesc* tevdesc, HSD_TExp* texp)
     }
 }
 
-int HSD_TExpCompile(HSD_TExp* texp, HSD_TExpTevDesc** tevdesc,
+/**
+ * @brief Compiles the expression tree into GX TEV descriptors.
+ * @param texp Root of the expression tree
+ * @param tevdesc_out Pointer to store the compiled TEV descriptors
+ * @param texp_list Pointer to expression list to manage lifecycle
+ * @return Status flag (0 on success)
+ */
+int HSD_TExpCompile(HSD_TExp* texp, HSD_TExpTevDesc** tevdesc_out,
                     HSD_TExp** texp_list)
 {
-    int num, i, val;
+    int num_nodes, i, assign_res;
     HSD_TExpRes res;
     HSD_TExp* order[32];
     HSD_TExpDag list[32];
     int init_cprev = 1;
     int init_aprev = 1;
 
-    HSD_ASSERT(1627, tevdesc);
+    HSD_ASSERT(1627, tevdesc_out);
     HSD_ASSERT(1628, texp_list);
 
     memset(&res, 0, sizeof(HSD_TExpRes));
@@ -1197,33 +1367,37 @@ int HSD_TExpCompile(HSD_TExp* texp, HSD_TExpTevDesc** tevdesc,
     HSD_TExpRef(texp, HSD_TE_A);
     HSD_TExpSimplify(texp);
 
-    num = HSD_TExpMakeDag(texp, list);
-    HSD_TExpSchedule(num, list, order, &res);
-    for (i = 0; i < num; ++i) {
-        val = TExpAssignReg(order[i], &res);
-        HSD_ASSERT(1660, val >= 0);
+    num_nodes = HSD_TExpMakeDag(texp, list);
+    HSD_TExpSchedule(num_nodes, list, order, &res);
+    for (i = 0; i < num_nodes; ++i) {
+        assign_res = TExpAssignReg(order[i], &res);
+        HSD_ASSERT(1660, assign_res >= 0);
     }
 
-    for (i = num - 1; i >= 0; --i) {
+    for (i = num_nodes - 1; i >= 0; --i) {
         HSD_TExpSimplify2(order[i]);
     }
 
-    num = HSD_TExpMakeDag(texp, list);
-    HSD_TExpSchedule(num, list, order, &res);
-    *tevdesc = NULL;
-    for (i = 0; i < num; ++i) {
-        HSD_TExpTevDesc* tdesc = hsdAllocMemPiece(sizeof(HSD_TExpTevDesc));
-        tdesc->desc.stage = HSD_Index2TevStage(i);
-        TExp2TevDesc(order[(num - i) - 1], tdesc, &init_cprev, &init_aprev);
-        tdesc->desc.next = &(*tevdesc)->desc;
-        *tevdesc = tdesc;
+    num_nodes = HSD_TExpMakeDag(texp, list);
+    HSD_TExpSchedule(num_nodes, list, order, &res);
+    *tevdesc_out = NULL;
+    for (i = 0; i < num_nodes; ++i) {
+        HSD_TExpTevDesc* new_tevdesc = hsdAllocMemPiece(sizeof(HSD_TExpTevDesc));
+        new_tevdesc->desc.stage = HSD_Index2TevStage(i);
+        TExp2TevDesc(order[(num_nodes - i) - 1], new_tevdesc, &init_cprev, &init_aprev);
+        new_tevdesc->desc.next = &(*tevdesc_out)->desc;
+        *tevdesc_out = new_tevdesc;
     }
 
     *texp_list = HSD_TExpFreeList(*texp_list, HSD_TE_TEV, 1);
     *texp_list = HSD_TExpFreeList(*texp_list, HSD_TE_CNST, 0);
-    return num;
+    return num_nodes;
 }
 
+/**
+ * @brief Frees a TEV descriptor list.
+ * @param tdesc Pointer to TEV descriptor list
+ */
 void HSD_TExpFreeTevDesc(HSD_TExpTevDesc* tdesc)
 {
     HSD_TExpTevDesc* next = tdesc;

@@ -1,3 +1,10 @@
+/**
+ * @file axdriver.c
+ * @brief Audio Driver (AXDriver) subsystem for SysDolphin
+ * @details The low-level sound engine interfacing with the GameCube DSP audio hardware.
+ * Handles voice allocation, streaming, pitch/volume control, and sample playback 
+ * for all sound effects and music.
+ */
 #include "axdriver.h"
 
 #include <math.h>
@@ -65,75 +72,96 @@ void* AXDriverAlloc(size_t size)
     return ptr;
 }
 
+/**
+ * @brief Handles operations for AXDriverFree
+ * @param voice_ptr
+ * @param head
+ */
 void AXDriverFree(void* ptr) {}
 
-void AXDriverUnlink(HSD_SM* v, HSD_SM** head)
+void AXDriverUnlink(HSD_SM* voice_ptr, HSD_SM** head)
 {
     HSD_SM* p;
     HSD_SM* n;
 
-    if (v != NULL) {
-        p = v->prev;
-        n = v->next;
-        v->next = NULL;
-        v->prev = NULL;
+    if (voice_ptr != NULL) {
+        p = voice_ptr->prev;
+        n = voice_ptr->next;
+        voice_ptr->next = NULL;
+        voice_ptr->prev = NULL;
         if (p != NULL) {
             p->next = n;
         }
         if (n != NULL) {
             n->prev = p;
         }
-        if (*head == v) {
+        if (*head == voice_ptr) {
             *head = n;
         }
-        HSD_ASSERT(113, *head != v);
+        HSD_ASSERT(113, *head != voice_ptr);
     }
 }
 
-static void AXDriverLink(HSD_SM* v, HSD_SM** head)
+/**
+ * @brief Handles operations for AXDriverLink
+ * @param voice_ptr
+ * @param head
+ * @return static void
+ */
+static void AXDriverLink(HSD_SM* voice_ptr, HSD_SM** head)
 {
-    if (v == NULL) {
+    if (voice_ptr == NULL) {
         return;
     }
 
-    HSD_ASSERT(0x7A, *head != v);
+    HSD_ASSERT(0x7A, *head != voice_ptr);
 
-    v->prev = NULL;
+    voice_ptr->prev = NULL;
     if (*head != NULL) {
-        (*head)->prev = v;
+        (*head)->prev = voice_ptr;
     }
-    v->next = *head;
-    *head = v;
+    voice_ptr->next = *head;
+    *head = voice_ptr;
 }
 
-static bool AXDriverKeyOff(HSD_SM* v)
+/**
+ * @brief Stops/Pauses voice/stream operations for AXDriverKeyOff
+ * @param voice_ptr
+ * @return static bool
+ */
+static bool AXDriverKeyOff(HSD_SM* voice_ptr)
 {
     int idx;
     u32 state;
 
-    state = v->flags & SMSTATE_MASK;
+    state = voice_ptr->flags & SMSTATE_MASK;
     HSD_ASSERTMSG(0x92, state == SMSTATE_ACTIVE || state == SMSTATE_SLEEP,
-                  "(v->flags&SMSTATE_MASK) == SMSTATE_ACTIVE || "
-                  "(v->flags&SMSTATE_MASK) == SMSTATE_SLEEP");
+                  "(voice_ptr->flags&SMSTATE_MASK) == SMSTATE_ACTIVE || "
+                  "(voice_ptr->flags&SMSTATE_MASK) == SMSTATE_SLEEP");
 
-    idx = v->vID;
-    if (v->vID != -1) {
+    idx = voice_ptr->vID;
+    if (voice_ptr->vID != -1) {
         AXDriver_804C5920[idx & 0x3F] = 0;
-        v->vID = -1;
+        voice_ptr->vID = -1;
         HSD_SynthSFXKeyOff(idx);
         AXDriver_804D77C8--;
     }
 
-    v->flags &= ~0x20000000;
-    v->flags &= ~SMSTATE_MASK;
+    voice_ptr->flags &= ~0x20000000;
+    voice_ptr->flags &= ~SMSTATE_MASK;
     return true;
 }
 
+/**
+ * @brief Stops/Pauses voice/stream operations for HSD_AudioSFXKeyOff
+ * @param vid
+ * @return bool
+ */
 bool HSD_AudioSFXKeyOff(int vid)
 {
     bool result;
     int idx;
-    HSD_SM* v;
+    HSD_SM* voice_ptr;
     bool enabled;
     PAD_STACK(8);
 
@@ -143,52 +171,59 @@ bool HSD_AudioSFXKeyOff(int vid)
     }
 
     enabled = OSDisableInterrupts();
-    v = &AXDriver_804C45A0[idx];
+    voice_ptr = &AXDriver_804C45A0[idx];
 
-    if (v->unk != vid || !(v->flags & SMSTATE_MASK)) {
+    if (voice_ptr->unk != vid || !(voice_ptr->flags & SMSTATE_MASK)) {
         OSRestoreInterrupts(enabled);
         return false;
     }
 
-    if (v == NULL) {
+    if (voice_ptr == NULL) {
         result = false;
     } else {
-        result = AXDriverKeyOff(v);
+        result = AXDriverKeyOff(voice_ptr);
     }
 
     OSRestoreInterrupts(enabled);
     return result;
 }
 
+/**
+ * @brief Stops/Pauses voice/stream operations for HSD_AudioSFXKeyOffAll
+ */
 void HSD_AudioSFXKeyOffAll(void)
 {
     bool enabled = OSDisableInterrupts();
-    HSD_SM* v = AXDriver_804D7794;
+    HSD_SM* voice_ptr = AXDriver_804D7794;
     PAD_STACK(8);
 
-    while (v != NULL) {
-        if (v->flags & SMSTATE_MASK) {
-            if (v != NULL) {
-                AXDriverKeyOff(v);
+    while (voice_ptr != NULL) {
+        if (voice_ptr->flags & SMSTATE_MASK) {
+            if (voice_ptr != NULL) {
+                AXDriverKeyOff(voice_ptr);
             }
         }
-        v = v->next;
+        voice_ptr = voice_ptr->next;
     }
     OSRestoreInterrupts(enabled);
 }
 
+/**
+ * @brief Stops/Pauses voice/stream operations for HSD_AudioSFXKeyOffTrack
+ * @param track
+ */
 void HSD_AudioSFXKeyOffTrack(int track)
 {
     bool enabled = OSDisableInterrupts();
-    HSD_SM* v = AXDriver_804D7794;
+    HSD_SM* voice_ptr = AXDriver_804D7794;
 
-    while (v != NULL) {
-        if ((v->flags & SMSTATE_MASK) && v->track == track) {
-            if (v != NULL) {
-                AXDriverKeyOff(v);
+    while (voice_ptr != NULL) {
+        if ((voice_ptr->flags & SMSTATE_MASK) && voice_ptr->track == track) {
+            if (voice_ptr != NULL) {
+                AXDriverKeyOff(voice_ptr);
             }
         }
-        v = v->next;
+        voice_ptr = voice_ptr->next;
     }
     OSRestoreInterrupts(enabled);
 }
@@ -217,7 +252,11 @@ static inline float sqrtf_store(float x, volatile float* y)
 #define sqrtf_store(x, y) sqrtf(x)
 #endif
 
-void AXDriverExec(HSD_SM* v)
+/**
+ * @brief Executes hardware commands for operations for AXDriverExec
+ * @param voice_ptr
+ */
+void AXDriverExec(HSD_SM* voice_ptr)
 {
     u32 flag;
     int i;
@@ -227,11 +266,11 @@ void AXDriverExec(HSD_SM* v)
     for (i = 0; i <= 9; i++) {
         flag = 1 << i;
 
-        if (v->flags & flag) {
+        if (voice_ptr->flags & flag) {
             switch (flag) {
             case 0x1: {
-                float left_vol = (v->x26 * v->x24[0]) / 65535.0F;
-                float right_vol = (v->x27 * v->x24[1]) / 65535.0F;
+                float left_vol = (voice_ptr->x26 * voice_ptr->x24[0]) / 65535.0F;
+                float right_vol = (voice_ptr->x27 * voice_ptr->x24[1]) / 65535.0F;
                 float left_sqrt = sqrtf_store(left_vol, &sqrt_tmp[7]);
                 float left_inv_sqrt =
                     sqrtf_store(1.0F - left_vol, &sqrt_tmp[6]);
@@ -239,52 +278,52 @@ void AXDriverExec(HSD_SM* v)
                 float right_inv_sqrt =
                     sqrtf_store(1.0F - right_vol, &sqrt_tmp[4]);
                 float tmp2 = left_inv_sqrt * right_inv_sqrt;
-                float pitch1 = powf(2.0F, v->x20 / 1200.0F);
-                float pitch2 = powf(2.0F, v->fadetime / 1200.0F);
+                float pitch1 = powf(2.0F, voice_ptr->x20 / 1200.0F);
+                float pitch2 = powf(2.0F, voice_ptr->fadetime / 1200.0F);
 
-                v->vID = HSD_SynthSFXPlayWithGroup(
-                    v->fid, v->x1A, v->volume,
-                    (v->flags & 0x20000) ? v->pan : v->x1C, v->pri, v->itdflag,
-                    v->track, pitch1, pitch2, left_inv_sqrt * tmp2, left_sqrt,
+                voice_ptr->vID = HSD_SynthSFXPlayWithGroup(
+                    voice_ptr->fid, voice_ptr->x1A, voice_ptr->volume,
+                    (voice_ptr->flags & 0x20000) ? voice_ptr->pan : voice_ptr->x1C, voice_ptr->pri, voice_ptr->itdflag,
+                    voice_ptr->track, pitch1, pitch2, left_inv_sqrt * tmp2, left_sqrt,
                     right_sqrt * left_inv_sqrt);
 
-                if (v->vID != -1) {
-                    AXDriver_804C5920[v->vID & 0x3F] = v;
-                    v->flags &= 0xFFF4FF99;
-                    if (v->flags & 0x40000) {
-                        v->flags &= ~0x40000;
+                if (voice_ptr->vID != -1) {
+                    AXDriver_804C5920[voice_ptr->vID & 0x3F] = voice_ptr;
+                    voice_ptr->flags &= 0xFFF4FF99;
+                    if (voice_ptr->flags & 0x40000) {
+                        voice_ptr->flags &= ~0x40000;
                     }
                     AXDriver_804D77C8++;
                 } else {
                     HSD_ASSERT(0x13B,
-                             (v->flags&SMSTATE_MASK) == SMSTATE_ACTIVE);
-                    v->flags &= ~SMSTATE_MASK;
+                             (voice_ptr->flags&SMSTATE_MASK) == SMSTATE_ACTIVE);
+                    voice_ptr->flags &= ~SMSTATE_MASK;
                     return;
                 }
                 break;
             }
             case 0x2:
-                HSD_SynthSFXSetPriority(v->vID, v->pri);
+                HSD_SynthSFXSetPriority(voice_ptr->vID, voice_ptr->pri);
                 break;
             case 0x4:
-                HSD_SynthSFXSetVolumeFade(v->vID, v->x1A, 0);
+                HSD_SynthSFXSetVolumeFade(voice_ptr->vID, voice_ptr->x1A, 0);
                 break;
             case 0x8:
-                HSD_SynthSFXSetPan(v->vID, v->x1C);
+                HSD_SynthSFXSetPan(voice_ptr->vID, voice_ptr->x1C);
                 break;
             case 0x10:
                 break;
             case 0x20:
-                HSD_SynthSFXSetPitchRatio(v->vID, 0,
-                                          powf(2.0F, v->x20 / 1200.0F));
+                HSD_SynthSFXSetPitchRatio(voice_ptr->vID, 0,
+                                          powf(2.0F, voice_ptr->x20 / 1200.0F));
                 break;
             case 0x40:
-                HSD_SynthSFXSetPitchRatio(v->vID, 1,
-                                          powf(2.0F, v->fadetime / 1200.0F));
+                HSD_SynthSFXSetPitchRatio(voice_ptr->vID, 1,
+                                          powf(2.0F, voice_ptr->fadetime / 1200.0F));
                 break;
             case 0x80: {
-                float left_vol = (v->x26 * v->x24[0]) / 65535.0F;
-                float right_vol = (v->x27 * v->x24[1]) / 65535.0F;
+                float left_vol = (voice_ptr->x26 * voice_ptr->x24[0]) / 65535.0F;
+                float right_vol = (voice_ptr->x27 * voice_ptr->x24[1]) / 65535.0F;
                 float left_sqrt = sqrtf_store(left_vol, &sqrt_tmp[3]);
                 float left_inv_sqrt =
                     sqrtf_store(1.0F - left_vol, &sqrt_tmp[2]);
@@ -293,25 +332,31 @@ void AXDriverExec(HSD_SM* v)
                     sqrtf_store(1.0F - right_vol, &sqrt_tmp[0]);
 
                 HSD_SynthSFXSetMix(
-                    v->vID, left_inv_sqrt * (left_inv_sqrt * right_inv_sqrt),
+                    voice_ptr->vID, left_inv_sqrt * (left_inv_sqrt * right_inv_sqrt),
                     left_sqrt, right_sqrt * left_inv_sqrt);
                 break;
             }
             case 0x100:
-                v->flags = (v->flags & ~SMSTATE_MASK) | SMSTATE_SLEEP;
+                voice_ptr->flags = (voice_ptr->flags & ~SMSTATE_MASK) | SMSTATE_SLEEP;
                 return;
             case 0x200:
-                if (v != NULL) {
-                    AXDriverKeyOff(v);
+                if (voice_ptr != NULL) {
+                    AXDriverKeyOff(voice_ptr);
                 }
                 return;
             }
         }
 
-        v->flags &= ~flag;
+        voice_ptr->flags &= ~flag;
     }
 }
 
+/**
+ * @brief Handles operations for parseWait
+ * @param param_type
+ * @param param_value
+ * @return u32
+ */
 u32 parseWait(u32 param_type, u32 param_value)
 {
     switch (param_type) {
@@ -350,7 +395,11 @@ u32 parseWait(u32 param_type, u32 param_value)
 #define MAX2(x, y) ((x) < (y) ? (y) : (x))
 #define CLAMP(min, val, max) MAX2(MIN2(val, max), min)
 
-void AXDriverInterp(HSD_SM* v)
+/**
+ * @brief Interprets hardware stream bytecode for operations for AXDriverInterp
+ * @param voice_ptr
+ */
+void AXDriverInterp(HSD_SM* voice_ptr)
 {
     u32 cmd_type;
     u32 cmd_word;
@@ -358,129 +407,133 @@ void AXDriverInterp(HSD_SM* v)
     int cmd_val;
     PAD_STACK(8);
 
-    while (v->x30 == (s32) AXDriver_804D778C) {
-        cmd_word = *v->cmd_stream;
+    while (voice_ptr->x30 == (s32) AXDriver_804D778C) {
+        cmd_word = *voice_ptr->cmd_stream;
         cmd_type = cmd_word >> 0x18U;
 
         cmd_size = parseWait(cmd_type, cmd_word);
         if (cmd_size != 0) {
-            AXDriverExec(v);
+            AXDriverExec(voice_ptr);
         }
-        v->x30 += cmd_size;
+        voice_ptr->x30 += cmd_size;
         switch (cmd_type) {
         case 2:
-            v->x2A = *v->cmd_stream;
-            if (v->x2A == 0) {
-                v->flags |= 0x100000;
+            voice_ptr->x2A = *voice_ptr->cmd_stream;
+            if (voice_ptr->x2A == 0) {
+                voice_ptr->flags |= 0x100000;
             }
             break;
         case 3:
-            if ((v->flags & 0x100000) || v->x2A != 0) {
-                v->cmd_stream -= *v->cmd_stream & 0xFFFFFF;
-                v->x2A--;
+            if ((voice_ptr->flags & 0x100000) || voice_ptr->x2A != 0) {
+                voice_ptr->cmd_stream -= *voice_ptr->cmd_stream & 0xFFFFFF;
+                voice_ptr->x2A--;
             }
             break;
         case 1:
-            v->flags |= 1;
-            v->fid = *v->cmd_stream;
+            voice_ptr->flags |= 1;
+            voice_ptr->fid = *voice_ptr->cmd_stream;
             break;
         case 4:
-            v->flags |= 2;
-            v->pri = *v->cmd_stream;
+            voice_ptr->flags |= 2;
+            voice_ptr->pri = *voice_ptr->cmd_stream;
             break;
         case 5:
-            v->flags |= 2;
-            cmd_val = v->pri + (s8) (u8) *v->cmd_stream;
-            v->pri = CLAMP(5, cmd_val, 0x1C);
+            voice_ptr->flags |= 2;
+            cmd_val = voice_ptr->pri + (s8) (u8) *voice_ptr->cmd_stream;
+            voice_ptr->pri = CLAMP(5, cmd_val, 0x1C);
             break;
         case 6:
-            v->flags |= 4;
-            v->x1A = *v->cmd_stream;
+            voice_ptr->flags |= 4;
+            voice_ptr->x1A = *voice_ptr->cmd_stream;
             break;
         case 7:
-            v->flags |= 4;
-            cmd_val = v->x1A + (s8) (u8) *v->cmd_stream;
-            v->x1A = CLAMP(0, cmd_val, 0xFF);
+            voice_ptr->flags |= 4;
+            cmd_val = voice_ptr->x1A + (s8) (u8) *voice_ptr->cmd_stream;
+            voice_ptr->x1A = CLAMP(0, cmd_val, 0xFF);
             break;
         case 8:
-            v->flags |= 8;
-            v->x1C = *v->cmd_stream;
+            voice_ptr->flags |= 8;
+            voice_ptr->x1C = *voice_ptr->cmd_stream;
             break;
         case 9:
-            v->flags |= 8;
-            cmd_val = v->x1C + (s8) (u8) *v->cmd_stream;
-            v->x1C = CLAMP(0, cmd_val, 0xFF);
+            voice_ptr->flags |= 8;
+            cmd_val = voice_ptr->x1C + (s8) (u8) *voice_ptr->cmd_stream;
+            voice_ptr->x1C = CLAMP(0, cmd_val, 0xFF);
             break;
         case 10:
-            v->flags |= 0x10;
-            v->x1E = *v->cmd_stream;
+            voice_ptr->flags |= 0x10;
+            voice_ptr->x1E = *voice_ptr->cmd_stream;
             break;
         case 11:
-            v->flags |= 0x10;
-            cmd_val = v->x1E + (s8) (u8) *v->cmd_stream;
-            v->x1E = CLAMP(0, cmd_val, 0xFF);
+            voice_ptr->flags |= 0x10;
+            cmd_val = voice_ptr->x1E + (s8) (u8) *voice_ptr->cmd_stream;
+            voice_ptr->x1E = CLAMP(0, cmd_val, 0xFF);
             break;
         case 12:
-            v->flags |= 0x20;
-            v->x20 = (s16) (u16) *v->cmd_stream;
+            voice_ptr->flags |= 0x20;
+            voice_ptr->x20 = (s16) (u16) *voice_ptr->cmd_stream;
             break;
         case 13:
-            v->flags |= 0x20;
-            cmd_val = v->x20 + (s16) (u16) *v->cmd_stream;
-            v->x20 = CLAMP(-0x2A30, cmd_val, 0x960);
+            voice_ptr->flags |= 0x20;
+            cmd_val = voice_ptr->x20 + (s16) (u16) *voice_ptr->cmd_stream;
+            voice_ptr->x20 = CLAMP(-0x2A30, cmd_val, 0x960);
             break;
         case 16:
             if (!(AXDriver_804D603C & 1)) {
-                v->flags |= 0x80;
-                v->x24[0] = *v->cmd_stream;
+                voice_ptr->flags |= 0x80;
+                voice_ptr->x24[0] = *voice_ptr->cmd_stream;
             }
             break;
         case 20:
             if (!(AXDriver_804D603C & 1)) {
-                v->x26 = *v->cmd_stream;
+                voice_ptr->x26 = *voice_ptr->cmd_stream;
             }
             break;
         case 21:
             if (!((AXDriver_804D603C >> 1U) & 1)) {
-                v->x27 = *v->cmd_stream;
+                voice_ptr->x27 = *voice_ptr->cmd_stream;
             }
             break;
         case 17:
             if (!(AXDriver_804D603C & 1)) {
-                v->flags |= 0x80;
-                cmd_val = v->x24[0] + (s8) (u8) *v->cmd_stream;
-                v->x24[0] = CLAMP(0, cmd_val, 0xFF);
+                voice_ptr->flags |= 0x80;
+                cmd_val = voice_ptr->x24[0] + (s8) (u8) *voice_ptr->cmd_stream;
+                voice_ptr->x24[0] = CLAMP(0, cmd_val, 0xFF);
             }
             break;
         case 18:
             if (!((AXDriver_804D603C >> 1U) & 1)) {
-                v->flags |= 0x80;
-                v->x24[1] = *v->cmd_stream;
+                voice_ptr->flags |= 0x80;
+                voice_ptr->x24[1] = *voice_ptr->cmd_stream;
             }
             break;
         case 19:
             if (!(AXDriver_804D603C >> 1 & 1)) {
-                v->flags |= 0x80;
-                cmd_val = v->x24[1] + (s8) (u8) *v->cmd_stream;
-                v->x24[1] = CLAMP(0, cmd_val, 0xFF);
+                voice_ptr->flags |= 0x80;
+                cmd_val = voice_ptr->x24[1] + (s8) (u8) *voice_ptr->cmd_stream;
+                voice_ptr->x24[1] = CLAMP(0, cmd_val, 0xFF);
             }
             break;
         case 15:
-            v->flags |= 0x200;
-            AXDriverExec(v);
+            voice_ptr->flags |= 0x200;
+            AXDriverExec(voice_ptr);
             return;
         case 14:
-            v->flags |= 0x100;
-            AXDriverExec(v);
+            voice_ptr->flags |= 0x100;
+            AXDriverExec(voice_ptr);
             return;
         }
-        v->cmd_stream++;
+        voice_ptr->cmd_stream++;
     }
 }
 
+/**
+ * @brief Handles operations for AXDriverCallback
+ * @return static void
+ */
 static void AXDriverCallback(void)
 {
-    HSD_SM* v;
+    HSD_SM* voice_ptr;
     HSD_SM* next;
     PAD_STACK(4);
 
@@ -492,71 +545,81 @@ static void AXDriverCallback(void)
             HSD_SynthSFXSetPitchRatio(AXDriver_804D6038, 1, x);
         }
     }
-    v = AXDriver_804D7794;
+    voice_ptr = AXDriver_804D7794;
     AXDriver_804D778C++;
-    while (v != NULL) {
-        next = v->next;
-        if (v->x30 == -1) {
-            v->x30 = AXDriver_804D778C;
-        } else if (v->flags & 0x20000000) {
-            v->x30++;
+    while (voice_ptr != NULL) {
+        next = voice_ptr->next;
+        if (voice_ptr->x30 == -1) {
+            voice_ptr->x30 = AXDriver_804D778C;
+        } else if (voice_ptr->flags & 0x20000000) {
+            voice_ptr->x30++;
         }
-        switch (v->flags & SMSTATE_MASK) {
+        switch (voice_ptr->flags & SMSTATE_MASK) {
         case SMSTATE_ACTIVE:
-            if (v->x30 == AXDriver_804D778C) {
-                AXDriverInterp(v);
+            if (voice_ptr->x30 == AXDriver_804D778C) {
+                AXDriverInterp(voice_ptr);
             }
             break;
         case 0:
-            AXDriverUnlink(v, &AXDriver_804D7794);
-            AXDriverLink(v, &AXDriver_804D7790);
+            AXDriverUnlink(voice_ptr, &AXDriver_804D7794);
+            AXDriverLink(voice_ptr, &AXDriver_804D7790);
             AXDriver_804D77D0--;
             break;
         case SMSTATE_SLEEP:
-            if (v->flags & 0x40) {
-                float x = powf(2.0F, v->fadetime / 1200.0F);
-                HSD_SynthSFXSetPitchRatio(v->vID, 1, x);
-                v->flags &= 0xFFFFFFBF;
+            if (voice_ptr->flags & 0x40) {
+                float x = powf(2.0F, voice_ptr->fadetime / 1200.0F);
+                HSD_SynthSFXSetPitchRatio(voice_ptr->vID, 1, x);
+                voice_ptr->flags &= 0xFFFFFFBF;
             }
             break;
         default:
             HSD_ASSERT(0x25F, 0);
             break;
         }
-        v = next;
+        voice_ptr = next;
     }
 }
 
+/**
+ * @brief Handles operations for AXDriverKillCallback
+ * @param vID
+ * @return static void
+ */
 static void AXDriverKillCallback(s32 vID)
 {
-    HSD_SM* v;
+    HSD_SM* voice_ptr;
     int idx = vID & 0x3F;
 
     HSD_ASSERT(0x26D, vID > 0);
 
-    v = AXDriver_804C5920[idx];
-    if (v == NULL || v->vID != vID) {
+    voice_ptr = AXDriver_804C5920[idx];
+    if (voice_ptr == NULL || voice_ptr->vID != vID) {
         return;
     }
 
     AXDriver_804C5920[idx] = NULL;
-    v->flags &= ~0x20000000;
-    v->flags &= ~SMSTATE_MASK;
+    voice_ptr->flags &= ~0x20000000;
+    voice_ptr->flags &= ~SMSTATE_MASK;
     AXDriver_804D77C8--;
 }
 
+/**
+ * @brief Stops/Pauses voice/stream operations for AXDriverPauseCallback
+ * @param vID
+ * @return static void
+ */
 static void AXDriverPauseCallback(s32 vID)
 {
-    HSD_SM* v;
+    HSD_SM* voice_ptr;
     int idx;
     idx = vID & 0x3F;
 
     HSD_ASSERT(0x288, vID > 0);
 
-    v = AXDriver_804C5920[idx];
-    HSD_ASSERT(0x28A, v && v->vID == vID);
+    voice_ptr = AXDriver_804C5920[idx];
+    HSD_ASSERT(0x28A, voice_ptr && voice_ptr->vID == vID);
 
-    v->flags |= 0x20000000;
+    voice_ptr->flags |= 0x20000000;
 }
 
 static HSD_SM* AXDriverAssignVVoice(void)
@@ -564,23 +627,32 @@ static HSD_SM* AXDriverAssignVVoice(void)
     if (AXDriver_804D7790 == NULL) {
         return NULL;
     } else {
-        HSD_SM* v;
+        HSD_SM* voice_ptr;
         bool enabled = OSDisableInterrupts();
-        v = AXDriver_804D7790;
-        AXDriverUnlink(v, &AXDriver_804D7790);
+        voice_ptr = AXDriver_804D7790;
+        AXDriverUnlink(voice_ptr, &AXDriver_804D7790);
         OSRestoreInterrupts(enabled);
-        v->vID = -1;
-        v->x30 = -1;
-        v->flags = 0;
-        v->flags &= ~SMSTATE_MASK;
-        return v;
+        voice_ptr->vID = -1;
+        voice_ptr->x30 = -1;
+        voice_ptr->flags = 0;
+        voice_ptr->flags &= ~SMSTATE_MASK;
+        return voice_ptr;
     }
 }
 
+/**
+ * @brief Starts/Resumes voice/stream operations for HSD_AudioSFXStartParam
+ * @param sound_id
+ * @param volume
+ * @param pan
+ * @param track
+ * @param channel
+ * @return int
+ */
 int HSD_AudioSFXStartParam(int sound_id, u8 volume, u8 pan, int track,
                            int channel)
 {
-    HSD_SM* v;
+    HSD_SM* voice_ptr;
     int sample_idx;
     int bank_idx;
     int bank_mem;
@@ -617,77 +689,89 @@ int HSD_AudioSFXStartParam(int sound_id, u8 volume, u8 pan, int track,
         return -1;
     }
 
-    v = AXDriverAssignVVoice();
+    voice_ptr = AXDriverAssignVVoice();
 
-    if (v == NULL) {
+    if (voice_ptr == NULL) {
         return -1;
     }
 
-    v->x16 = sound_id;
-    v->cmd_stream = AXDriver_804D77BC[sample_idx];
-    v->x1A = 0xFF;
-    v->volume = volume;
-    v->x1C = 0x80;
-    v->pan = pan;
-    v->x20 = 0;
-    v->fadetime = 0;
-    v->x24[0] = AXDriver_804C5A20[0][channel];
-    v->x24[1] = AXDriver_804C5A20[1][channel];
-    v->x26 = 0xFF;
-    v->x27 = 0xFF;
-    v->pri = 5;
-    v->track = track;
-    v->itdflag = channel;
-    v->flags |= 0x30000;
+    voice_ptr->x16 = sound_id;
+    voice_ptr->cmd_stream = AXDriver_804D77BC[sample_idx];
+    voice_ptr->x1A = 0xFF;
+    voice_ptr->volume = volume;
+    voice_ptr->x1C = 0x80;
+    voice_ptr->pan = pan;
+    voice_ptr->x20 = 0;
+    voice_ptr->fadetime = 0;
+    voice_ptr->x24[0] = AXDriver_804C5A20[0][channel];
+    voice_ptr->x24[1] = AXDriver_804C5A20[1][channel];
+    voice_ptr->x26 = 0xFF;
+    voice_ptr->x27 = 0xFF;
+    voice_ptr->pri = 5;
+    voice_ptr->track = track;
+    voice_ptr->itdflag = channel;
+    voice_ptr->flags |= 0x30000;
 
     if (vidhigh & 0xFE000000) {
         OSReport("vidhigh exceeds the max value\n");
         HSD_ASSERT(0x2EA, 0);
     }
 
-    v->unk =
-        (vidhigh << 7) | ((u8*) v - (u8*) AXDriver_804C45A0) / sizeof(HSD_SM);
+    voice_ptr->unk =
+        (vidhigh << 7) | ((u8*) voice_ptr - (u8*) AXDriver_804C45A0) / sizeof(HSD_SM);
     vidhigh++;
 
     enabled = OSDisableInterrupts();
-    v->flags = (v->flags & ~SMSTATE_MASK) | SMSTATE_ACTIVE;
-    AXDriverLink(v, &AXDriver_804D7794);
+    voice_ptr->flags = (voice_ptr->flags & ~SMSTATE_MASK) | SMSTATE_ACTIVE;
+    AXDriverLink(voice_ptr, &AXDriver_804D7794);
     AXDriver_804D77D0++;
     OSRestoreInterrupts(enabled);
 
-    return v->unk;
+    return voice_ptr->unk;
 }
 
+/**
+ * @brief Sets operations for HSD_AudioSFXSetPan
+ * @param vid
+ * @param pan
+ * @return bool
+ */
 bool HSD_AudioSFXSetPan(int vid, u8 pan)
 {
     int idx;
     bool enabled;
-    HSD_SM* v;
+    HSD_SM* voice_ptr;
     u8 clamped;
 
     idx = vid & 0x7F;
     if (vid < 0 || idx >= 0x60) {
         return false;
     }
-    v = &AXDriver_804C45A0[idx];
-    if (v->unk != vid || !(v->flags & SMSTATE_MASK)) {
+    voice_ptr = &AXDriver_804C45A0[idx];
+    if (voice_ptr->unk != vid || !(voice_ptr->flags & SMSTATE_MASK)) {
         return false;
     }
     enabled = OSDisableInterrupts();
-    if (v->vID != -1) {
-        HSD_SynthSFXSetPan(v->vID, MIN(pan, 0xFF));
+    if (voice_ptr->vID != -1) {
+        HSD_SynthSFXSetPan(voice_ptr->vID, MIN(pan, 0xFF));
     } else {
-        HSD_ASSERT(0x30B, (v->flags&SMSTATE_MASK) == SMSTATE_ACTIVE);
-        v->pan = pan;
-        v->flags |= 0x20000;
+        HSD_ASSERT(0x30B, (voice_ptr->flags&SMSTATE_MASK) == SMSTATE_ACTIVE);
+        voice_ptr->pan = pan;
+        voice_ptr->flags |= 0x20000;
     }
     OSRestoreInterrupts(enabled);
     return true;
 }
 
+/**
+ * @brief Sets operations for HSD_AudioSFXSetVolumeEx
+ * @param vid
+ * @param volume
+ * @return bool
+ */
 bool HSD_AudioSFXSetVolumeEx(s32 vid, u8 volume)
 {
-    HSD_SM* v;
+    HSD_SM* voice_ptr;
     s32 idx;
     bool enabled;
     s32 voice_id;
@@ -696,26 +780,32 @@ bool HSD_AudioSFXSetVolumeEx(s32 vid, u8 volume)
     if (vid < 0 || idx >= 0x60) {
         return false;
     }
-    v = &AXDriver_804C45A0[idx];
-    if (v->unk != vid || !(v->flags & SMSTATE_MASK)) {
+    voice_ptr = &AXDriver_804C45A0[idx];
+    if (voice_ptr->unk != vid || !(voice_ptr->flags & SMSTATE_MASK)) {
         return false;
     }
     enabled = OSDisableInterrupts();
-    voice_id = v->vID;
+    voice_id = voice_ptr->vID;
     if (voice_id != -1) {
         HSD_SynthSFXSetVolumeFade(voice_id, CLAMP(0, volume, 0xFF), 1);
     } else {
-        HSD_ASSERT(0x34D, (v->flags&SMSTATE_MASK) == SMSTATE_ACTIVE);
-        v->volume = volume;
-        v->flags |= 0x10000;
+        HSD_ASSERT(0x34D, (voice_ptr->flags&SMSTATE_MASK) == SMSTATE_ACTIVE);
+        voice_ptr->volume = volume;
+        voice_ptr->flags |= 0x10000;
     }
     OSRestoreInterrupts(enabled);
     return true;
 }
 
+/**
+ * @brief Sets operations for HSD_AudioSFXSetPitchFid
+ * @param vid
+ * @param pitch
+ * @return bool
+ */
 bool HSD_AudioSFXSetPitchFid(s32 vid, s16 pitch)
 {
-    HSD_SM* v;
+    HSD_SM* voice_ptr;
     s32 idx;
     bool enabled;
     int clamped;
@@ -724,21 +814,28 @@ bool HSD_AudioSFXSetPitchFid(s32 vid, s16 pitch)
     if (vid < 0 || idx >= 0x60) {
         return false;
     }
-    v = &AXDriver_804C45A0[idx];
-    if (v->unk != vid || !(v->flags & SMSTATE_MASK)) {
+    voice_ptr = &AXDriver_804C45A0[idx];
+    if (voice_ptr->unk != vid || !(voice_ptr->flags & SMSTATE_MASK)) {
         return false;
     }
     clamped = CLAMP(-0x2A30, pitch, 0x960);
     enabled = OSDisableInterrupts();
-    v->fadetime = clamped;
-    v->flags |= 0x40;
+    voice_ptr->fadetime = clamped;
+    voice_ptr->flags |= 0x40;
     OSRestoreInterrupts(enabled);
     return true;
 }
 
+/**
+ * @brief Sets operations for HSD_AudioSFXSetMix
+ * @param vid
+ * @param aux_bus
+ * @param send_level
+ * @return bool
+ */
 bool HSD_AudioSFXSetMix(s32 vid, s32 aux_bus, u8 send_level)
 {
-    HSD_SM* v;
+    HSD_SM* voice_ptr;
     float right_vol;
     float left_vol;
     float left_inv_sqrt;
@@ -766,36 +863,43 @@ bool HSD_AudioSFXSetMix(s32 vid, s32 aux_bus, u8 send_level)
     if (lock_flag != 1) {
         return false;
     }
-    v = &AXDriver_804C45A0[idx];
-    if (v->unk != vid || !(v->flags & SMSTATE_MASK)) {
+    voice_ptr = &AXDriver_804C45A0[idx];
+    if (voice_ptr->unk != vid || !(voice_ptr->flags & SMSTATE_MASK)) {
         return false;
     }
     clamped = CLAMP(0, send_level, 0xFF);
     enabled = OSDisableInterrupts();
-    if (v->vID != -1) {
-        v->x24[aux_bus] = clamped;
-        left_vol = (f32) (v->x26 * v->x24[0]) / 65535.0F;
-        right_vol = (f32) (v->x27 * v->x24[1]) / 65535.0F;
+    if (voice_ptr->vID != -1) {
+        voice_ptr->x24[aux_bus] = clamped;
+        left_vol = (f32) (voice_ptr->x26 * voice_ptr->x24[0]) / 65535.0F;
+        right_vol = (f32) (voice_ptr->x27 * voice_ptr->x24[1]) / 65535.0F;
         left_sqrt = sqrtf(left_vol);
         left_inv_sqrt = sqrtf(1.0F - left_vol);
         right_sqrt = sqrtf(right_vol);
         right_inv_sqrt = sqrtf(1.0F - right_vol);
-        HSD_SynthSFXSetMix(v->vID,
+        HSD_SynthSFXSetMix(voice_ptr->vID,
                            left_inv_sqrt * (left_inv_sqrt * right_inv_sqrt),
                            left_sqrt, right_sqrt * left_inv_sqrt);
     } else {
-        HSD_ASSERT(0x3AB, (v->flags&SMSTATE_MASK) == SMSTATE_ACTIVE);
-        v->x24[aux_bus] = clamped;
-        v->flags |= 0x80000;
+        HSD_ASSERT(0x3AB, (voice_ptr->flags&SMSTATE_MASK) == SMSTATE_ACTIVE);
+        voice_ptr->x24[aux_bus] = clamped;
+        voice_ptr->flags |= 0x80000;
     }
     OSRestoreInterrupts(enabled);
     return true;
 }
 
+/**
+ * @brief Sets operations for HSD_AudioSFXSetMixGroup
+ * @param channel
+ * @param aux_bus
+ * @param send_level
+ * @return bool
+ */
 bool HSD_AudioSFXSetMixGroup(s32 channel, s32 aux_bus, s8 send_level)
 {
     bool enabled;
-    HSD_SM* v;
+    HSD_SM* voice_ptr;
 
     if (channel < 0 || channel >= 0x10) {
         return false;
@@ -804,32 +908,37 @@ bool HSD_AudioSFXSetMixGroup(s32 channel, s32 aux_bus, s8 send_level)
         return false;
     }
     enabled = OSDisableInterrupts();
-    v = AXDriver_804D7794;
-    while (v != NULL) {
-        if ((v->flags & SMSTATE_MASK) && v->itdflag == channel) {
-            HSD_AudioSFXSetMix(v->unk, aux_bus, (u8) send_level);
+    voice_ptr = AXDriver_804D7794;
+    while (voice_ptr != NULL) {
+        if ((voice_ptr->flags & SMSTATE_MASK) && voice_ptr->itdflag == channel) {
+            HSD_AudioSFXSetMix(voice_ptr->unk, aux_bus, (u8) send_level);
         }
-        v = v->next;
+        voice_ptr = voice_ptr->next;
     }
     AXDriver_804C5A20[aux_bus][channel] = send_level;
     OSRestoreInterrupts(enabled);
     return true;
 }
 
+/**
+ * @brief Handles operations for HSD_AudioSFXCheck
+ * @param vid
+ * @return bool
+ */
 bool HSD_AudioSFXCheck(int vid)
 {
-    HSD_SM* v;
+    HSD_SM* voice_ptr;
     int idx;
 
     idx = vid & 0x7F;
     if (vid < 0 || idx >= 0x60) {
         return false;
     }
-    v = &AXDriver_804C45A0[idx];
-    if (v->unk != vid || !(v->flags & SMSTATE_MASK)) {
+    voice_ptr = &AXDriver_804C45A0[idx];
+    if (voice_ptr->unk != vid || !(voice_ptr->flags & SMSTATE_MASK)) {
         return false;
     }
-    if (HSD_SynthSFXCheck(v->vID) == -1) {
+    if (HSD_SynthSFXCheck(voice_ptr->vID) == -1) {
         return false;
     }
     return true;
@@ -842,6 +951,11 @@ static void fn_8038DA5C(s32 result, DVDFileInfo* fileInfo)
     }
 }
 
+/**
+ * @brief Handles operations for AXDriver_8038DA70
+ * @param path
+ * @param (callback)(void)
+ */
 void AXDriver_8038DA70(const char* path, void (*callback)(void))
 {
     DVDFileInfo fileInfo;
@@ -946,6 +1060,9 @@ void AXDriver_8038DA70(const char* path, void (*callback)(void))
     }
 }
 
+/**
+ * @brief Handles operations for AXDriver_8038DCFC
+ */
 void AXDriver_8038DCFC(void)
 {
     if (AXDriver_804D7798 != NULL) {
@@ -954,6 +1071,13 @@ void AXDriver_8038DCFC(void)
     AXDriver_804D7798 = NULL;
 }
 
+/**
+ * @brief Sets operations for AXDriverSetupAux
+ * @param channel
+ * @param type
+ * @param param
+ * @return int
+ */
 int AXDriverSetupAux(int channel, AXDriverAuxType type, void* param)
 {
     struct AXFX_REVERBHI* aux_data_hi;
@@ -1062,6 +1186,12 @@ int AXDriverSetupAux(int channel, AXDriverAuxType type, void* param)
     return result;
 }
 
+/**
+ * @brief Retrieves operations for HSD_AudioGetAuxHeapSize
+ * @param type
+ * @param param
+ * @return s32
+ */
 s32 HSD_AudioGetAuxHeapSize(AXDriverAuxType type, void* param)
 {
     s32 result = 0;
@@ -1124,6 +1254,15 @@ s32 HSD_AudioGetAuxHeapSize(AXDriverAuxType type, void* param)
     return result;
 }
 
+/**
+ * @brief Sets operations for HSD_AudioSFXSetupAux
+ * @param channel
+ * @param type
+ * @param param
+ * @param heap
+ * @param heap_size
+ * @return bool
+ */
 bool HSD_AudioSFXSetupAux(s32 channel, s32 type, void* param, u8* heap,
                           size_t heap_size)
 {
@@ -1139,6 +1278,12 @@ bool HSD_AudioSFXSetupAux(s32 channel, s32 type, void* param, u8* heap,
     return AXDriverSetupAux(channel, type, param);
 }
 
+/**
+ * @brief Retrieves operations for HSD_AudioSFXGetDefaultAuxParam
+ * @param type
+ * @param param
+ * @return bool
+ */
 bool HSD_AudioSFXGetDefaultAuxParam(AXDriverAuxType type, void* param)
 {
     if (type < 0 || type > AXDRIVER_AUX_DELAY ||
@@ -1186,6 +1331,13 @@ bool HSD_AudioSFXGetDefaultAuxParam(AXDriverAuxType type, void* param)
     return true;
 }
 
+/**
+ * @brief Initializes/Allocates operations for HSD_AudioInitMultiPStream
+ * @param voices
+ * @param priority
+ * @param sample_rate
+ * @param aram_size
+ */
 void HSD_AudioInitMultiPStream(int voices, int priority, int sample_rate,
                                int aram_size)
 {
@@ -1213,11 +1365,19 @@ void HSD_AudioInitMultiPStream(int voices, int priority, int sample_rate,
     AXFXSetHooks(AXDriverAlloc, AXDriverFree);
 }
 
+/**
+ * @brief Handles operations for AXDriver_8038E5D4
+ * @return int
+ */
 int AXDriver_8038E5D4(void)
 {
     return AXDriver_804D77C8;
 }
 
+/**
+ * @brief Handles operations for AXDriver_8038E5DC
+ * @return int
+ */
 int AXDriver_8038E5DC(void)
 {
     return AXDriver_804D77D0;
@@ -1227,42 +1387,47 @@ static bool PStreamPauseCh(int vid)
 {
     int idx;
     bool enabled;
-    HSD_SM* v;
+    HSD_SM* voice_ptr;
 
     idx = vid & 0x7F;
     if (vid < 0 || idx >= 0x60) {
         return false;
     }
-    v = &AXDriver_804C45A0[idx];
-    if (v->unk != vid || !(v->flags & SMSTATE_MASK)) {
+    voice_ptr = &AXDriver_804C45A0[idx];
+    if (voice_ptr->unk != vid || !(voice_ptr->flags & SMSTATE_MASK)) {
         return false;
     }
     enabled = OSDisableInterrupts();
-    if (v->vID != -1) {
-        HSD_SynthSFXPause(v->vID);
+    if (voice_ptr->vID != -1) {
+        HSD_SynthSFXPause(voice_ptr->vID);
     } else {
-        HSD_ASSERT(0x5D6, (v->flags&SMSTATE_MASK) == SMSTATE_ACTIVE);
-        v->flags |= 0x20000000;
+        HSD_ASSERT(0x5D6, (voice_ptr->flags&SMSTATE_MASK) == SMSTATE_ACTIVE);
+        voice_ptr->flags |= 0x20000000;
     }
     OSRestoreInterrupts(enabled);
     return true;
 }
 
+/**
+ * @brief Stops/Pauses voice/stream operations for HSD_AudioPStreamPauseCh
+ * @param channel
+ * @return bool
+ */
 bool HSD_AudioPStreamPauseCh(int channel)
 {
     bool enabled;
-    HSD_SM* v;
+    HSD_SM* voice_ptr;
 
     if (channel < 0 || channel >= 0x10) {
         return false;
     }
     enabled = OSDisableInterrupts();
-    v = AXDriver_804D7794;
-    while (v != NULL) {
-        if ((v->flags & SMSTATE_MASK) && v->itdflag == channel) {
-            PStreamPauseCh(v->unk);
+    voice_ptr = AXDriver_804D7794;
+    while (voice_ptr != NULL) {
+        if ((voice_ptr->flags & SMSTATE_MASK) && voice_ptr->itdflag == channel) {
+            PStreamPauseCh(voice_ptr->unk);
         }
-        v = v->next;
+        voice_ptr = voice_ptr->next;
     }
     AXDriver_804D77CC |= 1 << channel;
     OSRestoreInterrupts(enabled);
@@ -1273,48 +1438,60 @@ static bool PStreamResumeCh(int vid)
 {
     int idx;
     bool enabled;
-    HSD_SM* v;
+    HSD_SM* voice_ptr;
 
     idx = vid & 0x7F;
     if ((vid < 0) || idx >= 0x60) {
         return false;
     }
-    v = &AXDriver_804C45A0[idx];
-    if (v->unk != vid || !(v->flags & SMSTATE_MASK)) {
+    voice_ptr = &AXDriver_804C45A0[idx];
+    if (voice_ptr->unk != vid || !(voice_ptr->flags & SMSTATE_MASK)) {
         return false;
     }
     enabled = OSDisableInterrupts();
-    if (v->vID != -1) {
-        HSD_SynthSFXResume(v->vID);
+    if (voice_ptr->vID != -1) {
+        HSD_SynthSFXResume(voice_ptr->vID);
     } else {
-        HSD_ASSERT(0x619, (v->flags&SMSTATE_MASK) == SMSTATE_ACTIVE);
+        HSD_ASSERT(0x619, (voice_ptr->flags&SMSTATE_MASK) == SMSTATE_ACTIVE);
     }
-    v->flags &= 0xDFFFFFFF;
+    voice_ptr->flags &= 0xDFFFFFFF;
     OSRestoreInterrupts(enabled);
     return true;
 }
 
+/**
+ * @brief Starts/Resumes voice/stream operations for HSD_AudioPStreamResumeCh
+ * @param channel
+ * @return bool
+ */
 bool HSD_AudioPStreamResumeCh(int channel)
 {
     bool enabled;
-    HSD_SM* v;
+    HSD_SM* voice_ptr;
 
     if ((channel < 0) || (channel >= 0x10)) {
         return false;
     }
     enabled = OSDisableInterrupts();
-    v = AXDriver_804D7794;
-    while (v != NULL) {
-        if ((v->flags & SMSTATE_MASK) && v->itdflag == channel) {
-            PStreamResumeCh(v->unk);
+    voice_ptr = AXDriver_804D7794;
+    while (voice_ptr != NULL) {
+        if ((voice_ptr->flags & SMSTATE_MASK) && voice_ptr->itdflag == channel) {
+            PStreamResumeCh(voice_ptr->unk);
         }
-        v = v->next;
+        voice_ptr = voice_ptr->next;
     }
     AXDriver_804D77CC &= ~(1 << channel);
     OSRestoreInterrupts(enabled);
     return true;
 }
 
+/**
+ * @brief Starts/Resumes voice/stream operations for HSD_AudioPStreamStartChParam
+ * @param path
+ * @param volume
+ * @param track
+ * @return bool
+ */
 bool HSD_AudioPStreamStartChParam(const char* path, u8 volume, int track)
 {
     int entrynum = DVDConvertPathToEntrynum(path);
@@ -1326,6 +1503,10 @@ bool HSD_AudioPStreamStartChParam(const char* path, u8 volume, int track)
     return true;
 }
 
+/**
+ * @brief Stops/Pauses voice/stream operations for AXDriverStop
+ * @return bool
+ */
 bool AXDriverStop(void)
 {
     if (AXDriver_804D6038 == -1) {
@@ -1336,6 +1517,10 @@ bool AXDriverStop(void)
     return true;
 }
 
+/**
+ * @brief Stops/Pauses voice/stream operations for AXDriverPause
+ * @return bool
+ */
 bool AXDriverPause(void)
 {
     if (AXDriver_804D6038 == -1) {
@@ -1345,6 +1530,10 @@ bool AXDriverPause(void)
     return true;
 }
 
+/**
+ * @brief Starts/Resumes voice/stream operations for AXDriverResume
+ * @return bool
+ */
 bool AXDriverResume(void)
 {
     if (AXDriver_804D6038 == -1) {
@@ -1354,6 +1543,10 @@ bool AXDriverResume(void)
     return true;
 }
 
+/**
+ * @brief Handles operations for AXDriverCheck
+ * @return bool
+ */
 bool AXDriverCheck(void)
 {
     if (HSD_SynthSFXCheck(AXDriver_804D6038) == -1) {

@@ -1,3 +1,12 @@
+/**
+ * @file class.c
+ * @brief Base class and virtual method table (VMT) system implementation.
+ * @details Implements runtime type information (RTTI), dynamic class mutation,
+ * virtual method dispatching, class hierarchy management, and bucketed piece memory
+ * allocation for the Sysdolphin scene graph engine.
+ * Module prefix: HSD (Sysdolphin)
+ */
+
 #include "class.h"
 
 #include <string.h>
@@ -9,16 +18,27 @@
 #include <dolphin/os.h>
 
 void _hsdClassInfoInit(void);
+
+/// Global root class descriptor for all Sysdolphin classes
 HSD_ClassInfo hsdClass = { _hsdClassInfoInit };
 
+/// Dynamic array of memory bucket entries indexed by allocation size
 static HSD_MemoryEntry** memory_list;
+
+/// Current capacity of the memory_list bucket array
 static s32 nb_memory_list;
+
+/// Hash table for dynamic class lookup by string name
 static HSD_Hash* current_hash;
 
 #ifdef MUST_MATCH
 #pragma push
 #pragma dont_inline on
 #endif
+/**
+ * @brief Lazily ensures that a class descriptor is initialized.
+ * @param info Pointer to HSD_ClassInfo descriptor
+ */
 void ClassInfoInit(HSD_ClassInfo* info)
 {
     if ((info->head.flags & 1) == 0) {
@@ -29,6 +49,17 @@ void ClassInfoInit(HSD_ClassInfo* info)
 #pragma pop
 #endif
 
+/**
+ * @brief Registers and initializes a new class descriptor in the inheritance tree.
+ * @details Configures metadata, links class into parent's child list, copies parent vtable
+ * methods into the new descriptor, and asserts size invariants.
+ * @param class_info Descriptor of the new subclass to initialize
+ * @param parent_info Descriptor of the base superclass (NULL for root hsdClass)
+ * @param base_class_library Library grouping name string
+ * @param type Unique class type name string
+ * @param info_size Size of the class descriptor struct in bytes
+ * @param class_size Size of an object instance in bytes
+ */
 void hsdInitClassInfo(HSD_ClassInfo* class_info, HSD_ClassInfo* parent_info,
                       char* base_class_library, char* type, s32 info_size,
                       s32 class_size)
@@ -57,6 +88,10 @@ void hsdInitClassInfo(HSD_ClassInfo* class_info, HSD_ClassInfo* parent_info,
     }
 }
 
+/**
+ * @brief Prints spaces for indented diagnostic hierarchy dumps.
+ * @param count Number of space characters to emit
+ */
 void OSReport_PrintSpaces(s32 count)
 {
     s32 i;
@@ -76,6 +111,11 @@ static char unused4[] = "  nb_alloc %d nb_free %d\n";
 #pragma pop
 #endif
 
+/**
+ * @brief Retrieves or allocates a memory bucket entry for index idx (representing (idx+1)*32 bytes).
+ * @param idx Bucket index
+ * @return Pointer to HSD_MemoryEntry, or NULL on allocation failure
+ */
 HSD_MemoryEntry* GetMemoryEntry(s32 idx)
 {
     HSD_ASSERT(171, idx >= 0);
@@ -111,9 +151,9 @@ HSD_MemoryEntry* GetMemoryEntry(s32 idx)
             memcpy(new_list, memory_list,
                    sizeof(*memory_list) * nb_memory_list);
             memset(&new_list[nb_memory_list], 0,
-                   4 * (new_nb -
-                        nb_memory_list)); // You start *after* existing ptrs
-                                          // and make sure memory is zero'd
+               4 * (new_nb -
+                    nb_memory_list)); // You start *after* existing ptrs
+                                      // and make sure memory is zero'd
 
             old_list = memory_list;
             old_nb = OSRoundDown32B(nb_memory_list * sizeof(*memory_list));
@@ -161,75 +201,90 @@ HSD_MemoryEntry* GetMemoryEntry(s32 idx)
     }
 }
 
+/**
+ * @brief Allocates a piece of memory from the bucketed memory allocator.
+ * @details Finds or allocates a bucket matching size (rounded up to 32 bytes),
+ * pulling from the free-list, carving from larger blocks, or growing the heap.
+ * @param size Requested byte size
+ * @return Pointer to allocated memory, or NULL on failure
+ */
 void* hsdAllocMemPiece(s32 size)
 {
-    HSD_FreeList* temp_r3_2;
-    HSD_FreeList* temp_r4;
-    HSD_FreeList* temp_r4_2;
-    HSD_FreeList* temp_r5;
-    HSD_MemoryEntry* temp_r3_3;
-    HSD_MemoryEntry* temp_r3_4;
-    HSD_MemoryEntry* var_r28;
-    HSD_MemoryEntry* var_r30;
-    s32 temp_r28;
-    s32 temp_r29;
-    void* temp_r3;
+    HSD_FreeList* free_node;
+    HSD_FreeList* split_tail;
+    HSD_FreeList* split_block;
+    HSD_FreeList* block;
+    HSD_MemoryEntry* entry;
+    HSD_MemoryEntry* remainder_entry;
+    HSD_MemoryEntry* larger_entry;
+    HSD_MemoryEntry* tail_entry;
+    s32 split_idx;
+    s32 bucket_idx;
+    void* new_block;
 
-    temp_r29 = (size + 0x1F) / 32 - 1;
-    temp_r3_3 = GetMemoryEntry((size + 0x1F) / 32 - 1);
-    if (temp_r3_3 == NULL) {
+    bucket_idx = (size + 0x1F) / 32 - 1;
+    entry = GetMemoryEntry((size + 0x1F) / 32 - 1);
+    if (entry == NULL) {
         return NULL;
     }
-    if ((temp_r3_2 = temp_r3_3->free_list)) {
-        temp_r3_3->free_list = temp_r3_2->next;
-        temp_r3_3->nb_free -= 1;
-        return temp_r3_2;
+    /* Case 1: An exact-sized block is already available on the free list */
+    if ((free_node = entry->free_list)) {
+        entry->free_list = free_node->next;
+        entry->nb_free -= 1;
+        return free_node;
     }
-    var_r28 = temp_r3_3->next;
-    while (var_r28 != NULL) {
-        if (var_r28->free_list != NULL) {
-            temp_r3_4 = GetMemoryEntry(
-                (s32) (var_r28->size - temp_r3_3->size + 0x1F) / 32 - 1);
-            if (temp_r3_4 == NULL) {
+    /* Case 2: Carve requested size from a larger available block */
+    larger_entry = entry->next;
+    while (larger_entry != NULL) {
+        if (larger_entry->free_list != NULL) {
+            remainder_entry = GetMemoryEntry(
+                (s32) (larger_entry->size - entry->size + 0x1F) / 32 - 1);
+            if (remainder_entry == NULL) {
                 return NULL;
             }
-            temp_r5 = var_r28->free_list;
-            var_r28->free_list = var_r28->free_list->next;
-            var_r28->nb_free -= 1;
-            var_r28->nb_alloc -= 1;
-            temp_r4_2 = (void*) ((char*) temp_r5 + temp_r3_3->size);
-            temp_r4_2->next = temp_r3_4->free_list;
-            temp_r3_4->free_list = temp_r4_2;
-            temp_r3_4->nb_alloc += 1;
-            temp_r3_4->nb_free += 1;
-            temp_r3_3->nb_alloc += 1;
-            return temp_r5;
+            block = larger_entry->free_list;
+            larger_entry->free_list = larger_entry->free_list->next;
+            larger_entry->nb_free -= 1;
+            larger_entry->nb_alloc -= 1;
+            split_block = (void*) ((char*) block + entry->size);
+            split_block->next = remainder_entry->free_list;
+            remainder_entry->free_list = split_block;
+            remainder_entry->nb_alloc += 1;
+            remainder_entry->nb_free += 1;
+            entry->nb_alloc += 1;
+            return block;
         }
-        var_r28 = var_r28->next;
+        larger_entry = larger_entry->next;
     }
-    temp_r28 = (nb_memory_list - temp_r29) - 2;
-    temp_r29 = temp_r28;
-    if (temp_r29 >= 0) {
-        var_r30 = GetMemoryEntry(temp_r29);
-        if (var_r30 == NULL) {
+    /* Case 3: Allocate a new chunk from the heap and store remaining tail */
+    split_idx = (nb_memory_list - bucket_idx) - 2;
+    bucket_idx = split_idx;
+    if (bucket_idx >= 0) {
+        tail_entry = GetMemoryEntry(bucket_idx);
+        if (tail_entry == NULL) {
             return NULL;
         }
     }
-    temp_r3 = HSD_MemAlloc(nb_memory_list * 32);
-    if (temp_r3 == NULL) {
+    new_block = HSD_MemAlloc(nb_memory_list * 32);
+    if (new_block == NULL) {
         return NULL;
     }
-    if (temp_r28 >= 0) {
-        temp_r4 = (void*) ((char*) temp_r3 + temp_r3_3->size);
-        temp_r4->next = var_r30->free_list;
-        var_r30->free_list = temp_r4;
-        var_r30->nb_alloc += 1;
-        var_r30->nb_free += 1;
+    if (split_idx >= 0) {
+        split_tail = (void*) ((char*) new_block + entry->size);
+        split_tail->next = tail_entry->free_list;
+        tail_entry->free_list = split_tail;
+        tail_entry->nb_alloc += 1;
+        tail_entry->nb_free += 1;
     }
-    temp_r3_3->nb_alloc += 1;
-    return temp_r3;
+    entry->nb_alloc += 1;
+    return new_block;
 }
 
+/**
+ * @brief Returns an allocated memory piece back to its bucket free-list.
+ * @param mem Pointer to memory block to free
+ * @param size Size in bytes of the block being freed
+ */
 void hsdFreeMemPiece(void* mem, s32 size)
 {
     HSD_MemoryEntry* entry;
@@ -243,7 +298,11 @@ void hsdFreeMemPiece(void* mem, s32 size)
     }
 }
 
-/// _hsdClassAlloc
+/**
+ * @brief Default class allocator method allocating memory for an instance.
+ * @param info Pointer to HSD_ClassInfo descriptor
+ * @return Pointer to allocated HSD_Class instance
+ */
 HSD_Class* _hsdClassAlloc(HSD_ClassInfo* info)
 {
     HSD_Class* mem_piece = hsdAllocMemPiece(info->head.obj_size);
@@ -256,13 +315,26 @@ HSD_Class* _hsdClassAlloc(HSD_ClassInfo* info)
     return mem_piece;
 }
 
+/**
+ * @brief Default class constructor method.
+ * @param arg0 Pointer to HSD_Class instance
+ * @return 0 on success
+ */
 int _hsdClassInit(HSD_Class* arg0)
 {
     return 0;
 }
 
+/**
+ * @brief Default class pre-destructor method (no-op).
+ * @param cls Pointer to HSD_Class instance
+ */
 void _hsdClassRelease(HSD_Class* cls) {}
 
+/**
+ * @brief Default class destructor method freeing instance memory.
+ * @param cls Pointer to HSD_Class instance
+ */
 void _hsdClassDestroy(HSD_Class* cls)
 {
     HSD_ClassInfo* info = cls->class_info;
@@ -270,6 +342,10 @@ void _hsdClassDestroy(HSD_Class* cls)
     hsdFreeMemPiece(cls, info->head.obj_size);
 }
 
+/**
+ * @brief Default class memory reset callback resetting instance counts.
+ * @param info Pointer to HSD_ClassInfo descriptor
+ */
 void _hsdClassAmnesia(HSD_ClassInfo* info)
 {
     info->head.nb_exist = 0;
@@ -281,6 +357,9 @@ void _hsdClassAmnesia(HSD_ClassInfo* info)
     }
 }
 
+/**
+ * @brief Initializes the root HSD_Class descriptor.
+ */
 void _hsdClassInfoInit(void)
 {
     hsdInitClassInfo(&hsdClass, NULL, "sysdolphin_base_library", "hsd_class",
@@ -292,6 +371,13 @@ void _hsdClassInfoInit(void)
     hsdClass.amnesia = _hsdClassAmnesia;
 }
 
+/**
+ * @brief Instantiates and constructs a new object of the given class.
+ * @details Allocates memory via info->alloc, zeroes the instance, binds the vtable,
+ * and executes constructor info->init.
+ * @param i Pointer to HSD_ClassInfo descriptor
+ * @return Pointer to newly instantiated object, or NULL on allocation/init failure
+ */
 void* hsdNew(HSD_ClassInfo* i)
 {
     HSD_ClassInfo* info = i;
@@ -314,46 +400,62 @@ void* hsdNew(HSD_ClassInfo* i)
     return cls;
 }
 
+/**
+ * @brief Internal helper to retrieve the class descriptor of an HSD_Obj.
+ * @param object Pointer to HSD_Obj
+ * @return Pointer to HSD_ClassInfo
+ */
 static inline HSD_ClassInfo* HSD_GetClassInfo(HSD_Obj* object)
 {
     return object->parent.class_info;
 }
 
+/**
+ * @brief Internal helper to return class descriptor pointer.
+ * @param class_info Pointer to HSD_ClassInfo
+ * @return Pointer to HSD_ClassInfo
+ */
 static inline HSD_ClassInfo* HSD_PushClassInfo(HSD_ClassInfo* class_info)
 {
     HSD_ClassInfo* ret;
     return ret = class_info;
 }
 
+/**
+ * @brief Inlined implementation of dynamic class mutation.
+ * @param object Pointer to object to reclassify
+ * @param class_info Target HSD_ClassInfo to assign
+ * @return true if successful, false if sizes or root ancestors mismatch
+ */
 static inline bool hsdChangeClass_inline(HSD_Obj* object,
                                          HSD_ClassInfo* class_info)
 {
-    HSD_ClassInfo* var_r29;
-    HSD_ClassInfo* var_r28;
+    HSD_ClassInfo* src_class;
+    HSD_ClassInfo* dst_class;
 
     HSD_ASSERT(0x249, object);
     HSD_ASSERT(0x24A, class_info);
-    var_r29 = HSD_GetClassInfo(object);
-    !var_r29;
-    var_r28 = HSD_PushClassInfo(class_info);
-    if (!(var_r28->head.flags & 1)) {
-        var_r28->head.info_init();
+    src_class = HSD_GetClassInfo(object);
+    !src_class;
+    dst_class = HSD_PushClassInfo(class_info);
+    if (!(dst_class->head.flags & 1)) {
+        dst_class->head.info_init();
     }
-    if (var_r29->head.obj_size != var_r28->head.obj_size) {
+    if (src_class->head.obj_size != dst_class->head.obj_size) {
         return false;
     }
-    while (var_r29->head.parent != NULL &&
-           var_r29->head.parent->head.obj_size == var_r29->head.obj_size)
+    while (src_class->head.parent != NULL &&
+           src_class->head.parent->head.obj_size == src_class->head.obj_size)
     {
-        var_r29 = var_r29->head.parent;
+        src_class = src_class->head.parent;
     }
-    while (var_r28->head.parent != NULL &&
-           var_r28->head.parent->head.obj_size == var_r28->head.obj_size)
+    while (dst_class->head.parent != NULL &&
+           dst_class->head.parent->head.obj_size == dst_class->head.obj_size)
     {
-        var_r28 = var_r28->head.parent;
+        dst_class = dst_class->head.parent;
     }
-    if (var_r29 == var_r28) {
-        var_r29->head.nb_exist--;
+    if (src_class == dst_class) {
+        src_class->head.nb_exist--;
         class_info->head.nb_exist++;
         if (class_info->head.nb_exist > class_info->head.nb_peak) {
             class_info->head.nb_peak = class_info->head.nb_exist;
@@ -364,41 +466,61 @@ static inline bool hsdChangeClass_inline(HSD_Obj* object,
     return false;
 }
 
+/**
+ * @brief Mutates an existing object's class to another compatible class.
+ * @details Verifies that both classes share the exact same instance size and common
+ * root ancestor with identical size, updates tracking statistics, and rebinds class_info.
+ * @param object Pointer to object to reclassify
+ * @param class_info Target HSD_ClassInfo to assign
+ * @return true if class was successfully changed, false if incompatible
+ */
 bool hsdChangeClass(void* object, void* class_info)
 {
     return hsdChangeClass_inline(object, class_info);
 }
 
+/**
+ * @brief RTTI check: determines whether class @p info inherits from class @p p.
+ * @param info Subclass descriptor to test
+ * @param p Superclass descriptor to test against
+ * @return true if info is a descendant of p or equal to p, false otherwise
+ */
 bool hsdIsDescendantOf(void* info, void* p)
 {
-    HSD_ClassInfo* var_r31;
+    HSD_ClassInfo* curr;
     HSD_ClassInfo* cls = (HSD_ClassInfo*) p;
 
     if (info == NULL || p == NULL) {
         return false;
     }
 
-    var_r31 =
+    curr =
 #ifdef MUST_MATCH
-        var_r31 =
+        curr =
 #endif
             info;
 
     if (!(HSD_CLASS_INFO(info)->head.flags & 1)) {
-        var_r31->head.info_init();
+        curr->head.info_init();
     }
     if (!(cls->head.flags & 1)) {
         cls->head.info_init();
     }
-    while (var_r31 != NULL) {
-        if (var_r31 == cls) {
+    while (curr != NULL) {
+        if (curr == cls) {
             return true;
         }
-        var_r31 = var_r31->head.parent;
+        curr = curr->head.parent;
     }
     return false;
 }
 
+/**
+ * @brief RTTI check: determines whether object @p o is an instance of class @p p.
+ * @param o Object instance to test
+ * @param p Superclass descriptor to test against
+ * @return true if object's class descends from p, false otherwise
+ */
 bool hsdObjIsDescendantOf(HSD_Obj* o, HSD_ClassInfo* p)
 {
     HSD_ClassInfo* info;
@@ -419,11 +541,21 @@ bool hsdObjIsDescendantOf(HSD_Obj* o, HSD_ClassInfo* p)
     return false;
 }
 
+/**
+ * @brief Updates status flags on a class descriptor.
+ * @param class_info Pointer to HSD_ClassInfo
+ * @param set Bitmask of flags to set
+ * @param reset Bitmask of flags to clear
+ */
 void class_set_flags(HSD_ClassInfo* class_info, s32 set, s32 reset)
 {
     class_info->head.flags = (class_info->head.flags & ~reset) | set;
 }
 
+/**
+ * @brief Recursively purges a class and all its subclasses from memory.
+ * @param class_info Root class descriptor to purge
+ */
 void ForgetClassLibraryReal(HSD_ClassInfo* class_info)
 {
     HSD_ClassInfo* cur = class_info->head.child;
@@ -440,6 +572,11 @@ void ForgetClassLibraryReal(HSD_ClassInfo* class_info)
     class_set_flags(class_info, 0, 1);
 }
 
+/**
+ * @brief Purges child classes matching a library name.
+ * @param library_name Name of library to forget
+ * @param class_info Parent class descriptor whose children are searched
+ */
 void ForgetClassLibraryChild(const char* library_name,
                              HSD_ClassInfo* class_info)
 {
@@ -454,6 +591,10 @@ void ForgetClassLibraryChild(const char* library_name,
     }
 }
 
+/**
+ * @brief Unregisters and purges all classes belonging to a specified library.
+ * @param library_name Library grouping name string (defaults to "sysdolphin_base_library" if NULL)
+ */
 void hsdForgetClassLibrary(const char* library_name)
 {
     if (library_name == NULL) {
@@ -470,6 +611,11 @@ void hsdForgetClassLibrary(const char* library_name)
     }
 }
 
+/**
+ * @brief Searches for a registered class descriptor by its string name.
+ * @param class_name ASCII class name string
+ * @return Pointer to matching HSD_ClassInfo, or NULL if not found
+ */
 HSD_ClassInfo* hsdSearchClassInfo(const char* class_name)
 {
     if (current_hash != NULL) {
@@ -485,6 +631,11 @@ static char unused5[] = "info_hash";
 #pragma pop
 #endif
 
+/**
+ * @brief Emits formatted diagnostic statistics for a single class.
+ * @param info Pointer to HSD_ClassInfo
+ * @param level Indentation level
+ */
 void DumpClassStat(HSD_ClassInfo* info, s32 level)
 {
     OSReport_PrintSpaces(level);
@@ -495,6 +646,12 @@ void DumpClassStat(HSD_ClassInfo* info, s32 level)
              info->head.nb_peak);
 }
 
+/**
+ * @brief Emits diagnostic hierarchy statistics for a class and optionally its subclasses.
+ * @param info Pointer to HSD_ClassInfo (or NULL to dump from root hsdClass)
+ * @param recursive Whether to recursively traverse child subclasses
+ * @param level Indentation level
+ */
 void hsdDumpClassStat(HSD_ClassInfo* info, bool recursive, s32 level)
 {
     if (info == NULL) {
