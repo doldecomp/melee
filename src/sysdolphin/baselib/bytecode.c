@@ -1,3 +1,9 @@
+/**
+ * @file bytecode.c
+ * @brief SysDolphin Bytecode Virtual Machine
+ * @details Implements a simple stack-based interpreter for executing bytecode scripts.
+ * Often used for evaluating mathematical expressions or subaction event parameters.
+ */
 #include "bytecode.h"
 
 #include <Runtime/platform.h>
@@ -16,18 +22,25 @@ typedef union {
     f32 f;
 } ByteCodeVal;
 
+/**
+ * @brief Evaluates a bytecode expression and returns a float result.
+ * @param bytecode Pointer to the bytecode instruction stream.
+ * @param args Array of float arguments passed to the script.
+ * @param nb_args Number of arguments in the args array.
+ * @return The final evaluated float value.
+ */
 float HSD_ByteCodeEval(u8* bytecode, const f32* args, s32 nb_args)
 {
-    HSD_SList* stack;
+    HSD_SList* eval_stack;
     int i;
-    u8 last_command;
+    u8 opcode;
     s32 operand_count;
-    u32 operand;
+    u32 instruction_operand;
     HSD_SList* list;
-    f32 fv, f0, f1;
-    s32 d0, d1;
+    f32 float_result, float_op1, float_op2;
+    s32 int_op1, int_op2;
 
-    stack = NULL;
+    eval_stack = NULL;
     operand_count = 0;
 
     if (bytecode == NULL) {
@@ -37,53 +50,53 @@ float HSD_ByteCodeEval(u8* bytecode, const f32* args, s32 nb_args)
     for (;;) {
         if (operand_count > 0) {
             operand_count--;
-            operand = (operand << 8) | *bytecode;
+            instruction_operand = (instruction_operand << 8) | *bytecode;
             bytecode++;
 
             if (operand_count != 0) {
                 continue;
             }
 
-            switch (last_command) {
-            case 2:
-                HSD_ASSERT(281, operand < nb_args);
-                stack = HSD_SListAllocAndPrepend(
-                    stack, (void*) ((ByteCodeVal*) &args[operand])->i);
+            switch (opcode) {
+            case 2: // PUSH_ARG
+                HSD_ASSERT(281, instruction_operand < nb_args);
+                eval_stack = HSD_SListAllocAndPrepend(
+                    eval_stack, (void*) ((ByteCodeVal*) &args[instruction_operand])->i);
                 break;
-            case 5:
-                for (i = 0; i < operand; i++) {
-                    stack = HSD_SListRemove(stack);
+            case 5: // POP
+                for (i = 0; i < instruction_operand; i++) {
+                    eval_stack = HSD_SListRemove(eval_stack);
                 }
                 break;
-            case 0x3C: {
-                list = stack;
+            case 0x3C: { // DUP_N (Push from stack offset)
+                list = eval_stack;
                 i = 0;
-                while (list != NULL && i < operand) {
+                while (list != NULL && i < instruction_operand) {
                     list = list->next;
                     i++;
                 }
                 if (list == NULL) {
-                    OSReport("specified stack doesn't exist (%d).\n", operand);
+                    OSReport("specified stack doesn't exist (%d).\n", instruction_operand);
                     HSD_Panic(__FILE__, 299, "");
                 } else {
-                    stack = HSD_SListAllocAndPrepend(stack, list->data);
+                    eval_stack = HSD_SListAllocAndPrepend(eval_stack, list->data);
                 }
                 break;
             }
-            case 3:
-                HSD_ASSERT(307, stack);
-                if ((int) stack->data != 0) {
-                    bytecode += operand;
+            case 3: // JUMP_IF_TRUE
+                HSD_ASSERT(307, eval_stack);
+                if ((int) eval_stack->data != 0) {
+                    bytecode += instruction_operand;
                 }
-                stack = HSD_SListRemove(stack);
+                eval_stack = HSD_SListRemove(eval_stack);
                 break;
-            case 4:
-                bytecode += operand;
+            case 4: // JUMP
+                bytecode += instruction_operand;
                 break;
-            case 6:
-                stack = HSD_SListAllocAndPrepend(stack, (void*) operand);
+            case 6: // PUSH_INT
+                eval_stack = HSD_SListAllocAndPrepend(eval_stack, (void*) instruction_operand);
                 break;
-            case 0xFF:
+            case 0xFF: // NOT_IMPLEMENTED
                 HSD_Panic(__FILE__, 323, "not yet implemented.\n");
                 /* fallthrough */
             default:
@@ -93,440 +106,440 @@ float HSD_ByteCodeEval(u8* bytecode, const f32* args, s32 nb_args)
             continue;
         }
 
-        last_command = *bytecode++;
-        switch (last_command) {
-        case 0:
+        opcode = *bytecode++;
+        switch (opcode) {
+        case 0: // NOP
             break;
-        case 1:
-            HSD_ASSERT(339, stack);
-            f0 = ((ByteCodeVal*) &stack->data)->f;
-            while (stack != NULL) {
-                stack = HSD_SListRemove(stack);
+        case 1: // RETURN
+            HSD_ASSERT(339, eval_stack);
+            float_op1 = ((ByteCodeVal*) &eval_stack->data)->f;
+            while (eval_stack != NULL) {
+                eval_stack = HSD_SListRemove(eval_stack);
             }
-            return f0;
+            return float_op1;
         case 5:
         case 0x3C:
         case 0xFF:
             operand_count = 1;
-            operand = 0;
+            instruction_operand = 0;
             break;
         case 2:
         case 3:
         case 4:
             operand_count = 2;
-            operand = 0;
+            instruction_operand = 0;
             break;
         case 6:
             operand_count = 4;
-            operand = 0;
+            instruction_operand = 0;
             break;
-        case 7:
-            HSD_ASSERT(376, stack);
+        case 7: // FLOAT_TO_INT
+            HSD_ASSERT(376, eval_stack);
             {
-                ((ByteCodeVal*) &stack->data)->i =
-                    (int) ((ByteCodeVal*) &stack->data)->f;
+                ((ByteCodeVal*) &eval_stack->data)->i =
+                    (int) ((ByteCodeVal*) &eval_stack->data)->f;
             }
             break;
-        case 8:
-            HSD_ASSERT(381, stack);
+        case 8: // INT_TO_FLOAT
+            HSD_ASSERT(381, eval_stack);
             {
-                fv = (f32) ((ByteCodeVal*) &stack->data)->i;
-                stack->data = *(void**) &fv;
+                float_result = (f32) ((ByteCodeVal*) &eval_stack->data)->i;
+                eval_stack->data = *(void**) &float_result;
             }
             break;
-        case 9:
-            HSD_ASSERT(387, stack);
-            fv = -(((ByteCodeVal*) &stack->data)->f);
-            stack->data = *(void**) &fv;
+        case 9: // NEG_FLOAT
+            HSD_ASSERT(387, eval_stack);
+            float_result = -(((ByteCodeVal*) &eval_stack->data)->f);
+            eval_stack->data = *(void**) &float_result;
             break;
-        case 0x0A:
-            HSD_ASSERT(393, stack);
-            ((ByteCodeVal*) &stack->data)->i =
-                -((ByteCodeVal*) &stack->data)->i;
+        case 0x0A: // NEG_INT
+            HSD_ASSERT(393, eval_stack);
+            ((ByteCodeVal*) &eval_stack->data)->i =
+                -((ByteCodeVal*) &eval_stack->data)->i;
             break;
-        case 0x0B:
-            HSD_ASSERT(399, stack);
-            ((ByteCodeVal*) &stack->data)->i = HSD_Randi(2);
+        case 0x0B: // RAND_INT_2
+            HSD_ASSERT(399, eval_stack);
+            ((ByteCodeVal*) &eval_stack->data)->i = HSD_Randi(2);
             break;
-        case 0x0C:
-            HSD_ASSERT(405, stack);
-            fv = HSD_Randf();
-            stack->data = *(void**) &fv;
+        case 0x0C: // RAND_FLOAT
+            HSD_ASSERT(405, eval_stack);
+            float_result = HSD_Randf();
+            eval_stack->data = *(void**) &float_result;
             break;
-        case 0x0D:
-            HSD_ASSERT(411, stack);
-            fv = sinf(
-                (f32) (DEG_TO_RAD * (f64) ((ByteCodeVal*) &stack->data)->f));
-            stack->data = *(void**) &fv;
+        case 0x0D: // SIND
+            HSD_ASSERT(411, eval_stack);
+            float_result = sinf(
+                (f32) (DEG_TO_RAD * (f64) ((ByteCodeVal*) &eval_stack->data)->f));
+            eval_stack->data = *(void**) &float_result;
             break;
-        case 0x0E:
-            HSD_ASSERT(417, stack);
-            fv = cosf(
-                (f32) (DEG_TO_RAD * (f64) ((ByteCodeVal*) &stack->data)->f));
-            stack->data = *(void**) &fv;
+        case 0x0E: // COSD
+            HSD_ASSERT(417, eval_stack);
+            float_result = cosf(
+                (f32) (DEG_TO_RAD * (f64) ((ByteCodeVal*) &eval_stack->data)->f));
+            eval_stack->data = *(void**) &float_result;
             break;
-        case 0x0F:
-            HSD_ASSERT(423, stack);
-            fv = tanf(
-                (f32) (DEG_TO_RAD * (f64) ((ByteCodeVal*) &stack->data)->f));
-            stack->data = *(void**) &fv;
+        case 0x0F: // TAND
+            HSD_ASSERT(423, eval_stack);
+            float_result = tanf(
+                (f32) (DEG_TO_RAD * (f64) ((ByteCodeVal*) &eval_stack->data)->f));
+            eval_stack->data = *(void**) &float_result;
             break;
-        case 0x10:
-            HSD_ASSERT(429, stack);
-            fv = (f32) (RAD_TO_DEG * asinf(((ByteCodeVal*) &stack->data)->f));
-            stack->data = *(void**) &fv;
+        case 0x10: // ASIND
+            HSD_ASSERT(429, eval_stack);
+            float_result = (f32) (RAD_TO_DEG * asinf(((ByteCodeVal*) &eval_stack->data)->f));
+            eval_stack->data = *(void**) &float_result;
             break;
-        case 0x11:
-            HSD_ASSERT(435, stack);
-            fv = (f32) (RAD_TO_DEG * acosf(((ByteCodeVal*) &stack->data)->f));
-            stack->data = *(void**) &fv;
+        case 0x11: // ACOSD
+            HSD_ASSERT(435, eval_stack);
+            float_result = (f32) (RAD_TO_DEG * acosf(((ByteCodeVal*) &eval_stack->data)->f));
+            eval_stack->data = *(void**) &float_result;
             break;
-        case 0x12:
-            HSD_ASSERT(441, stack);
-            fv = (f32) (RAD_TO_DEG * atanf(((ByteCodeVal*) &stack->data)->f));
-            stack->data = *(void**) &fv;
+        case 0x12: // ATAND
+            HSD_ASSERT(441, eval_stack);
+            float_result = (f32) (RAD_TO_DEG * atanf(((ByteCodeVal*) &eval_stack->data)->f));
+            eval_stack->data = *(void**) &float_result;
             break;
-        case 0x13:
-            HSD_ASSERT(447, stack);
-            fv = logf(((ByteCodeVal*) &stack->data)->f);
-            stack->data = *(void**) &fv;
+        case 0x13: // LOGF
+            HSD_ASSERT(447, eval_stack);
+            float_result = logf(((ByteCodeVal*) &eval_stack->data)->f);
+            eval_stack->data = *(void**) &float_result;
             break;
-        case 0x14:
-            HSD_ASSERT(453, stack);
-            fv = expf(((ByteCodeVal*) &stack->data)->f);
-            stack->data = *(void**) &fv;
+        case 0x14: // EXPF
+            HSD_ASSERT(453, eval_stack);
+            float_result = expf(((ByteCodeVal*) &eval_stack->data)->f);
+            eval_stack->data = *(void**) &float_result;
             break;
-        case 0x15:
-            HSD_ASSERT(459, stack);
-            if (((ByteCodeVal*) &stack->data)->f < 0.0F) {
-                fv = -(((ByteCodeVal*) &stack->data)->f);
-                stack->data = *(void**) &fv;
+        case 0x15: // ABS_FLOAT
+            HSD_ASSERT(459, eval_stack);
+            if (((ByteCodeVal*) &eval_stack->data)->f < 0.0F) {
+                float_result = -(((ByteCodeVal*) &eval_stack->data)->f);
+                eval_stack->data = *(void**) &float_result;
             }
             break;
-        case 0x28:
-            HSD_ASSERT(467, stack);
+        case 0x28: // ABS_INT
+            HSD_ASSERT(467, eval_stack);
             {
-                d0 = ((ByteCodeVal*) &stack->data)->i;
-                if (d0 < 0) {
-                    ((ByteCodeVal*) &stack->data)->i = -d0;
+                int_op1 = ((ByteCodeVal*) &eval_stack->data)->i;
+                if (int_op1 < 0) {
+                    ((ByteCodeVal*) &eval_stack->data)->i = -int_op1;
                 }
             }
             break;
-        case 0x16:
-            HSD_ASSERT(474, stack);
-            fv = sqrtf(((ByteCodeVal*) &stack->data)->f);
-            stack->data = *(void**) &fv;
+        case 0x16: // SQRTF
+            HSD_ASSERT(474, eval_stack);
+            float_result = sqrtf(((ByteCodeVal*) &eval_stack->data)->f);
+            eval_stack->data = *(void**) &float_result;
             break;
-        case 0x31:
-            HSD_ASSERT(480, stack);
-            stack->data = (void*) !(s32) stack->data;
+        case 0x31: // NOT_LOGICAL
+            HSD_ASSERT(480, eval_stack);
+            eval_stack->data = (void*) !(s32) eval_stack->data;
             break;
-        case 0x17:
-            HSD_ASSERT(501, stack);
-            HSD_ASSERT(501, stack->next);
-            f0 = ((ByteCodeVal*) &stack->data)->f;
-            stack = HSD_SListRemove(stack);
-            fv = ((ByteCodeVal*) &stack->data)->f + f0;
-            stack->data = *(void**) &fv;
+        case 0x17: // ADD_FLOAT
+            HSD_ASSERT(501, eval_stack);
+            HSD_ASSERT(501, eval_stack->next);
+            float_op1 = ((ByteCodeVal*) &eval_stack->data)->f;
+            eval_stack = HSD_SListRemove(eval_stack);
+            float_result = ((ByteCodeVal*) &eval_stack->data)->f + float_op1;
+            eval_stack->data = *(void**) &float_result;
             break;
-        case 0x18:
-            HSD_ASSERT(507, stack);
-            HSD_ASSERT(507, stack->next);
-            f0 = ((ByteCodeVal*) &stack->data)->f;
-            stack = HSD_SListRemove(stack);
-            fv = ((ByteCodeVal*) &stack->data)->f - f0;
-            stack->data = *(void**) &fv;
+        case 0x18: // SUB_FLOAT
+            HSD_ASSERT(507, eval_stack);
+            HSD_ASSERT(507, eval_stack->next);
+            float_op1 = ((ByteCodeVal*) &eval_stack->data)->f;
+            eval_stack = HSD_SListRemove(eval_stack);
+            float_result = ((ByteCodeVal*) &eval_stack->data)->f - float_op1;
+            eval_stack->data = *(void**) &float_result;
             break;
-        case 0x19:
-            HSD_ASSERT(513, stack);
-            HSD_ASSERT(513, stack->next);
-            f0 = ((ByteCodeVal*) &stack->data)->f;
-            stack = HSD_SListRemove(stack);
-            fv = ((ByteCodeVal*) &stack->data)->f * f0;
-            stack->data = *(void**) &fv;
+        case 0x19: // MUL_FLOAT
+            HSD_ASSERT(513, eval_stack);
+            HSD_ASSERT(513, eval_stack->next);
+            float_op1 = ((ByteCodeVal*) &eval_stack->data)->f;
+            eval_stack = HSD_SListRemove(eval_stack);
+            float_result = ((ByteCodeVal*) &eval_stack->data)->f * float_op1;
+            eval_stack->data = *(void**) &float_result;
             break;
-        case 0x1A:
-            HSD_ASSERT(519, stack);
-            HSD_ASSERT(519, stack->next);
-            f0 = ((ByteCodeVal*) &stack->data)->f;
-            stack = HSD_SListRemove(stack);
-            fv = ((ByteCodeVal*) &stack->data)->f / f0;
-            stack->data = *(void**) &fv;
+        case 0x1A: // DIV_FLOAT
+            HSD_ASSERT(519, eval_stack);
+            HSD_ASSERT(519, eval_stack->next);
+            float_op1 = ((ByteCodeVal*) &eval_stack->data)->f;
+            eval_stack = HSD_SListRemove(eval_stack);
+            float_result = ((ByteCodeVal*) &eval_stack->data)->f / float_op1;
+            eval_stack->data = *(void**) &float_result;
             break;
-        case 0x1B:
-            HSD_ASSERT(525, stack);
-            HSD_ASSERT(525, stack->next);
-            f0 = ((ByteCodeVal*) &stack->data)->f;
-            stack = HSD_SListRemove(stack);
-            f1 =
+        case 0x1B: // FMOD
+            HSD_ASSERT(525, eval_stack);
+            HSD_ASSERT(525, eval_stack->next);
+            float_op1 = ((ByteCodeVal*) &eval_stack->data)->f;
+            eval_stack = HSD_SListRemove(eval_stack);
+            float_op2 =
 #ifdef MUST_MATCH
-                f1 =
+                float_op2 =
 #endif
-                    ((ByteCodeVal*) &stack->data)->f;
-            fv = fmodf(f1, f0);
-            stack->data = *(void**) &fv;
+                    ((ByteCodeVal*) &eval_stack->data)->f;
+            float_result = fmodf(float_op2, float_op1);
+            eval_stack->data = *(void**) &float_result;
             break;
-        case 0x1C:
-            HSD_ASSERT(531, stack);
-            HSD_ASSERT(531, stack->next);
-            d1 = ((ByteCodeVal*) &stack->data)->i;
-            stack = HSD_SListRemove(stack);
-            ((ByteCodeVal*) &stack->data)->i =
-                (((ByteCodeVal*) &stack->data)->i + d1);
+        case 0x1C: // ADD_INT
+            HSD_ASSERT(531, eval_stack);
+            HSD_ASSERT(531, eval_stack->next);
+            int_op2 = ((ByteCodeVal*) &eval_stack->data)->i;
+            eval_stack = HSD_SListRemove(eval_stack);
+            ((ByteCodeVal*) &eval_stack->data)->i =
+                (((ByteCodeVal*) &eval_stack->data)->i + int_op2);
             break;
-        case 0x1D:
-            HSD_ASSERT(536, stack);
-            HSD_ASSERT(536, stack->next);
-            d1 = ((ByteCodeVal*) &stack->data)->i;
-            stack = HSD_SListRemove(stack);
-            ((ByteCodeVal*) &stack->data)->i =
-                (((ByteCodeVal*) &stack->data)->i - d1);
+        case 0x1D: // SUB_INT
+            HSD_ASSERT(536, eval_stack);
+            HSD_ASSERT(536, eval_stack->next);
+            int_op2 = ((ByteCodeVal*) &eval_stack->data)->i;
+            eval_stack = HSD_SListRemove(eval_stack);
+            ((ByteCodeVal*) &eval_stack->data)->i =
+                (((ByteCodeVal*) &eval_stack->data)->i - int_op2);
             break;
-        case 0x1E:
-            HSD_ASSERT(541, stack);
-            HSD_ASSERT(541, stack->next);
-            d1 = ((ByteCodeVal*) &stack->data)->i;
-            stack = HSD_SListRemove(stack);
-            ((ByteCodeVal*) &stack->data)->i =
-                (((ByteCodeVal*) &stack->data)->i * d1);
+        case 0x1E: // MUL_INT
+            HSD_ASSERT(541, eval_stack);
+            HSD_ASSERT(541, eval_stack->next);
+            int_op2 = ((ByteCodeVal*) &eval_stack->data)->i;
+            eval_stack = HSD_SListRemove(eval_stack);
+            ((ByteCodeVal*) &eval_stack->data)->i =
+                (((ByteCodeVal*) &eval_stack->data)->i * int_op2);
             break;
-        case 0x1F:
-            HSD_ASSERT(546, stack);
-            HSD_ASSERT(546, stack->next);
-            d1 = ((ByteCodeVal*) &stack->data)->i;
-            stack = HSD_SListRemove(stack);
-            ((ByteCodeVal*) &stack->data)->i =
-                (((ByteCodeVal*) &stack->data)->i / d1);
+        case 0x1F: // DIV_INT
+            HSD_ASSERT(546, eval_stack);
+            HSD_ASSERT(546, eval_stack->next);
+            int_op2 = ((ByteCodeVal*) &eval_stack->data)->i;
+            eval_stack = HSD_SListRemove(eval_stack);
+            ((ByteCodeVal*) &eval_stack->data)->i =
+                (((ByteCodeVal*) &eval_stack->data)->i / int_op2);
             break;
-        case 0x20:
-            HSD_ASSERT(551, stack);
-            HSD_ASSERT(551, stack->next);
-            d1 = ((ByteCodeVal*) &stack->data)->i;
-            stack = HSD_SListRemove(stack);
-            d0 = ((ByteCodeVal*) &stack->data)->i;
-            ((ByteCodeVal*) &stack->data)->i = (d0 % d1);
+        case 0x20: // MOD_INT
+            HSD_ASSERT(551, eval_stack);
+            HSD_ASSERT(551, eval_stack->next);
+            int_op2 = ((ByteCodeVal*) &eval_stack->data)->i;
+            eval_stack = HSD_SListRemove(eval_stack);
+            int_op1 = ((ByteCodeVal*) &eval_stack->data)->i;
+            ((ByteCodeVal*) &eval_stack->data)->i = (int_op1 % int_op2);
             break;
-        case 0x21:
-            HSD_ASSERT(556, stack);
-            HSD_ASSERT(556, stack->next);
-            f0 = ((ByteCodeVal*) &stack->data)->f;
-            stack = HSD_SListRemove(stack);
-            fv = powf(((ByteCodeVal*) &stack->data)->f, f0);
-            stack->data = *(void**) &fv;
+        case 0x21: // POWF
+            HSD_ASSERT(556, eval_stack);
+            HSD_ASSERT(556, eval_stack->next);
+            float_op1 = ((ByteCodeVal*) &eval_stack->data)->f;
+            eval_stack = HSD_SListRemove(eval_stack);
+            float_result = powf(((ByteCodeVal*) &eval_stack->data)->f, float_op1);
+            eval_stack->data = *(void**) &float_result;
             break;
-        case 0x22:
-            HSD_ASSERT(562, stack);
-            HSD_ASSERT(562, stack->next);
-            f0 = ((ByteCodeVal*) &stack->data)->f;
-            stack = HSD_SListRemove(stack);
-            if (((ByteCodeVal*) &stack->data)->f > f0) {
-                stack->data = *(void**) &f0;
+        case 0x22: // MAX_FLOAT
+            HSD_ASSERT(562, eval_stack);
+            HSD_ASSERT(562, eval_stack->next);
+            float_op1 = ((ByteCodeVal*) &eval_stack->data)->f;
+            eval_stack = HSD_SListRemove(eval_stack);
+            if (((ByteCodeVal*) &eval_stack->data)->f > float_op1) {
+                eval_stack->data = *(void**) &float_op1;
             }
             break;
-        case 0x23:
-            HSD_ASSERT(569, stack);
-            HSD_ASSERT(569, stack->next);
-            f0 = ((ByteCodeVal*) &stack->data)->f;
-            stack = HSD_SListRemove(stack);
-            if (((ByteCodeVal*) &stack->data)->f < f0) {
-                stack->data = *(void**) &f0;
+        case 0x23: // MIN_FLOAT
+            HSD_ASSERT(569, eval_stack);
+            HSD_ASSERT(569, eval_stack->next);
+            float_op1 = ((ByteCodeVal*) &eval_stack->data)->f;
+            eval_stack = HSD_SListRemove(eval_stack);
+            if (((ByteCodeVal*) &eval_stack->data)->f < float_op1) {
+                eval_stack->data = *(void**) &float_op1;
             }
             break;
-        case 0x24:
-            HSD_ASSERT(576, stack);
-            HSD_ASSERT(576, stack->next);
-            d1 = ((ByteCodeVal*) &stack->data)->i;
-            stack = HSD_SListRemove(stack);
-            if (((ByteCodeVal*) &stack->data)->i > d1) {
-                ((ByteCodeVal*) &stack->data)->i = d1;
+        case 0x24: // MAX_INT
+            HSD_ASSERT(576, eval_stack);
+            HSD_ASSERT(576, eval_stack->next);
+            int_op2 = ((ByteCodeVal*) &eval_stack->data)->i;
+            eval_stack = HSD_SListRemove(eval_stack);
+            if (((ByteCodeVal*) &eval_stack->data)->i > int_op2) {
+                ((ByteCodeVal*) &eval_stack->data)->i = int_op2;
             }
             break;
-        case 0x25:
-            HSD_ASSERT(583, stack);
-            HSD_ASSERT(583, stack->next);
-            d1 = ((ByteCodeVal*) &stack->data)->i;
-            stack = HSD_SListRemove(stack);
-            if (((ByteCodeVal*) &stack->data)->i < d1) {
-                ((ByteCodeVal*) &stack->data)->i = d1;
+        case 0x25: // MIN_INT
+            HSD_ASSERT(583, eval_stack);
+            HSD_ASSERT(583, eval_stack->next);
+            int_op2 = ((ByteCodeVal*) &eval_stack->data)->i;
+            eval_stack = HSD_SListRemove(eval_stack);
+            if (((ByteCodeVal*) &eval_stack->data)->i < int_op2) {
+                ((ByteCodeVal*) &eval_stack->data)->i = int_op2;
             }
             break;
-        case 0x26:
-            HSD_ASSERT(590, stack);
-            HSD_ASSERT(590, stack->next);
-            f0 = ((ByteCodeVal*) &stack->data)->f;
-            stack = HSD_SListRemove(stack);
-            f1 = ((ByteCodeVal*) &stack->data)->f;
-            if (fabsf_bitwise(f0) == 0.0F) {
-                fv = f1 >= 0.0F ? 90.0F : -90.0F;
+        case 0x26: // ATAN2D
+            HSD_ASSERT(590, eval_stack);
+            HSD_ASSERT(590, eval_stack->next);
+            float_op1 = ((ByteCodeVal*) &eval_stack->data)->f;
+            eval_stack = HSD_SListRemove(eval_stack);
+            float_op2 = ((ByteCodeVal*) &eval_stack->data)->f;
+            if (fabsf_bitwise(float_op1) == 0.0F) {
+                float_result = float_op2 >= 0.0F ? 90.0F : -90.0F;
             } else {
-                fv = (f32) (RAD_TO_DEG * atan2f(f1, f0));
+                float_result = (f32) (RAD_TO_DEG * atan2f(float_op2, float_op1));
             }
-            stack->data = *(void**) &fv;
+            eval_stack->data = *(void**) &float_result;
             break;
-        case 0x33:
-            HSD_ASSERT(603, stack);
-            HSD_ASSERT(603, stack->next);
-            f0 = ((ByteCodeVal*) &stack->data)->f;
-            stack = HSD_SListRemove(stack);
-            f1 = ((ByteCodeVal*) &stack->data)->f;
-            ((ByteCodeVal*) &stack->data)->i = (f1 < f0);
+        case 0x33: // LT_FLOAT
+            HSD_ASSERT(603, eval_stack);
+            HSD_ASSERT(603, eval_stack->next);
+            float_op1 = ((ByteCodeVal*) &eval_stack->data)->f;
+            eval_stack = HSD_SListRemove(eval_stack);
+            float_op2 = ((ByteCodeVal*) &eval_stack->data)->f;
+            ((ByteCodeVal*) &eval_stack->data)->i = (float_op2 < float_op1);
             break;
-        case 0x34:
-            HSD_ASSERT(608, stack);
-            HSD_ASSERT(608, stack->next);
-            f0 = ((ByteCodeVal*) &stack->data)->f;
-            stack = HSD_SListRemove(stack);
-            f1 = ((ByteCodeVal*) &stack->data)->f;
-            ((ByteCodeVal*) &stack->data)->i = (f1 > f0);
+        case 0x34: // GT_FLOAT
+            HSD_ASSERT(608, eval_stack);
+            HSD_ASSERT(608, eval_stack->next);
+            float_op1 = ((ByteCodeVal*) &eval_stack->data)->f;
+            eval_stack = HSD_SListRemove(eval_stack);
+            float_op2 = ((ByteCodeVal*) &eval_stack->data)->f;
+            ((ByteCodeVal*) &eval_stack->data)->i = (float_op2 > float_op1);
             break;
-        case 0x35:
-            HSD_ASSERT(613, stack);
-            HSD_ASSERT(613, stack->next);
-            f0 = ((ByteCodeVal*) &stack->data)->f;
-            stack = HSD_SListRemove(stack);
-            ((ByteCodeVal*) &stack->data)->i =
-                (((ByteCodeVal*) &stack->data)->f <= f0);
+        case 0x35: // LE_FLOAT
+            HSD_ASSERT(613, eval_stack);
+            HSD_ASSERT(613, eval_stack->next);
+            float_op1 = ((ByteCodeVal*) &eval_stack->data)->f;
+            eval_stack = HSD_SListRemove(eval_stack);
+            ((ByteCodeVal*) &eval_stack->data)->i =
+                (((ByteCodeVal*) &eval_stack->data)->f <= float_op1);
             break;
-        case 0x36:
-            HSD_ASSERT(618, stack);
-            HSD_ASSERT(618, stack->next);
-            f0 = ((ByteCodeVal*) &stack->data)->f;
-            stack = HSD_SListRemove(stack);
-            f1 = ((ByteCodeVal*) &stack->data)->f;
-            ((ByteCodeVal*) &stack->data)->i = (f1 >= f0);
+        case 0x36: // GE_FLOAT
+            HSD_ASSERT(618, eval_stack);
+            HSD_ASSERT(618, eval_stack->next);
+            float_op1 = ((ByteCodeVal*) &eval_stack->data)->f;
+            eval_stack = HSD_SListRemove(eval_stack);
+            float_op2 = ((ByteCodeVal*) &eval_stack->data)->f;
+            ((ByteCodeVal*) &eval_stack->data)->i = (float_op2 >= float_op1);
             break;
-        case 0x37:
-            HSD_ASSERT(623, stack);
-            HSD_ASSERT(623, stack->next);
-            f0 = ((ByteCodeVal*) &stack->data)->f;
-            stack = HSD_SListRemove(stack);
-            f1 = ((ByteCodeVal*) &stack->data)->f;
-            ((ByteCodeVal*) &stack->data)->i = (f1 == f0);
+        case 0x37: // EQ_FLOAT
+            HSD_ASSERT(623, eval_stack);
+            HSD_ASSERT(623, eval_stack->next);
+            float_op1 = ((ByteCodeVal*) &eval_stack->data)->f;
+            eval_stack = HSD_SListRemove(eval_stack);
+            float_op2 = ((ByteCodeVal*) &eval_stack->data)->f;
+            ((ByteCodeVal*) &eval_stack->data)->i = (float_op2 == float_op1);
             break;
-        case 0x38:
-            HSD_ASSERT(628, stack);
-            HSD_ASSERT(628, stack->next);
-            f0 = ((ByteCodeVal*) &stack->data)->f;
-            stack = HSD_SListRemove(stack);
-            f1 = ((ByteCodeVal*) &stack->data)->f;
-            ((ByteCodeVal*) &stack->data)->i = (f1 != f0);
+        case 0x38: // NE_FLOAT
+            HSD_ASSERT(628, eval_stack);
+            HSD_ASSERT(628, eval_stack->next);
+            float_op1 = ((ByteCodeVal*) &eval_stack->data)->f;
+            eval_stack = HSD_SListRemove(eval_stack);
+            float_op2 = ((ByteCodeVal*) &eval_stack->data)->f;
+            ((ByteCodeVal*) &eval_stack->data)->i = (float_op2 != float_op1);
             break;
-        case 0x29:
-            HSD_ASSERT(633, stack);
-            HSD_ASSERT(633, stack->next);
-            d1 = ((ByteCodeVal*) &stack->data)->i;
-            stack = HSD_SListRemove(stack);
-            ((ByteCodeVal*) &stack->data)->i =
-                (((ByteCodeVal*) &stack->data)->i < d1);
+        case 0x29: // LT_INT
+            HSD_ASSERT(633, eval_stack);
+            HSD_ASSERT(633, eval_stack->next);
+            int_op2 = ((ByteCodeVal*) &eval_stack->data)->i;
+            eval_stack = HSD_SListRemove(eval_stack);
+            ((ByteCodeVal*) &eval_stack->data)->i =
+                (((ByteCodeVal*) &eval_stack->data)->i < int_op2);
             break;
-        case 0x2A:
-            HSD_ASSERT(638, stack);
-            HSD_ASSERT(638, stack->next);
-            d1 = ((ByteCodeVal*) &stack->data)->i;
-            stack = HSD_SListRemove(stack);
-            ((ByteCodeVal*) &stack->data)->i =
-                (((ByteCodeVal*) &stack->data)->i > d1);
+        case 0x2A: // GT_INT
+            HSD_ASSERT(638, eval_stack);
+            HSD_ASSERT(638, eval_stack->next);
+            int_op2 = ((ByteCodeVal*) &eval_stack->data)->i;
+            eval_stack = HSD_SListRemove(eval_stack);
+            ((ByteCodeVal*) &eval_stack->data)->i =
+                (((ByteCodeVal*) &eval_stack->data)->i > int_op2);
             break;
-        case 0x2B:
-            HSD_ASSERT(643, stack);
-            HSD_ASSERT(643, stack->next);
-            d1 = ((ByteCodeVal*) &stack->data)->i;
-            stack = HSD_SListRemove(stack);
-            ((ByteCodeVal*) &stack->data)->i =
-                (((ByteCodeVal*) &stack->data)->i <= d1);
+        case 0x2B: // LE_INT
+            HSD_ASSERT(643, eval_stack);
+            HSD_ASSERT(643, eval_stack->next);
+            int_op2 = ((ByteCodeVal*) &eval_stack->data)->i;
+            eval_stack = HSD_SListRemove(eval_stack);
+            ((ByteCodeVal*) &eval_stack->data)->i =
+                (((ByteCodeVal*) &eval_stack->data)->i <= int_op2);
             break;
-        case 0x2C:
-            HSD_ASSERT(648, stack);
-            HSD_ASSERT(648, stack->next);
-            d1 = ((ByteCodeVal*) &stack->data)->i;
-            stack = HSD_SListRemove(stack);
-            ((ByteCodeVal*) &stack->data)->i =
-                (((ByteCodeVal*) &stack->data)->i >= d1);
+        case 0x2C: // GE_INT
+            HSD_ASSERT(648, eval_stack);
+            HSD_ASSERT(648, eval_stack->next);
+            int_op2 = ((ByteCodeVal*) &eval_stack->data)->i;
+            eval_stack = HSD_SListRemove(eval_stack);
+            ((ByteCodeVal*) &eval_stack->data)->i =
+                (((ByteCodeVal*) &eval_stack->data)->i >= int_op2);
             break;
-        case 0x2D:
-            HSD_ASSERT(653, stack);
-            HSD_ASSERT(653, stack->next);
-            d1 = ((ByteCodeVal*) &stack->data)->i;
-            stack = HSD_SListRemove(stack);
-            ((ByteCodeVal*) &stack->data)->i =
-                (((ByteCodeVal*) &stack->data)->i == d1);
+        case 0x2D: // EQ_INT
+            HSD_ASSERT(653, eval_stack);
+            HSD_ASSERT(653, eval_stack->next);
+            int_op2 = ((ByteCodeVal*) &eval_stack->data)->i;
+            eval_stack = HSD_SListRemove(eval_stack);
+            ((ByteCodeVal*) &eval_stack->data)->i =
+                (((ByteCodeVal*) &eval_stack->data)->i == int_op2);
             break;
-        case 0x2E:
-            HSD_ASSERT(658, stack);
-            HSD_ASSERT(658, stack->next);
-            d1 = ((ByteCodeVal*) &stack->data)->i;
-            stack = HSD_SListRemove(stack);
-            ((ByteCodeVal*) &stack->data)->i =
-                (((ByteCodeVal*) &stack->data)->i != d1);
+        case 0x2E: // NE_INT
+            HSD_ASSERT(658, eval_stack);
+            HSD_ASSERT(658, eval_stack->next);
+            int_op2 = ((ByteCodeVal*) &eval_stack->data)->i;
+            eval_stack = HSD_SListRemove(eval_stack);
+            ((ByteCodeVal*) &eval_stack->data)->i =
+                (((ByteCodeVal*) &eval_stack->data)->i != int_op2);
             break;
-        case 0x2F:
-            HSD_ASSERT(663, stack);
-            HSD_ASSERT(663, stack->next);
-            d1 = ((ByteCodeVal*) &stack->data)->i;
-            stack = HSD_SListRemove(stack);
-            d0 = ((ByteCodeVal*) &stack->data)->i;
+        case 0x2F: // AND_LOGICAL
+            HSD_ASSERT(663, eval_stack);
+            HSD_ASSERT(663, eval_stack->next);
+            int_op2 = ((ByteCodeVal*) &eval_stack->data)->i;
+            eval_stack = HSD_SListRemove(eval_stack);
+            int_op1 = ((ByteCodeVal*) &eval_stack->data)->i;
             {
                 int val = 0;
-                if (d0 != 0 && d1 != 0) {
+                if (int_op1 != 0 && int_op2 != 0) {
                     val = 1;
                 }
-                ((ByteCodeVal*) &stack->data)->i = val;
+                ((ByteCodeVal*) &eval_stack->data)->i = val;
             }
             break;
-        case 0x30:
-            HSD_ASSERT(668, stack);
-            HSD_ASSERT(668, stack->next);
-            d1 = ((ByteCodeVal*) &stack->data)->i;
-            stack = HSD_SListRemove(stack);
-            d0 = ((ByteCodeVal*) &stack->data)->i;
+        case 0x30: // OR_LOGICAL
+            HSD_ASSERT(668, eval_stack);
+            HSD_ASSERT(668, eval_stack->next);
+            int_op2 = ((ByteCodeVal*) &eval_stack->data)->i;
+            eval_stack = HSD_SListRemove(eval_stack);
+            int_op1 = ((ByteCodeVal*) &eval_stack->data)->i;
             {
                 int val = 1;
-                if (d0 == 0 && d1 == 0) {
+                if (int_op1 == 0 && int_op2 == 0) {
                     val = 0;
                 }
-                ((ByteCodeVal*) &stack->data)->i = val;
+                ((ByteCodeVal*) &eval_stack->data)->i = val;
             }
             break;
-        case 0x32:
-            HSD_ASSERT(673, stack);
-            HSD_ASSERT(673, stack->next);
-            d1 = ((ByteCodeVal*) &stack->data)->i;
-            stack = HSD_SListRemove(stack);
-            d0 = ((ByteCodeVal*) &stack->data)->i;
-            ((ByteCodeVal*) &stack->data)->i =
-                (d0 == 0 && d1 != 0) || (d0 != 0 && d1 == 0);
+        case 0x32: // XOR_LOGICAL
+            HSD_ASSERT(673, eval_stack);
+            HSD_ASSERT(673, eval_stack->next);
+            int_op2 = ((ByteCodeVal*) &eval_stack->data)->i;
+            eval_stack = HSD_SListRemove(eval_stack);
+            int_op1 = ((ByteCodeVal*) &eval_stack->data)->i;
+            ((ByteCodeVal*) &eval_stack->data)->i =
+                (int_op1 == 0 && int_op2 != 0) || (int_op1 != 0 && int_op2 == 0);
             break;
-        case 0x39:
-            HSD_ASSERT(678, stack);
-            HSD_ASSERT(678, stack->next);
-            d1 = ((ByteCodeVal*) &stack->data)->i;
-            stack = HSD_SListRemove(stack);
-            stack->data = (void*) (((ByteCodeVal*) &stack->data)->i & d1);
+        case 0x39: // BITWISE_AND
+            HSD_ASSERT(678, eval_stack);
+            HSD_ASSERT(678, eval_stack->next);
+            int_op2 = ((ByteCodeVal*) &eval_stack->data)->i;
+            eval_stack = HSD_SListRemove(eval_stack);
+            eval_stack->data = (void*) (((ByteCodeVal*) &eval_stack->data)->i & int_op2);
             break;
-        case 0x3A:
-            HSD_ASSERT(683, stack);
-            HSD_ASSERT(683, stack->next);
-            d1 = ((ByteCodeVal*) &stack->data)->i;
-            stack = HSD_SListRemove(stack);
-            stack->data = (void*) (((ByteCodeVal*) &stack->data)->i | d1);
+        case 0x3A: // BITWISE_OR
+            HSD_ASSERT(683, eval_stack);
+            HSD_ASSERT(683, eval_stack->next);
+            int_op2 = ((ByteCodeVal*) &eval_stack->data)->i;
+            eval_stack = HSD_SListRemove(eval_stack);
+            eval_stack->data = (void*) (((ByteCodeVal*) &eval_stack->data)->i | int_op2);
             break;
-        case 0x3B:
-            HSD_ASSERT(688, stack);
-            HSD_ASSERT(688, stack->next);
-            d1 = ((ByteCodeVal*) &stack->data)->i;
-            stack = HSD_SListRemove(stack);
-            stack->data = (void*) (((ByteCodeVal*) &stack->data)->i ^ d1);
+        case 0x3B: // BITWISE_XOR
+            HSD_ASSERT(688, eval_stack);
+            HSD_ASSERT(688, eval_stack->next);
+            int_op2 = ((ByteCodeVal*) &eval_stack->data)->i;
+            eval_stack = HSD_SListRemove(eval_stack);
+            eval_stack->data = (void*) (((ByteCodeVal*) &eval_stack->data)->i ^ int_op2);
             break;
-        case 0x27:
-            HSD_ASSERT(694, stack);
-            HSD_ASSERT(694, stack->next);
-            d1 = ((ByteCodeVal*) &stack->data)->i;
-            stack = HSD_SListRemove(stack);
-            d0 = ((ByteCodeVal*) &stack->data)->i;
-            ((ByteCodeVal*) &stack->data)->i = (d0 + HSD_Randi((d1 - d0) + 1));
+        case 0x27: // RANDI_RANGE
+            HSD_ASSERT(694, eval_stack);
+            HSD_ASSERT(694, eval_stack->next);
+            int_op2 = ((ByteCodeVal*) &eval_stack->data)->i;
+            eval_stack = HSD_SListRemove(eval_stack);
+            int_op1 = ((ByteCodeVal*) &eval_stack->data)->i;
+            ((ByteCodeVal*) &eval_stack->data)->i = (int_op1 + HSD_Randi((int_op2 - int_op1) + 1));
             break;
         default:
-            OSReport("unexpected opcode 0x%x.\n", last_command);
+            OSReport("unexpected opcode 0x%x.\n", opcode);
             HSD_Panic(__FILE__, 700, "");
             break;
         }
