@@ -1,3 +1,9 @@
+/**
+ * @file aobj.c
+ * @brief Animation Object (AObj) API implementation
+ * @details The AObj is the core keyframe animation interpolation system. It manages playback state, frame timing, and applies FObjDesc chains (frame objects) that define keyframed animation tracks targeting specific object properties (translation, rotation, scaling, etc.).
+ */
+
 #include "aobj.h"
 
 #include <math.h>
@@ -25,21 +31,38 @@ static HSD_SList* endcallback_list;
 static s32 HSD_AObj_804D762C;
 static s32 HSD_AObj_804D7630;
 
+/**
+ * @brief Initializes the object allocation data for AObjs
+ */
 void HSD_AObjInitAllocData(void)
 {
     HSD_ObjAllocInit(&aobj_alloc_data, sizeof(HSD_AObj), 4);
 }
 
+/**
+ * @brief Gets the AObj allocation data structure
+ * @return Pointer to the HSD_ObjAllocData for AObjs
+ */
 HSD_ObjAllocData* HSD_AObjGetAllocData(void)
 {
     return &aobj_alloc_data;
 }
 
+/**
+ * @brief Gets the flags of an AObj
+ * @param aobj The Animation Object
+ * @return The 32-bit flags of the AObj, or 0 if aobj is NULL
+ */
 u32 HSD_AObjGetFlags(HSD_AObj* aobj)
 {
     return aobj ? aobj->flags : 0;
 }
 
+/**
+ * @brief Sets specific flags on an AObj
+ * @param aobj The Animation Object
+ * @param flags The flags to set (only AOBJ_LOOP and AOBJ_NO_UPDATE are allowed)
+ */
 void HSD_AObjSetFlags(HSD_AObj* aobj, u32 flags)
 {
     if (aobj) {
@@ -48,6 +71,11 @@ void HSD_AObjSetFlags(HSD_AObj* aobj, u32 flags)
     }
 }
 
+/**
+ * @brief Clears specific flags from an AObj
+ * @param aobj The Animation Object
+ * @param flags The flags to clear (only AOBJ_LOOP and AOBJ_NO_UPDATE are allowed)
+ */
 void HSD_AObjClearFlags(HSD_AObj* aobj, u32 flags)
 {
     if (aobj) {
@@ -56,6 +84,11 @@ void HSD_AObjClearFlags(HSD_AObj* aobj, u32 flags)
     }
 }
 
+/**
+ * @brief Sets the FObj (Frame Object) chain for an AObj
+ * @param aobj The Animation Object
+ * @param fobj The Frame Object chain to attach
+ */
 void HSD_AObjSetFObj(HSD_AObj* aobj, HSD_FObj* fobj)
 {
     if (!aobj) {
@@ -68,12 +101,18 @@ void HSD_AObjSetFObj(HSD_AObj* aobj, HSD_FObj* fobj)
     aobj->fobj = fobj;
 }
 
+/**
+ * @brief Initializes the global end callback variables for AObjs
+ */
 void HSD_AObjInitEndCallBack(void)
 {
     HSD_AObj_804D762C = 0;
     HSD_AObj_804D7630 = 0;
 }
 
+/**
+ * @brief Invokes registered end callbacks for AObjs if the animation has finished
+ */
 void HSD_AObjInvokeCallBacks(void)
 {
     HSD_SList* list;
@@ -88,6 +127,11 @@ void HSD_AObjInvokeCallBacks(void)
     }
 }
 
+/**
+ * @brief Requests the AObj to begin animation playback at a specific frame
+ * @param aobj The Animation Object
+ * @param frame The starting frame
+ */
 void HSD_AObjReqAnim(HSD_AObj* aobj, f32 frame)
 {
     u32 flags;
@@ -104,6 +148,12 @@ void HSD_AObjReqAnim(HSD_AObj* aobj, f32 frame)
     HSD_FObjReqAnimAll(aobj->fobj, frame);
 }
 
+/**
+ * @brief Stops animation playback on an AObj
+ * @param aobj The Animation Object
+ * @param obj The target object being animated (e.g. JObj, MObj)
+ * @param func The update function to evaluate final animation states
+ */
 void HSD_AObjStopAnim(HSD_AObj* aobj, void* obj, HSD_ObjUpdateFunc func)
 {
     if (!aobj) {
@@ -114,6 +164,11 @@ void HSD_AObjStopAnim(HSD_AObj* aobj, void* obj, HSD_ObjUpdateFunc func)
     aobj->flags |= AOBJ_NO_ANIM;
 }
 
+/**
+ * @brief Gets the wrapped frame value after looping
+ * @param aobj The Animation Object
+ * @return The properly wrapped frame within the loop bounds
+ */
 static inline f32 getLoopedFrame(HSD_AObj* aobj)
 {
     f32 y = aobj->end_frame - aobj->rewind_frame;
@@ -121,6 +176,12 @@ static inline f32 getLoopedFrame(HSD_AObj* aobj)
     return fmodf(x, y) + aobj->rewind_frame;
 }
 
+/**
+ * @brief Interprets the animation, advancing the time and evaluating keyframes
+ * @param aobj The Animation Object
+ * @param obj The target object being animated
+ * @param update_func The update function applied during interpolation
+ */
 void HSD_AObjInterpretAnim(HSD_AObj* aobj, void* obj,
                            HSD_ObjUpdateFunc update_func)
 {
@@ -131,7 +192,7 @@ void HSD_AObjInterpretAnim(HSD_AObj* aobj, void* obj,
     }
 
     if (aobj->flags & AOBJ_FIRST_PLAY) {
-        aobj->flags &= 0xF7FFFFFF;
+        aobj->flags &= ~AOBJ_FIRST_PLAY;
         rate = 0.0F;
     } else {
         rate = aobj->framerate;
@@ -149,7 +210,7 @@ void HSD_AObjInterpretAnim(HSD_AObj* aobj, void* obj,
         rate = 0.0F;
         aobj->flags |= AOBJ_REWINDED;
     } else {
-        aobj->flags &= 0xFBFFFFFF;
+        aobj->flags &= ~AOBJ_REWINDED;
     }
 
     if (aobj->flags & AOBJ_NO_UPDATE) {
@@ -169,6 +230,11 @@ void HSD_AObjInterpretAnim(HSD_AObj* aobj, void* obj,
     }
 }
 
+/**
+ * @brief Loads an AObj from an AObjDesc description structure
+ * @param aobjdesc The AObj description
+ * @return The loaded Animation Object
+ */
 HSD_AObj* HSD_AObjLoadDesc(HSD_AObjDesc* aobjdesc)
 {
     HSD_FObjDesc* fobjdesc;
@@ -178,7 +244,7 @@ HSD_AObj* HSD_AObjLoadDesc(HSD_AObjDesc* aobjdesc)
 
     HSD_FObj* fobj;
     HSD_IDKey id;
-    HSD_Obj* phi_r30;
+    HSD_Obj* target_obj;
 
     if (aobjdesc != NULL) {
         aobj = HSD_AObjAlloc();
@@ -191,17 +257,17 @@ HSD_AObj* HSD_AObjLoadDesc(HSD_AObjDesc* aobjdesc)
         id = (HSD_IDKey) aobjdesc->obj_id;
         if (id != 0U) {
             HSD_Obj* hsd_obj = HSD_IDGetDataFromTable(0, id, 0);
-            phi_r30 = hsd_obj;
+            target_obj = hsd_obj;
             if (hsd_obj != NULL) {
                 ref_INC(hsd_obj);
             } else {
-                phi_r30 = (HSD_Obj*) HSD_JObjLoadJoint(aobjdesc->obj_id);
+                target_obj = (HSD_Obj*) HSD_JObjLoadJoint(aobjdesc->obj_id);
             }
             if (aobj != NULL) {
                 if (aobj->hsd_obj != NULL) {
                     HSD_JObjUnref((HSD_JObj*) aobj->hsd_obj);
                 }
-                aobj->hsd_obj = phi_r30;
+                aobj->hsd_obj = target_obj;
             }
         }
         return aobj;
@@ -209,6 +275,10 @@ HSD_AObj* HSD_AObjLoadDesc(HSD_AObjDesc* aobjdesc)
     return NULL;
 }
 
+/**
+ * @brief Removes and frees an AObj, its FObjs, and unreferences its target object
+ * @param aobj The Animation Object
+ */
 void HSD_AObjRemove(HSD_AObj* aobj)
 {
     if (!aobj) {
@@ -231,6 +301,10 @@ void HSD_AObjRemove(HSD_AObj* aobj)
     HSD_AObjFree(aobj);
 }
 
+/**
+ * @brief Allocates a new AObj instance
+ * @return A new Animation Object
+ */
 HSD_AObj* HSD_AObjAlloc(void)
 {
     HSD_AObj* new = HSD_ObjAlloc(HSD_AObjGetAllocData());
@@ -242,6 +316,10 @@ HSD_AObj* HSD_AObjAlloc(void)
     return new;
 }
 
+/**
+ * @brief Frees an AObj instance
+ * @param aobj The Animation Object
+ */
 void HSD_AObjFree(HSD_AObj* aobj)
 {
     if (!aobj) {
@@ -425,6 +503,15 @@ static void JObjForeachAnim(HSD_JObj* obj, HSD_TypeMask mask, Event func,
     }
 }
 
+/**
+ * @brief Applies a callback function to all AObjs recursively down an object hierarchy
+ * @param obj The root object (e.g. JObj)
+ * @param type The type of the root object
+ * @param mask A bitmask defining which object types to traverse
+ * @param func The callback function to invoke
+ * @param arg_type The argument signature type for the callback
+ * @param ... Variable arguments passed to the callback
+ */
 void HSD_ForeachAnim(void* obj, HSD_Type type, HSD_TypeMask mask, void* func,
                      AObj_Arg_Type arg_type, ...)
 {
@@ -499,6 +586,11 @@ void HSD_ForeachAnim(void* obj, HSD_Type type, HSD_TypeMask mask, void* func,
     va_end(ap);
 }
 
+/**
+ * @brief Sets the animation playback rate for an AObj
+ * @param aobj The Animation Object
+ * @param rate The playback rate
+ */
 void HSD_AObjSetRate(HSD_AObj* aobj, f32 rate)
 {
     if (!aobj) {
@@ -507,6 +599,11 @@ void HSD_AObjSetRate(HSD_AObj* aobj, f32 rate)
     aobj->framerate = rate;
 }
 
+/**
+ * @brief Sets the rewind (loop start) frame for an AObj
+ * @param aobj The Animation Object
+ * @param frame The rewind frame
+ */
 void HSD_AObjSetRewindFrame(HSD_AObj* aobj, f32 frame)
 {
     if (!aobj) {
@@ -515,6 +612,11 @@ void HSD_AObjSetRewindFrame(HSD_AObj* aobj, f32 frame)
     aobj->rewind_frame = frame;
 }
 
+/**
+ * @brief Sets the end frame for an AObj
+ * @param aobj The Animation Object
+ * @param frame The end frame
+ */
 void HSD_AObjSetEndFrame(HSD_AObj* aobj, f32 frame)
 {
     if (!aobj) {
@@ -523,6 +625,11 @@ void HSD_AObjSetEndFrame(HSD_AObj* aobj, f32 frame)
     aobj->end_frame = frame;
 }
 
+/**
+ * @brief Sets the current playback frame for an AObj, requesting animation if active
+ * @param aobj The Animation Object
+ * @param frame The current frame
+ */
 void HSD_AObjSetCurrentFrame(HSD_AObj* aobj, f32 frame)
 {
     if (!aobj) {
@@ -536,6 +643,11 @@ void HSD_AObjSetCurrentFrame(HSD_AObj* aobj, f32 frame)
     }
 }
 
+/**
+ * @brief Clears the end callback list memory reference
+ * @param low Lower memory boundary (unused)
+ * @param high Upper memory boundary (unused)
+ */
 void _HSD_AObjForgetMemory(void* low, void* high)
 {
     endcallback_list = NULL;
