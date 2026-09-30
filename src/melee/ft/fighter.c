@@ -1,3 +1,36 @@
+/**
+ * @file fighter.c
+ * @brief Core fighter entity lifecycle, state machine, and per-frame update loop.
+ * @details Implements the central gameplay systems of Super Smash Bros. Melee:
+ * - Entity Allocation & Initialization: HSD_ObjAlloc memory pool setup,
+ *   PlCo.dat global common table loading, character spawning/respawning, costume
+ *   joint binding, and player parameter setup.
+ * - Action State Machine: #Fighter_ChangeMotionState handles transitions between
+ *   actions (Wait, Walk, Dash, Jump, Attack, Damage, etc.), action callback rebinding
+ *   (animation, input, physics, collision, accessory), and motion flag preservation.
+ * - 15 Priority-Ordered Process Callbacks: Drives the frame update pipeline attached
+ *   to each Fighter HSD_GObj:
+ *   - Priority 0:  #Fighter_procHitlag     (freeze frames, SDI input processing)
+ *   - Priority 1:  #Fighter_procAnim       (animation timers, subaction event scripts)
+ *   - Priority 2:  #Fighter_procCpu        (AI attack evaluation and input synthesis)
+ *   - Priority 3:  #Fighter_procInput      (controller polling, tap jump, L-cancel)
+ *   - Priority 4:  #Fighter_procUpdate     (physics, self-velocities, knockback decay)
+ *   - Priority 6:  #Fighter_procMap        (ECB environment collision, ledge grab)
+ *   - Priority 7:  #Fighter_procIK         (foot/leg slope inverse kinematics)
+ *   - Priority 8:  #Fighter_procAccessory  (held item/weapon callbacks 1-3)
+ *   - Priority 9:  #Fighter_procCollPos    (bone matrices, hurtbox capsules, cb 4)
+ *   - Priority 12: #Fighter_procGrabColl   (grab hitbox detection against hurtboxes)
+ *   - Priority 13: #Fighter_procAttackColl (offensive hitboxes, clanking, damage)
+ *   - Priority 14: #Fighter_procCollResolve(hitstun calculation, shield depletion/break)
+ *   - Priority 16: #Fighter_procDynamics   (hair/cape cloth secondary bone dynamics)
+ *   - Priority 18: #Fighter_procCamera     (viewport bounds, player camera tracking)
+ *   - Priority 22: #Fighter_procPlayer     (player match record synchronization)
+ * - Damage & Collision Outcomes: Damage accumulation, shield mechanics (60 HP, powershielding),
+ *   hitlag freeze frames, and entity teardown (#Fighter_Unload_8006DABC).
+ *
+ * Module prefix: ft / Fighter
+ */
+
 #include "fighter.h"
 
 #include <math.h>
@@ -137,6 +170,13 @@ float (*Fighter_804D654C)[5] = NULL;
 ftCo_ItemThrowAttrs* Fighter_804D6550 = NULL;
 ftCommonData* p_ftCommonData;
 
+/**
+ * @brief Initializes memory pools and common subsystems for all fighters.
+ * @details Configures HSD_ObjAlloc allocators for Fighter structs (sizeof(Fighter)),
+ * attribute backup buffers (0x424 bytes), skeletal bone parts arrays, and DObj lists.
+ * Calls #Fighter_LoadCommonData to unpack PlCo.dat and invokes per-character
+ * initialization routines in #ftData_Table_Unk1.
+ */
 void Fighter_800679B0(void)
 {
     s32 i;
@@ -170,6 +210,11 @@ void Fighter_800679B0(void)
     }
 }
 
+/**
+ * @brief Top-level initialization entry point for the fighter system.
+ * @details Calls #Fighter_800679B0 to initialize primary memory pools and
+ * configures the secondary animation scratch memory pool (0x8000 bytes).
+ */
 void Fighter_FirstInitialize_80067A84(void)
 {
     Fighter_800679B0();
@@ -205,6 +250,23 @@ typedef struct ftLoadCommonData {
 } ftLoadCommonData;
 ASSERT_SIZE(ftLoadCommonData, 0x5C);
 
+/**
+ * @brief Loads common fighter parameters from PlCo.dat.
+ * @details Loads the ftLoadCommonData symbol table from PlCo.dat and distributes
+ * pointers to global variables:
+ * - p_ftCommonData: Core common parameters table
+ * - Fighter_804D64FC: CPU AI attack evaluation decision tables
+ * - gCrowdConfig: Crowd cheer SFX configuration
+ * - Fighter_804D6504/08/0C: Shield bubble model joint and player color tables
+ * - Fighter_804D6514: Spawn platform (trophy stand) model joint
+ * - Fighter_804D6518/1C/20/24: Physics modifiers (stamina, metal, bunny hood, size scaling)
+ * - Fighter_SmashChargeShakeTable/GrabMashShake/804D6530: Controller/model rumble tables
+ * - Fighter_804D6538/3C: Color animation (ColAnim) flash tables
+ * - Fighter_804D6540/ftPartsTable: Parts visibility and lookup tables
+ * - Fighter_804D6548: 9-slot stale move damage reduction multiplier table
+ * - Fighter_804D654C: Item attack swing speed table
+ * - Fighter_804D6550: Item throw motion parameter table
+ */
 void Fighter_LoadCommonData(void)
 {
     ftLoadCommonData* data;
@@ -239,6 +301,13 @@ void Fighter_LoadCommonData(void)
     Fighter_804D64FC = data->x58;
 }
 
+/**
+ * @brief Updates the 3D model scale of a fighter's root JObj.
+ * @details Reads model scale from ftCommon_GetModelScale (scaled by mushroom/custom size)
+ * and applies it to the fighter's root joint using HSD_JObjSetScale. If custom Z-scale
+ * is active (Flat Zone 2D mode), applies fp->x34_scale.z to scale.x.
+ * @param gobj Pointer to the fighter's HSD_GObj
+ */
 void Fighter_UpdateModelScale(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -258,6 +327,17 @@ void Fighter_UpdateModelScale(Fighter_GObj* gobj)
     HSD_JObjSetScale(jobj, &scale);
 }
 
+/**
+ * @brief Resets and reinitializes a fighter's match state for spawning/respawning.
+ * @details Allocates a new spawn number via #Fighter_NewSpawn_80068E40, loads initial
+ * coordinates and facing direction from player match data, syncs current/previous
+ * positions, resets scale, and clears hitlag, combo, input, and damage state flags:
+ * - Resets damage percent to 0.0% (or stamina HP if stamina mode).
+ * - Restores shield health to 60.0 HP (p_ftCommonData->x260_startShieldHealth).
+ * - Clears combo counters, hitlag frames, and invulnerability timers.
+ * - Resets analog stick history buffers and tap detection timers.
+ * @param fp Pointer to the Fighter instance data
+ */
 void Fighter_UnkInitReset_80067C98(Fighter* fp)
 {
     Vec3 player_coords;
@@ -540,6 +620,15 @@ void Fighter_UnkInitReset_80067C98(Fighter* fp)
     fp->x2229_b4 = true;
 }
 
+/**
+ * @brief Spawns or respawns a fighter entity onto the stage.
+ * @details Resets state via #Fighter_UnkInitReset_80067C98, positions root joint,
+ * computes initial modified attributes (applying metal, bunny hood, and mushroom scale via
+ * ftCo_800D105C), initializes ECB stage collision, attaches camera tracking box, enables
+ * hurtbox capsules, sets up CPU AI parameters, and invokes character-specific OnDeath/spawn
+ * callbacks.
+ * @param gobj Pointer to the fighter's HSD_GObj
+ */
 void Fighter_Spawn(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -591,6 +680,13 @@ void Fighter_Spawn(Fighter_GObj* gobj)
     ft_8007C630(gobj);
 }
 
+/**
+ * @brief Loads and binds the skeletal joint hierarchy for the fighter's active costume.
+ * @details Retrieves costume joint data from CostumeListsForeachCharacter based on
+ * fp->kind and fp->costume_id, initializes polygon objects (PObj) with default class,
+ * creates the HSD_JObj hierarchy, and binds it to the fighter GObj.
+ * @param gobj Pointer to the fighter's HSD_GObj
+ */
 void Fighter_UnkUpdateCostumeJoint_800686E4(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -607,6 +703,13 @@ void Fighter_UnkUpdateCostumeJoint_800686E4(Fighter_GObj* gobj)
     HSD_GObjObject_80390A70(gobj, HSD_GObj_JObjKind, jobj);
 }
 
+/**
+ * @brief Computes height ratio and skeletal reference offsets between key bones.
+ * @details Reads the translation of bone part 2 (transN/hip) to compute height ratio
+ * (vec.y / 8.55f in fp->x1A6C), and calculates the 3D difference vector between
+ * bone part 1 (TopN) and bone part 2 into fp->x1A70.
+ * @param fp Pointer to the Fighter instance data
+ */
 void Fighter_UnkUpdateVecFromBones_8006876C(Fighter* fp)
 {
     Vec3 vec;
@@ -624,6 +727,13 @@ void Fighter_UnkUpdateVecFromBones_8006876C(Fighter* fp)
     fp->x1A70.z = vec2.z - vec.z;
 }
 
+/**
+ * @brief Clears all controller input buffers and resets input timers.
+ * @details Zeroes out analog control stick coordinates, C-stick coordinates, trigger
+ * pressures, and button states (held, pressed, released). Sets all tap/smash detection
+ * activity timers and duration counters to their default expiration value (254 / 255).
+ * @param gobj Pointer to the fighter's HSD_GObj
+ */
 void Fighter_ResetInputData_80068854(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -681,6 +791,10 @@ void Fighter_ResetInputData_80068854(Fighter_GObj* gobj)
     fp->x67C = 255;
 }
 
+/**
+ * @brief Helper routine configuring fighter allocation indices and controller port.
+ * @param gobj Pointer to the fighter's HSD_GObj
+ */
 static void Fighter_UnkInitLoad_80068914_Inner1(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -713,18 +827,26 @@ static void Fighter_UnkInitLoad_80068914_Inner1(Fighter_GObj* gobj)
             fp->x688 = fp->x689 = fp->x68A = fp->x68B = 255;
 }
 
+/**
+ * @brief Initializes fighter instance properties from player allocation info.
+ * @details Populates internal fighter fields including character kind, player slot index,
+ * controller port, sub-fighter flag (e.g. Nana vs Popo), model scale, costume/sub-color,
+ * and permanent metal status (Player_GetFlagsBit5).
+ * @param gobj Pointer to the fighter's HSD_GObj
+ * @param alloc_info Pointer to match allocation info (struct plAllocInfo)
+ */
 void Fighter_UnkInitLoad_80068914(Fighter_GObj* gobj,
-                                  struct plAllocInfo* argdata)
+                                  struct plAllocInfo* alloc_info)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     s32 costume_id;
-    fp->kind = argdata->internal_id;
-    fp->player_idx = argdata->slot;
+    fp->kind = alloc_info->internal_id;
+    fp->player_idx = alloc_info->slot;
 
-    fp->is_sub_fighter = argdata->x6.b0;
+    fp->is_sub_fighter = alloc_info->x6.b0;
 
     fp->x34_scale.x = Player_GetModelScale(fp->player_idx);
-    fp->x61C = argdata->x5;
+    fp->x61C = alloc_info->x5;
     fp->pad_port = Player_GetPadPort(fp->player_idx);
     fp->sub_color = Player_GetSubColor(fp->player_idx);
     fp->is_always_metal = Player_GetFlagsBit5(fp->player_idx);
@@ -840,6 +962,12 @@ void Fighter_UnkInitLoad_80068914(Fighter_GObj* gobj,
 
 /// increments the spawn number, returns the spawn number value before
 /// incrementing
+/**
+ * @brief Generates a new unique spawn identifier for a fighter instance.
+ * @details Increments the global spawn counter (g_spawnNumCounter), wrapping to 1 if
+ * it overflows to 0, and returns the previous counter value.
+ * @return Unique 32-bit spawn number
+ */
 u32 Fighter_NewSpawn_80068E40(void)
 {
     u32 spawnNum = g_spawnNumCounter++;
@@ -849,6 +977,12 @@ u32 Fighter_NewSpawn_80068E40(void)
     return spawnNum;
 }
 
+/**
+ * @brief Sets stage-specific model depth scaling (Flat Zone 2D mode).
+ * @details If the current stage is Flat Zone (Gr_Kind_Flatzone), flattens the fighter's
+ * Z-axis scale using p_ftCommonData->x7E4_scaleZ; otherwise restores Z-scale to 1.0f.
+ * @param gobj Pointer to the fighter's HSD_GObj
+ */
 void Fighter_80068E64(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -860,6 +994,10 @@ void Fighter_80068E64(Fighter_GObj* gobj)
     }
 }
 
+/**
+ * @brief Helper initializing dynamic bone secondary physics for a newly created fighter.
+ * @param gobj Pointer to the fighter's HSD_GObj
+ */
 static void Fighter_Create_Inline2(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -874,6 +1012,32 @@ static void Fighter_Create_Inline2(Fighter_GObj* gobj)
     }
 }
 
+/**
+ * @brief Allocates, constructs, and initializes a complete new Fighter entity.
+ * @details High-level factory function:
+ * 1. Creates HSD_GObj with class HSD_GOBJ_CLASS_FIGHTER (4) and p-link 8.
+ * 2. Allocates Fighter struct and attribute backup from HSD_ObjAlloc pools.
+ * 3. Loads character archives, model data, costume joints, and parts hierarchy.
+ * 4. Attaches 15 GObj process callbacks in strict priority order:
+ *    - Priority 0:  procHitlag   (freeze frame handling)
+ *    - Priority 1:  procAnim     (animation update & frame timers)
+ *    - Priority 2:  procCpu      (AI decision logic)
+ *    - Priority 3:  procInput    (hardware / CPU input polling)
+ *    - Priority 4:  procUpdate   (physics, knockback decay, positions)
+ *    - Priority 6:  procMap      (stage collision ECB checks)
+ *    - Priority 7:  procIK       (inverse kinematics / bone alignment)
+ *    - Priority 8:  procAccessory(accessory / item callbacks 1-3)
+ *    - Priority 9:  procCollPos  (bone matrices, accessory cb 4, hurtbox positions)
+ *    - Priority 12: procGrabColl (grab detection & throw initiation)
+ *    - Priority 13: procAttackColl (offensive hitboxes & clank/damage)
+ *    - Priority 14: procCollResolve (hitstun, shield damage/break, knockback)
+ *    - Priority 16: procDynamics (secondary bone cloth/hair physics)
+ *    - Priority 18: procCamera   (viewport & camera tracking updates)
+ *    - Priority 22: procPlayer   (sync coordinates to player data)
+ * 5. Calls #Fighter_Spawn to place the fighter on stage in initial action state.
+ * @param input Pointer to player allocation descriptor (struct plAllocInfo)
+ * @return Pointer to newly created Fighter_GObj, or NULL on failure
+ */
 Fighter_GObj* Fighter_Create(struct plAllocInfo* input)
 {
     Fighter_GObj* gobj;
@@ -961,17 +1125,38 @@ Fighter_GObj* Fighter_Create(struct plAllocInfo* input)
     return gobj;
 }
 
+/**
+ * @brief Transitions a fighter to a new action state (Motion State).
+ * @details THE central state machine function in Melee. Switches the fighter's active
+ * motion state (Action State ID @p msid), rebinds action callbacks (animation, I/O,
+ * physics, collision, accessory), sets animation playback flags, updates hurtbox status,
+ * and clears or preserves hitboxes and state data based on MotionFlags bitmask:
+ * - Ft_MF_KeepGfx: Preserves graphic effects across state transition
+ * - Ft_MF_SkipHit: Preserves active hitboxes (does not clear hitboxes)
+ * - Ft_MF_SkipModel: Retains current model parts display state
+ * - Ft_MF_KeepFastFall: Preserves fast-falling status into new state
+ * - Ft_MF_KeepColAnimHitStatus: Retains color animation hit status
+ * - Ft_MF_SkipThrowException: Does not reset thrown hitbox owner
+ *
+ * @param gobj Pointer to fighter HSD_GObj
+ * @param msid Target motion/action state ID (FtMotionId, e.g. ftCo_MS_Wait, ftCo_MS_Damage)
+ * @param flags Bitmask of MotionFlags controlling preserved state attributes
+ * @param anim_start Starting animation frame (typically 0.0f)
+ * @param anim_speed Animation playback speed multiplier (1.0f = normal speed)
+ * @param anim_blend Animation frame interpolation blend factor (typically 0.0f)
+ * @param ref_gobj Optional partner/reference fighter GObj (used during throws/grabs)
+ */
 void Fighter_ChangeMotionState(Fighter_GObj* gobj, FtMotionId msid,
                                MotionFlags flags, f32 anim_start,
                                f32 anim_speed, f32 anim_blend,
-                               Fighter_GObj* arg3)
+                               Fighter_GObj* ref_gobj)
 {
     HSD_JObj* jobj = GET_JOBJ(gobj);
     Fighter* fp = GET_FIGHTER(gobj);
     MotionState* new_motion_state;
-    struct Fighter_WaitAnimData* unk_struct_x18;
+    struct Fighter_WaitAnimData* anim_data;
     s32 bone_index;
-    u8(*unk_byte_ptr)[2];
+    u8(*anim_flags_ptr)[2];
     bool animflags_bool;
     union Struct2070 x2070;
 
@@ -1274,24 +1459,24 @@ void Fighter_ChangeMotionState(Fighter_GObj* gobj, FtMotionId msid,
                 anim_speed = 0.0f;
             }
 
-            if (arg3 != NULL) {
-                unk_struct_x18 =
-                    &((Fighter*) arg3->user_data)->x24[fp->anim_id];
-                unk_byte_ptr = &((Fighter*) arg3->user_data)->x28[fp->anim_id];
+            if (ref_gobj != NULL) {
+                anim_data =
+                    &((Fighter*) ref_gobj->user_data)->x24[fp->anim_id];
+                anim_flags_ptr = &((Fighter*) ref_gobj->user_data)->x28[fp->anim_id];
             } else {
-                unk_struct_x18 = &fp->x24[fp->anim_id];
-                unk_byte_ptr = &fp->x28[fp->anim_id];
+                anim_data = &fp->x24[fp->anim_id];
+                anim_flags_ptr = &fp->x28[fp->anim_id];
             }
-            fp->x594.x594_s32 = unk_struct_x18->x10_animCurrFlags;
-            ftCo_8009E7B4(fp, unk_byte_ptr);
+            fp->x594.x594_s32 = anim_data->x10_animCurrFlags;
+            ftCo_8009E7B4(fp, anim_flags_ptr);
             if ((flags & Ft_MF_SkipAnim) == 0) {
-                if (arg3 != 0U) {
-                    ftData_80085CD8(fp, GET_FIGHTER(arg3), fp->anim_id);
-                    ftColl_8007B8CC(fp, arg3);
+                if (ref_gobj != 0U) {
+                    ftData_80085CD8(fp, GET_FIGHTER(ref_gobj), fp->anim_id);
+                    ftColl_8007B8CC(fp, ref_gobj);
                 } else {
                     ftData_80085CD8(fp, fp, fp->anim_id);
                 }
-                fp->x3E4_fighterCmdScript.x8.u = unk_struct_x18->xC;
+                fp->x3E4_fighterCmdScript.x8.u = anim_data->xC;
                 fp->x3E4_fighterCmdScript.loop_count = 0;
 
                 if (anim_start) {
@@ -1300,7 +1485,7 @@ void Fighter_ChangeMotionState(Fighter_GObj* gobj, FtMotionId msid,
                                         anim_speed,
                                         (anim_blend == -1.0f) ? 0.0f
                                         : anim_blend ? anim_blend
-                                                     : (*unk_byte_ptr)[0]);
+                                                     : (*anim_flags_ptr)[0]);
                     }
                     ftAnim_8006E9B4(gobj);
                     if (fp->x594.x0.x594_b0 != 0U) {
@@ -1321,19 +1506,19 @@ void Fighter_ChangeMotionState(Fighter_GObj* gobj, FtMotionId msid,
                         ftAnim_8006EBE8(gobj, anim_start, anim_speed,
                                         (anim_blend == -1.0f) ? 0.0f
                                         : anim_blend ? anim_blend
-                                                     : (*unk_byte_ptr)[0]);
+                                                     : (*anim_flags_ptr)[0]);
                     }
                     fp->x3E4_fighterCmdScript.timer = 0.0f;
                 }
 
                 ftAnim_8006E9B4(gobj);
-                if ((bone_index != 0) && (*unk_byte_ptr)[0] != 0U) {
-                    HSD_JObj* temp_joint = fp->parts[bone_index].x4_jobj2;
+                if ((bone_index != 0) && (*anim_flags_ptr)[0] != 0U) {
+                    HSD_JObj* interp_joint = fp->parts[bone_index].x4_jobj2;
 
-                    HSD_JObjGetTranslation(temp_joint, &translation);
+                    HSD_JObjGetTranslation(interp_joint, &translation);
                     HSD_JObjSetTranslate(fp->parts[bone_index].joint,
                                          &translation);
-                    HSD_JObjGetRotation(temp_joint, &quat);
+                    HSD_JObjGetRotation(interp_joint, &quat);
                     ftParts_JObjSetRotation(fp->parts[bone_index].joint,
                                             &quat);
                 }
@@ -1348,10 +1533,10 @@ void Fighter_ChangeMotionState(Fighter_GObj* gobj, FtMotionId msid,
                     } else if (((flags & Ft_MF_SkipAnimVel) == 0) &&
                                (fp->ground_or_air == GA_Ground))
                     {
-                        float temp_vel =
+                        float launch_vel_x =
                             fp->x6A4_transNOffset.z * fp->facing_dir;
-                        fp->self_vel.x = temp_vel;
-                        fp->gr_vel = temp_vel;
+                        fp->self_vel.x = launch_vel_x;
+                        fp->gr_vel = launch_vel_x;
                     }
                 }
 
@@ -1364,9 +1549,9 @@ void Fighter_ChangeMotionState(Fighter_GObj* gobj, FtMotionId msid,
                     } else if (((flags & Ft_MF_SkipAnimVel) == 0) &&
                                (fp->ground_or_air == GA_Ground))
                     {
-                        float temp_vel = fp->x6D8.z * fp->facing_dir;
-                        fp->self_vel.x = temp_vel;
-                        fp->gr_vel = temp_vel;
+                        float launch_vel_x = fp->x6D8.z * fp->facing_dir;
+                        fp->self_vel.x = launch_vel_x;
+                        fp->gr_vel = launch_vel_x;
                     }
                 }
                 if ((flags & Ft_MF_UpdateCmd) != 0) {
@@ -1421,6 +1606,15 @@ void Fighter_ChangeMotionState(Fighter_GObj* gobj, FtMotionId msid,
     }
 }
 
+/**
+ * @brief GObj process callback running at priority 0: hitlag freeze frames.
+ * @details Manages frame freeze during hits (both attacker and defender):
+ * - Decrements damage hitlag timers (fp->dmg.x1954 and fp->dmg.x195c_hitlag_frames).
+ * - Accepts Smash Directional Influence (SDI) inputs during hitlag frames.
+ * - On timer expiration, invokes #Fighter_8006D10C to exit hitlag and clear SDI flags.
+ * - Processes pending mushroom growth/shrink transitions (Super Mushroom / Poison Mushroom).
+ * @param gobj Pointer to fighter HSD_GObj
+ */
 void Fighter_procHitlag(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -1472,6 +1666,15 @@ void Fighter_procHitlag(Fighter_GObj* gobj)
     }
 }
 
+/**
+ * @brief GObj process callback running at priority 1: animation update tick.
+ * @details Advances the character's skeletal animation and frame timers:
+ * - Updates position delta (pos_delta = cur_pos - prev_pos).
+ * - Decrements combo/hit timer, invulnerability frames, and color animation timers.
+ * - Ticks bone animations and executes character subaction animation script commands.
+ * - Calls the current action state's animation callback (fp->anim_cb).
+ * @param gobj Pointer to fighter HSD_GObj
+ */
 void Fighter_procAnim(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -1731,6 +1934,13 @@ void Fighter_procAnim(Fighter_GObj* gobj)
     }
 }
 
+/**
+ * @brief GObj process callback running at priority 2: CPU AI decision logic.
+ * @details When the fighter is computer-controlled (ftCo_IsCpuControlled), invokes
+ * the AI decision routine (ftCo_800B3900) to evaluate target distances, select moves,
+ * and populate virtual controller stick and button inputs.
+ * @param gobj Pointer to fighter HSD_GObj
+ */
 void Fighter_procCpu(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -1739,6 +1949,16 @@ void Fighter_procCpu(Fighter_GObj* gobj)
     }
 }
 
+/**
+ * @brief Updates buffered input timers and tap detection counters.
+ * @details Increments multi-frame input buffer timers (capped at 255):
+ * - Jump input buffer timer (fp->x685, used for jump squat transitions)
+ * - Smash input timer (fp->x686, detects stick smash within tap window)
+ * - Attack/tilt input timer (fp->x687)
+ * - Side special input buffer timer (fp->x688)
+ * - Special move input buffer timer (fp->x689)
+ * @param gobj Pointer to fighter HSD_GObj
+ */
 void Fighter_UnkIncrementCounters_8006ABEC(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -1785,6 +2005,10 @@ void Fighter_UnkIncrementCounters_8006ABEC(Fighter_GObj* gobj)
         *stickY = y;                                                          \
     } while (0)
 
+/**
+ * @brief Internal helper updating controller analog stick history and thresholds.
+ * @param fp Pointer to the Fighter instance data
+ */
 static void Fighter_procInput_Inner1(Fighter* fp)
 {
     s32 temp0_loc_1;
@@ -1804,11 +2028,22 @@ static void Fighter_procInput_Inner1(Fighter* fp)
     }
 }
 
+/**
+ * @brief GObj process callback running at priority 3: controller input processing.
+ * @details Polls raw hardware controller data or simulated CPU inputs:
+ * - Updates analog stick coordinates (lstick[0] and lstick[1] history).
+ * - Updates C-stick (cstick[0]) coordinates.
+ * - Updates analog trigger values (L/R triggers).
+ * - Computes button transitions (pressed_buttons = newly pressed, released_buttons).
+ * - Detects smash stick thresholds, tap jump inputs, and L-cancel triggers.
+ * - Calls the current action state's input callback (fp->input_cb).
+ * @param gobj Pointer to fighter HSD_GObj
+ */
 void Fighter_procInput(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    float tempf1;
-    float tempf0;
+    float trigger_r;
+    float trigger_l;
 
     if (!fp->is_sleeping) {
         if (!fp->stamina_dead) {
@@ -1842,10 +2077,10 @@ void Fighter_procInput(Fighter_GObj* gobj)
                     fp->input.cstick[0].y = 0;
                 }
 
-                tempf0 = ftCo_GetCpuLTrigger(fp);
-                tempf1 = ftCo_GetCpuRTrigger(fp);
+                trigger_l = ftCo_GetCpuLTrigger(fp);
+                trigger_r = ftCo_GetCpuRTrigger(fp);
 
-                fp->input.triggers[0] = (tempf0 > tempf1) ? tempf0 : tempf1;
+                fp->input.triggers[0] = (trigger_l > trigger_r) ? trigger_l : trigger_r;
 
             } else {
                 SET_STICKS(fp->input.lstick[0].x, fp->input.lstick[0].y,
@@ -1862,10 +2097,10 @@ void Fighter_procInput(Fighter_GObj* gobj)
                     fp->input.cstick[0].y = 0;
                 }
 
-                tempf1 = HSD_PadGameStatus[fp->pad_port].nml_analogR;
-                tempf0 = HSD_PadGameStatus[fp->pad_port].nml_analogL;
+                trigger_r = HSD_PadGameStatus[fp->pad_port].nml_analogR;
+                trigger_l = HSD_PadGameStatus[fp->pad_port].nml_analogL;
 
-                fp->input.triggers[0] = (tempf0 > tempf1) ? tempf0 : tempf1;
+                fp->input.triggers[0] = (trigger_l > trigger_r) ? trigger_l : trigger_r;
             }
 
             if (ABS(fp->input.lstick[0].x) <=
@@ -2179,6 +2414,17 @@ void Fighter_procInput(Fighter_GObj* gobj)
         vecLocal->x = vecLocal->y = vecLocal->z = c;                          \
     } while (0)
 
+/**
+ * @brief GObj process callback running at priority 4: main per-frame physics & state logic.
+ * @details Executes core movement physics and timers:
+ * - Decrements ledge regrab lockout timer (fp->x2064_ledgeCooldown).
+ * - Decrements capture timer (fp->capture_timer).
+ * - Invokes action state physics callback (fp->phys_cb) to compute self-induced velocities.
+ * - Applies knockback velocity decay (air deaccel vs ground friction).
+ * - Applies shield attack knockback decay.
+ * - Integrates wind velocity offsets into current position.
+ * @param gobj Pointer to fighter HSD_GObj
+ */
 void Fighter_procUpdate(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -2466,6 +2712,13 @@ void Fighter_procUpdate(Fighter_GObj* gobj)
     }
 }
 
+/**
+ * @brief Recomputes composite transformation matrix with custom scaling.
+ * @details If custom Z-scale is active (fp->x34_scale.z != 1.0f, e.g. Flat Zone),
+ * extracts joint scale, rotation, and translation, builds an SRT matrix, inverts the
+ * joint matrix, and stores the concatenated result into fp->x44_mtx.
+ * @param gobj Pointer to fighter HSD_GObj
+ */
 void Fighter_UnkApplyTransformation_8006C0F0(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -2492,16 +2745,36 @@ void Fighter_UnkApplyTransformation_8006C0F0(Fighter_GObj* gobj)
     }
 }
 
+/**
+ * @brief Retrieves the fighter's current world-space X coordinate.
+ * @param fp Pointer to Fighter instance data
+ * @return World X coordinate
+ */
 static inline float Fighter_GetPosX(Fighter* fp)
 {
     return fp->cur_pos.x;
 }
 
+/**
+ * @brief Retrieves the fighter's current world-space Y coordinate.
+ * @param fp Pointer to Fighter instance data
+ * @return World Y coordinate
+ */
 static inline float Fighter_GetPosY(Fighter* fp)
 {
     return fp->cur_pos.y;
 }
 
+/**
+ * @brief GObj process callback running at priority 6: stage collision detection (ECB).
+ * @details Performs environment collision checks using the Environmental Collision Box (ECB):
+ * - Decrements ECB lock timer and unlocks ECB when expired.
+ * - Sets joint root translation to current position.
+ * - Executes action state map collision callback (fp->coll_cb).
+ * - Resolves ground/air state transitions, ledge grabs, ceiling hits, and wall collisions.
+ * - Validates coordinate sanity (asserting against NaN positions in debug builds).
+ * @param gobj Pointer to fighter HSD_GObj
+ */
 void Fighter_procMap(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -2544,6 +2817,12 @@ void Fighter_procMap(Fighter_GObj* gobj)
     }
 }
 
+/**
+ * @brief GObj process callback running at priority 7: inverse kinematics (IK).
+ * @details Computes procedural skeletal adjustments (via ft_80089B08) to align feet
+ * and legs with uneven or sloped terrain collision geometry.
+ * @param gobj Pointer to fighter HSD_GObj
+ */
 void Fighter_procIK(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -2552,6 +2831,13 @@ void Fighter_procIK(Fighter_GObj* gobj)
     }
 }
 
+/**
+ * @brief GObj process callback running at priority 8: accessory & item callbacks.
+ * @details Executes character-specific accessory callbacks (fp->accessory1_cb,
+ * fp->accessory2_cb, fp->accessory3_cb) to update attached items, weapons, or custom
+ * bone attachments, then synchronizes root joint translation.
+ * @param gobj Pointer to fighter HSD_GObj
+ */
 void Fighter_procAccessory(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -2578,6 +2864,16 @@ void Fighter_procAccessory(Fighter_GObj* gobj)
     }
 }
 
+/**
+ * @brief GObj process callback running at priority 9: collision position preparation.
+ * @details Prepares world-space bone coordinates for collision testing:
+ * - Flushes pending asynchronous effects (efAsync_QueueFlush).
+ * - Recomputes transformation matrix (#Fighter_UnkApplyTransformation_8006C0F0).
+ * - Invokes accessory callback 4 (fp->accessory4_cb).
+ * - Updates hurtbox world coordinates from bone transforms (ftColl_8007AE80).
+ * - Ticks accessory animations and tracks magnifying glass off-screen camera limits.
+ * @param gobj Pointer to fighter HSD_GObj
+ */
 void Fighter_procCollPos(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -2615,6 +2911,15 @@ void Fighter_procCollPos(Fighter_GObj* gobj)
     }
 }
 
+/**
+ * @brief GObj process callback running at priority 12: grab detection and resolution.
+ * @details Tests offensive grab hitboxes against opponents:
+ * - Checks grab collisions against victim hurtboxes.
+ * - On valid grab: plays grab SFX, links victim GObj (fp->victim_gobj), triggers
+ *   grabber callback (fp->grab_cb) and victim grabbed callback (fp->grabbed_cb).
+ * - Tests item grab collisions to pick up items within range (fp->target_item_gobj).
+ * @param gobj Pointer to fighter HSD_GObj
+ */
 void Fighter_procGrabColl(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -2647,6 +2952,15 @@ void Fighter_procGrabColl(Fighter_GObj* gobj)
     }
 }
 
+/**
+ * @brief GObj process callback running at priority 13: attack hitboxes and damage.
+ * @details Processes offensive hitbox interactions across all entities:
+ * - Tests active attack hitboxes against opponent hurtboxes, shields, and reflectors.
+ * - Detects clashing attacks (hitbox vs hitbox priority / damage threshold).
+ * - Calculates damage and base/scaling knockback.
+ * - Triggers hitlag on both attacker and defender, camera shake, and hit SFX.
+ * @param gobj Pointer to fighter HSD_GObj
+ */
 void Fighter_procAttackColl(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -2668,12 +2982,29 @@ void Fighter_procAttackColl(Fighter_GObj* gobj)
     }
 }
 
-void Fighter_UnkTakeDamage_8006CC30(Fighter* fp, float arg0)
+/**
+ * @brief Applies damage to a fighter and records player combat statistics.
+ * @details High-level wrapper that calls #Fighter_TakeDamage_8006CC7C to modify damage
+ * percent, then calls ftCommon_8007EA90 to log damage taken in player match records.
+ * @param fp Pointer to Fighter instance data
+ * @param damage_amount Amount of damage in percent to add
+ */
+void Fighter_UnkTakeDamage_8006CC30(Fighter* fp, float damage_amount)
 {
-    Fighter_TakeDamage_8006CC7C(fp, arg0);
-    ftCommon_8007EA90(fp, arg0);
+    Fighter_TakeDamage_8006CC7C(fp, damage_amount);
+    ftCommon_8007EA90(fp, damage_amount);
 }
 
+/**
+ * @brief Increases fighter damage percentage and updates HUD display.
+ * @details Core damage application routine:
+ * - Adds damage_amount to fp->dmg.x1830_percent.
+ * - Decrements metal health if in metal state (fp->metal_health).
+ * - Clamps damage percent to maximum 999.0%.
+ * - Syncs updated percentage to Player data structure and HUD display.
+ * @param fp Pointer to Fighter instance data
+ * @param damage_amount Amount of damage in percent to add
+ */
 void Fighter_TakeDamage_8006CC7C(Fighter* fp, float damage_amount)
 {
     if (!fp->x2226_b4 || fp->x2226_b3) {
@@ -2697,9 +3028,17 @@ void Fighter_TakeDamage_8006CC7C(Fighter* fp, float damage_amount)
     }
 }
 
-void Fighter_8006CDA4(Fighter* fp, s32 arg1)
+/**
+ * @brief Checks if damage taken causes the fighter to drop items or headgear.
+ * @details Compares a random roll against damage threshold (p_ftCommonData->x418):
+ * - If check succeeds, forces the fighter to drop their currently held light item.
+ * - If fighter is wearing a Bunny Hood (fp->x197C), drops the Bunny Hood item.
+ * @param fp Pointer to Fighter instance data
+ * @param damage_threshold Damage value threshold used for drop probability check
+ */
+void Fighter_8006CDA4(Fighter* fp, s32 damage_threshold)
 {
-    bool temp_bool;
+    bool can_drop_item;
     bool hold_item_bool = false;
     Vec3 vec;
     PAD_STACK(8);
@@ -2708,15 +3047,15 @@ void Fighter_8006CDA4(Fighter* fp, s32 arg1)
         hold_item_bool = true;
     }
 
-    temp_bool = !(fp->x2220_b3 || fp->x2220_b4 || ftCo_8008E984(fp));
+    can_drop_item = !(fp->x2220_b3 || fp->x2220_b4 || ftCo_8008E984(fp));
     vec = vec3_803B7494;
 
     if (fp->motion_id != 0x145 && (unsigned) fp->motion_id - 0x122 > 1 &&
         fp->dmg.x1860_element != HitElement_Cape && !fp->x2226_b2)
     {
         if ( ///// giant if condition
-            hold_item_bool && temp_bool &&
-            ((HSD_Randi(p_ftCommonData->x418) < arg1) ||
+            hold_item_bool && can_drop_item &&
+            ((HSD_Randi(p_ftCommonData->x418) < damage_threshold) ||
              (((it_8026B30C(fp->item_gobj) == 3) &&
                it_8026B594(fp->item_gobj)) &&
               !HSD_Randi(p_ftCommonData->x41C))))
@@ -2727,7 +3066,7 @@ void Fighter_8006CDA4(Fighter* fp, s32 arg1)
             Item_8026ABD8(fp->item_gobj, &vec, 1.0f);
         }
         if (fp->x197C) {
-            if (HSD_Randi(p_ftCommonData->x418) < arg1) {
+            if (HSD_Randi(p_ftCommonData->x418) < damage_threshold) {
                 ftCommon_8007F8E8(fp->gobj);
                 Item_8026ABD8(fp->x197C, &vec, 1.0f);
                 ftCommon_8007F9B4(fp->gobj);
@@ -2736,6 +3075,13 @@ void Fighter_8006CDA4(Fighter* fp, s32 arg1)
     }
 }
 
+/**
+ * @brief Accumulates flinch damage and triggers damage reaction effects.
+ * @details If fighter is alive (not stamina dead), adds flinch_amount to damage counter
+ * fp->dmg.x18F0 and invokes ftCo_800BFFD0 / ftCommon_8007EBAC to trigger hit reactions.
+ * @param fp Pointer to Fighter instance data
+ * @param flinch_amount Flinch/damage intensity value to accumulate
+ */
 void Fighter_8006CF5C(Fighter* fp, s32 arg1)
 {
     if (!fp->stamina_dead) {
@@ -2745,6 +3091,12 @@ void Fighter_8006CF5C(Fighter* fp, s32 arg1)
     }
 }
 
+/**
+ * @brief Flags fighter for delayed hitlag exit.
+ * @details If hitlag flag fp->x2219_b7 is active, sets fp->x221A_b1 = 1 to signal
+ * hitlag termination on the subsequent frame.
+ * @param gobj Pointer to fighter HSD_GObj
+ */
 void Fighter_UnkSetFlag_8006CFBC(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -2754,6 +3106,12 @@ void Fighter_UnkSetFlag_8006CFBC(Fighter_GObj* gobj)
     }
 }
 
+/**
+ * @brief Checks conditions and terminates hitlag freeze state.
+ * @details If hitlag flag fp->x2219_b7 is set, verifies that SDI is inactive and
+ * hitlag frames (fp->dmg.x1954) have elapsed, then calls #Fighter_8006D10C to exit hitlag.
+ * @param gobj Pointer to fighter HSD_GObj
+ */
 void Fighter_8006CFE0(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -2768,12 +3126,23 @@ void Fighter_8006CFE0(Fighter_GObj* gobj)
     }
 }
 
+/**
+ * @brief Internal helper setting the primary hitlag state flag.
+ * @param gobj Pointer to fighter HSD_GObj
+ */
 static inline void setBit(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     fp->x2219_b7 = 1;
 }
 
+/**
+ * @brief Enters hitlag state and recursively propagates hitlag to linked fighters.
+ * @details Invokes pre-hitlag callback (fp->pre_hitlag_cb), sets hitlag freeze flag
+ * (fp->x2219_b5 = 1), and recursively sets hitlag on attached entities (such as grabbed
+ * victims in fp->x1A5C).
+ * @param gobj Pointer to fighter HSD_GObj
+ */
 void Fighter_UnkRecursiveFunc_8006D044(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -2792,6 +3161,10 @@ void Fighter_UnkRecursiveFunc_8006D044(Fighter_GObj* gobj)
     }
 }
 
+/**
+ * @brief Internal helper invoking post-hitlag callback.
+ * @param fp Pointer to Fighter instance data
+ */
 static void Fighter_8006D10C_Inline2(Fighter* fp)
 {
     Fighter_GObj* gobj = fp->x1A5C;
@@ -2801,6 +3174,10 @@ static void Fighter_8006D10C_Inline2(Fighter* fp)
     }
 }
 
+/**
+ * @brief Internal helper clearing hitlag freeze flags on an individual fighter.
+ * @param gobj Pointer to fighter HSD_GObj
+ */
 static void Fighter_8006D10C_Inline1(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -2817,6 +3194,12 @@ static void Fighter_8006D10C_Inline1(Fighter_GObj* gobj)
     }
 }
 
+/**
+ * @brief Exits hitlag state and unfreezes attached fighters.
+ * @details Invokes post-hitlag callback (fp->post_hitlag_cb), clears hitlag freeze flag
+ * (fp->x2219_b5 = 0), and recursively clears hitlag on linked fighters (fp->x1A5C).
+ * @param gobj Pointer to fighter HSD_GObj
+ */
 void Fighter_8006D10C(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -2832,14 +3215,25 @@ void Fighter_8006D10C(Fighter_GObj* gobj)
     }
 }
 
+/**
+ * @brief GObj process callback running at priority 14: collision response resolution.
+ * @details Evaluates the gameplay outcome of collisions:
+ * - Shield logic: regenerates shield HP when shield is inactive; applies shield damage,
+ *   shield depletion, and shield break (launching fighter and playing shield break sound).
+ * - Hitstun calculation: converts received knockback into hitstun frames
+ *   (formula: Hitstun = knockback * 0.4 frames).
+ * - Initiates hitstun action states (Damage, DamageFly, DamageFall) or knockdown tumble.
+ * - Handles rebound/clank recoil transitions.
+ * @param gobj Pointer to fighter HSD_GObj
+ */
 void Fighter_procCollResolve(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    bool bool1 = 0;
+    bool damaged_bool = 0;
     s32 motion_state_index = fp->motion_id;
-    bool bool2 = 0;
-    bool bool3 = 0;
-    bool bool4 = 0;
+    bool shield_hit_bool = 0;
+    bool shield_broken_bool = 0;
+    bool rebound_bool = 0;
     float forceAppliedOnHit;
 
     if (!fp->is_sleeping) {
@@ -2862,7 +3256,7 @@ void Fighter_procCollResolve(Fighter_GObj* gobj)
                            p_ftCommonData->x2DC)))) +
                 p_ftCommonData->x288;
             if (fp->shield_health < 0.0f) {
-                bool3 = 1;
+                shield_broken_bool = 1;
                 fp->shield_health = p_ftCommonData->x280_unkShieldHealth;
                 /// this function is called when shield is broken
                 pl_8003E058(fp->x19BC_shieldDamageTaken3, fp->x221F_b6,
@@ -2912,12 +3306,12 @@ void Fighter_procCollResolve(Fighter_GObj* gobj)
                 }
 
                 damage_bool = fp->dmg.x183C_applied;
-                bool2 = 1;
+                shield_hit_bool = 1;
                 ftCo_80090594(fp, fp->dmg.x1860_element, damage_bool,
                               motion_state_index, ground_or_air,
                               fp->x1960_vibrateMult);
                 ftCommon_8007ED50(fp, fp->dmg.x1838_percentTemp);
-                bool1 = damage_bool;
+                damaged_bool = damage_bool;
 
             } else {
                 switch (fp->kind) {
@@ -2934,10 +3328,10 @@ void Fighter_procCollResolve(Fighter_GObj* gobj)
                 ftCo_8008E9D0(gobj);
             }
         } else if (fp->dmg.x18a0) {
-            bool1 = fp->dmg.x1840;
-            bool4 = 1;
+            damaged_bool = fp->dmg.x1840;
+            rebound_bool = 1;
         } else if (fp->x19A4) {
-            if (bool3) {
+            if (shield_broken_bool) {
                 ftCo_80098B20(gobj);
                 ft_PlaySFX(fp, 0x82, 0x7F, 0x40);
             } else {
@@ -2945,7 +3339,7 @@ void Fighter_procCollResolve(Fighter_GObj* gobj)
                     fp->shield_hit_cb(gobj);
                 }
             }
-            bool1 = fp->x19A4;
+            damaged_bool = fp->x19A4;
         } else if (fp->dmg.int_value) {
             if ((fp->dmg.x191C) && (!fp->victim_gobj) &&
                 (!fp->target_item_gobj))
@@ -2953,12 +3347,12 @@ void Fighter_procCollResolve(Fighter_GObj* gobj)
                 ftCommon_8007DB58(gobj);
                 ftCo_80099D9C(gobj);
             }
-            bool1 = fp->dmg.int_value;
+            damaged_bool = fp->dmg.int_value;
         } else if (fp->dmg.x1914) {
             if (fp->deal_dmg_cb) {
                 fp->deal_dmg_cb(gobj);
             }
-            bool1 = fp->dmg.x1914;
+            damaged_bool = fp->dmg.x1914;
             if (fp->x2070.x0.x2073 == 0x46U) {
                 ftCommon_8007EBAC(fp, 0xE, 0);
             } else {
@@ -2966,7 +3360,7 @@ void Fighter_procCollResolve(Fighter_GObj* gobj)
             }
         } else {
             if (fp->dmg.x1924) {
-                bool1 = fp->dmg.x1924;
+                damaged_bool = fp->dmg.x1924;
             } else if (fp->ReflectAttr.x1A3C_damageOver) {
                 ftCo_80098C9C(gobj);
             } else if (fp->ReflectAttr.x1A2C_reflectHitDirection) {
@@ -2991,9 +3385,9 @@ void Fighter_procCollResolve(Fighter_GObj* gobj)
         }
         ftCo_800C8D00(gobj);
 
-        if (bool1) {
+        if (damaged_bool) {
             fp->dmg.x195c_hitlag_frames = ftCommon_CalcHitlag(
-                bool1, motion_state_index, fp->x1960_vibrateMult);
+                damaged_bool, motion_state_index, fp->x1960_vibrateMult);
             if (fp->dmg.x195c_hitlag_frames < fp->x1964) {
                 fp->dmg.x195c_hitlag_frames = fp->x1964;
             }
@@ -3005,10 +3399,10 @@ void Fighter_procCollResolve(Fighter_GObj* gobj)
                         p_ftCommonData->x194_unkHitLagFrames;
                 }
                 fp->allow_sdi = 1;
-                if (bool2) {
+                if (shield_hit_bool) {
                     fp->x221A_b3 = 1;
                 }
-                if (bool4) {
+                if (rebound_bool) {
                     fp->dmg.x189C_unk_num_frames = fp->dmg.x195c_hitlag_frames;
                 }
                 if (!fp->x2219_b5) {
@@ -3076,6 +3470,13 @@ void Fighter_procCollResolve(Fighter_GObj* gobj)
     }
 }
 
+/**
+ * @brief GObj process callback running at priority 16: physical dynamics simulation.
+ * @details Executes physical bone dynamics simulation (ftCo_8009E0A8) for secondary
+ * skeletal components such as hair, capes, scarves, ties, and dangling clothing.
+ * Skipped if the fighter is sleeping or frozen in hitlag.
+ * @param gobj Pointer to fighter HSD_GObj
+ */
 void Fighter_procDynamics(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -3087,6 +3488,13 @@ void Fighter_procDynamics(Fighter_GObj* gobj)
     ftCo_8009E0A8(gobj);
 }
 
+/**
+ * @brief GObj process callback running at priority 18: camera tracking update.
+ * @details Updates stage camera bounds and viewport tracking targets (ftCommon_8008021C)
+ * and executes fighter-specific camera callback (fp->cam_cb) to ensure all active fighters
+ * remain properly framed on screen.
+ * @param gobj Pointer to fighter HSD_GObj
+ */
 void Fighter_procCamera(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -3099,6 +3507,14 @@ void Fighter_procCamera(Fighter_GObj* gobj)
     }
 }
 
+/**
+ * @brief GObj process callback running at priority 22: player state synchronization.
+ * @details Final per-frame tick for player tracking:
+ * - Syncs fighter world coordinates to player match data (Player_80032828).
+ * - Synchronizes facing direction (Player_SetFacingDirectionConditional).
+ * - Updates player movement tracking history (pl_8003FAA8).
+ * @param gobj Pointer to fighter HSD_GObj
+ */
 void Fighter_procPlayer(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -3112,6 +3528,16 @@ void Fighter_procPlayer(Fighter_GObj* gobj)
     }
 }
 
+/**
+ * @brief Destructor callback for Fighter GObj destruction and memory deallocation.
+ * @details Cleans up all resources associated with a fighter:
+ * - Calls character-specific cleanup callback (ftData_OnUserDataRemove).
+ * - Removes collision hitboxes, camera box, dynamic bones, shadow textures, and accessories.
+ * - Unreferences and removes skeleton HSD_JObj hierarchy and lights (HSD_LObj).
+ * - Returns allocated blocks to HSD_ObjAlloc memory pools (fighter_alloc_data,
+ *   dat_attrs, parts, dobj_list, x2040, x59C).
+ * @param user_data Pointer to the Fighter struct passed as GObj user data
+ */
 void Fighter_Unload_8006DABC(void* user_data)
 {
     /// @remarks This doesn't use #GET_FIGHTER, but since it appears to pass it
