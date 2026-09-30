@@ -11,14 +11,13 @@ struct ftKoopa_FighterVars {
 };
 
 union ftKoopa_MotionVars {
-    /// @todo Proper state name.
-    struct ftKoopa_State1Vars {
+    struct ftKoopa_SpecialSGrabVars {
         UNK_T x0;
         bool x4;
         UNK_T x8;
         bool xC;
-    } unk1;
-    /// @todo Possibly #ftKoopa_State1Vars.
+    } specials_cmd_grab;
+
     struct ftKoopa_SpecialSVars {
         /* fp+2340 */ bool b_held;
         /* fp+2344 */ bool x4;
@@ -28,6 +27,7 @@ union ftKoopa_MotionVars {
         /* fp+2350 */ s32 x14;
         /* fp+2354 */ s32 x18;
     } specials;
+
     struct ftKoopa_SpecialNVars {
         /* fp+2340 */ int x0;
         /* fp+2344 */ u32 x4;

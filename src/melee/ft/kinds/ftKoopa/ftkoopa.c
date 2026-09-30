@@ -440,7 +440,7 @@ void ftKp_SpecialS_80132E30(HSD_GObj* gobj)
 
     if (ftCheckThrowB4(fp)) {
         fp->facing_dir = -fp->facing_dir;
-        fp->mv.kp.unk1.xC = true;
+        fp->mv.kp.specials_cmd_grab.xC = true;
     }
 
     if (fp->cmd_vars[0] == 0) {
