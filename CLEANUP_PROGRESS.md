@@ -79,9 +79,15 @@
 ## Phase 3: SDK/Runtime — ❌ Not Started
 
 ## Phase 2: Engine (src/sysdolphin/baselib/)
-- ❌ sysdolphin/baselib/cobj.c — Camera Object (CObj) rendering and viewport parameters
+- ✅ sysdolphin/baselib/cobj.c — Camera Object (CObj) rendering and viewport parameters
 - ✅ sysdolphin/baselib/dobj.c — Display Object (DObj) node structure
 - ✅ sysdolphin/baselib/jobj.c — Joint Object (JObj) skeletal transform hierarchy
-- ❌ sysdolphin/baselib/mobj.c — Material Object (MObj) textures and shaders
-- ❌ sysdolphin/baselib/pobj.c — Polygon Object (PObj) mesh and vertex data
-- ❌ sysdolphin/baselib/aobj.c — Animation Object (AObj) track interpolation
+- ✅ sysdolphin/baselib/mobj.c — Material Object (MObj) textures and shaders
+- ✅ sysdolphin/baselib/pobj.c — Polygon Object (PObj) mesh and vertex data
+- ✅ sysdolphin/baselib/aobj.c — Animation Object (AObj) track interpolation
+- ❌ sysdolphin/baselib/tobj.c — Texture Object (TObj) texture and TEV setup
+- ❌ sysdolphin/baselib/lobj.c — Light Object (LObj) lighting system
+- ❌ sysdolphin/baselib/fobj.c — Frame Object (FObj) keyframe tracks
+- ❌ sysdolphin/baselib/displayfunc.c — Display dispatch and render passes
+- ❌ sysdolphin/baselib/controller.c — GameCube controller input polling
+- ❌ sysdolphin/baselib/gobj.c — Game Object (GObj) entity base class
