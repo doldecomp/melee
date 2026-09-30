@@ -1,3 +1,10 @@
+/**
+ * @file itspawn.c
+ * @brief Item spawning system
+ * @details Handles spawning item entities into the world, resolving spawn probabilities, stage drops, and container interactions.
+ * Module prefix: it (Item)
+ */
+
 #include "itspawn.h"
 
 #include <Runtime/platform.h>
@@ -35,7 +42,10 @@ static void sdata2_order(void)
 }
 #endif
 
-/// Only called by lbSnap_8001DC0C (a snapshot-related function)
+/**
+ * @brief Constructs a bitfield of active item spawn kinds, used by snapshot functions.
+ * @param arg_struct Pointer to the bitfield argument struct
+ */
 void it_8026C47C(struct it_8026C47C_arg0_t* arg_struct)
 {
     ItemKind it_kind;
@@ -69,7 +79,14 @@ void it_8026C47C(struct it_8026C47C_arg0_t* arg_struct)
     }
 }
 
-/// bisection search in the item table for a given value
+/**
+ * @brief Bisection search in the item table for a given random weight value
+ * @param val The generated random weight value
+ * @param table The ItemPickTable to search
+ * @param lo Lower bound index
+ * @param hi Upper bound index
+ * @return The index of the selected item
+ */
 static int bisectValue(int val, ItemPickTable* table, int lo, int hi)
 {
     int mid;
@@ -92,51 +109,64 @@ static int bisectValue(int val, ItemPickTable* table, int lo, int hi)
     }
 }
 
+/**
+ * @brief Randomly selects an item kind from an ItemPickTable based on weighted values.
+ * @param table Pointer to the ItemPickTable
+ * @return The chosen ItemKind
+ */
 ItemKind it_8026C65C(ItemPickTable* table)
 {
-    int temp_r6 = table->x8;
-    return table->x4[bisectValue(HSD_Randi(temp_r6), table, 0, table->size)];
+    int rand_max = table->x8;
+    return table->x4[bisectValue(HSD_Randi(rand_max), table, 0, table->size)];
 }
 
+/**
+ * @brief Evaluates if the global item spawn limit or Master Ball restriction is met.
+ * @return true if restricted (cannot spawn), false otherwise
+ */
 bool it_8026C704(void)
 {
-    bool result = false;
+    bool is_restricted = false;
     if (Item_804A0C64.x1C >= Item_804A0C64.x20 || !it_8026D324(It_Kind_M_Ball))
     {
-        result = true;
+        is_restricted = true;
     }
-    return result;
+    return is_restricted;
 }
 
-/// Decides item kind for spawned items - not sure in which context (i.e from
-/// pokeballs, from capsules, thin air, etc.)
+/**
+ * @brief Selects an item kind to spawn from a table, substituting Master Balls if restricted.
+ * @param table Pointer to the ItemPickTable
+ * @return The chosen ItemKind
+ */
 ItemKind it_8026C75C(ItemPickTable* table)
 {
-    bool chk1;
-    int saved;
-    bool chk2;
+    bool is_m_ball_restricted;
+    int saved_total_weight;
+    bool is_m_ball_replaced;
     ItemKind ret;
     ItemKind kind;
     ItemPickTable* tbl = table;
     PAD_STACK(16);
 
-    chk1 = false;
+    is_m_ball_restricted = false;
     if (Item_804A0C64.x1C >= Item_804A0C64.x20 || !it_8026D324(It_Kind_M_Ball))
     {
-        chk1 = true;
+        is_m_ball_restricted = true;
     }
-    chk2 = false;
+    is_m_ball_replaced = false;
     if (tbl->x8 == 0) {
         return -1;
     }
-    if (chk1) {
+    if (is_m_ball_restricted) {
         if (tbl->x4[tbl->size - 1] == It_Kind_M_Ball) {
             int i_last = tbl->size - 1;
             if (i_last < 1) {
                 return -1;
             }
-            saved = tbl->x8;
-            chk2 = true;
+            saved_total_weight = tbl->x8;
+            is_m_ball_replaced = true;
+            // Temporarily exclude the Master Ball by narrowing the table bounds
             tbl->x8 = tbl->xC[i_last];
             tbl->size--;
         }
@@ -144,8 +174,9 @@ ItemKind it_8026C75C(ItemPickTable* table)
     kind = it_8026C65C(tbl);
 
     ret = kind;
-    if (chk1 && chk2) {
-        tbl->x8 = saved;
+    if (is_m_ball_restricted && is_m_ball_replaced) {
+        // Restore original table size and total weight
+        tbl->x8 = saved_total_weight;
         tbl->size++;
         if (kind == It_Kind_M_Ball) {
             ret = -1;
@@ -154,35 +185,35 @@ ItemKind it_8026C75C(ItemPickTable* table)
     return ret;
 }
 
-static inline void it_8026C88C_inline(RandomItemSpawner* alloc)
+static inline void it_8026C88C_inline(RandomItemSpawner* spawner)
 {
     Vec3* pos;
-    s32 chk;
-    Item_GObj* spawn_gobj;
+    s32 is_valid_pos;
+    Item_GObj* item_gobj;
     SpawnItem spawn;
     if (db_AreItemSpawnsEnabled() != 0U) {
-        alloc->x0--;
-        if (alloc->x0 == 0) {
-            spawn.kind = it_8026C75C(&alloc->x4);
+        spawner->x0--;
+        if (spawner->x0 == 0) {
+            spawn.kind = it_8026C75C(&spawner->x4);
             if ((s32) spawn.kind != -1) {
                 pos = &spawn.prev_pos;
                 if (it_8026CB3C(pos)) {
                     spawn.pos = *pos;
                     spawn.facing_dir = it_8026B684(pos);
-                    chk = 1;
+                    is_valid_pos = 1;
                     spawn.x3C_damage = 0;
                     spawn.vel.x = spawn.vel.y = spawn.vel.z = 0.0F;
                     spawn.x0_parent_gobj = NULL;
                     spawn.x4_parent_gobj2 = spawn.x0_parent_gobj;
-                    spawn.x44_flag.x0.b0 = chk;
+                    spawn.x44_flag.x0.b0 = is_valid_pos;
                     spawn.x40 = 0;
                 } else {
-                    chk = false;
+                    is_valid_pos = false;
                 }
-                if (chk) {
-                    spawn_gobj = Item_80268B18(&spawn);
-                    if (spawn_gobj != NULL) {
-                        efSync_Spawn(0x420, spawn_gobj, pos);
+                if (is_valid_pos) {
+                    item_gobj = Item_80268B18(&spawn);
+                    if (item_gobj != NULL) {
+                        efSync_Spawn(0x420, item_gobj, pos);
                         it_80274ED8();
                     }
                 }
@@ -191,29 +222,41 @@ static inline void it_8026C88C_inline(RandomItemSpawner* alloc)
                 s32* range = &it_804D6D28->xFC[gm_8016AE80() * 2];
                 f32 randf = HSD_Randf();
                 f32 diff = range[1] - range[0];
-                alloc->x0 = diff * randf + range[0];
-                alloc->x0 *= Ground_801C2AE8(Stage_80225194());
+                spawner->x0 = diff * randf + range[0];
+                spawner->x0 *= Ground_801C2AE8(Stage_80225194());
             }
         }
     }
 }
 
+/**
+ * @brief Process callback that handles continuous random item spawning during a match.
+ * @param gobj The Random Item Spawner GObj
+ */
 void fn_8026C88C(HSD_GObj* gobj)
 {
-    RandomItemSpawner* alloc = &it_804A0E30;
-    it_8026C88C_inline(alloc);
+    RandomItemSpawner* spawner = &it_804A0E30;
+    it_8026C88C_inline(spawner);
 }
 
-void it_8026CA4C(ItemPickTable* alloc, s32* arg1, u64 arg2, s32 arg3, f32 arg4)
+/**
+ * @brief Sums up total item spawn weights from stage info for a specific item pool.
+ * @param alloc Pointer to the ItemPickTable to store the sum
+ * @param stage_info Pointer to stage item frequency array
+ * @param allowed_mask Bitmask of allowed items
+ * @param start_idx Index to start summing from
+ * @param weight Base weight multiplier
+ */
+void it_8026CA4C(ItemPickTable* alloc, s32* stage_info, u64 allowed_mask, s32 start_idx, f32 weight)
 {
-    u64 mask = arg2;
-    s32* p = arg1 + arg3;
-    s32 i = arg3;
+    u64 mask = allowed_mask;
+    s32* p = stage_info + start_idx;
+    s32 i = start_idx;
     s32 sum = 0;
 
     while (i < It_Kind_Common_End) {
         if (mask & 1) {
-            sum += arg4 * *p + 0.99f;
+            sum += weight * *p + 0.99f;
         }
         p++;
         i++;
@@ -222,6 +265,11 @@ void it_8026CA4C(ItemPickTable* alloc, s32* arg1, u64 arg2, s32 arg3, f32 arg4)
     alloc->x8 = sum;
 }
 
+/**
+ * @brief Verifies if a given spawn position is valid (within stage bounds and not colliding).
+ * @param vec Pointer to the 3D spawn position vector
+ * @return true if the position is valid, false otherwise
+ */
 bool it_8026CB3C(Vec3* vec)
 {
     if (!Stage_80224FDC(vec)) {
@@ -234,8 +282,13 @@ bool it_8026CB3C(Vec3* vec)
     return true;
 }
 
-/// Builds some structs for items
-void it_8026CB9C(s32* counts, u64 mask, f32 weight)
+/**
+ * @brief Builds the common item spawn probability table for random stage drops.
+ * @param stage_info Pointer to the stage item counts/frequencies
+ * @param allowed_mask Bitmask of allowed items
+ * @param weight Base weight multiplier
+ */
+void it_8026CB9C(s32* stage_info, u64 allowed_mask, f32 weight)
 {
     RandomItemSpawner* spawner = &it_804A0E30;
     u8** item_kinds;
@@ -248,31 +301,31 @@ void it_8026CB9C(s32* counts, u64 mask, f32 weight)
     s32* p2;
     s32 cumulative;
     s32 idx;
-    u64 backup;
+    u64 backup_mask;
 
-    backup = mask;
-    p = counts;
+    backup_mask = allowed_mask;
+    p = stage_info;
     it_kind = 0;
     cnt = 0;
     while (it_kind < It_Kind_Common_End) {
-        if ((mask & 1) && *p != 0) {
+        if ((allowed_mask & 1) && *p != 0) {
             cnt++;
         }
         p++;
         it_kind++;
-        mask >>= 1;
+        allowed_mask >>= 1;
     }
     spawner->x4.size = cnt;
     *(item_kinds = &spawner->x4.x4) = HSD_MemAlloc(cnt * 4);
     *(weights = &spawner->x4.xC) = HSD_MemAlloc(cnt * 4);
 
     idx = (cnt2 = 0);
-    mask = backup;
-    p2 = counts;
+    allowed_mask = backup_mask;
+    p2 = stage_info;
     it_kind2 = 0;
     cumulative = 0;
     while (it_kind2 < It_Kind_Common_End) {
-        if ((mask & 1) && *p2 != 0) {
+        if ((allowed_mask & 1) && *p2 != 0) {
             (*item_kinds)[cnt2] = it_kind2;
             (*weights)[idx] = cumulative;
             cnt2++;
@@ -281,11 +334,17 @@ void it_8026CB9C(s32* counts, u64 mask, f32 weight)
         }
         p2++;
         it_kind2++;
-        mask >>= 1;
+        allowed_mask >>= 1;
     }
 }
 
-void it_8026CD50(s32* counts, u64 mask, f32 weight)
+/**
+ * @brief Builds the container item spawn probability table (e.g. for capsules/crates).
+ * @param stage_info Pointer to the stage item counts/frequencies
+ * @param allowed_mask Bitmask of allowed items
+ * @param weight Base weight multiplier
+ */
+void it_8026CD50(s32* stage_info, u64 allowed_mask, f32 weight)
 {
 #ifdef MUST_MATCH
     /// @todo #it_804A0E50 immediately follows #it_804A0E30; the original
@@ -302,19 +361,19 @@ void it_8026CD50(s32* counts, u64 mask, f32 weight)
     s32 idx;
     u16** weights;
     s32 cumulative;
-    u64 backup;
+    u64 backup_mask;
 
-    backup = mask;
-    p = counts + It_Kind_Container_End;
+    backup_mask = allowed_mask;
+    p = stage_info + It_Kind_Container_End;
     cnt = 0;
     it_kind = It_Kind_Container_End;
     while (it_kind < It_Kind_Common_End) {
-        if ((mask & 1) && *p != 0) {
+        if ((allowed_mask & 1) && *p != 0) {
             cnt++;
         }
         p++;
         it_kind++;
-        mask >>= 1;
+        allowed_mask >>= 1;
     }
 #ifdef MUST_MATCH
     ((ItemPickTable*) (spawner + 1))->size = cnt;
@@ -329,12 +388,12 @@ void it_8026CD50(s32* counts, u64 mask, f32 weight)
 #endif
 
     idx = (cnt2 = 0);
-    mask = backup;
-    p2 = counts + It_Kind_Container_End;
+    allowed_mask = backup_mask;
+    p2 = stage_info + It_Kind_Container_End;
     cumulative = 0;
     it_kind2 = It_Kind_Container_End;
     while (it_kind2 < It_Kind_Common_End) {
-        if ((mask & 1) && *p2 != 0) {
+        if ((allowed_mask & 1) && *p2 != 0) {
             (*item_kinds)[cnt2] = it_kind2;
             (*weights)[idx] = cumulative;
             cnt2++;
@@ -343,11 +402,13 @@ void it_8026CD50(s32* counts, u64 mask, f32 weight)
         }
         p2++;
         it_kind2++;
-        mask >>= 1;
+        allowed_mask >>= 1;
     }
 }
 
-/// Builds the monster-item weighted-pick table (it_804A0E60)
+/**
+ * @brief Builds the monster-item weighted-pick table (it_804A0E60)
+ */
 void it_8026CF04(void)
 {
     ItemCommonData* item_common;
@@ -431,6 +492,9 @@ static inline void it_8026D018_inline3(f32 randf, const s32* range)
     it_804A0E30.x0 *= Ground_801C2AE8(Stage_80225194());
 }
 
+/**
+ * @brief Initializes the stage's random item spawner and its associated tables.
+ */
 void it_8026D018(void)
 {
     if (!gm_8016B238() && (gm_8016AE80() != -1)) {
@@ -445,7 +509,12 @@ void it_8026D018(void)
     }
 }
 
-/// Spawn item of specified kind at specified position (but no z-offset)
+/**
+ * @brief Directly spawns an item of a specified kind at a given position.
+ * @param pos Pointer to the 3D position vector
+ * @param kind The ItemKind to spawn
+ * @return true if spawned successfully, false if limits were exceeded
+ */
 bool it_8026D258(Vec3* pos, ItemKind kind)
 {
     SpawnItem spawn;
@@ -472,20 +541,29 @@ bool it_8026D258(Vec3* pos, ItemKind kind)
     return item_spawn_chk;
 }
 
+/**
+ * @brief Checks if a specific item kind is allowed to spawn on the current stage/settings.
+ * @param kind The ItemKind to check
+ * @return true if allowed, false otherwise
+ */
 bool it_8026D324(ItemKind kind)
 {
-    u64 temp_r29 = it_804A0E30.x18;
-    s32* temp_r30 = Ground_801C2AD8();
-    s32 temp_r3 = gm_8016AE80();
-    if (temp_r29 == 0 || temp_r30 == NULL || temp_r3 == -1) {
+    u64 stage_mask = it_804A0E30.x18;
+    s32* stage_info = Ground_801C2AD8();
+    s32 item_switch = gm_8016AE80();
+    if (stage_mask == 0 || stage_info == NULL || item_switch == -1) {
         return false;
     }
-    if (!(temp_r29 >> kind & 1)) {
+    if (!(stage_mask >> kind & 1)) {
         return false;
     }
     return true;
 }
 
+/**
+ * @brief Checks if any healing item (Heart Container, Maxim Tomato, Food) is allowed to spawn.
+ * @return true if at least one healing item is allowed, false otherwise
+ */
 bool it_8026D3CC(void)
 {
     bool result = it_8026D324(It_Kind_Heart);
