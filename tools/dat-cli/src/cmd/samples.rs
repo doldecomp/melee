@@ -181,6 +181,11 @@ fn types(args: TypesArgs) -> Result<()> {
         for (name, _) in archive.named_publics() {
             let name = String::from_utf8_lossy(name);
             if let Some(&ty) = project.root_types.get(name.as_ref()) {
+                let count = project
+                    .symbols
+                    .lookup(&name, &args.archive)
+                    .and_then(|e| e.count);
+                text += &format!("count {count:?}\n");
                 text += &format!(
                     "root {name}: {}\n",
                     renderer.declare(Some(ty), "")
