@@ -1,3 +1,10 @@
+/**
+ * @file cobj.c
+ * @brief Camera Object (CObj) subsystem for SysDolphin
+ * @details Controls viewport projection matrices (perspective/orthographic), 
+ * view matrices (eye, look-at, up), scissor regions, fog settings, and screen clear (EraseColor).
+ * Used for the main game camera and HUD cameras.
+ */
 #include "cobj.h"
 
 #include <math.h>
@@ -25,12 +32,20 @@ static HSD_CObj* current;
 static int CObjInit(HSD_Class* o);
 static int CObjLoad(HSD_CObj* cobj, HSD_CObjDesc* cobjdesc);
 static void CObjInfoInit(void);
-static void CObjUpdateFunc(void* obj, int type, HSD_ObjData* val);
+static void CObjUpdateFunc(void* cobj_ptr, int prop_type, HSD_ObjData* val);
 static void CObjRelease(HSD_Class* o);
 static void CObjAmnesia(HSD_ClassInfo* info);
 
 HSD_CObjInfo hsdCObj = { CObjInfoInit };
 
+/**
+ * @brief Clears the screen/framebuffer using the camera's clipping bounds
+ * @details This function is used to clear the GX framebuffer before rendering a new frame in Melee.
+ * @param cobj The camera object defining the bounds
+ * @param enable_color Flag to clear the color buffer
+ * @param enable_alpha Flag to clear the alpha buffer
+ * @param enable_depth Flag to clear the depth buffer
+ */
 void HSD_CObjEraseScreen(HSD_CObj* cobj, s32 enable_color, s32 enable_alpha,
                          s32 enable_depth)
 {
@@ -72,130 +87,12 @@ void HSD_CObjEraseScreen(HSD_CObj* cobj, s32 enable_color, s32 enable_alpha,
                   enable_color, enable_alpha, enable_depth);
 }
 
-void HSD_CObjRemoveAnimByFlags(HSD_CObj* cobj, u32 flags)
-{
-    HSD_WObj* wobj;
-
-    if (cobj == NULL) {
-        return;
-    }
-
-    HSD_AObjRemove(cobj->aobj);
-    cobj->aobj = NULL;
-    wobj = HSD_CObjGetEyePositionWObj(cobj);
-    HSD_WObjRemoveAnim(wobj);
-    wobj = HSD_CObjGetInterestWObj(cobj);
-    HSD_WObjRemoveAnim(wobj);
-}
-
-void HSD_CObjRemoveAnim(HSD_CObj* cobj)
-{
-    if (cobj == NULL) {
-        return;
-    }
-
-    HSD_CObjRemoveAnimByFlags(cobj, 0x7FF);
-}
-
-void HSD_CObjAddAnim(HSD_CObj* cobj, HSD_CameraAnim* canim)
-{
-    if (cobj == NULL) {
-        return;
-    }
-
-    if (canim == NULL) {
-        return;
-    }
-
-    if (cobj->aobj != NULL) {
-        HSD_AObjRemove(cobj->aobj);
-    }
-    cobj->aobj = HSD_AObjLoadDesc(canim->aobjdesc);
-    HSD_WObjAddAnim(HSD_CObjGetEyePositionWObj(cobj), canim->eye_anim);
-    HSD_WObjAddAnim(HSD_CObjGetInterestWObj(cobj), canim->interest_anim);
-}
-
-static void CObjUpdateFunc(void* obj, int type, HSD_ObjData* val)
-{
-    HSD_CObj* cobj = obj;
-    Vec3 vec;
-
-    if (cobj == NULL) {
-        return;
-    }
-
-    switch (type) {
-    case 1:
-        HSD_CObjGetEyePosition(cobj, &vec);
-        vec.x = val->fv;
-        HSD_CObjSetEyePosition(cobj, &vec);
-        break;
-    case 2:
-        HSD_CObjGetEyePosition(cobj, &vec);
-        vec.y = val->fv;
-        HSD_CObjSetEyePosition(cobj, &vec);
-        break;
-    case 3:
-        HSD_CObjGetEyePosition(cobj, &vec);
-        vec.z = val->fv;
-        HSD_CObjSetEyePosition(cobj, &vec);
-        break;
-    case 5:
-        HSD_CObjGetInterest(cobj, &vec);
-        vec.x = val->fv;
-        HSD_CObjSetInterest(cobj, &vec);
-        break;
-    case 6:
-        HSD_CObjGetInterest(cobj, &vec);
-        vec.x = val->fv;
-        HSD_CObjSetInterest(cobj, &vec);
-        break;
-    case 7:
-        HSD_CObjGetInterest(cobj, &vec);
-        vec.x = val->fv;
-        HSD_CObjSetInterest(cobj, &vec);
-        break;
-    case 9:
-        HSD_CObjSetRoll(cobj, val->fv);
-        break;
-    case 10:
-        HSD_CObjSetFov(cobj, val->fv);
-        break;
-    case 11:
-        HSD_CObjSetNear(cobj, val->fv);
-        break;
-    case 12:
-        HSD_CObjSetFar(cobj, val->fv);
-        break;
-    }
-}
-
-void HSD_CObjAnim(HSD_CObj* cobj)
-{
-    if (cobj == NULL) {
-        return;
-    }
-
-    HSD_AObjInterpretAnim(cobj->aobj, cobj, CObjUpdateFunc);
-    HSD_WObjInterpretAnim(cobj->eyepos);
-    HSD_WObjInterpretAnim(cobj->interest);
-}
-
-void HSD_CObjReqAnim(HSD_CObj* cobj, float startframe)
-{
-    if (cobj == NULL) {
-        return;
-    }
-
-    if (cobj == NULL) {
-        return;
-    }
-
-    HSD_AObjReqAnim(cobj->aobj, startframe);
-    HSD_WObjReqAnim(cobj->eyepos, startframe);
-    HSD_WObjReqAnim(cobj->interest, startframe);
-}
-
+/**
+ * @brief Handles operations for makeProjectionMtx
+ * @param cobj
+ * @param mtx
+ * @return GXProjectionType
+ */
 GXProjectionType makeProjectionMtx(HSD_CObj* cobj, Mtx44 mtx)
 {
     GXProjectionType projection_type;
@@ -225,6 +122,11 @@ GXProjectionType makeProjectionMtx(HSD_CObj* cobj, Mtx44 mtx)
     return projection_type;
 }
 
+/**
+ * @brief Initializes operations for setupOffscreenCamera
+ * @param cobj
+ * @return static bool
+ */
 static bool setupOffscreenCamera(HSD_CObj* cobj)
 {
     Mtx44 mtx;
@@ -239,6 +141,11 @@ static bool setupOffscreenCamera(HSD_CObj* cobj)
     return true;
 }
 
+/**
+ * @brief Initializes operations for setupNormalCamera
+ * @param cobj
+ * @return static bool
+ */
 static bool setupNormalCamera(HSD_CObj* cobj)
 {
     GXProjectionType projection_type;
@@ -289,6 +196,11 @@ static bool setupNormalCamera(HSD_CObj* cobj)
     return true;
 }
 
+/**
+ * @brief Initializes operations for setupTopHalfCamera
+ * @param cobj
+ * @return static bool
+ */
 static bool setupTopHalfCamera(HSD_CObj* cobj)
 {
     GXProjectionType projection_type;
@@ -374,6 +286,11 @@ static bool setupTopHalfCamera(HSD_CObj* cobj)
     return true;
 }
 
+/**
+ * @brief Initializes operations for setupBottomHalfCamera
+ * @param cobj
+ * @return static bool
+ */
 static bool setupBottomHalfCamera(HSD_CObj* cobj)
 {
     GXProjectionType projection_type;
@@ -460,24 +377,12 @@ static bool setupBottomHalfCamera(HSD_CObj* cobj)
     return true;
 }
 
-void HSD_CObjSetupViewingMtx(HSD_CObj* cobj)
-{
-    Vec3 eyepos;
-    Vec3 up_vec;
-    Vec3 interest;
-
-    if (!(cobj->flags & 2) && HSD_CObjMtxIsDirty(cobj)) {
-        HSD_CObjGetEyePosition(cobj, &eyepos);
-        HSD_CObjGetUpVector(cobj, &up_vec);
-        HSD_CObjGetInterest(cobj, &interest);
-        C_MTXLookAt(cobj->view_mtx, &eyepos, &up_vec, &interest);
-        HSD_WObjClearFlags(cobj->eyepos, 2);
-        HSD_WObjClearFlags(cobj->interest, 2);
-        HSD_CObjClearFlags(cobj, 0x40000000);
-        HSD_CObjSetFlags(cobj, 0x80000000);
-    }
-}
-
+/**
+ * @brief Sets this camera as the active GX rendering camera
+ * @details Computes and applies the projection matrix and modelview matrices for rendering.
+ * @param cobj Camera object
+ * @return true if successfully activated
+ */
 bool HSD_CObjSetCurrent(HSD_CObj* cobj)
 {
     HSD_RenderPass render_pass;
@@ -514,60 +419,12 @@ bool HSD_CObjSetCurrent(HSD_CObj* cobj)
     }
 }
 
-void HSD_CObjEndCurrent(void)
-{
-    _HSD_ZListSort();
-    _HSD_ZListDisp();
-}
-
-HSD_WObj* HSD_CObjGetInterestWObj(HSD_CObj* cobj)
-{
-    HSD_ASSERT(661, cobj);
-    return cobj->interest;
-}
-
-void HSD_CObjSetInterestWObj(HSD_CObj* cobj, HSD_WObj* interest)
-{
-    HSD_ASSERT(672, cobj);
-    cobj->interest = interest;
-}
-
-HSD_WObj* HSD_CObjGetEyePositionWObj(HSD_CObj* cobj)
-{
-    HSD_ASSERT(685, cobj);
-    return cobj->eyepos;
-}
-
-void HSD_CObjSetEyePositionWObj(HSD_CObj* cobj, HSD_WObj* eyepos)
-{
-    HSD_ASSERT(696, cobj);
-    cobj->eyepos = eyepos;
-}
-
-void HSD_CObjGetInterest(HSD_CObj* cobj, Vec3* interest)
-{
-    HSD_ASSERT(709, cobj);
-    HSD_WObjGetPosition(HSD_CObjGetInterestWObj(cobj), interest);
-}
-
-void HSD_CObjSetInterest(HSD_CObj* cobj, Vec3* interest)
-{
-    HSD_ASSERT(721, cobj);
-    HSD_WObjSetPosition(HSD_CObjGetInterestWObj(cobj), interest);
-}
-
-void HSD_CObjGetEyePosition(HSD_CObj* cobj, Vec3* position)
-{
-    HSD_ASSERT(733, cobj);
-    HSD_WObjGetPosition(HSD_CObjGetEyePositionWObj(cobj), position);
-}
-
-void HSD_CObjSetEyePosition(HSD_CObj* cobj, Vec3* position)
-{
-    HSD_ASSERT(745, cobj);
-    HSD_WObjSetPosition(HSD_CObjGetEyePositionWObj(cobj), position);
-}
-
+/**
+ * @brief Retrieves operations for HSD_CObjGetEyeVector
+ * @param cobj
+ * @param eye
+ * @return int
+ */
 int HSD_CObjGetEyeVector(HSD_CObj* cobj, Vec3* eye)
 {
     Vec3 eyepos;
@@ -589,6 +446,11 @@ int HSD_CObjGetEyeVector(HSD_CObj* cobj, Vec3* eye)
     return -1;
 }
 
+/**
+ * @brief Retrieves operations for HSD_CObjGetEyeDistance
+ * @param cobj
+ * @return float
+ */
 float HSD_CObjGetEyeDistance(HSD_CObj* cobj)
 {
     Vec3 position;
@@ -610,6 +472,12 @@ static Vec3 orig = { 0.0F, 0.0F, 0.0F };
 static Vec3 uy = { 0.0F, 1.0F, 0.0F };
 static Vec3 uy2 = { 0.0F, 1.0F, 0.0F };
 
+/**
+ * @brief Handles operations for upvec2roll
+ * @param cobj
+ * @param up
+ * @return static float
+ */
 static float upvec2roll(HSD_CObj* cobj, Vec3* up)
 {
     Vec3 v;
@@ -647,6 +515,13 @@ static inline f64 vec_get_abs_y(Vec3* v)
     return fabsf(v->y);
 }
 
+/**
+ * @brief Handles operations for roll2upvec
+ * @param cobj
+ * @param up
+ * @param roll
+ * @return static int
+ */
 static int roll2upvec(HSD_CObj* cobj, Vec3* up, float roll)
 {
     int res;
@@ -679,6 +554,12 @@ static inline f32 cobj_get_up_x(Vec3* up)
     return up->x;
 }
 
+/**
+ * @brief Retrieves operations for HSD_CObjGetUpVector
+ * @param cobj
+ * @param up
+ * @return int
+ */
 int HSD_CObjGetUpVector(HSD_CObj* cobj, Vec3* up)
 {
     if (cobj != NULL && up != NULL) {
@@ -698,30 +579,12 @@ int HSD_CObjGetUpVector(HSD_CObj* cobj, Vec3* up)
     return -1;
 }
 
-void HSD_CObjSetUpVector(HSD_CObj* cobj, Vec3* up)
-{
-    Vec3 v;
-    if (!cobj || !up) {
-        return;
-    }
-    if ((cobj->flags & 1) != 0) {
-        if (vec_normalize_check(up, &v)) {
-            up = &uy2;
-        } else {
-            up = &v;
-        }
-
-        if (cobj->u.up.x != cobj_get_up_x(up) || cobj->u.up.y != up->y ||
-            cobj->u.up.z != up->z)
-        {
-            HSD_CObjSetMtxDirty(cobj);
-        }
-        cobj->u.up = *up;
-    } else {
-        HSD_CObjSetRoll(cobj, upvec2roll(cobj, up));
-    }
-}
-
+/**
+ * @brief Retrieves operations for HSD_CObjGetLeftVector
+ * @param cobj
+ * @param left
+ * @return int
+ */
 int HSD_CObjGetLeftVector(HSD_CObj* cobj, Vec3* left)
 {
     Vec3 eye;
@@ -745,11 +608,11 @@ int HSD_CObjGetLeftVector(HSD_CObj* cobj, Vec3* left)
     return -1;
 }
 
-void HSD_CObjSetMtxDirty(HSD_CObj* cobj)
-{
-    cobj->flags |= (1 << 30) | (1 << 31);
-}
-
+/**
+ * @brief Handles operations for HSD_CObjMtxIsDirty
+ * @param cobj
+ * @return bool
+ */
 bool HSD_CObjMtxIsDirty(HSD_CObj* cobj)
 {
     return (cobj->flags & (1 << 30)) ||
@@ -767,11 +630,11 @@ static inline int get_up_vector_for_viewing_mtx(HSD_CObj* cobj, Vec3* up)
     return get_up_vector_for_viewing_mtx_inner(cobj, up);
 }
 
-void HSD_CObjGetViewingMtx(HSD_CObj* cobj, Mtx mtx)
-{
-    PSMTXCopy(HSD_CObjGetViewingMtxPtr(cobj), mtx);
-}
-
+/**
+ * @brief Retrieves operations for HSD_CObjGetInvViewingMtxPtrDirect
+ * @param cobj
+ * @return MtxPtr
+ */
 MtxPtr HSD_CObjGetInvViewingMtxPtrDirect(HSD_CObj* cobj)
 {
     if (cobj->flags & (1 << 31)) {
@@ -784,6 +647,11 @@ MtxPtr HSD_CObjGetInvViewingMtxPtrDirect(HSD_CObj* cobj)
     return *cobj->proj_mtx;
 }
 
+/**
+ * @brief Retrieves operations for HSD_CObjGetViewingMtxPtr
+ * @param cobj
+ * @return MtxPtr
+ */
 MtxPtr HSD_CObjGetViewingMtxPtr(HSD_CObj* cobj)
 {
     Vec3 interest;
@@ -804,6 +672,11 @@ MtxPtr HSD_CObjGetViewingMtxPtr(HSD_CObj* cobj)
     return HSD_CObjGetViewingMtxPtrDirect(cobj);
 }
 
+/**
+ * @brief Retrieves operations for HSD_CObjGetInvViewingMtxPtr
+ * @param cobj
+ * @return MtxPtr
+ */
 MtxPtr HSD_CObjGetInvViewingMtxPtr(HSD_CObj* cobj)
 {
     Vec3 interest;
@@ -824,25 +697,11 @@ MtxPtr HSD_CObjGetInvViewingMtxPtr(HSD_CObj* cobj)
     return HSD_CObjGetInvViewingMtxPtrDirect(cobj);
 }
 
-void HSD_CObjSetRoll(HSD_CObj* cobj, float roll)
-{
-    Vec3 up;
-
-    if (!cobj) {
-        return;
-    }
-
-    if ((cobj->flags & 1) != 0) {
-        roll2upvec(cobj, &up, roll);
-        HSD_CObjSetUpVector(cobj, &up);
-    } else {
-        if (cobj->u.roll != roll) {
-            cobj->flags |= 0xC0000000;
-        }
-        cobj->u.roll = roll;
-    }
-}
-
+/**
+ * @brief Retrieves operations for HSD_CObjGetFov
+ * @param cobj
+ * @return float
+ */
 float HSD_CObjGetFov(HSD_CObj* cobj)
 {
     if (cobj == NULL || cobj->projection_type != 1) {
@@ -851,14 +710,11 @@ float HSD_CObjGetFov(HSD_CObj* cobj)
     return cobj->projection_param.perspective.fov;
 }
 
-void HSD_CObjSetFov(HSD_CObj* cobj, float fov)
-{
-    if (cobj == NULL || cobj->projection_type != 1) {
-        return;
-    }
-    cobj->projection_param.perspective.fov = fov;
-}
-
+/**
+ * @brief Retrieves operations for HSD_CObjGetAspect
+ * @param cobj
+ * @return float
+ */
 float HSD_CObjGetAspect(HSD_CObj* cobj)
 {
     if (cobj == NULL || cobj->projection_type != 1) {
@@ -867,14 +723,11 @@ float HSD_CObjGetAspect(HSD_CObj* cobj)
     return cobj->projection_param.perspective.aspect;
 }
 
-void HSD_CObjSetAspect(HSD_CObj* cobj, float aspect)
-{
-    if (cobj == NULL || cobj->projection_type != 1) {
-        return;
-    }
-    cobj->projection_param.perspective.aspect = aspect;
-}
-
+/**
+ * @brief Retrieves operations for HSD_CObjGetTop
+ * @param cobj
+ * @return float
+ */
 float HSD_CObjGetTop(HSD_CObj* cobj)
 {
     float result;
@@ -900,23 +753,11 @@ float HSD_CObjGetTop(HSD_CObj* cobj)
     return result;
 }
 
-void HSD_CObjSetTop(HSD_CObj* cobj, float top)
-{
-    if (cobj == NULL) {
-        return;
-    }
-    switch (cobj->projection_type) {
-    case PROJ_PERSPECTIVE:
-        break;
-    case PROJ_FRUSTUM:
-        cobj->projection_param.frustum.top = top;
-        break;
-    case PROJ_ORTHO:
-        cobj->projection_param.ortho.top = top;
-        break;
-    }
-}
-
+/**
+ * @brief Retrieves operations for HSD_CObjGetBottom
+ * @param cobj
+ * @return float
+ */
 float HSD_CObjGetBottom(HSD_CObj* cobj)
 {
     if (cobj == NULL) {
@@ -935,23 +776,11 @@ float HSD_CObjGetBottom(HSD_CObj* cobj)
     }
 }
 
-void HSD_CObjSetBottom(HSD_CObj* cobj, float bottom)
-{
-    if (cobj == NULL) {
-        return;
-    }
-    switch (cobj->projection_type) {
-    case PROJ_PERSPECTIVE:
-        break;
-    case PROJ_FRUSTUM:
-        cobj->projection_param.frustum.bottom = bottom;
-        break;
-    case PROJ_ORTHO:
-        cobj->projection_param.ortho.bottom = bottom;
-        break;
-    }
-}
-
+/**
+ * @brief Retrieves operations for HSD_CObjGetLeft
+ * @param cobj
+ * @return float
+ */
 float HSD_CObjGetLeft(HSD_CObj* cobj)
 {
     if (cobj == NULL) {
@@ -971,23 +800,11 @@ float HSD_CObjGetLeft(HSD_CObj* cobj)
     }
 }
 
-void HSD_CObjSetLeft(HSD_CObj* cobj, float left)
-{
-    if (cobj == NULL) {
-        return;
-    }
-    switch (cobj->projection_type) {
-    case PROJ_PERSPECTIVE:
-        break;
-    case PROJ_FRUSTUM:
-        cobj->projection_param.frustum.left = left;
-        break;
-    case PROJ_ORTHO:
-        cobj->projection_param.ortho.left = left;
-        break;
-    }
-}
-
+/**
+ * @brief Retrieves operations for HSD_CObjGetRight
+ * @param cobj
+ * @return float
+ */
 float HSD_CObjGetRight(HSD_CObj* cobj)
 {
     if (cobj == NULL) {
@@ -1007,23 +824,11 @@ float HSD_CObjGetRight(HSD_CObj* cobj)
     }
 }
 
-void HSD_CObjSetRight(HSD_CObj* cobj, float right)
-{
-    if (cobj == NULL) {
-        return;
-    }
-    switch (cobj->projection_type) {
-    case PROJ_PERSPECTIVE:
-        break;
-    case PROJ_FRUSTUM:
-        cobj->projection_param.frustum.right = right;
-        break;
-    case PROJ_ORTHO:
-        cobj->projection_param.ortho.right = right;
-        break;
-    }
-}
-
+/**
+ * @brief Retrieves operations for HSD_CObjGetNear
+ * @param cobj
+ * @return float
+ */
 float HSD_CObjGetNear(HSD_CObj* cobj)
 {
     if (cobj == NULL) {
@@ -1032,13 +837,11 @@ float HSD_CObjGetNear(HSD_CObj* cobj)
     return cobj->near;
 }
 
-void HSD_CObjSetNear(HSD_CObj* cobj, float near)
-{
-    if (cobj != NULL) {
-        cobj->near = near;
-    }
-}
-
+/**
+ * @brief Retrieves operations for HSD_CObjGetFar
+ * @param cobj
+ * @return float
+ */
 float HSD_CObjGetFar(HSD_CObj* cobj)
 {
     if (cobj == NULL) {
@@ -1047,83 +850,11 @@ float HSD_CObjGetFar(HSD_CObj* cobj)
     return cobj->far;
 }
 
-void HSD_CObjSetFar(HSD_CObj* cobj, float far)
-{
-    if (cobj != NULL) {
-        cobj->far = far;
-    }
-}
-
-void HSD_CObjGetScissor(HSD_CObj* cobj, Scissor* scissor)
-{
-    if (cobj == NULL) {
-        return;
-    }
-    *scissor = cobj->scissor;
-}
-
-void HSD_CObjSetScissor(HSD_CObj* cobj, Scissor* scissor)
-{
-    if (cobj == NULL) {
-        return;
-    }
-    cobj->scissor = *scissor;
-}
-
-void HSD_CObjSetScissorx4(HSD_CObj* cobj, u16 left, u16 right, u16 top,
-                          u16 bottom)
-{
-    if (cobj == NULL) {
-        return;
-    }
-    cobj->scissor.left = left;
-    cobj->scissor.right = right;
-    cobj->scissor.top = top;
-    cobj->scissor.bottom = bottom;
-}
-
-void HSD_CObjGetViewportf(HSD_CObj* cobj, HSD_RectF32* viewport)
-{
-    if (cobj == NULL) {
-        return;
-    }
-    *viewport = cobj->viewport;
-}
-
-extern const f64 HSD_CObj_804DE4C8;
-
-/// Uses s16 -> float cast literal
-void HSD_CObjSetViewport(HSD_CObj* cobj, HSD_RectS16* viewport)
-{
-    if (cobj == NULL) {
-        return;
-    }
-    cobj->viewport.xmin = viewport->xmin;
-    cobj->viewport.xmax = viewport->xmax;
-    cobj->viewport.ymin = viewport->ymin;
-    cobj->viewport.ymax = viewport->ymax;
-}
-
-void HSD_CObjSetViewportf(HSD_CObj* cobj, HSD_RectF32* viewport)
-{
-    if (cobj == NULL) {
-        return;
-    }
-    cobj->viewport = *viewport;
-}
-
-void HSD_CObjSetViewportfx4(HSD_CObj* cobj, float left, float right, float top,
-                            float bottom)
-{
-    if (cobj == NULL) {
-        return;
-    }
-    cobj->viewport.xmin = left;
-    cobj->viewport.xmax = right;
-    cobj->viewport.ymin = top;
-    cobj->viewport.ymax = bottom;
-}
-
+/**
+ * @brief Retrieves operations for HSD_CObjGetProjectionType
+ * @param cobj
+ * @return int
+ */
 int HSD_CObjGetProjectionType(HSD_CObj* cobj)
 {
     if (cobj == NULL) {
@@ -1132,88 +863,21 @@ int HSD_CObjGetProjectionType(HSD_CObj* cobj)
     return cobj->projection_type;
 }
 
-void HSD_CObjSetProjectionType(HSD_CObj* cobj, u32 proj_type)
-{
-    if (cobj == NULL) {
-        return;
-    }
-    cobj->projection_type = proj_type;
-}
-
-void HSD_CObjSetPerspective(HSD_CObj* cobj, float fov, float aspect)
-{
-    if (cobj == NULL) {
-        return;
-    }
-    cobj->projection_type = PROJ_PERSPECTIVE;
-    cobj->projection_param.perspective.fov = fov;
-    cobj->projection_param.perspective.aspect = aspect;
-}
-
-void HSD_CObjSetFrustum(HSD_CObj* cobj, float top, float bottom, float left,
-                        float right)
-{
-    if (cobj == NULL) {
-        return;
-    }
-    cobj->projection_type = PROJ_FRUSTUM;
-    cobj->projection_param.frustum.top = top;
-    cobj->projection_param.frustum.bottom = bottom;
-    cobj->projection_param.frustum.left = left;
-    cobj->projection_param.frustum.right = right;
-}
-
-void HSD_CObjSetOrtho(HSD_CObj* cobj, float top, float bottom, float left,
-                      float right)
-{
-    if (cobj == NULL) {
-        return;
-    }
-    cobj->projection_type = PROJ_ORTHO;
-    cobj->projection_param.ortho.top = top;
-    cobj->projection_param.ortho.bottom = bottom;
-    cobj->projection_param.ortho.left = left;
-    cobj->projection_param.ortho.right = right;
-}
-
-void HSD_CObjGetPerspective(HSD_CObj* cobj, float* top, float* bottom)
-{
-    if (cobj == NULL || cobj->projection_type != PROJ_PERSPECTIVE) {
-        return;
-    }
-    if (top != NULL) {
-        *top = cobj->projection_param.perspective.fov;
-    }
-    if (bottom != NULL) {
-        *bottom = cobj->projection_param.perspective.aspect;
-    }
-}
-
-void HSD_CObjGetOrtho(HSD_CObj* cobj, float* top, float* bottom, float* left,
-                      float* right)
-{
-    if (cobj == NULL || cobj->projection_type != PROJ_ORTHO) {
-        return;
-    }
-    if (top != NULL) {
-        *top = cobj->projection_param.ortho.top;
-    }
-    if (bottom != NULL) {
-        *bottom = cobj->projection_param.ortho.bottom;
-    }
-    if (left != NULL) {
-        *left = cobj->projection_param.ortho.left;
-    }
-    if (right != NULL) {
-        *right = cobj->projection_param.ortho.right;
-    }
-}
-
+/**
+ * @brief Retrieves operations for HSD_CObjGetFlags
+ * @param cobj
+ * @return u32
+ */
 u32 HSD_CObjGetFlags(HSD_CObj* cobj)
 {
     return cobj->flags;
 }
 
+/**
+ * @brief Sets operations for HSD_CObjSetFlags
+ * @param cobj
+ * @param flags
+ */
 void HSD_CObjSetFlags(HSD_CObj* cobj, u32 flags)
 {
     if (cobj == NULL) {
@@ -1222,6 +886,11 @@ void HSD_CObjSetFlags(HSD_CObj* cobj, u32 flags)
     cobj->flags |= flags;
 }
 
+/**
+ * @brief Handles operations for HSD_CObjClearFlags
+ * @param cobj
+ * @param flags
+ */
 void HSD_CObjClearFlags(HSD_CObj* cobj, u32 flags)
 {
     if (cobj == NULL) {
@@ -1235,6 +904,10 @@ HSD_CObj* HSD_CObjGetCurrent(void)
     return current;
 }
 
+/**
+ * @brief Sets operations for HSD_CObjSetDefaultClass
+ * @param info
+ */
 void HSD_CObjSetDefaultClass(HSD_ClassInfo* info)
 {
     if (info) {
@@ -1301,6 +974,11 @@ static int CObjLoad(HSD_CObj* cobj, HSD_CObjDesc* desc)
     return 0;
 }
 
+/**
+ * @brief Initializes operations for HSD_CObjInit
+ * @param cobj
+ * @param desc
+ */
 void HSD_CObjInit(HSD_CObj* cobj, HSD_CObjDesc* desc)
 {
     if (cobj == NULL || desc == NULL) {

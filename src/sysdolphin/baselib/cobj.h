@@ -1,12 +1,16 @@
+/**
+ * @file cobj.h
+ * @brief Camera Object (CObj) subsystem for SysDolphin
+ * @details Controls viewport projection matrices (perspective/orthographic), 
+ * view matrices (eye, look-at, up), scissor regions, fog settings, and screen clear (EraseColor).
+ * Used for the main game camera and HUD cameras.
+ */
 #ifndef _cobj_h_
 #define _cobj_h_
 
 #include <Runtime/platform.h>
-
 #include <sysdolphin/baselib/forward.h>
-
 #include <dat_macros.h> // IWYU pragma: export
-
 #include <dolphin/gx/GXEnum.h>
 #include <dolphin/mtx.h>
 #include <sysdolphin/baselib/object.h>
@@ -128,8 +132,7 @@ union HSD_CObjDesc {
     HSD_CameraDescCommon common DAT_IF(false);
     HSD_CameraDescFrustum frustum DAT_IF(projection_type == PROJ_FRUSTUM);
     HSD_CameraDescFrustum ortho DAT_IF(projection_type == PROJ_ORTHO);
-    HSD_CameraDescPerspective perspective DAT_IF(projection_type ==
-                                                 PROJ_PERSPECTIVE);
+    HSD_CameraDescPerspective perspective DAT_IF(projection_type == PROJ_PERSPECTIVE);
 };
 ASSERT_SIZE(HSD_CObjDesc, 0x40);
 
@@ -150,17 +153,46 @@ typedef struct _cobj_Unk1 cobj_Unk1;
 #define HSD_COBJ_INFO(i) ((HSD_CObjInfo*) (i))
 #define HSD_COBJ_METHOD(o) HSD_COBJ_INFO(HSD_OBJECT_METHOD(o))
 
-void HSD_CObjEraseScreen(HSD_CObj* cobj, s32 enable_color, s32 enable_alpha,
-                         s32 enable_depth);
+/**
+ * @brief Clears the screen/framebuffer using the camera's clipping bounds
+ * @param cobj The camera object defining the bounds
+ * @param enable_color Flag to clear the color buffer
+ * @param enable_alpha Flag to clear the alpha buffer
+ * @param enable_depth Flag to clear the depth buffer
+ */
+void HSD_CObjEraseScreen(HSD_CObj* cobj, s32 enable_color, s32 enable_alpha, s32 enable_depth);
+
+/** @brief Removes all animation objects attached to the camera */
 void HSD_CObjRemoveAnim(HSD_CObj* cobj);
+
+/** @brief Gets the interest/look-at position as a WObj */
 HSD_WObj* HSD_CObjGetInterestWObj(HSD_CObj* cobj);
+
+/** @brief Sets the interest/look-at position using a WObj */
 void HSD_CObjSetInterestWObj(HSD_CObj* cobj, HSD_WObj* interest);
+
+/** @brief Gets the eye/camera position as a WObj */
 HSD_WObj* HSD_CObjGetEyePositionWObj(HSD_CObj* cobj);
+
+/** @brief Sets the eye/camera position using a WObj */
 void HSD_CObjSetEyePositionWObj(HSD_CObj* cobj, HSD_WObj* eyepos);
+
+/** @brief Sets the interest/look-at position from a vector */
 void HSD_CObjSetInterest(HSD_CObj* cobj, Vec3*);
+
+/** @brief Sets the eye/camera position from a vector */
 void HSD_CObjSetEyePosition(HSD_CObj* cobj, Vec3*);
-bool HSD_CObjSetCurrent(HSD_CObj*);
+
+/** 
+ * @brief Sets this camera as the current active rendering camera, setting up GX viewport, scissor, and projection
+ * @param cobj Camera object
+ * @return True if successfully activated
+ */
+bool HSD_CObjSetCurrent(HSD_CObj* cobj);
+
+/** @brief Ends the current camera rendering pass and sorts/displays the Z-list */
 void HSD_CObjEndCurrent(void);
+
 void HSD_CObjSetViewportfx4(HSD_CObj*, f32, f32, f32, f32);
 void HSD_CObjGetEyePosition(HSD_CObj* cobj, Vec3* cam_pos);
 int HSD_CObjGetEyeVector(HSD_CObj* cobj, Vec3* eye);
