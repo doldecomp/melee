@@ -1,3 +1,26 @@
+/**
+ * @file jobj.h
+ * @brief Joint Object (JObj) skeletal transform hierarchy definitions.
+ * @details Declares the core scene graph node structure (HSD_JObj) and serialized
+ * descriptor (HSD_Joint) used by SysDolphin for character skeletons, stage models,
+ * item objects, and particle emitters.
+ *
+ * Key Architecture:
+ * - Scene Graph Tree: JObjs form an n-ary tree with parent, child, and next (sibling)
+ *   pointers.
+ * - Transform Hierarchy: Each joint stores local SRT (Scale, Rotation [Euler or Quaternion],
+ *   Translation) and a computed 3x4 world transform matrix (mtx).
+ * - Matrix Evaluation: #HSD_JObjSetupMatrix computes matrices recursively from root to leaf,
+ *   respecting billboard constraints, classical scale modes, and envelope skinning matrices.
+ * - Animation Integration: Binds animation tracks via AObj to dynamically animate position,
+ *   rotation, and scale.
+ * - Display Object (DObj) Attachment: Points to DObj display meshes for rendering.
+ * - Two-Bone Inverse Kinematics (IK): Supports analytical 2-bone IK solvers (Joint1,
+ *   Joint2, Effector) with angular limits and flip flags.
+ *
+ * Module prefix: HSD_JObj / JObj
+ */
+
 #ifndef _jobj_h_
 #define _jobj_h_
 
@@ -15,12 +38,29 @@
 #include <sysdolphin/baselib/pobj.h>
 #include <sysdolphin/baselib/spline.h>
 
+/* Particle joint flags and bit shifts */
+/// @brief Particle joint is active
 #define JOBJ_PTCL_ACTIVE 0x7FFFFFFF
 #define JOBJ_PTCL_OFFSET_MASK 0xFFFFFF
 #define JOBJ_PTCL_OFFSET_SHIFT 6
 #define JOBJ_PTCL_BANK_MASK 0x3F
+#define JOBJ_PTCL_OFFSET_MASK 0xFFFFFF
+#define JOBJ_PTCL_OFFSET_SHIFT 6
+#define JOBJ_PTCL_BANK_MASK 0x3F
 
-#define HSD_A_J_ROTX 1
+/* Animation track types for Joint Objects (AObj) */
+#define HSD_A_J_ROTX 1      ///< Rotation around X axis
+#define HSD_A_J_ROTY 2      ///< Rotation around Y axis
+#define HSD_A_J_ROTZ 3      ///< Rotation around Z axis
+#define HSD_A_J_PATH 4      ///< Path / spline parameter
+#define HSD_A_J_TRAX 5      ///< Translation along X axis
+#define HSD_A_J_TRAY 6      ///< Translation along Y axis
+#define HSD_A_J_TRAZ 7      ///< Translation along Z axis
+#define HSD_A_J_SCAX 8      ///< Scale factor along X axis
+#define HSD_A_J_SCAY 9      ///< Scale factor along Y axis
+#define HSD_A_J_SCAZ 10     ///< Scale factor along Z axis
+#define HSD_A_J_NODE 11     ///< Node visibility / activation flag
+#define HSD_A_J_BRANCH 12   ///< Branch animation
 #define HSD_A_J_ROTY 2
 #define HSD_A_J_ROTZ 3
 #define HSD_A_J_PATH 4
@@ -55,14 +95,50 @@
 #define HSD_A_J_SETFLOAT8 38
 #define HSD_A_J_SETFLOAT9 39
 
-#define JOBJ_BILLBOARD_FIELD 0xE00
+/* Billboarding render mode flags */
+#define JOBJ_BILLBOARD_FIELD 0xE00  ///< Bitmask covering billboard types
+#define JOBJ_BILLBOARD 0x200        ///< Standard spherical billboarding (faces camera)
+#define JOBJ_VBILLBOARD 0x400       ///< Vertical axial billboarding (rotates about Y axis)
+#define JOBJ_HBILLBOARD 0x600       ///< Horizontal axial billboarding
+#define JOBJ_RBILLBOARD 0x800       ///< Rotational billboarding
+#define JOBJ_PBILLBOARD 0x2000      ///< Point billboarding
 #define JOBJ_BILLBOARD 0x200
 #define JOBJ_VBILLBOARD 0x400
 #define JOBJ_HBILLBOARD 0x600
 #define JOBJ_RBILLBOARD 0x800
 #define JOBJ_PBILLBOARD 0x2000
 
-#define JOBJ_SKELETON (1 << 0)
+/* JObj feature, rendering, and hierarchy flags */
+#define JOBJ_SKELETON (1 << 0)          ///< Joint is part of a skeletal envelope skinning system
+#define JOBJ_SKELETON_ROOT (1 << 1)     ///< Joint is the root of a skeletal bone hierarchy
+#define JOBJ_ENVELOPE_MODEL (1 << 2)    ///< Model uses envelope/skin weighting for deformable meshes
+#define JOBJ_CLASSICAL_SCALE (1 << 3)   ///< Non-hierarchical classical scaling (scale does not scale child offsets)
+#define JOBJ_HIDDEN (1 << 4)            ///< Joint and attached meshes are hidden / omitted from rendering
+#define JOBJ_PTCL (1 << 5)              ///< Union member contains particle generator list (ptcl)
+#define JOBJ_MTX_DIRTY (1 << 6)         ///< Transform matrix is dirty and must be recomputed
+#define JOBJ_LIGHTING (1 << 7)          ///< Hardware lighting is enabled for this joint
+#define JOBJ_TEXGEN (1 << 8)            ///< Hardware texture coordinate generation enabled
+#define JOBJ_INSTANCE (1 << 12)         ///< Instanced joint model
+#define JOBJ_SPLINE (1 << 14)           ///< Union member contains spline curve
+#define JOBJ_FLIP_IK (1 << 15)          ///< Invert analytical two-bone IK solve bend direction
+#define JOBJ_SPECULAR (1 << 16)         ///< Specular highlight calculations enabled
+#define JOBJ_USE_QUATERNION (1 << 17)   ///< Rotation field stores a 4D Quaternion rather than Euler angles
+#define JOBJ_UNK_B18 (1 << 18)
+#define JOBJ_UNK_B19 (1 << 19)
+#define JOBJ_UNK_B20 (1 << 20)
+#define JOBJ_NULL_OBJ (0 << 21)         ///< Null / plain joint object
+#define JOBJ_JOINT1 (1 << 21)           ///< IK first joint (e.g. shoulder / thigh)
+#define JOBJ_JOINT2 (2 << 21)           ///< IK second joint (e.g. elbow / knee)
+#define JOBJ_JOINT (3 << 21)            ///< Mask for IK joint types
+#define JOBJ_EFFECTOR (3 << 21)         ///< IK effector joint (e.g. hand / foot target)
+#define JOBJ_USER_DEF_MTX (1 << 23)     ///< User-defined matrix supplied directly, bypassing SRT computation
+#define JOBJ_MTX_INDEP_PARENT (1 << 24) ///< Matrix does not inherit transform from parent joint
+#define JOBJ_MTX_INDEP_SRT (1 << 25)    ///< Modifying SRT does not automatically mark matrix dirty
+#define JOBJ_UNK_B26 (1 << 26)
+#define JOBJ_UNK_B27 (1 << 27)
+#define JOBJ_ROOT_OPA (1 << 28)         ///< Contains opaque mesh rendering passes
+#define JOBJ_ROOT_XLU (1 << 29)         ///< Contains translucent / alpha-blended mesh rendering passes
+#define JOBJ_ROOT_TEXEDGE (1 << 30)     ///< Contains punchthrough / alpha-tested texture edge rendering passes
 #define JOBJ_SKELETON_ROOT (1 << 1)
 #define JOBJ_ENVELOPE_MODEL (1 << 2)
 #define JOBJ_CLASSICAL_SCALE (1 << 3)
@@ -103,6 +179,11 @@
 #define HSD_JOBJ_INFO(i) ((HSD_JObjInfo*) (i))
 #define HSD_JOBJ_METHOD(o) HSD_JOBJ_INFO((o)->object.parent.class_info)
 
+/**
+ * @brief Runtime Joint Object instance representing a node in a skeletal hierarchy.
+ * @details Stores local transforms, calculated world matrix, rendering flags,
+ * attached display meshes (DObj), animations (AObj), and constraint effectors (RObj).
+ */
 typedef struct HSD_JObj {
     /*  +0 */ HSD_Obj object;
     /*  +8 */ HSD_JObj* next;
@@ -126,6 +207,10 @@ typedef struct HSD_JObj {
 } HSD_JObj;
 ASSERT_SIZE(struct HSD_JObj, 0x88);
 
+/**
+ * @brief Serialized Joint descriptor loaded from DAT file archives.
+ * @details Blueprint used by #HSD_JObjLoadJoint to construct runtime HSD_JObj hierarchies.
+ */
 typedef struct HSD_Joint {
     /* +0 */ char* class_name;
     /* +4 */ u32 flags;
@@ -143,6 +228,9 @@ typedef struct HSD_Joint {
     /* +3C */ HSD_RObjDesc* robjdesc;
 } HSD_Joint;
 
+/**
+ * @brief Class info and virtual function table for HSD_JObj.
+ */
 typedef struct HSD_JObjInfo {
     HSD_ObjInfo parent;
     s32 (*load)(HSD_JObj* jobj, HSD_Joint* joint, HSD_JObj* jobj_2);
@@ -157,40 +245,158 @@ extern HSD_JObjInfo hsdJObj;
 typedef void (*HSD_JObjWalkTreeCallback)(HSD_JObj*, f32**, s32);
 typedef void (*DPCtlCallback)(int, int lo, int hi, HSD_JObj* jobj);
 
+/**
+ * @brief Sets default class info structure for JObj allocations.
+ * @param info Class info pointer
+ */
 void HSD_JObjSetDefaultClass(HSD_ClassInfo* info);
 
+/**
+ * @brief Verifies dependencies and reference validity on a joint.
+ * @param jobj Pointer to HSD_JObj
+ */
 void HSD_JObjCheckDepend(HSD_JObj* jobj);
+/**
+ * @brief Retrieves active JOBJ_* flags from a joint.
+ * @param jobj Pointer to HSD_JObj
+ * @return Bitmask of JOBJ_* flags
+ */
 u32 HSD_JObjGetFlags(HSD_JObj* jobj);
+/**
+ * @brief Requests setting the animation frame on a joint and all its descendants.
+ * @param jobj Pointer to root HSD_JObj
+ * @param frame Animation frame time
+ */
 void HSD_JObjReqAnimAll(HSD_JObj*, f32);
+/**
+ * @brief Resets rotation, scale, and translation (RST) to initial descriptor values.
+ * @param jobj Target HSD_JObj
+ * @param joint Source HSD_Joint descriptor
+ */
 void HSD_JObjResetRST(HSD_JObj* jobj, HSD_Joint* joint);
+/**
+ * @brief Recursively evaluates and computes the 3x4 world transform matrix.
+ * @param jobj Pointer to HSD_JObj
+ */
 void HSD_JObjSetupMatrixSub(HSD_JObj*);
+/**
+ * @brief Recursively marks a joint and all descendants as having dirty matrices.
+ * @param jobj Pointer to HSD_JObj
+ */
 void HSD_JObjSetMtxDirtySub(HSD_JObj*);
+/**
+ * @brief Out-of-line function to mark a joint's matrix dirty.
+ * @param jobj Pointer to HSD_JObj
+ */
 void(HSD_JObjSetMtxDirty)(HSD_JObj* jobj);
+/**
+ * @brief Decrements reference count on a joint, releasing when reaching 0.
+ * @param jobj Pointer to HSD_JObj
+ */
 void HSD_JObjUnref(HSD_JObj* jobj);
+/**
+ * @brief Unlinks and removes a single joint from its parent and sibling chain.
+ * @param jobj Pointer to HSD_JObj to remove
+ * @return Next sibling joint, or NULL
+ */
 HSD_JObj* HSD_JObjRemove(HSD_JObj* jobj);
+/**
+ * @brief Recursively unlinks and removes a joint and all its descendants.
+ * @param jobj Pointer to root HSD_JObj
+ */
 void HSD_JObjRemoveAll(HSD_JObj*);
+/**
+ * @brief Returns the head of the attached display object (DObj) linked list.
+ * @param jobj Pointer to HSD_JObj
+ * @return Pointer to attached HSD_DObj, or NULL
+ */
 struct HSD_DObj* HSD_JObjGetDObj(HSD_JObj* jobj);
+/**
+ * @brief Instantiates a complete runtime HSD_JObj hierarchy from a serialized descriptor.
+ * @details Traverses the HSD_Joint tree loaded from DAT files, allocates HSD_JObj instances,
+ * initializes SRT transforms, binds DObj mesh descriptors, and links parent/child/sibling chains.
+ * @param joint Pointer to root HSD_Joint descriptor
+ * @return Pointer to constructed root HSD_JObj
+ */
 HSD_JObj* HSD_JObjLoadJoint(HSD_Joint*);
+/**
+ * @brief Recursively attaches bone, material, and shape animation tracks to joint hierarchy.
+ * @param jobj Pointer to root HSD_JObj
+ * @param an_joint Bone transform animation joint tree
+ * @param mat_joint Material animation joint tree
+ * @param sh_joint Shape/morph animation joint tree
+ */
 void HSD_JObjAddAnimAll(HSD_JObj*, HSD_AnimJoint*, HSD_MatAnimJoint*,
                         HSD_ShapeAnimJoint*);
+/**
+ * @brief Advances animation tracks and updates transforms across entire joint hierarchy.
+ * @param jobj Pointer to root HSD_JObj
+ */
 void HSD_JObjAnimAll(HSD_JObj*);
+/**
+ * @brief Sets specific JOBJ_* flag bits on a joint.
+ * @param jobj Target HSD_JObj
+ * @param flags Bitmask of flags to set
+ */
 void HSD_JObjSetFlags(HSD_JObj*, u32 flags);
+/**
+ * @brief Recursively sets JOBJ_* flag bits on a joint and all its descendants.
+ * @param jobj Target HSD_JObj
+ * @param flags Bitmask of flags to set
+ */
 void HSD_JObjSetFlagsAll(HSD_JObj*, u32 flags);
+/**
+ * @brief Clears specific JOBJ_* flag bits on a joint.
+ * @param jobj Target HSD_JObj
+ * @param flags Bitmask of flags to clear
+ */
 void HSD_JObjClearFlags(HSD_JObj*, u32 flags);
+/**
+ * @brief Recursively clears JOBJ_* flag bits on a joint and all its descendants.
+ * @param jobj Target HSD_JObj
+ * @param flags Bitmask of flags to clear
+ */
 void HSD_JObjClearFlagsAll(HSD_JObj*, u32 flags);
+/**
+ * @brief Allocates a new blank HSD_JObj instance from the class memory pool.
+ * @return Pointer to newly allocated HSD_JObj
+ */
 HSD_JObj* HSD_JObjAlloc(void);
 void HSD_JObjSetCurrent(HSD_JObj* jobj);
 HSD_JObj* HSD_JObjGetCurrent(void);
+/**
+ * @brief Recursively resolves envelope skinning references and joint pointers across skeleton.
+ * @param jobj Pointer to root HSD_JObj
+ * @param joint Pointer to root HSD_Joint descriptor
+ */
 void HSD_JObjResolveRefsAll(HSD_JObj*, HSD_Joint*);
+/**
+ * @brief Traverses and renders the joint hierarchy using specified camera view matrix.
+ * @param jobj Pointer to root HSD_JObj to render
+ * @param vmtx Camera view matrix
+ * @param flags Render filter flags
+ * @param rendermode Render pass mode (opaque, translucent, etc.)
+ */
 void HSD_JObjDispAll(HSD_JObj* jobj, Mtx vmtx, u32 flags, u32 rendermode);
 void HSD_JObjRemoveAnim(HSD_JObj* jobj);
 void HSD_JObjAddNext(HSD_JObj* jobj, HSD_JObj* next);
 void HSD_JObjRemoveAnimAll(HSD_JObj* jobj);
+/**
+ * @brief Traverses the joint tree depth-first, invoking a user callback on each joint.
+ * @param jobj Root of the joint tree
+ * @param cb Callback function invoked per joint
+ * @param cb_args User arguments passed to callback
+ */
 void HSD_JObjWalkTree(HSD_JObj* jobj, HSD_JObjWalkTreeCallback cb,
                       f32** cb_args);
 void HSD_JObjPrependRObj(HSD_JObj* jobj, HSD_RObj* robj);
 void HSD_JObjDeleteRObj(HSD_JObj* jobj, HSD_RObj* robj);
 
+/**
+ * @brief Retrieves the first child joint.
+ * @param jobj Pointer to parent HSD_JObj
+ * @return First child HSD_JObj, or NULL
+ */
 static inline HSD_JObj* HSD_JObjGetChild(HSD_JObj* jobj)
 {
     if (jobj == NULL) {
@@ -200,6 +406,11 @@ static inline HSD_JObj* HSD_JObjGetChild(HSD_JObj* jobj)
     }
 }
 
+/**
+ * @brief Retrieves the next sibling joint.
+ * @param jobj Pointer to current HSD_JObj
+ * @return Next sibling HSD_JObj, or NULL
+ */
 static inline HSD_JObj* HSD_JObjGetNext(HSD_JObj* jobj)
 {
     if (jobj == NULL) {
@@ -209,6 +420,11 @@ static inline HSD_JObj* HSD_JObjGetNext(HSD_JObj* jobj)
     }
 }
 
+/**
+ * @brief Retrieves the parent joint in the hierarchy.
+ * @param jobj Pointer to current HSD_JObj
+ * @return Parent HSD_JObj, or NULL if root
+ */
 static inline HSD_JObj* HSD_JObjGetParent(HSD_JObj* jobj)
 {
     if (jobj == NULL) {
@@ -224,6 +440,11 @@ static inline HSD_RObj* HSD_JObjGetRObj(HSD_JObj* jobj)
     return jobj->robj;
 }
 
+/**
+ * @brief Checks if a joint's world matrix is marked dirty and needs recalculation.
+ * @param jobj Pointer to HSD_JObj
+ * @return True if matrix is dirty and not user-defined
+ */
 static inline bool HSD_JObjMtxIsDirty(HSD_JObj* jobj)
 {
     bool result;
@@ -249,7 +470,11 @@ static inline void HSD_JObjSetMtxDirtyOutOfLine(HSD_JObj* jobj)
 #if !defined(__MWERKS__)
 static
 #endif
-    inline void HSD_JObjSetupMatrix(HSD_JObj* jobj)
+    /**
+ * @brief Updates the world transform matrix if marked dirty.
+ * @param jobj Pointer to HSD_JObj
+ */
+inline void HSD_JObjSetupMatrix(HSD_JObj* jobj)
 {
     if (!jobj || !HSD_JObjMtxIsDirty(jobj)) {
         return;
@@ -273,6 +498,11 @@ static inline void HSD_JObjSetMtxDirtyInline(HSD_JObj* jobj)
     }
 }
 
+/**
+ * @brief Sets the 3D rotation (Euler or Quaternion) and marks matrix dirty.
+ * @param jobj Pointer to HSD_JObj
+ * @param rotate Rotation quaternion/vector
+ */
 static inline void HSD_JObjSetRotation(HSD_JObj* jobj, Quaternion* rotate)
 {
     HSD_ASSERT(618, jobj);
@@ -379,6 +609,11 @@ static inline f32 HSD_JObjGetRotationZ(HSD_JObj* jobj)
     return jobj->rotate.z;
 }
 
+/**
+ * @brief Sets local 3D scale factors and marks matrix dirty.
+ * @param jobj Pointer to HSD_JObj
+ * @param scale 3D scale vector
+ */
 static inline void HSD_JObjSetScale(HSD_JObj* jobj, Vec3* scale)
 {
     HSD_ASSERT(760, jobj);
@@ -478,6 +713,11 @@ static inline f32 HSD_JObjGetScaleZ(HSD_JObj* jobj)
     return jobj->scale.z;
 }
 
+/**
+ * @brief Sets local 3D translation offset and marks matrix dirty.
+ * @param jobj Pointer to HSD_JObj
+ * @param translate 3D translation vector
+ */
 static inline void HSD_JObjSetTranslate(HSD_JObj* jobj, Vec3* translate)
 {
     HSD_ASSERT(916, jobj);
@@ -696,6 +936,11 @@ static inline void HSD_JObjAddTranslationZ(HSD_JObj* jobj, float z)
     }
 }
 
+/**
+ * @brief Ensures world matrix is computed and returns pointer to 3x4 transform matrix.
+ * @param jobj Pointer to HSD_JObj
+ * @return Pointer to 3x4 world transform matrix
+ */
 static inline MtxPtr HSD_JObjGetMtxPtr(HSD_JObj* jobj)
 {
     HSD_ASSERT(1144, jobj);

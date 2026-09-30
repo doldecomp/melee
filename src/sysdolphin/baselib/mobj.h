@@ -1,3 +1,9 @@
+/**
+ * @file mobj.h
+ * @brief Material Object (MObj) system for rendering
+ * @details Defines material properties for DObj meshes: textures, colors, alpha, blending, and TEV configurations.
+ * Module prefix: HSD_MObj
+ */
 #ifndef _mobj_h_
 #define _mobj_h_
 
@@ -156,30 +162,143 @@ struct HSD_MObjInfo {
 
 extern HSD_MObjInfo hsdMObj;
 
+/**
+ * @brief Sets the global active MObj instance.
+ * @param mobj MObj pointer
+ */
 void HSD_MObjSetCurrent(HSD_MObj* mobj);
+/**
+ * @brief Appends render mode flags to the MObj.
+ * @param mobj MObj pointer
+ * @param flags Flags to set
+ */
 void HSD_MObjSetFlags(HSD_MObj* mobj, u32 flags);
+/**
+ * @brief Removes render mode flags from the MObj.
+ * @param mobj MObj pointer
+ * @param flags Flags to clear
+ */
 void HSD_MObjClearFlags(HSD_MObj* mobj, u32 flags);
+/**
+ * @brief Removes animation objects from the MObj based on anim flags (e.g. MOBJ_ANIM, TOBJ_ANIM).
+ * @param mobj MObj pointer
+ * @param flags Animation flags
+ */
 void HSD_MObjRemoveAnimByFlags(HSD_MObj* mobj, u32 flags);
+/**
+ * @brief Adds a material animation description to the MObj, converting it to an AObj.
+ * @param mobj MObj pointer
+ * @param matanim Material animation descriptor
+ */
 void HSD_MObjAddAnim(HSD_MObj* mobj, HSD_MatAnim* matanim);
+/**
+ * @brief Requests the MObj's animation (including TObjs) to evaluate at the specified start frame, filtered by flags.
+ * @param mobj MObj pointer
+ * @param startframe Animation frame index
+ * @param flags Animation flags
+ */
 void HSD_MObjReqAnimByFlags(HSD_MObj* mobj, f32 startframe, u32 flags);
+/**
+ * @brief Requests the MObj's animation to evaluate at the specified frame (ALL_ANIM).
+ * @param mobj MObj pointer
+ * @param startframe Animation frame index
+ */
 void HSD_MObjReqAnim(HSD_MObj* mobj, f32 startframe);
+/**
+ * @brief Updates the animation state of the MObj and its associated TObjs.
+ * @param mobj MObj pointer
+ */
 void HSD_MObjAnim(HSD_MObj* mobj);
+/**
+ * @brief Allocates and loads an MObj and its material properties from an MObjDesc.
+ * @param mobjdesc Material object descriptor
+ * @return Newly allocated MObj
+ */
 HSD_MObj* HSD_MObjLoadDesc(HSD_MObjDesc* mobjdesc);
+/**
+ * @brief Retrieves the linked list of texture objects (TObj) from the MObj.
+ * @param mobj MObj pointer
+ * @return Head of the TObj linked list
+ */
 HSD_TObj* HSD_MObjGetTObj(HSD_MObj* mobj);
+/**
+ * @brief Destroys and frees the MObj and its associated resources.
+ * @param mobj MObj pointer
+ */
 void HSD_MObjRemove(HSD_MObj* mobj);
+/**
+ * @brief Allocates a new, uninitialized MObj instance.
+ * @return Newly allocated MObj
+ */
 HSD_MObj* HSD_MObjAlloc(void);
+/**
+ * @brief Allocates a new HSD_Material struct, initializing its alpha to 1.0.
+ * @return Newly allocated Material
+ */
 HSD_Material* HSD_MaterialAlloc(void);
+/**
+ * @brief Compiles TEV (Texture Environment) texture expressions for the MObj.
+ * @param mobj MObj pointer
+ */
 void HSD_MObjCompileTev(HSD_MObj* mobj);
+/**
+ * @brief Removes a texture object from the global shadow texture list.
+ * @param tobj Texture object
+ */
 void HSD_MObjDeleteShadowTexture(HSD_TObj* tobj);
+/**
+ * @brief Generates the TEV texture expression (TExp) tree based on the MObj's textures and rendering mode.
+ * @param mobj MObj pointer
+ * @param tobj_top Head of the TObj linked list
+ * @param list Pointer to store the resulting TExp list
+ * @return The root expression node
+ */
 HSD_TExp* MObjMakeTExp(HSD_MObj* mobj, HSD_TObj* tobj_top, HSD_TExp** list);
+/**
+ * @brief Loads the compiled TEV configuration to GX hardware registers.
+ * @param mobj MObj pointer
+ * @param tobj Texture object
+ * @param arg2 Additional volatile config flag
+ */
 void MObjSetupTev(HSD_MObj* mobj, HSD_TObj* tobj, u32 arg2);
 
+/**
+ * @brief Main material setup function before drawing a mesh. Configures GX colors, TEV, textures, and blending (PE).
+ * @param mobj MObj pointer
+ * @param rendermode Current rendering mode
+ */
 void HSD_MObjSetup(HSD_MObj* mobj, u32 rendermode);
+/**
+ * @brief Cleans up GX state after drawing a mesh with this MObj.
+ * @param mobj MObj pointer
+ * @param rendermode Current rendering mode
+ */
 void HSD_MObjUnset(HSD_MObj* mobj, u32 rendermode);
+/**
+ * @brief Sets the global texture image used for toon-shading rendering.
+ * @param imagedesc Image descriptor for toon shading
+ */
 void HSD_MObjSetToonTextureImage(HSD_ImageDesc* imagedesc);
+/**
+ * @brief Overrides the diffuse color of the MObj's material.
+ * @param mobj MObj pointer
+ * @param r Red channel
+ * @param g Green channel
+ * @param b Blue channel
+ */
 void HSD_MObjSetDiffuseColor(HSD_MObj* mobj, u8 r, u8 g, u8 b);
+/**
+ * @brief Overrides the alpha blending value of the MObj's material.
+ * @param mobj MObj pointer
+ * @param alpha New alpha value (0.0 to 1.0)
+ */
 void HSD_MObjSetAlpha(HSD_MObj* mobj, f32 alpha);
+/**
+ * @brief Adds a texture object to the global shadow texture list.
+ * @param tobj Texture object
+ */
 void HSD_MObjAddShadowTexture(HSD_TObj* tobj);
+
 extern HSD_TObj* tobj_shadows;
 extern HSD_TObj* tobj_toon;
 

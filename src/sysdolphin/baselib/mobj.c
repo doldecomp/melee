@@ -1,3 +1,9 @@
+/**
+ * @file mobj.c
+ * @brief Material Object (MObj) system implementation
+ * @details Handles the material properties for DObj meshes, including textures, colors, alpha, blending, and TEV configurations.
+ * Module prefix: HSD_MObj
+ */
 #include "mobj.h"
 
 #include <string.h>
@@ -18,11 +24,20 @@ HSD_TObj* tobj_toon;
 static void MObjInfoInit(void);
 HSD_MObjInfo hsdMObj = { MObjInfoInit };
 
+/**
+ * @brief Sets the global active MObj instance.
+ * @param mobj MObj pointer
+ */
 void HSD_MObjSetCurrent(HSD_MObj* mobj)
 {
     current_mobj = mobj;
 }
 
+/**
+ * @brief Appends render mode flags to the MObj.
+ * @param mobj MObj pointer
+ * @param flags Flags to set
+ */
 void HSD_MObjSetFlags(HSD_MObj* mobj, u32 flags)
 {
     if (mobj != NULL) {
@@ -30,6 +45,11 @@ void HSD_MObjSetFlags(HSD_MObj* mobj, u32 flags)
     }
 }
 
+/**
+ * @brief Removes render mode flags from the MObj.
+ * @param mobj MObj pointer
+ * @param flags Flags to clear
+ */
 void HSD_MObjClearFlags(HSD_MObj* mobj, u32 flags)
 {
     if (mobj != NULL) {
@@ -37,6 +57,11 @@ void HSD_MObjClearFlags(HSD_MObj* mobj, u32 flags)
     }
 }
 
+/**
+ * @brief Removes animation objects from the MObj based on anim flags (e.g. MOBJ_ANIM, TOBJ_ANIM).
+ * @param mobj MObj pointer
+ * @param flags Animation flags
+ */
 void HSD_MObjRemoveAnimByFlags(HSD_MObj* mobj, u32 flags)
 {
     if (mobj == NULL) {
@@ -52,6 +77,11 @@ void HSD_MObjRemoveAnimByFlags(HSD_MObj* mobj, u32 flags)
     }
 }
 
+/**
+ * @brief Adds a material animation description to the MObj, converting it to an AObj.
+ * @param mobj MObj pointer
+ * @param matanim Material animation descriptor
+ */
 void HSD_MObjAddAnim(HSD_MObj* mobj, HSD_MatAnim* matanim)
 {
     if (mobj == NULL) {
@@ -67,6 +97,12 @@ void HSD_MObjAddAnim(HSD_MObj* mobj, HSD_MatAnim* matanim)
     }
 }
 
+/**
+ * @brief Requests the MObj's animation (including TObjs) to evaluate at the specified start frame, filtered by flags.
+ * @param mobj MObj pointer
+ * @param startframe Animation frame index
+ * @param flags Animation flags
+ */
 void HSD_MObjReqAnimByFlags(HSD_MObj* mobj, f32 startframe, u32 flags)
 {
     if (mobj == NULL) {
@@ -78,12 +114,23 @@ void HSD_MObjReqAnimByFlags(HSD_MObj* mobj, f32 startframe, u32 flags)
     HSD_TObjReqAnimAllByFlags(mobj->tobj, startframe, flags);
 }
 
+/**
+ * @brief Requests the MObj's animation to evaluate at the specified frame (ALL_ANIM).
+ * @param mobj MObj pointer
+ * @param startframe Animation frame index
+ */
 void HSD_MObjReqAnim(HSD_MObj* mobj, f32 startframe)
 {
     HSD_MObjReqAnimByFlags(mobj, startframe, ALL_ANIM);
 }
 
-static void MObjUpdateFunc(void* obj, enum_t type, HSD_ObjData* val)
+/**
+ * @brief Callback applied during AObj interpretation to update material properties (ambient, diffuse, specular, alpha, PE).
+ * @param obj Cast to MObj pointer
+ * @param type ID of the material field being updated
+ * @param anim_data The animation value to apply
+ */
+static void MObjUpdateFunc(void* obj, enum_t type, HSD_ObjData* anim_data)
 {
     HSD_MObj* mobj = obj;
 
@@ -93,53 +140,57 @@ static void MObjUpdateFunc(void* obj, enum_t type, HSD_ObjData* val)
 
     switch (type) {
     case HSD_A_M_AMBIENT_R:
-        mobj->mat->ambient.r = (u8) (255.0 * val->fv);
+        mobj->mat->ambient.r = (u8) (255.0 * anim_data->fv);
         break;
     case HSD_A_M_AMBIENT_G:
-        mobj->mat->ambient.g = (u8) (255.0 * val->fv);
+        mobj->mat->ambient.g = (u8) (255.0 * anim_data->fv);
         break;
     case HSD_A_M_AMBIENT_B:
-        mobj->mat->ambient.b = (u8) (255.0 * val->fv);
+        mobj->mat->ambient.b = (u8) (255.0 * anim_data->fv);
         break;
     case HSD_A_M_DIFFUSE_R:
-        mobj->mat->diffuse.r = (u8) (255.0 * val->fv);
+        mobj->mat->diffuse.r = (u8) (255.0 * anim_data->fv);
         break;
     case HSD_A_M_DIFFUSE_G:
-        mobj->mat->diffuse.g = (u8) (255.0 * val->fv);
+        mobj->mat->diffuse.g = (u8) (255.0 * anim_data->fv);
         break;
     case HSD_A_M_DIFFUSE_B:
-        mobj->mat->diffuse.b = (u8) (255.0 * val->fv);
+        mobj->mat->diffuse.b = (u8) (255.0 * anim_data->fv);
         break;
     case HSD_A_M_ALPHA:
-        mobj->mat->alpha = 1.0F - val->fv;
+        mobj->mat->alpha = 1.0F - anim_data->fv;
         break;
     case HSD_A_M_SPECULAR_R:
-        mobj->mat->specular.r = (u8) (255.0 * val->fv);
+        mobj->mat->specular.r = (u8) (255.0 * anim_data->fv);
         break;
     case HSD_A_M_SPECULAR_G:
-        mobj->mat->specular.g = (u8) (255.0 * val->fv);
+        mobj->mat->specular.g = (u8) (255.0 * anim_data->fv);
         break;
     case HSD_A_M_SPECULAR_B:
-        mobj->mat->specular.b = (u8) (255.0 * val->fv);
+        mobj->mat->specular.b = (u8) (255.0 * anim_data->fv);
         break;
     case HSD_A_M_PE_REF0:
         if (mobj->pe) {
-            mobj->pe->ref0 = (u8) (255.0 * val->fv);
+            mobj->pe->ref0 = (u8) (255.0 * anim_data->fv);
         }
         break;
     case HSD_A_M_PE_REF1:
         if (mobj->pe) {
-            mobj->pe->ref1 = (u8) (255.0 * val->fv);
+            mobj->pe->ref1 = (u8) (255.0 * anim_data->fv);
         }
         break;
     case HSD_A_M_PE_DSTALPHA:
         if (mobj->pe) {
-            mobj->pe->dst_alpha = (u8) (255.0 * val->fv);
+            mobj->pe->dst_alpha = (u8) (255.0 * anim_data->fv);
         }
         break;
     }
 }
 
+/**
+ * @brief Updates the animation state of the MObj and its associated TObjs.
+ * @param mobj MObj pointer
+ */
 void HSD_MObjAnim(HSD_MObj* mobj)
 {
     if (mobj == NULL) {
@@ -149,6 +200,12 @@ void HSD_MObjAnim(HSD_MObj* mobj)
     HSD_TObjAnimAll(mobj->tobj);
 }
 
+/**
+ * @brief Initializes an MObj from an MObjDesc.
+ * @param mobj MObj pointer to initialize
+ * @param desc Material object descriptor
+ * @return 0 on success
+ */
 static int MObjLoad(HSD_MObj* mobj, HSD_MObjDesc* desc)
 {
     mobj->rendermode = desc->rendermode;
@@ -164,6 +221,11 @@ static int MObjLoad(HSD_MObj* mobj, HSD_MObjDesc* desc)
     return 0;
 }
 
+/**
+ * @brief Allocates and loads an MObj and its material properties from an MObjDesc.
+ * @param mobjdesc Material object descriptor
+ * @return Newly allocated MObj
+ */
 HSD_MObj* HSD_MObjLoadDesc(HSD_MObjDesc* mobjdesc)
 {
     if (mobjdesc) {
@@ -188,128 +250,135 @@ HSD_MObj* HSD_MObjLoadDesc(HSD_MObjDesc* mobjdesc)
     }
 }
 
+/**
+ * @brief Generates the TEV texture expression (TExp) tree based on the MObj's textures and rendering mode.
+ * @param mobj MObj pointer
+ * @param tobj_top Head of the TObj linked list
+ * @param list Pointer to store the resulting TExp list
+ * @return The root expression node
+ */
 HSD_TExp* MObjMakeTExp(HSD_MObj* mobj, HSD_TObj* tobj_top, HSD_TExp** list)
 {
     HSD_TExp *diff, *spec, *ext, *alpha;
-    HSD_TExp *exp, *exp_2, *exp_3;
-    HSD_TObj *tobj, *tobj_2, *tobj_3, *tobj_4, *toon = NULL;
+    HSD_TExp *texp1, *texp2, *texp3;
+    HSD_TObj *curr_tobj, *diff_tobj, *spec_tobj, *ext_tobj, *toon_tobj = NULL;
     u32 done = 0;
 
     u8 _[20];
 
     HSD_ASSERT(416, list);
     *list = NULL;
-    for (tobj = tobj_top; tobj != NULL; tobj = tobj->next) {
-        if (tobj_coord(tobj) == TEX_COORD_TOON) {
-            toon = tobj;
+    for (curr_tobj = tobj_top; curr_tobj != NULL; curr_tobj = curr_tobj->next) {
+        if (tobj_coord(curr_tobj) == TEX_COORD_TOON) {
+            toon_tobj = curr_tobj;
         }
     }
 
     if (mobj->rendermode & RENDER_VERTEX) {
-        exp = HSD_TExpTev(list);
-        HSD_TExpOrder(exp, NULL, GX_COLOR0A0);
-        HSD_TExpColorOp(exp, GX_TEV_ADD, GX_TB_ZERO, GX_CS_SCALE_1, GX_ENABLE);
-        HSD_TExpColorIn(exp, HSD_TE_0, HSD_TEXP_ZERO, HSD_TE_0, HSD_TEXP_ZERO,
+        texp1 = HSD_TExpTev(list);
+        HSD_TExpOrder(texp1, NULL, GX_COLOR0A0);
+        HSD_TExpColorOp(texp1, GX_TEV_ADD, GX_TB_ZERO, GX_CS_SCALE_1, GX_ENABLE);
+        HSD_TExpColorIn(texp1, HSD_TE_0, HSD_TEXP_ZERO, HSD_TE_0, HSD_TEXP_ZERO,
                         HSD_TE_0, HSD_TEXP_ZERO, HSD_TE_RGB, HSD_TEXP_RAS);
-        HSD_TExpAlphaOp(exp, GX_TEV_ADD, GX_TB_ZERO, GX_CS_SCALE_1, GX_ENABLE);
-        HSD_TExpAlphaIn(exp, HSD_TE_0, HSD_TEXP_ZERO, HSD_TE_0, HSD_TEXP_ZERO,
+        HSD_TExpAlphaOp(texp1, GX_TEV_ADD, GX_TB_ZERO, GX_CS_SCALE_1, GX_ENABLE);
+        HSD_TExpAlphaIn(texp1, HSD_TE_0, HSD_TEXP_ZERO, HSD_TE_0, HSD_TEXP_ZERO,
                         HSD_TE_0, HSD_TEXP_ZERO, HSD_TE_A, HSD_TEXP_RAS);
-        diff = exp;
-        alpha = exp;
+        diff = texp1;
+        alpha = texp1;
     } else {
         HSD_TExp* diff_cnst =
             HSD_TExpCnst(&mobj->mat->diffuse, HSD_TE_RGB, HSD_TE_U8, list);
         HSD_TExp* alpha_cnst =
             HSD_TExpCnst(&mobj->mat->alpha, HSD_TE_X, HSD_TE_F32, list);
 
-        exp = HSD_TExpTev(list);
-        HSD_TExpColorOp(exp, GX_TEV_ADD, GX_TB_ZERO, GX_CS_SCALE_1, GX_ENABLE);
-        HSD_TExpColorIn(exp, HSD_TE_0, HSD_TEXP_ZERO, HSD_TE_0, HSD_TEXP_ZERO,
+        texp1 = HSD_TExpTev(list);
+        HSD_TExpColorOp(texp1, GX_TEV_ADD, GX_TB_ZERO, GX_CS_SCALE_1, GX_ENABLE);
+        HSD_TExpColorIn(texp1, HSD_TE_0, HSD_TEXP_ZERO, HSD_TE_0, HSD_TEXP_ZERO,
                         HSD_TE_0, HSD_TEXP_ZERO, HSD_TE_RGB, diff_cnst);
-        HSD_TExpAlphaOp(exp, GX_TEV_ADD, GX_TB_ZERO, GX_CS_SCALE_1, GX_ENABLE);
-        HSD_TExpAlphaIn(exp, HSD_TE_0, HSD_TEXP_ZERO, HSD_TE_0, HSD_TEXP_ZERO,
+        HSD_TExpAlphaOp(texp1, GX_TEV_ADD, GX_TB_ZERO, GX_CS_SCALE_1, GX_ENABLE);
+        HSD_TExpAlphaIn(texp1, HSD_TE_0, HSD_TEXP_ZERO, HSD_TE_0, HSD_TEXP_ZERO,
                         HSD_TE_0, HSD_TEXP_ZERO, HSD_TE_X, alpha_cnst);
-        diff = exp;
-        alpha = exp;
+        diff = texp1;
+        alpha = texp1;
     }
 
-    for (tobj_2 = tobj_top; tobj_2 != NULL; tobj_2 = tobj_2->next) {
-        if ((tobj_2->flags & (TEX_LIGHTMAP_DIFFUSE | TEX_LIGHTMAP_AMBIENT)) &&
-            tobj_2->id != GX_TEXMAP_NULL)
+    for (diff_tobj = tobj_top; diff_tobj != NULL; diff_tobj = diff_tobj->next) {
+        if ((diff_tobj->flags & (TEX_LIGHTMAP_DIFFUSE | TEX_LIGHTMAP_AMBIENT)) &&
+            diff_tobj->id != GX_TEXMAP_NULL)
         {
-            HSD_TOBJ_METHOD(tobj_2)->make_texp(
-                tobj_2, (TEX_LIGHTMAP_DIFFUSE | TEX_LIGHTMAP_AMBIENT), done,
+            HSD_TOBJ_METHOD(diff_tobj)->make_texp(
+                diff_tobj, (TEX_LIGHTMAP_DIFFUSE | TEX_LIGHTMAP_AMBIENT), done,
                 &diff, &alpha, list);
         }
     }
     done |= (TEX_LIGHTMAP_DIFFUSE | TEX_LIGHTMAP_AMBIENT);
 
     if (mobj->rendermode & RENDER_DIFFUSE) {
-        exp_2 = HSD_TExpTev(list);
-        if (toon != NULL) {
-            HSD_TExpOrder(exp_2, toon, GX_COLOR0A0);
-            HSD_TExpColorOp(exp_2, GX_TEV_ADD, GX_TB_ZERO, GX_CS_SCALE_1,
+        texp2 = HSD_TExpTev(list);
+        if (toon_tobj != NULL) {
+            HSD_TExpOrder(texp2, toon_tobj, GX_COLOR0A0);
+            HSD_TExpColorOp(texp2, GX_TEV_ADD, GX_TB_ZERO, GX_CS_SCALE_1,
                             GX_ENABLE);
-            HSD_TExpColorIn(exp_2, HSD_TE_0, HSD_TEXP_ZERO, HSD_TE_RGB, diff,
+            HSD_TExpColorIn(texp2, HSD_TE_0, HSD_TEXP_ZERO, HSD_TE_RGB, diff,
                             HSD_TE_RGB, HSD_TEXP_TEX, HSD_TE_0, HSD_TEXP_ZERO);
         } else {
-            HSD_TExpOrder(exp_2, NULL, GX_COLOR0A0);
-            HSD_TExpColorOp(exp_2, GX_TEV_ADD, GX_TB_ZERO, GX_CS_SCALE_1,
+            HSD_TExpOrder(texp2, NULL, GX_COLOR0A0);
+            HSD_TExpColorOp(texp2, GX_TEV_ADD, GX_TB_ZERO, GX_CS_SCALE_1,
                             GX_ENABLE);
-            HSD_TExpColorIn(exp_2, HSD_TE_0, HSD_TEXP_ZERO, HSD_TE_RGB, diff,
+            HSD_TExpColorIn(texp2, HSD_TE_0, HSD_TEXP_ZERO, HSD_TE_RGB, diff,
                             HSD_TE_RGB, HSD_TEXP_RAS, HSD_TE_0, HSD_TEXP_ZERO);
         }
-        diff = exp_2;
-        HSD_TExpAlphaOp(exp_2, GX_TEV_ADD, GX_TB_ZERO, GX_CS_SCALE_1,
+        diff = texp2;
+        HSD_TExpAlphaOp(texp2, GX_TEV_ADD, GX_TB_ZERO, GX_CS_SCALE_1,
                         GX_ENABLE);
-        HSD_TExpAlphaIn(exp_2, HSD_TE_0, HSD_TEXP_ZERO, HSD_TE_A, alpha,
+        HSD_TExpAlphaIn(texp2, HSD_TE_0, HSD_TEXP_ZERO, HSD_TE_A, alpha,
                         HSD_TE_A, HSD_TEXP_RAS, HSD_TE_0, HSD_TEXP_ZERO);
-        alpha = exp_2;
+        alpha = texp2;
     }
 
     if (mobj->rendermode & RENDER_SPECULAR) {
         HSD_TExp* cnst =
             HSD_TExpCnst(&mobj->mat->specular, HSD_TE_RGB, HSD_TE_U8, list);
-        exp_3 = HSD_TExpTev(list);
-        HSD_TExpColorOp(exp_3, GX_TEV_ADD, GX_TB_ZERO, GX_CS_SCALE_1,
+        texp3 = HSD_TExpTev(list);
+        HSD_TExpColorOp(texp3, GX_TEV_ADD, GX_TB_ZERO, GX_CS_SCALE_1,
                         GX_ENABLE);
-        HSD_TExpColorIn(exp_3, HSD_TE_0, HSD_TEXP_ZERO, HSD_TE_0,
+        HSD_TExpColorIn(texp3, HSD_TE_0, HSD_TEXP_ZERO, HSD_TE_0,
                         HSD_TEXP_ZERO, HSD_TE_0, HSD_TEXP_ZERO, HSD_TE_RGB,
                         cnst);
-        spec = exp_3;
+        spec = texp3;
 
-        for (tobj_3 = tobj_top; tobj_3 != NULL; tobj_3 = tobj_3->next) {
-            if ((tobj_3->flags & TEX_LIGHTMAP_SPECULAR) &&
-                tobj_3->id != GX_TEXMAP_NULL)
+        for (spec_tobj = tobj_top; spec_tobj != NULL; spec_tobj = spec_tobj->next) {
+            if ((spec_tobj->flags & TEX_LIGHTMAP_SPECULAR) &&
+                spec_tobj->id != GX_TEXMAP_NULL)
             {
-                HSD_TOBJ_METHOD(tobj_3)->make_texp(
-                    tobj_3, TEX_LIGHTMAP_SPECULAR, done, &spec, &alpha, list);
+                HSD_TOBJ_METHOD(spec_tobj)->make_texp(
+                    spec_tobj, TEX_LIGHTMAP_SPECULAR, done, &spec, &alpha, list);
             }
         }
         done |= TEX_LIGHTMAP_SPECULAR;
 
-        exp_3 = HSD_TExpTev(list);
-        HSD_TExpOrder(exp_3, NULL, GX_COLOR1A1);
-        HSD_TExpColorOp(exp_3, GX_TEV_ADD, GX_TB_ZERO, GX_CS_SCALE_1,
+        texp3 = HSD_TExpTev(list);
+        HSD_TExpOrder(texp3, NULL, GX_COLOR1A1);
+        HSD_TExpColorOp(texp3, GX_TEV_ADD, GX_TB_ZERO, GX_CS_SCALE_1,
                         GX_ENABLE);
-        HSD_TExpColorIn(exp_3, HSD_TE_0, HSD_TEXP_ZERO, HSD_TE_RGB, spec,
+        HSD_TExpColorIn(texp3, HSD_TE_0, HSD_TEXP_ZERO, HSD_TE_RGB, spec,
                         HSD_TE_RGB, HSD_TEXP_RAS, HSD_TE_0, HSD_TEXP_ZERO);
-        spec = exp_3;
+        spec = texp3;
 
-        exp_3 = HSD_TExpTev(list);
-        HSD_TExpColorOp(exp_3, GX_TEV_ADD, GX_TB_ZERO, GX_CS_SCALE_1,
+        texp3 = HSD_TExpTev(list);
+        HSD_TExpColorOp(texp3, GX_TEV_ADD, GX_TB_ZERO, GX_CS_SCALE_1,
                         GX_ENABLE);
-        HSD_TExpColorIn(exp_3, HSD_TE_RGB, spec, HSD_TE_0, HSD_TEXP_ZERO,
+        HSD_TExpColorIn(texp3, HSD_TE_RGB, spec, HSD_TE_0, HSD_TEXP_ZERO,
                         HSD_TE_0, HSD_TEXP_ZERO, HSD_TE_RGB, diff);
-        diff = exp_3;
+        diff = texp3;
     }
 
     ext = diff;
 
-    for (tobj_4 = tobj_top; tobj_4 != NULL; tobj_4 = tobj_4->next) {
-        if ((tobj_4->flags & TEX_LIGHTMAP_EXT) && tobj_4->id != GX_TEXMAP_NULL)
+    for (ext_tobj = tobj_top; ext_tobj != NULL; ext_tobj = ext_tobj->next) {
+        if ((ext_tobj->flags & TEX_LIGHTMAP_EXT) && ext_tobj->id != GX_TEXMAP_NULL)
         {
-            HSD_TOBJ_METHOD(tobj_4)->make_texp(tobj_4, TEX_LIGHTMAP_EXT, done,
+            HSD_TOBJ_METHOD(ext_tobj)->make_texp(ext_tobj, TEX_LIGHTMAP_EXT, done,
                                                &ext, &alpha, list);
         }
     }
@@ -317,29 +386,33 @@ HSD_TExp* MObjMakeTExp(HSD_MObj* mobj, HSD_TObj* tobj_top, HSD_TExp** list)
     if (ext != alpha || HSD_TExpGetType(ext) != HSD_TE_TEV ||
         HSD_TExpGetType(alpha) != HSD_TE_TEV)
     {
-        exp_2 = HSD_TExpTev(list);
-        HSD_TExpColorOp(exp_2, GX_TEV_ADD, GX_TB_ZERO, GX_CS_SCALE_1,
+        texp2 = HSD_TExpTev(list);
+        HSD_TExpColorOp(texp2, GX_TEV_ADD, GX_TB_ZERO, GX_CS_SCALE_1,
                         GX_ENABLE);
-        HSD_TExpColorIn(exp_2, HSD_TE_0, HSD_TEXP_ZERO, HSD_TE_0,
+        HSD_TExpColorIn(texp2, HSD_TE_0, HSD_TEXP_ZERO, HSD_TE_0,
                         HSD_TEXP_ZERO, HSD_TE_0, HSD_TEXP_ZERO, HSD_TE_RGB,
                         ext);
-        HSD_TExpAlphaOp(exp_2, GX_TEV_ADD, GX_TB_ZERO, GX_CS_SCALE_1,
+        HSD_TExpAlphaOp(texp2, GX_TEV_ADD, GX_TB_ZERO, GX_CS_SCALE_1,
                         GX_ENABLE);
-        HSD_TExpAlphaIn(exp_2, HSD_TE_0, HSD_TEXP_ZERO, HSD_TE_0,
+        HSD_TExpAlphaIn(texp2, HSD_TE_0, HSD_TEXP_ZERO, HSD_TE_0,
                         HSD_TEXP_ZERO, HSD_TE_0, HSD_TEXP_ZERO, HSD_TE_A,
                         alpha);
-        return exp_2;
+        return texp2;
     }
 
     return ext;
 }
 
+/**
+ * @brief Compiles TEV (Texture Environment) texture expressions for the MObj.
+ * @param mobj MObj pointer
+ */
 void HSD_MObjCompileTev(HSD_MObj* mobj)
 {
-    HSD_TObj *tobj, **tail;
+    HSD_TObj *tobj, **shadow_tail;
     HSD_TExp* texp;
 
-    tail = NULL;
+    shadow_tail = NULL;
     if (mobj != NULL) {
         if (mobj->tevdesc != NULL) {
             HSD_TExpFreeTevDesc(mobj->tevdesc);
@@ -352,11 +425,11 @@ void HSD_MObjCompileTev(HSD_MObj* mobj)
         tobj = mobj->tobj;
         if (mobj->rendermode & RENDER_SHADOW) {
             if (tobj_shadows != NULL) {
-                tail = &tobj;
-                while (*tail != NULL) {
-                    tail = &(*tail)->next;
+                shadow_tail = &tobj;
+                while (*shadow_tail != NULL) {
+                    shadow_tail = &(*shadow_tail)->next;
                 }
-                *tail = tobj_shadows;
+                *shadow_tail = tobj_shadows;
             }
         }
         if (mobj->rendermode & RENDER_TOON) {
@@ -368,8 +441,8 @@ void HSD_MObjCompileTev(HSD_MObj* mobj)
         HSD_TObjAssignResources(tobj);
         texp = HSD_MOBJ_METHOD(mobj)->make_texp(mobj, tobj, &mobj->texp);
         HSD_TExpCompile(texp, &mobj->tevdesc, &mobj->texp);
-        if (tail != NULL) {
-            *tail = NULL;
+        if (shadow_tail != NULL) {
+            *shadow_tail = NULL;
         }
     }
 }
@@ -380,6 +453,12 @@ void HSD_MObjCompileTev(HSD_MObj* mobj)
 static char unused1[] = "hsdIsDescendantOf(info, &hsdMObj)";
 #endif
 
+/**
+ * @brief Loads the compiled TEV configuration to GX hardware registers.
+ * @param mobj MObj pointer
+ * @param tobj Texture object
+ * @param arg2 Additional volatile config flag
+ */
 void MObjSetupTev(HSD_MObj* mobj, HSD_TObj* tobj, u32 arg2)
 {
     HSD_ASSERT(624, mobj->tevdesc);
@@ -387,6 +466,11 @@ void MObjSetupTev(HSD_MObj* mobj, HSD_TObj* tobj, u32 arg2)
     HSD_TObjSetupVolatileTev(tobj, arg2);
 }
 
+/**
+ * @brief Main material setup function before drawing a mesh. Configures GX colors, TEV, textures, and blending (PE).
+ * @param mobj MObj pointer
+ * @param rendermode Current rendering mode
+ */
 void HSD_MObjSetup(HSD_MObj* mobj, u32 rendermode)
 {
     HSD_TObj *tobj, **tail;
@@ -424,6 +508,11 @@ void HSD_MObjSetup(HSD_MObj* mobj, u32 rendermode)
     }
 }
 
+/**
+ * @brief Cleans up GX state after drawing a mesh with this MObj.
+ * @param mobj MObj pointer
+ * @param rendermode Current rendering mode
+ */
 void HSD_MObjUnset(HSD_MObj* mobj, u32 rendermode)
 {
     HSD_TObjSetup(NULL);
@@ -447,6 +536,10 @@ static HSD_TObjDesc tobj_toon_desc = { NULL,
                                        NULL,
                                        NULL };
 
+/**
+ * @brief Sets the global texture image used for toon-shading rendering.
+ * @param imagedesc Image descriptor for toon shading
+ */
 void HSD_MObjSetToonTextureImage(HSD_ImageDesc* imagedesc)
 {
     if (tobj_toon == NULL) {
@@ -457,6 +550,13 @@ void HSD_MObjSetToonTextureImage(HSD_ImageDesc* imagedesc)
     tobj_toon->imagedesc = imagedesc;
 }
 
+/**
+ * @brief Overrides the diffuse color of the MObj's material.
+ * @param mobj MObj pointer
+ * @param r Red channel
+ * @param g Green channel
+ * @param b Blue channel
+ */
 void HSD_MObjSetDiffuseColor(HSD_MObj* mobj, u8 r, u8 g, u8 b)
 {
     mobj->mat->diffuse.r = r;
@@ -464,11 +564,21 @@ void HSD_MObjSetDiffuseColor(HSD_MObj* mobj, u8 r, u8 g, u8 b)
     mobj->mat->diffuse.b = b;
 }
 
+/**
+ * @brief Overrides the alpha blending value of the MObj's material.
+ * @param mobj MObj pointer
+ * @param alpha New alpha value (0.0 to 1.0)
+ */
 void HSD_MObjSetAlpha(HSD_MObj* mobj, f32 alpha)
 {
     mobj->mat->alpha = alpha;
 }
 
+/**
+ * @brief Retrieves the linked list of texture objects (TObj) from the MObj.
+ * @param mobj MObj pointer
+ * @return Head of the TObj linked list
+ */
 HSD_TObj* HSD_MObjGetTObj(HSD_MObj* mobj)
 {
     if (mobj == NULL) {
@@ -477,6 +587,10 @@ HSD_TObj* HSD_MObjGetTObj(HSD_MObj* mobj)
     return mobj->tobj;
 }
 
+/**
+ * @brief Destroys and frees the MObj and its associated resources.
+ * @param mobj MObj pointer
+ */
 void HSD_MObjRemove(HSD_MObj* mobj)
 {
     if (mobj != NULL) {
@@ -485,6 +599,10 @@ void HSD_MObjRemove(HSD_MObj* mobj)
     }
 }
 
+/**
+ * @brief Allocates a new, uninitialized MObj instance.
+ * @return Newly allocated MObj
+ */
 HSD_MObj* HSD_MObjAlloc(void)
 {
     HSD_MObj* mobj =
@@ -493,6 +611,10 @@ HSD_MObj* HSD_MObjAlloc(void)
     return mobj;
 }
 
+/**
+ * @brief Allocates a new HSD_Material struct, initializing its alpha to 1.0.
+ * @return Newly allocated Material
+ */
 HSD_Material* HSD_MaterialAlloc(void)
 {
     HSD_Material* mat = hsdAllocMemPiece(sizeof(HSD_Material));
@@ -502,6 +624,10 @@ HSD_Material* HSD_MaterialAlloc(void)
     return mat;
 }
 
+/**
+ * @brief Adds a texture object to the global shadow texture list.
+ * @param tobj Texture object
+ */
 void HSD_MObjAddShadowTexture(HSD_TObj* tobj)
 {
     HSD_TObj* cur;
@@ -522,27 +648,35 @@ static char unused2[] = "mobj->rendermode&RENDER_SPECULAR";
 #pragma pop
 #endif
 
+/**
+ * @brief Removes a texture object from the global shadow texture list.
+ * @param tobj Texture object
+ */
 void HSD_MObjDeleteShadowTexture(HSD_TObj* tobj)
 {
     if (tobj != NULL) {
-        HSD_TObj** cur = &tobj_shadows;
-        while (*cur != NULL) {
-            if (*cur == tobj) {
-                *cur = tobj->next;
+        HSD_TObj** curr_tobj = &tobj_shadows;
+        while (*curr_tobj != NULL) {
+            if (*curr_tobj == tobj) {
+                *curr_tobj = tobj->next;
                 tobj->next = NULL;
                 return;
             }
-            cur = &(*cur)->next;
+            curr_tobj = &(*curr_tobj)->next;
         }
     } else {
-        HSD_TObj* next;
-        for (next = NULL; tobj_shadows != NULL; tobj_shadows = next) {
-            next = tobj_shadows->next;
+        HSD_TObj* next_tobj;
+        for (next_tobj = NULL; tobj_shadows != NULL; tobj_shadows = next_tobj) {
+            next_tobj = tobj_shadows->next;
             tobj_shadows->next = NULL;
         }
     }
 }
 
+/**
+ * @brief Internal release method for freeing MObj components.
+ * @param o MObj as HSD_Class
+ */
 static void MObjRelease(HSD_Class* o)
 {
     HSD_MObj* mobj = HSD_MOBJ(o);
@@ -563,6 +697,10 @@ static void MObjRelease(HSD_Class* o)
     HSD_PARENT_INFO(&hsdMObj)->release(o);
 }
 
+/**
+ * @brief Clears global references (e.g. toon/shadow tobjs) upon class teardown.
+ * @param info Class info pointer
+ */
 static void MObjAmnesia(HSD_ClassInfo* info)
 {
     if (info == HSD_CLASS_INFO(default_class)) {
@@ -575,6 +713,9 @@ static void MObjAmnesia(HSD_ClassInfo* info)
     HSD_PARENT_INFO(&hsdMObj)->amnesia(info);
 }
 
+/**
+ * @brief Initializes the HSD_MObj class info and virtual methods.
+ */
 static void MObjInfoInit(void)
 {
     hsdInitClassInfo(HSD_CLASS_INFO(&hsdMObj), HSD_CLASS_INFO(&hsdClass),
