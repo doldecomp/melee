@@ -11,6 +11,7 @@
 
 use super::project::{Check, Project};
 use anyhow::{Context, Result, bail};
+use globset::{Glob, GlobSetBuilder};
 use melee_dat::{
     dwarf::{TypeGraph, cache::TypesFile, canonical::Canonical},
     hsd::Archive,
@@ -18,7 +19,9 @@ use melee_dat::{
         CWriter, Instance, Picker, SampleInfo, Source, root_of, target_object,
     },
 };
-use object::{Object, ObjectSection, ObjectSymbol, RelocationTarget};
+use object::{
+    Object, ObjectSection, ObjectSymbol, RelocationTarget, SectionKind,
+};
 use rayon::prelude::*;
 use serde::{Deserialize, Serialize};
 use serde_json::json;
@@ -60,6 +63,13 @@ struct Slice {
     /// The target object; its sidecar is written next to it as `.samples`
     #[arg(short, long)]
     output: PathBuf,
+    /// Every typed object, not just the best instance of each type
+    #[arg(long)]
+    all: bool,
+    /// Types never to sample, as globs on their names (e.g.
+    /// `HSD_VtxDescList`); data they point to stays bytes
+    #[arg(long)]
+    exclude: Vec<String>,
 }
 
 #[derive(clap::Args)]
@@ -133,7 +143,12 @@ fn slice(args: Slice) -> Result<()> {
         .with_context(|| format!("{}", path.display()))?;
 
     // This archive's best instance of each type and variant
-    let mut picker = Picker::new(&project.graph, &project.canonical);
+    let mut exclude = GlobSetBuilder::new();
+    for glob in &args.exclude {
+        exclude.add(Glob::new(glob)?);
+    }
+    let mut picker = Picker::new(&project.graph, &project.canonical)
+        .select(args.all, exclude.build()?);
     let mut walks = BTreeMap::new();
     for (at, archive) in &archives {
         let (_, walk) = project.walk(&args.archive, archive);
@@ -182,6 +197,14 @@ fn slice(args: Slice) -> Result<()> {
         fs::create_dir_all(dir)?;
     }
     fs::write(&args.output, target_object(&pairs)?)?;
+    // The target's order, for linking the base object's `.data` the same:
+    // clang lays variables out where an initializer first points to them
+    let mut script = String::from("SECTIONS\n{\n    .data : {\n");
+    for info in &infos {
+        script += &format!("        *(.data.{})\n", info.symbol);
+    }
+    script += "        *(.data .data.*)\n    }\n}\n";
+    fs::write(args.output.with_extension("ld"), script)?;
     let sidecar = Sidecar {
         archive: args.archive,
         samples: infos,
@@ -247,8 +270,8 @@ fn codegen(args: Codegen) -> Result<()> {
     )?;
 
     // A directory of each root's header and source, next to the unit's
-    // file, which includes the sources: `gen/PlMr/ftDataMario.{h,c}`,
-    // `gen/PlMr.c`
+    // file, which includes the sources: `src/PlMr/ftDataMario.{h,c}`,
+    // `src/PlMr.c`
     let stem = args
         .output
         .file_stem()
@@ -268,6 +291,9 @@ fn codegen(args: Codegen) -> Result<()> {
     );
     for root in &roots {
         fs::write(dir.join(format!("{}.h", root.name)), &root.header)?;
+        unit += &format!("#include \"{stem}/{}.h\"\n", root.name);
+    }
+    for root in &roots {
         if let Some(source) = &root.source {
             fs::write(dir.join(format!("{}.c", root.name)), source)?;
             unit += &format!("#include \"{stem}/{}.c\"\n", root.name);
@@ -369,6 +395,36 @@ struct UnitMatch {
     name: String,
     measures: MatchMeasures,
     samples: Vec<SampleMatch>,
+    /// The base object's contents outside `.data`, e.g. code or strings
+    /// from headers, which the target doesn't have.
+    extra: Vec<String>,
+}
+
+/// Allocated sections of a unit's base object other than `.data`, with
+/// their sizes.
+fn extra_sections(dir: &Path, unit: &str) -> Result<Vec<String>> {
+    let path = dir.join(format!("base/{unit}.o"));
+    let data =
+        fs::read(&path).with_context(|| format!("{}", path.display()))?;
+    let obj = object::File::parse(&*data)?;
+    Ok(obj
+        .sections()
+        .filter(|s| s.size() > 0 && s.name() != Ok(".data"))
+        .filter(|s| {
+            matches!(
+                s.kind(),
+                SectionKind::Text
+                    | SectionKind::Data
+                    | SectionKind::ReadOnlyData
+                    | SectionKind::ReadOnlyDataWithRel
+                    | SectionKind::ReadOnlyString
+                    | SectionKind::UninitializedData
+            )
+        })
+        .map(|s| {
+            format!("{} ({:#X} bytes)", s.name().unwrap_or("?"), s.size())
+        })
+        .collect())
 }
 
 /// objdiff's diff of one unit's target and base objects: each sample's
@@ -447,6 +503,7 @@ fn report(args: Report) -> Result<()> {
                 name: name.clone(),
                 measures,
                 samples,
+                extra: extra_sections(&args.dir, name)?,
             })
         })
         .collect::<Result<_>>()?;
@@ -476,6 +533,11 @@ fn report(args: Report) -> Result<()> {
             "{:6.1}%  {}  ({unit}, {:#X} bytes)",
             s.match_percent, s.name, s.size
         )?;
+    }
+    for unit in &units {
+        for section in &unit.extra {
+            writeln!(out, "  extra  {section} in base/{}.o", unit.name)?;
+        }
     }
     writeln!(
         out,

@@ -1,10 +1,18 @@
 # Samples of the .dat archives' data, typed by the DWARF build and compared
 # with objdiff (see tools/dat-cli). Each archive is a unit, built in four
-# steps: slice (archive → target/<unit>.o), codegen (→ gen/<unit>.c, which
-# includes a header and source per root in gen/<unit>/), format (→ src/)
+# steps: slice (archive → target/<unit>.o), codegen (→ src/<unit>.c, which
+# includes a header and source per root in src/<unit>/), format (in place)
 # and compile (→ base/<unit>.o). The build directory is also the objdiff
 # project.
 include_guard(GLOBAL)
+
+# Configured through a symlink, the build names the same files by two paths
+# (the physical one CMake resolves, and the logical one from $PWD), and
+# ninja then reruns CMake and rebuilds everything on every build
+file(REAL_PATH "${CMAKE_SOURCE_DIR}" _dat_real_source)
+if(NOT _dat_real_source STREQUAL CMAKE_SOURCE_DIR)
+    message(FATAL_ERROR "Configure from ${_dat_real_source}, not through a symlink (${CMAKE_SOURCE_DIR}): cd -P there first")
+endif()
 
 if(NOT MELEE_DWARF)
     message(FATAL_ERROR "MELEE_DAT_SAMPLES needs MELEE_DWARF: the samples are typed by its DWARF")
@@ -13,6 +21,23 @@ endif()
 set(MELEE_DAT "" CACHE FILEPATH "melee-dat binary; built with cargo if empty")
 set(MELEE_DAT_FILES "${CMAKE_SOURCE_DIR}/orig/${MELEE_VERSION}/files"
     CACHE PATH "The game's files, with its .dat archives")
+# What to sample is the user's choice, not the project's
+set(MELEE_DAT_SAMPLES_ALL "" CACHE STRING
+    "Archives (globs, e.g. PlFx.dat;Gr*.dat) to sample every typed object of, not one instance per type")
+set(MELEE_DAT_SAMPLES_EXCLUDE "" CACHE STRING
+    "Types (globs on their names) never to sample, e.g. bulky vertex or image records")
+
+set(_dat_all_regexes)
+foreach(_glob IN LISTS MELEE_DAT_SAMPLES_ALL)
+    string(REPLACE "." "\\." _regex "${_glob}")
+    string(REPLACE "*" ".*" _regex "${_regex}")
+    string(REPLACE "?" "." _regex "${_regex}")
+    list(APPEND _dat_all_regexes "^${_regex}$")
+endforeach()
+set(_dat_exclude)
+foreach(_glob IN LISTS MELEE_DAT_SAMPLES_EXCLUDE)
+    list(APPEND _dat_exclude --exclude "${_glob}")
+endforeach()
 
 set(_dat_config "${CMAKE_SOURCE_DIR}/config/${MELEE_VERSION}/dat.yml")
 set(_dat_symbols "${CMAKE_SOURCE_DIR}/config/${MELEE_VERSION}/dat_symbols.txt")
@@ -27,9 +52,10 @@ if(MELEE_DAT)
     set(_dat_tool "${MELEE_DAT}")
 else()
     set(_dat_tool "${CMAKE_CURRENT_BINARY_DIR}/cargo/release/melee-dat")
+    find_program(MELEE_CARGO cargo REQUIRED)
     add_custom_command(
         OUTPUT "${_dat_tool}"
-        COMMAND cargo build --release -p melee-dat
+        COMMAND "${MELEE_CARGO}" build --release -p melee-dat
             --manifest-path "${CMAKE_SOURCE_DIR}/Cargo.toml"
             --target-dir "${CMAKE_CURRENT_BINARY_DIR}/cargo"
         DEPFILE "${_dat_tool}.d"
@@ -69,46 +95,61 @@ foreach(_archive IN LISTS _dat_archives)
     get_filename_component(_unit "${_archive}" NAME_WE)
     set(_target "target/${_unit}.o")
     set(_sidecar "target/${_unit}.samples")
-    set(_generated "gen/${_unit}.c")
+    set(_layout "target/${_unit}.ld")
+    set(_object "obj/${_unit}.o")
     set(_source "src/${_unit}.c")
+    set(_formatted "stamp/${_unit}.formatted")
     set(_base "base/${_unit}.o")
 
+    set(_all)
+    foreach(_regex IN LISTS _dat_all_regexes)
+        if(_file MATCHES "${_regex}")
+            set(_all --all)
+        endif()
+    endforeach()
     add_custom_command(
-        OUTPUT "${_target}" "${_sidecar}"
+        OUTPUT "${_target}" "${_sidecar}" "${_layout}"
         COMMAND "${_dat_tool}" samples slice "${_file}" "${_dat_config}"
             -p "${CMAKE_SOURCE_DIR}" --types types.bin
-            --files "${MELEE_DAT_FILES}" -o "${_target}"
+            --files "${MELEE_DAT_FILES}" -o "${_target}" ${_all} ${_dat_exclude}
         DEPENDS "${_archive}" types.bin "${_dat_tool}" "${_dat_config}"
             "${_dat_symbols}"
         COMMENT "Slicing ${_file}"
         VERBATIM
     )
     add_custom_command(
-        OUTPUT "${_generated}"
+        OUTPUT "${_source}"
         COMMAND "${_dat_tool}" samples codegen "${_target}" --types types.bin
-            -o "${_generated}"
+            -o "${_source}"
         DEPENDS "${_target}" "${_sidecar}" types.bin "${_dat_tool}"
-        COMMENT "Generating ${_generated}"
+        COMMENT "Generating ${_source}"
         VERBATIM
     )
     add_custom_command(
-        OUTPUT "${_source}"
+        OUTPUT "${_formatted}"
         COMMAND "${CMAKE_COMMAND}"
             "-DCLANG_FORMAT=${MELEE_CLANG_FORMAT}"
             "-DSTYLE=${CMAKE_SOURCE_DIR}/.clang-format"
-            "-DGENERATED=${CMAKE_CURRENT_BINARY_DIR}/${_generated}"
             "-DSOURCE=${CMAKE_CURRENT_BINARY_DIR}/${_source}"
+            "-DSTAMP=${CMAKE_CURRENT_BINARY_DIR}/${_formatted}"
             -P "${CMAKE_SOURCE_DIR}/cmake/DatFormat.cmake"
-        DEPENDS "${_generated}" "${CMAKE_SOURCE_DIR}/.clang-format"
+        DEPENDS "${_source}" "${CMAKE_SOURCE_DIR}/.clang-format"
             "${CMAKE_SOURCE_DIR}/cmake/DatFormat.cmake"
         COMMENT "Formatting ${_source}"
         VERBATIM
     )
     add_custom_command(
         OUTPUT "${_base}"
-        COMMAND "${CMAKE_C_COMPILER}" "@${_dat_flags}" -MD -MF "${_base}.d"
-            -c "${_source}" -o "${_base}"
-        DEPENDS "${_source}" "${_dat_flags}"
+        BYPRODUCTS "${_object}"
+        # Each sample in its own section, then linked into .data in the
+        # target's order: clang lays variables out where an initializer
+        # first points to them
+        COMMAND "${CMAKE_C_COMPILER}" "@${_dat_flags}" -fdata-sections
+            -MD -MF "${_base}.d" -MT "${_base}"
+            -c "${_source}" -o "${_object}"
+        COMMAND "${CMAKE_LINKER}" -r -T "${_layout}" "${_object}"
+            -o "${_base}"
+        DEPENDS "${_source}" "${_formatted}" "${_layout}" "${_dat_flags}"
         DEPFILE "${_base}.d"
         COMMENT "Compiling ${_source}"
         VERBATIM

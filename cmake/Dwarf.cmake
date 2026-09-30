@@ -14,6 +14,10 @@ if(MELEE_VERSION_NUM EQUAL -1)
     message(FATAL_ERROR "Unknown MELEE_VERSION ${MELEE_VERSION}; one of: ${MELEE_VERSIONS}")
 endif()
 
+if(NOT NEWLIB_INCLUDE)
+    message(FATAL_ERROR "NEWLIB_INCLUDE is not set: configure from the dev shell")
+endif()
+
 target_compile_definitions(melee PRIVATE
     LINT
     DAT_ANNOTATIONS

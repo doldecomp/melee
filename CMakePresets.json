@@ -42,8 +42,7 @@
         "MELEE_DWARF": {
           "type": "BOOL",
           "value": true
-        },
-        "NEWLIB_INCLUDE": "$env{NEWLIB_INCLUDE}"
+        }
       }
     },
     {
