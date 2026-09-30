@@ -87,3 +87,24 @@ ftDataKirbyCopyPurin = PlKbCpPr.dat; // type:ftKbCopyParts_Dynamics
 ftDataKirbyCopyMewtwo = PlKbCpMt.dat; // type:ftKbCopyParts_ItemDynamics
 ftDataKirbyCopyFalco = PlKbCpFc.dat; // type:ftKbCopyParts_Items
 ftDataKirbyCopyGamewatch = PlKbCpGw.dat; // type:ftKbCopyParts_GameWatch
+
+// Pointer tables whose loaders declare only the first element's type: how
+// many elements there are. `count:*` lists end in a null pointer, then the
+// next object.
+map_plit = *; // count:*
+itemdata = *; // count:*
+ScMenMain_scene_lights = *; // count:*
+ScMenFigure_scene_lights = *; // count:*
+ScMenDisplay_scene_lights = *; // count:*
+ScTitle_scene_lights = *; // count:*
+ScInfCnt_scene_models = *; // count:*
+Stc_scemdls = *; // count:*
+MemCardIconData = *; // count:*
+ScGamRegStaffrollNames_scene_modelset = *; // count:10
+mnNameAutoName = *; // count:684
+mnNameAutoNameUs = *; // count:168
+mnNameRefuseName = *; // count:200
+mnNameRefuseNameUs = *; // count:22
+SIS_GrCorneriaData = *; // count:53
+SIS_GrPStadiumData = *; // count:22
+SIS_GrHomerunData = *; // count:4

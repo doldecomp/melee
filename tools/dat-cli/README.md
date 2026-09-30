@@ -95,7 +95,10 @@ used for publics no loader types:
 ```
 
 Names and archives take `*` and `?`. The first line with a matching archive
-wins, then the first `*` line. Types can be `T`, `T*`, `T[N]`, or `T[]` for
+wins, then the first `*` line. When the loader already gives a root's type,
+a line can still give its count: `count:N`, or `count:*` for as many as
+fit, e.g. `map_plit = *; // count:*` for a null-terminated list of
+`LightList*`. Types can be `T`, `T*`, `T[N]`, or `T[]` for
 as many as fit before the next public symbol or pointer target. Raw data
 (textures, palettes) is typed as `u8[]` or `u16[]`, like the extracted
 blobs in `config.yml`.

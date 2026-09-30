@@ -84,13 +84,6 @@ Not errors:
   relocated by `ftData` at runtime. They could be read as nested archives.
 - About 15,000 `void*` fields aren't followed. Use `DAT_TYPE` where the type
   is known.
-- Roots that are pointer tables: of the 30 roots loaded as `T**`, 20 are
-  null-terminated lists (e.g. `map_plit` in the stage archives, `itemdata`,
-  `Sc*_scene_lights`, `ScInfCnt_scene_models`, `Stc_scemdls`) and 8 are
-  fixed-count tables (`ScGamRegStaffrollNames_scene_modelset` = 10, GmStRoll,
-  3,760 relocations; `mnName*`; `SIS_Gr*Data`). The walk follows only the
-  first entry. Needs `count:`/`nullterm` in `dat_symbols.txt` for roots the
-  code types (they take precedence now).
 - `UnkStageDat.unk18` (map_head +0x18, count `unk1C`): entries are
   `{ HSD_LightDesc*, word }`, where the word is flags in some stages (GrGr:
   0 or 0xE0000000, as `ground.c` reads it through `LightOverrideEntry`) and
