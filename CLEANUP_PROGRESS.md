@@ -116,3 +116,12 @@
 - ✅ it/itdraw.c — Item rendering routines
 - ✅ it/itmaplib.c — Item ECB environment collision queries
 - ✅ it/itmaterial.c — Item shader and material effects
+- ❌ it/itanimlist.c — Item animation lists
+- ❌ it/itdrop.c — Item dropping logic
+- ❌ it/iteffect.c — Item particle effects
+- ❌ it/itzako.c — Fighting Wireframe items logic
+- ❌ it/it_26B1.c — Item physics state group 1
+- ❌ it/it_2725.c — Item physics state group 2
+- ❌ it/it_279C.c — Item physics state group 3
+- ❌ it/it_3F14.c — Item physics state group 4
+- ❌ it/it_3F2F.c — Item physics state group 5
