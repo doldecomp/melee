@@ -44,7 +44,7 @@
 - ✅ ft/ftmetal.c — Metal form effects
 - ✅ ft/ftwalljump.c — Wall jump mechanics
 - ✅ ft/ftwalkcommon.c — Walking mechanics
-- ❌ ft/ftwaitanim.c — Idle animation
+- ✅ ft/ftwaitanim.c — Idle animation
 
 #### Common Action States (ftCo_*)
 - ❌ ft/ftCo_800C703C.c through ft/ftCo_800C7CA0.c
