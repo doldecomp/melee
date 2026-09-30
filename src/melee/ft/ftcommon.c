@@ -1,3 +1,9 @@
+/**
+ * @file ftcommon.c
+ * @brief Common utility functions for fighters
+ * @details Contains shared physics, collision, and state management functions used by all fighters.
+ * Module prefix: ft
+ */
 #include "ftcommon.h"
 
 #include <melee/it/forward.h>
@@ -48,6 +54,12 @@
 
 const Vec3 ftCo_803B74A0 = { 0 };
 
+
+/**
+ * @brief Applies ground friction to decelerate the fighter
+ * @param fp Fighter state
+ * @param friction Ground friction amount to subtract from speed
+ */
 void ftCommon_CalcGroundAccel_Deaccel(Fighter* fp, float friction)
 {
     if (ABS(friction) > ABS(fp->gr_vel)) {
@@ -58,6 +70,14 @@ void ftCommon_CalcGroundAccel_Deaccel(Fighter* fp, float friction)
     fp->xE4_ground_accel_1 = friction;
 }
 
+
+/**
+ * @brief Calculates ground acceleration for dashes and runs
+ * @param fp Fighter state
+ * @param accel Base acceleration value to apply
+ * @param target_vel The maximum velocity cap for this movement
+ * @param friction Friction value applied when velocity exceeds target
+ */
 void ftCommon_CalcGroundAccel_DashRun(Fighter* fp, float accel,
                                       float target_vel, float friction)
 {
@@ -143,6 +163,11 @@ ftCommon_SetSelfMovementFromGroundedMovement_inline(HSD_GObj* gobj)
     fp->self_vel.z = 0;
 }
 
+
+/**
+ * @brief Transfers 1D ground velocity into X/Y self velocity vectors based on the floor normal
+ * @param gobj Fighter GObj
+ */
 void ftCommon_SetSelfMovementFromGroundedMovement(HSD_GObj* gobj)
 {
     float ground_friction;
@@ -485,11 +510,21 @@ void ftCommon_Fall(Fighter* fp, float gravity, float terminal_vel)
     }
 }
 
+
+/**
+ * @brief Standard falling physics: subtracts gravity up to terminal velocity
+ * @param fp Fighter state
+ */
 void ftCommon_FallBasic(Fighter* fp)
 {
     ftCommon_Fall(fp, fp->co_attrs.gravity, fp->co_attrs.terminal_velocity);
 }
 
+
+/**
+ * @brief Forces the fighter into fast fall velocity
+ * @param fp Fighter state
+ */
 void ftCommon_FallFast(Fighter* fp)
 {
     fp->self_vel.y = -fp->co_attrs.fast_fall_velocity;
@@ -510,6 +545,12 @@ void ftCommon_Ascend(Fighter* fp, float accel, float max)
     }
 }
 
+
+/**
+ * @brief Checks analog stick inputs to see if the player initiated a fast fall
+ * @param fp Fighter state
+ * @return true if fast fall triggered, false otherwise
+ */
 bool ftCommon_CheckFallFast(Fighter* fp)
 {
     if (!fp->fall_fast && fp->self_vel.y < 0 &&
@@ -685,6 +726,13 @@ void ftCommon_8007DB58(HSD_GObj* gobj)
     }
 }
 
+
+/**
+ * @brief Initializes grab state timers and properties
+ * @param fp Fighter state
+ * @param arg1 Unknown boolean
+ * @param timer Initial grab duration in frames
+ */
 void ftCommon_InitGrab(Fighter* fp, bool arg1, float timer)
 {
     fp->grab_timer = timer;
@@ -697,6 +745,13 @@ void ftCommon_InitGrab(Fighter* fp, bool arg1, float timer)
     }
 }
 
+
+/**
+ * @brief Reduces the remaining grab timer when the player mashes buttons or stick
+ * @param fp Fighter state
+ * @param arg1 Amount to subtract from timer per input
+ * @return true if a mash input was registered, false otherwise
+ */
 bool ftCommon_GrabMash(Fighter* fp, float arg1)
 {
     bool result = false;

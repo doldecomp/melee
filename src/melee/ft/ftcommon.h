@@ -1,3 +1,12 @@
+/**
+ * @file ftcommon.h
+ * @brief Common utility functions for fighters
+ * @details This module contains shared physics, collision, and state management functions
+ * used by all fighters. It handles core mechanics like acceleration, drifting, falling,
+ * and grabs.
+ * Module prefix: ft
+ */
+
 #ifndef GALE01_07C930
 #define GALE01_07C930
 
