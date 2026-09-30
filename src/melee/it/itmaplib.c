@@ -1,3 +1,11 @@
+/**
+ * @file itmaplib.c
+ * @brief Item Map Collision Library
+ * @details Primary interface between Items and the Map/ECB (Environment Collision Box) systems.
+ * Includes logic for querying ground lines, calculating ECB coordinates, resolving ledge limits, 
+ * slope physics, and terrain collision detection for items.
+ * Module prefix: it (Item)
+ */
 #include "itmaplib.h"
 
 #include "inlines.h"
@@ -30,6 +38,11 @@ static void sdata2_order(void)
 const Vec3 it_803B8570 = { 0.0f, 0.0f, 0.0f };
 const Vec3 it_803B857C = { 0.0f, 0.0f, 0.0f };
 
+/**
+ * @brief Handles map library operations for it_802759DC
+ * @param item_gobj1
+ * @param item_gobj2
+ */
 void it_802759DC(Item_GObj* item_gobj1, Item_GObj* item_gobj2)
 {
     Vec3 sp44;
@@ -91,7 +104,12 @@ void it_802759DC(Item_GObj* item_gobj1, Item_GObj* item_gobj2)
     }
 }
 
-void it_80275BC8(Item_GObj* item_gobj, HSD_GObj* arg_gobj)
+/**
+ * @brief Handles map library operations for it_80275BC8
+ * @param item_gobj
+ * @param owner_gobj
+ */
+void it_80275BC8(Item_GObj* item_gobj, HSD_GObj* owner_gobj)
 {
     Item* ip = GET_ITEM(item_gobj);
     itECB sp24;
@@ -101,13 +119,13 @@ void it_80275BC8(Item_GObj* item_gobj, HSD_GObj* arg_gobj)
     sp24 = ip->xBFC;
     it_802762BC(ip);
     ip->x378_itemColl.cur_pos = ip->pos;
-    if (arg_gobj != NULL) {
-        switch (it_80272D40(arg_gobj)) {
+    if (owner_gobj != NULL) {
+        switch (it_80272D40(owner_gobj)) {
         case 0:
-            it_8026BB68(arg_gobj, &sp14);
+            it_8026BB68(owner_gobj, &sp14);
             break;
         case 1:
-            it_8026BB88(arg_gobj, &sp14);
+            it_8026BB88(owner_gobj, &sp14);
             break;
         default:
             HSD_ASSERTREPORT(0x7FU, 0, "couldn't get Owner_GObj_Kind!!");
@@ -130,7 +148,12 @@ void it_80275BC8(Item_GObj* item_gobj, HSD_GObj* arg_gobj)
     it_80276100(item_gobj, &sp14);
 }
 
-void it_80275D5C(Item_GObj* item_gobj, itECB* arg_ecb)
+/**
+ * @brief Sets the ECB (Environment Collision Box) boundaries for an item it_80275D5C
+ * @param item_gobj
+ * @param ecb
+ */
+void it_80275D5C(Item_GObj* item_gobj, itECB* ecb)
 {
     f32 scale;
     s32 int_dir;
@@ -139,7 +162,7 @@ void it_80275D5C(Item_GObj* item_gobj, itECB* arg_ecb)
 
     item = GET_ITEM(item_gobj);
     scale = item->scl;
-    item->xC1C = *arg_ecb;
+    item->xC1C = *ecb;
     mpColl_SetECBSource_Fixed(
         &item->x378_itemColl, item_gobj, item->xC1C.top * scale,
         item->xC1C.bottom * scale, item->xC1C.right * scale,
@@ -152,6 +175,10 @@ void it_80275D5C(Item_GObj* item_gobj, itECB* arg_ecb)
     mpCollSetFacingDir(&item->x378_itemColl, int_dir);
 }
 
+/**
+ * @brief Updates ECB layout for an item based on facing direction and scale it_80275DFC
+ * @param item_gobj
+ */
 void it_80275DFC(Item_GObj* item_gobj)
 {
     Item* item;
@@ -175,6 +202,11 @@ void it_80275DFC(Item_GObj* item_gobj)
     mpCollSetFacingDir(&item->x378_itemColl, int_dir);
 }
 
+/**
+ * @brief Handles map library operations for it_80275E98
+ * @param item_gobj
+ * @param spawn
+ */
 void it_80275E98(Item_GObj* item_gobj, SpawnItem* spawn)
 {
     Item* item1;
@@ -243,6 +275,11 @@ void it_80275E98(Item_GObj* item_gobj, SpawnItem* spawn)
     mpColl_80043670(coll);
 }
 
+/**
+ * @brief Calculates map collision coordinate queries for an item it_80276100
+ * @param item_gobj
+ * @param pos
+ */
 void it_80276100(Item_GObj* item_gobj, Vec3* pos)
 {
     Item* item = GET_ITEM(item_gobj);
@@ -253,6 +290,11 @@ void it_80276100(Item_GObj* item_gobj, Vec3* pos)
     item->pos = coll->cur_pos;
 }
 
+/**
+ * @brief Calculates map collision coordinate queries for an item it_80276174
+ * @param item_gobj
+ * @param pos
+ */
 void it_80276174(Item_GObj* item_gobj, Vec3* pos)
 {
     f32 unused1;
@@ -271,6 +313,10 @@ void it_80276174(Item_GObj* item_gobj, Vec3* pos)
     }
 }
 
+/**
+ * @brief Handles map library operations for it_80276214
+ * @param item_gobj
+ */
 void it_80276214(Item_GObj* item_gobj)
 {
     Item* item;
@@ -283,6 +329,10 @@ void it_80276214(Item_GObj* item_gobj)
     }
 }
 
+/**
+ * @brief Handles map library operations for it_80276278
+ * @param item_gobj
+ */
 void it_80276278(Item_GObj* item_gobj)
 {
     Item* item;
@@ -294,17 +344,30 @@ void it_80276278(Item_GObj* item_gobj)
     mpColl_800436E4(coll_data, it_80274990(item_gobj));
 }
 
+/**
+ * @brief Handles map library operations for it_802762B0
+ * @param item
+ */
 void it_802762B0(Item* item)
 {
     item->ground_or_air = GA_Ground;
 }
 
+/**
+ * @brief Handles map library operations for it_802762BC
+ * @param item
+ */
 void it_802762BC(Item* item)
 {
     item->ground_or_air = GA_Air;
     item->xDC8_word.flags.x1F = 0;
 }
 
+/**
+ * @brief Detects ledge proximity by checking left and right edge collision flags it_802762D8
+ * @param item_gobj
+ * @return bool
+ */
 bool it_802762D8(Item_GObj* item_gobj)
 {
     CollData* coll;
@@ -321,6 +384,11 @@ bool it_802762D8(Item_GObj* item_gobj)
     return chk;
 }
 
+/**
+ * @brief Handles map library operations for it_80276308
+ * @param item_gobj
+ * @return s32
+ */
 s32 it_80276308(Item_GObj* item_gobj)
 {
     Item* item;
@@ -341,6 +409,12 @@ s32 it_80276308(Item_GObj* item_gobj)
     return ret_val;
 }
 
+/**
+ * @brief Handles map library operations for it_80276348
+ * @param item_gobj
+ * @param vec
+ * @return s32
+ */
 s32 it_80276348(Item_GObj* item_gobj, Vec3* vec)
 {
     s32 ret_val;
@@ -363,6 +437,11 @@ s32 it_80276348(Item_GObj* item_gobj, Vec3* vec)
     return ret_val;
 }
 
+/**
+ * @brief Queries ground line contact and updates floor index it_802763B8
+ * @param item_gobj
+ * @return bool
+ */
 bool it_802763B8(Item_GObj* item_gobj)
 {
     Item* item;
@@ -378,6 +457,11 @@ bool it_802763B8(Item_GObj* item_gobj)
     return chk;
 }
 
+/**
+ * @brief Handles map library operations for it_802763E0
+ * @param item_gobj
+ * @return s32
+ */
 s32 it_802763E0(Item_GObj* item_gobj)
 {
     int result = 0;
@@ -390,6 +474,12 @@ s32 it_802763E0(Item_GObj* item_gobj)
     return result;
 }
 
+/**
+ * @brief Handles map library operations for it_80276408
+ * @param item_gobj
+ * @param coll
+ * @param vec
+ */
 void it_80276408(Item_GObj* item_gobj, CollData* coll, Vec3* vec)
 {
     if (coll->env_flags & Collide_LeftWallMask) {
@@ -406,6 +496,11 @@ void it_80276408(Item_GObj* item_gobj, CollData* coll, Vec3* vec)
     }
 }
 
+/**
+ * @brief Calculates item slope rotation based on the ground normal vector it_8027649C
+ * @param item_gobj
+ * @return f32
+ */
 f32 it_8027649C(Item_GObj* item_gobj)
 {
     Vec3 normal;
@@ -424,10 +519,15 @@ f32 it_8027649C(Item_GObj* item_gobj)
     return angle;
 }
 
-void it_802765BC(Item_GObj* item_gobj, enum_t arg1)
+/**
+ * @brief Handles map library operations for it_802765BC
+ * @param item_gobj
+ * @param axis
+ */
+void it_802765BC(Item_GObj* item_gobj, enum_t axis)
 {
     Item* ip = GET_ITEM(item_gobj);
-    HSD_JObj* jobj = it_80272CC0(item_gobj, arg1);
+    HSD_JObj* jobj = it_80272CC0(item_gobj, axis);
     u32 bit_chk = ip->xDC8_word.flags.x17;
 
     if (bit_chk == 0) {
@@ -444,7 +544,12 @@ void it_802765BC(Item_GObj* item_gobj, enum_t arg1)
     }
 }
 
-void it_80276934(Item_GObj* item_gobj, enum_t arg1)
+/**
+ * @brief Handles map library operations for it_80276934
+ * @param item_gobj
+ * @param axis
+ */
+void it_80276934(Item_GObj* item_gobj, enum_t axis)
 {
     u8 _pad0[12];
     Vec3 sp80;
@@ -473,7 +578,7 @@ void it_80276934(Item_GObj* item_gobj, enum_t arg1)
     PAD_STACK(44);
 
     item1 = item_gobj->user_data;
-    jobj = it_80272CC0(item_gobj, arg1);
+    jobj = it_80272CC0(item_gobj, axis);
     bit_chk = item1->xDC8_word.flags.x17;
     if (bit_chk == 0) {
         item2 = item_gobj->user_data;
@@ -522,6 +627,10 @@ void it_80276934(Item_GObj* item_gobj, enum_t arg1)
     }
 }
 
+/**
+ * @brief Handles map library operations for it_80276CB8
+ * @param item_gobj
+ */
 void it_80276CB8(Item_GObj* item_gobj)
 {
     Item* item = item_gobj->user_data;
@@ -531,6 +640,10 @@ void it_80276CB8(Item_GObj* item_gobj)
     }
 }
 
+/**
+ * @brief Handles map library operations for it_80276CEC
+ * @param item_gobj
+ */
 void it_80276CEC(Item_GObj* item_gobj)
 {
     CollData* coll;
@@ -558,7 +671,13 @@ void it_80276CEC(Item_GObj* item_gobj)
     item->xC2C = coll_index;
 }
 
-bool it_80276D9C(Item_GObj* item_gobj, enum_t arg1)
+/**
+ * @brief Handles map library operations for it_80276D9C
+ * @param item_gobj
+ * @param axis
+ * @return bool
+ */
+bool it_80276D9C(Item_GObj* item_gobj, enum_t axis)
 {
     itECB sp34;
     CollData* coll;
@@ -605,33 +724,38 @@ bool it_80276D9C(Item_GObj* item_gobj, enum_t arg1)
         mpCollSetFacingDir(&item->x378_itemColl, dir2);
         return false;
     }
-    if ((arg1 & 4) && (coll->prev_env_flags & Collide_RightWallMask)) {
+    if ((axis & 4) && (coll->prev_env_flags & Collide_RightWallMask)) {
         ret_val = false;
         item->pos.x += 1.5f;
     }
-    if ((arg1 & 8) && (coll->prev_env_flags & Collide_LeftWallMask)) {
+    if ((axis & 8) && (coll->prev_env_flags & Collide_LeftWallMask)) {
         ret_val = false;
         item->pos.x -= 1.5f;
     }
-    if ((arg1 & 2) && (coll->prev_env_flags & Collide_CeilingMask)) {
+    if ((axis & 2) && (coll->prev_env_flags & Collide_CeilingMask)) {
         ret_val = false;
         item->pos.y -= 1.5f;
     }
-    if ((arg1 & 1) && (coll->prev_env_flags & Collide_FloorMask)) {
+    if ((axis & 1) && (coll->prev_env_flags & Collide_FloorMask)) {
         ret_val = false;
         item->pos.y += 1.5f;
     }
     return ret_val;
 }
 
-void it_80276FC4(Item_GObj* item_gobj, s32 arg1)
+/**
+ * @brief Handles map library operations for it_80276FC4
+ * @param item_gobj
+ * @param axis
+ */
+void it_80276FC4(Item_GObj* item_gobj, s32 axis)
 {
     Item* it = item_gobj->user_data;
     ItemAttr* attr = it->xCC_item_attr;
     it_8027781C(item_gobj);
-    if (it_80276D9C(item_gobj, arg1)) {
+    if (it_80276D9C(item_gobj, axis)) {
         it_8027321C(item_gobj);
-        it_80277C40(item_gobj, arg1);
+        it_80277C40(item_gobj, axis);
         it_80275640(item_gobj, attr->x58);
     }
 }
@@ -653,6 +777,11 @@ static inline bool checkNormalAngle(Item_GObj* gobj)
     return false;
 }
 
+/**
+ * @brief Applies terrain slope physics calculations to item velocity it_80277040
+ * @param item_gobj
+ * @return bool
+ */
 bool it_80277040(Item_GObj* item_gobj)
 {
     UNUSED u8 _top[4];
@@ -767,6 +896,11 @@ static inline float sqrtf_accurate_store(float x, volatile float* y)
     return x;
 }
 
+/**
+ * @brief Handles map library operations for it_8027737C
+ * @param item_gobj
+ * @param pos
+ */
 void it_8027737C(Item_GObj* item_gobj, Vec3* pos)
 {
     Vec3 sp1C;
@@ -803,6 +937,11 @@ void it_8027737C(Item_GObj* item_gobj, Vec3* pos)
     *pos = sp1C;
 }
 
+/**
+ * @brief Handles map library operations for it_80277544
+ * @param item_gobj
+ * @return bool
+ */
 bool it_80277544(Item_GObj* item_gobj)
 {
     Vec3 sp10;
@@ -839,16 +978,21 @@ static inline float sqrtf_accurate_sp18(float x)
     return x;
 }
 
-void it_802775F0(Item_GObj* item_gobj, Vec3* arg1)
+/**
+ * @brief Handles map library operations for it_802775F0
+ * @param item_gobj
+ * @param axis
+ */
+void it_802775F0(Item_GObj* item_gobj, Vec3* axis)
 {
     f32 temp_sqrt;
     Item* item = GET_ITEM(item_gobj);
 
     temp_sqrt = 0.0f;
     if (item->spin_spd != temp_sqrt) {
-        temp_sqrt = sqrtf_accurate_sp18(SQ(arg1->x) + SQ(arg1->y));
+        temp_sqrt = sqrtf_accurate_sp18(SQ(axis->x) + SQ(axis->y));
         item->xD3C_spinSpeed = 0.85f * (temp_sqrt / item->xC1C.bottom);
-        if ((arg1->x < 0.0f ? -1 : 1) != (item->facing_dir < 0.0f ? -1 : 1)) {
+        if ((axis->x < 0.0f ? -1 : 1) != (item->facing_dir < 0.0f ? -1 : 1)) {
             item->xD3C_spinSpeed = -item->xD3C_spinSpeed;
         }
         if (item->xDC8_word.flags.x19 != 1) {
@@ -857,6 +1001,11 @@ void it_802775F0(Item_GObj* item_gobj, Vec3* arg1)
     }
 }
 
+/**
+ * @brief Handles map library operations for it_8027770C
+ * @param item_gobj
+ * @return bool
+ */
 bool it_8027770C(Item_GObj* item_gobj)
 {
     Vec3 sp38;
@@ -924,6 +1073,11 @@ static inline float return_sqrt_value(Vec3* v)
     return sqrtf_accurate_local(product_xy(v, v));
 }
 
+/**
+ * @brief Handles map library operations for it_8027781C
+ * @param item_gobj
+ * @return bool
+ */
 bool it_8027781C(Item_GObj* item_gobj)
 {
     Item* item;
@@ -1008,7 +1162,12 @@ bool it_8027781C(Item_GObj* item_gobj)
     return false;
 }
 
-void it_80277C40(Item_GObj* item_gobj, s32 arg1)
+/**
+ * @brief Handles map library operations for it_80277C40
+ * @param item_gobj
+ * @param axis
+ */
+void it_80277C40(Item_GObj* item_gobj, s32 axis)
 {
     Vec3 sp20;
     Vec3 sp14;
@@ -1023,19 +1182,19 @@ void it_80277C40(Item_GObj* item_gobj, s32 arg1)
     sp20.z = 0.0f;
     sp20.y = 0.0f;
     sp20.x = 0.0f;
-    if (arg1 & 8) {
+    if (axis & 8) {
         sp20.x = coll->ecb.right.x;
         sp20.y = coll->ecb.right.y;
     }
-    if (arg1 & 4) {
+    if (axis & 4) {
         sp20.x = coll->ecb.left.x;
         sp20.y = coll->ecb.left.y;
     }
-    if (arg1 & 2) {
+    if (axis & 2) {
         sp20.x = coll->ecb.top.x;
         sp20.y = coll->ecb.top.y;
     }
-    if (arg1 & 1) {
+    if (axis & 1) {
         sp20.x = coll->ecb.bottom.x;
         sp20.y = coll->ecb.bottom.y;
     }
