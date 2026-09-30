@@ -7,7 +7,7 @@
 /* 0DE9D8 */ bool ftCo_800DE9D8(Fighter_GObj* gobj);
 /* 0DEA28 */ void ftCo_800DEA28(Fighter_GObj* gobj);
 
-/// @todo enum params
+
 /* 0DEAE8 */ void ftCo_800DEAE8(Fighter_GObj* gobj, FtMotionId msid0,
                                 FtMotionId msid1);
 
