@@ -25,7 +25,7 @@
 /* 2204D0 */ static bool grTDonkey_802204D0(Ground_GObj*);
 /* 2204D8 */ static void stageGObj1_GObjProc(Ground_GObj*);
 /* 2204F8 */ static void grTDonkey_802204F8(Ground_GObj*);
-/* 2204FC */ static DynamicsDesc* grTDonkey_802204FC(enum_t);
+/* 2204FC */ static lbColl_80008D30_arg1* grTDonkey_802204FC(enum_t);
 /* 220504 */ static bool grTDonkey_80220504(Vec3*, int, HSD_JObj*);
 
 static StageCallbacks grTDk_StageCallbacks[] = {
@@ -151,7 +151,7 @@ static void stageGObj1_GObjProc(Ground_GObj* arg0)
 
 static void grTDonkey_802204F8(Ground_GObj* arg0) {}
 
-static DynamicsDesc* grTDonkey_802204FC(enum_t arg0)
+static lbColl_80008D30_arg1* grTDonkey_802204FC(enum_t arg0)
 {
     return NULL;
 }

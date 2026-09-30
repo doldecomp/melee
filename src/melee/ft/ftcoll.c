@@ -180,7 +180,8 @@ bool ftColl_80076640(Fighter* fp, float* dmg)
  * @param hurt Hurtbox capsule that was struck
  */
 void ftColl_80076764(int arg0, enum_t arg1, Fighter_GObj* arg2,
-                     DynamicsDesc* arg3, Fighter* fp, FighterHurtCapsule* hurt)
+                     lbColl_80008D30_arg1* arg3, Fighter* fp,
+                     FighterHurtCapsule* hurt)
 {
     if (dmg_log0_idx < ARRAY_SIZE(dmg_log0)) {
         DmgLogEntry* entry = &dmg_log0[dmg_log0_idx];
@@ -190,7 +191,7 @@ void ftColl_80076764(int arg0, enum_t arg1, Fighter_GObj* arg2,
         entry->xC.unk_anim0 = arg3;
         entry->x10.hurt1 = hurt;
         entry->pos = fp->cur_pos;
-        entry->size_of_xC = arg3->count;
+        entry->size_of_xC = arg3->damage;
         ++dmg_log0_idx;
     } else {
         HSD_ASSERTREPORT(0xF9, 0, "damage log over %d!!\n",
@@ -2641,8 +2642,7 @@ void ftColl_8007A06C(Fighter_GObj* gobj, void* dmg_ptr, void* log, size_t idx,
         }
 
         case 3:
-            lbColl_80008D30(&stack_hit,
-                            (lbColl_80008D30_arg1*) entry->xC.unk_anim0);
+            lbColl_80008D30(&stack_hit, entry->xC.unk_anim0);
             kb = ftColl_80079AB0(
                 fp, &stack_hit, stack_hit.unk_count, gm_8016B248(), 1.0F,
                 Player_GetDefenseRatio(fp->player_idx), co->weight);
@@ -2702,8 +2702,7 @@ void ftColl_8007A06C(Fighter_GObj* gobj, void* dmg_ptr, void* log, size_t idx,
     }
 
     case 3: {
-        lbColl_80008D30_arg1* env =
-            (lbColl_80008D30_arg1*) best_entry->xC.unk_anim0;
+        lbColl_80008D30_arg1* env = best_entry->xC.unk_anim0;
 
         dir = fp->facing_dir;
         sfx_severity = 0;
@@ -3493,7 +3492,7 @@ void ftColl_8007BAC0(Fighter_GObj* gobj)
     int i;
     Ground_GObj* ground;
     Fighter* fp;
-    DynamicsDesc* desc;
+    lbColl_80008D30_arg1* desc;
     u32 type;
     struct ftDeviceUnk3* arr;
     PAD_STACK(8);

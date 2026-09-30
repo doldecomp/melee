@@ -1,5 +1,10 @@
+mod coverage;
+
+use super::project::Project;
+
 use super::dwarf_path;
 use anyhow::{Context, Result};
+use globset::GlobSet;
 use melee_dat::{
     config::{gather_files, get_config},
     dwarf::{
@@ -9,7 +14,6 @@ use melee_dat::{
         roots::{RootName, roots},
     },
     hsd::Archive,
-    walk::{Walker, macros},
 };
 use std::{
     collections::{BTreeMap, BTreeSet},
@@ -33,6 +37,9 @@ enum Command {
 
     /// Type each archive's data by walking it from its roots
     Walk(args::Check),
+
+    /// How much of each archive the walk explains, and where the gaps are
+    Coverage(args::Coverage),
 }
 
 mod args {
@@ -46,16 +53,26 @@ mod args {
         pub dwarf: Option<PathBuf>,
     }
 
+    pub use crate::cmd::project::Check;
+
     #[derive(Args)]
-    pub struct Check {
-        /// Project config
-        #[arg(default_value = "config/GALE01/dat.yml")]
-        pub cfg_path: PathBuf,
-        #[arg(short = 'p', long)]
-        pub proj_path: Option<PathBuf>,
-        /// ELF or object with DWARF [default: $MELEE_DWARF_ELF]
+    pub struct Coverage {
+        #[command(flatten)]
+        pub check: Check,
+        /// What to list
+        #[arg(long, value_enum, default_value_t)]
+        pub by: super::coverage::View,
+        /// Only archives whose file matches (glob; repeatable)
+        #[arg(short, long)]
+        pub archive: Vec<String>,
+        /// Rows to show in the table, by size; 0 for all
+        #[arg(long, default_value_t = 25)]
+        pub top: usize,
+        /// Also list every unexplained relocation
         #[arg(long)]
-        pub dwarf: Option<PathBuf>,
+        pub list: bool,
+        #[arg(long, value_enum, default_value_t)]
+        pub format: super::coverage::Format,
     }
 }
 
@@ -64,6 +81,7 @@ pub fn run(Args { command }: Args) -> Result<()> {
         Command::Roots(args) => list_roots(args),
         Command::Check(args) => check(args),
         Command::Walk(args) => walk(args),
+        Command::Coverage(args) => coverage::run(args),
     }
 }
 
@@ -79,7 +97,7 @@ fn list_roots(args: args::Roots) -> Result<()> {
         (RootName, Option<String>),
         BTreeMap<Option<String>, Vec<String>>,
     > = BTreeMap::new();
-    for root in roots(&graph) {
+    for root in roots(&graph, &canonical) {
         let ty = root.ty.map(|ty| renderer.declare(Some(ty), ""));
         let site = match root.function(&graph) {
             Some(function) => format!("{} {function}", root.location(&graph)),
@@ -149,14 +167,20 @@ fn index_archives(
     paths.sort();
     for path in paths {
         let bytes = fs::read(&path)?;
-        let archive = Archive::parse(&bytes)
+        let file = path.strip_prefix(&base)?.to_string_lossy().into_owned();
+        let archives = Archive::parse_packed(&bytes)
             .with_context(|| format!("{}", path.display()))?;
-        let rel = path.strip_prefix(&base)?.to_string_lossy().into_owned();
-        for (name, symbol) in archive.named_publics() {
-            index
-                .entry(String::from_utf8_lossy(name).into_owned())
-                .or_default()
-                .push((rel.clone(), archive.extent(symbol.offset)));
+        for (at, archive) in archives {
+            let rel = match at {
+                0 => file.clone(),
+                _ => format!("{file}@{at:#X}"),
+            };
+            for (name, symbol) in archive.named_publics() {
+                index
+                    .entry(String::from_utf8_lossy(name).into_owned())
+                    .or_default()
+                    .push((rel.clone(), archive.extent(symbol.offset)));
+            }
         }
     }
     Ok(index)
@@ -171,7 +195,7 @@ fn check(args: args::Check) -> Result<()> {
     // Each literal root name with the distinct types it is loaded as
     let mut types: BTreeMap<String, BTreeSet<_>> = BTreeMap::new();
     let mut dynamic = 0;
-    for root in roots(&graph) {
+    for root in roots(&graph, &canonical) {
         match root.name {
             RootName::Literal(name) => {
                 let entry = types.entry(name).or_default();
@@ -232,56 +256,23 @@ fn check(args: args::Check) -> Result<()> {
 }
 
 fn walk(args: args::Check) -> Result<()> {
-    let config = get_config(args.proj_path.as_ref(), &args.cfg_path)?;
-    let base = args
-        .proj_path
-        .clone()
-        .unwrap_or_default()
-        .join(config.base.as_str());
-    let graph = TypeGraph::load(dwarf_path(args.dwarf.clone())?)?;
-    let canonical = Canonical::new(&graph);
-    let renderer = Renderer::new(&graph, &canonical);
-    let macros = macros(&graph);
-
-    // The type of each root name; roots are loaded as one type each
-    let mut root_types = BTreeMap::new();
-    for root in roots(&graph) {
-        if let (RootName::Literal(name), Some(ty)) = (root.name, root.ty) {
-            root_types.entry(name).or_insert(ty);
-        }
-    }
-
+    let project = Project::load(&args)?;
+    let renderer = Renderer::new(&project.graph, &project.canonical);
     let mut out = io::stdout().lock();
     let (mut walked, mut publics, mut typed, mut relocs, mut explained) =
         (0, 0, 0, 0, 0);
     let (mut untyped_pointers, mut sentinels, mut conflicts) = (0, 0, 0);
     let mut kinds: BTreeMap<&str, usize> = BTreeMap::new();
-    let mut paths = gather_files(&base, &config.include)?;
-    paths.sort();
-    for path in paths {
-        let bytes = fs::read(&path)?;
-        let archive = Archive::parse(&bytes)
-            .with_context(|| format!("{}", path.display()))?;
-        let rel = path.strip_prefix(&base)?.to_string_lossy().into_owned();
-
-        let mut walker = Walker::new(&graph, &canonical, &macros, &archive);
-        let mut any = false;
-        for (name, symbol) in archive.named_publics() {
-            let name = String::from_utf8_lossy(name);
-            if let Some(&ty) = root_types.get(name.as_ref()) {
-                walker.root(symbol.offset, ty, &name);
-                any = true;
-            }
+    project.walk_all(&GlobSet::empty(), |w| {
+        publics += w.archive.publics.len();
+        relocs += w.archive.relocs.len();
+        if !w.rooted {
+            return Ok(());
         }
-        let result = walker.finish();
-
-        publics += archive.publics.len();
-        relocs += archive.relocs.len();
-        if !any {
-            continue;
-        }
+        let result = &w.result;
         walked += 1;
-        typed += archive
+        typed += w
+            .archive
             .publics
             .iter()
             .filter(|p| result.objects.contains_key(&p.offset))
@@ -295,21 +286,24 @@ fn walk(args: args::Check) -> Result<()> {
                 let names: Vec<_> = types
                     .iter()
                     .map(|&id| {
-                        renderer.declare(Some(canonical.get(id).rep), "")
+                        renderer
+                            .declare(Some(project.canonical.get(id).rep), "")
                     })
                     .collect();
                 writeln!(
                     out,
-                    "{rel}: object at 0x{offset:X} reached as {}",
+                    "{}: object at 0x{offset:X} reached as {}",
+                    w.name,
                     names.join(", ")
                 )?;
             }
         }
         for issue in &result.issues {
             *kinds.entry(issue.kind()).or_default() += 1;
-            writeln!(out, "{rel}: {}: {issue}", issue.kind())?;
+            writeln!(out, "{}: {}: {issue}", w.name, issue.kind())?;
         }
-    }
+        Ok(())
+    })?;
 
     eprintln!(
         "walked {walked} archives: {typed}/{publics} public symbols typed, \

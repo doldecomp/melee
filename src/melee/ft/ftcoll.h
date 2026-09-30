@@ -102,18 +102,8 @@
  * @param hurt Hurtbox capsule that was struck
  */
 /* 076764 */ void ftColl_80076764(int arg0, enum_t arg1, Fighter_GObj* arg2,
-                                  DynamicsDesc* arg3, Fighter* fp,
+                                  lbColl_80008D30_arg1* arg3, Fighter* fp,
                                   FighterHurtCapsule* hurt);
-
-/**
- * @brief Records a hit victim for all hitboxes in the same hitbox group.
- * @details Prevents multiple hitboxes of the same attack from striking the same target twice.
- * @param fp Attacking fighter data
- * @param hit Hitbox capsule that connected
- * @param arg2 Victim classification index
- * @param victim Pointer to victim entity
- * @param arg4 Flag indicating whether to clear hitbox pending state
- */
 /* 076808 */ void ftColl_80076808(Fighter* fp, HitCapsule* hit, int arg2,
                                   void* victim, bool arg4);
 

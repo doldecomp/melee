@@ -11,21 +11,35 @@
   dwarf ? false,
   # powerpc-none-eabi newlib, used only for its libc headers
   newlib ? null,
+  # Also sample the .dat archives' types (cmake/Dat.cmake): the melee-dat
+  # tool and the game's files
+  melee-dat ? null,
+  dat-files ? null,
 }:
+let
+  withDat = dat-files != null;
+in
 assert dwarf -> newlib != null;
+assert withDat -> dwarf && melee-dat != null;
 (if dwarf then stdenvNoCC else stdenv).mkDerivation {
-  name = "melee-cmake" + lib.optionalString dwarf "-dwarf";
+  name = "melee-cmake" + lib.optionalString dwarf "-dwarf" + lib.optionalString withDat "-dat";
 
   src = lib.fileset.toSource {
     root = ../.;
-    fileset = lib.fileset.unions [
-      ../CMakeLists.txt
-      ../cmake
-      ../src/sysdolphin
-      ../src/melee
-      ../src/Runtime
-      ../libs/doldecomp
-    ];
+    fileset = lib.fileset.unions (
+      [
+        ../CMakeLists.txt
+        ../cmake
+        ../src/sysdolphin
+        ../src/melee
+        ../src/Runtime
+        ../libs/doldecomp
+      ]
+      ++ lib.optionals withDat [
+        ../config
+        ../.clang-format
+      ]
+    );
   };
 
   nativeBuildInputs = [
@@ -44,7 +58,18 @@ assert dwarf -> newlib != null;
   cmakeFlags = lib.optionals dwarf [
     (lib.cmakeBool "MELEE_DWARF" true)
     (lib.cmakeFeature "NEWLIB_INCLUDE" "${newlib}/powerpc-none-eabi/include")
+  ]
+  ++ lib.optionals withDat [
+    (lib.cmakeBool "MELEE_DAT_SAMPLES" true)
+    (lib.cmakeFeature "MELEE_DAT" "${melee-dat}/bin/melee-dat")
+    (lib.cmakeFeature "MELEE_DAT_FILES" "${dat-files}")
   ];
+
+  # The samples' objdiff project, as built
+  postInstall = lib.optionalString withDat ''
+    mkdir -p $out/dat
+    cp -r target src base objdiff.json $out/dat
+  '';
 
   preConfigure = lib.optionalString dwarf ''
     appendToVar cmakeFlags "-DCMAKE_TOOLCHAIN_FILE=$PWD/cmake/ppc32-clang.cmake"

@@ -37,6 +37,9 @@ struct HSD_PObj {
     } u;
 };
 
+/// Envelopes of one vertex matrix, up to one with a null joint.
+typedef HSD_EnvelopeDesc* HSD_EnvelopeList DAT_NULLTERM;
+
 struct HSD_PObjDesc {
     char* class_name;
     HSD_PObjDesc* next;
@@ -47,8 +50,8 @@ struct HSD_PObjDesc {
     union HSD_PObjDesc_u {
         HSD_Joint* joint DAT_IF((flags & 0x3000) == POBJ_SKIN);
         HSD_ShapeSetDesc* shape_set DAT_IF((flags & 0x3000) == POBJ_SHAPEANIM);
-        HSD_EnvelopeDesc** envelope_p DAT_IF((flags & 0x3000) ==
-                                             POBJ_ENVELOPE);
+        HSD_EnvelopeList* envelope_p DAT_NULLTERM DAT_IF((flags & 0x3000) ==
+                                                         POBJ_ENVELOPE);
     } u;
 };
 

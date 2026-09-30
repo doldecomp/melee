@@ -51,7 +51,7 @@
 /* 218060 */ void grFlatzone_80218060(s32);
 /* 2181B4 */ void grFlatzone_802181B4(void);
 /* 218260 */ void grFlatzone_80218260(void);
-/* 2182B4 */ DynamicsDesc* grFlatzone_802182B4(enum_t);
+/* 2182B4 */ lbColl_80008D30_arg1* grFlatzone_802182B4(enum_t);
 /* 2182BC */ bool grFlatzone_802182BC(Vec3*, int, HSD_JObj*);
 /* 3E7A00 */ extern StageData grFz_StageData;
 

@@ -1273,14 +1273,13 @@ void efAsync_LoadAsync(int index)
 
 void efAsync_OnLoad(HSD_Archive* archive, u8* data, u32 length, int index)
 {
-    EF_DAT_Entry* result;
+    EffectDataTable* result;
 
     lbArchive_InitializeDAT(archive, data, length);
     result = HSD_ArchiveGetPublicAs(
-        EF_DAT_Entry, archive, efAsync_DatEntries[index].effDataTable_name);
-    if ((u32) result->ef_DAT_file | (u32) result->effDataTable_name) {
-        psInitDataBankLocate((int*) result->ef_DAT_file,
-                             (int*) result->effDataTable_name, NULL);
+        EffectDataTable, archive, efAsync_DatEntries[index].effDataTable_name);
+    if ((u32) result->cmd_bank | (u32) result->tex_bank) {
+        psInitDataBankLocate(result->cmd_bank, result->tex_bank, NULL);
     }
 }
 

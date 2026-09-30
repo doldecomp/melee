@@ -20,7 +20,7 @@
 /* 224364 */ void grTGameWatch_80224364(Ground_GObj*);
 /* 2243B8 */ bool grTGameWatch_802243B8(Ground_GObj*);
 /* 2243E0 */ void grTGameWatch_802243E0(Ground_GObj*);
-/* 2243E4 */ DynamicsDesc* grTGameWatch_802243E4(enum_t);
+/* 2243E4 */ lbColl_80008D30_arg1* grTGameWatch_802243E4(enum_t);
 /* 2243EC */ bool grTGameWatch_802243EC(Vec3*, int, HSD_JObj*);
 /* 3E9754 */ extern StageData grTGw_StageData;
 

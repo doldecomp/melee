@@ -2,12 +2,4 @@ base: orig/GALE01/files
 symbols: config/GALE01/dat_symbols.txt
 include:
   - '*.dat'
-  - '!Pl??AJ.dat'
 
-samples:
-  - archive: GrI2.dat
-    unit: dat/gr/GrI2
-    symbols:
-    - name: itemdata
-      max_depth: 2
-      ranges: [[13, 15]]

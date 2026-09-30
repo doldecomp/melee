@@ -78,7 +78,7 @@
 /* 1D0924 */ void fn_801D0924(HSD_GObj*, intptr_t);
 /* 1D09B8 */ bool grCastle_801D09B8(void*, HSD_GObj*, Vec3*);
 /* 1D0A9C */ void grCastle_801D0A9C(Vec3* arg0, f32 arg8);
-/* 1D0B04 */ DynamicsDesc* grCastle_801D0B04(enum_t);
+/* 1D0B04 */ lbColl_80008D30_arg1* grCastle_801D0B04(enum_t);
 /* 1D0B0C */ bool grCastle_801D0B0C(Vec3* v, int arg1, HSD_JObj* jobj);
 /* 1D0BBC */ void grCastle_801D0BBC(void);
 /* 1D0D24 */ void grCastle_801D0D24(void);

@@ -28,7 +28,7 @@
 /* 222878 */ static bool grTNess_80222878(Ground_GObj*);
 /* 222880 */ static void stageGObj1_GObjProc(Ground_GObj* gobj);
 /* 2228A0 */ static void grTNess_802228A0(Ground_GObj*);
-/* 2228A4 */ static DynamicsDesc* grTNess_802228A4(enum_t);
+/* 2228A4 */ static lbColl_80008D30_arg1* grTNess_802228A4(enum_t);
 /* 2228AC */ static bool grTNess_802228AC(Vec3*, int, HSD_JObj*);
 
 static StageCallbacks grTNs_StageCallbacks[] = {
@@ -169,7 +169,7 @@ static void grTNess_802228A0(Ground_GObj* gobj)
     return;
 }
 
-static DynamicsDesc* grTNess_802228A4(enum_t arg0)
+static lbColl_80008D30_arg1* grTNess_802228A4(enum_t arg0)
 {
     return NULL;
 }

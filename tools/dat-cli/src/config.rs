@@ -7,7 +7,6 @@ use std::{
     borrow::Cow,
     env, fs,
     path::{Path, PathBuf},
-    range::RangeInclusive,
 };
 use typed_path::Utf8UnixPathBuf;
 
@@ -18,24 +17,6 @@ pub struct ProjectConfig {
     pub include: Vec<String>,
     #[serde(with = "unix_path")]
     pub symbols: Utf8UnixPathBuf,
-    pub samples: Vec<SampleConfig>,
-}
-
-#[derive(Serialize, Deserialize, Debug, Clone)]
-pub struct SampleConfig {
-    #[serde(with = "unix_path")]
-    pub archive: Utf8UnixPathBuf,
-    #[serde(with = "unix_path")]
-    pub unit: Utf8UnixPathBuf,
-    pub symbols: Vec<SymbolConfig>,
-}
-
-#[derive(Serialize, Deserialize, Debug, Clone)]
-pub struct SymbolConfig {
-    pub name: String,
-    pub max_depth: Option<usize>,
-    #[serde(with = "vec_range_as_tuples")]
-    pub ranges: Vec<RangeInclusive<usize>>,
 }
 
 pub fn get_config(

@@ -360,8 +360,8 @@ StageData grMc_StageData = {
 struct grMc_YakumonoParam {
     void* x0;
     void* x4;
-    DynamicsDesc* x8;
-    DynamicsDesc* xC;
+    lbColl_80008D30_arg1* x8;
+    lbColl_80008D30_arg1* xC;
     u8 pad10[0x1C];
     f32 x2C;
     f32 x30;
@@ -1926,7 +1926,7 @@ void fn_801F2B58(void* user_data, int joint_id, CollData* coll, int coll_x50,
     coll->x34_flags.b7 = 1;
 }
 
-DynamicsDesc* grMuteCity_801F2BBC(enum_t arg0)
+lbColl_80008D30_arg1* grMuteCity_801F2BBC(enum_t arg0)
 {
     if (grMc_804D69D4 == 1) {
         if (arg0 == 0x31) {

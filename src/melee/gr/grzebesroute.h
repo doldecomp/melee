@@ -22,7 +22,7 @@
 /* 20B42C */ void grZebesRoute_8020B42C(Ground_GObj*);
 /* 20B4D4 */ void grZebesRoute_8020B4D4(Ground_GObj*);
 /* 20B548 */ void grZebesRoute_8020B548(void);
-/* 20B854 */ DynamicsDesc* grZebesRoute_8020B854(enum_t);
+/* 20B854 */ lbColl_80008D30_arg1* grZebesRoute_8020B854(enum_t);
 /* 20B85C */ bool grZebesRoute_8020B85C(Vec3*, int arg, HSD_JObj* jobj);
 /* 3E5E0C */ extern StageData grZe_Route_StageData;
 

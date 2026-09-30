@@ -139,7 +139,7 @@ static void stageGObj1_GObjProc(Ground_GObj* gobj)
 
 void grTCLink_80220214(Ground_GObj* gobj) {}
 
-DynamicsDesc* grTCLink_80220218(enum_t unused)
+lbColl_80008D30_arg1* grTCLink_80220218(enum_t unused)
 {
     return NULL;
 }

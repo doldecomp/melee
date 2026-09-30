@@ -55,7 +55,7 @@
 /* 1F66A4 */ bool grGreatBay_801F66A4(void);
 /* 1F6708 */ bool grGreatBay_801F6708(u32, HSD_GObj*);
 /* 1F67A4 */ void grGreatBay_801F67A4(Vec3*, f32);
-/* 1F680C */ DynamicsDesc* grGreatBay_801F680C(enum_t);
+/* 1F680C */ lbColl_80008D30_arg1* grGreatBay_801F680C(enum_t);
 /* 1F6814 */ bool grGreatBay_801F6814(Vec3*, int _, HSD_JObj*);
 /* 3E3F6C */ extern StageData grGb_StageData;
 

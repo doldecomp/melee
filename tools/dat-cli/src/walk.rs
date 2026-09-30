@@ -9,7 +9,7 @@
 use crate::{
     dwarf::{
         DieId, Member, TypeGraph, TypeKind,
-        annotation::DatTag,
+        annotation::{DatTag, Script},
         canonical::{CanonId, Canonical},
         expr::{Expr, eval_expr},
     },
@@ -32,6 +32,8 @@ pub enum Issue {
     /// A union none of whose members could be chosen, so none was
     /// followed.
     AmbiguousUnion { at: u32, path: String },
+    /// A `DAT_SCRIPT` command whose opcode has no known length.
+    UnknownCommand { at: u32, opcode: u8, path: String },
 }
 
 impl std::fmt::Display for Issue {
@@ -52,17 +54,32 @@ impl std::fmt::Display for Issue {
             Issue::AmbiguousUnion { at, path } => {
                 write!(f, "0x{at:X}: {path} is a union with no valid member")
             }
+            Issue::UnknownCommand { at, opcode, path } => {
+                write!(f, "0x{at:X}: {path} has unknown opcode {opcode:#X}")
+            }
         }
     }
 }
 
 impl Issue {
+    /// The walk path of the field it is about.
+    pub fn path(&self) -> &str {
+        match self {
+            Issue::UnrelocatedPointer { path, .. }
+            | Issue::RelocatedScalar { path, .. }
+            | Issue::OutOfBounds { path, .. }
+            | Issue::AmbiguousUnion { path, .. }
+            | Issue::UnknownCommand { path, .. } => path,
+        }
+    }
+
     pub fn kind(&self) -> &'static str {
         match self {
             Issue::UnrelocatedPointer { .. } => "unrelocated pointer",
             Issue::RelocatedScalar { .. } => "relocated scalar",
             Issue::OutOfBounds { .. } => "out of bounds",
             Issue::AmbiguousUnion { .. } => "ambiguous union",
+            Issue::UnknownCommand { .. } => "unknown command",
         }
     }
 }
@@ -79,10 +96,18 @@ enum Choice<'m> {
 pub struct Walk {
     /// Every object start reached, with the types it was reached as.
     pub objects: BTreeMap<u32, BTreeSet<CanonId>>,
+    /// The first path each object was reached by.
+    pub paths: BTreeMap<u32, String>,
+    /// The member each tagged union chose, by the union's offset and
+    /// type: an index into its members.
+    pub choices: BTreeMap<(u32, CanonId), usize>,
     /// Relocated words the walk found a pointer field for.
     pub pointers: HashSet<u32>,
     /// Pointers followed to a target of unknown type (`void*`, functions).
     pub untyped_pointers: usize,
+    /// The same, by field path from the root, without the root's name or
+    /// indices.
+    pub untyped_fields: BTreeMap<String, usize>,
     /// Pointer fields holding -1, which the data uses like null.
     pub sentinels: usize,
     pub issues: BTreeSet<Issue>,
@@ -123,6 +148,8 @@ pub struct Walker<'a> {
     targets: HashSet<u32>,
     walk: Walk,
     visited: HashSet<(u32, CanonId)>,
+    /// Starts of `DAT_SCRIPT` scripts already walked.
+    scripts: HashSet<u32>,
     /// Objects still to walk, each with the bindings in effect where it
     /// was reached.
     queue: Vec<(u32, DieId, String, Env)>,
@@ -155,6 +182,7 @@ impl<'a> Walker<'a> {
                 .collect(),
             walk: Walk::default(),
             visited: HashSet::new(),
+            scripts: HashSet::new(),
             queue: Vec::new(),
             env: None,
         }
@@ -166,6 +194,80 @@ impl<'a> Walker<'a> {
         while let Some((offset, die, path, env)) = self.queue.pop() {
             self.env = env;
             self.object(offset, die, path);
+        }
+    }
+
+    /// Walk `count` consecutive elements of type `element` at `offset`, or
+    /// if `count` is `None`, as many as fit before the next public symbol or
+    /// pointer target.
+    pub fn root_array(
+        &mut self,
+        offset: u32,
+        element: DieId,
+        count: Option<u64>,
+        name: &str,
+    ) {
+        let Some(element) = self.resolve(Some(element)) else {
+            return;
+        };
+        let (Some(id), Some(size)) = (
+            self.canonical.of(element),
+            self.canonical.byte_size(self.graph, element),
+        ) else {
+            return;
+        };
+        if size == 0 || !self.visited.insert((offset, id)) {
+            return;
+        }
+        self.walk.objects.entry(offset).or_default().insert(id);
+        self.walk
+            .paths
+            .entry(offset)
+            .or_insert_with(|| name.to_owned());
+        let room = (self.data.len() as u64).saturating_sub(offset.into());
+        let count = count.unwrap_or_else(|| {
+            let end = self
+                .publics
+                .iter()
+                .chain(&self.targets)
+                .copied()
+                .filter(|&at| at > offset)
+                .min()
+                .map_or(room, |end| u64::from(end - offset));
+            end.min(room) / size
+        });
+        if count * size > room {
+            self.issue(Issue::OutOfBounds {
+                at: offset,
+                path: name.to_owned(),
+            });
+        }
+        let count = count.min(room / size);
+        // Plain data, such as a texture: only check it isn't relocated
+        if !self.has_pointers(element) {
+            let end = offset + (count * size) as u32;
+            let mut words: Vec<_> = self
+                .relocs
+                .iter()
+                .copied()
+                .filter(|at| (offset..end).contains(at))
+                .collect();
+            words.sort();
+            for at in words {
+                self.issue(Issue::RelocatedScalar {
+                    at,
+                    path: format!("{name}[{}]", (at - offset) as u64 / size),
+                });
+            }
+            return;
+        }
+        for i in 0..count {
+            let at = offset + (i * size) as u32;
+            self.layout(at, element, &format!("{name}[{i}]"), None);
+            while let Some((offset, die, path, env)) = self.queue.pop() {
+                self.env = env;
+                self.object(offset, die, path);
+            }
         }
     }
 
@@ -184,6 +286,10 @@ impl<'a> Walker<'a> {
             return;
         }
         self.walk.objects.entry(offset).or_default().insert(id);
+        self.walk
+            .paths
+            .entry(offset)
+            .or_insert_with(|| path.clone());
         self.layout(offset, die, &path, None);
     }
 
@@ -196,6 +302,12 @@ impl<'a> Walker<'a> {
         path: &str,
         parent: Option<(DieId, u32)>,
     ) {
+        if self.typedef_tagged(die, &DatTag::NullTerm) {
+            return self.nullterm(offset, die, path);
+        }
+        if let Some(target) = self.typedef_type(die) {
+            return self.typed(offset, target, path);
+        }
         let Some(die) = self.resolve(Some(die)) else {
             return;
         };
@@ -239,8 +351,12 @@ impl<'a> Walker<'a> {
                         );
                     } else if let Some(target) = declared {
                         self.typed(at, target, &path);
+                    } else if let Some(script) = self.script_tag(member) {
+                        self.script(at, ty, &script, &path);
                     } else if self.is_extent(member) {
                         self.extent(at, ty, &path, &binds, parent);
+                    } else if self.member_tagged(member, &DatTag::NullTerm) {
+                        self.nullterm(at, ty, &path);
                     } else if !binds.is_empty()
                         && let Some((element, size, count)) = self.array(ty)
                     {
@@ -270,7 +386,17 @@ impl<'a> Walker<'a> {
                     return self.scalar(offset, die, path);
                 }
                 let member = match self.choose(members, offset, parent) {
-                    Choice::Member(member) => member,
+                    Choice::Member(member) => {
+                        if let (Some(id), Some(index)) = (
+                            self.canonical.of(die),
+                            members
+                                .iter()
+                                .position(|m| std::ptr::eq(m, member)),
+                        ) {
+                            self.walk.choices.insert((offset, id), index);
+                        }
+                        member
+                    }
                     Choice::Unused => return,
                     // Following a guess could misread everything behind it
                     Choice::Ambiguous => {
@@ -283,7 +409,13 @@ impl<'a> Walker<'a> {
                 };
                 if let Some(ty) = member.ty {
                     let path = field(path, member.name.map(|n| graph.str(n)));
-                    self.layout(offset, ty, &path, parent);
+                    if let Some(script) = self.script_tag(member) {
+                        self.script(offset, ty, &script, &path);
+                    } else if self.member_tagged(member, &DatTag::NullTerm) {
+                        self.nullterm(offset, ty, &path);
+                    } else {
+                        self.layout(offset, ty, &path, parent);
+                    }
                 }
             }
             TypeKind::Array { element, dims } => {
@@ -317,27 +449,28 @@ impl<'a> Walker<'a> {
                             format!("{path}->"),
                             self.env.clone(),
                         )),
-                        None => self.walk.untyped_pointers += 1,
+                        None => self.untyped(path),
                     }
                 } else {
                     self.unrelocated(offset, value, path);
                 }
             }
-            TypeKind::Base { .. } | TypeKind::Enum { .. } => {
-                if self.relocs.contains(&offset) {
-                    self.issue(Issue::RelocatedScalar {
-                        at: offset,
-                        path: path.to_owned(),
-                    });
-                }
+            TypeKind::Base { .. } | TypeKind::Enum { .. }
+                if self.relocs.contains(&offset) =>
+            {
+                self.issue(Issue::RelocatedScalar {
+                    at: offset,
+                    path: path.to_owned(),
+                });
             }
             _ => {}
         }
     }
 
-    /// Walk a `DAT_EXTENT` array: every element until the next public
-    /// symbol, object or pointer target, the end of the data, or an element
-    /// that does not fit its type.
+    /// Walk a `DAT_EXTENT` array, or the elements a `DAT_EXTENT` pointer
+    /// points to: every element until the next public symbol, object or
+    /// pointer target, the end of the data, or an element that does not fit
+    /// its type.
     fn extent(
         &mut self,
         offset: u32,
@@ -350,10 +483,37 @@ impl<'a> Walker<'a> {
         let Some(array) = self.resolve(Some(array)) else {
             return;
         };
-        let TypeKind::Array { element, .. } = self.graph.types[&array].kind
-        else {
-            return self.layout(offset, array, path, parent);
+        let (offset, element, path) = match self.graph.types[&array].kind {
+            TypeKind::Array { element, .. } => {
+                (offset, element, path.to_owned())
+            }
+            TypeKind::Pointer { target } => {
+                let value = self.word(offset);
+                if !self.relocs.contains(&offset) {
+                    return self.unrelocated(offset, value, path);
+                }
+                self.walk.pointers.insert(offset);
+                let raw = target;
+                let Some(target) = self.pointee(target) else {
+                    return self.untyped(path);
+                };
+                let Some(id) = self.canonical.of(target) else {
+                    return;
+                };
+                if !self.visited.insert((value, id)) {
+                    return;
+                }
+                self.walk.objects.entry(value).or_default().insert(id);
+                self.walk
+                    .paths
+                    .entry(value)
+                    .or_insert_with(|| format!("{path}->"));
+                (value, raw, format!("{path}->"))
+            }
+            _ => return self.layout(offset, array, path, parent),
         };
+        // Laid out unresolved, so that typedef tags on the element apply
+        let raw = element;
         let Some(element) = self.resolve(element) else {
             return;
         };
@@ -373,7 +533,8 @@ impl<'a> Walker<'a> {
                 break;
             }
             self.env = self.bound(&outer, binds, parent, i.into());
-            self.layout(at, element, &format!("{path}[{i}]"), parent);
+            let ty = raw.unwrap_or(element);
+            self.layout(at, ty, &format!("{path}[{i}]"), parent);
         }
         self.env = outer;
     }
@@ -465,15 +626,23 @@ impl<'a> Walker<'a> {
         }
         self.walk.pointers.insert(offset);
         let Some(element) = element.or_else(|| self.pointee(target)) else {
-            self.walk.untyped_pointers += 1;
-            return;
+            return self.untyped(path);
         };
         let Some(size) = self.canonical.byte_size(self.graph, element) else {
             return;
         };
-        // A count beyond the data is itself a finding, reported per element
+        // A count beyond the data means the count or the pointer is wrong:
+        // one finding, and nothing followed
+        let room = (self.data.len() as u64).saturating_sub(value.into());
+        if count > room / size.max(1) {
+            self.issue(Issue::OutOfBounds {
+                at: value,
+                path: format!("{path}->[{count}]"),
+            });
+            return;
+        }
         let outer = self.env.clone();
-        for i in 0..count.min(self.data.len() as u64) {
+        for i in 0..count {
             let env = self.bound(&outer, binds, parent, i);
             self.queue.push((
                 value + (i * size) as u32,
@@ -482,6 +651,25 @@ impl<'a> Walker<'a> {
                 env,
             ));
         }
+    }
+
+    fn untyped(&mut self, path: &str) {
+        self.walk.untyped_pointers += 1;
+        let field = path.find(['.', '-', '[']).map_or("", |at| &path[at..]);
+        let mut key = String::with_capacity(field.len());
+        let mut in_index = false;
+        for c in field.chars() {
+            match c {
+                '[' => {
+                    in_index = true;
+                    key.push_str("[]");
+                }
+                ']' => in_index = false,
+                _ if in_index => {}
+                _ => key.push(c),
+            }
+        }
+        *self.walk.untyped_fields.entry(key).or_default() += 1;
     }
 
     /// A pointer field that is not relocated: null, the -1 the data also
@@ -507,12 +695,9 @@ impl<'a> Walker<'a> {
                     _ => None,
                 }
             })?;
-        let name =
-            self.graph.strings.get(name.trim_start_matches("struct "))?;
         self.canonical
-            .named(name)
-            .iter()
-            .map(|&id| self.canonical.get(id).rep)
+            .lookup(self.graph, &name)
+            .into_iter()
             .find_map(|die| self.resolve(Some(die)))
     }
 
@@ -594,10 +779,226 @@ impl<'a> Walker<'a> {
     }
 
     fn is_extent(&self, member: &Member) -> bool {
+        self.member_tagged(member, &DatTag::Extent)
+    }
+
+    fn member_tagged(&self, member: &Member, tag: &DatTag) -> bool {
         member.annotations.iter().any(|a| {
-            a.value.and_then(|v| DatTag::parse(self.graph.str(v)))
-                == Some(DatTag::Extent)
+            a.value
+                .and_then(|v| DatTag::parse(self.graph.str(v)))
+                .as_ref()
+                == Some(tag)
         })
+    }
+
+    fn script_tag(&self, member: &Member) -> Option<Script> {
+        member.annotations.iter().find_map(|a| {
+            match DatTag::parse(self.graph.str(a.value?))? {
+                DatTag::Script(script) => Some(script),
+                _ => None,
+            }
+        })
+    }
+
+    /// The length in words of a script command, from `DAT_SCRIPT`'s own
+    /// lengths or else its table in the code.
+    fn command_length(&self, script: &Script, opcode: u8) -> Option<u64> {
+        let opcode = u64::from(opcode);
+        let first = script.lengths.len() as u64;
+        if opcode < first {
+            return script.lengths.get(opcode as usize).copied();
+        }
+        let table = self
+            .graph
+            .globals
+            .get(&self.graph.strings.get(&script.table)?)?;
+        let size = table
+            .ty
+            .and_then(|ty| self.canonical.byte_size(self.graph, ty))?;
+        let index = opcode - first;
+        if index >= size {
+            return None;
+        }
+        Some(self.graph.bytes(table.address + index, 1)?[0].into())
+    }
+
+    /// Follow a `DAT_SCRIPT` pointer, and every script its commands point to.
+    fn script(
+        &mut self,
+        offset: u32,
+        pointer: DieId,
+        script: &Script,
+        path: &str,
+    ) {
+        let Some(pointer) = self.resolve(Some(pointer)) else {
+            return;
+        };
+        let TypeKind::Pointer { target } = self.graph.types[&pointer].kind
+        else {
+            return self.layout(offset, pointer, path, None);
+        };
+        let value = self.word(offset);
+        if !self.relocs.contains(&offset) {
+            return self.unrelocated(offset, value, path);
+        }
+        self.walk.pointers.insert(offset);
+        let id = self.pointee(target).and_then(|t| self.canonical.of(t));
+        let mut queue = vec![(value, format!("{path}->"))];
+        while let Some((start, path)) = queue.pop() {
+            if !self.scripts.insert(start) {
+                continue;
+            }
+            if let Some(id) = id {
+                self.walk.objects.entry(start).or_default().insert(id);
+            }
+            self.walk.paths.entry(start).or_insert_with(|| path.clone());
+            let mut at = start;
+            loop {
+                let Some(&first) = self.data.get(at as usize) else {
+                    self.issue(Issue::OutOfBounds {
+                        at,
+                        path: path.clone(),
+                    });
+                    break;
+                };
+                let opcode = first >> 2;
+                let Some(length) = self.command_length(script, opcode) else {
+                    self.issue(Issue::UnknownCommand {
+                        at,
+                        opcode,
+                        path: path.clone(),
+                    });
+                    break;
+                };
+                let end = at + (length.max(1) * 4) as u32;
+                if end as usize > self.data.len() {
+                    self.issue(Issue::OutOfBounds {
+                        at,
+                        path: path.clone(),
+                    });
+                    break;
+                }
+                for word in (at..end).step_by(4) {
+                    if self.relocs.contains(&word) {
+                        self.walk.pointers.insert(word);
+                        queue.push((
+                            self.word(word),
+                            format!("{path}+0x{:X}->", word - start),
+                        ));
+                    }
+                }
+                if opcode == 0 {
+                    break;
+                }
+                at = end;
+            }
+        }
+    }
+
+    /// The type a `DAT_TYPE` typedef on the way from `die` to its underlying
+    /// type refers to.
+    fn typedef_type(&self, mut die: DieId) -> Option<DieId> {
+        while let Some(ty) = self.graph.types.get(&die) {
+            let TypeKind::Typedef {
+                target: Some(target),
+            } = ty.kind
+            else {
+                return None;
+            };
+            let name =
+                ty.annotations.iter().find_map(|a| {
+                    match DatTag::parse(self.graph.str(a.value?))? {
+                        DatTag::Type(name) => Some(name),
+                        _ => None,
+                    }
+                });
+            if let Some(name) = name {
+                return self
+                    .canonical
+                    .lookup(self.graph, &name)
+                    .into_iter()
+                    .find_map(|die| self.resolve(Some(die)));
+            }
+            die = target;
+        }
+        None
+    }
+
+    /// Whether a typedef on the way from `die` to its underlying type
+    /// carries `tag`.
+    fn typedef_tagged(&self, mut die: DieId, tag: &DatTag) -> bool {
+        while let Some(ty) = self.graph.types.get(&die) {
+            let TypeKind::Typedef {
+                target: Some(target),
+            } = ty.kind
+            else {
+                return false;
+            };
+            if ty.annotations.iter().any(|a| {
+                a.value
+                    .and_then(|v| DatTag::parse(self.graph.str(v)))
+                    .as_ref()
+                    == Some(tag)
+            }) {
+                return true;
+            }
+            die = target;
+        }
+        false
+    }
+
+    /// Follow a `DAT_NULLTERM` pointer: elements up to one whose first word
+    /// is zero, which is the terminator.
+    fn nullterm(&mut self, offset: u32, pointer: DieId, path: &str) {
+        let Some(pointer) = self.resolve(Some(pointer)) else {
+            return;
+        };
+        let TypeKind::Pointer { target } = self.graph.types[&pointer].kind
+        else {
+            return self.layout(offset, pointer, path, None);
+        };
+        let value = self.word(offset);
+        if !self.relocs.contains(&offset) {
+            return self.unrelocated(offset, value, path);
+        }
+        self.walk.pointers.insert(offset);
+        let Some(element) = self.pointee(target) else {
+            return self.untyped(path);
+        };
+        let (Some(id), Some(size)) = (
+            self.canonical.of(element),
+            self.canonical.byte_size(self.graph, element),
+        ) else {
+            return;
+        };
+        if size == 0 || !self.visited.insert((value, id)) {
+            return;
+        }
+        self.walk.objects.entry(value).or_default().insert(id);
+        self.walk
+            .paths
+            .entry(value)
+            .or_insert_with(|| format!("{path}->"));
+        let env = self.env.clone();
+        for i in 0.. {
+            let at = value + (i * size) as u32;
+            if at as usize + size as usize > self.data.len() {
+                self.issue(Issue::OutOfBounds {
+                    at: value,
+                    path: format!("{path}->"),
+                });
+                break;
+            }
+            // The terminator is walked too, for its other fields
+            let end = self.word(at) == 0 && !self.relocs.contains(&at);
+            // Unresolved, so that typedef tags on the element still apply
+            let ty = target.unwrap_or(element);
+            self.layout(at, ty, &format!("{path}->[{i}]"), None);
+            self.env = env.clone();
+            if end {
+                break;
+            }
+        }
     }
 
     /// Whether any part of a type is a pointer, looking through records,

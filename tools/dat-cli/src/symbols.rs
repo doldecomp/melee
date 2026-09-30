@@ -6,11 +6,13 @@
 //! ```text
 //! ftDataMars = PlMs.dat; // type:ftData
 //! map_head = *; // type:MapHead
+//! *_figatree = Pl??AJ.dat; // type:FigaTree
 //! ```
 //!
-//! The location is an archive path relative to the assets base, or `*` for
-//! every archive with a public symbol of that name. An archive-specific line
-//! overrides a `*` line of the same name.
+//! The location is an archive path relative to the dat base, or `*` for
+//! every archive with a public symbol of that name. Names and archives may
+//! use `*` and `?` wildcards. The first line with a matching archive wins,
+//! then the first `*` line.
 
 use anyhow::{Context, Result, anyhow, bail};
 use std::{fmt, str::FromStr};
@@ -82,15 +84,49 @@ impl SymbolFile {
     /// The entry that applies to a symbol in an archive, if any.
     pub fn lookup(&self, name: &str, archive: &str) -> Option<&Entry> {
         let mut any = None;
-        for entry in self.entries.iter().filter(|e| e.name == name) {
+        for entry in self.entries.iter().filter(|e| glob(&e.name, name)) {
             match &entry.location {
-                Location::Archive(a) if a == archive => return Some(entry),
-                Location::Any => any = Some(entry),
+                Location::Archive(a) if glob(a, archive) => {
+                    return Some(entry);
+                }
+                Location::Any => {
+                    any.get_or_insert(entry);
+                }
                 Location::Archive(_) => {}
             }
         }
         any
     }
+}
+
+/// Whether `text` matches `pattern`, where `*` is any run of characters and
+/// `?` any one character.
+fn glob(pattern: &str, text: &str) -> bool {
+    let (pattern, text) = (pattern.as_bytes(), text.as_bytes());
+    let (mut p, mut t) = (0, 0);
+    // Where to resume after the last `*`: its position and the text it took
+    let mut star = None;
+    while t < text.len() {
+        match pattern.get(p) {
+            Some(b'*') => {
+                star = Some((p, t));
+                p += 1;
+            }
+            Some(&c) if c == b'?' || c == text[t] => {
+                p += 1;
+                t += 1;
+            }
+            _ => match star {
+                Some((sp, st)) => {
+                    star = Some((sp, st + 1));
+                    p = sp + 1;
+                    t = st + 1;
+                }
+                None => return false,
+            },
+        }
+    }
+    pattern[p..].iter().all(|&c| c == b'*')
 }
 
 impl fmt::Display for SymbolFile {
@@ -273,6 +309,30 @@ itemdata = GrI2.dat;
         let ty = |archive| file.lookup("map_head", archive)?.ty.clone();
         assert_eq!(ty("GrNLa.dat").unwrap().name, "B");
         assert_eq!(ty("GrMc.dat").unwrap().name, "A");
+    }
+
+    #[test]
+    fn wildcards() {
+        let file = SymbolFile::parse(
+            "*_figatree = Pl??AJ.dat; // type:FigaTree\n\
+             *_joint = *; // type:HSD_JObjDesc\n",
+        )
+        .unwrap();
+        let ty =
+            |name, archive| Some(file.lookup(name, archive)?.ty.clone()?.name);
+        assert_eq!(
+            ty("PlyCaptain5K_Share_ACTION_Wait1_figatree", "PlCaAJ.dat")
+                .as_deref(),
+            Some("FigaTree")
+        );
+        assert_eq!(ty("x_figatree", "PlCaAJx.dat"), None);
+        assert_eq!(
+            ty("TyMario_joint", "TyMario.dat").as_deref(),
+            Some("HSD_JObjDesc")
+        );
+        assert_eq!(ty("joint", "TyMario.dat"), None);
+        assert!(glob("a*b*c", "aXbYbZc"));
+        assert!(!glob("a*b", "aXbY"));
     }
 
     #[test]

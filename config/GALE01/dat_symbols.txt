@@ -1,0 +1,89 @@
+// Fighter animations, named by ftData tables
+*_figatree = Pl??AJ.dat; // type:FigaTree
+
+// Named by HSD's exporter conventions. The first match wins.
+*_matanim_joint = *; // type:HSD_MatAnimJoint
+*_shapeanim_joint = *; // type:HSD_ShapeAnimJoint
+*_animjoint = *; // type:HSD_AnimJoint
+*_joint = *; // type:HSD_Joint
+*_camanim = *; // type:HSD_CameraAnim
+*_tlut_desc = *; // type:HSD_TlutDesc
+
+// Texels and palettes, up to the next public
+*_image = *; // type:u8[]
+*_tlut = *; // type:u16[]
+
+// SISLib text: string tables, loaded by name from a parameter
+SIS_*Data* = Sd*.dat; // type:u8*[]
+
+// Stage parameters: each stage's code casts them to its own type
+yakumono_param = GrBb.dat; // type:grBb_YakumonoParam
+yakumono_param = GrCn.dat; // type:grCorneria_YakumonoParam
+yakumono_param = GrCs.dat; // type:grCastle_YakumonoParam
+yakumono_param = GrFs.dat; // type:grFourside_YakumonoParam
+yakumono_param = GrFz.dat; // type:grFlatzone_YakumonoParam
+yakumono_param = GrGd.dat; // type:grGarden_YakumonoParam
+yakumono_param = GrGr.dat; // type:grGreens_YakumonoParam
+yakumono_param = GrI1.dat; // type:grInishie1_YakumonoParam
+yakumono_param = GrI2.dat; // type:grInishie2_YakumonoParam
+yakumono_param = GrIm.dat; // type:grIceMt_YakumonoParam
+yakumono_param = GrIz.dat; // type:grIzumi_YakumonoParam
+yakumono_param = GrKg.dat; // type:grKongo_YakumonoParam
+yakumono_param = GrKr.dat; // type:grKraid_YakumonoParam
+yakumono_param = GrMc.dat; // type:grMc_YakumonoParam
+yakumono_param = GrNBa.dat; // type:grBattle_YakumonoParam
+yakumono_param = GrNBr.dat; // type:grBigBlueRoute_YakumonoParam
+yakumono_param = GrNPo.dat; // type:grPushon_YakumonoParam
+yakumono_param = GrNSr.dat; // type:grShrineRoute_YakumonoParam
+yakumono_param = GrNZr.dat; // type:grZebesRoute_YakumonoParam
+yakumono_param = GrOk.dat; // type:grOldKongo_YakumonoParam
+yakumono_param = GrOp.dat; // type:grOldpupupu_YakumonoParam
+yakumono_param = GrRc.dat; // type:grRCruise_YakumonoParam
+yakumono_param = GrSt.dat; // type:grStory_YakumonoParam
+yakumono_param = GrTFc.dat; // type:grTFalco_YakumonoParam
+yakumono_param = GrTFx.dat; // type:grTFox_YakumonoParam
+yakumono_param = GrTGn.dat; // type:grTGn_YakumonoParam
+yakumono_param = GrVe.dat; // type:grVenom_YakumonoParam
+yakumono_param = GrZe.dat; // type:grZe_YakumonoParam
+
+// Demo motions: packed archives the game relocates itself, like Pl??AJ
+ftDemo*MotionFile* = *; // type:u8[]
+
+// Scenes whose loaders aren't typed or decompiled
+*_scene_data = *; // type:SceneDesc
+*_scene_lights = *; // type:LightList*[]
+visual*Scene = Vi*.dat; // type:SceneDesc
+cut3Bg*Scene = GmRgEBG*.dat; // type:SceneDesc
+
+// Memory card banners and icons
+MemCardBanner_* = LbMcGame.dat; // type:u8[]
+MemCardIcon_* = LbMcGame.dat; // type:u8[]
+MemSnapBanner_* = LbMcSnap.dat; // type:u8[]
+MemSnapIcon_* = LbMcSnap.dat; // type:u8[]
+
+// Kirby's copy abilities (see ft_80459B88_t)
+ftDataKirbyCopyCaptain = PlKbCpCa.dat; // type:ftKbCopyHat
+ftDataKirbyCopyGanon = PlKbCpGn.dat; // type:ftKbCopyHat
+ftDataKirbyCopyMario = PlKbCpMr.dat; // type:ftKbCopyHat_Item
+ftDataKirbyCopySamus = PlKbCpSs.dat; // type:ftKbCopyHat_Item
+ftDataKirbyCopyLuigi = PlKbCpLg.dat; // type:ftKbCopyHat_Item
+ftDataKirbyCopyDrmario = PlKbCpDr.dat; // type:ftKbCopyHat_Item
+ftDataKirbyCopyFox = PlKbCpFx.dat; // type:ftKbCopyHat_Items
+ftDataKirbyCopyNess = PlKbCpNs.dat; // type:ftKbCopyHat_Items
+ftDataKirbyCopyPeach = PlKbCpPe.dat; // type:ftKbCopyHat_Items
+ftDataKirbyCopyLink = PlKbCpLk.dat; // type:ftKbCopyHat_ItemsDynamics
+ftDataKirbyCopySeak = PlKbCpSk.dat; // type:ftKbCopyHat_ItemsDynamics
+ftDataKirbyCopyPikachu = PlKbCpPk.dat; // type:ftKbCopyHat_ItemsDynamics
+ftDataKirbyCopyClink = PlKbCpCl.dat; // type:ftKbCopyHat_ItemsDynamics
+ftDataKirbyCopyPichu = PlKbCpPc.dat; // type:ftKbCopyHat_ItemsDynamics
+ftDataKirbyCopyKoopa = PlKbCpKp.dat; // type:ftKbCopyHat_ItemDynamics
+ftDataKirbyCopyPopo = PlKbCpPp.dat; // type:ftKbCopyHat_Popo
+ftDataKirbyCopyZelda = PlKbCpZd.dat; // type:ftKbCopyHat_Dynamics
+ftDataKirbyCopyMars = PlKbCpMs.dat; // type:ftKbCopyHat_Sword
+ftDataKirbyCopyEmblem = PlKbCpFe.dat; // type:ftKbCopyHat_Sword
+ftDataKirbyCopyYoshi = PlKbCpYs.dat; // type:ftKbCopyHat_Yoshi
+ftDataKirbyCopyDonkey = PlKbCpDk.dat; // type:ftKbCopyParts
+ftDataKirbyCopyPurin = PlKbCpPr.dat; // type:ftKbCopyParts_Dynamics
+ftDataKirbyCopyMewtwo = PlKbCpMt.dat; // type:ftKbCopyParts_ItemDynamics
+ftDataKirbyCopyFalco = PlKbCpFc.dat; // type:ftKbCopyParts_Items
+ftDataKirbyCopyGamewatch = PlKbCpGw.dat; // type:ftKbCopyParts_GameWatch

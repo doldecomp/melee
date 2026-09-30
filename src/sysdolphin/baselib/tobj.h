@@ -10,6 +10,8 @@
 
 #include <sysdolphin/baselib/forward.h> // IWYU pragma: export
 
+#include <dat_macros.h>
+
 #include <dolphin/gx.h>
 #include <dolphin/gx/GXEnum.h>
 #include <dolphin/mtx.h>
@@ -257,8 +259,8 @@ typedef struct _HSD_TexAnim {
     struct _HSD_TexAnim* next;
     GXTexMapID id;
     HSD_AObjDesc* aobjdesc;
-    struct HSD_ImageDesc** imagetbl;
-    struct _HSD_TlutDesc** tluttbl;
+    struct HSD_ImageDesc** imagetbl DAT_COUNT(n_imagetbl);
+    struct _HSD_TlutDesc** tluttbl DAT_COUNT(n_tluttbl);
     u16 n_imagetbl;
     u16 n_tluttbl;
 } HSD_TexAnim;

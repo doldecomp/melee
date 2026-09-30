@@ -92,6 +92,35 @@ impl Canonical {
         self.by_name.get(&name).map_or(&[], Vec::as_slice)
     }
 
+    /// The representatives of the types a C type name refers to, e.g.
+    /// `HSD_Joint`, `struct HSD_Joint` or `u8*`.
+    pub fn lookup(&self, graph: &TypeGraph, name: &str) -> Vec<DieId> {
+        if let Some(target) = name.strip_suffix('*') {
+            let targets: Vec<_> = self
+                .lookup(graph, target.trim_end())
+                .into_iter()
+                .filter_map(|die| self.of(die))
+                .collect();
+            return self
+                .types
+                .iter()
+                .filter(|canon| {
+                    matches!(
+                        graph.types[&canon.rep].kind,
+                        TypeKind::Pointer { target: Some(t) }
+                            if self.of(t).is_some_and(|t| targets.contains(&t))
+                    )
+                })
+                .map(|canon| canon.rep)
+                .collect();
+        }
+        let name = graph.strings.get(name.trim_start_matches("struct "));
+        name.into_iter()
+            .flat_map(|name| self.named(name))
+            .map(|&id| self.get(id).rep)
+            .collect()
+    }
+
     /// The type behind a canonical ID, read from its representative DIE.
     pub fn ty<'g>(&self, graph: &'g TypeGraph, id: CanonId) -> &'g Type {
         &graph.types[&self.get(id).rep]

@@ -943,7 +943,7 @@ DynamicModelDesc* grOnett_801E56FC(void)
     return NULL;
 }
 
-DynamicsDesc* grOnett_801E5760(enum_t arg)
+lbColl_80008D30_arg1* grOnett_801E5760(enum_t arg)
 {
     return NULL;
 }
