@@ -23,7 +23,7 @@
 
 #### Core Sources
 - ❌ ft/fighter.c — Fighter initialization, state machine, main loop
-- ❌ ft/ftaction.c — Action state transition logic
+- ✅ ft/ftaction.c — Action state transition logic
 - ❌ ft/ftanim.c — Animation system
 - ❌ ft/ftcoll.c — Fighter collision detection
 - ❌ ft/ftcommon.c — Common fighter utilities

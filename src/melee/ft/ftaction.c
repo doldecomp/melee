@@ -1,3 +1,30 @@
+/**
+ * @file ftaction.c
+ * @brief Fighter subaction command script interpreter and action state event execution.
+ * @details Implements the bytecode interpreter and event handlers for fighter subaction
+ * scripts (`CommandInfo` / `fp->x3E4_fighterCmdScript`). Manages timed action state events
+ * including hitbox activation/deactivation, hurtbox toggles, IASA (Interruptible As Soon As)
+ * frame windows, jab combo windows, smash attack charging, audio effects, and particle GFX.
+ *
+ * ## Melee Action State & Animation Architecture:
+ * - **Action States**: Every character action (Wait, Walk, Attack, Special, etc.) is identified
+ *   by an action state ID (`FtMotionId`). Common states (0 to ~340) are indexed in
+ *   `fp->x1C_actionStateList`, while character-specific states (>= `fp->x18`) are indexed in
+ *   `fp->x20_actionStateList[(msid - fp->x18)]`.
+ * - **MotionState Callbacks**:
+ *   - `anim_cb`: Per-frame animation tick; evaluates state exit conditions, branches, or loops.
+ *   - `input_cb`: Polled on actionable frames (IASA / FAF) to transition into new actions.
+ *   - `phys_cb`: Computes movement, velocity integration, gravity, and traction.
+ *   - `coll_cb`: Evaluates environmental collisions (ECB against floor/walls/ledges).
+ *   - `cam_cb`: Updates camera framing and tracking targets.
+ * - **Subaction Event Scripts**:
+ *   - Bytecode streams tied to animation timelines.
+ *   - Control flow opcodes 0-9 are handled by `Command_Execute` (Wait, Goto, Loop, Subroutine, Return, End).
+ *   - Fighter opcodes 10+ trigger gameplay mechanics at precise animation frames (hitboxes, hurtboxes, SFX, GFX, etc.).
+ *
+ * Module prefix: ft (Fighter)
+ */
+
 #include "ftaction.h"
 
 #include <Runtime/platform.h>
@@ -170,6 +197,10 @@
 /* 07320C */ static void ftAction_8007320C(Fighter_GObj* gobj,
                                            CommandInfo* cmd);
 
+/**
+ * @brief Standard execution dispatch table for fighter subaction opcodes 10 through 58.
+ * @details Indexed by `(eventCode - 10)`. Called during normal frame-by-frame execution in ftAction_80073240.
+ */
 static FtCmd ftAction_803C06E8[] = {
     ftAction_80071028, ftAction_8007121C, ftAction_8007162C, ftAction_8007169C,
     ftAction_80071708, ftAction_80071784, ftAction_800717D8, ftAction_80071B50,
@@ -186,6 +217,12 @@ static FtCmd ftAction_803C06E8[] = {
     ftAction_80073118,
 };
 
+/**
+ * @brief Mid-animation catchup dispatch table for fighter subaction opcodes 10 through 58.
+ * @details Indexed by `(eventCode - 10)`. Used during ftAction_80073354 when entering an action
+ * state mid-animation (`anim_start > 0`). Skips transient audio and visual effects while executing
+ * persistent hitbox, hurtbox, and state flag updates.
+ */
 static FtCmd ftAction_803C07AC[ARRAY_SIZE(ftAction_803C06E8)] = {
     ftAction_800711DC, ftAction_800715EC, ftAction_8007168C, ftAction_800716F8,
     ftAction_80071774, ftAction_800717C8, ftAction_80071810, ftAction_80071CA4,
@@ -202,32 +239,23 @@ static FtCmd ftAction_803C07AC[ARRAY_SIZE(ftAction_803C06E8)] = {
     ftAction_8007320C,
 };
 
+/**
+ * @brief Bytecode command payload word counts for subaction opcodes 10 through 58.
+ * @details Used by ftAction_8007349C for rapid script pointer skipping when Ft_MF_UpdateCmd is active.
+ */
 static u8 ftAction_803C0870[ARRAY_SIZE(ftAction_803C06E8)] = {
     05, 05, 01, 01, 01, 01, 01, 03, 01, 01, 01, 01, 01, 01, 01, 01, 01,
     01, 01, 01, 01, 01, 01, 01, 03, 01, 01, 01, 07, 04, 01, 01, 01, 01,
     01, 01, 01, 01, 01, 01, 01, 01, 01, 01, 03, 03, 02, 01, 04
 };
 
-/*
-SubactionEvent 10 GFXSpawn
-
-https://github.com/Ploaj/HSDLib/blob/939cc10be5a9f76fdcf3ca8ff4a54e35e545fe4a/HSDRawViewer/Scripts/command_fighter.yml#L35
-
-Bone ID
-Use Common Bone IDs
-Destroy on State Change
-Unk1
-GFX ID
-Unk2
-Offset Z
-Offset Y
-Offset X
-Range Z
-Range Y
-Range X
-*/
-
-/// @brief Spawns GFX
+/**
+ * @brief Subaction opcode 10: Spawns particle graphic effects (GFX).
+ * @details Reads bone attachments, positional offsets, and range vectors (scaled by 1/256)
+ * to spawn particle effects via ftCo_8009F834. If fighter is invisible, skips execution.
+ * @param gobj Fighter game object pointer.
+ * @param cmd Active subaction command interpreter state.
+ */
 void ftAction_80071028(Fighter_GObj* gobj, CommandInfo* cmd)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -254,9 +282,7 @@ void ftAction_80071028(Fighter_GObj* gobj, CommandInfo* cmd)
             unk = cmd->x8.u->spawn_gfx_1.unkFloat;
 
             NEXT_CMD(cmd);
-            /// @todo i believe they are actually read in reverse order, maybe
-            // ftCo_8009F834 also reads them in reverse.
-            // double check this in-game eventually...
+            // 0.003906f = 1.0f / 256.0f (Q8 fixed-point coordinate divisor)
             offset.x = 0.003906f * cmd->x8.u->spawn_gfx_2.offsetZ;
             offset.y = 0.003906f * cmd->x8.u->spawn_gfx_2.offsetY;
 
@@ -277,13 +303,24 @@ void ftAction_80071028(Fighter_GObj* gobj, CommandInfo* cmd)
     }
 }
 
-/// @brief Skips GFX Spawn
+/**
+ * @brief Subaction opcode 10 skip: Skips GFX spawn command payload (5 words).
+ * @param gobj Fighter game object pointer.
+ * @param cmd Active subaction command interpreter state.
+ */
 void ftAction_800711DC(Fighter_GObj* gobj, CommandInfo* cmd)
 {
     SKIP_CMD(cmd, 5);
 }
 
-/// @brief Spawns Hitboxes
+/**
+ * @brief Subaction opcode 11: Creates and activates an offensive hitbox capsule.
+ * @details Configures a HitCapsule in fp->x914[id] with damage, bone attachment, radius scale,
+ * position offsets, trajectory angle, base knockback (BKB), knockback growth (KGB), weight-dependent
+ * set knockback (WKB), element (fire/electric/etc.), shield damage, and sound effects.
+ * @param gobj Fighter game object pointer.
+ * @param cmd Active subaction command interpreter state.
+ */
 void ftAction_8007121C(Fighter_GObj* gobj, CommandInfo* cmd)
 {
     Fighter* fp;
@@ -294,8 +331,6 @@ void ftAction_8007121C(Fighter_GObj* gobj, CommandInfo* cmd)
     PAD_STACK(8);
 
     fp = GET_FIGHTER(gobj);
-    /// @todo this matches but isnt pretty. maybe an inline/macro as
-    // we dont have enough stack in general?
     skip = (struct spawn_hitbox_skip*) cmd->x8.u;
     if ((skip->xF_b4) && (fp->x1064_thrownHitbox.x134.owner == NULL)) {
         ftAction_800715EC(gobj, cmd);
@@ -320,12 +355,14 @@ void ftAction_8007121C(Fighter_GObj* gobj, CommandInfo* cmd)
         }
         ftColl_8007ABD0(hitbox, cmd->x8.u->create_hitbox_0.damage, gobj);
         NEXT_CMD(cmd);
+        // Hitbox radius scale (0.003906f = 1/256)
         hitbox->scale = 0.003906f * cmd->x8.u->create_hitbox_1.size;
         hitbox->b_offset.x = 0.003906f * cmd->x8.u->create_hitbox_1.z_offset;
         NEXT_CMD(cmd);
         hitbox->b_offset.y = 0.003906f * cmd->x8.u->create_hitbox_2.y_offset;
         hitbox->b_offset.z = 0.003906f * cmd->x8.u->create_hitbox_2.x_offset;
         NEXT_CMD(cmd);
+        // Trajectory angle in degrees (e.g. 361 = Sakurai angle)
         ftColl_8007AC9C(hitbox, cmd->x8.u->create_hitbox_3.angle, gobj);
         hitbox->x24 = cmd->x8.u->create_hitbox_3.knockback_growth;
         hitbox->x28 = cmd->x8.u->create_hitbox_3.weight_set_knockback;
@@ -364,22 +401,21 @@ void ftAction_8007121C(Fighter_GObj* gobj, CommandInfo* cmd)
     ftCommon_80080484(fp);
 }
 
-/// @brief Skips Hitbox Spawn
+/**
+ * @brief Subaction opcode 11 skip: Skips hitbox creation payload (5 words).
+ * @param gobj Fighter game object pointer.
+ * @param cmd Active subaction command interpreter state.
+ */
 void ftAction_800715EC(Fighter_GObj* gobj, CommandInfo* cmd)
 {
     SKIP_CMD(cmd, 5);
 }
 
-/*
-- code: 12
-  name: Adjust Hitbox Damage
-  parameters:
-  - name: Hitbox ID
-    bitCount: 3
-  - name: Damage
-    bitCount: 23
-*/
-/// @brief Adjust Hitbox Damage
+/**
+ * @brief Subaction opcode 12: Dynamically updates active hitbox damage.
+ * @param gobj Fighter game object pointer.
+ * @param cmd Active subaction command interpreter state.
+ */
 void ftAction_8007162C(Fighter_GObj* gobj, CommandInfo* cmd)
 {
     HitCapsule* hit =
@@ -388,15 +424,21 @@ void ftAction_8007162C(Fighter_GObj* gobj, CommandInfo* cmd)
     NEXT_CMD(cmd);
 }
 
-/// @remarks after each CommandInfo function, there seems to be
-/// a function that has the ability to skip it (ftAction_800715EC's usage)
-/// unsure if theyre all actually called
+/**
+ * @brief Subaction opcode 12 skip: Skips damage update payload (1 word).
+ * @param gobj Fighter game object pointer.
+ * @param cmd Active subaction command interpreter state.
+ */
 void ftAction_8007168C(Fighter_GObj* gobj, CommandInfo* cmd)
 {
     SKIP_CMD(cmd, 1);
 }
 
-/// @brief Adjusts Hitbox Scale
+/**
+ * @brief Subaction opcode 13: Dynamically updates active hitbox radius scale.
+ * @param gobj Fighter game object pointer.
+ * @param cmd Active subaction command interpreter state.
+ */
 void ftAction_8007169C(Fighter_GObj* gobj, CommandInfo* cmd)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -405,12 +447,21 @@ void ftAction_8007169C(Fighter_GObj* gobj, CommandInfo* cmd)
     NEXT_CMD(cmd);
 }
 
+/**
+ * @brief Subaction opcode 13 skip: Skips scale update payload (1 word).
+ * @param gobj Fighter game object pointer.
+ * @param cmd Active subaction command interpreter state.
+ */
 void ftAction_800716F8(Fighter_GObj* gobj, CommandInfo* cmd)
 {
     SKIP_CMD(cmd, 1);
 }
 
-/// @brief Sets Hitbox flags
+/**
+ * @brief Subaction opcode 14: Updates internal hitbox flags (x42_b5 / x42_b7).
+ * @param gobj Fighter game object pointer.
+ * @param cmd Active subaction command interpreter state.
+ */
 void ftAction_80071708(Fighter_GObj* gobj, CommandInfo* cmd)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -426,35 +477,65 @@ void ftAction_80071708(Fighter_GObj* gobj, CommandInfo* cmd)
     NEXT_CMD(cmd);
 }
 
+/**
+ * @brief Subaction opcode 14 skip: Skips hitbox flags payload (1 word).
+ * @param gobj Fighter game object pointer.
+ * @param cmd Active subaction command interpreter state.
+ */
 void ftAction_80071774(Fighter_GObj* gobj, CommandInfo* cmd)
 {
     SKIP_CMD(cmd, 1);
 }
 
+/**
+ * @brief Subaction opcode 15: Deactivates a specific active hitbox capsule.
+ * @param gobj Fighter game object pointer.
+ * @param cmd Active subaction command interpreter state.
+ */
 void ftAction_80071784(Fighter_GObj* gobj, CommandInfo* cmd)
 {
     ftColl_8007AFC8(gobj, cmd->x8.u->set_throw_flags.hit_idx);
     NEXT_CMD(cmd);
 }
 
+/**
+ * @brief Subaction opcode 15 skip: Skips deactivate hitbox payload (1 word).
+ * @param gobj Fighter game object pointer.
+ * @param cmd Active subaction command interpreter state.
+ */
 void ftAction_800717C8(Fighter_GObj* gobj, CommandInfo* cmd)
 {
     SKIP_CMD(cmd, 1);
 }
 
+/**
+ * @brief Subaction opcode 16: Deactivates all active hitboxes on the fighter.
+ * @param gobj Fighter game object pointer.
+ * @param cmd Active subaction command interpreter state.
+ */
 void ftAction_800717D8(Fighter_GObj* gobj, CommandInfo* cmd)
 {
     ftColl_8007AFF8(gobj);
     NEXT_CMD(cmd);
 }
 
+/**
+ * @brief Subaction opcode 16 skip: Skips clear all hitboxes payload (1 word).
+ * @param gobj Fighter game object pointer.
+ * @param cmd Active subaction command interpreter state.
+ */
 void ftAction_80071810(Fighter_GObj* gobj, CommandInfo* cmd)
 {
     SKIP_CMD(cmd, 1);
 }
 
-/// Set one of #Fighter::cmd_vars
-/// @todo Heavily suggests that #Fighter::cmd_vars is not an array.
+/**
+ * @brief Subaction opcode 19: Sets a command script variable in fp->cmd_vars[0..3].
+ * @details Used by fighter code as an animation milestone signal (e.g. projectile launch,
+ * charge release point, transition triggers).
+ * @param gobj Fighter game object pointer.
+ * @param cmd Active subaction command interpreter state.
+ */
 void ftAction_80071820(Fighter_GObj* gobj, CommandInfo* cmd)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -476,6 +557,12 @@ void ftAction_80071820(Fighter_GObj* gobj, CommandInfo* cmd)
     NEXT_CMD(cmd);
 }
 
+/**
+ * @brief Subaction opcode 20: Sets throw release flags (b3 / b4) and syncs command timer.
+ * @details Marks the exact animation frame where the grabbed opponent is released from the throw.
+ * @param gobj Fighter game object pointer.
+ * @param cmd Active subaction command interpreter state.
+ */
 void ftAction_800718A4(Fighter_GObj* gobj, CommandInfo* cmd)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -491,6 +578,11 @@ void ftAction_800718A4(Fighter_GObj* gobj, CommandInfo* cmd)
     NEXT_CMD(cmd);
 }
 
+/**
+ * @brief Subaction opcode 21: Sets throw flag 1 (`throw_flags_b1`).
+ * @param gobj Fighter game object pointer.
+ * @param cmd Active subaction command interpreter state.
+ */
 void ftAction_80071908(Fighter_GObj* gobj, CommandInfo* cmd)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -498,6 +590,11 @@ void ftAction_80071908(Fighter_GObj* gobj, CommandInfo* cmd)
     NEXT_CMD(cmd);
 }
 
+/**
+ * @brief Subaction opcode 22: Sets throw flag 2 (`throw_flags_b2`), updating victim position.
+ * @param gobj Fighter game object pointer.
+ * @param cmd Active subaction command interpreter state.
+ */
 void ftAction_8007192C(Fighter_GObj* gobj, CommandInfo* cmd)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -505,7 +602,13 @@ void ftAction_8007192C(Fighter_GObj* gobj, CommandInfo* cmd)
     NEXT_CMD(cmd);
 }
 
-/// Allow interrupt
+/**
+ * @brief Subaction opcode 23: Enables action interruption (IASA / FAF).
+ * @details Sets `fp->allow_interrupt = true`. Signals the start of the Interruptible As Soon As window,
+ * allowing the player to cancel the remaining recovery animation into a new action (jump, shield, tilt, etc.).
+ * @param gobj Fighter game object pointer.
+ * @param cmd Active subaction command interpreter state.
+ */
 void ftAction_80071950(Fighter_GObj* gobj, CommandInfo* cmd)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -513,6 +616,11 @@ void ftAction_80071950(Fighter_GObj* gobj, CommandInfo* cmd)
     NEXT_CMD(cmd);
 }
 
+/**
+ * @brief Subaction opcode 24: Sets throw flag 0 (`throw_flags_b0`).
+ * @param gobj Fighter game object pointer.
+ * @param cmd Active subaction command interpreter state.
+ */
 void ftAction_80071974(Fighter_GObj* gobj, CommandInfo* cmd)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -520,6 +628,11 @@ void ftAction_80071974(Fighter_GObj* gobj, CommandInfo* cmd)
     NEXT_CMD(cmd);
 }
 
+/**
+ * @brief Subaction opcode 25: Configures airborne / grounded environment physics state.
+ * @param gobj Fighter game object pointer.
+ * @param cmd Active subaction command interpreter state.
+ */
 void ftAction_80071998(Fighter_GObj* gobj, CommandInfo* cmd)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -537,19 +650,33 @@ void ftAction_80071998(Fighter_GObj* gobj, CommandInfo* cmd)
     NEXT_CMD(cmd);
 }
 
+/**
+ * @brief Subaction opcode 26: Sets full-body collision / intangibility state.
+ * @param gobj Fighter game object pointer.
+ * @param cmd Active subaction command interpreter state.
+ */
 void ftAction_80071A14(Fighter_GObj* gobj, CommandInfo* cmd)
 {
     ftColl_8007B62C(gobj, cmd->x8.u->set_airborne_state.state);
     NEXT_CMD(cmd);
 }
 
+/**
+ * @brief Subaction opcode 27: Globally enables or disables all hurt capsules on the fighter.
+ * @param gobj Fighter game object pointer.
+ * @param cmd Active subaction command interpreter state.
+ */
 void ftAction_80071A58(Fighter_GObj* gobj, CommandInfo* cmd)
 {
     ftColl_8007B0C0(gobj, cmd->x8.u->set_airborne_state.state);
     NEXT_CMD(cmd);
 }
 
-/// @brief Sets Hurt Capsule State
+/**
+ * @brief Subaction opcode 28: Sets the hurt capsule status for a specific skeletal bone.
+ * @param gobj Fighter game object pointer.
+ * @param cmd Active subaction command interpreter state.
+ */
 void ftAction_80071A9C(Fighter_GObj* gobj, CommandInfo* cmd)
 {
     ftColl_8007B128(gobj, cmd->x8.u->set_hurt_state.bone_idx,
@@ -557,7 +684,13 @@ void ftAction_80071A9C(Fighter_GObj* gobj, CommandInfo* cmd)
     NEXT_CMD(cmd);
 }
 
-/// @brief Sets Jab Combo
+/**
+ * @brief Subaction opcode 29: Enables the jab combo continuation window.
+ * @details Sets `fp->x2218_b1 = true`, allowing subsequent presses of the attack button
+ * to chain Jab 1 into Jab 2, or Jab 2 into Jab 3.
+ * @param gobj Fighter game object pointer.
+ * @param cmd Active subaction command interpreter state.
+ */
 void ftAction_80071AE8(Fighter_GObj* gobj, CommandInfo* cmd)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -568,6 +701,12 @@ void ftAction_80071AE8(Fighter_GObj* gobj, CommandInfo* cmd)
     NEXT_CMD(cmd);
 }
 
+/**
+ * @brief Subaction opcode 30: Enables the rapid jab transition window.
+ * @details Sets `fp->x2218_b2` to enable mashing attack inputs to transition into infinite rapid jab.
+ * @param gobj Fighter game object pointer.
+ * @param cmd Active subaction command interpreter state.
+ */
 void ftAction_80071B28(Fighter_GObj* gobj, CommandInfo* cmd)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -575,6 +714,11 @@ void ftAction_80071B28(Fighter_GObj* gobj, CommandInfo* cmd)
     NEXT_CMD(cmd);
 }
 
+/**
+ * @brief Subaction opcode 17: Plays fighter sound effect (SFX) or executes audio behavior.
+ * @param gobj Fighter game object pointer.
+ * @param cmd Active subaction command interpreter state.
+ */
 void ftAction_80071B50(Fighter_GObj* gobj, CommandInfo* cmd)
 {
     Fighter* fp;
@@ -661,11 +805,21 @@ void ftAction_80071B50(Fighter_GObj* gobj, CommandInfo* cmd)
     NEXT_CMD(cmd);
 }
 
+/**
+ * @brief Subaction opcode 17 skip: Skips audio command payload (3 words).
+ * @param gobj Fighter game object pointer.
+ * @param cmd Active subaction command interpreter state.
+ */
 void ftAction_80071CA4(Fighter_GObj* gobj, CommandInfo* cmd)
 {
     SKIP_CMD(cmd, 3);
 }
 
+/**
+ * @brief Subaction opcode 18: Plays character smash attack charge/release sound effects.
+ * @param gobj Fighter game object pointer.
+ * @param cmd Active subaction command interpreter state.
+ */
 void ftAction_80071CCC(Fighter_GObj* gobj, CommandInfo* cmd)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -679,11 +833,21 @@ void ftAction_80071CCC(Fighter_GObj* gobj, CommandInfo* cmd)
     }
 }
 
+/**
+ * @brief Subaction opcode 18 skip: Skips smash SFX command payload (1 word).
+ * @param gobj Fighter game object pointer.
+ * @param cmd Active subaction command interpreter state.
+ */
 void ftAction_80071D30(Fighter_GObj* gobj, CommandInfo* cmd)
 {
     SKIP_CMD(cmd, 1);
 }
 
+/**
+ * @brief Subaction opcode 31: Sets display object (DObj) render flags.
+ * @param gobj Fighter game object pointer.
+ * @param cmd Active subaction command interpreter state.
+ */
 void ftAction_80071D40(Fighter_GObj* gobj, CommandInfo* cmd)
 {
     ftParts_80074B0C(gobj, cmd->x8.u->set_dobj_flags.idx,
@@ -691,18 +855,34 @@ void ftAction_80071D40(Fighter_GObj* gobj, CommandInfo* cmd)
     NEXT_CMD(cmd);
 }
 
+/**
+ * @brief Subaction opcode 32: Resets fighter model parts to default state.
+ * @param gobj Fighter game object pointer.
+ * @param cmd Active subaction command interpreter state.
+ */
 void ftAction_80071D94(Fighter_GObj* gobj, CommandInfo* cmd)
 {
     ftParts_80074A8C(gobj);
     NEXT_CMD(cmd);
 }
 
+/**
+ * @brief Subaction opcode 33: Alternate reset for fighter model parts.
+ * @param gobj Fighter game object pointer.
+ * @param cmd Active subaction command interpreter state.
+ */
 void ftAction_80071DCC(Fighter_GObj* gobj, CommandInfo* cmd)
 {
     ftParts_80074ACC(gobj);
     NEXT_CMD(cmd);
 }
 
+/**
+ * @brief Subaction opcode 34: Configures thrown opponent body collision hitbox.
+ * @details When throwing an opponent, turns their body into a damaging projectile hitbox (in fp->xDF4).
+ * @param gobj Fighter game object pointer.
+ * @param cmd Active subaction command interpreter state.
+ */
 void ftAction_80071E04(Fighter_GObj* gobj, CommandInfo* cmd)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -722,11 +902,21 @@ void ftAction_80071E04(Fighter_GObj* gobj, CommandInfo* cmd)
     NEXT_CMD(cmd);
 }
 
+/**
+ * @brief Subaction opcode 34 skip: Skips thrown hitbox payload (3 words).
+ * @param gobj Fighter game object pointer.
+ * @param cmd Active subaction command interpreter state.
+ */
 void ftAction_80071F0C(Fighter_GObj* gobj, CommandInfo* cmd)
 {
     SKIP_CMD(cmd, 3);
 }
 
+/**
+ * @brief Subaction opcode 35: Updates held item pickup/attachment visibility.
+ * @param gobj Fighter game object pointer.
+ * @param cmd Active subaction command interpreter state.
+ */
 void ftAction_80071F34(Fighter_GObj* gobj, CommandInfo* cmd)
 {
     PAD_STACK(8);
@@ -734,6 +924,11 @@ void ftAction_80071F34(Fighter_GObj* gobj, CommandInfo* cmd)
     NEXT_CMD(cmd);
 }
 
+/**
+ * @brief Subaction opcode 36: Toggles article / accessory visibility.
+ * @param gobj Fighter game object pointer.
+ * @param cmd Active subaction command interpreter state.
+ */
 void ftAction_80071F78(Fighter_GObj* gobj, CommandInfo* cmd)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -741,6 +936,11 @@ void ftAction_80071F78(Fighter_GObj* gobj, CommandInfo* cmd)
     NEXT_CMD(cmd);
 }
 
+/**
+ * @brief Subaction opcode 37: Toggles fighter body model visibility.
+ * @param gobj Fighter game object pointer.
+ * @param cmd Active subaction command interpreter state.
+ */
 void ftAction_80071FA0(Fighter_GObj* gobj, CommandInfo* cmd)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -748,6 +948,11 @@ void ftAction_80071FA0(Fighter_GObj* gobj, CommandInfo* cmd)
     NEXT_CMD(cmd);
 }
 
+/**
+ * @brief Subaction opcode 38: Randomly selects and plays one of up to 6 sound effects.
+ * @param gobj Fighter game object pointer.
+ * @param cmd Active subaction command interpreter state.
+ */
 void ftAction_80071FC8(Fighter_GObj* gobj, CommandInfo* cmd)
 {
     Fighter* fp;
@@ -841,17 +1046,27 @@ void ftAction_80071FC8(Fighter_GObj* gobj, CommandInfo* cmd)
     }
 }
 
+/**
+ * @brief Subaction opcode 38 skip: Skips random SFX payload (7 words).
+ * @param gobj Fighter game object pointer.
+ * @param cmd Active subaction command interpreter state.
+ */
 void ftAction_800722C8(Fighter_GObj* gobj, CommandInfo* cmd)
 {
     SKIP_CMD(cmd, 7);
 }
 
+/**
+ * @brief Subaction opcode 39: Plays directional/spatial stage audio with channel routing.
+ * @param gobj Fighter game object pointer.
+ * @param cmd Active subaction command interpreter state.
+ */
 void ftAction_80072320(Fighter_GObj* gobj, CommandInfo* cmd)
 {
     Fighter* fp;
     u8 pitch_select;
-    s32 spC;
-    s32 sp8;
+    s32 voice_channel;
+    s32 sfx_channel_group;
     s32 sfx;
     u32 behavior;
     u32 sfx_base;
@@ -891,35 +1106,35 @@ void ftAction_80072320(Fighter_GObj* gobj, CommandInfo* cmd)
 
     switch (sfx_base) {
     case 0:
-        sp8 = 0;
-        spC = -1;
+        sfx_channel_group = 0;
+        voice_channel = -1;
         fp->x2160 = lbAudioAx_800264E4(
             lbAudioAx_800263E8(direction, gobj, behavior, sfx, 127, 127,
-                               sfx_param0, sfx_param1, sfx_param2, sp8, spC));
+                               sfx_param0, sfx_param1, sfx_param2, sfx_channel_group, voice_channel));
         break;
 
     case 1:
-        sp8 = fp->player_idx + fp->is_sub_fighter;
+        sfx_channel_group = fp->player_idx + fp->is_sub_fighter;
         fp->x214C = lbAudioAx_800264E4(lbAudioAx_800263E8(
             direction, gobj, behavior, sfx, 127, 127, sfx_param0, sfx_param1,
-            sfx_param2, sp8 + 0x36, -1));
+            sfx_param2, sfx_channel_group + 0x36, -1));
         break;
 
     case 2:
         if (!fp->x2225_b6) {
-            sp8 = fp->player_idx + fp->is_sub_fighter;
+            sfx_channel_group = fp->player_idx + fp->is_sub_fighter;
             fp->x2144 = lbAudioAx_800264E4(lbAudioAx_800263E8(
                 direction, gobj, behavior, sfx, 127, 127, sfx_param0,
-                sfx_param1, sfx_param2, sp8 + 0x1E, -1));
+                sfx_param1, sfx_param2, sfx_channel_group + 0x1E, -1));
             break;
         }
         switch (fp->kind) {
         case Ft_Kind_GameWatch:
         case Ft_Kind_Samus:
-            sp8 = fp->player_idx + fp->is_sub_fighter;
+            sfx_channel_group = fp->player_idx + fp->is_sub_fighter;
             fp->x2144 = lbAudioAx_800264E4(lbAudioAx_800263E8(
                 direction, gobj, behavior, sfx, 127, 127, sfx_param0,
-                sfx_param1, sfx_param2, sp8 + 0x1E, -1));
+                sfx_param1, sfx_param2, sfx_channel_group + 0x1E, -1));
             break;
         default:
             break;
@@ -927,32 +1142,32 @@ void ftAction_80072320(Fighter_GObj* gobj, CommandInfo* cmd)
         break;
 
     case 3:
-        sp8 = fp->player_idx + fp->is_sub_fighter;
+        sfx_channel_group = fp->player_idx + fp->is_sub_fighter;
         fp->x2150 = lbAudioAx_800264E4(lbAudioAx_800263E8(
             direction, gobj, behavior, sfx, 127, 127, sfx_param0, sfx_param1,
-            sfx_param2, sp8 + 0x42, -1));
+            sfx_param2, sfx_channel_group + 0x42, -1));
         break;
 
     case 4:
-        sp8 = fp->player_idx + fp->is_sub_fighter;
+        sfx_channel_group = fp->player_idx + fp->is_sub_fighter;
         fp->x2154 = lbAudioAx_800264E4(lbAudioAx_800263E8(
             direction, gobj, behavior, sfx, 127, 127, sfx_param0, sfx_param1,
-            sfx_param2, sp8 + 0x4E, -1));
+            sfx_param2, sfx_channel_group + 0x4E, -1));
         break;
 
     case 5:
-        sp8 = fp->player_idx + fp->is_sub_fighter;
+        sfx_channel_group = fp->player_idx + fp->is_sub_fighter;
         fp->x2158 = lbAudioAx_800264E4(lbAudioAx_800263E8(
             direction, gobj, behavior, sfx, 127, 127, sfx_param0, sfx_param1,
-            sfx_param2, sp8 + 0x5A, -1));
+            sfx_param2, sfx_channel_group + 0x5A, -1));
         break;
 
     case 6:
         if (!fp->x2225_b6) {
-            sp8 = fp->player_idx + fp->is_sub_fighter;
+            sfx_channel_group = fp->player_idx + fp->is_sub_fighter;
             fp->x2148 = lbAudioAx_800264E4(lbAudioAx_800263E8(
                 direction, gobj, behavior, sfx, 127, 127, sfx_param0,
-                sfx_param1, sfx_param2, sp8 + 0x2A, -1));
+                sfx_param1, sfx_param2, sfx_channel_group + 0x2A, -1));
             break;
         default:
             break;
@@ -961,10 +1176,10 @@ void ftAction_80072320(Fighter_GObj* gobj, CommandInfo* cmd)
         switch (fp->kind) {
         case Ft_Kind_GameWatch:
         case Ft_Kind_Samus:
-            sp8 = fp->player_idx + fp->is_sub_fighter;
+            sfx_channel_group = fp->player_idx + fp->is_sub_fighter;
             fp->x2148 = lbAudioAx_800264E4(lbAudioAx_800263E8(
                 direction, gobj, behavior, sfx, 127, 127, sfx_param0,
-                sfx_param1, sfx_param2, sp8 + 0x2A, -1));
+                sfx_param1, sfx_param2, sfx_channel_group + 0x2A, -1));
             break;
         default:
             break;
@@ -973,11 +1188,21 @@ void ftAction_80072320(Fighter_GObj* gobj, CommandInfo* cmd)
     }
 }
 
+/**
+ * @brief Subaction opcode 39 skip: Skips spatial stage audio payload (4 words).
+ * @param gobj Fighter game object pointer.
+ * @param cmd Active subaction command interpreter state.
+ */
 void ftAction_800726C0(Fighter_GObj* gobj, CommandInfo* cmd)
 {
     SKIP_CMD(cmd, 4);
 }
 
+/**
+ * @brief Subaction opcode 40: Sets texture animation frame (facial expressions/eyes).
+ * @param gobj Fighter game object pointer.
+ * @param cmd Active subaction command interpreter state.
+ */
 void ftAction_800726F4(Fighter_GObj* gobj, CommandInfo* cmd)
 {
     ftAnim_800704F0(gobj, cmd->x8.u->set_tex_anim.idx,
@@ -989,26 +1214,46 @@ void ftAction_800726F4(Fighter_GObj* gobj, CommandInfo* cmd)
     NEXT_CMD(cmd);
 }
 
+/**
+ * @brief Subaction opcode 41: Applies an animation sequence to a specific body part.
+ * @param gobj Fighter game object pointer.
+ * @param cmd Active subaction command interpreter state.
+ */
 void ftAction_800727C8(Fighter_GObj* gobj, CommandInfo* cmd)
 {
     ftAnim_ApplyPartAnim(gobj, cmd->x8.u->part_anim.unk1,
-                         cmd->x8.u->part_anim.unk2, cmd->x8.u->part_anim.unk3);
+                          cmd->x8.u->part_anim.unk2, cmd->x8.u->part_anim.unk3);
     NEXT_CMD(cmd);
 }
 
+/**
+ * @brief Subaction opcode 41 alternate: Applies part animation with default frame (0.0f).
+ * @param gobj Fighter game object pointer.
+ * @param cmd Active subaction command interpreter state.
+ */
 void ftAction_8007283C(Fighter_GObj* gobj, CommandInfo* cmd)
 {
     ftAnim_ApplyPartAnim(gobj, cmd->x8.u->part_anim.unk1,
-                         cmd->x8.u->part_anim.unk2, 0.0f);
+                          cmd->x8.u->part_anim.unk2, 0.0f);
     NEXT_CMD(cmd);
 }
 
+/**
+ * @brief Subaction opcode 42: Updates Peach's parasol status.
+ * @param gobj Fighter game object pointer.
+ * @param cmd Active subaction command interpreter state.
+ */
 void ftAction_80072894(Fighter_GObj* gobj, CommandInfo* cmd)
 {
     ftCommon_8007E83C(gobj, cmd->x8.u->unk9.unk1, cmd->x8.u->unk9.unk2);
     NEXT_CMD(cmd);
 }
 
+/**
+ * @brief Subaction opcode 43: Initiates controller rumble pattern.
+ * @param gobj Fighter game object pointer.
+ * @param cmd Active subaction command interpreter state.
+ */
 void ftAction_800728F8(Fighter_GObj* gobj, CommandInfo* cmd)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -1021,11 +1266,21 @@ void ftAction_800728F8(Fighter_GObj* gobj, CommandInfo* cmd)
     NEXT_CMD(cmd);
 }
 
+/**
+ * @brief Subaction opcode 43 skip: Advances past rumble command (1 word).
+ * @param gobj Fighter game object pointer.
+ * @param cmd Active subaction command interpreter state.
+ */
 void ftAction_8007296C(Fighter_GObj* gobj, CommandInfo* cmd)
 {
     NEXT_CMD(cmd);
 }
 
+/**
+ * @brief Subaction opcode 44: Stops controller rumble effect.
+ * @param gobj Fighter game object pointer.
+ * @param cmd Active subaction command interpreter state.
+ */
 void ftAction_8007297C(Fighter_GObj* gobj, CommandInfo* cmd)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -1033,11 +1288,21 @@ void ftAction_8007297C(Fighter_GObj* gobj, CommandInfo* cmd)
     NEXT_CMD(cmd);
 }
 
+/**
+ * @brief Subaction opcode 44 skip: Advances past stop rumble command.
+ * @param gobj Fighter game object pointer.
+ * @param cmd Active subaction command interpreter state.
+ */
 void ftAction_800729C4(Fighter_GObj* gobj, CommandInfo* cmd)
 {
     NEXT_CMD(cmd);
 }
 
+/**
+ * @brief Subaction opcode 45: Sets looping controller rumble pattern.
+ * @param gobj Fighter game object pointer.
+ * @param cmd Active subaction command interpreter state.
+ */
 void ftAction_800729D4(Fighter_GObj* gobj, CommandInfo* cmd)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -1054,11 +1319,21 @@ void ftAction_800729D4(Fighter_GObj* gobj, CommandInfo* cmd)
     NEXT_CMD(cmd);
 }
 
+/**
+ * @brief Subaction opcode 45 skip: Advances past loop rumble command.
+ * @param gobj Fighter game object pointer.
+ * @param cmd Active subaction command interpreter state.
+ */
 void ftAction_80072A4C(Fighter_GObj* gobj, CommandInfo* cmd)
 {
     NEXT_CMD(cmd);
 }
 
+/**
+ * @brief Subaction opcode 46: Starts color/material flash animation (ColAnim).
+ * @param gobj Fighter game object pointer.
+ * @param cmd Active subaction command interpreter state.
+ */
 void ftAction_80072A5C(Fighter_GObj* gobj, CommandInfo* cmd)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -1066,22 +1341,42 @@ void ftAction_80072A5C(Fighter_GObj* gobj, CommandInfo* cmd)
     NEXT_CMD(cmd);
 }
 
+/**
+ * @brief Subaction opcode 46 skip: Advances past start ColAnim command.
+ * @param gobj Fighter game object pointer.
+ * @param cmd Active subaction command interpreter state.
+ */
 void ftAction_80072AAC(Fighter_GObj* gobj, CommandInfo* cmd)
 {
     NEXT_CMD(cmd);
 }
 
+/**
+ * @brief Subaction opcode 47: Stops active color animation (ColAnim).
+ * @param gobj Fighter game object pointer.
+ * @param cmd Active subaction command interpreter state.
+ */
 void ftAction_80072ABC(Fighter_GObj* gobj, CommandInfo* cmd)
 {
     ftCo_800C0200(GET_FIGHTER(gobj), cmd->x8.u->unk14.unk1);
     NEXT_CMD(cmd);
 }
 
+/**
+ * @brief Subaction opcode 47 skip: Advances past stop ColAnim command.
+ * @param gobj Fighter game object pointer.
+ * @param cmd Active subaction command interpreter state.
+ */
 void ftAction_80072B04(Fighter_GObj* gobj, CommandInfo* cmd)
 {
     NEXT_CMD(cmd);
 }
 
+/**
+ * @brief Subaction opcode 48: Sets intangible / invincible state flag.
+ * @param gobj Fighter game object pointer.
+ * @param cmd Active subaction command interpreter state.
+ */
 void ftAction_80072B14(Fighter_GObj* gobj, CommandInfo* cmd)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -1089,6 +1384,11 @@ void ftAction_80072B14(Fighter_GObj* gobj, CommandInfo* cmd)
     NEXT_CMD(cmd);
 }
 
+/**
+ * @brief Subaction opcode 49: Configures sword trail visual effect.
+ * @param gobj Fighter game object pointer.
+ * @param cmd Active subaction command interpreter state.
+ */
 void ftAction_80072B3C(Fighter_GObj* gobj, CommandInfo* cmd)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -1097,11 +1397,21 @@ void ftAction_80072B3C(Fighter_GObj* gobj, CommandInfo* cmd)
     NEXT_CMD(cmd);
 }
 
+/**
+ * @brief Subaction opcode 49 skip: Advances past sword trail command.
+ * @param gobj Fighter game object pointer.
+ * @param cmd Active subaction command interpreter state.
+ */
 void ftAction_80072B84(Fighter_GObj* gobj, CommandInfo* cmd)
 {
     NEXT_CMD(cmd);
 }
 
+/**
+ * @brief Subaction opcode 50: Updates dynamic bone secondary physics simulation.
+ * @param gobj Fighter game object pointer.
+ * @param cmd Active subaction command interpreter state.
+ */
 void ftAction_80072B94(Fighter_GObj* gobj, CommandInfo* cmd)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -1109,11 +1419,22 @@ void ftAction_80072B94(Fighter_GObj* gobj, CommandInfo* cmd)
     NEXT_CMD(cmd);
 }
 
+/**
+ * @brief Subaction opcode 50 skip: Advances past dynamic bone command.
+ * @param gobj Fighter game object pointer.
+ * @param cmd Active subaction command interpreter state.
+ */
 void ftAction_80072BE4(Fighter_GObj* gobj, CommandInfo* cmd)
 {
     NEXT_CMD(cmd);
 }
 
+/**
+ * @brief Subaction opcode 51: Inflicts self-damage recoil directly to the fighter.
+ * @details Notably used on Pichu's electric attacks (inflicting self-percent).
+ * @param gobj Fighter game object pointer.
+ * @param cmd Active subaction command interpreter state.
+ */
 void ftAction_80072BF4(Fighter_GObj* gobj, CommandInfo* cmd)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -1121,17 +1442,32 @@ void ftAction_80072BF4(Fighter_GObj* gobj, CommandInfo* cmd)
     NEXT_CMD(cmd);
 }
 
+/**
+ * @brief Subaction opcode 51 skip: Advances past self-damage command.
+ * @param gobj Fighter game object pointer.
+ * @param cmd Active subaction command interpreter state.
+ */
 void ftAction_80072C5C(Fighter_GObj* gobj, CommandInfo* cmd)
 {
     NEXT_CMD(cmd);
 }
 
+/**
+ * @brief Subaction opcode 52: Triggers camera focus or zoom event.
+ * @param gobj Fighter game object pointer.
+ * @param cmd Active subaction command interpreter state.
+ */
 void ftAction_80072C6C(Fighter_GObj* gobj, CommandInfo* cmd)
 {
     ft_8008A1B8(gobj, cmd->x8.u->unk19.unk1);
     NEXT_CMD(cmd);
 }
 
+/**
+ * @brief Subaction opcode 53: Updates model flag x2225_b2.
+ * @param gobj Fighter game object pointer.
+ * @param cmd Active subaction command interpreter state.
+ */
 void ftAction_80072CB0(Fighter_GObj* gobj, CommandInfo* cmd)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -1139,10 +1475,15 @@ void ftAction_80072CB0(Fighter_GObj* gobj, CommandInfo* cmd)
     NEXT_CMD(cmd);
 }
 
+/**
+ * @brief Subaction opcode 54: Spawns surface-dependent footstep sound and dust particle GFX.
+ * @param gobj Fighter game object pointer.
+ * @param cmd Active subaction command interpreter state.
+ */
 void ftAction_80072CD8(Fighter_GObj* gobj, CommandInfo* cmd)
 {
-    int sp64;
-    int sp60;
+    int surface_sfx_id;
+    int play_default_sfx;
     int gfx_id;
     CommandInfo _cmd;
     u32 cmd_words[3];
@@ -1153,13 +1494,13 @@ void ftAction_80072CD8(Fighter_GObj* gobj, CommandInfo* cmd)
     u32 unused;
 
     fp = gobj->user_data;
-    sp60 = 1;
+    play_default_sfx = 1;
 
-    if (ft_80084BFC(gobj, &sp64, &sp60, &gfx_id) != false) {
-        if (sp64 != -1) {
+    if (ft_80084BFC(gobj, &surface_sfx_id, &play_default_sfx, &gfx_id) != false) {
+        if (surface_sfx_id != -1) {
             _cmd.x8.u = (union CmdUnion*) cmd_words;
             cmd_words[0] = *(u32*) cmd->x8.u;
-            cmd_words[1] = sp64;
+            cmd_words[1] = surface_sfx_id;
             cmd_words[2] = *(u32*) ((u8*) cmd->x8.u + 8);
             ftAction_80071B50(gobj, &_cmd);
         }
@@ -1181,7 +1522,7 @@ void ftAction_80072CD8(Fighter_GObj* gobj, CommandInfo* cmd)
         }
     }
 
-    if (sp60 != 0) {
+    if (play_default_sfx != 0) {
         ftAction_80071B50(gobj, cmd);
         return;
     }
@@ -1191,15 +1532,25 @@ void ftAction_80072CD8(Fighter_GObj* gobj, CommandInfo* cmd)
     ++cmd->x8.u;
 }
 
+/**
+ * @brief Subaction opcode 54 skip: Skips footstep audio and GFX payload (3 words).
+ * @param gobj Fighter game object pointer.
+ * @param cmd Active subaction command interpreter state.
+ */
 void ftAction_80072E24(Fighter_GObj* gobj, CommandInfo* cmd)
 {
     SKIP_CMD(cmd, 3);
 }
 
+/**
+ * @brief Subaction opcode 55: Spawns surface-dependent landing sound and impact dust GFX.
+ * @param gobj Fighter game object pointer.
+ * @param cmd Active subaction command interpreter state.
+ */
 void ftAction_80072E4C(Fighter_GObj* gobj, CommandInfo* cmd)
 {
-    int sp64;
-    int sp60;
+    int landing_sfx_id;
+    int play_default_sfx;
     int gfx_id;
     CommandInfo _cmd;
     u32 cmd_words[3];
@@ -1210,16 +1561,16 @@ void ftAction_80072E4C(Fighter_GObj* gobj, CommandInfo* cmd)
     u32 unused;
 
     fp = gobj->user_data;
-    sp60 = 1;
+    play_default_sfx = 1;
     gfx_id = -1;
     cmd_flag = cmd->x8.u->unk_fx_0.x1_b0_7;
     cmd_flag &= 1;
-    if ((ft_80084C38(gobj, &sp64, &sp60, &gfx_id) != false) &&
-        (cmd_flag == 0) && (sp64 != -1))
+    if ((ft_80084C38(gobj, &landing_sfx_id, &play_default_sfx, &gfx_id) != false) &&
+        (cmd_flag == 0) && (landing_sfx_id != -1))
     {
         _cmd.x8.u = (union CmdUnion*) cmd_words;
         cmd_words[0] = *(u32*) cmd->x8.u;
-        cmd_words[1] = sp64;
+        cmd_words[1] = landing_sfx_id;
         cmd_words[2] = ((u32*) cmd->x8.u)[2];
         ftAction_80071B50(gobj, &_cmd);
     }
@@ -1234,13 +1585,13 @@ void ftAction_80072E4C(Fighter_GObj* gobj, CommandInfo* cmd)
     offset.x = 0.0f;
     range.x = 0.0f;
     ftCo_8009F834(gobj, gfx_id, FtPart_TopN, 0, 0, &offset, &range, 0.0f);
-    if (sp60 != 0) {
+    if (play_default_sfx != 0) {
         ft_PlaySFX(fp, 0x46, 0x7FU, 0x40U);
         if (cmd_flag == 0) {
             ftAction_80071B50(gobj, cmd);
         }
     }
-    if ((sp60 == 0) || (cmd_flag != 0)) {
+    if ((play_default_sfx == 0) || (cmd_flag != 0)) {
         ++cmd->x8.u;
         ++cmd->x8.u;
         ++cmd->x8.u;
@@ -1248,11 +1599,23 @@ void ftAction_80072E4C(Fighter_GObj* gobj, CommandInfo* cmd)
     ftCommon_8007EBAC(fp, 0x16U, 0U);
 }
 
+/**
+ * @brief Subaction opcode 55 skip: Skips landing audio and GFX payload (3 words).
+ * @param gobj Fighter game object pointer.
+ * @param cmd Active subaction command interpreter state.
+ */
 void ftAction_80072FE0(Fighter_GObj* gobj, CommandInfo* cmd)
 {
     SKIP_CMD(cmd, 3);
 }
 
+/**
+ * @brief Subaction opcode 56: Initializes smash attack charging state window.
+ * @details Reads charge frame limit (typically 60 frames max), damage growth rate,
+ * and charging flash color animation. Delegates to ftCo_800DEE84.
+ * @param gobj Fighter game object pointer.
+ * @param cmd Active subaction command interpreter state.
+ */
 void ftAction_80073008(Fighter_GObj* gobj, CommandInfo* cmd)
 {
     f32 charge_frames;
@@ -1269,11 +1632,21 @@ void ftAction_80073008(Fighter_GObj* gobj, CommandInfo* cmd)
     ftCo_800DEE84(gobj, (s32) color_anim, charge_frames, dmg_mult);
 }
 
+/**
+ * @brief Subaction opcode 56 skip: Skips smash charge initialization payload (2 words).
+ * @param gobj Fighter game object pointer.
+ * @param cmd Active subaction command interpreter state.
+ */
 void ftAction_8007309C(Fighter_GObj* gobj, CommandInfo* cmd)
 {
     SKIP_CMD(cmd, 2);
 }
 
+/**
+ * @brief Subaction opcode 57: Updates body collision and shield parameters.
+ * @param gobj Fighter game object pointer.
+ * @param cmd Active subaction command interpreter state.
+ */
 void ftAction_800730B8(Fighter_GObj* gobj, CommandInfo* cmd)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -1281,11 +1654,21 @@ void ftAction_800730B8(Fighter_GObj* gobj, CommandInfo* cmd)
     NEXT_CMD(cmd);
 }
 
+/**
+ * @brief Subaction opcode 57 skip: Advances past body parameter command.
+ * @param gobj Fighter game object pointer.
+ * @param cmd Active subaction command interpreter state.
+ */
 void ftAction_80073108(Fighter_GObj* gobj, CommandInfo* cmd)
 {
     NEXT_CMD(cmd);
 }
 
+/**
+ * @brief Subaction opcode 58: Spawns wind hazard push field / wind velocity effect.
+ * @param gobj Fighter game object pointer.
+ * @param cmd Active subaction command interpreter state.
+ */
 void ftAction_80073118(Fighter_GObj* gobj, CommandInfo* cmd)
 {
     u8 idx;
@@ -1314,52 +1697,71 @@ void ftAction_80073118(Fighter_GObj* gobj, CommandInfo* cmd)
     ftCo_8009E714(gobj, idx, timer, x, y, mag, decay_amt, angle);
 }
 
+/**
+ * @brief Subaction opcode 58 skip: Skips wind hazard command payload (4 words).
+ * @param gobj Fighter game object pointer.
+ * @param cmd Active subaction command interpreter state.
+ */
 void ftAction_8007320C(Fighter_GObj* gobj, CommandInfo* cmd)
 {
     SKIP_CMD(cmd, 4);
 }
 
-/// @todo Fix naming.
+/// Helper macro to cast script event pointer to default event structure.
 #define gmScriptEventCast(p_event, type) ((type*) (p_event))
 
+/**
+ * @brief Main per-frame subaction command script execution interpreter tick.
+ * @details Runs during each animation frame update. Decrements script timer by `fp->frame_speed_mul`,
+ * executes control flow commands (opcodes 0-9) via `Command_Execute`, and dispatches fighter
+ * action events (opcodes 10+) via `ftAction_803C06E8`.
+ * @param fighter_gobj Fighter game object pointer.
+ */
 void ftAction_80073240(Fighter_GObj* fighter_gobj)
 {
     Fighter* fp = fighter_gobj->user_data;
-    CommandInfo* ftCommand = &fp->x3E4_fighterCmdScript;
-    u32 eventCode;
+    CommandInfo* cmd = &fp->x3E4_fighterCmdScript;
+    u32 event_code;
     fp->x3E4_fighterCmdScript.frame_count = fp->cur_anim_frame + fp->x898_unk;
     if (fp->x3E4_fighterCmdScript.x8.u != NULL) {
-        if (ftCommand->timer != F32_MAX) {
-            ftCommand->timer -= fp->frame_speed_mul;
+        if (cmd->timer != F32_MAX) {
+            cmd->timer -= fp->frame_speed_mul;
         }
         do {
-            if (ftCommand->x8.u == NULL) {
+            if (cmd->x8.u == NULL) {
                 break;
             }
-            if (F32_MAX == ftCommand->timer) {
-                if (ftCommand->frame_count >= fp->frame_speed_mul) {
+            if (F32_MAX == cmd->timer) {
+                if (cmd->frame_count >= fp->frame_speed_mul) {
                     break;
                 }
-                ftCommand->timer = -ftCommand->frame_count;
-            } else if (ftCommand->timer > 0.0f) {
+                cmd->timer = -cmd->frame_count;
+            } else if (cmd->timer > 0.0f) {
                 break;
             }
-            eventCode =
-                gmScriptEventCast(ftCommand->x8.u, gmScriptEventDefault)
+            event_code =
+                gmScriptEventCast(cmd->x8.u, gmScriptEventDefault)
                     ->opcode;
-            if (Command_Execute(ftCommand, eventCode) == false) {
-                eventCode -= 0xA;
-                ftAction_803C06E8[eventCode](fighter_gobj, ftCommand);
+            if (Command_Execute(cmd, event_code) == false) {
+                event_code -= 0xA;
+                ftAction_803C06E8[event_code](fighter_gobj, cmd);
             }
-        } while (F32_MAX != ftCommand->timer);
+        } while (F32_MAX != cmd->timer);
     }
 }
 
+/**
+ * @brief Fast-forward subaction script catchup interpreter tick for mid-animation starts.
+ * @details Executed when entering an action state with anim_start > 0. Executes persistent
+ * state commands (hitbox creation, hurtbox state, flags) via ftAction_803C07AC while skipping
+ * one-shot audio and visual effects. Resets throw flags if timer changes and finishes.
+ * @param gobj Fighter game object pointer.
+ */
 void ftAction_80073354(Fighter_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
     CommandInfo* cmd = (&fp->x3E4_fighterCmdScript);
-    u32 eventCode;
+    u32 event_code;
 
     fp->x3E4_fighterCmdScript.frame_count = fp->cur_anim_frame + fp->x898_unk;
     fp->x2210.throw_flags = 0;
@@ -1380,14 +1782,14 @@ void ftAction_80073354(Fighter_GObj* gobj)
                 break;
             }
             {
-                float timer = cmd->timer;
-                eventCode =
+                float prev_timer = cmd->timer;
+                event_code =
                     gmScriptEventCast(cmd->x8.u, gmScriptEventDefault)->opcode;
-                if (Command_Execute(cmd, eventCode) == false) {
-                    eventCode -= 0xA;
-                    ftAction_803C07AC[eventCode](gobj, cmd);
+                if (Command_Execute(cmd, event_code) == false) {
+                    event_code -= 0xA;
+                    ftAction_803C07AC[event_code](gobj, cmd);
                 }
-                if (cmd->timer != timer && cmd->timer <= 0.0f) {
+                if (cmd->timer != prev_timer && cmd->timer <= 0.0f) {
                     fp->x2210.throw_flags = 0;
                 }
             }
@@ -1395,6 +1797,12 @@ void ftAction_80073354(Fighter_GObj* gobj)
     }
 }
 
+/**
+ * @brief Fast-forward subaction command skip loop when Ft_MF_UpdateCmd is active.
+ * @details Advances the command script up to the current animation frame by rapidly
+ * advancing script pointers using bytecode payload word lengths from `ftAction_803C0870`.
+ * @param gobj Fighter game object pointer.
+ */
 void ftAction_8007349C(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -1420,9 +1828,9 @@ void ftAction_8007349C(Fighter_GObj* gobj)
             break;
         }
         {
-            u32 id = cmd->x8.u->Command_09.id;
-            if (!Command_Execute(cmd, id)) {
-                cmd->x8.u += ftAction_803C0870[id - 10];
+            u32 opcode = cmd->x8.u->Command_09.id;
+            if (!Command_Execute(cmd, opcode)) {
+                cmd->x8.u += ftAction_803C0870[opcode - 10];
             }
         }
     } while (cmd->timer != F32_MAX);
