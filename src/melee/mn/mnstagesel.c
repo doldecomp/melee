@@ -76,29 +76,6 @@ static struct StageListInfo {
 };
 ASSERT_SIZE(mnStageSel_803F06D0[0], 0x1C);
 
-typedef struct MnSelectStageModels {
-    /* +00 */ StaticModelDesc icon_large;
-    /* +10 */ StaticModelDesc icon_random;
-    /* +20 */ StaticModelDesc icon_special;
-    /* +30 */ StaticModelDesc stage_name;
-    /* +40 */ StaticModelDesc icon_stacked;
-    /* +50 */ StaticModelDesc menu_border;
-    /* +60 */ StaticModelDesc stage_preview;
-    /* +70 */ StaticModelDesc icon_hover;
-    /* +80 */ StaticModelDesc cursor;
-    /* +90 */ StaticModelDesc layout;
-    /* +A0 */ StaticModelDesc background;
-    /* +B0 */ StaticModelDesc now_loading;
-} MnSelectStageModels;
-
-typedef struct MnSelectStageDataTable {
-    /* 0x00 */ HSD_CObjDesc* cam;
-    /* 0x04 */ HSD_LightDesc* light0;
-    /* 0x08 */ HSD_LightDesc* light1;
-    /* 0x0C */ HSD_FogDesc* fog;
-    /* 0x10 */ MnSelectStageModels models;
-} MnSelectStageDataTable;
-
 static s8 mnStageSel_804D50A0 = -1;
 
 static SSSData* sss_data;
@@ -532,7 +509,7 @@ void mnStageSel_Scene_OnEnter(void* arg0)
     Vec3 spCC;
 
     int i;
-    MnSelectStageDataTable* sss_data_table;
+    struct MnSelectStageDataTable* sss_data_table;
 
     PAD_STACK(0xDC - 0x50);
 
@@ -544,9 +521,9 @@ void mnStageSel_Scene_OnEnter(void* arg0)
         } else {
             mnStageSel_804D6C94 = lbArchive_LoadArchive("MnSlMap.dat");
         }
-        sss_data_table =
-            HSD_ArchiveGetPublicAs(MnSelectStageDataTable, mnStageSel_804D6C94,
-                                   "MnSelectStageDataTable");
+        sss_data_table = HSD_ArchiveGetPublicAs(struct MnSelectStageDataTable,
+                                                mnStageSel_804D6C94,
+                                                "MnSelectStageDataTable");
         MenMain_cam = sss_data_table->cam;
         sss_models = &sss_data_table->models;
         mnStageSel_804D6CAF = 0;

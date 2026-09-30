@@ -95,6 +95,7 @@ foreach(_archive IN LISTS _dat_archives)
     get_filename_component(_unit "${_archive}" NAME_WE)
     set(_target "target/${_unit}.o")
     set(_sidecar "target/${_unit}.samples")
+    set(_types "types/${_unit}.types")
     set(_layout "target/${_unit}.ld")
     set(_object "obj/${_unit}.o")
     set(_source "src/${_unit}.c")
@@ -107,12 +108,24 @@ foreach(_archive IN LISTS _dat_archives)
             set(_all --all)
         endif()
     endforeach()
+    # A hash of the types this archive leads to, rewritten only when it
+    # changes: the other steps depend on it, not on every type
+    add_custom_command(
+        OUTPUT "${_types}"
+        COMMAND "${_dat_tool}" samples types "${_file}" "${_dat_config}"
+            -p "${CMAKE_SOURCE_DIR}" --types types.bin
+            --files "${MELEE_DAT_FILES}" -o "${_types}"
+        DEPENDS "${_archive}" types.bin "${_dat_tool}" "${_dat_config}"
+            "${_dat_symbols}"
+        COMMENT "Hashing ${_file}'s types"
+        VERBATIM
+    )
     add_custom_command(
         OUTPUT "${_target}" "${_sidecar}" "${_layout}"
         COMMAND "${_dat_tool}" samples slice "${_file}" "${_dat_config}"
             -p "${CMAKE_SOURCE_DIR}" --types types.bin
             --files "${MELEE_DAT_FILES}" -o "${_target}" ${_all} ${_dat_exclude}
-        DEPENDS "${_archive}" types.bin "${_dat_tool}" "${_dat_config}"
+        DEPENDS "${_archive}" "${_types}" "${_dat_tool}" "${_dat_config}"
             "${_dat_symbols}"
         COMMENT "Slicing ${_file}"
         VERBATIM
@@ -121,7 +134,7 @@ foreach(_archive IN LISTS _dat_archives)
         OUTPUT "${_source}"
         COMMAND "${_dat_tool}" samples codegen "${_target}" --types types.bin
             -o "${_source}"
-        DEPENDS "${_target}" "${_sidecar}" types.bin "${_dat_tool}"
+        DEPENDS "${_target}" "${_sidecar}" "${_types}" "${_dat_tool}"
         COMMENT "Generating ${_source}"
         VERBATIM
     )

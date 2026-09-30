@@ -711,12 +711,6 @@ typedef struct ftData_x34 {
     /* +4 */ float scale;
 } ftData_x34;
 
-typedef struct ftData_x38 {
-    int x0;
-    Vec3 x4;
-    float x10;
-} ftData_x38;
-
 /// An entry of #ftData::x48_items: mostly an #Article, but some fighters
 /// keep joints or their own structs in certain slots.
 /// @todo Type the other slots per fighter (Link 6, Kirby 4, Yoshi 3,
@@ -904,7 +898,7 @@ struct ftData {
     /* +2C */ struct ftDynamics* x2C;
     /* +30 */ ftData_x30* x30;
     /* +34 */ ftData_x34* x34;
-    /* +38 */ ftData_x38* x38;
+    /* +38 */ AbsorbDesc* x38;
     /* +3C */ struct UnkFloat6_Camera* x3C;
     /* +40 */ struct itPickup* x40;
     /* +44 */ ftData_x44_t* x44;
@@ -1984,7 +1978,7 @@ struct ftDynamics {
         /*  +4 */ BoneDynamicsTemplate* ftDynamicBones DAT_COUNT(dynamicsNum);
     } x0;
     /*  +8 */ int x4;
-    /*  +C */ struct ftData_x38* x8;
+    /*  +C */ AbsorbDesc* x8;
     /// Per animation, the set of each dynamic bone (0x100 for none).
     /* +10 */ s32** x10;
 };

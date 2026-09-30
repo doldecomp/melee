@@ -172,6 +172,30 @@ impl<'a> Archive<'a> {
             .filter_map(|&p| Some((self.symbol_at(p.symbol)?, p)))
     }
 
+    /// Where the loader writes each extern's address, by offset, with the
+    /// extern's name: as `HSD_ArchiveLocateExtern` does, a chain from the
+    /// extern's offset through the words, each holding the next offset,
+    /// until -1 or the end of the data.
+    pub fn extern_slots(&self) -> std::collections::BTreeMap<u32, &'a [u8]> {
+        let mut slots = std::collections::BTreeMap::new();
+        for e in &self.externs {
+            let Some(name) = self.symbol_at(e.symbol) else {
+                continue;
+            };
+            let mut offset = e.offset;
+            while offset != u32::MAX
+                && (offset as usize) + 4 <= self.data.len()
+                && slots.insert(offset, name).is_none()
+            {
+                let at = offset as usize;
+                offset = u32::from_be_bytes(
+                    self.data[at..at + 4].try_into().unwrap(),
+                );
+            }
+        }
+        slots
+    }
+
     /// Bytes from `offset` to the next public symbol after it, or to the
     /// end of the data: an upper bound on the size of what `offset` labels.
     pub fn extent(&self, offset: u32) -> u32 {

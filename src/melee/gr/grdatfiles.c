@@ -140,7 +140,7 @@ UnkArchiveStruct* grDatFiles_801C6330(s32 arg0)
             if (grDatFiles_8049EE10[i].unk0 != NULL) {
                 UnkStageDat* temp_r7 = grDatFiles_8049EE10[i].unk4;
                 if (temp_r7 != NULL && temp_r7->unkC > arg0 &&
-                    temp_r7->unk8[arg0].unk0 != 0)
+                    temp_r7->unk8[arg0].joint != 0)
                 {
                     return &grDatFiles_8049EE10[i];
                 }

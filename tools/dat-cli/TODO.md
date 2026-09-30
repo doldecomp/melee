@@ -2,10 +2,16 @@
 
 ## Samples
 
-- `PlSs` `x352D8` (66.7%) and `PlGw` `x78F0` (85.7%) don't match.
-- Types declared in `.c` files can't be included, so they have no samples
-  (the `*_YakumonoParam` structs, several loader tables). Move them to
-  headers.
+- `PlSs` `x352D8` (66.7%) and `PlGw` `x78F0` (85.7%) don't match. PlSs's
+  cause: `ftData_Item` is `Article*` for every slot, but Samus's slot 4 is
+  `UNK_SAMUS_S1` (the grapple beam accessory; `ftSs_Init_CreateThrowGrapple
+  Beam`), so everything behind `ftDataSamus.x48_items->[4]` is mistyped (8
+  mismatches in the every-object build). Fix: a `bind:` attribute on roots
+  in `dat_symbols.txt` (e.g. the fighter kind on `ftData*`), and
+  `ftData_Item` as a union chosen by `DAT_IF` on that kind and `_index`.
+- `types unhoisted` lists dat types declared in `.c` files: none left. The
+  stage `*_YakumonoParam` structs aren't reachable (`void*` in the stage
+  info) and differ per stage.
 - A union object whose tag chooses no member has no sample (`CmdUnion`,
   which is a script; item attributes of fighter items, whose kind isn't
   bound).
@@ -78,6 +84,19 @@ Not errors:
   relocated by `ftData` at runtime. They could be read as nested archives.
 - About 15,000 `void*` fields aren't followed. Use `DAT_TYPE` where the type
   is known.
+- Roots that are pointer tables: of the 30 roots loaded as `T**`, 20 are
+  null-terminated lists (e.g. `map_plit` in the stage archives, `itemdata`,
+  `Sc*_scene_lights`, `ScInfCnt_scene_models`, `Stc_scemdls`) and 8 are
+  fixed-count tables (`ScGamRegStaffrollNames_scene_modelset` = 10, GmStRoll,
+  3,760 relocations; `mnName*`; `SIS_Gr*Data`). The walk follows only the
+  first entry. Needs `count:`/`nullterm` in `dat_symbols.txt` for roots the
+  code types (they take precedence now).
+- `UnkStageDat.unk18` (map_head +0x18, count `unk1C`): entries are
+  `{ HSD_LightDesc*, word }`, where the word is flags in some stages (GrGr:
+  0 or 0xE0000000, as `ground.c` reads it through `LightOverrideEntry`) and
+  a relocated `HSD_LightAnim**` in others (GrNBa, GrPu, GrGd, GrIm: the
+  entries are the stage's `LightList`s). Left `void*`: a struct can't be
+  both, and no annotation chooses by relocation.
 
 ## Tool
 

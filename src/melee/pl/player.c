@@ -2017,14 +2017,9 @@ void Player_80036DA4(void)
     Fighter_FirstInitialize_80067A84();
 }
 
-/// The @c plLoadCommonData root of @c PdPm.dat.
-typedef struct plLoadCommonData {
-    /* +0 */ pl_804D6470_t* x0;
-} plLoadCommonData;
-
 void Player_80036DD8(void)
 {
-    plLoadCommonData* data;
+    struct plLoadCommonData* data;
 
     lbArchive_LoadSymbols(str_PdPmdat_start_of_data, &data,
                           str_plLoadCommonData, 0);

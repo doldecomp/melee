@@ -141,6 +141,9 @@ pub struct Walker<'a> {
     macros: &'a HashMap<String, String>,
     data: &'a [u8],
     relocs: HashSet<u32>,
+    /// Words the loader points at other archives' symbols, by name: the
+    /// archive's externs.
+    externs: HashSet<u32>,
     /// Offsets of public symbols, which bound `DAT_EXTENT` arrays.
     publics: HashSet<u32>,
     /// Offsets some relocated pointer refers to: where objects start, which
@@ -169,6 +172,7 @@ impl<'a> Walker<'a> {
             macros,
             data: archive.data,
             relocs: archive.relocs.iter().copied().collect(),
+            externs: archive.extern_slots().into_keys().collect(),
             publics: archive.publics.iter().map(|p| p.offset).collect(),
             targets: archive
                 .relocs
@@ -549,6 +553,7 @@ impl<'a> Walker<'a> {
         match &self.graph.types[&die].kind {
             TypeKind::Pointer { .. } => {
                 self.relocs.contains(&offset)
+                    || self.externs.contains(&offset)
                     || matches!(self.word(offset), 0 | u32::MAX)
             }
             TypeKind::Base { .. } | TypeKind::Enum { .. } => {
@@ -675,6 +680,11 @@ impl<'a> Walker<'a> {
     /// A pointer field that is not relocated: null, the -1 the data also
     /// uses for none, or an error.
     fn unrelocated(&mut self, offset: u32, value: u32, path: &str) {
+        // Linked to another archive's symbol at load: nothing to follow
+        if self.externs.contains(&offset) {
+            self.walk.pointers.insert(offset);
+            return;
+        }
         match value {
             0 => {}
             u32::MAX => self.walk.sentinels += 1,

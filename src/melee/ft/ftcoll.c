@@ -2721,11 +2721,11 @@ void ftColl_8007B320(Fighter_GObj* gobj)
     fp->x166C = dyn->x4;
     for (i = 0; i < (u32) dyn->x4; i++) {
         Fighter_x1670_t* dst = &fp->x1670[i];
-        ftData_x38* init = &dyn->x8[i];
-        dst->x24 = init->x0;
-        dst->jobj = fp->parts[init->x0].joint;
-        dst->v1 = init->x4;
-        dst->v2 = init->x10;
+        AbsorbDesc* init = &dyn->x8[i];
+        dst->x24 = init->x0_bone_id;
+        dst->jobj = fp->parts[init->x0_bone_id].joint;
+        dst->v1 = init->x4_offset;
+        dst->v2 = init->x10_size;
     }
 }
 
