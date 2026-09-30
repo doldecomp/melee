@@ -1,3 +1,9 @@
+/**
+ * @file pobj.h
+ * @brief Polygon Object (PObj) management
+ * @details PObjs contain vertex geometry data such as display lists, skin weights, and shape blending info.
+ * Module prefix: HSD_PObj
+ */
 #ifndef _pobj_h_
 #define _pobj_h_
 
@@ -118,32 +124,142 @@ extern HSD_PObjInfo hsdPObj;
 #define HSD_POBJ_INFO(i) ((HSD_PObjInfo*) (i))
 #define HSD_POBJ_METHOD(o) HSD_POBJ_INFO(HSD_CLASS_METHOD(o))
 
+/**
+ * @brief Gets the default PObj class info.
+ */
 HSD_PObjInfo* HSD_PObjGetDefaultClass(void);
+/**
+ * @brief Sets the default PObj class info.
+ * @param info The PObj class info to set as default
+ */
 void HSD_PObjSetDefaultClass(HSD_PObjInfo* info);
+/**
+ * @brief Allocates a new PObj.
+ * @return Pointer to the allocated PObj
+ */
 HSD_PObj* HSD_PObjAlloc(void);
+/**
+ * @brief Frees a given PObj.
+ * @param pobj The PObj to free
+ */
 void HSD_PObjFree(HSD_PObj*);
 
+/**
+ * @brief Gets the flags of a PObj.
+ * @param pobj The PObj
+ * @return The flags
+ */
 u32 HSD_PObjGetFlags(HSD_PObj* pobj);
+/**
+ * @brief Removes animations from a list of PObjs matching the given flags.
+ * @param pobj The head of the PObj list
+ * @param flags The flags to match
+ */
 void HSD_PObjRemoveAnimAllByFlags(HSD_PObj* pobj, u32 flags);
+/**
+ * @brief Requests an animation on a PObj matching the given flags.
+ * @param pobj The PObj
+ * @param startframe The start frame
+ * @param flags The flags to match
+ */
 void HSD_PObjReqAnimByFlags(HSD_PObj* pobj, f32 startframe, u32 flags);
+/**
+ * @brief Requests an animation on a list of PObjs matching the given flags.
+ * @param pobj The head of the PObj list
+ * @param startframe The start frame
+ * @param flags The flags to match
+ */
 void HSD_PObjReqAnimAllByFlags(HSD_PObj* pobj, f32 startframe, u32 flags);
+/**
+ * @brief Clears the GX vertex descriptor cache.
+ */
 void HSD_ClearVtxDesc(void);
+/**
+ * @brief Loads a PObj from a descriptor.
+ * @param desc The PObj descriptor
+ * @return The loaded PObj
+ */
 HSD_PObj* HSD_PObjLoadDesc(HSD_PObjDesc*);
 
+/**
+ * @brief Clears the matrix mark for an object.
+ * @param obj The object
+ * @param mark The mark to clear
+ */
 void HSD_PObjClearMtxMark(void* obj, u32 mark);
+/**
+ * @brief Sets the matrix mark for an object at a specific index.
+ * @param idx The index
+ * @param obj The object
+ * @param mark The mark to set
+ */
 void HSD_PObjSetMtxMark(int idx, void* obj, u32 mark);
+/**
+ * @brief Gets the matrix mark for an object at a specific index.
+ * @param idx The index
+ * @param obj Output pointer for the object
+ * @param mark Output pointer for the mark
+ */
 void HSD_PObjGetMtxMark(int idx, void** obj, u32* mark);
+/**
+ * @brief Adds a shape animation to a PObj.
+ * @param pobj The PObj
+ * @param anim The shape animation
+ */
 void HSD_PObjAddAnim(HSD_PObj*, HSD_ShapeAnim*);
+/**
+ * @brief Adds shape animations to a list of PObjs.
+ * @param pobj The head of the PObj list
+ * @param anim The shape animation
+ */
 void HSD_PObjAddAnimAll(HSD_PObj*, HSD_ShapeAnim*);
+/**
+ * @brief Processes the animation for a PObj.
+ * @param pobj The PObj
+ */
 void HSD_PObjAnim(HSD_PObj* pobj);
+/**
+ * @brief Processes the animation for a list of PObjs.
+ * @param pobj The head of the PObj list
+ */
 void HSD_PObjAnimAll(HSD_PObj*);
+/**
+ * @brief Resolves JObj references in a PObj using its descriptor.
+ * @param pobj The PObj
+ * @param desc The PObj descriptor
+ */
 void HSD_PObjResolveRefs(HSD_PObj*, HSD_PObjDesc*);
+/**
+ * @brief Resolves JObj references in a list of PObjs using a descriptor list.
+ * @param pobj The head of the PObj list
+ * @param desc The head of the PObj descriptor list
+ */
 void HSD_PObjResolveRefsAll(HSD_PObj*, HSD_PObjDesc*);
+/**
+ * @brief Removes (deletes) a PObj.
+ * @param pobj The PObj
+ */
 void HSD_PObjRemove(HSD_PObj*);
+/**
+ * @brief Removes (deletes) a list of PObjs.
+ * @param pobj The head of the PObj list
+ */
 void HSD_PObjRemoveAll(HSD_PObj*);
 
+/**
+ * @brief Removes an animation from a PObj matching the given flags.
+ * @param pobj The PObj
+ * @param flags The flags to match
+ */
 void HSD_PObjRemoveAnimByFlags(HSD_PObj* pobj, u32 flags);
 
+/**
+ * @brief Displays (renders) a PObj.
+ * @param pobj The PObj
+ * @param vmtx The view matrix
+ * @param pmtx The projection matrix
+ * @param rendermode Rendering mode flags
+ */
 void HSD_PObjDisp(HSD_PObj* pobj, Mtx vmtx, Mtx pmtx, u32 rendermode);
 
 #endif

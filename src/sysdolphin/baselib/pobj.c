@@ -1,3 +1,9 @@
+/**
+ * @file pobj.c
+ * @brief Polygon Object (PObj) management
+ * @details PObjs contain vertex geometry data such as display lists, skin weights, and shape blending info.
+ * Module prefix: HSD_PObj
+ */
 #include "pobj.h"
 
 #include <math.h> // IWYU pragma: keep
@@ -20,6 +26,9 @@
 #include <dolphin/mtx.h>
 #include <dolphin/os.h>
 
+/**
+ * @brief Initializes the base PObj class info.
+ */
 static void PObjInfoInit(void);
 
 HSD_PObjInfo hsdPObj = { PObjInfoInit };
@@ -39,6 +48,11 @@ static struct mtx_mark_t {
     u32 mark;
 } mtx_mark[2];
 
+/**
+ * @brief Gets the flags of a PObj.
+ * @param pobj The PObj
+ * @return The flags
+ */
 u32 HSD_PObjGetFlags(HSD_PObj* pobj)
 {
     if (pobj != NULL) {
@@ -47,6 +61,11 @@ u32 HSD_PObjGetFlags(HSD_PObj* pobj)
     return 0;
 }
 
+/**
+ * @brief Removes an animation from a PObj matching the given flags.
+ * @param pobj The PObj
+ * @param flags The flags to match
+ */
 void HSD_PObjRemoveAnimByFlags(HSD_PObj* pobj, u32 flags)
 {
     if (pobj == NULL) {
@@ -60,6 +79,11 @@ void HSD_PObjRemoveAnimByFlags(HSD_PObj* pobj, u32 flags)
     }
 }
 
+/**
+ * @brief Removes animations from a list of PObjs matching the given flags.
+ * @param pobj The head of the PObj list
+ * @param flags The flags to match
+ */
 void HSD_PObjRemoveAnimAllByFlags(HSD_PObj* pobj, u32 flags)
 {
     HSD_PObj* pp;
@@ -73,6 +97,11 @@ void HSD_PObjRemoveAnimAllByFlags(HSD_PObj* pobj, u32 flags)
     }
 }
 
+/**
+ * @brief Adds a shape animation to a PObj.
+ * @param pobj The PObj
+ * @param shapeanim The shape animation
+ */
 void HSD_PObjAddAnim(HSD_PObj* pobj, HSD_ShapeAnim* shapeanim)
 {
     HSD_ShapeSet* st;
@@ -91,21 +120,32 @@ void HSD_PObjAddAnim(HSD_PObj* pobj, HSD_ShapeAnim* shapeanim)
     st->aobj = HSD_AObjLoadDesc(shapeanim->aobjdesc);
 }
 
+/**
+ * @brief Adds shape animations to a list of PObjs.
+ * @param pobj The head of the PObj list
+ * @param shapeanim The shape animation
+ */
 void HSD_PObjAddAnimAll(HSD_PObj* pobj, HSD_ShapeAnim* shapeanim)
 {
-    HSD_PObj* po;
-    HSD_ShapeAnim* sa;
+    HSD_PObj* curr_pobj;
+    HSD_ShapeAnim* curr_anim;
 
     if (pobj == NULL || shapeanim == NULL) {
         return;
     }
 
-    for (po = pobj, sa = shapeanim; po != NULL; po = po->next, sa = next_p(sa))
+    for (curr_pobj = pobj, curr_anim = shapeanim; curr_pobj != NULL; curr_pobj = curr_pobj->next, curr_anim = next_p(curr_anim))
     {
-        HSD_PObjAddAnim(po, sa);
+        HSD_PObjAddAnim(curr_pobj, curr_anim);
     }
 }
 
+/**
+ * @brief Requests an animation on a PObj matching the given flags.
+ * @param pobj The PObj
+ * @param startframe The start frame
+ * @param flags The flags to match
+ */
 void HSD_PObjReqAnimByFlags(HSD_PObj* pobj, f32 startframe, u32 flags)
 {
     if (pobj == NULL) {
@@ -117,6 +157,12 @@ void HSD_PObjReqAnimByFlags(HSD_PObj* pobj, f32 startframe, u32 flags)
     }
 }
 
+/**
+ * @brief Requests an animation on a list of PObjs matching the given flags.
+ * @param pobj The head of the PObj list
+ * @param startframe The start frame
+ * @param flags The flags to match
+ */
 void HSD_PObjReqAnimAllByFlags(HSD_PObj* pobj, f32 startframe, u32 flags)
 {
     HSD_PObj* pp;
@@ -130,6 +176,9 @@ void HSD_PObjReqAnimAllByFlags(HSD_PObj* pobj, f32 startframe, u32 flags)
     }
 }
 
+/**
+ * @brief Sets the animation result (blend weight) for a ShapeSet.
+ */
 static void ShapeSetSetAnimResult(HSD_ShapeSet* shape_set, u32 type,
                                   HSD_ObjData* val)
 {
@@ -140,6 +189,9 @@ static void ShapeSetSetAnimResult(HSD_ShapeSet* shape_set, u32 type,
     }
 }
 
+/**
+ * @brief Callback function to update a PObj\'s shape animation state.
+ */
 static void PObjUpdateFunc(void* obj, int type, HSD_ObjData* val)
 {
     HSD_PObj* pobj = HSD_POBJ(obj);
@@ -152,6 +204,10 @@ static void PObjUpdateFunc(void* obj, int type, HSD_ObjData* val)
     }
 }
 
+/**
+ * @brief Processes the animation for a PObj.
+ * @param pobj The PObj
+ */
 void HSD_PObjAnim(HSD_PObj* pobj)
 {
     if (pobj != NULL && pobj_type(pobj) == POBJ_SHAPEANIM) {
@@ -159,6 +215,10 @@ void HSD_PObjAnim(HSD_PObj* pobj)
     }
 }
 
+/**
+ * @brief Processes the animation for a list of PObjs.
+ * @param pobj The head of the PObj list
+ */
 void HSD_PObjAnimAll(HSD_PObj* pobj)
 {
     HSD_PObj* pp;
@@ -170,6 +230,9 @@ void HSD_PObjAnimAll(HSD_PObj* pobj)
     }
 }
 
+/**
+ * @brief Allocates an envelope object.
+ */
 static HSD_Envelope* HSD_EnvelopeAlloc(void)
 {
     HSD_Envelope* envelope = hsdAllocMemPiece(sizeof(HSD_Envelope));
@@ -178,6 +241,9 @@ static HSD_Envelope* HSD_EnvelopeAlloc(void)
     return envelope;
 }
 
+/**
+ * @brief Frees an envelope object.
+ */
 static void HSD_EnvelopeFree(HSD_Envelope* env)
 {
     if (env != NULL) {
@@ -185,6 +251,9 @@ static void HSD_EnvelopeFree(HSD_Envelope* env)
     }
 }
 
+/**
+ * @brief Frees an envelope list.
+ */
 static void HSD_EnvelopeListFree(HSD_SList* list)
 {
     while (list) {
@@ -199,6 +268,9 @@ static void HSD_EnvelopeListFree(HSD_SList* list)
     }
 }
 
+/**
+ * @brief Parses an envelope descriptor into a runtime list.
+ */
 static HSD_SList* loadEnvelopeDesc(HSD_EnvelopeDesc** edesc_p)
 {
     HSD_SList* list = NULL;
@@ -228,6 +300,9 @@ static HSD_SList* loadEnvelopeDesc(HSD_EnvelopeDesc** edesc_p)
     return list;
 }
 
+/**
+ * @brief Frees a ShapeSet.
+ */
 static void HSD_ShapeSetFree(HSD_ShapeSet* shape_set)
 {
     if (!shape_set) {
@@ -236,6 +311,9 @@ static void HSD_ShapeSetFree(HSD_ShapeSet* shape_set)
     hsdFreeMemPiece(shape_set, sizeof(HSD_ShapeSet));
 }
 
+/**
+ * @brief Removes (deletes) a ShapeSet.
+ */
 static void HSD_ShapeSetRemove(HSD_ShapeSet* shape_set)
 {
     if (shape_set == NULL) {
@@ -250,6 +328,9 @@ static void HSD_ShapeSetRemove(HSD_ShapeSet* shape_set)
     HSD_ShapeSetFree(shape_set);
 }
 
+/**
+ * @brief Parses a ShapeSet descriptor into a runtime object.
+ */
 static HSD_ShapeSet* loadShapeSetDesc(HSD_ShapeSetDesc* sdesc)
 {
     int i;
@@ -277,6 +358,9 @@ static HSD_ShapeSet* loadShapeSetDesc(HSD_ShapeSetDesc* sdesc)
     return shape_set;
 }
 
+/**
+ * @brief Internal method to load a PObj from a descriptor.
+ */
 static s32 PObjLoad(HSD_PObj* pobj, HSD_PObjDesc* desc)
 {
     pobj->next = HSD_PObjLoadDesc(desc->next);
@@ -306,6 +390,11 @@ static s32 PObjLoad(HSD_PObj* pobj, HSD_PObjDesc* desc)
     return 0;
 }
 
+/**
+ * @brief Loads a PObj from a descriptor.
+ * @param pobjdesc The PObj descriptor
+ * @return The loaded PObj
+ */
 HSD_PObj* HSD_PObjLoadDesc(HSD_PObjDesc* pobjdesc)
 {
     if (pobjdesc != NULL) {
@@ -327,11 +416,19 @@ HSD_PObj* HSD_PObjLoadDesc(HSD_PObjDesc* pobjdesc)
     }
 }
 
+/**
+ * @brief Removes (deletes) a PObj.
+ * @param pobj The PObj
+ */
 void HSD_PObjRemove(HSD_PObj* pobj)
 {
     hsdDelete(pobj);
 }
 
+/**
+ * @brief Removes (deletes) a list of PObjs.
+ * @param pobj The head of the PObj list
+ */
 void HSD_PObjRemoveAll(HSD_PObj* pobj)
 {
     HSD_PObj* next;
@@ -343,11 +440,18 @@ void HSD_PObjRemoveAll(HSD_PObj* pobj)
     }
 }
 
+/**
+ * @brief Gets the default PObj class info.
+ */
 HSD_PObjInfo* HSD_PObjGetDefaultClass(void)
 {
     return default_class ? default_class : &hsdPObj;
 }
 
+/**
+ * @brief Sets the default PObj class info.
+ * @param info The PObj class info to set as default
+ */
 void HSD_PObjSetDefaultClass(HSD_PObjInfo* info)
 {
     if (info != NULL) {
@@ -356,6 +460,10 @@ void HSD_PObjSetDefaultClass(HSD_PObjInfo* info)
     default_class = info;
 }
 
+/**
+ * @brief Allocates a new PObj.
+ * @return Pointer to the allocated PObj
+ */
 HSD_PObj* HSD_PObjAlloc(void)
 {
     HSD_PObj* pobj = hsdNew(&HSD_PObjGetDefaultClass()->parent);
@@ -363,6 +471,10 @@ HSD_PObj* HSD_PObjAlloc(void)
     return pobj;
 }
 
+/**
+ * @brief Frees a given PObj.
+ * @param pobj The PObj to free
+ */
 void HSD_PObjFree(HSD_PObj* pobj)
 {
     if (pobj) {
@@ -370,6 +482,9 @@ void HSD_PObjFree(HSD_PObj* pobj)
     }
 }
 
+/**
+ * @brief Resolves JObj references in an envelope list.
+ */
 static void resolveEnvelope(HSD_SList* list, HSD_EnvelopeDesc** edesc_p)
 {
     if (list == NULL || edesc_p == NULL) {
@@ -391,6 +506,11 @@ static void resolveEnvelope(HSD_SList* list, HSD_EnvelopeDesc** edesc_p)
     }
 }
 
+/**
+ * @brief Resolves JObj references in a PObj using its descriptor.
+ * @param pobj The PObj
+ * @param pdesc The PObj descriptor
+ */
 void HSD_PObjResolveRefs(HSD_PObj* pobj, HSD_PObjDesc* pdesc)
 {
     if (!pobj || !pdesc) {
@@ -417,6 +537,11 @@ void HSD_PObjResolveRefs(HSD_PObj* pobj, HSD_PObjDesc* pdesc)
     }
 }
 
+/**
+ * @brief Resolves JObj references in a list of PObjs using a descriptor list.
+ * @param pobj The head of the PObj list
+ * @param pdesc The head of the PObj descriptor list
+ */
 void HSD_PObjResolveRefsAll(HSD_PObj* pobj, HSD_PObjDesc* pdesc)
 {
     for (; pobj != NULL && pdesc != NULL;
@@ -426,6 +551,9 @@ void HSD_PObjResolveRefsAll(HSD_PObj* pobj, HSD_PObjDesc* pdesc)
     }
 }
 
+/**
+ * @brief Clears the GX vertex descriptor cache.
+ */
 void HSD_ClearVtxDesc(void)
 {
     GXClearVtxDesc();
@@ -433,6 +561,9 @@ void HSD_ClearVtxDesc(void)
     prev_vtxdesc = 0;
 }
 
+/**
+ * @brief Sets up GX vertex arrays.
+ */
 static void setupArrayDesc(HSD_VtxDescList* desc_list)
 {
     HSD_VtxDescList* desc;
@@ -447,6 +578,9 @@ static void setupArrayDesc(HSD_VtxDescList* desc_list)
     }
 }
 
+/**
+ * @brief Sets up GX vertex descriptors.
+ */
 static void setupVtxDesc(HSD_PObj* pobj)
 {
     HSD_VtxDescList* desc;
@@ -475,6 +609,9 @@ static void setupVtxDesc(HSD_PObj* pobj)
     }
 }
 
+/**
+ * @brief Sets up GX vertex arrays for shape animations.
+ */
 static void setupShapeAnimArrayDesc(HSD_VtxDescList* desc_list)
 {
     HSD_VtxDescList* desc;
@@ -494,6 +631,9 @@ static void setupShapeAnimArrayDesc(HSD_VtxDescList* desc_list)
     prev_vtxdesclist_array = NULL;
 }
 
+/**
+ * @brief Sets up GX vertex descriptors for shape animations.
+ */
 static void setupShapeAnimVtxDesc(HSD_PObj* pobj)
 {
     HSD_VtxDescList* desc;
@@ -529,6 +669,9 @@ static void setupShapeAnimVtxDesc(HSD_PObj* pobj)
     prev_vtxdesc = NULL;
 }
 
+/**
+ * @brief Decodes 8-bit unsigned coordinates into f32.
+ */
 static inline void decode_u8_xyz(void* src_base, f32 dst[3], int scale)
 {
     u8* src = src_base;
@@ -537,6 +680,9 @@ static inline void decode_u8_xyz(void* src_base, f32 dst[3], int scale)
     dst[2] = (f32) src[2] / scale;
 }
 
+/**
+ * @brief Decodes 8-bit signed coordinates into f32.
+ */
 static inline void decode_s8_xyz(void* src_base, f32 dst[3], int scale)
 {
     s8* src = src_base;
@@ -545,6 +691,9 @@ static inline void decode_s8_xyz(void* src_base, f32 dst[3], int scale)
     dst[2] = (f32) src[2] / scale;
 }
 
+/**
+ * @brief Decodes 16-bit unsigned coordinates into f32.
+ */
 static inline void decode_u16_xyz(void* src_base, f32 dst[3], int scale)
 {
     u16* src = src_base;
@@ -553,6 +702,9 @@ static inline void decode_u16_xyz(void* src_base, f32 dst[3], int scale)
     dst[2] = (f32) src[2] / scale;
 }
 
+/**
+ * @brief Decodes 16-bit signed coordinates into f32.
+ */
 static inline void decode_s16_xyz(void* src_base, f32 dst[3], int scale)
 {
     s16* src = src_base;
@@ -561,6 +713,9 @@ static inline void decode_s16_xyz(void* src_base, f32 dst[3], int scale)
     dst[2] = (f32) src[2] / scale;
 }
 
+/**
+ * @brief Reads a vertex position from a ShapeSet.
+ */
 static void get_shape_vertex_xyz(HSD_ShapeSet* shape_set, int shape_id,
                                  int arrayidx, f32 dst[3])
 {
@@ -606,6 +761,9 @@ static void get_shape_vertex_xyz(HSD_ShapeSet* shape_set, int shape_id,
     }
 }
 
+/**
+ * @brief Reads a normal from a ShapeSet.
+ */
 static void get_shape_normal_xyz(HSD_ShapeSet* shape_set, int shape_id,
                                  int arrayidx, float dst[3])
 {
@@ -647,6 +805,9 @@ static void get_shape_normal_xyz(HSD_ShapeSet* shape_set, int shape_id,
     }
 }
 
+/**
+ * @brief Reads a normal/binormal/tangent (NBT) from a ShapeSet.
+ */
 static void get_shape_nbt_xyz(HSD_ShapeSet* shape_set, int shape_id,
                               int arrayidx, float* dst)
 {
@@ -699,30 +860,33 @@ static void get_shape_nbt_xyz(HSD_ShapeSet* shape_set, int shape_id,
     }
 }
 
+/**
+ * @brief Recompiles and submits a GX display list for a shape animation using CPU-blended vertices.
+ */
 static void interpretShapeAnimDisplayList(HSD_PObj* pobj, float (*vertex)[3],
                                           float (*normal)[3])
 {
-    u8* dl = pobj->display;
+    u8* display_list = pobj->display;
     int length = pobj->n_display << 5;
     int l;
 
     for (l = 0; l + 3 < length;) {
-        int n = dl[1] << 8 | dl[2];
+        int vtx_count = display_list[1] << 8 | display_list[2];
         int m = 3;
         int i, j;
 
-        if ((dl[0] & GX_OPCODE_MASK) == GX_NOP) {
+        if ((display_list[0] & GX_OPCODE_MASK) == GX_NOP) {
             break;
         }
-        GXBegin((GXPrimitive) (dl[0] & GX_OPCODE_MASK),
-                (GXVtxFmt) (dl[0] & GX_VAT_MASK), n);
-        for (i = 0; i < n; i++) {
+        GXBegin((GXPrimitive) (display_list[0] & GX_OPCODE_MASK),
+                (GXVtxFmt) (display_list[0] & GX_VAT_MASK), vtx_count);
+        for (i = 0; i < vtx_count; i++) {
             for (j = 0;; j++) {
                 HSD_VtxDescList* desc = &pobj->verts[j];
                 if (desc->attr == GX_VA_NULL) {
                     break;
                 } else {
-                    u16 idx = dl[m++];
+                    u16 idx = display_list[m++];
                     switch (desc->attr) {
                     case GX_VA_PNMTXIDX:
                     case GX_VA_TEX0MTXIDX:
@@ -738,7 +902,7 @@ static void interpretShapeAnimDisplayList(HSD_PObj* pobj, float (*vertex)[3],
 
                     case GX_VA_POS:
                         if (desc->attr_type == GX_INDEX16) {
-                            idx = (idx << 8) | dl[m++];
+                            idx = (idx << 8) | display_list[m++];
                         }
                         GXPosition3f32(vertex[idx][0], vertex[idx][1],
                                        vertex[idx][2]);
@@ -746,7 +910,7 @@ static void interpretShapeAnimDisplayList(HSD_PObj* pobj, float (*vertex)[3],
 
                     case GX_VA_NRM:
                         if (desc->attr_type == GX_INDEX16) {
-                            idx = (idx << 8) | dl[m++];
+                            idx = (idx << 8) | display_list[m++];
                         }
                         GXNormal3f32(normal[idx][0], normal[idx][1],
                                      normal[idx][2]);
@@ -754,7 +918,7 @@ static void interpretShapeAnimDisplayList(HSD_PObj* pobj, float (*vertex)[3],
 
                     case GX_VA_NBT:
                         if (desc->attr_type == GX_INDEX16) {
-                            idx = (idx << 8) | dl[m++];
+                            idx = (idx << 8) | display_list[m++];
                         }
                         idx *= 3;
                         GXNormal3f32(normal[idx + 0][0], normal[idx + 0][1],
@@ -774,7 +938,7 @@ static void interpretShapeAnimDisplayList(HSD_PObj* pobj, float (*vertex)[3],
                     case GX_VA_TEX6:
                     case GX_VA_TEX7:
                         if (desc->attr_type == GX_INDEX16) {
-                            idx = (idx << 8) | dl[m++];
+                            idx = (idx << 8) | display_list[m++];
                             GXTexCoord1x16(idx);
                         } else {
                             GXTexCoord1x8(idx);
@@ -784,7 +948,7 @@ static void interpretShapeAnimDisplayList(HSD_PObj* pobj, float (*vertex)[3],
                     case GX_VA_CLR0:
                     case GX_VA_CLR1:
                         if (desc->attr_type == GX_INDEX16) {
-                            idx = (idx << 8) | dl[m++];
+                            idx = (idx << 8) | display_list[m++];
                             GXColor1x16(idx);
                         } else if (desc->attr_type == GX_INDEX8) {
                             GXColor1x8(idx);
@@ -792,16 +956,16 @@ static void interpretShapeAnimDisplayList(HSD_PObj* pobj, float (*vertex)[3],
                             switch (desc->comp_type) {
                             case GX_RGB565:
                             case GX_RGBA4:
-                                GXColor1u16((idx << 8) | dl[m++]);
+                                GXColor1u16((idx << 8) | display_list[m++]);
                                 break;
                             case GX_RGB8:
                             case GX_RGBA6:
-                                GXColor3u8(idx, dl[m], dl[m + 1]);
+                                GXColor3u8(idx, display_list[m], display_list[m + 1]);
                                 m += 2;
                                 break;
                             case GX_RGBA8:
                             case GX_RGBX8:
-                                GXColor4u8(idx, dl[m], dl[m + 1], dl[m + 2]);
+                                GXColor4u8(idx, display_list[m], display_list[m + 1], display_list[m + 2]);
                                 m += 3;
                                 break;
                             }
@@ -809,7 +973,7 @@ static void interpretShapeAnimDisplayList(HSD_PObj* pobj, float (*vertex)[3],
                         break;
                     default:
                         if (desc->attr_type == GX_INDEX16) {
-                            idx = (idx << 8) | dl[m++];
+                            idx = (idx << 8) | display_list[m++];
                         }
                         OSReport("attr(%d) is not supported by sysdolphin\n",
                                  desc->attr);
@@ -820,12 +984,15 @@ static void interpretShapeAnimDisplayList(HSD_PObj* pobj, float (*vertex)[3],
         }
         GXEnd();
         l += m;
-        dl += m;
+        display_list += m;
     }
 }
 
 #define pobj_min(x, y) (x < y ? x : y)
 
+/**
+ * @brief Performs CPU vertex blending and renders a shape animation.
+ */
 static void drawShapeAnim(HSD_PObj* pobj)
 {
     HSD_ShapeSet* shape_set = pobj->u.shape_set;
@@ -950,6 +1117,11 @@ static void drawShapeAnim(HSD_PObj* pobj)
     interpretShapeAnimDisplayList(pobj, vertex_buffer, normal_buffer);
 }
 
+/**
+ * @brief Clears the matrix mark for an object.
+ * @param obj The object
+ * @param mark The mark to clear
+ */
 void HSD_PObjClearMtxMark(void* obj, u32 mark)
 {
     int i;
@@ -960,6 +1132,12 @@ void HSD_PObjClearMtxMark(void* obj, u32 mark)
     }
 }
 
+/**
+ * @brief Sets the matrix mark for an object at a specific index.
+ * @param idx The index
+ * @param obj The object
+ * @param mark The mark to set
+ */
 void HSD_PObjSetMtxMark(int idx, void* obj, u32 mark)
 {
     if (idx >= 2) {
@@ -973,6 +1151,12 @@ void HSD_PObjSetMtxMark(int idx, void* obj, u32 mark)
     }
 }
 
+/**
+ * @brief Gets the matrix mark for an object at a specific index.
+ * @param idx The index
+ * @param obj Output pointer for the object
+ * @param mark Output pointer for the mark
+ */
 void HSD_PObjGetMtxMark(int idx, void** obj, u32* mark)
 {
     HSD_ASSERT(1655, obj);
@@ -987,6 +1171,9 @@ void HSD_PObjGetMtxMark(int idx, void** obj, u32* mark)
     }
 }
 
+/**
+ * @brief Gets setup flags for rendering a PObj based on the rendermode.
+ */
 static PObjSetupFlag GetSetupFlags(HSD_JObj* jobj, u32 rendermode)
 {
     PObjSetupFlag flags = SETUP_NONE;
@@ -1007,6 +1194,9 @@ static PObjSetupFlag GetSetupFlags(HSD_JObj* jobj, u32 rendermode)
     return flags;
 }
 
+/**
+ * @brief Sets up a rigid matrix for a single-bone PObj.
+ */
 static void SetupRigidModelMtx(HSD_PObj* pobj, Mtx vmtx, Mtx pmtx,
                                u32 rendermode)
 {
@@ -1034,7 +1224,7 @@ static void SetupRigidModelMtx(HSD_PObj* pobj, Mtx vmtx, Mtx pmtx,
     flags = GetSetupFlags(jobj, rendermode);
 
     if (flags & SETUP_NORMAL) {
-        HSD_MtxInverseTranspose(pmtx, n);
+        HSD_MtxInverseTranspose(pmtx, vtx_count);
         if (jobj->flags & JOBJ_LIGHTING) {
             GXLoadNrmMtxImm(n, GX_PNMTX0);
             HSD_PerfCountMtxLoad();
@@ -1046,6 +1236,9 @@ static void SetupRigidModelMtx(HSD_PObj* pobj, Mtx vmtx, Mtx pmtx,
     }
 }
 
+/**
+ * @brief Sets up matrices for a PObj sharing vertices between bones.
+ */
 static void SetupSharedVtxModelMtx(HSD_PObj* pobj, Mtx vmtx, Mtx pmtx,
                                    u32 rendermode)
 {
@@ -1120,6 +1313,9 @@ static void SetupSharedVtxModelMtx(HSD_PObj* pobj, Mtx vmtx, Mtx pmtx,
     }
 }
 
+/**
+ * @brief Sets up matrices for a skinning (envelope) PObj.
+ */
 static void SetupEnvelopeModelMtx(HSD_PObj* pobj, Mtx vmtx, Mtx pmtx,
                                   u32 rendermode)
 {
@@ -1196,6 +1392,9 @@ static void SetupEnvelopeModelMtx(HSD_PObj* pobj, Mtx vmtx, Mtx pmtx,
     }
 }
 
+/**
+ * @brief General setup function for PObj matrices.
+ */
 static void PObjSetupMtx(HSD_PObj* pobj, Mtx vmtx, Mtx pmtx, u32 rendermode)
 {
     switch (pobj_type(pobj)) {
@@ -1215,6 +1414,9 @@ static void PObjSetupMtx(HSD_PObj* pobj, Mtx vmtx, Mtx pmtx, u32 rendermode)
     }
 }
 
+/**
+ * @brief Directly renders a PObj\'s display list.
+ */
 static void PObjDispSimplePrimitive(HSD_PObj* pobj, u32 rendermode)
 {
     setupArrayDesc(pobj->verts);
@@ -1223,6 +1425,9 @@ static void PObjDispSimplePrimitive(HSD_PObj* pobj, u32 rendermode)
     GXCallDisplayList(pobj->display, pobj->n_display << 5);
 }
 
+/**
+ * @brief Renders a shape animation PObj.
+ */
 static void PObjDispShapeAnim(HSD_PObj* pobj, u32 rendermode)
 {
     setupShapeAnimArrayDesc(pobj->verts);
@@ -1232,6 +1437,13 @@ static void PObjDispShapeAnim(HSD_PObj* pobj, u32 rendermode)
     drawShapeAnim(pobj);
 }
 
+/**
+ * @brief Displays (renders) a PObj.
+ * @param pobj The PObj
+ * @param vmtx The view matrix
+ * @param pmtx The projection matrix
+ * @param rendermode Rendering mode flags
+ */
 void HSD_PObjDisp(HSD_PObj* pobj, Mtx vmtx, Mtx pmtx, u32 rendermode)
 {
     switch (pobj->flags & (POBJ_CULLFRONT | POBJ_CULLBACK)) {
@@ -1256,6 +1468,9 @@ void HSD_PObjDisp(HSD_PObj* pobj, Mtx vmtx, Mtx pmtx, u32 rendermode)
     }
 }
 
+/**
+ * @brief Releases (destroys) a PObj.
+ */
 static void PObjRelease(HSD_Class* o)
 {
     HSD_PObj* pobj = HSD_POBJ(o);
@@ -1276,6 +1491,9 @@ static void PObjRelease(HSD_Class* o)
     HSD_PARENT_INFO(&hsdPObj)->release(o);
 }
 
+/**
+ * @brief Clears global PObj state and classes.
+ */
 static void PObjAmnesia(HSD_ClassInfo* info)
 {
     if (info == HSD_CLASS_INFO(default_class)) {
@@ -1292,6 +1510,9 @@ static void PObjAmnesia(HSD_ClassInfo* info)
     HSD_PARENT_INFO(&hsdPObj)->amnesia(info);
 }
 
+/**
+ * @brief Initializes the base PObj class info.
+ */
 static void PObjInfoInit(void)
 {
     hsdInitClassInfo(HSD_CLASS_INFO(&hsdPObj), HSD_CLASS_INFO(&hsdClass),
