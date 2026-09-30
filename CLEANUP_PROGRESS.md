@@ -16,7 +16,7 @@
 
 #### Core Headers
 - ✅ ft/forward.h — Forward declarations, enums, character IDs
-- 🔄 ft/types.h — Fighter struct, ftCommonData, per-character attributes
+- ✅ ft/types.h — Fighter struct, ftCommonData, per-character attributes
 - ✅ ft/fighter.h — Core fighter API declarations
 - ❌ ft/inlines.h
 - ❌ ft/dobjlist.h
@@ -26,12 +26,12 @@
 - ✅ ft/ftaction.c — Action state transition logic
 - ❌ ft/ftanim.c — Animation system
 - ✅ ft/ftcoll.c — Fighter collision detection
-- ❌ ft/ftcommon.c — Common fighter utilities
+- ✅ ft/ftcommon.c — Common fighter utilities
 - ✅ ft/ftdata.c — Fighter data loading
-- ❌ ft/ftlib.c — Fighter library functions
+- ✅ ft/ftlib.c — Fighter library functions
 - ❌ ft/ftparts.c — Fighter model parts management
 - ✅ ft/ftcmdscript.c — CPU command script interpreter & input VM
-- ❌ ft/ftdynamics.c — Physics/bone dynamics
+- ✅ ft/ftdynamics.c — Physics/bone dynamics
 - ❌ ft/ftcamera.c — Fighter camera tracking
 - ❌ ft/ftchangeparam.c — Parameter modification (items, etc.)
 - ❌ ft/ftcliffcommon.c — Ledge grab mechanics
