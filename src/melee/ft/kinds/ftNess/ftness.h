@@ -1,6 +1,6 @@
 /**
  * @file
- * @todo Fix formatting
+ * @brief Ness initialization and setup routines
  */
 
 #ifndef GALE01_1147C0

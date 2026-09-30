@@ -1,6 +1,6 @@
 /**
  * @file
- * @todo Fix formatting
+ * @brief Ness Yo-Yo (Up Smash) routines
  */
 
 #ifndef GALE01_114EB8
