@@ -204,13 +204,13 @@ int it_8026B3C0(ItemKind kind)
 /// Store Item article pointer to table
 void it_8026B3F8(Article* article, s32 kind)
 {
-    it_804D6D38[kind - It_Kind_Kuriboh] = article;
+    it_804D6D38[kind - It_Kind_Item_End] = article;
 }
 
 /// Store Stage Item article pointer to table
 void it_8026B40C(Article* article, s32 kind)
 {
-    it_804A0F60[kind - It_Kind_Old_Kuri] = article;
+    it_804A0F60[kind - It_Kind_Monster2_Start] = article;
 }
 
 /// Item Damage Math
@@ -363,9 +363,9 @@ bool it_8026B6C8(HSD_GObj* gobj)
 
     ip = gobj->user_data;
     kind = ip->kind;
-    if (((kind >= It_Kind_Kuriboh) && (kind < It_Kind_Octarock_Stone)) ||
-        ((itemID_2 = ip->kind, ((itemID_2 < It_Kind_Old_Kuri) == false)) &&
-         (itemID_2 < It_Kind_Arwing_Laser)))
+    if (((kind >= It_Kind_Monster_Start) && (kind < It_Kind_Monster_End)) ||
+        ((itemID_2 = ip->kind, ((itemID_2 < It_Kind_Pokemon_End) == false)) &&
+         (itemID_2 < It_Kind_Stage_End)))
     {
         itemID_3 = ip->kind;
         if ((itemID_3 != It_Kind_Kyasarin_Egg) &&
@@ -1077,12 +1077,12 @@ HSD_GObj* it_8026C258(Vec3* pos, f32 facing_dir)
         Item* ip = GET_ITEM(cur);
 
         // Might not actually be (exclusively) hold kind in the end???
-        enum_t hold_kind = ip->hold_kind;
+        Item_HoldKinds hold_kind = ip->hold_kind;
 
         // Decide lock-on type for Samus Missile?
-        if ((hold_kind == ITEM_UNK_MATO || hold_kind == ITEM_UNK_LOCKON ||
-             /// @todo Why is this cast to @c s16 necessary?
-             (s16) (hold_kind == ITEM_UNK_ENEMY) || hold_kind == ITEM_UNK_7) &&
+        /// @todo Why are these casts to @c s32 and s16 necessary?
+        if ((hold_kind == ITEM_HOLD_4 || (s32) hold_kind == ITEM_HOLD_5 ||
+             (s16) (hold_kind == ITEM_HOLD_6) || hold_kind == ITEM_HOLD_7) &&
             ip->grab_victim == NULL &&
             (!ip->xDC8_word.flags.x13 || ip->owner == NULL) &&
             (facing_dir != -1 || !(ip->pos.x > pos->x)) &&

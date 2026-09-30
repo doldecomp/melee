@@ -19,11 +19,11 @@ ItemKind it_8026F3AC(void)
 static inline bool it_8026F3D4_check_kind(Item* ip, ItemKind it_kind)
 {
     bool ret = false;
-    if (it_kind == -1) {
+    if (it_kind == It_Kind_Unselected) {
         if (ip == NULL) {
         }
     }
-    if ((it_kind >= It_Kind_L_Gun_Ray)) {
+    if ((it_kind >= It_Kind_Common_End)) { // If not a common item
         ret = true;
     }
     return ret;
@@ -58,10 +58,11 @@ bool it_8026F3D4(Item_GObj* item_gobj, struct it_8026F3D4_arg1_t* arg1,
     cnt2 = 0;
     zero = *(volatile f32*) &zero_init[0];
     for (cnt = 0; cnt < num; cnt++) {
-        if ((new_var == 0) || (it_kind == -1)) {
+        if ((new_var == 0) || (it_kind == It_Kind_Unselected)) {
             it_kind = it_8026C75C(&it_804A0E50);
         }
-        if ((it_kind == -1) || (it_kind >= It_Kind_L_Gun_Ray) ||
+        if ((it_kind == It_Kind_Unselected) ||
+            (it_kind >= It_Kind_Common_End) ||
             ((it_kind == It_Kind_M_Ball) && it_8026C704()))
         {
             chk1 |= it_8026F3D4_check_kind(item, it_kind);
@@ -80,7 +81,7 @@ bool it_8026F3D4(Item_GObj* item_gobj, struct it_8026F3D4_arg1_t* arg1,
     if (ftLib_IsFighter(item->owner)) {
         s32 n = cnt2;
         if (n != 0) {
-            ftLib_800874CC(item->owner, &sp30, n);
+            ftLib_800874CC(item->owner, sp30, n);
         }
     }
     if (arg1 != NULL) {

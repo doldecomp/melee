@@ -178,10 +178,10 @@ bool ftpickupitem_8009447C(Fighter_GObj* gobj, Item_GObj* item_gobj)
             break;
         case It_Kind_WStar:
             ftCo_800C4724(gobj);
-            return 1;
+            return true;
         case It_Kind_Hammer:
             ftCo_800C52F4(gobj);
-            return 1;
+            return true;
         case It_Kind_RabbitC:
             ftCommon_8007FA58(gobj, item_gobj);
             break;

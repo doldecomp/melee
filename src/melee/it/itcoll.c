@@ -777,8 +777,8 @@ void it_80270E30(Item_GObj* arg_item_gobj)
                     knockback = knockback_cap;
                 }
                 if (!arg_item->xDCF_flag.x0.b1) {
-                    if ((arg_item->hold_kind == 4) ||
-                        (arg_item->hold_kind == 6))
+                    if ((arg_item->hold_kind == ITEM_HOLD_4) ||
+                        (arg_item->hold_kind == ITEM_HOLD_6))
                     {
                         sp18 = hit->damage;
                         hit2 = damage_log.v->x8;
@@ -1216,8 +1216,8 @@ void it_80271D2C(Item_GObj* arg_item_gobj)
         item = GET_ITEM(item_gobj);
         if ((arg_item_gobj != item_gobj) && !item->xDC8_word.flags.x13 &&
             (item->ground_or_air == GA_Ground) && !item->xDD1_flag.x0.b0 &&
-            ((item->hold_kind != 3) ||
-             ((item->hold_kind == 3) &&
+            ((item->hold_kind != ITEM_HOLD_3) ||
+             ((item->hold_kind == ITEM_HOLD_3) &&
               arg_item->xDC8_word.flags
                   .x1E)) // hold_kind 3 is open palm, facing down(?)
         )

@@ -131,6 +131,9 @@ struct pl_x5EC_t {
     } x10[6];
 };
 
+/// @todo: 215 comes up a few times in the stale moves code.
+/// Figure out where this comes from and define a variable to reference.
+
 struct StaleMoveTable {
     /*   +0 */ int current_index;
     /*   +4 */ struct StaleMoveTable_StaleMoves {

@@ -33,7 +33,6 @@ typedef struct ItemModelDesc ItemModelDesc;
 typedef struct ItemModStruct ItemModStruct;
 typedef struct ItemStateArray ItemStateArray;
 typedef struct ItemStateDesc ItemStateDesc;
-typedef struct itSword_ItemVars itSword_ItemVars;
 typedef struct SpawnItem SpawnItem;
 typedef struct UnkItemArticles3 UnkItemArticles3;
 
@@ -126,9 +125,6 @@ typedef enum Item_HoldKinds {
 /// further research by VetriTheRetri
 /// https://docs.google.com/spreadsheets/d/1JX2w-r2fuvWuNgGb6D3Cs4wHQKLFegZe2jhbBuIhCG8
 /// Development JP name strings are listed starting at data address 0x803EA7A8
-
-#define It_Common_Start It_Kind_Capsule
-#define It_Common_End It_Kind_L_Gun_Ray
 
 typedef enum ItemKind {
     /// @name COMMON ITEMS
@@ -314,47 +310,43 @@ typedef enum ItemKind {
 
     /// @name POKEMON
     /// @{
-    /* 0xA0 */ It_PKind_Random, ///< Used for Random Pokemon value
-    /* 0xA1 */ It_PKind_Start,  ///< First Poke Ball Pokemon, named by an
-                                ///< assert in #pl_8003E70C.
-    /* 0xA1 */ It_PKind_Tosakinto = It_PKind_Start, ///< Goldeen (Tosakinto)
-    /* 0xA2 */ It_PKind_Chicorita,                  ///< Chikorita (Chicorita)
-    /* 0xA3 */ It_PKind_Kabigon,                    ///< Snorlax (Kabigon)
-    /* 0xA4 */ It_PKind_Kamex,                      ///< Blastoise (Kamex)
-    /* 0xA5 */ It_PKind_Matadogas,                  ///< Weezing (Matadogas)
-    /* 0xA6 */ It_PKind_Lizardon,                   ///< Charizard (Lizardon)
-    /* 0xA7 */ It_PKind_Fire,                       ///< Moltres (Fire)
-    /* 0xA8 */ It_PKind_Thunder,                    ///< Zapdos (Thunder)
-    /* 0xA9 */ It_PKind_Freezer,                    ///< Articuno (Freezer)
-    /* 0xAA */ It_PKind_Sonans,                     ///< Wobbuffet (Sonans)
-    /* 0xAB */ It_PKind_Hassam,                     ///< Scizor (Hassam)
-    /* 0xAC */ It_PKind_Unknown,                    ///< Unown (Unknown)
-    /* 0xAD */ It_PKind_Entei,                      ///< Entei
-    /* 0xAE */ It_PKind_Raikou,                     ///< Raikou
-    /* 0xAF */ It_PKind_Suikun,                     ///< Suicune (Suikun)
-    /* 0xB0 */ It_PKind_Kireihana,                  ///< Bellossom (Kireihana)
-    /* 0xB1 */ It_PKind_Marumine,                   ///< Electrode (Marumine)
-    /* 0xB2 */ It_PKind_Lugia,                      ///< Lugia
-    /* 0xB3 */ It_PKind_Houou,                      ///< Ho-oh (Houou)
-    /* 0xB4 */ It_PKind_Metamon,                    ///< Ditto (Metamon)
-    /* 0xB5 */ It_PKind_Pippi,                      ///< Clefairy (Pippi)
-    /* 0xB6 */ It_PKind_Togepy,                     ///< Togepi (Togepy)
-    /* 0xB7 */ It_PKind_Mew,                        ///< Mew
-    /* 0xB8 */ It_PKind_Cerebi,                     ///< Celebi (Cerebi)
-    /* 0xB9 */ It_PKind_Hitodeman,                  ///< Staryu (Hitodeman)
-    /* 0xBA */ It_PKind_Lucky,                      ///< Chansey (Lucky)
-    /* 0xBB */ It_PKind_Porygon2,                   ///< Porygon2
-    /* 0xBC */ It_PKind_Hinoarashi,                 ///< Cyndaquil (Hinoarashi)
-    /* 0xBD */ It_PKind_Maril,                      ///< Marill (Maril)
-    /* 0xBE */ It_PKind_Fushigibana,                ///< Venusaur (Fushigibana)
-    /* 0xBF */ It_PKind_Terminate, ///< One past the last Poke Ball Pokemon.
+    /* 0xA0 */ It_PKind_Random,      ///< Used for Random Pokemon value
+    /* 0xA1 */ It_PKind_Tosakinto,   ///< Goldeen (Tosakinto)
+    /* 0xA2 */ It_PKind_Chicorita,   ///< Chikorita (Chicorita)
+    /* 0xA3 */ It_PKind_Kabigon,     ///< Snorlax (Kabigon)
+    /* 0xA4 */ It_PKind_Kamex,       ///< Blastoise (Kamex)
+    /* 0xA5 */ It_PKind_Matadogas,   ///< Weezing (Matadogas)
+    /* 0xA6 */ It_PKind_Lizardon,    ///< Charizard (Lizardon)
+    /* 0xA7 */ It_PKind_Fire,        ///< Moltres (Fire)
+    /* 0xA8 */ It_PKind_Thunder,     ///< Zapdos (Thunder)
+    /* 0xA9 */ It_PKind_Freezer,     ///< Articuno (Freezer)
+    /* 0xAA */ It_PKind_Sonans,      ///< Wobbuffet (Sonans)
+    /* 0xAB */ It_PKind_Hassam,      ///< Scizor (Hassam)
+    /* 0xAC */ It_PKind_Unknown,     ///< Unown (Unknown)
+    /* 0xAD */ It_PKind_Entei,       ///< Entei
+    /* 0xAE */ It_PKind_Raikou,      ///< Raikou
+    /* 0xAF */ It_PKind_Suikun,      ///< Suicune (Suikun)
+    /* 0xB0 */ It_PKind_Kireihana,   ///< Bellossom (Kireihana)
+    /* 0xB1 */ It_PKind_Marumine,    ///< Electrode (Marumine)
+    /* 0xB2 */ It_PKind_Lugia,       ///< Lugia
+    /* 0xB3 */ It_PKind_Houou,       ///< Ho-oh (Houou)
+    /* 0xB4 */ It_PKind_Metamon,     ///< Ditto (Metamon)
+    /* 0xB5 */ It_PKind_Pippi,       ///< Clefairy (Pippi)
+    /* 0xB6 */ It_PKind_Togepy,      ///< Togepi (Togepy)
+    /* 0xB7 */ It_PKind_Mew,         ///< Mew
+    /* 0xB8 */ It_PKind_Cerebi,      ///< Celebi (Cerebi)
+    /* 0xB9 */ It_PKind_Hitodeman,   ///< Staryu (Hitodeman)
+    /* 0xBA */ It_PKind_Lucky,       ///< Chansey (Lucky)
+    /* 0xBB */ It_PKind_Porygon2,    ///< Porygon2
+    /* 0xBC */ It_PKind_Hinoarashi,  ///< Cyndaquil (Hinoarashi)
+    /* 0xBD */ It_PKind_Maril,       ///< Marill (Maril)
+    /* 0xBE */ It_PKind_Fushigibana, ///< Venusaur (Fushigibana)
 
     /// @}
 
     /// @name POKEMON-RELATED
     /// @{
-    /* 0xBF */ It_Kind_Chicorita_Leaf =
-        It_PKind_Terminate,              ///< Chikorita's Leaf
+    /* 0xBF */ It_Kind_Chicorita_Leaf,   ///< Chikorita's Leaf
     /* 0xC0 */ It_Kind_Kamex_HydroPump,  ///< Blastoise's Water
     /* 0xC1 */ It_Kind_Matadogas_Gas1,   ///< Weezing's Gas
     /* 0xC2 */ It_Kind_Matadogas_Gas2,   ///< Weezing's Gas
@@ -374,7 +366,8 @@ typedef enum ItemKind {
 
     /// @}
 
-    /// @name MONSTERS 2
+    /// @name MONSTERS 2 (is Adventure Mode enemies (found in dbitem) a better
+    /// name?)
     /// @{
     It_Kind_Old_Kuri, // Old Goomba (old-Kuri)
     It_Kind_Mato,     // Target (Mato)
@@ -410,10 +403,103 @@ typedef enum ItemKind {
     It_Kind_Arwing_Laser,    // Arwing Laser
     It_Kind_GreatFox_Laser,  // Great Fox's Laser
     It_Kind_Kyasarin_Egg,    // Birdo's Egg
+                             /// @}
+
+    /// @name SECTION RANGES - as used in code (some are adjusted)
+    /// @{
+    /* 000 */ It_Kind_Common_Start =
+        It_Kind_Capsule, //   0 - Start of common items
+    /* 023 */ It_Kind_Common_End =
+        It_Kind_M_Ball + 1, //  35 - End of common items
+    /* 023 */ It_Kind_Item_Start =
+        It_Kind_L_Gun_Ray, //  35 - Start of item-related items
+    /* 02B */ It_Kind_Item_End =
+        It_Kind_EvYoshiEgg + 1, //  43 - End of item-related items
+    /* 02B */ It_Kind_Monster_Start =
+        It_Kind_Kuriboh, //  43 - Start of monster items
+    /* 02F */ It_Kind_Monster_End =
+        It_Kind_Octarock_Stone, //  47 - End of monster items
+    /* 030 */ It_Kind_Character_Start =
+        It_Kind_Mario_Fire, //  48 - Start of character items
+    /* 09E */ It_Kind_Character_End =
+        It_Kind_Kirby_YoshiEggLay + 1, // 158 - End of character items
+    /* 09E */ It_Kind_Misc_Start =
+        It_Kind_Unk4, // 158 - Start of miscellaneous items
+    /* 0A0 */ It_Kind_Misc_End =
+        It_Kind_Coin + 1, // 160 - End of miscellaneous items
+    /* 0A1 */ It_PKind_Start =
+        It_PKind_Random +
+        1, // 161 - First Poke Ball Pokemon, named by an assert in #pl_8003E70C
+    /* 0BF */ It_PKind_Terminate =
+        It_PKind_Fushigibana + 1, // 191 - One past the last Poke Ball Pokemon
+    /* 0BF */ It_PKind_Related_Start =
+        It_Kind_Chicorita_Leaf, // 191 - Start of Pokemon-related item
+    /* 0D0 */ It_PKind_Related_End =
+        It_Kind_Pokemon_Unk + 1, // 208 - End of Pokemon-related items
+    /* 0D0 */ It_Kind_Monster2_Start =
+        It_Kind_Old_Kuri, // 208 - Start of monster 2 items
+    /* 0DD */ It_Kind_Monster2_End =
+        It_Kind_ZRShell + 1, // 221 - End of monster 2 items
+    /* 0DD */ It_Kind_Stage_Start =
+        It_Kind_Tincle, // 221 - Start of stage-specific items
+    /* 0EA */ It_Kind_Stage_End =
+        It_Kind_Kyasarin_Egg - 2, // 234 - End of stage-specific items
+
+    /* 000 */ It_Kind_Start =
+        It_Kind_Common_Start, //   0 - Start of item kind list
+    /* 000 */ It_Kind_Container_Start =
+        It_Kind_Common_Start, //   0 - Start of container items
+    /* 006 */ It_Kind_Container_End =
+        It_Kind_BombHei, //   6 - End of container items
+    /* 0A1 */ It_Kind_Pokemon_Start =
+        It_PKind_Start, // 161 - Start of all Pokemon items
+    /* 0D0 */ It_Kind_Pokemon_End =
+        It_PKind_Related_End, // 208 - End of all Pokemon items
+    /* 0EE */ It_Kind_Max_Check =
+        It_Kind_Kyasarin_Egg +
+        2, // 236 - Used to check if still in valid item range (not sure why it
+           // skips 2 instead of 1)
+
     /// @}
 
     It_Kind_Unselected = -1,
     It_Kind_None = -999,
 } ItemKind;
+
+typedef enum PokemonKind {
+    Pokemon_ID_Tosakinto,   // Goldeen (Tosakinto)
+    Pokemon_ID_Chicorita,   // Chikorita (Chicorita)
+    Pokemon_ID_Kabigon,     // Snorlax (Kabigon)
+    Pokemon_ID_Kamex,       // Blastoise (Kamex)
+    Pokemon_ID_Matadogas,   // Weezing (Matadogas)
+    Pokemon_ID_Lizardon,    // Charizard (Lizardon)
+    Pokemon_ID_Fire,        // Moltres (Fire)
+    Pokemon_ID_Thunder,     // Zapdos (Thunder)
+    Pokemon_ID_Freezer,     // Articuno (Freezer)
+    Pokemon_ID_Sonans,      // Wobbuffet (Sonans)
+    Pokemon_ID_Hassam,      // Scizor (Hassam)
+    Pokemon_ID_Unknown,     // Unown (Unknown)
+    Pokemon_ID_Entei,       // Entei
+    Pokemon_ID_Raikou,      // Raikou
+    Pokemon_ID_Suikun,      // Suicune (Suikun)
+    Pokemon_ID_Kireihana,   // Bellossom (Kireihana)
+    Pokemon_ID_Marumine,    // Electrode (Marumine)
+    Pokemon_ID_Lugia,       // Lugia
+    Pokemon_ID_Houou,       // Ho-oh (Houou)
+    Pokemon_ID_Metamon,     // Ditto (Metamon)
+    Pokemon_ID_Pippi,       // Clefairy (Pippi)
+    Pokemon_ID_Togepy,      // Togepi (Togepy)
+    Pokemon_ID_Mew,         // Mew
+    Pokemon_ID_Cerebi,      // Celebi (Cerebi)
+    Pokemon_ID_Hitodeman,   // Staryu (Hitodeman)
+    Pokemon_ID_Lucky,       // Chansey (Lucky)
+    Pokemon_ID_Porygon2,    // Porygon2
+    Pokemon_ID_Hinoarashi,  // Cyndaquil (Hinoarashi)
+    Pokemon_ID_Maril,       // Marill (Maril)
+    Pokemon_ID_Fushigibana, // Venusaur (Fushigibana)
+
+    Pokemon_Start = Pokemon_ID_Tosakinto,       // Start of Pokemon list
+    Pokemon_Total = Pokemon_ID_Fushigibana + 1, // Total number of Pokemon
+} PokemonKind;
 
 #endif

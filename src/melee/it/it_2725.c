@@ -606,6 +606,8 @@ void it_80273670(Item_GObj* item_gobj, int arg1, f32 arg8)
     item->x524_cmd.x8.u = NULL;
 }
 
+/// @todo: Looks like a bunch of code is shared with it_80273B50 that could be
+/// reused
 void it_80273748(Item_GObj* item_gobj, Vec3* pos, Vec3* vel)
 {
     Item* item;
@@ -672,10 +674,10 @@ void it_80273748(Item_GObj* item_gobj, Vec3* pos, Vec3* vel)
         dir_radians = M_PI_2 * item->facing_dir;
         HSD_JObjSetRotationY(jobj, dir_radians);
     }
-    if (((itIsHeavy(item_gobj) == 1) &&
-         (hold_kind = item->hold_kind, (hold_kind != 4)) &&
-         (hold_kind != 6)) ||
-        (item->hold_kind == 8))
+    if (((itIsHeavy(item_gobj) == true) &&
+         (hold_kind = item->hold_kind, (hold_kind != ITEM_HOLD_4)) &&
+         (hold_kind != ITEM_HOLD_6)) ||
+        (item->hold_kind == ITEM_HOLD_8))
     {
         jobj2 = it_80272C90(item_gobj);
         HSD_JObjGetTranslation(jobj2, &sp3C);
@@ -779,10 +781,10 @@ void it_80273B50(Item_GObj* item_gobj, Vec3* vel)
         dir_radians = M_PI_2 * item->facing_dir;
         HSD_JObjSetRotationY(item_jobj1, dir_radians);
     }
-    if (((itIsHeavy(item_gobj) == 1) &&
-         (hold_kind = item->hold_kind, (hold_kind != 4)) &&
-         (hold_kind != 6)) ||
-        (item->hold_kind == 8))
+    if (((itIsHeavy(item_gobj) == true) &&
+         (hold_kind = item->hold_kind, (hold_kind != ITEM_HOLD_4)) &&
+         (hold_kind != ITEM_HOLD_6)) ||
+        (item->hold_kind == ITEM_HOLD_8))
     {
         jobj = it_80272C90(item_gobj);
         HSD_JObjGetTranslation(jobj, &sp40);
@@ -947,7 +949,7 @@ void it_802742F4(Item_GObj* item_gobj, HSD_GObj* gobj, Fighter_Part ftpart)
         item->xD40 = 0.0f;
         it_80279BBC(item);
     }
-    if (item->kind < It_Kind_L_Gun_Ray) { // If a common item
+    if (item->kind < It_Kind_Common_End) { // If a common item
         it_80275158(item_gobj, it_804D6D28->x30_lifetime);
     }
     it_80274F48(item_gobj,

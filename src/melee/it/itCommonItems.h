@@ -17,17 +17,17 @@
 #include <melee/gm/types.h>
 #include <melee/lb/types.h>
 
-typedef struct {
-    bool x0;
-    bool x4;
+typedef struct itCapsule_ItemVars {
+    /* ip+DD4 */ bool x0;
+    /* ip+DD8 */ bool x4;
 } itCapsule_ItemVars;
 
-typedef struct {
-    bool x0; // [true]
-    s32 x4;  // [8]
+typedef struct ItCapsuleAttr {
+    /*  +0  */ bool x0; // [true]
+    /*  +4  */ s32 x4;  // [8]
 } ItCapsuleAttr;
 
-typedef struct {
+typedef struct itStar_ItemVars {
     /* ip+DD4 */ float dir;
     /* ip+DD8 */ float x4;
     /* ip+DDC */ float x8;
@@ -36,7 +36,32 @@ typedef struct {
     /* ip+DE8 */ float yvel;
 } itStar_ItemVars;
 
-struct itSword_ItemVars {
+typedef struct itSword_UnkBytes {
+    /*   +0 */ f32 x0;
+    /*   +4 */ f32 x4;
+    /*   +8 */ u8 x8;
+    /*   +9 */ u8 x9;
+    /*   +A */ u8 xA;
+    /*   +B */ u8 xB;
+    /*   +C */ u8 xC;
+    /*   +D */ u8 xD;
+    /*   +E */ u8 xE;
+    /*   +F */ u8 xF;
+    /*  +10 */ u8 x10;
+} itSword_UnkBytes;
+
+typedef struct itSwordAttributes {
+    /*  +0 */ UNK_T x0;
+    /*  +4 */ UNK_T x4;
+    /*  +8 */ UNK_T x8;
+    /*  +C */ float xC;
+    /* +10 */ float x10;
+    /* +14 */ float x14;
+    /* +18 */ int x18;
+    /* +1C */ itSword_UnkBytes x1C;
+} itSwordAttributes;
+
+typedef struct itSword_ItemVars {
     /* ip+DD4 */ int x0;
     /* ip+DD8 */ int x4;
     /* ip+DDC */ int x8;
@@ -60,7 +85,7 @@ struct itSword_ItemVars {
     /* ip+E24 */ float x50;
     /* ip+E28 */ int x54;
     /* ip+E2C */ float x58;
-};
+} itSword_ItemVars;
 
 typedef struct itBatAttributes {
     int x0;

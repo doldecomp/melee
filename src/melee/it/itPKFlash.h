@@ -5,6 +5,8 @@
 
 #include <sysdolphin/baselib/forward.h>
 
+/// @todo: Move these to itCharItems.h
+
 typedef struct itPKFlush_ItemVars {
     s32 xDD4_PKFlash;
     float xDD8_PKFlash;

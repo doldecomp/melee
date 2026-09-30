@@ -8,6 +8,7 @@
 #include <sysdolphin/baselib/forward.h>
 
 #include <dolphin/mtx.h>
+#include <melee/it/itCommonItems.h>
 #include <melee/it/kinds/types.h>
 
 /* 284D54 */ Item_GObj* itSword_Spawn(Vec3* pos);

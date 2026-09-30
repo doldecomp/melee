@@ -192,27 +192,28 @@ void it_80275E98(Item_GObj* item_gobj, SpawnItem* spawn)
     item1->x378_itemColl.cur_pos = item1->pos;
     mpColl_80041EE4(coll);
     kind = item1->kind;
-    if (kind < It_Kind_L_Gun_Ray) {
+    if (kind < It_Kind_Common_End) {
         coll->x34_flags.b1234 = 2;
-    } else if (kind < It_Kind_Kuriboh) {
+    } else if (kind < It_Kind_Item_End) {
         coll->x34_flags.b1234 = 4;
-    } else if (kind < It_Kind_Octarock_Stone) {
+    } else if (kind < It_Kind_Monster_End) {
         coll->x34_flags.b1234 = 3;
-    } else if (kind < It_Kind_Mario_Fire) {
+    } else if (kind <
+               It_Kind_Character_Start) { // If item is It_Kind_Octarock_Stone
         coll->x34_flags.b1234 = 4;
-    } else if (kind < It_Kind_Unk4) {
+    } else if (kind < It_Kind_Character_End) {
         coll->x34_flags.b1234 = 5;
-    } else if (kind < It_PKind_Random) {
+    } else if (kind < It_Kind_Misc_End) {
         coll->x34_flags.b1234 = 5;
-    } else if (kind < It_PKind_Start) {
+    } else if (kind < It_PKind_Start) { // If item is It_Kind_Unk4
         coll->x34_flags.b1234 = 5;
     } else if (kind < It_PKind_Terminate) {
         coll->x34_flags.b1234 = 5;
-    } else if (kind < It_Kind_Old_Kuri) {
+    } else if (kind < It_PKind_Related_End) {
         coll->x34_flags.b1234 = 4;
-    } else if (kind < It_Kind_Arwing_Laser) {
+    } else if (kind < It_Kind_Stage_End) {
         coll->x34_flags.b1234 = 3;
-    } else if (kind < 238) {
+    } else if (kind < It_Kind_Max_Check) {
         coll->x34_flags.b1234 = 4;
     }
 

@@ -35,8 +35,9 @@ typedef struct it_804D6D20_t {
     Fighter_804D653C_t* x14;
 } it_804D6D20_t;
 
-/* 3F1418 */ extern struct sdata_ItemGXLink it_803F1418[43];
-/* 3F14C4 */ extern struct ItemLogicTable it_803F14C4[43];
+/* 3F1418 */ extern struct sdata_ItemGXLink
+    it_803F1418[It_Kind_Item_End - It_Kind_Common_Start];
+/* 3F14C4 */ extern struct ItemLogicTable it_803F14C4[ARRAY_SIZE(it_803F1418)];
 /* 3F1ED8 */ extern char it_803F1ED8[];
 /* 3F1EE4 */ extern char it_803F1EE4[];
 /* 3F1EF0 */ extern char it_803F1EF0[];
@@ -44,7 +45,8 @@ typedef struct it_804D6D20_t {
 /* 4A0E50 */ extern ItemPickTable it_804A0E50;
 /* 4A0E60 */ extern ItemPickTable it_804A0E60;
 /* 4A0E70 */ extern DamageLogEntry it_804A0E70[15];
-/* 4A0F60 */ extern Article* it_804A0F60[30];
+/* 4A0F60 */ extern Article*
+    it_804A0F60[It_Kind_Max_Check - It_Kind_Monster2_Start];
 /* 4D6D00 */ extern s8 it_804D6D00;
 /* 4D6D04 */ extern Fighter_804D653C_t* it_804D6D04;
 /* 4D6D08 */ extern s32 it_804D6D08;
@@ -58,6 +60,8 @@ typedef struct it_804D6D20_t {
 /* 4D6D14 */ extern u32 it_804D6D14;
 
 /* 4D6D18 */ extern u32 it_804D6D18;
+/// @todo find/create enum or define for size of this array (used other places
+/// as well)
 /* 4D6D1C */ extern u8 it_804D6D1C[4];
 /* 4D6D20 */ extern it_804D6D20_t* it_804D6D20;
 

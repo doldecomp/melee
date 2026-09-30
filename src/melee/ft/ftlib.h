@@ -101,7 +101,7 @@
 /* 087460 */ u32 ftLib_GetSpawnNum(HSD_GObj*);
 /* 08746C */ s32 ftLib_8008746C(HSD_GObj*);
 /* 0874BC */ s32 ftLib_IsSubFighter(HSD_GObj*);
-/* 0874CC */ void ftLib_800874CC(HSD_GObj*, void*, s32);
+/* 0874CC */ void ftLib_800874CC(HSD_GObj*, ItemKind[], s32);
 /* 087508 */ void ftLib_LoadFighterCostume(s8, u8);
 /// /* 087508 */ void ftLib_LoadFighterCostume(FighterKind, u8);
 /* 087574 */ void ftLib_LoadFighterAllCostumes(s8);

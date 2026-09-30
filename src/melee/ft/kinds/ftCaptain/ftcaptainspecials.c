@@ -173,7 +173,7 @@ void ftCa_SpecialS_OnDetect(HSD_GObj* gobj)
             }
             }
         } else if (fp->unk_gobj->classifier == HSD_GOBJ_CLASS_ITEM) {
-            if (itGetKind(detected_gobj) < It_Kind_BombHei) {
+            if (itGetKind(detected_gobj) < It_Kind_Container_End) {
                 switch (fp->motion_id) {
                 case ftCa_MS_SpecialSStart: {
                     onDetectGround(gobj);
@@ -184,10 +184,10 @@ void ftCa_SpecialS_OnDetect(HSD_GObj* gobj)
                     break;
                 }
                 }
-            } else if ((itGetKind(detected_gobj) >= It_Kind_Kuriboh &&
-                        itGetKind(detected_gobj) < It_Kind_Octarock_Stone) ||
-                       (itGetKind(detected_gobj) >= It_Kind_Old_Kuri &&
-                        itGetKind(detected_gobj) < It_Kind_Arwing_Laser) ||
+            } else if ((itGetKind(detected_gobj) >= It_Kind_Monster_Start &&
+                        itGetKind(detected_gobj) < It_Kind_Monster_End) ||
+                       (itGetKind(detected_gobj) >= It_Kind_Monster2_Start &&
+                        itGetKind(detected_gobj) < It_Kind_Stage_End) ||
                        itGetKind(detected_gobj) == It_PKind_Random)
             {
                 switch (fp->motion_id) {
