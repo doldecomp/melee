@@ -1,3 +1,9 @@
+/**
+ * @file ftmetal.c
+ * @brief Fighter metal form effects and shader updates
+ * @details Handles the transition, rendering flags, and shader setup when a fighter picks up a Metal Box.
+ * Module prefix: ft
+ */
 #include "ftmetal.h"
 
 #include "fighter.h"
@@ -11,6 +17,10 @@
 #include <melee/lb/lb_00B0.h>
 #include <sysdolphin/baselib/id.h>
 
+/**
+ * @brief Reverts a fighter's metal effect, resetting the JObj and DObj flags to their original rendering modes.
+ * @param fp The fighter
+ */
 void ft_800C8170(Fighter* fp)
 {
     int i;
@@ -75,6 +85,10 @@ void ft_800C8170(Fighter* fp)
     }
 }
 
+/**
+ * @brief Applies the metal state shader to all active joints and dobjs on the fighter.
+ * @param fp The fighter
+ */
 static inline void enableMetal(Fighter* fp)
 {
     HSD_DObj* dobj;
@@ -96,9 +110,15 @@ static inline void enableMetal(Fighter* fp)
     ftCommon_80080460(fp);
 }
 
-void ftCo_800C8348(Fighter_GObj* arg0, int timer, int health)
+/**
+ * @brief Turns a fighter metal for a specific duration with given health (stamina).
+ * @param fighter_gobj The fighter's GObj
+ * @param timer How many frames the metal effect lasts
+ * @param health Additional stamina/health properties for the metal state
+ */
+void ftCo_800C8348(Fighter_GObj* fighter_gobj, int timer, int health)
 {
-    Fighter* fp = GET_FIGHTER(arg0);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
 
     PAD_STACK(0x10);
 
@@ -113,6 +133,10 @@ void ftCo_800C8348(Fighter_GObj* arg0, int timer, int health)
     enableMetal(fp);
 }
 
+/**
+ * @brief Applies or reapplies the metal state based on the fighter's is_always_metal flag.
+ * @param gobj The fighter's GObj
+ */
 void ftCo_800C8438(Fighter_GObj* gobj)
 {
     Fighter* fp;
@@ -133,6 +157,10 @@ void ftCo_800C8438(Fighter_GObj* gobj)
     ft_80081C88(gobj, fp->x34_scale.y);
 }
 
+/**
+ * @brief Clears metal timers and health, removes the metal state, and reverts rendering.
+ * @param gobj The fighter's GObj
+ */
 void ftCo_800C8540(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -147,10 +175,14 @@ void ftCo_800C8540(Fighter_GObj* gobj)
     }
 }
 
+/**
+ * @brief Initializes the secondary DObjs / model parts needed for the metal state.
+ * @param gobj The fighter's GObj
+ */
 void ft_800C85B8(Fighter_GObj* gobj)
 {
-    HSD_Joint* sp20;
-    s32 sp1C;
+    HSD_Joint* curr_joint;
+    s32 tree_depth;
 
     Fighter* fp;
     u32 part_idx;
@@ -158,39 +190,39 @@ void ft_800C85B8(Fighter_GObj* gobj)
     HSD_JObj* part_jobj;
     int joint_idx;
     HSD_DObj* dobj;
-    HSD_Joint* joint;
-    int i;
+    HSD_Joint* metal_skeleton;
+    int dobj_iter_count;
     HSD_DObj* dobj_iter;
 
     PAD_STACK(0xC);
 
     fp = GET_FIGHTER(gobj);
-    joint = fp->ft_data->x5C;
-    sp20 = joint;
-    joint_idx = (dobj_count = (sp1C = 0));
-    while (sp20 != 0) {
+    metal_skeleton = fp->ft_data->x5C;
+    curr_joint = metal_skeleton;
+    joint_idx = (dobj_count = (tree_depth = 0));
+    while (curr_joint != 0) {
         if (ftParts_8007506C(fp->kind, joint_idx) != 0) {
             joint_idx++;
         } else {
-            HSD_IDInsertToTable(NULL, (HSD_IDKey) sp20,
+            HSD_IDInsertToTable(NULL, (HSD_IDKey) curr_joint,
                                 fp->parts[joint_idx].joint);
             joint_idx++;
-            ftAnim_GetNextJointInTree(&sp20, &sp1C);
+            ftAnim_GetNextJointInTree(&curr_joint, &tree_depth);
         }
     }
-    sp20 = joint;
-    sp1C = (part_idx = 0);
-    while (sp20 != 0) {
+    curr_joint = metal_skeleton;
+    tree_depth = (part_idx = 0);
+    while (curr_joint != 0) {
         if (ftParts_8007506C(fp->kind, part_idx) != 0) {
             part_idx += 1;
         } else {
-            i = 0;
+            dobj_iter_count = 0;
             part_jobj = fp->parts[part_idx].joint;
-            dobj = HSD_DObjLoadDesc(sp20->u.dobjdesc);
+            dobj = HSD_DObjLoadDesc(curr_joint->u.dobjdesc);
             if (dobj != NULL) {
                 dobj_iter = HSD_JObjGetDObj(part_jobj);
                 fp->parts[part_idx].x8.x0.flags2_b5 = true;
-                HSD_DObjResolveRefsAll(dobj, sp20->u.dobjdesc);
+                HSD_DObjResolveRefsAll(dobj, curr_joint->u.dobjdesc);
                 if (dobj_iter == NULL) {
                     HSD_JObjAddDObj(part_jobj, dobj);
                 } else {
@@ -219,16 +251,16 @@ void ft_800C85B8(Fighter_GObj* gobj)
                     }
                     dobj = dobj != NULL ? dobj->next : NULL;
                     dobj_count++;
-                    i++;
+                    dobj_iter_count++;
                 }
-                if (i >= 0x80) {
+                if (dobj_iter_count >= 0x80) {
                     HSD_ASSERTREPORT(0x106, 0, "fighter dobj num over!\n");
                 }
                 fp->parts[part_idx].xC_u.x0.xD = dobj_count - 1;
                 fp->parts[part_idx].x8.x0.flags2_b6 = true;
             }
             part_idx += 1;
-            ftAnim_GetNextJointInTree(&sp20, &sp1C);
+            ftAnim_GetNextJointInTree(&curr_joint, &tree_depth);
         }
     }
     fp->x203C.count = dobj_count;

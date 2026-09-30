@@ -40,7 +40,7 @@
 - ✅ ft/ftdemo.c — Demo/replay playback
 - ✅ ft/ftdevice.c — Device/stage interaction
 - ❌ ft/ftdrawcommon.c — Common draw routines
-- ❌ ft/ftmaterial.c — Material/texture handling
+- ✅ ft/ftmaterial.c — Material/texture handling
 - ✅ ft/ftmetal.c — Metal form effects
 - ✅ ft/ftwalljump.c — Wall jump mechanics
 - ✅ ft/ftwalkcommon.c — Walking mechanics
