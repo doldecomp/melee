@@ -1,3 +1,11 @@
+/**
+ * @file item.c
+ * @brief Core Item Lifecycle and Management
+ * @details Implements the core item pipeline including initialization, updating, 
+ * state transitions, physics, collision detection, and memory allocation for all 
+ * items in the game.
+ * Module prefix: it (Item)
+ */
 #include "item.h"
 
 #include <melee/lb/forward.h>
@@ -75,6 +83,10 @@
 /* 26B0B4 */ static void Item_8026B0B4(HSD_GObj* gobj);
 
 /// Check if items are enabled
+/**
+ * @brief Handles operations for Item_80266F3C
+ * @return bool
+ */
 bool Item_80266F3C(void)
 {
     if (gm_8016AE80() != -1) {
@@ -85,12 +97,18 @@ bool Item_80266F3C(void)
 }
 
 /// Check to load ItCo.dat/usd
+/**
+ * @brief Handles operations for Item_80266F70
+ */
 void Item_80266F70(void)
 {
     it_8027870C(Item_80266F3C());
 }
 
 /// ItCo prefunction with 0
+/**
+ * @brief Handles operations for Item_80266FA8
+ */
 void Item_80266FA8(void)
 {
     it_8027870C(false);
@@ -106,6 +124,9 @@ Item_FtTrack Item_804A0CCC;
 PokemonSelectionState Item_804A0E24;
 
 /// Init item struct?
+/**
+ * @brief Handles operations for Item_80266FCC
+ */
 void Item_80266FCC(void)
 {
     HSD_ObjAllocInit(&item_alloc_data, sizeof(Item), 4);
@@ -195,6 +216,12 @@ static inline void HSD_JObjSetFacingDirItem(HSD_JObj* jobj, Item* it)
 }
 
 /// Initialize item coordinates?
+/**
+ * @brief Handles operations for Item_80267130
+ * @param gobj
+ * @param spawnItem
+ * @return static void
+ */
 static void Item_80267130(HSD_GObj* gobj, SpawnItem* spawnItem)
 {
     Item* item_data = GET_ITEM(gobj);
@@ -267,6 +294,10 @@ static void Item_80267130(HSD_GObj* gobj, SpawnItem* spawnItem)
 }
 
 /// Remove Camera Box
+/**
+ * @brief Handles operations for Item_80267454
+ * @param gobj
+ */
 void Item_80267454(HSD_GObj* gobj)
 {
     Item* item_data = gobj->user_data;
@@ -282,6 +313,11 @@ void Item_80267454(HSD_GObj* gobj)
 }
 
 /// Set Item Hold kind
+/**
+ * @brief Handles operations for Item_802674AC
+ * @param spawnItem
+ * @return static void
+ */
 static void Item_802674AC(SpawnItem* spawnItem)
 {
     ItemKind kind = spawnItem->kind;
@@ -349,6 +385,11 @@ static void Item_802674AC(SpawnItem* spawnItem)
     spawnItem->hold_kind = 5;
 }
 
+/**
+ * @brief Handles operations for Item_802675A8
+ * @param gobj
+ * @return static void
+ */
 static void Item_802675A8(HSD_GObj* gobj)
 {
     Item* item_data = GET_ITEM(gobj);
@@ -400,6 +441,11 @@ static void Item_802675A8(HSD_GObj* gobj)
     }
 }
 
+/**
+ * @brief Handles operations for Item_802676F4
+ * @param gobj
+ * @return static void
+ */
 static void Item_802676F4(HSD_GObj* gobj)
 {
     Item* item_data = gobj->user_data;
@@ -456,7 +502,13 @@ static void Item_802676F4(HSD_GObj* gobj)
 }
 
 /// @remarks #Item_8026862C loads two integers
-static bool Item_8026784C(enum_t dropItem, int _)
+/**
+ * @brief Handles operations for Item_8026784C
+ * @param dropItem
+ * @param _
+ * @return static bool
+ */
+static bool Item_8026784C(enum_t dropItem, int unused)
 {
     bool result = false;
 
@@ -534,6 +586,10 @@ static bool Item_8026784C(enum_t dropItem, int _)
     return result;
 }
 
+/**
+ * @brief Handles operations for Item_80267978
+ * @param gobj
+ */
 void Item_80267978(HSD_GObj* gobj)
 {
     Item* item_data = gobj->user_data;
@@ -565,6 +621,12 @@ void Item_80267978(HSD_GObj* gobj)
 }
 
 /// Initialize item variables
+/**
+ * @brief Handles operations for Item_80267AA8
+ * @param gobj
+ * @param spawnItem
+ * @return static void
+ */
 static void Item_80267AA8(HSD_GObj* gobj, SpawnItem* spawnItem)
 {
     ItemAttr* item_attr;
@@ -736,6 +798,10 @@ static void Item_80267AA8(HSD_GObj* gobj, SpawnItem* spawnItem)
 }
 
 /// Setup Item JObj
+/**
+ * @brief Handles operations for Item_802680CC
+ * @param gobj
+ */
 void Item_802680CC(HSD_GObj* gobj)
 {
     Item* item_data = GET_ITEM(gobj);
@@ -752,6 +818,11 @@ void Item_802680CC(HSD_GObj* gobj)
 }
 
 /// Set up item render objects?
+/**
+ * @brief Handles operations for Item_8026814C
+ * @param gobj
+ * @return static void
+ */
 static void Item_8026814C(HSD_GObj* gobj)
 {
     HSD_JObj* jobj = GET_JOBJ(gobj);
@@ -791,6 +862,11 @@ static void Item_8026814C(HSD_GObj* gobj)
 }
 
 /// Initialize item bones
+/**
+ * @brief Handles operations for Item_802682F0
+ * @param gobj
+ * @return static bool
+ */
 static bool Item_802682F0(HSD_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
@@ -833,6 +909,10 @@ static bool Item_802682F0(HSD_GObj* gobj)
 }
 
 /// Set item model scale
+/**
+ * @brief Handles operations for Item_8026849C
+ * @param gobj
+ */
 void Item_8026849C(HSD_GObj* gobj)
 {
     HSD_JObj* temp_jobj = GET_JOBJ(gobj);
@@ -844,6 +924,11 @@ void Item_8026849C(HSD_GObj* gobj)
 }
 
 /// Set up item dynamic bones
+/**
+ * @brief Handles operations for Item_80268560
+ * @param gobj
+ * @return static void
+ */
 static void Item_80268560(HSD_GObj* gobj)
 {
     int i;
@@ -1008,6 +1093,10 @@ HSD_GObj* Item_80268B5C(SpawnItem* spawnItem)
 }
 
 /// Item spawn prefunction - spawn grounded and toggle unknown true
+/**
+ * @brief Handles operations for Item_80268B9C
+ * @param spawnItem
+ */
 void Item_80268B9C(SpawnItem* spawnItem)
 {
     spawnItem->x48_ground_or_air = GA_Ground;
@@ -1017,6 +1106,15 @@ void Item_80268B9C(SpawnItem* spawnItem)
 }
 
 /// Adds #HSD_AObj instances to item model
+/**
+ * @brief Handles operations for Item_80268BE0
+ * @param item_jobj
+ * @param anim_joint
+ * @param matanim_joint
+ * @param shapeanim_joint
+ * @param item_data
+ * @return static void
+ */
 static void Item_80268BE0(HSD_JObj* item_jobj, HSD_AnimJoint* anim_joint,
                           HSD_MatAnimJoint* matanim_joint,
                           HSD_ShapeAnimJoint* shapeanim_joint, Item* item_data)
@@ -1092,6 +1190,11 @@ static void Item_80268BE0(HSD_JObj* item_jobj, HSD_AnimJoint* anim_joint,
 }
 
 /// Unk Item AObj-related function
+/**
+ * @brief Handles operations for Item_80268D34
+ * @param gobj
+ * @param itemStateDesc
+ */
 void Item_80268D34(HSD_GObj* gobj, struct ItemStateDesc* itemStateDesc)
 {
     HSD_JObj* item_jobj = GET_JOBJ(gobj);
@@ -1114,6 +1217,11 @@ void Item_80268D34(HSD_GObj* gobj, struct ItemStateDesc* itemStateDesc)
 }
 
 /// Advance item animation?
+/**
+ * @brief Handles operations for Item_80268DD4
+ * @param gobj
+ * @param frame
+ */
 void Item_80268DD4(HSD_GObj* gobj, f32 frame)
 {
     HSD_JObj* item_jobj;
@@ -1126,6 +1234,11 @@ void Item_80268DD4(HSD_GObj* gobj, f32 frame)
 }
 
 /// Copy item script
+/**
+ * @brief Handles operations for Item_80268E40
+ * @param item_data
+ * @param itemStateDesc
+ */
 void Item_80268E40(Item* item_data, struct ItemStateDesc* itemStateDesc)
 {
     item_data->x524_cmd.x8.u = itemStateDesc->xC_script;
@@ -1134,7 +1247,13 @@ void Item_80268E40(Item* item_data, struct ItemStateDesc* itemStateDesc)
 }
 
 /// Change item state
-void Item_80268E5C(HSD_GObj* gobj, enum_t msid, Item_StateChangeFlags flags)
+/**
+ * @brief Executes a state transition for an item (changing behavior, animation, etc) operations for Item_80268E5C
+ * @param gobj
+ * @param msid
+ * @param flags
+ */
+void Item_80268E5C(HSD_GObj* item_gobj, enum_t msid, Item_StateChangeFlags flags)
 {
     Vec3 sp4C;
     Vec3 scl;
@@ -1258,6 +1377,10 @@ void Item_80268E5C(HSD_GObj* gobj, enum_t msid, Item_StateChangeFlags flags)
     it_802714C0(gobj);
 }
 
+/**
+ * @brief Handles operations for Item_802693E4
+ * @param gobj
+ */
 void Item_802693E4(HSD_GObj* gobj)
 {
     Item* item_data = gobj->user_data;
@@ -1285,6 +1408,10 @@ void Item_802693E4(HSD_GObj* gobj)
 }
 
 /// Advance item animation + script?
+/**
+ * @brief Handles operations for Item_802694CC
+ * @param gobj
+ */
 void Item_802694CC(HSD_GObj* gobj)
 {
     HSD_JObj* item_jobj = GET_JOBJ(gobj);
@@ -1295,6 +1422,11 @@ void Item_802694CC(HSD_GObj* gobj)
 }
 
 /// Item Think - Animation
+/**
+ * @brief Handles operations for Item_80269528
+ * @param gobj
+ * @return static void
+ */
 static void Item_80269528(HSD_GObj* gobj)
 {
     u8 _[8];
@@ -1338,6 +1470,11 @@ static void Item_80269528(HSD_GObj* gobj)
 }
 
 /// Item Think - Check for Blast Zones
+/**
+ * @brief Handles operations for Item_802696CC
+ * @param gobj
+ * @return static bool
+ */
 static bool Item_802696CC(HSD_GObj* gobj)
 {
     Item* item_data = GET_ITEM(gobj);
@@ -1371,6 +1508,10 @@ static bool Item_802696CC(HSD_GObj* gobj)
     return false;
 }
 
+/**
+ * @brief Handles operations for Item_802697D4
+ * @param gobj
+ */
 void Item_802697D4(HSD_GObj* gobj)
 {
     Vec3 sp1C;
@@ -1420,6 +1561,10 @@ void Item_802697D4(HSD_GObj* gobj)
     it_802714C0(gobj);
 }
 
+/**
+ * @brief Handles operations for Item_80269978
+ * @param gobj
+ */
 void Item_80269978(HSD_GObj* gobj)
 {
     Item* item_data = GET_ITEM(gobj);
@@ -1434,6 +1579,11 @@ void Item_80269978(HSD_GObj* gobj)
 }
 
 /// this function is where the item accessory callback is called if it exists
+/**
+ * @brief Handles operations for Item_80269A9C
+ * @param gobj
+ * @return static void
+ */
 static void Item_80269A9C(HSD_GObj* gobj)
 {
     Item* item_data = GET_ITEM(gobj);
@@ -1457,6 +1607,11 @@ static void Item_80269A9C(HSD_GObj* gobj)
 }
 
 /// Item Think - Yellow Bar Collision (cb_JumpedOn)
+/**
+ * @brief Handles operations for Item_80269B60
+ * @param gobj
+ * @return static void
+ */
 static void Item_80269B60(HSD_GObj* gobj)
 {
     Item* item_data = gobj->user_data;
@@ -1474,6 +1629,11 @@ static void Item_80269B60(HSD_GObj* gobj)
 
 /// @remarks Somewhat arbitrary. Does not run on Hook Shot / Grapple
 /// Beam, rather items such as the Barrel Cannon.
+/**
+ * @brief Handles operations for Item_80269BE4
+ * @param gobj
+ * @return static void
+ */
 static void Item_80269BE4(HSD_GObj* gobj)
 {
     Item* item_data = gobj->user_data;
@@ -1488,6 +1648,11 @@ static void Item_80269BE4(HSD_GObj* gobj)
 }
 
 /// Item Think - Hit Collision Logic
+/**
+ * @brief Handles operations for Item_80269C5C
+ * @param gobj
+ * @return static void
+ */
 static void Item_80269C5C(HSD_GObj* gobj)
 {
     PAD_STACK(8);
@@ -1499,6 +1664,11 @@ static void Item_80269C5C(HSD_GObj* gobj)
 }
 
 /// Add to damage taken
+/**
+ * @brief Handles operations for Item_80269CA0
+ * @param item_data
+ * @param damage
+ */
 void Item_80269CA0(Item* item_data, s32 damage)
 {
     item_data->xC9C += damage;
@@ -1509,6 +1679,11 @@ void Item_80269CA0(Item* item_data, s32 damage)
 }
 
 /// Set damage struct
+/**
+ * @brief Handles operations for Item_80269CC4
+ * @param gobj
+ * @return static void
+ */
 static void Item_80269CC4(HSD_GObj* gobj)
 {
     Item* temp_item = gobj->user_data;
@@ -1557,6 +1732,11 @@ static void Item_80269CC4(HSD_GObj* gobj)
 }
 
 /// Item Think - Shield Collision
+/**
+ * @brief Handles operations for Item_80269DC8
+ * @param gobj
+ * @return static bool
+ */
 static bool Item_80269DC8(HSD_GObj* gobj)
 {
     HSD_GObjPredicate shield_bounced;
@@ -1600,6 +1780,11 @@ static bool Item_80269DC8(HSD_GObj* gobj)
 }
 
 /// Item Think - On Reflect
+/**
+ * @brief Handles operations for Item_80269F14
+ * @param gobj
+ * @return static bool
+ */
 static bool Item_80269F14(HSD_GObj* gobj)
 {
     f32 temp_f30;
@@ -1653,6 +1838,11 @@ static bool Item_80269F14(HSD_GObj* gobj)
 }
 
 /// Item Think - Exit Hitlag Check
+/**
+ * @brief Handles operations for Item_8026A0A0
+ * @param gobj
+ * @return static void
+ */
 static void Item_8026A0A0(HSD_GObj* gobj)
 {
     Item* item_data = GET_ITEM(gobj);
@@ -1668,6 +1858,11 @@ static void Item_8026A0A0(HSD_GObj* gobj)
 }
 
 /// Item Think - Exit Hitlag Check 2
+/**
+ * @brief Handles operations for Item_8026A0FC
+ * @param gobj
+ * @return static void
+ */
 static void Item_8026A0FC(HSD_GObj* gobj)
 {
     Item* item_data = GET_ITEM(gobj);
@@ -1690,6 +1885,11 @@ static void func_8026A158_helper(HSD_GObj* atkCollGObj)
 }
 
 /// Item Think - Enter Hitlag
+/**
+ * @brief Handles operations for Item_8026A158
+ * @param gobj
+ * @return static void
+ */
 static void Item_8026A158(HSD_GObj* gobj)
 {
     Item* item_data = GET_ITEM(gobj);
@@ -1719,6 +1919,11 @@ static void func_8026A1E8_inline(HSD_GObj* atkCollGObj)
 }
 
 /// Item Think - Exit Hitlag
+/**
+ * @brief Handles operations for Item_8026A1E8
+ * @param gobj
+ * @return static void
+ */
 static void Item_8026A1E8(HSD_GObj* gobj)
 {
     Item* item_data = GET_ITEM(gobj);
@@ -1802,6 +2007,11 @@ static void checkHitLag(f32 min_value, Item* item_data)
 }
 
 /// Item Think - Hit Collision
+/**
+ * @brief Handles operations for Item_8026A294
+ * @param gobj
+ * @return static void
+ */
 static void Item_8026A294(HSD_GObj* gobj)
 {
     Item* item_data = GET_ITEM(gobj);
@@ -1862,6 +2072,11 @@ static void Item_8026A294(HSD_GObj* gobj)
 }
 
 /// Item Think - Process Dynamic Bones
+/**
+ * @brief Handles operations for Item_8026A788
+ * @param gobj
+ * @return static void
+ */
 static void Item_8026A788(HSD_GObj* gobj)
 {
     Item* item_data = gobj->user_data;
@@ -1878,6 +2093,11 @@ static void Item_8026A788(HSD_GObj* gobj)
 }
 
 /// Item Think - Spawn
+/**
+ * @brief Handles operations for Item_8026A810
+ * @param gobj
+ * @return static void
+ */
 static void Item_8026A810(HSD_GObj* gobj)
 {
     Item* temp_item = GET_ITEM(gobj);
@@ -1887,6 +2107,11 @@ static void Item_8026A810(HSD_GObj* gobj)
     }
 }
 
+/**
+ * @brief Handles operations for Item_8026A848
+ * @param gobj
+ * @param fighter_gobj
+ */
 void Item_8026A848(HSD_GObj* gobj, HSD_GObj* fighter_gobj)
 {
     Item* temp_item = GET_ITEM(gobj);
@@ -1980,6 +2205,10 @@ static void func_8026A8EC_inline3(HSD_GObj* gobj)
     }
 }
 
+/**
+ * @brief Destroys and frees operations for Item_8026A8EC
+ * @param gobj
+ */
 void Item_8026A8EC(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
@@ -2023,6 +2252,12 @@ void Item_8026A8EC(Item_GObj* gobj)
 }
 
 /// Pick up item
+/**
+ * @brief Handles operations for Item_8026AB54
+ * @param gobj
+ * @param owner_gobj
+ * @param part
+ */
 void Item_8026AB54(Item_GObj* gobj, HSD_GObj* owner_gobj, Fighter_Part part)
 {
     Item* item_data = GET_ITEM(gobj);
@@ -2034,6 +2269,12 @@ void Item_8026AB54(Item_GObj* gobj, HSD_GObj* owner_gobj, Fighter_Part part)
     Item_8026B074(item_data);
 }
 
+/**
+ * @brief Drops an item from being held operations for Item_8026ABD8
+ * @param gobj
+ * @param pos
+ * @param arg2
+ */
 void Item_8026ABD8(Item_GObj* gobj, Vec3* pos, f32 arg2)
 {
     Item* item_data = GET_ITEM(gobj);
@@ -2051,6 +2292,13 @@ void Item_8026ABD8(Item_GObj* gobj, Vec3* pos, f32 arg2)
     }
 }
 
+/**
+ * @brief Handles operations for Item_8026AC74
+ * @param gobj
+ * @param arg1
+ * @param arg2
+ * @param arg3
+ */
 void Item_8026AC74(HSD_GObj* gobj, Vec3* arg1, Vec3* arg2, f32 arg3)
 {
     Item* item_data = GetItemData(gobj);
@@ -2066,6 +2314,14 @@ void Item_8026AC74(HSD_GObj* gobj, Vec3* arg1, Vec3* arg2, f32 arg3)
     }
 }
 
+/**
+ * @brief Throws a held item operations for Item_8026AD20
+ * @param gobj
+ * @param arg1
+ * @param arg2
+ * @param arg3
+ * @param arg4
+ */
 void Item_8026AD20(HSD_GObj* gobj, Vec3* arg1, Vec3* arg2, f32 arg3, bool arg4)
 {
     // What is arg4 used for? Was looking at ftCo_ItemThrow and it seems to
@@ -2079,6 +2335,10 @@ void Item_8026AD20(HSD_GObj* gobj, Vec3* arg1, Vec3* arg2, f32 arg3, bool arg4)
     it_802754D4(gobj);
 }
 
+/**
+ * @brief Handles operations for Item_8026ADC0
+ * @param gobj
+ */
 void Item_8026ADC0(HSD_GObj* gobj)
 {
     Item* item_data = GET_ITEM(gobj);
@@ -2088,6 +2348,10 @@ void Item_8026ADC0(HSD_GObj* gobj)
     }
 }
 
+/**
+ * @brief Destroys and frees operations for Item_OnUserDataRemove
+ * @param user_data
+ */
 void Item_OnUserDataRemove(void* user_data)
 {
     Item* item_data = (Item*) user_data;
@@ -2100,6 +2364,10 @@ void Item_OnUserDataRemove(void* user_data)
     HSD_ObjFree(&item_alloc_data, item_data);
 }
 
+/**
+ * @brief Handles operations for Item_8026AE60
+ * @return u32
+ */
 u32 Item_8026AE60(void)
 {
     u32 result = it_804D6D14++;
@@ -2111,6 +2379,13 @@ u32 Item_8026AE60(void)
     return result;
 }
 
+/**
+ * @brief Handles operations for Item_8026AE84
+ * @param item_data
+ * @param sfx
+ * @param pan
+ * @param volume
+ */
 void Item_8026AE84(Item* item_data, enum_t sfx, u8 pan, u8 volume)
 {
     if (sfx != 540000) {
@@ -2123,6 +2398,13 @@ void Item_8026AE84(Item* item_data, enum_t sfx, u8 pan, u8 volume)
     }
 }
 
+/**
+ * @brief Handles operations for Item_8026AF0C
+ * @param item_data
+ * @param sfx
+ * @param pan
+ * @param volume
+ */
 void Item_8026AF0C(Item* item_data, enum_t sfx, u8 pan, u8 volume)
 {
     if (sfx != 540000) {
@@ -2138,6 +2420,13 @@ void Item_8026AF0C(Item* item_data, enum_t sfx, u8 pan, u8 volume)
     }
 }
 
+/**
+ * @brief Handles operations for Item_8026AFA0
+ * @param item_data
+ * @param sfx
+ * @param pan
+ * @param volume
+ */
 void Item_8026AFA0(Item* item_data, enum_t sfx, u8 pan, u8 volume)
 {
     if (sfx != 540000) {
@@ -2153,6 +2442,10 @@ void Item_8026AFA0(Item* item_data, enum_t sfx, u8 pan, u8 volume)
     }
 }
 
+/**
+ * @brief Handles operations for Item_8026B034
+ * @param item_data
+ */
 void Item_8026B034(Item* item_data)
 {
     if (item_data->sfx_unk1 != SFX_NONE) {
@@ -2162,6 +2455,10 @@ void Item_8026B034(Item* item_data)
     item_data->sfx_unk1 = SFX_NONE;
 }
 
+/**
+ * @brief Handles operations for Item_8026B074
+ * @param item_data
+ */
 void Item_8026B074(Item* item_data)
 {
     if (item_data->sfx_unk2 != SFX_NONE) {
@@ -2172,6 +2469,11 @@ void Item_8026B074(Item* item_data)
 }
 
 /// Stop All Item SFX
+/**
+ * @brief Handles operations for Item_8026B0B4
+ * @param gobj
+ * @return static void
+ */
 static void Item_8026B0B4(HSD_GObj* gobj)
 {
     Item* item_data = GET_ITEM(gobj);
@@ -2216,6 +2518,11 @@ static void Item_8026B0B4(HSD_GObj* gobj)
 }
 
 /// Check if item is grabbable
+/**
+ * @brief Handles operations for Item_IsGrabbable
+ * @param gobj
+ * @return bool
+ */
 bool Item_IsGrabbable(Item_GObj* gobj)
 {
     Item* temp_item;
