@@ -60,7 +60,8 @@
 - ❌ ftGameWatch/ ftGanon/ ftEmblem/ ftMasterHand/ ftCrazyHand/
 - ❌ ftZakoBoy/ ftZakoGirl/ ftSandbag/
 
-### src/melee/it/ (Items) — ❌ Not Started
+### src/melee/it/ (Items)
+- ✅ it/itcoll.c — Item collision, clanking, damage logging, and ECB physics
 ### src/melee/gr/ (Stages) — ❌ Not Started
 ### src/melee/pl/ (Player/Input) — ❌ Not Started
 ### src/melee/cm/ (Camera) — ❌ Not Started
@@ -106,7 +107,7 @@
 - ✅ sysdolphin/baselib/random.c — Linear congruential generator (LCG)
 
 ## Phase 3: Items (src/melee/it/)
-- ❌ it/types.h — Item struct and common data
+- ✅ it/types.h — Item struct and common data
 - ✅ it/item.c — Core item lifecycle and logic
 - ❌ it/itcoll.c — Item entity collision
 - ✅ it/itgroundcoll.c — Item environmental collision (map/ground)
