@@ -1,3 +1,9 @@
+/**
+ * @file controller.h
+ * @brief GameCube Controller Input Processing
+ * @details Handles polling of raw PAD status, deadzone clamping, analog stick scaling, queue processing, and button event tracking (presses, releases, holds).
+ */
+
 #ifndef _controller_h_
 #define _controller_h_
 
@@ -108,26 +114,84 @@ extern HSD_PadStatus HSD_PadMasterStatus[4];
 extern HSD_PadStatus HSD_PadGameStatus[4];
 extern HSD_PadStatus HSD_PadCopyStatus[4];
 
+/**
+ * @brief Retrieves the normalized Main Stick Y axis value for a given port
+ * @param slot The controller port index (0-3)
+ * @return Normalized Y value between -1.0 and 1.0
+ */
 static inline float HSD_PadGetNmlStickY(u8 slot)
 {
     return HSD_PadCopyStatus[slot].nml_stickY;
 }
 
+/**
+ * @brief Retrieves the normalized C-Stick Y axis value for a given port
+ * @param slot The controller port index (0-3)
+ * @return Normalized Y value between -1.0 and 1.0
+ */
 static inline float HSD_PadGetNmlSubStickY(u8 slot)
 {
     return HSD_PadCopyStatus[slot].nml_subStickY;
 }
 
-void HSD_PadFlushQueue(HSD_FlushType);
+/**
+ * @brief Flushes the controller input queue according to the specified flush type
+ * @param ftype The flush strategy to employ
+ */
+void HSD_PadFlushQueue(HSD_FlushType ftype);
+
+/**
+ * @brief Gets the number of unprocessed elements currently in the raw controller input queue
+ * @return The number of items in the queue
+ */
 u8 HSD_PadGetRawQueueCount(void);
+
+/**
+ * @brief Checks if the hardware reset switch is currently engaged
+ * @return Non-zero if pressed, zero otherwise
+ */
 s32 HSD_PadGetResetSwitch(void);
-void HSD_PadRenewRawStatus(bool);
+
+/**
+ * @brief Polls physical GameCube controllers and pushes the status into the raw queue
+ * @param err_check If true, requires at least one port to return successfully
+ */
+void HSD_PadRenewRawStatus(bool err_check);
+
+/**
+ * @brief Reads from the raw input queue, processes deadzones and repeats, and updates Master status
+ */
 void HSD_PadRenewMasterStatus(void);
+
+/**
+ * @brief Copies the processed inputs from Master status into the Copy status struct
+ */
 void HSD_PadRenewCopyStatus(void);
+
+/**
+ * @brief Copies the processed inputs from Master status into the Game status struct
+ */
 void HSD_PadRenewGameStatus(void);
+
+/**
+ * @brief Fully renews controller state by calling raw, master, copy, and game updates sequentially
+ */
 void HSD_PadRenewStatus(void);
+
+/**
+ * @brief Resets and recalibrates all physical controllers, clears queues, and halts rumble
+ */
 void HSD_PadReset(void);
-void HSD_PadInit(u8, HSD_PadData*, u16, HSD_PadRumbleListData*);
+
+/**
+ * @brief Initializes the HSD pad library and underlying GameCube PAD subsystem
+ * @param qnum Number of items the queue can hold
+ * @param queue Pointer to the allocated queue buffer
+ * @param nb_list Max number of rumble events
+ * @param listdatap Pointer to allocated rumble event buffer
+ */
+void HSD_PadInit(u8 qnum, HSD_PadData* queue, u16 nb_list, HSD_PadRumbleListData* listdatap);
+
 extern PadLibData HSD_PadLibData;
 
 #endif

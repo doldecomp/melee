@@ -1,3 +1,9 @@
+/**
+ * @file controller.c
+ * @brief GameCube Controller Input Processing
+ * @details Handles polling of raw PAD status, deadzone clamping, analog stick scaling, queue processing, and button event tracking (presses, releases, holds).
+ */
+
 #include "controller.h"
 
 #include <math.h>
@@ -18,6 +24,10 @@ HSD_PadStatus HSD_PadGameStatus[4];
 const u32 pad_bit[4] = { PAD_CHAN0_BIT, PAD_CHAN1_BIT, PAD_CHAN2_BIT,
                          PAD_CHAN3_BIT };
 
+/**
+ * @brief Gets the number of unprocessed elements currently in the raw controller input queue
+ * @return The number of items in the queue
+ */
 u8 HSD_PadGetRawQueueCount(void)
 {
     u8 queue_count;
@@ -32,6 +42,10 @@ u8 HSD_PadGetRawQueueCount(void)
     return queue_count;
 }
 
+/**
+ * @brief Checks if the hardware reset switch is currently engaged
+ * @return Non-zero if pressed, zero otherwise
+ */
 s32 HSD_PadGetResetSwitch(void)
 {
     PadLibData* p = &HSD_PadLibData;
@@ -39,11 +53,22 @@ s32 HSD_PadGetResetSwitch(void)
     return (p->reset_switch != 0) ? true : false;
 }
 
+/**
+ * @brief Helper function to wrap a queue index counter
+ * @param qnum Total capacity of the queue
+ * @param qptr Pointer to the current index
+ */
 static void HSD_PadRawQueueShift(u8 qnum, u8* qptr)
 {
     *qptr = (*qptr + 1) % qnum;
 }
 
+/**
+ * @brief Merges button presses from two raw pad status arrays using a bitwise OR
+ * @param src1 First source array of PADStatus (4 ports)
+ * @param src2 Second source array of PADStatus (4 ports)
+ * @param dst Destination array to write the merged bitmasks
+ */
 static void HSD_PadRawMerge(PADStatus* src1, PADStatus* src2, PADStatus* dst)
 {
     int i;
@@ -52,6 +77,10 @@ static void HSD_PadRawMerge(PADStatus* src1, PADStatus* src2, PADStatus* dst)
     }
 }
 
+/**
+ * @brief Polls physical GameCube controllers and pushes the status into the raw queue
+ * @param err_check If true, requires at least one port to return successfully
+ */
 void HSD_PadRenewRawStatus(bool err_check)
 {
     int i;
@@ -59,13 +88,13 @@ void HSD_PadRenewRawStatus(bool err_check)
     PadLibData* p = &HSD_PadLibData;
     HSD_PadData* qwrite;
     PADStatus* qread;
-    HSD_PadData now;
+    HSD_PadData current_pad_data;
 
     HSD_PadRumbleInterpret();
-    PADRead(now.stat);
+    PADRead(current_pad_data.stat);
     if (err_check) {
         for (i = 0; i < 4; i++) {
-            if (!now.stat[i].err) {
+            if (!current_pad_data.stat[i].err) {
                 break;
             }
         }
@@ -83,7 +112,7 @@ void HSD_PadRenewRawStatus(bool err_check)
             if (p->qnum != 1) {
                 HSD_PadRawMerge(qwrite->stat, qread, qread);
             } else {
-                HSD_PadRawMerge(now.stat, qread, now.stat);
+                HSD_PadRawMerge(current_pad_data.stat, qread, current_pad_data.stat);
             }
             break;
         case 1:
@@ -96,13 +125,13 @@ void HSD_PadRenewRawStatus(bool err_check)
         p->qcount += 1;
     }
 
-    *qwrite = now;
+    *qwrite = current_pad_data;
     HSD_PadRawQueueShift(p->qnum, &p->qwrite);
 
 skip:
     mask = 0;
     for (i = 0; i < 4; i++) {
-        if (now.stat[i].err == -1) {
+        if (current_pad_data.stat[i].err == -1) {
             mask |= pad_bit[i];
         }
     }
@@ -119,6 +148,10 @@ skip:
     }
 }
 
+/**
+ * @brief Flushes the controller input queue according to the specified flush type
+ * @param ftype The flush strategy to employ
+ */
 void HSD_PadFlushQueue(HSD_FlushType ftype)
 {
     PadLibData* p;
@@ -153,6 +186,13 @@ void HSD_PadFlushQueue(HSD_FlushType ftype)
     OSRestoreInterrupts(intr);
 }
 
+/**
+ * @brief Checks if an analog single-axis 1D value falls within the deadzone or exceeds max clamping
+ * @param val Pointer to the analog value
+ * @param shift Boolean flag to shift value closer to zero by the deadzone amount
+ * @param min Deadzone threshold below which value is zeroes
+ * @param max Max magnitude cap
+ */
 static void HSD_PadClampCheck1(u8* val, u8 shift, u8 min, u8 max)
 {
     if (*val < min) {
@@ -168,29 +208,41 @@ static void HSD_PadClampCheck1(u8* val, u8 shift, u8 min, u8 max)
     *val = *val - min;
 }
 
+/**
+ * @brief Checks if a 2D analog stick vector falls within the deadzone or exceeds max clamping radius
+ * @param x Pointer to X-axis value
+ * @param y Pointer to Y-axis value
+ * @param shift Boolean flag to subtract deadzone minimum from radius magnitude
+ * @param min Deadzone radius threshold
+ * @param max Max radius limit
+ */
 static void HSD_PadClampCheck3(s8* x, s8* y, u8 shift, s8 min, s8 max)
 {
-    f32 r;
+    f32 radius;
 
-    r = sqrtf(((f32) *x * (f32) *x) + ((f32) *y * (f32) *y));
+    radius = sqrtf(((f32) *x * (f32) *x) + ((f32) *y * (f32) *y));
 
-    if (r < min) {
+    if (radius < min) {
         *y = 0;
         *x = 0;
         return;
     }
-    if (r > max) {
-        *x = ((f32) *x * (f32) max) / r;
-        *y = ((f32) *y * (f32) max) / r;
-        r = sqrtf(((f32) *x * (f32) *x) + ((f32) *y * (f32) *y));
+    if (radius > max) {
+        *x = ((f32) *x * (f32) max) / radius;
+        *y = ((f32) *y * (f32) max) / radius;
+        radius = sqrtf(((f32) *x * (f32) *x) + ((f32) *y * (f32) *y));
     }
 
-    if (shift == 1 && r > 1.000000013351432e-10f) {
-        *x = (f32) *x - (((f32) *x * (f32) min) / r);
-        *y = (f32) *y - (((f32) *y * (f32) min) / r);
+    if (shift == 1 && radius > 1.000000013351432e-10f) {
+        *x = (f32) *x - (((f32) *x * (f32) min) / radius);
+        *y = (f32) *y - (((f32) *y * (f32) min) / radius);
     }
 }
 
+/**
+ * @brief Applies all deadzone and magnitude checks on sticks and triggers
+ * @param mp Pointer to the HSD_PadStatus to process
+ */
 static void HSD_PadClamp(HSD_PadStatus* mp)
 {
     PadLibData* p = &HSD_PadLibData;
@@ -215,11 +267,17 @@ static void HSD_PadClamp(HSD_PadStatus* mp)
                        p->clamp_analogABMin, p->clamp_analogABMax);
 }
 
+/**
+ * @brief Squares a float
+ */
 static inline f32 sq(f32 x)
 {
     return x * x;
 }
 
+/**
+ * @brief Returns the squared distance from the origin for a 2D float vector
+ */
 static inline f32 vec2DSqDist(f32 x, f32 y)
 {
     f32 ret;
@@ -227,50 +285,67 @@ static inline f32 vec2DSqDist(f32 x, f32 y)
     return ret;
 }
 
+/**
+ * @brief Returns the length/magnitude of a 2D byte vector
+ */
 static inline f32 vec2Dlen(s8 x, s8 y)
 {
     return sqrtf(vec2DSqDist(x, y));
 }
 
+/**
+ * @brief Emulates digital direction inputs depending on the angle of the analog stick
+ * @param mp HSD_PadStatus pointer to mutate buttons on
+ * @param x Stick X
+ * @param y Stick Y
+ * @param up Up bitflag to assign
+ * @param down Down bitflag to assign
+ * @param left Left bitflag to assign
+ * @param right Right bitflag to assign
+ */
 static void HSD_PadADConvertCheck1(HSD_PadStatus* mp, s8 x, s8 y, u32 up,
                                    u32 down, u32 left, u32 right)
 {
     PadLibData* p = &HSD_PadLibData;
-    f32 r;
-    f32 a;
-    f32 ha;
+    f32 radius;
+    f32 angle;
+    f32 half_angle;
 
-    r = sq(x);
-    r = vec2Dlen(x, y);
+    radius = sq(x);
+    radius = vec2Dlen(x, y);
 
     if (fabs(x) == 0.0f) {
-        a = y >= 0 ? 1.5707963267948966 : -1.5707963267948966;
+        angle = y >= 0 ? 1.5707963267948966 : -1.5707963267948966;
     } else {
-        a = (f32) atan2f(y, x);
+        angle = (f32) atan2f(y, x);
     }
 
-    ha = 0.5F * p->adc_angle;
-    if (r < p->adc_th) {
+    half_angle = 0.5F * p->adc_angle;
+    if (radius < p->adc_th) {
         return;
     }
 
-    if (a < -2.356194490192345 + ha) {
+    if (angle < -2.356194490192345 + half_angle) {
         mp->button |= left;
     }
-    if (a >= -2.356194490192345 - ha && a <= -0.7853981633974483 + ha) {
+    if (angle >= -2.356194490192345 - half_angle && angle <= -0.7853981633974483 + half_angle) {
         mp->button |= down;
     }
-    if (a > -0.7853981633974483 - ha && a < 0.7853981633974483 + ha) {
+    if (angle > -0.7853981633974483 - half_angle && angle < 0.7853981633974483 + half_angle) {
         mp->button |= right;
     }
-    if (a >= 0.7853981633974483 - ha && a <= 2.356194490192345 + ha) {
+    if (angle >= 0.7853981633974483 - half_angle && angle <= 2.356194490192345 + half_angle) {
         mp->button |= up;
     }
-    if (a > 2.356194490192345 - ha) {
+    if (angle > 2.356194490192345 - half_angle) {
         mp->button |= left;
     }
 }
 
+/**
+ * @brief Processes sticks to apply analog-to-digital button conversions
+ * @param mp Pointer to the HSD_PadStatus to process
+ */
 static void HSD_PadADConvert(HSD_PadStatus* mp)
 {
     PadLibData* p = &HSD_PadLibData;
@@ -287,6 +362,10 @@ static void HSD_PadADConvert(HSD_PadStatus* mp)
     }
 }
 
+/**
+ * @brief Normalizes the raw byte stick coordinates into floats by dividing them against scaling factors
+ * @param mp Pointer to the HSD_PadStatus to process
+ */
 static void HSD_PadScale(HSD_PadStatus* mp)
 {
     PadLibData* p = &HSD_PadLibData;
@@ -301,51 +380,58 @@ static void HSD_PadScale(HSD_PadStatus* mp)
     mp->nml_analogB = (f32) mp->analogB / (f32) p->scale_analogAB;
 }
 
-static void HSD_PadCrossDir(HSD_PadStatus* mp)
+/**
+ * @brief Resolves and filters mutually exclusive D-Pad directions
+ * @param pad_status Pointer to the HSD_PadStatus to process
+ */
+static void HSD_PadCrossDir(HSD_PadStatus* pad_status)
 {
     switch (HSD_PadLibData.cross_dir) {
     case 0:
         break;
 
     case 1:
-        if ((mp->button & (PAD_BUTTON_DOWN | PAD_BUTTON_UP)) == 0) {
+        if ((pad_status->button & (PAD_BUTTON_DOWN | PAD_BUTTON_UP)) == 0) {
             return;
         }
-        mp->button = mp->button & ~(PAD_BUTTON_LEFT | PAD_BUTTON_RIGHT);
+        pad_status->button = pad_status->button & ~(PAD_BUTTON_LEFT | PAD_BUTTON_RIGHT);
         return;
 
     case 2:
-        if ((mp->button & (PAD_BUTTON_LEFT | PAD_BUTTON_RIGHT)) == 0) {
+        if ((pad_status->button & (PAD_BUTTON_LEFT | PAD_BUTTON_RIGHT)) == 0) {
             return;
         }
-        mp->button = mp->button & ~(PAD_BUTTON_DOWN | PAD_BUTTON_UP);
+        pad_status->button = pad_status->button & ~(PAD_BUTTON_DOWN | PAD_BUTTON_UP);
         return;
 
     case 3:
-        if ((mp->button & (PAD_BUTTON_DOWN | PAD_BUTTON_UP)) != 0) {
-            if ((mp->button & (PAD_BUTTON_LEFT | PAD_BUTTON_RIGHT)) != 0) {
-                if (mp->cross_dir == 1) {
-                    mp->button =
-                        mp->button & ~(PAD_BUTTON_LEFT | PAD_BUTTON_RIGHT);
+        if ((pad_status->button & (PAD_BUTTON_DOWN | PAD_BUTTON_UP)) != 0) {
+            if ((pad_status->button & (PAD_BUTTON_LEFT | PAD_BUTTON_RIGHT)) != 0) {
+                if (pad_status->cross_dir == 1) {
+                    pad_status->button =
+                        pad_status->button & ~(PAD_BUTTON_LEFT | PAD_BUTTON_RIGHT);
                     return;
                 }
-                mp->button = mp->button & ~(PAD_BUTTON_DOWN | PAD_BUTTON_UP);
+                pad_status->button = pad_status->button & ~(PAD_BUTTON_DOWN | PAD_BUTTON_UP);
                 return;
             } else {
-                mp->cross_dir = 1;
+                pad_status->cross_dir = 1;
                 return;
             }
         }
-        if ((mp->button & (PAD_BUTTON_LEFT | PAD_BUTTON_RIGHT)) != 0) {
-            mp->cross_dir = 2;
+        if ((pad_status->button & (PAD_BUTTON_LEFT | PAD_BUTTON_RIGHT)) != 0) {
+            pad_status->cross_dir = 2;
             return;
         }
     }
 }
 
+/**
+ * @brief Reads from the raw input queue, processes deadzones and repeats, and updates Master status
+ */
 void HSD_PadRenewMasterStatus(void)
 {
-    int iVar1;
+    int remaining_repeat_count;
     PadLibData* p;
     HSD_PadStatus* mp;
     PADStatus* qread;
@@ -405,9 +491,9 @@ void HSD_PadRenewMasterStatus(void)
                 mp->repeat = mp->trigger;
                 mp->repeat_count = p->repeat_start;
             } else {
-                iVar1 = mp->repeat_count - 1;
-                mp->repeat_count = iVar1;
-                if (iVar1 != 0) {
+                remaining_repeat_count = mp->repeat_count - 1;
+                mp->repeat_count = remaining_repeat_count;
+                if (remaining_repeat_count != 0) {
                     mp->repeat = 0;
                 } else {
                     mp->repeat = mp->button;
@@ -419,6 +505,11 @@ void HSD_PadRenewMasterStatus(void)
     OSRestoreInterrupts(intr);
 }
 
+/**
+ * @brief Helper function to copy processed inputs natively
+ * @param dst Destination HSD_PadStatus
+ * @param src Source HSD_PadStatus
+ */
 static inline void HSD_PadCopyStatusFields(HSD_PadStatus* dst,
                                            HSD_PadStatus* src)
 {
@@ -441,6 +532,10 @@ static inline void HSD_PadCopyStatusFields(HSD_PadStatus* dst,
     dst->nml_analogB = src->nml_analogB;
 }
 
+/**
+ * @brief Helper function to clear processed inputs
+ * @param dst Destination HSD_PadStatus
+ */
 static inline void HSD_PadClearStatusFields(HSD_PadStatus* dst)
 {
     dst->button = 0;
@@ -462,9 +557,12 @@ static inline void HSD_PadClearStatusFields(HSD_PadStatus* dst)
     dst->nml_analogL = 0.0;
 }
 
+/**
+ * @brief Copies the processed inputs from Master status into the Copy status struct
+ */
 void HSD_PadRenewCopyStatus(void)
 {
-    int iVar1;
+    int remaining_repeat_count;
     HSD_PadStatus* mp;
     HSD_PadStatus* cp;
     PadLibData* p;
@@ -489,9 +587,9 @@ void HSD_PadRenewCopyStatus(void)
             cp->repeat = cp->trigger;
             cp->repeat_count = p->repeat_start;
         } else {
-            iVar1 = cp->repeat_count - 1;
-            cp->repeat_count = iVar1;
-            if (iVar1 != 0) {
+            remaining_repeat_count = cp->repeat_count - 1;
+            cp->repeat_count = remaining_repeat_count;
+            if (remaining_repeat_count != 0) {
                 cp->repeat = 0;
             } else {
                 cp->repeat = cp->button;
@@ -501,9 +599,12 @@ void HSD_PadRenewCopyStatus(void)
     }
 }
 
+/**
+ * @brief Copies the processed inputs from Master status into the Game status struct
+ */
 void HSD_PadRenewGameStatus(void)
 {
-    int iVar1;
+    int remaining_repeat_count;
     HSD_PadStatus* mp;
     HSD_PadStatus* gs;
     PadLibData* p;
@@ -528,9 +629,9 @@ void HSD_PadRenewGameStatus(void)
             gs->repeat = gs->trigger;
             gs->repeat_count = p->repeat_start;
         } else {
-            iVar1 = gs->repeat_count - 1;
-            gs->repeat_count = iVar1;
-            if (iVar1 != 0) {
+            remaining_repeat_count = gs->repeat_count - 1;
+            gs->repeat_count = remaining_repeat_count;
+            if (remaining_repeat_count != 0) {
                 gs->repeat = 0;
             } else {
                 gs->repeat = gs->button;
@@ -541,6 +642,9 @@ void HSD_PadRenewGameStatus(void)
     return;
 }
 
+/**
+ * @brief Fully renews controller state by calling raw, master, copy, and game updates sequentially
+ */
 void HSD_PadRenewStatus(void)
 {
     HSD_PadRenewRawStatus(0);
@@ -549,6 +653,9 @@ void HSD_PadRenewStatus(void)
     HSD_PadRenewGameStatus();
 }
 
+/**
+ * @brief Resets and recalibrates all physical controllers, clears queues, and halts rumble
+ */
 void HSD_PadReset(void)
 {
     PadLibData* p;
@@ -571,6 +678,13 @@ void HSD_PadReset(void)
     OSRestoreInterrupts(intr);
 }
 
+/**
+ * @brief Initializes the HSD pad library and underlying GameCube PAD subsystem
+ * @param qnum Number of items the queue can hold
+ * @param queue Pointer to the allocated queue buffer
+ * @param nb_list Max number of rumble events
+ * @param listdatap Pointer to allocated rumble event buffer
+ */
 void HSD_PadInit(u8 qnum, HSD_PadData* queue, u16 nb_list,
                  HSD_PadRumbleListData* listdatap)
 {
