@@ -112,6 +112,10 @@
               inherit (pkgs.pkgsCross.ppc-embedded) newlib;
             };
 
+            melee-dat = pkgs.callPackage ./.nix/melee-dat.nix {
+              inherit melee-dwarf;
+            };
+
             melee-docs =
               (pkgs.callPackage ./.nix/melee-docs.nix {
                 inherit mwcc;
@@ -166,6 +170,7 @@
           melee-dtk
           melee-cmake
           melee-dwarf
+          melee-dat
           melee-docs
           m2c
           ;

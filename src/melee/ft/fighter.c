@@ -134,7 +134,7 @@ struct Fighter_804D6540_t** Fighter_804D6540 = NULL;
 FighterPartsTable** ftPartsTable = NULL;
 float* Fighter_804D6548 = NULL;
 float (*Fighter_804D654C)[5] = NULL;
-int** Fighter_804D6550 = NULL;
+ftCo_ItemThrowAttrs* Fighter_804D6550 = NULL;
 ftCommonData* p_ftCommonData;
 
 void Fighter_800679B0(void)
@@ -180,7 +180,7 @@ void Fighter_FirstInitialize_80067A84(void)
 /// shares, copied into the globals of the same types.
 typedef struct ftLoadCommonData {
     /* +00 */ ftCommonData* common;
-    /* +04 */ int** x4;
+    /* +04 */ ftCo_ItemThrowAttrs* item_throw;
     /* +08 */ float (*x8)[5];
     /* +0C */ float* xC;
     /* +10 */ FighterPartsTable** parts_table;
@@ -215,7 +215,7 @@ void Fighter_LoadCommonData(void)
     //   (&Fighter_804D64FC)[23-1-i] = pData[i];
     // loop unrolling doesn't work (only up to 8 elements)
     p_ftCommonData = data->common; // p_ftCommonData
-    Fighter_804D6550 = data->x4;
+    Fighter_804D6550 = data->item_throw;
     Fighter_804D654C = data->x8;
     Fighter_804D6548 = data->xC;
     ftPartsTable = data->parts_table;

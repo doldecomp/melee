@@ -186,6 +186,13 @@ typedef struct Fighter_804D6540_x0_t {
     u8 x2;
     u8 x3;
 } Fighter_804D6540_x0_t;
+/// Item throw parameters, one per item throw motion state.
+typedef struct ftCo_ItemThrowAttrs {
+    float velocity_mul;
+    float angle;
+    float x8;
+} ftCo_ItemThrowAttrs;
+
 typedef struct Fighter_804D6540_t {
     Fighter_804D6540_x0_t* x0;
     int x4;
@@ -194,7 +201,7 @@ extern Fighter_804D6540_t** Fighter_804D6540;
 /* 4D6544 */ extern FighterPartsTable** ftPartsTable;
 /* 4D6548 */ extern float* Fighter_804D6548;
 /* 4D654C */ extern float (*Fighter_804D654C)[5];
-/* 4D6550 */ extern int** Fighter_804D6550;
+/* 4D6550 */ extern ftCo_ItemThrowAttrs* Fighter_804D6550;
 /* 4D6554 */ extern ftCommonData* p_ftCommonData;
 
 #endif

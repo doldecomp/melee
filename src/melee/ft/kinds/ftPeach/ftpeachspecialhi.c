@@ -7,8 +7,6 @@
 #include <melee/it/forward.h>
 #include <sysdolphin/baselib/forward.h>
 
-#include <math.h>
-
 #include "ftpeach.h"
 #include "types.h"
 #include <dolphin/mtx.h>

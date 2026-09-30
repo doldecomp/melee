@@ -471,8 +471,8 @@ void ftPr_Init_8013C360(HSD_GObj* gobj)
         if (!joints[fp->costume_id]) {
             UnkCostumeStruct* costume_list =
                 CostumeListsForeachCharacter[fp->kind].costume_list;
-            joints[fp->costume_id] = HSD_ArchiveGetPublicAddress(
-                costume_list[fp->costume_id].x14_archive,
+            joints[fp->costume_id] = HSD_ArchiveGetPublicAs(
+                HSD_Joint, costume_list[fp->costume_id].x14_archive,
                 ftPr_Init_803D05B4[fp->costume_id]);
         }
 

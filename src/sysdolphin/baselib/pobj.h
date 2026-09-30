@@ -5,6 +5,8 @@
 
 #include <sysdolphin/baselib/forward.h> // IWYU pragma: export
 
+#include <dat_macros.h>
+
 #include <dolphin/gx/GXEnum.h>
 #include <dolphin/mtx.h>
 #include <sysdolphin/baselib/aobj.h>
@@ -37,9 +39,10 @@ struct HSD_PObjDesc {
     u16 n_display;
     u8* display;
     union HSD_PObjDesc_u {
-        HSD_Joint* joint;
-        HSD_ShapeSetDesc* shape_set;
-        HSD_EnvelopeDesc** envelope_p;
+        HSD_Joint* joint DAT_IF((flags & 0x3000) == POBJ_SKIN);
+        HSD_ShapeSetDesc* shape_set DAT_IF((flags & 0x3000) == POBJ_SHAPEANIM);
+        HSD_EnvelopeDesc** envelope_p DAT_IF((flags & 0x3000) ==
+                                             POBJ_ENVELOPE);
     } u;
 };
 

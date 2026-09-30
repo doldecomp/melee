@@ -4,8 +4,6 @@
 
 #include <melee/ft/forward.h>
 
-#include <math.h>
-
 #include "ftgamewatch.h"
 #include "types.h"
 #include <dolphin/mtx.h>

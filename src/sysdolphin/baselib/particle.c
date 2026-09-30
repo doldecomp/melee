@@ -24,7 +24,6 @@ typedef struct {
 #include <math.h>
 #include <string.h>
 
-#include "cobj.h"
 #include "gobjobject.h"
 #include "mtx.h"
 #include "psappsrt.h"
@@ -162,8 +161,7 @@ void psInitDataBankLoad(int bank, const int* cmdBank, const int* texBank,
     }
 }
 
-void psInitDataBankLocate(HSD_Archive* cmdBank, HSD_Archive* texBank,
-                          int* formBank)
+void psInitDataBankLocate(int* cmdBank, int* texBank, int* formBank)
 {
     s32 num;
     s32* ptr;
@@ -203,7 +201,7 @@ version40:
     base = (s32*) cmdBank + 3 - num;
     ptr = (s32*) cmdBank;
     j = 0;
-    while (j < (s32) cmdBank->header.nb_reloc) {
+    while (j < (s32) cmdBank[2]) {
         if (ptr[3] != 0) {
             ptr[3] += (s32) cmdBank;
         }
@@ -333,8 +331,7 @@ void psInitDataBank(int bank, int* cmdBank, int* texBank, u32* ref,
                     int* formBank)
 {
     if (bank < 65) {
-        psInitDataBankLocate((HSD_Archive*) cmdBank, (HSD_Archive*) texBank,
-                             formBank);
+        psInitDataBankLocate(cmdBank, texBank, formBank);
         psInitDataBankLoad(bank, cmdBank, texBank, ref, formBank);
     }
 }

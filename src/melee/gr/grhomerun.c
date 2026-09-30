@@ -236,7 +236,7 @@ void grHomeRun_8021CB20(Ground_GObj* gobj)
                             0, 7);
     }
     HSD_SisLib_804D1124[1] =
-        HSD_ArchiveGetPublicAddress(archive->unk0, "SIS_GrHomerunData");
+        HSD_ArchiveGetPublicAs(u8*, archive->unk0, "SIS_GrHomerunData");
     HSD_ASSERT(418, INIT_ADD_PARTS_RANGE*2<Gr_Homerun_Parts_Max);
 
     for (i = 0; (float) i < INIT_ADD_PARTS_RANGE; i++) {

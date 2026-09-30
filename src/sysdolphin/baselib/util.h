@@ -3,6 +3,8 @@
 
 #include <Runtime/platform.h>
 
+#include <stdlib.h>
+
 #include <dolphin/gx.h>
 #include <dolphin/mtx.h>
 #include <sysdolphin/baselib/mtx.h>
@@ -36,7 +38,7 @@ static inline int vec_normalize_check(Vec3* src, Vec3* dst)
 
 static inline f32 atan2f_check(s8 y, s8 x)
 {
-    if (fabs(x) == 0.0) {
+    if (abs(x) == 0.0) {
         return y >= 0 ? 1.5707963267948966 : -1.5707963267948966;
     } else {
         return atan2f(y, x);

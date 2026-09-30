@@ -258,8 +258,8 @@ void grStadium_801D1290(Ground_GObj* gobj)
 
     grAnime_801C8138(gobj, gp->map_id, 0);
     grAnime_801C77FC(gobj, 0, 7);
-    gp->u.display.xD0 = HSD_ArchiveGetPublicAddress(
-        grDatFiles_801C6330(1)->unk0,
+    gp->u.display.xD0 = HSD_ArchiveGetPublicAs(
+        HSD_ImageDesc, grDatFiles_801C6330(1)->unk0,
         "GrdPStadiumBG_OVDummy_mat6962_GrdPStadiumDummy_0_image_desc");
     if (gp->u.display.xD0 == NULL) {
         OSReport("no such image desc!\n");
@@ -1190,7 +1190,7 @@ HSD_GObj* grStadium_801D2BEC(void)
     archive = grDatFiles_GetArchive();
     HSD_SisLib_803A611C(1, gobj, 9, 0xD, 0, 1, 0, 1);
     HSD_SisLib_804D1124[1] =
-        HSD_ArchiveGetPublicAddress(archive->unk0, "SIS_GrPStadiumData");
+        HSD_ArchiveGetPublicAs(u8*, archive->unk0, "SIS_GrPStadiumData");
     text->win_static_p =
         HSD_SisLib_803A5ACC(1, 0, 0.0F, 0.0F, 0.0F, 250.0F, 160.0F);
     text->win_dynamic_p = HSD_SisLib_803A6754(1, 0);

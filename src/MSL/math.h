@@ -12,9 +12,6 @@
 #define MSL_HI(x) *(int*) &x
 #define MSL_LO(x) *(1 + (int*) &x)
 
-#define M_PI 3.14159265358979323846
-#define M_PI_2 (M_PI / 2)
-
 enum FloatType {
     FP_NAN = 1,
     FP_INFINITE = 2,

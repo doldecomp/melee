@@ -24,9 +24,11 @@ static inline void checkFighter2244(HSD_GObj* gobj)
         fp->u.lk.x18 = NULL;
     }
 
+#ifdef MUST_MATCH
     if (gobj == NULL) {
         gobj == NULL;
     }
+#endif
 }
 
 #endif

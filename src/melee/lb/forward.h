@@ -22,6 +22,8 @@ typedef struct CollData CollData;
 typedef struct ColorOverlay ColorOverlay;
 typedef struct CommandInfo CommandInfo;
 typedef struct DynamicsDesc DynamicsDesc;
+typedef struct DynamicsTemplate DynamicsTemplate;
+typedef struct BoneDynamicsTemplate BoneDynamicsTemplate;
 typedef struct FigaTrack FigaTrack;
 typedef struct FigaTree FigaTree;
 typedef struct FighterHurtCapsule FighterHurtCapsule;

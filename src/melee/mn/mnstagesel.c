@@ -14,6 +14,7 @@
 #include <melee/lb/lbdvd.h>
 #include <melee/lb/lblanguage.h>
 #include <melee/lb/types.h>
+#include <sysdolphin/baselib/cobj.h> // IWYU pragma: keep
 #include <sysdolphin/baselib/controller.h>
 #include <sysdolphin/baselib/fog.h>
 #include <sysdolphin/baselib/gobj.h>
@@ -543,8 +544,9 @@ void mnStageSel_Scene_OnEnter(void* arg0)
         } else {
             mnStageSel_804D6C94 = lbArchive_LoadArchive("MnSlMap.dat");
         }
-        sss_data_table = HSD_ArchiveGetPublicAddress(mnStageSel_804D6C94,
-                                                     "MnSelectStageDataTable");
+        sss_data_table =
+            HSD_ArchiveGetPublicAs(MnSelectStageDataTable, mnStageSel_804D6C94,
+                                   "MnSelectStageDataTable");
         MenMain_cam = sss_data_table->cam;
         sss_models = &sss_data_table->models;
         mnStageSel_804D6CAF = 0;

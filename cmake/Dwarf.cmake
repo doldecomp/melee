@@ -6,6 +6,7 @@ include_guard(GLOBAL)
 # MWCC-specific code, and turns ASSERT_SIZE/ASSERT_OFFSET into static asserts
 target_compile_definitions(melee PRIVATE
     LINT
+    DAT_ANNOTATIONS
     VERSION_GALE01
     BUILD_VERSION=0
 )

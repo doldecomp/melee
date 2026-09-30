@@ -2,8 +2,6 @@
 
 #include <melee/it/forward.h>
 
-#include <math.h>
-
 #include "inlines.h"
 #include <melee/it/inlines.h>
 #include <melee/it/it_26B1.h>

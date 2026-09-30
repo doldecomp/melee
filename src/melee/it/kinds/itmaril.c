@@ -1,7 +1,5 @@
 #include "itmaril.h"
 
-#include <math.h>
-
 #include "ithinoarashi.h"
 #include <melee/ef/eflib.h>
 #include <melee/it/inlines.h>

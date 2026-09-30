@@ -4,7 +4,7 @@
 
 #include "aobj.h"
 #include "class.h"
-#include "cobj.h"
+#include "cobj.h" // IWYU pragma: keep
 #include "forward.h"
 #include "list.h"
 #include "object.h"

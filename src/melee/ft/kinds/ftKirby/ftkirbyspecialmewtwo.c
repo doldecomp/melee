@@ -3,7 +3,6 @@
 #include <melee/ft/forward.h>
 #include <melee/ft/kinds/ftMewtwo/forward.h>
 
-#include <math.h>
 #include <placeholder.h>
 #include <stddef.h>
 

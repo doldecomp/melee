@@ -4,6 +4,7 @@
 #include <Runtime/platform.h>
 
 /* 00CF74 */ s32 powi(s32, s32);
+/* 00CEE0 */
 /* 00D008 */ float lb_8000D008(float, float);
 /* 00D148 */ s32 lb_8000D148(float, float, float, float, float, float, float);
 
