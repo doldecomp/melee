@@ -85,9 +85,9 @@
 - ✅ sysdolphin/baselib/mobj.c — Material Object (MObj) textures and shaders
 - ✅ sysdolphin/baselib/pobj.c — Polygon Object (PObj) mesh and vertex data
 - ✅ sysdolphin/baselib/aobj.c — Animation Object (AObj) track interpolation
-- ❌ sysdolphin/baselib/tobj.c — Texture Object (TObj) texture and TEV setup
-- ❌ sysdolphin/baselib/lobj.c — Light Object (LObj) lighting system
-- ❌ sysdolphin/baselib/fobj.c — Frame Object (FObj) keyframe tracks
-- ❌ sysdolphin/baselib/displayfunc.c — Display dispatch and render passes
-- ❌ sysdolphin/baselib/controller.c — GameCube controller input polling
+- ✅ sysdolphin/baselib/tobj.c — Texture Object (TObj) texture and TEV setup
+- ✅ sysdolphin/baselib/lobj.c — Light Object (LObj) lighting system
+- ✅ sysdolphin/baselib/fobj.c — Frame Object (FObj) keyframe tracks
+- ✅ sysdolphin/baselib/displayfunc.c — Display dispatch and render passes
+- ✅ sysdolphin/baselib/controller.c — GameCube controller input polling
 - ❌ sysdolphin/baselib/gobj.c — Game Object (GObj) entity base class
