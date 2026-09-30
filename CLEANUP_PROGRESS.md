@@ -114,3 +114,4 @@
 - ✅ it/itspawn.c — Item spawning/drop mechanisms
 - ✅ it/itdraw.c — Item rendering routines
 - ✅ it/itmaplib.c — Item ECB environment collision queries
+- ✅ it/itmaterial.c — Item shader and material effects
