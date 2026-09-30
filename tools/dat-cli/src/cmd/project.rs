@@ -7,6 +7,7 @@ use melee_dat::{
     config::{gather_files, get_config},
     dwarf::{
         DieId, TypeGraph,
+        cache::TypesFile,
         canonical::Canonical,
         render::Renderer,
         roots::{RootName, roots},
@@ -31,6 +32,12 @@ pub struct Check {
     /// ELF or object with DWARF [default: $MELEE_DWARF_ELF]
     #[arg(long)]
     pub dwarf: Option<PathBuf>,
+    /// The compact types file from `types export`, instead of the DWARF
+    #[arg(long, conflicts_with = "dwarf")]
+    pub types: Option<PathBuf>,
+    /// The archives' directory [default: the config's `base`]
+    #[arg(long)]
+    pub files: Option<PathBuf>,
 }
 
 /// Everything a walk needs, loaded once.
@@ -63,16 +70,27 @@ impl Project {
     pub fn load(args: &Check) -> Result<Self> {
         let config = get_config(args.proj_path.as_ref(), &args.cfg_path)?;
         let proj = args.proj_path.clone().unwrap_or_default();
-        let graph = TypeGraph::load(dwarf_path(args.dwarf.clone())?)?;
-        let canonical = Canonical::new(&graph);
-        let macros = macros(&graph);
-
-        let mut root_types = BTreeMap::new();
-        for root in roots(&graph, &canonical) {
-            if let (RootName::Literal(name), Some(ty)) = (root.name, root.ty) {
-                root_types.entry(name).or_insert(ty);
+        let (graph, macros, root_types) = match &args.types {
+            Some(path) => {
+                let types = TypesFile::load(path)?;
+                (types.graph, types.macros, types.roots)
             }
-        }
+            None => {
+                let graph = TypeGraph::load(dwarf_path(args.dwarf.clone())?)?;
+                let canonical = Canonical::new(&graph);
+                let macros = macros(&graph);
+                let mut root_types = BTreeMap::new();
+                for root in roots(&graph, &canonical) {
+                    if let (RootName::Literal(name), Some(ty)) =
+                        (root.name, root.ty)
+                    {
+                        root_types.entry(name).or_insert(ty);
+                    }
+                }
+                (graph, macros, root_types)
+            }
+        };
+        let canonical = Canonical::new(&graph);
         let symbols_path = proj.join(config.symbols.as_str());
         let symbols =
             SymbolFile::parse(&fs::read_to_string(&symbols_path)?)
@@ -90,7 +108,10 @@ impl Project {
             symbol_types.insert(spec.name.clone(), die);
         }
         Ok(Project {
-            base: proj.join(config.base.as_str()),
+            base: args
+                .files
+                .clone()
+                .unwrap_or_else(|| proj.join(config.base.as_str())),
             include: config.include,
             graph,
             canonical,

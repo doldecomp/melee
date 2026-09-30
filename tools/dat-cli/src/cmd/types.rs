@@ -13,11 +13,23 @@ pub struct Args {
 enum Command {
     /// Print type definitions as C-like text with offsets and annotations
     Dump(args::Dump),
+
+    /// Write the compact types file other commands take with `--types`
+    Export(args::Export),
 }
 
 mod args {
     use clap::Args;
     use std::path::PathBuf;
+
+    #[derive(Args)]
+    pub struct Export {
+        /// ELF or object with DWARF [default: $MELEE_DWARF_ELF]
+        #[arg(long)]
+        pub dwarf: Option<PathBuf>,
+        #[arg(short, long)]
+        pub output: PathBuf,
+    }
 
     #[derive(Args)]
     pub struct Dump {
@@ -33,7 +45,13 @@ mod args {
 pub fn run(Args { command }: Args) -> Result<()> {
     match command {
         Command::Dump(args) => dump(args),
+        Command::Export(args) => export(args),
     }
+}
+
+fn export(args: args::Export) -> Result<()> {
+    let graph = TypeGraph::load(dwarf_path(args.dwarf)?)?;
+    melee_dat::dwarf::cache::TypesFile::build(&graph).save(&args.output)
 }
 
 fn dump(args: args::Dump) -> Result<()> {

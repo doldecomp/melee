@@ -1,24 +1,14 @@
 # TODO
 
-## Sample findings
-
-- `HeartContainerAttr` doesn't match (92.9%).
-- `itEgg_ItemVars` with `ItemSpecialAttributes` as `.kusudama`: the union's
-  first member can't carry that variant. `ItemSpecialAttributes`'
-  `hammer_head`, `m_ball` and `tomato` have no types of their own.
-- HSD-owned coverage gaps come from stage containers: `UnkStageDat_x8_t`'s
-  `unk4`/`unk8`/`unkC` are animation lists indexed by animation (count only
-  in code), `x28` is a `u8` flag per animation, and the map header's
-  `unk10` holds 8-byte records, not `HSD_Spline*`.
-
 ## Samples
 
-- C89 initializes a union through its first member only, and MWCC has no
-  designated initializers or `__typeof__`. A union object is sampled per
-  variant its tag chooses, as that member's own type. A union inside a
-  sample is written through its first member, which has to carry the
-  chosen variant (as large, with pointers wherever it has them); others
-  are listed as needing a type of their own.
+- `PlSs` `x352D8` (66.7%) and `PlGw` `x78F0` (85.7%) don't match.
+- Types declared in `.c` files can't be included, so they have no samples
+  (the `*_YakumonoParam` structs, several loader tables). Move them to
+  headers.
+- A union object whose tag chooses no member has no sample (`CmdUnion`,
+  which is a script; item attributes of fighter items, whose kind isn't
+  bound).
 
 ## Walk findings
 

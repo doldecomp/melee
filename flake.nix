@@ -79,6 +79,18 @@
             hash = "sha256-3CFQRRNCQ1C9oXp8ZegjcbRREqXfwenydJqLerDv9kY=";
           };
 
+          # The game's files, for the .dat archives: one hash for the whole
+          # directory
+          dat-files = pkgsMinPython.requireFile {
+            name = "melee-GALE01-files";
+            message = ''
+              Add melee's extracted files to your nix store with:
+                nix store add --name melee-GALE01-files orig/GALE01/files
+            '';
+            hashMode = "recursive";
+            hash = "sha256-S7iM0nxt/3kj9IpuIqD2kcv1rbIbZ7E1gpgJByOo+Vo=";
+          };
+
           m2c = pkgs.python3Packages.callPackage ./.nix/m2c.nix { };
 
         in
@@ -114,6 +126,11 @@
 
             melee-dat = pkgs.callPackage ./.nix/melee-dat.nix {
               inherit melee-dwarf;
+            };
+
+            # The DWARF build with samples of the .dat archives' types
+            melee-dat-samples = melee-dwarf.override {
+              inherit melee-dat dat-files;
             };
 
             melee-docs =
@@ -152,6 +169,10 @@
               pkgs.ninja
               pkgs.llvmPackages_22.clang-unwrapped
               pkgs.llvmPackages_22.bintools-unwrapped
+              # For tools/dat-cli and the dat CMake preset
+              pkgs.cargo
+              pkgs.rustc
+              objdiff
             ]
             # The native CMake preset builds 32-bit
             ++ lib.optionals pkgs.stdenv.hostPlatform.isx86_64 [ pkgs.gcc_multi ];
@@ -171,6 +192,7 @@
           melee-cmake
           melee-dwarf
           melee-dat
+          melee-dat-samples
           melee-docs
           m2c
           ;
