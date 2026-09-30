@@ -620,7 +620,7 @@ void it_802A9458(HSD_GObj* gobj)
     Item_80268E5C(gobj, 4, ITEM_ANIM_UPDATE);
     HSD_JObjSetRotationZ(jobj, item->xDD4_itemVar.linkarrow.x94);
     it_802A8330(gobj);
-    switch (item->kind) { ///< @todo replace with enum names
+    switch (item->kind) {
     case It_Kind_Link_Arrow:
     case It_Kind_Kirby_LinkArrow:
         Item_8026AE84(item, 0x27152, 0x7F, 0x40);
