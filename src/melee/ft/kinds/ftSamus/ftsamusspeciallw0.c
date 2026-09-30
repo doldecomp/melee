@@ -109,7 +109,7 @@ void ftSs_Init_80128B1C(HSD_GObj* gobj, float angle, float arg9, float argA)
     ftSamus_80128B1C_inner(gobj, angle);
     fp->cmd_vars[0] = 0;
     fp->cmd_vars[1] = 0;
-    fp->mv.ss.unk2.x0 = 0;
+    fp->mv.ss.speciallw.x0 = 0;
     if (fp->ground_or_air == GA_Ground) {
         ftCommon_8007D5D4(fighter2);
     }
@@ -120,13 +120,13 @@ void ftSs_Init_80128B1C(HSD_GObj* gobj, float angle, float arg9, float argA)
 void ftSs_SpecialLw_Anim(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if ((fp->cmd_vars[0]) && (!fp->mv.ss.unk2.x0)) {
+    if ((fp->cmd_vars[0]) && (!fp->mv.ss.speciallw.x0)) {
         ftSs_SpecialLw_8012AEBC(gobj);
-        fp->mv.ss.unk2.x0 = 1;
+        fp->mv.ss.speciallw.x0 = 1;
     }
-    if ((!fp->cmd_vars[0]) && (fp->mv.ss.unk2.x0)) {
+    if ((!fp->cmd_vars[0]) && (fp->mv.ss.speciallw.x0)) {
         ftSs_SpecialLw_8012AF38(gobj);
-        fp->mv.ss.unk2.x0 = 0;
+        fp->mv.ss.speciallw.x0 = 0;
     }
     if (!ftAnim_IsFramesRemaining(gobj)) {
         ft_8008A2BC(gobj);
@@ -136,13 +136,13 @@ void ftSs_SpecialLw_Anim(HSD_GObj* gobj)
 void ftSs_SpecialAirLw_Anim(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if ((fp->cmd_vars[0]) && (!fp->mv.ss.unk2.x0)) {
+    if ((fp->cmd_vars[0]) && (!fp->mv.ss.speciallw.x0)) {
         ftSs_SpecialLw_8012AEBC(gobj);
-        fp->mv.ss.unk2.x0 = 1;
+        fp->mv.ss.speciallw.x0 = 1;
     }
-    if ((!fp->cmd_vars[0]) && (fp->mv.ss.unk2.x0)) {
+    if ((!fp->cmd_vars[0]) && (fp->mv.ss.speciallw.x0)) {
         ftSs_SpecialLw_8012AF38(gobj);
-        fp->mv.ss.unk2.x0 = 0;
+        fp->mv.ss.speciallw.x0 = 0;
     }
     if (!ftAnim_IsFramesRemaining(gobj)) {
         ftCo_Fall_Enter(gobj);

@@ -144,9 +144,9 @@ void ftSs_SpecialN_Enter(HSD_GObj* gobj)
     self_vel = &fp->self_vel;
     self_vel->y = 0;
     ftSamus_updateDamageDeathCBs(gobj);
-    fp->mv.ss.unk3.x0 = 0;
-    fp->mv.ss.unk3.x4 = 0;
-    fp->mv.ss.unk3.x8 = 0;
+    fp->mv.ss.specialn.x0 = 0;
+    fp->mv.ss.specialn.x4 = 0;
+    fp->mv.ss.specialn.x8 = 0;
     ftAnim_8006EBA4(gobj);
 }
 
@@ -159,9 +159,9 @@ void ftSs_SpecialAirN_Enter(HSD_GObj* gobj)
     Fighter_ChangeMotionState(gobj, 347, Ft_MF_None, 0, 1, 0, NULL);
     Fighter_ClearCmdVars(fp);
     ftSamus_updateDamageDeathCBs(gobj);
-    fp->mv.ss.unk3.x0 = 1;
-    fp->mv.ss.unk3.x4 = 0;
-    fp->mv.ss.unk3.x8 = 0;
+    fp->mv.ss.specialn.x0 = 1;
+    fp->mv.ss.specialn.x4 = 0;
+    fp->mv.ss.specialn.x8 = 0;
     ftAnim_8006EBA4(gobj);
 }
 
@@ -174,7 +174,7 @@ void ftSs_SpecialNStart_Anim(HSD_GObj* gobj)
 
     ftSs_SpecialN_801292E4(gobj);
     if (!ftAnim_IsFramesRemaining(gobj)) {
-        if ((fp->mv.ss.unk3.x0 == 1) || (fp->u.ss.x2230 == samus_attr->x18)) {
+        if ((fp->mv.ss.specialn.x0 == 1) || (fp->u.ss.x2230 == samus_attr->x18)) {
             Fighter_ChangeMotionState(gobj, 346, Ft_MF_None, 0, 1, 0, NULL);
         } else {
             Fighter_ChangeMotionState(gobj, 344, Ft_MF_None, 0, 1, 0, NULL);
@@ -214,9 +214,9 @@ void ftSs_SpecialNHold_Anim(HSD_GObj* gobj)
         ft_80088510(fighter2, ftSs_Unk3_803CE6B8[index], 127, 64);
     }
 
-    fp->mv.ss.unk3.x4 += 1;
-    if (fp->mv.ss.unk3.x4 > samus_attr->x20) {
-        fp->mv.ss.unk3.x4 = 0;
+    fp->mv.ss.specialn.x4 += 1;
+    if (fp->mv.ss.specialn.x4 > samus_attr->x20) {
+        fp->mv.ss.specialn.x4 = 0;
         fp->u.ss.x2230 += 1;
         if (fp->u.ss.x2230 >= samus_attr->x18) {
             ftCo_800BFFD0(fp, 53, 0);
@@ -253,7 +253,7 @@ void ftSs_SpecialAirNStart_Anim(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
 
     ftSs_SpecialN_801292E4(gobj);
-    fp->mv.ss.unk3.x0 = 1;
+    fp->mv.ss.specialn.x0 = 1;
     if (!ftAnim_IsFramesRemaining(gobj)) {
         Fighter_ChangeMotionState(gobj, 348, Ft_MF_None, 0, 1, 0, NULL);
         ftSamus_updateDamageDeathCBs(gobj);

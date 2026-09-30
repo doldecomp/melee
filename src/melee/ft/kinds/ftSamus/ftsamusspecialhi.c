@@ -33,7 +33,7 @@ void ftSs_SpecialHi_Enter(HSD_GObj* gobj)
     Fighter_SetEffectHitlagCallbacks(fp);
     ftCommon_8007D7FC(fp);
     Fighter_ClearCmdVars(fp);
-    fp->mv.ss.unk5.x0 = 0;
+    fp->mv.ss.specialhi.x0 = 0;
     ftAnim_8006EBA4(gobj);
     efSync_Spawn(1154, gobj, fp->parts[FtPart_YRotN].joint);
     fp->u.ss.x2244 = 1;
@@ -49,7 +49,7 @@ void ftSs_SpecialAirHi_Enter(HSD_GObj* gobj)
     Fighter_SetEffectHitlagCallbacks(fp);
     ftCommon_8007D60C(fp);
     Fighter_ClearCmdVars(fp);
-    fp->mv.ss.unk5.x0 = 0;
+    fp->mv.ss.specialhi.x0 = 0;
     fp->self_vel.y = samus_attr->x44;
     ftCommon_ClampSelfVelX(fp, samus_attr->x40);
     ftAnim_8006EBA4(gobj);
@@ -111,7 +111,7 @@ void ftSs_SpecialHi_IASA(HSD_GObj* gobj)
 
     u8 _[4];
 
-    if ((!fp->cmd_vars[1]) && (!fp->mv.ss.unk5.x0)) {
+    if ((!fp->cmd_vars[1]) && (!fp->mv.ss.specialhi.x0)) {
         if ((lstick_x = fp->input.lstick[0].x) < 0.0f) {
             mag = -lstick_x;
         } else {
@@ -122,7 +122,7 @@ void ftSs_SpecialHi_IASA(HSD_GObj* gobj)
                 ((fp->facing_dir == -1.0f) && (lstick_x > 0.0f)))
             {
                 fp->cmd_vars[1] = 1;
-                fp->mv.ss.unk5.x0 = 1;
+                fp->mv.ss.specialhi.x0 = 1;
                 ftCommon_UpdateFacing(fp);
                 ftPartSetRotY(fp, 0, M_PI_2 * fp->facing_dir);
             }
@@ -139,7 +139,7 @@ void ftSs_SpecialAirHi_IASA(HSD_GObj* gobj)
 
     u8 _[8];
 
-    if ((!fp->cmd_vars[1]) && (!fp->mv.ss.unk5.x0)) {
+    if ((!fp->cmd_vars[1]) && (!fp->mv.ss.specialhi.x0)) {
         if ((lstick_x = fp->input.lstick[0].x) < 0.0f) {
             mag = -lstick_x;
         } else {
@@ -150,7 +150,7 @@ void ftSs_SpecialAirHi_IASA(HSD_GObj* gobj)
                 ((fp->facing_dir == -1.0f) && (lstick_x > 0.0f)))
             {
                 fp->cmd_vars[1] = 1;
-                fp->mv.ss.unk5.x0 = 1;
+                fp->mv.ss.specialhi.x0 = 1;
                 ftCommon_UpdateFacing(fp);
                 ftPartSetRotY(fp, 0, M_PI_2 * fp->facing_dir);
             }

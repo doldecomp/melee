@@ -85,17 +85,17 @@ struct UNK_SAMUS_S1 {
 };
 
 union ftSamus_MotionVars {
-    /// @todo Proper state name.
-    struct ftSamus_State2Vars {
+    /// SpecialLw (Bomb Drop)
+    struct ftSamus_SpecialLwVars {
         s32 x0;
-    } unk2;
+    } speciallw;
 
-    /// SpecialN charge shot state - x4 is frame counter (integer)
-    struct ftSamus_State3Vars {
+    /// SpecialN (Charge Shot) - x4 is frame counter (integer)
+    struct ftSamus_SpecialNVars {
         s32 x0;
         s32 x4;
         float x8;
-    } unk3;
+    } specialn;
 
     /// Grapple beam state - x4 is duration (float)
     struct ftSamus_GrappleVars {
@@ -104,17 +104,17 @@ union ftSamus_MotionVars {
         float x8;
     } grapple;
 
-    /// @todo Proper state name.
-    struct ftSamus_State5Vars {
+    /// SpecialHi (Screw Attack)
+    struct ftSamus_SpecialHiVars {
         s32 x0;
-    } unk5;
+    } specialhi;
 
-    /// @todo Proper state name.
-    struct ftSamus_State6Vars {
+    /// SpecialLw Jump (Bomb Jump)
+    struct ftSamus_SpecialLwJumpVars {
         s32 x0;
-    } unk6;
+    } speciallw_jump;
 
-    /// @todo Proper state name.
+    /// Unused/Unknown state vars
     struct ftSamus_State7Vars {
         f32 x0;
     } unk7;

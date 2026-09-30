@@ -68,7 +68,7 @@ static void ftSamus_SpecialLw_StartAction_inner(HSD_GObj* gobj)
     fp->cmd_vars[1] = 0;
     fp->cmd_vars[0] = 0;
     fp->x2210.x0.throw_flags_b0 = 0;
-    fp->mv.ss.unk6.x0 = 0;
+    fp->mv.ss.speciallw_jump.x0 = 0;
     if (fp->cur_anim_frame == 3.0f) {
         fp->cmd_vars[1] = 1;
     }
@@ -111,18 +111,18 @@ void ftSs_SpecialAirLw_Enter(HSD_GObj* gobj)
 
 static inline void setSamusBits(Fighter* fp, int val)
 {
-    fp->mv.ss.unk6.x0 = val;
+    fp->mv.ss.speciallw_jump.x0 = val;
 }
 
 static inline void checkStateVar1(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    if ((fp->cmd_vars[0]) && (!fp->mv.ss.unk6.x0)) {
+    if ((fp->cmd_vars[0]) && (!fp->mv.ss.speciallw_jump.x0)) {
         ftSs_SpecialLw_8012AEBC(gobj);
         setSamusBits(fp, 1);
     }
-    if ((!fp->cmd_vars[0]) && (fp->mv.ss.unk6.x0)) {
+    if ((!fp->cmd_vars[0]) && (fp->mv.ss.speciallw_jump.x0)) {
         ftColl_8007B0C0((Fighter_GObj*) gobj, HurtCapsule_Enabled);
         setSamusBits(fp, 0);
     }
@@ -231,7 +231,7 @@ static void ftSamus_UnkSetStateAndCb(HSD_GObj* gobj)
 {
     Fighter* fp = getFighter(gobj);
     fp->cmd_vars[1] = 2;
-    fp->mv.ss.unk6.x0 = 0;
+    fp->mv.ss.speciallw_jump.x0 = 0;
     fp->accessory4_cb = &ftSs_SpecialLw_8012ADF0;
 }
 
