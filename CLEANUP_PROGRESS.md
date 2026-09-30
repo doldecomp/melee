@@ -33,12 +33,12 @@
 - ✅ ft/ftcmdscript.c — CPU command script interpreter & input VM
 - ✅ ft/ftdynamics.c — Physics/bone dynamics
 - ✅ ft/ftcamera.c — Fighter camera tracking
-- ❌ ft/ftchangeparam.c — Parameter modification (items, etc.)
+- ✅ ft/ftchangeparam.c — Parameter modification (items, etc.)
 - ✅ ft/ftcliffcommon.c — Ledge grab mechanics
 - ✅ ft/ftcolanim.c — Color/material animation
-- ❌ ft/ftcpuattack.c — CPU AI attack logic
+- ✅ ft/ftcpuattack.c — CPU AI attack logic
 - ❌ ft/ftdemo.c — Demo/replay playback
-- ❌ ft/ftdevice.c — Device/stage interaction
+- ✅ ft/ftdevice.c — Device/stage interaction
 - ❌ ft/ftdrawcommon.c — Common draw routines
 - ❌ ft/ftmaterial.c — Material/texture handling
 - ❌ ft/ftmetal.c — Metal form effects
