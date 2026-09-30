@@ -1,6 +1,5 @@
 #include "efasync.h"
 
-#include <math.h>
 #include <stdarg.h>
 
 #include "efdata.h"
@@ -1277,11 +1276,11 @@ void efAsync_OnLoad(HSD_Archive* archive, u8* data, u32 length, int index)
     EF_DAT_Entry* result;
 
     lbArchive_InitializeDAT(archive, data, length);
-    result = HSD_ArchiveGetPublicAddress(
-        archive, efAsync_DatEntries[index].effDataTable_name);
+    result = HSD_ArchiveGetPublicAs(
+        EF_DAT_Entry, archive, efAsync_DatEntries[index].effDataTable_name);
     if ((u32) result->ef_DAT_file | (u32) result->effDataTable_name) {
-        psInitDataBankLocate((HSD_Archive*) result->ef_DAT_file,
-                             (HSD_Archive*) result->effDataTable_name, NULL);
+        psInitDataBankLocate((int*) result->ef_DAT_file,
+                             (int*) result->effDataTable_name, NULL);
     }
 }
 

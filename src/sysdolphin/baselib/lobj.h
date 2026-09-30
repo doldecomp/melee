@@ -5,6 +5,8 @@
 
 #include <sysdolphin/baselib/forward.h> // IWYU pragma: export
 
+#include <dat_macros.h>
+
 #include <dolphin/gx.h>
 #include <dolphin/gx/GXEnum.h>
 #include <dolphin/mtx.h>
@@ -84,11 +86,17 @@ struct HSD_LightDesc {
     /* 0x10 */ HSD_WObjDesc* position;
     /* 0x14 */ HSD_WObjDesc* interest;
     union HSD_LightDesc_u {
-        void* p;
-        f32* shininess;
-        HSD_LightPointDesc* point;
-        HSD_LightSpotDesc* spot;
-        HSD_LightAttn* attn;
+        void* p DAT_IF(false);
+        f32* shininess DAT_IF(false);
+        HSD_LightPointDesc* point DAT_IF((flags & LOBJ_TYPE_MASK) ==
+                                             LOBJ_POINT &&
+                                         !(attnflags & LOBJ_LIGHT_ATTN));
+        HSD_LightSpotDesc* spot DAT_IF((flags & LOBJ_TYPE_MASK) == LOBJ_SPOT &&
+                                       attnflags == 0);
+        HSD_LightAttn* attn DAT_IF(((flags & LOBJ_TYPE_MASK) == LOBJ_POINT &&
+                                    (attnflags & LOBJ_LIGHT_ATTN)) ||
+                                   ((flags & LOBJ_TYPE_MASK) == LOBJ_SPOT &&
+                                    attnflags != 0));
     } u;
 };
 

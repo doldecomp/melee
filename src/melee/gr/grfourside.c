@@ -2,6 +2,7 @@
 
 #include <Runtime/platform.h>
 
+#include <math.h>
 #include <placeholder.h>
 
 #include "forward.h"

@@ -1966,7 +1966,7 @@ struct ftData_80085FD4_ret {
 };
 
 struct ArticleDynamicBones {
-    BoneDynamicsDesc array[Ft_Dynamics_NumMax];
+    BoneDynamicsTemplate array[Ft_Dynamics_NumMax];
 };
 
 struct ftDynamics {

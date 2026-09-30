@@ -269,7 +269,8 @@ static inline s32 gm_801A9094_get_entry(s32* entries, s32 i)
 
 static inline HSD_Joint* gm_801A9094_get_bg(void)
 {
-    return HSD_ArchiveGetPublicAddress(gm_804D679C, "ToyDspStand_Top_joint");
+    return HSD_ArchiveGetPublicAs(HSD_Joint, gm_804D679C,
+                                  "ToyDspStand_Top_joint");
 }
 
 static inline HSD_GObj* gm_801A9094_create_gobj(void)
@@ -296,10 +297,12 @@ void gm_801A9094(void)
         if (sp8C[i] != 0x1A) {
             dsp = tyDisplay_8031B9DC(
                 gm_801A659C(gm_801A9094_get_entry(sp8C, i)));
-            joint = HSD_ArchiveGetPublicAddress(
-                gm_804D679C, (const char*) tyDisplay_8031BB34((s8) dsp->x04));
-            matanim = HSD_ArchiveGetPublicAddress(
-                gm_804D679C, tyDisplay_8031BB94((s8) dsp->x04));
+            joint = HSD_ArchiveGetPublicAs(
+                HSD_Joint, gm_804D679C,
+                (const char*) tyDisplay_8031BB34((s8) dsp->x04));
+            matanim =
+                HSD_ArchiveGetPublicAs(HSD_MatAnimJoint, gm_804D679C,
+                                       tyDisplay_8031BB94((s8) dsp->x04));
             bg_joint = gm_801A9094_get_bg();
             gm_80480A00[sp8C[i]] = gobj = gm_801A9094_create_gobj();
             root = HSD_JObjAlloc();

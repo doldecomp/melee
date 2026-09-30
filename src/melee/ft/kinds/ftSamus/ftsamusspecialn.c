@@ -5,8 +5,6 @@
 #include <melee/ft/forward.h>
 #include <sysdolphin/baselib/forward.h>
 
-#include <math.h>
-
 #include "inlines.h"
 #include "types.h"
 #include <dolphin/mtx.h>

@@ -1,0 +1,4 @@
+unstable_features = true
+format_manifest = true
+imports_granularity = "Crate"
+max_width = 79

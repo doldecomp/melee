@@ -1812,25 +1812,26 @@ void Toy_80306A48(HSD_JObj* jobj, char* symbol1, char* symbol2, char* symbol3,
 {
     void* new_var2;
     void* new_var;
-    void* anim;
-    void* matanim;
+    HSD_AnimJoint* anim;
+    HSD_MatAnimJoint* matanim;
     int new_var3;
-    void* shapeanim;
+    HSD_ShapeAnimJoint* shapeanim;
 
     new_var3 = symbol1 != NULL;
     if (new_var3) {
-        anim = HSD_ArchiveGetPublicAddress(archive, symbol1);
+        anim = HSD_ArchiveGetPublicAs(HSD_AnimJoint, archive, symbol1);
     } else {
         anim = NULL;
     }
     new_var = (void*) (0 ^ 0);
     if (symbol2 != NULL) {
-        matanim = HSD_ArchiveGetPublicAddress(archive, symbol2);
+        matanim = HSD_ArchiveGetPublicAs(HSD_MatAnimJoint, archive, symbol2);
     } else {
         matanim = NULL;
     }
     if (symbol3 != new_var) {
-        shapeanim = HSD_ArchiveGetPublicAddress(archive, symbol3);
+        shapeanim =
+            HSD_ArchiveGetPublicAs(HSD_ShapeAnimJoint, archive, symbol3);
     } else {
         new_var2 = NULL;
         shapeanim = new_var2;
@@ -1939,7 +1940,7 @@ void Toy_80306D70(s32 arg0)
             data->x04 = NULL;
             idx = _Toy_803FDDE4.values[arg0].index;
             sym = _Toy_803FDDE4.symbols[idx].name;
-            sp14 = HSD_ArchiveGetPublicAddress(data->archive, sym);
+            sp14 = HSD_ArchiveGetPublicAs(LightList*, data->archive, sym);
         } else {
             idx = _Toy_803FDDE4.values[arg0].index;
             sym = _Toy_803FDDE4.symbols[idx].name;
@@ -2048,8 +2049,8 @@ void _Toy_80307018(void)
         HSD_ASSERTREPORT(2322, 0, "*** BG data aren't being loaded!\n");
     }
 
-    lights =
-        HSD_ArchiveGetPublicAddress(ptr1->archive, "ScMenFigure_scene_lights");
+    lights = HSD_ArchiveGetPublicAs(LightList*, ptr1->archive,
+                                    "ScMenFigure_scene_lights");
     if (lights != NULL) {
         ptr2->x0 = GObj_Create(2, 3, 0);
         obj = Toy_LoadLObjList(lights, 0);
@@ -2209,20 +2210,21 @@ void Toy_80307470(s32 arg0)
     }
 
     label = &_Toy_803FDEA0[arg0];
-    joint[0] = HSD_ArchiveGetPublicAddress(tg->x50, *label);
+    joint[0] = HSD_ArchiveGetPublicAs(HSD_Joint, tg->x50, *label);
 
     if (joint[0] != NULL) {
         tg->x0 = GObj_Create(9, 9, 0);
 
         loaded_jobj = HSD_JObjLoadJoint(joint[0]);
-        anim[0] = HSD_ArchiveGetPublicAddress(tg->x50,
-                                              _Toy_803FDF3C[arg0].animjoint);
-        matanim[0] = HSD_ArchiveGetPublicAddress(
-            tg->x50, _Toy_803FDF3C[arg0].matanim_joint);
-        Toy_AddPanelAnims(loaded_jobj,
-                          HSD_ArchiveGetPublicAddress(
-                              tg->x50, _Toy_803FDF3C[arg0].shapeanim_joint),
-                          matanim[0], anim[0]);
+        anim[0] = HSD_ArchiveGetPublicAs(HSD_AnimJoint, tg->x50,
+                                         _Toy_803FDF3C[arg0].animjoint);
+        matanim[0] = HSD_ArchiveGetPublicAs(HSD_MatAnimJoint, tg->x50,
+                                            _Toy_803FDF3C[arg0].matanim_joint);
+        Toy_AddPanelAnims(
+            loaded_jobj,
+            HSD_ArchiveGetPublicAs(HSD_ShapeAnimJoint, tg->x50,
+                                   _Toy_803FDF3C[arg0].shapeanim_joint),
+            matanim[0], anim[0]);
 
         HSD_JObjReqAnimAll(loaded_jobj, 0.0f);
         HSD_GObjObject_80390A70(tg->x0, (kind = HSD_GObj_JObjKind),
@@ -2276,7 +2278,7 @@ void _Toy_803075E8(s32 arg0)
     ///       it directly changes register allocation.
     ptr = (char**) (data + arg0 * 4);
     if (*(ptr += 0x69) != NULL) {
-        joint = HSD_ArchiveGetPublicAddress(td->archive, *ptr);
+        joint = HSD_ArchiveGetPublicAs(HSD_Joint, td->archive, *ptr);
         if (joint != NULL) {
             td->gobj = GObj_Create(4, 7, 0);
             jobj = HSD_JObjLoadJoint(joint);
@@ -2284,12 +2286,13 @@ void _Toy_803075E8(s32 arg0)
             HSD_GObjObject_80390A70(td->gobj, kind, jobj);
             GObj_SetupGXLink(td->gobj, HSD_GObj_JObjCallback, 0x33, 0);
 
-            joint = HSD_ArchiveGetPublicAddress(td->archive,
-                                                _Toy_803FDFA8[arg0].animjoint);
-            data = HSD_ArchiveGetPublicAddress(
-                td->archive, _Toy_803FDFA8[arg0].matanim_joint);
-            shapanim = HSD_ArchiveGetPublicAddress(
-                td->archive, _Toy_803FDFA8[arg0].shapeanim_joint);
+            joint = HSD_ArchiveGetPublicAs(HSD_Joint, td->archive,
+                                           _Toy_803FDFA8[arg0].animjoint);
+            data = HSD_ArchiveGetPublicAs(char, td->archive,
+                                          _Toy_803FDFA8[arg0].matanim_joint);
+            shapanim =
+                HSD_ArchiveGetPublicAs(HSD_ShapeAnimJoint, td->archive,
+                                       _Toy_803FDFA8[arg0].shapeanim_joint);
 
             if (joint != NULL || data != NULL || shapanim != NULL) {
                 HSD_JObjAddAnimAll(jobj, (HSD_AnimJoint*) joint,
@@ -2410,8 +2413,8 @@ HSD_JObj* _Toy_80307BA0(HSD_JObj* parent_jobj, s16 arg1)
         Toy_sbss_804D6EC8 = lbArchive_LoadSymbols(
             "TyStand.dat", &joint_data, "ToyStandModel_TopN_joint", NULL);
     } else {
-        joint_data = HSD_ArchiveGetPublicAddress(Toy_sbss_804D6EC8,
-                                                 "ToyStandModel_TopN_joint");
+        joint_data = HSD_ArchiveGetPublicAs(HSD_Joint, Toy_sbss_804D6EC8,
+                                            "ToyStandModel_TopN_joint");
     }
 
     jobj = HSD_JObjLoadJoint(joint_data);
@@ -2813,7 +2816,7 @@ HSD_GObj* Toy_803087F4(void* arg0)
         entry->x14 = lbArchive_LoadSymbols(entry->x8, &spC, entry->xC, 0);
     }
 
-    joint = HSD_ArchiveGetPublicAddress(entry->x14, entry->xC);
+    joint = HSD_ArchiveGetPublicAs(HSD_Joint, entry->x14, entry->xC);
     if (joint == NULL) {
         goto assert_fail;
     }
@@ -5140,8 +5143,9 @@ void _Toy_8030FA50(void)
         ///       is declared
         ToyED8Data* ed8 = Toy_sbss_804D6ED8;
         state = (void**) _Toy_sbss_804D6E68;
-        cam_desc = HSD_ArchiveGetPublicAddress(
-            ed8->archive, Toy_str_ScMenFigure_cam_int1_camera);
+        cam_desc =
+            HSD_ArchiveGetPublicAs(HSD_CameraDescPerspective, ed8->archive,
+                                   Toy_str_ScMenFigure_cam_int1_camera);
     }
 
     /* Screen camera (offset 0x14) */

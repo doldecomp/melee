@@ -8,6 +8,7 @@
 #include <melee/ft/ftlib.h>
 #include <melee/ft/types.h>
 #include <melee/gr/ground.h>
+#include <sysdolphin/baselib/cobj.h>
 #include <sysdolphin/baselib/debug.h>
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/initialize.h>

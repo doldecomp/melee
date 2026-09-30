@@ -1,7 +1,5 @@
 #include "grlast.h"
 
-#include <math.h>
-
 #include "granime.h"
 #include "grdisplay.h"
 #include "grlib.h"

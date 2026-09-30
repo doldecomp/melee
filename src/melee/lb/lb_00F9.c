@@ -985,7 +985,7 @@ void lb_800115F4(void)
     lb_804D63B4 = 0;
 }
 
-void lb_80011710(DynamicsDesc* arg0, DynamicsDesc* arg1)
+void lb_80011710(DynamicsTemplate* arg0, DynamicsDesc* arg1)
 {
     struct lb_00F9_UnkDesc1Inner* data0;
     struct DynamicsData* data1;
@@ -995,7 +995,7 @@ void lb_80011710(DynamicsDesc* arg0, DynamicsDesc* arg1)
     arg1->pos.y = arg0->pos.y;
     arg1->pos.z = arg0->pos.z;
     data1 = arg1->data;
-    data0 = &arg0->data->desc.lb_unk1.array[0];
+    data0 = arg0->params;
     for (data1 = arg1->data, i = 0; i < (int) arg0->count;
          data1 = data1->next, i++)
     {

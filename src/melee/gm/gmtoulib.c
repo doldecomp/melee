@@ -132,7 +132,7 @@ static s16 lbl_803D9E1C[][2] = {
 /* 4771C4 */ TmData gm_804771C4;   // must not be static
 
 int lbl_804D663C;
-u8 lbl_804D6638[0x4];
+HSD_Archive* lbl_804D6638;
 
 extern SceneDesc* lbl_804D666C;
 extern SceneDesc* lbl_804D6674;

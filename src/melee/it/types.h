@@ -9,6 +9,7 @@
 #include <melee/it/kinds/forward.h>
 #include <sysdolphin/baselib/forward.h>
 
+#include <dat_macros.h>
 #include <placeholder.h>
 
 #include <dolphin/gx.h>
@@ -136,9 +137,12 @@ struct ItemDynamics {
     /// does not work perfectly
     int count;
 
-    BoneDynamicsDesc* dyn_descs;
+    BoneDynamicsTemplate* dyn_descs DAT_COUNT(count);
 };
 
+/// @todo In some stage items (e.g. in @c GrCn.dat), #x4_matanim_joint and
+///       #x8_parameters hold values that are not relocated, so they are not
+///       always pointers of these types.
 struct ItemStateDesc {
     HSD_AnimJoint* x0_anim_joint;
 
@@ -150,7 +154,8 @@ struct ItemStateDesc {
 };
 
 struct ItemStateArray {
-    struct ItemStateDesc x0_itemStateDesc[8];
+    /// Indexed by the @c anim_id of the item kind's #ItemStateTable entries.
+    struct ItemStateDesc x0_itemStateDesc[8] DAT_EXTENT;
 };
 
 struct ItemModelDesc {
@@ -180,7 +185,7 @@ typedef struct {
 
 struct Article {
     ItemAttr* x0_common_attr;
-    void* x4_specialAttributes;
+    void* x4_specialAttributes DAT_TYPE(ItemSpecialAttributes);
     ItHurtBoneList* x8_hurtbones;
     ItemStateArray* xC_itemStates;
     ItemModelDesc* x10_modelDesc;

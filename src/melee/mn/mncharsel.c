@@ -5319,8 +5319,8 @@ void mnCharSel_Scene_OnEnter(void* arg0)
         mnCharSel_804D6CD0 = lbArchive_LoadArchive("MnSlChr.usd");
         mnCharSel_804D6CD4 = lbArchive_LoadArchive("MnExtAll.usd");
     }
-    css_data_table = HSD_ArchiveGetPublicAddress(mnCharSel_804D6CD0,
-                                                 "MnSelectChrDataTable");
+    css_data_table = HSD_ArchiveGetPublicAs(
+        MnSelectChrDataTable, mnCharSel_804D6CD0, "MnSelectChrDataTable");
     css_models = &css_data_table->models;
     if (lbLang_IsSavedLanguageJP() != 0) {
         HSD_SisLib_803A62A0(0, "SdSlChr.dat", "SIS_SelCharData");

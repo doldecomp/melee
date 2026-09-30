@@ -29,6 +29,7 @@
 #include <sysdolphin/baselib/random.h>
 #include <sysdolphin/baselib/spline.h>
 
+static struct grKongo_YakumonoParam* yakumono_param;
 /* 1D7700 */ static void fn_801D7700(void* user_data, int joint_id,
                                      CollData* coll, int coll_x50,
                                      mpLib_GroundEnum ground_kind,

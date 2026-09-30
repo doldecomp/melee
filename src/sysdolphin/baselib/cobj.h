@@ -3,7 +3,9 @@
 
 #include <Runtime/platform.h>
 
-#include <sysdolphin/baselib/forward.h> // IWYU pragma: export
+#include <sysdolphin/baselib/forward.h>
+
+#include <dat_macros.h> // IWYU pragma: export
 
 #include <dolphin/gx/GXEnum.h>
 #include <dolphin/mtx.h>
@@ -122,11 +124,12 @@ struct HSD_CameraDescPerspective {
 };
 
 union HSD_CObjDesc {
-    char* class_name;
-    HSD_CameraDescCommon common;
-    HSD_CameraDescFrustum frustum;
-    HSD_CameraDescFrustum ortho;
-    HSD_CameraDescPerspective perspective;
+    char* class_name DAT_IF(false);
+    HSD_CameraDescCommon common DAT_IF(false);
+    HSD_CameraDescFrustum frustum DAT_IF(projection_type == PROJ_FRUSTUM);
+    HSD_CameraDescFrustum ortho DAT_IF(projection_type == PROJ_ORTHO);
+    HSD_CameraDescPerspective perspective DAT_IF(projection_type ==
+                                                 PROJ_PERSPECTIVE);
 };
 ASSERT_SIZE(HSD_CObjDesc, 0x40);
 

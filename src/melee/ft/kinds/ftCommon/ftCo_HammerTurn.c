@@ -2,8 +2,6 @@
 
 #include <Runtime/platform.h>
 
-#include <math.h>
-
 #include "ftCo_HammerJump.h"
 #include "ftCo_HammerWait.h"
 #include "ftCo_Turn.h"

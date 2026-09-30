@@ -24,8 +24,7 @@ assert dwarf -> newlib != null;
       ../src/sysdolphin
       ../src/melee
       ../src/Runtime
-      ../src/placeholder.h
-      ../src/m2c_macros.h
+      ../libs/doldecomp
     ];
   };
 

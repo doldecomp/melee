@@ -618,8 +618,8 @@ void grIzumi_801CCB14(Ground_GObj* gobj)
 
 void grIzumi_801CCB18(HSD_GObj* gobj)
 {
-    HSD_Joint* j = HSD_ArchiveGetPublicAddress(grDatFiles_GetArchive()->unk0,
-                                               "GrdIzumiStar_TopN_joint");
+    HSD_Joint* j = HSD_ArchiveGetPublicAs(
+        HSD_Joint, grDatFiles_GetArchive()->unk0, "GrdIzumiStar_TopN_joint");
     if (j != NULL) {
         HSD_GObj* sub = Ground_801C1A20(j, -1);
         if (sub != NULL) {
@@ -725,8 +725,9 @@ HSD_GObj* grIzumi_801CCD98(void)
     refl = HSD_MemAlloc(sizeof(IzumiReflection));
     GObj_InitUserData(gobj, 3, HSD_Free, refl);
     dat = grDatFiles_801C6330(3);
-    refl->image = HSD_ArchiveGetPublicAddress(
-        dat->unk0, "GrdIzumi_cd_wt_GrdIzumiDummy1_1_image_desc");
+    refl->image =
+        HSD_ArchiveGetPublicAs(HSD_ImageDesc, dat->unk0,
+                               "GrdIzumi_cd_wt_GrdIzumiDummy1_1_image_desc");
     if (refl->image != NULL) {
         memzero(refl->image, sizeof(HSD_ImageDesc));
         lb_800121FC(refl->image, 80, 60, 4, 2001);

@@ -5,6 +5,8 @@
 
 #include <sysdolphin/baselib/forward.h> // IWYU pragma: export
 
+#include <dat_macros.h>
+
 #include <dolphin/mtx.h>
 #include <sysdolphin/baselib/objalloc.h>
 
@@ -72,12 +74,14 @@ struct HSD_RObjDesc {
     HSD_RObjDesc* next;
     u32 flags; // 0x04
     union HSD_RObjDesc_u {
-        u32 i;
-        HSD_ExpDesc* exp;
-        HSD_ByteCodeExpDesc* bcexp;
-        HSD_IKHintDesc* ik_hint;
-        HSD_Joint* joint;
-        f32 limit;
+        u32 i DAT_IF(false);
+        HSD_ExpDesc* exp DAT_IF((flags & ROBJ_TYPE_MASK) == REFTYPE_EXP);
+        HSD_ByteCodeExpDesc* bcexp DAT_IF((flags & ROBJ_TYPE_MASK) ==
+                                          REFTYPE_BYTECODE);
+        HSD_IKHintDesc* ik_hint DAT_IF((flags & ROBJ_TYPE_MASK) ==
+                                       REFTYPE_IKHINT);
+        HSD_Joint* joint DAT_IF((flags & ROBJ_TYPE_MASK) == REFTYPE_JOBJ);
+        f32 limit DAT_IF((flags & ROBJ_TYPE_MASK) == REFTYPE_LIMIT);
     } u;
 };
 

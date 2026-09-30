@@ -1,6 +1,5 @@
 #include "itkyasarin.h"
 
-#include <math.h>
 #include <placeholder.h>
 
 #include "forward.h"

@@ -32,12 +32,6 @@
 /* 0958FC */ static void ftCo_80095D5C(Fighter* fp, Vec3* arg1);
 /* 095A9C */ static void ftCo_80095EFC(Fighter_GObj* gobj);
 
-typedef struct ftCo_ItemThrowAttrs {
-    float velocity_mul;
-    float angle;
-    float x8;
-} ftCo_ItemThrowAttrs;
-
 typedef struct ftCo_ItemThrowCmd {
     /* +0:0  */ u32 pad : 20;
     /* +0:20 */ s32 angle : 12;
@@ -538,7 +532,7 @@ void ftCo_80095EFC(Fighter_GObj* gobj)
                     ftCo_ItemThrowAttrs* throw_speed_arr;
                     float throw_speed;
                     fsm = -fp->cmd_timer / fp->frame_speed_mul;
-                    throw_speed_arr = (ftCo_ItemThrowAttrs*) Fighter_804D6550;
+                    throw_speed_arr = Fighter_804D6550;
                     scale.value *=
                         co_attrs->heavy_throw_velocity_multiplier *
                         throw_speed_arr[fp->motion_id - ftCo_MS_LightThrowF]

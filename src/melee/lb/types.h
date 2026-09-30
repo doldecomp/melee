@@ -7,6 +7,7 @@
 #include <melee/lb/forward.h> // IWYU pragma: export
 #include <sysdolphin/baselib/forward.h>
 
+#include <dat_macros.h>
 #include <placeholder.h>
 
 #include <dolphin/gx.h>
@@ -494,6 +495,20 @@ struct DynamicsDesc {
 struct BoneDynamicsDesc {
     enum_t bone_id;
     DynamicsDesc dyn_desc;
+};
+
+/// A #DynamicsDesc as stored in archives: the parameters @c lb_80011710
+/// copies into a runtime one.
+struct DynamicsTemplate {
+    /* +0 */ struct lb_00F9_UnkDesc1Inner* params DAT_COUNT(count);
+    /* +4 */ unsigned int count;
+    /* +8 */ Vec3 pos;
+};
+
+/// A #BoneDynamicsDesc as stored in archives.
+struct BoneDynamicsTemplate {
+    enum_t bone_id;
+    DynamicsTemplate dyn_desc;
 };
 
 struct lb_8000FD18_t {

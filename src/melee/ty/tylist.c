@@ -424,11 +424,11 @@ void* _tyList_80313508(HSD_GObj* parent, char* symbol_name, float x, float y,
 {
     HSD_JObj* jobj;
     ToyED8Data* archive;
-    void* joint;
+    HSD_Joint* joint;
     PAD_STACK(8);
 
     archive = Toy_sbss_804D6ED8;
-    joint = HSD_ArchiveGetPublicAddress(archive->archive, symbol_name);
+    joint = HSD_ArchiveGetPublicAs(HSD_Joint, archive->archive, symbol_name);
 
     if (joint == NULL) {
         OSPanic(__FILE__, 823,
@@ -912,8 +912,8 @@ void _tyList_8031457C(void)
 
     /// @todo Is this really a reference to
     ///       #Toy_str_ScMenFigure_cam_int1_camera, or de-duplicated?
-    desc = HSD_ArchiveGetPublicAddress(archive->archive,
-                                       Toy_str_ScMenFigure_cam_int1_camera);
+    desc = HSD_ArchiveGetPublicAs(HSD_CameraDescPerspective, archive->archive,
+                                  Toy_str_ScMenFigure_cam_int1_camera);
     if (desc != NULL) {
         entry->x0 = GObj_Create(1, 2, 0);
         cobj = lb_80013B14(desc);
@@ -986,8 +986,8 @@ void tyList_803147C4(void)
         OSPanic(__FILE__, 1590, "");
     }
 
-    jobj =
-        HSD_ArchiveGetPublicAddress(archive->data, "ScMenFigure_scene_lights");
+    jobj = HSD_ArchiveGetPublicAs(LightList*, archive->data,
+                                  "ScMenFigure_scene_lights");
     if (jobj != NULL) {
         *gobj = GObj_Create(2, 3, 0);
         HSD_GObjObject_80390A70(*gobj, new_var = HSD_GObj_LightKind,

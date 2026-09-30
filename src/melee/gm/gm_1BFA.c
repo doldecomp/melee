@@ -4,6 +4,7 @@
 
 #include "forward.h"
 #include "gm_unsplit.h"
+#include "gmapproach.h"
 #include "gmmain_lib.h"
 #include "gmvsmelee.h"
 #include "types.h"

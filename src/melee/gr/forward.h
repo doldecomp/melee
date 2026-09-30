@@ -21,7 +21,6 @@ typedef struct StageParam StageParam;
 typedef struct UnkArchiveStruct UnkArchiveStruct;
 typedef struct unkCastle unkCastle;
 typedef struct UnkStageDat UnkStageDat;
-typedef struct UnkStageDatInternal UnkStageDatInternal;
 
 #ifdef M2C
 typedef struct Ground_GObj Ground_GObj;

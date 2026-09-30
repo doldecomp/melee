@@ -1,6 +1,7 @@
 #include "gmgiant.h"
 
 #include "gm_unsplit.h"
+#include "gmapproach.h"
 #include "gmmain_lib.h"
 #include "gmmovieend.h"
 #include "gmvsmelee.h"

@@ -37,6 +37,7 @@
 #include <melee/lb/lblanguage.h>
 #include <melee/lb/lbmthp.h>
 #include <melee/sc/types.h>
+#include <sysdolphin/baselib/cobj.h> // IWYU pragma: keep
 #include <sysdolphin/baselib/controller.h>
 #include <sysdolphin/baselib/displayfunc.h>
 #include <sysdolphin/baselib/dobj.h>

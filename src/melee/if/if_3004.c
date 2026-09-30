@@ -13,7 +13,6 @@
 #include <melee/lb/lbsnap.h>
 #include <melee/mn/inlines.h>
 #include <melee/ty/toy.h>
-#include <sysdolphin/baselib/cobj.h>
 #include <sysdolphin/baselib/fog.h>
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/gobjgxlink.h>

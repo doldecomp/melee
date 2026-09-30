@@ -9,6 +9,7 @@
 #include <melee/it/forward.h>
 #include <sysdolphin/baselib/forward.h>
 
+#include <dat_macros.h>
 #include <placeholder.h>
 
 #include <dolphin/mtx.h>
@@ -1867,5 +1868,41 @@ typedef struct ScopeBeamAttrs {
     /* +78 */ f32 x78;
     /* +7C */ f32 x7C;
 } ScopeBeamAttrs;
+
+/// What an #Article's @c x4_specialAttributes points to, by the kind the
+/// article is bound to as @c Article::kind (see #it_804D6D20_t and
+/// #GroundItemData).
+///
+/// @todo Add the kinds whose attribute types are defined in source files or
+///       other headers, or used inconsistently.
+union ItemSpecialAttributes {
+    ItCapsuleAttr capsule DAT_IF(Article::kind == It_Kind_Capsule);
+    itBoxAttributes box DAT_IF(Article::kind == It_Kind_Box);
+    itTaruAttributes taru DAT_IF(Article::kind == It_Kind_Taru);
+    itEgg_ItemVars egg DAT_IF(Article::kind == It_Kind_Egg);
+    itKusudamaAttributes kusudama DAT_IF(Article::kind == It_Kind_Kusudama);
+    itTaruCann_DatAttrs tarucann DAT_IF(Article::kind == It_Kind_TaruCann);
+    itBombHeiAttributes bombhei DAT_IF(Article::kind == It_Kind_BombHei);
+    HeartContainerAttr heart DAT_IF(Article::kind == It_Kind_Heart);
+    MaximTomatoSpecialAttr tomato DAT_IF(Article::kind == It_Kind_Tomato);
+    itStar_ItemVars star DAT_IF(Article::kind == It_Kind_Star);
+    itBatAttributes bat DAT_IF(Article::kind == It_Kind_Bat);
+    ItLGunAttr l_gun DAT_IF(Article::kind == It_Kind_L_Gun);
+    itUnkAttributes freeze DAT_IF(Article::kind == It_Kind_Freeze);
+    itFlipper_DatAttrs flipper DAT_IF(Article::kind == It_Kind_Flipper);
+    itSScopeAttributes s_scope DAT_IF(Article::kind == It_Kind_S_Scope);
+    itLipstickAttributes lipstick DAT_IF(Article::kind == It_Kind_LipStick);
+    itHarisen_DatAttrs harisen DAT_IF(Article::kind == It_Kind_Harisen);
+    FFlowerAttr f_flower DAT_IF(Article::kind == It_Kind_F_Flower);
+    itWstarAttributes wstar DAT_IF(Article::kind == It_Kind_WStar);
+    itMBallAttributes m_ball DAT_IF(Article::kind == It_Kind_M_Ball);
+    ItLGunRayAttr l_gun_ray DAT_IF(Article::kind == It_Kind_L_Gun_Ray);
+    ScopeBeamAttrs s_scope_beam DAT_IF(Article::kind == It_Kind_S_Scope_Beam);
+    ItLGunBeamAttr l_gun_beam DAT_IF(Article::kind == It_Kind_L_Gun_Beam);
+    itHammerheadAttributes hammer_head DAT_IF(Article::kind ==
+                                              It_Kind_Hammer_Head);
+    itEvYoshiEgg_DatAttrs evyoshiegg DAT_IF(Article::kind ==
+                                            It_Kind_EvYoshiEgg);
+};
 
 #endif

@@ -13,6 +13,7 @@ IN_ROOTS = [
         "src/MSL",
         "src/melee",
         "src/melee/ft/kinds",
+        "libs/doldecomp/include",
         "libs/dolphin/include",
         "libs/dolphin/src",
         "build/GALE01/include",

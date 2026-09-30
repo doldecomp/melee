@@ -10,6 +10,7 @@
 #include <melee/sc/forward.h>
 #include <sysdolphin/baselib/forward.h>
 
+#include <dat_macros.h>
 #include <placeholder.h>
 
 #include <dolphin/gx.h>
@@ -89,7 +90,7 @@ struct StageInfo {
     void* x6A4;
     /* +6A8 */ struct GroundItemData {
         s32 unk0;
-        Article* unk4;
+        Article* unk4 DAT_BIND(Article::kind, unk0);
     }** itemdata;
     /* +6AC */ MapCollData* coll_data;
     /* +6B0 */ GroundParam* param;
@@ -2000,11 +2001,6 @@ struct GroundParam {
     GXColor xD8;
 };
 
-struct UnkStageDatInternal {
-    u8 x0_fill[0x4];
-    u32 unk4; // flags
-};
-
 struct UnkStageDat_x8_t {
     /*  +0 */ struct HSD_Joint* unk0;
     /*  +4 */ HSD_AnimJoint** unk4;
@@ -2027,23 +2023,24 @@ struct GroundShadowEntry {
 };
 
 struct UnkStageDat {
-    void* unk0;
+    void* unk0 DAT_COUNT(unk4);
     s32 unk4;
 
-    struct UnkStageDat_x8_t* unk8; // Suspect this may not be a consistent type
-                                   // based on un_802FD708 callers
+    // Suspect this may not be a consistent type based on un_802FD708 callers
+    struct UnkStageDat_x8_t* unk8 DAT_COUNT(unkC);
     s32 unkC;
 
-    HSD_Spline** unk10;
+    HSD_Spline** unk10 DAT_COUNT(unk14);
     s32 unk14;
 
-    void* unk18;
+    void* unk18 DAT_COUNT(unk1C);
     s32 unk1C;
 
-    struct GroundShadowEntry* unk20;
+    struct GroundShadowEntry* unk20 DAT_COUNT(unk24);
     s32 unk24;
 
-    UnkStageDatInternal** unk28;
+    /// Materials that receive shadows.
+    struct _HSD_MObjDesc** unk28 DAT_COUNT(unk2C);
     s32 unk2C; // size
 };
 ASSERT_SIZE(struct UnkStageDat_x8_t, 0x34);

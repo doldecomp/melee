@@ -93,7 +93,8 @@ void ftCo_8009CF84(Fighter* fp)
     {
         ssize_t i;
         for (i = 0; i < data->x2C->x0.dynamicsNum; i++) {
-            BoneDynamicsDesc* bones = &data->x2C->x0.ftDynamicBones->array[i];
+            BoneDynamicsTemplate* bones =
+                &data->x2C->x0.ftDynamicBones->array[i];
             lb_8000FD48(fp->parts[bones->bone_id].joint,
                         &fp->dynamic_bone_sets[i].dyn_desc,
                         bones->dyn_desc.count);
@@ -109,7 +110,7 @@ void ftCo_8009CF84(Fighter* fp)
 static inline void ftCo_SetupKirbyHatBone(Fighter* fp, KirbyHatStruct* hat,
                                           int dyn_idx, ssize_t i)
 {
-    BoneDynamicsDesc* article =
+    BoneDynamicsTemplate* article =
         &hat->hat_dynamics[dyn_idx]->x0.ftDynamicBones->array[i];
     HSD_JObj* cur = fp->u.kb.hat.jobj;
     ssize_t j;

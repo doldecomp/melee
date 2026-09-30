@@ -27,7 +27,6 @@
 #include <melee/lb/lbaudio_ax.h>
 #include <melee/lb/lbcollision.h>
 #include <melee/lb/lbvector.h>
-#include <sysdolphin/baselib/cobj.h>
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/gobjproc.h>
 #include <sysdolphin/baselib/jobj.h>

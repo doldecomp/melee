@@ -5,6 +5,8 @@
 
 #include <sysdolphin/baselib/forward.h>
 
+#include <dat_macros.h>
+
 #include <dolphin/mtx.h>
 #include <sysdolphin/baselib/class.h>
 #include <sysdolphin/baselib/debug.h>
@@ -130,9 +132,9 @@ typedef struct HSD_Joint {
     /* +8 */ HSD_Joint* child;
     /* +C */ HSD_Joint* next;
     /* +10 */ union HSD_Joint_u {
-        HSD_DObjDesc* dobjdesc;
-        HSD_Spline* spline;
-        HSD_SList* ptcl;
+        HSD_DObjDesc* dobjdesc DAT_IF(!(flags & (JOBJ_PTCL | JOBJ_SPLINE)));
+        HSD_Spline* spline DAT_IF((flags & JOBJ_SPLINE) != 0);
+        HSD_SList* ptcl DAT_IF((flags & JOBJ_PTCL) != 0);
     } u;
     /* +14 */ Vec3 rotation;
     /* +20 */ Vec3 scale;

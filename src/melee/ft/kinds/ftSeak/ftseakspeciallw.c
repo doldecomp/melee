@@ -2,8 +2,6 @@
 
 #include <melee/ft/forward.h>
 
-#include <math.h>
-
 #include <melee/ef/efsync.h>
 #include <melee/ft/fighter.h>
 #include <melee/ft/ft_081B.h>
