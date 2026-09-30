@@ -2,21 +2,24 @@
 //! objdiff and as C that should compile to the same bytes.
 //!
 //! Archives are too large to diff whole, so each type the walk finds is
-//! sampled once. A sample is the instance's bytes, with its relocated words
-//! pointing to externs named after their targets (`dat_PlMr_1A40`). The C
-//! side declares the same externs, so objdiff compares the pointers by name.
-//! A type whose sample matches is taken to match in every archive.
+//! sampled once per variant its tagged unions choose. Samples are grouped
+//! into one unit per archive. A sample is the instance's bytes under the
+//! name the archive gives it (a public symbol's name, else `x<OFFSET>`),
+//! with its relocated words pointing to symbols named the same way. The C
+//! side defines the same names with designated initializers, generated from
+//! the types, so objdiff compares data and pointers by name. A type whose
+//! sample matches is taken to match in every archive.
 
 use crate::{
     dwarf::{
-        DieId, TypeGraph, TypeKind,
+        DieId, Member, TypeGraph, TypeKind,
         canonical::{CanonId, Canonical},
         render::Renderer,
     },
     hsd::Archive,
     walk::Walk,
 };
-use anyhow::{Result, bail};
+use anyhow::{Context, Result, bail};
 use object::{
     Architecture, BinaryFormat, Endianness, RelocationFlags, SectionKind,
     SymbolFlags, SymbolKind, SymbolScope,
@@ -26,9 +29,6 @@ use std::{
     collections::{BTreeMap, BTreeSet},
     fmt::Write,
 };
-
-/// MWCC puts initialized data this small in `.sdata`.
-const SMALL_DATA_MAX: u64 = 8;
 
 const FLOAT: u8 = gimli::constants::DW_ATE_float.0;
 const SIGNED: u8 = gimli::constants::DW_ATE_signed.0;
@@ -48,14 +48,21 @@ pub struct Location {
 /// One instance chosen to stand for its type.
 #[derive(Debug, Clone)]
 pub struct Sample {
-    /// The type's representative DIE.
+    /// The type's DIE. For a union object, the member its tag chose: the
+    /// archive only holds that member's bytes.
     pub die: DieId,
-    /// The type's name, as C spells it (`HSD_Joint`, `struct Foo`).
+    /// The type as C declares it (`struct HSD_Joint`, `Vec2`, or
+    /// `typeof(((union U *) 0)->member)` for a union object).
     pub type_name: String,
+    /// The type's name for looking it up again: its tag, or the typedef
+    /// that names it.
+    pub lookup: String,
+    /// For a union object, the member its tag chose.
+    pub member: Option<String>,
+    /// The root the walk first reached it from, e.g. `ftDataMario`.
+    pub root: String,
     /// The header that declares the type, relative to its include directory.
     pub header: String,
-    /// Other headers the sample needs, such as its typedef's.
-    pub includes: Vec<String>,
     pub size: u64,
     pub location: Location,
     /// Relocated words in the instance.
@@ -73,20 +80,11 @@ pub struct Sample {
 }
 
 impl Sample {
-    /// The symbol both sides define.
-    pub fn symbol(&self) -> String {
-        let mut symbol = format!("sample_{}", identifier(&self.type_name));
-        for member in &self.variant {
-            symbol.push_str("__");
-            symbol.push_str(&identifier(member));
-        }
-        symbol
-    }
-
-    /// The unit it belongs to: its header without the extension, e.g.
-    /// `sysdolphin/baselib/jobj`.
+    /// The unit it belongs to: its archive's file without the extension,
+    /// e.g. `PlMr`.
     pub fn unit(&self) -> &str {
-        self.header.strip_suffix(".h").unwrap_or(&self.header)
+        let file = &self.location.file;
+        file.strip_suffix(".dat").unwrap_or(file)
     }
 }
 
@@ -94,7 +92,52 @@ impl Sample {
 #[derive(Debug, Clone)]
 pub struct Skipped {
     pub type_name: String,
-    pub reason: String,
+    pub reason: &'static str,
+}
+
+/// A sample as the sidecar next to its target object describes it.
+#[derive(Debug, Clone, serde::Serialize, serde::Deserialize)]
+pub struct SampleInfo {
+    /// Its symbol in the target object.
+    pub symbol: String,
+    /// Where it was in the archive.
+    pub offset: u32,
+    /// Offset of the archive in its file; nonzero inside packed files.
+    pub archive: usize,
+    pub size: u64,
+    /// The type as C declares it.
+    pub type_name: String,
+    /// The type's tag or typedef name, to look it up in the DWARF.
+    pub lookup: String,
+    /// For a union object, the member its tag chose.
+    pub member: Option<String>,
+    /// The root the walk first reached it from.
+    pub root: String,
+    /// The header that declares the type.
+    pub header: String,
+    /// The members its tagged unions chose, in order.
+    pub variant: Vec<String>,
+    pub choices: Vec<Choice>,
+}
+
+/// The member a tagged union inside a sample chose.
+#[derive(Debug, Clone, serde::Serialize, serde::Deserialize)]
+pub struct Choice {
+    /// Offset of the union in the sample.
+    pub offset: u32,
+    /// The union type, as C declares it.
+    pub union: String,
+    /// Index of the member.
+    pub member: usize,
+}
+
+/// A sample's data, as codegen reads it from the target object.
+pub struct Instance<'a> {
+    pub info: &'a SampleInfo,
+    pub bytes: &'a [u8],
+    /// Relocated words, by offset in the sample, with the symbol each
+    /// points to.
+    pub relocs: BTreeMap<u32, String>,
 }
 
 /// Picks the samples from walked archives.
@@ -104,11 +147,7 @@ pub struct Picker<'a> {
     renderer: Renderer<'a>,
     /// By type and variant.
     best: BTreeMap<(String, Vec<String>), Sample>,
-    skipped: BTreeMap<String, String>,
-    /// Variants that need a type of their own, with where one is.
-    variants: BTreeMap<String, String>,
-    /// Unions some instance's tag chose a member of.
-    chosen: BTreeSet<String>,
+    skipped: BTreeMap<String, &'static str>,
 }
 
 impl<'a> Picker<'a> {
@@ -119,8 +158,6 @@ impl<'a> Picker<'a> {
             renderer: Renderer::new(graph, canonical),
             best: BTreeMap::new(),
             skipped: BTreeMap::new(),
-            variants: BTreeMap::new(),
-            chosen: BTreeSet::new(),
         }
     }
 
@@ -138,122 +175,97 @@ impl<'a> Picker<'a> {
             let [id] = types.iter().copied().collect::<Vec<_>>()[..] else {
                 continue;
             };
-            let mut die = self.canonical.get(id).rep;
-            let TypeKind::Record { union, members, .. } =
-                &self.graph.types[&die].kind
-            else {
-                continue;
-            };
-            // A tagged union stands for the member its tag chose, declared
-            // as that member's own type, as the game's code does (e.g.
-            // `HSD_CameraDescPerspective` for `HSD_CObjDesc`)
-            if *union {
-                let union_name = self.renderer.declare(Some(die), "");
-                let Some(member) =
-                    walk.choices.get(&(offset, id)).and_then(|&i| members.get(i))
-                else {
-                    if !self.chosen.contains(&union_name) {
-                        self.skipped.entry(union_name).or_insert_with(|| {
-                            "a union no instance's tag chooses a member of".into()
-                        });
-                    }
-                    continue;
-                };
-                self.skipped.remove(&union_name);
-                self.chosen.insert(union_name.clone());
-                let member_die = member.ty.map(|t| self.resolve(t));
-                let named = member_die.is_some_and(|d| {
-                    let t = &self.graph.types[&d];
-                    t.name.is_some() && matches!(t.kind, TypeKind::Record { .. })
-                });
-                if !named {
-                    let name = member.name.map_or("?", |n| self.graph.str(n));
-                    self.skipped.insert(
-                        format!("{union_name}.{name}"),
-                        "a variant with no type of its own".into(),
-                    );
-                    continue;
-                }
-                die = member_die.unwrap();
-            }
+            let die = self.canonical.get(id).rep;
             let ty = &self.graph.types[&die];
-            let (mut type_name, mut typedef_header) = self.spelling(die);
-            // An anonymous struct is named by its typedef, e.g. `Vec2`
+            if !matches!(ty.kind, TypeKind::Record { .. }) {
+                continue;
+            }
+            let mut type_name = self.renderer.declare(Some(die), "");
+            let mut lookup = ty
+                .name
+                .map(|n| self.graph.str(n).to_owned())
+                .unwrap_or_default();
+            let mut decl_file = ty.decl_file;
+            // An anonymous record is named by its typedef, e.g. `Vec2`
             if ty.name.is_none() {
-                match self.typedef_of(die) {
-                    Some((name, header)) => {
-                        type_name = name;
-                        typedef_header = header;
+                match self.typedef_of(id) {
+                    Some(typedef) => {
+                        let typedef = &self.graph.types[&typedef];
+                        type_name = typedef.name.map_or(type_name, |n| {
+                            self.graph.str(n).to_owned()
+                        });
+                        lookup = type_name.clone();
+                        decl_file = typedef.decl_file;
                     }
                     None => {
-                        self.skipped.insert(type_name, "anonymous".into());
+                        self.skipped.insert(type_name, "anonymous");
                         continue;
                     }
                 }
             }
             let Some(header) =
-                ty.decl_file.and_then(|f| header(self.graph.str(f)))
+                decl_file.and_then(|f| header(self.graph.str(f)))
             else {
-                self.skipped.insert(type_name, "not declared in a header".into());
+                self.skipped.insert(type_name, "not declared in a header");
                 continue;
             };
-            let Some(size) = self.canonical.byte_size(self.graph, die) else {
+            // What each tagged union inside chose, by offset and type
+            let mut die = die;
+            let mut key_name = type_name.clone();
+            let mut member_name = None;
+            if let TypeKind::Record {
+                union: true,
+                members,
+                ..
+            } = &ty.kind
+            {
+                // A union object is the member its tag chose: the archive
+                // only holds that member's bytes, and other data follows
+                let member = walk
+                    .choices
+                    .get(&(offset, id))
+                    .and_then(|&i| members.get(i));
+                let Some((member, member_ty)) =
+                    member.and_then(|m| Some((m, m.ty?)))
+                else {
+                    self.skipped
+                        .entry(type_name)
+                        .or_insert("a union no tag chooses a member of");
+                    continue;
+                };
+                let name = member.name.map_or("?", |n| self.graph.str(n));
+                key_name = format!("{type_name}.{name}");
+                type_name = format!("typeof((({type_name} *) 0)->{name})");
+                member_name = Some(name.to_owned());
+                die = member_ty;
+            }
+            let Some(size) = self.member_size(die) else {
                 continue;
             };
             let end = offset as u64 + size;
             if size == 0 || end > archive.data.len() as u64 {
                 continue;
             }
-            // Only instances the walk found nothing wrong in: every
-            // relocated word explained, and no finding through them
+            // Whether the walk found nothing wrong in it: every relocated
+            // word explained, and no finding in its own fields
             let inside = relocs.range(offset..end as u32);
             let path = walk.paths.get(&offset).map_or("", String::as_str);
             let clean = inside.clone().all(|at| walk.pointers.contains(at))
                 && !walk.issues.iter().any(|i| {
-                    // Findings in its own fields, not behind its pointers
+                    // Not behind its pointers
                     i.path()
                         .strip_prefix(path)
                         .is_some_and(|rest| !rest.contains("->"))
                 });
-            // A tagged union inside that chose other than its first member
-            // can't be written as C89: that variant needs a type of its own
+            // The variant: what each tagged union inside chose
             let choices: BTreeMap<(u32, CanonId), usize> = walk
                 .choices
                 .range((offset, CanonId(0))..(end as u32, CanonId(0)))
+                .filter(|&(&key, _)| key != (offset, id))
                 .map(|(&k, &v)| (k, v))
                 .collect();
-            let writer = CWriter::new(self.graph, self.canonical);
-            let nested = choices.iter().find(|&(&(at, union), &i)| {
-                i != 0
-                    && (at, id) != (offset, id)
-                    && !writer.first_carries(union, i)
-            });
-            if let Some((&(at, union), &index)) = nested {
-                let member = match &self.canonical.ty(self.graph, union).kind {
-                    TypeKind::Record { members, .. } => members
-                        .get(index)
-                        .and_then(|m| m.name)
-                        .map_or("?", |n| self.graph.str(n)),
-                    _ => "?",
-                };
-                let union_name = self
-                    .renderer
-                    .declare(Some(self.canonical.get(union).rep), "");
-                self.variants
-                    .entry(format!(
-                        "{type_name} with {union_name} at +0x{:X} as .{member}",
-                        at - offset
-                    ))
-                    .or_insert_with(|| {
-                        format!("{file}@0x{archive_offset:X} at 0x{offset:X}")
-                    });
-                continue;
-            }
-            // The variant, by the members nested unions chose; a union
-            // object's own choice is already its type
             let variant = choices
                 .iter()
-                .filter(|&(&(at, union), _)| (at, union) != (offset, id))
                 .map(|(&(_, union), &index)| {
                     match &self.canonical.ty(self.graph, union).kind {
                         TypeKind::Record { members, .. } => members
@@ -266,19 +278,22 @@ impl<'a> Picker<'a> {
                     }
                 })
                 .collect();
+            let root = root_of(path).to_owned();
             let bytes = &archive.data[offset as usize..end as usize];
             let candidate = Sample {
                 die,
                 type_name: type_name.clone(),
+                lookup,
+                member: member_name,
+                root,
                 header,
-                includes: typedef_header.into_iter().collect(),
                 size,
                 location: Location {
                     file: file.to_owned(),
                     archive: archive_offset,
                     offset,
                 },
-                relocs: relocs.range(offset..end as u32).count(),
+                relocs: inside.count(),
                 nonzero: bytes.iter().filter(|&&b| b != 0).count(),
                 clean,
                 choices,
@@ -287,7 +302,7 @@ impl<'a> Picker<'a> {
             // A clean instance if there is one, so that a sample fails
             // only where its type is wrong everywhere; then the one that
             // exercises the most: pointers, then data
-            let key = (type_name, candidate.variant.clone());
+            let key = (key_name, candidate.variant.clone());
             let better = self.best.get(&key).is_none_or(|best| {
                 (candidate.clean, candidate.relocs, candidate.nonzero)
                     > (best.clean, best.relocs, best.nonzero)
@@ -298,91 +313,81 @@ impl<'a> Picker<'a> {
         }
     }
 
-    /// Look through typedefs and qualifiers, and from declarations to
-    /// their definitions.
-    fn resolve(&self, mut die: DieId) -> DieId {
-        loop {
-            match &self.graph.types[&die].kind {
-                TypeKind::Typedef { target: Some(t) }
-                | TypeKind::Const { target: Some(t) }
-                | TypeKind::Volatile { target: Some(t) } => die = *t,
-                TypeKind::Record {
-                    declaration: true, ..
-                } => {
-                    return self
-                        .canonical
-                        .of(die)
-                        .and_then(|id| self.canonical.definition(self.graph, id))
-                        .map_or(die, |id| self.canonical.get(id).rep);
-                }
-                _ => return die,
-            }
+    /// What codegen needs to know about a sample, by name.
+    pub fn info(&self, sample: &Sample, symbol: String) -> SampleInfo {
+        let base = sample.location.offset;
+        SampleInfo {
+            symbol,
+            offset: sample.location.offset,
+            archive: sample.location.archive,
+            size: sample.size,
+            type_name: sample.type_name.clone(),
+            lookup: sample.lookup.clone(),
+            member: sample.member.clone(),
+            root: sample.root.clone(),
+            header: sample.header.clone(),
+            variant: sample.variant.clone(),
+            choices: sample
+                .choices
+                .iter()
+                .map(|(&(at, union), &member)| Choice {
+                    offset: at - base,
+                    union: self
+                        .renderer
+                        .declare(Some(self.canonical.get(union).rep), ""),
+                    member,
+                })
+                .collect(),
         }
     }
 
-    /// A typedef that names an anonymous record, with its header.
-    fn typedef_of(&self, die: DieId) -> Option<(String, Option<String>)> {
-        let id = self.canonical.of(die)?;
-        self.canonical.types.iter().find_map(|t| {
-            let ty = &self.graph.types[&t.rep];
-            let TypeKind::Typedef { target: Some(target) } = ty.kind else {
-                return None;
-            };
-            if self.canonical.of(target) != Some(id) {
-                return None;
-            }
-            Some((
-                self.graph.str(ty.name?).to_owned(),
-                ty.decl_file.and_then(|f| header(self.graph.str(f))),
-            ))
+    /// The size of a member's type, through typedefs.
+    fn member_size(&self, mut die: DieId) -> Option<u64> {
+        while let TypeKind::Typedef { target: Some(t) }
+        | TypeKind::Const { target: Some(t) }
+        | TypeKind::Volatile { target: Some(t) } =
+            self.graph.types[&die].kind
+        {
+            die = t;
+        }
+        self.canonical.byte_size(self.graph, die)
+    }
+
+    /// A typedef that names an anonymous record.
+    fn typedef_of(&self, id: CanonId) -> Option<DieId> {
+        self.canonical.types.iter().map(|t| t.rep).find(|rep| {
+            let ty = &self.graph.types[rep];
+            matches!(
+                ty.kind,
+                TypeKind::Typedef { target: Some(t) }
+                    if ty.name.is_some() && self.canonical.of(t) == Some(id)
+            )
         })
     }
 
-    /// How C names a record: its typedef where one of the same name refers
-    /// to it (`HSD_Joint`), else its tag (`struct HSD_Joint`).
-    /// Also the typedef's header, when it has one.
-    fn spelling(&self, die: DieId) -> (String, Option<String>) {
-        let tagged = self.renderer.declare(Some(die), "");
-        let Some(name) = self.graph.types[&die].name else {
-            return (tagged, None);
-        };
-        let name = self.graph.str(name);
-        let id = self.canonical.of(die);
-        let typedef = self.canonical.lookup(self.graph, name).into_iter().find(|&t| {
-            let TypeKind::Typedef { target: Some(target) } = self.graph.types[&t].kind
-            else {
-                return false;
-            };
-            let target = self.canonical.of(target);
-            target.is_some()
-                && (target == id
-                    || target.and_then(|t| self.canonical.definition(self.graph, t)) == id)
-        });
-        match typedef {
-            Some(t) => (
-                name.to_owned(),
-                self.graph.types[&t]
-                    .decl_file
-                    .and_then(|f| header(self.graph.str(f))),
-            ),
-            None => (tagged, None),
-        }
-    }
-
     pub fn finish(self) -> (Vec<Sample>, Vec<Skipped>) {
-        let variants = self.variants.into_iter().map(|(variant, at)| Skipped {
-            type_name: variant,
-            reason: format!("needs a type of its own ({at})"),
-        });
         let skipped = self
             .skipped
             .into_iter()
-            .filter(|(name, _)| !self.best.keys().any(|(t, _)| t == name))
+            .filter(|(name, _)| {
+                !self.best.keys().any(|(t, _)| {
+                    t == name
+                        || t.strip_prefix(name.as_str())
+                            .is_some_and(|m| m.starts_with('.'))
+                })
+            })
             .map(|(type_name, reason)| Skipped { type_name, reason })
-            .chain(variants)
             .collect();
         (self.best.into_values().collect(), skipped)
     }
+}
+
+/// The root a walk path starts from.
+pub fn root_of(path: &str) -> &str {
+    path.split(['.', '-', '['])
+        .next()
+        .filter(|r| !r.is_empty())
+        .unwrap_or("unknown")
 }
 
 /// The include path of a header from its DWARF path, e.g.
@@ -399,38 +404,50 @@ fn header(path: &str) -> Option<String> {
     Some(path[at..].to_owned())
 }
 
-/// A C identifier from a type name: `struct HSD_Joint` to `HSD_Joint`.
-fn identifier(name: &str) -> String {
-    let name = name
-        .trim_start_matches("struct ")
-        .trim_start_matches("union ");
-    name.chars()
-        .map(|c| if c.is_ascii_alphanumeric() { c } else { '_' })
-        .collect()
+/// Whether a name from an archive can be used as a C identifier.
+fn is_identifier(name: &str) -> bool {
+    let mut chars = name.chars();
+    chars
+        .next()
+        .is_some_and(|c| c.is_ascii_alphabetic() || c == '_')
+        && chars.all(|c| c.is_ascii_alphanumeric() || c == '_')
 }
 
-/// The extern a relocated word points to, named after its target, e.g.
-/// `dat_PlMr_1A40`, or `dat_PlBoAJ_1F20_34` inside a packed file.
-pub fn target_symbol(location: &Location, target: u32) -> String {
-    let stem = location.file.strip_suffix(".dat").unwrap_or(&location.file);
-    let stem = identifier(stem);
-    match location.archive {
-        0 => format!("dat_{stem}_{target:X}"),
-        archive => format!("dat_{stem}_{archive:X}_{target:X}"),
-    }
-}
-
-/// The archive data a sample reads.
+/// One archive's data, as samples read and name it.
 pub struct Source<'a> {
     pub archive: &'a Archive<'a>,
+    /// Offset of the archive in its file; nonzero inside packed files.
+    archive_offset: usize,
     relocs: BTreeSet<u32>,
+    /// Public symbols by offset.
+    publics: BTreeMap<u32, String>,
 }
 
 impl<'a> Source<'a> {
-    pub fn new(archive: &'a Archive<'a>) -> Self {
+    pub fn new(archive: &'a Archive<'a>, archive_offset: usize) -> Self {
+        let mut publics = BTreeMap::new();
+        for (name, symbol) in archive.named_publics() {
+            if let Ok(name) = std::str::from_utf8(name)
+                && is_identifier(name)
+            {
+                publics.entry(symbol.offset).or_insert(name.to_owned());
+            }
+        }
         Source {
             archive,
+            archive_offset,
             relocs: archive.relocs.iter().copied().collect(),
+            publics,
+        }
+    }
+
+    /// What the data at `offset` is called: its public symbol's name, else
+    /// `x<OFFSET>`, or `x<ARCHIVE>_<OFFSET>` inside a packed file.
+    pub fn name(&self, offset: u32) -> String {
+        match (self.publics.get(&offset), self.archive_offset) {
+            (Some(name), _) => name.clone(),
+            (None, 0) => format!("x{offset:X}"),
+            (None, archive) => format!("x{archive:X}_{offset:X}"),
         }
     }
 
@@ -443,7 +460,7 @@ impl<'a> Source<'a> {
     }
 
     /// Relocated words in `offset..offset + size`, with their targets.
-    fn relocs(&self, offset: u32, size: u64) -> Vec<(u32, u32)> {
+    pub fn relocs(&self, offset: u32, size: u64) -> Vec<(u32, u32)> {
         self.relocs
             .range(offset..offset + size as u32)
             .map(|&at| (at, self.word(at)))
@@ -451,23 +468,28 @@ impl<'a> Source<'a> {
     }
 }
 
-/// A unit's target object: every sample's bytes, with relocations to the
-/// externs their words point to.
+/// A unit's target object: every sample's bytes under its name, with
+/// relocations to the names its words point to.
 pub fn target_object(samples: &[(&Sample, &Source)]) -> Result<Vec<u8>> {
     let mut obj =
         Object::new(BinaryFormat::Elf, Architecture::PowerPc, Endianness::Big);
     let segment = obj.segment_name(StandardSegment::Data).to_vec();
-    let data =
-        obj.add_section(segment.clone(), b".data".to_vec(), SectionKind::Data);
-    let sdata =
-        obj.add_section(segment, b".sdata".to_vec(), SectionKind::Data);
-    let mut externs = BTreeMap::new();
+    let data = obj.add_section(segment, b".data".to_vec(), SectionKind::Data);
+    let symbol = |name: String, section, value, size| Symbol {
+        name: name.into_bytes(),
+        value,
+        size,
+        kind: SymbolKind::Data,
+        // Global, with default visibility
+        scope: SymbolScope::Dynamic,
+        weak: false,
+        section,
+        flags: SymbolFlags::None,
+    };
+    // Samples first, so that pointers between them use their symbols
+    let mut symbols = BTreeMap::new();
+    let mut placed = Vec::new();
     for (sample, source) in samples {
-        let section = if sample.size <= SMALL_DATA_MAX {
-            sdata
-        } else {
-            data
-        };
         let offset = sample.location.offset;
         // Relocated words hold their target in the relocation, as a
         // compiler writes them; the archive's value is only an offset
@@ -476,36 +498,29 @@ pub fn target_object(samples: &[(&Sample, &Source)]) -> Result<Vec<u8>> {
             let at = (word - offset) as usize;
             bytes[at..at + 4].fill(0);
         }
-        let at = obj.append_section_data(section, &bytes, 4);
-        obj.add_symbol(Symbol {
-            name: sample.symbol().into_bytes(),
-            value: at,
-            size: sample.size,
-            kind: SymbolKind::Data,
-            scope: SymbolScope::Linkage,
-            weak: false,
-            section: SymbolSection::Section(section),
-            flags: SymbolFlags::None,
-        });
+        let at = obj.append_section_data(data, &bytes, 4);
+        let name = source.name(offset);
+        let id = obj.add_symbol(symbol(
+            name.clone(),
+            SymbolSection::Section(data),
+            at,
+            sample.size,
+        ));
+        symbols.insert(name, id);
+        placed.push(at);
+    }
+    for ((sample, source), at) in samples.iter().zip(placed) {
+        let offset = sample.location.offset;
         for (word, target) in source.relocs(offset, sample.size) {
-            let name = target_symbol(&sample.location, target);
-            let symbol = *externs.entry(name.clone()).or_insert_with(|| {
-                obj.add_symbol(Symbol {
-                    name: name.into_bytes(),
-                    value: 0,
-                    size: 0,
-                    kind: SymbolKind::Data,
-                    scope: SymbolScope::Linkage,
-                    weak: false,
-                    section: SymbolSection::Undefined,
-                    flags: SymbolFlags::None,
-                })
+            let name = source.name(target);
+            let id = *symbols.entry(name.clone()).or_insert_with(|| {
+                obj.add_symbol(symbol(name, SymbolSection::Undefined, 0, 0))
             });
             obj.add_relocation(
-                section,
+                data,
                 Relocation {
                     offset: at + u64::from(word - offset),
-                    symbol,
+                    symbol: id,
                     addend: 0,
                     flags: RelocationFlags::Elf {
                         r_type: object::elf::R_PPC_ADDR32,
@@ -517,11 +532,29 @@ pub fn target_object(samples: &[(&Sample, &Source)]) -> Result<Vec<u8>> {
     Ok(obj.write()?)
 }
 
+/// A root's generated C, named after it.
+pub struct RootFiles {
+    pub name: String,
+    pub header: String,
+    /// None for a root with no samples, only data they point to.
+    pub source: Option<String>,
+}
+
+/// A root name as a file name.
+fn file_name(root: &str) -> String {
+    root.chars()
+        .map(|c| if c.is_ascii_alphanumeric() { c } else { '_' })
+        .collect()
+}
+
 /// Writes C initializers that should compile to a sample's bytes.
 pub struct CWriter<'a> {
     graph: &'a TypeGraph,
     canonical: &'a Canonical,
     renderer: Renderer<'a>,
+    /// The unit's samples' types, by symbol, so pointers to them need no
+    /// cast.
+    samples: std::cell::RefCell<BTreeMap<String, CanonId>>,
 }
 
 impl<'a> CWriter<'a> {
@@ -530,57 +563,203 @@ impl<'a> CWriter<'a> {
             graph,
             canonical,
             renderer: Renderer::new(graph, canonical),
+            samples: Default::default(),
         }
     }
 
-    /// A unit's C: its headers, the externs its pointers name, and one
-    /// definition per sample.
-    pub fn unit(&self, samples: &[(&Sample, &Source)]) -> Result<String> {
-        let mut externs = BTreeSet::new();
-        let mut defs = String::new();
-        for (sample, source) in samples {
-            let offset = sample.location.offset;
-            for (_, target) in source.relocs(offset, sample.size) {
-                externs.insert(target_symbol(&sample.location, target));
-            }
-            let location = &sample.location;
-            let archive = match location.archive {
-                0 => String::new(),
-                a => format!("@0x{a:X}"),
-            };
-            writeln!(
-                defs,
-                "/// {}{archive} at 0x{:X}",
-                location.file, location.offset
-            )?;
-            let mut init = String::new();
-            let slots = BTreeSet::new();
-            self.value(&mut init, sample, source, sample.die, offset, &slots, 0)?;
-            writeln!(defs, "{} {} = {init};\n", sample.type_name, sample.symbol())?;
-        }
-        let mut out = String::from(concat!(
-            "// Generated by `melee-dat samples build` from the types.\n\n",
-            "#include <Runtime/platform.h>\n",
-        ));
-        let headers: BTreeSet<&str> = samples
+    /// A unit's C, one root at a time: its header, declaring the root's
+    /// samples, and its source, defining them.
+    /// `externs` are the other data the samples point to, by name, with
+    /// their roots; they are declared as bytes.
+    pub fn unit(
+        &self,
+        archive: &str,
+        instances: &[Instance],
+        externs: &BTreeMap<String, String>,
+    ) -> Result<Vec<RootFiles>> {
+        let owners: BTreeMap<&str, &str> = instances
             .iter()
-            .flat_map(|(s, _)| {
-                std::iter::once(s.header.as_str())
-                    .chain(s.includes.iter().map(String::as_str))
-            })
+            .map(|i| (i.info.symbol.as_str(), i.info.root.as_str()))
+            .chain(externs.iter().map(|(n, r)| (n.as_str(), r.as_str())))
             .collect();
+        let mut samples = BTreeMap::new();
+        for inst in instances {
+            let die = self.resolve(self.die_of(inst.info)?);
+            if let Some(id) = self.canonical.of(die) {
+                samples.insert(inst.info.symbol.clone(), id);
+            }
+        }
+        *self.samples.borrow_mut() = samples;
+        let mut roots: BTreeMap<&str, (Vec<&Instance>, Vec<&str>)> =
+            BTreeMap::new();
+        for inst in instances {
+            roots
+                .entry(inst.info.root.as_str())
+                .or_default()
+                .0
+                .push(inst);
+        }
+        for (name, root) in externs {
+            roots
+                .entry(root.as_str())
+                .or_default()
+                .1
+                .push(name.as_str());
+        }
+        roots
+            .into_iter()
+            .map(|(root, (instances, bytes))| {
+                Ok(RootFiles {
+                    name: file_name(root),
+                    header: self.header(archive, root, &instances, &bytes)?,
+                    source: if instances.is_empty() {
+                        None
+                    } else {
+                        Some(self.source(archive, root, &instances, &owners)?)
+                    },
+                })
+            })
+            .collect()
+    }
+
+    /// A root's header: an extern declaration of each of its samples, and
+    /// of the other data in it that samples point to, as bytes.
+    fn header(
+        &self,
+        archive: &str,
+        root: &str,
+        instances: &[&Instance],
+        bytes: &[&str],
+    ) -> Result<String> {
+        let guard = format!("DAT_{}_H", file_name(root).to_uppercase());
+        let mut out = format!(
+            concat!(
+                "/**\n",
+                " * @file\n",
+                " * The samples of `{root}` in `{archive}`, and the data they ",
+                "point to.\n",
+                " * Generated by `melee-dat samples codegen`.\n",
+                " */\n\n",
+                "#ifndef {guard}\n",
+                "#define {guard}\n\n",
+                "#include <Runtime/platform.h>\n",
+            ),
+            root = root,
+            archive = archive,
+            guard = guard,
+        );
+        let headers: BTreeSet<&str> =
+            instances.iter().map(|i| i.info.header.as_str()).collect();
         for header in headers {
             writeln!(out, "#include <{header}>")?;
         }
         out.push('\n');
-        for name in externs {
+        for inst in instances {
+            let info = inst.info;
+            writeln!(out, "extern {} {};", info.type_name, info.symbol)?;
+        }
+        for name in bytes {
             writeln!(out, "extern u8 {name}[];")?;
         }
-        if !samples.is_empty() {
-            out.push('\n');
+        writeln!(out, "\n#endif")?;
+        Ok(out)
+    }
+
+    /// A root's source: its samples' definitions, after the headers of every
+    /// root they point into.
+    fn source(
+        &self,
+        archive: &str,
+        root: &str,
+        instances: &[&Instance],
+        owners: &BTreeMap<&str, &str>,
+    ) -> Result<String> {
+        // What the pointers name, in the order they first do
+        let mut referenced = Vec::new();
+        let mut seen = BTreeSet::new();
+        let mut defs = String::new();
+        for inst in instances {
+            for name in inst.relocs.values() {
+                if seen.insert(name.as_str()) {
+                    referenced.push(name.as_str());
+                }
+            }
+            let die = self.die_of(inst.info)?;
+            let mut init = String::new();
+            self.value(&mut init, inst, die, 0, 0)?;
+            let info = inst.info;
+            let at = match info.archive {
+                0 => format!("0x{:X}", info.offset),
+                archive => format!("0x{archive:X}+0x{:X}", info.offset),
+            };
+            write!(defs, "/// `{archive}` at {at}.")?;
+            if !info.variant.is_empty() {
+                write!(
+                    defs,
+                    " Its unions' members: {}.",
+                    info.variant.join(", ")
+                )?;
+            }
+            defs.push('\n');
+            writeln!(defs, "{} {} = {init};\n", info.type_name, info.symbol)?;
         }
+        let mut out = format!(
+            "/**\n * @file\n \
+             * The samples of `{root}` in `{archive}`.\n \
+             * Generated by `melee-dat samples codegen`.\n */\n\n"
+        );
+        // This root's declarations, then those of every other root it
+        // points into
+        let mut roots = vec![root];
+        for name in referenced {
+            let owner = owners
+                .get(name)
+                .with_context(|| format!("no root declares {name}"))?;
+            if !roots.contains(owner) {
+                roots.push(owner);
+            }
+        }
+        roots[1..].sort_unstable();
+        for root in roots {
+            writeln!(out, "#include \"{}.h\"", file_name(root))?;
+        }
+        out.push('\n');
         out.push_str(&defs);
         Ok(out)
+    }
+
+    /// A sample's type, looked up by name; for a union object, the member
+    /// its tag chose.
+    fn die_of(&self, info: &SampleInfo) -> Result<DieId> {
+        let record = self
+            .canonical
+            .lookup(self.graph, &info.lookup)
+            .into_iter()
+            .map(|die| self.resolve(die))
+            .find(|die| {
+                matches!(
+                    self.graph.types[die].kind,
+                    TypeKind::Record {
+                        declaration: false,
+                        ..
+                    }
+                )
+            });
+        let Some(record) = record else {
+            bail!("{}: no type `{}`", info.symbol, info.lookup);
+        };
+        let Some(member) = &info.member else {
+            return Ok(record);
+        };
+        let TypeKind::Record { members, .. } = &self.graph.types[&record].kind
+        else {
+            unreachable!()
+        };
+        members
+            .iter()
+            .find(|m| m.name.is_some_and(|n| self.graph.str(n) == member))
+            .and_then(|m| m.ty)
+            .with_context(|| format!("{}: no member `{member}`", info.symbol))
     }
 
     /// Look through typedefs and qualifiers, and from declarations to
@@ -608,24 +787,35 @@ impl<'a> CWriter<'a> {
         }
     }
 
+    fn size(&self, die: DieId) -> u64 {
+        self.canonical
+            .byte_size(self.graph, self.resolve(die))
+            .unwrap_or(0)
+    }
+
+    /// `.name = ` for a member, or nothing for an anonymous one, which
+    /// then initializes the next member in order.
+    fn designator(&self, member: &Member) -> String {
+        member
+            .name
+            .map_or(String::new(), |n| format!(".{} = ", self.graph.str(n)))
+    }
+
     /// The initializer for a value of type `die` at `offset`.
     fn value(
         &self,
         out: &mut String,
-        sample: &Sample,
-        source: &Source,
+        inst: &Instance,
         die: DieId,
         offset: u32,
-        // Offsets where an enclosing union has a pointer in some member
-        slots: &BTreeSet<u32>,
         depth: usize,
     ) -> Result<()> {
         if depth > 32 {
-            bail!("{}: type nests too deep", sample.type_name);
+            bail!("{}: type nests too deep", inst.info.symbol);
         }
         let spelled = die;
         let die = self.resolve(die);
-        let size = self.canonical.byte_size(self.graph, die).unwrap_or(0);
+        let size = self.size(die);
         match &self.graph.types[&die].kind {
             TypeKind::Record {
                 union: false,
@@ -636,39 +826,44 @@ impl<'a> CWriter<'a> {
                 let mut first = true;
                 for member in members {
                     let Some(ty) = member.ty else { continue };
+                    // Unnamed bitfields are padding; a flexible array has
+                    // no size and no initializer
+                    let bitfield = member.bit_size.is_some();
+                    if (bitfield && member.name.is_none())
+                        || (!bitfield && self.size(ty) == 0)
+                    {
+                        continue;
+                    }
                     if !first {
                         out.push_str(", ");
                     }
                     first = false;
+                    out.push_str(&self.designator(member));
                     if let Some(bits) = member.bit_size {
                         let start = member
                             .bit_offset
                             .unwrap_or(member.offset.unwrap_or(0) * 8);
-                        let value = self.bits(source, offset, start, bits);
-                        let signed = self.signed(ty);
-                        let value = if signed
+                        let value = bits_at(inst.bytes, offset, start, bits);
+                        let negative = self.signed(ty)
                             && bits < 64
-                            && value >> (bits - 1) & 1 == 1
-                        {
-                            (value as i64) - (1i64 << bits)
-                        } else {
-                            value as i64
+                            && value >> (bits - 1) & 1 == 1;
+                        let value = match negative {
+                            true => value as i64 - (1i64 << bits),
+                            false => value as i64,
                         };
                         write!(out, "{value}")?;
                         continue;
                     }
                     let at = offset + member.offset.unwrap_or(0) as u32;
-                    // A flexible array has no size and no initializer
-                    let elements =
-                        self.canonical.byte_size(self.graph, self.resolve(ty));
-                    if elements == Some(0) {
-                        out.push_str("{0}");
-                        continue;
-                    }
-                    self.value(out, sample, source, ty, at, slots, depth + 1)?;
+                    self.value(out, inst, ty, at, depth + 1)?;
                 }
+                // A trailing comma lays the sample's members out one per
+                // line when the C is formatted. clang-format leaves an
+                // initializer alone if a nested one has one too
                 if first {
                     out.push('0');
+                } else if depth == 0 {
+                    out.push(',');
                 }
                 out.push('}');
             }
@@ -677,30 +872,30 @@ impl<'a> CWriter<'a> {
                 members,
                 ..
             } => {
-                // C89 initializes a union through its first member only
-                let Some(ty) = members.first().and_then(|m| m.ty) else {
+                // The member its tag chose; else the largest, which holds
+                // every byte
+                let union = self.renderer.declare(Some(die), "");
+                let chosen = inst
+                    .info
+                    .choices
+                    .iter()
+                    .find(|c| c.offset == offset && c.union == union)
+                    .and_then(|c| members.get(c.member));
+                let largest = members
+                    .iter()
+                    .rev()
+                    .max_by_key(|m| m.ty.map_or(0, |ty| self.size(ty)));
+                let Some(member) = chosen.or(largest) else {
                     out.push_str("{0}");
                     return Ok(());
                 };
-                // Relocations where the member its tag chose has pointers;
-                // where no tag chose, wherever any member has one
-                let mut slots = slots.clone();
-                let chosen = self
-                    .canonical
-                    .of(die)
-                    .and_then(|id| sample.choices.get(&(offset, id)))
-                    .and_then(|&i| members.get(i));
-                let candidates: Vec<_> = match chosen {
-                    Some(member) => vec![member],
-                    None => members.iter().collect(),
+                let Some(ty) = member.ty else {
+                    out.push_str("{0}");
+                    return Ok(());
                 };
-                for member in candidates {
-                    if let Some(ty) = member.ty {
-                        self.pointer_offsets(ty, offset, &mut slots, 0);
-                    }
-                }
                 out.push('{');
-                self.value(out, sample, source, ty, offset, &slots, depth + 1)?;
+                out.push_str(&self.designator(member));
+                self.value(out, inst, ty, offset, depth + 1)?;
                 out.push('}');
             }
             TypeKind::Array { element, dims } => {
@@ -708,12 +903,9 @@ impl<'a> CWriter<'a> {
                     out.push_str("{0}");
                     return Ok(());
                 };
-                let element_size = self
-                    .canonical
-                    .byte_size(self.graph, self.resolve(element))
-                    .unwrap_or(0);
-                let count: u64 = dims.iter().map(|d| d.unwrap_or(0)).product();
+                let element_size = self.size(element);
                 // Nested dimensions are laid out flat, which C accepts
+                let count: u64 = dims.iter().map(|d| d.unwrap_or(0)).product();
                 out.push('{');
                 if count == 0 || element_size == 0 {
                     out.push('0');
@@ -723,24 +915,37 @@ impl<'a> CWriter<'a> {
                         out.push_str(", ");
                     }
                     let at = offset + (i * element_size) as u32;
-                    self.value(out, sample, source, element, at, slots, depth + 1)?;
+                    self.value(out, inst, element, at, depth + 1)?;
                 }
                 out.push('}');
             }
-            TypeKind::Pointer { .. } => {
+            TypeKind::Pointer { target: pointee } => {
                 let cast = self.renderer.declare(Some(spelled), "");
-                self.word(out, sample, source, offset, &cast)?;
-            }
-            TypeKind::Base { encoding } => {
-                // A relocated word is written as its raw value, the same
-                // bytes without the relocation, so objdiff shows that the
-                // field should be a pointer. Unless another member of an
-                // enclosing union has one there
-                if slots.contains(&offset) && source.relocs.contains(&offset) {
-                    let cast = self.renderer.declare(Some(spelled), "");
-                    return self.word(out, sample, source, offset, &cast);
+                let value = word_at(inst.bytes, offset);
+                if let Some(target) = inst.relocs.get(&offset) {
+                    // A sample of the pointee's own type needs no cast
+                    let pointee = pointee
+                        .map(|p| self.resolve(p))
+                        .and_then(|p| self.canonical.of(p));
+                    let same = pointee.is_some()
+                        && self.samples.borrow().get(target)
+                            == pointee.as_ref();
+                    match same {
+                        true => write!(out, "&{target}")?,
+                        false => write!(out, "({cast}) &{target}")?,
+                    }
+                } else if value == 0 {
+                    out.push_str("NULL");
+                } else {
+                    write!(out, "({cast}) 0x{value:X}")?;
                 }
-                let bytes = source.bytes(offset, size);
+            }
+            // A relocated word under a scalar is written as its raw value:
+            // the same bytes without the relocation, so objdiff shows that
+            // the field should be a pointer
+            TypeKind::Base { encoding } => {
+                let bytes = &inst.bytes
+                    [offset as usize..(offset as u64 + size) as usize];
                 match (*encoding, size) {
                     (FLOAT, 4) => {
                         let v = f32::from_be_bytes(bytes.try_into().unwrap());
@@ -760,7 +965,8 @@ impl<'a> CWriter<'a> {
                 }
             }
             TypeKind::Enum { .. } => {
-                let bytes = source.bytes(offset, size);
+                let bytes = &inst.bytes
+                    [offset as usize..(offset as u64 + size) as usize];
                 let value =
                     bytes.iter().fold(0u64, |acc, &b| acc << 8 | u64::from(b));
                 integer(out, value, size, true)?;
@@ -768,106 +974,6 @@ impl<'a> CWriter<'a> {
             _ => out.push('0'),
         }
         Ok(())
-    }
-
-    /// Whether a union's first member can carry member `index`: C89
-    /// initializes a union through its first member, which has to be as
-    /// large and have a pointer wherever the chosen member does.
-    pub fn first_carries(&self, union: CanonId, index: usize) -> bool {
-        let TypeKind::Record { members, .. } =
-            &self.canonical.ty(self.graph, union).kind
-        else {
-            return false;
-        };
-        let (Some(first), Some(chosen)) = (
-            members.first().and_then(|m| m.ty),
-            members.get(index).and_then(|m| m.ty),
-        ) else {
-            return false;
-        };
-        let size = |die| {
-            self.canonical
-                .byte_size(self.graph, self.resolve(die))
-                .unwrap_or(0)
-        };
-        let (mut first_pointers, mut chosen_pointers) =
-            (BTreeSet::new(), BTreeSet::new());
-        self.pointer_offsets(first, 0, &mut first_pointers, 0);
-        self.pointer_offsets(chosen, 0, &mut chosen_pointers, 0);
-        size(first) >= size(chosen) && chosen_pointers.is_subset(&first_pointers)
-    }
-
-    /// Every offset where `die` at `base` has a pointer.
-    fn pointer_offsets(
-        &self,
-        die: DieId,
-        base: u32,
-        out: &mut BTreeSet<u32>,
-        depth: usize,
-    ) {
-        if depth > 32 {
-            return;
-        }
-        let die = self.resolve(die);
-        match &self.graph.types[&die].kind {
-            TypeKind::Pointer { .. } => {
-                out.insert(base);
-            }
-            TypeKind::Record { members, .. } => {
-                for m in members {
-                    if let (Some(ty), None) = (m.ty, m.bit_size) {
-                        let at = base + m.offset.unwrap_or(0) as u32;
-                        self.pointer_offsets(ty, at, out, depth + 1);
-                    }
-                }
-            }
-            TypeKind::Array { element: Some(e), dims } => {
-                let size = self
-                    .canonical
-                    .byte_size(self.graph, self.resolve(*e))
-                    .unwrap_or(0);
-                let count: u64 = dims.iter().map(|d| d.unwrap_or(0)).product();
-                for i in 0..count.min(4096) {
-                    let at = base + (i * size) as u32;
-                    self.pointer_offsets(*e, at, out, depth + 1);
-                }
-            }
-            _ => {}
-        }
-    }
-
-    /// A pointer-sized word: the extern it points to, or its value.
-    fn word(
-        &self,
-        out: &mut String,
-        sample: &Sample,
-        source: &Source,
-        offset: u32,
-        cast: &str,
-    ) -> Result<()> {
-        let value = source.word(offset);
-        if source.relocs.contains(&offset) {
-            write!(
-                out,
-                "({cast}) {}",
-                target_symbol(&sample.location, value)
-            )?;
-        } else if value == 0 {
-            out.push('0');
-        } else {
-            write!(out, "({cast}) 0x{value:X}")?;
-        }
-        Ok(())
-    }
-
-    /// Bits `start..start + len` of the record at `offset`, counted from the
-    /// most significant bit of its first byte.
-    fn bits(&self, source: &Source, offset: u32, start: u64, len: u64) -> u64 {
-        (start..start + len).fold(0, |acc, bit| {
-            let byte =
-                source.archive.data[offset as usize + (bit / 8) as usize];
-            acc << 1 | u64::from(byte >> (7 - bit % 8) & 1)
-        })
     }
 
     fn signed(&self, die: DieId) -> bool {
@@ -879,6 +985,20 @@ impl<'a> CWriter<'a> {
             _ => false,
         }
     }
+}
+
+/// Bits `start..start + len` of the record at `offset`, counted from the
+/// most significant bit of its first byte.
+fn bits_at(bytes: &[u8], offset: u32, start: u64, len: u64) -> u64 {
+    (start..start + len).fold(0, |acc, bit| {
+        let byte = bytes[offset as usize + (bit / 8) as usize];
+        acc << 1 | u64::from(byte >> (7 - bit % 8) & 1)
+    })
+}
+
+fn word_at(bytes: &[u8], offset: u32) -> u32 {
+    let at = offset as usize;
+    u32::from_be_bytes(bytes[at..at + 4].try_into().unwrap())
 }
 
 /// A float literal from Rust's shortest round-trip form, e.g. `1.0`,
@@ -934,16 +1054,11 @@ mod tests {
     }
 
     #[test]
-    fn target_symbols() {
-        let at = |file: &str, archive| Location {
-            file: file.into(),
-            archive,
-            offset: 0,
-        };
-        assert_eq!(target_symbol(&at("PlMr.dat", 0), 0x1A40), "dat_PlMr_1A40");
-        assert_eq!(
-            target_symbol(&at("PlBoAJ.dat", 0x1F20), 0x34),
-            "dat_PlBoAJ_1F20_34"
-        );
+    fn identifiers() {
+        assert!(is_identifier("ftDataMario"));
+        assert!(is_identifier("_x1"));
+        assert!(!is_identifier("1x"));
+        assert!(!is_identifier("a-b"));
+        assert!(!is_identifier(""));
     }
 }

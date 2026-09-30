@@ -3,9 +3,3 @@ symbols: config/GALE01/dat_symbols.txt
 include:
   - '*.dat'
 
-samples:
-  # Generated: target/ (from the archives), src/ (C from the types),
-  # base/ (src compiled), objdiff.json. Not committed.
-  dir: build/GALE01/dat
-  # A game unit whose compile command the samples reuse
-  compile_like: build/GALE01/src/melee/lb/lbcommand.o
