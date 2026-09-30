@@ -27,7 +27,7 @@
 - ❌ ft/ftanim.c — Animation system
 - ❌ ft/ftcoll.c — Fighter collision detection
 - ❌ ft/ftcommon.c — Common fighter utilities
-- ❌ ft/ftdata.c — Fighter data loading
+- ✅ ft/ftdata.c — Fighter data loading
 - ❌ ft/ftlib.c — Fighter library functions
 - ❌ ft/ftparts.c — Fighter model parts management
 - ❌ ft/ftcmdscript.c — Subaction command script interpreter

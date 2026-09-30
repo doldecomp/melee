@@ -1,3 +1,15 @@
+/**
+ * @file ftdata.c
+ * @brief Fighter asset loading, archive parsing, and character data management.
+ * @details Manages loading character assets from disc archives (.dat):
+ * - Character DAT files (PlXx.dat) containing models, attributes, collisions, and subactions.
+ * - Costume archives (PlXxNn.dat) containing alternate costume model joints and texture materials.
+ * - Animation joint archives (PlXxAJ.dat) containing FigaTree animation trees.
+ * - Character sound effects and particle effect archives (EfXxData.dat).
+ * Also handles Popo/Nana animation buffer sharing and reference counting.
+ * Module prefix: ft (Fighter)
+ */
+
 #include "ftdata.h"
 
 #include <Runtime/platform.h>
@@ -133,6 +145,7 @@
 #include <sysdolphin/baselib/jobj.h>
 #include <sysdolphin/baselib/objalloc.h>
 
+/// Model slot allocation entry (up to 6 simultaneous fighter model slots).
 typedef struct ft_8045993C_t {
     /* +0 */ u32 pad_x0;
     /* +4 */ u8 pad_x4[0x2];
@@ -144,7 +157,6 @@ typedef struct ft_8045993C_t {
 /* 45993C */ ft_8045993C_t ft_8045993C[6];
 /* 45996C */ int ft_8045996C[Ft_Kind_Max];
 
-/// @todo All one struct maybe?
 #ifdef MUST_MATCH
 static void order_bss(void)
 {
@@ -154,6 +166,10 @@ static void order_bss(void)
 }
 #endif
 
+/**
+ * @brief Updates fighter self-velocity from root bone joint translation delta.
+ * @param gobj Fighter game object pointer.
+ */
 void ft_8008521C(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -168,12 +184,14 @@ void ft_8008521C(HSD_GObj* gobj)
 
 static inline void ft_800852B0_Reset_ft_8045993C(ftData** list, int i)
 {
-    /// @todo Bitfields seem off
     ((ft_8045993C_t*) &list[Ft_Kind_Max])[i].pad_x0 = 0;
     ((ft_8045993C_t*) &list[Ft_Kind_Max])[i].x6_b0 = 0;
     ((ft_8045993C_t*) &list[Ft_Kind_Max])[i].x6_b1_b2 = 0;
 }
 
+/**
+ * @brief Global initialization routine clearing character data pointers and costume lists.
+ */
 void ft_800852B0(void)
 {
     ftData** list;
@@ -182,13 +200,13 @@ void ft_800852B0(void)
     ftData_UnkCountStruct* pairs =
         (ftData_UnkCountStruct*) ((u8*) CostumeListsForeachCharacter + 5940);
     int i;
-    int new_var = 0;
+    int costume_start = 0;
 
     for (i = 0; i < Ft_Kind_Max; ++i) {
-        int costume_idx = new_var;
+        int costume_idx = costume_start;
         list = gFtDataList;
         list[i] = NULL;
-        for (costume_idx = new_var;
+        for (costume_idx = costume_start;
              costume_idx < (s32) CostumeListsForeachCharacter[i].numCostumes;
              ++costume_idx)
         {
@@ -200,7 +218,7 @@ void ft_800852B0(void)
         unk0[i].data = NULL;
         pairs[i].data = NULL;
     }
-    ft_800852B0_Reset_ft_8045993C(list, new_var);
+    ft_800852B0_Reset_ft_8045993C(list, costume_start);
     ft_800852B0_Reset_ft_8045993C(list, 1);
     ft_800852B0_Reset_ft_8045993C(list, 2);
     ft_800852B0_Reset_ft_8045993C(list, 3);
@@ -208,6 +226,9 @@ void ft_800852B0(void)
     ft_800852B0_Reset_ft_8045993C(list, 5);
 }
 
+/**
+ * @brief Resets character reference counters to zero across all character kinds.
+ */
 void ft_8008549C(void)
 {
     int i;
@@ -216,6 +237,7 @@ void ft_8008549C(void)
     }
 }
 
+/// Per-character costume list definitions (joint model hierarchy and costume counts).
 /* 3C0EC0 */ struct UnkCostumeList
     CostumeListsForeachCharacter[Ft_Kind_Max] = {
         { ftMr_CostumeList, ARRAY_SIZE(ftMr_CostumeList) },
@@ -253,6 +275,7 @@ void ft_8008549C(void)
         { ftSb_CostumeList, ARRAY_SIZE(ftSb_CostumeList) }
     };
 
+/// Total subaction animation counts per character.
 ftData_UnkCountStruct ftData_Table_Unk0[Ft_Kind_Max] = {
     { 0, 303 }, { 0, 327 }, { 0, 318 }, { 0, 337 }, { 0, 479 }, { 0, 316 },
     { 0, 314 }, { 0, 317 }, { 0, 326 }, { 0, 318 }, { 0, 321 }, { 0, 321 },
@@ -262,6 +285,7 @@ ftData_UnkCountStruct ftData_Table_Unk0[Ft_Kind_Max] = {
     { 0, 295 }, { 0, 316 }, { 0, 296 },
 };
 
+/// Character secondary initialization callbacks (e.g. Kirby hat init).
 Event ftData_Table_Unk1[Ft_Kind_Max] = {
     NULL,
     NULL,
@@ -298,6 +322,7 @@ Event ftData_Table_Unk1[Ft_Kind_Max] = {
     NULL,
 };
 
+/// Per-character load callbacks called when a fighter entity is spawned.
 HSD_GObjEvent ftData_OnLoad[Ft_Kind_Max] = {
     ftMr_Init_OnLoad, ftFx_Init_OnLoad, ftCa_Init_OnLoad, ftDk_Init_OnLoad,
     ftKb_Init_OnLoad, ftKp_Init_OnLoad, ftLk_Init_OnLoad, ftSk_Init_OnLoad,
@@ -310,6 +335,7 @@ HSD_GObjEvent ftData_OnLoad[Ft_Kind_Max] = {
     ftSb_Init_OnLoad,
 };
 
+/// Per-character death callbacks invoked upon fighter KO.
 HSD_GObjEvent ftData_OnDeath[Ft_Kind_Max] = {
     ftMr_Init_OnDeath, ftFx_Init_OnDeath, ftCa_Init_OnDeath, ftDk_Init_OnDeath,
     ftKb_Init_OnDeath, ftKp_Init_OnDeath, ftLk_Init_OnDeath, ftSk_Init_OnDeath,
@@ -322,6 +348,7 @@ HSD_GObjEvent ftData_OnDeath[Ft_Kind_Max] = {
     ftSb_Init_OnDeath,
 };
 
+/// Per-character user data removal callbacks (cleanup).
 HSD_GObjEvent ftData_OnUserDataRemove[Ft_Kind_Max] = {
     NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL,
     NULL, NULL, NULL, NULL, NULL, NULL, NULL, ftPr_Init_OnUserDataRemove,
@@ -330,6 +357,7 @@ HSD_GObjEvent ftData_OnUserDataRemove[Ft_Kind_Max] = {
     NULL,
 };
 
+/// Per-character special action state tables (MotionState[]).
 MotionState* ftData_CharacterStateTables[Ft_Kind_Max] = {
     ftMr_Init_MotionStateTable,
     ftFx_Init_MotionStateTable,
@@ -402,6 +430,7 @@ MotionState* ftData_UnkMotionStates0[Ft_Kind_Max] = {
     NULL,
 };
 
+/// Ground Side Special (Side-B) entry functions per character.
 HSD_GObjEvent ftData_SpecialS[Ft_Kind_Max] = {
     ftMr_SpecialS_Enter,
     ftFx_SpecialSStart_Enter,
@@ -438,6 +467,7 @@ HSD_GObjEvent ftData_SpecialS[Ft_Kind_Max] = {
     NULL,
 };
 
+/// Aerial Up Special (Up-B) entry functions per character.
 HSD_GObjEvent ftData_SpecialAirHi[Ft_Kind_Max] = {
     ftMr_SpecialAirHi_Enter,
     ftFx_SpecialAirHiStart_Enter,
@@ -474,6 +504,7 @@ HSD_GObjEvent ftData_SpecialAirHi[Ft_Kind_Max] = {
     NULL,
 };
 
+/// Aerial Down Special (Down-B) entry functions per character.
 HSD_GObjEvent ftData_SpecialAirLw[Ft_Kind_Max] = {
     ftMr_SpecialAirLw_Enter,
     ftFx_SpecialAirLw_Enter,
@@ -510,6 +541,7 @@ HSD_GObjEvent ftData_SpecialAirLw[Ft_Kind_Max] = {
     NULL,
 };
 
+/// Aerial Side Special (Side-B) entry functions per character.
 HSD_GObjEvent ftData_SpecialAirS[Ft_Kind_Max] = {
     ftMr_SpecialAirS_Enter,
     ftFx_SpecialAirSStart_Enter,
@@ -546,6 +578,7 @@ HSD_GObjEvent ftData_SpecialAirS[Ft_Kind_Max] = {
     NULL,
 };
 
+/// Aerial Neutral Special (Neutral-B) entry functions per character.
 HSD_GObjEvent ftData_SpecialAirN[Ft_Kind_Max] = {
     ftMr_SpecialAirN_Enter,
     ftFx_SpecialAirN_Enter,
@@ -582,6 +615,7 @@ HSD_GObjEvent ftData_SpecialAirN[Ft_Kind_Max] = {
     NULL,
 };
 
+/// Ground Neutral Special (Neutral-B) entry functions per character.
 HSD_GObjEvent ftData_SpecialN[Ft_Kind_Max] = {
     ftMr_SpecialN_Enter,
     ftFx_SpecialN_Enter,
@@ -618,6 +652,7 @@ HSD_GObjEvent ftData_SpecialN[Ft_Kind_Max] = {
     NULL,
 };
 
+/// Ground Down Special (Down-B) entry functions per character.
 HSD_GObjEvent ftData_SpecialLw[Ft_Kind_Max] = {
     ftMr_SpecialLw_Enter,
     ftFx_SpecialLw_Enter,
@@ -654,6 +689,7 @@ HSD_GObjEvent ftData_SpecialLw[Ft_Kind_Max] = {
     NULL,
 };
 
+/// Ground Up Special (Up-B) entry functions per character.
 HSD_GObjEvent ftData_SpecialHi[Ft_Kind_Max] = {
     ftMr_SpecialHi_Enter,
     ftFx_SpecialHi_Enter,
@@ -690,6 +726,7 @@ HSD_GObjEvent ftData_SpecialHi[Ft_Kind_Max] = {
     NULL,
 };
 
+/// Energy projectile absorption callbacks (Ness PSI Magnet, G&W Oil Panic).
 HSD_GObjEvent ftData_OnAbsorb[Ft_Kind_Max] = {
     NULL,
     NULL,
@@ -726,6 +763,7 @@ HSD_GObjEvent ftData_OnAbsorb[Ft_Kind_Max] = {
     NULL,
 };
 
+/// Extended item pickup callbacks (Link/Young Link bomb/boomerang stow).
 Fighter_ItemEvent ftData_OnItemPickupExt[Ft_Kind_Max] = {
     ftMr_Init_OnItemPickup,
     ftFx_Init_OnItemPickup,
@@ -762,6 +800,7 @@ Fighter_ItemEvent ftData_OnItemPickupExt[Ft_Kind_Max] = {
     NULL,
 };
 
+/// Per-character callbacks when items become invisible.
 HSD_GObjEvent ftData_OnItemInvisible[Ft_Kind_Max] = {
     ftMr_Init_OnItemInvisible,
     ftFx_Init_OnItemInvisible,
@@ -798,6 +837,7 @@ HSD_GObjEvent ftData_OnItemInvisible[Ft_Kind_Max] = {
     NULL,
 };
 
+/// Per-character callbacks when items become visible.
 HSD_GObjEvent ftData_OnItemVisible[Ft_Kind_Max] = {
     ftMr_Init_OnItemVisible,
     ftFx_Init_OnItemVisible,
@@ -834,6 +874,7 @@ HSD_GObjEvent ftData_OnItemVisible[Ft_Kind_Max] = {
     NULL,
 };
 
+/// Extended item drop callbacks (Link/Young Link bomb/boomerang).
 Fighter_ItemEvent ftData_OnItemDropExt[Ft_Kind_Max] = {
     ftMr_Init_OnItemDrop,
     ftFx_Init_OnItemDrop,
@@ -870,6 +911,7 @@ Fighter_ItemEvent ftData_OnItemDropExt[Ft_Kind_Max] = {
     NULL,
 };
 
+/// Standard item pickup callbacks.
 Fighter_ItemEvent ftData_OnItemPickup[Ft_Kind_Max] = {
     ftMr_Init_OnItemPickup,
     ftFx_Init_OnItemPickup,
@@ -906,6 +948,7 @@ Fighter_ItemEvent ftData_OnItemPickup[Ft_Kind_Max] = {
     NULL,
 };
 
+/// Standard item drop callbacks.
 Fighter_ItemEvent ftData_OnItemDrop[Ft_Kind_Max] = {
     ftMr_Init_OnItemDrop,
     ftFx_Init_OnItemDrop,
@@ -1014,6 +1057,7 @@ HSD_GObjEvent ftData_UnkMotionStates2[Ft_Kind_Max] = {
     NULL,
 };
 
+/// Callbacks executed when entering knockback / hitstun state.
 HSD_GObjEvent ftData_OnKnockbackEnter[Ft_Kind_Max] = {
     ftMr_Init_OnKnockbackEnter,
     ftFx_Init_OnKnockbackEnter,
@@ -1050,6 +1094,7 @@ HSD_GObjEvent ftData_OnKnockbackEnter[Ft_Kind_Max] = {
     ftSb_Init_OnKnockbackEnter,
 };
 
+/// Callbacks executed when exiting knockback / hitstun state.
 HSD_GObjEvent ftData_OnKnockbackExit[Ft_Kind_Max] = {
     ftMr_Init_OnKnockbackExit,
     ftFx_Init_OnKnockbackExit,
@@ -1158,6 +1203,7 @@ HSD_GObjEvent ftData_UnkMotionStates4[Ft_Kind_Max] = {
     NULL,
 };
 
+/// Functions to parse and populate character-specific attributes from DAT archives.
 HSD_GObjEvent ftKindCalcIndiviParamTable[Ft_Kind_Max] = {
     ftMr_Init_LoadSpecialAttrs, ftFx_Init_LoadSpecialAttrs,
     ftCa_Init_LoadSpecialAttrs, ftDk_Init_LoadSpecialAttrs,
@@ -1178,10 +1224,10 @@ HSD_GObjEvent ftKindCalcIndiviParamTable[Ft_Kind_Max] = {
     ftSb_Init_LoadSpecialAttrs,
 };
 
-/// Standard Character .dat File Names
+/// Standard Character .dat File Names and Root Symbol Names
 struct StringPair {
-    char* a;
-    char* b;
+    char* a; ///< Archive filename on disc (e.g. "PlMr.dat")
+    char* b; ///< Root symbol identifier inside archive (e.g. "ftDataMario")
 };
 
 struct StringPair ftData_803C1F40[Ft_Kind_Max] = {
@@ -1266,8 +1312,7 @@ Fighter_UnkMtxEvent ftData_UnkMtxFunc0[Ft_Kind_Max] = {
     NULL,
 };
 
-/// Character model group (e.g. high poly, low poly, metal) visibility change
-/// callbacks
+/// Character model group (high poly, low poly, metal) visibility callbacks.
 ftData_UnkModelStruct ftData_UnkIntBoolFunc0 = {
     {
         NULL,
@@ -1352,7 +1397,7 @@ struct ftdata_ftData_UnkCallbackPairs0_t {
     { ftKb_Init_UnkCallbackPairs0_0, ftKb_Init_UnkCallbackPairs0_1 },
 };
 
-/// Costume and Joint Strings
+/// Costume filenames and model joint symbol names.
 Fighter_CostumeStrings* ftData_803C2360[Ft_Kind_Max] = {
     ftMr_Init_CostumeStrings, ftFx_Init_CostumeStrings,
     ftCa_Init_CostumeStrings, ftDk_Init_CostumeStrings,
@@ -1374,6 +1419,7 @@ Fighter_CostumeStrings* ftData_803C2360[Ft_Kind_Max] = {
 
 };
 
+/// Character animation joint archive filenames on disc (PlXxAJ.dat).
 char* ftData_803C23E4[Ft_Kind_Max] = {
     ftMr_Init_AnimDatFilename, ftFx_Init_AnimDatFilename,
     ftCa_Init_AnimDatFilename, ftDk_Init_AnimDatFilename,
@@ -1394,7 +1440,7 @@ char* ftData_803C23E4[Ft_Kind_Max] = {
     ftSb_Init_AnimDatFilename,
 };
 
-/// Demo Lookup Strings
+/// Demo animation filename table entries.
 Fighter_DemoStrings* ftData_803C2468[Ft_Kind_Max] = {
     &ftMr_Init_DemoMotionFilenames,
     &ftFx_Init_DemoMotionFilenames,
@@ -1431,6 +1477,7 @@ Fighter_DemoStrings* ftData_803C2468[Ft_Kind_Max] = {
     NULL,
 };
 
+/// Motion file string getter function pointers.
 Fighter_MotionFileStringGetter ftData_803C24EC[Ft_Kind_Max] = {
     ftMr_Init_GetMotionFileString,
     NULL,
@@ -1512,11 +1559,17 @@ ftData_UnkCountStruct ftData_UnkIntPairs[Ft_Kind_Max] = {
     { 0, 14 }, { 0, 15 }, { 0, 14 },
 };
 
+/// Particle effect (EF) bank IDs loaded asynchronously per character (-1 = none).
 u8 ftData_UnkBytePerCharacter[Ft_Kind_Max] = {
     1,  3,  4,  8, 5, 12, 6, 17, 10, 15, 14, 14, 7,  2,  9,  11, 13,
     18, 16, 17, 6, 1, 3,  7, -1, 19, 49, -1, -1, -1, -1, 12, -1,
 };
 
+/**
+ * @brief Adjusts character reference counter, asserting on underflow.
+ * @param idx Character kind index.
+ * @param increment Reference count delta.
+ */
 void ftData_80085560(int idx, int increment)
 {
     ft_8045996C[idx] += increment;
@@ -1529,6 +1582,11 @@ void ftData_80085560(int idx, int increment)
 char ftData_assert_msg_0[] = "cant get corps model array!\n";
 char ftData_assert_msg_1[] = "HSD_ArchiveParse error!\n";
 
+/**
+ * @brief Asynchronously queues DVD reads for base DAT, costumes, anims, and particle effects.
+ * @param kind Character kind to load.
+ * @param color Costume index to load (or 0xFF for all costumes).
+ */
 void ftData_800855C8(FighterKind kind, u8 color)
 {
     int i;
@@ -1540,6 +1598,7 @@ void ftData_800855C8(FighterKind kind, u8 color)
     {
         color = 0;
     }
+    // Queue main character DAT archive (PlXx.dat)
     if (ftData_803C1F40[kind].a != NULL) {
         lbDvd_800178E8(2, ftData_803C1F40[kind].a, 4, 4, 0, 1, 4, 2, 0);
     }
@@ -1550,20 +1609,27 @@ void ftData_800855C8(FighterKind kind, u8 color)
         lo = color;
         hi = color + 1;
     }
+    // Queue costume model DAT archives (PlXxNn.dat)
     for (i = lo; i < hi; i++) {
         if (ftData_803C2360[kind][i].dat_filename != NULL) {
             lbDvd_800178E8(2, ftData_803C2360[kind][i].dat_filename, 4, 4, 0,
                            1, 3, 1, 0);
         }
     }
+    // Queue character-specific particle effect archive
     if (ftData_UnkBytePerCharacter[kind] != (char) -1) {
         efAsync_LoadAsync(ftData_UnkBytePerCharacter[kind]);
     }
+    // Queue character animation archive (PlXxAJ.dat)
     if (ftData_803C23E4[kind] != NULL) {
         lbDvd_800178E8(1, ftData_803C23E4[kind], 5, 5, 0, 0, 1, 8, 0);
     }
 }
 
+/**
+ * @brief Synchronously opens and parses the main character archive (PlXx.dat) into gFtDataList.
+ * @param kind Character kind to load.
+ */
 void ftData_8008572C(FighterKind kind)
 {
     if (gFtDataList[kind] == NULL) {
@@ -1572,6 +1638,11 @@ void ftData_8008572C(FighterKind kind)
     }
 }
 
+/**
+ * @brief Loads Kirby copy ability hat and costume assets.
+ * @param arg0 Target parameter or hat ID.
+ * @param color Hat costume color index.
+ */
 void ftData_8008578C(int arg0, u8 color)
 {
     if (color != 0xFF &&
@@ -1583,6 +1654,10 @@ void ftData_8008578C(int arg0, u8 color)
         arg0, color, CostumeListsForeachCharacter[Ft_Kind_Kirby].numCostumes);
 }
 
+/**
+ * @brief Executes character secondary initialization callback.
+ * @param kind Character kind.
+ */
 void ftData_800857E0(FighterKind kind)
 {
     if (ftData_UnkMotionStates5[kind] != NULL) {
@@ -1590,21 +1665,26 @@ void ftData_800857E0(FighterKind kind)
     }
 }
 
+/**
+ * @brief Loads and parses costume model archive data (PlXxNn.dat).
+ * @param kind Character kind.
+ * @param costume_id Costume index.
+ */
 void ftData_80085820(FighterKind kind, int costume_id)
 {
-    UnkCostumeStruct* temp_r5 =
+    UnkCostumeStruct* costume =
         &CostumeListsForeachCharacter[kind].costume_list[costume_id];
-    if (temp_r5->joint == NULL) {
+    if (costume->joint == NULL) {
         if (ftData_803C2360[kind][costume_id].matanim_joint_name != NULL) {
             lbArchive_80017040(
-                &temp_r5->x14_archive,
-                ftData_803C2360[kind][costume_id].dat_filename, temp_r5,
-                ftData_803C2360[kind][costume_id].joint_name, &temp_r5->x4,
+                &costume->x14_archive,
+                ftData_803C2360[kind][costume_id].dat_filename, costume,
+                ftData_803C2360[kind][costume_id].joint_name, &costume->x4,
                 ftData_803C2360[kind][costume_id].matanim_joint_name, 0);
         } else {
             lbArchive_80017040(
-                &temp_r5->x14_archive,
-                ftData_803C2360[kind][costume_id].dat_filename, temp_r5,
+                &costume->x14_archive,
+                ftData_803C2360[kind][costume_id].dat_filename, costume,
                 ftData_803C2360[kind][costume_id].joint_name, 0,
                 ftData_803C2360[kind][costume_id].matanim_joint_name);
             CostumeListsForeachCharacter[kind].costume_list[costume_id].x4 =
@@ -1613,21 +1693,26 @@ void ftData_80085820(FighterKind kind, int costume_id)
     }
 }
 
+/**
+ * @brief Loads costume model archive data (alternate entry point).
+ * @param kind Character kind.
+ * @param costume_id Costume index.
+ */
 void ftData_800858E4(FighterKind kind, int costume_id)
 {
-    UnkCostumeStruct* temp_r5 =
+    UnkCostumeStruct* costume =
         &CostumeListsForeachCharacter[kind].costume_list[costume_id];
-    if (temp_r5->joint == NULL) {
+    if (costume->joint == NULL) {
         if (ftData_803C2360[kind][costume_id].matanim_joint_name != NULL) {
             lbArchive_80017040(
-                &temp_r5->x14_archive,
-                ftData_803C2360[kind][costume_id].dat_filename, temp_r5,
-                ftData_803C2360[kind][costume_id].joint_name, &temp_r5->x4,
+                &costume->x14_archive,
+                ftData_803C2360[kind][costume_id].dat_filename, costume,
+                ftData_803C2360[kind][costume_id].joint_name, &costume->x4,
                 ftData_803C2360[kind][costume_id].matanim_joint_name, 0);
         } else {
             lbArchive_80017040(
-                &temp_r5->x14_archive,
-                ftData_803C2360[kind][costume_id].dat_filename, temp_r5,
+                &costume->x14_archive,
+                ftData_803C2360[kind][costume_id].dat_filename, costume,
                 ftData_803C2360[kind][costume_id].joint_name, 0,
                 ftData_803C2360[kind][costume_id].matanim_joint_name);
             CostumeListsForeachCharacter[kind].costume_list[costume_id].x4 =
@@ -1636,55 +1721,67 @@ void ftData_800858E4(FighterKind kind, int costume_id)
     }
 }
 
+/**
+ * @brief Frees a fighter's model slot assignment if not shared by another fighter.
+ * @param fp Fighter state pointer.
+ */
 void ftData_800859A8(Fighter* fp)
 {
     HSD_GObj* gobj;
-    s8 temp_r6 = fp->x61C;
-    if (temp_r6 == -1) {
+    s8 slot_idx = fp->x61C;
+    if (slot_idx == -1) {
         return;
     }
     for (gobj = HSD_GObjPLinkHead[HSD_GOBJ_PLINK_FIGHTER]; gobj != NULL;
          gobj = gobj->next)
     {
         Fighter* cur_fp = GET_FIGHTER(gobj);
-        if (fp != cur_fp && temp_r6 == cur_fp->x61C) {
+        if (fp != cur_fp && slot_idx == cur_fp->x61C) {
             return;
         }
     }
-    ft_8045993C[temp_r6].x6_b0 = false;
+    ft_8045993C[slot_idx].x6_b0 = false;
 }
 
+/**
+ * @brief Loads character animation archive (PlXxAJ.dat) and resolves FigaTree offsets.
+ * @param kind Character kind.
+ */
 void ftData_80085A14(FighterKind kind)
 {
-    void* sp18;
+    void* archive_data;
     void* a_head;
-    ftData* temp_r27 = gFtDataList[kind];
-    u32 temp_r0;
+    ftData* char_data = gFtDataList[kind];
+    u32 figatree_size;
     int i;
     u8 _[4];
-    size_t sp10;
+    size_t archive_size;
 
     PAD_STACK(4);
 
     if (ftData_Table_Unk0[kind].data == NULL) {
-        lbFile_800168A0(1, ftData_803C23E4[kind], &sp18, &sp10);
-        a_head = sp18;
+        lbFile_800168A0(1, ftData_803C23E4[kind], &archive_data, &archive_size);
+        a_head = archive_data;
         HSD_ASSERT(0x974, a_head);
         for (i = 0; i < (u32) ftData_Table_Unk0[kind].count; i++) {
-            temp_r0 = temp_r27->xC[i].x8;
-            if (temp_r0 != 0) {
-                if (temp_r0 > 0x8000) {
+            figatree_size = char_data->xC[i].x8;
+            if (figatree_size != 0) {
+                if (figatree_size > 0x8000) {
                     HSD_ASSERTREPORT(0x9AF, 0, "fighter figatree over! %x\n",
-                                     temp_r0);
+                                     figatree_size);
                 }
-                temp_r27->xC[i].x14 =
-                    (uintptr_t) ((u8*) a_head + temp_r27->xC[i].x4);
+                char_data->xC[i].x14 =
+                    (uintptr_t) ((u8*) a_head + char_data->xC[i].x4);
             }
         }
         ftData_Table_Unk0[kind].data = a_head;
     }
 }
 
+/**
+ * @brief Allocates animation buffers for a fighter instance and verifies loaded anims.
+ * @param fp Fighter state pointer.
+ */
 void ftData_80085B10(Fighter* fp)
 {
     FighterKind kind = fp->kind;
@@ -1696,14 +1793,20 @@ void ftData_80085B10(Fighter* fp)
     ftData_80085A14(kind);
 }
 
+/**
+ * @brief Allocates animation buffers and resolves FigaTree pointers for cinematic demo playback.
+ * @param fp Fighter state pointer.
+ * @param arg1 Starting animation index.
+ * @param arg2 Ending animation index.
+ */
 void ftData_80085B98(Fighter* fp, int arg1, int arg2)
 {
-    uintptr_t temp_r30;
+    uintptr_t demo_base_addr;
     int i;
-    u32 temp_r0;
-    struct Fighter_WaitAnimData* temp_r3;
+    u32 figatree_size;
+    struct Fighter_WaitAnimData* anim_data;
 
-    temp_r30 = (uintptr_t) ftData_UnkIntPairs[fp->kind].data;
+    demo_base_addr = (uintptr_t) ftData_UnkIntPairs[fp->kind].data;
     fp->x59C = HSD_ObjAlloc(&fighter_x59C_alloc_data);
     fp->x5A0 = HSD_ObjAlloc(&fighter_x59C_alloc_data);
     fp->x5A4 = 0;
@@ -1712,131 +1815,155 @@ void ftData_80085B98(Fighter* fp, int arg1, int arg2)
     if (arg2 >= fp->x58C) {
         HSD_ASSERTREPORT(0x9D2, 0, "Demo Status error! %d\n", arg2);
     }
-    if (temp_r30 != 0U) {
+    if (demo_base_addr != 0U) {
         for (i = arg1; i <= arg2; i++) {
-            temp_r3 = &fp->ft_data->x14[i];
-            temp_r0 = temp_r3->x8;
-            if (temp_r3->x8 != 0U) {
-                if (temp_r0 > 0xB000) {
+            anim_data = &fp->ft_data->x14[i];
+            figatree_size = anim_data->x8;
+            if (anim_data->x8 != 0U) {
+                if (figatree_size > 0xB000) {
                     HSD_ASSERTREPORT(0x9DC, 0, "fighter figatree over! %x\n",
-                                     temp_r0);
+                                     figatree_size);
                 }
-                temp_r3 = &fp->ft_data->x14[i];
-                temp_r3->x14 = temp_r30 + temp_r3->x4;
+                anim_data = &fp->ft_data->x14[i];
+                anim_data->x14 = demo_base_addr + anim_data->x4;
             }
         }
         ftData_UnkIntPairs[fp->kind].data = 0;
     }
 }
 
+/**
+ * @brief Loads and relocates FigaTree animation for a motion state into primary buffer fp->x59C.
+ * @details If fp is Nana and Popo has already loaded the animation, copies and relocates
+ * directly from Popo's buffer to save memory and avoid ARAM transfers. Otherwise, performs
+ * an ARAM DMA (addresses < 0x80000000) or RAM memcpy, followed by HSD_ArchiveParse.
+ * @param fp Target fighter state pointer.
+ * @param arg1 Source fighter state pointer.
+ * @param msid Motion state ID to load.
+ */
 void ftData_80085CD8(Fighter* fp, Fighter* arg1, int msid)
 {
-    HSD_Archive sp14;
-    Fighter* temp_r3_3;
-    s32 temp_ret;
-    s32 temp_ret_2;
-    struct Fighter_x59C_t* temp_r4;
-    struct Fighter_WaitAnimData* temp_r3;
-    uintptr_t temp_r3_2;
-    uintptr_t temp_r4_2;
+    HSD_Archive archive;
+    Fighter* lead_fp;
+    s32 relocate_ret;
+    s32 parse_ret;
+    struct Fighter_x59C_t* alloc_buf;
+    struct Fighter_WaitAnimData* anim_data;
+    uintptr_t anim_addr;
+    uintptr_t src_addr;
 
     if (msid < arg1->x58C) {
-        temp_r3 = (struct Fighter_WaitAnimData*) ftData_80085FD4(arg1, msid);
-        temp_r3_2 = temp_r3->x14;
-        if (temp_r3_2 != fp->x5A4) {
-            if (temp_r3_2 != 0) {
-                temp_r3_3 = ftData_80086060(fp);
-                if ((temp_r3_3 != NULL) && (temp_r3->x14 == temp_r3_3->x5A4)) {
-                    memcpy(fp->x59C, temp_r3_3->x59C, temp_r3->x8);
-                    temp_r4 = fp->x59C;
-                    temp_ret = lbArchiveRelocate(
-                        &sp14, temp_r4->x0, temp_r3->x8,
-                        (intptr_t) temp_r4 - (intptr_t) temp_r3_3->x59C);
-                    if (temp_ret == -1) {
+        anim_data = (struct Fighter_WaitAnimData*) ftData_80085FD4(arg1, msid);
+        anim_addr = anim_data->x14;
+        if (anim_addr != fp->x5A4) {
+            if (anim_addr != 0) {
+                lead_fp = ftData_80086060(fp);
+                if ((lead_fp != NULL) && (anim_data->x14 == lead_fp->x5A4)) {
+                    // Nana shares animation from Popo's buffer
+                    memcpy(fp->x59C, lead_fp->x59C, anim_data->x8);
+                    alloc_buf = fp->x59C;
+                    relocate_ret = lbArchiveRelocate(
+                        &archive, alloc_buf->x0, anim_data->x8,
+                        (intptr_t) alloc_buf - (intptr_t) lead_fp->x59C);
+                    if (relocate_ret == -1) {
                         HSD_ASSERTREPORT(
                             0x9FA, 0, "lbArchiveRelocate error! %x\n", msid);
                     }
                 } else {
-                    temp_r4_2 = temp_r3->x14;
-                    if (temp_r4_2 < 0x80000000UL) {
-                        lbArq_80014BD0(temp_r4_2, fp->x59C,
-                                       OSRoundUp32B(temp_r3->x8), 0, 0);
+                    src_addr = anim_data->x14;
+                    // Addresses < 0x80000000 reside in ARAM; load via ARAM DMA
+                    if (src_addr < 0x80000000UL) {
+                        lbArq_80014BD0(src_addr, fp->x59C,
+                                       OSRoundUp32B(anim_data->x8), 0, 0);
                     } else {
-                        memcpy(fp->x59C, (void*) temp_r4_2, temp_r3->x8);
+                        memcpy(fp->x59C, (void*) src_addr, anim_data->x8);
                     }
-                    temp_ret_2 =
-                        HSD_ArchiveParse(&sp14, fp->x59C->x0, temp_r3->x8);
-                    if (temp_ret_2 == -1) {
+                    parse_ret =
+                        HSD_ArchiveParse(&archive, fp->x59C->x0, anim_data->x8);
+                    if (parse_ret == -1) {
                         HSD_ASSERTREPORT(0xA0F, 0,
                                          "HSD_ArchiveParse error! %x\n", msid);
                     }
                 }
                 fp->x590 =
-                    HSD_ArchiveGetPublicAs(FigaTree, &sp14, temp_r3->x0);
+                    HSD_ArchiveGetPublicAs(FigaTree, &archive, anim_data->x0);
             } else {
                 fp->x590 = NULL;
             }
-            fp->x5A4 = temp_r3->x14;
+            fp->x5A4 = anim_data->x14;
         }
     }
 }
 
-FigaTree* ftData_80085E50(Fighter* arg0, int msid)
+/**
+ * @brief Loads and relocates FigaTree animation into secondary buffer fp->x5A0 for animation blending.
+ * @param fp Fighter state pointer.
+ * @param msid Motion state ID.
+ * @return Pointer to loaded FigaTree structure.
+ */
+FigaTree* ftData_80085E50(Fighter* fp, int msid)
 {
-    HSD_Archive sp10;
-    Fighter* temp_r3_3;
-    int temp_ret;
-    int temp_ret_2;
-    struct Fighter_x59C_t* temp_r4;
-    struct ftData_80085FD4_ret* temp_r3;
-    uintptr_t temp_r3_2;
-    uintptr_t temp_r4_2;
+    HSD_Archive archive;
+    Fighter* lead_fp;
+    int relocate_ret;
+    int parse_ret;
+    struct Fighter_x59C_t* alloc_buf;
+    struct ftData_80085FD4_ret* anim_data;
+    uintptr_t anim_addr;
+    uintptr_t src_addr;
 
-    if (msid < arg0->x58C) {
-        temp_r3 = ftData_80085FD4(arg0, msid);
-        temp_r3_2 = temp_r3->x14;
-        if (temp_r3_2 != arg0->x5A8) {
-            if (temp_r3_2 != 0) {
-                temp_r3_3 = ftData_80086060(arg0);
-                if ((temp_r3_3 != NULL) && (temp_r3->x14 == temp_r3_3->x5A4)) {
-                    memcpy(arg0->x59C, temp_r3_3->x59C, temp_r3->x8);
-                    temp_r4 = arg0->x59C;
-                    temp_ret = lbArchiveRelocate(
-                        &sp10, temp_r4->x0, temp_r3->x8,
-                        (intptr_t) temp_r4 - (intptr_t) temp_r3_3->x59C);
-                    if (temp_ret == -1) {
+    if (msid < fp->x58C) {
+        anim_data = ftData_80085FD4(fp, msid);
+        anim_addr = anim_data->x14;
+        if (anim_addr != fp->x5A8) {
+            if (anim_addr != 0) {
+                lead_fp = ftData_80086060(fp);
+                if ((lead_fp != NULL) && (anim_data->x14 == lead_fp->x5A4)) {
+                    memcpy(fp->x59C, lead_fp->x59C, anim_data->x8);
+                    alloc_buf = fp->x59C;
+                    relocate_ret = lbArchiveRelocate(
+                        &archive, alloc_buf->x0, anim_data->x8,
+                        (intptr_t) alloc_buf - (intptr_t) lead_fp->x59C);
+                    if (relocate_ret == -1) {
                         HSD_ASSERTREPORT(
                             0xA30, 0, "lbArchiveRelocate error! %x\n", msid);
                     }
                 } else {
-                    temp_r4_2 = temp_r3->x14;
-                    if (temp_r4_2 < 0x80000000UL) {
-                        lbArq_80014BD0(temp_r4_2, arg0->x5A0,
-                                       OSRoundUp32B(temp_r3->x8), 0, 0);
+                    src_addr = anim_data->x14;
+                    if (src_addr < 0x80000000UL) {
+                        lbArq_80014BD0(src_addr, fp->x5A0,
+                                       OSRoundUp32B(anim_data->x8), 0, 0);
                     } else {
-                        memcpy(arg0->x5A0, (void*) temp_r4_2, temp_r3->x8);
+                        memcpy(fp->x5A0, (void*) src_addr, anim_data->x8);
                     }
-                    temp_ret_2 =
-                        HSD_ArchiveParse(&sp10, arg0->x5A0->x0, temp_r3->x8);
-                    if (temp_ret_2 == -1) {
+                    parse_ret =
+                        HSD_ArchiveParse(&archive, fp->x5A0->x0, anim_data->x8);
+                    if (parse_ret == -1) {
                         HSD_ASSERTREPORT(0xA45, 0,
                                          "HSD_ArchiveParse error! %x\n", msid);
                     }
                 }
-                arg0->x598 =
-                    HSD_ArchiveGetPublicAs(FigaTree, &sp10, temp_r3->x0);
+                fp->x598 =
+                    HSD_ArchiveGetPublicAs(FigaTree, &archive, anim_data->x0);
             } else {
-                arg0->x598 = 0;
+                fp->x598 = 0;
             }
-            arg0->x5A8 = temp_r3->x14;
+            fp->x5A8 = anim_data->x14;
         }
-        return arg0->x598;
+        return fp->x598;
     }
     return NULL;
 }
 
+/**
+ * @brief Retrieves animation metadata pointer for a motion state, falling back from Nana to Popo.
+ * @param fp Fighter state pointer.
+ * @param msid Motion state ID.
+ * @return Pointer to animation metadata entry.
+ */
 struct ftData_80085FD4_ret* ftData_80085FD4(Fighter* fp, int msid)
 {
+    // If Nana does not define a unique animation entry, share Popo's
     if (fp->kind == Ft_Kind_Nana &&
         Player_GetPlayerSlotType(fp->player_idx) != Gm_PKind_Demo &&
         fp->x24[msid].x14 == 0)
@@ -1847,8 +1974,14 @@ struct ftData_80085FD4_ret* ftData_80085FD4(Fighter* fp, int msid)
     return (struct ftData_80085FD4_ret*) &fp->x24[msid];
 }
 
+/**
+ * @brief Returns the partner leader fighter (Popo) if fp is Nana, or NULL otherwise.
+ * @param fp Fighter state pointer.
+ * @return Pointer to partner Popo Fighter struct, or NULL.
+ */
 Fighter* ftData_80086060(Fighter* fp)
 {
+    // Returns Popo (player entity index 0) for Nana companion
     if (fp->kind == Ft_Kind_Nana &&
         Player_GetPlayerSlotType(fp->player_idx) != Gm_PKind_Demo)
     {
