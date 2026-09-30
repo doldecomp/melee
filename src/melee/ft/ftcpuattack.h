@@ -1,3 +1,10 @@
+/**
+ * @file ftcpuattack.h
+ * @brief CPU AI attack logic and selection
+ * @details Handles CPU AI attack decisions based on target proximity, game state,
+ * and character-specific attack probability tables.
+ * Module prefix: ftCo (Common)
+ */
 #ifndef MELEE_FT_CPUATTACK_H
 #define MELEE_FT_CPUATTACK_H
 
@@ -6,10 +13,33 @@
 
 struct ftCo_AttackEntry;
 
+
+/**
+ * @brief Selects an attack from a list based on target position and weight
+ * @param fp The CPU fighter
+ * @param target The opponent fighter
+ * @param list Pointer to an array of ftCo_AttackEntry
+ * @return The selected attack command ID
+ */
 /* 0B4AB0 */ int ftCo_800B4AB0(Fighter*, Fighter*, void*);
+
+/**
+ * @brief Selects an attack from a list based on target position, weight, and reach
+ * @param fp The CPU fighter
+ * @param target The opponent fighter
+ * @param list Pointer to an array of ftCo_AttackEntry
+ * @param reach The additional reach distance to consider
+ * @return The selected attack command ID
+ */
 /* 0B52AC */ int ftCo_800B52AC(Fighter*, Fighter*, void*, float);
 /* 0B5AB0 */ int ftCo_800B5AB0(Fighter*, void*, void*);
 /* 0B6208 */ int ftCo_800B6208(struct ftCo_AttackEntry*);
+
+/**
+ * @brief Checks if the CPU fighter can perform a specific attack
+ * @param fp The CPU fighter
+ * @return true if the attack is valid, false otherwise
+ */
 /* 0B630C */ bool ftCo_800B630C(Fighter*);
 /* 0B63D8 */ void ftCo_800B63D8(Fighter*);
 /* 0B658C */ void ftCo_800B658C(Fighter*);

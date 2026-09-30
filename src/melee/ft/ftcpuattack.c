@@ -1,3 +1,10 @@
+/**
+ * @file ftcpuattack.c
+ * @brief CPU AI attack logic and selection
+ * @details Handles CPU AI attack decisions based on target proximity, game state,
+ * and character-specific attack probability tables.
+ * Module prefix: ftCo (Common)
+ */
 #include "ftcpuattack.h"
 
 #include <math.h>
@@ -171,7 +178,15 @@ static inline void ftCo_CpuClearTargetAndFinish(Fighter* fp)
     ftCo_800A0C8C(fp);
 }
 
-int ftCo_800B4AB0(Fighter* fp, Fighter* target, void* arg2)
+
+/**
+ * @brief Selects an attack from a list based on target position and weight
+ * @param fp The CPU fighter
+ * @param target The opponent fighter
+ * @param arg2 Pointer to an array of ftCo_AttackEntry (list)
+ * @return The selected attack command ID
+ */
+int ftCo_800B4AB0(Fighter* fp, Fighter* target, void* list)
 {
     ftCo_AttackEntry sp3C[32];
     float sqrt_tmp[4]; /* pins sqrtf volatile slots at 0x28..0x34 */
@@ -376,7 +391,16 @@ int ftCo_800B4AB0(Fighter* fp, Fighter* target, void* arg2)
     HSD_ASSERT(0xFA, 0);
 }
 
-int ftCo_800B52AC(Fighter* fp, Fighter* target, void* arg2, f32 reach)
+
+/**
+ * @brief Selects an attack from a list based on target position, weight, and reach
+ * @param fp The CPU fighter
+ * @param target The opponent fighter
+ * @param arg2 Pointer to an array of ftCo_AttackEntry (list)
+ * @param reach The additional reach distance to consider
+ * @return The selected attack command ID
+ */
+int ftCo_800B52AC(Fighter* fp, Fighter* target, void* list, f32 reach)
 {
     ftCo_AttackEntry sp40[32];
     float sqrt_tmp[4]; /* pins sqrtf volatile slots at 0x2C..0x38 */
@@ -589,7 +613,7 @@ int ftCo_800B52AC(Fighter* fp, Fighter* target, void* arg2, f32 reach)
     HSD_ASSERT(0x1C5, 0);
 }
 
-int ftCo_800B5AB0(Fighter* fp, void* arg1, void* arg2)
+int ftCo_800B5AB0(Fighter* fp, void* arg1, void* list)
 {
     Item* x50 = arg1;
     ftCo_AttackEntry sp34[32];
@@ -817,6 +841,12 @@ int ftCo_800B6208(ftCo_AttackEntry* arr)
 }
 
 /// Return true if the fighter is currently in any attacking motion state
+
+/**
+ * @brief Checks if the CPU fighter can perform a specific attack
+ * @param fp The CPU fighter
+ * @return true if the attack is valid, false otherwise
+ */
 bool ftCo_800B630C(Fighter* fp)
 {
     // Any common attack
