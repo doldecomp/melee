@@ -1,3 +1,8 @@
+/**
+ * @file displayfunc.c
+ * @brief Scene graph and JObj rendering dispatch functions
+ * @details Manages the rendering pipeline, Z-sorting (translucent objects), and GX state setup for drawing.
+ */
 #include "displayfunc.h"
 
 #include <string.h>
@@ -53,11 +58,17 @@ static int zlist_xlu_nb = 0;
 
 #define ZLIST_NEXT(list, offset) (*(HSD_ZList**) (((u8*) (list)) + (offset)))
 
+/**
+ * @brief Initializes the allocator data for Z-List entries.
+ */
 void HSD_ZListInitAllocData(void)
 {
     HSD_ObjAllocInit(&zlist_alloc_data, sizeof(HSD_ZList), 4);
 }
 
+/**
+ * @brief Allocates a new Z-List entry.
+ */
 static HSD_ZList* HSD_ZListAlloc(void)
 {
     HSD_ZList* list;
@@ -68,11 +79,17 @@ static HSD_ZList* HSD_ZListAlloc(void)
     return list;
 }
 
+/**
+ * @brief Frees a Z-List entry.
+ */
 static void HSD_ZListFree(HSD_ZList* ptr)
 {
     HSD_ObjFree(&zlist_alloc_data, ptr);
 }
 
+/**
+ * @brief Initializes the GX hardware state for direct rendering.
+ */
 void HSD_StateInitDirect(int vtxfmt, u32 rendermode)
 {
     HSD_ClearVtxDesc();
@@ -89,6 +106,9 @@ Vec3 zOne = { 0, 0, 1 };
 Vec3 yOne = { 0, 1, 0 };
 Vec3 zOne2 = { 0, 0, 1 };
 
+/**
+ * @brief Calculates a vertical billboard matrix.
+ */
 static void mkVBillBoardMtx(HSD_JObj* jobj, MtxPtr src, MtxPtr dst)
 {
     Vec3 pos, ax, ay, az;
@@ -122,6 +142,9 @@ static void mkVBillBoardMtx(HSD_JObj* jobj, MtxPtr src, MtxPtr dst)
     HSD_MtxSetColVec(dst, 3, &pos);
 }
 
+/**
+ * @brief Calculates a horizontal billboard matrix.
+ */
 static void mkHBillBoardMtx(HSD_JObj* jobj, MtxPtr src, MtxPtr dst)
 {
     Vec3 pos, ax, ay, az;
@@ -159,6 +182,9 @@ static void mkHBillBoardMtx(HSD_JObj* jobj, MtxPtr src, MtxPtr dst)
     HSD_MtxSetColVec(dst, 3, &pos);
 }
 
+/**
+ * @brief Calculates a standard billboard matrix.
+ */
 static void mkBillBoardMtx(HSD_JObj* jobj, MtxPtr src, MtxPtr dst)
 {
     Vec3 ax, ay, *az, pos;
@@ -200,6 +226,9 @@ static void mkBillBoardMtx(HSD_JObj* jobj, MtxPtr src, MtxPtr dst)
     HSD_MtxSetColVec(dst, 3, &pos);
 }
 
+/**
+ * @brief Calculates a rotation billboard matrix.
+ */
 static void mkRBillBoardMtx(HSD_JObj* jobj, MtxPtr src, MtxPtr dst)
 {
     Mtx rot, scl;
@@ -215,6 +244,9 @@ static void mkRBillBoardMtx(HSD_JObj* jobj, MtxPtr src, MtxPtr dst)
     MTXConcat(rot, scl, dst);
 }
 
+/**
+ * @brief Calculates and assigns the final position matrix for a JObj, applying billboard logic if necessary.
+ */
 void HSD_JObjMakePositionMtx(HSD_JObj* jobj, Mtx vmtx, Mtx pmtx)
 {
     Mtx mtx;
@@ -242,6 +274,9 @@ void HSD_JObjMakePositionMtx(HSD_JObj* jobj, Mtx vmtx, Mtx pmtx)
     }
 }
 
+/**
+ * @brief Walks up the JObj hierarchy to find the root skeleton node.
+ */
 HSD_JObj* HSD_JObjFindSkeleton(HSD_JObj* jobj)
 {
     HSD_ASSERT(342, jobj);
@@ -253,21 +288,24 @@ HSD_JObj* HSD_JObjFindSkeleton(HSD_JObj* jobj)
     return NULL;
 }
 
+/**
+ * @brief Computes the node matrix for an envelope skinning JObj relative to its skeleton root.
+ */
 MtxPtr _HSD_mkEnvelopeModelNodeMtx(HSD_JObj* m, MtxPtr mtx)
 {
     if (m->flags & JOBJ_SKELETON_ROOT) {
         return NULL;
     } else {
-        HSD_JObj* x = HSD_JObjFindSkeleton(m);
-        HSD_ASSERT(422, x);
+        HSD_JObj* root_skeleton = HSD_JObjFindSkeleton(m);
+        HSD_ASSERT(422, root_skeleton);
 
-        if (x == m) {
-            MTXInverse(x->envelopemtx, mtx);
-        } else if (x->flags & JOBJ_SKELETON_ROOT) {
-            HSD_MtxInverseConcat(x->mtx, m->mtx, mtx);
+        if (root_skeleton == m) {
+            MTXInverse(root_skeleton->envelopemtx, mtx);
+        } else if (root_skeleton->flags & JOBJ_SKELETON_ROOT) {
+            HSD_MtxInverseConcat(root_skeleton->mtx, m->mtx, mtx);
         } else {
             Mtx n;
-            MTXConcat(x->mtx, x->envelopemtx, n);
+            MTXConcat(root_skeleton->mtx, root_skeleton->envelopemtx, n);
             HSD_MtxInverseConcat(n, m->mtx, mtx);
         }
 
@@ -275,6 +313,9 @@ MtxPtr _HSD_mkEnvelopeModelNodeMtx(HSD_JObj* m, MtxPtr mtx)
     }
 }
 
+/**
+ * @brief Directly renders the DObjs associated with a JObj.
+ */
 void HSD_JObjDispSub(HSD_JObj* jobj, MtxPtr vmtx, MtxPtr pmtx,
                      HSD_TrspMask trsp_mask, u32 rendermode)
 {
@@ -306,6 +347,9 @@ void HSD_JObjDispSub(HSD_JObj* jobj, MtxPtr vmtx, MtxPtr pmtx,
     HSD_JObjSetCurrent(NULL);
 }
 
+/**
+ * @brief Displays the DObjs attached to a JObj, routing them to the direct pass or Z-List based on transparency.
+ */
 void HSD_JObjDispDObj(HSD_JObj* jobj, MtxPtr vmtx, HSD_TrspMask trsp_mask,
                       u32 rendermode)
 {
@@ -366,53 +410,59 @@ void HSD_JObjDispDObj(HSD_JObj* jobj, MtxPtr vmtx, HSD_TrspMask trsp_mask,
     }
 }
 
-static HSD_ZList* zlist_sort(HSD_ZList* list, s32 nb, s32 offset)
+/**
+ * @brief Recursively merge sorts a Z-List by depth (Z-value).
+ */
+static HSD_ZList* zlist_sort(HSD_ZList* list, s32 total_count, s32 offset)
 {
-    HSD_ZList *fore, *hind, **ptr;
-    int nb_fore, nb_hind;
+    HSD_ZList *left_list, *right_list, **ptr;
+    int count_left, count_right;
     int i;
 
-    if (nb <= 1) {
+    if (total_count <= 1) {
         if (list != NULL) {
             ZLIST_NEXT(list, offset) = NULL;
         }
         return list;
     }
 
-    nb_fore = nb / 2;
-    nb_hind = nb - nb_fore;
+    count_left = total_count / 2;
+    count_right = total_count - count_left;
 
-    hind = list;
-    for (i = 0; i < nb_fore; i++) {
-        hind = ZLIST_NEXT(hind, offset);
+    right_list = list;
+    for (i = 0; i < count_left; i++) {
+        right_list = ZLIST_NEXT(right_list, offset);
     }
 
-    fore = zlist_sort(list, nb_fore, offset);
-    hind = zlist_sort(hind, nb_hind, offset);
+    left_list = zlist_sort(list, count_left, offset);
+    right_list = zlist_sort(right_list, count_right, offset);
 
     list = NULL;
     ptr = &list;
 
-    while (fore != NULL && hind != NULL) {
-        if (fore->pmtx[2][3] <= hind->pmtx[2][3]) {
-            *ptr = fore;
-            fore = ZLIST_NEXT(fore, offset);
+    while (left_list != NULL && right_list != NULL) {
+        if (left_list->pmtx[2][3] <= right_list->pmtx[2][3]) {
+            *ptr = left_list;
+            left_list = ZLIST_NEXT(left_list, offset);
         } else {
-            *ptr = hind;
-            hind = ZLIST_NEXT(hind, offset);
+            *ptr = right_list;
+            right_list = ZLIST_NEXT(right_list, offset);
         }
         ptr = &ZLIST_NEXT(*ptr, offset);
     }
 
-    if (fore != NULL) {
-        *ptr = fore;
-    } else if (hind != NULL) {
-        *ptr = hind;
+    if (left_list != NULL) {
+        *ptr = left_list;
+    } else if (right_list != NULL) {
+        *ptr = right_list;
     }
 
     return list;
 }
 
+/**
+ * @brief Sorts the queued Z-List objects by depth.
+ */
 void _HSD_ZListSort(void)
 {
     if (zsort_sorting) {
@@ -424,6 +474,9 @@ void _HSD_ZListSort(void)
     }
 }
 
+/**
+ * @brief Dispatches rendering for all objects currently in the sorted Z-List.
+ */
 void _HSD_ZListDisp(void)
 {
     HSD_ZList* list;
@@ -452,6 +505,9 @@ void _HSD_ZListDisp(void)
     _HSD_ZListClear();
 }
 
+/**
+ * @brief Clears the Z-List and frees associated allocations.
+ */
 void _HSD_ZListClear(void)
 {
     HSD_ZList* list = zlist_top;
@@ -476,6 +532,9 @@ void _HSD_ZListClear(void)
     zlist_xlu_nb = 0;
 }
 
+/**
+ * @brief Main dispatch function to render a JObj (DObjs or particle nodes) with the specified transparency pass.
+ */
 void HSD_JObjDisp(HSD_JObj* jobj, MtxPtr vmtx, HSD_TrspMask trsp_mask,
                   u32 rendermode)
 {
@@ -497,11 +556,17 @@ void HSD_JObjDisp(HSD_JObj* jobj, MtxPtr vmtx, HSD_TrspMask trsp_mask,
     }
 }
 
+/**
+ * @brief Sets the global callback used for rendering particle JObjs.
+ */
 void HSD_JObjSetSPtclCallback(void (*func)(s32, s32, s32, HSD_JObj*))
 {
     sptcl_callback = func;
 }
 
+/**
+ * @brief Sets the erase color used by HSD_EraseRect.
+ */
 void HSD_SetEraseColor(u8 r, u8 g, u8 b, u8 a)
 {
     erase_color.r = r;
@@ -510,6 +575,9 @@ void HSD_SetEraseColor(u8 r, u8 g, u8 b, u8 a)
     erase_color.a = a;
 }
 
+/**
+ * @brief Draws a full-screen quad to manually clear the frame/depth buffer.
+ */
 void HSD_EraseRect(f32 top, f32 bottom, f32 left, f32 right, f32 z,
                    int enable_color, int enable_alpha, int enable_depth)
 {
@@ -596,6 +664,9 @@ void HSD_EraseRect(f32 top, f32 bottom, f32 left, f32 right, f32 z,
     HSD_StateInvalidate(HSD_STATE_ALL);
 }
 
+/**
+ * @brief Clears the internal Z-List memory and pointers.
+ */
 void _HSD_DispForgetMemory(void* lo, void* hi)
 {
     zlist_top = NULL;

@@ -1,3 +1,9 @@
+/**
+ * @file lobj.c
+ * @brief Light Object (LObj) subsystem for SysDolphin
+ * @details Manages lighting calculations including point, directional, spot, and ambient lights.
+ * Handles hardware light mapping, attenuation, and color properties.
+ */
 #include "lobj.h"
 
 #include <placeholder.h>
@@ -13,6 +19,11 @@
 #include <dolphin/mtx.h>
 #include <dolphin/os.h>
 
+/**
+ * @brief Initializes operations for LObjInfoInit
+ * @param lobj
+ * @return static void
+ */
 static void LObjInfoInit(void);
 
 HSD_LObjInfo hsdLObj = { LObjInfoInit };
@@ -33,6 +44,11 @@ u32 HSD_LObjGetFlags(HSD_LObj* lobj)
     return lobj ? lobj->flags : 0;
 }
 
+/**
+ * @brief Sets operations for HSD_LObjSetFlags
+ * @param lobj
+ * @param flags
+ */
 void HSD_LObjSetFlags(HSD_LObj* lobj, u32 flags)
 {
     if (lobj == NULL) {
@@ -41,6 +57,11 @@ void HSD_LObjSetFlags(HSD_LObj* lobj, u32 flags)
     lobj->flags |= flags;
 }
 
+/**
+ * @brief Removes operations for HSD_LObjClearFlags
+ * @param lobj
+ * @param flags
+ */
 void HSD_LObjClearFlags(HSD_LObj* lobj, u32 flags)
 {
     if (lobj == NULL) {
@@ -49,31 +70,56 @@ void HSD_LObjClearFlags(HSD_LObj* lobj, u32 flags)
     lobj->flags &= ~flags;
 }
 
+/**
+ * @brief Retrieves operations for HSD_LObjGetLightMaskDiffuse
+ * @return GXLightID
+ */
 GXLightID HSD_LObjGetLightMaskDiffuse(void)
 {
     return lightmask_diffuse;
 }
 
+/**
+ * @brief Retrieves operations for HSD_LObjGetLightMaskAttnFunc
+ * @return s32
+ */
 s32 HSD_LObjGetLightMaskAttnFunc(void)
 {
     return lightmask_attnfunc;
 }
 
+/**
+ * @brief Retrieves operations for HSD_LObjGetLightMaskAlpha
+ * @return s32
+ */
 s32 HSD_LObjGetLightMaskAlpha(void)
 {
     return lightmask_alpha;
 }
 
+/**
+ * @brief Retrieves operations for HSD_LObjGetLightMaskSpecular
+ * @return s32
+ */
 s32 HSD_LObjGetLightMaskSpecular(void)
 {
     return lightmask_specular;
 }
 
+/**
+ * @brief Retrieves operations for HSD_LObjGetType
+ * @param lobj
+ * @return u32
+ */
 u32 HSD_LObjGetType(HSD_LObj* lobj)
 {
     return lobj->flags & LOBJ_TYPE_MASK;
 }
 
+/**
+ * @brief Sets operations for HSD_LObjSetActive
+ * @param lobj
+ */
 void HSD_LObjSetActive(HSD_LObj* lobj)
 {
     int idx;
@@ -90,6 +136,10 @@ void HSD_LObjSetActive(HSD_LObj* lobj)
     lobj->id = HSD_Index2LightID(idx);
 }
 
+/**
+ * @brief Retrieves operations for HSD_LObjGetNbActive
+ * @return s32
+ */
 s32 HSD_LObjGetNbActive(void)
 {
     return nb_active_lights;
@@ -114,6 +164,9 @@ HSD_LObj* HSD_LObjGetActiveByIndex(s32 idx)
     }
 }
 
+/**
+ * @brief Removes operations for HSD_LObjClearActive
+ */
 void HSD_LObjClearActive(void)
 {
     int i;
@@ -125,7 +178,13 @@ void HSD_LObjClearActive(void)
 }
 
 /// @private
-void LObjUpdateFunc(void* obj, enum_t type, HSD_ObjData* val)
+/**
+ * @brief Handles operations for LObjUpdateFunc
+ * @param obj
+ * @param type
+ * @param val
+ */
+void LObjUpdateFunc(void* lobj_ptr, enum_t anim_type, HSD_ObjData* val)
 {
     HSD_LObj* lobj = obj;
 
@@ -133,7 +192,7 @@ void LObjUpdateFunc(void* obj, enum_t type, HSD_ObjData* val)
         return;
     }
 
-    switch (type) {
+    switch (anim_type) {
     case HSD_A_L_VIS:
         if (val->fv < 0.5) {
             lobj->flags &= ~LOBJ_HIDDEN;
@@ -195,6 +254,10 @@ void LObjUpdateFunc(void* obj, enum_t type, HSD_ObjData* val)
     }
 }
 
+/**
+ * @brief Processes animation for operations for HSD_LObjAnim
+ * @param lobj
+ */
 void HSD_LObjAnim(HSD_LObj* lobj)
 {
     if (lobj != NULL) {
@@ -204,6 +267,10 @@ void HSD_LObjAnim(HSD_LObj* lobj)
     }
 }
 
+/**
+ * @brief Processes animation for operations for HSD_LObjAnimAll
+ * @param lobj
+ */
 void HSD_LObjAnimAll(HSD_LObj* lobj)
 {
     HSD_LObj* lp;
@@ -217,6 +284,11 @@ void HSD_LObjAnimAll(HSD_LObj* lobj)
     }
 }
 
+/**
+ * @brief Processes animation for operations for HSD_LObjReqAnim
+ * @param lobj
+ * @param startframe
+ */
 void HSD_LObjReqAnim(HSD_LObj* lobj, f32 startframe)
 {
     if (lobj == NULL) {
@@ -228,6 +300,11 @@ void HSD_LObjReqAnim(HSD_LObj* lobj, f32 startframe)
     HSD_WObjReqAnim(HSD_LObjGetInterestWObj(lobj), startframe);
 }
 
+/**
+ * @brief Processes animation for operations for HSD_LObjReqAnimAll
+ * @param lobj
+ * @param startframe
+ */
 void HSD_LObjReqAnimAll(HSD_LObj* lobj, f32 startframe)
 {
     HSD_LObj* lp;
@@ -244,6 +321,11 @@ void HSD_LObjReqAnimAll(HSD_LObj* lobj, f32 startframe)
 Vec3 const HSD_LObj_803B94A0 = { 0.0F, 0.0F, 0.0F };
 Vec3 const HSD_LObj_803B94AC = { 0.0F, 0.0F, 0.0F };
 
+/**
+ * @brief Retrieves operations for HSD_LObjGetLightVector
+ * @param lobj
+ * @param dir
+ */
 void HSD_LObjGetLightVector(HSD_LObj* lobj, Vec3* dir)
 {
     Vec3 position = HSD_LObj_803B94A0;
@@ -259,6 +341,12 @@ void HSD_LObjGetLightVector(HSD_LObj* lobj, Vec3* dir)
     PSVECNormalize(dir, dir);
 }
 
+/**
+ * @brief Sets operations for HSD_LObjSetup
+ * @param lobj
+ * @param color
+ * @param shininess
+ */
 void HSD_LObjSetup(HSD_LObj* lobj, GXColor color, f32 shininess)
 {
     f32 k0 = shininess;
@@ -298,6 +386,10 @@ void HSD_LObjSetup(HSD_LObj* lobj, GXColor color, f32 shininess)
     }
 }
 
+/**
+ * @brief Sets operations for HSD_LObjSetupSpecularInit
+ * @param pmtx
+ */
 void HSD_LObjSetupSpecularInit(Mtx pmtx)
 {
     int i;
@@ -340,6 +432,11 @@ void HSD_LObjSetupSpecularInit(Mtx pmtx)
     }
 }
 
+/**
+ * @brief Initializes operations for setup_diffuse_lightobj
+ * @param lobj
+ * @return static void
+ */
 static void setup_diffuse_lightobj(HSD_LObj* lobj)
 {
     u32 _ = lobj->flags;
@@ -365,6 +462,13 @@ static void setup_diffuse_lightobj(HSD_LObj* lobj)
     }
 }
 
+/**
+ * @brief Initializes operations for setup_spec_lightobj
+ * @param lobj
+ * @param mtx
+ * @param spec_id
+ * @return static void
+ */
 static void setup_spec_lightobj(HSD_LObj* lobj, Mtx mtx, s32 spec_id)
 {
     f32 x;
@@ -402,6 +506,12 @@ static void setup_spec_lightobj(HSD_LObj* lobj, Mtx mtx, s32 spec_id)
     }
 }
 
+/**
+ * @brief Initializes operations for setup_infinite_lightobj
+ * @param lobj
+ * @param vmtx
+ * @return static void
+ */
 static void setup_infinite_lightobj(HSD_LObj* lobj, MtxPtr vmtx)
 {
     Vec3 lpos;
@@ -420,6 +530,12 @@ static void setup_infinite_lightobj(HSD_LObj* lobj, MtxPtr vmtx)
     }
 }
 
+/**
+ * @brief Initializes operations for setup_point_lightobj
+ * @param lobj
+ * @param mtx
+ * @return static void
+ */
 static void setup_point_lightobj(HSD_LObj* lobj, Mtx mtx)
 {
     Vec3 lpos;
@@ -443,6 +559,12 @@ static void setup_point_lightobj(HSD_LObj* lobj, Mtx mtx)
     }
 }
 
+/**
+ * @brief Initializes operations for setup_spot_lightobj
+ * @param lobj
+ * @param mtx
+ * @return static void
+ */
 static void setup_spot_lightobj(HSD_LObj* lobj, Mtx mtx)
 {
     Vec3 lpos;
@@ -473,6 +595,10 @@ static void setup_spot_lightobj(HSD_LObj* lobj, Mtx mtx)
     }
 }
 
+/**
+ * @brief Sets operations for HSD_LObjSetupInit
+ * @param cobj
+ */
 void HSD_LObjSetupInit(HSD_CObj* cobj)
 {
     MtxPtr vmtx;
@@ -528,7 +654,7 @@ void HSD_LObjSetupInit(HSD_CObj* cobj)
 
         lobj->spec_id = GX_LIGHT_NULL;
 
-        switch (type) {
+        switch (anim_type) {
         case LOBJ_INFINITE:
             setup_infinite_lightobj(lobj, vmtx);
             break;
@@ -592,6 +718,10 @@ void HSD_LObjSetupInit(HSD_CObj* cobj)
     }
 }
 
+/**
+ * @brief Handles operations for HSD_LObjAddCurrent
+ * @param lobj
+ */
 void HSD_LObjAddCurrent(HSD_LObj* lobj)
 {
     HSD_SList* node;
@@ -616,6 +746,10 @@ void HSD_LObjAddCurrent(HSD_LObj* lobj)
     }
 }
 
+/**
+ * @brief Handles operations for HSD_LObjUnrefThis
+ * @param lobj
+ */
 void HSD_LObjUnrefThis(HSD_LObj* lobj)
 {
     if (lobj != NULL && ref_DEC(lobj)) {
@@ -626,6 +760,10 @@ void HSD_LObjUnrefThis(HSD_LObj* lobj)
     }
 }
 
+/**
+ * @brief Removes operations for HSD_LObjDeleteCurrent
+ * @param lobj
+ */
 void HSD_LObjDeleteCurrent(HSD_LObj* lobj)
 {
     if (lobj != NULL) {
@@ -659,6 +797,10 @@ static inline void LObjRemoveAll(void)
     }
 }
 
+/**
+ * @brief Removes operations for HSD_LObjDeleteCurrentAll
+ * @param lobj
+ */
 void HSD_LObjDeleteCurrentAll(HSD_LObj* lobj)
 {
     if (lobj != NULL) {
@@ -671,6 +813,10 @@ void HSD_LObjDeleteCurrentAll(HSD_LObj* lobj)
     LObjRemoveAll();
 }
 
+/**
+ * @brief Sets operations for HSD_LObjSetCurrentAll
+ * @param lobj
+ */
 void HSD_LObjSetCurrentAll(HSD_LObj* lobj)
 {
     u32 _;
@@ -696,6 +842,10 @@ static inline void LObjReplaceAll(HSD_LObj* lobj)
     }
 }
 
+/**
+ * @brief Handles operations for HSD_LObj_803668EC
+ * @param lobj
+ */
 void HSD_LObj_803668EC(HSD_LObj* lobj)
 {
     PAD_STACK(4);
@@ -781,6 +931,10 @@ s32 HSD_Index2LightID(u32 index)
     }
 }
 
+/**
+ * @brief Removes operations for HSD_LObjRemoveAll
+ * @param lobj
+ */
 void HSD_LObjRemoveAll(HSD_LObj* lobj)
 {
     HSD_LObj* next;
@@ -795,16 +949,32 @@ void HSD_LObjRemoveAll(HSD_LObj* lobj)
     }
 }
 
+/**
+ * @brief Sets operations for HSD_LObjSetColor
+ * @param lobj
+ * @param color
+ */
 void HSD_LObjSetColor(HSD_LObj* lobj, GXColor color)
 {
     lobj->color = color;
 }
 
+/**
+ * @brief Retrieves operations for HSD_LObjGetColor
+ * @param lobj
+ * @param color
+ */
 void HSD_LObjGetColor(HSD_LObj* lobj, GXColor* color)
 {
     *color = lobj->color;
 }
 
+/**
+ * @brief Sets operations for HSD_LObjSetSpot
+ * @param lobj
+ * @param cutoff
+ * @param point_func
+ */
 void HSD_LObjSetSpot(HSD_LObj* lobj, f32 cutoff, s32 point_func)
 {
     if (lobj != NULL) {
@@ -813,6 +983,13 @@ void HSD_LObjSetSpot(HSD_LObj* lobj, f32 cutoff, s32 point_func)
     }
 }
 
+/**
+ * @brief Sets operations for HSD_LObjSetDistAttn
+ * @param lobj
+ * @param ref_dist
+ * @param ref_br
+ * @param dist_func
+ */
 void HSD_LObjSetDistAttn(HSD_LObj* lobj, f32 ref_dist, f32 ref_br,
                          s32 dist_func)
 {
@@ -823,6 +1000,13 @@ void HSD_LObjSetDistAttn(HSD_LObj* lobj, f32 ref_dist, f32 ref_br,
     }
 }
 
+/**
+ * @brief Sets operations for HSD_LObjSetAttnA
+ * @param lobj
+ * @param a0
+ * @param a1
+ * @param a2
+ */
 void HSD_LObjSetAttnA(HSD_LObj* lobj, f32 a0, f32 a1, f32 a2)
 {
     if (lobj == NULL) {
@@ -834,6 +1018,13 @@ void HSD_LObjSetAttnA(HSD_LObj* lobj, f32 a0, f32 a1, f32 a2)
     lobj->u.attn.a2 = a2;
 }
 
+/**
+ * @brief Sets operations for HSD_LObjSetAttnK
+ * @param lobj
+ * @param k0
+ * @param k1
+ * @param k2
+ */
 void HSD_LObjSetAttnK(HSD_LObj* lobj, f32 k0, f32 k1, f32 k2)
 {
     if (lobj == NULL) {
@@ -845,6 +1036,16 @@ void HSD_LObjSetAttnK(HSD_LObj* lobj, f32 k0, f32 k1, f32 k2)
     lobj->u.attn.k2 = k2;
 }
 
+/**
+ * @brief Sets operations for HSD_LObjSetAttn
+ * @param lobj
+ * @param a0
+ * @param a1
+ * @param a2
+ * @param k0
+ * @param k1
+ * @param k2
+ */
 void HSD_LObjSetAttn(HSD_LObj* lobj, f32 a0, f32 a1, f32 a2, f32 k0, f32 k1,
                      f32 k2)
 {
@@ -854,6 +1055,11 @@ void HSD_LObjSetAttn(HSD_LObj* lobj, f32 a0, f32 a1, f32 a2, f32 k0, f32 k1,
 
 extern char lbl_80406190[10];
 
+/**
+ * @brief Sets operations for HSD_LObjSetPosition
+ * @param lobj
+ * @param position
+ */
 void HSD_LObjSetPosition(HSD_LObj* lobj, Vec3* position)
 {
     HSD_ASSERT(1369, lobj);
@@ -864,6 +1070,12 @@ void HSD_LObjSetPosition(HSD_LObj* lobj, Vec3* position)
     HSD_WObjSetPosition(lobj->position, position);
 }
 
+/**
+ * @brief Retrieves operations for HSD_LObjGetPosition
+ * @param lobj
+ * @param position
+ * @return bool
+ */
 bool HSD_LObjGetPosition(HSD_LObj* lobj, Vec3* position)
 {
     if (lobj != NULL && lobj->position != NULL) {
@@ -873,6 +1085,11 @@ bool HSD_LObjGetPosition(HSD_LObj* lobj, Vec3* position)
     return false;
 }
 
+/**
+ * @brief Sets operations for HSD_LObjSetInterest
+ * @param lobj
+ * @param interest
+ */
 void HSD_LObjSetInterest(HSD_LObj* lobj, Vec3* interest)
 {
     HSD_ASSERT(1405, lobj);
@@ -883,6 +1100,12 @@ void HSD_LObjSetInterest(HSD_LObj* lobj, Vec3* interest)
     HSD_WObjSetPosition(lobj->interest, interest);
 }
 
+/**
+ * @brief Retrieves operations for HSD_LObjGetInterest
+ * @param lobj
+ * @param interest
+ * @return bool
+ */
 bool HSD_LObjGetInterest(HSD_LObj* lobj, Vec3* interest)
 {
     if (lobj != NULL && lobj->interest != NULL) {
@@ -892,6 +1115,10 @@ bool HSD_LObjGetInterest(HSD_LObj* lobj, Vec3* interest)
     return false;
 }
 
+/**
+ * @brief Sets operations for HSD_LObjSetDefaultClass
+ * @param info
+ */
 void HSD_LObjSetDefaultClass(HSD_LObjInfo* info)
 {
     if (info != NULL) {
@@ -928,6 +1155,11 @@ HSD_WObj* HSD_LObjGetInterestWObj(HSD_LObj* lobj)
     return NULL;
 }
 
+/**
+ * @brief Sets operations for HSD_LObjSetPositionWObj
+ * @param lobj
+ * @param wobj
+ */
 void HSD_LObjSetPositionWObj(HSD_LObj* lobj, HSD_WObj* wobj)
 {
     if (lobj == NULL) {
@@ -938,6 +1170,11 @@ void HSD_LObjSetPositionWObj(HSD_LObj* lobj, HSD_WObj* wobj)
     lobj->position = wobj;
 }
 
+/**
+ * @brief Sets operations for HSD_LObjSetInterestWObj
+ * @param lobj
+ * @param wobj
+ */
 void HSD_LObjSetInterestWObj(HSD_LObj* lobj, HSD_WObj* wobj)
 {
     if (lobj == NULL) {
@@ -948,6 +1185,12 @@ void HSD_LObjSetInterestWObj(HSD_LObj* lobj, HSD_WObj* wobj)
     lobj->interest = wobj;
 }
 
+/**
+ * @brief Handles operations for LObjLoad
+ * @param lobj
+ * @param ldesc
+ * @return static int
+ */
 static int LObjLoad(HSD_LObj* lobj, HSD_LightDesc* ldesc)
 {
     HSD_LObjSetColor(lobj, ldesc->color);
@@ -1017,6 +1260,11 @@ HSD_LObj* HSD_LObjLoadDesc(HSD_LightDesc* ldesc)
     return top;
 }
 
+/**
+ * @brief Processes animation for operations for HSD_LObjAddAnim
+ * @param lobj
+ * @param lanim
+ */
 void HSD_LObjAddAnim(HSD_LObj* lobj, HSD_LightAnim* lanim)
 {
     if (lobj == NULL) {
@@ -1033,6 +1281,11 @@ void HSD_LObjAddAnim(HSD_LObj* lobj, HSD_LightAnim* lanim)
     }
 }
 
+/**
+ * @brief Processes animation for operations for HSD_LObjAddAnimAll
+ * @param lobj
+ * @param lanim
+ */
 void HSD_LObjAddAnimAll(HSD_LObj* lobj, HSD_LightAnim* lanim)
 {
     HSD_LObj* lp;
@@ -1047,6 +1300,11 @@ void HSD_LObjAddAnimAll(HSD_LObj* lobj, HSD_LightAnim* lanim)
     }
 }
 
+/**
+ * @brief Handles operations for LObjRelease
+ * @param o
+ * @return static void
+ */
 static void LObjRelease(HSD_Class* o)
 {
     HSD_LObj* lobj = HSD_LOBJ(o);
@@ -1060,6 +1318,11 @@ static void LObjRelease(HSD_Class* o)
     HSD_OBJECT_PARENT_INFO(&hsdLObj)->release(o);
 }
 
+/**
+ * @brief Handles operations for LObjAmnesia
+ * @param info
+ * @return static void
+ */
 static void LObjAmnesia(HSD_ClassInfo* info)
 {
     if (info == HSD_CLASS_INFO(default_class)) {
@@ -1071,6 +1334,10 @@ static void LObjAmnesia(HSD_ClassInfo* info)
     HSD_OBJECT_PARENT_INFO(&hsdLObj)->amnesia(info);
 }
 
+/**
+ * @brief Initializes operations for LObjInfoInit
+ * @return static void
+ */
 static void LObjInfoInit(void)
 {
     hsdInitClassInfo(HSD_CLASS_INFO(&hsdLObj), HSD_CLASS_INFO(&hsdObj),
