@@ -1,3 +1,10 @@
+/**
+ * @file itzako.c
+ * @brief Zako (Fighting Wireframes) Item Module
+ * @details Handles the initialization, physics, spawning, and specific behaviors
+ * for items associated with the Fighting Wireframes (Zako) in Multi-Man Melee.
+ * Module prefix: it (Item)
+ */
 #include "itzako.h"
 
 #include "inlines.h"
@@ -96,6 +103,10 @@ Item_GObj* it_8027B5B0(ItemKind kind, Vec3* pos, HSD_JObj* jobj, Vec3* vel,
     return gobj;
 }
 
+/**
+ * @brief Resets Zako item state variables it_8027B730
+ * @param item_gobj
+ */
 void it_8027B730(Item_GObj* item_gobj)
 {
     Item* item;
@@ -136,6 +147,12 @@ static inline f32 it_8027B798_CalcAngle(GroundOrAir ground_or_air, s32 angle,
     }
 }
 
+/**
+ * @brief Calculates Zako item knockback velocity based on hit angle it_8027B798
+ * @param gobj
+ * @param out_vel
+ * @return bool
+ */
 bool it_8027B798(Item_GObj* gobj, Vec3* out_vel)
 {
     u8 _pad[4];
@@ -181,6 +198,11 @@ bool it_8027B798(Item_GObj* gobj, Vec3* out_vel)
     return result;
 }
 
+/**
+ * @brief Handles Zako item operations for it_8027B964
+ * @param item_gobj
+ * @param chk
+ */
 void it_8027B964(Item_GObj* item_gobj, bool chk)
 {
     Vec3 sp14;
@@ -209,7 +231,13 @@ void it_8027B964(Item_GObj* item_gobj, bool chk)
     item->x40_vel = sp14;
 }
 
-int it_8027BA54(HSD_GObj* item_gobj, Vec3* arg1)
+/**
+ * @brief Calculates randomized camera-relative position offsets it_8027BA54
+ * @param item_gobj
+ * @param target
+ * @return int
+ */
+int it_8027BA54(HSD_GObj* item_gobj, Vec3* target)
 {
     Vec3 sp20;
     Vec3 sp14;
@@ -224,10 +252,15 @@ int it_8027BA54(HSD_GObj* item_gobj, Vec3* arg1)
     sp14.x *= 10.0f;
     sp14.y *= 10.0f;
     sp14.z *= 10.0f;
-    *arg1 = sp14;
+    *target = sp14;
 }
 
-void it_8027BB1C(Vec3* arg0, Vec3* arg1)
+/**
+ * @brief Applies Euler angle rotations to a vector it_8027BB1C
+ * @param pos
+ * @param target
+ */
+void it_8027BB1C(Vec3* pos, Vec3* target)
 {
     f32 cos;
     f32 sin;
@@ -235,34 +268,41 @@ void it_8027BB1C(Vec3* arg0, Vec3* arg1)
     f32 t2;
 
     {
-        cos = cosf(arg1->x);
-        sin = sinf(arg1->x);
-        t1 = arg0->y;
-        t2 = arg0->z;
-        arg0->y = (t1 * cos) - (t2 * sin);
-        arg0->z = (t1 * sin) + (t2 * cos);
+        cos = cosf(target->x);
+        sin = sinf(target->x);
+        t1 = pos->y;
+        t2 = pos->z;
+        pos->y = (t1 * cos) - (t2 * sin);
+        pos->z = (t1 * sin) + (t2 * cos);
     }
 
     {
-        cos = cosf(arg1->y);
-        sin = sinf(arg1->y);
-        t1 = arg0->x;
-        t2 = arg0->z;
-        arg0->x = (t1 * cos) + (t2 * sin);
-        arg0->z = (t2 * cos) - (t1 * sin);
+        cos = cosf(target->y);
+        sin = sinf(target->y);
+        t1 = pos->x;
+        t2 = pos->z;
+        pos->x = (t1 * cos) + (t2 * sin);
+        pos->z = (t2 * cos) - (t1 * sin);
     }
 
     {
-        cos = cosf(arg1->z);
-        sin = sinf(arg1->z);
-        t1 = (arg0->x * cos) - (arg0->y * sin);
-        t2 = (arg0->x * sin) + (arg0->y * cos);
-        arg0->x = t1;
-        arg0->y = t2;
+        cos = cosf(target->z);
+        sin = sinf(target->z);
+        t1 = (pos->x * cos) - (pos->y * sin);
+        t2 = (pos->x * sin) + (pos->y * cos);
+        pos->x = t1;
+        pos->y = t2;
     }
 }
 
-void it_8027BBF4(Item_GObj* item_gobj, bool arg_chk, f64 arg8, f32 arg9)
+/**
+ * @brief Rotates Zako items based on terrain collision normals it_8027BBF4
+ * @param item_gobj
+ * @param arg_chk
+ * @param rotation_factor
+ * @param frames
+ */
+void it_8027BBF4(Item_GObj* item_gobj, bool arg_chk, f64 rotation_factor, f32 frames)
 {
     f32 temp_f1;
     f32 temp_f30;
@@ -306,7 +346,7 @@ void it_8027BBF4(Item_GObj* item_gobj, bool arg_chk, f64 arg8, f32 arg9)
     if (lbVector_AngleXY(&item->xDD4_itemVar.zako.x8, &sp68) > 0.00017453292f)
     {
         item->xDD4_itemVar.zako.x8 = sp68;
-        item->xDD4_itemVar.zako.x14.x = (s32) arg9;
+        item->xDD4_itemVar.zako.x14.x = (s32) frames;
     }
     temp_f1 = lbVector_AngleXY(&sp5C, &item->xDD4_itemVar.zako.x8);
     if ((temp_f1 < 0.00017453292f) || item->xDD4_itemVar.zako.x14.x < 2) {
@@ -326,8 +366,8 @@ void it_8027BBF4(Item_GObj* item_gobj, bool arg_chk, f64 arg8, f32 arg9)
 
     sp44 = vecs[0];
     sp50 = vecs[1];
-    lbVector_Rotate(&sp50, 2, M_PI_2 * arg8);
-    lbVector_Rotate(&sp44, 2, M_PI_2 * arg8);
+    lbVector_Rotate(&sp50, 2, M_PI_2 * rotation_factor);
+    lbVector_Rotate(&sp44, 2, M_PI_2 * rotation_factor);
 
     sp38.x = var_f29;
     sp38.y = var_f28;
@@ -342,18 +382,38 @@ void it_8027BBF4(Item_GObj* item_gobj, bool arg_chk, f64 arg8, f32 arg9)
 }
 
 /// Might take in and pass more vars
+/**
+ * @brief Handles Zako item operations for it_8027C0A8
+ * @param item_gobj
+ * @param arg4
+ * @param arg5
+ */
 void it_8027C0A8(Item_GObj* item_gobj, f32 arg4, f32 arg5)
 {
     it_8027BBF4(item_gobj, false, arg4, arg5);
 }
 
 /// Might take in and pass more vars
+/**
+ * @brief Handles Zako item operations for it_8027C0CC
+ * @param item_gobj
+ * @param arg4
+ * @param arg5
+ */
 void it_8027C0CC(Item_GObj* item_gobj, f32 arg4, f32 arg5)
 {
     it_8027BBF4(item_gobj, true, arg4, arg5);
 }
 
-void it_8027C0F0(Item_GObj* item_gobj, Vec3* arg1, f64 arg8, f32 arg9)
+/**
+ * @brief Handles Zako item operations for it_8027C0F0
+ * @param item_gobj
+ * @param target
+ * @param rotation_factor
+ * @param frames
+ */
+void it_8027C0F0(Item_GObj* item_gobj, Vec3* target, f64 rotation_factor,
+                 f32 frames)
 {
     u8 _padA[8];
     const Vec3* vecs = it_803B85A8;
@@ -374,8 +434,8 @@ void it_8027C0F0(Item_GObj* item_gobj, Vec3* arg1, f64 arg8, f32 arg9)
     sp5C = vecs[5];
 
     if (item->x378_itemColl.env_flags & Collide_FloorMask) {
-        if (arg1 != NULL) {
-            sp68 = *arg1;
+        if (target != NULL) {
+            sp68 = *target;
         }
         sp74.x = HSD_JObjGetRotationX(item_jobj);
         sp74.y = HSD_JObjGetRotationY(item_jobj);
@@ -386,7 +446,7 @@ void it_8027C0F0(Item_GObj* item_gobj, Vec3* arg1, f64 arg8, f32 arg9)
             0.00017453292f)
         {
             item->xDD4_itemVar.zako.x8 = sp68;
-            item->xDD4_itemVar.zako.x14.x = (s32) arg9;
+            item->xDD4_itemVar.zako.x14.x = (s32) frames;
         }
         temp_f1 = lbVector_AngleXY(&sp5C, &item->xDD4_itemVar.zako.x8);
         if ((temp_f1 < 0.00017453292f) || item->xDD4_itemVar.zako.x14.x < 2) {
@@ -406,8 +466,8 @@ void it_8027C0F0(Item_GObj* item_gobj, Vec3* arg1, f64 arg8, f32 arg9)
 
         sp44 = vecs[0];
         sp50 = vecs[1];
-        lbVector_Rotate(&sp50, 2, M_PI_2 * arg8);
-        lbVector_Rotate(&sp44, 2, M_PI_2 * arg8);
+        lbVector_Rotate(&sp50, 2, M_PI_2 * rotation_factor);
+        lbVector_Rotate(&sp44, 2, M_PI_2 * rotation_factor);
         sp3C.x = var_f29;
         sp3C.y = var_f28;
         sp3C.z = 0.0f;
@@ -421,6 +481,11 @@ void it_8027C0F0(Item_GObj* item_gobj, Vec3* arg1, f64 arg8, f32 arg9)
     }
 }
 
+/**
+ * @brief Handles Zako item operations for it_8027C56C
+ * @param item_gobj
+ * @param y_rot
+ */
 void it_8027C56C(Item_GObj* item_gobj, f32 y_rot)
 {
     Item* item;
@@ -438,11 +503,21 @@ void it_8027C56C(Item_GObj* item_gobj, f32 y_rot)
     item->xDD4_itemVar.zako.x14.x = 0U;
 }
 
+/**
+ * @brief Handles Zako item operations for it_8027C794
+ * @param gobj
+ * @return bool
+ */
 bool it_8027C794(Item_GObj* gobj)
 {
     return false;
 }
 
+/**
+ * @brief Handles Zako item operations for it_8027C79C
+ * @param item_gobj
+ * @return bool
+ */
 bool it_8027C79C(Item_GObj* item_gobj)
 {
     Item* item;
@@ -461,14 +536,20 @@ bool it_8027C79C(Item_GObj* item_gobj)
     return false;
 }
 
-bool it_8027C824(Item_GObj* item_gobj, s32 (*arg_func)(Item_GObj*))
+/**
+ * @brief Handles Zako item operations for it_8027C824
+ * @param item_gobj
+ * @param (callback_func)(Item_GObj)
+ * @return bool
+ */
+bool it_8027C824(Item_GObj* item_gobj, s32 (*callback_func)(Item_GObj*))
 {
     s32 arg_func_ret_val;
 
     if (it_8026DAA8(item_gobj) & 0xF) {
         it_8027CC88(item_gobj);
-        if (arg_func != NULL) {
-            arg_func_ret_val = arg_func(item_gobj);
+        if (callback_func != NULL) {
+            arg_func_ret_val = callback_func(item_gobj);
             if (arg_func_ret_val != 0) {
                 it_8027CE44(item_gobj);
             }
@@ -480,6 +561,10 @@ bool it_8027C824(Item_GObj* item_gobj, s32 (*arg_func)(Item_GObj*))
     return false;
 }
 
+/**
+ * @brief Handles Zako item destruction callback it_2725_Logic9_Destroyed
+ * @param item_gobj
+ */
 void it_2725_Logic9_Destroyed(Item_GObj* item_gobj)
 {
     grZakoGenerator_801CAC14(item_gobj);
@@ -510,33 +595,43 @@ static inline float return_sqrt_value3(Vec3* v)
     return itzako_sqrtf(product_xyz(v, v));
 }
 
-void it_8027C8D0(Vec3* arg0, Vec3* arg1, f32 arg8)
+/**
+ * @brief Handles Zako item operations for it_8027C8D0
+ * @param pos
+ * @param target
+ * @param rotation_factor
+ */
+void it_8027C8D0(Vec3* pos, Vec3* target, f32 rotation_factor)
 {
     f32 dir;
     f32 vec_mag;
     f32 var_f6;
     Vec3 sp1C;
 
-    vec_mag = return_sqrt_value3(arg0);
-    sp1C = *arg1;
-    if (arg8 > 0.0f) {
+    vec_mag = return_sqrt_value3(pos);
+    sp1C = *target;
+    if (rotation_factor > 0.0f) {
         dir = -1.0f;
         var_f6 = 6.8074177e-9f;
-    } else if (arg8 < 0.0f) {
+    } else if (rotation_factor < 0.0f) {
         dir = 1.0f;
         var_f6 = 6.8074177e-9f;
     } else {
-        arg0->z = 0.0f;
-        arg0->y = 0.0f;
-        arg0->x = 0.0f;
+        pos->z = 0.0f;
+        pos->y = 0.0f;
+        pos->x = 0.0f;
         return;
     }
 
-    arg0->x = vec_mag * ((sp1C.x * var_f6) - (sp1C.y * dir));
-    arg0->y = vec_mag * ((sp1C.x * dir) + (sp1C.y * var_f6));
-    arg0->z = 0.0f;
+    pos->x = vec_mag * ((sp1C.x * var_f6) - (sp1C.y * dir));
+    pos->y = vec_mag * ((sp1C.x * dir) + (sp1C.y * var_f6));
+    pos->z = 0.0f;
 }
 
+/**
+ * @brief Handles Zako item operations for it_8027C9D8
+ * @param item
+ */
 void it_8027C9D8(Item* item)
 {
     s32 spC[4] = {
@@ -555,6 +650,11 @@ void it_8027C9D8(Item* item)
     Item_8026AE84(item, item->xDD4_itemVar.zako.x14.z, 127, 64);
 }
 
+/**
+ * @brief Handles Zako item operations for it_8027CA7C
+ * @param gobj
+ * @return bool
+ */
 bool it_8027CA7C(HSD_GObj* gobj)
 {
     bool chk;
@@ -569,6 +669,10 @@ bool it_8027CA7C(HSD_GObj* gobj)
     return chk;
 }
 
+/**
+ * @brief Handles Zako item operations for it_8027CAD8
+ * @param item_gobj
+ */
 void it_8027CAD8(Item_GObj* item_gobj)
 {
     Item* item;
@@ -583,6 +687,10 @@ void it_8027CAD8(Item_GObj* item_gobj)
     it_80275270(item_gobj);
 }
 
+/**
+ * @brief Handles Zako item operations for it_8027CB3C
+ * @param item_gobj
+ */
 void it_8027CB3C(Item_GObj* item_gobj)
 {
     Item* item;
@@ -596,6 +704,10 @@ void it_8027CB3C(Item_GObj* item_gobj)
     it_8026B3A8(item_gobj);
 }
 
+/**
+ * @brief Handles Zako item operations for it_8027CBA4
+ * @param item_gobj
+ */
 void it_8027CBA4(Item_GObj* item_gobj)
 {
     Item* item;
@@ -607,6 +719,11 @@ void it_8027CBA4(Item_GObj* item_gobj)
     it_8026B3A8(item_gobj);
 }
 
+/**
+ * @brief Handles Zako item operations for it_8027CBFC
+ * @param item_gobj
+ * @return f32
+ */
 f32 it_8027CBFC(Item_GObj* item_gobj)
 {
     s32 ret_val;
@@ -678,20 +795,34 @@ Item_GObj* it_8027CC88(Item_GObj* item_gobj_arg)
     return item_gobj_var;
 }
 
+/**
+ * @brief Handles Zako item operations for it_8027CE18
+ * @param item_gobj
+ */
 void it_8027CE18(Item_GObj* item_gobj)
 {
     Item* item = GET_ITEM(item_gobj);
     pl_8004049C(item->xCB0_source_ply, item->kind);
 }
 
+/**
+ * @brief Handles Zako item operations for it_8027CE44
+ * @param item_gobj
+ */
 void it_8027CE44(Item_GObj* item_gobj)
 {
     grZakoGenerator_801CACB8(item_gobj);
 }
 
 /// Appears to be a function for Game&Watch items
+/**
+ * @brief Handles Zako item operations for it_8027CE64
+ * @param item_gobj
+ * @param fighter_gobj
+ * @param attr_address
+ */
 void it_8027CE64(Item_GObj* item_gobj, HSD_GObj* fighter_gobj,
-                 void* arg_attr_address)
+                 void* attr_address)
 {
     Item* item;
     GXColor sp18;
@@ -704,5 +835,5 @@ void it_8027CE64(Item_GObj* item_gobj, HSD_GObj* fighter_gobj,
     ftLib_GetGameWatchOutlineColor(fighter_gobj, &item->xBC8);
     item->x5C8 = ftLib_GetSubColor(item->owner, &item->xBC4);
     it_80274594(item_gobj);
-    item->xDD4_itemVar.gamewatch.attr = arg_attr_address;
+    item->xDD4_itemVar.gamewatch.attr = attr_address;
 }
