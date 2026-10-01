@@ -188,7 +188,7 @@ typedef struct _HSD_Tlut {
 } HSD_Tlut;
 
 typedef struct _HSD_TlutDesc {
-    void* lut;
+    u16* lut DAT_COUNT(n_entries);
     GXTlutFmt fmt;
     u32 tlut_name;
     u16 n_entries;
@@ -202,8 +202,14 @@ typedef struct _HSD_TexLODDesc {
     GXAnisotropy max_anisotropy;
 } HSD_TexLODDesc;
 
+/// Texels, laid out in the tiles of a #GXTexFmt.
+typedef u8 HSD_ImageData DAT_BLOB;
+
 struct HSD_ImageDesc {
-    void* image_ptr;
+    /// Levels 0 to #maxLOD when mipmapped.
+    HSD_ImageData* image_ptr DAT_COUNT(GXGetTexBufferSize(width, height,
+                                                          format, mipmap,
+                                                          maxLOD + 1));
     u16 width;
     u16 height;
     GXTexFmt format;

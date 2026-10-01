@@ -55,8 +55,6 @@
   would type `Article.x4_special` for fighter items.
 - Fighters' part animations (`ftData_x1C.x8`) sit next to `HSD_AnimJoint`
   trees that nothing points to. Their relocations can't be explained.
-- `EffectDataTable` only has its two particle banks. The records after them
-  (an `f32` and four pointers each) aren't typed.
 
 Not errors:
 
@@ -81,14 +79,11 @@ Not errors:
   fighter kind (`ftData_Table_Unk0`, `ftData_UnkIntPairs`), or only in code.
 - `FigaTree.tracks` uses `DAT_EXTENT`. Its length is the sum of `nodes`
   (`DAT_TERMINATED(-1)`), which needs a new annotation.
-- `*_image` and `*_tlut` are `u8[]`/`u16[]` up to the next public or
-  pointer target. Their exact sizes come from their `HSD_ImageDesc` and
-  `HSD_TlutDesc`, which a real element type could use.
-- GX data is raw `u8`, so it's never inferred: textures (bits per texel by
-  format, rounded up to whole tiles, plus mipmaps), palettes, and display
-  lists (commands until the end). Each needs a `DAT_BLOB` typedef and a
-  size more involved than `DAT_COUNT` arithmetic can say (no ternaries in
-  expressions).
+- `*_image` and `*_tlut` are typed `u8[]`/`u16[]` up to the next public or
+  pointer target, for the ones no reached `HSD_ImageDesc` or
+  `HSD_TlutDesc` sizes (e.g. GrIz and GrPu, whose descs nothing reached
+  points to). Vertex arrays (`HSD_VtxDescList.vertex`) are still raw: their
+  count is the largest index the display lists use.
 
 ## Coverage
 

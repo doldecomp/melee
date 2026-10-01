@@ -21,7 +21,9 @@
 #define DAT_TAG(tag)
 #endif
 
-/// The pointer refers to @p count elements: a sibling field or a constant.
+/// The pointer refers to @p count elements: an expression of sibling
+/// fields and constants, which may call the functions the tool ports, e.g.
+/// @c GXGetTexBufferSize.
 #define DAT_COUNT(count) DAT_TAG("count(" #count ")")
 
 /// The pointer refers to elements up to and including a terminator: the

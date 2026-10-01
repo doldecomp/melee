@@ -2,7 +2,8 @@
 //!
 //! Parsing produces an [`Expr`]; evaluating it resolves names through the
 //! caller, typically as fields of a record in the data and then as macros
-//! from the DWARF macro table.
+//! from the DWARF macro table. Calls are to the functions of the code that
+//! [`call`] ports, such as `GXGetTexBufferSize`.
 
 use std::collections::HashMap;
 use winnow::{
@@ -19,6 +20,7 @@ use winnow::{
 pub enum Expr {
     Int(u64),
     Name(String),
+    Call(String, Vec<Expr>),
     Unary(UnaryOp, Box<Expr>),
     Binary(BinaryOp, Box<Expr>, Box<Expr>),
 }
@@ -68,6 +70,13 @@ impl Expr {
         Some(match self {
             Expr::Int(value) => *value,
             Expr::Name(ident) => name(ident)?,
+            Expr::Call(function, args) => {
+                let args = args
+                    .iter()
+                    .map(|a| a.eval(name))
+                    .collect::<Option<Vec<_>>>()?;
+                call(function, &args)?
+            }
             Expr::Unary(op, a) => {
                 let a = a.eval(name)?;
                 match op {
@@ -199,20 +208,98 @@ fn parser<'i>(
     }
 }
 
-/// A parenthesized expression, a name, an integer literal, or `true` or
-/// `false`.
+/// A parenthesized expression, a name, a call, an integer literal, or
+/// `true` or `false`.
 fn operand(input: &mut &str) -> ModalResult<Expr> {
     dispatch! {peek(any);
         '(' => delimited('(', parser(0), cut_err(preceded(multispace0, ')'))),
         '0'..='9' => integer.map(Expr::Int),
-        _ => identifier.map(|name: &str| match name {
-            // Keywords as of C23
-            "true" => Expr::Int(1),
-            "false" => Expr::Int(0),
-            _ => Expr::Name(name.to_owned()),
-        }),
+        _ => (identifier, opt(preceded(multispace0, arguments))).map(
+            |(name, args): (&str, _)| match (name, args) {
+                (_, Some(args)) => Expr::Call(name.to_owned(), args),
+                // Keywords as of C23
+                ("true", None) => Expr::Int(1),
+                ("false", None) => Expr::Int(0),
+                (_, None) => Expr::Name(name.to_owned()),
+            },
+        ),
     }
     .parse_next(input)
+}
+
+/// A call's parenthesized, comma-separated arguments.
+fn arguments(input: &mut &str) -> ModalResult<Vec<Expr>> {
+    delimited(
+        '(',
+        separated(0.., delimited(multispace0, parser(0), multispace0), ','),
+        cut_err(')'),
+    )
+    .parse_next(input)
+}
+
+/// Call a function of the code, ported. Arguments are converted to the
+/// parameter types as C would; `None` for a function not ported, the wrong
+/// number of arguments, or an argument the function rejects.
+pub fn call(function: &str, args: &[u64]) -> Option<u64> {
+    match (function, args) {
+        (
+            "GXGetTexBufferSize",
+            &[width, height, format, mipmap, max_lod],
+        ) => gx_get_tex_buffer_size(
+            width as u16,
+            height as u16,
+            format as u32,
+            mipmap as u8,
+            max_lod as u8,
+        )
+        .map(u64::from),
+        _ => None,
+    }
+}
+
+/// `GXGetTexBufferSize` (`GXTexture.c`): the bytes a texture of `format`
+/// takes in memory, in whole tiles, with every mipmap level up to
+/// `max_lod` levels if `mipmap` is 1.
+fn gx_get_tex_buffer_size(
+    mut width: u16,
+    mut height: u16,
+    format: u32,
+    mipmap: u8,
+    max_lod: u8,
+) -> Option<u32> {
+    // `__GXGetTexTileShift`: a tile's width and height, as shifts
+    let (shift_x, shift_y) = match format {
+        // I4, C4, CMPR, CTF_R4, CTF_Z4
+        0x0 | 0x8 | 0xE | 0x20 | 0x30 => (3, 3),
+        // I8, IA4, C8, Z8, CTF_RA4, A8, CTF_R8, G8, B8, Z8M, Z8L
+        0x1 | 0x2 | 0x9 | 0x11 | 0x22 | 0x27 | 0x28 | 0x29 | 0x2A | 0x39
+        | 0x3A => (3, 2),
+        // IA8, RGB565, RGB5A3, RGBA8, C14X2, Z16, Z24X8, CTF_RA8, RG8, GB8,
+        // Z16L
+        0x3 | 0x4 | 0x5 | 0x6 | 0xA | 0x13 | 0x16 | 0x23 | 0x2B | 0x2C
+        | 0x3C => (2, 2),
+        _ => return None,
+    };
+    // RGBA8 and Z24X8
+    let tile_bytes = if matches!(format, 0x6 | 0x16) { 64 } else { 32 };
+    let tiles = |width: u16, height: u16| {
+        let nx = (u32::from(width) + (1 << shift_x) - 1) >> shift_x;
+        let ny = (u32::from(height) + (1 << shift_y) - 1) >> shift_y;
+        tile_bytes * nx * ny
+    };
+    if mipmap != 1 {
+        return Some(tiles(width, height));
+    }
+    let mut size = 0;
+    for _ in 0..max_lod {
+        size += tiles(width, height);
+        if width == 1 && height == 1 {
+            break;
+        }
+        width = (width >> 1).max(1);
+        height = (height >> 1).max(1);
+    }
+    Some(size)
 }
 
 /// A C identifier, or `Type::field` naming a value bound with `DAT_BIND`.
@@ -298,6 +385,23 @@ mod tests {
             ))
         );
         assert!(Expr::parse("A::b::c").is_none());
+    }
+
+    #[test]
+    fn calls() {
+        let e = |text| Expr::parse(text).unwrap().eval(&mut |_| None);
+        // CMPR, 8x8 tiles of 32 bytes
+        assert_eq!(e("GXGetTexBufferSize(64, 64, 14, 0, 0)"), Some(2048));
+        // RGBA8, 4x4 tiles of 64 bytes, rounded up
+        assert_eq!(e("GXGetTexBufferSize(5, 4, 6, 0, 0)"), Some(128));
+        // I8 with three levels: 32x32, 16x16, 8x8
+        assert_eq!(
+            e("GXGetTexBufferSize(32, 32, 1, 1, 3)"),
+            Some(1024 + 256 + 64)
+        );
+        assert_eq!(e("1 + GXGetTexBufferSize( 8 , 8 , 0 , 0 , 1 )"), Some(33));
+        assert_eq!(e("GXGetTexBufferSize(8, 8, 0x40, 0, 0)"), None);
+        assert_eq!(e("Unknown(1)"), None);
     }
 
     #[test]

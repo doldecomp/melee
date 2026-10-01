@@ -445,10 +445,18 @@ fn slice(args: Slice) -> Result<()> {
             let mut extents: Vec<(u32, u32)> = Vec::new();
             let data = sources[at].archive.data;
             for (&offset, &end) in &walk.extents {
-                // Objects start on words: zeros up to the next one are padding
-                let padded = end.next_multiple_of(4).min(data.len() as u32);
-                let zeros = data[end as usize..padded as usize].iter().all(|&b| b == 0);
-                let end = if zeros { padded } else { end };
+                // Objects start on words, and GX data (texels, palettes,
+                // display lists) on 32 bytes: zeros up to either are padding
+                let zeros = |to: u32| {
+                    let to = to.min(data.len() as u32);
+                    data[end as usize..to as usize]
+                        .iter()
+                        .all(|&b| b == 0)
+                        .then_some(to)
+                };
+                let end = zeros(end.next_multiple_of(32))
+                    .or_else(|| zeros(end.next_multiple_of(4)))
+                    .unwrap_or(end);
                 match extents.last_mut() {
                     Some(last) if offset <= last.1 => last.1 = last.1.max(end),
                     _ => extents.push((offset, end)),

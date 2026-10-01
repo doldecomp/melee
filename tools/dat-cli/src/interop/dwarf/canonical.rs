@@ -7,7 +7,9 @@
 //! Nothing is copied from the graph; a canonical type is a set of DIEs, read
 //! through its representative.
 
-use super::{Annotation, DieId, Str, Type, TypeGraph, TypeKind};
+use super::{
+    Annotation, DieId, Str, Type, TypeGraph, TypeKind, annotation::DatTag,
+};
 use std::collections::HashMap;
 
 /// Index into [`Canonical::types`].
@@ -102,6 +104,34 @@ impl Canonical {
                 continue;
             }
             let ty = &graph.types[&self.get(id).rep];
+            // And the types `DAT_TYPE` names, which the walk follows
+            let named = |annotations: &[Annotation]| {
+                annotations
+                    .iter()
+                    .filter_map(|a| {
+                        match DatTag::parse(graph.str(a.value?))? {
+                            DatTag::Type(name) => Some(name),
+                            _ => None,
+                        }
+                    })
+                    .flat_map(|name| self.lookup(graph, &name))
+                    .collect::<Vec<_>>()
+            };
+            queue.extend(named(&ty.annotations));
+            // A declaration's definition, as the walk resolves it
+            if let TypeKind::Record {
+                declaration: true, ..
+            } = ty.kind
+            {
+                queue.extend(
+                    self.definition(graph, id).map(|d| self.get(d).rep),
+                );
+            }
+            if let TypeKind::Record { members, .. } = &ty.kind {
+                for member in members {
+                    queue.extend(named(&member.annotations));
+                }
+            }
             let mut next = |t: &Option<DieId>| queue.extend(*t);
             match &ty.kind {
                 TypeKind::Pointer { target }
