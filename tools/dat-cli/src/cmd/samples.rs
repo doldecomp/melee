@@ -554,15 +554,21 @@ fn slice(args: Slice) -> Result<()> {
         samples: infos,
         elided,
         externs,
-        complete: archives.iter().all(|(at, archive)| {
-            let walk = &walks[at];
-            walk.issues.is_empty()
-                && archive
-                    .publics
-                    .iter()
-                    .all(|p| walk.objects.contains_key(&p.offset))
-                && coverages[at].unexplained.is_empty()
-        }) && inferred.len() == target_rest.len(),
+        complete: inferred.len() == target_rest.len()
+            && inferred.iter().zip(&target_rest).all(|(base, target)| {
+                base.source.file_offset(base.offset)
+                    == target.source.file_offset(target.offset)
+                    && base.size == target.size
+            })
+            && archives.iter().all(|(at, archive)| {
+                let walk = &walks[at];
+                walk.issues.is_empty()
+                    && archive
+                        .publics
+                        .iter()
+                        .all(|p| walk.objects.contains_key(&p.offset))
+                    && coverages[at].unexplained.is_empty()
+            }),
     };
     fs::write(sidecar_path(&args.output), postcard::to_stdvec(&sidecar)?)?;
     Ok(())
