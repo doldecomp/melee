@@ -40,12 +40,13 @@
 - Articles in Kirby's copies (`ftKbCopy*`) and in `ftData.x48_items` leave
   `x4_specialAttributes` ambiguous: their item kinds aren't bound. The
   kinds are known per slot (`ftKb_SpecialN_800F16D0`).
-- `ftData.x48_items` entries default to `Article` (`ftData_ItemData`), but
+- `ftData.x48_items` entries default to `Article` (`ftData_Item`), but
   some slots are joints or other structs: Game & Watch 10,
   Kirby 4, Yoshi 3, Sheik 4/5, Link 6, Jigglypuff 1. The fighter kind is
   bound at each `ftData` root (its index in the loader's name table), and
   the item slot is bound on `x48_items`.
-  Extend `ftData_ItemData`, which handles Samus's grapple in slot 4, to
+  Add `DAT_IF` conditions to the other C views in `ftData_Item`, which
+  currently selects Samus's grapple in slot 4 and otherwise `Article`, to
   choose these layouts. The same bindings can type `Article.x4_special`
   for fighter items.
 - Fighters' part animations (`ftData_x1C.x8`) sit next to `HSD_AnimJoint`

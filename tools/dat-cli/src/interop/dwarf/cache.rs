@@ -32,6 +32,8 @@ pub struct TypesFile {
     /// The type each root name is loaded as, by the loaders the DWARF
     /// records.
     pub roots: BTreeMap<String, DieId>,
+    /// Values bound while resolving each root's name in the loader table.
+    pub root_bindings: BTreeMap<String, Vec<(String, u64)>>,
 }
 
 impl TypesFile {
@@ -41,8 +43,12 @@ impl TypesFile {
             canonical.of(die).map_or(die, |id| canonical.get(id).rep)
         };
         let mut roots_by_name = BTreeMap::new();
+        let mut root_bindings = BTreeMap::new();
         for root in roots(graph, &canonical) {
             if let (RootName::Literal(name), Some(ty)) = (root.name, root.ty) {
+                if !root.bindings.is_empty() {
+                    root_bindings.entry(name.clone()).or_insert(root.bindings);
+                }
                 roots_by_name.entry(name).or_insert(rep(ty));
             }
         }
@@ -111,6 +117,7 @@ impl TypesFile {
             graph: compact,
             macros: macros(graph),
             roots: roots_by_name,
+            root_bindings,
         }
     }
 

@@ -14,9 +14,8 @@
 //! use `*` and `?` wildcards. The first line with a matching archive wins,
 //! then the first `*` line.
 
-use crate::dwarf::expr::{eval, identifier};
 use anyhow::{Context, Result, anyhow, bail};
-use std::{collections::HashMap, fmt, str::FromStr};
+use std::{fmt, str::FromStr};
 use winnow::{
     ModalResult, Parser,
     ascii::{digit1, hex_digit1, space0, space1},
@@ -53,30 +52,8 @@ pub struct Entry {
     /// its type (a `type:` has its own): `count:N`, or `count:*` for as
     /// many as fit before the next symbol or pointer target.
     pub count: Option<Count>,
-    /// Values available to annotations throughout this root's walk:
-    /// `bind:Type::field=VALUE`, resolved through macros and enum constants.
-    pub binds: Vec<(String, String)>,
-    /// Attributes other than `type`, `count` and `bind`, kept verbatim and
-    /// in order.
+    /// Attributes other than `type` and `count`, kept verbatim and in order.
     pub other: Vec<String>,
-}
-
-impl Entry {
-    pub fn bindings(
-        &self,
-        macros: &HashMap<String, String>,
-    ) -> Result<Vec<(String, u64)>> {
-        self.binds
-            .iter()
-            .map(|(name, value)| {
-                let value =
-                    eval(macros, value, &|_| None).with_context(|| {
-                        format!("{self}: cannot evaluate bind:{name}={value}")
-                    })?;
-                Ok((name.clone(), value))
-            })
-            .collect()
-    }
 }
 
 #[derive(Debug, Clone, Default, PartialEq, Eq)]
@@ -176,15 +153,11 @@ impl FromStr for Entry {
         }
         let mut ty = None;
         let mut count = None;
-        let mut binds = Vec::new();
         let mut other = Vec::new();
         for attr in entry.attrs {
             match attr {
                 Attr::Type(spec) => ty = Some(spec),
                 Attr::Count(n) => count = Some(n),
-                Attr::Bind(name, value) => {
-                    binds.push((name.to_owned(), value.to_owned()))
-                }
                 Attr::Other(attr) => other.push(attr.to_owned()),
             }
         }
@@ -193,7 +166,6 @@ impl FromStr for Entry {
             location: entry.location,
             ty,
             count,
-            binds,
             other,
         })
     }
@@ -209,7 +181,6 @@ struct RawEntry<'i> {
 enum Attr<'i> {
     Type(TypeSpec),
     Count(Count),
-    Bind(&'i str, &'i str),
     Other(&'i str),
 }
 
@@ -247,11 +218,6 @@ fn attr<'i>(input: &mut &'i str) -> ModalResult<Attr<'i>> {
             ))),
         )
         .map(Attr::Count),
-        preceded(
-            "bind:",
-            cut_err((identifier, '=', take_till(1.., char::is_whitespace))),
-        )
-        .map(|(name, _, value)| Attr::Bind(name, value)),
         take_till(1.., char::is_whitespace).map(Attr::Other),
     ))
     .parse_next(input)
@@ -303,11 +269,6 @@ impl fmt::Display for Entry {
                 Count::Exactly(n) => format!("count:{n}"),
                 Count::Unbounded => "count:*".to_owned(),
             }))
-            .chain(
-                self.binds
-                    .iter()
-                    .map(|(name, value)| format!("bind:{name}={value}")),
-            )
             .chain(self.other.iter().cloned())
             .collect();
         if !attrs.is_empty() {
@@ -346,7 +307,6 @@ grGroundParam = *; // type:grGroundParam[2] data:4byte
 itemdata = GrI2.dat;
 map_plit = *; // count:*
 ScGamRegStaffrollNames_scene_modelset = GmStRoll.dat; // count:10
-ftDataSamus = PlSs.dat; // bind:ftData::kind=Ft_Kind_Samus bind:flags=0x10
 ";
 
     #[test]
@@ -374,24 +334,6 @@ ftDataSamus = PlSs.dat; // bind:ftData::kind=Ft_Kind_Samus bind:flags=0x10
         let ty = |archive| file.lookup("map_head", archive)?.ty.clone();
         assert_eq!(ty("GrNLa.dat").unwrap().name, "B");
         assert_eq!(ty("GrMc.dat").unwrap().name, "A");
-    }
-
-    #[test]
-    fn root_bindings_resolve_constants() {
-        let file = SymbolFile::parse(TEXT).unwrap();
-        let entry = file.lookup("ftDataSamus", "PlSs.dat").unwrap();
-        let mut macros =
-            HashMap::from([("Ft_Kind_Samus".into(), "13".into())]);
-        assert_eq!(
-            entry.bindings(&macros).unwrap(),
-            [("ftData::kind".into(), 13), ("flags".into(), 16)]
-        );
-        // A changed constant changes the binding; unknown constants fail
-        // instead of silently walking with the wrong context.
-        macros.insert("Ft_Kind_Samus".into(), "14".into());
-        assert_eq!(entry.bindings(&macros).unwrap()[0].1, 14);
-        macros.clear();
-        assert!(entry.bindings(&macros).is_err());
     }
 
     #[test]
@@ -424,8 +366,5 @@ ftDataSamus = PlSs.dat; // bind:ftData::kind=Ft_Kind_Samus bind:flags=0x10
         assert!("foo = *".parse::<Entry>().is_err());
         assert!("foo = *; // type:A type:B".parse::<Entry>().is_err());
         assert!("foo = *; // type:A[x]".parse::<Entry>().is_err());
-        assert!("foo = *; // bind:kind".parse::<Entry>().is_err());
-        assert!("foo = *; // bind:kind=".parse::<Entry>().is_err());
-        assert!("foo = *; // bind:0kind=1".parse::<Entry>().is_err());
     }
 }
