@@ -52,7 +52,8 @@ void it_802EFA44(Item_GObj* catherine, Vec* pos, float dir)
 void it_802EFB0C(Item_GObj* egg_gobj)
 {
     Item* egg = GET_ITEM(egg_gobj);
-    itKyasarinEggAttributes* ap = egg->xC4_article_data->x4_specialAttributes;
+    itKyasarinEggAttributes* ap =
+        (itKyasarinEggAttributes*) egg->xC4_article_data->x4_specialAttributes;
     it_8026B390(egg_gobj);
     egg->x40_vel.x = ap->x4 * egg->facing_dir;
     egg->x40_vel.z = 0.0f;
@@ -99,7 +100,8 @@ bool itKyasarinegg_UnkMotion3_Coll(Item_GObj* gobj)
 void it_802EFCC0(Item_GObj* gobj)
 {
     Item* egg = GET_ITEM(gobj);
-    itKyasarinEggAttributes* ap = egg->xC4_article_data->x4_specialAttributes;
+    itKyasarinEggAttributes* ap =
+        (itKyasarinEggAttributes*) egg->xC4_article_data->x4_specialAttributes;
     Item_80268E5C(gobj, 1, 2);
     egg->x40_vel.x = -egg->x40_vel.x;
     egg->x40_vel.y = ap->x8;
@@ -143,7 +145,8 @@ static inline bool it_damage_inline(Item_GObj* gobj)
         return false;
     }
     if (egg->msid != 3) {
-        ap = egg->xC4_article_data->x4_specialAttributes;
+        ap = (itKyasarinEggAttributes*)
+                 egg->xC4_article_data->x4_specialAttributes;
         Item_80268E5C(gobj, 1, 2);
         egg->x40_vel.x = -egg->x40_vel.x;
         egg->x40_vel.y = ap->x8;
@@ -151,7 +154,8 @@ static inline bool it_damage_inline(Item_GObj* gobj)
     } else {
         efSync_Spawn(0x4d0, gobj, &egg->pos);
         Item_8026AE84(egg, 0xf4, 0x7f, 0x40); // why is this being inlined?
-        ap = GET_ITEM(gobj)->xC4_article_data->x4_specialAttributes;
+        ap = (itKyasarinEggAttributes*) GET_ITEM(gobj)
+                 ->xC4_article_data->x4_specialAttributes;
         if (HSD_Randi(ap->x10) == 0) {
             it_802EFD84(gobj);
             return false;

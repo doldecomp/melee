@@ -126,7 +126,8 @@ Item_GObj* itKoopaFlame_Spawn(Fighter_GObj* parent, Vec* pos, f32 facing_dir,
     if (gobj != NULL) {
         Item* it = gobj->user_data;
         itKoopaFlame_Attributes* attrs =
-            it->xC4_article_data->x4_specialAttributes;
+            (itKoopaFlame_Attributes*)
+                it->xC4_article_data->x4_specialAttributes;
         Item_ClearCmdVars(it);
         it_80275158(gobj, (it->xDD4_itemVar.koopaflame.x2C_lifetime =
                                attrs->x0_lifetime));
@@ -195,7 +196,7 @@ bool itKoopaFlame_UnkMotion0_Anim(Item_GObj* gobj)
 {
     Item* it = GET_ITEM(gobj);
     itKoopaFlame_Attributes* attrs =
-        it->xC4_article_data->x4_specialAttributes;
+        (itKoopaFlame_Attributes*) it->xC4_article_data->x4_specialAttributes;
     HSD_JObj* jobj = HSD_GObjGetHSDObj(gobj); // GET_JOBJ does not work here!
     Vec vec;
     if (it->x5D4_hitboxes[0].hit.state != HitCapsule_Disabled) {

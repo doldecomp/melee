@@ -53,7 +53,8 @@ ItemStateTable it_803F7C00[] = { {
 void it_802CB8AC(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
-    itLizardonAttributes* attrs = ip->xC4_article_data->x4_specialAttributes;
+    itLizardonAttributes* attrs =
+        (itLizardonAttributes*) ip->xC4_article_data->x4_specialAttributes;
     ip->xDAC_itcmd_var0 = 0;
     ip->xDB0_itcmd_var1 = 0;
     ip->xDB4_itcmd_var2 = 0;
@@ -120,7 +121,8 @@ bool itLizardon_UnkMotion1_Coll(Item_GObj* gobj)
 static inline void it_802CBAA8_inline(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
-    itLizardonAttributes* attrs = ip->xC4_article_data->x4_specialAttributes;
+    itLizardonAttributes* attrs =
+        (itLizardonAttributes*) ip->xC4_article_data->x4_specialAttributes;
     ip->xDD4_itemVar.lizardon.x70 =
         attrs->x28 + HSD_Randi(attrs->x2C - attrs->x28);
 }
@@ -128,7 +130,8 @@ static inline void it_802CBAA8_inline(Item_GObj* gobj)
 void it_802CBAA8(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
-    itLizardonAttributes* attrs = ip->xC4_article_data->x4_specialAttributes;
+    itLizardonAttributes* attrs =
+        (itLizardonAttributes*) ip->xC4_article_data->x4_specialAttributes;
 
     if (ip->xDD4_itemVar.lizardon.x60 == -1) {
         ip->xDD4_itemVar.lizardon.x60 = *(s32*) (void*) (&attrs->x4);
@@ -172,7 +175,7 @@ static inline void it_802CBD24_inline(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     itLizardonAttributes* attrs;
-    attrs = ip->xC4_article_data->x4_specialAttributes;
+    attrs = (itLizardonAttributes*) ip->xC4_article_data->x4_specialAttributes;
     ip->xDD4_itemVar.lizardon.x70 =
         attrs->x28 + HSD_Randi(attrs->x2C - attrs->x28);
 }
@@ -183,7 +186,8 @@ void it_802CBD24(Item_GObj* gobj)
     f32 scale;
     f32 facing;
     Item* ip = GET_ITEM(gobj);
-    itLizardonAttributes* attrs = ip->xC4_article_data->x4_specialAttributes;
+    itLizardonAttributes* attrs =
+        (itLizardonAttributes*) ip->xC4_article_data->x4_specialAttributes;
     PAD_STACK(4);
 
     if (ip->xDB0_itcmd_var1 != 0) {
@@ -193,7 +197,7 @@ void it_802CBD24(Item_GObj* gobj)
     }
     if (ip->xDAC_itcmd_var0 != 0) {
         itLizardonAttributes* attrs2 =
-            ip->xC4_article_data->x4_specialAttributes;
+            (itLizardonAttributes*) ip->xC4_article_data->x4_specialAttributes;
         scale = 1.0f;
         lb_8000B1CC(ip->xBBC_dynamicBoneTable->bones[0x32], NULL, &bone_pos);
         if (ip->xDD4_itemVar.lizardon.x64 != 0) {
@@ -317,7 +321,8 @@ void it_802CC1CC(Item_GObj* gobj, ItemKind kind)
     Vec3 bone_pos;
     u8 _pad[4];
     Item* ip = GET_ITEM(gobj);
-    itLizardonAttributes* attrs = ip->xC4_article_data->x4_specialAttributes;
+    itLizardonAttributes* attrs =
+        (itLizardonAttributes*) ip->xC4_article_data->x4_specialAttributes;
     f32 angle;
     s32 randi;
 
@@ -434,7 +439,8 @@ bool itLizardon_Logic37_Absorbed(Item_GObj* gobj)
 void it_802CC5D4(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
-    itLizardonAttributes* attrs = ip->xC4_article_data->x4_specialAttributes;
+    itLizardonAttributes* attrs =
+        (itLizardonAttributes*) ip->xC4_article_data->x4_specialAttributes;
     it_80275158(gobj, attrs->x0);
     it_80274740(gobj);
     Item_80268E5C(gobj, 0, ITEM_ANIM_UPDATE);
@@ -451,7 +457,8 @@ bool it_802CC650(Item_GObj* gobj)
 void it_802CC684(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
-    itLizardonAttributes* attrs = ip->xC4_article_data->x4_specialAttributes;
+    itLizardonAttributes* attrs =
+        (itLizardonAttributes*) ip->xC4_article_data->x4_specialAttributes;
 
     ip->x40_vel.x *= attrs->x4;
     ip->x40_vel.y *= attrs->x4;

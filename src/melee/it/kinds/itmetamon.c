@@ -40,7 +40,8 @@ ItemStateTable it_803F7FC8[] = {
 void it_802D3008(Item_GObj* item_gobj)
 {
     Item* it = GET_ITEM(item_gobj);
-    ItMetamonVars* vars = it->xC4_article_data->x4_specialAttributes;
+    ItMetamonVars* vars =
+        (ItMetamonVars*) it->xC4_article_data->x4_specialAttributes;
     it_80279CDC(item_gobj, vars->x0);
     it_802D31B4(item_gobj);
     Item_8026AE84(it, 0x2728, 0x7F, 0x40);

@@ -329,7 +329,8 @@ void itLikelike_UnkMotion1_Phys(Item_GObj* gobj)
     PAD_STACK(8);
 
     ip = GET_ITEM(gobj);
-    attr = (article = ip->xC4_article_data)->x4_specialAttributes;
+    attr = (itLikelikeAttributes*) (article = ip->xC4_article_data)
+               ->x4_specialAttributes;
 
     temp_r3 = ip->xDD4_itemVar.likelike.x44;
     if (temp_r3 == 0) {

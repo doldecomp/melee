@@ -76,7 +76,8 @@ bool it_802B314C(Item_GObj* item_gobj)
 void it_802B322C(Item_GObj* item_gobj, HSD_GObj* owner)
 {
     Item* item = GET_ITEM(item_gobj);
-    StarAttrs* star = item->xC4_article_data->x4_specialAttributes;
+    StarAttrs* star =
+        (StarAttrs*) item->xC4_article_data->x4_specialAttributes;
     item->owner = owner;
     item->x40_vel.x = star->speed * item->facing_dir;
     item->x40_vel.y = item->xCC_item_attr->x18;
@@ -96,7 +97,8 @@ void itYoshistar_UnkMotion0_Phys(Item_GObj* item_gobj)
 {
     Item* item = GET_ITEM(item_gobj);
     ItemAttr* attr = item->xCC_item_attr;
-    StarAttrs* star = item->xC4_article_data->x4_specialAttributes;
+    StarAttrs* star =
+        (StarAttrs*) item->xC4_article_data->x4_specialAttributes;
     it_80272860(item_gobj, attr->x10_fall_speed, attr->x14_fall_speed_max);
     item->x40_vel.x += star->accel * item->facing_dir;
 }

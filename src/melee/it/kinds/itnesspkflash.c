@@ -96,7 +96,8 @@ HSD_GObj* it_802AA8C0(Item_GObj* gobj, Vec3* pos, ItemKind kind,
     flash = Item_80268B18(&spawn);
     if (flash != NULL) {
         Item* ip = GET_ITEM(flash);
-        itFlashAttributes* attr = ip->xC4_article_data->x4_specialAttributes;
+        itFlashAttributes* attr =
+            (itFlashAttributes*) ip->xC4_article_data->x4_specialAttributes;
         Item_ClearCmdVars(ip);
         it_80275158(flash, attr->x0_FLASH_LIFETIMER);
         ip->xDD4_itemVar.pkflush.xDD8_PKFlash = 0.0F;
@@ -150,7 +151,8 @@ void it_802AAA50(Item_GObj* gobj)
 void it_802AAA80(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
-    itFlashAttributes* attr = ip->xC4_article_data->x4_specialAttributes;
+    itFlashAttributes* attr =
+        (itFlashAttributes*) ip->xC4_article_data->x4_specialAttributes;
     f32 angle;
     PAD_STACK(8);
 
@@ -169,7 +171,8 @@ void it_802AAA80(Item_GObj* gobj)
 bool itNesspkflash_UnkMotion0_Anim(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
-    itFlashAttributes* attr = ip->xC4_article_data->x4_specialAttributes;
+    itFlashAttributes* attr =
+        (itFlashAttributes*) ip->xC4_article_data->x4_specialAttributes;
     HSD_JObj* jobj = GET_JOBJ(gobj);
     bool holding;
 
@@ -223,7 +226,8 @@ bool itNesspkflash_UnkMotion1_Anim(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     HSD_JObj* jobj = GET_JOBJ(gobj);
-    itFlashAttributes* attr = ip->xC4_article_data->x4_specialAttributes;
+    itFlashAttributes* attr =
+        (itFlashAttributes*) ip->xC4_article_data->x4_specialAttributes;
 
     ip->xDAC_itcmd_var0++;
 
@@ -262,7 +266,8 @@ bool itNesspkflash_UnkMotion2_Anim(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     HSD_JObj* jobj = GET_JOBJ(gobj);
-    itFlashAttributes* attr = ip->xC4_article_data->x4_specialAttributes;
+    itFlashAttributes* attr =
+        (itFlashAttributes*) ip->xC4_article_data->x4_specialAttributes;
     itNesspkflash_SetScale(jobj, ip, attr);
     return it_80273130(gobj);
 }
@@ -270,7 +275,8 @@ bool itNesspkflash_UnkMotion2_Anim(Item_GObj* gobj)
 void itNesspkflash_UnkMotion0_Phys(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
-    itFlashAttributes* attr = ip->xC4_article_data->x4_specialAttributes;
+    itFlashAttributes* attr =
+        (itFlashAttributes*) ip->xC4_article_data->x4_specialAttributes;
     PAD_STACK(8);
 
     if (ip->xDD4_itemVar.pkflush.xDDC_PKFlash == 0) {
@@ -329,7 +335,8 @@ void itNesspkflash_UnkMotion2_Phys(Item_GObj* gobj)
 bool itNesspkflash_UnkMotion0_Coll(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
-    itFlashAttributes* attr = ip->xC4_article_data->x4_specialAttributes;
+    itFlashAttributes* attr =
+        (itFlashAttributes*) ip->xC4_article_data->x4_specialAttributes;
     HSD_JObj* jobj = GET_JOBJ(gobj);
 
     if (it_802AA810(gobj, &ip->x378_itemColl) != 0) {

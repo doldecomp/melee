@@ -57,7 +57,8 @@ ItemStateTable it_803F7CF8[] = {
 void itHassam_802CDBE0(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
-    itHassam_ItemVars* attr = ip->xC4_article_data->x4_specialAttributes;
+    itHassam_ItemVars* attr =
+        (itHassam_ItemVars*) ip->xC4_article_data->x4_specialAttributes;
     PAD_STACK(12);
 
     it_80279C48(gobj);
@@ -181,7 +182,8 @@ void itHassam_802CDF28(Item_GObj* gobj)
     Fighter_GObj* var_r3;
 
     Item* ip = GET_ITEM(gobj);
-    itHassam_ItemVars* attr = ip->xC4_article_data->x4_specialAttributes;
+    itHassam_ItemVars* attr =
+        (itHassam_ItemVars*) ip->xC4_article_data->x4_specialAttributes;
 
     var_r3 = itHassam_802CDE1C(&ip->pos, ip->owner);
     if (var_r3 == NULL) {
@@ -204,7 +206,8 @@ void itHassam_802CDF28(Item_GObj* gobj)
 void itHassam_802CE008(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
-    itHassam_ItemVars* attr = ip->xC4_article_data->x4_specialAttributes;
+    itHassam_ItemVars* attr =
+        (itHassam_ItemVars*) ip->xC4_article_data->x4_specialAttributes;
 
     Item_80268E5C(gobj, 1, ITEM_ANIM_UPDATE);
     Item_SetEffectHitlagCallbacks(ip);
@@ -223,7 +226,7 @@ bool itHassam_UnkMotion1_Anim(Item_GObj* gobj)
     HSD_JObj* jobj;
 
     ip = (Item*) gobj->user_data;
-    attr = ip->xC4_article_data->x4_specialAttributes;
+    attr = (itHassam_ItemVars*) ip->xC4_article_data->x4_specialAttributes;
     if (it_80272C6C(gobj) == false) {
         Item_80268E5C(gobj, 1, ITEM_ANIM_UPDATE);
         Item_SetEffectHitlagCallbacks(ip);
@@ -261,7 +264,8 @@ bool itHassam_UnkMotion1_Anim(Item_GObj* gobj)
 void itHassam_UnkMotion1_Phys(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
-    itHassam_ItemVars* attr = ip->xC4_article_data->x4_specialAttributes;
+    itHassam_ItemVars* attr =
+        (itHassam_ItemVars*) ip->xC4_article_data->x4_specialAttributes;
 
     it_8027A344(gobj);
     if (ip->ground_or_air == GA_Air) {
@@ -309,7 +313,7 @@ void itHassam_802CE400(Item_GObj* gobj)
 
     ip = GET_ITEM(gobj);
     jobj = (HSD_JObj*) gobj->hsd_obj;
-    attr = ip->xC4_article_data->x4_specialAttributes;
+    attr = (itHassam_ItemVars*) ip->xC4_article_data->x4_specialAttributes;
 
     itHassam_802CE400_sub(gobj, 2, ITEM_ANIM_UPDATE);
     Camera_GetTransformPosition(&cam_pos);

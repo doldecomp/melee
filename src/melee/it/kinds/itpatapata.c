@@ -100,7 +100,8 @@ bool itPatapata_UnkMotion1_Coll(Item_GObj* gobj)
 void it_802E0734(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
-    itPatapataAttributes* attrs = ip->xC4_article_data->x4_specialAttributes;
+    itPatapataAttributes* attrs =
+        (itPatapataAttributes*) ip->xC4_article_data->x4_specialAttributes;
 
     switch (ip->xDD4_itemVar.patapata.x40) {
     case 0: {
@@ -157,7 +158,8 @@ bool itPatapata_UnkMotion2_Anim(Item_GObj* gobj)
 void itPatapata_UnkMotion3_Phys(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
-    itPatapataAttributes* attrs = ip->xC4_article_data->x4_specialAttributes;
+    itPatapataAttributes* attrs =
+        (itPatapataAttributes*) ip->xC4_article_data->x4_specialAttributes;
     PAD_STACK(16);
 
     if (it_802750E8(gobj, 2) && ip->msid == 2) {
@@ -202,7 +204,8 @@ void itPatapata_UnkMotion3_Phys(Item_GObj* gobj)
 bool itPatapata_UnkMotion3_Coll(Item_GObj* gobj)
 {
     Item* ip = gobj->user_data;
-    itPatapataAttributes* attrs = ip->xC4_article_data->x4_specialAttributes;
+    itPatapataAttributes* attrs =
+        (itPatapataAttributes*) ip->xC4_article_data->x4_specialAttributes;
     s32 landed = it_8026DA08(gobj);
 
     if (it_80276308(gobj)) {
@@ -262,7 +265,8 @@ bool itPatapata_UnkMotion3_Coll(Item_GObj* gobj)
 void it_802E0D9C(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
-    itPatapataAttributes* attrs = ip->xC4_article_data->x4_specialAttributes;
+    itPatapataAttributes* attrs =
+        (itPatapataAttributes*) ip->xC4_article_data->x4_specialAttributes;
     switch (ip->xDD4_itemVar.patapata.x40) {
     case 0:
         ip->x40_vel.x = -ip->facing_dir * attrs->x0->x4;
@@ -406,7 +410,8 @@ bool itPatapata_UnkMotion6_Coll(Item_GObj* gobj)
 void it_802E11E0(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
-    itPatapataAttributes* attrs = ip->xC4_article_data->x4_specialAttributes;
+    itPatapataAttributes* attrs =
+        (itPatapataAttributes*) ip->xC4_article_data->x4_specialAttributes;
     s32 coll_facing;
     s32 range;
     s32 rand;
@@ -458,7 +463,7 @@ bool itPatapata_UnkMotion4_Anim(Item_GObj* gobj)
     Item* ip = GET_ITEM(gobj);
     if (ip->xDD4_itemVar.patapata.x28 == 0) {
         itPatapataAttributes* attrs =
-            ip->xC4_article_data->x4_specialAttributes;
+            (itPatapataAttributes*) ip->xC4_article_data->x4_specialAttributes;
         s32 toggle;
         ip->xDD4_itemVar.patapata.x28 = attrs->x2C;
         toggle = ip->xDD4_itemVar.patapata.x44 ^ 1;
@@ -483,7 +488,8 @@ bool itPatapata_UnkMotion4_Anim(Item_GObj* gobj)
 void itPatapata_UnkMotion4_Phys(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
-    itPatapataAttributes* attrs = ip->xC4_article_data->x4_specialAttributes;
+    itPatapataAttributes* attrs =
+        (itPatapataAttributes*) ip->xC4_article_data->x4_specialAttributes;
     HSD_JObjAddTranslationZ(ip->xBBC_dynamicBoneTable->bones[18],
                             ip->xDD4_itemVar.patapata.x2C);
     it_80272860(gobj, attrs->x38, attrs->x3C);

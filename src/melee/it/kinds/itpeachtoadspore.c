@@ -50,7 +50,8 @@ void it_802BE2E8(Item_GObj* item_gobj, HSD_GObj* arg1)
 
     item_1 = GET_ITEM(item_gobj);
     item_jobj = item_gobj->hsd_obj;
-    attr = item_1->xC4_article_data->x4_specialAttributes;
+    attr = (itPeachToadSporeAttributes*)
+               item_1->xC4_article_data->x4_specialAttributes;
     item_1->owner = arg1;
     it_80275158(item_gobj, 60.0F);
     item_1->xDAC_itcmd_var0 = 0;
@@ -102,7 +103,8 @@ void itPeachtoadspore_UnkMotion0_Phys(Item_GObj* item_gobj)
     Item* item;
 
     item = GET_ITEM(item_gobj);
-    attr = item->xC4_article_data->x4_specialAttributes;
+    attr = (itPeachToadSporeAttributes*)
+               item->xC4_article_data->x4_specialAttributes;
     item->x40_vel.x *= attr->x8_speed_decay_rate;
     item->x40_vel.y *= attr->x8_speed_decay_rate;
 }

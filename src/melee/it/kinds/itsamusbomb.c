@@ -46,7 +46,8 @@ Item_GObj* it_802B4AC8(Fighter_GObj* parent_gobj, Vec3* pos, f32 facing_dir)
 void it_802B4BA0(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
-    itSamusBombAttributes* attr = ip->xC4_article_data->x4_specialAttributes;
+    itSamusBombAttributes* attr =
+        (itSamusBombAttributes*) ip->xC4_article_data->x4_specialAttributes;
 
     ip->x40_vel.y = ip->xCC_item_attr->x18;
     ip->xDB4_itcmd_var2 = 0;
@@ -79,7 +80,8 @@ static inline void itSamusBomb_UnkMotion_PreProcess(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     HSD_JObj* jobj = GET_JOBJ(gobj);
-    itSamusBombAttributes* attr = ip->xC4_article_data->x4_specialAttributes;
+    itSamusBombAttributes* attr =
+        (itSamusBombAttributes*) ip->xC4_article_data->x4_specialAttributes;
 
     if (ip->xD44_lifeTimer <= attr->x4) {
         lb_8000BA0C(jobj, attr->x8);
@@ -168,7 +170,8 @@ static inline float my_sqrtf(float x)
 void itSamusbomb_UnkMotion2_Phys(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
-    itSamusBombAttributes* attr = ip->xC4_article_data->x4_specialAttributes;
+    itSamusBombAttributes* attr =
+        (itSamusBombAttributes*) ip->xC4_article_data->x4_specialAttributes;
     f32 mult;
 
     if (my_sqrtf(VEC2_SQ_LEN(ip->x7C)) > attr->xC) {

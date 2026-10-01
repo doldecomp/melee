@@ -92,7 +92,8 @@ void it_8029A31C(Item_GObj* gobj, Fighter_GObj* owner, Item* unused)
 {
     Item* ip = GET_ITEM(gobj);
     itLipstickSporeAttributes* attr =
-        ip->xC4_article_data->x4_specialAttributes;
+        (itLipstickSporeAttributes*)
+            ip->xC4_article_data->x4_specialAttributes;
     HitCapsule* hit;
 
     it_8026B3A8(gobj);

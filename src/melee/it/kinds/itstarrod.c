@@ -33,7 +33,8 @@ ItemStateTable it_803F5F90[] = {
 void itStarRod_Logic22_Spawned(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
-    StarRodAttributes* x = ip->xC4_article_data->x4_specialAttributes;
+    StarRodAttributes* x =
+        (StarRodAttributes*) ip->xC4_article_data->x4_specialAttributes;
     ip->xD4C = x->x0;
     it_80292488(gobj);
 }
@@ -41,7 +42,8 @@ void itStarRod_Logic22_Spawned(Item_GObj* gobj)
 void it_80292394(Item_GObj* gobj, Vec* arg1)
 {
     Item* ip = GET_ITEM(gobj);
-    StarRodAttributes* x = ip->xC4_article_data->x4_specialAttributes;
+    StarRodAttributes* x =
+        (StarRodAttributes*) ip->xC4_article_data->x4_specialAttributes;
     *arg1 = x->x4;
 }
 

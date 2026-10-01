@@ -55,7 +55,8 @@ bool itDkinoko_UnkMotion0_Anim(Item_GObj* gobj)
 void itDkinoko_UnkMotion0_Phys(Item_GObj* gobj)
 {
     Item* it = GET_ITEM(gobj);
-    KinokoAttrs* attrs = it->xC4_article_data->x4_specialAttributes;
+    KinokoAttrs* attrs =
+        (KinokoAttrs*) it->xC4_article_data->x4_specialAttributes;
     if (it->ground_or_air != GA_Air) {
         it->xDD4_itemVar.kinoko.x0 = attrs->x0 * it->facing_dir;
         it->x40_vel.x =
@@ -108,7 +109,8 @@ void itDkinoko_UnkMotion1_Phys(Item_GObj* gobj)
     f32 vel;
     Item* it = GET_ITEM(gobj);
     ItemAttr* attr = it->xCC_item_attr;
-    KinokoAttrs* sa = it->xC4_article_data->x4_specialAttributes;
+    KinokoAttrs* sa =
+        (KinokoAttrs*) it->xC4_article_data->x4_specialAttributes;
 
     it_80272860(gobj, attr->x10_fall_speed, attr->x14_fall_speed_max);
 

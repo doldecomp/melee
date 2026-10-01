@@ -93,7 +93,8 @@ bool ftPp_SpecialS_80120FE0(Fighter_GObj* gobj)
             Item_GObj* gobj = item_gobj;
             Item* ip = item_gobj->user_data;
             itClimbersStringAttributes* sa =
-                ip->xC4_article_data->x4_specialAttributes;
+                (itClimbersStringAttributes*)
+                    ip->xC4_article_data->x4_specialAttributes;
             s32 ev0 = sa->x18;
             s32 ev1 = sa->x1C;
             s32 ev2 = sa->x20;
