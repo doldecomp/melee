@@ -6,6 +6,7 @@
 #include <sysdolphin/baselib/forward.h>
 
 #include <dat_macros.h>
+
 #include <dolphin/mtx.h>
 #include <sysdolphin/baselib/objalloc.h>
 
