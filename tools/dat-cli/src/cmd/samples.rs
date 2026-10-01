@@ -511,8 +511,10 @@ fn slice(args: Slice) -> Result<()> {
             source,
             offset,
             size: size.into(),
-            // Public, or elided: the C declares it extern
-            global: true,
+            // The archive names only its public symbols. The C declares
+            // elided data extern, but the base's references to it needn't
+            // bind: objdiff compares relocations to undefined symbols by name
+            global: source.is_public(offset),
         };
         if all {
             inferred.push(piece.clone());

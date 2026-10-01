@@ -135,14 +135,13 @@ starts with (`Pl/PlMr`, `Gr/GrFs`), under `dat/` in objdiff like the code's
 - `target/<unit>.o`: the whole archive, in two sections (objdiff lists
   them by name):
   - `.0.sampled`: the sampled objects, with pointers as relocations
-  - `.1.inferred`: the rest of the archive's global symbols (its public
-    symbols, and the data the samples point to), as uninitialized data,
-    which objdiff never diffs bytes of. The base defines the ones the walk
-    explains here too, so objdiff matches them by name and size; the rest
-    show as missing. A global is explained when it, and everything it
-    reaches before another global or a sample, is typed data with no
-    relocation the walk can't explain. Raw `u8` isn't typed: its format
-    needs a `DAT_BLOB` typedef
+  - `.1.inferred`: the archive's public symbols and the data the samples
+    point to, as uninitialized data, which objdiff never diffs bytes of.
+    The base defines the ones the walk explains here too, so objdiff
+    matches them by name and size; the rest show as missing. One is
+    explained when it, and everything it reaches before another of them
+    or a sample, is typed data with no relocation the walk can't explain.
+    Raw `u8` isn't typed: its format needs a `DAT_BLOB` typedef
 
   Each symbol's offset in the archive is its virtual address in a
   `.note.split`, as decomp-toolkit writes for split code; objdiff shows it.
@@ -171,10 +170,12 @@ clang-tidy is off for `src/`.
 Data is named as the archive names it (its public symbols, global in both
 objects). Everything else is `LOCAL` (`static`, kept where nothing points to
 it), named after the field the walk first reached it through, then its
-offset: `child_x1A0`, `x1C_4_x2818`. Data the samples point to that isn't written as C (elided: declared as its
-type where the walk typed it as one record, else as `UNK_T`)
-can't be local, so its name starts with its root, e.g.
-`ftDataMario_x0_common_attr_x3AC8`. Externs, other archives' symbols the
+offset: `child_x1A0`, `x1C_4_x2818`. Data the samples point to that isn't
+written as C (elided: declared as its type where the walk typed it as one
+record, else as `UNK_T`) is local in both objects too, but the C declares
+it `extern`, so its name starts with its root to stay unique, e.g.
+`ftDataMario_x0_common_attr_x3AC8`. The base's references to it stay
+undefined; objdiff compares them by name. Externs, other archives' symbols the
 loader links in, start with the unit's name (`GrFz_<extern>` in
 `GrFz.dat`).
 
