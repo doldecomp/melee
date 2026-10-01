@@ -658,6 +658,36 @@ impl<'a> Walker<'a> {
             });
             return;
         }
+        // Plain data, such as texels: one object, nothing to follow
+        if count > 0 && !self.has_pointers(element) {
+            let Some(id) = self.canonical.of(element) else {
+                return;
+            };
+            if !self.visited.insert((value, id)) {
+                return;
+            }
+            self.walk.objects.entry(value).or_default().insert(id);
+            self.walk
+                .paths
+                .entry(value)
+                .or_insert_with(|| format!("{path}->"));
+            self.typed_extent(value, raw, count);
+            let end = value + (count * size) as u32;
+            let mut words: Vec<_> = self
+                .relocs
+                .iter()
+                .copied()
+                .filter(|at| (value..end).contains(at))
+                .collect();
+            words.sort();
+            for at in words {
+                self.issue(Issue::RelocatedScalar {
+                    at,
+                    path: format!("{path}[{}]", u64::from(at - value) / size),
+                });
+            }
+            return;
+        }
         let outer = self.env.clone();
         for i in 0..count {
             let env = self.bound(&outer, binds, parent, i);
@@ -1206,7 +1236,19 @@ impl<'a> Walker<'a> {
         let at = base + member.offset? as u32;
         let size = self.canonical.byte_size(self.graph, member.ty?)?;
         let bytes = self.data.get(at as usize..at as usize + size as usize)?;
-        Some(bytes.iter().fold(0, |v, &b| v << 8 | u64::from(b)))
+        let value = bytes.iter().fold(0, |v, &b| v << 8 | u64::from(b));
+        // Floats as the integers C would convert them to, toward zero
+        let ty = self.resolve(member.ty)?;
+        Some(match self.graph.types[&ty].kind {
+            TypeKind::Base { encoding } if encoding == gimli::DW_ATE_float.0 => {
+                match size {
+                    4 => f32::from_bits(value as u32) as i64 as u64,
+                    8 => f64::from_bits(value) as i64 as u64,
+                    _ => return None,
+                }
+            }
+            _ => value,
+        })
     }
 
     /// The type a pointer points to, if it can be followed.
