@@ -192,6 +192,15 @@ struct Article {
     ItemDynamics* x14_dynamics;
 };
 
+/// The data behind an #ftData_Item, chosen by fighter kind and item slot.
+/// The game stores each entry as a void pointer; this union describes the
+/// pointed-to data for the archive walk.
+union ftData_ItemData {
+    struct UNK_SAMUS_S1 samus_grapple DAT_IF(ftData::kind == Ft_Kind_Samus &&
+                                             ftData::item == 4);
+    Article article DAT_IF(ftData::kind != Ft_Kind_Samus || ftData::item != 4);
+};
+
 typedef struct it_266F_ItemVars {
     u16 x0;
     u8* x4;

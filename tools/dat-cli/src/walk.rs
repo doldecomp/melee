@@ -117,8 +117,8 @@ pub struct Walk {
     pub issues: BTreeSet<Issue>,
 }
 
-/// Names a `DAT_BIND` gives values to, for everything reached through the
-/// member it is on. Inner bindings shadow outer ones.
+/// Names bound by a root or `DAT_BIND`, for everything reached within
+/// that scope. Inner bindings shadow outer ones.
 #[derive(Debug)]
 struct Scope {
     name: String,
@@ -137,6 +137,16 @@ fn lookup(env: &Env, name: &str) -> Option<u64> {
         scope = s.outer.as_deref();
     }
     None
+}
+
+fn root_env(bindings: &[(String, u64)]) -> Env {
+    bindings.iter().fold(None, |outer, (name, value)| {
+        Some(Rc::new(Scope {
+            name: name.clone(),
+            value: *value,
+            outer,
+        }))
+    })
 }
 
 pub struct Walker<'a> {
@@ -197,8 +207,15 @@ impl<'a> Walker<'a> {
     }
 
     /// Walk everything reachable from an object of type `die` at `offset`.
-    pub fn root(&mut self, offset: u32, die: DieId, name: &str) {
-        self.queue.push((offset, die, name.to_owned(), None));
+    pub fn root(
+        &mut self,
+        offset: u32,
+        die: DieId,
+        name: &str,
+        bindings: &[(String, u64)],
+    ) {
+        self.queue
+            .push((offset, die, name.to_owned(), root_env(bindings)));
         while let Some((offset, die, path, env)) = self.queue.pop() {
             self.env = env;
             self.object(offset, die, path);
@@ -214,7 +231,10 @@ impl<'a> Walker<'a> {
         element: DieId,
         count: Option<u64>,
         name: &str,
+        bindings: &[(String, u64)],
     ) {
+        let env = root_env(bindings);
+        self.env = env.clone();
         let raw = element;
         let Some(element) = self.resolve(Some(element)) else {
             return;
@@ -272,6 +292,9 @@ impl<'a> Walker<'a> {
             return;
         }
         for i in 0..count {
+            // Following an element's pointers may leave an inner scope in
+            // effect. Each element starts with this root's bindings.
+            self.env = env.clone();
             let at = offset + (i * size) as u32;
             self.layout(at, element, &format!("{name}[{i}]"), None);
             while let Some((offset, die, path, env)) = self.queue.pop() {
