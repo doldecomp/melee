@@ -4,7 +4,6 @@
 #include <melee/lb/forward.h>
 
 #include <math.h>
-#include <placeholder.h>
 
 #include "ftseak.h"
 #include "types.h"

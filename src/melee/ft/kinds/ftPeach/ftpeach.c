@@ -5,8 +5,6 @@
 #include <melee/ft/kinds/ftCommon/forward.h>
 #include <melee/it/forward.h>
 
-#include <placeholder.h>
-
 #include "ftpeachattacks4.h"
 #include "ftpeachfloat.h"
 #include "ftpeachfloatattack.h"
