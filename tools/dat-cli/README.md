@@ -185,6 +185,10 @@ from all of them; `samples macros` writes `src/macros.h`. The archives come
 from `orig/GALE01/files` (`MELEE_DAT_FILES`); `MELEE_DAT` takes a prebuilt
 `melee-dat`, else the build compiles it with cargo.
 
+Configuration fails if `MELEE_DAT_FILES` contains no `.dat` archives.
+Extract the game's files there first, or use an existing extraction with
+`cmake --preset dat -DMELEE_DAT_FILES=/path/to/files`.
+
 A pointer the type has as an integer is written as its raw value, so
 objdiff shows the missing relocation; so does data in padding, or a float
 that doesn't round-trip. A union is written through the member its tag

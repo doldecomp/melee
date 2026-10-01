@@ -22,6 +22,12 @@ endif()
 set(MELEE_DAT "" CACHE FILEPATH "melee-dat binary; built with cargo if empty")
 set(MELEE_DAT_FILES "${CMAKE_SOURCE_DIR}/orig/${MELEE_VERSION}/files"
     CACHE PATH "The game's files, with its .dat archives")
+file(GLOB _dat_archives CONFIGURE_DEPENDS LIST_DIRECTORIES false "${MELEE_DAT_FILES}/*.dat")
+if(NOT _dat_archives)
+    message(FATAL_ERROR
+        "No .dat archives found in MELEE_DAT_FILES (${MELEE_DAT_FILES}). "
+        "Extract the game's files there or set MELEE_DAT_FILES to their directory.")
+endif()
 # What to sample is the user's choice, not the project's
 set(MELEE_DAT_SAMPLES_ALL "" CACHE STRING
     "Archives (globs, e.g. PlFx.dat;Gr*.dat) to sample every typed object of, not one instance per type")
@@ -99,7 +105,6 @@ add_custom_command(
     VERBATIM
 )
 
-file(GLOB _dat_archives CONFIGURE_DEPENDS "${MELEE_DAT_FILES}/*.dat")
 set(_dat_sidecars)
 set(_dat_bases)
 set(_dat_commands)
