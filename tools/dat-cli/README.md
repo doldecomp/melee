@@ -28,9 +28,14 @@ melee-dat symbols walk    # walk every archive, print mismatches
 melee-dat symbols roots   # symbols loaded by name, with their types
 melee-dat symbols check   # root types against the archives' symbol sizes
 melee-dat types dump -n HSD_Joint   # a type as the tool sees it
+melee-dat types duplicates  # records with the same layout under different names
+melee-dat types unhoisted   # dat types declared in .c files
+melee-dat types export -o types.bin # the types, for --types
 ```
 
-Run with `cargo run -rqp melee-dat -- <command> --dwarf build/ppc-dwarf/melee.elf`.
+Run with `cargo run -rqp melee-dat -- <command> --dwarf build/ppc-dwarf/melee.elf`,
+or `--types build/GALE01/dat/types.bin` (from the samples build; faster than
+reading the DWARF).
 
 `walk` reports:
 
@@ -84,8 +89,10 @@ The loaders record what they load in the DWARF build:
 - `HSD_ArchiveGetPublicAs(type, archive, name)`, a typed
   `HSD_ArchiveGetPublicAddress`.
 
-A root is untyped if its destination is `void*`, and skipped if its name
-isn't a string literal or a global string.
+They record them with `DAT_ROOTS` (in `dat_macros.h`), which declares a
+witness of each destination's type, annotated with the name. A root is
+untyped if its destination is `void*`, and skipped if its name isn't a
+string literal or a global string.
 
 Names the code builds at runtime go in `config/GALE01/dat_symbols.txt`,
 used for publics no loader types:
@@ -122,26 +129,41 @@ melee-dat samples report build/GALE01/dat
 
 - `melee.elf`: the DWARF build for that game version
 - `types.bin`: its types, deduplicated once for every step
-- `target/<archive>.o`: the sampled objects from the archive, named as the
-  archive names them (its public symbol, else `x<OFFSET>`), with pointers as
-  relocations; `target/<archive>.samples` says what each is
+- `target/<archive>.o`: the sampled objects from the archive, with
+  pointers as relocations; `target/<archive>.samples` says what each is
+- `metadata/<archive>.types`: a hash of the types the archive's roots
+  lead to, rewritten only when it changes, which the other steps depend on;
+  `metadata/<archive>.formatted` records that the C is formatted
 - `src/<archive>/<root>.{h,c}`: per root of the archive (the public
   symbol its samples were reached from), a header declaring its samples and
   the other data they point to, and designated initializers generated from
   the types; pointers into other roots include those roots' headers
+- `src/macros.h`: what the generated C includes (`LOCAL`, `DatBlob`), like
+  dtk's `macros.inc`; from `samples macros`
 - `src/<archive>.c`: the unit, which includes every root's source; all of
   it is formatted in place with the repository's `.clang-format`
-  (`stamp/<archive>.formatted` records that)
 - `base/<archive>.o`: that C, compiled with the DWARF build's flags, one
   section per variable (`obj/<archive>.o`), then linked with
   `target/<archive>.ld` into one `.data` in the target's order (clang lays
   variables out where they are first pointed to, not where they are
   defined)
 
-`compile_commands.json` there gives clangd the same flags as the build.
+`compile_commands.json` there gives clangd the same flags as the build;
+clang-tidy is off for `src/`.
 
-Each unit is four steps (`samples slice`, `samples codegen`, format,
-compile), and `samples project` writes `objdiff.json` from all of them. The archives come
+Data is named as the archive names it (its public symbols, global in both
+objects). Everything else is `LOCAL` (`static`, kept where nothing points to
+it), named after the field the walk first reached it through, then its
+offset: `child_x1A0`, `x1C_4_x2818`. Data the samples point to that isn't written as C (elided: declared as its
+type where the walk typed it as one record, else as a `DatBlob` array)
+can't be local, so its name starts with its root, e.g.
+`ftDataMario_x0_common_attr_x3AC8`. Externs, other archives' symbols the
+loader links in, start with the unit's name (`GrFz_<extern>` in
+`GrFz.dat`).
+
+Each unit is five steps (`samples types`, `samples slice`, `samples
+codegen`, format, compile), and `samples project` writes `objdiff.json`
+from all of them; `samples macros` writes `src/macros.h`. The archives come
 from `orig/GALE01/files` (`MELEE_DAT_FILES`); `MELEE_DAT` takes a prebuilt
 `melee-dat`, else the build compiles it with cargo.
 
@@ -184,7 +206,7 @@ type instead.
 | `DAT_EXTENT` | Array, or pointer to elements, that runs as far as the data does. Stopgap for lengths only the code knows. |
 | `DAT_BIND(T::f, value)` | `T::f` is `value` for everything reached through this member. |
 | `DAT_SCRIPT(table, len...)` | Pointer to a command script: opcode in the top 6 bits, lengths in words from the listed values, then from `table` in the code. Ends at opcode 0; relocated words point to more script. |
-| `DAT_NULLTERM` | Pointer to elements up to one whose first word is zero. On a member, or on a pointer typedef for nested lists. |
+| `DAT_TERMINATED(value)` | Pointer to elements up to one whose first word is `value` and not a relocated pointer: `0` for null-terminated lists, `GX_VA_NULL` for vertex descriptors. On a member, or on a pointer typedef for nested lists. |
 
 Expressions are C. Names resolve to fields of the enclosing record, then
 bindings, then macros and enum constants. `_index` is the element index
@@ -202,16 +224,21 @@ ItCapsuleAttr capsule DAT_IF(Article::kind == It_Kind_Capsule);
 
 ## Workflow
 
-1. `symbols walk`, pick a mismatch.
+1. `symbols walk` or `symbols coverage`, pick a mismatch.
 2. Fix the type in `src`, or annotate it.
-3. `ninja` (must stay at 100%), rebuild `ppc-dwarf`, walk again.
+3. `ninja` (must stay at 100%), then `cmake --build --preset dat` and
+   `samples report`, or rebuild `ppc-dwarf` and walk again.
 
 Known problems and coverage gaps are in `TODO.md`.
 
 ## Source
 
+- `src/cmd/`: the commands.
+- `src/config.rs`: `dat.yml`.
 - `src/interop/dwarf.rs`: DWARF reader.
+- `src/interop/dwarf/cache.rs`: the compact types file (`types export`).
 - `src/interop/dwarf/canonical.rs`: dedupes types across compile units.
+- `src/interop/dwarf/render.rs`: types as C.
 - `src/interop/dwarf/annotation.rs`, `expr.rs`: annotation and expression parsers.
 - `src/interop/dwarf/roots.rs`: roots from the loaders' records.
 - `src/interop/hsd.rs`: archive format (mirrors `archive.c`, `lbarchive.c`).

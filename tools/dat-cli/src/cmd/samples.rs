@@ -4,6 +4,7 @@
 //! - `slice`: the archive → `target/<unit>.o`, its sampled objects under
 //!   their archive names, plus `target/<unit>.samples` saying what each is
 //! - `codegen`: the target object → `src/<unit>.c`, generated from the types
+//! - `macros`: `src/macros.h`, which every unit's C includes
 //! - (the build compiles `src/<unit>.c` to `base/<unit>.o`)
 //! - `project`: every unit's sidecar → `objdiff.json`
 //!
@@ -19,8 +20,8 @@ use melee_dat::{
     },
     hsd::Archive,
     samples::{
-        CWriter, Elided, Instance, Picker, SampleInfo, Source, root_of,
-        target_object,
+        CWriter, Elided, ElidedType, Instance, Picker, SampleInfo, Source, Unnamed,
+        assign_names, root_of, target_object,
     },
 };
 use object::{
@@ -54,6 +55,9 @@ enum Command {
 
     /// Write the C for a target object's samples, from the types
     Codegen(Codegen),
+
+    /// Write the definitions the generated C includes (`macros.h`)
+    Macros(MacrosArgs),
 
     /// Write the objdiff project for the units' sidecars
     Project(ProjectArgs),
@@ -106,6 +110,13 @@ struct Codegen {
 }
 
 #[derive(clap::Args)]
+struct MacrosArgs {
+    /// Left alone when unchanged, so that its dependents are too
+    #[arg(short, long)]
+    output: PathBuf,
+}
+
+#[derive(clap::Args)]
 struct ProjectArgs {
     /// The units' sidecars (`target/<unit>.samples`)
     sidecars: Vec<PathBuf>,
@@ -129,6 +140,7 @@ pub fn run(Args { command }: Args) -> Result<()> {
         Command::Types(args) => types(args),
         Command::Slice(args) => slice(args),
         Command::Codegen(args) => codegen(args),
+        Command::Macros(args) => macros(args),
         Command::Project(args) => project(args),
         Command::Report(args) => report(args),
     }
@@ -256,28 +268,20 @@ fn slice(args: Slice) -> Result<()> {
     let (mut samples, _) = picker.finish();
     samples.sort_by_key(|s| (s.location.archive, s.location.offset));
 
-    let sources: BTreeMap<usize, Source> = archives
+    let unit = args.archive.strip_suffix(".dat").unwrap_or(&args.archive);
+    let mut sources: BTreeMap<usize, Source> = archives
         .iter()
-        .map(|(at, a)| (*at, Source::new(a, *at)))
+        .map(|(at, a)| (*at, Source::new(a, *at, unit, &walks[at].paths)))
         .collect();
-    let pairs: Vec<_> = samples
+    let sampled: BTreeSet<(usize, u32)> = samples
         .iter()
-        .map(|s| (s, &sources[&s.location.archive]))
+        .map(|s| (s.location.archive, s.location.offset))
         .collect();
-    let picker = Picker::new(&project.graph, &project.canonical);
-    let mut infos = Vec::new();
-    let mut names = BTreeSet::new();
-    for (sample, source) in &pairs {
-        let name = source.name(sample.location.offset);
-        if !names.insert(name.clone()) {
-            bail!("{}: two samples named {name}", args.archive);
-        }
-        infos.push(picker.info(sample, name));
-    }
     // The other data the samples point to belongs to the root of the
     // object it is in: the nearest one the walk reached at or before it
     let mut elided = BTreeMap::new();
     let mut externs = BTreeSet::new();
+    let describer = Picker::new(&project.graph, &project.canonical);
     // Where elided data ends, without a type: the next place something
     // starts
     let starts: BTreeMap<usize, BTreeSet<u32>> = archives
@@ -296,14 +300,15 @@ fn slice(args: Slice) -> Result<()> {
             (*at, starts)
         })
         .collect();
-    for (sample, source) in &pairs {
+    for sample in &samples {
+        let at = sample.location.archive;
+        let source = &sources[&at];
         for (_, name) in source.externs(sample.location.offset, sample.size) {
             externs.insert(name.to_owned());
         }
-        let walk = &walks[&sample.location.archive];
+        let walk = &walks[&at];
         for (_, target) in source.relocs(sample.location.offset, sample.size) {
-            let name = source.name(target);
-            if names.contains(&name) {
+            if sampled.contains(&(at, target)) {
                 continue;
             }
             let root = walk
@@ -325,7 +330,7 @@ fn slice(args: Slice) -> Result<()> {
             let end = source.archive.data.len() as u32;
             let size = typed.map_or_else(
                 || {
-                    starts[&sample.location.archive]
+                    starts[&at]
                         .range(target + 1..)
                         .next()
                         .map_or(end, |&s| s.min(end))
@@ -333,8 +338,62 @@ fn slice(args: Slice) -> Result<()> {
                 },
                 |size| size as u32,
             );
-            elided.entry(name).or_insert(Elided { root, size });
+            // Declared as its type where the walk typed it as one record
+            let ty = walk
+                .objects
+                .get(&target)
+                .and_then(|types| match types.iter().collect::<Vec<_>>()[..] {
+                    [&id] => describer.describe(id, target, walk).ok(),
+                    _ => None,
+                })
+                .filter(|t| t.size == u64::from(size))
+                .map(|t| ElidedType {
+                    type_name: t.type_name,
+                    lookup: t.lookup,
+                    member: t.member,
+                    header: t.header,
+                });
+            elided
+                .entry((at, target))
+                .or_insert(Elided { root, size, ty });
         }
+    }
+    // Names for what the archive doesn't name
+    let wanted: Vec<Unnamed> = sampled
+        .iter()
+        .map(|&(archive, offset)| (archive, offset, None))
+        .chain(
+            elided
+                .iter()
+                .map(|(&(archive, offset), e)| (archive, offset, Some(&*e.root))),
+        )
+        .filter(|&(archive, offset, _)| !sources[&archive].is_public(offset))
+        .map(|(archive, offset, elided)| Unnamed {
+            archive,
+            offset,
+            elided,
+        })
+        .collect();
+    assign_names(&mut sources, &wanted);
+    let elided: BTreeMap<String, Elided> = elided
+        .into_iter()
+        .map(|((at, target), e)| (sources[&at].name(target), e))
+        .collect();
+
+    let pairs: Vec<_> = samples
+        .iter()
+        .map(|s| (s, &sources[&s.location.archive]))
+        .collect();
+    let picker = Picker::new(&project.graph, &project.canonical);
+    let mut infos = Vec::new();
+    let mut names = BTreeSet::new();
+    for (sample, source) in &pairs {
+        let name = source.name(sample.location.offset);
+        if !names.insert(name.clone()) {
+            bail!("{}: two samples named {name}", args.archive);
+        }
+        let public = source.is_public(sample.location.offset);
+        infos.push(picker.info(sample, name, public));
     }
 
     if let Some(dir) = args.output.parent() {
@@ -457,6 +516,17 @@ fn codegen(args: Codegen) -> Result<()> {
         }
     }
     fs::write(&args.output, unit)?;
+    Ok(())
+}
+
+fn macros(args: MacrosArgs) -> Result<()> {
+    const MACROS: &str = include_str!("../../assets/macros.h");
+    if fs::read_to_string(&args.output).ok().as_deref() != Some(MACROS) {
+        if let Some(dir) = args.output.parent() {
+            fs::create_dir_all(dir)?;
+        }
+        fs::write(&args.output, MACROS)?;
+    }
     Ok(())
 }
 

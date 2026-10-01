@@ -3,7 +3,7 @@
 #   CLANG_FORMAT  clang-format
 #   STYLE         the .clang-format file
 #   SOURCE        src/<unit>.c
-#   STAMP         stamp/<unit>.formatted, written after formatting so that
+#   STAMP         metadata/<unit>.formatted, written after formatting so that
 #                 it is newer than the sources
 cmake_minimum_required(VERSION 3.20)
 
