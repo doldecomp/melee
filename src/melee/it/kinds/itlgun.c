@@ -45,7 +45,8 @@ ItemStateTable it_803F5CC8[] = {
 void itLGun_Logic16_Spawned(Item_GObj* gobj)
 {
     Item* ip = gobj->user_data;
-    ItLGunAttr* item_spec_attr = ip->xC4_article_data->x4_specialAttributes;
+    ItLGunAttr* item_spec_attr =
+        &ip->xC4_article_data->x4_specialAttributes->l_gun;
     ip->xD4C = item_spec_attr->max_ammo;
     ip->xDD4_itemVar.lgun.timer = 0;
     it_8028E860(gobj);
@@ -53,7 +54,8 @@ void itLGun_Logic16_Spawned(Item_GObj* gobj)
 
 void it_8028E774(Item_GObj* gobj, Vec3* arg1)
 {
-    ItLGunAttr* da = GET_ITEM(gobj)->xC4_article_data->x4_specialAttributes;
+    ItLGunAttr* da =
+        &GET_ITEM(gobj)->xC4_article_data->x4_specialAttributes->l_gun;
     arg1->x = da->pos.x;
     arg1->y = da->pos.y;
     arg1->z = da->pos.z;

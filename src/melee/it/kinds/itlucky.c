@@ -102,7 +102,8 @@ ItemStateTable it_803F8200[] = {
 void it_802D5050(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
-    itLuckyAttributes* attr = ip->xC4_article_data->x4_specialAttributes;
+    itLuckyAttributes* attr =
+        (itLuckyAttributes*) ip->xC4_article_data->x4_specialAttributes;
     PAD_STACK(4);
     ip->facing_dir = 0.0f;
     ip->xDD4_itemVar.lucky.x60 = 2;
@@ -149,7 +150,8 @@ bool it_802D5124(Item_GObj* gobj)
 void it_802D51C8(HSD_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
-    itLuckyAttributes* attr = ip->xC4_article_data->x4_specialAttributes;
+    itLuckyAttributes* attr =
+        (itLuckyAttributes*) ip->xC4_article_data->x4_specialAttributes;
     Vec3 vel, pos;
     Item_GObj* spawned;
     f32 facing;
@@ -306,7 +308,8 @@ static inline void it_802D5648_inline(Item_GObj* gobj)
 bool it_802D5648(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
-    itLuckyAttributes* attrs = ip->xC4_article_data->x4_specialAttributes;
+    itLuckyAttributes* attrs =
+        (itLuckyAttributes*) ip->xC4_article_data->x4_specialAttributes;
     if (ip->xC9C >= attrs->xC) {
         it_80279D38(gobj);
         it_802D5648_inline(gobj);
@@ -350,7 +353,8 @@ Item_GObj* it_802D5710(Item_GObj* gobj, Vec3* pos, Vec3* vel, f32 facing)
 void itLucky_Logic44_Spawned(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
-    itLuckyEggAttributes* attr = ip->xC4_article_data->x4_specialAttributes;
+    itLuckyEggAttributes* attr =
+        (itLuckyEggAttributes*) ip->xC4_article_data->x4_specialAttributes;
     PAD_STACK(4);
     it_80275158(gobj, attr->x0);
     ip->xDD4_itemVar.lucky.x60 = attr->x4;

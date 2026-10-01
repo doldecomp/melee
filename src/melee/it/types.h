@@ -185,7 +185,7 @@ typedef struct {
 
 struct Article {
     ItemAttr* x0_common_attr;
-    void* x4_specialAttributes DAT_TYPE(ItemSpecialAttributes);
+    union ItemSpecialAttributes* x4_specialAttributes;
     ItHurtBoneList* x8_hurtbones;
     ItemStateArray* xC_itemStates;
     ItemModelDesc* x10_modelDesc;

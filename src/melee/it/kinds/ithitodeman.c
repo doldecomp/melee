@@ -52,7 +52,8 @@ ItemStateTable it_803F8180[] = { {
 void it_2725_Logic24_Spawned(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
-    itHitodemanAttributes* attrs = ip->xC4_article_data->x4_specialAttributes;
+    itHitodemanAttributes* attrs =
+        (itHitodemanAttributes*) ip->xC4_article_data->x4_specialAttributes;
     PAD_STACK(16);
 
     ip->facing_dir = 0.0f;
@@ -92,7 +93,8 @@ void it_802D43B0(Item_GObj* gobj, Item_GObj* ref_gobj)
 void it_802D43EC(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
-    itHitodemanAttributes* attrs = ip->xC4_article_data->x4_specialAttributes;
+    itHitodemanAttributes* attrs =
+        (itHitodemanAttributes*) ip->xC4_article_data->x4_specialAttributes;
     HSD_GObj* owner_gobj;
     f32 randf;
     f32 diff;
@@ -121,7 +123,8 @@ void it_802D43EC(Item_GObj* gobj)
 void it_802D4494(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
-    itHitodemanAttributes* attrs = ip->xC4_article_data->x4_specialAttributes;
+    itHitodemanAttributes* attrs =
+        (itHitodemanAttributes*) ip->xC4_article_data->x4_specialAttributes;
     s32 randi;
     PAD_STACK(8);
     randi = HSD_Randi((s32) (attrs->x14 - attrs->x18));
@@ -131,7 +134,8 @@ void it_802D4494(Item_GObj* gobj)
 void it_802D4510(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
-    itHitodemanAttributes* attrs = ip->xC4_article_data->x4_specialAttributes;
+    itHitodemanAttributes* attrs =
+        (itHitodemanAttributes*) ip->xC4_article_data->x4_specialAttributes;
     PAD_STACK(8);
     ip->xDD4_itemVar.hitodeman.x88 =
         attrs->x44 + HSD_Randi(attrs->x40 - attrs->x44);
@@ -187,7 +191,7 @@ void it_802D472C(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     itHitodemanAttributes* attrs =
-        it_802D472C_inline(ip)->x4_specialAttributes;
+        (itHitodemanAttributes*) it_802D472C_inline(ip)->x4_specialAttributes;
     Vec3 target_pos;
     Vec3 dir;
     f32 speed;
@@ -286,7 +290,8 @@ bool itHitodeman_UnkMotion1_Anim(Item_GObj* gobj)
 
         if (ip->xDD4_itemVar.hitodeman.x90 != NULL) {
             itHitodemanAttributes* attrs =
-                ip->xC4_article_data->x4_specialAttributes;
+                (itHitodemanAttributes*)
+                    ip->xC4_article_data->x4_specialAttributes;
             ip->x40_vel.x = -ip->facing_dir * attrs->x48;
             it_802D4C74(gobj);
             ip->xDB0_itcmd_var1 = 1;
@@ -308,7 +313,8 @@ bool itHitodeman_UnkMotion1_Anim(Item_GObj* gobj)
 void itHitodeman_UnkMotion1_Phys(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
-    itHitodemanAttributes* attrs = ip->xC4_article_data->x4_specialAttributes;
+    itHitodemanAttributes* attrs =
+        (itHitodemanAttributes*) ip->xC4_article_data->x4_specialAttributes;
     if (ip->xDB0_itcmd_var1 != 0) {
         ip->x40_vel.x = -((-ip->facing_dir * attrs->x4C) - ip->x40_vel.x);
     }
@@ -351,7 +357,8 @@ bool itHitodeman_UnkMotion2_Coll(Item_GObj* gobj)
 void it_802D4C74(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
-    itHitodemanAttributes* attrs = ip->xC4_article_data->x4_specialAttributes;
+    itHitodemanAttributes* attrs =
+        (itHitodemanAttributes*) ip->xC4_article_data->x4_specialAttributes;
     SpawnItem spawn;
     Item_GObj* item_gobj;
 
@@ -385,7 +392,8 @@ void it_2725_Logic43_Spawned(Item_GObj* gobj)
 {
     HSD_JObj* jobj = gobj->hsd_obj;
     Item* ip = GET_ITEM(gobj);
-    itHitodemanAttributes* attrs = ip->xC4_article_data->x4_specialAttributes;
+    itHitodemanAttributes* attrs =
+        (itHitodemanAttributes*) ip->xC4_article_data->x4_specialAttributes;
     PAD_STACK(16);
 
     it_80275158(gobj, attrs->x0);

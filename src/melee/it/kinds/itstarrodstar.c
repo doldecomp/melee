@@ -53,7 +53,8 @@ void it_802988E4(Fighter_GObj* gobj, Vec* vec, int arg2, float arg3)
 void it_802989C8(Item_GObj* ig, Fighter_GObj* fg)
 {
     Item* ip = GET_ITEM(ig);
-    StarRodStarAttrs* attrs = ip->xC4_article_data->x4_specialAttributes;
+    StarRodStarAttrs* attrs =
+        (StarRodStarAttrs*) ip->xC4_article_data->x4_specialAttributes;
     HitCapsule* hit;
     it_8026B3A8(ig);
     it_80274740(ig);

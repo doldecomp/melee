@@ -71,7 +71,8 @@ HSD_GObj* it_802B55C8(Fighter_GObj* gobj, Vec3* pos, enum Fighter_Part arg2,
     if (n != NULL) {
         Item* ip = GET_ITEM(n);
         itSamusChargeShot_Attributes* attr =
-            ip->xC4_article_data->x4_specialAttributes;
+            (itSamusChargeShot_Attributes*)
+                ip->xC4_article_data->x4_specialAttributes;
         Item_ClearCmdVars(ip);
         it_80275158(n, attr->lifetime);
         ip->xDD4_itemVar.samuschargeshot.xDE8 = 0;
@@ -91,7 +92,8 @@ void it_802B56E4(Item_GObj* gobj, Vec3* vec, f32 farg0, f32 farg1, f32 farg2)
 {
     Item* ip = GET_ITEM(gobj);
     itSamusChargeShot_Attributes* attr =
-        ip->xC4_article_data->x4_specialAttributes;
+        (itSamusChargeShot_Attributes*)
+            ip->xC4_article_data->x4_specialAttributes;
     PAD_STACK(8);
 
     ip->xDD4_itemVar.samuschargeshot.xDD8 = farg0;
@@ -216,7 +218,8 @@ bool itSamuschargeshot_UnkMotion0_Anim(Item_GObj* gobj)
     Vec3 scale;
     Item* ip = GET_ITEM(gobj);
     itSamusChargeShot_Attributes* attr =
-        ip->xC4_article_data->x4_specialAttributes;
+        (itSamusChargeShot_Attributes*)
+            ip->xC4_article_data->x4_specialAttributes;
     HSD_JObj* grandchild = itGetJObjGrandchild(gobj);
     PAD_STACK(8);
 
@@ -286,7 +289,8 @@ void it_802B5CBC(Item_GObj* gobj, Fighter_GObj* unused)
 {
     Item* ip = GET_ITEM(gobj);
     itSamusChargeShot_Attributes* attr =
-        ip->xC4_article_data->x4_specialAttributes;
+        (itSamusChargeShot_Attributes*)
+            ip->xC4_article_data->x4_specialAttributes;
     PAD_STACK(4);
 
     it_80275158(gobj, attr->lifetime);

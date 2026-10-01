@@ -61,7 +61,8 @@ Item_GObj* it_80283AE4(Item_GObj* gobj, Vec3* pos, s32 arg2)
 void it_80283BD4(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
-    HeartContainerAttr* vars = ip->xC4_article_data->x4_specialAttributes;
+    HeartContainerAttr* vars =
+        &ip->xC4_article_data->x4_specialAttributes->heart;
 
     ip->xDD4_itemVar.heart.xDD4_heal = vars->x4.flags;
 }
@@ -69,7 +70,8 @@ void it_80283BD4(Item_GObj* gobj)
 void itHeart_Logic8_Spawned(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
-    HeartContainerAttr* vars = ip->xC4_article_data->x4_specialAttributes;
+    HeartContainerAttr* vars =
+        &ip->xC4_article_data->x4_specialAttributes->heart;
 
     ip->x40_vel.x = 0.0F;
     ip->x40_vel.y = vars->x14;
@@ -103,7 +105,7 @@ bool itHeart_UnkMotion0_Anim(Item_GObj* gobj)
 {
     HSD_JObj* child = HSD_JObjGetChild(GET_JOBJ(gobj));
     HeartContainerAttr* attrs =
-        GET_ITEM(gobj)->xC4_article_data->x4_specialAttributes;
+        &GET_ITEM(gobj)->xC4_article_data->x4_specialAttributes->heart;
     HSD_JObjAddRotationY(child, attrs->x18);
     return false;
 }
@@ -125,7 +127,7 @@ bool itHeart_UnkMotion3_Anim(Item_GObj* gobj)
 {
     HSD_JObj* child = HSD_JObjGetChild(GET_JOBJ(gobj));
     HeartContainerAttr* attrs =
-        GET_ITEM(gobj)->xC4_article_data->x4_specialAttributes;
+        &GET_ITEM(gobj)->xC4_article_data->x4_specialAttributes->heart;
     HSD_JObjAddRotationY(child, attrs->x18);
     return false;
 }

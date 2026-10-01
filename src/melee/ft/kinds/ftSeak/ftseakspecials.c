@@ -187,7 +187,8 @@ void ftSk_SpecialS_80110788(HSD_GObj* gobj)
             float left_stick_x = fp->input.lstick[0].x;
             Item* item_data = item_gobj->user_data;
             Article* article = item_data->xC4_article_data;
-            itChainSegment* chainSegment = article->x4_specialAttributes;
+            itChainSegment* chainSegment =
+                (itChainSegment*) article->x4_specialAttributes;
 
             if (left_stick_x < 0) {
                 left_stick_x = -left_stick_x;
@@ -337,7 +338,8 @@ void ftSk_SpecialS_80110BCC(HSD_GObj* gobj)
     {
         Item* item_data = item_gobj->user_data;
         itChainSegment* chain =
-            item_data->xC4_article_data->x4_specialAttributes;
+            (itChainSegment*)
+                item_data->xC4_article_data->x4_specialAttributes;
 
         {
             float sums_of_squares[4];
@@ -552,7 +554,8 @@ bool ftSk_SpecialS_CheckInitChain(HSD_GObj* gobj)
         Vec3 vel = { 1.8f, 0.0f, 0.0f };
         HSD_GObj* item_gobj = fp->u.sk.x8;
         Item* ip = item_gobj->user_data;
-        itChainSegment* segment = ip->xC4_article_data->x4_specialAttributes;
+        itChainSegment* segment =
+            (itChainSegment*) ip->xC4_article_data->x4_specialAttributes;
 
         vel.x = segment->x50;
         vel.x *= ip->facing_dir;

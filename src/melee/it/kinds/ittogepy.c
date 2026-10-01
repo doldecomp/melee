@@ -31,7 +31,7 @@ void itTogepy_Logic21_Spawned(Item_GObj* gobj)
 {
     Item* it = gobj->user_data;
     Article* ap = it->xC4_article_data;
-    itPokemonAttributes* sa = ap->x4_specialAttributes;
+    itPokemonAttributes* sa = (itPokemonAttributes*) ap->x4_specialAttributes;
 
     it->facing_dir = 0.0f;
     it->xDB4_itcmd_var2 = 0;
@@ -92,7 +92,7 @@ void it_802D3848(Item_GObj* gobj)
 {
     Item* it = gobj->user_data;
     Article* ap = it->xC4_article_data;
-    itPokemonAttributes* sa = ap->x4_specialAttributes;
+    itPokemonAttributes* sa = (itPokemonAttributes*) ap->x4_specialAttributes;
     int rand = HSD_Randi(sa->max);
     int val = sa->xC;
     int state;
@@ -156,7 +156,7 @@ void it_802D39F8(Item_GObj* gobj)
 {
     Item* it = gobj->user_data;
     Article* ap = it->xC4_article_data;
-    itPokemonAttributes* sa = ap->x4_specialAttributes;
+    itPokemonAttributes* sa = (itPokemonAttributes*) ap->x4_specialAttributes;
 
     it_802762BC(it);
     Item_80268E5C(gobj, 0, ITEM_ANIM_UPDATE);

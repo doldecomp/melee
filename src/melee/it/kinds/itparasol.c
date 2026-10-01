@@ -83,7 +83,7 @@ bool itParasol_UnkMotion2_Anim(Item_GObj* item_gobj)
 {
     f32 ry, fm;
     Item* item = item = GET_ITEM(item_gobj);
-    f32* attrs = item->xC4_article_data->x4_specialAttributes;
+    f32* attrs = (f32*) item->xC4_article_data->x4_specialAttributes;
     HSD_JObj* jobj = GET_JOBJ(item_gobj);
 
     if (jobj != NULL) {
@@ -115,7 +115,7 @@ void itParasol_UnkMotion1_Phys(Item_GObj* item_gobj)
 {
     Item* item = GET_ITEM(item_gobj);
     ItemAttr* attr = item->xCC_item_attr;
-    f32* attrs = item->xC4_article_data->x4_specialAttributes;
+    f32* attrs = (f32*) item->xC4_article_data->x4_specialAttributes;
     it_80272860(item_gobj, attr->x10_fall_speed, attr->x14_fall_speed_max);
     decelerateItemX(item, attrs[0]);
 }
@@ -142,7 +142,7 @@ void itParasol_UnkMotion2_Phys(Item_GObj* item_gobj)
 {
     Item* item = GET_ITEM(item_gobj);
     ItemAttr* attr = item->xCC_item_attr;
-    f32* attrs = item->xC4_article_data->x4_specialAttributes;
+    f32* attrs = (f32*) item->xC4_article_data->x4_specialAttributes;
     it_80272860(item_gobj, attr->x10_fall_speed, attr->x14_fall_speed_max);
     decelerateItemX(item, attrs[1]);
 }

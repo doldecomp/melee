@@ -72,7 +72,8 @@ itMewtwoDisable_Logic67_SpawnMewtwoDisable(Fighter_GObj* fighter_gobj,
 void it_802C4B38(Item_GObj* item_gobj)
 {
     Item* item = GET_ITEM(item_gobj);
-    itMDisableAttributes* attrs = item->xC4_article_data->x4_specialAttributes;
+    itMDisableAttributes* attrs =
+        (itMDisableAttributes*) item->xC4_article_data->x4_specialAttributes;
     Fighter_GObj* fighter_gobj = item->xDD4_itemVar.mdisable.owner;
 
     // the last parameter gets the y scaling of mewtwo

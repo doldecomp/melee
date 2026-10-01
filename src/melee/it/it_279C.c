@@ -1151,7 +1151,8 @@ void it_8027A344(Item_GObj* item_gobj)
 s32 it_8027A364(Item* item)
 {
     itPokemonSpawn_DatAttrs* attr =
-        item->xC4_article_data->x4_specialAttributes;
+        (itPokemonSpawn_DatAttrs*)
+            item->xC4_article_data->x4_specialAttributes;
     int ret_val = 1;
     int i;
     int start = It_PKind_Start;
@@ -1173,7 +1174,8 @@ s32 it_8027A4D4(Item* item)
     int var_r3;
 
     itPokemonSpawn_DatAttrs* attr =
-        item->xC4_article_data->x4_specialAttributes;
+        (itPokemonSpawn_DatAttrs*)
+            item->xC4_article_data->x4_specialAttributes;
 
     if (HSD_Randi(251) == 0 && !Item_804A0E24.rare_spawned && gm_80165084()) {
         Item_804A0E24.rare_spawned = true;
@@ -1227,7 +1229,8 @@ s32 it_8027A780(Item* item, void* arg1)
     base = weights;
     buf = base;
     cnt = 0;
-    attr = item->xC4_article_data->x4_specialAttributes;
+    attr = (itPokemonSpawn_DatAttrs*)
+               item->xC4_article_data->x4_specialAttributes;
     total = 0;
     last_kind = Item_804A0E24.last_kind;
     previous_kind = Item_804A0E24.previous_kind;
@@ -1294,7 +1297,8 @@ void it_8027AAA0(Item_GObj* item1_gobj, Item* item2, s32 arg2)
     Item* var_r6;
 
     Item* it = GET_ITEM(item1_gobj);
-    itPokemonSpawn_DatAttrs* attr = it->xC4_article_data->x4_specialAttributes;
+    itPokemonSpawn_DatAttrs* attr =
+        (itPokemonSpawn_DatAttrs*) it->xC4_article_data->x4_specialAttributes;
     if (arg2 == It_PKind_Marumine) {
         item2->xDD4_itemVar.pokemon_spawn.x1C = 0.0f;
         item2->xDD4_itemVar.pokemon_spawn.x20 = 0.0f;
@@ -1327,7 +1331,8 @@ void it_8027AAA0(Item_GObj* item1_gobj, Item* item2, s32 arg2)
 static inline s32 selectPokemonForOpening(Item* item)
 {
     itPokemonSpawn_DatAttrs* attr =
-        item->xC4_article_data->x4_specialAttributes;
+        (itPokemonSpawn_DatAttrs*)
+            item->xC4_article_data->x4_specialAttributes;
     s32 rand_int = HSD_Randi(it_8027A364(item));
     s32 index;
     s32 total = 0;
@@ -1393,7 +1398,8 @@ bool it_8027AB64(Item_GObj* item_gobj)
     item2 = item_gobj->user_data;
     {
         itPokemonSpawn_DatAttrs* attrs =
-            item2->xC4_article_data->x4_specialAttributes;
+            (itPokemonSpawn_DatAttrs*)
+                item2->xC4_article_data->x4_specialAttributes;
         Vec3* prev_pos = &spawn.prev_pos;
         spawn.vel.z = 0.0f;
         spawn.vel.x = 0.0f;

@@ -67,7 +67,8 @@ void it_802F10F8(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     itCrazyHandBombAttributes* attrs =
-        ip->xC4_article_data->x4_specialAttributes;
+        (itCrazyHandBombAttributes*)
+            ip->xC4_article_data->x4_specialAttributes;
     it_802762BC(ip);
     Item_80268E5C(gobj, 0, ITEM_ANIM_UPDATE);
     ip->on_accessory = (HSD_GObjEvent) it_802F1340;
@@ -83,7 +84,8 @@ void itCrazyhandbomb_UnkMotion0_Phys(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     itCrazyHandBombAttributes* attrs =
-        ip->xC4_article_data->x4_specialAttributes;
+        (itCrazyHandBombAttributes*)
+            ip->xC4_article_data->x4_specialAttributes;
     HSD_JObj* jobj = GET_JOBJ(gobj);
     Quaternion rot;
 

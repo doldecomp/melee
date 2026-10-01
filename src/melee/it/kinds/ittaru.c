@@ -81,7 +81,7 @@ static void order_sdata2(void)
 void it_802874F0(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
-    itTaruAttributes* attr = ip->xC4_article_data->x4_specialAttributes;
+    itTaruAttributes* attr = &ip->xC4_article_data->x4_specialAttributes->taru;
     f32 temp_f1;
     f32 temp_f2;
     f32 var_f0;
@@ -201,7 +201,7 @@ void itTaru_UnkMotion0_Phys(Item_GObj* gobj) {}
 bool itTaru_UnkMotion0_Coll(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
-    itTaruAttributes* attr = ip->xC4_article_data->x4_specialAttributes;
+    itTaruAttributes* attr = &ip->xC4_article_data->x4_specialAttributes->taru;
     HSD_JObj* jobj = GET_JOBJ(gobj);
     CollData* coll = &ip->x378_itemColl;
     Vec3 up;
@@ -255,7 +255,7 @@ bool itTaru_UnkMotion1_Coll(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     ItemAttr* attrs = ip->xCC_item_attr;
-    itTaruAttributes* attr = ip->xC4_article_data->x4_specialAttributes;
+    itTaruAttributes* attr = &ip->xC4_article_data->x4_specialAttributes->taru;
     f32 var_f1;
 
     if (it_8026DA08(gobj) != 0) {
@@ -339,7 +339,7 @@ bool itTaru_UnkMotion3_Coll(Item_GObj* gobj)
 {
     Item* ip = gobj->user_data;
     ItemAttr* attrs = ip->xCC_item_attr;
-    itTaruAttributes* attr = ip->xC4_article_data->x4_specialAttributes;
+    itTaruAttributes* attr = &ip->xC4_article_data->x4_specialAttributes->taru;
     f32 var_f1;
 
     if (it_8026DA08(gobj) != 0) {
@@ -421,7 +421,7 @@ void itTaru_UnkMotion5_Phys(Item_GObj* gobj)
 bool itTaru_UnkMotion5_Coll(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
-    itTaruAttributes* attr = ip->xC4_article_data->x4_specialAttributes;
+    itTaruAttributes* attr = &ip->xC4_article_data->x4_specialAttributes->taru;
     CollData* coll = &ip->x378_itemColl;
     f32 var_f1;
     s32 env_flags;
@@ -481,7 +481,7 @@ static inline void itTaru_UnkMotion4_Phys_inline(Item_GObj* gobj)
 void itTaru_UnkMotion4_Phys(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
-    itTaruAttributes* attr = ip->xC4_article_data->x4_specialAttributes;
+    itTaruAttributes* attr = &ip->xC4_article_data->x4_specialAttributes->taru;
     f32 var_f1;
 
     it_802874F0(gobj);
@@ -620,7 +620,8 @@ bool it_3F14_Logic2_DmgDealt(Item_GObj* gobj)
     PAD_STACK(24);
 
     if (ip->xDD4_itemVar.taru.xDD4 == 0) {
-        itTaruAttributes* attr = ip->xC4_article_data->x4_specialAttributes;
+        itTaruAttributes* attr =
+            &ip->xC4_article_data->x4_specialAttributes->taru;
         it_3F14_Logic2_inline(gobj, ip, attr);
     }
     return false;
@@ -632,7 +633,8 @@ bool it_3F14_Logic2_Clanked(Item_GObj* gobj)
     PAD_STACK(24);
 
     if (ip->xDD4_itemVar.taru.xDD4 == 0) {
-        itTaruAttributes* attr = ip->xC4_article_data->x4_specialAttributes;
+        itTaruAttributes* attr =
+            &ip->xC4_article_data->x4_specialAttributes->taru;
         it_3F14_Logic2_inline(gobj, ip, attr);
     }
     return false;
@@ -644,7 +646,8 @@ bool it_3F14_Logic2_HitShield(Item_GObj* gobj)
     PAD_STACK(24);
 
     if (ip->xDD4_itemVar.taru.xDD4 == 0) {
-        itTaruAttributes* attr = ip->xC4_article_data->x4_specialAttributes;
+        itTaruAttributes* attr =
+            &ip->xC4_article_data->x4_specialAttributes->taru;
         it_3F14_Logic2_inline(gobj, ip, attr);
     }
     return false;
@@ -656,7 +659,8 @@ bool it_3F14_Logic2_Reflected(Item_GObj* gobj)
     PAD_STACK(24);
 
     if (ip->xDD4_itemVar.taru.xDD4 == 0) {
-        itTaruAttributes* attr = ip->xC4_article_data->x4_specialAttributes;
+        itTaruAttributes* attr =
+            &ip->xC4_article_data->x4_specialAttributes->taru;
         it_3F14_Logic2_inline(gobj, ip, attr);
     }
     return false;
@@ -665,7 +669,7 @@ bool it_3F14_Logic2_Reflected(Item_GObj* gobj)
 bool it_3F14_Logic2_DmgReceived(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
-    itTaruAttributes* attr = ip->xC4_article_data->x4_specialAttributes;
+    itTaruAttributes* attr = &ip->xC4_article_data->x4_specialAttributes->taru;
     s32 x0;
     s32 var_r0;
     PAD_STACK(24);

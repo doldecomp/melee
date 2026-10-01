@@ -49,7 +49,8 @@ void it_8029C504(HSD_GObj* parent, Vec3* pos, enum_t msid, int kind, f32 angle,
     item_gobj = Item_80268B18(&spawn);
     if (item_gobj != NULL) {
         Item* item = GET_ITEM(item_gobj);
-        FoxLaserAttr* attr = item->xC4_article_data->x4_specialAttributes;
+        FoxLaserAttr* attr =
+            (FoxLaserAttr*) item->xC4_article_data->x4_specialAttributes;
         Item_80268E5C(item_gobj, msid, ITEM_ANIM_UPDATE);
         it_80275158(item_gobj, attr->lifetime);
         item->xDD4_itemVar.foxlaser.scale = 0.0F;
@@ -73,7 +74,8 @@ void it_8029C6CC(f32 angle, f32 vel, HSD_GObj* parent, Vec3* vec, int kind)
 bool itFoxlaser_UnkMotion1_Anim(Item_GObj* item_gobj)
 {
     Item* ip = GET_ITEM(item_gobj);
-    FoxLaserAttr* attr = ip->xC4_article_data->x4_specialAttributes;
+    FoxLaserAttr* attr =
+        (FoxLaserAttr*) ip->xC4_article_data->x4_specialAttributes;
     HSD_JObj* jobj = GET_JOBJ(item_gobj);
 
     return Item_UpdateRayAnimation(item_gobj, ip, jobj, &attr->scale, 11.25F);

@@ -97,7 +97,8 @@ s32 it_80291D38(Item_GObj* gobj, s32 charge_level)
 static inline int it_80291DAC_level(Item_GObj* gobj, int arg1)
 {
     Item* ip = GET_ITEM(gobj);
-    itSScopeAttributes* attrs = ip->xC4_article_data->x4_specialAttributes;
+    itSScopeAttributes* attrs =
+        &ip->xC4_article_data->x4_specialAttributes->s_scope;
     if (arg1 <= attrs->x4) {
         return 0;
     } else if (arg1 < attrs->x8 * 8) {

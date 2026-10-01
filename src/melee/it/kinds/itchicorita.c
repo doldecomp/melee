@@ -32,7 +32,7 @@ void it_802C9588(Item_GObj* item_gobj)
     PAD_STACK(12);
 
     item = GET_ITEM(item_gobj);
-    attr = item->xC4_article_data->x4_specialAttributes;
+    attr = (itChicoritaAttr*) item->xC4_article_data->x4_specialAttributes;
     it_80279C48(item_gobj);
     item->xDD4_itemVar.chicorita.x60 = -1;
     item->xDBC.xDBC_itcmd_var4.flags.x0 = false;
@@ -65,7 +65,7 @@ void it_802C9670(Item_GObj* item_gobj)
 
     item = item_gobj->user_data;
     article = item->xC4_article_data;
-    attr = article->x4_specialAttributes;
+    attr = (itChicoritaAttr*) article->x4_specialAttributes;
     if (item->xDD4_itemVar.chicorita.x60 == -1) {
         item->xDD4_itemVar.chicorita.x60 = attr->x4;
     }
@@ -96,7 +96,7 @@ bool itChicorita_UnkMotion0_Anim(HSD_GObj* item_gobj)
             item->xDD4_itemVar.chicorita.x60--;
             item = item_gobj->user_data;
             article = item->xC4_article_data;
-            attr = article->x4_specialAttributes;
+            attr = (itChicoritaAttr*) article->x4_specialAttributes;
             if (item->xDD4_itemVar.chicorita.x60 ==
                 -1) { // This check will never succeed?
                 item->xDD4_itemVar.chicorita.x60 = attr->x4;
@@ -227,7 +227,8 @@ void it_802C9B20(Item_GObj* chicorita_gobj)
     itChicoritaLeafAttr* attr;
 
     chicorita = GET_ITEM((HSD_GObj*) chicorita_gobj);
-    attr = chicorita->xC4_article_data->x4_specialAttributes;
+    attr = (itChicoritaLeafAttr*)
+               chicorita->xC4_article_data->x4_specialAttributes;
     spawn.prev_pos = chicorita->pos;
     spawn.prev_pos.x += attr->x8 * chicorita->facing_dir;
     spawn.prev_pos.y += attr->xC;

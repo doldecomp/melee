@@ -39,7 +39,8 @@ ItemStateTable it_803F7FB8[] = { {
 void it_2725_Logic18_Spawned(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
-    itHououAttr* attr = ip->xC4_article_data->x4_specialAttributes;
+    itHououAttr* attr =
+        (itHououAttr*) ip->xC4_article_data->x4_specialAttributes;
     ip->xDD4_itemVar.houou.start_pos = ip->pos;
     ip->facing_dir = 0.0F;
     ip->xDAC_itcmd_var0 = 0;
@@ -116,7 +117,8 @@ bool itHouou_UnkMotion2_Anim(Item_GObj* gobj)
 void itHouou_UnkMotion2_Phys(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
-    itHououAttr* attr = ip->xC4_article_data->x4_specialAttributes;
+    itHououAttr* attr =
+        (itHououAttr*) ip->xC4_article_data->x4_specialAttributes;
 
     it_8027A344(gobj);
 
@@ -172,7 +174,8 @@ bool itHouou_UnkMotion3_Anim(Item_GObj* gobj)
 void itHouou_UnkMotion3_Phys(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
-    itHououAttr* attr = ip->xC4_article_data->x4_specialAttributes;
+    itHououAttr* attr =
+        (itHououAttr*) ip->xC4_article_data->x4_specialAttributes;
     s32 timer;
 
     it_8027A344(gobj);
@@ -197,7 +200,8 @@ bool itHouou_UnkMotion3_Coll(Item_GObj* gobj)
 void it_802D290C(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
-    itHououAttr* attr = ip->xC4_article_data->x4_specialAttributes;
+    itHououAttr* attr =
+        (itHououAttr*) ip->xC4_article_data->x4_specialAttributes;
     Item_80268E5C(gobj, 4, ITEM_ANIM_UPDATE);
     Item_SetEffectHitlagCallbacks(ip);
     ip->xDD4_itemVar.houou.vel_accum = attr->x18;
@@ -227,7 +231,8 @@ bool itHouou_UnkMotion4_Anim(Item_GObj* gobj)
 void itHouou_UnkMotion4_Phys(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
-    itHououAttr* attr = ip->xC4_article_data->x4_specialAttributes;
+    itHououAttr* attr =
+        (itHououAttr*) ip->xC4_article_data->x4_specialAttributes;
 
     it_8027A344(gobj);
 
@@ -364,7 +369,7 @@ void it_2725_Logic42_Spawned(Item_GObj* item_gobj)
     PAD_STACK(8);
 
     item = GET_ITEM(item_gobj);
-    attr = item->xC4_article_data->x4_specialAttributes;
+    attr = (itHououAttr*) item->xC4_article_data->x4_specialAttributes;
     if ((item_gobj && item_gobj) && item_gobj) {
     }
     item->xD44_lifeTimer = attr->timer;

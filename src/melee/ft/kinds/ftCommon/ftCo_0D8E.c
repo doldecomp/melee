@@ -60,8 +60,8 @@ bool fn_800D8EC8(Fighter_GObj* gobj)
         } else if (grav > (f32) attrs->x84) {
             if (grav <= (f32) attrs->x90) {
                 item = fp->u.lk.xC;
-                hookAttrs =
-                    GET_ITEM(item)->xC4_article_data->x4_specialAttributes;
+                hookAttrs = (itLinkHookshotAttributes*) GET_ITEM(item)
+                                ->xC4_article_data->x4_specialAttributes;
                 if (grav == (f32) attrs->x88) {
                     jobj = fp->parts[ftParts_GetBoneIndex(fp, FtPart_RThumbNb)]
                                .joint;
@@ -135,7 +135,8 @@ bool fn_800D9228(Fighter_GObj* gobj)
             Item_GObj* tether_gobj = fp->u.lk.xC;
             Item* tether_ip = tether_gobj->user_data;
             struct TetherAttributes* tether_data =
-                tether_ip->xC4_article_data->x4_specialAttributes;
+                (struct TetherAttributes*)
+                    tether_ip->xC4_article_data->x4_specialAttributes;
 
             if (fp->mv.co.catch_.x0 == (f32) da->x98) {
                 Vec3 pos;
