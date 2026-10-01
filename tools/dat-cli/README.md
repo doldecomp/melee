@@ -95,7 +95,10 @@ used for publics no loader types:
 ```
 
 Names and archives take `*` and `?`. The first line with a matching archive
-wins, then the first `*` line. Types can be `T`, `T*`, `T[N]`, or `T[]` for
+wins, then the first `*` line. When the loader already gives a root's type,
+a line can still give its count: `count:N`, or `count:*` for as many as
+fit, e.g. `map_plit = *; // count:*` for a null-terminated list of
+`LightList*`. Types can be `T`, `T*`, `T[N]`, or `T[]` for
 as many as fit before the next public symbol or pointer target. Raw data
 (textures, palettes) is typed as `u8[]` or `u16[]`, like the extracted
 blobs in `config.yml`.
@@ -127,9 +130,13 @@ melee-dat samples report build/GALE01/dat
   the other data they point to, and designated initializers generated from
   the types; pointers into other roots include those roots' headers
 - `src/<archive>.c`: the unit, which includes every root's source; all of
-  `src` is generated into `gen` and formatted with the repository's
-  `.clang-format`
-- `base/<archive>.o`: that C, compiled with the DWARF build's flags
+  it is formatted in place with the repository's `.clang-format`
+  (`stamp/<archive>.formatted` records that)
+- `base/<archive>.o`: that C, compiled with the DWARF build's flags, one
+  section per variable (`obj/<archive>.o`), then linked with
+  `target/<archive>.ld` into one `.data` in the target's order (clang lays
+  variables out where they are first pointed to, not where they are
+  defined)
 
 `compile_commands.json` there gives clangd the same flags as the build.
 
@@ -143,6 +150,13 @@ objdiff shows the missing relocation; so does data in padding, or a float
 that doesn't round-trip. A union is written through the member its tag
 chose; a union object is declared as that member (`typeof(((union U *)
 0)->member)`), since the archive only holds that member's bytes.
+
+What to sample is up to you, in the build's cache: by default each archive
+gives its best instance of each type. `MELEE_DAT_SAMPLES_ALL` takes archive
+globs whose every typed object becomes a sample, e.g.
+`cmake --preset dat -DMELEE_DAT_SAMPLES_ALL="PlFx.dat;Gr*.dat"`, and
+`MELEE_DAT_SAMPLES_EXCLUDE` type globs never to sample (data they point to
+stays bytes), for records too bulky to want in C.
 
 Use `samples report` for the verdict: objdiff's own report measures data
 per section and misses relocation differences. To check a type change, edit

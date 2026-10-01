@@ -19,7 +19,7 @@
       flake = false;
     };
     objdiff = {
-      url = "github:encounter/objdiff/v3.6.1";
+      url = "github:encounter/objdiff/v3.8.2";
       flake = false;
     };
     sjiswrap = {

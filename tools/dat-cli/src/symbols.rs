@@ -48,7 +48,11 @@ pub struct Entry {
     pub name: String,
     pub location: Location,
     pub ty: Option<TypeSpec>,
-    /// Attributes other than `type`, kept verbatim and in order.
+    /// How many of the root's type there are, for a root whose loader gives
+    /// its type (a `type:` has its own): `count:N`, or `count:*` for as
+    /// many as fit before the next symbol or pointer target.
+    pub count: Option<Count>,
+    /// Attributes other than `type` and `count`, kept verbatim and in order.
     pub other: Vec<String>,
 }
 
@@ -148,10 +152,12 @@ impl FromStr for Entry {
             bail!("more than one `type`");
         }
         let mut ty = None;
+        let mut count = None;
         let mut other = Vec::new();
         for attr in entry.attrs {
             match attr {
                 Attr::Type(spec) => ty = Some(spec),
+                Attr::Count(n) => count = Some(n),
                 Attr::Other(attr) => other.push(attr.to_owned()),
             }
         }
@@ -159,6 +165,7 @@ impl FromStr for Entry {
             name: entry.name.to_owned(),
             location: entry.location,
             ty,
+            count,
             other,
         })
     }
@@ -173,6 +180,7 @@ struct RawEntry<'i> {
 
 enum Attr<'i> {
     Type(TypeSpec),
+    Count(Count),
     Other(&'i str),
 }
 
@@ -202,6 +210,14 @@ fn entry<'i>(input: &mut &'i str) -> ModalResult<RawEntry<'i>> {
 fn attr<'i>(input: &mut &'i str) -> ModalResult<Attr<'i>> {
     alt((
         preceded("type:", cut_err(type_spec)).map(Attr::Type),
+        preceded(
+            "count:",
+            cut_err(alt((
+                "*".value(Count::Unbounded),
+                integer.map(Count::Exactly),
+            ))),
+        )
+        .map(Attr::Count),
         take_till(1.., char::is_whitespace).map(Attr::Other),
     ))
     .parse_next(input)
@@ -248,6 +264,11 @@ impl fmt::Display for Entry {
             .ty
             .iter()
             .map(|ty| format!("type:{ty}"))
+            .chain(self.count.map(|count| match count {
+                Count::One => "count:1".to_owned(),
+                Count::Exactly(n) => format!("count:{n}"),
+                Count::Unbounded => "count:*".to_owned(),
+            }))
             .chain(self.other.iter().cloned())
             .collect();
         if !attrs.is_empty() {
@@ -284,6 +305,8 @@ ftDataMars = PlMs.dat; // type:ftData
 map_head = *; // type:MapHead[]
 grGroundParam = *; // type:grGroundParam[2] data:4byte
 itemdata = GrI2.dat;
+map_plit = *; // count:*
+ScGamRegStaffrollNames_scene_modelset = GmStRoll.dat; // count:10
 ";
 
     #[test]
@@ -298,6 +321,8 @@ itemdata = GrI2.dat;
             })
         );
         assert_eq!(file.entries[2].other, ["data:4byte"]);
+        assert_eq!(file.entries[4].count, Some(Count::Unbounded));
+        assert_eq!(file.entries[5].count, Some(Count::Exactly(10)));
     }
 
     #[test]

@@ -87,6 +87,41 @@ impl Canonical {
         self.by_die.get(&die).copied()
     }
 
+    /// Every type `roots` lead to, through members, pointers, arrays,
+    /// typedefs and qualifiers.
+    pub fn reachable(
+        &self,
+        graph: &TypeGraph,
+        roots: impl IntoIterator<Item = DieId>,
+    ) -> std::collections::BTreeSet<CanonId> {
+        let mut reached = std::collections::BTreeSet::new();
+        let mut queue: Vec<DieId> = roots.into_iter().collect();
+        while let Some(die) = queue.pop() {
+            let Some(id) = self.of(die) else { continue };
+            if !reached.insert(id) {
+                continue;
+            }
+            let ty = &graph.types[&self.get(id).rep];
+            let mut next = |t: &Option<DieId>| queue.extend(*t);
+            match &ty.kind {
+                TypeKind::Pointer { target }
+                | TypeKind::Typedef { target }
+                | TypeKind::Const { target }
+                | TypeKind::Volatile { target }
+                | TypeKind::Restrict { target } => next(target),
+                TypeKind::Array { element, .. } => next(element),
+                TypeKind::Record { members, .. } => {
+                    members.iter().for_each(|m| next(&m.ty));
+                }
+                TypeKind::Enum { underlying, .. } => next(underlying),
+                TypeKind::Subroutine { .. }
+                | TypeKind::Base { .. }
+                | TypeKind::Unspecified => {}
+            }
+        }
+        reached
+    }
+
     /// Every canonical type with this name, whether a typedef or a tag.
     pub fn named(&self, name: Str) -> &[CanonId] {
         self.by_name.get(&name).map_or(&[], Vec::as_slice)

@@ -1,10 +1,8 @@
 {
-  stdenvNoCC,
   lib,
   fontconfig,
   pkg-config,
   rustPlatform,
-  srcOnly,
   src,
 }:
 
@@ -12,14 +10,7 @@ rustPlatform.buildRustPackage (finalAttrs: {
   pname = "objdiff";
   version = src.shortRev;
 
-  src = srcOnly {
-    name = "objdiff-patched";
-    inherit src;
-    stdenv = stdenvNoCC;
-    patches = [
-      ./duplicate-similar-dep.patch
-    ];
-  };
+  inherit src;
 
   cargoBuildFlags = [
     "--workspace"

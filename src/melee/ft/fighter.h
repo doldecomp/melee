@@ -10,6 +10,7 @@
 #include <dolphin/mtx.h>
 #include <melee/ft/inlines.h> // IWYU pragma: export
 #include <melee/ft/types.h>
+#include <melee/sfx/crowdsfx.h>
 #include <sysdolphin/baselib/objalloc.h>
 
 /**
@@ -203,5 +204,34 @@ extern Fighter_804D6540_t** Fighter_804D6540;
 /* 4D654C */ extern float (*Fighter_804D654C)[5];
 /* 4D6550 */ extern ftCo_ItemThrowAttrs* Fighter_804D6550;
 /* 4D6554 */ extern ftCommonData* p_ftCommonData;
+
+/// The @c ftLoadCommonData root of @c PlCo.dat: the tables every fighter
+/// shares, copied into the globals of the same types.
+struct ftLoadCommonData {
+    /* +00 */ ftCommonData* common;
+    /* +04 */ ftCo_ItemThrowAttrs* item_throw;
+    /* +08 */ float (*x8)[5];
+    /* +0C */ float* xC;
+    /* +10 */ FighterPartsTable** parts_table;
+    /* +14 */ struct Fighter_804D6540_t** x14;
+    /* +18 */ struct Fighter_804D653C_t* x18;
+    /* +1C */ struct Fighter_804D653C_t* x1C;
+    /* +20 */ UNK_T x20;
+    /* +24 */ Vec2** x24;
+    /* +28 */ struct Fighter_ShakeTable_t* grab_mash_shake;
+    /* +2C */ struct Fighter_ShakeTable_t* smash_charge_shake;
+    /* +30 */ struct Fighter_804D6524_t* x30;
+    /* +34 */ struct Fighter_804D6520_t* x34;
+    /* +38 */ struct Fighter_804D651C_t* x38;
+    /* +3C */ struct Fighter_804D6518_t* x3C;
+    /* +40 */ HSD_Joint* x40;
+    /* +44 */ UNK_T x44;
+    /* +48 */ u8* x48;
+    /* +4C */ u8* x4C;
+    /* +50 */ HSD_Joint* x50;
+    /* +54 */ CrowdConfig* crowd_config;
+    /* +58 */ struct Fighter_804D64FC_t* x58;
+};
+ASSERT_SIZE(struct ftLoadCommonData, 0x5C);
 
 #endif

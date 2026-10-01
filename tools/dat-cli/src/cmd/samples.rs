@@ -11,14 +11,21 @@
 
 use super::project::{Check, Project};
 use anyhow::{Context, Result, bail};
+use globset::{Glob, GlobSetBuilder};
 use melee_dat::{
-    dwarf::{TypeGraph, cache::TypesFile, canonical::Canonical},
+    coverage::coverage,
+    dwarf::{
+        TypeGraph, cache::TypesFile, canonical::Canonical, render::Renderer,
+    },
     hsd::Archive,
     samples::{
-        CWriter, Instance, Picker, SampleInfo, Source, root_of, target_object,
+        CWriter, Elided, Instance, Picker, SampleInfo, Source, root_of,
+        target_object,
     },
 };
-use object::{Object, ObjectSection, ObjectSymbol, RelocationTarget};
+use object::{
+    Object, ObjectSection, ObjectSymbol, RelocationTarget, SectionKind,
+};
 use rayon::prelude::*;
 use serde::{Deserialize, Serialize};
 use serde_json::json;
@@ -38,6 +45,10 @@ pub struct Args {
 
 #[derive(clap::Subcommand)]
 enum Command {
+    /// Write a hash of the types an archive's roots lead to, if it changed:
+    /// the unit's other steps depend on it instead of every type
+    Types(TypesArgs),
+
     /// Write an archive's samples as a target object, with a sidecar
     Slice(Slice),
 
@@ -52,6 +63,17 @@ enum Command {
 }
 
 #[derive(clap::Args)]
+struct TypesArgs {
+    /// The archive, relative to the archives' directory, e.g. `PlMr.dat`
+    archive: String,
+    #[command(flatten)]
+    check: Check,
+    /// The hash; left alone when unchanged, so that its dependents are too
+    #[arg(short, long)]
+    output: PathBuf,
+}
+
+#[derive(clap::Args)]
 struct Slice {
     /// The archive, relative to the archives' directory, e.g. `PlMr.dat`
     archive: String,
@@ -60,6 +82,13 @@ struct Slice {
     /// The target object; its sidecar is written next to it as `.samples`
     #[arg(short, long)]
     output: PathBuf,
+    /// Every typed object, not just the best instance of each type
+    #[arg(long)]
+    all: bool,
+    /// Types never to sample, as globs on their names (e.g.
+    /// `HSD_VtxDescList`); data they point to stays bytes
+    #[arg(long)]
+    exclude: Vec<String>,
 }
 
 #[derive(clap::Args)]
@@ -97,6 +126,7 @@ struct Report {
 
 pub fn run(Args { command }: Args) -> Result<()> {
     match command {
+        Command::Types(args) => types(args),
         Command::Slice(args) => slice(args),
         Command::Codegen(args) => codegen(args),
         Command::Project(args) => project(args),
@@ -110,8 +140,16 @@ struct Sidecar {
     /// The archive file, e.g. `PlMr.dat`.
     archive: String,
     samples: Vec<SampleInfo>,
-    /// Everything else the samples point to, by name, with its root.
-    externs: BTreeMap<String, String>,
+    /// The data in the archive the samples point to but that isn't written
+    /// as C, by name.
+    elided: BTreeMap<String, Elided>,
+    /// The archive's externs the samples point to: other archives'
+    /// symbols, which the loader links in by name.
+    externs: BTreeSet<String>,
+    /// Whether the types explain the whole file: every relocation, every
+    /// public symbol, and nothing the walk finds wrong. objdiff's
+    /// `complete`, the analog of code that is linked into the game.
+    complete: bool,
 }
 
 fn sidecar_path(target: &Path) -> PathBuf {
@@ -124,6 +162,76 @@ fn read_sidecar(path: &Path) -> Result<Sidecar> {
     postcard::from_bytes(&bytes).with_context(|| format!("{}", path.display()))
 }
 
+/// Everything an archive's samples depend on from the types: the root
+/// names it has and their types, the definition of every type those lead
+/// to, and the macros their annotations use.
+fn types(args: TypesArgs) -> Result<()> {
+    use std::hash::{DefaultHasher, Hash, Hasher};
+    let project = Project::load(&args.check)?;
+    let path = project.base.join(&args.archive);
+    let bytes =
+        fs::read(&path).with_context(|| format!("{}", path.display()))?;
+    let archives = Archive::parse_packed(&bytes)
+        .with_context(|| format!("{}", path.display()))?;
+    let renderer = Renderer::new(&project.graph, &project.canonical);
+
+    let mut text = String::new();
+    let mut roots = Vec::new();
+    for (_, archive) in &archives {
+        for (name, _) in archive.named_publics() {
+            let name = String::from_utf8_lossy(name);
+            if let Some(&ty) = project.root_types.get(name.as_ref()) {
+                let count = project
+                    .symbols
+                    .lookup(&name, &args.archive)
+                    .and_then(|e| e.count);
+                text += &format!("count {count:?}\n");
+                text += &format!(
+                    "root {name}: {}\n",
+                    renderer.declare(Some(ty), "")
+                );
+                roots.push(ty);
+            } else if let Some(spec) = project
+                .symbols
+                .lookup(&name, &args.archive)
+                .and_then(|e| e.ty.as_ref())
+            {
+                text += &format!("symbol {name}: {spec}\n");
+                roots.push(project.symbol_types[&spec.name]);
+            }
+        }
+    }
+    let definitions: String = project
+        .canonical
+        .reachable(&project.graph, roots)
+        .into_iter()
+        .filter(|&id| renderer.is_listed(id))
+        .map(|id| renderer.definition(id))
+        .collect();
+    // The macros and enumerators the annotations might use
+    let identifiers: BTreeSet<&str> = definitions
+        .split(|c: char| !(c.is_ascii_alphanumeric() || c == '_'))
+        .filter(|w| !w.is_empty())
+        .collect();
+    text += &definitions;
+    for identifier in identifiers {
+        if let Some(value) = project.macros.get(identifier) {
+            text += &format!("#define {identifier} {value}\n");
+        }
+    }
+
+    let mut hasher = DefaultHasher::new();
+    text.hash(&mut hasher);
+    let hash = format!("{:016x}\n", hasher.finish());
+    if fs::read_to_string(&args.output).ok().as_deref() != Some(&hash) {
+        if let Some(dir) = args.output.parent() {
+            fs::create_dir_all(dir)?;
+        }
+        fs::write(&args.output, hash)?;
+    }
+    Ok(())
+}
+
 fn slice(args: Slice) -> Result<()> {
     let project = Project::load(&args.check)?;
     let path = project.base.join(&args.archive);
@@ -133,7 +241,12 @@ fn slice(args: Slice) -> Result<()> {
         .with_context(|| format!("{}", path.display()))?;
 
     // This archive's best instance of each type and variant
-    let mut picker = Picker::new(&project.graph, &project.canonical);
+    let mut exclude = GlobSetBuilder::new();
+    for glob in &args.exclude {
+        exclude.add(Glob::new(glob)?);
+    }
+    let mut picker = Picker::new(&project.graph, &project.canonical)
+        .select(args.all, exclude.build()?);
     let mut walks = BTreeMap::new();
     for (at, archive) in &archives {
         let (_, walk) = project.walk(&args.archive, archive);
@@ -163,18 +276,64 @@ fn slice(args: Slice) -> Result<()> {
     }
     // The other data the samples point to belongs to the root of the
     // object it is in: the nearest one the walk reached at or before it
-    let mut externs = BTreeMap::new();
+    let mut elided = BTreeMap::new();
+    let mut externs = BTreeSet::new();
+    // Where elided data ends, without a type: the next place something
+    // starts
+    let starts: BTreeMap<usize, BTreeSet<u32>> = archives
+        .iter()
+        .map(|(at, archive)| {
+            let source = &sources[at];
+            let mut starts: BTreeSet<u32> =
+                archive.publics.iter().map(|p| p.offset).collect();
+            starts.extend(walks[at].objects.keys());
+            starts.extend(
+                source
+                    .relocs(0, archive.data.len() as u64)
+                    .iter()
+                    .map(|&(_, t)| t),
+            );
+            (*at, starts)
+        })
+        .collect();
     for (sample, source) in &pairs {
-        let paths = &walks[&sample.location.archive].paths;
+        for (_, name) in source.externs(sample.location.offset, sample.size) {
+            externs.insert(name.to_owned());
+        }
+        let walk = &walks[&sample.location.archive];
         for (_, target) in source.relocs(sample.location.offset, sample.size) {
             let name = source.name(target);
-            if !names.contains(&name) {
-                let root = paths
-                    .range(..=target)
-                    .next_back()
-                    .map_or("unknown", |(_, path)| root_of(path));
-                externs.entry(name).or_insert_with(|| root.to_owned());
+            if names.contains(&name) {
+                continue;
             }
+            let root = walk
+                .paths
+                .range(..=target)
+                .next_back()
+                .map_or("unknown", |(_, path)| root_of(path))
+                .to_owned();
+            // Its type's size where the walk typed it
+            let typed = walk.objects.get(&target).and_then(|types| {
+                types
+                    .iter()
+                    .filter_map(|&id| {
+                        let rep = project.canonical.get(id).rep;
+                        project.canonical.byte_size(&project.graph, rep)
+                    })
+                    .max()
+            });
+            let end = source.archive.data.len() as u32;
+            let size = typed.map_or_else(
+                || {
+                    starts[&sample.location.archive]
+                        .range(target + 1..)
+                        .next()
+                        .map_or(end, |&s| s.min(end))
+                        - target
+                },
+                |size| size as u32,
+            );
+            elided.entry(name).or_insert(Elided { root, size });
         }
     }
 
@@ -182,10 +341,30 @@ fn slice(args: Slice) -> Result<()> {
         fs::create_dir_all(dir)?;
     }
     fs::write(&args.output, target_object(&pairs)?)?;
+    // The target's order, for linking the base object's `.data` the same:
+    // clang lays variables out where an initializer first points to them
+    let mut script = String::from("SECTIONS\n{\n    .data : {\n");
+    for info in &infos {
+        script += &format!("        *(.data.{})\n", info.symbol);
+    }
+    script += "        *(.data .data.*)\n    }\n}\n";
+    fs::write(args.output.with_extension("ld"), script)?;
     let sidecar = Sidecar {
         archive: args.archive,
         samples: infos,
+        elided,
         externs,
+        complete: archives.iter().all(|(at, archive)| {
+            let walk = &walks[at];
+            walk.issues.is_empty()
+                && archive
+                    .publics
+                    .iter()
+                    .all(|p| walk.objects.contains_key(&p.offset))
+                && coverage(&project.graph, &project.canonical, archive, walk)
+                    .unexplained
+                    .is_empty()
+        }),
     };
     fs::write(sidecar_path(&args.output), postcard::to_stdvec(&sidecar)?)?;
     Ok(())
@@ -243,12 +422,13 @@ fn codegen(args: Codegen) -> Result<()> {
     let roots = CWriter::new(&graph, &canonical).unit(
         &sidecar.archive,
         &instances,
+        &sidecar.elided,
         &sidecar.externs,
     )?;
 
     // A directory of each root's header and source, next to the unit's
-    // file, which includes the sources: `gen/PlMr/ftDataMario.{h,c}`,
-    // `gen/PlMr.c`
+    // file, which includes the sources: `src/PlMr/ftDataMario.{h,c}`,
+    // `src/PlMr.c`
     let stem = args
         .output
         .file_stem()
@@ -268,6 +448,9 @@ fn codegen(args: Codegen) -> Result<()> {
     );
     for root in &roots {
         fs::write(dir.join(format!("{}.h", root.name)), &root.header)?;
+        unit += &format!("#include \"{stem}/{}.h\"\n", root.name);
+    }
+    for root in &roots {
         if let Some(source) = &root.source {
             fs::write(dir.join(format!("{}.c", root.name)), source)?;
             unit += &format!("#include \"{stem}/{}.c\"\n", root.name);
@@ -294,7 +477,7 @@ fn project(args: ProjectArgs) -> Result<()> {
             "target_path": format!("target/{unit}.o"),
             "base_path": format!("base/{unit}.o"),
             "metadata": {
-                "complete": false,
+                "complete": sidecar.complete,
                 "source_path": format!("src/{unit}.c"),
                 "progress_categories": ["dat"],
                 "auto_generated": false,
@@ -369,6 +552,36 @@ struct UnitMatch {
     name: String,
     measures: MatchMeasures,
     samples: Vec<SampleMatch>,
+    /// The base object's contents outside `.data`, e.g. code or strings
+    /// from headers, which the target doesn't have.
+    extra: Vec<String>,
+}
+
+/// Allocated sections of a unit's base object other than `.data`, with
+/// their sizes.
+fn extra_sections(dir: &Path, unit: &str) -> Result<Vec<String>> {
+    let path = dir.join(format!("base/{unit}.o"));
+    let data =
+        fs::read(&path).with_context(|| format!("{}", path.display()))?;
+    let obj = object::File::parse(&*data)?;
+    Ok(obj
+        .sections()
+        .filter(|s| s.size() > 0 && s.name() != Ok(".data"))
+        .filter(|s| {
+            matches!(
+                s.kind(),
+                SectionKind::Text
+                    | SectionKind::Data
+                    | SectionKind::ReadOnlyData
+                    | SectionKind::ReadOnlyDataWithRel
+                    | SectionKind::ReadOnlyString
+                    | SectionKind::UninitializedData
+            )
+        })
+        .map(|s| {
+            format!("{} ({:#X} bytes)", s.name().unwrap_or("?"), s.size())
+        })
+        .collect())
 }
 
 /// objdiff's diff of one unit's target and base objects: each sample's
@@ -447,6 +660,7 @@ fn report(args: Report) -> Result<()> {
                 name: name.clone(),
                 measures,
                 samples,
+                extra: extra_sections(&args.dir, name)?,
             })
         })
         .collect::<Result<_>>()?;
@@ -476,6 +690,11 @@ fn report(args: Report) -> Result<()> {
             "{:6.1}%  {}  ({unit}, {:#X} bytes)",
             s.match_percent, s.name, s.size
         )?;
+    }
+    for unit in &units {
+        for section in &unit.extra {
+            writeln!(out, "  extra  {section} in base/{}.o", unit.name)?;
+        }
     }
     writeln!(
         out,

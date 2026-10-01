@@ -176,38 +176,9 @@ void Fighter_FirstInitialize_80067A84(void)
     HSD_ObjAllocInit(&fighter_x59C_alloc_data, 0x8000, 0x20);
 }
 
-/// The @c ftLoadCommonData root of @c PlCo.dat: the tables every fighter
-/// shares, copied into the globals of the same types.
-typedef struct ftLoadCommonData {
-    /* +00 */ ftCommonData* common;
-    /* +04 */ ftCo_ItemThrowAttrs* item_throw;
-    /* +08 */ float (*x8)[5];
-    /* +0C */ float* xC;
-    /* +10 */ FighterPartsTable** parts_table;
-    /* +14 */ struct Fighter_804D6540_t** x14;
-    /* +18 */ struct Fighter_804D653C_t* x18;
-    /* +1C */ struct Fighter_804D653C_t* x1C;
-    /* +20 */ UNK_T x20;
-    /* +24 */ Vec2** x24;
-    /* +28 */ struct Fighter_ShakeTable_t* grab_mash_shake;
-    /* +2C */ struct Fighter_ShakeTable_t* smash_charge_shake;
-    /* +30 */ struct Fighter_804D6524_t* x30;
-    /* +34 */ struct Fighter_804D6520_t* x34;
-    /* +38 */ struct Fighter_804D651C_t* x38;
-    /* +3C */ struct Fighter_804D6518_t* x3C;
-    /* +40 */ HSD_Joint* x40;
-    /* +44 */ UNK_T x44;
-    /* +48 */ u8* x48;
-    /* +4C */ u8* x4C;
-    /* +50 */ HSD_Joint* x50;
-    /* +54 */ CrowdConfig* crowd_config;
-    /* +58 */ struct Fighter_804D64FC_t* x58;
-} ftLoadCommonData;
-ASSERT_SIZE(ftLoadCommonData, 0x5C);
-
 void Fighter_LoadCommonData(void)
 {
-    ftLoadCommonData* data;
+    struct ftLoadCommonData* data;
     lbArchive_LoadSymbols("PlCo.dat", &data, "ftLoadCommonData", 0);
 
     // copy 23 4-byte chunks from pData to p_ftCommonData in reverse order,

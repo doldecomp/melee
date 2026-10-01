@@ -1,3 +1,5 @@
+#include "dbinit.h"
+
 #include "db.h"
 #include "dbsound.h"
 #include <dolphin/card.h>
@@ -59,12 +61,6 @@ void db_GetGameLaunchButtonState(void)
         VIWaitForRetrace();
     }
 }
-
-struct db_Setup_commonData {
-    char** bonus_names;
-    char** motionstate_names;
-    char** submotion_names;
-};
 
 void db_Setup(void)
 {

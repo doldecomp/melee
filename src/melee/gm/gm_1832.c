@@ -95,49 +95,7 @@ ClassicProcArray const lbl_803B7C40 = {
     fn_80184A4C, fn_80184A70, fn_80184A94,
 };
 
-typedef struct {
-    /* 0x00 */ f32 vals[3];
-} ClassicSlotVals;
-ASSERT_SIZE(ClassicSlotVals, 0xC);
-
-typedef struct {
-    /* 0x00 */ f32 x00;
-    /* 0x04 */ f32 x04;
-    /* 0x08 */ Vec3 x08;
-    /* 0x14 */ u8 pad_14[0x8];
-} ClassicCharLayout;
-ASSERT_SIZE(ClassicCharLayout, 0x1C);
-
-typedef struct {
-    /* 0x00 */ f32 x00;
-    /* 0x04 */ f32 x04;
-    /* 0x08 */ f32 x08;
-    /* 0x0C */ u8 pad_0C[0x8];
-} ClassicTeamEntry;
-ASSERT_SIZE(ClassicTeamEntry, 0x14);
-
-typedef struct {
-    /* 0x00 */ f32 x00[3];
-    /* 0x0C */ f32 x0C[3];
-    /* 0x18 */ f32 x18[3];
-    /* 0x24 */ f32 x24[3];
-} ClassicSplashRow;
-ASSERT_SIZE(ClassicSplashRow, 0x30);
-
-static struct lbl_804D6604_t {
-    /* 0x000 */ ClassicSlotVals x00[2];
-    /* 0x018 */ ClassicSlotVals x18[3];
-    /* 0x03C */ ClassicSlotVals x3C[4];
-    /* 0x06C */ ClassicCharLayout x6C[28];
-    /* 0x37C */ ClassicTeamEntry x37C[25];
-    /* 0x570 */ u8 pad_570[0xC];
-    /* 0x57C */ ClassicSplashRow x57C[3];
-    /* 0x60C */ u8 pad_60C[0x24];
-    /* 0x630 */ ClassicSlotVals x630[3];
-    /* 0x654 */ ClassicSlotVals x654[3];
-    /* 0x678 */ ClassicSlotVals x678[4];
-    /* 0x6A8 */ ClassicCharLayout x6A8[28];
-}* lbl_804D6604;
+static struct lbl_804D6604_t* lbl_804D6604;
 
 static int lbl_804D6608;
 

@@ -34,10 +34,7 @@ static struct lbl_804336D0_t {
     Mtx texture_mtx;
 } lbl_804336D0;
 
-static struct refract_data_t {
-    u8 x0;
-    f32* x4;
-}* refract_data;
+static struct refract_data_t* refract_data;
 
 static inline void lbRefract_WriteTexCoord(lbRefract_CallbackData* cb, s32 row,
                                            u32 col, f32 y, f32 x, f32 param0)
