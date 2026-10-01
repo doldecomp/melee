@@ -83,16 +83,16 @@ void ftSk_SpecialS_80110490(Fighter* fp)
 void ftSk_SpecialS_80110610(HSD_GObj* gobj, s32 arg1, float arg2)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    UNK_T* items = fp->ft_data->x48_items;
+    union ftData_Item* items = fp->ft_data->x48_items;
 
     u8 _[4];
 
     HSD_Joint** item;
 
     if (arg1 == 305) {
-        item = items[4];
+        item = items[4].joints;
     } else {
-        item = items[5];
+        item = items[5].joints;
     }
 
     ftSk_SpecialS_80110490(fp);

@@ -341,10 +341,10 @@ void ftKp_Init_OnLoad(HSD_GObj* gobj)
     Fighter* fp = gobj->user_data;
 
     ftData* ftDataInfo = fp->ft_data;
-    UNK_T* items = ftDataInfo->x48_items;
+    union ftData_Item* items = ftDataInfo->x48_items;
 
     PUSH_ATTRS(fp, ftKoopaAttributes);
-    it_8026B3F8(items[0], It_Kind_Koopa_Flame);
+    it_8026B3F8(items[0].article, It_Kind_Koopa_Flame);
     fp->x2226_b1 = true;
 }
 

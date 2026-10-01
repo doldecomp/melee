@@ -49,8 +49,10 @@ pub struct Project {
     pub macros: HashMap<String, String>,
     /// Types of the root names loaders record; one type per name.
     pub root_types: BTreeMap<String, DieId>,
-    /// `dat_symbols.txt`: types for names no loader records, and counts and
-    /// bindings for any root.
+    /// Values bound while resolving root names in loader tables.
+    pub root_bindings: BTreeMap<String, Vec<(String, u64)>>,
+    /// `dat_symbols.txt`: types for names no loader records, and counts
+    /// for any root.
     pub symbols: SymbolFile,
     pub symbol_types: BTreeMap<String, DieId>,
 }
@@ -71,24 +73,30 @@ impl Project {
     pub fn load(args: &Check) -> Result<Self> {
         let config = get_config(args.proj_path.as_ref(), &args.cfg_path)?;
         let proj = args.proj_path.clone().unwrap_or_default();
-        let (graph, macros, root_types) = match &args.types {
+        let (graph, macros, root_types, root_bindings) = match &args.types {
             Some(path) => {
                 let types = TypesFile::load(path)?;
-                (types.graph, types.macros, types.roots)
+                (types.graph, types.macros, types.roots, types.root_bindings)
             }
             None => {
                 let graph = TypeGraph::load(dwarf_path(args.dwarf.clone())?)?;
                 let canonical = Canonical::new(&graph);
                 let macros = macros(&graph);
                 let mut root_types = BTreeMap::new();
+                let mut root_bindings = BTreeMap::new();
                 for root in roots(&graph, &canonical) {
                     if let (RootName::Literal(name), Some(ty)) =
                         (root.name, root.ty)
                     {
+                        if !root.bindings.is_empty() {
+                            root_bindings
+                                .entry(name.clone())
+                                .or_insert(root.bindings);
+                        }
                         root_types.entry(name).or_insert(ty);
                     }
                 }
-                (graph, macros, root_types)
+                (graph, macros, root_types, root_bindings)
             }
         };
         let canonical = Canonical::new(&graph);
@@ -118,6 +126,7 @@ impl Project {
             canonical,
             macros,
             root_types,
+            root_bindings,
             symbols,
             symbol_types,
         })
@@ -148,7 +157,7 @@ impl Project {
                     0 => file.clone(),
                     _ => format!("{file}@{at:#X}"),
                 };
-                let (rooted, result) = self.walk(&file, archive)?;
+                let (rooted, result) = self.walk(&file, archive);
                 each(Walked {
                     file: &file,
                     name,
@@ -161,7 +170,7 @@ impl Project {
         Ok(())
     }
 
-    pub fn walk(&self, file: &str, archive: &Archive) -> Result<(bool, Walk)> {
+    pub fn walk(&self, file: &str, archive: &Archive) -> (bool, Walk) {
         let mut walker =
             Walker::new(&self.graph, &self.canonical, &self.macros, archive);
         let mut rooted = false;
@@ -171,7 +180,7 @@ impl Project {
             let (ty, count) =
                 if let Some(&ty) = self.root_types.get(name.as_ref()) {
                     // The loader gives the type; the symbol entry may add a
-                    // count and bindings without repeating that type.
+                    // count without repeating that type.
                     (ty, entry.and_then(|e| e.count).unwrap_or(Count::One))
                 } else if let Some(TypeSpec { name: ty, count }) =
                     entry.and_then(|e| e.ty.as_ref())
@@ -180,30 +189,27 @@ impl Project {
                 } else {
                     continue;
                 };
-            let bindings = entry
-                .map(|e| e.bindings(&self.macros))
-                .transpose()?
+            let bindings = self
+                .root_bindings
+                .get(name.as_ref())
+                .map(Vec::as_slice)
                 .unwrap_or_default();
             match count {
-                Count::One => walker.root(symbol.offset, ty, &name, &bindings),
+                Count::One => walker.root(symbol.offset, ty, &name, bindings),
                 Count::Exactly(n) => walker.root_array(
                     symbol.offset,
                     ty,
                     Some(n),
                     &name,
-                    &bindings,
+                    bindings,
                 ),
-                Count::Unbounded => walker.root_array(
-                    symbol.offset,
-                    ty,
-                    None,
-                    &name,
-                    &bindings,
-                ),
+                Count::Unbounded => {
+                    walker.root_array(symbol.offset, ty, None, &name, bindings)
+                }
             }
             rooted = true;
         }
-        Ok((rooted, walker.finish()))
+        (rooted, walker.finish())
     }
 
     /// The type of the object at `offset`, for display.
@@ -267,8 +273,35 @@ mod tests {
         };
         let items = word(root + 0x48);
         let grapple = word(items + 4 * 4);
+        assert_eq!(
+            project.root_bindings["ftDataSamus"],
+            [("fighter_kind".into(), 13)]
+        );
+        assert_eq!(
+            project.root_bindings["ftDataMario"],
+            [("fighter_kind".into(), 0)]
+        );
+        assert_eq!(
+            project.root_bindings["ftDataSandbag"],
+            [("fighter_kind".into(), 32)]
+        );
+        let union_die =
+            project.canonical.lookup(&project.graph, "ftData_Item")[0];
+        let union = project.canonical.of(union_die).unwrap();
+        assert_eq!(
+            project.canonical.byte_size(&project.graph, union_die),
+            Some(4)
+        );
+        let grapple_die =
+            project.canonical.lookup(&project.graph, "UNK_SAMUS_S1")[0];
+        let grapple_type = project.canonical.of(grapple_die).unwrap();
         let ty = project.root_types["ftDataSamus"];
         project.symbol_types.insert("ftData".into(), ty);
+        project.symbols.entries.extend(
+            SymbolFile::parse("ftDataSamus = *; // type:ftData")
+                .unwrap()
+                .entries,
+        );
 
         for loader in [true, false] {
             if !loader {
@@ -286,12 +319,11 @@ mod tests {
                     name: "ftData".into(),
                     count,
                 });
-                let (rooted, walk) =
-                    project.walk("PlSs.dat", &archive).unwrap();
+                let (rooted, walk) = project.walk("PlSs.dat", &archive);
                 assert!(rooted);
-                let union = *walk.objects[&grapple].first().unwrap();
+                assert!(walk.objects[&grapple].contains(&grapple_type));
                 assert_eq!(
-                    walk.choices.get(&(grapple, union)),
+                    walk.choices.get(&(items + 4 * 4, union)),
                     Some(&0),
                     "Samus slot 4 must select the grapple accessory (loader={loader}, count={count:?})"
                 );
@@ -305,7 +337,7 @@ mod tests {
                 // Other slots still choose Article: the per-element binding
                 // must shadow the index used for the grapple slot.
                 for index in 0..4 {
-                    let at = word(items + index * 4);
+                    let at = items + index * 4;
                     assert_eq!(walk.choices.get(&(at, union)), Some(&1));
                 }
             }
@@ -313,8 +345,6 @@ mod tests {
 
         // A root's scope cannot carry over to another root, even after
         // following pointers from an array root.
-        let union =
-            project.canonical.lookup(&project.graph, "ftData_ItemData")[0];
         let mut walker = Walker::new(
             &project.graph,
             &project.canonical,
@@ -322,13 +352,13 @@ mod tests {
             &archive,
         );
         walker.root_array(
-            grapple,
-            union,
+            items + 4 * 4,
+            union_die,
             Some(1),
             "grapple",
-            &[("ftData::kind".into(), 13), ("ftData::item".into(), 4)],
+            &[("fighter_kind".into(), 13), ("item_index".into(), 4)],
         );
-        walker.root(word(items), union, "unbound", &[]);
+        walker.root(items, union_die, "unbound", &[]);
         assert!(walker.finish().issues.iter().any(|issue| {
             matches!(issue, melee_dat::walk::Issue::AmbiguousUnion { path, .. } if path == "unbound")
         }));

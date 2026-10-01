@@ -110,20 +110,26 @@ as many as fit before the next public symbol or pointer target. Raw data
 (textures, palettes) is typed as `u8[]` or `u16[]`, like the extracted
 blobs in `config.yml`.
 
-A root can also supply values that are known by the loader but aren't
-stored in the archive, with `bind:Type::field=VALUE`:
+When a loader names roots through a global table, `DAT_BIND` on its name
+field carries the table's context into each root's walk. For example, the
+fighter loader indexes `ftData_803C1F40[kind].b`:
 
-```text
-ftDataSamus = *; // bind:ftData::kind=Ft_Kind_Samus
+```c
+struct StringPair {
+    char* a;
+    char* b DAT_BIND(fighter_kind, _index);
+};
 ```
 
-Values are integer expressions without whitespace; macros and enum
-constants come from the DWARF. Unresolved values are errors. Bindings apply
-to the root (including every element of an array root) and everything
-reached from it. A field's `DAT_BIND` can shadow them, and they don't carry
-over to other roots. For example, `ftData.x48_items` binds `ftData::item`
-to `_index`, so its pointed-to union can select Samus's grapple-beam
-accessory in slot 4 and an `Article` in the other slots.
+Expanding the name table binds `fighter_kind` to each element's index.
+These values are retained in the compact types file and apply to the root
+(including every element of an array root) and everything reached from it.
+Expressions can use `_index`, macros, enum constants, and bindings from
+earlier fields on the path. Unresolved bindings are omitted, as during the
+archive walk. A field's `DAT_BIND` can shadow them; they don't carry over to
+other roots. `ftData.x48_items` binds `item_index` to `_index`, so its C
+pointer union selects Samus's grapple-beam accessory in slot 4 and an
+`Article` in the other slots.
 
 ## Samples
 
