@@ -98,6 +98,10 @@ pub struct Walk {
     pub objects: BTreeMap<u32, BTreeSet<CanonId>>,
     /// The first path each object was reached by.
     pub paths: BTreeMap<u32, String>,
+    /// Typed data the walk laid out: from each object or element, the
+    /// furthest it reaches. Raw bytes (`u8` not named by a `DAT_BLOB`
+    /// typedef) say nothing of what the data is, and aren't included.
+    pub extents: BTreeMap<u32, u32>,
     /// The member each tagged union chose, by the union's offset and
     /// type: an index into its members.
     pub choices: BTreeMap<(u32, CanonId), usize>,
@@ -211,6 +215,7 @@ impl<'a> Walker<'a> {
         count: Option<u64>,
         name: &str,
     ) {
+        let raw = element;
         let Some(element) = self.resolve(Some(element)) else {
             return;
         };
@@ -247,6 +252,7 @@ impl<'a> Walker<'a> {
             });
         }
         let count = count.min(room / size);
+        self.typed_extent(offset, raw, count);
         // Plain data, such as a texture: only check it isn't relocated
         if !self.has_pointers(element) {
             let end = offset + (count * size) as u32;
@@ -280,6 +286,7 @@ impl<'a> Walker<'a> {
     }
 
     fn object(&mut self, offset: u32, die: DieId, path: String) {
+        let raw = die;
         let Some(die) = self.resolve(Some(die)) else {
             return;
         };
@@ -289,6 +296,7 @@ impl<'a> Walker<'a> {
         if !self.visited.insert((offset, id)) {
             return;
         }
+        self.typed_extent(offset, raw, 1);
         self.walk.objects.entry(offset).or_default().insert(id);
         self.walk
             .paths
@@ -446,7 +454,8 @@ impl<'a> Walker<'a> {
                 let value = self.word(offset);
                 if self.relocs.contains(&offset) {
                     self.walk.pointers.insert(offset);
-                    match self.pointee(*target) {
+                    // Unresolved, so that a `DAT_BLOB` typedef still shows
+                    match target.filter(|_| self.pointee(*target).is_some()) {
                         Some(target) => self.queue.push((
                             value,
                             target,
@@ -538,6 +547,7 @@ impl<'a> Walker<'a> {
             }
             self.env = self.bound(&outer, binds, parent, i.into());
             let ty = raw.unwrap_or(element);
+            self.typed_extent(at, ty, 1);
             self.layout(at, ty, &format!("{path}[{i}]"), parent);
         }
         self.env = outer;
@@ -630,9 +640,11 @@ impl<'a> Walker<'a> {
             return;
         }
         self.walk.pointers.insert(offset);
+        let raw = element.or(target);
         let Some(element) = element.or_else(|| self.pointee(target)) else {
             return self.untyped(path);
         };
+        let raw = raw.unwrap_or(element);
         let Some(size) = self.canonical.byte_size(self.graph, element) else {
             return;
         };
@@ -651,7 +663,7 @@ impl<'a> Walker<'a> {
             let env = self.bound(&outer, binds, parent, i);
             self.queue.push((
                 value + (i * size) as u32,
-                element,
+                raw,
                 format!("{path}[{i}]"),
                 env,
             ));
@@ -968,8 +980,48 @@ impl<'a> Walker<'a> {
         None
     }
 
-    /// Whether a typedef on the way from `die` to its underlying type
-    /// carries `tag`.
+    /// Record `count` elements of `die` at `offset` as typed data, unless
+    /// they are raw bytes.
+    fn typed_extent(&mut self, offset: u32, die: DieId, count: u64) {
+        if self.is_raw(die) {
+            return;
+        }
+        let Some(size) = self
+            .resolve(Some(die))
+            .and_then(|die| self.canonical.byte_size(self.graph, die))
+        else {
+            return;
+        };
+        let end = offset + (size * count) as u32;
+        let furthest = self.walk.extents.entry(offset).or_insert(end);
+        *furthest = end.max(*furthest);
+    }
+
+    /// Whether `die` is raw bytes: `u8`, or arrays of it, not named by a
+    /// `DAT_BLOB` typedef.
+    fn is_raw(&self, die: DieId) -> bool {
+        let Some(ty) = self.graph.types.get(&die) else {
+            return false;
+        };
+        let blob = ty.annotations.iter().any(|a| {
+            a.value.and_then(|v| DatTag::parse(self.graph.str(v)))
+                == Some(DatTag::Blob)
+        });
+        match ty.kind {
+            _ if blob => false,
+            TypeKind::Typedef { target }
+            | TypeKind::Const { target }
+            | TypeKind::Volatile { target }
+            | TypeKind::Array {
+                element: target, ..
+            } => target.is_some_and(|t| self.is_raw(t)),
+            TypeKind::Base { encoding } => {
+                encoding == gimli::DW_ATE_unsigned_char.0
+            }
+            _ => false,
+        }
+    }
+
     /// Follow a `DAT_TERMINATED` pointer: elements up to one whose first
     /// word is the terminator value, which is walked too.
     fn terminated(
@@ -1026,12 +1078,18 @@ impl<'a> Walker<'a> {
                 });
                 break;
             }
-            // The terminator is walked too, for its other fields
-            let end = u64::from(self.word(at)) == terminator
+            // The terminator is walked too, for its other fields. Elements
+            // smaller than a word are compared whole: -1 ends an `s8` list
+            let width = size.min(4) as usize;
+            let first = self.data[at as usize..at as usize + width]
+                .iter()
+                .fold(0, |v, &b| v << 8 | u64::from(b));
+            let end = first == terminator & (u64::MAX >> (64 - 8 * width))
                 && !self.relocs.contains(&at);
             // Unresolved, so that typedef tags on the element still apply
             let ty = target.unwrap_or(element);
             if self.visited.insert((at, id)) {
+                self.typed_extent(at, ty, 1);
                 self.layout(at, ty, &format!("{path}->[{i}]"), None);
             }
             self.env = env.clone();

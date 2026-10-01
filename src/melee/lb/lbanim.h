@@ -7,6 +7,7 @@
 #include <sysdolphin/baselib/forward.h>
 
 #include <dat_macros.h>
+#include <sysdolphin/baselib/fobj.h>
 
 struct FigaTrack {
     u16 length;
@@ -15,7 +16,7 @@ struct FigaTrack {
     u8 frac_value;
     u8 frac_slope;
     u8 dummy0; ///< Set in the data, unused
-    u8* ad_head;
+    HSD_FObjData* ad_head DAT_COUNT(length);
 };
 
 struct FigaTree {
@@ -23,7 +24,7 @@ struct FigaTree {
     u32 flags;
     f32 frames;
     /// Tracks per joint, up to -1
-    s8* nodes;
+    s8* nodes DAT_TERMINATED(-1);
     /// @todo As many as the sum of #nodes.
     FigaTrack* tracks DAT_EXTENT;
 };
