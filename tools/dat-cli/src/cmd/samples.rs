@@ -199,6 +199,14 @@ fn types(args: TypesArgs) -> Result<()> {
     for (_, archive) in &archives {
         for (name, _) in archive.named_publics() {
             let name = String::from_utf8_lossy(name);
+            if let Some(entry) = project.symbols.lookup(&name, &args.archive) {
+                // Include resolved values, so changes to constants used by
+                // a root binding also invalidate this archive's samples.
+                text += &format!(
+                    "bindings {:?}\n",
+                    entry.bindings(&project.macros)?
+                );
+            }
             if let Some(&ty) = project.root_types.get(name.as_ref()) {
                 let count = project
                     .symbols
@@ -268,7 +276,7 @@ fn slice(args: Slice) -> Result<()> {
         .select(args.all, exclude.build()?);
     let mut walks = BTreeMap::new();
     for (at, archive) in &archives {
-        let (_, walk) = project.walk(&args.archive, archive);
+        let (_, walk) = project.walk(&args.archive, archive)?;
         picker.add(&args.archive, *at, archive, &walk);
         walks.insert(*at, walk);
     }

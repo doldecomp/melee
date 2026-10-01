@@ -1,3 +1,39 @@
+// Fighter kinds, in ftData_803C1F40 order. The loader supplies the type;
+// annotations use the kind to choose each fighter's item-slot layout.
+ftDataMario = *; // bind:ftData::kind=Ft_Kind_Mario
+ftDataFox = *; // bind:ftData::kind=Ft_Kind_Fox
+ftDataCaptain = *; // bind:ftData::kind=Ft_Kind_Captain
+ftDataDonkey = *; // bind:ftData::kind=Ft_Kind_Donkey
+ftDataKirby = *; // bind:ftData::kind=Ft_Kind_Kirby
+ftDataKoopa = *; // bind:ftData::kind=Ft_Kind_Koopa
+ftDataLink = *; // bind:ftData::kind=Ft_Kind_Link
+ftDataSeak = *; // bind:ftData::kind=Ft_Kind_Seak
+ftDataNess = *; // bind:ftData::kind=Ft_Kind_Ness
+ftDataPeach = *; // bind:ftData::kind=Ft_Kind_Peach
+ftDataPopo = *; // bind:ftData::kind=Ft_Kind_Popo
+ftDataNana = *; // bind:ftData::kind=Ft_Kind_Nana
+ftDataPikachu = *; // bind:ftData::kind=Ft_Kind_Pikachu
+ftDataSamus = *; // bind:ftData::kind=Ft_Kind_Samus
+ftDataYoshi = *; // bind:ftData::kind=Ft_Kind_Yoshi
+ftDataPurin = *; // bind:ftData::kind=Ft_Kind_Purin
+ftDataMewtwo = *; // bind:ftData::kind=Ft_Kind_Mewtwo
+ftDataLuigi = *; // bind:ftData::kind=Ft_Kind_Luigi
+ftDataMars = *; // bind:ftData::kind=Ft_Kind_Mars
+ftDataZelda = *; // bind:ftData::kind=Ft_Kind_Zelda
+ftDataClink = *; // bind:ftData::kind=Ft_Kind_CLink
+ftDataDrmario = *; // bind:ftData::kind=Ft_Kind_DrMario
+ftDataFalco = *; // bind:ftData::kind=Ft_Kind_Falco
+ftDataPichu = *; // bind:ftData::kind=Ft_Kind_Pichu
+ftDataGamewatch = *; // bind:ftData::kind=Ft_Kind_GameWatch
+ftDataGanon = *; // bind:ftData::kind=Ft_Kind_Ganon
+ftDataEmblem = *; // bind:ftData::kind=Ft_Kind_Emblem
+ftDataMasterhand = *; // bind:ftData::kind=Ft_Kind_MasterH
+ftDataCrazyhand = *; // bind:ftData::kind=Ft_Kind_CrezyH
+ftDataBoy = *; // bind:ftData::kind=Ft_Kind_Boy
+ftDataGirl = *; // bind:ftData::kind=Ft_Kind_Girl
+ftDataGkoopa = *; // bind:ftData::kind=Ft_Kind_GKoops
+ftDataSandbag = *; // bind:ftData::kind=Ft_Kind_Sandbag
+
 // Fighter animations, named by ftData tables
 *_figatree = Pl??AJ.dat; // type:FigaTree
 

@@ -110,6 +110,21 @@ as many as fit before the next public symbol or pointer target. Raw data
 (textures, palettes) is typed as `u8[]` or `u16[]`, like the extracted
 blobs in `config.yml`.
 
+A root can also supply values that are known by the loader but aren't
+stored in the archive, with `bind:Type::field=VALUE`:
+
+```text
+ftDataSamus = *; // bind:ftData::kind=Ft_Kind_Samus
+```
+
+Values are integer expressions without whitespace; macros and enum
+constants come from the DWARF. Unresolved values are errors. Bindings apply
+to the root (including every element of an array root) and everything
+reached from it. A field's `DAT_BIND` can shadow them, and they don't carry
+over to other roots. For example, `ftData.x48_items` binds `ftData::item`
+to `_index`, so its pointed-to union can select Samus's grapple-beam
+accessory in slot 4 and an `Article` in the other slots.
+
 ## Samples
 
 Samples check that the types explain the archives' data. Each archive is a

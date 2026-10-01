@@ -49,7 +49,8 @@ pub struct Project {
     pub macros: HashMap<String, String>,
     /// Types of the root names loaders record; one type per name.
     pub root_types: BTreeMap<String, DieId>,
-    /// `dat_symbols.txt`, for names no loader records.
+    /// `dat_symbols.txt`: types for names no loader records, and counts and
+    /// bindings for any root.
     pub symbols: SymbolFile,
     pub symbol_types: BTreeMap<String, DieId>,
 }
@@ -147,7 +148,7 @@ impl Project {
                     0 => file.clone(),
                     _ => format!("{file}@{at:#X}"),
                 };
-                let (rooted, result) = self.walk(&file, archive);
+                let (rooted, result) = self.walk(&file, archive)?;
                 each(Walked {
                     file: &file,
                     name,
@@ -160,47 +161,49 @@ impl Project {
         Ok(())
     }
 
-    pub fn walk(&self, file: &str, archive: &Archive) -> (bool, Walk) {
+    pub fn walk(&self, file: &str, archive: &Archive) -> Result<(bool, Walk)> {
         let mut walker =
             Walker::new(&self.graph, &self.canonical, &self.macros, archive);
         let mut rooted = false;
         for (name, symbol) in archive.named_publics() {
             let name = String::from_utf8_lossy(name);
-            if let Some(&ty) = self.root_types.get(name.as_ref()) {
-                // The loader gives the type; `dat_symbols.txt` may give how
-                // many there are, for a root that is a table
-                let count =
-                    self.symbols.lookup(&name, file).and_then(|e| e.count);
-                match count {
-                    None | Some(Count::One) => {
-                        walker.root(symbol.offset, ty, &name)
-                    }
-                    Some(Count::Exactly(n)) => {
-                        walker.root_array(symbol.offset, ty, Some(n), &name)
-                    }
-                    Some(Count::Unbounded) => {
-                        walker.root_array(symbol.offset, ty, None, &name)
-                    }
-                }
-                rooted = true;
-            } else if let Some(TypeSpec { name: ty, count }) =
-                self.symbols.lookup(&name, file).and_then(|e| e.ty.as_ref())
-            {
-                let ty = self.symbol_types[ty];
-                let offset = symbol.offset;
-                match *count {
-                    Count::One => walker.root(offset, ty, &name),
-                    Count::Exactly(n) => {
-                        walker.root_array(offset, ty, Some(n), &name)
-                    }
-                    Count::Unbounded => {
-                        walker.root_array(offset, ty, None, &name)
-                    }
-                }
-                rooted = true;
+            let entry = self.symbols.lookup(&name, file);
+            let (ty, count) =
+                if let Some(&ty) = self.root_types.get(name.as_ref()) {
+                    // The loader gives the type; the symbol entry may add a
+                    // count and bindings without repeating that type.
+                    (ty, entry.and_then(|e| e.count).unwrap_or(Count::One))
+                } else if let Some(TypeSpec { name: ty, count }) =
+                    entry.and_then(|e| e.ty.as_ref())
+                {
+                    (self.symbol_types[ty], *count)
+                } else {
+                    continue;
+                };
+            let bindings = entry
+                .map(|e| e.bindings(&self.macros))
+                .transpose()?
+                .unwrap_or_default();
+            match count {
+                Count::One => walker.root(symbol.offset, ty, &name, &bindings),
+                Count::Exactly(n) => walker.root_array(
+                    symbol.offset,
+                    ty,
+                    Some(n),
+                    &name,
+                    &bindings,
+                ),
+                Count::Unbounded => walker.root_array(
+                    symbol.offset,
+                    ty,
+                    None,
+                    &name,
+                    &bindings,
+                ),
             }
+            rooted = true;
         }
-        (rooted, walker.finish())
+        Ok((rooted, walker.finish()))
     }
 
     /// The type of the object at `offset`, for display.
@@ -213,5 +216,121 @@ impl Project {
                 || "?".to_owned(),
                 |&id| renderer.declare(Some(self.canonical.get(id).rep), ""),
             )
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    /// Use the real extracted archive and derived types; nothing generated
+    /// or copied from the game is committed as a fixture.
+    #[test]
+    fn samus_root_bindings_select_grapple_for_loader_and_symbol_types() {
+        let repo = PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("../..");
+        let build = std::env::var_os("MELEE_DAT_BUILD")
+            .map(PathBuf::from)
+            .unwrap_or_else(|| repo.join("build/GALE01/dat"));
+        let files = std::env::var_os("MELEE_DAT_FILES")
+            .map(PathBuf::from)
+            .unwrap_or_else(|| repo.join("orig/GALE01/files"));
+        if (!build.join("types.bin").exists()
+            || !files.join("PlSs.dat").exists())
+            && std::env::var_os("MELEE_DAT_BUILD").is_none()
+            && std::env::var_os("MELEE_DAT_FILES").is_none()
+        {
+            eprintln!("skipping: no real DAT build and archives found");
+            return;
+        }
+        let mut project = Project::load(&Check {
+            cfg_path: "config/GALE01/dat.yml".into(),
+            proj_path: Some(repo),
+            dwarf: None,
+            types: Some(build.join("types.bin")),
+            files: Some(files.clone()),
+        })
+        .unwrap();
+        let bytes = fs::read(files.join("PlSs.dat")).unwrap();
+        let archive = Archive::parse_packed(&bytes).unwrap().remove(0).1;
+        let root = archive
+            .named_publics()
+            .find(|(name, _)| *name == b"ftDataSamus")
+            .unwrap()
+            .1
+            .offset;
+        let word = |at: u32| {
+            u32::from_be_bytes(
+                archive.data[at as usize..at as usize + 4]
+                    .try_into()
+                    .unwrap(),
+            )
+        };
+        let items = word(root + 0x48);
+        let grapple = word(items + 4 * 4);
+        let ty = project.root_types["ftDataSamus"];
+        project.symbol_types.insert("ftData".into(), ty);
+
+        for loader in [true, false] {
+            if !loader {
+                project.root_types.remove("ftDataSamus");
+            }
+            for count in [Count::One, Count::Exactly(1), Count::Unbounded] {
+                let entry = project
+                    .symbols
+                    .entries
+                    .iter_mut()
+                    .find(|e| e.name == "ftDataSamus")
+                    .unwrap();
+                entry.count = Some(count);
+                entry.ty = Some(TypeSpec {
+                    name: "ftData".into(),
+                    count,
+                });
+                let (rooted, walk) =
+                    project.walk("PlSs.dat", &archive).unwrap();
+                assert!(rooted);
+                let union = *walk.objects[&grapple].first().unwrap();
+                assert_eq!(
+                    walk.choices.get(&(grapple, union)),
+                    Some(&0),
+                    "Samus slot 4 must select the grapple accessory (loader={loader}, count={count:?})"
+                );
+                assert!(
+                    walk.issues.iter().all(|issue| {
+                        !issue.path().starts_with("ftDataSamus.x48_items->[4]")
+                    }),
+                    "grapple walk has issues: {:?}",
+                    walk.issues
+                );
+                // Other slots still choose Article: the per-element binding
+                // must shadow the index used for the grapple slot.
+                for index in 0..4 {
+                    let at = word(items + index * 4);
+                    assert_eq!(walk.choices.get(&(at, union)), Some(&1));
+                }
+            }
+        }
+
+        // A root's scope cannot carry over to another root, even after
+        // following pointers from an array root.
+        let union =
+            project.canonical.lookup(&project.graph, "ftData_ItemData")[0];
+        let mut walker = Walker::new(
+            &project.graph,
+            &project.canonical,
+            &project.macros,
+            &archive,
+        );
+        walker.root_array(
+            grapple,
+            union,
+            Some(1),
+            "grapple",
+            &[("ftData::kind".into(), 13), ("ftData::item".into(), 4)],
+        );
+        walker.root(word(items), union, "unbound", &[]);
+        assert!(walker.finish().issues.iter().any(|issue| {
+            matches!(issue, melee_dat::walk::Issue::AmbiguousUnion { path, .. } if path == "unbound")
+        }));
     }
 }

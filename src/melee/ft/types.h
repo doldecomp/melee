@@ -714,8 +714,8 @@ typedef struct ftData_x34 {
 /// An entry of #ftData::x48_items: mostly an #Article, but some fighters
 /// keep joints or their own structs in certain slots.
 /// @todo Type the other slots per fighter (Link 6, Kirby 4, Yoshi 3,
-///       Samus 4).
-typedef void* ftData_Item DAT_TYPE(Article);
+///       Game & Watch 10).
+typedef void* ftData_Item DAT_TYPE(ftData_ItemData);
 
 typedef struct ftData_x1C {
     u16 x0; ///< Fighter_Part
@@ -904,7 +904,7 @@ struct ftData {
     /* +44 */ ftData_x44_t* x44;
     /// The fighter's own items, by a per-fighter index.
     /// @todo Count differs per fighter.
-    /* +48 */ ftData_Item* x48_items DAT_EXTENT;
+    /* +48 */ ftData_Item* x48_items DAT_EXTENT DAT_BIND(ftData::item, _index);
     /* +4C */ FtSFX* x4C_sfx;
     /* +50 */ Vec2* x50;
     /* +54 */ int* x54;
