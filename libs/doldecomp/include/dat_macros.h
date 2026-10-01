@@ -62,6 +62,12 @@
 /// to more script, such as a goto's target.
 #define DAT_SCRIPT(table, ...) DAT_TAG("script(" #table ", " #__VA_ARGS__ ")")
 
+/// On a typedef of @c u8: the bytes are data of one format the archive
+/// doesn't break down further, such as an animation's keyframe stream. Raw
+/// @c u8 data is unknown; the size comes from the members that point to it,
+/// e.g. @c DAT_COUNT(length).
+#define DAT_BLOB DAT_TAG("blob")
+
 /// The untyped pointer, or pointer-sized integer, refers to a @p type when it
 /// is relocated.
 #define DAT_TYPE(type) DAT_TAG("type(" #type ")")

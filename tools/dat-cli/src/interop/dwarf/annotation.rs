@@ -22,6 +22,8 @@ pub enum DatTag {
     Terminated(Expr),
     /// `DAT_EXTENT`: the array holds as many elements as the data does.
     Extent,
+    /// `DAT_BLOB`: the typedef names a format of opaque bytes.
+    Blob,
     /// `DAT_IF`: the union member is valid when this holds.
     If(Expr),
     /// `DAT_TYPE`: the untyped pointer refers to this type, as written.
@@ -66,6 +68,7 @@ fn tag(input: &mut &str) -> ModalResult<DatTag> {
         "count" => args(expr).map(DatTag::Count),
         "terminated" => args(expr).map(DatTag::Terminated),
         "extent" => eof.value(DatTag::Extent),
+        "blob" => eof.value(DatTag::Blob),
         "if" => args(expr).map(DatTag::If),
         "type" => raw_args.map(|t: &str| DatTag::Type(t.trim().to_owned())),
         "root" => root.map(DatTag::Root),
@@ -234,6 +237,7 @@ mod tests {
             }))
         );
         assert_eq!(DatTag::parse("dat:extent"), Some(DatTag::Extent));
+        assert_eq!(DatTag::parse("dat:blob"), Some(DatTag::Blob));
         assert_eq!(
             DatTag::parse("dat:count(n)"),
             Some(DatTag::Count(Expr::Name("n".into())))

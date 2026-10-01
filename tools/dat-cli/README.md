@@ -125,28 +125,45 @@ cmake --build --preset dat
 melee-dat samples report build/GALE01/dat
 ```
 
-`build/GALE01/dat` holds everything, and is an objdiff project:
+`build/GALE01/dat` holds everything, and is an objdiff project. Each
+archive is a unit `<module>/<archive>`, grouped by the two letters its name
+starts with (`Pl/PlMr`, `Gr/GrFs`), under `dat/` in objdiff like the code's
+`main/`:
 
 - `melee.elf`: the DWARF build for that game version
 - `types.bin`: its types, deduplicated once for every step
-- `target/<archive>.o`: the sampled objects from the archive, with
-  pointers as relocations; `target/<archive>.samples` says what each is
-- `metadata/<archive>.types`: a hash of the types the archive's roots
+- `target/<unit>.o`: the whole archive, in two sections (objdiff lists
+  them by name):
+  - `.0.sampled`: the sampled objects, with pointers as relocations
+  - `.1.inferred`: the rest of the archive's global symbols (its public
+    symbols, and the data the samples point to), as uninitialized data,
+    which objdiff never diffs bytes of. The base defines the ones the walk
+    explains here too, so objdiff matches them by name and size; the rest
+    show as missing. A global is explained when it, and everything it
+    reaches before another global or a sample, is typed data with no
+    relocation the walk can't explain. Raw `u8` isn't typed: its format
+    needs a `DAT_BLOB` typedef
+
+  Each symbol's offset in the archive is its virtual address in a
+  `.note.split`, as decomp-toolkit writes for split code; objdiff shows it.
+  `target/<unit>.samples` says what each sample is; `target/<unit>.rest.o`
+  is the base's `.1.inferred`
+- `metadata/<unit>.types`: a hash of the types the archive's roots
   lead to, rewritten only when it changes, which the other steps depend on;
-  `metadata/<archive>.formatted` records that the C is formatted
-- `src/<archive>/<root>.{h,c}`: per root of the archive (the public
+  `metadata/<unit>.formatted` records that the C is formatted
+- `src/<unit>/<root>.{h,c}`: per root of the archive (the public
   symbol its samples were reached from), a header declaring its samples and
   the other data they point to, and designated initializers generated from
   the types; pointers into other roots include those roots' headers
-- `src/macros.h`: what the generated C includes (`LOCAL`, `DatBlob`), like
+- `src/macros.h`: what the generated C includes (`LOCAL`), like
   dtk's `macros.inc`; from `samples macros`
-- `src/<archive>.c`: the unit, which includes every root's source; all of
+- `src/<unit>.c`: the unit, which includes every root's source; all of
   it is formatted in place with the repository's `.clang-format`
-- `base/<archive>.o`: that C, compiled with the DWARF build's flags, one
-  section per variable (`obj/<archive>.o`), then linked with
-  `target/<archive>.ld` into one `.data` in the target's order (clang lays
-  variables out where they are first pointed to, not where they are
-  defined)
+- `base/<unit>.o`: that C, compiled with the DWARF build's flags, one
+  section per variable (`obj/<unit>.o`), then linked with
+  `target/<unit>.ld` and `target/<unit>.rest.o` into `.0.sampled` in the
+  target's order (clang lays variables out where they are first pointed
+  to, not where they are defined) and `.1.inferred`
 
 `compile_commands.json` there gives clangd the same flags as the build;
 clang-tidy is off for `src/`.
@@ -155,7 +172,7 @@ Data is named as the archive names it (its public symbols, global in both
 objects). Everything else is `LOCAL` (`static`, kept where nothing points to
 it), named after the field the walk first reached it through, then its
 offset: `child_x1A0`, `x1C_4_x2818`. Data the samples point to that isn't written as C (elided: declared as its
-type where the walk typed it as one record, else as a `DatBlob` array)
+type where the walk typed it as one record, else as `UNK_T`)
 can't be local, so its name starts with its root, e.g.
 `ftDataMario_x0_common_attr_x3AC8`. Externs, other archives' symbols the
 loader links in, start with the unit's name (`GrFz_<extern>` in
@@ -206,7 +223,8 @@ type instead.
 | `DAT_EXTENT` | Array, or pointer to elements, that runs as far as the data does. Stopgap for lengths only the code knows. |
 | `DAT_BIND(T::f, value)` | `T::f` is `value` for everything reached through this member. |
 | `DAT_SCRIPT(table, len...)` | Pointer to a command script: opcode in the top 6 bits, lengths in words from the listed values, then from `table` in the code. Ends at opcode 0; relocated words point to more script. |
-| `DAT_TERMINATED(value)` | Pointer to elements up to one whose first word is `value` and not a relocated pointer: `0` for null-terminated lists, `GX_VA_NULL` for vertex descriptors. On a member, or on a pointer typedef for nested lists. |
+| `DAT_TERMINATED(value)` | Pointer to elements up to one whose first word (or whole value, if smaller) is `value` and not a relocated pointer: `0` for null-terminated lists, `GX_VA_NULL` for vertex descriptors, `-1` for `s8` lists. On a member, or on a pointer typedef for nested lists. |
+| `DAT_BLOB` | On a `u8` typedef: one format of bytes the archive doesn't break down, e.g. `typedef u8 HSD_FObjData DAT_BLOB;` for keyframe streams. The size comes from the pointer (`DAT_COUNT(length)`). Raw `u8` data stays unexplained. |
 
 Expressions are C. Names resolve to fields of the enclosing record, then
 bindings, then macros and enum constants. `_index` is the element index

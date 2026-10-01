@@ -10,11 +10,4 @@
 /// target object's symbol, and kept where nothing in the unit points to it.
 #define LOCAL static __attribute__((used))
 
-/// A byte of archive data that generated C points to without defining and
-/// without a type: bulk data such as images, palettes, vertices and display
-/// lists, objects the walk didn't type as one record, and the archive's
-/// externs. Declared as arrays of their size where it's known, e.g.
-/// @c extern DatBlob ftDataMario_xF9A0[0x40];
-typedef unsigned char DatBlob;
-
 #endif

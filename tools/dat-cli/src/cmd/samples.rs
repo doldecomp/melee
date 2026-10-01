@@ -1,8 +1,13 @@
 //! `samples`: archive data typed by the DWARF, compared with objdiff.
 //!
-//! One unit per archive file, each built in steps a build system runs:
+//! One unit per archive file, `<module>/<archive>` (`Pl/PlMr`), each built
+//! in steps a build system runs:
 //! - `slice`: the archive → `target/<unit>.o`, its sampled objects under
-//!   their archive names, plus `target/<unit>.samples` saying what each is
+//!   their archive names and the rest by name and size (see
+//!   [`target_object`]), plus `target/<unit>.samples` saying what each
+//!   sample is, and for the base `target/<unit>.ld`, ordering its samples
+//!   like the target's, and `target/<unit>.rest.o`, the rest the walk
+//!   explains
 //! - `codegen`: the target object → `src/<unit>.c`, generated from the types
 //! - `macros`: `src/macros.h`, which every unit's C includes
 //! - (the build compiles `src/<unit>.c` to `base/<unit>.o`)
@@ -14,14 +19,15 @@ use super::project::{Check, Project};
 use anyhow::{Context, Result, bail};
 use globset::{Glob, GlobSetBuilder};
 use melee_dat::{
-    coverage::coverage,
+    coverage::{coverage, family},
     dwarf::{
         TypeGraph, cache::TypesFile, canonical::Canonical, render::Renderer,
     },
     hsd::Archive,
     samples::{
         CWriter, Elided, ElidedType, Instance, Picker, SampleInfo, Source, Unnamed,
-        assign_names, root_of, target_object,
+        Piece, SAMPLED, INFERRED, assign_names, rest_object, root_of,
+        target_object,
     },
 };
 use object::{
@@ -317,16 +323,8 @@ fn slice(args: Slice) -> Result<()> {
                 .next_back()
                 .map_or("unknown", |(_, path)| root_of(path))
                 .to_owned();
-            // Its type's size where the walk typed it
-            let typed = walk.objects.get(&target).and_then(|types| {
-                types
-                    .iter()
-                    .filter_map(|&id| {
-                        let rep = project.canonical.get(id).rep;
-                        project.canonical.byte_size(&project.graph, rep)
-                    })
-                    .max()
-            });
+            // As far as the walk typed it
+            let typed = walk.extents.get(&target).map(|&end| end - target);
             let end = source.archive.data.len() as u32;
             let size = typed.map_or_else(
                 || {
@@ -336,7 +334,7 @@ fn slice(args: Slice) -> Result<()> {
                         .map_or(end, |&s| s.min(end))
                         - target
                 },
-                |size| size as u32,
+                |size| size,
             );
             // Declared as its type where the walk typed it as one record
             let ty = walk
@@ -358,6 +356,30 @@ fn slice(args: Slice) -> Result<()> {
                 .or_insert(Elided { root, size, ty });
         }
     }
+    // The rest of the archive, split where something starts
+    let mut rest: Vec<(usize, u32, u32)> = Vec::new();
+    for (at, archive) in &archives {
+        let end = archive.data.len() as u32;
+        let spans: BTreeMap<u32, u32> = samples
+            .iter()
+            .filter(|s| s.location.archive == *at)
+            .map(|s| (s.location.offset, s.location.offset + s.size as u32))
+            .collect();
+        let mut bounds: BTreeSet<u32> = starts[at].range(..end).copied().collect();
+        bounds.insert(0);
+        bounds.extend(spans.values().filter(|&&e| e < end));
+        let bounds: Vec<u32> = bounds.into_iter().collect();
+        for (i, &from) in bounds.iter().enumerate() {
+            let to = bounds.get(i + 1).copied().unwrap_or(end);
+            let covered = spans
+                .range(..=from)
+                .next_back()
+                .is_some_and(|(_, &e)| from < e);
+            if !covered && from < to {
+                rest.push((*at, from, to - from));
+            }
+        }
+    }
     // Names for what the archive doesn't name
     let wanted: Vec<Unnamed> = sampled
         .iter()
@@ -375,6 +397,7 @@ fn slice(args: Slice) -> Result<()> {
         })
         .collect();
     assign_names(&mut sources, &wanted);
+    let pointed: BTreeSet<(usize, u32)> = elided.keys().copied().collect();
     let elided: BTreeMap<String, Elided> = elided
         .into_iter()
         .map(|((at, target), e)| (sources[&at].name(target), e))
@@ -399,14 +422,121 @@ fn slice(args: Slice) -> Result<()> {
     if let Some(dir) = args.output.parent() {
         fs::create_dir_all(dir)?;
     }
-    fs::write(&args.output, target_object(&pairs)?)?;
-    // The target's order, for linking the base object's `.data` the same:
+    let pieces: Vec<Piece> = pairs
+        .iter()
+        .map(|(sample, source)| Piece {
+            source,
+            offset: sample.location.offset,
+            size: sample.size,
+            global: source.is_public(sample.location.offset),
+        })
+        .collect();
+    // The rest the walk explains: typed data, with no relocation it can't
+    // explain
+    let coverages: BTreeMap<usize, _> = archives
+        .iter()
+        .map(|(at, archive)| {
+            (*at, coverage(&project.graph, &project.canonical, archive, &walks[at]))
+        })
+        .collect();
+    let typed: BTreeMap<usize, Vec<(u32, u32)>> = walks
+        .iter()
+        .map(|(at, walk)| {
+            let mut extents: Vec<(u32, u32)> = Vec::new();
+            let data = sources[at].archive.data;
+            for (&offset, &end) in &walk.extents {
+                // Objects start on words: zeros up to the next one are padding
+                let padded = end.next_multiple_of(4).min(data.len() as u32);
+                let zeros = data[end as usize..padded as usize].iter().all(|&b| b == 0);
+                let end = if zeros { padded } else { end };
+                match extents.last_mut() {
+                    Some(last) if offset <= last.1 => last.1 = last.1.max(end),
+                    _ => extents.push((offset, end)),
+                }
+            }
+            (*at, extents)
+        })
+        .collect();
+    let explained: Vec<bool> = rest
+        .iter()
+        .map(|&(at, offset, size)| {
+            let end = offset + size;
+            typed[&at].iter().any(|&(from, to)| from <= offset && end <= to)
+                && !coverages[&at]
+                    .unexplained
+                    .iter()
+                    .any(|u| (offset..end).contains(&u.at))
+        })
+        .collect();
+    // Only what has a global name goes in the objects: the archive's public
+    // symbols and the data the samples point to. The rest is only reached
+    // through those, and the C never names it: a global is inferred when it
+    // and everything it reaches without passing another global or a sample
+    // are explained
+    let spans: BTreeMap<(usize, u32), usize> = rest
+        .iter()
+        .enumerate()
+        .map(|(i, &(at, offset, _))| ((at, offset), i))
+        .collect();
+    let named = |i: usize| {
+        let (at, offset, _) = rest[i];
+        sources[&at].is_public(offset) || pointed.contains(&(at, offset))
+    };
+    let mut target_rest = Vec::new();
+    let mut inferred = Vec::new();
+    for (i, &(at, offset, size)) in rest.iter().enumerate() {
+        if !named(i) {
+            continue;
+        }
+        let source = &sources[&at];
+        let mut seen = BTreeSet::from([i]);
+        let mut stack = vec![i];
+        let mut all = true;
+        while let Some(i) = stack.pop() {
+            if !explained[i] {
+                all = false;
+                break;
+            }
+            let (_, from, size) = rest[i];
+            for (_, target) in source.relocs(from, size.into()) {
+                if let Some(&j) = spans.get(&(at, target))
+                    && !named(j)
+                    && seen.insert(j)
+                {
+                    stack.push(j);
+                }
+            }
+        }
+        let piece = Piece {
+            source,
+            offset,
+            size: size.into(),
+            // Public, or elided: the C declares it extern
+            global: true,
+        };
+        if all {
+            inferred.push(piece.clone());
+        }
+        target_rest.push(piece);
+    }
+    // The target defines all of it and the C doesn't, so objdiff counts it as
+    // missing; the base defines what is inferred, by name and size, so that
+    // objdiff matches it
+    fs::write(
+        &args.output,
+        target_object(&pieces, &target_rest, &args.archive)?,
+    )?;
+    fs::write(args.output.with_extension("rest.o"), rest_object(&inferred)?)?;
+    // The target's order, for linking the base object's samples the same:
     // clang lays variables out where an initializer first points to them
-    let mut script = String::from("SECTIONS\n{\n    .data : {\n");
+    let mut script = format!("SECTIONS\n{{\n    {SAMPLED} : {{\n");
     for info in &infos {
         script += &format!("        *(.data.{})\n", info.symbol);
     }
-    script += "        *(.data .data.*)\n    }\n}\n";
+    // Then what the walk explains, under the target's names
+    script += &format!(
+        "        *(.data .data.*)\n    }}\n    {INFERRED} : {{ *({INFERRED}) }}\n}}\n"
+    );
     fs::write(args.output.with_extension("ld"), script)?;
     let sidecar = Sidecar {
         archive: args.archive,
@@ -420,9 +550,7 @@ fn slice(args: Slice) -> Result<()> {
                     .publics
                     .iter()
                     .all(|p| walk.objects.contains_key(&p.offset))
-                && coverage(&project.graph, &project.canonical, archive, walk)
-                    .unexplained
-                    .is_empty()
+                && coverages[at].unexplained.is_empty()
         }),
     };
     fs::write(sidecar_path(&args.output), postcard::to_stdvec(&sidecar)?)?;
@@ -436,7 +564,7 @@ fn codegen(args: Codegen) -> Result<()> {
     let obj = object::File::parse(&*data)?;
 
     // Each symbol's bytes and relocations, from the object
-    let section = obj.section_by_name(".data");
+    let section = obj.section_by_name(SAMPLED);
     let bytes = match &section {
         Some(section) => section.data()?,
         None => &[],
@@ -530,6 +658,9 @@ fn macros(args: MacrosArgs) -> Result<()> {
     Ok(())
 }
 
+/// The units' top-level directory in objdiff, like the code's `main/`.
+const PROJECT_DIR: &str = "dat";
+
 fn project(args: ProjectArgs) -> Result<()> {
     let mut units = Vec::new();
     for path in &args.sidecars {
@@ -537,13 +668,14 @@ fn project(args: ProjectArgs) -> Result<()> {
         if sidecar.samples.is_empty() {
             continue;
         }
-        let unit = path
+        let stem = path
             .file_stem()
             .context("sidecar without a name")?
-            .to_string_lossy()
-            .into_owned();
+            .to_string_lossy();
+        // Grouped by module, as the build lays them out: `Pl/PlMr`
+        let unit = format!("{}/{stem}", family(&stem));
         units.push(json!({
-            "name": unit,
+            "name": format!("{PROJECT_DIR}/{unit}"),
             "target_path": format!("target/{unit}.o"),
             "base_path": format!("base/{unit}.o"),
             "metadata": {
@@ -622,13 +754,14 @@ struct UnitMatch {
     name: String,
     measures: MatchMeasures,
     samples: Vec<SampleMatch>,
-    /// The base object's contents outside `.data`, e.g. code or strings
+    /// The base object's contents outside its samples and inferred data,
+    /// e.g. code or strings
     /// from headers, which the target doesn't have.
     extra: Vec<String>,
 }
 
-/// Allocated sections of a unit's base object other than `.data`, with
-/// their sizes.
+/// Allocated sections of a unit's base object other than its samples and
+/// inferred data, with their sizes.
 fn extra_sections(dir: &Path, unit: &str) -> Result<Vec<String>> {
     let path = dir.join(format!("base/{unit}.o"));
     let data =
@@ -636,7 +769,7 @@ fn extra_sections(dir: &Path, unit: &str) -> Result<Vec<String>> {
     let obj = object::File::parse(&*data)?;
     Ok(obj
         .sections()
-        .filter(|s| s.size() > 0 && s.name() != Ok(".data"))
+        .filter(|s| s.size() > 0 && !matches!(s.name(), Ok(SAMPLED | INFERRED)))
         .filter(|s| {
             matches!(
                 s.kind(),
@@ -716,7 +849,11 @@ fn report(args: Report) -> Result<()> {
         .as_array()
         .into_iter()
         .flatten()
-        .filter_map(|u| u["name"].as_str().map(str::to_owned))
+        .filter_map(|u| u["name"].as_str())
+        .map(|name| {
+            let unit = name.strip_prefix(PROJECT_DIR).unwrap_or(name);
+            unit.trim_start_matches('/').to_owned()
+        })
         .collect();
     let units: Vec<UnitMatch> = names
         .par_iter()

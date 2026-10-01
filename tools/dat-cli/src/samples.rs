@@ -25,7 +25,7 @@ use globset::GlobSet;
 use object::{
     Architecture, BinaryFormat, Endianness, RelocationFlags, SectionKind,
     SymbolFlags, SymbolKind, SymbolScope,
-    write::{Object, Relocation, StandardSegment, Symbol, SymbolSection},
+    write::{Object, Relocation, StandardSegment, Symbol, SymbolId, SymbolSection},
 };
 use std::{
     collections::{BTreeMap, BTreeSet},
@@ -624,6 +624,12 @@ impl<'a> Source<'a> {
         }
     }
 
+    /// Where `offset` is in the file: inside a packed file, past the
+    /// archives before it.
+    pub fn file_offset(&self, offset: u32) -> u64 {
+        (self.archive_offset + offset as usize) as u64
+    }
+
     /// Whether the archive names the data at `offset`.
     pub fn is_public(&self, offset: u32) -> bool {
         self.publics.contains_key(&offset)
@@ -668,14 +674,27 @@ impl<'a> Source<'a> {
     }
 }
 
-/// A unit's target object: every sample's bytes under its name, with
-/// relocations to the names its words point to.
-pub fn target_object(samples: &[(&Sample, &Source)]) -> Result<Vec<u8>> {
-    let mut obj =
-        Object::new(BinaryFormat::Elf, Architecture::PowerPc, Endianness::Big);
-    let segment = obj.segment_name(StandardSegment::Data).to_vec();
-    let data = obj.add_section(segment, b".data".to_vec(), SectionKind::Data);
-    let symbol = |name: String, section, value, size, global| Symbol {
+/// The samples' section, in both objects. objdiff takes a section's kind
+/// from its type and flags, and pairs sections and symbols by section name;
+/// it lists sections by name, hence the numbers.
+pub const SAMPLED: &str = ".0.sampled";
+/// The rest of the archive: all of it in the target, and in the base what
+/// the walk explains by its type, which objdiff pairs by name and matches by
+/// size. The rest shows as missing in the base.
+pub const INFERRED: &str = ".1.inferred";
+
+/// A span of archive data an object defines.
+#[derive(Clone)]
+pub struct Piece<'s, 'a> {
+    pub source: &'s Source<'a>,
+    pub offset: u32,
+    pub size: u64,
+    /// Global with default visibility, else local.
+    pub global: bool,
+}
+
+fn data_symbol(name: String, section: SymbolSection, value: u64, size: u64, global: bool) -> Symbol {
+    Symbol {
         name: name.into_bytes(),
         value,
         size,
@@ -688,65 +707,182 @@ pub fn target_object(samples: &[(&Sample, &Source)]) -> Result<Vec<u8>> {
         weak: false,
         section,
         flags: SymbolFlags::None,
-    };
-    // Samples first, so that pointers between them use their symbols
-    let mut symbols = BTreeMap::new();
-    let mut placed = Vec::new();
-    for (sample, source) in samples {
-        let offset = sample.location.offset;
-        // Relocated words hold their target in the relocation, as a
-        // compiler writes them; the archive's value is only an offset
-        let mut bytes = source.bytes(offset, sample.size).to_vec();
-        // So do the words the loader links to other archives' symbols
-        let externs = source.externs(offset, sample.size);
-        let words = source
-            .relocs(offset, sample.size)
-            .into_iter()
-            .map(|(w, _)| w);
-        for word in words.chain(externs.iter().map(|&(w, _)| w)) {
-            let at = (word - offset) as usize;
-            bytes[at..at + 4].fill(0);
-        }
-        let at = obj.append_section_data(data, &bytes, 4);
-        let name = source.name(offset);
-        let id = obj.add_symbol(symbol(
+    }
+}
+
+/// Every piece in a section of uninitialized data, in order, by name and
+/// size only.
+fn add_bss(
+    obj: &mut Object,
+    section: &str,
+    pieces: &[Piece],
+    symbols: &mut BTreeMap<String, SymbolId>,
+) {
+    if pieces.is_empty() {
+        return;
+    }
+    let segment = obj.segment_name(StandardSegment::Data).to_vec();
+    let bss = obj.add_section(
+        segment,
+        section.as_bytes().to_vec(),
+        SectionKind::UninitializedData,
+    );
+    for piece in pieces {
+        let at = obj.append_section_bss(bss, piece.size, 1);
+        let name = piece.source.name(piece.offset);
+        let id = obj.add_symbol(data_symbol(
             name.clone(),
-            SymbolSection::Section(data),
+            SymbolSection::Section(bss),
             at,
-            sample.size,
-            source.is_public(offset),
+            piece.size,
+            piece.global,
         ));
         symbols.insert(name, id);
-        placed.push(at);
     }
-    for ((sample, source), at) in samples.iter().zip(placed) {
-        let offset = sample.location.offset;
-        let relocs = source
-            .relocs(offset, sample.size)
-            .into_iter()
-            .map(|(word, target)| (word, source.name(target)));
-        let externs = source
-            .externs(offset, sample.size)
-            .into_iter()
-            .map(|(word, name)| (word, name.to_owned()));
-        for (word, name) in relocs.chain(externs) {
-            let id = *symbols.entry(name.clone()).or_insert_with(|| {
-                obj.add_symbol(symbol(name, SymbolSection::Undefined, 0, 0, true))
-            });
-            obj.add_relocation(
-                data,
-                Relocation {
-                    offset: at + u64::from(word - offset),
-                    symbol: id,
-                    addend: 0,
-                    flags: RelocationFlags::Elf {
-                        r_type: object::elf::R_PPC_ADDR32,
+}
+
+/// A unit's target object: the samples' bytes in [`SAMPLED`], with
+/// relocations to the names their words point to, then the rest of the
+/// archive in [`INFERRED`], uninitialized, so objdiff never diffs bytes of
+/// it. Both in archive order; each symbol's offset in the archive is in the
+/// `.note.split` (see [`split_note`]).
+pub fn target_object(samples: &[Piece], rest: &[Piece], archive: &str) -> Result<Vec<u8>> {
+    let build = |note: Option<Vec<u8>>| -> Result<Vec<u8>> {
+        let mut obj =
+            Object::new(BinaryFormat::Elf, Architecture::PowerPc, Endianness::Big);
+        let segment = obj.segment_name(StandardSegment::Data).to_vec();
+        let data = obj.add_section(segment, SAMPLED.as_bytes().to_vec(), SectionKind::Data);
+        // Every piece first, so that pointers between them use their symbols
+        let mut symbols = BTreeMap::new();
+        let mut placed = Vec::new();
+        for &Piece {
+            source,
+            offset,
+            size,
+            global,
+        } in samples
+        {
+            // Relocated words hold their target in the relocation, as a
+            // compiler writes them; the archive's value is only an offset
+            let mut bytes = source.bytes(offset, size).to_vec();
+            // So do the words the loader links to other archives' symbols
+            let externs = source.externs(offset, size);
+            let words = source.relocs(offset, size).into_iter().map(|(w, _)| w);
+            for word in words.chain(externs.iter().map(|&(w, _)| w)) {
+                let at = (word - offset) as usize;
+                bytes[at..at + 4].fill(0);
+            }
+            let at = obj.append_section_data(data, &bytes, 4);
+            let name = source.name(offset);
+            let id = obj.add_symbol(data_symbol(
+                name.clone(),
+                SymbolSection::Section(data),
+                at,
+                size,
+                global,
+            ));
+            symbols.insert(name, id);
+            placed.push(at);
+        }
+        add_bss(&mut obj, INFERRED, rest, &mut symbols);
+        for (piece, at) in samples.iter().zip(placed) {
+            let Piece {
+                source,
+                offset,
+                size,
+                ..
+            } = *piece;
+            let relocs = source
+                .relocs(offset, size)
+                .into_iter()
+                .map(|(word, target)| (word, source.name(target)));
+            let externs = source
+                .externs(offset, size)
+                .into_iter()
+                .map(|(word, name)| (word, name.to_owned()));
+            for (word, name) in relocs.chain(externs) {
+                let id = *symbols.entry(name.clone()).or_insert_with(|| {
+                    obj.add_symbol(data_symbol(name, SymbolSection::Undefined, 0, 0, true))
+                });
+                obj.add_relocation(
+                    data,
+                    Relocation {
+                        offset: at + u64::from(word - offset),
+                        symbol: id,
+                        addend: 0,
+                        flags: RelocationFlags::Elf {
+                            r_type: object::elf::R_PPC_ADDR32,
+                        },
                     },
-                },
-            )?;
+                )?;
+            }
+        }
+        if let Some(note) = note {
+            let section = obj.add_section(
+                Vec::new(),
+                b".note.split".to_vec(),
+                SectionKind::Note,
+            );
+            obj.set_section_data(section, note, 4);
+        }
+        Ok(obj.write()?)
+    };
+    // The note is indexed by the symbol table, which only the written
+    // object orders; a section without symbols doesn't reorder it
+    let addresses: BTreeMap<String, u64> = samples
+        .iter()
+        .chain(rest)
+        .map(|p| (p.source.name(p.offset), p.source.file_offset(p.offset)))
+        .collect();
+    let first = build(None)?;
+    let note = split_note(&first, &addresses, archive)?;
+    build(Some(note))
+}
+
+/// The base's share of the rest of the archive: the data the walk explains
+/// by its type, in [`INFERRED`] by name and size like the target's, so that
+/// objdiff pairs and matches them without diffing bytes.
+pub fn rest_object(inferred: &[Piece]) -> Result<Vec<u8>> {
+    let mut obj =
+        Object::new(BinaryFormat::Elf, Architecture::PowerPc, Endianness::Big);
+    add_bss(&mut obj, INFERRED, inferred, &mut BTreeMap::new());
+    Ok(obj.write()?)
+}
+
+/// A `.note.split` section as decomp-toolkit writes one and objdiff reads it
+/// (objdiff-core's `split_meta.rs`): the generator, the module (the archive
+/// file) and every symbol's original address, here its offset in the file,
+/// which objdiff shows as the symbol's virtual address.
+fn split_note(object: &[u8], addresses: &BTreeMap<String, u64>, archive: &str) -> Result<Vec<u8>> {
+    use object::{Object as _, ObjectSymbol as _};
+    let file = object::File::parse(object)?;
+    // Index 0 is the null symbol, which the iterator skips
+    let mut virt = vec![0u32; 1];
+    for symbol in file.symbols() {
+        let index = symbol.index().0;
+        if virt.len() <= index {
+            virt.resize(index + 1, 0);
+        }
+        if symbol.is_definition()
+            && let Some(&at) = addresses.get(symbol.name()?)
+        {
+            virt[index] = at as u32;
         }
     }
-    Ok(obj.write()?)
+    let mut out = Vec::new();
+    let mut note = |kind: &[u8; 4], desc: &[u8]| {
+        out.extend_from_slice(&6u32.to_be_bytes());
+        out.extend_from_slice(&(desc.len() as u32).to_be_bytes());
+        out.extend_from_slice(kind);
+        out.extend_from_slice(b"Split\0\0\0");
+        out.extend_from_slice(desc);
+        out.resize(out.len().next_multiple_of(4), 0);
+    };
+    note(b"GENR", b"melee-dat");
+    note(b"MODN", archive.as_bytes());
+    let desc: Vec<u8> = virt.iter().flat_map(|a| a.to_be_bytes()).collect();
+    note(b"VIRT", &desc);
+    Ok(out)
 }
 
 /// Data the samples point to that isn't written as C: declared, as its type
@@ -815,8 +951,8 @@ impl<'a> CWriter<'a> {
     /// samples, and its source, defining them.
     /// `elided` is the other data in the archive the samples point to, by
     /// name; `externs` are the archive's externs they point to, which the
-    /// first root pointing to each declares. Both are declared as
-    /// `DatBlob` arrays.
+    /// first root pointing to each declares. Both are declared as `UNK_T`
+    /// unless the walk typed them.
     pub fn unit(
         &self,
         archive: &str,
@@ -912,8 +1048,9 @@ impl<'a> CWriter<'a> {
                 " */\n\n",
                 "#ifndef {guard}\n",
                 "#define {guard}\n\n",
-                "#include \"../macros.h\"\n\n",
+                "#include \"../../macros.h\"\n\n",
                 "#include <Runtime/platform.h>\n",
+                "#include <placeholder.h>\n",
             ),
             root = root,
             archive = archive,
@@ -957,7 +1094,7 @@ impl<'a> CWriter<'a> {
             ),
             linked
                 .iter()
-                .map(|n| format!("extern DatBlob {n}[];"))
+                .map(|n| format!("extern UNK_T {n};"))
                 .collect(),
         )?;
         group(
@@ -967,7 +1104,7 @@ impl<'a> CWriter<'a> {
                 .iter()
                 .map(|(n, e)| match &e.ty {
                     Some(ty) => format!("extern {} {n};", ty.type_name),
-                    None => format!("extern DatBlob {n}[{:#X}];", e.size),
+                    None => format!("extern UNK_T {n}; // {:#X} bytes", e.size),
                 })
                 .collect(),
         )?;
