@@ -165,8 +165,9 @@ struct Sidecar {
     /// symbols, which the loader links in by name.
     externs: BTreeSet<String>,
     /// Whether the types explain the whole file: every relocation, every
-    /// public symbol, and nothing the walk finds wrong. objdiff's
-    /// `complete`, the analog of code that is linked into the game.
+    /// public symbol and the data it reaches, and nothing the walk finds
+    /// wrong. Every target symbol outside the samples must be inferred in
+    /// the base. objdiff's `complete`, the analog of code linked into the game.
     complete: bool,
 }
 
@@ -561,7 +562,7 @@ fn slice(args: Slice) -> Result<()> {
                     .iter()
                     .all(|p| walk.objects.contains_key(&p.offset))
                 && coverages[at].unexplained.is_empty()
-        }),
+        }) && inferred.len() == target_rest.len(),
     };
     fs::write(sidecar_path(&args.output), postcard::to_stdvec(&sidecar)?)?;
     Ok(())

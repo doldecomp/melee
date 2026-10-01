@@ -167,6 +167,11 @@ starts with (`Pl/PlMr`, `Gr/GrFs`), under `dat/` in objdiff like the code's
 `compile_commands.json` there gives clangd the same flags as the build;
 clang-tidy is off for `src/`.
 
+A unit is complete in objdiff only when the types explain every public
+symbol and relocation without walk issues, and every symbol in the target's
+`.1.inferred` section is also inferred in the base. Typing a symbol's start
+alone does not make it complete if the rest of its data is unexplained.
+
 Data is named as the archive names it (its public symbols, global in both
 objects). Everything else is `LOCAL` (`static`, kept where nothing points to
 it), named after the field the walk first reached it through, then its
