@@ -306,8 +306,8 @@ impl<'a> Walker<'a> {
         path: &str,
         parent: Option<(DieId, u32)>,
     ) {
-        if self.typedef_tagged(die, &DatTag::NullTerm) {
-            return self.nullterm(offset, die, path);
+        if let Some(value) = self.typedef_terminator(die) {
+            return self.terminated(offset, die, path, &value);
         }
         if let Some(target) = self.typedef_type(die) {
             return self.typed(offset, target, path);
@@ -359,8 +359,8 @@ impl<'a> Walker<'a> {
                         self.script(at, ty, &script, &path);
                     } else if self.is_extent(member) {
                         self.extent(at, ty, &path, &binds, parent);
-                    } else if self.member_tagged(member, &DatTag::NullTerm) {
-                        self.nullterm(at, ty, &path);
+                    } else if let Some(value) = self.terminator(member) {
+                        self.terminated(at, ty, &path, &value);
                     } else if !binds.is_empty()
                         && let Some((element, size, count)) = self.array(ty)
                     {
@@ -415,8 +415,8 @@ impl<'a> Walker<'a> {
                     let path = field(path, member.name.map(|n| graph.str(n)));
                     if let Some(script) = self.script_tag(member) {
                         self.script(offset, ty, &script, &path);
-                    } else if self.member_tagged(member, &DatTag::NullTerm) {
-                        self.nullterm(offset, ty, &path);
+                    } else if let Some(value) = self.terminator(member) {
+                        self.terminated(offset, ty, &path, &value);
                     } else {
                         self.layout(offset, ty, &path, parent);
                     }
@@ -801,6 +801,40 @@ impl<'a> Walker<'a> {
         })
     }
 
+    /// A member's `DAT_TERMINATED` value.
+    fn terminator(&self, member: &Member) -> Option<Expr> {
+        member.annotations.iter().find_map(|a| {
+            match DatTag::parse(self.graph.str(a.value?))? {
+                DatTag::Terminated(value) => Some(value),
+                _ => None,
+            }
+        })
+    }
+
+    /// A `DAT_TERMINATED` value on a typedef, or one it names.
+    fn typedef_terminator(&self, mut die: DieId) -> Option<Expr> {
+        while let Some(ty) = self.graph.types.get(&die) {
+            let TypeKind::Typedef {
+                target: Some(target),
+            } = ty.kind
+            else {
+                return None;
+            };
+            let value =
+                ty.annotations.iter().find_map(|a| {
+                    match DatTag::parse(self.graph.str(a.value?))? {
+                        DatTag::Terminated(value) => Some(value),
+                        _ => None,
+                    }
+                });
+            if value.is_some() {
+                return value;
+            }
+            die = target;
+        }
+        None
+    }
+
     fn script_tag(&self, member: &Member) -> Option<Script> {
         member.annotations.iter().find_map(|a| {
             match DatTag::parse(self.graph.str(a.value?))? {
@@ -936,30 +970,15 @@ impl<'a> Walker<'a> {
 
     /// Whether a typedef on the way from `die` to its underlying type
     /// carries `tag`.
-    fn typedef_tagged(&self, mut die: DieId, tag: &DatTag) -> bool {
-        while let Some(ty) = self.graph.types.get(&die) {
-            let TypeKind::Typedef {
-                target: Some(target),
-            } = ty.kind
-            else {
-                return false;
-            };
-            if ty.annotations.iter().any(|a| {
-                a.value
-                    .and_then(|v| DatTag::parse(self.graph.str(v)))
-                    .as_ref()
-                    == Some(tag)
-            }) {
-                return true;
-            }
-            die = target;
-        }
-        false
-    }
-
-    /// Follow a `DAT_NULLTERM` pointer: elements up to one whose first word
-    /// is zero, which is the terminator.
-    fn nullterm(&mut self, offset: u32, pointer: DieId, path: &str) {
+    /// Follow a `DAT_TERMINATED` pointer: elements up to one whose first
+    /// word is the terminator value, which is walked too.
+    fn terminated(
+        &mut self,
+        offset: u32,
+        pointer: DieId,
+        path: &str,
+        terminator: &Expr,
+    ) {
         let Some(pointer) = self.resolve(Some(pointer)) else {
             return;
         };
@@ -981,7 +1000,7 @@ impl<'a> Walker<'a> {
         ) else {
             return;
         };
-        if size == 0 || !self.visited.insert((value, id)) {
+        if size == 0 {
             return;
         }
         self.walk.objects.entry(value).or_default().insert(id);
@@ -989,6 +1008,14 @@ impl<'a> Walker<'a> {
             .paths
             .entry(value)
             .or_insert_with(|| format!("{path}->"));
+        // Unresolved elsewhere, a list's first element may already have
+        // been reached alone (e.g. a vertex descriptor a shape set points
+        // to): mark elements visited one by one, not the list
+        let Some(terminator) = eval_expr(self.macros, terminator, &|name| {
+            lookup(&self.env, name)
+        }) else {
+            return;
+        };
         let env = self.env.clone();
         for i in 0.. {
             let at = value + (i * size) as u32;
@@ -1000,10 +1027,13 @@ impl<'a> Walker<'a> {
                 break;
             }
             // The terminator is walked too, for its other fields
-            let end = self.word(at) == 0 && !self.relocs.contains(&at);
+            let end = u64::from(self.word(at)) == terminator
+                && !self.relocs.contains(&at);
             // Unresolved, so that typedef tags on the element still apply
             let ty = target.unwrap_or(element);
-            self.layout(at, ty, &format!("{path}->[{i}]"), None);
+            if self.visited.insert((at, id)) {
+                self.layout(at, ty, &format!("{path}->[{i}]"), None);
+            }
             self.env = env.clone();
             if end {
                 break;

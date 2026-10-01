@@ -1,13 +1,14 @@
 //! Samples: one instance of each archive type, as a target object for
 //! objdiff and as C that should compile to the same bytes.
 //!
-//! Archives are too large to diff whole, so each type the walk finds is
-//! sampled once per variant its tagged unions choose. Samples are grouped
-//! into one unit per archive. A sample is the instance's bytes under the
-//! name the archive gives it (a public symbol's name, else `x<OFFSET>`),
-//! with its relocated words pointing to symbols named the same way. The C
-//! side defines the same names with designated initializers, generated from
-//! the types, so objdiff compares data and pointers by name. A type whose
+//! By default each type the walk finds is sampled once per variant its
+//! tagged unions choose; `--all` samples every typed object. Samples are
+//! grouped into one unit per archive. A sample is the instance's bytes under
+//! the name the archive gives it, or else one [`name_of`] makes up from the
+//! walk path (local to the unit), with its relocated words pointing to
+//! symbols named the same way. The C side defines the same names with
+//! designated initializers, generated from the types, so objdiff compares
+//! data and pointers by name. A type whose
 //! sample matches is taken to match in every archive.
 
 use crate::{
@@ -101,6 +102,9 @@ pub struct Skipped {
 pub struct SampleInfo {
     /// Its symbol in the target object.
     pub symbol: String,
+    /// The archive names it: a public symbol, global in both objects. The
+    /// others are local to the unit: `LOCAL` (`static`, kept) in C.
+    pub public: bool,
     /// Where it was in the archive.
     pub offset: u32,
     /// Offset of the archive in its file; nonzero inside packed files.
@@ -139,6 +143,19 @@ pub struct Instance<'a> {
     /// Relocated words, by offset in the sample, with the symbol each
     /// points to.
     pub relocs: BTreeMap<u32, String>,
+}
+
+/// An object's type as C declares it, from [`Picker::describe`].
+pub struct Typed {
+    /// The record's DIE, or the member's for a union object.
+    pub die: DieId,
+    pub type_name: String,
+    pub lookup: String,
+    pub member: Option<String>,
+    pub header: String,
+    pub size: u64,
+    /// The type and the union member, for telling samples apart.
+    pub key: String,
 }
 
 /// A sample's type and variant, and in [`Picker::all`] mode its archive
@@ -194,78 +211,28 @@ impl<'a> Picker<'a> {
             let [id] = types.iter().copied().collect::<Vec<_>>()[..] else {
                 continue;
             };
-            let die = self.canonical.get(id).rep;
-            let ty = &self.graph.types[&die];
-            if !matches!(ty.kind, TypeKind::Record { .. }) {
-                continue;
-            }
-            let mut type_name = self.renderer.declare(Some(die), "");
-            let mut lookup = ty
-                .name
-                .map(|n| self.graph.str(n).to_owned())
-                .unwrap_or_default();
-            let mut decl_file = ty.decl_file;
-            // An anonymous record is named by its typedef, e.g. `Vec2`
-            if ty.name.is_none() {
-                match self.typedef_of(id) {
-                    Some(typedef) => {
-                        let typedef = &self.graph.types[&typedef];
-                        type_name = typedef.name.map_or(type_name, |n| {
-                            self.graph.str(n).to_owned()
-                        });
-                        lookup = type_name.clone();
-                        decl_file = typedef.decl_file;
-                    }
-                    None => {
-                        self.skipped.insert(type_name, "anonymous");
-                        continue;
-                    }
-                }
-            }
-            let Some(header) =
-                decl_file.and_then(|f| header(self.graph.str(f)))
-            else {
-                self.skipped.insert(type_name, "not declared in a header");
-                continue;
-            };
-            // What each tagged union inside chose, by offset and type
-            let mut die = die;
-            let mut key_name = type_name.clone();
-            let mut member_name = None;
-            if let TypeKind::Record {
-                union: true,
-                members,
-                ..
-            } = &ty.kind
-            {
-                // A union object is the member its tag chose: the archive
-                // only holds that member's bytes, and other data follows
-                let member = walk
-                    .choices
-                    .get(&(offset, id))
-                    .and_then(|&i| members.get(i));
-                let Some((member, member_ty)) =
-                    member.and_then(|m| Some((m, m.ty?)))
-                else {
-                    self.skipped
-                        .entry(type_name)
-                        .or_insert("a union no tag chooses a member of");
+            let typed = match self.describe(id, offset, walk) {
+                Ok(typed) => typed,
+                Err(Some((type_name, reason))) => {
+                    self.skipped.entry(type_name).or_insert(reason);
                     continue;
-                };
-                let name = member.name.map_or("?", |n| self.graph.str(n));
-                key_name = format!("{type_name}.{name}");
-                type_name = format!("typeof((({type_name} *) 0)->{name})");
-                member_name = Some(name.to_owned());
-                die = member_ty;
-            }
+                }
+                Err(None) => continue,
+            };
+            let Typed {
+                die,
+                type_name,
+                lookup,
+                member: member_name,
+                header,
+                size,
+                key: key_name,
+            } = typed;
             if self.exclude.is_match(&key_name)
                 || self.exclude.is_match(&lookup)
             {
                 continue;
             }
-            let Some(size) = self.member_size(die) else {
-                continue;
-            };
             let end = offset as u64 + size;
             if size == 0 || end > archive.data.len() as u64 {
                 continue;
@@ -338,11 +305,94 @@ impl<'a> Picker<'a> {
         }
     }
 
+    /// How C declares an object the walk typed as `id`: a record declared
+    /// in a header, or the member a union object's tag chose. `Err` with
+    /// the type and why not, or `None` where it isn't a record.
+    pub fn describe(
+        &self,
+        id: CanonId,
+        offset: u32,
+        walk: &Walk,
+    ) -> Result<Typed, Option<(String, &'static str)>> {
+        let die = self.canonical.get(id).rep;
+        let ty = &self.graph.types[&die];
+        if !matches!(ty.kind, TypeKind::Record { .. }) {
+            return Err(None);
+        }
+        let mut type_name = self.renderer.declare(Some(die), "");
+        let mut lookup = ty
+            .name
+            .map(|n| self.graph.str(n).to_owned())
+            .unwrap_or_default();
+        let mut decl_file = ty.decl_file;
+        // An anonymous record is named by its typedef, e.g. `Vec2`
+        if ty.name.is_none() {
+            let Some(typedef) = self.typedef_of(id) else {
+                return Err(Some((type_name, "anonymous")));
+            };
+            let typedef = &self.graph.types[&typedef];
+            type_name = typedef
+                .name
+                .map_or(type_name, |n| self.graph.str(n).to_owned());
+            lookup = type_name.clone();
+            decl_file = typedef.decl_file;
+        }
+        let Some(header) = decl_file.and_then(|f| header(self.graph.str(f)))
+        else {
+            return Err(Some((type_name, "not declared in a header")));
+        };
+        let mut die = die;
+        let mut key = type_name.clone();
+        let mut member_name = None;
+        if let TypeKind::Record {
+            union: true,
+            members,
+            ..
+        } = &ty.kind
+        {
+            // A union object is the member its tag chose: the archive only
+            // holds that member's bytes, and other data follows
+            let member = walk
+                .choices
+                .get(&(offset, id))
+                .and_then(|&i| members.get(i));
+            let Some((member, member_ty)) =
+                member.and_then(|m| Some((m, m.ty?)))
+            else {
+                return Err(Some((
+                    type_name,
+                    "a union no tag chooses a member of",
+                )));
+            };
+            let name = member.name.map_or("?", |n| self.graph.str(n));
+            key = format!("{type_name}.{name}");
+            type_name = format!("typeof((({type_name} *) 0)->{name})");
+            member_name = Some(name.to_owned());
+            die = member_ty;
+        }
+        let size = self.member_size(die).ok_or(None)?;
+        Ok(Typed {
+            die,
+            type_name,
+            lookup,
+            member: member_name,
+            header,
+            size,
+            key,
+        })
+    }
+
     /// What codegen needs to know about a sample, by name.
-    pub fn info(&self, sample: &Sample, symbol: String) -> SampleInfo {
+    pub fn info(
+        &self,
+        sample: &Sample,
+        symbol: String,
+        public: bool,
+    ) -> SampleInfo {
         let base = sample.location.offset;
         SampleInfo {
             symbol,
+            public,
             offset: sample.location.offset,
             archive: sample.location.archive,
             size: sample.size,
@@ -438,6 +488,89 @@ fn is_identifier(name: &str) -> bool {
         && chars.all(|c| c.is_ascii_alphanumeric() || c == '_')
 }
 
+/// The fields of a walk path, each with the indices after it:
+/// `ftDataMario.x48_items->[4].x8->child->` is `ftDataMario`, `x48_items_4`,
+/// `x8`, `child`. Script offsets (`+0x1C`) are left out.
+fn segments(path: &str) -> Vec<String> {
+    let is_word = |c: char| c.is_ascii_alphanumeric() || c == '_';
+    let mut out: Vec<String> = Vec::new();
+    let mut rest = path;
+    while let Some(c) = rest.chars().next() {
+        let word = rest.find(|c| !is_word(c)).unwrap_or(rest.len());
+        if word > 0 {
+            out.push(rest[..word].to_owned());
+            rest = &rest[word..];
+            continue;
+        }
+        rest = &rest[c.len_utf8()..];
+        match c {
+            '[' => {
+                let end = rest.find(']').unwrap_or(rest.len());
+                let index = &rest[..end];
+                if let Some(last) = out.last_mut()
+                    && !index.is_empty()
+                    && index.chars().all(is_word)
+                {
+                    *last += &format!("_{index}");
+                }
+                rest = rest.get(end + 1..).unwrap_or("");
+            }
+            '+' => rest = &rest[rest.find(|c| !is_word(c)).unwrap_or(rest.len())..],
+            _ => {}
+        }
+    }
+    out
+}
+
+/// Data an archive doesn't name, for [`assign_names`].
+pub struct Unnamed<'r> {
+    /// Offset of its archive in the file.
+    pub archive: usize,
+    pub offset: u32,
+    /// For data the samples point to but that isn't written as C: the root
+    /// it belongs to. Its name is global, so it starts with that root,
+    /// which the archive names.
+    pub elided: Option<&'r str>,
+}
+
+/// A name for data its archive doesn't name: the field the walk first
+/// reached it through, with any indices, then its offset (`child_x1A0`,
+/// `x1C_4_x2818`), or only the offset where no field reaches it. An elided
+/// object's name starts with its root (`ftDataFox_ad_x5F20`). Flat, however
+/// deep the data is, and unique by its offset.
+fn name_of(
+    path: Option<&str>,
+    elided: Option<&str>,
+    archive: usize,
+    offset: u32,
+) -> String {
+    let at = match archive {
+        0 => format!("x{offset:X}"),
+        archive => format!("x{archive:X}_{offset:X}"),
+    };
+    // The root itself isn't a field
+    let segments = path.map(segments).unwrap_or_default();
+    let name = match &segments[..] {
+        [_, .., field] => format!("{field}_{at}"),
+        _ => at,
+    };
+    match elided {
+        Some(root) => format!("{root}_{name}"),
+        None => name,
+    }
+}
+
+/// Names the data its archive doesn't name, with [`name_of`].
+pub fn assign_names(sources: &mut BTreeMap<usize, Source>, wanted: &[Unnamed]) {
+    for u in wanted {
+        if let Some(source) = sources.get_mut(&u.archive) {
+            let path = source.paths.get(&u.offset).map(String::as_str);
+            let name = name_of(path, u.elided, u.archive, u.offset);
+            source.names.insert(u.offset, name);
+        }
+    }
+}
+
 /// One archive's data, as samples read and name it.
 pub struct Source<'a> {
     pub archive: &'a Archive<'a>,
@@ -448,10 +581,21 @@ pub struct Source<'a> {
     externs: BTreeMap<u32, String>,
     /// Public symbols by offset.
     publics: BTreeMap<u32, String>,
+    /// The walk's first path to each object, by offset.
+    paths: BTreeMap<u32, String>,
+    /// Names [`assign_names`] gave the data the archive doesn't name.
+    names: BTreeMap<u32, String>,
 }
 
 impl<'a> Source<'a> {
-    pub fn new(archive: &'a Archive<'a>, archive_offset: usize) -> Self {
+    /// `paths` are the walk's: where each object was first reached from.
+    /// `unit` prefixes the externs' names.
+    pub fn new(
+        archive: &'a Archive<'a>,
+        archive_offset: usize,
+        unit: &str,
+        paths: &BTreeMap<u32, String>,
+    ) -> Self {
         let mut publics = BTreeMap::new();
         for (name, symbol) in archive.named_publics() {
             if let Ok(name) = std::str::from_utf8(name)
@@ -464,15 +608,25 @@ impl<'a> Source<'a> {
             archive,
             archive_offset,
             relocs: archive.relocs.iter().copied().collect(),
+            // Every unit pointing to an extern declares it again, without
+            // a type: prefixed so that the declarations don't collide in an
+            // index of the units' sources
             externs: archive
                 .extern_slots()
                 .into_iter()
                 .map(|(at, name)| {
-                    (at, String::from_utf8_lossy(name).into_owned())
+                    (at, format!("{unit}_{}", String::from_utf8_lossy(name)))
                 })
                 .collect(),
             publics,
+            paths: paths.clone(),
+            names: BTreeMap::new(),
         }
+    }
+
+    /// Whether the archive names the data at `offset`.
+    pub fn is_public(&self, offset: u32) -> bool {
+        self.publics.contains_key(&offset)
     }
 
     /// Extern slots in `offset..offset + size`, with the externs' names.
@@ -484,12 +638,16 @@ impl<'a> Source<'a> {
     }
 
     /// What the data at `offset` is called: its public symbol's name, else
-    /// `x<OFFSET>`, or `x<ARCHIVE>_<OFFSET>` inside a packed file.
+    /// the one [`assign_names`] gave it, else `x<OFFSET>` (`x<ARCHIVE>_<OFFSET>`
+    /// inside a packed file).
     pub fn name(&self, offset: u32) -> String {
-        match (self.publics.get(&offset), self.archive_offset) {
-            (Some(name), _) => name.clone(),
-            (None, 0) => format!("x{offset:X}"),
-            (None, archive) => format!("x{archive:X}_{offset:X}"),
+        if let Some(name) = self.publics.get(&offset).or(self.names.get(&offset))
+        {
+            return name.clone();
+        }
+        match self.archive_offset {
+            0 => format!("x{offset:X}"),
+            archive => format!("x{archive:X}_{offset:X}"),
         }
     }
 
@@ -517,13 +675,16 @@ pub fn target_object(samples: &[(&Sample, &Source)]) -> Result<Vec<u8>> {
         Object::new(BinaryFormat::Elf, Architecture::PowerPc, Endianness::Big);
     let segment = obj.segment_name(StandardSegment::Data).to_vec();
     let data = obj.add_section(segment, b".data".to_vec(), SectionKind::Data);
-    let symbol = |name: String, section, value, size| Symbol {
+    let symbol = |name: String, section, value, size, global| Symbol {
         name: name.into_bytes(),
         value,
         size,
         kind: SymbolKind::Data,
-        // Global, with default visibility
-        scope: SymbolScope::Dynamic,
+        // Global with default visibility, or local
+        scope: match global {
+            true => SymbolScope::Dynamic,
+            false => SymbolScope::Compilation,
+        },
         weak: false,
         section,
         flags: SymbolFlags::None,
@@ -553,6 +714,7 @@ pub fn target_object(samples: &[(&Sample, &Source)]) -> Result<Vec<u8>> {
             SymbolSection::Section(data),
             at,
             sample.size,
+            source.is_public(offset),
         ));
         symbols.insert(name, id);
         placed.push(at);
@@ -569,7 +731,7 @@ pub fn target_object(samples: &[(&Sample, &Source)]) -> Result<Vec<u8>> {
             .map(|(word, name)| (word, name.to_owned()));
         for (word, name) in relocs.chain(externs) {
             let id = *symbols.entry(name.clone()).or_insert_with(|| {
-                obj.add_symbol(symbol(name, SymbolSection::Undefined, 0, 0))
+                obj.add_symbol(symbol(name, SymbolSection::Undefined, 0, 0, true))
             });
             obj.add_relocation(
                 data,
@@ -587,7 +749,8 @@ pub fn target_object(samples: &[(&Sample, &Source)]) -> Result<Vec<u8>> {
     Ok(obj.write()?)
 }
 
-/// Data the samples point to that isn't written as C.
+/// Data the samples point to that isn't written as C: declared, as its type
+/// or as bytes.
 #[derive(serde::Serialize, serde::Deserialize)]
 pub struct Elided {
     /// The root it belongs to: its header declares it.
@@ -595,12 +758,23 @@ pub struct Elided {
     /// Its type's size where the walk typed it, else up to where the next
     /// object, public symbol or pointer target starts.
     pub size: u32,
+    /// Its type where the walk typed it as one record; else it's bytes.
+    pub ty: Option<ElidedType>,
+}
+
+/// An elided object's type, declared like a sample's.
+#[derive(serde::Serialize, serde::Deserialize)]
+pub struct ElidedType {
+    pub type_name: String,
+    pub lookup: String,
+    pub member: Option<String>,
+    pub header: String,
 }
 
 /// A root's samples, the archive externs it declares, and the elided data
 /// it declares.
 type RootParts<'i, 'n> =
-    (Vec<&'i Instance<'i>>, Vec<&'n str>, Vec<(&'n str, u32)>);
+    (Vec<&'i Instance<'i>>, Vec<&'n str>, Vec<(&'n str, &'n Elided)>);
 
 /// A root's generated C, named after it.
 pub struct RootFiles {
@@ -622,8 +796,8 @@ pub struct CWriter<'a> {
     graph: &'a TypeGraph,
     canonical: &'a Canonical,
     renderer: Renderer<'a>,
-    /// The unit's samples' types, by symbol, so pointers to them need no
-    /// cast.
+    /// The types of the unit's samples and typed elided data, by symbol,
+    /// so pointers to them need no cast.
     samples: std::cell::RefCell<BTreeMap<String, CanonId>>,
 }
 
@@ -665,10 +839,20 @@ impl<'a> CWriter<'a> {
             .chain(linked.iter().map(|(&n, &r)| (n, r)))
             .collect();
         let mut samples = BTreeMap::new();
-        for inst in instances {
-            let die = self.resolve(self.die_of(inst.info)?);
+        let typed = instances
+            .iter()
+            .map(|i| {
+                let info = i.info;
+                (&info.symbol, &info.lookup, &info.member)
+            })
+            .chain(elided.iter().filter_map(|(name, e)| {
+                let ty = e.ty.as_ref()?;
+                Some((name, &ty.lookup, &ty.member))
+            }));
+        for (symbol, lookup, member) in typed {
+            let die = self.resolve(self.die_of(symbol, lookup, member)?);
             if let Some(id) = self.canonical.of(die) {
-                samples.insert(inst.info.symbol.clone(), id);
+                samples.insert(symbol.clone(), id);
             }
         }
         *self.samples.borrow_mut() = samples;
@@ -685,7 +869,7 @@ impl<'a> CWriter<'a> {
                 .entry(e.root.as_str())
                 .or_default()
                 .2
-                .push((name.as_str(), e.size));
+                .push((name.as_str(), e));
         }
         for (&name, &root) in &linked {
             roots.entry(root).or_default().1.push(name);
@@ -715,7 +899,7 @@ impl<'a> CWriter<'a> {
         root: &str,
         instances: &[&Instance],
         linked: &[&str],
-        elided: &[(&str, u32)],
+        elided: &[(&str, &Elided)],
     ) -> Result<String> {
         let guard = format!("DAT_{}_H", file_name(root).to_uppercase());
         let mut out = format!(
@@ -728,15 +912,18 @@ impl<'a> CWriter<'a> {
                 " */\n\n",
                 "#ifndef {guard}\n",
                 "#define {guard}\n\n",
+                "#include \"../macros.h\"\n\n",
                 "#include <Runtime/platform.h>\n",
-                "#include <dat_macros.h>\n",
             ),
             root = root,
             archive = archive,
             guard = guard,
         );
-        let headers: BTreeSet<&str> =
-            instances.iter().map(|i| i.info.header.as_str()).collect();
+        let headers: BTreeSet<&str> = instances
+            .iter()
+            .map(|i| i.info.header.as_str())
+            .chain(elided.iter().filter_map(|(_, e)| Some(&*e.ty.as_ref()?.header)))
+            .collect();
         for header in headers {
             writeln!(out, "#include <{header}>")?;
         }
@@ -757,7 +944,8 @@ impl<'a> CWriter<'a> {
             instances
                 .iter()
                 .map(|i| {
-                    format!("extern {} {};", i.info.type_name, i.info.symbol)
+                    let storage = if i.info.public { "extern" } else { "LOCAL" };
+                    format!("{storage} {} {};", i.info.type_name, i.info.symbol)
                 })
                 .collect(),
         )?;
@@ -777,7 +965,10 @@ impl<'a> CWriter<'a> {
             "Data in this archive the samples point to that isn't written as C.",
             elided
                 .iter()
-                .map(|(n, size)| format!("extern DatBlob {n}[{size:#X}];"))
+                .map(|(n, e)| match &e.ty {
+                    Some(ty) => format!("extern {} {n};", ty.type_name),
+                    None => format!("extern DatBlob {n}[{:#X}];", e.size),
+                })
                 .collect(),
         )?;
         writeln!(out, "\n#endif")?;
@@ -803,7 +994,8 @@ impl<'a> CWriter<'a> {
                     referenced.push(name.as_str());
                 }
             }
-            let die = self.die_of(inst.info)?;
+            let info = inst.info;
+            let die = self.die_of(&info.symbol, &info.lookup, &info.member)?;
             let mut init = String::new();
             self.value(&mut init, inst, die, 0, 0)?;
             let info = inst.info;
@@ -820,7 +1012,12 @@ impl<'a> CWriter<'a> {
                 )?;
             }
             defs.push('\n');
-            writeln!(defs, "{} {} = {init};\n", info.type_name, info.symbol)?;
+            let storage = if info.public { "" } else { "LOCAL " };
+            writeln!(
+                defs,
+                "{storage}{} {} = {init};\n",
+                info.type_name, info.symbol
+            )?;
         }
         let mut out = format!(
             "/**\n * @file\n \
@@ -849,10 +1046,15 @@ impl<'a> CWriter<'a> {
 
     /// A sample's type, looked up by name; for a union object, the member
     /// its tag chose.
-    fn die_of(&self, info: &SampleInfo) -> Result<DieId> {
+    fn die_of(
+        &self,
+        symbol: &str,
+        lookup: &str,
+        member: &Option<String>,
+    ) -> Result<DieId> {
         let record = self
             .canonical
-            .lookup(self.graph, &info.lookup)
+            .lookup(self.graph, lookup)
             .into_iter()
             .map(|die| self.resolve(die))
             .find(|die| {
@@ -865,9 +1067,9 @@ impl<'a> CWriter<'a> {
                 )
             });
         let Some(record) = record else {
-            bail!("{}: no type `{}`", info.symbol, info.lookup);
+            bail!("{symbol}: no type `{lookup}`");
         };
-        let Some(member) = &info.member else {
+        let Some(member) = member else {
             return Ok(record);
         };
         let TypeKind::Record { members, .. } = &self.graph.types[&record].kind
@@ -878,7 +1080,7 @@ impl<'a> CWriter<'a> {
             .iter()
             .find(|m| m.name.is_some_and(|n| self.graph.str(n) == member))
             .and_then(|m| m.ty)
-            .with_context(|| format!("{}: no member `{member}`", info.symbol))
+            .with_context(|| format!("{symbol}: no member `{member}`"))
     }
 
     /// Look through typedefs and qualifiers, and from declarations to
@@ -1179,5 +1381,29 @@ mod tests {
         assert!(!is_identifier("1x"));
         assert!(!is_identifier("a-b"));
         assert!(!is_identifier(""));
+    }
+
+    #[test]
+    fn path_segments() {
+        assert_eq!(
+            segments("ftDataMario.x48_items->[4].x8->child->"),
+            ["ftDataMario", "x48_items_4", "x8", "child"]
+        );
+        assert_eq!(segments("a->[1][3]"), ["a_1_3"]);
+        assert_eq!(segments("a.script+0x1C->next->"), ["a", "script", "next"]);
+    }
+
+    #[test]
+    fn names() {
+        let path = Some("ftDataMario.x1C->[4].x8->child->");
+        assert_eq!(name_of(path, None, 0, 0x1A0), "child_x1A0");
+        assert_eq!(
+            name_of(path, Some("ftDataMario"), 0, 0x1A0),
+            "ftDataMario_child_x1A0"
+        );
+        assert_eq!(name_of(Some("itemdata->[3]"), None, 0, 0x10), "x10");
+        assert_eq!(name_of(Some("a.x1C->[4]"), None, 0, 0x10), "x1C_4_x10");
+        assert_eq!(name_of(None, Some("map_head"), 0, 0x10), "map_head_x10");
+        assert_eq!(name_of(path, None, 0x2000, 0x1A0), "child_x2000_1A0");
     }
 }

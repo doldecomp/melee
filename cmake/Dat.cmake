@@ -64,6 +64,9 @@ else()
     )
 endif()
 
+# The generated C isn't the repository's to tidy
+file(WRITE "${CMAKE_CURRENT_BINARY_DIR}/src/.clang-tidy" "Checks: '-*'\n")
+
 # The types, deduplicated once for every step
 add_custom_command(
     OUTPUT types.bin
@@ -86,6 +89,15 @@ $<JOIN:$<FILTER:$<TARGET_PROPERTY:melee,COMPILE_OPTIONS>,EXCLUDE,^-g|^-fdebug-ma
 -fno-zero-initialized-in-bss
 ")
 
+# What the generated C includes, from the tool
+add_custom_command(
+    OUTPUT src/macros.h
+    COMMAND "${_dat_tool}" samples macros -o src/macros.h
+    DEPENDS "${_dat_tool}"
+    COMMENT "Writing src/macros.h"
+    VERBATIM
+)
+
 file(GLOB _dat_archives CONFIGURE_DEPENDS "${MELEE_DAT_FILES}/*.dat")
 set(_dat_sidecars)
 set(_dat_bases)
@@ -95,11 +107,11 @@ foreach(_archive IN LISTS _dat_archives)
     get_filename_component(_unit "${_archive}" NAME_WE)
     set(_target "target/${_unit}.o")
     set(_sidecar "target/${_unit}.samples")
-    set(_types "types/${_unit}.types")
+    set(_types "metadata/${_unit}.types")
     set(_layout "target/${_unit}.ld")
     set(_object "obj/${_unit}.o")
     set(_source "src/${_unit}.c")
-    set(_formatted "stamp/${_unit}.formatted")
+    set(_formatted "metadata/${_unit}.formatted")
     set(_base "base/${_unit}.o")
 
     set(_all)
@@ -163,6 +175,7 @@ foreach(_archive IN LISTS _dat_archives)
         COMMAND "${CMAKE_LINKER}" -r -T "${_layout}" "${_object}"
             -o "${_base}"
         DEPENDS "${_source}" "${_formatted}" "${_layout}" "${_dat_flags}"
+            src/macros.h
         DEPFILE "${_base}.d"
         COMMENT "Compiling ${_source}"
         VERBATIM
