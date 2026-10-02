@@ -175,8 +175,8 @@ struct MasterHandDataStuff ftMh_Init_803D40D0 = {
 
 static inline void doAnim0(HSD_GObj* gobj)
 {
-    /// @todo #GET_FIGHTER
-    Fighter* fp = gobj->user_data;
+    
+    Fighter* fp = GET_FIGHTER(gobj);
     if (fp->motion_id == ftMh_MS_Wait1_0 || fp->motion_id == ftMh_MS_Wait2_0) {
         fp->cur_pos = fp->u.mh.x2240_pos;
     } else {
@@ -194,8 +194,8 @@ static inline void doAnim0(HSD_GObj* gobj)
 
 static inline void doAnim1(HSD_GObj* gobj)
 {
-    /// @todo #GET_FIGHTER
-    Fighter* fp = gobj->user_data;
+    
+    Fighter* fp = GET_FIGHTER(gobj);
     if (fp->u.mh.x2258 == ftMh_MS_Wait2_1) {
         ftMh_MS_341_8014FF1C(gobj);
     } else {

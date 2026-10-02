@@ -318,9 +318,10 @@ void ftSk_SpecialAirNEnd_Phys(Fighter_GObj* gobj)
 
 void ftSk_SpecialNStart_Coll(Fighter_GObj* gobj)
 {
-    /// @todo Named flags.
-    static u32 const mf = (1 << 7) | (1 << 12) | (1 << 14) | (1 << 18) |
-                          (1 << 19) | (1 << 22) | (1 << 26) | (1 << 27);
+    static u32 const mf =
+        Ft_MF_SkipMatAnim | Ft_MF_SkipColAnim | Ft_MF_UpdateCmd |
+        Ft_MF_SkipItemVis | Ft_MF_Unk19 | Ft_MF_SkipModelPartVis |
+        Ft_MF_SkipModelFlags | Ft_MF_Unk27;
     Fighter* fp = GET_FIGHTER(gobj);
     if (ft_80082708(gobj) == GA_Ground) {
         ftCommon_GroundToAirStateChange(gobj, fp, ftSk_MS_SpecialAirNStart,
@@ -334,9 +335,10 @@ void ftSk_SpecialNStart_Coll(Fighter_GObj* gobj)
 
 void ftSk_SpecialNLoop_Coll(Fighter_GObj* gobj)
 {
-    /// @todo Named flags.
-    static u32 const mf = (1 << 7) | (1 << 12) | (1 << 14) | (1 << 18) |
-                          (1 << 19) | (1 << 22) | (1 << 26) | (1 << 27);
+    static u32 const mf =
+        Ft_MF_SkipMatAnim | Ft_MF_SkipColAnim | Ft_MF_UpdateCmd |
+        Ft_MF_SkipItemVis | Ft_MF_Unk19 | Ft_MF_SkipModelPartVis |
+        Ft_MF_SkipModelFlags | Ft_MF_Unk27;
     Fighter* fp = GET_FIGHTER(gobj);
     if (ft_80082708(gobj) == GA_Ground) {
         ftCommon_GroundToAirStateChange(gobj, fp, ftSk_MS_SpecialAirNLoop, mf);
@@ -378,9 +380,10 @@ void ftSk_SpecialNEnd_Coll(Fighter_GObj* gobj)
 
 static inline void doColl(Fighter_GObj* gobj, ftSeak_MotionState msid)
 {
-    /// @todo Named flags.
-    static u32 const mf = (1 << 7) | (1 << 12) | (1 << 14) | (1 << 18) |
-                          (1 << 19) | (1 << 22) | (1 << 26) | (1 << 27);
+    static u32 const mf =
+        Ft_MF_SkipMatAnim | Ft_MF_SkipColAnim | Ft_MF_UpdateCmd |
+        Ft_MF_SkipItemVis | Ft_MF_Unk19 | Ft_MF_SkipModelPartVis |
+        Ft_MF_SkipModelFlags | Ft_MF_Unk27;
     Fighter* fp = GET_FIGHTER(gobj);
     if (ft_80081D0C(gobj) != GA_Ground) {
         ftCommon_AirToGroundStateChange(gobj, fp, msid, mf);

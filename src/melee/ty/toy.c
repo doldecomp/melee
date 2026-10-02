@@ -1280,7 +1280,7 @@ s32 Toy_80305B88(void)
     PAD_STACK(8);
 
     for (i = 0; i < 4; i++) {
-        if ((button = HSD_PadCopyStatus[(u8) i].trigger)) {
+        if ((button = HSD_PadCopyStatus[i].trigger)) {
             gm_801677E8(i);
             break;
         }
@@ -1295,7 +1295,7 @@ s32 Toy_80305C44(void)
     PAD_STACK(4);
 
     for (i = 0; i < 4; i++) {
-        if ((button = HSD_PadCopyStatus[(u8) i].button)) {
+        if ((button = HSD_PadCopyStatus[i].button)) {
             gm_801677E8(i);
             break;
         }
@@ -1310,7 +1310,7 @@ float Toy_80305D00(void)
     int i;
 
     for (i = 0; i < 4; i++) {
-        val = HSD_PadCopyStatus[(u8) i].nml_stickX;
+        val = HSD_PadCopyStatus[i].nml_stickX;
         ret = val;
         if (val < 0.0F) {
             val = -val;
@@ -3144,7 +3144,7 @@ static inline void _Toy_ReadTrigger(u32* out)
     int i;
 
     for (i = 0; i < 4; i++) {
-        if ((*out = HSD_PadCopyStatus[(u8) i].trigger)) {
+        if ((*out = HSD_PadCopyStatus[i].trigger)) {
             gm_801677E8(i);
             break;
         }
@@ -3213,7 +3213,7 @@ void _Toy_80309404(HSD_GObj* gobj)
         s32 i;
 
         for (i = 0; i < 4; i++) {
-            val = HSD_PadCopyStatus[(u8) i].nml_stickX;
+            val = HSD_PadCopyStatus[i].nml_stickX;
             if (val < 0.0F) {
                 abs = -val;
             } else {
@@ -3932,7 +3932,7 @@ void _Toy_8030B530(HSD_GObj* arg0)
             s32 i;
 
             for (i = 0; i < 4; i++) {
-                if ((stick_x = HSD_PadCopyStatus[(u8) i].nml_stickX) < 0.0F) {
+                if ((stick_x = HSD_PadCopyStatus[i].nml_stickX) < 0.0F) {
                     abs = -stick_x;
                 } else {
                     abs = stick_x;
@@ -4573,7 +4573,7 @@ void _Toy_8030E110(HSD_GObj* arg0)
         s32 i;
 
         for (i = 0; i < 4; i++) {
-            val = HSD_PadCopyStatus[(u8) i].nml_stickX;
+            val = HSD_PadCopyStatus[i].nml_stickX;
             if (val < 0.0F) {
                 abs = -val;
             } else {
@@ -5823,7 +5823,7 @@ void _Toy_80310B48(HSD_GObj* gobj)
     editor = _Toy_sbss_804D6E5C;
 
     for (i = 0; i < 4; i++) {
-        if ((stickX = HSD_PadCopyStatus[(u8) i].nml_stickX) < 0.0F) {
+        if ((stickX = HSD_PadCopyStatus[i].nml_stickX) < 0.0F) {
             absVal = -stickX;
         } else {
             absVal = stickX;
@@ -5834,7 +5834,7 @@ void _Toy_80310B48(HSD_GObj* gobj)
     }
 
     for (i = 0; i < 4; i++) {
-        if ((stickY = HSD_PadCopyStatus[(u8) i].nml_stickY) < 0.0F) {
+        if ((stickY = HSD_PadCopyStatus[i].nml_stickY) < 0.0F) {
             absVal = -stickY;
         } else {
             absVal = stickY;
