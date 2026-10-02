@@ -14,11 +14,19 @@
 /* 1C6228 */ static void grDatFiles_801C6228(UnkStageDat*);
 /* 1C62B4 */ static UnkArchiveStruct* grDatFiles_801C62B4(void);
 
-/// @todo Merge declaration and definition
-/* static */ extern GroundParam grDatFiles_803E0848;
+static StageParam grDatFiles_803E07E4 = {
+    0, -1, -1, 0, 0, 0, 0, 0, { 0 },
+};
 
-/// @todo Merge declaration and definition
-/* static */ extern UnkStageDat grDatFiles_803E0924;
+GroundParam grDatFiles_803E0848 = {
+    1,  0x80, { 0 }, 0x1E, 0,  1,     0x8000, 10,
+    0,  0,    1,     1,    1,  { 0 }, 40,     10,
+    50, 100,  10,    10,   10, 10,    false,  0,
+    0,  0,    30,    10,   0,  0,     { 0 },  &grDatFiles_803E07E4,
+    1,
+};
+
+UnkStageDat grDatFiles_803E0924 = { 0 };
 
 void grDatFiles_801C5FC0(HSD_Archive* archive, void* data, size_t length)
 {
@@ -167,16 +175,3 @@ UnkArchiveStruct* grDatFiles_801C6478(void* data, s32 length)
     return arc;
 }
 
-static StageParam grDatFiles_803E07E4 = {
-    0, -1, -1, 0, 0, 0, 0, 0, { 0 },
-};
-
-GroundParam grDatFiles_803E0848 = {
-    1,  0x80, { 0 }, 0x1E, 0,  1,     0x8000, 10,
-    0,  0,    1,     1,    1,  { 0 }, 40,     10,
-    50, 100,  10,    10,   10, 10,    false,  0,
-    0,  0,    30,    10,   0,  0,     { 0 },  &grDatFiles_803E07E4,
-    1,
-};
-
-UnkStageDat grDatFiles_803E0924 = { 0 };

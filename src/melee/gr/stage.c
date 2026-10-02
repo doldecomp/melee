@@ -224,8 +224,7 @@ void Stage_80224E64(enum_t arg0, Vec3* arg_vec)
     Vec3 internal_vec;
 
     if (arg0 == -1) {
-        /// @todo Needs to be #HSD_ASSERT. Also remove fake zero-byte padding.
-        __assert("stage.c", 360, "no!=St_Player_InitPos_None\0\0\0\0");
+        HSD_ASSERTMSG(360, arg0 != -1, "no!=St_Player_InitPos_None");
     }
 
     if (arg0 == 4) {
