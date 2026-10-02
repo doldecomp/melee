@@ -882,12 +882,12 @@ void mpPruneEmptyLines(MapCollData* coll_data)
 
 void mpLibLoad(MapCollData* coll_data)
 {
-    float f0;
-    float f1;
-    float f2;
-    float f31;
-    CollJoint* joint_prev; // r27
-    CollJoint* joint;      // r26
+    float raw;
+    float y;
+    float x;
+    float scale;
+    CollJoint* joint_prev;
+    CollJoint* joint;
     int floor_start;
     int floor_count;
     int ceiling_start;
@@ -913,7 +913,7 @@ void mpLibLoad(MapCollData* coll_data)
     if (coll_data == NULL) {
         coll_data = &mpLib_803BF760;
     }
-    f31 = Ground_801C0498();
+    scale = Ground_801C0498();
     mpLib_80458868[0].right = F32_MAX;
     mpLib_80458868[0].top = F32_MAX;
     mpLib_80458868[0].left = -F32_MAX;
@@ -922,10 +922,10 @@ void mpLibLoad(MapCollData* coll_data)
         joint = &groundCollJoint[i];
         joint->inner = &coll_data->joints[i];
         joint->flags = CollJoint_Enabled;
-        joint->bounding_min.x = f31 * coll_data->joints[i].left_bound;
-        joint->bounding_min.y = f31 * coll_data->joints[i].bottom_bound;
-        joint->bounding_max.x = f31 * coll_data->joints[i].right_bound;
-        joint->bounding_max.y = f31 * coll_data->joints[i].top_bound;
+        joint->bounding_min.x = scale * coll_data->joints[i].left_bound;
+        joint->bounding_min.y = scale * coll_data->joints[i].bottom_bound;
+        joint->bounding_max.x = scale * coll_data->joints[i].right_bound;
+        joint->bounding_max.y = scale * coll_data->joints[i].top_bound;
         joint->x20 = NULL;
         joint->cb_data_0 = NULL;
         joint->cb_0 = NULL;
@@ -992,27 +992,27 @@ void mpLibLoad(MapCollData* coll_data)
 
     i = 0;
     while (i < coll_data->vert_count) {
-        f0 = coll_data->verts[i].x;
-        f2 = f31 * f0;
-        groundCollVtx[i].x0 = f0;
-        groundCollVtx[i].pos.x = f2;
-        groundCollVtx[i].x10 = f2;
-        f0 = coll_data->verts[i].y;
-        f1 = f31 * f0;
-        groundCollVtx[i].x4 = f0;
-        groundCollVtx[i].pos.y = f1;
-        groundCollVtx[i].x14 = f1;
-        if (mpLib_80458868[0].top < f1) {
-            mpLib_80458868[0].top = f1;
+        raw = coll_data->verts[i].x;
+        x = scale * raw;
+        groundCollVtx[i].x0 = raw;
+        groundCollVtx[i].pos.x = x;
+        groundCollVtx[i].x10 = x;
+        raw = coll_data->verts[i].y;
+        y = scale * raw;
+        groundCollVtx[i].x4 = raw;
+        groundCollVtx[i].pos.y = y;
+        groundCollVtx[i].x14 = y;
+        if (mpLib_80458868[0].top < y) {
+            mpLib_80458868[0].top = y;
         }
-        if (mpLib_80458868[0].bottom > f1) {
-            mpLib_80458868[0].bottom = f1;
+        if (mpLib_80458868[0].bottom > y) {
+            mpLib_80458868[0].bottom = y;
         }
-        if (mpLib_80458868[0].right < f2) {
-            mpLib_80458868[0].right = f2;
+        if (mpLib_80458868[0].right < x) {
+            mpLib_80458868[0].right = x;
         }
-        if (mpLib_80458868[0].left > f2) {
-            mpLib_80458868[0].left = f2;
+        if (mpLib_80458868[0].left > x) {
+            mpLib_80458868[0].left = x;
         }
         i++;
     }
@@ -1075,16 +1075,16 @@ static void mpRemap2d(float* x_out, float* y_out, float ax0, float ay0,
     double dx;
     double dy;
     double dist2;
-    float f30;
-    float f29;
+    float apx;
+    float apy;
     dx = ax1 - ax0;
     dy = ay1 - ay0;
-    f30 = px - ax0;
-    f29 = py - ay0;
+    apx = px - ax0;
+    apy = py - ay0;
     dist2 = (dy * dy) + (dx * dx);
     if (ABS(dist2) > 0.0001) {
         // how far along line a is point p
-        double t = (dy * f29 + dx * f30) / dist2;
+        double t = (dy * apy + dx * apx) / dist2;
         if (t > 1.0) {
             t = 1.0;
         } else if (t < 0.0) {
@@ -1575,23 +1575,23 @@ void mpLib_8004ED5C(int line_id, float* x0_out, float* y0_out, float* x1_out,
 
     int i0;
     int i1;
-    float x0_f0;
+    float x0;
     float y0;
     float x1;
     float y1;
     float distance;
 
     i0 = line->x0->v0_idx;
-    x0_f0 = groundCollVtx[i0].pos.x;
+    x0 = groundCollVtx[i0].pos.x;
     y0 = groundCollVtx[i0].pos.y;
     i1 = line->x0->v1_idx;
     x1 = groundCollVtx[i1].pos.x;
     y1 = groundCollVtx[i1].pos.y;
 
     if (mpLineGetPrev(line_id) != -1) {
-        distance = sqrtf(SQ(x0_f0 - x1) + SQ(y0 - y1));
+        distance = sqrtf(SQ(x0 - x1) + SQ(y0 - y1));
         if (distance > 0.001F) {
-            x0_f0 += (x0_f0 - x1) / distance;
+            x0 += (x0 - x1) / distance;
             y0 += (y0 - y1) / distance;
         }
         calculated_distance = true;
@@ -1599,15 +1599,15 @@ void mpLib_8004ED5C(int line_id, float* x0_out, float* y0_out, float* x1_out,
 
     if (mpLineGetNext(line_id) != -1) {
         if (!calculated_distance) {
-            distance = sqrtf(SQ(x0_f0 - x1) + SQ(y0 - y1));
+            distance = sqrtf(SQ(x0 - x1) + SQ(y0 - y1));
         }
         if (distance > 0.001F) {
-            x1 += (x1 - x0_f0) / distance;
+            x1 += (x1 - x0) / distance;
             y1 += (y1 - y0) / distance;
         }
     }
 
-    *x0_out = x0_f0;
+    *x0_out = x0;
     *y0_out = y0;
     *x1_out = x1;
     *y1_out = y1;
@@ -1620,7 +1620,7 @@ bool mpCheckFloor(float ax, float ay, float bx, float by, float y_offset,
                   Fighter_GObj* gobj)
 {
     float min_dist2;
-    CollJoint* joint; // r29
+    CollJoint* joint;
     int i;
     bool result;
     bool already_checked;
@@ -1637,7 +1637,7 @@ bool mpCheckFloor(float ax, float ay, float bx, float by, float y_offset,
         CollLine* line;
         int count;
         int dynamic_count;
-        MapJoint* j_inner; // r4
+        MapJoint* j_inner;
         if (joint->flags & CollJoint_TooFar) {
             continue;
         }
@@ -1937,7 +1937,7 @@ bool mpCheckCeiling(float ax, float ay, float bx, float by, Vec3* vec_out,
                     int joint_id_skip, int joint_id_only)
 {
     float min_dist2 = F32_MAX;
-    CollJoint* joint; // r29
+    CollJoint* joint;
     int i;
     bool result = false;
     bool already_checked;
@@ -3444,15 +3444,15 @@ bool mpCheckMultiple(float x0, float y0, float x1, float y1, Vec3* pos_out,
     float min_dist2;
     bool already_checked;
 
-    int line_id; // r30
-    u32 flags;   // r29
+    int line_id;
+    u32 flags;
 
-    Vec3 temp_pos;    // sp68
-    Vec3 temp_normal; // sp5C
-    Vec3 pos;         // sp50
-    Vec3 normal;      // sp44
-    int temp_line_id; // sp40
-    u32 temp_flags;   // sp3C
+    Vec3 temp_pos;
+    Vec3 temp_normal;
+    Vec3 pos;
+    Vec3 normal;
+    int temp_line_id;
+    u32 temp_flags;
 
     min_dist2 = F32_MAX;
     already_checked = mpCheckedBounding();
@@ -4645,29 +4645,29 @@ bool mpLinesConnected(int start_id, int target_id)
 void mpLib_800552B0(int joint_id, HSD_JObj* jobj, int z)
 {
     s32 i;
-    HSD_JObj* r7;
+    HSD_JObj* cur;
 
-    for (r7 = HSD_JObjGetChild(jobj), i = 0; r7 != NULL && i != z; i++) {
-        if (!(r7->flags & CollJoint_TooFar)) {
-            if (HSD_JObjGetChild(r7) != NULL) {
-                r7 = HSD_JObjGetChild(r7);
+    for (cur = HSD_JObjGetChild(jobj), i = 0; cur != NULL && i != z; i++) {
+        if (!(cur->flags & CollJoint_TooFar)) {
+            if (HSD_JObjGetChild(cur) != NULL) {
+                cur = HSD_JObjGetChild(cur);
                 continue;
             }
         }
 
-        if (HSD_JObjGetNext(r7) != NULL) {
-            r7 = HSD_JObjGetNext(r7);
+        if (HSD_JObjGetNext(cur) != NULL) {
+            cur = HSD_JObjGetNext(cur);
             continue;
         }
 
         while (true) {
-            if (HSD_JObjGetParent(r7) == NULL) {
-                r7 = NULL;
+            if (HSD_JObjGetParent(cur) == NULL) {
+                cur = NULL;
             } else {
-                if (HSD_JObjGetNext(HSD_JObjGetParent(r7)) != NULL) {
-                    r7 = HSD_JObjGetNext(HSD_JObjGetParent(r7));
+                if (HSD_JObjGetNext(HSD_JObjGetParent(cur)) != NULL) {
+                    cur = HSD_JObjGetNext(HSD_JObjGetParent(cur));
                 } else {
-                    r7 = HSD_JObjGetParent(r7);
+                    cur = HSD_JObjGetParent(cur);
                     continue;
                 }
             }
@@ -4675,9 +4675,9 @@ void mpLib_800552B0(int joint_id, HSD_JObj* jobj, int z)
         }
     }
 
-    if (r7 != NULL) {
+    if (cur != NULL) {
         CollJoint* joint = &groundCollJoint[joint_id];
-        joint->x20 = r7;
+        joint->x20 = cur;
     }
 }
 
@@ -4850,12 +4850,12 @@ void mpLib_80055E24(int joint_id)
 
 void mpLib_80055E9C(int joint_id)
 {
-    float f31;
-    float f30;
-    float f0;
-    float f1;
-    float f2;
-    float f3;
+    float corner_y;
+    float corner_x;
+    float hi;
+    float lo;
+    float corner2_x;
+    float corner2_y;
     u8 _[4];
     float m0_3;
     float m1_3;
@@ -4863,22 +4863,22 @@ void mpLib_80055E9C(int joint_id)
     CollJoint* joint;
     HSD_JObj* jobj;
     int vtx_count;
-    CollVtx* v_r26;
-    int var_r25;
-    CollVtx* v_r4;
-    bool var_r6;
+    CollVtx* vtx;
+    int unchanged;
+    CollVtx* v;
+    bool enabled;
     MtxPtr mtx;
     int i;
-    Vec3 sp28;
+    Vec3 pt;
     PAD_STACK(0x14);
 
     mpColl_804D64AC += 1;
     joint = &groundCollJoint[joint_id];
     vtx_count = joint->inner->vtx_count;
-    v_r4 = &groundCollVtx[joint->inner->vtx_start];
-    for (i = 0; i < vtx_count; i++, v_r4++) {
-        v_r4->x10 = v_r4->pos.x;
-        v_r4->x14 = v_r4->pos.y;
+    v = &groundCollVtx[joint->inner->vtx_start];
+    for (i = 0; i < vtx_count; i++, v++) {
+        v->x10 = v->pos.x;
+        v->x14 = v->pos.y;
     }
     jobj = joint->x20;
     if (jobj == NULL) {
@@ -4888,30 +4888,30 @@ void mpLib_80055E9C(int joint_id)
     if (HSD_JObjGetFlags(jobj) & JOBJ_HIDDEN) {
         if (!(joint->flags & CollJoint_Hidden)) {
             mpJointHide(joint_id);
-            var_r6 = false;
+            enabled = false;
             if (!(joint->flags & (CollJoint_Hidden | CollJoint_B11)) &&
                 joint->flags & CollJoint_Enabled)
             {
-                var_r6 = true;
+                enabled = true;
             }
             mpIsland_8005B334(joint_id, joint->inner->vtx_start,
-                              joint->inner->vtx_count, var_r6);
+                              joint->inner->vtx_count, enabled);
         }
         return;
     }
 
     joint->xE = true;
-    var_r25 = 0;
+    unchanged = 0;
     HSD_JObjSetupMatrix(jobj);
     mtx = HSD_JObjGetMtxPtr(jobj);
     m0_0 = ((volatile float*) mtx)[0];
     if (m0_0 == mtx[1][1] && m0_0 == mtx[2][2]) {
         m0_3 = mtx[0][3];
         m1_3 = mtx[1][3];
-        v_r4 = &groundCollVtx[joint->inner->vtx_start];
-        for (i = 0; i < vtx_count; i++, v_r4++) {
-            v_r4->pos.x = v_r4->x0 * m0_0 + m0_3;
-            v_r4->pos.y = v_r4->x4 * m0_0 + m1_3;
+        v = &groundCollVtx[joint->inner->vtx_start];
+        for (i = 0; i < vtx_count; i++, v++) {
+            v->pos.x = v->x0 * m0_0 + m0_3;
+            v->pos.y = v->x4 * m0_0 + m1_3;
         }
         joint->bounding_min.x =
             (joint->inner->left_bound * m0_0 + m0_3) - 30.0F;
@@ -4926,99 +4926,98 @@ void mpLib_80055E9C(int joint_id)
     }
 
     i = 0;
-    v_r26 = &groundCollVtx[joint->inner->vtx_start];
-    f31 = 0.0F;
+    vtx = &groundCollVtx[joint->inner->vtx_start];
+    corner_y = 0.0F;
 
     while (i < vtx_count) {
-        sp28.x = v_r26->x0;
-        sp28.y = v_r26->x4;
-        sp28.z = f31;
-        PSMTXMultVec(jobj->mtx, &sp28, &sp28);
-        v_r26->pos.x = sp28.x;
-        v_r26->pos.y = sp28.y;
-        if (mpLib_804D64CC == 0 || v_r26->pos.x != v_r26->x10 ||
-            v_r26->pos.y != v_r26->x14 || (++var_r25 <= 1))
+        pt.x = vtx->x0;
+        pt.y = vtx->x4;
+        pt.z = corner_y;
+        PSMTXMultVec(jobj->mtx, &pt, &pt);
+        vtx->pos.x = pt.x;
+        vtx->pos.y = pt.y;
+        if (mpLib_804D64CC == 0 || vtx->pos.x != vtx->x10 ||
+            vtx->pos.y != vtx->x14 || (++unchanged <= 1))
         {
             i += 1;
-            v_r26 += 1;
+            vtx += 1;
         } else {
             goto after1;
         }
     }
     {
         mtx = HSD_JObjGetMtxPtr(jobj);
-        f1 = 0.0F;
-        if (f1 != mtx[0][1] || f1 != mtx[0][2] || f1 != mtx[1][0] ||
-            f1 != mtx[1][2] || f1 != mtx[2][0] || f1 != mtx[2][1])
+        if (mtx[0][1] != 0.0F || mtx[0][2] != 0.0F || mtx[1][0] != 0.0F ||
+            mtx[1][2] != 0.0F || mtx[2][0] != 0.0F || mtx[2][1] != 0.0F)
         {
             joint->flags |= CollJoint_B9;
         }
         joint->flags |= CollJoint_B8;
         if (!(joint->flags & CollJoint_B10)) {
-            sp28.x = joint->inner->left_bound;
-            sp28.y = joint->inner->bottom_bound;
-            sp28.z = 0.0F;
-            PSMTXMultVec(jobj->mtx, &sp28, &sp28);
-            joint->bounding_min.x = sp28.x;
-            joint->bounding_min.y = sp28.y;
-            sp28.x = joint->inner->right_bound;
-            sp28.y = joint->inner->top_bound;
-            sp28.z = 0.0F;
-            PSMTXMultVec(jobj->mtx, &sp28, &sp28);
-            joint->bounding_max.x = sp28.x;
-            joint->bounding_max.y = sp28.y;
+            pt.x = joint->inner->left_bound;
+            pt.y = joint->inner->bottom_bound;
+            pt.z = 0.0F;
+            PSMTXMultVec(jobj->mtx, &pt, &pt);
+            joint->bounding_min.x = pt.x;
+            joint->bounding_min.y = pt.y;
+            pt.x = joint->inner->right_bound;
+            pt.y = joint->inner->top_bound;
+            pt.z = 0.0F;
+            PSMTXMultVec(jobj->mtx, &pt, &pt);
+            joint->bounding_max.x = pt.x;
+            joint->bounding_max.y = pt.y;
             if (joint->flags & CollJoint_B9) {
-                sp28.x = joint->inner->right_bound;
-                sp28.y = joint->inner->bottom_bound;
-                sp28.z = 0.0F;
-                PSMTXMultVec(jobj->mtx, &sp28, &sp28);
-                f30 = sp28.x;
-                f31 = sp28.y;
-                sp28.x = joint->inner->left_bound;
-                sp28.y = joint->inner->top_bound;
-                sp28.z = 0.0F;
-                PSMTXMultVec(jobj->mtx, &sp28, &sp28);
-                f1 = joint->bounding_min.x;
-                f0 = joint->bounding_max.x;
-                f2 = sp28.x;
-                f3 = sp28.y;
-                if (f1 > f0) {
-                    joint->bounding_min.x = f0;
+                pt.x = joint->inner->right_bound;
+                pt.y = joint->inner->bottom_bound;
+                pt.z = 0.0F;
+                PSMTXMultVec(jobj->mtx, &pt, &pt);
+                corner_x = pt.x;
+                corner_y = pt.y;
+                pt.x = joint->inner->left_bound;
+                pt.y = joint->inner->top_bound;
+                pt.z = 0.0F;
+                PSMTXMultVec(jobj->mtx, &pt, &pt);
+                lo = joint->bounding_min.x;
+                hi = joint->bounding_max.x;
+                corner2_x = pt.x;
+                corner2_y = pt.y;
+                if (lo > hi) {
+                    joint->bounding_min.x = hi;
                 }
-                if (joint->bounding_min.x > f30) {
-                    joint->bounding_min.x = f30;
+                if (joint->bounding_min.x > corner_x) {
+                    joint->bounding_min.x = corner_x;
                 }
-                if (joint->bounding_min.x > f2) {
-                    joint->bounding_min.x = f2;
+                if (joint->bounding_min.x > corner2_x) {
+                    joint->bounding_min.x = corner2_x;
                 }
-                if (joint->bounding_max.x < f1) {
-                    joint->bounding_max.x = f1;
+                if (joint->bounding_max.x < lo) {
+                    joint->bounding_max.x = lo;
                 }
-                if (joint->bounding_max.x < f30) {
-                    joint->bounding_max.x = f30;
+                if (joint->bounding_max.x < corner_x) {
+                    joint->bounding_max.x = corner_x;
                 }
-                if (joint->bounding_max.x < f2) {
-                    joint->bounding_max.x = f2;
+                if (joint->bounding_max.x < corner2_x) {
+                    joint->bounding_max.x = corner2_x;
                 }
-                f1 = joint->bounding_min.y;
-                f0 = joint->bounding_max.y;
-                if (f1 > f0) {
-                    joint->bounding_min.y = f0;
+                lo = joint->bounding_min.y;
+                hi = joint->bounding_max.y;
+                if (lo > hi) {
+                    joint->bounding_min.y = hi;
                 }
-                if (joint->bounding_min.y > f31) {
-                    joint->bounding_min.y = f31;
+                if (joint->bounding_min.y > corner_y) {
+                    joint->bounding_min.y = corner_y;
                 }
-                if (joint->bounding_min.y > f3) {
-                    joint->bounding_min.y = f3;
+                if (joint->bounding_min.y > corner2_y) {
+                    joint->bounding_min.y = corner2_y;
                 }
-                if (joint->bounding_max.y < f1) {
-                    joint->bounding_max.y = f1;
+                if (joint->bounding_max.y < lo) {
+                    joint->bounding_max.y = lo;
                 }
-                if (joint->bounding_max.y < f31) {
-                    joint->bounding_max.y = f31;
+                if (joint->bounding_max.y < corner_y) {
+                    joint->bounding_max.y = corner_y;
                 }
-                if (joint->bounding_max.y < f3) {
-                    joint->bounding_max.y = f3;
+                if (joint->bounding_max.y < corner2_y) {
+                    joint->bounding_max.y = corner2_y;
                 }
             }
             joint->bounding_min.x -= 30.0F;
@@ -5035,14 +5034,14 @@ after1:
     if (joint->flags & CollJoint_Hidden) {
         mpJointUnhide(joint_id);
     }
-    var_r6 = false;
+    enabled = false;
     if (!(joint->flags & (CollJoint_Hidden | CollJoint_B11)) &&
         joint->flags & CollJoint_Enabled)
     {
-        var_r6 = true;
+        enabled = true;
     }
     mpIsland_8005B334(joint_id, joint->inner->vtx_start,
-                      joint->inner->vtx_count, var_r6);
+                      joint->inner->vtx_count, enabled);
 }
 
 void mpJointUpdateBounding(int joint_id)
@@ -5238,17 +5237,18 @@ int mpJointFromLine(int line_id)
 }
 
 bool mpLib_80056C54(int line_id, Vec3* pos, int* line_id_out, Vec3* vec_out,
-                    u32* flags_out, Vec3* normal_out, f32 var_f25, f32 arg7)
+                    u32* flags_out, Vec3* normal_out, f32 distance,
+                    f32 wall_limit)
 {
     u8 _padA[8];
-    float sp64;
-    Vec3 sp58;
-    Vec3 sp4C;
+    float y;
+    Vec3 cur_pos;
+    Vec3 vtx_pos;
     float sqrt_tmp[2];
     float dist;
     float total_dist;
-    float x_f2;
-    float y_f0;
+    float dx2;
+    float dy2;
     int result;
     int new_id;
     u32 flags;
@@ -5258,21 +5258,21 @@ bool mpLib_80056C54(int line_id, Vec3* pos, int* line_id_out, Vec3* vec_out,
         return false;
     }
 
-    if (mpLib_8004DD90_Floor(line_id, pos, &sp64, NULL, NULL) == -1) {
+    if (mpLib_8004DD90_Floor(line_id, pos, &y, NULL, NULL) == -1) {
         return false;
     }
-    sp58 = *pos;
-    sp58.y += sp64;
-    if (var_f25 > 0.0F) {
+    cur_pos = *pos;
+    cur_pos.y += y;
+    if (distance > 0.0F) {
         while (true) {
-            mpLineGetV1Pos(line_id, &sp4C);
-            x_f2 = SQ(sp58.x - sp4C.x);
-            y_f0 = SQ(sp58.y - sp4C.y);
-            dist = sqrtf_store(x_f2 + y_f0, sqrt_tmp - 4);
+            mpLineGetV1Pos(line_id, &vtx_pos);
+            dx2 = SQ(cur_pos.x - vtx_pos.x);
+            dy2 = SQ(cur_pos.y - vtx_pos.y);
+            dist = sqrtf_store(dx2 + dy2, sqrt_tmp - 4);
             flags = mpLineGetKind(line_id);
             if (flags & 0xC) {
                 total_dist += dist;
-                if (total_dist > arg7) {
+                if (total_dist > wall_limit) {
                     result = false;
                 } else {
                     goto block_30;
@@ -5282,14 +5282,14 @@ bool mpLib_80056C54(int line_id, Vec3* pos, int* line_id_out, Vec3* vec_out,
             } else {
                 total_dist = 0.0F;
             block_30:
-                if (!(dist > var_f25)) {
+                if (!(dist > distance)) {
                     new_id = mpLineGetNext(line_id);
                     if (new_id == -1) {
                         result = false;
                     } else {
-                        var_f25 -= dist;
+                        distance -= dist;
                         line_id = new_id;
-                        sp58 = sp4C;
+                        cur_pos = vtx_pos;
                         continue;
                     }
                 }
@@ -5298,16 +5298,16 @@ bool mpLib_80056C54(int line_id, Vec3* pos, int* line_id_out, Vec3* vec_out,
             break;
         }
     } else {
-        var_f25 = -var_f25;
+        distance = -distance;
         while (true) {
-            mpLineGetV0Pos(line_id, &sp4C);
-            x_f2 = SQ(sp58.x - sp4C.x);
-            y_f0 = SQ(sp58.y - sp4C.y);
-            dist = sqrtf_store(x_f2 + y_f0, sqrt_tmp - 5);
+            mpLineGetV0Pos(line_id, &vtx_pos);
+            dx2 = SQ(cur_pos.x - vtx_pos.x);
+            dy2 = SQ(cur_pos.y - vtx_pos.y);
+            dist = sqrtf_store(dx2 + dy2, sqrt_tmp - 5);
             flags = mpLineGetKind(line_id);
             if (flags & 0xC) {
                 total_dist += dist;
-                if (total_dist > arg7) {
+                if (total_dist > wall_limit) {
                     result = false;
                 } else {
                     goto block_55;
@@ -5317,14 +5317,14 @@ bool mpLib_80056C54(int line_id, Vec3* pos, int* line_id_out, Vec3* vec_out,
             } else {
                 total_dist = 0.0F;
             block_55:
-                if (!(dist > var_f25)) {
+                if (!(dist > distance)) {
                     new_id = mpLineGetPrev(line_id);
                     if (new_id == -1) {
                         result = false;
                     } else {
-                        var_f25 -= dist;
+                        distance -= dist;
                         line_id = new_id;
-                        sp58 = sp4C;
+                        cur_pos = vtx_pos;
                         continue;
                     }
                 }
@@ -5351,15 +5351,15 @@ bool mpLib_80056C54(int line_id, Vec3* pos, int* line_id_out, Vec3* vec_out,
     if (vec_out != NULL) {
         if (result) {
             if (dist < 0.0001) {
-                *vec_out = sp58;
+                *vec_out = cur_pos;
             } else {
-                float temp_f2_5 = var_f25 / dist;
-                vec_out->x = (temp_f2_5 * (sp4C.x - sp58.x)) + sp58.x;
-                vec_out->y = (temp_f2_5 * (sp4C.y - sp58.y)) + sp58.y;
-                vec_out->z = (temp_f2_5 * (sp4C.z - sp58.z)) + sp58.z;
+                float t = distance / dist;
+                vec_out->x = (t * (vtx_pos.x - cur_pos.x)) + cur_pos.x;
+                vec_out->y = (t * (vtx_pos.y - cur_pos.y)) + cur_pos.y;
+                vec_out->z = (t * (vtx_pos.z - cur_pos.z)) + cur_pos.z;
             }
         } else {
-            *vec_out = sp4C;
+            *vec_out = vtx_pos;
         }
     }
     return result;
@@ -5679,9 +5679,9 @@ void mpLib_800581DC(int joint_id0, int joint_id1)
     j1 = &groundCollJoint[joint_id1];
     line_base = groundCollLine;
     for (i = 0; i < MapLineGroup_Count; i++) {
-        struct MapLineRange* pair; /* r4 */
-        int count;                 /* r0 */
-        int temp;                  /* r0 */
+        struct MapLineRange* pair;
+        int count;
+        int temp;
         {
             int j;
             int idx;
@@ -5736,70 +5736,65 @@ void mpLib_800581DC(int joint_id0, int joint_id1)
 
     // for every pair of verts
     for (vi = 0; vi < vcount0; vi++, vstart0++) {
-        CollVtx* v0_r29;
-        int v;       /* r28 */
-        int vcount1; /* r27 */
-        int vid;     /* r26 */
-        v0_r29 = &groundCollVtx[vstart0];
+        CollVtx* vtx0;
+        int v;
+        int vcount1;
+        int vid;
+        vtx0 = &groundCollVtx[vstart0];
         vcount1 = j1->inner->vtx_count;
         vid = j1->inner->vtx_start;
         for (v = 0; v < vcount1; v++, vid++) {
-            int var_r25;
+            int group;
             CollVtx* v1 = &groundCollVtx[vid];
 
             // ensure they are nearby
-            if (!(ABS(v0_r29->pos.x - v1->pos.x) < 2.0) ||
-                !(ABS(v0_r29->pos.y - v1->pos.y) < 2.0))
+            if (!(ABS(vtx0->pos.x - v1->pos.x) < 2.0) ||
+                !(ABS(vtx0->pos.y - v1->pos.y) < 2.0))
             {
                 continue;
             }
 
             // find every line with the first vert
-            for (var_r25 = 0; var_r25 < MapLineGroup_Count; var_r25++) {
-                int lstart_r24;
-                int i_r23;
-                int lcount_r22;
-                lcount_r22 = j0->inner->ranges[var_r25].count;
-                (void)
-                    line_base[lstart_r24 = j0->inner->ranges[var_r25].start];
-                for (i_r23 = 0; i_r23 < lcount_r22; i_r23++, lstart_r24++) {
-                    if (vstart0 == line_base[lstart_r24].x0->v0_idx) {
+            for (group = 0; group < MapLineGroup_Count; group++) {
+                int line0;
+                int n;
+                int count0;
+                count0 = j0->inner->ranges[group].count;
+                (void) line_base[line0 = j0->inner->ranges[group].start];
+                for (n = 0; n < count0; n++, line0++) {
+                    if (vstart0 == line_base[line0].x0->v0_idx) {
                         int j;
-                        int lstart_r20;
-                        s16 lcount_r17;
+                        int line1;
+                        s16 count1;
                         // if the first vert is that line's v0
                         // find every line with the second vert as v1
                         for (j = 0; j < MapLineGroup_Count; j++) {
                             int k;
-                            lcount_r17 = j1->inner->ranges[j].count;
-                            (void) line_base[lstart_r20 =
-                                                 j1->inner->ranges[j].start];
-                            for (k = 0; k < lcount_r17; k++, lstart_r20++) {
-                                if (vid == line_base[lstart_r20].x0->v1_idx) {
-                                    line_base[lstart_r24].x0->prev_id1 =
-                                        lstart_r20;
-                                    line_base[lstart_r20].x0->next_id1 =
-                                        lstart_r24;
+                            count1 = j1->inner->ranges[j].count;
+                            (void)
+                                line_base[line1 = j1->inner->ranges[j].start];
+                            for (k = 0; k < count1; k++, line1++) {
+                                if (vid == line_base[line1].x0->v1_idx) {
+                                    line_base[line0].x0->prev_id1 = line1;
+                                    line_base[line1].x0->next_id1 = line0;
                                 }
                             }
                         }
-                    } else if (vstart0 == line_base[lstart_r24].x0->v1_idx) {
+                    } else if (vstart0 == line_base[line0].x0->v1_idx) {
                         int j;
-                        int lstart_r20;
-                        s16 lcount_r17;
+                        int line1;
+                        s16 count1;
                         // else if the first vert is that line's v1
                         // find every line with the second vert as v0
                         for (j = 0; j < MapLineGroup_Count; j++) {
                             int k;
-                            lcount_r17 = j1->inner->ranges[j].count;
-                            (void) line_base[lstart_r20 =
-                                                 j1->inner->ranges[j].start];
-                            for (k = 0; k < lcount_r17; k++, lstart_r20++) {
-                                if (vid == line_base[lstart_r20].x0->v0_idx) {
-                                    line_base[lstart_r24].x0->next_id1 =
-                                        lstart_r20;
-                                    line_base[lstart_r20].x0->prev_id1 =
-                                        lstart_r24;
+                            count1 = j1->inner->ranges[j].count;
+                            (void)
+                                line_base[line1 = j1->inner->ranges[j].start];
+                            for (k = 0; k < count1; k++, line1++) {
+                                if (vid == line_base[line1].x0->v0_idx) {
+                                    line_base[line0].x0->next_id1 = line1;
+                                    line_base[line1].x0->prev_id1 = line0;
                                 }
                             }
                         }
@@ -5835,16 +5830,15 @@ void mpLib_80058560(void)
 
 void mpLib_80058614_Floor(void)
 {
-    // CollLine* var_r31;
     CollJoint* jp;
-    int count_r8;
-    int count_r5;
+    int joint_count;
+    int idx;
     int i;
     int j;
     CollLine* linebase;
     CollLine* line;
-    int count_r30;
-    int count_r29;
+    int count;
+    int dynamic_count;
     MapJoint* j_inner;
     CollVtx* v0;
     CollVtx* v1;
@@ -5856,14 +5850,14 @@ void mpLib_80058614_Floor(void)
     PAD_STACK(8);
 
     jp = (joint = groundCollJoint);
-    count_r8 = mpLib_804D64B4->joint_count;
-    for (count_r5 = 0; count_r5 < count_r8; count_r5++, jp++) {
+    joint_count = mpLib_804D64B4->joint_count;
+    for (idx = 0; idx < joint_count; idx++, jp++) {
         if (jp->xE) {
             break;
         }
     }
 
-    if (count_r5 == count_r8) {
+    if (idx == joint_count) {
         return;
     }
 
@@ -5872,7 +5866,7 @@ void mpLib_80058614_Floor(void)
     *(left_p = &mpLib_80458868[1].left) = F32_MAX;
     *(bottom_p = &mpLib_80458868[1].bottom) = F32_MAX;
 
-    for (i = 0; i < count_r8; i++, joint++) {
+    for (i = 0; i < joint_count; i++, joint++) {
         joint->xE = false;
         if (!(joint->flags & CollJoint_Enabled) ||
             joint->flags & CollJoint_Hidden)
@@ -5882,14 +5876,14 @@ void mpLib_80058614_Floor(void)
 
         {
             j_inner = joint->inner;
-            count_r29 = j_inner->ranges[MapLineGroup_Dynamic].count;
+            dynamic_count = j_inner->ranges[MapLineGroup_Dynamic].count;
             (void)
-                groundCollVtx[count_r30 =
+                groundCollVtx[count =
                                   j_inner->ranges[MapLineGroup_Floor].count];
             linebase = groundCollLine;
             line = &linebase[j_inner->ranges[MapLineGroup_Floor].start];
 
-            for (j = 0; j < count_r30; j++, line++) {
+            for (j = 0; j < count; j++, line++) {
                 float x0;
                 float y0;
                 float x1;
@@ -5934,10 +5928,10 @@ void mpLib_80058614_Floor(void)
                     *left_p = x1;
                 }
             }
-            if (count_r29 != 0) {
-                count_r30 = count_r29;
+            if (dynamic_count != 0) {
+                count = dynamic_count;
                 j = 0;
-                count_r29 = 0;
+                dynamic_count = 0;
                 line = &linebase[joint->inner->ranges[MapLineGroup_Dynamic]
                                      .start];
                 goto block_8;
@@ -6123,16 +6117,16 @@ void mpLib_SetupDraw(GXColor color)
 
 void mpLib_DrawEcbs(CollData* cd)
 {
-    GXColor spE0 = { 0xFF, 0xA0, 0x30, 0xFF };
-    GXColor spDC = { 0x80, 0x50, 0x18, 0xFF };
-    GXColor spD8 = { 0xFF, 0x5A, 0x20, 0xFF };
-    GXColor spD4 = { 0x80, 0x2D, 0x10, 0xFF };
-    GXColor spD0 = { 0x20, 0x20, 0xFF, 0xFF };
-    GXColor spCC = { 0x10, 0x10, 0x80, 0xFF };
-    GXColor spC8 = { 0xFF, 0xFF, 0xFF, 0x80 };
-    GXColor spC4 = { 0xFF, 0xFF, 0xFF, 0x80 };
+    GXColor cur_ecb_color = { 0xFF, 0xA0, 0x30, 0xFF };
+    GXColor cur_cross_color = { 0x80, 0x50, 0x18, 0xFF };
+    GXColor prev_ecb_color = { 0xFF, 0x5A, 0x20, 0xFF };
+    GXColor prev_cross_color = { 0x80, 0x2D, 0x10, 0xFF };
+    GXColor last_ecb_color = { 0x20, 0x20, 0xFF, 0xFF };
+    GXColor last_cross_color = { 0x10, 0x10, 0x80, 0xFF };
+    GXColor x28_ecb_color = { 0xFF, 0xFF, 0xFF, 0x80 };
+    GXColor x28_cross_color = { 0xFF, 0xFF, 0xFF, 0x80 };
 
-    mpLib_SetupDraw(spE0);
+    mpLib_SetupDraw(cur_ecb_color);
     GXBegin(GX_QUADS, GX_VTXFMT0, 4);
 
     GXPosition3f32(cd->cur_pos.x + cd->ecb.top.x,
@@ -6146,7 +6140,7 @@ void mpLib_DrawEcbs(CollData* cd)
 
     GXEnd();
 
-    mpLib_SetupDraw(spDC);
+    mpLib_SetupDraw(cur_cross_color);
     GXBegin(GX_LINES, GX_VTXFMT0, 4);
 
     GXPosition3f32(cd->cur_pos.x - 1.0F, cd->cur_pos.y, cd->cur_pos.z);
@@ -6156,7 +6150,7 @@ void mpLib_DrawEcbs(CollData* cd)
 
     GXEnd();
 
-    mpLib_SetupDraw(spD8);
+    mpLib_SetupDraw(prev_ecb_color);
     GXBegin(GX_QUADS, GX_VTXFMT0, 4);
 
     GXPosition3f32(cd->prev_pos.x + cd->prev_ecb.top.x,
@@ -6173,7 +6167,7 @@ void mpLib_DrawEcbs(CollData* cd)
 
     GXEnd();
 
-    mpLib_SetupDraw(spD4);
+    mpLib_SetupDraw(prev_cross_color);
     GXBegin(GX_LINES, GX_VTXFMT0, 4);
 
     GXPosition3f32(cd->prev_pos.x - 1.0F, cd->prev_pos.y,
@@ -6187,7 +6181,7 @@ void mpLib_DrawEcbs(CollData* cd)
 
     GXEnd();
 
-    mpLib_SetupDraw(spD0);
+    mpLib_SetupDraw(last_ecb_color);
     GXBegin(GX_QUADS, GX_VTXFMT0, 4);
 
     GXPosition3f32(cd->last_pos.x + cd->xE4_ecb.top.x,
@@ -6203,7 +6197,7 @@ void mpLib_DrawEcbs(CollData* cd)
 
     GXEnd();
 
-    mpLib_SetupDraw(spCC);
+    mpLib_SetupDraw(last_cross_color);
     GXBegin(GX_LINES, GX_VTXFMT0, 4);
 
     GXPosition3f32(cd->last_pos.x - 1.0F, cd->last_pos.y,
@@ -6217,7 +6211,7 @@ void mpLib_DrawEcbs(CollData* cd)
 
     GXEnd();
 
-    mpLib_SetupDraw(spC8);
+    mpLib_SetupDraw(x28_ecb_color);
     GXBegin(GX_LINESTRIP, GX_VTXFMT0, 5);
     if (cd->x34_flags.b6) {
         GXPosition3f32(cd->x28_vec.x + cd->x64_ecb.top.x,
@@ -6249,7 +6243,7 @@ void mpLib_DrawEcbs(CollData* cd)
     }
     GXEnd();
 
-    mpLib_SetupDraw(spC4);
+    mpLib_SetupDraw(x28_cross_color);
     GXBegin(GX_LINES, GX_VTXFMT0, 4U);
 
     GXPosition3f32(cd->x28_vec.x - 1.0F, cd->x28_vec.y, 0.5 + cd->x28_vec.z);
@@ -6274,21 +6268,21 @@ void mpLib_DrawSnapping(void)
     GXColor right_snap_color = mpLib_804D80E4;
     HSD_GObj* item;
     HSD_GObj* ft;
-    bool var_r31;
+    bool set_up;
 
-    var_r31 = false;
+    set_up = false;
     ft = HSD_GObjPLinkHead[HSD_GOBJ_PLINK_FIGHTER];
     if (ft != NULL) {
-        Mtx spDC;
+        Mtx mtx;
         PAD_STACK(0x30);
         HSD_StateSetCullMode(0);
         GXClearVtxDesc();
         GXSetVtxDesc(GX_VA_POS, GX_DIRECT);
         GXSetVtxAttrFmt(GX_VTXFMT0, GX_VA_POS, GX_TEX_ST, GX_RGBA6, 0U);
-        HSD_CObjGetViewingMtx(HSD_CObjGetCurrent(), spDC);
+        HSD_CObjGetViewingMtx(HSD_CObjGetCurrent(), mtx);
         GXSetCurrentMtx(0U);
-        GXLoadPosMtxImm(spDC, 0);
-        var_r31 = true;
+        GXLoadPosMtxImm(mtx, 0);
+        set_up = true;
         for (; ft != NULL; ft = ft->next) {
             CollData* cd = ftLib_GetCollData(ft);
 
@@ -6301,22 +6295,24 @@ void mpLib_DrawSnapping(void)
             if (cd->ledge_snap_x != 0.0 || cd->ledge_snap_y != 0.0) {
                 float inner_x = cd->cur_pos.x + cd->ecb.right.x;
                 float pos_y = cd->cur_pos.y;
-                float f30 = 0.5F * cd->ledge_snap_height;
+                float half_height = 0.5F * cd->ledge_snap_height;
 
                 mpLib_SetupDraw(right_snap_color);
                 GXBegin(GX_LINESTRIP, GX_VTXFMT0, 5);
                 GXPosition3f32(inner_x + cd->ledge_snap_x,
-                               f30 + (pos_y + cd->ledge_snap_y),
+                               half_height + (pos_y + cd->ledge_snap_y),
                                cd->cur_pos.z);
                 GXPosition3f32(inner_x + cd->ledge_snap_x,
-                               (pos_y + cd->ledge_snap_y) - f30,
+                               (pos_y + cd->ledge_snap_y) - half_height,
                                cd->cur_pos.z);
-                GXPosition3f32(cd->cur_pos.x, (pos_y + cd->ledge_snap_y) - f30,
+                GXPosition3f32(cd->cur_pos.x,
+                               (pos_y + cd->ledge_snap_y) - half_height,
                                cd->cur_pos.z);
-                GXPosition3f32(cd->cur_pos.x, f30 + (pos_y + cd->ledge_snap_y),
+                GXPosition3f32(cd->cur_pos.x,
+                               half_height + (pos_y + cd->ledge_snap_y),
                                cd->cur_pos.z);
                 GXPosition3f32(inner_x + cd->ledge_snap_x,
-                               f30 + (pos_y + cd->ledge_snap_y),
+                               half_height + (pos_y + cd->ledge_snap_y),
                                cd->cur_pos.z);
                 GXEnd();
 
@@ -6326,17 +6322,19 @@ void mpLib_DrawSnapping(void)
                 GXBegin(GX_LINESTRIP, GX_VTXFMT0, 5);
 
                 GXPosition3f32(inner_x - cd->ledge_snap_x,
-                               f30 + (pos_y + cd->ledge_snap_y),
+                               half_height + (pos_y + cd->ledge_snap_y),
                                cd->cur_pos.z);
                 GXPosition3f32(inner_x - cd->ledge_snap_x,
-                               (pos_y + cd->ledge_snap_y) - f30,
+                               (pos_y + cd->ledge_snap_y) - half_height,
                                cd->cur_pos.z);
-                GXPosition3f32(cd->cur_pos.x, (pos_y + cd->ledge_snap_y) - f30,
+                GXPosition3f32(cd->cur_pos.x,
+                               (pos_y + cd->ledge_snap_y) - half_height,
                                cd->cur_pos.z);
-                GXPosition3f32(cd->cur_pos.x, f30 + (pos_y + cd->ledge_snap_y),
+                GXPosition3f32(cd->cur_pos.x,
+                               half_height + (pos_y + cd->ledge_snap_y),
                                cd->cur_pos.z);
                 GXPosition3f32(inner_x - cd->ledge_snap_x,
-                               f30 + (pos_y + cd->ledge_snap_y),
+                               half_height + (pos_y + cd->ledge_snap_y),
                                cd->cur_pos.z);
 
                 GXEnd();
@@ -6345,16 +6343,16 @@ void mpLib_DrawSnapping(void)
     }
 
     if ((item = HSD_GObjPLinkHead[HSD_GOBJ_PLINK_ITEM]) != NULL) {
-        if (!var_r31) {
-            Mtx sp7C;
+        if (!set_up) {
+            Mtx view_mtx;
             PAD_STACK(0x34);
             GXSetCullMode(GX_CULL_NONE);
             GXClearVtxDesc();
             GXSetVtxDesc(GX_VA_POS, GX_DIRECT);
             GXSetVtxAttrFmt(GX_VTXFMT0, GX_VA_POS, GX_TEX_ST, GX_RGBA6, 0);
-            HSD_CObjGetViewingMtx(HSD_CObjGetCurrent(), sp7C);
+            HSD_CObjGetViewingMtx(HSD_CObjGetCurrent(), view_mtx);
             GXSetCurrentMtx(0);
-            GXLoadPosMtxImm(sp7C, 0);
+            GXLoadPosMtxImm(view_mtx, 0);
         }
 
         for (; item != NULL; item = item->next) {
@@ -6384,53 +6382,49 @@ void mpLib_DrawSnapping(void)
 static UNINITIALIZED(int)
     mpLib_DrawMatchingLines(int value, int flag, const GXColor* color)
 {
-    CollLine* line_r31;
+    CollLine* line;
     int count;
     int total;
-    CollLine* line_r6;
+    CollLine* scan;
     int i;
 
     count = 0;
     total = mpLib_804D64B4->line_count;
-    line_r6 = groundCollLine;
+    scan = groundCollLine;
     for (i = 0; i < total; i++) {
-        if (line_r6->flags & LINE_FLAG_ENABLED &&
-            !(line_r6->flags & LINE_FLAG_HIDDEN) &&
-            value == (line_r6->x0->lo_flags & flag))
+        if (scan->flags & LINE_FLAG_ENABLED &&
+            !(scan->flags & LINE_FLAG_HIDDEN) &&
+            value == (scan->x0->lo_flags & flag))
         {
             count += 1;
         }
-        line_r6 += 1;
+        scan += 1;
     }
 
     if (count == 0) {
         return;
     }
 
-    line_r31 = groundCollLine;
+    line = groundCollLine;
     mpLib_SetupDraw(*color);
     GXBegin(GX_QUADS, GX_VTXFMT0, count * 4);
     for (i = 0; i < total; i++) {
-        if (line_r31->flags & LINE_FLAG_ENABLED &&
-            !(line_r31->flags & LINE_FLAG_HIDDEN))
+        if (line->flags & LINE_FLAG_ENABLED &&
+            !(line->flags & LINE_FLAG_HIDDEN))
         {
-            if (value == (line_r31->x0->lo_flags & flag)) {
+            if (value == (line->x0->lo_flags & flag)) {
                 PAD_STACK(8);
-                GXPosition3f32(groundCollVtx[line_r31->x0->v0_idx].pos.x,
-                               groundCollVtx[line_r31->x0->v0_idx].pos.y,
-                               25.0F);
-                GXPosition3f32(groundCollVtx[line_r31->x0->v1_idx].pos.x,
-                               groundCollVtx[line_r31->x0->v1_idx].pos.y,
-                               25.0F);
-                GXPosition3f32(groundCollVtx[line_r31->x0->v1_idx].pos.x,
-                               groundCollVtx[line_r31->x0->v1_idx].pos.y,
-                               -25.0F);
-                GXPosition3f32(groundCollVtx[line_r31->x0->v0_idx].pos.x,
-                               groundCollVtx[line_r31->x0->v0_idx].pos.y,
-                               -25.0F);
+                GXPosition3f32(groundCollVtx[line->x0->v0_idx].pos.x,
+                               groundCollVtx[line->x0->v0_idx].pos.y, 25.0F);
+                GXPosition3f32(groundCollVtx[line->x0->v1_idx].pos.x,
+                               groundCollVtx[line->x0->v1_idx].pos.y, 25.0F);
+                GXPosition3f32(groundCollVtx[line->x0->v1_idx].pos.x,
+                               groundCollVtx[line->x0->v1_idx].pos.y, -25.0F);
+                GXPosition3f32(groundCollVtx[line->x0->v0_idx].pos.x,
+                               groundCollVtx[line->x0->v0_idx].pos.y, -25.0F);
             }
         }
-        line_r31 += 1;
+        line += 1;
     }
     GXEnd();
 }
@@ -6825,9 +6819,9 @@ void mpLib_80059E60(void)
     }
 }
 
-void mpLib_DrawCrosses(s16* idx, int len, GXColor arg2)
+void mpLib_DrawCrosses(s16* idx, int len, GXColor color)
 {
-    Vec3 sp34;
+    Vec3 pos;
     int i;
     Vec3* vtx;
     int idx_i;
@@ -6837,8 +6831,8 @@ void mpLib_DrawCrosses(s16* idx, int len, GXColor arg2)
          idx_i < len && out_count < (signed) ARRAY_SIZE(mpLib_80458888);
          idx_i++)
     {
-        if (Ground_801C2D24(idx[idx_i], &sp34)) {
-            mpLib_80458888[out_count] = sp34;
+        if (Ground_801C2D24(idx[idx_i], &pos)) {
+            mpLib_80458888[out_count] = pos;
             out_count += 1;
         }
     }
@@ -6847,7 +6841,7 @@ void mpLib_DrawCrosses(s16* idx, int len, GXColor arg2)
         return;
     }
 
-    mpLib_SetupDraw(arg2);
+    mpLib_SetupDraw(color);
     GXBegin(GX_LINES, GX_VTXFMT0, out_count * 6);
     for (i = 0; i < out_count; i++) {
         GXPosition3f32(mpLib_80458888[i].x - 3.0F, mpLib_80458888[i].y,
@@ -6964,13 +6958,13 @@ static const GXColor mpLib_804D8150[2] = {
 void mpLib_DrawZones(void)
 {
     u8 _3[0x4];
-    Mtx sp7C;
+    Mtx mtx;
     u8 _2[0x38];
-    GXColor sp40;
+    GXColor blast_zone_color;
     u8 _5[0x8];
-    GXColor sp34;
-    GXColor sp20;
-    CmSubject* var_r30;
+    GXColor cam_bounds_color;
+    GXColor cam_bounds_color_copy;
+    CmSubject* subject;
 
     f32 left;
     f32 right;
@@ -6982,16 +6976,16 @@ void mpLib_DrawZones(void)
     GXClearVtxDesc();
     GXSetVtxDesc(GX_VA_POS, GX_DIRECT);
     GXSetVtxAttrFmt(GX_VTXFMT0, GX_VA_POS, GX_TEX_ST, GX_RGBA6, 0);
-    HSD_CObjGetViewingMtx(HSD_CObjGetCurrent(), sp7C);
+    HSD_CObjGetViewingMtx(HSD_CObjGetCurrent(), mtx);
     GXSetCurrentMtx(0);
-    GXLoadPosMtxImm(sp7C, 0);
+    GXLoadPosMtxImm(mtx, 0);
 
     left = Stage_GetBlastZoneLeftOffset();
     right = Stage_GetBlastZoneRightOffset();
     bottom = Stage_GetBlastZoneBottomOffset();
     top = Stage_GetBlastZoneTopOffset();
 
-    sp40 = mpLib_804D8144;
+    blast_zone_color = mpLib_804D8144;
     mpLib_SetupDraw(mpLib_804D8140);
     GXSetZMode(1, GX_LEQUAL, 0);
     GXSetLineWidth(0x10, GX_TO_ZERO);
@@ -7006,7 +7000,7 @@ void mpLib_DrawZones(void)
 
     GXEnd();
 
-    mpLib_SetupDraw(sp40);
+    mpLib_SetupDraw(blast_zone_color);
     GXSetZMode(1, GX_GREATER, 0);
     GXSetLineWidth(0x10, GX_TO_ZERO);
 
@@ -7025,14 +7019,14 @@ void mpLib_DrawZones(void)
     bottom = Stage_GetCamBoundsBottomOffset();
     top = Stage_GetCamBoundsTopOffset();
 
-    sp34 = mpLib_804D814C;
+    cam_bounds_color = mpLib_804D814C;
     mpLib_SetupDraw(mpLib_804D8148);
 
     GXSetZMode(1, GX_LEQUAL, 0);
     GXSetLineWidth(0x10, GX_TO_ZERO);
     GXBegin(GX_LINESTRIP, GX_VTXFMT0, 5);
 
-    sp20 = sp34;
+    cam_bounds_color_copy = cam_bounds_color;
 
     GXPosition3f32(left, bottom, 0.0F);
     GXPosition3f32(right, bottom, 0.0F);
@@ -7042,7 +7036,7 @@ void mpLib_DrawZones(void)
 
     GXEnd();
 
-    mpLib_SetupDraw(sp20);
+    mpLib_SetupDraw(cam_bounds_color_copy);
 
     GXSetZMode(1, GX_GREATER, 0);
     GXSetLineWidth(0x10, GX_TO_ZERO);
@@ -7061,25 +7055,25 @@ void mpLib_DrawZones(void)
     GXSetZMode(0, GX_LEQUAL, 0);
     GXSetLineWidth(0x10, GX_TO_ZERO);
 
-    var_r30 = cm_804D6468;
-    while (var_r30 != NULL) {
-        if (Camera_8002928C(var_r30)) {
+    subject = cm_804D6468;
+    while (subject != NULL) {
+        if (Camera_8002928C(subject)) {
             GXBegin(GX_LINESTRIP, GX_VTXFMT0, 5);
 
-            GXPosition3f32(var_r30->pos.x + var_r30->ext.h.x,
-                           var_r30->pos.y + var_r30->ext.v.x, 0.0F);
-            GXPosition3f32(var_r30->pos.x + var_r30->ext.h.y,
-                           var_r30->pos.y + var_r30->ext.v.x, 0.0F);
-            GXPosition3f32(var_r30->pos.x + var_r30->ext.h.y,
-                           var_r30->pos.y + var_r30->ext.v.y, 0.0F);
-            GXPosition3f32(var_r30->pos.x + var_r30->ext.h.x,
-                           var_r30->pos.y + var_r30->ext.v.y, 0.0F);
-            GXPosition3f32(var_r30->pos.x + var_r30->ext.h.x,
-                           var_r30->pos.y + var_r30->ext.v.x, 0.0F);
+            GXPosition3f32(subject->pos.x + subject->ext.h.x,
+                           subject->pos.y + subject->ext.v.x, 0.0F);
+            GXPosition3f32(subject->pos.x + subject->ext.h.y,
+                           subject->pos.y + subject->ext.v.x, 0.0F);
+            GXPosition3f32(subject->pos.x + subject->ext.h.y,
+                           subject->pos.y + subject->ext.v.y, 0.0F);
+            GXPosition3f32(subject->pos.x + subject->ext.h.x,
+                           subject->pos.y + subject->ext.v.y, 0.0F);
+            GXPosition3f32(subject->pos.x + subject->ext.h.x,
+                           subject->pos.y + subject->ext.v.x, 0.0F);
 
             GXEnd();
         }
-        var_r30 = var_r30->prev;
+        subject = subject->prev;
     }
     HSD_StateInvalidate(-1);
 }
