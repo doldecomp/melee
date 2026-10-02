@@ -93,7 +93,7 @@ struct EF_QueuedEffect {
 typedef struct EF_DAT_Entry {
     /* 0x0 */ char* ef_DAT_file;       // ex. "EfCoData.dat"
     /* 0x4 */ char* effDataTable_name; // ex. "effCommonDataTable"
-    /* 0x8 */ void* data;              // loaded data pointer
+    /* 0x8 */ EF_EffectDesc* data;     // loaded data table's effects
 } EF_DAT_Entry;                        /* size = 0xC */
 ASSERT_SIZE(EF_DAT_Entry, 0xC);
 
