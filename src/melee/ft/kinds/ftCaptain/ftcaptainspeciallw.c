@@ -1,3 +1,12 @@
+/**
+ * @file ftcaptainspeciallw.c
+ * @brief Down Special - Falcon Kick (Captain Falcon) / Wizard's Foot
+ * (Ganondorf)
+ * @details Implements grounded and aerial states for Falcon Kick / Wizard's
+ * Foot, including on-hit slowdown drag, foot flame particles, ground slide
+ * recovery, aerial landing lag, ledge slip-off, and wall bonk rebound
+ * mechanics. Module prefix: ftCa
+ */
 
 #include "ftcaptainspeciallw.h"
 
@@ -27,6 +36,11 @@
 /// /* literal */ float const ftCa_SpecialHi_804D9228 = 1;
 /// /* literal */ float const ftCa_SpecialHi_804D922C = -1;
 
+/**
+ * @brief Helper to test and clear the throw_flags_b1 hit trigger flag.
+ * @param fp Pointer to Fighter data
+ * @return True if flag was set, false otherwise
+ */
 static inline bool ftCa_Special_Inline_Check_Flag(Fighter* fp)
 {
     if (fp->x2210.x0.throw_flags_b1) {
@@ -37,6 +51,10 @@ static inline bool ftCa_Special_Inline_Check_Flag(Fighter* fp)
     }
 }
 
+/**
+ * @brief Zeroes command script variables cmd_vars[0..2].
+ * @param gobj Pointer to Fighter GObj
+ */
 static inline void ftCa_Special_Inline_SetFlags(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -45,32 +63,40 @@ static inline void ftCa_Special_Inline_SetFlags(HSD_GObj* gobj)
     fp->cmd_vars[0] = 0;
 }
 
+/**
+ * @brief Spawns foot flame particle effect during Falcon Kick.
+ * @details Spawns on right foot (FtPart_RFootJA) at 0 deg for grounded kick
+ * (0x165), or left foot (FtPart_LFootJA) angled at
+ * speciallw_flame_particle_angle for aerial kick (0x167). Effect ID: 0x490
+ * (Falcon flame) or 0x50C (Ganon dark energy).
+ * @param gobj Pointer to Fighter GObj
+ */
 void ftCa_SpecialHi_800E3EAC(HSD_GObj* gobj)
 {
-    f32 sp1C;
-    enum Fighter_Part var_r29;
+    f32 particle_angle;
+    enum Fighter_Part foot_bone;
 
-    // var_r29 = saved_reg_r29;
     Fighter* fp = GET_FIGHTER(gobj);
     ftCaptain_DatAttrs* da = fp->dat_attrs;
     PAD_STACK(12);
     if (ftCa_Special_Inline_Check_Flag(fp) != 0) {
         if (!fp->x2219_b0) {
             if (fp->motion_id == 0x165) {
-                sp1C = 0.0F;
-                var_r29 = ftParts_GetBoneIndex(fp, FtPart_RFootJA);
+                particle_angle = 0.0F;
+                foot_bone = ftParts_GetBoneIndex(fp, FtPart_RFootJA);
             } else if (fp->motion_id == 0x167) {
-                sp1C = 0.017453292f * da->speciallw_flame_particle_angle;
-                var_r29 = ftParts_GetBoneIndex(fp, FtPart_LFootJA);
+                particle_angle =
+                    0.017453292f * da->speciallw_flame_particle_angle;
+                foot_bone = ftParts_GetBoneIndex(fp, FtPart_LFootJA);
             }
             switch (ftLib_GetKind(gobj)) {
             case Ft_Kind_Captain:
                 efAsync_Spawn(gobj, &GET_FIGHTER(gobj)->x60C, 3U, 0x490U,
-                              fp->parts[var_r29].joint, &sp1C);
+                              fp->parts[foot_bone].joint, &particle_angle);
                 break;
             case Ft_Kind_Ganon:
                 efAsync_Spawn(gobj, &GET_FIGHTER(gobj)->x60C, 3U, 0x50CU,
-                              fp->parts[var_r29].joint, &sp1C);
+                              fp->parts[foot_bone].joint, &particle_angle);
                 break;
             default:
                 break;
@@ -82,6 +108,13 @@ void ftCa_SpecialHi_800E3EAC(HSD_GObj* gobj)
     }
 }
 
+/**
+ * @brief Damage dealt callback for Falcon Kick: applies on-hit slowdown drag.
+ * @details Increments hit count and multiplies friction by
+ * speciallw_on_hit_spd_modifier to decelerate Falcon Kick upon connecting with
+ * targets.
+ * @param gobj Pointer to Fighter GObj
+ */
 static void ftCa_SpecialHi_800E400C(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -92,6 +125,12 @@ static void ftCa_SpecialHi_800E400C(HSD_GObj* gobj)
     }
 }
 
+/**
+ * @brief Grounded Down-B (Falcon Kick) state entry.
+ * @details Initializes command variables, sets friction to 1.0, registers deal
+ * damage callback, and enters ftCa_MS_SpecialLw.
+ * @param gobj Pointer to Fighter GObj
+ */
 void ftCa_SpecialLw_Enter(HSD_GObj* gobj)
 {
     u8 _[8];
@@ -109,6 +148,10 @@ void ftCa_SpecialLw_Enter(HSD_GObj* gobj)
     Fighter_SetEffectHitlagCallbacks(fp);
 }
 
+/**
+ * @brief Aerial Down-B (Aerial Falcon Kick) state entry.
+ * @param gobj Pointer to Fighter GObj
+ */
 void ftCa_SpecialAirLw_Enter(HSD_GObj* gobj)
 {
     u8 _[8];
@@ -123,7 +166,13 @@ void ftCa_SpecialAirLw_Enter(HSD_GObj* gobj)
     Fighter_SetEffectHitlagCallbacks(fp);
 }
 
-static inline void ftCa_SpecialLw_Anim_inline(HSD_GObj* gobj, s32 condition)
+/**
+ * @brief Helper to transition from grounded Falcon Kick into recovery states.
+ * @param gobj Pointer to Fighter GObj
+ * @param is_air 0 for grounded recovery (SpecialLwEnd), 1 for air recovery
+ * (SpecialLwEndAir)
+ */
+static inline void ftCa_SpecialLw_Anim_inline(HSD_GObj* gobj, s32 is_air)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftCaptain_DatAttrs* da = fp->dat_attrs;
@@ -131,7 +180,7 @@ static inline void ftCa_SpecialLw_Anim_inline(HSD_GObj* gobj, s32 condition)
     fp->cmd_vars[1] = 0;
     fp->cmd_vars[0] = 0;
     fp->x2210.throw_flags = 0;
-    if (condition == 0) {
+    if (is_air == 0) {
         ftCommon_8007D7FC(fp);
         Fighter_ChangeMotionState(gobj, ftCa_MS_SpecialLwEnd, Ft_MF_None, 0,
                                   da->speciallw_ground_lag_mul, 0, NULL);
@@ -143,6 +192,11 @@ static inline void ftCa_SpecialLw_Anim_inline(HSD_GObj* gobj, s32 condition)
     Fighter_SetEffectHitlagCallbacks(fp);
 }
 
+/**
+ * @brief Grounded Down-B (Falcon Kick) animation callback.
+ * @details On kick completion, transitions to ground recovery or air recovery.
+ * @param gobj Pointer to Fighter GObj
+ */
 void ftCa_SpecialLw_Anim(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -156,6 +210,11 @@ void ftCa_SpecialLw_Anim(HSD_GObj* gobj)
     }
 }
 
+/**
+ * @brief Grounded Down-B Ground Recovery (Falcon Kick End) animation callback.
+ * @details On animation completion, transitions to Wait (idle).
+ * @param gobj Pointer to Fighter GObj
+ */
 void ftCa_SpecialLwEnd_Anim(HSD_GObj* gobj)
 {
     if (!ftAnim_IsFramesRemaining(gobj)) {
@@ -163,6 +222,12 @@ void ftCa_SpecialLwEnd_Anim(HSD_GObj* gobj)
     }
 }
 
+/**
+ * @brief Grounded Down-B Edge Slip Air Recovery (Falcon Kick End Air)
+ * animation callback.
+ * @details On animation completion, transitions to Fall.
+ * @param gobj Pointer to Fighter GObj
+ */
 void ftCa_SpecialLwEndAir_Anim(HSD_GObj* gobj)
 {
     if (!ftAnim_IsFramesRemaining(gobj)) {
@@ -170,6 +235,10 @@ void ftCa_SpecialLwEndAir_Anim(HSD_GObj* gobj)
     }
 }
 
+/**
+ * @brief Helper to zero command variables upon completing aerial Falcon Kick.
+ * @param gobj Pointer to Fighter GObj
+ */
 static inline void ftCa_SpecialAirLw_Anim_inline(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -179,6 +248,12 @@ static inline void ftCa_SpecialAirLw_Anim_inline(HSD_GObj* gobj)
     fp->x2210.throw_flags = 0;
 }
 
+/**
+ * @brief Aerial Down-B (Aerial Falcon Kick) animation callback.
+ * @details On kick completion in the air, transitions to aerial end state
+ * (SpecialAirLwEndAir).
+ * @param gobj Pointer to Fighter GObj
+ */
 void ftCa_SpecialAirLw_Anim(HSD_GObj* gobj)
 {
     if (!ftAnim_IsFramesRemaining(gobj)) {
@@ -190,6 +265,12 @@ void ftCa_SpecialAirLw_Anim(HSD_GObj* gobj)
     }
 }
 
+/**
+ * @brief Aerial Down-B Landing Recovery (Falcon Kick Landing End) animation
+ * callback.
+ * @details On completion, transitions to Wait.
+ * @param gobj Pointer to Fighter GObj
+ */
 void ftCa_SpecialAirLwEnd_Anim(HSD_GObj* gobj)
 {
     if (!ftAnim_IsFramesRemaining(gobj)) {
@@ -197,6 +278,12 @@ void ftCa_SpecialAirLwEnd_Anim(HSD_GObj* gobj)
     }
 }
 
+/**
+ * @brief Aerial Down-B Air Recovery (Falcon Kick Air End Air) animation
+ * callback.
+ * @details On completion, transitions to Fall.
+ * @param gobj Pointer to Fighter GObj
+ */
 void ftCa_SpecialAirLwEndAir_Anim(HSD_GObj* gobj)
 {
     if (!ftAnim_IsFramesRemaining(gobj)) {
@@ -204,6 +291,11 @@ void ftCa_SpecialAirLwEndAir_Anim(HSD_GObj* gobj)
     }
 }
 
+/**
+ * @brief Falcon Kick Wall Rebound (Wall Bonk) animation callback.
+ * @details On rebound completion, transitions to Fall.
+ * @param gobj Pointer to Fighter GObj
+ */
 void ftCa_SpecialHiThrow1_Anim(HSD_GObj* gobj)
 {
     if (!ftAnim_IsFramesRemaining(gobj)) {
@@ -211,6 +303,10 @@ void ftCa_SpecialHiThrow1_Anim(HSD_GObj* gobj)
     }
 }
 
+/**
+ * @brief Applies friction factor to self-velocity.
+ * @param fp Pointer to Fighter data
+ */
 static inline void ftCa_Special_Inline_Friction(Fighter* fp)
 {
     float friction = fp->mv.ca.speciallw.friction;
@@ -218,6 +314,12 @@ static inline void ftCa_Special_Inline_Friction(Fighter* fp)
     fp->self_vel.y *= friction;
 }
 
+/**
+ * @brief Grounded Down-B (Falcon Kick) physics callback.
+ * @details Applies ground movement, friction drag, and spawns foot flame
+ * effect.
+ * @param gobj Pointer to Fighter GObj
+ */
 void ftCa_SpecialLw_Phys(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -232,6 +334,12 @@ void ftCa_SpecialLw_Phys(HSD_GObj* gobj)
     ftCa_SpecialHi_800E3EAC(gobj);
 }
 
+/**
+ * @brief Grounded Down-B Ground Recovery physics callback.
+ * @details Applies ground deceleration using speciallw_ground_traction *
+ * ground_friction.
+ * @param gobj Pointer to Fighter GObj
+ */
 void ftCa_SpecialLwEnd_Phys(HSD_GObj* gobj)
 {
     u8 _[8];
@@ -254,6 +362,10 @@ void ftCa_SpecialLwEnd_Phys(HSD_GObj* gobj)
     ftCa_Special_Inline_Friction(fp);
 }
 
+/**
+ * @brief Grounded Down-B Edge Slip Air Recovery physics callback.
+ * @param gobj Pointer to Fighter GObj
+ */
 void ftCa_SpecialLwEndAir_Phys(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -270,12 +382,23 @@ void ftCa_SpecialLwEndAir_Phys(HSD_GObj* gobj)
     }
 }
 
+/**
+ * @brief Aerial Down-B (Aerial Falcon Kick) physics callback.
+ * @details Applies aerial downward trajectory and spawns foot flame effect.
+ * @param gobj Pointer to Fighter GObj
+ */
 void ftCa_SpecialAirLw_Phys(HSD_GObj* gobj)
 {
     ft_80085134(gobj);
     ftCa_SpecialHi_800E3EAC(gobj);
 }
 
+/**
+ * @brief Aerial Down-B Landing Recovery physics callback.
+ * @details Applies landing slide deceleration using
+ * speciallw_air_landing_traction * ground_friction.
+ * @param gobj Pointer to Fighter GObj
+ */
 void ftCa_SpecialAirLwEnd_Phys(HSD_GObj* gobj)
 {
     ftCo_DatAttrs* ca;
@@ -294,16 +417,32 @@ void ftCa_SpecialAirLwEnd_Phys(HSD_GObj* gobj)
     }
 }
 
+/**
+ * @brief Aerial Down-B Air Recovery physics callback.
+ * @param gobj Pointer to Fighter GObj
+ */
 void ftCa_SpecialAirLwEndAir_Phys(HSD_GObj* gobj)
 {
     ft_80084EEC(gobj);
 }
 
+/**
+ * @brief Falcon Kick Wall Rebound physics callback.
+ * @param gobj Pointer to Fighter GObj
+ */
 void ftCa_SpecialHiThrow1_Phys(HSD_GObj* gobj)
 {
     ft_80085134(gobj);
 }
 
+/**
+ * @brief Grounded Down-B (Falcon Kick) collision callback.
+ * @details Handles ground/air transition and wall collisions:
+ * If kicking into a wall facing it (Collide_RightWallHug /
+ * Collide_LeftWallHug), triggers Falcon Kick Wall Rebound bounce into
+ * ftCa_MS_SpecialHiThrow1.
+ * @param gobj Pointer to Fighter GObj
+ */
 void ftCa_SpecialLw_Coll(HSD_GObj* gobj)
 {
     u8 _[8];
@@ -333,6 +472,10 @@ void ftCa_SpecialLw_Coll(HSD_GObj* gobj)
     }
 }
 
+/**
+ * @brief Grounded Down-B Ground Recovery collision callback.
+ * @param gobj Pointer to Fighter GObj
+ */
 void ftCa_SpecialLwEnd_Coll(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -349,11 +492,19 @@ void ftCa_SpecialLwEnd_Coll(HSD_GObj* gobj)
     }
 }
 
+/**
+ * @brief Grounded Down-B Edge Slip Air Recovery collision callback.
+ * @param gobj Pointer to Fighter GObj
+ */
 void ftCa_SpecialLwEndAir_Coll(Fighter_GObj* gobj)
 {
     ftCa_SpecialLwEnd_Coll(gobj);
 }
 
+/**
+ * @brief Resets command variables and throw flags.
+ * @param gobj Pointer to Fighter GObj
+ */
 static void resetCmdAndThrow(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -361,6 +512,13 @@ static void resetCmdAndThrow(Fighter_GObj* gobj)
     fp->x2210.throw_flags = 0;
 }
 
+/**
+ * @brief Landing collision helper for aerial Falcon Kick.
+ * @details If touching ground, enters landing recovery motion state msid
+ * with speciallw_landing_lag_mul animation speed.
+ * @param gobj Pointer to Fighter GObj
+ * @param msid Target landing motion state ID
+ */
 static void doColl(Fighter_GObj* gobj, ftCaptain_MotionState msid)
 {
     if (ft_80081D0C(gobj) != GA_Ground) {
@@ -374,17 +532,29 @@ static void doColl(Fighter_GObj* gobj, ftCaptain_MotionState msid)
     }
 }
 
+/**
+ * @brief Aerial Down-B (Aerial Falcon Kick) collision callback.
+ * @param gobj Pointer to Fighter GObj
+ */
 void ftCa_SpecialAirLw_Coll(Fighter_GObj* gobj)
 {
     PAD_STACK(4 * 4);
     doColl(gobj, ftCa_MS_SpecialAirLwEnd);
 }
 
+/**
+ * @brief Aerial Down-B Landing Recovery collision callback.
+ * @param gobj Pointer to Fighter GObj
+ */
 void ftCa_SpecialAirLwEnd_Coll(HSD_GObj* gobj)
 {
     ft_80084104(gobj);
 }
 
+/**
+ * @brief Aerial Down-B Air Recovery collision callback.
+ * @param gobj Pointer to Fighter GObj
+ */
 void ftCa_SpecialAirLwEndAir_Coll(Fighter_GObj* gobj)
 {
     PAD_STACK(4 * 4);

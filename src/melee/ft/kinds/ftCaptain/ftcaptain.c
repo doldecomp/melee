@@ -1,3 +1,12 @@
+/**
+ * @file ftcaptain.c
+ * @brief Captain Falcon character initialization, state table, and lifecycle
+ * callbacks
+ * @details Implements lifecycle callbacks (load, death, item handling) and
+ * defines the motion state table binding animation, physics, collision, and
+ * camera callbacks for Captain Falcon (and Ganondorf). Module prefix: ftCa
+ */
+
 #include "ftcaptain.h"
 
 #include <melee/ft/kinds/ftCommon/forward.h>
@@ -16,11 +25,14 @@
 #include <melee/ft/inlines.h>
 #include <melee/ft/types.h>
 
+/// Costume metadata list for Captain Falcon's 6 costume colors
 /* 459A98 */ UnkCostumeStruct ftCa_CostumeList[6];
 
+/// Motion state table defining animation, IASA, physics, and collision
+/// callbacks for Captain Falcon
 MotionState ftCa_Init_MotionStateTable[ftCa_MS_SelfCount] = {
     {
-        // ftCa_MS_SwordSwing4 = 341
+        // ftCa_MS_SwordSwing4 = 341 (Beam Sword Forward Smash)
         ftCa_SM_SwordSwing4,
         ftCo_MF_SwordSwing4,
         FtMoveId_SwordSwing4 << 24,
@@ -31,7 +43,7 @@ MotionState ftCa_Init_MotionStateTable[ftCa_MS_SelfCount] = {
         ftCamera_UpdateCameraBox,
     },
     {
-        // ftCa_MS_BatSwing4 = 342
+        // ftCa_MS_BatSwing4 = 342 (Home-Run Bat Forward Smash)
         ftCa_SM_BatSwing4,
         ftCo_MF_BatSwing4,
         FtMoveId_BatSwing4 << 24,
@@ -42,7 +54,7 @@ MotionState ftCa_Init_MotionStateTable[ftCa_MS_SelfCount] = {
         ftCamera_UpdateCameraBox,
     },
     {
-        // ftCa_MS_ParasolSwing4 = 343
+        // ftCa_MS_ParasolSwing4 = 343 (Parasol Forward Smash)
         ftCa_SM_ParasolSwing4,
         ftCo_MF_ParasolSwing4,
         FtMoveId_ParasolSwing4 << 24,
@@ -53,7 +65,7 @@ MotionState ftCa_Init_MotionStateTable[ftCa_MS_SelfCount] = {
         ftCamera_UpdateCameraBox,
     },
     {
-        // ftCa_MS_HarisenSwing4 = 344
+        // ftCa_MS_HarisenSwing4 = 344 (Fan Forward Smash)
         ftCa_SM_HarisenSwing4,
         ftCo_MF_HarisenSwing4,
         FtMoveId_HarisenSwing4 << 24,
@@ -64,7 +76,7 @@ MotionState ftCa_Init_MotionStateTable[ftCa_MS_SelfCount] = {
         ftCamera_UpdateCameraBox,
     },
     {
-        // ftCa_MS_StarRodSwing4 = 345
+        // ftCa_MS_StarRodSwing4 = 345 (Star Rod Forward Smash)
         ftCa_SM_StarRodSwing4,
         ftCo_MF_StarRodSwing4,
         FtMoveId_StarRodSwing4 << 24,
@@ -75,7 +87,7 @@ MotionState ftCa_Init_MotionStateTable[ftCa_MS_SelfCount] = {
         ftCamera_UpdateCameraBox,
     },
     {
-        // ftCa_MS_LipstickSwing4 = 346
+        // ftCa_MS_LipstickSwing4 = 346 (Lip's Stick Forward Smash)
         ftCa_SM_LipstickSwing4,
         ftCo_MF_LipstickSwing4,
         FtMoveId_LipstickSwing4 << 24,
@@ -86,7 +98,8 @@ MotionState ftCa_Init_MotionStateTable[ftCa_MS_SelfCount] = {
         ftCamera_UpdateCameraBox,
     },
     {
-        // ftCa_MS_SpecialN = 347
+        // ftCa_MS_SpecialN = 347 (Neutral-B: Grounded Falcon Punch / Warlock
+        // Punch)
         ftCa_SM_SpecialN,
         ftCa_MF_SpecialN,
         FtMoveId_SpecialN << 24,
@@ -97,7 +110,8 @@ MotionState ftCa_Init_MotionStateTable[ftCa_MS_SelfCount] = {
         ftCamera_UpdateCameraBox,
     },
     {
-        // ftCa_MS_SpecialAirN = 348
+        // ftCa_MS_SpecialAirN = 348 (Neutral-B: Aerial Falcon Punch / Aerial
+        // Warlock Punch)
         ftCa_SM_SpecialAirN,
         ftCa_MF_SpecialAirN,
         FtMoveId_SpecialN << 24,
@@ -108,7 +122,8 @@ MotionState ftCa_Init_MotionStateTable[ftCa_MS_SelfCount] = {
         ftCamera_UpdateCameraBox,
     },
     {
-        // ftCa_MS_SpecialSStart = 349
+        // ftCa_MS_SpecialSStart = 349 (Side-B: Grounded Raptor Boost Startup
+        // Dash)
         ftCa_SM_SpecialSStart,
         ftCa_MF_SpecialS,
         FtMoveId_SpecialS << 24,
@@ -119,7 +134,7 @@ MotionState ftCa_Init_MotionStateTable[ftCa_MS_SelfCount] = {
         ftCamera_UpdateCameraBox,
     },
     {
-        // ftCa_MS_SpecialS = 350
+        // ftCa_MS_SpecialS = 350 (Side-B: Grounded Raptor Boost Uppercut Hit)
         ftCa_SM_SpecialS,
         ftCa_MF_SpecialS,
         FtMoveId_SpecialS << 24,
@@ -130,7 +145,8 @@ MotionState ftCa_Init_MotionStateTable[ftCa_MS_SelfCount] = {
         ftCamera_UpdateCameraBox,
     },
     {
-        // ftCa_MS_SpecialAirSStart = 351
+        // ftCa_MS_SpecialAirSStart = 351 (Side-B: Aerial Raptor Boost Startup
+        // Dive)
         ftCa_SM_SpecialAirSStart,
         ftCa_MF_SpecialAirSStart,
         FtMoveId_SpecialS << 24,
@@ -141,7 +157,8 @@ MotionState ftCa_Init_MotionStateTable[ftCa_MS_SelfCount] = {
         ftCamera_UpdateCameraBox,
     },
     {
-        // ftCa_MS_SpecialAirS = 352
+        // ftCa_MS_SpecialAirS = 352 (Side-B: Aerial Raptor Boost Meteor Spike
+        // Hit)
         ftCa_SM_SpecialAirS,
         ftCa_MF_SpecialAirS,
         FtMoveId_SpecialS << 24,
@@ -152,7 +169,8 @@ MotionState ftCa_Init_MotionStateTable[ftCa_MS_SelfCount] = {
         ftCamera_UpdateCameraBox,
     },
     {
-        // ftCa_MS_SpecialHi = 353
+        // ftCa_MS_SpecialHi = 353 (Up-B: Falcon Dive Grounded/Air Startup &
+        // Leap)
         ftCa_SM_SpecialHi,
         ftCa_MF_SpecialHi,
         FtMoveId_SpecialHi << 24,
@@ -163,7 +181,7 @@ MotionState ftCa_Init_MotionStateTable[ftCa_MS_SelfCount] = {
         ftCamera_UpdateCameraBox,
     },
     {
-        // ftCa_MS_SpecialAirHi = 354
+        // ftCa_MS_SpecialAirHi = 354 (Up-B: Aerial Falcon Dive Leap)
         ftCa_SM_SpecialAirHi,
         ftCa_MF_SpecialAirHi,
         FtMoveId_SpecialHi << 24,
@@ -174,7 +192,8 @@ MotionState ftCa_Init_MotionStateTable[ftCa_MS_SelfCount] = {
         ftCamera_UpdateCameraBox,
     },
     {
-        // ftCa_MS_SpecialHiCatch = 355
+        // ftCa_MS_SpecialHiCatch = 355 (Up-B: Falcon Dive Command Grab
+        // Contact)
         ftCa_SM_SpecialHiCatch,
         ftCa_MF_SpecialHi,
         FtMoveId_SpecialHi << 24,
@@ -185,7 +204,8 @@ MotionState ftCa_Init_MotionStateTable[ftCa_MS_SelfCount] = {
         ftCamera_UpdateCameraBox,
     },
     {
-        // ftCa_MS_SpecialHiThrow = 356
+        // ftCa_MS_SpecialHiThrow = 356 (Up-B: Falcon Dive Explosion Throw
+        // Release)
         ftCa_SM_SpecialHiThrow0,
         ftCa_MF_SpecialHi,
         FtMoveId_SpecialHi << 24,
@@ -196,7 +216,7 @@ MotionState ftCa_Init_MotionStateTable[ftCa_MS_SelfCount] = {
         ftCamera_UpdateCameraBox,
     },
     {
-        // ftCa_MS_SpecialLw = 357
+        // ftCa_MS_SpecialLw = 357 (Down-B: Grounded Falcon Kick Dash)
         ftCa_SM_SpecialLw,
         ftCa_MF_SpecialLw,
         FtMoveId_SpecialLw << 24,
@@ -207,7 +227,8 @@ MotionState ftCa_Init_MotionStateTable[ftCa_MS_SelfCount] = {
         ftCamera_UpdateCameraBox,
     },
     {
-        // ftCa_MS_SpecialLwEnd = 358
+        // ftCa_MS_SpecialLwEnd = 358 (Down-B: Grounded Falcon Kick Ground
+        // Recovery)
         ftCa_SM_SpecialLwEnd,
         ftCa_MF_SpecialLw,
         FtMoveId_SpecialLw << 24,
@@ -218,7 +239,8 @@ MotionState ftCa_Init_MotionStateTable[ftCa_MS_SelfCount] = {
         ftCamera_UpdateCameraBox,
     },
     {
-        // ftCa_MS_SpecialAirLw = 359
+        // ftCa_MS_SpecialAirLw = 359 (Down-B: Aerial Falcon Kick Downward
+        // Dive)
         ftCa_SM_SpecialAirLw,
         ftCa_MF_SpecialLwRebound,
         FtMoveId_SpecialLw << 24,
@@ -229,7 +251,8 @@ MotionState ftCa_Init_MotionStateTable[ftCa_MS_SelfCount] = {
         ftCamera_UpdateCameraBox,
     },
     {
-        // ftCa_MS_SpecialAirLwEnd = 360
+        // ftCa_MS_SpecialAirLwEnd = 360 (Down-B: Aerial Falcon Kick Ground
+        // Landing Recovery)
         ftCa_SM_SpecialAirLwEnd,
         ftCa_MF_SpecialLwRebound,
         FtMoveId_SpecialLw << 24,
@@ -240,7 +263,8 @@ MotionState ftCa_Init_MotionStateTable[ftCa_MS_SelfCount] = {
         ftCamera_UpdateCameraBox,
     },
     {
-        // ftCa_MS_SpecialAirLwEndAir = 361
+        // ftCa_MS_SpecialAirLwEndAir = 361 (Down-B: Aerial Falcon Kick Air End
+        // Recovery)
         ftCa_SM_SpecialAirLwEndAir,
         ftCa_MF_SpecialLwRebound,
         FtMoveId_SpecialLw << 24,
@@ -251,7 +275,8 @@ MotionState ftCa_Init_MotionStateTable[ftCa_MS_SelfCount] = {
         ftCamera_UpdateCameraBox,
     },
     {
-        // ftCa_MS_SpecialLwEndAir = 362
+        // ftCa_MS_SpecialLwEndAir = 362 (Down-B: Grounded Falcon Kick Edge
+        // Slip Off into Air)
         ftCa_SM_SpecialLwEndAir,
         ftCa_MF_SpecialLw,
         FtMoveId_SpecialLw << 24,
@@ -262,7 +287,8 @@ MotionState ftCa_Init_MotionStateTable[ftCa_MS_SelfCount] = {
         ftCamera_UpdateCameraBox,
     },
     {
-        // ftCa_MS_SpecialHiThrow1 = 363
+        // ftCa_MS_SpecialHiThrow1 = 363 (Down-B: Falcon Kick Wall Rebound /
+        // Wall Bonk)
         ftCa_SM_SpecialHiThrow1,
         ftCa_MF_SpecialLwRebound,
         FtMoveId_SpecialLw << 24,
@@ -310,6 +336,12 @@ Fighter_CostumeStrings ftCa_Init_CostumeStrings[] = {
     { gr_dat, gr_joint, NULL }, { bu_dat, bu_joint, NULL },
 };
 
+/**
+ * @brief Resets character-specific state flags upon Captain Falcon's death.
+ * @details Resets model parts and clears Raptor Boost startup and active state
+ * flags.
+ * @param gobj Pointer to Captain Falcon's Fighter GObj
+ */
 void ftCa_Init_OnDeath(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -318,37 +350,79 @@ void ftCa_Init_OnDeath(HSD_GObj* gobj)
     fp->u.ca.during_specials_start = false;
 }
 
+/**
+ * @brief Callback invoked when Captain Falcon takes damage or dies during
+ * Raptor Boost.
+ * @details Cleans up lingering flame visual effects by calling
+ * ftCa_SpecialS_RemoveGFX.
+ * @param gobj Pointer to Captain Falcon's Fighter GObj
+ */
 void ftCa_Init_800E28C8(HSD_GObj* gobj)
 {
     ftCa_SpecialS_RemoveGFX(gobj);
 }
 
-void ftCa_Init_OnItemPickup(HSD_GObj* gobj, bool arg1)
+/**
+ * @brief Handles item pickup for Captain Falcon.
+ * @param gobj Pointer to Captain Falcon's Fighter GObj
+ * @param bool1 Whether item pickup is triggered during an action state
+ * transition
+ */
+void ftCa_Init_OnItemPickup(HSD_GObj* gobj, bool bool1)
 {
-    Fighter_OnItemPickup(gobj, arg1, true, true);
+    Fighter_OnItemPickup(gobj, bool1, true, true);
 }
 
+/**
+ * @brief Hides held item when Captain Falcon becomes invisible (e.g. Cloaking
+ * Device).
+ * @param gobj Pointer to Captain Falcon's Fighter GObj
+ */
 void ftCa_Init_OnItemInvisible(HSD_GObj* gobj)
 {
     Fighter_OnItemInvisible(gobj, true);
 }
 
+/**
+ * @brief Restores held item visibility when Captain Falcon becomes visible
+ * again.
+ * @param gobj Pointer to Captain Falcon's Fighter GObj
+ */
 void ftCa_Init_OnItemVisible(HSD_GObj* gobj)
 {
     Fighter_OnItemVisible(gobj, true);
 }
 
-/// @remarks Used for both OnItemRelease and OnUnknownItemRelated
+/**
+ * @brief Handles item drop/release for Captain Falcon.
+ * @param gobj Pointer to Captain Falcon's Fighter GObj
+ * @param bool1 Flag passed to standard item drop handler
+ * @remarks Used for both OnItemRelease and OnUnknownItemRelated
+ */
 void ftCa_Init_OnItemDrop(HSD_GObj* gobj, bool bool1)
 {
     Fighter_OnItemDrop(gobj, bool1, true, true);
 }
 
+/**
+ * @brief Initializes character attributes for Ganondorf using Captain Falcon's
+ * attribute structure.
+ * @details Ganondorf is Captain Falcon's clone in Melee and shares this
+ * attribute layout.
+ * @param fp Pointer to Ganondorf's Fighter data
+ */
 void ftCa_Init_OnLoadForGanon(Fighter* fp)
 {
     PUSH_ATTRS(fp, ftCaptain_DatAttrs);
 }
 
+/**
+ * @brief Character initialization callback executed when Captain Falcon is
+ * spawned.
+ * @details Enables wall jumping (Captain Falcon can wall jump) and loads
+ * attribute data.
+ * @param gobj Pointer to Captain Falcon's Fighter GObj
+ */
 void ftCa_Init_OnLoad(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -356,6 +430,11 @@ void ftCa_Init_OnLoad(HSD_GObj* gobj)
     PUSH_ATTRS(fp, ftCaptain_DatAttrs);
 }
 
+/**
+ * @brief Reloads Captain Falcon's special move attributes from the DAT file
+ * archive.
+ * @param gobj Pointer to Captain Falcon's Fighter GObj
+ */
 void ftCa_Init_LoadSpecialAttrs(HSD_GObj* gobj)
 {
     COPY_ATTRS(gobj, ftCaptain_DatAttrs);

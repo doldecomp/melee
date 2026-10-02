@@ -1,3 +1,12 @@
+/**
+ * @file ftcaptainspecialhi.c
+ * @brief Up Special - Falcon Dive (Captain Falcon) / Dark Dive (Ganondorf)
+ * @details Implements grounded and aerial states for Captain Falcon's Up
+ * Special command grab, including leap velocity, turnaround steering, grab
+ * contact detection, target attachment, explosion throw release, ledge grab
+ * mechanics, and post-throw physics recoil. Module prefix: ftCa
+ */
+
 #include "ftcaptainspecialhi.h"
 
 #include <Runtime/platform.h>
@@ -22,11 +31,21 @@
 #include <melee/ft/kinds/ftCommon/ftCo_Thrown.h>
 #include <melee/ft/types.h>
 
+/**
+ * @brief Collision callback for Falcon Kick Wall Rebound (SpecialHiThrow1).
+ * @param gobj Pointer to Fighter GObj
+ */
 void ftCa_SpecialHiThrow1_Coll(HSD_GObj* gobj)
 {
     ftCo_AirCatchHit_Coll(gobj);
 }
 
+/**
+ * @brief Initialization helper invoked upon entering Falcon Dive (SpecialHi).
+ * @details Consumes all remaining midair double-jumps, resets velocity and
+ * flags, and initializes command variables.
+ * @param gobj Pointer to Fighter GObj
+ */
 static void ftCa_SpecialLw_800E49FC(HSD_GObj* gobj)
 {
     u8 _[16];
@@ -44,6 +63,12 @@ static void ftCa_SpecialLw_800E49FC(HSD_GObj* gobj)
 
 static void ftCa_SpecialLw_800E5128(HSD_GObj*);
 
+/**
+ * @brief Grounded Up-B (Falcon Dive) entry.
+ * @details Enters ftCa_MS_SpecialHi, sets up catch callbacks for command grab,
+ * and plays animation.
+ * @param gobj Pointer to Fighter GObj
+ */
 void ftCa_SpecialHi_Enter(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -54,18 +79,31 @@ void ftCa_SpecialHi_Enter(HSD_GObj* gobj)
     ftAnim_8006EBA4(gobj);
 }
 
+/**
+ * @brief Grounded Up-B (Falcon Dive) animation callback.
+ * @details Upon animation end, transitions to freefall (FallSpecial) with
+ * specialhi_freefall_air_spd_mul air speed and specialhi_landing_lag frames of
+ * landing lag.
+ * @param gobj Pointer to Fighter GObj
+ */
 void ftCa_SpecialHi_Anim(HSD_GObj* gobj)
 {
     u8 _[8];
     Fighter* fp = GET_FIGHTER(gobj);
-    ftCaptain_DatAttrs* temp_r31 = fp->dat_attrs;
+    ftCaptain_DatAttrs* da = fp->dat_attrs;
     if (!ftAnim_IsFramesRemaining(gobj)) {
-        ftCo_80096900(gobj, 1, 1, false,
-                      temp_r31->specialhi_freefall_air_spd_mul,
-                      temp_r31->specialhi_landing_lag);
+        ftCo_80096900(gobj, 1, 1, false, da->specialhi_freefall_air_spd_mul,
+                      da->specialhi_landing_lag);
     }
 }
 
+/**
+ * @brief Grounded Up-B (Falcon Dive) IASA callback.
+ * @details Checks analog stick X during startup window to reverse facing
+ * direction and model Y rotation if stick magnitude exceeds
+ * specialhi_input_var.
+ * @param gobj Pointer to Fighter GObj
+ */
 void ftCa_SpecialHi_IASA(HSD_GObj* gobj)
 {
     u8 _[8];
@@ -87,6 +125,12 @@ void ftCa_SpecialHi_IASA(HSD_GObj* gobj)
     }
 }
 
+/**
+ * @brief Grounded Up-B (Falcon Dive) physics callback.
+ * @details Calculates horizontal air drift and acceleration during the upward
+ * leap using specialhi_horz_vel and specialhi_air_friction_mul.
+ * @param gobj Pointer to Fighter GObj
+ */
 void ftCa_SpecialHi_Phys(HSD_GObj* gobj)
 {
     u8 _[8];
@@ -112,6 +156,12 @@ void ftCa_SpecialHi_Phys(HSD_GObj* gobj)
     fp->self_vel.y = fp->self_vel.y + fp->mv.ca.specialhi.vel.y;
 }
 
+/**
+ * @brief Aerial Up-B (Aerial Falcon Dive) entry.
+ * @details Enters ftCa_MS_SpecialAirHi, initializes jump consumption and grab
+ * callbacks.
+ * @param gobj Pointer to Fighter GObj
+ */
 void ftCa_SpecialAirHi_Enter(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -122,6 +172,14 @@ void ftCa_SpecialAirHi_Enter(HSD_GObj* gobj)
     ftAnim_8006EBA4(gobj);
 }
 
+/**
+ * @brief Handles aerial collision, ground landing, and ledge grab for Falcon
+ * Dive.
+ * @details If landing on ground after turnaround window has passed (x2_b1),
+ * enters LandingFallSpecial with specialhi_landing_lag frames of lag. If near
+ * a ledge, triggers cliff catch (ledge grab).
+ * @param gobj Pointer to Fighter GObj
+ */
 static void doAirColl(HSD_GObj* gobj)
 {
     u8 _[8];
@@ -139,6 +197,10 @@ static void doAirColl(HSD_GObj* gobj)
     }
 }
 
+/**
+ * @brief Grounded Up-B (Falcon Dive) collision callback.
+ * @param gobj Pointer to Fighter GObj
+ */
 void ftCa_SpecialHi_Coll(HSD_GObj* gobj)
 {
     u8 _[8];
@@ -150,6 +212,12 @@ void ftCa_SpecialHi_Coll(HSD_GObj* gobj)
     }
 }
 
+/**
+ * @brief Aerial Up-B (Aerial Falcon Dive) animation callback.
+ * @details On animation completion, transitions to freefall (FallSpecial)
+ * with specialhi_landing_lag frames of landing lag.
+ * @param gobj Pointer to Fighter GObj
+ */
 void ftCa_SpecialAirHi_Anim(HSD_GObj* gobj)
 {
     u8 _[24];
@@ -160,6 +228,10 @@ void ftCa_SpecialAirHi_Anim(HSD_GObj* gobj)
     }
 }
 
+/**
+ * @brief Helper for aerial Up-B turnaround control stick input check.
+ * @param gobj Pointer to Fighter GObj
+ */
 static void doAirIASA(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -177,21 +249,34 @@ static void doAirIASA(HSD_GObj* gobj)
         }
     }
 }
+
+/**
+ * @brief Aerial Up-B (Aerial Falcon Dive) IASA callback.
+ * @param gobj Pointer to Fighter GObj
+ */
 void ftCa_SpecialAirHi_IASA(HSD_GObj* gobj)
 {
     u8 _[8];
-    Fighter* temp_r31 = GET_FIGHTER(gobj);
-    if (temp_r31->cmd_vars[0]) {
+    Fighter* fp = GET_FIGHTER(gobj);
+    if (fp->cmd_vars[0]) {
         doAirIASA(gobj);
     }
 }
 
+/**
+ * @brief Aerial Up-B (Aerial Falcon Dive) physics callback.
+ * @param gobj Pointer to Fighter GObj
+ */
 void ftCa_SpecialAirHi_Phys(HSD_GObj* gobj)
 {
     PAD_STACK(28);
     ftCa_SpecialHi_Phys(gobj);
 }
 
+/**
+ * @brief Aerial Up-B (Aerial Falcon Dive) collision callback.
+ * @param gobj Pointer to Fighter GObj
+ */
 void ftCa_SpecialAirHi_Coll(HSD_GObj* gobj)
 {
     ftCa_SpecialHi_Coll(gobj);
@@ -199,6 +284,12 @@ void ftCa_SpecialAirHi_Coll(HSD_GObj* gobj)
 
 static void ftCa_SpecialLw_800E550C(HSD_GObj*);
 
+/**
+ * @brief Up-B Command Grab Hit Callback (Falcon Dive Catch).
+ * @details Invoked when Falcon Dive hitbox contacts an opponent. Transitions
+ * to ftCa_MS_SpecialHiCatch, grants intangibility, and syncs victim position.
+ * @param gobj Pointer to Fighter GObj
+ */
 void ftCa_SpecialLw_800E5128(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -219,6 +310,11 @@ void ftCa_SpecialLw_800E5128(HSD_GObj* gobj)
 
 static void doCatchAnim(HSD_GObj* gobj);
 
+/**
+ * @brief Up-B Grab Contact (Falcon Dive Catch) animation callback.
+ * @details When grab contact animation finishes, transitions to throw release.
+ * @param gobj Pointer to Fighter GObj
+ */
 void ftCa_SpecialHiCatch_Anim(HSD_GObj* gobj)
 {
     if (!ftAnim_IsFramesRemaining(gobj)) {
@@ -226,10 +322,22 @@ void ftCa_SpecialHiCatch_Anim(HSD_GObj* gobj)
     }
 }
 
+/**
+ * @brief Up-B Grab Contact (Falcon Dive Catch) IASA callback (no-op).
+ * @param gobj Pointer to Fighter GObj
+ */
 void ftCa_SpecialHiCatch_IASA(HSD_GObj* gobj) {}
 
+/**
+ * @brief Up-B Grab Contact (Falcon Dive Catch) physics callback (no-op).
+ * @param gobj Pointer to Fighter GObj
+ */
 void ftCa_SpecialHiCatch_Phys(HSD_GObj* gobj) {}
 
+/**
+ * @brief Up-B Grab Contact (Falcon Dive Catch) collision callback.
+ * @param gobj Pointer to Fighter GObj
+ */
 void ftCa_SpecialHiCatch_Coll(HSD_GObj* gobj)
 {
     if (!GET_FIGHTER(gobj)->x221B.x221B_b7) {
@@ -237,6 +345,12 @@ void ftCa_SpecialHiCatch_Coll(HSD_GObj* gobj)
     }
 }
 
+/**
+ * @brief Transitions from Falcon Dive grab contact into the explosion throw.
+ * @details Enters ftCa_MS_SpecialHiThrow and triggers thrown damage/knockback
+ * on victim.
+ * @param gobj Pointer to Fighter GObj
+ */
 static void doCatchAnim(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -252,6 +366,13 @@ static void doCatchAnim(HSD_GObj* gobj)
     ftCo_800DE7C0(vic_gobj, 0, 0);
 }
 
+/**
+ * @brief Up-B Explosion Throw (Falcon Dive Release) animation callback.
+ * @details On animation completion, transitions to Fall.
+ * When cmd_vars[0] != 0 (recoil frame trigger), enables post-explosion gravity
+ * physics.
+ * @param gobj Pointer to Fighter GObj
+ */
 void ftCa_SpecialHiThrow0_Anim(HSD_GObj* gobj)
 {
     u8 _[8];
@@ -266,8 +387,19 @@ void ftCa_SpecialHiThrow0_Anim(HSD_GObj* gobj)
     }
 }
 
+/**
+ * @brief Up-B Explosion Throw (Falcon Dive Release) IASA callback (no-op).
+ * @param gobj Pointer to Fighter GObj
+ */
 void ftCa_SpecialHiThrow0_IASA(HSD_GObj* gobj) {}
 
+/**
+ * @brief Up-B Explosion Throw (Falcon Dive Release) physics callback.
+ * @details After explosion release (x2_b0 == true), applies
+ * specialhi_catch_grav downward gravity acceleration clamped to terminal
+ * velocity.
+ * @param gobj Pointer to Fighter GObj
+ */
 void ftCa_SpecialHiThrow0_Phys(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -287,6 +419,12 @@ void ftCa_SpecialHiThrow0_Phys(HSD_GObj* gobj)
     }
 }
 
+/**
+ * @brief Up-B Explosion Throw (Falcon Dive Release) collision callback.
+ * @details If touching ground during throw recovery, enters LandingFallSpecial
+ * with specialhi_landing_lag frames of landing lag.
+ * @param gobj Pointer to Fighter GObj
+ */
 void ftCa_SpecialHiThrow0_Coll(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -296,6 +434,11 @@ void ftCa_SpecialHiThrow0_Coll(HSD_GObj* gobj)
     }
 }
 
+/**
+ * @brief Accessory callback synchronizing Captain Falcon's position to victim
+ * during catch.
+ * @param gobj Pointer to Fighter GObj
+ */
 static void ftCa_SpecialLw_800E550C(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
