@@ -61,13 +61,6 @@ static void sdata2_order(void)
     (void) 3.0f;
     (void) 1.5f;
     (void) 6.0f;
-    (void) 6.283185307179586;
-    (void) -6.283185307179586;
-    (void) 4503601774854144.0;
-    (void) 5.0f;
-    (void) -0.75;
-    (void) 0.75;
-    (void) -3.0f;
 }
 #endif
 
