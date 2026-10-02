@@ -4148,334 +4148,241 @@ static inline u32 mpLineGetKindInline(int line_id)
     return groundCollLine[line_id].flags & LINE_FLAG_KIND;
 }
 
-struct mpFloorGetRight_w {
+/// Single-member wrapper for the line being walked.
+struct mpLineWalk {
     int id;
 };
 
 void mpFloorGetRight(int line_id, Vec3* pos_out)
 {
     u32 kind;
-    struct mpFloorGetRight_w w;
-    int line_offset;
+    struct mpLineWalk w;
 
     LINEID_CHECK(4465, line_id);
 
     w.id = line_id;
     kind = mpLineGetKindInline(line_id);
-again: {
-    MapLine* line;
-    int next;
-    line = groundCollLine[(u32) w.id].x0;
-    line_offset = w.id * sizeof(CollLine);
-    next = line->next_id1;
-    w.id = mpLineGetNextCheckInline(line, next);
-}
-    if (w.id == -1) {
-        goto done;
-    }
-    if (kind == (groundCollLine[w.id].flags & LINE_FLAG_KIND)) {
-        (void) line_id;
-        goto again;
-    }
-done: {
-    CollVtx* vtx =
-        &groundCollVtx[((CollLine*) ((int) groundCollLine + line_offset))
-                           ->x0->v1_idx];
-    pos_out->x = vtx->pos.x;
-    pos_out->y = vtx->pos.y;
-    pos_out->z = 0.0F;
-}
-}
+    for (;;) {
+        MapLine* line = groundCollLine[w.id].x0;
+        int next = line->next_id1;
 
-struct mpFloorGetLeft_w {
-    int id;
-};
+        line_id = mpLineGetNextCheckInline(line, next);
+        if (line_id == -1 ||
+            kind != (groundCollLine[line_id].flags & LINE_FLAG_KIND))
+        {
+            break;
+        }
+        w.id = line_id;
+    }
+    {
+        CollVtx* vtx = &groundCollVtx[groundCollLine[w.id].x0->v1_idx];
+        pos_out->x = vtx->pos.x;
+        pos_out->y = vtx->pos.y;
+        pos_out->z = 0.0F;
+    }
+}
 
 void mpFloorGetLeft(int line_id, Vec3* pos_out)
 {
     u32 kind;
-    struct mpFloorGetLeft_w w;
-    int line_offset;
+    struct mpLineWalk w;
 
     LINEID_CHECK(4474, line_id);
 
     w.id = line_id;
     kind = mpLineGetKindInline(line_id);
-again: {
-    MapLine* line;
-    int next;
-    line = groundCollLine[(u32) w.id].x0;
-    line_offset = w.id * sizeof(CollLine);
-    next = line->prev_id1;
-    w.id = mpLineGetPrevCheckInline(line, next);
-}
-    if (w.id == -1) {
-        goto done;
-    }
-    if (kind == (groundCollLine[w.id].flags & LINE_FLAG_KIND)) {
-        (void) line_id;
-        goto again;
-    }
-done: {
-    CollVtx* vtx =
-        &groundCollVtx[((CollLine*) ((int) groundCollLine + line_offset))
-                           ->x0->v0_idx];
-    pos_out->x = vtx->pos.x;
-    pos_out->y = vtx->pos.y;
-    pos_out->z = 0.0F;
-}
-}
+    for (;;) {
+        MapLine* line = groundCollLine[w.id].x0;
+        int next = line->prev_id1;
 
-struct mpCeilingGetRight_w {
-    int id;
-};
+        line_id = mpLineGetPrevCheckInline(line, next);
+        if (line_id == -1 ||
+            kind != (groundCollLine[line_id].flags & LINE_FLAG_KIND))
+        {
+            break;
+        }
+        w.id = line_id;
+    }
+    {
+        CollVtx* vtx = &groundCollVtx[groundCollLine[w.id].x0->v0_idx];
+        pos_out->x = vtx->pos.x;
+        pos_out->y = vtx->pos.y;
+        pos_out->z = 0.0F;
+    }
+}
 
 void mpCeilingGetRight(int line_id, Vec3* pos_out)
 {
     u32 kind;
-    struct mpCeilingGetRight_w w;
-    int line_offset;
+    struct mpLineWalk w;
 
     LINEID_CHECK(4483, line_id);
 
-    if (line_id != -1) {
-    }
-
-    kind = mpLineGetKindInline(line_id);
     w.id = line_id;
-again: {
-    MapLine* line;
-    int next;
-    line = groundCollLine[(u32) w.id].x0;
-    line_offset = w.id * sizeof(CollLine);
-    next = line->prev_id1;
-    w.id = mpLineGetPrevCheckInline(line, next);
-}
-    if (w.id == -1) {
-        goto done;
-    }
-    if (kind == (groundCollLine[w.id].flags & LINE_FLAG_KIND)) {
-        (void) line_id;
-        goto again;
-    }
-done: {
-    CollVtx* vtx =
-        &groundCollVtx[((CollLine*) ((int) groundCollLine + line_offset))
-                           ->x0->v0_idx];
-    pos_out->x = vtx->pos.x;
-    pos_out->y = vtx->pos.y;
-    pos_out->z = 0.0F;
-}
-}
+    kind = mpLineGetKindInline(line_id);
+    for (;;) {
+        MapLine* line = groundCollLine[w.id].x0;
+        int next = line->prev_id1;
 
-struct mpCeilingGetLeft_w {
-    int id;
-};
+        line_id = mpLineGetPrevCheckInline(line, next);
+        if (line_id == -1 ||
+            kind != (groundCollLine[line_id].flags & LINE_FLAG_KIND))
+        {
+            break;
+        }
+        w.id = line_id;
+    }
+    {
+        CollVtx* vtx = &groundCollVtx[groundCollLine[w.id].x0->v0_idx];
+        pos_out->x = vtx->pos.x;
+        pos_out->y = vtx->pos.y;
+        pos_out->z = 0.0F;
+    }
+}
 
 void mpCeilingGetLeft(int line_id, Vec3* pos_out)
 {
     u32 kind;
-    struct mpCeilingGetLeft_w w;
-    int line_offset;
+    struct mpLineWalk w;
 
     LINEID_CHECK(4492, line_id);
 
-    if (line_id != -1) {
-    }
-
     w.id = line_id;
     kind = mpLineGetKindInline(line_id);
-again: {
-    MapLine* line;
-    int next;
-    line = groundCollLine[(u32) w.id].x0;
-    line_offset = w.id * sizeof(CollLine);
-    next = line->next_id1;
-    w.id = mpLineGetNextCheckInline(line, next);
-}
-    if (w.id == -1) {
-        goto done;
-    }
-    if (kind == (groundCollLine[w.id].flags & LINE_FLAG_KIND)) {
-        (void) line_id;
-        goto again;
-    }
-done: {
-    CollVtx* vtx =
-        &groundCollVtx[((CollLine*) ((int) groundCollLine + line_offset))
-                           ->x0->v1_idx];
-    pos_out->x = vtx->pos.x;
-    pos_out->y = vtx->pos.y;
-    pos_out->z = 0.0F;
-}
-}
+    for (;;) {
+        MapLine* line = groundCollLine[w.id].x0;
+        int next = line->next_id1;
 
-struct mpLeftWallGetTop_w {
-    int id;
-};
+        line_id = mpLineGetNextCheckInline(line, next);
+        if (line_id == -1 ||
+            kind != (groundCollLine[line_id].flags & LINE_FLAG_KIND))
+        {
+            break;
+        }
+        w.id = line_id;
+    }
+    {
+        CollVtx* vtx = &groundCollVtx[groundCollLine[w.id].x0->v1_idx];
+        pos_out->x = vtx->pos.x;
+        pos_out->y = vtx->pos.y;
+        pos_out->z = 0.0F;
+    }
+}
 
 void mpLeftWallGetTop(int line_id, Vec3* pos_out)
 {
     u32 kind;
-    struct mpLeftWallGetTop_w w;
-    int line_offset;
+    struct mpLineWalk w;
 
     LINEID_CHECK(4501, line_id);
 
-    if (line_id != -1) {
-    }
-
     w.id = line_id;
     kind = mpLineGetKindInline(line_id);
-again: {
-    MapLine* line;
-    int next;
-    line = groundCollLine[(u32) w.id].x0;
-    line_offset = w.id * sizeof(CollLine);
-    next = line->next_id1;
-    w.id = mpLineGetNextCheckInline(line, next);
-}
-    if (w.id == -1) {
-        goto done;
-    }
-    if (kind == (groundCollLine[w.id].flags & LINE_FLAG_KIND)) {
-        (void) line_id;
-        goto again;
-    }
-done: {
-    CollVtx* vtx =
-        &groundCollVtx[((CollLine*) ((int) groundCollLine + line_offset))
-                           ->x0->v1_idx];
-    pos_out->x = vtx->pos.x;
-    pos_out->y = vtx->pos.y;
-    pos_out->z = 0.0F;
-}
-}
+    for (;;) {
+        MapLine* line = groundCollLine[w.id].x0;
+        int next = line->next_id1;
 
-struct mpLeftWallGetBottom_w {
-    int id;
-};
+        line_id = mpLineGetNextCheckInline(line, next);
+        if (line_id == -1 ||
+            kind != (groundCollLine[line_id].flags & LINE_FLAG_KIND))
+        {
+            break;
+        }
+        w.id = line_id;
+    }
+    {
+        CollVtx* vtx = &groundCollVtx[groundCollLine[w.id].x0->v1_idx];
+        pos_out->x = vtx->pos.x;
+        pos_out->y = vtx->pos.y;
+        pos_out->z = 0.0F;
+    }
+}
 
 void mpLeftWallGetBottom(int line_id, Vec3* pos_out)
 {
     u32 kind;
-    struct mpLeftWallGetBottom_w w;
-    int line_offset;
+    struct mpLineWalk w;
 
     LINEID_CHECK(4510, line_id);
 
-    if (line_id != -1) {
-    }
-
-    kind = mpLineGetKindInline(line_id);
     w.id = line_id;
-again: {
-    MapLine* line;
-    int next;
-    line = groundCollLine[(u32) w.id].x0;
-    line_offset = w.id * sizeof(CollLine);
-    next = line->prev_id1;
-    w.id = mpLineGetPrevCheckInline(line, next);
-}
-    if (w.id == -1) {
-        goto done;
-    }
-    if (kind == (groundCollLine[w.id].flags & LINE_FLAG_KIND)) {
-        (void) line_id;
-        goto again;
-    }
-done: {
-    CollVtx* vtx =
-        &groundCollVtx[((CollLine*) ((int) groundCollLine + line_offset))
-                           ->x0->v0_idx];
-    pos_out->x = vtx->pos.x;
-    pos_out->y = vtx->pos.y;
-    pos_out->z = 0.0F;
-}
-}
+    kind = mpLineGetKindInline(line_id);
+    for (;;) {
+        MapLine* line = groundCollLine[w.id].x0;
+        int next = line->prev_id1;
 
-struct mpRightWallGetTop_w {
-    int id;
-};
+        line_id = mpLineGetPrevCheckInline(line, next);
+        if (line_id == -1 ||
+            kind != (groundCollLine[line_id].flags & LINE_FLAG_KIND))
+        {
+            break;
+        }
+        w.id = line_id;
+    }
+    {
+        CollVtx* vtx = &groundCollVtx[groundCollLine[w.id].x0->v0_idx];
+        pos_out->x = vtx->pos.x;
+        pos_out->y = vtx->pos.y;
+        pos_out->z = 0.0F;
+    }
+}
 
 void mpRightWallGetTop(int line_id, Vec3* pos_out)
 {
     u32 kind;
-    struct mpRightWallGetTop_w w;
-    int line_offset;
+    struct mpLineWalk w;
 
     LINEID_CHECK(4519, line_id);
 
-    if (line_id != -1) {
-    }
-
     w.id = line_id;
     kind = mpLineGetKindInline(line_id);
-again: {
-    MapLine* line;
-    int next;
-    line = groundCollLine[(u32) w.id].x0;
-    line_offset = w.id * sizeof(CollLine);
-    next = line->prev_id1;
-    w.id = mpLineGetPrevCheckInline(line, next);
-}
-    if (w.id == -1) {
-        goto done;
-    }
-    if (kind == (groundCollLine[w.id].flags & LINE_FLAG_KIND)) {
-        (void) line_id;
-        goto again;
-    }
-done: {
-    CollVtx* vtx =
-        &groundCollVtx[((CollLine*) ((int) groundCollLine + line_offset))
-                           ->x0->v0_idx];
-    pos_out->x = vtx->pos.x;
-    pos_out->y = vtx->pos.y;
-    pos_out->z = 0.0F;
-}
-}
+    for (;;) {
+        MapLine* line = groundCollLine[w.id].x0;
+        int next = line->prev_id1;
 
-struct mpRightWallGetBottom_w {
-    int id;
-};
+        line_id = mpLineGetPrevCheckInline(line, next);
+        if (line_id == -1 ||
+            kind != (groundCollLine[line_id].flags & LINE_FLAG_KIND))
+        {
+            break;
+        }
+        w.id = line_id;
+    }
+    {
+        CollVtx* vtx = &groundCollVtx[groundCollLine[w.id].x0->v0_idx];
+        pos_out->x = vtx->pos.x;
+        pos_out->y = vtx->pos.y;
+        pos_out->z = 0.0F;
+    }
+}
 
 void mpRightWallGetBottom(int line_id, Vec3* pos_out)
 {
-    int line_offset;
-    struct mpRightWallGetBottom_w w;
     u32 kind;
+    struct mpLineWalk w;
 
     LINEID_CHECK(4528, line_id);
 
-    if (line_id != -1) {
-    }
-
     w.id = line_id;
     kind = mpLineGetKindInline(line_id);
-again: {
-    MapLine* line;
-    int next;
-    line = groundCollLine[(u32) w.id].x0;
-    line_offset = w.id * sizeof(CollLine);
-    next = line->next_id1;
-    w.id = mpLineGetNextCheckInline(line, next);
-}
-    if (w.id == -1) {
-        goto done;
+    for (;;) {
+        MapLine* line = groundCollLine[w.id].x0;
+        int next = line->next_id1;
+
+        line_id = mpLineGetNextCheckInline(line, next);
+        if (line_id == -1 ||
+            kind != (groundCollLine[line_id].flags & LINE_FLAG_KIND))
+        {
+            break;
+        }
+        w.id = line_id;
     }
-    if (kind == (groundCollLine[w.id].flags & LINE_FLAG_KIND)) {
-        (void) line_id;
-        goto again;
+    {
+        CollVtx* vtx = &groundCollVtx[groundCollLine[w.id].x0->v1_idx];
+        pos_out->x = vtx->pos.x;
+        pos_out->y = vtx->pos.y;
+        pos_out->z = 0.0F;
     }
-done: {
-    CollVtx* vtx =
-        &groundCollVtx[((CollLine*) ((int) groundCollLine + line_offset))
-                           ->x0->v1_idx];
-    pos_out->x = vtx->pos.x;
-    pos_out->y = vtx->pos.y;
-    pos_out->z = 0.0F;
-}
 }
 
 void mpLineGetV1Pos(int line_id, Vec3* pos_out)
