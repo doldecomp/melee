@@ -64,12 +64,11 @@ Not errors:
   the item kind's `ItemStateTable`, plus one. Replace with a `DAT_COUNT`
   based on `Article::kind` once the counts are available (item state enums,
   or reading the tables from the ELF).
-- `ItemSpecialAttributes` covers 25 common item kinds. Missing:
-  - types defined in `.c` files: G_Shell, MSBomb, StarRod, Hammer,
-    StarRod_Star
-  - inconsistent types: R_Shell, Foods, Kinoko
-  - never used: ScBall, RabbitC, MetalB, Spycloak
-  - all character items and Pokémon
+- `ItemSpecialAttributes` declares the layouts and shared views used by
+  item callers, but only 25 variants have `DAT_IF` conditions. Bind and
+  annotate the remaining item kinds, including character items and Pokémon,
+  and disambiguate shared views (R_Shell, Foods, Kinoko). ScBall, RabbitC,
+  MetalB, and Spycloak still lack layouts.
 - `ftData.xC`/`x14` (actions), `x1C` (part animations) and their `x8`,
   and `ftData_x20.x0` use `DAT_EXTENT`. The counts are in DOL tables per
   fighter kind (`ftData_Table_Unk0`, `ftData_UnkIntPairs`), or only in code.
