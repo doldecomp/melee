@@ -1,8 +1,6 @@
 #ifndef MELEE_EF_INLINES_H
 #define MELEE_EF_INLINES_H
 
-#include <math.h>
-
 #include <melee/ef/types.h>
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/jobj.h>
