@@ -22,7 +22,8 @@
                                            HSD_JObj*, HSD_JObj*, HSD_JObj*,
                                            HSD_JObj*, float);
 /* 04220C */ void mpColl_SetECBSource_Fixed(CollData* cd, HSD_GObj* gobj,
-                                            float, float, float, float);
+                                            float up, float down, float front,
+                                            float back);
 /* 042374 */ void mpColl_SetLedgeSnap(CollData*, float, float, float);
 /* 042384 */ void mpColl_80042384(CollData* cd);
 /* 0424DC */ void mpColl_LoadECB_JObj(CollData*, u32 flags);
