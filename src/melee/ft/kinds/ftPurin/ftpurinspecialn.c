@@ -77,10 +77,10 @@ void ftPr_SpecialS_8013D658(HSD_GObj* gobj)
 
 void ftPr_SpecialS_8013D764(HSD_GObj* gobj)
 {
-    /// @todo Named flags.
-    static u32 const mf = (1 << 1) | (1 << 4) | (1 << 7) | (1 << 9) |
-                          (1 << 18) | (1 << 19) | (1 << 22) | (1 << 26) |
-                          (1 << 27);
+    static u32 const mf = Ft_MF_KeepGfx | Ft_MF_SkipModel | Ft_MF_SkipMatAnim |
+                          Ft_MF_KeepSfx | Ft_MF_SkipItemVis | Ft_MF_Unk19 |
+                          Ft_MF_SkipModelPartVis | Ft_MF_SkipModelFlags |
+                          Ft_MF_Unk27;
     Fighter* fp = GET_FIGHTER(gobj);
     ftPurinAttributes* da = fp->dat_attrs;
     PAD_STACK(4);
@@ -353,8 +353,7 @@ void ftPr_SpecialAirN_Enter(HSD_GObj* gobj)
 
 void ftPr_SpecialNStart_Anim(HSD_GObj* gobj)
 {
-    /// @todo Named flags.
-    static u32 const mf = (1 << 1) | (1 << 4) | (1 << 18);
+    static u32 const mf = Ft_MF_KeepGfx | Ft_MF_SkipModel | Ft_MF_SkipItemVis;
     Fighter* fp = GET_FIGHTER(gobj);
     PAD_STACK(8);
     fp->mv.pr.specialn.facing_dir = 0;
@@ -372,10 +371,10 @@ void ftPr_SpecialNStart_Anim(HSD_GObj* gobj)
 
 void ftPr_SpecialNLoop_Anim(HSD_GObj* gobj)
 {
-    /// @todo Named flags.
-    static u32 const mf = (1 << 1) | (1 << 4) | (1 << 7) | (1 << 9) |
-                          (1 << 18) | (1 << 19) | (1 << 22) | (1 << 26) |
-                          (1 << 27);
+    static u32 const mf = Ft_MF_KeepGfx | Ft_MF_SkipModel | Ft_MF_SkipMatAnim |
+                          Ft_MF_KeepSfx | Ft_MF_SkipItemVis | Ft_MF_Unk19 |
+                          Ft_MF_SkipModelPartVis | Ft_MF_SkipModelFlags |
+                          Ft_MF_Unk27;
     Fighter* fp = GET_FIGHTER(gobj);
     ftPurinAttributes* da = fp->dat_attrs;
     ftPr_SpecialS_8013DD54(gobj, false);
@@ -500,8 +499,7 @@ void ftPr_SpecialNEnd_Anim(HSD_GObj* gobj)
 
 void ftPr_SpecialAirNStart_Anim(HSD_GObj* gobj)
 {
-    /// @todo Named flags.
-    static u32 const mf = (1 << 1) | (1 << 4) | (1 << 18);
+    static u32 const mf = Ft_MF_KeepGfx | Ft_MF_SkipModel | Ft_MF_SkipItemVis;
     Fighter* fp = GET_FIGHTER(gobj);
     PAD_STACK(8);
     fp->mv.pr.specialn.facing_dir = 0;
@@ -518,10 +516,10 @@ void ftPr_SpecialAirNStart_Anim(HSD_GObj* gobj)
 }
 void ftPr_SpecialAirNChargeLoop_Anim(HSD_GObj* gobj)
 {
-    /// @todo Named flags.
-    static u32 const mf = (1 << 1) | (1 << 4) | (1 << 7) | (1 << 9) |
-                          (1 << 18) | (1 << 19) | (1 << 22) | (1 << 26) |
-                          (1 << 27);
+    static u32 const mf = Ft_MF_KeepGfx | Ft_MF_SkipModel | Ft_MF_SkipMatAnim |
+                          Ft_MF_KeepSfx | Ft_MF_SkipItemVis | Ft_MF_Unk19 |
+                          Ft_MF_SkipModelPartVis | Ft_MF_SkipModelFlags |
+                          Ft_MF_Unk27;
     Fighter* fp = GET_FIGHTER(gobj);
     ftPurinAttributes* da = fp->dat_attrs;
     ftPr_SpecialS_8013DD54(gobj, false);
@@ -688,9 +686,8 @@ void ftPr_SpecialNStart_IASA(HSD_GObj* arg0) {}
 
 void ftPr_SpecialNLoop_IASA(HSD_GObj* gobj)
 {
-    /// @todo Named flags.
-    static u32 const mf =
-        (1 << 1) | (1 << 4) | (1 << 7) | (1 << 12) | (1 << 18);
+    static u32 const mf = Ft_MF_KeepGfx | Ft_MF_SkipModel | Ft_MF_SkipMatAnim |
+                          Ft_MF_SkipColAnim | Ft_MF_SkipItemVis;
     Fighter* fp = GET_FIGHTER(gobj);
     ftPurinAttributes* da = fp->dat_attrs;
     PAD_STACK(8);
@@ -709,9 +706,8 @@ void ftPr_SpecialNLoop_IASA(HSD_GObj* gobj)
 
 void ftPr_SpecialNFull_IASA(HSD_GObj* gobj)
 {
-    /// @todo Named flags.
-    static u32 const mf =
-        (1 << 1) | (1 << 4) | (1 << 7) | (1 << 12) | (1 << 18);
+    static u32 const mf = Ft_MF_KeepGfx | Ft_MF_SkipModel | Ft_MF_SkipMatAnim |
+                          Ft_MF_SkipColAnim | Ft_MF_SkipItemVis;
     Fighter* fp = GET_FIGHTER(gobj);
     ftPurinAttributes* da = fp->dat_attrs;
     PAD_STACK(8);
@@ -730,10 +726,10 @@ void ftPr_SpecialNFull_IASA(HSD_GObj* gobj)
 
 void ftPr_SpecialNRelease_IASA(HSD_GObj* gobj)
 {
-    /// @todo Named flags.
-    static u32 const mf = (1 << 1) | (1 << 4) | (1 << 7) | (1 << 9) |
-                          (1 << 18) | (1 << 19) | (1 << 22) | (1 << 26) |
-                          (1 << 27);
+    static u32 const mf = Ft_MF_KeepGfx | Ft_MF_SkipModel | Ft_MF_SkipMatAnim |
+                          Ft_MF_KeepSfx | Ft_MF_SkipItemVis | Ft_MF_Unk19 |
+                          Ft_MF_SkipModelPartVis | Ft_MF_SkipModelFlags |
+                          Ft_MF_Unk27;
     Fighter* fp = GET_FIGHTER(gobj);
     ftPurinAttributes* da = fp->dat_attrs;
     f32 dir;
@@ -763,9 +759,8 @@ void ftPr_SpecialAirNStart_IASA(HSD_GObj* arg0) {}
 
 void ftPr_SpecialAirNChargeLoop_IASA(HSD_GObj* gobj)
 {
-    /// @todo Named flags.
-    static u32 const mf =
-        (1 << 1) | (1 << 4) | (1 << 7) | (1 << 12) | (1 << 18);
+    static u32 const mf = Ft_MF_KeepGfx | Ft_MF_SkipModel | Ft_MF_SkipMatAnim |
+                          Ft_MF_SkipColAnim | Ft_MF_SkipItemVis;
     Fighter* fp = GET_FIGHTER(gobj);
     ftPurinAttributes* da = fp->dat_attrs;
     PAD_STACK(8);
@@ -784,9 +779,8 @@ void ftPr_SpecialAirNChargeLoop_IASA(HSD_GObj* gobj)
 
 void ftPr_SpecialAirNChargeFull_IASA(HSD_GObj* gobj)
 {
-    /// @todo Named flags.
-    static u32 const mf =
-        (1 << 1) | (1 << 4) | (1 << 7) | (1 << 12) | (1 << 18);
+    static u32 const mf = Ft_MF_KeepGfx | Ft_MF_SkipModel | Ft_MF_SkipMatAnim |
+                          Ft_MF_SkipColAnim | Ft_MF_SkipItemVis;
     Fighter* fp = GET_FIGHTER(gobj);
     ftPurinAttributes* da = fp->dat_attrs;
     PAD_STACK(8);
@@ -884,9 +878,10 @@ void ftPr_SpecialNRelease_Phys(HSD_GObj* gobj)
 
 void ftPr_SpecialNTurn_Phys(HSD_GObj* gobj)
 {
-    /// @todo Named flags.
-    static u32 const mf1 = (1 << 4) | (1 << 18) | (1 << 25);
-    static u32 const mf2 = (1 << 1) | (1 << 4) | (1 << 18) | (1 << 25);
+    static u32 const mf1 =
+        Ft_MF_SkipModel | Ft_MF_SkipItemVis | Ft_MF_SkipAttackCount;
+    static u32 const mf2 = Ft_MF_KeepGfx | Ft_MF_SkipModel |
+                           Ft_MF_SkipItemVis | Ft_MF_SkipAttackCount;
     Fighter* fp = GET_FIGHTER(gobj);
     ftPurinAttributes* da = fp->dat_attrs;
     f32 scale = da->xC4 * mpLib_800569EC(fp->coll_data.floor.flags);
@@ -1045,10 +1040,10 @@ void ftPr_SpecialNHit_Phys(HSD_GObj* gobj)
 
 void ftPr_SpecialNStart_Coll(HSD_GObj* gobj)
 {
-    /// @todo Named flags.
-    static u32 const mf = (1 << 1) | (1 << 4) | (1 << 7) | (1 << 12) |
-                          (1 << 14) | (1 << 18) | (1 << 19) | (1 << 22) |
-                          (1 << 26) | (1 << 27);
+    static u32 const mf =
+        Ft_MF_KeepGfx | Ft_MF_SkipModel | Ft_MF_SkipMatAnim |
+        Ft_MF_SkipColAnim | Ft_MF_UpdateCmd | Ft_MF_SkipItemVis | Ft_MF_Unk19 |
+        Ft_MF_SkipModelPartVis | Ft_MF_SkipModelFlags | Ft_MF_Unk27;
     Fighter* fp = GET_FIGHTER(gobj);
 
     if (ft_80082708(gobj) == GA_Ground) {
@@ -1075,9 +1070,8 @@ void ftPr_SpecialNStart_Coll(HSD_GObj* gobj)
 
 void ftPr_SpecialNLoop_Coll(HSD_GObj* gobj)
 {
-    /// @todo Named flags.
-    static u32 const mf =
-        (1 << 1) | (1 << 4) | (1 << 7) | (1 << 12) | (1 << 18);
+    static u32 const mf = Ft_MF_KeepGfx | Ft_MF_SkipModel | Ft_MF_SkipMatAnim |
+                          Ft_MF_SkipColAnim | Ft_MF_SkipItemVis;
     Fighter* fp = GET_FIGHTER(gobj);
     if (ft_80082708(gobj) == GA_Ground) {
         ftCommon_8007D5D4(fp);
@@ -1091,9 +1085,8 @@ void ftPr_SpecialNLoop_Coll(HSD_GObj* gobj)
 
 void ftPr_SpecialNFull_Coll(HSD_GObj* gobj)
 {
-    /// @todo Named flags.
-    static u32 const mf =
-        (1 << 1) | (1 << 4) | (1 << 7) | (1 << 12) | (1 << 18);
+    static u32 const mf = Ft_MF_KeepGfx | Ft_MF_SkipModel | Ft_MF_SkipMatAnim |
+                          Ft_MF_SkipColAnim | Ft_MF_SkipItemVis;
     Fighter* fp = GET_FIGHTER(gobj);
     if (ft_80082708(gobj) == GA_Ground) {
         ftCommon_8007D5D4(fp);
@@ -1127,10 +1120,10 @@ static inline void wallBounceEffect(HSD_GObj* gobj, Fighter* fp, f32 dir,
 
 void ftPr_SpecialNRelease_Coll(HSD_GObj* gobj)
 {
-    /// @todo Named flags.
-    static u32 const mf = (1 << 1) | (1 << 3) | (1 << 4) | (1 << 7) |
-                          (1 << 12) | (1 << 14) | (1 << 18) | (1 << 19) |
-                          (1 << 22) | (1 << 26) | (1 << 27);
+    static u32 const mf =
+        Ft_MF_KeepGfx | Ft_MF_SkipHit | Ft_MF_SkipModel | Ft_MF_SkipMatAnim |
+        Ft_MF_SkipColAnim | Ft_MF_UpdateCmd | Ft_MF_SkipItemVis | Ft_MF_Unk19 |
+        Ft_MF_SkipModelPartVis | Ft_MF_SkipModelFlags | Ft_MF_Unk27;
     Fighter* fp = GET_FIGHTER(gobj);
     ftPurinAttributes* da = fp->dat_attrs;
     bool coll = ft_80082888(gobj, &ftPr_Init_803D0610);
@@ -1178,10 +1171,10 @@ void ftPr_SpecialNRelease_Coll(HSD_GObj* gobj)
 
 void ftPr_SpecialNTurn_Coll(HSD_GObj* gobj)
 {
-    /// @todo Named flags.
-    static u32 const mf = (1 << 1) | (1 << 4) | (1 << 7) | (1 << 12) |
-                          (1 << 14) | (1 << 18) | (1 << 19) | (1 << 22) |
-                          (1 << 26) | (1 << 27);
+    static u32 const mf =
+        Ft_MF_KeepGfx | Ft_MF_SkipModel | Ft_MF_SkipMatAnim |
+        Ft_MF_SkipColAnim | Ft_MF_UpdateCmd | Ft_MF_SkipItemVis | Ft_MF_Unk19 |
+        Ft_MF_SkipModelPartVis | Ft_MF_SkipModelFlags | Ft_MF_Unk27;
     Fighter* fp = GET_FIGHTER(gobj);
     f32 abs_vel = fp->gr_vel;
     ftPurinAttributes* da = fp->dat_attrs;
@@ -1205,10 +1198,10 @@ void ftPr_SpecialNTurn_Coll(HSD_GObj* gobj)
 
 void ftPr_SpecialNEnd_Coll(Fighter_GObj* gobj)
 {
-    /// @todo Named flags.
-    static u32 const mf = (1 << 1) | (1 << 4) | (1 << 7) | (1 << 12) |
-                          (1 << 14) | (1 << 18) | (1 << 19) | (1 << 22) |
-                          (1 << 26) | (1 << 27);
+    static u32 const mf =
+        Ft_MF_KeepGfx | Ft_MF_SkipModel | Ft_MF_SkipMatAnim |
+        Ft_MF_SkipColAnim | Ft_MF_UpdateCmd | Ft_MF_SkipItemVis | Ft_MF_Unk19 |
+        Ft_MF_SkipModelPartVis | Ft_MF_SkipModelFlags | Ft_MF_Unk27;
     Fighter* fp = GET_FIGHTER(gobj);
     if (ft_80082708(gobj) == GA_Ground) {
         ftCommon_8007D5D4(fp);
@@ -1218,10 +1211,10 @@ void ftPr_SpecialNEnd_Coll(Fighter_GObj* gobj)
 
 void ftPr_SpecialAirNStart_Coll(HSD_GObj* gobj)
 {
-    /// @todo Named flags.
-    static u32 const mf = (1 << 1) | (1 << 4) | (1 << 7) | (1 << 12) |
-                          (1 << 14) | (1 << 18) | (1 << 19) | (1 << 22) |
-                          (1 << 26) | (1 << 27);
+    static u32 const mf =
+        Ft_MF_KeepGfx | Ft_MF_SkipModel | Ft_MF_SkipMatAnim |
+        Ft_MF_SkipColAnim | Ft_MF_UpdateCmd | Ft_MF_SkipItemVis | Ft_MF_Unk19 |
+        Ft_MF_SkipModelPartVis | Ft_MF_SkipModelFlags | Ft_MF_Unk27;
     Fighter* fp = GET_FIGHTER(gobj);
 
     if (ft_80081D0C(gobj) != GA_Ground) {
@@ -1242,9 +1235,8 @@ void ftPr_SpecialAirNStart_Coll(HSD_GObj* gobj)
 
 void ftPr_SpecialAirNChargeLoop_Coll(HSD_GObj* gobj)
 {
-    /// @todo Named flags.
-    static u32 const mf =
-        (1 << 1) | (1 << 4) | (1 << 7) | (1 << 12) | (1 << 18);
+    static u32 const mf = Ft_MF_KeepGfx | Ft_MF_SkipModel | Ft_MF_SkipMatAnim |
+                          Ft_MF_SkipColAnim | Ft_MF_SkipItemVis;
     Fighter* fp = GET_FIGHTER(gobj);
     if (ft_80081D0C(gobj) != GA_Ground) {
         ftCommon_8007D7FC(fp);
@@ -1258,9 +1250,8 @@ void ftPr_SpecialAirNChargeLoop_Coll(HSD_GObj* gobj)
 
 void ftPr_SpecialAirNChargeFull_Coll(HSD_GObj* gobj)
 {
-    /// @todo Named flags.
-    static u32 const mf =
-        (1 << 1) | (1 << 4) | (1 << 7) | (1 << 12) | (1 << 18);
+    static u32 const mf = Ft_MF_KeepGfx | Ft_MF_SkipModel | Ft_MF_SkipMatAnim |
+                          Ft_MF_SkipColAnim | Ft_MF_SkipItemVis;
     Fighter* fp = GET_FIGHTER(gobj);
     if (ft_80081D0C(gobj) != GA_Ground) {
         ftCommon_8007D7FC(fp);
@@ -1287,10 +1278,10 @@ static inline void ftPr_SpecialAirNChargeRelease_Coll_inline(HSD_GObj* gobj)
 
 void ftPr_SpecialAirNChargeRelease_Coll(HSD_GObj* gobj)
 {
-    /// @todo Named flags.
-    static u32 const mf = (1 << 1) | (1 << 3) | (1 << 4) | (1 << 7) |
-                          (1 << 12) | (1 << 14) | (1 << 18) | (1 << 19) |
-                          (1 << 22) | (1 << 26) | (1 << 27);
+    static u32 const mf =
+        Ft_MF_KeepGfx | Ft_MF_SkipHit | Ft_MF_SkipModel | Ft_MF_SkipMatAnim |
+        Ft_MF_SkipColAnim | Ft_MF_UpdateCmd | Ft_MF_SkipItemVis | Ft_MF_Unk19 |
+        Ft_MF_SkipModelPartVis | Ft_MF_SkipModelFlags | Ft_MF_Unk27;
     Fighter* fp = GET_FIGHTER(gobj);
     ftPurinAttributes* da = fp->dat_attrs;
     bool coll;
@@ -1376,10 +1367,10 @@ void ftPr_SpecialAirNChargeRelease_Coll(HSD_GObj* gobj)
 
 void ftPr_SpecialAirNStartTurn_Coll(HSD_GObj* gobj)
 {
-    /// @todo Named flags.
-    static u32 const mf = (1 << 1) | (1 << 4) | (1 << 7) | (1 << 12) |
-                          (1 << 14) | (1 << 18) | (1 << 19) | (1 << 22) |
-                          (1 << 26) | (1 << 27);
+    static u32 const mf =
+        Ft_MF_KeepGfx | Ft_MF_SkipModel | Ft_MF_SkipMatAnim |
+        Ft_MF_SkipColAnim | Ft_MF_UpdateCmd | Ft_MF_SkipItemVis | Ft_MF_Unk19 |
+        Ft_MF_SkipModelPartVis | Ft_MF_SkipModelFlags | Ft_MF_Unk27;
     Fighter* fp = GET_FIGHTER(gobj);
     PAD_STACK(8);
     if (ft_800824A0(gobj, &ftPr_Init_803D0610)) {
@@ -1396,10 +1387,10 @@ void ftPr_SpecialAirNStartTurn_Coll(HSD_GObj* gobj)
 /// @todo Maybe shared inline with #ftPr_SpecialNEnd_Coll?
 void ftPr_SpecialAirNEnd_Coll(Fighter_GObj* gobj)
 {
-    /// @todo Named flags.
-    static u32 const mf = (1 << 1) | (1 << 4) | (1 << 7) | (1 << 12) |
-                          (1 << 14) | (1 << 18) | (1 << 19) | (1 << 22) |
-                          (1 << 26) | (1 << 27);
+    static u32 const mf =
+        Ft_MF_KeepGfx | Ft_MF_SkipModel | Ft_MF_SkipMatAnim |
+        Ft_MF_SkipColAnim | Ft_MF_UpdateCmd | Ft_MF_SkipItemVis | Ft_MF_Unk19 |
+        Ft_MF_SkipModelPartVis | Ft_MF_SkipModelFlags | Ft_MF_Unk27;
     Fighter* fp = GET_FIGHTER(gobj);
     if (ft_80081D0C(gobj) != GA_Ground) {
         ftCommon_8007D7FC(fp);
