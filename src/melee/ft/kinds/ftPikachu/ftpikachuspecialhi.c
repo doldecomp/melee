@@ -1,3 +1,10 @@
+/**
+ * @file ftpikachuspecialhi.c
+ * @brief Pikachu
+ * @details This file contains Pikachu's specific functions.
+ * Module prefix: ftPk
+ */
+
 #include "ftpikachuspecialhi.h"
 
 #include <Runtime/platform.h>
@@ -34,6 +41,10 @@
 #define MAX_STICK_MAG 0.999f
 
 /// points velocity toward facing direction
+/**
+ * @brief Function for Up-B (Quick Attack)
+ * @param gobj The fighter's game object
+ */
 void ftPk_SpecialHi_UpdateVel(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -43,6 +54,10 @@ void ftPk_SpecialHi_UpdateVel(HSD_GObj* gobj)
         fp->facing_dir * ABS(fp->mv.pk.specialhi.x10.x);
 }
 
+/**
+ * @brief Action State initialization for Up-B (Quick Attack)
+ * @param gobj The fighter's game object
+ */
 void ftPk_SpecialHi_Enter(HSD_GObj* gobj)
 {
     u8 _[8];
@@ -67,6 +82,10 @@ void ftPk_SpecialHi_Enter(HSD_GObj* gobj)
     ftAnim_8006EBA4(gobj);
 }
 
+/**
+ * @brief Action State initialization for
+ * @param gobj The fighter's game object
+ */
 void ftPk_SpecialAirHi_Enter(HSD_GObj* gobj)
 {
     u8 _[8];
@@ -91,6 +110,10 @@ void ftPk_SpecialAirHi_Enter(HSD_GObj* gobj)
     ftAnim_8006EBA4(gobj);
 }
 
+/**
+ * @brief Animation callback for Up-B (Quick Attack)
+ * @param gobj The fighter's game object
+ */
 void ftPk_SpecialHiStart0_Anim(HSD_GObj* gobj)
 {
     if (!ftAnim_IsFramesRemaining(gobj)) {
@@ -98,6 +121,10 @@ void ftPk_SpecialHiStart0_Anim(HSD_GObj* gobj)
     }
 }
 
+/**
+ * @brief Animation callback for
+ * @param gobj The fighter's game object
+ */
 void ftPk_SpecialAirHiStart0_Anim(HSD_GObj* gobj)
 {
     if (!ftAnim_IsFramesRemaining(gobj)) {
@@ -105,15 +132,31 @@ void ftPk_SpecialAirHiStart0_Anim(HSD_GObj* gobj)
     }
 }
 
-void ftPk_SpecialHiStart0_IASA(HSD_GObj* arg0) {}
+/**
+ * @brief IASA callback for Up-B (Quick Attack)
+ * @param gobj The fighter's game object
+ */
+void ftPk_SpecialHiStart0_IASA(HSD_GObj* gobj) {}
 
-void ftPk_SpecialAirHiStart0_IASA(HSD_GObj* arg0) {}
+/**
+ * @brief IASA callback for
+ * @param gobj The fighter's game object
+ */
+void ftPk_SpecialAirHiStart0_IASA(HSD_GObj* gobj) {}
 
+/**
+ * @brief Physics callback for Up-B (Quick Attack)
+ * @param gobj The fighter's game object
+ */
 void ftPk_SpecialHiStart0_Phys(HSD_GObj* gobj)
 {
     ft_80084F3C(gobj);
 }
 
+/**
+ * @brief Physics callback for
+ * @param gobj The fighter's game object
+ */
 void ftPk_SpecialAirHiStart0_Phys(HSD_GObj* gobj)
 {
     u8 _[8];
@@ -134,6 +177,10 @@ void ftPk_SpecialAirHiStart0_Phys(HSD_GObj* gobj)
     ftCommon_CalcSelfAccel_DeaccelQuickAir(fp);
 }
 
+/**
+ * @brief Collision callback for Up-B (Quick Attack)
+ * @param gobj The fighter's game object
+ */
 void ftPk_SpecialHiStart0_Coll(HSD_GObj* gobj)
 {
     if (!ft_80082708(gobj)) {
@@ -141,6 +188,10 @@ void ftPk_SpecialHiStart0_Coll(HSD_GObj* gobj)
     }
 }
 
+/**
+ * @brief Collision callback for
+ * @param gobj The fighter's game object
+ */
 void ftPk_SpecialAirHiStart0_Coll(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -153,6 +204,10 @@ void ftPk_SpecialAirHiStart0_Coll(HSD_GObj* gobj)
     }
 }
 
+/**
+ * @brief Function for Up-B (Quick Attack)
+ * @param gobj The fighter's game object
+ */
 void ftPk_SpecialHi_ChangeMotion_Unk00(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -161,6 +216,10 @@ void ftPk_SpecialHi_ChangeMotion_Unk00(HSD_GObj* gobj)
                               fp->cur_anim_frame, 1.0f, 0.0f, 0);
 }
 
+/**
+ * @brief Function for Up-B (Quick Attack)
+ * @param gobj The fighter's game object
+ */
 void ftPk_SpecialHi_ChangeMotion_Unk01(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -168,6 +227,10 @@ void ftPk_SpecialHi_ChangeMotion_Unk01(HSD_GObj* gobj)
                                     ftPk_MF_SpecialHiStart_Coll);
 }
 
+/**
+ * @brief Animation callback for Up-B (Quick Attack)
+ * @param gobj The fighter's game object
+ */
 void ftPk_SpecialHiStart1_Anim(HSD_GObj* gobj)
 {
     Vec3 vec;
@@ -207,6 +270,10 @@ void ftPk_SpecialHiStart1_Anim(HSD_GObj* gobj)
     }
 }
 
+/**
+ * @brief Animation callback for
+ * @param gobj The fighter's game object
+ */
 void ftPk_SpecialAirHiStart1_Anim(HSD_GObj* gobj)
 {
     Vec3 vec;
@@ -246,10 +313,22 @@ void ftPk_SpecialAirHiStart1_Anim(HSD_GObj* gobj)
     }
 }
 
-void ftPk_SpecialHiStart1_IASA(HSD_GObj* arg0) {}
+/**
+ * @brief IASA callback for Up-B (Quick Attack)
+ * @param gobj The fighter's game object
+ */
+void ftPk_SpecialHiStart1_IASA(HSD_GObj* gobj) {}
 
-void ftPk_SpecialAirHiStart1_IASA(HSD_GObj* arg0) {}
+/**
+ * @brief IASA callback for
+ * @param gobj The fighter's game object
+ */
+void ftPk_SpecialAirHiStart1_IASA(HSD_GObj* gobj) {}
 
+/**
+ * @brief Function for Up-B (Quick Attack)
+ * @param gobj The fighter's game object
+ */
 void ftPk_SpecialHi_8012642C(HSD_GObj* gobj)
 {
     Vec3 scl;
@@ -281,16 +360,28 @@ void ftPk_SpecialHi_8012642C(HSD_GObj* gobj)
                     fp->x68C_transNPos.z = 0.0f;
 }
 
+/**
+ * @brief Physics callback for Up-B (Quick Attack)
+ * @param gobj The fighter's game object
+ */
 void ftPk_SpecialHiStart1_Phys(HSD_GObj* gobj)
 {
     ftCommon_SetSelfMovementFromGroundedMovement(gobj);
 }
 
+/**
+ * @brief Physics callback for
+ * @param gobj The fighter's game object
+ */
 void ftPk_SpecialAirHiStart1_Phys(HSD_GObj* gobj)
 {
     ftPk_SpecialHi_8012642C(gobj);
 }
 
+/**
+ * @brief Collision callback for Up-B (Quick Attack)
+ * @param gobj The fighter's game object
+ */
 void ftPk_SpecialHiStart1_Coll(HSD_GObj* gobj)
 {
     Vec3 scl;
@@ -359,6 +450,10 @@ static bool ftPikachu_GetBool(HSD_GObj* gobj)
     }
 }
 
+/**
+ * @brief Collision callback for
+ * @param gobj The fighter's game object
+ */
 void ftPk_SpecialAirHiStart1_Coll(HSD_GObj* gobj)
 {
     bool bool0;
@@ -392,6 +487,10 @@ void ftPk_SpecialAirHiStart1_Coll(HSD_GObj* gobj)
     }
 }
 
+/**
+ * @brief Function for Up-B (Quick Attack)
+ * @param gobj The fighter's game object
+ */
 void ftPk_SpecialHi_ChangeMotion_Unk02(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
@@ -405,6 +504,10 @@ void ftPk_SpecialHi_ChangeMotion_Unk02(HSD_GObj* gobj)
     ftPk_SpecialHi_8012642C(gobj);
 }
 
+/**
+ * @brief Function for Up-B (Quick Attack)
+ * @param gobj The fighter's game object
+ */
 void ftPk_SpecialHi_ChangeMotion_Unk03(HSD_GObj* gobj)
 {
     Vec3 scl;
@@ -450,6 +553,10 @@ static inline float get_max_and_fill_stack(void)
 }
 
 /// grounded up b zip
+/**
+ * @brief Function for Up-B (Quick Attack)
+ * @param gobj The fighter's game object
+ */
 void ftPk_SpecialHi_80126C0C(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -520,6 +627,10 @@ void ftPk_SpecialHi_80126C0C(HSD_GObj* gobj)
 }
 
 /// aerial up b zip
+/**
+ * @brief Function for Up-B (Quick Attack)
+ * @param gobj The fighter's game object
+ */
 void ftPk_SpecialHi_80126E1C(HSD_GObj* gobj)
 {
     float temp_f2_2;
@@ -612,6 +723,10 @@ static inline bool return_and_fill_stack(void)
 }
 
 /// seems to check whether to perform a second up b zip
+/**
+ * @brief Function for Up-B (Quick Attack)
+ * @param gobj The fighter's game object
+ */
 bool ftPk_SpecialHi_80127064(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
@@ -657,6 +772,10 @@ bool ftPk_SpecialHi_80127064(HSD_GObj* gobj)
     return false;
 }
 
+/**
+ * @brief Animation callback for Up-B (Quick Attack)
+ * @param gobj The fighter's game object
+ */
 void ftPk_SpecialHiEnd_Anim(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -675,6 +794,10 @@ void ftPk_SpecialHiEnd_Anim(HSD_GObj* gobj)
     }
 }
 
+/**
+ * @brief Animation callback for
+ * @param gobj The fighter's game object
+ */
 void ftPk_SpecialAirHiEnd_Anim(HSD_GObj* gobj)
 {
     u8 _[8];
@@ -695,10 +818,22 @@ void ftPk_SpecialAirHiEnd_Anim(HSD_GObj* gobj)
     }
 }
 
-void ftPk_SpecialHiEnd_IASA(HSD_GObj* arg0) {}
+/**
+ * @brief IASA callback for Up-B (Quick Attack)
+ * @param gobj The fighter's game object
+ */
+void ftPk_SpecialHiEnd_IASA(HSD_GObj* gobj) {}
 
-void ftPk_SpecialAirHiEnd_IASA(HSD_GObj* arg0) {}
+/**
+ * @brief IASA callback for
+ * @param gobj The fighter's game object
+ */
+void ftPk_SpecialAirHiEnd_IASA(HSD_GObj* gobj) {}
 
+/**
+ * @brief Physics callback for Up-B (Quick Attack)
+ * @param gobj The fighter's game object
+ */
 void ftPk_SpecialHiEnd_Phys(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -707,6 +842,10 @@ void ftPk_SpecialHiEnd_Phys(HSD_GObj* gobj)
     }
 }
 
+/**
+ * @brief Physics callback for
+ * @param gobj The fighter's game object
+ */
 void ftPk_SpecialAirHiEnd_Phys(HSD_GObj* gobj)
 {
     u8 _[8];
@@ -723,6 +862,10 @@ void ftPk_SpecialAirHiEnd_Phys(HSD_GObj* gobj)
     }
 }
 
+/**
+ * @brief Collision callback for Up-B (Quick Attack)
+ * @param gobj The fighter's game object
+ */
 void ftPk_SpecialHiEnd_Coll(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -735,6 +878,10 @@ void ftPk_SpecialHiEnd_Coll(HSD_GObj* gobj)
     }
 }
 
+/**
+ * @brief Collision callback for
+ * @param gobj The fighter's game object
+ */
 void ftPk_SpecialAirHiEnd_Coll(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -752,6 +899,10 @@ void ftPk_SpecialAirHiEnd_Coll(HSD_GObj* gobj)
     };
 }
 
+/**
+ * @brief Function for Up-B (Quick Attack)
+ * @param gobj The fighter's game object
+ */
 void ftPk_SpecialHi_ChangeMotion_Unk04(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -760,6 +911,10 @@ void ftPk_SpecialHi_ChangeMotion_Unk04(HSD_GObj* gobj)
                               fp->cur_anim_frame, 1.0f, 0.0f, 0);
 }
 
+/**
+ * @brief Function for Up-B (Quick Attack)
+ * @param gobj The fighter's game object
+ */
 void ftPk_SpecialHi_MotionChangeUpdateVel_Unk0(HSD_GObj* gobj)
 {
     u8 _[8];
@@ -779,6 +934,10 @@ void ftPk_SpecialHi_MotionChangeUpdateVel_Unk0(HSD_GObj* gobj)
     fp->x21F8 = &ftPk_SpecialHi_UpdateVel;
 }
 
+/**
+ * @brief Function for Up-B (Quick Attack)
+ * @param gobj The fighter's game object
+ */
 void ftPk_SpecialHi_MotionChangeUpdateVel_Unk1(HSD_GObj* gobj)
 {
     u8 _[8];

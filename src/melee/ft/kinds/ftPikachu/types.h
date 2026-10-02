@@ -1,3 +1,10 @@
+/**
+ * @file types.h
+ * @brief Pikachu
+ * @details This file contains Pikachu's specific functions.
+ * Module prefix: ftPk
+ */
+
 #ifndef MELEE_FT_CHARA_FTPIKACHU_TYPES_H
 #define MELEE_FT_CHARA_FTPIKACHU_TYPES_H
 

@@ -1,3 +1,10 @@
+/**
+ * @file ftpikachuspecialn.c
+ * @brief Pikachu
+ * @details This file contains Pikachu's specific functions.
+ * Module prefix: ftPk
+ */
+
 #include "ftpikachuspecialn.h"
 
 #include <Runtime/platform.h>
@@ -34,16 +41,28 @@ static void doEnter(Fighter_GObj* gobj, ftPikachu_MotionState msid)
     ftAnim_8006EBA4(gobj);
 }
 
+/**
+ * @brief Action State initialization for Neutral-B (Thunder Jolt)
+ * @param gobj The fighter's game object
+ */
 void ftPk_SpecialN_Enter(Fighter_GObj* gobj)
 {
     doEnter(gobj, ftPk_MS_SpecialN);
 }
 
+/**
+ * @brief Action State initialization for Neutral-B (Thunder Jolt)
+ * @param gobj The fighter's game object
+ */
 void ftPk_SpecialAirN_Enter(Fighter_GObj* gobj)
 {
     doEnter(gobj, ftPk_MS_SpecialAirN);
 }
 
+/**
+ * @brief Animation callback for Neutral-B (Thunder Jolt)
+ * @param gobj The fighter's game object
+ */
 void ftPk_SpecialN_Anim(Fighter_GObj* gobj)
 {
     Vec3 pos;
@@ -84,6 +103,10 @@ void ftPk_SpecialN_Anim(Fighter_GObj* gobj)
 }
 
 /// @todo Shared code with ::ftPk_SpecialAirN_Anim using different attrs
+/**
+ * @brief Animation callback for Neutral-B (Thunder Jolt)
+ * @param gobj The fighter's game object
+ */
 void ftPk_SpecialAirN_Anim(HSD_GObj* gobj)
 {
     Vec3 it_pos;
@@ -129,20 +152,40 @@ void ftPk_SpecialAirN_Anim(HSD_GObj* gobj)
     }
 }
 
-void ftPk_SpecialN_IASA(HSD_GObj* arg0) {}
+/**
+ * @brief IASA callback for Neutral-B (Thunder Jolt)
+ * @param gobj The fighter's game object
+ */
+void ftPk_SpecialN_IASA(HSD_GObj* gobj) {}
 
-void ftPk_SpecialAirN_IASA(HSD_GObj* arg0) {}
+/**
+ * @brief IASA callback for Neutral-B (Thunder Jolt)
+ * @param gobj The fighter's game object
+ */
+void ftPk_SpecialAirN_IASA(HSD_GObj* gobj) {}
 
+/**
+ * @brief Physics callback for Neutral-B (Thunder Jolt)
+ * @param gobj The fighter's game object
+ */
 void ftPk_SpecialN_Phys(HSD_GObj* gobj)
 {
     ft_80084F3C(gobj);
 }
 
+/**
+ * @brief Physics callback for Neutral-B (Thunder Jolt)
+ * @param gobj The fighter's game object
+ */
 void ftPk_SpecialAirN_Phys(HSD_GObj* gobj)
 {
     ft_80084DB0(gobj);
 }
 
+/**
+ * @brief Collision callback for Neutral-B (Thunder Jolt)
+ * @param gobj The fighter's game object
+ */
 void ftPk_SpecialN_Coll(HSD_GObj* gobj)
 {
     Fighter* fp;
@@ -153,6 +196,10 @@ void ftPk_SpecialN_Coll(HSD_GObj* gobj)
     }
 }
 
+/**
+ * @brief Collision callback for Neutral-B (Thunder Jolt)
+ * @param gobj The fighter's game object
+ */
 void ftPk_SpecialAirN_Coll(HSD_GObj* gobj)
 {
     Fighter* fp;
@@ -166,6 +213,10 @@ void ftPk_SpecialAirN_Coll(HSD_GObj* gobj)
     }
 }
 
+/**
+ * @brief Function for Neutral-B (Thunder Jolt)
+ * @param gobj The fighter's game object
+ */
 void ftPk_SpecialN_SpawnEffect0(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -184,6 +235,10 @@ void ftPk_SpecialN_SpawnEffect0(HSD_GObj* gobj)
 }
 
 /// @todo Shared code with ::ftPk_SpecialN_SpawnEffect0
+/**
+ * @brief Function for Neutral-B (Thunder Jolt)
+ * @param gobj The fighter's game object
+ */
 void ftPk_SpecialN_SpawnEffect1(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -201,6 +256,10 @@ void ftPk_SpecialN_SpawnEffect1(HSD_GObj* gobj)
     fp->accessory4_cb = NULL;
 }
 
+/**
+ * @brief Function for Neutral-B (Thunder Jolt)
+ * @param gobj The fighter's game object
+ */
 void ftPk_SpecialN_80124DC8(HSD_GObj* gobj)
 {
     u8 fp_x673;

@@ -1,3 +1,10 @@
+/**
+ * @file ftpikachuspecials.c
+ * @brief Pikachu
+ * @details This file contains Pikachu's specific functions.
+ * Module prefix: ftPk
+ */
+
 #include "ftpikachuspecials.h"
 
 #include <Runtime/platform.h>
@@ -19,6 +26,10 @@
 #include <melee/ft/kinds/ftCommon/inlines.h>
 #include <melee/ft/types.h>
 
+/**
+ * @brief Action State initialization for Side-B (Skull Bash)
+ * @param gobj The fighter's game object
+ */
 void ftPk_SpecialS_Enter(HSD_GObj* gobj)
 {
     u8 _[4];
@@ -33,6 +44,10 @@ void ftPk_SpecialS_Enter(HSD_GObj* gobj)
     ftAnim_8006EBA4(gobj);
 }
 
+/**
+ * @brief Action State initialization for
+ * @param gobj The fighter's game object
+ */
 void ftPk_SpecialAirS_Enter(HSD_GObj* gobj)
 {
     u8 _[4];
@@ -48,6 +63,10 @@ void ftPk_SpecialAirS_Enter(HSD_GObj* gobj)
     ftAnim_8006EBA4(gobj);
 }
 
+/**
+ * @brief Function for Side-B (Skull Bash)
+ * @param gobj The fighter's game object
+ */
 void ftPk_SpecialS_ZeroVelocity(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -60,6 +79,10 @@ void ftPk_SpecialS_ZeroVelocity(HSD_GObj* gobj)
     ftPk_SpecialS_ChangeMotion_Unk12(gobj);
 }
 
+/**
+ * @brief Animation callback for Side-B (Skull Bash)
+ * @param gobj The fighter's game object
+ */
 void ftPk_SpecialSStart_Anim(HSD_GObj* gobj)
 {
     if (!ftAnim_IsFramesRemaining(gobj)) {
@@ -67,6 +90,10 @@ void ftPk_SpecialSStart_Anim(HSD_GObj* gobj)
     }
 }
 
+/**
+ * @brief Animation callback for
+ * @param gobj The fighter's game object
+ */
 void ftPk_SpecialAirSStart_Anim(HSD_GObj* gobj)
 {
     if (!ftAnim_IsFramesRemaining(gobj)) {
@@ -74,10 +101,22 @@ void ftPk_SpecialAirSStart_Anim(HSD_GObj* gobj)
     }
 }
 
-void ftPk_SpecialSStart_IASA(HSD_GObj* arg0) {}
+/**
+ * @brief IASA callback for Side-B (Skull Bash)
+ * @param gobj The fighter's game object
+ */
+void ftPk_SpecialSStart_IASA(HSD_GObj* gobj) {}
 
-void ftPk_SpecialAirSStart_IASA(HSD_GObj* arg0) {}
+/**
+ * @brief IASA callback for
+ * @param gobj The fighter's game object
+ */
+void ftPk_SpecialAirSStart_IASA(HSD_GObj* gobj) {}
 
+/**
+ * @brief Physics callback for Side-B (Skull Bash)
+ * @param gobj The fighter's game object
+ */
 void ftPk_SpecialSStart_Phys(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -86,6 +125,10 @@ void ftPk_SpecialSStart_Phys(HSD_GObj* gobj)
     ftCommon_SetSelfMovementFromGroundedMovement(gobj);
 }
 
+/**
+ * @brief Physics callback for
+ * @param gobj The fighter's game object
+ */
 void ftPk_SpecialAirSStart_Phys(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -100,6 +143,10 @@ void ftPk_SpecialAirSStart_Phys(HSD_GObj* gobj)
     ftCommon_CalcSelfAccel_Deaccel(fp, pika_attr->specials_start_friction);
 }
 
+/**
+ * @brief Collision callback for Side-B (Skull Bash)
+ * @param gobj The fighter's game object
+ */
 void ftPk_SpecialSStart_Coll(HSD_GObj* gobj)
 {
     if (!ft_80082708(gobj)) {
@@ -107,6 +154,10 @@ void ftPk_SpecialSStart_Coll(HSD_GObj* gobj)
     }
 }
 
+/**
+ * @brief Collision callback for
+ * @param gobj The fighter's game object
+ */
 void ftPk_SpecialAirSStart_Coll(HSD_GObj* gobj)
 {
     if (ft_80081D0C(gobj)) {
@@ -119,18 +170,30 @@ static const u32 transition_flags0 =
     Ft_MF_SkipColAnim | Ft_MF_UpdateCmd | Ft_MF_SkipItemVis | Ft_MF_Unk19 |
     Ft_MF_SkipModelPartVis | Ft_MF_SkipModelFlags | Ft_MF_Unk27;
 
+/**
+ * @brief Function for Side-B (Skull Bash)
+ * @param gobj The fighter's game object
+ */
 void ftPk_SpecialS_ChangeMotion_Unk00(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftCommon_GroundToAirStateChange(gobj, fp, 348, transition_flags0);
 }
 
+/**
+ * @brief Function for Side-B (Skull Bash)
+ * @param gobj The fighter's game object
+ */
 void ftPk_SpecialS_ChangeMotion_Unk01(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftCommon_AirToGroundStateChange(gobj, fp, 343, transition_flags0);
 }
 
+/**
+ * @brief Animation callback for Side-B (Skull Bash)
+ * @param gobj The fighter's game object
+ */
 void ftPk_SpecialSHold_Anim(HSD_GObj* gobj)
 {
     u8 _[4];
@@ -150,6 +213,10 @@ void ftPk_SpecialSHold_Anim(HSD_GObj* gobj)
     }
 }
 
+/**
+ * @brief Animation callback for
+ * @param gobj The fighter's game object
+ */
 void ftPk_SpecialAirSHold_Anim(HSD_GObj* gobj)
 {
     u8 _[8];
@@ -169,6 +236,10 @@ void ftPk_SpecialAirSHold_Anim(HSD_GObj* gobj)
     }
 }
 
+/**
+ * @brief IASA callback for Side-B (Skull Bash)
+ * @param gobj The fighter's game object
+ */
 void ftPk_SpecialSHold_IASA(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -177,6 +248,10 @@ void ftPk_SpecialSHold_IASA(HSD_GObj* gobj)
     }
 }
 
+/**
+ * @brief IASA callback for
+ * @param gobj The fighter's game object
+ */
 void ftPk_SpecialAirSHold_IASA(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -185,16 +260,28 @@ void ftPk_SpecialAirSHold_IASA(HSD_GObj* gobj)
     }
 }
 
+/**
+ * @brief Physics callback for Side-B (Skull Bash)
+ * @param gobj The fighter's game object
+ */
 void ftPk_SpecialSHold_Phys(HSD_GObj* gobj)
 {
     ft_80084F3C(gobj);
 }
 
+/**
+ * @brief Physics callback for
+ * @param gobj The fighter's game object
+ */
 void ftPk_SpecialAirSHold_Phys(HSD_GObj* gobj)
 {
     ft_80084EEC(gobj);
 }
 
+/**
+ * @brief Collision callback for Side-B (Skull Bash)
+ * @param gobj The fighter's game object
+ */
 void ftPk_SpecialSHold_Coll(HSD_GObj* gobj)
 {
     if (!ft_80082708(gobj)) {
@@ -202,6 +289,10 @@ void ftPk_SpecialSHold_Coll(HSD_GObj* gobj)
     }
 }
 
+/**
+ * @brief Collision callback for
+ * @param gobj The fighter's game object
+ */
 void ftPk_SpecialAirSHold_Coll(HSD_GObj* gobj)
 {
     if (ft_80081D0C(gobj)) {
@@ -214,18 +305,30 @@ static u32 const transition_flags1 =
     Ft_MF_KeepSfx | Ft_MF_SkipColAnim | Ft_MF_UpdateCmd | Ft_MF_SkipItemVis |
     Ft_MF_Unk19 | Ft_MF_SkipModelPartVis | Ft_MF_SkipModelFlags | Ft_MF_Unk27;
 
+/**
+ * @brief Function for Side-B (Skull Bash)
+ * @param gobj The fighter's game object
+ */
 void ftPk_SpecialS_ChangeMotion_Unk02(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftCommon_GroundToAirStateChange(gobj, fp, 349, transition_flags1);
 }
 
+/**
+ * @brief Function for Side-B (Skull Bash)
+ * @param gobj The fighter's game object
+ */
 void ftPk_SpecialS_ChangeMotion_Unk03(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftCommon_AirToGroundStateChange(gobj, fp, 344, transition_flags1);
 }
 
+/**
+ * @brief Function for Side-B (Skull Bash)
+ * @param gobj The fighter's game object
+ */
 void ftPk_SpecialS_ChangeMotion_Unk04(HSD_GObj* gobj)
 {
     u8 _[8];
@@ -238,6 +341,10 @@ void ftPk_SpecialS_ChangeMotion_Unk04(HSD_GObj* gobj)
     }
 }
 
+/**
+ * @brief Function for Side-B (Skull Bash)
+ * @param gobj The fighter's game object
+ */
 void ftPk_SpecialS_ChangeMotion_Unk05(HSD_GObj* gobj)
 {
     u8 _[8];
@@ -250,6 +357,10 @@ void ftPk_SpecialS_ChangeMotion_Unk05(HSD_GObj* gobj)
     }
 }
 
+/**
+ * @brief Animation callback for Side-B (Skull Bash)
+ * @param gobj The fighter's game object
+ */
 void ftPk_SpecialS0_Anim(HSD_GObj* gobj)
 {
     u8 _[16];
@@ -268,6 +379,10 @@ void ftPk_SpecialS0_Anim(HSD_GObj* gobj)
     }
 }
 
+/**
+ * @brief Animation callback for
+ * @param gobj The fighter's game object
+ */
 void ftPk_SpecialAirS0_Anim(HSD_GObj* gobj)
 {
     u8 _[16];
@@ -285,20 +400,40 @@ void ftPk_SpecialAirS0_Anim(HSD_GObj* gobj)
     }
 }
 
-void ftPk_SpecialS0_IASA(HSD_GObj* arg0) {}
+/**
+ * @brief IASA callback for Side-B (Skull Bash)
+ * @param gobj The fighter's game object
+ */
+void ftPk_SpecialS0_IASA(HSD_GObj* gobj) {}
 
-void ftPk_SpecialAirS0_IASA(HSD_GObj* arg0) {}
+/**
+ * @brief IASA callback for
+ * @param gobj The fighter's game object
+ */
+void ftPk_SpecialAirS0_IASA(HSD_GObj* gobj) {}
 
+/**
+ * @brief Physics callback for Side-B (Skull Bash)
+ * @param gobj The fighter's game object
+ */
 void ftPk_SpecialS0_Phys(HSD_GObj* gobj)
 {
     ft_80084F3C(gobj);
 }
 
+/**
+ * @brief Physics callback for
+ * @param gobj The fighter's game object
+ */
 void ftPk_SpecialAirS0_Phys(HSD_GObj* gobj)
 {
     ft_80084EEC(gobj);
 }
 
+/**
+ * @brief Collision callback for Side-B (Skull Bash)
+ * @param gobj The fighter's game object
+ */
 void ftPk_SpecialS0_Coll(HSD_GObj* gobj)
 {
     if (!ft_80082708(gobj)) {
@@ -306,6 +441,10 @@ void ftPk_SpecialS0_Coll(HSD_GObj* gobj)
     }
 }
 
+/**
+ * @brief Collision callback for
+ * @param gobj The fighter's game object
+ */
 void ftPk_SpecialAirS0_Coll(HSD_GObj* gobj)
 {
     if (ft_80081D0C(gobj)) {
@@ -318,18 +457,30 @@ static u32 const transition_flags2 =
     Ft_MF_SkipColAnim | Ft_MF_UpdateCmd | Ft_MF_SkipItemVis | Ft_MF_Unk19 |
     Ft_MF_SkipModelPartVis | Ft_MF_SkipModelFlags | Ft_MF_Unk27;
 
+/**
+ * @brief Function for Side-B (Skull Bash)
+ * @param gobj The fighter's game object
+ */
 void ftPk_SpecialS_ChangeMotion_Unk06(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftCommon_GroundToAirStateChange(gobj, fp, 352, transition_flags2);
 }
 
+/**
+ * @brief Function for Side-B (Skull Bash)
+ * @param gobj The fighter's game object
+ */
 void ftPk_SpecialS_ChangeMotion_Unk07(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftCommon_AirToGroundStateChange(gobj, fp, 347, transition_flags2);
 }
 
+/**
+ * @brief Function for Side-B (Skull Bash)
+ * @param gobj The fighter's game object
+ */
 void ftPk_SpecialS_ChangeMotion_Unk08(HSD_GObj* gobj)
 {
     u8 _[8];
@@ -343,6 +494,10 @@ void ftPk_SpecialS_ChangeMotion_Unk08(HSD_GObj* gobj)
     }
 }
 
+/**
+ * @brief Function for Side-B (Skull Bash)
+ * @param gobj The fighter's game object
+ */
 void ftPk_SpecialS_ChangeMotion_Unk09(HSD_GObj* gobj)
 {
     u8 _[8];
@@ -357,8 +512,16 @@ void ftPk_SpecialS_ChangeMotion_Unk09(HSD_GObj* gobj)
     }
 }
 
-void ftPk_SpecialS1_Anim(HSD_GObj* arg0) {}
+/**
+ * @brief Animation callback for Side-B (Skull Bash)
+ * @param gobj The fighter's game object
+ */
+void ftPk_SpecialS1_Anim(HSD_GObj* gobj) {}
 
+/**
+ * @brief Animation callback for
+ * @param gobj The fighter's game object
+ */
 void ftPk_SpecialAirS1_Anim(HSD_GObj* gobj)
 {
     if (!ftAnim_IsFramesRemaining(gobj)) {
@@ -366,12 +529,28 @@ void ftPk_SpecialAirS1_Anim(HSD_GObj* gobj)
     }
 }
 
-void ftPk_SpecialS1_IASA(HSD_GObj* arg0) {}
+/**
+ * @brief IASA callback for Side-B (Skull Bash)
+ * @param gobj The fighter's game object
+ */
+void ftPk_SpecialS1_IASA(HSD_GObj* gobj) {}
 
-void ftPk_SpecialAirS1_IASA(HSD_GObj* arg0) {}
+/**
+ * @brief IASA callback for
+ * @param gobj The fighter's game object
+ */
+void ftPk_SpecialAirS1_IASA(HSD_GObj* gobj) {}
 
-void ftPk_SpecialS1_Phys(HSD_GObj* arg0) {}
+/**
+ * @brief Physics callback for Side-B (Skull Bash)
+ * @param gobj The fighter's game object
+ */
+void ftPk_SpecialS1_Phys(HSD_GObj* gobj) {}
 
+/**
+ * @brief Physics callback for
+ * @param gobj The fighter's game object
+ */
 void ftPk_SpecialAirS1_Phys(HSD_GObj* gobj)
 {
     u8 _[8];
@@ -390,8 +569,16 @@ void ftPk_SpecialAirS1_Phys(HSD_GObj* gobj)
     }
 }
 
-void ftPk_SpecialS1_Coll(HSD_GObj* arg0) {}
+/**
+ * @brief Collision callback for Side-B (Skull Bash)
+ * @param gobj The fighter's game object
+ */
+void ftPk_SpecialS1_Coll(HSD_GObj* gobj) {}
 
+/**
+ * @brief Collision callback for
+ * @param gobj The fighter's game object
+ */
 void ftPk_SpecialAirS1_Coll(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -411,6 +598,10 @@ void ftPk_SpecialAirS1_Coll(HSD_GObj* gobj)
 
 static u32 const transition_flags3 = Ft_MF_KeepGfx | Ft_MF_SkipHit;
 
+/**
+ * @brief Function for Side-B (Skull Bash)
+ * @param gobj The fighter's game object
+ */
 void ftPk_SpecialS_ChangeMotion_Unk10(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -433,6 +624,10 @@ void ftPk_SpecialS_ChangeMotion_Unk10(HSD_GObj* gobj)
     fp->deal_dmg_cb = &ftPk_SpecialS_ZeroVelocity;
 }
 
+/**
+ * @brief Animation callback for Side-B (Skull Bash)
+ * @param gobj The fighter's game object
+ */
 void ftPk_SpecialSEnd_Anim(HSD_GObj* gobj)
 {
     if (!ftAnim_IsFramesRemaining(gobj)) {
@@ -440,6 +635,10 @@ void ftPk_SpecialSEnd_Anim(HSD_GObj* gobj)
     }
 }
 
+/**
+ * @brief Animation callback for
+ * @param gobj The fighter's game object
+ */
 void ftPk_SpecialAirSEnd_Anim(HSD_GObj* gobj)
 {
     if (!ftAnim_IsFramesRemaining(gobj)) {
@@ -447,10 +646,22 @@ void ftPk_SpecialAirSEnd_Anim(HSD_GObj* gobj)
     }
 }
 
-void ftPk_SpecialSEnd_IASA(HSD_GObj* arg0) {}
+/**
+ * @brief IASA callback for Side-B (Skull Bash)
+ * @param gobj The fighter's game object
+ */
+void ftPk_SpecialSEnd_IASA(HSD_GObj* gobj) {}
 
-void ftPk_SpecialAirSEnd_IASA(HSD_GObj* arg0) {}
+/**
+ * @brief IASA callback for
+ * @param gobj The fighter's game object
+ */
+void ftPk_SpecialAirSEnd_IASA(HSD_GObj* gobj) {}
 
+/**
+ * @brief Physics callback for Side-B (Skull Bash)
+ * @param gobj The fighter's game object
+ */
 void ftPk_SpecialSEnd_Phys(HSD_GObj* gobj)
 {
     u8 _[8];
@@ -461,6 +672,10 @@ void ftPk_SpecialSEnd_Phys(HSD_GObj* gobj)
     ftCommon_SetSelfMovementFromGroundedMovement(gobj);
 }
 
+/**
+ * @brief Physics callback for
+ * @param gobj The fighter's game object
+ */
 void ftPk_SpecialAirSEnd_Phys(HSD_GObj* gobj)
 {
     u8 _[8];
@@ -471,6 +686,10 @@ void ftPk_SpecialAirSEnd_Phys(HSD_GObj* gobj)
     ftCommon_CalcSelfAccel_Deaccel(fp, sa->x54);
 }
 
+/**
+ * @brief Collision callback for Side-B (Skull Bash)
+ * @param gobj The fighter's game object
+ */
 void ftPk_SpecialSEnd_Coll(HSD_GObj* gobj)
 {
     if (!ft_80082708(gobj)) {
@@ -478,6 +697,10 @@ void ftPk_SpecialSEnd_Coll(HSD_GObj* gobj)
     }
 }
 
+/**
+ * @brief Collision callback for
+ * @param gobj The fighter's game object
+ */
 void ftPk_SpecialAirSEnd_Coll(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -487,6 +710,10 @@ void ftPk_SpecialAirSEnd_Coll(HSD_GObj* gobj)
     }
 }
 
+/**
+ * @brief Function for Side-B (Skull Bash)
+ * @param gobj The fighter's game object
+ */
 void ftPk_SpecialS_ChangeMotion_Unk11(HSD_GObj* gobj)
 {
     u8 _[8];
@@ -500,6 +727,10 @@ void ftPk_SpecialS_ChangeMotion_Unk11(HSD_GObj* gobj)
     Fighter_ChangeMotionState(gobj, 346, Ft_MF_None, 0, 1, 0, 0);
 }
 
+/**
+ * @brief Function for Side-B (Skull Bash)
+ * @param gobj The fighter's game object
+ */
 void ftPk_SpecialS_ChangeMotion_Unk12(HSD_GObj* gobj)
 {
     u8 _[8];

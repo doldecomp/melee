@@ -1,3 +1,10 @@
+/**
+ * @file ftpikachu.c
+ * @brief Pikachu
+ * @details This file contains Pikachu's specific functions.
+ * Module prefix: ftPk
+ */
+
 #include "ftpikachu.h"
 
 #include <Runtime/platform.h>
@@ -336,11 +343,19 @@ Fighter_CostumeStrings ftPk_Init_CostumeStrings[] = {
     { ftPk_Init_803CE1B8, ftPk_Init_803CE1C4, ftPk_Init_803CE1E0 },
 };
 
+/**
+ * @brief Function for Initialization/Common
+ * @param gobj The fighter's game object
+ */
 void ftPk_Init_OnLoadForPichu(Fighter* fp)
 {
     PUSH_ATTRS(fp, ftPikachuAttributes);
 }
 
+/**
+ * @brief Function for Initialization/Common
+ * @param gobj The fighter's game object
+ */
 void ftPk_Init_OnLoad(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -356,6 +371,10 @@ void ftPk_Init_OnLoad(HSD_GObj* gobj)
     }
 }
 
+/**
+ * @brief Function for Initialization/Common
+ * @param gobj The fighter's game object
+ */
 void ftPk_Init_OnDeath(HSD_GObj* gobj)
 {
     u8 _[8];
@@ -364,26 +383,46 @@ void ftPk_Init_OnDeath(HSD_GObj* gobj)
     ftParts_80074A4C(gobj, 1, 0);
 }
 
+/**
+ * @brief Function for Initialization/Common
+ * @param gobj The fighter's game object
+ */
 void ftPk_Init_OnItemPickup(HSD_GObj* gobj, bool flag)
 {
     Fighter_OnItemPickup(gobj, flag, 0, 0);
 }
 
+/**
+ * @brief Function for Initialization/Common
+ * @param gobj The fighter's game object
+ */
 void ftPk_Init_OnItemInvisible(HSD_GObj* gobj)
 {
     Fighter_OnItemInvisible(gobj, 0);
 }
 
+/**
+ * @brief Function for Initialization/Common
+ * @param gobj The fighter's game object
+ */
 void ftPk_Init_OnItemVisible(HSD_GObj* gobj)
 {
     Fighter_OnItemVisible(gobj, 0);
 }
 
+/**
+ * @brief Function for Initialization/Common
+ * @param gobj The fighter's game object
+ */
 void ftPk_Init_OnItemDrop(HSD_GObj* gobj, bool bool1)
 {
     Fighter_OnItemDrop(gobj, bool1, 0, 0);
 }
 
+/**
+ * @brief Function for Initialization/Common
+ * @param gobj The fighter's game object
+ */
 void ftPk_Init_UnkMotionStates1(HSD_GObj* gobj)
 {
     u8 _[8];
@@ -392,6 +431,10 @@ void ftPk_Init_UnkMotionStates1(HSD_GObj* gobj)
     ftParts_80074B0C(gobj, 1, 0);
 }
 
+/**
+ * @brief Function for Initialization/Common
+ * @param gobj The fighter's game object
+ */
 void ftPk_Init_UnkMotionStates2(HSD_GObj* gobj)
 {
     u8 _[8];
@@ -400,6 +443,10 @@ void ftPk_Init_UnkMotionStates2(HSD_GObj* gobj)
     ftParts_80074B0C(gobj, 1, 0);
 }
 
+/**
+ * @brief Function for Initialization/Common
+ * @param gobj The fighter's game object
+ */
 void ftPk_Init_LoadSpecialAttrs(HSD_GObj* gobj)
 {
     COPY_ATTRS(gobj, ftPikachuAttributes);
@@ -414,11 +461,19 @@ void ftPk_Init_LoadSpecialAttrs(HSD_GObj* gobj)
     }
 }
 
+/**
+ * @brief Function for Initialization/Common
+ * @param gobj The fighter's game object
+ */
 void ftPk_Init_OnKnockbackEnter(HSD_GObj* gobj)
 {
     Fighter_OnKnockbackEnter(gobj, 1);
 }
 
+/**
+ * @brief Function for Initialization/Common
+ * @param gobj The fighter's game object
+ */
 void ftPk_Init_OnKnockbackExit(HSD_GObj* gobj)
 {
     Fighter_OnKnockbackExit(gobj, 1);

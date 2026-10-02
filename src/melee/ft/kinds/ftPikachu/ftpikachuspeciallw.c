@@ -1,3 +1,10 @@
+/**
+ * @file ftpikachuspeciallw.c
+ * @brief Pikachu
+ * @details This file contains Pikachu's specific functions.
+ * Module prefix: ftPk
+ */
+
 #include "ftpikachuspeciallw.h"
 
 #include <Runtime/platform.h>
@@ -21,6 +28,10 @@
 #include <melee/ft/types.h>
 #include <melee/it/kinds/itpikachuthunder.h>
 
+/**
+ * @brief Function for Down-B (Thunder)
+ * @param gobj The fighter's game object
+ */
 bool ftPk_SpecialLw_CheckProperty(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -46,6 +57,10 @@ bool ftPk_SpecialLw_CheckProperty(HSD_GObj* gobj)
     }
 }
 
+/**
+ * @brief Function for Down-B (Thunder)
+ * @param gobj The fighter's game object
+ */
 void ftPk_SpecialLw_80127608(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -53,12 +68,20 @@ void ftPk_SpecialLw_80127608(HSD_GObj* gobj)
     ftCommon_8007EBAC(fp, 11, 0);
 }
 
+/**
+ * @brief Function for Down-B (Thunder)
+ * @param gobj The fighter's game object
+ */
 void ftPk_SpecialLw_SetState_Unk0(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     fp->mv.pk.specialhi.x4 = 3;
 }
 
+/**
+ * @brief Function for Down-B (Thunder)
+ * @param gobj The fighter's game object
+ */
 bool ftPk_SpecialLw_8012765C(HSD_GObj* gobj)
 {
     Vec3 vec;
@@ -90,12 +113,20 @@ bool ftPk_SpecialLw_8012765C(HSD_GObj* gobj)
     return false;
 }
 
+/**
+ * @brief Function for Down-B (Thunder)
+ * @param gobj The fighter's game object
+ */
 void ftPk_SpecialLw_SetState_Unk1(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     fp->mv.pk.specialhi.x4 = 0;
 }
 
+/**
+ * @brief Function for Down-B (Thunder)
+ * @param gobj The fighter's game object
+ */
 void ftPk_SpecialLw_SpawnEffect(HSD_GObj* gobj)
 {
     u8 _[4];
@@ -129,6 +160,10 @@ void ftPk_SpecialLw_SpawnEffect(HSD_GObj* gobj)
     }
 }
 
+/**
+ * @brief Action State initialization for Down-B (Thunder)
+ * @param gobj The fighter's game object
+ */
 void ftPk_SpecialLw_Enter(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -140,6 +175,10 @@ void ftPk_SpecialLw_Enter(HSD_GObj* gobj)
     ftAnim_8006EBA4(gobj);
 }
 
+/**
+ * @brief Action State initialization for
+ * @param gobj The fighter's game object
+ */
 void ftPk_SpecialAirLw_Enter(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -151,6 +190,10 @@ void ftPk_SpecialAirLw_Enter(HSD_GObj* gobj)
     ftAnim_8006EBA4(gobj);
 }
 
+/**
+ * @brief Function for Down-B (Thunder)
+ * @param gobj The fighter's game object
+ */
 void ftPk_SpecialLw_ChangeMotion_Unk00(HSD_GObj* gobj)
 {
     /// @todo #GET_FIGHTER
@@ -158,6 +201,10 @@ void ftPk_SpecialLw_ChangeMotion_Unk00(HSD_GObj* gobj)
     ftCommon_AirToGroundStateChange(gobj, fp, 359, ftPk_MF_SpecialLw_Coll);
 }
 
+/**
+ * @brief Function for Down-B (Thunder)
+ * @param gobj The fighter's game object
+ */
 void ftPk_SpecialLw_ChangeMotion_Unk01(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -165,6 +212,10 @@ void ftPk_SpecialLw_ChangeMotion_Unk01(HSD_GObj* gobj)
     ftCommon_ClampAirDrift(fp);
 }
 
+/**
+ * @brief Function for Down-B (Thunder)
+ * @param gobj The fighter's game object
+ */
 void ftPk_SpecialLw_ChangeMotion_Unk02(HSD_GObj* gobj)
 {
     /// @todo #GET_FIGHTER
@@ -175,6 +226,10 @@ void ftPk_SpecialLw_ChangeMotion_Unk02(HSD_GObj* gobj)
     fp->accessory4_cb = &ftPk_SpecialLw_SpawnEffect;
 }
 
+/**
+ * @brief Function for Down-B (Thunder)
+ * @param gobj The fighter's game object
+ */
 void ftPk_SpecialLw_ChangeMotion_Unk03(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -185,6 +240,10 @@ void ftPk_SpecialLw_ChangeMotion_Unk03(HSD_GObj* gobj)
     ftCommon_ClampAirDrift(fp);
 }
 
+/**
+ * @brief Function for Down-B (Thunder)
+ * @param gobj The fighter's game object
+ */
 void ftPk_SpecialLw_ChangeMotion_Unk04(HSD_GObj* gobj)
 {
     /// @todo #GET_FIGHTER
@@ -192,6 +251,10 @@ void ftPk_SpecialLw_ChangeMotion_Unk04(HSD_GObj* gobj)
     ftCommon_AirToGroundStateChange(gobj, fp, 361, ftPk_MF_SpecialLwHit_Coll);
 }
 
+/**
+ * @brief Function for Down-B (Thunder)
+ * @param gobj The fighter's game object
+ */
 void ftPk_SpecialLw_ChangeMotion_Unk05(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -199,6 +262,10 @@ void ftPk_SpecialLw_ChangeMotion_Unk05(HSD_GObj* gobj)
     ftCommon_ClampAirDrift(fp);
 }
 
+/**
+ * @brief Function for Down-B (Thunder)
+ * @param gobj The fighter's game object
+ */
 void ftPk_SpecialLw_ChangeMotion_Unk06(HSD_GObj* gobj)
 {
     /// @todo #GET_FIGHTER
@@ -206,6 +273,10 @@ void ftPk_SpecialLw_ChangeMotion_Unk06(HSD_GObj* gobj)
     ftCommon_AirToGroundStateChange(gobj, fp, 362, ftPk_MF_SpecialLw_Coll);
 }
 
+/**
+ * @brief Function for Down-B (Thunder)
+ * @param gobj The fighter's game object
+ */
 void ftPk_SpecialLw_ChangeMotion_Unk07(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -213,6 +284,10 @@ void ftPk_SpecialLw_ChangeMotion_Unk07(HSD_GObj* gobj)
     ftCommon_ClampAirDrift(fp);
 }
 
+/**
+ * @brief Animation callback for Down-B (Thunder)
+ * @param gobj The fighter's game object
+ */
 void ftPk_SpecialLwStart_Anim(HSD_GObj* gobj)
 {
     u8 _[8];
@@ -229,6 +304,10 @@ void ftPk_SpecialLwStart_Anim(HSD_GObj* gobj)
     }
 }
 
+/**
+ * @brief Animation callback for
+ * @param gobj The fighter's game object
+ */
 void ftPk_SpecialAirLwStart_Anim(HSD_GObj* gobj)
 {
     u8 _[8];
@@ -245,6 +324,10 @@ void ftPk_SpecialAirLwStart_Anim(HSD_GObj* gobj)
     }
 }
 
+/**
+ * @brief Animation callback for Down-B (Thunder)
+ * @param gobj The fighter's game object
+ */
 void ftPk_SpecialLwLoop0_Anim(HSD_GObj* gobj)
 {
     u8 _[8];
@@ -266,6 +349,10 @@ void ftPk_SpecialLwLoop0_Anim(HSD_GObj* gobj)
     }
 }
 
+/**
+ * @brief Animation callback for
+ * @param gobj The fighter's game object
+ */
 void ftPk_SpecialAirLwLoop0_Anim(HSD_GObj* gobj)
 {
     u8 _[24];
@@ -289,6 +376,10 @@ void ftPk_SpecialAirLwLoop0_Anim(HSD_GObj* gobj)
     }
 }
 
+/**
+ * @brief Animation callback for Down-B (Thunder)
+ * @param gobj The fighter's game object
+ */
 void ftPk_SpecialLwLoop1_Anim(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -298,6 +389,10 @@ void ftPk_SpecialLwLoop1_Anim(HSD_GObj* gobj)
     }
 }
 
+/**
+ * @brief Animation callback for
+ * @param gobj The fighter's game object
+ */
 void ftPk_SpecialAirLwLoop1_Anim(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -307,6 +402,10 @@ void ftPk_SpecialAirLwLoop1_Anim(HSD_GObj* gobj)
     }
 }
 
+/**
+ * @brief Animation callback for Down-B (Thunder)
+ * @param gobj The fighter's game object
+ */
 void ftPk_SpecialLwEnd_Anim(HSD_GObj* gobj)
 {
     if (!ftAnim_IsFramesRemaining(gobj)) {
@@ -314,6 +413,10 @@ void ftPk_SpecialLwEnd_Anim(HSD_GObj* gobj)
     }
 }
 
+/**
+ * @brief Animation callback for
+ * @param gobj The fighter's game object
+ */
 void ftPk_SpecialAirLwEnd_Anim(HSD_GObj* gobj)
 {
     if (!ftAnim_IsFramesRemaining(gobj)) {
@@ -321,31 +424,55 @@ void ftPk_SpecialAirLwEnd_Anim(HSD_GObj* gobj)
     }
 }
 
+/**
+ * @brief Physics callback for Down-B (Thunder)
+ * @param gobj The fighter's game object
+ */
 void ftPk_SpecialLwStart_Phys(HSD_GObj* gobj)
 {
     ft_80084F3C(gobj);
 }
 
+/**
+ * @brief Physics callback for
+ * @param gobj The fighter's game object
+ */
 void ftPk_SpecialAirLwStart_Phys(HSD_GObj* gobj)
 {
     ft_80084EEC(gobj);
 }
 
+/**
+ * @brief Physics callback for Down-B (Thunder)
+ * @param gobj The fighter's game object
+ */
 void ftPk_SpecialLwLoop0_Phys(HSD_GObj* gobj)
 {
     ft_80084F3C(gobj);
 }
 
+/**
+ * @brief Physics callback for
+ * @param gobj The fighter's game object
+ */
 void ftPk_SpecialAirLwLoop0_Phys(HSD_GObj* gobj)
 {
     ft_80084EEC(gobj);
 }
 
+/**
+ * @brief Physics callback for Down-B (Thunder)
+ * @param gobj The fighter's game object
+ */
 void ftPk_SpecialLwLoop1_Phys(HSD_GObj* gobj)
 {
     ft_80084F3C(gobj);
 }
 
+/**
+ * @brief Physics callback for
+ * @param gobj The fighter's game object
+ */
 void ftPk_SpecialAirLwLoop1_Phys(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -356,51 +483,91 @@ void ftPk_SpecialAirLwLoop1_Phys(HSD_GObj* gobj)
     ftCommon_CalcSelfAccel_DeaccelQuickAir(fp);
 }
 
+/**
+ * @brief Physics callback for Down-B (Thunder)
+ * @param gobj The fighter's game object
+ */
 void ftPk_SpecialLwEnd_Phys(HSD_GObj* gobj)
 {
     ft_80084F3C(gobj);
 }
 
+/**
+ * @brief Physics callback for
+ * @param gobj The fighter's game object
+ */
 void ftPk_SpecialAirLwEnd_Phys(HSD_GObj* gobj)
 {
     ft_80084EEC(gobj);
 }
 
+/**
+ * @brief Collision callback for Down-B (Thunder)
+ * @param gobj The fighter's game object
+ */
 void ftPk_SpecialLwStart_Coll(HSD_GObj* gobj)
 {
     ft_8008403C(gobj, &ftPk_SpecialLw_ChangeMotion_Unk01);
 }
 
+/**
+ * @brief Collision callback for
+ * @param gobj The fighter's game object
+ */
 void ftPk_SpecialAirLwStart_Coll(HSD_GObj* gobj)
 {
     ft_80082C74(gobj, ftPk_SpecialLw_ChangeMotion_Unk00);
 }
 
+/**
+ * @brief Collision callback for Down-B (Thunder)
+ * @param gobj The fighter's game object
+ */
 void ftPk_SpecialLwLoop0_Coll(HSD_GObj* gobj)
 {
     ft_8008403C(gobj, ftPk_SpecialLw_ChangeMotion_Unk03);
 }
 
+/**
+ * @brief Collision callback for
+ * @param gobj The fighter's game object
+ */
 void ftPk_SpecialAirLwLoop0_Coll(HSD_GObj* gobj)
 {
     ft_80082C74(gobj, ftPk_SpecialLw_ChangeMotion_Unk02);
 }
 
+/**
+ * @brief Collision callback for Down-B (Thunder)
+ * @param gobj The fighter's game object
+ */
 void ftPk_SpecialLwLoop1_Coll(HSD_GObj* gobj)
 {
     ft_8008403C(gobj, ftPk_SpecialLw_ChangeMotion_Unk05);
 }
 
+/**
+ * @brief Collision callback for
+ * @param gobj The fighter's game object
+ */
 void ftPk_SpecialAirLwLoop1_Coll(HSD_GObj* gobj)
 {
     ft_80082C74(gobj, ftPk_SpecialLw_ChangeMotion_Unk04);
 }
 
+/**
+ * @brief Collision callback for Down-B (Thunder)
+ * @param gobj The fighter's game object
+ */
 void ftPk_SpecialLwEnd_Coll(HSD_GObj* gobj)
 {
     ft_8008403C(gobj, ftPk_SpecialLw_ChangeMotion_Unk07);
 }
 
+/**
+ * @brief Collision callback for
+ * @param gobj The fighter's game object
+ */
 void ftPk_SpecialAirLwEnd_Coll(HSD_GObj* gobj)
 {
     ft_80082C74(gobj, ftPk_SpecialLw_ChangeMotion_Unk06);

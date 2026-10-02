@@ -1,3 +1,10 @@
+/**
+ * @file ftpikachu.h
+ * @brief Pikachu
+ * @details This file contains Pikachu's specific functions.
+ * Module prefix: ftPk
+ */
+
 #ifndef GALE01_1243AC
 #define GALE01_1243AC
 
@@ -11,10 +18,10 @@
 /* 1243AC */ void ftPk_Init_OnLoad(HSD_GObj* gobj);
 /* 1243E4 */ void ftPk_Init_OnLoadForPichu(Fighter* fp);
 /* 124474 */ void ftPk_Init_OnDeath(HSD_GObj* gobj);
-/* 1244B8 */ void ftPk_Init_OnItemPickup(HSD_GObj* gobj, bool arg1);
+/* 1244B8 */ void ftPk_Init_OnItemPickup(HSD_GObj* gobj, bool flag);
 /* 124598 */ void ftPk_Init_OnItemInvisible(HSD_GObj* gobj);
 /* 1245E0 */ void ftPk_Init_OnItemVisible(HSD_GObj* gobj);
-/* 124628 */ void ftPk_Init_OnItemDrop(HSD_GObj* gobj, bool arg1);
+/* 124628 */ void ftPk_Init_OnItemDrop(HSD_GObj* gobj, bool flag);
 /* 12467C */ void ftPk_Init_UnkMotionStates1(HSD_GObj* gobj);
 /* 1246C0 */ void ftPk_Init_UnkMotionStates2(HSD_GObj* gobj);
 /* 124704 */ void ftPk_Init_LoadSpecialAttrs(HSD_GObj* gobj);

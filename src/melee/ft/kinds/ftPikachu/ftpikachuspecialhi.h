@@ -1,3 +1,10 @@
+/**
+ * @file ftpikachuspecialhi.h
+ * @brief Pikachu
+ * @details This file contains Pikachu's specific functions.
+ * Module prefix: ftPk
+ */
+
 #ifndef GALE01_125D80
 #define GALE01_125D80
 
