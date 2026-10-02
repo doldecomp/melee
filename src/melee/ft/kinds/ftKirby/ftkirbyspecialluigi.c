@@ -1,3 +1,9 @@
+/**
+ * @file ftkirbyspecialluigi.c
+ * @brief Neutral-B Copy Ability (Luigi)
+ * @details Kirby's Neutral-B Copy Ability (Luigi) logic in Melee
+ * Module prefix: ft (Fighter)
+ */
 #include <melee/ft/forward.h>
 #include <melee/ft/kinds/ftLuigi/forward.h>
 
@@ -22,6 +28,10 @@
 
 static void fn_800F98F4(Fighter_GObj*);
 
+/**
+ * @brief Neutral-B Copy Ability (Luigi) logic for ftKb_SpecialNLg_800F9614
+ * @param gobj 
+ */
 void ftKb_SpecialNLg_800F9614(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -33,6 +43,10 @@ void ftKb_SpecialNLg_800F9614(Fighter_GObj* gobj)
     fp->accessory4_cb = fn_800F98F4;
 }
 
+/**
+ * @brief Neutral-B Copy Ability (Luigi) logic for ftKb_SpecialNLg_800F9684
+ * @param gobj 
+ */
 void ftKb_SpecialNLg_800F9684(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -44,6 +58,10 @@ void ftKb_SpecialNLg_800F9684(Fighter_GObj* gobj)
     fp->accessory4_cb = fn_800F98F4;
 }
 
+/**
+ * @brief Neutral-B Copy Ability (Luigi) logic for ftKb_LgSpecialN_Anim
+ * @param gobj 
+ */
 void ftKb_LgSpecialN_Anim(Fighter_GObj* gobj)
 {
     if (!ftAnim_IsFramesRemaining(gobj)) {
@@ -51,6 +69,10 @@ void ftKb_LgSpecialN_Anim(Fighter_GObj* gobj)
     }
 }
 
+/**
+ * @brief Neutral-B Copy Ability (Luigi) logic for ftKb_LgSpecialAirN_Anim
+ * @param gobj 
+ */
 void ftKb_LgSpecialAirN_Anim(Fighter_GObj* gobj)
 {
     if (!ftAnim_IsFramesRemaining(gobj)) {
@@ -58,6 +80,10 @@ void ftKb_LgSpecialAirN_Anim(Fighter_GObj* gobj)
     }
 }
 
+/**
+ * @brief Neutral-B Copy Ability (Luigi) logic for ftKb_LgSpecialN_IASA
+ * @param gobj 
+ */
 void ftKb_LgSpecialN_IASA(Fighter_GObj* gobj)
 {
     Fighter* ft = GET_FIGHTER(gobj);
@@ -66,6 +92,10 @@ void ftKb_LgSpecialN_IASA(Fighter_GObj* gobj)
     }
 }
 
+/**
+ * @brief Neutral-B Copy Ability (Luigi) logic for ftKb_LgSpecialAirN_IASA
+ * @param gobj 
+ */
 void ftKb_LgSpecialAirN_IASA(Fighter_GObj* gobj)
 {
     Fighter* ft = GET_FIGHTER(gobj);
@@ -74,16 +104,28 @@ void ftKb_LgSpecialAirN_IASA(Fighter_GObj* gobj)
     }
 }
 
+/**
+ * @brief Neutral-B Copy Ability (Luigi) logic for ftKb_LgSpecialN_Phys
+ * @param gobj 
+ */
 void ftKb_LgSpecialN_Phys(Fighter_GObj* gobj)
 {
     ft_80084F3C(gobj);
 }
 
+/**
+ * @brief Neutral-B Copy Ability (Luigi) logic for ftKb_LgSpecialAirN_Phys
+ * @param gobj 
+ */
 void ftKb_LgSpecialAirN_Phys(Fighter_GObj* gobj)
 {
     ft_80084DB0(gobj);
 }
 
+/**
+ * @brief Neutral-B Copy Ability (Luigi) logic for ftKb_LgSpecialN_Coll
+ * @param gobj 
+ */
 void ftKb_LgSpecialN_Coll(Fighter_GObj* gobj)
 {
     if (ft_80082708(gobj) == GA_Ground) {
@@ -94,6 +136,10 @@ void ftKb_LgSpecialN_Coll(Fighter_GObj* gobj)
     }
 }
 
+/**
+ * @brief Neutral-B Copy Ability (Luigi) logic for ftKb_LgSpecialAirN_Coll
+ * @param gobj 
+ */
 void ftKb_LgSpecialAirN_Coll(Fighter_GObj* gobj)
 {
     if (ft_80081D0C(gobj) != GA_Ground) {
@@ -104,6 +150,10 @@ void ftKb_LgSpecialAirN_Coll(Fighter_GObj* gobj)
     }
 }
 
+/**
+ * @brief Neutral-B Copy Ability (Luigi) logic for fn_800F98F4
+ * @param gobj 
+ */
 void fn_800F98F4(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);

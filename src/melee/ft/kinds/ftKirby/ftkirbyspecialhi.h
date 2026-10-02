@@ -1,3 +1,9 @@
+/**
+ * @file ftkirbyspecialhi.h
+ * @brief Up-B (Final Cutter)
+ * @details Kirby's Up-B (Final Cutter) logic in Melee
+ * Module prefix: ft (Fighter)
+ */
 #ifndef GALE01_0F21E8
 #define GALE01_0F21E8
 

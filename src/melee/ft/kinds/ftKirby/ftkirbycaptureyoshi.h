@@ -1,3 +1,9 @@
+/**
+ * @file ftkirbycaptureyoshi.h
+ * @brief Yoshi Capture
+ * @details Kirby's Yoshi Capture logic in Melee
+ * Module prefix: ft (Fighter)
+ */
 #ifndef GALE01_10A930
 #define GALE01_10A930
 

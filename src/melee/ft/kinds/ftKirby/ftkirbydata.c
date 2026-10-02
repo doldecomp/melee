@@ -1,3 +1,9 @@
+/**
+ * @file ftkirbydata.c
+ * @brief Fighter Data
+ * @details Kirby's Fighter Data logic in Melee
+ * Module prefix: ft (Fighter)
+ */
 #include "ftkirby.h"
 
 char ftKb_Init_DatFilename[] = "PlKb.dat";

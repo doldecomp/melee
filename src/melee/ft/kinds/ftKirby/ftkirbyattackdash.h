@@ -1,3 +1,9 @@
+/**
+ * @file ftkirbyattackdash.h
+ * @brief Dash Attack
+ * @details Kirby's Dash Attack logic in Melee
+ * Module prefix: ft (Fighter)
+ */
 #ifndef GALE01_0F1FDC
 #define GALE01_0F1FDC
 

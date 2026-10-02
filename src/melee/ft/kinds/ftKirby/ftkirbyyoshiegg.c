@@ -1,3 +1,9 @@
+/**
+ * @file ftkirbyyoshiegg.c
+ * @brief Yoshi Egg
+ * @details Kirby's Yoshi Egg logic in Melee
+ * Module prefix: ft (Fighter)
+ */
 #include "ftkirbyyoshiegg.h"
 
 #include <melee/ft/forward.h>
@@ -22,6 +28,10 @@
 #include <melee/lb/lb_00B0.h>
 #include <sysdolphin/baselib/gobj.h>
 
+/**
+ * @brief Yoshi Egg logic for fn_8010AA64
+ * @param gobj 
+ */
 static void fn_8010AA64(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -53,6 +63,11 @@ static void fn_8010AA64(Fighter_GObj* gobj)
     }
 }
 
+/**
+ * @brief Yoshi Egg logic for inlineB0
+ * @param gobj 
+ * @param hurt 
+ */
 static inline void inlineB0(Fighter_GObj* gobj, ftHurtboxInit* hurt)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -69,6 +84,11 @@ static inline void inlineB0(Fighter_GObj* gobj, ftHurtboxInit* hurt)
     ftColl_HurtboxInit(fp, fp->hurt_capsules, hurt);
 }
 
+/**
+ * @brief Yoshi Egg logic for ftKb_SpecialNYs_8010AC78
+ * @param victim 
+ * @param gobj 
+ */
 void ftKb_SpecialNYs_8010AC78(Fighter_GObj* victim, Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(victim);
@@ -107,6 +127,10 @@ void ftKb_SpecialNYs_8010AC78(Fighter_GObj* victim, Fighter_GObj* gobj)
     fp->accessory4_cb = fn_8010AA64;
 }
 
+/**
+ * @brief Yoshi Egg logic for ftCo_KirbyYoshiEgg_Anim
+ * @param gobj 
+ */
 void ftCo_KirbyYoshiEgg_Anim(Fighter_GObj* gobj)
 {
     f32 temp_ret;
@@ -143,6 +167,10 @@ void ftCo_KirbyYoshiEgg_Anim(Fighter_GObj* gobj)
 
 void ftCo_KirbyYoshiEgg_IASA(Fighter_GObj* gobj) {}
 
+/**
+ * @brief Yoshi Egg logic for ftCo_KirbyYoshiEgg_Phys
+ * @param gobj 
+ */
 void ftCo_KirbyYoshiEgg_Phys(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -154,6 +182,10 @@ void ftCo_KirbyYoshiEgg_Phys(Fighter_GObj* gobj)
     ft_80084DB0(gobj);
 }
 
+/**
+ * @brief Yoshi Egg logic for ftCo_KirbyYoshiEgg_Coll
+ * @param gobj 
+ */
 void ftCo_KirbyYoshiEgg_Coll(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -165,16 +197,28 @@ void ftCo_KirbyYoshiEgg_Coll(Fighter_GObj* gobj)
     ft_80082C74(gobj, fn_8010B124);
 }
 
+/**
+ * @brief Yoshi Egg logic for fn_8010B124
+ * @param gobj 
+ */
 void fn_8010B124(Fighter_GObj* gobj)
 {
     ftCommon_8007D7FC(GET_FIGHTER(gobj));
 }
 
+/**
+ * @brief Yoshi Egg logic for fn_8010B148
+ * @param gobj 
+ */
 void fn_8010B148(Fighter_GObj* gobj)
 {
     ftCommon_8007D5D4(GET_FIGHTER(gobj));
 }
 
+/**
+ * @brief Yoshi Egg logic for fn_8010B16C
+ * @param gobj 
+ */
 void fn_8010B16C(Fighter_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
@@ -185,6 +229,10 @@ void fn_8010B16C(Fighter_GObj* gobj)
     fp->x1828 = 4;
 }
 
+/**
+ * @brief Yoshi Egg logic for fn_8010B1D4
+ * @param gobj 
+ */
 void fn_8010B1D4(Fighter_GObj* gobj)
 {
     Fighter_UpdateModelScale(gobj);

@@ -1,3 +1,9 @@
+/**
+ * @file ftkirbyspecialiceclimber.c
+ * @brief Neutral-B Copy Ability (Iceclimber)
+ * @details Kirby's Neutral-B Copy Ability (Iceclimber) logic in Melee
+ * Module prefix: ft (Fighter)
+ */
 #include "ftkirbyspecialiceclimber.h"
 
 #include <melee/ft/forward.h>
@@ -27,6 +33,11 @@
 
 /* 1090D4 */ static void fn_801090D4(Fighter_GObj*);
 
+/**
+ * @brief Neutral-B Copy Ability (Iceclimber) logic for ftKb_SpecialNIc_80108CE8
+ * @param gobj 
+ * @param it_gobj 
+ */
 void ftKb_SpecialNIc_80108CE8(Fighter_GObj* gobj, Item_GObj* it_gobj)
 {
     Fighter* ft = GET_FIGHTER(gobj);
@@ -35,6 +46,10 @@ void ftKb_SpecialNIc_80108CE8(Fighter_GObj* gobj, Item_GObj* it_gobj)
     }
 }
 
+/**
+ * @brief Neutral-B Copy Ability (Iceclimber) logic for ftKb_SpecialNIc_80108D04
+ * @param gobj 
+ */
 void ftKb_SpecialNIc_80108D04(HSD_GObj* gobj)
 {
     Fighter* fp = HSD_GObjGetUserData(gobj);
@@ -50,6 +65,10 @@ void ftKb_SpecialNIc_80108D04(HSD_GObj* gobj)
     }
 }
 
+/**
+ * @brief Neutral-B Copy Ability (Iceclimber) logic for ftKb_SpecialNIc_80108D64
+ * @param gobj 
+ */
 void ftKb_SpecialNIc_80108D64(Fighter_GObj* gobj)
 {
     int new_var;
@@ -73,6 +92,10 @@ void ftKb_SpecialNIc_80108D64(Fighter_GObj* gobj)
     }
 }
 
+/**
+ * @brief Neutral-B Copy Ability (Iceclimber) logic for ftKb_SpecialNIc_80108E14
+ * @param gobj 
+ */
 void ftKb_SpecialNIc_80108E14(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -102,6 +125,10 @@ void ftKb_SpecialNIc_80108E14(Fighter_GObj* gobj)
     }
 }
 
+/**
+ * @brief Neutral-B Copy Ability (Iceclimber) logic for ftKb_PpSpecialN_Anim
+ * @param gobj 
+ */
 void ftKb_PpSpecialN_Anim(Fighter_GObj* gobj)
 {
     if (!ftAnim_IsFramesRemaining(gobj)) {
@@ -109,6 +136,10 @@ void ftKb_PpSpecialN_Anim(Fighter_GObj* gobj)
     }
 }
 
+/**
+ * @brief Neutral-B Copy Ability (Iceclimber) logic for ftKb_PpSpecialAirN_Anim
+ * @param gobj 
+ */
 void ftKb_PpSpecialAirN_Anim(Fighter_GObj* gobj)
 {
     if (!ftAnim_IsFramesRemaining(gobj)) {
@@ -120,16 +151,28 @@ void ftKb_PpSpecialN_IASA(Fighter_GObj* gobj) {}
 
 void ftKb_PpSpecialAirN_IASA(Fighter_GObj* gobj) {}
 
+/**
+ * @brief Neutral-B Copy Ability (Iceclimber) logic for ftKb_PpSpecialN_Phys
+ * @param gobj 
+ */
 void ftKb_PpSpecialN_Phys(Fighter_GObj* gobj)
 {
     ft_80084F3C(gobj);
 }
 
+/**
+ * @brief Neutral-B Copy Ability (Iceclimber) logic for ftKb_PpSpecialAirN_Phys
+ * @param gobj 
+ */
 void ftKb_PpSpecialAirN_Phys(Fighter_GObj* gobj)
 {
     ft_80084EEC(gobj);
 }
 
+/**
+ * @brief Neutral-B Copy Ability (Iceclimber) logic for ftKb_PpSpecialN_Coll
+ * @param gobj 
+ */
 void ftKb_PpSpecialN_Coll(Fighter_GObj* gobj)
 {
     if (!ft_80082708(gobj)) {
@@ -147,6 +190,10 @@ void ftKb_PpSpecialN_Coll(Fighter_GObj* gobj)
     }
 }
 
+/**
+ * @brief Neutral-B Copy Ability (Iceclimber) logic for ftKb_PpSpecialAirN_Coll
+ * @param gobj 
+ */
 void ftKb_PpSpecialAirN_Coll(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -169,6 +216,10 @@ void ftKb_PpSpecialAirN_Coll(Fighter_GObj* gobj)
     }
 }
 
+/**
+ * @brief Neutral-B Copy Ability (Iceclimber) logic for fn_801090D4
+ * @param gobj 
+ */
 void fn_801090D4(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -209,6 +260,10 @@ void fn_801090D4(Fighter_GObj* gobj)
     }
 }
 
+/**
+ * @brief Neutral-B Copy Ability (Iceclimber) logic for ftKb_SpecialNYs_80109238
+ * @param gobj 
+ */
 Fighter_Part ftKb_SpecialNYs_80109238(Fighter_GObj* gobj)
 {
     return ftParts_GetBoneIndex(GET_FIGHTER(gobj), FtPart_TransN2);

@@ -1,3 +1,9 @@
+/**
+ * @file ftkirbyspecialdonkey.c
+ * @brief Neutral-B Copy Ability (Donkey)
+ * @details Kirby's Neutral-B Copy Ability (Donkey) logic in Melee
+ * Module prefix: ft (Fighter)
+ */
 #include "ftkirbyspecialdonkey.h"
 
 #include <melee/ft/forward.h>
@@ -26,12 +32,19 @@
 #include <melee/ft/types.h>
 
 #ifdef MUST_MATCH
+/**
+ * @brief Neutral-B Copy Ability (Donkey) logic for sdata2_order0
+ */
 static void sdata2_order0(void)
 {
     (void) S32_TO_F32;
 }
 #endif
 
+/**
+ * @brief Neutral-B Copy Ability (Donkey) logic for ftKb_SpecialNDk_800FF8EC
+ * @param gobj 
+ */
 void ftKb_SpecialNDk_800FF8EC(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -65,6 +78,10 @@ void ftKb_SpecialNDk_800FF8EC(Fighter_GObj* gobj)
     ftAnim_8006EBA4(gobj);
 }
 
+/**
+ * @brief Neutral-B Copy Ability (Donkey) logic for ftKb_SpecialNDk_800FFA10
+ * @param gobj 
+ */
 void ftKb_SpecialNDk_800FFA10(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -96,6 +113,10 @@ void ftKb_SpecialNDk_800FFA10(Fighter_GObj* gobj)
     ftAnim_8006EBA4(gobj);
 }
 
+/**
+ * @brief Neutral-B Copy Ability (Donkey) logic for ftKb_DkSpecialNStart_Coll_inline
+ * @param gobj 
+ */
 static inline void ftKb_DkSpecialNStart_Coll_inline(Fighter_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
@@ -104,6 +125,10 @@ static inline void ftKb_DkSpecialNStart_Coll_inline(Fighter_GObj* gobj)
     Fighter_SetEffectHitlagCallbacks(fp);
 }
 
+/**
+ * @brief Neutral-B Copy Ability (Donkey) logic for ftKb_DkSpecialNStart_Anim
+ * @param gobj 
+ */
 void ftKb_DkSpecialNStart_Anim(Fighter_GObj* gobj)
 {
     if (!ftAnim_IsFramesRemaining(gobj)) {
@@ -113,6 +138,10 @@ void ftKb_DkSpecialNStart_Anim(Fighter_GObj* gobj)
     }
 }
 
+/**
+ * @brief Neutral-B Copy Ability (Donkey) logic for ftKb_DkSpecialNLoop_Anim
+ * @param gobj 
+ */
 void ftKb_DkSpecialNLoop_Anim(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -134,6 +163,10 @@ void ftKb_DkSpecialNLoop_Anim(Fighter_GObj* gobj)
     }
 }
 
+/**
+ * @brief Neutral-B Copy Ability (Donkey) logic for ftKb_DkSpecialNCancel_Anim
+ * @param gobj 
+ */
 void ftKb_DkSpecialNCancel_Anim(Fighter_GObj* gobj)
 {
     if (!ftAnim_IsFramesRemaining(gobj)) {
@@ -144,6 +177,10 @@ void ftKb_DkSpecialNCancel_Anim(Fighter_GObj* gobj)
     }
 }
 
+/**
+ * @brief Neutral-B Copy Ability (Donkey) logic for ftKb_DkSpecialN_Anim
+ * @param gobj 
+ */
 void ftKb_DkSpecialN_Anim(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -207,6 +244,10 @@ void ftKb_DkSpecialN_Anim(Fighter_GObj* gobj)
     }
 }
 
+/**
+ * @brief Neutral-B Copy Ability (Donkey) logic for ftKb_DkSpecialNFull_Anim
+ * @param gobj 
+ */
 void ftKb_DkSpecialNFull_Anim(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -253,6 +294,10 @@ void ftKb_DkSpecialNFull_Anim(Fighter_GObj* gobj)
     }
 }
 
+/**
+ * @brief Neutral-B Copy Ability (Donkey) logic for ftKb_DkSpecialAirNStart_Anim
+ * @param gobj 
+ */
 void ftKb_DkSpecialAirNStart_Anim(Fighter_GObj* gobj)
 {
     if (!ftAnim_IsFramesRemaining(gobj)) {
@@ -262,6 +307,10 @@ void ftKb_DkSpecialAirNStart_Anim(Fighter_GObj* gobj)
     }
 }
 
+/**
+ * @brief Neutral-B Copy Ability (Donkey) logic for ftKb_DkSpecialAirNLoop_Anim
+ * @param gobj 
+ */
 void ftKb_DkSpecialAirNLoop_Anim(Fighter_GObj* gobj)
 {
     ftKb_DatAttrs* new_var;
@@ -284,6 +333,10 @@ void ftKb_DkSpecialAirNLoop_Anim(Fighter_GObj* gobj)
     }
 }
 
+/**
+ * @brief Neutral-B Copy Ability (Donkey) logic for ftKb_DkSpecialAirNCancel_Anim
+ * @param gobj 
+ */
 void ftKb_DkSpecialAirNCancel_Anim(Fighter_GObj* gobj)
 {
     u8 _[16];
@@ -295,6 +348,10 @@ void ftKb_DkSpecialAirNCancel_Anim(Fighter_GObj* gobj)
     }
 }
 
+/**
+ * @brief Neutral-B Copy Ability (Donkey) logic for ftKb_DkSpecialAirN_Anim
+ * @param gobj 
+ */
 void ftKb_DkSpecialAirN_Anim(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -349,6 +406,10 @@ void ftKb_DkSpecialAirN_Anim(Fighter_GObj* gobj)
     }
 }
 
+/**
+ * @brief Neutral-B Copy Ability (Donkey) logic for ftKb_DkSpecialAirNFull_Anim
+ * @param gobj 
+ */
 void ftKb_DkSpecialAirNFull_Anim(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -387,6 +448,10 @@ void ftKb_DkSpecialAirNFull_Anim(Fighter_GObj* gobj)
 
 void ftKb_DkSpecialNStart_IASA(Fighter_GObj* gobj) {}
 
+/**
+ * @brief Neutral-B Copy Ability (Donkey) logic for ftKb_DkSpecialNLoop_IASA
+ * @param gobj 
+ */
 void ftKb_DkSpecialNLoop_IASA(Fighter_GObj* gobj)
 {
     Fighter* new_var;
@@ -420,6 +485,10 @@ void ftKb_DkSpecialNFull_IASA(Fighter_GObj* gobj) {}
 
 void ftKb_DkSpecialAirNStart_IASA(Fighter_GObj* gobj) {}
 
+/**
+ * @brief Neutral-B Copy Ability (Donkey) logic for ftKb_DkSpecialAirNLoop_IASA
+ * @param gobj 
+ */
 void ftKb_DkSpecialAirNLoop_IASA(Fighter_GObj* gobj)
 {
     Fighter* new_var;
@@ -449,57 +518,101 @@ void ftKb_DkSpecialAirN_IASA(Fighter_GObj* gobj) {}
 
 void ftKb_DkSpecialAirNFull_IASA(Fighter_GObj* gobj) {}
 
+/**
+ * @brief Neutral-B Copy Ability (Donkey) logic for ftKb_DkSpecialNStart_Phys
+ * @param gobj 
+ */
 void ftKb_DkSpecialNStart_Phys(Fighter_GObj* gobj)
 
 {
     ft_80084F3C(gobj);
 }
 
+/**
+ * @brief Neutral-B Copy Ability (Donkey) logic for ftKb_DkSpecialNLoop_Phys
+ * @param gobj 
+ */
 void ftKb_DkSpecialNLoop_Phys(Fighter_GObj* gobj)
 {
     ft_80084F3C(gobj);
 }
 
+/**
+ * @brief Neutral-B Copy Ability (Donkey) logic for ftKb_DkSpecialNCancel_Phys
+ * @param gobj 
+ */
 void ftKb_DkSpecialNCancel_Phys(Fighter_GObj* gobj)
 {
     ft_80084F3C(gobj);
 }
 
+/**
+ * @brief Neutral-B Copy Ability (Donkey) logic for ftKb_DkSpecialN_Phys
+ * @param gobj 
+ */
 void ftKb_DkSpecialN_Phys(Fighter_GObj* gobj)
 {
     ft_80084F3C(gobj);
 }
 
+/**
+ * @brief Neutral-B Copy Ability (Donkey) logic for ftKb_DkSpecialNFull_Phys
+ * @param gobj 
+ */
 void ftKb_DkSpecialNFull_Phys(Fighter_GObj* gobj)
 {
     ft_80084F3C(gobj);
 }
 
+/**
+ * @brief Neutral-B Copy Ability (Donkey) logic for ftKb_DkSpecialAirNStart_Phys
+ * @param gobj 
+ */
 void ftKb_DkSpecialAirNStart_Phys(Fighter_GObj* gobj)
 {
     ft_80084EEC(gobj);
 }
 
+/**
+ * @brief Neutral-B Copy Ability (Donkey) logic for ftKb_DkSpecialAirNLoop_Phys
+ * @param gobj 
+ */
 void ftKb_DkSpecialAirNLoop_Phys(Fighter_GObj* gobj)
 {
     ft_80084EEC(gobj);
 }
 
+/**
+ * @brief Neutral-B Copy Ability (Donkey) logic for ftKb_DkSpecialAirNCancel_Phys
+ * @param gobj 
+ */
 void ftKb_DkSpecialAirNCancel_Phys(Fighter_GObj* gobj)
 {
     ft_80084EEC(gobj);
 }
 
+/**
+ * @brief Neutral-B Copy Ability (Donkey) logic for ftKb_DkSpecialAirN_Phys
+ * @param gobj 
+ */
 void ftKb_DkSpecialAirN_Phys(Fighter_GObj* gobj)
 {
     ft_80084EEC(gobj);
 }
 
+/**
+ * @brief Neutral-B Copy Ability (Donkey) logic for ftKb_DkSpecialAirNFull_Phys
+ * @param gobj 
+ */
 void ftKb_DkSpecialAirNFull_Phys(Fighter_GObj* gobj)
 {
     ft_80084EEC(gobj);
 }
 
+/**
+ * @brief Neutral-B Copy Ability (Donkey) logic for ftKb_DkSpecialNStart_Coll
+ * @param gobj 
+ */
 void ftKb_DkSpecialNStart_Coll(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -510,6 +623,10 @@ void ftKb_DkSpecialNStart_Coll(Fighter_GObj* gobj)
     }
 }
 
+/**
+ * @brief Neutral-B Copy Ability (Donkey) logic for ftKb_DkSpecialNLoop_Coll
+ * @param gobj 
+ */
 void ftKb_DkSpecialNLoop_Coll(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -520,6 +637,10 @@ void ftKb_DkSpecialNLoop_Coll(Fighter_GObj* gobj)
     }
 }
 
+/**
+ * @brief Neutral-B Copy Ability (Donkey) logic for ftKb_DkSpecialNCancel_Coll
+ * @param gobj 
+ */
 void ftKb_DkSpecialNCancel_Coll(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -530,6 +651,10 @@ void ftKb_DkSpecialNCancel_Coll(Fighter_GObj* gobj)
     }
 }
 
+/**
+ * @brief Neutral-B Copy Ability (Donkey) logic for ftKb_DkSpecialN_Coll
+ * @param gobj 
+ */
 void ftKb_DkSpecialN_Coll(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -540,6 +665,10 @@ void ftKb_DkSpecialN_Coll(Fighter_GObj* gobj)
     }
 }
 
+/**
+ * @brief Neutral-B Copy Ability (Donkey) logic for ftKb_DkSpecialNFull_Coll
+ * @param gobj 
+ */
 void ftKb_DkSpecialNFull_Coll(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -550,6 +679,10 @@ void ftKb_DkSpecialNFull_Coll(Fighter_GObj* gobj)
     }
 }
 
+/**
+ * @brief Neutral-B Copy Ability (Donkey) logic for ftKb_DkSpecialAirNStart_Coll
+ * @param gobj 
+ */
 void ftKb_DkSpecialAirNStart_Coll(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -560,6 +693,10 @@ void ftKb_DkSpecialAirNStart_Coll(Fighter_GObj* gobj)
     }
 }
 
+/**
+ * @brief Neutral-B Copy Ability (Donkey) logic for ftKb_DkSpecialAirNLoop_Coll
+ * @param gobj 
+ */
 void ftKb_DkSpecialAirNLoop_Coll(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -570,6 +707,10 @@ void ftKb_DkSpecialAirNLoop_Coll(Fighter_GObj* gobj)
     }
 }
 
+/**
+ * @brief Neutral-B Copy Ability (Donkey) logic for ftKb_DkSpecialAirNCancel_Coll
+ * @param gobj 
+ */
 void ftKb_DkSpecialAirNCancel_Coll(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -580,6 +721,10 @@ void ftKb_DkSpecialAirNCancel_Coll(Fighter_GObj* gobj)
     }
 }
 
+/**
+ * @brief Neutral-B Copy Ability (Donkey) logic for ftKb_DkSpecialAirN_Coll
+ * @param gobj 
+ */
 void ftKb_DkSpecialAirN_Coll(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -590,6 +735,10 @@ void ftKb_DkSpecialAirN_Coll(Fighter_GObj* gobj)
     }
 }
 
+/**
+ * @brief Neutral-B Copy Ability (Donkey) logic for ftKb_DkSpecialAirNFull_Coll
+ * @param gobj 
+ */
 void ftKb_DkSpecialAirNFull_Coll(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -600,6 +749,10 @@ void ftKb_DkSpecialAirNFull_Coll(Fighter_GObj* gobj)
     }
 }
 
+/**
+ * @brief Neutral-B Copy Ability (Donkey) logic for ftKb_SpecialNPr_80100DE0
+ * @param gobj 
+ */
 void ftKb_SpecialNPr_80100DE0(Fighter_GObj* gobj)
 {
     Fighter* ft = GET_FIGHTER(gobj);

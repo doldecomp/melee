@@ -1,3 +1,9 @@
+/**
+ * @file ftkirbyspecialgamewatch.h
+ * @brief Neutral-B Copy Ability (Gamewatch.h)
+ * @details Kirby's Neutral-B Copy Ability (Gamewatch.h) logic in Melee
+ * Module prefix: ft (Fighter)
+ */
 #ifndef GALE01_10D074
 #define GALE01_10D074
 

@@ -1,3 +1,9 @@
+/**
+ * @file ftkirbyyoshiegg.h
+ * @brief Yoshi Egg
+ * @details Kirby's Yoshi Egg logic in Melee
+ * Module prefix: ft (Fighter)
+ */
 #ifndef GALE01_10AA2C
 #define GALE01_10AA2C
 

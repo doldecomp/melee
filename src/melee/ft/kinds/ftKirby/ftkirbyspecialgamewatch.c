@@ -1,3 +1,9 @@
+/**
+ * @file ftkirbyspecialgamewatch.c
+ * @brief Neutral-B Copy Ability (Gamewatch)
+ * @details Kirby's Neutral-B Copy Ability (Gamewatch) logic in Melee
+ * Module prefix: ft (Fighter)
+ */
 #include "ftkirbyspecialgamewatch.h"
 
 #include <melee/ft/forward.h>
@@ -29,6 +35,10 @@ static MotionFlags const ftKb_MF_GwSpecialN_Coll =
 /* 10CE5C */ static void fn_8010CE5C(Fighter_GObj* gobj);
 /* 10CFB0 */ static void fn_8010CFB0(Fighter_GObj* gobj);
 
+/**
+ * @brief Neutral-B Copy Ability (Gamewatch) logic for fn_8010CE5C
+ * @param gobj 
+ */
 void fn_8010CE5C(Fighter_GObj* gobj)
 {
     Vec3 vec0;
@@ -96,6 +106,10 @@ void fn_8010CE5C(Fighter_GObj* gobj)
     }
 }
 
+/**
+ * @brief Neutral-B Copy Ability (Gamewatch) logic for fn_8010CFB0
+ * @param gobj 
+ */
 void fn_8010CFB0(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -113,6 +127,10 @@ void fn_8010CFB0(Fighter_GObj* gobj)
     fp->accessory4_cb = fn_8010CE5C;
 }
 
+/**
+ * @brief Neutral-B Copy Ability (Gamewatch) logic for ftKb_SpecialNGw_8010D074
+ * @param gobj 
+ */
 void ftKb_SpecialNGw_8010D074(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -120,6 +138,10 @@ void ftKb_SpecialNGw_8010D074(Fighter_GObj* gobj)
     fp->u.kb.xDC = NULL;
 }
 
+/**
+ * @brief Neutral-B Copy Ability (Gamewatch) logic for ftKb_SpecialNGw_8010D0A8
+ * @param gobj 
+ */
 void ftKb_SpecialNGw_8010D0A8(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -129,6 +151,10 @@ void ftKb_SpecialNGw_8010D0A8(Fighter_GObj* gobj)
     }
 }
 
+/**
+ * @brief Neutral-B Copy Ability (Gamewatch) logic for fn_8010D100
+ * @param gobj 
+ */
 void fn_8010D100(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -137,6 +163,10 @@ void fn_8010D100(Fighter_GObj* gobj)
     }
 }
 
+/**
+ * @brief Neutral-B Copy Ability (Gamewatch) logic for ftKb_SpecialNGw_8010D130
+ * @param gobj 
+ */
 void ftKb_SpecialNGw_8010D130(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -145,6 +175,10 @@ void ftKb_SpecialNGw_8010D130(Fighter_GObj* gobj)
     }
 }
 
+/**
+ * @brief Neutral-B Copy Ability (Gamewatch) logic for ftKb_SpecialNGw_8010D160
+ * @param gobj 
+ */
 bool ftKb_SpecialNGw_8010D160(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -157,6 +191,10 @@ bool ftKb_SpecialNGw_8010D160(Fighter_GObj* gobj)
 }
 
 /// #ftGameWatch_SpecialN_SetVars with callback arg
+/**
+ * @brief Neutral-B Copy Ability (Gamewatch) logic for setGwVars
+ * @param fighter_gobj 
+ */
 static inline void setGwVars(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = GET_FIGHTER(fighter_gobj);
@@ -168,6 +206,10 @@ static inline void setGwVars(HSD_GObj* fighter_gobj)
     fp->accessory4_cb = fn_8010CFB0;
 }
 
+/**
+ * @brief Neutral-B Copy Ability (Gamewatch) logic for ftKb_SpecialNGw_8010D188
+ * @param gobj 
+ */
 void ftKb_SpecialNGw_8010D188(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -178,6 +220,10 @@ void ftKb_SpecialNGw_8010D188(Fighter_GObj* gobj)
     setGwVars(gobj);
 }
 
+/**
+ * @brief Neutral-B Copy Ability (Gamewatch) logic for ftKb_SpecialNGw_8010D204
+ * @param gobj 
+ */
 void ftKb_SpecialNGw_8010D204(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -188,6 +234,10 @@ void ftKb_SpecialNGw_8010D204(HSD_GObj* gobj)
     setGwVars(gobj);
 }
 
+/**
+ * @brief Neutral-B Copy Ability (Gamewatch) logic for ftKb_GwSpecialN_Anim
+ * @param gobj 
+ */
 void ftKb_GwSpecialN_Anim(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -207,6 +257,10 @@ void ftKb_GwSpecialN_Anim(Fighter_GObj* gobj)
     }
 }
 
+/**
+ * @brief Neutral-B Copy Ability (Gamewatch) logic for ftKb_GwSpecialAirN_Anim
+ * @param gobj 
+ */
 void ftKb_GwSpecialAirN_Anim(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -226,6 +280,10 @@ void ftKb_GwSpecialAirN_Anim(Fighter_GObj* gobj)
     }
 }
 
+/**
+ * @brief Neutral-B Copy Ability (Gamewatch) logic for ftKb_GwSpecialN_IASA
+ * @param gobj 
+ */
 void ftKb_GwSpecialN_IASA(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -241,6 +299,10 @@ void ftKb_GwSpecialN_IASA(Fighter_GObj* gobj)
     }
 }
 
+/**
+ * @brief Neutral-B Copy Ability (Gamewatch) logic for ftKb_GwSpecialAirN_IASA
+ * @param gobj 
+ */
 void ftKb_GwSpecialAirN_IASA(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -256,16 +318,28 @@ void ftKb_GwSpecialAirN_IASA(Fighter_GObj* gobj)
     }
 }
 
+/**
+ * @brief Neutral-B Copy Ability (Gamewatch) logic for ftKb_GwSpecialN_Phys
+ * @param gobj 
+ */
 void ftKb_GwSpecialN_Phys(Fighter_GObj* gobj)
 {
     ft_80084F3C(gobj);
 }
 
+/**
+ * @brief Neutral-B Copy Ability (Gamewatch) logic for ftKb_GwSpecialAirN_Phys
+ * @param gobj 
+ */
 void ftKb_GwSpecialAirN_Phys(Fighter_GObj* gobj)
 {
     ft_80084EEC(gobj);
 }
 
+/**
+ * @brief Neutral-B Copy Ability (Gamewatch) logic for ftKb_GwSpecialN_Coll
+ * @param gobj 
+ */
 void ftKb_GwSpecialN_Coll(Fighter_GObj* gobj)
 {
     if (!ft_800827A0(gobj)) {
@@ -273,6 +347,10 @@ void ftKb_GwSpecialN_Coll(Fighter_GObj* gobj)
     }
 }
 
+/**
+ * @brief Neutral-B Copy Ability (Gamewatch) logic for ftKb_GwSpecialAirN_Coll
+ * @param gobj 
+ */
 void ftKb_GwSpecialAirN_Coll(Fighter_GObj* gobj)
 {
     if (ft_80081D0C(gobj) != GA_Ground) {
@@ -280,6 +358,10 @@ void ftKb_GwSpecialAirN_Coll(Fighter_GObj* gobj)
     }
 }
 
+/**
+ * @brief Neutral-B Copy Ability (Gamewatch) logic for ftKb_SpecialNGw_8010D580
+ * @param gobj 
+ */
 void ftKb_SpecialNGw_8010D580(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -290,6 +372,10 @@ void ftKb_SpecialNGw_8010D580(Fighter_GObj* gobj)
     fp->accessory4_cb = fn_8010CE5C;
 }
 
+/**
+ * @brief Neutral-B Copy Ability (Gamewatch) logic for ftKb_SpecialNGw_8010D5F0
+ * @param gobj 
+ */
 void ftKb_SpecialNGw_8010D5F0(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -300,6 +386,10 @@ void ftKb_SpecialNGw_8010D5F0(Fighter_GObj* gobj)
     fp->accessory4_cb = fn_8010CE5C;
 }
 
+/**
+ * @brief Neutral-B Copy Ability (Gamewatch) logic for inline1
+ * @param gobj 
+ */
 static inline void inline1(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -309,20 +399,30 @@ static inline void inline1(Fighter_GObj* gobj)
     fp->accessory4_cb = fn_8010CE5C;
 }
 
-void ftKb_SpecialNGw_8010D660(Fighter_GObj* gobj, f32 arg1)
+/**
+ * @brief Neutral-B Copy Ability (Gamewatch) logic for ftKb_SpecialNGw_8010D660
+ * @param gobj 
+ * @param arg1 
+ */
+void ftKb_SpecialNGw_8010D660(Fighter_GObj* gobj, f32 val)
 {
     PAD_STACK(8);
     Fighter_ChangeMotionState(gobj, ftKb_MS_GwSpecialN, 0x0C4C508C,
-                              arg1 - 1.0F, 1.0F, 0.0F, NULL);
+                              val - 1.0F, 1.0F, 0.0F, NULL);
     ftAnim_8006EBA4(gobj);
     inline1(gobj);
 }
 
-void ftKb_SpecialNGw_8010D6D0(Fighter_GObj* gobj, f32 arg1)
+/**
+ * @brief Neutral-B Copy Ability (Gamewatch) logic for ftKb_SpecialNGw_8010D6D0
+ * @param gobj 
+ * @param arg1 
+ */
+void ftKb_SpecialNGw_8010D6D0(Fighter_GObj* gobj, f32 val)
 {
     PAD_STACK(8);
     Fighter_ChangeMotionState(gobj, ftKb_MS_GwSpecialAirN, 0x0C4C508C,
-                              arg1 - 1.0F, 1.0F, 0.0F, NULL);
+                              val - 1.0F, 1.0F, 0.0F, NULL);
     ftAnim_8006EBA4(gobj);
     inline1(gobj);
 }

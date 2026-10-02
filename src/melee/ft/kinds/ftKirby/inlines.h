@@ -1,9 +1,19 @@
+/**
+ * @file inlines.h
+ * @brief Kirby Module
+ * @details Kirby's Kirby Module logic in Melee
+ * Module prefix: ft (Fighter)
+ */
 #ifndef MELEE_FT_CHARA_FTKIRBY_INLINES_H
 #define MELEE_FT_CHARA_FTKIRBY_INLINES_H
 
 #include <melee/ft/inlines.h>
 #include <melee/ft/kinds/ftKirby/ftkirby.h>
 
+/**
+ * @brief Kirby Module logic for ftKb_SpecialN_set_cbs
+ * @param gobj 
+ */
 static inline void ftKb_SpecialN_set_cbs(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -11,6 +21,10 @@ static inline void ftKb_SpecialN_set_cbs(Fighter_GObj* gobj)
     fp->take_dmg_cb = ftKb_Init_800EE7B8;
 }
 
+/**
+ * @brief Kirby Module logic for ftKb_SpecialN_set_cbs2
+ * @param gobj 
+ */
 static inline void ftKb_SpecialN_set_cbs2(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);

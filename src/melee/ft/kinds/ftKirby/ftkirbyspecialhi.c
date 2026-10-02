@@ -1,3 +1,9 @@
+/**
+ * @file ftkirbyspecialhi.c
+ * @brief Up-B (Final Cutter)
+ * @details Kirby's Up-B (Final Cutter) logic in Melee
+ * Module prefix: ft (Fighter)
+ */
 #include "ftkirbyspecialhi.h"
 
 #include <melee/ft/forward.h>
@@ -32,6 +38,10 @@ static MotionFlags const ftKb_MF_SpecialHi_Coll =
 
 /* 0F21E8 */ static void fn_800F21E8(Fighter_GObj* gobj);
 
+/**
+ * @brief Up-B (Final Cutter) logic for fn_800F21E8
+ * @param gobj 
+ */
 void fn_800F21E8(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -54,12 +64,20 @@ void fn_800F21E8(Fighter_GObj* gobj)
     }
 }
 
+/**
+ * @brief Up-B (Final Cutter) logic for ftKb_AttackDashAir_800F22D4
+ * @param gobj 
+ */
 void ftKb_AttackDashAir_800F22D4(Fighter_GObj* gobj)
 {
     Fighter* ft = GET_FIGHTER(gobj);
     ftPartSetRotX(ft, 0, 0.0F);
 }
 
+/**
+ * @brief Up-B (Final Cutter) logic for ftKb_SpecialHi_Enter
+ * @param gobj 
+ */
 void ftKb_SpecialHi_Enter(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -77,6 +95,10 @@ void ftKb_SpecialHi_Enter(Fighter_GObj* gobj)
     Fighter_SetEffectHitlagCallbacks(fp);
 }
 
+/**
+ * @brief Up-B (Final Cutter) logic for ftKb_SpecialAirHi_Enter
+ * @param gobj 
+ */
 void ftKb_SpecialAirHi_Enter(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -94,6 +116,10 @@ void ftKb_SpecialAirHi_Enter(Fighter_GObj* gobj)
     Fighter_SetEffectHitlagCallbacks(fp);
 }
 
+/**
+ * @brief Up-B (Final Cutter) logic for ftKb_SpecialHi1_Anim
+ * @param gobj 
+ */
 void ftKb_SpecialHi1_Anim(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -107,6 +133,10 @@ void ftKb_SpecialHi1_Anim(Fighter_GObj* gobj)
     }
 }
 
+/**
+ * @brief Up-B (Final Cutter) logic for ftKb_SpecialHi2_Anim
+ * @param gobj 
+ */
 void ftKb_SpecialHi2_Anim(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -120,6 +150,10 @@ void ftKb_SpecialHi2_Anim(Fighter_GObj* gobj)
 
 void ftKb_SpecialHi3_Anim(Fighter_GObj* gobj) {}
 
+/**
+ * @brief Up-B (Final Cutter) logic for ftKb_SpecialHi4_Anim
+ * @param gobj 
+ */
 void ftKb_SpecialHi4_Anim(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -134,6 +168,10 @@ void ftKb_SpecialHi4_Anim(Fighter_GObj* gobj)
     }
 }
 
+/**
+ * @brief Up-B (Final Cutter) logic for ftKb_SpecialAirHi1_Anim
+ * @param gobj 
+ */
 void ftKb_SpecialAirHi1_Anim(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -146,6 +184,10 @@ void ftKb_SpecialAirHi1_Anim(Fighter_GObj* gobj)
     }
 }
 
+/**
+ * @brief Up-B (Final Cutter) logic for ftKb_SpecialAirHi2_Anim
+ * @param gobj 
+ */
 void ftKb_SpecialAirHi2_Anim(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -159,6 +201,10 @@ void ftKb_SpecialAirHi2_Anim(Fighter_GObj* gobj)
 
 void ftKb_SpecialAirHi3_Anim(Fighter_GObj* gobj) {}
 
+/**
+ * @brief Up-B (Final Cutter) logic for ftKb_SpecialAirHiEnd_Anim
+ * @param gobj 
+ */
 void ftKb_SpecialAirHiEnd_Anim(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -173,6 +219,10 @@ void ftKb_SpecialAirHiEnd_Anim(Fighter_GObj* gobj)
     }
 }
 
+/**
+ * @brief Up-B (Final Cutter) logic for ftKb_SpecialHi1_IASA
+ * @param gobj 
+ */
 void ftKb_SpecialHi1_IASA(Fighter_GObj* gobj)
 {
     float mag;
@@ -207,6 +257,10 @@ void ftKb_SpecialHi3_IASA(Fighter_GObj* gobj) {}
 
 void ftKb_SpecialHi4_IASA(Fighter_GObj* gobj) {}
 
+/**
+ * @brief Up-B (Final Cutter) logic for ftKb_SpecialAirHi1_IASA
+ * @param gobj 
+ */
 void ftKb_SpecialAirHi1_IASA(Fighter_GObj* gobj)
 {
     float mag;
@@ -241,6 +295,10 @@ void ftKb_SpecialAirHi3_IASA(Fighter_GObj* gobj) {}
 
 void ftKb_SpecialAirHiEnd_IASA(Fighter_GObj* gobj) {}
 
+/**
+ * @brief Up-B (Final Cutter) logic for ftKb_SpecialHi1_Phys
+ * @param gobj 
+ */
 void ftKb_SpecialHi1_Phys(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -256,6 +314,10 @@ void ftKb_SpecialHi1_Phys(Fighter_GObj* gobj)
     ftCommon_SetSelfMovementFromGroundedMovement(gobj);
 }
 
+/**
+ * @brief Up-B (Final Cutter) logic for ftKb_SpecialHi2_Phys
+ * @param gobj 
+ */
 void ftKb_SpecialHi2_Phys(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -271,6 +333,10 @@ void ftKb_SpecialHi2_Phys(Fighter_GObj* gobj)
     ftCommon_SetSelfMovementFromGroundedMovement(gobj);
 }
 
+/**
+ * @brief Up-B (Final Cutter) logic for ftKb_SpecialHi3_Phys
+ * @param gobj 
+ */
 void ftKb_SpecialHi3_Phys(Fighter_GObj* gobj)
 {
     ftKb_DatAttrs* new_var;
@@ -285,11 +351,19 @@ void ftKb_SpecialHi3_Phys(Fighter_GObj* gobj)
     ftCommon_SetSelfMovementFromGroundedMovement(gobj);
 }
 
+/**
+ * @brief Up-B (Final Cutter) logic for ftKb_SpecialHi4_Phys
+ * @param gobj 
+ */
 void ftKb_SpecialHi4_Phys(Fighter_GObj* gobj)
 {
     ft_80084FA8(gobj);
 }
 
+/**
+ * @brief Up-B (Final Cutter) logic for ftKb_SpecialAirHi1_Phys
+ * @param gobj 
+ */
 void ftKb_SpecialAirHi1_Phys(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -308,6 +382,10 @@ void ftKb_SpecialAirHi1_Phys(Fighter_GObj* gobj)
         temp_r30->air_drift_max);
 }
 
+/**
+ * @brief Up-B (Final Cutter) logic for ftKb_SpecialAirHi2_Phys
+ * @param gobj 
+ */
 void ftKb_SpecialAirHi2_Phys(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -326,6 +404,10 @@ void ftKb_SpecialAirHi2_Phys(Fighter_GObj* gobj)
         temp_r30->air_drift_max);
 }
 
+/**
+ * @brief Up-B (Final Cutter) logic for ftKb_SpecialAirHi3_Phys
+ * @param gobj 
+ */
 void ftKb_SpecialAirHi3_Phys(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -339,11 +421,19 @@ void ftKb_SpecialAirHi3_Phys(Fighter_GObj* gobj)
         fp->co_attrs.air_drift_max);
 }
 
+/**
+ * @brief Up-B (Final Cutter) logic for ftKb_SpecialAirHiEnd_Phys
+ * @param gobj 
+ */
 void ftKb_SpecialAirHiEnd_Phys(Fighter_GObj* gobj)
 {
     ft_80085134(gobj);
 }
 
+/**
+ * @brief Up-B (Final Cutter) logic for ftKb_SpecialHi1_Coll
+ * @param gobj 
+ */
 void ftKb_SpecialHi1_Coll(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -357,6 +447,10 @@ void ftKb_SpecialHi1_Coll(Fighter_GObj* gobj)
     }
 }
 
+/**
+ * @brief Up-B (Final Cutter) logic for ftKb_SpecialHi2_Coll
+ * @param gobj 
+ */
 void ftKb_SpecialHi2_Coll(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -395,6 +489,10 @@ void ftKb_SpecialHi2_Coll(Fighter_GObj* gobj)
     }
 }
 
+/**
+ * @brief Up-B (Final Cutter) logic for ftKb_SpecialHi3_Coll
+ * @param gobj 
+ */
 void ftKb_SpecialHi3_Coll(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -425,6 +523,10 @@ void ftKb_SpecialHi3_Coll(Fighter_GObj* gobj)
     }
 }
 
+/**
+ * @brief Up-B (Final Cutter) logic for ftKb_SpecialHi4_Coll
+ * @param gobj 
+ */
 void ftKb_SpecialHi4_Coll(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -443,6 +545,10 @@ void ftKb_SpecialHi4_Coll(Fighter_GObj* gobj)
                                           fp->coll_data.floor.normal.y));
 }
 
+/**
+ * @brief Up-B (Final Cutter) logic for ftKb_SpecialAirHi1_Coll
+ * @param gobj 
+ */
 void ftKb_SpecialAirHi1_Coll(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -456,6 +562,10 @@ void ftKb_SpecialAirHi1_Coll(Fighter_GObj* gobj)
     }
 }
 
+/**
+ * @brief Up-B (Final Cutter) logic for ftKb_SpecialAirHi2_Coll
+ * @param gobj 
+ */
 void ftKb_SpecialAirHi2_Coll(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -494,6 +604,10 @@ void ftKb_SpecialAirHi2_Coll(Fighter_GObj* gobj)
     }
 }
 
+/**
+ * @brief Up-B (Final Cutter) logic for ftKb_SpecialAirHi3_Coll
+ * @param gobj 
+ */
 void ftKb_SpecialAirHi3_Coll(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -523,6 +637,10 @@ void ftKb_SpecialAirHi3_Coll(Fighter_GObj* gobj)
     }
 }
 
+/**
+ * @brief Up-B (Final Cutter) logic for ftKb_SpecialAirHiEnd_Coll
+ * @param gobj 
+ */
 void ftKb_SpecialAirHiEnd_Coll(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);

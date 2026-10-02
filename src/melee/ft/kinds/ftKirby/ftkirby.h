@@ -1,3 +1,9 @@
+/**
+ * @file ftkirby.h
+ * @brief Kirby Module
+ * @details Kirby's Kirby Module logic in Melee
+ * Module prefix: ft (Fighter)
+ */
 #ifndef GALE01_0EE528
 #define GALE01_0EE528
 
@@ -164,7 +170,7 @@ typedef struct ftKirby_CopyName {
 /* 0F5820 */ void ftKb_SpecialN_800F5820(Fighter_GObj* gobj,
                                          ftCollisionBox* victim_coll_box,
                                          float victim_scale_x);
-/* 0F5874 */ void ftKb_SpecialN_800F5874(Vec2* arg0);
+/* 0F5874 */ void ftKb_SpecialN_800F5874(Vec2* vec);
 /* 0F5898 */ HSD_Joint* ftKb_SpecialN_800F5898(Fighter_GObj* gobj);
 /* 0F58AC */ float ftKb_SpecialN_800F58AC(Fighter_GObj* gobj,
                                           Vec3* victim_self_vel,
@@ -174,8 +180,8 @@ typedef struct ftKirby_CopyName {
                                           float victim_facing_dir);
 /* 0F5954 */ void ftKb_SpecialN_800F5954(Fighter_GObj* gobj);
 /* 0F597C */ bool ftKb_SpecialN_800F597C(Fighter_GObj* gobj);
-/* 0F598C */ void ftKb_SpecialN_800F598C(Fighter_GObj* gobj, int arg1);
-/* 0F5A04 */ void ftKb_SpecialN_800F5A04(Fighter_GObj* gobj, f32 arg1);
+/* 0F598C */ void ftKb_SpecialN_800F598C(Fighter_GObj* gobj, int val);
+/* 0F5A04 */ void ftKb_SpecialN_800F5A04(Fighter_GObj* gobj, f32 val);
 /* 0F5A38 */ bool ftKb_SpecialN_800F5A38(Fighter_GObj* gobj,
                                          Fighter* victim_fp);
 /* 0F5A60 */ float ftKb_SpecialN_800F5A60(Fighter_GObj* gobj);

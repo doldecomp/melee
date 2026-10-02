@@ -1,3 +1,9 @@
+/**
+ * @file ftkirbyspecialpikachu.c
+ * @brief Neutral-B Copy Ability (Pikachu)
+ * @details Kirby's Neutral-B Copy Ability (Pikachu) logic in Melee
+ * Module prefix: ft (Fighter)
+ */
 #include "ftkirbyspecialpikachu.h"
 
 #include <melee/ft/forward.h>
@@ -20,6 +26,12 @@
 #include <melee/ft/types.h>
 #include <melee/it/kinds/itpikachutjoltground.h>
 
+/**
+ * @brief Neutral-B Copy Ability (Pikachu) logic for doEnter
+ * @param gobj 
+ * @param pk_msid 
+ * @param pc_msid 
+ */
 static void doEnter(Fighter_GObj* gobj, ftKirby_MotionState pk_msid,
                     ftKirby_MotionState pc_msid)
 {
@@ -41,18 +53,30 @@ static void doEnter(Fighter_GObj* gobj, ftKirby_MotionState pk_msid,
     ftAnim_8006EBA4(gobj);
 }
 
+/**
+ * @brief Neutral-B Copy Ability (Pikachu) logic for ftKb_SpecialNPk_800F9FD4
+ * @param gobj 
+ */
 void ftKb_SpecialNPk_800F9FD4(Fighter_GObj* gobj)
 {
     doEnter(gobj, ftKb_MS_PkSpecialN, ftKb_MS_PcSpecialN);
     PAD_STACK(8);
 }
 
+/**
+ * @brief Neutral-B Copy Ability (Pikachu) logic for ftKb_SpecialNPk_800FA064
+ * @param gobj 
+ */
 void ftKb_SpecialNPk_800FA064(Fighter_GObj* gobj)
 {
     doEnter(gobj, ftKb_MS_PkSpecialAirN, ftKb_MS_PcSpecialAirN);
     PAD_STACK(8);
 }
 
+/**
+ * @brief Neutral-B Copy Ability (Pikachu) logic for ftKb_PkSpecialN_Anim
+ * @param gobj 
+ */
 void ftKb_PkSpecialN_Anim(Fighter_GObj* gobj)
 {
     Vec3 it_pos;
@@ -98,6 +122,10 @@ void ftKb_PkSpecialN_Anim(Fighter_GObj* gobj)
     }
 }
 
+/**
+ * @brief Neutral-B Copy Ability (Pikachu) logic for ftKb_PkSpecialAirN_Anim
+ * @param gobj 
+ */
 void ftKb_PkSpecialAirN_Anim(Fighter_GObj* gobj)
 {
     Vec3 it_pos;
@@ -168,11 +196,19 @@ void ftKb_PkSpecialN_IASA(Fighter_GObj* gobj) {}
 
 void ftKb_PkSpecialAirN_IASA(Fighter_GObj* gobj) {}
 
+/**
+ * @brief Neutral-B Copy Ability (Pikachu) logic for ftKb_PkSpecialN_Phys
+ * @param gobj 
+ */
 void ftKb_PkSpecialN_Phys(Fighter_GObj* gobj)
 {
     ft_80084F3C(gobj);
 }
 
+/**
+ * @brief Neutral-B Copy Ability (Pikachu) logic for ftKb_PkSpecialAirN_Phys
+ * @param gobj 
+ */
 void ftKb_PkSpecialAirN_Phys(Fighter_GObj* gobj)
 {
     ft_80084DB0(gobj);
@@ -183,6 +219,10 @@ static MotionFlags const coll_mf =
     Ft_MF_SkipItemVis | Ft_MF_Unk19 | Ft_MF_SkipModelPartVis |
     Ft_MF_SkipModelFlags | Ft_MF_Unk27;
 
+/**
+ * @brief Neutral-B Copy Ability (Pikachu) logic for ftKb_PkSpecialN_Coll
+ * @param gobj 
+ */
 void ftKb_PkSpecialN_Coll(Fighter_GObj* gobj)
 {
     if (ft_80082708(gobj) == GA_Ground) {
@@ -206,6 +246,10 @@ void ftKb_PkSpecialN_Coll(Fighter_GObj* gobj)
     }
 }
 
+/**
+ * @brief Neutral-B Copy Ability (Pikachu) logic for ftKb_PkSpecialAirN_Coll
+ * @param gobj 
+ */
 void ftKb_PkSpecialAirN_Coll(Fighter_GObj* gobj)
 {
     if (ft_80081D0C(gobj) == GA_Air) {

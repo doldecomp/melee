@@ -1,3 +1,9 @@
+/**
+ * @file ftkirbyspecialkoopa.c
+ * @brief Neutral-B Copy Ability (Koopa)
+ * @details Kirby's Neutral-B Copy Ability (Koopa) logic in Melee
+ * Module prefix: ft (Fighter)
+ */
 #include <melee/ft/forward.h>
 
 #include "ftkirby.h"
@@ -23,6 +29,10 @@ enum_t ftKb_Init_803CB540[] = {
     2, 2, 2, 2, 2, 2, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2,
 };
 
+/**
+ * @brief Neutral-B Copy Ability (Koopa) logic for ftKb_SpecialNKp_800FA588
+ * @param gobj 
+ */
 void ftKb_SpecialNKp_800FA588(Fighter_GObj* gobj)
 {
     Vec3 pos;
@@ -89,6 +99,10 @@ void ftKb_SpecialNKp_800FA588(Fighter_GObj* gobj)
     fp->mv.kb.specialn_kp.x14 %= 12;
 }
 
+/**
+ * @brief Neutral-B Copy Ability (Koopa) logic for ftKb_SpecialNKp_800FA7D4
+ * @param gobj 
+ */
 void ftKb_SpecialNKp_800FA7D4(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -105,6 +119,10 @@ void ftKb_SpecialNKp_800FA7D4(Fighter_GObj* gobj)
     }
 }
 
+/**
+ * @brief Neutral-B Copy Ability (Koopa) logic for ftKb_SpecialNKp_800FA83C
+ * @param gobj 
+ */
 int ftKb_SpecialNKp_800FA83C(Fighter_GObj* gobj)
 {
     if (gobj != NULL) {
@@ -117,6 +135,10 @@ int ftKb_SpecialNKp_800FA83C(Fighter_GObj* gobj)
     return 1;
 }
 
+/**
+ * @brief Neutral-B Copy Ability (Koopa) logic for ftKb_SpecialNKp_800FA878
+ * @param gobj 
+ */
 int ftKb_SpecialNKp_800FA878(Fighter_GObj* gobj)
 {
     if (gobj != NULL) {
@@ -129,6 +151,10 @@ int ftKb_SpecialNKp_800FA878(Fighter_GObj* gobj)
     return 2;
 }
 
+/**
+ * @brief Neutral-B Copy Ability (Koopa) logic for ftKb_SpecialNKp_800FA8B4
+ * @param gobj 
+ */
 void ftKb_SpecialNKp_800FA8B4(Fighter_GObj* gobj)
 {
     Fighter* fp;
@@ -152,6 +178,10 @@ void ftKb_SpecialNKp_800FA8B4(Fighter_GObj* gobj)
     fp->mv.kb.specialn_kp.x0[3] = 0;
 }
 
+/**
+ * @brief Neutral-B Copy Ability (Koopa) logic for ftKb_SpecialNKp_800FA958
+ * @param gobj 
+ */
 void ftKb_SpecialNKp_800FA958(Fighter_GObj* gobj)
 {
     int new_var2;
@@ -178,6 +208,10 @@ void ftKb_SpecialNKp_800FA958(Fighter_GObj* gobj)
     fp->mv.kb.specialn_kp.x0[new_var] = new_var2;
 }
 
+/**
+ * @brief Neutral-B Copy Ability (Koopa) logic for ftKb_KpSpecialNStart_Anim
+ * @param gobj 
+ */
 void ftKb_KpSpecialNStart_Anim(Fighter_GObj* gobj)
 {
     PAD_STACK(8);
@@ -197,6 +231,10 @@ void ftKb_KpSpecialNStart_Anim(Fighter_GObj* gobj)
     }
 }
 
+/**
+ * @brief Neutral-B Copy Ability (Koopa) logic for ftKb_KpSpecialN_Anim
+ * @param gobj 
+ */
 void ftKb_KpSpecialN_Anim(Fighter_GObj* gobj)
 {
     PAD_STACK(8);
@@ -221,6 +259,10 @@ void ftKb_KpSpecialN_Anim(Fighter_GObj* gobj)
     }
 }
 
+/**
+ * @brief Neutral-B Copy Ability (Koopa) logic for ftKb_KpSpecialNEnd_Anim
+ * @param gobj 
+ */
 void ftKb_KpSpecialNEnd_Anim(Fighter_GObj* gobj)
 {
     PAD_STACK(8);
@@ -229,6 +271,10 @@ void ftKb_KpSpecialNEnd_Anim(Fighter_GObj* gobj)
     }
 }
 
+/**
+ * @brief Neutral-B Copy Ability (Koopa) logic for ftKb_KpSpecialAirNStart_Anim
+ * @param gobj 
+ */
 void ftKb_KpSpecialAirNStart_Anim(Fighter_GObj* gobj)
 {
     PAD_STACK(8);
@@ -248,6 +294,10 @@ void ftKb_KpSpecialAirNStart_Anim(Fighter_GObj* gobj)
     }
 }
 
+/**
+ * @brief Neutral-B Copy Ability (Koopa) logic for ftKb_KpSpecialAirN_Anim
+ * @param gobj 
+ */
 void ftKb_KpSpecialAirN_Anim(Fighter_GObj* gobj)
 {
     PAD_STACK(8);
@@ -272,6 +322,10 @@ void ftKb_KpSpecialAirN_Anim(Fighter_GObj* gobj)
     }
 }
 
+/**
+ * @brief Neutral-B Copy Ability (Koopa) logic for ftKb_KpSpecialAirNEnd_Anim
+ * @param gobj 
+ */
 void ftKb_KpSpecialAirNEnd_Anim(Fighter_GObj* gobj)
 {
     PAD_STACK(8);
@@ -282,6 +336,10 @@ void ftKb_KpSpecialAirNEnd_Anim(Fighter_GObj* gobj)
 
 void ftKb_KpSpecialNStart_IASA(Fighter_GObj* gobj) {}
 
+/**
+ * @brief Neutral-B Copy Ability (Koopa) logic for ftKb_KpSpecialN_IASA
+ * @param gobj 
+ */
 void ftKb_KpSpecialN_IASA(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -337,6 +395,10 @@ void ftKb_KpSpecialNEnd_IASA(Fighter_GObj* gobj) {}
 
 void ftKb_KpSpecialAirNStart_IASA(Fighter_GObj* gobj) {}
 
+/**
+ * @brief Neutral-B Copy Ability (Koopa) logic for ftKb_KpSpecialAirN_IASA
+ * @param gobj 
+ */
 void ftKb_KpSpecialAirN_IASA(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -390,36 +452,64 @@ void ftKb_KpSpecialAirN_IASA(Fighter_GObj* gobj)
 
 void ftKb_KpSpecialAirNEnd_IASA(Fighter_GObj* gobj) {}
 
+/**
+ * @brief Neutral-B Copy Ability (Koopa) logic for ftKb_KpSpecialNStart_Phys
+ * @param gobj 
+ */
 void ftKb_KpSpecialNStart_Phys(Fighter_GObj* gobj)
 {
     ft_80084F3C(gobj);
 }
 
+/**
+ * @brief Neutral-B Copy Ability (Koopa) logic for ftKb_KpSpecialN_Phys
+ * @param gobj 
+ */
 void ftKb_KpSpecialN_Phys(Fighter_GObj* gobj)
 {
     ft_80084F3C(gobj);
 }
 
+/**
+ * @brief Neutral-B Copy Ability (Koopa) logic for ftKb_KpSpecialNEnd_Phys
+ * @param gobj 
+ */
 void ftKb_KpSpecialNEnd_Phys(Fighter_GObj* gobj)
 {
     ft_80084F3C(gobj);
 }
 
+/**
+ * @brief Neutral-B Copy Ability (Koopa) logic for ftKb_KpSpecialAirNStart_Phys
+ * @param gobj 
+ */
 void ftKb_KpSpecialAirNStart_Phys(Fighter_GObj* gobj)
 {
     ft_80084DB0(gobj);
 }
 
+/**
+ * @brief Neutral-B Copy Ability (Koopa) logic for ftKb_KpSpecialAirN_Phys
+ * @param gobj 
+ */
 void ftKb_KpSpecialAirN_Phys(Fighter_GObj* gobj)
 {
     ft_80084DB0(gobj);
 }
 
+/**
+ * @brief Neutral-B Copy Ability (Koopa) logic for ftKb_KpSpecialAirNEnd_Phys
+ * @param gobj 
+ */
 void ftKb_KpSpecialAirNEnd_Phys(Fighter_GObj* gobj)
 {
     ft_80084DB0(gobj);
 }
 
+/**
+ * @brief Neutral-B Copy Ability (Koopa) logic for ftKb_KpSpecialNStart_Coll
+ * @param gobj 
+ */
 void ftKb_KpSpecialNStart_Coll(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -443,6 +533,10 @@ void ftKb_KpSpecialNStart_Coll(Fighter_GObj* gobj)
     }
 }
 
+/**
+ * @brief Neutral-B Copy Ability (Koopa) logic for ftKb_KpSpecialN_Coll
+ * @param gobj 
+ */
 void ftKb_KpSpecialN_Coll(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -466,6 +560,10 @@ void ftKb_KpSpecialN_Coll(Fighter_GObj* gobj)
     }
 }
 
+/**
+ * @brief Neutral-B Copy Ability (Koopa) logic for ftKb_KpSpecialNEnd_Coll
+ * @param gobj 
+ */
 void ftKb_KpSpecialNEnd_Coll(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -489,6 +587,10 @@ void ftKb_KpSpecialNEnd_Coll(Fighter_GObj* gobj)
     }
 }
 
+/**
+ * @brief Neutral-B Copy Ability (Koopa) logic for ftKb_KpSpecialAirNStart_Coll
+ * @param gobj 
+ */
 void ftKb_KpSpecialAirNStart_Coll(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -512,6 +614,10 @@ void ftKb_KpSpecialAirNStart_Coll(Fighter_GObj* gobj)
     }
 }
 
+/**
+ * @brief Neutral-B Copy Ability (Koopa) logic for ftKb_KpSpecialAirN_Coll
+ * @param gobj 
+ */
 void ftKb_KpSpecialAirN_Coll(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -535,6 +641,10 @@ void ftKb_KpSpecialAirN_Coll(Fighter_GObj* gobj)
     }
 }
 
+/**
+ * @brief Neutral-B Copy Ability (Koopa) logic for ftKb_KpSpecialAirNEnd_Coll
+ * @param gobj 
+ */
 void ftKb_KpSpecialAirNEnd_Coll(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);

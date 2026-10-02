@@ -1,3 +1,9 @@
+/**
+ * @file ftkirbyspecialpikachu.h
+ * @brief Neutral-B Copy Ability (Pikachu.h)
+ * @details Kirby's Neutral-B Copy Ability (Pikachu.h) logic in Melee
+ * Module prefix: ft (Fighter)
+ */
 #ifndef GALE01_0F9FD4
 #define GALE01_0F9FD4
 

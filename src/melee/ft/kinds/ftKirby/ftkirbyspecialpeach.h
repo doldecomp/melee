@@ -1,3 +1,9 @@
+/**
+ * @file ftkirbyspecialpeach.h
+ * @brief Neutral-B Copy Ability (Peach.h)
+ * @details Kirby's Neutral-B Copy Ability (Peach.h) logic in Melee
+ * Module prefix: ft (Fighter)
+ */
 #ifndef GALE01_10C288
 #define GALE01_10C288
 

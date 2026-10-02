@@ -1,3 +1,9 @@
+/**
+ * @file ftkirbyspecialmario.c
+ * @brief Neutral-B Copy Ability (Mario)
+ * @details Kirby's Neutral-B Copy Ability (Mario) logic in Melee
+ * Module prefix: ft (Fighter)
+ */
 #include <melee/ft/forward.h>
 #include <sysdolphin/baselib/forward.h>
 
@@ -26,6 +32,10 @@
 
 void fn_800F9260(HSD_GObj*);
 
+/**
+ * @brief Neutral-B Copy Ability (Mario) logic for ftKb_SpecialN_800F9110
+ * @param gobj 
+ */
 void ftKb_SpecialN_800F9110(Fighter_GObj* gobj)
 {
     int new_var;
@@ -44,6 +54,10 @@ void ftKb_SpecialN_800F9110(Fighter_GObj* gobj)
     fp->accessory4_cb = fn_800F9260;
 }
 
+/**
+ * @brief Neutral-B Copy Ability (Mario) logic for ftKb_MrSpecialN_Anim
+ * @param gobj 
+ */
 void ftKb_MrSpecialN_Anim(Fighter_GObj* gobj)
 {
     if (!ftAnim_IsFramesRemaining(gobj)) {
@@ -51,6 +65,10 @@ void ftKb_MrSpecialN_Anim(Fighter_GObj* gobj)
     }
 }
 
+/**
+ * @brief Neutral-B Copy Ability (Mario) logic for ftKb_MrSpecialN_IASA
+ * @param gobj 
+ */
 void ftKb_MrSpecialN_IASA(Fighter_GObj* gobj)
 {
     Fighter* ft = GET_FIGHTER(gobj);
@@ -59,11 +77,19 @@ void ftKb_MrSpecialN_IASA(Fighter_GObj* gobj)
     }
 }
 
+/**
+ * @brief Neutral-B Copy Ability (Mario) logic for ftKb_MrSpecialN_Phys
+ * @param gobj 
+ */
 void ftKb_MrSpecialN_Phys(Fighter_GObj* gobj)
 {
     ft_80084F3C(gobj);
 }
 
+/**
+ * @brief Neutral-B Copy Ability (Mario) logic for ftKb_MrSpecialN_Coll
+ * @param gobj 
+ */
 void ftKb_MrSpecialN_Coll(Fighter_GObj* gobj)
 {
     if (ft_80082708(gobj) == GA_Ground) {
@@ -71,6 +97,10 @@ void ftKb_MrSpecialN_Coll(Fighter_GObj* gobj)
     }
 }
 
+/**
+ * @brief Neutral-B Copy Ability (Mario) logic for fn_800F9260_inline
+ * @param gobj 
+ */
 static inline s32 fn_800F9260_inline(HSD_GObj* gobj)
 {
     Fighter* fp2;
@@ -92,14 +122,27 @@ static inline s32 fn_800F9260_inline(HSD_GObj* gobj)
     return pick;
 }
 
+/**
+ * @brief Neutral-B Copy Ability (Mario) logic for fn_800F9260_GetPartJoint
+ * @param bone 
+ * @param fp 
+ */
 static inline HSD_JObj* fn_800F9260_GetPartJoint(s32 bone, Fighter* fp)
 {
     return fp->parts[bone].joint;
 }
+/**
+ * @brief Neutral-B Copy Ability (Mario) logic for fn_800F9260_GetLHandBone
+ * @param fp 
+ */
 static inline s32 fn_800F9260_GetLHandBone(Fighter* fp)
 {
     return ftParts_GetBoneIndex(fp, FtPart_LHandN);
 }
+/**
+ * @brief Neutral-B Copy Ability (Mario) logic for fn_800F9260
+ * @param gobj 
+ */
 void fn_800F9260(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -130,6 +173,10 @@ void fn_800F9260(HSD_GObj* gobj)
     }
 }
 
+/**
+ * @brief Neutral-B Copy Ability (Mario) logic for ftKb_SpecialNMr_800F93CC
+ * @param gobj 
+ */
 void ftKb_SpecialNMr_800F93CC(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -144,6 +191,10 @@ void ftKb_SpecialNMr_800F93CC(Fighter_GObj* gobj)
     fp->accessory4_cb = fn_800F9260;
 }
 
+/**
+ * @brief Neutral-B Copy Ability (Mario) logic for ftKb_MrSpecialAirN_Anim
+ * @param gobj 
+ */
 void ftKb_MrSpecialAirN_Anim(Fighter_GObj* gobj)
 {
     if (!ftAnim_IsFramesRemaining(gobj)) {
@@ -151,6 +202,10 @@ void ftKb_MrSpecialAirN_Anim(Fighter_GObj* gobj)
     }
 }
 
+/**
+ * @brief Neutral-B Copy Ability (Mario) logic for ftKb_MrSpecialAirN_IASA
+ * @param gobj 
+ */
 void ftKb_MrSpecialAirN_IASA(Fighter_GObj* gobj)
 {
     Fighter* ft = GET_FIGHTER(gobj);
@@ -159,11 +214,19 @@ void ftKb_MrSpecialAirN_IASA(Fighter_GObj* gobj)
     }
 }
 
+/**
+ * @brief Neutral-B Copy Ability (Mario) logic for ftKb_MrSpecialAirN_Phys
+ * @param gobj 
+ */
 void ftKb_MrSpecialAirN_Phys(Fighter_GObj* gobj)
 {
     ft_80084DB0(gobj);
 }
 
+/**
+ * @brief Neutral-B Copy Ability (Mario) logic for ftKb_MrSpecialAirN_Coll
+ * @param gobj 
+ */
 void ftKb_MrSpecialAirN_Coll(Fighter_GObj* gobj)
 {
     if (ft_80081D0C(gobj) != GA_Ground) {
@@ -171,6 +234,10 @@ void ftKb_MrSpecialAirN_Coll(Fighter_GObj* gobj)
     }
 }
 
+/**
+ * @brief Neutral-B Copy Ability (Mario) logic for ftKb_SpecialNLg_800F951C
+ * @param gobj 
+ */
 void ftKb_SpecialNLg_800F951C(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -193,6 +260,10 @@ void ftKb_SpecialNLg_800F951C(Fighter_GObj* gobj)
     fp->accessory4_cb = fn_800F9260;
 }
 
+/**
+ * @brief Neutral-B Copy Ability (Mario) logic for ftKb_SpecialNLg_800F9598
+ * @param gobj 
+ */
 void ftKb_SpecialNLg_800F9598(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);

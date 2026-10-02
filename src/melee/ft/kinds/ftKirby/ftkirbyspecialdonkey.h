@@ -1,3 +1,9 @@
+/**
+ * @file ftkirbyspecialdonkey.h
+ * @brief Neutral-B Copy Ability (Donkey.h)
+ * @details Kirby's Neutral-B Copy Ability (Donkey.h) logic in Melee
+ * Module prefix: ft (Fighter)
+ */
 #ifndef GALE01_0FF8EC
 #define GALE01_0FF8EC
 

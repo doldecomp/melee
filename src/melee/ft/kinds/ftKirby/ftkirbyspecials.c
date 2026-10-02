@@ -1,3 +1,9 @@
+/**
+ * @file ftkirbyspecials.c
+ * @brief Side-B (Hammer)
+ * @details Kirby's Side-B (Hammer) logic in Melee
+ * Module prefix: ft (Fighter)
+ */
 #include <melee/ft/forward.h>
 #include <sysdolphin/baselib/forward.h>
 
@@ -28,11 +34,19 @@ char ftKb_Init_803CB52C[] = "ftkirbyspecials.c";
 
 char ftKb_Init_804D3DB0[2] = "0";
 
+/**
+ * @brief Side-B (Hammer) logic for ftKb_SpecialAirLw_800F539C
+ * @param gobj 
+ */
 void ftKb_SpecialAirLw_800F539C(Fighter_GObj* gobj)
 {
     GET_FIGHTER(gobj)->u.kb.hat.x0 = 0;
 }
 
+/**
+ * @brief Side-B (Hammer) logic for fn_800F53AC_SpawnEffect
+ * @param gobj 
+ */
 static inline void fn_800F53AC_SpawnEffect(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
@@ -47,6 +61,10 @@ static inline void fn_800F53AC_SpawnEffect(HSD_GObj* gobj)
     Fighter_SetEffectHitlagCallbacks(fp);
 }
 
+/**
+ * @brief Side-B (Hammer) logic for fn_800F53AC_CleanupItem
+ * @param gobj 
+ */
 static inline void fn_800F53AC_CleanupItem(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -57,6 +75,10 @@ static inline void fn_800F53AC_CleanupItem(HSD_GObj* gobj)
     }
 }
 
+/**
+ * @brief Side-B (Hammer) logic for fn_800F53AC
+ * @param gobj 
+ */
 void fn_800F53AC(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -86,6 +108,10 @@ void fn_800F53AC(HSD_GObj* gobj)
     }
 }
 
+/**
+ * @brief Side-B (Hammer) logic for ftKb_SpecialAirLw_800F5524
+ * @param gobj 
+ */
 void ftKb_SpecialAirLw_800F5524(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -95,6 +121,10 @@ void ftKb_SpecialAirLw_800F5524(HSD_GObj* gobj)
     }
 }
 
+/**
+ * @brief Side-B (Hammer) logic for ftKb_SpecialS_Enter
+ * @param gobj 
+ */
 void ftKb_SpecialS_Enter(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -105,6 +135,10 @@ void ftKb_SpecialS_Enter(Fighter_GObj* gobj)
     fp->accessory4_cb = &fn_800F53AC;
 }
 
+/**
+ * @brief Side-B (Hammer) logic for ftKb_SpecialAirS_Enter
+ * @param gobj 
+ */
 void ftKb_SpecialAirS_Enter(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -121,6 +155,10 @@ void ftKb_SpecialAirS_Enter(Fighter_GObj* gobj)
     fp->accessory4_cb = &fn_800F53AC;
 }
 
+/**
+ * @brief Side-B (Hammer) logic for ftKb_SpecialS_Anim
+ * @param gobj 
+ */
 void ftKb_SpecialS_Anim(Fighter_GObj* gobj)
 {
     if (ftAnim_IsFramesRemaining(gobj) == 0) {
@@ -128,6 +166,10 @@ void ftKb_SpecialS_Anim(Fighter_GObj* gobj)
     }
 }
 
+/**
+ * @brief Side-B (Hammer) logic for ftKb_SpecialAirS_Anim
+ * @param gobj 
+ */
 void ftKb_SpecialAirS_Anim(Fighter_GObj* gobj)
 {
     PAD_STACK(0x08);
@@ -136,16 +178,28 @@ void ftKb_SpecialAirS_Anim(Fighter_GObj* gobj)
     }
 }
 
+/**
+ * @brief Side-B (Hammer) logic for ftKb_SpecialS_Phys
+ * @param gobj 
+ */
 void ftKb_SpecialS_Phys(Fighter_GObj* gobj)
 {
     ft_80084F3C(gobj);
 }
 
+/**
+ * @brief Side-B (Hammer) logic for ftKb_SpecialAirS_Phys
+ * @param gobj 
+ */
 void ftKb_SpecialAirS_Phys(Fighter_GObj* gobj)
 {
     ft_80084EEC(gobj);
 }
 
+/**
+ * @brief Side-B (Hammer) logic for ftKb_SpecialS_Coll
+ * @param gobj 
+ */
 void ftKb_SpecialS_Coll(Fighter_GObj* gobj)
 {
     Fighter* fp;
@@ -160,6 +214,10 @@ void ftKb_SpecialS_Coll(Fighter_GObj* gobj)
     ftCo_Fall_Enter(gobj);
 }
 
+/**
+ * @brief Side-B (Hammer) logic for ftKb_SpecialAirS_Coll
+ * @param gobj 
+ */
 void ftKb_SpecialAirS_Coll(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -175,12 +233,23 @@ void ftKb_SpecialAirS_Coll(Fighter_GObj* gobj)
     }
 }
 
+/**
+ * @brief Side-B (Hammer) logic for ftKb_SpecialN_800F5800
+ * @param gobj 
+ * @param vec 
+ */
 void ftKb_SpecialN_800F5800(HSD_GObj* gobj, Vec3* vec)
 {
     Fighter* ft = GET_FIGHTER(gobj);
     *vec = ft->cur_pos;
 }
 
+/**
+ * @brief Side-B (Hammer) logic for ftKb_SpecialN_800F5820
+ * @param gobj 
+ * @param victim_coll_box 
+ * @param victim_scale_x 
+ */
 void ftKb_SpecialN_800F5820(Fighter_GObj* gobj,
                             ftCollisionBox* victim_coll_box,
                             float victim_scale_x)
@@ -196,13 +265,21 @@ void ftKb_SpecialN_800F5820(Fighter_GObj* gobj,
     victim_coll_box->right.y = da->specialn_unk5 * victim_scale_x;
 }
 
-void ftKb_SpecialN_800F5874(Vec2* arg0)
+/**
+ * @brief Side-B (Hammer) logic for ftKb_SpecialN_800F5874
+ * @param vec 
+ */
+void ftKb_SpecialN_800F5874(Vec2* vec)
 {
     ftCommonData* cd = gFtDataList[Ft_Kind_Kirby]->ext_attr;
-    arg0->x = cd->x9C_radians;
-    arg0->y = cd->xA0_radians;
+    vec->x = cd->x9C_radians;
+    vec->y = cd->xA0_radians;
 }
 
+/**
+ * @brief Side-B (Hammer) logic for ftKb_SpecialN_800F5898
+ * @param gobj 
+ */
 HSD_Joint* ftKb_SpecialN_800F5898(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);

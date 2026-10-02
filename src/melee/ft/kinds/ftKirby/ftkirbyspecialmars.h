@@ -1,3 +1,9 @@
+/**
+ * @file ftkirbyspecialmars.h
+ * @brief Neutral-B Copy Ability (Mars.h)
+ * @details Kirby's Neutral-B Copy Ability (Mars.h) logic in Melee
+ * Module prefix: ft (Fighter)
+ */
 #ifndef GALE01_10B1F4
 #define GALE01_10B1F4
 

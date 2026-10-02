@@ -1,3 +1,9 @@
+/**
+ * @file ftkirbyspecialiceclimber.h
+ * @brief Neutral-B Copy Ability (Iceclimber.h)
+ * @details Kirby's Neutral-B Copy Ability (Iceclimber.h) logic in Melee
+ * Module prefix: ft (Fighter)
+ */
 #ifndef GALE01_108CE8
 #define GALE01_108CE8
 

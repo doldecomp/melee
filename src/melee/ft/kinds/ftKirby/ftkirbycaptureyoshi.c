@@ -1,3 +1,9 @@
+/**
+ * @file ftkirbycaptureyoshi.c
+ * @brief Yoshi Capture
+ * @details Kirby's Yoshi Capture logic in Melee
+ * Module prefix: ft (Fighter)
+ */
 #include "ftkirbycaptureyoshi.h"
 
 #include <melee/ft/forward.h>
@@ -14,6 +20,11 @@
 
 /* 4D95A0 */ extern f64 ftKb_Init_804D95A0;
 
+/**
+ * @brief Yoshi Capture logic for fn_8010A930
+ * @param gobj 
+ * @param attacker_gobj 
+ */
 void fn_8010A930(Fighter_GObj* gobj, Fighter_GObj* attacker_gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -41,6 +52,10 @@ void ftCo_CaptureKirbyYoshi_Phys(Fighter_GObj* gobj) {}
 
 void ftCo_CaptureKirbyYoshi_Coll(Fighter_GObj* gobj) {}
 
+/**
+ * @brief Yoshi Capture logic for ftKb_SpecialNYs_8010AA2C
+ * @param gobj 
+ */
 void ftKb_SpecialNYs_8010AA2C(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);

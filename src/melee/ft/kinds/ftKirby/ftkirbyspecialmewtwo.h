@@ -1,3 +1,9 @@
+/**
+ * @file ftkirbyspecialmewtwo.h
+ * @brief Neutral-B Copy Ability (Mewtwo.h)
+ * @details Kirby's Neutral-B Copy Ability (Mewtwo.h) logic in Melee
+ * Module prefix: ft (Fighter)
+ */
 #ifndef GALE01_106F44
 #define GALE01_106F44
 

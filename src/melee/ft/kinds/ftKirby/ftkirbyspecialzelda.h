@@ -1,3 +1,9 @@
+/**
+ * @file ftkirbyspecialzelda.h
+ * @brief Neutral-B Copy Ability (Zelda.h)
+ * @details Kirby's Neutral-B Copy Ability (Zelda.h) logic in Melee
+ * Module prefix: ft (Fighter)
+ */
 #ifndef GALE01_105B2C
 #define GALE01_105B2C
 

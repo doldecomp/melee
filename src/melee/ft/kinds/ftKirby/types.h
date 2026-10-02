@@ -1,3 +1,9 @@
+/**
+ * @file types.h
+ * @brief Kirby Module
+ * @details Kirby's Kirby Module logic in Melee
+ * Module prefix: ft (Fighter)
+ */
 #ifndef MELEE_FT_CHARA_FTKIRBY_TYPES_H
 #define MELEE_FT_CHARA_FTKIRBY_TYPES_H
 
