@@ -36,7 +36,7 @@ extern float ftKb_Init_803CB770[];
 
 /**
  * @brief Neutral-B Copy Ability (Zelda) logic for ftKb_SpecialNZd_Helper
- * @param gobj 
+ * @param gobj
  */
 static inline void ftKb_SpecialNZd_Helper(Fighter_GObj* gobj)
 {
@@ -51,7 +51,7 @@ static inline void ftKb_SpecialNZd_Helper(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Zelda) logic for fn_80105A34
- * @param gobj 
+ * @param gobj
  */
 void fn_80105A34(Fighter_GObj* gobj)
 {
@@ -69,7 +69,7 @@ void fn_80105A34(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Zelda) logic for fn_80105AB0
- * @param gobj 
+ * @param gobj
  */
 void fn_80105AB0(Fighter_GObj* gobj)
 {
@@ -84,7 +84,7 @@ void fn_80105AB0(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Zelda) logic for ftKb_SpecialNZd_80105B2C
- * @param gobj 
+ * @param gobj
  */
 void ftKb_SpecialNZd_80105B2C(Fighter_GObj* gobj)
 {
@@ -99,7 +99,7 @@ void ftKb_SpecialNZd_80105B2C(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Zelda) logic for ftKb_SpecialNZd_80105BA8
- * @param gobj 
+ * @param gobj
  */
 void ftKb_SpecialNZd_80105BA8(Fighter_GObj* gobj)
 {
@@ -121,7 +121,7 @@ void ftKb_SpecialNZd_80105BA8(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Zelda) logic for ftKb_ZdSpecialN_Anim
- * @param gobj 
+ * @param gobj
  */
 void ftKb_ZdSpecialN_Anim(Fighter_GObj* gobj)
 {
@@ -154,7 +154,7 @@ void ftKb_ZdSpecialN_Anim(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Zelda) logic for ftKb_ZdSpecialAirN_Anim
- * @param gobj 
+ * @param gobj
  */
 void ftKb_ZdSpecialAirN_Anim(Fighter_GObj* gobj)
 {
@@ -184,7 +184,7 @@ void ftKb_ZdSpecialAirN_IASA(Fighter_GObj* gobj) {}
 
 /**
  * @brief Neutral-B Copy Ability (Zelda) logic for ftKb_ZdSpecialN_Phys
- * @param gobj 
+ * @param gobj
  */
 void ftKb_ZdSpecialN_Phys(Fighter_GObj* gobj)
 {
@@ -194,7 +194,7 @@ void ftKb_ZdSpecialN_Phys(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Zelda) logic for ftKb_ZdSpecialAirN_Phys
- * @param gobj 
+ * @param gobj
  */
 void ftKb_ZdSpecialAirN_Phys(Fighter_GObj* gobj)
 {
@@ -221,7 +221,7 @@ void ftKb_ZdSpecialAirN_Phys(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Zelda) logic for ftKb_ZdSpecialN_Coll
- * @param gobj 
+ * @param gobj
  */
 void ftKb_ZdSpecialN_Coll(Fighter_GObj* gobj)
 {
@@ -232,7 +232,7 @@ void ftKb_ZdSpecialN_Coll(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Zelda) logic for ftKb_ZdSpecialAirN_Coll
- * @param gobj 
+ * @param gobj
  */
 void ftKb_ZdSpecialAirN_Coll(Fighter_GObj* gobj)
 {
@@ -243,7 +243,7 @@ void ftKb_ZdSpecialAirN_Coll(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Zelda) logic for ftKb_SpecialNSk_80105E8C
- * @param gobj 
+ * @param gobj
  */
 void ftKb_SpecialNSk_80105E8C(Fighter_GObj* gobj)
 {
@@ -266,7 +266,7 @@ void ftKb_SpecialNSk_80105E8C(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Zelda) logic for ftKb_SpecialNSk_80105F3C
- * @param gobj 
+ * @param gobj
  */
 void ftKb_SpecialNSk_80105F3C(Fighter_GObj* gobj)
 {

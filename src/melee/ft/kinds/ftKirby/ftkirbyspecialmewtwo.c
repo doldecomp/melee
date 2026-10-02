@@ -40,7 +40,7 @@
 
 /**
  * @brief Neutral-B Copy Ability (Mewtwo) logic for ftKb_SpecialNMt_80106F44
- * @param gobj 
+ * @param gobj
  * @param out_charge 
  * @param out_max 
  */
@@ -64,7 +64,7 @@ s32 ftKb_SpecialNMt_80106F44(Fighter_GObj* gobj, s32* out_charge, s32* out_max)
 
 /**
  * @brief Neutral-B Copy Ability (Mewtwo) logic for ftKb_SpecialNMt_80106F9C
- * @param gobj 
+ * @param gobj
  */
 bool ftKb_SpecialNMt_80106F9C(Fighter_GObj* gobj)
 {
@@ -95,7 +95,7 @@ bool ftKb_SpecialNMt_80106F9C(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Mewtwo) logic for ftKb_SpecialNMt_80106FEC
- * @param gobj 
+ * @param gobj
  */
 bool ftKb_SpecialNMt_80106FEC(Fighter_GObj* gobj)
 {
@@ -121,7 +121,7 @@ bool ftKb_SpecialNMt_80106FEC(Fighter_GObj* gobj)
 /// @brief Clears Mewtwo copy ability state and effects.
 /**
  * @brief Neutral-B Copy Ability (Mewtwo) logic for ftKb_SpecialNMt_80107040
- * @param gobj 
+ * @param gobj
  */
 void ftKb_SpecialNMt_80107040(Fighter_GObj* gobj)
 {
@@ -148,7 +148,7 @@ void ftKb_SpecialNMt_80107040(Fighter_GObj* gobj)
 /// @brief Full cleanup of Mewtwo copy ability state.
 /**
  * @brief Neutral-B Copy Ability (Mewtwo) logic for ftKb_SpecialNMt_8010709C
- * @param gobj 
+ * @param gobj
  */
 void ftKb_SpecialNMt_8010709C(Fighter_GObj* gobj)
 {
@@ -178,7 +178,7 @@ void ftKb_SpecialNMt_8010709C(Fighter_GObj* gobj)
 /// @brief Mewtwo copy cleanup with charge check.
 /**
  * @brief Neutral-B Copy Ability (Mewtwo) logic for ftKb_SpecialNMt_80107130
- * @param gobj 
+ * @param gobj
  */
 void ftKb_SpecialNMt_80107130(Fighter_GObj* gobj)
 {
@@ -215,7 +215,7 @@ void ftKb_SpecialNMt_80107130(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Mewtwo) logic for ftKb_SpecialNMt_SetRecoil
- * @param gobj 
+ * @param gobj
  */
 static inline void ftKb_SpecialNMt_SetRecoil(Fighter_GObj* gobj)
 {
@@ -240,7 +240,7 @@ static inline void ftKb_SpecialNMt_SetRecoil(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Mewtwo) logic for ftKb_SpecialNMt_801071FC
- * @param gobj 
+ * @param gobj
  */
 void ftKb_SpecialNMt_801071FC(Fighter_GObj* gobj)
 {
@@ -289,7 +289,7 @@ u32 ftKb_Init_803CB828[] = { 0x00030DB9, 0x00030DBC, 0x00030DBF, 0x00030DC2 };
 
 /**
  * @brief Neutral-B Copy Ability (Mewtwo) logic for ftKb_SpecialNMt_80107410
- * @param gobj 
+ * @param gobj
  */
 void ftKb_SpecialNMt_80107410(Fighter_GObj* gobj)
 {
@@ -348,7 +348,7 @@ void ftKb_SpecialNMt_80107410(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Mewtwo) logic for ftKb_SpecialNMt_80107568
- * @param gobj 
+ * @param gobj
  */
 void ftKb_SpecialNMt_80107568(Fighter_GObj* gobj)
 {
@@ -378,7 +378,7 @@ void ftKb_SpecialNMt_80107568(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Mewtwo) logic for ftKb_SpecialNMt_80107638
- * @param gobj 
+ * @param gobj
  */
 void ftKb_SpecialNMt_80107638(Fighter_GObj* gobj)
 {
@@ -400,7 +400,7 @@ void ftKb_SpecialNMt_80107638(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Mewtwo) logic for ftKb_MtSpecialNStart_Anim
- * @param gobj 
+ * @param gobj
  */
 void ftKb_MtSpecialNStart_Anim(Fighter_GObj* gobj)
 {
@@ -445,7 +445,7 @@ void ftKb_MtSpecialNStart_Anim(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Mewtwo) logic for ftKb_SpecialNMt_CreateHeldShadow
- * @param gobj 
+ * @param gobj
  * @param pos1 
  * @param pos2 
  */
@@ -476,7 +476,7 @@ static inline void ftKb_SpecialNMt_CreateHeldShadow(Fighter_GObj* gobj,
 
 /**
  * @brief Neutral-B Copy Ability (Mewtwo) logic for ftKb_MtSpecialNLoop_Anim
- * @param gobj 
+ * @param gobj
  */
 void ftKb_MtSpecialNLoop_Anim(Fighter_GObj* gobj)
 {
@@ -522,7 +522,7 @@ void ftKb_MtSpecialNLoop_Anim(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Mewtwo) logic for ftKb_MtSpecialNLoopFull_Anim
- * @param gobj 
+ * @param gobj
  */
 void ftKb_MtSpecialNLoopFull_Anim(Fighter_GObj* gobj)
 {
@@ -535,7 +535,7 @@ void ftKb_MtSpecialNLoopFull_Anim(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Mewtwo) logic for ftKb_MtSpecialNCancel_Anim
- * @param gobj 
+ * @param gobj
  */
 void ftKb_MtSpecialNCancel_Anim(Fighter_GObj* gobj)
 {
@@ -559,7 +559,7 @@ void ftKb_MtSpecialNCancel_Anim(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Mewtwo) logic for ftKb_MtSpecialNEnd_Anim
- * @param gobj 
+ * @param gobj
  */
 void ftKb_MtSpecialNEnd_Anim(Fighter_GObj* gobj)
 {
@@ -574,7 +574,7 @@ void ftKb_MtSpecialNEnd_Anim(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Mewtwo) logic for ftKb_MtSpecialAirNStart_Anim
- * @param gobj 
+ * @param gobj
  */
 void ftKb_MtSpecialAirNStart_Anim(Fighter_GObj* gobj)
 {
@@ -620,7 +620,7 @@ void ftKb_MtSpecialAirNStart_Anim(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Mewtwo) logic for ftKb_MtSpecialAirNLoop_Anim
- * @param gobj 
+ * @param gobj
  */
 void ftKb_MtSpecialAirNLoop_Anim(Fighter_GObj* gobj)
 {
@@ -666,7 +666,7 @@ void ftKb_MtSpecialAirNLoop_Anim(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Mewtwo) logic for ftKb_MtSpecialAirNLoopFull_Anim
- * @param gobj 
+ * @param gobj
  */
 void ftKb_MtSpecialAirNLoopFull_Anim(Fighter_GObj* gobj)
 {
@@ -679,7 +679,7 @@ void ftKb_MtSpecialAirNLoopFull_Anim(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Mewtwo) logic for ftKb_MtSpecialAirNCancel_Anim_inline
- * @param gobj 
+ * @param gobj
  */
 static inline Item_GObj* ftKb_MtSpecialAirNCancel_Anim_inline(Item_GObj* gobj)
 {
@@ -688,7 +688,7 @@ static inline Item_GObj* ftKb_MtSpecialAirNCancel_Anim_inline(Item_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Mewtwo) logic for ftKb_MtSpecialAirNCancel_Anim
- * @param gobj 
+ * @param gobj
  */
 void ftKb_MtSpecialAirNCancel_Anim(Fighter_GObj* gobj)
 {
@@ -713,7 +713,7 @@ void ftKb_MtSpecialAirNCancel_Anim(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Mewtwo) logic for ftKb_MtSpecialAirNEnd_Anim
- * @param gobj 
+ * @param gobj
  */
 void ftKb_MtSpecialAirNEnd_Anim(Fighter_GObj* gobj)
 {
@@ -734,7 +734,7 @@ void ftKb_MtSpecialNStart_IASA(Fighter_GObj* gobj) {}
 
 /**
  * @brief Neutral-B Copy Ability (Mewtwo) logic for ftKb_MtSpecialNLoop_IASA
- * @param gobj 
+ * @param gobj
  */
 void ftKb_MtSpecialNLoop_IASA(Fighter_GObj* gobj)
 {
@@ -791,7 +791,7 @@ void ftKb_MtSpecialNLoop_IASA(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Mewtwo) logic for ftKb_MtSpecialNLoopFull_IASA
- * @param gobj 
+ * @param gobj
  */
 void ftKb_MtSpecialNLoopFull_IASA(Fighter_GObj* gobj)
 {
@@ -854,7 +854,7 @@ void ftKb_MtSpecialAirNStart_IASA(Fighter_GObj* gobj) {}
 
 /**
  * @brief Neutral-B Copy Ability (Mewtwo) logic for ftKb_MtSpecialAirNLoop_IASA
- * @param gobj 
+ * @param gobj
  */
 void ftKb_MtSpecialAirNLoop_IASA(Fighter_GObj* gobj)
 {
@@ -899,7 +899,7 @@ void ftKb_MtSpecialAirNLoop_IASA(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Mewtwo) logic for ftKb_MtSpecialAirNLoopFull_IASA
- * @param gobj 
+ * @param gobj
  */
 void ftKb_MtSpecialAirNLoopFull_IASA(Fighter_GObj* gobj)
 {
@@ -943,7 +943,7 @@ void ftKb_MtSpecialAirNEnd_IASA(Fighter_GObj* gobj) {}
 
 /**
  * @brief Neutral-B Copy Ability (Mewtwo) logic for ftKb_MtSpecialNStart_Phys
- * @param gobj 
+ * @param gobj
  */
 void ftKb_MtSpecialNStart_Phys(Fighter_GObj* gobj)
 {
@@ -952,7 +952,7 @@ void ftKb_MtSpecialNStart_Phys(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Mewtwo) logic for ftKb_MtSpecialNLoop_Phys
- * @param gobj 
+ * @param gobj
  */
 void ftKb_MtSpecialNLoop_Phys(Fighter_GObj* gobj)
 {
@@ -961,7 +961,7 @@ void ftKb_MtSpecialNLoop_Phys(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Mewtwo) logic for ftKb_MtSpecialNLoopFull_Phys
- * @param gobj 
+ * @param gobj
  */
 void ftKb_MtSpecialNLoopFull_Phys(Fighter_GObj* gobj)
 {
@@ -970,7 +970,7 @@ void ftKb_MtSpecialNLoopFull_Phys(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Mewtwo) logic for ftKb_MtSpecialNCancel_Phys
- * @param gobj 
+ * @param gobj
  */
 void ftKb_MtSpecialNCancel_Phys(Fighter_GObj* gobj)
 {
@@ -979,7 +979,7 @@ void ftKb_MtSpecialNCancel_Phys(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Mewtwo) logic for ftKb_MtSpecialNEnd_Phys
- * @param gobj 
+ * @param gobj
  */
 void ftKb_MtSpecialNEnd_Phys(Fighter_GObj* gobj)
 {
@@ -988,7 +988,7 @@ void ftKb_MtSpecialNEnd_Phys(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Mewtwo) logic for ftKb_MtSpecialAirNStart_Phys
- * @param gobj 
+ * @param gobj
  */
 void ftKb_MtSpecialAirNStart_Phys(Fighter_GObj* gobj)
 {
@@ -997,7 +997,7 @@ void ftKb_MtSpecialAirNStart_Phys(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Mewtwo) logic for ftKb_MtSpecialAirNLoop_Phys
- * @param gobj 
+ * @param gobj
  */
 void ftKb_MtSpecialAirNLoop_Phys(Fighter_GObj* gobj)
 {
@@ -1006,7 +1006,7 @@ void ftKb_MtSpecialAirNLoop_Phys(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Mewtwo) logic for ftKb_MtSpecialAirNLoopFull_Phys
- * @param gobj 
+ * @param gobj
  */
 void ftKb_MtSpecialAirNLoopFull_Phys(Fighter_GObj* gobj)
 {
@@ -1015,7 +1015,7 @@ void ftKb_MtSpecialAirNLoopFull_Phys(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Mewtwo) logic for ftKb_MtSpecialAirNCancel_Phys
- * @param gobj 
+ * @param gobj
  */
 void ftKb_MtSpecialAirNCancel_Phys(Fighter_GObj* gobj)
 {
@@ -1024,7 +1024,7 @@ void ftKb_MtSpecialAirNCancel_Phys(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Mewtwo) logic for ftKb_MtSpecialAirNEnd_Phys
- * @param gobj 
+ * @param gobj
  */
 void ftKb_MtSpecialAirNEnd_Phys(Fighter_GObj* gobj)
 {
@@ -1033,7 +1033,7 @@ void ftKb_MtSpecialAirNEnd_Phys(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Mewtwo) logic for ftKb_MtSpecialNStart_Coll
- * @param gobj 
+ * @param gobj
  */
 void ftKb_MtSpecialNStart_Coll(Fighter_GObj* gobj)
 {
@@ -1047,7 +1047,7 @@ void ftKb_MtSpecialNStart_Coll(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Mewtwo) logic for ftKb_MtSpecialNLoop_Coll
- * @param gobj 
+ * @param gobj
  */
 void ftKb_MtSpecialNLoop_Coll(Fighter_GObj* gobj)
 {
@@ -1061,7 +1061,7 @@ void ftKb_MtSpecialNLoop_Coll(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Mewtwo) logic for ftKb_MtSpecialNLoopFull_Coll
- * @param gobj 
+ * @param gobj
  */
 void ftKb_MtSpecialNLoopFull_Coll(Fighter_GObj* gobj)
 {
@@ -1076,7 +1076,7 @@ void ftKb_MtSpecialNLoopFull_Coll(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Mewtwo) logic for ftKb_MtSpecialNCancel_Coll
- * @param gobj 
+ * @param gobj
  */
 void ftKb_MtSpecialNCancel_Coll(Fighter_GObj* gobj)
 {
@@ -1090,7 +1090,7 @@ void ftKb_MtSpecialNCancel_Coll(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Mewtwo) logic for ftKb_MtSpecialNEnd_Coll
- * @param gobj 
+ * @param gobj
  */
 void ftKb_MtSpecialNEnd_Coll(Fighter_GObj* gobj)
 {
@@ -1104,7 +1104,7 @@ void ftKb_MtSpecialNEnd_Coll(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Mewtwo) logic for ftKb_MtSpecialAirNStart_Coll
- * @param gobj 
+ * @param gobj
  */
 void ftKb_MtSpecialAirNStart_Coll(Fighter_GObj* gobj)
 {
@@ -1118,7 +1118,7 @@ void ftKb_MtSpecialAirNStart_Coll(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Mewtwo) logic for ftKb_MtSpecialAirNLoop_Coll
- * @param gobj 
+ * @param gobj
  */
 void ftKb_MtSpecialAirNLoop_Coll(Fighter_GObj* gobj)
 {
@@ -1132,7 +1132,7 @@ void ftKb_MtSpecialAirNLoop_Coll(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Mewtwo) logic for ftKb_MtSpecialAirNLoopFull_Coll
- * @param gobj 
+ * @param gobj
  */
 void ftKb_MtSpecialAirNLoopFull_Coll(Fighter_GObj* gobj)
 {
@@ -1146,7 +1146,7 @@ void ftKb_MtSpecialAirNLoopFull_Coll(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Mewtwo) logic for ftKb_MtSpecialAirNCancel_Coll
- * @param gobj 
+ * @param gobj
  */
 void ftKb_MtSpecialAirNCancel_Coll(Fighter_GObj* gobj)
 {
@@ -1160,7 +1160,7 @@ void ftKb_MtSpecialAirNCancel_Coll(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Mewtwo) logic for ftKb_MtSpecialAirNEnd_Coll
- * @param gobj 
+ * @param gobj
  */
 void ftKb_MtSpecialAirNEnd_Coll(Fighter_GObj* gobj)
 {

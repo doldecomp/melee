@@ -27,7 +27,7 @@
 
 /**
  * @brief Dash Attack logic for ftKb_SpecialN_800F1F68
- * @param gobj 
+ * @param gobj
  */
 void ftKb_SpecialN_800F1F68(Fighter_GObj* gobj)
 {
@@ -41,7 +41,7 @@ void ftKb_SpecialN_800F1F68(Fighter_GObj* gobj)
 
 /**
  * @brief Dash Attack logic for fn_800F1FDC
- * @param gobj 
+ * @param gobj
  */
 void fn_800F1FDC(Fighter_GObj* gobj)
 {
@@ -55,7 +55,7 @@ void fn_800F1FDC(Fighter_GObj* gobj)
 
 /**
  * @brief Dash Attack logic for ftKb_AttackDash_Anim
- * @param gobj 
+ * @param gobj
  */
 void ftKb_AttackDash_Anim(Fighter_GObj* gobj)
 {
@@ -64,7 +64,7 @@ void ftKb_AttackDash_Anim(Fighter_GObj* gobj)
 
 /**
  * @brief Dash Attack logic for ftKb_AttackDash_IASA
- * @param gobj 
+ * @param gobj
  */
 void ftKb_AttackDash_IASA(Fighter_GObj* gobj)
 {
@@ -73,7 +73,7 @@ void ftKb_AttackDash_IASA(Fighter_GObj* gobj)
 
 /**
  * @brief Dash Attack logic for ftKb_AttackDash_Phys
- * @param gobj 
+ * @param gobj
  */
 void ftKb_AttackDash_Phys(Fighter_GObj* gobj)
 {
@@ -82,7 +82,7 @@ void ftKb_AttackDash_Phys(Fighter_GObj* gobj)
 
 /**
  * @brief Dash Attack logic for ftKb_AttackDash_Coll
- * @param gobj 
+ * @param gobj
  */
 void ftKb_AttackDash_Coll(Fighter_GObj* gobj)
 {
@@ -91,7 +91,7 @@ void ftKb_AttackDash_Coll(Fighter_GObj* gobj)
 
 /**
  * @brief Dash Attack logic for fn_800F20C4
- * @param gobj 
+ * @param gobj
  */
 void fn_800F20C4(Fighter_GObj* gobj)
 {
@@ -104,7 +104,7 @@ void fn_800F20C4(Fighter_GObj* gobj)
 
 /**
  * @brief Dash Attack logic for ftKb_AttackDashAir_Anim
- * @param gobj 
+ * @param gobj
  */
 void ftKb_AttackDashAir_Anim(Fighter_GObj* gobj)
 {
@@ -117,7 +117,7 @@ void ftKb_AttackDashAir_IASA(Fighter_GObj* gobj) {}
 
 /**
  * @brief Dash Attack logic for ftKb_AttackDashAir_Phys
- * @param gobj 
+ * @param gobj
  */
 void ftKb_AttackDashAir_Phys(Fighter_GObj* gobj)
 {
@@ -129,7 +129,7 @@ void ftKb_AttackDashAir_Phys(Fighter_GObj* gobj)
 
 /**
  * @brief Dash Attack logic for ftKb_AttackDashAir_Coll
- * @param gobj 
+ * @param gobj
  */
 void ftKb_AttackDashAir_Coll(Fighter_GObj* gobj)
 {
@@ -138,7 +138,7 @@ void ftKb_AttackDashAir_Coll(Fighter_GObj* gobj)
 
 /**
  * @brief Dash Attack logic for ftKb_AttackDashAir_800F21C0
- * @param gobj 
+ * @param gobj
  */
 float ftKb_AttackDashAir_800F21C0(Fighter_GObj* gobj)
 {

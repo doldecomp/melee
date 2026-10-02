@@ -30,7 +30,7 @@
 
 /**
  * @brief Neutral-B (Inhale) logic for ftKb_NsSpecialNStart_Anim_inline
- * @param gobj 
+ * @param gobj
  * @param flash_pos 
  */
 static void ftKb_NsSpecialNStart_Anim_inline(HSD_GObj* gobj, Vec3* flash_pos)
@@ -54,7 +54,7 @@ static void ftKb_NsSpecialNStart_Anim_inline(HSD_GObj* gobj, Vec3* flash_pos)
 
 /**
  * @brief Neutral-B (Inhale) logic for ftKb_SpecialNNs_800FED38
- * @param gobj 
+ * @param gobj
  */
 void ftKb_SpecialNNs_800FED38(HSD_GObj* gobj)
 {
@@ -83,7 +83,7 @@ void ftKb_SpecialNNs_800FED38(HSD_GObj* gobj)
 
 /**
  * @brief Neutral-B (Inhale) logic for ftKb_SetNsFlashAttr
- * @param gobj 
+ * @param gobj
  */
 static inline void ftKb_SetNsFlashAttr(Fighter_GObj* gobj)
 {
@@ -102,7 +102,7 @@ static inline void ftKb_SetNsFlashAttr(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B (Inhale) logic for ftKb_SpecialNNs_800FEDD0
- * @param gobj 
+ * @param gobj
  */
 void ftKb_SpecialNNs_800FEDD0(HSD_GObj* gobj)
 {
@@ -132,7 +132,7 @@ void ftKb_SpecialNNs_800FEDD0(HSD_GObj* gobj)
 
 /**
  * @brief Neutral-B (Inhale) logic for ftKb_NsSpecialNStart_Anim
- * @param gobj 
+ * @param gobj
  */
 void ftKb_NsSpecialNStart_Anim(HSD_GObj* gobj)
 {
@@ -148,7 +148,7 @@ void ftKb_NsSpecialNStart_Anim(HSD_GObj* gobj)
 
 /**
  * @brief Neutral-B (Inhale) logic for ftKb_NsSpecialNHold_Anim
- * @param gobj 
+ * @param gobj
  */
 void ftKb_NsSpecialNHold_Anim(HSD_GObj* gobj)
 {
@@ -194,7 +194,7 @@ void ftKb_NsSpecialNHold_Anim(HSD_GObj* gobj)
 
 /**
  * @brief Neutral-B (Inhale) logic for ftKb_NsSpecialNEnd_Anim
- * @param gobj 
+ * @param gobj
  */
 void ftKb_NsSpecialNEnd_Anim(Fighter_GObj* gobj)
 {
@@ -209,7 +209,7 @@ void ftKb_NsSpecialNEnd_Anim(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B (Inhale) logic for ftKb_NsSpecialAirNStart_Anim
- * @param gobj 
+ * @param gobj
  */
 void ftKb_NsSpecialAirNStart_Anim(Fighter_GObj* gobj)
 {
@@ -226,7 +226,7 @@ void ftKb_NsSpecialAirNStart_Anim(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B (Inhale) logic for ftKb_NsSpecialAirNHold_Anim
- * @param gobj 
+ * @param gobj
  */
 void ftKb_NsSpecialAirNHold_Anim(Fighter_GObj* gobj)
 {
@@ -272,7 +272,7 @@ void ftKb_NsSpecialAirNHold_Anim(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B (Inhale) logic for ftKb_NsSpecialAirNEnd_Anim
- * @param gobj 
+ * @param gobj
  */
 void ftKb_NsSpecialAirNEnd_Anim(Fighter_GObj* gobj)
 {
@@ -295,7 +295,7 @@ void ftKb_NsSpecialNStart_IASA(Fighter_GObj* gobj) {}
 
 /**
  * @brief Neutral-B (Inhale) logic for ftKb_NsSpecialNHold_IASA
- * @param gobj 
+ * @param gobj
  */
 void ftKb_NsSpecialNHold_IASA(Fighter_GObj* gobj)
 {
@@ -338,7 +338,7 @@ void ftKb_NsSpecialAirNStart_IASA(Fighter_GObj* gobj) {}
 
 /**
  * @brief Neutral-B (Inhale) logic for ftKb_NsSpecialAirNHold_IASA
- * @param gobj 
+ * @param gobj
  */
 void ftKb_NsSpecialAirNHold_IASA(Fighter_GObj* gobj)
 {
@@ -379,7 +379,7 @@ void ftKb_NsSpecialAirNEnd_IASA(Fighter_GObj* gobj) {}
 
 /**
  * @brief Neutral-B (Inhale) logic for ftKb_NsSpecialNStart_Phys
- * @param gobj 
+ * @param gobj
  */
 void ftKb_NsSpecialNStart_Phys(Fighter_GObj* gobj)
 {
@@ -392,7 +392,7 @@ void ftKb_NsSpecialNStart_Phys(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B (Inhale) logic for ftKb_NsSpecialNHold_Phys
- * @param gobj 
+ * @param gobj
  */
 void ftKb_NsSpecialNHold_Phys(Fighter_GObj* gobj)
 {
@@ -401,7 +401,7 @@ void ftKb_NsSpecialNHold_Phys(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B (Inhale) logic for ftKb_NsSpecialNEnd_Phys
- * @param gobj 
+ * @param gobj
  */
 void ftKb_NsSpecialNEnd_Phys(Fighter_GObj* gobj)
 {
@@ -410,7 +410,7 @@ void ftKb_NsSpecialNEnd_Phys(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B (Inhale) logic for ftKb_NsSpecialAirNStart_Phys
- * @param gobj 
+ * @param gobj
  */
 void ftKb_NsSpecialAirNStart_Phys(Fighter_GObj* gobj)
 {
@@ -430,7 +430,7 @@ void ftKb_NsSpecialAirNStart_Phys(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B (Inhale) logic for ftKb_NsSpecialAirNHold_Phys
- * @param gobj 
+ * @param gobj
  */
 void ftKb_NsSpecialAirNHold_Phys(Fighter_GObj* gobj)
 {
@@ -440,7 +440,7 @@ void ftKb_NsSpecialAirNHold_Phys(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B (Inhale) logic for ftKb_NsSpecialAirNEnd_Phys
- * @param gobj 
+ * @param gobj
  */
 void ftKb_NsSpecialAirNEnd_Phys(Fighter_GObj* gobj)
 {
@@ -450,7 +450,7 @@ void ftKb_NsSpecialAirNEnd_Phys(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B (Inhale) logic for ftKb_NsSpecialNStart_Coll
- * @param gobj 
+ * @param gobj
  */
 void ftKb_NsSpecialNStart_Coll(Fighter_GObj* gobj)
 {
@@ -463,7 +463,7 @@ void ftKb_NsSpecialNStart_Coll(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B (Inhale) logic for ftKb_NsSpecialNHold_Coll
- * @param gobj 
+ * @param gobj
  */
 void ftKb_NsSpecialNHold_Coll(Fighter_GObj* gobj)
 {
@@ -476,7 +476,7 @@ void ftKb_NsSpecialNHold_Coll(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B (Inhale) logic for ftKb_NsSpecialNEnd_Coll
- * @param gobj 
+ * @param gobj
  */
 void ftKb_NsSpecialNEnd_Coll(Fighter_GObj* gobj)
 {
@@ -489,7 +489,7 @@ void ftKb_NsSpecialNEnd_Coll(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B (Inhale) logic for ftKb_NsSpecialAirNStart_Coll
- * @param gobj 
+ * @param gobj
  */
 void ftKb_NsSpecialAirNStart_Coll(Fighter_GObj* gobj)
 {
@@ -502,7 +502,7 @@ void ftKb_NsSpecialAirNStart_Coll(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B (Inhale) logic for ftKb_NsSpecialAirNHold_Coll
- * @param gobj 
+ * @param gobj
  */
 void ftKb_NsSpecialAirNHold_Coll(Fighter_GObj* gobj)
 {
@@ -515,7 +515,7 @@ void ftKb_NsSpecialAirNHold_Coll(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B (Inhale) logic for ftKb_NsSpecialAirNEnd_Coll
- * @param gobj 
+ * @param gobj
  */
 void ftKb_NsSpecialAirNEnd_Coll(Fighter_GObj* gobj)
 {

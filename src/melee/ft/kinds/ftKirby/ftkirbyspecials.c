@@ -36,7 +36,7 @@ char ftKb_Init_804D3DB0[2] = "0";
 
 /**
  * @brief Side-B (Hammer) logic for ftKb_SpecialAirLw_800F539C
- * @param gobj 
+ * @param gobj
  */
 void ftKb_SpecialAirLw_800F539C(Fighter_GObj* gobj)
 {
@@ -45,7 +45,7 @@ void ftKb_SpecialAirLw_800F539C(Fighter_GObj* gobj)
 
 /**
  * @brief Side-B (Hammer) logic for fn_800F53AC_SpawnEffect
- * @param gobj 
+ * @param gobj
  */
 static inline void fn_800F53AC_SpawnEffect(HSD_GObj* gobj)
 {
@@ -63,7 +63,7 @@ static inline void fn_800F53AC_SpawnEffect(HSD_GObj* gobj)
 
 /**
  * @brief Side-B (Hammer) logic for fn_800F53AC_CleanupItem
- * @param gobj 
+ * @param gobj
  */
 static inline void fn_800F53AC_CleanupItem(HSD_GObj* gobj)
 {
@@ -77,7 +77,7 @@ static inline void fn_800F53AC_CleanupItem(HSD_GObj* gobj)
 
 /**
  * @brief Side-B (Hammer) logic for fn_800F53AC
- * @param gobj 
+ * @param gobj
  */
 void fn_800F53AC(HSD_GObj* gobj)
 {
@@ -110,7 +110,7 @@ void fn_800F53AC(HSD_GObj* gobj)
 
 /**
  * @brief Side-B (Hammer) logic for ftKb_SpecialAirLw_800F5524
- * @param gobj 
+ * @param gobj
  */
 void ftKb_SpecialAirLw_800F5524(HSD_GObj* gobj)
 {
@@ -123,7 +123,7 @@ void ftKb_SpecialAirLw_800F5524(HSD_GObj* gobj)
 
 /**
  * @brief Side-B (Hammer) logic for ftKb_SpecialS_Enter
- * @param gobj 
+ * @param gobj
  */
 void ftKb_SpecialS_Enter(Fighter_GObj* gobj)
 {
@@ -137,7 +137,7 @@ void ftKb_SpecialS_Enter(Fighter_GObj* gobj)
 
 /**
  * @brief Side-B (Hammer) logic for ftKb_SpecialAirS_Enter
- * @param gobj 
+ * @param gobj
  */
 void ftKb_SpecialAirS_Enter(Fighter_GObj* gobj)
 {
@@ -157,7 +157,7 @@ void ftKb_SpecialAirS_Enter(Fighter_GObj* gobj)
 
 /**
  * @brief Side-B (Hammer) logic for ftKb_SpecialS_Anim
- * @param gobj 
+ * @param gobj
  */
 void ftKb_SpecialS_Anim(Fighter_GObj* gobj)
 {
@@ -168,7 +168,7 @@ void ftKb_SpecialS_Anim(Fighter_GObj* gobj)
 
 /**
  * @brief Side-B (Hammer) logic for ftKb_SpecialAirS_Anim
- * @param gobj 
+ * @param gobj
  */
 void ftKb_SpecialAirS_Anim(Fighter_GObj* gobj)
 {
@@ -180,7 +180,7 @@ void ftKb_SpecialAirS_Anim(Fighter_GObj* gobj)
 
 /**
  * @brief Side-B (Hammer) logic for ftKb_SpecialS_Phys
- * @param gobj 
+ * @param gobj
  */
 void ftKb_SpecialS_Phys(Fighter_GObj* gobj)
 {
@@ -189,7 +189,7 @@ void ftKb_SpecialS_Phys(Fighter_GObj* gobj)
 
 /**
  * @brief Side-B (Hammer) logic for ftKb_SpecialAirS_Phys
- * @param gobj 
+ * @param gobj
  */
 void ftKb_SpecialAirS_Phys(Fighter_GObj* gobj)
 {
@@ -198,7 +198,7 @@ void ftKb_SpecialAirS_Phys(Fighter_GObj* gobj)
 
 /**
  * @brief Side-B (Hammer) logic for ftKb_SpecialS_Coll
- * @param gobj 
+ * @param gobj
  */
 void ftKb_SpecialS_Coll(Fighter_GObj* gobj)
 {
@@ -216,7 +216,7 @@ void ftKb_SpecialS_Coll(Fighter_GObj* gobj)
 
 /**
  * @brief Side-B (Hammer) logic for ftKb_SpecialAirS_Coll
- * @param gobj 
+ * @param gobj
  */
 void ftKb_SpecialAirS_Coll(Fighter_GObj* gobj)
 {
@@ -235,7 +235,7 @@ void ftKb_SpecialAirS_Coll(Fighter_GObj* gobj)
 
 /**
  * @brief Side-B (Hammer) logic for ftKb_SpecialN_800F5800
- * @param gobj 
+ * @param gobj
  * @param vec 
  */
 void ftKb_SpecialN_800F5800(HSD_GObj* gobj, Vec3* vec)
@@ -246,7 +246,7 @@ void ftKb_SpecialN_800F5800(HSD_GObj* gobj, Vec3* vec)
 
 /**
  * @brief Side-B (Hammer) logic for ftKb_SpecialN_800F5820
- * @param gobj 
+ * @param gobj
  * @param victim_coll_box 
  * @param victim_scale_x 
  */
@@ -278,7 +278,7 @@ void ftKb_SpecialN_800F5874(Vec2* vec)
 
 /**
  * @brief Side-B (Hammer) logic for ftKb_SpecialN_800F5898
- * @param gobj 
+ * @param gobj
  */
 HSD_Joint* ftKb_SpecialN_800F5898(Fighter_GObj* gobj)
 {

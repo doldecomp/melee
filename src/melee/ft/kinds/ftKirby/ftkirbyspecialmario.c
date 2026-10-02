@@ -34,7 +34,7 @@ void fn_800F9260(HSD_GObj*);
 
 /**
  * @brief Neutral-B Copy Ability (Mario) logic for ftKb_SpecialN_800F9110
- * @param gobj 
+ * @param gobj
  */
 void ftKb_SpecialN_800F9110(Fighter_GObj* gobj)
 {
@@ -56,7 +56,7 @@ void ftKb_SpecialN_800F9110(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Mario) logic for ftKb_MrSpecialN_Anim
- * @param gobj 
+ * @param gobj
  */
 void ftKb_MrSpecialN_Anim(Fighter_GObj* gobj)
 {
@@ -67,7 +67,7 @@ void ftKb_MrSpecialN_Anim(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Mario) logic for ftKb_MrSpecialN_IASA
- * @param gobj 
+ * @param gobj
  */
 void ftKb_MrSpecialN_IASA(Fighter_GObj* gobj)
 {
@@ -79,7 +79,7 @@ void ftKb_MrSpecialN_IASA(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Mario) logic for ftKb_MrSpecialN_Phys
- * @param gobj 
+ * @param gobj
  */
 void ftKb_MrSpecialN_Phys(Fighter_GObj* gobj)
 {
@@ -88,7 +88,7 @@ void ftKb_MrSpecialN_Phys(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Mario) logic for ftKb_MrSpecialN_Coll
- * @param gobj 
+ * @param gobj
  */
 void ftKb_MrSpecialN_Coll(Fighter_GObj* gobj)
 {
@@ -99,7 +99,7 @@ void ftKb_MrSpecialN_Coll(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Mario) logic for fn_800F9260_inline
- * @param gobj 
+ * @param gobj
  */
 static inline s32 fn_800F9260_inline(HSD_GObj* gobj)
 {
@@ -141,7 +141,7 @@ static inline s32 fn_800F9260_GetLHandBone(Fighter* fp)
 }
 /**
  * @brief Neutral-B Copy Ability (Mario) logic for fn_800F9260
- * @param gobj 
+ * @param gobj
  */
 void fn_800F9260(HSD_GObj* gobj)
 {
@@ -175,7 +175,7 @@ void fn_800F9260(HSD_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Mario) logic for ftKb_SpecialNMr_800F93CC
- * @param gobj 
+ * @param gobj
  */
 void ftKb_SpecialNMr_800F93CC(Fighter_GObj* gobj)
 {
@@ -193,7 +193,7 @@ void ftKb_SpecialNMr_800F93CC(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Mario) logic for ftKb_MrSpecialAirN_Anim
- * @param gobj 
+ * @param gobj
  */
 void ftKb_MrSpecialAirN_Anim(Fighter_GObj* gobj)
 {
@@ -204,7 +204,7 @@ void ftKb_MrSpecialAirN_Anim(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Mario) logic for ftKb_MrSpecialAirN_IASA
- * @param gobj 
+ * @param gobj
  */
 void ftKb_MrSpecialAirN_IASA(Fighter_GObj* gobj)
 {
@@ -216,7 +216,7 @@ void ftKb_MrSpecialAirN_IASA(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Mario) logic for ftKb_MrSpecialAirN_Phys
- * @param gobj 
+ * @param gobj
  */
 void ftKb_MrSpecialAirN_Phys(Fighter_GObj* gobj)
 {
@@ -225,7 +225,7 @@ void ftKb_MrSpecialAirN_Phys(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Mario) logic for ftKb_MrSpecialAirN_Coll
- * @param gobj 
+ * @param gobj
  */
 void ftKb_MrSpecialAirN_Coll(Fighter_GObj* gobj)
 {
@@ -236,7 +236,7 @@ void ftKb_MrSpecialAirN_Coll(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Mario) logic for ftKb_SpecialNLg_800F951C
- * @param gobj 
+ * @param gobj
  */
 void ftKb_SpecialNLg_800F951C(Fighter_GObj* gobj)
 {
@@ -262,7 +262,7 @@ void ftKb_SpecialNLg_800F951C(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Mario) logic for ftKb_SpecialNLg_800F9598
- * @param gobj 
+ * @param gobj
  */
 void ftKb_SpecialNLg_800F9598(Fighter_GObj* gobj)
 {

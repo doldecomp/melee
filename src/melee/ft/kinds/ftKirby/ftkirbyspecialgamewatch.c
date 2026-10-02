@@ -37,7 +37,7 @@ static MotionFlags const ftKb_MF_GwSpecialN_Coll =
 
 /**
  * @brief Neutral-B Copy Ability (Gamewatch) logic for fn_8010CE5C
- * @param gobj 
+ * @param gobj
  */
 void fn_8010CE5C(Fighter_GObj* gobj)
 {
@@ -108,7 +108,7 @@ void fn_8010CE5C(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Gamewatch) logic for fn_8010CFB0
- * @param gobj 
+ * @param gobj
  */
 void fn_8010CFB0(Fighter_GObj* gobj)
 {
@@ -129,7 +129,7 @@ void fn_8010CFB0(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Gamewatch) logic for ftKb_SpecialNGw_8010D074
- * @param gobj 
+ * @param gobj
  */
 void ftKb_SpecialNGw_8010D074(Fighter_GObj* gobj)
 {
@@ -140,7 +140,7 @@ void ftKb_SpecialNGw_8010D074(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Gamewatch) logic for ftKb_SpecialNGw_8010D0A8
- * @param gobj 
+ * @param gobj
  */
 void ftKb_SpecialNGw_8010D0A8(Fighter_GObj* gobj)
 {
@@ -153,7 +153,7 @@ void ftKb_SpecialNGw_8010D0A8(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Gamewatch) logic for fn_8010D100
- * @param gobj 
+ * @param gobj
  */
 void fn_8010D100(Fighter_GObj* gobj)
 {
@@ -165,7 +165,7 @@ void fn_8010D100(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Gamewatch) logic for ftKb_SpecialNGw_8010D130
- * @param gobj 
+ * @param gobj
  */
 void ftKb_SpecialNGw_8010D130(Fighter_GObj* gobj)
 {
@@ -177,7 +177,7 @@ void ftKb_SpecialNGw_8010D130(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Gamewatch) logic for ftKb_SpecialNGw_8010D160
- * @param gobj 
+ * @param gobj
  */
 bool ftKb_SpecialNGw_8010D160(Fighter_GObj* gobj)
 {
@@ -208,7 +208,7 @@ static inline void setGwVars(HSD_GObj* fighter_gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Gamewatch) logic for ftKb_SpecialNGw_8010D188
- * @param gobj 
+ * @param gobj
  */
 void ftKb_SpecialNGw_8010D188(Fighter_GObj* gobj)
 {
@@ -222,7 +222,7 @@ void ftKb_SpecialNGw_8010D188(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Gamewatch) logic for ftKb_SpecialNGw_8010D204
- * @param gobj 
+ * @param gobj
  */
 void ftKb_SpecialNGw_8010D204(HSD_GObj* gobj)
 {
@@ -236,7 +236,7 @@ void ftKb_SpecialNGw_8010D204(HSD_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Gamewatch) logic for ftKb_GwSpecialN_Anim
- * @param gobj 
+ * @param gobj
  */
 void ftKb_GwSpecialN_Anim(Fighter_GObj* gobj)
 {
@@ -259,7 +259,7 @@ void ftKb_GwSpecialN_Anim(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Gamewatch) logic for ftKb_GwSpecialAirN_Anim
- * @param gobj 
+ * @param gobj
  */
 void ftKb_GwSpecialAirN_Anim(Fighter_GObj* gobj)
 {
@@ -282,7 +282,7 @@ void ftKb_GwSpecialAirN_Anim(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Gamewatch) logic for ftKb_GwSpecialN_IASA
- * @param gobj 
+ * @param gobj
  */
 void ftKb_GwSpecialN_IASA(Fighter_GObj* gobj)
 {
@@ -301,7 +301,7 @@ void ftKb_GwSpecialN_IASA(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Gamewatch) logic for ftKb_GwSpecialAirN_IASA
- * @param gobj 
+ * @param gobj
  */
 void ftKb_GwSpecialAirN_IASA(Fighter_GObj* gobj)
 {
@@ -320,7 +320,7 @@ void ftKb_GwSpecialAirN_IASA(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Gamewatch) logic for ftKb_GwSpecialN_Phys
- * @param gobj 
+ * @param gobj
  */
 void ftKb_GwSpecialN_Phys(Fighter_GObj* gobj)
 {
@@ -329,7 +329,7 @@ void ftKb_GwSpecialN_Phys(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Gamewatch) logic for ftKb_GwSpecialAirN_Phys
- * @param gobj 
+ * @param gobj
  */
 void ftKb_GwSpecialAirN_Phys(Fighter_GObj* gobj)
 {
@@ -338,7 +338,7 @@ void ftKb_GwSpecialAirN_Phys(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Gamewatch) logic for ftKb_GwSpecialN_Coll
- * @param gobj 
+ * @param gobj
  */
 void ftKb_GwSpecialN_Coll(Fighter_GObj* gobj)
 {
@@ -349,7 +349,7 @@ void ftKb_GwSpecialN_Coll(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Gamewatch) logic for ftKb_GwSpecialAirN_Coll
- * @param gobj 
+ * @param gobj
  */
 void ftKb_GwSpecialAirN_Coll(Fighter_GObj* gobj)
 {
@@ -360,7 +360,7 @@ void ftKb_GwSpecialAirN_Coll(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Gamewatch) logic for ftKb_SpecialNGw_8010D580
- * @param gobj 
+ * @param gobj
  */
 void ftKb_SpecialNGw_8010D580(Fighter_GObj* gobj)
 {
@@ -374,7 +374,7 @@ void ftKb_SpecialNGw_8010D580(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Gamewatch) logic for ftKb_SpecialNGw_8010D5F0
- * @param gobj 
+ * @param gobj
  */
 void ftKb_SpecialNGw_8010D5F0(Fighter_GObj* gobj)
 {
@@ -388,7 +388,7 @@ void ftKb_SpecialNGw_8010D5F0(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Gamewatch) logic for inline1
- * @param gobj 
+ * @param gobj
  */
 static inline void inline1(Fighter_GObj* gobj)
 {
@@ -401,7 +401,7 @@ static inline void inline1(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Gamewatch) logic for ftKb_SpecialNGw_8010D660
- * @param gobj 
+ * @param gobj
  * @param arg1 
  */
 void ftKb_SpecialNGw_8010D660(Fighter_GObj* gobj, f32 val)
@@ -415,7 +415,7 @@ void ftKb_SpecialNGw_8010D660(Fighter_GObj* gobj, f32 val)
 
 /**
  * @brief Neutral-B Copy Ability (Gamewatch) logic for ftKb_SpecialNGw_8010D6D0
- * @param gobj 
+ * @param gobj
  * @param arg1 
  */
 void ftKb_SpecialNGw_8010D6D0(Fighter_GObj* gobj, f32 val)

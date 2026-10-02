@@ -35,7 +35,7 @@
 
 /**
  * @brief Neutral-B Copy Ability (Iceclimber) logic for ftKb_SpecialNIc_80108CE8
- * @param gobj 
+ * @param gobj
  * @param it_gobj 
  */
 void ftKb_SpecialNIc_80108CE8(Fighter_GObj* gobj, Item_GObj* it_gobj)
@@ -48,7 +48,7 @@ void ftKb_SpecialNIc_80108CE8(Fighter_GObj* gobj, Item_GObj* it_gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Iceclimber) logic for ftKb_SpecialNIc_80108D04
- * @param gobj 
+ * @param gobj
  */
 void ftKb_SpecialNIc_80108D04(HSD_GObj* gobj)
 {
@@ -67,7 +67,7 @@ void ftKb_SpecialNIc_80108D04(HSD_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Iceclimber) logic for ftKb_SpecialNIc_80108D64
- * @param gobj 
+ * @param gobj
  */
 void ftKb_SpecialNIc_80108D64(Fighter_GObj* gobj)
 {
@@ -94,7 +94,7 @@ void ftKb_SpecialNIc_80108D64(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Iceclimber) logic for ftKb_SpecialNIc_80108E14
- * @param gobj 
+ * @param gobj
  */
 void ftKb_SpecialNIc_80108E14(Fighter_GObj* gobj)
 {
@@ -127,7 +127,7 @@ void ftKb_SpecialNIc_80108E14(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Iceclimber) logic for ftKb_PpSpecialN_Anim
- * @param gobj 
+ * @param gobj
  */
 void ftKb_PpSpecialN_Anim(Fighter_GObj* gobj)
 {
@@ -138,7 +138,7 @@ void ftKb_PpSpecialN_Anim(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Iceclimber) logic for ftKb_PpSpecialAirN_Anim
- * @param gobj 
+ * @param gobj
  */
 void ftKb_PpSpecialAirN_Anim(Fighter_GObj* gobj)
 {
@@ -153,7 +153,7 @@ void ftKb_PpSpecialAirN_IASA(Fighter_GObj* gobj) {}
 
 /**
  * @brief Neutral-B Copy Ability (Iceclimber) logic for ftKb_PpSpecialN_Phys
- * @param gobj 
+ * @param gobj
  */
 void ftKb_PpSpecialN_Phys(Fighter_GObj* gobj)
 {
@@ -162,7 +162,7 @@ void ftKb_PpSpecialN_Phys(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Iceclimber) logic for ftKb_PpSpecialAirN_Phys
- * @param gobj 
+ * @param gobj
  */
 void ftKb_PpSpecialAirN_Phys(Fighter_GObj* gobj)
 {
@@ -171,7 +171,7 @@ void ftKb_PpSpecialAirN_Phys(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Iceclimber) logic for ftKb_PpSpecialN_Coll
- * @param gobj 
+ * @param gobj
  */
 void ftKb_PpSpecialN_Coll(Fighter_GObj* gobj)
 {
@@ -192,7 +192,7 @@ void ftKb_PpSpecialN_Coll(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Iceclimber) logic for ftKb_PpSpecialAirN_Coll
- * @param gobj 
+ * @param gobj
  */
 void ftKb_PpSpecialAirN_Coll(Fighter_GObj* gobj)
 {
@@ -218,7 +218,7 @@ void ftKb_PpSpecialAirN_Coll(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Iceclimber) logic for fn_801090D4
- * @param gobj 
+ * @param gobj
  */
 void fn_801090D4(Fighter_GObj* gobj)
 {
@@ -262,7 +262,7 @@ void fn_801090D4(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Iceclimber) logic for ftKb_SpecialNYs_80109238
- * @param gobj 
+ * @param gobj
  */
 Fighter_Part ftKb_SpecialNYs_80109238(Fighter_GObj* gobj)
 {

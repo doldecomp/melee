@@ -30,7 +30,7 @@
 
 /**
  * @brief Yoshi Egg logic for fn_8010AA64
- * @param gobj 
+ * @param gobj
  */
 static void fn_8010AA64(Fighter_GObj* gobj)
 {
@@ -65,7 +65,7 @@ static void fn_8010AA64(Fighter_GObj* gobj)
 
 /**
  * @brief Yoshi Egg logic for inlineB0
- * @param gobj 
+ * @param gobj
  * @param hurt 
  */
 static inline void inlineB0(Fighter_GObj* gobj, ftHurtboxInit* hurt)
@@ -87,7 +87,7 @@ static inline void inlineB0(Fighter_GObj* gobj, ftHurtboxInit* hurt)
 /**
  * @brief Yoshi Egg logic for ftKb_SpecialNYs_8010AC78
  * @param victim 
- * @param gobj 
+ * @param gobj
  */
 void ftKb_SpecialNYs_8010AC78(Fighter_GObj* victim, Fighter_GObj* gobj)
 {
@@ -129,7 +129,7 @@ void ftKb_SpecialNYs_8010AC78(Fighter_GObj* victim, Fighter_GObj* gobj)
 
 /**
  * @brief Yoshi Egg logic for ftCo_KirbyYoshiEgg_Anim
- * @param gobj 
+ * @param gobj
  */
 void ftCo_KirbyYoshiEgg_Anim(Fighter_GObj* gobj)
 {
@@ -169,7 +169,7 @@ void ftCo_KirbyYoshiEgg_IASA(Fighter_GObj* gobj) {}
 
 /**
  * @brief Yoshi Egg logic for ftCo_KirbyYoshiEgg_Phys
- * @param gobj 
+ * @param gobj
  */
 void ftCo_KirbyYoshiEgg_Phys(Fighter_GObj* gobj)
 {
@@ -184,7 +184,7 @@ void ftCo_KirbyYoshiEgg_Phys(Fighter_GObj* gobj)
 
 /**
  * @brief Yoshi Egg logic for ftCo_KirbyYoshiEgg_Coll
- * @param gobj 
+ * @param gobj
  */
 void ftCo_KirbyYoshiEgg_Coll(Fighter_GObj* gobj)
 {
@@ -199,7 +199,7 @@ void ftCo_KirbyYoshiEgg_Coll(Fighter_GObj* gobj)
 
 /**
  * @brief Yoshi Egg logic for fn_8010B124
- * @param gobj 
+ * @param gobj
  */
 void fn_8010B124(Fighter_GObj* gobj)
 {
@@ -208,7 +208,7 @@ void fn_8010B124(Fighter_GObj* gobj)
 
 /**
  * @brief Yoshi Egg logic for fn_8010B148
- * @param gobj 
+ * @param gobj
  */
 void fn_8010B148(Fighter_GObj* gobj)
 {
@@ -217,7 +217,7 @@ void fn_8010B148(Fighter_GObj* gobj)
 
 /**
  * @brief Yoshi Egg logic for fn_8010B16C
- * @param gobj 
+ * @param gobj
  */
 void fn_8010B16C(Fighter_GObj* gobj)
 {
@@ -231,7 +231,7 @@ void fn_8010B16C(Fighter_GObj* gobj)
 
 /**
  * @brief Yoshi Egg logic for fn_8010B1D4
- * @param gobj 
+ * @param gobj
  */
 void fn_8010B1D4(Fighter_GObj* gobj)
 {

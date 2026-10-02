@@ -33,7 +33,7 @@
 
 /**
  * @brief Neutral-B Copy Ability (Mars) logic for fn_8010B1F4
- * @param gobj 
+ * @param gobj
  */
 void fn_8010B1F4(Fighter_GObj* gobj)
 {
@@ -60,7 +60,7 @@ void fn_8010B1F4(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Mars) logic for fn_8010B2E8
- * @param gobj 
+ * @param gobj
  */
 void fn_8010B2E8(Fighter_GObj* gobj)
 {
@@ -71,7 +71,7 @@ void fn_8010B2E8(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Mars) logic for setupStartAccessory
- * @param gobj 
+ * @param gobj
  * @param scale 
  */
 static inline void setupStartAccessory(HSD_GObj* gobj, Vec3* scale)
@@ -99,7 +99,7 @@ static inline void setupStartAccessory(HSD_GObj* gobj, Vec3* scale)
 
 /**
  * @brief Neutral-B Copy Ability (Mars) logic for ftKb_SpecialNMs_8010B2FC
- * @param gobj 
+ * @param gobj
  */
 void ftKb_SpecialNMs_8010B2FC(HSD_GObj* gobj)
 {
@@ -144,7 +144,7 @@ void ftKb_SpecialNMs_8010B2FC(HSD_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Mars) logic for ftKb_SpecialNMs_8010B4A0
- * @param gobj 
+ * @param gobj
  */
 void ftKb_SpecialNMs_8010B4A0(HSD_GObj* gobj)
 {
@@ -195,7 +195,7 @@ void ftKb_SpecialNMs_8010B4A0(HSD_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Mars) logic for ftKb_MsSpecialNStart_Anim
- * @param gobj 
+ * @param gobj
  */
 void ftKb_MsSpecialNStart_Anim(HSD_GObj* gobj)
 {
@@ -214,7 +214,7 @@ void ftKb_MsSpecialNStart_Anim(HSD_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Mars) logic for ftKb_MsSpecialAirNStart_Anim
- * @param gobj 
+ * @param gobj
  */
 void ftKb_MsSpecialAirNStart_Anim(HSD_GObj* gobj)
 {
@@ -237,7 +237,7 @@ void ftKb_MsSpecialAirNStart_IASA(Fighter_GObj* gobj) {}
 
 /**
  * @brief Neutral-B Copy Ability (Mars) logic for ftKb_MsSpecialNStart_Phys
- * @param gobj 
+ * @param gobj
  */
 void ftKb_MsSpecialNStart_Phys(Fighter_GObj* gobj)
 {
@@ -257,7 +257,7 @@ void ftKb_MsSpecialNStart_Phys(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Mars) logic for ftKb_MsSpecialAirNStart_Phys
- * @param gobj 
+ * @param gobj
  */
 void ftKb_MsSpecialAirNStart_Phys(Fighter_GObj* gobj)
 {
@@ -277,7 +277,7 @@ void ftKb_MsSpecialAirNStart_Phys(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Mars) logic for ftKb_MsSpecialNStart_Coll
- * @param gobj 
+ * @param gobj
  */
 void ftKb_MsSpecialNStart_Coll(Fighter_GObj* gobj)
 {
@@ -288,7 +288,7 @@ void ftKb_MsSpecialNStart_Coll(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Mars) logic for ftKb_MsSpecialAirNStart_Coll
- * @param gobj 
+ * @param gobj
  */
 void ftKb_MsSpecialAirNStart_Coll(Fighter_GObj* gobj)
 {
@@ -299,7 +299,7 @@ void ftKb_MsSpecialAirNStart_Coll(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Mars) logic for getAirSpecialMotionId
- * @param gobj 
+ * @param gobj
  */
 static inline FtMotionId getAirSpecialMotionId(Fighter_GObj* gobj)
 {
@@ -313,7 +313,7 @@ static inline FtMotionId getAirSpecialMotionId(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Mars) logic for ftKb_SpecialNMs_8010B868
- * @param gobj 
+ * @param gobj
  */
 void ftKb_SpecialNMs_8010B868(Fighter_GObj* gobj)
 {
@@ -326,7 +326,7 @@ void ftKb_SpecialNMs_8010B868(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Mars) logic for getGroundSpecialMotionId
- * @param gobj 
+ * @param gobj
  */
 static inline FtMotionId getGroundSpecialMotionId(Fighter_GObj* gobj)
 {
@@ -340,7 +340,7 @@ static inline FtMotionId getGroundSpecialMotionId(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Mars) logic for ftKb_SpecialNMs_8010B8E0
- * @param gobj 
+ * @param gobj
  */
 void ftKb_SpecialNMs_8010B8E0(Fighter_GObj* gobj)
 {
@@ -353,7 +353,7 @@ void ftKb_SpecialNMs_8010B8E0(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Mars) logic for ftKb_MsSpecialNLoop_Anim
- * @param gobj 
+ * @param gobj
  */
 void ftKb_MsSpecialNLoop_Anim(Fighter_GObj* gobj)
 {
@@ -374,7 +374,7 @@ void ftKb_MsSpecialNLoop_Anim(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Mars) logic for ftKb_MsSpecialAirNLoop_Anim
- * @param gobj 
+ * @param gobj
  */
 void ftKb_MsSpecialAirNLoop_Anim(Fighter_GObj* gobj)
 {
@@ -395,7 +395,7 @@ void ftKb_MsSpecialAirNLoop_Anim(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Mars) logic for ftKb_MsSpecialNLoop_IASA
- * @param gobj 
+ * @param gobj
  */
 void ftKb_MsSpecialNLoop_IASA(Fighter_GObj* gobj)
 {
@@ -408,7 +408,7 @@ void ftKb_MsSpecialNLoop_IASA(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Mars) logic for ftKb_MsSpecialAirNLoop_IASA
- * @param gobj 
+ * @param gobj
  */
 void ftKb_MsSpecialAirNLoop_IASA(Fighter_GObj* gobj)
 {
@@ -421,7 +421,7 @@ void ftKb_MsSpecialAirNLoop_IASA(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Mars) logic for ftKb_MsSpecialNLoop_Phys
- * @param gobj 
+ * @param gobj
  */
 void ftKb_MsSpecialNLoop_Phys(Fighter_GObj* gobj)
 {
@@ -430,7 +430,7 @@ void ftKb_MsSpecialNLoop_Phys(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Mars) logic for ftKb_MsSpecialAirNLoop_Phys
- * @param gobj 
+ * @param gobj
  */
 void ftKb_MsSpecialAirNLoop_Phys(Fighter_GObj* gobj)
 {
@@ -439,7 +439,7 @@ void ftKb_MsSpecialAirNLoop_Phys(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Mars) logic for ftKb_MsSpecialNLoop_Coll
- * @param gobj 
+ * @param gobj
  */
 void ftKb_MsSpecialNLoop_Coll(Fighter_GObj* gobj)
 {
@@ -450,7 +450,7 @@ void ftKb_MsSpecialNLoop_Coll(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Mars) logic for ftKb_MsSpecialAirNLoop_Coll
- * @param gobj 
+ * @param gobj
  */
 void ftKb_MsSpecialAirNLoop_Coll(Fighter_GObj* gobj)
 {
@@ -461,7 +461,7 @@ void ftKb_MsSpecialAirNLoop_Coll(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Mars) logic for ftKb_SpecialNMs_8010BB50
- * @param gobj 
+ * @param gobj
  */
 void ftKb_SpecialNMs_8010BB50(Fighter_GObj* gobj)
 {
@@ -479,7 +479,7 @@ void ftKb_SpecialNMs_8010BB50(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Mars) logic for ftKb_SpecialNMs_8010BBC8
- * @param gobj 
+ * @param gobj
  */
 void ftKb_SpecialNMs_8010BBC8(Fighter_GObj* gobj)
 {
@@ -497,7 +497,7 @@ void ftKb_SpecialNMs_8010BBC8(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Mars) logic for ftKb_SpecialNMs_8010BC40
- * @param gobj 
+ * @param gobj
  */
 void ftKb_SpecialNMs_8010BC40(Fighter_GObj* gobj)
 {
@@ -515,7 +515,7 @@ void ftKb_SpecialNMs_8010BC40(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Mars) logic for ftKb_SpecialNMs_8010BC90
- * @param gobj 
+ * @param gobj
  */
 void ftKb_SpecialNMs_8010BC90(Fighter_GObj* gobj)
 {
@@ -533,7 +533,7 @@ void ftKb_SpecialNMs_8010BC90(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Mars) logic for ftKb_MsSpecialNEnd_Anim
- * @param gobj 
+ * @param gobj
  */
 void ftKb_MsSpecialNEnd_Anim(Fighter_GObj* gobj)
 {
@@ -572,7 +572,7 @@ void ftKb_MsSpecialNEnd_Anim(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Mars) logic for ftKb_MsSpecialAirNEnd_Anim
- * @param gobj 
+ * @param gobj
  */
 void ftKb_MsSpecialAirNEnd_Anim(Fighter_GObj* gobj)
 {
@@ -615,7 +615,7 @@ void ftKb_MsSpecialAirNEnd_IASA(Fighter_GObj* gobj) {}
 
 /**
  * @brief Neutral-B Copy Ability (Mars) logic for ftKb_MsSpecialNEnd_Phys
- * @param gobj 
+ * @param gobj
  */
 void ftKb_MsSpecialNEnd_Phys(Fighter_GObj* gobj)
 {
@@ -624,7 +624,7 @@ void ftKb_MsSpecialNEnd_Phys(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Mars) logic for ftKb_MsSpecialAirNEnd_Phys
- * @param gobj 
+ * @param gobj
  */
 void ftKb_MsSpecialAirNEnd_Phys(Fighter_GObj* gobj)
 {
@@ -633,7 +633,7 @@ void ftKb_MsSpecialAirNEnd_Phys(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Mars) logic for ftKb_MsSpecialNEnd_Coll
- * @param gobj 
+ * @param gobj
  */
 void ftKb_MsSpecialNEnd_Coll(Fighter_GObj* gobj)
 {
@@ -644,7 +644,7 @@ void ftKb_MsSpecialNEnd_Coll(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Mars) logic for ftKb_MsSpecialAirNEnd_Coll
- * @param gobj 
+ * @param gobj
  */
 void ftKb_MsSpecialAirNEnd_Coll(Fighter_GObj* gobj)
 {
@@ -655,7 +655,7 @@ void ftKb_MsSpecialAirNEnd_Coll(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Mars) logic for ftKb_SpecialNPe_8010BF90
- * @param gobj 
+ * @param gobj
  */
 void ftKb_SpecialNPe_8010BF90(Fighter_GObj* gobj)
 {
@@ -681,7 +681,7 @@ void ftKb_SpecialNPe_8010BF90(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Mars) logic for ftKb_SpecialNPe_8010C06C
- * @param gobj 
+ * @param gobj
  */
 void ftKb_SpecialNPe_8010C06C(Fighter_GObj* gobj)
 {
@@ -707,7 +707,7 @@ void ftKb_SpecialNPe_8010C06C(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Mars) logic for ftKb_SpecialNPe_8010C148
- * @param gobj 
+ * @param gobj
  */
 void ftKb_SpecialNPe_8010C148(Fighter_GObj* gobj)
 {
@@ -730,7 +730,7 @@ void ftKb_SpecialNPe_8010C148(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Mars) logic for ftKb_SpecialNPe_8010C1E8
- * @param gobj 
+ * @param gobj
  */
 void ftKb_SpecialNPe_8010C1E8(Fighter_GObj* gobj)
 {

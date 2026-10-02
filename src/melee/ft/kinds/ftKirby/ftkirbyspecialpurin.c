@@ -46,7 +46,7 @@
 
 /**
  * @brief Neutral-B Copy Ability (Purin) logic for ftKb_PrScaleAnimStep
- * @param gobj 
+ * @param gobj
  * @param scale 
  */
 static inline void ftKb_PrScaleAnimStep(Fighter_GObj* gobj, Vec3* scale)
@@ -67,7 +67,7 @@ static inline void ftKb_PrScaleAnimStep(Fighter_GObj* gobj, Vec3* scale)
 
 /**
  * @brief Neutral-B Copy Ability (Purin) logic for ftKb_PrRestoreScale
- * @param gobj 
+ * @param gobj
  */
 static void ftKb_PrRestoreScale(Fighter_GObj* gobj)
 {
@@ -83,7 +83,7 @@ static void ftKb_PrRestoreScale(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Purin) logic for ftKb_PrSetCallbacks
- * @param gobj 
+ * @param gobj
  */
 static inline void ftKb_PrSetCallbacks(Fighter_GObj* gobj)
 {
@@ -96,7 +96,7 @@ static inline void ftKb_PrSetCallbacks(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Purin) logic for fn_80100E0C
- * @param gobj 
+ * @param gobj
  */
 void fn_80100E0C(Fighter_GObj* gobj)
 {
@@ -142,7 +142,7 @@ void fn_80100E0C(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Purin) logic for fn_80100F60
- * @param gobj 
+ * @param gobj
  */
 void fn_80100F60(Fighter_GObj* gobj)
 {
@@ -152,7 +152,7 @@ void fn_80100F60(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Purin) logic for ftKb_SpecialNPr_80100F94
- * @param gobj 
+ * @param gobj
  */
 void ftKb_SpecialNPr_80100F94(Fighter_GObj* gobj)
 {
@@ -185,7 +185,7 @@ void ftKb_SpecialNPr_80100F94(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Purin) logic for ftKb_SpecialNPr_801010D4
- * @param gobj 
+ * @param gobj
  * @param unk 
  * @param flags 
  * @param anim_start 
@@ -230,7 +230,7 @@ void ftKb_SpecialNPr_801010D4(Fighter_GObj* gobj, bool unk, MotionFlags flags,
 
 /**
  * @brief Neutral-B Copy Ability (Purin) logic for ftKb_PrWallBounceEffect
- * @param gobj 
+ * @param gobj
  * @param fp 
  * @param dir 
  * @param pos 
@@ -258,7 +258,7 @@ static void ftKb_PrWallBounceEffect(Fighter_GObj* gobj, Fighter* fp, f32 dir,
 
 /**
  * @brief Neutral-B Copy Ability (Purin) logic for ftKb_SpecialNPr_8010131C
- * @param gobj 
+ * @param gobj
  */
 void ftKb_SpecialNPr_8010131C(Fighter_GObj* gobj)
 {
@@ -284,7 +284,7 @@ void ftKb_SpecialNPr_8010131C(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Purin) logic for ftKb_PrPlayRollSFX
- * @param gobj 
+ * @param gobj
  */
 static inline void ftKb_PrPlayRollSFX(Fighter_GObj* gobj)
 {
@@ -300,7 +300,7 @@ static inline void ftKb_PrPlayRollSFX(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Purin) logic for ftKb_SpecialNPr_8010140C
- * @param gobj 
+ * @param gobj
  * @param arg1 
  */
 void ftKb_SpecialNPr_8010140C(Fighter_GObj* gobj, bool flag)
@@ -328,7 +328,7 @@ void ftKb_SpecialNPr_8010140C(Fighter_GObj* gobj, bool flag)
 
 /**
  * @brief Neutral-B Copy Ability (Purin) logic for ftKb_SpecialNPr_80101560
- * @param gobj 
+ * @param gobj
  */
 void ftKb_SpecialNPr_80101560(Fighter_GObj* gobj)
 {
@@ -353,7 +353,7 @@ void ftKb_SpecialNPr_80101560(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Purin) logic for ftKb_SpecialNPr_80101618
- * @param gobj 
+ * @param gobj
  */
 void ftKb_SpecialNPr_80101618(Fighter_GObj* gobj)
 {
@@ -377,7 +377,7 @@ void ftKb_SpecialNPr_80101618(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Purin) logic for ftKb_PrSpecialNStart_Anim
- * @param gobj 
+ * @param gobj
  */
 void ftKb_PrSpecialNStart_Anim(Fighter_GObj* gobj)
 {
@@ -399,7 +399,7 @@ void ftKb_PrSpecialNStart_Anim(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Purin) logic for ftKb_PrSpecialNLoop_Anim
- * @param gobj 
+ * @param gobj
  */
 void ftKb_PrSpecialNLoop_Anim(Fighter_GObj* gobj)
 {
@@ -430,7 +430,7 @@ void ftKb_PrSpecialNLoop_Anim(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Purin) logic for ftKb_PrSpecialNFull_Anim
- * @param gobj 
+ * @param gobj
  */
 void ftKb_PrSpecialNFull_Anim(Fighter_GObj* gobj)
 {
@@ -453,7 +453,7 @@ void ftKb_PrSpecialNFull_Anim(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Purin) logic for ftKb_PrHitCapsuleToggle
- * @param gobj 
+ * @param gobj
  */
 static inline void ftKb_PrHitCapsuleToggle(Fighter_GObj* gobj)
 {
@@ -471,7 +471,7 @@ static inline void ftKb_PrHitCapsuleToggle(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Purin) logic for ftKb_PrSpecialN1_Anim
- * @param gobj 
+ * @param gobj
  */
 void ftKb_PrSpecialN1_Anim(Fighter_GObj* gobj)
 {
@@ -522,7 +522,7 @@ void ftKb_PrSpecialN1_Anim(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Purin) logic for ftKb_PrSpecialNTurn_Anim
- * @param gobj 
+ * @param gobj
  */
 void ftKb_PrSpecialNTurn_Anim(Fighter_GObj* gobj)
 {
@@ -555,7 +555,7 @@ void ftKb_PrSpecialNTurn_Anim(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Purin) logic for ftKb_PrSpecialNEnd_Anim
- * @param gobj 
+ * @param gobj
  */
 void ftKb_PrSpecialNEnd_Anim(Fighter_GObj* gobj)
 {
@@ -571,7 +571,7 @@ void ftKb_PrSpecialNEnd_Anim(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Purin) logic for ftKb_PrSpecialAirNStart_Anim
- * @param gobj 
+ * @param gobj
  */
 void ftKb_PrSpecialAirNStart_Anim(Fighter_GObj* gobj)
 {
@@ -593,7 +593,7 @@ void ftKb_PrSpecialAirNStart_Anim(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Purin) logic for ftKb_PrSpecialAirNLoop_Anim
- * @param gobj 
+ * @param gobj
  */
 void ftKb_PrSpecialAirNLoop_Anim(Fighter_GObj* gobj)
 {
@@ -624,7 +624,7 @@ void ftKb_PrSpecialAirNLoop_Anim(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Purin) logic for ftKb_PrSpecialAirNFull_Anim
- * @param gobj 
+ * @param gobj
  */
 void ftKb_PrSpecialAirNFull_Anim(Fighter_GObj* gobj)
 {
@@ -647,7 +647,7 @@ void ftKb_PrSpecialAirNFull_Anim(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Purin) logic for ftKb_AirScaleAnimStep
- * @param gobj 
+ * @param gobj
  * @param scale 
  * @param scale_base 
  */
@@ -670,7 +670,7 @@ static inline void ftKb_AirScaleAnimStep(Fighter_GObj* gobj, Vec3* scale,
 
 /**
  * @brief Neutral-B Copy Ability (Purin) logic for ftKb_PrSpecialAirN_Anim
- * @param gobj 
+ * @param gobj
  */
 void ftKb_PrSpecialAirN_Anim(Fighter_GObj* gobj)
 {
@@ -723,7 +723,7 @@ void ftKb_PrSpecialAirN_Anim(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Purin) logic for ftKb_PrSpecialN_Anim
- * @param gobj 
+ * @param gobj
  */
 void ftKb_PrSpecialN_Anim(Fighter_GObj* gobj)
 {
@@ -751,7 +751,7 @@ void ftKb_PrSpecialN_Anim(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Purin) logic for ftKb_PrSpecialAirNEndR_Anim
- * @param gobj 
+ * @param gobj
  */
 void ftKb_PrSpecialAirNEndR_Anim(Fighter_GObj* gobj)
 {
@@ -775,7 +775,7 @@ void ftKb_PrSpecialAirNEndR_Anim(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Purin) logic for ftKb_PrSpecialNHit_Anim
- * @param gobj 
+ * @param gobj
  */
 void ftKb_PrSpecialNHit_Anim(Fighter_GObj* gobj)
 {
@@ -797,7 +797,7 @@ void ftKb_PrSpecialNStart_IASA(Fighter_GObj* gobj) {}
 
 /**
  * @brief Neutral-B Copy Ability (Purin) logic for ftKb_PrSpecialNLoop_IASA
- * @param gobj 
+ * @param gobj
  */
 void ftKb_PrSpecialNLoop_IASA(Fighter_GObj* gobj)
 {
@@ -822,7 +822,7 @@ void ftKb_PrSpecialNLoop_IASA(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Purin) logic for ftKb_PrSpecialNFull_IASA
- * @param gobj 
+ * @param gobj
  */
 void ftKb_PrSpecialNFull_IASA(Fighter_GObj* gobj)
 {
@@ -847,7 +847,7 @@ void ftKb_PrSpecialNFull_IASA(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Purin) logic for ftKb_PrSpecialN1_IASA
- * @param gobj 
+ * @param gobj
  */
 void ftKb_PrSpecialN1_IASA(Fighter_GObj* gobj)
 {
@@ -880,7 +880,7 @@ void ftKb_PrSpecialAirNStart_IASA(Fighter_GObj* gobj) {}
 
 /**
  * @brief Neutral-B Copy Ability (Purin) logic for ftKb_PrSpecialAirNLoop_IASA
- * @param gobj 
+ * @param gobj
  */
 void ftKb_PrSpecialAirNLoop_IASA(Fighter_GObj* gobj)
 {
@@ -906,7 +906,7 @@ void ftKb_PrSpecialAirNLoop_IASA(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Purin) logic for ftKb_PrSpecialAirNFull_IASA
- * @param gobj 
+ * @param gobj
  */
 void ftKb_PrSpecialAirNFull_IASA(Fighter_GObj* gobj)
 {
@@ -940,7 +940,7 @@ void ftKb_PrSpecialNHit_IASA(Fighter_GObj* gobj) {}
 
 /**
  * @brief Neutral-B Copy Ability (Purin) logic for ftKb_PrSpecialNStart_Phys
- * @param gobj 
+ * @param gobj
  */
 void ftKb_PrSpecialNStart_Phys(Fighter_GObj* gobj)
 {
@@ -955,7 +955,7 @@ void ftKb_PrSpecialNStart_Phys(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Purin) logic for ftKb_PrSpecialNLoop_Phys
- * @param gobj 
+ * @param gobj
  */
 void ftKb_PrSpecialNLoop_Phys(Fighter_GObj* gobj)
 {
@@ -964,7 +964,7 @@ void ftKb_PrSpecialNLoop_Phys(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Purin) logic for ftKb_PrSpecialNFull_Phys
- * @param gobj 
+ * @param gobj
  */
 void ftKb_PrSpecialNFull_Phys(Fighter_GObj* gobj)
 {
@@ -973,7 +973,7 @@ void ftKb_PrSpecialNFull_Phys(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Purin) logic for ftKb_PrSpecialN1_Phys
- * @param gobj 
+ * @param gobj
  */
 void ftKb_PrSpecialN1_Phys(Fighter_GObj* gobj)
 {
@@ -1028,7 +1028,7 @@ void ftKb_PrSpecialN1_Phys(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Purin) logic for ftKb_PrSpecialNTurn_Phys
- * @param gobj 
+ * @param gobj
  */
 void ftKb_PrSpecialNTurn_Phys(Fighter_GObj* gobj)
 {
@@ -1088,7 +1088,7 @@ void ftKb_PrSpecialNTurn_Phys(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Purin) logic for ftKb_PrSpecialNEnd_Phys
- * @param gobj 
+ * @param gobj
  */
 void ftKb_PrSpecialNEnd_Phys(Fighter_GObj* gobj)
 {
@@ -1099,7 +1099,7 @@ void ftKb_PrSpecialNEnd_Phys(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Purin) logic for ftKb_PrSpecialAirNStart_Phys
- * @param gobj 
+ * @param gobj
  */
 void ftKb_PrSpecialAirNStart_Phys(Fighter_GObj* gobj)
 {
@@ -1110,7 +1110,7 @@ void ftKb_PrSpecialAirNStart_Phys(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Purin) logic for ftKb_PrSpecialAirNLoop_Phys
- * @param gobj 
+ * @param gobj
  */
 void ftKb_PrSpecialAirNLoop_Phys(Fighter_GObj* gobj)
 {
@@ -1121,7 +1121,7 @@ void ftKb_PrSpecialAirNLoop_Phys(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Purin) logic for ftKb_PrSpecialAirNFull_Phys
- * @param gobj 
+ * @param gobj
  */
 void ftKb_PrSpecialAirNFull_Phys(Fighter_GObj* gobj)
 {
@@ -1132,7 +1132,7 @@ void ftKb_PrSpecialAirNFull_Phys(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Purin) logic for ftKb_PrSpecialAirN_Phys
- * @param gobj 
+ * @param gobj
  */
 void ftKb_PrSpecialAirN_Phys(Fighter_GObj* gobj)
 {
@@ -1185,7 +1185,7 @@ void ftKb_PrSpecialAirN_Phys(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Purin) logic for ftKb_PrSpecialN_Phys
- * @param gobj 
+ * @param gobj
  */
 void ftKb_PrSpecialN_Phys(Fighter_GObj* gobj)
 {
@@ -1216,7 +1216,7 @@ void ftKb_PrSpecialN_Phys(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Purin) logic for ftKb_PrSpecialAirNEndR_Phys
- * @param gobj 
+ * @param gobj
  */
 void ftKb_PrSpecialAirNEndR_Phys(Fighter_GObj* gobj)
 {
@@ -1227,7 +1227,7 @@ void ftKb_PrSpecialAirNEndR_Phys(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Purin) logic for ftKb_PrSpecialNHit_Phys
- * @param gobj 
+ * @param gobj
  */
 void ftKb_PrSpecialNHit_Phys(Fighter_GObj* gobj)
 {
@@ -1244,7 +1244,7 @@ void ftKb_PrSpecialNHit_Phys(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Purin) logic for ftKb_PrSpecialNStart_Coll
- * @param gobj 
+ * @param gobj
  */
 void ftKb_PrSpecialNStart_Coll(Fighter_GObj* gobj)
 {
@@ -1265,7 +1265,7 @@ void ftKb_PrSpecialNStart_Coll(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Purin) logic for ftKb_PrSpecialNLoop_Coll
- * @param gobj 
+ * @param gobj
  */
 void ftKb_PrSpecialNLoop_Coll(Fighter_GObj* gobj)
 {
@@ -1282,7 +1282,7 @@ void ftKb_PrSpecialNLoop_Coll(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Purin) logic for ftKb_PrSpecialNFull_Coll
- * @param gobj 
+ * @param gobj
  */
 void ftKb_PrSpecialNFull_Coll(Fighter_GObj* gobj)
 {
@@ -1303,7 +1303,7 @@ void ftKb_PrSpecialNFull_Coll(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Purin) logic for ftKb_PrSpecialN1_Coll
- * @param gobj 
+ * @param gobj
  */
 void ftKb_PrSpecialN1_Coll(Fighter_GObj* gobj)
 {
@@ -1357,7 +1357,7 @@ void ftKb_PrSpecialN1_Coll(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Purin) logic for ftKb_PrSpecialNTurn_Coll
- * @param gobj 
+ * @param gobj
  */
 void ftKb_PrSpecialNTurn_Coll(Fighter_GObj* gobj)
 {
@@ -1384,7 +1384,7 @@ void ftKb_PrSpecialNTurn_Coll(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Purin) logic for ftKb_PrSpecialNEnd_Coll
- * @param gobj 
+ * @param gobj
  */
 void ftKb_PrSpecialNEnd_Coll(Fighter_GObj* gobj)
 {
@@ -1400,7 +1400,7 @@ void ftKb_PrSpecialNEnd_Coll(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Purin) logic for ftKb_PrSpecialAirNStart_Coll
- * @param gobj 
+ * @param gobj
  */
 void ftKb_PrSpecialAirNStart_Coll(Fighter_GObj* gobj)
 {
@@ -1421,7 +1421,7 @@ void ftKb_PrSpecialAirNStart_Coll(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Purin) logic for ftKb_PrSpecialAirNLoop_Coll
- * @param gobj 
+ * @param gobj
  */
 void ftKb_PrSpecialAirNLoop_Coll(Fighter_GObj* gobj)
 {
@@ -1438,7 +1438,7 @@ void ftKb_PrSpecialAirNLoop_Coll(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Purin) logic for ftKb_PrSpecialAirNFull_Coll
- * @param gobj 
+ * @param gobj
  */
 void ftKb_PrSpecialAirNFull_Coll(Fighter_GObj* gobj)
 {
@@ -1455,7 +1455,7 @@ void ftKb_PrSpecialAirNFull_Coll(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Purin) logic for ftKb_PrSpecialAirN_Coll
- * @param gobj 
+ * @param gobj
  */
 void ftKb_PrSpecialAirN_Coll(Fighter_GObj* gobj)
 {
@@ -1543,7 +1543,7 @@ void ftKb_PrSpecialAirN_Coll(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Purin) logic for ftKb_PrSpecialN_Coll
- * @param gobj 
+ * @param gobj
  */
 void ftKb_PrSpecialN_Coll(Fighter_GObj* gobj)
 {
@@ -1562,7 +1562,7 @@ void ftKb_PrSpecialN_Coll(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Purin) logic for ftKb_PrSpecialAirNEndR_Coll
- * @param gobj 
+ * @param gobj
  */
 void ftKb_PrSpecialAirNEndR_Coll(Fighter_GObj* gobj)
 {
@@ -1578,7 +1578,7 @@ void ftKb_PrSpecialAirNEndR_Coll(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Purin) logic for ftKb_PrSpecialNHit_Coll
- * @param gobj 
+ * @param gobj
  */
 void ftKb_PrSpecialNHit_Coll(Fighter_GObj* gobj)
 {
@@ -1599,7 +1599,7 @@ void ftKb_PrSpecialNHit_Coll(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Purin) logic for fn_80105978
- * @param gobj 
+ * @param gobj
  */
 void fn_80105978(Fighter_GObj* gobj)
 {

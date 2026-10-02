@@ -57,7 +57,7 @@ struct ftKb_Init_803CB4EC_t ftKb_Init_803CB4EC = {
 
 /**
  * @brief Down-B (Stone) logic for fbKb_SpecialLw_IASA_Inline
- * @param gobj 
+ * @param gobj
  */
 static inline bool fbKb_SpecialLw_IASA_Inline(Fighter_GObj* gobj)
 {
@@ -85,7 +85,7 @@ static inline bool fbKb_SpecialLw_IASA_Inline(Fighter_GObj* gobj)
 
 /**
  * @brief Down-B (Stone) logic for ftKb_SpecialHi_800F331C
- * @param gobj 
+ * @param gobj
  */
 void ftKb_SpecialHi_800F331C(Fighter_GObj* gobj)
 {
@@ -122,7 +122,7 @@ void ftKb_SpecialHi_800F331C(Fighter_GObj* gobj)
 
 /**
  * @brief Down-B (Stone) logic for ftKb_SpecialHi_800F346C
- * @param gobj 
+ * @param gobj
  */
 void ftKb_SpecialHi_800F346C(Fighter_GObj* gobj)
 {
@@ -154,7 +154,7 @@ void ftKb_SpecialHi_800F346C(Fighter_GObj* gobj)
 
 /**
  * @brief Down-B (Stone) logic for ftKb_SpecialHi_800F3570
- * @param gobj 
+ * @param gobj
  */
 void ftKb_SpecialHi_800F3570(Fighter_GObj* gobj)
 {
@@ -213,7 +213,7 @@ void ftKb_SpecialHi_800F3570(Fighter_GObj* gobj)
 
 /**
  * @brief Down-B (Stone) logic for ftKb_SpecialHi_800F36DC
- * @param gobj 
+ * @param gobj
  */
 void ftKb_SpecialHi_800F36DC(Fighter_GObj* gobj)
 {
@@ -242,7 +242,7 @@ void ftKb_SpecialHi_800F36DC(Fighter_GObj* gobj)
 
 /**
  * @brief Down-B (Stone) logic for ftKb_SpecialHi_800F37EC
- * @param gobj 
+ * @param gobj
  */
 void ftKb_SpecialHi_800F37EC(Fighter_GObj* gobj)
 {
@@ -320,7 +320,7 @@ void ftKb_SpecialHi_800F37EC(Fighter_GObj* gobj)
 
 /**
  * @brief Down-B (Stone) logic for ftKb_SpecialHi_800F3B28
- * @param gobj 
+ * @param gobj
  */
 void ftKb_SpecialHi_800F3B28(Fighter_GObj* gobj)
 {
@@ -395,7 +395,7 @@ void ftKb_SpecialHi_800F3B28(Fighter_GObj* gobj)
 
 /**
  * @brief Down-B (Stone) logic for ftKb_SpecialLw_Enter
- * @param gobj 
+ * @param gobj
  */
 void ftKb_SpecialLw_Enter(Fighter_GObj* gobj)
 {
@@ -429,7 +429,7 @@ void ftKb_SpecialLw_Enter(Fighter_GObj* gobj)
 
 /**
  * @brief Down-B (Stone) logic for ftKb_SpecialAirLw_Enter
- * @param gobj 
+ * @param gobj
  */
 void ftKb_SpecialAirLw_Enter(Fighter_GObj* gobj)
 {
@@ -463,7 +463,7 @@ void ftKb_SpecialAirLw_Enter(Fighter_GObj* gobj)
 
 /**
  * @brief Down-B (Stone) logic for ftKb_SpecialLw1_Anim
- * @param gobj 
+ * @param gobj
  */
 void ftKb_SpecialLw1_Anim(Fighter_GObj* gobj)
 {
@@ -484,7 +484,7 @@ void ftKb_SpecialLw1_Anim(Fighter_GObj* gobj)
 
 /**
  * @brief Down-B (Stone) logic for ftKbUnkInline
- * @param gobj 
+ * @param gobj
  * @param val 
  */
 static inline void ftKbUnkInline(Fighter_GObj* gobj, int val)
@@ -497,7 +497,7 @@ static inline void ftKbUnkInline(Fighter_GObj* gobj, int val)
 
 /**
  * @brief Down-B (Stone) logic for ftKb_SpecialLw_Anim
- * @param gobj 
+ * @param gobj
  */
 void ftKb_SpecialLw_Anim(Fighter_GObj* gobj)
 {
@@ -506,7 +506,7 @@ void ftKb_SpecialLw_Anim(Fighter_GObj* gobj)
 
 /**
  * @brief Down-B (Stone) logic for ftKb_SpecialLwEnd_Anim
- * @param gobj 
+ * @param gobj
  */
 void ftKb_SpecialLwEnd_Anim(Fighter_GObj* gobj)
 {
@@ -528,7 +528,7 @@ void ftKb_SpecialLwEnd_Anim(Fighter_GObj* gobj)
 
 /**
  * @brief Down-B (Stone) logic for ftKb_SpecialAirLwStart_Anim
- * @param gobj 
+ * @param gobj
  */
 void ftKb_SpecialAirLwStart_Anim(Fighter_GObj* gobj)
 {
@@ -548,7 +548,7 @@ void ftKb_SpecialAirLwStart_Anim(Fighter_GObj* gobj)
 
 /**
  * @brief Down-B (Stone) logic for ftKb_SpecialAirLw_Anim
- * @param gobj 
+ * @param gobj
  */
 void ftKb_SpecialAirLw_Anim(Fighter_GObj* gobj)
 {
@@ -557,7 +557,7 @@ void ftKb_SpecialAirLw_Anim(Fighter_GObj* gobj)
 
 /**
  * @brief Down-B (Stone) logic for ftKb_SpecialAirLwEnd_Anim
- * @param gobj 
+ * @param gobj
  */
 void ftKb_SpecialAirLwEnd_Anim(Fighter_GObj* gobj)
 {
@@ -581,7 +581,7 @@ void ftKb_SpecialLw1_IASA(Fighter_GObj* gobj) {}
 
 /**
  * @brief Down-B (Stone) logic for ftKb_SpecialLw_IASA
- * @param gobj 
+ * @param gobj
  */
 void ftKb_SpecialLw_IASA(Fighter_GObj* gobj)
 {
@@ -607,7 +607,7 @@ void ftKb_SpecialAirLwStart_IASA(Fighter_GObj* gobj) {}
 
 /**
  * @brief Down-B (Stone) logic for ftKb_SpecialAirLw_IASA
- * @param gobj 
+ * @param gobj
  */
 void ftKb_SpecialAirLw_IASA(Fighter_GObj* gobj)
 {
@@ -630,7 +630,7 @@ void ftKb_SpecialAirLwEnd_IASA(Fighter_GObj* gobj) {}
 
 /**
  * @brief Down-B (Stone) logic for ftKb_SpecialLw1_Phys
- * @param gobj 
+ * @param gobj
  */
 void ftKb_SpecialLw1_Phys(Fighter_GObj* gobj)
 {
@@ -639,7 +639,7 @@ void ftKb_SpecialLw1_Phys(Fighter_GObj* gobj)
 
 /**
  * @brief Down-B (Stone) logic for ftKb_SpecialLw_Phys
- * @param gobj 
+ * @param gobj
  */
 void ftKb_SpecialLw_Phys(Fighter_GObj* gobj)
 {
@@ -651,7 +651,7 @@ void ftKb_SpecialLw_Phys(Fighter_GObj* gobj)
 
 /**
  * @brief Down-B (Stone) logic for ftKb_SpecialLwEnd_Phys
- * @param gobj 
+ * @param gobj
  */
 void ftKb_SpecialLwEnd_Phys(Fighter_GObj* gobj)
 {
@@ -660,7 +660,7 @@ void ftKb_SpecialLwEnd_Phys(Fighter_GObj* gobj)
 
 /**
  * @brief Down-B (Stone) logic for ftKb_SpecialAirLwStart_Phys
- * @param gobj 
+ * @param gobj
  */
 void ftKb_SpecialAirLwStart_Phys(Fighter_GObj* gobj)
 {
@@ -669,7 +669,7 @@ void ftKb_SpecialAirLwStart_Phys(Fighter_GObj* gobj)
 
 /**
  * @brief Down-B (Stone) logic for ftKb_SpecialAirLw_Phys
- * @param gobj 
+ * @param gobj
  */
 void ftKb_SpecialAirLw_Phys(Fighter_GObj* gobj)
 {
@@ -682,7 +682,7 @@ void ftKb_SpecialAirLw_Phys(Fighter_GObj* gobj)
 
 /**
  * @brief Down-B (Stone) logic for ftKb_SpecialAirLwEnd_Phys
- * @param gobj 
+ * @param gobj
  */
 void ftKb_SpecialAirLwEnd_Phys(Fighter_GObj* gobj)
 {
@@ -691,7 +691,7 @@ void ftKb_SpecialAirLwEnd_Phys(Fighter_GObj* gobj)
 
 /**
  * @brief Down-B (Stone) logic for ftKb_SpecialLw1_Coll
- * @param gobj 
+ * @param gobj
  */
 void ftKb_SpecialLw1_Coll(Fighter_GObj* gobj)
 {
@@ -741,7 +741,7 @@ void ftKb_SpecialLw1_Coll(Fighter_GObj* gobj)
 
 /**
  * @brief Down-B (Stone) logic for ftKb_SpecialLw_Coll
- * @param gobj 
+ * @param gobj
  */
 void ftKb_SpecialLw_Coll(Fighter_GObj* gobj)
 {
@@ -792,7 +792,7 @@ void ftKb_SpecialLw_Coll(Fighter_GObj* gobj)
 
 /**
  * @brief Down-B (Stone) logic for ftKb_SpecialLwEnd_Coll
- * @param gobj 
+ * @param gobj
  */
 void ftKb_SpecialLwEnd_Coll(Fighter_GObj* gobj)
 {
@@ -826,7 +826,7 @@ void ftKb_SpecialLwEnd_Coll(Fighter_GObj* gobj)
 
 /**
  * @brief Down-B (Stone) logic for ftKb_SpecialLw_SetStoneVecs
- * @param gobj 
+ * @param gobj
  * @param fp 
  * @param da 
  */
@@ -872,7 +872,7 @@ static inline void ftKb_SpecialLw_SetStoneVecs(Fighter_GObj* gobj, Fighter* fp,
 
 /**
  * @brief Down-B (Stone) logic for ftKb_SpecialAirLwStart_Coll
- * @param gobj 
+ * @param gobj
  */
 void ftKb_SpecialAirLwStart_Coll(Fighter_GObj* gobj)
 {
@@ -926,7 +926,7 @@ void ftKb_SpecialAirLwStart_Coll(Fighter_GObj* gobj)
 
 /**
  * @brief Down-B (Stone) logic for ftKb_SpecialAirLw_Coll
- * @param gobj 
+ * @param gobj
  */
 void ftKb_SpecialAirLw_Coll(Fighter_GObj* gobj)
 {
@@ -981,7 +981,7 @@ void ftKb_SpecialAirLw_Coll(Fighter_GObj* gobj)
 
 /**
  * @brief Down-B (Stone) logic for ftKb_SpecialAirLwEnd_Coll
- * @param gobj 
+ * @param gobj
  */
 void ftKb_SpecialAirLwEnd_Coll(Fighter_GObj* gobj)
 {
@@ -1015,7 +1015,7 @@ void ftKb_SpecialAirLwEnd_Coll(Fighter_GObj* gobj)
 
 /**
  * @brief Down-B (Stone) logic for ftKb_SpecialAirLw_800F5318
- * @param gobj 
+ * @param gobj
  */
 void ftKb_SpecialAirLw_800F5318(Fighter_GObj* gobj)
 {

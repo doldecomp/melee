@@ -40,7 +40,7 @@
 
 /**
  * @brief Neutral-B Copy Ability (Yoshi) logic for ftKb_SpecialNYs_80109260
- * @param gobj 
+ * @param gobj
  * @param vec 
  */
 void ftKb_SpecialNYs_80109260(Fighter_GObj* gobj, Vec3* vec)
@@ -54,7 +54,7 @@ void ftKb_SpecialNYs_80109260(Fighter_GObj* gobj, Vec3* vec)
 
 /**
  * @brief Neutral-B Copy Ability (Yoshi) logic for ftKb_SpecialNYs_80109290
- * @param gobj 
+ * @param gobj
  */
 float ftKb_SpecialNYs_80109290(Fighter_GObj* gobj)
 {
@@ -63,7 +63,7 @@ float ftKb_SpecialNYs_80109290(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Yoshi) logic for ftKb_SpecialNYs_8010929C
- * @param gobj 
+ * @param gobj
  */
 f32 ftKb_SpecialNYs_8010929C(Fighter_GObj* gobj)
 {
@@ -74,7 +74,7 @@ f32 ftKb_SpecialNYs_8010929C(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Yoshi) logic for ftKb_SpecialNYs_801092AC
- * @param gobj 
+ * @param gobj
  */
 f32 ftKb_SpecialNYs_801092AC(Fighter_GObj* gobj)
 {
@@ -85,7 +85,7 @@ f32 ftKb_SpecialNYs_801092AC(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Yoshi) logic for ftKb_SpecialNYs_801092BC
- * @param gobj 
+ * @param gobj
  */
 f32 ftKb_SpecialNYs_801092BC(Fighter_GObj* gobj)
 {
@@ -96,7 +96,7 @@ f32 ftKb_SpecialNYs_801092BC(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Yoshi) logic for ftKb_SpecialNYs_801092CC
- * @param gobj 
+ * @param gobj
  */
 f32 ftKb_SpecialNYs_801092CC(Fighter_GObj* gobj)
 {
@@ -173,7 +173,7 @@ float ftKb_SpecialNYs_80109380(void)
 
 /**
  * @brief Neutral-B Copy Ability (Yoshi) logic for ftKb_SpecialNYs_801093A0
- * @param gobj 
+ * @param gobj
  */
 ftDynamics* ftKb_SpecialNYs_801093A0(Fighter_GObj* gobj)
 {
@@ -182,7 +182,7 @@ ftDynamics* ftKb_SpecialNYs_801093A0(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Yoshi) logic for ftKb_SpecialNYs_801093B4
- * @param gobj 
+ * @param gobj
  */
 void ftKb_SpecialNYs_801093B4(Fighter_GObj* gobj)
 {
@@ -198,7 +198,7 @@ void ftKb_SpecialNYs_801093B4(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Yoshi) logic for ftKb_SpecialNYs_8010941C
- * @param gobj 
+ * @param gobj
  */
 void ftKb_SpecialNYs_8010941C(Fighter_GObj* gobj)
 {
@@ -223,7 +223,7 @@ void ftKb_SpecialNYs_8010941C(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Yoshi) logic for ftKb_SpecialNYs_801094FC
- * @param gobj 
+ * @param gobj
  */
 void ftKb_SpecialNYs_801094FC(Fighter_GObj* gobj)
 {
@@ -248,7 +248,7 @@ void ftKb_SpecialNYs_801094FC(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Yoshi) logic for fn_801095DC
- * @param gobj 
+ * @param gobj
  */
 static void fn_801095DC(HSD_GObj* gobj)
 {
@@ -270,7 +270,7 @@ static void fn_801095DC(HSD_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Yoshi) logic for fn_80109680
- * @param gobj 
+ * @param gobj
  */
 static void fn_80109680(HSD_GObj* gobj)
 {
@@ -290,7 +290,7 @@ static void fn_80109680(HSD_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Yoshi) logic for fn_80109714
- * @param gobj 
+ * @param gobj
  */
 static void fn_80109714(HSD_GObj* gobj)
 {
@@ -314,7 +314,7 @@ static void fn_80109714(HSD_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Yoshi) logic for fn_801097B8
- * @param gobj 
+ * @param gobj
  */
 static void fn_801097B8(HSD_GObj* gobj)
 {
@@ -335,7 +335,7 @@ static void fn_801097B8(HSD_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Yoshi) logic for fn_8010984C
- * @param gobj 
+ * @param gobj
  */
 void fn_8010984C(HSD_GObj* gobj)
 {
@@ -351,7 +351,7 @@ void fn_8010984C(HSD_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Yoshi) logic for fn_801098EC
- * @param gobj 
+ * @param gobj
  */
 void fn_801098EC(HSD_GObj* gobj)
 {
@@ -367,7 +367,7 @@ void fn_801098EC(HSD_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Yoshi) logic for fn_8010998C
- * @param gobj 
+ * @param gobj
  */
 void fn_8010998C(HSD_GObj* gobj)
 {
@@ -384,7 +384,7 @@ void fn_8010998C(HSD_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Yoshi) logic for fn_80109A08
- * @param gobj 
+ * @param gobj
  */
 void fn_80109A08(HSD_GObj* gobj)
 {
@@ -398,7 +398,7 @@ void fn_80109A08(HSD_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Yoshi) logic for fn_80109A84
- * @param gobj 
+ * @param gobj
  */
 void fn_80109A84(HSD_GObj* gobj)
 {
@@ -418,7 +418,7 @@ void fn_80109A84(HSD_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Yoshi) logic for fn_80109B00
- * @param gobj 
+ * @param gobj
  */
 void fn_80109B00(HSD_GObj* gobj)
 {
@@ -432,7 +432,7 @@ void fn_80109B00(HSD_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Yoshi) logic for fn_80109B7C
- * @param gobj 
+ * @param gobj
  */
 void fn_80109B7C(HSD_GObj* gobj)
 {
@@ -451,7 +451,7 @@ void fn_80109B7C(HSD_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Yoshi) logic for fn_80109BF8
- * @param gobj 
+ * @param gobj
  */
 void fn_80109BF8(HSD_GObj* gobj)
 {
@@ -469,7 +469,7 @@ void fn_80109BF8(HSD_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Yoshi) logic for fn_80109C74
- * @param gobj 
+ * @param gobj
  */
 void fn_80109C74(HSD_GObj* gobj)
 {
@@ -483,7 +483,7 @@ void fn_80109C74(HSD_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Yoshi) logic for fn_80109CF0
- * @param gobj 
+ * @param gobj
  */
 void fn_80109CF0(HSD_GObj* gobj)
 {
@@ -500,7 +500,7 @@ void fn_80109CF0(HSD_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Yoshi) logic for ftKb_YsSpecialN1_Anim
- * @param gobj 
+ * @param gobj
  */
 void ftKb_YsSpecialN1_Anim(Fighter_GObj* gobj)
 {
@@ -514,7 +514,7 @@ void ftKb_YsSpecialN1_Anim(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Yoshi) logic for ftKb_YsSpecialAirNCapture2_Anim
- * @param gobj 
+ * @param gobj
  */
 void ftKb_YsSpecialAirNCapture2_Anim(Fighter_GObj* gobj)
 {
@@ -528,7 +528,7 @@ void ftKb_YsSpecialAirNCapture2_Anim(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Yoshi) logic for ftKb_YsSpecialAirNCapture1_Anim
- * @param gobj 
+ * @param gobj
  */
 void ftKb_YsSpecialAirNCapture1_Anim(Fighter_GObj* gobj)
 {
@@ -559,7 +559,7 @@ void ftKb_YsSpecialAirNCapture1_Anim(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Yoshi) logic for ftKb_YsSpecialNCapture1_Anim
- * @param gobj 
+ * @param gobj
  */
 void ftKb_YsSpecialNCapture1_Anim(Fighter_GObj* gobj)
 {
@@ -591,7 +591,7 @@ void ftKb_YsSpecialNCapture1_Anim(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Yoshi) logic for ftKb_YsSpecialAirCapture2_Anim
- * @param gobj 
+ * @param gobj
  */
 void ftKb_YsSpecialAirCapture2_Anim(Fighter_GObj* gobj)
 {
@@ -622,7 +622,7 @@ void ftKb_YsSpecialAirCapture2_Anim(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Yoshi) logic for ftKb_YsSpecialAirCapture1_Anim
- * @param gobj 
+ * @param gobj
  */
 void ftKb_YsSpecialAirCapture1_Anim(Fighter_GObj* gobj)
 {
@@ -654,7 +654,7 @@ void ftKb_YsSpecialAirCapture1_Anim(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Yoshi) logic for ftKb_YsSpecialNCapture2_0_Anim
- * @param gobj 
+ * @param gobj
  */
 void ftKb_YsSpecialNCapture2_0_Anim(Fighter_GObj* gobj)
 {
@@ -712,7 +712,7 @@ void ftKb_YsSpecialNCapture2_0_Anim(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Yoshi) logic for ftKb_YsSpecialNCapture2_1_Anim
- * @param gobj 
+ * @param gobj
  */
 void ftKb_YsSpecialNCapture2_1_Anim(Fighter_GObj* gobj)
 {
@@ -739,7 +739,7 @@ void ftKb_YsSpecialNCapture2_1_Anim(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Yoshi) logic for ftKb_YsSpecialAirN2_1_Anim
- * @param gobj 
+ * @param gobj
  */
 void ftKb_YsSpecialAirN2_1_Anim(Fighter_GObj* gobj)
 {
@@ -797,7 +797,7 @@ void ftKb_YsSpecialAirN2_1_Anim(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Yoshi) logic for ftKb_YsSpecialAirN2_0_Anim
- * @param gobj 
+ * @param gobj
  */
 void ftKb_YsSpecialAirN2_0_Anim(Fighter_GObj* gobj)
 {
@@ -824,7 +824,7 @@ void ftKb_YsSpecialAirN2_0_Anim(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Yoshi) logic for ftKb_YsSpecialN1_Phys
- * @param gobj 
+ * @param gobj
  */
 void ftKb_YsSpecialN1_Phys(Fighter_GObj* gobj)
 {
@@ -833,7 +833,7 @@ void ftKb_YsSpecialN1_Phys(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Yoshi) logic for ftKb_YsSpecialAirNCapture2_Phys
- * @param gobj 
+ * @param gobj
  */
 void ftKb_YsSpecialAirNCapture2_Phys(Fighter_GObj* gobj)
 {
@@ -842,7 +842,7 @@ void ftKb_YsSpecialAirNCapture2_Phys(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Yoshi) logic for ftKb_YsSpecialAirNCapture1_Phys
- * @param gobj 
+ * @param gobj
  */
 void ftKb_YsSpecialAirNCapture1_Phys(Fighter_GObj* gobj)
 {
@@ -851,7 +851,7 @@ void ftKb_YsSpecialAirNCapture1_Phys(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Yoshi) logic for ftKb_YsSpecialNCapture1_Phys
- * @param gobj 
+ * @param gobj
  */
 void ftKb_YsSpecialNCapture1_Phys(Fighter_GObj* gobj)
 {
@@ -860,7 +860,7 @@ void ftKb_YsSpecialNCapture1_Phys(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Yoshi) logic for ftKb_YsSpecialAirCapture1_Phys
- * @param gobj 
+ * @param gobj
  */
 void ftKb_YsSpecialAirCapture1_Phys(Fighter_GObj* gobj)
 {
@@ -869,7 +869,7 @@ void ftKb_YsSpecialAirCapture1_Phys(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Yoshi) logic for ftKb_YsSpecialAirCapture2_Phys
- * @param gobj 
+ * @param gobj
  */
 void ftKb_YsSpecialAirCapture2_Phys(Fighter_GObj* gobj)
 {
@@ -878,7 +878,7 @@ void ftKb_YsSpecialAirCapture2_Phys(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Yoshi) logic for ftKb_YsSpecialNCapture2_0_Phys
- * @param gobj 
+ * @param gobj
  */
 void ftKb_YsSpecialNCapture2_0_Phys(Fighter_GObj* gobj)
 {
@@ -887,7 +887,7 @@ void ftKb_YsSpecialNCapture2_0_Phys(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Yoshi) logic for ftKb_YsSpecialNCapture2_1_Phys
- * @param gobj 
+ * @param gobj
  */
 void ftKb_YsSpecialNCapture2_1_Phys(Fighter_GObj* gobj)
 {
@@ -896,7 +896,7 @@ void ftKb_YsSpecialNCapture2_1_Phys(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Yoshi) logic for ftKb_YsSpecialAirN2_1_Phys
- * @param gobj 
+ * @param gobj
  */
 void ftKb_YsSpecialAirN2_1_Phys(Fighter_GObj* gobj)
 {
@@ -905,7 +905,7 @@ void ftKb_YsSpecialAirN2_1_Phys(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Yoshi) logic for ftKb_YsSpecialAirN2_0_Phys
- * @param gobj 
+ * @param gobj
  */
 void ftKb_YsSpecialAirN2_0_Phys(Fighter_GObj* gobj)
 {
@@ -914,7 +914,7 @@ void ftKb_YsSpecialAirN2_0_Phys(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Yoshi) logic for ftKb_YsSpecialN1_Coll
- * @param gobj 
+ * @param gobj
  */
 void ftKb_YsSpecialN1_Coll(Fighter_GObj* gobj)
 {
@@ -923,7 +923,7 @@ void ftKb_YsSpecialN1_Coll(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Yoshi) logic for ftKb_YsSpecialAirNCapture2_Coll
- * @param gobj 
+ * @param gobj
  */
 void ftKb_YsSpecialAirNCapture2_Coll(Fighter_GObj* gobj)
 {
@@ -932,7 +932,7 @@ void ftKb_YsSpecialAirNCapture2_Coll(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Yoshi) logic for ftKb_YsSpecialAirNCapture1_Coll
- * @param gobj 
+ * @param gobj
  */
 void ftKb_YsSpecialAirNCapture1_Coll(Fighter_GObj* gobj)
 {
@@ -941,7 +941,7 @@ void ftKb_YsSpecialAirNCapture1_Coll(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Yoshi) logic for ftKb_YsSpecialNCapture1_Coll
- * @param gobj 
+ * @param gobj
  */
 void ftKb_YsSpecialNCapture1_Coll(Fighter_GObj* gobj)
 {
@@ -950,7 +950,7 @@ void ftKb_YsSpecialNCapture1_Coll(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Yoshi) logic for ftKb_YsSpecialAirCapture2_Coll
- * @param gobj 
+ * @param gobj
  */
 void ftKb_YsSpecialAirCapture2_Coll(Fighter_GObj* gobj)
 {
@@ -959,7 +959,7 @@ void ftKb_YsSpecialAirCapture2_Coll(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Yoshi) logic for ftKb_YsSpecialAirCapture1_Coll
- * @param gobj 
+ * @param gobj
  */
 void ftKb_YsSpecialAirCapture1_Coll(Fighter_GObj* gobj)
 {
@@ -968,7 +968,7 @@ void ftKb_YsSpecialAirCapture1_Coll(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Yoshi) logic for ftKb_YsSpecialNCapture2_0_Coll
- * @param gobj 
+ * @param gobj
  */
 void ftKb_YsSpecialNCapture2_0_Coll(Fighter_GObj* gobj)
 {
@@ -977,7 +977,7 @@ void ftKb_YsSpecialNCapture2_0_Coll(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Yoshi) logic for ftKb_YsSpecialNCapture2_1_Coll
- * @param gobj 
+ * @param gobj
  */
 void ftKb_YsSpecialNCapture2_1_Coll(Fighter_GObj* gobj)
 {
@@ -986,7 +986,7 @@ void ftKb_YsSpecialNCapture2_1_Coll(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Yoshi) logic for ftKb_YsSpecialAirN2_1_Coll
- * @param gobj 
+ * @param gobj
  */
 void ftKb_YsSpecialAirN2_1_Coll(Fighter_GObj* gobj)
 {
@@ -995,7 +995,7 @@ void ftKb_YsSpecialAirN2_1_Coll(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Yoshi) logic for ftKb_YsSpecialAirN2_0_Coll
- * @param gobj 
+ * @param gobj
  */
 void ftKb_YsSpecialAirN2_0_Coll(Fighter_GObj* gobj)
 {
@@ -1004,7 +1004,7 @@ void ftKb_YsSpecialAirN2_0_Coll(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Yoshi) logic for ftKb_SpecialNYs_8010A8BC
- * @param gobj 
+ * @param gobj
  */
 void ftKb_SpecialNYs_8010A8BC(HSD_GObj* gobj)
 {

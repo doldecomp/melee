@@ -30,7 +30,7 @@ static void fn_800F98F4(Fighter_GObj*);
 
 /**
  * @brief Neutral-B Copy Ability (Luigi) logic for ftKb_SpecialNLg_800F9614
- * @param gobj 
+ * @param gobj
  */
 void ftKb_SpecialNLg_800F9614(Fighter_GObj* gobj)
 {
@@ -45,7 +45,7 @@ void ftKb_SpecialNLg_800F9614(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Luigi) logic for ftKb_SpecialNLg_800F9684
- * @param gobj 
+ * @param gobj
  */
 void ftKb_SpecialNLg_800F9684(Fighter_GObj* gobj)
 {
@@ -60,7 +60,7 @@ void ftKb_SpecialNLg_800F9684(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Luigi) logic for ftKb_LgSpecialN_Anim
- * @param gobj 
+ * @param gobj
  */
 void ftKb_LgSpecialN_Anim(Fighter_GObj* gobj)
 {
@@ -71,7 +71,7 @@ void ftKb_LgSpecialN_Anim(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Luigi) logic for ftKb_LgSpecialAirN_Anim
- * @param gobj 
+ * @param gobj
  */
 void ftKb_LgSpecialAirN_Anim(Fighter_GObj* gobj)
 {
@@ -82,7 +82,7 @@ void ftKb_LgSpecialAirN_Anim(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Luigi) logic for ftKb_LgSpecialN_IASA
- * @param gobj 
+ * @param gobj
  */
 void ftKb_LgSpecialN_IASA(Fighter_GObj* gobj)
 {
@@ -94,7 +94,7 @@ void ftKb_LgSpecialN_IASA(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Luigi) logic for ftKb_LgSpecialAirN_IASA
- * @param gobj 
+ * @param gobj
  */
 void ftKb_LgSpecialAirN_IASA(Fighter_GObj* gobj)
 {
@@ -106,7 +106,7 @@ void ftKb_LgSpecialAirN_IASA(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Luigi) logic for ftKb_LgSpecialN_Phys
- * @param gobj 
+ * @param gobj
  */
 void ftKb_LgSpecialN_Phys(Fighter_GObj* gobj)
 {
@@ -115,7 +115,7 @@ void ftKb_LgSpecialN_Phys(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Luigi) logic for ftKb_LgSpecialAirN_Phys
- * @param gobj 
+ * @param gobj
  */
 void ftKb_LgSpecialAirN_Phys(Fighter_GObj* gobj)
 {
@@ -124,7 +124,7 @@ void ftKb_LgSpecialAirN_Phys(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Luigi) logic for ftKb_LgSpecialN_Coll
- * @param gobj 
+ * @param gobj
  */
 void ftKb_LgSpecialN_Coll(Fighter_GObj* gobj)
 {
@@ -138,7 +138,7 @@ void ftKb_LgSpecialN_Coll(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Luigi) logic for ftKb_LgSpecialAirN_Coll
- * @param gobj 
+ * @param gobj
  */
 void ftKb_LgSpecialAirN_Coll(Fighter_GObj* gobj)
 {
@@ -152,7 +152,7 @@ void ftKb_LgSpecialAirN_Coll(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Luigi) logic for fn_800F98F4
- * @param gobj 
+ * @param gobj
  */
 void fn_800F98F4(Fighter_GObj* gobj)
 {

@@ -23,7 +23,7 @@
 
 /**
  * @brief Neutral-B Copy Ability (Link) logic for ftKb_SpecialNLk800FB394
- * @param gobj 
+ * @param gobj
  */
 ftLk_SpecialNIndex ftKb_SpecialNLk800FB394(Fighter_GObj* gobj)
 {
@@ -64,7 +64,7 @@ ftLk_SpecialNIndex ftKb_SpecialNLk800FB394(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Link) logic for ftKb_SpecialNLk800FB418
- * @param gobj 
+ * @param gobj
  */
 void ftKb_SpecialNLk800FB418(Fighter_GObj* gobj)
 {
@@ -78,7 +78,7 @@ void ftKb_SpecialNLk800FB418(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Link) logic for ftKb_SpecialNLk800FB444
- * @param gobj 
+ * @param gobj
  */
 void ftKb_SpecialNLk800FB444(Fighter_GObj* gobj)
 {
@@ -100,7 +100,7 @@ static MotionFlags const ftKb_SpecialNLk_coll_mf =
 
 /**
  * @brief Neutral-B Copy Ability (Link) logic for ftKb_SpecialNLk_UnsetArrow
- * @param gobj 
+ * @param gobj
  */
 static inline void ftKb_SpecialNLk_UnsetArrow(Fighter_GObj* gobj)
 {
@@ -114,7 +114,7 @@ static inline void ftKb_SpecialNLk_UnsetArrow(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Link) logic for ftKb_SpecialNLk_UnsetBow
- * @param gobj 
+ * @param gobj
  */
 static inline void ftKb_SpecialNLk_UnsetBow(Fighter_GObj* gobj)
 {
@@ -128,7 +128,7 @@ static inline void ftKb_SpecialNLk_UnsetBow(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Link) logic for ftKb_SpecialNLk800FB470
- * @param gobj 
+ * @param gobj
  */
 bool ftKb_SpecialNLk800FB470(Fighter_GObj* gobj)
 {
@@ -172,7 +172,7 @@ bool ftKb_SpecialNLk800FB470(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Link) logic for ftKb_SpecialNLk800FB500
- * @param gobj 
+ * @param gobj
  */
 bool ftKb_SpecialNLk800FB500(Fighter_GObj* gobj)
 {
@@ -207,7 +207,7 @@ bool ftKb_SpecialNLk800FB500(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Link) logic for ftKb_SpecialNLk800FB5F4
- * @param gobj 
+ * @param gobj
  */
 bool ftKb_SpecialNLk800FB5F4(Fighter_GObj* gobj)
 {
@@ -243,7 +243,7 @@ bool ftKb_SpecialNLk800FB5F4(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Link) logic for ftKb_SpecialNLk800FB6DC
- * @param gobj 
+ * @param gobj
  */
 void ftKb_SpecialNLk800FB6DC(Fighter_GObj* gobj)
 {
@@ -282,7 +282,7 @@ void ftKb_SpecialNLk800FB6DC(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Link) logic for ftKb_SpecialNLk800FB800
- * @param gobj 
+ * @param gobj
  */
 void ftKb_SpecialNLk800FB800(HSD_GObj* gobj)
 {
@@ -296,7 +296,7 @@ void ftKb_SpecialNLk800FB800(HSD_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Link) logic for ftKb_SpecialNLk800FB840
- * @param gobj 
+ * @param gobj
  */
 void ftKb_SpecialNLk800FB840(HSD_GObj* gobj)
 {
@@ -310,7 +310,7 @@ void ftKb_SpecialNLk800FB840(HSD_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Link) logic for ftKb_SpecialNLk800FB880
- * @param gobj 
+ * @param gobj
  */
 void ftKb_SpecialNLk800FB880(Fighter_GObj* gobj)
 {
@@ -358,7 +358,7 @@ void ftKb_SpecialNLk800FB880(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Link) logic for ftKb_SpecialNLk800FBA00
- * @param gobj 
+ * @param gobj
  */
 void ftKb_SpecialNLk800FBA00(Fighter_GObj* gobj)
 {
@@ -419,7 +419,7 @@ extern ftLk_SpecialN_Vec3Group const ftKb_Init_803B7548;
 
 /**
  * @brief Neutral-B Copy Ability (Link) logic for ftKb_LkSpecialNStart_Anim
- * @param gobj 
+ * @param gobj
  */
 void ftKb_LkSpecialNStart_Anim(Fighter_GObj* gobj)
 {
@@ -481,7 +481,7 @@ void ftKb_LkSpecialNStart_Anim(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Link) logic for ftKb_LkSpecialNLoop_Anim
- * @param gobj 
+ * @param gobj
  */
 void ftKb_LkSpecialNLoop_Anim(Fighter_GObj* gobj)
 {
@@ -501,7 +501,7 @@ void ftKb_LkSpecialNLoop_Anim(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Link) logic for ftKb_LkSpecialNEnd_Anim
- * @param gobj 
+ * @param gobj
  */
 void ftKb_LkSpecialNEnd_Anim(Fighter_GObj* gobj)
 {
@@ -515,7 +515,7 @@ void ftKb_LkSpecialNEnd_Anim(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Link) logic for ftKb_LkSpecialAirNStart_Anim
- * @param gobj 
+ * @param gobj
  */
 void ftKb_LkSpecialAirNStart_Anim(Fighter_GObj* gobj)
 {
@@ -580,7 +580,7 @@ void ftKb_LkSpecialAirNStart_Anim(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Link) logic for ftKb_LkSpecialAirNLoop_Anim
- * @param gobj 
+ * @param gobj
  */
 void ftKb_LkSpecialAirNLoop_Anim(Fighter_GObj* gobj)
 {
@@ -600,7 +600,7 @@ void ftKb_LkSpecialAirNLoop_Anim(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Link) logic for ftKb_LkSpecialAirNEnd_Anim
- * @param gobj 
+ * @param gobj
  */
 void ftKb_LkSpecialAirNEnd_Anim(Fighter_GObj* gobj)
 {
@@ -631,7 +631,7 @@ void ftKb_LkSpecialAirNEnd_Anim(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Link) logic for ftKb_LkSpecialNStart_IASA
- * @param gobj 
+ * @param gobj
  */
 void ftKb_LkSpecialNStart_IASA(Fighter_GObj* gobj)
 {
@@ -674,7 +674,7 @@ void ftKb_LkSpecialNStart_IASA(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Link) logic for ftKb_LkSpecialNLoop_IASA
- * @param gobj 
+ * @param gobj
  */
 void ftKb_LkSpecialNLoop_IASA(Fighter_GObj* gobj)
 {
@@ -711,7 +711,7 @@ void ftKb_LkSpecialNEnd_IASA(Fighter_GObj* gobj) {}
 
 /**
  * @brief Neutral-B Copy Ability (Link) logic for ftKb_LkSpecialAirNStart_IASA
- * @param gobj 
+ * @param gobj
  */
 void ftKb_LkSpecialAirNStart_IASA(Fighter_GObj* gobj)
 {
@@ -754,7 +754,7 @@ void ftKb_LkSpecialAirNStart_IASA(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Link) logic for ftKb_LkSpecialAirNLoop_IASA
- * @param gobj 
+ * @param gobj
  */
 void ftKb_LkSpecialAirNLoop_IASA(Fighter_GObj* gobj)
 {
@@ -791,7 +791,7 @@ void ftKb_LkSpecialAirNEnd_IASA(Fighter_GObj* gobj) {}
 
 /**
  * @brief Neutral-B Copy Ability (Link) logic for ftKb_LkSpecialNStart_Phys
- * @param gobj 
+ * @param gobj
  */
 void ftKb_LkSpecialNStart_Phys(Fighter_GObj* gobj)
 {
@@ -800,7 +800,7 @@ void ftKb_LkSpecialNStart_Phys(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Link) logic for ftKb_LkSpecialNLoop_Phys
- * @param gobj 
+ * @param gobj
  */
 void ftKb_LkSpecialNLoop_Phys(Fighter_GObj* gobj)
 {
@@ -809,7 +809,7 @@ void ftKb_LkSpecialNLoop_Phys(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Link) logic for ftKb_LkSpecialNEnd_Phys
- * @param gobj 
+ * @param gobj
  */
 void ftKb_LkSpecialNEnd_Phys(Fighter_GObj* gobj)
 {
@@ -818,7 +818,7 @@ void ftKb_LkSpecialNEnd_Phys(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Link) logic for ftKb_LkSpecialAirNStart_Phys
- * @param gobj 
+ * @param gobj
  */
 void ftKb_LkSpecialAirNStart_Phys(Fighter_GObj* gobj)
 {
@@ -827,7 +827,7 @@ void ftKb_LkSpecialAirNStart_Phys(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Link) logic for ftKb_LkSpecialAirNLoop_Phys
- * @param gobj 
+ * @param gobj
  */
 void ftKb_LkSpecialAirNLoop_Phys(Fighter_GObj* gobj)
 {
@@ -836,7 +836,7 @@ void ftKb_LkSpecialAirNLoop_Phys(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Link) logic for ftKb_LkSpecialAirNEnd_Phys
- * @param gobj 
+ * @param gobj
  */
 void ftKb_LkSpecialAirNEnd_Phys(Fighter_GObj* gobj)
 {
@@ -845,7 +845,7 @@ void ftKb_LkSpecialAirNEnd_Phys(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Link) logic for ftKb_LkSpecialNStart_Coll
- * @param gobj 
+ * @param gobj
  */
 void ftKb_LkSpecialNStart_Coll(Fighter_GObj* gobj)
 {
@@ -875,7 +875,7 @@ void ftKb_LkSpecialNStart_Coll(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Link) logic for ftKb_LkSpecialNLoop_Coll
- * @param gobj 
+ * @param gobj
  */
 void ftKb_LkSpecialNLoop_Coll(Fighter_GObj* gobj)
 {
@@ -905,7 +905,7 @@ void ftKb_LkSpecialNLoop_Coll(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Link) logic for ftKb_LkSpecialNEnd_Coll
- * @param gobj 
+ * @param gobj
  */
 void ftKb_LkSpecialNEnd_Coll(Fighter_GObj* gobj)
 {
@@ -936,7 +936,7 @@ void ftKb_LkSpecialNEnd_Coll(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Link) logic for ftKb_LkSpecialAirNStart_Coll
- * @param gobj 
+ * @param gobj
  */
 void ftKb_LkSpecialAirNStart_Coll(Fighter_GObj* gobj)
 {
@@ -966,7 +966,7 @@ void ftKb_LkSpecialAirNStart_Coll(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Link) logic for ftKb_LkSpecialAirNLoop_Coll
- * @param gobj 
+ * @param gobj
  */
 void ftKb_LkSpecialAirNLoop_Coll(Fighter_GObj* gobj)
 {
@@ -996,7 +996,7 @@ void ftKb_LkSpecialAirNLoop_Coll(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Link) logic for ftKb_LkSpecialAirNEnd_Coll
- * @param gobj 
+ * @param gobj
  */
 void ftKb_LkSpecialAirNEnd_Coll(Fighter_GObj* gobj)
 {

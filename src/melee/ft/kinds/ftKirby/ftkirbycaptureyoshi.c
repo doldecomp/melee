@@ -22,7 +22,7 @@
 
 /**
  * @brief Yoshi Capture logic for fn_8010A930
- * @param gobj 
+ * @param gobj
  * @param attacker_gobj 
  */
 void fn_8010A930(Fighter_GObj* gobj, Fighter_GObj* attacker_gobj)
@@ -54,7 +54,7 @@ void ftCo_CaptureKirbyYoshi_Coll(Fighter_GObj* gobj) {}
 
 /**
  * @brief Yoshi Capture logic for ftKb_SpecialNYs_8010AA2C
- * @param gobj 
+ * @param gobj
  */
 void ftKb_SpecialNYs_8010AA2C(Fighter_GObj* gobj)
 {

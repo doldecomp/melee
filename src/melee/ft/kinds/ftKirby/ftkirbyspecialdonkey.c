@@ -43,7 +43,7 @@ static void sdata2_order0(void)
 
 /**
  * @brief Neutral-B Copy Ability (Donkey) logic for ftKb_SpecialNDk_800FF8EC
- * @param gobj 
+ * @param gobj
  */
 void ftKb_SpecialNDk_800FF8EC(Fighter_GObj* gobj)
 {
@@ -80,7 +80,7 @@ void ftKb_SpecialNDk_800FF8EC(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Donkey) logic for ftKb_SpecialNDk_800FFA10
- * @param gobj 
+ * @param gobj
  */
 void ftKb_SpecialNDk_800FFA10(Fighter_GObj* gobj)
 {
@@ -115,7 +115,7 @@ void ftKb_SpecialNDk_800FFA10(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Donkey) logic for ftKb_DkSpecialNStart_Coll_inline
- * @param gobj 
+ * @param gobj
  */
 static inline void ftKb_DkSpecialNStart_Coll_inline(Fighter_GObj* gobj)
 {
@@ -127,7 +127,7 @@ static inline void ftKb_DkSpecialNStart_Coll_inline(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Donkey) logic for ftKb_DkSpecialNStart_Anim
- * @param gobj 
+ * @param gobj
  */
 void ftKb_DkSpecialNStart_Anim(Fighter_GObj* gobj)
 {
@@ -140,7 +140,7 @@ void ftKb_DkSpecialNStart_Anim(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Donkey) logic for ftKb_DkSpecialNLoop_Anim
- * @param gobj 
+ * @param gobj
  */
 void ftKb_DkSpecialNLoop_Anim(Fighter_GObj* gobj)
 {
@@ -165,7 +165,7 @@ void ftKb_DkSpecialNLoop_Anim(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Donkey) logic for ftKb_DkSpecialNCancel_Anim
- * @param gobj 
+ * @param gobj
  */
 void ftKb_DkSpecialNCancel_Anim(Fighter_GObj* gobj)
 {
@@ -179,7 +179,7 @@ void ftKb_DkSpecialNCancel_Anim(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Donkey) logic for ftKb_DkSpecialN_Anim
- * @param gobj 
+ * @param gobj
  */
 void ftKb_DkSpecialN_Anim(Fighter_GObj* gobj)
 {
@@ -246,7 +246,7 @@ void ftKb_DkSpecialN_Anim(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Donkey) logic for ftKb_DkSpecialNFull_Anim
- * @param gobj 
+ * @param gobj
  */
 void ftKb_DkSpecialNFull_Anim(Fighter_GObj* gobj)
 {
@@ -296,7 +296,7 @@ void ftKb_DkSpecialNFull_Anim(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Donkey) logic for ftKb_DkSpecialAirNStart_Anim
- * @param gobj 
+ * @param gobj
  */
 void ftKb_DkSpecialAirNStart_Anim(Fighter_GObj* gobj)
 {
@@ -309,7 +309,7 @@ void ftKb_DkSpecialAirNStart_Anim(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Donkey) logic for ftKb_DkSpecialAirNLoop_Anim
- * @param gobj 
+ * @param gobj
  */
 void ftKb_DkSpecialAirNLoop_Anim(Fighter_GObj* gobj)
 {
@@ -335,7 +335,7 @@ void ftKb_DkSpecialAirNLoop_Anim(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Donkey) logic for ftKb_DkSpecialAirNCancel_Anim
- * @param gobj 
+ * @param gobj
  */
 void ftKb_DkSpecialAirNCancel_Anim(Fighter_GObj* gobj)
 {
@@ -350,7 +350,7 @@ void ftKb_DkSpecialAirNCancel_Anim(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Donkey) logic for ftKb_DkSpecialAirN_Anim
- * @param gobj 
+ * @param gobj
  */
 void ftKb_DkSpecialAirN_Anim(Fighter_GObj* gobj)
 {
@@ -408,7 +408,7 @@ void ftKb_DkSpecialAirN_Anim(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Donkey) logic for ftKb_DkSpecialAirNFull_Anim
- * @param gobj 
+ * @param gobj
  */
 void ftKb_DkSpecialAirNFull_Anim(Fighter_GObj* gobj)
 {
@@ -450,7 +450,7 @@ void ftKb_DkSpecialNStart_IASA(Fighter_GObj* gobj) {}
 
 /**
  * @brief Neutral-B Copy Ability (Donkey) logic for ftKb_DkSpecialNLoop_IASA
- * @param gobj 
+ * @param gobj
  */
 void ftKb_DkSpecialNLoop_IASA(Fighter_GObj* gobj)
 {
@@ -487,7 +487,7 @@ void ftKb_DkSpecialAirNStart_IASA(Fighter_GObj* gobj) {}
 
 /**
  * @brief Neutral-B Copy Ability (Donkey) logic for ftKb_DkSpecialAirNLoop_IASA
- * @param gobj 
+ * @param gobj
  */
 void ftKb_DkSpecialAirNLoop_IASA(Fighter_GObj* gobj)
 {
@@ -520,7 +520,7 @@ void ftKb_DkSpecialAirNFull_IASA(Fighter_GObj* gobj) {}
 
 /**
  * @brief Neutral-B Copy Ability (Donkey) logic for ftKb_DkSpecialNStart_Phys
- * @param gobj 
+ * @param gobj
  */
 void ftKb_DkSpecialNStart_Phys(Fighter_GObj* gobj)
 
@@ -530,7 +530,7 @@ void ftKb_DkSpecialNStart_Phys(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Donkey) logic for ftKb_DkSpecialNLoop_Phys
- * @param gobj 
+ * @param gobj
  */
 void ftKb_DkSpecialNLoop_Phys(Fighter_GObj* gobj)
 {
@@ -539,7 +539,7 @@ void ftKb_DkSpecialNLoop_Phys(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Donkey) logic for ftKb_DkSpecialNCancel_Phys
- * @param gobj 
+ * @param gobj
  */
 void ftKb_DkSpecialNCancel_Phys(Fighter_GObj* gobj)
 {
@@ -548,7 +548,7 @@ void ftKb_DkSpecialNCancel_Phys(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Donkey) logic for ftKb_DkSpecialN_Phys
- * @param gobj 
+ * @param gobj
  */
 void ftKb_DkSpecialN_Phys(Fighter_GObj* gobj)
 {
@@ -557,7 +557,7 @@ void ftKb_DkSpecialN_Phys(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Donkey) logic for ftKb_DkSpecialNFull_Phys
- * @param gobj 
+ * @param gobj
  */
 void ftKb_DkSpecialNFull_Phys(Fighter_GObj* gobj)
 {
@@ -566,7 +566,7 @@ void ftKb_DkSpecialNFull_Phys(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Donkey) logic for ftKb_DkSpecialAirNStart_Phys
- * @param gobj 
+ * @param gobj
  */
 void ftKb_DkSpecialAirNStart_Phys(Fighter_GObj* gobj)
 {
@@ -575,7 +575,7 @@ void ftKb_DkSpecialAirNStart_Phys(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Donkey) logic for ftKb_DkSpecialAirNLoop_Phys
- * @param gobj 
+ * @param gobj
  */
 void ftKb_DkSpecialAirNLoop_Phys(Fighter_GObj* gobj)
 {
@@ -584,7 +584,7 @@ void ftKb_DkSpecialAirNLoop_Phys(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Donkey) logic for ftKb_DkSpecialAirNCancel_Phys
- * @param gobj 
+ * @param gobj
  */
 void ftKb_DkSpecialAirNCancel_Phys(Fighter_GObj* gobj)
 {
@@ -593,7 +593,7 @@ void ftKb_DkSpecialAirNCancel_Phys(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Donkey) logic for ftKb_DkSpecialAirN_Phys
- * @param gobj 
+ * @param gobj
  */
 void ftKb_DkSpecialAirN_Phys(Fighter_GObj* gobj)
 {
@@ -602,7 +602,7 @@ void ftKb_DkSpecialAirN_Phys(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Donkey) logic for ftKb_DkSpecialAirNFull_Phys
- * @param gobj 
+ * @param gobj
  */
 void ftKb_DkSpecialAirNFull_Phys(Fighter_GObj* gobj)
 {
@@ -611,7 +611,7 @@ void ftKb_DkSpecialAirNFull_Phys(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Donkey) logic for ftKb_DkSpecialNStart_Coll
- * @param gobj 
+ * @param gobj
  */
 void ftKb_DkSpecialNStart_Coll(Fighter_GObj* gobj)
 {
@@ -625,7 +625,7 @@ void ftKb_DkSpecialNStart_Coll(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Donkey) logic for ftKb_DkSpecialNLoop_Coll
- * @param gobj 
+ * @param gobj
  */
 void ftKb_DkSpecialNLoop_Coll(Fighter_GObj* gobj)
 {
@@ -639,7 +639,7 @@ void ftKb_DkSpecialNLoop_Coll(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Donkey) logic for ftKb_DkSpecialNCancel_Coll
- * @param gobj 
+ * @param gobj
  */
 void ftKb_DkSpecialNCancel_Coll(Fighter_GObj* gobj)
 {
@@ -653,7 +653,7 @@ void ftKb_DkSpecialNCancel_Coll(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Donkey) logic for ftKb_DkSpecialN_Coll
- * @param gobj 
+ * @param gobj
  */
 void ftKb_DkSpecialN_Coll(Fighter_GObj* gobj)
 {
@@ -667,7 +667,7 @@ void ftKb_DkSpecialN_Coll(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Donkey) logic for ftKb_DkSpecialNFull_Coll
- * @param gobj 
+ * @param gobj
  */
 void ftKb_DkSpecialNFull_Coll(Fighter_GObj* gobj)
 {
@@ -681,7 +681,7 @@ void ftKb_DkSpecialNFull_Coll(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Donkey) logic for ftKb_DkSpecialAirNStart_Coll
- * @param gobj 
+ * @param gobj
  */
 void ftKb_DkSpecialAirNStart_Coll(Fighter_GObj* gobj)
 {
@@ -695,7 +695,7 @@ void ftKb_DkSpecialAirNStart_Coll(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Donkey) logic for ftKb_DkSpecialAirNLoop_Coll
- * @param gobj 
+ * @param gobj
  */
 void ftKb_DkSpecialAirNLoop_Coll(Fighter_GObj* gobj)
 {
@@ -709,7 +709,7 @@ void ftKb_DkSpecialAirNLoop_Coll(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Donkey) logic for ftKb_DkSpecialAirNCancel_Coll
- * @param gobj 
+ * @param gobj
  */
 void ftKb_DkSpecialAirNCancel_Coll(Fighter_GObj* gobj)
 {
@@ -723,7 +723,7 @@ void ftKb_DkSpecialAirNCancel_Coll(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Donkey) logic for ftKb_DkSpecialAirN_Coll
- * @param gobj 
+ * @param gobj
  */
 void ftKb_DkSpecialAirN_Coll(Fighter_GObj* gobj)
 {
@@ -737,7 +737,7 @@ void ftKb_DkSpecialAirN_Coll(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Donkey) logic for ftKb_DkSpecialAirNFull_Coll
- * @param gobj 
+ * @param gobj
  */
 void ftKb_DkSpecialAirNFull_Coll(Fighter_GObj* gobj)
 {
@@ -751,7 +751,7 @@ void ftKb_DkSpecialAirNFull_Coll(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Donkey) logic for ftKb_SpecialNPr_80100DE0
- * @param gobj 
+ * @param gobj
  */
 void ftKb_SpecialNPr_80100DE0(Fighter_GObj* gobj)
 {

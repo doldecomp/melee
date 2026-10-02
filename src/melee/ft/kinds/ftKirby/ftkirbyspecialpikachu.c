@@ -28,7 +28,7 @@
 
 /**
  * @brief Neutral-B Copy Ability (Pikachu) logic for doEnter
- * @param gobj 
+ * @param gobj
  * @param pk_msid 
  * @param pc_msid 
  */
@@ -55,7 +55,7 @@ static void doEnter(Fighter_GObj* gobj, ftKirby_MotionState pk_msid,
 
 /**
  * @brief Neutral-B Copy Ability (Pikachu) logic for ftKb_SpecialNPk_800F9FD4
- * @param gobj 
+ * @param gobj
  */
 void ftKb_SpecialNPk_800F9FD4(Fighter_GObj* gobj)
 {
@@ -65,7 +65,7 @@ void ftKb_SpecialNPk_800F9FD4(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Pikachu) logic for ftKb_SpecialNPk_800FA064
- * @param gobj 
+ * @param gobj
  */
 void ftKb_SpecialNPk_800FA064(Fighter_GObj* gobj)
 {
@@ -75,7 +75,7 @@ void ftKb_SpecialNPk_800FA064(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Pikachu) logic for ftKb_PkSpecialN_Anim
- * @param gobj 
+ * @param gobj
  */
 void ftKb_PkSpecialN_Anim(Fighter_GObj* gobj)
 {
@@ -124,7 +124,7 @@ void ftKb_PkSpecialN_Anim(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Pikachu) logic for ftKb_PkSpecialAirN_Anim
- * @param gobj 
+ * @param gobj
  */
 void ftKb_PkSpecialAirN_Anim(Fighter_GObj* gobj)
 {
@@ -198,7 +198,7 @@ void ftKb_PkSpecialAirN_IASA(Fighter_GObj* gobj) {}
 
 /**
  * @brief Neutral-B Copy Ability (Pikachu) logic for ftKb_PkSpecialN_Phys
- * @param gobj 
+ * @param gobj
  */
 void ftKb_PkSpecialN_Phys(Fighter_GObj* gobj)
 {
@@ -207,7 +207,7 @@ void ftKb_PkSpecialN_Phys(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Pikachu) logic for ftKb_PkSpecialAirN_Phys
- * @param gobj 
+ * @param gobj
  */
 void ftKb_PkSpecialAirN_Phys(Fighter_GObj* gobj)
 {
@@ -221,7 +221,7 @@ static MotionFlags const coll_mf =
 
 /**
  * @brief Neutral-B Copy Ability (Pikachu) logic for ftKb_PkSpecialN_Coll
- * @param gobj 
+ * @param gobj
  */
 void ftKb_PkSpecialN_Coll(Fighter_GObj* gobj)
 {
@@ -248,7 +248,7 @@ void ftKb_PkSpecialN_Coll(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Pikachu) logic for ftKb_PkSpecialAirN_Coll
- * @param gobj 
+ * @param gobj
  */
 void ftKb_PkSpecialAirN_Coll(Fighter_GObj* gobj)
 {

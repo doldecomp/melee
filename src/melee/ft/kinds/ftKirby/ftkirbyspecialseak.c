@@ -40,7 +40,7 @@ void fn_80105FEC(Fighter_GObj* gobj) {}
 
 /**
  * @brief Side-B (Hammer) logic for ftKb_SpecialNSk_80105FF0
- * @param gobj 
+ * @param gobj
  */
 bool ftKb_SpecialNSk_80105FF0(Fighter_GObj* gobj)
 {
@@ -56,7 +56,7 @@ bool ftKb_SpecialNSk_80105FF0(Fighter_GObj* gobj)
 
 /**
  * @brief Side-B (Hammer) logic for ftKb_SpecialNSk_80106020
- * @param gobj 
+ * @param gobj
  */
 s32 ftKb_SpecialNSk_80106020(Fighter_GObj* gobj)
 {
@@ -69,7 +69,7 @@ s32 ftKb_SpecialNSk_80106020(Fighter_GObj* gobj)
 
 /**
  * @brief Side-B (Hammer) logic for ftKb_SpecialNSk_8010603C
- * @param gobj 
+ * @param gobj
  */
 void ftKb_SpecialNSk_8010603C(Fighter_GObj* gobj)
 {
@@ -108,7 +108,7 @@ void ftKb_SpecialNSk_8010603C(Fighter_GObj* gobj)
 
 /**
  * @brief Side-B (Hammer) logic for ftKb_SpecialNSk_8010612C
- * @param gobj 
+ * @param gobj
  */
 void ftKb_SpecialNSk_8010612C(Fighter_GObj* gobj)
 {
@@ -134,7 +134,7 @@ void ftKb_SpecialNSk_8010612C(Fighter_GObj* gobj)
 
 /**
  * @brief Side-B (Hammer) logic for ftKb_SpecialNSk_801061E4
- * @param gobj 
+ * @param gobj
  */
 void ftKb_SpecialNSk_801061E4(Fighter_GObj* gobj)
 {
@@ -161,7 +161,7 @@ void ftKb_SpecialNSk_801061E4(Fighter_GObj* gobj)
 
 /**
  * @brief Side-B (Hammer) logic for ftKb_SkSpecialNStart_Anim
- * @param gobj 
+ * @param gobj
  */
 void ftKb_SkSpecialNStart_Anim(Fighter_GObj* gobj)
 {
@@ -179,7 +179,7 @@ void ftKb_SkSpecialNStart_Anim(Fighter_GObj* gobj)
 
 /**
  * @brief Side-B (Hammer) logic for ftKb_SkSpecialNLoop_Anim
- * @param gobj 
+ * @param gobj
  */
 void ftKb_SkSpecialNLoop_Anim(Fighter_GObj* gobj)
 {
@@ -204,7 +204,7 @@ void ftKb_SkSpecialNLoop_Anim(Fighter_GObj* gobj)
 
 /**
  * @brief Side-B (Hammer) logic for ftKb_SkSpecialNCancel_Anim
- * @param gobj 
+ * @param gobj
  */
 void ftKb_SkSpecialNCancel_Anim(Fighter_GObj* gobj)
 {
@@ -217,7 +217,7 @@ void ftKb_SkSpecialNCancel_Anim(Fighter_GObj* gobj)
 
 /**
  * @brief Side-B (Hammer) logic for ftKb_SkSpecialNEnd_Anim
- * @param gobj 
+ * @param gobj
  */
 void ftKb_SkSpecialNEnd_Anim(Fighter_GObj* gobj)
 {
@@ -241,7 +241,7 @@ void ftKb_SkSpecialNEnd_Anim(Fighter_GObj* gobj)
 
 /**
  * @brief Side-B (Hammer) logic for ftKb_SkSpecialAirNStart_Anim
- * @param gobj 
+ * @param gobj
  */
 void ftKb_SkSpecialAirNStart_Anim(Fighter_GObj* gobj)
 {
@@ -264,7 +264,7 @@ void ftKb_SkSpecialAirNStart_Anim(Fighter_GObj* gobj)
 
 /**
  * @brief Side-B (Hammer) logic for ftKb_SkSpecialAirNLoop_Anim
- * @param gobj 
+ * @param gobj
  */
 void ftKb_SkSpecialAirNLoop_Anim(Fighter_GObj* gobj)
 {
@@ -289,7 +289,7 @@ void ftKb_SkSpecialAirNLoop_Anim(Fighter_GObj* gobj)
 
 /**
  * @brief Side-B (Hammer) logic for ftKb_SkSpecialAirNCancel_Anim
- * @param gobj 
+ * @param gobj
  */
 void ftKb_SkSpecialAirNCancel_Anim(Fighter_GObj* gobj)
 {
@@ -311,7 +311,7 @@ void ftKb_SkSpecialAirNCancel_Anim(Fighter_GObj* gobj)
 
 /**
  * @brief Side-B (Hammer) logic for ftKb_SkSpecialAirNEnd_Anim
- * @param gobj 
+ * @param gobj
  */
 void ftKb_SkSpecialAirNEnd_Anim(Fighter_GObj* gobj)
 {
@@ -343,7 +343,7 @@ void ftKb_SkSpecialNStart_IASA(Fighter_GObj* gobj) {}
 
 /**
  * @brief Side-B (Hammer) logic for ftKb_SkSpecialNLoop_IASA
- * @param gobj 
+ * @param gobj
  */
 void ftKb_SkSpecialNLoop_IASA(Fighter_GObj* gobj)
 {
@@ -369,7 +369,7 @@ void ftKb_SkSpecialAirNStart_IASA(Fighter_GObj* gobj) {}
 
 /**
  * @brief Side-B (Hammer) logic for ftKb_SkSpecialAirNLoop_IASA
- * @param gobj 
+ * @param gobj
  */
 void ftKb_SkSpecialAirNLoop_IASA(Fighter_GObj* gobj)
 {
@@ -393,7 +393,7 @@ void ftKb_SkSpecialAirNEnd_IASA(Fighter_GObj* gobj) {}
 
 /**
  * @brief Side-B (Hammer) logic for ftKb_SkSpecialNStart_Phys
- * @param gobj 
+ * @param gobj
  */
 void ftKb_SkSpecialNStart_Phys(Fighter_GObj* gobj)
 {
@@ -402,7 +402,7 @@ void ftKb_SkSpecialNStart_Phys(Fighter_GObj* gobj)
 
 /**
  * @brief Side-B (Hammer) logic for ftKb_SkSpecialNLoop_Phys
- * @param gobj 
+ * @param gobj
  */
 void ftKb_SkSpecialNLoop_Phys(Fighter_GObj* gobj)
 {
@@ -411,7 +411,7 @@ void ftKb_SkSpecialNLoop_Phys(Fighter_GObj* gobj)
 
 /**
  * @brief Side-B (Hammer) logic for ftKb_SkSpecialNCancel_Phys
- * @param gobj 
+ * @param gobj
  */
 void ftKb_SkSpecialNCancel_Phys(Fighter_GObj* gobj)
 {
@@ -420,7 +420,7 @@ void ftKb_SkSpecialNCancel_Phys(Fighter_GObj* gobj)
 
 /**
  * @brief Side-B (Hammer) logic for ftKb_SkSpecialNEnd_Phys
- * @param gobj 
+ * @param gobj
  */
 void ftKb_SkSpecialNEnd_Phys(Fighter_GObj* gobj)
 {
@@ -429,7 +429,7 @@ void ftKb_SkSpecialNEnd_Phys(Fighter_GObj* gobj)
 
 /**
  * @brief Side-B (Hammer) logic for ftKb_SkSpecialAirNStart_Phys
- * @param gobj 
+ * @param gobj
  */
 void ftKb_SkSpecialAirNStart_Phys(Fighter_GObj* gobj)
 {
@@ -438,7 +438,7 @@ void ftKb_SkSpecialAirNStart_Phys(Fighter_GObj* gobj)
 
 /**
  * @brief Side-B (Hammer) logic for ftKb_SkSpecialAirNLoop_Phys
- * @param gobj 
+ * @param gobj
  */
 void ftKb_SkSpecialAirNLoop_Phys(Fighter_GObj* gobj)
 {
@@ -447,7 +447,7 @@ void ftKb_SkSpecialAirNLoop_Phys(Fighter_GObj* gobj)
 
 /**
  * @brief Side-B (Hammer) logic for ftKb_SkSpecialAirNCancel_Phys
- * @param gobj 
+ * @param gobj
  */
 void ftKb_SkSpecialAirNCancel_Phys(Fighter_GObj* gobj)
 {
@@ -456,7 +456,7 @@ void ftKb_SkSpecialAirNCancel_Phys(Fighter_GObj* gobj)
 
 /**
  * @brief Side-B (Hammer) logic for ftKb_SkSpecialAirNEnd_Phys
- * @param gobj 
+ * @param gobj
  */
 void ftKb_SkSpecialAirNEnd_Phys(Fighter_GObj* gobj)
 {
@@ -465,7 +465,7 @@ void ftKb_SkSpecialAirNEnd_Phys(Fighter_GObj* gobj)
 
 /**
  * @brief Side-B (Hammer) logic for ftKb_SkSpecialNStart_Coll
- * @param gobj 
+ * @param gobj
  */
 void ftKb_SkSpecialNStart_Coll(Fighter_GObj* gobj)
 {
@@ -479,7 +479,7 @@ void ftKb_SkSpecialNStart_Coll(Fighter_GObj* gobj)
 
 /**
  * @brief Side-B (Hammer) logic for ftKb_SkSpecialNLoop_Coll
- * @param gobj 
+ * @param gobj
  */
 void ftKb_SkSpecialNLoop_Coll(Fighter_GObj* gobj)
 {
@@ -493,7 +493,7 @@ void ftKb_SkSpecialNLoop_Coll(Fighter_GObj* gobj)
 
 /**
  * @brief Side-B (Hammer) logic for ftKb_SkSpecialNCancel_Coll
- * @param gobj 
+ * @param gobj
  */
 void ftKb_SkSpecialNCancel_Coll(Fighter_GObj* gobj)
 {
@@ -512,7 +512,7 @@ void ftKb_SkSpecialNCancel_Coll(Fighter_GObj* gobj)
 
 /**
  * @brief Side-B (Hammer) logic for ftKb_SkSpecialNEnd_Coll
- * @param gobj 
+ * @param gobj
  */
 void ftKb_SkSpecialNEnd_Coll(Fighter_GObj* gobj)
 {
@@ -533,7 +533,7 @@ void ftKb_SkSpecialNEnd_Coll(Fighter_GObj* gobj)
 
 /**
  * @brief Side-B (Hammer) logic for ftKb_SkSpecialAirNStart_Coll
- * @param gobj 
+ * @param gobj
  */
 void ftKb_SkSpecialAirNStart_Coll(Fighter_GObj* gobj)
 {
@@ -547,7 +547,7 @@ void ftKb_SkSpecialAirNStart_Coll(Fighter_GObj* gobj)
 
 /**
  * @brief Side-B (Hammer) logic for ftKb_SkSpecialAirNLoop_Coll
- * @param gobj 
+ * @param gobj
  */
 void ftKb_SkSpecialAirNLoop_Coll(Fighter_GObj* gobj)
 {
@@ -561,7 +561,7 @@ void ftKb_SkSpecialAirNLoop_Coll(Fighter_GObj* gobj)
 
 /**
  * @brief Side-B (Hammer) logic for ftKb_SkSpecialAirNCancel_Coll
- * @param gobj 
+ * @param gobj
  */
 void ftKb_SkSpecialAirNCancel_Coll(Fighter_GObj* gobj)
 {
@@ -574,7 +574,7 @@ void ftKb_SkSpecialAirNCancel_Coll(Fighter_GObj* gobj)
 
 /**
  * @brief Side-B (Hammer) logic for ftKb_SkSpecialAirNEnd_Coll
- * @param gobj 
+ * @param gobj
  */
 void ftKb_SkSpecialAirNEnd_Coll(Fighter_GObj* gobj)
 {
@@ -599,7 +599,7 @@ static inline s32 perm_randi(int n)
 
 /**
  * @brief Side-B (Hammer) logic for fn_80106DB0
- * @param gobj 
+ * @param gobj
  */
 void fn_80106DB0(Fighter_GObj* gobj)
 {

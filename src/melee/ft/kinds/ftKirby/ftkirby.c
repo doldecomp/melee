@@ -2559,7 +2559,7 @@ void ftKb_Init_800EE528(void)
 
 /**
  * @brief Main Logic logic for ftKb_Init_OnDeath
- * @param gobj 
+ * @param gobj
  */
 void ftKb_Init_OnDeath(HSD_GObj* gobj)
 {
@@ -2582,7 +2582,7 @@ void ftKb_Init_OnDeath(HSD_GObj* gobj)
 
 /**
  * @brief Main Logic logic for ftKb_Init_OnLoad
- * @param gobj 
+ * @param gobj
  */
 void ftKb_Init_OnLoad(HSD_GObj* gobj)
 {
@@ -2602,7 +2602,7 @@ void ftKb_Init_OnLoad(HSD_GObj* gobj)
 
 /**
  * @brief Main Logic logic for ftKb_Init_800EE74C
- * @param gobj 
+ * @param gobj
  */
 void ftKb_Init_800EE74C(HSD_GObj* gobj)
 {
@@ -2618,7 +2618,7 @@ void ftKb_Init_800EE74C(HSD_GObj* gobj)
 
 /**
  * @brief Main Logic logic for ftKb_Init_800EE7B8
- * @param gobj 
+ * @param gobj
  */
 void ftKb_Init_800EE7B8(HSD_GObj* gobj)
 {
@@ -2633,7 +2633,7 @@ void ftKb_Init_800EE7B8(HSD_GObj* gobj)
 
 /**
  * @brief Main Logic logic for ftKb_Init_UnkMotionStates4
- * @param gobj 
+ * @param gobj
  */
 void ftKb_Init_UnkMotionStates4(HSD_GObj* gobj)
 {
@@ -2669,7 +2669,7 @@ void ftKb_Init_UnkMotionStates4(HSD_GObj* gobj)
 
 /**
  * @brief Main Logic logic for ftKb_Init_OnItemPickup
- * @param gobj 
+ * @param gobj
  * @param costume_id 
  */
 void ftKb_Init_OnItemPickup(HSD_GObj* gobj, bool costume_id)
@@ -2697,7 +2697,7 @@ void ftKb_Init_OnItemPickup(HSD_GObj* gobj, bool costume_id)
 
 /**
  * @brief Main Logic logic for ftKb_Init_OnItemInvisible
- * @param gobj 
+ * @param gobj
  */
 void ftKb_Init_OnItemInvisible(Fighter_GObj* gobj)
 {
@@ -2709,7 +2709,7 @@ void ftKb_Init_OnItemInvisible(Fighter_GObj* gobj)
 
 /**
  * @brief Main Logic logic for ftKb_Init_OnItemVisible
- * @param gobj 
+ * @param gobj
  */
 void ftKb_Init_OnItemVisible(HSD_GObj* gobj)
 {
@@ -2718,7 +2718,7 @@ void ftKb_Init_OnItemVisible(HSD_GObj* gobj)
 
 /**
  * @brief Main Logic logic for ftKb_Init_OnItemDrop
- * @param gobj 
+ * @param gobj
  * @param bool1 
  */
 void ftKb_Init_OnItemDrop(HSD_GObj* gobj, bool bool1)
@@ -2728,7 +2728,7 @@ void ftKb_Init_OnItemDrop(HSD_GObj* gobj, bool bool1)
 
 /**
  * @brief Main Logic logic for ftKb_Init_LoadSpecialAttrs
- * @param gobj 
+ * @param gobj
  */
 void ftKb_Init_LoadSpecialAttrs(HSD_GObj* gobj)
 {
@@ -2737,7 +2737,7 @@ void ftKb_Init_LoadSpecialAttrs(HSD_GObj* gobj)
 
 /**
  * @brief Main Logic logic for ftKb_Init_800EEB00
- * @param gobj 
+ * @param gobj
  * @param costume_id 
  */
 void ftKb_Init_800EEB00(Fighter_GObj* gobj, BoneDynamicsTemplate** costume_id)
@@ -2749,7 +2749,7 @@ void ftKb_Init_800EEB00(Fighter_GObj* gobj, BoneDynamicsTemplate** costume_id)
 
 /**
  * @brief Main Logic logic for ftKb_Init_800EEB1C
- * @param gobj 
+ * @param gobj
  * @param costume_id 
  */
 void ftKb_Init_800EEB1C(Fighter_GObj* gobj, s32* costume_id)
@@ -2759,7 +2759,7 @@ void ftKb_Init_800EEB1C(Fighter_GObj* gobj, s32* costume_id)
 
 /**
  * @brief Main Logic logic for ftKb_Init_OnKnockbackEnter
- * @param gobj 
+ * @param gobj
  */
 void ftKb_Init_OnKnockbackEnter(HSD_GObj* gobj)
 {
@@ -2768,7 +2768,7 @@ void ftKb_Init_OnKnockbackEnter(HSD_GObj* gobj)
 
 /**
  * @brief Main Logic logic for ftKb_Init_OnKnockbackExit
- * @param gobj 
+ * @param gobj
  */
 void ftKb_Init_OnKnockbackExit(HSD_GObj* gobj)
 {
@@ -2907,7 +2907,7 @@ void ftKb_Init_UnkMotionStates5(void)
 
 /**
  * @brief Main Logic logic for ftKb_SpecialN_800EEEC4
- * @param gobj 
+ * @param gobj
  * @param kind 
  */
 void ftKb_SpecialN_800EEEC4(HSD_GObj* gobj, FighterKind kind)
@@ -2921,7 +2921,7 @@ void ftKb_SpecialN_800EEEC4(HSD_GObj* gobj, FighterKind kind)
 
 /**
  * @brief Main Logic logic for ftKb_UnkMtxFunc0
- * @param gobj 
+ * @param gobj
  * @param costume_id 
  * @param mtx 
  */
@@ -2950,7 +2950,7 @@ void ftKb_UnkMtxFunc0(Fighter_GObj* gobj, int costume_id, Mtx mtx)
 
 /**
  * @brief Main Logic logic for ftKb_Init_UnkMotionStates6
- * @param gobj 
+ * @param gobj
  */
 HSD_JObj* ftKb_Init_UnkMotionStates6(Fighter_GObj* gobj)
 {
@@ -2967,7 +2967,7 @@ HSD_JObj* ftKb_Init_UnkMotionStates6(Fighter_GObj* gobj)
 
 /**
  * @brief Main Logic logic for ftKb_SpecialN_800EF040
- * @param gobj 
+ * @param gobj
  * @param costume_id 
  * @param hat 
  */
@@ -3058,7 +3058,7 @@ static inline void ftKb_SpecialN_800EF0E4_finish(Fighter* fp, s32 total_dobjs)
 
 /**
  * @brief Main Logic logic for ftKb_SpecialN_800EF0E4
- * @param gobj 
+ * @param gobj
  * @param costume_id 
  * @param arg2 
  */
@@ -3146,7 +3146,7 @@ void ftKb_SpecialN_800EF0E4(Fighter_GObj* gobj, int costume_id, u8* arg2)
 
 /**
  * @brief Main Logic logic for ftKb_SpecialN_800EF35C
- * @param gobj 
+ * @param gobj
  * @param costume_id 
  * @param arg2 
  */
@@ -3176,7 +3176,7 @@ void ftKb_SpecialN_800EF35C(Fighter_GObj* gobj, int costume_id, u8* arg2)
 
 /**
  * @brief Main Logic logic for ftKb_SpecialN_800EF438
- * @param gobj 
+ * @param gobj
  * @param hat 
  */
 void ftKb_SpecialN_800EF438(Fighter_GObj* gobj, KirbyHatStruct* hat)
@@ -3271,7 +3271,7 @@ void ftKb_SpecialN_800EF438(Fighter_GObj* gobj, KirbyHatStruct* hat)
 /// into a saved register.
 /**
  * @brief Main Logic logic for ftKb_RemoveHatParts
- * @param gobj 
+ * @param gobj
  * @param mask 
  */
 static inline void ftKb_RemoveHatParts(Fighter_GObj* gobj, u32 mask)
@@ -3287,7 +3287,7 @@ static inline void ftKb_RemoveHatParts(Fighter_GObj* gobj, u32 mask)
 
 /**
  * @brief Main Logic logic for ftKb_SpecialN_800EF69C
- * @param gobj 
+ * @param gobj
  * @param costume_id 
  * @param hat 
  */
@@ -3384,7 +3384,7 @@ void ftKb_UnkIntBoolFunc0(Fighter* fp, int costume_id, bool arg2)
 
 /**
  * @brief Main Logic logic for ftKb_Init_UnkCallbackPairs0_0
- * @param gobj 
+ * @param gobj
  */
 void ftKb_Init_UnkCallbackPairs0_0(Fighter_GObj* gobj)
 {
@@ -3396,7 +3396,7 @@ void ftKb_Init_UnkCallbackPairs0_0(Fighter_GObj* gobj)
 
 /**
  * @brief Main Logic logic for ftKb_Init_UnkCallbackPairs0_1
- * @param gobj 
+ * @param gobj
  * @param costume_id 
  * @param arg2 
  */
@@ -3410,7 +3410,7 @@ void ftKb_Init_UnkCallbackPairs0_1(Fighter_GObj* gobj, int costume_id, float arg
 
 /**
  * @brief Main Logic logic for ftKb_SpecialN_800EFA40
- * @param gobj 
+ * @param gobj
  */
 void ftKb_SpecialN_800EFA40(HSD_GObj* gobj)
 {
@@ -3431,7 +3431,7 @@ void ftKb_SpecialN_800EFA40(HSD_GObj* gobj)
 
 /**
  * @brief Main Logic logic for ftKb_SpecialN_800EFAF0_inline
- * @param gobj 
+ * @param gobj
  */
 static inline void ftKb_SpecialN_800EFAF0_inline(Fighter_GObj* gobj)
 {
@@ -3446,7 +3446,7 @@ static inline void ftKb_SpecialN_800EFAF0_inline(Fighter_GObj* gobj)
 
 /**
  * @brief Main Logic logic for ftKb_SpecialN_800EFAF0
- * @param gobj 
+ * @param gobj
  */
 void ftKb_SpecialN_800EFAF0(Fighter_GObj* gobj)
 {
@@ -3455,7 +3455,7 @@ void ftKb_SpecialN_800EFAF0(Fighter_GObj* gobj)
 
 /**
  * @brief Main Logic logic for ftKb_LoadHat
- * @param gobj 
+ * @param gobj
  * @param fp 
  * @param hat 
  */
@@ -3474,7 +3474,7 @@ static inline void ftKb_LoadHat(Fighter_GObj* gobj, Fighter* fp,
 
 /**
  * @brief Main Logic logic for ftKb_SpecialN_800EFB4C
- * @param gobj 
+ * @param gobj
  */
 void ftKb_SpecialN_800EFB4C(HSD_GObj* gobj)
 {
@@ -3488,7 +3488,7 @@ void ftKb_SpecialN_800EFB4C(HSD_GObj* gobj)
 
 /**
  * @brief Main Logic logic for ftKb_SpecialN_800EFBFC
- * @param gobj 
+ * @param gobj
  */
 void ftKb_SpecialN_800EFBFC(Fighter_GObj* gobj)
 {
@@ -3497,7 +3497,7 @@ void ftKb_SpecialN_800EFBFC(Fighter_GObj* gobj)
 
 /**
  * @brief Main Logic logic for ftKb_SpecialN_800EFC58
- * @param gobj 
+ * @param gobj
  */
 void ftKb_SpecialN_800EFC58(HSD_GObj* gobj)
 {
@@ -3511,7 +3511,7 @@ void ftKb_SpecialN_800EFC58(HSD_GObj* gobj)
 
 /**
  * @brief Main Logic logic for ftKb_SpecialN_800EFD08
- * @param gobj 
+ * @param gobj
  */
 void ftKb_SpecialN_800EFD08(Fighter_GObj* gobj)
 {
@@ -3520,7 +3520,7 @@ void ftKb_SpecialN_800EFD08(Fighter_GObj* gobj)
 
 /**
  * @brief Main Logic logic for ftKb_SpecialN_800EFD64
- * @param gobj 
+ * @param gobj
  */
 void ftKb_SpecialN_800EFD64(Fighter_GObj* gobj)
 {
@@ -3535,7 +3535,7 @@ void ftKb_SpecialN_800EFD64(Fighter_GObj* gobj)
 
 /**
  * @brief Main Logic logic for ftKb_SpecialN_800EFE1C
- * @param gobj 
+ * @param gobj
  */
 void ftKb_SpecialN_800EFE1C(Fighter_GObj* gobj)
 {
@@ -3546,7 +3546,7 @@ void ftKb_SpecialN_800EFE1C(Fighter_GObj* gobj)
 
 /**
  * @brief Main Logic logic for ftKb_SpecialN_800EFE80
- * @param gobj 
+ * @param gobj
  */
 void ftKb_SpecialN_800EFE80(Fighter_GObj* gobj)
 {
@@ -3561,7 +3561,7 @@ void ftKb_SpecialN_800EFE80(Fighter_GObj* gobj)
 
 /**
  * @brief Main Logic logic for ftKb_SpecialN_800EFF38
- * @param gobj 
+ * @param gobj
  */
 void ftKb_SpecialN_800EFF38(Fighter_GObj* gobj)
 {
@@ -3572,7 +3572,7 @@ void ftKb_SpecialN_800EFF38(Fighter_GObj* gobj)
 
 /**
  * @brief Main Logic logic for ftKb_SpecialN_800EFF9C
- * @param gobj 
+ * @param gobj
  */
 void ftKb_SpecialN_800EFF9C(Fighter_GObj* gobj)
 {
@@ -3587,7 +3587,7 @@ void ftKb_SpecialN_800EFF9C(Fighter_GObj* gobj)
 
 /**
  * @brief Main Logic logic for ftKb_SpecialN_800F0054
- * @param gobj 
+ * @param gobj
  */
 void ftKb_SpecialN_800F0054(Fighter_GObj* gobj)
 {
@@ -3598,7 +3598,7 @@ void ftKb_SpecialN_800F0054(Fighter_GObj* gobj)
 
 /**
  * @brief Main Logic logic for ftKb_SpecialN_800F00B8
- * @param gobj 
+ * @param gobj
  */
 void ftKb_SpecialN_800F00B8(HSD_GObj* gobj)
 {
@@ -3612,7 +3612,7 @@ void ftKb_SpecialN_800F00B8(HSD_GObj* gobj)
 
 /**
  * @brief Main Logic logic for ftKb_SpecialN_800F0168
- * @param gobj 
+ * @param gobj
  */
 void ftKb_SpecialN_800F0168(Fighter_GObj* gobj)
 {
@@ -3621,7 +3621,7 @@ void ftKb_SpecialN_800F0168(Fighter_GObj* gobj)
 
 /**
  * @brief Main Logic logic for ftKb_SpecialN_800F01C4
- * @param gobj 
+ * @param gobj
  */
 void ftKb_SpecialN_800F01C4(HSD_GObj* gobj)
 {
@@ -3635,7 +3635,7 @@ void ftKb_SpecialN_800F01C4(HSD_GObj* gobj)
 
 /**
  * @brief Main Logic logic for ftKb_SpecialN_800F0274
- * @param gobj 
+ * @param gobj
  */
 void ftKb_SpecialN_800F0274(Fighter_GObj* gobj)
 {
@@ -3644,7 +3644,7 @@ void ftKb_SpecialN_800F0274(Fighter_GObj* gobj)
 
 /**
  * @brief Main Logic logic for ftKb_SpecialN_800F02D0
- * @param gobj 
+ * @param gobj
  */
 void ftKb_SpecialN_800F02D0(HSD_GObj* gobj)
 {
@@ -3658,7 +3658,7 @@ void ftKb_SpecialN_800F02D0(HSD_GObj* gobj)
 
 /**
  * @brief Main Logic logic for ftKb_SpecialN_800F0380
- * @param gobj 
+ * @param gobj
  */
 void ftKb_SpecialN_800F0380(Fighter_GObj* gobj)
 {
@@ -3667,7 +3667,7 @@ void ftKb_SpecialN_800F0380(Fighter_GObj* gobj)
 
 /**
  * @brief Main Logic logic for ftKb_SpecialN_800F03DC
- * @param gobj 
+ * @param gobj
  */
 void ftKb_SpecialN_800F03DC(Fighter_GObj* gobj)
 {
@@ -3682,7 +3682,7 @@ void ftKb_SpecialN_800F03DC(Fighter_GObj* gobj)
 
 /**
  * @brief Main Logic logic for ftKb_SpecialN_800F0494
- * @param gobj 
+ * @param gobj
  */
 void ftKb_SpecialN_800F0494(Fighter_GObj* gobj)
 {
@@ -3693,7 +3693,7 @@ void ftKb_SpecialN_800F0494(Fighter_GObj* gobj)
 
 /**
  * @brief Main Logic logic for ftKb_SpecialN_800F04F8
- * @param gobj 
+ * @param gobj
  */
 void ftKb_SpecialN_800F04F8(HSD_GObj* gobj)
 {
@@ -3707,7 +3707,7 @@ void ftKb_SpecialN_800F04F8(HSD_GObj* gobj)
 
 /**
  * @brief Main Logic logic for ftKb_SpecialN_800F05A8
- * @param gobj 
+ * @param gobj
  */
 void ftKb_SpecialN_800F05A8(Fighter_GObj* gobj)
 {
@@ -3716,7 +3716,7 @@ void ftKb_SpecialN_800F05A8(Fighter_GObj* gobj)
 
 /**
  * @brief Main Logic logic for ftKb_SpecialN_800F0604
- * @param gobj 
+ * @param gobj
  */
 void ftKb_SpecialN_800F0604(HSD_GObj* gobj)
 {
@@ -3730,7 +3730,7 @@ void ftKb_SpecialN_800F0604(HSD_GObj* gobj)
 
 /**
  * @brief Main Logic logic for ftKb_SpecialN_800F06B4
- * @param gobj 
+ * @param gobj
  */
 void ftKb_SpecialN_800F06B4(Fighter_GObj* gobj)
 {
@@ -3739,7 +3739,7 @@ void ftKb_SpecialN_800F06B4(Fighter_GObj* gobj)
 
 /**
  * @brief Main Logic logic for ftKb_SpecialN_800F0710
- * @param gobj 
+ * @param gobj
  */
 void ftKb_SpecialN_800F0710(HSD_GObj* gobj)
 {
@@ -3753,7 +3753,7 @@ void ftKb_SpecialN_800F0710(HSD_GObj* gobj)
 
 /**
  * @brief Main Logic logic for ftKb_SpecialN_800F07C0
- * @param gobj 
+ * @param gobj
  */
 void ftKb_SpecialN_800F07C0(Fighter_GObj* gobj)
 {
@@ -3762,7 +3762,7 @@ void ftKb_SpecialN_800F07C0(Fighter_GObj* gobj)
 
 /**
  * @brief Main Logic logic for ftKb_SpecialN_800F081C
- * @param gobj 
+ * @param gobj
  */
 void ftKb_SpecialN_800F081C(Fighter_GObj* gobj)
 {
@@ -3777,7 +3777,7 @@ void ftKb_SpecialN_800F081C(Fighter_GObj* gobj)
 
 /**
  * @brief Main Logic logic for ftKb_SpecialN_800F08D4
- * @param gobj 
+ * @param gobj
  */
 void ftKb_SpecialN_800F08D4(Fighter_GObj* gobj)
 {
@@ -3788,7 +3788,7 @@ void ftKb_SpecialN_800F08D4(Fighter_GObj* gobj)
 
 /**
  * @brief Main Logic logic for ftKb_SpecialN_800F0938
- * @param gobj 
+ * @param gobj
  */
 void ftKb_SpecialN_800F0938(Fighter_GObj* gobj)
 {
@@ -3803,7 +3803,7 @@ void ftKb_SpecialN_800F0938(Fighter_GObj* gobj)
 
 /**
  * @brief Main Logic logic for ftKb_SpecialN_800F09F0
- * @param gobj 
+ * @param gobj
  */
 void ftKb_SpecialN_800F09F0(Fighter_GObj* gobj)
 {
@@ -3814,7 +3814,7 @@ void ftKb_SpecialN_800F09F0(Fighter_GObj* gobj)
 
 /**
  * @brief Main Logic logic for ftKb_SpecialN_800F0A54
- * @param gobj 
+ * @param gobj
  */
 void ftKb_SpecialN_800F0A54(Fighter_GObj* gobj)
 {
@@ -3829,7 +3829,7 @@ void ftKb_SpecialN_800F0A54(Fighter_GObj* gobj)
 
 /**
  * @brief Main Logic logic for ftKb_SpecialN_800F0B0C
- * @param gobj 
+ * @param gobj
  */
 void ftKb_SpecialN_800F0B0C(Fighter_GObj* gobj)
 {
@@ -3840,7 +3840,7 @@ void ftKb_SpecialN_800F0B0C(Fighter_GObj* gobj)
 
 /**
  * @brief Main Logic logic for ftKb_SpecialN_800F0B70
- * @param gobj 
+ * @param gobj
  */
 void ftKb_SpecialN_800F0B70(HSD_GObj* gobj)
 {
@@ -3854,7 +3854,7 @@ void ftKb_SpecialN_800F0B70(HSD_GObj* gobj)
 
 /**
  * @brief Main Logic logic for ftKb_SpecialN_800F0C20
- * @param gobj 
+ * @param gobj
  */
 void ftKb_SpecialN_800F0C20(Fighter_GObj* gobj)
 {
@@ -3863,7 +3863,7 @@ void ftKb_SpecialN_800F0C20(Fighter_GObj* gobj)
 
 /**
  * @brief Main Logic logic for ftKb_SpecialN_800F0C7C
- * @param gobj 
+ * @param gobj
  */
 void ftKb_SpecialN_800F0C7C(Fighter_GObj* gobj)
 {
@@ -3878,7 +3878,7 @@ void ftKb_SpecialN_800F0C7C(Fighter_GObj* gobj)
 
 /**
  * @brief Main Logic logic for ftKb_SpecialN_800F0D34
- * @param gobj 
+ * @param gobj
  */
 void ftKb_SpecialN_800F0D34(Fighter_GObj* gobj)
 {
@@ -3889,7 +3889,7 @@ void ftKb_SpecialN_800F0D34(Fighter_GObj* gobj)
 
 /**
  * @brief Main Logic logic for ftKb_SpecialN_800F0D98
- * @param gobj 
+ * @param gobj
  */
 void ftKb_SpecialN_800F0D98(HSD_GObj* gobj)
 {
@@ -3903,7 +3903,7 @@ void ftKb_SpecialN_800F0D98(HSD_GObj* gobj)
 
 /**
  * @brief Main Logic logic for ftKb_SpecialN_800F0E48
- * @param gobj 
+ * @param gobj
  */
 void ftKb_SpecialN_800F0E48(Fighter_GObj* gobj)
 {
@@ -3912,7 +3912,7 @@ void ftKb_SpecialN_800F0E48(Fighter_GObj* gobj)
 
 /**
  * @brief Main Logic logic for ftKb_SpecialN_800F0EA4
- * @param gobj 
+ * @param gobj
  */
 void ftKb_SpecialN_800F0EA4(Fighter_GObj* gobj)
 {
@@ -3927,7 +3927,7 @@ void ftKb_SpecialN_800F0EA4(Fighter_GObj* gobj)
 
 /**
  * @brief Main Logic logic for ftKb_SpecialN_800F0F5C
- * @param gobj 
+ * @param gobj
  */
 void ftKb_SpecialN_800F0F5C(Fighter_GObj* gobj)
 {
@@ -3940,7 +3940,7 @@ void ftKb_SpecialN_800F0F5C(Fighter_GObj* gobj)
 /// ftKb_SpecialN_800EF69C.
 /**
  * @brief Main Logic logic for ftKb_LoadHatParts
- * @param gobj 
+ * @param gobj
  * @param costume_id 
  * @param hat 
  */
@@ -3963,7 +3963,7 @@ static inline void ftKb_LoadHatParts(Fighter_GObj* gobj, int costume_id,
 
 /**
  * @brief Main Logic logic for ftKb_SpecialN_800F0FC0
- * @param gobj 
+ * @param gobj
  */
 void ftKb_SpecialN_800F0FC0(Fighter_GObj* gobj)
 {
@@ -3976,7 +3976,7 @@ void ftKb_SpecialN_800F0FC0(Fighter_GObj* gobj)
 
 /**
  * @brief Main Logic logic for ftKb_SpecialN_800F10A4
- * @param gobj 
+ * @param gobj
  */
 void ftKb_SpecialN_800F10A4(Fighter_GObj* gobj)
 {
@@ -3986,7 +3986,7 @@ void ftKb_SpecialN_800F10A4(Fighter_GObj* gobj)
 /// Load Jigglypuff's hat for Kirby copy ability.
 /**
  * @brief Main Logic logic for ftKb_SpecialN_800F10D4
- * @param gobj 
+ * @param gobj
  */
 void ftKb_SpecialN_800F10D4(Fighter_GObj* gobj)
 {
@@ -4000,7 +4000,7 @@ void ftKb_SpecialN_800F10D4(Fighter_GObj* gobj)
 
 /**
  * @brief Main Logic logic for ftKb_SpecialN_800F11AC
- * @param gobj 
+ * @param gobj
  */
 void ftKb_SpecialN_800F11AC(Fighter_GObj* gobj)
 {
@@ -4012,7 +4012,7 @@ void ftKb_SpecialN_800F11AC(Fighter_GObj* gobj)
 /// Load Mewtwo's hat for Kirby copy ability.
 /**
  * @brief Main Logic logic for ftKb_SpecialN_800F11F0
- * @param gobj 
+ * @param gobj
  */
 void ftKb_SpecialN_800F11F0(Fighter_GObj* gobj)
 {
@@ -4026,7 +4026,7 @@ void ftKb_SpecialN_800F11F0(Fighter_GObj* gobj)
 
 /**
  * @brief Main Logic logic for ftKb_SpecialN_800F12C8
- * @param gobj 
+ * @param gobj
  */
 void ftKb_SpecialN_800F12C8(Fighter_GObj* gobj)
 {
@@ -4038,7 +4038,7 @@ void ftKb_SpecialN_800F12C8(Fighter_GObj* gobj)
 /// Load Falco's hat for Kirby copy ability.
 /**
  * @brief Main Logic logic for ftKb_SpecialN_800F130C
- * @param gobj 
+ * @param gobj
  */
 void ftKb_SpecialN_800F130C(Fighter_GObj* gobj)
 {
@@ -4051,7 +4051,7 @@ void ftKb_SpecialN_800F130C(Fighter_GObj* gobj)
 
 /**
  * @brief Main Logic logic for ftKb_SpecialN_800F13F0
- * @param gobj 
+ * @param gobj
  */
 void ftKb_SpecialN_800F13F0(Fighter_GObj* gobj)
 {
@@ -4060,7 +4060,7 @@ void ftKb_SpecialN_800F13F0(Fighter_GObj* gobj)
 
 /**
  * @brief Main Logic logic for ftKb_SpecialN_800F1420
- * @param gobj 
+ * @param gobj
  * @param costume_id 
  */
 u8* ftKb_SpecialN_800F1420(Fighter_GObj* gobj, const u32* costume_id)
@@ -4097,7 +4097,7 @@ u8* ftKb_SpecialN_800F1420(Fighter_GObj* gobj, const u32* costume_id)
 
 /**
  * @brief Main Logic logic for ftKb_SpecialN_800F14B4
- * @param gobj 
+ * @param gobj
  */
 void ftKb_SpecialN_800F14B4(Fighter_GObj* gobj)
 {
@@ -4119,7 +4119,7 @@ void ftKb_SpecialN_800F14B4(Fighter_GObj* gobj)
 
 /**
  * @brief Main Logic logic for ftKb_SpecialN_800F15D8
- * @param gobj 
+ * @param gobj
  */
 void ftKb_SpecialN_800F15D8(Fighter_GObj* gobj)
 {
@@ -4133,7 +4133,7 @@ void ftKb_SpecialN_800F15D8(Fighter_GObj* gobj)
 
 /**
  * @brief Main Logic logic for ftKb_SpecialN_Enter
- * @param gobj 
+ * @param gobj
  */
 void ftKb_SpecialN_Enter(Fighter_GObj* gobj)
 {
@@ -4148,7 +4148,7 @@ void ftKb_SpecialN_Enter(Fighter_GObj* gobj)
 
 /**
  * @brief Main Logic logic for ftKb_SpecialAirN_Enter
- * @param gobj 
+ * @param gobj
  */
 void ftKb_SpecialAirN_Enter(Fighter_GObj* gobj)
 {
@@ -4162,7 +4162,7 @@ void ftKb_SpecialAirN_Enter(Fighter_GObj* gobj)
 
 /**
  * @brief Main Logic logic for ftKb_SpecialN_800F16D0
- * @param gobj 
+ * @param gobj
  * @param kind 
  */
 void ftKb_SpecialN_800F16D0(Fighter_GObj* gobj, FighterKind kind)
@@ -4277,7 +4277,7 @@ void ftKb_SpecialN_800F16D0(Fighter_GObj* gobj, FighterKind kind)
 
 /**
  * @brief Main Logic logic for ftKb_SpecialN_800F190C
- * @param gobj 
+ * @param gobj
  * @param kind 
  */
 void ftKb_SpecialN_800F190C(Fighter_GObj* gobj, FighterKind kind)
@@ -4317,7 +4317,7 @@ void ftKb_SpecialN_800F190C(Fighter_GObj* gobj, FighterKind kind)
 
 /**
  * @brief Main Logic logic for ftKb_SpecialN_800F19AC
- * @param gobj 
+ * @param gobj
  */
 void ftKb_SpecialN_800F19AC(Fighter_GObj* gobj)
 {
@@ -4369,7 +4369,7 @@ void ftKb_SpecialN_800F19AC(Fighter_GObj* gobj)
 
 /**
  * @brief Main Logic logic for ftKb_SpecialN_800F1A8C
- * @param gobj 
+ * @param gobj
  */
 void ftKb_SpecialN_800F1A8C(Fighter_GObj* gobj)
 {
@@ -4421,7 +4421,7 @@ void ftKb_SpecialN_800F1A8C(Fighter_GObj* gobj)
 
 /**
  * @brief Main Logic logic for ftKb_Init_UnkMotionStates3
- * @param gobj 
+ * @param gobj
  */
 void ftKb_Init_UnkMotionStates3(Fighter_GObj* gobj)
 {
@@ -4440,7 +4440,7 @@ void ftKb_Init_UnkMotionStates3(Fighter_GObj* gobj)
 
 /**
  * @brief Main Logic logic for ftKb_SpecialN_800F1BAC
- * @param gobj 
+ * @param gobj
  * @param kind 
  * @param arg2 
  */
@@ -4468,7 +4468,7 @@ void ftKb_SpecialN_800F1BAC(Fighter_GObj* gobj, s32 kind, bool arg2)
 
 /**
  * @brief Main Logic logic for fn_800F1CA0
- * @param gobj 
+ * @param gobj
  */
 bool fn_800F1CA0(HSD_GObj* gobj)
 {
@@ -4487,7 +4487,7 @@ bool fn_800F1CA0(HSD_GObj* gobj)
 
 /**
  * @brief Main Logic logic for ftKb_SpecialN_800F1CD8
- * @param gobj 
+ * @param gobj
  */
 s32 ftKb_SpecialN_800F1CD8(HSD_GObj* gobj)
 {
@@ -4499,7 +4499,7 @@ s32 ftKb_SpecialN_800F1CD8(HSD_GObj* gobj)
 
 /**
  * @brief Main Logic logic for ftKb_SpecialN_800F1D24
- * @param gobj 
+ * @param gobj
  */
 void ftKb_SpecialN_800F1D24(Fighter_GObj* gobj)
 {
@@ -4523,7 +4523,7 @@ void ftKb_SpecialN_800F1D24(Fighter_GObj* gobj)
 
 /**
  * @brief Main Logic logic for ftKb_SpecialN_800F1DAC
- * @param gobj 
+ * @param gobj
  */
 void ftKb_SpecialN_800F1DAC(HSD_GObj* gobj)
 {
@@ -4567,7 +4567,7 @@ void ftKb_SpecialN_800F1DAC(HSD_GObj* gobj)
 
 /**
  * @brief Main Logic logic for ftKb_SpecialN_800F1F1C
- * @param gobj 
+ * @param gobj
  * @param pos 
  */
 void ftKb_SpecialN_800F1F1C(Fighter_GObj* gobj, Vec3* pos)

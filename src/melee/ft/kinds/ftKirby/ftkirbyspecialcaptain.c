@@ -26,7 +26,7 @@
 
 /**
  * @brief Neutral-B Copy Ability (Captain) logic for ftKb_SpecialNCa_800F99BC
- * @param gobj 
+ * @param gobj
  */
 void ftKb_SpecialNCa_800F99BC(Fighter_GObj* gobj)
 {
@@ -50,7 +50,7 @@ void ftKb_SpecialNCa_800F99BC(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Captain) logic for ftKb_SpecialNCa_800F9A54
- * @param gobj 
+ * @param gobj
  */
 void ftKb_SpecialNCa_800F9A54(Fighter_GObj* gobj)
 {
@@ -71,7 +71,7 @@ void ftKb_SpecialNCa_800F9A54(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Captain) logic for ftKb_CaSpecialN_Anim
- * @param gobj 
+ * @param gobj
  */
 void ftKb_CaSpecialN_Anim(Fighter_GObj* gobj)
 {
@@ -82,7 +82,7 @@ void ftKb_CaSpecialN_Anim(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Captain) logic for ftKb_CaSpecialAirN_Anim
- * @param gobj 
+ * @param gobj
  */
 void ftKb_CaSpecialAirN_Anim(Fighter_GObj* gobj)
 {
@@ -95,7 +95,7 @@ void ftKb_CaSpecialN_IASA(Fighter_GObj* gobj) {}
 
 /**
  * @brief Neutral-B Copy Ability (Captain) logic for ftKb_CaSpecialAirN_IASA
- * @param gobj 
+ * @param gobj
  */
 void ftKb_CaSpecialAirN_IASA(Fighter_GObj* gobj)
 {
@@ -140,7 +140,7 @@ void ftKb_CaSpecialAirN_IASA(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Captain) logic for ftKb_CaSpecialN_Phys
- * @param gobj 
+ * @param gobj
  */
 void ftKb_CaSpecialN_Phys(Fighter_GObj* gobj)
 {
@@ -177,7 +177,7 @@ void ftKb_CaSpecialN_Phys(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Captain) logic for ftKb_CaSpecialAirN_Phys
- * @param gobj 
+ * @param gobj
  */
 void ftKb_CaSpecialAirN_Phys(Fighter_GObj* gobj)
 {
@@ -231,7 +231,7 @@ static u32 const ftKb_Ca_transition_flags =
 
 /**
  * @brief Neutral-B Copy Ability (Captain) logic for ftKb_CaSpecialN_Coll
- * @param gobj 
+ * @param gobj
  */
 void ftKb_CaSpecialN_Coll(Fighter_GObj* gobj)
 {
@@ -260,7 +260,7 @@ void ftKb_CaSpecialN_Coll(Fighter_GObj* gobj)
 
 /**
  * @brief Neutral-B Copy Ability (Captain) logic for ftKb_CaSpecialAirN_Coll
- * @param gobj 
+ * @param gobj
  */
 void ftKb_CaSpecialAirN_Coll(Fighter_GObj* gobj)
 {

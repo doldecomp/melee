@@ -12,7 +12,7 @@
 
 /**
  * @brief Kirby Module logic for ftKb_SpecialN_set_cbs
- * @param gobj 
+ * @param gobj
  */
 static inline void ftKb_SpecialN_set_cbs(Fighter_GObj* gobj)
 {
@@ -23,7 +23,7 @@ static inline void ftKb_SpecialN_set_cbs(Fighter_GObj* gobj)
 
 /**
  * @brief Kirby Module logic for ftKb_SpecialN_set_cbs2
- * @param gobj 
+ * @param gobj
  */
 static inline void ftKb_SpecialN_set_cbs2(Fighter_GObj* gobj)
 {
