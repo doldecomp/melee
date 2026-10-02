@@ -1,9 +1,9 @@
 /**
  * @file itzako.h
  * @brief Zako (Fighting Wireframes) Item Module
- * @details Handles the initialization, physics, spawning, and specific behaviors
- * for items associated with the Fighting Wireframes (Zako) in Multi-Man Melee.
- * Module prefix: it (Item)
+ * @details Handles the initialization, physics, spawning, and specific
+ * behaviors for items associated with the Fighting Wireframes (Zako) in
+ * Multi-Man Melee. Module prefix: it (Item)
  */
 #ifndef GALE01_ITZAKO
 #define GALE01_ITZAKO
@@ -35,16 +35,20 @@
 /* 27BB1C */ void it_8027BB1C(Vec3* pos, Vec3* target);
 
 /** @brief Rotates Zako items based on terrain collision normals */
-/* 27BBF4 */ void it_8027BBF4(Item_GObj* item_gobj, bool arg_chk, f64 rotation_factor, f32 frames);
+/* 27BBF4 */ void it_8027BBF4(Item_GObj* item_gobj, bool arg_chk,
+                              f64 rotation_factor, f32 frames);
 
 /** @brief Internal wrapper for normal-based rotation (variant 1) */
-/* 27C0A8 */ void it_8027C0A8(Item_GObj* item_gobj, f32 rotation_factor, f32 frames);
+/* 27C0A8 */ void it_8027C0A8(Item_GObj* item_gobj, f32 rotation_factor,
+                              f32 frames);
 
 /** @brief Internal wrapper for normal-based rotation (variant 2) */
-/* 27C0CC */ void it_8027C0CC(Item_GObj* item_gobj, f32 rotation_factor, f32 frames);
+/* 27C0CC */ void it_8027C0CC(Item_GObj* item_gobj, f32 rotation_factor,
+                              f32 frames);
 
 /** @brief Computes Zako item rotation from arbitrary reference angles */
-/* 27C0F0 */ void it_8027C0F0(Item_GObj* item_gobj, Vec3* target, f64 rotation_factor, f32 frames);
+/* 27C0F0 */ void it_8027C0F0(Item_GObj* item_gobj, Vec3* target,
+                              f64 rotation_factor, f32 frames);
 
 /** @brief Corrects X/Y/Z rotations for a Zako item */
 /* 27C56C */ void it_8027C56C(Item_GObj* item_gobj, f32 y_rot);
@@ -56,7 +60,8 @@
 /* 27C79C */ bool it_8027C79C(Item_GObj* item_gobj);
 
 /** @brief Processes Zako item state with a provided callback function */
-/* 27C824 */ bool it_8027C824(Item_GObj* item_gobj, s32 (*callback_func)(Item_GObj*));
+/* 27C824 */ bool it_8027C824(Item_GObj* item_gobj,
+                              s32 (*callback_func)(Item_GObj*));
 
 /** @brief Handles Zako item destruction callback */
 /* 27C8B0 */ void it_2725_Logic9_Destroyed(Item_GObj* item_gobj);
@@ -92,6 +97,7 @@
 /* 27CE44 */ void it_8027CE44(Item_GObj* item_gobj);
 
 /** @brief Game&Watch specific initialization hook for Zako interactions */
-/* 27CE64 */ void it_8027CE64(Item_GObj* item_gobj, HSD_GObj* fighter_gobj, void* attr_address);
+/* 27CE64 */ void it_8027CE64(Item_GObj* item_gobj, HSD_GObj* fighter_gobj,
+                              void* attr_address);
 
 #endif

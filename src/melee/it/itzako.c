@@ -1,9 +1,9 @@
 /**
  * @file itzako.c
  * @brief Zako (Fighting Wireframes) Item Module
- * @details Handles the initialization, physics, spawning, and specific behaviors
- * for items associated with the Fighting Wireframes (Zako) in Multi-Man Melee.
- * Module prefix: it (Item)
+ * @details Handles the initialization, physics, spawning, and specific
+ * behaviors for items associated with the Fighting Wireframes (Zako) in
+ * Multi-Man Melee. Module prefix: it (Item)
  */
 #include "itzako.h"
 
@@ -148,7 +148,8 @@ static inline f32 it_8027B798_CalcAngle(GroundOrAir ground_or_air, s32 angle,
 }
 
 /**
- * @brief Calculates Zako item knockback velocity based on hit angle it_8027B798
+ * @brief Calculates Zako item knockback velocity based on hit angle
+ * it_8027B798
  * @param gobj
  * @param out_vel
  * @return bool
@@ -302,7 +303,8 @@ void it_8027BB1C(Vec3* pos, Vec3* target)
  * @param rotation_factor
  * @param frames
  */
-void it_8027BBF4(Item_GObj* item_gobj, bool arg_chk, f64 rotation_factor, f32 frames)
+void it_8027BBF4(Item_GObj* item_gobj, bool arg_chk, f64 rotation_factor,
+                 f32 frames)
 {
     f32 temp_f1;
     f32 temp_f30;
