@@ -1,3 +1,13 @@
+/**
+ * @file ftfoxspecialhi.c
+ * @brief Up-B (Fire Fox / Falco Firebird)
+ * @details Implements Fox and Falco's Up-B recovery move. Handles the grounded
+ * and aerial charging/aiming phase, launch trajectory physics, model rotation,
+ * collision detection against terrain (including wall/ceiling bonk bounces),
+ * and transitions into landing lag or special fall (freefall).
+ * Module prefix: ftFx
+ */
+
 #include "ftfoxspecialhi.h"
 
 #include <Runtime/platform.h>
@@ -24,17 +34,22 @@
 #include <melee/ft/types.h>
 #include <melee/lb/lbvector.h>
 
+/// Motion flags for Fire Fox collision state changes
 #define FTFOX_SPECIALHI_COLL_FLAG                                             \
     Ft_MF_KeepGfx | Ft_MF_SkipMatAnim | Ft_MF_UpdateCmd | Ft_MF_SkipColAnim | \
         Ft_MF_SkipItemVis | Ft_MF_Unk19 | Ft_MF_SkipModelPartVis |            \
         Ft_MF_SkipModelFlags | Ft_MF_Unk27
 
-/// @todo Move elsewhere.
+/// Half Pi constant for default upward launch angle (90 degrees in radians)
 #define HALF_PI32 (1.5707963705062866f)
 
-/// @todo Move elsewhere.
+/// Two Pi constant for full rotation
 #define DOUBLE_PI32 (6.2831854820251465f)
 
+/**
+ * @brief Up-B (Fire Fox) - Spawns launch flame trail particle effects
+ * @param gobj The fighter's game object
+ */
 void ftFx_SpecialHi_CreateLaunchGFX(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -50,6 +65,10 @@ void ftFx_SpecialHi_CreateLaunchGFX(HSD_GObj* gobj)
     fp->accessory4_cb = NULL;
 }
 
+/**
+ * @brief Up-B (Fire Fox) - Spawns charging flame aura particle effects
+ * @param gobj The fighter's game object
+ */
 void ftFx_SpecialHi_CreateChargeGFX(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -65,6 +84,10 @@ void ftFx_SpecialHi_CreateChargeGFX(HSD_GObj* gobj)
     fp->accessory4_cb = NULL;
 }
 
+/**
+ * @brief Action State initialization for grounded Up-B (Fire Fox) charge
+ * @param gobj The fighter's game object
+ */
 void ftFx_SpecialHi_Enter(HSD_GObj* gobj)
 {
     Fighter* fp;
@@ -73,6 +96,7 @@ void ftFx_SpecialHi_Enter(HSD_GObj* gobj)
     fp = GET_FIGHTER(gobj);
     da = getFtSpecialAttrs(fp);
 
+    // Initialize gravity delay and initial velocity dampening
     fp->mv.fx.SpecialHi.gravityDelay = da->x54_FOX_FIREFOX_GRAVITY_DELAY;
     fp->gr_vel /= da->x58_FOX_FIREFOX_VEL_X;
 
@@ -83,6 +107,10 @@ void ftFx_SpecialHi_Enter(HSD_GObj* gobj)
     fp->accessory4_cb = ftFx_SpecialHi_CreateChargeGFX;
 }
 
+/**
+ * @brief Action State initialization for aerial Up-B (Fire Fox) charge
+ * @param gobj The fighter's game object
+ */
 void ftFx_SpecialAirHiStart_Enter(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -100,6 +128,11 @@ void ftFx_SpecialAirHiStart_Enter(HSD_GObj* gobj)
     fp->accessory4_cb = ftFx_SpecialHi_CreateChargeGFX;
 }
 
+/**
+ * @brief Up-B (Fire Fox) - Rotates the fighter's model to align with launch
+ * angle
+ * @param gobj The fighter's game object
+ */
 static void ftFox_SpecialHi_RotateModel(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -107,6 +140,10 @@ static void ftFox_SpecialHi_RotateModel(HSD_GObj* gobj)
                   (2 * (float) M_PI) - fp->mv.fx.SpecialHi.rotateModel);
 }
 
+/**
+ * @brief Animation callback for grounded Up-B (Fire Fox) charge
+ * @param gobj The fighter's game object
+ */
 void ftFx_SpecialHiHold_Anim(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -121,6 +158,10 @@ void ftFx_SpecialHiHold_Anim(HSD_GObj* gobj)
     }
 }
 
+/**
+ * @brief Animation callback for aerial Up-B (Fire Fox) charge
+ * @param gobj The fighter's game object
+ */
 void ftFx_SpecialHiHoldAir_Anim(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -134,21 +175,39 @@ void ftFx_SpecialHiHoldAir_Anim(HSD_GObj* gobj)
     }
 }
 
+/**
+ * @brief IASA callback for grounded Up-B (Fire Fox) charge (no interrupts)
+ * @param gobj The fighter's game object
+ */
 void ftFx_SpecialHiHold_IASA(HSD_GObj* gobj)
 {
     return;
 }
 
+/**
+ * @brief IASA callback for aerial Up-B (Fire Fox) charge (no interrupts)
+ * @param gobj The fighter's game object
+ */
 void ftFx_SpecialHiHoldAir_IASA(HSD_GObj* gobj)
 {
     return;
 }
 
+/**
+ * @brief Physics callback for grounded Up-B (Fire Fox) charge
+ * @param gobj The fighter's game object
+ */
 void ftFx_SpecialHiHold_Phys(HSD_GObj* gobj)
 {
     ft_80084F3C(gobj);
 }
 
+/**
+ * @brief Physics callback for aerial Up-B (Fire Fox) charge
+ * @details Freezes vertical movement during gravity delay; falls and applies
+ * air drag after.
+ * @param gobj The fighter's game object
+ */
 void ftFx_SpecialHiHoldAir_Phys(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -168,6 +227,10 @@ void ftFx_SpecialHiHoldAir_Phys(HSD_GObj* gobj)
         fp, da->x5C_FOX_FIREFOX_AIR_MOMENTUM_PRESERVE_X);
 }
 
+/**
+ * @brief Collision callback for grounded Up-B (Fire Fox) charge
+ * @param gobj The fighter's game object
+ */
 void ftFx_SpecialHiHold_Coll(HSD_GObj* gobj)
 {
     if (ft_80082708(gobj) == false) {
@@ -175,6 +238,10 @@ void ftFx_SpecialHiHold_Coll(HSD_GObj* gobj)
     }
 }
 
+/**
+ * @brief Collision callback for aerial Up-B (Fire Fox) charge
+ * @param gobj The fighter's game object
+ */
 void ftFx_SpecialHiHoldAir_Coll(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -189,6 +256,10 @@ void ftFx_SpecialHiHoldAir_Coll(HSD_GObj* gobj)
     }
 }
 
+/**
+ * @brief Ground to air transition during Up-B (Fire Fox) charge
+ * @param gobj The fighter's game object
+ */
 void ftFx_SpecialHiHold_GroundToAir(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -201,6 +272,10 @@ void ftFx_SpecialHiHold_GroundToAir(HSD_GObj* gobj)
     fp->accessory4_cb = ftFx_SpecialHi_CreateChargeGFX;
 }
 
+/**
+ * @brief Air to ground transition during Up-B (Fire Fox) charge
+ * @param gobj The fighter's game object
+ */
 void ftFx_SpecialHiHoldAir_AirToGround(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -213,6 +288,12 @@ void ftFx_SpecialHiHoldAir_AirToGround(HSD_GObj* gobj)
     ftCommon_ClampAirDrift(fp);
 }
 
+/**
+ * @brief Animation callback for grounded Up-B (Fire Fox) launch travel
+ * @details Decrements travel frames (typically 42). Transitions to
+ * landing/fall on finish.
+ * @param gobj The fighter's game object
+ */
 void ftFx_SpecialHi_Anim(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -230,6 +311,10 @@ void ftFx_SpecialHi_Anim(HSD_GObj* gobj)
     }
 }
 
+/**
+ * @brief Animation callback for aerial Up-B (Fire Fox) launch travel
+ * @param gobj The fighter's game object
+ */
 void ftFx_SpecialAirHi_Anim(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -246,16 +331,29 @@ void ftFx_SpecialAirHi_Anim(HSD_GObj* gobj)
     }
 }
 
+/**
+ * @brief IASA callback for grounded Up-B (Fire Fox) launch (no interrupts)
+ * @param gobj The fighter's game object
+ */
 void ftFx_SpecialHi_IASA(HSD_GObj* gobj)
 {
     return;
 }
 
+/**
+ * @brief IASA callback for aerial Up-B (Fire Fox) launch (no interrupts)
+ * @param gobj The fighter's game object
+ */
 void ftFx_SpecialAirHi_IASA(HSD_GObj* gobj)
 {
     return;
 }
 
+/**
+ * @brief Physics callback for grounded Up-B (Fire Fox) launch travel
+ * @details Applies reverse ground acceleration after duration threshold.
+ * @param gobj The fighter's game object
+ */
 void ftFx_SpecialHi_Phys(HSD_GObj* gobj)
 {
     /// @todo Possibly common inline with #ftFx_SpecialAirHi_Phys.
@@ -272,6 +370,12 @@ void ftFx_SpecialHi_Phys(HSD_GObj* gobj)
     ftCommon_SetSelfMovementFromGroundedMovement(gobj);
 }
 
+/**
+ * @brief Physics callback for aerial Up-B (Fire Fox) launch travel
+ * @details Applies reverse acceleration along launch vector near the end of
+ * the move.
+ * @param gobj The fighter's game object
+ */
 void ftFx_SpecialAirHi_Phys(HSD_GObj* gobj)
 {
     Fighter* fp = getFighter(gobj);
@@ -290,6 +394,10 @@ void ftFx_SpecialAirHi_Phys(HSD_GObj* gobj)
     }
 }
 
+/**
+ * @brief Collision callback for grounded Up-B (Fire Fox) launch travel
+ * @param gobj The fighter's game object
+ */
 void ftFx_SpecialHi_Coll(HSD_GObj* gobj)
 {
     Fighter* fp = fp = GET_FIGHTER(gobj);
@@ -310,6 +418,11 @@ void ftFx_SpecialHi_Coll(HSD_GObj* gobj)
     }
 }
 
+/**
+ * @brief Checks if Fire Fox launch bounce threshold has been met
+ * @param gobj The fighter's game object
+ * @return True if bounce should occur, false otherwise
+ */
 static inline bool ftFox_SpecialHi_IsBound(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -324,7 +437,13 @@ static inline bool ftFox_SpecialHi_IsBound(HSD_GObj* gobj)
     }
 }
 
-/// @todo Rework this entire match.
+/**
+ * @brief Collision callback for aerial Up-B (Fire Fox) launch travel
+ * @details Evaluates collision with floors, ceilings, and walls. If angle of
+ * incidence with surface normal exceeds threshold, enters wall bonk rebound
+ * (SpecialHiBound).
+ * @param gobj The fighter's game object
+ */
 void ftFx_SpecialAirHi_Coll(HSD_GObj* gobj)
 {
     float facingDir;
@@ -335,6 +454,7 @@ void ftFx_SpecialAirHi_Coll(HSD_GObj* gobj)
 
     if (ft_CheckGroundAndLedge(gobj, CLIFFCATCH_BOTH)) {
         if (ftFox_SpecialHi_IsBound(gobj)) {
+            // Check floor collision angle against bounce threshold
             if (!(collData->env_flags & Collide_FloorMask) ||
                 (!(lbVector_AngleXY(&collData->floor.normal, &fp->self_vel) <
                    (0.01745329238474369f *
@@ -348,40 +468,36 @@ void ftFx_SpecialAirHi_Coll(HSD_GObj* gobj)
         }
     }
 
-    /** @remarks Not a single line of this entire function makes the slightest
-     * sliver of sense but it matches so whatever :D
-     * @todo This match is definitely fake.
-     */
     if (ftCliffCommon_80081298(gobj) == false) {
         do {
             s32 envFlags = collData->env_flags;
-            float var;
+            float impact_angle;
             if (envFlags & Collide_CeilingMask) {
-                var =
+                impact_angle =
                     lbVector_AngleXY(&collData->ceiling.normal, &fp->self_vel);
             } else if (envFlags & Collide_LeftWallMask) {
-                var = lbVector_AngleXY(&collData->left_facing_wall.normal,
-                                       &fp->self_vel);
+                impact_angle = lbVector_AngleXY(
+                    &collData->left_facing_wall.normal, &fp->self_vel);
             } else if (envFlags & Collide_RightWallMask) {
-                var = lbVector_AngleXY(&collData->right_facing_wall.normal,
-                                       &fp->self_vel);
+                impact_angle = lbVector_AngleXY(
+                    &collData->right_facing_wall.normal, &fp->self_vel);
             } else {
                 if (((!fp->self_vel.x) && (!fp->self_vel.x)) &&
-                    (!fp->self_vel.x)) // ??????
+                    (!fp->self_vel.x))
                 {
                 }
                 break;
             }
 
-            if (var < (0.01745329238474369f *
-                       (90.0f + da->x94_FOX_FIREFOX_BOUND_ANGLE)))
+            if (impact_angle < (0.01745329238474369f *
+                                (90.0f + da->x94_FOX_FIREFOX_BOUND_ANGLE)))
             {
                 goto facingDir;
             } else {
                 continue;
             }
 
-        } while (false); // What?
+        } while (false);
 
         return;
 
@@ -401,6 +517,10 @@ void ftFx_SpecialAirHi_Coll(HSD_GObj* gobj)
     }
 }
 
+/**
+ * @brief Ground to air transition during Up-B (Fire Fox) launch travel
+ * @param gobj The fighter's game object
+ */
 void ftFx_SpecialHi_GroundToAir(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -417,9 +537,16 @@ void ftFx_SpecialHi_GroundToAir(HSD_GObj* gobj)
     fp->accessory4_cb = ftFx_SpecialHi_CreateLaunchGFX;
 }
 
+/**
+ * @brief Air to ground transition during Up-B (Fire Fox) launch travel
+ * @details Reads control stick input to determine launch direction: enters
+ * grounded launch if angled along floor, or enters aerial launch if angled
+ * away.
+ * @param gobj The fighter's game object
+ */
 void ftFx_SpecialAirHi_AirToGround(HSD_GObj* gobj)
 {
-    Vec3 sp20;
+    Vec3 stick_vec;
     ftFox_DatAttrs* da;
     Fighter* fp;
     CollData* collData;
@@ -442,11 +569,12 @@ void ftFx_SpecialAirHi_AirToGround(HSD_GObj* gobj)
 
     if (!((stick_x + stick_y) < da->x64_FOX_FIREFOX_DIRECTION_STICK_RANGE_MIN))
     {
-        sp20.x = temp_stick;
-        sp20.y = fp->input.lstick[0].y;
-        sp20.z = 0.0f;
+        stick_vec.x = temp_stick;
+        stick_vec.y = fp->input.lstick[0].y;
+        stick_vec.z = 0.0f;
 
-        if (!(lbVector_AngleXY(&collData->floor.normal, &sp20) < HALF_PI32) &&
+        if (!(lbVector_AngleXY(&collData->floor.normal, &stick_vec) <
+              HALF_PI32) &&
             (ftCo_8009A134(gobj) == false))
         {
             ftCommon_UpdateFacing(fp);
@@ -479,9 +607,13 @@ void ftFx_SpecialAirHi_AirToGround(HSD_GObj* gobj)
     ftFx_SpecialAirHi_Enter(gobj);
 }
 
-/// 0x800E7C98
-/// Fox & Falco's aerial Firefox/Firebird
-/// Launch Motion State handler
+/**
+ * @brief Action State initialization for aerial Up-B (Fire Fox) launch travel
+ * @details Reads control stick X/Y to calculate launch angle (atan2). Sets
+ * launch velocity, applies model rotation, and consumes all mid-air jumps
+ * (`max_jumps`).
+ * @param gobj The fighter's game object
+ */
 void ftFx_SpecialAirHi_Enter(HSD_GObj* gobj)
 {
     ftFox_DatAttrs* da;
@@ -501,6 +633,7 @@ void ftFx_SpecialAirHi_Enter(HSD_GObj* gobj)
 
     stick_x = stickGetDir(temp_stick, 0.0f);
 
+    // Calculate launch angle from control stick if outside deadzone
     if ((stick_x + stick_y) >= da->x64_FOX_FIREFOX_DIRECTION_STICK_RANGE_MIN) {
         if (temp_stick < 0.0f) {
             temp_stick = -temp_stick;
@@ -511,6 +644,7 @@ void ftFx_SpecialAirHi_Enter(HSD_GObj* gobj)
         fp->mv.fx.SpecialHi.rotateModel = atan2f(
             fp->input.lstick[0].y, fp->input.lstick[0].x * fp->facing_dir);
     } else {
+        // Default to straight up (90 degrees)
         fp->mv.fx.SpecialHi.rotateModel = HALF_PI32;
     }
 
@@ -524,6 +658,7 @@ void ftFx_SpecialAirHi_Enter(HSD_GObj* gobj)
     fp->mv.fx.SpecialHi.unk = 0;
     fp->mv.fx.SpecialHi.unk2 = 0;
 
+    // Apply launch velocity vector
     fp->self_vel.x = fp->facing_dir * (da->x74_FOX_FIREFOX_SPEED *
                                        cosf(fp->mv.fx.SpecialHi.rotateModel));
     fp->self_vel.y =
@@ -534,9 +669,10 @@ void ftFx_SpecialAirHi_Enter(HSD_GObj* gobj)
     fp->x1968_jumpsUsed = ca->max_jumps;
 }
 
-/// 0x800E7E3C
-/// Fox & Falco's grounded Firefox/Firebird
-/// End Animation callback
+/**
+ * @brief Animation callback for grounded Up-B (Fire Fox) landing
+ * @param gobj The fighter's game object
+ */
 void ftFx_SpecialHiLanding_Anim(HSD_GObj* gobj)
 {
     u8 _[8];
@@ -546,9 +682,12 @@ void ftFx_SpecialHiLanding_Anim(HSD_GObj* gobj)
     }
 }
 
-/// 0x800E7E78
-/// Fox & Falco's aerial Firefox/Firebird
-/// End Animation callback
+/**
+ * @brief Animation callback for aerial Up-B (Fire Fox) freefall
+ * @details Transitions into FallSpecial with freefall mobility and landing lag
+ * (26 frames).
+ * @param gobj The fighter's game object
+ */
 void ftFx_SpecialHiFall_Anim(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -560,21 +699,28 @@ void ftFx_SpecialHiFall_Anim(HSD_GObj* gobj)
     }
 }
 
-/// 0x800E7ED8 - Fox & Falco's grounded Firefox/Firebird End IASA callback
+/**
+ * @brief IASA callback for grounded Up-B (Fire Fox) landing (no interrupts)
+ * @param gobj The fighter's game object
+ */
 void ftFx_SpecialHiLanding_IASA(HSD_GObj* gobj)
 {
     return;
 }
 
-/// 0x800E7EDC - Fox & Falco's aerial Firefox/Firebird End IASA callback
+/**
+ * @brief IASA callback for aerial Up-B (Fire Fox) freefall (no interrupts)
+ * @param gobj The fighter's game object
+ */
 void ftFx_SpecialHiFall_IASA(HSD_GObj* gobj)
 {
     return;
 }
 
-/// 0x800E7EE0
-/// Fox & Falco's grounded Firefox/Firebird
-/// End Physics callback
+/**
+ * @brief Physics callback for grounded Up-B (Fire Fox) landing
+ * @param gobj The fighter's game object
+ */
 void ftFx_SpecialHiLanding_Phys(HSD_GObj* gobj)
 {
     Fighter* fp = getFighter(gobj);
@@ -585,15 +731,19 @@ void ftFx_SpecialHiLanding_Phys(HSD_GObj* gobj)
     ftCommon_SetSelfMovementFromGroundedMovement(gobj);
 }
 
-/// 0x800E7F20 - Fox & Falco's aerial Firefox/Firebird End Physics callback
+/**
+ * @brief Physics callback for aerial Up-B (Fire Fox) freefall
+ * @param gobj The fighter's game object
+ */
 void ftFx_SpecialHiFall_Phys(HSD_GObj* gobj)
 {
     ft_80084DB0(gobj);
 }
 
-/// 0x800E7F40
-/// Fox & Falco's grounded Firefox/Firebird
-/// End Collision callback
+/**
+ * @brief Collision callback for grounded Up-B (Fire Fox) landing
+ * @param gobj The fighter's game object
+ */
 void ftFx_SpecialHiLanding_Coll(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -605,9 +755,10 @@ void ftFx_SpecialHiLanding_Coll(HSD_GObj* gobj)
     }
 }
 
-/// 0x800E7FA0
-/// Fox & Falco's aerial Firefox/Firebird
-/// End Collision callback
+/**
+ * @brief Collision callback for aerial Up-B (Fire Fox) freefall
+ * @param gobj The fighter's game object
+ */
 void ftFx_SpecialHiFall_Coll(HSD_GObj* gobj)
 {
     u8 _[8];
@@ -621,9 +772,10 @@ void ftFx_SpecialHiFall_Coll(HSD_GObj* gobj)
     }
 }
 
-/// 0x800E7FF0
-/// Fox & Falco's aerial Firefox/Firebird
-/// End Motion State handler
+/**
+ * @brief Transitions from aerial Up-B fall to grounded landing at frame 13.0
+ * @param gobj The fighter's game object
+ */
 void ftFx_SpecialHiFall_Enter(HSD_GObj* gobj)
 {
     ftCommon_8007D7FC(GET_FIGHTER(gobj));
@@ -633,9 +785,10 @@ void ftFx_SpecialHiFall_Enter(HSD_GObj* gobj)
     ftAnim_8006EBA4(gobj);
 }
 
-/// 0x800E8048
-/// Fox & Falco's ground -> air
-/// Firefox/Firebird End Motion State handler
+/**
+ * @brief Handles landing from Up-B (Fire Fox) onto ground
+ * @param gobj The fighter's game object
+ */
 void ftFx_SpecialHiFall_AirToGround(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -649,9 +802,10 @@ void ftFx_SpecialHiFall_AirToGround(HSD_GObj* gobj)
     fp->x21F8 = ftCommon_8007F76C;
 }
 
-/// 0x800E80C0
-/// Fox & Falco's Firefox/Firebird End ->
-/// Rebound Collision thing
+/**
+ * @brief Handles sliding off ledge during Up-B (Fire Fox) landing lag
+ * @param gobj The fighter's game object
+ */
 void ftFx_SpecialHiLanding_GroundToAir(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -663,9 +817,10 @@ void ftFx_SpecialHiLanding_GroundToAir(HSD_GObj* gobj)
     fp->x21F8 = ftCommon_8007F76C;
 }
 
-/// 0x800E8124
-/// Fox & Falco's Firefox/Firebird Rebound
-/// Animation callback
+/**
+ * @brief Animation callback for Up-B (Fire Fox) wall/floor rebound (bonk)
+ * @param gobj The fighter's game object
+ */
 void ftFx_SpecialHiBound_Anim(HSD_GObj* gobj)
 {
     ftCo_DatAttrs* ca;
@@ -696,15 +851,19 @@ void ftFx_SpecialHiBound_Anim(HSD_GObj* gobj)
     }
 }
 
-/// 0x800E81FC - Fox & Falco's Firefox/Firebird Rebound IASA callback
+/**
+ * @brief IASA callback for Up-B (Fire Fox) rebound (no interrupts)
+ * @param gobj The fighter's game object
+ */
 void ftFx_SpecialHiBound_IASA(HSD_GObj* gobj)
 {
     return;
 }
 
-/// 0x800E8200
-/// Fox & Falco's Firefox/Firebird Rebound
-/// Physics callback
+/**
+ * @brief Physics callback for Up-B (Fire Fox) rebound
+ * @param gobj The fighter's game object
+ */
 void ftFx_SpecialHiBound_Phys(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -718,9 +877,10 @@ void ftFx_SpecialHiBound_Phys(HSD_GObj* gobj)
     ft_80084F3C(gobj);
 }
 
-/// 0x800E824C
-/// Fox & Falco's Firefox/Firebird Rebound
-/// Collision callback
+/**
+ * @brief Collision callback for Up-B (Fire Fox) rebound
+ * @param gobj The fighter's game object
+ */
 void ftFx_SpecialHiBound_Coll(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -734,32 +894,38 @@ void ftFx_SpecialHiBound_Coll(HSD_GObj* gobj)
         if (ftCliffCommon_80081298(gobj)) {
             return;
         }
-    }
-
-    else {
+    } else {
         ft_80084104(gobj);
     }
 }
 
+/**
+ * @brief Helper to initialize impact angle and spawn wall bonk GFX
+ * @param gobj The fighter's game object
+ */
 static inline void ftFox_SpecialHiBound_SetVars(HSD_GObj* gobj)
 {
-    vf32 f; // I have a feeling this is a Vec3 struct however
+    vf32 ground_angle;
     Fighter* fp = fp = gobj->user_data;
     CollData* collData = collData = getFtColl(fp);
 
     if (fp->coll_data.env_flags & Collide_FloorMask) {
-        f = -atan2f(collData->floor.normal.x, collData->floor.normal.y);
+        ground_angle =
+            -atan2f(collData->floor.normal.x, collData->floor.normal.y);
     } else {
-        f = 0.0f;
+        ground_angle = 0.0f;
     }
-    efSync_Spawn(1030, gobj, &fp->cur_pos, &f);
+    efSync_Spawn(1030, gobj, &fp->cur_pos, &ground_angle);
     fp->x2219_b0 = true;
     Fighter_SetEffectHitlagCallbacks(fp);
 }
 
-/// 0x800E82E4
-/// Fox & Falco's Firefox/Firebird Rebound
-/// Motion State handler
+/**
+ * @brief Action State initialization for Up-B (Fire Fox) wall/floor rebound
+ * @details Dampens horizontal velocity by `x84_FOX_FIREFOX_BOUND_VEL_X` and
+ * spawns bonk GFX.
+ * @param gobj The fighter's game object
+ */
 void ftFx_SpecialHiBound_Enter(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;

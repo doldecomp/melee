@@ -1,3 +1,13 @@
+/**
+ * @file ftfox.c
+ * @brief Character initialization, motion state table, and lifecycle callbacks
+ * for Fox
+ * @details Implements Fox's character initialization on match load (walljump
+ * setup, attribute loading, item precaching for Blaster and Illusion), costume
+ * tables, death/respawn handling, item interaction callbacks, and knockback
+ * hurt animations. Module prefix: ftFx
+ */
+
 #include "ftfox.h"
 
 #include <Runtime/platform.h>
@@ -20,9 +30,10 @@
 
 /* 459B28 */ UnkCostumeStruct ftFx_CostumeList[4];
 
+/// Fox-specific Motion State transition table
 MotionState ftFx_Init_MotionStateTable[ftFx_MS_SelfCount] = {
     {
-        // ftFx_MS_SpecialNStart = 341
+        // ftFx_MS_SpecialNStart = 341 - Neutral-B (Blaster) grounded draw
         ftFx_SM_SpecialNStart,
         ftFx_MF_SpecialN,
         FtMoveId_SpecialN << 24,
@@ -33,7 +44,7 @@ MotionState ftFx_Init_MotionStateTable[ftFx_MS_SelfCount] = {
         ftCamera_UpdateCameraBox,
     },
     {
-        // ftFx_MS_SpecialNLoop = 342
+        // ftFx_MS_SpecialNLoop = 342 - Neutral-B (Blaster) grounded fire loop
         ftFx_SM_SpecialNLoop,
         ftFx_MF_SpecialNLoop,
         FtMoveId_SpecialN << 24,
@@ -44,7 +55,7 @@ MotionState ftFx_Init_MotionStateTable[ftFx_MS_SelfCount] = {
         ftCamera_UpdateCameraBox,
     },
     {
-        // ftFx_MS_SpecialNEnd = 343
+        // ftFx_MS_SpecialNEnd = 343 - Neutral-B (Blaster) grounded holster
         ftFx_SM_SpecialNEnd,
         ftFx_MF_SpecialN,
         FtMoveId_SpecialN << 24,
@@ -55,7 +66,7 @@ MotionState ftFx_Init_MotionStateTable[ftFx_MS_SelfCount] = {
         ftCamera_UpdateCameraBox,
     },
     {
-        // ftFx_MS_SpecialAirNStart = 344
+        // ftFx_MS_SpecialAirNStart = 344 - Neutral-B (Blaster) aerial draw
         ftFx_SM_SpecialAirNStart,
         ftFx_MF_SpecialAirN,
         FtMoveId_SpecialN << 24,
@@ -66,7 +77,7 @@ MotionState ftFx_Init_MotionStateTable[ftFx_MS_SelfCount] = {
         ftCamera_UpdateCameraBox,
     },
     {
-        // ftFx_MS_SpecialAirNLoop = 345
+        // ftFx_MS_SpecialAirNLoop = 345 - Neutral-B (Blaster) aerial fire loop
         ftFx_SM_SpecialAirNLoop,
         ftFx_MF_SpecialAirNLoop,
         FtMoveId_SpecialN << 24,
@@ -77,7 +88,7 @@ MotionState ftFx_Init_MotionStateTable[ftFx_MS_SelfCount] = {
         ftCamera_UpdateCameraBox,
     },
     {
-        // ftFx_MS_SpecialAirNEnd = 346
+        // ftFx_MS_SpecialAirNEnd = 346 - Neutral-B (Blaster) aerial holster
         ftFx_SM_SpecialAirNEnd,
         ftFx_MF_SpecialAirN,
         FtMoveId_SpecialN << 24,
@@ -88,7 +99,7 @@ MotionState ftFx_Init_MotionStateTable[ftFx_MS_SelfCount] = {
         ftCamera_UpdateCameraBox,
     },
     {
-        // ftFx_MS_SpecialSStart = 347
+        // ftFx_MS_SpecialSStart = 347 - Side-B (Fox Illusion) grounded startup
         ftFx_SM_SpecialSStart,
         ftFx_MF_SpecialS,
         FtMoveId_SpecialS << 24,
@@ -99,7 +110,7 @@ MotionState ftFx_Init_MotionStateTable[ftFx_MS_SelfCount] = {
         ftCamera_UpdateCameraBox,
     },
     {
-        // ftFx_MS_SpecialS = 348
+        // ftFx_MS_SpecialS = 348 - Side-B (Fox Illusion) grounded dash
         ftFx_SM_SpecialS,
         ftFx_MF_SpecialS,
         FtMoveId_SpecialS << 24,
@@ -110,7 +121,7 @@ MotionState ftFx_Init_MotionStateTable[ftFx_MS_SelfCount] = {
         ftCamera_UpdateCameraBox,
     },
     {
-        // ftFx_MS_SpecialSEnd = 349
+        // ftFx_MS_SpecialSEnd = 349 - Side-B (Fox Illusion) grounded end lag
         ftFx_SM_SpecialSEnd,
         ftFx_MF_SpecialS,
         FtMoveId_SpecialS << 24,
@@ -121,7 +132,8 @@ MotionState ftFx_Init_MotionStateTable[ftFx_MS_SelfCount] = {
         ftCamera_UpdateCameraBox,
     },
     {
-        // ftFx_MS_SpecialAirSStart = 350
+        // ftFx_MS_SpecialAirSStart = 350 - Side-B (Fox Illusion) aerial
+        // startup
         ftFx_SM_SpecialAirSStart,
         ftFx_MF_SpecialAirS,
         FtMoveId_SpecialS << 24,
@@ -132,7 +144,7 @@ MotionState ftFx_Init_MotionStateTable[ftFx_MS_SelfCount] = {
         ftCamera_UpdateCameraBox,
     },
     {
-        // ftFx_MS_SpecialAirS = 351
+        // ftFx_MS_SpecialAirS = 351 - Side-B (Fox Illusion) aerial dash
         ftFx_SM_SpecialAirS,
         ftFx_MF_SpecialAirS,
         FtMoveId_SpecialS << 24,
@@ -143,7 +155,8 @@ MotionState ftFx_Init_MotionStateTable[ftFx_MS_SelfCount] = {
         ftCamera_UpdateCameraBox,
     },
     {
-        // ftFx_MS_SpecialAirSEnd = 352
+        // ftFx_MS_SpecialAirSEnd = 352 - Side-B (Fox Illusion) aerial end lag
+        // / freefall
         ftFx_SM_SpecialAirSEnd,
         ftFx_MF_SpecialAirS,
         FtMoveId_SpecialS << 24,
@@ -154,7 +167,7 @@ MotionState ftFx_Init_MotionStateTable[ftFx_MS_SelfCount] = {
         ftCamera_UpdateCameraBox,
     },
     {
-        // ftFx_MS_SpecialHiHold = 353
+        // ftFx_MS_SpecialHiHold = 353 - Up-B (Fire Fox) grounded charge
         ftFx_SM_SpecialHiHold,
         ftFx_MF_SpecialHi,
         FtMoveId_SpecialHi << 24,
@@ -165,7 +178,7 @@ MotionState ftFx_Init_MotionStateTable[ftFx_MS_SelfCount] = {
         ftCamera_UpdateCameraBox,
     },
     {
-        // ftFx_MS_SpecialHiHoldAir = 354
+        // ftFx_MS_SpecialHiHoldAir = 354 - Up-B (Fire Fox) aerial charge
         ftFx_SM_SpecialHiHoldAir,
         ftFx_MF_SpecialAirHiHold,
         FtMoveId_SpecialHi << 24,
@@ -176,7 +189,7 @@ MotionState ftFx_Init_MotionStateTable[ftFx_MS_SelfCount] = {
         ftCamera_UpdateCameraBox,
     },
     {
-        // ftFx_MS_SpecialHi = 355
+        // ftFx_MS_SpecialHi = 355 - Up-B (Fire Fox) grounded launch travel
         ftFx_SM_SpecialHi,
         ftFx_MF_SpecialHi,
         FtMoveId_SpecialHi << 24,
@@ -187,7 +200,7 @@ MotionState ftFx_Init_MotionStateTable[ftFx_MS_SelfCount] = {
         ftCamera_UpdateCameraBox,
     },
     {
-        // ftFx_MS_SpecialAirHi = 356
+        // ftFx_MS_SpecialAirHi = 356 - Up-B (Fire Fox) aerial launch travel
         ftFx_SM_SpecialHi,
         ftFx_MF_SpecialAirHiHold,
         FtMoveId_SpecialHi << 24,
@@ -198,7 +211,7 @@ MotionState ftFx_Init_MotionStateTable[ftFx_MS_SelfCount] = {
         ftCamera_UpdateCameraBox,
     },
     {
-        // ftFx_MS_SpecialHiLanding = 357
+        // ftFx_MS_SpecialHiLanding = 357 - Up-B (Fire Fox) landing lag
         ftFx_SM_SpecialHiLanding,
         ftFx_MF_SpecialHi,
         FtMoveId_SpecialHi << 24,
@@ -209,7 +222,8 @@ MotionState ftFx_Init_MotionStateTable[ftFx_MS_SelfCount] = {
         ftCamera_UpdateCameraBox,
     },
     {
-        // ftFx_MS_SpecialHiFall = 358
+        // ftFx_MS_SpecialHiFall = 358 - Up-B (Fire Fox) special fall /
+        // freefall
         ftFx_SM_SpecialHiFall,
         ftFx_MF_SpecialAirHiHold,
         FtMoveId_SpecialHi << 24,
@@ -220,7 +234,8 @@ MotionState ftFx_Init_MotionStateTable[ftFx_MS_SelfCount] = {
         ftCamera_UpdateCameraBox,
     },
     {
-        // ftFx_MS_SpecialHiBound = 359
+        // ftFx_MS_SpecialHiBound = 359 - Up-B (Fire Fox) wall/ceiling/floor
+        // rebound
         ftFx_SM_SpecialHiBound,
         ftFx_MF_SpecialAirHiHold,
         FtMoveId_SpecialHi << 24,
@@ -231,7 +246,8 @@ MotionState ftFx_Init_MotionStateTable[ftFx_MS_SelfCount] = {
         ftCamera_UpdateCameraBox,
     },
     {
-        // ftFx_MS_SpecialLwStart = 360
+        // ftFx_MS_SpecialLwStart = 360 - Down-B (Reflector) grounded startup /
+        // frame 1 hit
         ftFx_SM_SpecialLwStart,
         ftFx_MF_SpecialLw,
         FtMoveId_SpecialLw << 24,
@@ -242,7 +258,8 @@ MotionState ftFx_Init_MotionStateTable[ftFx_MS_SelfCount] = {
         ftCamera_UpdateCameraBox,
     },
     {
-        // ftFx_MS_SpecialLwLoop = 361
+        // ftFx_MS_SpecialLwLoop = 361 - Down-B (Reflector) grounded active
+        // loop / jump-cancelable
         ftFx_SM_SpecialLwLoop,
         ftFx_MF_SpecialLwLoop,
         FtMoveId_SpecialLw << 24,
@@ -253,7 +270,8 @@ MotionState ftFx_Init_MotionStateTable[ftFx_MS_SelfCount] = {
         ftCamera_UpdateCameraBox,
     },
     {
-        // ftFx_MS_SpecialLwHit = 362
+        // ftFx_MS_SpecialLwHit = 362 - Down-B (Reflector) grounded reflect
+        // projectile
         ftFx_SM_SpecialLwHit,
         ftFx_MF_SpecialLw,
         FtMoveId_SpecialLw << 24,
@@ -264,7 +282,7 @@ MotionState ftFx_Init_MotionStateTable[ftFx_MS_SelfCount] = {
         ftCamera_UpdateCameraBox,
     },
     {
-        // ftFx_MS_SpecialLwEnd = 363
+        // ftFx_MS_SpecialLwEnd = 363 - Down-B (Reflector) grounded release lag
         ftFx_SM_SpecialLwEnd,
         ftFx_MF_SpecialLw,
         FtMoveId_SpecialLw << 24,
@@ -275,7 +293,7 @@ MotionState ftFx_Init_MotionStateTable[ftFx_MS_SelfCount] = {
         ftCamera_UpdateCameraBox,
     },
     {
-        // ftFx_MS_SpecialLwTurn = 364
+        // ftFx_MS_SpecialLwTurn = 364 - Down-B (Reflector) grounded turnaround
         ftFx_SM_SpecialLwLoop,
         ftFx_MF_SpecialLw,
         FtMoveId_SpecialLw << 24,
@@ -286,7 +304,8 @@ MotionState ftFx_Init_MotionStateTable[ftFx_MS_SelfCount] = {
         ftCamera_UpdateCameraBox,
     },
     {
-        // ftFx_MS_SpecialAirLwStart = 365
+        // ftFx_MS_SpecialAirLwStart = 365 - Down-B (Reflector) aerial startup
+        // / stall
         ftFx_SM_SpecialAirLwStart,
         ftFx_MF_SpecialAirLw,
         FtMoveId_SpecialLw << 24,
@@ -297,7 +316,8 @@ MotionState ftFx_Init_MotionStateTable[ftFx_MS_SelfCount] = {
         ftCamera_UpdateCameraBox,
     },
     {
-        // ftFx_MS_SpecialAirLwLoop = 366
+        // ftFx_MS_SpecialAirLwLoop = 366 - Down-B (Reflector) aerial active
+        // loop
         ftFx_SM_SpecialAirLwLoop,
         ftFx_MF_SpecialAirLwLoop,
         FtMoveId_SpecialLw << 24,
@@ -308,7 +328,8 @@ MotionState ftFx_Init_MotionStateTable[ftFx_MS_SelfCount] = {
         ftCamera_UpdateCameraBox,
     },
     {
-        // ftFx_MS_SpecialAirLwHit = 367
+        // ftFx_MS_SpecialAirLwHit = 367 - Down-B (Reflector) aerial reflect
+        // projectile
         ftFx_SM_SpecialAirLwHit,
         ftFx_MF_SpecialAirLw,
         FtMoveId_SpecialLw << 24,
@@ -319,7 +340,8 @@ MotionState ftFx_Init_MotionStateTable[ftFx_MS_SelfCount] = {
         ftCamera_UpdateCameraBox,
     },
     {
-        // ftFx_MS_SpecialAirLwEnd = 368
+        // ftFx_MS_SpecialAirLwEnd = 368 - Down-B (Reflector) aerial release
+        // lag
         ftFx_SM_SpecialAirLwEnd,
         ftFx_MF_SpecialAirLw,
         FtMoveId_SpecialLw << 24,
@@ -330,7 +352,8 @@ MotionState ftFx_Init_MotionStateTable[ftFx_MS_SelfCount] = {
         ftCamera_UpdateCameraBox,
     },
     {
-        // ftFx_MS_SpecialAirLwTurn = 369
+        // ftFx_MS_SpecialAirLwTurn = 369 - Down-B (Reflector) aerial
+        // turnaround
         ftFx_SM_SpecialAirLwLoop,
         ftFx_MF_SpecialAirLw,
         FtMoveId_SpecialLw << 24,
@@ -341,7 +364,7 @@ MotionState ftFx_Init_MotionStateTable[ftFx_MS_SelfCount] = {
         ftCamera_UpdateCameraBox,
     },
     {
-        // ftFx_MS_AppealSStartR = 370
+        // ftFx_MS_AppealSStartR = 370 - Smash Taunt start facing right
         ftFx_SM_AppealSStartR,
         ftFx_MF_Appeal,
         FtMoveId_Default << 24,
@@ -352,7 +375,7 @@ MotionState ftFx_Init_MotionStateTable[ftFx_MS_SelfCount] = {
         ftCamera_UpdateCameraBox,
     },
     {
-        // ftFx_MS_AppealSStartL = 371
+        // ftFx_MS_AppealSStartL = 371 - Smash Taunt start facing left
         ftFx_SM_AppealSStartL,
         ftFx_MF_Appeal,
         FtMoveId_Default << 24,
@@ -363,7 +386,7 @@ MotionState ftFx_Init_MotionStateTable[ftFx_MS_SelfCount] = {
         ftCamera_UpdateCameraBox,
     },
     {
-        // ftFx_MS_AppealSR = 372
+        // ftFx_MS_AppealSR = 372 - Smash Taunt comm active facing right
         ftFx_SM_AppealSR,
         ftFx_MF_Appeal,
         FtMoveId_Default << 24,
@@ -374,7 +397,7 @@ MotionState ftFx_Init_MotionStateTable[ftFx_MS_SelfCount] = {
         ftCamera_UpdateCameraBox,
     },
     {
-        // ftFx_MS_AppealSL = 373
+        // ftFx_MS_AppealSL = 373 - Smash Taunt comm active facing left
         ftFx_SM_AppealSL,
         ftFx_MF_Appeal,
         FtMoveId_Default << 24,
@@ -385,7 +408,7 @@ MotionState ftFx_Init_MotionStateTable[ftFx_MS_SelfCount] = {
         ftCamera_UpdateCameraBox,
     },
     {
-        // ftFx_MS_AppealSEndR = 374
+        // ftFx_MS_AppealSEndR = 374 - Smash Taunt end facing right
         ftFx_SM_AppealSEndR,
         ftFx_MF_Appeal,
         FtMoveId_Default << 24,
@@ -396,7 +419,7 @@ MotionState ftFx_Init_MotionStateTable[ftFx_MS_SelfCount] = {
         ftCamera_UpdateCameraBox,
     },
     {
-        // ftFx_MS_AppealSEndL = 375
+        // ftFx_MS_AppealSEndL = 375 - Smash Taunt end facing left
         ftFx_SM_AppealSEndL,
         ftFx_MF_Appeal,
         FtMoveId_Default << 24,
@@ -438,6 +461,11 @@ Fighter_CostumeStrings ftFx_Init_CostumeStrings[] = {
     { ftFx_Init_803C7CCC, ftFx_Init_803C7CD8, ftFx_Init_803C7CF0 },
 };
 
+/**
+ * @brief Checks if Fox's Blaster gun item entity exists
+ * @param gobj The fighter's game object
+ * @return True if blaster GObj exists, false otherwise
+ */
 bool ftFx_Init_800E5534(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -445,6 +473,10 @@ bool ftFx_Init_800E5534(HSD_GObj* gobj)
     return fp->u.fx.x222C_blasterGObj ? true : false;
 }
 
+/**
+ * @brief Resets Fox on death/respawn
+ * @param gobj The fighter's game object
+ */
 void ftFx_Init_OnDeath(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -453,36 +485,69 @@ void ftFx_Init_OnDeath(HSD_GObj* gobj)
     ftParts_80074A4C(gobj, 0, 0);
 }
 
+/**
+ * @brief Removes Blaster item on damage or interrupt
+ * @param gobj The fighter's game object
+ */
 void ftFx_Init_800E5588(HSD_GObj* gobj)
 {
     ftFx_SpecialN_RemoveBlaster(gobj);
 }
 
+/**
+ * @brief Item pickup callback for Fox
+ * @param gobj The fighter's game object
+ * @param flag Item pickup flag
+ */
 void ftFx_Init_OnItemPickup(HSD_GObj* gobj, bool flag)
 {
     Fighter_OnItemPickup(gobj, flag, 1, 1);
 }
 
+/**
+ * @brief Hides held items
+ * @param gobj The fighter's game object
+ */
 void ftFx_Init_OnItemInvisible(HSD_GObj* gobj)
 {
     Fighter_OnItemInvisible(gobj, 1);
 }
 
+/**
+ * @brief Restores held item visibility
+ * @param gobj The fighter's game object
+ */
 void ftFx_Init_OnItemVisible(HSD_GObj* gobj)
 {
     Fighter_OnItemVisible(gobj, 1);
 }
 
+/**
+ * @brief Item drop callback for Fox
+ * @param gobj The fighter's game object
+ * @param flag Item drop flag
+ */
 void ftFx_Init_OnItemDrop(HSD_GObj* gobj, bool flag)
 {
     Fighter_OnItemDrop(gobj, flag, 1, 1);
 }
 
+/**
+ * @brief Loads Fox attribute struct for Falco
+ * @param fp Pointer to the Fighter data structure
+ */
 void ftFx_Init_OnLoadForFalco(Fighter* fp)
 {
     PUSH_ATTRS(fp, ftFox_DatAttrs);
 }
 
+/**
+ * @brief Main character load callback for Fox
+ * @details Configures walljump capability (`can_walljump = true`), loads
+ * character attributes, and registers item kinds (Blaster shot, gun, illusion
+ * ghost).
+ * @param gobj The fighter's game object
+ */
 void ftFx_Init_OnLoad(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
@@ -500,6 +565,10 @@ void ftFx_Init_OnLoad(HSD_GObj* gobj)
     }
 }
 
+/**
+ * @brief Reloads special attributes copy
+ * @param gobj The fighter's game object
+ */
 void ftFx_Init_LoadSpecialAttrs(HSD_GObj* gobj)
 {
     COPY_ATTRS(gobj, ftFox_DatAttrs);
@@ -507,6 +576,10 @@ void ftFx_Init_LoadSpecialAttrs(HSD_GObj* gobj)
 
 extern float lbl_804D9244; /// 0.0f
 
+/**
+ * @brief Knockback hurt animation entry callback
+ * @param gobj The fighter's game object
+ */
 void ftFx_Init_OnKnockbackEnter(HSD_GObj* gobj)
 {
     Fighter_OnKnockbackEnter(gobj, 1);
@@ -514,6 +587,10 @@ void ftFx_Init_OnKnockbackEnter(HSD_GObj* gobj)
     ftAnim_ApplyPartAnim(gobj, 4, 3, 0.0f);
 }
 
+/**
+ * @brief Knockback hurt animation exit callback
+ * @param gobj The fighter's game object
+ */
 void ftFx_Init_OnKnockbackExit(HSD_GObj* gobj)
 {
     Fighter_OnKnockbackExit(gobj, 1);

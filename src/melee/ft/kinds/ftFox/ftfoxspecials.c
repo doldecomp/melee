@@ -1,3 +1,14 @@
+/**
+ * @file ftfoxspecials.c
+ * @brief Side-B (Fox Illusion / Falco Phantasm)
+ * @details Implements Fox and Falco's Side-B special move.
+ * Handles the startup anticipation phase, high-speed dash physics, spawning
+ * the illusion ghost entity, historical position tracking for trail effects,
+ * the famous **Illusion Shorten** technique via B-button interrupt in IASA,
+ * and transition into landing lag or freefall.
+ * Module prefix: ftFx
+ */
+
 #include "ftfoxspecials.h"
 
 #include <melee/ft/forward.h>
@@ -25,8 +36,10 @@ static MotionFlags const ftFx_MF_SpecialS_Coll =
 static MotionFlags const ftFx_MF_SpecialSDash_Coll =
     ftFx_MF_SpecialS_Coll | Ft_MF_KeepColAnimHitStatus;
 
-/// 0x800E9DF8
-/// Create Fox Illusion / Falco Phantasm GFX
+/**
+ * @brief Side-B (Fox Illusion) - Spawns dash trail particle effects
+ * @param gobj The fighter's game object
+ */
 void ftFx_SpecialS_CreateGFX(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -41,9 +54,12 @@ void ftFx_SpecialS_CreateGFX(HSD_GObj* gobj)
     fp->accessory4_cb = NULL;
 }
 
-/// 0x800E9E78
-/// Check if Fox or Falco are in any of
-/// their Illusion/Phantasm Motion States
+/**
+ * @brief Checks if fighter has exited all Illusion motion states to remove
+ * ghost
+ * @param gobj The fighter's game object
+ * @return True if outside Illusion states, false if still in Illusion
+ */
 bool ftFx_SpecialS_CheckGhostRemove(HSD_GObj* gobj)
 {
     /// @todo @c enum
@@ -56,16 +72,22 @@ bool ftFx_SpecialS_CheckGhostRemove(HSD_GObj* gobj)
     return true;
 }
 
-/// 0x800E9EA0
-/// Return 0x2208 from Fighter Struct
+/**
+ * @brief Returns command variable 2 from fighter struct
+ * @param gobj The fighter's game object
+ * @return Value of cmd_vars[2]
+ */
 s32 ftFx_SpecialS_GetCmdVar2(HSD_GObj* gobj)
 {
     return (GET_FIGHTER(gobj))->cmd_vars[2];
 }
 
-/// 0x800E9EAC
-/// Copy state variables into SpecialS
-/// struct
+/**
+ * @brief Copies historical ghost trail position at specified index
+ * @param gobj The fighter's game object
+ * @param index Index in ghost position ring buffer (0..3)
+ * @param[out] ghostPos Destination vector
+ */
 void ftFx_SpecialS_CopyGhostPosIndexed(HSD_GObj* gobj, s32 index,
                                        Vec3* ghostPos)
 {
@@ -74,17 +96,22 @@ void ftFx_SpecialS_CopyGhostPosIndexed(HSD_GObj* gobj, s32 index,
     *ghostPos = fp->mv.fx.SpecialS.ghostEffectPos[index];
 }
 
-/// 0x800E9ED4
-/// Return float from array @ 0x2374 for Fox
-/// & Falco's Illusion/Phantasm
+/**
+ * @brief Returns rotation at specified index in ghost history buffer
+ * @param gobj The fighter's game object
+ * @param index Index in blend frames ring buffer (0..3)
+ * @return Rotation float value
+ */
 float ftFx_SpecialS_ReturnFloatVarIndexed(HSD_GObj* gobj, s32 index)
 {
     return getFighter(gobj)->mv.fx.SpecialS.blendFrames[index];
 }
 
-/// 0x800E9EE8
-/// Fox & Falco's grounded Illusion/Phantasm
-/// Start Motion State handler
+/**
+ * @brief Action State initialization for grounded Side-B (Fox Illusion)
+ * startup
+ * @param gobj The fighter's game object
+ */
 void ftFx_SpecialSStart_Enter(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -104,9 +131,11 @@ void ftFx_SpecialSStart_Enter(HSD_GObj* gobj)
     ftAnim_8006EBA4(gobj);
 }
 
-/// 0x800E9F6C
-/// Fox & Falco's aerial Illusion/Phantasm
-/// Start Motion State handler
+/**
+ * @brief Action State initialization for aerial Side-B (Fox Illusion) startup
+ * @details Freezes vertical velocity (self_vel.y = 0) and consumes all jumps.
+ * @param gobj The fighter's game object
+ */
 void ftFx_SpecialAirSStart_Enter(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -129,9 +158,10 @@ void ftFx_SpecialAirSStart_Enter(HSD_GObj* gobj)
     fp->x1968_jumpsUsed = fp->co_attrs.max_jumps;
 }
 
-/// 0x800EA004
-/// Fox & Falco's grounded Illusion/Phantasm
-/// Start Animation callback
+/**
+ * @brief Animation callback for grounded Side-B startup
+ * @param gobj The fighter's game object
+ */
 void ftFx_SpecialSStart_Anim(HSD_GObj* gobj)
 {
     if (!ftAnim_IsFramesRemaining(gobj)) {
@@ -139,9 +169,10 @@ void ftFx_SpecialSStart_Anim(HSD_GObj* gobj)
     }
 }
 
-/// 0x800EA040
-/// Fox & Falco's aerial Illusion/Phantasm
-/// Start Animation callback
+/**
+ * @brief Animation callback for aerial Side-B startup
+ * @param gobj The fighter's game object
+ */
 void ftFx_SpecialAirSStart_Anim(HSD_GObj* gobj)
 {
     if (!ftAnim_IsFramesRemaining(gobj)) {
@@ -149,21 +180,28 @@ void ftFx_SpecialAirSStart_Anim(HSD_GObj* gobj)
     }
 }
 
-/// 0x800EA07C - Fox & Falco's grounded Illusion/Phantasm Start IASA callback
+/**
+ * @brief IASA callback for grounded Side-B startup (no interrupts)
+ * @param gobj The fighter's game object
+ */
 void ftFx_SpecialSStart_IASA(HSD_GObj* gobj)
 {
     return;
 }
 
-/// 0x800EA080 - Fox & Falco's aerial Illusion/Phantasm Start IASA callback
+/**
+ * @brief IASA callback for aerial Side-B startup (no interrupts)
+ * @param gobj The fighter's game object
+ */
 void ftFx_SpecialAirSStart_IASA(HSD_GObj* gobj)
 {
     return;
 }
 
-/// 0x800EA084
-/// Fox & Falco's grounded Illusion/Phantasm
-/// Start Physics callback
+/**
+ * @brief Physics callback for grounded Side-B startup
+ * @param gobj The fighter's game object
+ */
 void ftFx_SpecialSStart_Phys(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -174,9 +212,10 @@ void ftFx_SpecialSStart_Phys(HSD_GObj* gobj)
     ft_80084F3C(gobj);
 }
 
-/// 0x800EA0BC
-/// Fox & Falco's aerial Illusion/Phantasm
-/// Start Physics callback
+/**
+ * @brief Physics callback for aerial Side-B startup
+ * @param gobj The fighter's game object
+ */
 void ftFx_SpecialAirSStart_Phys(HSD_GObj* gobj)
 {
     Fighter* fp = fp = GET_FIGHTER(gobj);
@@ -193,9 +232,10 @@ void ftFx_SpecialAirSStart_Phys(HSD_GObj* gobj)
     ftCommon_CalcSelfAccel_Deaccel(fp, da->x2C_FOX_ILLUSION_UNK1);
 }
 
-/// 0x800EA128
-/// Fox & Falco's grounded Illusion/Phantasm
-/// Start Collision callback
+/**
+ * @brief Collision callback for grounded Side-B startup
+ * @param gobj The fighter's game object
+ */
 void ftFx_SpecialSStart_Coll(HSD_GObj* gobj)
 {
     if (ft_80082708(gobj) == false) {
@@ -203,9 +243,10 @@ void ftFx_SpecialSStart_Coll(HSD_GObj* gobj)
     }
 }
 
-/// 0x800EA164
-/// Fox & Falco's aerial Illusion/Phantasm
-/// Start Collision callback
+/**
+ * @brief Collision callback for aerial Side-B startup
+ * @param gobj The fighter's game object
+ */
 void ftFx_SpecialAirSStart_Coll(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -220,9 +261,10 @@ void ftFx_SpecialAirSStart_Coll(HSD_GObj* gobj)
     }
 }
 
-/// 0x800EA1D4
-/// Fox & Falco's ground -> air
-/// Illusion/Phantasm Start Motion State handler
+/**
+ * @brief Ground to air transition during Side-B startup
+ * @param gobj The fighter's game object
+ */
 void ftFx_SpecialSStart_GroundToAir(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -233,9 +275,10 @@ void ftFx_SpecialSStart_GroundToAir(HSD_GObj* gobj)
                               0.0f, NULL);
 }
 
-/// 0x800EA234
-/// Fox & Falco's air -> ground
-/// Illusion/Phantasm Start Motion State handler
+/**
+ * @brief Air to ground transition during Side-B startup
+ * @param gobj The fighter's game object
+ */
 void ftFx_SpecialAirSStart_AirToGround(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -244,6 +287,10 @@ void ftFx_SpecialAirSStart_AirToGround(HSD_GObj* gobj)
                                     ftFx_MF_SpecialS_Coll);
 }
 
+/**
+ * @brief Helper to spawn the Illusion ghost entity during the dash
+ * @param gobj The fighter's game object
+ */
 static inline void ftFox_SpecialS_CreateGhostItem(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -265,9 +312,10 @@ static inline void ftFox_SpecialS_CreateGhostItem(HSD_GObj* gobj)
     }
 }
 
-/// 0x800EA294
-/// Fox & Falco's grounded Illusion/Phantasm
-/// Dash Animation callback
+/**
+ * @brief Animation callback for grounded Side-B dash
+ * @param gobj The fighter's game object
+ */
 void ftFx_SpecialS_Anim(HSD_GObj* gobj)
 {
     u8 _[24];
@@ -278,9 +326,10 @@ void ftFx_SpecialS_Anim(HSD_GObj* gobj)
     ftFox_SpecialS_CreateGhostItem(gobj);
 }
 
-/// 0x800EA344
-/// Fox & Falco's aerial Illusion/Phantasm
-/// Dash Animation callback
+/**
+ * @brief Animation callback for aerial Side-B dash
+ * @param gobj The fighter's game object
+ */
 void ftFx_SpecialAirS_Anim(HSD_GObj* gobj)
 {
     u8 _[16];
@@ -291,9 +340,13 @@ void ftFx_SpecialAirS_Anim(HSD_GObj* gobj)
     ftFox_SpecialS_CreateGhostItem(gobj);
 }
 
-/// 0x800EA3F4
-/// Fox & Falco's grounded Illusion/Phantasm
-/// Dash IASA callback
+/**
+ * @brief IASA callback for grounded Side-B dash
+ * @details **ILLUSION SHORTEN**: Checks for B button press (`pressed_buttons &
+ * HSD_PAD_B`) during the dash to immediately transition into end lag
+ * (SpecialSEnd), shortening the dash.
+ * @param gobj The fighter's game object
+ */
 void ftFx_SpecialS_IASA(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -308,9 +361,12 @@ void ftFx_SpecialS_IASA(HSD_GObj* gobj)
     }
 }
 
-/// 0x800EA438
-/// Fox & Falco's aerial Illusion/Phantasm
-/// Dash IASA callback
+/**
+ * @brief IASA callback for aerial Side-B dash
+ * @details **ILLUSION SHORTEN**: Checks for B button press during aerial dash
+ * to shorten distance.
+ * @param gobj The fighter's game object
+ */
 void ftFx_SpecialAirS_IASA(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -325,12 +381,17 @@ void ftFx_SpecialAirS_IASA(HSD_GObj* gobj)
     }
 }
 
+/**
+ * @brief Updates 4-entry ghost position and rotation history ring buffer
+ * @param gobj The fighter's game object
+ */
 static inline void ftFox_SpecialS_SetPhys(HSD_GObj* gobj)
 {
     Fighter* fp;
 
     fp = GET_FIGHTER(gobj);
 
+    // Shift previous positions down the buffer
     fp->mv.fx.SpecialS.ghostEffectPos[3] =
         fp->mv.fx.SpecialS.ghostEffectPos[2];
     fp->mv.fx.SpecialS.ghostEffectPos[2] =
@@ -340,6 +401,7 @@ static inline void ftFox_SpecialS_SetPhys(HSD_GObj* gobj)
 
     fp->mv.fx.SpecialS.ghostEffectPos[0] = fp->cur_pos;
 
+    // Shift previous model rotations down the buffer
     fp->mv.fx.SpecialS.blendFrames[3] = fp->mv.fx.SpecialS.blendFrames[2];
     fp->mv.fx.SpecialS.blendFrames[2] = fp->mv.fx.SpecialS.blendFrames[1];
     fp->mv.fx.SpecialS.blendFrames[1] = fp->mv.fx.SpecialS.blendFrames[0];
@@ -347,9 +409,10 @@ static inline void ftFox_SpecialS_SetPhys(HSD_GObj* gobj)
     fp->mv.fx.SpecialS.blendFrames[0] = ftPartGetRotX(fp, 0);
 }
 
-/// 0x800EA47C
-/// Fox & Falco's grounded Illusion/Phantasm
-/// Dash Physics callback
+/**
+ * @brief Physics callback for grounded Side-B dash
+ * @param gobj The fighter's game object
+ */
 void ftFx_SpecialS_Phys(HSD_GObj* gobj)
 {
     ft_80085088(gobj);
@@ -357,7 +420,10 @@ void ftFx_SpecialS_Phys(HSD_GObj* gobj)
     ftFox_SpecialS_SetPhys(gobj);
 }
 
-/// 0x800EA534
+/**
+ * @brief Physics callback for aerial Side-B dash
+ * @param gobj The fighter's game object
+ */
 void ftFx_SpecialAirS_Phys(HSD_GObj* gobj)
 {
     ft_80085134(gobj);
@@ -365,9 +431,10 @@ void ftFx_SpecialAirS_Phys(HSD_GObj* gobj)
     ftFox_SpecialS_SetPhys(gobj);
 }
 
-/// 0x800EA5EC
-/// Fox & Falco's grounded Illusion/Phantasm
-/// Dash Collision callback
+/**
+ * @brief Collision callback for grounded Side-B dash
+ * @param gobj The fighter's game object
+ */
 void ftFx_SpecialS_Coll(HSD_GObj* gobj)
 {
     if (ft_80082708(gobj) == false) {
@@ -375,9 +442,10 @@ void ftFx_SpecialS_Coll(HSD_GObj* gobj)
     }
 }
 
-/// 0x800EA628
-/// Fox & Falco's aerial Illusion/Phantasm
-/// Dash Collision callback
+/**
+ * @brief Collision callback for aerial Side-B dash
+ * @param gobj The fighter's game object
+ */
 void ftFx_SpecialAirS_Coll(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -390,9 +458,10 @@ void ftFx_SpecialAirS_Coll(HSD_GObj* gobj)
     }
 }
 
-/// 0x800EA698
-/// Fox & Falco's ground -> air
-/// Illusion/Phantasm Dash Motion State handler
+/**
+ * @brief Ground to air transition during Side-B dash
+ * @param gobj The fighter's game object
+ */
 void ftFx_SpecialS_GroundToAir(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -404,9 +473,10 @@ void ftFx_SpecialS_GroundToAir(HSD_GObj* gobj)
     fp->cmd_vars[2] = 0;
 }
 
-/// 0x800EA700
-/// Fox & Falco's air -> ground
-/// Illusion/Phantasm Dash Motion State handler
+/**
+ * @brief Air to ground transition during Side-B dash
+ * @param gobj The fighter's game object
+ */
 void ftFx_SpecialAirS_AirToGround(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -416,9 +486,13 @@ void ftFx_SpecialAirS_AirToGround(HSD_GObj* gobj)
     fp->cmd_vars[2] = 0;
 }
 
+/**
+ * @brief Initializes ghost position and rotation ring buffer
+ * @param gobj The fighter's game object
+ */
 static inline void ftFox_SpecialS_SetVars(HSD_GObj* gobj)
 {
-    float var;
+    float rot_x;
     Fighter* fp = GET_FIGHTER(gobj);
 
     fp->mv.fx.SpecialS.ghostEffectPos[3] = fp->cur_pos;
@@ -426,19 +500,20 @@ static inline void ftFox_SpecialS_SetVars(HSD_GObj* gobj)
     fp->mv.fx.SpecialS.ghostEffectPos[1] = fp->cur_pos;
     fp->mv.fx.SpecialS.ghostEffectPos[0] = fp->cur_pos;
 
-    var = ftPartGetRotX(fp, 0);
+    rot_x = ftPartGetRotX(fp, 0);
 
-    fp->mv.fx.SpecialS.blendFrames[3] = var;
-    fp->mv.fx.SpecialS.blendFrames[2] = var;
-    fp->mv.fx.SpecialS.blendFrames[1] = var;
-    fp->mv.fx.SpecialS.blendFrames[0] = var;
+    fp->mv.fx.SpecialS.blendFrames[3] = rot_x;
+    fp->mv.fx.SpecialS.blendFrames[2] = rot_x;
+    fp->mv.fx.SpecialS.blendFrames[1] = rot_x;
+    fp->mv.fx.SpecialS.blendFrames[0] = rot_x;
 
     fp->accessory4_cb = &ftFx_SpecialS_CreateGFX;
 }
 
-/// 0x800EA768
-/// Fox & Falco's grounded Illusion/Phantasm
-/// Dash Motion State handler
+/**
+ * @brief Action State initialization for grounded Side-B dash
+ * @param gobj The fighter's game object
+ */
 void ftFx_SpecialS_Enter(HSD_GObj* gobj)
 {
     u8 _[28];
@@ -448,9 +523,10 @@ void ftFx_SpecialS_Enter(HSD_GObj* gobj)
     ftFox_SpecialS_SetVars(gobj);
 }
 
-/// 0x800EA838
-/// Fox & Falco's aerial Illusion/Phantasm
-/// Dash Motion State handler
+/**
+ * @brief Action State initialization for aerial Side-B dash
+ * @param gobj The fighter's game object
+ */
 void ftFx_SpecialAirS_Enter(HSD_GObj* gobj)
 {
     u8 _[36];
@@ -460,9 +536,10 @@ void ftFx_SpecialAirS_Enter(HSD_GObj* gobj)
     ftFox_SpecialS_SetVars(gobj);
 }
 
-/// 0x800EA908
-/// Fox & Falco's grounded Illusion/Phantasm
-/// End Animation callback
+/**
+ * @brief Animation callback for grounded Side-B end lag
+ * @param gobj The fighter's game object
+ */
 void ftFx_SpecialSEnd_Anim(HSD_GObj* gobj)
 {
     if (!ftAnim_IsFramesRemaining(gobj)) {
@@ -470,9 +547,12 @@ void ftFx_SpecialSEnd_Anim(HSD_GObj* gobj)
     }
 }
 
-/// 0x800EA944
-/// Fox & Falco's aerial Illusion/Phantasm
-/// End Animation callback
+/**
+ * @brief Animation callback for aerial Side-B end lag / freefall
+ * @details Transitions into FallSpecial with freefall mobility and landing lag
+ * (20 frames).
+ * @param gobj The fighter's game object
+ */
 void ftFx_SpecialAirSEnd_Anim(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -484,21 +564,29 @@ void ftFx_SpecialAirSEnd_Anim(HSD_GObj* gobj)
     }
 }
 
-/// 0x800EA9A4 - Fox & Falco's grounded Illusion/Phantasm End IASA callback
+/**
+ * @brief IASA callback for grounded Side-B end lag (no interrupts)
+ * @param gobj The fighter's game object
+ */
 void ftFx_SpecialSEnd_IASA(HSD_GObj* gobj)
 {
     return;
 }
 
-/// 0x800EA9A8 - Fox & Falco's grounded Illusion/Phantasm End IASA callback
+/**
+ * @brief IASA callback for aerial Side-B end lag (no interrupts)
+ * @param gobj The fighter's game object
+ */
 void ftFx_SpecialAirSEnd_IASA(HSD_GObj* gobj)
 {
     return;
 }
 
-/// 0x800EA9AC
-/// Fox & Falco's grounded Illusion/Phantasm
-/// End Physics callback
+/**
+ * @brief Physics callback for grounded Side-B end lag (applies ground
+ * friction)
+ * @param gobj The fighter's game object
+ */
 void ftFx_SpecialSEnd_Phys(HSD_GObj* gobj)
 {
     Fighter* fp = getFighter(gobj);
@@ -514,9 +602,10 @@ void ftFx_SpecialSEnd_Phys(HSD_GObj* gobj)
     ftFox_SpecialS_SetPhys(gobj);
 }
 
-/// 0x800EAA8C
-/// Fox & Falco's aerial Illusion/Phantasm
-/// End Physics callback
+/**
+ * @brief Physics callback for aerial Side-B end lag
+ * @param gobj The fighter's game object
+ */
 void ftFx_SpecialAirSEnd_Phys(HSD_GObj* gobj)
 {
     Fighter* fp = fp = GET_FIGHTER(gobj);
@@ -535,9 +624,10 @@ void ftFx_SpecialAirSEnd_Phys(HSD_GObj* gobj)
     ftFox_SpecialS_SetPhys(gobj);
 }
 
-/// 0x800EAB90
-/// Fox & Falco's grounded Illusion/Phantasm
-/// End Collision callback
+/**
+ * @brief Collision callback for grounded Side-B end lag
+ * @param gobj The fighter's game object
+ */
 void ftFx_SpecialSEnd_Coll(HSD_GObj* gobj)
 {
     u8 _[8];
@@ -547,9 +637,12 @@ void ftFx_SpecialSEnd_Coll(HSD_GObj* gobj)
     }
 }
 
-/// 0x800EABCC
-/// Fox & Falco's aerial Illusion/Phantasm
-/// End Collision callback
+/**
+ * @brief Collision callback for aerial Side-B end lag
+ * @details Checks ground landing and enters landing lag
+ * (da->x50_FOX_ILLUSION_LANDING_LAG = 20 frames).
+ * @param gobj The fighter's game object
+ */
 void ftFx_SpecialAirSEnd_Coll(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -575,9 +668,10 @@ static inline void ftFox_SpecialSEnd_SetVars(HSD_GObj* gobj)
     fp->x2222_b2 = 1;
 }
 
-/// 0x800EAC50
-/// Fox & Falco's grounded Illusion End
-/// Motion State handler
+/**
+ * @brief Action State initialization for grounded Side-B end lag
+ * @param gobj The fighter's game object
+ */
 void ftFx_SpecialSEnd_Enter(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -590,7 +684,10 @@ void ftFx_SpecialSEnd_Enter(HSD_GObj* gobj)
     ftFox_SpecialSEnd_SetVars(gobj);
 }
 
-/// 0x800EACD8
+/**
+ * @brief Action State initialization for aerial Side-B end lag
+ * @param gobj The fighter's game object
+ */
 void ftFx_SpecialAirSEnd_Enter(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);

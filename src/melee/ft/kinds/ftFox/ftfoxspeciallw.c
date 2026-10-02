@@ -1,3 +1,14 @@
+/**
+ * @file ftfoxspeciallw.c
+ * @brief Down-B (Reflector / Shine)
+ * @details Implements Fox and Falco's Down-B special move (Reflector/Shine).
+ * Includes frame-1 startup hitbox and reflection bubble initialization,
+ * the active loop with Jump-Cancel Shine mechanics (ftCo_Jump_CheckInput),
+ * turnaround handling, platform drop-through, projectile reflection reactions,
+ * and release lag processing.
+ * Module prefix: ftFx
+ */
+
 #include "ftfoxspeciallw.h"
 
 #include <Runtime/platform.h>
@@ -29,6 +40,10 @@ static MotionFlags const ftFx_MF_SpecialLw_Coll =
 static MotionFlags const ftFx_MF_SpecialLwEnd_Coll =
     Ft_MF_SkipColAnim | Ft_MF_UpdateCmd;
 
+/**
+ * @brief Down-B (Reflector) - Spawns looping hexagonal shield particle effect
+ * @param gobj The fighter's game object
+ */
 void ftFx_SpecialLw_CreateLoopGFX(HSD_GObj* gobj)
 {
     /// @todo Shared @c inline with #ftFx_SpecialLw_CreateStartGFX.
@@ -43,7 +58,10 @@ void ftFx_SpecialLw_CreateLoopGFX(HSD_GObj* gobj)
     fp->accessory4_cb = NULL;
 }
 
-/// Create Reflector Start GFX
+/**
+ * @brief Down-B (Reflector) - Spawns initial activation flash effect
+ * @param gobj The fighter's game object
+ */
 void ftFx_SpecialLw_CreateStartGFX(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
@@ -57,6 +75,10 @@ void ftFx_SpecialLw_CreateStartGFX(HSD_GObj* gobj)
     fp->accessory4_cb = NULL;
 }
 
+/**
+ * @brief Down-B (Reflector) - Spawns projectile reflection deflection effect
+ * @param gobj The fighter's game object
+ */
 void ftFx_SpecialLw_CreateReflectGFX(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
@@ -71,6 +93,10 @@ void ftFx_SpecialLw_CreateReflectGFX(HSD_GObj* gobj)
     fp->accessory4_cb = NULL;
 }
 
+/**
+ * @brief Helper to initialize Reflector state variables
+ * @param gobj The fighter's game object
+ */
 static inline void ftFox_SpecialLw_SetVars(HSD_GObj* gobj)
 {
     Fighter* fp = fp = GET_FIGHTER(gobj);
@@ -86,6 +112,11 @@ static inline void ftFox_SpecialLw_SetVars(HSD_GObj* gobj)
     fp->accessory4_cb = ftFx_SpecialLw_CreateStartGFX;
 }
 
+/**
+ * @brief Action State initialization for grounded Down-B (Reflector / Shine)
+ * @details Hitbox active on frame 1; initial startup phase.
+ * @param gobj The fighter's game object
+ */
 void ftFx_SpecialLw_Enter(HSD_GObj* gobj)
 {
     u8 _[8];
@@ -97,6 +128,12 @@ void ftFx_SpecialLw_Enter(HSD_GObj* gobj)
     ftFox_SpecialLw_SetVars(gobj);
 }
 
+/**
+ * @brief Action State initialization for aerial Down-B (Reflector / Shine)
+ * @details Freezes vertical velocity (self_vel.y = 0) creating the "shine
+ * stall".
+ * @param gobj The fighter's game object
+ */
 void ftFx_SpecialAirLw_Enter(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -112,15 +149,16 @@ void ftFx_SpecialAirLw_Enter(HSD_GObj* gobj)
     ftFox_SpecialLw_SetVars(gobj);
 }
 
-/// Fox & Falco's grounded Reflector Loop Motion State handler
+/// Forward declaration: grounded Reflector loop enter
 static void ftFx_SpecialLwLoop_Enter(HSD_GObj* gobj);
 
-/// Fox & Falco's aerial Reflector Loop Motion State handler
+/// Forward declaration: aerial Reflector loop enter
 static void ftFx_SpecialAirLwLoop_Enter(HSD_GObj* gobj);
 
-/// 0x800E8694
-/// Fox & Falco's grounded Reflector Start
-/// Animation callback
+/**
+ * @brief Animation callback for grounded Down-B (Reflector) startup
+ * @param gobj The fighter's game object
+ */
 void ftFx_SpecialLwStart_Anim(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -139,7 +177,10 @@ void ftFx_SpecialLwStart_Anim(HSD_GObj* gobj)
     }
 }
 
-/// Fox & Falco's aerial Reflector Start Animation callback
+/**
+ * @brief Animation callback for aerial Down-B (Reflector) startup
+ * @param gobj The fighter's game object
+ */
 void ftFx_SpecialAirLwStart_Anim(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -161,9 +202,10 @@ void ftFx_SpecialAirLwStart_Anim(HSD_GObj* gobj)
     }
 }
 
-/// 0x800E87AC
-/// Fox & Falco's grounded Reflector Start
-/// IASA callback
+/**
+ * @brief IASA callback for grounded Down-B startup (checks platform drop)
+ * @param gobj The fighter's game object
+ */
 void ftFx_SpecialLwStart_IASA(HSD_GObj* gobj)
 {
     if (ftFx_SpecialLwStart_CheckPass(gobj)) {
@@ -171,12 +213,20 @@ void ftFx_SpecialLwStart_IASA(HSD_GObj* gobj)
     }
 }
 
-/// 0x800E87D0 - Fox & Falco's aerial Reflector Start IASA callback
+/**
+ * @brief IASA callback for aerial Down-B startup (no interrupts)
+ * @param gobj The fighter's game object
+ */
 void ftFx_SpecialAirLwStart_IASA(HSD_GObj* gobj)
 {
     return;
 }
 
+/**
+ * @brief Checks for platform drop-through input during Down-B startup
+ * @param gobj The fighter's game object
+ * @return True if dropping through platform, false otherwise
+ */
 bool ftFx_SpecialLwStart_CheckPass(HSD_GObj* gobj)
 {
     if (ftCo_80099F1C(gobj) != false) {
@@ -187,9 +237,13 @@ bool ftFx_SpecialLwStart_CheckPass(HSD_GObj* gobj)
     return false;
 }
 
-/// Create Reflector's reflect bubble
+/// Forward declaration: creates reflection bubble collision
 static void ftFx_SpecialLw_CreateReflectHit(HSD_GObj* gobj);
 
+/**
+ * @brief Drops through platform during Down-B startup
+ * @param gobj The fighter's game object
+ */
 void ftFx_SpecialLwStart_Pass(HSD_GObj* gobj)
 {
     ftCo_8009A184(gobj, ftFx_MS_SpecialAirLwStart, ftFx_MF_SpecialLw_Coll,
@@ -198,11 +252,19 @@ void ftFx_SpecialLwStart_Pass(HSD_GObj* gobj)
     ftFx_SpecialLw_CreateReflectHit(gobj);
 }
 
+/**
+ * @brief Physics callback for grounded Down-B startup
+ * @param gobj The fighter's game object
+ */
 void ftFx_SpecialLwStart_Phys(HSD_GObj* gobj)
 {
     ft_80084F3C(gobj);
 }
 
+/**
+ * @brief Physics callback for aerial Down-B startup
+ * @param gobj The fighter's game object
+ */
 void ftFx_SpecialAirLwStart_Phys(HSD_GObj* gobj)
 {
     u8 _[8];
@@ -221,6 +283,10 @@ void ftFx_SpecialAirLwStart_Phys(HSD_GObj* gobj)
     ftCommon_CalcSelfAccel_DeaccelQuickAir(fp);
 }
 
+/**
+ * @brief Collision callback for grounded Down-B startup
+ * @param gobj The fighter's game object
+ */
 void ftFx_SpecialLwStart_Coll(HSD_GObj* gobj)
 {
     if (ft_80082708(gobj) == false) {
@@ -228,6 +294,10 @@ void ftFx_SpecialLwStart_Coll(HSD_GObj* gobj)
     }
 }
 
+/**
+ * @brief Collision callback for aerial Down-B startup
+ * @param gobj The fighter's game object
+ */
 void ftFx_SpecialAirLwStart_Coll(HSD_GObj* gobj)
 {
     if (ft_80081D0C(gobj) != false) {
@@ -235,6 +305,10 @@ void ftFx_SpecialAirLwStart_Coll(HSD_GObj* gobj)
     }
 }
 
+/**
+ * @brief Ground to air transition during Down-B startup
+ * @param gobj The fighter's game object
+ */
 void ftFx_SpecialLwStart_GroundToAir(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -243,6 +317,10 @@ void ftFx_SpecialLwStart_GroundToAir(HSD_GObj* gobj)
                                     ftFx_MF_SpecialLw_Coll);
 }
 
+/**
+ * @brief Air to ground transition during Down-B startup
+ * @param gobj The fighter's game object
+ */
 void ftFx_SpecialAirLwStart_AirToGround(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -253,6 +331,12 @@ void ftFx_SpecialAirLwStart_AirToGround(HSD_GObj* gobj)
     ftCommon_ClampAirDrift(fp);
 }
 
+/**
+ * @brief Animation callback for grounded Down-B active loop
+ * @details Decrements release lag counter; transitions to End when B is
+ * released and lag expires.
+ * @param gobj The fighter's game object
+ */
 void ftFx_SpecialLwLoop_Anim(HSD_GObj* gobj)
 {
     /// @todo Shared @c inline with #ftFx_SpecialAirLwLoop_Anim.
@@ -275,6 +359,10 @@ void ftFx_SpecialLwLoop_Anim(HSD_GObj* gobj)
     }
 }
 
+/**
+ * @brief Animation callback for aerial Down-B active loop
+ * @param gobj The fighter's game object
+ */
 void ftFx_SpecialAirLwLoop_Anim(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -299,9 +387,16 @@ void ftFx_SpecialAirLwLoop_Anim(HSD_GObj* gobj)
     }
 }
 
-/// Check for drop-through platform while in SpecialLwLoop
+/// Checks platform drop during Reflector loop
 static bool ftFx_SpecialLwLoop_CheckPass(HSD_GObj* gobj);
 
+/**
+ * @brief IASA callback for grounded Down-B active loop
+ * @details **JUMP-CANCEL SHINE**: Checks for jump input
+ * (`ftCo_Jump_CheckInput`) allowing Fox to jump cancel out of Reflector
+ * starting on frame 4. Also checks for turnaround input and platform drop.
+ * @param gobj The fighter's game object
+ */
 void ftFx_SpecialLwLoop_IASA(HSD_GObj* gobj)
 {
     if ((ftFx_SpecialLwTurn_Check(gobj) == false) &&
@@ -313,6 +408,10 @@ void ftFx_SpecialLwLoop_IASA(HSD_GObj* gobj)
     }
 }
 
+/**
+ * @brief IASA callback for aerial Down-B active loop
+ * @param gobj The fighter's game object
+ */
 void ftFx_SpecialAirLwLoop_IASA(HSD_GObj* gobj)
 {
     if (ftFx_SpecialLwTurn_Check(gobj) == false && ftCo_800CB870(gobj)) {
@@ -321,9 +420,14 @@ void ftFx_SpecialAirLwLoop_IASA(HSD_GObj* gobj)
     }
 }
 
-/// Fox & Falco's Reflector Loop Platform Drop Motion State handler
+/// Handles platform drop-through in Reflector loop
 static void ftFx_SpecialLwLoop_Pass(HSD_GObj* gobj);
 
+/**
+ * @brief Checks for platform drop-through input during Reflector loop
+ * @param gobj The fighter's game object
+ * @return True if dropping through, false otherwise
+ */
 static bool ftFx_SpecialLwLoop_CheckPass(HSD_GObj* gobj)
 {
     if (ftCo_80099F1C(gobj) != false) {
@@ -334,6 +438,10 @@ static bool ftFx_SpecialLwLoop_CheckPass(HSD_GObj* gobj)
     return false;
 }
 
+/**
+ * @brief Executes platform drop-through during Reflector loop
+ * @param gobj The fighter's game object
+ */
 static void ftFx_SpecialLwLoop_Pass(HSD_GObj* gobj)
 {
     ftCo_8009A184(gobj, ftFx_MS_SpecialAirLwLoop, ftFx_MF_SpecialLw_Coll,
@@ -342,12 +450,20 @@ static void ftFx_SpecialLwLoop_Pass(HSD_GObj* gobj)
     ftFx_SpecialLw_CreateReflectHit(gobj);
 }
 
+/**
+ * @brief Physics callback for grounded Down-B active loop
+ * @param gobj The fighter's game object
+ */
 void ftFx_SpecialLwLoop_Phys(HSD_GObj* gobj)
 {
     ft_80084F3C(gobj);
     ftColl_8007AEF8(gobj);
 }
 
+/**
+ * @brief Helper for aerial Reflector physics
+ * @param gobj The fighter's game object
+ */
 static inline void ftFox_SpecialLw_InlinePhys(HSD_GObj* gobj)
 {
     ftCo_DatAttrs* ca;
@@ -368,15 +484,23 @@ static inline void ftFox_SpecialLw_InlinePhys(HSD_GObj* gobj)
     ftCommon_CalcSelfAccel_DeaccelQuickAir(fp);
 }
 
+/**
+ * @brief Physics callback for aerial Down-B active loop
+ * @param gobj The fighter's game object
+ */
 void ftFx_SpecialAirLwLoop_Phys(HSD_GObj* gobj)
 {
     ftFox_SpecialLw_InlinePhys(gobj);
     ftColl_8007AEF8(gobj);
 }
 
-/// Fox & Falco's ground -> air Reflector Loop Motion State handler
+/// Ground to air transition during Reflector loop
 static void ftFx_SpecialLwLoop_GroundToAir(HSD_GObj* gobj);
 
+/**
+ * @brief Collision callback for grounded Down-B active loop
+ * @param gobj The fighter's game object
+ */
 void ftFx_SpecialLwLoop_Coll(HSD_GObj* gobj)
 {
     if (ft_80082708(gobj) == false) {
@@ -384,9 +508,13 @@ void ftFx_SpecialLwLoop_Coll(HSD_GObj* gobj)
     }
 }
 
-/// Fox & Falco's air -> ground Reflector Loop Motion State Handler
+/// Air to ground transition during Reflector loop
 static void ftFx_SpecialAirLwLoop_AirToGround(HSD_GObj* gobj);
 
+/**
+ * @brief Collision callback for aerial Down-B active loop
+ * @param gobj The fighter's game object
+ */
 void ftFx_SpecialAirLwLoop_Coll(HSD_GObj* gobj)
 {
     if (ft_80081D0C(gobj) != false) {
@@ -415,6 +543,11 @@ static void ftFx_SpecialAirLwLoop_AirToGround(HSD_GObj* gobj)
     ftFx_SpecialLw_CreateReflectHit(gobj);
 }
 
+/**
+ * @brief Creates the reflection hitbox bubble with callback to
+ * ftFx_SpecialLwHit_Enter
+ * @param gobj The fighter's game object
+ */
 static void ftFx_SpecialLw_CreateReflectHit(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
@@ -432,7 +565,6 @@ static void ftFx_SpecialLwLoop_Enter(HSD_GObj* gobj)
     ftFx_SpecialLw_CreateReflectHit(gobj);
 }
 
-/// Fox & Falco's aerial Reflector Loop Motion State handler
 static void ftFx_SpecialAirLwLoop_Enter(HSD_GObj* gobj)
 {
     Fighter_ChangeMotionState(gobj, ftFx_MS_SpecialAirLwLoop, Ft_MF_KeepGfx, 0,
@@ -441,6 +573,10 @@ static void ftFx_SpecialAirLwLoop_Enter(HSD_GObj* gobj)
     ftFx_SpecialLw_CreateReflectHit(gobj);
 }
 
+/**
+ * @brief Checks B button release state and decrements release lag
+ * @param gobj The fighter's game object
+ */
 static inline void updateRelease(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -454,7 +590,11 @@ static inline void updateRelease(HSD_GObj* gobj)
     }
 }
 
-/// Fox & Falco's Reflector Turn function
+/**
+ * @brief Down-B (Reflector) - Incremental turnaround interpolation
+ * @details Reverses facing direction at midpoint and rotates model Y axis.
+ * @param gobj The fighter's game object
+ */
 static void ftFx_SpecialLw_Turn(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
@@ -474,6 +614,10 @@ static void ftFx_SpecialLw_Turn(HSD_GObj* gobj)
                     ftPartGetRotZ(fp, 0)));
 }
 
+/**
+ * @brief Animation callback for grounded Down-B turnaround
+ * @param gobj The fighter's game object
+ */
 void ftFx_SpecialLwTurn_Anim(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -488,6 +632,10 @@ void ftFx_SpecialLwTurn_Anim(HSD_GObj* gobj)
     }
 }
 
+/**
+ * @brief Animation callback for aerial Down-B turnaround
+ * @param gobj The fighter's game object
+ */
 void ftFx_SpecialAirLwTurn_Anim(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -502,28 +650,38 @@ void ftFx_SpecialAirLwTurn_Anim(HSD_GObj* gobj)
     }
 }
 
-/// 0x800E91FC - Fox & Falco's grounded Reflector Turn IASA callback
+/**
+ * @brief IASA callback for grounded Down-B turnaround (no interrupts)
+ * @param gobj The fighter's game object
+ */
 void ftFx_SpecialLwTurn_IASA(HSD_GObj* gobj)
 {
     return;
 }
 
-/// 0x800E9200 - Fox & Falco's aerial Reflector Turn IASA callback
+/**
+ * @brief IASA callback for aerial Down-B turnaround (no interrupts)
+ * @param gobj The fighter's game object
+ */
 void ftFx_SpecialAirLwTurn_IASA(HSD_GObj* gobj)
 {
     return;
 }
 
-/// 0x800E9204
-/// Fox & Falco's grounded Reflector Turn
-/// Physics callback
+/**
+ * @brief Physics callback for grounded Down-B turnaround
+ * @param gobj The fighter's game object
+ */
 void ftFx_SpecialLwTurn_Phys(HSD_GObj* gobj)
 {
     ft_80084F3C(gobj);
     ftColl_8007AEF8(gobj);
 }
 
-/// Fox & Falco's aerial Reflector Turn Physics callback
+/**
+ * @brief Physics callback for aerial Down-B turnaround
+ * @param gobj The fighter's game object
+ */
 void ftFx_SpecialAirLwTurn_Phys(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -543,9 +701,10 @@ void ftFx_SpecialAirLwTurn_Phys(HSD_GObj* gobj)
     ftColl_8007AEF8(gobj);
 }
 
-/// 0x800E92AC
-/// Fox & Falco's grounded Reflector Turn
-/// Collision callback
+/**
+ * @brief Collision callback for grounded Down-B turnaround
+ * @param gobj The fighter's game object
+ */
 void ftFx_SpecialLwTurn_Coll(HSD_GObj* gobj)
 {
     if (ft_80082708(gobj) == false) {
@@ -553,9 +712,10 @@ void ftFx_SpecialLwTurn_Coll(HSD_GObj* gobj)
     }
 }
 
-/// 0x800E92E8
-/// Fox & Falco's aerial Reflector Turn
-/// Collision callback
+/**
+ * @brief Collision callback for aerial Down-B turnaround
+ * @param gobj The fighter's game object
+ */
 void ftFx_SpecialAirLwTurn_Coll(HSD_GObj* gobj)
 {
     if (ft_80081D0C(gobj) != false) {
@@ -570,9 +730,10 @@ static inline void ftFox_SpecialLw_SetReflectVars(HSD_GObj* gobj)
     fp->reflect_hit_cb = ftFx_SpecialLwHit_Enter;
 }
 
-/// 0x800E9324
-/// Fox & Falco's ground -> air Reflector
-/// Turn Motion State handler
+/**
+ * @brief Ground to air transition during Down-B turnaround
+ * @param gobj The fighter's game object
+ */
 void ftFx_SpecialLwTurn_GroundToAir(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -582,9 +743,10 @@ void ftFx_SpecialLwTurn_GroundToAir(HSD_GObj* gobj)
     ftFox_SpecialLw_SetReflectVars(gobj);
 }
 
-/// 0x800E93A4
-/// Fox & Falco's air -> ground Reflector
-/// Turn Motion State handler
+/**
+ * @brief Air to ground transition during Down-B turnaround
+ * @param gobj The fighter's game object
+ */
 void ftFx_SpecialAirLwTurn_GroundToAir(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -620,9 +782,11 @@ static inline void enterAirTurn(HSD_GObj* gobj)
     ftFox_SpecialLwTurn_SetVarAll(gobj);
 }
 
-/// 0x800E942C
-/// Fox & Falco's Reflector Turn Motion
-/// State handler
+/**
+ * @brief Checks for turnaround input during Down-B active loop
+ * @param gobj The fighter's game object
+ * @return True if turnaround initiated, false otherwise
+ */
 bool ftFx_SpecialLwTurn_Check(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
@@ -640,9 +804,11 @@ bool ftFx_SpecialLwTurn_Check(HSD_GObj* gobj)
     return false;
 }
 
-/// 0x800E9564
-/// Fox & Falco's Reflector Hit Motion State
-/// handler
+/**
+ * @brief Checks transition conditions after Reflector reflect hit finishes
+ * @param gobj The fighter's game object
+ * @return True if returning to loop, false if entering end lag
+ */
 bool ftFx_SpecialLwHit_Check(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
@@ -663,7 +829,10 @@ bool ftFx_SpecialLwHit_Check(HSD_GObj* gobj)
     return true;
 }
 
-/// Fox & Falco's grounded Reflector Hit Animation callback
+/**
+ * @brief Animation callback for grounded projectile reflection hit
+ * @param gobj The fighter's game object
+ */
 void ftFx_SpecialLwHit_Anim(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -678,34 +847,47 @@ void ftFx_SpecialLwHit_Anim(HSD_GObj* gobj)
     }
 }
 
-/// Fox & Falco's aerial Reflector Hit Animation callback
+/**
+ * @brief Animation callback for aerial projectile reflection hit
+ * @param gobj The fighter's game object
+ */
 void ftFx_SpecialAirLwHit_Anim(HSD_GObj* gobj)
 {
     ftFx_SpecialLwHit_Anim(gobj);
 }
 
-/// 0x800E9844 - Fox & Falco's grounded Reflector Hit IASA callback
+/**
+ * @brief IASA callback for grounded Reflector hit (no interrupts)
+ * @param gobj The fighter's game object
+ */
 void ftFx_SpecialLwHit_IASA(HSD_GObj* gobj)
 {
     return;
 }
 
-/// 0x800E9848 - Fox & Falco's aerial Reflector Hit IASA callback
+/**
+ * @brief IASA callback for aerial Reflector hit (no interrupts)
+ * @param gobj The fighter's game object
+ */
 void ftFx_SpecialAirLwHit_IASA(HSD_GObj* gobj)
 {
     return;
 }
 
-/// 0x800E984C
-/// Fox & Falco's grounded Reflector Hit
-/// Physics callback
+/**
+ * @brief Physics callback for grounded Reflector hit
+ * @param gobj The fighter's game object
+ */
 void ftFx_SpecialLwHit_Phys(HSD_GObj* gobj)
 {
     ft_80084F3C(gobj);
     ftColl_8007AEF8(gobj);
 }
 
-/// Fox & Falco's aerial Reflector Hit Physics callback
+/**
+ * @brief Physics callback for aerial Reflector hit
+ * @param gobj The fighter's game object
+ */
 void ftFx_SpecialAirLwHit_Phys(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -725,7 +907,10 @@ void ftFx_SpecialAirLwHit_Phys(HSD_GObj* gobj)
     ftColl_8007AEF8(gobj);
 }
 
-/// Fox & Falco's grounded Reflector Hit Collision callback
+/**
+ * @brief Collision callback for grounded Reflector hit
+ * @param gobj The fighter's game object
+ */
 void ftFx_SpecialLwHit_Coll(HSD_GObj* gobj)
 {
     if (!ft_80082708(gobj)) {
@@ -733,7 +918,10 @@ void ftFx_SpecialLwHit_Coll(HSD_GObj* gobj)
     }
 }
 
-/// Fox & Falco's aerial Reflector Hit Collision callback
+/**
+ * @brief Collision callback for aerial Reflector hit
+ * @param gobj The fighter's game object
+ */
 void ftFx_SpecialAirLwHit_Coll(HSD_GObj* gobj)
 {
     if (ft_80081D0C(gobj)) {
@@ -741,9 +929,10 @@ void ftFx_SpecialAirLwHit_Coll(HSD_GObj* gobj)
     }
 }
 
-/// 0x800E996C
-/// Fox & Falco's ground -> air Reflector
-/// Hit Motion State handler
+/**
+ * @brief Ground to air transition during Reflector hit
+ * @param gobj The fighter's game object
+ */
 void ftFx_SpecialLwHit_GroundToAir(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
@@ -753,9 +942,10 @@ void ftFx_SpecialLwHit_GroundToAir(HSD_GObj* gobj)
     ftFx_SpecialLwHit_SetCall(gobj);
 }
 
-/// 0x800E99D4
-/// Fox & Falco's air -> ground Reflector
-/// Hit Motion State handler
+/**
+ * @brief Air to ground transition during Reflector hit
+ * @param gobj The fighter's game object
+ */
 void ftFx_SpecialAirLwHit_AirToGround(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
@@ -766,9 +956,10 @@ void ftFx_SpecialAirLwHit_AirToGround(HSD_GObj* gobj)
     ftFx_SpecialLwHit_SetCall(gobj);
 }
 
-/// 0x800E9A44
-/// Toggle bit flag and set OnReflect
-/// callback for Reflector
+/**
+ * @brief Sets reflection active flag and callback
+ * @param gobj The fighter's game object
+ */
 void ftFx_SpecialLwHit_SetCall(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -777,21 +968,24 @@ void ftFx_SpecialLwHit_SetCall(HSD_GObj* gobj)
     fp->reflect_hit_cb = ftFx_SpecialLwHit_Enter;
 }
 
-/// 0x800E9A68
-/// Fox & Falco's Reflect Hit Motion State
-/// handler
+/**
+ * @brief Action State initialization when Reflector reflects a projectile
+ * @details Spawns sparkle burst effect (lb_800119DC) and turns fighter toward
+ * projectile origin.
+ * @param gobj The fighter's game object
+ */
 void ftFx_SpecialLwHit_Enter(HSD_GObj* gobj)
 {
-    Vec3 sp14;
+    Vec3 spark_pos;
     Fighter* fp = fp = GET_FIGHTER(gobj);
     s32 msid;
 
     fp->facing_dir = fp->ReflectAttr.x1A2C_reflectHitDirection;
 
     lb_8000B1CC(fp->parts[ftParts_GetBoneIndex(fp, FtPart_HipN)].joint, NULL,
-                &sp14);
+                &spark_pos);
 
-    lb_800119DC(&sp14, 120, 3, 0.1, M_PI / 3);
+    lb_800119DC(&spark_pos, 120, 3, 0.1, M_PI / 3);
 
     if (fp->ground_or_air == GA_Ground) {
         msid = ftFx_MS_SpecialLwHit;
@@ -805,7 +999,10 @@ void ftFx_SpecialLwHit_Enter(HSD_GObj* gobj)
     fp->accessory4_cb = ftFx_SpecialLw_CreateReflectGFX;
 }
 
-/// Fox & Falco's grounded Reflector End Animation callback
+/**
+ * @brief Animation callback for grounded Down-B release end lag
+ * @param gobj The fighter's game object
+ */
 void ftFx_SpecialLwEnd_Anim(HSD_GObj* gobj)
 {
     u8 _[8];
@@ -816,7 +1013,10 @@ void ftFx_SpecialLwEnd_Anim(HSD_GObj* gobj)
     }
 }
 
-/// Fox & Falco's aerial Reflector End Animation callback
+/**
+ * @brief Animation callback for aerial Down-B release end lag
+ * @param gobj The fighter's game object
+ */
 void ftFx_SpecialAirLwEnd_Anim(HSD_GObj* gobj)
 {
     u8 _[8];
@@ -827,25 +1027,37 @@ void ftFx_SpecialAirLwEnd_Anim(HSD_GObj* gobj)
     }
 }
 
-/// Fox & Falco's grounded Reflector End IASA callback
+/**
+ * @brief IASA callback for grounded Down-B release end lag (no interrupts)
+ * @param gobj The fighter's game object
+ */
 void ftFx_SpecialLwEnd_IASA(HSD_GObj* gobj)
 {
     return;
 }
 
-/// 0x800E9BCC - Fox & Falco's aerial Reflector End IASA callback
+/**
+ * @brief IASA callback for aerial Down-B release end lag (no interrupts)
+ * @param gobj The fighter's game object
+ */
 void ftFx_SpecialAirLwEnd_IASA(HSD_GObj* gobj)
 {
     return;
 }
 
-/// 0x800E9BD0 - Fox & Falco's grounded Reflector End Physics callback
+/**
+ * @brief Physics callback for grounded Down-B release end lag
+ * @param gobj The fighter's game object
+ */
 void ftFx_SpecialLwEnd_Phys(HSD_GObj* gobj)
 {
     ft_80084F3C(gobj);
 }
 
-/// Fox & Falco's aerial Reflector End Physics callback
+/**
+ * @brief Physics callback for aerial Down-B release end lag
+ * @param gobj The fighter's game object
+ */
 void ftFx_SpecialAirLwEnd_Phys(HSD_GObj* gobj)
 {
     Fighter* fp = fp = GET_FIGHTER(gobj);
@@ -863,9 +1075,10 @@ void ftFx_SpecialAirLwEnd_Phys(HSD_GObj* gobj)
     ftCommon_CalcSelfAccel_DeaccelQuickAir(fp);
 }
 
-/// 0x800E9C50
-/// Fox & Falco's grounded Reflector End
-/// Collision callback
+/**
+ * @brief Collision callback for grounded Down-B release end lag
+ * @param gobj The fighter's game object
+ */
 void ftFx_SpecialLwEnd_Coll(HSD_GObj* gobj)
 {
     if (ft_80082708(gobj) == false) {
@@ -873,9 +1086,10 @@ void ftFx_SpecialLwEnd_Coll(HSD_GObj* gobj)
     }
 }
 
-/// 0x800E9C8C
-/// Fox & Falco's aerial Reflector End
-/// Collision callback
+/**
+ * @brief Collision callback for aerial Down-B release end lag
+ * @param gobj The fighter's game object
+ */
 void ftFx_SpecialAirLwEnd_Coll(HSD_GObj* gobj)
 {
     if (ft_80081D0C(gobj) != false) {
@@ -883,9 +1097,10 @@ void ftFx_SpecialAirLwEnd_Coll(HSD_GObj* gobj)
     }
 }
 
-/// 0x800E9CC8
-/// Fox & Falco's ground -> air Reflector
-/// End Motion State handler
+/**
+ * @brief Ground to air transition during Down-B release end lag
+ * @param gobj The fighter's game object
+ */
 void ftFx_SpecialLwEnd_GroundToAir(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
@@ -894,9 +1109,10 @@ void ftFx_SpecialLwEnd_GroundToAir(HSD_GObj* gobj)
                                     ftFx_MF_SpecialLwEnd_Coll);
 }
 
-/// 0x800E9D24
-/// Fox & Falco's air -> ground Reflector
-/// End Motion State handler
+/**
+ * @brief Air to ground transition during Down-B release end lag
+ * @param gobj The fighter's game object
+ */
 void ftFx_SpecialAirLwEnd_AirToGround(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
@@ -906,16 +1122,20 @@ void ftFx_SpecialAirLwEnd_AirToGround(HSD_GObj* gobj)
     ftCommon_ClampAirDrift(fp);
 }
 
-/// 0x800E9D88
-/// Fox & Falco's grounded Reflector End
-/// Motion State handler
+/**
+ * @brief Action State initialization for grounded Down-B release end lag
+ * @param gobj The fighter's game object
+ */
 void ftFx_SpecialLwEnd_Enter(HSD_GObj* gobj)
 {
     Fighter_ChangeMotionState(gobj, ftFx_MS_SpecialLwEnd, Ft_MF_None, 0, 1, 0,
                               NULL);
 }
 
-/// 0x800E9DC0 - Fox & Falco's aerial Reflector End Motion State handler
+/**
+ * @brief Action State initialization for aerial Down-B release end lag
+ * @param gobj The fighter's game object
+ */
 void ftFx_SpecialAirLwEnd_Enter(HSD_GObj* gobj)
 {
     Fighter_ChangeMotionState(gobj, ftFx_MS_SpecialAirLwEnd, Ft_MF_None, 0, 1,

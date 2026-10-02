@@ -1,3 +1,13 @@
+/**
+ * @file ftfoxspecialn.c
+ * @brief Neutral-B (Blaster)
+ * @details Implements Fox and Falco's Neutral-B special move (Blaster).
+ * Handles spawning and managing the Blaster gun item entity, firing laser shot
+ * projectiles, the continuous firing loop (enabling Short Hop Double Laser),
+ * holster animations, and firing laser shots during Fox/Falco's throws.
+ * Module prefix: ftFx
+ */
+
 #include "ftfoxspecialn.h"
 
 #include <melee/ft/forward.h>
@@ -30,32 +40,54 @@
 #include <melee/lb/lb_00B0.h>
 #include <sysdolphin/baselib/debug.h>
 
+/**
+ * @brief Computes world position of Blaster muzzle from right thumb joint
+ * @param gobj The fighter's game object
+ * @param[out] pos Output world coordinates
+ * @param z_offset Z offset along bone
+ */
 static inline void ftFox_SpecialN_GetHoldJoint(HSD_GObj* gobj, Vec3* pos,
                                                f32 z_offset)
 {
-    Vec3 sp14;
+    Vec3 joint_offset;
 
     // Double fp init otherwise this will not match when inlined
     Fighter* fp = fp = GET_FIGHTER(gobj);
 
-    sp14.x = 0;
-    sp14.y = 1.2325000762939453f;
-    sp14.z = z_offset;
+    joint_offset.x = 0;
+    joint_offset.y = 1.2325000762939453f;
+    joint_offset.z = z_offset;
 
     lb_8000B1CC(fp->parts[ftParts_GetBoneIndex(fp, FtPart_RThumbNb)].joint,
-                &sp14, pos);
+                &joint_offset, pos);
 }
 
+/**
+ * @brief Gets Blaster muzzle world position for fighter laser effects (z
+ * = 4.2636f)
+ * @param gobj The fighter's game object
+ * @param[out] pos Output world coordinates
+ */
 void ftFx_SpecialN_FtGetHoldJoint(HSD_GObj* gobj, Vec3* pos)
 {
     ftFox_SpecialN_GetHoldJoint(gobj, pos, 4.263599872589111f);
 }
 
+/**
+ * @brief Gets Blaster muzzle world position for item laser effects (z =
+ * 0.0136f)
+ * @param gobj The fighter's game object
+ * @param[out] pos Output world coordinates
+ */
 void ftFx_SpecialN_ItGetHoldJoint(HSD_GObj* gobj, Vec3* pos)
 {
     ftFox_SpecialN_GetHoldJoint(gobj, pos, 0.013600001111626625f);
 }
 
+/**
+ * @brief Callback when action state changes during Blaster
+ * @param gobj The fighter's game object
+ */
 void ftFx_SpecialN_OnChangeAction(HSD_GObj* gobj)
 {
     PAD_STACK(8);
@@ -64,6 +96,11 @@ void ftFx_SpecialN_OnChangeAction(HSD_GObj* gobj)
     ft_80089824(gobj);
 }
 
+/**
+ * @brief Checks if the Blaster item GObj pointer is NULL
+ * @param gobj The fighter's game object
+ * @return True if blaster GObj is NULL, false otherwise
+ */
 bool ftFx_SpecialN_CheckRemoveBlaster(HSD_GObj* gobj)
 {
     if (GET_FIGHTER(gobj)->u.fx.x222C_blasterGObj == NULL) {
@@ -72,6 +109,11 @@ bool ftFx_SpecialN_CheckRemoveBlaster(HSD_GObj* gobj)
     return false;
 }
 
+/**
+ * @brief Maps current motion state to Blaster sub-action index
+ * @param gobj The fighter's game object
+ * @return Sub-action index (0..5 for SpecialN, 6..8 for throws, 9 for none)
+ */
 s32 ftFx_SpecialN_GetBlasterAction(HSD_GObj* gobj)
 {
     s32 msid = 9;
@@ -100,6 +142,11 @@ s32 ftFx_SpecialN_GetBlasterAction(HSD_GObj* gobj)
     return msid;
 }
 
+/**
+ * @brief Checks if current action is an active Blaster action
+ * @param gobj The fighter's game object
+ * @return True if Blaster should remain active, false otherwise
+ */
 bool ftFx_SpecialN_CheckBlasterAction(HSD_GObj* gobj)
 {
     if (gobj != NULL) {
@@ -124,6 +171,10 @@ bool ftFx_SpecialN_CheckBlasterAction(HSD_GObj* gobj)
     return true;
 }
 
+/**
+ * @brief Clears Blaster GObj pointer and removes damage callback
+ * @param gobj The fighter's game object
+ */
 void ftFx_SpecialN_ClearBlaster(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -134,6 +185,10 @@ void ftFx_SpecialN_ClearBlaster(HSD_GObj* gobj)
     Fighter_SetDamageCallback(gobj, NULL);
 }
 
+/**
+ * @brief Destroys Blaster item entity and clears pointer
+ * @param gobj The fighter's game object
+ */
 void ftFx_SpecialN_RemoveBlaster(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -147,9 +202,19 @@ void ftFx_SpecialN_RemoveBlaster(HSD_GObj* gobj)
     }
 }
 
+/// Sound effect IDs for Fox Blaster shot [facing_right, facing_left]
 u32 foxSFX[2] = { 110103, 110106 };
+/// Sound effect IDs for Falco Blaster shot [facing_right, facing_left]
 u32 falcoSFX[2] = { 100099, 100102 };
 
+/**
+ * @brief Prepares Blaster muzzle position and computes firing angle
+ * @param gobj The fighter's game object
+ * @param fp Pointer to the Fighter data structure
+ * @param da Character attributes
+ * @param[out] pos Output muzzle coordinates
+ * @return Firing angle in radians
+ */
 static inline f64 ftFox_SpecialN_PrepareBlasterShot(HSD_GObj* gobj,
                                                     Fighter* fp,
                                                     ftFox_DatAttrs* da,
@@ -163,6 +228,14 @@ static inline f64 ftFox_SpecialN_PrepareBlasterShot(HSD_GObj* gobj,
     return M_PI - da->x10_FOX_BLASTER_ANGLE;
 }
 
+/**
+ * @brief Spawns laser shot projectile and triggers SFX
+ * @param gobj The fighter's game object
+ * @param fp Pointer to the Fighter data structure
+ * @param da Character attributes
+ * @param pos Muzzle world coordinates
+ * @param launch_angle Firing angle in radians
+ */
 static inline void ftFox_SpecialN_FireBlasterShot(HSD_GObj* gobj, Fighter* fp,
                                                   ftFox_DatAttrs* da,
                                                   Vec3* pos, f64 launch_angle)
@@ -185,9 +258,13 @@ static inline void ftFox_SpecialN_FireBlasterShot(HSD_GObj* gobj, Fighter* fp,
     }
 }
 
+/**
+ * @brief Animation script accessory callback to spawn laser projectile
+ * @param gobj The fighter's game object
+ */
 void ftFx_SpecialN_CreateBlasterShot(HSD_GObj* gobj)
 {
-    Vec3 sp2C;
+    Vec3 shot_pos;
 
     ftFox_DatAttrs* da;
     Fighter* fp;
@@ -205,11 +282,19 @@ void ftFx_SpecialN_CreateBlasterShot(HSD_GObj* gobj)
 
     if (fp->cmd_vars[2] != 0) {
         fp->cmd_vars[2] = 0;
-        launchAngle = ftFox_SpecialN_PrepareBlasterShot(gobj, fp, da, &sp2C);
-        ftFox_SpecialN_FireBlasterShot(gobj, fp, da, &sp2C, launchAngle);
+        launchAngle =
+            ftFox_SpecialN_PrepareBlasterShot(gobj, fp, da, &shot_pos);
+        ftFox_SpecialN_FireBlasterShot(gobj, fp, da, &shot_pos, launchAngle);
     }
 }
 
+/**
+ * @brief Spawns the Blaster gun item attached to the fighter's hand
+ * @param gobj The fighter's game object
+ * @param fp Pointer to the Fighter data structure
+ * @param da Character attributes
+ * @param assert_line Source line for assertion if spawning fails
+ */
 static inline void ftFox_SpecialN_SpawnBlaster(HSD_GObj* gobj, Fighter* fp,
                                                ftFox_DatAttrs* da,
                                                int assert_line)
@@ -227,15 +312,27 @@ static inline void ftFox_SpecialN_SpawnBlaster(HSD_GObj* gobj, Fighter* fp,
     }
 
     OSReport("ftToSpecialNFox::Caution!!!\n");
+    /// @todo Replace direct __assert with HSD_ASSERT once byte matching is
+    /// verified.
     __assert("ftfoxspecialn.c", assert_line, "0");
 }
 
+/**
+ * @brief Resets command variables and advances animation frame
+ * @param gobj The fighter's game object
+ * @param fp Pointer to the Fighter data structure
+ */
 static inline void ftFox_SpecialN_InitializeState(HSD_GObj* gobj, Fighter* fp)
 {
     Fighter_ClearCmdVars(fp);
     ftAnim_8006EBA4(gobj);
 }
 
+/**
+ * @brief Action State initialization for grounded Neutral-B (Blaster)
+ * @details Spawns blaster gun and zeroes ground/self velocity.
+ * @param gobj The fighter's game object
+ */
 void ftFx_SpecialN_Enter(HSD_GObj* gobj)
 {
     Fighter* fp = fp = GET_FIGHTER(gobj);
@@ -256,6 +353,10 @@ void ftFx_SpecialN_Enter(HSD_GObj* gobj)
     ftFox_SpecialN_SpawnBlaster(gobj, fp, da, 305);
 }
 
+/**
+ * @brief Action State initialization for aerial Neutral-B (Blaster)
+ * @param gobj The fighter's game object
+ */
 void ftFx_SpecialAirN_Enter(HSD_GObj* gobj)
 {
     Fighter* fp = fp = GET_FIGHTER(gobj);
@@ -269,6 +370,10 @@ void ftFx_SpecialAirN_Enter(HSD_GObj* gobj)
     ftFox_SpecialN_SpawnBlaster(gobj, fp, da, 333);
 }
 
+/**
+ * @brief Updates Blaster model animation state
+ * @param fp Pointer to the Fighter data structure
+ */
 static inline void ftFox_SpecialN_UpdateBlaster(Fighter* fp)
 {
     it_802ADDD0(fp->u.fx.x222C_blasterGObj, 1);
@@ -278,6 +383,11 @@ static inline void ftFox_SpecialN_UpdateBlaster(Fighter* fp)
     }
 }
 
+/**
+ * @brief Helper for draw animation completing and entering firing loop
+ * @param gobj The fighter's game object
+ * @param loop_msid Motion state ID of the loop to transition into
+ */
 static inline void ftFox_SpecialN_StartAnimation(HSD_GObj* gobj,
                                                  FtMotionId loop_msid)
 {
@@ -293,6 +403,10 @@ static inline void ftFox_SpecialN_StartAnimation(HSD_GObj* gobj,
     }
 }
 
+/**
+ * @brief Animation callback for grounded Neutral-B draw weapon
+ * @param gobj The fighter's game object
+ */
 void ftFx_SpecialNStart_Anim(HSD_GObj* gobj)
 {
     ftFox_SpecialN_StartAnimation(gobj, ftFx_MS_SpecialNLoop);
@@ -323,6 +437,12 @@ static inline void ftFox_SpecialN_FinishEndTransition(Fighter* fp)
     it_802ADDD0(blaster_gobj, 1);
 }
 
+/**
+ * @brief Animation callback for grounded Neutral-B firing loop
+ * @details If `isBlasterLoop` is true (from tapping B), repeats firing loop.
+ * Otherwise transitions to holster animation (SpecialNEnd).
+ * @param gobj The fighter's game object
+ */
 void ftFx_SpecialNLoop_Anim(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
@@ -341,7 +461,7 @@ void ftFx_SpecialNLoop_Anim(HSD_GObj* gobj)
         Fighter_SetDamageCallback(gobj, ftFx_Init_800E5588);
     }
     {
-        Vec3 sp2C;
+        Vec3 shot_pos;
         ftFox_DatAttrs* da;
         f64 launchAngle;
 
@@ -356,8 +476,9 @@ void ftFx_SpecialNLoop_Anim(HSD_GObj* gobj)
         if (fp->cmd_vars[2] != 0) {
             fp->cmd_vars[2] = 0;
             launchAngle =
-                ftFox_SpecialN_PrepareBlasterShot(gobj, fp, da, &sp2C);
-            ftFox_SpecialN_FireBlasterShot(gobj, fp, da, &sp2C, launchAngle);
+                ftFox_SpecialN_PrepareBlasterShot(gobj, fp, da, &shot_pos);
+            ftFox_SpecialN_FireBlasterShot(gobj, fp, da, &shot_pos,
+                                           launchAngle);
         }
     }
 }
@@ -386,6 +507,10 @@ static inline bool ftFox_SpecialN_UpdateEndAnimation(HSD_GObj* gobj,
     return ftAnim_IsFramesRemaining(gobj);
 }
 
+/**
+ * @brief Animation callback for grounded Neutral-B holster weapon
+ * @param gobj The fighter's game object
+ */
 void ftFx_SpecialNEnd_Anim(HSD_GObj* gobj)
 {
     Fighter* fp = getFighter(gobj);
@@ -396,11 +521,19 @@ void ftFx_SpecialNEnd_Anim(HSD_GObj* gobj)
     }
 }
 
+/**
+ * @brief Animation callback for aerial Neutral-B draw weapon
+ * @param gobj The fighter's game object
+ */
 void ftFx_SpecialAirNStart_Anim(HSD_GObj* gobj)
 {
     ftFox_SpecialN_StartAnimation(gobj, ftFx_MS_SpecialAirNLoop);
 }
 
+/**
+ * @brief Animation callback for aerial Neutral-B firing loop
+ * @param gobj The fighter's game object
+ */
 void ftFx_SpecialAirNLoop_Anim(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
@@ -422,7 +555,7 @@ void ftFx_SpecialAirNLoop_Anim(HSD_GObj* gobj)
         Fighter_SetDamageCallback(gobj, ftFx_Init_800E5588);
     }
     {
-        Vec3 sp2C;
+        Vec3 shot_pos;
         ftFox_DatAttrs* da;
 
         fp = GET_FIGHTER(gobj);
@@ -438,12 +571,19 @@ void ftFx_SpecialAirNLoop_Anim(HSD_GObj* gobj)
 
             fp->cmd_vars[2] = 0;
             launchAngle =
-                ftFox_SpecialN_PrepareBlasterShot(gobj, fp, da, &sp2C);
-            ftFox_SpecialN_FireBlasterShot(gobj, fp, da, &sp2C, launchAngle);
+                ftFox_SpecialN_PrepareBlasterShot(gobj, fp, da, &shot_pos);
+            ftFox_SpecialN_FireBlasterShot(gobj, fp, da, &shot_pos,
+                                           launchAngle);
         }
     }
 }
 
+/**
+ * @brief Animation callback for aerial Neutral-B holster weapon
+ * @details If landing lag is 0 (Fox), enters normal fall (ftCo_Fall_Enter)
+ * without special fall lag upon completing the move in the air.
+ * @param gobj The fighter's game object
+ */
 void ftFx_SpecialAirNEnd_Anim(HSD_GObj* gobj)
 {
     Fighter* fp = getFighter(gobj);
@@ -459,96 +599,175 @@ void ftFx_SpecialAirNEnd_Anim(HSD_GObj* gobj)
     }
 }
 
+/**
+ * @brief IASA callback for grounded Neutral-B draw weapon
+ * @param gobj The fighter's game object
+ */
 void ftFx_SpecialNStart_IASA(HSD_GObj* gobj)
 {
     ftFox_SpecialN_CheckLoopInput(gobj);
 }
 
+/**
+ * @brief IASA callback for grounded Neutral-B firing loop
+ * @param gobj The fighter's game object
+ */
 void ftFx_SpecialNLoop_IASA(HSD_GObj* gobj)
 {
     ftFox_SpecialN_CheckLoopInput(gobj);
 }
 
+/**
+ * @brief IASA callback for grounded Neutral-B holster weapon (no interrupts)
+ * @param gobj The fighter's game object
+ */
 void ftFx_SpecialNEnd_IASA(HSD_GObj* gobj)
 {
     return;
 }
 
+/**
+ * @brief IASA callback for aerial Neutral-B draw weapon
+ * @param gobj The fighter's game object
+ */
 void ftFx_SpecialAirNStart_IASA(HSD_GObj* gobj)
 {
     ftFox_SpecialN_CheckLoopInput(gobj);
 }
 
+/**
+ * @brief IASA callback for aerial Neutral-B firing loop
+ * @param gobj The fighter's game object
+ */
 void ftFx_SpecialAirNLoop_IASA(HSD_GObj* gobj)
 {
     ftFox_SpecialN_CheckLoopInput(gobj);
 }
 
+/**
+ * @brief IASA callback for aerial Neutral-B holster weapon (no interrupts)
+ * @param gobj The fighter's game object
+ */
 void ftFx_SpecialAirNEnd_IASA(HSD_GObj* gobj)
 {
     return;
 }
 
+/**
+ * @brief Physics callback for grounded Neutral-B draw weapon
+ * @param gobj The fighter's game object
+ */
 void ftFx_SpecialNStart_Phys(HSD_GObj* gobj)
 {
     ft_80084F3C(gobj);
 }
 
+/**
+ * @brief Physics callback for grounded Neutral-B firing loop
+ * @param gobj The fighter's game object
+ */
 void ftFx_SpecialNLoop_Phys(HSD_GObj* gobj)
 {
     ft_80084F3C(gobj);
 }
 
+/**
+ * @brief Physics callback for grounded Neutral-B holster weapon
+ * @param gobj The fighter's game object
+ */
 void ftFx_SpecialNEnd_Phys(HSD_GObj* gobj)
 {
     ft_80084F3C(gobj);
 }
 
+/**
+ * @brief Physics callback for aerial Neutral-B draw weapon
+ * @param gobj The fighter's game object
+ */
 void ftFx_SpecialAirNStart_Phys(HSD_GObj* gobj)
 {
     ft_80084DB0(gobj);
 }
 
+/**
+ * @brief Physics callback for aerial Neutral-B firing loop
+ * @param gobj The fighter's game object
+ */
 void ftFx_SpecialAirNLoop_Phys(HSD_GObj* gobj)
 {
     ft_80084DB0(gobj);
 }
 
+/**
+ * @brief Physics callback for aerial Neutral-B holster weapon
+ * @param gobj The fighter's game object
+ */
 void ftFx_SpecialAirNEnd_Phys(HSD_GObj* gobj)
 {
     ft_80084DB0(gobj);
 }
 
+/**
+ * @brief Collision callback for grounded Neutral-B draw weapon
+ * @param gobj The fighter's game object
+ */
 void ftFx_SpecialNStart_Coll(HSD_GObj* gobj)
 {
     ft_80083F88(gobj);
 }
 
+/**
+ * @brief Collision callback for grounded Neutral-B firing loop
+ * @param gobj The fighter's game object
+ */
 void ftFx_SpecialNLoop_Coll(HSD_GObj* gobj)
 {
     ft_80083F88(gobj);
 }
 
+/**
+ * @brief Collision callback for grounded Neutral-B holster weapon
+ * @param gobj The fighter's game object
+ */
 void ftFx_SpecialNEnd_Coll(HSD_GObj* gobj)
 {
     ft_80083F88(gobj);
 }
 
+/**
+ * @brief Collision callback for aerial Neutral-B draw weapon
+ * @param gobj The fighter's game object
+ */
 void ftFx_SpecialAirNStart_Coll(HSD_GObj* gobj)
 {
     ftCo_AirCatchHit_Coll(gobj);
 }
 
+/**
+ * @brief Collision callback for aerial Neutral-B firing loop
+ * @param gobj The fighter's game object
+ */
 void ftFx_SpecialAirNLoop_Coll(HSD_GObj* gobj)
 {
     ftCo_AirCatchHit_Coll(gobj);
 }
 
+/**
+ * @brief Collision callback for aerial Neutral-B holster weapon
+ * @param gobj The fighter's game object
+ */
 void ftFx_SpecialAirNEnd_Coll(HSD_GObj* gobj)
 {
     ftCo_AirCatchHit_Coll(gobj);
 }
 
+/**
+ * @brief Animation callback for Fox and Falco's throws that fire Blaster shots
+ * @details Fires blaster shots into opponents during Back Throw, Up Throw,
+ * Down Throw. Spawns blaster item, aligns it to hand bone, fires laser
+ * projectile, and plays sound.
+ * @param gobj The fighter's game object
+ */
 void ftFx_Throw_Anim(HSD_GObj* gobj)
 {
     Fighter* fp = fp = GET_FIGHTER(gobj);
@@ -590,27 +809,31 @@ void ftFx_Throw_Anim(HSD_GObj* gobj)
                     break;
                 }
                 if (ftCheckThrowB0(fp)) {
-                    Vec3 sp50;
-                    Vec3 sp44;
+                    Vec3 ft_joint_pos;
+                    Vec3 it_joint_pos;
 
-                    ftFx_SpecialN_FtGetHoldJoint(gobj, &sp50);
-                    ftFx_SpecialN_ItGetHoldJoint(gobj, &sp44);
+                    ftFx_SpecialN_FtGetHoldJoint(gobj, &ft_joint_pos);
+                    ftFx_SpecialN_ItGetHoldJoint(gobj, &it_joint_pos);
 
-                    sp44.z = 0;
-                    sp50.z = 0;
+                    it_joint_pos.z = 0;
+                    ft_joint_pos.z = 0;
                     switch (ftGetAction(fp)) {
                     case ftCo_MS_ThrowB:
                     case ftCo_MS_ThrowHi:
                     case ftCo_MS_ThrowLw:
 
-                        it_8029C6CC(atan2f(sp50.y - sp44.y, sp50.x - sp44.x),
-                                    da->x14_FOX_BLASTER_VEL, gobj, &sp50,
+                        it_8029C6CC(atan2f(ft_joint_pos.y - it_joint_pos.y,
+                                           ft_joint_pos.x - it_joint_pos.x),
+                                    da->x14_FOX_BLASTER_VEL, gobj,
+                                    &ft_joint_pos,
                                     da->x1C_FOX_BLASTER_SHOT_ITKIND);
                         break;
 
                     default:
-                        it_8029C6A4(atan2f(sp50.y - sp44.y, sp50.x - sp44.x),
-                                    da->x14_FOX_BLASTER_VEL, gobj, &sp50,
+                        it_8029C6A4(atan2f(ft_joint_pos.y - it_joint_pos.y,
+                                           ft_joint_pos.x - it_joint_pos.x),
+                                    da->x14_FOX_BLASTER_VEL, gobj,
+                                    &ft_joint_pos,
                                     da->x1C_FOX_BLASTER_SHOT_ITKIND);
                         break;
                     }
