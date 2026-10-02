@@ -22,6 +22,37 @@ typedef struct ArwingLaserAttr {
     /* +8 */ f32 x8;
 } ArwingLaserAttr;
 
+typedef struct itCerebiAttributes {
+    /* +0 */ f32 scale;
+    /* +4 */ Vec2 velocity;
+    /* +C */ f32 vertical_acceleration;
+} itCerebiAttributes;
+
+typedef struct itFFlowerFlameAttributes {
+    /* +0 */ f32 lifetime;
+} itFFlowerFlameAttributes;
+
+typedef struct itHeihoAttributes {
+    /*  +0 */ s32* x0;
+    /*  +4 */ f32 speed[3];
+    /* +10 */ u8 x10[4];
+    /* +14 */ f32 x14;
+} itHeihoAttributes;
+
+typedef struct itLugiaAeroblastAttributes {
+    /* +0 */ f32 lifetime;
+    /* +4 */ f32 x4;
+    /* +8 */ f32 x8;
+    /* +C */ f32 xC;
+} itLugiaAeroblastAttributes;
+
+typedef struct itParasolAttributes {
+    /* +0 */ f32 x0;
+    /* +4 */ f32 x4;
+    /* +8 */ f32 x8;
+    /* +C */ f32 xC;
+} itParasolAttributes;
+
 typedef struct {
     f32 x0;
 } ItMetamonVars;
@@ -223,6 +254,7 @@ union ItemSpecialAttributes {
 
     // Other layouts and shared views used by item callers.
     ArwingLaserAttr arwing_laser;
+    itCerebiAttributes cerebi;
     struct itChainSegment chain_segment;
     itChicoritaAttr chicorita;
     itChicoritaLeafAttr chicorita_leaf;
@@ -233,11 +265,12 @@ union ItemSpecialAttributes {
     itCrazyHandBombAttributes crazy_hand_bomb;
     itDoseiAttributes dosei;
     itDrMarioPillAttributes dr_mario_pill;
+    itFFlowerFlameAttributes f_flower_flame;
     itFireAttributes fire;
     itFlashAttributes flash;
     itFlashExplAttributes flash_expl;
-    f32 float_value;
     itFoodsAttributes foods;
+    FoxIllusionAttr fox_illusion;
     FoxLaserAttr fox_laser;
     itFreezerAttributes freezer;
     itFushigibanaAttributes fushigibana;
@@ -247,10 +280,10 @@ union ItemSpecialAttributes {
     itGreatFoxLaser_Attrs great_fox_laser;
     itHammerData hammer_data;
     itHassam_ItemVars hassam;
+    itHeihoAttributes heiho;
     itHinoarashiAttributes hinoarashi;
     itHitodemanAttributes hitodeman;
     itHououAttr houou;
-    s32* integer_pointer;
     itKabigonAttributes kabigon;
     itKamexAttributes kamex;
     KinokoAttrs kinoko;
@@ -271,6 +304,7 @@ union ItemSpecialAttributes {
     itLuckyAttributes lucky;
     itLuckyEggAttributes lucky_egg;
     itLugiaAttributes lugia;
+    itLugiaAeroblastAttributes lugia_aeroblast;
     itMDisableAttributes m_disable;
     itMarilAttributes maril;
     itMasterHandBulletAttributes master_hand_bullet;
@@ -286,6 +320,7 @@ union ItemSpecialAttributes {
     itOldkuriAttributes oldkuri;
     itOldottoseaAttributes oldottosea;
     void* opaque_pointer;
+    itParasolAttributes parasol;
     itPatapataAttributes patapata;
     itPeachToadSporeAttributes peach_toad_spore;
     itPeachTurnipAttributes peach_turnip;
@@ -314,7 +349,6 @@ union ItemSpecialAttributes {
     it_2728_DatAttrs unk_2728;
     it_2E5A_Attrs unk_2e5a;
     itUnknownAttributes unknown;
-    Vec4 vector;
     itWhispyAppleAttributes whispy_apple;
     itWhiteBeaAttributes white_bea;
     itYoshiEggThrowAttributes yoshi_egg_throw;

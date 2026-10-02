@@ -9,6 +9,7 @@
 #include <melee/it/forward.h>
 #include <sysdolphin/baselib/forward.h>
 
+#include <dat_macros.h>
 #include <placeholder.h>
 
 #include <dolphin/mtx.h>
@@ -589,11 +590,15 @@ typedef struct itFoods_ItemVars {
     /* +4 ip+DD8 */ u32 heal_amount;
 } itFoods_ItemVars;
 
+typedef struct itFoodEntry {
+    /* +0 */ HSD_Joint* joint;
+    /* +4 */ s32 heal_amount;
+    /* +8 */ Vec2 offset;
+} itFoodEntry;
+
 typedef struct itFoodsAttributes {
-    s32 x0;
-    HSD_Joint* x4;
-    s32 x8;
-    s32 xC;
+    /* +0 */ s32 count;
+    /* +4 */ itFoodEntry entries[] DAT_EXTENT;
 } itFoodsAttributes;
 
 typedef struct itWhispyApple_ItemVars {

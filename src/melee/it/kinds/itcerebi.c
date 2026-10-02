@@ -36,10 +36,11 @@ ItemStateTable it_803F80F8[] = {
 void itCerebi_Logic23_Spawned(Item_GObj* gobj)
 {
     Item* item = GET_ITEM(gobj);
-    float* attr = &item->xC4_article_data->x4_specialAttributes->float_value;
+    itCerebiAttributes* attr =
+        &item->xC4_article_data->x4_specialAttributes->cerebi;
     item->facing_dir = 0.0f;
     it_802D4168(gobj);
-    it_80279CDC(gobj, *attr);
+    it_80279CDC(gobj, attr->scale);
 }
 
 void it_802D3F4C(Item_GObj* gobj, Item_GObj* arg1)
@@ -85,16 +86,17 @@ bool itCerebi_UnkMotion1_Coll(Item_GObj* gobj)
 void it_802D4070(Item_GObj* gobj)
 {
     Item* item = GET_ITEM(gobj);
-    float* attrs = &item->xC4_article_data->x4_specialAttributes->float_value;
+    itCerebiAttributes* attrs =
+        &item->xC4_article_data->x4_specialAttributes->cerebi;
 
     Item_80268E5C(gobj, 2, ITEM_ANIM_UPDATE);
     Item_SetEffectHitlagCallbacks(item);
     if (HSD_Randi(2) != 0) {
-        item->x40_vel.x = attrs[1];
+        item->x40_vel.x = attrs->velocity.x;
     } else {
-        item->x40_vel.x = -attrs[1];
+        item->x40_vel.x = -attrs->velocity.x;
     }
-    item->x40_vel.y = attrs[2];
+    item->x40_vel.y = attrs->velocity.y;
 }
 
 bool itCerebi_UnkMotion2_Anim(Item_GObj* gobj)
@@ -109,8 +111,8 @@ bool itCerebi_UnkMotion2_Anim(Item_GObj* gobj)
 void itCerebi_UnkMotion2_Phys(Item_GObj* gobj)
 {
     Item* item = GET_ITEM(gobj);
-    item->x40_vel.y +=
-        (&item->xC4_article_data->x4_specialAttributes->float_value)[3];
+    item->x40_vel.y += item->xC4_article_data->x4_specialAttributes->cerebi
+                           .vertical_acceleration;
 }
 
 bool itCerebi_UnkMotion2_Coll(Item_GObj* gobj)
