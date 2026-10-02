@@ -1,3 +1,12 @@
+/**
+ * @file ftpopospecials.c
+ * @brief Side-B: Squall Hammer (Tornado spinning hammer attack)
+ * @details Implements grounded and aerial Squall Hammer move logic for Ice
+ * Climbers (Popo/Nana). Popo and Nana spin rapidly with hammers outstretched,
+ * moving forward with player-steered horizontal drift. Rapidly pressing the B
+ * button allows the Ice Climbers to gain vertical height. Module prefix: ftPp
+ */
+
 #include "ftpopospecials.h"
 
 #include <math.h>
@@ -15,19 +24,28 @@
 #include <melee/ft/kinds/ftNana/ftnana.h>
 #include <melee/pl/player.h>
 
+/**
+ * @brief Unlink partner's cross-reference pointer and clear mutual flags
+ * @param fp Fighter instance pointer
+ */
 static inline void setRefGObjFlagAndClear(Fighter* fp)
 {
-    Fighter_GObj* gobj = fp->x1A5C;
-    Fighter* ref_fp;
+    Fighter_GObj* partner_gobj = fp->x1A5C;
+    Fighter* partner_fp;
 
-    if (gobj != NULL) {
-        ref_fp = gobj->user_data;
-        Fighter_UnkSetFlag_8006CFBC(gobj);
-        ref_fp->x1A5C = NULL;
+    if (partner_gobj != NULL) {
+        partner_fp = partner_gobj->user_data;
+        Fighter_UnkSetFlag_8006CFBC(partner_gobj);
+        partner_fp->x1A5C = NULL;
     }
     fp->x1A5C = NULL;
 }
 
+/**
+ * @brief Reset rotation and unlink partner when Squall Hammer ends or is
+ * interrupted
+ * @param gobj Fighter game object
+ */
 void ftPp_SpecialS_8011F68C(Fighter_GObj* gobj)
 {
     Fighter* fp;
@@ -39,6 +57,11 @@ void ftPp_SpecialS_8011F68C(Fighter_GObj* gobj)
     setRefGObjFlagAndClear(fp);
 }
 
+/**
+ * @brief Check partner's command var 1 state
+ * @param gobj Fighter game object
+ * @return True if partner is valid and finished
+ */
 bool ftPp_SpecialS_8011F6FC(Fighter_GObj* gobj)
 {
     if (gobj != NULL) {
@@ -52,35 +75,40 @@ bool ftPp_SpecialS_8011F6FC(Fighter_GObj* gobj)
     return true;
 }
 
+/**
+ * @brief Update hammer head joint visibility and slope tilt rotation
+ * @param gobj Fighter game object
+ */
 void ftPp_SpecialS_8011F720(Fighter_GObj* gobj)
 {
     Fighter* fp;
-    HSD_JObj* temp_r30;
-    HSD_JObj* var_r0;
+    HSD_JObj* root_jobj;
+    HSD_JObj* child_jobj;
     f32 angle;
-    HSD_GObj* temp_r3_2;
+    HSD_GObj* hammer_gobj;
 
     fp = GET_FIGHTER(gobj);
     if (fp->mv.pp.specials.x8 != NULL) {
         if (fp->x2219_b0 && fp->mv.pp.specials.x8 != NULL) {
-            temp_r3_2 = fp->mv.pp.specials.x8->x4;
-            if (temp_r3_2 != NULL) {
-                var_r0 =
-                    HSD_JObjGetNext(HSD_JObjGetChild(GET_JOBJ(temp_r3_2)));
-                temp_r30 = temp_r3_2->hsd_obj;
+            hammer_gobj = fp->mv.pp.specials.x8->x4;
+            if (hammer_gobj != NULL) {
+                child_jobj =
+                    HSD_JObjGetNext(HSD_JObjGetChild(GET_JOBJ(hammer_gobj)));
+                root_jobj = hammer_gobj->hsd_obj;
                 if (fp->motion_id == ftPp_MS_SpecialS1 ||
                     fp->motion_id == ftPp_MS_SpecialS2)
                 {
-                    HSD_JObjClearFlagsAll(var_r0, JOBJ_HIDDEN);
+                    HSD_JObjClearFlagsAll(child_jobj, JOBJ_HIDDEN);
                 } else {
-                    HSD_JObjSetFlagsAll(var_r0, JOBJ_HIDDEN);
+                    HSD_JObjSetFlagsAll(child_jobj, JOBJ_HIDDEN);
                 }
                 if (fp->cmd_vars[3] != 0 && fp->mv.pp.specials.xC != 0) {
+                    // Match floor slope normal angle
                     angle = -atan2f(fp->coll_data.floor.normal.x,
                                     fp->coll_data.floor.normal.y);
-                    HSD_JObjSetRotationZ(temp_r30, angle);
+                    HSD_JObjSetRotationZ(root_jobj, angle);
                 } else {
-                    HSD_JObjSetRotationZ(temp_r30, 0.0F);
+                    HSD_JObjSetRotationZ(root_jobj, 0.0F);
                 }
                 Fighter_SetEffectHitlagCallbacks(fp);
                 return;
@@ -93,6 +121,12 @@ void ftPp_SpecialS_8011F720(Fighter_GObj* gobj)
     }
 }
 
+/**
+ * @brief Test if current state is solo vs paired Squall Hammer
+ * @param gobj Fighter game object
+ * @return False if paired (ftPp_MS_SpecialS2 / ftPp_MS_SpecialAirS2), true
+ * otherwise
+ */
 bool ftPp_SpecialS_8011F964(Fighter_GObj* gobj)
 {
     switch (GET_FIGHTER(gobj)->motion_id) {
@@ -103,6 +137,10 @@ bool ftPp_SpecialS_8011F964(Fighter_GObj* gobj)
     return true;
 }
 
+/**
+ * @brief Setup damage and death cleanup callbacks for Squall Hammer
+ * @param gobj Fighter game object
+ */
 static inline void inlineA0(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -111,6 +149,10 @@ static inline void inlineA0(Fighter_GObj* gobj)
     Fighter_SetEffectHitlagCallbacks(fp);
 }
 
+/**
+ * @brief Setup hammer subpart and hitlag callbacks
+ * @param gobj Fighter game object
+ */
 static inline void inlineA1(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -119,6 +161,12 @@ static inline void inlineA1(Fighter_GObj* gobj)
     Fighter_SetEffectHitlagCallbacks(fp);
 }
 
+/**
+ * @brief Setup state and parameters for grounded Squall Hammer
+ * @details Checks partner availability; enters solo (SpecialS1) or paired
+ * (SpecialS2) state.
+ * @param gobj Fighter game object
+ */
 static inline void inlineA2(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -135,10 +183,12 @@ static inline void inlineA2(Fighter_GObj* gobj)
     if (ftNn_Init_80123954(Player_GetEntityAtIndex(fp->player_idx, 1),
                            fp->ground_or_air) == GA_Air)
     {
+        // Solo Squall Hammer (grounded)
         Fighter_ChangeMotionState(gobj, ftPp_MS_SpecialS1, Ft_MF_None, 0, 1, 0,
                                   NULL);
         fp->x1A5C = NULL;
     } else {
+        // Paired Squall Hammer with partner Nana (grounded)
         Fighter_ChangeMotionState(gobj, ftPp_MS_SpecialS2, Ft_MF_None, 0, 1, 0,
                                   NULL);
         fp->x1A5C = Player_GetEntityAtIndex(fp->player_idx, 1);
@@ -151,6 +201,10 @@ static inline void inlineA2(Fighter_GObj* gobj)
     }
 }
 
+/**
+ * @brief Enter grounded Side-B: Squall Hammer
+ * @param gobj Fighter game object
+ */
 void ftPp_SpecialS_Enter(Fighter_GObj* gobj)
 {
     PAD_STACK(4 * 2);
@@ -161,7 +215,10 @@ void ftPp_SpecialS_Enter(Fighter_GObj* gobj)
     inlineA0(gobj);
 }
 
-/// @todo Can probably share some more code with #inlineA2
+/**
+ * @brief Setup state and parameters for aerial Squall Hammer
+ * @param gobj Fighter game object
+ */
 static inline void inlineB0(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -178,11 +235,13 @@ static inline void inlineB0(Fighter_GObj* gobj)
     if (ftNn_Init_80123954(Player_GetEntityAtIndex(fp->player_idx, 1),
                            fp->ground_or_air) == GA_Air)
     {
+        // Solo Squall Hammer (aerial)
         Fighter_ChangeMotionState(gobj, ftPp_MS_SpecialAirS1, Ft_MF_None, 0, 1,
                                   0, NULL);
         fp->x1A5C = NULL;
         fp->self_vel.y = da->x20;
     } else {
+        // Paired Squall Hammer with partner Nana (aerial)
         Fighter_ChangeMotionState(gobj, ftPp_MS_SpecialAirS2, Ft_MF_None, 0, 1,
                                   0, NULL);
         fp->x1A5C = Player_GetEntityAtIndex(fp->player_idx, 1);
@@ -191,6 +250,10 @@ static inline void inlineB0(Fighter_GObj* gobj)
     fp->self_vel.x = da->x2C * fp->facing_dir;
 }
 
+/**
+ * @brief Enter aerial Side-B: Squall Hammer
+ * @param gobj Fighter game object
+ */
 void ftPp_SpecialAirS_Enter(Fighter_GObj* gobj)
 {
     PAD_STACK(4 * 2);
@@ -201,6 +264,10 @@ void ftPp_SpecialAirS_Enter(Fighter_GObj* gobj)
     inlineA0(gobj);
 }
 
+/**
+ * @brief Reset callbacks and return to Wait on animation completion
+ * @param gobj Fighter game object
+ */
 static inline void resetAnim(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -212,6 +279,10 @@ static inline void resetAnim(Fighter_GObj* gobj)
     ft_8008A2BC(gobj);
 }
 
+/**
+ * @brief Animation callback for grounded solo Squall Hammer
+ * @param gobj Fighter game object
+ */
 void ftPp_SpecialS1_Anim(Fighter_GObj* gobj)
 {
     PAD_STACK(4 * 2);
@@ -220,6 +291,10 @@ void ftPp_SpecialS1_Anim(Fighter_GObj* gobj)
     }
 }
 
+/**
+ * @brief Helper to clear partner flags and unlink partner reference
+ * @param gobj Fighter game object
+ */
 static inline void inlineC0(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -227,6 +302,10 @@ static inline void inlineC0(Fighter_GObj* gobj)
     fp->x1A5C = NULL;
 }
 
+/**
+ * @brief Reset rotation, notify partner, and transition to Wait
+ * @param gobj Fighter game object
+ */
 static inline void inlineC1(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -240,6 +319,12 @@ static inline void inlineC1(Fighter_GObj* gobj)
     resetAnim(gobj);
 }
 
+/**
+ * @brief Animation callback for grounded paired Squall Hammer
+ * @details Ends when animation finishes or partner Nana's move completes
+ * early.
+ * @param gobj Fighter game object
+ */
 void ftPp_SpecialS2_Anim(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -250,6 +335,10 @@ void ftPp_SpecialS2_Anim(Fighter_GObj* gobj)
     }
 }
 
+/**
+ * @brief Clear callbacks and partner reference on aerial move end
+ * @param gobj Fighter game object
+ */
 static inline void inline0(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -260,6 +349,11 @@ static inline void inline0(Fighter_GObj* gobj)
     fp->x1A5C = NULL;
 }
 
+/**
+ * @brief Animation callback for aerial solo Squall Hammer
+ * @details Transitions to Fall or Special Fall based on attribute da->x70.
+ * @param gobj Fighter game object
+ */
 void ftPp_SpecialAirS1_Anim(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -275,6 +369,10 @@ void ftPp_SpecialAirS1_Anim(Fighter_GObj* gobj)
     }
 }
 
+/**
+ * @brief Reset tilt rotation and clear partner flags on aerial end
+ * @param gobj Fighter game object
+ */
 static inline void inline1(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -283,13 +381,17 @@ static inline void inline1(Fighter_GObj* gobj)
     setRefGObjFlagAndClear(fp);
 }
 
+/**
+ * @brief Animation callback for aerial paired Squall Hammer
+ * @param gobj Fighter game object
+ */
 void ftPp_SpecialAirS2_Anim(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftIceClimberAttributes* da = fp->dat_attrs;
-    Fighter_GObj* temp_r30 = Player_GetEntityAtIndex(fp->player_idx, 1);
+    Fighter_GObj* nana_gobj = Player_GetEntityAtIndex(fp->player_idx, 1);
     PAD_STACK(8);
-    if (!ftAnim_IsFramesRemaining(gobj) || ftNn_Init_80123B10(temp_r30)) {
+    if (!ftAnim_IsFramesRemaining(gobj) || ftNn_Init_80123B10(nana_gobj)) {
         inline1(gobj);
         inline0(gobj);
         if (da->x70 == 0.0) {
@@ -301,6 +403,12 @@ void ftPp_SpecialAirS2_Anim(Fighter_GObj* gobj)
     }
 }
 
+/**
+ * @brief IASA steering input callback for grounded solo Squall Hammer
+ * @details Reads analog stick X: if outside deadzone da->x40, applies steering
+ * factor da->x30.
+ * @param gobj Fighter game object
+ */
 void ftPp_SpecialS1_IASA(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -312,11 +420,21 @@ void ftPp_SpecialS1_IASA(Fighter_GObj* gobj)
     }
 }
 
+/**
+ * @brief IASA steering input callback for grounded paired Squall Hammer
+ * @param gobj Fighter game object
+ */
 void ftPp_SpecialS2_IASA(Fighter_GObj* gobj)
 {
     ftPp_SpecialS1_IASA(gobj);
 }
 
+/**
+ * @brief IASA steering input callback for aerial solo Squall Hammer
+ * @details Reads analog stick X: if outside deadzone da->x40, applies aerial
+ * steering factor da->x34.
+ * @param gobj Fighter game object
+ */
 void ftPp_SpecialAirS1_IASA(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -328,132 +446,153 @@ void ftPp_SpecialAirS1_IASA(Fighter_GObj* gobj)
     }
 }
 
+/**
+ * @brief IASA steering input callback for aerial paired Squall Hammer
+ * @param gobj Fighter game object
+ */
 void ftPp_SpecialAirS2_IASA(Fighter_GObj* gobj)
 {
     ftPp_SpecialAirS1_IASA(gobj);
 }
 
+/**
+ * @brief Physics callback for grounded solo Squall Hammer
+ * @details Computes horizontal steering acceleration, slope push, friction,
+ * and processes B-button mashing to take off into the air!
+ * @param gobj Fighter game object
+ */
 void ftPp_SpecialS1_Phys(Fighter_GObj* gobj)
 {
-    ftIceClimberAttributes* temp_r28;
-    Fighter* temp_r27;
+    ftIceClimberAttributes* attrs;
+    Fighter* fighter;
     Fighter* fp;
-    Fighter* temp_r5;
-    Fighter* temp_r5_2;
+    Fighter* fighter_fp;
+    Fighter* fighter_fp2;
     f32 temp_f1;
     f32 target_vel;
-    ftIceClimberAttributes* temp_r30;
+    ftIceClimberAttributes* icattr;
 
     PAD_STACK(0x18);
 
     fp = GET_FIGHTER(gobj);
-    temp_r30 = fp->dat_attrs;
+    icattr = fp->dat_attrs;
     if (fp->cmd_vars[0] == 0 && fp->mv.pp.specials.x1C != 0.0F) {
         target_vel =
-            fp->mv.pp.specials.x1C > 0.0F ? temp_r30->x38 : -temp_r30->x38;
+            fp->mv.pp.specials.x1C > 0.0F ? icattr->x38 : -icattr->x38;
         ftCommon_CalcGroundAccel_AccelToVel(fp, fp->mv.pp.specials.x1C,
                                             target_vel,
                                             fp->co_attrs.ground_friction);
-        temp_r5 = GET_FIGHTER(gobj);
+        fighter_fp = GET_FIGHTER(gobj);
         {
-            ftIceClimberAttributes* da = temp_r5->dat_attrs;
-            temp_r5->xE4_ground_accel_1 +=
-                da->x6C * temp_r5->coll_data.floor.normal.x;
+            ftIceClimberAttributes* da = fighter_fp->dat_attrs;
+            fighter_fp->xE4_ground_accel_1 +=
+                da->x6C * fighter_fp->coll_data.floor.normal.x;
         }
-        ftCommon_ClampGroundVel(fp, temp_r30->x38);
+        ftCommon_ClampGroundVel(fp, icattr->x38);
         ftCommon_SetSelfMovementFromGroundedMovement_NoFriction(gobj);
     } else {
         float friction = fp->co_attrs.ground_friction;
         ftCommon_CalcGroundAccel_Deaccel(fp, friction);
-        ftCommon_ClampGroundVel(fp, temp_r30->x38);
+        ftCommon_ClampGroundVel(fp, icattr->x38);
         ftCommon_SetSelfMovementFromGroundedMovement_NoFriction(gobj);
     }
     fp->mv.pp.specials.x14 += 1;
+    // B-button mash detection
     if (fp->cmd_vars[2] != 0 && (fp->input.pressed_buttons & HSD_PAD_B)) {
         fp->mv.pp.specials.x10 += 1;
     }
-    if (fp->mv.pp.specials.x10 != 0 && fp->mv.pp.specials.x14 > temp_r30->x68)
-    {
-        temp_r27 = GET_FIGHTER(gobj);
-        temp_r28 = temp_r27->dat_attrs;
-        ftCommon_8007D5D4(temp_r27);
-        temp_r27->x74_self_accel.x = temp_r27->xE4_ground_accel_1;
+    // Launch into air when mashed sufficiently
+    if (fp->mv.pp.specials.x10 != 0 && fp->mv.pp.specials.x14 > icattr->x68) {
+        fighter = GET_FIGHTER(gobj);
+        attrs = fighter->dat_attrs;
+        ftCommon_8007D5D4(fighter);
+        fighter->x74_self_accel.x = fighter->xE4_ground_accel_1;
         Fighter_ChangeMotionState(gobj, ftPp_MS_SpecialAirS1, 0x0C4C528A,
-                                  temp_r27->cur_anim_frame, 1.0F, 0.0F, NULL);
-        temp_r5_2 = GET_FIGHTER(gobj);
-        temp_r5_2->take_dmg_cb = ftPp_Init_8011F060;
-        temp_r5_2->death2_cb = ftPp_Init_8011F060;
-        Fighter_SetEffectHitlagCallbacks(temp_r5_2);
-        ftCommon_ClampSelfVelX(temp_r27, temp_r28->x3C);
-        fp->self_vel.y += temp_r30->x60;
+                                  fighter->cur_anim_frame, 1.0F, 0.0F, NULL);
+        fighter_fp2 = GET_FIGHTER(gobj);
+        fighter_fp2->take_dmg_cb = ftPp_Init_8011F060;
+        fighter_fp2->death2_cb = ftPp_Init_8011F060;
+        Fighter_SetEffectHitlagCallbacks(fighter_fp2);
+        ftCommon_ClampSelfVelX(fighter, attrs->x3C);
+        fp->self_vel.y += icattr->x60;
         fp->mv.pp.specials.x10 = 0;
         fp->mv.pp.specials.x14 = 0;
     }
     fp->mv.pp.specials.x18 += 1;
 }
 
+/**
+ * @brief Physics callback for grounded paired Squall Hammer
+ * @details Computes steering velocity, friction, and paired B-button mash
+ * upward lift (da->x64).
+ * @param gobj Fighter game object
+ */
 void ftPp_SpecialS2_Phys(Fighter_GObj* gobj)
 {
-    Fighter* temp_r31;
-    ftIceClimberAttributes* temp_r30;
-    ftIceClimberAttributes* temp_r28;
-    Fighter* temp_r27;
-    Fighter* temp_r5;
-    Fighter* temp_r5_2;
+    Fighter* fp;
+    ftIceClimberAttributes* icattr;
+    ftIceClimberAttributes* attrs;
+    Fighter* fighter;
+    Fighter* fighter_fp;
+    Fighter* fighter_fp2;
     f32 temp_f1;
     f32 target_vel;
 
     PAD_STACK(0x18);
 
-    temp_r31 = GET_FIGHTER(gobj);
-    temp_r30 = temp_r31->dat_attrs;
-    if (temp_r31->cmd_vars[0] == 0 && temp_r31->mv.pp.specials.x1C != 0.0F) {
-        target_vel = temp_r31->mv.pp.specials.x1C > 0.0F ? temp_r30->x38
-                                                         : -temp_r30->x38;
-        ftCommon_CalcGroundAccel_AccelToVel(
-            temp_r31, temp_r31->mv.pp.specials.x1C, target_vel,
-            temp_r31->co_attrs.ground_friction);
-        temp_r5 = GET_FIGHTER(gobj);
+    fp = GET_FIGHTER(gobj);
+    icattr = fp->dat_attrs;
+    if (fp->cmd_vars[0] == 0 && fp->mv.pp.specials.x1C != 0.0F) {
+        target_vel =
+            fp->mv.pp.specials.x1C > 0.0F ? icattr->x38 : -icattr->x38;
+        ftCommon_CalcGroundAccel_AccelToVel(fp, fp->mv.pp.specials.x1C,
+                                            target_vel,
+                                            fp->co_attrs.ground_friction);
+        fighter_fp = GET_FIGHTER(gobj);
         {
-            ftIceClimberAttributes* da = temp_r5->dat_attrs;
-            temp_r5->xE4_ground_accel_1 +=
-                da->x6C * temp_r5->coll_data.floor.normal.x;
+            ftIceClimberAttributes* da = fighter_fp->dat_attrs;
+            fighter_fp->xE4_ground_accel_1 +=
+                da->x6C * fighter_fp->coll_data.floor.normal.x;
         }
-        ftCommon_ClampGroundVel(temp_r31, temp_r30->x38);
+        ftCommon_ClampGroundVel(fp, icattr->x38);
         ftCommon_SetSelfMovementFromGroundedMovement_NoFriction(gobj);
     } else {
-        float friction = temp_r31->co_attrs.ground_friction;
-        ftCommon_CalcGroundAccel_Deaccel(temp_r31, friction);
-        ftCommon_ClampGroundVel(temp_r31, temp_r30->x38);
+        float friction = fp->co_attrs.ground_friction;
+        ftCommon_CalcGroundAccel_Deaccel(fp, friction);
+        ftCommon_ClampGroundVel(fp, icattr->x38);
         ftCommon_SetSelfMovementFromGroundedMovement_NoFriction(gobj);
     }
-    temp_r31->mv.pp.specials.x14 += 1;
-    if ((temp_r31->cmd_vars[2] != 0) &&
-        (temp_r31->input.pressed_buttons & HSD_PAD_B))
-    {
-        temp_r31->mv.pp.specials.x10 += 1;
+    fp->mv.pp.specials.x14 += 1;
+    // B-button mash detection
+    if ((fp->cmd_vars[2] != 0) && (fp->input.pressed_buttons & HSD_PAD_B)) {
+        fp->mv.pp.specials.x10 += 1;
     }
-    if (temp_r31->mv.pp.specials.x10 != 0 &&
-        temp_r31->mv.pp.specials.x14 > temp_r30->x68)
-    {
-        temp_r27 = GET_FIGHTER(gobj);
-        temp_r28 = temp_r27->dat_attrs;
-        ftCommon_8007D5D4(temp_r27);
-        temp_r27->x74_self_accel.x = temp_r27->xE4_ground_accel_1;
+    // Launch into air when mashed
+    if (fp->mv.pp.specials.x10 != 0 && fp->mv.pp.specials.x14 > icattr->x68) {
+        fighter = GET_FIGHTER(gobj);
+        attrs = fighter->dat_attrs;
+        ftCommon_8007D5D4(fighter);
+        fighter->x74_self_accel.x = fighter->xE4_ground_accel_1;
         Fighter_ChangeMotionState(gobj, ftPp_MS_SpecialAirS2, 0xC4C528A,
-                                  temp_r27->cur_anim_frame, 1.0F, 0.0F, NULL);
-        temp_r5_2 = GET_FIGHTER(gobj);
-        temp_r5_2->take_dmg_cb = ftPp_Init_8011F060;
-        temp_r5_2->death2_cb = ftPp_Init_8011F060;
-        Fighter_SetEffectHitlagCallbacks(temp_r5_2);
-        ftCommon_ClampSelfVelX(temp_r27, temp_r28->x3C);
-        temp_r31->self_vel.y += temp_r30->x64;
-        temp_r31->mv.pp.specials.x10 = 0;
-        temp_r31->mv.pp.specials.x14 = 0;
+                                  fighter->cur_anim_frame, 1.0F, 0.0F, NULL);
+        fighter_fp2 = GET_FIGHTER(gobj);
+        fighter_fp2->take_dmg_cb = ftPp_Init_8011F060;
+        fighter_fp2->death2_cb = ftPp_Init_8011F060;
+        Fighter_SetEffectHitlagCallbacks(fighter_fp2);
+        ftCommon_ClampSelfVelX(fighter, attrs->x3C);
+        fp->self_vel.y += icattr->x64;
+        fp->mv.pp.specials.x10 = 0;
+        fp->mv.pp.specials.x14 = 0;
     }
-    temp_r31->mv.pp.specials.x18 += 1;
+    fp->mv.pp.specials.x18 += 1;
 }
 
+/**
+ * @brief Physics callback for aerial solo Squall Hammer
+ * @details Applies B-press rise boost (da->x60), custom gravity/fall, and
+ * aerial drift.
+ * @param gobj Fighter game object
+ */
 void ftPp_SpecialAirS1_Phys(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -461,6 +600,7 @@ void ftPp_SpecialAirS1_Phys(Fighter_GObj* gobj)
     PAD_STACK(8);
 
     fp->mv.pp.specials.x14 += 1;
+    // B-button mash height gain
     if (fp->cmd_vars[2] != 0 && (fp->input.pressed_buttons & HSD_PAD_B)) {
         fp->mv.pp.specials.x10 += 1;
     }
@@ -470,20 +610,28 @@ void ftPp_SpecialAirS1_Phys(Fighter_GObj* gobj)
         fp->mv.pp.specials.x14 = 0;
     }
     fp->mv.pp.specials.x18 += 1;
+    // Custom gravity during initial window (da->x5C frames)
     if (fp->mv.pp.specials.x18 < da->x5C) {
         ftCommon_Fall(fp, da->x4C_gravity, da->x54_terminal_vel);
     } else {
         ftCommon_FallBasic(fp);
     }
+    // Horizontal drift steering
     if (fp->cmd_vars[0] == 0 && fp->mv.pp.specials.x1C != 0.0F) {
-        f32 var_f0 = fp->mv.pp.specials.x1C > 0.0F ? da->x3C : -da->x3C;
-        ftCommon_CalcSelfAccel_AccelToVel(fp, fp->mv.pp.specials.x1C, var_f0,
-                                          0.0F);
+        f32 target_vel = fp->mv.pp.specials.x1C > 0.0F ? da->x3C : -da->x3C;
+        ftCommon_CalcSelfAccel_AccelToVel(fp, fp->mv.pp.specials.x1C,
+                                          target_vel, 0.0F);
     } else {
         ftCommon_CalcSelfAccel_DeaccelAir(fp);
     }
 }
 
+/**
+ * @brief Physics callback for aerial paired Squall Hammer
+ * @details Applies paired B-press rise boost (da->x64), paired gravity, and
+ * drift.
+ * @param gobj Fighter game object
+ */
 void ftPp_SpecialAirS2_Phys(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -491,6 +639,7 @@ void ftPp_SpecialAirS2_Phys(Fighter_GObj* gobj)
     PAD_STACK(8);
 
     fp->mv.pp.specials.x14 += 1;
+    // Paired B-button mash height gain
     if (fp->cmd_vars[2] != 0 && (fp->input.pressed_buttons & HSD_PAD_B)) {
         fp->mv.pp.specials.x10 += 1;
     }
@@ -500,15 +649,17 @@ void ftPp_SpecialAirS2_Phys(Fighter_GObj* gobj)
         fp->mv.pp.specials.x14 = 0;
     }
     fp->mv.pp.specials.x18 += 1;
+    // Custom paired gravity
     if (fp->mv.pp.specials.x18 < da->x5C) {
         ftCommon_Fall(fp, da->x50_gravity, da->x58_terminal_vel);
     } else {
         ftCommon_FallBasic(fp);
     }
+    // Paired aerial drift steering
     if (fp->cmd_vars[0] == 0 && fp->mv.pp.specials.x1C != 0.0F) {
-        f32 var_f0 = fp->mv.pp.specials.x1C > 0.0F ? da->x3C : -da->x3C;
-        ftCommon_CalcSelfAccel_AccelToVel(fp, fp->mv.pp.specials.x1C, var_f0,
-                                          0.0F);
+        f32 target_vel = fp->mv.pp.specials.x1C > 0.0F ? da->x3C : -da->x3C;
+        ftCommon_CalcSelfAccel_AccelToVel(fp, fp->mv.pp.specials.x1C,
+                                          target_vel, 0.0F);
     } else {
         ftCommon_CalcSelfAccel_DeaccelAir(fp);
     }
@@ -518,6 +669,10 @@ static ftCollisionBox ftNn_Init_803CD820 = {
     12, 0, -6, 6, 6, 6,
 };
 
+/**
+ * @brief Update joint tilt rotation for ground slope alignment
+ * @param gobj Fighter game object
+ */
 static inline void inline2(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -530,40 +685,53 @@ static inline void inline2(Fighter_GObj* gobj)
     }
 }
 
+/**
+ * @brief Transition from grounded to aerial Squall Hammer when slipping off
+ * ledge
+ * @param gobj Fighter game object
+ * @param msid Target motion state ID
+ */
 static inline void inline3(Fighter_GObj* gobj, int msid)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    ftIceClimberAttributes* temp_r30 = fp->dat_attrs;
+    ftIceClimberAttributes* icattr = fp->dat_attrs;
     ftCommon_8007D5D4(fp);
     fp->x74_self_accel.x = fp->xE4_ground_accel_1;
     Fighter_ChangeMotionState(gobj, msid, 0xC4C528A, fp->cur_anim_frame, 1.0F,
                               0.0F, NULL);
     inlineA0(gobj);
-    ftCommon_ClampSelfVelX(fp, temp_r30->x3C);
+    ftCommon_ClampSelfVelX(fp, icattr->x3C);
 }
 
+/**
+ * @brief Collision callback for grounded solo Squall Hammer
+ * @details Handles wall bouncing: reflects velocity by -da->x44 if above
+ * threshold da->x48.
+ * @param gobj Fighter game object
+ */
 void ftPp_SpecialS1_Coll(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftIceClimberAttributes* da = fp->dat_attrs;
-    bool temp_r3 = ft_80082888(gobj, &ftNn_Init_803CD820);
-    bool var_r0 = false;
+    bool is_grounded = ft_80082888(gobj, &ftNn_Init_803CD820);
+    bool hit_wall = false;
     PAD_STACK(0x10);
     if (fp->gr_vel != 0.0F) {
         if (fp->gr_vel > 0.0F) {
-            var_r0 = fp->coll_data.env_flags & Collide_LeftWallMask;
+            hit_wall = fp->coll_data.env_flags & Collide_LeftWallMask;
         } else {
-            var_r0 = fp->coll_data.env_flags & Collide_RightWallMask;
+            hit_wall = fp->coll_data.env_flags & Collide_RightWallMask;
         }
     }
-    if (var_r0) {
+    // Wall bounce reflection
+    if (hit_wall) {
         if (ABS(fp->gr_vel) < da->x48) {
             fp->gr_vel = fp->gr_vel > 0.0F ? -da->x48 : da->x48;
         } else {
             fp->gr_vel *= -da->x44;
         }
     }
-    if (!temp_r3) {
+    if (!is_grounded) {
         inline3(gobj, ftPp_MS_SpecialAirS1);
         fp->mv.pp.specials.xC = 0;
     } else {
@@ -574,38 +742,48 @@ void ftPp_SpecialS1_Coll(Fighter_GObj* gobj)
     inlineA0(gobj);
 }
 
+/**
+ * @brief Collision callback for grounded paired Squall Hammer
+ * @param gobj Fighter game object
+ */
 void ftPp_SpecialS2_Coll(Fighter_GObj* gobj)
 {
-    Fighter* temp_r28 = GET_FIGHTER(gobj);
-    ftIceClimberAttributes* da = temp_r28->dat_attrs;
-    bool temp_r3 = ft_80082888(gobj, &ftNn_Init_803CD820);
-    bool var_r0 = false;
+    Fighter* fp = GET_FIGHTER(gobj);
+    ftIceClimberAttributes* da = fp->dat_attrs;
+    bool is_grounded = ft_80082888(gobj, &ftNn_Init_803CD820);
+    bool hit_wall = false;
     PAD_STACK(0x10);
-    if (temp_r28->gr_vel != 0.0F) {
-        if (temp_r28->gr_vel > 0.0F) {
-            var_r0 = temp_r28->coll_data.env_flags & Collide_LeftWallMask;
+    if (fp->gr_vel != 0.0F) {
+        if (fp->gr_vel > 0.0F) {
+            hit_wall = fp->coll_data.env_flags & Collide_LeftWallMask;
         } else {
-            var_r0 = temp_r28->coll_data.env_flags & Collide_RightWallMask;
+            hit_wall = fp->coll_data.env_flags & Collide_RightWallMask;
         }
     }
-    if (var_r0) {
-        if (ABS(temp_r28->gr_vel) < da->x48) {
-            temp_r28->gr_vel = temp_r28->gr_vel > 0.0F ? -da->x48 : da->x48;
+    // Paired wall bounce reflection
+    if (hit_wall) {
+        if (ABS(fp->gr_vel) < da->x48) {
+            fp->gr_vel = fp->gr_vel > 0.0F ? -da->x48 : da->x48;
         } else {
-            temp_r28->gr_vel *= -da->x44;
+            fp->gr_vel *= -da->x44;
         }
     }
-    if (!temp_r3) {
+    if (!is_grounded) {
         inline3(gobj, ftPp_MS_SpecialAirS2);
-        temp_r28->mv.pp.specials.xC = 0;
+        fp->mv.pp.specials.xC = 0;
     } else {
-        temp_r28->mv.pp.specials.xC = 1;
+        fp->mv.pp.specials.xC = 1;
     }
     inline2(gobj);
     ftPp_SpecialS_8011F720(gobj);
     inlineA0(gobj);
 }
 
+/**
+ * @brief Transition from aerial to grounded Squall Hammer upon landing
+ * @param gobj Fighter game object
+ * @param msid Target grounded motion state ID
+ */
 static inline void inline4(Fighter_GObj* gobj, int msid)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -617,34 +795,40 @@ static inline void inline4(Fighter_GObj* gobj, int msid)
     ftCommon_ClampGroundVel(fp, da->x38);
 }
 
+/**
+ * @brief Collision callback for aerial solo Squall Hammer
+ * @details Detects ceiling, wall bounce reflection, and landing.
+ * @param gobj Fighter game object
+ */
 void ftPp_SpecialAirS1_Coll(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftIceClimberAttributes* da = fp->dat_attrs;
-    bool temp_r3;
-    bool var_r0;
+    bool is_grounded;
+    bool hit_wall;
     PAD_STACK(0x18);
 
-    temp_r3 = ft_800824A0(gobj, &ftNn_Init_803CD820);
+    is_grounded = ft_800824A0(gobj, &ftNn_Init_803CD820);
     if ((fp->coll_data.env_flags & Collide_CeilingMask) == 1) {
         fp->self_vel.y = 0.0F;
     }
-    var_r0 = false;
+    hit_wall = false;
     if (fp->self_vel.x != 0.0F) {
         if (fp->self_vel.x > 0.0F) {
-            var_r0 = fp->coll_data.env_flags & Collide_LeftWallMask;
+            hit_wall = fp->coll_data.env_flags & Collide_LeftWallMask;
         } else {
-            var_r0 = fp->coll_data.env_flags & Collide_RightWallMask;
+            hit_wall = fp->coll_data.env_flags & Collide_RightWallMask;
         }
     }
-    if (var_r0) {
+    // Aerial wall bounce reflection
+    if (hit_wall) {
         if (ABS(fp->self_vel.x) < da->x48) {
             fp->self_vel.x = fp->self_vel.x > 0.0F ? -da->x48 : da->x48;
         } else {
             fp->self_vel.x *= -da->x44;
         }
     }
-    if (temp_r3) {
+    if (is_grounded) {
         inline4(gobj, ftPp_MS_SpecialS1);
         fp->mv.pp.specials.xC = 1;
     } else {
@@ -655,32 +839,37 @@ void ftPp_SpecialAirS1_Coll(Fighter_GObj* gobj)
     inlineA0(gobj);
 }
 
+/**
+ * @brief Collision callback for aerial paired Squall Hammer
+ * @param gobj Fighter game object
+ */
 void ftPp_SpecialAirS2_Coll(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftIceClimberAttributes* da = fp->dat_attrs;
-    bool temp_r3 = ft_800824A0(gobj, &ftNn_Init_803CD820);
-    bool var_r0;
+    bool is_grounded = ft_800824A0(gobj, &ftNn_Init_803CD820);
+    bool hit_wall;
     PAD_STACK(0x18);
     if ((fp->coll_data.env_flags & Collide_CeilingMask) == 1) {
         fp->self_vel.y = 0.0F;
     }
-    var_r0 = false;
+    hit_wall = false;
     if (fp->self_vel.x != 0.0F) {
         if (fp->self_vel.x > 0.0F) {
-            var_r0 = fp->coll_data.env_flags & Collide_LeftWallMask;
+            hit_wall = fp->coll_data.env_flags & Collide_LeftWallMask;
         } else {
-            var_r0 = fp->coll_data.env_flags & Collide_RightWallMask;
+            hit_wall = fp->coll_data.env_flags & Collide_RightWallMask;
         }
     }
-    if (var_r0) {
+    // Paired aerial wall bounce reflection
+    if (hit_wall) {
         if (ABS(fp->self_vel.x) < da->x48) {
             fp->self_vel.x = fp->self_vel.x > 0.0F ? -da->x48 : da->x48;
         } else {
             fp->self_vel.x *= -da->x44;
         }
     }
-    if (temp_r3) {
+    if (is_grounded) {
         inline4(gobj, ftPp_MS_SpecialS2);
         fp->mv.pp.specials.xC = 1;
     } else {

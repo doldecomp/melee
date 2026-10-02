@@ -1,3 +1,11 @@
+/**
+ * @file ftpopo.c
+ * @brief Main character module and callback setup for Ice Climbers (Popo)
+ * @details Implements motion state table configuration, item handling
+ * callbacks, death/damage reset handlers, and DAT asset loading for Popo.
+ * Module prefix: ftPp
+ */
+
 #include "ftpopo.h"
 
 #include "forward.h"
@@ -17,9 +25,11 @@
 
 /* 459E68 */ UnkCostumeStruct ftPp_CostumeList[4];
 
+/// Motion state table defining animation, IASA, physics, and collision
+/// callbacks
 MotionState ftPp_Init_MotionStateTable[ftPp_MS_SelfCount] = {
     {
-        // ftPp_MS_SpecialN = 341
+        // ftPp_MS_SpecialN = 341: Neutral-B (Ice Shot) Grounded
         ftPp_SM_SpecialN,
         ftPp_MF_SpecialN,
         (FtMoveId_SpecialN << 24) | (1 << 23),
@@ -30,7 +40,7 @@ MotionState ftPp_Init_MotionStateTable[ftPp_MS_SelfCount] = {
         ftCamera_UpdateCameraBox,
     },
     {
-        // ftPp_MS_SpecialAirN = 342
+        // ftPp_MS_SpecialAirN = 342: Neutral-B (Ice Shot) Aerial
         ftPp_SM_SpecialAirN,
         ftPp_MF_SpecialAirN,
         (FtMoveId_SpecialN << 24) | (1 << 23),
@@ -41,7 +51,7 @@ MotionState ftPp_Init_MotionStateTable[ftPp_MS_SelfCount] = {
         ftCamera_UpdateCameraBox,
     },
     {
-        // ftPp_MS_SpecialS1 = 343
+        // ftPp_MS_SpecialS1 = 343: Side-B (Squall Hammer) Solo Grounded
         ftPp_SM_SpecialS1,
         ftPp_MF_SpecialS,
         (FtMoveId_SpecialS << 24) | (1 << 23),
@@ -52,7 +62,7 @@ MotionState ftPp_Init_MotionStateTable[ftPp_MS_SelfCount] = {
         ftCamera_UpdateCameraBox,
     },
     {
-        // ftPp_MS_SpecialS2 = 344
+        // ftPp_MS_SpecialS2 = 344: Side-B (Squall Hammer) Paired Grounded
         ftPp_SM_SpecialS2,
         ftPp_MF_SpecialS,
         (FtMoveId_SpecialS << 24) | (1 << 23),
@@ -63,7 +73,7 @@ MotionState ftPp_Init_MotionStateTable[ftPp_MS_SelfCount] = {
         ftCamera_UpdateCameraBox,
     },
     {
-        // ftPp_MS_SpecialAirS1 = 345
+        // ftPp_MS_SpecialAirS1 = 345: Side-B (Squall Hammer) Solo Aerial
         ftPp_SM_SpecialAirS1,
         ftPp_MF_SpecialAirS,
         (FtMoveId_SpecialS << 24) | (1 << 23),
@@ -74,7 +84,7 @@ MotionState ftPp_Init_MotionStateTable[ftPp_MS_SelfCount] = {
         ftCamera_UpdateCameraBox,
     },
     {
-        // ftPp_MS_SpecialAirS2 = 346
+        // ftPp_MS_SpecialAirS2 = 346: Side-B (Squall Hammer) Paired Aerial
         ftPp_SM_SpecialAirS2,
         ftPp_MF_SpecialAirS,
         (FtMoveId_SpecialS << 24) | (1 << 23),
@@ -85,7 +95,8 @@ MotionState ftPp_Init_MotionStateTable[ftPp_MS_SelfCount] = {
         ftCamera_UpdateCameraBox,
     },
     {
-        // ftPp_MS_SpecialHiStart_0 = 347
+        // ftPp_MS_SpecialHiStart_0 = 347: Up-B (Belay) Partnered Grounded
+        // Start
         ftPp_SM_SpecialHiStart_0,
         ftPp_MF_SpecialHi,
         FtMoveId_SpecialHi << 24,
@@ -96,7 +107,8 @@ MotionState ftPp_Init_MotionStateTable[ftPp_MS_SelfCount] = {
         ftCamera_UpdateCameraBox,
     },
     {
-        // ftPp_MS_SpecialHiThrow_0 = 348
+        // ftPp_MS_SpecialHiThrow_0 = 348: Up-B (Belay) Partnered Grounded
+        // Throw
         ftPp_SM_SpecialHiThrow_0,
         ftPp_MF_SpecialHi,
         FtMoveId_SpecialHi << 24,
@@ -107,7 +119,8 @@ MotionState ftPp_Init_MotionStateTable[ftPp_MS_SelfCount] = {
         ftCamera_UpdateCameraBox,
     },
     {
-        // ftPp_MS_SpecialHiThrow2 = 349
+        // ftPp_MS_SpecialHiThrow2 = 349: Up-B (Belay) Partnered Grounded Popo
+        // Rise
         ftPp_SM_SpecialHiThrow2,
         ftPp_MF_SpecialHi,
         FtMoveId_SpecialHi << 24,
@@ -118,7 +131,8 @@ MotionState ftPp_Init_MotionStateTable[ftPp_MS_SelfCount] = {
         ftCamera_UpdateCameraBox,
     },
     {
-        // ftPp_MS_SpecialHiStart_1 = 350
+        // ftPp_MS_SpecialHiStart_1 = 350: Up-B (Belay) Solo Fail Grounded
+        // Start
         ftPp_SM_SpecialHiStart_1,
         ftPp_MF_SpecialHi,
         FtMoveId_SpecialHi << 24,
@@ -129,7 +143,8 @@ MotionState ftPp_Init_MotionStateTable[ftPp_MS_SelfCount] = {
         ftCamera_UpdateCameraBox,
     },
     {
-        // ftPp_MS_SpecialHiThrow_1 = 351
+        // ftPp_MS_SpecialHiThrow_1 = 351: Up-B (Belay) Solo Fail Grounded
+        // Throw
         ftPp_SM_SpecialHiThrow_1,
         ftPp_MF_SpecialHi,
         FtMoveId_SpecialHi << 24,
@@ -140,7 +155,8 @@ MotionState ftPp_Init_MotionStateTable[ftPp_MS_SelfCount] = {
         ftCamera_UpdateCameraBox,
     },
     {
-        // ftPp_MS_SpecialAirHiStart_0 = 352
+        // ftPp_MS_SpecialAirHiStart_0 = 352: Up-B (Belay) Partnered Aerial
+        // Start
         ftPp_SM_SpecialAirHiStart_0,
         ftPp_MF_SpecialAirHi,
         FtMoveId_SpecialHi << 24,
@@ -151,7 +167,8 @@ MotionState ftPp_Init_MotionStateTable[ftPp_MS_SelfCount] = {
         ftCamera_UpdateCameraBox,
     },
     {
-        // ftPp_MS_SpecialAirHiThrow_0 = 353
+        // ftPp_MS_SpecialAirHiThrow_0 = 353: Up-B (Belay) Partnered Aerial
+        // Throw
         ftPp_SM_SpecialAirHiThrow_0,
         ftPp_MF_SpecialAirHi,
         FtMoveId_SpecialHi << 24,
@@ -162,7 +179,8 @@ MotionState ftPp_Init_MotionStateTable[ftPp_MS_SelfCount] = {
         ftCamera_UpdateCameraBox,
     },
     {
-        // ftPp_MS_SpecialAirHiThrow2 = 354
+        // ftPp_MS_SpecialAirHiThrow2 = 354: Up-B (Belay) Partnered Aerial Popo
+        // Rise
         ftPp_SM_SpecialAirHiThrow2,
         ftPp_MF_SpecialAirHi,
         FtMoveId_SpecialHi << 24,
@@ -173,7 +191,8 @@ MotionState ftPp_Init_MotionStateTable[ftPp_MS_SelfCount] = {
         ftCamera_UpdateCameraBox,
     },
     {
-        // ftPp_MS_SpecialAirHiStart_1 = 355
+        // ftPp_MS_SpecialAirHiStart_1 = 355: Up-B (Belay) Solo Fail Aerial
+        // Start
         ftPp_SM_SpecialAirHiStart_1,
         ftPp_MF_SpecialAirHi,
         FtMoveId_SpecialHi << 24,
@@ -184,7 +203,8 @@ MotionState ftPp_Init_MotionStateTable[ftPp_MS_SelfCount] = {
         ftCamera_UpdateCameraBox,
     },
     {
-        // ftPp_MS_SpecialAirHiThrow_1 = 356
+        // ftPp_MS_SpecialAirHiThrow_1 = 356: Up-B (Belay) Solo Fail Aerial
+        // Throw
         ftPp_SM_SpecialAirHiThrow_1,
         ftPp_MF_SpecialAirHi,
         FtMoveId_SpecialHi << 24,
@@ -195,7 +215,7 @@ MotionState ftPp_Init_MotionStateTable[ftPp_MS_SelfCount] = {
         ftCamera_UpdateCameraBox,
     },
     {
-        // ftPp_MS_SpecialLw = 357
+        // ftPp_MS_SpecialLw = 357: Down-B (Blizzard) Grounded
         ftPp_SM_SpecialLw,
         ftPp_MF_SpecialLw,
         (FtMoveId_SpecialLw << 24) | (1 << 23),
@@ -206,7 +226,7 @@ MotionState ftPp_Init_MotionStateTable[ftPp_MS_SelfCount] = {
         ftCamera_UpdateCameraBox,
     },
     {
-        // ftPp_MS_SpecialAirLw = 358
+        // ftPp_MS_SpecialAirLw = 358: Down-B (Blizzard) Aerial
         ftPp_SM_SpecialAirLw,
         ftPp_MF_MS_358,
         (FtMoveId_SpecialLw << 24) | (1 << 23),
@@ -217,7 +237,7 @@ MotionState ftPp_Init_MotionStateTable[ftPp_MS_SelfCount] = {
         ftCamera_UpdateCameraBox,
     },
     {
-        // ftPp_MS_SpecialS_0 = 359
+        // ftPp_MS_SpecialS_0 = 359: Side-B (Squall Hammer) Auxiliary State 0
         ftPp_SM_SpecialS_0,
         ftPp_MF_SpecialS,
         (FtMoveId_SpecialS << 24) | (1 << 23),
@@ -228,7 +248,7 @@ MotionState ftPp_Init_MotionStateTable[ftPp_MS_SelfCount] = {
         ftCamera_UpdateCameraBox,
     },
     {
-        // ftPp_MS_SpecialS_1 = 360
+        // ftPp_MS_SpecialS_1 = 360: Side-B (Squall Hammer) Auxiliary State 1
         ftPp_SM_SpecialS_1,
         ftPp_MF_SpecialAirS,
         (FtMoveId_SpecialS << 24) | (1 << 23),
@@ -239,7 +259,7 @@ MotionState ftPp_Init_MotionStateTable[ftPp_MS_SelfCount] = {
         ftCamera_UpdateCameraBox,
     },
     {
-        // ftPp_MS_SpecialHi_0 = 361
+        // ftPp_MS_SpecialHi_0 = 361: Up-B (Belay) Nana Partnered State 0
         ftPp_SM_SpecialHi_0,
         ftPp_MF_SpecialHi,
         FtMoveId_SpecialHi << 24,
@@ -250,7 +270,7 @@ MotionState ftPp_Init_MotionStateTable[ftPp_MS_SelfCount] = {
         ftCamera_UpdateCameraBox,
     },
     {
-        // ftPp_MS_SpecialHi_1 = 362
+        // ftPp_MS_SpecialHi_1 = 362: Up-B (Belay) Nana Partnered State 1
         ftPp_SM_SpecialHi_1,
         ftPp_MF_SpecialHi,
         FtMoveId_SpecialHi << 24,
@@ -261,7 +281,7 @@ MotionState ftPp_Init_MotionStateTable[ftPp_MS_SelfCount] = {
         ftCamera_UpdateCameraBox,
     },
     {
-        // ftPp_MS_SpecialHi_2 = 363
+        // ftPp_MS_SpecialHi_2 = 363: Up-B (Belay) Nana Partnered State 2
         ftPp_SM_SpecialHi_2,
         ftPp_MF_SpecialHi,
         FtMoveId_SpecialHi << 24,
@@ -272,7 +292,7 @@ MotionState ftPp_Init_MotionStateTable[ftPp_MS_SelfCount] = {
         ftCamera_UpdateCameraBox,
     },
     {
-        // ftPp_MS_SpecialHi_3 = 364
+        // ftPp_MS_SpecialHi_3 = 364: Up-B (Belay) Nana Partnered State 3
         ftPp_SM_SpecialHi_3,
         ftPp_MF_SpecialAirHi,
         FtMoveId_SpecialHi << 24,
@@ -283,7 +303,7 @@ MotionState ftPp_Init_MotionStateTable[ftPp_MS_SelfCount] = {
         ftCamera_UpdateCameraBox,
     },
     {
-        // ftPp_MS_SpecialHi_4 = 365
+        // ftPp_MS_SpecialHi_4 = 365: Up-B (Belay) Nana Partnered State 4
         ftPp_SM_SpecialHi_4,
         ftPp_MF_SpecialAirHi,
         FtMoveId_SpecialHi << 24,
@@ -294,7 +314,7 @@ MotionState ftPp_Init_MotionStateTable[ftPp_MS_SelfCount] = {
         ftCamera_UpdateCameraBox,
     },
     {
-        // ftPp_MS_SpecialHi_5 = 366
+        // ftPp_MS_SpecialHi_5 = 366: Up-B (Belay) Nana Partnered State 5
         ftPp_SM_SpecialHi_5,
         ftPp_MF_SpecialAirHi,
         FtMoveId_SpecialHi << 24,
@@ -336,31 +356,61 @@ Fighter_CostumeStrings ftPp_Init_CostumeStrings[] = {
     { ftPp_Init_803CD6F4, ftPp_Init_803CD700, ftPp_Init_803CD718 },
 };
 
+/**
+ * @brief Handle item pickup animation and flag update
+ * @param gobj Fighter game object
+ * @param flag Item pickup flag
+ */
 void ftPp_Init_OnItemPickup(HSD_GObj* gobj, bool flag)
 {
     Fighter_OnItemPickup(gobj, flag, 1, 1);
 }
 
+/**
+ * @brief Handle item invisibility callback
+ * @param gobj Fighter game object
+ */
 void ftPp_Init_OnItemInvisible(HSD_GObj* gobj)
 {
     Fighter_OnItemInvisible(gobj, 1);
 }
 
+/**
+ * @brief Handle item visibility callback
+ * @param gobj Fighter game object
+ */
 void ftPp_Init_OnItemVisible(HSD_GObj* gobj)
 {
     Fighter_OnItemVisible(gobj, 1);
 }
 
+/**
+ * @brief Handle item drop callback
+ * @param gobj Fighter game object
+ * @param flag Drop flag
+ */
 void ftPp_Init_OnItemDrop(HSD_GObj* gobj, bool flag)
 {
     Fighter_OnItemDrop(gobj, flag, 1, 1);
 }
 
+/**
+ * @brief Setup character attributes when initializing partner Nana
+ * @param fp Fighter instance pointer
+ */
 void ftPp_Init_OnLoadForNana(Fighter* fp)
 {
     PUSH_ATTRS(fp, ftIceClimberAttributes);
 }
 
+/**
+ * @brief Character load callback for Popo
+ * @details Pushes attributes and registers item archetypes:
+ * - item_list[0]: Ice Shot chunk (It_Kind_IceClimber_Ice)
+ * - item_list[1]: Blizzard cloud (It_Kind_IceClimber_Blizzard)
+ * - item_list[2]: Belay gum string / rope (It_Kind_IceClimber_GumStrings)
+ * @param gobj Fighter game object
+ */
 void ftPp_Init_OnLoad(HSD_GObj* gobj)
 {
     u8 _[4];
@@ -380,6 +430,10 @@ void ftPp_Init_OnLoad(HSD_GObj* gobj)
     }
 }
 
+/**
+ * @brief Reset callbacks and per-character variables when Popo dies
+ * @param gobj Fighter game object
+ */
 void ftPp_Init_OnDeath(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -395,6 +449,12 @@ void ftPp_Init_OnDeath(HSD_GObj* gobj)
 
 static void ftPp_Init_8011F190(HSD_GObj* gobj);
 
+/**
+ * @brief Clean up all special move entities when damaged or KO'd
+ * @details Despawns Ice Shot block, Blizzard effects, Belay rope, and Squall
+ * partner link.
+ * @param gobj Fighter game object
+ */
 void ftPp_Init_8011F060(HSD_GObj* gobj)
 {
     ftPp_Init_8011F190(gobj);
@@ -403,21 +463,38 @@ void ftPp_Init_8011F060(HSD_GObj* gobj)
     ftPp_SpecialS_8011F68C(gobj);
 }
 
+/**
+ * @brief Copy character special attributes into fighter memory
+ * @param gobj Fighter game object
+ */
 void ftPp_Init_LoadSpecialAttrs(HSD_GObj* gobj)
 {
     COPY_ATTRS(gobj, ftIceClimberAttributes);
 }
 
+/**
+ * @brief Callback when entering knockback
+ * @param gobj Fighter game object
+ */
 void ftPp_Init_OnKnockbackEnter(HSD_GObj* gobj)
 {
     Fighter_OnKnockbackEnter(gobj, true);
 }
 
+/**
+ * @brief Callback when exiting knockback
+ * @param gobj Fighter game object
+ */
 void ftPp_Init_OnKnockbackExit(HSD_GObj* gobj)
 {
     Fighter_OnKnockbackExit(gobj, true);
 }
 
+/**
+ * @brief Clear Ice Shot block reference if it matches the specified item
+ * @param gobj Fighter game object
+ * @param item_gobj Item game object to compare
+ */
 void ftPp_Init_8011F16C(HSD_GObj* gobj, Item_GObj* item_gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -431,6 +508,10 @@ void ftPp_Init_8011F16C(HSD_GObj* gobj, Item_GObj* item_gobj)
     fp->take_dmg_cb = NULL;
 }
 
+/**
+ * @brief Despawn active Ice Shot item and clear associated callbacks
+ * @param gobj Fighter game object
+ */
 static void ftPp_Init_8011F190(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);

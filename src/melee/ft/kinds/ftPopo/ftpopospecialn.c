@@ -1,3 +1,12 @@
+/**
+ * @file ftpopospecialn.c
+ * @brief Neutral-B: Ice Shot (Ice block projectile)
+ * @details Implements grounded and aerial Ice Shot logic for Ice Climbers
+ * (Popo/Nana). Popo summons a chunk of ice on the ground/in air, then smashes
+ * it with his hammer to slide/send it forward as an active projectile. Module
+ * prefix: ftPp
+ */
+
 #include "ftpopospecialn.h"
 
 #include <Runtime/platform.h>
@@ -26,6 +35,12 @@
 
 /* 11F500 */ static void ftPp_SpecialN_8011F500(Fighter_GObj* gobj);
 
+/**
+ * @brief Enter grounded Neutral-B (Ice Shot)
+ * @details Initializes throw flags, clears cmd_vars, changes motion state to
+ * 341 (ftPp_MS_SpecialN), and binds the hammer strike accessory callback.
+ * @param gobj Fighter game object
+ */
 void ftPp_SpecialN_Enter(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -33,12 +48,20 @@ void ftPp_SpecialN_Enter(HSD_GObj* gobj)
     fp->cmd_vars[0] = 0;
     fp->u.nn.x222C = NULL;
 
+    // Transition to grounded Ice Shot (motion state 341)
     Fighter_ChangeMotionState(gobj, 341, Ft_MF_None, 0.0f, 1.0f, 0.0f, NULL);
 
     ftAnim_8006EBA4(gobj);
     fp->accessory4_cb = &ftPp_SpecialN_8011F500;
 }
 
+/**
+ * @brief Enter aerial Neutral-B (Ice Shot)
+ * @details If not previously used midair (x224C == false), gives a small
+ * vertical hop (icattr->x4) and sets stall flag to prevent infinite aerial
+ * stalling. Subsequent aerial uses set a negative Y offset.
+ * @param gobj Fighter game object
+ */
 void ftPp_SpecialAirN_Enter(HSD_GObj* gobj)
 {
     u8 _[4];
@@ -50,6 +73,7 @@ void ftPp_SpecialAirN_Enter(HSD_GObj* gobj)
     fp->cmd_vars[0] = 0;
     fp->u.nn.x222C = NULL;
 
+    // Aerial vertical impulse logic (stall prevention)
     if ((s32) fp->u.nn.x224C == false) {
         fp->self_vel.y = icattr->x4;
         fp->u.nn.x224C = true;
@@ -58,12 +82,18 @@ void ftPp_SpecialAirN_Enter(HSD_GObj* gobj)
         fp->u.nn.x2250 = -10.0;
     }
 
+    // Transition to aerial Ice Shot (motion state 342)
     Fighter_ChangeMotionState(gobj, 342, Ft_MF_None, 0.0f, 1.0f, 0.0f, NULL);
 
     ftAnim_8006EBA4(gobj);
     fp->accessory4_cb = &ftPp_SpecialN_8011F500;
 }
 
+/**
+ * @brief Animation handler for grounded Neutral-B (Ice Shot)
+ * @details Transitions to Wait state (idle) upon animation completion.
+ * @param gobj Fighter game object
+ */
 void ftPp_SpecialN_Anim(HSD_GObj* gobj)
 {
     if (!ftAnim_IsFramesRemaining(gobj)) {
@@ -71,6 +101,11 @@ void ftPp_SpecialN_Anim(HSD_GObj* gobj)
     }
 }
 
+/**
+ * @brief Animation handler for aerial Neutral-B (Ice Shot)
+ * @details Transitions to Fall state upon animation completion.
+ * @param gobj Fighter game object
+ */
 void ftPp_SpecialAirN_Anim(HSD_GObj* gobj)
 {
     if (!ftAnim_IsFramesRemaining(gobj)) {
@@ -78,25 +113,46 @@ void ftPp_SpecialAirN_Anim(HSD_GObj* gobj)
     }
 }
 
-void ftPp_SpecialN_IASA(HSD_GObj* arg0) {}
+/**
+ * @brief IASA callback for grounded Neutral-B (Ice Shot)
+ * @param gobj Fighter game object
+ */
+void ftPp_SpecialN_IASA(HSD_GObj* gobj) {}
 
-void ftPp_SpecialAirN_IASA(HSD_GObj* arg0) {}
+/**
+ * @brief IASA callback for aerial Neutral-B (Ice Shot)
+ * @param gobj Fighter game object
+ */
+void ftPp_SpecialAirN_IASA(HSD_GObj* gobj) {}
 
+/**
+ * @brief Physics callback for grounded Neutral-B (Ice Shot)
+ * @param gobj Fighter game object
+ */
 void ftPp_SpecialN_Phys(HSD_GObj* gobj)
 {
     ft_80084F3C(gobj);
 }
 
+/**
+ * @brief Physics callback for aerial Neutral-B (Ice Shot)
+ * @param gobj Fighter game object
+ */
 void ftPp_SpecialAirN_Phys(HSD_GObj* gobj)
 {
     ft_80084EEC(gobj);
 }
 
+/**
+ * @brief Collision callback for grounded Neutral-B (Ice Shot)
+ * @details If Popo slips off edge into air, destroys unlaunched ice block and
+ * enters Fall.
+ * @param gobj Fighter game object
+ */
 void ftPp_SpecialN_Coll(HSD_GObj* gobj)
 {
     if (!ft_80082708(gobj)) {
-        Fighter* fp1;
-        fp1 = GET_FIGHTER(gobj);
+        Fighter* fp1 = GET_FIGHTER(gobj);
         if (fp1->u.nn.x222C != NULL) {
             Fighter* fp2;
             it_802C17DC(fp1->u.nn.x222C);
@@ -111,6 +167,13 @@ void ftPp_SpecialN_Coll(HSD_GObj* gobj)
     }
 }
 
+/**
+ * @brief Collision callback for aerial Neutral-B (Ice Shot)
+ * @details If landing on ground, destroys unlaunched ice block, resets air
+ * stall flag, and enters LandingFallSpecial with character landing lag
+ * (da->x8).
+ * @param gobj Fighter game object
+ */
 void ftPp_SpecialAirN_Coll(Fighter_GObj* gobj)
 {
     Fighter *fp, *fp1, *fp2;
@@ -136,6 +199,11 @@ void ftPp_SpecialAirN_Coll(Fighter_GObj* gobj)
     }
 }
 
+/**
+ * @brief Helper to clear ice block pointer and callbacks on hammer hit
+ * @param gobj Fighter game object
+ * @param other_fp Fighter instance pointer
+ */
 static inline void inlineA0(Fighter_GObj* gobj, Fighter* other_fp)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -146,6 +214,17 @@ static inline void inlineA0(Fighter_GObj* gobj, Fighter* other_fp)
     }
 }
 
+/**
+ * @brief Animation accessory callback for Neutral-B: Ice Shot
+ * @details Handles animation-driven events via cmd_vars[0]:
+ * - cmd_vars[0] == 1: Spawns the ice block entity (It_Kind_IceClimber_Ice) in
+ * front of Popo at position (da->xC * facing_dir, da->x10 + y_offset). Sets
+ * death and damage cleanup callbacks.
+ * - cmd_vars[0] == 2: Hammer strikes the ice block (it_802C16F8), launching it
+ * as a projectile. Plays Popo/Nana voice clip and hammer strike SFX (130024).
+ * Clears active reference.
+ * @param gobj Fighter game object
+ */
 void ftPp_SpecialN_8011F500(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -155,6 +234,7 @@ void ftPp_SpecialN_8011F500(Fighter_GObj* gobj)
         return;
     }
     if (cmd_var0 == 1) {
+        // Spawn ice block projectile in front of fighter
         ftIceClimberAttributes* da = fp->dat_attrs;
         Vec3 pos;
         PAD_STACK(4 * 2);
@@ -170,6 +250,7 @@ void ftPp_SpecialN_8011F500(Fighter_GObj* gobj)
         }
         fp->cmd_vars[0] = 0;
     } else if (cmd_var0 == 2) {
+        // Strike ice block with hammer to propel it forward
         if (fp->u.pp.x222C != NULL) {
             it_802C16F8(fp->u.pp.x222C);
             fp->cmd_vars[0] = 0;

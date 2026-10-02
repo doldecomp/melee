@@ -1,3 +1,11 @@
+/**
+ * @file ftpopospeciallw.c
+ * @brief Down-B: Blizzard (Ice breath projectile stream)
+ * @details Implements grounded and aerial Blizzard logic for Ice Climbers
+ * (Popo/Nana). Popo/Nana channels an icy breath stream that can freeze
+ * opponents and tilts with floor slopes. Module prefix: ftPp
+ */
+
 #include "ftpopospeciallw.h"
 
 #include <melee/ft/forward.h>
@@ -18,6 +26,13 @@
 #include <melee/it/kinds/itclimbersblizzard.h>
 #include <melee/lb/lb_00B0.h>
 
+/**
+ * @brief Clean up Blizzard particle effects and model tilt rotation
+ * @details Destroys all active particle effects, clears the active Blizzard
+ * flag (x2230_b0), clears death/damage callbacks, and resets joint 0
+ * X-rotation to flat.
+ * @param gobj Fighter game object
+ */
 void ftPp_SpecialHi_80122898(Fighter_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
@@ -32,6 +47,13 @@ void ftPp_SpecialHi_80122898(Fighter_GObj* gobj)
     }
 }
 
+/**
+ * @brief Enter grounded Down-B (Blizzard)
+ * @details Initializes throw flags, cmd_vars, and motion variables for
+ * Blizzard, then enters motion state ftPp_MS_SpecialLw and binds the accessory
+ * callback.
+ * @param gobj Fighter game object
+ */
 void ftPp_SpecialLw_Enter(Fighter_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
@@ -47,6 +69,10 @@ void ftPp_SpecialLw_Enter(Fighter_GObj* gobj)
     fp->accessory4_cb = fn_80122D2C;
 }
 
+/**
+ * @brief Enter aerial Down-B (Blizzard)
+ * @param gobj Fighter game object
+ */
 void ftPp_SpecialAirLw_Enter(Fighter_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
@@ -62,6 +88,12 @@ void ftPp_SpecialAirLw_Enter(Fighter_GObj* gobj)
     fp->accessory4_cb = fn_80122D2C;
 }
 
+/**
+ * @brief Animation callback for grounded Down-B (Blizzard)
+ * @details On animation completion, removes Blizzard effects, resets rotation,
+ * and returns to Wait (idle).
+ * @param gobj Fighter game object
+ */
 void ftPp_SpecialLw_Anim(Fighter_GObj* gobj)
 {
     PAD_STACK(16);
@@ -79,6 +111,12 @@ void ftPp_SpecialLw_Anim(Fighter_GObj* gobj)
     }
 }
 
+/**
+ * @brief Animation callback for aerial Down-B (Blizzard)
+ * @details On animation completion, removes Blizzard effects, resets rotation,
+ * and enters Fall state.
+ * @param gobj Fighter game object
+ */
 void ftPp_SpecialAirLw_Anim(Fighter_GObj* gobj)
 {
     PAD_STACK(16);
@@ -96,20 +134,40 @@ void ftPp_SpecialAirLw_Anim(Fighter_GObj* gobj)
     }
 }
 
+/**
+ * @brief IASA callback for grounded Down-B (Blizzard)
+ * @param gobj Fighter game object
+ */
 void ftPp_SpecialLw_IASA(Fighter_GObj* gobj) {}
 
+/**
+ * @brief IASA callback for aerial Down-B (Blizzard)
+ * @param gobj Fighter game object
+ */
 void ftPp_SpecialAirLw_IASA(Fighter_GObj* gobj) {}
 
+/**
+ * @brief Physics callback for grounded Down-B (Blizzard)
+ * @param gobj Fighter game object
+ */
 void ftPp_SpecialLw_Phys(Fighter_GObj* gobj)
 {
     ft_80084F3C(gobj);
 }
 
+/**
+ * @brief Physics callback for aerial Down-B (Blizzard)
+ * @param gobj Fighter game object
+ */
 void ftPp_SpecialAirLw_Phys(Fighter_GObj* gobj)
 {
     ft_80084EEC(gobj);
 }
 
+/**
+ * @brief Set death and damage cleanup callbacks for Blizzard
+ * @param gobj Fighter game object
+ */
 static inline void ftPp_set_cbs(Fighter_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
@@ -117,6 +175,12 @@ static inline void ftPp_set_cbs(Fighter_GObj* gobj)
     fp->take_dmg_cb = ftPp_Init_8011F060;
 }
 
+/**
+ * @brief Calculate and set body tilt rotation to match ground slope
+ * @details If cmd_vars[3] is set, tilts Popo along the floor normal:
+ * angle = facing_dir * atan2(normal.x, normal.y). Otherwise resets to 0.
+ * @param gobj Fighter game object
+ */
 static inline void ftPp_SpecialLw_Coll_inline(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -129,22 +193,29 @@ static inline void ftPp_SpecialLw_Coll_inline(Fighter_GObj* gobj)
     }
 }
 
+/**
+ * @brief Aerial-to-ground landing transition during Down-B (Blizzard)
+ * @param gobj Fighter game object
+ */
 void fn_80122B54(Fighter_GObj* gobj)
 {
-    Fighter_GObj* new_var;
+    Fighter_GObj* fighter_gobj = gobj;
     Fighter* fp = gobj->user_data;
-    Fighter* fp2;
-    new_var = gobj;
+    Fighter* temp_fp;
     PAD_STACK(8);
     ftCommon_8007D7FC(fp);
-    fp2 = fp;
-    Fighter_ChangeMotionState(new_var, ftPp_MS_SpecialLw, 0x0C4C5282,
-                              fp2->cur_anim_frame, 1.0F, 0.0F, 0L);
-    ftPp_set_cbs(new_var);
+    temp_fp = fp;
+    Fighter_ChangeMotionState(fighter_gobj, ftPp_MS_SpecialLw, 0x0C4C5282,
+                              temp_fp->cur_anim_frame, 1.0F, 0.0F, 0L);
+    ftPp_set_cbs(fighter_gobj);
     ftPp_SpecialLw_Coll_inline(gobj);
     fp->accessory4_cb = fn_80122D2C;
 }
 
+/**
+ * @brief Grounded-to-air transition when slipping off a ledge during Blizzard
+ * @param gobj Fighter game object
+ */
 static inline void ftPp_SpecialLw_Coll_Land(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -155,6 +226,12 @@ static inline void ftPp_SpecialLw_Coll_Land(Fighter_GObj* gobj)
     ftCommon_ClampAirDrift(fp);
 }
 
+/**
+ * @brief Collision callback for grounded Down-B (Blizzard)
+ * @details If ground contact is lost, transitions to aerial Blizzard.
+ * If grounded, updates slope tilt rotation.
+ * @param gobj Fighter game object
+ */
 void ftPp_SpecialLw_Coll(Fighter_GObj* gobj)
 {
     PAD_STACK(8);
@@ -167,11 +244,28 @@ void ftPp_SpecialLw_Coll(Fighter_GObj* gobj)
     }
 }
 
+/**
+ * @brief Collision callback for aerial Down-B (Blizzard)
+ * @details Checks for ground contact and calls fn_80122B54 to land.
+ * @param gobj Fighter game object
+ */
 void ftPp_SpecialAirLw_Coll(Fighter_GObj* gobj)
 {
     ft_80082C74(gobj, fn_80122B54);
 }
 
+/**
+ * @brief Animation accessory callback for Down-B: Blizzard
+ * @details Handles Blizzard projectile spawning and particle sync:
+ * - When active (x4_b0 is true): Decrements spawn timer. When it reaches 0,
+ *   spawns a Blizzard particle/projectile (itClimbersBlizzard_Spawn) at Popo's
+ *   mouth/hand bone offset (pos.x += da->xBC * facing_dir, pos.y += da->xC0),
+ *   and resets the timer to da->xB8 frames.
+ * - cmd_vars[0] == 1: Starts Blizzard emission, attaches particle effect 0x4EC
+ * to joint FtPart_L4thNb, sets callbacks, and plays Popo/Nana sound effects.
+ * - cmd_vars[0] == 2: Stops Blizzard emission (x4_b0 = false).
+ * @param gobj Fighter game object
+ */
 void fn_80122D2C(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -190,6 +284,7 @@ void fn_80122D2C(Fighter_GObj* gobj)
     }
     switch (fp->cmd_vars[0]) {
     case 1:
+        // Begin frost emission, spawn sync particle effect 0x4EC
         efSync_Spawn(0x4EC, gobj, fp->parts[FtPart_L4thNb].joint);
         fp->mv.pp.speciallw.x4_b0 = true;
         fp->u.pp.x2230_b0 = true;
@@ -204,6 +299,7 @@ void fn_80122D2C(Fighter_GObj* gobj)
         }
         break;
     case 2:
+        // End frost emission
         fp->mv.pp.speciallw.x4_b0 = false;
         fp->cmd_vars[0] = 0;
         break;
