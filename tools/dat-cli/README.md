@@ -110,27 +110,6 @@ as many as fit before the next public symbol or pointer target. Raw data
 (textures, palettes) is typed as `u8[]` or `u16[]`, like the extracted
 blobs in `config.yml`.
 
-When a loader names roots through a global table, `DAT_BIND` on its name
-field carries the table's context into each root's walk. For example, the
-fighter loader indexes `ftData_803C1F40[kind].b`:
-
-```c
-struct StringPair {
-    char* a;
-    char* b DAT_BIND(fighter_kind, _index);
-};
-```
-
-Expanding the name table binds `fighter_kind` to each element's index.
-These values are retained in the compact types file and apply to the root
-(including every element of an array root) and everything reached from it.
-Expressions can use `_index`, macros, enum constants, and bindings from
-earlier fields on the path. Unresolved bindings are omitted, as during the
-archive walk. A field's `DAT_BIND` can shadow them; they don't carry over to
-other roots. `ftData.x48_items` binds `item_index` to `_index`, so its C
-pointer union selects Samus's grapple-beam accessory in slot 4 and an
-`Article` in the other slots.
-
 ## Samples
 
 Samples check that the types explain the archives' data. Each archive is a
