@@ -521,9 +521,9 @@ void it_802D23D4(Item_GObj* gobj, Item_GObj* ref_gobj)
 void it_802D23F4(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
-    itLugiaAttributes* attrs =
-        &ip->xC4_article_data->x4_specialAttributes->lugia;
-    ip->xD44_lifeTimer = attrs->x0;
+    itLugiaAeroblastAttributes* attrs =
+        &ip->xC4_article_data->x4_specialAttributes->lugia_aeroblast;
+    ip->xD44_lifeTimer = attrs->lifetime;
     it_80274740(gobj);
     Item_80268E5C(gobj, 0, ITEM_ANIM_UPDATE);
     Item_SetEffectHitlagCallbacks(ip);
@@ -539,18 +539,19 @@ bool it_802D246C(Item_GObj* gobj)
 void it_802D24A0(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
-    f32* attrs = &ip->xC4_article_data->x4_specialAttributes->float_value;
+    itLugiaAeroblastAttributes* attrs =
+        &ip->xC4_article_data->x4_specialAttributes->lugia_aeroblast;
     f32 multiplier = 0.0f;
 
     switch (ip->kind) {
     case It_Kind_Lugia_Aeroblast:
-        multiplier = attrs[1];
+        multiplier = attrs->x4;
         break;
     case It_Kind_Lugia_Aeroblast2:
-        multiplier = attrs[2];
+        multiplier = attrs->x8;
         break;
     case It_Kind_Lugia_Aeroblast3:
-        multiplier = attrs[3];
+        multiplier = attrs->xC;
         break;
     default:
         break;

@@ -51,8 +51,8 @@ HSD_GObj* it_8029A748(Item_GObj* arg0, Vec3* arg1, Fighter_Part arg2, f32 arg3)
             Vec3 temp_pos;
             HSD_JObj* jobj;
             Item* item = GET_ITEM(gobj);
-            f32 lifetime =
-                *&item->xC4_article_data->x4_specialAttributes->float_value;
+            f32 lifetime = item->xC4_article_data->x4_specialAttributes
+                               ->f_flower_flame.lifetime;
             it_80275158(gobj, lifetime);
             Item_8026AB54(gobj, arg0, arg2);
             it_8026B3A8(gobj);
