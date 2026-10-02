@@ -6957,7 +6957,6 @@ static const GXColor mpLib_804D8150[2] = {
 /// blast zones, camera bounds, etc
 void mpLib_DrawZones(void)
 {
-    u8 _3[0x4];
     Mtx mtx;
     u8 _2[0x38];
     GXColor blast_zone_color;
