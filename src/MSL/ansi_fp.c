@@ -5,34 +5,11 @@
 #define __HI(x) (((s32*) &x)[0])
 #define __LO(x) (((s32*) &x)[1])
 
-/// @todo somehow make this work with math.h
-static inline int _fpclassify(double x)
-{
-    switch (__HI(x) & 0x7FF00000) {
-    case 0x7FF00000: {
-        if ((__HI(x) & 0x000FFFFF) || (__LO(x) & 0xFFFFFFFF)) {
-            return FP_NAN;
-        } else {
-            return FP_INFINITE;
-        }
-        break;
-    }
-    case 0: {
-        if ((__HI(x) & 0x000FFFFF) || (__LO(x) & 0xFFFFFFFF)) {
-            return FP_SUBNORMAL;
-        } else {
-            return FP_ZERO;
-        }
-        break;
-    }
-    }
-    return FP_NORMAL;
-}
 
-#define _isnormal(x) (_fpclassify(x) == FP_NORMAL)
-#define _isnan(x) (_fpclassify(x) == FP_NAN)
-#define _isinf(x) (_fpclassify(x) == FP_INFINITE)
-#define _isfinite(x) (_fpclassify(x) > FP_INFINITE)
+#define _isnormal(x) (fpclassify(x) == FP_NORMAL)
+#define _isnan(x) (fpclassify(x) == FP_NAN)
+#define _isinf(x) (fpclassify(x) == FP_INFINITE)
+#define _isfinite(x) (fpclassify(x) > FP_INFINITE)
 
 const double bit_values[] = {
     1e1, 1e2, 1e4, 1e8, 1e16, 1e32, 1e64, 1e128, 1e256,
