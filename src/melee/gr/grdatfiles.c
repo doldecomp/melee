@@ -174,4 +174,3 @@ UnkArchiveStruct* grDatFiles_801C6478(void* data, s32 length)
 
     return arc;
 }
-
