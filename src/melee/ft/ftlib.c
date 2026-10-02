@@ -960,7 +960,7 @@ s32 ftLib_IsSubFighter(HSD_GObj* gobj)
     return fp->is_sub_fighter;
 }
 
-void ftLib_800874CC(HSD_GObj* gobj, void* arg1, s32 arg2)
+void ftLib_800874CC(HSD_GObj* gobj, ItemKind arg1[], s32 arg2)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     pl_8003E4A4(fp->player_idx, fp->is_sub_fighter, arg1, arg2);

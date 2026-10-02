@@ -53,7 +53,7 @@ GameModeState gm_Mode_StaminaVs_States[] = {
     { -1 },
 };
 
-static struct {
+static struct gm_804975F8_t {
     u16 done_counter;     ///< Ticks up to 100 when match is done
     bool eliminated[4];   ///< True if this slot been eliminated
     u16 slomo_counter[4]; ///< Ticks up to 100 when player is eliminated

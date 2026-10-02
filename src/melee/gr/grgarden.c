@@ -394,7 +394,7 @@ void grGarden_80203560(float param1, Vec3* vec)
     }
 }
 
-DynamicsDesc* grGarden_802035C8(enum_t arg)
+lbColl_80008D30_arg1* grGarden_802035C8(enum_t arg)
 {
     return NULL;
 }

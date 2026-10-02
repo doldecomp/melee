@@ -99,10 +99,10 @@ union ftPp_MotionVars {
         /* fp+2358 */ int x18;
         /* fp+235C */ float x1C;
     } specials;
-    struct {
+    struct ftPp_MotionVars_unk_80123954 {
         /* fp+2340 */ int x0;
     } unk_80123954;
-    struct {
+    struct ftPp_MotionVars_speciallw {
         /* fp+2340 */ int x0;
         /* fp+2344:0 */ u8 x4_b0 : 1;
     } speciallw;

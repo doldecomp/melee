@@ -373,7 +373,7 @@ void mnSound_8024A09C(int arg0)
     mn_804A04F0.hovered_selection = 0;
     archive = mn_804D6BB8;
     lbArchive_LoadSections(
-        archive, (void**) &mnSound_804A08A8.joint, "MenMainConSo_Top_joint",
+        archive, &mnSound_804A08A8.joint, "MenMainConSo_Top_joint",
         &mnSound_804A08A8.animjoint, "MenMainConSo_Top_animjoint",
         &mnSound_804A08A8.matanim_joint, "MenMainConSo_Top_matanim_joint",
         &mnSound_804A08A8.shapeanim_joint, "MenMainConSo_Top_shapeanim_joint",

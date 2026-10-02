@@ -68,8 +68,8 @@ static inline void inlineA0(Fighter_GObj* gobj, Fighter_GObj* vic_gobj,
     ftCo_ReleaseItemAndVictim(gobj);
     fp->x1A5C = vic_gobj;
     fp->victim_gobj = vic_gobj;
-    fp->x221B_b5 = false;
-    fp->x221B_b7 = false;
+    fp->x221B.x221B_b5 = false;
+    fp->x221B.x221B_b7 = false;
     fp->facing_dir = vic_fp->facing_dir;
     ftCommon_InitGrab(fp, 0, ftKp_SpecialS_80132DC0(fp->victim_gobj));
     fp->mv.ca.specialhi.vel.y = 0;

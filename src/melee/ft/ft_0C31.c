@@ -38,7 +38,8 @@ void ftCo_800C61B0(Fighter_GObj* gobj)
     HSD_JObjSetScale(jobj, &fp->mv.co.entry.x14);
 
     fp->mv.co.common.x4.x = fp->cur_pos.y;
-    Fighter_ChangeMotionState(gobj, ftCo_MS_Entry, 0, 0.0F, 1.0F, 0.0F, NULL);
+    Fighter_ChangeMotionState(gobj, ftCo_MS_Entry, Ft_MF_None, 0.0F, 1.0F,
+                              0.0F, NULL);
     fp->invisible = true;
     fp->x2219_b1 = true;
     fp->x221E_b1 = true;
@@ -94,8 +95,8 @@ void ftCo_800C6408(Fighter_GObj* gobj)
 
     temp_r31 = GET_FIGHTER(gobj);
     temp_r31->mv.co.entry.timer = p_ftCommonData->x6BC;
-    Fighter_ChangeMotionState(gobj, ftCo_MS_EntryStart, 0, 0.0F, 1.0F, 0.0F,
-                              NULL);
+    Fighter_ChangeMotionState(gobj, ftCo_MS_EntryStart, Ft_MF_None, 0.0F, 1.0F,
+                              0.0F, NULL);
     temp_r31->x2219_b1 = true;
     if (!temp_r31->is_sub_fighter) {
         ftCommon_SetAccessory(temp_r31, Fighter_804D6514);
@@ -110,7 +111,7 @@ void ftCo_800C6408(Fighter_GObj* gobj)
         sp2C.w = 0.0F;
         sp2C.z = 0.0F;
         sp2C.x = 0.0F;
-        sp2C.y = 1.5707963267948966 * temp_r31->facing_dir;
+        sp2C.y = M_PI_2 * temp_r31->facing_dir;
 
         HSD_JObjSetRotation(temp_r31->x20A0_accessory, &sp2C);
 

@@ -209,7 +209,7 @@ void mnLanguage_8024C5C0(HSD_GObj* gobj)
     mn_804A04F0.hovered_selection = 0;
     archive = mn_804D6BB8;
     lbArchive_LoadSections(
-        archive, (void**) &model_desc.joint, "MenMainConLa_Top_joint",
+        archive, &model_desc.joint, "MenMainConLa_Top_joint",
         &model_desc.animjoint, "MenMainConLa_Top_animjoint",
         &model_desc.matanim_joint, "MenMainConLa_Top_matanim_joint",
         &model_desc.shapeanim_joint, "MenMainConLa_Top_shapeanim_joint", 0);

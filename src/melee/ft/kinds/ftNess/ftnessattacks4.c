@@ -38,8 +38,8 @@ void ftNs_AttackS4_Enter(HSD_GObj* gobj) // Ness's F-Smash Motion State handler
 
     fp->cmd_vars[0] = false;
 
-    Fighter_ChangeMotionState(gobj, ftNs_MS_AttackS4, 0, 0.0f, 1.0f, 0.0f,
-                              NULL);
+    Fighter_ChangeMotionState(gobj, ftNs_MS_AttackS4, Ft_MF_None, 0.0f, 1.0f,
+                              0.0f, NULL);
 
     ftAnim_8006EBA4(gobj);
 

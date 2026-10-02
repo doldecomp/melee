@@ -311,6 +311,10 @@ static inline void ifStatus_UpdateDamageDisplay(IfDamageState* state,
     }
 }
 
+struct ifStatus_802F4EDC_digit_offset {
+    f32 value;
+};
+
 void ifStatus_802F4EDC(HSD_GObj* gobj)
 {
     HudIndex* hud;
@@ -412,9 +416,7 @@ found_player:
                                  &normal_color);
 
     {
-        struct {
-            f32 value;
-        } digit_offset;
+        struct ifStatus_802F4EDC_digit_offset digit_offset;
 
         /* Calculate digit spacing offsets based on which digit is "1" */
         ones_offset = (state->damage_percent % 10 == 1) ? 0.5069F : 0.0F;
@@ -512,7 +514,10 @@ void ifStatus_802F5B48(HSD_GObj* gobj)
             p->flags.unk10 = 0;
         }
         if (p->old_damage == 0) {
-            if (gmVs_GetSceneState()->fighters[(s8) p->player_slot].x4_b5) {
+            if (gmVs_GetSceneState()
+                    ->fighters[(s8) p->player_slot]
+                    .x4.x0.x4_b5)
+            {
                 ifStatus_802F6948((s8) p->player_slot);
             }
         }

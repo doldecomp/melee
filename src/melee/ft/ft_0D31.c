@@ -83,7 +83,7 @@ void ftCo_800D331C(Fighter_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
 
     if (fp->victim_gobj != NULL) {
-        if (fp->x221B_b5) {
+        if (fp->x221B.x221B_b5) {
             Fighter* temp_r3_2 = GET_FIGHTER(fp->victim_gobj);
             if (!temp_r3_2->is_sub_fighter) {
                 temp_r3_2->x2180 = fp->player_idx;
@@ -131,7 +131,7 @@ void ftCo_800D331C(Fighter_GObj* gobj)
     }
     ftCommon_8007DB24(gobj);
     fp->mv.co.unk_800D331C.x6C = fp->motion_id;
-    fp->mv.co.unk_800D331C.x70 = fp->x2070.x2073;
+    fp->mv.co.unk_800D331C.x70 = fp->x2070.x0.x2073;
 }
 
 void ftCo_800D34E0(Fighter_GObj* gobj)
@@ -217,7 +217,7 @@ static inline void enterDead(Fighter_GObj* gobj, FtMotionId msid)
     Fighter* fp = GET_FIGHTER(gobj);
     ftCo_800D331C(gobj);
     fp->mv.co.unk_800D3680.x40 = p_ftCommonData->x500;
-    Fighter_ChangeMotionState(gobj, msid, 0, 0.0F, 1.0F, 0.0F, NULL);
+    Fighter_ChangeMotionState(gobj, msid, Ft_MF_None, 0.0F, 1.0F, 0.0F, NULL);
     setDeadFlags(gobj);
     pl_8003DF44(fp->player_idx, fp->is_sub_fighter);
     processDeath(gobj);
@@ -389,8 +389,8 @@ void ftCo_800D40B8(Fighter_GObj* gobj)
     ftCo_800D331C(gobj);
     fp->mv.co.unk_deadup.x40 = *temp_r31;
     fp->mv.co.unk_deadup.x44 = 0.0F;
-    Fighter_ChangeMotionState(gobj, ftCo_MS_DeadUpStar, 0, 0.0F, 1.0F, 0.0F,
-                              NULL);
+    Fighter_ChangeMotionState(gobj, ftCo_MS_DeadUpStar, Ft_MF_None, 0.0F, 1.0F,
+                              0.0F, NULL);
     ftCo_800D40B8_inline(gobj);
     ftCommon_8007EFC0(fp, true);
     new_var = fp;
@@ -410,8 +410,8 @@ void ftCo_800D41C4(Fighter_GObj* gobj)
         ftCo_800D331C(gobj);
         fp2->mv.co.unk_deadup.x40 = *temp_r31;
         fp2->mv.co.unk_deadup.x44 = 0;
-        Fighter_ChangeMotionState(gobj, ftCo_MS_DeadUpStarIce, 0, 0.0F, 1.0F,
-                                  0.0F, NULL);
+        Fighter_ChangeMotionState(gobj, ftCo_MS_DeadUpStarIce, Ft_MF_None,
+                                  0.0F, 1.0F, 0.0F, NULL);
         ftCo_800D40B8_inline(gobj);
         ftCommon_8007EFC0(fp2, true);
         new_var = fp2;

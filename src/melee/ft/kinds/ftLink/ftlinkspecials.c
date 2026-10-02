@@ -50,7 +50,7 @@ void on21EC(HSD_GObj* gobj)
         fp->active_sticky.lstick.x <
             p_ftCommonData->dash_smash_window + p_ftCommonData->x44)
     {
-        fp->x2070.count_thrown_items = true;
+        fp->x2070.x0.count_thrown_items = true;
         fp->u.lk.x4 = true;
     } else {
         fp->u.lk.x4 = false;
@@ -64,7 +64,7 @@ bool ftLk_SepcialS_Get2219b5(HSD_GObj* gobj)
 
 bool ftLk_SpecialS_Is2071b0_5to13(HSD_GObj* gobj)
 {
-    switch (GET_FIGHTER(gobj)->x2070.x2071_b0_3) {
+    switch (GET_FIGHTER(gobj)->x2070.x0.x2071_b0_3) {
     case 5:
     case 6:
     case 7:
@@ -82,7 +82,7 @@ bool ftLk_SpecialS_Is2071b0_5to13(HSD_GObj* gobj)
 
 bool ftLk_SpecialS_Is2071b0_1to13(HSD_GObj* gobj)
 {
-    switch (GET_FIGHTER(gobj)->x2070.x2071_b0_3) {
+    switch (GET_FIGHTER(gobj)->x2070.x0.x2071_b0_3) {
     case 1:
     case 2:
     case 3:
@@ -202,7 +202,7 @@ void onAccessory4(HSD_GObj* gobj)
 void ftLk_SpecialS_Enter(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    fp->throw_flags = 0;
+    fp->x2210.throw_flags = 0;
     fp->cmd_vars[cmd_unk0_bool] = false;
     fp->x21EC = on21EC;
     if (fp->u.lk.used_boomerang) {
@@ -220,7 +220,7 @@ void ftLk_SpecialS_Enter(HSD_GObj* gobj)
 void ftLk_SpecialAirS_Enter(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    fp->throw_flags = 0;
+    fp->x2210.throw_flags = 0;
     fp->cmd_vars[cmd_unk0_bool] = 0;
     fp->x21EC = on21EC;
     if (fp->u.lk.used_boomerang) {

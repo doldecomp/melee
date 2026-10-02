@@ -10,7 +10,6 @@
 #include <dolphin/gx/GXStruct.h>
 #include <dolphin/mtx.h>
 #include <sysdolphin/baselib/archive.h>
-#include <sysdolphin/baselib/cobj.h>
 
 struct SisBlock {
     SisBlock* next;

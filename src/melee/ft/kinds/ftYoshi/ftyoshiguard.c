@@ -66,13 +66,15 @@ static void ftYs_Init_8012B8A4_no_inline(HSD_GObj* gobj)
     ftYs_Init_8012B8A4_no_inline_2(gobj);
 }
 
+struct ftYs_Init_8012BECC_sub_s {
+    u8 _pad[4];
+    Vec3 v;
+};
+
 static void ftYs_Init_8012BECC_sub(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    struct {
-        u8 _pad[4];
-        Vec3 v;
-    } s;
+    struct ftYs_Init_8012BECC_sub_s s;
 
     ftColl_8007B0C0(gobj, HurtCapsule_Disabled);
     fp->mv.ys.guard.xC = false;
@@ -90,8 +92,8 @@ static void ftYs_Init_8012BECC_sub(HSD_GObj* gobj)
 void ftYs_Init_8012BECC(Fighter_GObj* gobj)
 {
     PAD_STACK(8);
-    Fighter_ChangeMotionState(gobj, ftYs_MS_GuardOn_0, 0, 0.0f, 1.0f, 0.0f,
-                              NULL);
+    Fighter_ChangeMotionState(gobj, ftYs_MS_GuardOn_0, Ft_MF_None, 0.0f, 1.0f,
+                              0.0f, NULL);
     ftAnim_8006EBA4(gobj);
     ftCo_80092450(gobj);
     ftYs_Init_8012BECC_sub(gobj);
@@ -194,7 +196,8 @@ void ftYs_GuardHold_Anim(HSD_GObj* gobj)
 
     if (ftCo_800925A4(gobj)) {
         spawnEffect(gobj);
-    } else if (fp->mv.ys.guard.xC || (!fp->x221B_b0 && !fp->reflecting)) {
+    } else if (fp->mv.ys.guard.xC || (!fp->x221B.x221B_b0 && !fp->reflecting))
+    {
         ftCo_80092BE8(gobj);
     } else {
         ftYs_Init_8012B8A4(gobj);
@@ -223,7 +226,7 @@ void ftYs_GuardHold_Coll(HSD_GObj* arg0)
 void ftYs_Shield_8012C49C(HSD_GObj* gobj)
 {
     PAD_STACK(8);
-    Fighter_ChangeMotionState(gobj, 343, 0, 0, 1.0F, 0, NULL);
+    Fighter_ChangeMotionState(gobj, 343, Ft_MF_None, 0, 1.0F, 0, NULL);
     ftYs_Init_8012BE3C(gobj);
 }
 
@@ -314,11 +317,11 @@ void ftYs_GuardDamage_Coll(Fighter_GObj* gobj)
 void ftYs_Shield_8012C850(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    Fighter_ChangeMotionState(gobj, ftYs_MS_GuardOn_1, 16, fp->cur_anim_frame,
-                              1, 0, NULL);
+    Fighter_ChangeMotionState(gobj, ftYs_MS_GuardOn_1, Ft_MF_SkipModel,
+                              fp->cur_anim_frame, 1, 0, NULL);
     fp->active_timer.trigger = 254;
     fp->x221A_b7 = false;
-    fp->x221B_b0 = false;
+    fp->x221B.x221B_b0 = false;
     fp->x221C_b3 = true;
     fp->x221C_b1 = true;
     fp->x221C_b2 = true;
@@ -350,8 +353,8 @@ static inline void ftYs_Shield_8012C914_inline(Fighter_GObj* gobj)
 void ftYs_Shield_8012C914(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    Fighter_ChangeMotionState(gobj, ftYs_MS_GuardOn_1, 0, 0.0F, 1.0F, 0.0F,
-                              NULL);
+    Fighter_ChangeMotionState(gobj, ftYs_MS_GuardOn_1, Ft_MF_None, 0.0F, 1.0F,
+                              0.0F, NULL);
     ftAnim_8006EBA4(gobj);
     fp->active_timer.trigger = 254;
     fp->x221C_b3 = true;

@@ -51,13 +51,13 @@ void ftKp_SpecialS_Enter(HSD_GObj* gobj)
     {
         Fighter* fp = GET_FIGHTER(gobj);
 
-        fp->throw_flags = 0;
+        fp->x2210.throw_flags = 0;
         fp->cmd_vars[0] = 0;
         fp->mv.kp.unk1.x4 = 0;
         fp->mv.kp.unk1.xC = 0;
     }
 
-    Fighter_ChangeMotionState(gobj, 347, 0, 0.0F, 1.0F, 0.0F, 0);
+    Fighter_ChangeMotionState(gobj, 347, Ft_MF_None, 0.0F, 1.0F, 0.0F, 0);
 
     ftAnim_8006EBA4(gobj);
 
@@ -76,13 +76,13 @@ void ftKp_SpecialAirS_Enter(HSD_GObj* gobj)
     {
         Fighter* fp = GET_FIGHTER(gobj);
 
-        fp->throw_flags = 0;
+        fp->x2210.throw_flags = 0;
         fp->cmd_vars[0] = 0;
         fp->mv.kp.unk1.x4 = 0;
         fp->mv.kp.unk1.xC = 0;
     }
 
-    Fighter_ChangeMotionState(gobj, 353, 0, 0.0F, 1.0F, 0.0F, 0);
+    Fighter_ChangeMotionState(gobj, 353, Ft_MF_None, 0.0F, 1.0F, 0.0F, 0);
 
     ftAnim_8006EBA4(gobj);
 
@@ -106,7 +106,7 @@ void ftKp_SpecialS_8013302C(HSD_GObj* gobj)
         Fighter_ChangeMotionState(gobj, 349, transition_flags0, 0.0F, 1.0F,
                                   0.0F, 0);
     } else {
-        Fighter_ChangeMotionState(gobj, 348, 0, 0.0F, 1.0F, 0.0F, 0);
+        Fighter_ChangeMotionState(gobj, 348, Ft_MF_None, 0.0F, 1.0F, 0.0F, 0);
     }
 
     fp->x2222_b2 = true;
@@ -125,7 +125,7 @@ void ftKp_SpecialS_801330E4(HSD_GObj* gobj)
         Fighter_ChangeMotionState(gobj, 355, transition_flags0, 0.0F, 1.0F,
                                   0.0F, 0);
     } else {
-        Fighter_ChangeMotionState(gobj, 354, 0, 0.0F, 1.0F, 0.0F, 0);
+        Fighter_ChangeMotionState(gobj, 354, Ft_MF_None, 0.0F, 1.0F, 0.0F, 0);
     }
 
     fp->x2222_b2 = true;
@@ -483,7 +483,7 @@ ftKoopa_SpecialS_ChangeAction(HSD_GObj* gobj, ftKoopa_MotionState kp_msid_f,
                               ftCommon_MotionState victim_msid_b)
 {
     Fighter* fp = fp = GET_FIGHTER(gobj);
-    fp->throw_flags = 0;
+    fp->x2210.throw_flags = 0;
     fp->cmd_vars[0] = 0;
     if (fp->mv.kp.specials.facing_dir == +1) {
         Fighter_ChangeMotionState(gobj, kp_msid_f, Ft_MF_Unk19, 0, 1, 0, NULL);

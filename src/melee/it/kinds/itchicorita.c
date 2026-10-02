@@ -35,7 +35,7 @@ void it_802C9588(Item_GObj* item_gobj)
     attr = item->xC4_article_data->x4_specialAttributes;
     it_80279C48(item_gobj);
     item->xDD4_itemVar.chicorita.x60 = -1;
-    item->xDBC_itcmd_var4.flags.x0 = false;
+    item->xDBC.xDBC_itcmd_var4.flags.x0 = false;
     it_80279CDC(item_gobj, attr->scale);
     item->xDD4_itemVar.chicorita.x64 = 0.0f;
     it_802C9A74(item_gobj);
@@ -158,9 +158,9 @@ bool itChicorita_UnkMotion0_Coll(HSD_GObj* item_gobj)
 void it_802C989C(HSD_GObj* item_gobj)
 {
     Item* item = item_gobj->user_data;
-    if (item->xDBC_itcmd_var4.flags.x0) {
+    if (item->xDBC.xDBC_itcmd_var4.flags.x0) {
         it_802C9B20((Item_GObj*) item_gobj);
-        item->xDBC_itcmd_var4.flags.x0 = false;
+        item->xDBC.xDBC_itcmd_var4.flags.x0 = false;
     }
 }
 
@@ -245,7 +245,7 @@ void it_802C9B20(Item_GObj* chicorita_gobj)
     spawn.kind = It_Kind_Chicorita_Leaf;
     spawn.x0_parent_gobj = chicorita->owner;
     spawn.x4_parent_gobj2 = (HSD_GObj*) chicorita_gobj;
-    spawn.x44_flag.b0 = 1;
+    spawn.x44_flag.x0.b0 = 1;
     if (Item_80268B18(&spawn)) {
         Item_8026AE84(chicorita, 0x2710, 0x7F, 0x40);
     }

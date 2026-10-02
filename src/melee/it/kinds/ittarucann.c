@@ -69,7 +69,7 @@ void it_80295ED4(Item_GObj* gobj)
         Item* ip = gobj->user_data;
         if (ip != NULL) {
             ip->xDD4_itemVar.tarucann.x20 = ip->grab_victim;
-            ip->xDD0_flag.b5 = false;
+            ip->xDD0_flag.x0.b5 = false;
             it_80274ECC(gobj, true);
             it_80297790(gobj);
         }
@@ -152,7 +152,7 @@ void it_3F14_Logic5_Spawned(Item_GObj* gobj)
     float temp;
     ip->facing_dir = -1.0f;
     ip->xD5C = 0;
-    ip->xDCE_flag.b7 = false;
+    ip->xDCE_flag.x0.b7 = false;
     ip->xDAC_itcmd_var0 = 0;
     ip->xDB0_itcmd_var1 = 0;
     ip->xDD4_itemVar.tarucann.x0 = 0;

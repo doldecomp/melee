@@ -25,7 +25,7 @@ ItemStateTable it_803F62C0[] = {
 void itMetalB_Logic32_Spawned(Item_GObj* gobj)
 {
     Item* it = GET_ITEM(gobj);
-    it->xDCE_flag.b7 = 0;
+    it->xDCE_flag.x0.b7 = 0;
     it_80295498(gobj);
 }
 
@@ -117,7 +117,7 @@ bool itMetalB_Logic32_DmgReceived(Item_GObj* gobj)
     PAD_STACK(8);
 
     if (go != NULL) {
-        if (go->classifier == HSD_GOBJ_CLASS_FIGHTER && it->xDCF_flag.b6) {
+        if (go->classifier == HSD_GOBJ_CLASS_FIGHTER && it->xDCF_flag.x0.b6) {
             ftLib_ApplyMetalBox(go, gobj);
             pl_8003E17C(ftLib_GetPlayerIndex(go) & 0xFF,
                         ftLib_IsSubFighter(go), gobj);

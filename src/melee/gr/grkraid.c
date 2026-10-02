@@ -567,7 +567,7 @@ void grKraid_801FF14C(Ground_GObj* gobj)
 
 void grKraid_801FF150(Ground_GObj* gobj) {}
 
-DynamicsDesc* grKraid_OnTouchLine(enum_t unused)
+lbColl_80008D30_arg1* grKraid_OnTouchLine(enum_t unused)
 {
     return NULL;
 }

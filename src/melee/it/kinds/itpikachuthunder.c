@@ -64,7 +64,7 @@ Item_GObj* it_802B1DF8(Item_GObj* owner, Vec3* pos, Vec3* vel, s32 count,
     cur_delay = 0;
     spawn.x0_parent_gobj = owner;
     spawn.x4_parent_gobj2 = spawn.x0_parent_gobj;
-    spawn.x44_flag.b0 = true;
+    spawn.x44_flag.x0.b0 = true;
     spawn.x40 = x40;
 
     for (first = NULL, i = 0; i < count; i++) {

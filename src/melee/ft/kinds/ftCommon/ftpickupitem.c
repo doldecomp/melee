@@ -178,10 +178,10 @@ bool ftpickupitem_8009447C(Fighter_GObj* gobj, Item_GObj* item_gobj)
             break;
         case It_Kind_WStar:
             ftCo_800C4724(gobj);
-            return 1;
+            return true;
         case It_Kind_Hammer:
             ftCo_800C52F4(gobj);
-            return 1;
+            return true;
         case It_Kind_RabbitC:
             ftCommon_8007FA58(gobj, item_gobj);
             break;
@@ -214,7 +214,7 @@ void ftpickupitem_80094694(Fighter_GObj* gobj, FtMotionId msid, bool loop)
         } else {
             anim_spd = 1;
         }
-        fp->throw_flags = 0;
+        fp->x2210.throw_flags = 0;
         Fighter_ChangeMotionState(gobj, msid, Ft_MF_None, 0, anim_spd, 0,
                                   NULL);
     }

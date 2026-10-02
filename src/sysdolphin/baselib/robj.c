@@ -4,6 +4,7 @@
 #include <string.h>
 
 #include "aobj.h"
+#include "bytecode.h"
 #include "class.h"
 #include "debug.h"
 #include "fobj.h"
@@ -467,7 +468,7 @@ static void resolveLimits(HSD_RObj* robj, void* obj,
 
                 case 2:
                     if (jobj->rotate.x > rp->u.limit) {
-                        (jobj->rotate).x = rp->u.limit;
+                        jobj->rotate.x = rp->u.limit;
                     }
                     break;
 
@@ -683,8 +684,6 @@ void HSD_RObjFree(HSD_RObj* robj)
 }
 
 static char HSD_RObj_80406F14[] = "(ptr && nitems) || !ptr";
-
-extern float HSD_ByteCodeEval(u8*, f32*, s32);
 
 static void expEvaluate(HSD_Exp* exp, u32 type, void* obj,
                         HSD_ObjUpdateFunc update_func)

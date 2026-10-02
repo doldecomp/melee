@@ -37,6 +37,7 @@
 #include <melee/lb/lblanguage.h>
 #include <melee/lb/lbmthp.h>
 #include <melee/sc/types.h>
+#include <sysdolphin/baselib/cobj.h> // IWYU pragma: keep
 #include <sysdolphin/baselib/controller.h>
 #include <sysdolphin/baselib/displayfunc.h>
 #include <sysdolphin/baselib/dobj.h>
@@ -1383,6 +1384,10 @@ static inline u8 CountUnlockedSelections(MenuKind kind)
     return count;
 }
 
+struct mn_8022B3A0_jobj {
+    HSD_JObj* value;
+};
+
 /// @brief sets up a new menu when transitioning from another.
 HSD_GObj* mn_8022B3A0(u8 state)
 {
@@ -1402,9 +1407,7 @@ HSD_GObj* mn_8022B3A0(u8 state)
     StaticModelDesc* model = &MenMainConTop_Top;
     u8 hovered_selection;
     AnimLoopSettings* anim_loop;
-    struct {
-        HSD_JObj* value;
-    } jobj;
+    struct mn_8022B3A0_jobj jobj;
     u32 unlocked_count;
     HSD_JObj* root_jobj;
     PAD_STACK(16);

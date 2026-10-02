@@ -8,6 +8,7 @@
 #include <melee/ft/ftlib.h>
 #include <melee/ft/types.h>
 #include <melee/gr/ground.h>
+#include <sysdolphin/baselib/cobj.h>
 #include <sysdolphin/baselib/debug.h>
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/initialize.h>
@@ -461,7 +462,7 @@ void lbShadow_8000F38C(s32 arg0)
                     lobj = NULL;
                     HSD_ShadowDeleteObject(fp2->x20A4.shadow, NULL);
 
-                    if (fp2->x21FC_flag.b7) {
+                    if (fp2->x21FC_flag.x0.b7) {
                         if (!fp2->invisible && !fp2->x221E_b5 &&
                             fp2->x5AC.xC[1] != NULL)
                         {

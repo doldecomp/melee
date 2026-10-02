@@ -42,9 +42,9 @@ ftPurin_SpecialHi_SetActionFromFacingDirection(HSD_GObj* gobj, u32 left_id,
     Fighter* fighter = GET_FIGHTER(gobj);
 
     if (-1 == fighter->facing_dir) {
-        Fighter_ChangeMotionState(gobj, left_id, 0, 0, 1, 0, NULL);
+        Fighter_ChangeMotionState(gobj, left_id, Ft_MF_None, 0, 1, 0, NULL);
     } else {
-        Fighter_ChangeMotionState(gobj, right_id, 0, 0, 1, 0, NULL);
+        Fighter_ChangeMotionState(gobj, right_id, Ft_MF_None, 0, 1, 0, NULL);
     }
 }
 

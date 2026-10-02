@@ -22,7 +22,7 @@
 /* 1C99C0 */ void grLib_801C99C0(s32, s32, HSD_JObj*, s32);
 /* 1C9A10 */ VecMtxPtr grLib_801C9A10(void);
 /* 1C9A70 */ void grLib_801C9A70(enum_t, Vec3*);
-/* 1C9B20 */ void grLib_801C9B20(HSD_JObj*, DynamicsDesc*, DynamicsDesc*);
+/* 1C9B20 */ void grLib_801C9B20(HSD_JObj*, DynamicsTemplate*, DynamicsDesc*);
 /* 1C9B6C */ void grLib_801C9B6C(void*);
 /* 1C9B8C */ void grLib_801C9B8C(void*);
 /* 1C9CEC */ HSD_GObj* grLib_801C9CEC(CmQuakeKind);

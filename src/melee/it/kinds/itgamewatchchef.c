@@ -35,7 +35,7 @@ HSD_GObj* it_802C837C(Item_GObj* parent, Vec3* pos, enum_t kind, u32 arg3,
     spawn.vel.x = 0.0f;
     spawn.x0_parent_gobj = parent;
     spawn.x4_parent_gobj2 = spawn.x0_parent_gobj;
-    spawn.x44_flag.b0 = true;
+    spawn.x44_flag.x0.b0 = true;
     spawn.x40 = 0;
     gobj = Item_80268B18(&spawn);
     if (gobj != NULL) {

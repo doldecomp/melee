@@ -120,7 +120,7 @@ float ftKb_SpecialNYs_80109380(void)
 
 ftDynamics* ftKb_SpecialNYs_801093A0(Fighter_GObj* gobj)
 {
-    return ft_80459B88.hats[Ft_Kind_Samus]->hat_dynamics[0];
+    return ft_80459B88.copies[Ft_Kind_Yoshi]->hat_dynamics[0];
 }
 
 void ftKb_SpecialNYs_801093B4(Fighter_GObj* gobj)
@@ -128,7 +128,7 @@ void ftKb_SpecialNYs_801093B4(Fighter_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     HSD_JObjAddAnimAll(
         fp->u.kb.hat.jobj,
-        (HSD_AnimJoint*) ft_80459B88.hats[Ft_Kind_Samus]->hat_dynamics[1], 0,
+        (HSD_AnimJoint*) ft_80459B88.copies[Ft_Kind_Yoshi]->hat_dynamics[1], 0,
         0);
     HSD_JObjReqAnimAll(fp->u.kb.hat.jobj, 0.0F);
     HSD_JObjAnimAll(fp->u.kb.hat.jobj);
@@ -138,10 +138,10 @@ void ftKb_SpecialNYs_801093B4(Fighter_GObj* gobj)
 void ftKb_SpecialNYs_8010941C(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    KirbyHatStruct* ys_hat = ft_80459B88.hats[Ft_Kind_Samus];
+    KirbyHatStruct* ys_hat = ft_80459B88.copies[Ft_Kind_Yoshi];
     fp->cmd_vars[0] = 0;
-    Fighter_ChangeMotionState(gobj, ftKb_MS_YsSpecialN1, 0, 0.0F, 1.0F, 0.0F,
-                              NULL);
+    Fighter_ChangeMotionState(gobj, ftKb_MS_YsSpecialN1, Ft_MF_None, 0.0F,
+                              1.0F, 0.0F, NULL);
     ftAnim_8006EBA4(gobj);
     HSD_JObjAddAnimAll(fp->u.kb.hat.jobj,
                        (HSD_AnimJoint*) ys_hat->hat_dynamics[1], 0, 0);
@@ -159,10 +159,10 @@ void ftKb_SpecialNYs_8010941C(Fighter_GObj* gobj)
 void ftKb_SpecialNYs_801094FC(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    KirbyHatStruct* ys_hat = ft_80459B88.hats[Ft_Kind_Samus];
+    KirbyHatStruct* ys_hat = ft_80459B88.copies[Ft_Kind_Yoshi];
     fp->cmd_vars[0] = 0;
-    Fighter_ChangeMotionState(gobj, ftKb_MS_YsSpecialAirNCapture2, 0, 0.0F,
-                              1.0F, 0.0F, NULL);
+    Fighter_ChangeMotionState(gobj, ftKb_MS_YsSpecialAirNCapture2, Ft_MF_None,
+                              0.0F, 1.0F, 0.0F, NULL);
     ftAnim_8006EBA4(gobj);
     HSD_JObjAddAnimAll(fp->u.kb.hat.jobj,
                        (HSD_AnimJoint*) ys_hat->hat_dynamics[3], 0, 0);
@@ -407,7 +407,7 @@ void ftKb_YsSpecialAirNCapture1_Anim(Fighter_GObj* gobj)
         fp->cmd_vars[0] = new_var;
         fp->cmd_vars[1] = new_var;
         fp2 = GET_FIGHTER(gobj);
-        hat = ft_80459B88.hats[0xD];
+        hat = ft_80459B88.copies[Ft_Kind_Yoshi];
         Fighter_ChangeMotionState(gobj, ftKb_MS_YsSpecialNCapture2_1, 0x80012,
                                   0.0f, 1.0f, 0.0f, NULL);
         HSD_JObjAddAnimAll(fp2->u.kb.hat.jobj,
@@ -435,7 +435,7 @@ void ftKb_YsSpecialNCapture1_Anim(Fighter_GObj* gobj)
         fp->cmd_vars[0] = new_var;
         fp->cmd_vars[1] = new_var;
         fp2 = GET_FIGHTER(gobj);
-        hat = ft_80459B88.hats[0xD];
+        hat = ft_80459B88.copies[Ft_Kind_Yoshi];
         Fighter_ChangeMotionState(gobj, ftKb_MS_YsSpecialNCapture2_0, 0x80012,
                                   0.0f, 1.0f, 0.0f, NULL);
         HSD_JObjAddAnimAll(fp2->u.kb.hat.jobj,
@@ -462,7 +462,7 @@ void ftKb_YsSpecialAirCapture2_Anim(Fighter_GObj* gobj)
         fp->cmd_vars[0] = new_var;
         fp->cmd_vars[1] = new_var;
         fp2 = GET_FIGHTER(gobj);
-        hat = ft_80459B88.hats[0xD];
+        hat = ft_80459B88.copies[Ft_Kind_Yoshi];
         Fighter_ChangeMotionState(gobj, ftKb_MS_YsSpecialAirN2_1, 0x80012,
                                   0.0f, 1.0f, 0.0f, NULL);
         HSD_JObjAddAnimAll(fp2->u.kb.hat.jobj,
@@ -490,7 +490,7 @@ void ftKb_YsSpecialAirCapture1_Anim(Fighter_GObj* gobj)
         fp->cmd_vars[0] = new_var;
         fp->cmd_vars[1] = new_var;
         fp2 = GET_FIGHTER(gobj);
-        hat = ft_80459B88.hats[0xD];
+        hat = ft_80459B88.copies[Ft_Kind_Yoshi];
         Fighter_ChangeMotionState(gobj, ftKb_MS_YsSpecialAirN2_0, 0x80012,
                                   0.0f, 1.0f, 0.0f, NULL);
         HSD_JObjAddAnimAll(fp2->u.kb.hat.jobj,

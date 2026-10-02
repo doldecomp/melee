@@ -1,3 +1,5 @@
+#include "dbinit.h"
+
 #include "db.h"
 #include "dbsound.h"
 #include <dolphin/card.h>
@@ -17,7 +19,7 @@ DbLKind DbLevel = DbLKind_NoDebugRom;
 
 char db_build_timestamp[] = "DATE Feb 13 2002  TIME 22:06:27";
 
-static struct {
+static struct db_ButtonStates_t {
     /*  +0 */ HSD_Pad current;
     /*  +4 */ HSD_Pad prev;
     /*  +8 */ HSD_Pad pressed;
@@ -63,11 +65,7 @@ void db_GetGameLaunchButtonState(void)
 void db_Setup(void)
 {
     int i;
-    struct {
-        char** bonus_names;
-        char** motionstate_names;
-        char** submotion_names;
-    }* commonData;
+    struct db_Setup_commonData* commonData;
 
     if (DbLevel >= DbLKind_DebugRom) {
         for (i = 0; i < 4; i++) {

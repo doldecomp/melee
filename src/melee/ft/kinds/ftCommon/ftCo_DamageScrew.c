@@ -20,7 +20,7 @@ bool ftCo_800D2FA4(Fighter_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
 
     if (fp->dmg.x1860_element == HitElement_Scball) {
-        int x = fp->x2070.x2071_b0_3;
+        int x = fp->x2070.x0.x2071_b0_3;
         switch (x) {
         case 11:
         case 12:
@@ -40,11 +40,11 @@ void ftCo_800D3004(Fighter_GObj* gobj)
     fp->cmd_vars[0] = 0;
     if (fp->ground_or_air == GA_Ground) {
         ftCommon_8007D5D4(fp);
-        Fighter_ChangeMotionState(gobj, ftCo_MS_DamageScrew, 0, 0.0F, 1.0F,
-                                  0.0F, NULL);
+        Fighter_ChangeMotionState(gobj, ftCo_MS_DamageScrew, Ft_MF_None, 0.0F,
+                                  1.0F, 0.0F, NULL);
     } else {
-        Fighter_ChangeMotionState(gobj, ftCo_MS_DamageScrewAir, 0, 0.0F, 1.0F,
-                                  0.0F, NULL);
+        Fighter_ChangeMotionState(gobj, ftCo_MS_DamageScrewAir, Ft_MF_None,
+                                  0.0F, 1.0F, 0.0F, NULL);
     }
     fp->self_vel.x = 0.0F;
     fp->self_vel.y = fp->co_attrs.screw_attack_launch_velocity;

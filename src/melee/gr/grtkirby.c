@@ -28,9 +28,9 @@ void grTKirby_802215B8(Ground_GObj*); /* static */
 static void stageGObj1_OnInit(Ground_GObj*);
 bool grTKirby_8022160C(Ground_GObj*); /* static */
 static void stageGObj1_GObjProc(Ground_GObj*);
-void grTKirby_80221634(Ground_GObj*);          /* static */
-DynamicsDesc* grTKirby_80221638(enum_t);       /* static */
-bool grTKirby_80221640(Vec3*, int, HSD_JObj*); /* static */
+void grTKirby_80221634(Ground_GObj*);            /* static */
+lbColl_80008D30_arg1* grTKirby_80221638(enum_t); /* static */
+bool grTKirby_80221640(Vec3*, int, HSD_JObj*);   /* static */
 
 static StageCallbacks grTKb_StageCallbacks[] = {
     {
@@ -156,7 +156,7 @@ static void stageGObj1_GObjProc(Ground_GObj* gobj)
 
 void grTKirby_80221634(Ground_GObj* gobj) {}
 
-DynamicsDesc* grTKirby_80221638(enum_t arg0)
+lbColl_80008D30_arg1* grTKirby_80221638(enum_t arg0)
 {
     return NULL;
 }

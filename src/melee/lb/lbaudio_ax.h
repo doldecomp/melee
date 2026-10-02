@@ -12,7 +12,7 @@
 /// @todo Create an @c enum for SFX IDs.
 #define SFX_NONE -1
 
-enum {
+enum AUDIO_MODE {
     AUDIO_MODE_UNK0,
     AUDIO_MODE_UNK1,
 };
@@ -87,5 +87,12 @@ int lbAudioAx_80028B2C(void);
 int lbAudioAx_80028B4C(void);
 void lbAudioAx_80028B6C(void);
 void lbAudioAx_80028B90(void);
+
+struct lbl_804D6454_t {
+    int** x0;
+    int** x4;
+    int** x8;
+    int** xC;
+};
 
 #endif

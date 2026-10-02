@@ -15,15 +15,15 @@ struct mn_802307F8_t {
     /* 0x009 */ u8 x9;
     /* 0x00A */ u8 xA;
     /* 0x00B */ u8 xB_pad[0x00C - 0x00B];
-    union {
+    union mn_802307F8_t_xC {
         /* 0x00C */ HSD_JObj* xC[17];
-        struct {
+        struct mn_802307F8_t_xC_x0 {
             /* 0x00C */ HSD_JObj* xC0[10];
-            struct {
+            struct mn_802307F8_t_xC_x0_x34 {
                 /* 0x00 */ HSD_JObj* joints[9];
             } x34[7];
-        };
-    };
+        } x0;
+    } xC_u;
     /* 0x130 */ HSD_Text* text;
 };
 

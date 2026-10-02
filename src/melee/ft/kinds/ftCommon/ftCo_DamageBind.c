@@ -17,7 +17,7 @@ bool ftCo_800C44CC(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (fp->dmg.x1860_element == HitElement_Disable && !fp->is_sandbag) {
-        switch (fp->x2070.x2071_b0_3) {
+        switch (fp->x2070.x0.x2071_b0_3) {
         case 5:
         case 9:
         case 11:

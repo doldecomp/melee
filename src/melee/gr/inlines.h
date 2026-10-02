@@ -3,8 +3,6 @@
 
 #include <sysdolphin/baselib/forward.h>
 
-#include <math.h>
-
 #include <melee/cm/camera.h>
 #include <melee/gr/granime.h>
 #include <melee/gr/grcorneria.h>

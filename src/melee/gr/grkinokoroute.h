@@ -38,7 +38,7 @@
 /* 208564 */ void grKinokoRoute_80208564(Ground_GObj*);
 /* 208660 */ bool grKinokoRoute_80208660(int unused, Fighter_GObj*);
 /* 2086EC */ void grKinokoRoute_802086EC(Vec3*, f32);
-/* 208754 */ DynamicsDesc* grKinokoRoute_80208754(enum_t);
+/* 208754 */ lbColl_80008D30_arg1* grKinokoRoute_80208754(enum_t);
 /* 20875C */ bool grKinokoRoute_8020875C(Vec3*, int arg, HSD_JObj* jobj);
 /* 2087B0 */ float grKinokoRoute_802087B0(void);
 /* 3E584C */ extern StageData grNKr_StageData;

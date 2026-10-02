@@ -7,7 +7,7 @@ typedef struct decimal {
     char sign;
     char unk1;
     short exp;
-    struct {
+    struct decimal_sig {
         unsigned char length;
         unsigned char text[36];
         unsigned char unk41;

@@ -3,7 +3,6 @@
 #include <melee/ft/forward.h>
 #include <melee/ft/kinds/ftMewtwo/forward.h>
 
-#include <math.h>
 #include <placeholder.h>
 #include <stddef.h>
 
@@ -68,7 +67,7 @@ bool ftKb_SpecialNMt_80106F9C(Fighter_GObj* gobj)
         case ftKb_MS_MtSpecialAirNLoopFull:
         case ftKb_MS_MtSpecialAirNCancel:
         case ftKb_MS_MtSpecialAirNEnd:
-            if (fp->x2070.x2071_b6) {
+            if (fp->x2070.x0.x2071_b6) {
                 return true;
             }
             return false;
@@ -308,8 +307,8 @@ void ftKb_SpecialNMt_80107568(Fighter_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     ftKb_DatAttrs* da = fp->dat_attrs;
 
-    Fighter_ChangeMotionState(gobj, ftKb_MS_MtSpecialNStart, 0, 0.0F, 1.0F,
-                              0.0F, NULL);
+    Fighter_ChangeMotionState(gobj, ftKb_MS_MtSpecialNStart, Ft_MF_None, 0.0F,
+                              1.0F, 0.0F, NULL);
 
     Fighter_ClearCmdVars(fp);
 
@@ -333,8 +332,8 @@ void ftKb_SpecialNMt_80107638(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftKb_DatAttrs* da = fp->dat_attrs;
-    Fighter_ChangeMotionState(gobj, ftKb_MS_MtSpecialAirNStart, 0, 0.0F, 1.0F,
-                              0.0F, NULL);
+    Fighter_ChangeMotionState(gobj, ftKb_MS_MtSpecialAirNStart, Ft_MF_None,
+                              0.0F, 1.0F, 0.0F, NULL);
     Fighter_ClearCmdVars(fp);
 
     ftKb_SpecialN_set_cbs(gobj);
@@ -377,11 +376,11 @@ void ftKb_MtSpecialNStart_Anim(Fighter_GObj* gobj)
         if (fp->mv.kb.specialhi.x0 == 1 ||
             (f32) fp->u.kb.x9C == da->specialn_mt_charge_time)
         {
-            Fighter_ChangeMotionState(gobj, ftKb_MS_MtSpecialNEnd, 0, 0.0f,
-                                      1.0f, 0.0f, NULL);
+            Fighter_ChangeMotionState(gobj, ftKb_MS_MtSpecialNEnd, Ft_MF_None,
+                                      0.0f, 1.0f, 0.0f, NULL);
         } else {
-            Fighter_ChangeMotionState(gobj, ftKb_MS_MtSpecialNLoop, 0, 0.0f,
-                                      1.0f, 0.0f, NULL);
+            Fighter_ChangeMotionState(gobj, ftKb_MS_MtSpecialNLoop, Ft_MF_None,
+                                      0.0f, 1.0f, 0.0f, NULL);
             fp->mv.kb.specialhi.x8.i = 0;
         }
         ftKb_SpecialN_set_cbs(gobj);
@@ -526,11 +525,11 @@ void ftKb_MtSpecialAirNStart_Anim(Fighter_GObj* gobj)
         if (fp->mv.kb.specialhi.x0 == 1 ||
             (f32) fp->u.kb.x9C == da->specialn_mt_charge_time)
         {
-            Fighter_ChangeMotionState(gobj, ftKb_MS_MtSpecialAirNEnd, 0, 0.0f,
-                                      1.0f, 0.0f, NULL);
+            Fighter_ChangeMotionState(gobj, ftKb_MS_MtSpecialAirNEnd,
+                                      Ft_MF_None, 0.0f, 1.0f, 0.0f, NULL);
         } else {
-            Fighter_ChangeMotionState(gobj, ftKb_MS_MtSpecialAirNLoop, 0, 0.0f,
-                                      1.0f, 0.0f, NULL);
+            Fighter_ChangeMotionState(gobj, ftKb_MS_MtSpecialAirNLoop,
+                                      Ft_MF_None, 0.0f, 1.0f, 0.0f, NULL);
             fp->mv.kb.specialhi.x8.i = 0;
         }
         ftKb_SpecialN_set_cbs(gobj);
@@ -653,20 +652,20 @@ void ftKb_MtSpecialNLoop_IASA(Fighter_GObj* gobj)
         u32 input = fp->input.pressed_buttons;
 
         if ((input & HSD_PAD_A) && fp->mv.kb.specialhi.xC <= 0) {
-            Fighter_ChangeMotionState(gobj, ftKb_MS_MtSpecialNEnd, 0, 0.0f,
-                                      1.0f, 0.0f, NULL);
+            Fighter_ChangeMotionState(gobj, ftKb_MS_MtSpecialNEnd, Ft_MF_None,
+                                      0.0f, 1.0f, 0.0f, NULL);
             ftKb_SpecialN_set_cbs(gobj);
             return;
         }
         if (input & HSD_PAD_B) {
             if (fp->mv.kb.specialhi.xC <= 0) {
-                Fighter_ChangeMotionState(gobj, ftKb_MS_MtSpecialNEnd, 0, 0.0f,
-                                          1.0f, 0.0f, NULL);
+                Fighter_ChangeMotionState(gobj, ftKb_MS_MtSpecialNEnd,
+                                          Ft_MF_None, 0.0f, 1.0f, 0.0f, NULL);
                 ftKb_SpecialN_set_cbs(gobj);
             }
         } else if (input & 0x80000000) {
-            Fighter_ChangeMotionState(gobj, ftKb_MS_MtSpecialNCancel, 0, 0.0f,
-                                      1.0f, 0.0f, NULL);
+            Fighter_ChangeMotionState(gobj, ftKb_MS_MtSpecialNCancel,
+                                      Ft_MF_None, 0.0f, 1.0f, 0.0f, NULL);
             if (gobj != NULL) {
                 Fighter* fp2 = GET_FIGHTER(gobj);
                 if (fp2->u.kb.x98 != NULL) {
@@ -706,20 +705,20 @@ void ftKb_MtSpecialNLoopFull_IASA(Fighter_GObj* gobj)
         u32 input = fp->input.pressed_buttons;
 
         if (input & HSD_PAD_A) {
-            Fighter_ChangeMotionState(gobj, ftKb_MS_MtSpecialNEnd, 0, 0.0f,
-                                      1.0f, 0.0f, NULL);
+            Fighter_ChangeMotionState(gobj, ftKb_MS_MtSpecialNEnd, Ft_MF_None,
+                                      0.0f, 1.0f, 0.0f, NULL);
             ftKb_SpecialN_set_cbs(gobj);
             return;
         }
         if (input & HSD_PAD_B) {
-            Fighter_ChangeMotionState(gobj, ftKb_MS_MtSpecialNEnd, 0, 0.0f,
-                                      1.0f, 0.0f, NULL);
+            Fighter_ChangeMotionState(gobj, ftKb_MS_MtSpecialNEnd, Ft_MF_None,
+                                      0.0f, 1.0f, 0.0f, NULL);
             ftKb_SpecialN_set_cbs(gobj);
             return;
         }
         if (input & 0x80000000) {
-            Fighter_ChangeMotionState(gobj, ftKb_MS_MtSpecialNCancel, 0, 0.0f,
-                                      1.0f, 0.0f, NULL);
+            Fighter_ChangeMotionState(gobj, ftKb_MS_MtSpecialNCancel,
+                                      Ft_MF_None, 0.0f, 1.0f, 0.0f, NULL);
             if (gobj != NULL) {
                 Fighter* fp2 = GET_FIGHTER(gobj);
                 if (fp2->u.kb.x98 != NULL) {
@@ -754,20 +753,20 @@ void ftKb_MtSpecialAirNLoop_IASA(Fighter_GObj* gobj)
     input = fp->input.pressed_buttons;
 
     if ((input & HSD_PAD_A) && fp2->mv.kb.specialhi.xC <= 0) {
-        Fighter_ChangeMotionState(gobj, ftKb_MS_MtSpecialAirNEnd, 0, 0.0f,
-                                  1.0f, 0.0f, NULL);
+        Fighter_ChangeMotionState(gobj, ftKb_MS_MtSpecialAirNEnd, Ft_MF_None,
+                                  0.0f, 1.0f, 0.0f, NULL);
         ftKb_SpecialN_set_cbs(gobj);
         return;
     }
     if (input & HSD_PAD_B) {
         if (fp2->mv.kb.specialhi.xC <= 0) {
-            Fighter_ChangeMotionState(gobj, ftKb_MS_MtSpecialAirNEnd, 0, 0.0f,
-                                      1.0f, 0.0f, NULL);
+            Fighter_ChangeMotionState(gobj, ftKb_MS_MtSpecialAirNEnd,
+                                      Ft_MF_None, 0.0f, 1.0f, 0.0f, NULL);
             ftKb_SpecialN_set_cbs(gobj);
         }
     } else if (input & 0x80000000) {
-        Fighter_ChangeMotionState(gobj, ftKb_MS_MtSpecialAirNCancel, 0, 0.0f,
-                                  1.0f, 0.0f, NULL);
+        Fighter_ChangeMotionState(gobj, ftKb_MS_MtSpecialAirNCancel,
+                                  Ft_MF_None, 0.0f, 1.0f, 0.0f, NULL);
         if (gobj != NULL) {
             Fighter* fp2 = GET_FIGHTER(gobj);
             if (fp2->u.kb.x98 != NULL) {
@@ -790,20 +789,20 @@ void ftKb_MtSpecialAirNLoopFull_IASA(Fighter_GObj* gobj)
     PAD_STACK(16);
 
     if (input & HSD_PAD_A) {
-        Fighter_ChangeMotionState(gobj, ftKb_MS_MtSpecialAirNEnd, 0, 0.0f,
-                                  1.0f, 0.0f, NULL);
+        Fighter_ChangeMotionState(gobj, ftKb_MS_MtSpecialAirNEnd, Ft_MF_None,
+                                  0.0f, 1.0f, 0.0f, NULL);
         ftKb_SpecialN_set_cbs(gobj);
         return;
     }
     if (input & HSD_PAD_B) {
-        Fighter_ChangeMotionState(gobj, ftKb_MS_MtSpecialAirNEnd, 0, 0.0f,
-                                  1.0f, 0.0f, NULL);
+        Fighter_ChangeMotionState(gobj, ftKb_MS_MtSpecialAirNEnd, Ft_MF_None,
+                                  0.0f, 1.0f, 0.0f, NULL);
         ftKb_SpecialN_set_cbs(gobj);
         return;
     }
     if (input & 0x80000000) {
-        Fighter_ChangeMotionState(gobj, ftKb_MS_MtSpecialAirNCancel, 0, 0.0f,
-                                  1.0f, 0.0f, NULL);
+        Fighter_ChangeMotionState(gobj, ftKb_MS_MtSpecialAirNCancel,
+                                  Ft_MF_None, 0.0f, 1.0f, 0.0f, NULL);
         if (gobj != NULL) {
             Fighter* fp2 = GET_FIGHTER(gobj);
             if (fp2->u.kb.x98 != NULL) {

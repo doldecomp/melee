@@ -4,6 +4,7 @@
 
 #include "forward.h"
 #include "gm_unsplit.h"
+#include "gmapproach.h"
 #include "gmmain_lib.h"
 #include "gmvsmelee.h"
 #include "types.h"
@@ -14,7 +15,7 @@
 #include <melee/ty/toy.h>
 #include <sysdolphin/baselib/memory.h>
 
-enum {
+enum state {
     state_approach,
     state_vs,
     state_prize,

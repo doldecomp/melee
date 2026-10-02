@@ -1,3 +1,5 @@
+#include "gm_181A.h"
+
 #include <Runtime/platform.h>
 
 #include <sysdolphin/baselib/forward.h>
@@ -24,16 +26,6 @@
 #include <sysdolphin/baselib/mobj.h>
 #include <sysdolphin/baselib/random.h>
 #include <sysdolphin/baselib/tobj.h>
-
-typedef struct RegClearSpawnEntry {
-    /* 0x00 */ s32 x0;
-    /* 0x04 */ u8 x4;
-    /* 0x05 */ u8 x5;
-    /* 0x06 */ u8 x6;
-    /* 0x07 */ u8 x7;
-    /* 0x08 */ f32 x8;
-    /* 0x0C */ f32 xC;
-} RegClearSpawnEntry;
 
 typedef struct RegClearCharEntry {
     /* 0x00 */ u8 x0;
@@ -575,17 +567,18 @@ bool gm_IsMultimanSmashMode(void)
 /// relocations are lbl_80472ED8+0x6BC..+0x6C8): lbl_80473594 overlays
 /// lbl_80472ED8+0x6BC (0x80472ED8 + 0x6BC == 0x80473594), and gm_80182578
 /// below already reads the same storage via lbl_80473594.
+typedef struct {
+    u8 pad_0[0x6BC];
+    u8 x6BC;
+    u8 pad_6BD;
+    u16 x6BE;
+    int x6C0;
+    int x6C4;
+    int x6C8;
+} regclear_record_state;
+
 void gm_80182554(int arg0, int arg1)
 {
-    typedef struct {
-        u8 pad_0[0x6BC];
-        u8 x6BC;
-        u8 pad_6BD;
-        u16 x6BE;
-        int x6C0;
-        int x6C4;
-        int x6C8;
-    } regclear_record_state;
     regclear_record_state* s = (regclear_record_state*) &lbl_80472ED8;
 
     s->x6C8 = arg0;

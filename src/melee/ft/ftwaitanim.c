@@ -25,10 +25,10 @@ void ftCo_8008A6D8(Fighter_GObj* gobj, s32 anim_id)
         ftData_80085CD8(fp, fp, anim_id);
         fp->anim_id = anim_id;
         ftCo_8009E7B4(fp, blend_data);
-        fp->x3E4_fighterCmdScript.u = anim->xC;
+        fp->x3E4_fighterCmdScript.x8.u = anim->xC;
         fp->x3E4_fighterCmdScript.loop_count = 0;
         if (fp->x590 != NULL) {
-            fp->x594_s32 = anim->x10_animCurrFlags;
+            fp->x594.x594_s32 = anim->x10_animCurrFlags;
             ftAnim_8006EBE8(gobj, 0.0F, 1.0F, (*blend_data)[0]);
         }
         fp->x3E4_fighterCmdScript.timer = 0.0f;
@@ -90,10 +90,10 @@ void ftCo_8008A7A8(Fighter_GObj* gobj, WaitStruct* arg1)
                     ftData_80085CD8(fp, fp, anim_id);
                     fp->anim_id = anim_id;
                     ftCo_8009E7B4(fp, blend_data);
-                    fp->x3E4_fighterCmdScript.u = anim->xC;
+                    fp->x3E4_fighterCmdScript.x8.u = anim->xC;
                     fp->x3E4_fighterCmdScript.loop_count = 0;
                     if (fp->x590 != NULL) {
-                        fp->x594_s32 = anim->x10_animCurrFlags;
+                        fp->x594.x594_s32 = anim->x10_animCurrFlags;
                         ftAnim_8006EBE8(gobj, 0.0F, 1.0F, (*blend_data)[0]);
                     }
                     fp->x3E4_fighterCmdScript.timer = 0.0f;

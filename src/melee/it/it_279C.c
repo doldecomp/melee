@@ -50,25 +50,25 @@
 #include <melee/pl/pltrick.h>
 #include <sysdolphin/baselib/random.h>
 
-#define IT_M_PI_2 1.5707963267948966
-
 const Quaternion it_803B8588 = { 0.0f, 0.0f, 0.0f, 0.0f };
 const Quaternion it_803B8598 = { 0.0f, 0.0f, 0.0f, 0.0f };
 
-/// Pokemon items
-struct sdata_ItemGXLink it_803F2310[47] = {
-    it_8026EECC, it_8026EECC, it_8026EECC, it_8026EECC, it_8026EECC,
-    it_8026EECC, it_8026EECC, it_8026EECC, it_8026EECC, it_8026EECC,
-    it_8026EECC, it_8026EECC, it_8026EECC, it_8026EECC, it_8026EECC,
-    it_8026EECC, it_8026EECC, it_8026EECC, it_8026EECC, it_8026EECC,
-    it_8026EECC, it_8026EECC, it_8026EECC, it_8026EECC, it_8026EECC,
-    it_8026EECC, it_8026EECC, it_8026EECC, it_8026EECC, it_8026EECC,
-    it_8026EECC, it_8026EECC, it_8026EECC, it_8026EECC, it_8026EECC,
-    it_8026EECC, it_8026EECC, it_8026EECC, it_8026EECC, it_8026EECC,
-    it_8026EECC, it_8026EECC, it_8026EECC, it_8026EECC, it_8026EECC,
-    it_8026EECC, it_8026EECC,
-};
+/// Pokemon and Related Items
+struct sdata_ItemGXLink
+    it_803F2310[It_Kind_Pokemon_End - It_Kind_Pokemon_Start] = {
+        it_8026EECC, it_8026EECC, it_8026EECC, it_8026EECC, it_8026EECC,
+        it_8026EECC, it_8026EECC, it_8026EECC, it_8026EECC, it_8026EECC,
+        it_8026EECC, it_8026EECC, it_8026EECC, it_8026EECC, it_8026EECC,
+        it_8026EECC, it_8026EECC, it_8026EECC, it_8026EECC, it_8026EECC,
+        it_8026EECC, it_8026EECC, it_8026EECC, it_8026EECC, it_8026EECC,
+        it_8026EECC, it_8026EECC, it_8026EECC, it_8026EECC, it_8026EECC,
+        it_8026EECC, it_8026EECC, it_8026EECC, it_8026EECC, it_8026EECC,
+        it_8026EECC, it_8026EECC, it_8026EECC, it_8026EECC, it_8026EECC,
+        it_8026EECC, it_8026EECC, it_8026EECC, it_8026EECC, it_8026EECC,
+        it_8026EECC, it_8026EECC,
+    };
 
+/// Pokemon and Related Items
 ItemLogicTable it_803F23CC[ARRAY_SIZE(it_803F2310)] = {
     {
         // Tosakinto (Goldeen)
@@ -928,39 +928,6 @@ static ItemKind common_pokemon[] = {
     It_PKind_Maril,     It_PKind_Fushigibana, It_PKind_Terminate,
 };
 
-typedef enum PokemonKind {
-    Pokemon_ID_Tosakinto,   // Goldeen (Tosakinto)
-    Pokemon_ID_Chicorita,   // Chikorita (Chicorita)
-    Pokemon_ID_Kabigon,     // Snorlax (Kabigon)
-    Pokemon_ID_Kamex,       // Blastoise (Kamex)
-    Pokemon_ID_Matadogas,   // Weezing (Matadogas)
-    Pokemon_ID_Lizardon,    // Charizard (Lizardon)
-    Pokemon_ID_Fire,        // Moltres (Fire)
-    Pokemon_ID_Thunder,     // Zapdos (Thunder)
-    Pokemon_ID_Freezer,     // Articuno (Freezer)
-    Pokemon_ID_Sonans,      // Wobbuffet (Sonans)
-    Pokemon_ID_Hassam,      // Scizor (Hassam)
-    Pokemon_ID_Unknown,     // Unown (Unknown)
-    Pokemon_ID_Entei,       // Entei
-    Pokemon_ID_Raikou,      // Raikou
-    Pokemon_ID_Suikun,      // Suicune (Suikun)
-    Pokemon_ID_Kireihana,   // Bellossom (Kireihana)
-    Pokemon_ID_Marumine,    // Electrode (Marumine)
-    Pokemon_ID_Lugia,       // Lugia
-    Pokemon_ID_Houou,       // Ho-oh (Houou)
-    Pokemon_ID_Metamon,     // Ditto (Metamon)
-    Pokemon_ID_Pippi,       // Clefairy (Pippi)
-    Pokemon_ID_Togepy,      // Togepi (Togepy)
-    Pokemon_ID_Mew,         // Mew
-    Pokemon_ID_Cerebi,      // Celebi (Cerebi)
-    Pokemon_ID_Hitodeman,   // Staryu (Hitodeman)
-    Pokemon_ID_Lucky,       // Chansey (Lucky)
-    Pokemon_ID_Porygon2,    // Porygon2
-    Pokemon_ID_Hinoarashi,  // Cyndaquil (Hinoarashi)
-    Pokemon_ID_Maril,       // Marill (Maril)
-    Pokemon_ID_Fushigibana, // Venusaur (Fushigibana)
-} PokemonKind;
-
 void it_80279C48(Item_GObj* item_gobj)
 {
     Vec3 v;
@@ -1033,10 +1000,10 @@ static inline void it_80279E24_inline(Item_GObj* item_gobj)
 
 void it_80279E24(Item_GObj* item_gobj)
 {
+    Item* item = GET_ITEM(item_gobj);
     HSD_JObj* item_jobj = item_gobj->hsd_obj;
-    Item* item = HSD_GObjGetUserData(item_gobj);
     f32 scale = HSD_JObjGetScaleX(item_jobj);
-    PAD_STACK(24);
+    PAD_STACK(20);
 
     if (item->xDD4_itemVar.pokemon_spawn.x50 <= 0.0f) {
         item->xDD4_itemVar.pokemon_spawn.x50 =
@@ -1235,13 +1202,15 @@ s32 it_8027A4D4(Item* item)
     return 0;
 }
 
+struct PokemonSpawnWeight {
+    ItemKind kind;
+    s32 weight;
+};
+
 s32 it_8027A780(Item* item, void* arg1)
 {
     u8 _pad[8];
-    struct PokemonSpawnWeight {
-        ItemKind kind;
-        s32 weight;
-    } weights[30];
+    struct PokemonSpawnWeight weights[30];
     struct PokemonSpawnWeight* base;
     struct PokemonSpawnWeight* buf;
     ItemKind last_kind;
@@ -1437,7 +1406,7 @@ bool it_8027AB64(Item_GObj* item_gobj)
         spawn.kind = spawn.kind + It_PKind_Start;
         spawn.x0_parent_gobj = item2->owner;
         spawn.x4_parent_gobj2 = item_gobj;
-        spawn.x44_flag.b0 = 1;
+        spawn.x44_flag.x0.b0 = 1;
         spawn.x40 = 0;
         if (spawn.kind == It_PKind_Cerebi) {
             gm_80172C04();
@@ -1482,7 +1451,7 @@ bool it_8027AE34(Item_GObj* item_gobj)
     item->x40_vel.x = -item->x40_vel.x * item->xC70;
     item->facing_dir = -item->facing_dir;
     item->xD44_lifeTimer = item->xD48_halfLifeTimer;
-    rotate.y = IT_M_PI_2 * item->facing_dir;
+    rotate.y = M_PI_2 * item->facing_dir;
     HSD_JObjSetRotation(item_jobj, &rotate);
     return false;
 }
@@ -1495,7 +1464,7 @@ bool it_8027AF50(Item_GObj* item_gobj)
     rotate = it_803B8598;
     lbVector_Mirror(&item->x40_vel, &item->xC58);
     it_80272980(item_gobj);
-    rotate.y = IT_M_PI_2 * item->facing_dir;
+    rotate.y = M_PI_2 * item->facing_dir;
     HSD_JObjSetRotation(item_jobj, &rotate);
     return false;
 }
@@ -1509,7 +1478,7 @@ void it_8027B070(Item_GObj* item_gobj, Fighter_GObj* owner_gobj)
     item->xD90 = fighter->x2070;
     item->xD94 = fighter->x2074.x2074_vec;
     item->xD9C = fighter->x2074.x207C;
-    item->xDA4_word = fighter->x2074.x2084;
+    item->xDA4_word = fighter->x2074.x10.x2084;
     item->xDA8_short = fighter->x2074.x2088;
 }
 
@@ -1558,7 +1527,7 @@ void it_8027B1F4(Item_GObj* item_gobj)
         struct Struct2074* temp_r3 = ft_800898A8((Fighter_GObj*) item->owner);
         item->xD94 = temp_r3->x2074_vec;
         item->xD9C = temp_r3->x207C;
-        item->xDA4_word = temp_r3->x2084;
+        item->xDA4_word = temp_r3->x10.x2084;
         return;
     }
     ft_80089768(&item->xD94);
@@ -1573,7 +1542,7 @@ void it_8027B288(Item_GObj* item_gobj, volatile u32 arg1)
 
     item = item_gobj->user_data;
     sp14.x2070_int = arg1;
-    if ((sp14.x2073 == 0) || (sp14.x2073 != item->xD90.x2073)) {
+    if ((sp14.x0.x2073 == 0) || (sp14.x0.x2073 != item->xD90.x0.x2073)) {
         item->xDA8_short = plAttack_80037B08();
     }
     item->xD90 = sp14;
@@ -1581,7 +1550,7 @@ void it_8027B288(Item_GObj* item_gobj, volatile u32 arg1)
         temp_r3 = ft_800898A8(item->owner);
         item->xD94 = temp_r3->x2074_vec;
         item->xD9C = temp_r3->x207C;
-        item->xDA4_word = temp_r3->x2084;
+        item->xDA4_word = temp_r3->x10.x2084;
         return;
     }
     ft_80089768(&item->xD94);
@@ -1604,7 +1573,7 @@ void it_8027B378(Fighter_GObj* fighter_gobj, Item_GObj* item_gobj, f32 arg2)
     PAD_STACK(4);
 
     if (it_8026B6C8(item_gobj)) {
-        temp_r30 = ft_80089884(fighter_gobj)->x2073;
+        temp_r30 = ft_80089884(fighter_gobj)->x0.x2073;
         temp_r31 = ftLib_IsSubFighter(fighter_gobj);
         temp_r3 = ftLib_GetPlayerIndex(fighter_gobj);
         pl_8003EB30(arg2, temp_r3, temp_r31, 6, 0, temp_r30);
@@ -1623,7 +1592,7 @@ void it_8027B408(Item_GObj* item_gobj1, Item_GObj* item_gobj2, f32 arg8)
             HSD_GObj* owner = item1->owner;
             temp_r31 = ftLib_IsSubFighter(owner);
             temp_r3 = ftLib_GetPlayerIndex(owner);
-            pl_8003EB30(arg8, temp_r3, temp_r31, 6, 0, item1->xD90.x2073);
+            pl_8003EB30(arg8, temp_r3, temp_r31, 6, 0, item1->xD90.x0.x2073);
         }
     }
 }
@@ -1634,7 +1603,7 @@ void it_8027B4A4(Fighter_GObj* item_gobj1, Item_GObj* item_gobj2)
 
     if (it_8026B6C8(item_gobj2)) {
         temp_r31 = (void*) ft_800898A8(item_gobj1);
-        pl_800384DC(item_gobj1, ft_80089884(item_gobj1)->x2073, temp_r31);
+        pl_800384DC(item_gobj1, ft_80089884(item_gobj1)->x0.x2073, temp_r31);
     }
 }
 
@@ -1643,7 +1612,7 @@ void it_8027B508(Item_GObj* item_gobj1, Item_GObj* item_gobj2)
     if (it_8026B6C8(item_gobj2)) {
         Item* item1 = GET_ITEM(item_gobj1);
         if (ftLib_IsFighter(item1->owner)) {
-            pl_800384DC(item1->owner, item1->xD90.x2073, &item1->xD94);
+            pl_800384DC(item1->owner, item1->xD90.x0.x2073, &item1->xD94);
         }
     }
 }

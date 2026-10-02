@@ -32,4 +32,9 @@
 /// @brief Decrement refraction effect user count.
 /* 022BD0 */ void lbRefSetUnuse(void);
 
+struct refract_data_t {
+    u8 x0;
+    f32* x4;
+};
+
 #endif

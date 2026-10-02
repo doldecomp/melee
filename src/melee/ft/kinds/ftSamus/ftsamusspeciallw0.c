@@ -37,12 +37,13 @@ void ftSs_Init_80128944(HSD_GObj* gobj, float farg1, float farg2)
     u8 _[8];
 
     if (!ftColl_8007B868(gobj)) {
-        switch (fp->x2070.x2071_b0_3) {
+        switch (fp->x2070.x0.x2071_b0_3) {
         case 0:
         case 2:
         case 3:
         case 4:
-            if ((fp->x2070.x2073 == 0x14) || ((fp->x2070.x2071_b5) == 0)) {
+            if ((fp->x2070.x0.x2073 == 0x14) || ((fp->x2070.x0.x2071_b5) == 0))
+            {
                 if (fp->x5F4_arr[0].idx == 2) {
                     ftSs_Init_80128B1C(gobj, float_result, da->x0, 1.0f);
                 } else {
@@ -112,7 +113,7 @@ void ftSs_Init_80128B1C(HSD_GObj* gobj, float angle, float arg9, float argA)
     if (fp->ground_or_air == GA_Ground) {
         ftCommon_8007D5D4(fighter2);
     }
-    Fighter_ChangeMotionState(gobj, 0x156, 0, arg9, argA, 0.0f, 0);
+    Fighter_ChangeMotionState(gobj, 0x156, Ft_MF_None, arg9, argA, 0.0f, 0);
     ftAnim_8006EBA4(gobj);
 }
 
@@ -249,7 +250,7 @@ void ftSs_SpecialLw_80129048(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftCommon_8007D5D4(fp);
-    Fighter_ChangeMotionState(gobj, 0x156, 0x10, fp->cur_anim_frame,
+    Fighter_ChangeMotionState(gobj, 0x156, JOBJ_HIDDEN, fp->cur_anim_frame,
                               fp->frame_speed_mul, 0.0f, 0);
 }
 
@@ -257,7 +258,7 @@ void ftSs_SpecialLw_801290A4(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftCommon_8007D7FC(fp);
-    Fighter_ChangeMotionState(gobj, 0x155, 0x10, fp->cur_anim_frame,
+    Fighter_ChangeMotionState(gobj, 0x155, JOBJ_HIDDEN, fp->cur_anim_frame,
                               fp->frame_speed_mul, 0.0f, 0);
 }
 
@@ -293,7 +294,7 @@ s32 ftSs_SpecialLw_80129158(HSD_GObj* gobj)
         case 0x15A:
         case 0x15B:
         case 0x15C:
-            if (fp->x2070.x2071_b6) {
+            if (fp->x2070.x0.x2071_b6) {
                 return 1;
             }
             return 0;

@@ -136,8 +136,8 @@ void ifStatus_802F7134(void)
     }
 
     archive = ifAll_GetArchive();
-    lbArchive_LoadSections(*archive, (void**) &models, "ScInfCnt_scene_models",
-                           0);
+    lbArchive_LoadSections(*archive, (DynamicModelDesc***) &models,
+                           "ScInfCnt_scene_models", 0);
 
     for (i = 0; i < 8; i++) {
         ifStatus_803F9628[i].x14 = models[i];

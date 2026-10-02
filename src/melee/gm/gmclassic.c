@@ -18,10 +18,10 @@ UNK_T gmClassic_804D68D0;
 
 typedef struct gmClassicMatchup {
     /* 0x00 */ u16 x00;
-    /* 0x02 */ union {
+    /* 0x02 */ union gmClassicMatchup_x2 {
         s8 x02[3];
         u8 x02_u8[3];
-    };
+    } x2;
     /* 0x05 */ u8 x05;
 } gmClassicMatchup;
 ASSERT_SIZE(gmClassicMatchup, 6);
@@ -57,7 +57,7 @@ ASSERT_SIZE(gmClassicIntroData, 0x20);
 
 typedef union gmClassic_804908A0Data {
     /* 0x00 */ u8 bytes[0x70];
-    struct {
+    struct gmClassic_804908A0Data_order {
         /* 0x00 */ u8 x00[0x0C];
         /* 0x0C */ u8 x0C[0x28];
         /* 0x34 */ u8 x34[0x20];
@@ -538,7 +538,7 @@ static gmClassicMatchup* gmClassic_801B2BA4(gmClassicMatchup* arg0,
     for (outer = 0; outer < gmClassic_GetMatchupCount(arg0); outer++) {
         entry = &arg0[arg1[outer]];
         for (j = 0; j < 3; j++) {
-            int cur_char = entry->x02[j];
+            int cur_char = entry->x2.x02[j];
 
             if (cur_char == ChKind_None) {
                 continue;
@@ -556,7 +556,7 @@ static gmClassicMatchup* gmClassic_801B2BA4(gmClassicMatchup* arg0,
             for (temp_idx = 0; arg2[temp_idx].x0 != 0xD; temp_idx++) {
                 for (k = 0; k < 3; k++) {
                     if (arg2[temp_idx].xC != NULL &&
-                        cur_char == arg2[temp_idx].xC->x02[k])
+                        cur_char == arg2[temp_idx].xC->x2.x02[k])
                     {
                         goto next;
                     }
@@ -812,11 +812,11 @@ void gmClassic_801B3500(GameModeState* arg0)
     }
 
     for (i = 0; i < 3; i++) {
-        sd->x10[i] = entry->xC->x02[i];
-        sd->x16[i] = gm_8017CD94((UnkAdventureData*) ad, entry->xC->x02[i],
+        sd->x10[i] = entry->xC->x2.x02[i];
+        sd->x16[i] = gm_8017CD94((UnkAdventureData*) ad, entry->xC->x2.x02[i],
                                  entry->x0, i);
         gmRegSetupEnemyColorTable(ad->x0.x0.ckind, ad->x0.x0.color,
-                                  entry->xC->x02, sd->x16);
+                                  entry->xC->x2.x02, sd->x16);
         if (entry->x1 & 4) {
             sd->x1C[i] = 1;
         } else {
@@ -838,7 +838,7 @@ void gmClassic_801B3500(GameModeState* arg0)
     sd->x13[0] = ad->x0.x0.color;
 
     gm_8017DB88(ad->x0.xC.x24, entry->x1, ad->x0.x0.cpu_level,
-                (u8) gm_8017BE84(arg0->id), entry->xC->x02_u8, sd->x0D[0],
+                (u8) gm_8017BE84(arg0->id), entry->xC->x2.x02_u8, sd->x0D[0],
                 (u8 (*)(s32, s32, u8))(Event) ad->x0.x58,
                 (u8 (*)(s32, s32, u8))(Event) ad->x0.x5C,
                 (u8 (*)(s32, s32, u8))(Event) ad->x0.x60,
@@ -866,7 +866,7 @@ void gmClassic_801B3500(GameModeState* arg0)
     lbDvd_80017700(4);
 
     for (i = 0; i < 3; i++) {
-        s8 echar = entry->xC->x02[i];
+        s8 echar = entry->xC->x2.x02[i];
         if (echar != 0x21) {
             gc->entries[count].char_id = echar;
             if (entry->x1 & 8) {
@@ -909,9 +909,9 @@ void gmClassic_801B3500(GameModeState* arg0)
     }
 
     for (i = 0; i < 3; i++) {
-        if (entry->xC->x02[i] != 0x21) {
-            audio |= lbAudioAx_80026E84(new_var->xC->x02[i]);
-            if (entry->xC->x02[i] == 4) {
+        if (entry->xC->x2.x02[i] != 0x21) {
+            audio |= lbAudioAx_80026E84(new_var->xC->x2.x02[i]);
+            if (entry->xC->x2.x02[i] == 4) {
                 audio |= ((u64) 2 << 32) | 0x4000;
             }
         }
@@ -958,8 +958,8 @@ void gmClassic_801B3A34(GameModeState* arg0)
     temp_r28 = gm_804908A0[idx_val];
     sp8 = (u16) gm_8017BE84(arg0->id);
     spC = temp_r28;
-    gm_8017CE34(new_var, &temp_r29->x0, temp_r31->xC->x02, temp_r31->x6, 1, 0,
-                temp_r31->x4, var_r27, sp8, spC);
+    gm_8017CE34(new_var, &temp_r29->x0, temp_r31->xC->x2.x02, temp_r31->x6, 1,
+                0, temp_r31->x4, var_r27, sp8, spC);
     gm_LoadRumbleEnabled(new_var);
 }
 

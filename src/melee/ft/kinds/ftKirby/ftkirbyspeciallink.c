@@ -114,7 +114,7 @@ bool ftKb_SpecialNLk800FB470(Fighter_GObj* gobj)
                 case ftKb_MS_LkSpecialAirNStart:
                 case ftKb_MS_LkSpecialAirNLoop:
                 case ftKb_MS_LkSpecialAirNEnd:
-                    if (!fp->x2070.x2071_b6) {
+                    if (!fp->x2070.x0.x2071_b6) {
                         return false;
                     }
                 }
@@ -127,7 +127,7 @@ bool ftKb_SpecialNLk800FB470(Fighter_GObj* gobj)
                 case ftKb_MS_ClSpecialAirNStart:
                 case ftKb_MS_ClSpecialAirNLoop:
                 case ftKb_MS_ClSpecialAirNEnd:
-                    if (!fp->x2070.x2071_b6) {
+                    if (!fp->x2070.x0.x2071_b6) {
                         return false;
                     }
                 }
@@ -281,7 +281,7 @@ void ftKb_SpecialNLk800FB880(Fighter_GObj* gobj)
     default:
         break;
     }
-    Fighter_ChangeMotionState(gobj, msid, 0, 0.0F, 1.0F, 0.0F, NULL);
+    Fighter_ChangeMotionState(gobj, msid, Ft_MF_None, 0.0F, 1.0F, 0.0F, NULL);
     ftKb_SpecialN_set_cbs(gobj);
     switch (fp->u.kb.hat.kind) {
     case Ft_Kind_Link:
@@ -322,7 +322,7 @@ void ftKb_SpecialNLk800FBA00(Fighter_GObj* gobj)
     default:
         break;
     }
-    Fighter_ChangeMotionState(gobj, msid, 0, 0.0F, 1.0F, 0.0F, NULL);
+    Fighter_ChangeMotionState(gobj, msid, Ft_MF_None, 0.0F, 1.0F, 0.0F, NULL);
     ftKb_SpecialN_set_cbs(gobj);
     switch (fp->u.kb.hat.kind) {
     case Ft_Kind_Link:

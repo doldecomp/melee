@@ -1,6 +1,5 @@
 #include "efasync.h"
 
-#include <math.h>
 #include <stdarg.h>
 
 #include "efdata.h"
@@ -1218,19 +1217,19 @@ void efAsync_LoadAsync(int index)
 
 void efAsync_OnLoad(HSD_Archive* archive, u8* data, u32 length, int index)
 {
-    EF_DataTable* table;
+    EffectDataTable* table;
 
     lbArchive_InitializeDAT(archive, data, length);
-    table = HSD_ArchiveGetPublicAddress(
-        archive, efAsync_DatEntries[index].effDataTable_name);
-    if ((uintptr_t) table->ptcl | (uintptr_t) table->texg) {
-        psInitDataBankLocate(table->ptcl, table->texg, NULL);
+    table = HSD_ArchiveGetPublicAs(
+        EffectDataTable, archive, efAsync_DatEntries[index].effDataTable_name);
+    if ((uintptr_t) table->cmd_bank | (uintptr_t) table->tex_bank) {
+        psInitDataBankLocate(table->cmd_bank, table->tex_bank, NULL);
     }
 }
 
 void efAsync_LoadSync(int idx)
 {
-    EF_DataTable* table;
+    EffectDataTable* table;
     EF_DAT_Entry* lookup;
     lookup = &efAsync_DatEntries[idx];
 
@@ -1246,14 +1245,16 @@ void efAsync_LoadSync(int idx)
     {
         bool chk = lbArchive_80017040(NULL, lookup->ef_DAT_file, &table,
                                       lookup->effDataTable_name, 0);
-        if ((uintptr_t) table->ptcl | (uintptr_t) table->texg) {
+        if ((uintptr_t) table->cmd_bank | (uintptr_t) table->tex_bank) {
             if (chk) {
-                psInitDataBankLoad(idx, table->ptcl, table->texg, NULL, NULL);
+                psInitDataBankLoad(idx, table->cmd_bank, table->tex_bank, NULL,
+                                   NULL);
             } else {
-                psInitDataBank(idx, table->ptcl, table->texg, NULL, NULL);
+                psInitDataBank(idx, table->cmd_bank, table->tex_bank, NULL,
+                               NULL);
             }
         }
-        lookup->data = table->effects;
+        lookup->data = table->descs;
     }
 }
 

@@ -10,6 +10,7 @@
 #include <melee/lb/lbmthp.h>
 #include <melee/mn/inlines.h>
 #include <melee/mn/types.h>
+#include <sysdolphin/baselib/cobj.h> // IWYU pragma: keep
 #include <sysdolphin/baselib/controller.h>
 #include <sysdolphin/baselib/gobjgxlink.h>
 #include <sysdolphin/baselib/gobjobject.h>

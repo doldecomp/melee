@@ -4,8 +4,6 @@
 
 #include <melee/ft/forward.h>
 
-#include <math.h>
-
 #include "forward.h"
 #include <melee/ft/fighter.h>
 #include <melee/ft/ft_081B.h>
@@ -113,7 +111,7 @@ void ftSb_Init_8014FBA4(HSD_GObj* gobj)
         ftCommon_8007D7FC(fp);
     }
 
-    Fighter_ChangeMotionState(gobj, 0x155, 0, 0.0f, 1.0f, 0.0f, 0);
+    Fighter_ChangeMotionState(gobj, 0x155, Ft_MF_None, 0.0f, 1.0f, 0.0f, 0);
     ftCommon_8007EFC0(fp, p_ftCommonData->x5F0);
 }
 

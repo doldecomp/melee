@@ -122,7 +122,7 @@ static char cur_hps_stem[0x40] = "";
 static char cur_ssm_file[0x40] = "/audio/";
 static char cur_hps_file[0x40] = "/audio/";
 
-static struct {
+static struct lbl_803BB3C0_t {
     u8 x0;
     u64 x8;
 } lbl_803BB3C0[ChKind_Max] = {
@@ -584,12 +584,7 @@ int lbAudioAx_80023870(int id, int vol, int pan, int track)
     return fn_80023750(id, vol, pan, track, 7);
 }
 
-static struct {
-    int** x0;
-    int** x4;
-    int** x8;
-    int** xC;
-}* lbl_804D6454;
+static struct lbl_804D6454_t* lbl_804D6454;
 
 void lbAudioAx_8002392C(void)
 {
@@ -757,13 +752,15 @@ int lbAudioAx_80023F28(int arg0)
     return lbAudioAx_80023F28_helper1(filename);
 }
 
+struct lbl_803BC918_t {
+    int id;
+    int track;
+    int channel;
+};
+
 void lbAudioAx_80024030(int arg0)
 {
-    static struct lbl_803BC918_t {
-        int id;
-        int track;
-        int channel;
-    } lbl_803BC918[] = {
+    static struct lbl_803BC918_t lbl_803BC918[] = {
         { 0xAC, 0x13, 3 }, { 0xAD, 0x14, 3 }, { 0xAE, 0x00, 3 },
         { 0xAF, 0x00, 3 }, { 0xB0, 0x15, 3 }, { 0xB1, 0x00, 2 },
         { 0xC1, 0x00, 2 }, { 0xBC, 0x00, 2 }, { 0xDB, 0x00, 3 },
@@ -1588,10 +1585,11 @@ typedef struct {
     int voice;
 } SoundParams;
 
+typedef bool (*lbl_803BCA24_fn)(HSD_GObj*);
+
 static void fn_80025FAC(HSD_GObj* gobj, lbAudioAx_UserData* ud,
                         SoundParams* sp)
 {
-    typedef bool (*lbl_803BCA24_fn)(HSD_GObj*);
     static lbl_803BCA24_fn lbl_803BCA24[] = {
         fn_800251EC, fn_800253D8, fn_800256BC, fn_800259A0, fn_800259EC,
         fn_80025A98, fn_80025B44, fn_80025CBC, fn_80025E38, fn_80025E38,

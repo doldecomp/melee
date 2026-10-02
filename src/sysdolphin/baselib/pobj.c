@@ -34,7 +34,7 @@ static u32 normal_buffer_size = 0;
 static HSD_VtxDescList* prev_vtxdesclist_array = NULL;
 static HSD_VtxDescList* prev_vtxdesc = NULL;
 
-static struct {
+static struct mtx_mark_t {
     void* obj;
     u32 mark;
 } mtx_mark[2];

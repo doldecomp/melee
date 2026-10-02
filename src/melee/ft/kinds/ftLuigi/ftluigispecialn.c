@@ -29,9 +29,9 @@ void ftLg_SpecialN_Enter(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
 
     fp->cmd_vars[0] = 0;
-    fp->throw_flags = 0;
-    Fighter_ChangeMotionState(gobj, ftLg_MS_SpecialN, 0, 0.0f, 1.0f, 0.0f,
-                              NULL);
+    fp->x2210.throw_flags = 0;
+    Fighter_ChangeMotionState(gobj, ftLg_MS_SpecialN, Ft_MF_None, 0.0f, 1.0f,
+                              0.0f, NULL);
     ftAnim_8006EBA4(gobj);
     fp->accessory4_cb = &ftLg_SpecialN_FireSpawn;
 }
@@ -42,9 +42,9 @@ void ftLg_SpecialAirN_Enter(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
 
     fp->cmd_vars[0] = 0;
-    fp->throw_flags = 0;
-    Fighter_ChangeMotionState(gobj, ftLg_MS_SpecialAirN, 0, 0.0f, 1.0f, 0.0f,
-                              NULL);
+    fp->x2210.throw_flags = 0;
+    Fighter_ChangeMotionState(gobj, ftLg_MS_SpecialAirN, Ft_MF_None, 0.0f,
+                              1.0f, 0.0f, NULL);
     ftAnim_8006EBA4(gobj);
     fp->accessory4_cb = &ftLg_SpecialN_FireSpawn;
 }
@@ -132,8 +132,8 @@ void ftLg_SpecialN_FireSpawn(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     bool flag;
 
-    if (fp->throw_flags_b0 != 0) {
-        fp->throw_flags_b0 = 0;
+    if (fp->x2210.x0.throw_flags_b0 != 0) {
+        fp->x2210.x0.throw_flags_b0 = 0;
         flag = true;
     } else {
         flag = false;

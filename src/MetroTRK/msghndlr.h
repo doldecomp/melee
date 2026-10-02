@@ -10,14 +10,14 @@
 typedef struct msgbuf_t {
     /* 0x00 */ u32 msgLength;
     /// @todo fix enum size shenanigans
-    /* 0x04 */ union {
+    /* 0x04 */ union msgbuf_t_x4 {
         u8 commandId;
         MessageCommandID commandIdInt;
-    };
-    /* 0x08 */ union {
+    } x4;
+    /* 0x08 */ union msgbuf_t_x8 {
         u8 replyError;
         DSReplyError replyErrorInt;
-    };
+    } x8;
     /* 0x0C */ u32 unk0C;
     /* 0x10 */ u8 unk10[0x30];
 } msgbuf_t; // size = 0x40

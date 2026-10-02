@@ -40,7 +40,7 @@ struct staffInfo_t {
 };
 ASSERT_SIZE(struct staffInfo_t, 0x948);
 
-/* 4D67F8 */ static struct {
+/* 4D67F8 */ static struct gmstaffroll_staffInfo_t {
     HSD_Text* win[2];
     int x8;
 }* staffInfo;
@@ -103,7 +103,7 @@ typedef struct {
 
 typedef struct {
     /* 0x00 */ f32 x_positions[4];
-    /* 0x10 */ struct {
+    /* 0x10 */ struct StaffRollExtraData_sfx_cues {
         s32 frame;
         s32 sfx;
     } sfx_cues[45]; ///< terminated by a 0x7FFFFFFF frame
@@ -112,7 +112,7 @@ ASSERT_SIZE(StaffRollExtraData, 0x178);
 
 typedef struct StaffRollPtclNode {
     /* 0x00 */ struct StaffRollPtclNode* x0;
-    /* 0x04 */ union {
+    /* 0x04 */ union StaffRollPtclNode_x4 {
         struct StaffRollPtclNode* ptr;
         s32 color;
     } x4;
@@ -428,7 +428,7 @@ void fn_801AA7F8(HSD_GObj* gobj)
     }
 }
 
-enum {
+enum Gm_GObj_GXLink {
     Gm_GObj_GXLink_PlyCursor = 9
 };
 void fn_801AA854(HSD_GObj* gobj, intptr_t code)

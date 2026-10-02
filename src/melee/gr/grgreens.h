@@ -59,7 +59,7 @@
 /* 215ED8 */ void grGreens_80215ED8(Ground_GObj*, int, int);
 /* 2166C4 */ void grGreens_802166C4(Ground_GObj*);
 /* 216C20 */ void grGreens_80216C20(Ground_GObj*);
-/* 216E64 */ DynamicsDesc* grGreens_80216E64(enum_t);
+/* 216E64 */ lbColl_80008D30_arg1* grGreens_80216E64(enum_t);
 /* 216E6C */ bool grGreens_80216E6C(Vec3*, int arg, HSD_JObj* jobj);
 /* 3E76D0 */ extern StageData grGr_StageData;
 

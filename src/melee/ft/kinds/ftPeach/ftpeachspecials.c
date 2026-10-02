@@ -43,7 +43,7 @@ static void reset(HSD_GObj* gobj)
     fp->self_vel.x = 0;
     fp->x6A4_transNOffset.x = 0;
     if (fp->active_sticky.lstick.x < da->x30) {
-        fp->x2070.count_thrown_items = true;
+        fp->x2070.x0.count_thrown_items = true;
         fp->mv.pe.specials.x0 = true;
     } else {
         fp->mv.pe.specials.x0 = false;
@@ -387,11 +387,11 @@ void enterAirEndSmash(HSD_GObj* gobj)
     fp->self_vel.x /= da->x68;
     fp->self_vel.y /= da->x6C;
     if (fp->cmd_vars[2] != 0U) {
-        Fighter_ChangeMotionState(gobj, ftPe_MS_SpecialAirSEnd_1, 0, 0.0f,
-                                  1.0f, 0.0f, NULL);
+        Fighter_ChangeMotionState(gobj, ftPe_MS_SpecialAirSEnd_1, Ft_MF_None,
+                                  0.0f, 1.0f, 0.0f, NULL);
     } else {
-        Fighter_ChangeMotionState(gobj, ftPe_MS_SpecialAirSEnd_0, 0, 0.0f,
-                                  1.0f, 0.0f, NULL);
+        Fighter_ChangeMotionState(gobj, ftPe_MS_SpecialAirSEnd_0, Ft_MF_None,
+                                  0.0f, 1.0f, 0.0f, NULL);
     }
     doPostEnd_SmallerStack(gobj);
 }

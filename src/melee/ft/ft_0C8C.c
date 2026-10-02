@@ -69,7 +69,7 @@ void ftCo_800C8D00(Fighter_GObj* gobj)
         victim = getFtVictim(fp);
 
         if (victim != NULL) {
-            if (fp->x221B_b5) {
+            if (fp->x221B.x221B_b5) {
                 ftCo_CaptureCut_Enter(victim);
             } else {
                 Fighter_GObj* tmp = victim;

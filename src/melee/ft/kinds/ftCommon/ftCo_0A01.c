@@ -236,7 +236,7 @@ static void sdata2_order(void)
  * for which items the CPU should prefer to target.
  * Higher numbers are preferred.
  */
-int ftCo_803C5A68[] = {
+int ftCo_803C5A68[It_Kind_Common_End] = {
     1, 0, 0, 1, 0, 0, 0, 1, 7, 6, 5, 4, 4, 3, 1, 1, 2, 1,
     5, 2, 2, 2, 3, 3, 3, 4, 0, 0, 8, 4, 1, 4, 4, 5, 5,
 };
@@ -3029,14 +3029,14 @@ Item* ftCo_800A5F4C(Fighter* fp, ItemKind arg1)
             continue;
         }
 
-        /// Passing It_Kind_L_Gun_Ray means to target any common item
-        if (arg1 != It_Kind_L_Gun_Ray && cur_ip->kind != arg1) {
+        /// Passing It_Kind_Common_End means to target any common item
+        if (arg1 != It_Kind_Common_End && cur_ip->kind != arg1) {
             continue;
         }
         if (inlineD0_it(fp, cur_ip)) {
             continue;
         }
-        if (cur_ip->kind >= It_Kind_L_Gun_Ray) {
+        if (cur_ip->kind >= It_Kind_Common_End) {
             continue;
         }
         if (ftCo_803C5A68[cur_ip->kind] < data->x2C) {
@@ -3094,7 +3094,7 @@ Item* ftCo_800A61D8(Fighter* fp)
         if (inlineD0_it(fp, ip)) {
             continue;
         }
-        if (ip->kind >= It_Common_End) {
+        if (ip->kind >= It_Kind_Common_End) {
             continue;
         }
         if (ftCo_803C5A68[ip->kind] < data->x2C) {
@@ -3118,7 +3118,7 @@ Item* ftCo_800A61D8(Fighter* fp)
 
 static inline bool ftCo_800A648C_inline1(Item* ip)
 {
-    if (ip->kind >= It_Kind_Kuriboh && ip->kind < It_Kind_Octarock_Stone) {
+    if (ip->kind >= It_Kind_Monster_Start && ip->kind < It_Kind_Monster_End) {
         return true;
     }
     if (ip->kind == It_Kind_Nokonoko ||
@@ -4487,16 +4487,18 @@ static inline bool ftCo_IsNearlyZero(float x)
         }                                                                     \
     } while (0)
 
+struct ftCo_800A9904_ceiling {
+    u32 pad;
+    u32 flags;
+    int line_id;
+    Vec3 normal;
+    Vec3 pos;
+};
+
 void ftCo_800A9904(Fighter* fp)
 {
     UNUSED u8 _top[8];
-    struct {
-        u32 pad;
-        u32 flags;
-        int line_id;
-        Vec3 normal;
-        Vec3 pos;
-    } ceiling;
+    struct ftCo_800A9904_ceiling ceiling;
     f32 sqrt_time_store;
     f32 sqrt_terminal_store;
     UNUSED u8 _[0x1C];
@@ -5331,6 +5333,11 @@ static inline void ftCo_800ABBA8_blk155144r(Fighter* fp, Fighter** target)
     *target = data->x44;
 }
 
+struct ftCo_800ABBA8_sp50 {
+    Vec3 v;
+    u8 _[4];
+};
+
 void ftCo_800ABBA8(Fighter* fp)
 {
     struct CpuFighter* data = &fp->cpu;
@@ -5341,10 +5348,7 @@ void ftCo_800ABBA8(Fighter* fp)
     Vec3 sp68;
     int line_id;
     u32 flags;
-    struct {
-        Vec3 v;
-        u8 _[4];
-    } sp50;
+    struct ftCo_800ABBA8_sp50 sp50;
     u8 sqrt_gap[0xC];
     float sqrt_tmp[4];
     s32 result;
@@ -6164,7 +6168,7 @@ static bool ftCo_800ADE48(Fighter* fp)
             data->xF8_b5 = false;
         }
     }
-    if (!fp->x221B_b5) {
+    if (!fp->x221B.x221B_b5) {
         data->x94 = 0;
     }
     if (data->x18 != 0x12) {
@@ -6424,7 +6428,7 @@ static inline void ftCo_CpuUpdateCommonItemTarget(Fighter* fp)
         if (fp->x2168 != 0) {
             data->x4C = NULL;
         } else {
-            data->x4C = ftCo_800A5F4C(fp, It_Kind_L_Gun_Ray);
+            data->x4C = ftCo_800A5F4C(fp, It_Kind_Common_End);
         }
     }
 }
@@ -6806,7 +6810,7 @@ static inline void ftCo_CpuUpdateFoodItemTarget(Fighter* fp, bool* is_food)
     if (fp->x2168 != 0) {
         data->x4C = NULL;
     } else {
-        data->x4C = ftCo_800A5F4C(fp, It_Kind_L_Gun_Ray);
+        data->x4C = ftCo_800A5F4C(fp, It_Kind_Common_End);
     }
 }
 

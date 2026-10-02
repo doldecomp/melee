@@ -175,7 +175,7 @@ void ftAnim_8006E054(Fighter* fp, HSD_JObj* jobj, HSD_JObj* arg2,
                 HSD_JObjAnim(jobj);
                 fp->x698 = fp->x68C_transNPos;
                 HSD_JObjGetTranslation(jobj, &fp->x68C_transNPos);
-                if (!fp->x594_b6) {
+                if (!fp->x594.x0.x594_b6) {
                     float temp_f1 = ftCommon_GetModelScale(fp);
                     fp->x68C_transNPos.x *= temp_f1;
                     fp->x68C_transNPos.y *= temp_f1;
@@ -191,13 +191,13 @@ void ftAnim_8006E054(Fighter* fp, HSD_JObj* jobj, HSD_JObj* arg2,
                               &fp->x6A4_transNOffset);
                 HSD_JObjSetTranslate(jobj, &sp50);
             }
-        } else if (fp->x594_b5 && jobj == arg3) {
+        } else if (fp->x594.x0.x594_b5 && jobj == arg3) {
             if (jobj != NULL) {
                 sp44.x = sp44.y = sp44.z = 0.0F;
                 HSD_JObjAnim(jobj);
                 fp->x6CC = fp->x6C0;
                 HSD_JObjGetTranslation(jobj, &fp->x6C0);
-                if (!fp->x594_b6) {
+                if (!fp->x594.x0.x594_b6) {
                     float temp_f1_3 = ftCommon_GetModelScale(fp);
                     fp->x6C0.x *= temp_f1_3;
                     fp->x6C0.y *= temp_f1_3;
@@ -236,7 +236,7 @@ void ftAnim_8006E054(Fighter* fp, HSD_JObj* jobj, HSD_JObj* arg2,
             }
         }
     }
-    if (fp->x594_b5) {
+    if (fp->x594.x0.x594_b5) {
         sp5C.x = fp->x68C_transNPos.x - fp->x6C0.x;
         sp5C.y = fp->x68C_transNPos.y - fp->x6C0.y;
         sp5C.z = fp->x68C_transNPos.z - fp->x6C0.z;
@@ -251,7 +251,7 @@ void ftAnim_8006E054(Fighter* fp, HSD_JObj* jobj, HSD_JObj* arg2,
         ftCommon_GetModelScale(fp);
         HSD_JObjGetTranslation(jobj, &sp2C);
         sp38 = fp->x68C_transNPos;
-        if (!fp->x594_b6) {
+        if (!fp->x594.x0.x594_b6) {
             scale_inline(ftCommon_GetModelScale(fp), &sp38);
         } else {
             scale_inline(fp->co_attrs.model_scaling, &sp38);
@@ -272,16 +272,16 @@ void ftAnim_8006E7B8(Fighter* fp, Fighter_Part part)
     HSD_AObjInitEndCallBack();
     i = part;
     temp_r30 = fp->parts[part].joint;
-    temp_r27 = fp->parts[part].xC;
+    temp_r27 = fp->parts[part].xC_u.x0.xC;
     jobj = temp_r30;
     while (jobj != NULL) {
-        while (!fp->parts[i].flags_b1) {
+        while (!fp->parts[i].x8.x0.flags_b1) {
             i++;
         }
-        if (fp->parts[i].xC <= temp_r27 && i != part) {
+        if (fp->parts[i].xC_u.x0.xC <= temp_r27 && i != part) {
             break;
         }
-        if (!fp->parts[i].flags_b0 && !fp->parts[i].flags_b5) {
+        if (!fp->parts[i].x8.x0.flags_b0 && !fp->parts[i].x8.x0.flags_b5) {
             HSD_JObjAnim(jobj);
         }
         i++;
@@ -329,7 +329,7 @@ void ftAnim_8006E9B4(Fighter_GObj* gobj)
     jobj = GET_JOBJ(gobj);
     if (fp->x8A4_animBlendFrames == 0.0F) {
         HSD_JObjClearFlagsAll(jobj, JOBJ_USE_QUATERNION);
-        if (fp->x594_b0) {
+        if (fp->x594.x0.x594_b0) {
             ftAnim_8006E054(
                 fp, jobj,
                 fp->parts[ftParts_GetBoneIndex(fp, FtPart_TransN)].joint,
@@ -352,7 +352,7 @@ void ftAnim_8006E9B4(Fighter_GObj* gobj)
             blend_t_inv = 1.0F - blend_t;
         }
         ftAnim_8006E7B8(fp, FtPart_TopN);
-        if (fp->x594_b0) {
+        if (fp->x594.x0.x594_b0) {
             ftAnim_8006E054(
                 fp, anim_jobj,
                 fp->parts[ftParts_GetBoneIndex(fp, FtPart_TransN)].x4_jobj2,
@@ -367,7 +367,7 @@ void ftAnim_8006E9B4(Fighter_GObj* gobj)
         }
     }
 
-    if (fp->x594_b2) {
+    if (fp->x594.x0.x594_b2) {
         if (ftAnim_8006F3DC(gobj) < fp->cur_anim_frame) {
             fp->x898_unk += fp->cur_anim_frame + fp->frame_speed_mul;
         }
@@ -401,7 +401,7 @@ void ftAnim_8006EBE8(HSD_GObj* gobj, float anim_start, float anim_rate,
         ftAnim_8006FA58(fp, FtPart_TransN, fp->x108_costume_joint->child);
         ftAnim_8006FE08(fp, false);
         ftAnim_80070710(root_jobj, anim_start);
-        if (fp->x594_b1_loop) {
+        if (fp->x594.x0.x594_b1_loop) {
             HSD_ForeachAnim(root_jobj, JOBJ_TYPE, mask, HSD_AObjSetFlags,
                             AOBJ_ARG_AU, AOBJ_LOOP);
         }
@@ -412,7 +412,7 @@ void ftAnim_8006EBE8(HSD_GObj* gobj, float anim_start, float anim_rate,
         ftAnim_8006FE08(fp, true);
         ftAnim_80070710(anim_jobj, anim_start);
         ftAnim_80070710(root_jobj, anim_start);
-        if (fp->x594_b1_loop) {
+        if (fp->x594.x0.x594_b1_loop) {
             HSD_ForeachAnim(anim_jobj, JOBJ_TYPE, mask, HSD_AObjSetFlags,
                             AOBJ_ARG_AU, AOBJ_LOOP);
             HSD_ForeachAnim(root_jobj, JOBJ_TYPE, mask, HSD_AObjSetFlags,
@@ -473,7 +473,7 @@ void ftAnim_8006EED4(Fighter* fp, Fighter_Part arg1, FigaTree* arg2,
     ftAnim_8006F954(fp, arg1, 1, arg2);
     ftAnim_80070710(temp_r26, frame);
     ftAnim_80070710(temp_r31, frame);
-    if (fp->x594_b1_loop) {
+    if (fp->x594.x0.x594_b1_loop) {
         HSD_ForeachAnim(temp_r26, JOBJ_TYPE, 0xFB7F, HSD_AObjSetFlags,
                         AOBJ_ARG_AU, AOBJ_LOOP);
         HSD_ForeachAnim(temp_r31, JOBJ_TYPE, 0xFB7F, HSD_AObjSetFlags,
@@ -519,16 +519,18 @@ bool ftAnim_IsFramesRemaining(Fighter_GObj* gobj)
 
     if (fp->x8A4_animBlendFrames == 0.0F) {
         for (i = 0; i < ftPartsTable[fp->kind]->parts_num; i++) {
-            if (fp->parts[i].flags_b1 && !fp->parts[i].flags_b0 &&
-                !fp->parts[i].flags_b5 && lb_8000B074(fp->parts[i].joint))
+            if (fp->parts[i].x8.x0.flags_b1 && !fp->parts[i].x8.x0.flags_b0 &&
+                !fp->parts[i].x8.x0.flags_b5 &&
+                lb_8000B074(fp->parts[i].joint))
             {
                 return true;
             }
         }
     } else {
         for (i = 0; i < ftPartsTable[fp->kind]->parts_num; i++) {
-            if (fp->parts[i].flags_b1 && !fp->parts[i].flags_b0 &&
-                !fp->parts[i].flags_b5 && lb_8000B074(fp->parts[i].x4_jobj2))
+            if (fp->parts[i].x8.x0.flags_b1 && !fp->parts[i].x8.x0.flags_b0 &&
+                !fp->parts[i].x8.x0.flags_b5 &&
+                lb_8000B074(fp->parts[i].x4_jobj2))
             {
                 return true;
             }
@@ -556,8 +558,8 @@ float ftAnim_8006F3DC(Fighter_GObj* fighter_gobj)
     if (fp->x8A4_animBlendFrames == 0.0F) {
         int i;
         for (i = 0; i < ftPartsTable[fp->kind]->parts_num; i++) {
-            if (fp->parts[i].flags_b1 && !fp->parts[i].flags_b0 &&
-                !fp->parts[i].flags_b5)
+            if (fp->parts[i].x8.x0.flags_b1 && !fp->parts[i].x8.x0.flags_b0 &&
+                !fp->parts[i].x8.x0.flags_b5)
             {
                 HSD_AObj* aobj = fp->parts[i].joint->aobj;
                 if (aobj != 0) {
@@ -602,14 +604,14 @@ void ftAnim_8006F4C8(Fighter* fp, bool do_blending, FigaTree* tree)
     cur_node = tree->nodes;
     cur_track = tree->tracks;
 
-    flags = fp->x594_bits;
+    flags = fp->x594.x0_1.x594_bits;
 
     while (*cur_node != -1) {
-        while (!fp->parts[i].flags_b1) {
+        while (!fp->parts[i].x8.x0.flags_b1) {
             i++;
         }
         while (1) {
-            if (!fp->parts[i].flags_b2) {
+            if (!fp->parts[i].x8.x0.flags_b2) {
                 break;
             }
             temp_r3 = ftParts_8007506C(fp->kind, i);
@@ -622,7 +624,7 @@ void ftAnim_8006F4C8(Fighter* fp, bool do_blending, FigaTree* tree)
             HSD_ASSERTREPORT(767, 0, "atree data error! player %d\n",
                              fp->player_idx);
         }
-        if (!fp->parts[i].flags_b0 && !fp->parts[i].flags_b5) {
+        if (!fp->parts[i].x8.x0.flags_b0 && !fp->parts[i].x8.x0.flags_b5) {
             HSD_JObj* jobj = get_part_joint(fp, i, do_blending);
             lbAnim_8001E6D8(jobj, tree, cur_track, *cur_node);
         }
@@ -651,10 +653,10 @@ void ftAnim_8006F628(Fighter* fp, Fighter_Part part, bool do_blending)
     i = 0;
     tree = fp->x590;
     cur_node = tree->nodes;
-    x594_bits = fp->x594_bits;
+    x594_bits = fp->x594.x0_1.x594_bits;
     cur_track = tree->tracks;
-    kind = fp->x597_bits;
-    temp_r25 = fp->parts[part].xC;
+    kind = fp->x594.x0_1.x597_bits;
+    temp_r25 = fp->parts[part].xC_u.x0.xC;
 
     while (i < part) {
         temp_r3 = ftParts_8007506C(kind, i);
@@ -671,18 +673,19 @@ void ftAnim_8006F628(Fighter* fp, Fighter_Part part, bool do_blending)
             }
             i++;
         }
-        if (fp->parts[i].xC <= temp_r25 && i != part) {
+        if (fp->parts[i].xC_u.x0.xC <= temp_r25 && i != part) {
             break;
         }
 
         {
             int tmp = ftPartsRemap(fp->kind, kind, i);
             if (tmp != 0xFFU) {
-                if (fp->parts[tmp].flags_b1 && !fp->parts[tmp].flags_b0 &&
-                    !fp->parts[tmp].flags_b5)
+                if (fp->parts[tmp].x8.x0.flags_b1 &&
+                    !fp->parts[tmp].x8.x0.flags_b0 &&
+                    !fp->parts[tmp].x8.x0.flags_b5)
                 {
                     HSD_JObj* jobj = get_part_joint(fp, tmp, do_blending);
-                    if (fp->parts[tmp].flags_b3) {
+                    if (fp->parts[tmp].x8.x0.flags_b3) {
                         lbAnim_8001E6D8(jobj, tree, cur_track, *cur_node);
                     } else {
                         lbAnim_8001E7E8(jobj, tree, cur_track, *cur_node);
@@ -709,8 +712,8 @@ void ftAnim_8006F7C8(Fighter* ft, Fighter_Part part, int arg2, FigaTree* tree)
 
     nodes = tree->nodes;
     tracks = tree->tracks;
-    r29 = ft->x594_bits;
-    r27 = ft->parts[part].xC;
+    r29 = ft->x594.x0_1.x594_bits;
+    r27 = ft->parts[part].xC_u.x0.xC;
 
     for (i = 0; i < part; i++) {
         u32 r3 = ftParts_8007506C(ft->kind, i);
@@ -726,7 +729,7 @@ void ftAnim_8006F7C8(Fighter* ft, Fighter_Part part, int arg2, FigaTree* tree)
         FighterBone* r3 = &ft->parts[r22];
         int r21;
 
-        while (!r3->flags_b1) {
+        while (!r3->x8.x0.flags_b1) {
             r3 += 1;
             i += 1;
             r22 += 1;
@@ -736,7 +739,7 @@ void ftAnim_8006F7C8(Fighter* ft, Fighter_Part part, int arg2, FigaTree* tree)
 
         while (true) {
             u32 r3;
-            if (!ft->parts[r21].flags_b2) {
+            if (!ft->parts[r21].x8.x0.flags_b2) {
                 break;
             }
 
@@ -750,11 +753,11 @@ void ftAnim_8006F7C8(Fighter* ft, Fighter_Part part, int arg2, FigaTree* tree)
             r22 += 1;
         }
 
-        if (ft->parts[r22].xC <= r27 && i != part) {
+        if (ft->parts[r22].xC_u.x0.xC <= r27 && i != part) {
             break;
         }
 
-        if (!ft->parts[r22].flags_b0 && !ft->parts[r22].flags_b5) {
+        if (!ft->parts[r22].x8.x0.flags_b0 && !ft->parts[r22].x8.x0.flags_b5) {
             HSD_JObj* r3;
             if (arg2) {
                 r3 = ft->parts[r22].x4_jobj2;
@@ -774,7 +777,7 @@ void ftAnim_8006F7C8(Fighter* ft, Fighter_Part part, int arg2, FigaTree* tree)
 void ftAnim_8006F954(Fighter* fp, Fighter_Part part, bool do_blending,
                      FigaTree* unused)
 {
-    if (fp->kind != fp->x597_bits) {
+    if (fp->kind != fp->x594.x0_1.x597_bits) {
         ftAnim_8006F628(fp, part, do_blending);
     } else {
         ftAnim_8006F7C8(fp, part, do_blending, fp->x590);
@@ -809,16 +812,16 @@ void ftAnim_8006FA58(Fighter* fp, Fighter_Part part, HSD_Joint* joint)
             i++;
         }
         if (i == fp->ft_data->x8->x10) {
-            if (fp->parts[i].flags_b0) {
+            if (fp->parts[i].x8.x0.flags_b0) {
                 lb_8000B760(fp->parts[i].joint, joint);
-            } else if (!fp->parts[i].flags_b5) {
+            } else if (!fp->parts[i].x8.x0.flags_b5) {
                 lb_8000B5DC(fp->parts[i].joint, joint);
             }
             ftCommon_8007F6A4(fp, fp->parts[i].joint);
         } else {
-            if (fp->parts[i].flags_b0) {
+            if (fp->parts[i].x8.x0.flags_b0) {
                 lb_8000B6A4(fp->parts[i].joint, joint);
-            } else if (!fp->parts[i].flags_b5) {
+            } else if (!fp->parts[i].x8.x0.flags_b5) {
                 lb_8000B4FC(fp->parts[i].joint, joint);
             }
         }
@@ -837,18 +840,18 @@ void ftAnim_8006FB88(Fighter* fp, Fighter_Part part, HSD_Joint* joint)
             i++;
         }
         if (i == fp->ft_data->x8->x10) {
-            if (fp->parts[i].flags_b0) {
+            if (fp->parts[i].x8.x0.flags_b0) {
                 lb_8000B760(fp->parts[i].x4_jobj2, joint);
                 HSD_JObjClearFlags(fp->parts[i].x4_jobj2, JOBJ_USE_QUATERNION);
-            } else if (!fp->parts[i].flags_b5) {
+            } else if (!fp->parts[i].x8.x0.flags_b5) {
                 lb_8000B5DC(fp->parts[i].x4_jobj2, joint);
             }
             ftCommon_8007F6A4(fp, fp->parts[i].x4_jobj2);
         } else {
-            if (fp->parts[i].flags_b0) {
+            if (fp->parts[i].x8.x0.flags_b0) {
                 lb_8000B6A4(fp->parts[i].x4_jobj2, joint);
                 HSD_JObjClearFlags(fp->parts[i].x4_jobj2, JOBJ_USE_QUATERNION);
-            } else if (!fp->parts[i].flags_b5) {
+            } else if (!fp->parts[i].x8.x0.flags_b5) {
                 lb_8000B4FC(fp->parts[i].x4_jobj2, joint);
             }
         }
@@ -869,9 +872,9 @@ void ftAnim_8006FCE4(Fighter* fp, bool do_blending)
     i = 0;
     tree = fp->x590;
     cur_node = tree->nodes;
-    x594_bits = fp->x594_bits;
+    x594_bits = fp->x594.x0_1.x594_bits;
     cur_track = tree->tracks;
-    kind = fp->x597_bits;
+    kind = fp->x594.x0_1.x597_bits;
 
     while (*cur_node != -1) {
         int part;
@@ -886,11 +889,12 @@ void ftAnim_8006FCE4(Fighter* fp, bool do_blending)
 
         part = ftPartsRemap(fp->kind, kind, i);
         if (part != 0xFFU) {
-            if (fp->parts[part].flags_b1 && !fp->parts[part].flags_b0 &&
-                !fp->parts[part].flags_b5)
+            if (fp->parts[part].x8.x0.flags_b1 &&
+                !fp->parts[part].x8.x0.flags_b0 &&
+                !fp->parts[part].x8.x0.flags_b5)
             {
                 HSD_JObj* jobj = get_part_joint(fp, part, do_blending);
-                if (fp->parts[part].flags_b3) {
+                if (fp->parts[part].x8.x0.flags_b3) {
                     lbAnim_8001E6D8(jobj, tree, cur_track, *cur_node);
                 } else {
                     lbAnim_8001E7E8(jobj, tree, cur_track, *cur_node);
@@ -906,7 +910,7 @@ void ftAnim_8006FCE4(Fighter* fp, bool do_blending)
 
 void ftAnim_8006FE08(Fighter* fp, bool do_blending)
 {
-    if (fp->kind != fp->x597_bits) {
+    if (fp->kind != fp->x594.x0_1.x597_bits) {
         ftAnim_8006FCE4(fp, do_blending);
     } else {
         ftAnim_8006F4C8(fp, do_blending, fp->x590);
@@ -926,10 +930,10 @@ void ftAnim_8006FE9C(Fighter* fp, Fighter_Part start, float t, float t_inv)
 {
     int i;
     for (i = start; i < ftPartsTable[fp->kind]->parts_num; i++) {
-        if (fp->parts[i].flags_b1 && !fp->parts[i].flags_b0 &&
-            !fp->parts[i].flags_b5)
+        if (fp->parts[i].x8.x0.flags_b1 && !fp->parts[i].x8.x0.flags_b0 &&
+            !fp->parts[i].x8.x0.flags_b5)
         {
-            if (fp->parts[i].flags_b4) {
+            if (fp->parts[i].x8.x0.flags_b4) {
                 lbCopyJObjSRT(fp->parts[i].x4_jobj2, fp->parts[i].joint);
             } else {
                 lb_8000C490(fp->parts[i].x4_jobj2, fp->parts[i].joint,
@@ -943,8 +947,8 @@ void ftAnim_8006FF74(Fighter* fp, Fighter_Part start)
 {
     int i;
     for (i = start; i < ftPartsTable[fp->kind]->parts_num; i++) {
-        if (fp->parts[i].flags_b1 && !fp->parts[i].flags_b0 &&
-            !fp->parts[i].flags_b5)
+        if (fp->parts[i].x8.x0.flags_b1 && !fp->parts[i].x8.x0.flags_b0 &&
+            !fp->parts[i].x8.x0.flags_b5)
         {
             lbCopyJObjSRT(fp->parts[i].x4_jobj2, fp->parts[i].joint);
         }
@@ -961,8 +965,8 @@ void ftAnim_80070010(Fighter* fp, Fighter_Part start, float t, float t_inv,
         while (ftParts_8007506C(fp->kind, i) != 0) {
             i++;
         }
-        if (!fp->parts[i].flags_b0 && !fp->parts[i].flags_b5) {
-            if (fp->parts[i].flags_b4) {
+        if (!fp->parts[i].x8.x0.flags_b0 && !fp->parts[i].x8.x0.flags_b5) {
+            if (fp->parts[i].x8.x0.flags_b4) {
                 lb_8000B4FC(fp->parts[i].joint, joint);
             } else {
                 lb_8000C868(joint, fp->parts[i].joint, fp->parts[i].joint, t,
@@ -985,8 +989,8 @@ void ftAnim_80070108(Fighter* fp, Fighter_Part start, float t, float t_inv,
             i++;
         }
 
-        if (!fp->parts[i].flags_b0 && !fp->parts[i].flags_b5) {
-            if (fp->parts[i].flags_b4) {
+        if (!fp->parts[i].x8.x0.flags_b0 && !fp->parts[i].x8.x0.flags_b5) {
+            if (fp->parts[i].x8.x0.flags_b4) {
                 lb_8000B4FC(fp->parts[i].x4_jobj2, joint);
             } else {
                 lb_8000C868(joint, fp->parts[i].x4_jobj2,
@@ -1031,7 +1035,7 @@ void ftAnim_80070308(Fighter_GObj* fighter_gobj)
     ftAnim_80070200(fp, &fp->ft_data->x8->x8, &fp->tobj_list, &fp->dobj_list);
 }
 
-extern struct {
+extern struct ftData_UnkCallbackPairs0_t {
     HSD_GObjEvent x0;
     void (*x4)(Fighter_GObj*, int, float frame);
 } ftData_UnkCallbackPairs0[Ft_Kind_Max];
@@ -1145,7 +1149,7 @@ void ftAnim_800707B0(Fighter_GObj* arg0)
             }
             for (j = 0; j < temp_r26->x2; j++) {
                 int temp_r0 = var_r29[j];
-                if (fp->parts[temp_r0].flags_b5) {
+                if (fp->parts[temp_r0].x8.x0.flags_b5) {
                     if (var_f29) {
                         temp_r3 = &fp->parts[temp_r0];
                         lb_8000C490(temp_r3->x4_jobj2, temp_r3->joint,
@@ -1169,13 +1173,13 @@ void ftAnim_80070904(Fighter* fp, Fighter_Part start, HSD_AnimJoint* animjoint)
         while (ftParts_8007506C(fp->kind, i) != 0) {
             i++;
         }
-        if (!fp->parts[i].flags_b0 && animjoint->aobjdesc != NULL) {
+        if (!fp->parts[i].x8.x0.flags_b0 && animjoint->aobjdesc != NULL) {
             HSD_JObj* jobj = fp->parts[i].x4_jobj2;
             HSD_JObjAddAnim(jobj, animjoint, NULL, NULL);
             HSD_JObjClearFlags(jobj, 0x20000);
             HSD_JObjReqAnimByFlags(jobj, 1, 0.0F);
             HSD_JObjAnim(jobj);
-            fp->parts[i].flags_b5 = true;
+            fp->parts[i].x8.x0.flags_b5 = true;
         }
         i++;
         ftAnim_GetNextAnimJointInTree(&animjoint, &sp14);
@@ -1195,8 +1199,8 @@ void ftAnim_80070A10(Fighter* ft, Fighter_Part part, FigaTree* tree)
 
     nodes = tree->nodes;
     tracks = tree->tracks;
-    r29 = ft->x594_bits;
-    r27 = ft->parts[part].xC;
+    r29 = ft->x594.x0_1.x594_bits;
+    r27 = ft->parts[part].xC_u.x0.xC;
 
     for (i = 0; i < part; i++) {
         u32 r3 = ftParts_8007506C(ft->kind, i);
@@ -1212,7 +1216,7 @@ void ftAnim_80070A10(Fighter* ft, Fighter_Part part, FigaTree* tree)
         FighterBone* r3 = &ft->parts[r22];
         int r21;
 
-        while (!r3->flags_b1) {
+        while (!r3->x8.x0.flags_b1) {
             r3 += 1;
             i += 1;
             r22 += 1;
@@ -1222,7 +1226,7 @@ void ftAnim_80070A10(Fighter* ft, Fighter_Part part, FigaTree* tree)
 
         while (true) {
             u32 r3;
-            if (!ft->parts[r21].flags_b2) {
+            if (!ft->parts[r21].x8.x0.flags_b2) {
                 break;
             }
 
@@ -1236,11 +1240,11 @@ void ftAnim_80070A10(Fighter* ft, Fighter_Part part, FigaTree* tree)
             r22 += 1;
         }
 
-        if (ft->parts[r22].xC <= r27 && i != part) {
+        if (ft->parts[r22].xC_u.x0.xC <= r27 && i != part) {
             break;
         }
 
-        if (!ft->parts[r22].flags_b0 && !ft->parts[r22].flags_b5) {
+        if (!ft->parts[r22].x8.x0.flags_b0 && !ft->parts[r22].x8.x0.flags_b5) {
             HSD_JObj* r3 = ft->parts[r22].x4_jobj2;
             lbAnim_8001E6D8(r3, tree, tracks, *nodes);
         }
@@ -1290,8 +1294,8 @@ static inline void some_inline(Fighter* fp, int start,
             i++;
         }
 
-        if (fp->parts[i].flags_b5) {
-            fp->parts[i].flags_b5 = false;
+        if (fp->parts[i].x8.x0.flags_b5) {
+            fp->parts[i].x8.x0.flags_b5 = false;
         }
 
         i++;
@@ -1350,7 +1354,7 @@ void ftAnim_80070F28(HSD_GObj* gobj)
 
             for (j = 0; j < data->x2; j++) {
                 u8 part_idx = parts_list[j];
-                fp->parts[part_idx].flags_b5 = false;
+                fp->parts[part_idx].x8.x0.flags_b5 = false;
             }
             slot->x11 = -1;
         }

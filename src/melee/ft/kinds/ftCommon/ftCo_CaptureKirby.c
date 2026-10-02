@@ -45,8 +45,8 @@ void ftCo_800BD1DC(Fighter_GObj* gobj, Fighter_GObj* victim_gobj)
     ftCo_ReleaseItemAndVictim(gobj);
     fp->x1A5C = victim_gobj;
     fp->victim_gobj = victim_gobj;
-    fp->x221B_b5 = false;
-    fp->x221B_b7 = false;
+    fp->x221B.x221B_b5 = false;
+    fp->x221B.x221B_b7 = false;
     fp->facing_dir = -victim_fp->facing_dir;
     Fighter_ChangeMotionState(gobj, ftCo_MS_CaptureKirby, Ft_MF_None, 0, 1, 0,
                               NULL);
@@ -69,6 +69,11 @@ void ftCo_CaptureKirby_Phys(HSD_GObj* gobj) {}
 
 void ftCo_CaptureKirby_Coll(HSD_GObj* gobj) {}
 
+struct inlineB0_scale_pad {
+    u8 pad[8];
+    Vec3 scale;
+};
+
 static inline void inlineB0(Fighter_GObj* gobj, Vec3* pos)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -76,10 +81,7 @@ static inline void inlineB0(Fighter_GObj* gobj, Vec3* pos)
     float dist = lbVector_Len(pos);
     float mv_x8_x = fp->mv.co.capturekirby.x8.x;
     if (dist < mv_x8_x) {
-        struct {
-            u8 pad[8];
-            Vec3 scale;
-        } scale_pad;
+        struct inlineB0_scale_pad scale_pad;
         float f;
 
         f = dist / mv_x8_x;

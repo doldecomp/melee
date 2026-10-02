@@ -196,7 +196,7 @@ void grTest_80207404(Ground_GObj* gobj) {}
 
 void grTest_80207408(Ground_GObj* gobj) {}
 
-struct DynamicsDesc* grTest_8020740C(enum_t unused)
+lbColl_80008D30_arg1* grTest_8020740C(enum_t unused)
 {
     return NULL;
 }

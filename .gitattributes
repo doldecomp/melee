@@ -1,25 +1,21 @@
-# Auto detect text files and perform LF normalization
+# Auto-detect text files and normalize line endings to native line endings for the platform
 * text=auto
 
-# Enforce Unix-style line endings.
-text eol=lf
+# Force strict Unix-style line endings (LF) for shell scripts and dtk config.
+*.sh text eol=lf
+config/**/*.txt text eol=lf
 
-# Always use CRLF for Windows batch scripts
-*.bat  text eol=crlf
-# Never use CRLF for Unix bash scripts
-*.sh -crlf
+# Always use CRLF for Windows batch scripts.
+*.bat text eol=crlf
 
-# decomp-toolkit writes files with LF
-config/**/*.txt  text eol=lf
-
-# Explicitly declare text files you want to always be normalized and converted
-# to native line endings on checkout.
+# Explicitly declare source/build files as text to ensure Git normalizes them.
 *.c text
 *.h text
 *.s text
 *.py text
 *.mk text
 Makefile text
+Doxyfile text
 
 # Denote all files that are truly binary and should not be modified.
 *.png binary

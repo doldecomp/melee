@@ -127,7 +127,7 @@ bool ftCo_800C3538(Fighter_GObj* gobj)
     if (fp->x2222_b2) {
         return false;
     }
-    switch (fp->x2070.x2071_b0_3) {
+    switch (fp->x2070.x0.x2071_b0_3) {
     case 9:
     case 10:
     case 11:

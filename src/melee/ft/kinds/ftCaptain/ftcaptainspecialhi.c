@@ -4,8 +4,6 @@
 
 #include <melee/ft/forward.h>
 
-#include <math.h>
-
 #include "types.h"
 #include <dolphin/mtx.h>
 #include <melee/ft/fighter.h>
@@ -205,15 +203,16 @@ void ftCa_SpecialLw_800E5128(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     Fighter* vic_fp = GET_FIGHTER(fp->victim_gobj);
-    Fighter_ChangeMotionState(gobj, ftCa_MS_SpecialHiCatch, 2, 0, 1, 0, NULL);
+    Fighter_ChangeMotionState(gobj, ftCa_MS_SpecialHiCatch, Ft_MF_KeepGfx, 0,
+                              1, 0, NULL);
     fp->x2222_b2 = true;
     ftCommon_8007E2F4(fp, 511);
     ftCommon_8007E2FC(gobj);
     if (vic_fp->ground_or_air == GA_Air) {
-        fp->x221B_b7 = false;
+        fp->x221B.x221B_b7 = false;
     } else {
         ftCo_800DB368(vic_fp, fp);
-        fp->x221B_b7 = true;
+        fp->x221B.x221B_b7 = true;
         fp->accessory4_cb = ftCa_SpecialLw_800E550C;
     }
 }
@@ -233,7 +232,7 @@ void ftCa_SpecialHiCatch_Phys(HSD_GObj* gobj) {}
 
 void ftCa_SpecialHiCatch_Coll(HSD_GObj* gobj)
 {
-    if (!GET_FIGHTER(gobj)->x221B_b7) {
+    if (!GET_FIGHTER(gobj)->x221B.x221B_b7) {
         ft_80083B68(gobj);
     }
 }

@@ -1,7 +1,5 @@
 #include "it_2725.h"
 
-#include <math.h>
-
 #include "inlines.h"
 #include "it_26B1.h"
 #include "it_279C.h"
@@ -40,7 +38,7 @@ void it_80272560(Item_GObj* item_gobj, s32 idx)
 
     item = item_gobj->user_data;
     lbColl_80008428(&item->x5D4_hitboxes[idx].hit);
-    item->xDAA_flag.b2 = false;
+    item->xDAA.xDAA_flag.x0.b2 = false;
 
     it_8027129C_by_4(item_gobj);
 }
@@ -56,7 +54,7 @@ void it_802725D4(Item_GObj* item_gobj)
         it_8027129C(item_gobj, i);
     }
     item->xDC8_word.flags.x16 = 0;
-    item->xDAA_flag.b2 = 0;
+    item->xDAA.xDAA_flag.x0.b2 = 0;
 }
 
 void it_80272674(Item_GObj* item_gobj, s32 idx)
@@ -77,7 +75,7 @@ void it_80272674(Item_GObj* item_gobj, s32 idx)
         lb_8000B1CC(hitbox->jobj, &hitbox->b_offset, &hitbox->x4C);
         hitbox->x58 = hitbox->x4C;
         hitbox->state = HitCapsule_Unk2;
-        item->xDAA_flag.b2 = 1;
+        item->xDAA.xDAA_flag.x0.b2 = 1;
         return;
     case HitCapsule_Unk2:
         hitbox->state = HitCapsule_Unk3;
@@ -420,7 +418,7 @@ void it_80273168(Item_GObj* item_gobj)
     Item* item;
 
     item = item_gobj->user_data;
-    if (!(item->xDCD_flag.b2)) {
+    if (!(item->xDCD_flag.x0.b2)) {
         Item_8026AE84(item, item->xD70, 0x7F, 0x40);
     }
 }
@@ -430,7 +428,7 @@ void it_802731A4(Item_GObj* item_gobj)
     Item* item;
 
     item = item_gobj->user_data;
-    if (!(item->xDCD_flag.b2)) {
+    if (!(item->xDCD_flag.x0.b2)) {
         Item_8026AE84(item, item->xD78, 0x7F, 0x40);
     }
 }
@@ -440,7 +438,7 @@ void it_802731E0(Item_GObj* item_gobj)
     Item* item;
 
     item = item_gobj->user_data;
-    if (!(item->xDCD_flag.b2)) {
+    if (!(item->xDCD_flag.x0.b2)) {
         Item_8026AE84(item, item->xD74, 0x7F, 0x40);
     }
 }
@@ -450,7 +448,7 @@ void it_8027321C(Item_GObj* item_gobj)
     Item* item;
 
     item = item_gobj->user_data;
-    if (!item->xDCD_flag.b2) {
+    if (!item->xDCD_flag.x0.b2) {
         if (item->kind == It_Kind_Unk4) {
             lbAudioAx_80023870(item->xD84, 0x7F, 0x40, 0x9A);
             return;
@@ -467,7 +465,7 @@ void it_8027327C(Item_GObj* item_gobj, enum_t ID1, enum_t ID2)
     if (ID1 != -1) {
         it_802787B4(item_gobj, ID1);
     }
-    if (!item->xDCD_flag.b2) {
+    if (!item->xDCD_flag.x0.b2) {
         it_802732E4(item, ID2);
         if (ID2 == 0x12F) {
             lbAudioAx_80024DC4(ID2);
@@ -477,7 +475,7 @@ void it_8027327C(Item_GObj* item_gobj, enum_t ID1, enum_t ID2)
 
 void it_802732E4(Item* item, s32 arg1)
 {
-    if (!item->xDCD_flag.b2) {
+    if (!item->xDCD_flag.x0.b2) {
         Item_8026AE84(item, arg1, 0x7F, 0x40);
     }
 }
@@ -605,9 +603,11 @@ void it_80273670(Item_GObj* item_gobj, int arg1, f32 arg8)
     }
     HSD_JObjAnimAll(item_jobj1);
     HSD_JObjRemoveAnimAll(item_jobj1);
-    item->x524_cmd.u = NULL;
+    item->x524_cmd.x8.u = NULL;
 }
 
+/// @todo: Looks like a bunch of code is shared with it_80273B50 that could be
+/// reused
 void it_80273748(Item_GObj* item_gobj, Vec3* pos, Vec3* vel)
 {
     Item* item;
@@ -674,10 +674,10 @@ void it_80273748(Item_GObj* item_gobj, Vec3* pos, Vec3* vel)
         dir_radians = M_PI_2 * item->facing_dir;
         HSD_JObjSetRotationY(jobj, dir_radians);
     }
-    if (((itIsHeavy(item_gobj) == 1) &&
-         (hold_kind = item->hold_kind, (hold_kind != 4)) &&
-         (hold_kind != 6)) ||
-        (item->hold_kind == 8))
+    if (((itIsHeavy(item_gobj) == true) &&
+         (hold_kind = item->hold_kind, (hold_kind != ITEM_HOLD_4)) &&
+         (hold_kind != ITEM_HOLD_6)) ||
+        (item->hold_kind == ITEM_HOLD_8))
     {
         jobj2 = it_80272C90(item_gobj);
         HSD_JObjGetTranslation(jobj2, &sp3C);
@@ -781,10 +781,10 @@ void it_80273B50(Item_GObj* item_gobj, Vec3* vel)
         dir_radians = M_PI_2 * item->facing_dir;
         HSD_JObjSetRotationY(item_jobj1, dir_radians);
     }
-    if (((itIsHeavy(item_gobj) == 1) &&
-         (hold_kind = item->hold_kind, (hold_kind != 4)) &&
-         (hold_kind != 6)) ||
-        (item->hold_kind == 8))
+    if (((itIsHeavy(item_gobj) == true) &&
+         (hold_kind = item->hold_kind, (hold_kind != ITEM_HOLD_4)) &&
+         (hold_kind != ITEM_HOLD_6)) ||
+        (item->hold_kind == ITEM_HOLD_8))
     {
         jobj = it_80272C90(item_gobj);
         HSD_JObjGetTranslation(jobj, &sp40);
@@ -944,12 +944,12 @@ void it_802742F4(Item_GObj* item_gobj, HSD_GObj* gobj, Fighter_Part ftpart)
         it_8026B3A8(item_gobj);
         db_80225DD8(item_gobj, (Fighter_GObj*) gobj);
     }
-    if (item->xDD0_flag.b6) {
-        item->xDD0_flag.b6 = 0;
+    if (item->xDD0_flag.x0.b6) {
+        item->xDD0_flag.x0.b6 = 0;
         item->xD40 = 0.0f;
         it_80279BBC(item);
     }
-    if (item->kind < It_Kind_L_Gun_Ray) { // If a common item
+    if (item->kind < It_Kind_Common_End) { // If a common item
         it_80275158(item_gobj, it_804D6D28->x30_lifetime);
     }
     it_80274F48(item_gobj,
@@ -1174,8 +1174,8 @@ void it_80274C88(Item_GObj* item_gobj)
     Item* item;
 
     item = item_gobj->user_data;
-    item->xDD0_flag.b0 = 0;
-    item->xDAA_flag.b3 = 0;
+    item->xDD0_flag.x0.b0 = 0;
+    item->xDAA.xDAA_flag.x0.b3 = 0;
 }
 
 void it_80274CAC(Item_GObj* item_gobj)
@@ -1183,9 +1183,9 @@ void it_80274CAC(Item_GObj* item_gobj)
     Item* item;
 
     item = item_gobj->user_data;
-    item->xDD0_flag.b0 = 1;
+    item->xDD0_flag.x0.b0 = 1;
     if (db_ShowEnemyStompRange() != 0) {
-        item->xDAA_flag.b3 = 1;
+        item->xDAA.xDAA_flag.x0.b3 = 1;
     }
 }
 
@@ -1292,7 +1292,7 @@ void it_80274F10(Item_GObj* item_gobj)
 void it_80274F28(Item* item, s8 arg1, HSD_GObjEvent arg2,
                  HSD_GObjInteraction arg3)
 {
-    item->xDD0_flag.b5 = 1;
+    item->xDD0_flag.x0.b5 = 1;
     item->xD08 = arg1;
     item->grab_dealt = arg2;
     item->grabbed_for_victim = arg3;
@@ -1378,8 +1378,8 @@ void it_8027518C(Item_GObj* item_gobj)
 
     item = item_gobj->user_data;
     item->xD44_lifeTimer = it_804D6D28->xF8;
-    item->xDCF_flag.b2 = 1;
-    item->xDD1_flag.b0 = 1;
+    item->xDCF_flag.x0.b2 = 1;
+    item->xDD1_flag.x0.b0 = 1;
     it_8026BDB4(item_gobj);
 }
 
@@ -1424,7 +1424,7 @@ void it_80275258(Item_GObj* item_gobj)
     Item* item;
 
     item = item_gobj->user_data;
-    item->xDD0_flag.b4 = 0;
+    item->xDD0_flag.x0.b4 = 0;
 }
 
 void it_80275270(Item_GObj* item_gobj)
@@ -1432,7 +1432,7 @@ void it_80275270(Item_GObj* item_gobj)
     Item* item;
 
     item = item_gobj->user_data;
-    item->xDD0_flag.b4 = 1;
+    item->xDD0_flag.x0.b4 = 1;
 }
 
 void it_80275288(Item_GObj* item_gobj, s32 arg1, s32 arg2)

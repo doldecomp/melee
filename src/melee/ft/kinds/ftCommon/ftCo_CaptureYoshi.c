@@ -16,8 +16,8 @@ void ftCo_800BBB8C(Fighter_GObj* gobj, Fighter_GObj* attacker_gobj)
     ftCo_ReleaseItemAndVictim(gobj);
     fp->x1A5C = attacker_gobj;
     fp->victim_gobj = attacker_gobj;
-    fp->x221B_b5 = false;
-    fp->x221B_b7 = false;
+    fp->x221B.x221B_b5 = false;
+    fp->x221B.x221B_b7 = false;
     fp->facing_dir = -attacker_fp->facing_dir;
     ftCo_800DB368(attacker_fp, fp);
     Fighter_ChangeMotionState(gobj, ftCo_MS_CaptureYoshi, Ft_MF_None, 0, 1, 0,

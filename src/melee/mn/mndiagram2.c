@@ -1073,13 +1073,13 @@ u8 mnDiagram2_GetRankedFighter(u8 stat_type, u8 rank)
 
     for (i = 0; i < SELKIND_COUNT; i++) {
         selkind = mnDiagram_GetFighterByIndex(i);
-        entries[i].idx = selkind;
+        entries[i].x0.idx = selkind;
         if (mn_IsFighterUnlocked(selkind) != 0) {
-            entries[i].xC = mnDiagram2_GetStatValue(0, stat_type, selkind);
-            entries[i].x8 = 0;
+            entries[i].x0.xC = mnDiagram2_GetStatValue(0, stat_type, selkind);
+            entries[i].x0.x8 = 0;
         } else {
-            entries[i].xC = neg1;
-            entries[i].x8 = neg1;
+            entries[i].x0.xC = neg1;
+            entries[i].x0.x8 = neg1;
         }
     }
 
@@ -1089,10 +1089,10 @@ u8 mnDiagram2_GetRankedFighter(u8 stat_type, u8 rank)
         maxIdx = i;
         while (k < SELKIND_COUNT) {
             // Skip entries with -1 value
-            if (entries[k].value != (u64) neg1) {
+            if (entries[k].x0_2.value != (u64) neg1) {
                 // Update if entries[k] > entries[maxIdx] OR entries[i] == -1
-                if (entries[k].value > entries[maxIdx].value ||
-                    entries[i].value == (u64) neg1)
+                if (entries[k].x0_2.value > entries[maxIdx].x0_2.value ||
+                    entries[i].x0_2.value == (u64) neg1)
                 {
                     maxIdx = k;
                 }
@@ -1111,10 +1111,10 @@ u8 mnDiagram2_GetRankedFighter(u8 stat_type, u8 rank)
     }
 
     // Return
-    if (entries[rank].value == (u64) -1) {
+    if (entries[rank].x0_2.value == (u64) -1) {
         return SELKIND_COUNT;
     }
-    return entries[rank].idx;
+    return entries[rank].x0.idx;
 }
 
 /// @brief Returns the name entry at rank N for a given stat type.
@@ -1143,11 +1143,11 @@ u8 mnDiagram2_GetRankedName(u8 stat_type, u8 rank)
     i = 0;
     zero = 0;
     while (i < count) {
-        ptr->idx = mnDiagram_GetNameByIndex(i);
-        ptr->xC =
+        ptr->x0.idx = mnDiagram_GetNameByIndex(i);
+        ptr->x0.xC =
             mnDiagram2_GetStatValue(1, stat_type, mnDiagram_GetNameByIndex(i));
         i++;
-        ptr->x8 = zero;
+        ptr->x0.x8 = zero;
         ptr++;
     }
 
@@ -1156,7 +1156,7 @@ u8 mnDiagram2_GetRankedName(u8 stat_type, u8 rank)
         j = i + 1;
         maxIdx = i;
         while (j < count) {
-            if (entries[maxIdx].value < entries[j].value) {
+            if (entries[maxIdx].x0_2.value < entries[j].x0_2.value) {
                 maxIdx = j;
             }
             j++;
@@ -1176,7 +1176,7 @@ u8 mnDiagram2_GetRankedName(u8 stat_type, u8 rank)
         i++;
     }
 
-    return entries[rank].idx;
+    return entries[rank].x0.idx;
 }
 
 /// @brief Computes aggregated fighter ranking across all saved names for icon
@@ -1206,10 +1206,10 @@ void mnDiagram2_GetAggregatedFighterRank(mnDiagram2_SortEntry* out, u8 type,
     zero = 0;
 
     do {
-        ptr->idx = mnDiagram_GetFighterByIndex(n);
+        ptr->x0.idx = mnDiagram_GetFighterByIndex(n);
         n++;
-        ptr->xC = zero;
-        ptr->x8 = zero;
+        ptr->x0.xC = zero;
+        ptr->x0.x8 = zero;
         ptr++;
     } while (n < SELKIND_COUNT);
 
@@ -1234,8 +1234,8 @@ void mnDiagram2_GetAggregatedFighterRank(mnDiagram2_SortEntry* out, u8 type,
             ptr = base;
             k = 0;
             for (m = SELKIND_COUNT; m > 0; m--) {
-                if (res == ptr->idx) {
-                    entries[k].value += 1;
+                if (res == ptr->x0.idx) {
+                    entries[k].x0_2.value += 1;
                     break;
                 }
                 ptr++;
@@ -1249,7 +1249,7 @@ void mnDiagram2_GetAggregatedFighterRank(mnDiagram2_SortEntry* out, u8 type,
         k = j + 1;
         curr = &entries[k];
         while (k < SELKIND_COUNT) {
-            if (base->value < curr->value) {
+            if (base->x0_2.value < curr->x0_2.value) {
                 temp = *base;
                 *base = *curr;
                 *curr = temp;
@@ -1261,10 +1261,10 @@ void mnDiagram2_GetAggregatedFighterRank(mnDiagram2_SortEntry* out, u8 type,
     }
 
     // Write result to output buffer
-    if (entries[idx].value != 0) {
+    if (entries[idx].x0_2.value != 0) {
         *out = entries[idx];
     } else {
-        entries[idx].idx = SELKIND_COUNT;
+        entries[idx].x0.idx = SELKIND_COUNT;
         *out = entries[idx];
     }
 }

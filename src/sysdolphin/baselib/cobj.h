@@ -3,7 +3,9 @@
 
 #include <Runtime/platform.h>
 
-#include <sysdolphin/baselib/forward.h> // IWYU pragma: export
+#include <sysdolphin/baselib/forward.h>
+
+#include <dat_macros.h> // IWYU pragma: export
 
 #include <dolphin/gx/GXEnum.h>
 #include <dolphin/mtx.h>
@@ -41,26 +43,26 @@ struct HSD_CObj {
     /* +1C */ Scissor scissor;
     /* +24 */ HSD_WObj* eyepos;
     /* +28 */ HSD_WObj* interest;
-    union {
+    union HSD_CObj_u {
         /* +2C */ f32 roll;
         /* +2C */ Vec3 up;
     } u;
     /* +38 */ f32 near;
     /* +3C */ f32 far;
-    union {
-        struct {
+    union HSD_CObj_projection_param {
+        struct HSD_CObj_projection_param_perspective {
             f32 fov;
             f32 aspect;
         } perspective;
 
-        struct {
+        struct HSD_CObj_projection_param_frustum {
             f32 top;
             f32 bottom;
             f32 left;
             f32 right;
         } frustum;
 
-        struct {
+        struct HSD_CObj_projection_param_ortho {
             f32 top;
             f32 bottom;
             f32 left;
@@ -122,11 +124,12 @@ struct HSD_CameraDescPerspective {
 };
 
 union HSD_CObjDesc {
-    char* class_name;
-    HSD_CameraDescCommon common;
-    HSD_CameraDescFrustum frustum;
-    HSD_CameraDescFrustum ortho;
-    HSD_CameraDescPerspective perspective;
+    char* class_name DAT_IF(false);
+    HSD_CameraDescCommon common DAT_IF(false);
+    HSD_CameraDescFrustum frustum DAT_IF(projection_type == PROJ_FRUSTUM);
+    HSD_CameraDescFrustum ortho DAT_IF(projection_type == PROJ_ORTHO);
+    HSD_CameraDescPerspective perspective DAT_IF(projection_type ==
+                                                 PROJ_PERSPECTIVE);
 };
 ASSERT_SIZE(HSD_CObjDesc, 0x40);
 

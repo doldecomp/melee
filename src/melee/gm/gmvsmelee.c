@@ -299,24 +299,24 @@ void gmVsMelee_ExitResults(GameModeState* state, VsModeData* vs, u8 state_id)
             idx = findSmallestLoser(match_end);
             unk = gm_80172DD4(gmMainLib_8015ED98()->x0);
             if (unk != ChKind_None) {
-                gm_InitChallengerData(match_end->player_standings[idx].ckind,
-                                      (match_end->player_standings[idx].x3_b0),
-                                      idx, match_end->player_standings[idx].x4,
-                                      unk, 0);
+                gm_InitChallengerData(
+                    match_end->player_standings[idx].ckind,
+                    (match_end->player_standings[idx].x3_u.x0.x3_b0), idx,
+                    match_end->player_standings[idx].x4, unk, 0);
                 gm_SetNextGameModeStateId(gmVsMode_State_Approach);
                 unk_bool = true;
             } else if ((unk = gm_80172D78()) != ChKind_None) {
-                gm_InitChallengerData(match_end->player_standings[idx].ckind,
-                                      (match_end->player_standings[idx].x3_b0),
-                                      idx, match_end->player_standings[idx].x4,
-                                      unk, 0);
+                gm_InitChallengerData(
+                    match_end->player_standings[idx].ckind,
+                    (match_end->player_standings[idx].x3_u.x0.x3_b0), idx,
+                    match_end->player_standings[idx].x4, unk, 0);
                 gm_SetNextGameModeStateId(gmVsMode_State_Approach);
                 unk_bool = true;
             } else if ((unk = gm_80172E74()) != ChKind_None) {
-                gm_InitChallengerData(match_end->player_standings[idx].ckind,
-                                      (match_end->player_standings[idx].x3_b0),
-                                      idx, match_end->player_standings[idx].x4,
-                                      unk, 0);
+                gm_InitChallengerData(
+                    match_end->player_standings[idx].ckind,
+                    (match_end->player_standings[idx].x3_u.x0.x3_b0), idx,
+                    match_end->player_standings[idx].x4, unk, 0);
                 gm_SetNextGameModeStateId(gmVsMode_State_Approach);
                 unk_bool = true;
             }

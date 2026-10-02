@@ -2,8 +2,6 @@
 
 #include <melee/ft/forward.h>
 
-#include <math.h>
-
 #include "ftnana.h"
 #include <dolphin/mtx.h>
 #include <melee/ft/fighter.h>
@@ -49,7 +47,7 @@ bool ftNn_Init_80123954(Fighter_GObj* nana_gobj, GroundOrAir pp_ga)
         nana_fp = GET_FIGHTER(nana_gobj);
         popo_fp = GET_FIGHTER(Player_GetEntityAtIndex(nana_fp->player_idx, 0));
         attrs = nana_fp->dat_attrs;
-        switch (nana_fp->x2070.x2071_b0_3) {
+        switch (nana_fp->x2070.x0.x2071_b0_3) {
         case 1:
         case 2:
         case 3:
@@ -133,7 +131,7 @@ void ftNn_Init_80123B3C(Fighter_GObj* gobj)
     PAD_STACK(8);
     Fighter_ClearCmdVars(fp);
     ftNn_Init_80123B3C_inline(gobj);
-    Fighter_ChangeMotionState(gobj, 359, 0, 0.0f, 1.0f, 0.0f, NULL);
+    Fighter_ChangeMotionState(gobj, 359, Ft_MF_None, 0.0f, 1.0f, 0.0f, NULL);
     ftNn_Init_80123B3C_inline(gobj);
     ftAnim_8006EBA4(gobj);
     fp->x74_self_accel.y = 0.0f;
@@ -146,7 +144,7 @@ void ftNn_Init_80123BF0(Fighter_GObj* gobj)
     PAD_STACK(8);
     Fighter_ClearCmdVars(fp);
     ftNn_Init_80123B3C_inline(gobj);
-    Fighter_ChangeMotionState(gobj, 360, 0, 0.0f, 1.0f, 0.0f, NULL);
+    Fighter_ChangeMotionState(gobj, 360, Ft_MF_None, 0.0f, 1.0f, 0.0f, NULL);
     ftNn_Init_80123B3C_inline(gobj);
     ftAnim_8006EBA4(gobj);
     fp->x74_self_accel.y = 0.0f;

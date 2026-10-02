@@ -22,7 +22,7 @@
 /* 220198 */ void grTCLink_80220198(Ground_GObj*);
 /* 2201EC */ bool grTCLink_802201EC(Ground_GObj*);
 /* 220214 */ void grTCLink_80220214(Ground_GObj*);
-/* 220218 */ DynamicsDesc* grTCLink_80220218(enum_t unused);
+/* 220218 */ lbColl_80008D30_arg1* grTCLink_80220218(enum_t unused);
 /* 220220 */ bool grTCLink_80220220(Vec3*, int, HSD_JObj*);
 /* 3E872C */ extern StageData grTCLink_StageData;
 

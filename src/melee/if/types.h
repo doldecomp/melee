@@ -112,7 +112,7 @@ typedef struct ifMagnifyPlayer {
                     // 0x804A1DF8 for a JObj
     HSD_ImageDesc*
         idesc; // ifMagnify_802FBBDC access 0x804A1DFC for an ImageDesc
-    struct {
+    struct ifMagnifyPlayer_state {
         u8 is_offscreen : 1;
         u8 ignore_offscreen : 1;
         u8 edge : 6;
@@ -198,7 +198,7 @@ struct un_80304138_objalloc_t_x8 {
     soundtest_callback x4;
     char* x8;
     char** xC;
-    union {
+    union un_80304138_objalloc_t_x8_x10 {
         void* any;
         int* i;
         u8* b;

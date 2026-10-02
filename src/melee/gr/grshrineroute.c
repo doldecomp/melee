@@ -100,7 +100,7 @@ struct grSh_Route_LightConfig {
 /* 20B020 */ static void grShrineRoute_8020B020(HSD_GObj* gobj, int r4,
                                                 bool hide);
 /* 20B0AC */ static void grShrineRoute_8020B0AC(void);
-/* 20B104 */ static DynamicsDesc* grShrineRoute_OnTouchLine(enum_t);
+/* 20B104 */ static lbColl_80008D30_arg1* grShrineRoute_OnTouchLine(enum_t);
 /* 20B10C */ static bool grShrineRoute_OnCheckShadowRender(Vec3*, int arg,
                                                            HSD_JObj* jobj);
 
@@ -1561,7 +1561,7 @@ void grShrineRoute_8020B0AC(void)
     }
 }
 
-DynamicsDesc* grShrineRoute_OnTouchLine(enum_t arg)
+lbColl_80008D30_arg1* grShrineRoute_OnTouchLine(enum_t arg)
 {
     return NULL;
 }

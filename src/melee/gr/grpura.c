@@ -68,7 +68,7 @@ struct GrPuVtxMapEntry {
 /* 212EF4 */ static void grPura_80212EF4(HSD_GObj*);
 /* 212FC0 */ static void grPura_80212FC0(HSD_GObj*);
 /* 213030 */ static void grPura_80213030(Ground_GObj* arg0);
-/* 2130C0 */ static DynamicsDesc* grPura_802130C0(enum_t);
+/* 2130C0 */ static lbColl_80008D30_arg1* grPura_802130C0(enum_t);
 /* 2130C8 */ static bool grPura_802130C8(Vec3* a, int, HSD_JObj*);
 /* 2130D0 */ static void fn_802130D0(HSD_GObj*, intptr_t);
 /* 213128 */ static void grPura_80213128(HSD_DObj*);
@@ -667,7 +667,9 @@ u16 grPu_803E6E20[1024] ATTRIBUTE_ALIGN(32) = {
     0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF,
 };
 
-struct HSD_ImageDesc grPu_803E7620 = { &grPu_803E6E20, 32, 32, 4, 0, 0, 0 };
+struct HSD_ImageDesc grPu_803E7620 = {
+    (HSD_ImageData*) grPu_803E6E20, 32, 32, 4, 0, 0, 0
+};
 
 void stageGObj2_OnInit(Ground_GObj* arg0)
 {
@@ -872,7 +874,7 @@ void grPura_80213030(Ground_GObj* arg0)
     mpJointUpdateBounding(5);
 }
 
-DynamicsDesc* grPura_802130C0(enum_t arg0)
+lbColl_80008D30_arg1* grPura_802130C0(enum_t arg0)
 {
     return NULL;
 }

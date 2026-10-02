@@ -1100,7 +1100,7 @@ static inline void fn_80178BB4_init_players(ResultsData* data,
                         (CharacterKind) match_end->player_standings[(*i)]
                             .ckind,
                         match_end->player_standings[(*i)].ftkind,
-                        match_end->player_standings[(*i)].x3_b0);
+                        match_end->player_standings[(*i)].x3_u.x0.x3_b0);
                     HSD_JObj* taunt_jobj = data->player_data[(*i)].jobjs[7];
                     HSD_ForeachAnim(taunt_jobj, JOBJ_TYPE, ALL_TYPE_MASK,
                                     HSD_AObjSetRate, AOBJ_ARG_AF, 0.0);

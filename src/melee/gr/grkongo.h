@@ -79,8 +79,6 @@ struct grKongo_YakumonoParam {
 
 extern const grKg_SplineChoiceList grKg_803B7FD4;
 
-static struct grKongo_YakumonoParam* yakumono_param;
-
 /* 1D5238 */ void grKongo_801D5238(bool);
 /* 1D523C */ void grKongo_801D523C(void);
 /* 1D52F8 */ void grKongo_801D52F8(void);

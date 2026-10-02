@@ -111,7 +111,7 @@ HSD_GObj* it_802AB58C(Item_GObj* owner, Vec3* pos, f32 facing_dir)
     spawn.vel.x = spawn.vel.y = spawn.vel.z = 0.0f;
     spawn.x0_parent_gobj = owner;
     spawn.x4_parent_gobj2 = spawn.x0_parent_gobj;
-    spawn.x44_flag.b0 = true;
+    spawn.x44_flag.x0.b0 = true;
     spawn.x40 = Item_8026AE60();
 
     ball = Item_80268B18(&spawn);

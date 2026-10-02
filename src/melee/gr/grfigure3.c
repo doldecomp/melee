@@ -29,7 +29,7 @@ static void stageGObj2_OnInit(Ground_GObj* gobj);
 static bool grFigure3_8020E778(Ground_GObj*);
 static void grFigure3_8020E780(Ground_GObj* gobj);
 static void grFigure3_8020E784(Ground_GObj*);
-static DynamicsDesc* grFigure3_8020E788(enum_t);
+static lbColl_80008D30_arg1* grFigure3_8020E788(enum_t);
 static bool grFigure3_8020E790(Vec3* vector, int number, HSD_JObj* jobj);
 
 static StageCallbacks grEF2_StageCallbacks[3] = {
@@ -148,7 +148,7 @@ static void grFigure3_8020E780(Ground_GObj* gobj) {}
 
 static void grFigure3_8020E784(Ground_GObj* arg0) {}
 
-static DynamicsDesc* grFigure3_8020E788(enum_t arg0)
+static lbColl_80008D30_arg1* grFigure3_8020E788(enum_t arg0)
 {
     return NULL;
 }

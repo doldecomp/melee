@@ -12,8 +12,8 @@
 /* 3984F4 */ void psInitDataBankLoad(int bank, const int* cmdBank,
                                      const int* texBank, const u32* ref,
                                      const int* formBank);
-/* 398614 */ void psInitDataBankLocate(HSD_Archive* cmdBank,
-                                       HSD_Archive* texBank, int* formBank);
+/* 398614 */ void psInitDataBankLocate(int* cmdBank, int* texBank,
+                                       int* formBank);
 /* 3989A0 */ void psInitDataBankRelocate(int* cmdBank, int* texBank,
                                          int* formBank, int* newCmdBank,
                                          int* newTexBank, int* newFormBank);

@@ -15,7 +15,7 @@
 
 void fn_Setup5xSpeed(void)
 {
-    db_5xSpeedStatus.b0 = false;
+    db_5xSpeedStatus.x0.b0 = false;
 }
 
 void fn_Check5xSpeed(int player)
@@ -29,8 +29,8 @@ void fn_Check5xSpeed(int player)
 
 void fn_Toggle5xSpeed(void)
 {
-    db_5xSpeedStatus.b0 ^= 1;
-    if (db_5xSpeedStatus.b0) {
+    db_5xSpeedStatus.x0.b0 ^= 1;
+    if (db_5xSpeedStatus.x0.b0) {
         gm_SetGameSpeed(5.0f);
     } else {
         gm_ResetGameSpeed();

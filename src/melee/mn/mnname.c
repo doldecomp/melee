@@ -27,15 +27,6 @@
 #include <sysdolphin/baselib/jobj.h>
 #include <sysdolphin/baselib/memory.h>
 
-/// Loaded section pointers for one of the name-entry menu archive models
-/// (joint, animjoint, matanim_joint, shapeanim_joint).
-typedef struct {
-    void* joint;
-    void* anim_joint;
-    void* matanim_joint;
-    void* shapeanim_joint;
-} MnNameArchive;
-
 /// Name-entry menu animation loop windows (.data block owned by this
 /// translation unit; see symbols.txt 0x803ED538..0x803ED62F).
 /* 3ED538 */ AnimLoopSettings mnName_803ED538[4] = {
@@ -74,9 +65,9 @@ typedef struct {
 /// section pointers (.bss block owned by this translation unit; see
 /// symbols.txt 0x804A0648..0x804A06EF).
 /* 4A0648 */ static u8 mnName_NameDisplayOrder[0x78];
-/* 4A06C0 */ static MnNameArchive mnName_804A06C0;
-/* 4A06D0 */ static MnNameArchive mnName_804A06D0;
-/* 4A06E0 */ static MnNameArchive mnName_804A06E0;
+/* 4A06C0 */ static StaticModelDesc mnName_804A06C0;
+/* 4A06D0 */ static StaticModelDesc mnName_804A06D0;
+/* 4A06E0 */ static StaticModelDesc mnName_804A06E0;
 
 /// Shared model descriptors loaded by both name-entry menus.
 StaticModelDesc mnNameNew_804A06F0;
@@ -210,12 +201,14 @@ static inline u8 unsignedCharacter(s32 character)
     return (u8) character;
 }
 
+union CompareNameStrings_string1 {
+    char* signed_characters;
+    u8* unsigned_characters;
+};
+
 s32 CompareNameStrings(char* str1, char* str2)
 {
-    union {
-        char* signed_characters;
-        u8* unsigned_characters;
-    } string1;
+    union CompareNameStrings_string1 string1;
     u8* unsigned_str1;
     s8 terminator = (s8) *mnName_StringTerminator;
     s32 i = 0;
@@ -962,13 +955,15 @@ void mnName_80238AE0(HSD_GObj* gobj, u8 index, u8 arg2)
     HSD_JObjAnimAll(jobj);
 }
 
+struct AnimTable {
+    AnimLoopSettings* entries[6];
+};
+
 static inline AnimLoopSettings*
 mnName_FindAnimLoop(AnimLoopSettings* const* tableBase, f32 frame)
 {
     s32 i;
-    struct AnimTable {
-        AnimLoopSettings* entries[6];
-    } table;
+    struct AnimTable table;
 
     table = *(struct AnimTable*) tableBase;
 
@@ -1229,7 +1224,7 @@ void mnName_80239A24(HSD_GObj* gobj)
     s32 j;
     s32 i;
     HSD_Text* text;
-    MnNameArchive* archive = &mnName_804A06C0;
+    StaticModelDesc* archive = &mnName_804A06C0;
     MnName_GObj* data = (MnName_GObj*) gobj;
     HSD_JObj* ref_jobj3;
     GXColor text_color;
@@ -1246,7 +1241,7 @@ void mnName_80239A24(HSD_GObj* gobj)
 
     for (i = 0; i < 0x18; i++) {
         jobj = HSD_JObjLoadJoint(archive->joint);
-        HSD_JObjAddAnimAll(jobj, archive->anim_joint, archive->matanim_joint,
+        HSD_JObjAddAnimAll(jobj, archive->animjoint, archive->matanim_joint,
                            archive->shapeanim_joint);
         HSD_JObjReqAnimAll(jobj,
                            (f32) ((u8) i == mn_804A04F0.hovered_selection));
@@ -1500,14 +1495,14 @@ void mnName_8023A290(void)
     HSD_JObj* sp20;
     HSD_GObj* gobj;
     HSD_JObj* jobj;
-    MnNameArchive* archive = &mnName_804A06D0;
+    StaticModelDesc* archive = &mnName_804A06D0;
 
     gobj = GObj_Create(6U, 7U, 0x80U);
     jobj = HSD_JObjLoadJoint(archive->joint);
     HSD_GObjObject_80390A70(gobj, HSD_GObj_JObjKind, jobj);
     GObj_SetupGXLink(gobj, HSD_GObj_JObjCallback, 6U, 0x80U);
     HSD_GObj_SetupProc(gobj, fn_8023A0BC, 0U);
-    HSD_JObjAddAnimAll(jobj, archive->anim_joint, archive->matanim_joint,
+    HSD_JObjAddAnimAll(jobj, archive->animjoint, archive->matanim_joint,
                        archive->shapeanim_joint);
     HSD_JObjReqAnimAll(jobj, mnName_803ED600[0]);
     HSD_JObjAnimAll(jobj);
@@ -1571,7 +1566,7 @@ HSD_GObj* mnName_8023A59C(u8 arg0)
     HSD_JObj* jobj5;
     HSD_JObj* root_jobj[1];
     HSD_JObj* jobj7[1];
-    MnNameArchive* archive = &mnName_804A06E0;
+    StaticModelDesc* archive = &mnName_804A06E0;
     HSD_JObj* slider;
     HSD_JObj* scrollbar_container;
     HSD_JObj* jobj4;
@@ -1585,7 +1580,7 @@ HSD_GObj* mnName_8023A59C(u8 arg0)
     HSD_GObjObject_80390A70(gobj, HSD_GObj_JObjKind, root_jobj[0]);
     GObj_SetupGXLink(gobj, HSD_GObj_JObjCallback, 4U, 0x80U);
     HSD_GObj_SetupProc(gobj, fn_80239574, 0U);
-    HSD_JObjAddAnimAll(root_jobj[0], archive->anim_joint,
+    HSD_JObjAddAnimAll(root_jobj[0], archive->animjoint,
                        archive->matanim_joint, archive->shapeanim_joint);
     HSD_JObjReqAnimAll(root_jobj[0], 0.0f);
     HSD_JObjAnimAll(root_jobj[0]);
@@ -1738,15 +1733,15 @@ s32 mnName_8023AC40(void)
 
     lbArchive_LoadSections(
         archive, &mnName_804A06E0.joint, "MenMainConNmTp_Top_joint",
-        &mnName_804A06E0.anim_joint, "MenMainConNmTp_Top_animjoint",
+        &mnName_804A06E0.animjoint, "MenMainConNmTp_Top_animjoint",
         &mnName_804A06E0.matanim_joint, "MenMainConNmTp_Top_matanim_joint",
         &mnName_804A06E0.shapeanim_joint, "MenMainConNmTp_Top_shapeanim_joint",
         &mnName_804A06C0.joint, "MenMainBaseNmTp_Top_joint",
-        &mnName_804A06C0.anim_joint, "MenMainBaseNmTp_Top_animjoint",
+        &mnName_804A06C0.animjoint, "MenMainBaseNmTp_Top_animjoint",
         &mnName_804A06C0.matanim_joint, "MenMainBaseNmTp_Top_matanim_joint",
         &mnName_804A06C0.shapeanim_joint,
         "MenMainBaseNmTp_Top_shapeanim_joint", &mnName_804A06D0.joint,
-        "MenMainWarCmn_Top_joint", &mnName_804A06D0.anim_joint,
+        "MenMainWarCmn_Top_joint", &mnName_804A06D0.animjoint,
         "MenMainWarCmn_Top_animjoint", &mnName_804A06D0.matanim_joint,
         "MenMainWarCmn_Top_matanim_joint", &mnName_804A06D0.shapeanim_joint,
         "MenMainWarCmn_Top_shapeanim_joint", &mnNameNew_804A06F0.joint,
@@ -1772,13 +1767,11 @@ s32 mnName_8023AC40(void)
         "MenMainSbaseEtNw_Top_shapeanim_joint", 0);
 
     if (lbLang_IsSavedLanguageUS()) {
-        lbArchive_LoadSections(
-            archive, (void**) &AutoNamesList, (char*) mnName_803ED538 + 0x4D0,
-            (void**) &NotAllowedNamesList, (char*) mnName_803ED538 + 0x4E4, 0);
+        lbArchive_LoadSections(archive, &AutoNamesList, "mnNameAutoNameUs",
+                               &NotAllowedNamesList, "mnNameRefuseNameUs", 0);
     } else {
-        lbArchive_LoadSections(
-            archive, (void**) &AutoNamesList, (char*) mnName_803ED538 + 0x4F8,
-            (void**) &NotAllowedNamesList, (char*) mnName_803ED538 + 0x508, 0);
+        lbArchive_LoadSections(archive, &AutoNamesList, "mnNameAutoName",
+                               &NotAllowedNamesList, "mnNameRefuseName", 0);
     }
 
     mn_804A04F0.prev_menu = mn_804A04F0.cur_menu;
@@ -1788,15 +1781,6 @@ s32 mnName_8023AC40(void)
     proc->flags_3 = (u16) HSD_GObj_804D783C;
     return (s32) proc;
 }
-
-/// Auto/refused name-list section names owned by this translation unit
-/// (retail .data 0x803EDA08..0x803EDA51; see the symbols.txt entries). They
-/// sit after the pooled archive-name literals of mnName_8023AC40, which
-/// addresses them relative to the unit's .data anchor (mnName_803ED538).
-static char mnName_AutoNameUsName[] = "mnNameAutoNameUs";
-static char mnName_RefuseNameUsName[] = "mnNameRefuseNameUs";
-static char mnName_AutoNameName[] = "mnNameAutoName";
-static char mnName_RefuseNameName[] = "mnNameRefuseName";
 
 extern char mnNameNew_NullCharacter;
 

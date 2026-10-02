@@ -613,12 +613,14 @@ static inline void itSeakChain_clamp_x14(ItemLink* link,
     }
 }
 
+struct it_802BC080_stack {
+    Vec3 dir;
+    u8 pad[16];
+};
+
 void it_802BC080(ItemLink* link, Vec3* target, Item* ip)
 {
-    struct {
-        Vec3 dir;
-        u8 pad[16];
-    } stack;
+    struct it_802BC080_stack stack;
     f32 lstick_x, lstick_y;
     ItemLink* iter = link->prev;
     ItemLink* cur = link;

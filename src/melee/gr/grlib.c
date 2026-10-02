@@ -175,7 +175,7 @@ void grLib_801C9A70(enum_t arg0, Vec3* v)
     *v = grLib_8049EF58[i];
 }
 
-void grLib_801C9B20(HSD_JObj* arg0, DynamicsDesc* arg1, DynamicsDesc* arg2)
+void grLib_801C9B20(HSD_JObj* arg0, DynamicsTemplate* arg1, DynamicsDesc* arg2)
 {
     lb_8000FD48(arg0, arg2, arg1->count);
     lb_80011710(arg1, arg2);

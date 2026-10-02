@@ -33,8 +33,8 @@ void ftMh_CaptureWaitMasterHand_80155D6C(HSD_GObj* gobj, s32 arg1)
 
     fp->facing_dir = victim_fp->facing_dir;
     fp->mv.mh.unk4.x0 = 0;
-    Fighter_ChangeMotionState(gobj, ftCo_MS_ThrownMasterHand, 0, 0.0f, 1.0f,
-                              0.0f, 0);
+    Fighter_ChangeMotionState(gobj, ftCo_MS_ThrownMasterHand, Ft_MF_None, 0.0f,
+                              1.0f, 0.0f, 0);
     fp->invisible = false;
     fp->accessory1_cb = &ftCo_800DE508;
     ftCommon_8007E2F4(fp, 511);

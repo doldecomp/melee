@@ -391,7 +391,7 @@ bool ftNn_Init_8012300C(Fighter_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     int ret;
     if (!fp->is_sleeping && !fp->x2219_b5) {
-        switch (fp->x2070.x2071_b0_3) {
+        switch (fp->x2070.x0.x2071_b0_3) {
         case 1:
         case 3:
         case 4:
