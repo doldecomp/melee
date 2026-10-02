@@ -66,9 +66,12 @@ Not errors:
   or reading the tables from the ELF).
 - `ItemSpecialAttributes` declares the layouts and shared views used by
   item callers, but only 25 variants have `DAT_IF` conditions. Bind and
-  annotate the remaining item kinds, including character items and Pokémon,
-  and disambiguate shared views (R_Shell, Foods, Kinoko). ScBall, RabbitC,
+  annotate the remaining common items, character items, and Pokémon,
+  and disambiguate shared views (R_Shell, Kinoko). ScBall, RabbitC,
   MetalB, and Spycloak still lack layouts.
+- Inline arrays such as `itFoodsAttributes.entries` use `DAT_EXTENT` even
+  when a sibling field gives their count. Teach `DAT_COUNT` walks to handle
+  inline arrays as well as pointers.
 - `ftData.xC`/`x14` (actions), `x1C` (part animations) and their `x8`,
   and `ftData_x20.x0` use `DAT_EXTENT`. The counts are in DOL tables per
   fighter kind (`ftData_Table_Unk0`, `ftData_UnkIntPairs`), or only in code.
