@@ -117,20 +117,20 @@ void ftMs_SpecialAirNStart_Coll(HSD_GObj* gobj)
 
 void ftMs_SpecialN_80136A1C(HSD_GObj* gobj)
 {
-    /// @todo Named flags.
-    static u32 const mf = (1 << 2) | (1 << 7) | (1 << 12) | (1 << 14) |
-                          (1 << 18) | (1 << 19) | (1 << 22) | (1 << 26) |
-                          (1 << 27);
+    static u32 const mf =
+        Ft_MF_KeepColAnimHitStatus | Ft_MF_SkipMatAnim | Ft_MF_SkipColAnim |
+        Ft_MF_UpdateCmd | Ft_MF_SkipItemVis | Ft_MF_Unk19 |
+        Ft_MF_SkipModelPartVis | Ft_MF_SkipModelFlags | Ft_MF_Unk27;
     Fighter* fp = GET_FIGHTER(gobj);
     ftCommon_GroundToAirStateChange(gobj, fp, ftMs_MS_SpecialAirNStart, mf);
 }
 
 void ftMs_SpecialN_80136A7C(HSD_GObj* gobj)
 {
-    /// @todo Named flags.
-    static u32 const mf = (1 << 2) | (1 << 7) | (1 << 12) | (1 << 14) |
-                          (1 << 18) | (1 << 19) | (1 << 22) | (1 << 26) |
-                          (1 << 27);
+    static u32 const mf =
+        Ft_MF_KeepColAnimHitStatus | Ft_MF_SkipMatAnim | Ft_MF_SkipColAnim |
+        Ft_MF_UpdateCmd | Ft_MF_SkipItemVis | Ft_MF_Unk19 |
+        Ft_MF_SkipModelPartVis | Ft_MF_SkipModelFlags | Ft_MF_Unk27;
     Fighter* fp = GET_FIGHTER(gobj);
     ftCommon_AirToGroundStateChange(gobj, fp, ftMs_MS_SpecialNStart, mf);
 }
@@ -215,20 +215,22 @@ void ftMs_SpecialAirNLoop_Coll(HSD_GObj* gobj)
 
 void ftMs_SpecialN_80136DB4(HSD_GObj* gobj)
 {
-    /// @todo Named flags.
-    static u32 const mf = (1 << 1) | (1 << 2) | (1 << 7) | (1 << 9) |
-                          (1 << 11) | (1 << 12) | (1 << 14) | (1 << 18) |
-                          (1 << 19) | (1 << 22) | (1 << 26) | (1 << 27);
+    static u32 const mf =
+        Ft_MF_KeepGfx | Ft_MF_KeepColAnimHitStatus | Ft_MF_SkipMatAnim |
+        Ft_MF_KeepSfx | Ft_MF_SkipRumble | Ft_MF_SkipColAnim |
+        Ft_MF_UpdateCmd | Ft_MF_SkipItemVis | Ft_MF_Unk19 |
+        Ft_MF_SkipModelPartVis | Ft_MF_SkipModelFlags | Ft_MF_Unk27;
     Fighter* fp = GET_FIGHTER(gobj);
     ftCommon_GroundToAirStateChange(gobj, fp, ftMs_MS_SpecialAirNLoop, mf);
 }
 
 void ftMs_SpecialN_80136E14(HSD_GObj* gobj)
 {
-    /// @todo Named flags.
-    static u32 const mf = (1 << 1) | (1 << 2) | (1 << 7) | (1 << 9) |
-                          (1 << 11) | (1 << 12) | (1 << 14) | (1 << 18) |
-                          (1 << 19) | (1 << 22) | (1 << 26) | (1 << 27);
+    static u32 const mf =
+        Ft_MF_KeepGfx | Ft_MF_KeepColAnimHitStatus | Ft_MF_SkipMatAnim |
+        Ft_MF_KeepSfx | Ft_MF_SkipRumble | Ft_MF_SkipColAnim |
+        Ft_MF_UpdateCmd | Ft_MF_SkipItemVis | Ft_MF_Unk19 |
+        Ft_MF_SkipModelPartVis | Ft_MF_SkipModelFlags | Ft_MF_Unk27;
     Fighter* fp = GET_FIGHTER(gobj);
     ftCommon_AirToGroundStateChange(gobj, fp, ftMs_MS_SpecialNLoop, mf);
 }
@@ -317,10 +319,11 @@ void ftMs_SpecialAirNEnd_Coll(HSD_GObj* gobj)
 
 void ftMs_SpecialN_801371FC(HSD_GObj* gobj)
 {
-    /// @todo Named flags.
-    static u32 const mf = (1 << 1) | (1 << 2) | (1 << 3) | (1 << 7) |
-                          (1 << 12) | (1 << 14) | (1 << 18) | (1 << 19) |
-                          (1 << 22) | (1 << 26) | (1 << 27);
+    static u32 const mf =
+        Ft_MF_KeepGfx | Ft_MF_KeepColAnimHitStatus | Ft_MF_SkipHit |
+        Ft_MF_SkipMatAnim | Ft_MF_SkipColAnim | Ft_MF_UpdateCmd |
+        Ft_MF_SkipItemVis | Ft_MF_Unk19 | Ft_MF_SkipModelPartVis |
+        Ft_MF_SkipModelFlags | Ft_MF_Unk27;
     Fighter* fp = GET_FIGHTER(gobj);
     ftMars_MotionState msid;
     if (!fp->cmd_vars[0]) {
@@ -336,10 +339,11 @@ void ftMs_SpecialN_801371FC(HSD_GObj* gobj)
 
 void ftMs_SpecialN_801372A8(HSD_GObj* gobj)
 {
-    /// @todo Named flags.
-    static u32 const mf = (1 << 1) | (1 << 2) | (1 << 3) | (1 << 7) |
-                          (1 << 12) | (1 << 14) | (1 << 18) | (1 << 19) |
-                          (1 << 22) | (1 << 26) | (1 << 27);
+    static u32 const mf =
+        Ft_MF_KeepGfx | Ft_MF_KeepColAnimHitStatus | Ft_MF_SkipHit |
+        Ft_MF_SkipMatAnim | Ft_MF_SkipColAnim | Ft_MF_UpdateCmd |
+        Ft_MF_SkipItemVis | Ft_MF_Unk19 | Ft_MF_SkipModelPartVis |
+        Ft_MF_SkipModelFlags | Ft_MF_Unk27;
     Fighter* fp = GET_FIGHTER(gobj);
     ftMars_MotionState msid;
     if (!fp->cmd_vars[0]) {
