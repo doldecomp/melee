@@ -112,7 +112,7 @@ void it_802EF098(Item_GObj* gobj, s32 arg1)
 {
     Item* ip = GET_ITEM(gobj);
     itToolsAttributes* attrs =
-        (itToolsAttributes*) ip->xC4_article_data->x4_specialAttributes;
+        &ip->xC4_article_data->x4_specialAttributes->tools;
     ip->xDD4_itemVar.tools.x0 = arg1;
     it_80275158(gobj, attrs->x0);
     ip->xD5C = 0;
@@ -127,7 +127,7 @@ bool itTools_UnkMotion4_Anim(Item_GObj* gobj)
     Item* ip = GET_ITEM(gobj);
     HSD_JObj* jobj = GET_JOBJ(gobj);
     itToolsAttributes* attrs =
-        (itToolsAttributes*) ip->xC4_article_data->x4_specialAttributes;
+        &ip->xC4_article_data->x4_specialAttributes->tools;
     f32 rz = HSD_JObjGetRotationZ(jobj);
     rz += attrs->motions[ip->xDD4_itemVar.tools.x0].xC * ip->facing_dir;
     HSD_JObjSetRotationZ(jobj, rz);
@@ -143,7 +143,7 @@ void itTools_UnkMotion4_Phys(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     itToolsAttributes* attrs =
-        (itToolsAttributes*) ip->xC4_article_data->x4_specialAttributes;
+        &ip->xC4_article_data->x4_specialAttributes->tools;
     it_80272860(gobj, attrs->motions[ip->xDD4_itemVar.tools.x0].x4,
                 attrs->motions[ip->xDD4_itemVar.tools.x0].x8);
 }
@@ -164,7 +164,7 @@ void it_802EF320(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     itToolsAttributes* attrs =
-        (itToolsAttributes*) ip->xC4_article_data->x4_specialAttributes;
+        &ip->xC4_article_data->x4_specialAttributes->tools;
     PAD_STACK(8);
     it_802756D0(gobj);
     it_8026B3A8(gobj);
@@ -197,7 +197,7 @@ static inline void itTools_UnkMotion9_Coll_inline(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     itToolsAttributes* attrs =
-        (itToolsAttributes*) ip->xC4_article_data->x4_specialAttributes;
+        &ip->xC4_article_data->x4_specialAttributes->tools;
     it_802756D0(gobj);
     it_8026B3A8(gobj);
     ip->x40_vel.y = 0.0f;
@@ -222,7 +222,7 @@ void it_802EF548(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     itToolsAttributes* attrs =
-        (itToolsAttributes*) ip->xC4_article_data->x4_specialAttributes;
+        &ip->xC4_article_data->x4_specialAttributes->tools;
     Fighter_GObj* fighter;
     f32 new_damage;
     Vec3 fighter_pos;
@@ -275,7 +275,7 @@ bool it_2725_Logic22_Clanked(Item_GObj* gobj)
 {
     itToolsAttributes* attrs;
     Item* ip = GET_ITEM(gobj);
-    attrs = (itToolsAttributes*) ip->xC4_article_data->x4_specialAttributes;
+    attrs = &ip->xC4_article_data->x4_specialAttributes->tools;
     PAD_STACK(16);
     it_802756D0(gobj);
     it_8026B3A8(gobj);
@@ -290,7 +290,7 @@ bool it_2725_Logic22_HitShield(Item_GObj* gobj)
 {
     itToolsAttributes* attrs;
     Item* ip = GET_ITEM(gobj);
-    attrs = (itToolsAttributes*) ip->xC4_article_data->x4_specialAttributes;
+    attrs = &ip->xC4_article_data->x4_specialAttributes->tools;
     PAD_STACK(16);
     it_802756D0(gobj);
     it_8026B3A8(gobj);
@@ -305,7 +305,7 @@ bool it_2725_Logic22_Absorbed(Item_GObj* gobj)
 {
     itToolsAttributes* attrs;
     Item* ip = GET_ITEM(gobj);
-    attrs = (itToolsAttributes*) ip->xC4_article_data->x4_specialAttributes;
+    attrs = &ip->xC4_article_data->x4_specialAttributes->tools;
     PAD_STACK(24);
     it_802756D0(gobj);
     it_8026B3A8(gobj);

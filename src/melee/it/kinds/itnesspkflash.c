@@ -97,7 +97,7 @@ HSD_GObj* it_802AA8C0(Item_GObj* gobj, Vec3* pos, ItemKind kind,
     if (flash != NULL) {
         Item* ip = GET_ITEM(flash);
         itFlashAttributes* attr =
-            (itFlashAttributes*) ip->xC4_article_data->x4_specialAttributes;
+            &ip->xC4_article_data->x4_specialAttributes->flash;
         Item_ClearCmdVars(ip);
         it_80275158(flash, attr->x0_FLASH_LIFETIMER);
         ip->xDD4_itemVar.pkflush.xDD8_PKFlash = 0.0F;
@@ -152,7 +152,7 @@ void it_802AAA80(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     itFlashAttributes* attr =
-        (itFlashAttributes*) ip->xC4_article_data->x4_specialAttributes;
+        &ip->xC4_article_data->x4_specialAttributes->flash;
     f32 angle;
     PAD_STACK(8);
 
@@ -172,7 +172,7 @@ bool itNesspkflash_UnkMotion0_Anim(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     itFlashAttributes* attr =
-        (itFlashAttributes*) ip->xC4_article_data->x4_specialAttributes;
+        &ip->xC4_article_data->x4_specialAttributes->flash;
     HSD_JObj* jobj = GET_JOBJ(gobj);
     bool holding;
 
@@ -227,7 +227,7 @@ bool itNesspkflash_UnkMotion1_Anim(Item_GObj* gobj)
     Item* ip = GET_ITEM(gobj);
     HSD_JObj* jobj = GET_JOBJ(gobj);
     itFlashAttributes* attr =
-        (itFlashAttributes*) ip->xC4_article_data->x4_specialAttributes;
+        &ip->xC4_article_data->x4_specialAttributes->flash;
 
     ip->xDAC_itcmd_var0++;
 
@@ -267,7 +267,7 @@ bool itNesspkflash_UnkMotion2_Anim(Item_GObj* gobj)
     Item* ip = GET_ITEM(gobj);
     HSD_JObj* jobj = GET_JOBJ(gobj);
     itFlashAttributes* attr =
-        (itFlashAttributes*) ip->xC4_article_data->x4_specialAttributes;
+        &ip->xC4_article_data->x4_specialAttributes->flash;
     itNesspkflash_SetScale(jobj, ip, attr);
     return it_80273130(gobj);
 }
@@ -276,7 +276,7 @@ void itNesspkflash_UnkMotion0_Phys(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     itFlashAttributes* attr =
-        (itFlashAttributes*) ip->xC4_article_data->x4_specialAttributes;
+        &ip->xC4_article_data->x4_specialAttributes->flash;
     PAD_STACK(8);
 
     if (ip->xDD4_itemVar.pkflush.xDDC_PKFlash == 0) {
@@ -336,7 +336,7 @@ bool itNesspkflash_UnkMotion0_Coll(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     itFlashAttributes* attr =
-        (itFlashAttributes*) ip->xC4_article_data->x4_specialAttributes;
+        &ip->xC4_article_data->x4_specialAttributes->flash;
     HSD_JObj* jobj = GET_JOBJ(gobj);
 
     if (it_802AA810(gobj, &ip->x378_itemColl) != 0) {

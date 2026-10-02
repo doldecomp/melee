@@ -166,7 +166,7 @@ void it_8029DB5C(HSD_GObj* gobj)
 
     item = GET_ITEM(gobj);
     article = item->xC4_article_data;
-    sa = (itLinkBombAttributes*) article->x4_specialAttributes;
+    sa = &article->x4_specialAttributes->link_bomb;
     if (item->xD44_lifeTimer <= 0.0f) {
         it_8029F69C(gobj);
     } else {
@@ -214,8 +214,7 @@ HSD_GObj* it_8029DD58(Item_GObj* fighter_gobj, Vec3* arg1, u32 arg2, int arg3,
     temp_r3 = Item_80268B18(&spawn);
     if (temp_r3 != NULL) {
         item = GET_ITEM(temp_r3);
-        attr = (itLinkBombAttributes*)
-                   item->xC4_article_data->x4_specialAttributes;
+        attr = &item->xC4_article_data->x4_specialAttributes->link_bomb;
         it_8029DD58_inline(item, attr, fighter_gobj, temp_r3, arg2);
     }
     return temp_r3;
@@ -244,7 +243,7 @@ bool itLinkbomb_UnkMotion0_Anim(HSD_GObj* gobj)
     }
     item = GET_ITEM(gobj);
     article = item->xC4_article_data;
-    sa = (itLinkBombAttributes*) article->x4_specialAttributes;
+    sa = &article->x4_specialAttributes->link_bomb;
     if (item->xD44_lifeTimer <= 0.0f) {
         it_8029F69C(gobj);
     } else {
@@ -277,7 +276,7 @@ bool itLinkbomb_UnkMotion1_Anim(HSD_GObj* gobj)
 
     item = GET_ITEM(gobj);
     article = item->xC4_article_data;
-    sa = (itLinkBombAttributes*) article->x4_specialAttributes;
+    sa = &article->x4_specialAttributes->link_bomb;
     if (item->xD44_lifeTimer <= 0.0f) {
         it_8029F69C(gobj);
     } else {
@@ -327,7 +326,7 @@ bool itLinkbomb_UnkMotion2_Anim(HSD_GObj* gobj)
 
     item = GET_ITEM(gobj);
     article = item->xC4_article_data;
-    sa = (itLinkBombAttributes*) article->x4_specialAttributes;
+    sa = &article->x4_specialAttributes->link_bomb;
     if (item->xD44_lifeTimer <= 0.0f) {
         it_8029F69C(gobj);
     } else {
@@ -347,7 +346,7 @@ static inline int it_LinkBomb_Inline_VelocityCompare(HSD_GObj* gobj, Vec3* vel)
     Item* item;
     itLinkBombAttributes* sa;
     item = GET_ITEM(gobj);
-    sa = (itLinkBombAttributes*) item->xC4_article_data->x4_specialAttributes;
+    sa = &item->xC4_article_data->x4_specialAttributes->link_bomb;
     if ((ABS(vel->x) > sa->x24) || (ABS(vel->y) > sa->x28)) {
         it_8029F69C(gobj);
         return 1;
@@ -416,8 +415,8 @@ static inline void itLinkbomb_UnkMotion3_Anim_inline2(HSD_GObj* gobj)
 
 bool itLinkbomb_UnkMotion3_Anim(Item_GObj* gobj)
 {
-    itLinkBombAttributes* attrs = (itLinkBombAttributes*) GET_ITEM(gobj)
-                                      ->xC4_article_data->x4_specialAttributes;
+    itLinkBombAttributes* attrs =
+        &GET_ITEM(gobj)->xC4_article_data->x4_specialAttributes->link_bomb;
     PAD_STACK(12);
     if (!it_80272C6C(gobj)) {
         itLinkbomb_UnkMotion3_Anim_inline1(gobj);
@@ -492,8 +491,7 @@ bool itLinkbomb_UnkMotion4_Anim(HSD_GObj* gobj)
     {
         Item* item = GET_ITEM(gobj);
         Article* article = item->xC4_article_data;
-        itLinkBombAttributes* sa =
-            (itLinkBombAttributes*) article->x4_specialAttributes;
+        itLinkBombAttributes* sa = &article->x4_specialAttributes->link_bomb;
         if (item->xD44_lifeTimer <= 0.0F) {
             it_8029F69C(gobj);
         } else {
@@ -514,7 +512,7 @@ void itLinkbomb_UnkMotion4_Phys(HSD_GObj* gobj)
     f32 zero = 0.0F;
 
     item = GET_ITEM(gobj);
-    sa = (itLinkBombAttributes*) item->xC4_article_data->x4_specialAttributes;
+    sa = &item->xC4_article_data->x4_specialAttributes->link_bomb;
     if (item->xDD4_itemVar.linkbomb.x0.x0.b1) {
         temp_f2 = item->x40_vel.x;
         if (temp_f2 != zero) {
@@ -596,8 +594,7 @@ bool it_8029F960(Item_GObj* gobj)
     if (item->msid != 5) {
         if (!it_LinkBomb_Inline_VelocityCompare(gobj, &item->x40_vel)) {
             item_2 = GET_ITEM(gobj);
-            sa = (itLinkBombAttributes*)
-                     item_2->xC4_article_data->x4_specialAttributes;
+            sa = &item_2->xC4_article_data->x4_specialAttributes->link_bomb;
             item_2->facing_dir = -item_2->facing_dir;
             item_2->x40_vel.x = sa->x1C * item_2->facing_dir;
             item_2->x40_vel.y = sa->x20;
@@ -614,7 +611,7 @@ bool itLinkBomb_Logic16_DmgReceived(Item_GObj* gobj)
     f32 pad[2];
 
     item = GET_ITEM(gobj);
-    sa = (itLinkBombAttributes*) item->xC4_article_data->x4_specialAttributes;
+    sa = &item->xC4_article_data->x4_specialAttributes->link_bomb;
     if (item->msid != 5) {
         if (item->xCA0 >= sa->x10) {
             it_8029F69C(gobj);
@@ -652,7 +649,7 @@ bool itLinkbomb_UnkMotion6_Anim(HSD_GObj* gobj)
 
     item = GET_ITEM(gobj);
     article = item->xC4_article_data;
-    sa = (itLinkBombAttributes*) article->x4_specialAttributes;
+    sa = &article->x4_specialAttributes->link_bomb;
     if (item->xD44_lifeTimer <= 0.0f) {
         it_8029F69C(gobj);
     } else {

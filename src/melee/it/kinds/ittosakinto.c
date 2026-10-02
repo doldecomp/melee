@@ -15,7 +15,7 @@
 #include <sysdolphin/baselib/random.h>
 
 #define GET_ATTRS(it)                                                         \
-    ((itTosakinto_Attrs*) (it)->xC4_article_data->x4_specialAttributes)
+    (&(it)->xC4_article_data->x4_specialAttributes->tosakinto)
 
 ItemStateTable it_803F7A48[] = {
     { 0, itTosakinto_UnkMotion2_Anim, itTosakinto_UnkMotion2_Phys,

@@ -15,11 +15,6 @@
 #include <melee/mp/mpcoll.h>
 #include <sysdolphin/baselib/jobj.h>
 
-typedef struct {
-    float x0;
-    float x4;
-    itECB x8;
-} itMsBomb_Attrs;
 ASSERT_SIZE(itMsBomb_Attrs, 24);
 
 ItemStateTable ItemStateTable_MsBomb[] = {
@@ -71,7 +66,7 @@ void it_8028FF8C(Item_GObj* gobj)
     itMsBomb_Attrs* attrs;
     Item* ip = GET_ITEM(gobj);
     HSD_JObj* jobj = GET_JOBJ(gobj);
-    attrs = (itMsBomb_Attrs*) ip->xC4_article_data->x4_specialAttributes;
+    attrs = &ip->xC4_article_data->x4_specialAttributes->ms_bomb;
     Item_80268E5C(gobj, 1, ITEM_ANIM_UPDATE);
     HSD_JObjSetRotationX(jobj, attrs->x0);
 }
@@ -103,7 +98,7 @@ void itMSBomb_Logic19_Thrown(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     itMsBomb_Attrs* attrs =
-        (itMsBomb_Attrs*) ip->xC4_article_data->x4_specialAttributes;
+        &ip->xC4_article_data->x4_specialAttributes->ms_bomb;
     itECB ecb;
     Item_80268E5C(gobj, 3, 6);
     ip->xBFC = ecb = attrs->x8;
@@ -126,7 +121,7 @@ void it_80290238(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     itMsBomb_Attrs* attrs =
-        (itMsBomb_Attrs*) ip->xC4_article_data->x4_specialAttributes;
+        &ip->xC4_article_data->x4_specialAttributes->ms_bomb;
     PAD_STACK(0x18);
     ip->xDCE_flag.x0.b3 = 1;
     if (it_802763B8(gobj) != 1) {

@@ -54,7 +54,7 @@ void it_802CB8AC(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     itLizardonAttributes* attrs =
-        (itLizardonAttributes*) ip->xC4_article_data->x4_specialAttributes;
+        &ip->xC4_article_data->x4_specialAttributes->lizardon;
     ip->xDAC_itcmd_var0 = 0;
     ip->xDB0_itcmd_var1 = 0;
     ip->xDB4_itcmd_var2 = 0;
@@ -122,7 +122,7 @@ static inline void it_802CBAA8_inline(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     itLizardonAttributes* attrs =
-        (itLizardonAttributes*) ip->xC4_article_data->x4_specialAttributes;
+        &ip->xC4_article_data->x4_specialAttributes->lizardon;
     ip->xDD4_itemVar.lizardon.x70 =
         attrs->x28 + HSD_Randi(attrs->x2C - attrs->x28);
 }
@@ -131,7 +131,7 @@ void it_802CBAA8(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     itLizardonAttributes* attrs =
-        (itLizardonAttributes*) ip->xC4_article_data->x4_specialAttributes;
+        &ip->xC4_article_data->x4_specialAttributes->lizardon;
 
     if (ip->xDD4_itemVar.lizardon.x60 == -1) {
         ip->xDD4_itemVar.lizardon.x60 = *(s32*) (void*) (&attrs->x4);
@@ -175,7 +175,7 @@ static inline void it_802CBD24_inline(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     itLizardonAttributes* attrs;
-    attrs = (itLizardonAttributes*) ip->xC4_article_data->x4_specialAttributes;
+    attrs = &ip->xC4_article_data->x4_specialAttributes->lizardon;
     ip->xDD4_itemVar.lizardon.x70 =
         attrs->x28 + HSD_Randi(attrs->x2C - attrs->x28);
 }
@@ -187,7 +187,7 @@ void it_802CBD24(Item_GObj* gobj)
     f32 facing;
     Item* ip = GET_ITEM(gobj);
     itLizardonAttributes* attrs =
-        (itLizardonAttributes*) ip->xC4_article_data->x4_specialAttributes;
+        &ip->xC4_article_data->x4_specialAttributes->lizardon;
     PAD_STACK(4);
 
     if (ip->xDB0_itcmd_var1 != 0) {
@@ -197,7 +197,7 @@ void it_802CBD24(Item_GObj* gobj)
     }
     if (ip->xDAC_itcmd_var0 != 0) {
         itLizardonAttributes* attrs2 =
-            (itLizardonAttributes*) ip->xC4_article_data->x4_specialAttributes;
+            &ip->xC4_article_data->x4_specialAttributes->lizardon;
         scale = 1.0f;
         lb_8000B1CC(ip->xBBC_dynamicBoneTable->bones[0x32], NULL, &bone_pos);
         if (ip->xDD4_itemVar.lizardon.x64 != 0) {
@@ -322,7 +322,7 @@ void it_802CC1CC(Item_GObj* gobj, ItemKind kind)
     u8 _pad[4];
     Item* ip = GET_ITEM(gobj);
     itLizardonAttributes* attrs =
-        (itLizardonAttributes*) ip->xC4_article_data->x4_specialAttributes;
+        &ip->xC4_article_data->x4_specialAttributes->lizardon;
     f32 angle;
     s32 randi;
 
@@ -440,7 +440,7 @@ void it_802CC5D4(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     itLizardonAttributes* attrs =
-        (itLizardonAttributes*) ip->xC4_article_data->x4_specialAttributes;
+        &ip->xC4_article_data->x4_specialAttributes->lizardon;
     it_80275158(gobj, attrs->x0);
     it_80274740(gobj);
     Item_80268E5C(gobj, 0, ITEM_ANIM_UPDATE);
@@ -458,7 +458,7 @@ void it_802CC684(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     itLizardonAttributes* attrs =
-        (itLizardonAttributes*) ip->xC4_article_data->x4_specialAttributes;
+        &ip->xC4_article_data->x4_specialAttributes->lizardon;
 
     ip->x40_vel.x *= attrs->x4;
     ip->x40_vel.y *= attrs->x4;

@@ -26,7 +26,7 @@ void itFire_Logic6_Spawned(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     itFireAttributes* attrs =
-        (itFireAttributes*) ip->xC4_article_data->x4_specialAttributes;
+        &ip->xC4_article_data->x4_specialAttributes->fire;
     ip->facing_dir = 0.0f;
     ip->xDAC_itcmd_var0 = 0;
     it_802CC944(gobj);
@@ -62,7 +62,7 @@ void it_802CC7D8(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     itFireAttributes* attrs =
-        (itFireAttributes*) ip->xC4_article_data->x4_specialAttributes;
+        &ip->xC4_article_data->x4_specialAttributes->fire;
     PAD_STACK(8);
 
     it_8027ADEC(0x463, gobj, gobj->hsd_obj, 1.1f);
@@ -75,7 +75,7 @@ static void itFire_UnkMotion2_Anim_inline(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     itFireAttributes* attrs =
-        (itFireAttributes*) ip->xC4_article_data->x4_specialAttributes;
+        &ip->xC4_article_data->x4_specialAttributes->fire;
     it_8027ADEC(0x463, gobj, gobj->hsd_obj, 1.1f);
     ip->x40_vel.y = attrs->x8;
     Item_80268E5C(gobj, 2, 2);
@@ -100,7 +100,7 @@ void itFire_UnkMotion2_Phys(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     itFireAttributes* attrs =
-        (itFireAttributes*) ip->xC4_article_data->x4_specialAttributes;
+        &ip->xC4_article_data->x4_specialAttributes->fire;
     ip->x40_vel.y += attrs->xC;
 }
 
@@ -132,7 +132,7 @@ void itFire_UnkMotion0_Phys(Item_GObj* gobj)
     if (it_8027A09C(gobj)) {
         Item* ip = GET_ITEM(gobj);
         itFireAttributes* attrs =
-            (itFireAttributes*) ip->xC4_article_data->x4_specialAttributes;
+            &ip->xC4_article_data->x4_specialAttributes->fire;
         it_8027ADEC(0x464, gobj, gobj->hsd_obj, 1.1f);
         it_80273454(gobj);
         ip->x40_vel.y = attrs->x4;

@@ -192,8 +192,7 @@ HSD_GObj* it_802A83E0(f32 facing_dir, Fighter_GObj* arg1, Vec3* arg2,
 
     if (gobj != NULL) {
         item = GET_ITEM(gobj);
-        attr = (itLinkArrowAttributes*)
-                   item->xC4_article_data->x4_specialAttributes;
+        attr = &item->xC4_article_data->x4_specialAttributes->link_arrow;
         Item_ClearCmdVars(item);
         it_80275158(gobj, attr->x0);
         item->xDD4_itemVar.linkarrow.xA0 = 0;
@@ -247,7 +246,7 @@ bool itLinkArrow_802A850C(Item_GObj* gobj, Vec3* arg1, Vec3* arg2, f32 arg3,
     Item* ip = GET_ITEM(gobj);
     HSD_JObj* jobj = gobj->hsd_obj;
     itLinkArrowAttributes* attr =
-        (itLinkArrowAttributes*) ip->xC4_article_data->x4_specialAttributes;
+        &ip->xC4_article_data->x4_specialAttributes->link_arrow;
     u8 _pad1[4];
     Vec3 rot;
     u8 _pad2[4];
@@ -293,12 +292,10 @@ bool itLinkArrow_802A850C(Item_GObj* gobj, Vec3* arg1, Vec3* arg2, f32 arg3,
 
         itLinkArrow_802A850C_inline_2(gobj, &quat);
 
-        attr = (itLinkArrowAttributes*)
-                   ip->xC4_article_data->x4_specialAttributes;
+        attr = &ip->xC4_article_data->x4_specialAttributes->link_arrow;
         ip->xDD4_itemVar.linkarrow.xB4[0] =
             itLinkArrow_802A850C_inline(attr->x24);
-        attr = (itLinkArrowAttributes*)
-                   ip->xC4_article_data->x4_specialAttributes;
+        attr = &ip->xC4_article_data->x4_specialAttributes->link_arrow;
         ip->xDD4_itemVar.linkarrow.xB4[1] =
             itLinkArrow_802A850C_inline(attr->x28);
 
@@ -418,8 +415,7 @@ void it_802A8C7C(HSD_GObj* gobj)
     Item* item;
     itLinkArrowAttributes* attr;
     item = GET_ITEM(gobj);
-    attr =
-        (itLinkArrowAttributes*) item->xC4_article_data->x4_specialAttributes;
+    attr = &item->xC4_article_data->x4_specialAttributes->link_arrow;
     it_80275158(gobj, attr->x0);
     Item_80268E5C(gobj, 1, ITEM_ANIM_UPDATE);
 }
@@ -499,7 +495,7 @@ void itLinkarrow_UnkMotion1_Phys(HSD_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     itLinkArrowAttributes* attr =
-        (itLinkArrowAttributes*) ip->xC4_article_data->x4_specialAttributes;
+        &ip->xC4_article_data->x4_specialAttributes->link_arrow;
     ip->xDD4_itemVar.linkarrow.x18 = ip->pos;
     ip->x40_vel.y -= ABS(attr->x1C);
 }
@@ -529,7 +525,7 @@ bool itLinkarrow_UnkMotion1_Coll(Item_GObj* gobj)
 {
     Item* item = GET_ITEM(gobj);
     itLinkArrowAttributes* attr =
-        (itLinkArrowAttributes*) item->xC4_article_data->x4_specialAttributes;
+        &item->xC4_article_data->x4_specialAttributes->link_arrow;
     HSD_JObj* jobj = GET_JOBJ(gobj);
 
     PAD_STACK(8);
@@ -614,8 +610,7 @@ void it_802A9458(HSD_GObj* gobj)
     item = GET_ITEM(gobj);
     jobj = HSD_GObjGetHSDObj(gobj);
     temp_scale = item->xDD4_itemVar.linkarrow.xC0;
-    attr =
-        (itLinkArrowAttributes*) item->xC4_article_data->x4_specialAttributes;
+    attr = &item->xC4_article_data->x4_specialAttributes->link_arrow;
 
     scale.z = temp_scale;
     scale.y = temp_scale;
@@ -763,7 +758,7 @@ bool itLinkArrow_Logic98_DmgDealt(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     itLinkArrowAttributes* attr =
-        (itLinkArrowAttributes*) ip->xC4_article_data->x4_specialAttributes;
+        &ip->xC4_article_data->x4_specialAttributes->link_arrow;
     ip->x40_vel.x *= attr->x14;
     it_802A8330(gobj);
     return true;
@@ -774,7 +769,7 @@ static inline void itLinkArrow_Logic98_HitShield_inline(Item_GObj* gobj,
 {
     Item* ip = GET_ITEM(gobj);
     itLinkArrowAttributes* attr =
-        (itLinkArrowAttributes*) ip->xC4_article_data->x4_specialAttributes;
+        &ip->xC4_article_data->x4_specialAttributes->link_arrow;
     HSD_JObj* jobj = GET_JOBJ(gobj);
 
     scale->x = scale->y = scale->z = ip->xDD4_itemVar.linkarrow.xC0;

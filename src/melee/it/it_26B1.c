@@ -268,7 +268,7 @@ float it_8026B54C(HSD_GObj* gobj)
 {
     Item* temp_item = gobj->user_data;
     itUnkAttributes* unk_attr =
-        (itUnkAttributes*) temp_item->xC4_article_data->x4_specialAttributes;
+        &temp_item->xC4_article_data->x4_specialAttributes->generic;
 
     return unk_attr->x0_float;
 }
@@ -278,7 +278,7 @@ float it_8026B560(HSD_GObj* gobj)
 {
     Item* temp_item = gobj->user_data;
     itUnkAttributes* unk_attr =
-        (itUnkAttributes*) temp_item->xC4_article_data->x4_specialAttributes;
+        &temp_item->xC4_article_data->x4_specialAttributes->generic;
     return unk_attr->x0_float;
 }
 
@@ -287,7 +287,7 @@ float it_8026B574(HSD_GObj* gobj)
 {
     Item* temp_item = gobj->user_data;
     itUnkAttributes* unk_attr =
-        (itUnkAttributes*) temp_item->xC4_article_data->x4_specialAttributes;
+        &temp_item->xC4_article_data->x4_specialAttributes->generic;
     return unk_attr->x4_float;
 }
 
@@ -1039,9 +1039,9 @@ bool it_8026C1B4(HSD_GObj* gobj)
 
 u32 it_8026C1D4(void)
 {
-    itLGun_ItemVars* lgun =
-        (itLGun_ItemVars*) it_804D6D24[It_Kind_L_Gun]->x4_specialAttributes;
-    return lgun->timer;
+    ItLGunAttr* lgun =
+        &it_804D6D24[It_Kind_L_Gun]->x4_specialAttributes->l_gun;
+    return lgun->max_ammo;
 }
 
 /// Check if item has grabbed a GObj?

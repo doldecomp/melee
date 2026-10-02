@@ -33,7 +33,7 @@ ItemStateTable it_803F80C8[] = {
 void itMew_Logic22_Spawned(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
-    MewVars* attr = (MewVars*) ip->xC4_article_data->x4_specialAttributes;
+    MewVars* attr = &ip->xC4_article_data->x4_specialAttributes->mew;
 
     ip->facing_dir = 0.0F;
     it_802D3D94(gobj);
@@ -82,7 +82,7 @@ bool itMew_UnkMotion1_Coll(Item_GObj* gobj)
 void it_802D3C9C(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
-    MewVars* attr = (MewVars*) ip->xC4_article_data->x4_specialAttributes;
+    MewVars* attr = &ip->xC4_article_data->x4_specialAttributes->mew;
 
     Item_80268E5C(gobj, 2, ITEM_ANIM_UPDATE);
     Item_SetEffectHitlagCallbacks(ip);
@@ -107,7 +107,7 @@ bool itMew_UnkMotion2_Anim(Item_GObj* gobj)
 void itMew_UnkMotion2_Phys(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
-    MewVars* attr = (MewVars*) ip->xC4_article_data->x4_specialAttributes;
+    MewVars* attr = &ip->xC4_article_data->x4_specialAttributes->mew;
     ip->x40_vel.y += attr->xC;
 }
 

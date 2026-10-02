@@ -36,7 +36,7 @@ void it_802CD44C(Item_GObj* gobj)
 {
     Item* item = GET_ITEM(gobj);
     itsonansAttributes* attrs =
-        (itsonansAttributes*) item->xC4_article_data->x4_specialAttributes;
+        &item->xC4_article_data->x4_specialAttributes->sonans;
     item->facing_dir = 0.0f;
     item->xDAC_itcmd_var0 = 0;
     item->xD44_lifeTimer = attrs->x24;
@@ -59,7 +59,7 @@ void it_802CD4FC(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     itsonansAttributes* attrs =
-        (itsonansAttributes*) ip->xC4_article_data->x4_specialAttributes;
+        &ip->xC4_article_data->x4_specialAttributes->sonans;
     f32 angle;
     f32 max_angle;
     if (ip->ground_or_air == GA_Air) {
@@ -116,7 +116,7 @@ bool it_802CD7D4(Item_GObj* gobj)
 {
     Item* item = GET_ITEM(gobj);
     itsonansAttributes* attrs =
-        (itsonansAttributes*) item->xC4_article_data->x4_specialAttributes;
+        &item->xC4_article_data->x4_specialAttributes->sonans;
     if (item->xDAC_itcmd_var0 == 0) {
         item->xDD4_itemVar.sonans.x60 =
             attrs->x8 * (item->xCA0 * item->xCCC_incDamageDirection);

@@ -18,13 +18,6 @@
 #include <melee/it/itzako.h>
 #include <sysdolphin/baselib/random.h>
 
-typedef struct itOldkuriAttributes {
-    s32* x0;
-    f32 x4;
-    f32 x8;
-    f32 xC;
-} itOldkuriAttributes;
-
 ItemStateTable it_803F8320[] = {
     { -1, itOldkuri_UnkMotion0_Anim, itOldkuri_UnkMotion0_Phys,
       itOldkuri_UnkMotion0_Coll },
@@ -110,7 +103,7 @@ void it_802D758C(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     itOldkuriAttributes* attr =
-        (itOldkuriAttributes*) ip->xC4_article_data->x4_specialAttributes;
+        &ip->xC4_article_data->x4_specialAttributes->oldkuri;
     ip->xDD4_itemVar.oldkuri.xDF4 = ip->facing_dir * ((f32*) attr->x0)[1];
     ip->x40_vel.x = ip->xDD4_itemVar.oldkuri.xDF4;
     ip->x40_vel.z = 0.0f;
@@ -161,7 +154,7 @@ void it_802D775C(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     itOldkuriAttributes* attr =
-        (itOldkuriAttributes*) ip->xC4_article_data->x4_specialAttributes;
+        &ip->xC4_article_data->x4_specialAttributes->oldkuri;
     ip->xDD4_itemVar.oldkuri.xDF4 = ip->facing_dir * ((f32*) attr->x0)[1];
     ip->x40_vel.x = ip->xDD4_itemVar.oldkuri.xDF4;
     ip->x40_vel.z = 0.0f;
@@ -181,8 +174,7 @@ bool itOldkuri_UnkMotion2_Anim(Item_GObj* gobj)
         } else {
             Item* ip = GET_ITEM(gobj);
             itOldkuriAttributes* attr =
-                (itOldkuriAttributes*)
-                    ip->xC4_article_data->x4_specialAttributes;
+                &ip->xC4_article_data->x4_specialAttributes->oldkuri;
             ip->xDD4_itemVar.oldkuri.xDF4 =
                 ip->facing_dir * ((f32*) attr->x0)[1];
             ip->x40_vel.x = ip->xDD4_itemVar.oldkuri.xDF4;
@@ -203,7 +195,7 @@ void itOldkuri_UnkMotion2_Phys(Item_GObj* gobj)
     if (ip->xDD4_itemVar.oldkuri.xDFC != 0 && it_802750E8(gobj, 2) != 0) {
         Item* ip = GET_ITEM(gobj);
         itOldkuriAttributes* attr =
-            (itOldkuriAttributes*) ip->xC4_article_data->x4_specialAttributes;
+            &ip->xC4_article_data->x4_specialAttributes->oldkuri;
         ip->xDD4_itemVar.oldkuri.xDF4 = ip->facing_dir * ((f32*) attr->x0)[1];
         ip->x40_vel.x = ip->xDD4_itemVar.oldkuri.xDF4;
         ip->x40_vel.z = 0.0f;
@@ -225,7 +217,7 @@ bool itOldkuri_UnkMotion2_Coll(Item_GObj* gobj)
     if (it_80276308(gobj) == 8 && ip->xDD4_itemVar.oldkuri.xDFC != 0) {
         Item* ip = GET_ITEM(gobj);
         itOldkuriAttributes* attr =
-            (itOldkuriAttributes*) ip->xC4_article_data->x4_specialAttributes;
+            &ip->xC4_article_data->x4_specialAttributes->oldkuri;
         ip->xDD4_itemVar.oldkuri.xDF4 = ip->facing_dir * ((f32*) attr->x0)[1];
         ip->x40_vel.x = ip->xDD4_itemVar.oldkuri.xDF4;
         ip->x40_vel.z = 0.0f;
@@ -256,7 +248,7 @@ bool itOldkuri_UnkMotion3_Coll(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     itOldkuriAttributes* attr =
-        (itOldkuriAttributes*) ip->xC4_article_data->x4_specialAttributes;
+        &ip->xC4_article_data->x4_specialAttributes->oldkuri;
     ip->xDD4_itemVar.oldkuri.xDF8 = (s32) attr->xC;
     it_8026E414(gobj, it_802D747C);
     return it_8027C794(gobj);
@@ -291,7 +283,7 @@ bool itOldkuri_UnkMotion4_Coll(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     itOldkuriAttributes* attr =
-        (itOldkuriAttributes*) ip->xC4_article_data->x4_specialAttributes;
+        &ip->xC4_article_data->x4_specialAttributes->oldkuri;
     ip->xDD4_itemVar.oldkuri.xDF8 = (s32) attr->xC;
     it_8026E414(gobj, it_802D747C);
     return it_8027C794(gobj);
@@ -414,7 +406,7 @@ bool it_2725_Logic0_DmgReceived(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     itOldkuriAttributes* attr =
-        (itOldkuriAttributes*) ip->xC4_article_data->x4_specialAttributes;
+        &ip->xC4_article_data->x4_specialAttributes->oldkuri;
 
     ip->xC9C += it_8027CBFC(gobj);
     if (ip->xC9C > *attr->x0 || ip->msid == 6) {
@@ -481,7 +473,7 @@ void it_802D81FC(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     itOldkuriAttributes* attr =
-        (itOldkuriAttributes*) ip->xC4_article_data->x4_specialAttributes;
+        &ip->xC4_article_data->x4_specialAttributes->oldkuri;
     ip->x40_vel.x *= attr->x8;
     Item_80268E5C(gobj, 8, ITEM_ANIM_UPDATE);
 }

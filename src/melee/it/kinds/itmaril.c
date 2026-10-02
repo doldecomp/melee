@@ -64,7 +64,7 @@ void it_802D6740(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     itMarilAttributes* attr =
-        (itMarilAttributes*) ip->xC4_article_data->x4_specialAttributes;
+        &ip->xC4_article_data->x4_specialAttributes->maril;
     ip->x40_vel.y += attr->xC;
     ip->xDD4_itemVar.maril.x6C = ip->x40_vel;
     lbVector_Normalize(&ip->xDD4_itemVar.maril.x6C);
@@ -123,7 +123,7 @@ void itMaril_Logic28_Spawned(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     itMarilAttributes* attr =
-        (itMarilAttributes*) ip->xC4_article_data->x4_specialAttributes;
+        &ip->xC4_article_data->x4_specialAttributes->maril;
     ip->xDD4_itemVar.maril.x60.x0_s.x0 = 0;
     ip->x5D0_animFrameSpeed = attr->x10;
     it_80279CDC(gobj, attr->x0);
@@ -143,7 +143,7 @@ static void itMaril_UnkMotion1_Coll_inline(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     itMarilAttributes* attr =
-        (itMarilAttributes*) ip->xC4_article_data->x4_specialAttributes;
+        &ip->xC4_article_data->x4_specialAttributes->maril;
     if (!ip->xDD4_itemVar.maril.x60.x0_s.x0) {
         ip->xDD4_itemVar.maril.x6C.y = attr->x8;
         ip->xDD4_itemVar.maril.x6C.x = (M_PI * -ip->facing_dir) / attr->x8;
@@ -186,7 +186,7 @@ void it_802D6A54(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     itMarilAttributes* attr =
-        (itMarilAttributes*) ip->xC4_article_data->x4_specialAttributes;
+        &ip->xC4_article_data->x4_specialAttributes->maril;
     Item_80268E5C(gobj, 1, ITEM_ANIM_UPDATE);
     ip->xDD4_itemVar.maril.x64 = attr->xC * ip->facing_dir;
     it_8026BD9C(gobj);
@@ -284,7 +284,7 @@ bool it_802D6F00(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     itMarilAttributes* attr =
-        (itMarilAttributes*) ip->xC4_article_data->x4_specialAttributes;
+        &ip->xC4_article_data->x4_specialAttributes->maril;
     if ((f32) ip->xC9C >= attr->x14) {
         it_80279D38(gobj);
         it_802D6F00_inline(gobj);

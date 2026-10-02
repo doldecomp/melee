@@ -73,7 +73,7 @@ void it_802C4B38(Item_GObj* item_gobj)
 {
     Item* item = GET_ITEM(item_gobj);
     itMDisableAttributes* attrs =
-        (itMDisableAttributes*) item->xC4_article_data->x4_specialAttributes;
+        &item->xC4_article_data->x4_specialAttributes->m_disable;
     Fighter_GObj* fighter_gobj = item->xDD4_itemVar.mdisable.owner;
 
     // the last parameter gets the y scaling of mewtwo

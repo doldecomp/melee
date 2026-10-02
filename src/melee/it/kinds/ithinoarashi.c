@@ -119,7 +119,7 @@ bool itHinoarashi_UnkMotion1_Anim(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     itHinoarashiAttributes* attr =
-        (itHinoarashiAttributes*) ip->xC4_article_data->x4_specialAttributes;
+        &ip->xC4_article_data->x4_specialAttributes->hinoarashi;
     if (!it_80272C6C(gobj)) {
         return true;
     }
@@ -163,7 +163,7 @@ bool it_2725_Logic27_DmgReceived(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     itHinoarashiAttributes* attr =
-        (itHinoarashiAttributes*) ip->xC4_article_data->x4_specialAttributes;
+        &ip->xC4_article_data->x4_specialAttributes->hinoarashi;
     if (ip->xC9C >= attr->x4) {
         it_80279D38(gobj);
         it_802762BC(gobj->user_data);
@@ -282,8 +282,7 @@ void it_802D64B8(HSD_GObj* gobj, Vec3* pos, u32 arg2, f32 facing_dir)
         if (new_gobj != NULL) {
             Item* new_ip = GET_ITEM(new_gobj);
             itHinoarashiAttributes* attr =
-                (itHinoarashiAttributes*)
-                    new_ip->xC4_article_data->x4_specialAttributes;
+                &new_ip->xC4_article_data->x4_specialAttributes->hinoarashi;
             f32 speed;
             f32 angle;
 

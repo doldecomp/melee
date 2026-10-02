@@ -5,17 +5,8 @@
 
 #include <melee/it/forward.h>
 
+#include <melee/it/itemattrs.h> // IWYU pragma: export
 #include <melee/it/kinds/types.h>
-
-typedef struct itLipstickSporeAttributes {
-    f32 x0;
-    f32 x4;
-    f32 x8;
-    f32 xC;
-    f32 x10;
-    s32 x14;
-    s32 x18;
-} itLipstickSporeAttributes;
 
 /* 29A114 */ void it_8029A114(Fighter_GObj*, Vec*, f32 facing_dir, s32 arg4);
 /* 29A218 */ void it_8029A218(HSD_GObj* owner, Vec3* pos, f32 facing_dir,

@@ -118,8 +118,7 @@ HSD_GObj* it_802AB58C(Item_GObj* owner, Vec3* pos, f32 facing_dir)
     if (ball != NULL) {
         Item* ip = GET_ITEM(ball);
         itPKThunderAttributes* attr =
-            (itPKThunderAttributes*)
-                ip->xC4_article_data->x4_specialAttributes;
+            &ip->xC4_article_data->x4_specialAttributes->pk_thunder;
 
         Item_ClearCmdVars(ip);
         it_80275158(ball, attr->x0_PKTHUNDER_LIFETIME);
@@ -195,7 +194,7 @@ void it_802ABA4C(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     itPKThunderAttributes* attr =
-        (itPKThunderAttributes*) ip->xC4_article_data->x4_specialAttributes;
+        &ip->xC4_article_data->x4_specialAttributes->pk_thunder;
     int i;
 
     Item_ClearFlagsAndEnterState(gobj, ip, 0);
@@ -287,7 +286,7 @@ void itNesspkthunderball_UnkMotion0_Phys(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     itPKThunderAttributes* attr =
-        (itPKThunderAttributes*) ip->xC4_article_data->x4_specialAttributes;
+        &ip->xC4_article_data->x4_specialAttributes->pk_thunder;
     Vec3 stick;
     f32 angle;
     Vec3 cross;

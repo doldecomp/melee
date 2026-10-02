@@ -15,8 +15,7 @@
 #include <melee/it/item.h>
 #include <melee/it/itgroundcoll.h>
 
-#define GET_ATTRS(ip)                                                         \
-    ((itSScopeAttributes*) (ip)->xC4_article_data->x4_specialAttributes)
+#define GET_ATTRS(ip) (&(ip)->xC4_article_data->x4_specialAttributes->s_scope)
 
 ItemStateTable it_803F5F40[] = {
     { -1, itSscope_UnkMotion0_Anim, itSscope_UnkMotion0_Phys,
@@ -114,7 +113,7 @@ int it_80291DAC(Item_GObj* gobj, int arg1)
     s32 level;
     int cost;
     int i;
-    PAD_STACK(12);
+    PAD_STACK(8);
 
     if (ip->xD4C <= 0) {
         return -1;

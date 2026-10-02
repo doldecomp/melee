@@ -76,8 +76,7 @@ u32 it_802C4D10(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     itMewtwoShadowball_DatAttrs* attr =
-        (itMewtwoShadowball_DatAttrs*)
-            ip->xC4_article_data->x4_specialAttributes;
+        &ip->xC4_article_data->x4_specialAttributes->mewtwo_shadowball;
     HSD_JObj* child = itGetJObjGrandchild(gobj);
 
     if (ip->xDD4_itemVar.mewtwoshadowball.x4C > 0) {
@@ -148,8 +147,7 @@ HSD_GObj* it_802C5000(Item_GObj* parent, Vec3* pos, s32 bone, s32 kind,
     if (item_gobj != NULL) {
         Item* ip = GET_ITEM(item_gobj);
         itMewtwoShadowball_DatAttrs* attr =
-            (itMewtwoShadowball_DatAttrs*)
-                ip->xC4_article_data->x4_specialAttributes;
+            &ip->xC4_article_data->x4_specialAttributes->mewtwo_shadowball;
         Item_ClearCmdVars(ip);
         it_80275158(item_gobj, attr->x0);
         ip->xDD4_itemVar.mewtwoshadowball.x14 = 0;
@@ -190,8 +188,7 @@ Item_GObj* it_802C519C(Item_GObj* parent, Vec3* pos, s32 kind, s32 max_charge,
     if (item_gobj != NULL) {
         Item* ip = GET_ITEM(item_gobj);
         itMewtwoShadowball_DatAttrs* attr =
-            (itMewtwoShadowball_DatAttrs*)
-                ip->xC4_article_data->x4_specialAttributes;
+            &ip->xC4_article_data->x4_specialAttributes->mewtwo_shadowball;
         f32 timer;
 
         Item_80268E5C(item_gobj, 9, ITEM_ANIM_UPDATE);
@@ -260,8 +257,7 @@ void it_802C53F0(Item_GObj* gobj, Vec3* pos, float angle, float charge,
     HSD_JObj* jobj;
     Item* ip = GET_ITEM(gobj);
     itMewtwoShadowball_DatAttrs* attr =
-        (itMewtwoShadowball_DatAttrs*)
-            ip->xC4_article_data->x4_specialAttributes;
+        &ip->xC4_article_data->x4_specialAttributes->mewtwo_shadowball;
     Vec3 rot;
     Vec3 tr;
     PAD_STACK(4);
@@ -381,8 +377,7 @@ bool itMewtwoshadowball_UnkMotion0_Anim(Item_GObj* gobj)
 {
     Item* ip = gobj->user_data;
     itMewtwoShadowball_DatAttrs* attr =
-        (itMewtwoShadowball_DatAttrs*)
-            ip->xC4_article_data->x4_specialAttributes;
+        &ip->xC4_article_data->x4_specialAttributes->mewtwo_shadowball;
     HSD_JObj* grandchild = HSD_JObjGetChild(HSD_JObjGetChild(GET_JOBJ(gobj)));
     Vec3 trans;
     Vec3 scale;
@@ -467,8 +462,7 @@ void it_802C5B18(Item_GObj* gobj, Item_GObj* arg1)
 {
     Item* ip = GET_ITEM(gobj);
     itMewtwoShadowball_DatAttrs* attr =
-        (itMewtwoShadowball_DatAttrs*)
-            ip->xC4_article_data->x4_specialAttributes;
+        &ip->xC4_article_data->x4_specialAttributes->mewtwo_shadowball;
     it_80275158(gobj, attr->x0);
     efLib_DestroyAll(gobj);
     ip->xDD4_itemVar.mewtwoshadowball.x28 = 0;
@@ -559,8 +553,7 @@ void it_802C5E5C(Item_GObj* gobj)
     Item* ip = GET_ITEM(gobj);
     HSD_JObj* jobj = gobj->hsd_obj;
     itMewtwoShadowball_DatAttrs* attr =
-        (itMewtwoShadowball_DatAttrs*)
-            ip->xC4_article_data->x4_specialAttributes;
+        &ip->xC4_article_data->x4_specialAttributes->mewtwo_shadowball;
     Vec3 pos;
 
     HSD_JObjSetFlagsAll(gobj->hsd_obj, JOBJ_HIDDEN);

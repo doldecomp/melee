@@ -142,7 +142,7 @@ void it_802EB6DC(Item_GObj* gobj)
     s32 randi_result;
     Item* ip = GET_ITEM(gobj);
     itTincleAttributes* sa =
-        (itTincleAttributes*) ip->xC4_article_data->x4_specialAttributes;
+        &ip->xC4_article_data->x4_specialAttributes->tincle;
     Item* unused;
     s32 unused2;
     s32 range_i;
@@ -196,7 +196,7 @@ void it_802EB870(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     itTincleAttributes* sa =
-        (itTincleAttributes*) ip->xC4_article_data->x4_specialAttributes;
+        &ip->xC4_article_data->x4_specialAttributes->tincle;
     s32 s;
     PAD_STACK(8);
 
@@ -234,7 +234,7 @@ void it_802EBA00(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     itTincleAttributes* sa =
-        (itTincleAttributes*) ip->xC4_article_data->x4_specialAttributes;
+        &ip->xC4_article_data->x4_specialAttributes->tincle;
     f32 dur_f = (f32) sa->x28;
     f32 height = sa->x24;
 
@@ -275,7 +275,7 @@ void itTincle_UnkMotion2_Phys(Item_GObj* gobj)
     Item* ip = GET_ITEM(gobj);
     f32 bounce_count = ip->xDD4_itemVar.tincle.x3C;
     itTincleAttributes* sa =
-        (itTincleAttributes*) ip->xC4_article_data->x4_specialAttributes;
+        &ip->xC4_article_data->x4_specialAttributes->tincle;
     PAD_STACK(8);
 
     if (bounce_count == 0.0f) {
@@ -388,7 +388,7 @@ void it_802EBE5C(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     itTincleAttributes* data =
-        (itTincleAttributes*) ip->xC4_article_data->x4_specialAttributes;
+        &ip->xC4_article_data->x4_specialAttributes->tincle;
 
     ip->xDD4_itemVar.tincle.x30 = (f32) ip->msid;
     ip->xDD4_itemVar.tincle.x44 = ip->x40_vel.y;
@@ -412,7 +412,7 @@ void itTincle_UnkMotion4_Phys(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     itTincleAttributes* sa =
-        (itTincleAttributes*) ip->xC4_article_data->x4_specialAttributes;
+        &ip->xC4_article_data->x4_specialAttributes->tincle;
     if (ip->xDD4_itemVar.tincle.x20 == 0) {
         f32 dist;
         ip->x40_vel.y = -sa->x48;
@@ -438,7 +438,7 @@ void it_802EBFAC(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     itTincleAttributes* sa =
-        (itTincleAttributes*) ip->xC4_article_data->x4_specialAttributes;
+        &ip->xC4_article_data->x4_specialAttributes->tincle;
     f32 dist = ip->xDD4_itemVar.tincle.x5C - ip->pos.y;
     f32 max_speed = sa->x4C;
     PAD_STACK(16);
@@ -618,7 +618,7 @@ void it_802EC4D0(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     itTincleAttributes* data =
-        (itTincleAttributes*) ip->xC4_article_data->x4_specialAttributes;
+        &ip->xC4_article_data->x4_specialAttributes->tincle;
     s32 range;
     PAD_STACK(8);
 
@@ -683,7 +683,7 @@ void it_802EC69C(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     itTincleAttributes* sa =
-        (itTincleAttributes*) ip->xC4_article_data->x4_specialAttributes;
+        &ip->xC4_article_data->x4_specialAttributes->tincle;
     f32 dist;
     PAD_STACK(16);
 
@@ -746,7 +746,7 @@ static void it_802EC870(Item_GObj* gobj, int arg1)
 {
     Item* ip = GET_ITEM(gobj);
     itTincleAttributes* sa =
-        (itTincleAttributes*) ip->xC4_article_data->x4_specialAttributes;
+        &ip->xC4_article_data->x4_specialAttributes->tincle;
 
     if (arg1 != 0) {
         ip->facing_dir = -ip->facing_dir;

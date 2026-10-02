@@ -48,7 +48,7 @@ void it_802E2470(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     itOldottoseaAttributes* attr =
-        (itOldottoseaAttributes*) ip->xC4_article_data->x4_specialAttributes;
+        &ip->xC4_article_data->x4_specialAttributes->oldottosea;
     s32 facing;
     PAD_STACK(8);
 
@@ -83,7 +83,7 @@ bool it_2725_Logic8_DmgReceived(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     itOldottoseaAttributes* attr =
-        (itOldottoseaAttributes*) ip->xC4_article_data->x4_specialAttributes;
+        &ip->xC4_article_data->x4_specialAttributes->oldottosea;
     PAD_STACK(0x10);
 
     ip->init_facing_dir = ip->facing_dir;
@@ -141,7 +141,7 @@ void it_802E27B4(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     itOldottoseaAttributes* attr =
-        (itOldottoseaAttributes*) ip->xC4_article_data->x4_specialAttributes;
+        &ip->xC4_article_data->x4_specialAttributes->oldottosea;
     Vec3 pos;
     int int_dir;
 
@@ -180,7 +180,7 @@ bool itOldottosea_UnkMotion2_Anim(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     itOldottoseaAttributes* attr =
-        (itOldottoseaAttributes*) ip->xC4_article_data->x4_specialAttributes;
+        &ip->xC4_article_data->x4_specialAttributes->oldottosea;
     s32 threshold;
     PAD_STACK(0x10);
 
@@ -234,7 +234,7 @@ void itOldottosea_UnkMotion2_Phys(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     itOldottoseaAttributes* attr =
-        (itOldottoseaAttributes*) ip->xC4_article_data->x4_specialAttributes;
+        &ip->xC4_article_data->x4_specialAttributes->oldottosea;
     s32 jp_offset;
 
     if (lbLang_IsSettingJP()) {
@@ -281,7 +281,7 @@ void it_802E2BC0(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     itOldottoseaAttributes* attr =
-        (itOldottoseaAttributes*) ip->xC4_article_data->x4_specialAttributes;
+        &ip->xC4_article_data->x4_specialAttributes->oldottosea;
     ip->xDD4_itemVar.oldottosea.x28 = 0;
     ip->x40_vel.x *= attr->x4;
     Item_80268E5C(gobj, 4, ITEM_ANIM_UPDATE);
@@ -394,7 +394,7 @@ void itOldottosea_UnkMotion7_Phys(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     itOldottoseaAttributes* attr =
-        (itOldottoseaAttributes*) ip->xC4_article_data->x4_specialAttributes;
+        &ip->xC4_article_data->x4_specialAttributes->oldottosea;
     s32 threshold;
 
     if (lbLang_IsSettingJP()) {

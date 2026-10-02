@@ -152,8 +152,7 @@ void it_80287690(Item_GObj* gobj)
     Item* ip = GET_ITEM(gobj);
     HSD_JObj* jobj = GET_JOBJ(gobj);
     f32 step =
-        1.5707964f /
-        ((itTaruAttributes*) ip->xC4_article_data->x4_specialAttributes)->x18;
+        1.5707964f / (&ip->xC4_article_data->x4_specialAttributes->taru)->x18;
     HSD_JObj* child = HSD_JObjGetChild(jobj);
     f32 var_f31;
     f32 rot;
