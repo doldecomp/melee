@@ -1,3 +1,11 @@
+/**
+ * @file ftsamus.c
+ * @brief Samus fighter initialization, callbacks, and grapple beam setup
+ * @details Implements Samus's character load, death cleanup, item interaction
+ * callbacks, motion state table, attribute scaling, and Grapple Beam accessory
+ * attachment for throws. Module prefix: ftSs
+ */
+
 #include "ftsamus.h"
 
 #include <melee/ft/kinds/ftCommon/forward.h>
@@ -27,9 +35,13 @@
 
 /* 459F88 */ UnkCostumeStruct ftSs_CostumeList[5];
 
+/**
+ * @brief Motion state table for Samus special moves and character-specific
+ * actions
+ */
 MotionState ftSs_Init_MotionStateTable[ftSs_MS_SelfCount] = {
     {
-        // ftSs_MS_SpecialLw = 341
+        // ftSs_MS_SpecialLw = 341: Down-B (Morph Ball, Ground)
         ftSs_SM_SpecialLw,
         Ft_MF_None,
         FtMoveId_Default << 24,
@@ -40,7 +52,7 @@ MotionState ftSs_Init_MotionStateTable[ftSs_MS_SelfCount] = {
         ftCamera_UpdateCameraBox,
     },
     {
-        // ftSs_MS_SpecialAirLw = 342
+        // ftSs_MS_SpecialAirLw = 342: Down-B (Morph Ball, Air)
         ftSs_SM_SpecialAirLw,
         Ft_MF_None,
         FtMoveId_Default << 24,
@@ -51,7 +63,7 @@ MotionState ftSs_Init_MotionStateTable[ftSs_MS_SelfCount] = {
         ftCamera_UpdateCameraBox,
     },
     {
-        // ftSs_MS_SpecialNStart = 343
+        // ftSs_MS_SpecialNStart = 343: Neutral-B (Charge Shot startup, Ground)
         ftSs_SM_SpecialNStart,
         ftSs_MF_SpecialN,
         FtMoveId_SpecialN << 24,
@@ -62,7 +74,8 @@ MotionState ftSs_Init_MotionStateTable[ftSs_MS_SelfCount] = {
         ftCamera_UpdateCameraBox,
     },
     {
-        // ftSs_MS_SpecialNHold = 344
+        // ftSs_MS_SpecialNHold = 344: Neutral-B (Charge Shot charging loop,
+        // Ground)
         ftSs_SM_SpecialNHold,
         ftSs_MF_SpecialN,
         FtMoveId_SpecialN << 24,
@@ -73,7 +86,7 @@ MotionState ftSs_Init_MotionStateTable[ftSs_MS_SelfCount] = {
         ftCamera_UpdateCameraBox,
     },
     {
-        // ftSs_MS_SpecialNCancel = 345
+        // ftSs_MS_SpecialNCancel = 345: Neutral-B (Charge Shot cancel, Ground)
         ftSs_SM_SpecialNCancel,
         ftSs_MF_SpecialN,
         FtMoveId_SpecialN << 24,
@@ -84,7 +97,7 @@ MotionState ftSs_Init_MotionStateTable[ftSs_MS_SelfCount] = {
         ftCamera_UpdateCameraBox,
     },
     {
-        // ftSs_MS_SpecialN = 346
+        // ftSs_MS_SpecialN = 346: Neutral-B (Charge Shot fire, Ground)
         ftSs_SM_SpecialN,
         ftSs_MF_SpecialN,
         FtMoveId_SpecialN << 24,
@@ -95,7 +108,7 @@ MotionState ftSs_Init_MotionStateTable[ftSs_MS_SelfCount] = {
         ftCamera_UpdateCameraBox,
     },
     {
-        // ftSs_MS_SpecialAirNStart = 347
+        // ftSs_MS_SpecialAirNStart = 347: Neutral-B (Charge Shot startup, Air)
         ftSs_SM_SpecialAirNStart,
         ftSs_MF_SpecialAirN,
         FtMoveId_SpecialN << 24,
@@ -106,7 +119,7 @@ MotionState ftSs_Init_MotionStateTable[ftSs_MS_SelfCount] = {
         ftCamera_UpdateCameraBox,
     },
     {
-        // ftSs_MS_SpecialAirN = 348
+        // ftSs_MS_SpecialAirN = 348: Neutral-B (Charge Shot fire, Air)
         ftSs_SM_SpecialAirN,
         ftSs_MF_SpecialAirN,
         FtMoveId_SpecialN << 24,
@@ -117,7 +130,7 @@ MotionState ftSs_Init_MotionStateTable[ftSs_MS_SelfCount] = {
         ftCamera_UpdateCameraBox,
     },
     {
-        // ftSs_MS_SpecialS = 349
+        // ftSs_MS_SpecialS = 349: Side-B (Homing Missile, Ground)
         ftSs_SM_SpecialS,
         ftSs_MF_SpecialS,
         FtMoveId_SpecialS << 24,
@@ -128,7 +141,8 @@ MotionState ftSs_Init_MotionStateTable[ftSs_MS_SelfCount] = {
         ftCamera_UpdateCameraBox,
     },
     {
-        // ftSs_MS_SpecialSSmash = 350
+        // ftSs_MS_SpecialSSmash = 350: Side-B (Super Missile, Ground smash
+        // input)
         ftSs_SM_SpecialSSmash,
         ftSs_MF_SpecialSSmash,
         FtMoveId_SpecialS << 24,
@@ -139,7 +153,7 @@ MotionState ftSs_Init_MotionStateTable[ftSs_MS_SelfCount] = {
         ftCamera_UpdateCameraBox,
     },
     {
-        // ftSs_MS_SpecialAirS = 351
+        // ftSs_MS_SpecialAirS = 351: Side-B (Homing Missile, Air)
         ftSs_SM_SpecialAirS,
         ftSs_MF_SpecialAirS,
         FtMoveId_SpecialS << 24,
@@ -150,7 +164,8 @@ MotionState ftSs_Init_MotionStateTable[ftSs_MS_SelfCount] = {
         ftCamera_UpdateCameraBox,
     },
     {
-        // ftSs_MS_SpecialAirSSmash = 352
+        // ftSs_MS_SpecialAirSSmash = 352: Side-B (Super Missile, Air smash
+        // input)
         ftSs_SM_SpecialAirSSmash,
         ftSs_MF_SpecialAirSSmash,
         FtMoveId_SpecialS << 24,
@@ -161,7 +176,7 @@ MotionState ftSs_Init_MotionStateTable[ftSs_MS_SelfCount] = {
         ftCamera_UpdateCameraBox,
     },
     {
-        // ftSs_MS_SpecialHi = 353
+        // ftSs_MS_SpecialHi = 353: Up-B (Screw Attack, Ground)
         ftSs_SM_SpecialHi,
         ftSs_MF_SpecialHi,
         FtMoveId_SpecialHi << 24,
@@ -172,7 +187,7 @@ MotionState ftSs_Init_MotionStateTable[ftSs_MS_SelfCount] = {
         ftCamera_UpdateCameraBox,
     },
     {
-        // ftSs_MS_SpecialAirHi = 354
+        // ftSs_MS_SpecialAirHi = 354: Up-B (Screw Attack, Air)
         ftSs_SM_SpecialAirHi,
         ftSs_MF_SpecialAirHi,
         FtMoveId_SpecialHi << 24,
@@ -183,7 +198,7 @@ MotionState ftSs_Init_MotionStateTable[ftSs_MS_SelfCount] = {
         ftCamera_UpdateCameraBox,
     },
     {
-        // ftSs_MS_SpecialLwBomb = 355
+        // ftSs_MS_SpecialLwBomb = 355: Down-B (Bomb Drop release, Ground)
         ftSs_SM_SpecialLwBomb,
         ftSs_MF_SpecialLw,
         FtMoveId_SpecialLw << 24,
@@ -194,7 +209,7 @@ MotionState ftSs_Init_MotionStateTable[ftSs_MS_SelfCount] = {
         ftCamera_UpdateCameraBox,
     },
     {
-        // ftSs_MS_SpecialAirLwBomb = 356
+        // ftSs_MS_SpecialAirLwBomb = 356: Down-B (Bomb Drop release, Air)
         ftSs_SM_SpecialAirLwBomb,
         ftSs_MF_SpecialAirLw,
         FtMoveId_SpecialLw << 24,
@@ -205,7 +220,7 @@ MotionState ftSs_Init_MotionStateTable[ftSs_MS_SelfCount] = {
         ftCamera_UpdateCameraBox,
     },
     {
-        // ftSs_MS_AirCatch = 357
+        // ftSs_MS_AirCatch = 357: Aerial Z-air Grapple Beam extend
         ftSs_SM_AirCatch,
         Ft_MF_FreezeState,
         FtMoveId_Default << 24,
@@ -216,7 +231,8 @@ MotionState ftSs_Init_MotionStateTable[ftSs_MS_SelfCount] = {
         ftCamera_UpdateCameraBox,
     },
     {
-        // ftSs_MS_AirCatchHit = 358
+        // ftSs_MS_AirCatchHit = 358: Aerial Z-air Grapple Beam connect /
+        // tether
         ftSs_SM_AirCatchHit,
         ftSs_MF_ZairCatch,
         FtMoveId_Default << 24,
@@ -257,6 +273,10 @@ Fighter_CostumeStrings ftSs_Init_CostumeStrings[] = {
     { ftSs_Init_803CE5C4, ftSs_Init_803CE5D0, NULL },
 };
 
+/**
+ * @brief Resets Samus fighter state and pointers upon death / KO.
+ * @param gobj Samus fighter game object pointer
+ */
 void ftSs_Init_OnDeath(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -269,6 +289,13 @@ void ftSs_Init_OnDeath(HSD_GObj* gobj)
     fp->u.ss.x2240 = 0;
 }
 
+/**
+ * @brief Fighter load callback: sets walljump flag, loads attributes, and
+ * registers items.
+ * @details Registers Samus Bomb, Charge Shot, Missile, and Grapple Beam item
+ * types.
+ * @param gobj Samus fighter game object pointer
+ */
 void ftSs_Init_OnLoad(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -284,6 +311,11 @@ void ftSs_Init_OnLoad(HSD_GObj* gobj)
     it_8026B3F8(item_list[3], It_Kind_Samus_GBeam);
 }
 
+/**
+ * @brief Damage/state cleanup callback to cancel active Charge Shot and
+ * missile effects.
+ * @param gobj Samus fighter game object pointer
+ */
 void ftSs_Init_80128428(HSD_GObj* gobj)
 {
     ftSs_SpecialN_80129258(gobj);
@@ -291,36 +323,65 @@ void ftSs_Init_80128428(HSD_GObj* gobj)
     ftCo_800D9C98(gobj);
 }
 
+/**
+ * @brief Item pickup event callback for Samus.
+ * @param gobj Samus fighter game object pointer
+ * @param flag Pickup flag
+ */
 void ftSs_Init_OnItemPickup(HSD_GObj* gobj, bool flag)
 {
     Fighter_OnItemPickup(gobj, flag, 0, 0);
 }
 
+/**
+ * @brief Item invisible event callback for Samus.
+ * @param gobj Samus fighter game object pointer
+ */
 void ftSs_Init_OnItemInvisible(HSD_GObj* gobj)
 {
     Fighter_OnItemInvisible(gobj, 0);
 }
 
+/**
+ * @brief Item visible event callback for Samus.
+ * @param gobj Samus fighter game object pointer
+ */
 void ftSs_Init_OnItemVisible(HSD_GObj* gobj)
 {
     Fighter_OnItemVisible(gobj, 0);
 }
 
+/**
+ * @brief Item drop event callback for Samus.
+ * @param gobj Samus fighter game object pointer
+ * @param bool1 Item drop condition flag
+ */
 void ftSs_Init_OnItemDrop(HSD_GObj* gobj, bool bool1)
 {
     Fighter_OnItemDrop(gobj, bool1, 0, 0);
 }
 
+/**
+ * @brief Checks if Samus's Charge Shot is at maximum charge and triggers
+ * full-charge SFX/visuals.
+ * @param gobj Samus fighter game object pointer
+ */
 void ftSs_Init_UnkMotionStates4(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftSs_DatAttrs* da = fp->dat_attrs;
     s32 samus_x2230 = fp->u.ss.x2230;
+    // Check if current charge level equals max charge (da->x18)
     if (samus_x2230 == da->x18) {
         ftCo_800BFFD0(fp, 53, 0);
     }
 }
 
+/**
+ * @brief Copies and scales special attributes (hitboxes, velocity, offsets)
+ * based on model scale.
+ * @param gobj Samus fighter game object pointer
+ */
 void ftSs_Init_LoadSpecialAttrs(HSD_GObj* gobj)
 {
     COPY_ATTRS(gobj, ftSs_DatAttrs);
@@ -330,7 +391,7 @@ void ftSs_Init_LoadSpecialAttrs(HSD_GObj* gobj)
         sA2->x54 *= fp->x34_scale.y;
         sA2->x58 *= fp->x34_scale.y;
         {
-            /// @todo Shared code wit #ftPk_Init_LoadSpecialAttrs
+            /// @todo Shared code with #ftPk_Init_LoadSpecialAttrs
             int i;
             for (i = 0;
                  i < (signed) (sizeof(sA2->height_attributes) / sizeof(float));
@@ -342,13 +403,29 @@ void ftSs_Init_LoadSpecialAttrs(HSD_GObj* gobj)
     }
 }
 
-void ftSs_Init_80128770(HSD_AObj* gobj, float rate)
+/**
+ * @brief Sets animation playback rate on Grapple Beam animation object if
+ * non-looping.
+ * @param aobj Grapple beam animation object pointer
+ * @param rate Animation playback rate
+ */
+void ftSs_Init_80128770(HSD_AObj* aobj, float rate)
 {
-    if (gobj && !(HSD_AObjGetFlags(gobj) & AOBJ_LOOP)) {
-        HSD_AObjSetRate(gobj, rate);
+    if (aobj && !(HSD_AObjGetFlags(aobj) & AOBJ_LOOP)) {
+        HSD_AObjSetRate(aobj, rate);
     }
 }
 
+/**
+ * @brief Spawns and attaches Grapple Beam accessory to Samus's throw joint for
+ * throw animations.
+ * @details Scales the accessory with fighter scale and applies the throw
+ * submotion animation (Forward/Back/Up/Down throw indexed relative to
+ * ftCo_MS_ThrowF).
+ * @param gobj Samus fighter game object pointer
+ * @param motion_state Current throw motion state ID
+ * @param anim_speed Animation playback speed multiplier
+ */
 void ftSs_Init_CreateThrowGrappleBeam(HSD_GObj* gobj, s32 motion_state,
                                       float anim_speed)
 {
@@ -360,6 +437,7 @@ void ftSs_Init_CreateThrowGrappleBeam(HSD_GObj* gobj, s32 motion_state,
     struct UNK_SAMUS_S1* beam = item_list[4];
     ftCommon_SetAccessory(fp, beam->x0_joint);
 
+    // Scale grapple beam with fighter model scale
     scale.x = scale.y = scale.z = fp->x34_scale.y;
     HSD_JObjSetScale((fighter_copy = fp)->x20A0_accessory, &scale);
 
