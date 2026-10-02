@@ -1,10 +1,8 @@
 /**
- * @file itzako.h
- * @brief Zako (Fighting Wireframes) Item Module
- * @details Handles the initialization, physics, spawning, and specific
- * behaviors for items associated with the Fighting Wireframes (Zako) in
- * Multi-Man Melee. Module prefix: it (Item)
+ * @file
+ * @brief Fighting Wireframe items (@c It_Kind_Boy and @c It_Kind_Girl).
  */
+
 #ifndef GALE01_ITZAKO
 #define GALE01_ITZAKO
 
@@ -15,88 +13,88 @@
 
 #include <dolphin/mtx.h>
 
-/** @brief Spawns and initializes a Zako item */
+/// Spawns and initializes a Zako item.
 /* 27B5B0 */ Item_GObj* it_8027B5B0(ItemKind kind, Vec3* pos, HSD_JObj* jobj,
                                     Vec3* vel, bool use_init);
 
-/** @brief Resets Zako item state variables */
+/// Resets Zako item state variables.
 /* 27B730 */ void it_8027B730(Item_GObj* item_gobj);
 
-/** @brief Calculates Zako item knockback velocity based on hit angle */
+/// Calculates Zako item knockback velocity based on hit angle.
 /* 27B798 */ bool it_8027B798(Item_GObj* item_gobj, Vec3* target);
 
-/** @brief Initializes physics parameters for a spawned Zako item */
+/// Initializes physics parameters for a spawned Zako item.
 /* 27B964 */ void it_8027B964(Item_GObj* item_gobj, bool chk);
 
-/** @brief Calculates randomized camera-relative position offsets */
+/// Calculates randomized camera-relative position offsets.
 /* 27BA54 */ int it_8027BA54(HSD_GObj* gobj, Vec3* target);
 
-/** @brief Applies Euler angle rotations to a vector */
+/// Applies Euler angle rotations to a vector.
 /* 27BB1C */ void it_8027BB1C(Vec3* pos, Vec3* target);
 
-/** @brief Rotates Zako items based on terrain collision normals */
+/// Rotates Zako items based on terrain collision normals.
 /* 27BBF4 */ void it_8027BBF4(Item_GObj* item_gobj, bool arg_chk,
-                              f64 rotation_factor, f32 frames);
+                              f64 facing_dir, f32 frames);
 
-/** @brief Internal wrapper for normal-based rotation (variant 1) */
-/* 27C0A8 */ void it_8027C0A8(Item_GObj* item_gobj, f32 rotation_factor,
+/// Internal wrapper for normal-based rotation (variant 1).
+/* 27C0A8 */ void it_8027C0A8(Item_GObj* item_gobj, f32 facing_dir,
                               f32 frames);
 
-/** @brief Internal wrapper for normal-based rotation (variant 2) */
-/* 27C0CC */ void it_8027C0CC(Item_GObj* item_gobj, f32 rotation_factor,
+/// Internal wrapper for normal-based rotation (variant 2).
+/* 27C0CC */ void it_8027C0CC(Item_GObj* item_gobj, f32 facing_dir,
                               f32 frames);
 
-/** @brief Computes Zako item rotation from arbitrary reference angles */
+/// Computes Zako item rotation from arbitrary reference angles.
 /* 27C0F0 */ void it_8027C0F0(Item_GObj* item_gobj, Vec3* target,
-                              f64 rotation_factor, f32 frames);
+                              f64 facing_dir, f32 frames);
 
-/** @brief Corrects X/Y/Z rotations for a Zako item */
+/// Corrects X/Y/Z rotations for a Zako item.
 /* 27C56C */ void it_8027C56C(Item_GObj* item_gobj, f32 y_rot);
 
-/** @brief Unused Zako verification routine */
+/// Unused Zako verification routine.
 /* 27C794 */ bool it_8027C794(Item_GObj* item_gobj);
 
-/** @brief Evaluates lifetime logic for Zako parts */
+/// Evaluates lifetime logic for Zako parts.
 /* 27C79C */ bool it_8027C79C(Item_GObj* item_gobj);
 
-/** @brief Processes Zako item state with a provided callback function */
+/// Processes Zako item state with a provided callback function.
 /* 27C824 */ bool it_8027C824(Item_GObj* item_gobj,
                               s32 (*callback_func)(Item_GObj*));
 
-/** @brief Handles Zako item destruction callback */
+/// Handles Zako item destruction callback.
 /* 27C8B0 */ void it_2725_Logic9_Destroyed(Item_GObj* item_gobj);
 
-/** @brief Calculates proportional vector orientations */
-/* 27C8D0 */ void it_8027C8D0(Vec3* pos, Vec3* target, f32 rotation_factor);
+/// Calculates proportional vector orientations.
+/* 27C8D0 */ void it_8027C8D0(Vec3* pos, Vec3* target, f32 facing_dir);
 
-/** @brief Triggers randomized audio events for Zako pieces */
+/// Triggers randomized audio events for Zako pieces.
 /* 27C9D8 */ void it_8027C9D8(Item* item_data);
 
-/** @brief Evaluates fighter animation states against Zako interactions */
+/// Evaluates fighter animation states against Zako interactions.
 /* 27CA7C */ bool it_8027CA7C(HSD_GObj* gobj);
 
-/** @brief Halts Zako item velocity and clears ownership */
+/// Halts Zako item velocity and clears ownership.
 /* 27CAD8 */ void it_8027CAD8(Item_GObj* item_gobj);
 
-/** @brief Inherits facing direction from the holding fighter */
+/// Inherits facing direction from the holding fighter.
 /* 27CB3C */ void it_8027CB3C(Item_GObj* item_gobj);
 
-/** @brief Readjusts facing direction when caught or grabbed */
+/// Readjusts facing direction when caught or grabbed.
 /* 27CBA4 */ void it_8027CBA4(Item_GObj* item_gobj);
 
-/** @brief Returns lifetime boundaries for standard items */
+/// Returns lifetime boundaries for standard items.
 /* 27CBFC */ f32 it_8027CBFC(Item_GObj* item_gobj);
 
-/** @brief Evaluates rare item drops (e.g. trophies) upon Zako defeat */
+/// Evaluates rare item drops (e.g. trophies) upon Zako defeat.
 /* 27CC88 */ Item_GObj* it_8027CC88(Item_GObj* item_gobj_arg);
 
-/** @brief Grants points to the player upon Zako item absorption/destruction */
+/// Grants points to the player upon Zako item absorption/destruction.
 /* 27CE18 */ void it_8027CE18(Item_GObj* item_gobj);
 
-/** @brief Triggers the destruction event in the generator */
+/// Triggers the destruction event in the generator.
 /* 27CE44 */ void it_8027CE44(Item_GObj* item_gobj);
 
-/** @brief Game&Watch specific initialization hook for Zako interactions */
+/// Game&Watch specific initialization hook for Zako interactions.
 /* 27CE64 */ void it_8027CE64(Item_GObj* item_gobj, HSD_GObj* fighter_gobj,
                               void* attr_address);
 
