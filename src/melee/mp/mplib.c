@@ -3929,8 +3929,10 @@ static inline int mpLineGetNextCachedInline(int line_id)
     return line->next_id0;
 }
 
-static inline int mpLineGetNextCheckResultFirst(int result, MapLine* line)
+static inline int mpLineGetNextChecked(MapLine* line)
 {
+    int result = line->next_id1;
+
     if (result != -1) {
         u32 flags = groundCollLine[result].flags;
 
@@ -3959,13 +3961,7 @@ int mpLib_800534FC_Floor(int line_id)
             new_id = -1;
         } else if (new_id != groundCollLine[line_id].x0->next_id1) {
             line_id = new_id;
-#ifdef MUST_MATCH
-            new_id = mpLineGetNextCheckResultFirst(
-                (line = groundCollLine[new_id].x0)->next_id1, line);
-#else
-            line = groundCollLine[new_id].x0;
-            new_id = mpLineGetNextCheckResultFirst(line->next_id1, line);
-#endif
+            new_id = mpLineGetNextChecked(line = groundCollLine[line_id].x0);
             continue;
         }
         break;
@@ -3999,8 +3995,10 @@ static inline int mpLineGetPrevInline(int line_id)
     return line->prev_id0;
 }
 
-static inline int mpLineGetPrevCheckResultFirst(int result, MapLine* line)
+static inline int mpLineGetPrevChecked(MapLine* line)
 {
+    int result = line->prev_id1;
+
     if (result != -1) {
         u32 flags = groundCollLine[result].flags;
 
@@ -4029,13 +4027,7 @@ int mpLib_800536CC_Floor(int line_id)
             new_id = -1;
         } else if (new_id != groundCollLine[line_id].x0->prev_id1) {
             line_id = new_id;
-#ifdef MUST_MATCH
-            new_id = mpLineGetPrevCheckResultFirst(
-                (line = groundCollLine[new_id].x0)->prev_id1, line);
-#else
-            line = groundCollLine[new_id].x0;
-            new_id = mpLineGetPrevCheckResultFirst(line->prev_id1, line);
-#endif
+            new_id = mpLineGetPrevChecked(line = groundCollLine[line_id].x0);
             continue;
         }
         break;
@@ -4072,13 +4064,7 @@ int mpLib_80053A04_Ceiling(int line_id)
             new_id = -1;
         } else if (new_id != groundCollLine[line_id].x0->prev_id1) {
             line_id = new_id;
-#ifdef MUST_MATCH
-            new_id = mpLineGetPrevCheckResultFirst(
-                (line = groundCollLine[new_id].x0)->prev_id1, line);
-#else
-            line = groundCollLine[new_id].x0;
-            new_id = mpLineGetPrevCheckResultFirst(line->prev_id1, line);
-#endif
+            new_id = mpLineGetPrevChecked(line = groundCollLine[line_id].x0);
             continue;
         }
         break;
