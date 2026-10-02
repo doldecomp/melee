@@ -7,13 +7,9 @@
 
 pub use super::annotation::RootName;
 use super::{
-    DieId, TypeGraph, TypeKind, Variable,
-    annotation::DatTag,
-    canonical::Canonical,
-    expr::{eval_expr, identifier},
+    DieId, TypeGraph, TypeKind, Variable, annotation::DatTag,
+    canonical::Canonical, expr::identifier,
 };
-use crate::walk::macros;
-use std::collections::HashMap;
 use winnow::{
     ModalResult, Parser,
     combinator::{alt, delimited, eof, preceded, repeat},
@@ -25,8 +21,6 @@ pub struct Root<'g> {
     pub name: RootName,
     /// The type the symbol is loaded as; `None` for `void`.
     pub ty: Option<DieId>,
-    /// `DAT_BIND`s on the path through the loader's global name table.
-    pub bindings: Vec<(String, u64)>,
     pub witness: &'g Variable,
 }
 
@@ -74,17 +68,11 @@ pub fn roots<'g>(
             RootName::Literal(_) => Vec::new(),
         };
         if names.is_empty() {
-            roots.push(Root {
-                name,
-                ty,
-                bindings: Vec::new(),
-                witness,
-            });
+            roots.push(Root { name, ty, witness });
         } else {
-            roots.extend(names.into_iter().map(|(value, bindings)| Root {
+            roots.extend(names.into_iter().map(|value| Root {
                 name: RootName::Literal(value),
                 ty,
-                bindings,
                 witness,
             }));
         }
@@ -131,18 +119,7 @@ struct Memory<'a> {
     canonical: &'a Canonical,
     /// Every global's extent, `(start, end)`, sorted by start.
     extents: Vec<(u64, u64)>,
-    macros: HashMap<String, String>,
 }
-
-#[derive(Clone)]
-struct Cursor {
-    at: u64,
-    ty: DieId,
-    index: u64,
-    bindings: Vec<(String, u64)>,
-}
-
-type BoundName = (String, Vec<(String, u64)>);
 
 impl<'a> Memory<'a> {
     fn new(graph: &'a TypeGraph, canonical: &'a Canonical) -> Self {
@@ -159,63 +136,43 @@ impl<'a> Memory<'a> {
             graph,
             canonical,
             extents,
-            macros: macros(graph),
         }
     }
 
     /// Every string `expr` can evaluate to, or `None` if it isn't a path
     /// from a global to strings.
-    fn strings(&self, expr: &str) -> Option<Vec<BoundName>> {
+    fn strings(&self, expr: &str) -> Option<Vec<String>> {
         let (base, steps) = path.parse(expr).ok()?;
         let global = self.graph.globals.get(&self.graph.strings.get(base)?)?;
-        let mut cursors = vec![Cursor {
-            at: global.address,
-            ty: global.ty?,
-            index: 0,
-            bindings: Vec::new(),
-        }];
+        let mut cursors = vec![(global.address, global.ty?)];
         for step in &steps {
             cursors = cursors
                 .into_iter()
-                .flat_map(|cursor| self.step(cursor, step))
+                .flat_map(|(at, ty)| self.step(at, ty, step))
                 .collect();
         }
         let mut strings = Vec::new();
-        for cursor in cursors {
-            if let Some(s) = self.string(cursor.at, cursor.ty)? {
-                let value = (s, cursor.bindings);
-                if !strings.contains(&value) {
-                    strings.push(value);
-                }
+        for (at, ty) in cursors {
+            if let Some(s) = self.string(at, ty)?
+                && !strings.contains(&s)
+            {
+                strings.push(s);
             }
         }
         Some(strings)
     }
 
-    fn step(&self, mut cursor: Cursor, step: &Step) -> Vec<Cursor> {
+    fn step(&self, at: u64, ty: DieId, step: &Step) -> Vec<(u64, DieId)> {
         match step {
-            Step::Index => self
-                .elements(cursor.at, cursor.ty)
-                .into_iter()
-                .enumerate()
-                .map(|(index, (at, ty))| Cursor {
-                    at,
-                    ty,
-                    index: index as u64,
-                    bindings: cursor.bindings.clone(),
-                })
-                .collect(),
+            Step::Index => self.elements(at, ty),
             Step::Field(name) => {
-                self.field(cursor, name).into_iter().collect()
+                self.field(at, ty, name).into_iter().collect()
             }
-            Step::Arrow(name) => {
-                let Some((at, ty)) = self.deref(cursor.at, cursor.ty) else {
-                    return Vec::new();
-                };
-                cursor.at = at;
-                cursor.ty = ty;
-                self.field(cursor, name).into_iter().collect()
-            }
+            Step::Arrow(name) => self
+                .deref(at, ty)
+                .and_then(|(p, target)| self.field(p, target, name))
+                .into_iter()
+                .collect(),
         }
     }
 
@@ -249,41 +206,16 @@ impl<'a> Memory<'a> {
         (0..count).map(|i| (start + i * size, element)).collect()
     }
 
-    fn field(&self, mut cursor: Cursor, name: &str) -> Option<Cursor> {
+    fn field(&self, at: u64, ty: DieId, name: &str) -> Option<(u64, DieId)> {
         let TypeKind::Record { members, .. } =
-            &self.graph.types[&strip(self.graph, Some(cursor.ty))?].kind
+            &self.graph.types[&strip(self.graph, Some(ty))?].kind
         else {
             return None;
         };
         let member = members
             .iter()
             .find(|m| m.name.map(|n| self.graph.str(n)) == Some(name))?;
-        for annotation in &member.annotations {
-            let Some(DatTag::Bind(name, expr)) = annotation
-                .value
-                .and_then(|v| DatTag::parse(self.graph.str(v)))
-            else {
-                continue;
-            };
-            let value = eval_expr(&self.macros, &expr, &|name| {
-                if name == "_index" {
-                    Some(cursor.index)
-                } else {
-                    cursor
-                        .bindings
-                        .iter()
-                        .rev()
-                        .find(|(n, _)| n == name)
-                        .map(|(_, value)| *value)
-                }
-            });
-            if let Some(value) = value {
-                cursor.bindings.push((name, value));
-            }
-        }
-        cursor.at += member.offset?;
-        cursor.ty = member.ty?;
-        Some(cursor)
+        Some((at + member.offset?, member.ty?))
     }
 
     /// The address a pointer at `at` holds, and the type it points to.
@@ -362,145 +294,5 @@ fn pointee(graph: &TypeGraph, mut die: Option<DieId>) -> Option<DieId> {
             TypeKind::Pointer { target } => return *target,
             _ => return None,
         }
-    }
-}
-
-#[cfg(test)]
-mod tests {
-    use super::*;
-    use crate::dwarf::{Annotation, Global, Member, Type, Unit};
-
-    #[test]
-    fn loader_name_table_bindings_survive_expansion_and_cache() {
-        let mut graph = TypeGraph::default();
-        graph.units.push(Unit {
-            name: None,
-            address_size: 4,
-            macros: Vec::new(),
-        });
-        let name = graph.strings.get_or_intern("name");
-        let bind = graph.strings.get_or_intern("dat:bind(kind, _index)");
-        let member = Member {
-            name: Some(name),
-            ty: Some(2),
-            offset: Some(0),
-            bit_size: None,
-            bit_offset: None,
-            annotations: vec![Annotation {
-                name: None,
-                value: Some(bind),
-            }],
-        };
-        let kinds = [
-            (
-                1,
-                1,
-                TypeKind::Base {
-                    encoding: gimli::DW_ATE_signed_char.0,
-                },
-            ),
-            (2, 4, TypeKind::Pointer { target: Some(1) }),
-            (
-                3,
-                4,
-                TypeKind::Record {
-                    union: false,
-                    declaration: false,
-                    members: vec![member],
-                },
-            ),
-            (
-                4,
-                12,
-                TypeKind::Array {
-                    element: Some(3),
-                    dims: vec![Some(3)],
-                },
-            ),
-            (5, 4, TypeKind::Pointer { target: Some(3) }),
-            (6, 4, TypeKind::Pointer { target: Some(5) }),
-        ];
-        for (die, size, kind) in kinds {
-            graph.types.insert(
-                die,
-                Type {
-                    unit: 0,
-                    name: None,
-                    byte_size: Some(size),
-                    decl_file: None,
-                    scope: None,
-                    annotations: Vec::new(),
-                    kind,
-                },
-            );
-        }
-        let names = graph.strings.get_or_intern("names");
-        graph.globals.insert(
-            names,
-            Global {
-                address: 0x100,
-                ty: Some(4),
-            },
-        );
-        let pointer = graph.strings.get_or_intern("pointer");
-        graph.globals.insert(
-            pointer,
-            Global {
-                address: 0x200,
-                ty: Some(5),
-            },
-        );
-        graph.sections = vec![
-            (
-                0x100,
-                [0x300u32, 0x304, 0x304]
-                    .into_iter()
-                    .flat_map(u32::to_be_bytes)
-                    .collect(),
-            ),
-            (0x200, 0x100u32.to_be_bytes().to_vec()),
-            (0x300, b"one\0two\0".to_vec()),
-        ];
-        let annotation =
-            graph.strings.get_or_intern("dat:root(names[kind].name)");
-        graph.variables.insert(
-            7,
-            Variable {
-                unit: 0,
-                name: None,
-                ty: Some(6),
-                decl_file: None,
-                decl_line: None,
-                scope: None,
-                annotations: vec![Annotation {
-                    name: None,
-                    value: Some(annotation),
-                }],
-            },
-        );
-        let canonical = Canonical::new(&graph);
-        let memory = Memory::new(&graph, &canonical);
-        let expected = vec![
-            ("one".into(), vec![("kind".into(), 0)]),
-            ("two".into(), vec![("kind".into(), 1)]),
-            ("two".into(), vec![("kind".into(), 2)]),
-        ];
-        assert_eq!(memory.strings("names[kind].name"), Some(expected.clone()));
-        assert_eq!(memory.strings("pointer[kind].name"), Some(expected));
-        assert_eq!(
-            memory.strings("pointer->name"),
-            Some(vec![("one".into(), vec![("kind".into(), 0)])])
-        );
-        let expanded = roots(&graph, &canonical);
-        assert_eq!(expanded.len(), 3);
-        assert_eq!(expanded[2].bindings, [("kind".into(), 2)]);
-        let cache = super::super::cache::TypesFile::build(&graph);
-        assert_eq!(cache.root_bindings["one"], [("kind".into(), 0)]);
-        // Like root types, duplicate root names retain the first witness.
-        assert_eq!(cache.root_bindings["two"], [("kind".into(), 1)]);
-        let bytes = postcard::to_stdvec(&cache).unwrap();
-        let restored: super::super::cache::TypesFile =
-            postcard::from_bytes(&bytes).unwrap();
-        assert_eq!(restored.root_bindings, cache.root_bindings);
     }
 }

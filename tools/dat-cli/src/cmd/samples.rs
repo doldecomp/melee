@@ -199,9 +199,6 @@ fn types(args: TypesArgs) -> Result<()> {
     for (_, archive) in &archives {
         for (name, _) in archive.named_publics() {
             let name = String::from_utf8_lossy(name);
-            if let Some(bindings) = project.root_bindings.get(name.as_ref()) {
-                text += &format!("bindings {bindings:?}\n");
-            }
             if let Some(&ty) = project.root_types.get(name.as_ref()) {
                 let count = project
                     .symbols
