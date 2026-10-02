@@ -1,3 +1,9 @@
+/**
+ * @file ftpeachspecialhi.c
+ * @brief Up-B (Peach Parasol)
+ * @details Up-B (Peach Parasol) logic for Peach.
+ * Module prefix: ftPe
+ */
 #include "ftpeachspecialhi.h"
 
 #include <Runtime/platform.h>
@@ -31,6 +37,11 @@
 /* 11D650 */ static void ftPe_SpecialHi_8011D650(HSD_GObj* gobj);
 /* 11E064 */ static void ftPe_SpecialHi_8011E064(HSD_GObj* gobj);
 
+/**
+ * @brief Up-B (Peach Parasol) - ftPe_SpecialHi_8011D424
+ * @param gobj The fighter's game object
+ * @todo Identify game mechanics and inline frame data
+ */
 void ftPe_SpecialHi_8011D424(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -62,6 +73,11 @@ void ftPe_SpecialHi_8011D424(HSD_GObj* gobj)
     fp->post_hitlag_cb = ftPe_SpecialHi_8011D650;
 }
 
+/**
+ * @brief Up-B (Peach Parasol) - ftPe_8011D518
+ * @param gobj The fighter's game object
+ * @todo Identify game mechanics and inline frame data
+ */
 bool ftPe_8011D518(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -83,6 +99,11 @@ bool ftPe_8011D518(HSD_GObj* gobj)
 }
 
 /// @todo Can maybe use #ensureUnkItem?
+/**
+ * @brief Up-B (Peach Parasol) - ftPe_8011D598
+ * @param gobj The fighter's game object
+ * @todo Identify game mechanics and inline frame data
+ */
 void ftPe_8011D598(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -92,6 +113,11 @@ void ftPe_8011D598(HSD_GObj* gobj)
     }
 }
 
+/**
+ * @brief Up-B (Peach Parasol) - ensureUnkItem
+ * @param gobj The fighter's game object
+ * @todo Identify game mechanics and inline frame data
+ */
 static void ensureUnkItem(HSD_GObj* gobj, HSD_GObjEvent cb)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -100,16 +126,31 @@ static void ensureUnkItem(HSD_GObj* gobj, HSD_GObjEvent cb)
     }
 }
 
+/**
+ * @brief Up-B (Peach Parasol) - ftPe_SpecialHi_8011D620
+ * @param gobj The fighter's game object
+ * @todo Identify game mechanics and inline frame data
+ */
 void ftPe_SpecialHi_8011D620(HSD_GObj* gobj)
 {
     ensureUnkItem(gobj, it_802BDBF8);
 }
 
+/**
+ * @brief Up-B (Peach Parasol) - ftPe_SpecialHi_8011D650
+ * @param gobj The fighter's game object
+ * @todo Identify game mechanics and inline frame data
+ */
 void ftPe_SpecialHi_8011D650(HSD_GObj* gobj)
 {
     ensureUnkItem(gobj, it_802BDC18);
 }
 
+/**
+ * @brief Up-B (Peach Parasol) - notUsingParasol
+ * @param gobj The fighter's game object
+ * @todo Identify game mechanics and inline frame data
+ */
 static bool notUsingParasol(Fighter* fp)
 {
     FtMotionId msid = fp->motion_id;
@@ -130,6 +171,11 @@ static bool notUsingParasol(Fighter* fp)
     return true;
 }
 
+/**
+ * @brief Up-B (Peach Parasol) - ftPe_SpecialHi_NotActive
+ * @param gobj The fighter's game object
+ * @todo Identify game mechanics and inline frame data
+ */
 bool ftPe_SpecialHi_NotActive(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -140,6 +186,11 @@ bool ftPe_SpecialHi_NotActive(HSD_GObj* gobj)
     return notUsingParasol(fp);
 }
 
+/**
+ * @brief Up-B (Peach Parasol) - doEnter
+ * @param gobj The fighter's game object
+ * @todo Identify game mechanics and inline frame data
+ */
 static void doEnter(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -163,6 +214,11 @@ static void doEnter(HSD_GObj* gobj)
     fp->accessory4_cb = ftPe_SpecialHi_8011D424;
 }
 
+/**
+ * @brief Up-B (Peach Parasol) - ftPe_SpecialHi_Enter
+ * @param gobj The fighter's game object
+ * @todo Identify game mechanics and inline frame data
+ */
 void ftPe_SpecialHi_Enter(HSD_GObj* gobj)
 {
     u8 _[16];
@@ -172,6 +228,11 @@ void ftPe_SpecialHi_Enter(HSD_GObj* gobj)
     doEnter(gobj);
 }
 
+/**
+ * @brief Up-B (Peach Parasol) - ftPe_SpecialAirHi_Enter
+ * @param gobj The fighter's game object
+ * @todo Identify game mechanics and inline frame data
+ */
 void ftPe_SpecialAirHi_Enter(HSD_GObj* gobj)
 {
     u8 _[8];
@@ -185,6 +246,11 @@ void ftPe_SpecialAirHi_Enter(HSD_GObj* gobj)
     doEnter(gobj);
 }
 
+/**
+ * @brief Up-B (Peach Parasol) - checkCmdVar2
+ * @param gobj The fighter's game object
+ * @todo Identify game mechanics and inline frame data
+ */
 static bool checkCmdVar2(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -195,6 +261,11 @@ static bool checkCmdVar2(HSD_GObj* gobj)
     return false;
 }
 
+/**
+ * @brief Up-B (Peach Parasol) - ftPe_SpecialHiStart_Anim
+ * @param gobj The fighter's game object
+ * @todo Identify game mechanics and inline frame data
+ */
 void ftPe_SpecialHiStart_Anim(HSD_GObj* gobj)
 {
     u8 _[16];
@@ -211,12 +282,22 @@ void ftPe_SpecialHiStart_Anim(HSD_GObj* gobj)
     }
 }
 
+/**
+ * @brief Up-B (Peach Parasol) - ftPe_SpecialAirHiStart_Anim
+ * @param gobj The fighter's game object
+ * @todo Identify game mechanics and inline frame data
+ */
 void ftPe_SpecialAirHiStart_Anim(HSD_GObj* gobj)
 {
     u8 _[16];
     ftPe_SpecialHiStart_Anim(gobj);
 }
 
+/**
+ * @brief Up-B (Peach Parasol) - ftPe_SpecialHiStart_IASA
+ * @param gobj The fighter's game object
+ * @todo Identify game mechanics and inline frame data
+ */
 void ftPe_SpecialHiStart_IASA(HSD_GObj* gobj)
 {
     /// @todo #GET_FIGHTER
@@ -238,12 +319,22 @@ void ftPe_SpecialHiStart_IASA(HSD_GObj* gobj)
     }
 }
 
+/**
+ * @brief Up-B (Peach Parasol) - ftPe_SpecialAirHiStart_IASA
+ * @param gobj The fighter's game object
+ * @todo Identify game mechanics and inline frame data
+ */
 void ftPe_SpecialAirHiStart_IASA(HSD_GObj* gobj)
 {
     u8 _[8];
     ftPe_SpecialHiStart_IASA(gobj);
 }
 
+/**
+ * @brief Up-B (Peach Parasol) - ftPe_SpecialHiStart_Phys
+ * @param gobj The fighter's game object
+ * @todo Identify game mechanics and inline frame data
+ */
 void ftPe_SpecialHiStart_Phys(HSD_GObj* gobj)
 {
     if (GET_FIGHTER(gobj)->ground_or_air == GA_Air) {
@@ -253,6 +344,11 @@ void ftPe_SpecialHiStart_Phys(HSD_GObj* gobj)
     }
 }
 
+/**
+ * @brief Up-B (Peach Parasol) - ftPe_SpecialAirHiStart_Phys
+ * @param gobj The fighter's game object
+ * @todo Identify game mechanics and inline frame data
+ */
 void ftPe_SpecialAirHiStart_Phys(HSD_GObj* gobj)
 {
     u8 _[4];
@@ -270,12 +366,22 @@ void ftPe_SpecialAirHiStart_Phys(HSD_GObj* gobj)
     }
 }
 
+/**
+ * @brief Up-B (Peach Parasol) - ftPe_SpecialHi_8011DD8C
+ * @param gobj The fighter's game object
+ * @todo Identify game mechanics and inline frame data
+ */
 static void ftPe_SpecialHi_8011DD8C(HSD_GObj* gobj)
 {
     ftPe_DatAttrs* da = GET_FIGHTER(gobj)->dat_attrs;
     ftCo_LandingFallSpecial_Enter(gobj, false, da->x74);
 }
 
+/**
+ * @brief Up-B (Peach Parasol) - doColl
+ * @param gobj The fighter's game object
+ * @todo Identify game mechanics and inline frame data
+ */
 static void doColl(HSD_GObj* gobj, HSD_GObjEvent cb)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -290,16 +396,31 @@ static void doColl(HSD_GObj* gobj, HSD_GObjEvent cb)
     ft_80084104(gobj);
 }
 
+/**
+ * @brief Up-B (Peach Parasol) - ftPe_SpecialHiStart_Coll
+ * @param gobj The fighter's game object
+ * @todo Identify game mechanics and inline frame data
+ */
 void ftPe_SpecialHiStart_Coll(HSD_GObj* gobj)
 {
     doColl(gobj, ftPe_SpecialHi_8011DD8C);
 }
 
+/**
+ * @brief Up-B (Peach Parasol) - ftPe_SpecialAirHiStart_Coll
+ * @param gobj The fighter's game object
+ * @todo Identify game mechanics and inline frame data
+ */
 void ftPe_SpecialAirHiStart_Coll(HSD_GObj* gobj)
 {
     doColl(gobj, ftPe_SpecialHi_8011DD8C);
 }
 
+/**
+ * @brief Up-B (Peach Parasol) - ftPe_SpecialHiEnd_Anim
+ * @param gobj The fighter's game object
+ * @todo Identify game mechanics and inline frame data
+ */
 void ftPe_SpecialHiEnd_Anim(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -309,16 +430,36 @@ void ftPe_SpecialHiEnd_Anim(HSD_GObj* gobj)
     }
 }
 
+/**
+ * @brief Up-B (Peach Parasol) - ftPe_SpecialAirHiEnd_Anim
+ * @param gobj The fighter's game object
+ * @todo Identify game mechanics and inline frame data
+ */
 void ftPe_SpecialAirHiEnd_Anim(HSD_GObj* gobj)
 {
     u8 _[8];
     ftPe_SpecialHiEnd_Anim(gobj);
 }
 
+/**
+ * @brief Up-B (Peach Parasol) - ftPe_SpecialHiEnd_IASA
+ * @param gobj The fighter's game object
+ * @todo Identify game mechanics and inline frame data
+ */
 void ftPe_SpecialHiEnd_IASA(HSD_GObj* gobj) {}
 
+/**
+ * @brief Up-B (Peach Parasol) - ftPe_SpecialAirHiEnd_IASA
+ * @param gobj The fighter's game object
+ * @todo Identify game mechanics and inline frame data
+ */
 void ftPe_SpecialAirHiEnd_IASA(HSD_GObj* gobj) {}
 
+/**
+ * @brief Up-B (Peach Parasol) - ftPe_SpecialHiEnd_Phys
+ * @param gobj The fighter's game object
+ * @todo Identify game mechanics and inline frame data
+ */
 void ftPe_SpecialHiEnd_Phys(HSD_GObj* gobj)
 {
     u8 _[8];
@@ -334,6 +475,11 @@ void ftPe_SpecialHiEnd_Phys(HSD_GObj* gobj)
     }
 }
 
+/**
+ * @brief Up-B (Peach Parasol) - ftPe_SpecialAirHiEnd_Phys
+ * @param gobj The fighter's game object
+ * @todo Identify game mechanics and inline frame data
+ */
 void ftPe_SpecialAirHiEnd_Phys(HSD_GObj* gobj)
 {
     u8 _[8];
@@ -349,16 +495,31 @@ void ftPe_SpecialAirHiEnd_Phys(HSD_GObj* gobj)
     ftCommon_Fall(fp, ca->gravity, ca->terminal_velocity);
 }
 
+/**
+ * @brief Up-B (Peach Parasol) - ftPe_SpecialHi_8011E064
+ * @param gobj The fighter's game object
+ * @todo Identify game mechanics and inline frame data
+ */
 void ftPe_SpecialHi_8011E064(HSD_GObj* gobj)
 {
     ftPe_SpecialHi_8011DD8C(gobj);
 }
 
+/**
+ * @brief Up-B (Peach Parasol) - ftPe_SpecialHiEnd_Coll
+ * @param gobj The fighter's game object
+ * @todo Identify game mechanics and inline frame data
+ */
 void ftPe_SpecialHiEnd_Coll(HSD_GObj* gobj)
 {
     doColl(gobj, ftPe_SpecialHi_8011E064);
 }
 
+/**
+ * @brief Up-B (Peach Parasol) - ftPe_SpecialAirHiEnd_Coll
+ * @param gobj The fighter's game object
+ * @todo Identify game mechanics and inline frame data
+ */
 void ftPe_SpecialAirHiEnd_Coll(HSD_GObj* gobj)
 {
     doColl(gobj, ftPe_SpecialHi_8011E064);

@@ -1,3 +1,9 @@
+/**
+ * @file ftpeachspeciallw.h
+ * @brief Down-B (Vegetable)
+ * @details Down-B (Vegetable) logic for Peach.
+ * Module prefix: ftPe
+ */
 #ifndef GALE01_11D11C
 #define GALE01_11D11C
 

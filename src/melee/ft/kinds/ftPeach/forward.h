@@ -1,3 +1,9 @@
+/**
+ * @file forward.h
+ * @brief Peach Forward Declarations
+ * @details Peach Forward Declarations logic for Peach.
+ * Module prefix: ftPe
+ */
 #ifndef MELEE_FT_CHARA_FTPEACH_FORWARD_H
 #define MELEE_FT_CHARA_FTPEACH_FORWARD_H
 

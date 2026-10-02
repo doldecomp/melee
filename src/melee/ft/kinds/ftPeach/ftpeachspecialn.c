@@ -1,3 +1,9 @@
+/**
+ * @file ftpeachspecialn.c
+ * @brief Neutral-B (Toad)
+ * @details Neutral-B (Toad) logic for Peach.
+ * Module prefix: ftPe
+ */
 #include "ftpeachspecialn.h"
 
 #include <Runtime/platform.h>
@@ -58,6 +64,11 @@ typedef enum phys_state {
 /* 11EC30 */ static void setupHitColl(HSD_GObj* gobj);
 /* 11EC6C */ static void onUnkHit(HSD_GObj* gobj);
 
+/**
+ * @brief Neutral-B (Toad) - onAccessory4
+ * @param gobj The fighter's game object
+ * @todo Identify game mechanics and inline frame data
+ */
 void onAccessory4(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -81,6 +92,11 @@ void onAccessory4(HSD_GObj* gobj)
     fp->post_hitlag_cb = onExitHitlag;
 }
 
+/**
+ * @brief Neutral-B (Toad) - doHitAccessory4
+ * @param gobj The fighter's game object
+ * @todo Identify game mechanics and inline frame data
+ */
 static void doHitAccessory4(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -91,6 +107,11 @@ static void doHitAccessory4(HSD_GObj* gobj)
     it_802BE214(gobj, &pos, It_Kind_Peach_ToadSpore, fp->facing_dir);
 }
 
+/**
+ * @brief Neutral-B (Toad) - onHitAccessory4
+ * @param gobj The fighter's game object
+ * @todo Identify game mechanics and inline frame data
+ */
 static void onHitAccessory4(HSD_GObj* gobj)
 {
     u8 _[8];
@@ -99,6 +120,11 @@ static void onHitAccessory4(HSD_GObj* gobj)
     fp->accessory4_cb = NULL;
 }
 
+/**
+ * @brief Neutral-B (Toad) - ftPe_SpecialN_DoDeath2
+ * @param gobj The fighter's game object
+ * @todo Identify game mechanics and inline frame data
+ */
 void ftPe_SpecialN_DoDeath2(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -108,6 +134,11 @@ void ftPe_SpecialN_DoDeath2(HSD_GObj* gobj)
     fp->take_dmg_cb = NULL;
 }
 
+/**
+ * @brief Neutral-B (Toad) - ftPe_SpecialN_OnDeath2
+ * @param gobj The fighter's game object
+ * @todo Identify game mechanics and inline frame data
+ */
 void ftPe_SpecialN_OnDeath2(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -117,6 +148,11 @@ void ftPe_SpecialN_OnDeath2(HSD_GObj* gobj)
     }
 }
 
+/**
+ * @brief Neutral-B (Toad) - onEnterHitlag
+ * @param gobj The fighter's game object
+ * @todo Identify game mechanics and inline frame data
+ */
 static void onEnterHitlag(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -125,6 +161,11 @@ static void onEnterHitlag(HSD_GObj* gobj)
     }
 }
 
+/**
+ * @brief Neutral-B (Toad) - onExitHitlag
+ * @param gobj The fighter's game object
+ * @todo Identify game mechanics and inline frame data
+ */
 static void onExitHitlag(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -133,6 +174,11 @@ static void onExitHitlag(HSD_GObj* gobj)
     }
 }
 
+/**
+ * @brief Neutral-B (Toad) - ftPe_SpecialN_IsActive
+ * @param gobj The fighter's game object
+ * @todo Identify game mechanics and inline frame data
+ */
 bool ftPe_SpecialN_IsActive(HSD_GObj* gobj)
 {
     FtMotionId msid = GET_FIGHTER(gobj)->motion_id;
@@ -143,6 +189,11 @@ bool ftPe_SpecialN_IsActive(HSD_GObj* gobj)
     }
 }
 
+/**
+ * @brief Neutral-B (Toad) - reset
+ * @param gobj The fighter's game object
+ * @todo Identify game mechanics and inline frame data
+ */
 static void reset(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -152,6 +203,11 @@ static void reset(HSD_GObj* gobj)
     fp->accessory4_cb = onAccessory4;
 }
 
+/**
+ * @brief Neutral-B (Toad) - ftPe_SpecialN_Enter
+ * @param gobj The fighter's game object
+ * @todo Identify game mechanics and inline frame data
+ */
 void ftPe_SpecialN_Enter(HSD_GObj* gobj)
 {
     u8 _[8];
@@ -162,6 +218,11 @@ void ftPe_SpecialN_Enter(HSD_GObj* gobj)
     reset(gobj);
 }
 
+/**
+ * @brief Neutral-B (Toad) - ftPe_SpecialAirN_Enter
+ * @param gobj The fighter's game object
+ * @todo Identify game mechanics and inline frame data
+ */
 void ftPe_SpecialAirN_Enter(HSD_GObj* gobj)
 {
     u8 _[8];
@@ -174,6 +235,11 @@ void ftPe_SpecialAirN_Enter(HSD_GObj* gobj)
     reset(gobj);
 }
 
+/**
+ * @brief Neutral-B (Toad) - doAnim
+ * @param gobj The fighter's game object
+ * @todo Identify game mechanics and inline frame data
+ */
 static void doAnim(HSD_GObj* gobj, HSD_GObjEvent cb)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -192,28 +258,58 @@ static void doAnim(HSD_GObj* gobj, HSD_GObjEvent cb)
     }
 }
 
+/**
+ * @brief Neutral-B (Toad) - ftPe_SpecialN_Anim
+ * @param gobj The fighter's game object
+ * @todo Identify game mechanics and inline frame data
+ */
 void ftPe_SpecialN_Anim(HSD_GObj* gobj)
 {
     u8 _[16];
     doAnim(gobj, ft_8008A2BC);
 }
 
+/**
+ * @brief Neutral-B (Toad) - ftPe_SpecialAirN_Anim
+ * @param gobj The fighter's game object
+ * @todo Identify game mechanics and inline frame data
+ */
 void ftPe_SpecialAirN_Anim(HSD_GObj* gobj)
 {
     u8 _[16];
     doAnim(gobj, ftCo_Fall_Enter);
 }
 
+/**
+ * @brief Neutral-B (Toad) - ftPe_SpecialN_IASA
+ * @param gobj The fighter's game object
+ * @todo Identify game mechanics and inline frame data
+ */
 void ftPe_SpecialN_IASA(HSD_GObj* gobj) {}
 
+/**
+ * @brief Neutral-B (Toad) - ftPe_SpecialAirN_IASA
+ * @param gobj The fighter's game object
+ * @todo Identify game mechanics and inline frame data
+ */
 void ftPe_SpecialAirN_IASA(HSD_GObj* gobj) {}
 
+/**
+ * @brief Neutral-B (Toad) - ftPe_SpecialN_Phys
+ * @param gobj The fighter's game object
+ * @todo Identify game mechanics and inline frame data
+ */
 void ftPe_SpecialN_Phys(HSD_GObj* gobj)
 {
     ft_80084F3C(gobj);
     ftColl_8007AEE0(gobj);
 }
 
+/**
+ * @brief Neutral-B (Toad) - ftPe_SpecialAirN_Phys
+ * @param gobj The fighter's game object
+ * @todo Identify game mechanics and inline frame data
+ */
 void ftPe_SpecialAirN_Phys(HSD_GObj* gobj)
 {
     u8 _[16];
@@ -237,6 +333,11 @@ void ftPe_SpecialAirN_Phys(HSD_GObj* gobj)
     ftColl_8007AEE0(gobj);
 }
 
+/**
+ * @brief Neutral-B (Toad) - ftPe_SpecialN_Coll
+ * @param gobj The fighter's game object
+ * @todo Identify game mechanics and inline frame data
+ */
 void ftPe_SpecialN_Coll(HSD_GObj* gobj)
 {
     if (!ft_800827A0(gobj)) {
@@ -244,6 +345,11 @@ void ftPe_SpecialN_Coll(HSD_GObj* gobj)
     }
 }
 
+/**
+ * @brief Neutral-B (Toad) - ftPe_SpecialAirN_Coll
+ * @param gobj The fighter's game object
+ * @todo Identify game mechanics and inline frame data
+ */
 void ftPe_SpecialAirN_Coll(HSD_GObj* gobj)
 {
     if (ft_80081D0C(gobj)) {
@@ -251,6 +357,11 @@ void ftPe_SpecialAirN_Coll(HSD_GObj* gobj)
     }
 }
 
+/**
+ * @brief Neutral-B (Toad) - setupColl
+ * @param gobj The fighter's game object
+ * @todo Identify game mechanics and inline frame data
+ */
 static void setupColl(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -273,6 +384,11 @@ static MotionFlags const coll_mf =
     Ft_MF_SkipColAnim | Ft_MF_UpdateCmd | Ft_MF_SkipItemVis | Ft_MF_Unk19 |
     Ft_MF_SkipModelPartVis | Ft_MF_SkipModelFlags | Ft_MF_Unk27;
 
+/**
+ * @brief Neutral-B (Toad) - doColl
+ * @param gobj The fighter's game object
+ * @todo Identify game mechanics and inline frame data
+ */
 static void doColl(HSD_GObj* gobj)
 {
     u8 _[8];
@@ -284,6 +400,11 @@ static void doColl(HSD_GObj* gobj)
     setupColl(gobj);
 }
 
+/**
+ * @brief Neutral-B (Toad) - doAirColl
+ * @param gobj The fighter's game object
+ * @todo Identify game mechanics and inline frame data
+ */
 static void doAirColl(HSD_GObj* gobj)
 {
     u8 _[8];
@@ -293,6 +414,11 @@ static void doAirColl(HSD_GObj* gobj)
     setupColl(gobj);
 }
 
+/**
+ * @brief Neutral-B (Toad) - doHitAnim
+ * @param gobj The fighter's game object
+ * @todo Identify game mechanics and inline frame data
+ */
 static void doHitAnim(HSD_GObj* gobj, HSD_GObjEvent cb)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -305,25 +431,55 @@ static void doHitAnim(HSD_GObj* gobj, HSD_GObjEvent cb)
     }
 }
 
+/**
+ * @brief Neutral-B (Toad) - ftPe_SpecialNHit_Anim
+ * @param gobj The fighter's game object
+ * @todo Identify game mechanics and inline frame data
+ */
 void ftPe_SpecialNHit_Anim(HSD_GObj* gobj)
 {
     doHitAnim(gobj, ft_8008A2BC);
 }
 
+/**
+ * @brief Neutral-B (Toad) - ftPe_SpecialAirNHit_Anim
+ * @param gobj The fighter's game object
+ * @todo Identify game mechanics and inline frame data
+ */
 void ftPe_SpecialAirNHit_Anim(HSD_GObj* gobj)
 {
     doHitAnim(gobj, ftCo_Fall_Enter);
 }
 
+/**
+ * @brief Neutral-B (Toad) - ftPe_SpecialNHit_IASA
+ * @param gobj The fighter's game object
+ * @todo Identify game mechanics and inline frame data
+ */
 void ftPe_SpecialNHit_IASA(HSD_GObj* gobj) {}
 
+/**
+ * @brief Neutral-B (Toad) - ftPe_SpecialAirNHit_IASA
+ * @param gobj The fighter's game object
+ * @todo Identify game mechanics and inline frame data
+ */
 void ftPe_SpecialAirNHit_IASA(HSD_GObj* gobj) {}
 
+/**
+ * @brief Neutral-B (Toad) - ftPe_SpecialNHit_Phys
+ * @param gobj The fighter's game object
+ * @todo Identify game mechanics and inline frame data
+ */
 void ftPe_SpecialNHit_Phys(HSD_GObj* gobj)
 {
     ft_80084F3C(gobj);
 }
 
+/**
+ * @brief Neutral-B (Toad) - ftPe_SpecialAirNHit_Phys
+ * @param gobj The fighter's game object
+ * @todo Identify game mechanics and inline frame data
+ */
 void ftPe_SpecialAirNHit_Phys(HSD_GObj* gobj)
 {
     u8 _[8];
@@ -333,6 +489,11 @@ void ftPe_SpecialAirNHit_Phys(HSD_GObj* gobj)
     ftCommon_CalcSelfAccel_Deaccel(fp, da->x98);
 }
 
+/**
+ * @brief Neutral-B (Toad) - ftPe_SpecialNHit_Coll
+ * @param gobj The fighter's game object
+ * @todo Identify game mechanics and inline frame data
+ */
 void ftPe_SpecialNHit_Coll(HSD_GObj* gobj)
 {
     if (!ft_800827A0(gobj)) {
@@ -340,6 +501,11 @@ void ftPe_SpecialNHit_Coll(HSD_GObj* gobj)
     }
 }
 
+/**
+ * @brief Neutral-B (Toad) - ftPe_SpecialAirNHit_Coll
+ * @param gobj The fighter's game object
+ * @todo Identify game mechanics and inline frame data
+ */
 void ftPe_SpecialAirNHit_Coll(HSD_GObj* gobj)
 {
     if (ft_80081D0C(gobj)) {
@@ -347,6 +513,11 @@ void ftPe_SpecialAirNHit_Coll(HSD_GObj* gobj)
     }
 }
 
+/**
+ * @brief Neutral-B (Toad) - doHitColl
+ * @param gobj The fighter's game object
+ * @todo Identify game mechanics and inline frame data
+ */
 static void doHitColl(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -355,6 +526,11 @@ static void doHitColl(HSD_GObj* gobj)
 }
 
 /// @todo Can maybe me combined with #doAirColl.
+/**
+ * @brief Neutral-B (Toad) - doAirHitColl
+ * @param gobj The fighter's game object
+ * @todo Identify game mechanics and inline frame data
+ */
 void doAirHitColl(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -363,6 +539,11 @@ void doAirHitColl(HSD_GObj* gobj)
     setupHitColl(gobj);
 }
 
+/**
+ * @brief Neutral-B (Toad) - setupHitColl
+ * @param gobj The fighter's game object
+ * @todo Identify game mechanics and inline frame data
+ */
 static void setupHitColl(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -375,6 +556,11 @@ static void setupHitColl(HSD_GObj* gobj)
     fp->post_hitlag_cb = onExitHitlag;
 }
 
+/**
+ * @brief Neutral-B (Toad) - onUnkHit
+ * @param gobj The fighter's game object
+ * @todo Identify game mechanics and inline frame data
+ */
 static void onUnkHit(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);

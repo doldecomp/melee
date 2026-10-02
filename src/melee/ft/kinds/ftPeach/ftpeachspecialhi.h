@@ -1,3 +1,9 @@
+/**
+ * @file ftpeachspecialhi.h
+ * @brief Up-B (Peach Parasol)
+ * @details Up-B (Peach Parasol) logic for Peach.
+ * Module prefix: ftPe
+ */
 #ifndef GALE01_11D72C
 #define GALE01_11D72C
 

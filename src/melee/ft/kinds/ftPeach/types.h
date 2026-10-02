@@ -1,3 +1,9 @@
+/**
+ * @file types.h
+ * @brief Peach Types
+ * @details Peach Types logic for Peach.
+ * Module prefix: ftPe
+ */
 #ifndef MELEE_FT_CHARA_FTPEACH_TYPES_H
 #define MELEE_FT_CHARA_FTPEACH_TYPES_H
 

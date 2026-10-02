@@ -1,3 +1,9 @@
+/**
+ * @file ftpeachfloatattack.c
+ * @brief Float Attack
+ * @details Float Attack logic for Peach.
+ * Module prefix: ftPe
+ */
 #include "ftpeachfloatattack.h"
 
 #include <Runtime/platform.h>
@@ -21,6 +27,11 @@
 
 static void ftPe_8011BF34(HSD_GObj* gobj);
 
+/**
+ * @brief Float Attack - ftPe_8011BE80
+ * @param gobj The fighter's game object
+ * @todo Identify game mechanics and inline frame data
+ */
 bool ftPe_8011BE80(HSD_GObj* gobj)
 {
     u8 _[8];
@@ -40,6 +51,11 @@ bool ftPe_8011BE80(HSD_GObj* gobj)
     return false;
 }
 
+/**
+ * @brief Float Attack - ftPe_8011BF34
+ * @param gobj The fighter's game object
+ * @todo Identify game mechanics and inline frame data
+ */
 static void ftPe_8011BF34(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -48,6 +64,11 @@ static void ftPe_8011BF34(HSD_GObj* gobj)
     ftCo_AttackAir_EnterFromMsid(gobj, msid + ftCo_MS_CaptureDamageKoopa);
 }
 
+/**
+ * @brief Float Attack - ftPe_FloatAttackAir_Anim
+ * @param gobj The fighter's game object
+ * @todo Identify game mechanics and inline frame data
+ */
 void ftPe_FloatAttackAir_Anim(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -66,6 +87,11 @@ void ftPe_FloatAttackAir_Anim(HSD_GObj* gobj)
     }
 }
 
+/**
+ * @brief Float Attack - ftPe_FloatAttackAir_IASA
+ * @param gobj The fighter's game object
+ * @todo Identify game mechanics and inline frame data
+ */
 void ftPe_FloatAttackAir_IASA(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -81,6 +107,11 @@ void ftPe_FloatAttackAir_IASA(HSD_GObj* gobj)
     }
 }
 
+/**
+ * @brief Float Attack - ftPe_FloatAttackAir_Phys
+ * @param gobj The fighter's game object
+ * @todo Identify game mechanics and inline frame data
+ */
 void ftPe_FloatAttackAir_Phys(HSD_GObj* gobj)
 {
     if (GET_FIGHTER(gobj)->mv.pe.floatattack.x0) {
@@ -90,6 +121,11 @@ void ftPe_FloatAttackAir_Phys(HSD_GObj* gobj)
     }
 }
 
+/**
+ * @brief Float Attack - ftPe_FloatAttackAir_Coll
+ * @param gobj The fighter's game object
+ * @todo Identify game mechanics and inline frame data
+ */
 void ftPe_FloatAttackAir_Coll(HSD_GObj* gobj)
 {
     ft_80082C74(gobj, ftCo_LandingAir_EnterWithLag);

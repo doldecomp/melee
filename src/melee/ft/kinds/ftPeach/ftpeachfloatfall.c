@@ -1,3 +1,9 @@
+/**
+ * @file ftpeachfloatfall.c
+ * @brief Float Fall
+ * @details Float Fall logic for Peach.
+ * Module prefix: ftPe
+ */
 #include "ftpeachfloatfall.h"
 
 #include <Runtime/platform.h>
@@ -12,6 +18,11 @@
 #include <melee/ft/kinds/ftCommon/ftCo_JumpAerial.h>
 #include <melee/ft/types.h>
 
+/**
+ * @brief Float Fall - getFloatDir
+ * @param gobj The fighter's game object
+ * @todo Identify game mechanics and inline frame data
+ */
 static ftPeach_MotionState getFloatDir(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -20,6 +31,11 @@ static ftPeach_MotionState getFloatDir(HSD_GObj* gobj)
                : ftPe_MS_FloatFallB;
 }
 
+/**
+ * @brief Float Fall - ftPe_UpdateFloatDir
+ * @param gobj The fighter's game object
+ * @todo Identify game mechanics and inline frame data
+ */
 void ftPe_UpdateFloatDir(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -32,6 +48,11 @@ void ftPe_UpdateFloatDir(HSD_GObj* gobj)
                               1.0f, 0.0f, NULL);
 }
 
+/**
+ * @brief Float Fall - ftPe_FloatFall_Anim
+ * @param gobj The fighter's game object
+ * @todo Identify game mechanics and inline frame data
+ */
 void ftPe_FloatFall_Anim(HSD_GObj* gobj)
 {
     if (!ftAnim_IsFramesRemaining(gobj)) {
@@ -39,13 +60,28 @@ void ftPe_FloatFall_Anim(HSD_GObj* gobj)
     }
 }
 
+/**
+ * @brief Float Fall - ftPe_FloatFall_IASA
+ * @param gobj The fighter's game object
+ * @todo Identify game mechanics and inline frame data
+ */
 void ftPe_FloatFall_IASA(HSD_GObj* gobj) {}
 
+/**
+ * @brief Float Fall - ftPe_FloatFall_Phys
+ * @param gobj The fighter's game object
+ * @todo Identify game mechanics and inline frame data
+ */
 void ftPe_FloatFall_Phys(HSD_GObj* gobj)
 {
     ftCo_JumpAerial_Phys_Cb(gobj);
 }
 
+/**
+ * @brief Float Fall - ftPe_FloatFall_Coll
+ * @param gobj The fighter's game object
+ * @todo Identify game mechanics and inline frame data
+ */
 void ftPe_FloatFall_Coll(HSD_GObj* gobj)
 {
     ft_800831CC(gobj, ftCo_80096CC8, ft_80082B1C);

@@ -1,3 +1,9 @@
+/**
+ * @file ftpeachspeciallw.c
+ * @brief Down-B (Vegetable)
+ * @details Down-B (Vegetable) logic for Peach.
+ * Module prefix: ftPe
+ */
 #include "ftpeachspeciallw.h"
 
 #include <Runtime/platform.h>
@@ -31,6 +37,11 @@
 /* 11D214 */ static void handleAirColl(HSD_GObj* gobj);
 /* 11D280 */ static void handleColl(HSD_GObj* gobj);
 
+/**
+ * @brief Down-B (Vegetable) - pickVeg
+ * @param gobj The fighter's game object
+ * @todo Identify game mechanics and inline frame data
+ */
 ItemKind pickVeg(HSD_GObj* gobj)
 {
     ftPe_DatAttrs* a = GET_FIGHTER(gobj)->dat_attrs;
@@ -58,6 +69,11 @@ ItemKind pickVeg(HSD_GObj* gobj)
     }
 }
 
+/**
+ * @brief Down-B (Vegetable) - ftPe_SpecialLw_UnsetVeg
+ * @param gobj The fighter's game object
+ * @todo Identify game mechanics and inline frame data
+ */
 void ftPe_SpecialLw_UnsetVeg(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -66,6 +82,11 @@ void ftPe_SpecialLw_UnsetVeg(HSD_GObj* gobj)
     }
 }
 
+/**
+ * @brief Down-B (Vegetable) - ftPe_SpecialLw_8011CFA0
+ * @param gobj The fighter's game object
+ * @todo Identify game mechanics and inline frame data
+ */
 void ftPe_SpecialLw_8011CFA0(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -81,6 +102,11 @@ void ftPe_SpecialLw_8011CFA0(HSD_GObj* gobj)
     }
 }
 
+/**
+ * @brief Down-B (Vegetable) - getVeg
+ * @param gobj The fighter's game object
+ * @todo Identify game mechanics and inline frame data
+ */
 static ItemKind getVeg(HSD_GObj* gobj)
 {
     ftPe_DatAttrs* da = GET_FIGHTER(gobj)->dat_attrs;
@@ -93,6 +119,11 @@ static ItemKind getVeg(HSD_GObj* gobj)
     return kind;
 }
 
+/**
+ * @brief Down-B (Vegetable) - setupVeg
+ * @param gobj The fighter's game object
+ * @todo Identify game mechanics and inline frame data
+ */
 static void setupVeg(ItemKind kind, HSD_GObj* gobj, Fighter* fp, Vec3* pos)
 {
     HSD_GObj* veg_gobj =
@@ -107,6 +138,11 @@ static void setupVeg(ItemKind kind, HSD_GObj* gobj, Fighter* fp, Vec3* pos)
     }
 }
 
+/**
+ * @brief Down-B (Vegetable) - spawnVeg
+ * @param gobj The fighter's game object
+ * @todo Identify game mechanics and inline frame data
+ */
 static void spawnVeg(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -123,6 +159,11 @@ static void spawnVeg(HSD_GObj* gobj)
     }
 }
 
+/**
+ * @brief Down-B (Vegetable) - throwVegIfHeld
+ * @param gobj The fighter's game object
+ * @todo Identify game mechanics and inline frame data
+ */
 static bool throwVegIfHeld(HSD_GObj* gobj, FtMotionId msid)
 {
     HSD_GObj* igobj = GET_FIGHTER(gobj)->item_gobj;
@@ -136,6 +177,11 @@ static bool throwVegIfHeld(HSD_GObj* gobj, FtMotionId msid)
     }
 }
 
+/**
+ * @brief Down-B (Vegetable) - ftPe_SpecialLw_Enter
+ * @param gobj The fighter's game object
+ * @todo Identify game mechanics and inline frame data
+ */
 void ftPe_SpecialLw_Enter(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -148,6 +194,11 @@ void ftPe_SpecialLw_Enter(HSD_GObj* gobj)
     }
 }
 
+/**
+ * @brief Down-B (Vegetable) - ftPe_SpecialAirLw_Enter
+ * @param gobj The fighter's game object
+ * @todo Identify game mechanics and inline frame data
+ */
 void ftPe_SpecialAirLw_Enter(HSD_GObj* gobj)
 {
     throwVegIfHeld(gobj, ftCo_MS_LightThrowAirF4);
@@ -158,6 +209,11 @@ static MotionFlags const coll_mf = Ft_MF_SkipMatAnim | Ft_MF_SkipColAnim |
                                    Ft_MF_Unk19 | Ft_MF_SkipModelPartVis |
                                    Ft_MF_SkipModelFlags | Ft_MF_Unk27;
 
+/**
+ * @brief Down-B (Vegetable) - handleAirColl
+ * @param gobj The fighter's game object
+ * @todo Identify game mechanics and inline frame data
+ */
 static void handleAirColl(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -165,6 +221,11 @@ static void handleAirColl(HSD_GObj* gobj)
     fp->accessory4_cb = spawnVeg;
 }
 
+/**
+ * @brief Down-B (Vegetable) - handleColl
+ * @param gobj The fighter's game object
+ * @todo Identify game mechanics and inline frame data
+ */
 static void handleColl(HSD_GObj* gobj)
 {
     /// @todo #GET_FIGHTER
@@ -173,6 +234,11 @@ static void handleColl(HSD_GObj* gobj)
     fp->accessory4_cb = spawnVeg;
 }
 
+/**
+ * @brief Down-B (Vegetable) - doAnim
+ * @param gobj The fighter's game object
+ * @todo Identify game mechanics and inline frame data
+ */
 static void doAnim(HSD_GObj* gobj, HSD_GObjEvent cb)
 {
     if (!ftAnim_IsFramesRemaining(gobj)) {
@@ -181,32 +247,62 @@ static void doAnim(HSD_GObj* gobj, HSD_GObjEvent cb)
     }
 }
 
+/**
+ * @brief Down-B (Vegetable) - ftPe_SpecialLw_Anim
+ * @param gobj The fighter's game object
+ * @todo Identify game mechanics and inline frame data
+ */
 void ftPe_SpecialLw_Anim(HSD_GObj* gobj)
 {
     u8 _[4];
     doAnim(gobj, ft_8008A2BC);
 }
 
+/**
+ * @brief Down-B (Vegetable) - ftPe_SpecialAirLw_Anim
+ * @param gobj The fighter's game object
+ * @todo Identify game mechanics and inline frame data
+ */
 void ftPe_SpecialAirLw_Anim(HSD_GObj* gobj)
 {
     doAnim(gobj, ftCo_Fall_Enter);
 }
 
+/**
+ * @brief Down-B (Vegetable) - ftPe_SpecialLw_Phys
+ * @param gobj The fighter's game object
+ * @todo Identify game mechanics and inline frame data
+ */
 void ftPe_SpecialLw_Phys(HSD_GObj* gobj)
 {
     ft_80084F3C(gobj);
 }
 
+/**
+ * @brief Down-B (Vegetable) - ftPe_SpecialAirLw_Phys
+ * @param gobj The fighter's game object
+ * @todo Identify game mechanics and inline frame data
+ */
 void ftPe_SpecialAirLw_Phys(HSD_GObj* gobj)
 {
     ft_80084EEC(gobj);
 }
 
+/**
+ * @brief Down-B (Vegetable) - ftPe_SpecialLw_Coll
+ * @param gobj The fighter's game object
+ * @todo Identify game mechanics and inline frame data
+ */
 void ftPe_SpecialLw_Coll(HSD_GObj* gobj)
 {
     ft_8008403C(gobj, handleAirColl);
 }
 
+/**
+ * @brief Down-B (Vegetable) - ftPe_SpecialAirLw_Coll
+ * @param gobj The fighter's game object
+ * @todo Identify game mechanics and inline frame data
+ */
 void ftPe_SpecialAirLw_Coll(HSD_GObj* gobj)
 {
     ft_80082C74(gobj, handleColl);

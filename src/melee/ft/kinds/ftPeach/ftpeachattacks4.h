@@ -1,3 +1,9 @@
+/**
+ * @file ftpeachattacks4.h
+ * @brief Forward Smash (Club, Pan, Racket)
+ * @details Forward Smash (Club, Pan, Racket) logic for Peach.
+ * Module prefix: ftPe
+ */
 #ifndef GALE01_11C1C0
 #define GALE01_11C1C0
 

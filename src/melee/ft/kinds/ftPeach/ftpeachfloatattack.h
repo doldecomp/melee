@@ -1,3 +1,9 @@
+/**
+ * @file ftpeachfloatattack.h
+ * @brief Float Attack
+ * @details Float Attack logic for Peach.
+ * Module prefix: ftPe
+ */
 #ifndef GALE01_11BF88
 #define GALE01_11BF88
 

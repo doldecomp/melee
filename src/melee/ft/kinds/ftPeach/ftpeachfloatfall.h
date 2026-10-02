@@ -1,3 +1,9 @@
+/**
+ * @file ftpeachfloatfall.h
+ * @brief Float Fall
+ * @details Float Fall logic for Peach.
+ * Module prefix: ftPe
+ */
 #ifndef GALE01_11BDF0
 #define GALE01_11BDF0
 

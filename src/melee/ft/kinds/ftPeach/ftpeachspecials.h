@@ -1,3 +1,9 @@
+/**
+ * @file ftpeachspecials.h
+ * @brief Side-B (Peach Bomber)
+ * @details Side-B (Peach Bomber) logic for Peach.
+ * Module prefix: ftPe
+ */
 #ifndef GALE01_11C2F4
 #define GALE01_11C2F4
 

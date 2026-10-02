@@ -1,3 +1,9 @@
+/**
+ * @file ftpeach.h
+ * @brief Peach Main
+ * @details Peach Main logic for Peach.
+ * Module prefix: ftPe
+ */
 #ifndef GALE01_11B51C
 #define GALE01_11B51C
 

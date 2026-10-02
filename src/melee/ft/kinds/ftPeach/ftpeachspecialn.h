@@ -1,3 +1,9 @@
+/**
+ * @file ftpeachspecialn.h
+ * @brief Neutral-B (Toad)
+ * @details Neutral-B (Toad) logic for Peach.
+ * Module prefix: ftPe
+ */
 #ifndef GALE01_11E3D0
 #define GALE01_11E3D0
 

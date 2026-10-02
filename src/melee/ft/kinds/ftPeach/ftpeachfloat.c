@@ -1,3 +1,9 @@
+/**
+ * @file ftpeachfloat.c
+ * @brief Float
+ * @details Float logic for Peach.
+ * Module prefix: ftPe
+ */
 #include "ftpeachfloat.h"
 
 #include <Runtime/platform.h>
@@ -17,19 +23,34 @@
 #include <melee/ft/kinds/ftCommon/ftCo_SpecialAir.h>
 #include <melee/ft/types.h>
 
+/**
+ * @brief Float - ftPe_Float_CheckContinueInput
+ * @param gobj The fighter's game object
+ * @todo Identify game mechanics and inline frame data
+ */
 bool ftPe_Float_CheckContinueInput(Fighter* fp)
 {
     return fp->input.lstick[0].y >= p_ftCommonData->tap_jump_threshold ||
            fp->input.held_buttons[0] & HSD_PAD_XY;
 }
 
+/**
+ * @brief Float - checkStartFloatInput
+ * @param gobj The fighter's game object
+ * @todo Identify game mechanics and inline frame data
+ */
 static bool checkStartFloatInput(HSD_GObj* gobj)
 {
-    Fighter* temp_r6 = GET_FIGHTER(gobj);
-    return temp_r6->input.lstick[0].y <= -p_ftCommonData->x88 &&
-           temp_r6->input.held_buttons[0] & HSD_PAD_XY;
+    Fighter* fp = GET_FIGHTER(gobj);
+    return fp->input.lstick[0].y <= -p_ftCommonData->x88 &&
+           fp->input.held_buttons[0] & HSD_PAD_XY;
 }
 
+/**
+ * @brief Float - ftPe_8011BA54
+ * @param gobj The fighter's game object
+ * @todo Identify game mechanics and inline frame data
+ */
 bool ftPe_8011BA54(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -41,6 +62,11 @@ bool ftPe_8011BA54(HSD_GObj* gobj)
     return false;
 }
 
+/**
+ * @brief Float - ftPe_8011BAD8
+ * @param gobj The fighter's game object
+ * @todo Identify game mechanics and inline frame data
+ */
 bool ftPe_8011BAD8(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -55,13 +81,23 @@ bool ftPe_8011BAD8(HSD_GObj* gobj)
     return false;
 }
 
+/**
+ * @brief Float - spawnParticle
+ * @param gobj The fighter's game object
+ * @todo Identify game mechanics and inline frame data
+ */
 static void spawnParticle(HSD_GObj* gobj, HSD_JObj* joint)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     efAsync_Spawn(gobj, &fp->x60C, 0, 1236, joint);
 }
 
-void ftPe_8011BB6C(HSD_GObj* gobj, bool arg1)
+/**
+ * @brief Float - ftPe_8011BB6C
+ * @param gobj The fighter's game object
+ * @todo Identify game mechanics and inline frame data
+ */
+void ftPe_8011BB6C(HSD_GObj* gobj, bool set_timer)
 {
     u8 _[8];
     Fighter* fp = GET_FIGHTER(gobj);
@@ -70,7 +106,7 @@ void ftPe_8011BB6C(HSD_GObj* gobj, bool arg1)
 
     Fighter_ChangeMotionState(gobj, ftPe_MS_Float, Ft_MF_None, 0, 1, 0, NULL);
     fp->u.pe.has_float = false;
-    if (arg1) {
+    if (set_timer) {
         fp->u.pe.x4 = da->xC;
     }
     fp->self_vel.y = 0;
@@ -79,6 +115,11 @@ void ftPe_8011BB6C(HSD_GObj* gobj, bool arg1)
     spawnParticle(gobj, joint);
 }
 
+/**
+ * @brief Float - ftPe_Float_Anim
+ * @param gobj The fighter's game object
+ * @todo Identify game mechanics and inline frame data
+ */
 void ftPe_Float_Anim(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -90,6 +131,11 @@ void ftPe_Float_Anim(HSD_GObj* gobj)
     }
 }
 
+/**
+ * @brief Float - ftPe_Float_IASA
+ * @param gobj The fighter's game object
+ * @todo Identify game mechanics and inline frame data
+ */
 void ftPe_Float_IASA(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
@@ -104,11 +150,21 @@ void ftPe_Float_IASA(HSD_GObj* gobj)
     }
 }
 
+/**
+ * @brief Float - ftPe_Float_Phys
+ * @param gobj The fighter's game object
+ * @todo Identify game mechanics and inline frame data
+ */
 void ftPe_Float_Phys(HSD_GObj* gobj)
 {
     ftCommon_CalcSelfAccel_Drift(GET_FIGHTER(gobj));
 }
 
+/**
+ * @brief Float - ftPe_Float_Coll
+ * @param gobj The fighter's game object
+ * @todo Identify game mechanics and inline frame data
+ */
 void ftPe_Float_Coll(HSD_GObj* gobj)
 {
     ft_800831CC(gobj, ftCo_80096CC8, ft_80082B1C);

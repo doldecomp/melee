@@ -1,3 +1,9 @@
+/**
+ * @file ftpeach.c
+ * @brief Peach Main
+ * @details Peach Main logic for Peach.
+ * Module prefix: ftPe
+ */
 #include "ftpeach.h"
 
 #include <Runtime/platform.h>
@@ -404,6 +410,11 @@ Fighter_CostumeStrings ftPe_Init_CostumeStrings[] = {
       str_PlyPeach5KGr_Share_matanim_joint },
 };
 
+/**
+ * @brief Peach Main - ftPe_Init_OnDeath
+ * @param gobj The fighter's game object
+ * @todo Identify game mechanics and inline frame data
+ */
 void ftPe_Init_OnDeath(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -435,6 +446,11 @@ void ftPe_Init_OnDeath(HSD_GObj* gobj)
     }
 }
 
+/**
+ * @brief Peach Main - ftPe_Init_OnLoad
+ * @param gobj The fighter's game object
+ * @todo Identify game mechanics and inline frame data
+ */
 void ftPe_Init_OnLoad(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -450,6 +466,11 @@ void ftPe_Init_OnLoad(HSD_GObj* gobj)
     it_8026B3F8(items[4], It_Kind_Peach_ToadSpore);
 }
 
+/**
+ * @brief Peach Main - ftPe_Init_OnDeath2
+ * @param gobj The fighter's game object
+ * @todo Identify game mechanics and inline frame data
+ */
 void ftPe_Init_OnDeath2(HSD_GObj* gobj)
 {
     ftPe_8011D598(gobj);
@@ -457,31 +478,61 @@ void ftPe_Init_OnDeath2(HSD_GObj* gobj)
     ftPe_SpecialLw_8011CFA0(gobj);
 }
 
+/**
+ * @brief Peach Main - ftPe_Init_OnItemPickup
+ * @param gobj The fighter's game object
+ * @todo Identify game mechanics and inline frame data
+ */
 void ftPe_Init_OnItemPickup(HSD_GObj* gobj, bool flag)
 {
     Fighter_OnItemPickup(gobj, flag, 1, 1);
 }
 
+/**
+ * @brief Peach Main - ftPe_Init_OnItemInvisible
+ * @param gobj The fighter's game object
+ * @todo Identify game mechanics and inline frame data
+ */
 void ftPe_Init_OnItemInvisible(HSD_GObj* gobj)
 {
     Fighter_OnItemInvisible(gobj, 1);
 }
 
+/**
+ * @brief Peach Main - ftPe_Init_OnItemVisible
+ * @param gobj The fighter's game object
+ * @todo Identify game mechanics and inline frame data
+ */
 void ftPe_Init_OnItemVisible(HSD_GObj* gobj)
 {
     Fighter_OnItemVisible(gobj, 1);
 }
 
+/**
+ * @brief Peach Main - ftPe_Init_OnItemDrop
+ * @param gobj The fighter's game object
+ * @todo Identify game mechanics and inline frame data
+ */
 void ftPe_Init_OnItemDrop(HSD_GObj* gobj, bool flag)
 {
     Fighter_OnItemDrop(gobj, flag, 1, 1);
 }
 
+/**
+ * @brief Peach Main - ftPe_Init_LoadSpecialAttrs
+ * @param gobj The fighter's game object
+ * @todo Identify game mechanics and inline frame data
+ */
 void ftPe_Init_LoadSpecialAttrs(HSD_GObj* gobj)
 {
     COPY_ATTRS(gobj, ftPe_DatAttrs);
 }
 
+/**
+ * @brief Peach Main - ftPe_Init_8011B93C
+ * @param gobj The fighter's game object
+ * @todo Identify game mechanics and inline frame data
+ */
 void ftPe_Init_8011B93C(HSD_GObj* gobj)
 {
     u8 _[8];
@@ -495,11 +546,21 @@ void ftPe_Init_8011B93C(HSD_GObj* gobj)
     }
 }
 
+/**
+ * @brief Peach Main - ftPe_Init_OnKnockbackEnter
+ * @param gobj The fighter's game object
+ * @todo Identify game mechanics and inline frame data
+ */
 void ftPe_Init_OnKnockbackEnter(HSD_GObj* gobj)
 {
     Fighter_OnKnockbackEnter(gobj, 1);
 }
 
+/**
+ * @brief Peach Main - ftPe_Init_OnKnockbackExit
+ * @param gobj The fighter's game object
+ * @todo Identify game mechanics and inline frame data
+ */
 void ftPe_Init_OnKnockbackExit(HSD_GObj* gobj)
 {
     Fighter_OnKnockbackExit(gobj, 1);

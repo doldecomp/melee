@@ -1,3 +1,9 @@
+/**
+ * @file ftpeachattacks4.c
+ * @brief Forward Smash (Club, Pan, Racket)
+ * @details Forward Smash (Club, Pan, Racket) logic for Peach.
+ * Module prefix: ftPe
+ */
 #include "ftpeachattacks4.h"
 
 #include <Runtime/platform.h>
@@ -14,6 +20,11 @@
 #include <melee/ft/types.h>
 #include <sysdolphin/baselib/random.h>
 
+/**
+ * @brief Forward Smash (Club, Pan, Racket) - ftPe_AttackS4_Enter
+ * @param gobj The fighter's game object
+ * @todo Identify game mechanics and inline frame data
+ */
 void ftPe_AttackS4_Enter(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -32,6 +43,11 @@ void ftPe_AttackS4_Enter(HSD_GObj* gobj)
     ftAnim_8006EBA4(gobj);
 }
 
+/**
+ * @brief Forward Smash (Club, Pan, Racket) - ftPe_AttackS4_Anim
+ * @param gobj The fighter's game object
+ * @todo Identify game mechanics and inline frame data
+ */
 void ftPe_AttackS4_Anim(HSD_GObj* gobj)
 {
     if (!ftAnim_IsFramesRemaining(gobj)) {
@@ -39,6 +55,11 @@ void ftPe_AttackS4_Anim(HSD_GObj* gobj)
     }
 }
 
+/**
+ * @brief Forward Smash (Club, Pan, Racket) - ftPe_AttackS4_IASA
+ * @param gobj The fighter's game object
+ * @todo Identify game mechanics and inline frame data
+ */
 void ftPe_AttackS4_IASA(HSD_GObj* gobj)
 {
     if (GET_FIGHTER(gobj)->allow_interrupt) {
@@ -46,11 +67,21 @@ void ftPe_AttackS4_IASA(HSD_GObj* gobj)
     }
 }
 
+/**
+ * @brief Forward Smash (Club, Pan, Racket) - ftPe_AttackS4_Phys
+ * @param gobj The fighter's game object
+ * @todo Identify game mechanics and inline frame data
+ */
 void ftPe_AttackS4_Phys(HSD_GObj* gobj)
 {
     ft_80084FA8(gobj);
 }
 
+/**
+ * @brief Forward Smash (Club, Pan, Racket) - ftPe_AttackS4_Coll
+ * @param gobj The fighter's game object
+ * @todo Identify game mechanics and inline frame data
+ */
 void ftPe_AttackS4_Coll(HSD_GObj* gobj)
 {
     ft_80084104(gobj);

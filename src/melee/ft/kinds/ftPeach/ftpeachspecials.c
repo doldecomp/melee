@@ -1,3 +1,9 @@
+/**
+ * @file ftpeachspecials.c
+ * @brief Side-B (Peach Bomber)
+ * @details Side-B (Peach Bomber) logic for Peach.
+ * Module prefix: ftPe
+ */
 #include "ftpeachspecials.h"
 
 #include <Runtime/platform.h>
@@ -35,6 +41,11 @@ static MotionFlags const start_mf =
     Ft_MF_SkipModelPartVis | Ft_MF_SkipModelFlags | Ft_MF_Unk27;
 static MotionFlags const end_mf = Ft_MF_SkipColAnim | Ft_MF_UpdateCmd;
 
+/**
+ * @brief Side-B (Peach Bomber) - reset
+ * @param gobj The fighter's game object
+ * @todo Identify game mechanics and inline frame data
+ */
 static void reset(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -50,6 +61,11 @@ static void reset(HSD_GObj* gobj)
     }
 }
 
+/**
+ * @brief Side-B (Peach Bomber) - ftPe_SpecialS_Enter
+ * @param gobj The fighter's game object
+ * @todo Identify game mechanics and inline frame data
+ */
 void ftPe_SpecialS_Enter(HSD_GObj* gobj)
 {
     u8 _[8];
@@ -63,6 +79,11 @@ void ftPe_SpecialS_Enter(HSD_GObj* gobj)
     ftAnim_8006EBA4(gobj);
 }
 
+/**
+ * @brief Side-B (Peach Bomber) - ftPe_SpecialAirS_Enter
+ * @param gobj The fighter's game object
+ * @todo Identify game mechanics and inline frame data
+ */
 void ftPe_SpecialAirS_Enter(HSD_GObj* gobj)
 {
     u8 _[16];
@@ -75,6 +96,11 @@ void ftPe_SpecialAirS_Enter(HSD_GObj* gobj)
     ftAnim_8006EBA4(gobj);
 }
 
+/**
+ * @brief Side-B (Peach Bomber) - doAirEnd0
+ * @param gobj The fighter's game object
+ * @todo Identify game mechanics and inline frame data
+ */
 static void doAirEnd0(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -110,6 +136,11 @@ static void doAirEnd0(HSD_GObj* gobj)
     enterAirEndSmash(gobj);
 }
 
+/**
+ * @brief Side-B (Peach Bomber) - ftPe_SpecialSStart_Anim
+ * @param gobj The fighter's game object
+ * @todo Identify game mechanics and inline frame data
+ */
 void ftPe_SpecialSStart_Anim(HSD_GObj* gobj)
 {
     u8 _[8];
@@ -127,6 +158,11 @@ void ftPe_SpecialSStart_Anim(HSD_GObj* gobj)
     }
 }
 
+/**
+ * @brief Side-B (Peach Bomber) - ftPe_SpecialAirSStart_Anim
+ * @param gobj The fighter's game object
+ * @todo Identify game mechanics and inline frame data
+ */
 void ftPe_SpecialAirSStart_Anim(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -139,10 +175,25 @@ void ftPe_SpecialAirSStart_Anim(HSD_GObj* gobj)
     }
 }
 
+/**
+ * @brief Side-B (Peach Bomber) - ftPe_SpecialSStart_IASA
+ * @param gobj The fighter's game object
+ * @todo Identify game mechanics and inline frame data
+ */
 void ftPe_SpecialSStart_IASA(HSD_GObj* gobj) {}
 
+/**
+ * @brief Side-B (Peach Bomber) - ftPe_SpecialAirSStart_IASA
+ * @param gobj The fighter's game object
+ * @todo Identify game mechanics and inline frame data
+ */
 void ftPe_SpecialAirSStart_IASA(HSD_GObj* gobj) {}
 
+/**
+ * @brief Side-B (Peach Bomber) - ftPe_SpecialSStart_Phys
+ * @param gobj The fighter's game object
+ * @todo Identify game mechanics and inline frame data
+ */
 void ftPe_SpecialSStart_Phys(HSD_GObj* gobj)
 {
     u8 _[8];
@@ -154,11 +205,21 @@ void ftPe_SpecialSStart_Phys(HSD_GObj* gobj)
     ftCommon_SetSelfMovementFromGroundedMovement(gobj);
 }
 
+/**
+ * @brief Side-B (Peach Bomber) - ftPe_SpecialAirSStart_Phys
+ * @param gobj The fighter's game object
+ * @todo Identify game mechanics and inline frame data
+ */
 void ftPe_SpecialAirSStart_Phys(HSD_GObj* gobj)
 {
     ft_80084EEC(gobj);
 }
 
+/**
+ * @brief Side-B (Peach Bomber) - ftPe_SpecialSStart_Coll
+ * @param gobj The fighter's game object
+ * @todo Identify game mechanics and inline frame data
+ */
 void ftPe_SpecialSStart_Coll(Fighter_GObj* gobj)
 {
     CollData* coll;
@@ -179,6 +240,11 @@ void ftPe_SpecialSStart_Coll(Fighter_GObj* gobj)
     }
 }
 
+/**
+ * @brief Side-B (Peach Bomber) - ftPe_SpecialAirSStart_Coll
+ * @param gobj The fighter's game object
+ * @todo Identify game mechanics and inline frame data
+ */
 void ftPe_SpecialAirSStart_Coll(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -202,6 +268,11 @@ void ftPe_SpecialAirSStart_Coll(HSD_GObj* gobj)
     }
 }
 
+/**
+ * @brief Side-B (Peach Bomber) - enterAirStart
+ * @param gobj The fighter's game object
+ * @todo Identify game mechanics and inline frame data
+ */
 static void enterAirStart(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -210,12 +281,22 @@ static void enterAirStart(HSD_GObj* gobj)
                                     start_mf);
 }
 
+/**
+ * @brief Side-B (Peach Bomber) - enterStart
+ * @param gobj The fighter's game object
+ * @todo Identify game mechanics and inline frame data
+ */
 static void enterStart(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftCommon_AirToGroundStateChange(gobj, fp, ftPe_MS_SpecialSStart, start_mf);
 }
 
+/**
+ * @brief Side-B (Peach Bomber) - ftPe_SpecialAirSJump_Anim
+ * @param gobj The fighter's game object
+ * @todo Identify game mechanics and inline frame data
+ */
 void ftPe_SpecialAirSJump_Anim(HSD_GObj* gobj)
 {
     u8 _[8];
@@ -225,8 +306,18 @@ void ftPe_SpecialAirSJump_Anim(HSD_GObj* gobj)
     }
 }
 
+/**
+ * @brief Side-B (Peach Bomber) - ftPe_SpecialAirSJump_IASA
+ * @param gobj The fighter's game object
+ * @todo Identify game mechanics and inline frame data
+ */
 void ftPe_SpecialAirSJump_IASA(HSD_GObj* gobj) {}
 
+/**
+ * @brief Side-B (Peach Bomber) - ftPe_SpecialAirSJump_Phys
+ * @param gobj The fighter's game object
+ * @todo Identify game mechanics and inline frame data
+ */
 void ftPe_SpecialAirSJump_Phys(HSD_GObj* gobj)
 {
     u8 _[8];
@@ -239,6 +330,11 @@ void ftPe_SpecialAirSJump_Phys(HSD_GObj* gobj)
                   da->x5C_terminal_vel);
 }
 
+/**
+ * @brief Side-B (Peach Bomber) - ftPe_SpecialAirSJump_Coll
+ * @param gobj The fighter's game object
+ * @todo Identify game mechanics and inline frame data
+ */
 void ftPe_SpecialAirSJump_Coll(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -259,6 +355,11 @@ void ftPe_SpecialAirSJump_Coll(HSD_GObj* gobj)
     }
 }
 
+/**
+ * @brief Side-B (Peach Bomber) - enterAirJump
+ * @param gobj The fighter's game object
+ * @todo Identify game mechanics and inline frame data
+ */
 static void enterAirJump(Fighter_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
@@ -278,6 +379,11 @@ static void enterAirJump(Fighter_GObj* gobj)
     fp->hurtbox_detect_cb = doAirEnd0;
 }
 
+/**
+ * @brief Side-B (Peach Bomber) - ftPe_SpecialSEnd_Anim
+ * @param gobj The fighter's game object
+ * @todo Identify game mechanics and inline frame data
+ */
 void ftPe_SpecialSEnd_Anim(HSD_GObj* gobj)
 {
     if (!ftAnim_IsFramesRemaining(gobj)) {
@@ -285,6 +391,11 @@ void ftPe_SpecialSEnd_Anim(HSD_GObj* gobj)
     }
 }
 
+/**
+ * @brief Side-B (Peach Bomber) - ftPe_SpecialAirSEnd_Anim
+ * @param gobj The fighter's game object
+ * @todo Identify game mechanics and inline frame data
+ */
 void ftPe_SpecialAirSEnd_Anim(HSD_GObj* gobj)
 {
     if (!ftAnim_IsFramesRemaining(gobj)) {
@@ -292,20 +403,45 @@ void ftPe_SpecialAirSEnd_Anim(HSD_GObj* gobj)
     }
 }
 
+/**
+ * @brief Side-B (Peach Bomber) - ftPe_SpecialSEnd_IASA
+ * @param gobj The fighter's game object
+ * @todo Identify game mechanics and inline frame data
+ */
 void ftPe_SpecialSEnd_IASA(HSD_GObj* gobj) {}
 
+/**
+ * @brief Side-B (Peach Bomber) - ftPe_SpecialAirSEnd_IASA
+ * @param gobj The fighter's game object
+ * @todo Identify game mechanics and inline frame data
+ */
 void ftPe_SpecialAirSEnd_IASA(HSD_GObj* gobj) {}
 
+/**
+ * @brief Side-B (Peach Bomber) - ftPe_SpecialSEnd_Phys
+ * @param gobj The fighter's game object
+ * @todo Identify game mechanics and inline frame data
+ */
 void ftPe_SpecialSEnd_Phys(HSD_GObj* gobj)
 {
     ft_80084F3C(gobj);
 }
 
+/**
+ * @brief Side-B (Peach Bomber) - ftPe_SpecialAirSEnd_Phys
+ * @param gobj The fighter's game object
+ * @todo Identify game mechanics and inline frame data
+ */
 void ftPe_SpecialAirSEnd_Phys(HSD_GObj* gobj)
 {
     ft_80084EEC(gobj);
 }
 
+/**
+ * @brief Side-B (Peach Bomber) - ftPe_SpecialSEnd_Coll
+ * @param gobj The fighter's game object
+ * @todo Identify game mechanics and inline frame data
+ */
 void ftPe_SpecialSEnd_Coll(HSD_GObj* gobj)
 {
     if (!ft_80082708(gobj)) {
@@ -313,6 +449,11 @@ void ftPe_SpecialSEnd_Coll(HSD_GObj* gobj)
     }
 }
 
+/**
+ * @brief Side-B (Peach Bomber) - ftPe_SpecialAirSEnd_Coll
+ * @param gobj The fighter's game object
+ * @todo Identify game mechanics and inline frame data
+ */
 void ftPe_SpecialAirSEnd_Coll(HSD_GObj* gobj)
 {
     if (ft_80081D0C(gobj)) {
@@ -320,6 +461,11 @@ void ftPe_SpecialAirSEnd_Coll(HSD_GObj* gobj)
     }
 }
 
+/**
+ * @brief Side-B (Peach Bomber) - enterAirEnd
+ * @param gobj The fighter's game object
+ * @todo Identify game mechanics and inline frame data
+ */
 void enterAirEnd(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -327,12 +473,22 @@ void enterAirEnd(HSD_GObj* gobj)
                                     end_mf);
 }
 
+/**
+ * @brief Side-B (Peach Bomber) - enterEnd
+ * @param gobj The fighter's game object
+ * @todo Identify game mechanics and inline frame data
+ */
 void enterEnd(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftCommon_AirToGroundStateChange(gobj, fp, ftPe_MS_SpecialSEnd, end_mf);
 }
 
+/**
+ * @brief Side-B (Peach Bomber) - doPostEnd
+ * @param gobj The fighter's game object
+ * @todo Identify game mechanics and inline frame data
+ */
 static void doPostEnd(HSD_GObj* gobj)
 {
     u8 _[38] = { 0 };
@@ -352,6 +508,11 @@ static void doPostEnd(HSD_GObj* gobj)
     fp->x21F8 = ftCommon_8007F7B4;
 }
 
+/**
+ * @brief Side-B (Peach Bomber) - doPostEnd_SmallerStack
+ * @param gobj The fighter's game object
+ * @todo Identify game mechanics and inline frame data
+ */
 static void doPostEnd_SmallerStack(HSD_GObj* gobj)
 {
     u8 _[34] = { 0 };
@@ -371,6 +532,11 @@ static void doPostEnd_SmallerStack(HSD_GObj* gobj)
     fp->x21F8 = ftCommon_8007F7B4;
 }
 
+/**
+ * @brief Side-B (Peach Bomber) - enterEndSmash
+ * @param gobj The fighter's game object
+ * @todo Identify game mechanics and inline frame data
+ */
 static void enterEndSmash(HSD_GObj* gobj)
 {
     u8 _[8];
@@ -379,6 +545,11 @@ static void enterEndSmash(HSD_GObj* gobj)
     doPostEnd(gobj);
 }
 
+/**
+ * @brief Side-B (Peach Bomber) - enterAirEndSmash
+ * @param gobj The fighter's game object
+ * @todo Identify game mechanics and inline frame data
+ */
 void enterAirEndSmash(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
