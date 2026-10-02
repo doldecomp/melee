@@ -417,10 +417,10 @@ static HSD_ZList* zlist_sort(HSD_ZList* list, s32 nb, s32 offset)
 void _HSD_ZListSort(void)
 {
     if (zsort_sorting) {
-        zlist_texedge_top =
-            zlist_sort(zlist_texedge_top, zlist_texedge_nb,
-                       offsetof(HSD_ZList, sort.texedge));
-        zlist_xlu_top = zlist_sort(zlist_xlu_top, zlist_xlu_nb, offsetof(HSD_ZList, sort.xlu));
+        zlist_texedge_top = zlist_sort(zlist_texedge_top, zlist_texedge_nb,
+                                       offsetof(HSD_ZList, sort.texedge));
+        zlist_xlu_top = zlist_sort(zlist_xlu_top, zlist_xlu_nb,
+                                   offsetof(HSD_ZList, sort.xlu));
     }
 }
 
