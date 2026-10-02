@@ -1,3 +1,12 @@
+/**
+ * @file ftseakspecialhi.c
+ * @brief Sheik's Up-B move: Vanish.
+ * @details Implements Sheik's grounded and aerial Up-B recovery move (Vanish),
+ * including initial blast explosion attack, intangibility, directional analog
+ * stick steering, invisible travel, ledge snap detection, reappearance, and
+ * landing lag. Module prefix: ftSk (Fighter: Sheik)
+ */
+
 #include "ftseakspecialhi.h"
 
 #include <melee/ft/forward.h>
@@ -44,18 +53,26 @@ static MotionFlags const ftSk_MF_SpecialHi_Coll =
 /* 113EAC */ static void ftSk_SpecialHi_80113EAC(Fighter_GObj* gobj);
 /* 113F68 */ static void ftSk_SpecialHi_80113F68(Fighter_GObj* gobj);
 
+/**
+ * @brief Accessory callback spawning the Vanish explosion hitbox and GFX.
+ * @param gobj Fighter game object
+ */
 void fn_80112ED8(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
     if (!fp->x2219_b0) {
-        ftSk_SpecialHi_80112F48(gobj);
-        ftSk_SpecialHi_80112FA8(gobj);
-        ft_PlaySFX(fp, 115, 0x7F, 0x40);
+        ftSk_SpecialHi_80112F48(gobj);   // Spawn explosion hitbox item
+        ftSk_SpecialHi_80112FA8(gobj);   // Spawn explosion particle effect
+        ft_PlaySFX(fp, 115, 0x7F, 0x40); // Play explosion sound effect
     }
     fp->accessory4_cb = NULL;
 }
 
+/**
+ * @brief Spawns the Vanish explosion item entity at Sheik's hip joint.
+ * @param gobj Fighter game object
+ */
 void ftSk_SpecialHi_80112F48(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -69,6 +86,10 @@ void ftSk_SpecialHi_80112F48(HSD_GObj* gobj)
     }
 }
 
+/**
+ * @brief Spawns the Vanish explosion visual particle effect (GFX ID 1284).
+ * @param gobj Fighter game object
+ */
 void ftSk_SpecialHi_80112FA8(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -81,6 +102,11 @@ void ftSk_SpecialHi_80112FA8(HSD_GObj* gobj)
     Fighter_SetEffectHitlagCallbacks(fp);
 }
 
+/**
+ * @brief Accessory callback spawning the Vanish reappearance particle effect
+ * (GFX ID 1285).
+ * @param gobj Fighter game object
+ */
 void fn_80113038(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -94,6 +120,11 @@ void fn_80113038(HSD_GObj* gobj)
     fp->accessory4_cb = NULL;
 }
 
+/**
+ * @brief Enters grounded Up-B (Vanish) startup.
+ * @details Changes motion state to ftSk_MS_SpecialHiStart_0 (state 355).
+ * @param gobj Fighter game object
+ */
 void ftSk_SpecialHi_Enter(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -105,6 +136,12 @@ void ftSk_SpecialHi_Enter(HSD_GObj* gobj)
     ftAnim_8006EBA4(gobj);
 }
 
+/**
+ * @brief Enters aerial Up-B (Vanish) startup.
+ * @details Applies initial vertical velocity boost (da->self_vel_y) and
+ * changes motion state to ftSk_MS_SpecialAirHiStart_0 (state 358).
+ * @param gobj Fighter game object
+ */
 void ftSk_SpecialAirHi_Enter(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -118,6 +155,12 @@ void ftSk_SpecialAirHi_Enter(HSD_GObj* gobj)
     ftAnim_8006EBA4(gobj);
 }
 
+/**
+ * @brief Animation update for grounded Up-B startup.
+ * @details On animation completion, transitions to teleport direction
+ * calculation.
+ * @param gobj Fighter game object
+ */
 void ftSk_SpecialHiStart_0_Anim(HSD_GObj* gobj)
 {
     if (!ftAnim_IsFramesRemaining(gobj)) {
@@ -125,6 +168,12 @@ void ftSk_SpecialHiStart_0_Anim(HSD_GObj* gobj)
     }
 }
 
+/**
+ * @brief Animation update for aerial Up-B startup.
+ * @details On animation completion, transitions to aerial teleport direction
+ * calculation.
+ * @param gobj Fighter game object
+ */
 void ftSk_SpecialAirHiStart_0_Anim(HSD_GObj* gobj)
 {
     if (ftAnim_IsFramesRemaining(gobj) == 0) {
@@ -132,16 +181,32 @@ void ftSk_SpecialAirHiStart_0_Anim(HSD_GObj* gobj)
     }
 }
 
+/**
+ * @brief Interrupt check for grounded Up-B startup.
+ * @param gobj Fighter game object
+ */
 void ftSk_SpecialHiStart_0_IASA(HSD_GObj* gobj) {}
 
-/// Interrupt_SheikUpBStartAir
+/**
+ * @brief Interrupt check for aerial Up-B startup.
+ * @param gobj Fighter game object
+ */
 void ftSk_SpecialAirHiStart_0_IASA(HSD_GObj* gobj) {}
 
+/**
+ * @brief Physics update for grounded Up-B startup.
+ * @param gobj Fighter game object
+ */
 void ftSk_SpecialHiStart_0_Phys(HSD_GObj* gobj)
 {
     ft_80084F3C(gobj);
 }
 
+/**
+ * @brief Physics update for aerial Up-B startup.
+ * @details Applies special fall gravity and aerial drift.
+ * @param gobj Fighter game object
+ */
 void ftSk_SpecialAirHiStart_0_Phys(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -156,6 +221,10 @@ void ftSk_SpecialAirHiStart_0_Phys(HSD_GObj* gobj)
     ftCommon_CalcSelfAccel_Drift(fp);
 }
 
+/**
+ * @brief Collision update for grounded Up-B startup.
+ * @param gobj Fighter game object
+ */
 void ftSk_SpecialHiStart_0_Coll(HSD_GObj* gobj)
 {
     if (ft_80082708(gobj) == GA_Ground) {
@@ -163,6 +232,11 @@ void ftSk_SpecialHiStart_0_Coll(HSD_GObj* gobj)
     }
 }
 
+/**
+ * @brief Collision update for aerial Up-B startup.
+ * @details Checks for landing or ledge grab during startup.
+ * @param gobj Fighter game object
+ */
 void ftSk_SpecialAirHiStart_0_Coll(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -175,79 +249,114 @@ void ftSk_SpecialAirHiStart_0_Coll(Fighter_GObj* gobj)
     }
 }
 
-void ftSk_SpecialHi_80113324(Fighter_GObj* arg0)
+/**
+ * @brief State transition: Grounded -> Aerial for Up-B startup.
+ * @param gobj Fighter game object
+ */
+void ftSk_SpecialHi_80113324(Fighter_GObj* gobj)
 {
-    Fighter* temp_r31;
+    Fighter* fp = gobj->user_data;
 
-    temp_r31 = arg0->user_data;
-    ftCommon_8007D60C(temp_r31);
-    Fighter_ChangeMotionState(arg0, 0x166, 0x0C4C508EU,
-                              temp_r31->cur_anim_frame, 1.0f, 0.0f, NULL);
-    temp_r31->accessory4_cb = fn_80112ED8;
+    ftCommon_8007D60C(fp);
+    Fighter_ChangeMotionState(gobj, 0x166, 0x0C4C508EU, fp->cur_anim_frame,
+                              1.0f, 0.0f, NULL);
+    fp->accessory4_cb = fn_80112ED8;
 }
 
-void ftSk_SpecialHi_80113390(Fighter_GObj* arg0)
+/**
+ * @brief State transition: Aerial -> Grounded for Up-B startup.
+ * @param gobj Fighter game object
+ */
+void ftSk_SpecialHi_80113390(Fighter_GObj* gobj)
 {
-    Fighter* temp_r31;
+    Fighter* fp = gobj->user_data;
 
-    temp_r31 = arg0->user_data;
-    ftCommon_AirToGroundStateChange(arg0, temp_r31, 0x163,
-                                    ftSk_MF_SpecialHi_Coll);
-    temp_r31->accessory4_cb = fn_80112ED8;
+    ftCommon_AirToGroundStateChange(gobj, fp, 0x163, ftSk_MF_SpecialHi_Coll);
+    fp->accessory4_cb = fn_80112ED8;
 }
 
+/**
+ * @brief Animation update for grounded Up-B invisible travel phase.
+ * @details Decrements invisible travel timer until 0, then enters
+ * reappearance.
+ * @param gobj Fighter game object
+ */
 void ftSk_SpecialHiStart_1_Anim(HSD_GObj* gobj)
 {
-    Fighter* fp;
-
-    fp = gobj->user_data;
+    Fighter* fp = gobj->user_data;
     fp->mv.sk.specialn.x0 -= 1;
 
     if (0 >= fp->mv.sk.specialn.x0) {
-        ftSk_SpecialHi_80113EAC(gobj);
+        ftSk_SpecialHi_80113EAC(gobj); // Enter grounded reappearance
     }
 }
 
-/// Animation_SheikUpBTravel
-
+/**
+ * @brief Animation update for aerial Up-B invisible travel phase.
+ * @details Decrements invisible travel timer until 0, then enters aerial
+ * reappearance.
+ * @param gobj Fighter game object
+ */
 void ftSk_SpecialAirHiStart_1_Anim(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     fp->mv.sk.specialhi.x0 -= 1;
 
     if (fp->mv.sk.specialhi.x0 <= 0) {
-        ftSk_SpecialHi_80113F68(gobj);
+        ftSk_SpecialHi_80113F68(gobj); // Enter aerial reappearance
     }
 }
 
+/**
+ * @brief Interrupt check for grounded Up-B invisible travel.
+ * @param gobj Fighter game object
+ */
 void ftSk_SpecialHiStart_1_IASA(HSD_GObj* gobj) {}
 
-/// Interrupt_SheikUpBTravelAir
+/**
+ * @brief Interrupt check for aerial Up-B invisible travel.
+ * @param gobj Fighter game object
+ */
 void ftSk_SpecialAirHiStart_1_IASA(HSD_GObj* gobj) {}
 
-/// Physics_SheikUpBTravelAir
-
+/**
+ * @brief Physics update for grounded Up-B invisible travel.
+ * @param gobj Fighter game object
+ */
 void ftSk_SpecialHiStart_1_Phys(HSD_GObj* gobj)
 {
     ftCommon_SetSelfMovementFromGroundedMovement(gobj);
 }
 
+/**
+ * @brief Physics update for aerial Up-B invisible travel.
+ * @details Position is updated directly via teleport trajectory.
+ * @param gobj Fighter game object
+ */
 void ftSk_SpecialAirHiStart_1_Phys(HSD_GObj* gobj) {}
 
+/**
+ * @brief Collision update for grounded Up-B invisible travel.
+ * @details Checks for wall collisions (bounces/transitions to reappearance) or
+ * edge transitions.
+ * @param gobj Fighter game object
+ */
 void ftSk_SpecialHiStart_1_Coll(HSD_GObj* gobj)
 {
-    s32 temp_r3;
-    s32 temp_r3_2;
-    Fighter* fp; // r4
+    s32 env_flags;
+    s32 env_flags_air;
+    Fighter* fp;
     CollData* collData;
 
     fp = gobj->user_data;
     collData = &fp->coll_data;
 
     if (ft_80082708(gobj) == GA_Ground) {
-        temp_r3 = collData->env_flags;
+        env_flags = collData->env_flags;
 
-        if (temp_r3 & Collide_LeftWallMask || temp_r3 & Collide_RightWallMask)
+        // Wall collision triggers early reappearance
+        if (env_flags & Collide_LeftWallMask ||
+            env_flags & Collide_RightWallMask)
         {
             ftCommon_8007D60C(fp);
             ftSk_SpecialHi_80113F68(gobj);
@@ -256,22 +365,29 @@ void ftSk_SpecialHiStart_1_Coll(HSD_GObj* gobj)
         ftSk_SpecialHi_8011374C(gobj);
         return;
     }
-    temp_r3_2 = collData->env_flags;
+    env_flags_air = collData->env_flags;
 
-    if (temp_r3_2 & Collide_LeftWallMask || temp_r3_2 & Collide_RightWallMask)
+    if (env_flags_air & Collide_LeftWallMask ||
+        env_flags_air & Collide_RightWallMask)
     {
         ftSk_SpecialHi_80113EAC(gobj);
     }
 }
 
+/**
+ * @brief Collision update for aerial Up-B invisible travel.
+ * @details Handles ledge grabbing, landing detection, and teleport collision
+ * resolution.
+ * @param gobj Fighter game object
+ */
 void ftSk_SpecialAirHiStart_1_Coll(HSD_GObj* gobj)
 {
-    s32 var_r0;
-    Fighter* fp;             // r31
-    Fighter* fp2;            // r3
-    ftSeakAttributes* attr;  // r30
-    ftSeakAttributes* attr2; // r30
-    CollData* collData;      // r29
+    s32 should_land;
+    Fighter* fp;
+    Fighter* fp2;
+    ftSeakAttributes* attr;
+    ftSeakAttributes* attr2;
+    CollData* collData;
     s32 unused[6];
 
     fp = gobj->user_data;
@@ -279,18 +395,20 @@ void ftSk_SpecialAirHiStart_1_Coll(HSD_GObj* gobj)
     attr = fp->dat_attrs;
     ++fp->mv.sk.specialhi.xC;
 
+    // Check if eligible to grab ledge or land on floor
     if (ft_CheckGroundAndLedge(gobj, ftGetFacingDirInt(fp)) != 0) {
         fp2 = gobj->user_data;
         attr2 = fp2->dat_attrs;
+        // Check if elapsed frames meet ledge grab threshold
         if ((f32) fp2->mv.sk.specialhi.xC >= attr2->x3C) {
-            var_r0 = 1;
+            should_land = 1;
         } else if (ftCo_8009A134(gobj) != 0) {
-            var_r0 = 0;
+            should_land = 0;
         } else {
-            var_r0 = 1;
+            should_land = 1;
         }
-        if (var_r0 != 0) {
-            ftSk_SpecialHi_801137C8(gobj);
+        if (should_land != 0) {
+            ftSk_SpecialHi_801137C8(gobj); // Enter landing state
             return;
         }
     }
@@ -306,7 +424,10 @@ void ftSk_SpecialAirHiStart_1_Coll(HSD_GObj* gobj)
     }
 }
 
-/// AS_SheikUpBGroundtoAirFall?
+/**
+ * @brief State transition: Grounded -> Aerial during invisible travel.
+ * @param gobj Fighter game object
+ */
 void ftSk_SpecialHi_8011374C(Fighter_GObj* gobj)
 {
     u32 fighterFlags;
@@ -332,12 +453,13 @@ void ftSk_SpecialHi_8011374C(Fighter_GObj* gobj)
     fp->invisible = true;
 }
 
-/// AS_SheikUpBLand
+/**
+ * @brief State transition: Aerial -> Grounded landing during invisible travel.
+ * @param gobj Fighter game object
+ */
 void ftSk_SpecialHi_801137C8(Fighter_GObj* gobj)
 {
     u32 fighterFlags;
-    // f32 animStart, animSpeed;
-    // float animFrame;
     Fighter* fp = gobj->user_data;
 
     ftCommon_8007D7FC(fp);
@@ -358,7 +480,12 @@ void ftSk_SpecialHi_801137C8(Fighter_GObj* gobj)
     fp->invisible = true;
 }
 
-/// AS_SheikUpBTravelGround
+/**
+ * @brief Helper initializing invisible travel state.
+ * @details Sets travel timer (attributes->x38), consumes double jumps, sets
+ * intangibility, makes model invisible, and sets explosion callback.
+ * @param gobj Fighter game object
+ */
 static inline void inlineA0(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -367,11 +494,16 @@ static inline void inlineA0(Fighter_GObj* gobj)
     fp->mv.sk.specialhi.x0 = attributes->x38;
     fp->x1968_jumpsUsed = (u8) fp->co_attrs.max_jumps;
     fp->x2223_b4 = 1;
-    ftColl_8007B62C(gobj, 2);
+    ftColl_8007B62C(gobj, 2); // Set intangible hurtbox state
     fp->invisible = 1;
     fp->accessory4_cb = fn_80112ED8;
 }
 
+/**
+ * @brief PowerPC Newton-Raphson fast inverse square root helper.
+ * @param x Input float
+ * @return float Square root of x
+ */
 static inline float my_sqrtf(float x)
 {
     FORCE_PAD_STACK_32;
@@ -390,6 +522,13 @@ static inline float my_sqrtf(float x)
     }
 }
 
+/**
+ * @brief Calculates grounded Vanish teleport steering from analog stick.
+ * @details Reads stick angle and magnitude. If aimed down into ground,
+ * converts to grounded sliding teleport; otherwise initiates aerial teleport
+ * trajectory.
+ * @param gobj Fighter game object
+ */
 void ftSk_SpecialHi_80113838(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -408,6 +547,7 @@ void ftSk_SpecialHi_80113838(Fighter_GObj* gobj)
         stick_mag = 1.0f;
     }
 
+    // Check stick deadzone threshold (attributes->x40)
     if (!(stick_mag < attributes->x40)) {
         Vec3* normal = &coll->floor.normal;
         {
@@ -415,20 +555,23 @@ void ftSk_SpecialHi_80113838(Fighter_GObj* gobj)
             lstick.x = fp->input.lstick[0].x;
             lstick.y = fp->input.lstick[0].y;
             lstick.z = 0.0f;
+            // Angle between floor normal and stick direction < 90 deg
             if (!(lbVector_AngleXY(normal, &lstick) < (float) M_PI_2)) {
                 if (ftCo_8009A134(gobj) == 0) {
-                    f32 temp_f1_5;
+                    f32 stick_angle;
                     ftCommon_UpdateFacing(fp);
-                    temp_f1_5 = atan2f(fp->input.lstick[0].y,
-                                       fp->input.lstick[0].x * fp->facing_dir);
+                    stick_angle =
+                        atan2f(fp->input.lstick[0].y,
+                               fp->input.lstick[0].x * fp->facing_dir);
                     fp->mv.sk.specialhi.vel.x = lstick.x;
                     fp->mv.sk.specialhi.vel.y = lstick.y;
                     {
-                        f32 temp_f6;
-                        temp_f6 =
+                        f32 speed;
+                        // Velocity = (scale * stick_mag + base) * cos(angle)
+                        speed =
                             ((attributes->x44 * stick_mag) + attributes->x48) *
-                            cosf(temp_f1_5);
-                        fp->gr_vel = fp->facing_dir * temp_f6;
+                            cosf(stick_angle);
+                        fp->gr_vel = fp->facing_dir * speed;
                     }
                     Fighter_ChangeMotionState(gobj, 0x164, Ft_MF_None, 35.0f,
                                               1.0f, 0.0f, NULL);
@@ -444,14 +587,20 @@ void ftSk_SpecialHi_80113838(Fighter_GObj* gobj)
     ftSk_SpecialHi_80113A30(gobj);
 }
 
-/// AS_SheikUpBTravelAir
+/**
+ * @brief Calculates aerial Vanish teleport trajectory from analog stick input.
+ * @details Reads stick angle & magnitude, computes self velocities:
+ * vel = (attributes->x44 * stick_mag + attributes->x48) * (cos/sin),
+ * updates facing direction, and enters invisible travel state 0x167.
+ * @param gobj Fighter game object
+ */
 void ftSk_SpecialHi_80113A30(Fighter_GObj* gobj)
 {
     f32 stick_y;
     f32 stick_x;
-    f32 var_f1;
-    f32 var_f30;
-    f32 var_f31;
+    f32 stick_abs_x;
+    f32 travel_angle;
+    f32 clamped_stick_mag;
     f32 stick_y_sq;
     f32 stick_mag;
     Fighter* fp = gobj->user_data;
@@ -463,49 +612,63 @@ void ftSk_SpecialHi_80113A30(Fighter_GObj* gobj)
     stick_y_sq = stick_y * stick_y;
     stick_mag = my_sqrtf(stick_x + stick_y_sq);
 
-    var_f31 = stick_mag;
+    clamped_stick_mag = stick_mag;
     if (stick_mag > 1.0f) {
-        var_f31 = 1.0f;
+        clamped_stick_mag = 1.0f;
     }
-    if (var_f31 > attributes->x40) {
-        var_f1 = fp->input.lstick[0].x;
-        if (var_f1 < 0.0f) {
-            var_f1 = -var_f1;
+    if (clamped_stick_mag > attributes->x40) {
+        stick_abs_x = fp->input.lstick[0].x;
+        if (stick_abs_x < 0.0f) {
+            stick_abs_x = -stick_abs_x;
         }
-        if (var_f1 > 0.001f) {
+        if (stick_abs_x > 0.001f) {
             ftCommon_UpdateFacing(fp);
         }
-        var_f30 = atan2f(fp->input.lstick[0].y,
-                         fp->input.lstick[0].x * fp->facing_dir);
+        travel_angle = atan2f(fp->input.lstick[0].y,
+                              fp->input.lstick[0].x * fp->facing_dir);
         fp->mv.sk.specialhi.vel.x = fp->input.lstick[0].x;
         fp->mv.sk.specialhi.vel.y = fp->input.lstick[0].y;
     } else {
+        // Default trajectory: straight up (pi/2)
         ftCommon_8007DA24(fp);
-        var_f30 = M_PI / 2;
+        travel_angle = M_PI / 2;
         fp->mv.sk.specialhi.vel.x = 0.0f;
         fp->mv.sk.specialhi.vel.y = 1.0f;
-        var_f31 = 1.0f;
+        clamped_stick_mag = 1.0f;
     }
     fp->self_vel.x =
         fp->facing_dir *
-        (((attributes->x44 * var_f31) + attributes->x48) * cosf(var_f30));
+        (((attributes->x44 * clamped_stick_mag) + attributes->x48) *
+         cosf(travel_angle));
     fp->self_vel.y =
-        ((attributes->x44 * var_f31) + attributes->x48) * sinf(var_f30);
+        ((attributes->x44 * clamped_stick_mag) + attributes->x48) *
+        sinf(travel_angle);
     Fighter_ChangeMotionState(gobj, 0x167, 0U, 35.0f, 1.0f, 0.0f, NULL);
     ftAnim_8006EBA4(gobj);
     ftAnim_SetAnimRate(gobj, 0.0f);
     inlineA0(gobj);
 }
 
+/**
+ * @brief Animation update for grounded Up-B reappearance.
+ * @details On animation completion, transitions to Wait (idle).
+ * @param gobj Fighter game object
+ */
 void ftSk_SpecialHi_Anim(HSD_GObj* gobj)
 {
     FORCE_PAD_STACK_8;
 
     if (ftAnim_IsFramesRemaining(gobj) == 0) {
-        ft_8008A2BC(gobj);
+        ft_8008A2BC(gobj); // Enter Wait / Idle
     }
 }
 
+/**
+ * @brief Animation update for aerial Up-B reappearance.
+ * @details On animation completion, enters FallSpecial (freefall) with landing
+ * lag parameters.
+ * @param gobj Fighter game object
+ */
 void ftSk_SpecialAirHi_Anim(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -513,22 +676,39 @@ void ftSk_SpecialAirHi_Anim(HSD_GObj* gobj)
 
     if (ftAnim_IsFramesRemaining(gobj) == 0) {
         float x, y;
-        x = attributes->x58;
+        x = attributes->x58; // Freefall landing lag
         y = attributes->x5C;
         ftCo_80096900(gobj, 1, 0, 1, x, y);
     }
 }
 
+/**
+ * @brief Interrupt check for grounded Up-B reappearance.
+ * @param gobj Fighter game object
+ */
 void ftSk_SpecialHi_IASA(HSD_GObj* gobj) {}
 
-/// Interrupt_SheikUpBEndAir
+/**
+ * @brief Interrupt check for aerial Up-B reappearance.
+ * @param gobj Fighter game object
+ */
 void ftSk_SpecialAirHi_IASA(HSD_GObj* gobj) {}
 
+/**
+ * @brief Physics update for grounded Up-B reappearance.
+ * @param gobj Fighter game object
+ */
 void ftSk_SpecialHi_Phys(HSD_GObj* gobj)
 {
     ft_80084F3C(gobj);
 }
 
+/**
+ * @brief Physics update for aerial Up-B reappearance.
+ * @details Decelerates vertical velocity, applies fall and drift clamps when
+ * cmd_vars set.
+ * @param gobj Fighter game object
+ */
 void ftSk_SpecialAirHi_Phys(HSD_GObj* gobj)
 {
     u8 _[8];
@@ -544,11 +724,15 @@ void ftSk_SpecialAirHi_Phys(HSD_GObj* gobj)
         return;
     } else {
         float vel_y = fp->self_vel.y;
-        fp->self_vel.y = vel_y - (vel_y / 10.0f);
+        fp->self_vel.y = vel_y - (vel_y / 10.0f); // Exponential deceleration
     }
     ftCommon_CalcSelfAccel_DeaccelAir(fp);
 }
 
+/**
+ * @brief Collision update for grounded Up-B reappearance.
+ * @param gobj Fighter game object
+ */
 void ftSk_SpecialHi_Coll(HSD_GObj* gobj)
 {
     if (ft_800827A0(gobj) == 0) {
@@ -556,6 +740,11 @@ void ftSk_SpecialHi_Coll(HSD_GObj* gobj)
     }
 }
 
+/**
+ * @brief Collision update for aerial Up-B reappearance.
+ * @details Checks for landing into FallSpecial landing lag or ledge grab.
+ * @param gobj Fighter game object
+ */
 void ftSk_SpecialAirHi_Coll(HSD_GObj* gobj)
 {
     u8 _[8];
@@ -572,6 +761,10 @@ void ftSk_SpecialAirHi_Coll(HSD_GObj* gobj)
     }
 }
 
+/**
+ * @brief State transition: Grounded -> Aerial for Up-B reappearance.
+ * @param gobj Fighter game object
+ */
 void ftSk_SpecialHi_80113E40(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -582,6 +775,11 @@ void ftSk_SpecialHi_80113E40(Fighter_GObj* gobj)
     fp->accessory4_cb = fn_80113038;
 }
 
+/**
+ * @brief Helper resetting velocities and making Sheik visible upon
+ * reappearance.
+ * @param gobj Fighter game object
+ */
 static void ftSk_SpecialHi_80113EAC_inline(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -593,6 +791,10 @@ static void ftSk_SpecialHi_80113EAC_inline(Fighter_GObj* gobj)
     fp->accessory4_cb = fn_80113038;
 }
 
+/**
+ * @brief Enters grounded Up-B reappearance state (state 0x165).
+ * @param gobj Fighter game object
+ */
 void ftSk_SpecialHi_80113EAC(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -603,7 +805,11 @@ void ftSk_SpecialHi_80113EAC(Fighter_GObj* gobj)
     fp->gr_vel = fp->mv.co.common.x18 * attributes->x54;
 }
 
-/// AS_SheikUpBFall
+/**
+ * @brief Helper resetting velocities and making Sheik visible upon aerial
+ * reappearance.
+ * @param gobj Fighter game object
+ */
 static void ftSk_SpecialHi_80113F68_inline(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -615,6 +821,10 @@ static void ftSk_SpecialHi_80113F68_inline(Fighter_GObj* gobj)
     fp->accessory4_cb = fn_80113038;
 }
 
+/**
+ * @brief Enters aerial Up-B reappearance state (ftSk_MS_SpecialAirHi).
+ * @param gobj Fighter game object
+ */
 void ftSk_SpecialHi_80113F68(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
