@@ -35,24 +35,24 @@
 
 void mpIsland_8005A6F8(void)
 {
-    mpIsland_80458E88.next = NULL;
-    mpIsland_80458E88.x4 = NULL;
-    mpIsland_80458E88.x8 = NULL;
-    mpIsland_80458E88.xC = NULL;
-    mpIsland_80458E88.x18 = NULL;
-    mpIsland_80458E88.x1C = NULL;
-    mpIsland_80458E88.x10 = NULL;
-    mpIsland_80458E88.x14 = NULL;
-    mpIsland_80458E88.x20 = NULL;
+    mpIsland_80458E88.floors = NULL;
+    mpIsland_80458E88.ceilings = NULL;
+    mpIsland_80458E88.floors_tail = NULL;
+    mpIsland_80458E88.ceilings_tail = NULL;
+    mpIsland_80458E88.disabled_floors = NULL;
+    mpIsland_80458E88.disabled_ceilings = NULL;
+    mpIsland_80458E88.dynamic_floors = NULL;
+    mpIsland_80458E88.dynamic_ceilings = NULL;
+    mpIsland_80458E88.free_list = NULL;
 }
 
-static inline void mpIsland_AssertSeg(mp_UnkStruct0* mpisp)
+static inline void mpIsland_AssertSeg(mpIsland* mpisp)
 {
     HSD_ASSERT(62, mpisp);
 }
 
 struct mpIsland_8005A728_seg {
-    mp_UnkStruct0* p;
+    mpIsland* p;
 };
 
 void mpIsland_8005A728(void)
@@ -67,7 +67,7 @@ void mpIsland_8005A728(void)
     int end_idx;
     int next;
     int hidden;
-    mp_UnkStruct0* prev;
+    mpIsland* prev;
     u8 visited[0x600];
     PAD_STACK(0x10);
 
@@ -84,12 +84,12 @@ void mpIsland_8005A728(void)
         line_idx = map->ranges[MapLineGroup_Floor].start;
         z_val = 0.0f;
         while (count != 0) {
-            seg.p = HSD_MemAlloc(0x2C);
+            seg.p = HSD_MemAlloc(sizeof(mpIsland));
             mpIsland_AssertSeg(seg.p);
             if (prev) {
                 prev->next = seg.p;
             } else {
-                mpIsland_80458E88.next = seg.p;
+                mpIsland_80458E88.floors = seg.p;
             }
             prev = seg.p;
             end_idx = line_idx;
@@ -109,19 +109,19 @@ void mpIsland_8005A728(void)
                 }
                 end_idx = next;
             }
-            seg.p->x20 = hidden ? 2 : 0;
+            seg.p->flags = hidden ? 2 : 0;
             seg.p->next = NULL;
-            seg.p->x24 = (s16) line_idx;
-            seg.p->x26 = (s16) end_idx;
-            seg.p->x4 = lines[line_idx].x0->v0_idx;
-            seg.p->x6 = lines[end_idx].x0->v1_idx;
-            seg.p->x8.x = vtx[seg.p->x4].pos.x;
-            seg.p->x8.y = vtx[seg.p->x4].pos.y;
-            seg.p->x8.z = z_val;
-            seg.p->x14.x = vtx[seg.p->x6].pos.x;
-            seg.p->x14.y = vtx[seg.p->x6].pos.y;
-            seg.p->x14.z = z_val;
-            seg.p->x28 = mpJointFromLine(line_idx);
+            seg.p->line0 = (s16) line_idx;
+            seg.p->line1 = (s16) end_idx;
+            seg.p->vtx0 = lines[line_idx].x0->v0_idx;
+            seg.p->vtx1 = lines[end_idx].x0->v1_idx;
+            seg.p->pos0.x = vtx[seg.p->vtx0].pos.x;
+            seg.p->pos0.y = vtx[seg.p->vtx0].pos.y;
+            seg.p->pos0.z = z_val;
+            seg.p->pos1.x = vtx[seg.p->vtx1].pos.x;
+            seg.p->pos1.y = vtx[seg.p->vtx1].pos.y;
+            seg.p->pos1.z = z_val;
+            seg.p->joint_id = mpJointFromLine(line_idx);
             count--;
             line_idx++;
             {
@@ -139,7 +139,7 @@ void mpIsland_8005A728(void)
         }
     }
 
-    mpIsland_80458E88.x8 = prev;
+    mpIsland_80458E88.floors_tail = prev;
 
     /* Process ceiling segments */
     prev = NULL;
@@ -149,12 +149,12 @@ void mpIsland_8005A728(void)
         line_idx = map->ranges[MapLineGroup_Ceiling].start;
         z_val = 0.0f;
         while (count != 0) {
-            seg.p = HSD_MemAlloc(0x2C);
+            seg.p = HSD_MemAlloc(sizeof(mpIsland));
             mpIsland_AssertSeg(seg.p);
             if (prev) {
                 prev->next = seg.p;
             } else {
-                mpIsland_80458E88.x4 = seg.p;
+                mpIsland_80458E88.ceilings = seg.p;
             }
             prev = seg.p;
             end_idx = line_idx;
@@ -175,19 +175,19 @@ void mpIsland_8005A728(void)
                 }
                 end_idx = next;
             }
-            seg.p->x20 = hidden ? 2 : 0;
+            seg.p->flags = hidden ? 2 : 0;
             seg.p->next = NULL;
-            seg.p->x24 = (s16) line_idx;
-            seg.p->x26 = (s16) end_idx;
-            seg.p->x4 = lines[line_idx].x0->v1_idx;
-            seg.p->x6 = lines[end_idx].x0->v0_idx;
-            seg.p->x8.x = vtx[seg.p->x4].pos.x;
-            seg.p->x8.y = vtx[seg.p->x4].pos.y;
-            seg.p->x8.z = z_val;
-            seg.p->x14.x = vtx[seg.p->x6].pos.x;
-            seg.p->x14.y = vtx[seg.p->x6].pos.y;
-            seg.p->x14.z = z_val;
-            seg.p->x28 = mpJointFromLine(line_idx);
+            seg.p->line0 = (s16) line_idx;
+            seg.p->line1 = (s16) end_idx;
+            seg.p->vtx0 = lines[line_idx].x0->v1_idx;
+            seg.p->vtx1 = lines[end_idx].x0->v0_idx;
+            seg.p->pos0.x = vtx[seg.p->vtx0].pos.x;
+            seg.p->pos0.y = vtx[seg.p->vtx0].pos.y;
+            seg.p->pos0.z = z_val;
+            seg.p->pos1.x = vtx[seg.p->vtx1].pos.x;
+            seg.p->pos1.y = vtx[seg.p->vtx1].pos.y;
+            seg.p->pos1.z = z_val;
+            seg.p->joint_id = mpJointFromLine(line_idx);
             count--;
             line_idx++;
             {
@@ -205,24 +205,24 @@ void mpIsland_8005A728(void)
         }
     }
 
-    mpIsland_80458E88.xC = prev;
+    mpIsland_80458E88.ceilings_tail = prev;
 }
 
-mp_UnkStruct0* mpIsland_8005AB54(int surface_idx)
+mpIsland* mpIsland_8005AB54(int surface_idx)
 {
     if (mpLib_80054ED8(surface_idx)) {
         CollLine* v2 = mpGetGroundCollLine();
         bool done;
-        mp_UnkStruct0* cur;
+        mpIsland* cur;
 
-        for (cur = mpIsland_80458E88.next; cur; cur = cur->next) {
+        for (cur = mpIsland_80458E88.floors; cur; cur = cur->next) {
             int j, j_next;
-            for (j = cur->x24; j != -1; j = j_next) {
+            for (j = cur->line0; j != -1; j = j_next) {
                 if (j == surface_idx) {
                     return cur;
                 }
 
-                if (j == cur->x26) {
+                if (j == cur->line1) {
                     break;
                 }
 
@@ -242,201 +242,151 @@ mp_UnkStruct0* mpIsland_8005AB54(int surface_idx)
     return NULL;
 }
 
-mp_UnkStruct0* mpIsland_8005AC14(Vec3* arg0, float arg1)
+mpIsland* mpIsland_8005AC14(Vec3* pos, float dy)
 {
-    int i;
-    if (mpCheckFloor(arg0->x, arg0->y, arg0->x, arg0->y + arg1, 0.0F, NULL, &i,
+    int line_id;
+    if (mpCheckFloor(pos->x, pos->y, pos->x, pos->y + dy, 0.0F, NULL, &line_id,
                      NULL, NULL, -1, -1, -1, NULL, NULL))
     {
-        return mpIsland_8005AB54(i);
+        return mpIsland_8005AB54(line_id);
     }
     return NULL;
 }
 
-bool mpIsland_8005AC8C(mp_UnkStruct0* arg0)
+bool mpIsland_8005AC8C(mpIsland* island)
 {
-    CollJoint* temp_r3 = &mpGetGroundCollJoint()[arg0->x28];
-    if (temp_r3->flags & (CollJoint_B10 | CollJoint_B9 | CollJoint_B8)) {
+    CollJoint* joint = &mpGetGroundCollJoint()[island->joint_id];
+    if (joint->flags & (CollJoint_B10 | CollJoint_B9 | CollJoint_B8)) {
         return true;
     }
-    if (temp_r3->flags & (CollJoint_B10 | CollJoint_B9 | CollJoint_B8)) {
+    if (joint->flags & (CollJoint_B10 | CollJoint_B9 | CollJoint_B8)) {
         return true;
     }
     return false;
 }
 
-void mpIsland_8005ACE8(mp_UnkStruct0* arg0, Vec3* arg1, Vec3* arg2)
+void mpIsland_8005ACE8(mpIsland* island, Vec3* left, Vec3* right)
 {
-    int var_r31;
-    CollLine* var_r30;
-    int temp_r29;
-    bool var_r28;
-    CollJoint* temp_r3;
-    bool var_r27;
+    int line_id;
+    CollLine* line;
+    int count;
+    bool find_left;
+    CollJoint* joint;
+    bool find_right;
     int i;
 
-    temp_r3 = &mpGetGroundCollJoint()[arg0->x28];
-    var_r31 = temp_r3->inner->ranges[MapLineGroup_Floor].start;
-    var_r30 = &mpGetGroundCollLine()[var_r31];
-    temp_r29 = temp_r3->inner->ranges[MapLineGroup_Floor].count;
+    joint = &mpGetGroundCollJoint()[island->joint_id];
+    line_id = joint->inner->ranges[MapLineGroup_Floor].start;
+    line = &mpGetGroundCollLine()[line_id];
+    count = joint->inner->ranges[MapLineGroup_Floor].count;
 
-    var_r28 = true;
-    var_r27 = true;
-    if (arg1 != NULL) {
-        *arg1 = arg0->x8;
+    find_left = true;
+    find_right = true;
+    if (left != NULL) {
+        *left = island->pos0;
     } else {
-        var_r28 = false;
+        find_left = false;
     }
-    if (arg2 != NULL) {
-        *arg2 = arg0->x14;
+    if (right != NULL) {
+        *right = island->pos1;
     } else {
-        var_r27 = false;
+        find_right = false;
     }
 
-    for (i = 0; i < temp_r29 && var_r28 && var_r27; var_r31++) {
-        if (var_r28 && var_r30->x0->v0_idx == arg0->x4) {
-            mpFloorGetLeft(var_r31, arg1);
-        } else if (var_r27 && var_r30->x0->v1_idx == arg0->x6) {
-            mpFloorGetRight(var_r31, arg2);
+    for (i = 0; i < count && find_left && find_right; line_id++) {
+        if (find_left && line->x0->v0_idx == island->vtx0) {
+            mpFloorGetLeft(line_id, left);
+        } else if (find_right && line->x0->v1_idx == island->vtx1) {
+            mpFloorGetRight(line_id, right);
         }
         i++;
-        var_r30++;
+        line++;
     }
 }
 
-void mpIsland_8005AE1C(mp_UnkStruct0** arg0, mp_UnkStruct0** arg1, int arg2,
-                       int arg3, bool arg4)
+void mpIsland_8005AE1C(mpIsland** enabled_list, mpIsland** disabled_list,
+                       int vtx_start, int vtx_count, bool enabled)
 {
-    mp_UnkStruct0* prev_b;
-    mp_UnkStruct0* prev_a;
-    mp_UnkStruct0* cur;
-    mp_UnkStruct0* next;
+    mpIsland* enabled_head;
+    mpIsland* disabled_head;
+    mpIsland* cur;
+    mpIsland* next;
     CollVtx* vtx;
     int end;
     float z_val;
     u16 v0;
 
-    prev_b = NULL;
-    prev_a = NULL;
+    enabled_head = NULL;
+    disabled_head = NULL;
 
     vtx = mpGetGroundCollVtx();
-    cur = *arg0;
-    end = arg2 + arg3;
+    cur = *enabled_list;
+    end = vtx_start + vtx_count;
     z_val = 0.0f;
 
-    goto loop1_check;
-loop1_body:
-    v0 = cur->x4;
-    next = cur->next;
-
-    if ((int) v0 < arg2) {
-        if ((int) cur->x6 < arg2) {
-            goto add_to_prev_b_1;
+    for (; cur != NULL; cur = next) {
+        v0 = cur->vtx0;
+        next = cur->next;
+        if ((v0 >= vtx_start || cur->vtx1 >= vtx_start) &&
+            (end > v0 || end > cur->vtx1))
+        {
+            cur->pos0.x = vtx[v0].pos.x;
+            cur->pos0.y = vtx[cur->vtx0].pos.y;
+            cur->pos0.z = z_val;
+            cur->pos1.x = vtx[cur->vtx1].pos.x;
+            cur->pos1.y = vtx[cur->vtx1].pos.y;
+            cur->pos1.z = z_val;
+            if (!enabled && !(cur->flags & mpIsland_Disabled)) {
+                cur->flags |= mpIsland_Disabled;
+                cur->next = disabled_head;
+                disabled_head = cur;
+                continue;
+            }
         }
+        cur->next = enabled_head;
+        enabled_head = cur;
     }
 
-    if (end > (int) v0) {
-        goto do_assign_1;
-    }
-    if (end <= (int) cur->x6) {
-        goto add_to_prev_b_1;
-    }
-
-do_assign_1:
-    cur->x8.x = vtx[v0].pos.x;
-    cur->x8.y = vtx[cur->x4].pos.y;
-    cur->x8.z = z_val;
-    cur->x14.x = vtx[cur->x6].pos.x;
-    cur->x14.y = vtx[cur->x6].pos.y;
-    cur->x14.z = z_val;
-
-    if (arg4) {
-        goto add_to_prev_b_1;
-    }
-    if (cur->x20 & 2) {
-        goto add_to_prev_b_1;
-    }
-    cur->x20 |= 2;
-    cur->next = prev_a;
-    prev_a = cur;
-    goto loop1_next;
-
-add_to_prev_b_1:
-    cur->next = prev_b;
-    prev_b = cur;
-
-loop1_next:
-    cur = next;
-loop1_check:
-    if (cur != NULL) {
-        goto loop1_body;
-    }
-
-    cur = *arg1;
+    cur = *disabled_list;
     z_val = 0.0f;
 
-    goto loop2_check;
-loop2_body:
-    v0 = cur->x4;
-    next = cur->next;
-
-    if ((int) v0 < arg2) {
-        if ((int) cur->x6 < arg2) {
-            goto add_to_prev_a_2;
+    for (; cur != NULL; cur = next) {
+        v0 = cur->vtx0;
+        next = cur->next;
+        if ((v0 >= vtx_start || cur->vtx1 >= vtx_start) &&
+            (end > v0 || end > cur->vtx1))
+        {
+            cur->pos0.x = vtx[v0].pos.x;
+            cur->pos0.y = vtx[cur->vtx0].pos.y;
+            cur->pos0.z = z_val;
+            cur->pos1.x = vtx[cur->vtx1].pos.x;
+            cur->pos1.y = vtx[cur->vtx1].pos.y;
+            cur->pos1.z = z_val;
+            if (enabled && (cur->flags & mpIsland_Disabled)) {
+                cur->flags &= ~mpIsland_Disabled;
+                cur->next = enabled_head;
+                enabled_head = cur;
+                continue;
+            }
         }
+        cur->next = disabled_head;
+        disabled_head = cur;
     }
 
-    if (end > (int) v0) {
-        goto do_assign_2;
-    }
-    if (end <= (int) cur->x6) {
-        goto add_to_prev_a_2;
-    }
-
-do_assign_2:
-    cur->x8.x = vtx[v0].pos.x;
-    cur->x8.y = vtx[cur->x4].pos.y;
-    cur->x8.z = z_val;
-    cur->x14.x = vtx[cur->x6].pos.x;
-    cur->x14.y = vtx[cur->x6].pos.y;
-    cur->x14.z = z_val;
-
-    if (arg4 == false) {
-        goto add_to_prev_a_2;
-    }
-    if ((cur->x20 & 2) == 0) {
-        goto add_to_prev_a_2;
-    }
-    cur->x20 &= ~2;
-    cur->next = prev_b;
-    prev_b = cur;
-    goto loop2_next;
-
-add_to_prev_a_2:
-    cur->next = prev_a;
-    prev_a = cur;
-
-loop2_next:
-    cur = next;
-loop2_check:
-    if (cur != NULL) {
-        goto loop2_body;
-    }
-
-    *arg0 = prev_b;
-    *arg1 = prev_a;
+    *enabled_list = enabled_head;
+    *disabled_list = disabled_head;
 }
 
-void mpIsland_8005B004(mp_UnkStruct0** arg0, mp_UnkStruct0** arg1, int arg2,
-                       int arg3, int arg4, int arg5, bool arg6)
+void mpIsland_8005B004(mpIsland** list, mpIsland** free_list, int joint_id,
+                       int kind, int vtx_start, int vtx_count, bool enabled)
 {
     UNUSED u8 _q0[8];
-    mp_UnkStruct0* cur;
+    mpIsland* cur;
     float z_val;
     u8 visited[0x600];
-    mp_UnkStruct0* next;
-    mp_UnkStruct0* prev;
-    mp_UnkStruct0* mpisp;
+    mpIsland* next;
+    mpIsland* prev;
+    mpIsland* mpisp;
     CollLine* lines;
     CollVtx* vtx;
     CollJoint* joints;
@@ -448,32 +398,32 @@ void mpIsland_8005B004(mp_UnkStruct0** arg0, mp_UnkStruct0** arg1, int arg2,
     u32 type_flag;
     s16 link;
     int cycle_start;
-    float min_x;
     float max_x;
+    float min_x;
     int i;
     PAD_STACK(8);
 
-    type_flag = arg3 | 0x10;
+    type_flag = kind | 0x10;
     prev = NULL;
-    cur = *arg0;
+    cur = *list;
 
     while (cur != NULL) {
         next = cur->next;
-        if (cur->x28 == arg2) {
-            cur->next = *arg1;
-            *arg1 = cur;
+        if (cur->joint_id == joint_id) {
+            cur->next = *free_list;
+            *free_list = cur;
         } else {
             cur->next = prev;
             prev = cur;
         }
         cur = next;
     }
-    *arg0 = prev;
+    *list = prev;
 
     memzero(visited, sizeof(visited));
 
     joints = mpGetGroundCollJoint();
-    joints = &joints[arg2];
+    joints = &joints[joint_id];
     lines = mpGetGroundCollLine();
     vtx = mpGetGroundCollVtx();
     z_val = 0.0F;
@@ -531,18 +481,18 @@ void mpIsland_8005B004(mp_UnkStruct0** arg0, mp_UnkStruct0** arg1, int arg2,
             HSD_ASSERT(0x206, !loop);
         } else {
             i = start_idx = end_idx;
-            min_x = -F32_MAX;
-            max_x = F32_MAX;
+            max_x = -F32_MAX;
+            min_x = F32_MAX;
             cycle_start = i;
 
             do {
-                if (max_x > vtx[lines[i].x0->v0_idx].pos.x) {
-                    max_x = vtx[lines[i].x0->v0_idx].pos.x;
+                if (min_x > vtx[lines[i].x0->v0_idx].pos.x) {
+                    min_x = vtx[lines[i].x0->v0_idx].pos.x;
                     end_idx = i;
                 }
                 {
-                    if (min_x > vtx[lines[i].x0->v1_idx].pos.x) {
-                        min_x = vtx[lines[i].x0->v1_idx].pos.x;
+                    if (max_x > vtx[lines[i].x0->v1_idx].pos.x) {
+                        max_x = vtx[lines[i].x0->v1_idx].pos.x;
                         start_idx = i;
                     }
                 }
@@ -552,78 +502,83 @@ void mpIsland_8005B004(mp_UnkStruct0** arg0, mp_UnkStruct0** arg1, int arg2,
             } while (link != cycle_start);
         }
 
-        if ((mpisp = *arg1) != NULL) {
-            *arg1 = mpisp->next;
+        if ((mpisp = *free_list) != NULL) {
+            *free_list = mpisp->next;
         } else {
-            mpisp = HSD_MemAlloc(0x2C);
+            mpisp = HSD_MemAlloc(sizeof(mpIsland));
             mpIsland_AssertSeg(mpisp);
         }
 
-        mpisp->x20 = arg6 ? 0 : 2;
+        mpisp->flags = enabled ? 0 : mpIsland_Disabled;
         mpisp->next = NULL;
-        mpisp->x24 = (s16) end_idx;
-        mpisp->x26 = (s16) start_idx;
-        mpisp->x4 = lines[end_idx].x0->v0_idx;
-        mpisp->x6 = lines[start_idx].x0->v1_idx;
-        mpisp->x8.x = vtx[mpisp->x4].pos.x;
-        mpisp->x8.y = vtx[mpisp->x4].pos.y;
-        mpisp->x8.z = z_val;
-        mpisp->x14.x = vtx[mpisp->x6].pos.x;
-        mpisp->x14.y = vtx[mpisp->x6].pos.y;
-        mpisp->x14.z = z_val;
-        mpisp->x28 = (s16) arg2;
+        mpisp->line0 = (s16) end_idx;
+        mpisp->line1 = (s16) start_idx;
+        mpisp->vtx0 = lines[end_idx].x0->v0_idx;
+        mpisp->vtx1 = lines[start_idx].x0->v1_idx;
+        mpisp->pos0.x = vtx[mpisp->vtx0].pos.x;
+        mpisp->pos0.y = vtx[mpisp->vtx0].pos.y;
+        mpisp->pos0.z = z_val;
+        mpisp->pos1.x = vtx[mpisp->vtx1].pos.x;
+        mpisp->pos1.y = vtx[mpisp->vtx1].pos.y;
+        mpisp->pos1.z = z_val;
+        mpisp->joint_id = (s16) joint_id;
 
-        mpisp->next = *arg0;
-        *arg0 = mpisp;
+        mpisp->next = *list;
+        *list = mpisp;
     }
 }
 
-void mpIsland_8005B334(int arg0, int arg1, int arg2, bool arg3)
+void mpIsland_8005B334(int joint_id, int vtx_start, int vtx_count,
+                       bool enabled)
 {
-    mp_UnkStruct0* temp;
+    mpIsland* tail;
 
-    if (mpIsland_80458E88.x8 != NULL) {
-        mpIsland_80458E88.x8->next = NULL;
+    if (mpIsland_80458E88.floors_tail != NULL) {
+        mpIsland_80458E88.floors_tail->next = NULL;
     } else {
-        mpIsland_80458E88.next = NULL;
+        mpIsland_80458E88.floors = NULL;
     }
 
-    if (mpIsland_80458E88.xC != NULL) {
-        mpIsland_80458E88.xC->next = NULL;
+    if (mpIsland_80458E88.ceilings_tail != NULL) {
+        mpIsland_80458E88.ceilings_tail->next = NULL;
     } else {
-        mpIsland_80458E88.x4 = NULL;
+        mpIsland_80458E88.ceilings = NULL;
     }
 
-    mpIsland_8005AE1C(&mpIsland_80458E88.next, &mpIsland_80458E88.x18, arg1,
-                      arg2, arg3);
-    mpIsland_8005AE1C(&mpIsland_80458E88.x4, &mpIsland_80458E88.x1C, arg1,
-                      arg2, arg3);
-    mpIsland_8005B004(&mpIsland_80458E88.x10, &mpIsland_80458E88.x20, arg0, 1,
-                      arg1, arg2, arg3);
-    mpIsland_8005B004(&mpIsland_80458E88.x14, &mpIsland_80458E88.x20, arg0, 2,
-                      arg1, arg2, arg3);
+    mpIsland_8005AE1C(&mpIsland_80458E88.floors,
+                      &mpIsland_80458E88.disabled_floors, vtx_start, vtx_count,
+                      enabled);
+    mpIsland_8005AE1C(&mpIsland_80458E88.ceilings,
+                      &mpIsland_80458E88.disabled_ceilings, vtx_start,
+                      vtx_count, enabled);
+    mpIsland_8005B004(&mpIsland_80458E88.dynamic_floors,
+                      &mpIsland_80458E88.free_list, joint_id, CollLine_Floor,
+                      vtx_start, vtx_count, enabled);
+    mpIsland_8005B004(&mpIsland_80458E88.dynamic_ceilings,
+                      &mpIsland_80458E88.free_list, joint_id, CollLine_Ceiling,
+                      vtx_start, vtx_count, enabled);
 
-    // Find end of first list and link
-    temp = mpIsland_80458E88.next;
-    while (temp != NULL && temp->next != NULL) {
-        temp = temp->next;
+    // Append the dynamic floors to the floor list
+    tail = mpIsland_80458E88.floors;
+    while (tail != NULL && tail->next != NULL) {
+        tail = tail->next;
     }
-    if (temp != NULL) {
-        temp->next = mpIsland_80458E88.x10;
+    if (tail != NULL) {
+        tail->next = mpIsland_80458E88.dynamic_floors;
     } else {
-        mpIsland_80458E88.next = mpIsland_80458E88.x10;
+        mpIsland_80458E88.floors = mpIsland_80458E88.dynamic_floors;
     }
-    mpIsland_80458E88.x8 = temp;
+    mpIsland_80458E88.floors_tail = tail;
 
-    // Find end of second list and link
-    temp = mpIsland_80458E88.x4;
-    while (temp != NULL && temp->next != NULL) {
-        temp = temp->next;
+    // Append the dynamic ceilings to the ceiling list
+    tail = mpIsland_80458E88.ceilings;
+    while (tail != NULL && tail->next != NULL) {
+        tail = tail->next;
     }
-    if (temp != NULL) {
-        temp->next = mpIsland_80458E88.x14;
+    if (tail != NULL) {
+        tail->next = mpIsland_80458E88.dynamic_ceilings;
     } else {
-        mpIsland_80458E88.x4 = mpIsland_80458E88.x14;
+        mpIsland_80458E88.ceilings = mpIsland_80458E88.dynamic_ceilings;
     }
-    mpIsland_80458E88.xC = temp;
+    mpIsland_80458E88.ceilings_tail = tail;
 }

@@ -10,10 +10,8 @@ typedef struct CollVtx CollVtx;
 typedef struct MapCollData MapCollData;
 typedef struct MapJoint MapJoint;
 typedef struct MapLine MapLine;
-typedef struct mp_UnkStruct0 mp_UnkStruct0;
-typedef struct mp_UnkStruct3 mp_UnkStruct3;
+typedef struct mpIsland mpIsland;
 typedef struct mpCollisionBox mpCollisionBox;
-typedef struct mpisland mpisland;
 typedef struct mpIsland_Palette mpIsland_Palette;
 typedef struct mpIsland_PaletteEntry mpIsland_PaletteEntry;
 
@@ -80,6 +78,10 @@ typedef enum CollLineKind {
 enum CollDataX130Flags {
     CollData_X130_Locked = 1 << 4,
     CollData_X130_Clear = 1 << 5,
+};
+
+enum mpIslandFlags {
+    mpIsland_Disabled = 1 << 1,
 };
 
 enum CollJointFlags {
