@@ -79,7 +79,7 @@ void itMarumine_Logic16_Spawned(Item_GObj* gobj)
     itPokemonAttributes* attr;
 
     ip = GET_ITEM(gobj);
-    attr = (itPokemonAttributes*) ip->xC4_article_data->x4_specialAttributes;
+    attr = &ip->xC4_article_data->x4_specialAttributes->pokemon;
     ip->facing_dir = 0.0F;
     ip->xDC8_word.flags.x0 = true;
     ip->xDD4_itemVar.pokemon.timer = 0xB4 - attr->max;
@@ -134,7 +134,7 @@ bool itMarumine_UnkMotion1_Coll(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     itPokemonAttributes* attr =
-        (itPokemonAttributes*) ip->xC4_article_data->x4_specialAttributes;
+        &ip->xC4_article_data->x4_specialAttributes->pokemon;
 
     if (it_8026DA08(gobj) == false) {
         if (ip->x5CC_currentAnimFrame >= attr->timer) {
@@ -206,8 +206,7 @@ void it_802D0DBC(Item_GObj* gobj)
     Item* ip = GET_ITEM(gobj);
 
     if (--ip->xDD4_itemVar.pokemon.x64 == 0) {
-        attr =
-            (itPokemonAttributes*) ip->xC4_article_data->x4_specialAttributes;
+        attr = &ip->xC4_article_data->x4_specialAttributes->pokemon;
         sp10 = 1.0F;
         efSync_Spawn(0x471, gobj, (ip->xBBC_dynamicBoneTable->bones[3]),
                      &sp10);
@@ -263,7 +262,7 @@ void fn_802D0F98(Item_GObj* gobj)
 
     if (--ip->xDD4_itemVar.pokemon.x64 == 0) {
         itPokemonAttributes* attr =
-            (itPokemonAttributes*) ip->xC4_article_data->x4_specialAttributes;
+            &ip->xC4_article_data->x4_specialAttributes->pokemon;
         sp10 = 1.0F;
         efSync_Spawn(0x471, gobj, ip->xBBC_dynamicBoneTable->bones[3], &sp10);
         ip->xDD4_itemVar.pokemon.x64 = attr->xC;
@@ -320,8 +319,7 @@ void it_802D1140(Item_GObj* gobj)
 
     if (--ip->xDD4_itemVar.pokemon.timer < 0) {
         if (--ip->xDD4_itemVar.pokemon.x64 == 0) {
-            attr = (itPokemonAttributes*)
-                       ip->xC4_article_data->x4_specialAttributes;
+            attr = &ip->xC4_article_data->x4_specialAttributes->pokemon;
             sp10 = 1.0F;
             efSync_Spawn(0x471, gobj, ip->xBBC_dynamicBoneTable->bones[3],
                          &sp10);

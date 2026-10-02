@@ -36,7 +36,7 @@ ItemStateTable it_803F5DB0[] = {
 void it_8028F9D8(Item_GObj* arg0, Vec3* arg1, f32 arg8)
 {
     Item* temp_r30 = GET_ITEM(arg0);
-    Vec4* temp_r6 = (Vec4*) temp_r30->xC4_article_data->x4_specialAttributes;
+    Vec4* temp_r6 = &temp_r30->xC4_article_data->x4_specialAttributes->vector;
     f32 var_2;
     temp_r30->pos.x =
         arg1->x + (arg8 * temp_r6[temp_r30->xDD4_itemVar.foods.x0].w);
@@ -76,8 +76,7 @@ HSD_GObj* it_8028FAF4(Item_GObj* arg0, Vec3* arg1)
 
 static inline u32 getRandMax(Article* article)
 {
-    itFoodsAttributes* attr =
-        (itFoodsAttributes*) article->x4_specialAttributes;
+    itFoodsAttributes* attr = &article->x4_specialAttributes->foods;
     return attr->x0;
 }
 
@@ -85,7 +84,7 @@ void itFoods_Logic18_Spawned(HSD_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     itFoodsAttributes* attr =
-        (itFoodsAttributes*) ip->xC4_article_data->x4_specialAttributes;
+        &ip->xC4_article_data->x4_specialAttributes->foods;
     s32 rand = HSD_Randi(getRandMax(ip->xC4_article_data));
     s32 temp;
 

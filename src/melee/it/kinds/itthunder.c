@@ -26,8 +26,7 @@ void itThunder_Logic7_Spawned(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     itThunderPokemonAttributes* attrs =
-        (itThunderPokemonAttributes*)
-            ip->xC4_article_data->x4_specialAttributes;
+        &ip->xC4_article_data->x4_specialAttributes->thunder_pokemon;
     ip->facing_dir = 0.0f;
     ip->xDAC_itcmd_var0 = 0;
     it_802CCE28(gobj);
@@ -128,16 +127,14 @@ void itThunder_UnkMotion2_Phys(Item_GObj* gobj)
     it_8027A344(gobj);
     if (item->xDAC_itcmd_var0 != 0) {
         itThunderPokemonAttributes* attrs =
-            (itThunderPokemonAttributes*)
-                item->xC4_article_data->x4_specialAttributes;
+            &item->xC4_article_data->x4_specialAttributes->thunder_pokemon;
         item->xDD4_itemVar.thunder.x68 = attrs->x4;
         item->xDAC_itcmd_var0 = 0;
         item->xDB0_itcmd_var1 = 1;
     }
     if (item->xDB0_itcmd_var1 != 0) {
         itThunderPokemonAttributes* attrs =
-            (itThunderPokemonAttributes*)
-                item->xC4_article_data->x4_specialAttributes;
+            &item->xC4_article_data->x4_specialAttributes->thunder_pokemon;
         item->xDD4_itemVar.thunder.x68 += attrs->x8;
     }
     item->x40_vel.y = item->xDD4_itemVar.thunder.x68;
@@ -163,8 +160,7 @@ static void itThunder_UnkMotion0_Phys_inline2(Item_GObj* gobj)
 {
     Item* item = GET_ITEM(gobj);
     itThunderPokemonAttributes* attrs =
-        (itThunderPokemonAttributes*)
-            item->xC4_article_data->x4_specialAttributes;
+        &item->xC4_article_data->x4_specialAttributes->thunder_pokemon;
     item->xDD4_itemVar.thunder.x60 = attrs->xC;
     item->xDD4_itemVar.thunder.x64 = 1;
     Item_80268E5C(gobj, 1, ITEM_ANIM_UPDATE);

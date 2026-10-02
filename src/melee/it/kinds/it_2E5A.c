@@ -84,7 +84,7 @@ bool it_802E5AC4(Item_GObj* item_gobj, bool arg_check)
     item = GET_ITEM(item_gobj);
     coll_data = &item->x378_itemColl;
     comm_attr = item->xCC_item_attr;
-    spec_attr = (it_2E5A_Attrs*) item->xC4_article_data->x4_specialAttributes;
+    spec_attr = &item->xC4_article_data->x4_specialAttributes->unk_2e5a;
     it_80276214(item_gobj);
     coll_data->cur_pos.y -= item->xC1C.bottom;
     check1 = mpColl_80048844(coll_data);
@@ -258,7 +258,7 @@ s32 it_802E61C4(Item_GObj* item_gobj, s32 arg1, s32 arg2)
 {
     Item* item = GET_ITEM(item_gobj);
     it_2E5A_Attrs* attr =
-        (it_2E5A_Attrs*) item->xC4_article_data->x4_specialAttributes;
+        &item->xC4_article_data->x4_specialAttributes->unk_2e5a;
     f32 new_var;
     s32 var_r29;
     f32 temp_f1;
@@ -283,7 +283,7 @@ void it_802E628C(Item_GObj* item_gobj, f32 arg8, f32 arg9)
     f32 temp_f0;
     f32 var_f30;
     it_2E5A_Attrs* attr =
-        (it_2E5A_Attrs*) item->xC4_article_data->x4_specialAttributes;
+        &item->xC4_article_data->x4_specialAttributes->unk_2e5a;
 
     temp_f31 = HSD_Randf();
     temp_f1 = M_PI_2;
@@ -316,7 +316,7 @@ static inline void it_802E6380_inline(Item_GObj* item_gobj)
 
     if (item->xDD4_itemVar.it_2E5A.x8 != 0) {
         it_2E5A_Attrs* attr =
-            (it_2E5A_Attrs*) item->xC4_article_data->x4_specialAttributes;
+            &item->xC4_article_data->x4_specialAttributes->unk_2e5a;
         it_2E5A_SubVars* sub = &item->xDD4_itemVar.it_2E5A.sub;
         sub->x4 = GET_JOBJ(item_gobj);
         sub->x0 = (0.003906f * attr->x28) / item->scl;
@@ -349,7 +349,7 @@ s32 it_802E6380(Item_GObj* item_gobj, it_802E5FXX_struct* arg1)
 {
     Item* item = GET_ITEM(item_gobj);
     it_2E5A_Attrs* attr =
-        (it_2E5A_Attrs*) item->xC4_article_data->x4_specialAttributes;
+        &item->xC4_article_data->x4_specialAttributes->unk_2e5a;
     s32 off = it_802E6380_tier(item_gobj, attr, arg1);
     PAD_STACK(8);
 
@@ -434,7 +434,7 @@ static inline void it_2E5A_ApplyStateDesc(HSD_GObj* item_gobj, int idx)
     Item* item = item_gobj->user_data;
     HSD_JObj* item_jobj = item_gobj->hsd_obj;
     it_2E5A_Attrs* attr =
-        (it_2E5A_Attrs*) item->xC4_article_data->x4_specialAttributes;
+        &item->xC4_article_data->x4_specialAttributes->unk_2e5a;
     item->xD0_itemStateDesc = (ItemStateDesc*) &attr->tiers[idx].anim_joint;
     Item_80268D34(item_gobj, item->xD0_itemStateDesc);
     HSD_JObjAnimAll(item_jobj);

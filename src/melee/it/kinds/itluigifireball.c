@@ -49,7 +49,7 @@ void it_802C027C(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     itUnkAttributes* attrs =
-        &ip->xC4_article_data->x4_specialAttributes->freeze;
+        &ip->xC4_article_data->x4_specialAttributes->generic;
     ip->x40_vel.x = attrs->x0_float * ip->facing_dir;
     ip->x40_vel.y = ip->x40_vel.z = 0;
     it_80275158(gobj, attrs->x4_float);
@@ -80,7 +80,7 @@ bool itLuigifireball_UnkMotion0_Coll(Item_GObj* gobj)
         Item* ip = GET_ITEM(gobj);
         HSD_JObj* jobj = GET_JOBJ(gobj);
         itUnkAttributes* attrs =
-            &ip->xC4_article_data->x4_specialAttributes->freeze;
+            &ip->xC4_article_data->x4_specialAttributes->generic;
         if (calc_dist_2d_accurate(&ip->x40_vel) < attrs->xC) {
             return true;
         }

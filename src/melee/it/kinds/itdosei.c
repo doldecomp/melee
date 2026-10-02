@@ -86,8 +86,7 @@ void itDosei_Logic7_Spawned(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     Article* article = ip->xC4_article_data;
-    itDoseiAttributes* attr =
-        (itDoseiAttributes*) article->x4_specialAttributes;
+    itDoseiAttributes* attr = &article->x4_specialAttributes->dosei;
 
     itResetVelocity(ip);
     ip->xDD4_itemVar.dosei.xDD4 = attr->unk4;
@@ -158,7 +157,7 @@ void itDosei_802817A0(Item_GObj* gobj)
     Item* ip = GET_ITEM(gobj);
     HSD_JObj* jobj = gobj->hsd_obj;
     itDoseiAttributes* attr =
-        (itDoseiAttributes*) ip->xC4_article_data->x4_specialAttributes;
+        &ip->xC4_article_data->x4_specialAttributes->dosei;
 
     ip->xD5C = 0;
     ip->xDC8_word.flags.x17 = 1;
@@ -201,7 +200,7 @@ void itDosei_UnkMotion1_Phys(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     itDoseiAttributes* attr =
-        (itDoseiAttributes*) ip->xC4_article_data->x4_specialAttributes;
+        &ip->xC4_article_data->x4_specialAttributes->dosei;
     ip->x40_vel.x = ip->facing_dir * ABS(attr->unk8 * ip->x5D0_animFrameSpeed);
 }
 
@@ -273,7 +272,7 @@ static inline void itDosei_SetupWalk_FC(Item_GObj* gobj)
     Item* ip = GET_ITEM(gobj);
     HSD_JObj* jobj = gobj->hsd_obj;
     itDoseiAttributes* attr =
-        (itDoseiAttributes*) ip->xC4_article_data->x4_specialAttributes;
+        &ip->xC4_article_data->x4_specialAttributes->dosei;
 
     ip->xD5C = 0;
     ip->xDC8_word.flags.x17 = 1;
@@ -340,7 +339,7 @@ void itDosei_Logic7_PickedUp(Item_GObj* gobj)
     HSD_JObj* jobj = gobj->hsd_obj;
     Item* ip = gobj->user_data;
     itDoseiAttributes* attr =
-        (itDoseiAttributes*) ip->xC4_article_data->x4_specialAttributes;
+        &ip->xC4_article_data->x4_specialAttributes->dosei;
 
     if (ip->msid != 4) {
         Item_80268E5C(gobj, 4, ITEM_ANIM_UPDATE);
@@ -378,7 +377,7 @@ static inline f32 itDosei_UnkMotion4_GetAnimSpeed(itDoseiAttributes* attr)
 
 static inline itDoseiAttributes* itDosei_UnkMotion4_GetAttrs(Item* ip)
 {
-    return (itDoseiAttributes*) ip->xC4_article_data->x4_specialAttributes;
+    return &ip->xC4_article_data->x4_specialAttributes->dosei;
 }
 
 bool itDosei_UnkMotion4_Anim(Item_GObj* gobj)
@@ -425,7 +424,7 @@ void itDosei_Logic7_Dropped(Item_GObj* gobj)
     HSD_JObj* obj = itDosei_GetJObj(gobj);
     HSD_JObj* jobj = obj;
     itDoseiAttributes* attr =
-        (itDoseiAttributes*) ip->xC4_article_data->x4_specialAttributes;
+        &ip->xC4_article_data->x4_specialAttributes->dosei;
 
     it_8026B390(gobj);
     HSD_JObjClearFlagsAll(HSD_JObjGetChild(jobj), JOBJ_HIDDEN);
@@ -443,7 +442,7 @@ void itDosei_Logic7_Thrown(Item_GObj* gobj)
     HSD_JObj* jobj = gobj->hsd_obj;
     Item* ip = GET_ITEM(gobj);
     itDoseiAttributes* attr =
-        (itDoseiAttributes*) ip->xC4_article_data->x4_specialAttributes;
+        &ip->xC4_article_data->x4_specialAttributes->dosei;
 
     if (ip->msid != 5) {
         it_8026B390(gobj);
@@ -596,7 +595,7 @@ bool itDosei_UnkMotion9_Anim(Item_GObj* gobj)
 {
     Item* ip = gobj->user_data;
     itDoseiAttributes* attr =
-        (itDoseiAttributes*) ip->xC4_article_data->x4_specialAttributes;
+        &ip->xC4_article_data->x4_specialAttributes->dosei;
 
     ip->xDD4_itemVar.dosei.xDE4 = ip->pos;
     ip->xDD4_itemVar.dosei.xDDC =
@@ -656,7 +655,7 @@ bool itDosei_Logic7_DmgReceived(Item_GObj* gobj)
 {
     Item* ip = gobj->user_data;
     itDoseiAttributes* attr =
-        (itDoseiAttributes*) ip->xC4_article_data->x4_specialAttributes;
+        &ip->xC4_article_data->x4_specialAttributes->dosei;
 
     {
         HSD_JObj* jobj = itDosei_GetJObj(gobj);

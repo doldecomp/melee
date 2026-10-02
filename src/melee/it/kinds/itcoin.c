@@ -63,8 +63,7 @@ ItemStateTable it_803F93C8[] = {
 void it_802F13B4(Item_GObj* gobj, intptr_t arg1)
 {
     Item* ip = GET_ITEM(gobj);
-    itCoinAttributes* attr =
-        (itCoinAttributes*) ip->xC4_article_data->x4_specialAttributes;
+    itCoinAttributes* attr = &ip->xC4_article_data->x4_specialAttributes->coin;
     HSD_JObj* jobj = GET_JOBJ(gobj)->child;
 
     if (ip->xDD4_itemVar.coin.x4 != 0) {
@@ -210,7 +209,7 @@ bool itCoin_Logic116_DmgReceived(Item_GObj* gobj)
     PAD_STACK(20);
 
     ip = GET_ITEM(gobj);
-    attr = (itCoinAttributes*) ip->xC4_article_data->x4_specialAttributes;
+    attr = &ip->xC4_article_data->x4_specialAttributes->coin;
     it_802762BC(ip);
     ip->xC9C = ip->xC9C + it_8027CBFC(gobj);
     it_8027B798(gobj, &ip->x40_vel);
@@ -273,8 +272,7 @@ bool itCoin_UnkMotion3_Anim(Item_GObj* gobj)
 void itCoin_UnkMotion3_Phys(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
-    itCoinAttributes* attr =
-        (itCoinAttributes*) ip->xC4_article_data->x4_specialAttributes;
+    itCoinAttributes* attr = &ip->xC4_article_data->x4_specialAttributes->coin;
 
     ip->x40_vel.x *= attr->x34;
     it_80272860(gobj, ip->xDD4_itemVar.coin.x8, ip->xDD4_itemVar.coin.xC);
@@ -398,7 +396,7 @@ Item_GObj* it_802F2094(HSD_GObj* arg0, Vec3* pos, int arg2, int arg3)
     gobj = Item_80268B18(&spawn);
     if (gobj != NULL) {
         ip = GET_ITEM(gobj);
-        attr = (itCoinAttributes*) ip->xC4_article_data->x4_specialAttributes;
+        attr = &ip->xC4_article_data->x4_specialAttributes->coin;
         ip->xDD4_itemVar.coin.x0 = arg2;
         ip->xDD4_itemVar.coin.x4 = arg3;
         ip->xDD4_itemVar.coin.x14 = arg0;

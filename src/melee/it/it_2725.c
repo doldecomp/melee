@@ -114,8 +114,7 @@ void it_80272784(Item_GObj* item_gobj)
 
 Fighter* it_80272818(Item* item)
 {
-    return ((it_2728_DatAttrs*) item->xC4_article_data->x4_specialAttributes)
-        ->fighter;
+    return (&item->xC4_article_data->x4_specialAttributes->unk_2728)->fighter;
 }
 
 /// Returns Item_GObj of the specified kind if part of

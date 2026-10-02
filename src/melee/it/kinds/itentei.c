@@ -23,7 +23,7 @@ void it_802CF3E0(Item_GObj* gobj)
 {
     Item* it = gobj->user_data;
     Article* ap = it->xC4_article_data;
-    itPokemonAttributes* sa = (itPokemonAttributes*) ap->x4_specialAttributes;
+    itPokemonAttributes* sa = &ap->x4_specialAttributes->pokemon;
     PAD_STACK(16);
 
     it_80279C48(gobj);
@@ -59,7 +59,7 @@ void it_802CF4D4(Item_GObj* gobj)
 {
     Item* it = gobj->user_data;
     Article* ap = it->xC4_article_data;
-    itPokemonAttributes* sa = (itPokemonAttributes*) ap->x4_specialAttributes;
+    itPokemonAttributes* sa = &ap->x4_specialAttributes->pokemon;
 
     Item_80268E5C(gobj, 0, ITEM_ANIM_UPDATE);
     Item_SetEffectHitlagCallbacks(it);
@@ -85,8 +85,7 @@ bool itEntei_UnkMotion0_Anim(Item_GObj* gobj)
     if (it->xDB4_itcmd_var2) {
         timer = --it->xDD4_itemVar.pokemon.timer;
         if (timer == 0) {
-            sa = (itPokemonAttributes*)
-                     it->xC4_article_data->x4_specialAttributes;
+            sa = &it->xC4_article_data->x4_specialAttributes->pokemon;
             switch (HSD_Randi(3)) {
             case 0:
                 sfx = 0x2742;

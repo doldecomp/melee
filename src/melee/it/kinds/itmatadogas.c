@@ -27,8 +27,7 @@ void it_802CAFD4(Item_GObj* gobj)
     itMatadogasAttributes* attrs;
     item = gobj->user_data;
     jobj = gobj->hsd_obj;
-    attrs =
-        (itMatadogasAttributes*) item->xC4_article_data->x4_specialAttributes;
+    attrs = &item->xC4_article_data->x4_specialAttributes->matadogas;
     item->xDAC_itcmd_var0 = 0;
     item->xDD4_itemVar.matadogas.x60 = (s32) attrs->x4;
     item->xDD4_itemVar.matadogas.x64 = 0;
@@ -91,8 +90,7 @@ void it_802CB2B0(Item_GObj* gobj)
     PAD_STACK(8);
     if (ip->xDAC_itcmd_var0 != 0) {
         itMatadogasAttributes* attrs =
-            (itMatadogasAttributes*)
-                ip->xC4_article_data->x4_specialAttributes;
+            &ip->xC4_article_data->x4_specialAttributes->matadogas;
         if (--ip->xDD4_itemVar.matadogas.x60 == 0) {
             ip->xDD4_itemVar.matadogas.x60 = attrs->x4;
             if (HSD_Randi(2) == 0) {
@@ -217,7 +215,7 @@ void it_802CB798(Item_GObj* gobj)
 {
     Item* ip = gobj->user_data;
     itMatadogasAttributes* attrs =
-        (itMatadogasAttributes*) ip->xC4_article_data->x4_specialAttributes;
+        &ip->xC4_article_data->x4_specialAttributes->matadogas;
     PAD_STACK(8);
     ip->xD44_lifeTimer = attrs->x0;
     it_80274740(gobj);
@@ -245,7 +243,7 @@ void it_802CB844(Item_GObj* gobj)
     f32 scale = 0.0f;
     ItemKind kind = ip->kind;
     itMatadogasAttributes* attrs =
-        (itMatadogasAttributes*) ip->xC4_article_data->x4_specialAttributes;
+        &ip->xC4_article_data->x4_specialAttributes->matadogas;
 
     switch (kind) {
     case It_Kind_Matadogas_Gas1:

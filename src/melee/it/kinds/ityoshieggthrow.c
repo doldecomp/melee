@@ -88,8 +88,7 @@ void it_802B2B08(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     itYoshiEggThrowAttributes* attrs =
-        (itYoshiEggThrowAttributes*)
-            ip->xC4_article_data->x4_specialAttributes;
+        &ip->xC4_article_data->x4_specialAttributes->yoshi_egg_throw;
     Item_80268E5C(gobj, 1, ITEM_ANIM_UPDATE);
     it_80275158(gobj, attrs->x0);
 }
@@ -147,8 +146,7 @@ void it_802B2C38(HSD_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     itYoshiEggThrowAttributes* attrs =
-        (itYoshiEggThrowAttributes*)
-            ip->xC4_article_data->x4_specialAttributes;
+        &ip->xC4_article_data->x4_specialAttributes->yoshi_egg_throw;
     HSD_JObj* jobj = gobj->hsd_obj;
     Item_80268E5C(gobj, 2, 0x12);
     it_8026BB44(gobj);

@@ -43,7 +43,7 @@ void it_802CE710(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     itUnknownAttributes* attr =
-        (itUnknownAttributes*) ip->xC4_article_data->x4_specialAttributes;
+        &ip->xC4_article_data->x4_specialAttributes->unknown;
     it_80273318(gobj, attr->x24[HSD_Randi(26)]);
     if (HSD_Randi(2) != 0) {
         ip->xDD4_itemVar.unknown.x60 = 1.0f;
@@ -82,7 +82,7 @@ void itUnknown_UnkMotion0_Phys(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     itUnknownAttributes* attr =
-        (itUnknownAttributes*) ip->xC4_article_data->x4_specialAttributes;
+        &ip->xC4_article_data->x4_specialAttributes->unknown;
     it_80272860(gobj, attr->xC, attr->x10);
     ip->x40_vel.x += attr->x4 * ip->xDD4_itemVar.unknown.x60;
 }
@@ -96,7 +96,7 @@ void it_802CE8D0(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     itUnknownAttributes* attr =
-        (itUnknownAttributes*) ip->xC4_article_data->x4_specialAttributes;
+        &ip->xC4_article_data->x4_specialAttributes->unknown;
     Vec3 cam_pos;
     Vec3 dir;
 
@@ -170,8 +170,7 @@ bool itUnknown_UnkMotion1_Anim(Item_GObj* gobj)
         if (--ip->xDD4_itemVar.unknown.x68.i == 0) {
             return true;
         }
-        attr =
-            (itUnknownAttributes*) ip->xC4_article_data->x4_specialAttributes;
+        attr = &ip->xC4_article_data->x4_specialAttributes->unknown;
         ip->xDD4_itemVar.unknown.x64.i = attr->x20.i + HSD_Randi(attr->x1C.i);
     }
     return false;
@@ -202,8 +201,7 @@ void itUnknown_UnkMotion2_Phys(Item_GObj* gobj)
         {
             Item* ip = GET_ITEM(gobj);
             itUnknownAttributes* attr =
-                (itUnknownAttributes*)
-                    ip->xC4_article_data->x4_specialAttributes;
+                &ip->xC4_article_data->x4_specialAttributes->unknown;
             ip->x40_vel.y = attr->x8;
             Item_80268E5C(gobj, 0, ITEM_ANIM_UPDATE);
             Item_SetEffectHitlagCallbacks(ip);
@@ -255,7 +253,7 @@ void it_2725_Logic38_Spawned(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     itUnknownAttributes* attr =
-        (itUnknownAttributes*) ip->xC4_article_data->x4_specialAttributes;
+        &ip->xC4_article_data->x4_specialAttributes->unknown;
 
     it_80273318(gobj, attr->x24[randi_perm_int(26)]);
     ip->xDCC_flag.b3 = false;
@@ -308,7 +306,7 @@ void it_802CF154(Item_GObj* gobj)
     HSD_JObj* jobj = gobj->hsd_obj;
     Item* ip = GET_ITEM(gobj);
     itUnknownAttributes* attr =
-        (itUnknownAttributes*) ip->xC4_article_data->x4_specialAttributes;
+        &ip->xC4_article_data->x4_specialAttributes->unknown;
 
     ip->xDD4_itemVar.unknown.x60 += ip->xDD4_itemVar.unknown.x6C.x;
     ip->xDD4_itemVar.unknown.x64.f += ip->xDD4_itemVar.unknown.x6C.y;

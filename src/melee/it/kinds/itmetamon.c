@@ -12,10 +12,6 @@
 
 static Item_GObj* it_804D6D50;
 
-typedef struct {
-    f32 x0;
-} ItMetamonVars;
-
 ItemStateTable it_803F7FC8[] = {
     {
         0,
@@ -40,8 +36,7 @@ ItemStateTable it_803F7FC8[] = {
 void it_802D3008(Item_GObj* item_gobj)
 {
     Item* it = GET_ITEM(item_gobj);
-    ItMetamonVars* vars =
-        (ItMetamonVars*) it->xC4_article_data->x4_specialAttributes;
+    ItMetamonVars* vars = &it->xC4_article_data->x4_specialAttributes->metamon;
     it_80279CDC(item_gobj, vars->x0);
     it_802D31B4(item_gobj);
     Item_8026AE84(it, 0x2728, 0x7F, 0x40);

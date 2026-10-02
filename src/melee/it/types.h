@@ -17,6 +17,7 @@
 #include <melee/ft/types.h>
 #include <melee/it/itCharItems.h>
 #include <melee/it/itCommonItems.h>
+#include <melee/it/itemattrs.h>
 #include <melee/it/itPKFlash.h>
 #include <melee/it/itPKThunder.h>
 #include <melee/lb/types.h>

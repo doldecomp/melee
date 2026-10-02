@@ -64,8 +64,7 @@ s32 it_802BD32C(Item_GObj* item_gobj)
     itPeachTurnipAttributes* attr;
 
     item = GET_ITEM(item_gobj);
-    attr = (itPeachTurnipAttributes*)
-               item->xC4_article_data->x4_specialAttributes;
+    attr = &item->xC4_article_data->x4_specialAttributes->peach_turnip;
 
     sum = 0;
     for (i = 0; i < attr->x4_length; i++) {
@@ -119,8 +118,7 @@ Item_GObj* it_802BD4AC(Item_GObj* item_gobj, Vec3* pos, Fighter_Part part,
     if (spawn_gobj != NULL) {
         item = GET_ITEM(spawn_gobj);
         if (kind == It_Kind_Peach_Turnip) {
-            attr = (itPeachTurnipAttributes*)
-                       item->xC4_article_data->x4_specialAttributes;
+            attr = &item->xC4_article_data->x4_specialAttributes->peach_turnip;
             it_80275158(spawn_gobj, attr->x0_lifetime);
             item->xDD4_itemVar.peachturnip.xDD8 = it_802BD32C(spawn_gobj);
             item->xDD4_itemVar.peachturnip.xDDC_damage =

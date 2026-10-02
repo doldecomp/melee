@@ -65,7 +65,7 @@ void it_802AFA70(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     itFlashExplAttributes* attr =
-        (itFlashExplAttributes*) ip->xC4_article_data->x4_specialAttributes;
+        &ip->xC4_article_data->x4_specialAttributes->flash_expl;
     f32 ratio;
     PAD_STACK(8);
 
@@ -95,7 +95,7 @@ bool itNessPKFlashExplode_UnkMotion0_Anim(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     itFlashExplAttributes* attr =
-        (itFlashExplAttributes*) ip->xC4_article_data->x4_specialAttributes;
+        &ip->xC4_article_data->x4_specialAttributes->flash_expl;
     HSD_JObj* jobj = GET_JOBJ(gobj);
     Vec3 scale;
     scale.x = scale.y = scale.z = (ip->xDD4_itemVar.pkflushexplode.xDD4 *

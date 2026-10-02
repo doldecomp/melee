@@ -27,7 +27,8 @@ HSD_GObj* it_802C65E4(Item_GObj* gobj, Vec* vec, enum Fighter_Part arg2,
     result = Item_80268B18(&spawn);
     if (result != NULL) {
         Item* item = GET_ITEM(result);
-        void** attr = (void**) item->xC4_article_data->x4_specialAttributes;
+        void** attr =
+            &item->xC4_article_data->x4_specialAttributes->opaque_pointer;
         Item_AttachGameWatchArticle(gobj, arg2, result, attr);
         return result;
     }
