@@ -1,28 +1,24 @@
 {
+  stdenvNoCC,
   lib,
-  fetchFromGitHub,
   git,
   rustPlatform,
-  stdenv,
+  src,
 }:
 
 rustPlatform.buildRustPackage rec {
   pname = "decomp-toolkit";
-  version = "1.8.3";
+  version = src.shortRev;
+  inherit src;
 
-  src = fetchFromGitHub {
-    owner = "encounter";
-    repo = "decomp-toolkit";
-    rev = "v${version}";
-    hash = "sha256-MMD6iY6IpRPycRCoSnXKkcwpVnrDTKw0EDqgyPOAjcM=";
-  };
+  stdenv = stdenvNoCC;
 
   nativeBuildInputs = [
     git
   ];
 
   cargoLock.lockFile = "${src}/Cargo.lock";
-  cargoLock.outputHashes."ar-0.8.0" = "sha256-OLyo+cRRWMsI1i8NsgsBKRJH1XsKW1CculQnJ/wcya0=";
+  cargoLock.allowBuiltinFetchGit = true;
 
   meta = with lib; {
     description = "A GameCube & Wii decompilation toolkit";

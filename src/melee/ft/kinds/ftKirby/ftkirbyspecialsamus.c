@@ -1,7 +1,5 @@
 #include <melee/ft/forward.h>
 
-#include <math.h>
-
 #include "ftkirby.h"
 #include "inlines.h"
 #include <melee/ef/eflib.h>
@@ -68,7 +66,7 @@ bool ftKb_SpecialNSs_800FCC6C(Fighter_GObj* gobj)
         case 0x19A:
         case 0x19B:
         case 0x19C:
-            if (fp->x2070.x2071_b6) {
+            if (fp->x2070.x0.x2071_b6) {
                 return true;
             }
             return false;

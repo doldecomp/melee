@@ -4,8 +4,6 @@
 
 #include <sysdolphin/baselib/forward.h>
 
-#include <math.h>
-
 #include "ftcrazyhandtagcancel.h"
 #include "types.h"
 #include <dolphin/mtx.h>

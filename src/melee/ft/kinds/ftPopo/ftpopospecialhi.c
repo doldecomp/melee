@@ -3,8 +3,6 @@
 
 #include <melee/ft/forward.h>
 
-#include <math.h>
-
 #include "ftpopo.h"
 #include "ftpopospecials.h"
 #include <melee/ft/fighter.h>

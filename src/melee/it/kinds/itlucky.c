@@ -333,7 +333,7 @@ static inline Item_GObj* it_802D5710_inline(Item_GObj* gobj, Vec3* pos,
     spawn.vel = *vel;
     spawn.x0_parent_gobj = ip->owner;
     spawn.x4_parent_gobj2 = gobj;
-    spawn.x44_flag.b0 = true;
+    spawn.x44_flag.x0.b0 = true;
     spawn.x40 = 0;
     return Item_80268B18(&spawn);
 }

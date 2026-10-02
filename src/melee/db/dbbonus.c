@@ -11,7 +11,7 @@
 /* 228E54 */ static void fn_80228E54(int arg0, int arg1, int arg2);
 /* 22900C */ static void fn_8022900C(int arg0);
 
-static struct {
+static struct db_TextColors_t {
     GXColor bg;
     GXColor fg;
 } db_TextColors[2] = {
@@ -19,12 +19,12 @@ static struct {
     { { 0x80, 0x40, 0xFF, 0x80 }, { 0x00, 0x00, 0x00, 0xFF } }
 };
 
-static struct {
+static struct db_804D6B98_t {
     u8 x0;
     UnkFlagStruct x1;
 } db_804D6B98;
 
-static struct {
+static struct db_804D6B9C_t {
     DevText* text;
     char buffer[1500];
 }* db_804D6B9C;
@@ -38,7 +38,7 @@ void fn_SetupBonusInfo(void)
 static void fn_80228D18(void)
 {
     db_804D6B98.x0 = 0xFF;
-    db_804D6B98.x1.b0 = 0;
+    db_804D6B98.x1.x0.b0 = 0;
 }
 
 static void fn_80228D38(void)
@@ -54,9 +54,9 @@ static void fn_80228D38(void)
             DevText_Show(gobj, db_804D6B9C[i].text);
             DevText_HideCursor(db_804D6B9C[i].text);
             DevText_SetBGColor(db_804D6B9C[i].text,
-                               db_TextColors[db_804D6B98.x1.b0].bg);
+                               db_TextColors[db_804D6B98.x1.x0.b0].bg);
             DevText_SetTextColor(db_804D6B9C[i].text,
-                                 db_TextColors[db_804D6B98.x1.b0].fg);
+                                 db_TextColors[db_804D6B98.x1.x0.b0].fg);
             DevText_SetScale(db_804D6B9C[i].text, 12.0F, 16.0F);
         }
     }
@@ -110,20 +110,20 @@ static void fn_8022900C(int arg0)
     int i;
 
     if (db_804D6B98.x0 == arg0) {
-        if (db_804D6B98.x1.b0) {
+        if (db_804D6B98.x1.x0.b0) {
             db_804D6B98.x0 = 0xFF;
-            db_804D6B98.x1.b0 = 0;
+            db_804D6B98.x1.x0.b0 = 0;
             for (i = 0; i < 2; i++) {
                 DevText_HideBackground(db_804D6B9C[i].text);
                 DevText_HideText(db_804D6B9C[i].text);
             }
         } else {
-            db_804D6B98.x1.b0 = 1;
+            db_804D6B98.x1.x0.b0 = 1;
             for (i = 0; i < 2; i++) {
                 DevText_SetBGColor(db_804D6B9C[i].text,
-                                   db_TextColors[db_804D6B98.x1.b0].bg);
+                                   db_TextColors[db_804D6B98.x1.x0.b0].bg);
                 DevText_SetTextColor(db_804D6B9C[i].text,
-                                     db_TextColors[db_804D6B98.x1.b0].fg);
+                                     db_TextColors[db_804D6B98.x1.x0.b0].fg);
             }
         }
     } else {
@@ -132,9 +132,9 @@ static void fn_8022900C(int arg0)
             DevText_ShowBackground(db_804D6B9C[i].text);
             DevText_ShowText(db_804D6B9C[i].text);
             DevText_SetBGColor(db_804D6B9C[i].text,
-                               db_TextColors[db_804D6B98.x1.b0].bg);
+                               db_TextColors[db_804D6B98.x1.x0.b0].bg);
             DevText_SetTextColor(db_804D6B9C[i].text,
-                                 db_TextColors[db_804D6B98.x1.b0].fg);
+                                 db_TextColors[db_804D6B98.x1.x0.b0].fg);
         }
     }
 }

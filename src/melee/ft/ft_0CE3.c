@@ -15,7 +15,7 @@ void ftCo_800CE620(HSD_GObj*); /* extern */
 void ftCo_800CE3E0(Fighter_GObj* fighter_gobj)
 {
     Fighter* fighter = GET_FIGHTER(fighter_gobj);
-    fighter->throw_flags = 0;
+    fighter->x2210.throw_flags = 0;
     fighter->mv.co.itemthrow.facing_dir = p_ftCommonData->x5A8;
     fighter->mv.co.itemthrow.x4 = p_ftCommonData->x5AC;
     fighter->mv.co.itemthrow.x8 = 0;
@@ -32,7 +32,7 @@ void ftCo_800CE3E0(Fighter_GObj* fighter_gobj)
 void ftCo_800CE480(Fighter_GObj* fighter_gobj)
 {
     Fighter* fighter = GET_FIGHTER(fighter_gobj);
-    fighter->throw_flags = 0;
+    fighter->x2210.throw_flags = 0;
     fighter->mv.co.itemthrow.facing_dir = p_ftCommonData->x5A8;
     fighter->mv.co.itemthrow.x4 = p_ftCommonData->x5AC;
     fighter->mv.co.itemthrow.x8 = 0;

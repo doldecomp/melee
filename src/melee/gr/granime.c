@@ -481,13 +481,13 @@ void fn_801C6F2C(HSD_AObj* aobj)
     HSD_AObjSetFlags(aobj, AOBJ_LOOP);
 }
 
-enum {
+enum ARG_TYPE {
     ARG_TYPE_DOBJ = 3,
     ARG_TYPE_MOBJ = 8,
     ARG_TYPE_POBJ = 9,
     ARG_TYPE_TOBJ = 11,
 };
-enum {
+enum CALL_ON {
     CALL_ON_DOBJ = 1 << (ARG_TYPE_DOBJ - 1),
     CALL_ON_MOBJ = 1 << (ARG_TYPE_MOBJ - 1),
     CALL_ON_POBJ = 1 << (ARG_TYPE_POBJ - 1),
@@ -901,7 +901,7 @@ void grAnime_801C7C1C(HSD_JObj* jobj, s32 map_id, s32 arg2, s32 arg3, s32 arg4,
     }
     archive = grDatFiles_801C6330(map_id);
     HSD_ASSERT(0x4DE, archive);
-    if ((arg3 & 1) && (ajp = archive->unk4->unk8[map_id].unk4, ajp != NULL) &&
+    if ((arg3 & 1) && (ajp = archive->unk4->unk8[map_id].anims, ajp != NULL) &&
         ((aj = ajp[arg4]) != NULL))
     {
         aj = &aj[arg2];
@@ -910,7 +910,8 @@ void grAnime_801C7C1C(HSD_JObj* jobj, s32 map_id, s32 arg2, s32 arg3, s32 arg4,
     } else {
         aj = NULL;
     }
-    if ((arg3 & 2) && (mjp = archive->unk4->unk8[map_id].unk8, mjp != NULL) &&
+    if ((arg3 & 2) &&
+        (mjp = archive->unk4->unk8[map_id].matanims, mjp != NULL) &&
         ((mj = mjp[arg4]) != NULL))
     {
         mj = &mj[arg2];
@@ -919,7 +920,8 @@ void grAnime_801C7C1C(HSD_JObj* jobj, s32 map_id, s32 arg2, s32 arg3, s32 arg4,
     } else {
         mj = NULL;
     }
-    if ((arg3 & 4) && (sjp = archive->unk4->unk8[map_id].unkC, sjp != NULL) &&
+    if ((arg3 & 4) &&
+        (sjp = archive->unk4->unk8[map_id].shapeanims, sjp != NULL) &&
         ((sj = sjp[arg4]) != NULL))
     {
         sj = &sj[arg2];
@@ -999,7 +1001,7 @@ void grAnime_801C8138(HSD_GObj* gobj, enum_t arg1, bool arg2)
     }
     archive = grDatFiles_801C6330(arg1);
     HSD_ASSERT(0x556, archive);
-    joint = archive->unk4->unk8[arg1].unk0;
+    joint = archive->unk4->unk8[arg1].joint;
     if (HSD_JObjGetChild(jobj) != NULL) {
         jobj = HSD_JObjGetChild(jobj);
     }
@@ -1008,9 +1010,9 @@ void grAnime_801C8138(HSD_GObj* gobj, enum_t arg1, bool arg2)
     }
     grMaterial_801C8B68(jobj, 0);
     HSD_JObjRemoveAnimAll(jobj);
-    sap = archive->unk4->unk8[arg1].unkC;
-    ajp = archive->unk4->unk8[arg1].unk4;
-    mjp = archive->unk4->unk8[arg1].unk8;
+    sap = archive->unk4->unk8[arg1].shapeanims;
+    ajp = archive->unk4->unk8[arg1].anims;
+    mjp = archive->unk4->unk8[arg1].matanims;
     if (sap != NULL) {
         sa = sap[arg2];
     } else {
@@ -1134,7 +1136,7 @@ void grAnime_801C86D4(s32 arg0, HSD_GObj* arg1, s32 arg2)
         archive = grDatFiles_801C6330(arg0);
         HSD_ASSERT(1538, archive);
         {
-            HSD_Joint* root = archive->unk4->unk8[arg0].unk0;
+            HSD_Joint* root = archive->unk4->unk8[arg0].joint;
             sp = arg2;
             joint = grAnime_801C8578_noinline(root, &sp);
         }

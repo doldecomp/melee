@@ -5,14 +5,14 @@
 typedef struct {
     /* 0x00 */ void* next;
     /* 0x04 */ s32 type;
-    /* 0x08 */ union {
+    /* 0x08 */ union particle_PerfDispItem_content {
         u8 bytes[0x80];
         char text[0x80];
-        struct {
+        struct particle_PerfDispItem_content_bars {
             s32 count;
             u32 color;
         } bars[16];
-        struct {
+        struct particle_PerfDispItem_content_gradient {
             f32 pos;
             u32 color;
         } gradient[16];
@@ -24,7 +24,6 @@ typedef struct {
 #include <math.h>
 #include <string.h>
 
-#include "cobj.h"
 #include "gobjobject.h"
 #include "mtx.h"
 #include "psappsrt.h"
@@ -162,8 +161,7 @@ void psInitDataBankLoad(int bank, const int* cmdBank, const int* texBank,
     }
 }
 
-void psInitDataBankLocate(HSD_Archive* cmdBank, HSD_Archive* texBank,
-                          int* formBank)
+void psInitDataBankLocate(int* cmdBank, int* texBank, int* formBank)
 {
     s32 num;
     s32* ptr;
@@ -203,7 +201,7 @@ version40:
     base = (s32*) cmdBank + 3 - num;
     ptr = (s32*) cmdBank;
     j = 0;
-    while (j < (s32) cmdBank->header.nb_reloc) {
+    while (j < (s32) cmdBank[2]) {
         if (ptr[3] != 0) {
             ptr[3] += (s32) cmdBank;
         }
@@ -333,8 +331,7 @@ void psInitDataBank(int bank, int* cmdBank, int* texBank, u32* ref,
                     int* formBank)
 {
     if (bank < 65) {
-        psInitDataBankLocate((HSD_Archive*) cmdBank, (HSD_Archive*) texBank,
-                             formBank);
+        psInitDataBankLocate(cmdBank, texBank, formBank);
         psInitDataBankLoad(bank, cmdBank, texBank, ref, formBank);
     }
 }
@@ -3026,14 +3023,15 @@ void hsd_8039D048(void* particle)
     }
 }
 
+typedef struct {
+    HSD_JObj* jobj[8];
+    HSD_Particle* particle[146];
+    u8 pad[0x410];
+    HSD_ObjAllocData alloc_data;
+} ParticleData;
+
 void hsd_8039D0A0(HSD_Generator* gen)
 {
-    typedef struct {
-        HSD_JObj* jobj[8];
-        HSD_Particle* particle[146];
-        u8 pad[0x410];
-        HSD_ObjAllocData alloc_data;
-    } ParticleData;
     ParticleData* data = (ParticleData*) hsd_804D08E8;
     HSD_Particle* prev;
     HSD_Particle* prt;

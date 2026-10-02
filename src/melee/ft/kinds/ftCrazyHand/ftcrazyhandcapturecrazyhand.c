@@ -18,8 +18,8 @@ void fn_8015B548(HSD_GObj* gobj, HSD_GObj* gobj2)
     ftCo_ReleaseItemAndVictim(gobj);
     fp->x1A5C = gobj2;
     fp->victim_gobj = gobj2;
-    fp->x221B_b5 = false;
-    fp->x221B_b7 = false;
+    fp->x221B.x221B_b5 = false;
+    fp->x221B.x221B_b7 = false;
     fp->facing_dir = fp2->facing_dir;
     ftCommon_InitGrab(fp, 0, ftCo_800DA824(fp2));
     ftCo_800DB368(fp2, fp);

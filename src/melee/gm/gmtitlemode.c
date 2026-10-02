@@ -7,13 +7,13 @@
 #include <melee/lb/lbdvd.h>
 #include <sysdolphin/baselib/controller.h>
 
-struct exitData {
+struct TitleExitData {
     int buttons;
     UNK_T x4;
 };
 
 /* 1B089C */ static void onExit(GameModeState*);
-/* 4D6878 */ static struct exitData exit_data;
+/* 4D6878 */ static struct TitleExitData exit_data;
 
 /* 3DD6A0 */ GameModeState gm_Mode_Title_States[] = {
     {

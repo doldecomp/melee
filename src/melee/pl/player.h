@@ -29,8 +29,8 @@ typedef struct _StaticPlayer {
 
     /*0x0E*/ s16 unk0E;
 
-    union {
-        struct {
+    union _StaticPlayer_player_poses {
+        struct _StaticPlayer_player_poses_byVecName {
             /*0x10-0x1B*/ Vec3
                 nametag_pos; /// Horizontal, Vertical, Depth (floats)
             /*0x1C-0x27*/ Vec3 transformed_player_pos;
@@ -68,8 +68,8 @@ typedef struct _StaticPlayer {
 
     /*0x5C*/ f32 model_scale;
 
-    union {
-        struct {
+    union _StaticPlayer_staminas {
+        struct _StaticPlayer_staminas_byName {
             /*0x60*/ s16 damage_percent;
             /*0x62*/ s16 damage_percent_alt_or_start_hp;
             /*0x64*/ s16 stamina;
@@ -104,7 +104,7 @@ typedef struct _StaticPlayer {
 
     /*0xA8*/ int nametag_slot_id;
 
-    /*0xAC*/ struct {
+    /*0xAC*/ struct _StaticPlayer_flags {
         u8 b0 : 1; // rumble enabled
         u8 b1 : 1;
         u8 b2 : 1;
@@ -115,7 +115,7 @@ typedef struct _StaticPlayer {
         u8 b7 : 1;
     } flags;
 
-    /*0xAD*/ struct {
+    /*0xAD*/ struct _StaticPlayer_more_flags {
         u8 b0 : 1;
         u8 b1 : 1;
         u8 b2 : 1;
@@ -125,7 +125,7 @@ typedef struct _StaticPlayer {
         u8 b6 : 2;
     } more_flags;
 
-    /*0xAE*/ struct {
+    /*0xAE*/ struct _StaticPlayer_flagsAE {
         u8 b0 : 1;
         u8 b1 : 1;
         u8 b2 : 1;
@@ -312,5 +312,10 @@ void Player_SetOtherStamina(s32 slot, s32 stamina);
 void Player_SetFlagsAEBit0(s32 slot, u8 bit0);
 s32 Player_80033BB8(int slot);
 /* 4D6470 */ extern pl_804D6470_t* pl_804D6470;
+
+/// The @c plLoadCommonData root of @c PdPm.dat.
+struct plLoadCommonData {
+    /* +0 */ pl_804D6470_t* x0;
+};
 
 #endif

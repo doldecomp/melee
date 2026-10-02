@@ -19,10 +19,10 @@
 #include <melee/ty/toy.h>
 #include <sysdolphin/baselib/sislib.h>
 
-static struct {
+static struct lbl_8046DBC8_t {
     u8 x0;
     u8 x1;
-    struct {
+    struct lbl_8046DBC8_t_x2 {
         u8 x0;
         u8 x1;
     } x2[6];
@@ -83,7 +83,7 @@ struct lbl_803D5A4C_t {
     /* +6 */ u8 x6;
 };
 
-/* 3D5A4C */ static struct {
+/* 3D5A4C */ static struct gm_16F1_lbl_803D5A4C_t {
     struct lbl_803D5A4C_t entries[0x80C / sizeof(struct lbl_803D5A4C_t)];
     u8 pad[4];
 } lbl_803D5A4C = {
@@ -348,7 +348,7 @@ struct lbl_803D5A4C_t {
     },
 };
 
-/* 4D65A0 */ static struct {
+/* 4D65A0 */ static struct lbl_804D65A0_t {
     /* 0x0 */ u8 x0;
     /* 0x1 */ u8 x1[7];
 } lbl_804D65A0;
@@ -804,6 +804,10 @@ int fn_801701B8(void)
     return lbl_804D65A0.x0;
 }
 
+typedef struct {
+    s32 a, b, c, d;
+} copy_t;
+
 int fn_801701C0(MatchEnd* rules, int arg1, int arg2)
 {
     u8* tmp;
@@ -928,9 +932,6 @@ int fn_801701C0(MatchEnd* rules, int arg1, int arg2)
         int i, j;
         if (x58[arg1].x20 >= 3) {
             {
-                typedef struct {
-                    s32 a, b, c, d;
-                } copy_t;
                 *(copy_t*) vals = *(copy_t*) zeroes->x0;
             }
             for (i = 0; i < 4; i++) {
@@ -978,9 +979,6 @@ int fn_801701C0(MatchEnd* rules, int arg1, int arg2)
         int i, j;
         if (x58[arg1].x40 >= 3) {
             {
-                typedef struct {
-                    s32 a, b, c, d;
-                } copy_t;
                 *(copy_t*) vals = *(copy_t*) zeroes->x10;
             }
             for (i = 0; i < 4; i++) {
@@ -1029,9 +1027,6 @@ int fn_801701C0(MatchEnd* rules, int arg1, int arg2)
         player_net = x58[arg1].x24 - x58[arg1].self_destructs;
         if ((u32) player_net >= 3) {
             {
-                typedef struct {
-                    s32 a, b, c, d;
-                } copy_t;
                 *(copy_t*) vals = *(copy_t*) zeroes->x20;
             }
             for (i = 0; i < 4; i++) {
@@ -1083,9 +1078,6 @@ int fn_801701C0(MatchEnd* rules, int arg1, int arg2)
         int i, j;
         if (x58[arg1].self_destructs >= 3) {
             {
-                typedef struct {
-                    s32 a, b, c, d;
-                } copy_t;
                 *(copy_t*) vals = *(copy_t*) zeroes->x30;
             }
             for (i = 0; i < 4; i++) {
@@ -1270,9 +1262,6 @@ int fn_801701C0(MatchEnd* rules, int arg1, int arg2)
         f32 vals[4];
         int i, j;
         {
-            typedef struct {
-                s32 a, b, c, d;
-            } copy_t;
             *(copy_t*) vals = *(copy_t*) zeroes->x40;
         }
         for (i = 0; i < 4; i++) {
@@ -1322,7 +1311,7 @@ int fn_801701C0(MatchEnd* rules, int arg1, int arg2)
             int i;
             for (i = 0; i < 4; i++) {
                 if (x58[i].pkind != Gm_PKind_NA && i != arg1 &&
-                    (x58[i].x3 & 1))
+                    (x58[i].x3_u.x3 & 1))
                 {
                     return 0;
                 }
@@ -1339,7 +1328,7 @@ int fn_801701C0(MatchEnd* rules, int arg1, int arg2)
                     }
                 }
             }
-            if (!(x58[arg1].x3_b7 & 1) && rankings[arg1] == 0 &&
+            if (!(x58[arg1].x3_u.x0.x3_b7 & 1) && rankings[arg1] == 0 &&
                 x58[arg1].x20 == 0)
             {
                 return 1;
@@ -1362,13 +1351,13 @@ int fn_801701C0(MatchEnd* rules, int arg1, int arg2)
                         }
                     }
                 }
-                if (!(x58[arg1].x3_b7 & 1) && x58[arg1].is_big_loser == 0 &&
-                    x58[arg1].x20 == 0)
+                if (!(x58[arg1].x3_u.x0.x3_b7 & 1) &&
+                    x58[arg1].is_big_loser == 0 && x58[arg1].x20 == 0)
                 {
                     return 1;
                 }
             } else {
-                if (!(x58[arg1].x3_b7 & 1) && x58[arg1].x20 == 0) {
+                if (!(x58[arg1].x3_u.x0.x3_b7 & 1) && x58[arg1].x20 == 0) {
                     return 1;
                 }
             }
@@ -1402,9 +1391,6 @@ int fn_801701C0(MatchEnd* rules, int arg1, int arg2)
             }
             if (mode == 0) {
                 {
-                    typedef struct {
-                        u32 a, b, c, d;
-                    } copy_t;
                     *(copy_t*) vals = *(copy_t*) zeroes->x50;
                 }
                 for (i = 0; i < 4; i++) {
@@ -1446,9 +1432,6 @@ int fn_801701C0(MatchEnd* rules, int arg1, int arg2)
             }
             if (mode == 0) {
                 {
-                    typedef struct {
-                        u32 a, b, c, d;
-                    } copy_t;
                     *(copy_t*) vals = *(copy_t*) zeroes->x60;
                 }
                 for (i = 0; i < 4; i++) {

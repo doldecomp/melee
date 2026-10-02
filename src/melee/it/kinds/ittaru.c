@@ -47,7 +47,7 @@ void it_3F14_Logic2_Spawned(Item_GObj* gobj)
     float temp;
     ip->facing_dir = -1.0f;
     ip->xD5C = 0;
-    ip->xDCE_flag.b7 = 0;
+    ip->xDCE_flag.x0.b7 = 0;
     ip->xDAC_itcmd_var0 = 0;
     ip->xDB0_itcmd_var1 = 0;
     ip->xDD4_itemVar.taru.xDD4 = 0;
@@ -521,7 +521,7 @@ void it_802885C8(Item_GObj* gobj)
 
     ip->x40_vel.x = 0.0F;
     ip->x40_vel.y = 0.0F;
-    ip->xDCF_flag.b2 = 1;
+    ip->xDCF_flag.x0.b2 = 1;
     ip->xDD4_itemVar.taru.xDD4 = 1;
     ip->xDD4_itemVar.taru.xDD8 = 40;
 
@@ -569,7 +569,7 @@ void it_802886C4(Item_GObj* gobj)
     it_802756D0(gobj);
     ip->x40_vel.x = 0.0f;
     ip->x40_vel.y = 0.0f;
-    ip->xDCF_flag.b2 = 1;
+    ip->xDCF_flag.x0.b2 = 1;
     ip->xDD4_itemVar.taru.xDD4 = 1;
     ip->xDD4_itemVar.taru.xDD8 = 0x28;
     it_8026B3A8(gobj);

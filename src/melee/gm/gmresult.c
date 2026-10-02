@@ -52,7 +52,7 @@ static void gmresult_sdata2_order(void)
 
 u32 lbl_804D3FA0 = 0x817C0000;
 u32 lbl_804D3FA4 = 0x817B0000;
-union {
+union lbl_804D3FA8_t {
     u32 words[2];
     char text[8];
 } lbl_804D3FA8 = { { 0x817C8146, 0x817C0000 } };
@@ -1077,7 +1077,7 @@ void fn_80175D34(void)
     }
 }
 
-static const struct {
+static const struct lbl_803B7B18_t {
     u8 lookup[34][2];
     Vec3 translate;
 } lbl_803B7B18 = {
@@ -1774,7 +1774,7 @@ void gm_Scene_Results_OnEnter(void* arg0_)
     fn_801771C0(&lbl_8046DBE8);
     if (match_end->player_standings[data->x6].pkind == Gm_PKind_Human) {
         if (!gm_WasMatchCanceled(match_end->outcome) &&
-            match_end->player_standings[data->x6].x3_b6)
+            match_end->player_standings[data->x6].x3_u.x0.x3_b6)
         {
             lb_80014574(data->x6, 3, 0x20, 0);
         }
@@ -1813,7 +1813,7 @@ void gm_Scene_Results_OnEnter(void* arg0_)
             fn_8017A9B4(i);
             data_iter->player_data[0].fighter_gobj =
                 fn_8017A67C(me_iter->player_standings[0].ckind,
-                            me_iter->player_standings[0].x3_b0, i);
+                            me_iter->player_standings[0].x3_u.x0.x3_b0, i);
             data_iter->player_data[0].camera = fn_8017A318(i);
         }
         me_iter = (MatchEnd*) ((MatchPlayerData*) me_iter + 1);

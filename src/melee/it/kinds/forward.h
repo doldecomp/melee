@@ -3,7 +3,5 @@
 
 typedef struct ItemLogicTable ItemLogicTable;
 typedef struct ItemStateTable ItemStateTable;
-typedef struct itSword_UnkArticle1 itSword_UnkArticle1;
-typedef struct itSword_UnkBytes itSword_UnkBytes;
 
 #endif

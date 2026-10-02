@@ -25,7 +25,7 @@
 /* 202428 */ void grYorster_80202428(HSD_GObj*, Ground*, Vec3*, HSD_GObj*,
                                      f32);
 /* 20266C */ void grYorster_8020266C(HSD_GObj*);
-/* 202B5C */ DynamicsDesc* grYorster_80202B5C(enum_t);
+/* 202B5C */ lbColl_80008D30_arg1* grYorster_80202B5C(enum_t);
 /* 202B64 */ bool grYorster_80202B64(Vec3*, int _, HSD_JObj*);
 /* 3E51CC */ extern StageData grYt_StageData;
 

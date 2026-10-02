@@ -174,7 +174,7 @@ static void itThunder_UnkMotion0_Phys_inline(Item_GObj* gobj)
     Item* item = GET_ITEM(gobj);
     it_80273454(gobj);
     itThunder_UnkMotion0_Phys_inline2(gobj);
-    item->xDD1_flag.b1 = 1;
+    item->xDD1_flag.x0.b1 = 1;
 }
 
 void itThunder_UnkMotion0_Phys(Item_GObj* gobj)

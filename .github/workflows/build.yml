@@ -186,8 +186,14 @@ jobs:
         uses: actions/deploy-pages@v5
 
   native-build:
-    name: Build for x86 with gcc
+    name: Build ${{ matrix.package }} with CMake
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        package:
+          - melee-cmake
+          - melee-dwarf
     steps:
     - uses: actions/checkout@v6
       with:
@@ -196,7 +202,7 @@ jobs:
     - uses: cachix/cachix-action@v17
       with:
         name: doldecomp-melee
-    - run: nix build .#melee-gcc-native -L
+    - run: nix build .#${{ matrix.package }} -L
 
   build-nix:
     name: Build matching DOL with nix

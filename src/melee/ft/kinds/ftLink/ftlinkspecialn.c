@@ -105,7 +105,7 @@ bool ftLk_SpecialN_IsActiveAnd2071b6(Fighter_GObj* gobj)
     case ftLk_MS_SpecialAirNStart:
     case ftLk_MS_SpecialAirNLoop:
     case ftLk_MS_SpecialAirNEnd:
-        if (!fp->x2070.x2071_b6) {
+        if (!fp->x2070.x0.x2071_b6) {
             return false;
         }
     }

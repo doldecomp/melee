@@ -1,22 +1,16 @@
 {
-  lib,
   stdenvNoCC,
+  lib,
   decomp-toolkit,
   devkitppc,
-  fetchurl,
   mwcc,
   objdiff,
   ninja,
-  python3Minimal,
+  python3,
   wibo,
   main-dol,
+  sjiswrap,
 }:
-let
-  sjiswrap = fetchurl {
-    url = "https://github.com/encounter/sjiswrap/releases/download/v1.2.1/sjiswrap-windows-x86.exe";
-    hash = "sha256-6GMMjcxhTSKzFmS6MyQvEkO7m+T91ATtbDXYt9pI8hk=";
-  };
-in
 stdenvNoCC.mkDerivation (finalAttrs: {
   name = "doldecomp-melee";
 
@@ -25,9 +19,11 @@ stdenvNoCC.mkDerivation (finalAttrs: {
     fileset = lib.fileset.unions [
       ../config
       ../configure.py
+      ../flake.lock
       ../libs
       ../orig/GALE01/sys/.gitkeep
       ../src
+      ../tools/download_tool.py
       ../tools/ninja_syntax.py
       ../tools/project.py
       ../tools/transform_dep.py
@@ -43,7 +39,7 @@ stdenvNoCC.mkDerivation (finalAttrs: {
     decomp-toolkit
     devkitppc
     ninja
-    python3Minimal
+    python3
     wibo
   ];
 

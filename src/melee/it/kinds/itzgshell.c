@@ -19,7 +19,7 @@
 #include <melee/mp/mpcoll.h>
 #include <sysdolphin/baselib/random.h>
 
-typedef struct itGShell_Attrs {
+typedef struct itZGShell_Attrs {
     float x0;
     float x4;
     float x8;
@@ -34,12 +34,6 @@ typedef struct itGShell_Attrs {
     float x2C;
     float x30;
     float x34;
-    float x38;
-    Vec x3C;
-} itGShell_Attrs;
-
-typedef struct itZGShell_Attrs {
-    char pad0[0x38];
     float x38;
     Vec x3C;
 } itZGShell_Attrs;
@@ -96,7 +90,7 @@ void it_802DDB38(Item_GObj* gobj)
 void it_802DDBE8(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
-    itGShell_Attrs* attrs = ip->xC4_article_data->x4_specialAttributes;
+    itZGShell_Attrs* attrs = ip->xC4_article_data->x4_specialAttributes;
     if (ip->xDD4_itemVar.zgshell.xE08_b0) {
         ip->xDD4_itemVar.zgshell.xDFC -= 1.0f;
         if (ip->xDD4_itemVar.zgshell.xDFC <= 0.0f) {
@@ -113,7 +107,7 @@ void it_802DDBE8(Item_GObj* gobj)
 void fn_802DDC8C(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
-    itGShell_Attrs* attrs = ip->xC4_article_data->x4_specialAttributes;
+    itZGShell_Attrs* attrs = ip->xC4_article_data->x4_specialAttributes;
     it_80275D5C(gobj, &ip->xC0C);
     if (ABS(ip->x40_vel.x) < attrs->x8) {
         ip->x40_vel.x = ip->x40_vel.y = ip->x40_vel.z = 0.0f;
@@ -130,7 +124,7 @@ void fn_802DDC8C(Item_GObj* gobj)
 void it_802DDD38(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
-    itGShell_Attrs* attrs = ip->xC4_article_data->x4_specialAttributes;
+    itZGShell_Attrs* attrs = ip->xC4_article_data->x4_specialAttributes;
 
     switch (ip->msid) {
     case 0:
@@ -170,7 +164,7 @@ void it_802DDD38(Item_GObj* gobj)
 }
 
 // permuterslop
-static inline itGShell_Attrs* get_attrs(Item* arg0)
+static inline itZGShell_Attrs* get_attrs(Item* arg0)
 {
     return arg0->xC4_article_data->x4_specialAttributes;
 }
@@ -178,7 +172,7 @@ static inline itGShell_Attrs* get_attrs(Item* arg0)
 void it_802DDEB4(Item_GObj* gobj)
 {
     Item* ip = gobj->user_data;
-    itGShell_Attrs* attrs = get_attrs(ip);
+    itZGShell_Attrs* attrs = get_attrs(ip);
 
     switch (ip->msid) {
     case 5:
@@ -187,7 +181,7 @@ void it_802DDEB4(Item_GObj* gobj)
     case 8:
     case 10: {
         Item* ip = gobj->user_data;
-        itGShell_Attrs* attrs = get_attrs(ip);
+        itZGShell_Attrs* attrs = get_attrs(ip);
         it_802756D0(gobj);
         it_80275444(gobj);
         ip->x40_vel.x = -ip->x40_vel.x * attrs->xC * HSD_Randf();
@@ -230,7 +224,7 @@ void it_802DDEB4(Item_GObj* gobj)
 void it_802DE040(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
-    itGShell_Attrs* attrs = ip->xC4_article_data->x4_specialAttributes;
+    itZGShell_Attrs* attrs = ip->xC4_article_data->x4_specialAttributes;
     it_8027B730(gobj);
     it_80275210(gobj);
     ip->xDD4_itemVar.zgshell.xE08_b0 = 0;
@@ -271,7 +265,7 @@ void itZrshell_UnkMotion0_Phys(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     int counter = ip->xDD4_itemVar.zgshell.xE0C;
-    itGShell_Attrs* attrs = ip->xC4_article_data->x4_specialAttributes;
+    itZGShell_Attrs* attrs = ip->xC4_article_data->x4_specialAttributes;
     if ((f32) counter > attrs->x2C) {
         it_802DF230(gobj);
     } else {
@@ -281,7 +275,7 @@ void itZrshell_UnkMotion0_Phys(Item_GObj* gobj)
 
 bool itZrshell_UnkMotion0_Coll(Item_GObj* gobj)
 {
-    itGShell_Attrs* attrs;
+    itZGShell_Attrs* attrs;
     Item* ip;
     HSD_JObj* jobj;
     it_8026D62C(gobj, it_802DE320);
@@ -303,7 +297,7 @@ void it_802DE320(Item_GObj* gobj)
 bool itZrshell_UnkMotion1_Anim(Item_GObj* gobj)
 {
     Item* ip = gobj->user_data;
-    if (ip->xDD4_itemVar.zgshell.xE1C_b0 && ip->xDD0_flag.b0 != 1) {
+    if (ip->xDD4_itemVar.zgshell.xE1C_b0 && ip->xDD0_flag.x0.b0 != 1) {
         if (ip->xDD4_itemVar.zgshell.xE04 <= 0.0f) {
             it_80274CAC(gobj);
             ip->jumped_on = fn_802DFE7C;
@@ -345,7 +339,7 @@ void itZrshell_UnkMotion2_Phys(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     int counter = ip->xDD4_itemVar.zgshell.xE0C;
-    itGShell_Attrs* attrs = ip->xC4_article_data->x4_specialAttributes;
+    itZGShell_Attrs* attrs = ip->xC4_article_data->x4_specialAttributes;
     if ((f32) counter > attrs->x2C) {
         it_802DF230(gobj);
     } else {
@@ -406,7 +400,7 @@ bool itZrshell_UnkMotion4_Coll(Item_GObj* gobj)
 void it_802DE6F0(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
-    itGShell_Attrs* attrs = ip->xC4_article_data->x4_specialAttributes;
+    itZGShell_Attrs* attrs = ip->xC4_article_data->x4_specialAttributes;
     PAD_STACK(8);
 
     it_8026B3A8(gobj);
@@ -439,7 +433,7 @@ bool itZrshell_UnkMotion6_Anim(Item_GObj* gobj)
 {
     Item* ip = gobj->user_data;
     if (ip->xDD4_itemVar.zgshell.xDF4 <= 0.0f) {
-        if (!ip->xDCD_flag.b5) {
+        if (!ip->xDCD_flag.x0.b5) {
             it_80275444(gobj);
         }
     } else {
@@ -455,7 +449,7 @@ bool itZrshell_UnkMotion6_Anim(Item_GObj* gobj)
 void itZrshell_UnkMotion6_Phys(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
-    itGShell_Attrs* attrs = ip->xC4_article_data->x4_specialAttributes;
+    itZGShell_Attrs* attrs = ip->xC4_article_data->x4_specialAttributes;
 
     if (ABS(ip->x40_vel.x) < attrs->x8) {
         if (!ip->xDC8_word.flags.x15) {
@@ -486,7 +480,7 @@ void itZrshell_UnkMotion6_Phys(Item_GObj* gobj)
 
 bool itZrshell_UnkMotion6_Coll(Item_GObj* gobj)
 {
-    itGShell_Attrs* attrs;
+    itZGShell_Attrs* attrs;
     Item* ip;
     HSD_JObj* jobj;
     PAD_STACK(8);
@@ -506,7 +500,7 @@ bool itZrshell_UnkMotion6_Coll(Item_GObj* gobj)
 void it_802DEC80(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
-    itGShell_Attrs* attrs = ip->xC4_article_data->x4_specialAttributes;
+    itZGShell_Attrs* attrs = ip->xC4_article_data->x4_specialAttributes;
     PAD_STACK(8);
 
     it_8026B3A8(gobj);
@@ -585,7 +579,7 @@ static inline void itZGShell_StopAndIdle(Item_GObj* gobj)
 void itZrshell_UnkMotion9_Phys(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
-    itGShell_Attrs* attrs = ip->xC4_article_data->x4_specialAttributes;
+    itZGShell_Attrs* attrs = ip->xC4_article_data->x4_specialAttributes;
     PAD_STACK(8);
 
     if (ABS(ip->x40_vel.x) < attrs->x30) {
@@ -604,7 +598,7 @@ void itZrshell_UnkMotion9_Phys(Item_GObj* gobj)
 
 bool itZrshell_UnkMotion9_Coll(Item_GObj* gobj)
 {
-    itGShell_Attrs* attrs;
+    itZGShell_Attrs* attrs;
     Item* ip;
     HSD_JObj* jobj;
     PAD_STACK(8);
@@ -834,7 +828,7 @@ bool itZGShell_Logic11_Reflected(Item_GObj* gobj)
 
 bool it_2725_Logic11_Clanked(Item_GObj* gobj)
 {
-    itGShell_Attrs* attrs;
+    itZGShell_Attrs* attrs;
     Item* ip = GET_ITEM(gobj);
     attrs = ip->xC4_article_data->x4_specialAttributes;
     it_802756D0(gobj);

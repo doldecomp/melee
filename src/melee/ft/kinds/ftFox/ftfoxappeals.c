@@ -94,7 +94,7 @@ void ftFx_AppealS_Enter(HSD_GObj* gobj)
     facingDir = ftFox_AppealS_GetLR(1.0f, fp->facing_dir);
 
     fp->mv.fx.AppealS.facingDir = facingDir;
-    fp->throw_flags = 0;
+    fp->x2210.throw_flags = 0;
 
     actionDir = fp->mv.fx.AppealS.facingDir;
     animCount = fp->mv.fx.AppealS.animCount;

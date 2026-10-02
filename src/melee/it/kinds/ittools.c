@@ -92,7 +92,7 @@ Item_GObj* it_802EEFA8(Vec3* pos, s32 arg1, f32 facing_dir)
     spawn.vel.x = 0.0f;
     spawn.x0_parent_gobj = NULL;
     spawn.x4_parent_gobj2 = spawn.x0_parent_gobj;
-    spawn.x44_flag.b0 = true;
+    spawn.x44_flag.x0.b0 = true;
     spawn.x40 = 0;
     gobj = Item_80268B18(&spawn);
     if (gobj != NULL) {

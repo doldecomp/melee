@@ -45,7 +45,7 @@ Item_GObj* it_802AC43C(Fighter_GObj* gobj, Item_GObj* ball, Vec3* pos,
     spawn.vel.x = spawn.vel.y = spawn.vel.z = 0.0F;
     spawn.x0_parent_gobj = gobj;
     spawn.x4_parent_gobj2 = ball;
-    spawn.x44_flag.b0 = true;
+    spawn.x44_flag.x0.b0 = true;
     spawn.x40 = arg4;
 
     trail = Item_80268B18(&spawn);

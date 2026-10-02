@@ -5,6 +5,7 @@
 #include "forward.h"
 #include "gm_1A3F.h"
 #include "gm_unsplit.h"
+#include "gmapproach.h"
 #include "gmmovieend.h"
 #include "gmresult.h"
 #include "gmvsmelee.h"
@@ -125,7 +126,7 @@ GameModeState gm_Mode_Vs_States[] = {
     { GM_GAMEMODESTATE_TERMINATE },
 };
 
-enum {
+enum state_debug {
     state_debug_vs = 1,
     state_debug_results = 3,
 };

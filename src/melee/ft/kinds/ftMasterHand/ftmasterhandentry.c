@@ -2,8 +2,6 @@
 
 #include <Runtime/platform.h>
 
-#include <math.h>
-
 #include "ftmasterhanddamage0.h"
 #include "ftmasterhandwait12.h"
 #include "types.h"

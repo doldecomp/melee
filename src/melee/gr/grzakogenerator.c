@@ -24,7 +24,7 @@
 #include <sysdolphin/baselib/psstructs.h>
 #include <sysdolphin/baselib/random.h>
 
-static struct {
+static struct lbl_8049F030_t {
     /* +0 */ grZakoGenerator_SpawnDesc* x0;
     /* +4 */ grZakoGenerator_Data* x4;
     /* +8 */ s16 x8;

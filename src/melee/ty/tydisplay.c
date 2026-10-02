@@ -450,6 +450,13 @@ static inline TySortElem* tyDisplay_GetGridSortElem(size_t offset,
     return (TySortElem*) ((size_t) grid + offset + 0x14);
 }
 
+struct _tyDisplay_80319540_sort_temps {
+    u8 pad0[4];
+    TySortElem tmp2;
+    u8 pad1[4];
+    TySortElem tmp1, tmp0;
+};
+
 static inline void _tyDisplay_80319540_sort(TyDspConfig* cfg, TyDspGrid* grid)
 {
     s32 n2;
@@ -458,12 +465,7 @@ static inline void _tyDisplay_80319540_sort(TyDspConfig* cfg, TyDspGrid* grid)
     if (cfg->x08 > 1) {
         n2 = (cfg->x08 / 3) * 2;
         if (n2 > 0) {
-            struct {
-                u8 pad0[4];
-                TySortElem tmp2;
-                u8 pad1[4];
-                TySortElem tmp1, tmp0;
-            } temps;
+            struct _tyDisplay_80319540_sort_temps temps;
             s32 mid = n2 / 2;
             TyDspGrid* cur;
             s32 pivot, n;
@@ -503,6 +505,13 @@ static inline void _tyDisplay_80319540_sort(TyDspConfig* cfg, TyDspGrid* grid)
     }
 }
 
+struct _tyDisplay_80319994_sort_temps {
+    u8 pad0[4];
+    TySortElem tmp2;
+    u8 pad1[4];
+    TySortElem tmp1, tmp0;
+};
+
 static inline void _tyDisplay_80319994_sort(TyDspConfig* cfg, TyDspGrid* grid)
 {
     s32 pivot;
@@ -512,12 +521,7 @@ static inline void _tyDisplay_80319994_sort(TyDspConfig* cfg, TyDspGrid* grid)
     if (cfg->x08 > 1) {
         n2 = (cfg->x08 / 3) * 2;
         if (n2 > 0) {
-            struct {
-                u8 pad0[4];
-                TySortElem tmp2;
-                u8 pad1[4];
-                TySortElem tmp1, tmp0;
-            } temps;
+            struct _tyDisplay_80319994_sort_temps temps;
             s32 mid = n2 / 2;
             TyDspGrid* cur;
             s32 n;
@@ -557,6 +561,12 @@ static inline void _tyDisplay_80319994_sort(TyDspConfig* cfg, TyDspGrid* grid)
     }
 }
 
+struct _tyDisplay_80318CB4_sort_temps {
+    TySortElem tmp2;
+    u8 pad1[4];
+    TySortElem tmp1, tmp0;
+};
+
 static inline void _tyDisplay_80318CB4_sort(TyDspConfig* cfg, TyDspGrid* grid)
 {
     s32 n2;
@@ -565,11 +575,7 @@ static inline void _tyDisplay_80318CB4_sort(TyDspConfig* cfg, TyDspGrid* grid)
     if (cfg->x08 > 1) {
         n2 = (cfg->x08 / 3) * 2;
         if (0 < n2) {
-            struct {
-                TySortElem tmp2;
-                u8 pad1[4];
-                TySortElem tmp1, tmp0;
-            } temps;
+            struct _tyDisplay_80318CB4_sort_temps temps;
             s32 mid = n2 / 2;
             TyDspGrid* cur;
             s32 pivot, n;
@@ -609,6 +615,12 @@ static inline void _tyDisplay_80318CB4_sort(TyDspConfig* cfg, TyDspGrid* grid)
     }
 }
 
+struct _tyDisplay_80319994_sort_pos_temps {
+    TyDspPos tmp2;
+    u8 pad1[4];
+    TyDspPos tmp1, tmp0;
+};
+
 static inline void _tyDisplay_80319994_sort_pos(TyDspGrid* grid, s32 count)
 {
     if (count > 1) {
@@ -618,11 +630,7 @@ static inline void _tyDisplay_80319994_sort_pos(TyDspGrid* grid, s32 count)
         n2 = count - 1;
         base = grid;
         if (n2 > 0) {
-            struct {
-                TyDspPos tmp2;
-                u8 pad1[4];
-                TyDspPos tmp1, tmp0;
-            } temps;
+            struct _tyDisplay_80319994_sort_pos_temps temps;
             s32 mid = n2 / 2;
             TyDspPos* p;
             TyDspGrid* cur;
@@ -663,17 +671,19 @@ static inline void _tyDisplay_80319994_sort_pos(TyDspGrid* grid, s32 count)
     }
 }
 
+struct _tyDisplay_80318CB4_sort_pos_temps {
+    TyDspPos tmp2;
+    u8 pad1[4];
+    TyDspPos tmp1, tmp0;
+};
+
 static inline void _tyDisplay_80318CB4_sort_pos(TyDspGrid* grid, s32 n2)
 {
     s32 pivot;
     TyDspGrid* base;
     base = grid;
     {
-        struct {
-            TyDspPos tmp2;
-            u8 pad1[4];
-            TyDspPos tmp1, tmp0;
-        } temps;
+        struct _tyDisplay_80318CB4_sort_pos_temps temps;
         s32 mid = n2 / 2;
         TyDspPos* p;
         TyDspGrid* cur;
@@ -758,6 +768,12 @@ static inline f32 _tyDisplay_80318CB4_sqrt_store(f32 x, volatile f32* rounded)
 #define _tyDisplay_80318CB4_sqrt_store(x, rounded) sqrtf(x)
 #endif
 
+struct _tyDisplay_80318CB4_rounded {
+    u8 pad0[0x14];
+    f32 value;
+    u8 pad1[0x10];
+};
+
 void _tyDisplay_80318CB4(s32 arg0)
 {
     s32 sort_end;
@@ -778,11 +794,7 @@ void _tyDisplay_80318CB4(s32 arg0)
     TyDspConfig* cfg = _tyDisplay_804D6F18;
 
     /* Preserve the first sqrtf rounding slot at frame offset 0x78. */
-    struct {
-        u8 pad0[0x14];
-        f32 value;
-        u8 pad1[0x10];
-    } rounded;
+    struct _tyDisplay_80318CB4_rounded rounded;
 
     memzero(grid, sizeof(*grid));
     grid->x08_min_z = -3.5f;
@@ -1663,7 +1675,8 @@ void _tyDisplay_8031B1FC(void)
         ptr->gobj4 = NULL;
     }
 
-    joint = HSD_ArchiveGetPublicAddress(ptr->archive, "ToyDspBg_Top_joint");
+    joint =
+        HSD_ArchiveGetPublicAs(HSD_Joint, ptr->archive, "ToyDspBg_Top_joint");
     if (joint != NULL) {
         ptr->gobj4 = GObj_Create(9, 9, zero);
         jobj = HSD_JObjLoadJoint(joint);
@@ -1731,8 +1744,8 @@ void _tyDisplay_8031B328(void)
         OSPanic(__FILE__, 1113, "");
     }
 
-    if ((lightData = HSD_ArchiveGetPublicAddress(
-             temp3->archive, "ScMenDisplay_scene_lights")) != NULL)
+    if ((lightData = HSD_ArchiveGetPublicAs(
+             LightList*, temp3->archive, "ScMenDisplay_scene_lights")) != NULL)
     {
         scene->x00 = GObj_Create(2, 3, 0);
         lobj = Toy_LoadLObjList(lightData, 0);
@@ -1746,8 +1759,8 @@ void _tyDisplay_8031B328(void)
 
     /// @todo .data order hack
     (void) "ScMenDisplay_cam_int1_camera";
-    if ((fogDesc = HSD_ArchiveGetPublicAddress(temp3->archive,
-                                               "ScMenDisplay_fog")) != NULL)
+    if ((fogDesc = HSD_ArchiveGetPublicAs(HSD_FogDesc, temp3->archive,
+                                          "ScMenDisplay_fog")) != NULL)
     {
         scene->x08 = GObj_Create(3, 4, 0);
         HSD_GObjObject_80390A70(scene->x08, temp2 = HSD_GObj_FogKind,
@@ -1800,7 +1813,7 @@ static inline void tyDisplay_SetGridSize(TyDspConfig* cfg, TyDspGrid* grid)
 
 void tyDisplay_Scene_OnEnter(void* arg0)
 {
-    s32 sp18;
+    HSD_Joint* sp18;
     TyDspConfig* cfg;
     TyDspBgData* data;
     TyDspGrid* grid;
@@ -1875,8 +1888,9 @@ void tyDisplay_Scene_OnEnter(void* arg0)
 
     {
         cfg2 = _tyDisplay_804D6F18;
-        cobj = lb_80013B14(HSD_ArchiveGetPublicAddress(
-            _tyDisplay_804D6F1C->archive, "ScMenDisplay_cam_int1_camera"));
+        cobj = lb_80013B14(HSD_ArchiveGetPublicAs(
+            HSD_CameraDescPerspective, _tyDisplay_804D6F1C->archive,
+            "ScMenDisplay_cam_int1_camera"));
 
         cfg2->x00 = GObj_Create(1, 2, 0);
         HSD_GObjObject_80390A70(cfg2->x00, kind = HSD_GObj_CameraKind, cobj);
@@ -2213,7 +2227,7 @@ HSD_GObj* _tyDisplay_8031BC54(s32 arg0)
         const char* temp;
         temp = jobj_names.entries[(s8) cat];
         child = HSD_JObjLoadJoint(
-            HSD_ArchiveGetPublicAddress(data->archives[c], temp));
+            HSD_ArchiveGetPublicAs(HSD_Joint, data->archives[c], temp));
     }
 
     HSD_JObjAddChild(root, child);
@@ -2236,8 +2250,9 @@ HSD_GObj* _tyDisplay_8031BC54(s32 arg0)
     HSD_JObjSetTranslateX(child, entry->x08);
     HSD_JObjSetTranslateZ(child, entry->x0C);
 
-    HSD_JObjAddChild(root, HSD_JObjLoadJoint(HSD_ArchiveGetPublicAddress(
-                               data->archives[41], _tyDisplay_803FF01C)));
+    HSD_JObjAddChild(root,
+                     HSD_JObjLoadJoint(HSD_ArchiveGetPublicAs(
+                         HSD_Joint, data->archives[41], _tyDisplay_803FF01C)));
 
     if (_tyDisplay_804D6F24 != NULL) {
         DevText_Erase(_tyDisplay_804D6F24);

@@ -6,6 +6,7 @@
 #include <melee/lb/lbarchive.h>
 #include <melee/lb/lbmthp.h>
 #include <melee/sc/types.h>
+#include <sysdolphin/baselib/cobj.h> // IWYU pragma: keep
 #include <sysdolphin/baselib/controller.h>
 #include <sysdolphin/baselib/debug.h>
 #include <sysdolphin/baselib/displayfunc.h>
@@ -301,7 +302,7 @@ static inline void fn_802590C4_inline(HSD_GObj* gobj)
     tmp = HSD_GObjGetUserData(gobj); /// @todo GET_804D6C88 breaks these
     HSD_GObjFree(gobj);
     for (i = 0; i < 2; i++) {
-        HSD_GObjFree((tmp->gobjs)[i]);
+        HSD_GObjFree(tmp->gobjs[i]);
         tmp->gobjs[i] = NULL;
     };
 }
@@ -477,7 +478,7 @@ void mnGallery_80259868(void)
     archive = mn_804D6BB8;
 
     lbArchive_LoadSections(
-        archive, (void*) &mnGallery_804A0BA0.joint, "MenMainConGa_Top_joint",
+        archive, &mnGallery_804A0BA0.joint, "MenMainConGa_Top_joint",
         &mnGallery_804A0BA0.animjoint, "MenMainConGa_Top_animjoint",
         &mnGallery_804A0BA0.matanim_joint, "MenMainConGa_Top_matanim_joint",
         &mnGallery_804A0BA0.shapeanim_joint,

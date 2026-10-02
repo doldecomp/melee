@@ -64,7 +64,7 @@
 /* 21EC58 */ HSD_Text* grHomeRun_8021EC58(int);
 /* 21ED74 */ void grHomeRun_8021ED74(void);
 /* 21EDD4 */ void grHomeRun_8021EDD4(void);
-/* 21EEB4 */ DynamicsDesc* grHomeRun_8021EEB4(enum_t);
+/* 21EEB4 */ lbColl_80008D30_arg1* grHomeRun_8021EEB4(enum_t);
 /* 21EEBC */ bool grHomeRun_8021EEBC(Vec3*, int arg, HSD_JObj* jobj);
 /* 21EF10 */ float grHomeRun_8021EF10(void);
 /* 3E821C */ extern StageData grHr_StageData;

@@ -63,7 +63,7 @@
 /* 1DC408 */ static void grZebes_801DC408(Ground_GObj*);
 /* 1DC744 */ static void grZebes_801DC744(s32, u8);
 /* 1DC9DC */ static void grZebes_801DC9DC(s32 arg);
-/* 1DCCB8 */ static DynamicsDesc* grZebes_801DCCB8(enum_t arg);
+/* 1DCCB8 */ static lbColl_80008D30_arg1* grZebes_801DCCB8(enum_t arg);
 /* 1DCCC0 */ static bool grZebes_801DCCC0(Vec3* arg, int arg0, HSD_JObj* jobj);
 
 typedef struct grZe_ColorEntry {
@@ -2391,7 +2391,7 @@ bool grZebes_801DCBFC(Ground_GObj* gobj, HSD_GObj* fobj, void* arg)
     return false;
 }
 
-DynamicsDesc* grZebes_801DCCB8(enum_t arg)
+lbColl_80008D30_arg1* grZebes_801DCCB8(enum_t arg)
 {
     return NULL;
 }

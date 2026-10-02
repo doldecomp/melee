@@ -77,7 +77,7 @@
 /* 1D4548 */ void grStadium_801D4548(Ground_GObj*);
 /* 1D4FF8 */ bool grStadium_801D4FF8(int pl_slot);
 /* 1D5074 */ void fn_801D5074(Ground_GObj*, intptr_t);
-/* 1D50B8 */ DynamicsDesc* grStadium_OnTouchLine(enum_t);
+/* 1D50B8 */ lbColl_80008D30_arg1* grStadium_OnTouchLine(enum_t);
 /* 1D50C0 */ bool grStadium_OnCheckShadowRender(Vec3*, int, HSD_JObj*);
 /* 1D511C */ void grStadium_801D511C(void);
 /* 3E1334 */ extern StageData grPs_StageData;

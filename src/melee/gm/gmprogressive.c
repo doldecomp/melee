@@ -17,7 +17,7 @@
 #include <sysdolphin/baselib/jobj.h>
 #include <sysdolphin/baselib/sislib.h>
 
-static struct {
+static struct gm_80480D70_t {
     HSD_Archive* x0;
     HSD_JObj* x4;
     HSD_Text* x8;

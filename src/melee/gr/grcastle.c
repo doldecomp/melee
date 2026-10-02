@@ -400,9 +400,9 @@ void grCastle_801CD658(Ground_GObj* gobj)
 {
     Ground* gp = GET_GROUND(gobj);
     UnkArchiveStruct* archive;
-    DynamicsDesc* flag3;
-    DynamicsDesc* flag4;
-    DynamicsDesc* flag6;
+    DynamicsTemplate* flag3;
+    DynamicsTemplate* flag4;
+    DynamicsTemplate* flag6;
     Vec3 pos;
     grCastle_DynEntries entries_s;
     s32 i;
@@ -424,14 +424,14 @@ void grCastle_801CD658(Ground_GObj* gobj)
 
     archive = grDatFiles_GetArchive();
     if (archive != NULL) {
-        flag3 =
-            HSD_ArchiveGetPublicAddress(archive->unk0, "dynamicsdata_flag3");
+        flag3 = HSD_ArchiveGetPublicAs(DynamicsTemplate, archive->unk0,
+                                       "dynamicsdata_flag3");
         if (flag3 != NULL) {
-            flag4 = HSD_ArchiveGetPublicAddress(archive->unk0,
-                                                "dynamicsdata_flag4");
+            flag4 = HSD_ArchiveGetPublicAs(DynamicsTemplate, archive->unk0,
+                                           "dynamicsdata_flag4");
             if (flag4 != NULL) {
-                flag6 = HSD_ArchiveGetPublicAddress(archive->unk0,
-                                                    "dynamicsdata_flag6");
+                flag6 = HSD_ArchiveGetPublicAs(DynamicsTemplate, archive->unk0,
+                                               "dynamicsdata_flag6");
                 if (flag6 != NULL) {
                     entries_s = grCs_803B7EA8;
 
@@ -1882,7 +1882,7 @@ void grCastle_801D0A9C(Vec3* arg0, f32 arg8)
     }
 }
 
-DynamicsDesc* grCastle_801D0B04(enum_t arg)
+lbColl_80008D30_arg1* grCastle_801D0B04(enum_t arg)
 {
     return NULL;
 }

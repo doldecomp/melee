@@ -6,20 +6,20 @@
 
 /* Union for 64-bit sorting operations */
 typedef union {
-    struct {
+    struct mnDiagram2_SortEntry_x0 {
         u8 idx; ///< SelectableCharacterKind or a nametag slot id
         char pad1[7];
         s32 x8;
         s32 xC;
-    };
-    struct {
+    } x0;
+    struct mnDiagram2_SortEntry_x0_1 {
         f64 d0;
         f64 d8;
-    };
-    struct {
+    } x0_1;
+    struct mnDiagram2_SortEntry_x0_2 {
         char pad2[8];
         u64 value;
-    };
+    } x0_2;
 } mnDiagram2_SortEntry;
 
 /* 243A3C */ bool mnDiagram2_IsTimeStat(u8 stat_type);

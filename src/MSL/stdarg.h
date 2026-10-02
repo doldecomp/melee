@@ -1,7 +1,7 @@
 #ifndef _STDARG_H_
 #define _STDARG_H_
 
-typedef struct {
+typedef struct __va_list_t {
     char gpr;
     char fpr;
     char reserved[2];

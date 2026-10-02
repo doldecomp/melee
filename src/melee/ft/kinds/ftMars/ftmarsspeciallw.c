@@ -5,8 +5,6 @@
 #include <melee/ft/forward.h>
 #include <melee/lb/forward.h>
 
-#include <math.h>
-
 #include "types.h"
 #include <dolphin/mtx.h>
 #include <melee/ef/efsync.h>
@@ -78,11 +76,11 @@ void ftMs_SpecialLw_Anim(HSD_GObj* gobj)
         fp->cmd_vars[1] = 2;
         ftColl_8007B1B8(gobj, (ShieldDesc*) &da->x64,
                         &ftMs_SpecialLw_80139140);
-        fp->x221B_b1 = true;
+        fp->x221B.x221B_b1 = true;
         fp->shield_unk0 = da->x60;
         fp->shield_unk1 = da->x60;
     } else if (fp->cmd_vars[1] == 0) {
-        fp->x221B_b0 = false;
+        fp->x221B.x221B_b0 = false;
     }
 
     if (!ftAnim_IsFramesRemaining(gobj)) {
@@ -101,11 +99,11 @@ void ftMs_SpecialAirLw_Anim(HSD_GObj* gobj)
         fp->cmd_vars[1] = 2;
         ftColl_8007B1B8(gobj, (ShieldDesc*) &da->x64,
                         &ftMs_SpecialLw_80139140);
-        fp->x221B_b1 = true;
+        fp->x221B.x221B_b1 = true;
         fp->shield_unk0 = da->x60;
         fp->shield_unk1 = da->x60;
     } else if (fp->cmd_vars[1] == 0) {
-        fp->x221B_b0 = false;
+        fp->x221B.x221B_b0 = false;
     }
 
     if (!ftAnim_IsFramesRemaining(gobj)) {
@@ -166,7 +164,7 @@ void ftMs_SpecialLw_80138D38(HSD_GObj* gobj)
         if (fp->cmd_vars[1] == 2) {
             ftColl_8007B1B8(gobj, (ShieldDesc*) &da->x64,
                             &ftMs_SpecialLw_80139140);
-            fp->x221B_b1 = true;
+            fp->x221B.x221B_b1 = true;
         }
     }
 }
@@ -188,7 +186,7 @@ void ftMs_SpecialLw_80138DD0(HSD_GObj* gobj)
         if (fp->cmd_vars[1] == 2) {
             ftColl_8007B1B8(gobj, (ShieldDesc*) &da->x64,
                             &ftMs_SpecialLw_80139140);
-            fp->x221B_b1 = true;
+            fp->x221B.x221B_b1 = true;
         }
     }
 }

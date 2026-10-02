@@ -1,5 +1,52 @@
 {
   "nodes": {
+    "aurora-src": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1786866164,
+        "narHash": "sha256-jvnfdnRF5HtZ792lwUs0WYASwG/dHIkp9JaisLdntUc=",
+        "owner": "r-burns",
+        "repo": "aurora",
+        "rev": "e6a6f02ace4146e8a2f648d5c274dbb7dd89665c",
+        "type": "github"
+      },
+      "original": {
+        "owner": "r-burns",
+        "repo": "aurora",
+        "rev": "e6a6f02ace4146e8a2f648d5c274dbb7dd89665c",
+        "type": "github"
+      }
+    },
+    "compilers": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1763496356,
+        "narHash": "sha256-M+pz/o+3vt0yIGrRJuVs5Ga9QHtVAicWtu1SugbLWH4=",
+        "type": "tarball",
+        "url": "https://files.decomp.dev/compilers_20251118.zip"
+      },
+      "original": {
+        "type": "tarball",
+        "url": "https://files.decomp.dev/compilers_20251118.zip"
+      }
+    },
+    "decomp-toolkit": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1772429804,
+        "narHash": "sha256-MMD6iY6IpRPycRCoSnXKkcwpVnrDTKw0EDqgyPOAjcM=",
+        "owner": "encounter",
+        "repo": "decomp-toolkit",
+        "rev": "e4219e7644fb7b96d920d5bc3d1d950f5569dcaf",
+        "type": "github"
+      },
+      "original": {
+        "owner": "encounter",
+        "ref": "v1.8.3",
+        "repo": "decomp-toolkit",
+        "type": "github"
+      }
+    },
     "nixpkgs": {
       "locked": {
         "lastModified": 1786599213,
@@ -16,10 +63,45 @@
         "type": "github"
       }
     },
+    "objdiff": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1790698507,
+        "narHash": "sha256-fM7fQv0TguxohDvc3wDM9NEmnI2BfYkS1kYlQl3MOTM=",
+        "owner": "encounter",
+        "repo": "objdiff",
+        "rev": "eed74b99c4e94dd154882259931201badc6fdbd1",
+        "type": "github"
+      },
+      "original": {
+        "owner": "encounter",
+        "ref": "v3.8.2",
+        "repo": "objdiff",
+        "type": "github"
+      }
+    },
     "root": {
       "inputs": {
+        "aurora-src": "aurora-src",
+        "compilers": "compilers",
+        "decomp-toolkit": "decomp-toolkit",
         "nixpkgs": "nixpkgs",
-        "treefmt-nix": "treefmt-nix"
+        "objdiff": "objdiff",
+        "sjiswrap": "sjiswrap",
+        "treefmt-nix": "treefmt-nix",
+        "wibo": "wibo"
+      }
+    },
+    "sjiswrap": {
+      "flake": false,
+      "locked": {
+        "narHash": "sha256-rtBcpKyACwu2vDsnrppfJntsx8rlhQemlisnB+w3kAQ=",
+        "type": "file",
+        "url": "https://github.com/encounter/sjiswrap/releases/download/v1.2.2/sjiswrap-windows-x86.exe"
+      },
+      "original": {
+        "type": "file",
+        "url": "https://github.com/encounter/sjiswrap/releases/download/v1.2.2/sjiswrap-windows-x86.exe"
       }
     },
     "treefmt-nix": {
@@ -39,6 +121,23 @@
       "original": {
         "owner": "numtide",
         "repo": "treefmt-nix",
+        "type": "github"
+      }
+    },
+    "wibo": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1755273904,
+        "narHash": "sha256-PEqfvpS3p8Zooee7k59SN2UiSZWfITuB/VULIrfup4w=",
+        "owner": "decompals",
+        "repo": "wibo",
+        "rev": "6d0bff464ac998a9c68964e3bab13f9bd53ef329",
+        "type": "github"
+      },
+      "original": {
+        "owner": "decompals",
+        "ref": "0.7.0",
+        "repo": "wibo",
         "type": "github"
       }
     }

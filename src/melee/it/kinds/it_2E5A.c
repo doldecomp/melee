@@ -18,7 +18,6 @@
 #include <melee/lb/lbaudio_ax.h>
 #include <melee/lb/lbvector.h>
 #include <melee/mp/mpcoll.h>
-#include <sysdolphin/baselib/cobj.h>
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/gobjproc.h>
 #include <sysdolphin/baselib/jobj.h>
@@ -107,7 +106,7 @@ bool it_802E5AC4(Item_GObj* item_gobj, bool arg_check)
             goto block_18;
         }
     block_16:
-        if (item->xDCD_flag.b4 || !comm_attr->x58) {
+        if (item->xDCD_flag.x0.b4 || !comm_attr->x58) {
         block_18:
             itResetVelocity(item);
             item->xD50_landNum = 0;
@@ -154,8 +153,8 @@ bool it_802E5AC4(Item_GObj* item_gobj, bool arg_check)
             item->x40_vel.x *= spec_attr->x14;
             item->xD50_landNum += 1;
             if (item->xD50_landNum >= 3U) {
-                if (!(item->xDCF_flag.b0)) {
-                    item->xDCF_flag.b0 = 1;
+                if (!(item->xDCF_flag.x0.b0)) {
+                    item->xDCF_flag.x0.b0 = 1;
                 }
             }
         }
@@ -256,7 +255,7 @@ static inline void it_802E614C(Item_GObj* parent_gobj1,
     spawn->vel = *vel;
     spawn->x0_parent_gobj = parent_gobj1;
     spawn->x4_parent_gobj2 = parent_gobj2;
-    spawn->x44_flag.b0 = 1;
+    spawn->x44_flag.x0.b0 = 1;
     spawn->x40 = 0;
 }
 
@@ -315,8 +314,8 @@ void it_802E628C(Item_GObj* item_gobj, f32 arg8, f32 arg9)
 static inline void it_802E6380_inline(Item_GObj* item_gobj)
 {
     Item* item = GET_ITEM(item_gobj);
-    item->xDD4_itemVar.it_2E5A.x18.b0 =
-        (item->xDD4_itemVar.it_2E5A.x18.b1 = 0);
+    item->xDD4_itemVar.it_2E5A.x18.x0.b0 =
+        (item->xDD4_itemVar.it_2E5A.x18.x0.b1 = 0);
 
     if (item->xDD4_itemVar.it_2E5A.x8 != 0) {
         it_2E5A_Attrs* attr = item->xC4_article_data->x4_specialAttributes;
@@ -327,7 +326,7 @@ static inline void it_802E6380_inline(Item_GObj* item_gobj)
         lb_8000B1CC(sub->x4, NULL, &sub->x8);
         sub->x14 = sub->x8;
         if (db_ShowCoinPickupRange()) {
-            item->xDAA_flag.b0 = 1;
+            item->xDAA.xDAA_flag.x0.b0 = 1;
         }
     }
 }
@@ -369,7 +368,7 @@ s32 it_802E6380(Item_GObj* item_gobj, it_802E5FXX_struct* arg1)
 
     item->xDD4_itemVar.it_2E5A.x14 = attr->x8;
     item->xDD4_itemVar.it_2E5A.x8 = arg1->x14;
-    item->xDCD_flag.b6 = 1;
+    item->xDCD_flag.x0.b6 = 1;
 
     {
         s32 tier_idx = off;
@@ -404,18 +403,18 @@ bool it_802E657C(Item_GObj* item_gobj)
     if (item->xDD4_itemVar.it_2E5A.x8 == 1) {
         temp_f0_2 = item->xDD4_itemVar.it_2E5A.x10;
         if (temp_f0_2 <= 0.0f) {
-            temp_r4 = item->xDD4_itemVar.it_2E5A.x18.b0;
+            temp_r4 = item->xDD4_itemVar.it_2E5A.x18.x0.b0;
             if (!temp_r4) {
-                item->xDD4_itemVar.it_2E5A.x18.b0 = 1;
+                item->xDD4_itemVar.it_2E5A.x18.x0.b0 = 1;
             }
         } else {
             item->xDD4_itemVar.it_2E5A.x10 = temp_f0_2 - 1.0f;
         }
         temp_f1 = item->xDD4_itemVar.it_2E5A.x14;
         if (temp_f1 <= 0.0f) {
-            if (item->xDCD_flag.b5 != 1) {
+            if (item->xDCD_flag.x0.b5 != 1) {
                 it_80275444(item_gobj);
-                item->xDD4_itemVar.it_2E5A.x18.b1 = 1;
+                item->xDD4_itemVar.it_2E5A.x18.x0.b1 = 1;
             }
         } else {
             item->xDD4_itemVar.it_2E5A.x14 = temp_f1 - 1.0f;
@@ -482,7 +481,7 @@ bool it_2E5A_UnkMotion0_Coll(HSD_GObj* item_gobj)
     if (it_802E5AC4(item_gobj, 1)) {
         it_802E6888(item_gobj);
         item->xD50_landNum = 0;
-        item->xDCF_flag.b0 = 0;
+        item->xDCF_flag.x0.b0 = 0;
     }
     return false;
 }

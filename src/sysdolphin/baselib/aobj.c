@@ -4,7 +4,7 @@
 #include <stdarg.h>
 #include <string.h>
 
-#include "cobj.h"
+#include "cobj.h" // IWYU pragma: keep
 #include "debug.h"
 #include "dobj.h"
 #include "fog.h"
@@ -188,15 +188,14 @@ HSD_AObj* HSD_AObjLoadDesc(HSD_AObjDesc* aobjdesc)
         fobjdesc = aobjdesc->fobjdesc;
         fobj = HSD_FObjLoadDesc(fobjdesc);
         HSD_AObjSetFObj(aobj, fobj);
-        id = aobjdesc->obj_id;
+        id = (HSD_IDKey) aobjdesc->obj_id;
         if (id != 0U) {
             HSD_Obj* hsd_obj = HSD_IDGetDataFromTable(0, id, 0);
             phi_r30 = hsd_obj;
             if (hsd_obj != NULL) {
                 ref_INC(hsd_obj);
             } else {
-                phi_r30 =
-                    (HSD_Obj*) HSD_JObjLoadJoint((void*) aobjdesc->obj_id);
+                phi_r30 = (HSD_Obj*) HSD_JObjLoadJoint(aobjdesc->obj_id);
             }
             if (aobj != NULL) {
                 if (aobj->hsd_obj != NULL) {

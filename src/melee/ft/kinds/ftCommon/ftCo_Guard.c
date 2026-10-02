@@ -216,7 +216,7 @@ void ftCo_80091E78(Fighter_GObj* gobj, float arg1)
     Fighter* fp = gobj->user_data;
     Vec3 scl;
     PAD_STACK(4);
-    if (fp->reflecting || fp->x221B_b0) {
+    if (fp->reflecting || fp->x221B.x221B_b0) {
         ftCo_80091BC4(fp);
         if (fp->mv.co.guard.x4) {
             HSD_JObj* jobj = fp->x8AC_animSkeleton;
@@ -226,7 +226,8 @@ void ftCo_80091E78(Fighter_GObj* gobj, float arg1)
             HSD_JObjAnimAll(jobj);
             if (fp->mv.co.guard.x4 < 1) {
                 ftAnim_80070108(fp, FtPart_TransN, 1 - fp->mv.co.guard.x4,
-                                fp->mv.co.guard.x4, fp->ft_data->x20->x0[2]);
+                                fp->mv.co.guard.x4,
+                                fp->ft_data->x20->x0->child);
             }
             if (arg1 < 1) {
                 ftAnim_8006FE9C(fp, FtPart_TransN, arg1, 1 - arg1);
@@ -235,9 +236,9 @@ void ftCo_80091E78(Fighter_GObj* gobj, float arg1)
             }
         } else if (arg1 < 1) {
             ftAnim_80070010(fp, FtPart_TransN, arg1, 1 - arg1,
-                            fp->ft_data->x20->x0[2]);
+                            fp->ft_data->x20->x0->child);
         } else {
-            ftAnim_8006FA58(fp, FtPart_TransN, fp->ft_data->x20->x0[2]);
+            ftAnim_8006FA58(fp, FtPart_TransN, fp->ft_data->x20->x0->child);
         }
         {
             scl.x = scl.y = scl.z = inlineB0(fp);
@@ -400,7 +401,7 @@ bool ftCo_800925A4(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     PAD_STACK(8);
-    if (fp->x221B_b0) {
+    if (fp->x221B.x221B_b0) {
         fp->mv.co.guard.x2C = fp->lightshield_amount;
         {
             fp->lightshield_amount =
@@ -420,7 +421,7 @@ bool ftCo_800925A4(HSD_GObj* gobj)
         if (fp->shield_health < 0) {
             fp->shield_health = 0;
             fp->x221A_b7 = false;
-            fp->x221B_b0 = false;
+            fp->x221B.x221B_b0 = false;
             pl_8003E0E8(fp->player_idx, fp->is_sub_fighter);
             ftCo_80098B20(gobj);
             ft_PlaySFX(fp, 129, 127, 64);
@@ -454,7 +455,7 @@ static inline bool inlineC0(Fighter_GObj* gobj, HSD_GObjEvent cb)
     Fighter* fp = gobj->user_data;
     ftCo_80092BCC(gobj);
     if ((fp->mv.co.guard.xC && !fp->mv.co.guard.x10) ||
-        (!fp->x221B_b0 && !fp->reflecting))
+        (!fp->x221B.x221B_b0 && !fp->reflecting))
     {
         cb(gobj);
         return true;
@@ -903,7 +904,7 @@ void ftCo_8009388C(HSD_GObj* gobj)
                               fp->cur_anim_frame, 1, 0, NULL);
     fp->active_timer.trigger = 0xFE;
     fp->x221A_b7 = false;
-    fp->x221B_b0 = false;
+    fp->x221B.x221B_b0 = false;
     fp->x221C_b3 = true;
     fp->x221C_b1 = true;
     fp->x221C_b2 = true;

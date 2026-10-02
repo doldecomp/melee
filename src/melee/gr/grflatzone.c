@@ -765,7 +765,7 @@ void grFlatzone_80218260(void)
     }
 }
 
-DynamicsDesc* grFlatzone_802182B4(enum_t arg0)
+lbColl_80008D30_arg1* grFlatzone_802182B4(enum_t arg0)
 {
     return NULL;
 }

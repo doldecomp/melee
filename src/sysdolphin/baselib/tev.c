@@ -5,7 +5,7 @@
 #include "debug.h"
 #include <dolphin/gx.h>
 
-static struct {
+static struct TevReg_t {
     GXColorS10 a;
     int c;
 } TevReg[4] = { 0 };

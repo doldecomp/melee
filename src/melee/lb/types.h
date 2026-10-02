@@ -7,6 +7,7 @@
 #include <melee/lb/forward.h> // IWYU pragma: export
 #include <sysdolphin/baselib/forward.h>
 
+#include <dat_macros.h>
 #include <placeholder.h>
 
 #include <dolphin/gx.h>
@@ -80,10 +81,10 @@ struct HitCapsule {
     /* +70 */ float coll_distance;
     /* +74 */ HitVictim victims_1[12];
     /* +D4 */ HitVictim victims_2[12];
-    /* +134 */ union {
+    /* +134 */ union HitCapsule_x134 {
         HSD_GObj* owner;
         u8 hit_grabbed_victim_only : 1;
-    };
+    } x134;
 };
 ASSERT_SIZE(HitCapsule, 0x138);
 
@@ -183,19 +184,19 @@ typedef struct _ftECB {
 
 typedef struct ECBSource {
     /* fp+7F4 */ ECBSourceKind kind;
-    /* fp+7F8 */ union {
-        /* fp+7F8 */ struct {
+    /* fp+7F8 */ union ECBSource_x4 {
+        /* fp+7F8 */ struct ECBSource_x4_x0 {
             /* fp+7F8 */ HSD_JObj* x108_joint;
             /* fp+7FC */ HSD_JObj* x10C_joint[6];
-        };
-        /* fp+7F8 */ struct {
+        } x0;
+        /* fp+7F8 */ struct ECBSource_x4_x0_1 {
             /* fp+7F8 */ float up;
             /* fp+7FC */ float down;
             /* fp+800 */ float front;
             /* fp+804 */ float back;
             /* fp+808 */ float angle;
-        };
-    };
+        } x0_1;
+    } x4;
     /* fp+814 */ float x124;
     /* fp+818 */ float x128;
     /* fp+81C */ float x12C;
@@ -324,12 +325,12 @@ struct ColorOverlay_UnkInner {
 
 union ColorOverlay_x8_t {
     GXColor light_color;
-    struct {
+    struct ColorOverlay_x8_t_light_rot1 {
         s32 unk : 6;
         s32 x : 13;
         s32 yz : 13;
     } light_rot1;
-    struct {
+    struct ColorOverlay_x8_t_light_rot2 {
         u32 x0_0 : 1;
         u32 x0_1 : 1;
         u32 x0_2 : 1;
@@ -341,7 +342,7 @@ union ColorOverlay_x8_t {
         s32 x : 12;
         s32 yz : 12;
     } light_rot2;
-    struct {
+    struct ColorOverlay_x8_t_unk {
         u32 unk : 6;
         u32 timer : 26;
     } unk;
@@ -359,7 +360,7 @@ struct ColorOverlay {
     s32 x1c;                          // 0x1c
     s32 x20;                          // 0x20
     s32 x24;                          // 0x24
-    union {
+    union ColorOverlay_x28_colanim {
         enum_t i;
         struct ColorOverlay_UnkInner* ptr;
     } x28_colanim;            // 0x28, id for the color animation in effect
@@ -494,6 +495,20 @@ struct DynamicsDesc {
 struct BoneDynamicsDesc {
     enum_t bone_id;
     DynamicsDesc dyn_desc;
+};
+
+/// A #DynamicsDesc as stored in archives: the parameters @c lb_80011710
+/// copies into a runtime one.
+struct DynamicsTemplate {
+    /* +0 */ struct lb_00F9_UnkDesc1Inner* params DAT_COUNT(count);
+    /* +4 */ unsigned int count;
+    /* +8 */ Vec3 pos;
+};
+
+/// A #BoneDynamicsDesc as stored in archives.
+struct BoneDynamicsTemplate {
+    enum_t bone_id;
+    DynamicsTemplate dyn_desc;
 };
 
 struct lb_8000FD18_t {
@@ -999,12 +1014,12 @@ union CmdUnion {
 struct CommandInfo {
     f32 timer;       // 0x00
     f32 frame_count; // 0x04
-    union {
+    union CommandInfo_x8 {
         u32* ptr[1]; ///< @todo Hack to match #Command_04
         /// @todo eventually clean this up, probably have each struct as its
         /// own union?
         CmdUnion* u;
-    };
+    } x8;
     u32 loop_count; // 0x0C
     union CmdUnion*
         event_return[3]; // 0x10 - Array Size is purely made-up for now

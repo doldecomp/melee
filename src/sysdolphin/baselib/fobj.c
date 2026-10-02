@@ -111,12 +111,14 @@ void HSD_FObjStopAnimAll(HSD_FObj* fobj, void* obj,
     }
 }
 
+union parseFloat_u {
+    f32 f;
+    u32 d;
+};
+
 static f32 parseFloat(u8** pos, u8 frac)
 {
-    union {
-        f32 f;
-        u32 d;
-    } u;
+    union parseFloat_u u;
     f32 numer;
     s32 denom;
 

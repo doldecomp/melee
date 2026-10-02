@@ -184,7 +184,7 @@ typedef struct grGb_StageAttr {
     /* 0x6C */ f32 kame_ud_scale;
     /* 0x70 */ s16 kame_dir_prob[4];
     /* 0x78 */ f32 kame_item_prob;
-    /* 0x7C */ struct {
+    /* 0x7C */ struct grGb_StageAttr_items {
         s16 kind;
         s16 weight;
     } items[10];
@@ -1190,7 +1190,7 @@ void grGreatBay_801F67A4(Vec3* vec, f32 arg8)
     }
 }
 
-DynamicsDesc* grGreatBay_801F680C(enum_t unused)
+lbColl_80008D30_arg1* grGreatBay_801F680C(enum_t unused)
 {
     return NULL;
 }

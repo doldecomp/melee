@@ -50,8 +50,8 @@ void it_802D5CF8(Item_GObj* gobj)
     Item* ip = GET_ITEM(gobj);
     ip->xDAC_itcmd_var0 = 0;
     ip->xDB0_itcmd_var1 = 0;
-    ip->xDD4_itemVar.hinoarashi.x60.b0 = false;
-    ip->xDD4_itemVar.hinoarashi.x60.b1 = false;
+    ip->xDD4_itemVar.hinoarashi.x60.x0.b0 = false;
+    ip->xDD4_itemVar.hinoarashi.x60.x0.b1 = false;
     ip->xDD4_itemVar.hinoarashi.x64 = 0.0f;
     it_80279CDC(gobj, ip->scl);
     Item_8026AE84(ip, 0x2734, 0x7FU, 0x40U);
@@ -64,8 +64,8 @@ void it_802D5D7C(HSD_GObj* gobj)
     Vec3 pos;
 
     if (ip->xDAC_itcmd_var0 != 0) {
-        if (!ip->xDD4_itemVar.hinoarashi.x60.b0) {
-            ip->xDD4_itemVar.hinoarashi.x60.b0 = true;
+        if (!ip->xDD4_itemVar.hinoarashi.x60.x0.b0) {
+            ip->xDD4_itemVar.hinoarashi.x60.x0.b0 = true;
             efSync_Spawn(0x473, gobj, ip->xBBC_dynamicBoneTable->bones[2]);
         }
         lb_8000B1CC(ip->xBBC_dynamicBoneTable->bones[2], NULL, &pos);
@@ -74,7 +74,7 @@ void it_802D5D7C(HSD_GObj* gobj)
     }
     if (ip->xDB0_itcmd_var1 != 0) {
         efLib_DestroyAll(gobj);
-        ip->xDD4_itemVar.hinoarashi.x60.b1 = true;
+        ip->xDD4_itemVar.hinoarashi.x60.x0.b1 = true;
         ip->xDB0_itcmd_var1 = 0;
     }
 }
@@ -112,7 +112,7 @@ void it_802D5F34(HSD_GObj* gobj)
     it_802754BC(gobj);
     it_80273454(gobj);
     ip->on_accessory = it_802D5D7C;
-    ip->xDD1_flag.b1 = true;
+    ip->xDD1_flag.x0.b1 = true;
 }
 
 bool itHinoarashi_UnkMotion1_Anim(Item_GObj* gobj)
@@ -122,8 +122,8 @@ bool itHinoarashi_UnkMotion1_Anim(Item_GObj* gobj)
     if (!it_80272C6C(gobj)) {
         return true;
     }
-    if (ip->xDD4_itemVar.hinoarashi.x60.b0 &&
-        !ip->xDD4_itemVar.hinoarashi.x60.b1)
+    if (ip->xDD4_itemVar.hinoarashi.x60.x0.b0 &&
+        !ip->xDD4_itemVar.hinoarashi.x60.x0.b1)
     {
         if (!ip->xDD4_itemVar.hinoarashi.x64) {
             ip->xDD4_itemVar.hinoarashi.x64 = attr->x8;
@@ -273,7 +273,7 @@ void it_802D64B8(HSD_GObj* gobj, Vec3* pos, u32 arg2, f32 facing_dir)
     spawn.vel.x = spawn.vel.y = spawn.vel.z = 0.0f;
     spawn.x0_parent_gobj = ip->owner;
     spawn.x4_parent_gobj2 = gobj;
-    spawn.x44_flag.b0 = true;
+    spawn.x44_flag.x0.b0 = true;
     spawn.x40 = arg2;
     {
         Item_GObj* new_gobj = Item_80268B18(&spawn);

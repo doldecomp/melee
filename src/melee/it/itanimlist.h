@@ -28,7 +28,7 @@
 
 /* 279AF0 */ void it_80279AF0(Item_GObj*, CommandInfo*);
 /* 279B10 */ void it_80279B10(Item_GObj*, CommandInfo*);
-/* 279B30 */ void fn_80279B30(Item_GObj*, CommandInfo*, int arg2);
+/* 279B30 */ void fn_80279B30(Item_GObj*, CommandInfo*, int);
 /* 279B64 */ void it_80279B64(Item*);
 /* 279B88 */ void it_80279B88(Item*, s32, s32);
 /* 279BBC */ void it_80279BBC(Item*);

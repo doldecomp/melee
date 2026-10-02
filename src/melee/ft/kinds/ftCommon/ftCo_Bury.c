@@ -63,15 +63,15 @@ void ftCo_800C0874(Fighter_GObj* gobj, UNK_T arg1, ftCommon_BuryType arg2)
     }
 }
 
-void ftCo_800C08A0(Fighter_GObj* gobj, Fighter_GObj* arg1, DynamicsDesc* arg2,
-                   ftCommon_BuryType arg3)
+void ftCo_800C08A0(Fighter_GObj* gobj, Fighter_GObj* arg1,
+                   lbColl_80008D30_arg1* arg2, ftCommon_BuryType arg3)
 {
     float f;
     FighterHurtCapsule* p_hurt;
     struct SmallerHitCapsule hit;
     int hurt_idx;
     Fighter* fp = GET_FIGHTER(gobj);
-    f = ftColl_800765F0(fp, NULL, arg2->count);
+    f = ftColl_800765F0(fp, NULL, arg2->damage);
     hurt_idx = 0;
     switch (arg3) {
     case BuryType_Unk2:
@@ -87,7 +87,7 @@ void ftCo_800C08A0(Fighter_GObj* gobj, Fighter_GObj* arg1, DynamicsDesc* arg2,
     }
     if (ftColl_80076640(fp, &f) != 0) {
         ftColl_80076764(3, arg3, arg1, arg2, fp, &fp->hurt_capsules[hurt_idx]);
-        lbColl_80008D30((HitCapsule*) &hit, (lbColl_80008D30_arg1*) arg2);
+        lbColl_80008D30((HitCapsule*) &hit, arg2);
         ftColl_80078384(fp, &fp->hurt_capsules[hurt_idx], (HitCapsule*) &hit);
     }
     pl_8003EC30(fp->player_idx, fp->is_sub_fighter, arg3, f);
@@ -168,7 +168,7 @@ void ftCo_800C0B20(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     int hurt_idx;
-    DynamicsDesc* unk_anim;
+    lbColl_80008D30_arg1* unk_anim;
     if (fp->bury_timer_1 == 0) {
         CollData* coll = &fp->coll_data;
         unk_anim = NULL;
@@ -188,15 +188,14 @@ void ftCo_800C0B20(Fighter_GObj* gobj)
             HitCapsule hit;
             float f;
             fp = GET_FIGHTER(gobj);
-            f = ftColl_800765F0(fp, NULL, unk_anim->count);
+            f = ftColl_800765F0(fp, NULL, unk_anim->damage);
             hurt_idx = 0;
             fp->bury_timer_1 = p_ftCommonData->bury_timer_unk1;
             if (ftColl_80076640(fp, &f)) {
                 ftColl_80076764(3, 1, 0, unk_anim, fp,
                                 &fp->hurt_capsules[hurt_idx]);
 
-                /// @todo Eliminate cast
-                lbColl_80008D30(&hit, (lbColl_80008D30_arg1*) unk_anim);
+                lbColl_80008D30(&hit, unk_anim);
 
                 ftColl_80078384(fp, &fp->hurt_capsules[hurt_idx], &hit);
             }

@@ -3,11 +3,8 @@
 
 #include <Runtime/platform.h>
 
-#include <melee/it/forward.h>
-
 #include <dolphin/mtx.h>
-
-struct it_8026C47C_arg0_t;
+#include <melee/it/types.h>
 
 /* 26C47C */ void it_8026C47C(struct it_8026C47C_arg0_t*);
 /* 26C65C */ ItemKind it_8026C65C(ItemPickTable*);

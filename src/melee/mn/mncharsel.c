@@ -49,28 +49,8 @@ static u8 mnCharSel_804D50D0[8] = { 2, 0, 1, 0, 5, 3, 4, 0 };
 static u8 mnCharSel_804D50D8[8] = { 2, 0, 8, 1, 7, 7, 7, 7 };
 static u8 mnCharSel_804D50E0[3] = { 0, 1, 3 };
 
-typedef struct MnSelectChrModels {
-    /* 0x0 */ StaticModelDesc background;
-    /* 0x10 */ StaticModelDesc hand;
-    /* 0x20 */ StaticModelDesc token;
-    /* 0x30 */ StaticModelDesc menu;
-    /* 0x40 */ StaticModelDesc press_start;
-    /* 0x50 */ StaticModelDesc debug_camera;
-    /* 0x60 */ StaticModelDesc regend_menu;
-    /* 0x70 */ StaticModelDesc regend_options;
-    /* 0x80 */ StaticModelDesc door;
-} MnSelectChrModels;
-
-typedef struct MnSelectChrDataTable {
-    /* 0x00 */ HSD_CObjDesc* cam;
-    /* 0x04 */ HSD_LightDesc* light0;
-    /* 0x08 */ HSD_LightDesc* light1;
-    /* 0x0C */ HSD_FogDesc* fog;
-    /* 0x10 */ MnSelectChrModels models;
-} MnSelectChrDataTable;
-
 static CSSData* mnCharSel_804D6CB0;
-static MnSelectChrDataTable* css_data_table;
+static struct MnSelectChrDataTable* css_data_table;
 static HSD_GObj* mnCharSel_804D6CB8;
 static HSD_GObj* mnCharSel_804D6CBC;
 static HSD_JObj* mnCharSel_804D6CC0;
@@ -912,13 +892,15 @@ static inline HSD_JObj* animateJoint(HSD_JObj* root, u8 joint, u32 mask,
     return jobj;
 }
 
+struct animateJointPadded_state {
+    HSD_JObj* jobj;
+    u8 pad[8];
+};
+
 static inline HSD_JObj* animateJointPadded(HSD_JObj* root, u8 joint, u32 mask,
                                            f32 frame)
 {
-    struct {
-        HSD_JObj* jobj;
-        u8 pad[8];
-    } state;
+    struct animateJointPadded_state state;
     HSD_JObj* cc0;
     HSD_JObj* cc1;
     lb_80011E24(root, &state.jobj, joint, -1);
@@ -1182,11 +1164,13 @@ static inline s32 getHandicapValue(int port)
     return hval != 0 ? hval : 1;
 }
 
+struct mnCharSel_8025DB34_team {
+    s32 v;
+};
+
 void mnCharSel_8025DB34(u8 arg0)
 {
-    struct {
-        s32 v;
-    } team;
+    struct mnCharSel_8025DB34_team team;
     HSD_JObj* sp90;
     f32 anim_frame;
     u8 joint;
@@ -3360,14 +3344,16 @@ static inline void animateCharModel(HSD_JObj* jobj, f32 frame)
                     AOBJ_ARG_AOV, 0, 0);
 }
 
+union fn_80262648_carrier {
+    CSSData* css;
+    struct CSSCharModel** bd0;
+    struct CSSCharModel* model;
+};
+
 void fn_80262648(HSD_GObj* gobj)
 {
     HSD_JObj* sp24;
-    union {
-        CSSData* css;
-        struct CSSCharModel** bd0;
-        struct CSSCharModel* model;
-    } carrier;
+    union fn_80262648_carrier carrier;
     struct CSSCharModel* model;
     HSD_JObj* jobj = (carrier.model = gobj->user_data, model = carrier.model,
                       GET_JOBJ(gobj));
@@ -5313,8 +5299,9 @@ void mnCharSel_Scene_OnEnter(void* arg0)
         mnCharSel_804D6CD0 = lbArchive_LoadArchive("MnSlChr.usd");
         mnCharSel_804D6CD4 = lbArchive_LoadArchive("MnExtAll.usd");
     }
-    css_data_table = HSD_ArchiveGetPublicAddress(mnCharSel_804D6CD0,
-                                                 "MnSelectChrDataTable");
+    css_data_table =
+        HSD_ArchiveGetPublicAs(struct MnSelectChrDataTable, mnCharSel_804D6CD0,
+                               "MnSelectChrDataTable");
     css_models = &css_data_table->models;
     if (lbLang_IsSavedLanguageJP() != 0) {
         HSD_SisLib_803A62A0(0, "SdSlChr.dat", "SIS_SelCharData");

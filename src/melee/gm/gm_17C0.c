@@ -896,13 +896,15 @@ bool gm_8017D7AC(MatchExitInfo* arg0, Unk1PData* arg1, u8 arg2)
     return 1;
 }
 
+struct pick_random_ckind_scan {
+    s32 count;
+    u8* cursor;
+};
+
 static inline s32 pick_random_ckind(u8* arr, const u8* used_ckinds,
                                     const u8* preset_ckinds)
 {
-    struct {
-        s32 count;
-        u8* cursor;
-    } scan;
+    struct pick_random_ckind_scan scan;
     u8 temp;
     s32 j;
     s32 i;

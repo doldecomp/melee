@@ -550,7 +550,7 @@ HSD_GObj* ifStock_802F96D0(int a, int b, float x, float y)
 static inline struct lbl_8046B6A0_FighterMatchInfoFlags*
 ifStock_802F98E8_get_match_info(VsSceneState* data, int player)
 {
-    return &data->fighters[player].flags;
+    return &data->fighters[player].x4.flags;
 }
 
 static const GXColor ifStock_802F98E8_color1 = { 0x08, 0x08, 0x08, 0x80 };

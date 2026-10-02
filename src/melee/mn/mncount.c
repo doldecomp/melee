@@ -806,7 +806,7 @@ void mnCount_Create(void)
 
     archive = mn_804D6BB8;
     lbArchive_LoadSections(
-        archive, (void**) &model_desc.joint, "MenMainConCo_Top_joint",
+        archive, &model_desc.joint, "MenMainConCo_Top_joint",
         &model_desc.animjoint, "MenMainConCo_Top_animjoint",
         &model_desc.matanim_joint, "MenMainConCo_Top_matanim_joint",
         &model_desc.shapeanim_joint, "MenMainConCo_Top_shapeanim_joint", 0);

@@ -51,7 +51,7 @@ Item_GObj* it_80283AE4(Item_GObj* gobj, Vec3* pos, s32 arg2)
     }
     if (item_gobj != NULL) {
         Item* ip = GET_ITEM(item_gobj);
-        ip->xDD4_itemVar.heart.xDD8.b0 = true;
+        ip->xDD4_itemVar.heart.xDD8.x0.b0 = true;
         ip->xDD4_itemVar.heart.xDDC = arg2;
         Item_80267454(item_gobj);
     }
@@ -75,7 +75,7 @@ void itHeart_Logic8_Spawned(Item_GObj* gobj)
     ip->x40_vel.y = vars->x14;
     ip->x40_vel.z = 0.0F;
     ip->xDD4_itemVar.heart.xDD4_heal = vars->x0_heal;
-    ip->xDD4_itemVar.heart.xDD8.b0 = false;
+    ip->xDD4_itemVar.heart.xDD8.x0.b0 = false;
     ip->xDD4_itemVar.heart.xDDC = 0;
     it_80283DD4(gobj);
 }
@@ -83,7 +83,7 @@ void itHeart_Logic8_Spawned(Item_GObj* gobj)
 void itHeart_Logic8_Destroyed(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
-    if (ip->xDD4_itemVar.heart.xDD8.b0) {
+    if (ip->xDD4_itemVar.heart.xDD8.x0.b0) {
         gm_80473A18.x90[ip->xDD4_itemVar.heart.xDDC] = 0;
     }
 }

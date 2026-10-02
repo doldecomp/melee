@@ -1,6 +1,5 @@
 #include "efalt.h"
 
-#include <math.h>
 #include <placeholder.h>
 
 #include "eflib.h"

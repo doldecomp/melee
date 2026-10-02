@@ -35,6 +35,8 @@ MWCC_FLAGS = [
     "auto",
     "-i",
     "src",
+    "-i",
+    "libs/doldecomp/include",
     "-I-",
     "-i",
     "src/MSL",
@@ -65,6 +67,7 @@ def pcpp_import(in_file: Path, quiet: bool) -> str:
 
             includes = [
                 "src",
+                "libs/doldecomp/include",
                 "src/MSL",
                 "libs/dolphin/include",
             ]

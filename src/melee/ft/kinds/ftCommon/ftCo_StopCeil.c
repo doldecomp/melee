@@ -25,7 +25,7 @@ bool ftCo_8009EF68(Fighter_GObj* gobj)
 void ftCo_8009EFA4(Fighter_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
-    fp->throw_flags = 0;
+    fp->x2210.throw_flags = 0;
     {
         Vec3 vec;
         vec.x = 0;

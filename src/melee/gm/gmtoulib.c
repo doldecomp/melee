@@ -132,7 +132,7 @@ static s16 lbl_803D9E1C[][2] = {
 /* 4771C4 */ TmData gm_804771C4;   // must not be static
 
 int lbl_804D663C;
-u8 lbl_804D6638[0x4];
+HSD_Archive* lbl_804D6638;
 
 extern SceneDesc* lbl_804D666C;
 extern SceneDesc* lbl_804D6674;
@@ -1762,6 +1762,11 @@ static inline void gmTournament_InitBracket(s32 entrant_count, f32 anim_frame,
     fn_8018A970(entrant_count);
 }
 
+typedef struct CObjData {
+    f32 pos[9];
+    struct lbl_803D9DD0_t cobj_data;
+} CObjData;
+
 /// Initializes the tournament bracket camera and optionally resets bracket
 /// data. Removes all existing GObjs from two entity lists, inits lbl_80473AB8
 /// entries, creates camera GObj with CObjDesc loaded from lbl_803B7CA8 rodata.
@@ -1794,10 +1799,6 @@ void fn_8018E618(int arg0, f32 farg0, int arg1)
 
     gobj = GObj_Create(9, 20, 1);
     {
-        typedef struct CObjData {
-            f32 pos[9];
-            struct lbl_803D9DD0_t cobj_data;
-        } CObjData;
         HSD_CObj* cobj = HSD_CObjLoadDesc((HSD_CObjDesc*) &cam);
         CObjData* cobj_data = (CObjData*) &lbl_803D9DAC;
         cobj_data->cobj_data.cobj = cobj;

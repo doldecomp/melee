@@ -193,7 +193,7 @@ grIceMt_801FA0BC(struct grIceMt_GObj9_GObj10_UnderUpperIdPair* ids);
 /* 1FA4CC */ static int fn_801FA4CC(int num);
 /* 1FA500 */ static int grIceMt_801FA500(HSD_GObj*, HSD_JObj*);
 /* 1FA854 */ static void grIceMt_801FA854(void);
-/* 1FA8F8 */ static DynamicsDesc* grIceMt_801FA8F8(enum_t id);
+/* 1FA8F8 */ static lbColl_80008D30_arg1* grIceMt_801FA8F8(enum_t id);
 /* 1FA900 */ static bool grIceMt_801FA900(Vec3* a, int id, HSD_JObj* jobj);
 
 static HSD_GObj* grIm_804D69E8;
@@ -202,7 +202,7 @@ static HSD_GObj* grIm_804D69F0;
 static struct grIceMt_YakumonoParam* yakumono_param;
 
 typedef struct GrIm825C {
-    struct {
+    struct GrIm825C_hi {
         u16 x0;
         u16 x2;
         u16 x4;
@@ -1006,13 +1006,15 @@ void stageGObj2_Callback3(Ground_GObj* gobj)
     }
 }
 
+struct stageGObj3_OnInit_sp14 {
+    GrIm588 x0;
+    GrIm588 x4;
+};
+
 void stageGObj3_OnInit(Ground_GObj* arg0)
 {
     Ground* gp = GET_GROUND(arg0);
-    struct {
-        GrIm588 x0;
-        GrIm588 x4;
-    } sp14;
+    struct stageGObj3_OnInit_sp14 sp14;
     PAD_STACK(4);
     Ground_InitMapColl(arg0->hsd_obj, gp->map_id);
     grAnime_801C8138(arg0, gp->map_id, 0);
@@ -1060,6 +1062,11 @@ void stageGObj3_Callback3(Ground_GObj* gobj)
     }
 }
 
+struct stageGObj4_OnInit_sp14 {
+    GrIm588 x0;
+    GrIm588 x4;
+};
+
 void stageGObj4_OnInit(Ground_GObj* arg0)
 {
     HSD_JObj* jobj3;
@@ -1067,10 +1074,7 @@ void stageGObj4_OnInit(Ground_GObj* arg0)
     HSD_JObj* jobj = arg0->hsd_obj;
     HSD_JObj* jobj2;
     s32 r;
-    struct {
-        GrIm588 x0;
-        GrIm588 x4;
-    } sp14;
+    struct stageGObj4_OnInit_sp14 sp14;
     PAD_STACK(0x4);
     Ground_801C0498();
     Ground_InitMapColl(jobj, gp->map_id);
@@ -1178,13 +1182,15 @@ void stageGObj5_Callback3(Ground_GObj* gobj)
     }
 }
 
+struct stageGObj6_OnInit_sp14 {
+    GrIm588 x0;
+    GrIm588 x4;
+};
+
 void stageGObj6_OnInit(Ground_GObj* arg0)
 {
     Ground* gp = GET_GROUND(arg0);
-    struct {
-        GrIm588 x0;
-        GrIm588 x4;
-    } sp14;
+    struct stageGObj6_OnInit_sp14 sp14;
     PAD_STACK(4);
     Ground_InitMapColl(arg0->hsd_obj, gp->map_id);
     grAnime_801C8138(arg0, gp->map_id, 0);
@@ -1306,7 +1312,7 @@ void grIceMt_801F8CDC(Ground_GObj* gobj, s16* joint_indices, int block_num,
         UnkArchiveStruct* archive;
 
         archive = grDatFiles_GetArchive();
-        jobj_desc = archive->unk4->unk8[7].unk0;
+        jobj_desc = archive->unk4->unk8[7].joint;
 
         HSD_ASSERT(2004, block_num<=BLOCK_COLL_JOBJ_MAX);
 
@@ -2038,7 +2044,7 @@ void onJointCollision(void* user_data, int joint_id, CollData* coll,
         if (gobj != NULL) {
             gp2 = gobj->user_data;
             if (gp2 != NULL) {
-                ((UnkFlagStruct*) &gp2->u.icemt.x14)->b4 = 1;
+                ((UnkFlagStruct*) &gp2->u.icemt.x14)->x0.b4 = 1;
             }
         }
     }
@@ -2070,7 +2076,7 @@ void grIceMt_801FA854(void)
     return;
 }
 
-DynamicsDesc* grIceMt_801FA8F8(enum_t id)
+lbColl_80008D30_arg1* grIceMt_801FA8F8(enum_t id)
 {
     return 0;
 }

@@ -63,7 +63,7 @@ typedef struct grHeal_UnkData {
 /* 21F708 */ static void stageGObj4_Callback3(Ground_GObj*);
 /* 21F70C */ static int grHeal_8021F70C(enum_t character_id);
 /* 21F79C */ static void grHeal_8021F79C(s32, s32, s32);
-/* 21F830 */ static DynamicsDesc* grHeal_8021F830(enum_t);
+/* 21F830 */ static lbColl_80008D30_arg1* grHeal_8021F830(enum_t);
 /* 21F838 */ static bool grHeal_8021F838(Vec3*, int, HSD_JObj*);
 
 static Vec3 const grHeal_803B84A8 = { 0.0F, 40.0F, 0.0F };
@@ -424,12 +424,12 @@ void grHeal_8021F79C(s32 arg0, s32 idx, s32 arg2)
     bobomb_rain.x4 = NULL;
     bobomb_rain.x14 = arg0;
     bobomb_rain.x18 = arg2;
-    bobomb_rain.x1C.b0 = 1;
+    bobomb_rain.x1C.x0.b0 = 1;
     lb_8000B1CC(jobj, NULL, &bobomb_rain.x8_vec);
     it_8026BE84(&bobomb_rain);
 }
 
-DynamicsDesc* grHeal_8021F830(enum_t arg0)
+lbColl_80008D30_arg1* grHeal_8021F830(enum_t arg0)
 {
     return NULL;
 }

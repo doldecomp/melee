@@ -217,7 +217,7 @@ static inline void Item_InitSpawnCommonFields(SpawnItem* spawn,
     spawn->vel.x = spawn->vel.y = spawn->vel.z = 0.0F;
     spawn->x0_parent_gobj = parent;
     spawn->x4_parent_gobj2 = spawn->x0_parent_gobj;
-    spawn->x44_flag.b0 = initial_collision;
+    spawn->x44_flag.x0.b0 = initial_collision;
     spawn->x40 = 0;
 }
 
