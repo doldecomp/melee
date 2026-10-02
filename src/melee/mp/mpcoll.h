@@ -37,7 +37,7 @@
 /* 043680 */ void mpColl_80043680(CollData*, Vec3*);
 /* 0436D8 */ void mpCollSetFacingDir(CollData*, int facing_dir);
 /* 0436E4 */ void mpColl_800436E4(CollData*, float);
-/* 043754 */ bool mpColl_80043754(mpColl_Callback, CollData*, u32);
+/* 043754 */ bool mpColl_80043754(mpColl_Callback, CollData*, int);
 /* 0439FC */ void mpColl_800439FC(CollData*);
 /* 043ADC */ void mpColl_80043ADC(CollData*);
 /* 043BBC */ bool mpColl_80043BBC(CollData*, int* line_id_out);
@@ -57,8 +57,8 @@
 /* 0454A4 */ bool mpColl_800454A4_RightWall(CollData*);
 /* 045B74 */ bool mpColl_80045B74_LeftWall(CollData*);
 /* 046224 */ bool mpColl_80046224_LeftWall(CollData*);
-/* 046904 */ bool mpColl_80046904(CollData*, u32 flags);
-/* 046F78 */ bool mpColl_80046F78(CollData*, u32);
+/* 046904 */ bool mpColl_80046904(CollData*, int flags);
+/* 046F78 */ bool mpColl_80046F78(CollData*, int);
 /* 0471F8 */ bool mpColl_800471F8(CollData*);
 /* 04730C */ bool mpColl_8004730C(CollData*, ftCollisionBox*);
 /* 0473CC */ bool mpColl_800473CC(CollData*);
@@ -109,7 +109,7 @@
 /* 04B894 */ bool mpColl_8004B894_RightWall(CollData*);
 /* 04BDD4 */ bool mpColl_8004BDD4_LeftWall(CollData*);
 /* 04C328 */ bool mpColl_8004C328_Ceiling(CollData*, int line_id);
-/* 04C534 */ bool mpColl_8004C534(CollData*, u32);
+/* 04C534 */ bool mpColl_8004C534(CollData*, int);
 /* 04C750 */ bool mpColl_8004C750(CollData*);
 /* 04C864 */ void mpCollSqueezeHorizontal(CollData*, bool airborne, float left,
                                           float right);

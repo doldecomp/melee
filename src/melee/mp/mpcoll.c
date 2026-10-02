@@ -904,7 +904,7 @@ static inline float max_inline(float a, float b)
     return (a > b) ? a : b;
 }
 
-bool mpColl_80043754(mpColl_Callback cb, CollData* coll, u32 flags)
+bool mpColl_80043754(mpColl_Callback cb, CollData* coll, int flags)
 {
     Vec3 vel;
 
@@ -2329,7 +2329,7 @@ static inline void mpCollFloorInline(CollData* coll, bool ecb_unlocked,
     floorWallHug(coll, ecb_unlocked, squeeze_flags, &wall_id);
 }
 
-bool mpColl_80046904(CollData* coll, u32 flags)
+bool mpColl_80046904(CollData* coll, int flags)
 {
     bool prev_b6;
     int squeeze_flags;
@@ -2535,7 +2535,7 @@ static inline bool mpColl_80046F78_inline(CollData* coll, int* line_id_out)
     }
 }
 
-bool mpColl_80046F78(CollData* coll, u32 _)
+bool mpColl_80046F78(CollData* coll, int _)
 {
     int line_id;
     float y; // sp10
@@ -2650,7 +2650,7 @@ static inline bool inline2(CollData* coll, int i)
     } else {
         mpColl_IsEcbTiny = false;
     }
-    result = mpColl_80043754((void*) mpColl_8004ACE4, coll, i);
+    result = mpColl_80043754(mpColl_8004ACE4, coll, i);
     mpCollEnd(coll, result, false);
     return result;
 }
@@ -4307,7 +4307,7 @@ bool mpColl_8004C328_Ceiling(CollData* coll, int line_id)
     return false;
 }
 
-bool mpColl_8004C534(CollData* coll, u32 flags)
+bool mpColl_8004C534(CollData* coll, int flags)
 {
     bool hit_ceiling = false;
 

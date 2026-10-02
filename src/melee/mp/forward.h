@@ -59,7 +59,7 @@ typedef void (*mpLib_JointCollisionCallback)(void* user_data, int joint_id,
                                              mpLib_GroundEnum ground_kind,
                                              float delta_y);
 
-typedef bool (*mpColl_Callback)(CollData*, u32);
+typedef bool (*mpColl_Callback)(CollData*, int);
 
 typedef enum CollLineKind {
     CollLine_Floor = 1 << 0,
