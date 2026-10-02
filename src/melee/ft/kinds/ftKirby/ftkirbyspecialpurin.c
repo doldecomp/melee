@@ -1,3 +1,5 @@
+/// @file
+/// Neutral Special - Rollout (ftKirby Jigglypuff Copy)
 #include "ftkirbyspecialpurin.h"
 
 #include <melee/ft/forward.h>

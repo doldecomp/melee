@@ -1,3 +1,5 @@
+/// @file
+/// Up Special - Final Cutter
 #include "ftkirbyspecialhi.h"
 
 #include <melee/ft/forward.h>

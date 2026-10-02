@@ -1,3 +1,5 @@
+/// @file
+/// Neutral Special - Rollout (ftKirby Jigglypuff Copy)
 #ifndef GALE01_100DE0
 #define GALE01_100DE0
 

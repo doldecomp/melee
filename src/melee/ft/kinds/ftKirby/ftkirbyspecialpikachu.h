@@ -1,3 +1,5 @@
+/// @file
+/// Neutral Special - Thunder Jolt (ftKirby Pikachu Copy)
 #ifndef GALE01_0F9FD4
 #define GALE01_0F9FD4
 

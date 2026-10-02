@@ -1,3 +1,5 @@
+/// @file
+/// Neutral Special - Shadow Ball (ftKirby Mewtwo Copy)
 #include "ftkirbyspecialmewtwo.h"
 
 #include <melee/ft/forward.h>
@@ -98,7 +100,7 @@ bool ftKb_SpecialNMt_80106FEC(Fighter_GObj* gobj)
     return true;
 }
 
-/// @brief Clears Mewtwo copy ability state and effects.
+/// Clears Mewtwo copy ability state and effects.
 void ftKb_SpecialNMt_80107040(Fighter_GObj* gobj)
 {
     Fighter* fp;
@@ -121,7 +123,7 @@ void ftKb_SpecialNMt_80107040(Fighter_GObj* gobj)
     fp->u.kb.xA0 = NULL;
 }
 
-/// @brief Full cleanup of Mewtwo copy ability state.
+/// Full cleanup of Mewtwo copy ability state.
 void ftKb_SpecialNMt_8010709C(Fighter_GObj* gobj)
 {
     Vec3 unused;
@@ -147,7 +149,7 @@ void ftKb_SpecialNMt_8010709C(Fighter_GObj* gobj)
     efLib_DestroyAll(gobj);
 }
 
-/// @brief Mewtwo copy cleanup with charge check.
+/// Mewtwo copy cleanup with charge check.
 void ftKb_SpecialNMt_80107130(Fighter_GObj* gobj)
 {
     Vec3 unused;

@@ -1,3 +1,5 @@
+/// @file
+/// Neutral Special - Thunder Jolt (ftKirby Pikachu Copy)
 #include "ftkirbyspecialpikachu.h"
 
 #include <melee/ft/forward.h>

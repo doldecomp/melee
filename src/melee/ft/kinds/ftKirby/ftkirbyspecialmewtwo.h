@@ -1,3 +1,5 @@
+/// @file
+/// Neutral Special - Shadow Ball (ftKirby Mewtwo Copy)
 #ifndef GALE01_106F44
 #define GALE01_106F44
 

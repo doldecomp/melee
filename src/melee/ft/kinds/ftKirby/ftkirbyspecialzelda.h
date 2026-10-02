@@ -1,3 +1,5 @@
+/// @file
+/// Neutral Special - Nayru's Love (ftKirby Zelda Copy)
 #ifndef GALE01_105B2C
 #define GALE01_105B2C
 

@@ -1,3 +1,5 @@
+/// @file
+/// Dash Attack - Burning
 #ifndef GALE01_0F1FDC
 #define GALE01_0F1FDC
 

@@ -1,3 +1,5 @@
+/// @file
+/// Neutral Special - Bow (ftKirby Link Copy)
 #include <melee/ft/forward.h>
 
 #include "ftkirby.h"

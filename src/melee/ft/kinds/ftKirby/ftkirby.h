@@ -1,3 +1,5 @@
+/// @file
+/// Kirby character module
 #ifndef GALE01_0EE528
 #define GALE01_0EE528
 

@@ -1,3 +1,5 @@
+/// @file
+/// Kirby character data
 #include "ftkirby.h"
 
 char ftKb_Init_DatFilename[] = "PlKb.dat";

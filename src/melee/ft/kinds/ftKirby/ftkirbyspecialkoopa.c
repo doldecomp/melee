@@ -1,3 +1,5 @@
+/// @file
+/// Neutral Special - Fire Breath (ftKirby Bowser Copy)
 #include <melee/ft/forward.h>
 
 #include "ftkirby.h"

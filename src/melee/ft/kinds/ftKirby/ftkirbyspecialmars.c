@@ -1,3 +1,5 @@
+/// @file
+/// Neutral Special - Shield Breaker (ftKirby Marth Copy)
 #include "ftkirbyspecialmars.h"
 
 #include <melee/ft/forward.h>

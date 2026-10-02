@@ -1,3 +1,5 @@
+/// @file
+/// Neutral Special - Giant Punch (ftKirby Donkey Kong Copy)
 #ifndef GALE01_0FF8EC
 #define GALE01_0FF8EC
 

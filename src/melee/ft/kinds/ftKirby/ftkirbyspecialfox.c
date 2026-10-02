@@ -1,3 +1,5 @@
+/// @file
+/// Neutral Special - Blaster (ftKirby Fox Copy)
 #include <melee/ft/forward.h>
 
 #include "ftkirby.h"

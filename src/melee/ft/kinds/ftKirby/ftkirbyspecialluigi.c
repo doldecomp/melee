@@ -1,3 +1,5 @@
+/// @file
+/// Neutral Special - Fireball (ftKirby Luigi Copy)
 #include <melee/ft/forward.h>
 #include <melee/ft/kinds/ftLuigi/forward.h>
 

@@ -1,3 +1,5 @@
+/// @file
+/// Kirby types and constants forward declarations
 #ifndef MELEE_FT_CHARA_FTKIRBY_FORWARD_H
 #define MELEE_FT_CHARA_FTKIRBY_FORWARD_H
 

@@ -1,3 +1,5 @@
+/// @file
+/// Neutral Special - Fireball (ftKirby Mario Copy)
 #include <melee/ft/forward.h>
 #include <sysdolphin/baselib/forward.h>
 

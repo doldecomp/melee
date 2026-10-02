@@ -1,3 +1,5 @@
+/// @file
+/// Yoshi Egg item interaction
 #ifndef GALE01_10AA2C
 #define GALE01_10AA2C
 

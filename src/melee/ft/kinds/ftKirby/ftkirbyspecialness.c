@@ -1,3 +1,5 @@
+/// @file
+/// Neutral Special - PK Flash (ftKirby Ness Copy)
 #include <melee/ft/forward.h>
 #include <sysdolphin/baselib/forward.h>
 

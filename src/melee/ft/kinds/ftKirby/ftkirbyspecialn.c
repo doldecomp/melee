@@ -1,3 +1,5 @@
+/// @file
+/// Neutral Special - Inhale, Swallow, and Copy Ability
 #include <melee/ft/forward.h>
 #include <sysdolphin/baselib/forward.h>
 

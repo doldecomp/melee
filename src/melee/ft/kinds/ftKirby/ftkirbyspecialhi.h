@@ -1,3 +1,5 @@
+/// @file
+/// Up Special - Final Cutter
 #ifndef GALE01_0F21E8
 #define GALE01_0F21E8
 

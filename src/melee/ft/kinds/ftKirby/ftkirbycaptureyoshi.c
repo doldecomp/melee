@@ -1,3 +1,5 @@
+/// @file
+/// Yoshi Egg capture logic
 #include "ftkirbycaptureyoshi.h"
 
 #include <melee/ft/forward.h>

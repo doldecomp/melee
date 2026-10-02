@@ -1,3 +1,5 @@
+/// @file
+/// Neutral Special - Shield Breaker (ftKirby Marth Copy)
 #ifndef GALE01_10B1F4
 #define GALE01_10B1F4
 

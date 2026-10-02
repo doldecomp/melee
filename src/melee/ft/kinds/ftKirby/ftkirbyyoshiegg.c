@@ -1,3 +1,5 @@
+/// @file
+/// Yoshi Egg item interaction
 #include "ftkirbyyoshiegg.h"
 
 #include <melee/ft/forward.h>

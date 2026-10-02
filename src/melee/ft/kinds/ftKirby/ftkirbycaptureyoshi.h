@@ -1,3 +1,5 @@
+/// @file
+/// Yoshi Egg capture logic
 #ifndef GALE01_10A930
 #define GALE01_10A930
 

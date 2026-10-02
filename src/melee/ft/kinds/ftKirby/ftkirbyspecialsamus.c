@@ -1,3 +1,5 @@
+/// @file
+/// Neutral Special - Charge Shot (ftKirby Samus Copy)
 #include <melee/ft/forward.h>
 
 #include "ftkirby.h"

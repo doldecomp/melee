@@ -1,3 +1,5 @@
+/// @file
+/// Kirby character module
 #include "ftkirby.h"
 
 #include <stddef.h>

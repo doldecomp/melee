@@ -1,3 +1,5 @@
+/// @file
+/// Neutral Special - Chef (ftKirby Mr. Game & Watch Copy)
 #ifndef GALE01_10D074
 #define GALE01_10D074
 

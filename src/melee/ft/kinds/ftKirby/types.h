@@ -1,3 +1,5 @@
+/// @file
+/// Kirby types and structs
 #ifndef MELEE_FT_CHARA_FTKIRBY_TYPES_H
 #define MELEE_FT_CHARA_FTKIRBY_TYPES_H
 

@@ -1,3 +1,5 @@
+/// @file
+/// Side Special - Hammer
 #include <melee/ft/forward.h>
 #include <sysdolphin/baselib/forward.h>
 

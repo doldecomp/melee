@@ -1,3 +1,5 @@
+/// @file
+/// Neutral Special - Nayru's Love (ftKirby Zelda Copy)
 #include "ftkirbyspecialzelda.h"
 
 #include <melee/ft/forward.h>

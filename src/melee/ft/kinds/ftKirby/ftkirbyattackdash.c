@@ -1,3 +1,5 @@
+/// @file
+/// Dash Attack - Burning
 #include "ftkirbyattackdash.h"
 
 #include <melee/ft/forward.h>

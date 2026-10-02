@@ -1,3 +1,5 @@
+/// @file
+/// Neutral Special - Egg Lay (ftKirby Yoshi Copy)
 #include <melee/ft/forward.h>
 #include <melee/ft/kinds/ftYoshi/forward.h>
 

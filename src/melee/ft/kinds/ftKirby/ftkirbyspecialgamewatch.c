@@ -1,3 +1,5 @@
+/// @file
+/// Neutral Special - Chef (ftKirby Mr. Game & Watch Copy)
 #include "ftkirbyspecialgamewatch.h"
 
 #include <melee/ft/forward.h>

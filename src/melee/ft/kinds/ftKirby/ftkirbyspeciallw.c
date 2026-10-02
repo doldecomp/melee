@@ -1,3 +1,5 @@
+/// @file
+/// Down Special - Stone
 #include <melee/ft/forward.h>
 #include <sysdolphin/baselib/forward.h>
 

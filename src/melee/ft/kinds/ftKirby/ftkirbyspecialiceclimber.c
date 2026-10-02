@@ -1,3 +1,5 @@
+/// @file
+/// Neutral Special - Ice Shot (ftKirby Ice Climbers Copy)
 #include "ftkirbyspecialiceclimber.h"
 
 #include <melee/ft/forward.h>

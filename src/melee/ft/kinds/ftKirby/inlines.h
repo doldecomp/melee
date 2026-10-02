@@ -1,3 +1,5 @@
+/// @file
+/// Kirby inline helper functions
 #ifndef MELEE_FT_CHARA_FTKIRBY_INLINES_H
 #define MELEE_FT_CHARA_FTKIRBY_INLINES_H
 

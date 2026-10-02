@@ -1,3 +1,5 @@
+/// @file
+/// Neutral Special - Toad (ftKirby Peach Copy)
 #ifndef GALE01_10C288
 #define GALE01_10C288
 

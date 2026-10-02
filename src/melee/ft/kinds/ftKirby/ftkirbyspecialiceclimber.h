@@ -1,3 +1,5 @@
+/// @file
+/// Neutral Special - Ice Shot (ftKirby Ice Climbers Copy)
 #ifndef GALE01_108CE8
 #define GALE01_108CE8
 

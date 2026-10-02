@@ -1,3 +1,5 @@
+/// @file
+/// Neutral Special - Giant Punch (ftKirby Donkey Kong Copy)
 #include "ftkirbyspecialdonkey.h"
 
 #include <melee/ft/forward.h>
