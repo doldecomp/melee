@@ -5266,17 +5266,16 @@ s32 mnCharSel_802640A0(void)
                 css->vs.start.players[mnCharSel_804D6CF0].color;
             mnCharSel_803F0DFC.doors[0].sel_icon_prev =
                 mnCharSel_803F0DFC.doors[0].sel_icon;
-            if (css->match_type != 0x17) {
-                goto doors_done;
+            if (css->match_type == 0x17) {
+                css->vs.start.players[mnCharSel_804D6CF1].slot_type = 1;
+                mnCharSel_803F0DFC.doors[1].p_kind = 1;
+                mnCharSel_803F0DFC.doors[1].costume =
+                    mnCharSel_804D6CB0->vs.start.players[mnCharSel_804D6CF1]
+                        .color;
+                mnCharSel_803F0DFC.doors[1].sel_icon_prev =
+                    mnCharSel_803F0DFC.doors[1].sel_icon;
             }
-            css->vs.start.players[mnCharSel_804D6CF1].slot_type = 1;
         }
-        mnCharSel_803F0DFC.doors[1].p_kind = 1;
-        mnCharSel_803F0DFC.doors[1].costume =
-            mnCharSel_804D6CB0->vs.start.players[mnCharSel_804D6CF1].color;
-        mnCharSel_803F0DFC.doors[1].sel_icon_prev =
-            mnCharSel_803F0DFC.doors[1].sel_icon;
-    doors_done:;
     } else {
         for (i = 0; i < (s32) mnCharSel_804D6CF5; i++) {
             GameRules* rules;
