@@ -341,15 +341,15 @@ void ftPc_Init_OnLoad(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftData* ftdata = fp->ft_data;
-    void** items = ftdata->x48_items;
+    union ftData_Item* items = ftdata->x48_items;
     fp->can_walljump = true;
     ftPk_Init_OnLoadForPichu(fp);
 
     {
         ftPichuAttributes* attrs = fp->dat_attrs;
-        it_8026B3F8(items[0], attrs->xDC);
-        it_8026B3F8(items[1], attrs->x14);
-        it_8026B3F8(items[2], attrs->x18);
+        it_8026B3F8(items[0].article, attrs->xDC);
+        it_8026B3F8(items[1].article, attrs->x14);
+        it_8026B3F8(items[2].article, attrs->x18);
     }
 }
 

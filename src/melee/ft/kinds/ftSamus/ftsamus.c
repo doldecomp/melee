@@ -272,16 +272,16 @@ void ftSs_Init_OnDeath(HSD_GObj* gobj)
 void ftSs_Init_OnLoad(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    void** item_list = fp->ft_data->x48_items;
+    union ftData_Item* item_list = fp->ft_data->x48_items;
 
     fp->can_walljump = true;
 
     PUSH_ATTRS(fp, ftSs_DatAttrs);
 
-    it_8026B3F8(item_list[0], It_Kind_Samus_Bomb);
-    it_8026B3F8(item_list[1], It_Kind_Samus_Charge);
-    it_8026B3F8(item_list[2], It_Kind_Samus_Missile);
-    it_8026B3F8(item_list[3], It_Kind_Samus_GBeam);
+    it_8026B3F8(item_list[0].article, It_Kind_Samus_Bomb);
+    it_8026B3F8(item_list[1].article, It_Kind_Samus_Charge);
+    it_8026B3F8(item_list[2].article, It_Kind_Samus_Missile);
+    it_8026B3F8(item_list[3].article, It_Kind_Samus_GBeam);
 }
 
 void ftSs_Init_80128428(HSD_GObj* gobj)
@@ -356,8 +356,8 @@ void ftSs_Init_CreateThrowGrappleBeam(HSD_GObj* gobj, s32 motion_state,
     Vec3 scale;
 
     Fighter* fp = getFighter(gobj);
-    void** item_list = fp->ft_data->x48_items;
-    struct UNK_SAMUS_S1* beam = item_list[4];
+    union ftData_Item* item_list = fp->ft_data->x48_items;
+    struct UNK_SAMUS_S1* beam = item_list[4].samus_grapple;
     ftCommon_SetAccessory(fp, beam->x0_joint);
 
     scale.x = scale.y = scale.z = fp->x34_scale.y;
