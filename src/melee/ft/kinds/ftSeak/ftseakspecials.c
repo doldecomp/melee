@@ -856,6 +856,28 @@ void ftSk_SpecialS_80111988(HSD_GObj* gobj)
     }
 }
 
+static inline void updateSpecialSEnd(HSD_GObj* gobj, Fighter* fp,
+                                     ftSeakAttributes* specialAttributes)
+{
+    s32 frame;
+    float end_frame;
+    HSD_GObj* item_gobj;
+
+    frame = fp->mv.sk.specials.x0;
+    end_frame = specialAttributes->x28;
+    if (frame < end_frame) {
+        item_gobj = fp->u.sk.x8;
+        if (frame == specialAttributes->x24) {
+            it_802BCF84(item_gobj);
+        }
+    } else if (frame == end_frame) {
+        item_gobj = fp->u.sk.x8;
+        it_802BB20C(item_gobj);
+        return;
+    }
+    ftSk_SpecialS_80110BCC(gobj);
+}
+
 void ftSk_SpecialSEnd_Anim(HSD_GObj* gobj)
 {
     u8 _[36];
@@ -863,33 +885,7 @@ void ftSk_SpecialSEnd_Anim(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     ftSeakAttributes* specialAttributes = fp->dat_attrs;
     fp->mv.sk.specials.x0 += 1;
-
-    {
-        s32 temp_r3 = fp->mv.sk.specials.x0;
-        float temp_f1 = specialAttributes->x28;
-
-        HSD_GObj* item_gobj;
-
-        if (temp_r3 < temp_f1) {
-            item_gobj = fp->u.sk.x8;
-
-            if (temp_r3 == specialAttributes->x24) {
-                it_802BCF84(item_gobj);
-            }
-
-            /// @todo Split inner function
-            goto inner_ret;
-        }
-
-        if (temp_r3 == temp_f1) {
-            item_gobj = fp->u.sk.x8;
-            it_802BB20C(item_gobj);
-        } else {
-        inner_ret:
-            ftSk_SpecialS_80110BCC(gobj);
-        }
-    }
-
+    updateSpecialSEnd(gobj, fp, specialAttributes);
     if (!ftAnim_IsFramesRemaining(gobj)) {
         ft_8008A2BC(gobj);
     }
@@ -897,36 +893,14 @@ void ftSk_SpecialSEnd_Anim(HSD_GObj* gobj)
 
 void ftSk_SpecialAirSEnd_Anim(HSD_GObj* gobj)
 {
-    u8 _[36];
+    u8 _[28];
 
-    Fighter* fp = gobj->user_data;
+    Fighter* fp = GET_FIGHTER(gobj);
     ftSeakAttributes* specialAttributes = fp->dat_attrs;
     fp->mv.sk.specials.x0 += 1;
-
-    {
-        s32 stateVar1 = fp->mv.sk.specials.x0;
-        float temp_f1 = specialAttributes->x28;
-
-        HSD_GObj* item_gobj;
-
-        if (stateVar1 < temp_f1) {
-            item_gobj = fp->u.sk.x8;
-            if (stateVar1 == specialAttributes->x24) {
-                it_802BCF84(item_gobj);
-            }
-            goto inner_ret;
-        }
-        if (stateVar1 == temp_f1) {
-            item_gobj = fp->u.sk.x8;
-            it_802BB20C(item_gobj);
-        } else {
-        inner_ret:
-            ftSk_SpecialS_80110BCC(gobj);
-        }
-
-        if (!ftAnim_IsFramesRemaining(gobj)) {
-            ftCo_Fall_Enter(gobj);
-        }
+    updateSpecialSEnd(gobj, fp, specialAttributes);
+    if (!ftAnim_IsFramesRemaining(gobj)) {
+        ftCo_Fall_Enter(gobj);
     }
 }
 

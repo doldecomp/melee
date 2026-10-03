@@ -152,28 +152,26 @@ bool itPikachutjoltground_UnkMotion0_Anim(Item_GObj* gobj)
     return it_80273130(gobj);
 }
 
+static inline bool isLinkBroken(Item_GObj* gobj, Item* ip)
+{
+    if (gobj != NULL && ip != NULL) {
+        if (ip->xDD4_itemVar.pikachujoltground.xDDC == NULL) {
+            return true;
+        }
+        if (it_802B3EFC(ip->xDD4_itemVar.pikachujoltground.xDDC) != gobj) {
+            return true;
+        }
+    }
+    return false;
+}
+
 bool itPikachutjoltground_UnkMotion1_Anim(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
-    bool flag;
     if (ip->xDD4_itemVar.pikachujoltground.xDDC == NULL) {
         return true;
     }
-    if ((gobj != NULL) && (ip != NULL)) {
-        if (ip->xDD4_itemVar.pikachujoltground.xDDC == NULL) {
-            flag = true;
-        } else if (it_802B3EFC(ip->xDD4_itemVar.pikachujoltground.xDDC) !=
-                   gobj)
-        {
-            flag = true;
-        } else {
-            goto block_8;
-        }
-    } else {
-    block_8:
-        flag = false;
-    }
-    if (flag == true) {
+    if (isLinkBroken(gobj, ip) == true) {
         return true;
     }
     if (itPikachutjoltground_UnkMotion0_Anim(gobj) == true) {
