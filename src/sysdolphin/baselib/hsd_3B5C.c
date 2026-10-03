@@ -646,134 +646,138 @@ static inline s32 hsd_803B6BE4_inline(char* src, s32 size, void* dst)
         return 0;
     }
     src_byte0 = &hsd_804D79BC[hsd_804D79C0];
-find_luma_quant:
-    if (*(u16*) hsd_804D79B8 == 0xFFDB) {
-        u8* zigzag;
-        s32 i;
+    for (;;) {
+        if (*(u16*) hsd_804D79B8 == 0xFFDB) {
+            u8* zigzag;
+            s32 i;
 
-        hsd_804D79B8 += 5;
-        zigzag = lbl_80431638;
-        for (i = 0; i < 0x40; i += 8) {
-            src_byte0 = hsd_804D79B8;
-            hsd_804D79B8 = src_byte0 + 1;
-            state.quant_table->luma[zigzag[0]] = *src_byte0;
-            src_byte1 = hsd_804D79B8;
-            hsd_804D79B8 = src_byte1 + 1;
-            state.quant_table->luma[zigzag[1]] = *src_byte1;
-            src_byte2 = hsd_804D79B8;
-            hsd_804D79B8 = src_byte2 + 1;
-            state.quant_table->luma[zigzag[2]] = *src_byte2;
-            src_byte3 = hsd_804D79B8;
-            hsd_804D79B8 = src_byte3 + 1;
-            state.quant_table->luma[zigzag[3]] = *src_byte3;
-            src_byte4 = hsd_804D79B8;
-            hsd_804D79B8 = src_byte4 + 1;
-            state.quant_table->luma[zigzag[4]] = *src_byte4;
-            src_byte5 = hsd_804D79B8;
-            hsd_804D79B8 = src_byte5 + 1;
-            state.quant_table->luma[zigzag[5]] = *src_byte5;
-            src_byte6 = hsd_804D79B8;
-            hsd_804D79B8 = src_byte6 + 1;
-            state.quant_table->luma[zigzag[6]] = *src_byte6;
-            src_byte7 = hsd_804D79B8;
-            hsd_804D79B8 = src_byte7 + 1;
-            quant_byte = zigzag[7];
-            zigzag += 8;
-            state.quant_table->luma[quant_byte] = *src_byte7;
+            hsd_804D79B8 += 5;
+            zigzag = lbl_80431638;
+            for (i = 0; i < 0x40; i += 8) {
+                src_byte0 = hsd_804D79B8;
+                hsd_804D79B8 = src_byte0 + 1;
+                state.quant_table->luma[zigzag[0]] = *src_byte0;
+                src_byte1 = hsd_804D79B8;
+                hsd_804D79B8 = src_byte1 + 1;
+                state.quant_table->luma[zigzag[1]] = *src_byte1;
+                src_byte2 = hsd_804D79B8;
+                hsd_804D79B8 = src_byte2 + 1;
+                state.quant_table->luma[zigzag[2]] = *src_byte2;
+                src_byte3 = hsd_804D79B8;
+                hsd_804D79B8 = src_byte3 + 1;
+                state.quant_table->luma[zigzag[3]] = *src_byte3;
+                src_byte4 = hsd_804D79B8;
+                hsd_804D79B8 = src_byte4 + 1;
+                state.quant_table->luma[zigzag[4]] = *src_byte4;
+                src_byte5 = hsd_804D79B8;
+                hsd_804D79B8 = src_byte5 + 1;
+                state.quant_table->luma[zigzag[5]] = *src_byte5;
+                src_byte6 = hsd_804D79B8;
+                hsd_804D79B8 = src_byte6 + 1;
+                state.quant_table->luma[zigzag[6]] = *src_byte6;
+                src_byte7 = hsd_804D79B8;
+                hsd_804D79B8 = src_byte7 + 1;
+                quant_byte = zigzag[7];
+                zigzag += 8;
+                state.quant_table->luma[quant_byte] = *src_byte7;
+            }
+            break;
         }
-    } else {
-        if (++hsd_804D79B8 >= src_byte0) {
-            longjmp(state.work->jmp, 1);
-        } else {
-            goto find_luma_quant;
+        if (++hsd_804D79B8 < src_byte0) {
+            continue;
         }
+        longjmp(state.work->jmp, 1);
+        break;
     }
     src_byte0 = &hsd_804D79BC[hsd_804D79C0];
-find_chroma_quant:
-    if (*(u16*) hsd_804D79B8 == 0xFFDB) {
-        u8 qbyte;
-        u8* qptr;
-        s32 zigzag_index;
+    for (;;) {
+        if (*(u16*) hsd_804D79B8 == 0xFFDB) {
+            u8 qbyte;
+            u8* qptr;
+            s32 zigzag_index;
 
-        hsd_804D79B8 += 5;
-        zigzag = lbl_80431638;
-        for (i = 0; i < 0x40; i += 8) {
-            src_byte8 = hsd_804D79B8;
-            hsd_804D79B8 = src_byte8 + 1;
-            zigzag_index = zigzag[0];
-            qptr = state.quant_table->luma + zigzag_index;
-            qptr[0x40] = qbyte = *src_byte8;
-            src_byte9 = hsd_804D79B8;
-            hsd_804D79B8 = src_byte9 + 1;
-            zigzag_index = zigzag[1];
-            qptr = state.quant_table->luma + zigzag_index;
-            qptr[0x40] = qbyte = *src_byte9;
-            src_byte10 = hsd_804D79B8;
-            hsd_804D79B8 = src_byte10 + 1;
-            zigzag_index = zigzag[2];
-            qptr = state.quant_table->luma + zigzag_index;
-            qptr[0x40] = qbyte = *src_byte10;
-            src_byte11 = hsd_804D79B8;
-            hsd_804D79B8 = src_byte11 + 1;
-            zigzag_index = zigzag[3];
-            qptr = state.quant_table->luma + zigzag_index;
-            qptr[0x40] = qbyte = *src_byte11;
-            src_byte12 = hsd_804D79B8;
-            hsd_804D79B8 = src_byte12 + 1;
-            zigzag_index = zigzag[4];
-            qptr = state.quant_table->luma + zigzag_index;
-            qptr[0x40] = qbyte = *src_byte12;
-            src_byte13 = hsd_804D79B8;
-            hsd_804D79B8 = src_byte13 + 1;
-            zigzag_index = zigzag[5];
-            qptr = state.quant_table->luma + zigzag_index;
-            qbyte = quant_byte = *src_byte13;
-            qptr[0x40] = qbyte;
-            src_byte14 = hsd_804D79B8;
-            hsd_804D79B8 = src_byte14 + 1;
-            zigzag_index = zigzag[6];
-            qptr = state.quant_table->luma + zigzag_index;
-            qptr[0x40] = qbyte = *src_byte14;
-            src_byte15 = hsd_804D79B8;
-            hsd_804D79B8 = src_byte15 + 1;
-            zigzag_index = zigzag[7];
-            qptr = state.quant_table->luma + zigzag_index;
-            zigzag += 8;
-            qptr[0x40] = qbyte = *src_byte15;
+            hsd_804D79B8 += 5;
+            zigzag = lbl_80431638;
+            for (i = 0; i < 0x40; i += 8) {
+                src_byte8 = hsd_804D79B8;
+                hsd_804D79B8 = src_byte8 + 1;
+                zigzag_index = zigzag[0];
+                qptr = state.quant_table->luma + zigzag_index;
+                qptr[0x40] = qbyte = *src_byte8;
+                src_byte9 = hsd_804D79B8;
+                hsd_804D79B8 = src_byte9 + 1;
+                zigzag_index = zigzag[1];
+                qptr = state.quant_table->luma + zigzag_index;
+                qptr[0x40] = qbyte = *src_byte9;
+                src_byte10 = hsd_804D79B8;
+                hsd_804D79B8 = src_byte10 + 1;
+                zigzag_index = zigzag[2];
+                qptr = state.quant_table->luma + zigzag_index;
+                qptr[0x40] = qbyte = *src_byte10;
+                src_byte11 = hsd_804D79B8;
+                hsd_804D79B8 = src_byte11 + 1;
+                zigzag_index = zigzag[3];
+                qptr = state.quant_table->luma + zigzag_index;
+                qptr[0x40] = qbyte = *src_byte11;
+                src_byte12 = hsd_804D79B8;
+                hsd_804D79B8 = src_byte12 + 1;
+                zigzag_index = zigzag[4];
+                qptr = state.quant_table->luma + zigzag_index;
+                qptr[0x40] = qbyte = *src_byte12;
+                src_byte13 = hsd_804D79B8;
+                hsd_804D79B8 = src_byte13 + 1;
+                zigzag_index = zigzag[5];
+                qptr = state.quant_table->luma + zigzag_index;
+                qbyte = quant_byte = *src_byte13;
+                qptr[0x40] = qbyte;
+                src_byte14 = hsd_804D79B8;
+                hsd_804D79B8 = src_byte14 + 1;
+                zigzag_index = zigzag[6];
+                qptr = state.quant_table->luma + zigzag_index;
+                qptr[0x40] = qbyte = *src_byte14;
+                src_byte15 = hsd_804D79B8;
+                hsd_804D79B8 = src_byte15 + 1;
+                zigzag_index = zigzag[7];
+                qptr = state.quant_table->luma + zigzag_index;
+                zigzag += 8;
+                qptr[0x40] = qbyte = *src_byte15;
+            }
+            break;
         }
-    } else {
-        if (++hsd_804D79B8 >= src_byte0) {
-            longjmp(state.work->jmp, 1);
-        } else {
-            goto find_chroma_quant;
+        if (++hsd_804D79B8 < src_byte0) {
+            continue;
         }
+        longjmp(state.work->jmp, 1);
+        break;
     }
     src_byte0 = &hsd_804D79BC[hsd_804D79C0];
-find_frame:
-    if (*(u16*) hsd_804D79B8 == 0xFFC0) {
-        hsd_804D79B8 += 5;
-        state.height = *(u16*) hsd_804D79B8;
-        hsd_804D79B8 += 2;
-        state.width = *(u16*) hsd_804D79B8;
-        hsd_804D79B8 += 0xC;
-    } else {
-        if (++hsd_804D79B8 >= src_byte0) {
-            longjmp(state.work->jmp, 1);
-        } else {
-            goto find_frame;
+    for (;;) {
+        if (*(u16*) hsd_804D79B8 == 0xFFC0) {
+            hsd_804D79B8 += 5;
+            state.height = *(u16*) hsd_804D79B8;
+            hsd_804D79B8 += 2;
+            state.width = *(u16*) hsd_804D79B8;
+            hsd_804D79B8 += 0xC;
+            break;
         }
+        if (++hsd_804D79B8 < src_byte0) {
+            continue;
+        }
+        longjmp(state.work->jmp, 1);
+        break;
     }
     src_byte0 = &hsd_804D79BC[hsd_804D79C0];
-find_scan:
-    if (*(u16*) hsd_804D79B8 == 0xFFDA) {
-        hsd_804D79B8 += 2;
-        hsd_804D79B8 += 0xC;
-    } else {
-        if (++hsd_804D79B8 >= src_byte0) {
-            longjmp(state.work->jmp, 1);
-        } else {
-            goto find_scan;
+    for (;;) {
+        if (*(u16*) hsd_804D79B8 == 0xFFDA) {
+            hsd_804D79B8 += 2;
+            hsd_804D79B8 += 0xC;
+            break;
         }
+        if (++hsd_804D79B8 < src_byte0) {
+            continue;
+        }
+        longjmp(state.work->jmp, 1);
+        break;
     }
     for (y = 0; y < state.height; y += 0x10) {
         for (x = 0; x < state.width; x += 0x10) {
