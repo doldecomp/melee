@@ -24,8 +24,7 @@ Item_GObj* it_802C74D8(HSD_GObj* parent, Vec3* pos, Fighter_Part part,
     if (result != NULL) {
         Item* item = GET_ITEM(result);
         itGamewatchAttributes* attr =
-            &item->xC4_article_data->x4_specialAttributes
-                 ->kirby_gamewatch_chef_pan;
+            &item->xC4_article_data->x4_specialAttributes->gamewatch;
         Item_AttachGameWatchArticle(parent, part, result, attr);
         return result;
     }

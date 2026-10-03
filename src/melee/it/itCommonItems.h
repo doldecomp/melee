@@ -856,15 +856,39 @@ typedef struct {
 } itZeldaDinFire_ItemVars;
 ASSERT_SIZE(itZeldaDinFire_ItemVars, 36);
 
+/// Shared by Raikou, Entei, and Suicune.
 typedef struct itPokemonAttributes {
-    f32 x0;
-    s32 timer;
-    s32 max;
-    s32 xC;
-    s32 x10;
-    s32 x14;
-    s32 x18;
+    /* +0 */ f32 x0;
+    /* +4 */ s32 timer;
 } itPokemonAttributes;
+
+typedef struct itPippiAttributes {
+    /*  +0 */ f32 x0;
+    /*  +4 */ s32 timer;
+    /*  +8 */ s32 max;
+    /*  +C */ s32 xC;
+    /* +10 */ s32 x10;
+    /* +14 */ s32 x14;
+    /* +18 */ s32 x18;
+} itPippiAttributes;
+
+typedef struct itTogepyAttributes {
+    /*  +0 */ f32 x0;
+    /*  +4 */ s32 timer;
+    /*  +8 */ s32 max;
+    /*  +C */ s32 xC;
+    /* +10 */ s32 x10;
+    /* +14 */ s32 x14;
+    /* +18 */ s32 x18;
+    /* +1C */ s32 x1C;
+} itTogepyAttributes;
+
+typedef struct itMarumineAttributes {
+    /* +0 */ f32 x0;
+    /* +4 */ s32 timer;
+    /* +8 */ s32 max;
+    /* +C */ s32 xC;
+} itMarumineAttributes;
 
 typedef struct itKamexAttributes {
     /* +00 */ f32 x0;
@@ -876,6 +900,10 @@ typedef struct itKamexAttributes {
     /* +18 */ f32 x18;
     /* +1C */ f32 x1C;
 } itKamexAttributes;
+
+typedef struct itKamexHydroPumpAttributes {
+    /* +0 */ f32 x0;
+} itKamexHydroPumpAttributes;
 
 typedef struct {
     s16 x0;

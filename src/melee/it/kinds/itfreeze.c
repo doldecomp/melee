@@ -132,7 +132,7 @@ void it_8028EDBC(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     itUnkAttributes* attrs =
-        &ip->xC4_article_data->x4_specialAttributes->freeze;
+        &ip->xC4_article_data->x4_specialAttributes->generic;
 
     if (ip->ground_or_air != GA_Air) {
         if (ABS(ip->xDD4_itemVar.freeze.x4.x) > 0.1f) {

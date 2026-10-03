@@ -28,7 +28,7 @@ HSD_GObj* it_802C65E4(Item_GObj* gobj, Vec* vec, enum Fighter_Part arg2,
     if (result != NULL) {
         Item* item = GET_ITEM(result);
         itGamewatchAttributes* attr =
-            &item->xC4_article_data->x4_specialAttributes->gamewatch_manhole;
+            &item->xC4_article_data->x4_specialAttributes->gamewatch;
         Item_AttachGameWatchArticle(gobj, arg2, result, attr);
         return result;
     }

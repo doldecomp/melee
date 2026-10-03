@@ -76,10 +76,10 @@ void it_802D09D0(Item_GObj* gobj)
 void itMarumine_Logic16_Spawned(Item_GObj* gobj)
 {
     Item* ip;
-    itPokemonAttributes* attr;
+    itMarumineAttributes* attr;
 
     ip = GET_ITEM(gobj);
-    attr = &ip->xC4_article_data->x4_specialAttributes->pokemon;
+    attr = &ip->xC4_article_data->x4_specialAttributes->marumine;
     ip->facing_dir = 0.0F;
     ip->xDC8_word.flags.x0 = true;
     ip->xDD4_itemVar.pokemon.timer = 0xB4 - attr->max;
@@ -133,8 +133,8 @@ void itMarumine_UnkMotion1_Phys(Item_GObj* gobj) {}
 bool itMarumine_UnkMotion1_Coll(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
-    itPokemonAttributes* attr =
-        &ip->xC4_article_data->x4_specialAttributes->pokemon;
+    itMarumineAttributes* attr =
+        &ip->xC4_article_data->x4_specialAttributes->marumine;
 
     if (it_8026DA08(gobj) == false) {
         if (ip->x5CC_currentAnimFrame >= attr->timer) {
@@ -202,11 +202,11 @@ bool itMarumine_UnkMotion3_Coll(Item_GObj* gobj)
 void it_802D0DBC(Item_GObj* gobj)
 {
     f32 sp10;
-    itPokemonAttributes* attr;
+    itMarumineAttributes* attr;
     Item* ip = GET_ITEM(gobj);
 
     if (--ip->xDD4_itemVar.pokemon.x64 == 0) {
-        attr = &ip->xC4_article_data->x4_specialAttributes->pokemon;
+        attr = &ip->xC4_article_data->x4_specialAttributes->marumine;
         sp10 = 1.0F;
         efSync_Spawn(0x471, gobj, (ip->xBBC_dynamicBoneTable->bones[3]),
                      &sp10);
@@ -261,8 +261,8 @@ void fn_802D0F98(Item_GObj* gobj)
     Item* ip = GET_ITEM(gobj);
 
     if (--ip->xDD4_itemVar.pokemon.x64 == 0) {
-        itPokemonAttributes* attr =
-            &ip->xC4_article_data->x4_specialAttributes->pokemon;
+        itMarumineAttributes* attr =
+            &ip->xC4_article_data->x4_specialAttributes->marumine;
         sp10 = 1.0F;
         efSync_Spawn(0x471, gobj, ip->xBBC_dynamicBoneTable->bones[3], &sp10);
         ip->xDD4_itemVar.pokemon.x64 = attr->xC;
@@ -313,13 +313,13 @@ void it_802D1140(Item_GObj* gobj)
 {
     f32 sp10;
     Item* ip;
-    itPokemonAttributes* attr;
+    itMarumineAttributes* attr;
 
     ip = GET_ITEM(gobj);
 
     if (--ip->xDD4_itemVar.pokemon.timer < 0) {
         if (--ip->xDD4_itemVar.pokemon.x64 == 0) {
-            attr = &ip->xC4_article_data->x4_specialAttributes->pokemon;
+            attr = &ip->xC4_article_data->x4_specialAttributes->marumine;
             sp10 = 1.0F;
             efSync_Spawn(0x471, gobj, ip->xBBC_dynamicBoneTable->bones[3],
                          &sp10);

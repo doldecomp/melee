@@ -39,8 +39,7 @@ Item_GObj* it_802C8038(Item_GObj* parent, Vec3* arg1, s32 arg2, s32 arg3,
         result = Item_80268B18(&spawn);
         if (result != NULL) {
             temp_r6 = result->user_data;
-            tmp = &temp_r6->xC4_article_data->x4_specialAttributes
-                       ->gamewatch_rescue;
+            tmp = &temp_r6->xC4_article_data->x4_specialAttributes->gamewatch;
             Item_ClearCmdVars(temp_r6);
             temp_r6->xDCC_flag.b3 = false;
             temp_r6->xDD4_itemVar.gamewatchrescue.xDD8 = parent;
