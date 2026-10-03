@@ -1185,12 +1185,12 @@ static inline bool find_light_override(UnkArchiveStruct* archive,
                                        bool* b5)
 {
     UnkStageDat* dat = archive->unk4;
-    s32 count = dat->unk1C;
-    s32 i;
+    ssize_t count = dat->light_word_count;
+    ssize_t i;
 
     if (count != 0) {
         for (i = 0; i < count; i++) {
-            LightOverrideEntry* arr = dat->unk18;
+            LightOverrideEntry* arr = dat->light_overrides;
             if (arr[i].desc == desc) {
                 *b6 = arr[i].b;
                 *b7 = arr[i].a;
@@ -1207,13 +1207,13 @@ static inline bool find_light_override_in_dat(UnkStageDat* dat,
                                               HSD_LightDesc* desc, bool* b6,
                                               bool* b7, bool* b5)
 {
-    s32 count = dat->unk1C;
-    s32 i;
+    ssize_t count = dat->light_word_count;
+    ssize_t i;
 
     (void) dat;
     if (count != 0) {
         for (i = 0; i < count; i++) {
-            LightOverrideEntry* arr = array_dat->unk18;
+            LightOverrideEntry* arr = array_dat->light_overrides;
             if (arr[i].desc == desc) {
                 *b6 = arr[i].b;
                 *b7 = arr[i].a;
