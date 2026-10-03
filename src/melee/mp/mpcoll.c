@@ -469,8 +469,7 @@ void mpColl_LoadECB_Fixed(CollData* coll)
     float sin;
     float cos;
 
-    float midpoint_x;
-    float midpoint_y;
+    float midpoint_x, midpoint_y;
 
     float orig_top_y;
     float orig_bottom_y;
@@ -482,14 +481,10 @@ void mpColl_LoadECB_Fixed(CollData* coll)
     float right_x;
     float left_x;
 
-    float rot_top_x;
-    float rot_top_y;
-    float rot_bot_x;
-    float rot_bot_y;
-    float rot_right_x;
-    float rot_right_y;
-    float rot_left_y;
-    float rot_left_x;
+    float rot_top_x, rot_top_y;
+    float rot_bot_x, rot_bot_y;
+    float rot_right_x, rot_right_y;
+    float rot_left_y, rot_left_x;
 
     angle = coll->ecb_source.x4.x0_1.angle;
     if (coll->x130_flags & CollData_X130_Clear) {
@@ -607,8 +602,7 @@ void mpColl_80042C58(CollData* coll, ftCollisionBox* box)
 
 static inline void mpColl_LoadECB_inline(CollData* coll, enum_t i)
 {
-    float saved_bottom_x;
-    float saved_bottom_y;
+    float saved_bottom_x, saved_bottom_y;
 
     if (coll->x130_flags & CollData_X130_Locked) {
         saved_bottom_x = coll->desired_ecb.bottom.x;
@@ -628,8 +622,7 @@ static inline void mpColl_LoadECB_inline(CollData* coll, enum_t i)
 
 void mpColl_LoadECB(CollData* coll)
 {
-    float saved_bottom_x;
-    float saved_bottom_y;
+    float saved_bottom_x, saved_bottom_y;
 
     if (coll->x130_flags & CollData_X130_Locked) {
         saved_bottom_x = coll->desired_ecb.bottom.x;
@@ -899,10 +892,8 @@ bool mpColl_80043754(mpColl_Callback cb, CollData* coll, int flags)
 
     u8 _[4];
 
-    float dist_right_x;
-    float dist_right_y;
-    float x;
-    float y;
+    float dist_right_x, dist_right_y;
+    float x, y;
     float dist_left_x;
     float dist_top_y;
     s32 step;
@@ -971,10 +962,8 @@ bool mpColl_80043754(mpColl_Callback cb, CollData* coll, int flags)
 void mpColl_800439FC(CollData* coll)
 {
     float right_dx;
-    float probe_x;
-    float probe_y;
-    float right_x;
-    float right_y;
+    float probe_x, probe_y;
+    float right_x, right_y;
     Vec3 pt;
     float y;
 
@@ -1008,10 +997,8 @@ void mpColl_800439FC(CollData* coll)
 void mpColl_80043ADC(CollData* coll)
 {
     float left_dx;
-    float probe_x;
-    float probe_y;
-    float left_x;
-    float left_y;
+    float probe_x, probe_y;
+    float left_x, left_y;
     Vec3 pt;
     float y;
 
@@ -1065,8 +1052,7 @@ bool mpColl_80043BBC(CollData* coll, int* line_id_out)
 
 void mpColl_80043C6C(CollData* coll, int line_id, bool ignore_bottom)
 {
-    float probe_x;
-    float probe_y;
+    float probe_x, probe_y;
     float y;
     float right_dx;
     Vec3 pos;
@@ -1147,8 +1133,7 @@ bool mpColl_80043E90(CollData* coll, int* line_id_out)
 
 void mpColl_80043F40(CollData* coll, int line_id, bool ignore_bottom)
 {
-    float probe_x;
-    float probe_y;
+    float probe_x, probe_y;
     float y;
     float left_dx;
     Vec3 pos;
@@ -1628,18 +1613,12 @@ static inline bool mpColl_RightWall_inline2(CollData* coll, float ax, float ay,
 bool mpColl_80044E10_RightWall(CollData* coll)
 {
     int line_id;
-    float left_x;
-    float left_y;
-    float prev_left_x;
-    float prev_left_y;
-    float vertical_y;
-    float vertical_x;
-    float prev_x;
-    float prev_y;
-    float top_x;
-    float top_y;
-    float bottom_x;
-    float bottom_y;
+    float left_x, left_y;
+    float prev_left_x, prev_left_y;
+    float vertical_y, vertical_x;
+    float prev_x, prev_y;
+    float top_x, top_y;
+    float bottom_x, bottom_y;
     bool hit_wall;
     PAD_STACK(0x14);
 
@@ -1947,18 +1926,12 @@ static inline bool mpColl_LeftWall_inline2(CollData* coll, float ax, float ay,
 bool mpColl_80045B74_LeftWall(CollData* coll)
 {
     int line_id;
-    float right_x;
-    float right_y;
-    float prev_right_x;
-    float prev_right_y;
-    float vertical_y;
-    float vertical_x;
-    float prev_x;
-    float prev_y;
-    float bottom_x;
-    float bottom_y;
-    float top_x;
-    float top_y;
+    float right_x, right_y;
+    float prev_right_x, prev_right_y;
+    float vertical_y, vertical_x;
+    float prev_x, prev_y;
+    float bottom_x, bottom_y;
+    float top_x, top_y;
     bool hit_wall;
     PAD_STACK(0x8);
 
@@ -2259,10 +2232,8 @@ static inline void mpCollCeilingInline(CollData* coll)
 {
     int right_wall_id;
     int left_wall_id;
-    float top_x;
-    float top_y;
-    float side_x;
-    float side_y;
+    float top_x, top_y;
+    float side_x, side_y;
     bool hit_wall;
     int non_ceiling_id = mpLineNextNonCeiling(coll->ceiling.index);
     top_x = coll->cur_pos.x + coll->ecb.top.x;
@@ -2941,18 +2912,12 @@ bool mpColl_800488F4(CollData* coll)
 bool mpColl_80048AB0_RightWall(CollData* coll)
 {
     int line_id;
-    float left_x;
-    float left_y;
-    float prev_left_x;
-    float prev_left_y;
-    float vertical_y;
-    float vertical_x;
-    float prev_x;
-    float prev_y;
-    float top_x;
-    float top_y;
-    float bottom_x;
-    float bottom_y;
+    float left_x, left_y;
+    float prev_left_x, prev_left_y;
+    float vertical_y, vertical_x;
+    float prev_x, prev_y;
+    float top_x, top_y;
+    float bottom_x, bottom_y;
     bool hit_wall;
     int line_id1;
     int line_id2;
@@ -3236,18 +3201,12 @@ bool mpColl_800491C8_RightWall(CollData* coll)
 bool mpColl_80049778_LeftWall(CollData* coll)
 {
     int line_id;
-    float right_x;
-    float right_y;
-    float prev_right_x;
-    float prev_right_y;
-    float vertical_y;
-    float vertical_x;
-    float prev_x;
-    float prev_y;
-    float bottom_x;
-    float bottom_y;
-    float top_x;
-    float top_y;
+    float right_x, right_y;
+    float prev_right_x, prev_right_y;
+    float vertical_y, vertical_x;
+    float prev_x, prev_y;
+    float bottom_x, bottom_y;
+    float top_x, top_y;
     bool hit_wall;
     int line_id1;
     int line_id2;
@@ -3547,10 +3506,8 @@ bool mpColl_8004A45C_Floor(CollData* coll, int line_id)
     }
     mpFloorGetLeft(line_id, &edge);
     if (coll->cur_pos.x <= edge.x) {
-        float edge_x;
-        float edge_y;
-        float right_x;
-        float right_y;
+        float edge_x, edge_y;
+        float right_x, right_y;
         floor_id = mpLib_8004DD90_Floor(line_id, &edge, &y, &flags, &normal);
         edge_x = edge.x + 1.0F;
         edge_y = edge.y + 1.0F;
@@ -3565,10 +3522,8 @@ bool mpColl_8004A45C_Floor(CollData* coll, int line_id)
             coll->env_flags |= Collide_RightEdge;
         }
     } else {
-        float edge_x;
-        float edge_y;
-        float left_x;
-        float left_y;
+        float edge_x, edge_y;
+        float left_x, left_y;
         mpFloorGetRight(line_id, &edge);
         if (coll->cur_pos.x >= edge.x) {
             floor_id =
@@ -3619,10 +3574,8 @@ bool mpColl_8004A678_Floor(CollData* coll, int line_id)
         if (!(coll->env_flags & Collide_LeftWallMask) &&
             coll->facing_dir == -1 && coll->lstick_x > -0.75)
         {
-            float edge_x;
-            float edge_y;
-            float right_x;
-            float right_y;
+            float edge_x, edge_y;
+            float right_x, right_y;
             floor_id =
                 mpLib_8004DD90_Floor(line_id, &edge, &y, &flags, &normal);
             if (floor_id != -1) {
@@ -3647,10 +3600,8 @@ bool mpColl_8004A678_Floor(CollData* coll, int line_id)
             !(coll->env_flags & Collide_RightWallMask) &&
             coll->facing_dir == 1 && coll->lstick_x < 0.75)
         {
-            float edge_x;
-            float edge_y;
-            float left_x;
-            float left_y;
+            float edge_x, edge_y;
+            float left_x, left_y;
             floor_id =
                 mpLib_8004DD90_Floor(line_id, &edge, &y, &flags, &normal);
             if (floor_id != -1) {
@@ -3690,10 +3641,8 @@ bool mpColl_8004A908_Floor(CollData* coll, int line_id)
     int floor_id;
     u32 flags;
     Vec3 normal;
-    float prev_bottom_x;
-    float prev_bottom_y;
-    float bottom_x;
-    float bottom_y;
+    float prev_bottom_x, prev_bottom_y;
+    float bottom_x, bottom_y;
     bool hit_floor;
 
     prev_bottom_x = coll->prev_pos.x + coll->prev_ecb.bottom.x;
@@ -4048,18 +3997,12 @@ bool mpColl_8004B6D8(CollData* coll)
 bool mpColl_8004B894_RightWall(CollData* coll)
 {
     int line_id;
-    float left_x;
-    float left_y;
-    float prev_left_x;
-    float prev_left_y;
-    float prev_bottom_x;
-    float prev_bottom_y;
-    float prev_top_x;
-    float prev_top_y;
-    float bottom_x;
-    float bottom_y;
-    float top_x;
-    float top_y;
+    float left_x, left_y;
+    float prev_left_x, prev_left_y;
+    float prev_bottom_x, prev_bottom_y;
+    float prev_top_x, prev_top_y;
+    float bottom_x, bottom_y;
+    float top_x, top_y;
     bool hit_wall;
     int line_id1;
     int line_id2;
@@ -4143,18 +4086,12 @@ bool mpColl_8004B894_RightWall(CollData* coll)
 bool mpColl_8004BDD4_LeftWall(CollData* coll)
 {
     int line_id;
-    float right_x;
-    float right_y;
-    float prev_right_x;
-    float prev_right_y;
-    float prev_bottom_x;
-    float prev_bottom_y;
-    float prev_top_x;
-    float prev_top_y;
-    float bottom_x;
-    float bottom_y;
-    float top_x;
-    float top_y;
+    float right_x, right_y;
+    float prev_right_x, prev_right_y;
+    float prev_bottom_x, prev_bottom_y;
+    float prev_top_x, prev_top_y;
+    float bottom_x, bottom_y;
+    float top_x, top_y;
     bool hit_wall;
     int line_id1;
     int line_id2;
@@ -4243,10 +4180,8 @@ bool mpColl_8004C328_Ceiling(CollData* coll, int line_id)
     Vec3 edge;
     int ceiling_id;
     bool result;
-    float edge_x;
-    float edge_y;
-    float ecb_side_x;
-    float ecb_side_y;
+    float edge_x, edge_y;
+    float ecb_side_x, ecb_side_y;
 
     result = false;
     if (!mpLib_80054ED8(line_id) || mpLineGetKind(line_id) != CollLine_Ceiling)

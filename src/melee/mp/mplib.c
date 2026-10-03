@@ -1035,8 +1035,7 @@ static void mpRemap2d(float* x_out, float* y_out, float ax0, float ay0,
     double dx;
     double dy;
     double dist2;
-    float apx;
-    float apy;
+    float apx, apy;
     dx = ax1 - ax0;
     dy = ay1 - ay0;
     apx = px - ax0;
@@ -1535,10 +1534,8 @@ void mpLib_8004ED5C(int line_id, float* x0_out, float* y0_out, float* x1_out,
 
     int i0;
     int i1;
-    float x0;
-    float y0;
-    float x1;
-    float y1;
+    float x0, y0;
+    float x1, y1;
     float distance;
 
     i0 = line->inner->v0_idx;
@@ -1614,13 +1611,10 @@ bool mpCheckFloor(float ax, float ay, float bx, float by, float y_offset,
         dynamic_count = j_inner->ranges[MapLineGroup_Dynamic].count;
         line = &groundCollLine[j_inner->ranges[MapLineGroup_Floor].start];
         for (; i < count; i += 1, line += 1) {
-            float px;
-            float py;
+            float px, py;
             u8 pad[4];
-            float x0;
-            float y0;
-            float x1;
-            float y1;
+            float x0, y0;
+            float x1, y1;
             float dist2;
             ssize_t line_offset;
         block_8:
@@ -1779,13 +1773,10 @@ bool mpCheckFloorRemap(float ax, float ay, float bx, float by, float y_offset,
                 float y0 = y_offset + groundCollVtx[line->inner->v0_idx].pos.y;
                 float x1 = groundCollVtx[line->inner->v1_idx].pos.x;
                 float y1 = y_offset + groundCollVtx[line->inner->v1_idx].pos.y;
-                float dx;
-                float dy;
-                float dx2;
-                float dy2;
+                float dx, dy;
+                float dx2, dy2;
                 float dist2;
-                float int_x;
-                float int_y;
+                float int_x, int_y;
                 PAD_STACK(4);
 
                 if (joint->flags &
@@ -1930,13 +1921,10 @@ bool mpCheckCeiling(float ax, float ay, float bx, float by, Vec3* vec_out,
         dynamic_count = j_inner->ranges[MapLineGroup_Dynamic].count;
         line = &groundCollLine[j_inner->ranges[MapLineGroup_Ceiling].start];
         for (; i < count; i += 1, line += 1) {
-            float int_x;
-            float int_y;
+            float int_x, int_y;
             u8 pad[4];
-            float x0;
-            float y0;
-            float x1;
-            float y1;
+            float x0, y0;
+            float x1, y1;
             float dist2;
 
         block_8:
@@ -2072,18 +2060,13 @@ bool mpCheckCeilingRemap(float ax, float ay, float bx, float by, Vec3* vec_out,
                 line->flags & LINE_FLAG_ENABLED &&
                 !(line->flags & LINE_FLAG_EMPTY))
             {
-                float dx2;
-                float dy2;
+                float dx2, dy2;
                 float dist2;
-                float dx;
-                float dy;
-                float int_x;
-                float int_y;
+                float dx, dy;
+                float int_x, int_y;
                 u8 _[12];
-                float x0;
-                float y0;
-                float x1;
-                float y1;
+                float x0, y0;
+                float x1, y1;
                 mpLib_8004ED5C(line - groundCollLine, &x0, &y0, &x1, &y1);
 
                 if (joint->flags &
@@ -2309,11 +2292,9 @@ bool mpCheckLeftWall(float ax, float ay, float bx, float by, Vec3* vec_out,
                 float y0 = v0->pos.y;
                 float x1 = v1->pos.x;
                 float y1 = v1->pos.y;
-                float dx2;
-                float dy2;
+                float dx2, dy2;
                 float dist2;
-                float int_x;
-                float int_y;
+                float int_x, int_y;
                 if (ABS(x0 - x1) > 0.0001) {
                     if (mpLineIntersection(x0, y0, x1, y1, ax, ay, bx, by,
                                            &int_x, &int_y))
@@ -2444,13 +2425,10 @@ bool mpCheckLeftWallRemap(float ax, float ay, float bx, float by,
                 float y0 = groundCollVtx[line->inner->v0_idx].pos.y;
                 float x1 = groundCollVtx[line->inner->v1_idx].pos.x;
                 float y1 = groundCollVtx[line->inner->v1_idx].pos.y;
-                float dx;
-                float dy;
-                float dx2;
-                float dy2;
+                float dx, dy;
+                float dx2, dy2;
                 float dist2;
-                float int_x;
-                float int_y;
+                float int_x, int_y;
 
                 if (joint->flags &
                     (CollJoint_B10 | CollJoint_B9 | CollJoint_B8))
@@ -2622,11 +2600,9 @@ bool mpCheckRightWall(float ax, float ay, float bx, float by, Vec3* vec_out,
                 float y0 = v0->pos.y;
                 float x1 = v1->pos.x;
                 float y1 = v1->pos.y;
-                float dx2;
-                float dy2;
+                float dx2, dy2;
                 float dist2;
-                float int_x;
-                float int_y;
+                float int_x, int_y;
                 if (ABS(x0 - x1) > 0.0001) {
                     if (mpLineIntersection(x0, y0, x1, y1, ax, ay, bx, by,
                                            &int_x, &int_y))
@@ -2757,13 +2733,10 @@ bool mpCheckRightWallRemap(float ax, float ay, float bx, float by,
                 float y0 = groundCollVtx[line->inner->v0_idx].pos.y;
                 float x1 = groundCollVtx[line->inner->v1_idx].pos.x;
                 float y1 = groundCollVtx[line->inner->v1_idx].pos.y;
-                float dx;
-                float dy;
-                float dx2;
-                float dy2;
+                float dx, dy;
+                float dx2, dy2;
                 float dist2;
-                float int_x;
-                float int_y;
+                float int_x, int_y;
 
                 if (joint->flags &
                     (CollJoint_B10 | CollJoint_B9 | CollJoint_B8))
@@ -2929,16 +2902,11 @@ bool mpLib_800511A4_RightWall(float ax, float ay, float bx, float by, float cx,
                 !(line->flags & LINE_FLAG_EMPTY))
             {
                 CollVtx* vtx;
-                float int_x;
-                float int_y;
-                float x;
-                float y;
-                float x0;
-                float y0;
-                float x1;
-                float y1;
-                float vdx;
-                float vdy;
+                float int_x, int_y;
+                float x, y;
+                float x0, y0;
+                float x1, y1;
+                float vdx, vdy;
                 float dist2;
 
                 {
@@ -3073,16 +3041,11 @@ bool mpLib_800515A0_LeftWall(float a0x, float a0y, float a1x, float a1y,
                 !(line->flags & LINE_FLAG_EMPTY))
             {
                 CollVtx* vtx;
-                float int_x;
-                float int_y;
-                float x;
-                float y;
-                float x0;
-                float y0;
-                float x1;
-                float y1;
-                float vdx;
-                float vdy;
+                float int_x, int_y;
+                float x, y;
+                float x0, y0;
+                float x1, y1;
+                float vdx, vdy;
                 float dist2;
 
                 {
@@ -3254,8 +3217,7 @@ int mpLib_80051BA8_Floor(Vec3* out_vec, int line_id_skip, int joint_id_skip,
                          float right, float top)
 {
     float min;
-    float out_x;
-    float out_y;
+    float out_x, out_y;
 
     int ledge_id = -1;
 
@@ -3402,8 +3364,7 @@ bool mpCheckMultiple(float x0, float y0, float x1, float y1, Vec3* pos_out,
                      int* line_id_out, u32* flags_out, Vec3* normal_out,
                      u32 checks, int joint_id_skip, int joint_id_only)
 {
-    float dx;
-    float dy;
+    float dx, dy;
 
     float min_dist2;
     bool already_checked;
@@ -4726,12 +4687,10 @@ void mpLib_80055E24(int joint_id)
 
 void mpLib_80055E9C(int joint_id)
 {
-    float corner_y;
-    float corner_x;
+    float corner_y, corner_x;
     float hi;
     float lo;
-    float corner2_x;
-    float corner2_y;
+    float corner2_x, corner2_y;
     u8 _[4];
     float m0_3;
     float m1_3;
@@ -4994,8 +4953,7 @@ void mpLib_80056758(int line_id, float x0, float y0, float x1, float y1)
 
 bool mpGetSpeed(int line_id, Vec3* pos, Vec3* speed)
 {
-    float new_x;
-    float new_y;
+    float new_x, new_y;
     CollVtx* v0;
     CollVtx* v1;
 
@@ -5124,8 +5082,7 @@ bool mpLib_80056C54(int line_id, Vec3* pos, int* line_id_out, Vec3* vec_out,
     float sqrt_tmp[2];
     float dist;
     float total_dist;
-    float dx2;
-    float dy2;
+    float dx2, dy2;
     int result;
     int new_id;
     u32 flags;
@@ -5758,10 +5715,8 @@ void mpLib_80058614_Floor(void)
             line = &linebase[j_inner->ranges[MapLineGroup_Floor].start];
 
             for (j = 0; j < count; j++, line++) {
-                float x0;
-                float y0;
-                float x1;
-                float y1;
+                float x0, y0;
+                float x1, y1;
             block_8:
 
                 if (!(line->flags & CollLine_Floor) ||
