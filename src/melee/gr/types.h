@@ -2030,12 +2030,12 @@ struct GroundJointPair {
 struct Ground_801C34AC_entry {
     /* +0 */ HSD_Joint* joint;
     /* +4 */ struct GroundJointPair* pairs DAT_COUNT(pair_count);
-    /* +8 */ s32 pair_count;
+    /* +8 */ ssize_t pair_count;
 };
 
 struct UnkStageDat {
-    struct Ground_801C34AC_entry* unk0 DAT_COUNT(unk4);
-    s32 unk4;
+    struct Ground_801C34AC_entry* unk0 DAT_COUNT(count);
+    ssize_t count;
 
     // Suspect this may not be a consistent type based on un_802FD708 callers
     struct UnkStageDat_x8_t* unk8 DAT_COUNT(unkC);

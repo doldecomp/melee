@@ -1900,14 +1900,14 @@ void Ground_801C34AC(s32 map_id, HSD_JObj* root, struct HSD_Joint* joint)
     HSD_JObj* jobj;
     UnkStageDat* stage_dat;
     UnkArchiveStruct* archive;
-    int entry_count;
-    int i;
+    ssize_t entry_count;
+    ssize_t i;
     struct Ground_801C34AC_entry* entry;
-    int count;
+    ssize_t count;
     struct GroundJointPair* pair;
-    int prev_index;
+    ssize_t prev_index;
     int target;
-    int j;
+    ssize_t j;
 
     jobj = root;
     prev_index = -1;
@@ -1921,7 +1921,7 @@ void Ground_801C34AC(s32 map_id, HSD_JObj* root, struct HSD_Joint* joint)
         return;
     }
     stage_dat = archive->unk4;
-    entry_count = stage_dat->unk4;
+    entry_count = stage_dat->count;
     if (entry_count == 0) {
         return;
     }
@@ -1984,9 +1984,9 @@ void Ground_801C36F4(int map_id, HSD_JObj* root, UNK_T joint)
     HSD_JObj* jobj;
     UnkStageDat* stage_dat;
     UnkArchiveStruct* archive;
-    int entry_count;
+    ssize_t entry_count;
     struct Ground_801C34AC_entry* entry;
-    int i;
+    ssize_t i;
     u32 unused[4];
 
     archive = grDatFiles_801C6330(map_id);
@@ -1997,7 +1997,7 @@ void Ground_801C36F4(int map_id, HSD_JObj* root, UNK_T joint)
         return;
     }
     stage_dat = archive->unk4;
-    entry_count = stage_dat->unk4;
+    entry_count = stage_dat->count;
     if (entry_count == 0) {
         return;
     }
@@ -3250,19 +3250,20 @@ Item_GObj* Ground_801C58E0(s32 arg0, s32 arg1)
 int Ground_801C5940(void)
 {
     struct Ground_801C34AC_entry* phi_r8;
-    int i, j, out_idx;
+    ssize_t i, j;
+    int out_idx;
     UnkArchiveStruct* archive;
     const size_t vals_count = 32;
     u8 _[4];
     int vals[vals_count];
     archive = grDatFiles_GetArchive();
     out_idx = 0;
-    if (archive->unk4->unk4 == 0) {
+    if (archive->unk4->count == 0) {
         return -1;
     }
     phi_r8 = archive->unk4->unk0;
-    for (i = 0; i < archive->unk4->unk4; i++, phi_r8++) {
-        int max = phi_r8->pair_count;
+    for (i = 0; i < archive->unk4->count; i++, phi_r8++) {
+        ssize_t max = phi_r8->pair_count;
         for (j = 0; j < max; j++) {
             int val = phi_r8->pairs[j].stage_joint_index;
             if (val >= 220 && val < 252 && (unsigned) out_idx < vals_count) {
