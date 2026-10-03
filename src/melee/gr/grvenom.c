@@ -1051,34 +1051,30 @@ void grVenom_80204F20(Ground_GObj* arg0)
 
     scale = Ground_801C0498();
     state = base[gp->u.venom.xC8 + 11];
-    if (state >= 8) {
-        goto check_scale_uniform;
+    switch (state) {
+    case 1:
+    case 2:
+    case 3:
+    case 4:
+    case 5:
+    case 6:
+    case 7:
+        HSD_JObjSetScaleX(jobj, scale);
+        HSD_JObjSetScaleY(jobj, scale);
+        HSD_JObjSetScaleZ(jobj, scale * *(f32*) ((u8*) yakumono_param + 0x34));
+        break;
+    case 8:
+    case 9:
+    case 10:
+    case 11:
+        HSD_JObjSetScaleX(jobj, scale);
+        HSD_JObjSetScaleY(jobj, scale);
+        HSD_JObjSetScaleZ(jobj, scale);
+        break;
     }
-    if (state >= 1) {
-        goto scale_nonuniform;
-    }
-    goto done_scale;
-
-check_scale_uniform:
-    if (state >= 12) {
-        goto done_scale;
-    }
-    goto scale_uniform;
-
-scale_nonuniform:
-    HSD_JObjSetScaleX(jobj, scale);
-    HSD_JObjSetScaleY(jobj, scale);
-    HSD_JObjSetScaleZ(jobj, scale * *(f32*) ((u8*) yakumono_param + 0x34));
-    goto done_scale;
-
-scale_uniform:
-    HSD_JObjSetScaleX(jobj, scale);
-    HSD_JObjSetScaleY(jobj, scale);
-    HSD_JObjSetScaleZ(jobj, scale);
-
-done_scale:
 
     gp->u.venom.xD4 = 1;
+
     gp->u.venom.xD8 = 0;
 }
 
@@ -1131,17 +1127,41 @@ void grVenom_802052E0(Ground_GObj* gobj, Vec3* pos)
 
 /// grVenom_802053B0
 
+static inline void updateFlybySfx(Ground_GObj* gobj, Vec3* pos)
+{
+    Ground* gp = gobj->user_data;
+
+    grVenom_802052E0(gobj, pos);
+    switch (gp->u.venom.xD8) {
+    case 0:
+        if (!grVenom_80205DF8(pos)) {
+            lbAudioAx_800237A8(0x6B6C0, 0x7F, 0x40);
+            gp->u.venom.xD8 = 1;
+        }
+        break;
+    case 1:
+        if (!grVenom_80205E84(pos)) {
+            gp->u.venom.xD8 = 2;
+        }
+        break;
+    case 2:
+        if (grVenom_80205E84(pos) == 1) {
+            lbAudioAx_800237A8(0x6B6C2, 0x7F, 0x40);
+            gp->u.venom.xD8 = 3;
+        }
+        break;
+    }
+}
+
 void grVenom_802053B0(Ground_GObj* gobj)
 {
     Vec3 sp28;
     Vec3 sp1C;
     s32* ptr;
-    Ground* gp2;
-    s32 state;
     HSD_JObj* jobj;
     s32* base;
     Ground* gp;
-    PAD_STACK(0x10);
+    PAD_STACK(0xC);
 
     gp = gobj->user_data;
     base = (s32*) &grVe_803E5348;
@@ -1156,72 +1176,25 @@ void grVenom_802053B0(Ground_GObj* gobj)
             return;
         }
 
-        state = ptr[11];
-        if (state >= 8) {
-            goto check_far;
-        }
-        if (state >= 1) {
-            goto near_type;
-        }
-        goto type_done;
-
-    check_far:
-        if (state >= 12) {
-            goto type_done;
-        }
-        goto far_type;
-
-    near_type:
-        grVenom_802052E0(gobj, &sp28);
-        state = gp->u.venom.xD8;
-        switch (state) {
-        case 0:
-            if (!grVenom_80205DF8(&sp28)) {
-                lbAudioAx_800237A8(0x6B6C0, 0x7F, 0x40);
-                gp->u.venom.xD8 = 1;
-            }
-            break;
+        switch (ptr[11]) {
         case 1:
-            if (!grVenom_80205E84(&sp28)) {
-                gp->u.venom.xD8 = 2;
-            }
-            break;
         case 2:
-            if (grVenom_80205E84(&sp28) == 1) {
-                lbAudioAx_800237A8(0x6B6C2, 0x7F, 0x40);
-                gp->u.venom.xD8 = 3;
-            }
+        case 3:
+        case 4:
+        case 5:
+        case 6:
+        case 7:
+            updateFlybySfx(gobj, &sp28);
             break;
-        }
-        goto type_done;
-
-    far_type:
-        HSD_JObjSetRotationY(jobj, 0.0F);
-
-        gp2 = gobj->user_data;
-        grVenom_802052E0(gobj, &sp1C);
-        state = gp2->u.venom.xD8;
-        switch (state) {
-        case 0:
-            if (!grVenom_80205DF8(&sp1C)) {
-                lbAudioAx_800237A8(0x6B6C0, 0x7F, 0x40);
-                gp2->u.venom.xD8 = 1;
-            }
-            break;
-        case 1:
-            if (!grVenom_80205E84(&sp1C)) {
-                gp2->u.venom.xD8 = 2;
-            }
-            break;
-        case 2:
-            if (grVenom_80205E84(&sp1C) == 1) {
-                lbAudioAx_800237A8(0x6B6C2, 0x7F, 0x40);
-                gp2->u.venom.xD8 = 3;
-            }
+        case 8:
+        case 9:
+        case 10:
+        case 11:
+            HSD_JObjSetRotationY(jobj, 0.0F);
+            updateFlybySfx(gobj, &sp1C);
             break;
         }
 
-    type_done:
         if (grAnime_801C83D0(gobj, 0, 7)) {
             base[gp->u.venom.xC8 + 8] = 0;
             Ground_801C4A08(gobj);
@@ -1396,6 +1369,25 @@ static inline s32 grVe_GetAnimArg(s32 fire_kind, Ground* gp,
     return ((volatile grVe_AnimArg*) anim_data)->value;
 }
 
+static inline s32 getFireKind(Ground_GObj* gobj, const s32* base)
+{
+    s32 fire_kind = -1;
+
+    switch (base[GET_GROUND(gobj)->u.venom.xC8 + 14]) {
+    case 0:
+        break;
+    case 1:
+    case 2:
+    case 3:
+        fire_kind = 0;
+        break;
+    case 4:
+        fire_kind = 1;
+        break;
+    }
+    return fire_kind;
+}
+
 void grVenom_80205F30(Ground_GObj* gobj)
 {
     u64 padA8;
@@ -1424,7 +1416,7 @@ void grVenom_80205F30(Ground_GObj* gobj)
     jobj = gobj->hsd_obj;
     sp94 = grVe_803B82D0;
     sp88 = grVe_803B82DC;
-    PAD_STACK(0x18);
+    PAD_STACK(0x10);
 
     if (grVe_804D6A3C) {
         return;
@@ -1448,34 +1440,11 @@ void grVenom_80205F30(Ground_GObj* gobj)
         case 7:
             HSD_JObjSetRotationY(jobj, 0.0F);
 
-            {
-                s32 anim_state = gp->u.venom.xF4;
-                if (anim_state == 0) {
-                    goto venom_80205F30_anim_zero;
-                }
-                if (anim_state < 0) {
-                    goto venom_80205F30_anim_done;
-                }
-                if (anim_state >= 5) {
-                    goto venom_80205F30_anim_done;
-                }
-                goto venom_80205F30_check_anim;
-            venom_80205F30_anim_zero: {
+            switch (gp->u.venom.xF4) {
+            case 0:
                 if (gp->u.venom.xF8 <= 0) {
                     gp->u.venom.xF4 = HSD_Randi(4) + 1;
-                    fire_kind = -1;
-                    switch (base[GET_GROUND(gobj)->u.venom.xC8 + 14]) {
-                    case 0:
-                        break;
-                    case 1:
-                    case 2:
-                    case 3:
-                        fire_kind = 0;
-                        break;
-                    case 4:
-                        fire_kind = 1;
-                        break;
-                    }
+                    fire_kind = getFireKind(gobj, base);
                     {
                         grVe_AnimData* anim_data = (grVe_AnimData*) base;
                         s32 idx0 = base[gp->u.venom.xC8 + 14];
@@ -1492,14 +1461,16 @@ void grVenom_80205F30(Ground_GObj* gobj)
                     HSD_JObjSetRotationZ(tmp_jobj, 0.0F);
                 }
                 gp->u.venom.xF8 = gp->u.venom.xF8 - 1;
-            }
-                goto venom_80205F30_anim_done;
-            venom_80205F30_check_anim:
+                break;
+            case 1:
+            case 2:
+            case 3:
+            case 4:
                 if (grAnime_801C83D0(gobj, 0, 7)) {
                     gp->u.venom.xF4 = 0;
                     gp->u.venom.xF8 = (s32) yakumono_param->x2C;
                 }
-            venom_80205F30_anim_done:;
+                break;
             }
 
             if ((other = (HSD_GObj*) base[gp->u.venom.xC8 + 8]) != NULL) {
@@ -1624,19 +1595,7 @@ void grVenom_80205F30(Ground_GObj* gobj)
                 {
                     sp88.y += 5.0F;
                     lbAudioAx_800237A8(0x6B6C9, 0x7F, 0x40);
-                    fire_kind = -1;
-                    switch (base[GET_GROUND(gobj)->u.venom.xC8 + 14]) {
-                    case 0:
-                        break;
-                    case 1:
-                    case 2:
-                    case 3:
-                        fire_kind = 0;
-                        break;
-                    case 4:
-                        fire_kind = 1;
-                        break;
-                    }
+                    fire_kind = getFireKind(gobj, base);
                     if (fire_kind == 1) {
                         it_802E7654(gobj, Ground_801C3FA4(gobj, 7), &sp88, 3,
                                     0, yakumono_param->x34);
