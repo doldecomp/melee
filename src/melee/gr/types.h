@@ -2022,8 +2022,14 @@ struct GroundShadowEntry {
     u8 flag : 1;
 };
 
+struct Ground_801C34AC_entry {
+    /* +0 */ HSD_Joint* joint;
+    /* +4 */ s16* pairs DAT_COUNT(pair_count * 2);
+    /* +8 */ s32 pair_count;
+};
+
 struct UnkStageDat {
-    void* unk0 DAT_COUNT(unk4);
+    struct Ground_801C34AC_entry* unk0 DAT_COUNT(unk4);
     s32 unk4;
 
     // Suspect this may not be a consistent type based on un_802FD708 callers

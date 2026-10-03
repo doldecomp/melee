@@ -1895,12 +1895,6 @@ UNUSED static u32 unk_words[] = {
     0xFFFFFFFF, 0x00000000, 0x00000000, 0x00000000,
 };
 
-struct Ground_801C34AC_entry {
-    void* joint;
-    s16* pairs;
-    s32 pair_count;
-};
-
 void Ground_801C34AC(s32 map_id, HSD_JObj* root, struct HSD_Joint* joint)
 {
     HSD_JObj* jobj;
@@ -1985,18 +1979,13 @@ void Ground_801C34AC(s32 map_id, HSD_JObj* root, struct HSD_Joint* joint)
     }
 }
 
-struct Ground_801C36F4_entry {
-    void* joint;
-    u8 x4_pad[0x8];
-};
-
 void Ground_801C36F4(int map_id, HSD_JObj* root, UNK_T joint)
 {
     HSD_JObj* jobj;
     UnkStageDat* stage_dat;
     UnkArchiveStruct* archive;
     int entry_count;
-    struct Ground_801C36F4_entry* entry;
+    struct Ground_801C34AC_entry* entry;
     int i;
     u32 unused[4];
 
@@ -3258,17 +3247,9 @@ Item_GObj* Ground_801C58E0(s32 arg0, s32 arg1)
     return result;
 }
 
-struct Ground_801C5940_phi_r8 {
-    u8 x0_pad[0x4];
-    struct Ground_801C5940_phi_r8_unk4 {
-        s16 a, b;
-    }* unk4;
-    s32 unk8;
-};
-
 int Ground_801C5940(void)
 {
-    struct Ground_801C5940_phi_r8* phi_r8;
+    struct Ground_801C34AC_entry* phi_r8;
     int i, j, out_idx;
     UnkArchiveStruct* archive;
     const size_t vals_count = 32;
@@ -3281,9 +3262,9 @@ int Ground_801C5940(void)
     }
     phi_r8 = archive->unk4->unk0;
     for (i = 0; i < archive->unk4->unk4; i++, phi_r8++) {
-        int max = phi_r8->unk8;
+        int max = phi_r8->pair_count;
         for (j = 0; j < max; j++) {
-            int val = phi_r8->unk4[j].b;
+            int val = phi_r8->pairs[j * 2 + 1];
             if (val >= 220 && val < 252 && (unsigned) out_idx < vals_count) {
                 vals[out_idx] = val;
                 out_idx++;
