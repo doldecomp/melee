@@ -17,9 +17,9 @@ ItemStateTable it_803F6110[] = {
 
 HSD_AnimJoint* it_80293660(int idx)
 {
-    KinokoAnim* attrs =
-        &it_804D6D24[It_Kind_Kinoko]->x4_specialAttributes->kinoko_anim;
-    return attrs[idx + 2].joint;
+    KinokoAttrs* attrs =
+        &it_804D6D24[It_Kind_Kinoko]->x4_specialAttributes->kinoko;
+    return attrs->x8[idx];
 }
 
 void itKinoko_Logic26_Spawned(Item_GObj* gobj)
