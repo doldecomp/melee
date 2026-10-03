@@ -102,8 +102,9 @@ void mpIsland_8005A728(void)
                 {
                     hidden = 1;
                 }
-                next = lines[end_idx].x0->next_id0;
-                if (next == -1 || !(lines[next].x0->hi_flags & CollLine_Floor))
+                next = lines[end_idx].inner->next_id0;
+                if (next == -1 ||
+                    !(lines[next].inner->hi_flags & CollLine_Floor))
                 {
                     break;
                 }
@@ -113,8 +114,8 @@ void mpIsland_8005A728(void)
             seg.p->next = NULL;
             seg.p->line0 = (s16) line_idx;
             seg.p->line1 = (s16) end_idx;
-            seg.p->vtx0 = lines[line_idx].x0->v0_idx;
-            seg.p->vtx1 = lines[end_idx].x0->v1_idx;
+            seg.p->vtx0 = lines[line_idx].inner->v0_idx;
+            seg.p->vtx1 = lines[end_idx].inner->v1_idx;
             seg.p->pos0.x = vtx[seg.p->vtx0].pos.x;
             seg.p->pos0.y = vtx[seg.p->vtx0].pos.y;
             seg.p->pos0.z = z_val;
@@ -167,9 +168,9 @@ void mpIsland_8005A728(void)
                 {
                     hidden = 1;
                 }
-                next = lines[end_idx].x0->prev_id0;
+                next = lines[end_idx].inner->prev_id0;
                 if (next == -1 ||
-                    !(lines[next].x0->hi_flags & CollLine_Ceiling))
+                    !(lines[next].inner->hi_flags & CollLine_Ceiling))
                 {
                     break;
                 }
@@ -179,8 +180,8 @@ void mpIsland_8005A728(void)
             seg.p->next = NULL;
             seg.p->line0 = (s16) line_idx;
             seg.p->line1 = (s16) end_idx;
-            seg.p->vtx0 = lines[line_idx].x0->v1_idx;
-            seg.p->vtx1 = lines[end_idx].x0->v0_idx;
+            seg.p->vtx0 = lines[line_idx].inner->v1_idx;
+            seg.p->vtx1 = lines[end_idx].inner->v0_idx;
             seg.p->pos0.x = vtx[seg.p->vtx0].pos.x;
             seg.p->pos0.y = vtx[seg.p->vtx0].pos.y;
             seg.p->pos0.z = z_val;
@@ -227,7 +228,7 @@ mpIsland* mpIsland_8005AB54(int surface_idx)
                 }
 
                 done = true;
-                j_next = v2[j].x0->next_id0;
+                j_next = v2[j].inner->next_id0;
 
                 if (j_next != -1 && (v2[j_next].flags & CollLine_Floor)) {
                     done = false;
@@ -294,9 +295,9 @@ void mpIsland_8005ACE8(mpIsland* island, Vec3* left, Vec3* right)
     }
 
     for (i = 0; i < count && find_left && find_right; line_id++) {
-        if (find_left && line->x0->v0_idx == island->vtx0) {
+        if (find_left && line->inner->v0_idx == island->vtx0) {
             mpFloorGetLeft(line_id, left);
-        } else if (find_right && line->x0->v1_idx == island->vtx1) {
+        } else if (find_right && line->inner->v1_idx == island->vtx1) {
             mpFloorGetRight(line_id, right);
         }
         i++;
@@ -445,7 +446,7 @@ void mpIsland_8005B004(mpIsland** list, mpIsland** free_list, int joint_id,
 
         for (;;) {
             visited[end_idx] = 1;
-            link = lines[end_idx].x0->prev_id0;
+            link = lines[end_idx].inner->prev_id0;
             if (link == -1) {
                 break;
             }
@@ -464,7 +465,7 @@ void mpIsland_8005B004(mpIsland** list, mpIsland** free_list, int joint_id,
 
             for (;;) {
                 visited[start_idx] = 1;
-                link = lines[start_idx].x0->next_id0;
+                link = lines[start_idx].inner->next_id0;
                 if (link == -1) {
                     break;
                 }
@@ -486,17 +487,17 @@ void mpIsland_8005B004(mpIsland** list, mpIsland** free_list, int joint_id,
             cycle_start = i;
 
             do {
-                if (min_x > vtx[lines[i].x0->v0_idx].pos.x) {
-                    min_x = vtx[lines[i].x0->v0_idx].pos.x;
+                if (min_x > vtx[lines[i].inner->v0_idx].pos.x) {
+                    min_x = vtx[lines[i].inner->v0_idx].pos.x;
                     end_idx = i;
                 }
                 {
-                    if (max_x > vtx[lines[i].x0->v1_idx].pos.x) {
-                        max_x = vtx[lines[i].x0->v1_idx].pos.x;
+                    if (max_x > vtx[lines[i].inner->v1_idx].pos.x) {
+                        max_x = vtx[lines[i].inner->v1_idx].pos.x;
                         start_idx = i;
                     }
                 }
-                link = lines[i].x0->prev_id0;
+                link = lines[i].inner->prev_id0;
                 (void) lines[link];
                 i = link;
             } while (link != cycle_start);
@@ -513,8 +514,8 @@ void mpIsland_8005B004(mpIsland** list, mpIsland** free_list, int joint_id,
         mpisp->next = NULL;
         mpisp->line0 = (s16) end_idx;
         mpisp->line1 = (s16) start_idx;
-        mpisp->vtx0 = lines[end_idx].x0->v0_idx;
-        mpisp->vtx1 = lines[start_idx].x0->v1_idx;
+        mpisp->vtx0 = lines[end_idx].inner->v0_idx;
+        mpisp->vtx1 = lines[start_idx].inner->v1_idx;
         mpisp->pos0.x = vtx[mpisp->vtx0].pos.x;
         mpisp->pos0.y = vtx[mpisp->vtx0].pos.y;
         mpisp->pos0.z = z_val;

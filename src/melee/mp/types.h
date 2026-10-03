@@ -27,7 +27,7 @@ struct mpIsland_PaletteEntry {
 };
 
 struct mpIsland_Palette {
-    mpIsland_PaletteEntry x0[20];
+    mpIsland_PaletteEntry entries[20];
 };
 
 struct mpIsland {
@@ -55,7 +55,7 @@ struct MapLine {
 };
 
 struct CollLine {
-    /* +0 */ MapLine* x0;
+    /* +0 */ MapLine* inner;
     /* +4 */ u32 flags;
 };
 
@@ -98,7 +98,7 @@ struct CollJoint {
     /* 0x0E */ u8 xE : 1;
     /* 0x10 */ Vec2 bounding_min;
     /* 0x18 */ Vec2 bounding_max;
-    /* 0x20 */ HSD_JObj* x20;
+    /* 0x20 */ HSD_JObj* jobj;
     /* 0x24 */ mpLib_JointCollisionCallback
         cb_0; ///< @todo Possible array here
     /* 0x28 */ Ground* cb_data_0;
