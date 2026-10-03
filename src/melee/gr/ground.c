@@ -1904,7 +1904,7 @@ void Ground_801C34AC(s32 map_id, HSD_JObj* root, struct HSD_Joint* joint)
     int i;
     struct Ground_801C34AC_entry* entry;
     int count;
-    s16* pair;
+    struct GroundJointPair* pair;
     int prev_index;
     int target;
     int j;
@@ -1941,7 +1941,7 @@ void Ground_801C34AC(s32 map_id, HSD_JObj* root, struct HSD_Joint* joint)
     count = entry->pair_count;
     pair = entry->pairs;
     for (j = count; j > 0; j--) {
-        target = pair[0];
+        target = pair->joint_index;
         if (prev_index > target || prev_index == -1) {
             jobj = root;
             i = 0;
@@ -1974,8 +1974,8 @@ void Ground_801C34AC(s32 map_id, HSD_JObj* root, struct HSD_Joint* joint)
             i++;
         }
         prev_index = i;
-        stage_info.x280[pair[1]] = jobj;
-        pair += 2;
+        stage_info.x280[pair->stage_joint_index] = jobj;
+        pair++;
     }
 }
 
@@ -3264,7 +3264,7 @@ int Ground_801C5940(void)
     for (i = 0; i < archive->unk4->unk4; i++, phi_r8++) {
         int max = phi_r8->pair_count;
         for (j = 0; j < max; j++) {
-            int val = phi_r8->pairs[j * 2 + 1];
+            int val = phi_r8->pairs[j].stage_joint_index;
             if (val >= 220 && val < 252 && (unsigned) out_idx < vals_count) {
                 vals[out_idx] = val;
                 out_idx++;

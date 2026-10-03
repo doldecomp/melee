@@ -2022,9 +2022,14 @@ struct GroundShadowEntry {
     u8 flag : 1;
 };
 
+struct GroundJointPair {
+    /* +0 */ s16 joint_index;
+    /* +2 */ s16 stage_joint_index;
+};
+
 struct Ground_801C34AC_entry {
     /* +0 */ HSD_Joint* joint;
-    /* +4 */ s16* pairs DAT_COUNT(pair_count * 2);
+    /* +4 */ struct GroundJointPair* pairs DAT_COUNT(pair_count);
     /* +8 */ s32 pair_count;
 };
 
