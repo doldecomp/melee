@@ -42,7 +42,7 @@ void it_802ADA1C(Vec3* pos, Vec3* vel, float facing_dir)
         if (gobj != NULL) {
             Item* ip = GET_ITEM(gobj);
             itUnkAttributes* attrs =
-                &ip->xC4_article_data->x4_specialAttributes->generic;
+                &ip->xC4_article_data->x4_specialAttributes->unk1;
             it_80275158(gobj, attrs->x0_float);
             it_802ADAF0(gobj);
         }
