@@ -6666,21 +6666,6 @@ void mpLib_80059554(void)
     }
 }
 
-struct mpLib_80059E60_sp28 {
-    mpIsland_Palette palette;
-    u8 pad[4];
-    GXColor line_color;
-    GXColor basic_color;
-};
-
-struct mpLib_80059E60_colors {
-    u8 pad[0x10];
-    GXColor ledge;
-    GXColor platform;
-    GXColor ledge_platform;
-    GXColor none;
-};
-
 void mpLib_80059E60(void)
 {
     Mtx sp104;
@@ -6696,38 +6681,45 @@ void mpLib_80059E60(void)
     GXLoadPosMtxImm(sp104, 0U);
     if (Camera_80030B50()) {
         // terrain draw
-        struct mpLib_80059E60_sp28 sp28;
-        GXColor* line_color;
+        GXColor basic_color;
+        GXColor line_color;
+        UNUSED u8 pad[4];
+        mpIsland_Palette palette;
+        GXColor* color;
         mpIsland_PaletteEntry* entry;
-        sp28.palette = mpIsland_TerrainPalette;
+        palette = mpIsland_TerrainPalette;
 
-        entry = sp28.palette.entries;
-        line_color = &sp28.line_color;
+        entry = palette.entries;
+        color = &line_color;
 
         while (entry->kind != -1) {
-            *line_color = entry->color;
-            mpLib_DrawMatchingLines(entry->kind, 0xFF, line_color);
+            *color = entry->color;
+            mpLib_DrawMatchingLines(entry->kind, 0xFF, color);
             entry++;
         }
 
-        sp28.basic_color = mpLib_804D8100;
-        mpLib_DrawMatchingLines(mp_Terrain_Basic, 0xFF, &sp28.basic_color);
+        basic_color = mpLib_804D8100;
+        mpLib_DrawMatchingLines(mp_Terrain_Basic, 0xFF, &basic_color);
     } else if (Camera_80030B7C()) {
         // platform/ledge draw
-        struct mpLib_80059E60_colors colors;
-        colors.ledge = mpLib_804D80F0;
+        GXColor none_color;
+        GXColor ledge_platform_color;
+        GXColor platform_color;
+        GXColor ledge_color;
+        PAD_STACK(0x10);
+        ledge_color = mpLib_804D80F0;
         mpLib_DrawMatchingLines(LINE_FLAG_LEDGE, LINE_FLAG_LEDGE,
-                                &colors.ledge);
-        colors.platform = mpLib_804D80F4;
+                                &ledge_color);
+        platform_color = mpLib_804D80F4;
         mpLib_DrawMatchingLines(LINE_FLAG_PLATFORM, LINE_FLAG_PLATFORM,
-                                &colors.platform);
-        colors.ledge_platform = mpLib_804D80F8;
+                                &platform_color);
+        ledge_platform_color = mpLib_804D80F8;
         mpLib_DrawMatchingLines(LINE_FLAG_LEDGE | LINE_FLAG_PLATFORM,
                                 LINE_FLAG_LEDGE | LINE_FLAG_PLATFORM,
-                                &colors.ledge_platform);
-        colors.none = mpLib_804D80FC;
+                                &ledge_platform_color);
+        none_color = mpLib_804D80FC;
         mpLib_DrawMatchingLines(0, LINE_FLAG_LEDGE | LINE_FLAG_PLATFORM,
-                                &colors.none);
+                                &none_color);
     } else {
         mpLib_80059554();
     }
