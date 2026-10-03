@@ -331,6 +331,18 @@ void CreateNameAtIndex(s32 slot)
     InitializePersistentNameData(slot);
 }
 
+static inline bool hasName(s32 slot, bool* has)
+{
+    if ((s8) *mnName_StringTerminator ==
+        (s8) GetPersistentNameData(slot)->namedata[0])
+    {
+        *has = false;
+    } else {
+        *has = true;
+    }
+    return *has;
+}
+
 void mnName_SortNames(HSD_GObj* arg0)
 {
     s32 result;
@@ -342,95 +354,38 @@ void mnName_SortNames(HSD_GObj* arg0)
     PAD_STACK(8);
 
     if (((HSD_GObj*) arg0->user_data)->p_priority == 0) {
-        for (i = 0; 0x78 > i; i++) {
+        for (i = 0; GM_NAMETAG_COUNT > i; i++) {
             mnName_NameDisplayOrder[i] = (u8) i;
         }
         return;
     }
 
-    {
-        for (i = 0; i < 0x78; i++) {
-            s32 j;
+    for (i = 0; i < GM_NAMETAG_COUNT; i++) {
+        s32 j;
 
-            for (j = i + 1; j < 0x78; j++) {
-                char* name1;
-                s32 index1;
-                idx1 = mnName_NameDisplayOrder[i];
-                idx2 = mnName_NameDisplayOrder[j];
-                index1 = idx1;
-                name1 = GetPersistentNameData(index1)->namedata;
-                name2 = GetPersistentNameData((s32) idx2)->namedata;
-                {
-                    bool e1, e2;
-
-                    if ((s8) *mnName_StringTerminator ==
-                        (s8) GetPersistentNameData((s32) idx1)->namedata[0])
-                    {
-                        e1 = 0;
-                    } else {
-                        e1 = 1;
-                    }
-                    if (e1 != 0) {
-                        if ((s8) *mnName_StringTerminator ==
-                            (s8) GetPersistentNameData((s32) idx2)
-                                ->namedata[0])
-                        {
-                            e2 = 0;
-                        } else {
-                            e2 = 1;
-                        }
-                        if (e2 != 0) {
-                            result = CompareNameStrings(name1, name2);
-                        } else {
-                            goto block_15;
-                        }
-                    } else {
-                    block_15:
-                        if ((s8) *mnName_StringTerminator ==
-                            (s8) GetPersistentNameData((s32) idx1)
-                                ->namedata[0])
-                        {
-                            e1 = 0;
-                        } else {
-                            e1 = 1;
-                        }
-                        if (e1 == 0) {
-                            if ((s8) *mnName_StringTerminator ==
-                                (s8) GetPersistentNameData((s32) idx2)
-                                    ->namedata[0])
-                            {
-                                e2 = 0;
-                            } else {
-                                e2 = 1;
-                            }
-                            if (e2 == 0) {
-                                result = 0;
-                            } else {
-                                goto block_24;
-                            }
-                        } else {
-                        block_24:
-                            if ((s8) *mnName_StringTerminator ==
-                                (s8) GetPersistentNameData((s32) idx1)
-                                    ->namedata[0])
-                            {
-                                e1 = 0;
-                            } else {
-                                e1 = 1;
-                            }
-                            if (e1 == 0) {
-                                result = 1;
-                            } else {
-                                result = 2;
-                            }
-                        }
-                    }
-                }
-                if (result == 1) {
-                    result = mnName_NameDisplayOrder[i];
-                    mnName_NameDisplayOrder[i] = mnName_NameDisplayOrder[j];
-                    mnName_NameDisplayOrder[j] = result;
-                }
+        for (j = i + 1; j < GM_NAMETAG_COUNT; j++) {
+            char* name1;
+            s32 index1;
+            bool has1;
+            bool has2;
+            idx1 = mnName_NameDisplayOrder[i];
+            idx2 = mnName_NameDisplayOrder[j];
+            index1 = idx1;
+            name1 = GetPersistentNameData(index1)->namedata;
+            name2 = GetPersistentNameData(idx2)->namedata;
+            if (hasName(idx1, &has1) && hasName(idx2, &has2)) {
+                result = CompareNameStrings(name1, name2);
+            } else if (!hasName(idx1, &has1) && !hasName(idx2, &has2)) {
+                result = 0;
+            } else if (!hasName(idx1, &has1)) {
+                result = 1;
+            } else {
+                result = 2;
+            }
+            if (result == 1) {
+                result = mnName_NameDisplayOrder[i];
+                mnName_NameDisplayOrder[i] = mnName_NameDisplayOrder[j];
+                mnName_NameDisplayOrder[j] = result;
             }
         }
     }
