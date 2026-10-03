@@ -37,8 +37,8 @@ void mpIsland_8005A6F8(void)
 {
     mpIsland_80458E88.floors = NULL;
     mpIsland_80458E88.ceilings = NULL;
-    mpIsland_80458E88.floors_tail = NULL;
-    mpIsland_80458E88.ceilings_tail = NULL;
+    mpIsland_80458E88.non_dynamic_floors_tail = NULL;
+    mpIsland_80458E88.non_dynamic_ceilings_tail = NULL;
     mpIsland_80458E88.b1_floors = NULL;
     mpIsland_80458E88.b1_ceilings = NULL;
     mpIsland_80458E88.dynamic_floors = NULL;
@@ -140,7 +140,7 @@ void mpIsland_8005A728(void)
         }
     }
 
-    mpIsland_80458E88.floors_tail = prev;
+    mpIsland_80458E88.non_dynamic_floors_tail = prev;
 
     /* Process ceiling segments */
     prev = NULL;
@@ -206,7 +206,7 @@ void mpIsland_8005A728(void)
         }
     }
 
-    mpIsland_80458E88.ceilings_tail = prev;
+    mpIsland_80458E88.non_dynamic_ceilings_tail = prev;
 }
 
 mpIsland* mpIsland_8005AB54(int surface_idx)
@@ -533,14 +533,14 @@ void mpIsland_8005B334(int joint_id, int vtx_start, int vtx_count, bool flag)
 {
     mpIsland* tail;
 
-    if (mpIsland_80458E88.floors_tail != NULL) {
-        mpIsland_80458E88.floors_tail->next = NULL;
+    if (mpIsland_80458E88.non_dynamic_floors_tail != NULL) {
+        mpIsland_80458E88.non_dynamic_floors_tail->next = NULL;
     } else {
         mpIsland_80458E88.floors = NULL;
     }
 
-    if (mpIsland_80458E88.ceilings_tail != NULL) {
-        mpIsland_80458E88.ceilings_tail->next = NULL;
+    if (mpIsland_80458E88.non_dynamic_ceilings_tail != NULL) {
+        mpIsland_80458E88.non_dynamic_ceilings_tail->next = NULL;
     } else {
         mpIsland_80458E88.ceilings = NULL;
     }
@@ -567,7 +567,7 @@ void mpIsland_8005B334(int joint_id, int vtx_start, int vtx_count, bool flag)
     } else {
         mpIsland_80458E88.floors = mpIsland_80458E88.dynamic_floors;
     }
-    mpIsland_80458E88.floors_tail = tail;
+    mpIsland_80458E88.non_dynamic_floors_tail = tail;
 
     // Append the dynamic ceilings to the ceiling list
     tail = mpIsland_80458E88.ceilings;
@@ -579,5 +579,5 @@ void mpIsland_8005B334(int joint_id, int vtx_start, int vtx_count, bool flag)
     } else {
         mpIsland_80458E88.ceilings = mpIsland_80458E88.dynamic_ceilings;
     }
-    mpIsland_80458E88.ceilings_tail = tail;
+    mpIsland_80458E88.non_dynamic_ceilings_tail = tail;
 }
