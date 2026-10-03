@@ -462,21 +462,21 @@ void ftNs_Init_OnDeath(HSD_GObj* gobj)
 void ftNs_Init_OnLoad(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
-    union ftData_Item* item_list = fp->ft_data->x48_items;
+    void** item_list = fp->ft_data->x48_items;
 
     PUSH_ATTRS(fp, ftNessAttributes);
 
-    it_8026B3F8(item_list[0].article, It_Kind_Ness_PKFire);
-    it_8026B3F8(item_list[1].article, It_Kind_Ness_PKFire_Flame);
-    it_8026B3F8(item_list[2].article, It_Kind_Ness_PKFlush);
-    it_8026B3F8(item_list[8].article, It_Kind_Ness_PKFlush_Explode);
-    it_8026B3F8(item_list[3].article, It_Kind_Ness_PKThunder);
-    it_8026B3F8(item_list[4].article, It_Kind_Ness_PKThunder1);
-    it_8026B3F8(item_list[5].article, It_Kind_Ness_PKThunder2);
-    it_8026B3F8(item_list[6].article, It_Kind_Ness_PKThunder3);
-    it_8026B3F8(item_list[7].article, It_Kind_Ness_PKThunder4);
-    it_8026B3F8(item_list[9].article, It_Kind_Ness_Bat);
-    it_8026B3F8(item_list[10].article, It_Kind_Ness_Yoyo);
+    it_8026B3F8(item_list[0], It_Kind_Ness_PKFire);
+    it_8026B3F8(item_list[1], It_Kind_Ness_PKFire_Flame);
+    it_8026B3F8(item_list[2], It_Kind_Ness_PKFlush);
+    it_8026B3F8(item_list[8], It_Kind_Ness_PKFlush_Explode);
+    it_8026B3F8(item_list[3], It_Kind_Ness_PKThunder);
+    it_8026B3F8(item_list[4], It_Kind_Ness_PKThunder1);
+    it_8026B3F8(item_list[5], It_Kind_Ness_PKThunder2);
+    it_8026B3F8(item_list[6], It_Kind_Ness_PKThunder3);
+    it_8026B3F8(item_list[7], It_Kind_Ness_PKThunder4);
+    it_8026B3F8(item_list[9], It_Kind_Ness_Bat);
+    it_8026B3F8(item_list[10], It_Kind_Ness_Yoyo);
 }
 
 void ftNs_Init_OnDamage(HSD_GObj* gobj)

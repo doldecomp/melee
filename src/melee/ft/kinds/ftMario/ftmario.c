@@ -175,7 +175,7 @@ void ftMr_Init_OnLoad(HSD_GObj* gobj)
     /// @todo #GET_FIGHTER is too much stack. Problem with #PUSH_ATTRS?
     Fighter* fp = gobj->user_data;
     ftData* ftDataInfo = fp->ft_data;
-    union ftData_Item* items = ftDataInfo->x48_items;
+    void** items = ftDataInfo->x48_items;
 
     fp->can_walljump = true;
 
@@ -184,8 +184,8 @@ void ftMr_Init_OnLoad(HSD_GObj* gobj)
     {
         ftMario_DatAttrs* sa = fp->dat_attrs;
 
-        it_8026B3F8(items[0].article, It_Kind_Mario_Fire);
-        it_8026B3F8(items[2].article, sa->specials.cape_kind);
+        it_8026B3F8(items[0], It_Kind_Mario_Fire);
+        it_8026B3F8(items[2], sa->specials.cape_kind);
     }
 }
 

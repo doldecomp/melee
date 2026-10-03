@@ -1181,7 +1181,7 @@ HSD_GObjEvent ftKindCalcIndiviParamTable[Ft_Kind_Max] = {
 /// Standard Character .dat File Names
 struct StringPair {
     char* a;
-    char* b DAT_BIND(fighter_kind, _index);
+    char* b;
 };
 
 struct StringPair ftData_803C1F40[Ft_Kind_Max] = {
