@@ -765,7 +765,7 @@ static inline void mpCollEnd_inline(CollData* coll, int line_id, bool flag,
     mpColl_80043268(coll, line_id, flag, dy);
 }
 
-void mpCollEnd(CollData* coll, bool hit, bool flag)
+void mpCollEnd(CollData* coll, bool result, bool flag)
 {
     PAD_STACK(4);
     if (coll->floor.index != -1) {
@@ -774,7 +774,7 @@ void mpCollEnd(CollData* coll, bool hit, bool flag)
             coll->floor.flags = (coll->floor.flags & ~0xFF) | (attr & 0xFF);
         }
     }
-    if (hit || coll->env_flags & Collide_Edge ||
+    if (result || coll->env_flags & Collide_Edge ||
         coll->env_flags & Collide_LeftEdge ||
         coll->env_flags & Collide_RightEdge)
     {
@@ -2348,7 +2348,7 @@ bool mpColl_80046904(CollData* coll, int flags)
     squeeze_flags = 0;
 
     do {
-        bool hit;
+        bool result;
         float x_after_collide_right;
         float x_after_collide_left;
         float y_after_collide_floor;
@@ -2409,16 +2409,16 @@ bool mpColl_80046904(CollData* coll, int flags)
         }
 
         if (platform_pass) {
-            hit = mpColl_80044628_Floor(
+            result = mpColl_80044628_Floor(
                 c, mpColl_804D64A0, mpColl_804D64A4,
                 left_right_flags); // Physics_FloorCheckAir
         } else {
-            hit = mpColl_80044628_Floor(
+            result = mpColl_80044628_Floor(
                 c, NULL, NULL,
                 left_right_flags); // Physics_FloorCheckAir
         }
 
-        if (hit) {
+        if (result) {
             if (stay_airborne) {
                 if (mpColl_80044948_Floor(c)) {
                     floorWallHug(c, false, squeeze_flags, &wid_floorA);
@@ -3091,11 +3091,11 @@ bool mpColl_800491C8_RightWall(CollData* coll)
         mpRightWallGetTop(wall_id, &pos);
         if (pos.y < (coll->cur_pos.y + coll->ecb.bottom.y)) {
             if (mpColl_804D6490_max_x < pos.x) {
-                int hit = mpLib_8004E684_RightWall(wall_id, &pos, NULL, &flags,
-                                                   &normal);
-                if (hit != -1) {
+                int new_id = mpLib_8004E684_RightWall(wall_id, &pos, NULL,
+                                                      &flags, &normal);
+                if (new_id != -1) {
                     mpColl_804D6490_max_x = pos.x;
-                    mpColl_804D6494_line_id = hit;
+                    mpColl_804D6494_line_id = new_id;
                     mpColl_804D6498_flags = flags;
                     mpColl_80458810.normal = normal;
                 }
@@ -3107,11 +3107,11 @@ bool mpColl_800491C8_RightWall(CollData* coll)
         mpRightWallGetBottom(wall_id, &pos);
         if (pos.y > (coll->cur_pos.y + coll->ecb.top.y)) {
             if (mpColl_804D6490_max_x < pos.x) {
-                int hit = mpLib_8004E684_RightWall(wall_id, &pos, NULL, &flags,
-                                                   &normal);
-                if (hit != -1) {
+                int new_id = mpLib_8004E684_RightWall(wall_id, &pos, NULL,
+                                                      &flags, &normal);
+                if (new_id != -1) {
                     mpColl_804D6490_max_x = pos.x;
-                    mpColl_804D6494_line_id = hit;
+                    mpColl_804D6494_line_id = new_id;
                     mpColl_804D6498_flags = flags;
                     mpColl_80458810.normal = normal;
                 }
@@ -3387,11 +3387,11 @@ bool mpColl_80049EAC_LeftWall(CollData* coll)
         mpLeftWallGetTop(wall_id, &pos);
         if (pos.y < (coll->cur_pos.y + coll->ecb.bottom.y)) {
             if (mpColl_804D6490_max_x > pos.x) {
-                int hit = mpLib_8004E398_LeftWall(wall_id, &pos, NULL, &flags,
-                                                  &normal);
-                if (hit != -1) {
+                int new_id = mpLib_8004E398_LeftWall(wall_id, &pos, NULL,
+                                                     &flags, &normal);
+                if (new_id != -1) {
                     mpColl_804D6490_max_x = pos.x;
-                    mpColl_804D6494_line_id = hit;
+                    mpColl_804D6494_line_id = new_id;
                     mpColl_804D6498_flags = flags;
                     mpColl_80458810.normal = normal;
                 }
@@ -3403,11 +3403,11 @@ bool mpColl_80049EAC_LeftWall(CollData* coll)
         mpLeftWallGetBottom(wall_id, &pos);
         if (pos.y > (coll->cur_pos.y + coll->ecb.top.y)) {
             if (mpColl_804D6490_max_x > pos.x) {
-                int hit = mpLib_8004E398_LeftWall(wall_id, &pos, NULL, &flags,
-                                                  &normal);
-                if (hit != -1) {
+                int new_id = mpLib_8004E398_LeftWall(wall_id, &pos, NULL,
+                                                     &flags, &normal);
+                if (new_id != -1) {
                     mpColl_804D6490_max_x = pos.x;
-                    mpColl_804D6494_line_id = hit;
+                    mpColl_804D6494_line_id = new_id;
                     mpColl_804D6498_flags = flags;
                     mpColl_80458810.normal = normal;
                 }
@@ -3878,7 +3878,7 @@ bool mpColl_8004ACE4(CollData* coll, int flags)
             }
         } else {
             int old_skip;
-            bool hit = false;
+            bool flag = false;
             int floor_id = coll->floor.index;
             if (mpLib_80054ED8(floor_id) &&
                 mpLineGetKind(floor_id) == CollLine_Floor)
@@ -3890,7 +3890,7 @@ bool mpColl_8004ACE4(CollData* coll, int flags)
                         hit_floor = true;
                         y_after_floor = coll->cur_pos.y;
                     } else {
-                        hit = true;
+                        flag = true;
                     }
                 } else if (flags & 2) {
                     if (mpColl_8004A45C_Floor(coll, floor_id)) {
@@ -3899,13 +3899,13 @@ bool mpColl_8004ACE4(CollData* coll, int flags)
                         hit_floor = true;
                         y_after_floor = coll->cur_pos.y;
                     } else {
-                        hit = true;
+                        flag = true;
                     }
                 } else {
-                    hit = true;
+                    flag = true;
                 }
 
-                if (hit) {
+                if (flag) {
                     old_skip = coll->floor_skip;
                     coll->floor_skip = floor_id;
                     if (mpColl_80046904(coll, 0U)) {

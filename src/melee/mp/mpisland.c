@@ -399,8 +399,8 @@ void mpIsland_8005B004(mpIsland** list, mpIsland** free_list, int joint_id,
     u32 type_flag;
     s16 link;
     int cycle_start;
-    float max_x;
-    float min_x;
+    float v1_x;
+    float v0_x;
     int i;
     PAD_STACK(8);
 
@@ -482,18 +482,18 @@ void mpIsland_8005B004(mpIsland** list, mpIsland** free_list, int joint_id,
             HSD_ASSERT(0x206, !loop);
         } else {
             i = start_idx = end_idx;
-            max_x = -F32_MAX;
-            min_x = F32_MAX;
+            v1_x = -F32_MAX;
+            v0_x = F32_MAX;
             cycle_start = i;
 
             do {
-                if (min_x > vtx[lines[i].inner->v0_idx].pos.x) {
-                    min_x = vtx[lines[i].inner->v0_idx].pos.x;
+                if (v0_x > vtx[lines[i].inner->v0_idx].pos.x) {
+                    v0_x = vtx[lines[i].inner->v0_idx].pos.x;
                     end_idx = i;
                 }
                 {
-                    if (max_x > vtx[lines[i].inner->v1_idx].pos.x) {
-                        max_x = vtx[lines[i].inner->v1_idx].pos.x;
+                    if (v1_x > vtx[lines[i].inner->v1_idx].pos.x) {
+                        v1_x = vtx[lines[i].inner->v1_idx].pos.x;
                         start_idx = i;
                     }
                 }
