@@ -908,7 +908,7 @@ s32 it_802A3E50(ItemLink* item_link, enum FighterKind arg1, f32 arg8)
 
     CollData* coll; ///< @todo This is seemingly the wrong struct; there should
     // be floats at 0x8, 0xC, 0x14, 0x18
-    mp_UnkStruct0* mp_island;
+    mpIsland* mp_island;
     bool flag;
     s32 var_r29;
 
@@ -934,19 +934,19 @@ s32 it_802A3E50(ItemLink* item_link, enum FighterKind arg1, f32 arg8)
             mp_island =
                 mpIsland_8005AB54(item_link_next_2->coll_data.floor.index);
             if (mp_island != NULL) {
-                if ((mp_island->x14.x < item_link->pos.x) &&
-                    (mp_island->x14.y > item_link->pos.y))
+                if ((mp_island->pos1.x < item_link->pos.x) &&
+                    (mp_island->pos1.y > item_link->pos.y))
                 {
                     item_link->pos.x = item_link->pos.x;
-                    item_link->pos.y = mp_island->x14.y;
+                    item_link->pos.y = mp_island->pos1.y;
                     return coll->env_flags &
                            (Collide_FloorMask | Collide_WallMask);
                 }
-                if ((mp_island->x8.x > item_link->pos.x) &&
-                    (mp_island->x8.y > item_link->pos.y))
+                if ((mp_island->pos0.x > item_link->pos.x) &&
+                    (mp_island->pos0.y > item_link->pos.y))
                 {
                     item_link->pos.x = item_link->pos.x;
-                    item_link->pos.y = mp_island->x14.y;
+                    item_link->pos.y = mp_island->pos1.y;
                     return coll->env_flags &
                            (Collide_FloorMask | Collide_WallMask);
                 }
@@ -985,7 +985,7 @@ s32 it_802A40D0(ItemLink* item_link, f32 arg8)
     f32 temp_f2;
 
     CollData* coll;
-    mp_UnkStruct0* mp_island;
+    mpIsland* mp_island;
     s32 flag_2;
     s32 var_r29;
 
@@ -1010,19 +1010,19 @@ s32 it_802A40D0(ItemLink* item_link, f32 arg8)
             mp_island =
                 mpIsland_8005AB54(item_link_next_2->coll_data.floor.index);
             if (mp_island != NULL) {
-                if ((mp_island->x14.x < item_link->pos.x) &&
-                    (mp_island->x14.y > item_link->pos.y))
+                if ((mp_island->pos1.x < item_link->pos.x) &&
+                    (mp_island->pos1.y > item_link->pos.y))
                 {
                     item_link->pos.x = item_link->pos.x;
-                    item_link->pos.y = mp_island->x14.y;
+                    item_link->pos.y = mp_island->pos1.y;
                     return coll->env_flags &
                            (Collide_FloorMask | Collide_WallMask);
                 }
-                if ((mp_island->x8.x > item_link->pos.x) &&
-                    (mp_island->x8.y > item_link->pos.y))
+                if ((mp_island->pos0.x > item_link->pos.x) &&
+                    (mp_island->pos0.y > item_link->pos.y))
                 {
                     item_link->pos.x = item_link->pos.x;
-                    item_link->pos.y = mp_island->x14.y;
+                    item_link->pos.y = mp_island->pos1.y;
                     return coll->env_flags &
                            (Collide_FloorMask | Collide_WallMask);
                 }

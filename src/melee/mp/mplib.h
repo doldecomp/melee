@@ -177,7 +177,8 @@
 /* 056B6C */ int mpJointFromLine(int line_id);
 /* 056C54 */ bool mpLib_80056C54(int line_id, Vec3* pos, int* line_id_out,
                                  Vec3* vec_out, u32* flags_out,
-                                 Vec3* normal_out, float, float);
+                                 Vec3* normal_out, float distance,
+                                 float wall_limit);
 /* 057424 */ void mpLib_80057424(int joint_id);
 /* 057528 */ void mpLib_80057528(int line_id);
 /* 0575B0 */ void mpLib_800575B0(int line_id);
