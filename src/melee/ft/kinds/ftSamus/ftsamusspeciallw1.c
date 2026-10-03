@@ -4,6 +4,7 @@
 
 #include <melee/ft/forward.h>
 
+#include "forward.h"
 #include "types.h"
 #include <dolphin/mtx.h>
 #include <melee/ft/fighter.h>
@@ -82,14 +83,15 @@ void ftSs_SpecialLw_Enter(HSD_GObj* gobj)
 
     fp->gr_vel *= samus_attr->x6C;
     if (fp->motion_id == 0x28) {
-        Fighter_ChangeMotionState(gobj, 0x163, Ft_MF_None, 3.0f, 1.0f, 0.0f,
-                                  NULL);
+        Fighter_ChangeMotionState(gobj, ftSs_MS_SpecialLwBomb, Ft_MF_None,
+                                  3.0f, 1.0f, 0.0f, NULL);
         ftSamus_SpecialLw_StartAction_inner(gobj);
         fp->cmd_vars[1] = 2;
         ftSs_SpecialLw_8012B5F0(gobj);
         return;
     }
-    Fighter_ChangeMotionState(gobj, 0x163, Ft_MF_None, 0.0f, 1.0f, 0.0f, NULL);
+    Fighter_ChangeMotionState(gobj, ftSs_MS_SpecialLwBomb, Ft_MF_None, 0.0f,
+                              1.0f, 0.0f, NULL);
     ftAnim_8006EBA4(gobj);
     ftSamus_SpecialLw_StartAction_inner(gobj);
 }
@@ -104,7 +106,8 @@ void ftSs_SpecialAirLw_Enter(HSD_GObj* gobj)
     fp->self_vel.x *= samus_attr->x70;
     fp->self_vel.y = samus_attr->x58;
 
-    Fighter_ChangeMotionState(gobj, 0x164, Ft_MF_None, 0.0f, 1.0f, 0.0f, NULL);
+    Fighter_ChangeMotionState(gobj, ftSs_MS_SpecialAirLwBomb, Ft_MF_None, 0.0f,
+                              1.0f, 0.0f, NULL);
     ftAnim_8006EBA4(gobj);
     ftSamus_SpecialLw_StartAction_inner(gobj);
 }
@@ -238,7 +241,8 @@ static void ftSamus_UnkSetStateAndCb(HSD_GObj* gobj)
 void ftSs_SpecialLw_8012B570(HSD_GObj* gobj)
 {
     Fighter* fp = getFighter(gobj);
-    ftCommon_GroundToAirStateChange(gobj, fp, 0x164, ftSs_MF_SpecialLw_Coll);
+    ftCommon_GroundToAirStateChange(gobj, fp, ftSs_MS_SpecialAirLwBomb,
+                                    ftSs_MF_SpecialLw_Coll);
     ftSamus_UnkSetStateAndCb(gobj);
 }
 
@@ -247,13 +251,15 @@ void ftSs_SpecialLw_8012B5F0(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     ftSs_DatAttrs* samus_attr = getFtSpecialAttrs(fp);
     fp->self_vel.y = samus_attr->x54;
-    ftCommon_GroundToAirStateChange(gobj, fp, 0x164, ftSs_MF_SpecialLw_Coll);
+    ftCommon_GroundToAirStateChange(gobj, fp, ftSs_MS_SpecialAirLwBomb,
+                                    ftSs_MF_SpecialLw_Coll);
     fp->accessory4_cb = ftSs_SpecialLw_8012ADF0;
 }
 
 void ftSs_SpecialLw_8012B668(HSD_GObj* gobj)
 {
     Fighter* fp = getFighter(gobj);
-    ftCommon_AirToGroundStateChange(gobj, fp, 0x163, ftSs_MF_SpecialLw_Coll);
+    ftCommon_AirToGroundStateChange(gobj, fp, ftSs_MS_SpecialLwBomb,
+                                    ftSs_MF_SpecialLw_Coll);
     ftSamus_UnkSetStateAndCb(gobj);
 }
