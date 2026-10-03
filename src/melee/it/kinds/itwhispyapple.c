@@ -145,7 +145,7 @@ void it_802EE374(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     itWhispyAppleAttributes* attrs =
-        ip->xC4_article_data->x4_specialAttributes;
+        &ip->xC4_article_data->x4_specialAttributes->whispy_apple;
     f32 rand;
 
     Item_80268E5C(gobj, 0, ITEM_ANIM_UPDATE);

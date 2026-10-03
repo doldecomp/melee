@@ -11,11 +11,6 @@
 #include <melee/it/item.h>
 #include <melee/it/itgroundcoll.h>
 
-typedef struct StarRodAttributes {
-    int x0;
-    Vec x4;
-} StarRodAttributes;
-
 ItemStateTable it_803F5F90[] = {
     { -1, itStarrod_UnkMotion0_Anim, itStarrod_UnkMotion0_Phys,
       itStarrod_UnkMotion0_Coll },
@@ -33,7 +28,8 @@ ItemStateTable it_803F5F90[] = {
 void itStarRod_Logic22_Spawned(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
-    StarRodAttributes* x = ip->xC4_article_data->x4_specialAttributes;
+    StarRodAttributes* x =
+        &ip->xC4_article_data->x4_specialAttributes->star_rod;
     ip->xD4C = x->x0;
     it_80292488(gobj);
 }
@@ -41,7 +37,8 @@ void itStarRod_Logic22_Spawned(Item_GObj* gobj)
 void it_80292394(Item_GObj* gobj, Vec* arg1)
 {
     Item* ip = GET_ITEM(gobj);
-    StarRodAttributes* x = ip->xC4_article_data->x4_specialAttributes;
+    StarRodAttributes* x =
+        &ip->xC4_article_data->x4_specialAttributes->star_rod;
     *arg1 = x->x4;
 }
 

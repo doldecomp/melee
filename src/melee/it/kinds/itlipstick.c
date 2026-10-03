@@ -9,8 +9,7 @@
 #include <melee/it/itgroundcoll.h>
 #include <melee/it/itmaplib.h>
 
-#define GET_ATTRS(ip)                                                         \
-    ((itLipstickAttributes*) (ip)->xC4_article_data->x4_specialAttributes)
+#define GET_ATTRS(ip) (&(ip)->xC4_article_data->x4_specialAttributes->lipstick)
 
 ItemStateTable it_803F6310[] = {
     { 0, itLipstick_UnkMotion0_Anim, itLipstick_UnkMotion0_Phys,

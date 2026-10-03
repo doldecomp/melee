@@ -73,7 +73,7 @@ Item_GObj* itPikachuThunderJolt_Spawn(Item_GObj* owner, Vec3* pos,
     if (item_gobj != NULL) {
         Item* ip = GET_ITEM(item_gobj);
         itPikachutJoltGroundAttributes* attr =
-            ip->xC4_article_data->x4_specialAttributes;
+            &ip->xC4_article_data->x4_specialAttributes->pikachut_jolt_ground;
         if (it_8026E9A4(item_gobj, &spawn.pos, &spawn.prev_pos,
                         &coll_normal) != 0)
         {
@@ -115,7 +115,7 @@ void it_802B3554(Item_GObj* gobj, HSD_GObj* owner)
     Item* ip = GET_ITEM(gobj);
     HSD_JObj* jobj = GET_JOBJ(gobj);
     itPikachutJoltGroundAttributes* attr =
-        ip->xC4_article_data->x4_specialAttributes;
+        &ip->xC4_article_data->x4_specialAttributes->pikachut_jolt_ground;
     f64 angle;
     PAD_STACK(4);
 
@@ -185,7 +185,7 @@ void itPikachutjoltground_UnkMotion0_Phys(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     itPikachutJoltGroundAttributes* attr =
-        ip->xC4_article_data->x4_specialAttributes;
+        &ip->xC4_article_data->x4_specialAttributes->pikachut_jolt_ground;
     ip->x40_vel.x = attr->x8 * cosf(ip->xDD4_itemVar.pikachujoltground.xDD4);
     ip->x40_vel.y = attr->x8 * sinf(ip->xDD4_itemVar.pikachujoltground.xDD4);
 }
@@ -260,7 +260,8 @@ bool itPikachutjoltground_UnkMotion1_Coll(Item_GObj* gobj)
         {
             Item* ip2 = GET_ITEM(gobj);
             itPikachutJoltGroundAttributes* attr =
-                ip2->xC4_article_data->x4_specialAttributes;
+                &ip2->xC4_article_data->x4_specialAttributes
+                     ->pikachut_jolt_ground;
             bool flag;
 
             if (0.0f == attr->xC) {

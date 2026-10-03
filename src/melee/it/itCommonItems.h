@@ -166,7 +166,7 @@ typedef struct itWstarAttributes {
     /* +1C */ f32 x1C;
     /* +20 */ f32 x20;
     /* +24 */ s32 x24_count;
-    /* +28 */ itWstarAttrEntry x28_entries[1];
+    /* +28 */ itWstarAttrEntry x28_entries[] DAT_EXTENT;
 } itWstarAttributes;
 
 typedef struct itKyasarin_ItemVars {
@@ -590,11 +590,15 @@ typedef struct itFoods_ItemVars {
     /* +4 ip+DD8 */ u32 heal_amount;
 } itFoods_ItemVars;
 
+typedef struct itFoodEntry {
+    /* +0 */ HSD_Joint* joint;
+    /* +4 */ s32 heal_amount;
+    /* +8 */ Vec2 offset;
+} itFoodEntry;
+
 typedef struct itFoodsAttributes {
-    s32 x0;
-    HSD_Joint* x4;
-    s32 x8;
-    s32 xC;
+    /* +0 */ s32 count;
+    /* +4 */ itFoodEntry entries[] DAT_EXTENT;
 } itFoodsAttributes;
 
 typedef struct itWhispyApple_ItemVars {
@@ -621,13 +625,17 @@ typedef struct itFreeze_ItemVars {
     /* +20 */ UNK_T x20;
 } itFreeze_ItemVars;
 
-/// @remarks Might be shared?
+typedef struct itFreezeAttributes {
+    /*  +0 */ float x0_float;
+    /*  +4 */ float x4_float;
+    /*  +8 */ float x8;
+    /*  +C */ float xC;
+    /* +10 */ float x10;
+} itFreezeAttributes;
+
+/// Attributes for #It_Kind_Unk1.
 typedef struct itUnkAttributes {
-    float x0_float;
-    float x4_float;
-    float x8;
-    float xC;
-    float x10;
+    /* +0 */ float x0_float;
 } itUnkAttributes;
 
 typedef struct {
@@ -828,11 +836,6 @@ typedef struct {
 ASSERT_SIZE(itRShell_ItemVars, 88);
 
 typedef struct {
-    u8 _pad[0x14];
-    Vec3 x14;
-} itRshellAttributes;
-
-typedef struct {
     unsigned char xDD4_b0 : 1;
     unsigned char xDD4_b1 : 1;
     unsigned char xDD4_b2 : 1;
@@ -857,15 +860,39 @@ typedef struct {
 } itZeldaDinFire_ItemVars;
 ASSERT_SIZE(itZeldaDinFire_ItemVars, 36);
 
-typedef struct itPokemonAttributes {
-    f32 x0;
-    s32 timer;
-    s32 max;
-    s32 xC;
-    s32 x10;
-    s32 x14;
-    s32 x18;
-} itPokemonAttributes;
+/// Shared by Raikou, Entei, and Suicune.
+typedef struct itSanseijuuAttributes {
+    /* +0 */ f32 x0;
+    /* +4 */ s32 timer;
+} itSanseijuuAttributes;
+
+typedef struct itPippiAttributes {
+    /*  +0 */ f32 x0;
+    /*  +4 */ s32 timer;
+    /*  +8 */ s32 max;
+    /*  +C */ s32 xC;
+    /* +10 */ s32 x10;
+    /* +14 */ s32 x14;
+    /* +18 */ s32 x18;
+} itPippiAttributes;
+
+typedef struct itTogepyAttributes {
+    /*  +0 */ f32 x0;
+    /*  +4 */ s32 timer;
+    /*  +8 */ s32 max;
+    /*  +C */ s32 xC;
+    /* +10 */ s32 x10;
+    /* +14 */ s32 x14;
+    /* +18 */ s32 x18;
+    /* +1C */ s32 x1C;
+} itTogepyAttributes;
+
+typedef struct itMarumineAttributes {
+    /* +0 */ f32 x0;
+    /* +4 */ s32 timer;
+    /* +8 */ s32 max;
+    /* +C */ s32 xC;
+} itMarumineAttributes;
 
 typedef struct itKamexAttributes {
     /* +00 */ f32 x0;
@@ -877,6 +904,10 @@ typedef struct itKamexAttributes {
     /* +18 */ f32 x18;
     /* +1C */ f32 x1C;
 } itKamexAttributes;
+
+typedef struct itKamexHydroPumpAttributes {
+    /* +0 */ f32 x0;
+} itKamexHydroPumpAttributes;
 
 typedef struct {
     s16 x0;
@@ -1868,41 +1899,5 @@ typedef struct ScopeBeamAttrs {
     /* +78 */ f32 x78;
     /* +7C */ f32 x7C;
 } ScopeBeamAttrs;
-
-/// What an #Article's @c x4_specialAttributes points to, by the kind the
-/// article is bound to as @c Article::kind (see #it_804D6D20_t and
-/// #GroundItemData).
-///
-/// @todo Add the kinds whose attribute types are defined in source files or
-///       other headers, or used inconsistently.
-union ItemSpecialAttributes {
-    ItCapsuleAttr capsule DAT_IF(Article::kind == It_Kind_Capsule);
-    itBoxAttributes box DAT_IF(Article::kind == It_Kind_Box);
-    itTaruAttributes taru DAT_IF(Article::kind == It_Kind_Taru);
-    itEgg_ItemVars egg DAT_IF(Article::kind == It_Kind_Egg);
-    itKusudamaAttributes kusudama DAT_IF(Article::kind == It_Kind_Kusudama);
-    itTaruCann_DatAttrs tarucann DAT_IF(Article::kind == It_Kind_TaruCann);
-    itBombHeiAttributes bombhei DAT_IF(Article::kind == It_Kind_BombHei);
-    HeartContainerAttr heart DAT_IF(Article::kind == It_Kind_Heart);
-    MaximTomatoSpecialAttr tomato DAT_IF(Article::kind == It_Kind_Tomato);
-    itStar_ItemVars star DAT_IF(Article::kind == It_Kind_Star);
-    itBatAttributes bat DAT_IF(Article::kind == It_Kind_Bat);
-    ItLGunAttr l_gun DAT_IF(Article::kind == It_Kind_L_Gun);
-    itUnkAttributes freeze DAT_IF(Article::kind == It_Kind_Freeze);
-    itFlipper_DatAttrs flipper DAT_IF(Article::kind == It_Kind_Flipper);
-    itSScopeAttributes s_scope DAT_IF(Article::kind == It_Kind_S_Scope);
-    itLipstickAttributes lipstick DAT_IF(Article::kind == It_Kind_LipStick);
-    itHarisen_DatAttrs harisen DAT_IF(Article::kind == It_Kind_Harisen);
-    FFlowerAttr f_flower DAT_IF(Article::kind == It_Kind_F_Flower);
-    itWstarAttributes wstar DAT_IF(Article::kind == It_Kind_WStar);
-    itMBallAttributes m_ball DAT_IF(Article::kind == It_Kind_M_Ball);
-    ItLGunRayAttr l_gun_ray DAT_IF(Article::kind == It_Kind_L_Gun_Ray);
-    ScopeBeamAttrs s_scope_beam DAT_IF(Article::kind == It_Kind_S_Scope_Beam);
-    ItLGunBeamAttr l_gun_beam DAT_IF(Article::kind == It_Kind_L_Gun_Beam);
-    itHammerheadAttributes hammer_head DAT_IF(Article::kind ==
-                                              It_Kind_Hammer_Head);
-    itEvYoshiEgg_DatAttrs evyoshiegg DAT_IF(Article::kind ==
-                                            It_Kind_EvYoshiEgg);
-};
 
 #endif

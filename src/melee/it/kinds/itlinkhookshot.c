@@ -149,7 +149,7 @@ static inline HSD_JObj* it_link_get_joint(Item* arg0, s32 var_r31)
 {
     itLinkHookshotAttributes* temp_r3_4;
     HSD_JObj* temp_r3;
-    temp_r3_4 = arg0->xC4_article_data->x4_specialAttributes;
+    temp_r3_4 = &arg0->xC4_article_data->x4_specialAttributes->link_hookshot;
     if ((var_r31 % 2) != 0) {
         temp_r3 = HSD_JObjLoadJoint(temp_r3_4->x54);
         return temp_r3;
@@ -161,7 +161,7 @@ static inline HSD_JObj* it_link_get_joint(Item* arg0, s32 var_r31)
 static inline HSD_JObj* it_link_get_joint_c(Item* arg0)
 {
     itLinkHookshotAttributes* temp_r3_4;
-    temp_r3_4 = arg0->xC4_article_data->x4_specialAttributes;
+    temp_r3_4 = &arg0->xC4_article_data->x4_specialAttributes->link_hookshot;
     return HSD_JObjLoadJoint(temp_r3_4->x5C);
 }
 
@@ -211,7 +211,7 @@ HSD_JObj* it_802A2568(Item* arg0, HSD_JObj* arg1, s32 arg2, f32 arg8)
     s32 link_idx;
     Vec3 pos;
 
-    attr = arg0->xC4_article_data->x4_specialAttributes;
+    attr = &arg0->xC4_article_data->x4_specialAttributes->link_hookshot;
     pos = *(const Vec3*) &it_803B8650;
 
     it_link_attr_math(attr, arg2, arg8);
@@ -376,7 +376,7 @@ bool itLinkhookshot_UnkMotion8_Anim(Item_GObj* arg0)
     item = GET_ITEM(arg0);
     jobj = arg0->hsd_obj;
     link_0 = item->xDD4_itemVar.linkhookshot.x0;
-    attr = item->xC4_article_data->x4_specialAttributes;
+    attr = &item->xC4_article_data->x4_specialAttributes->link_hookshot;
     while ((link_0 != NULL) && link_0->x2C_b0) {
         link_0 = link_0->next;
         var_r5 += 1;
@@ -478,7 +478,7 @@ void it_802A2EE4(Item_GObj* arg0)
 
     Item* item = GET_ITEM(arg0);
     itLinkHookshotAttributes* attr =
-        item->xC4_article_data->x4_specialAttributes;
+        &item->xC4_article_data->x4_specialAttributes->link_hookshot;
     ItemLink* item_link = item->xDD4_itemVar.linkhookshot.x0;
     Fighter* fp = item->owner->user_data;
 
@@ -553,7 +553,7 @@ static void fn_802A3110(HSD_GObj* arg0)
     ItemLink* item_link;
     Fighter* fp;
 
-    attr = item->xC4_article_data->x4_specialAttributes;
+    attr = &item->xC4_article_data->x4_specialAttributes->link_hookshot;
     fp = item->owner->user_data;
     (void) fp;
     item_link = item->xDD4_itemVar.linkhookshot.x0;
@@ -585,7 +585,7 @@ void it_802A3254(Item_GObj* arg0)
     Fighter* fp;
     u8 _padB[4];
 
-    attr = item->xC4_article_data->x4_specialAttributes;
+    attr = &item->xC4_article_data->x4_specialAttributes->link_hookshot;
     fp = item->owner->user_data;
     (void) fp;
     item_link = item->xDD4_itemVar.linkhookshot.x4;
@@ -625,7 +625,7 @@ void fn_802A33A0(Item_GObj* arg0)
     u8 _padB[4];
 
     item = GET_ITEM(arg0);
-    attr = item->xC4_article_data->x4_specialAttributes;
+    attr = &item->xC4_article_data->x4_specialAttributes->link_hookshot;
     fp = fn_802A33A0_GetFighter(item);
 
     item_link = item->xDD4_itemVar.linkhookshot.x4;
@@ -657,7 +657,7 @@ void it_802A3500(Item_GObj* arg0)
     u8 _padB[8];
     Item* item = GET_ITEM(arg0);
     itLinkHookshotAttributes* attr =
-        item->xC4_article_data->x4_specialAttributes;
+        &item->xC4_article_data->x4_specialAttributes->link_hookshot;
     ItemLink* item_link;
     Fighter* fp = item->owner->user_data;
 
@@ -687,7 +687,7 @@ void it_802A3630(Item_GObj* arg0)
     u8 _pad[4];
     Item* item = GET_ITEM(arg0);
     itLinkHookshotAttributes* attr =
-        item->xC4_article_data->x4_specialAttributes;
+        &item->xC4_article_data->x4_specialAttributes->link_hookshot;
     Fighter* fp = item->owner->user_data;
     ItemLink* item_link = item->xDD4_itemVar.linkhookshot.x4;
     Fighter* fp2;
@@ -727,7 +727,7 @@ void it_802A3828(Item_GObj* gobj)
 {
     Item* item = GET_ITEM(gobj);
     itLinkHookshotAttributes* attr =
-        item->xC4_article_data->x4_specialAttributes;
+        &item->xC4_article_data->x4_specialAttributes->link_hookshot;
     ItemLink* item_link;
     Fighter* fp = GET_FIGHTER(item->owner);
     Fighter* fp2;
@@ -781,7 +781,7 @@ void it_802A39FC(Item_GObj* gobj)
     Item* item = gobj->user_data;
     Fighter* fp;
     itLinkHookshotAttributes* attr =
-        item->xC4_article_data->x4_specialAttributes;
+        &item->xC4_article_data->x4_specialAttributes->link_hookshot;
     f32 temp_f30_2;
     Vec3 pos;
     Vec3 pos_2;
@@ -2250,7 +2250,7 @@ void it_802A7B34(HSD_GObj* arg0)
     if (fp->u.lk.xC != NULL) {
         Item* item = GET_ITEM(fp->u.lk.xC);
         itLinkHookshotAttributes* attr =
-            item->xC4_article_data->x4_specialAttributes;
+            &item->xC4_article_data->x4_specialAttributes->link_hookshot;
         ItemLink* item_link = item->xDD4_itemVar.linkhookshot.x0;
 
         it_802A2EE4_inline_alt_mtx_first(item_link, &vec);

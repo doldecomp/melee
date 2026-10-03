@@ -17,6 +17,7 @@
 #include <melee/ft/types.h>
 #include <melee/it/itCharItems.h>
 #include <melee/it/itCommonItems.h>
+#include <melee/it/itemattrs.h>
 #include <melee/it/itPKFlash.h>
 #include <melee/it/itPKThunder.h>
 #include <melee/lb/types.h>
@@ -100,7 +101,7 @@ struct ItemAttr {
     u8 x3;                  // 0x3
     f32 x4_throw_speed_mul; // 0x4, speed multiplier at which this item is
                             // thrown at
-    s32 x8;
+    f32 x8;
     f32 xC_spin_speed;
     f32 x10_fall_speed;     // 0x10
     f32 x14_fall_speed_max; // 0x14
@@ -185,7 +186,7 @@ typedef struct {
 
 struct Article {
     ItemAttr* x0_common_attr;
-    void* x4_specialAttributes DAT_TYPE(ItemSpecialAttributes);
+    union ItemSpecialAttributes* x4_specialAttributes;
     ItHurtBoneList* x8_hurtbones;
     ItemStateArray* xC_itemStates;
     ItemModelDesc* x10_modelDesc;

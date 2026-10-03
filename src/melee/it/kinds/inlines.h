@@ -68,13 +68,13 @@ Item_AttachToParent(Item_GObj* item_gobj, HSD_GObj* parent, Fighter_Part part)
     return item_gobj;
 }
 
-static inline void Item_AttachGameWatchArticle(HSD_GObj* parent,
-                                               Fighter_Part part,
-                                               Item_GObj* item_gobj,
-                                               void** attributes)
+static inline void
+Item_AttachGameWatchArticle(HSD_GObj* parent, Fighter_Part part,
+                            Item_GObj* item_gobj,
+                            const itGamewatchAttributes* attributes)
 {
     Item_AttachToParent(item_gobj, parent, part);
-    it_8027CE64(item_gobj, parent, attributes[0]);
+    it_8027CE64(item_gobj, parent, attributes->x0);
 }
 
 static inline void Item_StopAndEnterState(Item_GObj* gobj, Item* ip, s32 msid)

@@ -75,7 +75,7 @@ Item_GObj* it_802B1DF8(Item_GObj* owner, Vec3* pos, Vec3* vel, s32 count,
         if (item_gobj != NULL) {
             Item* ip = (Item*) (new_var = HSD_GObjGetUserData(item_gobj));
             itPikachuthunderAttributes* attrs =
-                ip->xC4_article_data->x4_specialAttributes;
+                &ip->xC4_article_data->x4_specialAttributes->pikachuthunder;
             if (prev != NULL) {
                 GET_ITEM(prev)->xDD4_itemVar.pikachuthunder.x34 = item_gobj;
             }
@@ -110,7 +110,7 @@ void it_802B1FE8(Item_GObj* gobj, Vec3* pos)
 {
     Item* ip = GET_ITEM(gobj);
     itPikachuthunderAttributes* attrs =
-        ip->xC4_article_data->x4_specialAttributes;
+        &ip->xC4_article_data->x4_specialAttributes->pikachuthunder;
     f32 scale = ip->xDD4_itemVar.pikachuthunder.x18;
     f32 offset = -attrs->x8;
 
@@ -134,7 +134,7 @@ void it_802B2080(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     itPikachuthunderAttributes* attrs =
-        ip->xC4_article_data->x4_specialAttributes;
+        &ip->xC4_article_data->x4_specialAttributes->pikachuthunder;
     Item_80268E5C(gobj, 0, ITEM_ANIM_UPDATE);
     it_80275158(gobj, attrs->x0);
     it_8026BB44(gobj);
@@ -155,7 +155,7 @@ void it_802B211C(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     itPikachuthunderAttributes* attrs =
-        ip->xC4_article_data->x4_specialAttributes;
+        &ip->xC4_article_data->x4_specialAttributes->pikachuthunder;
     Item_80268E5C(gobj, 1, ITEM_ANIM_UPDATE);
     it_80275158(gobj, attrs->x0);
     ip->x40_vel = ip->xDD4_itemVar.pikachuthunder.x1C;
@@ -180,7 +180,7 @@ bool itPikachuthunder_UnkMotion1_Coll(Item_GObj* gobj)
         if (it_8026DA70(gobj)) {
             Item* ip = gobj->user_data;
             itPikachuthunderAttributes* attrs =
-                ip->xC4_article_data->x4_specialAttributes;
+                &ip->xC4_article_data->x4_specialAttributes->pikachuthunder;
             Vec3 pos;
             pos.z = 0.0f;
             pos.x = 0.0f;
@@ -247,7 +247,7 @@ static inline void itPikachuthunder_UnkMotion2_UpdateScale(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     itPikachuthunderAttributes* attrs =
-        ip->xC4_article_data->x4_specialAttributes;
+        &ip->xC4_article_data->x4_specialAttributes->pikachuthunder;
     ip->xDD4_itemVar.pikachuthunder.x10 =
         ip->xDD4_itemVar.pikachuthunder.xC +
         ip->xDD4_itemVar.pikachuthunder.x1C.y;

@@ -20,8 +20,7 @@
 #define M_TAU 6.283185307179586
 
 #define GET_ATTRS(ip)                                                         \
-    ((itClimbersBlizzardAttributes*)                                          \
-         ip->xC4_article_data->x4_specialAttributes)
+    (&ip->xC4_article_data->x4_specialAttributes->climbers_blizzard)
 
 /* 2C2380 */ bool itClimbersBlizzard_UnkMotion0_Anim(Item_GObj* gobj);
 /* 2C23B4 */ void itClimbersBlizzard_UnkMotion0_Phys(Item_GObj* gobj);

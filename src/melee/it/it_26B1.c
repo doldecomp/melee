@@ -263,32 +263,32 @@ bool it_8026B4F0(HSD_GObj* gobj)
     }
 }
 
-/// Get unknown float from 0x0 of item's special attributes
+/// Get unknown float from 0x0 of Bunny Hood's special attributes
 float it_8026B54C(HSD_GObj* gobj)
 {
     Item* temp_item = gobj->user_data;
-    itUnkAttributes* unk_attr =
-        temp_item->xC4_article_data->x4_specialAttributes;
+    itRabbitCAttributes* unk_attr =
+        &temp_item->xC4_article_data->x4_specialAttributes->rabbit_c;
 
-    return unk_attr->x0_float;
+    return unk_attr->x0;
 }
 
-/// Identical to 0x8026B54C but likely using a different itAttributes struct
+/// Get unknown float from 0x0 of Metal Box's special attributes
 float it_8026B560(HSD_GObj* gobj)
 {
     Item* temp_item = gobj->user_data;
-    itUnkAttributes* unk_attr =
-        temp_item->xC4_article_data->x4_specialAttributes;
-    return unk_attr->x0_float;
+    itMetalBAttributes* unk_attr =
+        &temp_item->xC4_article_data->x4_specialAttributes->metal_b;
+    return unk_attr->x0;
 }
 
-/// Get unknown float from 0x4 of item's special attributes
+/// Get unknown float from 0x4 of Metal Box's special attributes
 float it_8026B574(HSD_GObj* gobj)
 {
     Item* temp_item = gobj->user_data;
-    itUnkAttributes* unk_attr =
-        temp_item->xC4_article_data->x4_specialAttributes;
-    return unk_attr->x4_float;
+    itMetalBAttributes* unk_attr =
+        &temp_item->xC4_article_data->x4_specialAttributes->metal_b;
+    return unk_attr->x4;
 }
 
 /// Get unknown integer from itCommonData
@@ -1039,8 +1039,9 @@ bool it_8026C1B4(HSD_GObj* gobj)
 
 u32 it_8026C1D4(void)
 {
-    itLGun_ItemVars* lgun = it_804D6D24[It_Kind_L_Gun]->x4_specialAttributes;
-    return lgun->timer;
+    ItLGunAttr* lgun =
+        &it_804D6D24[It_Kind_L_Gun]->x4_specialAttributes->l_gun;
+    return lgun->max_ammo;
 }
 
 /// Check if item has grabbed a GObj?

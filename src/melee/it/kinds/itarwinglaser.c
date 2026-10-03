@@ -19,12 +19,6 @@
 #include <melee/mp/mplib.h>
 #include <sysdolphin/baselib/jobj.h>
 
-typedef struct ArwingLaserAttr {
-    /* +0 */ ItemAttr* x0;
-    /* +4 */ f32 x4;
-    /* +8 */ f32 x8;
-} ArwingLaserAttr;
-
 static void itArwinglaser_UnkMotion2_Anim(Item_GObj*);
 static void itArwinglaser_UnkMotion3_Anim(Item_GObj*);
 static void itArwinglaser_UnkMotion2_Phys(Item_GObj*);
@@ -366,7 +360,8 @@ static void itArwinglaser_UnkMotion2_Phys(Item_GObj* gobj)
     Vec3 scale_vec;
     HSD_JObj* jobj = GET_JOBJ(gobj);
     ArwingLaserAttr* attrs =
-        ((Item*) gobj->user_data)->xC4_article_data->x4_specialAttributes;
+        &((Item*) gobj->user_data)
+             ->xC4_article_data->x4_specialAttributes->arwing_laser;
     Item* ip = gobj->user_data;
     float f1;
     float f2;
@@ -406,7 +401,8 @@ static void itArwinglaser_UnkMotion3_Phys(Item_GObj* gobj)
     Vec3 corneria_offset;
     HSD_JObj* jobj = GET_JOBJ(gobj);
     ArwingLaserAttr* attrs =
-        ((Item*) gobj->user_data)->xC4_article_data->x4_specialAttributes;
+        &((Item*) gobj->user_data)
+             ->xC4_article_data->x4_specialAttributes->arwing_laser;
     Item* ip = gobj->user_data;
     switch (ip->xDD4_itemVar.arwinglaser.xE38) {
     case 2:

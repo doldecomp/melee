@@ -68,7 +68,7 @@ void itNesspkfirepillar_802AA55C(Item_GObj* item_gobj)
 {
     Item* item = GET_ITEM(item_gobj);
     itNessPKFirepillarAttributes* attrs =
-        item->xC4_article_data->x4_specialAttributes;
+        &item->xC4_article_data->x4_specialAttributes->ness_pk_firepillar;
     Item_80268E5C(item_gobj, 0, ITEM_ANIM_UPDATE);
     it_80275158(item_gobj, attrs->x0);
 }
@@ -96,7 +96,7 @@ bool itNesspkfirepillar_UnkMotion0_Anim(Item_GObj* item_gobj)
     f32 scale;
     itNessPKFirepillarAttributes* attrs;
     item = GET_ITEM(item_gobj);
-    attrs = item->xC4_article_data->x4_specialAttributes;
+    attrs = &item->xC4_article_data->x4_specialAttributes->ness_pk_firepillar;
     scale = attrs->scale +
             (item->xD44_lifeTimer * (1.0F - attrs->scale)) / attrs->x0;
     scale *= item->xCC_item_attr->x60_scale;
@@ -131,7 +131,7 @@ bool itNesspkfirepillar_Logic24_DmgReceived(Item_GObj* item_gobj)
 {
     Item* item = GET_ITEM(item_gobj);
     itNessPKFirepillarAttributes* attrs =
-        item->xC4_article_data->x4_specialAttributes;
+        &item->xC4_article_data->x4_specialAttributes->ness_pk_firepillar;
     item->xD44_lifeTimer = -((item->xC9C * attrs->x4) - item->xD44_lifeTimer);
     if (item->xD44_lifeTimer <= 0.0F) {
         item->xD44_lifeTimer = get_min_life();

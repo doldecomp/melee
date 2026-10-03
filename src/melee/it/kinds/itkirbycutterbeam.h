@@ -5,14 +5,8 @@
 
 #include <melee/it/forward.h>
 
+#include <melee/it/itemattrs.h> // IWYU pragma: export
 #include <melee/it/kinds/types.h>
-
-typedef struct itKirbyCutterBeamAttributes {
-    f32 x0_speed;
-    f32 x4_vel;
-    f32 x8_lifetime;
-    f32 xC_decel;
-} itKirbyCutterBeamAttributes;
 
 /* 29BAB8 */ void it_8029BAB8(HSD_GObj* gobj, Vec3* pos, float facing_dir);
 /* 29BB90 */ void it_8029BB90(Item_GObj* gobj, HSD_GObj* owner);
