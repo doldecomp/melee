@@ -1108,54 +1108,46 @@ void fn_80239574(HSD_GObj* arg0)
                 case 3:
                 case 1:
                     data->gobj.p_link = 0U;
-                    goto do_anim;
+                    break;
                 case 2:
                 case 4:
                     HSD_GObjFree(arg0);
                     return;
-                default:
-                    goto do_anim;
                 }
-            } else {
-            do_anim:
-                HSD_JObjAnim(new_var);
-                goto do_update;
             }
+            HSD_JObjAnim(new_var);
         }
-    } else {
-    do_update:
-        if (mn_804A04F0.x10 != 1) {
-            state = data->gobj.p_link;
-            if ((state == 0 || state == 1 || state == 3) &&
-                (s32) * ((u8*) data + 1) !=
-                    (s32) mn_804A04F0.hovered_selection)
-            {
-                doSel = 1;
-            }
-        }
-        mnName_80238C34(arg0, doSel, doSelReset);
-        if ((s32) doSel != 0 && mn_804A04F0.hovered_selection >= 0x18U &&
-            (*((u8*) data + 1)) >= 0x18U)
+    }
+    if (mn_804A04F0.x10 != 1) {
+        state = data->gobj.p_link;
+        if ((state == 0 || state == 1 || state == 3) &&
+            (s32) * ((u8*) data + 1) != (s32) mn_804A04F0.hovered_selection)
         {
-            HSD_Text* text;
-            s32 idx = mn_804A04F0.hovered_selection - 0x18;
-            new_var2 = idx;
-            if (data->text2 != NULL) {
-                HSD_SisLib_803A5CC4(data->text2);
-            }
-            text = HSD_SisLib_803A5ACC(0, 0, -9.5f, 9.1f, 17.0f, 364.68332f,
-                                       38.38772f);
-            data->text2 = text;
-            text->font_size.x = 0.0521f;
-            text->font_size.y = 0.0521f;
-            HSD_SisLib_803A6368(text, mnName_804D4BE8[new_var2]);
+            doSel = 1;
         }
-        if (doUpdate != 0) {
-            *((u8*) data) = (u8) mn_804A04F0.cur_menu;
+    }
+    mnName_80238C34(arg0, doSel, doSelReset);
+    if ((s32) doSel != 0 && mn_804A04F0.hovered_selection >= 0x18U &&
+        (*((u8*) data + 1)) >= 0x18U)
+    {
+        HSD_Text* text;
+        s32 idx = mn_804A04F0.hovered_selection - 0x18;
+        new_var2 = idx;
+        if (data->text2 != NULL) {
+            HSD_SisLib_803A5CC4(data->text2);
         }
-        if ((s32) doSel != 0) {
-            *((u8*) data + 1) = (u8) mn_804A04F0.hovered_selection;
-        }
+        text = HSD_SisLib_803A5ACC(0, 0, -9.5f, 9.1f, 17.0f, 364.68332f,
+                                   38.38772f);
+        data->text2 = text;
+        text->font_size.x = 0.0521f;
+        text->font_size.y = 0.0521f;
+        HSD_SisLib_803A6368(text, mnName_804D4BE8[new_var2]);
+    }
+    if (doUpdate != 0) {
+        *((u8*) data) = (u8) mn_804A04F0.cur_menu;
+    }
+    if ((s32) doSel != 0) {
+        *((u8*) data + 1) = (u8) mn_804A04F0.hovered_selection;
     }
 }
 
