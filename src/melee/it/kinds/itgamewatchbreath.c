@@ -26,8 +26,8 @@ HSD_GObj* it_802C720C(HSD_GObj* parent, Vec3* pos, Fighter_Part part,
     result = Item_80268B18(&spawn);
     if (result != NULL) {
         Item* item = GET_ITEM(result);
-        void** attr =
-            &item->xC4_article_data->x4_specialAttributes->opaque_pointer;
+        itGamewatchAttributes* attr =
+            &item->xC4_article_data->x4_specialAttributes->gamewatch_breath;
         Item_AttachGameWatchArticle(parent, part, result, attr);
         return result;
     }

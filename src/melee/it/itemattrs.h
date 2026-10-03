@@ -32,6 +32,21 @@ typedef struct itFFlowerFlameAttributes {
     /* +0 */ f32 lifetime;
 } itFFlowerFlameAttributes;
 
+typedef struct itMarioFireballAttributes {
+    /*  +0 */ f32 x0;
+    /*  +4 */ f32 x4;
+    /*  +8 */ f32 x8;
+    /*  +C */ f32 xC;
+    /* +10 */ f32 x10;
+} itMarioFireballAttributes;
+
+typedef struct itLuigiFireballAttributes {
+    /* +0 */ f32 x0;
+    /* +4 */ f32 x4;
+    /* +8 */ f32 x8;
+    /* +C */ f32 xC;
+} itLuigiFireballAttributes;
+
 typedef struct itHeihoAttributes {
     /*  +0 */ s32* x0;
     /*  +4 */ f32 speed[3];
@@ -72,14 +87,10 @@ typedef struct {
     f32 x2C;
 } ItZeldaDinFire_ItemVars;
 
-typedef struct KinokoAnim {
-    HSD_AnimJoint* joint;
-} KinokoAnim;
-
 typedef struct KinokoAttrs {
-    f32 x0;
-    f32 x4;
-    s32 x8;
+    /* +0 */ f32 x0;
+    /* +4 */ f32 x4;
+    /* +8 */ HSD_AnimJoint* x8[2];
 } KinokoAttrs;
 
 typedef struct {
@@ -275,6 +286,15 @@ union ItemSpecialAttributes {
     itFreezerAttributes freezer;
     itFushigibanaAttributes fushigibana;
     itGShell_Attrs g_shell;
+    itGamewatchAttributes gamewatch_breath;
+    itGamewatchAttributes gamewatch_fire;
+    itGamewatchAttributes gamewatch_greenhouse;
+    itGamewatchAttributes gamewatch_judge;
+    itGamewatchAttributes gamewatch_manhole;
+    itGamewatchAttributes gamewatch_panic;
+    itGamewatchAttributes gamewatch_parachute;
+    itGamewatchAttributes gamewatch_rescue;
+    itGamewatchAttributes gamewatch_turtle;
     itGamewatchchefAttributes gamewatchchef;
     itUnkAttributes generic;
     itGreatFoxLaser_Attrs great_fox_laser;
@@ -287,8 +307,8 @@ union ItemSpecialAttributes {
     itKabigonAttributes kabigon;
     itKamexAttributes kamex;
     KinokoAttrs kinoko;
-    KinokoAnim kinoko_anim;
     itKirbyCutterBeamAttributes kirby_cutter_beam;
+    itGamewatchAttributes kirby_gamewatch_chef_pan;
     itkireihanaAttributes kireihana;
     itKoopaFlame_Attributes koopa_flame;
     itKyasarinAttributes kyasarin;
@@ -305,8 +325,10 @@ union ItemSpecialAttributes {
     itLuckyEggAttributes lucky_egg;
     itLugiaAttributes lugia;
     itLugiaAeroblastAttributes lugia_aeroblast;
+    itLuigiFireballAttributes luigi_fireball;
     itMDisableAttributes m_disable;
     itMarilAttributes maril;
+    itMarioFireballAttributes mario_fireball;
     itMasterHandBulletAttributes master_hand_bullet;
     itMasterHandLaserAttributes master_hand_laser;
     itMatadogasAttributes matadogas;
@@ -319,7 +341,6 @@ union ItemSpecialAttributes {
     itOctarockAttributes octarock;
     itOldkuriAttributes oldkuri;
     itOldottoseaAttributes oldottosea;
-    void* opaque_pointer;
     itParasolAttributes parasol;
     itPatapataAttributes patapata;
     itPeachToadSporeAttributes peach_toad_spore;
@@ -330,7 +351,6 @@ union ItemSpecialAttributes {
     itPokemonAttributes pokemon;
     itPokemonSpawn_DatAttrs pokemon_spawn;
     itRShell_Attrs r_shell;
-    itRshellAttributes r_shell_common;
     itSamusBombAttributes samus_bomb;
     itSamusChargeShot_Attributes samus_charge_shot;
     itSamusGrappleAttributes samus_grapple;

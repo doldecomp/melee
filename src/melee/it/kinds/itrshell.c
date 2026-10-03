@@ -251,9 +251,8 @@ static inline void itRshell_ClampVel(Item_GObj* gobj)
 
 f32 it_8028D56C(Item_GObj* gobj, f32 f1, f32 f2)
 {
-    itRshellAttributes* attrs =
-        &GET_ITEM(gobj)
-             ->xC4_article_data->x4_specialAttributes->r_shell_common;
+    itRShell_Attrs* attrs =
+        &GET_ITEM(gobj)->xC4_article_data->x4_specialAttributes->r_shell;
     f32 f = (f1 * -attrs->x14.x) + (-attrs->x14.y * f2);
     return f * attrs->x14.z;
 }

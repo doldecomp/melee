@@ -30,8 +30,9 @@ HSD_GObj* itGamewatchGreenhouse_Spawn(HSD_GObj* parent, Vec3* pos,
     result = Item_80268B18(&spawn);
     if (result != NULL) {
         Item* item = GET_ITEM(result);
-        void** attr =
-            &item->xC4_article_data->x4_specialAttributes->opaque_pointer;
+        itGamewatchAttributes* attr =
+            &item->xC4_article_data->x4_specialAttributes
+                 ->gamewatch_greenhouse;
         Item_AttachGameWatchArticle(parent, part, result, attr);
         return result;
     }

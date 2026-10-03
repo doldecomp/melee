@@ -166,7 +166,7 @@ typedef struct itWstarAttributes {
     /* +1C */ f32 x1C;
     /* +20 */ f32 x20;
     /* +24 */ s32 x24_count;
-    /* +28 */ itWstarAttrEntry x28_entries[1];
+    /* +28 */ itWstarAttrEntry x28_entries[] DAT_EXTENT;
 } itWstarAttributes;
 
 typedef struct itKyasarin_ItemVars {
@@ -830,11 +830,6 @@ typedef struct {
     /* ip+E20 */ Vec3 vel;
 } itRShell_ItemVars;
 ASSERT_SIZE(itRShell_ItemVars, 88);
-
-typedef struct {
-    u8 _pad[0x14];
-    Vec3 x14;
-} itRshellAttributes;
 
 typedef struct {
     unsigned char xDD4_b0 : 1;
