@@ -668,11 +668,7 @@ bool it_80277040(Item_GObj* item_gobj)
     f32 temp_f31;
     f32 temp_f30;
     f32 angle1;
-    s32 int_dir1;
-    s32 int_dir3;
     bool ret_val;
-    s32 int_dir2;
-    s32 int_dir4;
 
     ret_val = true;
     item1 = GET_ITEM(item_gobj);
@@ -707,33 +703,11 @@ bool it_80277040(Item_GObj* item_gobj)
         if (!checkNormalAngle(item_gobj)) {
             temp_f3 = 0.0f;
             if (item1->x94.x != temp_f3 || item1->x94.y != temp_f3) {
-                if (slope.x < 0.0f) {
-                    int_dir1 = -1;
-                } else {
-                    int_dir1 = 1;
-                }
-                if (temp_f31 < 0.0f) {
-                    int_dir2 = -1;
-                } else {
-                    int_dir2 = 1;
-                }
-                if (int_dir2 == int_dir1) {
-                    if (slope.y < 0.0f) {
-                        int_dir3 = -1;
-                    } else {
-                        int_dir3 = 1;
-                    }
-                    if (temp_f30 < 0.0f) {
-                        int_dir4 = -1;
-                    } else {
-                        int_dir4 = 1;
-                    }
-                    if (int_dir4 != int_dir3) {
-                        goto block_38;
-                    }
-                } else {
-                block_38:
+                if ((temp_f31 < 0.0f ? -1 : 1) != (slope.x < 0.0f ? -1 : 1) ||
+                    (temp_f30 < 0.0f ? -1 : 1) != (slope.y < 0.0f ? -1 : 1))
+                {
                     item1->xD58++;
+
                     if (item1->xD58 >= it_804D6D28->x38_float) {
                         item1->xD58 = 0;
                         ret_val = false;
