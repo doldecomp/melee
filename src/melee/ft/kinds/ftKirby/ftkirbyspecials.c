@@ -207,5 +207,5 @@ HSD_Joint* ftKb_SpecialN_800F5898(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftData* ca = fp->ft_data;
-    return ca->x48_items[4].joint;
+    return ca->x48_items[4];
 }

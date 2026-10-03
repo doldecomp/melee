@@ -486,7 +486,7 @@ void ftFx_Init_OnLoadForFalco(Fighter* fp)
 void ftFx_Init_OnLoad(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
-    union ftData_Item* item_list = fp->ft_data->x48_items;
+    void** item_list = fp->ft_data->x48_items;
 
     fp->can_walljump = true;
 
@@ -494,11 +494,9 @@ void ftFx_Init_OnLoad(HSD_GObj* gobj)
 
     {
         ftFox_DatAttrs* fox_attr = fp->dat_attrs;
-        it_8026B3F8(item_list[0].article,
-                    fox_attr->x1C_FOX_BLASTER_SHOT_ITKIND);
-        it_8026B3F8(item_list[1].article,
-                    fox_attr->x20_FOX_BLASTER_GUN_ITKIND);
-        it_8026B3F8(item_list[2].article, It_Kind_Fox_Illusion);
+        it_8026B3F8(item_list[0], fox_attr->x1C_FOX_BLASTER_SHOT_ITKIND);
+        it_8026B3F8(item_list[1], fox_attr->x20_FOX_BLASTER_GUN_ITKIND);
+        it_8026B3F8(item_list[2], It_Kind_Fox_Illusion);
     }
 }
 

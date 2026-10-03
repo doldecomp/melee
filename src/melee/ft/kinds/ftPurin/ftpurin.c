@@ -465,7 +465,7 @@ void ftPr_Init_8013C360(HSD_GObj* gobj)
     if (ftPr_Init_803D05B4[fp->costume_id]) {
         /// @todo clean up memory accesses - this looks similar to
         /// ftKb_SpecialN_800EFB4C
-        UNK_T* items = (UNK_T*) fp->ft_data->x48_items;
+        UNK_T* items = fp->ft_data->x48_items;
         UNK_T* items_shifted = items[1];
 
         if (!joints[fp->costume_id]) {
