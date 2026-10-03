@@ -31,8 +31,7 @@ HSD_GObj* itGamewatchGreenhouse_Spawn(HSD_GObj* parent, Vec3* pos,
     if (result != NULL) {
         Item* item = GET_ITEM(result);
         itGamewatchAttributes* attr =
-            &item->xC4_article_data->x4_specialAttributes
-                 ->gamewatch_greenhouse;
+            &item->xC4_article_data->x4_specialAttributes->gamewatch;
         Item_AttachGameWatchArticle(parent, part, result, attr);
         return result;
     }

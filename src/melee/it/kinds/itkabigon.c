@@ -124,8 +124,8 @@ void it_802CA014(Item_GObj* gobj)
         s32 timer;
         timer = --ip->xDD4_itemVar.kabigon.xE44;
         if (timer == 0) {
-            itPokemonAttributes* attr =
-                &ip->xC4_article_data->x4_specialAttributes->pokemon;
+            itKabigonAttributes* attr =
+                &ip->xC4_article_data->x4_specialAttributes->kabigon;
             it_802CA3F4(gobj);
             ip->xDD4_itemVar.kabigon.xE44 = attr->x14;
         }

@@ -29,7 +29,7 @@ void itPippi_Logic20_Spawned(Item_GObj* gobj)
 {
     Item* it = gobj->user_data;
     Article* ap = it->xC4_article_data;
-    itPokemonAttributes* sa = &ap->x4_specialAttributes->pokemon;
+    itPippiAttributes* sa = &ap->x4_specialAttributes->pippi;
 
     it->facing_dir = 0.0f;
     it->xDB4_itcmd_var2 = 0;
@@ -90,7 +90,7 @@ void it_802D33F8(Item_GObj* gobj)
 {
     Item* it = gobj->user_data;
     Article* ap = it->xC4_article_data;
-    itPokemonAttributes* sa = &ap->x4_specialAttributes->pokemon;
+    itPippiAttributes* sa = &ap->x4_specialAttributes->pippi;
     int rand = HSD_Randi(sa->max);
     int val = sa->xC;
     int state;
@@ -149,7 +149,7 @@ void it_802D3590(Item_GObj* gobj)
 {
     Item* it = gobj->user_data;
     Article* ap = it->xC4_article_data;
-    itPokemonAttributes* sa = &ap->x4_specialAttributes->pokemon;
+    itPippiAttributes* sa = &ap->x4_specialAttributes->pippi;
 
     it_802762BC(it);
     Item_80268E5C(gobj, 0, ITEM_ANIM_UPDATE);

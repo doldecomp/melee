@@ -26,7 +26,7 @@ HSD_GObj* it_802C7D60(Item_GObj* parent, Vec3* pos, Fighter_Part arg2, f32 dir)
     if (result != NULL) {
         Item* item = GET_ITEM(result);
         itGamewatchAttributes* attr =
-            &item->xC4_article_data->x4_specialAttributes->gamewatch_panic;
+            &item->xC4_article_data->x4_specialAttributes->gamewatch;
         Item_AttachGameWatchArticle(parent, arg2, result, attr);
         return result;
     }

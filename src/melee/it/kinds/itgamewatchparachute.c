@@ -36,7 +36,7 @@ HSD_GObj* it_802C6C38(Item_GObj* parent, Vec3* pos, enum_t part,
     if (result != NULL) {
         Item* item = GET_ITEM(result);
         itGamewatchAttributes* attr =
-            &item->xC4_article_data->x4_specialAttributes->gamewatch_parachute;
+            &item->xC4_article_data->x4_specialAttributes->gamewatch;
         Item_AttachGameWatchArticle(parent, part, result, attr);
         return result;
     }

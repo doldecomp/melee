@@ -247,7 +247,7 @@ union ItemSpecialAttributes {
     itStar_ItemVars star DAT_IF(Article::kind == It_Kind_Star);
     itBatAttributes bat DAT_IF(Article::kind == It_Kind_Bat);
     ItLGunAttr l_gun DAT_IF(Article::kind == It_Kind_L_Gun);
-    itUnkAttributes freeze DAT_IF(Article::kind == It_Kind_Freeze);
+    itUnkAttributes generic DAT_IF(Article::kind == It_Kind_Freeze);
     itFlipper_DatAttrs flipper DAT_IF(Article::kind == It_Kind_Flipper);
     itSScopeAttributes s_scope DAT_IF(Article::kind == It_Kind_S_Scope);
     itLipstickAttributes lipstick DAT_IF(Article::kind == It_Kind_LipStick);
@@ -286,17 +286,8 @@ union ItemSpecialAttributes {
     itFreezerAttributes freezer;
     itFushigibanaAttributes fushigibana;
     itGShell_Attrs g_shell;
-    itGamewatchAttributes gamewatch_breath;
-    itGamewatchAttributes gamewatch_fire;
-    itGamewatchAttributes gamewatch_greenhouse;
-    itGamewatchAttributes gamewatch_judge;
-    itGamewatchAttributes gamewatch_manhole;
-    itGamewatchAttributes gamewatch_panic;
-    itGamewatchAttributes gamewatch_parachute;
-    itGamewatchAttributes gamewatch_rescue;
-    itGamewatchAttributes gamewatch_turtle;
+    itGamewatchAttributes gamewatch;
     itGamewatchchefAttributes gamewatchchef;
-    itUnkAttributes generic;
     itGreatFoxLaser_Attrs great_fox_laser;
     itHammerData hammer_data;
     itHassam_ItemVars hassam;
@@ -306,9 +297,9 @@ union ItemSpecialAttributes {
     itHououAttr houou;
     itKabigonAttributes kabigon;
     itKamexAttributes kamex;
+    itKamexHydroPumpAttributes kamex_hydro_pump;
     KinokoAttrs kinoko;
     itKirbyCutterBeamAttributes kirby_cutter_beam;
-    itGamewatchAttributes kirby_gamewatch_chef_pan;
     itkireihanaAttributes kireihana;
     itKoopaFlame_Attributes koopa_flame;
     itKyasarinAttributes kyasarin;
@@ -328,6 +319,7 @@ union ItemSpecialAttributes {
     itLuigiFireballAttributes luigi_fireball;
     itMDisableAttributes m_disable;
     itMarilAttributes maril;
+    itMarumineAttributes marumine;
     itMarioFireballAttributes mario_fireball;
     itMasterHandBulletAttributes master_hand_bullet;
     itMasterHandLaserAttributes master_hand_laser;
@@ -348,6 +340,7 @@ union ItemSpecialAttributes {
     itPikachutJoltGroundAttributes pikachut_jolt_ground;
     itPikachuthunderAttributes pikachuthunder;
     itPKThunderAttributes pk_thunder;
+    itPippiAttributes pippi;
     itPokemonAttributes pokemon;
     itPokemonSpawn_DatAttrs pokemon_spawn;
     itRShell_Attrs r_shell;
@@ -364,6 +357,7 @@ union ItemSpecialAttributes {
     struct TetherAttributes tether;
     itThunderPokemonAttributes thunder_pokemon;
     itTincleAttributes tincle;
+    itTogepyAttributes togepy;
     itToolsAttributes tools;
     itTosakinto_Attrs tosakinto;
     it_2728_DatAttrs unk_2728;
