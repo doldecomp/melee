@@ -531,35 +531,30 @@ bool grOldKongo_80210454(Ground_GObj* ground_gobj, Fighter_GObj* keep)
 
     gp = GET_GROUND(ground_gobj);
 
-    if (gp->u.taru.xC6 != 0) {
-        goto done;
+    if (gp->u.taru.xC6 == 0) {
+        Ground_801C4DA0(&pos_gnd, &unk);
+        ftLib_GetPos(keep, &pos_ft);
+        if ((pos_gnd.x - pos_ft.x) * (pos_gnd.x - pos_ft.x) +
+                (pos_gnd.y - pos_ft.y) * (pos_gnd.y - pos_ft.y) +
+                (pos_gnd.z - pos_ft.z) * (pos_gnd.z - pos_ft.z) <
+            yakumono_param->rframe_barrel_in *
+                yakumono_param->rframe_barrel_in)
+        {
+            rand_val = HSD_Randf();
+            diff = yakumono_param->rframe_barrel_shoot_b -
+                   yakumono_param->rframe_barrel_shoot_a;
+            gp->u.taru.xCA = (s16) (diff * rand_val +
+                                    yakumono_param->rframe_barrel_shoot_a);
+            gp->u.taru.keep = keep;
+            gp->u.taru.xC6 = 1;
+            Ground_801C5440(gp, 0, 0x129U);
+            grAnime_801C7FF8(ground_gobj, 2, 7, 1, 0.0f, 1.0f);
+            grMaterial_801C9604(ground_gobj, yakumono_param->x6C, 0);
+            efSync_Spawn(0x405, ground_gobj, &pos_ft);
+            ftLib_StartRumble(keep, 0xD, 0x1E);
+            return true;
+        }
     }
-
-    Ground_801C4DA0(&pos_gnd, &unk);
-    ftLib_GetPos(keep, &pos_ft);
-
-    if (!((pos_gnd.x - pos_ft.x) * (pos_gnd.x - pos_ft.x) +
-              (pos_gnd.y - pos_ft.y) * (pos_gnd.y - pos_ft.y) +
-              (pos_gnd.z - pos_ft.z) * (pos_gnd.z - pos_ft.z) <
-          yakumono_param->rframe_barrel_in * yakumono_param->rframe_barrel_in))
-    {
-        goto done;
-    }
-
-    rand_val = HSD_Randf();
-    diff = yakumono_param->rframe_barrel_shoot_b -
-           yakumono_param->rframe_barrel_shoot_a;
-    gp->u.taru.xCA =
-        (s16) (diff * rand_val + yakumono_param->rframe_barrel_shoot_a);
-    gp->u.taru.keep = keep;
-    gp->u.taru.xC6 = 1;
-    Ground_801C5440(gp, 0, 0x129U);
-    grAnime_801C7FF8(ground_gobj, 2, 7, 1, 0.0f, 1.0f);
-    grMaterial_801C9604(ground_gobj, yakumono_param->x6C, 0);
-    efSync_Spawn(0x405, ground_gobj, &pos_ft);
-    ftLib_StartRumble(keep, 0xD, 0x1E);
-    return true;
-done:
     return false;
 }
 
