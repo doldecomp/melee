@@ -1021,8 +1021,8 @@ void ftCo_800B683C(Fighter* fp)
     f32 var_f2;
 
     f32 var_f2_2;
-    mp_UnkStruct0* temp_r3_2;
-    mp_UnkStruct0* temp_r3_3;
+    mpIsland* temp_r3_2;
+    mpIsland* temp_r3_3;
     s32 temp_r0;
     s32 temp_r0_2;
 
@@ -2015,7 +2015,7 @@ void ftCo_800B9340(Fighter* fp)
 {
     struct CpuFighter* temp_r30 = &fp->cpu;
     Fighter* temp_r29 = fp->cpu.x44;
-    mp_UnkStruct0* temp_r3 = mpIsland_8005AC14(&fp->cur_pos, -100.0F);
+    mpIsland* temp_r3 = mpIsland_8005AC14(&fp->cur_pos, -100.0F);
 
     if (temp_r3 == NULL || temp_r29 == NULL ||
         temp_r3 != mpIsland_8005AC14(&temp_r29->cur_pos, -100.0F))
@@ -2029,11 +2029,11 @@ void ftCo_800B9340(Fighter* fp)
         ftCo_800B463C(fp, CpuCmd_ReleaseB);
         ftCo_800B46B8(fp, CpuCmd_WaitFor, 1);
         ftCo_800B463C(fp, CpuCmd_Done);
-    } else if (ABS(temp_r3->x14.x - fp->cur_pos.x) < 10.0) {
+    } else if (ABS(temp_r3->pos1.x - fp->cur_pos.x) < 10.0) {
         ftCo_800B46B8(fp, CpuCmd_SetLstickY, 0);
         ftCo_800B46B8(fp, CpuCmd_SetLstickX, -0x7F);
         ftCo_800B463C(fp, CpuCmd_Done);
-    } else if (ABS(temp_r3->x8.x - fp->cur_pos.x) < 10.0) {
+    } else if (ABS(temp_r3->pos0.x - fp->cur_pos.x) < 10.0) {
         ftCo_800B46B8(fp, CpuCmd_SetLstickY, 0);
         ftCo_800B46B8(fp, CpuCmd_SetLstickX, 0x7F);
         ftCo_800B463C(fp, CpuCmd_Done);
