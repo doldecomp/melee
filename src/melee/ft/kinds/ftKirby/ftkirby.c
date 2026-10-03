@@ -2709,21 +2709,18 @@ void ftKb_Init_OnKnockbackExit(HSD_GObj* gobj)
 
 void ftKb_Init_UnkDemoCallbacks0(int kind, int* out1, int* out2)
 {
-    if (kind == 14) {
-        goto case14;
+    switch (kind) {
+    case 11:
+    case 12:
+    case 13:
+        *out1 = 14;
+        *out2 = 16;
+        break;
+    case 14:
+        *out2 = 17;
+        *out1 = 17;
+        break;
     }
-    if (kind >= 14) {
-        return;
-    }
-    if (kind < 11) {
-        return;
-    }
-    *out1 = 14;
-    *out2 = 16;
-    return;
-case14:
-    *out2 = 17;
-    *out1 = 17;
 }
 
 char* ftKb_Init_GetMotionFileString(enum_t arg0)

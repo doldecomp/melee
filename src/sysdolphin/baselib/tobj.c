@@ -328,13 +328,10 @@ HSD_TObj* _HSD_TObjGetCurrentByType(HSD_TObj* from, u32 mapping)
 
     for (; tp != NULL; tp = tp->next) {
         if (tobj_coord(tp) == mapping) {
-            goto END;
+            return tp;
         }
     }
-
-    tp = NULL;
-END:
-    return tp;
+    return NULL;
 }
 
 static u32 HSD_TexMapID2PTTexMtx(GXTexMapID id)

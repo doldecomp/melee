@@ -57,22 +57,19 @@ static void HSD_DevComUnlink(HSD_DevCom* dc)
         if (HSD_DevCom_804C6330[i] == dc) {
             HSD_DevCom_804C6330[i] = 0;
         }
-        goto cleanup;
-    }
-
-    for (curr = devComStatus[i]; curr->next != NULL; curr = curr->next) {
-        if (curr->next == dc) {
-            curr->next = dc->next;
-            if (HSD_DevCom_804C6330[i] == dc) {
-                HSD_DevCom_804C6330[i] = curr;
+    } else {
+        for (curr = devComStatus[i]; curr->next != NULL; curr = curr->next) {
+            if (curr->next == dc) {
+                curr->next = dc->next;
+                if (HSD_DevCom_804C6330[i] == dc) {
+                    HSD_DevCom_804C6330[i] = curr;
+                }
+                OSRestoreInterrupts(enabled);
+                return;
             }
-            OSRestoreInterrupts(enabled);
-            return;
         }
+        HSD_ASSERT(0x6E, 0);
     }
-    HSD_ASSERT(0x6E, 0);
-
-cleanup:
     OSRestoreInterrupts(enabled);
 }
 

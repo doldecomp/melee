@@ -868,17 +868,13 @@ void fn_8016A4C8(void)
     }
     if ((s32) gp->x7 == 0) {
         s32 active_slot;
-        active_slot = 0;
-    scan_active_spawn:
-        if (Player_GetPlayerSlotType(active_slot) != Gm_PKind_NA &&
-            Player_GetFlagsBit1(active_slot) != 0 &&
-            Player_GetStocks(active_slot) != 0)
-        {
-            has_active_spawn = 1;
-        } else {
-            active_slot += 1;
-            if (active_slot < 6) {
-                goto scan_active_spawn;
+        for (active_slot = 0; active_slot < 6; active_slot++) {
+            if (Player_GetPlayerSlotType(active_slot) != Gm_PKind_NA &&
+                Player_GetFlagsBit1(active_slot) != 0 &&
+                Player_GetStocks(active_slot) != 0)
+            {
+                has_active_spawn = 1;
+                break;
             }
         }
         if (has_active_spawn == 0) {

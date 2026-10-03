@@ -155,15 +155,11 @@ void it_80272860(Item_GObj* item_gobj, f32 arg1, f32 arg2)
         if (var_f3 < 0.0f) {
             var_f3 = -var_f3;
         }
-        if (var_f3 < arg2) {
-        label_1:
-            item->x40_vel.y -= arg1;
+        if (!(var_f3 < arg2)) {
             return;
         }
-        return;
     }
-    // big dumb
-    goto label_1;
+    item->x40_vel.y -= arg1;
 }
 
 void it_802728C8(Item_GObj* item_gobj)

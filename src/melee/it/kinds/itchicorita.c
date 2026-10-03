@@ -121,19 +121,14 @@ static inline void itChicorita_Phys(HSD_GObj* item_gobj)
         fall_speed_dir = item->xCC_item_attr->x10_fall_speed < 0.0f ? -1 : 1;
         chicorita_fall_speed = item->xDD4_itemVar.chicorita.x64;
         item_vel_y_dir = chicorita_fall_speed < 0.0f ? -1 : 1;
-        if (item_vel_y_dir != fall_speed_dir) {
-            if (chicorita_fall_speed < 0.0f) {
-                chicorita_fall_speed = -chicorita_fall_speed;
-            }
-            if (chicorita_fall_speed < item->xCC_item_attr->x14_fall_speed_max)
-            {
-            block_11:
-                item->xDD4_itemVar.chicorita.x64 -=
-                    item->xCC_item_attr->x10_fall_speed;
-            }
-        } else {
-            goto block_11;
+        if (item_vel_y_dir == fall_speed_dir ||
+            ABS(chicorita_fall_speed) <
+                item->xCC_item_attr->x14_fall_speed_max)
+        {
+            item->xDD4_itemVar.chicorita.x64 -=
+                item->xCC_item_attr->x10_fall_speed;
         }
+
         item->x40_vel.y = item->xDD4_itemVar.chicorita.x64;
         return;
     }

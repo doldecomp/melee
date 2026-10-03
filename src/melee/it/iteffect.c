@@ -58,14 +58,11 @@ void it_80278800(Item_GObj* item_gobj, s32 ef_id, s32 arg2, Vec3* arg3,
     f32 sp5C;
     HSD_JObj* jobj;
     Item* item;
-    f32 temp_f1;
-    f32 temp_f2;
     f64 var_f0;
-    PAD_STACK(48);
+    PAD_STACK(56);
 
     item = item_gobj->user_data;
 
-    // Not sure what to make of mixing this case statement with the if's below.
     switch (ef_id) {
     case 0x402:
     case 0x403:
@@ -78,7 +75,6 @@ void it_80278800(Item_GObj* item_gobj, s32 ef_id, s32 arg2, Vec3* arg3,
     case 0x433:
     case 0x449:
     case 0x473:
-        // block_50:
         if (arg5 == 1) {
             jobj = it_80272CC0(item_gobj, arg2);
             efSync_Spawn(ef_id, item_gobj, jobj);
@@ -168,7 +164,6 @@ void it_80278800(Item_GObj* item_gobj, s32 ef_id, s32 arg2, Vec3* arg3,
                       ef_id, jobj, &sp80);
         return;
     }
-    // default:
     sp74 = *arg3;
     it_80278800_rand_vec(&sp74, arg4);
     lb_8000B1CC(it_80272CC0(item_gobj, arg2), &sp74, &sp68);
@@ -181,217 +176,134 @@ void it_80278800(Item_GObj* item_gobj, s32 ef_id, s32 arg2, Vec3* arg3,
         efAsync_Spawn(item_gobj, &((Item*) item_gobj->user_data)->xBC0, 2U,
                       ef_id, jobj, &sp74);
         return;
-    } else if (ef_id == 0x41E) {
-        return;
-    } else if (ef_id < 0x41E) {
-        if (ef_id == 0x3FF) {
-            goto block_558;
-        } else if (ef_id < 0x3FF) {
-            if (ef_id == 0x3F5) {
-                goto block_4FC;
-            } else if (ef_id < 0x3F5) {
-                if (ef_id == 0x3EE) {
-                    goto block_4A8;
-                } else if (ef_id < 0x3EE) {
-                    if (ef_id >= 0x3ED) {
-                        goto block_4FC;
-                    } else if (ef_id >= 0x3E9) {
-                        goto block_4A8;
-                    } else {
-                        return;
-                    }
-                }
-                if (ef_id >= 0x3F3) {
-                    goto block_4A8;
-                } else {
-                    goto block_4FC;
-                }
-            } else {
-                if (ef_id == 0x3FD) {
-                    goto block_558;
-                } else if (ef_id >= 0x3FD) {
-                    goto block_4FC;
-                }
-                if (ef_id >= 0x3FA) {
-                    goto block_4A8;
-                } else if (ef_id >= 0x3F7) {
-                    goto block_558;
-                } else {
-                    goto block_4A8;
-                }
-            }
-        }
-        if (ef_id == 0x408) {
-            goto block_61C;
-        } else if (ef_id < 0x408) {
-            if (ef_id == 0x405) {
-                goto block_4A8;
-            } else if (ef_id < 0x405) {
-                if (ef_id >= 0x404) {
-                    goto block_61C;
-                }
-                if (ef_id >= 0x402) {
-                    goto done;
-                }
-                goto block_4FC;
-            }
-            if (ef_id >= 0x407) {
-                goto block_4A8;
-            } else {
-                goto block_61C;
-            }
-        }
-        if (ef_id == 0x416) {
-            goto block_4A8;
-        } else if (ef_id < 0x416) {
-            if (ef_id >= 0x412) {
-                return;
-            }
-            if (ef_id >= 0x40C) {
-                goto block_4A8;
-            } else {
-                return;
-            }
-        } else if (ef_id >= 0x41C) {
-            goto block_4A8;
-        } else {
-            // goto block_50;
-            return;
-        }
-    } else if (ef_id == 0x440) {
-        goto block_59C;
-    } else if (ef_id < 0x440) {
-        if (ef_id < 0x432) {
-            if (ef_id < 0x428) {
-                if (ef_id >= 0x425) {
-                    goto block_4A8;
-                }
-                if (ef_id >= 0x422) {
-                    goto done;
-                }
-                goto block_4A8;
-            }
-            if (ef_id == 0x42D) {
-                goto block_4A8;
-            } else if (ef_id >= 0x42D) {
-                goto block_4FC;
-            } else {
-                return;
-            }
-        }
-        if (ef_id < 0x438) {
-            if (ef_id == 0x434) {
-                goto block_4A8;
-            } else if (ef_id >= 0x434) {
-                goto block_59C;
-            } else {
-                return;
-            }
-        }
-        if (ef_id >= 0x43D) {
-            return;
-        } else if (ef_id >= 0x43A) {
-            goto block_4FC;
-        } else {
-            return;
-        }
-    } else if (ef_id == 0x4D0) {
-        goto block_4A8;
-    } else if (ef_id < 0x4D0) {
-        if (ef_id < 0x446) {
-            if (ef_id == 0x443) {
-                goto block_4FC;
-            } else {
-                goto block_4A8;
-            }
-        } else if (ef_id >= 0x44D) {
-            return;
-        } else if (ef_id >= 0x44A) {
-            goto block_4A8;
-        } else {
-            // goto block_50;
-            return;
-        }
-    } else if (ef_id == 0x514) {
-        goto block_6B4;
-    } else if (ef_id < 0x514) {
-        if (ef_id >= 0x513) {
-            goto block_680;
-
-        } else {
-            return;
-        }
-    } else {
-        if (ef_id >= 0x516) {
-            goto done;
-        }
-        goto block_6E8;
     }
 
-block_4A8:
-    if (arg5 == 1) {
-        efSync_Spawn(ef_id, item_gobj, &sp68);
+    switch (ef_id) {
+    case 0x3E9:
+    case 0x3EA:
+    case 0x3EB:
+    case 0x3EC:
+    case 0x3EE:
+    case 0x3F3:
+    case 0x3F4:
+    case 0x3F6:
+    case 0x3FA:
+    case 0x3FB:
+    case 0x3FC:
+    case 0x405:
+    case 0x407:
+    case 0x40C:
+    case 0x40D:
+    case 0x40E:
+    case 0x40F:
+    case 0x410:
+    case 0x411:
+    case 0x416:
+    case 0x41C:
+    case 0x41D:
+    case 0x41F:
+    case 0x420:
+    case 0x421:
+    case 0x425:
+    case 0x426:
+    case 0x427:
+    case 0x42D:
+    case 0x434:
+    case 0x441:
+    case 0x442:
+    case 0x444:
+    case 0x445:
+    case 0x44A:
+    case 0x44B:
+    case 0x44C:
+    case 0x4D0:
+        if (arg5 == 1) {
+            efSync_Spawn(ef_id, item_gobj, &sp68);
+            return;
+        }
+        jobj = it_80272CC0(item_gobj, arg2);
+        efAsync_Spawn(item_gobj, &((Item*) item_gobj->user_data)->xBC0, 2U,
+                      ef_id, jobj, &sp74);
+        return;
+    case 0x3ED:
+    case 0x3EF:
+    case 0x3F0:
+    case 0x3F1:
+    case 0x3F2:
+    case 0x3F5:
+    case 0x3FE:
+    case 0x400:
+    case 0x401:
+    case 0x42E:
+    case 0x42F:
+    case 0x430:
+    case 0x431:
+    case 0x43A:
+    case 0x43B:
+    case 0x43C:
+    case 0x443:
+        if (arg5 == 1) {
+            efSync_Spawn(ef_id, item_gobj, &sp68, &item->facing_dir);
+            return;
+        }
+        jobj = it_80272CC0(item_gobj, arg2);
+        efAsync_Spawn(item_gobj, &((Item*) item_gobj->user_data)->xBC0, 5U,
+                      ef_id, jobj, &sp74, &item->facing_dir);
+        return;
+    case 0x3F7:
+    case 0x3F8:
+    case 0x3F9:
+    case 0x3FD:
+    case 0x3FF:
+        sp64 = 0.0f;
+        jobj = it_80272CC0(item_gobj, arg2);
+        efAsync_Spawn(item_gobj, &((Item*) item_gobj->user_data)->xBC0, 6U,
+                      ef_id, jobj, &sp74, &item->facing_dir, &sp64);
+        return;
+    case 0x435:
+    case 0x436:
+    case 0x437:
+    case 0x440:
+        if (item->facing_dir < 0.0f) {
+            var_f0 = M_PI;
+        } else {
+            var_f0 = 0.0f;
+        }
+        sp60 = var_f0;
+        if (arg5 == 1) {
+            efSync_Spawn(ef_id, item_gobj, &sp68, &sp60);
+            return;
+        }
+        jobj = it_80272CC0(item_gobj, arg2);
+        efAsync_Spawn(item_gobj, &((Item*) item_gobj->user_data)->xBC0, 5U,
+                      ef_id, jobj, &sp74, &sp60);
+        return;
+    case 0x404:
+    case 0x406:
+    case 0x408:
+        sp5C = 0.0f;
+        if (arg5 == 1) {
+            efSync_Spawn(ef_id, item_gobj, &sp68, &sp5C);
+            return;
+        }
+        jobj = it_80272CC0(item_gobj, arg2);
+        efAsync_Spawn(item_gobj, &((Item*) item_gobj->user_data)->xBC0, 5U,
+                      ef_id, jobj, &sp74, &sp5C);
+        return;
+    case 0x513:
+        jobj = it_80272CC0(item_gobj, arg2);
+        efAsync_Spawn(item_gobj, &((Item*) item_gobj->user_data)->xBC0, 8U, 2U,
+                      jobj, &sp74);
+        return;
+    case 0x514:
+        jobj = it_80272CC0(item_gobj, arg2);
+        efAsync_Spawn(item_gobj, &((Item*) item_gobj->user_data)->xBC0, 8U, 3U,
+                      jobj, &sp74);
+        return;
+    case 0x515:
+        jobj = it_80272CC0(item_gobj, arg2);
+        efAsync_Spawn(item_gobj, &((Item*) item_gobj->user_data)->xBC0, 8U, 4U,
+                      jobj, &sp74);
         return;
     }
-    jobj = it_80272CC0(item_gobj, arg2);
-    efAsync_Spawn(item_gobj, &((Item*) item_gobj->user_data)->xBC0, 2U, ef_id,
-                  jobj, &sp74);
-    return;
-block_4FC:
-    if (arg5 == 1) {
-        efSync_Spawn(ef_id, item_gobj, &sp68, &item->facing_dir);
-        return;
-    }
-    jobj = it_80272CC0(item_gobj, arg2);
-    efAsync_Spawn(item_gobj, &((Item*) item_gobj->user_data)->xBC0, 5U, ef_id,
-                  jobj, &sp74, &item->facing_dir);
-    return;
-block_558:
-    sp64 = 0.0f;
-    jobj = it_80272CC0(item_gobj, arg2);
-    efAsync_Spawn(item_gobj, &((Item*) item_gobj->user_data)->xBC0, 6U, ef_id,
-                  jobj, &sp74, &item->facing_dir, &sp64);
-    return;
-block_59C:
-    temp_f1 = item->facing_dir;
-    if (item->facing_dir < 0.0f) {
-        var_f0 = M_PI;
-    } else {
-        var_f0 = 0.0f;
-    }
-    sp60 = var_f0;
-    if (arg5 == 1) {
-        efSync_Spawn(ef_id, item_gobj, &sp68, &sp60);
-        return;
-    }
-    jobj = it_80272CC0(item_gobj, arg2);
-    efAsync_Spawn(item_gobj, &((Item*) item_gobj->user_data)->xBC0, 5U, ef_id,
-                  jobj, &sp74, &sp60);
-    return;
-block_61C:
-    sp5C = 0.0f;
-    if (arg5 == 1) {
-        efSync_Spawn(ef_id, item_gobj, &sp68, &sp5C);
-        return;
-    }
-    jobj = it_80272CC0(item_gobj, arg2);
-    efAsync_Spawn(item_gobj, &((Item*) item_gobj->user_data)->xBC0, 5U, ef_id,
-                  jobj, &sp74, &sp5C);
-    return;
-block_680:
-    jobj = it_80272CC0(item_gobj, arg2);
-    efAsync_Spawn(item_gobj, &((Item*) item_gobj->user_data)->xBC0, 8U, 2U,
-                  jobj, &sp74);
-    return;
-block_6B4:
-    jobj = it_80272CC0(item_gobj, arg2);
-    efAsync_Spawn(item_gobj, &((Item*) item_gobj->user_data)->xBC0, 8U, 3U,
-                  jobj, &sp74);
-    return;
-block_6E8:
-    jobj = it_80272CC0(item_gobj, arg2);
-    efAsync_Spawn(item_gobj, &((Item*) item_gobj->user_data)->xBC0, 8U, 4U,
-                  jobj, &sp74);
-done:
-    return;
 }

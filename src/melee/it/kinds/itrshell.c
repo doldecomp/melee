@@ -91,47 +91,26 @@ void it_8028D100(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     itRShell_Attrs* attrs = ip->xC4_article_data->x4_specialAttributes;
-    s32 kind = ip->msid;
     s32 did_hit = 0;
-    f32 vel;
 
-    if (kind < 5) {
-        if (kind == 2) {
-            goto check_speed;
-        }
-        if (kind >= 2) {
-            goto set_vel;
-        }
-        if (kind >= 0) {
-            goto set_vel;
-        }
-        goto check_speed;
-    } else {
-        if (kind == 7) {
-            goto set_vel;
-        }
-        if (kind >= 7) {
-            goto check_speed;
-        }
-        goto add_vel;
+    switch (ip->msid) {
+    case 0:
+    case 1:
+    case 3:
+    case 4:
+    case 7:
+        did_hit = 1;
+        ip->x40_vel.x = -ip->xCCC_incDamageDirection * (ip->xCA0 * attrs->x20);
+        break;
+    case 5:
+    case 6:
+        it_8028D390(gobj);
+        ip->x40_vel.x +=
+            -ip->xCCC_incDamageDirection * (ip->xCA0 * attrs->x24);
+        break;
     }
 
-set_vel:
-    did_hit = 1;
-    ip->x40_vel.x = -ip->xCCC_incDamageDirection * (ip->xCA0 * attrs->x20);
-    goto check_speed;
-
-add_vel:
-    it_8028D390(gobj);
-    ip->x40_vel.x += -ip->xCCC_incDamageDirection * (ip->xCA0 * attrs->x24);
-    goto check_speed;
-
-check_speed:
-    vel = ip->x40_vel.x;
-    if (vel < 0.0f) {
-        vel = -vel;
-    }
-    if (vel > attrs->x10) {
+    if (ABS(ip->x40_vel.x) > attrs->x10) {
         it_8027236C(gobj);
         if (did_hit != 0) {
             it_802756D0(gobj);
@@ -150,47 +129,25 @@ void it_8028D26C(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     itRShell_Attrs* attrs = ip->xC4_article_data->x4_specialAttributes;
-    s32 kind = ip->msid;
     s32 did_hit = 0;
-    f32 vel;
 
-    if (kind < 5) {
-        if (kind == 2) {
-            goto check_speed;
-        }
-        if (kind >= 2) {
-            goto set_vel;
-        }
-        if (kind >= 0) {
-            goto set_vel;
-        }
-        goto check_speed;
-    } else {
-        if (kind == 7) {
-            goto set_vel;
-        }
-        if (kind >= 7) {
-            goto check_speed;
-        }
-        goto add_vel;
+    switch (ip->msid) {
+    case 0:
+    case 1:
+    case 3:
+    case 4:
+    case 7:
+        did_hit = 1;
+        ip->x40_vel.x = attrs->x28 * -ip->xCD0;
+        break;
+    case 5:
+    case 6:
+        it_8028D390(gobj);
+        ip->x40_vel.x += attrs->x2C * -ip->xCD0;
+        break;
     }
 
-set_vel:
-    did_hit = 1;
-    ip->x40_vel.x = attrs->x28 * -ip->xCD0;
-    goto check_speed;
-
-add_vel:
-    it_8028D390(gobj);
-    ip->x40_vel.x += attrs->x2C * -ip->xCD0;
-    goto check_speed;
-
-check_speed:
-    vel = ip->x40_vel.x;
-    if (vel < 0.0f) {
-        vel = -vel;
-    }
-    if (vel > attrs->x10) {
+    if (ABS(ip->x40_vel.x) > attrs->x10) {
         it_802723FC(gobj);
         if (did_hit != 0) {
             it_802756D0(gobj);

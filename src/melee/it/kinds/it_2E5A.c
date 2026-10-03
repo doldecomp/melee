@@ -99,15 +99,10 @@ bool it_802E5AC4(Item_GObj* item_gobj, bool arg_check)
         if (ABS(item->x40_vel.y) <= 0.00001f) {
             item->x40_vel.y = 0.0f;
         }
-        if (ABS(item->x40_vel.x) <= comm_attr->x5c) {
-            if (!(ABS(item->x40_vel.y) <= comm_attr->x5c)) {
-                goto block_16;
-            }
-            goto block_18;
-        }
-    block_16:
-        if (item->xDCD_flag.x0.b4 || !comm_attr->x58) {
-        block_18:
+        if ((ABS(item->x40_vel.x) <= comm_attr->x5c &&
+             ABS(item->x40_vel.y) <= comm_attr->x5c) ||
+            item->xDCD_flag.x0.b4 || !comm_attr->x58)
+        {
             itResetVelocity(item);
             item->xD50_landNum = 0;
         } else {

@@ -203,35 +203,39 @@ void hsd_80391A04(float scale_x, float scale_y, int line_width)
     HSD_StateSetCullMode(0);
 }
 
+/// @bug The digit cases are 0-9 rather than '0'-'9'.
 static inline int hexval(int ch)
+
 {
-    if (ch < 0x47) {
-        if (ch < 0x0A) {
-            if (ch >= 0) {
-                goto sub_30;
-            }
-            goto ret_zero;
-        }
-        if (ch >= 0x41) {
-            goto sub_37;
-        }
-        goto ret_zero;
+    switch (ch) {
+    case 0:
+    case 1:
+    case 2:
+    case 3:
+    case 4:
+    case 5:
+    case 6:
+    case 7:
+    case 8:
+    case 9:
+        return ch - '0';
+    case 'a':
+    case 'b':
+    case 'c':
+    case 'd':
+    case 'e':
+    case 'f':
+        return ch - 'a' + 10;
+    case 'A':
+    case 'B':
+    case 'C':
+    case 'D':
+    case 'E':
+    case 'F':
+        return ch - 'A' + 10;
+    default:
+        return 0;
     }
-    if (ch < 0x67) {
-        if (ch >= 0x61) {
-            goto sub_57;
-        }
-        goto ret_zero;
-    }
-    goto ret_zero;
-sub_30:
-    return ch - 0x30;
-sub_57:
-    return ch - 0x57;
-sub_37:
-    return ch - 0x37;
-ret_zero:
-    return 0;
 }
 
 s32 hsd_80391AC8(char* str, GXColor* color, f32 x, f32 y)

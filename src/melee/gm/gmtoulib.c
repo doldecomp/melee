@@ -1836,13 +1836,13 @@ void fn_8018E85C(DynamicModelDesc* model, s32 flag)
 
     for (outer_idx = 0; outer_idx < 0x40; outer_idx++) {
         if (lbl_80473AB8[outer_idx].x0 == 0) {
-            goto next_entry;
+            continue;
         }
         inner_idx = 0;
         for (; inner_idx < 4; inner_idx++) {
             sub = &lbl_80473AB8[outer_idx].x0 + inner_idx * 0x2C;
             if (sub[0x30] == 0) {
-                goto next_sub;
+                continue;
             }
 
             if (flag != 0) {
@@ -1895,10 +1895,7 @@ void fn_8018E85C(DynamicModelDesc* model, s32 flag)
                 fn_8018FDC4(jobj, (f32) * (s32*) (sub + 0x44),
                             -(f32) * (s32*) (sub + 0x48), 666.0f);
             }
-
-        next_sub:;
         }
-    next_entry:;
     }
 }
 

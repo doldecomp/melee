@@ -807,12 +807,12 @@ bool itLinkArrow_Logic98_HitShield(Item_GObj* gobj)
                             sinf(ip->xDD4_itemVar.linkarrow.xD8) +
                         ip->xDD4_itemVar.linkarrow.xCC;
             ip->pos.z = 0.0f;
-            goto end;
+        } else {
+            return true;
         }
+    } else {
         return true;
     }
-    return true;
-end:
     return false;
 }
 

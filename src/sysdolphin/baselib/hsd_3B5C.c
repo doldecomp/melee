@@ -241,26 +241,20 @@ s32 hsd_803B5D70(s32 ac, s32 component)
     code_cursor = code_table;
     length_table = length_table_base;
     bit_len = 1;
-read_bit:
-    code = (code * 2) | hsd_803B5C4C(1);
-    code_table_tmp = code_cursor;
-    goto read_huffman_code;
-check_code:
-    if (code == (s32) *code_table_tmp) {
-        return value_table[value_idx];
-    }
-    code_table_tmp += 1;
-    code_cursor += 1;
-    value_idx += 1;
-    length_table += 1;
-read_huffman_code:
-    if (bit_len == (s32) *length_table) {
-        goto check_code;
-    }
-    bit_len += 1;
-    if (bit_len <= 0x10) {
-        goto read_bit;
-    }
+    do {
+        code = (code * 2) | hsd_803B5C4C(1);
+        code_table_tmp = code_cursor;
+        while (bit_len == (s32) *length_table) {
+            if (code == (s32) *code_table_tmp) {
+                return value_table[value_idx];
+            }
+            code_table_tmp += 1;
+            code_cursor += 1;
+            value_idx += 1;
+            length_table += 1;
+        }
+        bit_len += 1;
+    } while (bit_len <= 0x10);
     return 0U;
 }
 
