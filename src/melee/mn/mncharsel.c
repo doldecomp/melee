@@ -3722,6 +3722,24 @@ void fn_80263354(HSD_GObj* gobj)
     HSD_JObjAnimAll(jobj);
 }
 
+static inline bool usesKOCounts(u8 match_type)
+{
+    switch (match_type) {
+    case VS_MELEE:
+    case VS_SUDDEN_DEATH:
+    case VS_GIANT:
+    case VS_TINY:
+    case VS_INVISIBLE:
+    case VS_FIXED_CAMERA:
+    case VS_SINGLE_BUTTON:
+    case VS_LIGHTNING:
+    case VS_SLOWMO:
+        return true;
+    default:
+        return false;
+    }
+}
+
 /// Nametag list think callback - handles scrolling through nametag list
 
 static const GXColor mnCharSel_804DC560 = { 255, 255, 255, 255 };
@@ -3748,11 +3766,9 @@ void fn_802633B0(HSD_GObj* gobj)
     s32 page;
     s32 new_page;
     GXColor* used_name_color;
-    s32 val;
     s32 row;
     s32 j;
     s32 page_off;
-    u8 match_type;
     u32 trigger;
     s32 num_entries;
     s32 i;
@@ -3974,21 +3990,7 @@ void fn_802633B0(HSD_GObj* gobj)
                     if (mnCharSel_804D6CB0->vs.start.players[port].nametag !=
                         0x78)
                     {
-                        match_type = mnCharSel_804D6CB0->match_type;
-                        if ((s32) match_type < 3) {
-                            if ((s32) match_type == 0) {
-                                goto clear;
-                            }
-                            goto no_clear;
-                        }
-                        if ((s32) match_type < 0xB) {
-                        clear:
-                            val = 1;
-                        } else {
-                        no_clear:
-                            val = 0;
-                        }
-                        if (val != 0) {
+                        if (usesKOCounts(mnCharSel_804D6CB0->match_type)) {
                             mnCharSel_804D6CB0->ko_counts[tag->port] = 0;
                         }
                     }
@@ -3997,10 +3999,7 @@ void fn_802633B0(HSD_GObj* gobj)
                 tag->use_tag = 0;
                 tag->state = 4;
                 sfxMove();
-                goto check_cancel;
-            }
-
-            if ((s32) tag->next_tag == row) {
+            } else if ((s32) tag->next_tag == row) {
                 if (IsNameListFull() == 0) {
                     if (mnCharSel_804D6CF5 == 1) {
                         mnCharSel_804D6CF9 = mnCharSel_804D6CF0;
@@ -4021,10 +4020,7 @@ void fn_802633B0(HSD_GObj* gobj)
                     }
                     return;
                 }
-                goto check_cancel;
-            }
-
-            if ((s32) tag->next_tag > row) {
+            } else if ((s32) tag->next_tag > row) {
                 {
                     s32 p;
                     for (p = 0; p < (s32) mnCharSel_804D6CF5; p++) {
@@ -4045,21 +4041,9 @@ void fn_802633B0(HSD_GObj* gobj)
                                     .players[port]
                                     .nametag != (s32) (row - 1))
                             {
-                                match_type = mnCharSel_804D6CB0->match_type;
-                                if ((s32) match_type < 3) {
-                                    if ((s32) match_type == 0) {
-                                        goto clear2;
-                                    }
-                                    goto no_clear2;
-                                }
-                                if ((s32) match_type < 0xB) {
-                                clear2:
-                                    val = 1;
-                                } else {
-                                no_clear2:
-                                    val = 0;
-                                }
-                                if (val != 0) {
+                                if (usesKOCounts(
+                                        mnCharSel_804D6CB0->match_type))
+                                {
                                     mnCharSel_804D6CB0->ko_counts[tag->port] =
                                         0;
                                 }
@@ -4127,7 +4111,7 @@ void fn_802633B0(HSD_GObj* gobj)
         break;
     }
     }
-    PAD_STACK(16);
+    PAD_STACK(12);
 }
 void mnCharSel_80264070(void)
 {
@@ -4684,22 +4668,7 @@ s32 mnCharSel_802640A0(void)
         }
         if (player == mnCharSel_804D6CF9 && mnCharSel_804D6CF8 < td->next_tag)
         {
-            u8 mt = mnCharSel_804D6CB0->match_type;
-            s32 clear;
-            if ((s32) mt < 3) {
-                if ((s32) mt == 0) {
-                    goto clear_tag_overflow;
-                }
-                goto no_clear_tag_overflow;
-            }
-            if ((s32) mt < 0xB) {
-            clear_tag_overflow:
-                clear = 1;
-            } else {
-            no_clear_tag_overflow:
-                clear = 0;
-            }
-            if (clear != 0) {
+            if (usesKOCounts(mnCharSel_804D6CB0->match_type)) {
                 mnCharSel_804D6CB0->ko_counts[player] = 0;
             }
             mnCharSel_804D6CB0->vs.start.players[player].nametag =
@@ -5114,8 +5083,6 @@ s32 mnCharSel_802640A0(void)
             break;
         }
     } else {
-        u8 mt;
-        s32 clear;
         mnCharSel_803F0EBC.scroll_flag = 0;
         text =
             HSD_SisLib_803A5ACC(0, ctx, -12.0f, -23.3f, 0.0f, 450.0f, 32.0f);
@@ -5126,21 +5093,7 @@ s32 mnCharSel_802640A0(void)
         text->font_size.y = 0.07f;
         HSD_SisLib_803A6368(text, 0x4A);
         mnCharSel_8025BD30();
-        mt = mnCharSel_804D6CB0->match_type;
-        if ((s32) mt < 3) {
-            if ((s32) mt == 0) {
-                goto clear_ko_stars;
-            }
-            goto no_clear_ko_stars;
-        }
-        if ((s32) mt < 0xB) {
-        clear_ko_stars:
-            clear = 1;
-        } else {
-        no_clear_ko_stars:
-            clear = 0;
-        }
-        if (clear != 0) {
+        if (usesKOCounts(mnCharSel_804D6CB0->match_type)) {
             for (i = 0; i < (s32) mnCharSel_804D6CF5; i++) {
                 lb_80011E24(mnCharSel_804D6CC0, &sp108,
                             ((CSSKOStar*) &data2.ko_stars)[i].joint, -1);
@@ -5258,7 +5211,7 @@ s32 mnCharSel_802640A0(void)
     }
 
     mnCharSel_8025EE8C(mnCharSel_804D6CB0->match_type);
-    PAD_STACK(0x20);
+    PAD_STACK(0x1C);
     return lbAudioAx_80023F28(gmMainLib_8015ECB0());
 }
 
