@@ -895,8 +895,7 @@ static inline void mpLib_LoadLineGroup(MapCollData* coll_data, int group)
 void mpLibLoad(MapCollData* coll_data)
 {
     float raw_x, raw_y;
-    float y;
-    float x;
+    float y, x;
     float scale;
     CollJoint* joint_prev;
     CollJoint* joint;
