@@ -2727,8 +2727,7 @@ void mnCharSel_CursorThink(HSD_GObj* gobj)
                                 if (cy < data2.x108 && cy > data2.x10c) {
                                     f32 cx = cursor->xC;
                                     if (cx > data2.xf8 && cx < data2.xfc) {
-                                        cursor->x8 = 1;
-                                        if ((trigger & HSD_PAD_A) &&
+                                        if (isButtonPressed(cursor, trigger) &&
                                             data2.stocks > 1U)
                                         {
                                             data2.stocks =
@@ -2738,14 +2737,12 @@ void mnCharSel_CursorThink(HSD_GObj* gobj)
                                                 .players[mnCharSel_804D6CF0]
                                                 .stocks = (s8) data2.stocks;
                                             sfxMove();
-                                        } else {
-                                            goto cpu_level_widget;
+                                            goto update_display;
                                         }
                                     } else if (cx > data2.x100 &&
                                                cx < data2.x104)
                                     {
-                                        cursor->x8 = 1;
-                                        if ((trigger & HSD_PAD_A) &&
+                                        if (isButtonPressed(cursor, trigger) &&
                                             data2.stocks < 5U)
                                         {
                                             data2.stocks =
@@ -2755,204 +2752,181 @@ void mnCharSel_CursorThink(HSD_GObj* gobj)
                                                 .players[mnCharSel_804D6CF0]
                                                 .stocks = (s8) data2.stocks;
                                             sfxMove();
-                                        } else {
-                                            goto cpu_level_widget;
+                                            goto update_display;
                                         }
-                                    } else {
-                                        goto cpu_level_widget;
                                     }
-                                } else {
-                                    goto cpu_level_widget;
-                                }
-                            } else {
-                            cpu_level_widget:
-                                if (mnCharSel_804D6CB0->match_type <= 0xDU) {
-                                    f32 cy2 = cursor->x10;
-                                    if (cy2 < mnCharSel_803F0EBC.cpubtn_top &&
-                                        cy2 > mnCharSel_803F0EBC.cpubtn_btm)
-                                    {
-                                        f32 cx2 = cursor->xC;
-                                        if (cx2 > mnCharSel_803F0EBC
-                                                      .cpudown_left &&
-                                            cx2 < mnCharSel_803F0EBC
-                                                      .cpudown_right)
-                                        {
-                                            cursor->x8 = 1;
-                                            if (trigger & HSD_PAD_A) {
-                                                u8* level;
-                                                u8 current_level;
-                                                if ((current_level = *(
-                                                         level =
-                                                             &mnCharSel_803F0EBC
-                                                                  .cpu_level)) !=
-                                                    0)
-                                                {
-                                                    *level =
-                                                        (u8) (current_level -
-                                                              1);
-                                                    mnCharSel_803F0EBC
-                                                        .scroll_flag = 1;
-                                                    mnCharSel_804D6CB0->vs
-                                                        .start
-                                                        .players
-                                                            [(s8) (u8)
-                                                                 mnCharSel_804D6CF0]
-                                                        .cpu_level = *level;
-                                                    sfxMove();
-                                                } else {
-                                                    goto door_clicks;
-                                                }
-                                            } else {
-                                                goto door_clicks;
-                                            }
-                                        } else if (cx2 > mnCharSel_803F0EBC
-                                                             .cpuup_left &&
-                                                   cx2 < mnCharSel_803F0EBC
-                                                             .cpuup_right)
-                                        {
-                                            cursor->x8 = 1;
-                                            if (trigger & HSD_PAD_A) {
-                                                u8* level;
-                                                u8 current_level;
-                                                if ((current_level = *(
-                                                         level =
-                                                             &mnCharSel_803F0EBC
-                                                                  .cpu_level)) <
-                                                    4U)
-                                                {
-                                                    *level =
-                                                        (u8) (current_level +
-                                                              1);
-                                                    mnCharSel_803F0EBC
-                                                        .scroll_flag = 1;
-                                                    mnCharSel_804D6CB0->vs
-                                                        .start
-                                                        .players
-                                                            [(s8) (u8)
-                                                                 mnCharSel_804D6CF0]
-                                                        .cpu_level = *level;
-                                                    sfxMove();
-                                                } else {
-                                                    goto door_clicks;
-                                                }
-                                            } else {
-                                                goto door_clicks;
-                                            }
-                                        } else {
-                                            goto door_clicks;
-                                        }
-                                    } else {
-                                        goto door_clicks;
-                                    }
-                                } else {
-                                    goto door_clicks;
                                 }
                             }
-                            goto update_display;
-                        }
-
-                        if (mnCharSel_804D6CB0->match_type != 2) {
-                            f32 cx3 = cursor->xC;
-                            if (cx3 > -17.0f && cx3 < 15.0f &&
-                                cursor->x10 > 22.0f)
-                            {
-                                cursor->x8 = 1;
-                                if (trigger & HSD_PAD_A) {
-                                    s32 loop_i;
-                                    mnCharSel_804D6CF6 = 3;
-                                    for (loop_i = 0;
-                                         loop_i < (s32) mnCharSel_804D6CF5;
-                                         loop_i++)
+                            if (mnCharSel_804D6CB0->match_type <= 0xDU) {
+                                f32 cy2 = cursor->x10;
+                                if (cy2 < mnCharSel_803F0EBC.cpubtn_top &&
+                                    cy2 > mnCharSel_803F0EBC.cpubtn_btm)
+                                {
+                                    f32 cx2 = cursor->xC;
+                                    if (cx2 >
+                                            mnCharSel_803F0EBC.cpudown_left &&
+                                        cx2 < mnCharSel_803F0EBC.cpudown_right)
                                     {
-                                        if (mnCharSel_804A0BC0[loop_i]->x5 ==
-                                                1 &&
-                                            mnCharSel_8025FDEC((u8) loop_i) ==
+                                        if (isButtonPressed(cursor, trigger)) {
+                                            u8* level;
+                                            u8 current_level;
+                                            if ((current_level =
+                                                     *(level =
+                                                           &mnCharSel_803F0EBC
+                                                                .cpu_level)) !=
                                                 0)
-                                        {
-                                            mnCharSel_8025DB34((u8) loop_i);
-                                            mnCharSel_804A0BC0[loop_i]->x5 = 2;
+                                            {
+                                                *level =
+                                                    (u8) (current_level - 1);
+                                                mnCharSel_803F0EBC
+                                                    .scroll_flag = 1;
+                                                mnCharSel_804D6CB0->vs.start
+                                                    .players
+                                                        [(s8) (u8)
+                                                             mnCharSel_804D6CF0]
+                                                    .cpu_level = *level;
+                                                sfxMove();
+                                                goto update_display;
+                                            }
                                         }
-                                    }
-                                    return;
-                                }
-                            }
-                        }
-
-                        if (cursor->xC < -25.5f && cursor->x10 > 22.0f) {
-                            switch ((s32) mnCharSel_804D6CB0->match_type) {
-                            case VS_MELEE:
-                            case VS_CAMERA:
-                            case VS_STAMINA:
-                            case VS_SUDDEN_DEATH:
-                            case VS_GIANT:
-                            case VS_TINY:
-                            case VS_INVISIBLE:
-                            case VS_FIXED_CAMERA:
-                            case VS_SINGLE_BUTTON:
-                            case VS_LIGHTNING:
-                            case VS_SLOWMO:
-                                cursor->x8 = 1;
-                                if (trigger & HSD_PAD_A) {
-                                    sfxMove();
+                                    } else if (cx2 > mnCharSel_803F0EBC
+                                                         .cpuup_left &&
+                                               cx2 < mnCharSel_803F0EBC
+                                                         .cpuup_right)
                                     {
-                                        u8* is_teams =
-                                            &mnCharSel_804D6CB0->vs.start.rules
-                                                 .is_teams;
-                                        *is_teams = (*is_teams + 1) & 1;
-                                    }
-                                    if (mnCharSel_804D6CB0->vs.start.rules
-                                            .is_teams == 0)
-                                    {
-                                        int k;
-                                        for (k = 0;
-                                             k < (s32) mnCharSel_804D6CF5; k++)
-                                        {
-                                            if (isDuplicateCostumeCached(k)) {
-                                                mnCharSel_803F0DFC.doors[k]
-                                                    .costume = 0;
-                                                current_tag =
-                                                    (CSSTagData*) loadCSSValue(
-                                                        &mnCharSel_804D6CB0);
-                                                for (;;) {
-                                                    if (!isDuplicateCostumeWith(
-                                                            k,
-                                                            (CSSData*)
-                                                                current_tag,
-                                                            mnCharSel_804D6CF5))
-                                                    {
-                                                        break;
-                                                    }
-                                                    mnCharSel_803F0DFC.doors[k]
-                                                        .costume =
-                                                        (u8) (mnCharSel_803F0DFC
-                                                                  .doors[k]
-                                                                  .costume +
-                                                              1);
-                                                }
+                                        if (isButtonPressed(cursor, trigger)) {
+                                            u8* level;
+                                            u8 current_level;
+                                            if ((current_level =
+                                                     *(level =
+                                                           &mnCharSel_803F0EBC
+                                                                .cpu_level)) <
+                                                4U)
+                                            {
+                                                *level =
+                                                    (u8) (current_level + 1);
+                                                mnCharSel_803F0EBC
+                                                    .scroll_flag = 1;
+                                                mnCharSel_804D6CB0->vs.start
+                                                    .players
+                                                        [(s8) (u8)
+                                                             mnCharSel_804D6CF0]
+                                                    .cpu_level = *level;
+                                                sfxMove();
+                                                goto update_display;
                                             }
                                         }
                                     }
-                                    mnCharSel_8025EE8C(
-                                        mnCharSel_804D6CB0->match_type);
-                                } else {
-                                    goto try_costume_change;
                                 }
-                                break;
-                            default:
-                                goto try_costume_change;
                             }
                         } else {
-                        try_costume_change: {
-                            u8 cport2 = cursor->x4;
-                            if (mnCharSel_804A0BD0[cport2]->x5 == 0 &&
-                                mnCharSel_804D6CB0->vs.start.rules.is_teams ==
-                                    0 &&
-                                mnCharSel_803F0DFC.doors[cport2].p_kind != 3)
+                            if (mnCharSel_804D6CB0->match_type != 2) {
+                                f32 cx3 = cursor->xC;
+                                if (cx3 > -17.0f && cx3 < 15.0f &&
+                                    cursor->x10 > 22.0f)
+                                {
+                                    cursor->x8 = 1;
+                                    if (trigger & HSD_PAD_A) {
+                                        s32 loop_i;
+                                        mnCharSel_804D6CF6 = 3;
+                                        for (loop_i = 0;
+                                             loop_i < (s32) mnCharSel_804D6CF5;
+                                             loop_i++)
+                                        {
+                                            if (mnCharSel_804A0BC0[loop_i]
+                                                        ->x5 == 1 &&
+                                                mnCharSel_8025FDEC(
+                                                    (u8) loop_i) == 0)
+                                            {
+                                                mnCharSel_8025DB34(
+                                                    (u8) loop_i);
+                                                mnCharSel_804A0BC0[loop_i]
+                                                    ->x5 = 2;
+                                            }
+                                        }
+                                        return;
+                                    }
+                                }
+                            }
+
+                            if (cursor->xC < -25.5f && cursor->x10 > 22.0f) {
+                                switch ((s32) mnCharSel_804D6CB0->match_type) {
+                                case VS_MELEE:
+                                case VS_CAMERA:
+                                case VS_STAMINA:
+                                case VS_SUDDEN_DEATH:
+                                case VS_GIANT:
+                                case VS_TINY:
+                                case VS_INVISIBLE:
+                                case VS_FIXED_CAMERA:
+                                case VS_SINGLE_BUTTON:
+                                case VS_LIGHTNING:
+                                case VS_SLOWMO:
+                                    if (isButtonPressed(cursor, trigger)) {
+                                        sfxMove();
+                                        {
+                                            u8* is_teams =
+                                                &mnCharSel_804D6CB0->vs.start
+                                                     .rules.is_teams;
+                                            *is_teams = (*is_teams + 1) & 1;
+                                        }
+                                        if (mnCharSel_804D6CB0->vs.start.rules
+                                                .is_teams == 0)
+                                        {
+                                            int k;
+                                            for (k = 0;
+                                                 k < (s32) mnCharSel_804D6CF5;
+                                                 k++)
+                                            {
+                                                if (isDuplicateCostumeCached(
+                                                        k))
+                                                {
+                                                    mnCharSel_803F0DFC.doors[k]
+                                                        .costume = 0;
+                                                    current_tag = (CSSTagData*)
+                                                        loadCSSValue(
+                                                            &mnCharSel_804D6CB0);
+                                                    for (;;) {
+                                                        if (!isDuplicateCostumeWith(
+                                                                k,
+                                                                (CSSData*)
+                                                                    current_tag,
+                                                                mnCharSel_804D6CF5))
+                                                        {
+                                                            break;
+                                                        }
+                                                        mnCharSel_803F0DFC
+                                                            .doors[k]
+                                                            .costume =
+                                                            (u8) (mnCharSel_803F0DFC
+                                                                      .doors[k]
+                                                                      .costume +
+                                                                  1);
+                                                    }
+                                                }
+                                            }
+                                        }
+                                        mnCharSel_8025EE8C(
+                                            mnCharSel_804D6CB0->match_type);
+                                        goto update_display;
+                                    }
+                                    break;
+                                }
+                            }
                             {
-                                mnCharSel_CostumeChange((s32) cport2, trigger);
+                                u8 cport2 = cursor->x4;
+                                if (mnCharSel_804A0BD0[cport2]->x5 == 0 &&
+                                    mnCharSel_804D6CB0->vs.start.rules
+                                            .is_teams == 0 &&
+                                    mnCharSel_803F0DFC.doors[cport2].p_kind !=
+                                        3)
+                                {
+                                    mnCharSel_CostumeChange((s32) cport2,
+                                                            trigger);
+                                }
                             }
                         }
-                        door_clicks: {
+                        {
                             u32 a_press2 = trigger & HSD_PAD_A;
                             if (a_press2 != 0) {
                                 if (mnCharSel_804D6CF5 != 1) {
@@ -3434,7 +3408,6 @@ void mnCharSel_CursorThink(HSD_GObj* gobj)
                                     }
                                 }
                             }
-                        }
                         }
                     }
                 }
