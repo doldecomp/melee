@@ -60,11 +60,9 @@ struct CollLine {
 };
 
 struct CollVtx {
-    /* 0x00 */ f32 x0;
-    /* 0x04 */ f32 x4;
+    /* 0x00 */ Vec2 base_pos;
     /* 0x08 */ Vec2 pos;
-    /* 0x10 */ float x10;
-    /* 0x14 */ float x14;
+    /* 0x10 */ Vec2 prev_pos;
 }; /* size = 0x18 */
 ASSERT_SIZE(struct CollVtx, 0x18);
 

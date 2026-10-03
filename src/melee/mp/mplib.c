@@ -880,24 +880,26 @@ void mpPruneEmptyLines(MapCollData* coll_data)
     }
 }
 
+static inline void mpLib_LoadLineGroup(MapCollData* coll_data, int group)
+{
+    int count = coll_data->ranges[group].count;
+    int start = coll_data->ranges[group].start;
+    for (; count > 0; count--) {
+        groundCollLine[start].flags =
+            coll_data->lines[start].hi_flags | LINE_FLAG_ENABLED;
+        groundCollLine[start].x0 = &coll_data->lines[start];
+        start++;
+    }
+}
+
 void mpLibLoad(MapCollData* coll_data)
 {
-    float raw;
+    float raw_x, raw_y;
     float y;
     float x;
     float scale;
     CollJoint* joint_prev;
     CollJoint* joint;
-    int floor_start;
-    int floor_count;
-    int ceiling_start;
-    int ceiling_count;
-    int right_wall_start;
-    int right_wall_count;
-    int left_wall_start;
-    int left_wall_count;
-    int dynamic_start;
-    int dynamic_count;
     int i;
 
     joint_prev = NULL;
@@ -943,65 +945,23 @@ void mpLibLoad(MapCollData* coll_data)
     jointListEnd = joint;
     mpPruneEmptyLines(coll_data);
 
-    floor_count = coll_data->ranges[MapLineGroup_Floor].count;
-    floor_start = coll_data->ranges[MapLineGroup_Floor].start;
-    for (; floor_count > 0; floor_count--) {
-        groundCollLine[floor_start].flags =
-            coll_data->lines[floor_start].hi_flags | LINE_FLAG_ENABLED;
-        groundCollLine[floor_start].x0 = &coll_data->lines[floor_start];
-        floor_start++;
-    }
+    mpLib_LoadLineGroup(coll_data, MapLineGroup_Floor);
+    mpLib_LoadLineGroup(coll_data, MapLineGroup_Ceiling);
+    mpLib_LoadLineGroup(coll_data, MapLineGroup_RightWall);
+    mpLib_LoadLineGroup(coll_data, MapLineGroup_LeftWall);
+    mpLib_LoadLineGroup(coll_data, MapLineGroup_Dynamic);
 
-    ceiling_count = coll_data->ranges[MapLineGroup_Ceiling].count;
-    ceiling_start = coll_data->ranges[MapLineGroup_Ceiling].start;
-    for (; ceiling_count > 0; ceiling_count--) {
-        groundCollLine[ceiling_start].flags =
-            coll_data->lines[ceiling_start].hi_flags | LINE_FLAG_ENABLED;
-        groundCollLine[ceiling_start].x0 = &coll_data->lines[ceiling_start];
-        ceiling_start++;
-    }
-
-    right_wall_count = coll_data->ranges[MapLineGroup_RightWall].count;
-    right_wall_start = coll_data->ranges[MapLineGroup_RightWall].start;
-    for (; right_wall_count > 0; right_wall_count--) {
-        groundCollLine[right_wall_start].flags =
-            coll_data->lines[right_wall_start].hi_flags | LINE_FLAG_ENABLED;
-        groundCollLine[right_wall_start].x0 =
-            &coll_data->lines[right_wall_start];
-        right_wall_start++;
-    }
-
-    left_wall_count = coll_data->ranges[MapLineGroup_LeftWall].count;
-    left_wall_start = coll_data->ranges[MapLineGroup_LeftWall].start;
-    for (; left_wall_count > 0; left_wall_count--) {
-        groundCollLine[left_wall_start].flags =
-            coll_data->lines[left_wall_start].hi_flags | LINE_FLAG_ENABLED;
-        groundCollLine[left_wall_start].x0 =
-            &coll_data->lines[left_wall_start];
-        left_wall_start++;
-    }
-
-    dynamic_count = coll_data->ranges[MapLineGroup_Dynamic].count;
-    dynamic_start = coll_data->ranges[MapLineGroup_Dynamic].start;
-    for (; dynamic_count > 0; dynamic_count--) {
-        groundCollLine[dynamic_start].flags =
-            coll_data->lines[dynamic_start].hi_flags | LINE_FLAG_ENABLED;
-        groundCollLine[dynamic_start].x0 = &coll_data->lines[dynamic_start];
-        dynamic_start++;
-    }
-
-    i = 0;
-    while (i < coll_data->vert_count) {
-        raw = coll_data->verts[i].x;
-        x = scale * raw;
-        groundCollVtx[i].x0 = raw;
+    for (i = 0; i < coll_data->vert_count; i++) {
+        raw_x = coll_data->verts[i].x;
+        x = scale * raw_x;
+        groundCollVtx[i].base_pos.x = raw_x;
         groundCollVtx[i].pos.x = x;
-        groundCollVtx[i].x10 = x;
-        raw = coll_data->verts[i].y;
-        y = scale * raw;
-        groundCollVtx[i].x4 = raw;
+        groundCollVtx[i].prev_pos.x = x;
+        raw_y = coll_data->verts[i].y;
+        y = scale * raw_y;
+        groundCollVtx[i].base_pos.y = raw_y;
         groundCollVtx[i].pos.y = y;
-        groundCollVtx[i].x14 = y;
+        groundCollVtx[i].prev_pos.y = y;
         if (mpLib_80458868[0].top < y) {
             mpLib_80458868[0].top = y;
         }
@@ -1014,7 +974,6 @@ void mpLibLoad(MapCollData* coll_data)
         if (mpLib_80458868[0].left > x) {
             mpLib_80458868[0].left = x;
         }
-        i++;
     }
     mpLib_804D64B4 = coll_data;
     if (coll_data != NULL) {
@@ -1831,11 +1790,12 @@ bool mpCheckFloorRemap(float ax, float ay, float bx, float by, float y_offset,
                 if (joint->flags &
                     (CollJoint_B10 | CollJoint_B9 | CollJoint_B8))
                 {
-                    mpRemap2d(&ax, &ay, groundCollVtx[line->x0->v0_idx].x10,
-                              groundCollVtx[line->x0->v0_idx].x14,
-                              groundCollVtx[line->x0->v1_idx].x10,
-                              groundCollVtx[line->x0->v1_idx].x14, x0, y0, x1,
-                              y1, old_x, old_y);
+                    mpRemap2d(&ax, &ay,
+                              groundCollVtx[line->x0->v0_idx].prev_pos.x,
+                              groundCollVtx[line->x0->v0_idx].prev_pos.y,
+                              groundCollVtx[line->x0->v1_idx].prev_pos.x,
+                              groundCollVtx[line->x0->v1_idx].prev_pos.y, x0,
+                              y0, x1, y1, old_x, old_y);
                 } else {
                     ax = old_x;
                     ay = old_y;
@@ -2131,8 +2091,9 @@ bool mpCheckCeilingRemap(float ax, float ay, float bx, float by, Vec3* vec_out,
                     MapLine* map_line = line->x0;
                     CollVtx* v1 = &groundCollVtx[map_line->v1_idx];
                     CollVtx* v0 = &groundCollVtx[map_line->v0_idx];
-                    mpRemap2d(&ax, &ay, v0->x10, v0->x14, v1->x10, v1->x14, x0,
-                              y0, x1, y1, old_x, old_y);
+                    mpRemap2d(&ax, &ay, v0->prev_pos.x, v0->prev_pos.y,
+                              v1->prev_pos.x, v1->prev_pos.y, x0, y0, x1, y1,
+                              old_x, old_y);
                 } else {
                     ax = old_x;
                     ay = old_y;
@@ -2493,11 +2454,12 @@ bool mpCheckLeftWallRemap(float ax, float ay, float bx, float by,
                 if (joint->flags &
                     (CollJoint_B10 | CollJoint_B9 | CollJoint_B8))
                 {
-                    mpRemap2d(&ax, &ay, groundCollVtx[line->x0->v0_idx].x10,
-                              groundCollVtx[line->x0->v0_idx].x14,
-                              groundCollVtx[line->x0->v1_idx].x10,
-                              groundCollVtx[line->x0->v1_idx].x14, x0, y0, x1,
-                              y1, old_x, old_y);
+                    mpRemap2d(&ax, &ay,
+                              groundCollVtx[line->x0->v0_idx].prev_pos.x,
+                              groundCollVtx[line->x0->v0_idx].prev_pos.y,
+                              groundCollVtx[line->x0->v1_idx].prev_pos.x,
+                              groundCollVtx[line->x0->v1_idx].prev_pos.y, x0,
+                              y0, x1, y1, old_x, old_y);
                 } else {
                     ax = old_x;
                     ay = old_y;
@@ -2805,11 +2767,12 @@ bool mpCheckRightWallRemap(float ax, float ay, float bx, float by,
                 if (joint->flags &
                     (CollJoint_B10 | CollJoint_B9 | CollJoint_B8))
                 {
-                    mpRemap2d(&ax, &ay, groundCollVtx[line->x0->v0_idx].x10,
-                              groundCollVtx[line->x0->v0_idx].x14,
-                              groundCollVtx[line->x0->v1_idx].x10,
-                              groundCollVtx[line->x0->v1_idx].x14, x0, y0, x1,
-                              y1, old_x, old_y);
+                    mpRemap2d(&ax, &ay,
+                              groundCollVtx[line->x0->v0_idx].prev_pos.x,
+                              groundCollVtx[line->x0->v0_idx].prev_pos.y,
+                              groundCollVtx[line->x0->v1_idx].prev_pos.x,
+                              groundCollVtx[line->x0->v1_idx].prev_pos.y, x0,
+                              y0, x1, y1, old_x, old_y);
                 } else {
                     ax = old_x;
                     ay = old_y;
@@ -2981,8 +2944,8 @@ bool mpLib_800511A4_RightWall(float ax, float ay, float bx, float by, float cx,
                     vtx = &groundCollVtx[line->x0->v0_idx];
                     x0 = vtx->pos.x;
                     y0 = vtx->pos.y;
-                    x1 = vtx->x10;
-                    y1 = vtx->x14;
+                    x1 = vtx->prev_pos.x;
+                    y1 = vtx->prev_pos.y;
                     mpRemap2d(&x, &y, ax, ay, bx, by, cx, cy, dx, dy, x1, y1);
 
                     vdx = x0 - x;
@@ -3013,8 +2976,8 @@ bool mpLib_800511A4_RightWall(float ax, float ay, float bx, float by, float cx,
                     vtx = &groundCollVtx[line->x0->v1_idx];
                     x0 = vtx->pos.x;
                     y0 = vtx->pos.y;
-                    x1 = vtx->x10;
-                    y1 = vtx->x14;
+                    x1 = vtx->prev_pos.x;
+                    y1 = vtx->prev_pos.y;
                     mpRemap2d(&x, &y, ax, ay, bx, by, cx, cy, dx, dy, x1, y1);
 
                     vdx = x0 - x;
@@ -3125,8 +3088,8 @@ bool mpLib_800515A0_LeftWall(float a0x, float a0y, float a1x, float a1y,
                     vtx = &groundCollVtx[line->x0->v0_idx];
                     x0 = vtx->pos.x;
                     y0 = vtx->pos.y;
-                    x1 = vtx->x10;
-                    y1 = vtx->x14;
+                    x1 = vtx->prev_pos.x;
+                    y1 = vtx->prev_pos.y;
                     mpRemap2d(&x, &y, a0x, a0y, a1x, a1y, b0x, b0y, b1x, b1y,
                               x1, y1);
 
@@ -3158,8 +3121,8 @@ bool mpLib_800515A0_LeftWall(float a0x, float a0y, float a1x, float a1y,
                     vtx = &groundCollVtx[line->x0->v1_idx];
                     x0 = vtx->pos.x;
                     y0 = vtx->pos.y;
-                    x1 = vtx->x10;
-                    y1 = vtx->x14;
+                    x1 = vtx->prev_pos.x;
+                    y1 = vtx->prev_pos.y;
                     mpRemap2d(&x, &y, a0x, a0y, a1x, a1y, b0x, b0y, b1x, b1y,
                               x1, y1);
 
@@ -4681,8 +4644,8 @@ void mpJointUnhide(int joint_id)
 
     vtx = &groundCollVtx[joint->inner->vtx_start];
     for (i = joint->inner->vtx_count; i > 0; i--, vtx++) {
-        vtx->x10 = vtx->pos.x;
-        vtx->x14 = vtx->pos.y;
+        vtx->prev_pos.x = vtx->pos.x;
+        vtx->prev_pos.y = vtx->pos.y;
     }
 }
 
@@ -4784,8 +4747,8 @@ void mpLib_80055E9C(int joint_id)
     vtx_count = joint->inner->vtx_count;
     v = &groundCollVtx[joint->inner->vtx_start];
     for (i = 0; i < vtx_count; i++, v++) {
-        v->x10 = v->pos.x;
-        v->x14 = v->pos.y;
+        v->prev_pos.x = v->pos.x;
+        v->prev_pos.y = v->pos.y;
     }
     jobj = joint->x20;
     if (jobj == NULL) {
@@ -4817,8 +4780,8 @@ void mpLib_80055E9C(int joint_id)
         m1_3 = mtx[1][3];
         v = &groundCollVtx[joint->inner->vtx_start];
         for (i = 0; i < vtx_count; i++, v++) {
-            v->pos.x = v->x0 * m0_0 + m0_3;
-            v->pos.y = v->x4 * m0_0 + m1_3;
+            v->pos.x = v->base_pos.x * m0_0 + m0_3;
+            v->pos.y = v->base_pos.y * m0_0 + m1_3;
         }
         joint->bounding_min.x =
             (joint->inner->left_bound * m0_0 + m0_3) - 30.0F;
@@ -4837,14 +4800,14 @@ void mpLib_80055E9C(int joint_id)
     corner_y = 0.0F;
 
     while (i < vtx_count) {
-        pt.x = vtx->x0;
-        pt.y = vtx->x4;
+        pt.x = vtx->base_pos.x;
+        pt.y = vtx->base_pos.y;
         pt.z = corner_y;
         PSMTXMultVec(jobj->mtx, &pt, &pt);
         vtx->pos.x = pt.x;
         vtx->pos.y = pt.y;
-        if (mpLib_804D64CC == 0 || vtx->pos.x != vtx->x10 ||
-            vtx->pos.y != vtx->x14 || (++unchanged <= 1))
+        if (mpLib_804D64CC == 0 || vtx->pos.x != vtx->prev_pos.x ||
+            vtx->pos.y != vtx->prev_pos.y || (++unchanged <= 1))
         {
             i += 1;
             vtx += 1;
@@ -5015,12 +4978,12 @@ void mpLib_80056758(int line_id, float x0, float y0, float x1, float y1)
     CollLine* line = &groundCollLine[line_id];
 
     CollVtx* vtx = &groundCollVtx[line->x0->v0_idx];
-    vtx->pos.x = vtx->x0 + x0;
-    vtx->pos.y = vtx->x4 + y0;
+    vtx->pos.x = vtx->base_pos.x + x0;
+    vtx->pos.y = vtx->base_pos.y + y0;
 
     vtx = &groundCollVtx[line->x0->v1_idx];
-    vtx->pos.x = vtx->x0 + x1;
-    vtx->pos.y = vtx->x4 + y1;
+    vtx->pos.x = vtx->base_pos.x + x1;
+    vtx->pos.y = vtx->base_pos.y + y1;
 }
 
 bool mpGetSpeed(int line_id, Vec3* pos, Vec3* speed)
@@ -5036,8 +4999,9 @@ bool mpGetSpeed(int line_id, Vec3* pos, Vec3* speed)
 
     v0 = &groundCollVtx[groundCollLine[line_id].x0->v0_idx];
     v1 = &groundCollVtx[groundCollLine[line_id].x0->v1_idx];
-    mpRemap2d(&new_x, &new_y, v0->x10, v0->x14, v1->x10, v1->x14, v0->pos.x,
-              v0->pos.y, v1->pos.x, v1->pos.y, pos->x, pos->y);
+    mpRemap2d(&new_x, &new_y, v0->prev_pos.x, v0->prev_pos.y, v1->prev_pos.x,
+              v1->prev_pos.y, v0->pos.x, v0->pos.y, v1->pos.x, v1->pos.y,
+              pos->x, pos->y);
     speed->x = new_x - pos->x;
     speed->y = new_y - pos->y;
     speed->z = 0.0F;
@@ -5280,8 +5244,8 @@ void mpLib_80057424(int joint_id)
     int new_var;
     CollVtx* vtx = &groundCollVtx[j_inner->vtx_start];
     for (joint_id = 0; joint_id < (new_var = count); joint_id++) {
-        vtx->x10 = vtx->pos.x;
-        vtx->x14 = vtx->pos.y;
+        vtx->prev_pos.x = vtx->pos.x;
+        vtx->prev_pos.y = vtx->pos.y;
         vtx++;
     }
 }
