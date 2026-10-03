@@ -2570,17 +2570,17 @@ void ftKb_Init_OnDeath(HSD_GObj* gobj)
 void ftKb_Init_OnLoad(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    void** item_list = fp->ft_data->x48_items;
+    union ftData_Item* item_list = fp->ft_data->x48_items;
 
     PUSH_ATTRS(fp, ftKb_DatAttrs);
 
     fp->can_multijump = true;
     fp->x2D0 = fp->dat_attrs;
     fp->u.kb.hat.x8_b0 = Player_GetFlagsAEBit1(fp->player_idx);
-    it_8026B3F8(item_list[0], It_Kind_Kirby_CBeam);
-    it_8026B3F8(item_list[1], It_Kind_Kirby_Hammer);
-    it_8026B3F8(item_list[2], It_Kind_Unk1);
-    it_8026B3F8(item_list[3], It_Kind_Unk2);
+    it_8026B3F8(item_list[0].article, It_Kind_Kirby_CBeam);
+    it_8026B3F8(item_list[1].article, It_Kind_Kirby_Hammer);
+    it_8026B3F8(item_list[2].article, It_Kind_Unk1);
+    it_8026B3F8(item_list[3].article, It_Kind_Unk2);
 }
 
 void ftKb_Init_800EE74C(HSD_GObj* gobj)

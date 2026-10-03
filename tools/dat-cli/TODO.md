@@ -2,14 +2,7 @@
 
 ## Samples
 
-- `PlSs` `x8_hurtbones_x352D8` (66.7%) and `PlGw` `dyn_descs_0_x78F0`
-  (85.7%) don't match. PlSs's
-  cause: `ftData_Item` is `Article*` for every slot, but Samus's slot 4 is
-  `UNK_SAMUS_S1` (the grapple beam accessory; `ftSs_Init_CreateThrowGrapple
-  Beam`), so everything behind `ftDataSamus.x48_items->[4]` is mistyped (8
-  mismatches in the every-object build). Fix: a `bind:` attribute on roots
-  in `dat_symbols.txt` (e.g. the fighter kind on `ftData*`), and
-  `ftData_Item` as a union chosen by `DAT_IF` on that kind and `_index`.
+- `PlGw` `dyn_descs_0_x78F0` (85.7%) doesn't match.
 - `types unhoisted` lists dat types declared in `.c` files: none left. The
   stage `*_YakumonoParam` structs aren't reachable (`void*` in the stage
   info) and differ per stage.
@@ -47,12 +40,15 @@
 - Articles in Kirby's copies (`ftKbCopy*`) and in `ftData.x48_items` leave
   `x4_specialAttributes` ambiguous: their item kinds aren't bound. The
   kinds are known per slot (`ftKb_SpecialN_800F16D0`).
-- `ftData.x48_items` entries are typed `Article` (`ftData_Item`), but
-  some slots are joints or other structs: Samus 4, Game & Watch 10,
-  Kirby 4, Yoshi 3, Sheik 4/5, Link 6, Jigglypuff 1. These give about 140
-  findings. Binding the fighter kind at each `ftData` root (its index in
-  the loader's name table) would let a union pick per slot. The same binding
-  would type `Article.x4_special` for fighter items.
+- `ftData.x48_items` entries default to `Article` (`ftData_Item`), but
+  some slots are joints or other structs: Game & Watch 10,
+  Kirby 4, Yoshi 3, Sheik 4/5, Link 6, Jigglypuff 1. The fighter kind is
+  bound at each `ftData` root (its index in the loader's name table), and
+  the item slot is bound on `x48_items`.
+  Add `DAT_IF` conditions to the other C views in `ftData_Item`, which
+  currently selects Samus's grapple in slot 4 and otherwise `Article`, to
+  choose these layouts. The same bindings can type `Article.x4_special`
+  for fighter items.
 - Fighters' part animations (`ftData_x1C.x8`) sit next to `HSD_AnimJoint`
   trees that nothing points to. Their relocations can't be explained.
 

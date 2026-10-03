@@ -123,7 +123,7 @@ HSD_Joint* ftYs_SpecialN_8012CDD4(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftData* ca = fp->ft_data;
-    return ca->x48_items[3];
+    return ca->x48_items[3].joint;
 }
 
 static void setupCallbacks(Fighter_GObj* gobj, HSD_GObjEvent grab_cb,

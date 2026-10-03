@@ -321,20 +321,20 @@ void ftCl_Init_OnLoad(HSD_GObj* gobj)
     Fighter* fp = gobj->user_data;
     ftData* ftdata = fp->ft_data;
     ftLk_DatAttrs* ea = ftdata->ext_attr;
-    void** items = ftdata->x48_items;
+    union ftData_Item* items = ftdata->x48_items;
 
     fp->can_walljump = true;
     ea->attackairlw_hit_anim_frame_end =
         lbAnim_8001E8F8(ftData_80085E50(fp, 72));
     ftLk_Init_OnLoadForCLink(fp);
     ea = fp->dat_attrs;
-    it_8026B3F8(items[0], ea->x48);
-    it_8026B3F8(items[1], ea->x2C);
-    it_8026B3F8(items[2], ea->xBC);
-    it_8026B3F8(items[3], ea->xC);
-    it_8026B3F8(items[4], ea->x10);
-    it_8026B3F8(items[5], It_Kind_CLink_Milk);
-    ftParts_800753D4(fp, Fighter_804D6540[fp->kind]->x0, items[6]);
+    it_8026B3F8(items[0].article, ea->x48);
+    it_8026B3F8(items[1].article, ea->x2C);
+    it_8026B3F8(items[2].article, ea->xBC);
+    it_8026B3F8(items[3].article, ea->xC);
+    it_8026B3F8(items[4].article, ea->x10);
+    it_8026B3F8(items[5].article, It_Kind_CLink_Milk);
+    ftParts_800753D4(fp, Fighter_804D6540[fp->kind]->x0, items[6].joint);
 }
 
 void ftCl_Init_OnItemPickupExt(HSD_GObj* gobj, bool flag)
