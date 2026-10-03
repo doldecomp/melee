@@ -897,25 +897,22 @@ void ftCo_Damage_Anim(Fighter_GObj* gobj)
 bool doIasa(Fighter_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
-    if (!(fp->mv.co.damage.x1A)) {
-        goto ret_inline;
+    if (fp->mv.co.damage.x1A) {
+        if (fp->mv.co.damage.x1B) {
+            --fp->mv.co.damage.x1B;
+        }
+        if (!fp->mv.co.damage.x1B && fp->ground_or_air == GA_Air &&
+            fp->x8c_kb_vel.y < 0 &&
+            (ftCo_800D69C4(gobj) || ftCo_800CB8E0(gobj)))
+        {
+            fp->x8c_kb_vel.x = fp->x8c_kb_vel.y = fp->x8c_kb_vel.z = 0;
+            ftCommon_8007EBAC(fp, 12, 0);
+            ftCo_800BFFD0(fp, 121, 0);
+            fp->x2227_b4 = true;
+            return true;
+        }
     }
-    if (fp->mv.co.damage.x1B) {
-        --fp->mv.co.damage.x1B;
-    }
-    if (!(!fp->mv.co.damage.x1B)) {
-        goto ret_inline;
-    }
-    if (fp->ground_or_air == GA_Air && fp->x8c_kb_vel.y < 0 &&
-        (ftCo_800D69C4(gobj) || ftCo_800CB8E0(gobj)))
-    {
-        fp->x8c_kb_vel.x = fp->x8c_kb_vel.y = fp->x8c_kb_vel.z = 0;
-        ftCommon_8007EBAC(fp, 12, 0);
-        ftCo_800BFFD0(fp, 121, 0);
-        fp->x2227_b4 = true;
-        return true;
-    }
-ret_inline:
+
     if (ftCo_Jump_GetInput(gobj)) {
         fp->mv.co.damage.x14 = fp->mv.co.damage.x0;
         return true;
