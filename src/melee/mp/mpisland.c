@@ -39,8 +39,8 @@ void mpIsland_8005A6F8(void)
     mpIsland_80458E88.ceilings = NULL;
     mpIsland_80458E88.floors_tail = NULL;
     mpIsland_80458E88.ceilings_tail = NULL;
-    mpIsland_80458E88.disabled_floors = NULL;
-    mpIsland_80458E88.disabled_ceilings = NULL;
+    mpIsland_80458E88.b1_floors = NULL;
+    mpIsland_80458E88.b1_ceilings = NULL;
     mpIsland_80458E88.dynamic_floors = NULL;
     mpIsland_80458E88.dynamic_ceilings = NULL;
     mpIsland_80458E88.free_list = NULL;
@@ -305,11 +305,11 @@ void mpIsland_8005ACE8(mpIsland* island, Vec3* left, Vec3* right)
     }
 }
 
-void mpIsland_8005AE1C(mpIsland** enabled_list, mpIsland** disabled_list,
-                       int vtx_start, int vtx_count, bool enabled)
+void mpIsland_8005AE1C(mpIsland** list, mpIsland** b1_list, int vtx_start,
+                       int vtx_count, bool flag)
 {
-    mpIsland* enabled_head;
-    mpIsland* disabled_head;
+    mpIsland* head;
+    mpIsland* b1_head;
     mpIsland* cur;
     mpIsland* next;
     CollVtx* vtx;
@@ -317,11 +317,11 @@ void mpIsland_8005AE1C(mpIsland** enabled_list, mpIsland** disabled_list,
     float z_val;
     u16 v0;
 
-    enabled_head = NULL;
-    disabled_head = NULL;
+    head = NULL;
+    b1_head = NULL;
 
     vtx = mpGetGroundCollVtx();
-    cur = *enabled_list;
+    cur = *list;
     end = vtx_start + vtx_count;
     z_val = 0.0f;
 
@@ -337,18 +337,18 @@ void mpIsland_8005AE1C(mpIsland** enabled_list, mpIsland** disabled_list,
             cur->pos1.x = vtx[cur->vtx1].pos.x;
             cur->pos1.y = vtx[cur->vtx1].pos.y;
             cur->pos1.z = z_val;
-            if (!enabled && !(cur->flags & mpIsland_Disabled)) {
-                cur->flags |= mpIsland_Disabled;
-                cur->next = disabled_head;
-                disabled_head = cur;
+            if (!flag && !(cur->flags & mpIsland_B1)) {
+                cur->flags |= mpIsland_B1;
+                cur->next = b1_head;
+                b1_head = cur;
                 continue;
             }
         }
-        cur->next = enabled_head;
-        enabled_head = cur;
+        cur->next = head;
+        head = cur;
     }
 
-    cur = *disabled_list;
+    cur = *b1_list;
     z_val = 0.0f;
 
     for (; cur != NULL; cur = next) {
@@ -363,23 +363,23 @@ void mpIsland_8005AE1C(mpIsland** enabled_list, mpIsland** disabled_list,
             cur->pos1.x = vtx[cur->vtx1].pos.x;
             cur->pos1.y = vtx[cur->vtx1].pos.y;
             cur->pos1.z = z_val;
-            if (enabled && (cur->flags & mpIsland_Disabled)) {
-                cur->flags &= ~mpIsland_Disabled;
-                cur->next = enabled_head;
-                enabled_head = cur;
+            if (flag && (cur->flags & mpIsland_B1)) {
+                cur->flags &= ~mpIsland_B1;
+                cur->next = head;
+                head = cur;
                 continue;
             }
         }
-        cur->next = disabled_head;
-        disabled_head = cur;
+        cur->next = b1_head;
+        b1_head = cur;
     }
 
-    *enabled_list = enabled_head;
-    *disabled_list = disabled_head;
+    *list = head;
+    *b1_list = b1_head;
 }
 
 void mpIsland_8005B004(mpIsland** list, mpIsland** free_list, int joint_id,
-                       int kind, int vtx_start, int vtx_count, bool enabled)
+                       int kind, int vtx_start, int vtx_count, bool flag)
 {
     UNUSED u8 _q0[8];
     mpIsland* cur;
@@ -510,7 +510,7 @@ void mpIsland_8005B004(mpIsland** list, mpIsland** free_list, int joint_id,
             mpIsland_AssertSeg(mpisp);
         }
 
-        mpisp->flags = enabled ? 0 : mpIsland_Disabled;
+        mpisp->flags = flag ? 0 : mpIsland_B1;
         mpisp->next = NULL;
         mpisp->line0 = (s16) end_idx;
         mpisp->line1 = (s16) start_idx;
@@ -529,8 +529,7 @@ void mpIsland_8005B004(mpIsland** list, mpIsland** free_list, int joint_id,
     }
 }
 
-void mpIsland_8005B334(int joint_id, int vtx_start, int vtx_count,
-                       bool enabled)
+void mpIsland_8005B334(int joint_id, int vtx_start, int vtx_count, bool flag)
 {
     mpIsland* tail;
 
@@ -546,18 +545,17 @@ void mpIsland_8005B334(int joint_id, int vtx_start, int vtx_count,
         mpIsland_80458E88.ceilings = NULL;
     }
 
-    mpIsland_8005AE1C(&mpIsland_80458E88.floors,
-                      &mpIsland_80458E88.disabled_floors, vtx_start, vtx_count,
-                      enabled);
+    mpIsland_8005AE1C(&mpIsland_80458E88.floors, &mpIsland_80458E88.b1_floors,
+                      vtx_start, vtx_count, flag);
     mpIsland_8005AE1C(&mpIsland_80458E88.ceilings,
-                      &mpIsland_80458E88.disabled_ceilings, vtx_start,
-                      vtx_count, enabled);
+                      &mpIsland_80458E88.b1_ceilings, vtx_start, vtx_count,
+                      flag);
     mpIsland_8005B004(&mpIsland_80458E88.dynamic_floors,
                       &mpIsland_80458E88.free_list, joint_id, CollLine_Floor,
-                      vtx_start, vtx_count, enabled);
+                      vtx_start, vtx_count, flag);
     mpIsland_8005B004(&mpIsland_80458E88.dynamic_ceilings,
                       &mpIsland_80458E88.free_list, joint_id, CollLine_Ceiling,
-                      vtx_start, vtx_count, enabled);
+                      vtx_start, vtx_count, flag);
 
     // Append the dynamic floors to the floor list
     tail = mpIsland_80458E88.floors;

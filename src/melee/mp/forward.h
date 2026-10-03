@@ -81,7 +81,7 @@ enum CollDataX130Flags {
 };
 
 enum mpIslandFlags {
-    mpIsland_Disabled = 1 << 1,
+    mpIsland_B1 = 1 << 1,
 };
 
 enum CollJointFlags {

@@ -16,8 +16,8 @@ struct mpIsland_80458E88_t {
     /*  +C */ mpIsland* ceilings_tail;
     /* +10 */ mpIsland* dynamic_floors;
     /* +14 */ mpIsland* dynamic_ceilings;
-    /* +18 */ mpIsland* disabled_floors;
-    /* +1C */ mpIsland* disabled_ceilings;
+    /* +18 */ mpIsland* b1_floors;
+    /* +1C */ mpIsland* b1_ceilings;
     /* +20 */ mpIsland* free_list;
 };
 

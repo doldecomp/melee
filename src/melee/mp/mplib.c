@@ -4711,18 +4711,18 @@ void mpJointUpdateDynamics(int joint_id)
 
 void mpLib_80055E24(int joint_id)
 {
-    bool enabled;
+    bool flag;
     CollJoint* joint = &groundCollJoint[joint_id];
 
     mpJointUpdateDynamics(joint_id);
-    enabled = false;
+    flag = false;
     if (!(joint->flags & (CollJoint_Hidden | CollJoint_B11)) &&
         joint->flags & CollJoint_Enabled)
     {
-        enabled = true;
+        flag = true;
     }
     mpIsland_8005B334(joint_id, joint->inner->vtx_start,
-                      joint->inner->vtx_count, enabled);
+                      joint->inner->vtx_count, flag);
 }
 
 void mpLib_80055E9C(int joint_id)
@@ -4743,7 +4743,7 @@ void mpLib_80055E9C(int joint_id)
     CollVtx* vtx;
     int unchanged;
     CollVtx* v;
-    bool enabled;
+    bool flag;
     MtxPtr mtx;
     int i;
     Vec3 pt;
@@ -4765,14 +4765,14 @@ void mpLib_80055E9C(int joint_id)
     if (HSD_JObjGetFlags(jobj) & JOBJ_HIDDEN) {
         if (!(joint->flags & CollJoint_Hidden)) {
             mpJointHide(joint_id);
-            enabled = false;
+            flag = false;
             if (!(joint->flags & (CollJoint_Hidden | CollJoint_B11)) &&
                 joint->flags & CollJoint_Enabled)
             {
-                enabled = true;
+                flag = true;
             }
             mpIsland_8005B334(joint_id, joint->inner->vtx_start,
-                              joint->inner->vtx_count, enabled);
+                              joint->inner->vtx_count, flag);
         }
         return;
     }
@@ -4911,14 +4911,14 @@ after1:
     if (joint->flags & CollJoint_Hidden) {
         mpJointUnhide(joint_id);
     }
-    enabled = false;
+    flag = false;
     if (!(joint->flags & (CollJoint_Hidden | CollJoint_B11)) &&
         joint->flags & CollJoint_Enabled)
     {
-        enabled = true;
+        flag = true;
     }
     mpIsland_8005B334(joint_id, joint->inner->vtx_start,
-                      joint->inner->vtx_count, enabled);
+                      joint->inner->vtx_count, flag);
 }
 
 void mpJointUpdateBounding(int joint_id)
@@ -4947,16 +4947,16 @@ void mpJointUpdateBounding(int joint_id)
 
 void mpLib_8005667C(int joint_id)
 {
-    bool enabled = false;
+    bool flag = false;
     CollJoint* joint = &groundCollJoint[joint_id];
 
     if (!(joint->flags & (CollJoint_Hidden | CollJoint_B11)) &&
         joint->flags & CollJoint_Enabled)
     {
-        enabled = true;
+        flag = true;
     }
     mpIsland_8005B334(joint_id, joint->inner->vtx_start,
-                      joint->inner->vtx_count, enabled);
+                      joint->inner->vtx_count, flag);
 }
 
 void mpVtxGetPos(int vtx_id, float* x_out, float* y_out)
@@ -5440,35 +5440,33 @@ void mpLib_80057BC0(int joint_id)
 void mpLib_80057FDC(int joint_id)
 {
     MapJoint* j_inner;
-    bool enabled = false;
+    bool flag = false;
     CollJoint* joint = &groundCollJoint[joint_id];
 
     joint->flags &= ~CollJoint_B11;
     if (!(joint->flags & (CollJoint_Hidden | CollJoint_B11)) &&
         joint->flags & CollJoint_Enabled)
     {
-        enabled = true;
+        flag = true;
     }
     j_inner = joint->inner;
-    mpIsland_8005B334(joint_id, j_inner->vtx_start, j_inner->vtx_count,
-                      enabled);
+    mpIsland_8005B334(joint_id, j_inner->vtx_start, j_inner->vtx_count, flag);
 }
 
 void mpLib_80058044(int joint_id)
 {
     MapJoint* j_inner;
-    bool enabled = false;
+    bool flag = false;
     CollJoint* joint = &groundCollJoint[joint_id];
 
     joint->flags |= CollJoint_B11;
     if (!(joint->flags & (CollJoint_Hidden | CollJoint_B11)) &&
         joint->flags & CollJoint_Enabled)
     {
-        enabled = true;
+        flag = true;
     }
     j_inner = joint->inner;
-    mpIsland_8005B334(joint_id, j_inner->vtx_start, j_inner->vtx_count,
-                      enabled);
+    mpIsland_8005B334(joint_id, j_inner->vtx_start, j_inner->vtx_count, flag);
 }
 
 void mpJointSetB10(int joint_id)

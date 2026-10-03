@@ -12,14 +12,13 @@
 /* 05AC14 */ mpIsland* mpIsland_8005AC14(Vec3* pos, float dy);
 /* 05AC8C */ bool mpIsland_8005AC8C(mpIsland* island);
 /* 05ACE8 */ void mpIsland_8005ACE8(mpIsland* island, Vec3* left, Vec3* right);
-/* 05AE1C */ void mpIsland_8005AE1C(mpIsland** enabled_list,
-                                    mpIsland** disabled_list, int vtx_start,
-                                    int vtx_count, bool enabled);
+/* 05AE1C */ void mpIsland_8005AE1C(mpIsland** list, mpIsland** b1_list,
+                                    int vtx_start, int vtx_count, bool flag);
 /* 05B004 */ void mpIsland_8005B004(mpIsland** list, mpIsland** free_list,
                                     int joint_id, int kind, int vtx_start,
-                                    int vtx_count, bool enabled);
+                                    int vtx_count, bool flag);
 /* 05B334 */ void mpIsland_8005B334(int joint_id, int vtx_start, int vtx_count,
-                                    bool enabled);
+                                    bool flag);
 /* 3B73E8 */ extern mpIsland_Palette const mpIsland_TerrainPalette;
 /* 458E88 */ extern struct mpIsland_80458E88_t mpIsland_80458E88;
 
