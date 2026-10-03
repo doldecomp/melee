@@ -68,6 +68,15 @@ typedef struct itParasolAttributes {
     /* +C */ f32 xC;
 } itParasolAttributes;
 
+typedef struct itRabbitCAttributes {
+    /* +0 */ f32 x0;
+} itRabbitCAttributes;
+
+typedef struct itMetalBAttributes {
+    /* +0 */ f32 x0;
+    /* +4 */ f32 x4;
+} itMetalBAttributes;
+
 typedef struct {
     f32 x0;
 } ItMetamonVars;
@@ -247,7 +256,7 @@ union ItemSpecialAttributes {
     itStar_ItemVars star DAT_IF(Article::kind == It_Kind_Star);
     itBatAttributes bat DAT_IF(Article::kind == It_Kind_Bat);
     ItLGunAttr l_gun DAT_IF(Article::kind == It_Kind_L_Gun);
-    itUnkAttributes generic DAT_IF(Article::kind == It_Kind_Freeze);
+    itFreezeAttributes freeze DAT_IF(Article::kind == It_Kind_Freeze);
     itFlipper_DatAttrs flipper DAT_IF(Article::kind == It_Kind_Flipper);
     itSScopeAttributes s_scope DAT_IF(Article::kind == It_Kind_S_Scope);
     itLipstickAttributes lipstick DAT_IF(Article::kind == It_Kind_LipStick);
@@ -323,6 +332,7 @@ union ItemSpecialAttributes {
     itMarioFireballAttributes mario_fireball;
     itMasterHandBulletAttributes master_hand_bullet;
     itMasterHandLaserAttributes master_hand_laser;
+    itMetalBAttributes metal_b;
     itMatadogasAttributes matadogas;
     ItMetamonVars metamon;
     MewVars mew;
@@ -341,13 +351,14 @@ union ItemSpecialAttributes {
     itPikachuthunderAttributes pikachuthunder;
     itPKThunderAttributes pk_thunder;
     itPippiAttributes pippi;
-    itPokemonAttributes pokemon;
     itPokemonSpawn_DatAttrs pokemon_spawn;
+    itRabbitCAttributes rabbit_c;
     itRShell_Attrs r_shell;
     itSamusBombAttributes samus_bomb;
     itSamusChargeShot_Attributes samus_charge_shot;
     itSamusGrappleAttributes samus_grapple;
     itSamusMissileAttributes samus_missile;
+    itSanseijuuAttributes sanseijuu;
     itSeakChain_Attrs seak_chain;
     itSeakNeedleThrownAttributes seak_needle_thrown;
     itsonansAttributes sonans;
@@ -360,6 +371,7 @@ union ItemSpecialAttributes {
     itTogepyAttributes togepy;
     itToolsAttributes tools;
     itTosakinto_Attrs tosakinto;
+    itUnkAttributes unk1;
     it_2728_DatAttrs unk_2728;
     it_2E5A_Attrs unk_2e5a;
     itUnknownAttributes unknown;

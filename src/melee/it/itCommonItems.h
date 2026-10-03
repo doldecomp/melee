@@ -625,13 +625,17 @@ typedef struct itFreeze_ItemVars {
     /* +20 */ UNK_T x20;
 } itFreeze_ItemVars;
 
-/// @remarks Might be shared?
+typedef struct itFreezeAttributes {
+    /*  +0 */ float x0_float;
+    /*  +4 */ float x4_float;
+    /*  +8 */ float x8;
+    /*  +C */ float xC;
+    /* +10 */ float x10;
+} itFreezeAttributes;
+
+/// Attributes for #It_Kind_Unk1.
 typedef struct itUnkAttributes {
-    float x0_float;
-    float x4_float;
-    float x8;
-    float xC;
-    float x10;
+    /* +0 */ float x0_float;
 } itUnkAttributes;
 
 typedef struct {
@@ -857,10 +861,10 @@ typedef struct {
 ASSERT_SIZE(itZeldaDinFire_ItemVars, 36);
 
 /// Shared by Raikou, Entei, and Suicune.
-typedef struct itPokemonAttributes {
+typedef struct itSanseijuuAttributes {
     /* +0 */ f32 x0;
     /* +4 */ s32 timer;
-} itPokemonAttributes;
+} itSanseijuuAttributes;
 
 typedef struct itPippiAttributes {
     /*  +0 */ f32 x0;
