@@ -5383,7 +5383,6 @@ void mpLib_80057BC0(int joint_id)
     CollJoint* joint;
     MapJoint* j_inner;
     int count;
-    int start;
     CollLine* line;
 
     joint = &groundCollJoint[joint_id];
@@ -6729,7 +6728,7 @@ void mpLib_DrawCrosses(s16* idx, int len, GXColor color)
 {
     Vec3 pos;
     int i;
-    Vec3* vtx;
+    UNUSED u8 pad[4];
     int idx_i;
     int out_count;
 
