@@ -72,7 +72,8 @@ static inline void inline_UnkMotion8_Anim(Item_GObj* igp)
 {
     if (it_80272C6C(igp) == 0) {
         Item* ip = GET_ITEM(igp);
-        itBombHeiAttributes* ap = ip->xC4_article_data->x4_specialAttributes;
+        itBombHeiAttributes* ap =
+            &ip->xC4_article_data->x4_specialAttributes->bombhei;
 
         ip->xDC8_word.flags.x19 = 1;
         ip->xDC8_word.flags.x17 = 1;
@@ -87,8 +88,7 @@ static inline void inline_UnkMotion8_Anim(Item_GObj* igp)
     }
 }
 
-#define GET_ATTRS(ip)                                                         \
-    ((itBombHeiAttributes*) ip->xC4_article_data->x4_specialAttributes)
+#define GET_ATTRS(ip) (&ip->xC4_article_data->x4_specialAttributes->bombhei)
 
 ItemStateTable it_803F54D8[] = {
     { -1, itBombhei_UnkMotion0_Anim, itBombhei_UnkMotion0_Phys,
@@ -187,7 +187,8 @@ void itBombhei_Logic6_Spawned(Item_GObj* igp)
 {
     Item* ip = GET_ITEM(igp);
     f32 temp_f2;
-    itBombHeiAttributes* ap = ip->xC4_article_data->x4_specialAttributes;
+    itBombHeiAttributes* ap =
+        &ip->xC4_article_data->x4_specialAttributes->bombhei;
 
     ip->xDD4_itemVar.bombhei.xDDC = 0;
     ip->xDD4_itemVar.bombhei.xDD4 = ap->x10;
@@ -209,7 +210,7 @@ void it_8027D820(Item_GObj* igp)
     f32 scale;
     itBombHeiAttributes* ap;
 
-    ap = ip->xC4_article_data->x4_specialAttributes;
+    ap = &ip->xC4_article_data->x4_specialAttributes->bombhei;
     temp_f30 = ap->x1C;
     ip->xDD4_itemVar.bombhei.xDD4 -= 1;
 
@@ -268,7 +269,7 @@ void it_8027DE18(Item_GObj* igp)
     itBombHeiAttributes* ap;
 
     ip = GET_ITEM(igp);
-    ap = ip->xC4_article_data->x4_specialAttributes;
+    ap = &ip->xC4_article_data->x4_specialAttributes->bombhei;
 
     if ((ip->msid == 3) || (ip->msid == 0)) {
         ip->xDC8_word.flags.x19 = 1;
@@ -312,7 +313,8 @@ bool itBombhei_UnkMotion1_Coll(Item_GObj* igp)
 void itBombhei_Logic6_PickedUp(Item_GObj* igp)
 {
     Item* ip = GET_ITEM(igp);
-    itBombHeiAttributes* ap = ip->xC4_article_data->x4_specialAttributes;
+    itBombHeiAttributes* ap =
+        &ip->xC4_article_data->x4_specialAttributes->bombhei;
 
     ip->xDC8_word.flags.x19 = 1;
     ip->xDC8_word.flags.x17 = 1;

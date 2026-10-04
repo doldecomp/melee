@@ -35,7 +35,8 @@ ItemStateTable it_803F7CA0[] = {
 void it_802CD44C(Item_GObj* gobj)
 {
     Item* item = GET_ITEM(gobj);
-    itsonansAttributes* attrs = item->xC4_article_data->x4_specialAttributes;
+    itsonansAttributes* attrs =
+        &item->xC4_article_data->x4_specialAttributes->sonans;
     item->facing_dir = 0.0f;
     item->xDAC_itcmd_var0 = 0;
     item->xD44_lifeTimer = attrs->x24;
@@ -57,7 +58,8 @@ void it_802CD4DC(Item_GObj* gobj, Item_GObj* ref_gobj)
 void it_802CD4FC(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
-    itsonansAttributes* attrs = ip->xC4_article_data->x4_specialAttributes;
+    itsonansAttributes* attrs =
+        &ip->xC4_article_data->x4_specialAttributes->sonans;
     f32 angle;
     f32 max_angle;
     if (ip->ground_or_air == GA_Air) {
@@ -113,7 +115,8 @@ bool itSonans_Logic9_DmgDealt(Item_GObj* gobj)
 bool it_802CD7D4(Item_GObj* gobj)
 {
     Item* item = GET_ITEM(gobj);
-    itsonansAttributes* attrs = item->xC4_article_data->x4_specialAttributes;
+    itsonansAttributes* attrs =
+        &item->xC4_article_data->x4_specialAttributes->sonans;
     if (item->xDAC_itcmd_var0 == 0) {
         item->xDD4_itemVar.sonans.x60 =
             attrs->x8 * (item->xCA0 * item->xCCC_incDamageDirection);

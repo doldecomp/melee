@@ -7,14 +7,9 @@
 #include <melee/it/forward.h>
 
 #include <dolphin/mtx.h>
+#include <melee/it/itemattrs.h> // IWYU pragma: export
 #include <melee/it/kinds/types.h>
 #include <melee/it/types.h>
-
-typedef struct itSeakNeedleThrownAttributes {
-    f32 x0;
-    f32 x4;
-    f32 x8;
-} itSeakNeedleThrownAttributes;
 
 /* 2AFD8C */ Item_GObj* it_802AFD8C(Item_GObj*, Vec3*, u32, float);
 /* 2AFEA8 */ void it_802AFEA8(Item_GObj* gobj, Fighter_GObj* owner_gobj, u32);

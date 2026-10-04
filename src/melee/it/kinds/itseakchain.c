@@ -133,13 +133,15 @@ void it_802BAF0C(Item_GObj* gobj)
 
 static inline HSD_JObj* it_802BAF2C_Load_x64(Item* ip)
 {
-    itSeakChain_Attrs* attrs = ip->xC4_article_data->x4_specialAttributes;
+    itSeakChain_Attrs* attrs =
+        &ip->xC4_article_data->x4_specialAttributes->seak_chain;
     return HSD_JObjLoadJoint(attrs->x64_joint);
 }
 
 static inline HSD_JObj* it_802BAF2C_Load_x68(Item* ip)
 {
-    itSeakChain_Attrs* attrs = ip->xC4_article_data->x4_specialAttributes;
+    itSeakChain_Attrs* attrs =
+        &ip->xC4_article_data->x4_specialAttributes->seak_chain;
     return HSD_JObjLoadJoint(attrs->x68_joint);
 }
 
@@ -149,7 +151,8 @@ int it_802BAF2C(Item* ip, HSD_JObj* jobj)
     ItemLink* head_link;
     ItemLink* tail_link;
     HSD_JObj* result;
-    itSeakChain_Attrs* attrs = ip->xC4_article_data->x4_specialAttributes;
+    itSeakChain_Attrs* attrs =
+        &ip->xC4_article_data->x4_specialAttributes->seak_chain;
     HSD_GObj* link_gobj;
     ItemLink* link;
     int i;
@@ -295,7 +298,7 @@ void fn_802BB44C(Item_GObj* gobj)
 
     temp_r30 = GET_ITEM(gobj);
     link = temp_r30->xDD4_itemVar.seakchain.x0;
-    sa = temp_r30->xC4_article_data->x4_specialAttributes;
+    sa = &temp_r30->xC4_article_data->x4_specialAttributes->seak_chain;
     Item_InitLinkMtx(mtx, 0.1f);
     HSD_JObjSetupMatrix(link->jobj);
     PSMTXConcat(link->jobj->mtx, mtx, mtx);
@@ -318,7 +321,8 @@ void fn_802BB574(Item_GObj* gobj)
 {
     Vec3 vec;
     Item* ip = GET_ITEM(gobj);
-    itSeakChain_Attrs* sa = ip->xC4_article_data->x4_specialAttributes;
+    itSeakChain_Attrs* sa =
+        &ip->xC4_article_data->x4_specialAttributes->seak_chain;
     Mtx mtx;
     ItemLink* link = ip->xDD4_itemVar.seakchain.x0;
 
@@ -366,7 +370,7 @@ void fn_802BB784(Item_GObj* gobj)
 
     ip = GET_ITEM(gobj);
     link = ip->xDD4_itemVar.seakchain.x4;
-    sa = ip->xC4_article_data->x4_specialAttributes;
+    sa = &ip->xC4_article_data->x4_specialAttributes->seak_chain;
     Item_InitLinkMtx(mtx, 0.1f);
     HSD_JObjSetupMatrix(link->jobj);
     PSMTXConcat(link->jobj->mtx, mtx, mtx);
@@ -624,7 +628,8 @@ void it_802BC080(ItemLink* link, Vec3* target, Item* ip)
     f32 lstick_x, lstick_y;
     ItemLink* iter = link->prev;
     ItemLink* cur = link;
-    itSeakChain_Attrs* attrs = ip->xC4_article_data->x4_specialAttributes;
+    itSeakChain_Attrs* attrs =
+        &ip->xC4_article_data->x4_specialAttributes->seak_chain;
     s32 last_idx = (s32) (0.5f * attrs->x0 - 1.0f);
     Fighter* fp;
     s32 env_flags;
@@ -855,7 +860,8 @@ static inline ItemLink* it_802BCB88_prev(ItemLink* link)
 void it_802BCB88(Item* ip, Vec3* vec)
 {
     ItemLink* link = ip->xDD4_itemVar.seakchain.x4;
-    itSeakChain_Attrs* sa = ip->xC4_article_data->x4_specialAttributes;
+    itSeakChain_Attrs* sa =
+        &ip->xC4_article_data->x4_specialAttributes->seak_chain;
     HSD_JObj* jobj;
     int count;
     int stride = sa->x0 / 3;

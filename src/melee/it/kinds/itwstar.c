@@ -21,7 +21,8 @@
 HSD_AnimJoint* it_80294364(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
-    itWstarAttributes* attr = ip->xC4_article_data->x4_specialAttributes;
+    itWstarAttributes* attr =
+        &ip->xC4_article_data->x4_specialAttributes->wstar;
     s32 candidates[7];
     int i;
     int count;
@@ -59,7 +60,8 @@ ItemStateTable it_803F61B0[] = {
 void it_80294430(Item_GObj* gobj, f32 arg1, f32 arg2)
 {
     Item* ip = GET_ITEM(gobj);
-    itWstarAttributes* attr = ip->xC4_article_data->x4_specialAttributes;
+    itWstarAttributes* attr =
+        &ip->xC4_article_data->x4_specialAttributes->wstar;
     HSD_JObj* jobj = it_80272C90(gobj);
     f32 speed = attr->x8 * (arg1 / attr->x4);
     speed *= ip->xCC_item_attr->x60_scale;
@@ -71,7 +73,8 @@ void it_80294430(Item_GObj* gobj, f32 arg1, f32 arg2)
 void it_802944AC(Item_GObj* gobj, ftCollisionBox* box)
 {
     Item* ip = GET_ITEM(gobj);
-    itWstarAttributes* attr = ip->xC4_article_data->x4_specialAttributes;
+    itWstarAttributes* attr =
+        &ip->xC4_article_data->x4_specialAttributes->wstar;
     box->top = attr->xC * ip->xDD4_itemVar.wstar.xDD4;
     box->bottom = attr->x10 * ip->xDD4_itemVar.wstar.xDD4;
     box->left.x = attr->x14 * ip->xDD4_itemVar.wstar.xDD4;
@@ -103,7 +106,8 @@ bool itWstar_UnkMotion0_Anim(Item_GObj* gobj)
 void itWstar_UnkMotion0_Phys(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
-    itWstarAttributes* attr = ip->xC4_article_data->x4_specialAttributes;
+    itWstarAttributes* attr =
+        &ip->xC4_article_data->x4_specialAttributes->wstar;
     it_80274658(gobj, attr->x0);
     it_80274A64(gobj);
 }

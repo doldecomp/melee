@@ -30,7 +30,7 @@ ItemStateTable it_803F7B48[] = { {
 void it_802CA49C(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
-    itPokemonAttributes* sa = ip->xC4_article_data->x4_specialAttributes;
+    itKamexAttributes* sa = &ip->xC4_article_data->x4_specialAttributes->kamex;
     PAD_STACK(16);
 
     it_80279C48(gobj);
@@ -95,7 +95,8 @@ bool it_802CA654(Item_GObj* gobj)
 void it_802CA6A0(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
-    itKamexAttributes* attrs = ip->xC4_article_data->x4_specialAttributes;
+    itKamexAttributes* attrs =
+        &ip->xC4_article_data->x4_specialAttributes->kamex;
 
     if (ip->xDD4_itemVar.pokemon.timer == -1) {
         ip->xDD4_itemVar.pokemon.timer = attrs->timer;
@@ -220,7 +221,8 @@ void it_802CAB10(Item_GObj* gobj)
 {
     SpawnItem spawn;
     Item* ip = GET_ITEM(gobj);
-    itKamexAttributes* attrs = ip->xC4_article_data->x4_specialAttributes;
+    itKamexAttributes* attrs =
+        &ip->xC4_article_data->x4_specialAttributes->kamex;
 
     spawn.prev_pos = ip->pos;
     spawn.prev_pos.x += attrs->x8 * ip->facing_dir;
@@ -258,7 +260,8 @@ void it_2725_Logic31_Spawned(Item_GObj* gobj)
     HSD_JObj* jobj;
     Vec3 scale;
     Item* ip = gobj->user_data;
-    itKamexAttributes* sa = ip->xC4_article_data->x4_specialAttributes;
+    itKamexHydroPumpAttributes* sa =
+        &ip->xC4_article_data->x4_specialAttributes->kamex_hydro_pump;
 
     jobj = gobj->hsd_obj;
     ip->xD44_lifeTimer = sa->x0;

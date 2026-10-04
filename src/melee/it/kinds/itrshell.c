@@ -18,26 +18,6 @@
 #include <sysdolphin/baselib/jobj.h>
 #include <sysdolphin/baselib/random.h>
 
-typedef struct itRShell_Attrs {
-    float x0;
-    float x4;
-    float x8;
-    float xC;
-    float x10;
-    Vec3 x14;
-    float x20;
-    float x24;
-    float x28;
-    float x2C;
-    char pad30[0x38 - 0x30];
-    float x38; // rotation multiplier (gshell x20)
-    float x3C;
-    float x40;
-    float x44;
-    Vec x48;
-    s32 x54;
-} itRShell_Attrs;
-
 ItemStateTable it_803F5C48[] = {
     { -1, itRshell_UnkMotion0_Anim, itRshell_UnkMotion0_Phys,
       itRshell_UnkMotion0_Coll },
@@ -59,7 +39,8 @@ ItemStateTable it_803F5C48[] = {
 void it_8028CFE0(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
-    itRShell_Attrs* attrs = ip->xC4_article_data->x4_specialAttributes;
+    itRShell_Attrs* attrs =
+        &ip->xC4_article_data->x4_specialAttributes->r_shell;
     f32 temp;
     Vec v;
     HSD_JObj* jobj;
@@ -80,7 +61,8 @@ void it_8028CFE0(Item_GObj* gobj)
 void it_8028D090(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
-    itRShell_Attrs* attrs = ip->xC4_article_data->x4_specialAttributes;
+    itRShell_Attrs* attrs =
+        &ip->xC4_article_data->x4_specialAttributes->r_shell;
     it_80275D5C(gobj, &ip->xC0C);
     it_8028DAE4(gobj);
     ip->x40_vel.x = it_8028D56C(gobj, attrs->x4, ip->facing_dir);
@@ -90,7 +72,8 @@ void it_8028D090(Item_GObj* gobj)
 void it_8028D100(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
-    itRShell_Attrs* attrs = ip->xC4_article_data->x4_specialAttributes;
+    itRShell_Attrs* attrs =
+        &ip->xC4_article_data->x4_specialAttributes->r_shell;
     s32 did_hit = 0;
 
     switch (ip->msid) {
@@ -128,7 +111,8 @@ void it_8028D100(Item_GObj* gobj)
 void it_8028D26C(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
-    itRShell_Attrs* attrs = ip->xC4_article_data->x4_specialAttributes;
+    itRShell_Attrs* attrs =
+        &ip->xC4_article_data->x4_specialAttributes->r_shell;
     s32 did_hit = 0;
 
     switch (ip->msid) {
@@ -219,7 +203,7 @@ void it_8028D4E4(Item_GObj* gobj)
     f32 abs_vel;
     abs_vel = ip->x40_vel.x;
     vel = abs_vel;
-    attrs = ip->xC4_article_data->x4_specialAttributes;
+    attrs = &ip->xC4_article_data->x4_specialAttributes->r_shell;
 
     if (vel < 0.0f) {
         abs_vel = -vel;
@@ -243,7 +227,8 @@ static inline void itRshell_ClampVel(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     f32 vel = ip->x40_vel.x;
-    itRShell_Attrs* attrs = ip->xC4_article_data->x4_specialAttributes;
+    itRShell_Attrs* attrs =
+        &ip->xC4_article_data->x4_specialAttributes->r_shell;
     f32 abs_vel;
 
     if (vel < 0.0f) {
@@ -266,8 +251,8 @@ static inline void itRshell_ClampVel(Item_GObj* gobj)
 
 f32 it_8028D56C(Item_GObj* gobj, f32 f1, f32 f2)
 {
-    itRshellAttributes* attrs =
-        GET_ITEM(gobj)->xC4_article_data->x4_specialAttributes;
+    itRShell_Attrs* attrs =
+        &GET_ITEM(gobj)->xC4_article_data->x4_specialAttributes->r_shell;
     f32 f = (f1 * -attrs->x14.x) + (-attrs->x14.y * f2);
     return f * attrs->x14.z;
 }
@@ -275,7 +260,8 @@ f32 it_8028D56C(Item_GObj* gobj, f32 f1, f32 f2)
 void it_3F14_Logic15_Spawned(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
-    itRShell_Attrs* attrs = ip->xC4_article_data->x4_specialAttributes;
+    itRShell_Attrs* attrs =
+        &ip->xC4_article_data->x4_specialAttributes->r_shell;
     ip->xDD4_itemVar.rshell.xDD4 = attrs->x0;
     it_80275174(gobj, ip->xDD4_itemVar.rshell.xDD4);
     ip->xDD4_itemVar.rshell.xDEC = attrs->x54;
@@ -290,7 +276,8 @@ void it_3F14_Logic15_Spawned(Item_GObj* gobj)
 void it_8028D62C(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
-    itRShell_Attrs* attrs = ip->xC4_article_data->x4_specialAttributes;
+    itRShell_Attrs* attrs =
+        &ip->xC4_article_data->x4_specialAttributes->r_shell;
     it_8026B390(gobj);
     it_80275414(gobj);
     it_802756E0(gobj);
@@ -318,7 +305,7 @@ bool itRshell_UnkMotion0_Coll(Item_GObj* gobj)
     it_8026D62C(gobj, it_8028D7F0);
     ip = GET_ITEM(gobj);
     jobj = GET_JOBJ(gobj);
-    attrs = ip->xC4_article_data->x4_specialAttributes;
+    attrs = &ip->xC4_article_data->x4_specialAttributes->r_shell;
     if (ip->ground_or_air == GA_Ground) {
         Item_UpdateRollingShellRotation(gobj, ip, jobj, &attrs->x38);
     }
@@ -370,7 +357,8 @@ void itRshell_UnkMotion2_Phys(Item_GObj* gobj) {}
 void it_3F14_Logic15_Thrown(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
-    itRShell_Attrs* attrs = ip->xC4_article_data->x4_specialAttributes;
+    itRShell_Attrs* attrs =
+        &ip->xC4_article_data->x4_specialAttributes->r_shell;
     ip->xDD4_itemVar.rshell.xDE8 = 1;
     ip->xDD4_itemVar.rshell.xDD8 = attrs->x3C;
     Item_80268E5C(gobj, 3, 6);
@@ -406,7 +394,8 @@ bool itRshell_UnkMotion3_Coll(Item_GObj* gobj)
 void it_3F14_Logic15_Dropped(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
-    itRShell_Attrs* attrs = ip->xC4_article_data->x4_specialAttributes;
+    itRShell_Attrs* attrs =
+        &ip->xC4_article_data->x4_specialAttributes->r_shell;
     ip->xDD4_itemVar.rshell.xDD8 = attrs->x3C;
     Item_80268E5C(gobj, 4, 6);
 }
@@ -440,7 +429,8 @@ bool itRshell_UnkMotion4_Coll(Item_GObj* gobj)
 static inline void itRshell_StopInit(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
-    itRShell_Attrs* attrs = ip->xC4_article_data->x4_specialAttributes;
+    itRShell_Attrs* attrs =
+        &ip->xC4_article_data->x4_specialAttributes->r_shell;
     it_8026B3A8(gobj);
     it_80274C88(gobj);
     it_80275158(gobj, it_804D6D28->x30_lifetime);
@@ -488,7 +478,8 @@ bool itRshell_UnkMotion5_Anim(Item_GObj* gobj)
 static inline void itRshell_UM5_Accel(Item_GObj* gobj, Vec3* target)
 {
     Item* ip = GET_ITEM(gobj);
-    itRShell_Attrs* attrs = ip->xC4_article_data->x4_specialAttributes;
+    itRShell_Attrs* attrs =
+        &ip->xC4_article_data->x4_specialAttributes->r_shell;
     s32 sign = (target->x - ip->pos.x < 0.0f) ? -1 : 1;
     ip->xDD4_itemVar.rshell.xDE0 = attrs->x8 * (f32) sign;
 }
@@ -507,7 +498,8 @@ static inline bool itRshell_UM5_AddVelAndCheck(Item_GObj* gobj)
 static inline void itRshell_UM5_MaybeBrake(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
-    itRShell_Attrs* attrs = ip->xC4_article_data->x4_specialAttributes;
+    itRShell_Attrs* attrs =
+        &ip->xC4_article_data->x4_specialAttributes->r_shell;
     if (ip->x5D4_hitboxes[0].hit.state == HitCapsule_Disabled) {
         if (ABS(ip->x40_vel.x) <= attrs->x10) {
             it_80272674(gobj, 0);
@@ -518,7 +510,8 @@ static inline void itRshell_UM5_MaybeBrake(Item_GObj* gobj)
 void itRshell_UnkMotion5_Phys(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
-    itRShell_Attrs* attrs = ip->xC4_article_data->x4_specialAttributes;
+    itRShell_Attrs* attrs =
+        &ip->xC4_article_data->x4_specialAttributes->r_shell;
     Vec3 target_pos;
     PAD_STACK(16);
 
@@ -556,7 +549,8 @@ static inline void itRshell_UM5C_Reverse(Item_GObj* gobj)
 static inline void itRshell_UM5C_GroundSpin(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
-    itRShell_Attrs* attrs = ip->xC4_article_data->x4_specialAttributes;
+    itRShell_Attrs* attrs =
+        &ip->xC4_article_data->x4_specialAttributes->r_shell;
     HSD_JObj* jobj = GET_JOBJ(gobj);
 
     if (ip->ground_or_air == GA_Ground) {
@@ -640,7 +634,7 @@ bool itRshell_UnkMotion7_Coll(Item_GObj* gobj)
     it_8026E8C4(gobj, it_8028D62C, it_8028D7F0);
     ip = GET_ITEM(gobj);
     jobj = GET_JOBJ(gobj);
-    attrs = ip->xC4_article_data->x4_specialAttributes;
+    attrs = &ip->xC4_article_data->x4_specialAttributes->r_shell;
     if (ip->ground_or_air == GA_Ground) {
         Item_UpdateRollingShellRotation(gobj, ip, jobj, &attrs->x38);
     }

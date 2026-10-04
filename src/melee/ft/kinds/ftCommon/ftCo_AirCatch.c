@@ -144,7 +144,7 @@ void ftCo_AirCatch_Anim(Fighter_GObj* gobj)
                 Item_GObj* tether_gobj = fp->u.lk.xC;
                 Item* tether_ip = GET_ITEM(fp->u.lk.xC);
                 struct TetherAttributes* tether_data =
-                    tether_ip->xC4_article_data->x4_specialAttributes;
+                    &tether_ip->xC4_article_data->x4_specialAttributes->tether;
 
                 if (fp->mv.co.aircatch.x0 == da->xA8) {
                     Vec3 pos = { 1.8, 0, 0 };
@@ -212,7 +212,7 @@ void ftCo_AirCatch_Anim(Fighter_GObj* gobj)
                 Item_GObj* temp_r29_2 = fp->u.ss.x223C;
                 Item* tether_ip = GET_ITEM(temp_r29_2);
                 struct TetherAttributes* tether_data =
-                    tether_ip->xC4_article_data->x4_specialAttributes;
+                    &tether_ip->xC4_article_data->x4_specialAttributes->tether;
                 if (fp->mv.co.aircatch.x0 == da->xC0) {
                     {
                         Vec3 pos = { 1.8, 0, 0 };

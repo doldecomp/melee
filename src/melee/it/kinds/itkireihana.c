@@ -30,7 +30,7 @@ void itKireihana_Logic15_Spawned(Item_GObj* gobj)
 {
     Item* item = GET_ITEM(gobj);
     itkireihanaAttributes* attrs =
-        item->xC4_article_data->x4_specialAttributes;
+        &item->xC4_article_data->x4_specialAttributes->kireihana;
     item->facing_dir = 0.0f;
     item->xDAC_itcmd_var0 = 0;
     item->xDD4_itemVar.kireihana.timer_unk0 = attrs->x4;
@@ -96,7 +96,7 @@ void itKireihana_UnkMotion1_Phys(Item_GObj* gobj)
     PAD_STACK(8);
     if (--item->xDD4_itemVar.kireihana.timer_unk1 == 0) {
         itkireihanaAttributes* attrs =
-            item->xC4_article_data->x4_specialAttributes;
+            &item->xC4_article_data->x4_specialAttributes->kireihana;
         it_8027ADEC(0x470, gobj, item->xBBC_dynamicBoneTable->bones[2], 2.6f);
         if (--item->xDD4_itemVar.kireihana.timer_unk2 == 0) {
             if (HSD_Randi(2)) {
@@ -157,7 +157,7 @@ void itKireihana_UnkMotion2_Phys(Item_GObj* gobj)
     PAD_STACK(8);
     if (--item->xDD4_itemVar.kireihana.timer_unk1 == 0) {
         itkireihanaAttributes* attrs =
-            item->xC4_article_data->x4_specialAttributes;
+            &item->xC4_article_data->x4_specialAttributes->kireihana;
         it_8027ADEC(0x470, gobj, item->xBBC_dynamicBoneTable->bones[2], 2.6f);
         item->xDD4_itemVar.kireihana.timer_unk1 = attrs->x8;
     }

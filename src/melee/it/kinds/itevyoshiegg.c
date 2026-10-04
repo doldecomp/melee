@@ -212,7 +212,8 @@ static inline void dmgReceived(Item_GObj* gobj)
 bool itEvYoshiEgg_Logic42_DmgReceived(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
-    itEvYoshiEgg_DatAttrs* attrs = ip->xC4_article_data->x4_specialAttributes;
+    itEvYoshiEgg_DatAttrs* attrs =
+        &ip->xC4_article_data->x4_specialAttributes->evyoshiegg;
     f32 val;
     f32* unused;
 

@@ -11,6 +11,7 @@
 #include "psdisptev.h"
 #include "psstructs.h"
 #include "state.h"
+#include "tobj.h"
 #include "util.h"
 #include <dolphin/gx.h>
 
@@ -22,12 +23,6 @@ typedef struct {
     HSD_Particle* head;
     HSD_Particle* tail;
 } psdisp_ParticleSortBucket;
-
-typedef struct {
-    GXTlutFmt fmt;
-    u32 tlut_name;
-    u16 n_entries;
-} psdisp_Tlut;
 
 typedef struct {
     Mtx mtx;
@@ -49,19 +44,19 @@ typedef struct {
 /* 40C30C */ static char HSD_PSDisp_8040C30C[] =
     "HSD_OBJ(o)->ref_count != HSD_OBJ_NOREF";
 /* 40C334 */ static u8 HSD_PSDisp_8040C334[0xC] = { 0 };
-/* 40C340 */ static u8 HSD_PSDisp_8040C340[0x20] = {
+/* 40C340 */ static u8 billboard_tex0_u8[] ATTRIBUTE_ALIGN(32) = {
     0, 1, 0, 0, 1, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 1,
     0, 0, 0, 1, 1, 1, 1, 0, 1, 0, 1, 1, 0, 1, 0, 0,
 };
 /* 40C360 */ static u8 HSD_PSDisp_8040C360[0x10] = { 0 };
-/* 4D6380 */ static u8 psFrameNum = 0x7B;
+/* 4D6380 */ static u8 psFrameNum = 123;
 /* 4D0908 */ extern HSD_Particle* hsd_804D0908[16];
 /* 4D0FC0 */ static Mtx vmtx;
 /* 4D0FF0 */ static Mtx rvmtx;
 /* 4D1020 */ static f32 prj[GX_PROJECTION_SZ];
 /* 4D103C */ static Mtx pvmtx;
 /* 4D106C */ static HSD_Particle* particle_list[17];
-/* 4D7908 */ static HSD_Fog* HSD_PSDisp_804D7908;
+/* 4D7908 */ static HSD_Fog* particleFog;
 /* 4D790C */ static s32 prevPointSize;
 /* 4D7910 */ static s32 prevLineWidth;
 /* 4D7914 */ static f32 HSD_PSDisp_804D7914;
@@ -79,7 +74,7 @@ typedef struct {
 /* 4D7944 */ static GXColor prevColorMat;
 /* 4D7948 */ static s32 HSD_PSDisp_804D7948[2];
 
-ASSERT_SIZE(HSD_PSDisp_8040C340, 0x20);
+ASSERT_SIZE(billboard_tex0_u8, 0x20);
 ASSERT_SIZE(HSD_PSDisp_8040C360, 0x10);
 
 void setVtxDesc(s32 fmt)
@@ -387,8 +382,8 @@ static inline void setupTevReg(HSD_Particle* pp)
     }
 }
 
-HSD_Particle* particleSort(s32 arg0, u8 arg1, HSD_Particle** arg2,
-                           HSD_Particle** arg3)
+HSD_Particle* particleSort(s32 linkNo, u8 arg1, HSD_Particle** texEdge,
+                           HSD_Particle** xlu)
 {
     psdisp_ParticleSortBucket buckets[16];
     HSD_Particle** new_var;
@@ -411,20 +406,20 @@ HSD_Particle* particleSort(s32 arg0, u8 arg1, HSD_Particle** arg2,
 
     STATIC_ASSERT(sizeof(buckets[0]) == 8);
 
-    temp_r9 = &HSD_PSDisp_8040C360[arg0];
-    temp_r29 = (new_var = &hsd_804D0908[arg0]);
+    temp_r9 = &HSD_PSDisp_8040C360[linkNo];
+    temp_r29 = (new_var = &hsd_804D0908[linkNo]);
     var_r28 = *temp_r29;
     if (*temp_r9 == arg1) {
-        *arg2 = var_r28;
-        *arg3 = particle_list[arg0];
+        *texEdge = var_r28;
+        *xlu = particle_list[linkNo];
         return var_r28;
     }
 
     *temp_r9 = arg1;
     if (var_r28 == NULL) {
-        particle_list[arg0] = NULL;
-        *arg2 = NULL;
-        *arg3 = NULL;
+        particle_list[linkNo] = NULL;
+        *texEdge = NULL;
+        *xlu = NULL;
         return NULL;
     }
 
@@ -501,9 +496,9 @@ HSD_Particle* particleSort(s32 arg0, u8 arg1, HSD_Particle** arg2,
     }
 
     *temp_r29 = var_r3;
-    particle_list[arg0] = var_r5;
-    *arg2 = var_r3;
-    *arg3 = var_r5;
+    particle_list[linkNo] = var_r5;
+    *texEdge = var_r3;
+    *xlu = var_r5;
     return var_r3;
 }
 
@@ -533,10 +528,11 @@ static inline HSD_Particle* psDispSubPoint(HSD_Particle* pp)
     q = pp->next;
     while (q != NULL) {
         if (q->size == pp->size && q->appsrt == NULL &&
-            !((q->kind ^ pp->kind) & 0xC0100400) && q->primColCount == 0 &&
-            q->primCol.r == pp->primCol.r && q->primCol.g == pp->primCol.g &&
-            q->primCol.b == pp->primCol.b && q->primCol.a == pp->primCol.a &&
-            !(q->kind & DispPoint) &&
+            !((q->kind ^ pp->kind) &
+              (DispPoint | DispTexture | DispLighting | Trail)) &&
+            q->primColCount == 0 && q->primCol.r == pp->primCol.r &&
+            q->primCol.g == pp->primCol.g && q->primCol.b == pp->primCol.b &&
+            q->primCol.a == pp->primCol.a && !(q->kind & DispPoint) &&
             (!(pp->kind & DispLighting) ||
              (q->matColCount == 0 && q->ambColCount == 0 &&
               q->matRGB == pp->matRGB && q->matA == pp->matA &&
@@ -644,7 +640,9 @@ static inline HSD_Particle* psDispSubPointTrail(HSD_Particle* pp)
     q = pp->next;
     while (q != NULL) {
         if (q->size == pp->size && q->appsrt == NULL &&
-            !((q->kind ^ pp->kind) & 0xC0100400) && !(q->kind & DispPoint))
+            !((q->kind ^ pp->kind) &
+              (DispPoint | DispTexture | DispLighting | Trail)) &&
+            !(q->kind & DispPoint))
         {
             {
                 Vec3* dst = p++;
@@ -1820,17 +1818,16 @@ static inline void psUpdateBillboardAxes(const Mtx inv_view)
 #endif
 void psDispParticles(u32 target_link, u32 sw)
 {
-    s32 sp7B4;
-    void* sp7B0;
-    u32 sp7AC;
-    u32 sp7A8;
-    u8 sp7A5;
-    u8 sp7A4;
+    s32 linkNo;
+    u8* prevTex;
+    u32 prevTexEdge;
+    u32 prevMirror;
+    u8 prevACmpParam1;
+    u8 prevACmpParam2;
     s32 needs_setup;
-    void* sp79C;
-    psdisp_Tlut tlut_obj;
-    UNUSED s32 stack_pad;
-    GXTexObj sp764;
+    u16* prevLut;
+    HSD_TlutDesc tlutdesc;
+    GXTexObj texObj;
     HSD_Particle* sorted_particles;
     HSD_Particle* non_edge_particles;
     psdisp_Mtx billboard_mtx;
@@ -1843,21 +1840,20 @@ void psDispParticles(u32 target_link, u32 sw)
 
     alpha_compare_mode = 0;
     prev_tex_interp_near = 0;
-    sp7A5 = 0;
-    sp7A4 = 0xFF;
+    prevACmpParam1 = 0;
+    prevACmpParam2 = 0xFF;
     needs_setup = 1;
     if (sw == 0) {
-        if (psFrameNum < 0xFFU) {
+        if (psFrameNum < 0xFF) {
             psFrameNum += 1;
             return;
         }
         psFrameNum = 1;
         return;
     }
-    sp7B4 = 0;
-    do {
-        if (target_link & (1 << sp7B4)) {
-            particleSort(sp7B4, psFrameNum, &sorted_particles,
+    for (linkNo = 0; linkNo < PS_NUM_LINK; linkNo++) {
+        if (target_link & (1 << linkNo)) {
+            particleSort(linkNo, psFrameNum, &sorted_particles,
                          &non_edge_particles);
             if (sw == 1) {
                 pp = sorted_particles;
@@ -1869,7 +1865,6 @@ void psDispParticles(u32 target_link, u32 sw)
                 HSD_PSFormGroup* form_group = NULL;
                 u8* form = NULL;
                 void* image;
-                void* tlut;
                 u32 blend_mode;
                 u8 alpha0;
                 u8 alpha1;
@@ -1887,15 +1882,15 @@ void psDispParticles(u32 target_link, u32 sw)
                 }
                 if (!(pp->size < FLT_EPSILON)) {
                     if (needs_setup != 0) {
-                        sp79C = NULL;
+                        prevLut = NULL;
                         prevPointSize = -1;
-                        sp7B0 = NULL;
+                        prevTex = NULL;
                         prevLineWidth = -1;
                         prevChanCtrl = -1;
                         psSetupTevInvalidState();
-                        sp7A8 = (u32) -1;
+                        prevMirror = (u32) -1;
                         prev_kind &= 0xFEFFFFFF;
-                        sp7AC = (u32) -1;
+                        prevTexEdge = (u32) -1;
                         HSD_FogSet(NULL);
                         prevChanMat.r = prevChanMat.g = prevChanMat.b = 0xFF;
                         prevChanAmb.r = prevChanAmb.g = prevChanAmb.b = 0xFF;
@@ -1973,8 +1968,8 @@ void psDispParticles(u32 target_link, u32 sw)
                         psSetCurrentMtx(GX_PNMTX0);
                         GXEnableTexOffsets(GX_TEXCOORD0, GX_TRUE, GX_TRUE);
                         GXSetCullMode(GX_CULL_BACK);
-                        GXSETARRAY(GX_VA_TEX0, HSD_PSDisp_8040C340,
-                                   sizeof(HSD_PSDisp_8040C340), 2, true);
+                        GXSETARRAY(GX_VA_TEX0, billboard_tex0_u8,
+                                   sizeof(billboard_tex0_u8), 2, true);
                         psSetupVtxFormat(GX_VTXFMT0, false, true, GX_RGB565);
                         psSetupVtxFormat(GX_VTXFMT1, false, false, GX_RGB565);
                         psSetupVtxFormat(GX_VTXFMT2, true, true, GX_RGB565);
@@ -2002,23 +1997,25 @@ void psDispParticles(u32 target_link, u32 sw)
                         alpha1 = pp->aCmpParam2;
                     }
                     if ((alpha_compare_mode != pp->aCmpMode) ||
-                        (sp7A5 != alpha0) || (sp7A4 != alpha1))
+                        (prevACmpParam1 != alpha0) ||
+                        (prevACmpParam2 != alpha1))
                     {
-                        sp7A5 = alpha0;
+                        prevACmpParam1 = alpha0;
                         alpha_compare_mode = pp->aCmpMode;
-                        sp7A4 = alpha1;
-                        GXSetAlphaCompare((alpha_compare_mode >> 3) & 7, sp7A5,
-                                          (alpha_compare_mode >> 6) & 3,
-                                          alpha_compare_mode & 7, sp7A4);
+                        prevACmpParam2 = alpha1;
+                        GXSetAlphaCompare(
+                            (alpha_compare_mode >> 3) & 7, prevACmpParam1,
+                            (alpha_compare_mode >> 6) & 3,
+                            alpha_compare_mode & 7, prevACmpParam2);
                     }
 
                     psSetupTev(pp);
                     setupChanCtrl(pp);
                     setupChanReg(pp);
                     setupTevReg(pp);
-                    if ((pp->kind & TexEdge) != sp7AC) {
-                        sp7AC = pp->kind & TexEdge;
-                        if ((s32) sp7AC != 0) {
+                    if ((pp->kind & TexEdge) != prevTexEdge) {
+                        prevTexEdge = pp->kind & TexEdge;
+                        if ((s32) prevTexEdge != 0) {
                             GXSetZMode(GX_TRUE, GX_LEQUAL, GX_TRUE);
                         } else {
                             GXSetZMode(GX_TRUE, GX_LEQUAL, GX_FALSE);
@@ -2026,17 +2023,14 @@ void psDispParticles(u32 target_link, u32 sw)
                     }
                     if (((pp->kind ^ prev_kind) & DispFog) != 0) {
                         if (pp->kind & DispFog) {
-                            HSD_FogSet(HSD_PSDisp_804D7908);
+                            HSD_FogSet(particleFog);
                         } else {
                             HSD_FogSet(NULL);
                         }
                     }
 
-                    if (((HSD_PSFormGroup***) psNumCmdList)[pp->bank] !=
-                            NULL &&
-                        (form_group =
-                             ((HSD_PSFormGroup***)
-                                  psNumCmdList)[pp->bank][pp->texGroup]) !=
+                    if (psNumCmdList[pp->bank] != NULL &&
+                        (form_group = psNumCmdList[pp->bank][pp->texGroup]) !=
                             NULL
 #ifdef MUST_MATCH
                         && form_group->formTable != NULL
@@ -2063,11 +2057,11 @@ void psDispParticles(u32 target_link, u32 sw)
                             scale_t = 1.0f;
                             wrap_t = GX_CLAMP;
                         }
-                        if ((pp->kind & (MirrorS | MirrorT)) != sp7A8) {
+                        if ((pp->kind & (MirrorS | MirrorT)) != prevMirror) {
                             Mtx temp_mtx;
 
-                            sp7A8 = pp->kind & (MirrorS | MirrorT);
-                            sp7B0 = NULL;
+                            prevMirror = pp->kind & (MirrorS | MirrorT);
+                            prevTex = NULL;
                             PSMTXScale(temp_mtx, scale_s, scale_t, 1.0f);
                             if (pp->kind & MirrorT) {
                                 temp_mtx[1][3] = 1.0f;
@@ -2100,34 +2094,34 @@ void psDispParticles(u32 target_link, u32 sw)
                                     (void**) &tex_table[tex_group->num];
                                 if (palettes != NULL) {
                                     if (pp->palNum != 0xFF) {
-                                        tlut = palettes[pp->palNum];
+                                        tlutdesc.lut = palettes[pp->palNum];
                                     } else if (!(pp->kind & ComTLUT)) {
-                                        tlut = palettes[pp->poseNum];
+                                        tlutdesc.lut = palettes[pp->poseNum];
                                     } else {
-                                        tlut = palettes[0];
+                                        tlutdesc.lut = palettes[0];
                                     }
-                                    if (tlut != sp79C) {
-                                        tlut_obj.fmt = (GXTlutFmt) (u8)
+                                    if (tlutdesc.lut != prevLut) {
+                                        tlutdesc.fmt = (GXTlutFmt) (u8)
                                                            tex_group->tlutfmt;
-                                        tlut_obj.tlut_name = GX_TLUT0;
-                                        tlut_obj.n_entries =
-                                            (fmt == GX_TF_C4) ? 0x10 : 0x100;
-                                        GXInitTlutObj(&gx_tlut_obj, tlut,
-                                                      tlut_obj.fmt,
-                                                      tlut_obj.n_entries);
+                                        tlutdesc.tlut_name = GX_TLUT0;
+                                        tlutdesc.n_entries =
+                                            (fmt == GX_TF_C4) ? 16 : 256;
+                                        GXInitTlutObj(
+                                            &gx_tlut_obj, tlutdesc.lut,
+                                            tlutdesc.fmt, tlutdesc.n_entries);
                                         GXLoadTlut(&gx_tlut_obj,
-                                                   tlut_obj.tlut_name);
+                                                   tlutdesc.tlut_name);
                                     }
-                                    sp7B0 = NULL;
+                                    prevTex = NULL;
                                 }
                             }
                         }
-                        if ((sp7B0 != image) && (image != NULL)) {
-                            sp7B0 = image;
+                        if ((prevTex != image) && (image != NULL)) {
+                            prevTex = image;
                             switch (fmt) {
                             case GX_TF_C4:
                             case GX_TF_C8:
-                                GXInitTexObjCI(&sp764, image, width, height,
+                                GXInitTexObjCI(&texObj, image, width, height,
                                                fmt, wrap_s, wrap_t, GX_FALSE,
                                                GX_TLUT0);
                                 break;
@@ -2139,8 +2133,8 @@ void psDispParticles(u32 target_link, u32 sw)
                             case GX_TF_RGB5A3:
                             case GX_TF_RGBA8:
                             case GX_TF_CMPR:
-                                GXInitTexObj(&sp764, image, width, height, fmt,
-                                             wrap_s, wrap_t, GX_FALSE);
+                                GXInitTexObj(&texObj, image, width, height,
+                                             fmt, wrap_s, wrap_t, GX_FALSE);
                                 break;
                             default:
                                 HSD_ASSERT(0x8AA, 0);
@@ -2148,21 +2142,21 @@ void psDispParticles(u32 target_link, u32 sw)
                             }
                             prev_tex_interp_near = pp->kind & TexInterpNear;
                             GXInitTexObjLOD(
-                                &sp764,
+                                &texObj,
                                 (prev_tex_interp_near != 0) ? GX_NEAR
                                                             : GX_LINEAR,
                                 (pp->kind & TexInterpNear) ? GX_NEAR
                                                            : GX_LINEAR,
                                 0.0f, 0.0f, 0.0f, GX_FALSE, GX_FALSE,
                                 GX_ANISO_1);
-                            GXLoadTexObj(&sp764, GX_TEXMAP0);
+                            GXLoadTexObj(&texObj, GX_TEXMAP0);
                         }
                         if ((u32) prev_tex_interp_near !=
                             (pp->kind & TexInterpNear))
                         {
                             prev_tex_interp_near = pp->kind & TexInterpNear;
                             GXInitTexObjLOD(
-                                &sp764,
+                                &texObj,
                                 (prev_tex_interp_near != 0) ? GX_NEAR
                                                             : GX_LINEAR,
                                 (s32) (pp->kind & TexInterpNear) != 0
@@ -2170,7 +2164,7 @@ void psDispParticles(u32 target_link, u32 sw)
                                     : GX_LINEAR,
                                 0.0f, 0.0f, 0.0f, GX_FALSE, GX_FALSE,
                                 GX_ANISO_1);
-                            GXLoadTexObj(&sp764, GX_TEXMAP0);
+                            GXLoadTexObj(&texObj, GX_TEXMAP0);
                         }
                     }
 
@@ -2195,8 +2189,7 @@ void psDispParticles(u32 target_link, u32 sw)
                 pp = pp->next;
             }
         }
-        sp7B4 += 1;
-    } while (sp7B4 < 0x10);
+    }
     if (needs_setup == 0) {
         HSD_StateInvalidate(-1);
     }
