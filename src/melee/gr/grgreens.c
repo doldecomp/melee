@@ -394,7 +394,7 @@ bool grGreens_80213AB4(Vec* vec, f32 maxX, f32 minX, f32 maxY, f32 minY)
 }
 
 bool grGreens_80213B1C(Ground_GObj* ground_gobj, Fighter_GObj* fighter_gobj,
-                 Vec* vec)
+                       Vec* vec)
 {
     Vec vec2;
     PAD_STACK(4);
