@@ -581,9 +581,9 @@ void grKinokoRoute_802084B4(HSD_GObj* gobj)
 
     gobj2 = Ground_GetMapGObj(3);
     if (gobj2 != NULL) {
-        void* gp2 = gobj2->user_data;
+        Ground* gp2 = GET_GROUND(gobj2);
         if (gp2 != NULL) {
-            ((UnkFlagStruct*) ((u8*) gp2 + 0xC4))->x0.b0 = 1;
+            gp2->u.kinokoroute2.flags_0 = 1;
         }
     }
 
@@ -592,7 +592,7 @@ void grKinokoRoute_802084B4(HSD_GObj* gobj)
     Camera_RequestQuake(QuakeKind_Small, NULL);
     Ground_801C5414(0x136, 0xBA);
     grMaterial_801C8CDC(gobj);
-    PAD_STACK(20);
+    PAD_STACK(16);
 }
 
 void grKinokoRoute_80208564(HSD_GObj* gobj)
