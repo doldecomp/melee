@@ -366,7 +366,7 @@ void ftPp_Init_OnLoad(HSD_GObj* gobj)
     u8 _[4];
 
     Fighter* fp = GET_FIGHTER(gobj);
-    void** item_list = fp->ft_data->x48_items;
+    union ftData_Item* item_list = fp->ft_data->x48_items;
     fp->x2222_b5 = 1;
 
     PUSH_ATTRS(fp, ftIceClimberAttributes);
@@ -374,9 +374,9 @@ void ftPp_Init_OnLoad(HSD_GObj* gobj)
     {
         ftIceClimberAttributes* da = fp->dat_attrs;
         fp->x40 = da->x0;
-        it_8026B3F8(item_list[0], It_Kind_IceClimber_Ice);
-        it_8026B3F8(item_list[1], It_Kind_IceClimber_Blizzard);
-        it_8026B3F8(item_list[2], It_Kind_IceClimber_GumStrings);
+        it_8026B3F8(item_list[0].article, It_Kind_IceClimber_Ice);
+        it_8026B3F8(item_list[1].article, It_Kind_IceClimber_Blizzard);
+        it_8026B3F8(item_list[2].article, It_Kind_IceClimber_GumStrings);
     }
 }
 

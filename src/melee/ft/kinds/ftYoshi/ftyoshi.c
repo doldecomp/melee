@@ -444,7 +444,7 @@ void ftYs_Init_OnDeath(HSD_GObj* gobj)
 
 void ftYs_Init_OnLoad(HSD_GObj* gobj)
 {
-    void** item_list;
+    union ftData_Item* item_list;
     ftYoshiAttributes* other_attr;
     struct S_UNK_YOSHI1* temp_r28;
     struct S_UNK_YOSHI1* temp;
@@ -467,9 +467,9 @@ void ftYs_Init_OnLoad(HSD_GObj* gobj)
     ftYs_Init_8012B6E8(fp, temp_r27);
     ftYs_Init_8012B6E8(fp, temp_r28);
     PUSH_ATTRS(fp, ftYoshiAttributes);
-    it_8026B3F8(item_list[0], It_Kind_Yoshi_EggThrow);
-    it_8026B3F8(item_list[1], It_Kind_Yoshi_Star);
-    it_8026B3F8(item_list[2], It_Kind_Yoshi_EggLay);
+    it_8026B3F8(item_list[0].article, It_Kind_Yoshi_EggThrow);
+    it_8026B3F8(item_list[1].article, It_Kind_Yoshi_Star);
+    it_8026B3F8(item_list[2].article, It_Kind_Yoshi_EggLay);
     fp->x2226_b1 = 1;
 }
 
