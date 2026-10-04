@@ -802,12 +802,10 @@ hsd_803B51C8_inline(s32 image, s32 image_height, s32 image_width,
     s32* work_r26_2;
     s32 scratch_r6_4;
     s32 scratch_r6_5;
-    s32 scratch_r7_2;
-    s32 scratch_r7_4;
     s32 quant_scale;
     u16 scratch_r0;
     u8 scratch_r6_3;
-    u8 scratch_r7_3;
+    s32 k;
     struct hsd_803B51C8_inline_state state;
     u32 scratch_r23;
     u32 comment_size;
@@ -970,27 +968,12 @@ hsd_803B51C8_inline(s32 image, s32 image_height, s32 image_width,
                 work_r4_3 = (s32*) work_r23;
                 work_r5_3 = (s32*) (state.base + 0x718);
                 for (work_r3 = 0; work_r3 < 0x40; work_r3 += 8) {
-                    u8 scratch_r7;
                     scratch_r6 = state.quant_table + work_r3;
-                    scratch_r7 = scratch_r6[0];
-                    work_r5_3[0] =
-                        (work_r4_3[0] / ((s32) scratch_r7 / quant_scale));
-                    work_r5_3[1] =
-                        (work_r4_3[1] / ((s32) scratch_r6[1] / quant_scale));
-                    work_r5_3[2] =
-                        (work_r4_3[2] / ((s32) scratch_r6[2] / quant_scale));
-                    work_r5_3[3] =
-                        (work_r4_3[3] / ((s32) scratch_r6[3] / quant_scale));
-                    work_r5_3[4] =
-                        (work_r4_3[4] / ((s32) scratch_r6[4] / quant_scale));
-                    work_r5_3[5] =
-                        (work_r4_3[5] / ((s32) scratch_r6[5] / quant_scale));
-                    work_r5_3[6] =
-                        (work_r4_3[6] / ((s32) scratch_r6[6] / quant_scale));
-                    scratch_r7_2 = work_r4_3[7];
+                    for (k = 0; k < 8; k++) {
+                        work_r5_3[k] =
+                            work_r4_3[k] / ((s32) scratch_r6[k] / quant_scale);
+                    }
                     work_r4_3 += 8;
-                    work_r5_3[7] =
-                        (scratch_r7_2 / ((s32) scratch_r6[7] / quant_scale));
                     work_r5_3 += 8;
                 }
                 hsd_803B3CD8(0);
@@ -1009,25 +992,11 @@ hsd_803B51C8_inline(s32 image, s32 image_height, s32 image_width,
                 work_r4_4 = (s32*) (state.base + 0x518);
                 for (work_r3_2 = 0; work_r3_2 < 0x40; work_r3_2 += 8) {
                     scratch_r6_2 = chroma_quant_table + work_r3_2;
-                    scratch_r7_3 = scratch_r6_2[0];
-                    work_r5_4[0] =
-                        (work_r4_4[0] / ((s32) scratch_r7_3 / quant_scale));
-                    work_r5_4[1] =
-                        (work_r4_4[1] / ((s32) scratch_r6_2[1] / quant_scale));
-                    work_r5_4[2] =
-                        (work_r4_4[2] / ((s32) scratch_r6_2[2] / quant_scale));
-                    work_r5_4[3] =
-                        (work_r4_4[3] / ((s32) scratch_r6_2[3] / quant_scale));
-                    work_r5_4[4] =
-                        (work_r4_4[4] / ((s32) scratch_r6_2[4] / quant_scale));
-                    work_r5_4[5] =
-                        (work_r4_4[5] / ((s32) scratch_r6_2[5] / quant_scale));
-                    work_r5_4[6] =
-                        (work_r4_4[6] / ((s32) scratch_r6_2[6] / quant_scale));
-                    scratch_r7_4 = work_r4_4[7];
+                    for (k = 0; k < 8; k++) {
+                        work_r5_4[k] = work_r4_4[k] /
+                                       ((s32) scratch_r6_2[k] / quant_scale);
+                    }
                     work_r4_4 += 8;
-                    work_r5_4[7] =
-                        (scratch_r7_4 / ((s32) scratch_r6_2[7] / quant_scale));
                     work_r5_4 += 8;
                 }
                 hsd_803B3CD8(1);
@@ -1042,25 +1011,11 @@ hsd_803B51C8_inline(s32 image, s32 image_height, s32 image_width,
                 work_r4_5 = (s32*) (state.base + 0x618);
                 for (work_r3_3 = 0; work_r3_3 < 0x40; work_r3_3 += 8) {
                     scratch_r5 = chroma_quant_table + work_r3_3;
-                    scratch_r6_3 = scratch_r5[0];
-                    work_r26_2[0] =
-                        (work_r4_5[0] / ((s32) scratch_r6_3 / quant_scale));
-                    work_r26_2[1] =
-                        (work_r4_5[1] / ((s32) scratch_r5[1] / quant_scale));
-                    work_r26_2[2] =
-                        (work_r4_5[2] / ((s32) scratch_r5[2] / quant_scale));
-                    work_r26_2[3] =
-                        (work_r4_5[3] / ((s32) scratch_r5[3] / quant_scale));
-                    work_r26_2[4] =
-                        (work_r4_5[4] / ((s32) scratch_r5[4] / quant_scale));
-                    work_r26_2[5] =
-                        (work_r4_5[5] / ((s32) scratch_r5[5] / quant_scale));
-                    work_r26_2[6] =
-                        (work_r4_5[6] / ((s32) scratch_r5[6] / quant_scale));
-                    scratch_r6_4 = work_r4_5[7];
+                    for (k = 0; k < 8; k++) {
+                        work_r26_2[k] =
+                            work_r4_5[k] / ((s32) scratch_r5[k] / quant_scale);
+                    }
                     work_r4_5 += 8;
-                    work_r26_2[7] =
-                        (scratch_r6_4 / ((s32) scratch_r5[7] / quant_scale));
                     work_r26_2 += 8;
                 }
                 hsd_803B3CD8(2);
@@ -1106,8 +1061,6 @@ s32 hsd_803B51C8(s32 arg0, s32 arg1, s32 arg2, char* arg3, s32 arg4)
     JpegHuffDc huff_dc_chroma;
     JpegHuffAc huff_ac_luma;
     JpegHuffAc huff_ac_chroma;
-
-    PAD_STACK(0x18);
 
     return hsd_803B51C8_inline(arg0, arg2, arg1, arg3, arg4, &lbl_803B9670,
                                &comment, &huff_dc_luma, &huff_dc_chroma,
