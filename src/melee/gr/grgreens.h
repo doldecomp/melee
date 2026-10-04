@@ -37,8 +37,8 @@
 /* 213AAC */ bool grGreens_80213AAC(Ground_GObj*);
 /* 213AB4 */ bool grGreens_80213AB4(Vec* vec, f32 maxX, f32 minX, f32 maxY,
                                     f32 minY);
-/* 213B1C */ bool fn_80213B1C(Ground_GObj* ground_gobj,
-                              Fighter_GObj* fighter_gobj, Vec* vec);
+/* 213B1C */ bool grGreens_80213B1C(Ground_GObj* ground_gobj,
+                                    Fighter_GObj* fighter_gobj, Vec* vec);
 /* 213C10 */ void grGreens_80213C10(Ground_GObj*);
 /* 214654 */ void grGreens_80214654(Ground_GObj*);
 /* 214658 */ void fn_80214658(Ground_GObj*);

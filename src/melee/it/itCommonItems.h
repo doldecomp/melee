@@ -1662,6 +1662,16 @@ typedef struct itPatapataAttributes {
     /* 0x3C */ f32 x3C;
 } itPatapataAttributes;
 
+typedef struct itOldkuriAttributes {
+    /* 0x00 */ struct itOldkuriAttributes_x0 {
+        s32 x0;
+        f32 x4;
+    }* x0;
+    f32 x4;
+    f32 x8;
+    f32 xC;
+} itOldkuriAttributes;
+
 typedef struct itOldottoseaAttributes {
     /* 0x00 */ struct itOldottoseaAttributes_x0 {
         s32 x0;
