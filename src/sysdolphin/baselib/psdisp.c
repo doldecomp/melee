@@ -2032,11 +2032,8 @@ void psDispParticles(u32 target_link, u32 sw)
                         }
                     }
 
-                    if (((HSD_PSFormGroup***) psNumCmdList)[pp->bank] !=
-                            NULL &&
-                        (form_group =
-                             ((HSD_PSFormGroup***)
-                                  psNumCmdList)[pp->bank][pp->texGroup]) !=
+                    if (psNumCmdList[pp->bank] != NULL &&
+                        (form_group = psNumCmdList[pp->bank][pp->texGroup]) !=
                             NULL
 #ifdef MUST_MATCH
                         && form_group->formTable != NULL
