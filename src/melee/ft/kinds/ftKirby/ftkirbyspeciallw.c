@@ -586,8 +586,8 @@ void ftKb_SpecialAirLwEnd_Phys(Fighter_GObj* gobj)
     ft_80085134(gobj);
 }
 
-static inline void
-resetSpecialLwState(Fighter_GObj* gobj, struct ftKb_Init_803CB490_layout* p)
+static inline void resetSpecialLwState(Fighter_GObj* gobj,
+                                       struct ftKb_Init_803CB490_layout* p)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     int i;
