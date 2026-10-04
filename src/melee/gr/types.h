@@ -2022,6 +2022,15 @@ struct GroundShadowEntry {
     u8 flag : 1;
 };
 
+typedef struct LightOverrideEntry {
+    /* 0x0 */ HSD_LightDesc* desc;
+    /* 0x4 */ u8 a : 1;
+    /* 0x4 */ u8 b : 1;
+    /* 0x4 */ u8 c : 1;
+    /* 0x4 */ u8 _ : 5;
+    /* 0x5 */ u8 _pad[3];
+} LightOverrideEntry;
+
 struct GroundJointPair {
     /* +0 */ s16 joint_index;
     /* +2 */ s16 stage_joint_index;
@@ -2044,8 +2053,8 @@ struct UnkStageDat {
     HSD_Spline** unk10 DAT_COUNT(unk14);
     s32 unk14;
 
-    void* unk18 DAT_COUNT(unk1C);
-    s32 unk1C;
+    LightOverrideEntry* light_overrides DAT_COUNT(light_word_count / 2);
+    ssize_t light_word_count; ///< Number of 32-bit words, not records.
 
     struct GroundShadowEntry* unk20 DAT_COUNT(unk24);
     s32 unk24;
