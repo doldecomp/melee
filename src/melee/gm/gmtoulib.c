@@ -202,6 +202,7 @@ static inline void gmTournament_SetBracketByes(BracketEntry* entries,
 
 void fn_8018A514(int count, float val)
 {
+    int j;
     s32 region;
     BracketEntry* entries;
     BracketSrcEntry* src;
@@ -257,14 +258,10 @@ void fn_8018A514(int count, float val)
         lbl_80473AB8[i].x26 = src->x1D;
         lbl_80473AB8[i].x27 = src->x1F;
         lbl_80473AB8[i].x28 = src->x20;
-        lbl_80473AB8[i].slots[0].x52 = 9;
-        lbl_80473AB8[i].slots[0].x32 = 0;
-        lbl_80473AB8[i].slots[1].x52 = 9;
-        lbl_80473AB8[i].slots[1].x32 = 0;
-        lbl_80473AB8[i].slots[2].x52 = 9;
-        lbl_80473AB8[i].slots[2].x32 = 0;
-        lbl_80473AB8[i].slots[3].x52 = 9;
-        lbl_80473AB8[i].slots[3].x32 = 0;
+        for (j = 0; j < 4; j++) {
+            lbl_80473AB8[i].slots[j].x52 = 9;
+            lbl_80473AB8[i].slots[j].x32 = 0;
+        }
         lbl_80473AB8[i].slots[0].x30 = src->x21;
         lbl_80473AB8[i].slots[1].x30 = src->x22;
         lbl_80473AB8[i].slots[2].x30 = src->x23;
@@ -275,7 +272,7 @@ void fn_8018A514(int count, float val)
     if (region == 0) {
         gmTournament_SetBracketByes(entries, count);
     }
-    PAD_STACK(24);
+    PAD_STACK(8);
 }
 
 void fn_8018A970(int arg0)
