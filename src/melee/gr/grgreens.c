@@ -159,13 +159,6 @@ StageData grGr_StageData = {
     0,
 };
 
-#ifdef MUST_MATCH
-static void order_data(void)
-{
-    (void) "%s:%d: couldn t get gobj(id=%d)\n";
-}
-#endif
-
 static u8 grGr_8049F9E0[0x20];
 
 static inline int randrange(int min, int max);
@@ -247,7 +240,7 @@ Ground_GObj* grGreens_80213524(int id)
             HSD_GObj_SetupProc(gobj, cbs->gobj_proc, 4);
         }
     } else {
-        OSReport((char*) grGr_callbacks + 0xCC, "grgreens.c", 281, id);
+        OSReport("%s:%d: couldn t get gobj(id=%d)\n", __FILE__, 281, id);
     }
     return gobj;
 }
