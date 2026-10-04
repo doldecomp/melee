@@ -251,27 +251,15 @@ int hsd_80392E80(void)
 
 bool hsd_803931A4(s32 exi_channel)
 {
+    int i;
     s32 channel;
     s32* channel_flags;
-    PAD_STACK(16);
+    PAD_STACK(8);
 
     channel_flags = (s32*) hsd_804CF740;
-    channel_flags[0] = 0;
-    channel_flags[1] = 0;
-    channel_flags[2] = 0;
-    channel_flags[3] = 0;
-    channel_flags[4] = 0;
-    channel_flags[5] = 0;
-    channel_flags[6] = 0;
-    channel_flags[7] = 0;
-    channel_flags[8] = 0;
-    channel_flags[9] = 0;
-    channel_flags[10] = 0;
-    channel_flags[11] = 0;
-    channel_flags[12] = 0;
-    channel_flags[13] = 0;
-    channel_flags[14] = 0;
-    channel_flags[15] = 0;
+    for (i = 0; i < 16; i++) {
+        channel_flags[i] = 0;
+    }
     channel_flags[0] = 1;
     channel_flags[8] = 1;
     channel_flags[15] = 1;

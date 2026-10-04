@@ -338,7 +338,7 @@ void hsd_80398A08(u32 unused)
     (void) ptclref_804D0E5C;
 
     HSD_ObjAllocInit(&hsd_804D0F60.alloc_data, sizeof(HSD_Particle), 4);
-    PAD_STACK(16);
+    PAD_STACK(4);
 
     for (i = 0; i < 16; i++) {
         hsd_804D0908[i] = NULL;
@@ -354,14 +354,9 @@ void hsd_80398A08(u32 unused)
         hsd_804D0948[i] = NULL;
     }
     psCallback = NULL;
-    hsd_804D08E8[0] = NULL;
-    hsd_804D08E8[1] = NULL;
-    hsd_804D08E8[2] = NULL;
-    hsd_804D08E8[3] = NULL;
-    hsd_804D08E8[4] = NULL;
-    hsd_804D08E8[5] = NULL;
-    hsd_804D08E8[6] = NULL;
-    hsd_804D08E8[7] = NULL;
+    for (i = 0; i < 8; i++) {
+        hsd_804D08E8[i] = NULL;
+    }
 }
 
 HSD_Particle* psGenerateParticle0(HSD_Particle** head, int linkNo, int bank,
