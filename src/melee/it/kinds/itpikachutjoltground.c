@@ -73,7 +73,7 @@ Item_GObj* itPikachuThunderJolt_Spawn(Item_GObj* owner, Vec3* pos,
     if (item_gobj != NULL) {
         Item* ip = GET_ITEM(item_gobj);
         itPikachutJoltGroundAttributes* attr =
-            ip->xC4_article_data->x4_specialAttributes;
+            &ip->xC4_article_data->x4_specialAttributes->pikachut_jolt_ground;
         if (it_8026E9A4(item_gobj, &spawn.pos, &spawn.prev_pos,
                         &coll_normal) != 0)
         {
@@ -115,7 +115,7 @@ void it_802B3554(Item_GObj* gobj, HSD_GObj* owner)
     Item* ip = GET_ITEM(gobj);
     HSD_JObj* jobj = GET_JOBJ(gobj);
     itPikachutJoltGroundAttributes* attr =
-        ip->xC4_article_data->x4_specialAttributes;
+        &ip->xC4_article_data->x4_specialAttributes->pikachut_jolt_ground;
     f64 angle;
     PAD_STACK(4);
 
@@ -152,28 +152,26 @@ bool itPikachutjoltground_UnkMotion0_Anim(Item_GObj* gobj)
     return it_80273130(gobj);
 }
 
+static inline bool isLinkBroken(Item_GObj* gobj, Item* ip)
+{
+    if (gobj != NULL && ip != NULL) {
+        if (ip->xDD4_itemVar.pikachujoltground.xDDC == NULL) {
+            return true;
+        }
+        if (it_802B3EFC(ip->xDD4_itemVar.pikachujoltground.xDDC) != gobj) {
+            return true;
+        }
+    }
+    return false;
+}
+
 bool itPikachutjoltground_UnkMotion1_Anim(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
-    bool flag;
     if (ip->xDD4_itemVar.pikachujoltground.xDDC == NULL) {
         return true;
     }
-    if ((gobj != NULL) && (ip != NULL)) {
-        if (ip->xDD4_itemVar.pikachujoltground.xDDC == NULL) {
-            flag = true;
-        } else if (it_802B3EFC(ip->xDD4_itemVar.pikachujoltground.xDDC) !=
-                   gobj)
-        {
-            flag = true;
-        } else {
-            goto block_8;
-        }
-    } else {
-    block_8:
-        flag = false;
-    }
-    if (flag == true) {
+    if (isLinkBroken(gobj, ip) == true) {
         return true;
     }
     if (itPikachutjoltground_UnkMotion0_Anim(gobj) == true) {
@@ -187,7 +185,7 @@ void itPikachutjoltground_UnkMotion0_Phys(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     itPikachutJoltGroundAttributes* attr =
-        ip->xC4_article_data->x4_specialAttributes;
+        &ip->xC4_article_data->x4_specialAttributes->pikachut_jolt_ground;
     ip->x40_vel.x = attr->x8 * cosf(ip->xDD4_itemVar.pikachujoltground.xDD4);
     ip->x40_vel.y = attr->x8 * sinf(ip->xDD4_itemVar.pikachujoltground.xDD4);
 }
@@ -262,7 +260,8 @@ bool itPikachutjoltground_UnkMotion1_Coll(Item_GObj* gobj)
         {
             Item* ip2 = GET_ITEM(gobj);
             itPikachutJoltGroundAttributes* attr =
-                ip2->xC4_article_data->x4_specialAttributes;
+                &ip2->xC4_article_data->x4_specialAttributes
+                     ->pikachut_jolt_ground;
             bool flag;
 
             if (0.0f == attr->xC) {

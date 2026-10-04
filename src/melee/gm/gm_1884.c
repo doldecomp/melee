@@ -211,8 +211,6 @@ void fn_80188644(void)
     Vec3 sp10;
     int saved_count;
 
-    PAD_STACK(8);
-
     saved_count = lbl_80473700.count;
     lbl_80473700.count = 1;
     Player_SetFacingDirection(0, 1.0f);
@@ -235,15 +233,10 @@ void fn_80188644(void)
         }
     }
 
-    gm_80473814.menu_values[0] = 0;
-    gm_80473814.menu_values[1] = 0;
-    gm_80473814.menu_values[2] = 0;
-    gm_80473814.menu_values[3] = 0;
-    saved_count = 0;
-    gm_80473814.menu_values[4] = saved_count;
-    gm_80473814.menu_values[5] = saved_count;
-    gm_80473814.menu_values[6] = saved_count;
-    gm_80473814.menu_values[saved_count] = 2;
+    for (i = 0; i < 7; i++) {
+        gm_80473814.menu_values[i] = 0;
+    }
+    gm_80473814.menu_values[0] = 2;
 }
 
 void fn_80188738(HSD_JObj* arg0)

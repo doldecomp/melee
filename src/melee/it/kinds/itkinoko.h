@@ -5,17 +5,8 @@
 
 #include <melee/it/forward.h>
 
+#include <melee/it/itemattrs.h> // IWYU pragma: export
 #include <melee/it/kinds/types.h>
-
-typedef struct KinokoAnim {
-    HSD_AnimJoint* joint;
-} KinokoAnim;
-
-typedef struct KinokoAttrs {
-    f32 x0;
-    f32 x4;
-    s32 x8;
-} KinokoAttrs;
 
 HSD_AnimJoint* it_80293660(int idx);
 void itKinoko_Logic26_Spawned(Item_GObj*);

@@ -26,8 +26,7 @@
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/random.h>
 
-#define GET_ATTRS(ip)                                                         \
-    ((itLikelikeAttributes*) ip->xC4_article_data->x4_specialAttributes)
+#define GET_ATTRS(ip) (&ip->xC4_article_data->x4_specialAttributes->likelike)
 
 const Vec3 zero_vec = { 0.0f, 0.0f, 0.0f };
 
@@ -329,7 +328,7 @@ void itLikelike_UnkMotion1_Phys(Item_GObj* gobj)
     PAD_STACK(8);
 
     ip = GET_ITEM(gobj);
-    attr = (article = ip->xC4_article_data)->x4_specialAttributes;
+    attr = &(article = ip->xC4_article_data)->x4_specialAttributes->likelike;
 
     temp_r3 = ip->xDD4_itemVar.likelike.x44;
     if (temp_r3 == 0) {

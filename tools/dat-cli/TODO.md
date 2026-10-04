@@ -2,7 +2,8 @@
 
 ## Samples
 
-- `PlSs` `x352D8` (66.7%) and `PlGw` `x78F0` (85.7%) don't match. PlSs's
+- `PlSs` `x8_hurtbones_x352D8` (66.7%) and `PlGw` `dyn_descs_0_x78F0`
+  (85.7%) don't match. PlSs's
   cause: `ftData_Item` is `Article*` for every slot, but Samus's slot 4 is
   `UNK_SAMUS_S1` (the grapple beam accessory; `ftSs_Init_CreateThrowGrapple
   Beam`), so everything behind `ftDataSamus.x48_items->[4]` is mistyped (8
@@ -12,9 +13,21 @@
 - `types unhoisted` lists dat types declared in `.c` files: none left. The
   stage `*_YakumonoParam` structs aren't reachable (`void*` in the stage
   info) and differ per stage.
+- `PlFx` `x0_common_attr_x4018` is an `ItemAttr` sample, but two other
+  samples point to it as `HSD_ShapeAnimJoint*` and `HSD_AnimJoint*` (casts
+  in `ftDataFox.c`). Likely a field that is a union of those, chosen by
+  something the walk doesn't bind.
 - A union object whose tag chooses no member has no sample (`CmdUnion`,
   which is a script; item attributes of fighter items, whose kind isn't
   bound).
+
+- The generated C has some redundant parentheses (clang-tidy is off for
+  `src/` in the build directory, so nothing reports them). Find and drop
+  them in codegen.
+- objdiff can diff whole archives: the cost is the size of each symbol,
+  not of the object, and blob data is understood and typed data is
+  sliced. Sampling could become a choice rather than a necessity
+  (`MELEE_DAT_SAMPLES_ALL` for every archive).
 
 ## Walk findings
 
@@ -42,8 +55,6 @@
   would type `Article.x4_special` for fighter items.
 - Fighters' part animations (`ftData_x1C.x8`) sit next to `HSD_AnimJoint`
   trees that nothing points to. Their relocations can't be explained.
-- `EffectDataTable` only has its two particle banks. The records after them
-  (an `f32` and four pointers each) aren't typed.
 
 Not errors:
 
@@ -57,20 +68,24 @@ Not errors:
   the item kind's `ItemStateTable`, plus one. Replace with a `DAT_COUNT`
   based on `Article::kind` once the counts are available (item state enums,
   or reading the tables from the ELF).
-- `ItemSpecialAttributes` covers 25 common item kinds. Missing:
-  - types defined in `.c` files: G_Shell, MSBomb, StarRod, Hammer,
-    StarRod_Star
-  - inconsistent types: R_Shell, Foods, Kinoko
-  - never used: ScBall, RabbitC, MetalB, Spycloak
-  - all character items and Pokémon
+- `ItemSpecialAttributes` declares the layouts and shared views used by
+  item callers, but only 25 variants have `DAT_IF` conditions. Bind and
+  annotate the remaining common items, character items, and Pokémon,
+  and disambiguate shared views (R_Shell, Kinoko). ScBall and Spycloak
+  still lack layouts.
+- Inline arrays such as `itFoodsAttributes.entries` use `DAT_EXTENT` even
+  when a sibling field gives their count. Teach `DAT_COUNT` walks to handle
+  inline arrays as well as pointers.
 - `ftData.xC`/`x14` (actions), `x1C` (part animations) and their `x8`,
   and `ftData_x20.x0` use `DAT_EXTENT`. The counts are in DOL tables per
   fighter kind (`ftData_Table_Unk0`, `ftData_UnkIntPairs`), or only in code.
-- `FigaTree.tracks` uses `DAT_EXTENT`. Its length is the sum of `nodes` up
-  to -1, which needs a new annotation.
-- `*_image` and `*_tlut` are `u8[]`/`u16[]` up to the next public or
-  pointer target. Their exact sizes come from their `HSD_ImageDesc` and
-  `HSD_TlutDesc`, which a real element type could use.
+- `FigaTree.tracks` uses `DAT_EXTENT`. Its length is the sum of `nodes`
+  (`DAT_TERMINATED(-1)`), which needs a new annotation.
+- `*_image` and `*_tlut` are typed `u8[]`/`u16[]` up to the next public or
+  pointer target, for the ones no reached `HSD_ImageDesc` or
+  `HSD_TlutDesc` sizes (e.g. GrIz and GrPu, whose descs nothing reached
+  points to). Vertex arrays (`HSD_VtxDescList.vertex`) are still raw: their
+  count is the largest index the display lists use.
 
 ## Coverage
 
@@ -96,6 +111,13 @@ Not errors:
 - Only pointers are checked against relocations. Wrong scalar types go
   unnoticed.
 
+## Objects
+
+- A sample whose type runs into the next one: `coll_data` in `GrBb.dat`
+  ends 4 bytes into `stage_params_xC6B98`. The type is probably too long.
+- Unit diffs scale with symbol count: the `Pl*AJ.dat` animation archives
+  have ~44k symbols each and take ~4s to diff in objdiff.
+
 ## Reporting (low priority)
 
 - decomp.dev ingests objdiff-format reports from workflow artifacts named
@@ -104,7 +126,6 @@ Not errors:
   report as REL-like units would lower `GALE01`'s data percentage:
   decomp.dev sums every unit and ignores `module_name`.
 - The report has to come from dat-cli: `objdiff-cli report` measures data
-  per combined section and misses relocation differences, and can't hold
-  whole archives. Units per archive, `matched_data` as the bytes of objects
+  per combined section and misses relocation differences. Units per archive, `matched_data` as the bytes of objects
   whose sample matches.
 - Unknown whether CI's `/orig` has `orig/GALE01/files`.

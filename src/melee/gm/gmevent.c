@@ -1400,11 +1400,26 @@ void gm_801BC9E8(HSD_GObj* gobj)
     }
 }
 
+/// Restores the stock of a defeated player that is not Sheik.
+static inline bool isSeakDefeated(int slot)
+{
+    HSD_GObj* fighter_gobj;
+
+    if (Player_GetStocks(slot) <= 0 &&
+        (fighter_gobj = Player_GetEntity(slot)) != NULL)
+    {
+        if (ftLib_GetKind(fighter_gobj) == Ft_Kind_Seak) {
+            return true;
+        }
+        Player_SetStocks(slot, 1);
+        gm_8016F00C(slot);
+    }
+    return false;
+}
+
 void gm_801BCAF0(HSD_GObj* gobj)
 {
-    HSD_GObj* temp_r3;
     VsSceneController* temp_r3_2;
-    s32 var_r0;
     s32 var_r0_2;
     struct EventData* temp_r30;
     s32 i;
@@ -1413,21 +1428,7 @@ void gm_801BCAF0(HSD_GObj* gobj)
 
     count = 0;
     for (i = 1; i < 3; i += 1) {
-        if ((Player_GetStocks(i) <= 0) &&
-            (temp_r3 = Player_GetEntity(i), ((temp_r3 == NULL) == 0)))
-        {
-            if (ftLib_GetKind(temp_r3) == Ft_Kind_Seak) {
-                var_r0 = 1;
-            } else {
-                Player_SetStocks(i, 1);
-                gm_8016F00C(i);
-                goto block_6;
-            }
-        } else {
-        block_6:
-            var_r0 = 0;
-        }
-        if (var_r0 != 0) {
+        if (isSeakDefeated(i)) {
             count += 1;
         }
     }

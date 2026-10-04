@@ -1973,7 +1973,8 @@ s32 hsd_80396A20(void* data)
                 hsd_80394E8C(lbl_8040BC3C.x18);
                 return 1;
             }
-            goto default_case;
+            break;
+
         case 0x400:
             lbl_8040BC3C.x10 = val & ~mask;
             return 1;
@@ -1984,11 +1985,8 @@ s32 hsd_80396A20(void* data)
             ps_push_node((ExcptNode*) &lbl_8040BD74);
             return 1;
         }
-        default:
-        default_case:
-            bit <<= 1;
-            break;
         }
+        bit <<= 1;
     }
     return 0;
 }

@@ -1021,8 +1021,8 @@ void ftCo_800B683C(Fighter* fp)
     f32 var_f2;
 
     f32 var_f2_2;
-    mp_UnkStruct0* temp_r3_2;
-    mp_UnkStruct0* temp_r3_3;
+    mpIsland* temp_r3_2;
+    mpIsland* temp_r3_3;
     s32 temp_r0;
     s32 temp_r0_2;
 
@@ -1809,9 +1809,7 @@ bool ftCo_800B8A9C(Fighter* fp)
                 return true;
             }
         }
-        goto done;
-    }
-    if (ftCo_800A3134(target) != 0 || ftCo_800A3200(target)) {
+    } else if (ftCo_800A3134(target) != 0 || ftCo_800A3200(target)) {
         struct CpuFighter* tmp = &fp->cpu;
         u8* xc8;
         if (*(xc8 = &fp->cpu.xC8) < 8U) {
@@ -1830,93 +1828,94 @@ bool ftCo_800B8A9C(Fighter* fp)
             cpu->xA4 = result;
             return true;
         }
-        goto done;
-    }
-    if (fp->item_gobj != NULL &&
-        ftCo_800A59E4((Item*) fp->item_gobj->user_data))
-    {
-        item = GET_ITEM(fp->item_gobj);
-        if (!ftCo_800A59E4(item)) {
-            weapon_reach = 0.0f;
-        } else {
-            switch (item->kind) {
-            case It_Kind_Harisen:
-                weapon_reach = Fighter_804D64FC->x24[0];
-                break;
-            case It_Kind_LipStick:
-                weapon_reach = Fighter_804D64FC->x24[1];
-                break;
-            case It_Kind_StarRod:
-                weapon_reach = Fighter_804D64FC->x24[2];
-                break;
-            case It_Kind_Sword:
-                weapon_reach = Fighter_804D64FC->x24[3];
-                break;
-            case It_Kind_Bat:
-                weapon_reach = Fighter_804D64FC->x24[4];
-                break;
-            case It_Kind_Parasol:
-                weapon_reach = Fighter_804D64FC->x24[5];
-                break;
-            default:
+    } else {
+        if (fp->item_gobj != NULL &&
+            ftCo_800A59E4((Item*) fp->item_gobj->user_data))
+        {
+            item = GET_ITEM(fp->item_gobj);
+            if (!ftCo_800A59E4(item)) {
                 weapon_reach = 0.0f;
-                break;
+            } else {
+                switch (item->kind) {
+                case It_Kind_Harisen:
+                    weapon_reach = Fighter_804D64FC->x24[0];
+                    break;
+                case It_Kind_LipStick:
+                    weapon_reach = Fighter_804D64FC->x24[1];
+                    break;
+                case It_Kind_StarRod:
+                    weapon_reach = Fighter_804D64FC->x24[2];
+                    break;
+                case It_Kind_Sword:
+                    weapon_reach = Fighter_804D64FC->x24[3];
+                    break;
+                case It_Kind_Bat:
+                    weapon_reach = Fighter_804D64FC->x24[4];
+                    break;
+                case It_Kind_Parasol:
+                    weapon_reach = Fighter_804D64FC->x24[5];
+                    break;
+                default:
+                    weapon_reach = 0.0f;
+                    break;
+                }
+            }
+            result = ftCo_800B52AC(
+                fp, target, (Fighter_804D64FC->x18)[fp->kind], weapon_reach);
+            if (result != 0) {
+                cpu->xA4 = result;
+                return true;
             }
         }
-        result = ftCo_800B52AC(fp, target, (Fighter_804D64FC->x18)[fp->kind],
-                               weapon_reach);
-        if (result != 0) {
-            cpu->xA4 = result;
-            return true;
+        if (cpu->level > 5 && ftCo_800B9F6C(target)) {
+            result =
+                ftCo_800B4AB0(fp, target, (Fighter_804D64FC->x10)[fp->kind]);
+            if (result != 0) {
+                cpu->xA4 = result;
+                return true;
+            }
         }
-    }
-    if (cpu->level > 5 && ftCo_800B9F6C(target)) {
-        result = ftCo_800B4AB0(fp, target, (Fighter_804D64FC->x10)[fp->kind]);
-        if (result != 0) {
-            cpu->xA4 = result;
-            return true;
-        }
-    }
-    {
-        target3 = *target_pp;
-        if (fp->item_gobj != NULL) {
-            var_r0 = 0;
-        } else if (ftCo_800A3200(target3)) {
-            var_r0 = 0;
-        } else {
-            if (ftCo_800A0FB0(&sp1C, &sp34, &sp38, &sp28, -1, -1, -1,
-                              target3->cur_pos.x, 5.0 + target3->cur_pos.y,
-                              target3->cur_pos.x, target3->cur_pos.y - 1000.0,
-                              0.0f) != 0)
-            {
+        {
+            target3 = *target_pp;
+            if (fp->item_gobj != NULL) {
+                var_r0 = 0;
+            } else if (ftCo_800A3200(target3)) {
                 var_r0 = 0;
             } else {
-                var_r0 = 1;
+                if (ftCo_800A0FB0(&sp1C, &sp34, &sp38, &sp28, -1, -1, -1,
+                                  target3->cur_pos.x, 5.0 + target3->cur_pos.y,
+                                  target3->cur_pos.x,
+                                  target3->cur_pos.y - 1000.0, 0.0f) != 0)
+                {
+                    var_r0 = 0;
+                } else {
+                    var_r0 = 1;
+                }
+            }
+        }
+        if (var_r0 != 0) {
+            result =
+                ftCo_800B4AB0(fp, target, (Fighter_804D64FC->x1C)[fp->kind]);
+            if (result != 0) {
+                cpu->xA4 = result;
+                cpu->xF8_b7 = 1;
+                return true;
+            }
+        }
+        result = ftCo_800B4AB0(fp, target, (Fighter_804D64FC->x4)[fp->kind]);
+        if (result != 0) {
+            cpu->xA4 = result;
+            return true;
+        }
+        if (cpu->x50 != 0) {
+            result = ftCo_800B5AB0(fp, (void*) cpu->x50,
+                                   (Fighter_804D64FC->x14)[fp->kind]);
+            if (result != 0) {
+                cpu->xA4 = result;
+                return true;
             }
         }
     }
-    if (var_r0 != 0) {
-        result = ftCo_800B4AB0(fp, target, (Fighter_804D64FC->x1C)[fp->kind]);
-        if (result != 0) {
-            cpu->xA4 = result;
-            cpu->xF8_b7 = 1;
-            return true;
-        }
-    }
-    result = ftCo_800B4AB0(fp, target, (Fighter_804D64FC->x4)[fp->kind]);
-    if (result != 0) {
-        cpu->xA4 = result;
-        return true;
-    }
-    if (cpu->x50 != 0) {
-        result = ftCo_800B5AB0(fp, (void*) cpu->x50,
-                               (Fighter_804D64FC->x14)[fp->kind]);
-        if (result != 0) {
-            cpu->xA4 = result;
-            return true;
-        }
-    }
-done:
     cpu->xA4 = 0;
     return false;
 }
@@ -2015,7 +2014,7 @@ void ftCo_800B9340(Fighter* fp)
 {
     struct CpuFighter* temp_r30 = &fp->cpu;
     Fighter* temp_r29 = fp->cpu.x44;
-    mp_UnkStruct0* temp_r3 = mpIsland_8005AC14(&fp->cur_pos, -100.0F);
+    mpIsland* temp_r3 = mpIsland_8005AC14(&fp->cur_pos, -100.0F);
 
     if (temp_r3 == NULL || temp_r29 == NULL ||
         temp_r3 != mpIsland_8005AC14(&temp_r29->cur_pos, -100.0F))
@@ -2029,11 +2028,11 @@ void ftCo_800B9340(Fighter* fp)
         ftCo_800B463C(fp, CpuCmd_ReleaseB);
         ftCo_800B46B8(fp, CpuCmd_WaitFor, 1);
         ftCo_800B463C(fp, CpuCmd_Done);
-    } else if (ABS(temp_r3->x14.x - fp->cur_pos.x) < 10.0) {
+    } else if (ABS(temp_r3->pos1.x - fp->cur_pos.x) < 10.0) {
         ftCo_800B46B8(fp, CpuCmd_SetLstickY, 0);
         ftCo_800B46B8(fp, CpuCmd_SetLstickX, -0x7F);
         ftCo_800B463C(fp, CpuCmd_Done);
-    } else if (ABS(temp_r3->x8.x - fp->cur_pos.x) < 10.0) {
+    } else if (ABS(temp_r3->pos0.x - fp->cur_pos.x) < 10.0) {
         ftCo_800B46B8(fp, CpuCmd_SetLstickY, 0);
         ftCo_800B46B8(fp, CpuCmd_SetLstickX, 0x7F);
         ftCo_800B463C(fp, CpuCmd_Done);

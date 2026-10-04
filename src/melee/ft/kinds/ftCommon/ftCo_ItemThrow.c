@@ -97,32 +97,22 @@ bool ftCo_80094EA4(HSD_GObj* gobj)
                 var_f31 < p_ftCommonData->xD8)
             {
                 msid = ftCo_MS_HeavyThrowLw4;
-            } else {
-                if (ABS(stick_x) >= p_ftCommonData->x98) {
-                    if (ABS(stick_angle) <= p_ftCommonData->x20_radians) {
-                        msid = stick_x * fp->facing_dir >= 0
-                                   ? ftCo_MS_HeavyThrowF
-                                   : ftCo_MS_HeavyThrowB;
-                    } else {
-                        goto block_32;
-                    }
-                } else {
-                block_32:
-                    if (stick_y >=
-                            p_ftCommonData->attackhi3_stick_threshold_y &&
-                        stick_angle > p_ftCommonData->x20_radians)
-                    {
-                        msid = ftCo_MS_HeavyThrowHi;
-                    } else {
-                        if (stick_y <= p_ftCommonData->xB0 &&
-                            (stick_angle < -p_ftCommonData->x20_radians))
-                        {
-                            msid = ftCo_MS_HeavyThrowLw;
-                        } else if (ret != 0) {
-                            msid = ftCo_MS_HeavyThrowF;
-                        }
-                    }
-                }
+            } else if (ABS(stick_x) >= p_ftCommonData->x98 &&
+                       ABS(stick_angle) <= p_ftCommonData->x20_radians)
+            {
+                msid = stick_x * fp->facing_dir >= 0 ? ftCo_MS_HeavyThrowF
+                                                     : ftCo_MS_HeavyThrowB;
+            } else if (stick_y >=
+                           p_ftCommonData->attackhi3_stick_threshold_y &&
+                       stick_angle > p_ftCommonData->x20_radians)
+            {
+                msid = ftCo_MS_HeavyThrowHi;
+            } else if (stick_y <= p_ftCommonData->xB0 &&
+                       stick_angle < -p_ftCommonData->x20_radians)
+            {
+                msid = ftCo_MS_HeavyThrowLw;
+            } else if (ret != 0) {
+                msid = ftCo_MS_HeavyThrowF;
             }
         }
     }
@@ -371,89 +361,46 @@ void ftCo_800958FC(HSD_GObj* gobj, FtMotionId msid)
 void ftCo_80095A30(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    float var_f1_2;
-    float var_f1_3;
-    int var_r0;
-    int var_r0_2;
-    int var_r0_3;
-    int var_r29;
-    float var_f1;
-
+    int msid;
     PAD_STACK(0x8);
 
-    var_f1 = fp->input.lstick[0].x;
-    if (var_f1 < 0.0f) {
-        var_f1 = -var_f1;
-    }
-    if (var_f1 >= p_ftCommonData->dash_smash_stick_threshold &&
+    if (ABS(fp->input.lstick[0].x) >=
+            p_ftCommonData->dash_smash_stick_threshold &&
         fp->active_sticky.lstick.x <
             p_ftCommonData->dash_smash_window + p_ftCommonData->x44)
     {
-        if (fp->input.lstick[0].x * fp->facing_dir >= 0.0f) {
-            var_r0 = 0x6C;
-        } else {
-            var_r0 = 0x6D;
-        }
-        var_r29 = var_r0;
+        msid = fp->input.lstick[0].x * fp->facing_dir >= 0.0f
+                   ? ftCo_MS_LightThrowF4
+                   : ftCo_MS_LightThrowB4;
+    } else if (fp->input.lstick[0].y >= p_ftCommonData->xCC &&
+               fp->active_sticky.lstick.y <
+                   p_ftCommonData->xD0 + fp->co_attrs.jump_startup_time)
+    {
+        msid = ftCo_MS_LightThrowHi4;
+    } else if (fp->input.lstick[0].y <= p_ftCommonData->xD4 &&
+               fp->active_sticky.lstick.y < p_ftCommonData->xD8)
+    {
+        msid = ftCo_MS_LightThrowLw4;
+    } else if (ABS(fp->input.lstick[0].x) >= p_ftCommonData->x98 &&
+               ABS(ftCo_GetLStickAngle(fp)) <= p_ftCommonData->x20_radians)
+    {
+        msid = fp->input.lstick[0].x * fp->facing_dir >= 0.0f
+                   ? ftCo_MS_LightThrowF
+                   : ftCo_MS_LightThrowB;
+    } else if (fp->input.lstick[0].y >=
+                   p_ftCommonData->attackhi3_stick_threshold_y &&
+               ftCo_GetLStickAngle(fp) > p_ftCommonData->x20_radians)
+    {
+        msid = ftCo_MS_LightThrowHi;
+    } else if (fp->input.lstick[0].y <= p_ftCommonData->xB0 &&
+               ftCo_GetLStickAngle(fp) < -p_ftCommonData->x20_radians)
+    {
+        msid = ftCo_MS_LightThrowLw;
     } else {
-        if (fp->input.lstick[0].y >= p_ftCommonData->xCC &&
-            fp->active_sticky.lstick.y <
-                p_ftCommonData->xD0 + fp->co_attrs.jump_startup_time)
-        {
-            var_r29 = 0x6E;
-        } else {
-            if (fp->input.lstick[0].y <= p_ftCommonData->xD4 &&
-                fp->active_sticky.lstick.y < p_ftCommonData->xD8)
-            {
-                var_r29 = 0x6F;
-            } else {
-                var_f1_2 = fp->input.lstick[0].x;
-                if (var_f1_2 < 0.0f) {
-                    var_f1_2 = -var_f1_2;
-                }
-                if (var_f1_2 >= p_ftCommonData->x98) {
-                    if (ftCo_GetLStickAngle(fp) < 0.0f) {
-                        var_f1_3 = -ftCo_GetLStickAngle(fp);
-                    } else {
-                        var_f1_3 = ftCo_GetLStickAngle(fp);
-                    }
-                    if (var_f1_3 <= p_ftCommonData->x20_radians) {
-                        if (fp->input.lstick[0].x * fp->facing_dir >= 0.0f) {
-                            var_r0_2 = 0x5E;
-                        } else {
-                            var_r0_2 = 0x5F;
-                        }
-                        var_r29 = var_r0_2;
-                    } else {
-                        goto block_25;
-                    }
-                } else {
-                block_25:
-                    if (fp->input.lstick[0].y >=
-                            p_ftCommonData->attackhi3_stick_threshold_y &&
-                        ftCo_GetLStickAngle(fp) > p_ftCommonData->x20_radians)
-                    {
-                        var_r29 = 0x60;
-                    } else {
-                        if (fp->input.lstick[0].y <= p_ftCommonData->xB0 &&
-                            ftCo_GetLStickAngle(fp) <
-                                -p_ftCommonData->x20_radians)
-                        {
-                            var_r29 = 0x61;
-                        } else {
-                            if (it_8026B30C(fp->item_gobj) == 0) {
-                                var_r0_3 = 0x5E;
-                            } else {
-                                var_r0_3 = 0x63;
-                            }
-                            var_r29 = var_r0_3;
-                        }
-                    }
-                }
-            }
-        }
+        msid = it_8026B30C(fp->item_gobj) == 0 ? ftCo_MS_LightThrowF
+                                               : ftCo_MS_LightThrowDrop;
     }
-    ftCo_800957F4(gobj, var_r29);
+    ftCo_800957F4(gobj, msid);
 }
 
 void ftCo_80095D5C(Fighter* fp, Vec3* arg1)

@@ -1,7 +1,8 @@
 # Samples of the .dat archives' data, typed by the DWARF build and compared
-# with objdiff (see tools/dat-cli). Each archive is a unit, built in four
-# steps: slice (archive → target/<unit>.o), codegen (→ src/<unit>.c, which
-# includes a header and source per root in src/<unit>/), format (in place)
+# with objdiff (see tools/dat-cli). Each archive is a unit, named by its
+# module and file (Pl/PlMr), built in four steps: slice (archive →
+# target/<unit>.o), codegen (→ src/<unit>.c, which includes a header and
+# source per root in src/<unit>/), format (in place)
 # and compile (→ base/<unit>.o). The build directory is also the objdiff
 # project.
 include_guard(GLOBAL)
@@ -21,6 +22,12 @@ endif()
 set(MELEE_DAT "" CACHE FILEPATH "melee-dat binary; built with cargo if empty")
 set(MELEE_DAT_FILES "${CMAKE_SOURCE_DIR}/orig/${MELEE_VERSION}/files"
     CACHE PATH "The game's files, with its .dat archives")
+file(GLOB _dat_archives CONFIGURE_DEPENDS LIST_DIRECTORIES false "${MELEE_DAT_FILES}/*.dat")
+if(NOT _dat_archives)
+    message(FATAL_ERROR
+        "No .dat archives found in MELEE_DAT_FILES (${MELEE_DAT_FILES}). "
+        "Extract the game's files there or set MELEE_DAT_FILES to their directory.")
+endif()
 # What to sample is the user's choice, not the project's
 set(MELEE_DAT_SAMPLES_ALL "" CACHE STRING
     "Archives (globs, e.g. PlFx.dat;Gr*.dat) to sample every typed object of, not one instance per type")
@@ -64,6 +71,9 @@ else()
     )
 endif()
 
+# The generated C isn't the repository's to tidy
+file(WRITE "${CMAKE_CURRENT_BINARY_DIR}/src/.clang-tidy" "Checks: '-*'\n")
+
 # The types, deduplicated once for every step
 add_custom_command(
     OUTPUT types.bin
@@ -86,20 +96,32 @@ $<JOIN:$<FILTER:$<TARGET_PROPERTY:melee,COMPILE_OPTIONS>,EXCLUDE,^-g|^-fdebug-ma
 -fno-zero-initialized-in-bss
 ")
 
-file(GLOB _dat_archives CONFIGURE_DEPENDS "${MELEE_DAT_FILES}/*.dat")
+# What the generated C includes, from the tool
+add_custom_command(
+    OUTPUT src/macros.h
+    COMMAND "${_dat_tool}" samples macros -o src/macros.h
+    DEPENDS "${_dat_tool}"
+    COMMENT "Writing src/macros.h"
+    VERBATIM
+)
+
 set(_dat_sidecars)
 set(_dat_bases)
 set(_dat_commands)
 foreach(_archive IN LISTS _dat_archives)
     get_filename_component(_file "${_archive}" NAME)
-    get_filename_component(_unit "${_archive}" NAME_WE)
+    get_filename_component(_stem "${_archive}" NAME_WE)
+    # Grouped by module, the name's first two letters: Pl/PlMr, Gr/GrFs
+    string(SUBSTRING "${_stem}" 0 2 _module)
+    set(_unit "${_module}/${_stem}")
     set(_target "target/${_unit}.o")
     set(_sidecar "target/${_unit}.samples")
-    set(_types "types/${_unit}.types")
+    set(_types "metadata/${_unit}.types")
     set(_layout "target/${_unit}.ld")
+    set(_rest "target/${_unit}.rest.o")
     set(_object "obj/${_unit}.o")
     set(_source "src/${_unit}.c")
-    set(_formatted "stamp/${_unit}.formatted")
+    set(_formatted "metadata/${_unit}.formatted")
     set(_base "base/${_unit}.o")
 
     set(_all)
@@ -121,7 +143,7 @@ foreach(_archive IN LISTS _dat_archives)
         VERBATIM
     )
     add_custom_command(
-        OUTPUT "${_target}" "${_sidecar}" "${_layout}"
+        OUTPUT "${_target}" "${_sidecar}" "${_layout}" "${_rest}"
         COMMAND "${_dat_tool}" samples slice "${_file}" "${_dat_config}"
             -p "${CMAKE_SOURCE_DIR}" --types types.bin
             --files "${MELEE_DAT_FILES}" -o "${_target}" ${_all} ${_dat_exclude}
@@ -160,9 +182,12 @@ foreach(_archive IN LISTS _dat_archives)
         COMMAND "${CMAKE_C_COMPILER}" "@${_dat_flags}" -fdata-sections
             -MD -MF "${_base}.d" -MT "${_base}"
             -c "${_source}" -o "${_object}"
-        COMMAND "${CMAKE_LINKER}" -r -T "${_layout}" "${_object}"
+        # With the rest of the archive the walk explains, by name and size
+        COMMAND "${CMAKE_LINKER}" -r -T "${_layout}" "${_object}" "${_rest}"
             -o "${_base}"
-        DEPENDS "${_source}" "${_formatted}" "${_layout}" "${_dat_flags}"
+        DEPENDS "${_source}" "${_formatted}" "${_layout}" "${_rest}"
+            "${_dat_flags}"
+            src/macros.h
         DEPFILE "${_base}.d"
         COMMENT "Compiling ${_source}"
         VERBATIM

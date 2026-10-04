@@ -286,14 +286,11 @@ void fn_80208A38(HSD_GObj* gobj)
     HSD_JObj* ejobj;
     int i;
     float unused1;
-    PAD_STACK(16);
+    PAD_STACK(8);
 
-    flags[0] = 0;
-    flags[1] = 0;
-    flags[2] = 0;
-    flags[3] = 0;
-    flags[4] = 0;
-    flags[5] = 0;
+    for (i = 0; i < 6; i++) {
+        flags[i] = 0;
+    }
     {
         int idx = HSD_Randi(6);
         flag[idx] = 1;
@@ -326,7 +323,7 @@ void grShrineRoute_80208D14(Ground_GObj* gobj)
     Ground* gp = gobj->user_data;
     Vec3 center;
     int i;
-    PAD_STACK(12);
+    PAD_STACK(4);
 
     mpLib_80058560();
     grAnime_801C8138(gobj, gp->map_id, 0);
@@ -370,9 +367,9 @@ void grShrineRoute_80208D14(Ground_GObj* gobj)
             }
         }
     } else {
-        gp->u.shrineroute.platforms[0].jobj = NULL;
-        gp->u.shrineroute.platforms[1].jobj = NULL;
-        gp->u.shrineroute.platforms[2].jobj = NULL;
+        for (i = 0; i < 3; i++) {
+            gp->u.shrineroute.platforms[i].jobj = NULL;
+        }
     }
 
     Ground_801C10B8(gobj, fn_80208A38);

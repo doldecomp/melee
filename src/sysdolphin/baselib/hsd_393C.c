@@ -290,32 +290,28 @@ s32 hsd_803941E8(void* xfb_out_ptr, void* xfb_cur_ptr)
 
     vi_base = (u8*) &HSD_VIData;
     nb_xfb = HSD_VIData.nb_xfb;
-    for (i = 0; i < nb_xfb; i++) {
+    for (i = 0; i < nb_xfb; vi_base += 0x60, i++) {
         if (i == last_draw) {
-            goto next1;
+            continue;
         }
         buf = *(u32*) (vi_base + 0x58);
         xfb_out[0] = buf;
         if (buf != 0) {
             break;
         }
-    next1:
-        vi_base += 0x60;
     }
 
     i++;
     vi_base = (u8*) &HSD_VIData + i * 0x60;
-    for (; i < nb_xfb; i++) {
+    for (; i < nb_xfb; vi_base += 0x60, i++) {
         if (i == last_draw) {
-            goto next2;
+            continue;
         }
         buf = *(u32*) (vi_base + 0x58);
         xfb_out[1] = buf;
         if (buf != 0) {
             break;
         }
-    next2:
-        vi_base += 0x60;
     }
 
     if ((u32) xfb_out[0] == 0) {

@@ -27,15 +27,6 @@
 #define itkpf_LeftWall 4
 #define itkpf_RightWall 8
 
-typedef struct itKoopaFlame_Attributes {
-    float x0_lifetime;        // 28.0
-    float x4_hitbox_lifetime; // 20.0
-    float x8_min_speed;       // 1.9
-    float xC_max_speed;       // 2.2
-    float x10_min_angle;      // 2.1816616
-    float x14_max_angle;      // 2.5307274
-} itKoopaFlame_Attributes;
-
 ItemStateTable ItemStateTable_KoopaFlame[] = {
     {
         0,
@@ -126,7 +117,7 @@ Item_GObj* itKoopaFlame_Spawn(Fighter_GObj* parent, Vec* pos, f32 facing_dir,
     if (gobj != NULL) {
         Item* it = gobj->user_data;
         itKoopaFlame_Attributes* attrs =
-            it->xC4_article_data->x4_specialAttributes;
+            &it->xC4_article_data->x4_specialAttributes->koopa_flame;
         Item_ClearCmdVars(it);
         it_80275158(gobj, (it->xDD4_itemVar.koopaflame.x2C_lifetime =
                                attrs->x0_lifetime));
@@ -195,7 +186,7 @@ bool itKoopaFlame_UnkMotion0_Anim(Item_GObj* gobj)
 {
     Item* it = GET_ITEM(gobj);
     itKoopaFlame_Attributes* attrs =
-        it->xC4_article_data->x4_specialAttributes;
+        &it->xC4_article_data->x4_specialAttributes->koopa_flame;
     HSD_JObj* jobj = HSD_GObjGetHSDObj(gobj); // GET_JOBJ does not work here!
     Vec vec;
     if (it->x5D4_hitboxes[0].hit.state != HitCapsule_Disabled) {

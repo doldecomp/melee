@@ -113,7 +113,8 @@ void ftSs_Init_80128B1C(HSD_GObj* gobj, float angle, float arg9, float argA)
     if (fp->ground_or_air == GA_Ground) {
         ftCommon_8007D5D4(fighter2);
     }
-    Fighter_ChangeMotionState(gobj, 0x156, Ft_MF_None, arg9, argA, 0.0f, 0);
+    Fighter_ChangeMotionState(gobj, ftSs_MS_SpecialAirLw, Ft_MF_None, arg9,
+                              argA, 0.0f, 0);
     ftAnim_8006EBA4(gobj);
 }
 

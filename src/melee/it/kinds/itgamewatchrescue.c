@@ -27,7 +27,7 @@ ItemStateTable it_803F79C0[] = { {
 Item_GObj* it_802C8038(Item_GObj* parent, Vec3* arg1, s32 arg2, s32 arg3,
                        f32 farg0, f32 farg1)
 {
-    void** tmp;
+    itGamewatchAttributes* tmp;
     Item* temp_r6;
     SpawnItem spawn;
     Item_GObj* result;
@@ -39,11 +39,11 @@ Item_GObj* it_802C8038(Item_GObj* parent, Vec3* arg1, s32 arg2, s32 arg3,
         result = Item_80268B18(&spawn);
         if (result != NULL) {
             temp_r6 = result->user_data;
-            tmp = temp_r6->xC4_article_data->x4_specialAttributes;
+            tmp = &temp_r6->xC4_article_data->x4_specialAttributes->gamewatch;
             Item_ClearCmdVars(temp_r6);
             temp_r6->xDCC_flag.b3 = false;
             temp_r6->xDD4_itemVar.gamewatchrescue.xDD8 = parent;
-            it_8027CE64(result, parent, *tmp);
+            it_8027CE64(result, parent, tmp->x0);
             it_802C8208(result, arg3);
         }
     } else {
@@ -85,62 +85,32 @@ void it_802C8208(HSD_GObj* hsd_gobj, enum_t msid)
     Item_802694CC(hsd_gobj);
 }
 
+static inline void clearRescue(Item_GObj* item_gobj)
+{
+    if (item_gobj != NULL) {
+        Item* ip = GET_ITEM(item_gobj);
+        ip->xDD4_itemVar.gamewatchrescue.xDD8 = NULL;
+        ip->owner = NULL;
+    }
+}
+
 bool itGamewatchrescue_UnkMotion1_Anim(Item_GObj* item_gobj)
 {
-    Item* item1;
-    Item* item2;
-    // All of these items are unused, but the stack needs padding for a match
-    // so...
-    Item* item3;
-    Item* item4;
-    Item* item5;
-    Item* item6;
-    Item* item7;
+    Item* ip = GET_ITEM(item_gobj);
+    HSD_GObj* rescue_gobj = ip->xDD4_itemVar.gamewatchrescue.xDD8;
+    PAD_STACK(8);
 
-    Item* temp_r3_3;
-    Item* temp_r3_4;
-    HSD_GObj* temp_r3;
-    HSD_GObj* temp_r3_2;
-
-    item1 = GET_ITEM(item_gobj);
-    if ((temp_r3 = item1->xDD4_itemVar.gamewatchrescue.xDD8) != NULL) {
-        if (ftGw_SpecialHi_ItemCheckRescueRemove(temp_r3) == true) {
-            item2 = GET_ITEM(item_gobj);
-            if (item_gobj != NULL && item2 != NULL) {
-                if ((temp_r3_2 = item2->xDD4_itemVar.gamewatchrescue.xDD8) !=
-                        NULL &&
-                    item2->owner == temp_r3_2)
-                {
-                    ftGw_SpecialHi_ItemRescueSetNULL(temp_r3_2);
-                }
-                item2->xDD4_itemVar.gamewatchrescue.xDD8 = NULL;
-                item2->owner = NULL;
-                Item_8026A8EC(item_gobj);
-            }
-            if (item_gobj != NULL) {
-                temp_r3_3 = GET_ITEM(item_gobj);
-                temp_r3_3->xDD4_itemVar.gamewatchrescue.xDD8 = NULL;
-                temp_r3_3->owner = NULL;
-            }
+    if (rescue_gobj != NULL) {
+        if (ftGw_SpecialHi_ItemCheckRescueRemove(rescue_gobj) == true) {
+            it_802C8158(item_gobj);
+            clearRescue(item_gobj);
             return true;
         }
-        goto end;
+    } else {
+        it_802C8158(item_gobj);
+        clearRescue(item_gobj);
+        return true;
     }
-    if (item_gobj != NULL && item1 != NULL) {
-        if (temp_r3 != NULL && item1->owner == temp_r3) {
-            ftGw_SpecialHi_ItemRescueSetNULL(temp_r3);
-        }
-        item1->xDD4_itemVar.gamewatchrescue.xDD8 = NULL;
-        item1->owner = NULL;
-        Item_8026A8EC(item_gobj);
-    }
-    if (item_gobj != NULL) {
-        temp_r3_4 = GET_ITEM(item_gobj);
-        temp_r3_4->xDD4_itemVar.gamewatchrescue.xDD8 = NULL;
-        temp_r3_4->owner = NULL;
-    }
-    return true;
-end:
     return false;
 }
 

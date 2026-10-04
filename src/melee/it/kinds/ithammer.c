@@ -14,12 +14,6 @@
 #include <melee/lb/lbvector.h>
 #include <sysdolphin/baselib/random.h>
 
-typedef struct itHammerData {
-    u32 x0;
-    u32 x4;
-    f32 x8;
-} itHammerData;
-
 /* 293FF4 */ static bool itHammer_UnkMotion0_Anim(HSD_GObj* gobj);
 /* 293FFC */ static void itHammer_UnkMotion0_Phys(HSD_GObj* gobj);
 /* 294000 */ static bool itHammer_UnkMotion0_Coll(HSD_GObj* gobj);
@@ -68,7 +62,7 @@ int it_80293DCC(Item_GObj* gobj)
 {
     Item* item = GET_ITEM((HSD_GObj*) gobj);
     Article* article = item->xC4_article_data;
-    itHammerData* temp_r31 = article->x4_specialAttributes;
+    itHammerData* temp_r31 = &article->x4_specialAttributes->hammer_data;
     if (HSD_Randf() < temp_r31->x8 / 100.0f) {
         int rng = HSD_Randi(temp_r31->x4 - temp_r31->x0);
         return rng + temp_r31->x0;

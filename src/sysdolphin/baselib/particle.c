@@ -53,7 +53,7 @@ typedef struct {
 /* 4D78EC */ u32 hsd_804D78EC = 0;
 /* 4D78F0 */ HSD_CObj* psCamera = NULL;
 /* 4D78F4 */ HSD_SList* hsd_804D78F4 = NULL;
-static HSD_JObj* hsd_804D08E8[8];
+static HSD_JObj* psPointJObj[8];
 /* 4D0908 */ HSD_Particle* hsd_804D0908[16];
 /* 4D0948 */ u32* hsd_804D0948[65];
 /* 4D0A4C */ HSD_PSFormGroup** psFormGroupArray[65];
@@ -175,41 +175,34 @@ void psInitDataBankLocate(int* cmdBank, int* texBank, int* formBank)
     s32 version;
 
     version = *(u16*) cmdBank;
-    if (version < 0x40) {
-        if (version == 0) {
-            goto version0;
+    switch (version) {
+    case 0:
+        num2 = ((s32*) cmdBank)[1];
+        base = (s32*) ((u8*) cmdBank + 8);
+        num = 0;
+        for (i = 0; i < num2; i++) {
+            ((s32*) cmdBank)[i + 2] += (s32) cmdBank;
         }
-        goto done_cmd;
-    }
-    if (version >= 0x44) {
-        goto done_cmd;
-    }
-    goto version40;
-
-version0:
-    num2 = ((s32*) cmdBank)[1];
-    base = (s32*) ((u8*) cmdBank + 8);
-    num = 0;
-    for (i = 0; i < num2; i++) {
-        ((s32*) cmdBank)[i + 2] += (s32) cmdBank;
-    }
-    goto done_cmd;
-
-version40:
-    num = ((s32*) cmdBank)[1];
-    num2 = ((s32*) cmdBank)[2] + num;
-    base = (s32*) cmdBank + 3 - num;
-    ptr = (s32*) cmdBank;
-    j = 0;
-    while (j < (s32) cmdBank[2]) {
-        if (ptr[3] != 0) {
-            ptr[3] += (s32) cmdBank;
+        break;
+    case 0x40:
+    case 0x41:
+    case 0x42:
+    case 0x43:
+        num = ((s32*) cmdBank)[1];
+        num2 = ((s32*) cmdBank)[2] + num;
+        base = (s32*) cmdBank + 3 - num;
+        ptr = (s32*) cmdBank;
+        j = 0;
+        while (j < (s32) cmdBank[2]) {
+            if (ptr[3] != 0) {
+                ptr[3] += (s32) cmdBank;
+            }
+            ptr++;
+            j++;
         }
-        ptr++;
-        j++;
+        break;
     }
 
-done_cmd:
     /* Phase 2: Fix cmdList kind bits */
     ptr = base + num;
     for (i = num; i < num2; i++) {
@@ -237,10 +230,10 @@ done_cmd:
 
         {
             group = groups;
-            for (k = 0; k < num_groups; k++) {
+            for (k = 0; k < num_groups; group++, k++) {
                 HSD_PSTexGroup* tg = (HSD_PSTexGroup*) group[0];
                 if (tg == NULL) {
-                    goto next_group;
+                    continue;
                 }
 
                 /* Relocate texture pointers in the group */
@@ -262,7 +255,7 @@ done_cmd:
                 {
                     u32 fmt = tg->fmt;
                     if (fmt != 8 && (fmt - 9) > 1) {
-                        goto next_group;
+                        continue;
                     }
                 }
 
@@ -270,10 +263,9 @@ done_cmd:
                 if (tg->palflag & 1) {
                     /* Single palette pointer */
                     i = tg->num;
-                    if (tg->texTable[i] == NULL) {
-                        goto next_group;
+                    if (tg->texTable[i] != NULL) {
+                        tg->texTable[i] += (u32) texBank;
                     }
-                    tg->texTable[i] += (u32) texBank;
                 } else if (tg->palnum != 0) {
                     /* Multiple palette pointers (palnum > 0) */
                     i = tg->num;
@@ -300,9 +292,6 @@ done_cmd:
                         }
                     }
                 }
-
-            next_group:
-                group++;
             }
         }
 
@@ -349,7 +338,7 @@ void hsd_80398A08(u32 unused)
     (void) ptclref_804D0E5C;
 
     HSD_ObjAllocInit(&hsd_804D0F60.alloc_data, sizeof(HSD_Particle), 4);
-    PAD_STACK(16);
+    PAD_STACK(4);
 
     for (i = 0; i < 16; i++) {
         hsd_804D0908[i] = NULL;
@@ -365,14 +354,9 @@ void hsd_80398A08(u32 unused)
         hsd_804D0948[i] = NULL;
     }
     psCallback = NULL;
-    hsd_804D08E8[0] = NULL;
-    hsd_804D08E8[1] = NULL;
-    hsd_804D08E8[2] = NULL;
-    hsd_804D08E8[3] = NULL;
-    hsd_804D08E8[4] = NULL;
-    hsd_804D08E8[5] = NULL;
-    hsd_804D08E8[6] = NULL;
-    hsd_804D08E8[7] = NULL;
+    for (i = 0; i < 8; i++) {
+        psPointJObj[i] = NULL;
+    }
 }
 
 HSD_Particle* psGenerateParticle0(HSD_Particle** head, int linkNo, int bank,
@@ -769,311 +753,370 @@ void* hsd_8039930C(HSD_Particle* pp, HSD_Particle* prev)
     }
 
     /* --- Command wait check --- */
-    if (pp->cmdWait == 0) {
-        goto do_life;
-    }
-    if (--pp->cmdWait != 0) {
-        goto do_life;
-    }
+    if (pp->cmdWait != 0 && --pp->cmdWait == 0) {
+        /* --- Bytecode loop --- */
+        operand = 0;
+        pc = pp->cmdList + pp->cmdPtr;
 
-    /* --- Bytecode loop --- */
-    operand = 0;
-    pc = pp->cmdList + pp->cmdPtr;
+        for (;;) {
+            opcode = *pc++;
 
-    for (;;) {
-        opcode = *pc++;
-
-        if (opcode < 0x80) {
-            /* Low opcode range */
-            operand = opcode & 0x1F;
-            if (opcode & 0x20) {
-                operand = (operand << 8) + *pc++;
-            }
-            switch (opcode & 0xC0) {
-            case 0x00:
-                /* Wait/nop: operand is wait count */
-                break;
-            case 0x40: {
-                /* Texture command */
-                u8 pn = *pc++;
-                pp->poseNum = pn;
-                {
-                    HSD_PSTexGroup** tga;
-                    HSD_PSTexGroup* texGrp;
-                    u8 bank = pp->bank;
-                    u8 tgIdx = pp->texGroup;
-
-                    tga = psTexGroupArray[bank];
-                    texGrp = tga[tgIdx];
-                    if (texGrp != NULL) {
-                        psEnableTexture(pp, texGrp->texTable);
-                    }
+            if (opcode < 0x80) {
+                /* Low opcode range */
+                operand = opcode & 0x1F;
+                if (opcode & 0x20) {
+                    operand = (operand << 8) + *pc++;
                 }
-                break;
-            }
-            }
-        } else {
-            /* High opcode: classify */
-            operand = 0;
-            cls = opcode & 0xF8;
-            if (cls > 0x98) {
-                cls = opcode & 0xF0;
-                if (cls != 0xC0 && cls != 0xD0) {
-                    cls = opcode;
-                }
-            }
-
-            switch (cls) {
-            case 0x80:
-                /* Set position */
-                if (opcode & 1) {
-                    u8* p = pc;
-                    psReadFloat(&p);
-                    pc = p;
-                    pp->pos.x = fval;
-                }
-                if (opcode & 2) {
-                    u8* p = pc;
-                    psReadFloat(&p);
-                    pc = p;
-                    pp->pos.y = fval;
-                }
-                if (opcode & 4) {
-                    u8* p = pc;
-                    psReadFloat(&p);
-                    pc = p;
-                    pp->pos.z = fval;
-                }
-                break;
-
-            case 0x88:
-                /* Add to position */
-                if (opcode & 1) {
-                    u8* p = pc;
-                    psReadFloat(&p);
-                    pc = p;
-                    pp->pos.x += fval;
-                }
-                if (opcode & 2) {
-                    u8* p = pc;
-                    psReadFloat(&p);
-                    pc = p;
-                    pp->pos.y += fval;
-                }
-                if (opcode & 4) {
-                    u8* p = pc;
-                    psReadFloat(&p);
-                    pc = p;
-                    pp->pos.z += fval;
-                }
-                break;
-
-            case 0x90:
-                /* Set velocity */
-                if (opcode & 1) {
-                    u8* p = pc;
-                    psReadFloat(&p);
-                    pc = p;
-                    pp->vel.x = fval;
-                }
-                if (opcode & 2) {
-                    u8* p = pc;
-                    psReadFloat(&p);
-                    pc = p;
-                    pp->vel.y = fval;
-                }
-                if (opcode & 4) {
-                    u8* p = pc;
-                    psReadFloat(&p);
-                    pc = p;
-                    pp->vel.z = fval;
-                }
-                break;
-
-            case 0x98:
-                /* Add to velocity */
-                if (opcode & 1) {
-                    u8* p = pc;
-                    psReadFloat(&p);
-                    pc = p;
-                    pp->vel.x += fval;
-                }
-                if (opcode & 2) {
-                    u8* p = pc;
-                    psReadFloat(&p);
-                    pc = p;
-                    pp->vel.y += fval;
-                }
-                if (opcode & 4) {
-                    u8* p = pc;
-                    psReadFloat(&p);
-                    pc = p;
-                    pp->vel.z += fval;
-                }
-                break;
-
-            case 0xA0:
-                /* Set size interpolation target */
-                {
-                    u8* p = pc;
-                    pp->sizeCount = *p++;
+                switch (opcode & 0xC0) {
+                case 0x00:
+                    /* Wait/nop: operand is wait count */
+                    break;
+                case 0x40: {
+                    /* Texture command */
+                    u8 pn = *pc++;
+                    pp->poseNum = pn;
                     {
-                        u16 cnt = pp->sizeCount;
-                        if (cnt & 0x80) {
-                            cnt = ((cnt & 0x7F) << 8) + *p++;
-                            pp->sizeCount = cnt;
+                        HSD_PSTexGroup** tga;
+                        HSD_PSTexGroup* texGrp;
+                        u8 bank = pp->bank;
+                        u8 tgIdx = pp->texGroup;
+
+                        tga = psTexGroupArray[bank];
+                        texGrp = tga[tgIdx];
+                        if (texGrp != NULL) {
+                            psEnableTexture(pp, texGrp->texTable);
                         }
                     }
+                    break;
+                }
+                }
+            } else {
+                /* High opcode: classify */
+                operand = 0;
+                cls = opcode & 0xF8;
+                if (cls > 0x98) {
+                    cls = opcode & 0xF0;
+                    if (cls != 0xC0 && cls != 0xD0) {
+                        cls = opcode;
+                    }
+                }
+
+                switch (cls) {
+                case 0x80:
+                    /* Set position */
+                    if (opcode & 1) {
+                        u8* p = pc;
+                        psReadFloat(&p);
+                        pc = p;
+                        pp->pos.x = fval;
+                    }
+                    if (opcode & 2) {
+                        u8* p = pc;
+                        psReadFloat(&p);
+                        pc = p;
+                        pp->pos.y = fval;
+                    }
+                    if (opcode & 4) {
+                        u8* p = pc;
+                        psReadFloat(&p);
+                        pc = p;
+                        pp->pos.z = fval;
+                    }
+                    break;
+
+                case 0x88:
+                    /* Add to position */
+                    if (opcode & 1) {
+                        u8* p = pc;
+                        psReadFloat(&p);
+                        pc = p;
+                        pp->pos.x += fval;
+                    }
+                    if (opcode & 2) {
+                        u8* p = pc;
+                        psReadFloat(&p);
+                        pc = p;
+                        pp->pos.y += fval;
+                    }
+                    if (opcode & 4) {
+                        u8* p = pc;
+                        psReadFloat(&p);
+                        pc = p;
+                        pp->pos.z += fval;
+                    }
+                    break;
+
+                case 0x90:
+                    /* Set velocity */
+                    if (opcode & 1) {
+                        u8* p = pc;
+                        psReadFloat(&p);
+                        pc = p;
+                        pp->vel.x = fval;
+                    }
+                    if (opcode & 2) {
+                        u8* p = pc;
+                        psReadFloat(&p);
+                        pc = p;
+                        pp->vel.y = fval;
+                    }
+                    if (opcode & 4) {
+                        u8* p = pc;
+                        psReadFloat(&p);
+                        pc = p;
+                        pp->vel.z = fval;
+                    }
+                    break;
+
+                case 0x98:
+                    /* Add to velocity */
+                    if (opcode & 1) {
+                        u8* p = pc;
+                        psReadFloat(&p);
+                        pc = p;
+                        pp->vel.x += fval;
+                    }
+                    if (opcode & 2) {
+                        u8* p = pc;
+                        psReadFloat(&p);
+                        pc = p;
+                        pp->vel.y += fval;
+                    }
+                    if (opcode & 4) {
+                        u8* p = pc;
+                        psReadFloat(&p);
+                        pc = p;
+                        pp->vel.z += fval;
+                    }
+                    break;
+
+                case 0xA0:
+                    /* Set size interpolation target */
                     {
-                        u8* q = p;
-                        psReadFloat(&q);
-                        p = q;
-                    }
-                    pc = p;
-                    pp->sizeTarget = fval;
-                    if (pp->sizeCount == 0) {
-                        pp->size = pp->sizeTarget;
-                    }
-                }
-                break;
-
-            case 0xA1:
-                /* Clear DispTexture flag */
-                pp->kind &= ~DispTexture;
-                break;
-
-            case 0xA2:
-                /* Set gravity */
-                {
-                    u8* p = pc;
-                    psReadFloat(&p);
-                    pc = p;
-                }
-                pp->grav = fval;
-                if (pp->grav == 0.0F) {
-                    pp->kind &= ~1;
-                } else {
-                    pp->kind |= 1;
-                }
-                break;
-
-            case 0xA3:
-                /* Set friction */
-                {
-                    u8* p = pc;
-                    psReadFloat(&p);
-                    pc = p;
-                }
-                pp->fric = fval;
-                if (pp->fric == 1.0F) {
-                    pp->kind &= ~2;
-                } else {
-                    pp->kind |= 2;
-                }
-                break;
-
-            case 0xA4:
-                /* Spawn child particle by cmdList ID */
-                {
-                    int linkNo = pp->linkNo;
-                    int idx;
-                    int palflag;
-                    HSD_Particle* c;
-                    bank = pp->bank;
-
-                    idx = pc[0] << 8;
-                    idx += pc[1];
-                    pc += 2;
-
-                    child = psSpawnChild(&pp->next, linkNo, bank, idx);
-                    c = child;
-                    (void) c;
-                    if (child != NULL) {
-                        child->idnum = pp->idnum;
-                        child->gen = pp->gen;
-                        if (pp->gen != NULL) {
-                            pp->gen->numChild++;
+                        u8* p = pc;
+                        pp->sizeCount = *p++;
+                        {
+                            u16 cnt = pp->sizeCount;
+                            if (cnt & 0x80) {
+                                cnt = ((cnt & 0x7F) << 8) + *p++;
+                                pp->sizeCount = cnt;
+                            }
                         }
-                        psAttachParticleAppSRT(c, pp->appsrt);
-                        child->pos.x = pp->pos.x;
-                        child->pos.y = pp->pos.y;
-                        child->pos.z = pp->pos.z;
-                        hsd_8039930C(c, pp);
+                        {
+                            u8* q = p;
+                            psReadFloat(&q);
+                            p = q;
+                        }
+                        pc = p;
+                        pp->sizeTarget = fval;
+                        if (pp->sizeCount == 0) {
+                            pp->size = pp->sizeTarget;
+                        }
                     }
-                }
-                break;
+                    break;
 
-            case 0xF1:
-                /* Spawn child particle from ptclref remap */
-                {
-                    int idx;
-                    int palflag;
-                    HSD_Particle* c;
-                    int linkNo;
-                    bank = pp->bank;
+                case 0xA1:
+                    /* Clear DispTexture flag */
+                    pp->kind &= ~DispTexture;
+                    break;
 
-                    idx = pc[0] << 8;
-                    idx += pc[1];
-                    pc += 2;
-
-                    if (hsd_804D0948[pp->bank] != NULL) {
-                        idx = hsd_804D0948[pp->bank][idx];
+                case 0xA2:
+                    /* Set gravity */
+                    {
+                        u8* p = pc;
+                        psReadFloat(&p);
+                        pc = p;
                     }
-
-                    linkNo = pp->linkNo;
-                    (void) linkNo;
-                    if (linkNo >= 8) {
-                        child = NULL;
-                    } else if (bank >= 65) {
-                        child = NULL;
-                    } else if (idx >= psCmdListArray[bank]) {
-                        child = NULL;
+                    pp->grav = fval;
+                    if (pp->grav == 0.0F) {
+                        pp->kind &= ~1;
                     } else {
-                        cl = ptclref_804D0E5C[bank][idx];
-                        if (cl == NULL) {
+                        pp->kind |= 1;
+                    }
+                    break;
+
+                case 0xA3:
+                    /* Set friction */
+                    {
+                        u8* p = pc;
+                        psReadFloat(&p);
+                        pc = p;
+                    }
+                    pp->fric = fval;
+                    if (pp->fric == 1.0F) {
+                        pp->kind &= ~2;
+                    } else {
+                        pp->kind |= 2;
+                    }
+                    break;
+
+                case 0xA4:
+                    /* Spawn child particle by cmdList ID */
+                    {
+                        int linkNo = pp->linkNo;
+                        int idx;
+                        int palflag;
+                        HSD_Particle* c;
+                        bank = pp->bank;
+
+                        idx = pc[0] << 8;
+                        idx += pc[1];
+                        pc += 2;
+
+                        child = psSpawnChild(&pp->next, linkNo, bank, idx);
+                        c = child;
+                        (void) c;
+                        if (child != NULL) {
+                            child->idnum = pp->idnum;
+                            child->gen = pp->gen;
+                            if (pp->gen != NULL) {
+                                pp->gen->numChild++;
+                            }
+                            psAttachParticleAppSRT(c, pp->appsrt);
+                            child->pos.x = pp->pos.x;
+                            child->pos.y = pp->pos.y;
+                            child->pos.z = pp->pos.z;
+                            hsd_8039930C(c, pp);
+                        }
+                    }
+                    break;
+
+                case 0xF1:
+                    /* Spawn child particle from ptclref remap */
+                    {
+                        int idx;
+                        int palflag;
+                        HSD_Particle* c;
+                        int linkNo;
+                        bank = pp->bank;
+
+                        idx = pc[0] << 8;
+                        idx += pc[1];
+                        pc += 2;
+
+                        if (hsd_804D0948[pp->bank] != NULL) {
+                            idx = hsd_804D0948[pp->bank][idx];
+                        }
+
+                        linkNo = pp->linkNo;
+                        (void) linkNo;
+                        if (linkNo >= 8) {
+                            child = NULL;
+                        } else if (bank >= 65) {
+                            child = NULL;
+                        } else if (idx >= psCmdListArray[bank]) {
                             child = NULL;
                         } else {
-                            tg = psTexGroupArray[bank][cl->texGroup];
-                            if (tg != NULL) {
-                                palflag = tg->palflag;
+                            cl = ptclref_804D0E5C[bank][idx];
+                            if (cl == NULL) {
+                                child = NULL;
                             } else {
-                                palflag = 0;
+                                tg = psTexGroupArray[bank][cl->texGroup];
+                                if (tg != NULL) {
+                                    palflag = tg->palflag;
+                                } else {
+                                    palflag = 0;
+                                }
+                                child = psGenerateParticle0(
+                                    &pp->next, linkNo, bank, cl->kind,
+                                    cl->texGroup, cl->cmdList, cl->life,
+                                    palflag, 0.0F, 0.0F, 0.0F, cl->vx, cl->vy,
+                                    cl->vz, cl->size, cl->grav, cl->fric, NULL,
+                                    0);
                             }
-                            child = psGenerateParticle0(
-                                &pp->next, linkNo, bank, cl->kind,
-                                cl->texGroup, cl->cmdList, cl->life, palflag,
-                                0.0F, 0.0F, 0.0F, cl->vx, cl->vy, cl->vz,
-                                cl->size, cl->grav, cl->fric, NULL, 0);
+                        }
+                        c = child;
+                        (void) c;
+                        if (child != NULL) {
+                            child->idnum = pp->idnum;
+                            child->gen = pp->gen;
+                            if (pp->gen != NULL) {
+                                pp->gen->numChild++;
+                            }
+                            psAttachParticleAppSRT(c, pp->appsrt);
+                            child->pos.x = pp->pos.x;
+                            child->pos.y = pp->pos.y;
+                            child->pos.z = pp->pos.z;
+                            hsd_8039930C(c, pp);
                         }
                     }
-                    c = child;
-                    (void) c;
-                    if (child != NULL) {
-                        child->idnum = pp->idnum;
-                        child->gen = pp->gen;
-                        if (pp->gen != NULL) {
-                            pp->gen->numChild++;
+                    break;
+
+                case 0xA5:
+                    /* Spawn child generator */
+                    {
+                        int idx;
+
+                        idx = pc[0] << 8;
+                        idx += pc[1];
+                        pc += 2;
+                        gchild = hsd_8039F05C(pp->linkNo, pp->bank, idx);
+                        if (gchild != NULL) {
+                            HSD_psAppSRT* srt;
+                            gchild->idnum = pp->idnum;
+                            if (pp->gen != NULL) {
+                                HSD_JObj* jobj = pp->gen->jobj;
+                                if (gchild != NULL) {
+                                    gchild->jobj = jobj;
+                                    if (jobj != NULL) {
+                                        ref_INC(jobj);
+                                    }
+                                }
+                            }
+                            gchild->type |= 0x100;
+                            if (pp->gen != NULL) {
+                                gchild->type |= pp->gen->type & 0x1E00;
+                                if (gchild->kind & (1 << 17)) {
+                                    gchild->type &= ~(1 << 9);
+                                }
+                            }
+                            if ((srt = pp->appsrt) != NULL) {
+                                psAttachGeneratorAppSRT(gchild, srt);
+                            }
+                            if (pp->appsrt != NULL) {
+                                if (gchild->appsrt == NULL) {
+                                    break;
+                                }
+                                if (gchild->appsrt == pp->appsrt) {
+                                    gchild->pos.x = pp->pos.x;
+                                    gchild->pos.y = pp->pos.y;
+                                    gchild->pos.z = pp->pos.z;
+                                } else {
+                                    gchild->appsrt->translate.x =
+                                        pp->appsrt->translate.x;
+                                    gchild->appsrt->translate.y =
+                                        pp->appsrt->translate.y;
+                                    gchild->appsrt->translate.z =
+                                        pp->appsrt->translate.z;
+                                }
+                            } else if (gchild->appsrt != NULL) {
+                                gchild->appsrt->translate.x = pp->pos.x;
+                                gchild->appsrt->translate.y = pp->pos.y;
+                                gchild->appsrt->translate.z = pp->pos.z;
+                            } else {
+                                gchild->pos.x = pp->pos.x;
+                                gchild->pos.y = pp->pos.y;
+                                gchild->pos.z = pp->pos.z;
+                            }
                         }
-                        psAttachParticleAppSRT(c, pp->appsrt);
-                        child->pos.x = pp->pos.x;
-                        child->pos.y = pp->pos.y;
-                        child->pos.z = pp->pos.z;
-                        hsd_8039930C(c, pp);
                     }
-                }
-                break;
+                    break;
 
-            case 0xA5:
-                /* Spawn child generator */
-                {
-                    int idx;
-
-                    idx = pc[0] << 8;
-                    idx += pc[1];
-                    pc += 2;
-                    gchild = hsd_8039F05C(pp->linkNo, pp->bank, idx);
-                    if (gchild != NULL) {
+                case 0xEF:
+                    /* Spawn generator with kind flags */
+                    {
+                        int idx;
+                        u8 flags;
                         HSD_psAppSRT* srt;
+
+                        idx = pc[0] << 8;
+                        idx += pc[1];
+                        flags = pc[2];
+                        pc += 3;
+                        gchild = hsd_8039F05C(pp->linkNo, pp->bank, idx);
+                        if (gchild == NULL) {
+                            break;
+                        }
                         gchild->idnum = pp->idnum;
                         if (pp->gen != NULL) {
                             HSD_JObj* jobj = pp->gen->jobj;
@@ -1094,6 +1137,8 @@ void* hsd_8039930C(HSD_Particle* pp, HSD_Particle* prev)
                         if ((srt = pp->appsrt) != NULL) {
                             psAttachGeneratorAppSRT(gchild, srt);
                         }
+                        gchild->kind &= 0xF1FFFFFF;
+                        gchild->kind |= ((flags & 7) << 25);
                         if (pp->appsrt != NULL) {
                             if (gchild->appsrt == NULL) {
                                 break;
@@ -1120,1625 +1165,846 @@ void* hsd_8039930C(HSD_Particle* pp, HSD_Particle* prev)
                             gchild->pos.z = pp->pos.z;
                         }
                     }
-                }
-                break;
+                    break;
 
-            case 0xEF:
-                /* Spawn generator with kind flags */
-                {
-                    int idx;
-                    u8 flags;
-                    HSD_psAppSRT* srt;
+                case 0xF0:
+                    /* Spawn generator with kind flags + ptclref remap */
+                    {
+                        int idx;
+                        u8 flags;
+                        HSD_psAppSRT* srt;
+                        int bank;
 
-                    idx = pc[0] << 8;
-                    idx += pc[1];
-                    flags = pc[2];
-                    pc += 3;
-                    gchild = hsd_8039F05C(pp->linkNo, pp->bank, idx);
-                    if (gchild == NULL) {
-                        break;
-                    }
-                    gchild->idnum = pp->idnum;
-                    if (pp->gen != NULL) {
-                        HSD_JObj* jobj = pp->gen->jobj;
-                        if (gchild != NULL) {
-                            gchild->jobj = jobj;
-                            if (jobj != NULL) {
-                                ref_INC(jobj);
-                            }
+                        idx = pc[0] << 8;
+                        idx += pc[1];
+                        flags = pc[2];
+                        pc += 3;
+
+                        bank = pp->bank;
+                        (void) bank;
+                        if (hsd_804D0948[bank] != NULL) {
+                            idx = hsd_804D0948[bank][idx];
                         }
-                    }
-                    gchild->type |= 0x100;
-                    if (pp->gen != NULL) {
-                        gchild->type |= pp->gen->type & 0x1E00;
-                        if (gchild->kind & (1 << 17)) {
-                            gchild->type &= ~(1 << 9);
-                        }
-                    }
-                    if ((srt = pp->appsrt) != NULL) {
-                        psAttachGeneratorAppSRT(gchild, srt);
-                    }
-                    gchild->kind &= 0xF1FFFFFF;
-                    gchild->kind |= ((flags & 7) << 25);
-                    if (pp->appsrt != NULL) {
-                        if (gchild->appsrt == NULL) {
+
+                        gchild = hsd_8039F05C(pp->linkNo, bank, idx);
+                        if (gchild == NULL) {
                             break;
                         }
-                        if (gchild->appsrt == pp->appsrt) {
-                            gchild->pos.x = pp->pos.x;
-                            gchild->pos.y = pp->pos.y;
-                            gchild->pos.z = pp->pos.z;
-                        } else {
-                            gchild->appsrt->translate.x =
-                                pp->appsrt->translate.x;
-                            gchild->appsrt->translate.y =
-                                pp->appsrt->translate.y;
-                            gchild->appsrt->translate.z =
-                                pp->appsrt->translate.z;
-                        }
-                    } else if (gchild->appsrt != NULL) {
-                        gchild->appsrt->translate.x = pp->pos.x;
-                        gchild->appsrt->translate.y = pp->pos.y;
-                        gchild->appsrt->translate.z = pp->pos.z;
-                    } else {
-                        gchild->pos.x = pp->pos.x;
-                        gchild->pos.y = pp->pos.y;
-                        gchild->pos.z = pp->pos.z;
-                    }
-                }
-                break;
-
-            case 0xF0:
-                /* Spawn generator with kind flags + ptclref remap */
-                {
-                    int idx;
-                    u8 flags;
-                    HSD_psAppSRT* srt;
-                    int bank;
-
-                    idx = pc[0] << 8;
-                    idx += pc[1];
-                    flags = pc[2];
-                    pc += 3;
-
-                    bank = pp->bank;
-                    (void) bank;
-                    if (hsd_804D0948[bank] != NULL) {
-                        idx = hsd_804D0948[bank][idx];
-                    }
-
-                    gchild = hsd_8039F05C(pp->linkNo, bank, idx);
-                    if (gchild == NULL) {
-                        break;
-                    }
-                    gchild->idnum = pp->idnum;
-                    if (pp->gen != NULL) {
-                        HSD_JObj* jobj = pp->gen->jobj;
-                        if (gchild != NULL) {
-                            gchild->jobj = jobj;
-                            if (jobj != NULL) {
-                                ref_INC(jobj);
-                            }
-                        }
-                    }
-                    gchild->type |= 0x100;
-                    if (pp->gen != NULL) {
-                        gchild->type |= pp->gen->type & 0x1E00;
-                        if (gchild->kind & (1 << 17)) {
-                            gchild->type &= ~(1 << 9);
-                        }
-                    }
-                    if ((srt = pp->appsrt) != NULL) {
-                        psAttachGeneratorAppSRT(gchild, srt);
-                    }
-                    gchild->kind &= 0xF1FFFFFF;
-                    gchild->kind |= ((flags & 7) << 25);
-                    if (pp->appsrt != NULL) {
-                        if (gchild->appsrt == NULL) {
-                            break;
-                        }
-                        if (gchild->appsrt == pp->appsrt) {
-                            gchild->pos.x = pp->pos.x;
-                            gchild->pos.y = pp->pos.y;
-                            gchild->pos.z = pp->pos.z;
-                        } else {
-                            gchild->appsrt->translate.x =
-                                pp->appsrt->translate.x;
-                            gchild->appsrt->translate.y =
-                                pp->appsrt->translate.y;
-                            gchild->appsrt->translate.z =
-                                pp->appsrt->translate.z;
-                        }
-                    } else if (gchild->appsrt != NULL) {
-                        gchild->appsrt->translate.x = pp->pos.x;
-                        gchild->appsrt->translate.y = pp->pos.y;
-                        gchild->appsrt->translate.z = pp->pos.z;
-                    } else {
-                        gchild->pos.x = pp->pos.x;
-                        gchild->pos.y = pp->pos.y;
-                        gchild->pos.z = pp->pos.z;
-                    }
-                }
-                break;
-
-            case 0xA6:
-                /* Set life with random offset */
-                {
-                    int baseLife;
-                    int randomRange;
-                    baseLife = *pc++ << 8;
-                    baseLife += *pc++;
-                    randomRange = *pc++ << 8;
-                    randomRange += *pc++;
-                    pp->life =
-                        baseLife + (s32) ((f32) randomRange * HSD_Randf());
-                }
-                break;
-
-            case 0xA7:
-                /* Conditional kill */
-                {
-                    int threshold = *pc++;
-                    if (threshold >= (s32) (100.0F * HSD_Randf())) {
-                        pp->life = 1;
-                        goto exit_loop;
-                    }
-                }
-                break;
-
-            case 0xA8:
-                /* Position random offset */
-                {
-                    {
-                        u8* q = pc;
-                        psReadFloat(&q);
-                        pc = q;
-                    }
-                    pp->pos.x += 2.0F * fval * HSD_Randf() - fval;
-                    {
-                        u8* q = pc;
-                        psReadFloat(&q);
-                        pc = q;
-                    }
-                    pp->pos.y += 2.0F * fval * HSD_Randf() - fval;
-                    {
-                        u8* q = pc;
-                        psReadFloat(&q);
-                        pc = q;
-                    }
-                    pp->pos.z += 2.0F * fval * HSD_Randf() - fval;
-                }
-                break;
-
-            case 0xA9:
-                /* Call force function with float parameter */
-                {
-                    u8* p = pc;
-                    psReadFloat(&p);
-                    pc = p;
-                }
-                hsd_80398F8C(pp, fval);
-                break;
-
-            case 0xAA:
-                /* Spawn child particle with random ptclref index */
-                {
-                    int randomRange;
-                    int idx;
-                    int palflag;
-                    int linkNo;
-                    HSD_Particle* c;
-
-                    idx = *pc++ << 8;
-                    idx += *pc++;
-                    randomRange = *pc++ << 8;
-                    randomRange += *pc++;
-
-                    idx += (s32) ((f32) randomRange * HSD_Randf());
-
-                    bank = pp->bank;
-                    (void) bank;
-                    if (hsd_804D0948[pp->bank] != NULL) {
-                        idx = hsd_804D0948[pp->bank][idx];
-                    }
-
-                    linkNo = pp->linkNo;
-                    (void) linkNo;
-                    if (linkNo >= 8) {
-                        child = NULL;
-                    } else if (bank >= 65) {
-                        child = NULL;
-                    } else if (idx >= psCmdListArray[bank]) {
-                        child = NULL;
-                    } else {
-                        cl = ptclref_804D0E5C[bank][idx];
-                        if (cl == NULL) {
-                            child = NULL;
-                        } else {
-                            tg = psTexGroupArray[bank][cl->texGroup];
-                            if (tg != NULL) {
-                                palflag = tg->palflag;
-                            } else {
-                                palflag = 0;
-                            }
-                            child = psGenerateParticle0(
-                                &pp->next, linkNo, bank, cl->kind,
-                                cl->texGroup, cl->cmdList, cl->life, palflag,
-                                0.0F, 0.0F, 0.0F, cl->vx, cl->vy, cl->vz,
-                                cl->size, cl->grav, cl->fric, NULL, 0);
-                        }
-                    }
-                    c = child;
-                    if (child != NULL) {
-                        child->pos.x = pp->pos.x;
-                        child->pos.y = pp->pos.y;
-                        child->pos.z = pp->pos.z;
-                        child->idnum = pp->idnum;
-                        child->gen = pp->gen;
+                        gchild->idnum = pp->idnum;
                         if (pp->gen != NULL) {
-                            pp->gen->numChild++;
-                        }
-                        {
-                            HSD_psAppSRT* srt;
-                            if ((srt = pp->appsrt) != NULL) {
-                                psAttachParticleAppSRT(c, srt);
+                            HSD_JObj* jobj = pp->gen->jobj;
+                            if (gchild != NULL) {
+                                gchild->jobj = jobj;
+                                if (jobj != NULL) {
+                                    ref_INC(jobj);
+                                }
                             }
                         }
-                        hsd_8039930C(c, pp);
-                    }
-                }
-                break;
-
-            case 0xAB:
-                /* Velocity scale */
-                {
-                    f32 scale;
-                    u8* p = pc;
-                    psReadFloat(&p);
-                    pc = p;
-                    scale = fval;
-                    pp->vel.x *= scale;
-                    pp->vel.y *= scale;
-                    pp->vel.z *= scale;
-                }
-                break;
-
-            case 0xAC:
-                /* Size interpolation with random */
-                {
-                    f32 range;
-                    {
-                        u8* p = pc;
-                        u16 cnt;
-                        pp->sizeCount = *p++;
-                        cnt = pp->sizeCount;
-                        if (cnt & 0x80) {
-                            cnt = ((cnt & 0x7F) << 8) + *p++;
-                            pp->sizeCount = cnt;
-                        }
-                        psReadFloat(&p);
-                        pp->sizeTarget = fval;
-                        psReadFloat(&p);
-                        range = fval;
-                        pc = p;
-                    }
-                    pp->sizeTarget += range * HSD_Randf();
-                    if (pp->sizeCount == 0) {
-                        pp->size = pp->sizeTarget;
-                    }
-                }
-                break;
-
-            case 0xAD:
-                /* Set PrimEnv flag */
-                pp->kind |= PrimEnv;
-                break;
-
-            case 0xAE:
-                /* Clear Mirror flags */
-                pp->kind &= ~(MirrorS | MirrorT);
-                break;
-
-            case 0xAF:
-                /* Set MirrorS */
-                pp->kind &= ~MirrorT;
-                pp->kind |= MirrorS;
-                break;
-
-            case 0xB0:
-                /* Set MirrorT */
-                pp->kind &= ~MirrorS;
-                pp->kind |= MirrorT;
-                break;
-
-            case 0xB1:
-                /* Set MirrorS | MirrorT */
-                pp->kind |= (MirrorS | MirrorT);
-                break;
-
-            case 0xB2:
-                /* AppSRT matrix transform and detach */
-                {
-                    HSD_psAppSRT* srt = pp->appsrt;
-                    if (srt == NULL) {
-                        break;
-                    }
-                    if (srt->xA2 != 0) {
-                        break;
-                    }
-                    hsd_803983A4(srt->gp);
-                    {
-                        Vec3* translate;
-                        Vec3* rot;
-                        Vec3* scale;
-                        MtxPtr mtx;
-                        srt = pp->appsrt;
-                        translate = &srt->translate;
-                        rot = (Vec3*) &srt->rot;
-                        scale = &srt->scale;
-                        mtx = srt->mmtx;
-                        HSD_MtxSRT(mtx, scale, rot, translate, NULL);
-                    }
-                    pp->pos.x = pp->appsrt->mmtx[0][0] * pp->pos.x +
-                                pp->appsrt->mmtx[0][1] * pp->pos.y +
-                                pp->appsrt->mmtx[0][2] * pp->pos.z +
-                                pp->appsrt->mmtx[0][3];
-                    pp->pos.y = pp->appsrt->mmtx[1][0] * pp->pos.x +
-                                pp->appsrt->mmtx[1][1] * pp->pos.y +
-                                pp->appsrt->mmtx[1][2] * pp->pos.z +
-                                pp->appsrt->mmtx[1][3];
-                    pp->pos.z = pp->appsrt->mmtx[2][0] * pp->pos.x +
-                                pp->appsrt->mmtx[2][1] * pp->pos.y +
-                                pp->appsrt->mmtx[2][2] * pp->pos.z +
-                                pp->appsrt->mmtx[2][3];
-                    psRemoveParticleAppSRT(pp);
-                }
-                break;
-
-            case 0xB3:
-                /* Alpha compare interpolation setup */
-                {
-                    s32 step;
-
-                    if (pp->aCmpCount != 0) {
-                        step =
-                            ((s32) pp->aCmpRemain << 16) / (s32) pp->aCmpCount;
-                        pp->aCmpParam1 =
-                            (u8) ((((s32) pp->aCmpParam1Target << 16) +
-                                   step * ((s32) pp->aCmpParam1 -
-                                           (s32) pp->aCmpParam1Target)) >>
-                                  16);
-                        pp->aCmpParam2 =
-                            (u8) ((((s32) pp->aCmpParam2Target << 16) +
-                                   step * ((s32) pp->aCmpParam2 -
-                                           (s32) pp->aCmpParam2Target)) >>
-                                  16);
-                    }
-                    {
-                        u8* p = pc;
-                        pp->aCmpCount = *p++;
-                        {
-                            u16 cnt = pp->aCmpCount;
-                            if (cnt & 0x80) {
-                                cnt = ((cnt & 0x7F) << 8) + *p++;
-                                pp->aCmpCount = cnt;
+                        gchild->type |= 0x100;
+                        if (pp->gen != NULL) {
+                            gchild->type |= pp->gen->type & 0x1E00;
+                            if (gchild->kind & (1 << 17)) {
+                                gchild->type &= ~(1 << 9);
                             }
                         }
-                        pc = p;
-                        pp->aCmpMode = *pc++;
-                        pp->aCmpParam1Target = pc[0];
-                        pp->aCmpParam2Target = pc[1];
-                        pc += 2;
-                    }
-                    if (pp->aCmpCount == 0) {
-                        pp->aCmpParam1 = pp->aCmpParam1Target;
-                        pp->aCmpParam2 = pp->aCmpParam2Target;
-                        pp->aCmpRemain = 0;
-                        pp->aCmpCount = 0;
-                    } else {
-                        pp->aCmpRemain = pp->aCmpCount;
-                    }
-                }
-                break;
-
-            case 0xB4:
-                /* Set TexInterpNear */
-                pp->kind |= TexInterpNear;
-                break;
-
-            case 0xB5:
-                /* Clear TexInterpNear */
-                pp->kind &= ~TexInterpNear;
-                break;
-
-            case 0xB6:
-                /* Rotate interpolation setup */
-                {
-                    u8* p = pc;
-                    pp->rotateCount = *p++;
-                    {
-                        u16 cnt = pp->rotateCount;
-                        if (cnt & 0x80) {
-                            cnt = ((cnt & 0x7F) << 8) + *p++;
-                            pp->rotateCount = cnt;
+                        if ((srt = pp->appsrt) != NULL) {
+                            psAttachGeneratorAppSRT(gchild, srt);
+                        }
+                        gchild->kind &= 0xF1FFFFFF;
+                        gchild->kind |= ((flags & 7) << 25);
+                        if (pp->appsrt != NULL) {
+                            if (gchild->appsrt == NULL) {
+                                break;
+                            }
+                            if (gchild->appsrt == pp->appsrt) {
+                                gchild->pos.x = pp->pos.x;
+                                gchild->pos.y = pp->pos.y;
+                                gchild->pos.z = pp->pos.z;
+                            } else {
+                                gchild->appsrt->translate.x =
+                                    pp->appsrt->translate.x;
+                                gchild->appsrt->translate.y =
+                                    pp->appsrt->translate.y;
+                                gchild->appsrt->translate.z =
+                                    pp->appsrt->translate.z;
+                            }
+                        } else if (gchild->appsrt != NULL) {
+                            gchild->appsrt->translate.x = pp->pos.x;
+                            gchild->appsrt->translate.y = pp->pos.y;
+                            gchild->appsrt->translate.z = pp->pos.z;
+                        } else {
+                            gchild->pos.x = pp->pos.x;
+                            gchild->pos.y = pp->pos.y;
+                            gchild->pos.z = pp->pos.z;
                         }
                     }
+                    break;
+
+                case 0xA6:
+                    /* Set life with random offset */
                     {
-                        u8* q = p;
-                        psReadFloat(&q);
-                        p = q;
+                        int baseLife;
+                        int randomRange;
+                        baseLife = *pc++ << 8;
+                        baseLife += *pc++;
+                        randomRange = *pc++ << 8;
+                        randomRange += *pc++;
+                        pp->life =
+                            baseLife + (s32) ((f32) randomRange * HSD_Randf());
                     }
-                    pc = p;
-                    pp->rotateTarget += fval;
-                    if (pp->rotateCount == 0) {
-                        pp->rotate = pp->rotateTarget;
-                    }
-                }
-                break;
+                    break;
 
-            case 0xB7:
-                /* Aim velocity toward JObj */
-                {
-                    HSD_JObj* jobj = hsd_804D08E8[*pc++ + pp->pJObjOfs];
-                    MtxPtr matrix;
-                    f32 dz, dy, dx, vel_mag_sq, dist_sq;
-
-                    if (jobj == NULL) {
-                        break;
-                    }
-                    HSD_JObjSetupMatrix(jobj);
-                    matrix = jobj->mtx;
-
-                    val = pp->vel.x * pp->vel.x + pp->vel.y * pp->vel.y;
-                    vel_mag_sq = pp->vel.z * pp->vel.z;
-                    vel_mag_sq += val;
-                    dx = matrix[0][3] - pp->pos.x;
-                    dy = matrix[1][3];
-                    dy -= pp->pos.y;
-                    dz = matrix[2][3] - pp->pos.z;
-                    if (vel_mag_sq > 0.0F) {
-                        double guess = __frsqrte((double) vel_mag_sq);
-                        guess =
-                            0.5 * guess * (3.0 - guess * guess * vel_mag_sq);
-                        guess =
-                            0.5 * guess * (3.0 - guess * guess * vel_mag_sq);
-                        guess =
-                            0.5 * guess * (3.0 - guess * guess * vel_mag_sq);
-                        vel_res = (f32) (vel_mag_sq * guess);
-                        vel_mag_sq = vel_res;
-                    }
-                    val = dx * dx + dy * dy;
-                    if ((dist_sq = dz * dz + val) == 0.0F) {
-                        break;
-                    }
-                    if (dist_sq > 0.0F) {
-                        double guess = __frsqrte((double) dist_sq);
-                        guess = 0.5 * guess * (3.0 - guess * guess * dist_sq);
-                        guess = 0.5 * guess * (3.0 - guess * guess * dist_sq);
-                        guess = 0.5 * guess * (3.0 - guess * guess * dist_sq);
-                        dist_res = (f32) (dist_sq * guess);
-                        dist_sq = dist_res;
-                    }
+                case 0xA7:
+                    /* Conditional kill */
                     {
-                        f32 scale = vel_mag_sq / dist_sq;
-                        pp->vel.x = dx * scale;
-                        pp->vel.y = dy * scale;
-                        pp->vel.z = dz * scale;
-                    }
-                }
-                break;
-
-            case 0xB8:
-                /* Force toward JObj with kill on proximity */
-                {
-                    int idx = *pc++;
-                    f32 force, range;
-
-                    idx += pp->pJObjOfs;
-                    psReadFloat(&pc);
-                    force = fval;
-                    psReadFloat(&pc);
-                    range = fval;
-
-                    {
-                        HSD_JObj* jobj = hsd_804D08E8[idx];
-                        if (hsd_803991D8((HSD_Generator*) pp, jobj, force,
-                                         range) != 0)
-                        {
+                        int threshold = *pc++;
+                        if (threshold >= (s32) (100.0F * HSD_Randf())) {
                             pp->life = 1;
                             goto exit_loop;
                         }
                     }
-                }
-                break;
+                    break;
 
-            case 0xB9:
-                /* Spawn child particle + inherit pos and vel */
-                {
-                    int linkNo = pp->linkNo;
-                    int idx;
-                    int palflag;
-                    HSD_Particle* c;
-                    bank = pp->bank;
+                case 0xA8:
+                    /* Position random offset */
+                    {
+                        {
+                            u8* q = pc;
+                            psReadFloat(&q);
+                            pc = q;
+                        }
+                        pp->pos.x += 2.0F * fval * HSD_Randf() - fval;
+                        {
+                            u8* q = pc;
+                            psReadFloat(&q);
+                            pc = q;
+                        }
+                        pp->pos.y += 2.0F * fval * HSD_Randf() - fval;
+                        {
+                            u8* q = pc;
+                            psReadFloat(&q);
+                            pc = q;
+                        }
+                        pp->pos.z += 2.0F * fval * HSD_Randf() - fval;
+                    }
+                    break;
 
-                    idx = pc[0] << 8;
-                    idx += pc[1];
-                    pc += 2;
+                case 0xA9:
+                    /* Call force function with float parameter */
+                    {
+                        u8* p = pc;
+                        psReadFloat(&p);
+                        pc = p;
+                    }
+                    hsd_80398F8C(pp, fval);
+                    break;
 
-                    if (linkNo >= 8) {
-                        child = NULL;
-                    } else if (bank >= 65) {
-                        child = NULL;
-                    } else if (idx >= psCmdListArray[bank]) {
-                        child = NULL;
-                    } else {
-                        cl = ptclref_804D0E5C[bank][idx];
-                        if (cl == NULL) {
+                case 0xAA:
+                    /* Spawn child particle with random ptclref index */
+                    {
+                        int randomRange;
+                        int idx;
+                        int palflag;
+                        int linkNo;
+                        HSD_Particle* c;
+
+                        idx = *pc++ << 8;
+                        idx += *pc++;
+                        randomRange = *pc++ << 8;
+                        randomRange += *pc++;
+
+                        idx += (s32) ((f32) randomRange * HSD_Randf());
+
+                        bank = pp->bank;
+                        (void) bank;
+                        if (hsd_804D0948[pp->bank] != NULL) {
+                            idx = hsd_804D0948[pp->bank][idx];
+                        }
+
+                        linkNo = pp->linkNo;
+                        (void) linkNo;
+                        if (linkNo >= 8) {
+                            child = NULL;
+                        } else if (bank >= 65) {
+                            child = NULL;
+                        } else if (idx >= psCmdListArray[bank]) {
                             child = NULL;
                         } else {
-                            tg = psTexGroupArray[bank][cl->texGroup];
-                            if (tg != NULL) {
-                                palflag = tg->palflag;
+                            cl = ptclref_804D0E5C[bank][idx];
+                            if (cl == NULL) {
+                                child = NULL;
                             } else {
-                                palflag = 0;
+                                tg = psTexGroupArray[bank][cl->texGroup];
+                                if (tg != NULL) {
+                                    palflag = tg->palflag;
+                                } else {
+                                    palflag = 0;
+                                }
+                                child = psGenerateParticle0(
+                                    &pp->next, linkNo, bank, cl->kind,
+                                    cl->texGroup, cl->cmdList, cl->life,
+                                    palflag, 0.0F, 0.0F, 0.0F, cl->vx, cl->vy,
+                                    cl->vz, cl->size, cl->grav, cl->fric, NULL,
+                                    0);
                             }
-                            child = psGenerateParticle0(
-                                &pp->next, linkNo, bank, cl->kind,
-                                cl->texGroup, cl->cmdList, cl->life, palflag,
-                                0.0F, 0.0F, 0.0F, cl->vx, cl->vy, cl->vz,
-                                cl->size, cl->grav, cl->fric, NULL, 0);
                         }
-                    }
-                    c = child;
-                    if (child != NULL) {
-                        HSD_psAppSRT* srt;
-                        child->pos.x = pp->pos.x;
-                        child->pos.y = pp->pos.y;
-                        child->pos.z = pp->pos.z;
-                        child->vel.x = pp->vel.x;
-                        child->vel.y = pp->vel.y;
-                        child->vel.z = pp->vel.z;
-                        child->idnum = pp->idnum;
-                        child->gen = pp->gen;
-                        if (pp->gen != NULL) {
-                            pp->gen->numChild++;
-                        }
-                        if ((srt = pp->appsrt) != NULL) {
-                            psAttachParticleAppSRT(c, srt);
-                        }
-                        hsd_8039930C(c, pp);
-                    }
-                }
-                break;
-
-            case 0xF2:
-                /* Spawn child + inherit pos/vel + ptclref remap */
-                {
-                    int idx;
-                    int palflag;
-                    HSD_Particle* c;
-                    int linkNo;
-                    bank = pp->bank;
-
-                    idx = pc[0] << 8;
-                    idx += pc[1];
-                    pc += 2;
-
-                    if (hsd_804D0948[pp->bank] != NULL) {
-                        idx = hsd_804D0948[pp->bank][idx];
-                    }
-
-                    linkNo = pp->linkNo;
-                    (void) linkNo;
-                    if (linkNo >= 8) {
-                        child = NULL;
-                    } else if (bank >= 65) {
-                        child = NULL;
-                    } else if (idx >= psCmdListArray[bank]) {
-                        child = NULL;
-                    } else {
-                        cl = ptclref_804D0E5C[bank][idx];
-                        if (cl == NULL) {
-                            child = NULL;
-                        } else {
-                            tg = psTexGroupArray[bank][cl->texGroup];
-                            if (tg != NULL) {
-                                palflag = tg->palflag;
-                            } else {
-                                palflag = 0;
+                        c = child;
+                        if (child != NULL) {
+                            child->pos.x = pp->pos.x;
+                            child->pos.y = pp->pos.y;
+                            child->pos.z = pp->pos.z;
+                            child->idnum = pp->idnum;
+                            child->gen = pp->gen;
+                            if (pp->gen != NULL) {
+                                pp->gen->numChild++;
                             }
-                            child = psGenerateParticle0(
-                                &pp->next, linkNo, bank, cl->kind,
-                                cl->texGroup, cl->cmdList, cl->life, palflag,
-                                0.0F, 0.0F, 0.0F, cl->vx, cl->vy, cl->vz,
-                                cl->size, cl->grav, cl->fric, NULL, 0);
+                            {
+                                HSD_psAppSRT* srt;
+                                if ((srt = pp->appsrt) != NULL) {
+                                    psAttachParticleAppSRT(c, srt);
+                                }
+                            }
+                            hsd_8039930C(c, pp);
                         }
                     }
-                    c = child;
-                    if (child != NULL) {
-                        child->pos.x = pp->pos.x;
-                        child->pos.y = pp->pos.y;
-                        child->pos.z = pp->pos.z;
-                        child->vel.x = pp->vel.x;
-                        child->vel.y = pp->vel.y;
-                        child->vel.z = pp->vel.z;
-                        child->idnum = pp->idnum;
-                        child->gen = pp->gen;
-                        if (pp->gen != NULL) {
-                            pp->gen->numChild++;
+                    break;
+
+                case 0xAB:
+                    /* Velocity scale */
+                    {
+                        f32 scale;
+                        u8* p = pc;
+                        psReadFloat(&p);
+                        pc = p;
+                        scale = fval;
+                        pp->vel.x *= scale;
+                        pp->vel.y *= scale;
+                        pp->vel.z *= scale;
+                    }
+                    break;
+
+                case 0xAC:
+                    /* Size interpolation with random */
+                    {
+                        f32 range;
+                        {
+                            u8* p = pc;
+                            u16 cnt;
+                            pp->sizeCount = *p++;
+                            cnt = pp->sizeCount;
+                            if (cnt & 0x80) {
+                                cnt = ((cnt & 0x7F) << 8) + *p++;
+                                pp->sizeCount = cnt;
+                            }
+                            psReadFloat(&p);
+                            pp->sizeTarget = fval;
+                            psReadFloat(&p);
+                            range = fval;
+                            pc = p;
+                        }
+                        pp->sizeTarget += range * HSD_Randf();
+                        if (pp->sizeCount == 0) {
+                            pp->size = pp->sizeTarget;
+                        }
+                    }
+                    break;
+
+                case 0xAD:
+                    /* Set PrimEnv flag */
+                    pp->kind |= PrimEnv;
+                    break;
+
+                case 0xAE:
+                    /* Clear Mirror flags */
+                    pp->kind &= ~(MirrorS | MirrorT);
+                    break;
+
+                case 0xAF:
+                    /* Set MirrorS */
+                    pp->kind &= ~MirrorT;
+                    pp->kind |= MirrorS;
+                    break;
+
+                case 0xB0:
+                    /* Set MirrorT */
+                    pp->kind &= ~MirrorS;
+                    pp->kind |= MirrorT;
+                    break;
+
+                case 0xB1:
+                    /* Set MirrorS | MirrorT */
+                    pp->kind |= (MirrorS | MirrorT);
+                    break;
+
+                case 0xB2:
+                    /* AppSRT matrix transform and detach */
+                    {
+                        HSD_psAppSRT* srt = pp->appsrt;
+                        if (srt == NULL) {
+                            break;
+                        }
+                        if (srt->xA2 != 0) {
+                            break;
+                        }
+                        hsd_803983A4(srt->gp);
+                        {
+                            Vec3* translate;
+                            Vec3* rot;
+                            Vec3* scale;
+                            MtxPtr mtx;
+                            srt = pp->appsrt;
+                            translate = &srt->translate;
+                            rot = (Vec3*) &srt->rot;
+                            scale = &srt->scale;
+                            mtx = srt->mmtx;
+                            HSD_MtxSRT(mtx, scale, rot, translate, NULL);
+                        }
+                        pp->pos.x = pp->appsrt->mmtx[0][0] * pp->pos.x +
+                                    pp->appsrt->mmtx[0][1] * pp->pos.y +
+                                    pp->appsrt->mmtx[0][2] * pp->pos.z +
+                                    pp->appsrt->mmtx[0][3];
+                        pp->pos.y = pp->appsrt->mmtx[1][0] * pp->pos.x +
+                                    pp->appsrt->mmtx[1][1] * pp->pos.y +
+                                    pp->appsrt->mmtx[1][2] * pp->pos.z +
+                                    pp->appsrt->mmtx[1][3];
+                        pp->pos.z = pp->appsrt->mmtx[2][0] * pp->pos.x +
+                                    pp->appsrt->mmtx[2][1] * pp->pos.y +
+                                    pp->appsrt->mmtx[2][2] * pp->pos.z +
+                                    pp->appsrt->mmtx[2][3];
+                        psRemoveParticleAppSRT(pp);
+                    }
+                    break;
+
+                case 0xB3:
+                    /* Alpha compare interpolation setup */
+                    {
+                        s32 step;
+
+                        if (pp->aCmpCount != 0) {
+                            step = ((s32) pp->aCmpRemain << 16) /
+                                   (s32) pp->aCmpCount;
+                            pp->aCmpParam1 =
+                                (u8) ((((s32) pp->aCmpParam1Target << 16) +
+                                       step * ((s32) pp->aCmpParam1 -
+                                               (s32) pp->aCmpParam1Target)) >>
+                                      16);
+                            pp->aCmpParam2 =
+                                (u8) ((((s32) pp->aCmpParam2Target << 16) +
+                                       step * ((s32) pp->aCmpParam2 -
+                                               (s32) pp->aCmpParam2Target)) >>
+                                      16);
                         }
                         {
+                            u8* p = pc;
+                            pp->aCmpCount = *p++;
+                            {
+                                u16 cnt = pp->aCmpCount;
+                                if (cnt & 0x80) {
+                                    cnt = ((cnt & 0x7F) << 8) + *p++;
+                                    pp->aCmpCount = cnt;
+                                }
+                            }
+                            pc = p;
+                            pp->aCmpMode = *pc++;
+                            pp->aCmpParam1Target = pc[0];
+                            pp->aCmpParam2Target = pc[1];
+                            pc += 2;
+                        }
+                        if (pp->aCmpCount == 0) {
+                            pp->aCmpParam1 = pp->aCmpParam1Target;
+                            pp->aCmpParam2 = pp->aCmpParam2Target;
+                            pp->aCmpRemain = 0;
+                            pp->aCmpCount = 0;
+                        } else {
+                            pp->aCmpRemain = pp->aCmpCount;
+                        }
+                    }
+                    break;
+
+                case 0xB4:
+                    /* Set TexInterpNear */
+                    pp->kind |= TexInterpNear;
+                    break;
+
+                case 0xB5:
+                    /* Clear TexInterpNear */
+                    pp->kind &= ~TexInterpNear;
+                    break;
+
+                case 0xB6:
+                    /* Rotate interpolation setup */
+                    {
+                        u8* p = pc;
+                        pp->rotateCount = *p++;
+                        {
+                            u16 cnt = pp->rotateCount;
+                            if (cnt & 0x80) {
+                                cnt = ((cnt & 0x7F) << 8) + *p++;
+                                pp->rotateCount = cnt;
+                            }
+                        }
+                        {
+                            u8* q = p;
+                            psReadFloat(&q);
+                            p = q;
+                        }
+                        pc = p;
+                        pp->rotateTarget += fval;
+                        if (pp->rotateCount == 0) {
+                            pp->rotate = pp->rotateTarget;
+                        }
+                    }
+                    break;
+
+                case 0xB7:
+                    /* Aim velocity toward JObj */
+                    {
+                        HSD_JObj* jobj = psPointJObj[*pc++ + pp->pJObjOfs];
+                        MtxPtr matrix;
+                        f32 dz, dy, dx, vel_mag_sq, dist_sq;
+
+                        if (jobj == NULL) {
+                            break;
+                        }
+                        HSD_JObjSetupMatrix(jobj);
+                        matrix = jobj->mtx;
+
+                        val = pp->vel.x * pp->vel.x + pp->vel.y * pp->vel.y;
+                        vel_mag_sq = pp->vel.z * pp->vel.z;
+                        vel_mag_sq += val;
+                        dx = matrix[0][3] - pp->pos.x;
+                        dy = matrix[1][3];
+                        dy -= pp->pos.y;
+                        dz = matrix[2][3] - pp->pos.z;
+                        if (vel_mag_sq > 0.0F) {
+                            double guess = __frsqrte((double) vel_mag_sq);
+                            guess = 0.5 * guess *
+                                    (3.0 - guess * guess * vel_mag_sq);
+                            guess = 0.5 * guess *
+                                    (3.0 - guess * guess * vel_mag_sq);
+                            guess = 0.5 * guess *
+                                    (3.0 - guess * guess * vel_mag_sq);
+                            vel_res = (f32) (vel_mag_sq * guess);
+                            vel_mag_sq = vel_res;
+                        }
+                        val = dx * dx + dy * dy;
+                        if ((dist_sq = dz * dz + val) == 0.0F) {
+                            break;
+                        }
+                        if (dist_sq > 0.0F) {
+                            double guess = __frsqrte((double) dist_sq);
+                            guess =
+                                0.5 * guess * (3.0 - guess * guess * dist_sq);
+                            guess =
+                                0.5 * guess * (3.0 - guess * guess * dist_sq);
+                            guess =
+                                0.5 * guess * (3.0 - guess * guess * dist_sq);
+                            dist_res = (f32) (dist_sq * guess);
+                            dist_sq = dist_res;
+                        }
+                        {
+                            f32 scale = vel_mag_sq / dist_sq;
+                            pp->vel.x = dx * scale;
+                            pp->vel.y = dy * scale;
+                            pp->vel.z = dz * scale;
+                        }
+                    }
+                    break;
+
+                case 0xB8:
+                    /* Force toward JObj with kill on proximity */
+                    {
+                        int idx = *pc++;
+                        f32 force, range;
+
+                        idx += pp->pJObjOfs;
+                        psReadFloat(&pc);
+                        force = fval;
+                        psReadFloat(&pc);
+                        range = fval;
+
+                        {
+                            HSD_JObj* jobj = psPointJObj[idx];
+                            if (hsd_803991D8((HSD_Generator*) pp, jobj, force,
+                                             range) != 0)
+                            {
+                                pp->life = 1;
+                                goto exit_loop;
+                            }
+                        }
+                    }
+                    break;
+
+                case 0xB9:
+                    /* Spawn child particle + inherit pos and vel */
+                    {
+                        int linkNo = pp->linkNo;
+                        int idx;
+                        int palflag;
+                        HSD_Particle* c;
+                        bank = pp->bank;
+
+                        idx = pc[0] << 8;
+                        idx += pc[1];
+                        pc += 2;
+
+                        if (linkNo >= 8) {
+                            child = NULL;
+                        } else if (bank >= 65) {
+                            child = NULL;
+                        } else if (idx >= psCmdListArray[bank]) {
+                            child = NULL;
+                        } else {
+                            cl = ptclref_804D0E5C[bank][idx];
+                            if (cl == NULL) {
+                                child = NULL;
+                            } else {
+                                tg = psTexGroupArray[bank][cl->texGroup];
+                                if (tg != NULL) {
+                                    palflag = tg->palflag;
+                                } else {
+                                    palflag = 0;
+                                }
+                                child = psGenerateParticle0(
+                                    &pp->next, linkNo, bank, cl->kind,
+                                    cl->texGroup, cl->cmdList, cl->life,
+                                    palflag, 0.0F, 0.0F, 0.0F, cl->vx, cl->vy,
+                                    cl->vz, cl->size, cl->grav, cl->fric, NULL,
+                                    0);
+                            }
+                        }
+                        c = child;
+                        if (child != NULL) {
                             HSD_psAppSRT* srt;
+                            child->pos.x = pp->pos.x;
+                            child->pos.y = pp->pos.y;
+                            child->pos.z = pp->pos.z;
+                            child->vel.x = pp->vel.x;
+                            child->vel.y = pp->vel.y;
+                            child->vel.z = pp->vel.z;
+                            child->idnum = pp->idnum;
+                            child->gen = pp->gen;
+                            if (pp->gen != NULL) {
+                                pp->gen->numChild++;
+                            }
                             if ((srt = pp->appsrt) != NULL) {
                                 psAttachParticleAppSRT(c, srt);
                             }
+                            hsd_8039930C(c, pp);
                         }
-                        hsd_8039930C(c, pp);
                     }
-                }
-                break;
+                    break;
 
-            case 0xBA:
-                /* PrimCol delta with random */
-                {
-                    s32 step;
-                    s8 delta;
-                    f32 rand_val;
-
-                    if (pp->primColCount != 0) {
-                        step = ((s32) pp->primColRemain << 16) /
-                               (s32) pp->primColCount;
-                        pp->primCol.r =
-                            (u8) ((((s32) pp->primColTarget.r << 16) +
-                                   step * ((s32) pp->primCol.r -
-                                           (s32) pp->primColTarget.r)) >>
-                                  16);
-                        pp->primCol.g =
-                            (u8) ((((s32) pp->primColTarget.g << 16) +
-                                   step * ((s32) pp->primCol.g -
-                                           (s32) pp->primColTarget.g)) >>
-                                  16);
-                        pp->primCol.b =
-                            (u8) ((((s32) pp->primColTarget.b << 16) +
-                                   step * ((s32) pp->primCol.b -
-                                           (s32) pp->primColTarget.b)) >>
-                                  16);
-                        pp->primCol.a =
-                            (u8) ((((s32) pp->primColTarget.a << 16) +
-                                   step * ((s32) pp->primCol.a -
-                                           (s32) pp->primColTarget.a)) >>
-                                  16);
-                    }
-
-                    rand_val = HSD_Randf();
-                    delta = (s8) *pc++;
-                    rand_val = (f32) (delta << 1) * rand_val;
-                    val = (f32) pp->primColTarget.r + rand_val;
-                    if (val < 0.0F) {
-                        val = 0.0F;
-                    }
-                    if (val > 255.0F) {
-                        val = 255.0F;
-                    }
-                    pp->primColTarget.r = (u8) (s32) val;
-
-                    rand_val = HSD_Randf();
-                    delta = (s8) *pc++;
-                    rand_val = (f32) (delta << 1) * rand_val;
-                    val = (f32) pp->primColTarget.g + rand_val;
-                    if (val < 0.0F) {
-                        val = 0.0F;
-                    }
-                    if (val > 255.0F) {
-                        val = 255.0F;
-                    }
-                    pp->primColTarget.g = (u8) (s32) val;
-
-                    rand_val = HSD_Randf();
-                    delta = (s8) *pc++;
-                    rand_val = (f32) (delta << 1) * rand_val;
-                    val = (f32) pp->primColTarget.b + rand_val;
-                    if (val < 0.0F) {
-                        val = 0.0F;
-                    }
-                    if (val > 255.0F) {
-                        val = 255.0F;
-                    }
-                    pp->primColTarget.b = (u8) (s32) val;
-
-                    rand_val = HSD_Randf();
-                    delta = (s8) *pc++;
-                    rand_val = (f32) (delta << 1) * rand_val;
-                    val = (f32) pp->primColTarget.a + rand_val;
-                    if (val < 0.0F) {
-                        val = 0.0F;
-                    }
-                    if (val > 255.0F) {
-                        val = 255.0F;
-                    }
-                    pp->primColTarget.a = (u8) (s32) val;
-
-                    if (pp->primColCount == 0) {
-                        pp->primCol = pp->primColTarget;
-                    } else {
-                        pp->primColRemain = pp->primColCount;
-                    }
-                }
-                break;
-
-            case 0xBB:
-                /* EnvCol delta with random */
-                {
-                    s32 step;
-                    s8 delta;
-                    f32 rand_val;
-
-                    if (pp->envColCount != 0) {
-                        step = ((s32) pp->envColRemain << 16) /
-                               (s32) pp->envColCount;
-                        pp->envCol.r =
-                            (u8) ((((s32) pp->envColTarget.r << 16) +
-                                   step * ((s32) pp->envCol.r -
-                                           (s32) pp->envColTarget.r)) >>
-                                  16);
-                        pp->envCol.g =
-                            (u8) ((((s32) pp->envColTarget.g << 16) +
-                                   step * ((s32) pp->envCol.g -
-                                           (s32) pp->envColTarget.g)) >>
-                                  16);
-                        pp->envCol.b =
-                            (u8) ((((s32) pp->envColTarget.b << 16) +
-                                   step * ((s32) pp->envCol.b -
-                                           (s32) pp->envColTarget.b)) >>
-                                  16);
-                        pp->envCol.a =
-                            (u8) ((((s32) pp->envColTarget.a << 16) +
-                                   step * ((s32) pp->envCol.a -
-                                           (s32) pp->envColTarget.a)) >>
-                                  16);
-                    }
-
-                    rand_val = HSD_Randf();
-                    delta = (s8) *pc++;
-                    rand_val = (f32) (delta << 1) * rand_val;
-                    val = (f32) pp->envColTarget.r + rand_val;
-                    if (val < 0.0F) {
-                        val = 0.0F;
-                    }
-                    if (val > 255.0F) {
-                        val = 255.0F;
-                    }
-                    pp->envColTarget.r = (u8) (s32) val;
-
-                    rand_val = HSD_Randf();
-                    delta = (s8) *pc++;
-                    rand_val = (f32) (delta << 1) * rand_val;
-                    val = (f32) pp->envColTarget.g + rand_val;
-                    if (val < 0.0F) {
-                        val = 0.0F;
-                    }
-                    if (val > 255.0F) {
-                        val = 255.0F;
-                    }
-                    pp->envColTarget.g = (u8) (s32) val;
-
-                    rand_val = HSD_Randf();
-                    delta = (s8) *pc++;
-                    rand_val = (f32) (delta << 1) * rand_val;
-                    val = (f32) pp->envColTarget.b + rand_val;
-                    if (val < 0.0F) {
-                        val = 0.0F;
-                    }
-                    if (val > 255.0F) {
-                        val = 255.0F;
-                    }
-                    pp->envColTarget.b = (u8) (s32) val;
-
-                    rand_val = HSD_Randf();
-                    delta = (s8) *pc++;
-                    rand_val = (f32) (delta << 1) * rand_val;
-                    val = (f32) pp->envColTarget.a + rand_val;
-                    if (val < 0.0F) {
-                        val = 0.0F;
-                    }
-                    if (val > 255.0F) {
-                        val = 255.0F;
-                    }
-                    pp->envColTarget.a = (u8) (s32) val;
-
-                    if (pp->envColCount == 0) {
-                        pp->envCol = pp->envColTarget;
-                    } else {
-                        pp->envColRemain = pp->envColCount;
-                    }
-                }
-                break;
-
-            case 0xBC:
-                /* PoseNum with random */
-                {
-                    f32 randRange;
-
-                    pp->poseNum = *pc++;
-                    randRange = *pc++;
-                    pp->poseNum = (u8) (s32) (randRange * HSD_Randf() +
-                                              (f32) pp->poseNum);
+                case 0xF2:
+                    /* Spawn child + inherit pos/vel + ptclref remap */
                     {
-                        u8 bank = pp->bank;
-                        u8 tgIdx = pp->texGroup;
-                        HSD_PSTexGroup** tga;
-                        HSD_PSTexGroup* texGrp;
+                        int idx;
+                        int palflag;
+                        HSD_Particle* c;
+                        int linkNo;
+                        bank = pp->bank;
 
-                        tga = psTexGroupArray[bank];
-                        texGrp = tga[tgIdx];
-                        if (texGrp != NULL) {
-                            psEnableTexture(pp, texGrp->texTable);
+                        idx = pc[0] << 8;
+                        idx += pc[1];
+                        pc += 2;
+
+                        if (hsd_804D0948[pp->bank] != NULL) {
+                            idx = hsd_804D0948[pp->bank][idx];
                         }
-                    }
-                }
-                break;
 
-            case 0xBD:
-                /* Normalize velocity to target speed */
-                {
-                    f32 base_speed, random_range;
-                    f32 mag;
-
-                    {
-                        {
-                            u8* q = pc;
-                            psReadFloat(&q);
-                            pc = q;
-                        }
-                        base_speed = fval;
-                        {
-                            u8* q = pc;
-                            psReadFloat(&q);
-                            pc = q;
-                        }
-                        random_range = fval;
-                    }
-                    base_speed += random_range * HSD_Randf();
-                    mag = pp->vel.x * pp->vel.x + pp->vel.y * pp->vel.y +
-                          pp->vel.z * pp->vel.z;
-                    if (mag > 0.0F) {
-                        double guess = __frsqrte((double) mag);
-                        guess = 0.5 * guess * (3.0 - guess * guess * mag);
-                        guess = 0.5 * guess * (3.0 - guess * guess * mag);
-                        guess = 0.5 * guess * (3.0 - guess * guess * mag);
-                        sqrt_res = (f32) (mag * guess);
-                        mag = sqrt_res;
-                    }
-                    if (mag > 1e-10F) {
-                        base_speed /= mag;
-                        pp->vel.x *= base_speed;
-                        pp->vel.y *= base_speed;
-                        pp->vel.z *= base_speed;
-                    }
-                }
-                break;
-
-            case 0xBE:
-                /* Velocity component multiply */
-                {
-                    u8* p = pc;
-                    {
-                        u8* q = p;
-                        psReadFloat(&q);
-                        p = q;
-                    }
-                    pp->vel.x *= fval;
-                    {
-                        u8* q = p;
-                        psReadFloat(&q);
-                        p = q;
-                    }
-                    pp->vel.y *= fval;
-                    {
-                        u8* q = p;
-                        psReadFloat(&q);
-                        p = q;
-                    }
-                    pc = p;
-                    pp->vel.z *= fval;
-                }
-                break;
-
-            case 0xBF:
-                /* JObj offset */
-                {
-                    u8 idx = *pc++;
-                    pp->kind |= (((idx + pp->pJObjOfs) & 7) << 12) | 0x8000;
-                }
-                break;
-
-            case 0xC0:
-                /* PrimCol selective channel setup */
-                {
-                    s32 step;
-                    u16 cnt;
-
-                    if (pp->primColCount != 0) {
-                        step = ((s32) pp->primColRemain << 16) /
-                               (s32) pp->primColCount;
-                        pp->primCol.r =
-                            (u8) ((((s32) pp->primColTarget.r << 16) +
-                                   step * ((s32) pp->primCol.r -
-                                           (s32) pp->primColTarget.r)) >>
-                                  16);
-                        pp->primCol.g =
-                            (u8) ((((s32) pp->primColTarget.g << 16) +
-                                   step * ((s32) pp->primCol.g -
-                                           (s32) pp->primColTarget.g)) >>
-                                  16);
-                        pp->primCol.b =
-                            (u8) ((((s32) pp->primColTarget.b << 16) +
-                                   step * ((s32) pp->primCol.b -
-                                           (s32) pp->primColTarget.b)) >>
-                                  16);
-                        pp->primCol.a =
-                            (u8) ((((s32) pp->primColTarget.a << 16) +
-                                   step * ((s32) pp->primCol.a -
-                                           (s32) pp->primColTarget.a)) >>
-                                  16);
-                    }
-                    {
-                        u8* p = pc;
-                        pp->primColCount = *p++;
-                        cnt = pp->primColCount;
-                        if (cnt & 0x80) {
-                            cnt = ((cnt & 0x7F) << 8) + *p++;
-                            pp->primColCount = cnt;
-                        }
-                        pc = p;
-                    }
-                    pp->primColTarget = pp->primCol;
-                    if (opcode & 1) {
-                        pp->primColTarget.r = *pc++;
-                    }
-                    if (opcode & 2) {
-                        pp->primColTarget.g = *pc++;
-                    }
-                    if (opcode & 4) {
-                        pp->primColTarget.b = *pc++;
-                    }
-                    if (opcode & 8) {
-                        pp->primColTarget.a = *pc++;
-                    }
-                    if (pp->primColCount == 0) {
-                        pp->primCol = pp->primColTarget;
-                        pp->primColRemain = 0;
-                    } else {
-                        pp->primColRemain = pp->primColCount;
-                    }
-                }
-                break;
-
-            case 0xD0:
-                /* EnvCol selective channel setup */
-                {
-                    s32 step;
-                    u16 cnt;
-
-                    if (pp->envColCount != 0) {
-                        step = ((s32) pp->envColRemain << 16) /
-                               (s32) pp->envColCount;
-                        pp->envCol.r =
-                            (u8) ((((s32) pp->envColTarget.r << 16) +
-                                   step * ((s32) pp->envCol.r -
-                                           (s32) pp->envColTarget.r)) >>
-                                  16);
-                        pp->envCol.g =
-                            (u8) ((((s32) pp->envColTarget.g << 16) +
-                                   step * ((s32) pp->envCol.g -
-                                           (s32) pp->envColTarget.g)) >>
-                                  16);
-                        pp->envCol.b =
-                            (u8) ((((s32) pp->envColTarget.b << 16) +
-                                   step * ((s32) pp->envCol.b -
-                                           (s32) pp->envColTarget.b)) >>
-                                  16);
-                        pp->envCol.a =
-                            (u8) ((((s32) pp->envColTarget.a << 16) +
-                                   step * ((s32) pp->envCol.a -
-                                           (s32) pp->envColTarget.a)) >>
-                                  16);
-                    }
-                    {
-                        u8* p = pc;
-                        pp->envColCount = *p++;
-                        cnt = pp->envColCount;
-                        if (cnt & 0x80) {
-                            cnt = ((cnt & 0x7F) << 8) + *p++;
-                            pp->envColCount = cnt;
-                        }
-                        pc = p;
-                    }
-                    pp->envColTarget = pp->envCol;
-                    if (opcode & 1) {
-                        pp->envColTarget.r = *pc++;
-                    }
-                    if (opcode & 2) {
-                        pp->envColTarget.g = *pc++;
-                    }
-                    if (opcode & 4) {
-                        pp->envColTarget.b = *pc++;
-                    }
-                    if (opcode & 8) {
-                        pp->envColTarget.a = *pc++;
-                    }
-                    if (pp->envColCount == 0) {
-                        pp->envCol = pp->envColTarget;
-                        pp->envColRemain = 0;
-                    } else {
-                        pp->envColRemain = pp->envColCount;
-                    }
-                }
-                break;
-
-            case 0xE0:
-                /* Dual delta PrimCol + EnvCol */
-                {
-                    s32 step;
-                    s8 delta;
-                    f32 rand_r;
-                    f32 rand_g;
-                    f32 rand_b;
-                    f32 rand_a;
-
-                    if (pp->primColCount != 0) {
-                        step = ((s32) pp->primColRemain << 16) /
-                               (s32) pp->primColCount;
-                        pp->primCol.r =
-                            (u8) ((((s32) pp->primColTarget.r << 16) +
-                                   step * ((s32) pp->primCol.r -
-                                           (s32) pp->primColTarget.r)) >>
-                                  16);
-                        pp->primCol.g =
-                            (u8) ((((s32) pp->primColTarget.g << 16) +
-                                   step * ((s32) pp->primCol.g -
-                                           (s32) pp->primColTarget.g)) >>
-                                  16);
-                        pp->primCol.b =
-                            (u8) ((((s32) pp->primColTarget.b << 16) +
-                                   step * ((s32) pp->primCol.b -
-                                           (s32) pp->primColTarget.b)) >>
-                                  16);
-                        pp->primCol.a =
-                            (u8) ((((s32) pp->primColTarget.a << 16) +
-                                   step * ((s32) pp->primCol.a -
-                                           (s32) pp->primColTarget.a)) >>
-                                  16);
-                    }
-                    if (pp->envColCount != 0) {
-                        step = ((s32) pp->envColRemain << 16) /
-                               (s32) pp->envColCount;
-                        pp->envCol.r =
-                            (u8) ((((s32) pp->envColTarget.r << 16) +
-                                   step * ((s32) pp->envCol.r -
-                                           (s32) pp->envColTarget.r)) >>
-                                  16);
-                        pp->envCol.g =
-                            (u8) ((((s32) pp->envColTarget.g << 16) +
-                                   step * ((s32) pp->envCol.g -
-                                           (s32) pp->envColTarget.g)) >>
-                                  16);
-                        pp->envCol.b =
-                            (u8) ((((s32) pp->envColTarget.b << 16) +
-                                   step * ((s32) pp->envCol.b -
-                                           (s32) pp->envColTarget.b)) >>
-                                  16);
-                        pp->envCol.a =
-                            (u8) ((((s32) pp->envColTarget.a << 16) +
-                                   step * ((s32) pp->envCol.a -
-                                           (s32) pp->envColTarget.a)) >>
-                                  16);
-                    }
-
-                    rand_r = HSD_Randf();
-
-                    delta = (s8) *pc++;
-                    rand_r = (f32) (delta << 1) * rand_r;
-                    val = (f32) pp->primColTarget.r + rand_r;
-                    if (val < 0.0F) {
-                        val = 0.0F;
-                    }
-                    if (val > 255.0F) {
-                        val = 255.0F;
-                    }
-                    pp->primColTarget.r = (u8) (s32) val;
-                    val = (f32) pp->envColTarget.r + rand_r;
-                    if (val < 0.0F) {
-                        val = 0.0F;
-                    }
-                    if (val > 255.0F) {
-                        val = 255.0F;
-                    }
-                    pp->envColTarget.r = (u8) (s32) val;
-
-                    rand_g = HSD_Randf();
-                    delta = (s8) *pc++;
-                    rand_g = (f32) (delta << 1) * rand_g;
-                    val = (f32) pp->primColTarget.g + rand_g;
-                    if (val < 0.0F) {
-                        val = 0.0F;
-                    }
-                    if (val > 255.0F) {
-                        val = 255.0F;
-                    }
-                    pp->primColTarget.g = (u8) (s32) val;
-                    val = (f32) pp->envColTarget.g + rand_g;
-                    if (val < 0.0F) {
-                        val = 0.0F;
-                    }
-                    if (val > 255.0F) {
-                        val = 255.0F;
-                    }
-                    pp->envColTarget.g = (u8) (s32) val;
-
-                    rand_b = HSD_Randf();
-                    delta = (s8) *pc++;
-                    rand_b = (f32) (delta << 1) * rand_b;
-                    val = (f32) pp->primColTarget.b + rand_b;
-                    if (val < 0.0F) {
-                        val = 0.0F;
-                    }
-                    if (val > 255.0F) {
-                        val = 255.0F;
-                    }
-                    pp->primColTarget.b = (u8) (s32) val;
-                    val = (f32) pp->envColTarget.b + rand_b;
-                    if (val < 0.0F) {
-                        val = 0.0F;
-                    }
-                    if (val > 255.0F) {
-                        val = 255.0F;
-                    }
-                    pp->envColTarget.b = (u8) (s32) val;
-
-                    rand_a = HSD_Randf();
-                    delta = (s8) *pc++;
-                    rand_a = (f32) (delta << 1) * rand_a;
-                    val = (f32) pp->primColTarget.a + rand_a;
-                    if (val < 0.0F) {
-                        val = 0.0F;
-                    }
-                    if (val > 255.0F) {
-                        val = 255.0F;
-                    }
-                    pp->primColTarget.a = (u8) (s32) val;
-                    val = (f32) pp->envColTarget.a + rand_a;
-                    if (val < 0.0F) {
-                        val = 0.0F;
-                    }
-                    if (val > 255.0F) {
-                        val = 255.0F;
-                    }
-                    pp->envColTarget.a = (u8) (s32) val;
-
-                    if (pp->primColCount == 0) {
-                        pp->primCol = pp->primColTarget;
-                    }
-                    pp->primColRemain = pp->primColCount;
-                    if (pp->envColCount == 0) {
-                        pp->envCol = pp->envColTarget;
-                    }
-                    pp->envColRemain = pp->envColCount;
-                }
-                break;
-
-            case 0xE9:
-                /* Dual PrimCol + EnvCol interp + selective random delta */
-                {
-                    s32 step;
-                    int timing;
-                    int flags;
-                    f32 scale;
-                    s8 delta;
-                    f32 delta_float;
-
-                    /* Interpolate primCol */
-                    if (pp->primColCount != 0) {
-                        step = ((s32) pp->primColRemain << 16) /
-                               (s32) pp->primColCount;
-                        pp->primCol.r =
-                            (u8) ((((s32) pp->primColTarget.r << 16) +
-                                   step * ((s32) pp->primCol.r -
-                                           (s32) pp->primColTarget.r)) >>
-                                  16);
-                        pp->primCol.g =
-                            (u8) ((((s32) pp->primColTarget.g << 16) +
-                                   step * ((s32) pp->primCol.g -
-                                           (s32) pp->primColTarget.g)) >>
-                                  16);
-                        pp->primCol.b =
-                            (u8) ((((s32) pp->primColTarget.b << 16) +
-                                   step * ((s32) pp->primCol.b -
-                                           (s32) pp->primColTarget.b)) >>
-                                  16);
-                        pp->primCol.a =
-                            (u8) ((((s32) pp->primColTarget.a << 16) +
-                                   step * ((s32) pp->primCol.a -
-                                           (s32) pp->primColTarget.a)) >>
-                                  16);
-                    }
-
-                    /* Interpolate envCol */
-                    if (pp->envColCount != 0) {
-                        step = ((s32) pp->envColRemain << 16) /
-                               (s32) pp->envColCount;
-                        pp->envCol.r =
-                            (u8) ((((s32) pp->envColTarget.r << 16) +
-                                   step * ((s32) pp->envCol.r -
-                                           (s32) pp->envColTarget.r)) >>
-                                  16);
-                        pp->envCol.g =
-                            (u8) ((((s32) pp->envColTarget.g << 16) +
-                                   step * ((s32) pp->envCol.g -
-                                           (s32) pp->envColTarget.g)) >>
-                                  16);
-                        pp->envCol.b =
-                            (u8) ((((s32) pp->envColTarget.b << 16) +
-                                   step * ((s32) pp->envCol.b -
-                                           (s32) pp->envColTarget.b)) >>
-                                  16);
-                        pp->envCol.a =
-                            (u8) ((((s32) pp->envColTarget.a << 16) +
-                                   step * ((s32) pp->envCol.a -
-                                           (s32) pp->envColTarget.a)) >>
-                                  16);
-                    }
-
-                    /* Read timing and flags from bytecode */
-                    flags = *pc++;
-                    timing = *pc++;
-
-                    /* Compute scale from timing */
-                    if (timing != 0) {
-                        scale =
-                            (f32) (s32) ((f32) (timing + 1) * HSD_Randf()) /
-                            (f32) timing;
-                    } else {
-                        scale = HSD_Randf();
-                    }
-
-                    /* R channel delta */
-                    if (flags & 0x01) {
-                        delta = (s8) *pc++;
-                        delta_float = scale * (f32) (delta << 1);
-                        if (flags & 0x10) {
-                            val = (f32) pp->primColTarget.r + delta_float;
-                            if (val < 0.0F) {
-                                val = 0.0F;
-                            }
-                            if (val > 255.0F) {
-                                val = 255.0F;
-                            }
-                            pp->primColTarget.r = (u8) (s32) val;
-                        }
-                        if (flags & 0x20) {
-                            val = (f32) pp->envColTarget.r + delta_float;
-                            if (val < 0.0F) {
-                                val = 0.0F;
-                            }
-                            if (val > 255.0F) {
-                                val = 255.0F;
-                            }
-                            pp->envColTarget.r = (u8) (s32) val;
-                        }
-                    }
-
-                    /* G channel delta */
-                    if (flags & 0x02) {
-                        delta = (s8) *pc++;
-                        delta_float = scale * (f32) (delta << 1);
-                        if (flags & 0x10) {
-                            val = (f32) pp->primColTarget.g + delta_float;
-                            if (val < 0.0F) {
-                                val = 0.0F;
-                            }
-                            if (val > 255.0F) {
-                                val = 255.0F;
-                            }
-                            pp->primColTarget.g = (u8) (s32) val;
-                        }
-                        if (flags & 0x20) {
-                            val = (f32) pp->envColTarget.g + delta_float;
-                            if (val < 0.0F) {
-                                val = 0.0F;
-                            }
-                            if (val > 255.0F) {
-                                val = 255.0F;
-                            }
-                            pp->envColTarget.g = (u8) (s32) val;
-                        }
-                    }
-
-                    /* B channel delta */
-                    if (flags & 0x04) {
-                        delta = (s8) *pc++;
-                        delta_float = scale * (f32) (delta << 1);
-                        if (flags & 0x10) {
-                            val = (f32) pp->primColTarget.b + delta_float;
-                            if (val < 0.0F) {
-                                val = 0.0F;
-                            }
-                            if (val > 255.0F) {
-                                val = 255.0F;
-                            }
-                            pp->primColTarget.b = (u8) (s32) val;
-                        }
-                        if (flags & 0x20) {
-                            val = (f32) pp->envColTarget.b + delta_float;
-                            if (val < 0.0F) {
-                                val = 0.0F;
-                            }
-                            if (val > 255.0F) {
-                                val = 255.0F;
-                            }
-                            pp->envColTarget.b = (u8) (s32) val;
-                        }
-                    }
-
-                    /* A channel delta (separate random) */
-                    if (flags & 0x08) {
-                        f32 a_rand;
-                        a_rand = HSD_Randf();
-                        delta = *(s8*) pc++;
-                        a_rand = (f32) (s32) ((f32) (timing + 1) * a_rand);
-                        delta_float =
-                            ((f32) (delta << 1) * a_rand) / (f32) timing;
-                        if (flags & 0x10) {
-                            val = (f32) pp->primColTarget.a + delta_float;
-                            if (val < 0.0F) {
-                                val = 0.0F;
-                            }
-                            if (val > 255.0F) {
-                                val = 255.0F;
-                            }
-                            pp->primColTarget.a = (u8) (s32) val;
-                        }
-                        if (flags & 0x20) {
-                            val = (f32) pp->envColTarget.a + delta_float;
-                            if (val < 0.0F) {
-                                val = 0.0F;
-                            }
-                            if (val > 255.0F) {
-                                val = 255.0F;
-                            }
-                            pp->envColTarget.a = (u8) (s32) val;
-                        }
-                    }
-
-                    /* Final: sync current from target if count is 0 */
-                    if (pp->primColCount == 0) {
-                        pp->primCol = pp->primColTarget;
-                    }
-                    pp->primColRemain = pp->primColCount;
-                    if (pp->envColCount == 0) {
-                        pp->envCol = pp->envColTarget;
-                    }
-                    pp->envColRemain = pp->envColCount;
-                }
-                break;
-
-            case 0xE1:
-                /* Callback set */
-                {
-                    int idx = *pc++;
-                    if (idx == 0) {
-                        pp->callback = NULL;
-                    } else {
-                        pp->callback = psCallback[idx - 1];
-                    }
-                }
-                break;
-
-            case 0xEC:
-                /* UserData set */
-                {
-                    int idx = *pc++;
-                    u8* p = pc;
-                    f32 v;
-                    psReadFloat(&p);
-                    pc = p;
-                    v = fval;
-                    if (pp->gen->userfunc != NULL &&
-                        pp->gen->userfunc->setUserData != NULL)
-                    {
-                        pp->gen->userfunc->setUserData(pp, idx, v);
-                    } else if (pp->userdata != NULL) {
-                        pp->userdata[idx] = v;
-                    }
-                }
-                break;
-
-            case 0xE2:
-                /* Set TexEdge (kill) bit */
-                pp->kind |= TexEdge;
-                break;
-
-            case 0xE3:
-                /* Set palNum */
-                pp->palNum = *pc++;
-                break;
-
-            case 0xE4:
-                /* TexFlipS control */
-                {
-                    u8 mode = *pc++ & 0x3;
-                    switch (mode) {
-                    case 0:
-                        pp->kind &= ~TexFlipS;
-                        break;
-                    case 1:
-                        pp->kind |= TexFlipS;
-                        break;
-                    case 2:
-                        pp->kind ^= TexFlipS;
-                        break;
-                    case 3:
-                        if (HSD_Randf() < 0.5F) {
-                            pp->kind &= ~TexFlipS;
+                        linkNo = pp->linkNo;
+                        (void) linkNo;
+                        if (linkNo >= 8) {
+                            child = NULL;
+                        } else if (bank >= 65) {
+                            child = NULL;
+                        } else if (idx >= psCmdListArray[bank]) {
+                            child = NULL;
                         } else {
-                            pp->kind |= TexFlipS;
+                            cl = ptclref_804D0E5C[bank][idx];
+                            if (cl == NULL) {
+                                child = NULL;
+                            } else {
+                                tg = psTexGroupArray[bank][cl->texGroup];
+                                if (tg != NULL) {
+                                    palflag = tg->palflag;
+                                } else {
+                                    palflag = 0;
+                                }
+                                child = psGenerateParticle0(
+                                    &pp->next, linkNo, bank, cl->kind,
+                                    cl->texGroup, cl->cmdList, cl->life,
+                                    palflag, 0.0F, 0.0F, 0.0F, cl->vx, cl->vy,
+                                    cl->vz, cl->size, cl->grav, cl->fric, NULL,
+                                    0);
+                            }
                         }
-                        break;
+                        c = child;
+                        if (child != NULL) {
+                            child->pos.x = pp->pos.x;
+                            child->pos.y = pp->pos.y;
+                            child->pos.z = pp->pos.z;
+                            child->vel.x = pp->vel.x;
+                            child->vel.y = pp->vel.y;
+                            child->vel.z = pp->vel.z;
+                            child->idnum = pp->idnum;
+                            child->gen = pp->gen;
+                            if (pp->gen != NULL) {
+                                pp->gen->numChild++;
+                            }
+                            {
+                                HSD_psAppSRT* srt;
+                                if ((srt = pp->appsrt) != NULL) {
+                                    psAttachParticleAppSRT(c, srt);
+                                }
+                            }
+                            hsd_8039930C(c, pp);
+                        }
                     }
-                }
-                break;
+                    break;
 
-            case 0xE5:
-                /* TexFlipT control */
-                {
-                    u8 mode = *pc++ & 0x3;
-                    switch (mode) {
-                    case 0:
-                        pp->kind &= ~TexFlipT;
-                        break;
-                    case 1:
-                        pp->kind |= TexFlipT;
-                        break;
-                    case 2:
-                        pp->kind ^= TexFlipT;
-                        break;
-                    case 3:
-                        if (HSD_Randf() < 0.5F) {
-                            pp->kind &= ~TexFlipT;
+                case 0xBA:
+                    /* PrimCol delta with random */
+                    {
+                        s32 step;
+                        s8 delta;
+                        f32 rand_val;
+
+                        if (pp->primColCount != 0) {
+                            step = ((s32) pp->primColRemain << 16) /
+                                   (s32) pp->primColCount;
+                            pp->primCol.r =
+                                (u8) ((((s32) pp->primColTarget.r << 16) +
+                                       step * ((s32) pp->primCol.r -
+                                               (s32) pp->primColTarget.r)) >>
+                                      16);
+                            pp->primCol.g =
+                                (u8) ((((s32) pp->primColTarget.g << 16) +
+                                       step * ((s32) pp->primCol.g -
+                                               (s32) pp->primColTarget.g)) >>
+                                      16);
+                            pp->primCol.b =
+                                (u8) ((((s32) pp->primColTarget.b << 16) +
+                                       step * ((s32) pp->primCol.b -
+                                               (s32) pp->primColTarget.b)) >>
+                                      16);
+                            pp->primCol.a =
+                                (u8) ((((s32) pp->primColTarget.a << 16) +
+                                       step * ((s32) pp->primCol.a -
+                                               (s32) pp->primColTarget.a)) >>
+                                      16);
+                        }
+
+                        rand_val = HSD_Randf();
+                        delta = (s8) *pc++;
+                        rand_val = (f32) (delta << 1) * rand_val;
+                        val = (f32) pp->primColTarget.r + rand_val;
+                        if (val < 0.0F) {
+                            val = 0.0F;
+                        }
+                        if (val > 255.0F) {
+                            val = 255.0F;
+                        }
+                        pp->primColTarget.r = (u8) (s32) val;
+
+                        rand_val = HSD_Randf();
+                        delta = (s8) *pc++;
+                        rand_val = (f32) (delta << 1) * rand_val;
+                        val = (f32) pp->primColTarget.g + rand_val;
+                        if (val < 0.0F) {
+                            val = 0.0F;
+                        }
+                        if (val > 255.0F) {
+                            val = 255.0F;
+                        }
+                        pp->primColTarget.g = (u8) (s32) val;
+
+                        rand_val = HSD_Randf();
+                        delta = (s8) *pc++;
+                        rand_val = (f32) (delta << 1) * rand_val;
+                        val = (f32) pp->primColTarget.b + rand_val;
+                        if (val < 0.0F) {
+                            val = 0.0F;
+                        }
+                        if (val > 255.0F) {
+                            val = 255.0F;
+                        }
+                        pp->primColTarget.b = (u8) (s32) val;
+
+                        rand_val = HSD_Randf();
+                        delta = (s8) *pc++;
+                        rand_val = (f32) (delta << 1) * rand_val;
+                        val = (f32) pp->primColTarget.a + rand_val;
+                        if (val < 0.0F) {
+                            val = 0.0F;
+                        }
+                        if (val > 255.0F) {
+                            val = 255.0F;
+                        }
+                        pp->primColTarget.a = (u8) (s32) val;
+
+                        if (pp->primColCount == 0) {
+                            pp->primCol = pp->primColTarget;
                         } else {
-                            pp->kind |= TexFlipT;
+                            pp->primColRemain = pp->primColCount;
                         }
-                        break;
                     }
-                }
-                break;
+                    break;
 
-            case 0xE6:
-                /* Set DirVec */
-                pp->kind |= DirVec;
-                break;
-
-            case 0xE7:
-                /* Clear DirVec */
-                pp->kind &= ~DirVec;
-                break;
-
-            case 0xE8:
-                /* Trail control */
-                {
-                    f32 trail;
-                    u8* p = pc;
-                    psReadFloat(&p);
-                    pc = p;
-                    trail = fval;
-                    if (trail < 0.0F) {
-                        pp->kind &= ~Trail;
-                    } else {
-                        pp->kind |= Trail;
-                        pp->trail = trail;
-                    }
-                }
-                break;
-
-            case 0xEA:
-                /* MatCol interpolation setup */
-                {
-                    s32 step;
-                    u16 cnt;
-                    u8 flags;
-
-                    if (pp->matColCount != 0) {
-                        step = ((s32) pp->matColRemain << 16) /
-                               (s32) pp->matColCount;
-                        pp->matRGB = (u8) ((((s32) pp->matRGBTarget << 16) +
-                                            step * ((s32) pp->matRGB -
-                                                    (s32) pp->matRGBTarget)) >>
-                                           16);
-                        pp->matA = (u8) ((((s32) pp->matATarget << 16) +
-                                          step * ((s32) pp->matA -
-                                                  (s32) pp->matATarget)) >>
-                                         16);
-                    }
+                case 0xBB:
+                    /* EnvCol delta with random */
                     {
-                        u8* p = pc;
-                        pp->matColCount = *p++;
-                        cnt = pp->matColCount;
-                        if (cnt & 0x80) {
-                            cnt = ((cnt & 0x7F) << 8) + *p++;
-                            pp->matColCount = cnt;
+                        s32 step;
+                        s8 delta;
+                        f32 rand_val;
+
+                        if (pp->envColCount != 0) {
+                            step = ((s32) pp->envColRemain << 16) /
+                                   (s32) pp->envColCount;
+                            pp->envCol.r =
+                                (u8) ((((s32) pp->envColTarget.r << 16) +
+                                       step * ((s32) pp->envCol.r -
+                                               (s32) pp->envColTarget.r)) >>
+                                      16);
+                            pp->envCol.g =
+                                (u8) ((((s32) pp->envColTarget.g << 16) +
+                                       step * ((s32) pp->envCol.g -
+                                               (s32) pp->envColTarget.g)) >>
+                                      16);
+                            pp->envCol.b =
+                                (u8) ((((s32) pp->envColTarget.b << 16) +
+                                       step * ((s32) pp->envCol.b -
+                                               (s32) pp->envColTarget.b)) >>
+                                      16);
+                            pp->envCol.a =
+                                (u8) ((((s32) pp->envColTarget.a << 16) +
+                                       step * ((s32) pp->envCol.a -
+                                               (s32) pp->envColTarget.a)) >>
+                                      16);
                         }
-                        pc = p;
-                        flags = *pc++;
-                    }
-                    pp->matRGBTarget = pp->matRGB;
-                    if (flags & 1) {
-                        pp->matRGBTarget = *pc++;
-                    }
-                    if (flags & 8) {
-                        pp->matATarget = *pc++;
-                    }
-                    if (pp->matColCount == 0) {
-                        pp->matRGB = pp->matRGBTarget;
-                        pp->matColRemain = 0;
-                    } else {
-                        pp->matColRemain = pp->matColCount;
-                    }
-                }
-                break;
 
-            case 0xEB:
-                /* AmbCol interpolation setup */
-                {
-                    s32 step;
-                    u16 cnt;
-                    u8 flags;
+                        rand_val = HSD_Randf();
+                        delta = (s8) *pc++;
+                        rand_val = (f32) (delta << 1) * rand_val;
+                        val = (f32) pp->envColTarget.r + rand_val;
+                        if (val < 0.0F) {
+                            val = 0.0F;
+                        }
+                        if (val > 255.0F) {
+                            val = 255.0F;
+                        }
+                        pp->envColTarget.r = (u8) (s32) val;
 
-                    if (pp->ambColCount != 0) {
-                        step = ((s32) pp->ambColRemain << 16) /
-                               (s32) pp->ambColCount;
-                        pp->ambRGB = (u8) ((((s32) pp->ambRGBTarget << 16) +
-                                            step * ((s32) pp->ambRGB -
-                                                    (s32) pp->ambRGBTarget)) >>
-                                           16);
-                        pp->ambA = (u8) ((((s32) pp->ambATarget << 16) +
-                                          step * ((s32) pp->ambA -
-                                                  (s32) pp->ambATarget)) >>
-                                         16);
+                        rand_val = HSD_Randf();
+                        delta = (s8) *pc++;
+                        rand_val = (f32) (delta << 1) * rand_val;
+                        val = (f32) pp->envColTarget.g + rand_val;
+                        if (val < 0.0F) {
+                            val = 0.0F;
+                        }
+                        if (val > 255.0F) {
+                            val = 255.0F;
+                        }
+                        pp->envColTarget.g = (u8) (s32) val;
+
+                        rand_val = HSD_Randf();
+                        delta = (s8) *pc++;
+                        rand_val = (f32) (delta << 1) * rand_val;
+                        val = (f32) pp->envColTarget.b + rand_val;
+                        if (val < 0.0F) {
+                            val = 0.0F;
+                        }
+                        if (val > 255.0F) {
+                            val = 255.0F;
+                        }
+                        pp->envColTarget.b = (u8) (s32) val;
+
+                        rand_val = HSD_Randf();
+                        delta = (s8) *pc++;
+                        rand_val = (f32) (delta << 1) * rand_val;
+                        val = (f32) pp->envColTarget.a + rand_val;
+                        if (val < 0.0F) {
+                            val = 0.0F;
+                        }
+                        if (val > 255.0F) {
+                            val = 255.0F;
+                        }
+                        pp->envColTarget.a = (u8) (s32) val;
+
+                        if (pp->envColCount == 0) {
+                            pp->envCol = pp->envColTarget;
+                        } else {
+                            pp->envColRemain = pp->envColCount;
+                        }
                     }
+                    break;
+
+                case 0xBC:
+                    /* PoseNum with random */
                     {
-                        u8* p = pc;
-                        pp->ambColCount = *p++;
-                        cnt = pp->ambColCount;
-                        if (cnt & 0x80) {
-                            cnt = ((cnt & 0x7F) << 8) + *p++;
-                            pp->ambColCount = cnt;
+                        f32 randRange;
+
+                        pp->poseNum = *pc++;
+                        randRange = *pc++;
+                        pp->poseNum = (u8) (s32) (randRange * HSD_Randf() +
+                                                  (f32) pp->poseNum);
+                        {
+                            u8 bank = pp->bank;
+                            u8 tgIdx = pp->texGroup;
+                            HSD_PSTexGroup** tga;
+                            HSD_PSTexGroup* texGrp;
+
+                            tga = psTexGroupArray[bank];
+                            texGrp = tga[tgIdx];
+                            if (texGrp != NULL) {
+                                psEnableTexture(pp, texGrp->texTable);
+                            }
                         }
-                        pc = p;
-                        flags = *pc++;
                     }
-                    pp->ambRGBTarget = pp->ambRGB;
-                    if (flags & 1) {
-                        pp->ambRGBTarget = *pc++;
-                    }
-                    if (flags & 8) {
-                        pp->ambATarget = *pc++;
-                    }
-                    if (pp->ambColCount == 0) {
-                        pp->ambRGB = pp->ambRGBTarget;
-                        pp->ambColRemain = 0;
-                    } else {
-                        pp->ambColRemain = pp->ambColCount;
-                    }
-                }
-                break;
+                    break;
 
-            case 0xED:
-                /* Rotate interpolation with random */
-                {
-                    f32 range_val;
-                    f32 base_val;
-                    int timing;
+                case 0xBD:
+                    /* Normalize velocity to target speed */
+                    {
+                        f32 base_speed, random_range;
+                        f32 mag;
 
+                        {
+                            {
+                                u8* q = pc;
+                                psReadFloat(&q);
+                                pc = q;
+                            }
+                            base_speed = fval;
+                            {
+                                u8* q = pc;
+                                psReadFloat(&q);
+                                pc = q;
+                            }
+                            random_range = fval;
+                        }
+                        base_speed += random_range * HSD_Randf();
+                        mag = pp->vel.x * pp->vel.x + pp->vel.y * pp->vel.y +
+                              pp->vel.z * pp->vel.z;
+                        if (mag > 0.0F) {
+                            double guess = __frsqrte((double) mag);
+                            guess = 0.5 * guess * (3.0 - guess * guess * mag);
+                            guess = 0.5 * guess * (3.0 - guess * guess * mag);
+                            guess = 0.5 * guess * (3.0 - guess * guess * mag);
+                            sqrt_res = (f32) (mag * guess);
+                            mag = sqrt_res;
+                        }
+                        if (mag > 1e-10F) {
+                            base_speed /= mag;
+                            pp->vel.x *= base_speed;
+                            pp->vel.y *= base_speed;
+                            pp->vel.z *= base_speed;
+                        }
+                    }
+                    break;
+
+                case 0xBE:
+                    /* Velocity component multiply */
                     {
                         u8* p = pc;
                         {
@@ -2746,75 +2012,798 @@ void* hsd_8039930C(HSD_Particle* pp, HSD_Particle* prev)
                             psReadFloat(&q);
                             p = q;
                         }
-                        base_val = fval;
+                        pp->vel.x *= fval;
                         {
                             u8* q = p;
                             psReadFloat(&q);
                             p = q;
                         }
-                        range_val = fval;
+                        pp->vel.y *= fval;
+                        {
+                            u8* q = p;
+                            psReadFloat(&q);
+                            p = q;
+                        }
                         pc = p;
+                        pp->vel.z *= fval;
+                    }
+                    break;
+
+                case 0xBF:
+                    /* JObj offset */
+                    {
+                        u8 idx = *pc++;
+                        pp->kind |=
+                            (((idx + pp->pJObjOfs) & 7) << 12) | 0x8000;
+                    }
+                    break;
+
+                case 0xC0:
+                    /* PrimCol selective channel setup */
+                    {
+                        s32 step;
+                        u16 cnt;
+
+                        if (pp->primColCount != 0) {
+                            step = ((s32) pp->primColRemain << 16) /
+                                   (s32) pp->primColCount;
+                            pp->primCol.r =
+                                (u8) ((((s32) pp->primColTarget.r << 16) +
+                                       step * ((s32) pp->primCol.r -
+                                               (s32) pp->primColTarget.r)) >>
+                                      16);
+                            pp->primCol.g =
+                                (u8) ((((s32) pp->primColTarget.g << 16) +
+                                       step * ((s32) pp->primCol.g -
+                                               (s32) pp->primColTarget.g)) >>
+                                      16);
+                            pp->primCol.b =
+                                (u8) ((((s32) pp->primColTarget.b << 16) +
+                                       step * ((s32) pp->primCol.b -
+                                               (s32) pp->primColTarget.b)) >>
+                                      16);
+                            pp->primCol.a =
+                                (u8) ((((s32) pp->primColTarget.a << 16) +
+                                       step * ((s32) pp->primCol.a -
+                                               (s32) pp->primColTarget.a)) >>
+                                      16);
+                        }
+                        {
+                            u8* p = pc;
+                            pp->primColCount = *p++;
+                            cnt = pp->primColCount;
+                            if (cnt & 0x80) {
+                                cnt = ((cnt & 0x7F) << 8) + *p++;
+                                pp->primColCount = cnt;
+                            }
+                            pc = p;
+                        }
+                        pp->primColTarget = pp->primCol;
+                        if (opcode & 1) {
+                            pp->primColTarget.r = *pc++;
+                        }
+                        if (opcode & 2) {
+                            pp->primColTarget.g = *pc++;
+                        }
+                        if (opcode & 4) {
+                            pp->primColTarget.b = *pc++;
+                        }
+                        if (opcode & 8) {
+                            pp->primColTarget.a = *pc++;
+                        }
+                        if (pp->primColCount == 0) {
+                            pp->primCol = pp->primColTarget;
+                            pp->primColRemain = 0;
+                        } else {
+                            pp->primColRemain = pp->primColCount;
+                        }
+                    }
+                    break;
+
+                case 0xD0:
+                    /* EnvCol selective channel setup */
+                    {
+                        s32 step;
+                        u16 cnt;
+
+                        if (pp->envColCount != 0) {
+                            step = ((s32) pp->envColRemain << 16) /
+                                   (s32) pp->envColCount;
+                            pp->envCol.r =
+                                (u8) ((((s32) pp->envColTarget.r << 16) +
+                                       step * ((s32) pp->envCol.r -
+                                               (s32) pp->envColTarget.r)) >>
+                                      16);
+                            pp->envCol.g =
+                                (u8) ((((s32) pp->envColTarget.g << 16) +
+                                       step * ((s32) pp->envCol.g -
+                                               (s32) pp->envColTarget.g)) >>
+                                      16);
+                            pp->envCol.b =
+                                (u8) ((((s32) pp->envColTarget.b << 16) +
+                                       step * ((s32) pp->envCol.b -
+                                               (s32) pp->envColTarget.b)) >>
+                                      16);
+                            pp->envCol.a =
+                                (u8) ((((s32) pp->envColTarget.a << 16) +
+                                       step * ((s32) pp->envCol.a -
+                                               (s32) pp->envColTarget.a)) >>
+                                      16);
+                        }
+                        {
+                            u8* p = pc;
+                            pp->envColCount = *p++;
+                            cnt = pp->envColCount;
+                            if (cnt & 0x80) {
+                                cnt = ((cnt & 0x7F) << 8) + *p++;
+                                pp->envColCount = cnt;
+                            }
+                            pc = p;
+                        }
+                        pp->envColTarget = pp->envCol;
+                        if (opcode & 1) {
+                            pp->envColTarget.r = *pc++;
+                        }
+                        if (opcode & 2) {
+                            pp->envColTarget.g = *pc++;
+                        }
+                        if (opcode & 4) {
+                            pp->envColTarget.b = *pc++;
+                        }
+                        if (opcode & 8) {
+                            pp->envColTarget.a = *pc++;
+                        }
+                        if (pp->envColCount == 0) {
+                            pp->envCol = pp->envColTarget;
+                            pp->envColRemain = 0;
+                        } else {
+                            pp->envColRemain = pp->envColCount;
+                        }
+                    }
+                    break;
+
+                case 0xE0:
+                    /* Dual delta PrimCol + EnvCol */
+                    {
+                        s32 step;
+                        s8 delta;
+                        f32 rand_r;
+                        f32 rand_g;
+                        f32 rand_b;
+                        f32 rand_a;
+
+                        if (pp->primColCount != 0) {
+                            step = ((s32) pp->primColRemain << 16) /
+                                   (s32) pp->primColCount;
+                            pp->primCol.r =
+                                (u8) ((((s32) pp->primColTarget.r << 16) +
+                                       step * ((s32) pp->primCol.r -
+                                               (s32) pp->primColTarget.r)) >>
+                                      16);
+                            pp->primCol.g =
+                                (u8) ((((s32) pp->primColTarget.g << 16) +
+                                       step * ((s32) pp->primCol.g -
+                                               (s32) pp->primColTarget.g)) >>
+                                      16);
+                            pp->primCol.b =
+                                (u8) ((((s32) pp->primColTarget.b << 16) +
+                                       step * ((s32) pp->primCol.b -
+                                               (s32) pp->primColTarget.b)) >>
+                                      16);
+                            pp->primCol.a =
+                                (u8) ((((s32) pp->primColTarget.a << 16) +
+                                       step * ((s32) pp->primCol.a -
+                                               (s32) pp->primColTarget.a)) >>
+                                      16);
+                        }
+                        if (pp->envColCount != 0) {
+                            step = ((s32) pp->envColRemain << 16) /
+                                   (s32) pp->envColCount;
+                            pp->envCol.r =
+                                (u8) ((((s32) pp->envColTarget.r << 16) +
+                                       step * ((s32) pp->envCol.r -
+                                               (s32) pp->envColTarget.r)) >>
+                                      16);
+                            pp->envCol.g =
+                                (u8) ((((s32) pp->envColTarget.g << 16) +
+                                       step * ((s32) pp->envCol.g -
+                                               (s32) pp->envColTarget.g)) >>
+                                      16);
+                            pp->envCol.b =
+                                (u8) ((((s32) pp->envColTarget.b << 16) +
+                                       step * ((s32) pp->envCol.b -
+                                               (s32) pp->envColTarget.b)) >>
+                                      16);
+                            pp->envCol.a =
+                                (u8) ((((s32) pp->envColTarget.a << 16) +
+                                       step * ((s32) pp->envCol.a -
+                                               (s32) pp->envColTarget.a)) >>
+                                      16);
+                        }
+
+                        rand_r = HSD_Randf();
+
+                        delta = (s8) *pc++;
+                        rand_r = (f32) (delta << 1) * rand_r;
+                        val = (f32) pp->primColTarget.r + rand_r;
+                        if (val < 0.0F) {
+                            val = 0.0F;
+                        }
+                        if (val > 255.0F) {
+                            val = 255.0F;
+                        }
+                        pp->primColTarget.r = (u8) (s32) val;
+                        val = (f32) pp->envColTarget.r + rand_r;
+                        if (val < 0.0F) {
+                            val = 0.0F;
+                        }
+                        if (val > 255.0F) {
+                            val = 255.0F;
+                        }
+                        pp->envColTarget.r = (u8) (s32) val;
+
+                        rand_g = HSD_Randf();
+                        delta = (s8) *pc++;
+                        rand_g = (f32) (delta << 1) * rand_g;
+                        val = (f32) pp->primColTarget.g + rand_g;
+                        if (val < 0.0F) {
+                            val = 0.0F;
+                        }
+                        if (val > 255.0F) {
+                            val = 255.0F;
+                        }
+                        pp->primColTarget.g = (u8) (s32) val;
+                        val = (f32) pp->envColTarget.g + rand_g;
+                        if (val < 0.0F) {
+                            val = 0.0F;
+                        }
+                        if (val > 255.0F) {
+                            val = 255.0F;
+                        }
+                        pp->envColTarget.g = (u8) (s32) val;
+
+                        rand_b = HSD_Randf();
+                        delta = (s8) *pc++;
+                        rand_b = (f32) (delta << 1) * rand_b;
+                        val = (f32) pp->primColTarget.b + rand_b;
+                        if (val < 0.0F) {
+                            val = 0.0F;
+                        }
+                        if (val > 255.0F) {
+                            val = 255.0F;
+                        }
+                        pp->primColTarget.b = (u8) (s32) val;
+                        val = (f32) pp->envColTarget.b + rand_b;
+                        if (val < 0.0F) {
+                            val = 0.0F;
+                        }
+                        if (val > 255.0F) {
+                            val = 255.0F;
+                        }
+                        pp->envColTarget.b = (u8) (s32) val;
+
+                        rand_a = HSD_Randf();
+                        delta = (s8) *pc++;
+                        rand_a = (f32) (delta << 1) * rand_a;
+                        val = (f32) pp->primColTarget.a + rand_a;
+                        if (val < 0.0F) {
+                            val = 0.0F;
+                        }
+                        if (val > 255.0F) {
+                            val = 255.0F;
+                        }
+                        pp->primColTarget.a = (u8) (s32) val;
+                        val = (f32) pp->envColTarget.a + rand_a;
+                        if (val < 0.0F) {
+                            val = 0.0F;
+                        }
+                        if (val > 255.0F) {
+                            val = 255.0F;
+                        }
+                        pp->envColTarget.a = (u8) (s32) val;
+
+                        if (pp->primColCount == 0) {
+                            pp->primCol = pp->primColTarget;
+                        }
+                        pp->primColRemain = pp->primColCount;
+                        if (pp->envColCount == 0) {
+                            pp->envCol = pp->envColTarget;
+                        }
+                        pp->envColRemain = pp->envColCount;
+                    }
+                    break;
+
+                case 0xE9:
+                    /* Dual PrimCol + EnvCol interp + selective random delta */
+                    {
+                        s32 step;
+                        int timing;
+                        int flags;
+                        f32 scale;
+                        s8 delta;
+                        f32 delta_float;
+
+                        /* Interpolate primCol */
+                        if (pp->primColCount != 0) {
+                            step = ((s32) pp->primColRemain << 16) /
+                                   (s32) pp->primColCount;
+                            pp->primCol.r =
+                                (u8) ((((s32) pp->primColTarget.r << 16) +
+                                       step * ((s32) pp->primCol.r -
+                                               (s32) pp->primColTarget.r)) >>
+                                      16);
+                            pp->primCol.g =
+                                (u8) ((((s32) pp->primColTarget.g << 16) +
+                                       step * ((s32) pp->primCol.g -
+                                               (s32) pp->primColTarget.g)) >>
+                                      16);
+                            pp->primCol.b =
+                                (u8) ((((s32) pp->primColTarget.b << 16) +
+                                       step * ((s32) pp->primCol.b -
+                                               (s32) pp->primColTarget.b)) >>
+                                      16);
+                            pp->primCol.a =
+                                (u8) ((((s32) pp->primColTarget.a << 16) +
+                                       step * ((s32) pp->primCol.a -
+                                               (s32) pp->primColTarget.a)) >>
+                                      16);
+                        }
+
+                        /* Interpolate envCol */
+                        if (pp->envColCount != 0) {
+                            step = ((s32) pp->envColRemain << 16) /
+                                   (s32) pp->envColCount;
+                            pp->envCol.r =
+                                (u8) ((((s32) pp->envColTarget.r << 16) +
+                                       step * ((s32) pp->envCol.r -
+                                               (s32) pp->envColTarget.r)) >>
+                                      16);
+                            pp->envCol.g =
+                                (u8) ((((s32) pp->envColTarget.g << 16) +
+                                       step * ((s32) pp->envCol.g -
+                                               (s32) pp->envColTarget.g)) >>
+                                      16);
+                            pp->envCol.b =
+                                (u8) ((((s32) pp->envColTarget.b << 16) +
+                                       step * ((s32) pp->envCol.b -
+                                               (s32) pp->envColTarget.b)) >>
+                                      16);
+                            pp->envCol.a =
+                                (u8) ((((s32) pp->envColTarget.a << 16) +
+                                       step * ((s32) pp->envCol.a -
+                                               (s32) pp->envColTarget.a)) >>
+                                      16);
+                        }
+
+                        /* Read timing and flags from bytecode */
+                        flags = *pc++;
                         timing = *pc++;
+
+                        /* Compute scale from timing */
+                        if (timing != 0) {
+                            scale = (f32) (s32) ((f32) (timing + 1) *
+                                                 HSD_Randf()) /
+                                    (f32) timing;
+                        } else {
+                            scale = HSD_Randf();
+                        }
+
+                        /* R channel delta */
+                        if (flags & 0x01) {
+                            delta = (s8) *pc++;
+                            delta_float = scale * (f32) (delta << 1);
+                            if (flags & 0x10) {
+                                val = (f32) pp->primColTarget.r + delta_float;
+                                if (val < 0.0F) {
+                                    val = 0.0F;
+                                }
+                                if (val > 255.0F) {
+                                    val = 255.0F;
+                                }
+                                pp->primColTarget.r = (u8) (s32) val;
+                            }
+                            if (flags & 0x20) {
+                                val = (f32) pp->envColTarget.r + delta_float;
+                                if (val < 0.0F) {
+                                    val = 0.0F;
+                                }
+                                if (val > 255.0F) {
+                                    val = 255.0F;
+                                }
+                                pp->envColTarget.r = (u8) (s32) val;
+                            }
+                        }
+
+                        /* G channel delta */
+                        if (flags & 0x02) {
+                            delta = (s8) *pc++;
+                            delta_float = scale * (f32) (delta << 1);
+                            if (flags & 0x10) {
+                                val = (f32) pp->primColTarget.g + delta_float;
+                                if (val < 0.0F) {
+                                    val = 0.0F;
+                                }
+                                if (val > 255.0F) {
+                                    val = 255.0F;
+                                }
+                                pp->primColTarget.g = (u8) (s32) val;
+                            }
+                            if (flags & 0x20) {
+                                val = (f32) pp->envColTarget.g + delta_float;
+                                if (val < 0.0F) {
+                                    val = 0.0F;
+                                }
+                                if (val > 255.0F) {
+                                    val = 255.0F;
+                                }
+                                pp->envColTarget.g = (u8) (s32) val;
+                            }
+                        }
+
+                        /* B channel delta */
+                        if (flags & 0x04) {
+                            delta = (s8) *pc++;
+                            delta_float = scale * (f32) (delta << 1);
+                            if (flags & 0x10) {
+                                val = (f32) pp->primColTarget.b + delta_float;
+                                if (val < 0.0F) {
+                                    val = 0.0F;
+                                }
+                                if (val > 255.0F) {
+                                    val = 255.0F;
+                                }
+                                pp->primColTarget.b = (u8) (s32) val;
+                            }
+                            if (flags & 0x20) {
+                                val = (f32) pp->envColTarget.b + delta_float;
+                                if (val < 0.0F) {
+                                    val = 0.0F;
+                                }
+                                if (val > 255.0F) {
+                                    val = 255.0F;
+                                }
+                                pp->envColTarget.b = (u8) (s32) val;
+                            }
+                        }
+
+                        /* A channel delta (separate random) */
+                        if (flags & 0x08) {
+                            f32 a_rand;
+                            a_rand = HSD_Randf();
+                            delta = *(s8*) pc++;
+                            a_rand = (f32) (s32) ((f32) (timing + 1) * a_rand);
+                            delta_float =
+                                ((f32) (delta << 1) * a_rand) / (f32) timing;
+                            if (flags & 0x10) {
+                                val = (f32) pp->primColTarget.a + delta_float;
+                                if (val < 0.0F) {
+                                    val = 0.0F;
+                                }
+                                if (val > 255.0F) {
+                                    val = 255.0F;
+                                }
+                                pp->primColTarget.a = (u8) (s32) val;
+                            }
+                            if (flags & 0x20) {
+                                val = (f32) pp->envColTarget.a + delta_float;
+                                if (val < 0.0F) {
+                                    val = 0.0F;
+                                }
+                                if (val > 255.0F) {
+                                    val = 255.0F;
+                                }
+                                pp->envColTarget.a = (u8) (s32) val;
+                            }
+                        }
+
+                        /* Final: sync current from target if count is 0 */
+                        if (pp->primColCount == 0) {
+                            pp->primCol = pp->primColTarget;
+                        }
+                        pp->primColRemain = pp->primColCount;
+                        if (pp->envColCount == 0) {
+                            pp->envCol = pp->envColTarget;
+                        }
+                        pp->envColRemain = pp->envColCount;
                     }
+                    break;
 
-                    if (timing != 0) {
-                        s32 randi = (s32) ((f32) (timing + 1) * HSD_Randf());
-                        base_val =
-                            base_val + range_val * (f32) randi / (f32) timing;
-                    } else {
-                        base_val = base_val + range_val * HSD_Randf();
+                case 0xE1:
+                    /* Callback set */
+                    {
+                        int idx = *pc++;
+                        if (idx == 0) {
+                            pp->callback = NULL;
+                        } else {
+                            pp->callback = psCallback[idx - 1];
+                        }
                     }
-                    pp->rotateTarget += base_val;
-                    pp->rotate += base_val;
+                    break;
+
+                case 0xEC:
+                    /* UserData set */
+                    {
+                        int idx = *pc++;
+                        u8* p = pc;
+                        f32 v;
+                        psReadFloat(&p);
+                        pc = p;
+                        v = fval;
+                        if (pp->gen->userfunc != NULL &&
+                            pp->gen->userfunc->setUserData != NULL)
+                        {
+                            pp->gen->userfunc->setUserData(pp, idx, v);
+                        } else if (pp->userdata != NULL) {
+                            pp->userdata[idx] = v;
+                        }
+                    }
+                    break;
+
+                case 0xE2:
+                    /* Set TexEdge (kill) bit */
+                    pp->kind |= TexEdge;
+                    break;
+
+                case 0xE3:
+                    /* Set palNum */
+                    pp->palNum = *pc++;
+                    break;
+
+                case 0xE4:
+                    /* TexFlipS control */
+                    {
+                        u8 mode = *pc++ & 0x3;
+                        switch (mode) {
+                        case 0:
+                            pp->kind &= ~TexFlipS;
+                            break;
+                        case 1:
+                            pp->kind |= TexFlipS;
+                            break;
+                        case 2:
+                            pp->kind ^= TexFlipS;
+                            break;
+                        case 3:
+                            if (HSD_Randf() < 0.5F) {
+                                pp->kind &= ~TexFlipS;
+                            } else {
+                                pp->kind |= TexFlipS;
+                            }
+                            break;
+                        }
+                    }
+                    break;
+
+                case 0xE5:
+                    /* TexFlipT control */
+                    {
+                        u8 mode = *pc++ & 0x3;
+                        switch (mode) {
+                        case 0:
+                            pp->kind &= ~TexFlipT;
+                            break;
+                        case 1:
+                            pp->kind |= TexFlipT;
+                            break;
+                        case 2:
+                            pp->kind ^= TexFlipT;
+                            break;
+                        case 3:
+                            if (HSD_Randf() < 0.5F) {
+                                pp->kind &= ~TexFlipT;
+                            } else {
+                                pp->kind |= TexFlipT;
+                            }
+                            break;
+                        }
+                    }
+                    break;
+
+                case 0xE6:
+                    /* Set DirVec */
+                    pp->kind |= DirVec;
+                    break;
+
+                case 0xE7:
+                    /* Clear DirVec */
+                    pp->kind &= ~DirVec;
+                    break;
+
+                case 0xE8:
+                    /* Trail control */
+                    {
+                        f32 trail;
+                        u8* p = pc;
+                        psReadFloat(&p);
+                        pc = p;
+                        trail = fval;
+                        if (trail < 0.0F) {
+                            pp->kind &= ~Trail;
+                        } else {
+                            pp->kind |= Trail;
+                            pp->trail = trail;
+                        }
+                    }
+                    break;
+
+                case 0xEA:
+                    /* MatCol interpolation setup */
+                    {
+                        s32 step;
+                        u16 cnt;
+                        u8 flags;
+
+                        if (pp->matColCount != 0) {
+                            step = ((s32) pp->matColRemain << 16) /
+                                   (s32) pp->matColCount;
+                            pp->matRGB =
+                                (u8) ((((s32) pp->matRGBTarget << 16) +
+                                       step * ((s32) pp->matRGB -
+                                               (s32) pp->matRGBTarget)) >>
+                                      16);
+                            pp->matA = (u8) ((((s32) pp->matATarget << 16) +
+                                              step * ((s32) pp->matA -
+                                                      (s32) pp->matATarget)) >>
+                                             16);
+                        }
+                        {
+                            u8* p = pc;
+                            pp->matColCount = *p++;
+                            cnt = pp->matColCount;
+                            if (cnt & 0x80) {
+                                cnt = ((cnt & 0x7F) << 8) + *p++;
+                                pp->matColCount = cnt;
+                            }
+                            pc = p;
+                            flags = *pc++;
+                        }
+                        pp->matRGBTarget = pp->matRGB;
+                        if (flags & 1) {
+                            pp->matRGBTarget = *pc++;
+                        }
+                        if (flags & 8) {
+                            pp->matATarget = *pc++;
+                        }
+                        if (pp->matColCount == 0) {
+                            pp->matRGB = pp->matRGBTarget;
+                            pp->matColRemain = 0;
+                        } else {
+                            pp->matColRemain = pp->matColCount;
+                        }
+                    }
+                    break;
+
+                case 0xEB:
+                    /* AmbCol interpolation setup */
+                    {
+                        s32 step;
+                        u16 cnt;
+                        u8 flags;
+
+                        if (pp->ambColCount != 0) {
+                            step = ((s32) pp->ambColRemain << 16) /
+                                   (s32) pp->ambColCount;
+                            pp->ambRGB =
+                                (u8) ((((s32) pp->ambRGBTarget << 16) +
+                                       step * ((s32) pp->ambRGB -
+                                               (s32) pp->ambRGBTarget)) >>
+                                      16);
+                            pp->ambA = (u8) ((((s32) pp->ambATarget << 16) +
+                                              step * ((s32) pp->ambA -
+                                                      (s32) pp->ambATarget)) >>
+                                             16);
+                        }
+                        {
+                            u8* p = pc;
+                            pp->ambColCount = *p++;
+                            cnt = pp->ambColCount;
+                            if (cnt & 0x80) {
+                                cnt = ((cnt & 0x7F) << 8) + *p++;
+                                pp->ambColCount = cnt;
+                            }
+                            pc = p;
+                            flags = *pc++;
+                        }
+                        pp->ambRGBTarget = pp->ambRGB;
+                        if (flags & 1) {
+                            pp->ambRGBTarget = *pc++;
+                        }
+                        if (flags & 8) {
+                            pp->ambATarget = *pc++;
+                        }
+                        if (pp->ambColCount == 0) {
+                            pp->ambRGB = pp->ambRGBTarget;
+                            pp->ambColRemain = 0;
+                        } else {
+                            pp->ambColRemain = pp->ambColCount;
+                        }
+                    }
+                    break;
+
+                case 0xED:
+                    /* Rotate interpolation with random */
+                    {
+                        f32 range_val;
+                        f32 base_val;
+                        int timing;
+
+                        {
+                            u8* p = pc;
+                            {
+                                u8* q = p;
+                                psReadFloat(&q);
+                                p = q;
+                            }
+                            base_val = fval;
+                            {
+                                u8* q = p;
+                                psReadFloat(&q);
+                                p = q;
+                            }
+                            range_val = fval;
+                            pc = p;
+                            timing = *pc++;
+                        }
+
+                        if (timing != 0) {
+                            s32 randi =
+                                (s32) ((f32) (timing + 1) * HSD_Randf());
+                            base_val = base_val +
+                                       range_val * (f32) randi / (f32) timing;
+                        } else {
+                            base_val = base_val + range_val * HSD_Randf();
+                        }
+                        pp->rotateTarget += base_val;
+                        pp->rotate += base_val;
+                    }
+                    break;
+
+                case 0xFA:
+                    /* Loop mark */
+                    pp->loopCount = *pc++;
+                    pp->cmdLoopPtr = (u16) (pc - pp->cmdList);
+                    break;
+
+                case 0xFB:
+                    /* Loop back */
+                    if (--pp->loopCount != 0) {
+                        pc = pp->cmdList + pp->cmdLoopPtr;
+                    }
+                    break;
+
+                case 0xFC:
+                    /* Mark set */
+                    pp->cmdMarkPtr = (u16) (pc - pp->cmdList);
+                    break;
+
+                case 0xFD:
+                    /* Mark jump */
+                    pc = pp->cmdList + pp->cmdMarkPtr;
+                    break;
+
+                case 0xFE:
+                case 0xFF:
+                    /* End: set life to 1 */
+                    pp->life = 1;
+                    goto exit_loop;
+
+                default:
+                    break;
                 }
-                break;
+            }
 
-            case 0xFA:
-                /* Loop mark */
-                pp->loopCount = *pc++;
-                pp->cmdLoopPtr = (u16) (pc - pp->cmdList);
-                break;
-
-            case 0xFB:
-                /* Loop back */
-                if (--pp->loopCount != 0) {
-                    pc = pp->cmdList + pp->cmdLoopPtr;
-                }
-                break;
-
-            case 0xFC:
-                /* Mark set */
-                pp->cmdMarkPtr = (u16) (pc - pp->cmdList);
-                break;
-
-            case 0xFD:
-                /* Mark jump */
-                pc = pp->cmdList + pp->cmdMarkPtr;
-                break;
-
-            case 0xFE:
-            case 0xFF:
-                /* End: set life to 1 */
-                pp->life = 1;
-                goto exit_loop;
-
-            default:
+            /* Loop continuation check */
+            if (operand != 0) {
                 break;
             }
         }
 
-        /* Loop continuation check */
-        if (operand != 0) {
-            break;
-        }
+    exit_loop:
+        /* Save bytecode state */
+        pp->cmdPtr = (u16) (pc - pp->cmdList);
+        pp->cmdWait = operand;
     }
 
-exit_loop:
-    /* Save bytecode state */
-    pp->cmdPtr = (u16) (pc - pp->cmdList);
-    pp->cmdWait = operand;
-
-do_life:
     /* Life countdown */
     if (--pp->life == 0) {
     delete_particle:
@@ -2913,7 +2902,7 @@ do_life:
         s32 jobj_idx = (pp->kind & 0x7000) >> 12;
 
         /* Allocate JObj if slot is empty */
-        if (hsd_804D08E8[jobj_idx] == NULL) {
+        if (psPointJObj[jobj_idx] == NULL) {
             HSD_JObj* new_jobj = HSD_JObjAlloc();
             if (new_jobj != NULL) {
                 hsd_8039CF4C(jobj_idx + 1, new_jobj);
@@ -2924,16 +2913,16 @@ do_life:
         {
             HSD_JObj* jobj;
 
-            if ((jobj = hsd_804D08E8[jobj_idx]) != NULL) {
-                HSD_JObjSetupMatrix(hsd_804D08E8[jobj_idx]);
+            if ((jobj = psPointJObj[jobj_idx]) != NULL) {
+                HSD_JObjSetupMatrix(psPointJObj[jobj_idx]);
 
-                jobj = hsd_804D08E8[jobj_idx];
+                jobj = psPointJObj[jobj_idx];
                 HSD_JObjAddTranslationX(jobj, pp->pos.x - jobj->mtx[0][3]);
 
-                jobj = hsd_804D08E8[jobj_idx];
+                jobj = psPointJObj[jobj_idx];
                 HSD_JObjAddTranslationY(jobj, pp->pos.y - jobj->mtx[1][3]);
 
-                jobj = hsd_804D08E8[jobj_idx];
+                jobj = psPointJObj[jobj_idx];
                 HSD_JObjAddTranslationZ(jobj, pp->pos.z - jobj->mtx[2][3]);
             }
         }
@@ -2989,7 +2978,7 @@ void hsd_8039CF4C(s32 index, HSD_JObj* jobj)
     }
 
     if (index != 0) {
-        HSD_JObj** p = hsd_804D08E8;
+        HSD_JObj** p = psPointJObj;
         HSD_JObj* old;
         p += index;
         old = *--p;
@@ -3003,9 +2992,9 @@ void hsd_8039CF4C(s32 index, HSD_JObj* jobj)
     } else {
         s32 i;
         for (i = 0; i < 8; i++) {
-            if (hsd_804D08E8[i] == jobj) {
-                HSD_JObjUnref(hsd_804D08E8[i]);
-                hsd_804D08E8[i] = NULL;
+            if (psPointJObj[i] == jobj) {
+                HSD_JObjUnref(psPointJObj[i]);
+                psPointJObj[i] = NULL;
             }
         }
     }
@@ -3015,7 +3004,7 @@ void hsd_8039D048(void* particle)
 {
     u32 flags = ((HSD_Particle*) particle)->kind;
     if (flags & 0x8000) {
-        HSD_JObj** p = &hsd_804D08E8[(flags >> 12) & 7];
+        HSD_JObj** p = &psPointJObj[(flags >> 12) & 7];
         if (*p != NULL) {
             HSD_JObjUnref(*p);
             *p = NULL;
@@ -3032,7 +3021,7 @@ typedef struct {
 
 void hsd_8039D0A0(HSD_Generator* gen)
 {
-    ParticleData* data = (ParticleData*) hsd_804D08E8;
+    ParticleData* data = (ParticleData*) psPointJObj;
     HSD_Particle* prev;
     HSD_Particle* prt;
     HSD_Particle* next;

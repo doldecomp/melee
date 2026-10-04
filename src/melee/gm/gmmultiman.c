@@ -400,9 +400,7 @@ void gm_801B65D4(GameModeState* arg0)
             gm_SetNewGameModePending();
             return;
         }
-        goto block_22;
     }
-block_22:
     if (gm_80173754(0xF, gm_804D68E8) == 0) {
         gm_SetNextGameModeStateId(0U);
     }

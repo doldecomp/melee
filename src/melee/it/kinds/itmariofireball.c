@@ -9,8 +9,8 @@
 #include <melee/it/inlines.h>
 #include <melee/it/it_26B1.h>
 #include <melee/it/it_2725.h>
-#include <melee/it/itCommonItems.h>
 #include <melee/it/item.h>
+#include <melee/it/itemattrs.h>
 #include <melee/it/itgroundcoll.h>
 #include <melee/it/itmaplib.h>
 #include <sysdolphin/baselib/gobj.h>
@@ -39,9 +39,10 @@ void it_8029B6F8(Item_GObj* gobj, Vec3* pos, ItemKind kind, f32 facing_dir)
 void it_8029B7C0(Item_GObj* gobj)
 {
     Item* it = GET_ITEM(gobj);
-    itUnkAttributes* ap = it->xC4_article_data->x4_specialAttributes;
-    f32 x0 = ap->x0_float;
-    f32 x4 = ap->x4_float;
+    itMarioFireballAttributes* ap =
+        &it->xC4_article_data->x4_specialAttributes->mario_fireball;
+    f32 x0 = ap->x0;
+    f32 x4 = ap->x4;
 
     it->x40_vel.x = it->facing_dir * (x0 * cosf(x4));
     it->x40_vel.y = x0 * sinf(x4);
@@ -74,7 +75,8 @@ bool itMariofireball_UnkMotion0_Coll(Item_GObj* gobj)
     if (it_8027781C(gobj)) {
         Item* it = GET_ITEM(gobj);
         HSD_JObj* jobj = GET_JOBJ(gobj);
-        itUnkAttributes* attrs = it->xC4_article_data->x4_specialAttributes;
+        itMarioFireballAttributes* attrs =
+            &it->xC4_article_data->x4_specialAttributes->mario_fireball;
         if (calc_dist_2d_accurate(&it->x40_vel) < attrs->x10) {
             return true;
         }

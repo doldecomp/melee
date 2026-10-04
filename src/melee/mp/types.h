@@ -10,15 +10,15 @@
 #include <dolphin/mtx.h>
 
 struct mpIsland_80458E88_t {
-    /*  +0 */ mp_UnkStruct0* next;
-    /*  +4 */ mp_UnkStruct0* x4;
-    /*  +8 */ mp_UnkStruct0* x8;
-    /*  +C */ mp_UnkStruct0* xC;
-    /* +10 */ mp_UnkStruct0* x10;
-    /* +14 */ mp_UnkStruct0* x14;
-    /* +18 */ mp_UnkStruct0* x18;
-    /* +1C */ mp_UnkStruct0* x1C;
-    /* +20 */ mp_UnkStruct0* x20;
+    /*  +0 */ mpIsland* floors;
+    /*  +4 */ mpIsland* ceilings;
+    /*  +8 */ mpIsland* non_dynamic_floors_tail;
+    /*  +C */ mpIsland* non_dynamic_ceilings_tail;
+    /* +10 */ mpIsland* dynamic_floors;
+    /* +14 */ mpIsland* dynamic_ceilings;
+    /* +18 */ mpIsland* b1_floors;
+    /* +1C */ mpIsland* b1_ceilings;
+    /* +20 */ mpIsland* free_list;
 };
 
 struct mpIsland_PaletteEntry {
@@ -27,22 +27,21 @@ struct mpIsland_PaletteEntry {
 };
 
 struct mpIsland_Palette {
-    mpIsland_PaletteEntry x0[20];
+    mpIsland_PaletteEntry entries[20];
 };
 
-struct mp_UnkStruct0 {
-    /*  +0 */ mp_UnkStruct0* next;
-    /*  +4 */ u16 x4;
-    /*  +6 */ u16 x6;
-    /*  +8 */ Vec3 x8;
-    /* +14 */ Vec3 x14;
-    /* +20 */ int x20;
-    /* +24 */ s16 x24;
-    /* +26 */ s16 x26;
-    /* +28 */ s16 x28;
-    /* +2A */ s16 x2A;
-    /* +2C */ mp_UnkStruct3* ptr;
+struct mpIsland {
+    /*  +0 */ mpIsland* next;
+    /*  +4 */ u16 vtx0;
+    /*  +6 */ u16 vtx1;
+    /*  +8 */ Vec3 pos0;
+    /* +14 */ Vec3 pos1;
+    /* +20 */ int flags;
+    /* +24 */ s16 line0;
+    /* +26 */ s16 line1;
+    /* +28 */ s16 joint_id;
 };
+ASSERT_SIZE(struct mpIsland, 0x2C);
 
 struct MapLine {
     /* +0 */ u16 v0_idx;
@@ -56,27 +55,14 @@ struct MapLine {
 };
 
 struct CollLine {
-    /* +0 */ MapLine* x0;
+    /* +0 */ MapLine* inner;
     /* +4 */ u32 flags;
 };
 
-struct mpisland {
-    /*  +0 */ int x0[8];
-    /* +20 */ int x20[8];
-};
-
-struct mp_UnkStruct3 {
-    int x0;
-    int x4;
-    int xC;
-};
-
 struct CollVtx {
-    /* 0x00 */ f32 x0;
-    /* 0x04 */ f32 x4;
+    /* 0x00 */ Vec2 base_pos;
     /* 0x08 */ Vec2 pos;
-    /* 0x10 */ float x10;
-    /* 0x14 */ float x14;
+    /* 0x10 */ Vec2 prev_pos;
 }; /* size = 0x18 */
 ASSERT_SIZE(struct CollVtx, 0x18);
 
@@ -112,7 +98,7 @@ struct CollJoint {
     /* 0x0E */ u8 xE : 1;
     /* 0x10 */ Vec2 bounding_min;
     /* 0x18 */ Vec2 bounding_max;
-    /* 0x20 */ HSD_JObj* x20;
+    /* 0x20 */ HSD_JObj* jobj;
     /* 0x24 */ mpLib_JointCollisionCallback
         cb_0; ///< @todo Possible array here
     /* 0x28 */ Ground* cb_data_0;

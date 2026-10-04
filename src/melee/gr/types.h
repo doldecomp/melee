@@ -2003,12 +2003,12 @@ struct GroundParam {
 
 struct UnkStageDat_x8_t {
     /*  +0 */ struct HSD_Joint* joint;
-    /*  +4 */ HSD_AnimJoint** anims DAT_NULLTERM;
-    /*  +8 */ HSD_MatAnimJoint** matanims DAT_NULLTERM;
-    /*  +C */ HSD_ShapeAnimJoint** shapeanims DAT_NULLTERM;
+    /*  +4 */ HSD_AnimJoint** anims DAT_TERMINATED(0);
+    /*  +8 */ HSD_MatAnimJoint** matanims DAT_TERMINATED(0);
+    /*  +C */ HSD_ShapeAnimJoint** shapeanims DAT_TERMINATED(0);
     /* +10 */ HSD_CameraDescPerspective* x10;
     /* +14 */ UNK_T x14;
-    /* +18 */ LightList** x18 DAT_NULLTERM;
+    /* +18 */ LightList** x18 DAT_TERMINATED(0);
     /* +1C */ HSD_FogDesc* x1C;
     /* +20 */ GrJoint* unk20;
     /* +24 */ s32 unk24; // size of unk20 array
@@ -2022,9 +2022,20 @@ struct GroundShadowEntry {
     u8 flag : 1;
 };
 
+struct GroundJointPair {
+    /* +0 */ s16 joint_index;
+    /* +2 */ s16 stage_joint_index;
+};
+
+struct Ground_801C34AC_entry {
+    /* +0 */ HSD_Joint* joint;
+    /* +4 */ struct GroundJointPair* pairs DAT_COUNT(pair_count);
+    /* +8 */ ssize_t pair_count;
+};
+
 struct UnkStageDat {
-    void* unk0 DAT_COUNT(unk4);
-    s32 unk4;
+    struct Ground_801C34AC_entry* unk0 DAT_COUNT(count);
+    ssize_t count;
 
     // Suspect this may not be a consistent type based on un_802FD708 callers
     struct UnkStageDat_x8_t* unk8 DAT_COUNT(unkC);

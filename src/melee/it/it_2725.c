@@ -114,8 +114,7 @@ void it_80272784(Item_GObj* item_gobj)
 
 Fighter* it_80272818(Item* item)
 {
-    return ((it_2728_DatAttrs*) item->xC4_article_data->x4_specialAttributes)
-        ->fighter;
+    return (&item->xC4_article_data->x4_specialAttributes->unk_2728)->fighter;
 }
 
 /// Returns Item_GObj of the specified kind if part of
@@ -155,15 +154,11 @@ void it_80272860(Item_GObj* item_gobj, f32 arg1, f32 arg2)
         if (var_f3 < 0.0f) {
             var_f3 = -var_f3;
         }
-        if (var_f3 < arg2) {
-        label_1:
-            item->x40_vel.y -= arg1;
+        if (!(var_f3 < arg2)) {
             return;
         }
-        return;
     }
-    // big dumb
-    goto label_1;
+    item->x40_vel.y -= arg1;
 }
 
 void it_802728C8(Item_GObj* item_gobj)

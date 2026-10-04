@@ -202,6 +202,7 @@ static inline void gmTournament_SetBracketByes(BracketEntry* entries,
 
 void fn_8018A514(int count, float val)
 {
+    int j;
     s32 region;
     BracketEntry* entries;
     BracketSrcEntry* src;
@@ -257,14 +258,10 @@ void fn_8018A514(int count, float val)
         lbl_80473AB8[i].x26 = src->x1D;
         lbl_80473AB8[i].x27 = src->x1F;
         lbl_80473AB8[i].x28 = src->x20;
-        lbl_80473AB8[i].slots[0].x52 = 9;
-        lbl_80473AB8[i].slots[0].x32 = 0;
-        lbl_80473AB8[i].slots[1].x52 = 9;
-        lbl_80473AB8[i].slots[1].x32 = 0;
-        lbl_80473AB8[i].slots[2].x52 = 9;
-        lbl_80473AB8[i].slots[2].x32 = 0;
-        lbl_80473AB8[i].slots[3].x52 = 9;
-        lbl_80473AB8[i].slots[3].x32 = 0;
+        for (j = 0; j < 4; j++) {
+            lbl_80473AB8[i].slots[j].x52 = 9;
+            lbl_80473AB8[i].slots[j].x32 = 0;
+        }
         lbl_80473AB8[i].slots[0].x30 = src->x21;
         lbl_80473AB8[i].slots[1].x30 = src->x22;
         lbl_80473AB8[i].slots[2].x30 = src->x23;
@@ -275,7 +272,7 @@ void fn_8018A514(int count, float val)
     if (region == 0) {
         gmTournament_SetBracketByes(entries, count);
     }
-    PAD_STACK(24);
+    PAD_STACK(8);
 }
 
 void fn_8018A970(int arg0)
@@ -1809,8 +1806,7 @@ void fn_8018E618(int arg0, f32 farg0, int arg1)
         }
     }
     GObj_SetupGXLinkMax(gobj, HSD_GObj_803910D8, 1);
-    ((u32*) &gobj->gxlink_prios)[1] = 0x10;
-    ((u32*) &gobj->gxlink_prios)[0] = 0;
+    gobj->gxlink_prios = 0x10;
 
     gmTournament_InitBracket(arg0, farg0, arg1);
 }
@@ -1836,13 +1832,13 @@ void fn_8018E85C(DynamicModelDesc* model, s32 flag)
 
     for (outer_idx = 0; outer_idx < 0x40; outer_idx++) {
         if (lbl_80473AB8[outer_idx].x0 == 0) {
-            goto next_entry;
+            continue;
         }
         inner_idx = 0;
         for (; inner_idx < 4; inner_idx++) {
             sub = &lbl_80473AB8[outer_idx].x0 + inner_idx * 0x2C;
             if (sub[0x30] == 0) {
-                goto next_sub;
+                continue;
             }
 
             if (flag != 0) {
@@ -1895,10 +1891,7 @@ void fn_8018E85C(DynamicModelDesc* model, s32 flag)
                 fn_8018FDC4(jobj, (f32) * (s32*) (sub + 0x44),
                             -(f32) * (s32*) (sub + 0x48), 666.0f);
             }
-
-        next_sub:;
         }
-    next_entry:;
     }
 }
 

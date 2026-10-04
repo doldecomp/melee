@@ -4,6 +4,8 @@
 #include <melee/ef/forward.h> // IWYU pragma: export
 #include <sysdolphin/baselib/forward.h>
 
+#include <dat_macros.h>
+
 #include <dolphin/mtx.h>
 #include <dolphin/types.h>
 #include <melee/sc/types.h>
@@ -92,18 +94,19 @@ struct EF_QueuedEffect {
 typedef struct EF_DAT_Entry {
     /* 0x0 */ char* ef_DAT_file;       // ex. "EfCoData.dat"
     /* 0x4 */ char* effDataTable_name; // ex. "effCommonDataTable"
-    /* 0x8 */ void* data;              // loaded data pointer
+    /* 0x8 */ EF_EffectDesc* data;     // loaded data table's effects
 } EF_DAT_Entry;                        /* size = 0xC */
 ASSERT_SIZE(EF_DAT_Entry, 0xC);
 
 /// The effect data table named by an #EF_DAT_Entry, as stored in its
 /// archive.
-///
-/// @todo The particle banks are followed by records of an @c f32 and four
-///       pointers, presumably effect models.
 typedef struct EffectDataTable {
     /* 0x0 */ int* cmd_bank;
     /* 0x4 */ int* tex_bank;
+    /// Indexed by @c gfx_id % 1000 (#efLib_Create, through
+    /// #EF_DAT_Entry::data).
+    /// @todo The count is only implied by the effect IDs.
+    /* 0x8 */ EF_EffectDesc descs[1] DAT_EXTENT;
 } EffectDataTable;
 
 struct EF_QueuedEffect_ObjAlloc {

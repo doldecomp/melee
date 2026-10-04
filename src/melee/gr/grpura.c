@@ -667,7 +667,9 @@ u16 grPu_803E6E20[1024] ATTRIBUTE_ALIGN(32) = {
     0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF,
 };
 
-struct HSD_ImageDesc grPu_803E7620 = { &grPu_803E6E20, 32, 32, 4, 0, 0, 0 };
+struct HSD_ImageDesc grPu_803E7620 = {
+    (HSD_ImageData*) grPu_803E6E20, 32, 32, 4, 0, 0, 0
+};
 
 void stageGObj2_OnInit(Ground_GObj* arg0)
 {

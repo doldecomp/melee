@@ -36,7 +36,8 @@ void it_80298168(HSD_GObj* owner_gobj, Vec3* pos, f32 facing_dir)
         if (gobj != NULL) {
             Item* ip = GET_ITEM(gobj);
             Article* article = ip->xC4_article_data;
-            ItLGunRayAttr* item_spec_attr = article->x4_specialAttributes;
+            ItLGunRayAttr* item_spec_attr =
+                &article->x4_specialAttributes->l_gun_ray;
             it_802982AC(gobj, owner_gobj, article);
             ip->xDD4_itemVar.lgunray.scale = 0.0f;
             ip->xDD4_itemVar.lgunray.angle =
@@ -51,7 +52,8 @@ void it_80298168(HSD_GObj* owner_gobj, Vec3* pos, f32 facing_dir)
 
 void it_802982AC(Item_GObj* gobj, Item_GObj* owner_gobj, Article* article)
 {
-    ItLGunRayAttr* da = GET_ITEM(gobj)->xC4_article_data->x4_specialAttributes;
+    ItLGunRayAttr* da =
+        &GET_ITEM(gobj)->xC4_article_data->x4_specialAttributes->l_gun_ray;
     it_80275158(gobj, da->lifetime);
     it_8026B3A8(gobj);
     Item_80268E5C(gobj, 0, ITEM_ANIM_UPDATE);
@@ -60,7 +62,8 @@ void it_802982AC(Item_GObj* gobj, Item_GObj* owner_gobj, Article* article)
 bool itLgunray_UnkMotion0_Anim(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
-    ItLGunRayAttr* item_spec_attr = ip->xC4_article_data->x4_specialAttributes;
+    ItLGunRayAttr* item_spec_attr =
+        &ip->xC4_article_data->x4_specialAttributes->l_gun_ray;
     HSD_JObj* jobj = GET_JOBJ(gobj);
 
     return Item_UpdateRayAnimation(gobj, ip, jobj, &item_spec_attr->max_scale,

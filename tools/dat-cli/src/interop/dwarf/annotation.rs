@@ -16,10 +16,14 @@ use winnow::{
 pub enum DatTag {
     /// `DAT_COUNT`: the pointer refers to this many elements.
     Count(Expr),
-    /// `DAT_NULLTERM`: the pointer refers to elements up to a zeroed one.
-    NullTerm,
+    /// `DAT_TERMINATED`: the pointer refers to
+    /// elements up to the first whose first word is this value and isn't a
+    /// relocated pointer.
+    Terminated(Expr),
     /// `DAT_EXTENT`: the array holds as many elements as the data does.
     Extent,
+    /// `DAT_BLOB`: the typedef names a format of opaque bytes.
+    Blob,
     /// `DAT_IF`: the union member is valid when this holds.
     If(Expr),
     /// `DAT_TYPE`: the untyped pointer refers to this type, as written.
@@ -62,8 +66,9 @@ impl DatTag {
 fn tag(input: &mut &str) -> ModalResult<DatTag> {
     dispatch! {take_while(1.., |c: char| c.is_ascii_alphabetic());
         "count" => args(expr).map(DatTag::Count),
-        "nullterm" => eof.value(DatTag::NullTerm),
+        "terminated" => args(expr).map(DatTag::Terminated),
         "extent" => eof.value(DatTag::Extent),
+        "blob" => eof.value(DatTag::Blob),
         "if" => args(expr).map(DatTag::If),
         "type" => raw_args.map(|t: &str| DatTag::Type(t.trim().to_owned())),
         "root" => root.map(DatTag::Root),
@@ -220,7 +225,10 @@ mod tests {
 
     #[test]
     fn tags() {
-        assert_eq!(DatTag::parse("dat:nullterm"), Some(DatTag::NullTerm));
+        assert!(matches!(
+            DatTag::parse("dat:terminated(GX_VA_NULL)"),
+            Some(DatTag::Terminated(_))
+        ));
         assert_eq!(
             DatTag::parse("dat:script(lengths, 1, 2 ,1)"),
             Some(DatTag::Script(Script {
@@ -229,6 +237,7 @@ mod tests {
             }))
         );
         assert_eq!(DatTag::parse("dat:extent"), Some(DatTag::Extent));
+        assert_eq!(DatTag::parse("dat:blob"), Some(DatTag::Blob));
         assert_eq!(
             DatTag::parse("dat:count(n)"),
             Some(DatTag::Count(Expr::Name("n".into())))

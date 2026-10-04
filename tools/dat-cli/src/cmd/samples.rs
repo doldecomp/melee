@@ -1,9 +1,15 @@
 //! `samples`: archive data typed by the DWARF, compared with objdiff.
 //!
-//! One unit per archive file, each built in steps a build system runs:
+//! One unit per archive file, `<module>/<archive>` (`Pl/PlMr`), each built
+//! in steps a build system runs:
 //! - `slice`: the archive → `target/<unit>.o`, its sampled objects under
-//!   their archive names, plus `target/<unit>.samples` saying what each is
+//!   their archive names and the rest by name and size (see
+//!   [`target_object`]), plus `target/<unit>.samples` saying what each
+//!   sample is, and for the base `target/<unit>.ld`, ordering its samples
+//!   like the target's, and `target/<unit>.rest.o`, the rest the walk
+//!   explains
 //! - `codegen`: the target object → `src/<unit>.c`, generated from the types
+//! - `macros`: `src/macros.h`, which every unit's C includes
 //! - (the build compiles `src/<unit>.c` to `base/<unit>.o`)
 //! - `project`: every unit's sidecar → `objdiff.json`
 //!
@@ -13,13 +19,14 @@ use super::project::{Check, Project};
 use anyhow::{Context, Result, bail};
 use globset::{Glob, GlobSetBuilder};
 use melee_dat::{
-    coverage::coverage,
+    coverage::{coverage, family},
     dwarf::{
         TypeGraph, cache::TypesFile, canonical::Canonical, render::Renderer,
     },
     hsd::Archive,
     samples::{
-        CWriter, Elided, Instance, Picker, SampleInfo, Source, root_of,
+        CWriter, Elided, ElidedType, Instance, Picker, SampleInfo, Source, Unnamed,
+        Piece, SAMPLED, INFERRED, assign_names, rest_object, root_of,
         target_object,
     },
 };
@@ -54,6 +61,9 @@ enum Command {
 
     /// Write the C for a target object's samples, from the types
     Codegen(Codegen),
+
+    /// Write the definitions the generated C includes (`macros.h`)
+    Macros(MacrosArgs),
 
     /// Write the objdiff project for the units' sidecars
     Project(ProjectArgs),
@@ -106,6 +116,13 @@ struct Codegen {
 }
 
 #[derive(clap::Args)]
+struct MacrosArgs {
+    /// Left alone when unchanged, so that its dependents are too
+    #[arg(short, long)]
+    output: PathBuf,
+}
+
+#[derive(clap::Args)]
 struct ProjectArgs {
     /// The units' sidecars (`target/<unit>.samples`)
     sidecars: Vec<PathBuf>,
@@ -129,6 +146,7 @@ pub fn run(Args { command }: Args) -> Result<()> {
         Command::Types(args) => types(args),
         Command::Slice(args) => slice(args),
         Command::Codegen(args) => codegen(args),
+        Command::Macros(args) => macros(args),
         Command::Project(args) => project(args),
         Command::Report(args) => report(args),
     }
@@ -147,8 +165,9 @@ struct Sidecar {
     /// symbols, which the loader links in by name.
     externs: BTreeSet<String>,
     /// Whether the types explain the whole file: every relocation, every
-    /// public symbol, and nothing the walk finds wrong. objdiff's
-    /// `complete`, the analog of code that is linked into the game.
+    /// public symbol and the data it reaches, and nothing the walk finds
+    /// wrong. Every target symbol outside the samples must be inferred in
+    /// the base. objdiff's `complete`, the analog of code linked into the game.
     complete: bool,
 }
 
@@ -256,28 +275,20 @@ fn slice(args: Slice) -> Result<()> {
     let (mut samples, _) = picker.finish();
     samples.sort_by_key(|s| (s.location.archive, s.location.offset));
 
-    let sources: BTreeMap<usize, Source> = archives
+    let unit = args.archive.strip_suffix(".dat").unwrap_or(&args.archive);
+    let mut sources: BTreeMap<usize, Source> = archives
         .iter()
-        .map(|(at, a)| (*at, Source::new(a, *at)))
+        .map(|(at, a)| (*at, Source::new(a, *at, unit, &walks[at].paths)))
         .collect();
-    let pairs: Vec<_> = samples
+    let sampled: BTreeSet<(usize, u32)> = samples
         .iter()
-        .map(|s| (s, &sources[&s.location.archive]))
+        .map(|s| (s.location.archive, s.location.offset))
         .collect();
-    let picker = Picker::new(&project.graph, &project.canonical);
-    let mut infos = Vec::new();
-    let mut names = BTreeSet::new();
-    for (sample, source) in &pairs {
-        let name = source.name(sample.location.offset);
-        if !names.insert(name.clone()) {
-            bail!("{}: two samples named {name}", args.archive);
-        }
-        infos.push(picker.info(sample, name));
-    }
     // The other data the samples point to belongs to the root of the
     // object it is in: the nearest one the walk reached at or before it
     let mut elided = BTreeMap::new();
     let mut externs = BTreeSet::new();
+    let describer = Picker::new(&project.graph, &project.canonical);
     // Where elided data ends, without a type: the next place something
     // starts
     let starts: BTreeMap<usize, BTreeSet<u32>> = archives
@@ -296,14 +307,15 @@ fn slice(args: Slice) -> Result<()> {
             (*at, starts)
         })
         .collect();
-    for (sample, source) in &pairs {
+    for sample in &samples {
+        let at = sample.location.archive;
+        let source = &sources[&at];
         for (_, name) in source.externs(sample.location.offset, sample.size) {
             externs.insert(name.to_owned());
         }
-        let walk = &walks[&sample.location.archive];
+        let walk = &walks[&at];
         for (_, target) in source.relocs(sample.location.offset, sample.size) {
-            let name = source.name(target);
-            if names.contains(&name) {
+            if sampled.contains(&(at, target)) {
                 continue;
             }
             let root = walk
@@ -312,59 +324,251 @@ fn slice(args: Slice) -> Result<()> {
                 .next_back()
                 .map_or("unknown", |(_, path)| root_of(path))
                 .to_owned();
-            // Its type's size where the walk typed it
-            let typed = walk.objects.get(&target).and_then(|types| {
-                types
-                    .iter()
-                    .filter_map(|&id| {
-                        let rep = project.canonical.get(id).rep;
-                        project.canonical.byte_size(&project.graph, rep)
-                    })
-                    .max()
-            });
+            // As far as the walk typed it
+            let typed = walk.extents.get(&target).map(|&end| end - target);
             let end = source.archive.data.len() as u32;
             let size = typed.map_or_else(
                 || {
-                    starts[&sample.location.archive]
+                    starts[&at]
                         .range(target + 1..)
                         .next()
                         .map_or(end, |&s| s.min(end))
                         - target
                 },
-                |size| size as u32,
+                |size| size,
             );
-            elided.entry(name).or_insert(Elided { root, size });
+            // Declared as its type where the walk typed it as one record
+            let ty = walk
+                .objects
+                .get(&target)
+                .and_then(|types| match types.iter().collect::<Vec<_>>()[..] {
+                    [&id] => describer.describe(id, target, walk).ok(),
+                    _ => None,
+                })
+                .filter(|t| t.size == u64::from(size))
+                .map(|t| ElidedType {
+                    type_name: t.type_name,
+                    lookup: t.lookup,
+                    member: t.member,
+                    header: t.header,
+                });
+            elided
+                .entry((at, target))
+                .or_insert(Elided { root, size, ty });
         }
+    }
+    // The rest of the archive, split where something starts
+    let mut rest: Vec<(usize, u32, u32)> = Vec::new();
+    for (at, archive) in &archives {
+        let end = archive.data.len() as u32;
+        let spans: BTreeMap<u32, u32> = samples
+            .iter()
+            .filter(|s| s.location.archive == *at)
+            .map(|s| (s.location.offset, s.location.offset + s.size as u32))
+            .collect();
+        let mut bounds: BTreeSet<u32> = starts[at].range(..end).copied().collect();
+        bounds.insert(0);
+        bounds.extend(spans.values().filter(|&&e| e < end));
+        let bounds: Vec<u32> = bounds.into_iter().collect();
+        for (i, &from) in bounds.iter().enumerate() {
+            let to = bounds.get(i + 1).copied().unwrap_or(end);
+            let covered = spans
+                .range(..=from)
+                .next_back()
+                .is_some_and(|(_, &e)| from < e);
+            if !covered && from < to {
+                rest.push((*at, from, to - from));
+            }
+        }
+    }
+    // Names for what the archive doesn't name
+    let wanted: Vec<Unnamed> = sampled
+        .iter()
+        .map(|&(archive, offset)| (archive, offset, None))
+        .chain(
+            elided
+                .iter()
+                .map(|(&(archive, offset), e)| (archive, offset, Some(&*e.root))),
+        )
+        .filter(|&(archive, offset, _)| !sources[&archive].is_public(offset))
+        .map(|(archive, offset, elided)| Unnamed {
+            archive,
+            offset,
+            elided,
+        })
+        .collect();
+    assign_names(&mut sources, &wanted);
+    let pointed: BTreeSet<(usize, u32)> = elided.keys().copied().collect();
+    let elided: BTreeMap<String, Elided> = elided
+        .into_iter()
+        .map(|((at, target), e)| (sources[&at].name(target), e))
+        .collect();
+
+    let pairs: Vec<_> = samples
+        .iter()
+        .map(|s| (s, &sources[&s.location.archive]))
+        .collect();
+    let picker = Picker::new(&project.graph, &project.canonical);
+    let mut infos = Vec::new();
+    let mut names = BTreeSet::new();
+    for (sample, source) in &pairs {
+        let name = source.name(sample.location.offset);
+        if !names.insert(name.clone()) {
+            bail!("{}: two samples named {name}", args.archive);
+        }
+        let public = source.is_public(sample.location.offset);
+        infos.push(picker.info(sample, name, public));
     }
 
     if let Some(dir) = args.output.parent() {
         fs::create_dir_all(dir)?;
     }
-    fs::write(&args.output, target_object(&pairs)?)?;
-    // The target's order, for linking the base object's `.data` the same:
+    let pieces: Vec<Piece> = pairs
+        .iter()
+        .map(|(sample, source)| Piece {
+            source,
+            offset: sample.location.offset,
+            size: sample.size,
+            global: source.is_public(sample.location.offset),
+        })
+        .collect();
+    // The rest the walk explains: typed data, with no relocation it can't
+    // explain
+    let coverages: BTreeMap<usize, _> = archives
+        .iter()
+        .map(|(at, archive)| {
+            (*at, coverage(&project.graph, &project.canonical, archive, &walks[at]))
+        })
+        .collect();
+    let typed: BTreeMap<usize, Vec<(u32, u32)>> = walks
+        .iter()
+        .map(|(at, walk)| {
+            let mut extents: Vec<(u32, u32)> = Vec::new();
+            let data = sources[at].archive.data;
+            for (&offset, &end) in &walk.extents {
+                // Objects start on words, and GX data (texels, palettes,
+                // display lists) on 32 bytes: zeros up to either are padding
+                let zeros = |to: u32| {
+                    let to = to.min(data.len() as u32);
+                    data[end as usize..to as usize]
+                        .iter()
+                        .all(|&b| b == 0)
+                        .then_some(to)
+                };
+                let end = zeros(end.next_multiple_of(32))
+                    .or_else(|| zeros(end.next_multiple_of(4)))
+                    .unwrap_or(end);
+                match extents.last_mut() {
+                    Some(last) if offset <= last.1 => last.1 = last.1.max(end),
+                    _ => extents.push((offset, end)),
+                }
+            }
+            (*at, extents)
+        })
+        .collect();
+    let explained: Vec<bool> = rest
+        .iter()
+        .map(|&(at, offset, size)| {
+            let end = offset + size;
+            typed[&at].iter().any(|&(from, to)| from <= offset && end <= to)
+                && !coverages[&at]
+                    .unexplained
+                    .iter()
+                    .any(|u| (offset..end).contains(&u.at))
+        })
+        .collect();
+    // Only what has a global name goes in the objects: the archive's public
+    // symbols and the data the samples point to. The rest is only reached
+    // through those, and the C never names it: a global is inferred when it
+    // and everything it reaches without passing another global or a sample
+    // are explained
+    let spans: BTreeMap<(usize, u32), usize> = rest
+        .iter()
+        .enumerate()
+        .map(|(i, &(at, offset, _))| ((at, offset), i))
+        .collect();
+    let named = |i: usize| {
+        let (at, offset, _) = rest[i];
+        sources[&at].is_public(offset) || pointed.contains(&(at, offset))
+    };
+    let mut target_rest = Vec::new();
+    let mut inferred = Vec::new();
+    for (i, &(at, offset, size)) in rest.iter().enumerate() {
+        if !named(i) {
+            continue;
+        }
+        let source = &sources[&at];
+        let mut seen = BTreeSet::from([i]);
+        let mut stack = vec![i];
+        let mut all = true;
+        while let Some(i) = stack.pop() {
+            if !explained[i] {
+                all = false;
+                break;
+            }
+            let (_, from, size) = rest[i];
+            for (_, target) in source.relocs(from, size.into()) {
+                if let Some(&j) = spans.get(&(at, target))
+                    && !named(j)
+                    && seen.insert(j)
+                {
+                    stack.push(j);
+                }
+            }
+        }
+        let piece = Piece {
+            source,
+            offset,
+            size: size.into(),
+            // The archive names only its public symbols. The C declares
+            // elided data extern, but the base's references to it needn't
+            // bind: objdiff compares relocations to undefined symbols by name
+            global: source.is_public(offset),
+        };
+        if all {
+            inferred.push(piece.clone());
+        }
+        target_rest.push(piece);
+    }
+    // The target defines all of it and the C doesn't, so objdiff counts it as
+    // missing; the base defines what is inferred, by name and size, so that
+    // objdiff matches it
+    fs::write(
+        &args.output,
+        target_object(&pieces, &target_rest, &args.archive)?,
+    )?;
+    fs::write(args.output.with_extension("rest.o"), rest_object(&inferred)?)?;
+    // The target's order, for linking the base object's samples the same:
     // clang lays variables out where an initializer first points to them
-    let mut script = String::from("SECTIONS\n{\n    .data : {\n");
+    let mut script = format!("SECTIONS\n{{\n    {SAMPLED} : {{\n");
     for info in &infos {
         script += &format!("        *(.data.{})\n", info.symbol);
     }
-    script += "        *(.data .data.*)\n    }\n}\n";
+    // Then what the walk explains, under the target's names
+    script += &format!(
+        "        *(.data .data.*)\n    }}\n    {INFERRED} : {{ *({INFERRED}) }}\n}}\n"
+    );
     fs::write(args.output.with_extension("ld"), script)?;
     let sidecar = Sidecar {
         archive: args.archive,
         samples: infos,
         elided,
         externs,
-        complete: archives.iter().all(|(at, archive)| {
-            let walk = &walks[at];
-            walk.issues.is_empty()
-                && archive
-                    .publics
-                    .iter()
-                    .all(|p| walk.objects.contains_key(&p.offset))
-                && coverage(&project.graph, &project.canonical, archive, walk)
-                    .unexplained
-                    .is_empty()
-        }),
+        complete: inferred.len() == target_rest.len()
+            && inferred.iter().zip(&target_rest).all(|(base, target)| {
+                base.source.file_offset(base.offset)
+                    == target.source.file_offset(target.offset)
+                    && base.size == target.size
+            })
+            && archives.iter().all(|(at, archive)| {
+                let walk = &walks[at];
+                walk.issues.is_empty()
+                    && archive
+                        .publics
+                        .iter()
+                        .all(|p| walk.objects.contains_key(&p.offset))
+                    && coverages[at].unexplained.is_empty()
+            }),
     };
     fs::write(sidecar_path(&args.output), postcard::to_stdvec(&sidecar)?)?;
     Ok(())
@@ -377,7 +581,7 @@ fn codegen(args: Codegen) -> Result<()> {
     let obj = object::File::parse(&*data)?;
 
     // Each symbol's bytes and relocations, from the object
-    let section = obj.section_by_name(".data");
+    let section = obj.section_by_name(SAMPLED);
     let bytes = match &section {
         Some(section) => section.data()?,
         None => &[],
@@ -460,6 +664,20 @@ fn codegen(args: Codegen) -> Result<()> {
     Ok(())
 }
 
+fn macros(args: MacrosArgs) -> Result<()> {
+    const MACROS: &str = include_str!("../../assets/macros.h");
+    if fs::read_to_string(&args.output).ok().as_deref() != Some(MACROS) {
+        if let Some(dir) = args.output.parent() {
+            fs::create_dir_all(dir)?;
+        }
+        fs::write(&args.output, MACROS)?;
+    }
+    Ok(())
+}
+
+/// The units' top-level directory in objdiff, like the code's `main/`.
+const PROJECT_DIR: &str = "dat";
+
 fn project(args: ProjectArgs) -> Result<()> {
     let mut units = Vec::new();
     for path in &args.sidecars {
@@ -467,13 +685,14 @@ fn project(args: ProjectArgs) -> Result<()> {
         if sidecar.samples.is_empty() {
             continue;
         }
-        let unit = path
+        let stem = path
             .file_stem()
             .context("sidecar without a name")?
-            .to_string_lossy()
-            .into_owned();
+            .to_string_lossy();
+        // Grouped by module, as the build lays them out: `Pl/PlMr`
+        let unit = format!("{}/{stem}", family(&stem));
         units.push(json!({
-            "name": unit,
+            "name": format!("{PROJECT_DIR}/{unit}"),
             "target_path": format!("target/{unit}.o"),
             "base_path": format!("base/{unit}.o"),
             "metadata": {
@@ -552,13 +771,14 @@ struct UnitMatch {
     name: String,
     measures: MatchMeasures,
     samples: Vec<SampleMatch>,
-    /// The base object's contents outside `.data`, e.g. code or strings
+    /// The base object's contents outside its samples and inferred data,
+    /// e.g. code or strings
     /// from headers, which the target doesn't have.
     extra: Vec<String>,
 }
 
-/// Allocated sections of a unit's base object other than `.data`, with
-/// their sizes.
+/// Allocated sections of a unit's base object other than its samples and
+/// inferred data, with their sizes.
 fn extra_sections(dir: &Path, unit: &str) -> Result<Vec<String>> {
     let path = dir.join(format!("base/{unit}.o"));
     let data =
@@ -566,7 +786,7 @@ fn extra_sections(dir: &Path, unit: &str) -> Result<Vec<String>> {
     let obj = object::File::parse(&*data)?;
     Ok(obj
         .sections()
-        .filter(|s| s.size() > 0 && s.name() != Ok(".data"))
+        .filter(|s| s.size() > 0 && !matches!(s.name(), Ok(SAMPLED | INFERRED)))
         .filter(|s| {
             matches!(
                 s.kind(),
@@ -646,7 +866,11 @@ fn report(args: Report) -> Result<()> {
         .as_array()
         .into_iter()
         .flatten()
-        .filter_map(|u| u["name"].as_str().map(str::to_owned))
+        .filter_map(|u| u["name"].as_str())
+        .map(|name| {
+            let unit = name.strip_prefix(PROJECT_DIR).unwrap_or(name);
+            unit.trim_start_matches('/').to_owned()
+        })
         .collect();
     let units: Vec<UnitMatch> = names
         .par_iter()

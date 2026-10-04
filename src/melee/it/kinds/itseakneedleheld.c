@@ -94,41 +94,36 @@ bool itSeakneedleheld_UnkMotion0_Anim(Item_GObj* gobj)
     Vec3 scale;
     PAD_STACK(3 * 4);
 
-    if (ip->xDD4_itemVar.seakneedleheld.owner == NULL) {
-        goto ret_true;
-    }
-    if (ip->owner != ip->xDD4_itemVar.seakneedleheld.owner) {
-        goto ret_false;
-    }
+    if (ip->xDD4_itemVar.seakneedleheld.owner != NULL) {
+        if (ip->owner == ip->xDD4_itemVar.seakneedleheld.owner) {
+            switch (ip->kind) {
+            case It_Kind_Seak_NeedleHeld:
+                if (ftSk_SpecialS_80111F70(
+                        ip->xDD4_itemVar.seakneedleheld.owner) == 1)
+                {
+                    return true;
+                }
+                break;
+            case It_Kind_Kirby_SeakNeedleHeld:
+                if (ftKb_SpecialNSk_80105FF0(
+                        ip->xDD4_itemVar.seakneedleheld.owner) == 1)
+                {
+                    return true;
+                }
+                break;
+            default:
+                break;
+            }
 
-    switch (ip->kind) {
-    case It_Kind_Seak_NeedleHeld:
-        if (ftSk_SpecialS_80111F70(ip->xDD4_itemVar.seakneedleheld.owner) == 1)
-        {
-            return true;
+            it_802B18B0(gobj);
+
+            scale.x = scale.y = scale.z =
+                ftLib_GetModelScale(ip->xDD4_itemVar.seakneedleheld.owner);
+            HSD_JObjSetScale(needle, &scale);
         }
-        break;
-    case It_Kind_Kirby_SeakNeedleHeld:
-        if (ftKb_SpecialNSk_80105FF0(ip->xDD4_itemVar.seakneedleheld.owner) ==
-            1)
-        {
-            return true;
-        }
-        break;
-    default:
-        break;
+    } else {
+        return true;
     }
-
-    it_802B18B0(gobj);
-
-    scale.x = scale.y = scale.z =
-        ftLib_GetModelScale(ip->xDD4_itemVar.seakneedleheld.owner);
-    HSD_JObjSetScale(needle, &scale);
-    goto ret_false;
-
-ret_true:
-    return true;
-ret_false:
     return false;
 }
 

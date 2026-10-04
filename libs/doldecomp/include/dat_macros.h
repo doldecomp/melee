@@ -21,11 +21,15 @@
 #define DAT_TAG(tag)
 #endif
 
-/// The pointer refers to @p count elements: a sibling field or a constant.
+/// The pointer refers to @p count elements: an expression of sibling
+/// fields and constants, which may call the functions the tool ports, e.g.
+/// @c GXGetTexBufferSize.
 #define DAT_COUNT(count) DAT_TAG("count(" #count ")")
 
-/// The pointer refers to elements up to and including a zeroed one.
-#define DAT_NULLTERM DAT_TAG("nullterm")
+/// The pointer refers to elements up to and including a terminator: the
+/// first element whose first word is @p value and not a relocated pointer,
+/// e.g. @c DAT_TERMINATED(GX_VA_NULL) for a vertex descriptor list.
+#define DAT_TERMINATED(value) DAT_TAG("terminated(" #value ")")
 
 /// The array holds as many elements as the data does: they continue until
 /// the next symbol, the next address a pointer refers to, or an element that
@@ -59,6 +63,12 @@
 /// says at @c n minus their number. Relocated words within a command point
 /// to more script, such as a goto's target.
 #define DAT_SCRIPT(table, ...) DAT_TAG("script(" #table ", " #__VA_ARGS__ ")")
+
+/// On a typedef of @c u8: the bytes are data of one format the archive
+/// doesn't break down further, such as an animation's keyframe stream. Raw
+/// @c u8 data is unknown; the size comes from the members that point to it,
+/// e.g. @c DAT_COUNT(length).
+#define DAT_BLOB DAT_TAG("blob")
 
 /// The untyped pointer, or pointer-sized integer, refers to a @p type when it
 /// is relocated.
@@ -271,11 +281,5 @@ static inline void GXTexCoord1x16(const u16 index)
 }
 /// @}
 #endif
-
-/// A byte of archive data that generated C points to without defining: bulk
-/// data such as images, palettes, vertices and display lists, objects that
-/// aren't sampled, and the archive's externs. Declared as arrays of their
-/// size where it's known, e.g. @c extern DatBlob x13CC0[0x1C0];
-typedef unsigned char DatBlob;
 
 #endif

@@ -1207,7 +1207,7 @@ void gm_Scene_StaffRoll_OnEnter(void* unused)
     int i;
     HSD_GObj* gobj;
     HSD_GObj* final_gobj;
-    PAD_STACK(0x10);
+    PAD_STACK(8);
 
     efLib_Init();
     efAsync_LoadSync(0);
@@ -1317,12 +1317,9 @@ void gm_Scene_StaffRoll_OnEnter(void* unused)
         lbBgFlash_800209F4();
         gm_804D6804.x0 = gm_804D6804.x4 = 0.0F;
         memzero(staffInfo, sizeof(struct staffInfo_t));
-        gm_80480D58[0] = 0;
-        gm_80480D58[1] = 0;
-        gm_80480D58[2] = 0;
-        gm_80480D58[3] = 0;
-        gm_80480D58[4] = 0;
-        gm_80480D58[5] = 0;
+        for (i = 0; i < 6; i++) {
+            gm_80480D58[i] = 0;
+        }
         gm_804D680C = NULL;
         gm_804D6810 = 0;
         gm_804D6814 = 0;

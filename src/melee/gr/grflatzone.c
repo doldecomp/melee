@@ -697,13 +697,11 @@ void grFlatzone_80218060(s32 arg0)
             } else {
                 u8 v;
                 do {
-                loop_4:
                     gp->u.flatzone.xC7 = HSD_Randi(8);
                     v = gp->u.flatzone.xC7;
-                    if (v == gp->u.flatzone3.xC8) {
-                        goto loop_4;
-                    }
-                } while (((s16(*)[5]) grFz_803E7A68)[v][1] == -1);
+                } while (v == gp->u.flatzone3.xC8 ||
+                         ((s16(*)[5]) grFz_803E7A68)[v][1] == -1);
+
                 do {
                     {
                         s32 randi = HSD_Randi(4);

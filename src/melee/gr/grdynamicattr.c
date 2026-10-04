@@ -60,19 +60,19 @@ void grDynamicAttr_801CA1C0(grDynamicAttr_UnkStruct* arg)
 
     if (grDynamicAttr_804D6960 == arg) {
         grDynamicAttr_804D6960 = arg->next;
-        goto insert;
-    }
-    for (cur = grDynamicAttr_804D6960; cur != NULL; cur = cur->next) {
-        if (cur->next == arg) {
-            cur->next = arg->next;
-            break;
+    } else {
+        for (cur = grDynamicAttr_804D6960; cur != NULL; cur = cur->next) {
+            if (cur->next == arg) {
+                cur->next = arg->next;
+                break;
+            }
+        }
+        if (cur != NULL) {
+            return;
         }
     }
-    if (cur == NULL) {
-    insert:
-        arg->next = grDynamicAttr_804D6964;
-        grDynamicAttr_804D6964 = arg;
-    }
+    arg->next = grDynamicAttr_804D6964;
+    grDynamicAttr_804D6964 = arg;
 }
 
 void grDynamicAttr_801CA224(void)

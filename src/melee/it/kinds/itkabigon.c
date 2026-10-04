@@ -25,7 +25,8 @@ ItemStateTable it_803F7AD8[] = {
 void it_802C9D40(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
-    itKabigonAttributes* attrs = ip->xC4_article_data->x4_specialAttributes;
+    itKabigonAttributes* attrs =
+        &ip->xC4_article_data->x4_specialAttributes->kabigon;
     ip->xDD4_itemVar.kabigon.timer = attrs->x4;
     ip->xDD4_itemVar.kabigon.x64 = attrs->x8;
     ip->xDD4_itemVar.kabigon.x68 = attrs->xC;
@@ -123,8 +124,8 @@ void it_802CA014(Item_GObj* gobj)
         s32 timer;
         timer = --ip->xDD4_itemVar.kabigon.xE44;
         if (timer == 0) {
-            itPokemonAttributes* attr =
-                ip->xC4_article_data->x4_specialAttributes;
+            itKabigonAttributes* attr =
+                &ip->xC4_article_data->x4_specialAttributes->kabigon;
             it_802CA3F4(gobj);
             ip->xDD4_itemVar.kabigon.xE44 = attr->x14;
         }
@@ -212,7 +213,8 @@ bool itKabigon_UnkMotion2_Coll(Item_GObj* gobj)
 void it_802CA3F4(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
-    itKabigonAttributes* attr = ip->xC4_article_data->x4_specialAttributes;
+    itKabigonAttributes* attr =
+        &ip->xC4_article_data->x4_specialAttributes->kabigon;
     Vec3 pos = ip->pos;
     f32 r;
 

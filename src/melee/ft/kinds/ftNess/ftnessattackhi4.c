@@ -345,7 +345,7 @@ void ftNs_AttackHi4_YoyoApplySmash(HSD_GObj* gobj)
     if (temp_yoyo) {
         item_data = yoyo_GObj->user_data;
         article = item_data->xC4_article_data;
-        yoyo_attr = article->x4_specialAttributes;
+        yoyo_attr = &article->x4_specialAttributes->yoyo;
         sp18 = AttackHi4Pos;
         sp18.x = yoyo_attr->x24_YOYO_RELEASE_VEL_X;
         posX = sp18.x;
@@ -385,7 +385,7 @@ void ftNs_AttackHi4_YoyoSetChargeDamage(HSD_GObj* gobj)
     if (yoyo_gobj != NULL) {
         Item* ip = GetItemData(yoyo_gobj);
         Article* article = ip->xC4_article_data;
-        itYoyoAttributes* yoyo_attr = article->x4_specialAttributes;
+        itYoyoAttributes* yoyo_attr = &article->x4_specialAttributes->yoyo;
         Vec3 pos = YoyoChargePos;
         it_802C0010(yoyo_gobj, &pos);
         fp->u.ns.x223C = yoyo_attr->x18_SPIN_TEXANIM_SPEED;
@@ -435,7 +435,7 @@ bool ftNs_AttackHi4_YoyoThink_IsRemove(HSD_GObj* gobj)
         yoyo_GObj = fp->u.ns.yoyo_gobj;
         yoyo_itemdata = yoyo_GObj->user_data;
         yoyo_article = yoyo_itemdata->xC4_article_data;
-        yoyo_attr = yoyo_article->x4_specialAttributes;
+        yoyo_attr = &yoyo_article->x4_specialAttributes->yoyo;
         if (fp->cmd_vars[1] == 1U) {
             fp->cmd_vars[1] = 0U;
             it_802BE5D8(yoyo_GObj, 1.0f);
@@ -503,7 +503,7 @@ void ftNs_AttackHi4_YoyoSetUnkRate(HSD_GObj* gobj)
     if (yoyo_GObj != NULL) {
         item_data = yoyo_GObj->user_data;
         item_article = item_data->xC4_article_data;
-        yoyo_attr = item_article->x4_specialAttributes;
+        yoyo_attr = &item_article->x4_specialAttributes->yoyo;
 
         texanim_unk = yoyo_attr->x20_UNK_TEXANIM_MOD;
         yoyo_float = (texanim_unk - yoyo_attr->x1C_UNK_TEXANIM_SPEED);
@@ -759,7 +759,7 @@ void ftNs_AttackHi4Charge_Anim(
     temp_ness_attr = getFtSpecialAttrs(temp_fp = getFighterPlus(gobj));
     if ((yoyo_GObj = GetYoyoGObj(temp_fp = getFighterPlus(gobj))) != NULL) {
         item_data = yoyo_GObj->user_data;
-        yoyo_attr = item_data->xC4_article_data->x4_specialAttributes;
+        yoyo_attr = &item_data->xC4_article_data->x4_specialAttributes->yoyo;
         unk_float = (yoyo_attr->x20_UNK_TEXANIM_MOD -
                      yoyo_attr->x1C_UNK_TEXANIM_SPEED);
         unk_float =

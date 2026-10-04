@@ -15,34 +15,21 @@ bool ftCo_800CECE8(Fighter_GObj* gobj)
     return false;
 }
 
-/// This atrocious-looking code is the only way I could get the compiler
-/// to spit out the redundant branch instructions found in the assembly.
-/// Otherwise a simple switch statement is functionally equivalent.
 void ftCo_800CED30(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    FighterKind kind = fp->kind;
+    FtMotionId msid;
 
-    if (kind == Ft_Kind_CLink) {
-        goto first;
-    } else {
-        if (kind < Ft_Kind_CLink) {
-            if (kind != Ft_Kind_Link) {
-                goto second;
-            first:
-                if (kind != Ft_Kind_Link) {
-                    goto third;
-                }
-            }
-        } else {
-        second:
-            HSD_ASSERTREPORT(0x36, 0, "don't have smash42 motion!!!\n");
-        }
+    switch (fp->kind) {
+    case Ft_Kind_Link:
+    case Ft_Kind_CLink:
+        msid = ftLk_MS_AttackS42;
+        break;
+    default:
+        HSD_ASSERTREPORT(0x36, 0, "don't have smash42 motion!!!\n");
     }
-third:
     fp->allow_interrupt = false;
-    Fighter_ChangeMotionState(gobj, ftLk_MS_AttackS42, Ft_MF_None, 0.0F, 1.0F,
-                              0.0F, NULL);
+    Fighter_ChangeMotionState(gobj, msid, Ft_MF_None, 0.0F, 1.0F, 0.0F, NULL);
     ftAnim_8006EBA4(gobj);
 }
 

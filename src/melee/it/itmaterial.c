@@ -324,108 +324,37 @@ void it_80278108(Item* item, HSD_MObj* mobj, HSD_TExp* texp)
 
 void it_80278574(HSD_GObj* gobj, GXColor* arg1)
 {
-    HSD_DObj* var_r3;
-    HSD_JObj* var_r0;
-    HSD_JObj* var_r0_2;
-    HSD_JObj* var_r0_3;
-    HSD_JObj* var_r0_4;
-    HSD_JObj* var_r0_5;
-    HSD_JObj* var_r0_6;
-    HSD_JObj* var_r0_7;
-    HSD_JObj* var_r0_8;
-    HSD_JObj* var_r31;
-    HSD_JObj* var_r3_2;
-    HSD_JObj* var_r3_3;
-    HSD_MObj* temp_r4;
-    HSD_Material* temp_r4_2;
+    HSD_JObj* jobj;
+    HSD_DObj* dobj;
     PAD_STACK(4);
 
-    // var_r31 = GET_JOBJ(gobj->hsd_obj);
-    var_r31 = gobj->hsd_obj;
-    while (var_r31 != NULL) {
-        var_r3 = HSD_JObjGetDObj(var_r31);
-        while (var_r3 != NULL) {
-            temp_r4 = var_r3->mobj;
-            if (temp_r4 != NULL) {
-                temp_r4_2 = temp_r4->mat;
-                if (temp_r4_2 != NULL) {
-                    temp_r4_2->diffuse = *arg1;
-                }
+    jobj = gobj->hsd_obj;
+    while (jobj != NULL) {
+        dobj = HSD_JObjGetDObj(jobj);
+        while (dobj != NULL) {
+            if (dobj->mobj != NULL && dobj->mobj->mat != NULL) {
+                dobj->mobj->mat->diffuse = *arg1;
             }
-            if (var_r3 != NULL) {
-                var_r3 = var_r3->next;
-            } else {
-                var_r3 = NULL;
-            }
+            dobj = dobj != NULL ? dobj->next : NULL;
         }
-        if (var_r31 == NULL) {
-            var_r0 = NULL;
-        } else {
-            var_r0 = var_r31->child;
+        if (HSD_JObjGetChild(jobj) != NULL) {
+            jobj = HSD_JObjGetChild(jobj);
+            continue;
         }
-        if (var_r0 != NULL) {
-            if (var_r31 == NULL) {
-                var_r0_2 = NULL;
-            } else {
-                var_r0_2 = var_r31->child;
+        if (HSD_JObjGetNext(jobj) != NULL) {
+            jobj = HSD_JObjGetNext(jobj);
+            continue;
+        }
+        while (true) {
+            if (HSD_JObjGetParent(jobj) == NULL) {
+                jobj = NULL;
+                break;
             }
-            var_r31 = var_r0_2;
-        } else {
-            if (var_r31 == NULL) {
-                var_r0_3 = NULL;
-            } else {
-                var_r0_3 = var_r31->next;
+            if (HSD_JObjGetNext(HSD_JObjGetParent(jobj)) != NULL) {
+                jobj = HSD_JObjGetNext(HSD_JObjGetParent(jobj));
+                break;
             }
-            if (var_r0_3 != NULL) {
-                if (var_r31 == NULL) {
-                    var_r0_4 = NULL;
-                } else {
-                    var_r0_4 = var_r31->next;
-                }
-                var_r31 = var_r0_4;
-            } else {
-            loop_25:
-                if (var_r31 == NULL) {
-                    var_r0_5 = NULL;
-                } else {
-                    var_r0_5 = var_r31->parent;
-                }
-                if (var_r0_5 == NULL) {
-                    var_r31 = NULL;
-                } else {
-                    if (var_r31 == NULL) {
-                        var_r3_2 = NULL;
-                    } else {
-                        var_r3_2 = var_r31->parent;
-                    }
-                    if (var_r3_2 == NULL) {
-                        var_r0_6 = NULL;
-                    } else {
-                        var_r0_6 = var_r3_2->next;
-                    }
-                    if (var_r0_6 != NULL) {
-                        if (var_r31 == NULL) {
-                            var_r3_3 = NULL;
-                        } else {
-                            var_r3_3 = var_r31->parent;
-                        }
-                        if (var_r3_3 == NULL) {
-                            var_r0_7 = NULL;
-                        } else {
-                            var_r0_7 = var_r3_3->next;
-                        }
-                        var_r31 = var_r0_7;
-                    } else {
-                        if (var_r31 == NULL) {
-                            var_r0_8 = NULL;
-                        } else {
-                            var_r0_8 = var_r31->parent;
-                        }
-                        var_r31 = var_r0_8;
-                        goto loop_25;
-                    }
-                }
-            }
+            jobj = HSD_JObjGetParent(jobj);
         }
     }
 }
