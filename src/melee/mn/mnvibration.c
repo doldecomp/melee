@@ -1020,7 +1020,7 @@ void mnVibration_CreateScreen(s32 arg0)
     MnVibrationData* data;
 
     (void) arg0;
-    PAD_STACK(24);
+    PAD_STACK(20);
     assets = &mnVibration_804A0898;
     gobj = GObj_Create(6, 7, 0x80);
     mnVibration_804D6C28 = gobj;
@@ -1042,14 +1042,9 @@ void mnVibration_CreateScreen(s32 arg0)
         data->x6[i] = HSD_PadCopyStatus[(u8) i].err != 0 ? 0 : 1;
     }
     data->scroll_offset = 0;
-    data->texts[0] = NULL;
-    data->texts[1] = NULL;
-    data->texts[2] = NULL;
-    data->texts[3] = NULL;
-    data->texts[4] = NULL;
-    data->texts[5] = NULL;
-    data->texts[6] = NULL;
-    data->texts[7] = NULL;
+    for (i = 0; i < 8; i++) {
+        data->texts[i] = NULL;
+    }
     GObj_InitUserData(gobj, 0, HSD_Free, data);
     {
         s32 k;

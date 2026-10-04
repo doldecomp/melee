@@ -1196,26 +1196,23 @@ s32 ftCo_800A229C(Fighter* fp, Vec3* arg1)
                 *arg1 = fp->cur_pos;
                 return 2;
             }
-            goto block_18;
-        }
-        if (fp->cur_pos.x > -(0.4f * w - Stage_GetBlastZoneRightOffset())) {
+        } else if (fp->cur_pos.x >
+                   -(0.4f * w - Stage_GetBlastZoneRightOffset()))
+        {
             *arg1 = fp->cur_pos;
             return 2;
         }
-    block_18:
         h = Stage_GetBlastZoneTopOffset() - Stage_GetBlastZoneBottomOffset();
         if (sp2C.y > 0.0) {
             if (fp->cur_pos.y > -(0.4f * h - Stage_GetBlastZoneTopOffset())) {
                 *arg1 = fp->cur_pos;
                 return 2;
             }
-            goto block_23;
-        }
-        if (fp->cur_pos.y < 0.4f * h + Stage_GetBlastZoneBottomOffset()) {
+        } else if (fp->cur_pos.y < 0.4f * h + Stage_GetBlastZoneBottomOffset())
+        {
             *arg1 = fp->cur_pos;
             return 2;
         }
-    block_23:
         if (fp->cur_pos.x < 0.2f * w + Stage_GetBlastZoneLeftOffset() ||
             fp->cur_pos.x > Stage_GetBlastZoneRightOffset() - 0.2f * w ||
             fp->cur_pos.y > Stage_GetBlastZoneTopOffset() - 0.2f * h ||
@@ -1224,9 +1221,7 @@ s32 ftCo_800A229C(Fighter* fp, Vec3* arg1)
             *arg1 = fp->cur_pos;
             return 2;
         }
-        goto block_43;
-    }
-    if (stage == Gr_Kind_BigBlue) {
+    } else if (stage == Gr_Kind_BigBlue) {
         w = Stage_GetBlastZoneRightOffset() - Stage_GetBlastZoneLeftOffset();
         h = Stage_GetBlastZoneTopOffset() - Stage_GetBlastZoneBottomOffset();
         if (fp->cur_pos.x < 0.2f * w + Stage_GetBlastZoneLeftOffset() ||
@@ -1237,9 +1232,7 @@ s32 ftCo_800A229C(Fighter* fp, Vec3* arg1)
             *arg1 = fp->cur_pos;
             return 2;
         }
-        goto block_43;
-    }
-    if (stage == Gr_Kind_Icemt) {
+    } else if (stage == Gr_Kind_Icemt) {
         h = Stage_GetBlastZoneTopOffset() - Stage_GetBlastZoneBottomOffset();
         grLib_801C9E60(&sp20);
         mag = ABS(sp20.y);
@@ -1249,14 +1242,12 @@ s32 ftCo_800A229C(Fighter* fp, Vec3* arg1)
                 *arg1 = fp->cur_pos;
                 return 2;
             }
-            goto block_43;
-        }
-        if (fp->cur_pos.y > -(h * frac - Stage_GetBlastZoneTopOffset())) {
+        } else if (fp->cur_pos.y > -(h * frac - Stage_GetBlastZoneTopOffset()))
+        {
             *arg1 = fp->cur_pos;
             return 2;
         }
     }
-block_43:
     if (Camera_8003118C(&fp->cur_pos, 0.0f) == 0) {
         *arg1 = fp->cur_pos;
         return -1;
@@ -7186,7 +7177,6 @@ void ftCo_800B04DC(Fighter* fp)
     Fighter** target_slot;
     struct CpuFighter* data;
     Item_GObj* item_gobj;
-    ItemKind kind;
     Fighter* target;
     f32 dist[1];
     bool is_food;
@@ -7205,24 +7195,9 @@ void ftCo_800B04DC(Fighter* fp)
     *(target_slot = &fp->cpu.x44) = target;
 
     item_gobj = fp->item_gobj;
-    if (item_gobj != NULL) {
-        kind = GET_ITEM(item_gobj)->kind;
-        if (kind == It_Kind_Heart) {
-            is_food = true;
-        } else if (kind == It_Kind_Tomato) {
-            is_food = true;
-        } else if (kind == It_Kind_Foods) {
-            is_food = true;
-        } else {
-            is_food = false;
-        }
-        if (is_food == false) {
-            data->x4C = NULL;
-        } else {
-            goto maybe_find_item;
-        }
+    if (item_gobj != NULL && !ftCo_800A5908(GET_ITEM(item_gobj))) {
+        data->x4C = NULL;
     } else {
-    maybe_find_item:
         if (fp->x2168 != 0) {
             data->x4C = NULL;
         } else {

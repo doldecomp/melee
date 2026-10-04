@@ -2545,13 +2545,22 @@ bool gm_IsCKindUnlocked(u8 ckind)
     return false;
 }
 
+static inline u8 get_unlock_notification(u8 unlock_idx)
+{
+    int i;
+    for (i = 0; i < NUM_UNLOCKABLE_CHARACTERS; i++) {
+        if ((s32) unlock_idx == (s32) lbl_803B78C8[i].idx) {
+            return lbl_803B78C8[i].notification_id;
+        }
+    }
+    return 0x42;
+}
+
 void gm_UnlockCKind(CharacterKind ckind)
 {
     u16* char_unlock_mask;
     u8 selkind;
-    int i;
     u8 unlock_idx;
-    u8 notify_val;
 
     char_unlock_mask = gmMainLib_GetUnlockedCharactersBitmaskPtr();
     selkind = ckind_to_selkind_map[(u8) ckind];
@@ -2559,16 +2568,7 @@ void gm_UnlockCKind(CharacterKind ckind)
     unlock_idx = gm_SelKindToUnlockIndex(selkind);
 
     if (unlock_idx != NUM_UNLOCKABLE_CHARACTERS) {
-        for (i = 0; i < NUM_UNLOCKABLE_CHARACTERS; i++) {
-            if ((s32) unlock_idx == (s32) lbl_803B78C8[i].idx) {
-                notify_val = lbl_803B78C8[i].notification_id;
-                goto found_notify;
-            }
-        }
-        notify_val = 0x42;
-
-    found_notify:
-        gmMainLib_8015D818(notify_val);
+        gmMainLib_8015D818(get_unlock_notification(unlock_idx));
         *char_unlock_mask |= (1LL << (s32) unlock_idx);
     }
 }

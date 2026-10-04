@@ -181,16 +181,11 @@ void fn_800DA054(Fighter_GObj* gobj)
         dx = victimPos.x - selfPos.x;
         dy = new_var3 + fp->x2170;
 
-        if ((dx * facing > p_ftCommonData->x34C)) {
-            goto jmp;
-        }
-
-        if (dy < 0.0f) {
-            dy = -dy;
-        }
-        if (dy > p_ftCommonData->x350) {
-        jmp:
+        if (dx * facing > p_ftCommonData->x34C ||
+            ABS(dy) > p_ftCommonData->x350)
+        {
             ftCo_800DA698(gobj, 1);
+
         } else if (dx * facing < 0.0f) {
             v = (dx < 0.0f ? -dx : dx);
             spd = (tmp = fp->co_attrs.walk_max_vel);

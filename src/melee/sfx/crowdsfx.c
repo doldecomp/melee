@@ -193,23 +193,12 @@ bool un_80321EBC(u32 arg0, f32 arg1)
 
     data = crowdsfx_ptr;
     gobj = ftLib_FindBySpawnNum(arg0_copy);
-    if (gobj == NULL) {
-        goto skip;
-    }
-
-    port = ftLib_IsSubFighter(gobj);
-    if (Player_8003248C(ftLib_GetPlayerIndex(gobj), port) == 1) {
-        goto skip;
-    }
-
-    if (ftLib_GetPercent(gobj) < gCrowdConfig->x1C) {
-        goto skip;
-    }
-    if (data->x10 < gCrowdConfig->cheer_limit) {
-        goto skip;
-    }
-    if (data->xC == arg0) {
-    skip:
+    if (gobj == NULL ||
+        (port = ftLib_IsSubFighter(gobj),
+         Player_8003248C(ftLib_GetPlayerIndex(gobj), port) == 1) ||
+        ftLib_GetPercent(gobj) < gCrowdConfig->x1C ||
+        data->x10 < gCrowdConfig->cheer_limit || data->xC == arg0)
+    {
         return 0;
     }
 

@@ -75,20 +75,17 @@ void it_802CD4FC(Item_GObj* gobj)
         } else if (angle <= 0.0f && ip->xDD4_itemVar.sonans.x60 > 0.0f) {
             ip->xDD4_itemVar.sonans.x60 += attrs->x10;
         }
-        angle = ABS(ip->xDD4_itemVar.sonans.x64);
-        if (angle < attrs->x1C) {
-            angle = ABS(ip->xDD4_itemVar.sonans.x60);
-            if (angle < attrs->x1C) {
-                ip->xDD4_itemVar.sonans.x64 = 0.0f;
-                ip->xDD4_itemVar.sonans.x60 = 0.0f;
-                ip->xDAC_itcmd_var0 = 0;
-            } else {
-                goto accumulate;
-            }
+        if (ABS(ip->xDD4_itemVar.sonans.x64) < attrs->x1C &&
+            ABS(ip->xDD4_itemVar.sonans.x60) < attrs->x1C)
+
+        {
+            ip->xDD4_itemVar.sonans.x64 = 0.0f;
+            ip->xDD4_itemVar.sonans.x60 = 0.0f;
+            ip->xDAC_itcmd_var0 = 0;
         } else {
-        accumulate:
             ip->xDD4_itemVar.sonans.x64 += ip->xDD4_itemVar.sonans.x60;
         }
+
         angle = ip->xDD4_itemVar.sonans.x64;
         max_angle = attrs->x18;
         if (angle > max_angle) {

@@ -1877,13 +1877,14 @@ void Player_80036978(s32 slot, Vec3* pos)
 
 void Player_InitOrResetPlayer(s32 slot)
 {
+    int i;
     StaticPlayer* player;
     u8* transformed0;
     u8* transformed1;
     f32 zerofloat;
     f32 onefloat;
 
-    u8 _[56];
+    u8 _[48];
 
     Player_CheckSlot(slot);
     player = &player_slots[slot];
@@ -1941,12 +1942,9 @@ void Player_InitOrResetPlayer(s32 slot)
     player->falls[player->transformed[0]] = 0;
     player->falls[player->transformed[1]] = 0;
 
-    player->kos_by_player[0] = 0;
-    player->kos_by_player[1] = 0;
-    player->kos_by_player[2] = 0;
-    player->kos_by_player[3] = 0;
-    player->kos_by_player[4] = 0;
-    player->kos_by_player[5] = 0;
+    for (i = 0; i < 6; i++) {
+        player->kos_by_player[i] = 0;
+    }
 
     player->match_frame_count = -1;
     player->self_destructs = 0;

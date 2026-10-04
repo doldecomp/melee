@@ -285,13 +285,9 @@ bool it_8026DC24(Item_GObj* gobj)
     if (ABS(ip->x40_vel.y) <= 0.00001f) {
         ip->x40_vel.y = 0.0f;
     }
-    if (ABS(ip->x40_vel.x) <= attr->x5c) {
-        if ((ABS(ip->x40_vel.y) <= attr->x5c)) {
-            goto block_18a8;
-        }
-    }
-    if (ip->xDCD_flag.x0.b4 || !attr->x58) {
-    block_18a8:
+    if ((ABS(ip->x40_vel.x) <= attr->x5c && ABS(ip->x40_vel.y) <= attr->x5c) ||
+        ip->xDCD_flag.x0.b4 || !attr->x58)
+    {
         itResetVelocity(ip);
         return true;
     }

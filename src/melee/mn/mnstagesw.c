@@ -142,18 +142,37 @@ static void mnStageSw_802359C8(MnStageSwData* data)
     }
 }
 
+static inline bool isPageEmpty(u8 arg0)
+{
+    s32 i;
+    u8 start;
+    u8 end;
+
+    if (arg0 < 15) {
+        start = 0;
+        end = 14;
+    } else {
+        start = 15;
+        end = 28;
+    }
+    for (i = start; i <= end; i++) {
+        if (gm_80164430(gm_801641CC(mnStageSw_803ED4C4[(u8) i])) != 0) {
+            return false;
+        }
+    }
+    return true;
+}
+
 static s32 mnStageSw_80235C58(u8 arg0)
 {
     s32 next;
     s32 found;
-    s32 temp;
     s32 curr;
+    s32 temp;
     s32 low_bound;
     s32 high_bound;
     s32 idx;
     u8 low;
-    u8 end;
-    u8 start;
     u8 high;
     s32 prev;
     s32 i;
@@ -165,26 +184,7 @@ static s32 mnStageSw_80235C58(u8 arg0)
         low = 15;
         high = 28;
     }
-    if (arg0 < 15) {
-        start = 0;
-        end = 14;
-    } else {
-        start = 15;
-        end = 28;
-    }
-
-    curr = start;
-    next = end;
-    while (curr <= next) {
-        if (gm_80164430(gm_801641CC(mnStageSw_803ED4C4[(u8) curr])) != 0) {
-            found = 0;
-            goto loop_done;
-        }
-        curr++;
-    }
-    found = 1;
-loop_done:
-    if (found != 0) {
+    if (isPageEmpty(arg0)) {
         return -1;
     }
 
@@ -343,9 +343,7 @@ static void fn_80235F80(HSD_GObj* gobj)
                 mnStageSw_8023593C(mnStageSw_804D6BF0);
                 return;
             }
-            goto check_dpad;
-        }
-        if (buttons & 0x100) {
+        } else if (buttons & 0x100) {
             sfxForward();
             result = gm_GetCurrentGameMode();
             switch (result) {
@@ -359,7 +357,6 @@ static void fn_80235F80(HSD_GObj* gobj)
                 return;
             }
         }
-    check_dpad:
         if (buttons & 0xF) {
             sfxMove();
             mnStageSw_80235DC8(user_data, buttons);
