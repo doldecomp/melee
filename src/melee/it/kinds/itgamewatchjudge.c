@@ -32,13 +32,14 @@ HSD_GObj* it_802C7774(float facing_dir, HSD_GObj* parent_gobj, Vec3* pos,
 
     new_gobj = Item_80268B18(&si);
     if (new_gobj != NULL) {
-        void** special_attrs =
-            GET_ITEM(new_gobj)->xC4_article_data->x4_specialAttributes;
+        itGamewatchAttributes* special_attrs =
+            &GET_ITEM(new_gobj)
+                 ->xC4_article_data->x4_specialAttributes->gamewatch;
         Item_8026AB54(new_gobj, parent_gobj, part);
         it_80273670(new_gobj, 0, (f32) (s32) (arg4 + 1));
         it_802C78B8(new_gobj);
         db_80225DD8(new_gobj, (Fighter_GObj*) parent_gobj);
-        it_8027CE64(new_gobj, parent_gobj, *special_attrs);
+        it_8027CE64(new_gobj, parent_gobj, special_attrs->x0);
         return new_gobj;
     }
     return NULL;

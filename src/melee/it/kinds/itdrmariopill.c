@@ -30,7 +30,7 @@
 #include <sysdolphin/baselib/mtx.h>
 
 #define GET_ATTRS(ip)                                                         \
-    ((itDrMarioPillAttributes*) ip->xC4_article_data->x4_specialAttributes)
+    (&ip->xC4_article_data->x4_specialAttributes->dr_mario_pill)
 
 /* 2C0C0C */ static bool itDrMarioPill_UnkMotion0_Anim(Item_GObj*);
 /* 2C0C68 */ static void itDrMarioPill_UnkMotion0_Phys(Item_GObj*);

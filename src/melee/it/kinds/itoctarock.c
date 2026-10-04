@@ -95,7 +95,8 @@ void it_802E4A44(Item_GObj* gobj)
 bool it_802E4B00(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
-    itOctarockAttributes* attr = ip->xC4_article_data->x4_specialAttributes;
+    itOctarockAttributes* attr =
+        &ip->xC4_article_data->x4_specialAttributes->octarock;
     ip->init_facing_dir = ip->facing_dir;
     ip->xC9C += it_8027CBFC(gobj);
     if (ip->xC9C > *attr->x0 || ip->msid == 6) {
@@ -114,7 +115,8 @@ bool it_802E4B00(Item_GObj* gobj)
 void it_802E4C08(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
-    itOctarockAttributes* attr = ip->xC4_article_data->x4_specialAttributes;
+    itOctarockAttributes* attr =
+        &ip->xC4_article_data->x4_specialAttributes->octarock;
     it_8027CAD8(gobj);
     ip->xDD4_itemVar.octarock.x32 = attr->x1C;
     Item_80268E5C(gobj, 0, ITEM_ANIM_UPDATE);
@@ -131,7 +133,8 @@ bool itOctarock_UnkMotion0_Anim(Item_GObj* gobj)
 void itOctarock_UnkMotion0_Phys(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
-    itOctarockAttributes* attr = ip->xC4_article_data->x4_specialAttributes;
+    itOctarockAttributes* attr =
+        &ip->xC4_article_data->x4_specialAttributes->octarock;
     if (ip->xDD4_itemVar.octarock.x32 == 0) {
         switch (it_802E52E0(gobj)) {
         case 0:
@@ -160,7 +163,8 @@ bool itOctarock_UnkMotion0_Coll(Item_GObj* gobj)
 void it_802E4DB4(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
-    itOctarockAttributes* attr = ip->xC4_article_data->x4_specialAttributes;
+    itOctarockAttributes* attr =
+        &ip->xC4_article_data->x4_specialAttributes->octarock;
     ip->x40_vel.x *= attr->x4;
     Item_80268E5C(gobj, 2, 3);
 }
@@ -245,7 +249,8 @@ void it_802E503C(Item_GObj* gobj)
 bool itOctarock_UnkMotion4_Anim(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
-    itOctarockAttributes* attr = ip->xC4_article_data->x4_specialAttributes;
+    itOctarockAttributes* attr =
+        &ip->xC4_article_data->x4_specialAttributes->octarock;
     it_802E595C(ip->xBBC_dynamicBoneTable->bones[1], ip);
     if (ip->xDD4_itemVar.octarock.x32 == 0) {
         Vec3 v;
@@ -293,7 +298,8 @@ bool itOctarock_UnkMotion4_Coll(Item_GObj* gobj)
 s32 it_802E52E0(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
-    itOctarockAttributes* attr = ip->xC4_article_data->x4_specialAttributes;
+    itOctarockAttributes* attr =
+        &ip->xC4_article_data->x4_specialAttributes->octarock;
     s32 result = 0;
     HSD_GObj* fighter = ftLib_FindNearestOpponent(&ip->pos, NULL);
 

@@ -32,7 +32,7 @@ void it_802C9588(Item_GObj* item_gobj)
     PAD_STACK(12);
 
     item = GET_ITEM(item_gobj);
-    attr = item->xC4_article_data->x4_specialAttributes;
+    attr = &item->xC4_article_data->x4_specialAttributes->chicorita;
     it_80279C48(item_gobj);
     item->xDD4_itemVar.chicorita.x60 = -1;
     item->xDBC.xDBC_itcmd_var4.flags.x0 = false;
@@ -65,7 +65,7 @@ void it_802C9670(Item_GObj* item_gobj)
 
     item = item_gobj->user_data;
     article = item->xC4_article_data;
-    attr = article->x4_specialAttributes;
+    attr = &article->x4_specialAttributes->chicorita;
     if (item->xDD4_itemVar.chicorita.x60 == -1) {
         item->xDD4_itemVar.chicorita.x60 = attr->x4;
     }
@@ -96,7 +96,7 @@ bool itChicorita_UnkMotion0_Anim(HSD_GObj* item_gobj)
             item->xDD4_itemVar.chicorita.x60--;
             item = item_gobj->user_data;
             article = item->xC4_article_data;
-            attr = article->x4_specialAttributes;
+            attr = &article->x4_specialAttributes->chicorita;
             if (item->xDD4_itemVar.chicorita.x60 ==
                 -1) { // This check will never succeed?
                 item->xDD4_itemVar.chicorita.x60 = attr->x4;
@@ -227,7 +227,7 @@ void it_802C9B20(Item_GObj* chicorita_gobj)
     itChicoritaLeafAttr* attr;
 
     chicorita = GET_ITEM((HSD_GObj*) chicorita_gobj);
-    attr = chicorita->xC4_article_data->x4_specialAttributes;
+    attr = &chicorita->xC4_article_data->x4_specialAttributes->chicorita_leaf;
     spawn.prev_pos = chicorita->pos;
     spawn.prev_pos.x += attr->x8 * chicorita->facing_dir;
     spawn.prev_pos.y += attr->xC;
@@ -253,8 +253,7 @@ void itChicoritaLeaf_Logic30_Spawned(Item_GObj* item_gobj)
 
     item = GET_ITEM((HSD_GObj*) item_gobj);
     item->xD44_lifeTimer =
-        ((itChicoritaLeafAttr*) item->xC4_article_data->x4_specialAttributes)
-            ->timer;
+        (&item->xC4_article_data->x4_specialAttributes->chicorita_leaf)->timer;
     it_80274740(item_gobj);
     it_802C9CC0(item_gobj);
     it_8026B3A8(item_gobj);

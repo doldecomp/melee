@@ -9,8 +9,8 @@
 #include <melee/it/inlines.h>
 #include <melee/it/it_26B1.h>
 #include <melee/it/it_2725.h>
-#include <melee/it/itCommonItems.h>
 #include <melee/it/item.h>
+#include <melee/it/itemattrs.h>
 #include <melee/it/itgroundcoll.h>
 #include <melee/it/itmaplib.h>
 #include <sysdolphin/baselib/gobj.h>
@@ -48,10 +48,11 @@ void it_802C01AC(Item_GObj* gobj, Vec3* pos, ItemKind kind, float facing_dir)
 void it_802C027C(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
-    itUnkAttributes* attrs = ip->xC4_article_data->x4_specialAttributes;
-    ip->x40_vel.x = attrs->x0_float * ip->facing_dir;
+    itLuigiFireballAttributes* attrs =
+        &ip->xC4_article_data->x4_specialAttributes->luigi_fireball;
+    ip->x40_vel.x = attrs->x0 * ip->facing_dir;
     ip->x40_vel.y = ip->x40_vel.z = 0;
-    it_80275158(gobj, attrs->x4_float);
+    it_80275158(gobj, attrs->x4);
     Item_80268E5C(gobj, 0, ITEM_ANIM_UPDATE);
 }
 
@@ -78,7 +79,8 @@ bool itLuigifireball_UnkMotion0_Coll(Item_GObj* gobj)
     if (it_8027781C(gobj)) {
         Item* ip = GET_ITEM(gobj);
         HSD_JObj* jobj = GET_JOBJ(gobj);
-        itUnkAttributes* attrs = ip->xC4_article_data->x4_specialAttributes;
+        itLuigiFireballAttributes* attrs =
+            &ip->xC4_article_data->x4_specialAttributes->luigi_fireball;
         if (calc_dist_2d_accurate(&ip->x40_vel) < attrs->xC) {
             return true;
         }

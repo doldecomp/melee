@@ -69,7 +69,7 @@ void it_802F0BE8(Item_GObj* gobj)
     Item* ip = GET_ITEM(gobj);
     HSD_JObj* jobj = GET_JOBJ(gobj);
     itMasterHandBulletAttributes* attrs =
-        ip->xC4_article_data->x4_specialAttributes;
+        &ip->xC4_article_data->x4_specialAttributes->master_hand_bullet;
     Quaternion quad = { 0 };
     Item_80268E5C(gobj, 0, ITEM_ANIM_UPDATE);
     ip->on_accessory = it_802F0F04;
@@ -84,7 +84,7 @@ void it_802F0D2C(Item_GObj* gobj)
     Item* ip = GET_ITEM(gobj);
     HSD_JObj* jobj = GET_JOBJ(gobj);
     itMasterHandBulletAttributes* attrs =
-        ip->xC4_article_data->x4_specialAttributes;
+        &ip->xC4_article_data->x4_specialAttributes->master_hand_bullet;
     Quaternion quad = { 0 };
     Item_80268E5C(gobj, 1, ITEM_ANIM_UPDATE);
     ip->on_accessory = it_802F0F04;

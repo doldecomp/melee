@@ -71,7 +71,8 @@ static inline float my_sqrtf_accurate(float x)
 void it_2725_Logic17_Spawned(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
-    itLugiaAttributes* attrs = ip->xC4_article_data->x4_specialAttributes;
+    itLugiaAttributes* attrs =
+        &ip->xC4_article_data->x4_specialAttributes->lugia;
     ip->xDD4_itemVar.lugia.x64 = ip->pos;
     ip->facing_dir = 0.0f;
     ip->xDAC_itcmd_var0 = 0;
@@ -123,7 +124,8 @@ bool itLugia_UnkMotion1_Coll(Item_GObj* gobj)
 void it_802D1580(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
-    itLugiaAttributes* attrs = ip->xC4_article_data->x4_specialAttributes;
+    itLugiaAttributes* attrs =
+        &ip->xC4_article_data->x4_specialAttributes->lugia;
     ip->xDD4_itemVar.lugia.xE50.x = -attrs->x4;
     Item_80268E5C(gobj, 2, ITEM_ANIM_UPDATE);
     Item_SetEffectHitlagCallbacks(ip);
@@ -148,7 +150,8 @@ bool itLugia_UnkMotion2_Anim(Item_GObj* gobj)
 void itLugia_UnkMotion2_Phys(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
-    itLugiaAttributes* attrs = ip->xC4_article_data->x4_specialAttributes;
+    itLugiaAttributes* attrs =
+        &ip->xC4_article_data->x4_specialAttributes->lugia;
     it_8027A344(gobj);
     if (it_80272C6C(gobj)) {
         ip->xDD4_itemVar.lugia.xE50.x += attrs->x8;
@@ -199,7 +202,8 @@ bool itLugia_UnkMotion3_Anim(Item_GObj* gobj)
 void itLugia_UnkMotion3_Phys(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
-    itLugiaAttributes* attrs = ip->xC4_article_data->x4_specialAttributes;
+    itLugiaAttributes* attrs =
+        &ip->xC4_article_data->x4_specialAttributes->lugia;
     it_8027A344(gobj);
     if (ip->xDD4_itemVar.lugia.x60-- != 0) {
         ip->x40_vel.z = attrs->x10;
@@ -219,7 +223,8 @@ void it_802D1830(Item_GObj* gobj)
     Item* ip = GET_ITEM(gobj);
     f32 prod;
     f32 sqrtval;
-    itLugiaAttributes* attrs = ip->xC4_article_data->x4_specialAttributes;
+    itLugiaAttributes* attrs =
+        &ip->xC4_article_data->x4_specialAttributes->lugia;
     f32 x18, disc;
     PAD_STACK(16);
 
@@ -257,7 +262,8 @@ bool itLugia_UnkMotion4_Anim(Item_GObj* gobj)
 void itLugia_UnkMotion4_Phys(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
-    itLugiaAttributes* attrs = ip->xC4_article_data->x4_specialAttributes;
+    itLugiaAttributes* attrs =
+        &ip->xC4_article_data->x4_specialAttributes->lugia;
     f32 new_var;
     it_8027A344(gobj);
     ip->xDD4_itemVar.lugia.xE50.x += attrs->x18;
@@ -276,7 +282,8 @@ bool itLugia_UnkMotion4_Coll(Item_GObj* gobj)
 void it_802D1A44(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
-    itLugiaAttributes* attrs = ip->xC4_article_data->x4_specialAttributes;
+    itLugiaAttributes* attrs =
+        &ip->xC4_article_data->x4_specialAttributes->lugia;
     Vec3 pos;
 
     Item_80268E5C(gobj, 5, ITEM_ANIM_UPDATE);
@@ -325,7 +332,8 @@ void it_802D1BBC(Item_GObj* gobj)
     Item* ip = GET_ITEM(gobj);
 
     if (ip->xDAC_itcmd_var0 != 0) {
-        itLugiaAttributes* attrs = ip->xC4_article_data->x4_specialAttributes;
+        itLugiaAttributes* attrs =
+            &ip->xC4_article_data->x4_specialAttributes->lugia;
         ip->xDD4_itemVar.lugia.xE50.y += attrs->x20;
         ip->xDD4_itemVar.lugia.xE50.z += attrs->x28;
         ip->xDD4_itemVar.lugia.x88 += attrs->x30;
@@ -441,7 +449,8 @@ Vec3 it_802D1F64(Item_GObj* gobj, f32 param)
 void it_802D208C(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
-    itLugiaAttributes* attrs = ip->xC4_article_data->x4_specialAttributes;
+    itLugiaAttributes* attrs =
+        &ip->xC4_article_data->x4_specialAttributes->lugia;
     s32 random_offset, new_angle;
     f32 angle;
     Vec3 target;
@@ -512,8 +521,9 @@ void it_802D23D4(Item_GObj* gobj, Item_GObj* ref_gobj)
 void it_802D23F4(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
-    itLugiaAttributes* attrs = ip->xC4_article_data->x4_specialAttributes;
-    ip->xD44_lifeTimer = attrs->x0;
+    itLugiaAeroblastAttributes* attrs =
+        &ip->xC4_article_data->x4_specialAttributes->lugia_aeroblast;
+    ip->xD44_lifeTimer = attrs->lifetime;
     it_80274740(gobj);
     Item_80268E5C(gobj, 0, ITEM_ANIM_UPDATE);
     Item_SetEffectHitlagCallbacks(ip);
@@ -529,18 +539,19 @@ bool it_802D246C(Item_GObj* gobj)
 void it_802D24A0(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
-    f32* attrs = ip->xC4_article_data->x4_specialAttributes;
+    itLugiaAeroblastAttributes* attrs =
+        &ip->xC4_article_data->x4_specialAttributes->lugia_aeroblast;
     f32 multiplier = 0.0f;
 
     switch (ip->kind) {
     case It_Kind_Lugia_Aeroblast:
-        multiplier = attrs[1];
+        multiplier = attrs->x4;
         break;
     case It_Kind_Lugia_Aeroblast2:
-        multiplier = attrs[2];
+        multiplier = attrs->x8;
         break;
     case It_Kind_Lugia_Aeroblast3:
-        multiplier = attrs[3];
+        multiplier = attrs->xC;
         break;
     default:
         break;

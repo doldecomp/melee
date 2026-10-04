@@ -44,7 +44,8 @@ bool fn_800D9558(Fighter_GObj* gobj)
                 Item* it;
                 it = fp->u.ss.x223C->user_data;
                 item = fp->u.ss.x223C;
-                grappleAttrs = it->xC4_article_data->x4_specialAttributes;
+                grappleAttrs =
+                    &it->xC4_article_data->x4_specialAttributes->samus_grapple;
                 if (item != NULL) {
                     for (i = 0; i < 6; i++) {
                         if (fp->mv.ca.specials.grav == (f32) (i * 3 + 0x14)) {
@@ -133,7 +134,8 @@ bool fn_800D9930(Fighter_GObj* gobj)
                 Item* it;
                 it = fp->u.ss.x223C->user_data;
                 item = fp->u.ss.x223C;
-                grappleAttrs = it->xC4_article_data->x4_specialAttributes;
+                grappleAttrs =
+                    &it->xC4_article_data->x4_specialAttributes->samus_grapple;
                 if (item != NULL) {
                     for (i = 0; i < 4; i++) {
                         if (fp->mv.ca.specials.grav == (f32) (i * 3 + 0x14)) {
