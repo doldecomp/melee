@@ -61,7 +61,7 @@ typedef struct {
 /* 4D1020 */ static f32 prj[GX_PROJECTION_SZ];
 /* 4D103C */ static Mtx pvmtx;
 /* 4D106C */ static HSD_Particle* particle_list[17];
-/* 4D7908 */ static HSD_Fog* HSD_PSDisp_804D7908;
+/* 4D7908 */ static HSD_Fog* particleFog;
 /* 4D790C */ static s32 prevPointSize;
 /* 4D7910 */ static s32 prevLineWidth;
 /* 4D7914 */ static f32 HSD_PSDisp_804D7914;
@@ -2026,7 +2026,7 @@ void psDispParticles(u32 target_link, u32 sw)
                     }
                     if (((pp->kind ^ prev_kind) & DispFog) != 0) {
                         if (pp->kind & DispFog) {
-                            HSD_FogSet(HSD_PSDisp_804D7908);
+                            HSD_FogSet(particleFog);
                         } else {
                             HSD_FogSet(NULL);
                         }
