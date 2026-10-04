@@ -2245,6 +2245,25 @@ static inline void updateCursorDisplay(HSD_JObj* jobj,
     HSD_JObjAnimAll(jobj);
 }
 
+/// Times a held B press and sets pending scene change 2 after 30 frames.
+static inline void updateBackHold(struct CSSCursorData* cursor, u32 buttons)
+{
+    if (buttons & HSD_PAD_B) {
+        if (mnCharSel_804D6CF3 & mnCharSel_804D50C8[cursor->x4]) {
+            u16 new_timer = cursor->xA + 1;
+            cursor->xA = new_timer;
+            if (new_timer > 0x1E) {
+                mnCharSel_804D6CF6 = 2;
+            }
+        } else {
+            cursor->xA = 0;
+        }
+    } else {
+        mnCharSel_804D6CF3 |= mnCharSel_804D50C8[cursor->x4];
+        cursor->xA = 0;
+    }
+}
+
 /// Highlights the hovered button and returns whether A was pressed.
 static inline u32 isButtonPressed(struct CSSCursorData* cursor, u32 trigger)
 {
@@ -2374,20 +2393,7 @@ void mnCharSel_CursorThink(HSD_GObj* gobj)
             trigger = HSD_PadCopyStatus[port].trigger;
             buttons = HSD_PadCopyStatus[port].button;
             getStickDelta(port, &dx, &dy);
-            if (buttons & 0x200) {
-                if (mnCharSel_804D6CF3 & mnCharSel_804D50C8[cursor->x4]) {
-                    u16 new_timer = cursor->xA + 1;
-                    cursor->xA = new_timer;
-                    if (new_timer > 0x1E) {
-                        mnCharSel_804D6CF6 = 2;
-                    }
-                } else {
-                    cursor->xA = 0;
-                }
-            } else {
-                mnCharSel_804D6CF3 |= mnCharSel_804D50C8[cursor->x4];
-                cursor->xA = 0;
-            }
+            updateBackHold(cursor, buttons);
         } else {
             int port = cursor->x4;
             trigger = HSD_PadCopyStatus[port].trigger;
@@ -2445,20 +2451,7 @@ void mnCharSel_CursorThink(HSD_GObj* gobj)
                 HSD_JObjClearFlagsAll(jobj, JOBJ_HIDDEN);
             }
 
-            if (buttons & 0x200) {
-                if (mnCharSel_804D6CF3 & mnCharSel_804D50C8[cursor->x4]) {
-                    u16 new_timer = cursor->xA + 1;
-                    cursor->xA = new_timer;
-                    if (new_timer > 0x1E) {
-                        mnCharSel_804D6CF6 = 2;
-                    }
-                } else {
-                    cursor->xA = 0;
-                }
-            } else {
-                mnCharSel_804D6CF3 |= mnCharSel_804D50C8[cursor->x4];
-                cursor->xA = 0;
-            }
+            updateBackHold(cursor, buttons);
         }
 
         cursor->xC = (f32) ((0.0002f * dx) + cursor->xC);
