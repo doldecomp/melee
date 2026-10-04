@@ -108,7 +108,7 @@ void gm_801B1C24(GameModeState* arg0)
     s32 i;
     struct GameCache* cache;
     s32 j;
-    PAD_STACK(0x10);
+    PAD_STACK(12);
 
     if (css->pending_scene_change == 2) {
         gm_ChangeGameModeAfterCurrentScene(GM_MENU);
@@ -136,9 +136,9 @@ void gm_801B1C24(GameModeState* arg0)
         vs->start.players[i].slot_type = 3;
     }
     if (gm_804D68C0 == 0) {
-        vs->start.players[1].slot = 0;
-        vs->start.players[2].slot = 0;
-        vs->start.players[3].slot = 0;
+        for (i = 1; i < 4; i++) {
+            vs->start.players[i].slot = 0;
+        }
     } else {
         s32 k = 1;
         for (i = 0; i < 4; i++) {

@@ -855,7 +855,7 @@ void mnDataDel_8024FE4C(u8 arg0)
     StaticModelDesc* assets;
     struct MnDataDelGObjUserData* user_data;
     u8* cursor;
-    PAD_STACK(0x14);
+    PAD_STACK(12);
 
     assets = &mnDataDel_804A0918;
     gobj = GObj_Create(6U, 7U, 0x80U);
@@ -872,12 +872,9 @@ void mnDataDel_8024FE4C(u8 arg0)
     user_data->x0 = arg0;
     user_data->x1 = 0;
     user_data->x2 = 0;
-    user_data->x3[0] = 0;
-    user_data->x3[1] = 0;
-    user_data->x3[2] = 0;
-    user_data->x3[3] = 0;
-    user_data->x3[4] = 0;
-    user_data->x3[5] = 0;
+    for (i = 0; i < 6; i++) {
+        user_data->x3[i] = 0;
+    }
     user_data->xC = NULL;
     GObj_InitUserData(gobj, 0U, HSD_Free, user_data);
     i = (enabled = 0);

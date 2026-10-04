@@ -1737,7 +1737,7 @@ void gm_Scene_Results_OnEnter(void* arg0_)
     MatchEnd* me_iter;
     ResultsData* data_iter;
 
-    PAD_STACK(0x28);
+    PAD_STACK(36);
 
     memzero(&lbl_8046DBE8, sizeof(lbl_8046DBE8));
     lbl_8046DBE8.x1 = 0;
@@ -1752,10 +1752,9 @@ void gm_Scene_Results_OnEnter(void* arg0_)
     } else {
         lbl_8046DBE8.num_pages = 3;
         if (match_end->match_kind == 3) {
-            lbl_8046DBE8.player_data[0].page = 2;
-            lbl_8046DBE8.player_data[1].page = 2;
-            lbl_8046DBE8.player_data[2].page = 2;
-            lbl_8046DBE8.player_data[3].page = 2;
+            for (i = 0; i < 4; i++) {
+                lbl_8046DBE8.player_data[i].page = 2;
+            }
         }
     }
     if (fn_801701B8() == 0) {

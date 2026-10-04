@@ -771,9 +771,7 @@ s32 Toy_80305058(s32 arg0, s32 arg1, s32 arg2, f32 farg0)
     s32 trophy;
     s32 obtained_count;
     s32 new_count;
-    s16* skip_list;
     u16* flags;
-    s32 skip;
 
     PAD_STACK(20);
 
@@ -783,21 +781,7 @@ s32 Toy_80305058(s32 arg0, s32 arg1, s32 arg2, f32 farg0)
     total = 0;
 
     for (trophy = 0; trophy < TY_TROPHY_COUNT; trophy++) {
-        skip_list = _Toy_sbss_804D6EB4;
-        if (lbLang_IsSettingUS() != 0) {
-            s16 val;
-            while ((val = *skip_list) != -1) {
-                if (val == trophy) {
-                    skip = 0;
-                    goto check_skip;
-                }
-                skip_list++;
-            }
-        }
-        skip = 1;
-
-    check_skip:
-        if (skip != 0) {
+        if (Toy_80304CC8(trophy)) {
             if (arg0 == 0x63) {
                 if (gm_IsCurrently1PMode() != 0 ||
                     gm_GetCurrentGameMode() == GM_TOY_LOTTERY)
@@ -1013,7 +997,7 @@ void _Toy_803053C4(s32 targetValue, s32 count, s32 flag)
                     *ptr ^= 0x8000;
 
                     if (count == 0) {
-                        goto done;
+                        return;
                     }
                 }
             }
@@ -1021,9 +1005,6 @@ void _Toy_803053C4(s32 targetValue, s32 count, s32 flag)
             i++;
         }
     }
-
-done:
-    return;
 }
 
 void Toy_SetUnlockState(enum_t trophyId, bool addValue)
@@ -1288,7 +1269,7 @@ s32 Toy_80305B88(void)
     return button;
 }
 
-s32 Toy_80305C44(void)
+u32 Toy_80305C44(void)
 {
     int i = 0;
     u32 button;
@@ -2817,76 +2798,72 @@ HSD_GObj* Toy_803087F4(void* arg0)
     }
 
     joint = HSD_ArchiveGetPublicAs(HSD_Joint, entry->x14, entry->xC);
-    if (joint == NULL) {
-        goto assert_fail;
+    if (joint != NULL) {
+        if (anim->gobj != NULL) {
+            HSD_GObjFree(anim->gobj);
+            anim->gobj = NULL;
+            anim->jobj[1] = NULL;
+            anim->jobj[0] = NULL;
+        }
+
+        anim->gobj = GObj_Create(6, 7, 0);
+        anim->xC = entry->x10;
+
+        parent_jobj = HSD_JObjAlloc();
+        _Toy_80307BA0(parent_jobj, anim->xC);
+
+        trophy_jobj = HSD_JObjLoadJoint(joint);
+        HSD_JObjAddChild(parent_jobj, trophy_jobj);
+
+        kind = HSD_GObj_JObjKind;
+        HSD_GObjObject_80390A70(anim->gobj, kind, parent_jobj);
+        GObj_SetupGXLink(anim->gobj, HSD_GObj_JObjCallback, 0x39, 0);
+
+        HSD_JObjSetTranslateX(trophy_jobj, Toy_803060BC((s32) anim->xC, 0));
+
+        HSD_JObjSetTranslateY(trophy_jobj, Toy_803060BC((s32) anim->xC, 1));
+
+        HSD_JObjSetTranslateZ(trophy_jobj, Toy_803060BC((s32) anim->xC, 2));
+
+        scale = Toy_803060BC((s32) anim->xC, 3);
+        HSD_JObjSetScaleX(trophy_jobj, scale);
+        HSD_JObjSetScaleY(trophy_jobj, scale);
+        HSD_JObjSetScaleZ(trophy_jobj, scale);
+
+        rot = MTXDegToRad(Toy_803060BC((s32) anim->xC, 5));
+        HSD_JObjSetRotationY(trophy_jobj, rot);
+
+        if (_Toy_sbss_804D6E9C != NULL) {
+            DevText_Erase(_Toy_sbss_804D6E9C);
+            DevText_SetCursorXY(_Toy_sbss_804D6E9C, 0, 0);
+
+            sprintf(buf,
+                    "X   %3.2f\n"
+                    "Y   %3.2f\n"
+                    "Z   %3.2f\n"
+                    "MS  %3.2f\n"
+                    "SS  %3.2f\n"
+                    "MD  %3.2f",
+
+                    Toy_803060BC((s32) anim->xC, 0),
+                    Toy_803060BC((s32) anim->xC, 1),
+                    Toy_803060BC((s32) anim->xC, 2),
+                    Toy_803060BC((s32) anim->xC, 3),
+                    Toy_803060BC((s32) anim->xC, 4),
+                    Toy_803060BC((s32) anim->xC, 5));
+            DevText_Print(_Toy_sbss_804D6E9C, buf);
+        }
+
+        {
+            HSD_JObj* child = _Toy_80307BA0(parent_jobj, anim->xC);
+            HSD_JObjSetFlagsAll(child, JOBJ_HIDDEN);
+            anim->x0E = 0;
+        }
+    } else {
+        OSReport("*** Cann't Show Model!\n");
+        HSD_ASSERT(3358, 0);
     }
 
-    if (anim->gobj != NULL) {
-        HSD_GObjFree(anim->gobj);
-        anim->gobj = NULL;
-        anim->jobj[1] = NULL;
-        anim->jobj[0] = NULL;
-    }
-
-    anim->gobj = GObj_Create(6, 7, 0);
-    anim->xC = entry->x10;
-
-    parent_jobj = HSD_JObjAlloc();
-    _Toy_80307BA0(parent_jobj, anim->xC);
-
-    trophy_jobj = HSD_JObjLoadJoint(joint);
-    HSD_JObjAddChild(parent_jobj, trophy_jobj);
-
-    kind = HSD_GObj_JObjKind;
-    HSD_GObjObject_80390A70(anim->gobj, kind, parent_jobj);
-    GObj_SetupGXLink(anim->gobj, HSD_GObj_JObjCallback, 0x39, 0);
-
-    HSD_JObjSetTranslateX(trophy_jobj, Toy_803060BC((s32) anim->xC, 0));
-
-    HSD_JObjSetTranslateY(trophy_jobj, Toy_803060BC((s32) anim->xC, 1));
-
-    HSD_JObjSetTranslateZ(trophy_jobj, Toy_803060BC((s32) anim->xC, 2));
-
-    scale = Toy_803060BC((s32) anim->xC, 3);
-    HSD_JObjSetScaleX(trophy_jobj, scale);
-    HSD_JObjSetScaleY(trophy_jobj, scale);
-    HSD_JObjSetScaleZ(trophy_jobj, scale);
-
-    rot = MTXDegToRad(Toy_803060BC((s32) anim->xC, 5));
-    HSD_JObjSetRotationY(trophy_jobj, rot);
-
-    if (_Toy_sbss_804D6E9C != NULL) {
-        DevText_Erase(_Toy_sbss_804D6E9C);
-        DevText_SetCursorXY(_Toy_sbss_804D6E9C, 0, 0);
-
-        sprintf(
-            buf,
-            "X   %3.2f\n"
-            "Y   %3.2f\n"
-            "Z   %3.2f\n"
-            "MS  %3.2f\n"
-            "SS  %3.2f\n"
-            "MD  %3.2f",
-
-            Toy_803060BC((s32) anim->xC, 0), Toy_803060BC((s32) anim->xC, 1),
-            Toy_803060BC((s32) anim->xC, 2), Toy_803060BC((s32) anim->xC, 3),
-            Toy_803060BC((s32) anim->xC, 4), Toy_803060BC((s32) anim->xC, 5));
-        DevText_Print(_Toy_sbss_804D6E9C, buf);
-    }
-
-    {
-        HSD_JObj* child = _Toy_80307BA0(parent_jobj, anim->xC);
-        HSD_JObjSetFlagsAll(child, JOBJ_HIDDEN);
-        anim->x0E = 0;
-    }
-
-    goto done;
-
-assert_fail:
-    OSReport("*** Cann't Show Model!\n");
-    HSD_ASSERT(3358, 0);
-
-done:
     return anim->gobj;
 }
 
@@ -3328,15 +3305,10 @@ void _Toy_80309404(HSD_GObj* gobj)
             }
         }
 
-        if (state->x40 + state->x44) {
-            goto reset_idle_timer;
-        }
-        trigger = Toy_80305B88();
-
-        if (trigger & (HSD_PAD_DPADLEFT | HSD_PAD_DPADRIGHT |
-                       HSD_PAD_DPADDOWN | HSD_PAD_DPADUP))
+        if (state->x40 + state->x44 ||
+            (Toy_80305B88() & (HSD_PAD_DPADLEFT | HSD_PAD_DPADRIGHT |
+                               HSD_PAD_DPADDOWN | HSD_PAD_DPADUP)))
         {
-        reset_idle_timer:
             state->x58 = 0;
         } else {
             if ((f32) state->x58 > 2400.0f) {
@@ -3591,13 +3563,7 @@ void _Toy_80309404(HSD_GObj* gobj)
                 if (tmp < 0.0f) {
                     tmp = -tmp;
                 }
-                if (!(tmp > 0.9f)) {
-                    trigger = Toy_80305B88();
-                    if (!(trigger & (HSD_PAD_L | HSD_PAD_R))) {
-                        goto skip_trophy_cycle;
-                    }
-                }
-                {
+                if (tmp > 0.9f || (Toy_80305B88() & (HSD_PAD_L | HSD_PAD_R))) {
                     TyDisplayData* display;
 
                     display = Toy_sbss_804D6EE0;
@@ -3683,91 +3649,88 @@ void _Toy_80309404(HSD_GObj* gobj)
                     } else {
                         u32 btn3;
 
-                        if (state->x30 > 0.0f) {
-                            goto next_body;
-                        }
-                        _Toy_ReadTrigger(&btn3);
-                        if (!(btn3 & 0x822)) {
-                            goto next_done;
-                        }
-                    next_body: {
-                        s32 total;
+                        if (state->x30 > 0.0f ||
+                            (_Toy_ReadTrigger(&btn3), btn3 & 0x822))
+                        {
+                            s32 total;
 
-                        sfxMove();
-                        display->selectedIdx = display->selectedIdx + 1;
-                        if ((gm_IsCurrently1PMode() != 0) ||
-                            (gm_GetCurrentGameMode() == GM_TOY_LOTTERY))
-                        {
-                            total = base->trophy_count;
-                        } else {
-                            total = *gmMainLib_GetTrophyCount();
-                        }
-                        if (display->selectedIdx >= total) {
-                            display->selectedIdx = 0;
-                        }
-                        if ((gm_IsCurrently1PMode() != 0) ||
-                            (gm_GetCurrentGameMode() == GM_TOY_LOTTERY))
-                        {
-                            total = base->trophy_count;
-                        } else {
-                            total = *gmMainLib_GetTrophyCount();
-                        }
-                        if (total > 3) {
-                            if ((s32) (display->selectedIdx + 1) >=
-                                _Toy_GetTrophyTotal(base))
+                            sfxMove();
+                            display->selectedIdx = display->selectedIdx + 1;
+                            if ((gm_IsCurrently1PMode() != 0) ||
+                                (gm_GetCurrentGameMode() == GM_TOY_LOTTERY))
                             {
-                                s32 cnt2;
-                                ToyListEntry* entry;
-                                s16 tid;
-                                s32 lk;
-
-                                if ((gm_IsCurrently1PMode() != 0) ||
-                                    (gm_GetCurrentGameMode() ==
-                                     GM_TOY_LOTTERY))
-                                {
-                                    cnt2 = base->trophy_count;
-                                } else {
-                                    cnt2 = *gmMainLib_GetTrophyCount();
-                                }
-                                lk = display->selectedIdx - cnt2;
-                                tid = Toy_sbss_804D6EDC[lk + 1];
-                                entry = display->last_entry->next;
-                                setupTrophyEntry(entry, tid);
-                                entry->archive = lbArchive_LoadSymbols(
-                                    entry->archive_name,
-                                    &archive_symbols.next_wrap,
-                                    entry->symbol_name, 0);
+                                total = base->trophy_count;
                             } else {
-                                ToyListEntry* entry;
-                                s16 tid;
-
-                                tid = Toy_sbss_804D6EDC[display->selectedIdx +
-                                                        1];
-                                entry = display->last_entry->next;
-                                setupTrophyEntry(entry, tid);
-                                entry->archive = lbArchive_LoadSymbols(
-                                    entry->archive_name, &archive_symbols.next,
-                                    entry->symbol_name, 0);
+                                total = *gmMainLib_GetTrophyCount();
                             }
+                            if (display->selectedIdx >= total) {
+                                display->selectedIdx = 0;
+                            }
+                            if ((gm_IsCurrently1PMode() != 0) ||
+                                (gm_GetCurrentGameMode() == GM_TOY_LOTTERY))
                             {
-                                HSD_Archive* ma;
-                                if ((ma = display->first_entry->archive) !=
-                                    NULL)
-                                {
-                                    lbArchive_80016EFC(ma);
-                                    display->first_entry->archive = NULL;
-                                }
+                                total = base->trophy_count;
+                            } else {
+                                total = *gmMainLib_GetTrophyCount();
                             }
-                            display->selected_entry =
-                                display->selected_entry->next;
-                            display->first_entry = display->first_entry->next;
-                            display->last_entry = display->last_entry->next;
-                        } else {
-                            display->selected_entry =
-                                display->selected_entry->next;
+                            if (total > 3) {
+                                if ((s32) (display->selectedIdx + 1) >=
+                                    _Toy_GetTrophyTotal(base))
+                                {
+                                    s32 cnt2;
+                                    ToyListEntry* entry;
+                                    s16 tid;
+                                    s32 lk;
+
+                                    if ((gm_IsCurrently1PMode() != 0) ||
+                                        (gm_GetCurrentGameMode() ==
+                                         GM_TOY_LOTTERY))
+                                    {
+                                        cnt2 = base->trophy_count;
+                                    } else {
+                                        cnt2 = *gmMainLib_GetTrophyCount();
+                                    }
+                                    lk = display->selectedIdx - cnt2;
+                                    tid = Toy_sbss_804D6EDC[lk + 1];
+                                    entry = display->last_entry->next;
+                                    setupTrophyEntry(entry, tid);
+                                    entry->archive = lbArchive_LoadSymbols(
+                                        entry->archive_name,
+                                        &archive_symbols.next_wrap,
+                                        entry->symbol_name, 0);
+                                } else {
+                                    ToyListEntry* entry;
+                                    s16 tid;
+
+                                    tid = Toy_sbss_804D6EDC
+                                        [display->selectedIdx + 1];
+                                    entry = display->last_entry->next;
+                                    setupTrophyEntry(entry, tid);
+                                    entry->archive = lbArchive_LoadSymbols(
+                                        entry->archive_name,
+                                        &archive_symbols.next,
+                                        entry->symbol_name, 0);
+                                }
+                                {
+                                    HSD_Archive* ma;
+                                    if ((ma = display->first_entry->archive) !=
+                                        NULL)
+                                    {
+                                        lbArchive_80016EFC(ma);
+                                        display->first_entry->archive = NULL;
+                                    }
+                                }
+                                display->selected_entry =
+                                    display->selected_entry->next;
+                                display->first_entry =
+                                    display->first_entry->next;
+                                display->last_entry =
+                                    display->last_entry->next;
+                            } else {
+                                display->selected_entry =
+                                    display->selected_entry->next;
+                            }
                         }
-                    }
-                    next_done:;
                     }
 
                     _Toy_80307828(0);
@@ -3808,7 +3771,6 @@ void _Toy_80309404(HSD_GObj* gobj)
                                  (s32) display->selected_entry->trophy_id);
                     state->x60 = 0x14;
                 }
-            skip_trophy_cycle:;
             }
         }
 
@@ -4064,9 +4026,7 @@ void _Toy_8030B530(HSD_GObj* arg0)
                     return;
                 }
             }
-            goto check_buttons;
         }
-    check_buttons:
 
         button = Toy_80305C44();
 
@@ -4227,28 +4187,11 @@ void _Toy_8030B530(HSD_GObj* arg0)
                     }
                 } else {
                     if (state->x61 == 0) {
-                        u32 bm;
-                        bm = Toy_80305C44();
-                        if (bm != 8) {
-                            u32 bm2;
-                            bm2 = Toy_80305C44();
-                            if (bm2 != 4) {
-                                u32 bm3;
-                                bm3 = Toy_80305C44();
-                                if (bm3 != 1) {
-                                    u32 bm4;
-                                    bm4 = Toy_80305C44();
-                                    if (bm4 == 2) {
-                                        goto do_mode_switch;
-                                    }
-                                } else {
-                                    goto do_mode_switch;
-                                }
-                            } else {
-                                goto do_mode_switch;
-                            }
-                        } else {
-                        do_mode_switch:
+                        PAD_STACK(16);
+
+                        if (Toy_80305C44() == 8 || Toy_80305C44() == 4 ||
+                            Toy_80305C44() == 1 || Toy_80305C44() == 2)
+                        {
                             switch (_Toy_sbss_804D6E60) {
                             case 0:
                                 lbLang_IsSavedLanguageJP();
@@ -4689,12 +4632,12 @@ void _Toy_8030E110(HSD_GObj* arg0)
                     return;
                 }
             }
-            goto case_default;
+            break;
 
         case 1:
         case 3:
             _Toy_80308F04(cobj);
-            goto case_default;
+            break;
 
         case 2:
             trigger = Toy_80305B88();
@@ -4789,280 +4732,264 @@ void _Toy_8030E110(HSD_GObj* arg0)
                     state->x20 = 250.0f;
                 }
             }
-            goto case_default;
+            break;
+        }
 
-        default:
-        case_default:
+        trigger = Toy_80305B88();
+        if (trigger & HSD_PAD_Y) {
+            _Toy_sbss_804D6E54 ^= 1;
+        }
+
+        state->x1C = (f32) - ((3.0f * state->x40) - state->x1C);
+        state->x18 = (f32) - ((3.0f * state->x44) - state->x18);
+        if (state->x18 < -89.0f) {
+            state->x18 = -89.0f;
+        }
+        if (state->x18 > 89.0f) {
+            state->x18 = 89.0f;
+        }
+        tmp = state->x1C;
+        if (tmp < -360.0f) {
+            state->x1C += 360.0f;
+        }
+        tmp = state->x1C;
+        if (tmp > 360.0f) {
+            state->x1C = (f32) (tmp - 360.0f);
+        }
+        ed4->x18 = state->x1C;
+        ed4->x14 = state->x18;
+        if (state->x40 + state->x44) {
+            state->x24 = 0.0f;
+        }
+
+        if (!moved_x && !moved_y) {
             trigger = Toy_80305B88();
-            if (trigger & HSD_PAD_Y) {
-                _Toy_sbss_804D6E54 ^= 1;
-            }
-
-            state->x1C = (f32) - ((3.0f * state->x40) - state->x1C);
-            state->x18 = (f32) - ((3.0f * state->x44) - state->x18);
-            if (state->x18 < -89.0f) {
-                state->x18 = -89.0f;
-            }
-            if (state->x18 > 89.0f) {
-                state->x18 = 89.0f;
-            }
-            tmp = state->x1C;
-            if (tmp < -360.0f) {
-                state->x1C += 360.0f;
-            }
-            tmp = state->x1C;
-            if (tmp > 360.0f) {
-                state->x1C = (f32) (tmp - 360.0f);
-            }
-            ed4->x18 = state->x1C;
-            ed4->x14 = state->x18;
-            if (state->x40 + state->x44) {
-                state->x24 = 0.0f;
-            }
-
-            if (!moved_x && !moved_y) {
-                trigger = Toy_80305B88();
-                if (trigger & (HSD_PAD_L | HSD_PAD_R)) {
-                    display = Toy_sbss_804D6EE0;
+            if (trigger & (HSD_PAD_L | HSD_PAD_R)) {
+                display = Toy_sbss_804D6EE0;
+                {
+                    s32 tc;
+                    if ((gm_IsCurrently1PMode() != 0) ||
+                        (gm_GetCurrentGameMode() == GM_TOY_LOTTERY))
                     {
-                        s32 tc;
+                        tc = base->trophy_count;
+                    } else {
+                        tc = *gmMainLib_GetTrophyCount();
+                    }
+                    if (tc == 1) {
+                        state->x58 = 0x961;
+                        return;
+                    }
+                }
+                if ((state->x30 < 0.0f) || (Toy_80305B88() & 0x441)) {
+                    {
+                        s32 total;
+
+                        sfxMove();
+                        display->selectedIdx = display->selectedIdx - 1;
+                        if (display->selectedIdx < 0) {
+                            if ((gm_IsCurrently1PMode() != 0) ||
+                                (gm_GetCurrentGameMode() == GM_TOY_LOTTERY))
+                            {
+                                total = base->trophy_count;
+                            } else {
+                                total = *gmMainLib_GetTrophyCount();
+                            }
+                            display->selectedIdx = (s16) (total - 1);
+                        }
                         if ((gm_IsCurrently1PMode() != 0) ||
                             (gm_GetCurrentGameMode() == GM_TOY_LOTTERY))
                         {
-                            tc = base->trophy_count;
+                            total = base->trophy_count;
                         } else {
-                            tc = *gmMainLib_GetTrophyCount();
+                            total = *gmMainLib_GetTrophyCount();
                         }
-                        if (tc == 1) {
-                            state->x58 = 0x961;
-                            return;
-                        }
-                    }
-                    if ((state->x30 < 0.0f) || (Toy_80305B88() & 0x441)) {
-                        {
-                            s32 total;
+                        if (total > 3) {
+                            if ((display->selectedIdx - 1) < 0) {
+                                ToyListEntry* list_entry;
+                                s32 list_idx;
+                                s32 count;
 
-                            sfxMove();
-                            display->selectedIdx = display->selectedIdx - 1;
-                            if (display->selectedIdx < 0) {
+                                uintptr_t keys;
+
                                 if ((gm_IsCurrently1PMode() != 0) ||
                                     (gm_GetCurrentGameMode() ==
                                      GM_TOY_LOTTERY))
                                 {
-                                    total = base->trophy_count;
+                                    count = base->trophy_count;
                                 } else {
-                                    total = *gmMainLib_GetTrophyCount();
+                                    count = *gmMainLib_GetTrophyCount();
                                 }
-                                display->selectedIdx = (s16) (total - 1);
-                            }
-                            if ((gm_IsCurrently1PMode() != 0) ||
-                                (gm_GetCurrentGameMode() == GM_TOY_LOTTERY))
-                            {
-                                total = base->trophy_count;
-                            } else {
-                                total = *gmMainLib_GetTrophyCount();
-                            }
-                            if (total > 3) {
-                                if ((display->selectedIdx - 1) < 0) {
-                                    ToyListEntry* list_entry;
-                                    s32 list_idx;
-                                    s32 count;
-
-                                    uintptr_t keys;
-
-                                    if ((gm_IsCurrently1PMode() != 0) ||
-                                        (gm_GetCurrentGameMode() ==
-                                         GM_TOY_LOTTERY))
-                                    {
-                                        count = base->trophy_count;
-                                    } else {
-                                        count = *gmMainLib_GetTrophyCount();
-                                    }
-                                    count += display->selectedIdx;
-                                    list_idx = count;
-                                    keys = (uintptr_t) Toy_sbss_804D6EDC;
-                                    list_entry = display->first_entry;
-                                    list_entry = list_entry->prev;
-                                    {
-                                        s32 idx = list_idx - 1;
-                                        s16 trophy_id = ((s16*) keys)[idx];
-                                        (void) keys;
-                                        setupTrophyEntry(list_entry,
-                                                         trophy_id);
-                                        list_entry->archive =
-                                            lbArchive_LoadSymbols(
-                                                list_entry->archive_name,
-                                                &archive_symbols.prev_wrap,
-                                                list_entry->symbol_name, 0);
-                                    }
-                                } else {
-                                    ToyListEntry* list_entry;
-                                    s16 trophy_id;
-
-                                    trophy_id = Toy_sbss_804D6EDC
-                                        [display->selectedIdx - 1];
-                                    list_entry = display->first_entry->prev;
+                                count += display->selectedIdx;
+                                list_idx = count;
+                                keys = (uintptr_t) Toy_sbss_804D6EDC;
+                                list_entry = display->first_entry;
+                                list_entry = list_entry->prev;
+                                {
+                                    s32 idx = list_idx - 1;
+                                    s16 trophy_id = ((s16*) keys)[idx];
+                                    (void) keys;
                                     setupTrophyEntry(list_entry, trophy_id);
                                     list_entry->archive =
                                         lbArchive_LoadSymbols(
                                             list_entry->archive_name,
-                                            &archive_symbols.prev,
+                                            &archive_symbols.prev_wrap,
                                             list_entry->symbol_name, 0);
                                 }
-                                {
-                                    HSD_Archive* old_archive;
-                                    if ((old_archive =
-                                             display->last_entry->archive) !=
-                                        NULL)
-                                    {
-                                        lbArchive_80016EFC(old_archive);
-                                        display->last_entry->archive = NULL;
-                                    }
-                                }
-                                display->selected_entry =
-                                    display->selected_entry->prev;
-                                display->first_entry =
-                                    display->first_entry->prev;
-                                display->last_entry =
-                                    display->last_entry->prev;
                             } else {
-                                display->selected_entry =
-                                    display->selected_entry->prev;
-                            }
-                        }
-                    } else if ((state->x30 > 0.0f) || (Toy_80305B88() & 0x822))
-                    {
-                        {
-                            s32 total;
+                                ToyListEntry* list_entry;
+                                s16 trophy_id;
 
-                            sfxMove();
-                            display->selectedIdx = display->selectedIdx + 1;
-                            if ((gm_IsCurrently1PMode() != 0) ||
-                                (gm_GetCurrentGameMode() == GM_TOY_LOTTERY))
+                                trophy_id =
+                                    Toy_sbss_804D6EDC[display->selectedIdx -
+                                                      1];
+                                list_entry = display->first_entry->prev;
+                                setupTrophyEntry(list_entry, trophy_id);
+                                list_entry->archive = lbArchive_LoadSymbols(
+                                    list_entry->archive_name,
+                                    &archive_symbols.prev,
+                                    list_entry->symbol_name, 0);
+                            }
                             {
-                                total = base->trophy_count;
-                            } else {
-                                total = *gmMainLib_GetTrophyCount();
-                            }
-                            if (display->selectedIdx >= total) {
-                                display->selectedIdx = 0;
-                            }
-                            if ((gm_IsCurrently1PMode() != 0) ||
-                                (gm_GetCurrentGameMode() == GM_TOY_LOTTERY))
-                            {
-                                total = base->trophy_count;
-                            } else {
-                                total = *gmMainLib_GetTrophyCount();
-                            }
-                            if (total > 3) {
-                                if ((s32) (display->selectedIdx + 1) >=
-                                    _Toy_GetTrophyTotal(base))
+                                HSD_Archive* old_archive;
+                                if ((old_archive =
+                                         display->last_entry->archive) != NULL)
                                 {
-                                    s32 count2;
-                                    ToyListEntry* list_entry;
-                                    s16 trophy_id;
-                                    s32 list_idx;
-                                    if ((gm_IsCurrently1PMode() != 0) ||
-                                        (gm_GetCurrentGameMode() ==
-                                         GM_TOY_LOTTERY))
-                                    {
-                                        count2 = base->trophy_count;
-                                    } else {
-                                        count2 = *gmMainLib_GetTrophyCount();
-                                    }
-                                    list_idx = display->selectedIdx - count2;
-                                    trophy_id =
-                                        Toy_sbss_804D6EDC[list_idx + 1];
-                                    list_entry = display->last_entry->next;
-                                    setupTrophyEntry(list_entry, trophy_id);
-                                    list_entry->archive =
-                                        lbArchive_LoadSymbols(
-                                            list_entry->archive_name,
-                                            &archive_symbols.next_wrap,
-                                            list_entry->symbol_name, 0);
-                                } else {
-                                    ToyListEntry* list_entry;
-                                    s16 trophy_id;
-
-                                    trophy_id = Toy_sbss_804D6EDC
-                                        [display->selectedIdx + 1];
-                                    list_entry = display->last_entry->next;
-                                    setupTrophyEntry(list_entry, trophy_id);
-                                    list_entry->archive =
-                                        lbArchive_LoadSymbols(
-                                            list_entry->archive_name,
-                                            &archive_symbols.next,
-                                            list_entry->symbol_name, 0);
+                                    lbArchive_80016EFC(old_archive);
+                                    display->last_entry->archive = NULL;
                                 }
-                                {
-                                    HSD_Archive* old_archive;
-                                    if ((old_archive =
-                                             display->first_entry->archive) !=
-                                        NULL)
-                                    {
-                                        lbArchive_80016EFC(old_archive);
-                                        display->first_entry->archive = NULL;
-                                    }
-                                }
-                                display->selected_entry =
-                                    display->selected_entry->next;
-                                display->first_entry =
-                                    display->first_entry->next;
-                                display->last_entry =
-                                    display->last_entry->next;
-                            } else {
-                                display->selected_entry =
-                                    display->selected_entry->next;
                             }
+                            display->selected_entry =
+                                display->selected_entry->prev;
+                            display->first_entry = display->first_entry->prev;
+                            display->last_entry = display->last_entry->prev;
+                        } else {
+                            display->selected_entry =
+                                display->selected_entry->prev;
                         }
                     }
-                    _Toy_80307828(0);
-                    state->x58 = 0x95E;
-                    Toy_803087F4(display->selected_entry);
-                    state->x60 = 0x14;
-                    goto after_trophy_cycle;
-                }
-                goto after_trophy_cycle;
-            }
+                } else if ((state->x30 > 0.0f) || (Toy_80305B88() & 0x822)) {
+                    {
+                        s32 total;
 
-        after_trophy_cycle:
-            trigger = Toy_80305B88();
-            if (trigger & HSD_PAD_START) {
-                sfxMove();
-                state->x58 = 0;
-                ed4->x10 = ed4->x10 + 1;
-                if (ed4->x10 == 6) {
-                    ed4->x10 = 0;
-                }
-                Toy_80306D70(ed4->x10);
-                _Toy_803075E8(ed4->x10);
-            }
+                        sfxMove();
+                        display->selectedIdx = display->selectedIdx + 1;
+                        if ((gm_IsCurrently1PMode() != 0) ||
+                            (gm_GetCurrentGameMode() == GM_TOY_LOTTERY))
+                        {
+                            total = base->trophy_count;
+                        } else {
+                            total = *gmMainLib_GetTrophyCount();
+                        }
+                        if (display->selectedIdx >= total) {
+                            display->selectedIdx = 0;
+                        }
+                        if ((gm_IsCurrently1PMode() != 0) ||
+                            (gm_GetCurrentGameMode() == GM_TOY_LOTTERY))
+                        {
+                            total = base->trophy_count;
+                        } else {
+                            total = *gmMainLib_GetTrophyCount();
+                        }
+                        if (total > 3) {
+                            if ((s32) (display->selectedIdx + 1) >=
+                                _Toy_GetTrophyTotal(base))
+                            {
+                                s32 count2;
+                                ToyListEntry* list_entry;
+                                s16 trophy_id;
+                                s32 list_idx;
+                                if ((gm_IsCurrently1PMode() != 0) ||
+                                    (gm_GetCurrentGameMode() ==
+                                     GM_TOY_LOTTERY))
+                                {
+                                    count2 = base->trophy_count;
+                                } else {
+                                    count2 = *gmMainLib_GetTrophyCount();
+                                }
+                                list_idx = display->selectedIdx - count2;
+                                trophy_id = Toy_sbss_804D6EDC[list_idx + 1];
+                                list_entry = display->last_entry->next;
+                                setupTrophyEntry(list_entry, trophy_id);
+                                list_entry->archive = lbArchive_LoadSymbols(
+                                    list_entry->archive_name,
+                                    &archive_symbols.next_wrap,
+                                    list_entry->symbol_name, 0);
+                            } else {
+                                ToyListEntry* list_entry;
+                                s16 trophy_id;
 
-            trigger = Toy_80305B88();
-            if (trigger & HSD_PAD_Z) {
-                ToyCameraControl* ed4_2;
+                                trophy_id =
+                                    Toy_sbss_804D6EDC[display->selectedIdx +
+                                                      1];
+                                list_entry = display->last_entry->next;
+                                setupTrophyEntry(list_entry, trophy_id);
+                                list_entry->archive = lbArchive_LoadSymbols(
+                                    list_entry->archive_name,
+                                    &archive_symbols.next,
+                                    list_entry->symbol_name, 0);
+                            }
+                            {
+                                HSD_Archive* old_archive;
+                                if ((old_archive =
+                                         display->first_entry->archive) !=
+                                    NULL)
+                                {
+                                    lbArchive_80016EFC(old_archive);
+                                    display->first_entry->archive = NULL;
+                                }
+                            }
+                            display->selected_entry =
+                                display->selected_entry->next;
+                            display->first_entry = display->first_entry->next;
+                            display->last_entry = display->last_entry->next;
+                        } else {
+                            display->selected_entry =
+                                display->selected_entry->next;
+                        }
+                    }
+                }
                 _Toy_80307828(0);
-                ed4_2 = Toy_sbss_804D6ED4;
-                ed4_2->x10 = 0;
-                Toy_80306D70(ed4_2->x10);
-                _Toy_803075E8(ed4_2->x10);
-                anim->x11 = 0;
-                anim->x10 = 0;
-                anim->x0E = 1;
+                state->x58 = 0x95E;
+                Toy_803087F4(display->selected_entry);
+                state->x60 = 0x14;
             }
-
-            {
-                HSD_JObjSetFlagsAll(anim->jobj[0], JOBJ_HIDDEN);
-                HSD_JObjSetFlagsAll(anim->jobj[1], JOBJ_HIDDEN);
-            }
-
-            _Toy_8030715C(state->x50, state->x54);
-            state->x38 = state->x30;
-            state->x3C = state->x34;
-            state->x48 = state->x40;
-            state->x4C = state->x44;
-            break;
         }
+
+        trigger = Toy_80305B88();
+        if (trigger & HSD_PAD_START) {
+            sfxMove();
+            state->x58 = 0;
+            ed4->x10 = ed4->x10 + 1;
+            if (ed4->x10 == 6) {
+                ed4->x10 = 0;
+            }
+            Toy_80306D70(ed4->x10);
+            _Toy_803075E8(ed4->x10);
+        }
+
+        trigger = Toy_80305B88();
+        if (trigger & HSD_PAD_Z) {
+            ToyCameraControl* ed4_2;
+            _Toy_80307828(0);
+            ed4_2 = Toy_sbss_804D6ED4;
+            ed4_2->x10 = 0;
+            Toy_80306D70(ed4_2->x10);
+            _Toy_803075E8(ed4_2->x10);
+            anim->x11 = 0;
+            anim->x10 = 0;
+            anim->x0E = 1;
+        }
+
+        {
+            HSD_JObjSetFlagsAll(anim->jobj[0], JOBJ_HIDDEN);
+            HSD_JObjSetFlagsAll(anim->jobj[1], JOBJ_HIDDEN);
+        }
+
+        _Toy_8030715C(state->x50, state->x54);
+        state->x38 = state->x30;
+        state->x3C = state->x34;
+        state->x48 = state->x40;
+        state->x4C = state->x44;
     }
 }
 
@@ -6137,7 +6064,6 @@ void Toy_Scene_OnEnter(void* arg0)
     u8* base;
     s16* selp;
     u32 buttons;
-    s32 count;
 
     PAD_STACK(40);
 
@@ -6197,18 +6123,7 @@ void Toy_Scene_OnEnter(void* arg0)
 
     /* Validate saved selection index */
     selp = &((s16*) base)[0x1F4];
-    if (*selp < 0) {
-        goto reset_selection;
-    }
-    if (gm_IsCurrently1PMode() != 0 ||
-        gm_GetCurrentGameMode() == GM_TOY_LOTTERY)
-    {
-        count = *(s16*) (base + 0x3EC);
-    } else {
-        count = *gmMainLib_GetTrophyCount();
-    }
-    if (*selp > count) {
-    reset_selection:
+    if (*selp < 0 || *selp > _Toy_GetTrophyTotal((Toy26B8*) base)) {
         *selp = 0;
     }
 

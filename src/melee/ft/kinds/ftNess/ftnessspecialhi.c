@@ -400,6 +400,15 @@ void ftNs_SpecialAirHiStart_Enter(
     ftAnim_8006EBA4(gobj);
 }
 
+static inline float getFloorAngle(Fighter* fp, Vec3* dir)
+{
+    dir->x = fp->cur_pos.x - fp->mv.ns.specialhi.collPos1.x;
+    dir->y = (5.0f * fp->x34_scale.y + fp->cur_pos.y) -
+             fp->mv.ns.specialhi.collPos1.y;
+    dir->z = 0.0f;
+    return lbVector_Angle(&fp->coll_data.floor.normal, dir);
+}
+
 /// @todo Rewrite this.
 void ftNs_SpecialHi_Enter(
     HSD_GObj* gobj) // Ness's grounded PK Thunder 2 Motion State handler
@@ -409,89 +418,70 @@ void ftNs_SpecialHi_Enter(
     ftNessAttributes* ness_attr2;
     Fighter* fighter_data2;
 
-    u8 _[8];
+    u8 _[16];
     Fighter* fighter_data3;
+    float angle;
 
     Fighter* fp = getFighter(gobj);
     ftNessAttributes* ness_attr = fp->dat_attrs;
-    if ((fp->coll_data.floor.flags & LINE_FLAG_PLATFORM) == 0) {
-        float temp_f3 = 5.0f;
-        float temp_f1;
-        float temp_f2;
-
-        sp40.x = fp->cur_pos.x - fp->mv.ns.specialhi.collPos1.x;
-        temp_f2 = fp->x34_scale.y;
-        temp_f1 = (temp_f3 * temp_f2) + fp->cur_pos.y;
-        sp40.y = temp_f1 - fp->mv.ns.specialhi.collPos1.y;
-        sp40.z = 0.0f;
-
-        {
-            float temp_f1_2 =
-                lbVector_Angle(&fp->coll_data.floor.normal, &sp40);
-
-            if (!(temp_f1_2 < (float) M_PI_2)) {
-                if (!(temp_f1_2 >
-                      MTXDegToRad(
-                          90.0f +
+    if ((fp->coll_data.floor.flags & LINE_FLAG_PLATFORM) == 0 &&
+        !((angle = getFloorAngle(fp, &sp40)) < (float) M_PI_2))
+    {
+        if (!(angle >
+              MTXDegToRad(90.0f +
                           ness_attr->x60_PK_THUNDER_2_KNOCKDOWN_ANGLE)))
-                {
-                    {
-                        float facing_dir;
-                        if (sp40.x >= 0) {
-                            facing_dir = +1;
-                        } else {
-                            facing_dir = -1;
-                        }
-                        fp->facing_dir = facing_dir;
-                    }
-
-                    {
-                        float facing_dir;
-                        if (sp40.y >= 0) {
-                            facing_dir = +1;
-                        } else {
-                            facing_dir = -1;
-                        }
-                        fp->mv.ns.specialhi.facingDir = facing_dir;
-                    }
-
-                    fp->mv.ns.specialhi.aerialVel = atan2f(sp40.y, sp40.x);
-                    {
-                        u8 _[4];
-
-                        Fighter_ChangeMotionState(gobj, ftNs_MS_SpecialHi,
-                                                  Ft_MF_None, 0.0f, 1.0f, 0.0f,
-                                                  NULL);
-                        fp->gr_vel = (ness_attr->x54_PK_THUNDER_2_MOMENTUM *
-                                      fp->facing_dir);
-                        fp = getFighter(gobj);
-                        ness_attr2 = getFtSpecialAttrs(fp);
-                        fp->mv.ns.specialhi.unkVar =
-                            ness_attr2->x58_PK_THUNDER_2_UNK1;
-                        fighter_data2 = GET_FIGHTER(gobj);
-                        ftPartSetRotX(fighter_data2, 0,
-                                      (fighter_data2->facing_dir *
-                                       atan2f(fighter_data2->self_vel.x,
-                                              fighter_data2->self_vel.y)) -
-                                          (float) M_PI_2);
-                        fighter_data2 = fp;
-                        fighter_data2->death2_cb = NULL;
-                        fighter_data2->take_dmg_cb = NULL;
-                        fighter_data2->x1968_jumpsUsed =
-                            fighter_data2->co_attrs.max_jumps;
-                        return;
-                    }
+        {
+            {
+                float facing_dir;
+                if (sp40.x >= 0) {
+                    facing_dir = +1;
+                } else {
+                    facing_dir = -1;
                 }
-                goto block_stuff;
+                fp->facing_dir = facing_dir;
+            }
+
+            {
+                float facing_dir;
+                if (sp40.y >= 0) {
+                    facing_dir = +1;
+                } else {
+                    facing_dir = -1;
+                }
+                fp->mv.ns.specialhi.facingDir = facing_dir;
+            }
+
+            fp->mv.ns.specialhi.aerialVel = atan2f(sp40.y, sp40.x);
+            {
+                u8 _[4];
+
+                Fighter_ChangeMotionState(gobj, ftNs_MS_SpecialHi, Ft_MF_None,
+                                          0.0f, 1.0f, 0.0f, NULL);
+                fp->gr_vel =
+                    (ness_attr->x54_PK_THUNDER_2_MOMENTUM * fp->facing_dir);
+                fp = getFighter(gobj);
+                ness_attr2 = getFtSpecialAttrs(fp);
+                fp->mv.ns.specialhi.unkVar = ness_attr2->x58_PK_THUNDER_2_UNK1;
+                fighter_data2 = GET_FIGHTER(gobj);
+                ftPartSetRotX(fighter_data2, 0,
+                              (fighter_data2->facing_dir *
+                               atan2f(fighter_data2->self_vel.x,
+                                      fighter_data2->self_vel.y)) -
+                                  (float) M_PI_2);
+                fighter_data2 = fp;
+                fighter_data2->death2_cb = NULL;
+                fighter_data2->take_dmg_cb = NULL;
+                fighter_data2->x1968_jumpsUsed =
+                    fighter_data2->co_attrs.max_jumps;
+                return;
             }
         }
+    } else {
+        fp->x1968_jumpsUsed = fp->co_attrs.max_jumps;
+        ftCommon_8007D60C(fp);
+        ftNs_SpecialAirHi_Enter(gobj);
+        return;
     }
-    fp->x1968_jumpsUsed = fp->co_attrs.max_jumps;
-    ftCommon_8007D60C(fp);
-    ftNs_SpecialAirHi_Enter(gobj);
-    return;
-
-block_stuff: {
     fighter_data3 =
 #ifdef MUST_MATCH
         fighter_data3 =
@@ -517,7 +507,6 @@ block_stuff: {
             return;
         }
     }
-}
 }
 
 static inline float sign(float x)

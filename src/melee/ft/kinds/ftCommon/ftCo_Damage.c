@@ -747,49 +747,44 @@ void ftCo_8008EC90(Fighter_GObj* gobj)
                             fp->x1960_vibrateMult =
                                 other_fp->x1960_vibrateMult;
                             other_fp->x1828 = 3;
-                            goto ret_A8C;
+                        } else {
+                            ftCo_800DE854(gobj);
+                            ftCo_800DCE34(other_gobj, gobj);
+                            ftCommon_8007DB58(gobj);
+                            ftCo_8008E908(gobj, facing_dir);
+                            other_fp->x1828 = 1;
                         }
-                        ftCo_800DE854(gobj);
-                        ftCo_800DCE34(other_gobj, gobj);
-                        ftCommon_8007DB58(gobj);
-                        ftCo_8008E908(gobj, facing_dir);
-                        other_fp->x1828 = 1;
-                        goto ret_A8C;
-                    }
-                    if (fp->dmg.x183C_applied != 0) {
-                        other_fp->dmg.x195c_hitlag_frames =
-                            ftCommon_CalcHitlag(fp->dmg.x183C_applied,
-                                                other_fp->motion_id,
-                                                other_fp->x1960_vibrateMult);
-                        other_fp->allow_sdi = true;
-                        if (!other_fp->x2219_b5) {
-                            if (other_fp->pre_hitlag_cb != NULL) {
-                                other_fp->pre_hitlag_cb(gobj);
+                    } else {
+                        if (fp->dmg.x183C_applied != 0) {
+                            other_fp->dmg.x195c_hitlag_frames =
+                                ftCommon_CalcHitlag(
+                                    fp->dmg.x183C_applied, other_fp->motion_id,
+                                    other_fp->x1960_vibrateMult);
+                            other_fp->allow_sdi = true;
+                            if (!other_fp->x2219_b5) {
+                                if (other_fp->pre_hitlag_cb != NULL) {
+                                    other_fp->pre_hitlag_cb(gobj);
+                                }
+                                other_fp->x2219_b5 = true;
                             }
-                            other_fp->x2219_b5 = true;
                         }
+                        fp->input.pressed_buttons =
+                            fp->input.released_buttons = 0;
+                        inlineB2(gobj);
                     }
-                    fp->input.pressed_buttons = fp->input.released_buttons = 0;
-                    inlineB2(gobj);
-                    goto ret_A8C;
-                }
-                {
-                    if (other_fp->dmg.kb_applied) {
-                        ftCo_800DCE34(other_gobj, gobj);
-                        ftCommon_8007DB58(gobj);
-                        ftCo_8008E908(gobj, facing_dir);
-                        other_fp->x1828 = 1;
-                        goto ret_A8C;
-                    }
+                } else if (other_fp->dmg.kb_applied) {
+                    ftCo_800DCE34(other_gobj, gobj);
+                    ftCommon_8007DB58(gobj);
+                    ftCo_8008E908(gobj, facing_dir);
+                    other_fp->x1828 = 1;
+                } else {
                     ftCo_800DCE34(other_gobj, gobj);
                     ftCommon_8007DB58(gobj);
                     ftCo_8008E908(gobj, facing_dir);
                     ftCommon_8007DB58(other_gobj);
                     ftCo_800DE2F0(other_gobj);
-                    goto ret_A8C;
                 }
-            }
-            {
+            } else {
                 Fighter* other_fp = fp->victim_gobj->user_data;
                 if (inlineB0(fp)) {
                     if (other_fp->dmg.kb_applied) {
@@ -800,18 +795,16 @@ void ftCo_8008EC90(Fighter_GObj* gobj)
                                 fp->x1960_vibrateMult;
                             inlineB3(gobj);
                             other_fp->x1828 = 2;
-                            goto ret_A8C;
+                        } else {
+                            ftCo_800DCE34(gobj, fp->victim_gobj);
+                            ftCommon_8007DB58(gobj);
+                            ftCo_8008E908(gobj, facing_dir);
+                            other_fp->x1828 = 1;
                         }
-                        ftCo_800DCE34(gobj, fp->victim_gobj);
-                        ftCommon_8007DB58(gobj);
-                        ftCo_8008E908(gobj, facing_dir);
-                        other_fp->x1828 = 1;
-                        goto ret_A8C;
+                    } else {
+                        inlineB3(gobj);
                     }
-                    inlineB3(gobj);
-                    goto ret_A8C;
-                }
-                if (other_fp->dmg.kb_applied) {
+                } else if (other_fp->dmg.kb_applied) {
                     if (inlineB1(other_fp)) {
                         ftCo_800DE854(fp->victim_gobj);
                     }
@@ -819,13 +812,13 @@ void ftCo_8008EC90(Fighter_GObj* gobj)
                     ftCommon_8007DB58(gobj);
                     ftCo_8008E908(gobj, facing_dir);
                     other_fp->x1828 = 1;
-                    goto ret_A8C;
+                } else {
+                    ftCommon_8007DB58(fp->victim_gobj);
+                    ftCo_800DCFD4(fp->victim_gobj);
+                    ftCo_800DCE34(gobj, fp->victim_gobj);
+                    ftCommon_8007DB58(gobj);
+                    ftCo_8008E908(gobj, facing_dir);
                 }
-                ftCommon_8007DB58(fp->victim_gobj);
-                ftCo_800DCFD4(fp->victim_gobj);
-                ftCo_800DCE34(gobj, fp->victim_gobj);
-                ftCommon_8007DB58(gobj);
-                ftCo_8008E908(gobj, facing_dir);
             }
         } else if (fp->item_gobj != NULL && it_8026B2D8(fp->item_gobj) &&
                    fp->x2222_b0)

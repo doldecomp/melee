@@ -274,14 +274,12 @@ void gm_8017C838(void)
     s8* var_r31;
     UnkAdventureData* temp_r30;
 
-    PAD_STACK(8);
-
     temp_r30 = gm_GetAdventureData();
     temp_r3 = gmVs_GetSceneController();
     var_r31 = sp10;
-    sp10[0] = Ft_Kind_None;
-    sp10[1] = Ft_Kind_None;
-    sp10[2] = Ft_Kind_None;
+    for (i = 0; i < 3; i++) {
+        sp10[i] = Ft_Kind_None;
+    }
     switch (temp_r3->start.stkind) {
     case 0x3B:
         sp10[0] = Ft_Kind_Yoshi;
