@@ -357,7 +357,7 @@ void Fighter_UnkInitReset_80067C98(Fighter* fp)
 
     fp->x2223_b5 = 0;
 
-    fp->dmg.x1950 = 0;
+    fp->dmg.x1950 = false;
     fp->dmg.x1948 = 0;
 
     fp->x2223_b4 = 0;
@@ -371,15 +371,15 @@ void Fighter_UnkInitReset_80067C98(Fighter* fp)
     fp->fall_fast = 0;
     fp->x2219_b0 = 0;
 
-    fp->x20A0_accessory = 0;
+    fp->x20A0_accessory = NULL;
     fp->x2210.throw_flags = 0;
     fp->cmd_timer = 0;
-    fp->item_gobj = 0;
-    fp->x1978 = 0;
+    fp->item_gobj = NULL;
+    fp->x1978 = NULL;
 
     fp->x221E_b3 = 1;
 
-    fp->x1984_heldItemSpec = 0;
+    fp->x1984_heldItemSpec = NULL;
     fp->x1988 = 0;
     fp->x198C = 0;
 
@@ -391,13 +391,13 @@ void Fighter_UnkInitReset_80067C98(Fighter* fp)
     fp->x221D_b6 = 0;
     fp->x221B.x221B_b5 = 0;
 
-    fp->victim_gobj = 0;
-    fp->x1A5C = 0;
+    fp->victim_gobj = NULL;
+    fp->x1A5C = NULL;
 
     fp->x221B.x221B_b6 = 0;
 
-    fp->target_item_gobj = 0;
-    fp->x1A64 = 0;
+    fp->target_item_gobj = NULL;
+    fp->x1A64 = NULL;
 
     fp->x221B.x221B_b7 = 0;
     fp->x221C_b0 = 0;
@@ -416,7 +416,7 @@ void Fighter_UnkInitReset_80067C98(Fighter* fp)
     fp->x2090 = 0;
     fp->x2098 = 0;
     fp->x2092 = 0;
-    fp->x2094 = 0;
+    fp->x2094 = NULL;
     fp->shield_health = p_ftCommonData->x260_startShieldHealth;
 
     fp->x221A_b7 = 0;
@@ -431,7 +431,7 @@ void Fighter_UnkInitReset_80067C98(Fighter* fp)
     fp->x19A0_shieldDamageTaken = 0;
     fp->x19A4 = 0;
     fp->lightshield_amount = 0;
-    fp->x19A8 = 0;
+    fp->x19A8 = NULL;
     fp->shield_unk0 = 0;
     fp->shield_unk1 = 0;
     fp->x19BC_shieldDamageTaken3 = 6;
@@ -467,7 +467,7 @@ void Fighter_UnkInitReset_80067C98(Fighter* fp)
     fp->death1_cb = NULL;
     fp->death3_cb = NULL;
     fp->x221E_b4 = true;
-    fp->x197C = 0;
+    fp->x197C = NULL;
 
     fp->is_metal = false;
     fp->metal_timer = 0;
@@ -478,7 +478,7 @@ void Fighter_UnkInitReset_80067C98(Fighter* fp)
     fp->x2227_b3 = false;
     fp->x2034 = 0;
     fp->x2038 = 0;
-    fp->x1980 = 0;
+    fp->x1980 = NULL;
 
     fp->stamina_dead = fp->x2224_b3 = false;
 
@@ -499,7 +499,7 @@ void Fighter_UnkInitReset_80067C98(Fighter* fp)
     fp->x2170 = 0;
     fp->x2225_b6 = fp->x2225_b5;
     fp->dmg.x1908 = -1;
-    fp->dmg.x190C = 0;
+    fp->dmg.x190C = NULL;
     fp->x2227_b4 = false;
     fp->smash_attrs.x2138_smashSinceHitbox = -1;
     fp->x213C = -1;
@@ -728,8 +728,8 @@ void Fighter_UnkInitLoad_80068914(Fighter_GObj* gobj,
     fp->gobj = gobj;
     fp->ft_data = gFtDataList[fp->kind];
     ftCo_800D0FA0(gobj);
-    fp->x2CC = 0;
-    fp->x2D0 = 0;
+    fp->x2CC = NULL;
+    fp->x2D0 = NULL;
     fp->x18 = 0x155;
     fp->x1C_actionStateList = ftData_MotionStateList;
     fp->x20_actionStateList = ftData_CharacterStateTables[fp->kind];
@@ -757,7 +757,7 @@ void Fighter_UnkInitLoad_80068914(Fighter_GObj* gobj,
     fp->x209A = 0;
     fp->x221E_b5 = 0;
     fp->x221F_b0 = 0;
-    fp->x21EC = 0;
+    fp->x21EC = NULL;
 
     fp->has_prev_input = 0;
     fp->input_disabled = 0;

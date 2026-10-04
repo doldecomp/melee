@@ -2822,7 +2822,7 @@ void ftColl_8007B760(Fighter_GObj* gobj, int arg1)
         fp->x1990 = arg1;
     }
     fp->x198C = 2;
-    ftCo_800BFFD0(fp, 9, 0);
+    ftCo_800BFFD0(fp, 9, false);
 }
 
 void ftColl_8007B7A4(Fighter_GObj* gobj, int arg1)
@@ -2832,14 +2832,14 @@ void ftColl_8007B7A4(Fighter_GObj* gobj, int arg1)
         fp->x1994 = arg1;
     }
     fp->x198C = fp->x1990 ? 2 : 1;
-    ftCo_800BFFD0(fp, 9, 0);
+    ftCo_800BFFD0(fp, 9, false);
 }
 
 void ftColl_8007B7FC(Fighter* fp, int arg1)
 {
     fp->x221D_b6 = true;
     fp->x2004 = arg1;
-    ftCo_800BFFD0(fp, 107, 0);
+    ftCo_800BFFD0(fp, 107, false);
     if (arg1 > it_8026B588()) {
         ft_80088080(fp);
     }
@@ -3040,7 +3040,7 @@ void ftColl_8007BC90(Fighter_GObj* gobj)
     HitCapsule* hit;
     PAD_STACK(16);
 
-    fp->target_item_gobj = 0;
+    fp->target_item_gobj = NULL;
     fp->unk_grab_val = F32_MAX;
 
     for (cur = HSD_GObjPLinkHead[HSD_GOBJ_PLINK_ITEM]; cur != NULL;

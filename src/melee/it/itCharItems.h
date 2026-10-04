@@ -268,14 +268,14 @@ typedef struct {
 typedef struct FoxLaserAttr {
     /* +0 */ float lifetime; // [35]
     /* +4 */ float scale;    // [3]
-    /* +8 */ float x8;
-    /* +C */ float xC;
-    /* +10 */ float x10;
-    /* +14 */ float x14;
-    /* +18 */ float x18;
-    /* +1C */ float x1C;
-    /* +20 */ float x20;
-    /* +24 */ float x24; // [1]
+    /* +8 */ float x8;       // [0]
+    /* +C */ float xC;       // [0]
+    /* +10 */ float x10;     // [0]
+    /* +14 */ float x14;     // [0]
+    /* +18 */ float x18;     // [0]
+    /* +1C */ float x1C;     // [0]
+    /* +20 */ float x20;     // [0]
+    /* +24 */ float x24;     // [1]
 } FoxLaserAttr;
 
 typedef struct {

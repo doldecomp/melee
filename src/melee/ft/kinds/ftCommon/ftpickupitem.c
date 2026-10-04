@@ -94,7 +94,7 @@ Item_GObj* ftpickupitem_800942A0(Fighter_GObj* gobj, u32 flags)
     pickup = ftpickupitem_800942A0_inline(fp);
     offset0 = fp->ground_or_air == GA_Ground ? &pickup->gr_light_offset
                                              : &pickup->air_light_offset;
-    if (ftCo_IsCpuControlled(fp) && (signed) fp->cpu.kind == 28) {
+    if (ftCo_IsCpuControlled(fp) && (signed) fp->cpu.kind == CpuKind_28) {
         return NULL;
     }
     {
@@ -107,8 +107,8 @@ Item_GObj* ftpickupitem_800942A0(Fighter_GObj* gobj, u32 flags)
                 if ((!fp->x2222_b4 || !it_8026B47C(cur)) &&
                     (fp->item_gobj == NULL || it_8026B4F0(cur)))
                 {
-                    if ((unk_enum == 0 && flags & (1 << 0)) ||
-                        (unk_enum == 1 && flags & (1 << 1)))
+                    if ((unk_enum == false && flags & (1 << 0)) ||
+                        (unk_enum == true && flags & (1 << 1)))
                     {
                         Vec3 it_pos;
                         Vec4* vec;
@@ -118,8 +118,8 @@ Item_GObj* ftpickupitem_800942A0(Fighter_GObj* gobj, u32 flags)
                         {
                             float x_range = itGetGrabRangeX(cur);
                             float y_range = itGetGrabRangeY(cur);
-                            vec = unk_enum == 0 ? offset0
-                                                : &pickup->gr_heavy_offset;
+                            vec = unk_enum == false ? offset0
+                                                    : &pickup->gr_heavy_offset;
                             {
                                 float x1 = vec->z;
                                 float x0 =
@@ -190,7 +190,7 @@ bool ftpickupitem_8009447C(Fighter_GObj* gobj, Item_GObj* item_gobj)
             Item_8026A8EC(item_gobj);
             break;
         case It_Kind_Spycloak:
-            ftCo_800C88D4(gobj, p_ftCommonData->x7CC, 1);
+            ftCo_800C88D4(gobj, p_ftCommonData->x7CC, true);
             Item_8026A8EC(item_gobj);
             break;
         case It_Kind_Coin:
