@@ -1806,8 +1806,7 @@ void fn_8018E618(int arg0, f32 farg0, int arg1)
         }
     }
     GObj_SetupGXLinkMax(gobj, HSD_GObj_803910D8, 1);
-    ((u32*) &gobj->gxlink_prios)[1] = 0x10;
-    ((u32*) &gobj->gxlink_prios)[0] = 0;
+    gobj->gxlink_prios = 0x10;
 
     gmTournament_InitBracket(arg0, farg0, arg1);
 }
