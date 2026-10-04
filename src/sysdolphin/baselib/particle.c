@@ -53,7 +53,7 @@ typedef struct {
 /* 4D78EC */ u32 hsd_804D78EC = 0;
 /* 4D78F0 */ HSD_CObj* psCamera = NULL;
 /* 4D78F4 */ HSD_SList* hsd_804D78F4 = NULL;
-static HSD_JObj* hsd_804D08E8[8];
+static HSD_JObj* psPointJObj[8];
 /* 4D0908 */ HSD_Particle* hsd_804D0908[16];
 /* 4D0948 */ u32* hsd_804D0948[65];
 /* 4D0A4C */ HSD_PSFormGroup** psFormGroupArray[65];
@@ -355,7 +355,7 @@ void hsd_80398A08(u32 unused)
     }
     psCallback = NULL;
     for (i = 0; i < 8; i++) {
-        hsd_804D08E8[i] = NULL;
+        psPointJObj[i] = NULL;
     }
 }
 
@@ -1559,7 +1559,7 @@ void* hsd_8039930C(HSD_Particle* pp, HSD_Particle* prev)
                 case 0xB7:
                     /* Aim velocity toward JObj */
                     {
-                        HSD_JObj* jobj = hsd_804D08E8[*pc++ + pp->pJObjOfs];
+                        HSD_JObj* jobj = psPointJObj[*pc++ + pp->pJObjOfs];
                         MtxPtr matrix;
                         f32 dz, dy, dx, vel_mag_sq, dist_sq;
 
@@ -1624,7 +1624,7 @@ void* hsd_8039930C(HSD_Particle* pp, HSD_Particle* prev)
                         range = fval;
 
                         {
-                            HSD_JObj* jobj = hsd_804D08E8[idx];
+                            HSD_JObj* jobj = psPointJObj[idx];
                             if (hsd_803991D8((HSD_Generator*) pp, jobj, force,
                                              range) != 0)
                             {
@@ -2902,7 +2902,7 @@ void* hsd_8039930C(HSD_Particle* pp, HSD_Particle* prev)
         s32 jobj_idx = (pp->kind & 0x7000) >> 12;
 
         /* Allocate JObj if slot is empty */
-        if (hsd_804D08E8[jobj_idx] == NULL) {
+        if (psPointJObj[jobj_idx] == NULL) {
             HSD_JObj* new_jobj = HSD_JObjAlloc();
             if (new_jobj != NULL) {
                 hsd_8039CF4C(jobj_idx + 1, new_jobj);
@@ -2913,16 +2913,16 @@ void* hsd_8039930C(HSD_Particle* pp, HSD_Particle* prev)
         {
             HSD_JObj* jobj;
 
-            if ((jobj = hsd_804D08E8[jobj_idx]) != NULL) {
-                HSD_JObjSetupMatrix(hsd_804D08E8[jobj_idx]);
+            if ((jobj = psPointJObj[jobj_idx]) != NULL) {
+                HSD_JObjSetupMatrix(psPointJObj[jobj_idx]);
 
-                jobj = hsd_804D08E8[jobj_idx];
+                jobj = psPointJObj[jobj_idx];
                 HSD_JObjAddTranslationX(jobj, pp->pos.x - jobj->mtx[0][3]);
 
-                jobj = hsd_804D08E8[jobj_idx];
+                jobj = psPointJObj[jobj_idx];
                 HSD_JObjAddTranslationY(jobj, pp->pos.y - jobj->mtx[1][3]);
 
-                jobj = hsd_804D08E8[jobj_idx];
+                jobj = psPointJObj[jobj_idx];
                 HSD_JObjAddTranslationZ(jobj, pp->pos.z - jobj->mtx[2][3]);
             }
         }
@@ -2978,7 +2978,7 @@ void hsd_8039CF4C(s32 index, HSD_JObj* jobj)
     }
 
     if (index != 0) {
-        HSD_JObj** p = hsd_804D08E8;
+        HSD_JObj** p = psPointJObj;
         HSD_JObj* old;
         p += index;
         old = *--p;
@@ -2992,9 +2992,9 @@ void hsd_8039CF4C(s32 index, HSD_JObj* jobj)
     } else {
         s32 i;
         for (i = 0; i < 8; i++) {
-            if (hsd_804D08E8[i] == jobj) {
-                HSD_JObjUnref(hsd_804D08E8[i]);
-                hsd_804D08E8[i] = NULL;
+            if (psPointJObj[i] == jobj) {
+                HSD_JObjUnref(psPointJObj[i]);
+                psPointJObj[i] = NULL;
             }
         }
     }
@@ -3004,7 +3004,7 @@ void hsd_8039D048(void* particle)
 {
     u32 flags = ((HSD_Particle*) particle)->kind;
     if (flags & 0x8000) {
-        HSD_JObj** p = &hsd_804D08E8[(flags >> 12) & 7];
+        HSD_JObj** p = &psPointJObj[(flags >> 12) & 7];
         if (*p != NULL) {
             HSD_JObjUnref(*p);
             *p = NULL;
@@ -3021,7 +3021,7 @@ typedef struct {
 
 void hsd_8039D0A0(HSD_Generator* gen)
 {
-    ParticleData* data = (ParticleData*) hsd_804D08E8;
+    ParticleData* data = (ParticleData*) psPointJObj;
     HSD_Particle* prev;
     HSD_Particle* prt;
     HSD_Particle* next;
