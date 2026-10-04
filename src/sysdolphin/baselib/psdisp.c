@@ -44,7 +44,7 @@ typedef struct {
 /* 40C30C */ static char HSD_PSDisp_8040C30C[] =
     "HSD_OBJ(o)->ref_count != HSD_OBJ_NOREF";
 /* 40C334 */ static u8 HSD_PSDisp_8040C334[0xC] = { 0 };
-/* 40C340 */ static u8 HSD_PSDisp_8040C340[0x20] = {
+/* 40C340 */ static u8 billboard_tex0_u8[] ATTRIBUTE_ALIGN(32) = {
     0, 1, 0, 0, 1, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 1,
     0, 0, 0, 1, 1, 1, 1, 0, 1, 0, 1, 1, 0, 1, 0, 0,
 };
@@ -74,7 +74,7 @@ typedef struct {
 /* 4D7944 */ static GXColor prevColorMat;
 /* 4D7948 */ static s32 HSD_PSDisp_804D7948[2];
 
-ASSERT_SIZE(HSD_PSDisp_8040C340, 0x20);
+ASSERT_SIZE(billboard_tex0_u8, 0x20);
 ASSERT_SIZE(HSD_PSDisp_8040C360, 0x10);
 
 void setVtxDesc(s32 fmt)
@@ -528,10 +528,11 @@ static inline HSD_Particle* psDispSubPoint(HSD_Particle* pp)
     q = pp->next;
     while (q != NULL) {
         if (q->size == pp->size && q->appsrt == NULL &&
-            !((q->kind ^ pp->kind) & 0xC0100400) && q->primColCount == 0 &&
-            q->primCol.r == pp->primCol.r && q->primCol.g == pp->primCol.g &&
-            q->primCol.b == pp->primCol.b && q->primCol.a == pp->primCol.a &&
-            !(q->kind & DispPoint) &&
+            !((q->kind ^ pp->kind) &
+              (DispPoint | DispTexture | DispLighting | Trail)) &&
+            q->primColCount == 0 && q->primCol.r == pp->primCol.r &&
+            q->primCol.g == pp->primCol.g && q->primCol.b == pp->primCol.b &&
+            q->primCol.a == pp->primCol.a && !(q->kind & DispPoint) &&
             (!(pp->kind & DispLighting) ||
              (q->matColCount == 0 && q->ambColCount == 0 &&
               q->matRGB == pp->matRGB && q->matA == pp->matA &&
@@ -639,7 +640,9 @@ static inline HSD_Particle* psDispSubPointTrail(HSD_Particle* pp)
     q = pp->next;
     while (q != NULL) {
         if (q->size == pp->size && q->appsrt == NULL &&
-            !((q->kind ^ pp->kind) & 0xC0100400) && !(q->kind & DispPoint))
+            !((q->kind ^ pp->kind) &
+              (DispPoint | DispTexture | DispLighting | Trail)) &&
+            !(q->kind & DispPoint))
         {
             {
                 Vec3* dst = p++;
@@ -1965,8 +1968,8 @@ void psDispParticles(u32 target_link, u32 sw)
                         psSetCurrentMtx(GX_PNMTX0);
                         GXEnableTexOffsets(GX_TEXCOORD0, GX_TRUE, GX_TRUE);
                         GXSetCullMode(GX_CULL_BACK);
-                        GXSETARRAY(GX_VA_TEX0, HSD_PSDisp_8040C340,
-                                   sizeof(HSD_PSDisp_8040C340), 2, true);
+                        GXSETARRAY(GX_VA_TEX0, billboard_tex0_u8,
+                                   sizeof(billboard_tex0_u8), 2, true);
                         psSetupVtxFormat(GX_VTXFMT0, false, true, GX_RGB565);
                         psSetupVtxFormat(GX_VTXFMT1, false, false, GX_RGB565);
                         psSetupVtxFormat(GX_VTXFMT2, true, true, GX_RGB565);
