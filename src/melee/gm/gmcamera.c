@@ -568,7 +568,8 @@ static inline void gmCamera_801A31FC_inline(DynamicModelDesc* mdl)
 
 void gmCamera_801A31FC(void)
 {
-    PAD_STACK(24);
+    int i;
+    PAD_STACK(12);
 
     cmSnap_800316B4();
     gmCamera_VsCamUiState.x14 = 1;
@@ -594,7 +595,7 @@ void gmCamera_801A31FC(void)
     HSD_SisLib_803A62A0(3, "SdVsCam", "SIS_VsCameraData");
     gmCamera_VsCamUiState.x54 =
         HSD_SisLib_803A611C(3, NULL, 9, 0xD, 0, 0xE, 0, 0xB);
-    gmCamera_VsCamUiState.x48[0] = NULL;
-    gmCamera_VsCamUiState.x48[1] = NULL;
-    gmCamera_VsCamUiState.x48[2] = NULL;
+    for (i = 0; i < 3; i++) {
+        gmCamera_VsCamUiState.x48[i] = NULL;
+    }
 }

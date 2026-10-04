@@ -5287,7 +5287,7 @@ s32 mnCharSel_802640A0(void)
 
 void mnCharSel_Scene_OnEnter(void* arg0)
 {
-    PAD_STACK(8);
+    int i;
 
     lbCardNew_AllocWorkArea();
     lbCardGame_LoadArchive(0);
@@ -5305,10 +5305,9 @@ void mnCharSel_Scene_OnEnter(void* arg0)
     mnCharSel_804D6CF9 = -1;
     mnCharSel_804D6CF8++;
 
-    mnCharSel_803F0DFC.doors[0].selected_since_load = 0;
-    mnCharSel_803F0DFC.doors[1].selected_since_load = 0;
-    mnCharSel_803F0DFC.doors[2].selected_since_load = 0;
-    mnCharSel_803F0DFC.doors[3].selected_since_load = 0;
+    for (i = 0; i < 4; i++) {
+        mnCharSel_803F0DFC.doors[i].selected_since_load = 0;
+    }
 
     lbAudioAx_80026F2C(0x12);
 
