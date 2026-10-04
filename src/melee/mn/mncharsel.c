@@ -2264,6 +2264,15 @@ static inline void updateBackHold(struct CSSCursorData* cursor, u32 buttons)
     }
 }
 
+static inline void setCpuLevel(u8 value)
+{
+    mnCharSel_803F0EBC.cpu_level = value;
+    mnCharSel_803F0EBC.scroll_flag = 1;
+    mnCharSel_804D6CB0->vs.start.players[(s8) (u8) mnCharSel_804D6CF0]
+        .cpu_level = mnCharSel_803F0EBC.cpu_level;
+    sfxMove();
+}
+
 /// Highlights the hovered button and returns whether A was pressed.
 static inline u32 isButtonPressed(struct CSSCursorData* cursor, u32 trigger)
 {
@@ -2761,24 +2770,10 @@ void mnCharSel_CursorThink(HSD_GObj* gobj)
                                         cx2 < mnCharSel_803F0EBC.cpudown_right)
                                     {
                                         if (isButtonPressed(cursor, trigger)) {
-                                            u8* level;
-                                            u8 current_level;
-                                            if ((current_level =
-                                                     *(level =
-                                                           &mnCharSel_803F0EBC
-                                                                .cpu_level)) !=
-                                                0)
-                                            {
-                                                *level =
-                                                    (u8) (current_level - 1);
-                                                mnCharSel_803F0EBC
-                                                    .scroll_flag = 1;
-                                                mnCharSel_804D6CB0->vs.start
-                                                    .players
-                                                        [(s8) (u8)
-                                                             mnCharSel_804D6CF0]
-                                                    .cpu_level = *level;
-                                                sfxMove();
+                                            u8 current_level =
+                                                mnCharSel_803F0EBC.cpu_level;
+                                            if (current_level != 0) {
+                                                setCpuLevel(current_level - 1);
                                                 goto update_display;
                                             }
                                         }
@@ -2788,24 +2783,10 @@ void mnCharSel_CursorThink(HSD_GObj* gobj)
                                                          .cpuup_right)
                                     {
                                         if (isButtonPressed(cursor, trigger)) {
-                                            u8* level;
-                                            u8 current_level;
-                                            if ((current_level =
-                                                     *(level =
-                                                           &mnCharSel_803F0EBC
-                                                                .cpu_level)) <
-                                                4U)
-                                            {
-                                                *level =
-                                                    (u8) (current_level + 1);
-                                                mnCharSel_803F0EBC
-                                                    .scroll_flag = 1;
-                                                mnCharSel_804D6CB0->vs.start
-                                                    .players
-                                                        [(s8) (u8)
-                                                             mnCharSel_804D6CF0]
-                                                    .cpu_level = *level;
-                                                sfxMove();
+                                            u8 current_level =
+                                                mnCharSel_803F0EBC.cpu_level;
+                                            if (current_level < 4U) {
+                                                setCpuLevel(current_level + 1);
                                                 goto update_display;
                                             }
                                         }
