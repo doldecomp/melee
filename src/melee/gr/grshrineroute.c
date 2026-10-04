@@ -286,14 +286,11 @@ void fn_80208A38(HSD_GObj* gobj)
     HSD_JObj* ejobj;
     int i;
     float unused1;
-    PAD_STACK(16);
+    PAD_STACK(8);
 
-    flags[0] = 0;
-    flags[1] = 0;
-    flags[2] = 0;
-    flags[3] = 0;
-    flags[4] = 0;
-    flags[5] = 0;
+    for (i = 0; i < 6; i++) {
+        flags[i] = 0;
+    }
     {
         int idx = HSD_Randi(6);
         flag[idx] = 1;
