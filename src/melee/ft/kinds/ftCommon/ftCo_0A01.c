@@ -7177,7 +7177,6 @@ void ftCo_800B04DC(Fighter* fp)
     Fighter** target_slot;
     struct CpuFighter* data;
     Item_GObj* item_gobj;
-    ItemKind kind;
     Fighter* target;
     f32 dist[1];
     bool is_food;
@@ -7196,24 +7195,9 @@ void ftCo_800B04DC(Fighter* fp)
     *(target_slot = &fp->cpu.x44) = target;
 
     item_gobj = fp->item_gobj;
-    if (item_gobj != NULL) {
-        kind = GET_ITEM(item_gobj)->kind;
-        if (kind == It_Kind_Heart) {
-            is_food = true;
-        } else if (kind == It_Kind_Tomato) {
-            is_food = true;
-        } else if (kind == It_Kind_Foods) {
-            is_food = true;
-        } else {
-            is_food = false;
-        }
-        if (is_food == false) {
-            data->x4C = NULL;
-        } else {
-            goto maybe_find_item;
-        }
+    if (item_gobj != NULL && !ftCo_800A5908(GET_ITEM(item_gobj))) {
+        data->x4C = NULL;
     } else {
-    maybe_find_item:
         if (fp->x2168 != 0) {
             data->x4C = NULL;
         } else {

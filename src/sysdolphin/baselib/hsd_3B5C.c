@@ -1,4 +1,3 @@
-#include <placeholder.h>
 #include <setjmp.h>
 
 #include "hsd_3B34.h"
@@ -601,17 +600,11 @@ struct hsd_803B6BE4_inline_state {
 
 static inline s32 hsd_803B6BE4_inline(char* src, s32 size, void* dst)
 {
-    s32 cr_coeff7;
-    s32 luma_coeff7;
-    s32 cb_coeff7;
     s32 y;
     s32 x;
     u8* zigzag;
     s32 i;
     u8 quant_byte;
-    u8 quant0;
-    u8 cr_quant0;
-    u8 cb_quant0;
     u8* src_byte0;
     u8* src_byte9;
     u8* src_byte10;
@@ -620,13 +613,6 @@ static inline s32 hsd_803B6BE4_inline(char* src, s32 size, void* dst)
     u8* src_byte13;
     u8* src_byte14;
     u8* src_byte15;
-    u8* src_byte1;
-    u8* src_byte2;
-    u8* src_byte3;
-    u8* src_byte4;
-    u8* src_byte5;
-    u8* src_byte6;
-    u8* src_byte7;
     u8* src_byte8;
     s32 luma_block;
     s32* luma;
@@ -646,134 +632,117 @@ static inline s32 hsd_803B6BE4_inline(char* src, s32 size, void* dst)
         return 0;
     }
     src_byte0 = &hsd_804D79BC[hsd_804D79C0];
-find_luma_quant:
-    if (*(u16*) hsd_804D79B8 == 0xFFDB) {
-        u8* zigzag;
-        s32 i;
+    for (;;) {
+        if (*(u16*) hsd_804D79B8 == 0xFFDB) {
+            u8* zigzag;
+            s32 i;
 
-        hsd_804D79B8 += 5;
-        zigzag = lbl_80431638;
-        for (i = 0; i < 0x40; i += 8) {
-            src_byte0 = hsd_804D79B8;
-            hsd_804D79B8 = src_byte0 + 1;
-            state.quant_table->luma[zigzag[0]] = *src_byte0;
-            src_byte1 = hsd_804D79B8;
-            hsd_804D79B8 = src_byte1 + 1;
-            state.quant_table->luma[zigzag[1]] = *src_byte1;
-            src_byte2 = hsd_804D79B8;
-            hsd_804D79B8 = src_byte2 + 1;
-            state.quant_table->luma[zigzag[2]] = *src_byte2;
-            src_byte3 = hsd_804D79B8;
-            hsd_804D79B8 = src_byte3 + 1;
-            state.quant_table->luma[zigzag[3]] = *src_byte3;
-            src_byte4 = hsd_804D79B8;
-            hsd_804D79B8 = src_byte4 + 1;
-            state.quant_table->luma[zigzag[4]] = *src_byte4;
-            src_byte5 = hsd_804D79B8;
-            hsd_804D79B8 = src_byte5 + 1;
-            state.quant_table->luma[zigzag[5]] = *src_byte5;
-            src_byte6 = hsd_804D79B8;
-            hsd_804D79B8 = src_byte6 + 1;
-            state.quant_table->luma[zigzag[6]] = *src_byte6;
-            src_byte7 = hsd_804D79B8;
-            hsd_804D79B8 = src_byte7 + 1;
-            quant_byte = zigzag[7];
-            zigzag += 8;
-            state.quant_table->luma[quant_byte] = *src_byte7;
+            hsd_804D79B8 += 5;
+            zigzag = lbl_80431638;
+            for (i = 0; i < 0x40; i += 8) {
+                s32 j;
+                for (j = 0; j < 8; j++) {
+                    state.quant_table->luma[zigzag[j]] = *hsd_804D79B8++;
+                }
+                zigzag += 8;
+            }
+            break;
         }
-    } else {
-        if (++hsd_804D79B8 >= src_byte0) {
-            longjmp(state.work->jmp, 1);
-        } else {
-            goto find_luma_quant;
+        if (++hsd_804D79B8 < src_byte0) {
+            continue;
         }
+        longjmp(state.work->jmp, 1);
+        break;
     }
     src_byte0 = &hsd_804D79BC[hsd_804D79C0];
-find_chroma_quant:
-    if (*(u16*) hsd_804D79B8 == 0xFFDB) {
-        u8 qbyte;
-        u8* qptr;
-        s32 zigzag_index;
+    for (;;) {
+        if (*(u16*) hsd_804D79B8 == 0xFFDB) {
+            u8 qbyte;
+            u8* qptr;
+            s32 zigzag_index;
 
-        hsd_804D79B8 += 5;
-        zigzag = lbl_80431638;
-        for (i = 0; i < 0x40; i += 8) {
-            src_byte8 = hsd_804D79B8;
-            hsd_804D79B8 = src_byte8 + 1;
-            zigzag_index = zigzag[0];
-            qptr = state.quant_table->luma + zigzag_index;
-            qptr[0x40] = qbyte = *src_byte8;
-            src_byte9 = hsd_804D79B8;
-            hsd_804D79B8 = src_byte9 + 1;
-            zigzag_index = zigzag[1];
-            qptr = state.quant_table->luma + zigzag_index;
-            qptr[0x40] = qbyte = *src_byte9;
-            src_byte10 = hsd_804D79B8;
-            hsd_804D79B8 = src_byte10 + 1;
-            zigzag_index = zigzag[2];
-            qptr = state.quant_table->luma + zigzag_index;
-            qptr[0x40] = qbyte = *src_byte10;
-            src_byte11 = hsd_804D79B8;
-            hsd_804D79B8 = src_byte11 + 1;
-            zigzag_index = zigzag[3];
-            qptr = state.quant_table->luma + zigzag_index;
-            qptr[0x40] = qbyte = *src_byte11;
-            src_byte12 = hsd_804D79B8;
-            hsd_804D79B8 = src_byte12 + 1;
-            zigzag_index = zigzag[4];
-            qptr = state.quant_table->luma + zigzag_index;
-            qptr[0x40] = qbyte = *src_byte12;
-            src_byte13 = hsd_804D79B8;
-            hsd_804D79B8 = src_byte13 + 1;
-            zigzag_index = zigzag[5];
-            qptr = state.quant_table->luma + zigzag_index;
-            qbyte = quant_byte = *src_byte13;
-            qptr[0x40] = qbyte;
-            src_byte14 = hsd_804D79B8;
-            hsd_804D79B8 = src_byte14 + 1;
-            zigzag_index = zigzag[6];
-            qptr = state.quant_table->luma + zigzag_index;
-            qptr[0x40] = qbyte = *src_byte14;
-            src_byte15 = hsd_804D79B8;
-            hsd_804D79B8 = src_byte15 + 1;
-            zigzag_index = zigzag[7];
-            qptr = state.quant_table->luma + zigzag_index;
-            zigzag += 8;
-            qptr[0x40] = qbyte = *src_byte15;
+            hsd_804D79B8 += 5;
+            zigzag = lbl_80431638;
+            for (i = 0; i < 0x40; i += 8) {
+                src_byte8 = hsd_804D79B8;
+                hsd_804D79B8 = src_byte8 + 1;
+                zigzag_index = zigzag[0];
+                qptr = state.quant_table->luma + zigzag_index;
+                qptr[0x40] = qbyte = *src_byte8;
+                src_byte9 = hsd_804D79B8;
+                hsd_804D79B8 = src_byte9 + 1;
+                zigzag_index = zigzag[1];
+                qptr = state.quant_table->luma + zigzag_index;
+                qptr[0x40] = qbyte = *src_byte9;
+                src_byte10 = hsd_804D79B8;
+                hsd_804D79B8 = src_byte10 + 1;
+                zigzag_index = zigzag[2];
+                qptr = state.quant_table->luma + zigzag_index;
+                qptr[0x40] = qbyte = *src_byte10;
+                src_byte11 = hsd_804D79B8;
+                hsd_804D79B8 = src_byte11 + 1;
+                zigzag_index = zigzag[3];
+                qptr = state.quant_table->luma + zigzag_index;
+                qptr[0x40] = qbyte = *src_byte11;
+                src_byte12 = hsd_804D79B8;
+                hsd_804D79B8 = src_byte12 + 1;
+                zigzag_index = zigzag[4];
+                qptr = state.quant_table->luma + zigzag_index;
+                qptr[0x40] = qbyte = *src_byte12;
+                src_byte13 = hsd_804D79B8;
+                hsd_804D79B8 = src_byte13 + 1;
+                zigzag_index = zigzag[5];
+                qptr = state.quant_table->luma + zigzag_index;
+                qbyte = quant_byte = *src_byte13;
+                qptr[0x40] = qbyte;
+                src_byte14 = hsd_804D79B8;
+                hsd_804D79B8 = src_byte14 + 1;
+                zigzag_index = zigzag[6];
+                qptr = state.quant_table->luma + zigzag_index;
+                qptr[0x40] = qbyte = *src_byte14;
+                src_byte15 = hsd_804D79B8;
+                hsd_804D79B8 = src_byte15 + 1;
+                zigzag_index = zigzag[7];
+                qptr = state.quant_table->luma + zigzag_index;
+                zigzag += 8;
+                qptr[0x40] = qbyte = *src_byte15;
+            }
+            break;
         }
-    } else {
-        if (++hsd_804D79B8 >= src_byte0) {
-            longjmp(state.work->jmp, 1);
-        } else {
-            goto find_chroma_quant;
+        if (++hsd_804D79B8 < src_byte0) {
+            continue;
         }
+        longjmp(state.work->jmp, 1);
+        break;
     }
     src_byte0 = &hsd_804D79BC[hsd_804D79C0];
-find_frame:
-    if (*(u16*) hsd_804D79B8 == 0xFFC0) {
-        hsd_804D79B8 += 5;
-        state.height = *(u16*) hsd_804D79B8;
-        hsd_804D79B8 += 2;
-        state.width = *(u16*) hsd_804D79B8;
-        hsd_804D79B8 += 0xC;
-    } else {
-        if (++hsd_804D79B8 >= src_byte0) {
-            longjmp(state.work->jmp, 1);
-        } else {
-            goto find_frame;
+    for (;;) {
+        if (*(u16*) hsd_804D79B8 == 0xFFC0) {
+            hsd_804D79B8 += 5;
+            state.height = *(u16*) hsd_804D79B8;
+            hsd_804D79B8 += 2;
+            state.width = *(u16*) hsd_804D79B8;
+            hsd_804D79B8 += 0xC;
+            break;
         }
+        if (++hsd_804D79B8 < src_byte0) {
+            continue;
+        }
+        longjmp(state.work->jmp, 1);
+        break;
     }
     src_byte0 = &hsd_804D79BC[hsd_804D79C0];
-find_scan:
-    if (*(u16*) hsd_804D79B8 == 0xFFDA) {
-        hsd_804D79B8 += 2;
-        hsd_804D79B8 += 0xC;
-    } else {
-        if (++hsd_804D79B8 >= src_byte0) {
-            longjmp(state.work->jmp, 1);
-        } else {
-            goto find_scan;
+    for (;;) {
+        if (*(u16*) hsd_804D79B8 == 0xFFDA) {
+            hsd_804D79B8 += 2;
+            hsd_804D79B8 += 0xC;
+            break;
         }
+        if (++hsd_804D79B8 < src_byte0) {
+            continue;
+        }
+        longjmp(state.work->jmp, 1);
+        break;
     }
     for (y = 0; y < state.height; y += 0x10) {
         for (x = 0; x < state.width; x += 0x10) {
@@ -788,18 +757,12 @@ find_scan:
                 luma_out = luma;
                 luma_coeff = state.work->work.coeff;
                 for (luma_index = 0; luma_index < 0x40; luma_index += 8) {
+                    s32 k;
                     luma_quant = state.quant_table->luma + luma_index;
-                    quant0 = luma_quant[0];
-                    luma_out[0] = (luma_coeff[0] * quant0);
-                    luma_out[1] = (luma_coeff[1] * luma_quant[1]);
-                    luma_out[2] = (luma_coeff[2] * luma_quant[2]);
-                    luma_out[3] = (luma_coeff[3] * luma_quant[3]);
-                    luma_out[4] = (luma_coeff[4] * luma_quant[4]);
-                    luma_out[5] = (luma_coeff[5] * luma_quant[5]);
-                    luma_out[6] = (luma_coeff[6] * luma_quant[6]);
-                    luma_coeff7 = luma_coeff[7];
+                    for (k = 0; k < 8; k++) {
+                        luma_out[k] = luma_coeff[k] * luma_quant[k];
+                    }
                     luma_coeff += 8;
-                    luma_out[7] = (luma_coeff7 * luma_quant[7]);
                     luma_out += 8;
                 }
                 fn_803B61B4(luma);
@@ -816,18 +779,12 @@ find_scan:
                 cb_coeff = coefficients = state.work->work.coeff;
                 cb_out = state.work->work.cb;
                 for (cb_index = 0; cb_index < 0x40; cb_index += 8) {
+                    s32 k;
                     cb_quant = quant_chroma + cb_index;
-                    cb_quant0 = cb_quant[0];
-                    cb_out[0] = (cb_coeff[0] * cb_quant0);
-                    cb_out[1] = (cb_coeff[1] * cb_quant[1]);
-                    cb_out[2] = (cb_coeff[2] * cb_quant[2]);
-                    cb_out[3] = (cb_coeff[3] * cb_quant[3]);
-                    cb_out[4] = (cb_coeff[4] * cb_quant[4]);
-                    cb_out[5] = (cb_coeff[5] * cb_quant[5]);
-                    cb_out[6] = (cb_coeff[6] * cb_quant[6]);
-                    cb_coeff7 = cb_coeff[7];
+                    for (k = 0; k < 8; k++) {
+                        cb_out[k] = cb_coeff[k] * cb_quant[k];
+                    }
                     cb_coeff += 8;
-                    cb_out[7] = (cb_coeff7 * cb_quant[7]);
                     cb_out += 8;
                 }
                 fn_803B61B4(state.work->work.cb);
@@ -841,18 +798,12 @@ find_scan:
 
                 cr_out = state.work->work.cr;
                 for (cr_index = 0; cr_index < 0x40; cr_index += 8) {
+                    s32 k;
                     cr_quant = quant_chroma + cr_index;
-                    cr_quant0 = cr_quant[0];
-                    cr_out[0] = (coefficients[0] * cr_quant0);
-                    cr_out[1] = (coefficients[1] * cr_quant[1]);
-                    cr_out[2] = (coefficients[2] * cr_quant[2]);
-                    cr_out[3] = (coefficients[3] * cr_quant[3]);
-                    cr_out[4] = (coefficients[4] * cr_quant[4]);
-                    cr_out[5] = (coefficients[5] * cr_quant[5]);
-                    cr_out[6] = (coefficients[6] * cr_quant[6]);
-                    cr_coeff7 = coefficients[7];
+                    for (k = 0; k < 8; k++) {
+                        cr_out[k] = coefficients[k] * cr_quant[k];
+                    }
                     coefficients += 8;
-                    cr_out[7] = (cr_coeff7 * cr_quant[7]);
                     cr_out += 8;
                 }
                 fn_803B61B4(state.work->work.cr);
@@ -865,8 +816,6 @@ find_scan:
 
 s32 hsd_803B6BE4(char* src, s32 size, void* dst)
 {
-    PAD_STACK(0x30);
-
     return hsd_803B6BE4_inline(src, size, dst);
 }
 

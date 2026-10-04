@@ -575,7 +575,7 @@ void mnDiagram3_InitUserData(Diagram3* data, int arg1)
 {
     u8* src;
     int i;
-    PAD_STACK(8);
+    PAD_STACK(4);
 
     src = (u8*) &mn_804A04F0;
     data->saved_menu = src[0];
@@ -591,11 +591,9 @@ void mnDiagram3_InitUserData(Diagram3* data, int arg1)
     data->popup_gobj = NULL;
     data->title_text = NULL;
     data->value_text = NULL;
-    data->row_icons[0] = NULL;
-    data->row_icons[1] = NULL;
-    data->row_icons[2] = NULL;
-    data->row_icons[3] = NULL;
-    data->row_icons[4] = NULL;
+    for (i = 0; i < 5; i++) {
+        data->row_icons[i] = NULL;
+    }
 }
 
 static inline HSD_JObj* mnDiagram3_LoadJoint(StaticModelDesc* archive)
