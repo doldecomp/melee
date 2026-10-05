@@ -700,7 +700,7 @@ struct FtPartsDesc {
     /*  +0 */ u32 model_num;
     /// A row per costume, the default's (0) where an entry is NULL
     /// (#ftParts_8007487C).
-    /*  +4 */ FtPartsVisLookup* (*vis_table)[4];
+    /*  +4 */ FtPartsVisLookup* (*vis_table)[4] DAT_EXTENT;
 };
 
 typedef struct ftData_x20 {
@@ -713,11 +713,15 @@ typedef struct ftData_x34 {
     /* +4 */ float scale;
 } ftData_x34;
 
+/// Jigglypuff's slot 1, with its costume part descriptor at +4.
+struct ftData_x48_x4 {
+    /* +0 */ u32 x0;
+    /* +4 */ FtPartsDesc x4;
+};
+
 /// An entry of #ftData::x48_items: mostly an #Article, but some fighters
 /// keep joints or their own structs in certain slots. Those slots come
 /// first; #article is the catch-all for the rest.
-/// @todo Annotate the other slots per fighter (Sheik 4/5, Game & Watch 10,
-///       Jigglypuff 1).
 union ftData_Item {
     struct UNK_SAMUS_S1* samus_grapple DAT_IF(fighter_kind == Ft_Kind_Samus &&
                                               item_index == 4);
@@ -725,9 +729,15 @@ union ftData_Item {
         ((fighter_kind == Ft_Kind_Link || fighter_kind == Ft_Kind_CLink) &&
          item_index == 6) ||
         (fighter_kind == Ft_Kind_Kirby && item_index == 4) ||
-        (fighter_kind == Ft_Kind_Yoshi && item_index == 3));
-    HSD_Joint** joints;
-    FtPartsVisLookup* visibility;
+        (fighter_kind == Ft_Kind_Yoshi && item_index == 3) ||
+        (fighter_kind == Ft_Kind_Seak &&
+         (item_index == 4 || item_index == 5)));
+    /// Game & Watch's table has one entry for each of its 11 models.
+    FtPartsVisLookup (*visibility)[11] DAT_IF(fighter_kind ==
+                                                  Ft_Kind_GameWatch &&
+                                              item_index == 10);
+    struct ftData_x48_x4* parts DAT_IF(fighter_kind == Ft_Kind_Purin &&
+                                       item_index == 1);
     Article* article DAT_IF(true);
 };
 
