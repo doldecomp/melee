@@ -345,15 +345,15 @@ void ftPk_Init_OnLoadForPichu(Fighter* fp)
 void ftPk_Init_OnLoad(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    void** item_list = fp->ft_data->x48_items;
+    union ftData_Item* item_list = fp->ft_data->x48_items;
 
     PUSH_ATTRS(fp, ftPikachuAttributes);
 
     {
         ftPikachuAttributes* pika_attr = fp->dat_attrs;
-        it_8026B3F8(item_list[0], pika_attr->xDC);
-        it_8026B3F8(item_list[1], pika_attr->specialn_itkind);
-        it_8026B3F8(item_list[2], pika_attr->specialairn_itkind);
+        it_8026B3F8(item_list[0].article, pika_attr->xDC);
+        it_8026B3F8(item_list[1].article, pika_attr->specialn_itkind);
+        it_8026B3F8(item_list[2].article, pika_attr->specialairn_itkind);
     }
 }
 

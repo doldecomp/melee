@@ -110,12 +110,40 @@ as many as fit before the next public symbol or pointer target. Raw data
 (textures, palettes) is typed as `u8[]` or `u16[]`, like the extracted
 blobs in `config.yml`.
 
+When a loader names roots through a global table, `DAT_BIND` on its name
+field carries the table's context into each root's walk. For example, the
+fighter loader indexes `ftData_803C1F40[kind].b`:
+
+```c
+struct StringPair {
+    char* a;
+    char* b DAT_BIND(fighter_kind, _index);
+};
+```
+
+Expanding the name table binds `fighter_kind` to each element's index.
+These values are retained in the compact types file and apply to the root
+(including every element of an array root) and everything reached from it.
+Expressions can use `_index`, macros, enum constants, and bindings from
+earlier fields on the path. Unresolved bindings are omitted, as during the
+archive walk. A field's `DAT_BIND` can shadow them; they don't carry over to
+other roots. `ftData.x48_items` binds `item_index` to `_index`, so its C
+pointer union selects Samus's grapple-beam accessory in slot 4 and an
+`Article` in the other slots.
+
 ## Samples
 
 Samples check that the types explain the archives' data. Each archive is a
-unit: its best-typed instance of each type (and of each variant its tagged
-unions choose) is sliced into a target object, and C generated from the
-current types must compile to the same bytes and relocations.
+unit, sliced into a target object, and C generated from the current types
+must compile its samples to the same bytes and relocations. The samples are
+chosen across every archive: for each type (and each variant its tagged
+unions choose), the fewest instances that together show every case its
+fields take anywhere in the game. Cases are per field: a pointer null,
+relocated, unrelocated or -1; a float zero, negative zero, positive,
+negative, subnormal, infinite or NaN; an integer zero, positive, negative or
+relocated; a bitfield zero or not; and nonzero padding. Instances the walk
+found nothing wrong in come first. The rest of each archive is matched as
+inferred data.
 
 They build in their own CMake preset, in the dev shell:
 
@@ -132,16 +160,20 @@ starts with (`Pl/PlMr`, `Gr/GrFs`), under `dat/` in objdiff like the code's
 
 - `melee.elf`: the DWARF build for that game version
 - `types.bin`: its types, deduplicated once for every step
+- `metadata/pick/<archive>.pick`: the instances chosen in each archive,
+  rewritten only when they change
 - `target/<unit>.o`: the whole archive, in two sections (objdiff lists
   them by name):
   - `.0.sampled`: the sampled objects, with pointers as relocations
-  - `.1.inferred`: the archive's public symbols and the data the samples
-    point to, as uninitialized data, which objdiff never diffs bytes of.
-    The base defines the ones the walk explains here too, so objdiff
-    matches them by name and size; the rest show as missing. One is
-    explained when it, and everything it reaches before another of them
-    or a sample, is typed data with no relocation the walk can't explain.
-    Raw `u8` isn't typed: its format needs a `DAT_BLOB` typedef
+  - `.1.inferred`: the rest of the archive, as uninitialized data, which
+    objdiff never diffs bytes of: one symbol per piece, split wherever an
+    object, public symbol or pointer target starts. The base defines the
+    pieces the walk explains here too, so objdiff matches them by name and
+    size; the rest show as missing. A piece is explained when it's typed
+    data (an object up to its type's end, a script up to its end command)
+    with no relocation the walk can't explain. Bytes a pointer says are
+    bytes (`u8` texels, strings, keyframes) are explained up to the next
+    object
 
   Each symbol's offset in the archive is its virtual address in a
   `.note.split`, as decomp-toolkit writes for split code; objdiff shows it.
@@ -150,14 +182,14 @@ starts with (`Pl/PlMr`, `Gr/GrFs`), under `dat/` in objdiff like the code's
 - `metadata/<unit>.types`: a hash of the types the archive's roots
   lead to, rewritten only when it changes, which the other steps depend on;
   `metadata/<unit>.formatted` records that the C is formatted
-- `src/<unit>/<root>.{h,c}`: per root of the archive (the public
-  symbol its samples were reached from), a header declaring its samples and
-  the other data they point to, and designated initializers generated from
-  the types; pointers into other roots include those roots' headers
+- `src/<unit>.h`: declares the archive's public symbols, typed by their
+  roots, then its samples, the archive's externs and the other data they
+  point to
+- `src/<unit>.c`: only for a unit with samples: their designated
+  initializers, generated from the types. Both are formatted in place with
+  the repository's `.clang-format`
 - `src/macros.h`: what the generated C includes (`LOCAL`), like
   dtk's `macros.inc`; from `samples macros`
-- `src/<unit>.c`: the unit, which includes every root's source; all of
-  it is formatted in place with the repository's `.clang-format`
 - `base/<unit>.o`: that C, compiled with the DWARF build's flags, one
   section per variable (`obj/<unit>.o`), then linked with
   `target/<unit>.ld` and `target/<unit>.rest.o` into `.0.sampled` in the
@@ -176,8 +208,10 @@ Data is named as the archive names it (its public symbols, global in both
 objects). Everything else is `LOCAL` (`static`, kept where nothing points to
 it), named after the field the walk first reached it through, then its
 offset: `child_x1A0`, `x1C_4_x2818`. Data the samples point to that isn't
-written as C (elided: declared as its type where the walk typed it as one
-record, else as `UNK_T`) is local in both objects too, but the C declares
+written as C (elided: declared as the type the walk reached it as, spelled
+as the pointers to it spell it, e.g. `Mtx`, `HSD_Joint x[2]`, `u16 x[256]`;
+`UNK_T` where nothing typed reaches it or it was reached as several types)
+is local in both objects too, but the C declares
 it `extern`, so its name starts with its root to stay unique, e.g.
 `ftDataMario_x0_common_attr_x3AC8`. The base's references to it stay
 undefined; objdiff compares them by name. Externs, other archives' symbols the
@@ -200,8 +234,8 @@ that doesn't round-trip. A union is written through the member its tag
 chose; a union object is declared as that member (`typeof(((union U *)
 0)->member)`), since the archive only holds that member's bytes.
 
-What to sample is up to you, in the build's cache: by default each archive
-gives its best instance of each type. `MELEE_DAT_SAMPLES_ALL` takes archive
+What to sample is up to you, in the build's cache: by default the chosen
+instances above. `MELEE_DAT_SAMPLES_ALL` takes archive
 globs whose every typed object becomes a sample, e.g.
 `cmake --preset dat -DMELEE_DAT_SAMPLES_ALL="PlFx.dat;Gr*.dat"`, and
 `MELEE_DAT_SAMPLES_EXCLUDE` type globs never to sample (data they point to
@@ -228,7 +262,7 @@ type instead.
 | Annotation | Meaning |
 | --- | --- |
 | `DAT_COUNT(n)` | Pointer to `n` elements. |
-| `DAT_IF(cond)` | Union member is valid when `cond` holds. |
+| `DAT_IF(cond)` | Union member is valid when `cond` holds; the first match wins, so a last `DAT_IF(true)` is a catch-all. |
 | `DAT_TYPE(T)` | `void*` points to a `T`. Also on a `void*` typedef, for arrays of them. |
 | `DAT_EXTENT` | Array, or pointer to elements, that runs as far as the data does. Stopgap for lengths only the code knows. |
 | `DAT_BIND(T::f, value)` | `T::f` is `value` for everything reached through this member. |

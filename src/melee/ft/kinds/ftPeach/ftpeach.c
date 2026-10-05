@@ -5,8 +5,6 @@
 #include <melee/ft/kinds/ftCommon/forward.h>
 #include <melee/it/forward.h>
 
-#include <placeholder.h>
-
 #include "ftpeachattacks4.h"
 #include "ftpeachfloat.h"
 #include "ftpeachfloatattack.h"
@@ -440,15 +438,15 @@ void ftPe_Init_OnLoad(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftPe_DatAttrs* extAtrrs = fp->ft_data->ext_attr;
-    UNK_T* items = fp->ft_data->x48_items;
+    union ftData_Item* items = fp->ft_data->x48_items;
     extAtrrs->floatfallf_anim_start = lbAnim_8001E8F8(ftData_80085E50(fp, 18));
     extAtrrs->floatfallb_anim_start = lbAnim_8001E8F8(ftData_80085E50(fp, 19));
     PUSH_ATTRS(fp, ftPe_DatAttrs);
-    it_8026B3F8(items[0], It_Kind_Peach_Explode);
-    it_8026B3F8(items[1], It_Kind_Peach_Turnip);
-    it_8026B3F8(items[2], It_Kind_Peach_Parasol);
-    it_8026B3F8(items[3], It_Kind_Peach_Toad);
-    it_8026B3F8(items[4], It_Kind_Peach_ToadSpore);
+    it_8026B3F8(items[0].article, It_Kind_Peach_Explode);
+    it_8026B3F8(items[1].article, It_Kind_Peach_Turnip);
+    it_8026B3F8(items[2].article, It_Kind_Peach_Parasol);
+    it_8026B3F8(items[3].article, It_Kind_Peach_Toad);
+    it_8026B3F8(items[4].article, It_Kind_Peach_ToadSpore);
 }
 
 void ftPe_Init_OnDeath2(HSD_GObj* gobj)

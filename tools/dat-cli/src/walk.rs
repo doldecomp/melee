@@ -98,6 +98,10 @@ pub struct Walk {
     pub objects: BTreeMap<u32, BTreeSet<CanonId>>,
     /// The first path each object was reached by.
     pub paths: BTreeMap<u32, String>,
+    /// Each object's type as the code first spelled it, by its start and
+    /// canonical type: through typedefs, e.g. `Mtx` rather than
+    /// `float[3][4]`, for declaring it.
+    pub spelled: BTreeMap<(u32, CanonId), DieId>,
     /// Typed data the walk laid out: from each object or element, the
     /// furthest it reaches. Raw bytes (`u8` not named by a `DAT_BLOB`
     /// typedef) say nothing of what the data is, and aren't included.
@@ -117,8 +121,8 @@ pub struct Walk {
     pub issues: BTreeSet<Issue>,
 }
 
-/// Names a `DAT_BIND` gives values to, for everything reached through the
-/// member it is on. Inner bindings shadow outer ones.
+/// Names bound by a root or `DAT_BIND`, for everything reached within
+/// that scope. Inner bindings shadow outer ones.
 #[derive(Debug)]
 struct Scope {
     name: String,
@@ -137,6 +141,16 @@ fn lookup(env: &Env, name: &str) -> Option<u64> {
         scope = s.outer.as_deref();
     }
     None
+}
+
+fn root_env(bindings: &[(String, u64)]) -> Env {
+    bindings.iter().fold(None, |outer, (name, value)| {
+        Some(Rc::new(Scope {
+            name: name.clone(),
+            value: *value,
+            outer,
+        }))
+    })
 }
 
 pub struct Walker<'a> {
@@ -197,8 +211,15 @@ impl<'a> Walker<'a> {
     }
 
     /// Walk everything reachable from an object of type `die` at `offset`.
-    pub fn root(&mut self, offset: u32, die: DieId, name: &str) {
-        self.queue.push((offset, die, name.to_owned(), None));
+    pub fn root(
+        &mut self,
+        offset: u32,
+        die: DieId,
+        name: &str,
+        bindings: &[(String, u64)],
+    ) {
+        self.queue
+            .push((offset, die, name.to_owned(), root_env(bindings)));
         while let Some((offset, die, path, env)) = self.queue.pop() {
             self.env = env;
             self.object(offset, die, path);
@@ -214,7 +235,10 @@ impl<'a> Walker<'a> {
         element: DieId,
         count: Option<u64>,
         name: &str,
+        bindings: &[(String, u64)],
     ) {
+        let env = root_env(bindings);
+        self.env = env.clone();
         let raw = element;
         let Some(element) = self.resolve(Some(element)) else {
             return;
@@ -228,7 +252,7 @@ impl<'a> Walker<'a> {
         if size == 0 || !self.visited.insert((offset, id)) {
             return;
         }
-        self.walk.objects.entry(offset).or_default().insert(id);
+        self.reached(offset, id, Some(raw));
         self.walk
             .paths
             .entry(offset)
@@ -272,6 +296,9 @@ impl<'a> Walker<'a> {
             return;
         }
         for i in 0..count {
+            // Following an element's pointers may leave an inner scope in
+            // effect. Each element starts with this root's bindings.
+            self.env = env.clone();
             let at = offset + (i * size) as u32;
             self.layout(at, element, &format!("{name}[{i}]"), None);
             while let Some((offset, die, path, env)) = self.queue.pop() {
@@ -283,6 +310,15 @@ impl<'a> Walker<'a> {
 
     pub fn finish(self) -> Walk {
         self.walk
+    }
+
+    /// Record an object of type `id` at `offset`, which the code spells as
+    /// `spelled`.
+    fn reached(&mut self, offset: u32, id: CanonId, spelled: Option<DieId>) {
+        self.walk.objects.entry(offset).or_default().insert(id);
+        if let Some(spelled) = spelled {
+            self.walk.spelled.entry((offset, id)).or_insert(spelled);
+        }
     }
 
     fn object(&mut self, offset: u32, die: DieId, path: String) {
@@ -297,7 +333,7 @@ impl<'a> Walker<'a> {
             return;
         }
         self.typed_extent(offset, raw, 1);
-        self.walk.objects.entry(offset).or_default().insert(id);
+        self.reached(offset, id, Some(raw));
         self.walk
             .paths
             .entry(offset)
@@ -516,7 +552,7 @@ impl<'a> Walker<'a> {
                 if !self.visited.insert((value, id)) {
                     return;
                 }
-                self.walk.objects.entry(value).or_default().insert(id);
+                self.reached(value, id, raw);
                 self.walk
                     .paths
                     .entry(value)
@@ -666,7 +702,7 @@ impl<'a> Walker<'a> {
             if !self.visited.insert((value, id)) {
                 return;
             }
-            self.walk.objects.entry(value).or_default().insert(id);
+            self.reached(value, id, Some(raw));
             self.walk
                 .paths
                 .entry(value)
@@ -935,10 +971,12 @@ impl<'a> Walker<'a> {
                 continue;
             }
             if let Some(id) = id {
-                self.walk.objects.entry(start).or_default().insert(id);
+                self.reached(start, id, target);
             }
             self.walk.paths.entry(start).or_insert_with(|| path.clone());
             let mut at = start;
+            // Typed data up to its end command, if it gets there
+            let mut ended = None;
             loop {
                 let Some(&first) = self.data.get(at as usize) else {
                     self.issue(Issue::OutOfBounds {
@@ -974,15 +1012,20 @@ impl<'a> Walker<'a> {
                     }
                 }
                 if opcode == 0 {
+                    ended = Some(end);
                     break;
                 }
                 at = end;
+            }
+            if let Some(end) = ended {
+                let furthest = self.walk.extents.entry(start).or_insert(end);
+                *furthest = end.max(*furthest);
             }
         }
     }
 
     /// The type a `DAT_TYPE` typedef on the way from `die` to its underlying
-    /// type refers to.
+    /// type refers to, as named: through its own typedefs, e.g. `Mtx`.
     fn typedef_type(&self, mut die: DieId) -> Option<DieId> {
         while let Some(ty) = self.graph.types.get(&die) {
             let TypeKind::Typedef {
@@ -1003,7 +1046,7 @@ impl<'a> Walker<'a> {
                     .canonical
                     .lookup(self.graph, &name)
                     .into_iter()
-                    .find_map(|die| self.resolve(Some(die)));
+                    .find(|&die| self.resolve(Some(die)).is_some());
             }
             die = target;
         }
@@ -1085,7 +1128,7 @@ impl<'a> Walker<'a> {
         if size == 0 {
             return;
         }
-        self.walk.objects.entry(value).or_default().insert(id);
+        self.reached(value, id, target);
         self.walk
             .paths
             .entry(value)
@@ -1173,7 +1216,10 @@ impl<'a> Walker<'a> {
     /// The first union member whose `dat:if` condition holds. Conditions
     /// read the fields of the record containing the union, or else those of
     /// the union's own record members, for a union whose members share a
-    /// common initial sequence. A lone member needs no condition.
+    /// common initial sequence. A lone member needs no condition. A
+    /// condition that can't be evaluated makes the choice ambiguous rather
+    /// than falling through to a later member, such as a `dat:if(true)`
+    /// catch-all.
     fn choose<'m>(
         &self,
         members: &'m [Member],
@@ -1191,6 +1237,7 @@ impl<'a> Walker<'a> {
                     _ => None,
                 }
             });
+            let conditioned = condition.is_some();
             let holds = condition.and_then(|cond| {
                 eval_expr(self.macros, &cond, &|name| {
                     if let Some((record, at)) = parent
@@ -1206,10 +1253,13 @@ impl<'a> Walker<'a> {
                         .or_else(|| lookup(&self.env, name))
                 })
             });
-            match holds {
-                Some(0) => {}
-                Some(_) => return Choice::Member(member),
-                None => decided = false,
+            match (conditioned, holds) {
+                (_, Some(0)) => {}
+                (_, Some(_)) => return Choice::Member(member),
+                // A condition that can't be evaluated might hold: a later
+                // member, which may be a catch-all, can't be chosen over it
+                (true, None) => return Choice::Ambiguous,
+                (false, None) => decided = false,
             }
         }
         if decided {

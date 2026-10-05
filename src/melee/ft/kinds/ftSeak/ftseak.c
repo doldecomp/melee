@@ -330,16 +330,16 @@ void ftSk_Init_OnDeath(HSD_GObj* gobj)
 void ftSk_Init_OnLoad(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    void** item_list = fp->ft_data->x48_items;
+    union ftData_Item* item_list = fp->ft_data->x48_items;
 
     fp->can_walljump = true;
 
     PUSH_ATTRS(fp, ftSeakAttributes);
 
-    it_8026B3F8(item_list[0], It_Kind_Seak_NeedleThrow);
-    it_8026B3F8(item_list[1], It_Kind_Seak_NeedleHeld);
-    it_8026B3F8(item_list[2], It_Kind_Seak_Vanish);
-    it_8026B3F8(item_list[3], It_Kind_Seak_Chain);
+    it_8026B3F8(item_list[0].article, It_Kind_Seak_NeedleThrow);
+    it_8026B3F8(item_list[1].article, It_Kind_Seak_NeedleHeld);
+    it_8026B3F8(item_list[2].article, It_Kind_Seak_Vanish);
+    it_8026B3F8(item_list[3].article, It_Kind_Seak_Chain);
 }
 
 void ftSk_Init_80110198(HSD_GObj* gobj)
