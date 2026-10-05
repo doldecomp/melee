@@ -60,11 +60,15 @@
 
 /// The pointer refers to a command script: commands of whole words, each
 /// with its opcode in the top 6 bits of its first byte, up to one with opcode
-/// 0. Opcode @c n is as many words long as the @c n th of the lengths
-/// following @p table, or past those, as @p table (an array in the code)
-/// says at @c n minus their number. Relocated words within a command point
-/// to more script, such as a goto's target.
-#define DAT_SCRIPT(table, ...) DAT_TAG("script(" #table ", " #__VA_ARGS__ ")")
+/// 0. Relocated words within a command point to more script, such as a
+/// goto's target. Opcodes 0 to 9 are the generic commands every script
+/// shares (#Command_Execute). The script's own commands, from opcode 10,
+/// are as many words long as either
+/// - @c table, an array in the code of their lengths, from opcode 10:
+///   @c DAT_SCRIPT(ftAction_803C0870); or
+/// - an expression in @c _command, the command's first word, such as a call
+///   to a tool-side helper: @c DAT_SCRIPT(itCommandLength(_command)).
+#define DAT_SCRIPT(...) DAT_TAG("script(" #__VA_ARGS__ ")")
 
 /// On a typedef of @c u8: the bytes are data of one format the archive
 /// doesn't break down further, such as an animation's keyframe stream. Raw

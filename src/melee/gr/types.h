@@ -99,8 +99,9 @@ struct StageInfo {
     }** itemdata;
     /* +6AC */ MapCollData* coll_data;
     /* +6B0 */ GroundParam* param;
-    /* +6B4 */ UNK_T** ald_yaku_all; // Does this have to do with
-                                     // It_PKind_Random? (see Ground_801C0800)
+    /// Item scripts for the stage's objects (#ItemStateDesc::xC_script),
+    /// from index 1, up to NULL.
+    /* +6B4 */ UNK_T* ald_yaku_all;
     /* +6B8 */ void* map_ptcl;
     /* +6BC */ void* map_texg;
     /* +6C0 */ void* yakumono_param;

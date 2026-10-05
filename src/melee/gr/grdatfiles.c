@@ -58,7 +58,7 @@ void grDatFiles_801C6038(char* filename, bool bool1, bool bool2)
             stage_info.itemdata = HSD_ArchiveGetPublicAs(
                 struct GroundItemData*, sp14, "itemdata");
             stage_info.ald_yaku_all =
-                HSD_ArchiveGetPublicAs(void**, sp14, "ALDYakuAll");
+                HSD_ArchiveGetPublicAs(void*, sp14, "ALDYakuAll");
             stage_info.map_ptcl =
                 HSD_ArchiveGetPublicAddress(sp14, "map_ptcl");
             stage_info.map_texg =

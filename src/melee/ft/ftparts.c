@@ -515,7 +515,7 @@ HSD_JObj* ftParts_8007482C(HSD_Joint* joint)
 void ftParts_8007487C(FtPartsDesc* desc, FtPartsVis* vis, u32 costume_id,
                       DObjList* arg3, DObjList* arg4)
 {
-    void*(*vis_table)[4];
+    FtPartsVisLookup*(*vis_table)[4];
     PAD_STACK(0x8);
 
     vis_table = desc->vis_table;

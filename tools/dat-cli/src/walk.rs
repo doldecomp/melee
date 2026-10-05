@@ -153,6 +153,20 @@ fn root_env(bindings: &[(String, u64)]) -> Env {
     })
 }
 
+/// The opcodes every command script shares, which `Command_Execute`
+/// (`lbcommand.c`) runs; a script's own commands come after.
+const GENERIC_COMMANDS: u64 = 10;
+
+/// How many words a generic command is (`lbCommand_803B9840`): the
+/// subroutine call and goto (5, 7) take a pointer too.
+fn generic_command_length(opcode: u64) -> Option<u64> {
+    match opcode {
+        5 | 7 => Some(2),
+        0..GENERIC_COMMANDS => Some(1),
+        _ => None,
+    }
+}
+
 pub struct Walker<'a> {
     graph: &'a TypeGraph,
     canonical: &'a Canonical,
@@ -922,26 +936,32 @@ impl<'a> Walker<'a> {
         })
     }
 
-    /// The length in words of a script command, from `DAT_SCRIPT`'s own
-    /// lengths or else its table in the code.
-    fn command_length(&self, script: &Script, opcode: u8) -> Option<u64> {
-        let opcode = u64::from(opcode);
-        let first = script.lengths.len() as u64;
-        if opcode < first {
-            return script.lengths.get(opcode as usize).copied();
+    /// How many words the command whose first word is `command` is: one of
+    /// the generic commands, or else one of the script's own.
+    fn command_length(&self, script: &Script, command: u32) -> Option<u64> {
+        let opcode = u64::from(command >> 26);
+        if let Some(length) = generic_command_length(opcode) {
+            return Some(length);
         }
-        let table = self
-            .graph
-            .globals
-            .get(&self.graph.strings.get(&script.table)?)?;
-        let size = table
-            .ty
-            .and_then(|ty| self.canonical.byte_size(self.graph, ty))?;
-        let index = opcode - first;
-        if index >= size {
-            return None;
+        match script {
+            Script::Table(table) => {
+                let table = self
+                    .graph
+                    .globals
+                    .get(&self.graph.strings.get(table)?)?;
+                let size = table
+                    .ty
+                    .and_then(|ty| self.canonical.byte_size(self.graph, ty))?;
+                let index = opcode - GENERIC_COMMANDS;
+                if index >= size {
+                    return None;
+                }
+                Some(self.graph.bytes(table.address + index, 1)?[0].into())
+            }
+            Script::Length(length) => eval_expr(self.macros, length, &|name| {
+                (name == "_command").then_some(u64::from(command))
+            }),
         }
-        Some(self.graph.bytes(table.address + index, 1)?[0].into())
     }
 
     /// Follow a `DAT_SCRIPT` pointer, and every script its commands point to.
@@ -986,7 +1006,8 @@ impl<'a> Walker<'a> {
                     break;
                 };
                 let opcode = first >> 2;
-                let Some(length) = self.command_length(script, opcode) else {
+                let Some(length) = self.command_length(script, self.word(at))
+                else {
                     self.issue(Issue::UnknownCommand {
                         at,
                         opcode,

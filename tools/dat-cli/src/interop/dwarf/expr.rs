@@ -242,6 +242,7 @@ fn arguments(input: &mut &str) -> ModalResult<Vec<Expr>> {
 /// number of arguments, or an argument the function rejects.
 pub fn call(function: &str, args: &[u64]) -> Option<u64> {
     match (function, args) {
+        ("itCommandLength", &[command]) => it_command_length(command),
         (
             "GXGetTexBufferSize",
             &[width, height, format, mipmap, max_lod],
@@ -255,6 +256,26 @@ pub fn call(function: &str, args: &[u64]) -> Option<u64> {
         .map(u64::from),
         _ => None,
     }
+}
+
+/// How many words an item's own script command is (from opcode 10), from
+/// its first word: as far as the handlers `it_802799E4` calls
+/// (`it_803F22A8`) advance. A tool-side helper, not a port: the game has no
+/// such table. Opcode 16 is three words for its sub-commands 0-2, 10 and
+/// 11 (`it_8027978C`), two for the others.
+fn it_command_length(command: u64) -> Option<u64> {
+    let opcode = (command >> 26) & 0x3F;
+    let sub = (command >> 18) & 0xFF;
+    Some(match opcode {
+        10 => 5,
+        11 => 6,
+        16 => match sub {
+            0..=2 | 10 | 11 => 3,
+            _ => 2,
+        },
+        12..=25 => 1,
+        _ => return None,
+    })
 }
 
 /// `GXGetTexBufferSize` (`GXTexture.c`): the bytes a texture of `format`
@@ -385,6 +406,16 @@ mod tests {
             ))
         );
         assert!(Expr::parse("A::b::c").is_none());
+    }
+
+    #[test]
+    fn item_command_lengths() {
+        let e = |text| Expr::parse(text).unwrap().eval(&mut |_| None);
+        // Opcode 11, a hitbox, and opcode 16 with sub-commands 2 and 3
+        assert_eq!(e("itCommandLength(0x2C000000)"), Some(6));
+        assert_eq!(e("itCommandLength(0x40080000)"), Some(3));
+        assert_eq!(e("itCommandLength(0x400C0000)"), Some(2));
+        assert_eq!(e("itCommandLength(0x68000000)"), None);
     }
 
     #[test]

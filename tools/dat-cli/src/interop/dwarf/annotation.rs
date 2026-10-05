@@ -3,9 +3,9 @@
 use super::expr::{Expr, expr, identifier};
 use winnow::{
     ModalResult, Parser,
-    ascii::{digit1, multispace0, multispace1},
+    ascii::{multispace0, multispace1},
     combinator::{
-        alt, cut_err, delimited, dispatch, empty, eof, fail, preceded, repeat,
+        alt, cut_err, delimited, dispatch, empty, eof, fail, peek, preceded, repeat,
         separated, terminated,
     },
     token::{any, rest, take_while},
@@ -37,13 +37,17 @@ pub enum DatTag {
     Script(Script),
 }
 
-/// How to read a `DAT_SCRIPT` command script.
+/// How long a `DAT_SCRIPT` command script's own commands are: those from
+/// opcode 10, after the generic ones every script shares
+/// (`Command_Execute`).
 #[derive(Debug, Clone, PartialEq, Eq)]
-pub struct Script {
-    /// The array in the code holding the lengths of the other opcodes.
-    pub table: String,
-    /// The lengths in words of the first opcodes.
-    pub lengths: Vec<u64>,
+pub enum Script {
+    /// `table`: an array in the code of their lengths in words, from
+    /// opcode 10.
+    Table(String),
+    /// `length`: an expression in `_command`, the command's first word,
+    /// e.g. a helper's call.
+    Length(Expr),
 }
 
 /// The name argument of an archive loader call.
@@ -91,22 +95,17 @@ fn args<'i, O>(
     delimited('(', inner, cut_err((')', eof)))
 }
 
-/// `table, length, length, ...`.
+/// A table's name, or else a length expression.
 fn script(input: &mut &str) -> ModalResult<Script> {
-    let table =
-        delimited(multispace0, identifier, multispace0).parse_next(input)?;
-    let lengths: Vec<u64> = repeat(
-        0..,
-        preceded(
-            (',', multispace0),
-            terminated(digit1.try_map(str::parse::<u64>), multispace0),
-        ),
-    )
-    .parse_next(input)?;
-    Ok(Script {
-        table: table.to_owned(),
-        lengths,
-    })
+    alt((
+        terminated(
+            delimited(multispace0, identifier, multispace0),
+            peek(')'),
+        )
+        .map(|table: &str| Script::Table(table.to_owned())),
+        expr.map(Script::Length),
+    ))
+    .parse_next(input)
 }
 
 /// `name, expr`.
@@ -230,11 +229,15 @@ mod tests {
             Some(DatTag::Terminated(_))
         ));
         assert_eq!(
-            DatTag::parse("dat:script(lengths, 1, 2 ,1)"),
-            Some(DatTag::Script(Script {
-                table: "lengths".into(),
-                lengths: vec![1, 2, 1],
-            }))
+            DatTag::parse("dat:script( lengths )"),
+            Some(DatTag::Script(Script::Table("lengths".into())))
+        );
+        assert_eq!(
+            DatTag::parse("dat:script(itCommandLength(_command))"),
+            Some(DatTag::Script(Script::Length(Expr::Call(
+                "itCommandLength".into(),
+                vec![Expr::Name("_command".into())],
+            ))))
         );
         assert_eq!(DatTag::parse("dat:extent"), Some(DatTag::Extent));
         assert_eq!(DatTag::parse("dat:blob"), Some(DatTag::Blob));

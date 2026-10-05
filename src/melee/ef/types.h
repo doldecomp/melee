@@ -100,8 +100,11 @@ ASSERT_SIZE(EF_DAT_Entry, 0xC);
 /// The effect data table named by an #EF_DAT_Entry, as stored in its
 /// archive.
 typedef struct EffectDataTable {
-    /* 0x0 */ int* cmd_bank;
-    /* 0x4 */ int* tex_bank;
+    /// The particle command and texture banks: words, and offsets into
+    /// themselves that #psInitDataBankLocate turns into pointers.
+    /// @todo Their lengths are only in their headers.
+    /* 0x0 */ int* cmd_bank DAT_EXTENT;
+    /* 0x4 */ int* tex_bank DAT_EXTENT;
     /// Indexed by @c gfx_id % 1000 (#efLib_Create, through
     /// #EF_DAT_Entry::data).
     /// @todo The count is only implied by the effect IDs.
