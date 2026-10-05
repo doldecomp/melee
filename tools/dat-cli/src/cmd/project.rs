@@ -315,6 +315,22 @@ mod tests {
         let union_die =
             project.canonical.lookup(&project.graph, "ftData_Item")[0];
         let union = project.canonical.of(union_die).unwrap();
+        let melee_dat::dwarf::TypeKind::Record {
+            union: true,
+            members,
+            ..
+        } = &project.graph.types[&union_die].kind
+        else {
+            panic!("ftData_Item must be a union");
+        };
+        let member_index = |name| {
+            members
+                .iter()
+                .position(|m| {
+                    m.name.map(|n| project.graph.str(n)) == Some(name)
+                })
+                .unwrap()
+        };
         assert_eq!(
             project.canonical.byte_size(&project.graph, union_die),
             Some(4)
@@ -348,7 +364,7 @@ mod tests {
                 assert!(walk.objects[&grapple].contains(&grapple_type));
                 assert_eq!(
                     walk.choices.get(&(items + 4 * 4, union)),
-                    Some(&0),
+                    Some(&member_index("samus_grapple")),
                     "Samus slot 4 must select the grapple accessory (loader={loader}, count={count:?})"
                 );
                 assert!(
@@ -362,7 +378,10 @@ mod tests {
                 // must shadow the index used for the grapple slot.
                 for index in 0..4 {
                     let at = items + index * 4;
-                    assert_eq!(walk.choices.get(&(at, union)), Some(&1));
+                    assert_eq!(
+                        walk.choices.get(&(at, union)),
+                        Some(&member_index("article"))
+                    );
                 }
             }
         }
