@@ -118,12 +118,12 @@ Not errors:
   relocated by `ftData` at runtime. They could be read as nested archives.
 - About 15,000 `void*` fields aren't followed. Use `DAT_TYPE` where the type
   is known.
-- `UnkStageDat.unk18` (map_head +0x18, count `unk1C`): entries are
-  `{ HSD_LightDesc*, word }`, where the word is flags in some stages (GrGr:
-  0 or 0xE0000000, as `ground.c` reads it through `LightOverrideEntry`) and
-  a relocated `HSD_LightAnim**` in others (GrNBa, GrPu, GrGd, GrIm: the
-  entries are the stage's `LightList`s). Left `void*`: a struct can't be
-  both, and no annotation chooses by relocation.
+- Ground's light override scans use `light_word_count` as a record count.
+  The archive stores a count of 32-bit words: all 71 stage tables end at
+  `light_word_count / 2` two-word records. The DAT annotation uses that
+  length; the matching runtime retains the original scan bound. Reading
+  past the table previously made neighbouring `LightList`s look like
+  alternate entries, but every actual entry's second word is flags.
 
 ## Tool
 
