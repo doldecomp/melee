@@ -2,6 +2,8 @@
 
 #include <Runtime/platform.h>
 
+#include <stdbool.h>
+
 #include "forward.h"
 #include "ftmarsspecialhi.h"
 #include "ftmarsspeciallw.h"
@@ -398,13 +400,14 @@ Fighter_DemoStrings ftMs_Init_DemoMotionFilenames = {
     "ftDemoViWaitMotionFileMars",
 };
 
-Fighter_CostumeStrings ftMs_Init_CostumeStrings[] = {
-    { ftMs_Init_803CF838, ftMs_Init_803CF844, ftMs_Init_803CF85C },
-    { ftMs_Init_803CF87C, ftMs_Init_803CF888, ftMs_Init_803CF8A0 },
-    { ftMs_Init_803CF8C0, ftMs_Init_803CF8CC, ftMs_Init_803CF8E4 },
-    { ftMs_Init_803CF904, ftMs_Init_803CF910, ftMs_Init_803CF928 },
-    { ftMs_Init_803CF948, ftMs_Init_803CF954, ftMs_Init_803CF96C },
-};
+Fighter_CostumeStrings
+    ftMs_Init_CostumeStrings[ARRAY_SIZE(ftMs_CostumeList)] = {
+        { ftMs_Init_803CF838, ftMs_Init_803CF844, ftMs_Init_803CF85C },
+        { ftMs_Init_803CF87C, ftMs_Init_803CF888, ftMs_Init_803CF8A0 },
+        { ftMs_Init_803CF8C0, ftMs_Init_803CF8CC, ftMs_Init_803CF8E4 },
+        { ftMs_Init_803CF904, ftMs_Init_803CF910, ftMs_Init_803CF928 },
+        { ftMs_Init_803CF948, ftMs_Init_803CF954, ftMs_Init_803CF96C },
+    };
 
 /// 80136258 00132E38
 void ftMs_Init_OnDeath(HSD_GObj* gobj)
@@ -419,28 +422,28 @@ void ftMs_Init_OnDeath(HSD_GObj* gobj)
 /// ftMs_Init_OnItemPickup
 void ftMs_Init_OnItemPickup(HSD_GObj* gobj, bool flag)
 {
-    Fighter_OnItemPickup(gobj, flag, 0, 1);
+    Fighter_OnItemPickup(gobj, flag, false, true);
 }
 
 /// 80136390 00132F70
 /// ftMs_Init_OnItemInvisible
 void ftMs_Init_OnItemInvisible(HSD_GObj* gobj)
 {
-    Fighter_OnItemInvisible(gobj, 0);
+    Fighter_OnItemInvisible(gobj, false);
 }
 
 /// 801363D8 00132FB8
 /// ftMs_Init_OnItemVisible
 void ftMs_Init_OnItemVisible(HSD_GObj* gobj)
 {
-    Fighter_OnItemVisible(gobj, 0);
+    Fighter_OnItemVisible(gobj, false);
 }
 
 /// 80136420 00133000
 /// ftMs_Init_OnItemDrop
 void ftMs_Init_OnItemDrop(HSD_GObj* gobj, bool flag)
 {
-    Fighter_OnItemDrop(gobj, flag, 0, 1);
+    Fighter_OnItemDrop(gobj, flag, false, true);
 }
 
 /// 80136474 00133054
@@ -483,10 +486,10 @@ void ftMs_SpecialN_801365A8(HSD_GObj* gobj)
     if (!fp->x2219_b0) {
         result = ftLib_GetKind(gobj);
         switch (result) {
-        case 18:
+        case Ft_Kind_Mars:
             efSync_Spawn(1266, gobj, fp->parts->joint);
             break;
-        case 26:
+        case Ft_Kind_Emblem:
             efSync_Spawn(1297, gobj, fp->parts->joint);
             break;
         }
@@ -494,7 +497,7 @@ void ftMs_SpecialN_801365A8(HSD_GObj* gobj)
     }
 
     Fighter_SetEffectHitlagCallbacks(fp);
-    fp->accessory4_cb = 0;
+    fp->accessory4_cb = NULL;
     return;
 }
 
@@ -506,10 +509,10 @@ void ftMs_SpecialN_8013666C(HSD_GObj* gobj)
     if (!fp->x2219_b0) {
         result = ftLib_GetKind(gobj);
         switch (result) {
-        case 18:
+        case Ft_Kind_Mars:
             efSync_Spawn(1267, gobj, fp->parts->joint);
             break;
-        case 26:
+        case Ft_Kind_Emblem:
             efSync_Spawn(1298, gobj, fp->parts->joint);
             break;
         }
@@ -517,7 +520,7 @@ void ftMs_SpecialN_8013666C(HSD_GObj* gobj)
     }
 
     Fighter_SetEffectHitlagCallbacks(fp);
-    fp->accessory4_cb = 0;
+    fp->accessory4_cb = NULL;
     return;
 }
 

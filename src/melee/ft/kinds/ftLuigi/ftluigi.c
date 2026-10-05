@@ -271,17 +271,18 @@ char* ftLg_Init_803D0AAC[] = {
     "ftDemoVi1101MotionFileLuigi",
 };
 
-Fighter_CostumeStrings ftLg_Init_CostumeStrings[] = {
-    { ftLg_Init_803D08C0, ftLg_Init_803D08CC, ftLg_Init_803D08E4 },
-    { ftLg_Init_803D0904, ftLg_Init_803D0910, ftLg_Init_803D092C },
-    { ftLg_Init_803D0950, ftLg_Init_803D095C, ftLg_Init_803D0978 },
-    { ftLg_Init_803D099C, ftLg_Init_803D09A8, ftLg_Init_803D09C4 },
-};
+Fighter_CostumeStrings
+    ftLg_Init_CostumeStrings[ARRAY_SIZE(ftLg_CostumeList)] = {
+        { ftLg_Init_803D08C0, ftLg_Init_803D08CC, ftLg_Init_803D08E4 },
+        { ftLg_Init_803D0904, ftLg_Init_803D0910, ftLg_Init_803D092C },
+        { ftLg_Init_803D0950, ftLg_Init_803D095C, ftLg_Init_803D0978 },
+        { ftLg_Init_803D099C, ftLg_Init_803D09A8, ftLg_Init_803D09C4 },
+    };
 
 void ftLg_Init_OnDeath(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    ftParts_80074A4C(gobj, 0, false);
+    ftParts_80074A4C(gobj, 0, 0);
     fp->u.lg.x2234 = 0;
 }
 
@@ -297,22 +298,22 @@ void ftLg_Init_OnLoad(HSD_GObj* gobj)
 
 void ftLg_Init_OnItemPickup(HSD_GObj* gobj, bool flag)
 {
-    Fighter_OnItemPickup(gobj, flag, 1, 1);
+    Fighter_OnItemPickup(gobj, flag, true, true);
 }
 
 void ftLg_Init_OnItemInvisible(HSD_GObj* gobj)
 {
-    Fighter_OnItemInvisible(gobj, 1);
+    Fighter_OnItemInvisible(gobj, true);
 }
 
 void ftLg_Init_OnItemVisible(HSD_GObj* gobj)
 {
-    Fighter_OnItemVisible(gobj, 1);
+    Fighter_OnItemVisible(gobj, true);
 }
 
 void ftLg_Init_OnItemDrop(HSD_GObj* gobj, bool flag)
 {
-    Fighter_OnItemDrop(gobj, flag, 1, 1);
+    Fighter_OnItemDrop(gobj, flag, true, true);
 }
 
 void ftLg_Init_LoadSpecialAttrs(HSD_GObj* gobj)

@@ -82,7 +82,9 @@ static inline bool unk_cond(int arg0, int temp_r23)
 
 static inline bool pokemon_item_kind_check(int x)
 {
-    if (x >= It_Kind_Pokemon_Start && x < It_Kind_Pokemon_End) {
+    if (x >= It_Kind_Section_Pokemon_Extended_Start &&
+        x < It_Kind_Section_Pokemon_Extended_End)
+    {
         return true;
     } else {
         return false;

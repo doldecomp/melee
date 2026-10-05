@@ -294,13 +294,14 @@ Fighter_DemoStrings ftGn_Init_DemoMotionFilenames = {
     "ftDemoViWaitMotionFileGanon",
 };
 
-Fighter_CostumeStrings ftGn_Init_CostumeStrings[] = {
-    { ftGn_Init_803D2CF0, ftGn_Init_803D2CFC, NULL },
-    { ftGn_Init_803D2D14, ftGn_Init_803D2D20, NULL },
-    { ftGn_Init_803D2D3C, ftGn_Init_803D2D48, NULL },
-    { ftGn_Init_803D2D64, ftGn_Init_803D2D70, NULL },
-    { ftGn_Init_803D2D8C, ftGn_Init_803D2D98, NULL },
-};
+Fighter_CostumeStrings
+    ftGn_Init_CostumeStrings[ARRAY_SIZE(ftGn_CostumeList)] = {
+        { ftGn_Init_803D2CF0, ftGn_Init_803D2CFC, NULL },
+        { ftGn_Init_803D2D14, ftGn_Init_803D2D20, NULL },
+        { ftGn_Init_803D2D3C, ftGn_Init_803D2D48, NULL },
+        { ftGn_Init_803D2D64, ftGn_Init_803D2D70, NULL },
+        { ftGn_Init_803D2D8C, ftGn_Init_803D2D98, NULL },
+    };
 
 void ftGn_Init_OnDeath(HSD_GObj* gobj)
 {

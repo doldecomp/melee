@@ -3,6 +3,7 @@
 #include <melee/ft/kinds/ftCommon/forward.h>
 
 #include <placeholder.h>
+#include <stdbool.h>
 
 #include "forward.h"
 #include "ftpurinspecialhi.h"
@@ -413,13 +414,14 @@ Fighter_DemoStrings ftPr_Init_DemoMotionFilenames = {
     "ftDemoViWaitMotionFilePurin",
 };
 
-Fighter_CostumeStrings ftPr_Init_CostumeStrings[] = {
-    { ftPr_Init_803D0308, ftPr_Init_803D0314, ftPr_Init_803D032C },
-    { ftPr_Init_803D034C, ftPr_Init_803D0358, ftPr_Init_803D0374 },
-    { ftPr_Init_803D0398, ftPr_Init_803D03A4, ftPr_Init_803D03C0 },
-    { ftPr_Init_803D03E4, ftPr_Init_803D03F0, ftPr_Init_803D040C },
-    { ftPr_Init_803D0430, ftPr_Init_803D043C, ftPr_Init_803D0458 },
-};
+Fighter_CostumeStrings
+    ftPr_Init_CostumeStrings[ARRAY_SIZE(ftPr_CostumeList)] = {
+        { ftPr_Init_803D0308, ftPr_Init_803D0314, ftPr_Init_803D032C },
+        { ftPr_Init_803D034C, ftPr_Init_803D0358, ftPr_Init_803D0374 },
+        { ftPr_Init_803D0398, ftPr_Init_803D03A4, ftPr_Init_803D03C0 },
+        { ftPr_Init_803D03E4, ftPr_Init_803D03F0, ftPr_Init_803D040C },
+        { ftPr_Init_803D0430, ftPr_Init_803D043C, ftPr_Init_803D0458 },
+    };
 
 char* ftPr_Init_803D05B4[] = {
     NULL,
@@ -599,7 +601,7 @@ void ftPr_Init_OnItemVisible(HSD_GObj* gobj)
 
 void ftPr_Init_OnItemDrop(HSD_GObj* gobj, bool bool1)
 {
-    Fighter_OnItemDrop(gobj, bool1, 0, 0);
+    Fighter_OnItemDrop(gobj, bool1, false, false);
 }
 
 void ftPr_Init_LoadSpecialAttrs(HSD_GObj* gobj)

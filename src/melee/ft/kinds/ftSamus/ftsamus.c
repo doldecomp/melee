@@ -249,23 +249,24 @@ Fighter_DemoStrings ftSs_Init_DemoMotionFilenames = {
     "ftDemoViWaitMotionFileSamus",
 };
 
-Fighter_CostumeStrings ftSs_Init_CostumeStrings[] = {
-    { ftSs_Init_803CE528, ftSs_Init_803CE534, NULL },
-    { ftSs_Init_803CE54C, ftSs_Init_803CE558, NULL },
-    { ftSs_Init_803CE574, ftSs_Init_803CE580, NULL },
-    { ftSs_Init_803CE59C, ftSs_Init_803CE5A8, NULL },
-    { ftSs_Init_803CE5C4, ftSs_Init_803CE5D0, NULL },
-};
+Fighter_CostumeStrings
+    ftSs_Init_CostumeStrings[ARRAY_SIZE(ftSs_CostumeList)] = {
+        { ftSs_Init_803CE528, ftSs_Init_803CE534, NULL },
+        { ftSs_Init_803CE54C, ftSs_Init_803CE558, NULL },
+        { ftSs_Init_803CE574, ftSs_Init_803CE580, NULL },
+        { ftSs_Init_803CE59C, ftSs_Init_803CE5A8, NULL },
+        { ftSs_Init_803CE5C4, ftSs_Init_803CE5D0, NULL },
+    };
 
 void ftSs_Init_OnDeath(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftParts_80074A4C(gobj, 0, 0);
-    fp->u.ss.x222C = 0;
+    fp->u.ss.x222C = NULL;
     fp->u.ss.x2230 = 0;
     fp->u.ss.x2238 = 0;
     fp->u.ss.x2244 = 0;
-    fp->u.ss.x223C = 0;
+    fp->u.ss.x223C = NULL;
     fp->u.ss.x2240 = 0;
 }
 
@@ -293,22 +294,22 @@ void ftSs_Init_80128428(HSD_GObj* gobj)
 
 void ftSs_Init_OnItemPickup(HSD_GObj* gobj, bool flag)
 {
-    Fighter_OnItemPickup(gobj, flag, 0, 0);
+    Fighter_OnItemPickup(gobj, flag, false, false);
 }
 
 void ftSs_Init_OnItemInvisible(HSD_GObj* gobj)
 {
-    Fighter_OnItemInvisible(gobj, 0);
+    Fighter_OnItemInvisible(gobj, false);
 }
 
 void ftSs_Init_OnItemVisible(HSD_GObj* gobj)
 {
-    Fighter_OnItemVisible(gobj, 0);
+    Fighter_OnItemVisible(gobj, false);
 }
 
 void ftSs_Init_OnItemDrop(HSD_GObj* gobj, bool bool1)
 {
-    Fighter_OnItemDrop(gobj, bool1, 0, 0);
+    Fighter_OnItemDrop(gobj, bool1, false, false);
 }
 
 void ftSs_Init_UnkMotionStates4(HSD_GObj* gobj)
@@ -317,7 +318,7 @@ void ftSs_Init_UnkMotionStates4(HSD_GObj* gobj)
     ftSs_DatAttrs* da = fp->dat_attrs;
     s32 samus_x2230 = fp->u.ss.x2230;
     if (samus_x2230 == da->x18) {
-        ftCo_800BFFD0(fp, 53, 0);
+        ftCo_800BFFD0(fp, 53, false);
     }
 }
 
@@ -364,10 +365,10 @@ void ftSs_Init_CreateThrowGrappleBeam(HSD_GObj* gobj, s32 motion_state,
     HSD_JObjSetScale((fighter_copy = fp)->x20A0_accessory, &scale);
 
     HSD_JObjAddAnimAll(fighter_copy->x20A0_accessory, beam->x8_anim_joint,
-                       beam->xC_matanim_joint, 0);
+                       beam->xC_matanim_joint, NULL);
     HSD_JObjAddAnimAll(fighter_copy->x20A0_accessory,
-                       beam->x4_anim_joints[motion_state - ftCo_MS_ThrowF], 0,
-                       0);
+                       beam->x4_anim_joints[motion_state - ftCo_MS_ThrowF],
+                       NULL, NULL);
     HSD_ForeachAnim(fighter_copy->x20A0_accessory, JOBJ_TYPE,
                     ALL_TYPE_MASK & ~TOBJ_MASK & ~MOBJ_MASK,
                     &ftSs_Init_80128770, AOBJ_ARG_AF, anim_speed);

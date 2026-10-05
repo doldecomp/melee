@@ -52,10 +52,10 @@
 /* 26B3C0 */ int it_8026B3C0(ItemKind kind);
 
 /// Store Item article pointer to table
-/* 26B3F8 */ void it_8026B3F8(Article* article, s32 kind);
+/* 26B3F8 */ void it_8026B3F8(Article* article, ItemKind kind);
 
 /// Store Stage Item article pointer to table
-/* 26B40C */ void it_8026B40C(Article* article, s32 kind);
+/* 26B40C */ void it_8026B40C(Article* article, ItemKind kind);
 
 /// Item Damage Math
 /* 26B424 */ float it_8026B424(int damage);

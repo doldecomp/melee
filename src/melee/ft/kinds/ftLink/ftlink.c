@@ -2,6 +2,8 @@
 
 #include <melee/ft/kinds/ftCommon/forward.h>
 
+#include <stdbool.h>
+
 #include "ftlinkspecialhi.h"
 #include "ftlinkspeciallw.h"
 #include "ftlinkspecialn.h"
@@ -283,13 +285,14 @@ Fighter_DemoStrings ftLk_Init_DemoMotionFilenames = {
     "ftDemoViWaitMotionFileLink",
 };
 
-Fighter_CostumeStrings ftLk_Init_CostumeStrings[] = {
-    { ftLk_Init_803C80D0, ftLk_Init_803C80DC, ftLk_Init_803C80F4 },
-    { ftLk_Init_803C8114, ftLk_Init_803C8120, ftLk_Init_803C8138 },
-    { ftLk_Init_803C8158, ftLk_Init_803C8164, ftLk_Init_803C817C },
-    { ftLk_Init_803C819C, ftLk_Init_803C81A8, ftLk_Init_803C81C0 },
-    { ftLk_Init_803C81E0, ftLk_Init_803C81EC, ftLk_Init_803C8204 },
-};
+Fighter_CostumeStrings
+    ftLk_Init_CostumeStrings[ARRAY_SIZE(ftLk_CostumeList)] = {
+        { ftLk_Init_803C80D0, ftLk_Init_803C80DC, ftLk_Init_803C80F4 },
+        { ftLk_Init_803C8114, ftLk_Init_803C8120, ftLk_Init_803C8138 },
+        { ftLk_Init_803C8158, ftLk_Init_803C8164, ftLk_Init_803C817C },
+        { ftLk_Init_803C819C, ftLk_Init_803C81A8, ftLk_Init_803C81C0 },
+        { ftLk_Init_803C81E0, ftLk_Init_803C81EC, ftLk_Init_803C8204 },
+    };
 
 /* 3C82EC */ UnkCostumeStruct ftLk_CostumeList[5] = { 0 };
 
@@ -313,11 +316,11 @@ void ftLk_Init_OnDeath(HSD_GObj* gobj)
 
     fp->u.lk.used_boomerang = false;
     fp->u.lk.boomerang_gobj = NULL;
-    fp->u.lk.xC = 0;
+    fp->u.lk.xC = NULL;
     fp->u.lk.arrow_gobj = NULL;
-    fp->u.lk.x14 = 0;
-    fp->u.lk.xC = 0;
-    fp->u.lk.x18 = 0;
+    fp->u.lk.x14 = NULL;
+    fp->u.lk.xC = NULL;
+    fp->u.lk.x18 = NULL;
 }
 
 void ftLk_Init_OnLoadForCLink(Fighter* fp)
@@ -359,7 +362,7 @@ void ftLk_800EAF58(HSD_GObj* gobj)
 void ftLk_Init_OnItemPickupExt(HSD_GObj* gobj, bool arg1)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if (itIsHeavy(fp->item_gobj) == 1) {
+    if (itIsHeavy(fp->item_gobj) == true) {
         ftParts_80074A4C(gobj, 1, 1);
     }
     ftParts_80074A4C(gobj, 2, 1);
@@ -368,34 +371,34 @@ void ftLk_Init_OnItemPickupExt(HSD_GObj* gobj, bool arg1)
 
 void ftLk_Init_OnItemInvisible(HSD_GObj* gobj)
 {
-    Fighter_OnItemInvisible(gobj, 1);
+    Fighter_OnItemInvisible(gobj, true);
 }
 
 void ftLk_Init_OnItemVisible(HSD_GObj* gobj)
 {
-    Fighter_OnItemVisible(gobj, 1);
+    Fighter_OnItemVisible(gobj, true);
 }
 
-void ftLk_Init_OnItemDropExt(HSD_GObj* gobj, bool arg1)
+void ftLk_Init_OnItemDropExt(HSD_GObj* gobj, bool bool1)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if (itIsHeavy(fp->item_gobj) == 1) {
+    if (itIsHeavy(fp->item_gobj) == true) {
         ftParts_80074A4C(gobj, 1, 0);
     }
     ftParts_80074A4C(gobj, 2, 0);
-    ftLk_Init_OnItemDrop(gobj, arg1);
+    ftLk_Init_OnItemDrop(gobj, bool1);
 }
 
 void ftLk_Init_OnItemPickup(HSD_GObj* gobj, bool flag)
 {
-    Fighter_OnItemPickup(gobj, flag, 1, 1);
+    Fighter_OnItemPickup(gobj, flag, true, true);
 }
 
 void ftLk_Init_OnItemDrop(HSD_GObj* gobj, bool bool1)
 {
     u8 _[8];
 
-    Fighter_OnItemDrop(gobj, bool1, 1, 1);
+    Fighter_OnItemDrop(gobj, bool1, true, true);
 }
 
 void ftLk_Init_LoadSpecialAttrs(HSD_GObj* gobj)

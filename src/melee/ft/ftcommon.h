@@ -91,7 +91,7 @@ ftCommon_SetSelfMovementFromGroundedMovement_NoFriction(Fighter_GObj*);
 /* 07E690 */ void ftCommon_8007E690(Fighter*, HSD_AnimJoint*);
 /* 07E6DC */ void ftCommon_8007E6DC(Fighter_GObj*, Fighter_GObj* gobj, s32);
 /* 07E79C */ void ftCommon_8007E79C(Fighter_GObj*, s32);
-/* 07E7E4 */ void ftCommon_8007E7E4(Fighter_GObj*, s32);
+/* 07E7E4 */ void ftCommon_8007E7E4(Fighter_GObj*, bool);
 /* 07E82C */ void ftCommon_8007E82C(Fighter_GObj*);
 /* 07E83C */ void ftCommon_8007E83C(Fighter_GObj*, s32, float div);
 /* 07E994 */ s32 ftGetParasolStatus(Fighter_GObj*);

@@ -293,7 +293,7 @@ HSD_Spline* spline DAT_IF((flags & JOBJ_SPLINE) != 0);
 HSD_ImageData* image_ptr DAT_COUNT(GXGetTexBufferSize(
     width, height, format, mipmap, maxLOD + 1));
 
-Article** x4 DAT_COUNT(It_Kind_Kuriboh) DAT_BIND(Article::kind, _index);
+Article** x4 DAT_COUNT(It_Kind_Section_Common_Extended_End) DAT_BIND(Article::kind, _index);
 ItCapsuleAttr capsule DAT_IF(Article::kind == It_Kind_Capsule);
 ```
 

@@ -304,11 +304,12 @@ Fighter_DemoStrings ftCa_Init_DemoMotionFilenames = {
     "ftDemoViWaitMotionFileCaptain",
 };
 
-Fighter_CostumeStrings ftCa_Init_CostumeStrings[] = {
-    { nr_dat, nr_joint, NULL }, { gy_dat, gy_joint, NULL },
-    { re_dat, re_joint, NULL }, { wh_dat, wh_joint, NULL },
-    { gr_dat, gr_joint, NULL }, { bu_dat, bu_joint, NULL },
-};
+Fighter_CostumeStrings
+    ftCa_Init_CostumeStrings[ARRAY_SIZE(ftCa_CostumeList)] = {
+        { nr_dat, nr_joint, NULL }, { gy_dat, gy_joint, NULL },
+        { re_dat, re_joint, NULL }, { wh_dat, wh_joint, NULL },
+        { gr_dat, gr_joint, NULL }, { bu_dat, bu_joint, NULL },
+    };
 
 void ftCa_Init_OnDeath(HSD_GObj* gobj)
 {

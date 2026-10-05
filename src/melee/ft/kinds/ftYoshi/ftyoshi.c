@@ -367,7 +367,7 @@ void ftYs_Init_8012B6E8(Fighter* fp, struct S_UNK_YOSHI1* unk_struct_arg)
         if (dobj_r3) {
             mobj_r3 = dobj_r3->mobj;
         } else {
-            mobj_r3 = 0;
+            mobj_r3 = NULL;
         }
 
         aobj_r24 = mobj_r3->aobj;
@@ -405,7 +405,7 @@ void ftYs_Init_8012B804(Fighter* fp, struct S_UNK_YOSHI1* unk_struct_arg,
             if (dobj_r3) {
                 mobj_r3 = dobj_r3->mobj;
             } else {
-                mobj_r3 = 0;
+                mobj_r3 = NULL;
             }
 
             mobj = mobj_r3;
@@ -439,7 +439,7 @@ void ftYs_Init_OnDeath(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftParts_80074A4C(gobj, 0, 0);
-    fp->u.ys.x2238 = 0;
+    fp->u.ys.x2238 = NULL;
 }
 
 void ftYs_Init_OnLoad(HSD_GObj* gobj)
@@ -487,22 +487,22 @@ float ftYs_Init_8012BAC0(Fighter* fp)
 
 void ftYs_Init_OnItemPickup(HSD_GObj* gobj, bool flag)
 {
-    Fighter_OnItemPickup(gobj, flag, 1, 1);
+    Fighter_OnItemPickup(gobj, flag, true, true);
 }
 
 void ftYs_Init_OnItemInvisible(HSD_GObj* gobj)
 {
-    Fighter_OnItemInvisible(gobj, 1);
+    Fighter_OnItemInvisible(gobj, true);
 }
 
 void ftYs_Init_OnItemVisible(HSD_GObj* gobj)
 {
-    Fighter_OnItemVisible(gobj, 1);
+    Fighter_OnItemVisible(gobj, true);
 }
 
 void ftYs_Init_OnItemDrop(HSD_GObj* gobj, bool bool1)
 {
-    Fighter_OnItemDrop(gobj, bool1, 1, 1);
+    Fighter_OnItemDrop(gobj, bool1, true, true);
 }
 
 void ftYs_Init_LoadSpecialAttrs(HSD_GObj* gobj)
@@ -553,12 +553,13 @@ Fighter_DemoStrings ftYs_Init_DemoMotionFilenames = {
     "ftDemoViWaitMotionFileYoshi",
 };
 
-Fighter_CostumeStrings ftYs_Init_CostumeStrings[] = {
-    { ftYs_Unk2_803CEAB0, ftYs_Unk2_803CEABC, ftYs_Unk2_803CEAD4 },
-    { ftYs_Unk2_803CEAF4, ftYs_Unk2_803CEB00, ftYs_Unk2_803CEB1C },
-    { ftYs_Unk2_803CEB40, ftYs_Unk2_803CEB4C, ftYs_Unk2_803CEB68 },
-    { ftYs_Unk2_803CEB8C, ftYs_Unk2_803CEB98, ftYs_Unk2_803CEBB4 },
-    { ftYs_Unk2_803CEBD8, ftYs_Unk2_803CEBE4, ftYs_Unk2_803CEC00 },
-    { ftYs_Unk2_803CEC24, ftYs_Unk2_803CEC30, ftYs_Unk2_803CEC4C },
-};
+Fighter_CostumeStrings
+    ftYs_Init_CostumeStrings[ARRAY_SIZE(ftYs_CostumeList)] = {
+        { ftYs_Unk2_803CEAB0, ftYs_Unk2_803CEABC, ftYs_Unk2_803CEAD4 },
+        { ftYs_Unk2_803CEAF4, ftYs_Unk2_803CEB00, ftYs_Unk2_803CEB1C },
+        { ftYs_Unk2_803CEB40, ftYs_Unk2_803CEB4C, ftYs_Unk2_803CEB68 },
+        { ftYs_Unk2_803CEB8C, ftYs_Unk2_803CEB98, ftYs_Unk2_803CEBB4 },
+        { ftYs_Unk2_803CEBD8, ftYs_Unk2_803CEBE4, ftYs_Unk2_803CEC00 },
+        { ftYs_Unk2_803CEC24, ftYs_Unk2_803CEC30, ftYs_Unk2_803CEC4C },
+    };
 /* 45A000 */ UnkCostumeStruct ftYs_CostumeList[6];

@@ -194,18 +194,18 @@ void it_80275E98(Item_GObj* item_gobj, SpawnItem* spawn)
     kind = item1->kind;
     if (kind < It_Kind_Common_End) {
         coll->x34_flags.b1234 = 2;
-    } else if (kind < It_Kind_Item_End) {
+    } else if (kind < It_Kind_Item_Related_End) {
         coll->x34_flags.b1234 = 4;
     } else if (kind < It_Kind_Monster_End) {
         coll->x34_flags.b1234 = 3;
-    } else if (kind <
-               It_Kind_Character_Start) { // If item is It_Kind_Octarock_Stone
+    } else if (kind < It_Kind_Monster_Related_End) { // If item is
+                                                     // It_Kind_Octarock_Stone
         coll->x34_flags.b1234 = 4;
     } else if (kind < It_Kind_Character_End) {
         coll->x34_flags.b1234 = 5;
     } else if (kind < It_Kind_Misc_End) {
         coll->x34_flags.b1234 = 5;
-    } else if (kind < It_PKind_Start) { // If item is It_Kind_Unk4
+    } else if (kind < It_PKind_Misc_End) { // If item is It_PKind_Random
         coll->x34_flags.b1234 = 5;
     } else if (kind < It_PKind_Terminate) {
         coll->x34_flags.b1234 = 5;
@@ -213,7 +213,7 @@ void it_80275E98(Item_GObj* item_gobj, SpawnItem* spawn)
         coll->x34_flags.b1234 = 4;
     } else if (kind < It_Kind_Stage_End) {
         coll->x34_flags.b1234 = 3;
-    } else if (kind < It_Kind_Max_Check) {
+    } else if (kind < It_Kind_Stage_Related_End) {
         coll->x34_flags.b1234 = 4;
     }
 

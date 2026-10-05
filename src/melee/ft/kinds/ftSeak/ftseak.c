@@ -308,20 +308,21 @@ Fighter_DemoStrings ftSk_Init_DemoMotionFilenames = {
     "ftDemoViWaitMotionFileSeak",
 };
 
-Fighter_CostumeStrings ftSk_Init_CostumeStrings[] = {
-    { ftSk_Init_803CC378, ftSk_Init_803CC384, ftSk_Init_803CC39C },
-    { ftSk_Init_803CC3BC, ftSk_Init_803CC3C8, ftSk_Init_803CC3E0 },
-    { ftSk_Init_803CC400, ftSk_Init_803CC40C, ftSk_Init_803CC424 },
-    { ftSk_Init_803CC444, ftSk_Init_803CC450, ftSk_Init_803CC468 },
-    { ftSk_Init_803CC488, ftSk_Init_803CC494, ftSk_Init_803CC4AC },
-};
+Fighter_CostumeStrings
+    ftSk_Init_CostumeStrings[ARRAY_SIZE(ftSk_CostumeList)] = {
+        { ftSk_Init_803CC378, ftSk_Init_803CC384, ftSk_Init_803CC39C },
+        { ftSk_Init_803CC3BC, ftSk_Init_803CC3C8, ftSk_Init_803CC3E0 },
+        { ftSk_Init_803CC400, ftSk_Init_803CC40C, ftSk_Init_803CC424 },
+        { ftSk_Init_803CC444, ftSk_Init_803CC450, ftSk_Init_803CC468 },
+        { ftSk_Init_803CC488, ftSk_Init_803CC494, ftSk_Init_803CC4AC },
+    };
 
 void ftSk_Init_OnDeath(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     fp->u.sk.x0 = 0;
-    fp->u.sk.x4 = 0;
-    fp->u.sk.x8 = 0;
+    fp->u.sk.x4 = NULL;
+    fp->u.sk.x8 = NULL;
     ftParts_80074A4C(gobj, 0, 0);
     ftParts_80074A4C(gobj, 1, -1);
 }
@@ -351,28 +352,28 @@ void ftSk_Init_UnkMotionStates4(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (fp->u.sk.x0 == 6) {
-        ftCo_800BFFD0(fp, 86, 0);
+        ftCo_800BFFD0(fp, 86, false);
     }
 }
 
 void ftSk_Init_OnItemPickup(HSD_GObj* gobj, bool flag)
 {
-    Fighter_OnItemPickup(gobj, flag, 1, 1);
+    Fighter_OnItemPickup(gobj, flag, true, true);
 }
 
 void ftSk_Init_OnItemInvisible(HSD_GObj* gobj)
 {
-    Fighter_OnItemInvisible(gobj, 1);
+    Fighter_OnItemInvisible(gobj, true);
 }
 
 void ftSk_Init_OnItemVisible(HSD_GObj* gobj)
 {
-    Fighter_OnItemVisible(gobj, 1);
+    Fighter_OnItemVisible(gobj, true);
 }
 
 void ftSk_Init_OnItemDrop(HSD_GObj* gobj, bool flag)
 {
-    Fighter_OnItemDrop(gobj, flag, 1, 1);
+    Fighter_OnItemDrop(gobj, flag, true, true);
 }
 
 void ftSk_Init_LoadSpecialAttrs(HSD_GObj* gobj)

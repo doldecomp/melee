@@ -329,31 +329,32 @@ Fighter_DemoStrings ftPp_Init_DemoMotionFilenames = {
     "ftDemoViWaitMotionFilePopo",
 };
 
-Fighter_CostumeStrings ftPp_Init_CostumeStrings[] = {
-    { ftPp_Init_803CD628, ftPp_Init_803CD634, ftPp_Init_803CD64C },
-    { ftPp_Init_803CD66C, ftPp_Init_803CD678, ftPp_Init_803CD690 },
-    { ftPp_Init_803CD6B0, ftPp_Init_803CD6BC, ftPp_Init_803CD6D4 },
-    { ftPp_Init_803CD6F4, ftPp_Init_803CD700, ftPp_Init_803CD718 },
-};
+Fighter_CostumeStrings
+    ftPp_Init_CostumeStrings[ARRAY_SIZE(ftPp_CostumeList)] = {
+        { ftPp_Init_803CD628, ftPp_Init_803CD634, ftPp_Init_803CD64C },
+        { ftPp_Init_803CD66C, ftPp_Init_803CD678, ftPp_Init_803CD690 },
+        { ftPp_Init_803CD6B0, ftPp_Init_803CD6BC, ftPp_Init_803CD6D4 },
+        { ftPp_Init_803CD6F4, ftPp_Init_803CD700, ftPp_Init_803CD718 },
+    };
 
 void ftPp_Init_OnItemPickup(HSD_GObj* gobj, bool flag)
 {
-    Fighter_OnItemPickup(gobj, flag, 1, 1);
+    Fighter_OnItemPickup(gobj, flag, true, true);
 }
 
 void ftPp_Init_OnItemInvisible(HSD_GObj* gobj)
 {
-    Fighter_OnItemInvisible(gobj, 1);
+    Fighter_OnItemInvisible(gobj, true);
 }
 
 void ftPp_Init_OnItemVisible(HSD_GObj* gobj)
 {
-    Fighter_OnItemVisible(gobj, 1);
+    Fighter_OnItemVisible(gobj, true);
 }
 
 void ftPp_Init_OnItemDrop(HSD_GObj* gobj, bool flag)
 {
-    Fighter_OnItemDrop(gobj, flag, 1, 1);
+    Fighter_OnItemDrop(gobj, flag, true, true);
 }
 
 void ftPp_Init_OnLoadForNana(Fighter* fp)
@@ -386,9 +387,9 @@ void ftPp_Init_OnDeath(HSD_GObj* gobj)
     ftParts_80074A4C(gobj, 0U, 0);
     ftParts_80074A4C(gobj, 1U, 0);
     fp->u.nn.x2234 = 0;
-    fp->u.nn.x222C = 0;
+    fp->u.nn.x222C = NULL;
     fp->u.nn.x2230_b0 = false;
-    fp->u.nn.x2238 = 0;
+    fp->u.nn.x2238 = NULL;
     fp->u.nn.x224C = 0;
     fp->u.nn.x2250 = 0.0f;
 }
@@ -410,12 +411,12 @@ void ftPp_Init_LoadSpecialAttrs(HSD_GObj* gobj)
 
 void ftPp_Init_OnKnockbackEnter(HSD_GObj* gobj)
 {
-    Fighter_OnKnockbackEnter(gobj, true);
+    Fighter_OnKnockbackEnter(gobj, 1);
 }
 
 void ftPp_Init_OnKnockbackExit(HSD_GObj* gobj)
 {
-    Fighter_OnKnockbackExit(gobj, true);
+    Fighter_OnKnockbackExit(gobj, 1);
 }
 
 void ftPp_Init_8011F16C(HSD_GObj* gobj, Item_GObj* item_gobj)
@@ -426,7 +427,7 @@ void ftPp_Init_8011F16C(HSD_GObj* gobj, Item_GObj* item_gobj)
         return;
     }
 
-    fp->u.nn.x222C = 0;
+    fp->u.nn.x222C = NULL;
     fp->death2_cb = NULL;
     fp->take_dmg_cb = NULL;
 }
@@ -435,7 +436,7 @@ static void ftPp_Init_8011F190(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    if (fp->u.nn.x222C == 0) {
+    if (fp->u.nn.x222C == NULL) {
         return;
     }
 

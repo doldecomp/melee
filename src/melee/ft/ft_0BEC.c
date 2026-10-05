@@ -24,29 +24,6 @@ static inline void setupInitialState(Fighter* fp)
     fp->x1984_heldItemSpec = NULL;
 }
 
-void ftCo_800BECB0(Fighter_GObj* gobj)
-{
-    int unused[2];
-    Fighter* fp = GET_FIGHTER(gobj);
-    Fighter_ChangeMotionState(gobj, ftCo_MS_DeadDown, Ft_MF_None, 0.f, 1.f,
-                              0.f, NULL);
-    setupInitialState(fp);
-    switch (fp->kind) {
-    case Ft_Kind_Fox: {
-        ftFox_DatAttrs* da = fp->dat_attrs;
-        fp->item_gobj =
-            it_802AE994(gobj, ftParts_GetBoneIndex(fp, FtPart_RThumbNb),
-                        da->x20_FOX_BLASTER_GUN_ITKIND);
-        it_8026BAE8(fp->item_gobj,
-                    fp->x34_scale.y * fp->co_attrs.model_scaling);
-    }
-    default:
-        break;
-    }
-}
-
-void ftCo_800BED84(Fighter_GObj* gobj) {}
-
 static inline void FoxHelper(Fighter_GObj* gobj, Fighter* fp)
 {
     ftFox_DatAttrs* da = fp->dat_attrs;
@@ -72,10 +49,36 @@ static inline void DocHelper(Fighter_GObj* gobj, Fighter* fp)
                 0.71428f * (fp->x34_scale.y * co->model_scaling));
 }
 
+/// @todo: Seems like more code could be reused, but registers won't line up
+/// nicely
+
+void ftCo_800BECB0(Fighter_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    PAD_STACK(4);
+    Fighter_ChangeMotionState(gobj, ftCo_MS_DeadDown, Ft_MF_None, 0.f, 1.f,
+                              0.f, NULL);
+    setupInitialState(fp);
+    switch (fp->kind) {
+    case Ft_Kind_Fox: {
+        ftFox_DatAttrs* da = fp->dat_attrs;
+        fp->item_gobj =
+            it_802AE994(gobj, ftParts_GetBoneIndex(fp, FtPart_RThumbNb),
+                        da->x20_FOX_BLASTER_GUN_ITKIND);
+        it_8026BAE8(fp->item_gobj,
+                    fp->x34_scale.y * fp->co_attrs.model_scaling);
+    }
+    default:
+        break;
+    }
+}
+
+void ftCo_800BED84(Fighter_GObj* gobj) {}
+
 void ftCo_800BED88(Fighter_GObj* gobj)
 {
-    int unused[2];
-    Fighter* fp = gobj->user_data;
+    Fighter* fp = GET_FIGHTER(gobj);
+    PAD_STACK(4);
     Fighter_ChangeMotionState(gobj, ftCo_MS_DeadRight, Ft_MF_None, 0.f, 1.f,
                               0.f, NULL);
     setupInitialState(fp);

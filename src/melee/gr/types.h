@@ -89,8 +89,13 @@ struct StageInfo {
     void* x694[4];
     void* x6A4;
     /* +6A8 */ struct GroundItemData {
-        s32 unk0;
-        Article* unk4 DAT_BIND(Article::kind, unk0);
+        ItemKind gr_itkind;
+        Article* article_data DAT_BIND(Article::kind, gr_itkind);
+        // This data is stored in it_804A0F60, gets loaded in by calls to
+        // it_8026B40C in Ground_801C0800, which is different than the other
+        // item data (see it_804D6D20_t) With that in mind, should this instead
+        // be DAT_BIND(Article::kind, It_Kind_Section_Stage_Extended_Start +
+        // gr_itkind) ?
     }** itemdata;
     /* +6AC */ MapCollData* coll_data;
     /* +6B0 */ GroundParam* param;
@@ -159,7 +164,7 @@ struct GrJoint { ///< @todo rename fields
 struct StageData {
     GrKind grkind;
     StageCallbacks* callbacks;
-    char* data1;
+    char* data1; // filename?
     Event on_init;
     void (*on_demo_init)(int);
     Event on_load;
@@ -2060,7 +2065,7 @@ ASSERT_SIZE(struct UnkStageDat_x8_t, 0x34);
 
 struct UnkArchiveStruct {
     HSD_Archive* unk0;
-    UnkStageDat* unk4;
+    UnkStageDat* unk4; // symbols?
     u32 unk8;
 };
 

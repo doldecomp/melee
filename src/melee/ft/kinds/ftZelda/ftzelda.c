@@ -241,20 +241,21 @@ Fighter_DemoStrings ftZd_Init_DemoMotionFilenames = {
     "ftDemoViWaitMotionFileZelda",
 };
 
-Fighter_CostumeStrings ftZd_Init_CostumeStrings[] = {
-    { ftZd_Init_803CFCB0, ftZd_Init_803CFCBC, ftZd_Init_803CFCD4 },
-    { ftZd_Init_803CFCF4, ftZd_Init_803CFD00, ftZd_Init_803CFD1C },
-    { ftZd_Init_803CFD40, ftZd_Init_803CFD4C, ftZd_Init_803CFD68 },
-    { ftZd_Init_803CFD8C, ftZd_Init_803CFD98, ftZd_Init_803CFDB4 },
-    { ftZd_Init_803CFDD8, ftZd_Init_803CFDE4, ftZd_Init_803CFE00 },
-};
+Fighter_CostumeStrings
+    ftZd_Init_CostumeStrings[ARRAY_SIZE(ftZd_CostumeList)] = {
+        { ftZd_Init_803CFCB0, ftZd_Init_803CFCBC, ftZd_Init_803CFCD4 },
+        { ftZd_Init_803CFCF4, ftZd_Init_803CFD00, ftZd_Init_803CFD1C },
+        { ftZd_Init_803CFD40, ftZd_Init_803CFD4C, ftZd_Init_803CFD68 },
+        { ftZd_Init_803CFD8C, ftZd_Init_803CFD98, ftZd_Init_803CFDB4 },
+        { ftZd_Init_803CFDD8, ftZd_Init_803CFDE4, ftZd_Init_803CFE00 },
+    };
 
 void ftZd_Init_OnDeath(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftParts_80074A4C(gobj, 0, 0);
     ftParts_80074A4C(gobj, 1, 0);
-    fp->u.zd.x222C = 0;
+    fp->u.zd.x222C = NULL;
 }
 
 void ftZd_Init_OnLoad(HSD_GObj* gobj)
@@ -275,22 +276,22 @@ void ftZd_Init_801393AC(HSD_GObj* gobj)
 
 void ftZd_Init_OnItemPickup(HSD_GObj* gobj, bool flag)
 {
-    Fighter_OnItemPickup(gobj, flag, 1, 1);
+    Fighter_OnItemPickup(gobj, flag, true, true);
 }
 
 void ftZd_Init_OnItemInvisible(HSD_GObj* gobj)
 {
-    Fighter_OnItemInvisible(gobj, 1);
+    Fighter_OnItemInvisible(gobj, true);
 }
 
 void ftZd_Init_OnItemVisible(HSD_GObj* gobj)
 {
-    Fighter_OnItemVisible(gobj, 1);
+    Fighter_OnItemVisible(gobj, true);
 }
 
 void ftZd_Init_OnItemDrop(HSD_GObj* gobj, bool flag)
 {
-    Fighter_OnItemDrop(gobj, flag, 1, 1);
+    Fighter_OnItemDrop(gobj, flag, true, true);
 }
 
 void ftZd_Init_LoadSpecialAttrs(HSD_GObj* gobj)

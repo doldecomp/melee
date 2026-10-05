@@ -480,6 +480,8 @@ typedef enum CpuKind {
 } CpuKind;
 
 /// Color animation ID.
+/// @todo: populate enum and replace constants when used (like in calls to
+/// ftCo_800BFFD0)
 typedef enum FtColAnim {
     /// IDs starting here index the separate spycloak list after subtraction.
     /* 0x7B */ FtColAnim_SpycloakStart = 0x7B,

@@ -81,7 +81,7 @@ struct gm_evinit {
     /* 0x08 */ u32 time_limit;
     /* 0x0C */ u8 padC[4];
     /* 0x10 */ u64 x10;
-    /* 0x18 */ s32 x18;
+    /* 0x18 */ s32 x18; // ItemKind?
     /* 0x1C */ f32 x1C;
     /* 0x20 */ f32 game_speed;
     /* 0x24 */ f32 unk24;
@@ -415,7 +415,7 @@ void onEnterVs(GameModeState* arg0)
     md->rules.x14 = 0;
     md->rules.x18 = 0;
     md->rules.x20 = levels[level]->evinit->x10;
-    md->rules.x28 = levels[level]->evinit->x18;
+    md->rules.it_kind = levels[level]->evinit->x18;
     md->rules.x30 = levels[level]->evinit->x1C;
     md->rules.game_speed = levels[level]->evinit->game_speed;
     md->rules.on_match_start = fn_801BBFE8;
@@ -2358,12 +2358,12 @@ u8 gm_801BEBF8(u8 arg0)
     return entry->player_init[0]->c_kind;
 }
 
-UNK_T gm_801BEC54(void)
+ItemKind* gm_801BEC54(void)
 {
     struct gm_804D6900_t* temp_r3;
     temp_r3 = (*gm_804D6900)[gmMainLib_804D3EE0->vs.unk_530.unk_535];
     if (temp_r3 == NULL) {
         return NULL;
     }
-    return temp_r3->x4;
+    return (ItemKind*) temp_r3->x4;
 }

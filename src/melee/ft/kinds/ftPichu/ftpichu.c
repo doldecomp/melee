@@ -4,6 +4,8 @@
 
 #include <melee/ft/kinds/ftPikachu/forward.h>
 
+#include <stdbool.h>
+
 #include "types.h"
 #include <melee/ft/fighter.h>
 #include <melee/ft/ftcamera.h>
@@ -330,12 +332,13 @@ Fighter_DemoStrings ftPc_Init_DemoMotionFilenames = {
     "ftDemoViWaitMotionFilePichu",
 };
 
-Fighter_CostumeStrings ftPc_Init_CostumeStrings[] = {
-    { ftPc_Init_803D2200, ftPc_Init_803D220C, ftPc_Init_803D2224 },
-    { ftPc_Init_803D2244, ftPc_Init_803D2250, ftPc_Init_803D226C },
-    { ftPc_Init_803D2290, ftPc_Init_803D229C, ftPc_Init_803D22B8 },
-    { ftPc_Init_803D22DC, ftPc_Init_803D22E8, ftPc_Init_803D2304 },
-};
+Fighter_CostumeStrings
+    ftPc_Init_CostumeStrings[ARRAY_SIZE(ftPc_CostumeList)] = {
+        { ftPc_Init_803D2200, ftPc_Init_803D220C, ftPc_Init_803D2224 },
+        { ftPc_Init_803D2244, ftPc_Init_803D2250, ftPc_Init_803D226C },
+        { ftPc_Init_803D2290, ftPc_Init_803D229C, ftPc_Init_803D22B8 },
+        { ftPc_Init_803D22DC, ftPc_Init_803D22E8, ftPc_Init_803D2304 },
+    };
 
 void ftPc_Init_OnLoad(HSD_GObj* gobj)
 {
@@ -387,22 +390,22 @@ void ftPc_Init_OnDeath(HSD_GObj* gobj)
 
 void ftPc_Init_OnItemPickup(HSD_GObj* gobj, bool flag)
 {
-    Fighter_OnItemPickup(gobj, flag, 0, 0);
+    Fighter_OnItemPickup(gobj, flag, false, false);
 }
 
 void ftPc_Init_OnItemInvisible(HSD_GObj* gobj)
 {
-    Fighter_OnItemInvisible(gobj, 0);
+    Fighter_OnItemInvisible(gobj, false);
 }
 
 void ftPc_Init_OnItemVisible(HSD_GObj* gobj)
 {
-    Fighter_OnItemVisible(gobj, 0);
+    Fighter_OnItemVisible(gobj, false);
 }
 
 void ftPc_Init_OnItemDrop(HSD_GObj* gobj, bool bool1)
 {
-    Fighter_OnItemDrop(gobj, bool1, 0, 0);
+    Fighter_OnItemDrop(gobj, bool1, false, false);
 }
 
 void ftPc_Init_LoadSpecialAttrs(HSD_GObj* gobj)

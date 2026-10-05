@@ -156,6 +156,7 @@ HSD_GObjProc* HSD_GObj_SetupProc(HSD_GObj* gobj, HSD_GObjEvent func, u8 pri)
     gproc = HSD_ObjAlloc(&gobjproc_alloc_data);
     assertProc(gproc);
     HSD_ASSERT(216, pri <= HSD_GObjLibInitData.gproc_pri_max);
+    /// @todo: should the priorities be an enum that illustrates what they are?
     gproc->s_link = pri;
     gproc->flags_1 = gproc->flags_2 = 0;
     gproc->flags_3 = 3;

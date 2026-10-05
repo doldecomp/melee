@@ -572,13 +572,14 @@ Fighter_DemoStrings ftDk_Init_DemoMotionFilenames = {
     "ftDemoViWaitMotionFileDonkey",
 };
 
-Fighter_CostumeStrings ftDk_Init_CostumeStrings[] = {
-    { ftDk_Init_803CBE14, ftDk_Init_803CBE20, ftDk_Init_803CBE38 },
-    { ftDk_Init_803CBE58, ftDk_Init_803CBE64, ftDk_Init_803CBE80 },
-    { ftDk_Init_803CBEA4, ftDk_Init_803CBEB0, ftDk_Init_803CBECC },
-    { ftDk_Init_803CBEF0, ftDk_Init_803CBEFC, ftDk_Init_803CBF18 },
-    { ftDk_Init_803CBF3C, ftDk_Init_803CBF48, ftDk_Init_803CBF64 },
-};
+Fighter_CostumeStrings
+    ftDk_Init_CostumeStrings[ARRAY_SIZE(ftDk_CostumeList)] = {
+        { ftDk_Init_803CBE14, ftDk_Init_803CBE20, ftDk_Init_803CBE38 },
+        { ftDk_Init_803CBE58, ftDk_Init_803CBE64, ftDk_Init_803CBE80 },
+        { ftDk_Init_803CBEA4, ftDk_Init_803CBEB0, ftDk_Init_803CBECC },
+        { ftDk_Init_803CBEF0, ftDk_Init_803CBEFC, ftDk_Init_803CBF18 },
+        { ftDk_Init_803CBF3C, ftDk_Init_803CBF48, ftDk_Init_803CBF64 },
+    };
 
 void ftDk_Init_OnDeath(HSD_GObj* gobj)
 {
@@ -595,7 +596,7 @@ void ftDk_Init_8010D774(HSD_GObj* gobj)
 
 void ftDk_Init_OnItemPickup(HSD_GObj* gobj, bool flag)
 {
-    Fighter_OnItemPickup(gobj, flag, 1, 1);
+    Fighter_OnItemPickup(gobj, flag, true, true);
 }
 
 void ftDk_Init_OnItemInvisible(HSD_GObj* gobj)
@@ -618,7 +619,7 @@ void ftDk_Init_UnkMotionStates4(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     ftDonkeyAttributes* da = fp->dat_attrs;
     if (fp->u.dk.x222C == da->SpecialN.x2C_MAX_ARM_SWINGS) {
-        ftCo_800BFFD0(fp, 57, 0);
+        ftCo_800BFFD0(fp, 57, false);
     }
 }
 

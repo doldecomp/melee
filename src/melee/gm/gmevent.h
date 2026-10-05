@@ -2,6 +2,7 @@
 #define GALE01_1BA8FC
 
 #include <melee/ft/forward.h>
+#include <melee/it/forward.h>
 
 #include <melee/gm/types.h>
 
@@ -16,7 +17,7 @@
 /* 1BEBA8 */ u8 gm_801BEBA8(u8);
 /* 1BEBC0 */ u8 gm_801BEBC0(u8);
 /* 1BEBF8 */ u8 gm_801BEBF8(u8 arg0);
-/* 1BEC54 */ void* gm_801BEC54(void);
+/* 1BEC54 */ ItemKind* gm_801BEC54(void);
 /* 1BEFA4 */ void gm_801BEFA4(int ckind);
 /* 1BEFB0 */ CharacterKind gm_801BEFB0(void);
 /* 1BEFC0 */ void gm_801BEFC0(int);

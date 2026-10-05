@@ -1,5 +1,7 @@
 #include "ft_0CD1.h"
 
+#include <stdbool.h>
+
 #include "fighter.h"
 #include "forward.h"
 #include "ft_081B.h"
@@ -56,7 +58,7 @@ void ftCo_800CD278(Fighter_GObj* gobj)
 
 void ftCo_800CD2C4(Fighter_GObj* gobj, void (*cb)(Fighter_GObj*))
 {
-    if (ft_800827A0(gobj) == 0) {
+    if (ft_800827A0(gobj) == false) {
         cb(gobj);
         ftCo_Fall_Enter(gobj);
     }
@@ -66,6 +68,6 @@ void ft_800CD31C(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (fp->item_gobj != NULL) {
-        ftCommon_8007E7E4(gobj, 1);
+        ftCommon_8007E7E4(gobj, true);
     }
 }

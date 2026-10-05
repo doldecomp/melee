@@ -1040,11 +1040,11 @@ void ftCommon_8007E79C(HSD_GObj* gobj, s32 arg1)
     }
 }
 
-void ftCommon_8007E7E4(HSD_GObj* gobj, s32 arg1)
+void ftCommon_8007E7E4(HSD_GObj* gobj, bool flag)
 {
     Fighter* fp = gobj->user_data;
     if (ftData_OnItemPickup[fp->kind] != NULL) {
-        ftData_OnItemPickup[fp->kind](gobj, arg1);
+        ftData_OnItemPickup[fp->kind](gobj, flag);
     }
 }
 

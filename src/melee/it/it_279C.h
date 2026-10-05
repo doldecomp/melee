@@ -22,8 +22,8 @@
 /* 27A160 */ void it_8027A160(HSD_JObj*, Item*);
 /* 27A344 */ void it_8027A344(Item_GObj*);
 /* 27A364 */ s32 it_8027A364(Item*);
-/* 27A4D4 */ s32 it_8027A4D4(Item*);
-/* 27A780 */ s32 it_8027A780(Item*, void*);
+/* 27A4D4 */ PokemonKind it_8027A4D4(Item*);
+/* 27A780 */ PokemonKind it_8027A780(Item*, const ItemKind*);
 /* 27A9B8 */ s32 it_8027A9B8(Item*);
 /* 27AAA0 */ void it_8027AAA0(Item_GObj*, Item*, s32);
 /* 27AB64 */ bool it_8027AB64(Item_GObj*);
@@ -40,7 +40,9 @@
 /* 27B4A4 */ void it_8027B4A4(Fighter_GObj*, Item_GObj*);
 /* 27B508 */ void it_8027B508(Item_GObj*, Item_GObj*);
 /* 27B564 */ void it_8027B564(Item_GObj*);
-/* 3F2310 */ extern struct sdata_ItemGXLink it_803F2310[47];
-/* 3F23CC */ extern struct ItemLogicTable it_803F23CC[47];
+/* 3F2310 */ extern struct sdata_ItemGXLink
+    it_803F2310[It_Kind_Section_Pokemon_Extended_Size];
+/* 3F23CC */ extern struct ItemLogicTable
+    it_803F23CC[It_Kind_Section_Pokemon_Extended_Size];
 
 #endif

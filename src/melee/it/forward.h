@@ -92,6 +92,7 @@ typedef enum Item_StateChangeFlags {
  * These are used in #it_8026C258 to determine whether Samus' Homing Missile
  * should lock on its target.
  */
+/// Related to it_80275E98?
 typedef enum Item_UnkKinds {
     ITEM_UNK_MATO = 4, ///< Item type: Target (Mato)
     ITEM_UNK_LOCKON,
@@ -100,20 +101,18 @@ typedef enum Item_UnkKinds {
 } Item_UnkKinds;
 
 /// Combine with Item_UnkKinds?
+/// See Item_802674AC
 typedef enum Item_HoldKinds {
     ITEM_HOLD_0,  // Common items, besides It_Kind_Foods
     ITEM_HOLD_1,  // Item-related items
     ITEM_HOLD_2,  // It_Kind_Foods
-    ITEM_HOLD_3,  // It_PKind_Random
-    ITEM_HOLD_4,  // Monsters 2 and Stage-specific items, besides
-                  // It_Kind_Arwing_Laser, It_Kind_GreatFox_Laser, and
-                  // It_Kind_Kyasarin_Egg
-    ITEM_HOLD_5,  // (Stage-specific projectile items) It_Kind_Arwing_Laser,
-                  // It_Kind_GreatFox_Laser, and It_Kind_Kyasarin_Egg
-    ITEM_HOLD_6,  // Monster items, besides It_Kind_Octarock_Stone
-    ITEM_HOLD_7,  // It_Kind_Octarock_Stone
-    ITEM_HOLD_8,  // Character-related items, besides It_Kind_Unk4 and
-                  // It_Kind_Coin
+    ITEM_HOLD_3,  // Pokemon misc items (aka It_PKind_Random)
+    ITEM_HOLD_4,  // Monsters 2 and Stage-specific items
+    ITEM_HOLD_5,  // Stage-specific-related items (aka It_Kind_Arwing_Laser,
+                  // It_Kind_GreatFox_Laser, and It_Kind_Kyasarin_Egg)
+    ITEM_HOLD_6,  // Monster items
+    ITEM_HOLD_7,  // Monster-related items (aka It_Kind_Octarock_Stone)
+    ITEM_HOLD_8,  // Character-related items
     ITEM_HOLD_9,  // Pokemon items
     ITEM_HOLD_10, // Pokemon-related items
     ITEM_HOLD_11, // It_Kind_Coin
@@ -366,8 +365,9 @@ typedef enum ItemKind {
 
     /// @}
 
-    /// @name MONSTERS 2 (is Adventure Mode enemies (found in dbitem) a better
-    /// name?)
+    /// @name MONSTERS 2
+    /// Stage-specific monsters and their related items (data stored in stage
+    /// files) (is Adventure Mode enemies (found in dbitem) a better  name?)
     /// @{
     It_Kind_Old_Kuri, // Old Goomba (old-Kuri)
     It_Kind_Mato,     // Target (Mato)
@@ -405,64 +405,139 @@ typedef enum ItemKind {
     It_Kind_Kyasarin_Egg,    // Birdo's Egg
                              /// @}
 
-    /// @name SECTION RANGES - as used in code (some are adjusted)
+    /// @name SECTIONS - as used in code (some are adjusted)
     /// @{
+    /// Minor Sections
     /* 000 */ It_Kind_Common_Start =
-        It_Kind_Capsule, //   0 - Start of common items
+        It_Kind_Capsule, //   0 - Start of Common Items
     /* 023 */ It_Kind_Common_End =
-        It_Kind_M_Ball + 1, //  35 - End of common items
-    /* 023 */ It_Kind_Item_Start =
-        It_Kind_L_Gun_Ray, //  35 - Start of item-related items
-    /* 02B */ It_Kind_Item_End =
-        It_Kind_EvYoshiEgg + 1, //  43 - End of item-related items
+        It_Kind_M_Ball + 1, //  35 - End of Common Items
+    /* 023 */ It_Kind_Item_Related_Start =
+        It_Kind_L_Gun_Ray, //  35 - Start of Item-Related Items (projectiles,
+                           //  effects, and misc)
+    /* 02B */ It_Kind_Item_Related_End =
+        It_Kind_EvYoshiEgg + 1, //  43 - End of Item-Related Items
     /* 02B */ It_Kind_Monster_Start =
-        It_Kind_Kuriboh, //  43 - Start of monster items
+        It_Kind_Kuriboh, //  43 - Start of Monster Items
     /* 02F */ It_Kind_Monster_End =
-        It_Kind_Octarock_Stone, //  47 - End of monster items
+        It_Kind_Ottosea + 1, //  47 - End of Monster Items
+    /* 02F */ It_Kind_Monster_Related_Start =
+        It_Kind_Octarock_Stone, //  47 - Start of Monster-Related Items
+    /* 02F */ It_Kind_Monster_Related_End =
+        It_Kind_Octarock_Stone + 1, //  48 - End of Monster-Related Items
     /* 030 */ It_Kind_Character_Start =
-        It_Kind_Mario_Fire, //  48 - Start of character items
+        It_Kind_Mario_Fire, //  48 - Start of Character Items
     /* 09E */ It_Kind_Character_End =
-        It_Kind_Kirby_YoshiEggLay + 1, // 158 - End of character items
+        It_Kind_Kirby_YoshiEggLay + 1, // 158 - End of Character Items
     /* 09E */ It_Kind_Misc_Start =
-        It_Kind_Unk4, // 158 - Start of miscellaneous items
+        It_Kind_Unk4, // 158 - Start of Miscellaneous Items
     /* 0A0 */ It_Kind_Misc_End =
-        It_Kind_Coin + 1, // 160 - End of miscellaneous items
+        It_Kind_Coin + 1, // 160 - End of Miscellaneous Items
+    /* 0A0 */ It_PKind_Misc_Start =
+        It_PKind_Random, // 160 - Start of Pokemon Miscellaneous Items
+    /* 0A0 */ It_PKind_Misc_End =
+        It_PKind_Random + 1, // 161 - End of Pokemon Miscellaneous Items
     /* 0A1 */ It_PKind_Start =
-        It_PKind_Random +
-        1, // 161 - First Poke Ball Pokemon, named by an assert in #pl_8003E70C
+        It_PKind_Random + 1, // 161 - Start of Poke Ball Pokemon Item, named by
+                             // an assert in #pl_8003E70C
     /* 0BF */ It_PKind_Terminate =
-        It_PKind_Fushigibana + 1, // 191 - One past the last Poke Ball Pokemon
+        It_PKind_Fushigibana + 1, // 191 - End of Poke Ball Pokemon Items
     /* 0BF */ It_PKind_Related_Start =
-        It_Kind_Chicorita_Leaf, // 191 - Start of Pokemon-related item
+        It_Kind_Chicorita_Leaf, // 191 - Start of Pokemon-Related Items
     /* 0D0 */ It_PKind_Related_End =
-        It_Kind_Pokemon_Unk + 1, // 208 - End of Pokemon-related items
+        It_Kind_Pokemon_Unk + 1, // 208 - End of Pokemon-Related Items
     /* 0D0 */ It_Kind_Monster2_Start =
-        It_Kind_Old_Kuri, // 208 - Start of monster 2 items
+        It_Kind_Old_Kuri, // 208 - Start of Monster 2 Items
     /* 0DD */ It_Kind_Monster2_End =
-        It_Kind_ZRShell + 1, // 221 - End of monster 2 items
+        It_Kind_ZRShell + 1, // 221 - End of Monster 2 Items
     /* 0DD */ It_Kind_Stage_Start =
-        It_Kind_Tincle, // 221 - Start of stage-specific items
+        It_Kind_Tincle, // 221 - Start of Stage-Specific Items
     /* 0EA */ It_Kind_Stage_End =
-        It_Kind_Kyasarin_Egg - 2, // 234 - End of stage-specific items
+        It_Kind_Kyasarin + 1, // 234 - End of Stage-Specific Items
+    /* 0EA */ It_Kind_Stage_Related_Start =
+        It_Kind_Arwing_Laser, // 234 - Start of Stage-Specific-Related Items
+    /* 0EE */ It_Kind_Stage_Related_End =
+        It_Kind_Kyasarin_Egg + 2, // 238 - End of Stage-Specific-Related Items
+                                  // (not sure why it skips 2 instead of 1)
 
-    /* 000 */ It_Kind_Start =
-        It_Kind_Common_Start, //   0 - Start of item kind list
+    /// Major Sections - separated according to where values are stored in DAT
+    /// files
+    /* 000 */ It_Kind_Section_Common_Extended_Start =
+        It_Kind_Common_Start, // 0 - Start of Common and Item-Related Items
+    /* 02B */ It_Kind_Section_Common_Extended_End =
+        It_Kind_Item_Related_End, // 43 - End of Common and Item-Related Items
+    /* 02B */ It_Kind_Section_Monster_Character_Misc_Start =
+        It_Kind_Monster_Start, // 43 - Start of Monster, Character, and
+                               // Miscellaneous Items
+    /* 0A1 */ It_Kind_Section_Monster_Character_Misc_End =
+        It_PKind_Misc_End, // 161 - End of Monster, Character, and
+                           // Miscellaneous Items
+    /* 0A1 */ It_Kind_Section_Pokemon_Extended_Start =
+        It_PKind_Start, // 161 - Start of Pokemon and Pokemon-Related Items
+    /* 0D0 */ It_Kind_Section_Pokemon_Extended_End =
+        It_PKind_Related_End, // 208 - End of Pokemon and Pokemon-Related Items
+    /* 0D0 */ It_Kind_Section_Stage_Extended_Start =
+        It_Kind_Monster2_Start, // 208 - Start of Stage-Specific and Stage
+                                // Monster Items
+    /* 0EE */ It_Kind_Section_Stage_Extended_End =
+        It_Kind_Stage_Related_End, // 238 - End of Stage-Specific and Stage
+                                   // Monster Items
+
+    /// Helper Sections - used in code to help better illustrate the use of a
+    /// section boundary
     /* 000 */ It_Kind_Container_Start =
-        It_Kind_Common_Start, //   0 - Start of container items
+        It_Kind_Capsule, // 0 - Start of container items
     /* 006 */ It_Kind_Container_End =
-        It_Kind_BombHei, //   6 - End of container items
-    /* 0A1 */ It_Kind_Pokemon_Start =
-        It_PKind_Start, // 161 - Start of all Pokemon items
-    /* 0D0 */ It_Kind_Pokemon_End =
-        It_PKind_Related_End, // 208 - End of all Pokemon items
-    /* 0EE */ It_Kind_Max_Check =
-        It_Kind_Kyasarin_Egg +
-        2, // 236 - Used to check if still in valid item range (not sure why it
-           // skips 2 instead of 1)
+        It_Kind_BombHei, // 6 - End of container items
+    /* 000 */ It_Kind_Start =
+        It_Kind_Section_Common_Extended_Start, // 0 - Start of item kind list
+    /* 0EE */ It_Kind_End =
+        It_Kind_Section_Stage_Extended_End, // 238 - Used to check if still in
+                                            // valid item range
+
+    /// Section Range Sizes
+    It_Kind_Common_Items_Size =
+        It_Kind_Common_End - It_Kind_Common_Start, // 35
+    It_Kind_Item_Related_Size =
+        It_Kind_Item_Related_End - It_Kind_Item_Related_Start, // 8
+    It_Kind_Monster_Items_Size =
+        It_Kind_Monster_End - It_Kind_Monster_Start, // 4
+    It_Kind_Monster_Related_Size =
+        It_Kind_Monster_Related_End - It_Kind_Monster_Related_Start, // 1
+    It_Kind_Character_Items_Size =
+        It_Kind_Character_End - It_Kind_Character_Start,                // 110
+    It_Kind_Misc_Items_Size = It_Kind_Misc_End - It_Kind_Misc_Start,    // 2
+    It_PKind_Misc_Items_Size = It_PKind_Misc_End - It_PKind_Misc_Start, // 1
+    It_PKind_Items_Size = It_PKind_Terminate - It_PKind_Start,          // 30
+    It_PKind_Items_Total =
+        It_PKind_Misc_Items_Size + It_PKind_Items_Size, // 31
+    It_PKind_Items_Related_Size =
+        It_PKind_Related_End - It_PKind_Related_Start, // 17
+    It_Kind_Monster2_Items_Size =
+        It_Kind_Monster2_End - It_Kind_Monster2_Start,                  // 13
+    It_Kind_Stage_Items_Size = It_Kind_Stage_End - It_Kind_Stage_Start, // 13
+    It_Kind_Monsters2_Stage_Items_Size =
+        It_Kind_Stage_End - It_Kind_Monster2_Start, // 26
+    It_Kind_Stage_Related_Items_Size =
+        It_Kind_Stage_Related_End - It_Kind_Stage_Related_Start, // 4
+
+    It_Kind_Section_Common_Extended_Size =
+        It_Kind_Section_Common_Extended_End -
+        It_Kind_Section_Common_Extended_Start, // 43
+    It_Kind_Section_Monster_Character_Misc_Size =
+        It_Kind_Section_Monster_Character_Misc_End -
+        It_Kind_Section_Monster_Character_Misc_Start, // 118
+    It_Kind_Section_Pokemon_Extended_Size =
+        It_Kind_Section_Pokemon_Extended_End -
+        It_Kind_Section_Pokemon_Extended_Start, // 47
+    It_Kind_Section_Stage_Extended_Size =
+        It_Kind_Section_Stage_Extended_End -
+        It_Kind_Section_Stage_Extended_Start, // 30
 
     /// @}
 
-    It_Kind_Unselected = -1,
+    It_Kind_Unset1 = -1,
+    It_Kind_Unset2 = 0,
     It_Kind_None = -999,
 } ItemKind;
 

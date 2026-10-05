@@ -236,7 +236,7 @@ static void sdata2_order(void)
  * for which items the CPU should prefer to target.
  * Higher numbers are preferred.
  */
-int ftCo_803C5A68[It_Kind_Common_End] = {
+int ftCo_803C5A68[It_Kind_Common_Items_Size] = {
     1, 0, 0, 1, 0, 0, 0, 1, 7, 6, 5, 4, 4, 3, 1, 1, 2, 1,
     5, 2, 2, 2, 3, 3, 3, 4, 0, 0, 8, 4, 1, 4, 4, 5, 5,
 };
@@ -2993,7 +2993,7 @@ static inline float ftCo_GetItemDistance(Fighter* fp, Item* ip)
 }
 
 /// Decide which common item to target
-Item* ftCo_800A5F4C(Fighter* fp, ItemKind arg1)
+Item* ftCo_800A5F4C(Fighter* fp, ItemKind arg_kind)
 {
     Item* cur_ip;
     Item* closest_ip;
@@ -3021,7 +3021,7 @@ Item* ftCo_800A5F4C(Fighter* fp, ItemKind arg1)
         }
 
         /// Passing It_Kind_Common_End means to target any common item
-        if (arg1 != It_Kind_Common_End && cur_ip->kind != arg1) {
+        if (arg_kind != It_Kind_Common_End && cur_ip->kind != arg_kind) {
             continue;
         }
         if (inlineD0_it(fp, cur_ip)) {
@@ -3056,6 +3056,7 @@ Item* ftCo_800A5F4C(Fighter* fp, ItemKind arg1)
     return closest_ip;
 }
 
+/// @todo: Can this reuse code from ftCo_800A5F4C?
 Item* ftCo_800A61D8(Fighter* fp)
 {
     Item* ip;
