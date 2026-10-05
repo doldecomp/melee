@@ -427,7 +427,8 @@ struct lb_80014638_arg1_t {
 ASSERT_SIZE(struct lb_80014638_arg1_t, 0x14);
 
 struct Fighter_804D653C_t {
-    void* unk;
+    /// A color animation's script
+    union ColorOverlay_x8_t* unk DAT_SCRIPT(colAnimCommandLength(_command));
     u8 unk4;
     u8 unk5;
 };

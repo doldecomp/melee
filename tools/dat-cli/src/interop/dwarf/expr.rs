@@ -11,7 +11,7 @@ use winnow::{
     ascii::{digit1, hex_digit1, multispace0, oct_digit1},
     combinator::{
         Infix, Prefix, alt, cut_err, delimited, dispatch, expression, fail,
-        opt, peek, preceded, separated,
+        opt, peek, preceded, repeat, separated,
     },
     token::{any, one_of, take_while},
 };
@@ -214,7 +214,7 @@ fn operand(input: &mut &str) -> ModalResult<Expr> {
     dispatch! {peek(any);
         '(' => delimited('(', parser(0), cut_err(preceded(multispace0, ')'))),
         '0'..='9' => integer.map(Expr::Int),
-        _ => (identifier, opt(preceded(multispace0, arguments))).map(
+        _ => (name, opt(preceded(multispace0, arguments))).map(
             |(name, args): (&str, _)| match (name, args) {
                 (_, Some(args)) => Expr::Call(name.to_owned(), args),
                 // Keywords as of C23
@@ -243,6 +243,9 @@ fn arguments(input: &mut &str) -> ModalResult<Vec<Expr>> {
 pub fn call(function: &str, args: &[u64]) -> Option<u64> {
     match (function, args) {
         ("itCommandLength", &[command]) => it_command_length(command),
+        ("colAnimCommandLength", &[command]) => {
+            col_anim_command_length(command)
+        }
         (
             "GXGetTexBufferSize",
             &[width, height, format, mipmap, max_lod],
@@ -274,6 +277,23 @@ fn it_command_length(command: u64) -> Option<u64> {
             _ => 2,
         },
         12..=25 => 1,
+        _ => return None,
+    })
+}
+
+/// How many words a color animation's own command is (from opcode 10), from
+/// its first word: as far as `lb_803BA248`'s handlers advance, and for
+/// opcodes 21-23, which `ftCo_803C6AD0` hands to subaction commands, as long
+/// as those are (`ftAction_803C0870`). Opcode 10 stops the animation
+/// (`lb_80013BB0`): 0, the script's end. A tool-side helper, not a port.
+fn col_anim_command_length(command: u64) -> Option<u64> {
+    const OWN: [u64; 11] = [0, 1, 1, 2, 2, 2, 1, 1, 2, 2, 1];
+    let opcode = (command >> 26) & 0x3F;
+    Some(match opcode {
+        10..=20 => OWN[opcode as usize - 10],
+        21 => 5,
+        22 => 3,
+        23 => 1,
         _ => return None,
     })
 }
@@ -327,6 +347,14 @@ fn gx_get_tex_buffer_size(
 pub fn identifier<'i>(input: &mut &'i str) -> ModalResult<&'i str> {
     separated(1..=2, word, "::")
         .map(|()| ())
+        .take()
+        .parse_next(input)
+}
+
+/// An expression's name: an identifier, or a member of a nested record,
+/// `x0.count`.
+fn name<'i>(input: &mut &'i str) -> ModalResult<&'i str> {
+    (identifier, repeat(0.., ('.', word)).map(|()| ()))
         .take()
         .parse_next(input)
 }
@@ -406,6 +434,10 @@ mod tests {
             ))
         );
         assert!(Expr::parse("A::b::c").is_none());
+        assert_eq!(
+            Expr::parse("x0.dynamicsNum"),
+            Some(Expr::Name("x0.dynamicsNum".into()))
+        );
     }
 
     #[test]
@@ -414,6 +446,8 @@ mod tests {
         // Opcode 11, a hitbox, and opcode 16 with sub-commands 2 and 3
         assert_eq!(e("itCommandLength(0x2C000000)"), Some(6));
         assert_eq!(e("itCommandLength(0x40080000)"), Some(3));
+        assert_eq!(e("colAnimCommandLength(0x28000000)"), Some(0));
+        assert_eq!(e("colAnimCommandLength(0x54020000)"), Some(5));
         assert_eq!(e("itCommandLength(0x400C0000)"), Some(2));
         assert_eq!(e("itCommandLength(0x68000000)"), None);
     }

@@ -24,14 +24,19 @@
 #endif
 
 /// The pointer refers to @p count elements: an expression of sibling
-/// fields and constants, which may call the functions the tool ports, e.g.
-/// @c GXGetTexBufferSize.
+/// fields (or their members, @c x0.count) and constants, which may call the
+/// functions the tool ports, e.g. @c GXGetTexBufferSize. On a pointer
+/// typedef, for lists of counted lists, names resolve to bindings
+/// (#DAT_BIND).
 #define DAT_COUNT(count) DAT_TAG("count(" #count ")")
 
 /// The pointer refers to elements up to and including a terminator: the
 /// first element whose first word is @p value and not a relocated pointer,
-/// e.g. @c DAT_TERMINATED(GX_VA_NULL) for a vertex descriptor list.
-#define DAT_TERMINATED(value) DAT_TAG("terminated(" #value ")")
+/// e.g. @c DAT_TERMINATED(GX_VA_NULL) for a vertex descriptor list. An
+/// optional second argument, a number, is how many elements the terminator
+/// takes, for lists that end in it more than once:
+/// @c DAT_TERMINATED(0x83D60, 2).
+#define DAT_TERMINATED(...) DAT_TAG("terminated(" #__VA_ARGS__ ")")
 
 /// The array holds as many elements as the data does: they continue until
 /// the next symbol, the next address a pointer refers to, or an element that
@@ -67,7 +72,9 @@
 /// - @c table, an array in the code of their lengths, from opcode 10:
 ///   @c DAT_SCRIPT(ftAction_803C0870); or
 /// - an expression in @c _command, the command's first word, such as a call
-///   to a tool-side helper: @c DAT_SCRIPT(itCommandLength(_command)).
+///   to a tool-side helper: @c DAT_SCRIPT(itCommandLength(_command)). A
+///   length of 0 ends the script there, for scripts that stop at a command
+///   of their own (a color animation's opcode 10).
 #define DAT_SCRIPT(...) DAT_TAG("script(" #__VA_ARGS__ ")")
 
 /// On a typedef of @c u8: the bytes are data of one format the archive

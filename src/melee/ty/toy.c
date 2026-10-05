@@ -2267,10 +2267,13 @@ void _Toy_803075E8(s32 arg0)
             HSD_GObjObject_80390A70(td->gobj, kind, jobj);
             GObj_SetupGXLink(td->gobj, HSD_GObj_JObjCallback, 0x33, 0);
 
-            joint = HSD_ArchiveGetPublicAs(HSD_Joint, td->archive,
-                                           _Toy_803FDFA8[arg0].animjoint);
-            data = HSD_ArchiveGetPublicAs(char, td->archive,
-                                          _Toy_803FDFA8[arg0].matanim_joint);
+            /// @todo Reusing @c joint and @c data for the animations
+            ///       matches; their own locals don't.
+            joint = (HSD_Joint*) HSD_ArchiveGetPublicAs(
+                HSD_AnimJoint, td->archive, _Toy_803FDFA8[arg0].animjoint);
+            data = (char*) HSD_ArchiveGetPublicAs(
+                HSD_MatAnimJoint, td->archive,
+                _Toy_803FDFA8[arg0].matanim_joint);
             shapanim =
                 HSD_ArchiveGetPublicAs(HSD_ShapeAnimJoint, td->archive,
                                        _Toy_803FDFA8[arg0].shapeanim_joint);

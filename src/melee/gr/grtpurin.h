@@ -10,6 +10,10 @@
 
 #include <dolphin/mtx.h>
 
+typedef struct grTPrSpecialParams {
+    lbColl_80008D30_arg1* x0;
+} grTPrSpecialParams;
+
 /* 223160 */ void grTPurin_80223160(bool);
 /* 223164 */ void grTPurin_80223164(void);
 /* 2231DC */ void grTpurin_UnkStage0_OnLoad(void);

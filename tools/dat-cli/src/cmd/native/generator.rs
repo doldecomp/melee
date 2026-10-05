@@ -73,6 +73,10 @@ pub struct TypeRow {
     pub count: u64,
     pub members: Vec<MemberRow>,
     pub terminator: Option<Expr>,
+    /// How many elements the terminator takes.
+    pub terminator_length: u64,
+    /// Pointer typedefs: `DAT_COUNT`.
+    pub count_tag: Option<Expr>,
     pub type_tag: i32,
     /// The headers its native spellings need.
     pub headers: BTreeSet<String>,
@@ -101,6 +105,8 @@ pub struct MemberRow {
     pub place: Place,
     pub count: Option<Expr>,
     pub terminator: Option<Expr>,
+    /// How many elements the terminator takes.
+    pub terminator_length: u64,
     pub cond: Option<Expr>,
     pub type_tag: i32,
     pub script: Option<ScriptRow>,
@@ -121,6 +127,8 @@ pub struct RootRow {
     pub address: u32,
     pub ty: i32,
     pub count: Count,
+    /// `script:`, for an alias that is a command script.
+    pub script: Option<ScriptRow>,
     pub binds: Vec<(String, u64)>,
 }
 
@@ -548,10 +556,14 @@ impl<'a> Generator<'a> {
                 row.target = target.map_or(NONE, |t| self.type_index(t));
                 for tag in &tags {
                     match tag {
-                        DatTag::Terminated(value)
+                        DatTag::Terminated(value, length)
                             if row.terminator.is_none() =>
                         {
                             row.terminator = Some(value.clone());
+                            row.terminator_length = *length;
+                        }
+                        DatTag::Count(count) if row.count_tag.is_none() => {
+                            row.count_tag = Some(count.clone());
                         }
                         DatTag::Type(name) if row.type_tag == NONE => {
                             // As the walker's `typedef_type`: the type as
@@ -714,7 +726,7 @@ impl<'a> Generator<'a> {
                     DatTag::parse(v),
                     Some(
                         DatTag::Count(_)
-                            | DatTag::Terminated(_)
+                            | DatTag::Terminated(..)
                             | DatTag::If(_)
                             | DatTag::Bind(..)
                             | DatTag::Script(_)
@@ -733,6 +745,7 @@ impl<'a> Generator<'a> {
             place: Place::Unplaced,
             count: None,
             terminator: None,
+            terminator_length: 1,
             cond: None,
             type_tag: NONE,
             script: None,
@@ -797,8 +810,9 @@ impl<'a> Generator<'a> {
                 DatTag::Count(value) if row.count.is_none() => {
                     row.count = Some(value);
                 }
-                DatTag::Terminated(value) if row.terminator.is_none() => {
+                DatTag::Terminated(value, length) if row.terminator.is_none() => {
                     row.terminator = Some(value);
+                    row.terminator_length = length;
                 }
                 DatTag::If(value) if row.cond.is_none() => {
                     row.cond = Some(value);
@@ -901,6 +915,7 @@ impl<'a> Generator<'a> {
                         address: 0,
                         ty: self.type_index(die),
                         count,
+                        script: None,
                         binds,
                     });
                 }
@@ -912,6 +927,7 @@ impl<'a> Generator<'a> {
                         address,
                         ty: self.type_index(project.symbol_types[ty]),
                         count: entry.count.unwrap_or(Count::One),
+                        script: entry.script().map(|s| self.script(s)),
                         binds: Vec::new(),
                     });
                 }

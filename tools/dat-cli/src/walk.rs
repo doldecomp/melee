@@ -243,6 +243,41 @@ impl<'a> Walker<'a> {
     /// Walk `count` consecutive elements of type `element` at `offset`, or
     /// if `count` is `None`, as many as fit before the next public symbol or
     /// pointer target.
+    /// How many `element`s a list at `offset` holds up to and including
+    /// the first whose first word (or whole value, if smaller) is
+    /// `terminator` and not a relocated pointer, as `DAT_TERMINATED`
+    /// counts them; the elements that fit if none is.
+    pub fn terminated_count(
+        &self,
+        offset: u32,
+        element: DieId,
+        terminator: u64,
+    ) -> Option<u64> {
+        let element = self.resolve(Some(element))?;
+        let size = self.canonical.byte_size(self.graph, element)?;
+        if size == 0 {
+            return None;
+        }
+        let width = size.min(4) as usize;
+        let mask = u64::MAX >> (64 - 8 * width);
+        let mut n = 0;
+        loop {
+            let at = offset as usize + (n * size) as usize;
+            if at + size as usize > self.data.len() {
+                break;
+            }
+            n += 1;
+            let first = self.data[at..at + width]
+                .iter()
+                .fold(0, |v, &b| v << 8 | u64::from(b));
+            if first == terminator & mask && !self.relocs.contains(&(at as u32))
+            {
+                break;
+            }
+        }
+        Some(n)
+    }
+
     pub fn root_array(
         &mut self,
         offset: u32,
@@ -366,8 +401,16 @@ impl<'a> Walker<'a> {
         path: &str,
         parent: Option<(DieId, u32)>,
     ) {
-        if let Some(value) = self.typedef_terminator(die) {
-            return self.terminated(offset, die, path, &value);
+        if let Some((value, length)) = self.typedef_terminator(die) {
+            return self.terminated(offset, die, path, &value, length);
+        }
+        if let Some(count) = self.typedef_count(die) {
+            let count = eval_expr(self.macros, &count, &|name| {
+                lookup(&self.env, name)
+            });
+            if let Some(count) = count {
+                return self.counted(offset, die, None, count, path, &[], None);
+            }
         }
         if let Some(target) = self.typedef_type(die) {
             return self.typed(offset, target, path);
@@ -419,8 +462,8 @@ impl<'a> Walker<'a> {
                         self.script(at, ty, &script, &path);
                     } else if self.is_extent(member) {
                         self.extent(at, ty, &path, &binds, parent);
-                    } else if let Some(value) = self.terminator(member) {
-                        self.terminated(at, ty, &path, &value);
+                    } else if let Some((value, length)) = self.terminator(member) {
+                        self.terminated(at, ty, &path, &value, length);
                     } else if !binds.is_empty()
                         && let Some((element, size, count)) = self.array(ty)
                     {
@@ -475,8 +518,8 @@ impl<'a> Walker<'a> {
                     let path = field(path, member.name.map(|n| graph.str(n)));
                     if let Some(script) = self.script_tag(member) {
                         self.script(offset, ty, &script, &path);
-                    } else if let Some(value) = self.terminator(member) {
-                        self.terminated(offset, ty, &path, &value);
+                    } else if let Some((value, length)) = self.terminator(member) {
+                        self.terminated(offset, ty, &path, &value, length);
                     } else {
                         self.layout(offset, ty, &path, parent);
                     }
@@ -895,18 +938,43 @@ impl<'a> Walker<'a> {
         })
     }
 
-    /// A member's `DAT_TERMINATED` value.
-    fn terminator(&self, member: &Member) -> Option<Expr> {
+    /// A member's `DAT_TERMINATED` value and length.
+    fn terminator(&self, member: &Member) -> Option<(Expr, u64)> {
         member.annotations.iter().find_map(|a| {
             match DatTag::parse(self.graph.str(a.value?))? {
-                DatTag::Terminated(value) => Some(value),
+                DatTag::Terminated(value, length) => Some((value, length)),
                 _ => None,
             }
         })
     }
 
-    /// A `DAT_TERMINATED` value on a typedef, or one it names.
-    fn typedef_terminator(&self, mut die: DieId) -> Option<Expr> {
+    /// A `DAT_COUNT` on a pointer typedef, or one it names: an expression
+    /// in the bindings, for lists of counted lists.
+    fn typedef_count(&self, mut die: DieId) -> Option<Expr> {
+        while let Some(ty) = self.graph.types.get(&die) {
+            let TypeKind::Typedef {
+                target: Some(target),
+            } = ty.kind
+            else {
+                return None;
+            };
+            let count =
+                ty.annotations.iter().find_map(|a| {
+                    match DatTag::parse(self.graph.str(a.value?))? {
+                        DatTag::Count(count) => Some(count),
+                        _ => None,
+                    }
+                });
+            if count.is_some() {
+                return count;
+            }
+            die = target;
+        }
+        None
+    }
+
+    /// A `DAT_TERMINATED` value and length on a typedef, or one it names.
+    fn typedef_terminator(&self, mut die: DieId) -> Option<(Expr, u64)> {
         while let Some(ty) = self.graph.types.get(&die) {
             let TypeKind::Typedef {
                 target: Some(target),
@@ -917,7 +985,9 @@ impl<'a> Walker<'a> {
             let value =
                 ty.annotations.iter().find_map(|a| {
                     match DatTag::parse(self.graph.str(a.value?))? {
-                        DatTag::Terminated(value) => Some(value),
+                        DatTag::Terminated(value, length) => {
+                            Some((value, length))
+                        }
                         _ => None,
                     }
                 });
@@ -986,8 +1056,31 @@ impl<'a> Walker<'a> {
             return self.unrelocated(offset, value, path);
         }
         self.walk.pointers.insert(offset);
+        self.script_at(value, target, script, format!("{path}->"));
+    }
+
+    /// Walk a command script nothing points to at `offset`, as `element`.
+    pub fn root_script(
+        &mut self,
+        offset: u32,
+        element: DieId,
+        script: &Script,
+        name: &str,
+    ) {
+        self.env = root_env(&[]);
+        self.script_at(offset, Some(element), script, name.to_owned());
+    }
+
+    /// Walk the script at `value`, and every script its commands point to.
+    fn script_at(
+        &mut self,
+        value: u32,
+        target: Option<DieId>,
+        script: &Script,
+        path: String,
+    ) {
         let id = self.pointee(target).and_then(|t| self.canonical.of(t));
-        let mut queue = vec![(value, format!("{path}->"))];
+        let mut queue = vec![(value, path)];
         while let Some((start, path)) = queue.pop() {
             if !self.scripts.insert(start) {
                 continue;
@@ -1034,7 +1127,10 @@ impl<'a> Walker<'a> {
                         ));
                     }
                 }
-                if opcode == 0 {
+                // A length expression ends the script with a command of 0 words
+                if opcode == 0
+                    || (length == 0 && matches!(script, Script::Length(_)))
+                {
                     ended = Some(end);
                     break;
                 }
@@ -1119,13 +1215,15 @@ impl<'a> Walker<'a> {
     }
 
     /// Follow a `DAT_TERMINATED` pointer: elements up to one whose first
-    /// word is the terminator value, which is walked too.
+    /// word is the terminator value, which is walked too, with the
+    /// `length - 1` after it.
     fn terminated(
         &mut self,
         offset: u32,
         pointer: DieId,
         path: &str,
         terminator: &Expr,
+        length: u64,
     ) {
         let Some(pointer) = self.resolve(Some(pointer)) else {
             return;
@@ -1165,6 +1263,7 @@ impl<'a> Walker<'a> {
             return;
         };
         let env = self.env.clone();
+        let mut ended = 0;
         for i in 0.. {
             let at = value + (i * size) as u32;
             if at as usize + size as usize > self.data.len() {
@@ -1189,7 +1288,10 @@ impl<'a> Walker<'a> {
                 self.layout(at, ty, &format!("{path}->[{i}]"), None);
             }
             self.env = env.clone();
-            if end {
+            if end || ended > 0 {
+                ended += 1;
+            }
+            if ended >= length.max(1) {
                 break;
             }
         }
@@ -1303,6 +1405,14 @@ impl<'a> Walker<'a> {
         else {
             return None;
         };
+        // A member of a nested record, `x0.count`
+        if let Some((head, rest)) = name.split_once('.') {
+            let member = members
+                .iter()
+                .find(|m| m.name.map(|n| self.graph.str(n)) == Some(head))?;
+            let inner = self.resolve(member.ty)?;
+            return self.field_value(inner, base + member.offset? as u32, rest);
+        }
         let member = members
             .iter()
             .find(|m| m.name.map(|n| self.graph.str(n)) == Some(name))?;

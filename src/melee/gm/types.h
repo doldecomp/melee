@@ -1016,13 +1016,6 @@ struct gm_8049E548_t {
 }; /* size = 0x10 */
 ASSERT_SIZE(struct gm_8049E548_t, 0x10);
 
-struct TmBoxArrays {
-    void* box2;
-    void* box3;
-    void* box4;
-};
-ASSERT_SIZE(struct TmBoxArrays, 0xC);
-
 struct Lbl804799B8_t {
     u8 x0;
     u8 x1;

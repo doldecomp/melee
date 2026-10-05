@@ -85,10 +85,10 @@ struct HSD_ShapeSet {
     u16 nb_shape;
     int nb_vertex_index;
     HSD_VtxDescList* vertex_desc;
-    u8** vertex_idx_list;
+    u8** vertex_idx_list DAT_COUNT(nb_shape);
     s32 nb_normal_index;
     HSD_VtxDescList* normal_desc;
-    u8** normal_idx_list;
+    u8** normal_idx_list DAT_COUNT(nb_shape);
     union HSD_ShapeSet_blend {
         f32* bp;
         f32 bl;
@@ -101,10 +101,10 @@ struct HSD_ShapeSetDesc {
     u16 nb_shape;
     s32 nb_vertex_index;
     HSD_VtxDescList* vertex_desc;
-    u8** vertex_idx_list;
+    u8** vertex_idx_list DAT_COUNT(nb_shape);
     s32 nb_normal_index;
     HSD_VtxDescList* normal_desc;
-    u8** normal_idx_list;
+    u8** normal_idx_list DAT_COUNT(nb_shape);
 };
 
 struct HSD_ShapeAnim {

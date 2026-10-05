@@ -39,10 +39,6 @@ StageData grTPr_StageData = {
     (1 << 0),
 };
 
-typedef struct grTPrSpecialParams {
-    lbColl_80008D30_arg1* x0;
-} grTPrSpecialParams;
-
 static grTPrSpecialParams* yakumono_param;
 
 void grTPurin_80223160(bool unused)

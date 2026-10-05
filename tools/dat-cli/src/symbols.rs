@@ -20,6 +20,7 @@
 //! ftDataEmblem_unused_joint = PlFe.dat:0x3AD70; // type:HSD_Joint
 //! ```
 
+use crate::dwarf::annotation::{DatTag, Script};
 use anyhow::{Context, Result, anyhow, bail};
 use std::{fmt, str::FromStr};
 use winnow::{
@@ -41,6 +42,10 @@ pub enum Count {
     Exactly(u64),
     /// As many as fit before the next symbol.
     Unbounded,
+    /// Up to and including the first element whose first word (or whole
+    /// value, if smaller) is this and not a relocated pointer, like
+    /// `DAT_TERMINATED`.
+    Terminated(u64),
 }
 
 /// `name = dat:address; // attrs`, like decomp-toolkit's `symbols.txt`
@@ -62,6 +67,9 @@ pub struct Entry {
     /// `DAT_EXTENT`, for as many as fit before the next symbol or pointer
     /// target.
     pub count: Option<Count>,
+    /// `script:S`, like `DAT_SCRIPT(S)`: the root is a command script, its
+    /// commands from opcode 10 as long as the table or expression `S` says.
+    pub script: Option<String>,
     /// Attributes other than `type` and `count`, kept verbatim and in order.
     pub other: Vec<String>,
 }
@@ -180,11 +188,13 @@ impl FromStr for Entry {
         }
         let mut ty = None;
         let mut count = None;
+        let mut script = None;
         let mut other = Vec::new();
         for attr in entry.attrs {
             match attr {
                 Attr::Type(spec) => ty = Some(spec),
                 Attr::Count(n) => count = Some(n),
+                Attr::Script(table) => script = Some(table.to_owned()),
                 Attr::Other(attr) => other.push(attr.to_owned()),
             }
         }
@@ -212,8 +222,20 @@ impl FromStr for Entry {
             address: entry.address,
             ty,
             count,
+            script,
             other,
         })
+    }
+}
+
+impl Entry {
+    /// `script:`'s argument, as `DAT_SCRIPT` takes it.
+    pub fn script(&self) -> Option<Script> {
+        let script = self.script.as_ref()?;
+        match DatTag::parse(&format!("dat:script({script})"))? {
+            DatTag::Script(script) => Some(script),
+            _ => None,
+        }
     }
 }
 
@@ -228,6 +250,7 @@ struct RawEntry<'i> {
 enum Attr<'i> {
     Type(String),
     Count(Count),
+    Script(&'i str),
     Other(&'i str),
 }
 
@@ -272,6 +295,10 @@ fn attr<'i>(input: &mut &'i str) -> ModalResult<Attr<'i>> {
         preceded("type:", cut_err(type_name)).map(Attr::Type),
         preceded("count:", cut_err(integer))
             .map(|n| Attr::Count(Count::Exactly(n))),
+        preceded("terminated:", cut_err(integer))
+            .map(|v| Attr::Count(Count::Terminated(v))),
+        preceded("script:", cut_err(take_till(1.., char::is_whitespace)))
+            .map(Attr::Script),
         take_till(1.., char::is_whitespace).map(|word| match word {
             "extent" => Attr::Count(Count::Unbounded),
             word => Attr::Other(word),
@@ -321,7 +348,9 @@ impl fmt::Display for Entry {
                 Count::One => "count:1".to_owned(),
                 Count::Exactly(n) => format!("count:{n}"),
                 Count::Unbounded => "extent".to_owned(),
+                Count::Terminated(v) => format!("terminated:{v:#X}"),
             }))
+            .chain(self.script.iter().map(|table| format!("script:{table}")))
             .chain(self.other.iter().cloned())
             .collect();
         if !attrs.is_empty() {
@@ -342,6 +371,8 @@ grGroundParam = *:*; // type:grGroundParam count:2 data:4byte
 itemdata = GrI2.dat:*;
 map_plit = *:*; // extent
 ScGamRegStaffrollNames_scene_modelset = GmStRoll.dat:*; // count:10
+itemdata = GrOp.dat:*; // terminated:0x0
+PlCo_unused_x10 = PlCo.dat:0x10; // type:CmdUnion script:ftAction_803C0870
 ";
 
     #[test]
@@ -354,6 +385,8 @@ ScGamRegStaffrollNames_scene_modelset = GmStRoll.dat:*; // count:10
         assert_eq!(file.entries[2].other, ["data:4byte"]);
         assert_eq!(file.entries[4].count, Some(Count::Unbounded));
         assert_eq!(file.entries[5].count, Some(Count::Exactly(10)));
+        assert_eq!(file.entries[6].count, Some(Count::Terminated(0)));
+        assert_eq!(file.entries[7].script.as_deref(), Some("ftAction_803C0870"));
     }
 
     #[test]

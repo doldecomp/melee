@@ -185,7 +185,7 @@ struct plAllocInfo;
 /// Grab-mash shake table
 /* 4D652C */ extern struct Fighter_ShakeTable_t* Fighter_GrabMashShake;
 
-/* 4D6530 */ extern Vec2** Fighter_804D6530;
+/* 4D6530 */ extern struct ftDamageShifts* Fighter_804D6530;
 /* 4D6534 */ extern UNK_T Fighter_804D6534;
 /* 4D6538 */ extern struct Fighter_804D653C_t* Fighter_804D6538;
 /* 4D653C */ extern struct Fighter_804D653C_t* Fighter_804D653C;
@@ -216,17 +216,29 @@ extern Fighter_804D6540_t** Fighter_804D6540;
 
 /// The @c ftLoadCommonData root of @c PlCo.dat: the tables every fighter
 /// shares, copied into the globals of the same types.
+/// Model shifts while taking damage, one list per ground state.
+struct ftDamageShifts {
+    /* +0 */ Vec2* shifts DAT_COUNT(count);
+    /* +4 */ int count;
+};
+
 struct ftLoadCommonData {
     /* +00 */ ftCommonData* common;
     /* +04 */ ftCo_ItemThrowAttrs* item_throw;
-    /* +08 */ float (*x8)[5];
-    /* +0C */ float* xC;
-    /* +10 */ FighterPartsTable** parts_table;
-    /* +14 */ struct Fighter_804D6540_t** x14;
-    /* +18 */ struct Fighter_804D653C_t* x18;
-    /* +1C */ struct Fighter_804D653C_t* x1C;
+    /// One row per swing type (#fn_800CCEC4)
+    /* +08 */ float (*x8)[5] DAT_COUNT(6);
+    /// Staling, one per entry of the stale move queue (#ft_80089118)
+    /* +0C */ float* xC DAT_COUNT(9);
+    /* +10 */ FighterPartsTable** parts_table DAT_COUNT(Ft_Kind_Max + 1);
+    /* +14 */ struct Fighter_804D6540_t** x14 DAT_COUNT(Ft_Kind_Max + 1);
+    /// Color animations, by id
+    /// @todo Count: the number of color animations.
+    /* +18 */ struct Fighter_804D653C_t* x18 DAT_EXTENT;
+    /// @todo Count.
+    /* +1C */ struct Fighter_804D653C_t* x1C DAT_EXTENT;
     /* +20 */ UNK_T x20;
-    /* +24 */ Vec2** x24;
+    /// By #Fighter::dmg's @c x18F8
+    /* +24 */ struct ftDamageShifts* x24 DAT_COUNT(3);
     /* +28 */ struct Fighter_ShakeTable_t* grab_mash_shake;
     /* +2C */ struct Fighter_ShakeTable_t* smash_charge_shake;
     /* +30 */ struct Fighter_804D6524_t* x30;
