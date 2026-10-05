@@ -41,4 +41,15 @@
 /* 1FF15C */ bool grKraid_OnCheckShadowRender(Vec3*, int, HSD_JObj*);
 /* 3E4D0C */ extern StageData grKr_StageData;
 
+struct grKraid_YakumonoParam {
+    u32 map_time_min;
+    u32 map_time_max;
+    s32 map_time_acl;
+    float map_rot_spd_min;
+    float map_rot_spd_max;
+    u32 kraid_wait_time;
+    u32 kraid_wait_time_add;
+    float kraid_pos_x[6];
+};
+
 #endif

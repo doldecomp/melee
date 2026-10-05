@@ -4,12 +4,27 @@
 #include <melee/ft/forward.h>
 #include <melee/it/forward.h>
 
-struct ftCo_AttackEntry;
+#include <dat_macros.h>
+
+typedef struct ftCo_AttackEntry {
+    /* +00 */ s32 cmd;
+    /* +04 */ s32 x04;
+    /* +08 */ f32 x08;
+    /* +0C */ f32 x0C;
+    /* +10 */ f32 x10;
+    /* +14 */ f32 x14;
+    /* +18 */ f32 weight;
+    /* +1C */ s32 x1C;
+    /* +20 */ s32 x20;
+} ftCo_AttackEntry;
+
+/// A CPU attack list, ended by an entry whose command is 0
+typedef ftCo_AttackEntry* ftCo_AttackList DAT_TERMINATED(0);
 
 /* 0B4AB0 */ int ftCo_800B4AB0(Fighter*, Fighter*, void*);
 /* 0B52AC */ int ftCo_800B52AC(Fighter*, Fighter*, void*, float);
 /* 0B5AB0 */ int ftCo_800B5AB0(Fighter*, void*, void*);
-/* 0B6208 */ int ftCo_800B6208(struct ftCo_AttackEntry*);
+/* 0B6208 */ int ftCo_800B6208(ftCo_AttackEntry*);
 /* 0B630C */ bool ftCo_800B630C(Fighter*);
 /* 0B63D8 */ void ftCo_800B63D8(Fighter*);
 /* 0B658C */ void ftCo_800B658C(Fighter*);

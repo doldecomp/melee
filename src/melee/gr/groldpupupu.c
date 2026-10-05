@@ -22,24 +22,6 @@
 #include <sysdolphin/baselib/jobj.h>
 #include <sysdolphin/baselib/random.h>
 
-struct grOldpupupu_YakumonoParam {
-    s16 x0;
-    s16 x2;
-    s16 x4;
-    s16 x6;
-    int x8;
-    int xC;
-    f32 x10;
-    f32 x14;
-    f32 x18;
-    f32 x1C;
-    f32 x20;
-    f32 x24;
-    f32 x28;
-    f32 x2C;
-    f32 x30;
-};
-
 static struct grOldpupupu_YakumonoParam* yakumono_param;
 
 static void* grOp_804D6A9C;

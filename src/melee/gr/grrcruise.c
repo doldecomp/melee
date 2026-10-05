@@ -28,27 +28,6 @@
 #include <sysdolphin/baselib/memory.h>
 #include <sysdolphin/baselib/random.h>
 
-struct grRCruise_YakumonoParam {
-    f32 x0;
-    f32 x4;
-    f32 x8;
-    s32 xC;
-    s32 x10;
-    s32 x14;
-    s32 x18;
-    s32 x1C;
-    s32 x20;
-    s32 x24;
-    s32 x28;
-    f32 x2C;
-    f32 x30;
-    f32 x34;
-    f32 x38;
-    s32 x3C;
-    s32 x40;
-    s32 x44;
-};
-
 /* 200460 */ static void fn_80200460(void* user_data, int joint_id,
                                      CollData* coll, int coll_x50,
                                      mpLib_GroundEnum ground_kind,

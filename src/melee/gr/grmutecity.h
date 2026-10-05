@@ -107,4 +107,21 @@
 /* 1F2C10 */ bool grMuteCity_801F2C10(Vec3*, int arg, HSD_JObj* jobj);
 /* 3E33DC */ extern StageData grMc_StageData;
 
+struct grMc_YakumonoParam {
+    void* x0;
+    void* x4;
+    lbColl_80008D30_arg1* x8;
+    lbColl_80008D30_arg1* xC;
+    u8 pad10[0x1C];
+    f32 x2C;
+    f32 x30;
+    f32 x34;
+    f32 x38;
+    f32 x3C;
+    f32 x40;
+    f32 x44;
+    f32 x48;
+    f32 x4C;
+};
+
 #endif

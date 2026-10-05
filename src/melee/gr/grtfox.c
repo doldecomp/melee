@@ -8,13 +8,6 @@
 #include <melee/mp/mplib.h>
 #include <sysdolphin/baselib/gobjproc.h>
 
-struct grTFox_YakumonoParam {
-    UNK_T unk0;
-    UNK_T unk4;
-    UNK_T unk8;
-    UNK_T unkC;
-};
-
 static void grTFox_80220B80(bool);
 static void grTFox_80220B84(void);
 static void grTFox_UnkStage0_OnLoad(void);

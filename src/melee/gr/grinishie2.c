@@ -163,23 +163,6 @@ StageData grI2_StageData = {
     ARRAY_SIZE(grI2_803E4A60),
 };
 
-struct grInishie2_YakumonoParam {
-    s16 unk0;
-    s16 unk2;
-    s16 unk4;
-    s16 unk6;
-    s16 unk8;
-    s16 unkA;
-    s16 unkC;
-    s16 unkE;
-    s16 unk10[2];
-    Vec3 unk14[2];
-    f32 unk2C;
-    Vec3 unk30[2];
-    s16 unk48;
-    s16 unk4A;
-};
-
 static struct grInishie2_YakumonoParam* yakumono_param;
 
 void grInishie2_801FCBC0(bool arg) {}

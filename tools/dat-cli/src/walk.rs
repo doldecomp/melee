@@ -352,7 +352,9 @@ impl<'a> Walker<'a> {
             .paths
             .entry(offset)
             .or_insert_with(|| path.clone());
-        self.layout(offset, die, &path, None);
+        // Unresolved, so that the tags of a typedef it was reached as apply,
+        // e.g. a list's `DAT_TERMINATED`
+        self.layout(offset, raw, &path, None);
     }
 
     /// Lay the type `die` over the data at `offset`. `parent` is the record

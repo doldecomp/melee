@@ -35,19 +35,6 @@ typedef struct grVe_Data {
     } arwing;
 } grVe_Data;
 
-struct grVenom_YakumonoParam {
-    f32 x0;
-    f32 x4;
-    f32 x8;
-    f32 xC;
-    f32 x10;
-    char x14[0x2C - 0x14];
-    f32 x2C;
-    char x30[0x34 - 0x30];
-    f32 x34;
-    void* x38;
-};
-
 static grVe_Data grVe_803E5348 = {
     {
         { 0, 5, 0 },

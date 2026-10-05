@@ -38,30 +38,6 @@
 #include <sysdolphin/baselib/tobj.h>
 #include <sysdolphin/baselib/wobj.h>
 
-struct grIzumi_YakumonoParam {
-    float x0;
-    int x4;
-    float x8;
-    float xC;
-    float x10;
-    float x14;
-    float x18;
-    float x1C;
-    float x20;
-    float x24;
-    float x28;
-    float x2C;
-    float x30;
-    float x34;
-    float x38;
-    float x3C;
-    float x40;
-    float x44;
-    float x48;
-    float x4C;
-    float x50;
-};
-
 typedef struct IzumiReflection {
     Mtx texture_matrix;
     HSD_ImageDesc* image;

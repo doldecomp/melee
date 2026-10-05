@@ -17,11 +17,6 @@
 #include <sysdolphin/baselib/lobj.h>
 #include <sysdolphin/baselib/random.h>
 
-struct grZebesRoute_YakumonoParam {
-    int camera_timer;
-    int zako_spawn_chance;
-};
-
 /* 20B260 */ static Ground_GObj* grZebesRoute_8020B260(int);
 static void stageGObj0_OnInit(Ground_GObj* gobj);
 static void stageGObj2_OnInit(Ground_GObj* gobj);

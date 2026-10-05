@@ -1,6 +1,7 @@
 use anyhow::{Result, bail};
 use std::path::PathBuf;
 
+pub mod native;
 pub mod project;
 pub mod samples;
 pub mod symbols;

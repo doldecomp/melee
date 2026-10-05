@@ -55,4 +55,23 @@
 /* 2182BC */ bool grFlatzone_802182BC(Vec3*, int, HSD_JObj*);
 /* 3E7A00 */ extern StageData grFz_StageData;
 
+struct grFlatzone_YakumonoParam {
+    s32 unk0;
+    s32 unk4;
+    s32 unk8;
+    s32 unkC;
+    s32 unk10;
+    s32 unk14;
+    s32 unk18;
+    s32 unk1C;
+    s32 unk20;
+    f32 unk24;
+    f32 unk28;
+    int unk2C;
+    s32 unk30;
+    s32 unk34;
+    f32 unk38;
+    s32 unk3C;
+};
+
 #endif

@@ -1426,6 +1426,12 @@ pub struct CWriter<'a> {
     /// The types of the unit's samples and typed elided data, by symbol,
     /// so pointers to them need no cast.
     samples: std::cell::RefCell<BTreeMap<String, CanonId>>,
+    /// The declarations of the unit's other symbols, by name, with `{}`
+    /// for the name, so pointers to them need no cast.
+    declared: std::cell::RefCell<BTreeMap<String, String>>,
+    /// What the samples' pointer fields say each symbol they point to is:
+    /// the pointees' declarations, with `{}` for the name.
+    pointed: std::cell::RefCell<BTreeMap<String, BTreeSet<String>>>,
 }
 
 impl<'a> CWriter<'a> {
@@ -1435,6 +1441,8 @@ impl<'a> CWriter<'a> {
             canonical,
             renderer: Renderer::new(graph, canonical),
             samples: Default::default(),
+            declared: Default::default(),
+            pointed: Default::default(),
         }
     }
 
@@ -1488,6 +1496,36 @@ impl<'a> CWriter<'a> {
         let linked: Vec<&str> = linked.into_iter().collect();
         let elided: Vec<(&str, &Elided)> =
             elided.iter().map(|(n, e)| (n.as_str(), e)).collect();
+        // A first pass over the samples finds what their pointers say each
+        // symbol is: data without a type of its own is declared as that,
+        // where they agree
+        self.pointed.borrow_mut().clear();
+        self.declared.borrow_mut().clear();
+        self.definitions(archive, &instances)?;
+        let pointed = self.pointed.take();
+        let inferred = |name: &str| {
+            let mut types = pointed.get(name)?.iter();
+            let ty = types.next()?;
+            let void = ty == "void {}" || ty == "UNK_T {}";
+            (types.next().is_none() && !void).then(|| ty.clone())
+        };
+        let declared: BTreeMap<String, String> = elided
+            .iter()
+            .filter_map(|&(n, e)| {
+                let ty = e.ty.as_ref().map(|t| t.declaration.clone());
+                Some((n.to_owned(), ty.or_else(|| inferred(n))?))
+            })
+            .chain(publics.iter().filter_map(|p| {
+                let ty = p.ty.as_ref().map(|t| t.declaration.clone());
+                Some((p.name.clone(), ty.or_else(|| inferred(&p.name))?))
+            }))
+            .chain(
+                linked
+                    .iter()
+                    .filter_map(|&n| Some((n.to_owned(), inferred(n)?))),
+            )
+            .collect();
+        *self.declared.borrow_mut() = declared;
         let guard = format!("DAT_{}_H", file_name(stem).to_uppercase());
         let mut header = format!(
             concat!(
@@ -1591,10 +1629,8 @@ impl<'a> CWriter<'a> {
             publics
                 .iter()
                 .filter(|p| !elided_names.contains(p.name.as_str()))
-                .map(|p| match &p.ty {
-                    Some(ty) => {
-                        format!("extern {};", ty.declaration.replace("{}", &p.name))
-                    }
+                .map(|p| match self.declared.borrow().get(&p.name) {
+                    Some(ty) => format!("extern {};", ty.replace("{}", &p.name)),
                     None => format!("extern UNK_T {};", p.name),
                 })
                 .collect(),
@@ -1618,7 +1654,10 @@ impl<'a> CWriter<'a> {
             ),
             linked
                 .iter()
-                .map(|n| format!("extern UNK_T {n};"))
+                .map(|&n| match self.declared.borrow().get(n) {
+                    Some(ty) => format!("extern {};", ty.replace("{}", n)),
+                    None => format!("extern UNK_T {n};"),
+                })
                 .collect(),
         )?;
         group(
@@ -1626,8 +1665,15 @@ impl<'a> CWriter<'a> {
             "Data in this archive the samples point to that isn't written as C.",
             elided
                 .iter()
-                .map(|(n, e)| match &e.ty {
-                    Some(ty) => format!("extern {};", ty.declaration.replace("{}", n)),
+                .map(|&(n, e)| match self.declared.borrow().get(n) {
+                    Some(ty) if e.ty.is_some() => {
+                        format!("extern {};", ty.replace("{}", n))
+                    }
+                    Some(ty) => format!(
+                        "extern {}; // {:#X} bytes",
+                        ty.replace("{}", n),
+                        e.size
+                    ),
                     None => format!("extern UNK_T {n}; // {:#X} bytes", e.size),
                 })
                 .collect(),
@@ -1851,16 +1897,45 @@ impl<'a> CWriter<'a> {
                 let cast = self.renderer.declare(Some(spelled), "");
                 let value = word_at(inst.bytes, offset);
                 if let Some(target) = inst.relocs.get(&offset) {
+                    let template = self.renderer.declare(*pointee, "{}");
+                    self.pointed
+                        .borrow_mut()
+                        .entry(target.clone())
+                        .or_default()
+                        .insert(template.clone());
                     // A sample of the pointee's own type needs no cast
-                    let pointee = pointee
+                    let id = pointee
                         .map(|p| self.resolve(p))
                         .and_then(|p| self.canonical.of(p));
-                    let same = pointee.is_some()
-                        && self.samples.borrow().get(target)
-                            == pointee.as_ref();
-                    match same {
-                        true => write!(out, "&{target}")?,
-                        false => write!(out, "({cast}) &{target}")?,
+                    let same = id.is_some()
+                        && self.samples.borrow().get(target) == id.as_ref();
+                    // Nor does other data declared as the pointee, or as an
+                    // array of it, which decays to a pointer to its first
+                    let declared = self.declared.borrow();
+                    let declared = declared.get(target).map(String::as_str);
+                    let array = declared.is_some_and(|d| {
+                        let Some((head, tail)) = d.split_once("{}") else {
+                            return false;
+                        };
+                        let Some(dim) = tail
+                            .strip_prefix('[')
+                            .and_then(|t| t.strip_suffix(']'))
+                        else {
+                            return false;
+                        };
+                        dim.bytes().all(|b| b.is_ascii_digit())
+                            && template == format!("{head}{{}}")
+                    });
+                    // And any object converts to `void*`
+                    if same
+                        || pointee.is_none()
+                        || declared == Some(template.as_str())
+                    {
+                        write!(out, "&{target}")?;
+                    } else if array {
+                        write!(out, "{target}")?;
+                    } else {
+                        write!(out, "({cast}) &{target}")?;
                     }
                 } else if value == 0 {
                     out.push_str("NULL");

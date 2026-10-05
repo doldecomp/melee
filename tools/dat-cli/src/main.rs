@@ -18,6 +18,9 @@ enum Commands {
 
     /// Manage DAT samples for objdiff
     Samples(cmd::samples::Args),
+
+    /// The native archive interface: its tables, and what it should reach
+    Native(cmd::native::Args),
 }
 
 fn main() -> Result<()> {
@@ -26,6 +29,7 @@ fn main() -> Result<()> {
         Commands::Types(args) => cmd::types::run(args),
         Commands::Symbols(args) => cmd::symbols::run(args),
         Commands::Samples(args) => cmd::samples::run(args),
+        Commands::Native(args) => cmd::native::run(args),
     };
     // Output piped into e.g. `head` ends early; that's not an error
     match result {
