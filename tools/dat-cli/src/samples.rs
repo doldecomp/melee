@@ -1066,6 +1066,11 @@ pub struct Source<'a> {
 }
 
 impl<'a> Source<'a> {
+    /// Name the data at `offset` with an alias from `dat_symbols.txt`.
+    pub fn alias(&mut self, offset: u32, name: &str) {
+        self.names.insert(offset, name.to_owned());
+    }
+
     /// `paths` are the walk's: where each object was first reached from.
     /// `unit` prefixes the externs' names.
     pub fn new(

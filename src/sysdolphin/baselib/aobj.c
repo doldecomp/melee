@@ -195,7 +195,8 @@ HSD_AObj* HSD_AObjLoadDesc(HSD_AObjDesc* aobjdesc)
             if (hsd_obj != NULL) {
                 ref_INC(hsd_obj);
             } else {
-                phi_r30 = (HSD_Obj*) HSD_JObjLoadJoint(aobjdesc->obj_id);
+                phi_r30 = (HSD_Obj*) HSD_JObjLoadJoint(
+                    (HSD_Joint*) aobjdesc->obj_id);
             }
             if (aobj != NULL) {
                 if (aobj->hsd_obj != NULL) {

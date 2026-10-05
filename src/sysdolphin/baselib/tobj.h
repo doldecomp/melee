@@ -188,7 +188,9 @@ typedef struct _HSD_Tlut {
 } HSD_Tlut;
 
 typedef struct _HSD_TlutDesc {
-    u16* lut DAT_COUNT(n_entries);
+    /// GX loads palettes in blocks of 16 entries, so archives store them
+    /// rounded up to that.
+    u16* lut DAT_COUNT((n_entries + 15) & ~15);
     GXTlutFmt fmt;
     u32 tlut_name;
     u16 n_entries;

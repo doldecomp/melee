@@ -698,7 +698,9 @@ struct ftData_x8_x8 {
 
 struct FtPartsDesc {
     /*  +0 */ u32 model_num;
-    /*  +4 */ void* (*vis_table)[4];
+    /// A row per costume, the default's (0) where an entry is NULL
+    /// (#ftParts_8007487C).
+    /*  +4 */ FtPartsVisLookup* (*vis_table)[4];
 };
 
 typedef struct ftData_x20 {
@@ -876,7 +878,7 @@ typedef struct Fighter_WaitAnimData {
     s32 x4;
     s32 x8;
     /// Generic commands (#Command_Execute), then #ftAction_803C0870.
-    CmdUnion* xC DAT_SCRIPT(ftAction_803C0870, 1, 1, 1, 1, 1, 2, 1, 2, 1, 1);
+    CmdUnion* xC DAT_SCRIPT(ftAction_803C0870);
     s32 x10_animCurrFlags;
     uintptr_t x14;
 } Fighter_WaitAnimData;
