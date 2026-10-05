@@ -2,8 +2,8 @@
 
 #include <dolphin/mtx.h>
 
-// TODO: A bunch of pointless void casts because of Mtx type-ness.
-// Dunno how to resolve this at the moment.
+/// @TODO: A bunch of pointless void casts because of Mtx type-ness.
+/// Dunno how to resolve this at the moment.
 
 void MTXInitStack(MTXStack* sPtr, u32 numMtx)
 {
