@@ -82,7 +82,7 @@ struct EF_EffectDesc {
 
 struct EF_QueuedEffect {
     /* +0 */ EF_QueuedEffect* next;
-/* +4 */ u8 spawn_kind; ///< ::EF_SpawnKind
+    /* +4 */ u8 spawn_kind; ///< ::EF_SpawnKind
     /* +8 */ s32 gfx_id;
     /* +C */ HSD_JObj* jobj;
     /* +10 */ Vec3 params; // parameters depending on spawn_kind
