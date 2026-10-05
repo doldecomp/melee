@@ -56,6 +56,11 @@ typedef struct StageCameraInfo {
     f32 fixed_cam_horz_angle;  // 0x70
 } StageCameraInfo;
 
+/// An item script, as #StageInfo::ald_yaku_all lists them.
+typedef struct GroundItemScript {
+    union CmdUnion* script DAT_SCRIPT(itCommandLength(_command));
+} GroundItemScript;
+
 struct StageInfo {
     StageCameraInfo cam_info;  // 0x00 - 0x70
     StageBlastZone blast_zone; // 0x74 - 0x80
@@ -99,7 +104,7 @@ struct StageInfo {
     /* +6B0 */ GroundParam* param;
     /// Item scripts for the stage's objects (#ItemStateDesc::xC_script),
     /// from index 1, up to NULL.
-    /* +6B4 */ UNK_T* ald_yaku_all;
+    /* +6B4 */ GroundItemScript* ald_yaku_all;
     /* +6B8 */ void* map_ptcl;
     /* +6BC */ void* map_texg;
     /* +6C0 */ void* yakumono_param;

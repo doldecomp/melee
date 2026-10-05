@@ -104,11 +104,6 @@ Not errors:
 
 ## Coverage
 
-- `ALDYakuAll` (`StageInfo.ald_yaku_all`) is a null-terminated table of
-  item scripts, loaded as `void*`: a null, then the scripts from index 1
-  (as `Ground` reads them), then a null. The scripts are typed by address
-  (`script:`); the lists (~900 bytes) need a pointer typedef with
-  `DAT_SCRIPT` and a list that skips its first null.
 - `PlSb.dat` 0x75C-0x1444, after Sandbag's `FtSFX`, parses as subaction
   commands but has no end command before the next object: not standalone
   scripts. Nothing points into it.
