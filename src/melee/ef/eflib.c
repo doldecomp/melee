@@ -34,14 +34,14 @@ void efLib_render_callback(HSD_GObj*, intptr_t);
 
 // Particle linkNo skip masks (bits 16+) for hsd_8039CEAC / hsd_8039EE24
 // Set bit = skip processing for that linkNo
-/* TODO: Get these from particles.h once that is fully fleshed out */
+/// @TODO: Get these from particles.h once that is fully fleshed out
 #define PTCL_SKIP_LINKNO_0 0x10000
 #define PTCL_SKIP_LINKNO_1 0x20000
 #define PTCL_SKIP_LINKNO_2 0x40000
 
 // Particle linkNo render masks (bits 0+) for psDispParticles
 // Set bit = include for rendering
-/* TODO: Get these from particles.h once that is fully fleshed out */
+/// @TODO: Get these from particles.h once that is fully fleshed out
 #define PTCL_RENDER_LINKNO_0 0x1
 #define PTCL_RENDER_LINKNO_1 0x2
 #define PTCL_RENDER_LINKNO_2 0x4

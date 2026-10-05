@@ -94,7 +94,7 @@ struct Toy {
     /* +3E8 */ char pad_3E8[0x3EC - 0x3E8];
     /* +3EC */ s16 trophyCount;
 };
-// TODO: This struct should only be 0x58
+/// @TODO: This struct should only be 0x58
 // STATIC_ASSERT(sizeof(struct Toy) == 0x58);
 
 struct TyDspEntry {
