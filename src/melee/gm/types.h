@@ -984,7 +984,7 @@ typedef struct CssSubStruct {
     /* 0x004 */ u8 pad04[2];
     /* 0x006 */ s16 stage_id;
     /* 0x008 */ u8 pad08[0xC];
-    /* 0x014 */ PlayerInitData saved_players[4];
+    /* 0x014 */ PlayerInitData saved_players[PAD_MAX_CONTROLLERS];
     /* 0x0A4 */ HSD_GObj* gobj;
     /* 0x0A8 */ HSD_JObj* jobjs[39];
     /* 0x144 */ s32 anim_frames[39];

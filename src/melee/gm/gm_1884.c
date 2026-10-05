@@ -872,14 +872,14 @@ void gm_80189CDC(StartMeleeData* start)
     start->rules.x20 = 0xFFFFFFFFFFFFFFFFULL;
     start->rules.x5_0 = 1;
 
-    for (i = 0; i < ARRAY_SIZE(gm_80473814.saved_players); i++) {
+    for (i = 0; i < (ssize_t) ARRAY_SIZE(gm_80473814.saved_players); i++) {
         state->players[i] = gm_80473814.saved_players[i] = start->players[i];
     }
 
     state->mode = (s32) (start->players[0].slot - 1);
     state->count = 1;
 
-    for (i = 0; ARRAY_SIZE(state->char_data) > i; i++) {
+    for (i = 0; (ssize_t) ARRAY_SIZE(state->char_data) > i; i++) {
         state->char_data[i] = 0;
     }
 }
