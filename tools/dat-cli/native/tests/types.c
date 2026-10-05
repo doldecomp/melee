@@ -14,6 +14,8 @@
 #include "melee_dat.h"
 #include <dat/archive.h>
 #include <melee/ft/types.h>
+#include <melee/it/itCommonItems.h>
+#include <sysdolphin/baselib/jobj.h>
 
 static int failures;
 
@@ -98,12 +100,68 @@ static int public_offset(const uint8_t* file, const char* name,
     return 0;
 }
 
+/// Food's inline entries are counted by its own header, including the
+/// final entry. Read the native structs against their serialized offsets.
+static void test_foods(const char* dir)
+{
+    char path[2048];
+    snprintf(path, sizeof path, "%s/ItCo.dat", dir);
+    size_t size;
+    unsigned char* bytes = read_file(path, &size);
+    CHECK(bytes != NULL, "%s", path);
+    if (bytes == NULL) {
+        return;
+    }
+    uint32_t root;
+    if (!public_offset(bytes, "itPublicData", &root)) {
+        CHECK(false, "%s: itPublicData missing", path);
+        free(bytes);
+        return;
+    }
+    const char* error = NULL;
+    DatArchive* a = dat_open(&melee_dat_schema, bytes, size, &error);
+    CHECK(a != NULL, "%s: %s", path, error);
+    const uint8_t* data = bytes + 0x20;
+    uint32_t table = be32(data + root + 4);
+    uint32_t article = be32(data + table + 4 * It_Kind_Foods);
+    uint32_t attrs = be32(data + article + 4);
+    /* The item union still leaves foods unselected. Load its known type
+       directly to test the count without adding another discriminator. */
+    itFoodsAttributes* foods =
+        a ? dat_at(a, attrs, DAT_TYPE_itFoodsAttributes, DAT_COUNT_ONE, 0)
+          : NULL;
+    CHECK(foods != NULL, "%s", path);
+    if (foods != NULL) {
+        CHECK(foods->count == (int32_t) be32(data + attrs), "%s", path);
+        CHECK(foods->count > 1, "%s", path);
+        for (int32_t i = 0; i < foods->count; i++) {
+            const uint8_t* entry = data + attrs + 4 + i * 16;
+            CHECK(foods->entries[i].heal_amount == (int32_t) be32(entry + 4),
+                  "food %d", i);
+            CHECK(foods->entries[i].offset.x == befloat(entry + 8), "food %d",
+                  i);
+            CHECK(foods->entries[i].offset.y == befloat(entry + 12), "food %d",
+                  i);
+            CHECK(foods->entries[i].joint != NULL, "food %d", i);
+            if (foods->entries[i].joint != NULL) {
+                CHECK(foods->entries[i].joint->flags ==
+                          be32(data + be32(entry) + 4),
+                      "food %d", i);
+            }
+        }
+        CHECK(dat_verify(a, NULL) == 0, "%s", path);
+    }
+    dat_close(a);
+    free(bytes);
+}
+
 int main(int argc, char** argv)
 {
     if (argc < 2) {
         fprintf(stderr, "usage: %s <files dir>\n", argv[0]);
         return 2;
     }
+    test_foods(argv[1]);
     size_t checked = 0;
     for (size_t i = 0; i < sizeof fighters / sizeof *fighters; i++) {
         char path[2048];

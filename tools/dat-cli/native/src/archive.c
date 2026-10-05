@@ -273,6 +273,8 @@ struct DatArchive {
     /// offset → furthest end.
     Map extents;
     Map choices;
+    /// Counted inline arrays' lengths, for verification after leaving scope.
+    Map array_counts;
     VEC(Reached) reached;
     VEC(Choice) chosen;
     VEC(Issue) issues;
@@ -507,6 +509,7 @@ void dat_close(DatArchive* a)
     map_free(&a->offsets);
     map_free(&a->extents);
     map_free(&a->choices);
+    map_free(&a->array_counts);
     free(a->reached.items);
     free(a->chosen.items);
     free(a->issues.items);
@@ -1482,7 +1485,50 @@ static void* plain_array(DatArchive* a, uint32_t offset, int32_t raw,
     return block;
 }
 
-/// Follow a pointer to `count` consecutive elements.
+/// Whether a counted inline array fits its declared bound and the data.
+static bool array_count_fits(const DatArchive* a, uint32_t offset,
+                             int32_t array, int32_t element, uint64_t count)
+{
+    uint64_t size = T(a, element)->size;
+    uint64_t room = a->size > offset ? a->size - offset : 0;
+    return count <= room / (size ? size : 1) &&
+           (T(a, array)->unbounded || count <= T(a, array)->count);
+}
+
+/// Walk an inline array: an explicit count ignores symbols and pointer
+/// targets inside it, unlike `DAT_EXTENT`.
+static void counted_array(DatArchive* a, uint32_t offset, int32_t array,
+                          uint64_t count, const DatMember* m, Parent parent,
+                          void* native)
+{
+    int32_t raw = T(a, array)->target;
+    int32_t e = resolve(a, raw);
+    if (e == DAT_NONE) {
+        return;
+    }
+    uint64_t* walked =
+        map_slot(&a->array_counts, key2(offset, T(a, array)->id), true);
+    *walked = 0;
+    if (!array_count_fits(a, offset, array, e, count)) {
+        issue(a, ISSUE_OUT_OF_BOUNDS, offset, 0);
+        return;
+    }
+    *walked = count;
+    const Scope* outer = a->env;
+    for (uint64_t i = 0; i < count; i++) {
+        uint32_t at = (uint32_t) (offset + i * T(a, e)->size);
+        a->env =
+            m ? bound(a, outer, m, parent.record, parent.base, parent.some, i)
+              : outer;
+        typed_extent(a, at, raw, 1);
+        layout(a, at, raw,
+               native ? (char*) native + i * T(a, e)->native_size : NULL,
+               parent);
+    }
+    a->env = outer;
+}
+
+/// Walk an inline array or follow a pointer to `count` consecutive elements.
 static void counted(DatArchive* a, uint32_t offset, int32_t pointer,
                     int32_t element, uint64_t count, const DatMember* m,
                     Parent parent, void* slot)
@@ -1492,7 +1538,10 @@ static void counted(DatArchive* a, uint32_t offset, int32_t pointer,
         return;
     }
     int32_t target = DAT_NONE;
-    if (T(a, p)->kind == DAT_KIND_POINTER) {
+    if (T(a, p)->kind == DAT_KIND_ARRAY) {
+        counted_array(a, offset, p, count, m, parent, slot);
+        return;
+    } else if (T(a, p)->kind == DAT_KIND_POINTER) {
         target = T(a, p)->target;
     } else if (element == DAT_NONE) {
         Parent none = { DAT_NONE, 0, false };
@@ -2082,17 +2131,18 @@ static void layout(DatArchive* a, uint32_t offset, int32_t type, void* native,
     }
 }
 
-/// The native size of a struct ending in a `DAT_EXTENT` array at `offset`,
-/// with as many elements as it can have.
-static size_t extent_native_size(const DatArchive* a, uint32_t offset,
-                                 int32_t r)
+/// The native size of a struct ending in a counted or extent array.
+static size_t extent_native_size(DatArchive* a, uint32_t offset, int32_t r)
 {
     const DatType* t = T(a, r);
     size_t size = t->native_size;
-    if (!t->has_extent || t->nmembers == 0) {
+    if (t->nmembers == 0) {
         return size;
     }
     const DatMember* m = &t->members[t->nmembers - 1];
+    if (!m->extent && m->count == NULL) {
+        return size;
+    }
     int32_t arr = resolve(a, m->type);
     if (arr == DAT_NONE || T(a, arr)->kind != DAT_KIND_ARRAY) {
         return size;
@@ -2101,7 +2151,19 @@ static size_t extent_native_size(const DatArchive* a, uint32_t offset,
     if (e == DAT_NONE) {
         return size;
     }
-    uint64_t n = extent_bound(a, offset + m->offset, T(a, e)->size);
+    uint64_t n;
+    if (m->count != NULL) {
+        const Scope* env = bound(a, a->env, m, r, offset, true, 0);
+        Context c = { MODE_COUNT, r, offset, DAT_NONE, 0, env, 0, 0 };
+        if (!eval(a, &c, m->count, &n)) {
+            n = T(a, arr)->count;
+        }
+        if (!array_count_fits(a, offset + m->offset, arr, e, n)) {
+            return size;
+        }
+    } else {
+        n = extent_bound(a, offset + m->offset, T(a, e)->size);
+    }
     size_t end = m->native_offset + (size_t) n * T(a, e)->native_size;
     return end > size ? end : size;
 }
@@ -2594,6 +2656,24 @@ static void verify(Verify* v, uint32_t offset, int32_t type,
             if (!m->has_offset || m->type == DAT_NONE ||
                 m->type_tag != DAT_NONE || m->script != NULL || m->extent)
             {
+                continue;
+            }
+            int32_t arr = resolve(a, m->type);
+            uint64_t count;
+            if (m->count != NULL && arr != DAT_NONE &&
+                T(a, arr)->kind == DAT_KIND_ARRAY &&
+                map_get(&a->array_counts,
+                        key2(offset + m->offset, T(a, arr)->id), &count))
+            {
+                int32_t e = resolve(a, T(a, arr)->target);
+                if (e != DAT_NONE) {
+                    for (uint64_t j = 0; j < count; j++) {
+                        verify(v, offset + m->offset + j * T(a, e)->size, e,
+                               (const char*) native + m->native_offset +
+                                   j * T(a, e)->native_size,
+                               depth + 1);
+                    }
+                }
                 continue;
             }
             verify(v, offset + m->offset, m->type,

@@ -1,0 +1,241 @@
+use melee_dat::{
+    dwarf::{
+        Annotation, Member, Type, TypeGraph, TypeKind, Unit,
+        canonical::Canonical,
+    },
+    hsd::{Archive, ArchiveHeader, NamedSymbol},
+    walk::{Issue, Walk, Walker},
+};
+use std::collections::HashMap;
+
+fn tag(graph: &mut TypeGraph, value: &str) -> Annotation {
+    Annotation {
+        name: Some(graph.strings.get_or_intern("btf_decl_tag")),
+        value: Some(graph.strings.get_or_intern(value)),
+    }
+}
+
+fn member(
+    graph: &mut TypeGraph,
+    name: &str,
+    ty: u64,
+    offset: u64,
+    tags: &[&str],
+) -> Member {
+    Member {
+        name: Some(graph.strings.get_or_intern(name)),
+        ty: Some(ty),
+        offset: Some(offset),
+        bit_size: None,
+        bit_offset: None,
+        annotations: tags.iter().map(|value| tag(graph, value)).collect(),
+    }
+}
+
+fn ty(
+    graph: &mut TypeGraph,
+    id: u64,
+    name: Option<&str>,
+    size: Option<u64>,
+    kind: TypeKind,
+) {
+    let name = name.map(|name| graph.strings.get_or_intern(name));
+    graph.types.insert(
+        id,
+        Type {
+            unit: 0,
+            name,
+            byte_size: size,
+            decl_file: None,
+            scope: None,
+            annotations: Vec::new(),
+            kind,
+        },
+    );
+}
+
+/// A count followed by an inline array of tagged unions. Its elements
+/// point to leaves through a DAT_TYPE typedef, and bind their own index.
+fn graph(bound: Option<u64>) -> TypeGraph {
+    let mut graph = TypeGraph::default();
+    graph.units.push(Unit {
+        name: None,
+        address_size: 4,
+        macros: Vec::new(),
+    });
+    ty(
+        &mut graph,
+        1,
+        Some("u32"),
+        Some(4),
+        TypeKind::Base {
+            encoding: gimli::DW_ATE_unsigned.0,
+        },
+    );
+    let value = member(&mut graph, "value", 1, 0, &[]);
+    ty(
+        &mut graph,
+        2,
+        Some("Leaf"),
+        Some(4),
+        TypeKind::Record {
+            union: false,
+            declaration: false,
+            members: vec![value],
+        },
+    );
+    ty(
+        &mut graph,
+        3,
+        None,
+        Some(4),
+        TypeKind::Pointer { target: None },
+    );
+    ty(
+        &mut graph,
+        4,
+        Some("LeafPtr"),
+        Some(4),
+        TypeKind::Typedef { target: Some(3) },
+    );
+    let typed = tag(&mut graph, "dat:type(Leaf)");
+    graph.types.get_mut(&4).unwrap().annotations.push(typed);
+    let first = member(&mut graph, "first", 4, 0, &["dat:if(slot == 0)"]);
+    let second = member(&mut graph, "second", 4, 0, &["dat:if(slot == 1)"]);
+    ty(
+        &mut graph,
+        5,
+        Some("Entry"),
+        Some(4),
+        TypeKind::Record {
+            union: true,
+            declaration: false,
+            members: vec![first, second],
+        },
+    );
+    ty(
+        &mut graph,
+        6,
+        None,
+        bound.map(|n| n * 4),
+        TypeKind::Array {
+            element: Some(5),
+            dims: vec![bound],
+        },
+    );
+    ty(
+        &mut graph,
+        8,
+        Some("s32"),
+        Some(4),
+        TypeKind::Base {
+            encoding: gimli::DW_ATE_signed.0,
+        },
+    );
+    let count = member(&mut graph, "count", 8, 0, &[]);
+    let entries = member(
+        &mut graph,
+        "entries",
+        6,
+        4,
+        &["dat:count(count)", "dat:bind(slot, _index)"],
+    );
+    ty(
+        &mut graph,
+        7,
+        Some("Root"),
+        Some(4 + bound.unwrap_or(0) * 4),
+        TypeKind::Record {
+            union: false,
+            declaration: false,
+            members: vec![count, entries],
+        },
+    );
+    graph
+}
+
+fn walk(graph: &TypeGraph, count: u32) -> Walk {
+    let words = [count, 16, 20, 16, 123, 456];
+    let data: Vec<_> = words.into_iter().flat_map(u32::to_be_bytes).collect();
+    let archive = Archive {
+        header: ArchiveHeader {
+            file_size: 0,
+            data_size: data.len() as u32,
+            reloc_count: 3,
+            public_count: 1,
+            extern_count: 0,
+            version: [0; 12],
+        },
+        data: &data,
+        relocs: vec![4, 8, 12],
+        // A symbol inside the array must not shorten an explicit count.
+        publics: vec![NamedSymbol {
+            offset: 8,
+            symbol: 0,
+        }],
+        externs: Vec::new(),
+        symbols: b"interior\0",
+    };
+    let canonical = Canonical::new(graph);
+    let macros = HashMap::new();
+    let mut walker = Walker::new(graph, &canonical, &macros, &archive);
+    walker.root(0, 7, "root", &[]);
+    walker.finish()
+}
+
+#[test]
+fn inline_count_follows_all_elements_and_binds_each_index() {
+    let graph = graph(None);
+    let walked = walk(&graph, 2);
+    assert!(walked.issues.is_empty(), "{:?}", walked.issues);
+    assert_eq!(walked.pointers.len(), 2);
+    assert!(walked.pointers.contains(&4));
+    assert!(walked.pointers.contains(&8));
+    assert!(!walked.pointers.contains(&12));
+    assert!(walked.objects.contains_key(&16));
+    assert!(walked.objects.contains_key(&20));
+    let canonical = Canonical::new(&graph);
+    let entry = canonical.of(5).unwrap();
+    assert_eq!(walked.choices[&(4, entry)], 0);
+    assert_eq!(walked.choices[&(8, entry)], 1);
+    assert_eq!(walked.extents[&8], 12);
+}
+
+#[test]
+fn inline_count_zero_follows_nothing() {
+    let walked = walk(&graph(None), 0);
+    assert!(walked.issues.is_empty());
+    assert!(walked.pointers.is_empty());
+    assert_eq!(walked.objects.len(), 1);
+    assert_eq!(walked.extents.len(), 1);
+    assert_eq!(walked.extents[&0], 4);
+}
+
+#[test]
+fn inline_count_rejects_truncated_and_negative_counts() {
+    let graph = graph(None);
+    for count in [6, u32::MAX] {
+        let walked = walk(&graph, count);
+        assert_eq!(walked.issues.len(), 1);
+        assert!(matches!(
+            walked.issues.first(),
+            Some(Issue::OutOfBounds { at: 4, .. })
+        ));
+        assert!(walked.pointers.is_empty());
+        assert_eq!(walked.objects.len(), 1);
+    }
+}
+
+#[test]
+fn inline_count_respects_fixed_capacity() {
+    let graph = graph(Some(2));
+    let walked = walk(&graph, 1);
+    assert!(walked.issues.is_empty());
+    assert_eq!(walked.pointers.len(), 1);
+    let walked = walk(&graph, 3);
+    assert!(matches!(
+        walked.issues.first(),
+        Some(Issue::OutOfBounds { at: 4, .. })
+    ));
+    assert!(walked.pointers.is_empty());
+}
