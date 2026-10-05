@@ -92,7 +92,8 @@ The loaders record what they load in the DWARF build:
   `HSD_ArchiveGetPublicAddress`.
 
 They record them with `DAT_ROOTS` (in `dat_macros.h`), which declares a
-witness of each destination's type, annotated with the name. A root is
+witness of each destination's type, annotated with the name. An array
+destination is loaded into its first element. A root is
 untyped if its destination is `void*`, and skipped if its name isn't a
 string literal or a global string.
 
@@ -113,9 +114,11 @@ dats take `*` and `?`. The first line with a matching archive
 wins, then the first `*` line. The attributes mirror the annotations:
 `type:T` like `DAT_TYPE(T)` (`T` or `T*`), and a count like `DAT_COUNT` and
 `DAT_EXTENT`: `count:N`, or `extent` for as many as fit before the next
-public symbol or pointer target. A count also applies where the loader
-already gives the type, e.g. `map_plit = *:*; // extent` for a
-null-terminated list of `LightList*`. Raw data (textures, palettes) is
+public symbol or pointer target, and `terminated:V` like
+`DAT_TERMINATED(V)`. `script:TABLE`, like `DAT_SCRIPT(TABLE)`, makes an
+address's root a command script. A count also applies where the loader already gives
+the type, e.g. `map_plit = *:*; // terminated:0` for a null-terminated
+list of `LightList*`. Raw data (textures, palettes) is
 `type:u8 extent` or `type:u16 extent`, like the extracted blobs in
 `config.yml`.
 
@@ -348,13 +351,13 @@ type instead.
 
 | Annotation | Meaning |
 | --- | --- |
-| `DAT_COUNT(n)` | Pointer to `n` elements. |
+| `DAT_COUNT(n)` | Pointer to `n` elements. On a pointer typedef, `n` is in the bindings, for lists of counted lists. |
 | `DAT_IF(cond)` | Union member is valid when `cond` holds; the first match wins, so a last `DAT_IF(true)` is a catch-all. |
 | `DAT_TYPE(T)` | `void*` points to a `T`. Also on a `void*` typedef, for arrays of them. |
 | `DAT_EXTENT` | Array, or pointer to elements, that runs as far as the data does. Stopgap for lengths only the code knows. |
 | `DAT_BIND(T::f, value)` | `T::f` is `value` for everything reached through this member. |
-| `DAT_SCRIPT(table)`, `DAT_SCRIPT(length)` | Pointer to a command script: opcode in the top 6 bits; opcodes 0-9 are the generic commands (`Command_Execute`), and the script's own from 10 are as long in words as `table` (an array in the code) says, or as `length`, an expression in `_command` (the command's first word), e.g. `itCommandLength(_command)`. Ends at opcode 0; relocated words point to more script. |
-| `DAT_TERMINATED(value)` | Pointer to elements up to one whose first word (or whole value, if smaller) is `value` and not a relocated pointer: `0` for null-terminated lists, `GX_VA_NULL` for vertex descriptors, `-1` for `s8` lists. On a member, or on a pointer typedef for nested lists. |
+| `DAT_SCRIPT(table)`, `DAT_SCRIPT(length)` | Pointer to a command script: opcode in the top 6 bits; opcodes 0-9 are the generic commands (`Command_Execute`), and the script's own from 10 are as long in words as `table` (an array in the code) says, or as `length`, an expression in `_command` (the command's first word), e.g. `itCommandLength(_command)`. Ends at opcode 0, or a command whose `length` is 0; relocated words point to more script. |
+| `DAT_TERMINATED(value)` | Pointer to elements up to one whose first word (or whole value, if smaller) is `value` and not a relocated pointer: `0` for null-terminated lists, `GX_VA_NULL` for vertex descriptors, `-1` for `s8` lists. On a member, or on a pointer typedef for nested lists. `DAT_TERMINATED(value, n)`: the terminator is `n` elements long, for lists that end in it more than once. |
 | `DAT_BLOB` | On a `u8` typedef: one format of bytes the archive doesn't break down: keyframe streams (`HSD_FObjData`), texels (`HSD_ImageData`), display lists (`HSD_DisplayList`). The size comes from the pointer, e.g. `DAT_COUNT(length)`. Raw `u8` data stays unexplained. |
 
 Expressions are C. Names resolve to fields of the enclosing record, then

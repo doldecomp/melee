@@ -5,6 +5,7 @@
 #include <sysdolphin/baselib/forward.h>
 
 #include <dat_macros.h>
+#include <placeholder.h>
 
 /// Model with a single animation or no animation
 struct StaticModelDesc {
@@ -30,9 +31,15 @@ typedef struct LightList {
     HSD_LightDesc* desc;
     HSD_LightAnim** anims DAT_TERMINATED(0);
 } LightList;
+/// Two words, unlike #HSD_CameraAnim: the archives' lists of these start
+/// right after them.
+typedef struct SceneFogAnim {
+    HSD_AObjDesc* aobjdesc;
+    UNK_T x4;
+} SceneFogAnim;
 typedef struct SceneFogDesc {
     HSD_FogDesc* desc;
-    HSD_CameraAnim** anims DAT_TERMINATED(0);
+    SceneFogAnim** anims DAT_TERMINATED(0);
 } SceneFogDesc;
 
 /// The basis of a rendered scene, like a stage, menu, or HUD overlay

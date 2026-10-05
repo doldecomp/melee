@@ -251,6 +251,10 @@ impl Emitter<'_, '_> {
     }
 
     fn name(&mut self, name: &str) -> String {
+        // A nested member's path: the walk looks up each remainder
+        for (i, _) in name.match_indices('.') {
+            self.names.insert(name[i + 1..].to_owned());
+        }
         self.names.insert(name.to_owned());
         format!("DAT_NAME_{}", identifier(name))
     }
@@ -331,6 +335,15 @@ impl Emitter<'_, '_> {
         if let Some(terminator) = &row.terminator {
             fields.push(format!(".terminator = {}", self.expr(terminator)));
         }
+        if row.terminator_length > 1 {
+            fields.push(format!(
+                ".terminator_length = {}",
+                row.terminator_length
+            ));
+        }
+        if let Some(count) = &row.count_tag {
+            fields.push(format!(".count_tag = {}", self.expr(count)));
+        }
         if row.type_tag != NONE {
             fields.push(format!(".type_tag = {}", self.ty(row.type_tag)));
         }
@@ -375,27 +388,17 @@ impl Emitter<'_, '_> {
         if let Some(terminator) = &m.terminator {
             parts.push(format!(".terminator = {}", self.expr(terminator)));
         }
+        if m.terminator_length > 1 {
+            parts.push(format!(".terminator_length = {}", m.terminator_length));
+        }
         if let Some(cond) = &m.cond {
             parts.push(format!(".cond = {}", self.expr(cond)));
         }
         if m.type_tag != NONE {
             parts.push(format!(".type_tag = {}", self.ty(m.type_tag)));
         }
-        match &m.script {
-            Some(ScriptRow::Table(table, bytes)) => {
-                self.scripts.insert(table.clone(), bytes.clone());
-                parts.push(format!(
-                    ".script = &dat_script_{}",
-                    identifier(table)
-                ));
-            }
-            Some(ScriptRow::Length(length)) => {
-                let length = self.expr(length);
-                parts.push(format!(
-                    ".script = &(const DatScript) {{ .length = {length} }}"
-                ));
-            }
-            None => {}
+        if let Some(script) = &m.script {
+            parts.push(self.script(script));
         }
         if !m.binds.is_empty() {
             let binds: Vec<String> = m
@@ -435,6 +438,20 @@ impl Emitter<'_, '_> {
         }
     }
 
+    /// A script's `.script` field.
+    fn script(&mut self, script: &ScriptRow) -> String {
+        match script {
+            ScriptRow::Table(table, bytes) => {
+                self.scripts.insert(table.clone(), bytes.clone());
+                format!(".script = &dat_script_{}", identifier(table))
+            }
+            ScriptRow::Length(length) => {
+                let length = self.expr(length);
+                format!(".script = &(const DatScript) {{ .length = {length} }}")
+            }
+        }
+    }
+
     fn root(&mut self, root: &super::generator::RootRow) -> Vec<String> {
         let mut parts = vec![format!(".name = {}", literal(&root.name))];
         if root.alias {
@@ -451,6 +468,13 @@ impl Emitter<'_, '_> {
             Count::Unbounded => {
                 parts.push(".count_kind = DAT_COUNT_EXTENT".into());
             }
+            Count::Terminated(value) => {
+                parts.push(".count_kind = DAT_COUNT_TERMINATED".into());
+                parts.push(format!(".count = {}", int(value)));
+            }
+        }
+        if let Some(script) = &root.script {
+            parts.push(self.script(script));
         }
         if !root.binds.is_empty() {
             let binds: Vec<String> = root
@@ -806,6 +830,7 @@ fn int(value: u64) -> String {
 fn function_c(function: &str) -> Option<&'static str> {
     match function {
         "itCommandLength" => Some("IT_COMMAND_LENGTH"),
+        "colAnimCommandLength" => Some("COL_ANIM_COMMAND_LENGTH"),
         "GXGetTexBufferSize" => Some("GX_GET_TEX_BUFFER_SIZE"),
         _ => None,
     }

@@ -210,6 +210,13 @@ impl Project {
                 Count::Unbounded => {
                     walker.root_array(symbol.offset, ty, None, &name, bindings)
                 }
+                Count::Terminated(value) => walker.root_array(
+                    symbol.offset,
+                    ty,
+                    walker.terminated_count(symbol.offset, ty, value),
+                    &name,
+                    bindings,
+                ),
             }
             rooted = true;
         }
@@ -217,6 +224,11 @@ impl Project {
         for (address, entry) in self.aliases(file, at) {
             let Some(ty) = &entry.ty else { continue };
             let ty = self.symbol_types[ty];
+            if let Some(script) = entry.script() {
+                walker.root_script(address, ty, &script, &entry.name);
+                rooted = true;
+                continue;
+            }
             match entry.count.unwrap_or(Count::One) {
                 Count::One => walker.root(address, ty, &entry.name, &[]),
                 Count::Exactly(n) => {
@@ -225,6 +237,13 @@ impl Project {
                 Count::Unbounded => {
                     walker.root_array(address, ty, None, &entry.name, &[])
                 }
+                Count::Terminated(value) => walker.root_array(
+                    address,
+                    ty,
+                    walker.terminated_count(address, ty, value),
+                    &entry.name,
+                    &[],
+                ),
             }
             rooted = true;
         }

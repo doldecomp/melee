@@ -41,13 +41,19 @@
   `x4_specialAttributes` ambiguous: their item kinds aren't bound. The
   kinds are known per slot (`ftKb_SpecialN_800F16D0`).
 - Fighters' part animations (`ftData_x1C.x8`) sit next to `HSD_AnimJoint`
-  trees that nothing points to. Their relocations can't be explained.
+  trees that nothing points to, whose subtrees the part animations reach.
+  `dat_symbols.txt` types their heads by address.
 
 Not errors:
 
 - 23 objects reached as both `HSD_CameraAnim` and `HSD_WObjAnim`: the
   exporter reuses identical bytes. The walker could recognize this.
 - `-1` in pointer fields means none. Counted, not reported.
+
+- `ItCo.dat` 0x50A0-0x7DDC (right after `itPublicData.x8`) is a
+  byte-for-byte copy of 0x2FC-0x303C whose pointers point to the
+  originals. `dat_symbols.txt` types its structs and scripts by address; its
+  43 `ItemSpecialAttributes` (kinds unbound) remain.
 
 ## Stopgaps
 
@@ -102,12 +108,16 @@ Not errors:
 ## Coverage
 
 - `ALDYakuAll` (`StageInfo.ald_yaku_all`) is a null-terminated table of
-  item scripts, loaded as `void*`. Walking them needs a script attribute
-  for `dat_symbols.txt` roots, mirroring `DAT_SCRIPT`, so that its entries
-  can be `union CmdUnion*` without an ambiguous union.
+  item scripts, loaded as `void*`: a null, then the scripts from index 1
+  (as `Ground` reads them), then a null. The scripts are typed by address
+  (`script:`); the lists (~900 bytes) need a pointer typedef with
+  `DAT_SCRIPT` and a list that skips its first null.
+- `PlSb.dat` 0x75C-0x1444, after Sandbag's `FtSFX`, parses as subaction
+  commands but has no end command before the next object: not standalone
+  scripts. Nothing points into it.
 
 - Loaded into untyped destinations, types unknown:
-  `sqEventInitDataLevelTbl`, `tournament_box*_array`, `mnNameDefaultName*`
+  `mnNameDefaultName*`
   (and `mnNameAutoName*`), `MemCardIconData`, `MemSnapIconData`.
 - `toy.c` loads trophy symbols through `symbol_name` fields of its tables;
   those are covered by name patterns instead.
@@ -115,12 +125,6 @@ Not errors:
   relocated by `ftData` at runtime. They could be read as nested archives.
 - About 15,000 `void*` fields aren't followed. Use `DAT_TYPE` where the type
   is known.
-- `UnkStageDat.unk18` (map_head +0x18, count `unk1C`): entries are
-  `{ HSD_LightDesc*, word }`, where the word is flags in some stages (GrGr:
-  0 or 0xE0000000, as `ground.c` reads it through `LightOverrideEntry`) and
-  a relocated `HSD_LightAnim**` in others (GrNBa, GrPu, GrGd, GrIm: the
-  entries are the stage's `LightList`s). Left `void*`: a struct can't be
-  both, and no annotation chooses by relocation.
 
 ## Tool
 

@@ -87,7 +87,7 @@ struct HSD_LightDesc {
     /* 0x14 */ HSD_WObjDesc* interest;
     union HSD_LightDesc_u {
         void* p DAT_IF(false);
-        f32* shininess DAT_IF(false);
+        f32* shininess DAT_IF((flags & LOBJ_TYPE_MASK) == LOBJ_INFINITE);
         HSD_LightPointDesc* point DAT_IF((flags & LOBJ_TYPE_MASK) ==
                                              LOBJ_POINT &&
                                          !(attnflags & LOBJ_LIGHT_ATTN));

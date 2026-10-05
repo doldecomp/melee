@@ -1995,7 +1995,7 @@ struct GroundParam {
      * One row per #StKind this ground serves, looked up by
      * #StageParam::stkind.
      */
-    StageParam* stage_params;
+    StageParam* stage_params DAT_COUNT(stage_param_count);
     s32 stage_param_count;
     GXColor xB8;
     GXColor xBC;
@@ -2017,7 +2017,7 @@ struct UnkStageDat_x8_t {
     /* +14 */ UNK_T x14;
     /* +18 */ LightList** x18 DAT_TERMINATED(0);
     /* +1C */ HSD_FogDesc* x1C;
-    /* +20 */ GrJoint* unk20;
+    /* +20 */ GrJoint* unk20 DAT_COUNT(unk24);
     /* +24 */ s32 unk24; // size of unk20 array
     /* +28 */ UNK_T x28;
     /* +2C */ s16* x2C;
@@ -2051,7 +2051,9 @@ struct UnkStageDat {
     HSD_Spline** unk10 DAT_COUNT(unk14);
     s32 unk14;
 
-    void* unk18 DAT_COUNT(unk1C);
+    /// The game searches \c unk1C entries, but the archives' counts run
+    /// past the table into the data after it.
+    struct LightOverrideEntry* unk18 DAT_EXTENT;
     s32 unk1C;
 
     struct GroundShadowEntry* unk20 DAT_COUNT(unk24);

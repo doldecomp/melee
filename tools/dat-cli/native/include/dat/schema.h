@@ -82,6 +82,7 @@ typedef enum DatOp {
 typedef enum DatFunction {
     DAT_FN_IT_COMMAND_LENGTH,
     DAT_FN_GX_GET_TEX_BUFFER_SIZE,
+    DAT_FN_COL_ANIM_COMMAND_LENGTH,
 } DatFunction;
 
 /// An expression node. Arithmetic is unsigned 64-bit, as `melee-dat`
@@ -137,6 +138,8 @@ typedef struct DatMember {
     /// `DAT_COUNT`, `DAT_TERMINATED` and `DAT_IF`.
     const DatExpr* count;
     const DatExpr* terminator;
+    /// How many elements `DAT_TERMINATED`'s terminator takes; 0 for one.
+    uint32_t terminator_length;
     const DatExpr* cond;
     /// `DAT_TYPE`.
     int32_t type_tag;
@@ -178,8 +181,12 @@ typedef struct DatType {
     /// Structs and unions.
     const DatMember* members;
     uint32_t nmembers;
-    /// Typedefs: `DAT_TERMINATED`'s value.
+    /// Typedefs: `DAT_TERMINATED`'s value, and how many elements the
+    /// terminator takes (0 for one).
     const DatExpr* terminator;
+    uint32_t terminator_length;
+    /// Pointer typedefs: `DAT_COUNT`, an expression in the bindings.
+    const DatExpr* count_tag;
     /// Typedefs: `DAT_TYPE`'s type.
     int32_t type_tag;
 } DatType;
@@ -189,6 +196,9 @@ typedef enum DatCount {
     DAT_COUNT_EXACTLY,
     /// As many as fit before the next public symbol or pointer target.
     DAT_COUNT_EXTENT,
+    /// Up to and including the first element whose first word (or whole
+    /// value, if smaller) is `n` and not a relocated pointer.
+    DAT_COUNT_TERMINATED,
 } DatCount;
 
 /// A value a root's loader binds, for `DAT_IF` and `DAT_BIND` names.
@@ -207,6 +217,8 @@ typedef struct DatRoot {
     int32_t type;
     uint8_t count_kind;
     uint64_t count;
+    /// A command script nothing points to, for an alias; `NULL` otherwise.
+    const DatScript* script;
     const DatRootBind* binds;
     uint32_t nbinds;
 } DatRoot;

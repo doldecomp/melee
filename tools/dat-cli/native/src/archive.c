@@ -560,12 +560,26 @@ static int32_t pointee(const DatArchive* a, int32_t target)
     return r;
 }
 
-/// A `DAT_TERMINATED` value on a typedef, or one it names.
-static const DatExpr* typedef_terminator(const DatArchive* a, int32_t type)
+/// A `DAT_TERMINATED` value on a typedef, or one it names, and its length.
+static const DatExpr* typedef_terminator(const DatArchive* a, int32_t type,
+                                         uint32_t* length)
 {
     while (type != DAT_NONE && T(a, type)->kind == DAT_KIND_TYPEDEF) {
         if (T(a, type)->terminator != NULL) {
+            *length = T(a, type)->terminator_length;
             return T(a, type)->terminator;
+        }
+        type = T(a, type)->target;
+    }
+    return NULL;
+}
+
+/// A `DAT_COUNT` on a pointer typedef, or one it names.
+static const DatExpr* typedef_count(const DatArchive* a, int32_t type)
+{
+    while (type != DAT_NONE && T(a, type)->kind == DAT_KIND_TYPEDEF) {
+        if (T(a, type)->count_tag != NULL) {
+            return T(a, type)->count_tag;
         }
         type = T(a, type)->target;
     }
@@ -875,6 +889,32 @@ static bool field_value(const DatArchive* a, int32_t record, uint32_t base,
         return false;
     }
     const DatMember* m = NULL;
+    /* A member of a nested record, `x0.count`: by the name's text */
+    const char* full = a->s->names[name];
+    const char* dot = strchr(full, '.');
+    if (dot != NULL) {
+        size_t len = (size_t) (dot - full);
+        for (uint32_t i = 0; i < t->nmembers; i++) {
+            const DatMember* c = &t->members[i];
+            if (c->name != DAT_NONE &&
+                strncmp(a->s->names[c->name], full, len) == 0 &&
+                a->s->names[c->name][len] == '\0')
+            {
+                m = c;
+                break;
+            }
+        }
+        if (m == NULL || !m->has_offset || m->type == DAT_NONE) {
+            return false;
+        }
+        for (uint32_t i = 1; i < a->s->nnames; i++) {
+            if (strcmp(a->s->names[i], dot + 1) == 0) {
+                return field_value(a, resolve(a, m->type), base + m->offset,
+                                   (int32_t) i, out);
+            }
+        }
+        return false;
+    }
     for (uint32_t i = 0; i < t->nmembers; i++) {
         if (t->members[i].name == name) {
             m = &t->members[i];
@@ -961,6 +1001,30 @@ static bool resolve_name(const DatArchive* a, const Context* c, int32_t name,
         return false;
     }
     return false;
+}
+
+/// See `col_anim_command_length` in `expr.rs`.
+static bool col_anim_command_length(uint64_t command, uint64_t* out)
+{
+    static const uint8_t own[11] = { 0, 1, 1, 2, 2, 2, 1, 1, 2, 2, 1 };
+    uint64_t opcode = (command >> 26) & 0x3F;
+    if (opcode >= 10 && opcode <= 20) {
+        *out = own[opcode - 10];
+        return true;
+    }
+    switch (opcode) {
+    case 21:
+        *out = 5;
+        return true;
+    case 22:
+        *out = 3;
+        return true;
+    case 23:
+        *out = 1;
+        return true;
+    default:
+        return false;
+    }
 }
 
 static bool it_command_length(uint64_t command, uint64_t* out)
@@ -1084,6 +1148,8 @@ static bool eval_at(const DatArchive* a, const Context* c, const DatExpr* e,
         switch (e->function) {
         case DAT_FN_IT_COMMAND_LENGTH:
             return e->nargs == 1 && it_command_length(args[0], out);
+        case DAT_FN_COL_ANIM_COMMAND_LENGTH:
+            return e->nargs == 1 && col_anim_command_length(args[0], out);
         case DAT_FN_GX_GET_TEX_BUFFER_SIZE:
             return e->nargs == 5 && gx_get_tex_buffer_size(
                                         (uint16_t) args[0], (uint16_t) args[1],
@@ -1489,7 +1555,7 @@ static void counted(DatArchive* a, uint32_t offset, int32_t pointer,
 /// Follow a `DAT_TERMINATED` pointer: elements up to one whose first word
 /// is the terminator value, which is walked too.
 static void terminated(DatArchive* a, uint32_t offset, int32_t pointer,
-                       void* slot, const DatExpr* terminator)
+                       void* slot, const DatExpr* terminator, uint32_t length)
 {
     int32_t p = resolve(a, pointer);
     if (p == DAT_NONE) {
@@ -1529,6 +1595,7 @@ static void terminated(DatArchive* a, uint32_t offset, int32_t pointer,
     uint32_t width = size < 4 ? size : 4;
     uint64_t mask = width >= 8 ? ~0ull : (1ull << (8 * width)) - 1;
     uint64_t n = 0;
+    uint32_t ended = 0;
     bool past = false;
     for (uint64_t i = 0;; i++) {
         uint64_t at = value + i * size;
@@ -1537,9 +1604,12 @@ static void terminated(DatArchive* a, uint32_t offset, int32_t pointer,
             break;
         }
         n = i + 1;
-        if (bytes_at(a, at, width) == (term & mask) &&
-            !bits_has(&a->reloc, at, a->size))
+        if (ended > 0 || (bytes_at(a, at, width) == (term & mask) &&
+                          !bits_has(&a->reloc, at, a->size)))
         {
+            ended++;
+        }
+        if (ended >= (length ? length : 1)) {
             break;
         }
     }
@@ -1718,6 +1788,9 @@ static bool command_length(const DatArchive* a, const DatScript* s,
 /// Follow a `DAT_SCRIPT` pointer, and every script its commands point to.
 /// Scripts stay as they are in the data: big-endian words, their pointers
 /// offsets.
+static void script_at(DatArchive* a, uint32_t value, int32_t id,
+                      const DatScript* s);
+
 static void script(DatArchive* a, uint32_t offset, int32_t pointer,
                    const DatScript* s, void* slot)
 {
@@ -1738,7 +1811,13 @@ static void script(DatArchive* a, uint32_t offset, int32_t pointer,
     }
     bits_set(&a->pointer, offset, a->size);
     store_pointer(slot, a->data + value);
-    int32_t id = pointee(a, T(a, p)->target);
+    script_at(a, value, pointee(a, T(a, p)->target), s);
+}
+
+/// Walk the script at `value`, and every script its commands point to.
+static void script_at(DatArchive* a, uint32_t value, int32_t id,
+                      const DatScript* s)
+{
     VEC(uint32_t) queue = { 0 };
     VEC_PUSH(queue, value);
     while (queue.len > 0) {
@@ -1774,7 +1853,9 @@ static void script(DatArchive* a, uint32_t offset, int32_t pointer,
                     VEC_PUSH(queue, word(a, w));
                 }
             }
-            if (opcode == 0) {
+            /* A length expression ends the script with a command of 0
+             * words */
+            if (opcode == 0 || (length == 0 && s->table == NULL)) {
                 ended = true;
                 break;
             }
@@ -1836,10 +1917,23 @@ static void layout(DatArchive* a, uint32_t offset, int32_t type, void* native,
     if (type == DAT_NONE) {
         return;
     }
-    const DatExpr* term = typedef_terminator(a, type);
+    uint32_t term_length = 0;
+    const DatExpr* term = typedef_terminator(a, type, &term_length);
     if (term != NULL) {
-        terminated(a, offset, type, native, term);
+        terminated(a, offset, type, native, term, term_length);
         return;
+    }
+    const DatExpr* count_tag = typedef_count(a, type);
+    if (count_tag != NULL) {
+        Context c = {
+            MODE_TERMINATOR, DAT_NONE, 0, DAT_NONE, 0, a->env, 0, 0
+        };
+        uint64_t count;
+        if (eval(a, &c, count_tag, &count)) {
+            Parent none = { DAT_NONE, 0, false };
+            counted(a, offset, type, DAT_NONE, count, NULL, none, native);
+            return;
+        }
     }
     int32_t declared = typedef_type(a, type);
     if (declared != DAT_NONE) {
@@ -1885,7 +1979,8 @@ static void layout(DatArchive* a, uint32_t offset, int32_t type, void* native,
             } else if (m->extent) {
                 extent(a, at, m->type, m, here, mnative);
             } else if (m->terminator != NULL) {
-                terminated(a, at, m->type, mnative, m->terminator);
+                terminated(a, at, m->type, mnative, m->terminator,
+                           m->terminator_length);
             } else if (m->nbinds > 0 &&
                        T(a, resolve(a, m->type))->kind == DAT_KIND_ARRAY)
             {
@@ -1930,7 +2025,8 @@ static void layout(DatArchive* a, uint32_t offset, int32_t type, void* native,
             if (m->script != NULL) {
                 script(a, offset, m->type, m->script, native);
             } else if (m->terminator != NULL) {
-                terminated(a, offset, m->type, native, m->terminator);
+                terminated(a, offset, m->type, native, m->terminator,
+                           m->terminator_length);
             } else {
                 layout(a, offset, m->type, native, parent);
             }
@@ -2159,6 +2255,30 @@ static void* walk_root_array(DatArchive* a, uint32_t offset, int32_t element,
     return block;
 }
 
+/// How many elements of `type` a list at `offset` holds, up to and
+/// including the first whose first word is `term` and not relocated.
+static uint64_t terminated_count(const DatArchive* a, uint32_t offset,
+                                 int32_t type, uint64_t term)
+{
+    int32_t e = resolve(a, type);
+    if (e == DAT_NONE || T(a, e)->size == 0) {
+        return 0;
+    }
+    uint32_t size = T(a, e)->size;
+    uint32_t width = size < 4 ? size : 4;
+    uint64_t mask = (1ull << (8 * width)) - 1;
+    uint64_t n = 0;
+    for (uint64_t at = offset; at + size <= a->size; at += size) {
+        n++;
+        if (bytes_at(a, at, width) == (term & mask) &&
+            !bits_has(&a->reloc, at, a->size))
+        {
+            break;
+        }
+    }
+    return n;
+}
+
 static void* walk(DatArchive* a, uint32_t offset, const DatRoot* root,
                   int32_t type, DatCount count, uint64_t n)
 {
@@ -2170,6 +2290,9 @@ static void* walk(DatArchive* a, uint32_t offset, const DatRoot* root,
         return walk_root_array(a, offset, type, true, n, env);
     case DAT_COUNT_EXTENT:
         return walk_root_array(a, offset, type, false, 0, env);
+    case DAT_COUNT_TERMINATED:
+        return walk_root_array(a, offset, type, true,
+                               terminated_count(a, offset, type, n), env);
     }
     return NULL;
 }
@@ -2226,7 +2349,12 @@ int dat_load_roots(DatArchive* a, const char* file, uint32_t index)
     }
     for (uint32_t j = 0; j < f->nroots; j++) {
         const DatRoot* root = &f->roots[j];
-        if (root->alias) {
+        if (root->alias && root->script != NULL) {
+            a->env = root_env(a, root);
+            script_at(a, root->address, pointee(a, root->type), root->script);
+            finish(a);
+            found++;
+        } else if (root->alias) {
             walk(a, root->address, root, root->type,
                  (DatCount) root->count_kind, root->count);
             found++;

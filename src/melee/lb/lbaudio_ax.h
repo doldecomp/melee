@@ -7,6 +7,8 @@
 #include <melee/gr/forward.h>
 #include <sysdolphin/baselib/forward.h>
 
+#include <dat_macros.h>
+
 #include <sysdolphin/baselib/gobj.h>
 
 /// @todo Create an @c enum for SFX IDs.
@@ -88,11 +90,17 @@ int lbAudioAx_80028B4C(void);
 void lbAudioAx_80028B6C(void);
 void lbAudioAx_80028B90(void);
 
+/// Sound IDs, up to 0x83D60. The archive ends each list with it twice; the
+/// game stops at the first.
+typedef int* lbAudioLoadList DAT_TERMINATED(0x83D60, 2);
+
+/// 30 lists for each pairing of the console's and the saved language, as
+/// #lbAudioAx_80023968 picks them.
 struct lbl_804D6454_t {
-    int** x0;
-    int** x4;
-    int** x8;
-    int** xC;
+    lbAudioLoadList* x0 DAT_COUNT(30);
+    lbAudioLoadList* x4 DAT_COUNT(30);
+    lbAudioLoadList* x8 DAT_COUNT(30);
+    lbAudioLoadList* xC DAT_COUNT(30);
 };
 
 #endif

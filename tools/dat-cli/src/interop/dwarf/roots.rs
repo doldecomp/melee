@@ -2,7 +2,8 @@
 //! `(&dst, "name")` pair passed to an archive loader.
 //!
 //! A witness has the type of `&dst`, a pointer to the pointer the symbol is
-//! loaded into, so the root's type is two pointers down. Its `dat:root`
+//! loaded into, so the root's type is two pointers down. When `dst` is an
+//! array, the symbol is loaded into its first element. Its `dat:root`
 //! annotation is the name argument as written.
 
 pub use super::annotation::RootName;
@@ -68,7 +69,7 @@ pub fn roots<'g>(
         }) else {
             continue;
         };
-        let ty = pointee(graph, pointee(graph, witness.ty));
+        let ty = pointee(graph, first_element(graph, pointee(graph, witness.ty)));
         let names = match &name {
             RootName::Expr(expr) => memory.strings(expr).unwrap_or_default(),
             RootName::Literal(_) => Vec::new(),
@@ -349,6 +350,14 @@ fn strip(graph: &TypeGraph, mut die: Option<DieId>) -> Option<DieId> {
         die = target;
     }
     die
+}
+
+/// An array's first element, or anything else as it is.
+fn first_element(graph: &TypeGraph, die: Option<DieId>) -> Option<DieId> {
+    match graph.types.get(&strip(graph, die)?)?.kind {
+        TypeKind::Array { element, .. } => element,
+        _ => die,
+    }
 }
 
 /// The target of a pointer, looking through typedefs and qualifiers.

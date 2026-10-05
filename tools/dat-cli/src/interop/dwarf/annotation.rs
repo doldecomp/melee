@@ -3,10 +3,10 @@
 use super::expr::{Expr, expr, identifier};
 use winnow::{
     ModalResult, Parser,
-    ascii::{multispace0, multispace1},
+    ascii::{dec_uint, multispace0, multispace1},
     combinator::{
-        alt, cut_err, delimited, dispatch, empty, eof, fail, peek, preceded, repeat,
-        separated, terminated,
+        alt, cut_err, delimited, dispatch, empty, eof, fail, opt, peek, preceded,
+        repeat, separated, terminated,
     },
     token::{any, rest, take_while},
 };
@@ -18,8 +18,9 @@ pub enum DatTag {
     Count(Expr),
     /// `DAT_TERMINATED`: the pointer refers to
     /// elements up to the first whose first word is this value and isn't a
-    /// relocated pointer.
-    Terminated(Expr),
+    /// relocated pointer, then as many more as make the terminator this many
+    /// elements long.
+    Terminated(Expr, u64),
     /// `DAT_EXTENT`: the array holds as many elements as the data does.
     Extent,
     /// `DAT_BLOB`: the typedef names a format of opaque bytes.
@@ -70,7 +71,8 @@ impl DatTag {
 fn tag(input: &mut &str) -> ModalResult<DatTag> {
     dispatch! {take_while(1.., |c: char| c.is_ascii_alphabetic());
         "count" => args(expr).map(DatTag::Count),
-        "terminated" => args(expr).map(DatTag::Terminated),
+        "terminated" => args(terminator)
+            .map(|(value, length)| DatTag::Terminated(value, length)),
         "extent" => eof.value(DatTag::Extent),
         "blob" => eof.value(DatTag::Blob),
         "if" => args(expr).map(DatTag::If),
@@ -109,6 +111,17 @@ fn script(input: &mut &str) -> ModalResult<Script> {
 }
 
 /// `name, expr`.
+/// A terminator's value, then optionally how many elements it takes.
+fn terminator(input: &mut &str) -> ModalResult<(Expr, u64)> {
+    let value = expr.parse_next(input)?;
+    let length = opt(preceded(
+        ',',
+        delimited(multispace0, dec_uint::<_, u64, _>, multispace0),
+    ))
+    .parse_next(input)?;
+    Ok((value, length.unwrap_or(1)))
+}
+
 fn bind(input: &mut &str) -> ModalResult<(String, Expr)> {
     let name =
         delimited(multispace0, identifier, multispace0).parse_next(input)?;
@@ -226,7 +239,11 @@ mod tests {
     fn tags() {
         assert!(matches!(
             DatTag::parse("dat:terminated(GX_VA_NULL)"),
-            Some(DatTag::Terminated(_))
+            Some(DatTag::Terminated(_, 1))
+        ));
+        assert!(matches!(
+            DatTag::parse("dat:terminated(0x83D60, 2)"),
+            Some(DatTag::Terminated(Expr::Int(0x83D60), 2))
         ));
         assert_eq!(
             DatTag::parse("dat:script( lengths )"),
