@@ -8,7 +8,7 @@
 
 #include <melee/ft/types.h>
 
-// TODO transitive include hack, should be included directly by dependers
+/// @todo transitive include hack, should be included directly by dependers
 
 /* 081B38 */ void ft_80081B38(Fighter_GObj* gobj);
 /* 081C88 */ void ft_80081C88(Fighter_GObj* dst_gobj, float scl_y);

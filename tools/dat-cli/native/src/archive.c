@@ -2038,7 +2038,7 @@ static void layout(DatArchive* a, uint32_t offset, int32_t type, void* native,
                 if (e != DAT_NONE) {
                     for (uint32_t j = 0; j < arr->count; j++) {
                         a->env = bound(a, outer, m, r, offset, true, j);
-                        layout(a, at + j * T(a, e)->size, e,
+                        layout(a, at + j * T(a, e)->size, arr->target,
                                mnative ? mnative +
                                              (size_t) j * T(a, e)->native_size
                                        : NULL,
@@ -2096,7 +2096,8 @@ static void layout(DatArchive* a, uint32_t offset, int32_t type, void* native,
             break;
         }
         for (uint32_t i = 0; i < t->count; i++) {
-            layout(a, offset + i * T(a, e)->size, e,
+            /* Keep typedef tags, e.g. a counted list in each slot. */
+            layout(a, offset + i * T(a, e)->size, t->target,
                    native ? (char*) native + (size_t) i * T(a, e)->native_size
                           : NULL,
                    parent);

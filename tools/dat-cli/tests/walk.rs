@@ -239,3 +239,92 @@ fn inline_count_respects_fixed_capacity() {
     ));
     assert!(walked.pointers.is_empty());
 }
+
+/// Counted lists behind a fixed-size row of pointers. The binding belongs
+/// to the root, so it must survive both the row and its pointer typedefs.
+fn counted_lists(inline: bool, count: u32) -> (TypeGraph, Vec<u8>, Vec<u32>) {
+    let mut graph = graph(None);
+    graph.types.get_mut(&3).unwrap().kind =
+        TypeKind::Pointer { target: Some(2) };
+    let count_tag = tag(&mut graph, "dat:count(Root::count)");
+    graph.types.get_mut(&4).unwrap().annotations = vec![count_tag];
+    graph.types.get_mut(&6).unwrap().kind = TypeKind::Array {
+        element: Some(4),
+        dims: vec![Some(2)],
+    };
+    graph.types.get_mut(&6).unwrap().byte_size = Some(8);
+    ty(
+        &mut graph,
+        9,
+        None,
+        Some(4),
+        TypeKind::Pointer { target: Some(6) },
+    );
+    let count_member = member(&mut graph, "count", 1, 0, &[]);
+    let rows = member(
+        &mut graph,
+        "rows",
+        if inline { 6 } else { 9 },
+        4,
+        if inline {
+            &["dat:bind(Root::count, count)"]
+        } else {
+            &["dat:extent", "dat:bind(Root::count, count)"]
+        },
+    );
+    let root = graph.types.get_mut(&7).unwrap();
+    root.byte_size = Some(if inline { 12 } else { 8 });
+    root.kind = TypeKind::Record {
+        union: false,
+        declaration: false,
+        members: vec![count_member, rows],
+    };
+    let words = if inline {
+        vec![count, 24, 36, 0, 0, 0, 11, 12, 13, 21, 22, 23]
+    } else {
+        vec![count, 16, 0, 0, 24, 36, 11, 12, 13, 21, 22, 23]
+    };
+    let data = words.into_iter().flat_map(u32::to_be_bytes).collect();
+    let relocs = if inline { vec![4, 8] } else { vec![4, 16, 20] };
+    (graph, data, relocs)
+}
+
+#[test]
+fn array_elements_keep_pointer_typedef_counts() {
+    // The inline member takes the per-element binding path; the extent
+    // pointer reaches a row whose elements take the ordinary array path.
+    for (inline, count) in [(false, 3), (true, 3), (false, 0), (true, 0)] {
+        let (graph, data, relocs) = counted_lists(inline, count);
+        let archive = Archive {
+            header: ArchiveHeader {
+                file_size: 0,
+                data_size: data.len() as u32,
+                reloc_count: relocs.len() as u32,
+                public_count: 0,
+                extern_count: 0,
+                version: [0; 12],
+            },
+            data: &data,
+            relocs,
+            publics: Vec::new(),
+            externs: Vec::new(),
+            symbols: &[],
+        };
+        let canonical = Canonical::new(&graph);
+        let macros = HashMap::new();
+        let mut walker = Walker::new(&graph, &canonical, &macros, &archive);
+        walker.root(0, 7, "root", &[]);
+        let walked = walker.finish();
+        assert!(walked.issues.is_empty(), "{:?}", walked.issues);
+        assert_eq!(walked.pointers.len(), if inline { 2 } else { 3 });
+        if count > 0 {
+            // Plain lists have one extent covering the entire count.
+            assert_eq!(walked.extents.get(&24), Some(&36), "{inline}");
+            assert_eq!(walked.extents.get(&36), Some(&48), "{inline}");
+        } else {
+            assert!(!walked.objects.contains_key(&24));
+            assert!(!walked.objects.contains_key(&36));
+        }
+        assert!(!walked.extents.contains_key(&48));
+    }
+}

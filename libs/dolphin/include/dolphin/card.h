@@ -15,7 +15,7 @@ extern "C" {
 
 typedef void (*CARDCallback)(s32 chan, s32 result);
 
-// todo: sort into headers
+/// @todo: sort into headers
 typedef struct CARDFileInfo {
     /*0x00*/ s32 chan;
     /*0x04*/ s32 fileNo;
