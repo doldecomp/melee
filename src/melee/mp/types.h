@@ -6,6 +6,8 @@
 #include <melee/gr/forward.h>
 #include <melee/mp/forward.h> // IWYU pragma: export
 
+#include <dat_macros.h>
+
 #include <dolphin/gx/GXStruct.h>
 #include <dolphin/mtx.h>
 
@@ -108,12 +110,12 @@ struct CollJoint {
 ASSERT_SIZE(struct CollJoint, 0x34);
 
 struct MapCollData {
-    /*  +0 */ Vec2* verts;
+    /*  +0 */ Vec2* verts DAT_COUNT(vert_count);
     /*  +4 */ int vert_count;
-    /*  +8 */ MapLine* lines;
+    /*  +8 */ MapLine* lines DAT_COUNT(line_count);
     /*  +C */ int line_count;
     /* +10 */ struct MapLineRange ranges[MapLineGroup_Count];
-    /* +24 */ MapJoint* joints;
+    /* +24 */ MapJoint* joints DAT_COUNT(joint_count);
     /* +28 */ int joint_count;
     /* +2C */ int x2C; /* inferred */
 };

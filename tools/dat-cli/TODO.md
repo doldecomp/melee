@@ -77,18 +77,42 @@ Not errors:
   fighter kind (`ftData_Table_Unk0`, `ftData_UnkIntPairs`), or only in code.
 - `FigaTree.tracks` uses `DAT_EXTENT`. Its length is the sum of `nodes`
   (`DAT_TERMINATED(-1)`), which needs a new annotation.
-- `*_image` and `*_tlut` are typed `u8[]`/`u16[]` up to the next public or
-  pointer target, for the ones no reached `HSD_ImageDesc` or
+- `*_image` and `*_tlut` are `type:u8 extent`/`type:u16 extent`, up to the
+  next public or pointer target, for the ones no reached `HSD_ImageDesc` or
   `HSD_TlutDesc` sizes (e.g. GrIz and GrPu, whose descs nothing reached
-  points to). Vertex arrays (`HSD_VtxDescList.vertex`) are still raw: their
-  count is the largest index the display lists use.
+  points to).
+- Vertex arrays (`HSD_VtxDescList.vertex`, an `HSD_VertexArray` blob) run
+  to the next object. Their length is (the largest index the display lists
+  use + 1) × `stride`. Plan:
+  - The evaluator gets a byte-slice value besides integers: a pointer
+    field whose own annotation gives its length (`DAT_COUNT`,
+    `DAT_TERMINATED`) evaluates to the data it points to. `DAT_BIND` scopes
+    and `call` take such values; functions stay pure over fixed bytes.
+  - `HSD_PObjDesc.verts` binds `DAT_BIND(dl, display) DAT_BIND(descs,
+    verts)`; `vertex` gets `DAT_COUNT((GXMaxIndex(dl, descs, attr) + 1) *
+    stride)`.
+  - `GXMaxIndex` is a tool-side helper, not a port: it decodes the display
+    list as the GameCube lays it out (opcode byte, `u16` vertex count, then
+    per vertex an entry per attribute in `verts` order: `GX_INDEX8` 1 byte,
+    `GX_INDEX16` 2, `GX_DIRECT` inline by `comp_cnt`/`comp_type`; up to the
+    0 opcode) and returns the largest index for `attr`.
+  - Arrays shared between PObjs already take the largest extent. Shape
+    animations (`HSD_ShapeSetDesc.vertex_idx_list`) index them too.
+- The particle banks (`EffectDataTable.cmd_bank`/`tex_bank`, `map_ptcl`,
+  `map_texg`) use `DAT_EXTENT`/`extent`. Their headers give their sizes, as
+  `psInitDataBankLocate` reads them: a header struct with counted members,
+  or a sizer like `DAT_SCRIPT`'s.
 
 ## Coverage
 
+- `ALDYakuAll` (`StageInfo.ald_yaku_all`) is a null-terminated table of
+  item scripts, loaded as `void*`. Walking them needs a script attribute
+  for `dat_symbols.txt` roots, mirroring `DAT_SCRIPT`, so that its entries
+  can be `union CmdUnion*` without an ambiguous union.
+
 - Loaded into untyped destinations, types unknown:
   `sqEventInitDataLevelTbl`, `tournament_box*_array`, `mnNameDefaultName*`
-  (and `mnNameAutoName*`), `MemCardIconData`, `MemSnapIconData`,
-  `effKirbyPichuDataTable`.
+  (and `mnNameAutoName*`), `MemCardIconData`, `MemSnapIconData`.
 - `toy.c` loads trophy symbols through `symbol_name` fields of its tables;
   those are covered by name patterns instead.
 - `ftDemo*MotionFile*` are `u8[]`: packed archives like `Pl??AJ.dat`,
@@ -103,6 +127,13 @@ Not errors:
   both, and no annotation chooses by relocation.
 
 ## Tool
+
+- `Archive::parse_packed` splits `Pl??AJ.dat` by each archive's size,
+  rounded up to 32 bytes; the padding between them is leftover bytes, not
+  zeros. The game finds each through the offsets and sizes in `ftData`'s
+  motion tables instead: split, or at least check the split, by those.
+- One relocation is at a halfword (`TyMnInfo.dat` 0x25F6): the walk assumes
+  pointers on words, so it's unexplained.
 
 - Only pointers are checked against relocations. Wrong scalar types go
   unnoticed.

@@ -9,7 +9,7 @@
 
 use super::{
     DieId, Global, Type, TypeGraph, TypeKind,
-    annotation::DatTag,
+    annotation::{DatTag, Script},
     canonical::Canonical,
     roots::{RootName, roots},
 };
@@ -65,7 +65,7 @@ impl TypesFile {
             .flatten()
             .flat_map(|m| &m.annotations)
             .filter_map(|a| match DatTag::parse(graph.str(a.value?))? {
-                DatTag::Script(script) => Some(script.table),
+                DatTag::Script(Script::Table(table)) => Some(table),
                 _ => None,
             });
         for table in tables {

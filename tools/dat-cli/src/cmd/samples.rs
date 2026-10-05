@@ -164,6 +164,13 @@ struct Report {
     dir: PathBuf,
     #[arg(long)]
     json: bool,
+    /// List the data the base doesn't infer, by the field that reaches it,
+    /// largest first
+    #[arg(long)]
+    missing: bool,
+    /// Rows for `--missing` (0 for all)
+    #[arg(long, default_value_t = 30)]
+    top: usize,
 }
 
 pub fn run(Args { command }: Args) -> Result<()> {
@@ -198,6 +205,10 @@ struct Sidecar {
     /// wrong. Every target symbol outside the samples must be inferred in
     /// the base. objdiff's `complete`, the analog of code linked into the game.
     complete: bool,
+    /// The archive's size, every packed archive in the file together.
+    bytes: u64,
+    /// Of those, the bytes the base infers.
+    inferred_bytes: u64,
 }
 
 fn sidecar_path(target: &Path) -> PathBuf {
@@ -225,7 +236,13 @@ fn types(args: TypesArgs) -> Result<()> {
 
     let mut text = String::new();
     let mut roots = Vec::new();
-    for (_, archive) in &archives {
+    for (at, archive) in &archives {
+        for (_, entry) in project.aliases(&args.archive, *at) {
+            text += &format!("alias {entry}\n");
+            if let Some(ty) = &entry.ty {
+                roots.push(project.symbol_types[ty]);
+            }
+        }
         for (name, _) in archive.named_publics() {
             let name = String::from_utf8_lossy(name);
             if let Some(bindings) = project.root_bindings.get(name.as_ref()) {
@@ -242,13 +259,12 @@ fn types(args: TypesArgs) -> Result<()> {
                     renderer.declare(Some(ty), "")
                 );
                 roots.push(ty);
-            } else if let Some(spec) = project
-                .symbols
-                .lookup(&name, &args.archive)
-                .and_then(|e| e.ty.as_ref())
+            } else if let Some(entry) =
+                project.symbols.lookup(&name, &args.archive)
+                && let Some(ty) = &entry.ty
             {
-                text += &format!("symbol {name}: {spec}\n");
-                roots.push(project.symbol_types[&spec.name]);
+                text += &format!("symbol {name}: {ty} {:?}\n", entry.count);
+                roots.push(project.symbol_types[ty]);
             }
         }
     }
@@ -322,7 +338,7 @@ fn pick(args: PickArgs) -> Result<()> {
             let mut picker = Picker::new(&project.graph, &project.canonical)
                 .select(false, exclude.clone());
             for (at, archive) in &archives {
-                let (_, walk) = project.walk(file, archive);
+                let (_, walk) = project.walk(file, *at, archive);
                 picker.add(file, *at, archive, &walk);
             }
             Ok(picker)
@@ -395,7 +411,7 @@ fn slice(args: Slice) -> Result<()> {
         .select(args.all || picked.is_some(), exclude.build()?);
     let mut walks = BTreeMap::new();
     for (at, archive) in &archives {
-        let (_, walk) = project.walk(&args.archive, archive);
+        let (_, walk) = project.walk(&args.archive, *at, archive);
         picker.add(&args.archive, *at, archive, &walk);
         walks.insert(*at, walk);
     }
@@ -532,6 +548,12 @@ fn slice(args: Slice) -> Result<()> {
         })
         .collect();
     assign_names(&mut sources, &wanted);
+    // An alias names its root
+    for (&at, source) in &mut sources {
+        for (address, entry) in project.aliases(&args.archive, at) {
+            source.alias(address, &entry.name);
+        }
+    }
     let elided: BTreeMap<String, Elided> = elided
         .into_iter()
         .map(|((at, target), e)| (sources[&at].name(target), e))
@@ -691,7 +713,10 @@ fn slice(args: Slice) -> Result<()> {
             })
         })
         .collect();
+    let inferred_bytes = inferred.iter().map(|p| p.size).sum();
     let sidecar = Sidecar {
+        bytes: archives.iter().map(|(_, a)| a.data.len() as u64).sum(),
+        inferred_bytes,
         publics,
         archive: args.archive,
         samples: infos,
@@ -868,6 +893,11 @@ struct MatchMeasures {
     /// Bytes, weighted by each sample's match.
     matched_data: f64,
     matched_data_percent: f64,
+    /// Every byte of the archives.
+    total_bytes: u64,
+    /// Matched sample bytes, weighted as above, and inferred bytes.
+    covered_bytes: f64,
+    covered_bytes_percent: f64,
 }
 
 impl MatchMeasures {
@@ -876,6 +906,7 @@ impl MatchMeasures {
         self.matched_samples += u64::from(sample.match_percent >= 100.0);
         self.total_data += sample.size;
         self.matched_data += sample.size as f64 * sample.match_percent / 100.0;
+        self.covered_bytes += sample.size as f64 * sample.match_percent / 100.0;
         self.finish();
     }
 
@@ -884,6 +915,8 @@ impl MatchMeasures {
         self.matched_samples += other.matched_samples;
         self.total_data += other.total_data;
         self.matched_data += other.matched_data;
+        self.total_bytes += other.total_bytes;
+        self.covered_bytes += other.covered_bytes;
         self.finish();
     }
 
@@ -894,6 +927,8 @@ impl MatchMeasures {
             percent(self.matched_samples as f64, self.total_samples as f64);
         self.matched_data_percent =
             percent(self.matched_data, self.total_data as f64);
+        self.covered_bytes_percent =
+            percent(self.covered_bytes, self.total_bytes as f64);
     }
 }
 
@@ -906,6 +941,55 @@ struct UnitMatch {
     /// e.g. code or strings
     /// from headers, which the target doesn't have.
     extra: Vec<String>,
+}
+
+/// The target's symbols outside its samples that the base doesn't infer,
+/// with their sizes.
+fn missing_symbols(dir: &Path, unit: &str) -> Result<Vec<(String, u64)>> {
+    let read = |kind: &str| -> Result<Vec<u8>> {
+        let path = dir.join(format!("{kind}/{unit}.o"));
+        fs::read(&path).with_context(|| format!("{}", path.display()))
+    };
+    let (target, base) = (read("target")?, read("base")?);
+    let base = object::File::parse(&*base)?;
+    let inferred: BTreeSet<&str> = base
+        .symbols()
+        .filter(|s| s.is_definition())
+        .filter_map(|s| s.name().ok())
+        .collect();
+    let target = object::File::parse(&*target)?;
+    let Some(section) = target.section_by_name(INFERRED) else {
+        return Ok(Vec::new());
+    };
+    Ok(target
+        .symbols()
+        .filter(|s| s.section_index() == Some(section.index()))
+        .filter_map(|s| Some((s.name().ok()?, s.size())))
+        .filter(|(name, _)| !inferred.contains(name))
+        .map(|(name, size)| (name.to_owned(), size))
+        .collect())
+}
+
+/// The field a piece's name says reached it, without its offset:
+/// `child_x1A0` and `child_x1_1A0` are `child`; a bare offset is a piece
+/// the walk never reached.
+fn field_of(name: &str) -> &str {
+    let is_hex = |s: &str| !s.is_empty() && s.bytes().all(|b| b.is_ascii_hexdigit());
+    let offset = |s: &str| s.strip_prefix('x').is_some_and(is_hex);
+    let mut end = name.len();
+    // `x<archive>_<offset>` in a packed file, else `x<offset>`
+    if let Some((rest, last)) = name.rsplit_once('_')
+        && is_hex(last)
+        && rest.rsplit('_').next().is_some_and(offset)
+    {
+        end = rest.len() - rest.rsplit('_').next().map_or(0, str::len);
+    } else if name.rsplit('_').next().is_some_and(offset) {
+        end = name.len() - name.rsplit('_').next().map_or(0, str::len);
+    }
+    match name[..end].trim_end_matches('_') {
+        "" => "(unreached)",
+        field => field,
+    }
 }
 
 /// Allocated sections of a unit's base object other than its samples and
@@ -937,7 +1021,7 @@ fn extra_sections(dir: &Path, unit: &str) -> Result<Vec<String>> {
 
 /// objdiff's diff of one unit's target and base objects: each sample's
 /// match.
-fn diff_unit(dir: &Path, unit: &str) -> Result<Vec<SampleMatch>> {
+fn diff_unit(dir: &Path, unit: &str) -> Result<(Sidecar, Vec<SampleMatch>)> {
     let target = dir.join("target").join(format!("{unit}.o"));
     let sidecar = read_sidecar(&sidecar_path(&target))?;
     let samples: BTreeSet<&str> =
@@ -962,7 +1046,7 @@ fn diff_unit(dir: &Path, unit: &str) -> Result<Vec<SampleMatch>> {
         .as_array()
         .cloned()
         .unwrap_or_default();
-    Ok(symbols
+    let matches = symbols
         .iter()
         .filter_map(|s| {
             let name = s["name"].as_str()?;
@@ -979,7 +1063,8 @@ fn diff_unit(dir: &Path, unit: &str) -> Result<Vec<SampleMatch>> {
                 match_percent,
             })
         })
-        .collect())
+        .collect();
+    Ok((sidecar, matches))
 }
 
 fn report(args: Report) -> Result<()> {
@@ -1003,11 +1088,50 @@ fn report(args: Report) -> Result<()> {
             unit.trim_start_matches('/').to_owned()
         })
         .collect();
+    if args.missing {
+        let mut out = io::stdout().lock();
+        let missing: Vec<(String, Vec<(String, u64)>)> = names
+            .par_iter()
+            .map(|name| Ok((name.clone(), missing_symbols(&args.dir, name)?)))
+            .collect::<Result<_>>()?;
+        // By field: bytes, pieces, and the unit with the most of it
+        let mut fields: BTreeMap<&str, (u64, usize, BTreeMap<&str, u64>)> =
+            BTreeMap::new();
+        for (unit, symbols) in &missing {
+            for (name, size) in symbols {
+                let entry = fields.entry(field_of(name)).or_default();
+                entry.0 += size;
+                entry.1 += 1;
+                *entry.2.entry(unit.as_str()).or_default() += size;
+            }
+        }
+        let mut rows: Vec<_> = fields.into_iter().collect();
+        rows.sort_by_key(|(_, (bytes, _, _))| std::cmp::Reverse(*bytes));
+        let top = if args.top == 0 { rows.len() } else { args.top };
+        writeln!(out, "{:>10} {:>7}  field (largest in)", "bytes", "pieces")?;
+        for (field, (bytes, pieces, units)) in rows.iter().take(top) {
+            let (unit, most) = units
+                .iter()
+                .max_by_key(|&(_, b)| *b)
+                .map_or(("", 0), |(u, b)| (*u, *b));
+            writeln!(
+                out,
+                "{bytes:>10} {pieces:>7}  {field} ({unit}: {most})"
+            )?;
+        }
+        let total: u64 = rows.iter().map(|(_, (b, _, _))| b).sum();
+        writeln!(out, "{total} bytes in {} fields", rows.len())?;
+        return Ok(());
+    }
     let units: Vec<UnitMatch> = names
         .par_iter()
         .map(|name| {
-            let samples = diff_unit(&args.dir, name)?;
-            let mut measures = MatchMeasures::default();
+            let (sidecar, samples) = diff_unit(&args.dir, name)?;
+            let mut measures = MatchMeasures {
+                total_bytes: sidecar.bytes,
+                covered_bytes: sidecar.inferred_bytes as f64,
+                ..Default::default()
+            };
             for sample in &samples {
                 measures.add(sample);
             }
@@ -1058,6 +1182,16 @@ fn report(args: Report) -> Result<()> {
         total.total_samples,
         units.len(),
         total.matched_data_percent
+    )?;
+    writeln!(
+        out,
+        concat!(
+            "{:.0}/{} archive bytes covered by matching samples and ",
+            "inferred data, {:.2}%",
+        ),
+        total.covered_bytes,
+        total.total_bytes,
+        total.covered_bytes_percent
     )?;
     Ok(())
 }

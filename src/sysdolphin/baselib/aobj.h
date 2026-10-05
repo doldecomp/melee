@@ -51,9 +51,11 @@ struct HSD_AObjDesc {
     u32 flags;
     f32 end_frame;
     HSD_FObjDesc* fobjdesc;
-    /// The joint to animate. Its address is also the key the joint's
-    /// object is registered under once loaded.
-    HSD_Joint* obj_id;
+    /// The descriptor of the object to animate, whose address is the key
+    /// that object is registered under once loaded (#HSD_IDGetDataFromTable):
+    /// a joint, a material, or another kind. Loaded as a joint if nothing is
+    /// registered under it yet.
+    void* obj_id;
 };
 
 struct HSD_AnimJoint {

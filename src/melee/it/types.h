@@ -10,7 +10,6 @@
 #include <sysdolphin/baselib/forward.h>
 
 #include <dat_macros.h>
-#include <placeholder.h>
 
 #include <dolphin/gx.h>
 #include <dolphin/mtx.h>
@@ -151,7 +150,8 @@ struct ItemStateDesc {
 
     HSD_ShapeAnimJoint* x8_parameters;
 
-    UNK_T xC_script;
+    /// Run by #it_802799E4.
+    union CmdUnion* xC_script DAT_SCRIPT(itCommandLength(_command));
 };
 
 struct ItemStateArray {

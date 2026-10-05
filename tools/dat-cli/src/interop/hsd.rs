@@ -32,6 +32,8 @@ pub struct ResolvedPublicSymbol {
     pub name: Range<u32>,
 }
 
+/// An archive as `HSD_ArchiveParse` reads it, with its tables in file
+/// order: the game looks names up in that order, first match wins.
 #[derive(Debug)]
 pub struct Archive<'a> {
     pub header: ArchiveHeader,
@@ -94,9 +96,14 @@ pub fn archive<'a>(input: &mut &'a [u8]) -> ModalResult<Archive<'a>> {
 }
 
 impl<'a> Archive<'a> {
+    /// Parse one archive, refusing anything the game would misread: a size
+    /// that isn't the file's (`HSD_ArchiveParse`'s byte-order check), a
+    /// relocation outside the data (`Locate` would write past it), or a
+    /// name outside the symbol table. Relocations needn't be aligned: the
+    /// game relocates one at a halfword (`TyMnInfo.dat`).
     pub fn parse(bytes: &'a [u8]) -> Result<Self> {
         let mut input = bytes;
-        let mut parsed = archive
+        let parsed = archive
             .parse_next(&mut input)
             .map_err(|e| anyhow::anyhow!("DAT parse error: {e:?}"))?;
 
@@ -107,10 +114,20 @@ impl<'a> Archive<'a> {
                 bytes.len(),
             );
         }
-
-        // TODO: Kind of hacky but archive symbols are not actually in order
-        parsed.publics.sort_unstable_by_key(|ns| ns.offset);
-        parsed.externs.sort_unstable_by_key(|ns| ns.offset);
+        let data_size = parsed.header.data_size;
+        if let Some(&r) =
+            parsed.relocs.iter().find(|&&r| r.checked_add(4).is_none_or(|end| end > data_size))
+        {
+            bail!("relocation at {r:#X} is outside the data ({data_size:#X} bytes)");
+        }
+        for (kind, table) in [("public", &parsed.publics), ("extern", &parsed.externs)] {
+            if let Some(ns) = table.iter().find(|ns| parsed.symbol_at(ns.symbol).is_none()) {
+                bail!("{kind} at {:#X} names {:#X}, outside the symbol table", ns.offset, ns.symbol);
+            }
+        }
+        if let Some(ns) = parsed.publics.iter().find(|ns| ns.offset > data_size) {
+            bail!("public at {:#X} is outside the data ({data_size:#X} bytes)", ns.offset);
+        }
 
         Ok(parsed)
     }
@@ -145,28 +162,17 @@ impl<'a> Archive<'a> {
         Some(&self.symbols[start..end])
     }
 
+    /// Bytes from the `index`th public symbol to the next one after it, or
+    /// to the end of the data.
     pub fn public_size(&self, index: usize) -> Option<u32> {
-        let len = self.publics.len();
-
-        if index >= len {
-            return None;
-        }
-        let ns = self.publics[index];
-
-        let next_offset = if index == len - 1 {
-            self.header.data_size
-        } else {
-            self.publics[index + 1].offset
-        };
-
-        assert!(ns.offset < next_offset);
-        Some(next_offset - ns.offset)
+        Some(self.extent(self.publics.get(index)?.offset))
     }
 
-    /// Public symbols with their names, in offset order.
+    /// Public symbols with their names, in the archive's order.
     pub fn named_publics(
         &self,
     ) -> impl Iterator<Item = (&'a [u8], NamedSymbol)> + '_ {
+        // `parse` checked that every name resolves
         self.publics
             .iter()
             .filter_map(|&p| Some((self.symbol_at(p.symbol)?, p)))
@@ -203,7 +209,8 @@ impl<'a> Archive<'a> {
             .publics
             .iter()
             .map(|p| p.offset)
-            .find(|&o| o > offset)
+            .filter(|&o| o > offset)
+            .min()
             .unwrap_or(self.header.data_size);
         next.saturating_sub(offset)
     }
