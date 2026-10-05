@@ -44,7 +44,7 @@ void it_8026C47C(struct it_8026C47C_arg0_t* arg_struct)
     s32* word;
     PAD_STACK(8);
 
-    it_kind = (unused = It_Kind_Start); // set to 0
+    it_kind = (unused = It_Kind_Unset2); // set to 0
     bit_idx = 0;
     word = &arg_struct->unk0;
     arg_struct->unk0 = 0;
@@ -56,7 +56,7 @@ void it_8026C47C(struct it_8026C47C_arg0_t* arg_struct)
     arg_struct->unk18 = 0;
     arg_struct->unk1C = 0;
 
-    while ((u32) it_kind < It_Kind_Max_Check) {
+    while ((u32) it_kind < It_Kind_End) {
         if (it_80272828(it_kind)) {
             *word |= 1 << bit_idx;
         }

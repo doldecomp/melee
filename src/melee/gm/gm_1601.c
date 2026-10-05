@@ -3699,7 +3699,7 @@ void gm_SetupRulesDefaults(struct StartMeleeRules* rules)
     rules->item_freq = 2;
 
     rules->x20 = -1;
-    rules->x28 = 0;
+    rules->it_kind = It_Kind_Unset2;
 
     rules->x3_1 = true;
 

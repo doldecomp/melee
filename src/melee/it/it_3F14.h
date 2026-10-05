@@ -23,23 +23,31 @@ typedef struct it_804D6D40_t {
 
 typedef struct it_804D6D20_t {
     ItemCommonData* x0; // it_804D6D28
-    /// Common items, by kind from #It_Kind_Common_Start.
-    Article** x4 DAT_COUNT(It_Kind_Monster_Start)
+    /// Common and related items, by kind from
+    /// #It_Kind_Section_Common_Extended_Start
+    Article** x4 DAT_COUNT(It_Kind_Section_Common_Extended_End)
         DAT_BIND(Article::kind, _index); // it_804D6D24
-    /// Monsters and fighter items, by kind from #It_Kind_Monster_Start.
-    Article** x8 DAT_COUNT(It_PKind_Start -
-                           It_Kind_Monster_Start) // it_804D6D38
-        DAT_BIND(Article::kind, It_Kind_Monster_Start + _index);
-    /// Pokemon items, by kind from #It_PKind_Start.
-    Article** xC DAT_COUNT(It_Kind_Monster2_Start - It_PKind_Start)
-        DAT_BIND(Article::kind, It_PKind_Start + _index); // it_804D6D30
-    it_804D6D40_t* x10;                                   // it_804D6D40
-    Fighter_804D653C_t* x14;                              // it_804D6D04
+    /// Monster, fighter, and misc items, by kind from
+    /// #It_Kind_Section_Monster_Character_Misc_Start
+    Article** x8
+        DAT_COUNT(It_Kind_Section_Monster_Character_Misc_End -
+                  It_Kind_Section_Monster_Character_Misc_Start) // it_804D6D38
+        DAT_BIND(Article::kind,
+                 It_Kind_Section_Monster_Character_Misc_Start + _index);
+    /// Pokemon and related items, by kind from
+    /// #It_Kind_Section_Pokemon_Extended_Start.
+    Article** xC DAT_COUNT(It_Kind_Section_Pokemon_Extended_End -
+                           It_Kind_Section_Pokemon_Extended_Start)
+        DAT_BIND(Article::kind, It_Kind_Section_Pokemon_Extended_Start +
+                                    _index); // it_804D6D30
+    it_804D6D40_t* x10;                      // it_804D6D40
+    Fighter_804D653C_t* x14;                 // it_804D6D04
 } it_804D6D20_t;
 
 /* 3F1418 */ extern struct sdata_ItemGXLink
-    it_803F1418[It_Kind_Item_End - It_Kind_Common_Start];
-/* 3F14C4 */ extern struct ItemLogicTable it_803F14C4[ARRAY_SIZE(it_803F1418)];
+    it_803F1418[It_Kind_Section_Common_Extended_Size];
+/* 3F14C4 */ extern struct ItemLogicTable
+    it_803F14C4[It_Kind_Section_Common_Extended_Size];
 /* 3F1ED8 */ extern char it_803F1ED8[];
 /* 3F1EE4 */ extern char it_803F1EE4[];
 /* 3F1EF0 */ extern char it_803F1EF0[];
@@ -47,8 +55,7 @@ typedef struct it_804D6D20_t {
 /* 4A0E50 */ extern ItemPickTable it_804A0E50;
 /* 4A0E60 */ extern ItemPickTable it_804A0E60;
 /* 4A0E70 */ extern DamageLogEntry it_804A0E70[15];
-/* 4A0F60 */ extern Article*
-    it_804A0F60[It_Kind_Max_Check - It_Kind_Monster2_Start];
+/* 4A0F60 */ extern Article* it_804A0F60[It_Kind_Section_Stage_Extended_Size];
 /* 4D6D00 */ extern s8 it_804D6D00;
 /* 4D6D04 */ extern Fighter_804D653C_t* it_804D6D04;
 /* 4D6D08 */ extern s32 it_804D6D08;

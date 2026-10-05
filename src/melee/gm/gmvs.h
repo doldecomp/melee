@@ -12,7 +12,7 @@
 /* 16AE80 */ bool gm_8016AE80(void);
 /* 16AE94 */ f32 gm_8016AE94(void);
 /* 16AEA4 */ u64 gm_8016AEA4(void);
-/* 16AEB8 */ s32 gm_8016AEB8(void);
+/* 16AEB8 */ ItemKind gm_8016AEB8(void);
 /* 16AEC8 */ bool gm_8016AEC8(void);
 /* 16AEDC */ u32 gm_GetFrameCount(void);
 /* 16AEEC */ u32 gm_8016AEEC(void);

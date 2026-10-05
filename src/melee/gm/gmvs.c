@@ -95,9 +95,9 @@ u64 gm_8016AEA4(void)
     return gm_GetStartMeleeRules()->x20;
 }
 
-s32 gm_8016AEB8(void)
+ItemKind gm_8016AEB8(void)
 {
-    return gm_GetStartMeleeRules()->x28;
+    return gm_GetStartMeleeRules()->it_kind;
 }
 
 bool gm_8016AEC8(void)

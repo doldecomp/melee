@@ -46,21 +46,20 @@
 #include "kinds/itwstar.h"
 
 /// Common or Item-related Items
-struct sdata_ItemGXLink
-    it_803F1418[It_Kind_Item_End - It_Kind_Common_Start] = {
-        it_8026EECC, it_8026EECC, it_8026EECC, it_8026EECC, it_8026EECC,
-        it_8026EECC, it_8026EECC, it_8026EECC, it_8026EECC, it_8026EECC,
-        it_8026EECC, it_80284E10, it_8026EECC, it_8026EECC, it_8026EECC,
-        it_8026EECC, it_8026EECC, it_8026EECC, it_8026EECC, it_8026EECC,
-        it_8026EECC, it_8026EECC, it_8026EECC, it_8026EECC, it_8026EECC,
-        it_8026EECC, it_8026EECC, it_8026EECC, it_8026EECC, it_8026EECC,
-        it_8026EECC, it_8026EECC, it_8026EECC, it_8026EECC, it_8026EECC,
-        it_8026EECC, it_8026EECC, it_8026EECC, it_8026EECC, it_8026EECC,
-        it_8026EECC, it_8026EECC, it_8026EECC,
-    };
+struct sdata_ItemGXLink it_803F1418[It_Kind_Section_Common_Extended_Size] = {
+    it_8026EECC, it_8026EECC, it_8026EECC, it_8026EECC, it_8026EECC,
+    it_8026EECC, it_8026EECC, it_8026EECC, it_8026EECC, it_8026EECC,
+    it_8026EECC, it_80284E10, it_8026EECC, it_8026EECC, it_8026EECC,
+    it_8026EECC, it_8026EECC, it_8026EECC, it_8026EECC, it_8026EECC,
+    it_8026EECC, it_8026EECC, it_8026EECC, it_8026EECC, it_8026EECC,
+    it_8026EECC, it_8026EECC, it_8026EECC, it_8026EECC, it_8026EECC,
+    it_8026EECC, it_8026EECC, it_8026EECC, it_8026EECC, it_8026EECC,
+    it_8026EECC, it_8026EECC, it_8026EECC, it_8026EECC, it_8026EECC,
+    it_8026EECC, it_8026EECC, it_8026EECC,
+};
 
 /// Common or Item-related Items
-struct ItemLogicTable it_803F14C4[ARRAY_SIZE(it_803F1418)] = {
+struct ItemLogicTable it_803F14C4[It_Kind_Section_Common_Extended_Size] = {
     {
         // Capsule
         it_803F5468,
@@ -841,8 +840,8 @@ char it_803F1ED8[] = "ItCo.dat";
 char it_803F1EE4[] = "ItCo.usd";
 char it_803F1EF0[] = "itPublicData";
 
-Article* it_804A0F60[It_Kind_Max_Check -
-                     It_Kind_Monster2_Start]; // Stage and Monster 2 items data
+Article* it_804A0F60[It_Kind_Section_Stage_Extended_Size]; // Stage and Monster
+                                                           // 2 items data
 DamageLogEntry it_804A0E70[15];
 
 it_804D6D40_t* it_804D6D40 ATTRIBUTE_ALIGN(8);

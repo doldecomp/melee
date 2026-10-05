@@ -1,5 +1,7 @@
 #include "grdatfiles.h"
 
+#include <stdbool.h>
+
 #include "ground.h"
 #include "types.h"
 #include <melee/lb/lb_00B0.h>
@@ -33,22 +35,22 @@ void grDatFiles_801C5FC0(HSD_Archive* archive, void* data, size_t length)
     }
 }
 
-void grDatFiles_801C6038(void* arg0, s32 arg1, s32 arg2)
+void grDatFiles_801C6038(char* filename, bool bool1, bool bool2)
 {
     UnkArchiveStruct* temp_r3 = grDatFiles_801C62B4();
-    if (arg0 != NULL) {
+    if (filename != NULL) {
         HSD_Archive* sp14;
-        s32 phi_r28;
-        void* r4 = arg0;
-        if (arg2 != 0) {
+        bool phi_r28;
+        char* r4 = filename;
+        if (bool2 != false) {
             phi_r28 =
                 lbArchive_800171CC(&sp14, r4, &temp_r3->unk4, "map_head", 0);
         } else {
             sp14 = lbArchive_80016DBC(r4, &temp_r3->unk4, "map_head", 0);
-            phi_r28 = 0;
+            phi_r28 = false;
         }
         temp_r3->unk8 = 0;
-        if (arg1 == 0) {
+        if (bool1 == false) {
             stage_info.coll_data =
                 HSD_ArchiveGetPublicAs(MapCollData, sp14, "coll_data");
             stage_info.param =
@@ -70,7 +72,7 @@ void grDatFiles_801C6038(void* arg0, s32 arg1, s32 arg2)
         }
         temp_r3->unk0 = sp14;
         if (stage_info.map_ptcl != NULL && stage_info.map_texg != NULL) {
-            if (phi_r28 != 0) {
+            if (phi_r28 != false) {
                 psInitDataBankLoad(0x40, stage_info.map_ptcl,
                                    stage_info.map_texg, 0, 0);
             } else {
@@ -81,7 +83,7 @@ void grDatFiles_801C6038(void* arg0, s32 arg1, s32 arg2)
         grDatFiles_801C6228(temp_r3->unk4);
     } else {
         temp_r3->unk4 = &grDatFiles_803E0924;
-        if (arg1 == 0) {
+        if (bool1 == false) {
             stage_info.coll_data = NULL;
             stage_info.param = &grDatFiles_803E0848;
             stage_info.itemdata = NULL;

@@ -3,6 +3,7 @@
 #include <Runtime/platform.h>
 
 #include <math.h>
+#include <stdbool.h>
 
 #include "grbattle.h"
 #include "grbigblue.h"
@@ -157,7 +158,7 @@
     0,
 };
 
-static StageData* stage_datas[] = {
+static StageData* stage_datas[111] = {
     &Ground_StageData,     &grTe_StageData,       &grCs_StageData,
     &grRc_StageData,       &grKg_StageData,       &grGd_StageData,
     &grGb_StageData,       &grSh_StageData,       &grZe_StageData,
@@ -453,12 +454,12 @@ void Ground_801C06B8(GrKind arg0)
 void Ground_801C0754(StageIdPair* pair)
 {
     StageData* stage;
-    s32 arg3;
+    bool arg3;
     Ground_801BFFB0();
     stage_info.grkind = pair->grkind;
     stage = stage_datas[pair->grkind];
-    arg3 = (pair->stkind == St_Kind_Heal) ? 0 : 1;
-    grDatFiles_801C6038(stage->data1, 0, arg3);
+    arg3 = (pair->stkind == St_Kind_Heal) ? false : true;
+    grDatFiles_801C6038(stage->data1, false, arg3);
     Ground_801C28CC(&stage_info.xA0, pair->stkind);
     stage_info.on_touch_line = stage->on_touch_line;
     stage_info.on_check_shadow_render = stage->on_check_shadow_render;
@@ -485,14 +486,18 @@ void Ground_801C0800(StageIdPair* pair)
         int i;
         if (stage_info.itemdata != NULL) {
             for (i = 0; stage_info.itemdata[i] != NULL; i++) {
-                it_8026B40C(stage_info.itemdata[i]->unk4,
-                            stage_info.itemdata[i]->unk0);
+                it_8026B40C(stage_info.itemdata[i]->article_data,
+                            stage_info.itemdata[i]->gr_itkind);
             }
         }
 
         if (stage_info.ald_yaku_all != NULL) {
             for (i = 1; stage_info.ald_yaku_all[i] != NULL; i++) {
-                Article* a = it_804D6D38[It_Kind_Misc_End - It_Kind_Item_End];
+                Article* a = it_804D6D38
+                    [It_PKind_Random -
+                     It_Kind_Section_Monster_Character_Misc_Start]; // Get item
+                                                                    // data for
+                                                                    // It_PKind_Random
                 a->xC_itemStates->x0_itemStateDesc[i].xC_script =
                     stage_info.ald_yaku_all[i];
             }

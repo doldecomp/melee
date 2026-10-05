@@ -186,7 +186,8 @@ void ftCa_SpecialS_OnDetect(HSD_GObj* gobj)
                 }
             } else if ((itGetKind(detected_gobj) >= It_Kind_Monster_Start &&
                         itGetKind(detected_gobj) < It_Kind_Monster_End) ||
-                       (itGetKind(detected_gobj) >= It_Kind_Monster2_Start &&
+                       (itGetKind(detected_gobj) >=
+                            It_Kind_Section_Stage_Extended_Start &&
                         itGetKind(detected_gobj) < It_Kind_Stage_End) ||
                        itGetKind(detected_gobj) == It_PKind_Random)
             {

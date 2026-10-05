@@ -202,15 +202,15 @@ int it_8026B3C0(ItemKind kind)
 }
 
 /// Store Item article pointer to table
-void it_8026B3F8(Article* article, s32 kind)
+void it_8026B3F8(Article* article, ItemKind kind)
 {
-    it_804D6D38[kind - It_Kind_Item_End] = article;
+    it_804D6D38[kind - It_Kind_Section_Monster_Character_Misc_Start] = article;
 }
 
 /// Store Stage Item article pointer to table
-void it_8026B40C(Article* article, s32 kind)
+void it_8026B40C(Article* article, ItemKind kind)
 {
-    it_804A0F60[kind - It_Kind_Monster2_Start] = article;
+    it_804A0F60[kind - It_Kind_Section_Stage_Extended_Start] = article;
 }
 
 /// Item Damage Math
@@ -364,7 +364,8 @@ bool it_8026B6C8(HSD_GObj* gobj)
     ip = gobj->user_data;
     kind = ip->kind;
     if (((kind >= It_Kind_Monster_Start) && (kind < It_Kind_Monster_End)) ||
-        ((itemID_2 = ip->kind, ((itemID_2 < It_Kind_Pokemon_End) == false)) &&
+        ((itemID_2 = ip->kind,
+          ((itemID_2 < It_Kind_Section_Stage_Extended_Start) == false)) &&
          (itemID_2 < It_Kind_Stage_End)))
     {
         itemID_3 = ip->kind;

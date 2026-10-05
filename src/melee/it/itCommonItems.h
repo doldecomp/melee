@@ -1378,7 +1378,7 @@ typedef struct itPokemonSpawn_DatAttrs {
     f32 x1C[6];
     f32 x34;
     s32 x38;
-    s32 pokemon_spawn_weights[It_PKind_Terminate - It_PKind_Start];
+    s32 pokemon_spawn_weights[It_PKind_Items_Size];
     u8 _pad[520];
 } itPokemonSpawn_DatAttrs;
 ASSERT_SIZE(itPokemonSpawn_DatAttrs, 0x2BC);

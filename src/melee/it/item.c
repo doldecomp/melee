@@ -45,7 +45,7 @@
 /* 2674AC */ static void Item_802674AC(SpawnItem* spawnItem);
 /* 2675A8 */ static void Item_802675A8(HSD_GObj* gobj);
 /* 2676F4 */ static void Item_802676F4(HSD_GObj* gobj);
-/* 26784C */ static bool Item_8026784C(enum_t dropItem, int);
+/* 26784C */ static bool Item_8026784C(Item_HoldKinds hold_kind, ItemKind);
 /* 267AA8 */ static void Item_80267AA8(HSD_GObj* gobj, SpawnItem* spawnItem);
 /* 26814C */ static void Item_8026814C(HSD_GObj* gobj);
 /* 2682F0 */ static bool Item_802682F0(HSD_GObj* gobj);
@@ -144,8 +144,8 @@ void Item_80266FCC(void)
     Item_804A0CCC.x154.x0.b0 = true;
     Item_804A0CCC.count = 1;
 
-    Item_804A0E24.last_kind = It_Kind_Unselected;
-    Item_804A0E24.previous_kind = It_Kind_Unselected;
+    Item_804A0E24.last_kind = It_Kind_Unset1;
+    Item_804A0E24.previous_kind = It_Kind_Unset1;
     Item_804A0E24.rare_spawned = false;
 
     it_804D6D00 = -1;
@@ -287,66 +287,67 @@ static void Item_802674AC(SpawnItem* spawnItem)
     ItemKind kind = spawnItem->kind;
 
     if (kind == It_Kind_Foods) {
-        spawnItem->hold_kind = 2;
+        spawnItem->hold_kind = ITEM_HOLD_2;
         return;
     }
 
     if (kind == It_PKind_Random) {
-        spawnItem->hold_kind = 3;
+        spawnItem->hold_kind = ITEM_HOLD_3;
         return;
     }
 
     if (kind < It_Kind_Common_End) {
-        spawnItem->hold_kind = 0;
+        spawnItem->hold_kind = ITEM_HOLD_0;
         return;
     }
 
-    if (kind < It_Kind_Item_End) {
-        spawnItem->hold_kind = 1;
+    if (kind < It_Kind_Item_Related_End) {
+        spawnItem->hold_kind = ITEM_HOLD_1;
         return;
     }
 
     if (kind < It_Kind_Monster_End) {
-        spawnItem->hold_kind = 6;
+        spawnItem->hold_kind = ITEM_HOLD_6;
         return;
     }
 
-    if (kind < It_Kind_Character_Start) { // If item is It_Kind_Octarock_Stone
-        spawnItem->hold_kind = 7;
+    if (kind <
+        It_Kind_Monster_Related_End) { // If item is It_Kind_Octarock_Stone
+        spawnItem->hold_kind = ITEM_HOLD_7;
         return;
     }
 
     if (kind < It_Kind_Character_End) {
-        spawnItem->hold_kind = 8;
+        spawnItem->hold_kind = ITEM_HOLD_8;
         return;
     }
 
     if (kind == It_Kind_Unk4) {
-        spawnItem->hold_kind = 12;
+        spawnItem->hold_kind = ITEM_HOLD_12;
         return;
     }
 
-    if (kind < It_Kind_Misc_End) {
-        spawnItem->hold_kind = 11;
+    if (kind < It_Kind_Misc_End) { // If item is It_Kind_Coin
+        spawnItem->hold_kind = ITEM_HOLD_11;
         return;
     }
 
     if (kind < It_PKind_Terminate) {
-        spawnItem->hold_kind = 9;
+        spawnItem->hold_kind = ITEM_HOLD_9;
         return;
     }
 
     if (kind < It_PKind_Related_End) {
-        spawnItem->hold_kind = 10;
+        spawnItem->hold_kind = ITEM_HOLD_10;
         return;
     }
 
     if (kind < It_Kind_Stage_End) {
-        spawnItem->hold_kind = 4;
+        spawnItem->hold_kind = ITEM_HOLD_4;
         return;
     }
 
-    spawnItem->hold_kind = 5;
+    spawnItem->hold_kind = ITEM_HOLD_5;
 }
 
 static void Item_802675A8(HSD_GObj* gobj)
@@ -456,54 +457,54 @@ static void Item_802676F4(HSD_GObj* gobj)
 }
 
 /// @remarks #Item_8026862C loads two integers
-static bool Item_8026784C(enum_t dropItem, int _)
+static bool Item_8026784C(Item_HoldKinds hold_kind, ItemKind _)
 {
     bool result = false;
 
-    switch (dropItem) {
-    case 0:
+    switch (hold_kind) {
+    case ITEM_HOLD_0:
         if (Item_804A0C64.x0 >= Item_804A0C64.x4) {
             result = true;
         }
 
         break;
 
-    case 1:
+    case ITEM_HOLD_1:
         if (Item_804A0C64.x8 >= Item_804A0C64.xC) {
             result = true;
         }
 
         break;
 
-    case 2:
+    case ITEM_HOLD_2:
         if (Item_804A0C64.x10 >= Item_804A0C64.x14) {
             result = true;
         }
 
         break;
 
-    case 3:
+    case ITEM_HOLD_3:
         if (Item_804A0C64.x58 >= Item_804A0C64.x5C) {
             result = true;
         }
 
         break;
 
-    case 5:
+    case ITEM_HOLD_5:
         if (Item_804A0C64.x40 >= Item_804A0C64.x44) {
             result = true;
         }
 
         break;
 
-    case 7:
+    case ITEM_HOLD_7:
         if (Item_804A0C64.x34 >= Item_804A0C64.x38) {
             result = true;
         }
 
         break;
 
-    case 9:
+    case ITEM_HOLD_9:
         if (Item_804A0C64.x1C > Item_804A0C64.x20) {
             Item_804A0C64.x1C--;
             result = true;
@@ -511,24 +512,26 @@ static bool Item_8026784C(enum_t dropItem, int _)
 
         break;
 
-    case 10:
+    case ITEM_HOLD_10:
         if (Item_804A0C64.x24 >= Item_804A0C64.x28) {
             result = true;
         }
 
         break;
 
-    case 11:
+    case ITEM_HOLD_11:
         if (Item_804A0C64.x48 >= Item_804A0C64.x4C) {
             result = true;
         }
 
         break;
 
-    case 12:
+    case ITEM_HOLD_12:
         if (Item_804A0C64.x50 >= Item_804A0C64.x54) {
             result = true;
         }
+    default:
+        break;
     }
 
     return result;
@@ -537,23 +540,24 @@ static bool Item_8026784C(enum_t dropItem, int _)
 void Item_80267978(HSD_GObj* gobj)
 {
     Item* item_data = gobj->user_data;
-    if (item_data->kind < It_Kind_Item_End) {
+    if (item_data->kind < It_Kind_Section_Common_Extended_End) {
         // Common or item-related items
         item_data->xC4_article_data = it_804D6D24[item_data->kind];
         item_data->xB8_itemLogicTable = &it_803F14C4[item_data->kind];
-    } else if (item_data->kind < It_PKind_Start) {
+    } else if (item_data->kind < It_Kind_Section_Monster_Character_Misc_End) {
         // Character or Monster items
-        int idx = item_data->kind - It_Kind_Monster_Start;
+        int idx =
+            item_data->kind - It_Kind_Section_Monster_Character_Misc_Start;
         item_data->xC4_article_data = it_804D6D38[idx];
         item_data->xB8_itemLogicTable = &it_803F3100[idx];
-    } else if (item_data->kind < It_Kind_Pokemon_End) {
+    } else if (item_data->kind < It_Kind_Section_Pokemon_Extended_End) {
         // Pokemon and related items
-        int idx = item_data->kind - It_Kind_Pokemon_Start;
+        int idx = item_data->kind - It_Kind_Section_Pokemon_Extended_Start;
         item_data->xC4_article_data = it_804D6D30[idx];
         item_data->xB8_itemLogicTable = &it_803F23CC[idx];
     } else {
         // Stage or Monster 2 items
-        int idx = item_data->kind - It_Kind_Monster2_Start;
+        int idx = item_data->kind - It_Kind_Section_Stage_Extended_Start;
         item_data->xC4_article_data = it_804A0F60[idx];
         item_data->xB8_itemLogicTable = &it_803F4D20[idx];
         if (item_data->xC4_article_data == NULL) {
@@ -720,7 +724,7 @@ static void Item_80267AA8(HSD_GObj* gobj, SpawnItem* spawnItem)
 
     item_data->xDAA.xDAA_byte = 1;
 
-    if (db_ShowItemPickupRange()) {
+    if (db_ShowItemPickupRange() != 0) {
         item_data->xDAA.xDAA_flag.x0.b4 = true;
     }
 
@@ -929,28 +933,29 @@ static HSD_GObj* Item_8026862C(SpawnItem* spawnItem)
 
     void* user_data;
 
-    if (Item_8026784C(spawnItem->hold_kind, spawnItem->kind) != 0) {
+    if (Item_8026784C(spawnItem->hold_kind, spawnItem->kind) != false) {
         return NULL;
     }
     gobj = GObj_Create(HSD_GOBJ_CLASS_ITEM, 9, 0);
     if (gobj == NULL) {
         return NULL;
     }
-    if (spawnItem->kind < It_Kind_Item_End) {
+    if (spawnItem->kind < It_Kind_Section_Common_Extended_End) {
         // Common or item-related items
         GObj_SetupGXLink(gobj, it_803F1418[spawnItem->kind].x0_renderFunc, 6,
                          0);
-    } else if (spawnItem->kind < It_Kind_Pokemon_Start) {
+    } else if (spawnItem->kind < It_Kind_Section_Monster_Character_Misc_End) {
         // Character or Monster items
-        int idx = spawnItem->kind - It_Kind_Monster_Start;
+        int idx =
+            spawnItem->kind - It_Kind_Section_Monster_Character_Misc_Start;
         GObj_SetupGXLink(gobj, it_803F2F28[idx].x0_renderFunc, 6, 0);
-    } else if (spawnItem->kind < It_Kind_Pokemon_End) {
+    } else if (spawnItem->kind < It_Kind_Section_Pokemon_Extended_End) {
         // Pokemon and related items
-        int idx = spawnItem->kind - It_Kind_Pokemon_Start;
+        int idx = spawnItem->kind - It_Kind_Section_Pokemon_Extended_Start;
         GObj_SetupGXLink(gobj, it_803F2310[idx].x0_renderFunc, 6, 0);
     } else {
         // Stage and Monster 2 items
-        int idx = spawnItem->kind - It_Kind_Monster2_Start;
+        int idx = spawnItem->kind - It_Kind_Section_Stage_Extended_Start;
         GObj_SetupGXLink(gobj, it_803F4CA8[idx].x0_renderFunc, 6, 0);
     }
     user_data = HSD_ObjAlloc(&item_alloc_data);

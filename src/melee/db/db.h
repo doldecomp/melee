@@ -4,6 +4,7 @@
 #include <melee/ft/forward.h>
 #include <melee/it/forward.h>
 
+#include <dolphin/types.h>
 #include <sysdolphin/baselib/controller.h>
 
 typedef enum DbLKind {
@@ -33,10 +34,10 @@ typedef enum DbLKind {
 /* 225C44 */ void fn_DisableShowEnemyStompRange(void);
 /* 225C8C */ void fn_EnableShowItemPickupRange(void);
 /* 225CD4 */ void fn_DisableShowItemPickupRange(void);
-/* 225D1C */ s32 db_GetCurrentlySelectedPokemon(void);
+/* 225D1C */ PokemonKind db_GetCurrentlySelectedPokemon(void);
 /* 225D2C */ void db_DisableItemSpawns(void);
 /* 225D40 */ void db_EnableItemSpawns(void);
-/* 225D54 */ s32 db_AreItemSpawnsEnabled(void);
+/* 225D54 */ bool db_AreItemSpawnsEnabled(void);
 /* 225D64 */ void db_80225D64(Item_GObj* item, Fighter_GObj* owner);
 /* 225D7C */ void fn_ToggleItemCollisionBubbles(void);
 /* 225DD8 */ void db_80225DD8(Item_GObj* item, Fighter_GObj* owner);

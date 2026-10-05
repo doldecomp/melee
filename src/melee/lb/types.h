@@ -210,7 +210,7 @@ struct CollData {
     // position before collision routine started
     /* fp+70C */ Vec3 last_pos;
     /* fp+718 */ Vec3 x28_vec;
-    /* fp+724 */ ECBFlagStruct x34_flags;
+    /* fp+724 */ ECBFlagStruct x34_flags; // Make an enum? (See it_80275E98)
     /* fp+725 */ ECBFlagStruct x35_flags;
     /* fp+726 */ s16 facing_dir;
     /* fp+728 */ int x38;
