@@ -1140,7 +1140,7 @@ struct ftDeviceUnk4 {
 };
 ASSERT_SIZE(struct ftDeviceUnk4, 0x8);
 
-/// TODO same as ftDeviceUnk3
+/// @todo same as ftDeviceUnk3
 struct ftDeviceUnk5 {
     UNK_T x0;
     ftCommon_BuryType x4;

@@ -80,7 +80,7 @@ HSD_CameraDescPerspective lbl_803BB028 = {
 
 void fn_8001FC08(void)
 {
-    // TODO: Un-unroll this somehow?
+    /// @TODO: Un-unroll this somehow?
     // When I try it just stays a loop in the asm
     BgFlashData* data = &lbl_80433658;
     f32 val;
