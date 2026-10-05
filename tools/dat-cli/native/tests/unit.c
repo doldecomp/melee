@@ -449,6 +449,12 @@ static void test_walk(void)
     CHECK(root->flag == 5 && root->other == 17);
     CHECK(b->flag == 0 && b->other == 0);
     CHECK(dat_verify(a, stdout) == 0);
+    /* A relocated pointer to a converted object cannot become NULL. */
+    Leaf* saved_leaf = root->leaf;
+    root->leaf = NULL;
+    CHECK(dat_verify(a, NULL) == 1);
+    root->leaf = saved_leaf;
+    CHECK(dat_verify(a, NULL) == 0);
 
     FILE* out = tmpfile();
     dat_trace(a, out, DAT_TRACE_ALL);
