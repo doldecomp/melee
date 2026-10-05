@@ -1,8 +1,6 @@
 #ifndef MELEE_DB_DBINIT_H
 #define MELEE_DB_DBINIT_H
 
-#include <melee/ft/kinds/ftCommon/forward.h>
-
 #include <dat_macros.h>
 
 struct db_Setup_commonData {
