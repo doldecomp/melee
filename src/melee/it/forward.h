@@ -405,7 +405,7 @@ typedef enum ItemKind {
     It_Kind_Kyasarin_Egg,    // Birdo's Egg
                              /// @}
 
-    /// @name SECTION RANGES - as used in code (some are adjusted)
+    /// @name SECTIONS - as used in code (some are adjusted)
     /// @{
     /// Minor Sections
     /* 000 */ It_Kind_Common_Start =
@@ -495,51 +495,51 @@ typedef enum ItemKind {
         It_Kind_Section_Stage_Extended_End, // 238 - Used to check if still in
                                             // valid item range
 
+    /// Section Range Sizes
+    It_Kind_Common_Items_Size =
+        It_Kind_Common_End - It_Kind_Common_Start, // 35
+    It_Kind_Item_Related_Size =
+        It_Kind_Item_Related_End - It_Kind_Item_Related_Start, // 8
+    It_Kind_Monster_Items_Size =
+        It_Kind_Monster_End - It_Kind_Monster_Start, // 4
+    It_Kind_Monster_Related_Size =
+        It_Kind_Monster_Related_End - It_Kind_Monster_Related_Start, // 1
+    It_Kind_Character_Items_Size =
+        It_Kind_Character_End - It_Kind_Character_Start,                // 110
+    It_Kind_Misc_Items_Size = It_Kind_Misc_End - It_Kind_Misc_Start,    // 2
+    It_PKind_Misc_Items_Size = It_PKind_Misc_End - It_PKind_Misc_Start, // 1
+    It_PKind_Items_Size = It_PKind_Terminate - It_PKind_Start,          // 30
+    It_PKind_Items_Total =
+        It_PKind_Misc_Items_Size + It_PKind_Items_Size, // 31
+    It_PKind_Items_Related_Size =
+        It_PKind_Related_End - It_PKind_Related_Start, // 17
+    It_Kind_Monster2_Items_Size =
+        It_Kind_Monster2_End - It_Kind_Monster2_Start,                  // 13
+    It_Kind_Stage_Items_Size = It_Kind_Stage_End - It_Kind_Stage_Start, // 13
+    It_Kind_Monsters2_Stage_Items_Size =
+        It_Kind_Stage_End - It_Kind_Monster2_Start, // 26
+    It_Kind_Stage_Related_Items_Size =
+        It_Kind_Stage_Related_End - It_Kind_Stage_Related_Start, // 4
+
+    It_Kind_Section_Common_Extended_Size =
+        It_Kind_Section_Common_Extended_End -
+        It_Kind_Section_Common_Extended_Start, // 43
+    It_Kind_Section_Monster_Character_Misc_Size =
+        It_Kind_Section_Monster_Character_Misc_End -
+        It_Kind_Section_Monster_Character_Misc_Start, // 118
+    It_Kind_Section_Pokemon_Extended_Size =
+        It_Kind_Section_Pokemon_Extended_End -
+        It_Kind_Section_Pokemon_Extended_Start, // 47
+    It_Kind_Section_Stage_Extended_Size =
+        It_Kind_Section_Stage_Extended_End -
+        It_Kind_Section_Stage_Extended_Start, // 30
+
     /// @}
 
     It_Kind_Unset1 = -1,
     It_Kind_Unset2 = 0,
     It_Kind_None = -999,
 } ItemKind;
-
-#define It_Kind_Common_Items_Size                                             \
-    (It_Kind_Common_End - It_Kind_Common_Start) // 35
-#define It_Kind_Item_Related_Size                                             \
-    (It_Kind_Item_Related_End - It_Kind_Item_Related_Start) // 8
-#define It_Kind_Monster_Items_Size                                            \
-    (It_Kind_Monster_End - It_Kind_Monster_Start) // 4
-#define It_Kind_Monster_Related_Size                                          \
-    (It_Kind_Monster_Related_End - It_Kind_Monster_Related_Start) // 1
-#define It_Kind_Character_Items_Size                                          \
-    (It_Kind_Character_End - It_Kind_Character_Start)                   // 110
-#define It_Kind_Misc_Items_Size (It_Kind_Misc_End - It_Kind_Misc_Start) // 2
-#define It_PKind_Misc_Items_Size (It_PKind_Misc_End - It_PKind_Misc_Start) // 1
-#define It_PKind_Items_Size (It_PKind_Terminate - It_PKind_Start) // 30
-#define It_PKind_Items_Total                                                  \
-    (It_PKind_Misc_Items_Size + It_PKind_Items_Size) // 31
-#define It_PKind_Items_Related_Size                                           \
-    (It_PKind_Related_End - It_PKind_Related_Start) // 17
-#define It_Kind_Monster2_Items_Size                                           \
-    (It_Kind_Monster2_End - It_Kind_Monster2_Start) // 13
-#define It_Kind_Stage_Items_Size                                              \
-    (It_Kind_Stage_End - It_Kind_Stage_Start) // 13
-#define It_Kind_Monsters2_Stage_Items_Size                                    \
-    (It_Kind_Stage_End - It_Kind_Monster2_Start) // 26
-#define It_Kind_Stage_Related_Items_Size                                      \
-    (It_Kind_Stage_Related_End - It_Kind_Stage_Related_Start) // 4
-
-#define It_Kind_Section_Common_Extended_Size                                  \
-    (It_Kind_Section_Common_Extended_End -                                    \
-     It_Kind_Section_Common_Extended_Start) // 43
-#define It_Kind_Section_Monster_Character_Misc_Size                           \
-    (It_Kind_Section_Monster_Character_Misc_End -                             \
-     It_Kind_Section_Monster_Character_Misc_Start) // 118
-#define It_Kind_Section_Pokemon_Extended_Size                                 \
-    (It_Kind_Section_Pokemon_Extended_End -                                   \
-     It_Kind_Section_Pokemon_Extended_Start) // 47
-#define It_Kind_Section_Stage_Extended_Size                                   \
-    (It_Kind_Section_Stage_Extended_End -                                     \
-     It_Kind_Section_Stage_Extended_Start) // 30
 
 typedef enum PokemonKind {
     Pokemon_ID_Tosakinto,   // Goldeen (Tosakinto)
