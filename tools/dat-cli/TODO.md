@@ -5,8 +5,7 @@
 - The stage `*_YakumonoParam` structs aren't reachable (`void*` in the
   stage info) and differ per stage.
 - A union object whose tag chooses no member has no sample (`CmdUnion`,
-  which is a script; item attributes of fighter and stage items, whose kind
-  isn't bound or has no variant).
+  which is a script; item attributes of kinds with no variant).
 
 - objdiff can diff whole archives: the cost is the size of each symbol,
   not of the object, and blob data is understood and typed data is
@@ -24,17 +23,14 @@
 - `yakumono_param` has no type for about 40 stages, including every
   `GrT*` target test. Their code doesn't read it, or reads it locally.
 
-- Articles in Kirby's copies (`ftKbCopy*`) and in `ftData.x48_items` leave
-  `x4_specialAttributes` ambiguous: their item kinds aren't bound. The
-  kinds are known per slot (`ftKb_SpecialN_800F16D0`). So do stage items
-  (`GroundItemData`): every `GrT*` target, `GrTe`'s ten items, and one or
-  two in most other stages.
 - `ftDataFox.x48_items[4]` isn't an `Article`: its words are small integers.
 - Kirby's Game & Watch and Yoshi copies (`PlKbCpGw`, `PlKbCpYs`) have
   `dynamics` that don't fit `ftDynamics`.
 - Some unused trees typed by address in `dat_symbols.txt` don't fit:
-  relocated scalars in `PlGn*`'s material animations, and `FObjDesc` data
-  running past the end in `PlCl`, `PlLk` and `PlSs`.
+  relocated scalars in `PlGn*`'s material animations. The trees at `PlCl`
+  0x19428 and 0x1969C, `PlLk` 0x18BA8 and 0x18E1C, and `PlSs` 0x15898 are
+  untyped: as `HSD_AnimJoint`s, an `FObjDesc`'s `ad` runs 0x80000 bytes
+  past the data.
 - Fighters' part animations (`ftData_x1C.x8`) sit next to `HSD_AnimJoint`
   trees that nothing points to, whose subtrees the part animations reach.
   `dat_symbols.txt` types their heads by address.
@@ -62,10 +58,19 @@ Not errors:
   the item kind's `ItemStateTable`, plus one. Replace with a `DAT_COUNT`
   based on `Article::kind` once the counts are available (item state enums,
   or reading the tables from the ELF).
-- `ItemSpecialAttributes` selects common and related items except Sword,
-  ScBall and Spycloak. Sword's first three fields are pointer-typed but
-  hold unrelocated scalar values; ScBall and Spycloak still lack layouts.
-  Bind and annotate the remaining character items and Pokémon.
+- `ItemSpecialAttributes` selects a variant by `Article::kind`, bound in
+  `itPublicData`, stage items (`gr_itkind`), fighters' items
+  (`ftData_ItemKind`) and Kirby's copies (`ftKbCopy_ItemKind`). Left
+  ambiguous: ScBall and Spycloak (no layouts), `It_Kind_Unk4`,
+  `Lizardon_Flame4`, `Unknown_Swarm`, `Pokemon_Unk`, and fighter items
+  whose code reads no attributes (bows, blasters, capes, Peach's parasol
+  and Toad, Thunder Jolt in the air, Sheik's held needle, PK Thunder's
+  last trail, Ness's bat, Kirby's `It_Kind_Unk1`). Master Hand's third and
+  Young Link's sixth item slots aren't registered with a kind.
+- `itSpecialAttrsHead`, the record monsters' and stage items' attributes
+  start with, has duplicates: `itNokoNoko_DatAttrs2`, `itPatapataDatAttrs`,
+  `itOldkuriAttributes_x0`, `itOldottoseaAttributes_x0`,
+  `itWhiteBeaAttributes_x0`, and `s32*` in Heiho's and Birdo's.
 - `ftData.xC`/`x14` (actions), `x1C` (part animations) and their `x8`,
   and `ftData_x20.x0` use `DAT_EXTENT`. The counts are in DOL tables per
   fighter kind (`ftData_Table_Unk0`, `ftData_UnkIntPairs`), or only in code.

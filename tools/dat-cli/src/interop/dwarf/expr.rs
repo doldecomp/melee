@@ -23,6 +23,8 @@ pub enum Expr {
     Call(String, Vec<Expr>),
     Unary(UnaryOp, Box<Expr>),
     Binary(BinaryOp, Box<Expr>, Box<Expr>),
+    /// `a ? b : c`.
+    Cond(Box<Expr>, Box<Expr>, Box<Expr>),
 }
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
@@ -85,6 +87,10 @@ impl Expr {
                     UnaryOp::Neg => a.wrapping_neg(),
                 }
             }
+            Expr::Cond(a, b, c) => match a.eval(name)? {
+                0 => c.eval(name)?,
+                _ => b.eval(name)?,
+            },
             Expr::Binary(op, a, b) => {
                 let a = a.eval(name)?;
                 // Short-circuit like C, so the other side may be unresolved
@@ -156,7 +162,22 @@ fn eval_depth(
 
 /// An expression, with any whitespace around it.
 pub fn expr(input: &mut &str) -> ModalResult<Expr> {
-    delimited(multispace0, parser(0), multispace0).parse_next(input)
+    delimited(multispace0, conditional, multispace0).parse_next(input)
+}
+
+/// `a ? b : c`, right-associative and binding loosest, or an expression of
+/// the other operators.
+fn conditional(input: &mut &str) -> ModalResult<Expr> {
+    let a = parser(0).parse_next(input)?;
+    let branches = opt((
+        preceded((multispace0, '?'), cut_err(expr)),
+        preceded(':', cut_err(delimited(multispace0, conditional, multispace0))),
+    ))
+    .parse_next(input)?;
+    Ok(match branches {
+        Some((b, c)) => Expr::Cond(Box::new(a), Box::new(b), Box::new(c)),
+        None => a,
+    })
 }
 
 /// An operand and the operators around it, binding tighter than
@@ -212,7 +233,7 @@ fn parser<'i>(
 /// `true` or `false`.
 fn operand(input: &mut &str) -> ModalResult<Expr> {
     dispatch! {peek(any);
-        '(' => delimited('(', parser(0), cut_err(preceded(multispace0, ')'))),
+        '(' => delimited('(', expr, cut_err(')')),
         '0'..='9' => integer.map(Expr::Int),
         _ => (name, opt(preceded(multispace0, arguments))).map(
             |(name, args): (&str, _)| match (name, args) {
@@ -441,6 +462,20 @@ mod tests {
     }
 
     #[test]
+    fn conditional() {
+        let e = |text| Expr::parse(text).unwrap().eval(&mut |_| None);
+        assert_eq!(e("1 ? 2 : 3"), Some(2));
+        assert_eq!(e("0 ? 2 : 3"), Some(3));
+        assert_eq!(e("0 ? 1 : 0 ? 2 : 3"), Some(3));
+        assert_eq!(e("1 ? 0 ? 4 : 5 : 6"), Some(5));
+        assert_eq!(e("1 + 1 == 2 ? 7 : 8"), Some(7));
+        assert_eq!(e("(0 ? 1 : 2) * 3"), Some(6));
+        assert_eq!(e("0 ? UNKNOWN : 9"), Some(9));
+        assert!(Expr::parse("1 ? 2").is_none());
+        assert!(Expr::parse("1 ? : 3").is_none());
+    }
+
+    #[test]
     fn item_command_lengths() {
         let e = |text| Expr::parse(text).unwrap().eval(&mut |_| None);
         // Opcode 11, a hitbox, and opcode 16 with sub-commands 2 and 3
@@ -496,6 +531,5 @@ mod tests {
         assert!(Expr::parse("1 +").is_none());
         assert!(Expr::parse("(1").is_none());
         assert!(Expr::parse("1 2").is_none());
-        assert!(Expr::parse("1 ? 2 : 3").is_none());
     }
 }

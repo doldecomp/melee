@@ -17,6 +17,16 @@
 #include <melee/gm/types.h>
 #include <melee/lb/types.h>
 
+/// The record the attributes of monsters and stage items point to first,
+/// stored just before them.
+typedef struct itSpecialAttrsHead {
+    /* 0x00 */ s32 x0; ///< Damage the item takes before it reacts.
+    /* 0x04 */ f32 x4; ///< Walking speed.
+    /* 0x08 */ f32 x8;
+    /* 0x0C */ f32 xC;
+    /* 0x10 */ s32 x10;
+} itSpecialAttrsHead;
+
 typedef struct itCapsule_ItemVars {
     /* ip+DD4 */ bool x0;
     /* ip+DD8 */ bool x4;
@@ -607,7 +617,7 @@ typedef struct itWhispyApple_ItemVars {
 } itWhispyApple_ItemVars;
 
 typedef struct itWhispyAppleAttributes {
-    u8 x0[0x4];
+    itSpecialAttrsHead* x0;
     s32 x4;
     s32 x8;
     u8 xC[0x8];
@@ -649,10 +659,7 @@ typedef struct {
 } itMBallAttributes;
 
 typedef struct {
-    union itLikelikeAttributes_x0 {
-        Vec3* x0_f32;
-        S32Vec3* x0_s32;
-    } x0;
+    /* 0x00 */ itSpecialAttrsHead* x0;
     /* 0x04 */ s32 x4;
     /* 0x08 */ s32 x8;
     /* 0x0C */ s32 xC;
@@ -733,7 +740,7 @@ typedef struct itTincle_ItemVars {
 } itTincle_ItemVars;
 
 typedef struct itTincleAttributes {
-    /* 0x00 */ f32 x0;
+    /* 0x00 */ itSpecialAttrsHead* x0;
     /* 0x04 */ s32 x4;
     /* 0x08 */ s32 x8;
     /* 0x0C */ f32 xC;
@@ -1181,13 +1188,8 @@ typedef struct itKlap_ItemVars {
     /* +28 ip+DFC */ f32 x28;
 } itKlap_ItemVars;
 
-typedef struct itLeadeadAttr_x0 {
-    /* 0x00 */ s32 x0;
-    /* 0x04 */ f32 x4;
-} itLeadeadAttr_x0;
-
 typedef struct itLeadeadAttributes {
-    /* 0x00 */ itLeadeadAttr_x0* x0;
+    /* 0x00 */ itSpecialAttrsHead* x0;
     /* 0x04 */ s32 x4;
     /* 0x08 */ f32 x8;
     /* 0x0C */ f32 xC;

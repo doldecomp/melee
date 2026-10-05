@@ -75,6 +75,8 @@ typedef enum DatOp {
     DAT_OP_MUL,
     DAT_OP_DIV,
     DAT_OP_REM,
+    /// `cond ? a : b`.
+    DAT_OP_COND,
     /// Always fails: a call to a function the library doesn't port.
     DAT_OP_FAIL,
 } DatOp;
@@ -98,6 +100,8 @@ typedef struct DatExpr {
     /// Operands; for DAT_OP_NAME, `b` is the name's macro.
     const struct DatExpr* a;
     const struct DatExpr* b;
+    /// DAT_OP_COND: the condition.
+    const struct DatExpr* cond;
     uint64_t value;
 } DatExpr;
 
@@ -303,6 +307,8 @@ typedef struct DatSchema {
              .args = (const DatExpr* const[]) { __VA_ARGS__ },                \
              .nargs =                                                         \
                  DAT_COUNTOF(((const DatExpr* const[]) { __VA_ARGS__ })))
+#define DAT_COND(c, x, y)                                                     \
+    DAT_EXPR(.op = DAT_OP_COND, .cond = (c), .a = (x), .b = (y))
 #define DAT_FAIL DAT_EXPR(.op = DAT_OP_FAIL)
 
 #ifdef __cplusplus

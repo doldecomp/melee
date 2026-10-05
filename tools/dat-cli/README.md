@@ -144,7 +144,10 @@ other roots. `ftData.x48_items` binds `item_index` to `_index`, so its C
 pointer union selects Samus's grapple-beam accessory in slot 4, joints in
 Link/Young Link slot 6, Kirby slot 4, Yoshi slot 3 and Sheik slots 4/5,
 Game & Watch's visibility table in slot 10, Jigglypuff's costume parts in
-slot 1, and an `Article` in the other slots.
+slot 1, and an `Article` in the other slots, whose `Article::kind` is
+bound from `ftData_ItemKind`. Untyped roots keep their bindings for the type
+`dat_symbols.txt` gives them: Kirby's copies bind `fighter_kind` the same
+way. A union member's `DAT_BIND` applies to the member when it's chosen.
 
 ## Samples
 
@@ -415,8 +418,10 @@ type instead.
 | `DAT_TERMINATED(value)` | Pointer to elements up to one whose first word (or whole value, if smaller) is `value` and not a relocated pointer: `0` for null-terminated lists, `GX_VA_NULL` for vertex descriptors, `-1` for `s8` lists. On a member, or on a pointer typedef for nested lists. `DAT_TERMINATED(value, n)`: the terminator is `n` elements long, for lists that end in it more than once. |
 | `DAT_BLOB` | On a `u8` typedef: one format of bytes the archive doesn't break down: keyframe streams (`HSD_FObjData`), texels (`HSD_ImageData`), display lists (`HSD_DisplayList`). The size comes from the pointer, e.g. `DAT_COUNT(length)`. Raw `u8` data stays unexplained. |
 
-Expressions are C. Names resolve to fields of the enclosing record, then
-bindings, then macros and enum constants. `_index` is the element index
+Expressions are C integer expressions, including `?:`. Names resolve to
+fields of the enclosing record, then bindings, then macros and enum
+constants; a macro can hold a table as a chain of `?:`, like
+`ftData_ItemKind`. `_index` is the element index
 inside arrays and counted pointers. Float fields convert to integers as C
 would. Calls are to functions of the code that the tool ports
 (`interop/dwarf/expr.rs`), so an annotation can say what the game itself

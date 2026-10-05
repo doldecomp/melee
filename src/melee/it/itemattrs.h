@@ -17,7 +17,7 @@
 #include <melee/it/itYoyo.h>
 
 typedef struct ArwingLaserAttr {
-    /* +0 */ ItemAttr* x0;
+    /* +0 */ itSpecialAttrsHead* x0;
     /* +4 */ f32 x4;
     /* +8 */ f32 x8;
 } ArwingLaserAttr;
@@ -214,7 +214,7 @@ typedef struct itSeakNeedleThrownAttributes {
 } itSeakNeedleThrownAttributes;
 
 typedef struct itZGShell_Attrs {
-    f32 x0;
+    itSpecialAttrsHead* x0;
     f32 x4;
     f32 x8;
     f32 xC;
@@ -282,104 +282,205 @@ union ItemSpecialAttributes {
                                                    It_Kind_F_Flower_Flame);
     itEvYoshiEgg_DatAttrs evyoshiegg DAT_IF(Article::kind ==
                                             It_Kind_EvYoshiEgg);
+    itLeadeadAttributes leadead DAT_IF(Article::kind == It_Kind_Leadead);
+    itOctarockAttributes octarock DAT_IF(Article::kind == It_Kind_Octarock);
+    itMarioFireballAttributes
+        mario_fireball DAT_IF(Article::kind == It_Kind_Mario_Fire ||
+                              Article::kind == It_Kind_Kirby_MarioFire);
+    itDrMarioPillAttributes
+        dr_mario_pill DAT_IF(Article::kind == It_Kind_DrMario_Vitamin ||
+                             Article::kind == It_Kind_Kirby_DrMarioVitamin);
+    itKirbyCutterBeamAttributes kirby_cutter_beam DAT_IF(Article::kind ==
+                                                         It_Kind_Kirby_CBeam);
+    FoxLaserAttr fox_laser DAT_IF(Article::kind == It_Kind_Fox_Laser ||
+                                  Article::kind == It_Kind_Falco_Laser ||
+                                  Article::kind == It_Kind_Kirby_FoxLaser ||
+                                  Article::kind == It_Kind_Kirby_FalcoLaser);
+    FoxIllusionAttr
+        fox_illusion DAT_IF(Article::kind == It_Kind_Fox_Illusion ||
+                            Article::kind == It_Kind_Falco_Phantasm);
+    itLinkBombAttributes link_bomb DAT_IF(Article::kind == It_Kind_Link_Bomb ||
+                                          Article::kind == It_Kind_CLink_Bomb);
+    itLinkBoomerangAttributes
+        link_boomerang DAT_IF(Article::kind == It_Kind_Link_Boomerang ||
+                              Article::kind == It_Kind_CLink_Boomerang);
+    itLinkHookshotAttributes
+        link_hookshot DAT_IF(Article::kind == It_Kind_Link_HShot ||
+                             Article::kind == It_Kind_CLink_HShot);
+    itLinkArrowAttributes
+        link_arrow DAT_IF(Article::kind == It_Kind_Link_Arrow ||
+                          Article::kind == It_Kind_CLink_Arrow ||
+                          Article::kind == It_Kind_Kirby_LinkArrow ||
+                          Article::kind == It_Kind_Kirby_CLinkArrow);
+    itNessPKFirepillarAttributes
+        ness_pk_firepillar DAT_IF(Article::kind == It_Kind_Ness_PKFire ||
+                                  Article::kind == It_Kind_Ness_PKFire_Flame);
+    itFlashAttributes flash DAT_IF(Article::kind == It_Kind_Ness_PKFlush ||
+                                   Article::kind == It_Kind_Kirby_NessPKFlush);
+    itPKThunderAttributes pk_thunder DAT_IF(Article::kind ==
+                                            It_Kind_Ness_PKThunder);
+    itFlashExplAttributes
+        flash_expl DAT_IF(Article::kind == It_Kind_Ness_PKFlush_Explode ||
+                          Article::kind == It_Kind_Kirby_NessPKFlush_Explode);
+    itSeakNeedleThrownAttributes seak_needle_thrown
+        DAT_IF(Article::kind == It_Kind_Seak_NeedleThrow ||
+               Article::kind == It_Kind_Kirby_SeakNeedleThrow);
+    itPikachuthunderAttributes
+        pikachuthunder DAT_IF(Article::kind == It_Kind_Pikachu_Thunder ||
+                              Article::kind == It_Kind_Pichu_Thunder);
+    itYoshiEggThrowAttributes yoshi_egg_throw DAT_IF(Article::kind ==
+                                                     It_Kind_Yoshi_EggThrow);
+    StarAttrs yoshi_star DAT_IF(Article::kind == It_Kind_Yoshi_Star);
+    itPikachutJoltGroundAttributes pikachut_jolt_ground
+        DAT_IF(Article::kind == It_Kind_Pikachu_TJolt_Ground ||
+               Article::kind == It_Kind_Pichu_TJolt_Ground ||
+               Article::kind == It_Kind_Kirby_PikachuTJolt_Ground ||
+               Article::kind == It_Kind_Kirby_PichuTJolt_Ground);
+    itSamusBombAttributes samus_bomb DAT_IF(Article::kind ==
+                                            It_Kind_Samus_Bomb);
+    itSamusChargeShot_Attributes
+        samus_charge_shot DAT_IF(Article::kind == It_Kind_Samus_Charge ||
+                                 Article::kind == It_Kind_Kirby_SamusCharge);
+    itSamusMissileAttributes samus_missile DAT_IF(Article::kind ==
+                                                  It_Kind_Samus_Missile);
+    itSamusGrappleAttributes samus_grapple DAT_IF(Article::kind ==
+                                                  It_Kind_Samus_GBeam);
+    itSeakChain_Attrs seak_chain DAT_IF(Article::kind == It_Kind_Seak_Chain);
+    itPeachTurnipAttributes peach_turnip DAT_IF(Article::kind ==
+                                                It_Kind_Peach_Turnip);
+    itKoopaFlame_Attributes
+        koopa_flame DAT_IF(Article::kind == It_Kind_Koopa_Flame ||
+                           Article::kind == It_Kind_Kirby_KoopaFlame);
+    itYoyoAttributes yoyo DAT_IF(Article::kind == It_Kind_Ness_Yoyo);
+    itLuigiFireballAttributes
+        luigi_fireball DAT_IF(Article::kind == It_Kind_Luigi_Fire ||
+                              Article::kind == It_Kind_Kirby_LuigiFire);
+    itClimbersIceAttributes
+        climbers_ice DAT_IF(Article::kind == It_Kind_IceClimber_Ice ||
+                            Article::kind == It_Kind_Kirby_IceClimberIce);
+    itClimbersBlizzardAttributes
+        climbers_blizzard DAT_IF(Article::kind == It_Kind_IceClimber_Blizzard);
+    ItZeldaDinFire_ItemVars zelda_din_fire DAT_IF(Article::kind ==
+                                                  It_Kind_Zelda_DinFire);
+    itZeldaDinFireExplodeAttributes zelda_din_fire_explode
+        DAT_IF(Article::kind == It_Kind_Zelda_DinFire_Explode);
+    itMDisableAttributes m_disable DAT_IF(Article::kind ==
+                                          It_Kind_Mewtwo_Disable);
+    itPeachToadSporeAttributes
+        peach_toad_spore DAT_IF(Article::kind == It_Kind_Peach_ToadSpore ||
+                                Article::kind == It_Kind_Kirby_PeachToadSpore);
+    itMewtwoShadowball_DatAttrs mewtwo_shadowball
+        DAT_IF(Article::kind == It_Kind_Mewtwo_ShadowBall ||
+               Article::kind == It_Kind_Kirby_MewtwoShadowBall);
+    itClimbersStringAttributes
+        climbers_string DAT_IF(Article::kind == It_Kind_IceClimber_GumStrings);
+    itGamewatchAttributes
+        gamewatch DAT_IF(Article::kind == It_Kind_GameWatch_Greenhouse ||
+                         Article::kind == It_Kind_GameWatch_Manhole ||
+                         Article::kind == It_Kind_GameWatch_Fire ||
+                         Article::kind == It_Kind_GameWatch_Parachute ||
+                         Article::kind == It_Kind_GameWatch_Turtle ||
+                         Article::kind == It_Kind_GameWatch_Breath ||
+                         Article::kind == It_Kind_GameWatch_Judge ||
+                         Article::kind == It_Kind_GameWatch_Panic ||
+                         Article::kind == It_Kind_GameWatch_Rescue ||
+                         Article::kind == It_Kind_Kirby_GameWatchChefPan);
+    itGamewatchchefAttributes
+        gamewatchchef DAT_IF(Article::kind == It_Kind_GameWatch_Chef ||
+                             Article::kind == It_Kind_Kirby_GameWatchChef);
+    itMasterHandLaserAttributes
+        master_hand_laser DAT_IF(Article::kind == It_Kind_MasterHand_Laser ||
+                                 Article::kind == It_Kind_CrazyHand_Laser);
+    itMasterHandBulletAttributes
+        master_hand_bullet DAT_IF(Article::kind == It_Kind_MasterHand_Bullet ||
+                                  Article::kind == It_Kind_CrazyHand_Bullet);
+    itCrazyHandBombAttributes crazy_hand_bomb DAT_IF(Article::kind ==
+                                                     It_Kind_CrazyHand_Bomb);
+    itCoinAttributes coin DAT_IF(Article::kind == It_Kind_Coin);
+    itTosakinto_Attrs tosakinto DAT_IF(Article::kind == It_PKind_Tosakinto);
+    itChicoritaAttr chicorita DAT_IF(Article::kind == It_PKind_Chicorita);
+    itKabigonAttributes kabigon DAT_IF(Article::kind == It_PKind_Kabigon);
+    itKamexAttributes kamex DAT_IF(Article::kind == It_PKind_Kamex);
+    itMatadogasAttributes
+        matadogas DAT_IF(Article::kind == It_PKind_Matadogas ||
+                         Article::kind == It_Kind_Matadogas_Gas1 ||
+                         Article::kind == It_Kind_Matadogas_Gas2);
+    itLizardonAttributes lizardon DAT_IF(Article::kind == It_PKind_Lizardon);
+    itFireAttributes fire DAT_IF(Article::kind == It_PKind_Fire);
+    itThunderPokemonAttributes thunder_pokemon DAT_IF(Article::kind ==
+                                                      It_PKind_Thunder);
+    itFreezerAttributes freezer DAT_IF(Article::kind == It_PKind_Freezer);
+    itsonansAttributes sonans DAT_IF(Article::kind == It_PKind_Sonans);
+    itHassamAttributes hassam DAT_IF(Article::kind == It_PKind_Hassam);
+    itUnknownAttributes unknown DAT_IF(Article::kind == It_PKind_Unknown);
+    itSanseijuuAttributes sanseijuu DAT_IF(Article::kind == It_PKind_Entei ||
+                                           Article::kind == It_PKind_Raikou ||
+                                           Article::kind == It_PKind_Suikun);
+    itkireihanaAttributes kireihana DAT_IF(Article::kind ==
+                                           It_PKind_Kireihana);
+    itMarumineAttributes marumine DAT_IF(Article::kind == It_PKind_Marumine);
+    itLugiaAttributes lugia DAT_IF(Article::kind == It_PKind_Lugia);
+    itHououAttr houou DAT_IF(Article::kind == It_PKind_Houou ||
+                             Article::kind == It_Kind_Houou_SacredFire);
+    ItMetamonVars metamon DAT_IF(Article::kind == It_PKind_Metamon);
+    itPippiAttributes pippi DAT_IF(Article::kind == It_PKind_Pippi);
+    itTogepyAttributes togepy DAT_IF(Article::kind == It_PKind_Togepy);
+    MewVars mew DAT_IF(Article::kind == It_PKind_Mew);
+    itCerebiAttributes cerebi DAT_IF(Article::kind == It_PKind_Cerebi);
+    itHitodemanAttributes
+        hitodeman DAT_IF(Article::kind == It_PKind_Hitodeman ||
+                         Article::kind == It_Kind_Hitodeman_Star);
+    itLuckyAttributes lucky DAT_IF(Article::kind == It_PKind_Lucky);
+    itHinoarashiAttributes
+        hinoarashi DAT_IF(Article::kind == It_PKind_Hinoarashi ||
+                          Article::kind == It_Kind_Hinoarashi_Flame);
+    itMarilAttributes maril DAT_IF(Article::kind == It_PKind_Maril);
+    itFushigibanaAttributes fushigibana DAT_IF(Article::kind ==
+                                               It_PKind_Fushigibana);
+    itChicoritaLeafAttr chicorita_leaf DAT_IF(Article::kind ==
+                                              It_Kind_Chicorita_Leaf);
+    itKamexHydroPumpAttributes
+        kamex_hydro_pump DAT_IF(Article::kind == It_Kind_Kamex_HydroPump);
+    itLugiaAeroblastAttributes
+        lugia_aeroblast DAT_IF(Article::kind == It_Kind_Lugia_Aeroblast ||
+                               Article::kind == It_Kind_Lugia_Aeroblast2 ||
+                               Article::kind == It_Kind_Lugia_Aeroblast3);
+    itLuckyEggAttributes lucky_egg DAT_IF(Article::kind == It_Kind_Lucky_Egg);
 
+    itOldkuriAttributes oldkuri DAT_IF(Article::kind == It_Kind_Old_Kuri);
+    itHeihoAttributes heiho DAT_IF(Article::kind == It_Kind_Heiho);
+    itNokoNoko_DatAttrs noko_noko DAT_IF(Article::kind == It_Kind_Nokonoko);
+    itPatapataAttributes patapata DAT_IF(Article::kind == It_Kind_Patapata);
+    itLikelikeAttributes likelike DAT_IF(Article::kind == It_Kind_Likelike);
+    itOldottoseaAttributes oldottosea DAT_IF(Article::kind ==
+                                             It_Kind_Old_Otto);
+    itWhiteBeaAttributes white_bea DAT_IF(Article::kind == It_Kind_Whitebea);
+    itZGShell_Attrs zg_shell DAT_IF(Article::kind == It_Kind_ZGShell);
+    itTincleAttributes tincle DAT_IF(Article::kind == It_Kind_Tincle);
+    itWhispyAppleAttributes
+        whispy_apple DAT_IF(Article::kind == It_Kind_WhispyApple ||
+                            Article::kind == It_Kind_WhispyHealApple);
+    itToolsAttributes tools DAT_IF(Article::kind == It_Kind_Tools);
+    itKyasarinAttributes kyasarin DAT_IF(Article::kind == It_Kind_Kyasarin);
+    ArwingLaserAttr arwing_laser DAT_IF(Article::kind == It_Kind_Arwing_Laser);
+    itGreatFoxLaser_Attrs great_fox_laser DAT_IF(Article::kind ==
+                                                 It_Kind_GreatFox_Laser);
+    itKyasarinEggAttributes kyasarin_egg DAT_IF(Article::kind ==
+                                                It_Kind_Kyasarin_Egg);
+    /// Monsters and stage items whose code reads none of their attributes:
+    /// only the record they start with is known.
+    itSpecialAttrsHead* head DAT_IF(Article::kind == It_Kind_Kuriboh ||
+                                    Article::kind == It_Kind_Ottosea ||
+                                    Article::kind == It_Kind_Mato ||
+                                    Article::kind == It_Kind_Klap ||
+                                    Article::kind == It_Kind_ZRShell);
     // Other layouts and shared views used by item callers.
-    ArwingLaserAttr arwing_laser;
-    itCerebiAttributes cerebi;
     struct itChainSegment chain_segment;
-    itChicoritaAttr chicorita;
-    itChicoritaLeafAttr chicorita_leaf;
-    itClimbersBlizzardAttributes climbers_blizzard;
-    itClimbersIceAttributes climbers_ice;
-    itClimbersStringAttributes climbers_string;
-    itCoinAttributes coin;
-    itCrazyHandBombAttributes crazy_hand_bomb;
-    itDrMarioPillAttributes dr_mario_pill;
-    itFireAttributes fire;
-    itFlashAttributes flash;
-    itFlashExplAttributes flash_expl;
-    FoxIllusionAttr fox_illusion;
-    FoxLaserAttr fox_laser;
-    itFreezerAttributes freezer;
-    itFushigibanaAttributes fushigibana;
-    itGamewatchAttributes gamewatch;
-    itGamewatchchefAttributes gamewatchchef;
-    itGreatFoxLaser_Attrs great_fox_laser;
-    itHassam_ItemVars hassam;
-    itHeihoAttributes heiho;
-    itHinoarashiAttributes hinoarashi;
-    itHitodemanAttributes hitodeman;
-    itHououAttr houou;
-    itKabigonAttributes kabigon;
-    itKamexAttributes kamex;
-    itKamexHydroPumpAttributes kamex_hydro_pump;
-    itKirbyCutterBeamAttributes kirby_cutter_beam;
-    itkireihanaAttributes kireihana;
-    itKoopaFlame_Attributes koopa_flame;
-    itKyasarinAttributes kyasarin;
-    itKyasarinEggAttributes kyasarin_egg;
-    itLeadeadAttributes leadead;
-    itLikelikeAttributes likelike;
-    itLinkArrowAttributes link_arrow;
-    itLinkBombAttributes link_bomb;
-    itLinkBoomerangAttributes link_boomerang;
-    itLinkHookshotAttributes link_hookshot;
-    itLizardonAttributes lizardon;
-    itLuckyAttributes lucky;
-    itLuckyEggAttributes lucky_egg;
-    itLugiaAttributes lugia;
-    itLugiaAeroblastAttributes lugia_aeroblast;
-    itLuigiFireballAttributes luigi_fireball;
-    itMDisableAttributes m_disable;
-    itMarilAttributes maril;
-    itMarumineAttributes marumine;
-    itMarioFireballAttributes mario_fireball;
-    itMasterHandBulletAttributes master_hand_bullet;
-    itMasterHandLaserAttributes master_hand_laser;
-    itMatadogasAttributes matadogas;
-    ItMetamonVars metamon;
-    MewVars mew;
-    itMewtwoShadowball_DatAttrs mewtwo_shadowball;
-    itNessPKFirepillarAttributes ness_pk_firepillar;
-    itNokoNoko_DatAttrs noko_noko;
-    itOctarockAttributes octarock;
-    itOldkuriAttributes oldkuri;
-    itOldottoseaAttributes oldottosea;
-    itPatapataAttributes patapata;
-    itPeachToadSporeAttributes peach_toad_spore;
-    itPeachTurnipAttributes peach_turnip;
-    itPikachutJoltGroundAttributes pikachut_jolt_ground;
-    itPikachuthunderAttributes pikachuthunder;
-    itPKThunderAttributes pk_thunder;
-    itPippiAttributes pippi;
     itPokemonSpawn_DatAttrs pokemon_spawn;
-    itSamusBombAttributes samus_bomb;
-    itSamusChargeShot_Attributes samus_charge_shot;
-    itSamusGrappleAttributes samus_grapple;
-    itSamusMissileAttributes samus_missile;
-    itSanseijuuAttributes sanseijuu;
-    itSeakChain_Attrs seak_chain;
-    itSeakNeedleThrownAttributes seak_needle_thrown;
-    itsonansAttributes sonans;
-    itSwordAttributes sword;
     struct TetherAttributes tether;
-    itThunderPokemonAttributes thunder_pokemon;
-    itTincleAttributes tincle;
-    itTogepyAttributes togepy;
-    itToolsAttributes tools;
-    itTosakinto_Attrs tosakinto;
     itUnkAttributes unk1;
     it_2728_DatAttrs unk_2728;
     it_2E5A_Attrs unk_2e5a;
-    itUnknownAttributes unknown;
-    itWhispyAppleAttributes whispy_apple;
-    itWhiteBeaAttributes white_bea;
-    itYoshiEggThrowAttributes yoshi_egg_throw;
-    StarAttrs yoshi_star;
-    itYoyoAttributes yoyo;
-    ItZeldaDinFire_ItemVars zelda_din_fire;
-    itZeldaDinFireExplodeAttributes zelda_din_fire_explode;
-    itZGShell_Attrs zg_shell;
 };
 
 #endif

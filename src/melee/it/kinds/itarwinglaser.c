@@ -372,7 +372,7 @@ static void itArwinglaser_UnkMotion2_Phys(Item_GObj* gobj)
     case 0:
     case 2:
         if (ip->xDD4_itemVar.arwinglaser.xE30 == 1) {
-            ip->x40_vel.x = attrs->x0->x4_throw_speed_mul * ip->facing_dir;
+            ip->x40_vel.x = attrs->x0->x4 * ip->facing_dir;
             ip->x40_vel.z = 0.0f;
             ip->x40_vel.y = 0.0f;
         } else {
@@ -409,12 +409,12 @@ static void itArwinglaser_UnkMotion3_Phys(Item_GObj* gobj)
         break;
     case 1:
     case 3:
-        ip->x40_vel.x = ip->xDD4_itemVar.arwinglaser.xE0C.x *
-                        (attrs->x0->x4_throw_speed_mul * attrs->x4);
-        ip->x40_vel.y = ip->xDD4_itemVar.arwinglaser.xE0C.y *
-                        (attrs->x0->x4_throw_speed_mul * attrs->x4);
-        ip->x40_vel.z = ip->xDD4_itemVar.arwinglaser.xE0C.z *
-                        (attrs->x0->x4_throw_speed_mul * attrs->x4);
+        ip->x40_vel.x =
+            ip->xDD4_itemVar.arwinglaser.xE0C.x * (attrs->x0->x4 * attrs->x4);
+        ip->x40_vel.y =
+            ip->xDD4_itemVar.arwinglaser.xE0C.y * (attrs->x0->x4 * attrs->x4);
+        ip->x40_vel.z =
+            ip->xDD4_itemVar.arwinglaser.xE0C.z * (attrs->x0->x4 * attrs->x4);
         break;
     }
     {

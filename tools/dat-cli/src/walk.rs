@@ -516,6 +516,8 @@ impl<'a> Walker<'a> {
                 };
                 if let Some(ty) = member.ty {
                     let path = field(path, member.name.map(|n| graph.str(n)));
+                    let outer = self.env.clone();
+                    self.env = self.bound(&outer, &self.binds(member), parent, 0);
                     if let Some(script) = self.script_tag(member) {
                         self.script(offset, ty, &script, &path);
                     } else if let Some((value, length)) = self.terminator(member) {
@@ -523,6 +525,7 @@ impl<'a> Walker<'a> {
                     } else {
                         self.layout(offset, ty, &path, parent);
                     }
+                    self.env = outer;
                 }
             }
             TypeKind::Array { element, dims } => {
