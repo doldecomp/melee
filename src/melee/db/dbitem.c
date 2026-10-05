@@ -406,8 +406,8 @@ void db_HandleItemPokemonMenuInput(int player)
                    It_Kind_Monster_Start)
         {
             db_ItemAndPokemonMenu.CurrentlySelectedItem--;
-            // If currently selected a monster item, progres to common items
-            // next instead of  common item-related items
+            // If currently selected a monster item, progress to common items
+            // next instead of common item-related items
             if (db_ItemAndPokemonMenu.CurrentlySelectedItem <
                 It_Kind_Monster_Start)
             {
