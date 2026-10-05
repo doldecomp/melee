@@ -557,8 +557,7 @@ struct MatchPlayerData {
     u16 self_destructs;
     u16 percent;
     u16 xE;
-    u16 kills[4];
-    u16 x18;
+    u16 kills[6];
     s32 x1C;
     u32 x20;
     int x24;
@@ -997,8 +996,7 @@ typedef struct CssSubStruct {
 typedef struct TrainingModeState {
     /* 0x000 */ s32 count;
     /* 0x004 */ s32 mode;
-    /* 0x008 */ s32 char_data[25];
-    /* 0x06C */ s32 pad_6C[2];
+    /* 0x008 */ s32 char_data[27];
     /* 0x074 */ PlayerInitData players[4];
     /* 0x104 */ s32 result_cache[4];
 } TrainingModeState;
