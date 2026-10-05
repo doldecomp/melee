@@ -12,7 +12,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "tables.h"
+#include "melee_dat.h"
 #include <dat/archive.h>
 
 #define MAX_ARCHIVES 256

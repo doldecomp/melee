@@ -426,7 +426,7 @@ DatArchive* dat_open(const DatSchema* schema, const void* bytes, size_t size,
         }
     }
     a->name_index = a->name_command = DAT_NONE;
-    for (uint32_t i = 0; i < schema->nnames; i++) {
+    for (uint32_t i = 1; i < schema->nnames; i++) {
         if (strcmp(schema->names[i], "_index") == 0) {
             a->name_index = (int32_t) i;
         } else if (strcmp(schema->names[i], "_command") == 0) {
@@ -528,8 +528,8 @@ uint32_t dat_size(const DatArchive* a)
 
 int32_t dat_type_by_id(const DatSchema* s, uint32_t id)
 {
-    for (uint32_t i = 0; i < s->ntypes; i++) {
-        if (s->types[i].id == id) {
+    for (uint32_t i = 1; i < s->ntypes; i++) {
+        if (s->types[i]->id == id) {
             return (int32_t) i;
         }
     }
@@ -541,7 +541,7 @@ int32_t dat_type_by_id(const DatSchema* s, uint32_t id)
 
 static const DatType* T(const DatArchive* a, int32_t type)
 {
-    return &a->s->types[type];
+    return a->s->types[type];
 }
 
 static int32_t resolve(const DatArchive* a, int32_t type)
@@ -561,15 +561,15 @@ static int32_t pointee(const DatArchive* a, int32_t target)
 }
 
 /// A `DAT_TERMINATED` value on a typedef, or one it names.
-static int32_t typedef_terminator(const DatArchive* a, int32_t type)
+static const DatExpr* typedef_terminator(const DatArchive* a, int32_t type)
 {
     while (type != DAT_NONE && T(a, type)->kind == DAT_KIND_TYPEDEF) {
-        if (T(a, type)->terminator != DAT_NONE) {
+        if (T(a, type)->terminator != NULL) {
             return T(a, type)->terminator;
         }
         type = T(a, type)->target;
     }
-    return DAT_NONE;
+    return NULL;
 }
 
 /// The type a `DAT_TYPE` typedef on the way to the type refers to.
@@ -764,7 +764,7 @@ static const DatMember* largest(const DatArchive* a, const DatType* u)
     const DatMember* best = NULL;
     uint32_t size = 0;
     for (uint32_t i = 0; i < u->nmembers; i++) {
-        const DatMember* m = &a->s->members[u->members + i];
+        const DatMember* m = &u->members[i];
         int32_t r = resolve(a, m->type);
         uint32_t ms = r == DAT_NONE ? 0 : T(a, r)->size;
         if (best == NULL || ms > size) {
@@ -790,7 +790,7 @@ static void convert(DatArchive* a, uint32_t offset, int32_t type, void* native)
         break;
     case DAT_KIND_STRUCT:
         for (uint32_t i = 0; i < t->nmembers; i++) {
-            const DatMember* m = &a->s->members[t->members + i];
+            const DatMember* m = &t->members[i];
             if (m->bit_size) {
                 convert_bitfield(a, offset, m, native);
             } else if (m->has_offset && m->type != DAT_NONE) {
@@ -876,8 +876,8 @@ static bool field_value(const DatArchive* a, int32_t record, uint32_t base,
     }
     const DatMember* m = NULL;
     for (uint32_t i = 0; i < t->nmembers; i++) {
-        if (a->s->members[t->members + i].name == name) {
-            m = &a->s->members[t->members + i];
+        if (t->members[i].name == name) {
+            m = &t->members[i];
             break;
         }
     }
@@ -936,7 +936,7 @@ static bool resolve_name(const DatArchive* a, const Context* c, int32_t name,
         }
         const DatType* u = T(a, c->onion);
         for (uint32_t i = 0; i < u->nmembers; i++) {
-            const DatMember* m = &a->s->members[u->members + i];
+            const DatMember* m = &u->members[i];
             if (field_value(a, resolve(a, m->type), c->union_base, name, out))
             {
                 return true;
@@ -1051,37 +1051,41 @@ static bool gx_get_tex_buffer_size(uint16_t width, uint16_t height,
     return true;
 }
 
-static bool eval(const DatArchive* a, const Context* c, int32_t node,
-                 uint64_t* out)
+/// How deep a name's macro is expanded within macros, as `melee-dat`
+/// expands them.
+#define MACRO_DEPTH 16
+
+static bool eval_at(const DatArchive* a, const Context* c, const DatExpr* e,
+                    unsigned depth, uint64_t* out)
 {
-    if (node == DAT_NONE) {
+    if (e == NULL) {
         return false;
     }
-    const DatExpr* e = &a->s->exprs[node];
     uint64_t x, y;
     switch (e->op) {
     case DAT_OP_INT:
         *out = e->value;
         return true;
     case DAT_OP_NAME:
-        return resolve_name(a, c, e->a, out) || eval(a, c, e->b, out);
+        return resolve_name(a, c, e->name, out) ||
+               (depth < MACRO_DEPTH && eval_at(a, c, e->b, depth + 1, out));
     case DAT_OP_FAIL:
         return false;
     case DAT_OP_CALL: {
         uint64_t args[8];
-        if (e->value > 8) {
+        if (e->nargs > 8) {
             return false;
         }
-        for (uint64_t i = 0; i < e->value; i++) {
-            if (!eval(a, c, a->s->args[e->b + i], &args[i])) {
+        for (uint8_t i = 0; i < e->nargs; i++) {
+            if (!eval_at(a, c, e->args[i], depth, &args[i])) {
                 return false;
             }
         }
-        switch (e->a) {
+        switch (e->function) {
         case DAT_FN_IT_COMMAND_LENGTH:
-            return e->value == 1 && it_command_length(args[0], out);
+            return e->nargs == 1 && it_command_length(args[0], out);
         case DAT_FN_GX_GET_TEX_BUFFER_SIZE:
-            return e->value == 5 && gx_get_tex_buffer_size(
+            return e->nargs == 5 && gx_get_tex_buffer_size(
                                         (uint16_t) args[0], (uint16_t) args[1],
                                         (uint32_t) args[2], (uint8_t) args[3],
                                         (uint8_t) args[4], out);
@@ -1092,7 +1096,7 @@ static bool eval(const DatArchive* a, const Context* c, int32_t node,
     case DAT_OP_NOT:
     case DAT_OP_BITNOT:
     case DAT_OP_NEG:
-        if (!eval(a, c, e->a, &x)) {
+        if (!eval_at(a, c, e->a, depth, &x)) {
             return false;
         }
         *out = e->op == DAT_OP_NOT      ? (x == 0)
@@ -1102,7 +1106,7 @@ static bool eval(const DatArchive* a, const Context* c, int32_t node,
     default:
         break;
     }
-    if (!eval(a, c, e->a, &x)) {
+    if (!eval_at(a, c, e->a, depth, &x)) {
         return false;
     }
     /* Short-circuit like C, so the other side may be unresolved */
@@ -1114,7 +1118,7 @@ static bool eval(const DatArchive* a, const Context* c, int32_t node,
         *out = 0;
         return true;
     }
-    if (!eval(a, c, e->b, &y)) {
+    if (!eval_at(a, c, e->b, depth, &y)) {
         return false;
     }
     switch (e->op) {
@@ -1185,6 +1189,12 @@ static bool eval(const DatArchive* a, const Context* c, int32_t node,
     default:
         return false;
     }
+}
+
+static bool eval(const DatArchive* a, const Context* c, const DatExpr* e,
+                 uint64_t* out)
+{
+    return eval_at(a, c, e, 0, out);
 }
 
 /* --- The walk -------------------------------------------------------------
@@ -1307,7 +1317,7 @@ static const Scope* bound(DatArchive* a, const Scope* outer,
 {
     const Scope* env = outer;
     for (uint32_t i = 0; i < m->nbinds; i++) {
-        const DatBind* b = &a->s->binds[m->binds + i];
+        const DatBind* b = &m->binds[i];
         Context c = { MODE_BIND, has_record ? record : DAT_NONE,
                       base,      DAT_NONE,
                       0,         outer,
@@ -1353,7 +1363,7 @@ static bool fits(const DatArchive* a, uint32_t offset, int32_t type)
         return !bits_has(&a->reloc, offset, a->size);
     case DAT_KIND_STRUCT:
         for (uint32_t i = 0; i < t->nmembers; i++) {
-            const DatMember* m = &a->s->members[t->members + i];
+            const DatMember* m = &t->members[i];
             if (m->bit_size || !m->has_offset || m->type == DAT_NONE) {
                 continue;
             }
@@ -1479,7 +1489,7 @@ static void counted(DatArchive* a, uint32_t offset, int32_t pointer,
 /// Follow a `DAT_TERMINATED` pointer: elements up to one whose first word
 /// is the terminator value, which is walked too.
 static void terminated(DatArchive* a, uint32_t offset, int32_t pointer,
-                       void* slot, int32_t terminator)
+                       void* slot, const DatExpr* terminator)
 {
     int32_t p = resolve(a, pointer);
     if (p == DAT_NONE) {
@@ -1797,8 +1807,8 @@ static ChoiceKind choose(const DatArchive* a, int32_t u, uint32_t base,
     }
     bool decided = true;
     for (uint32_t i = 0; i < t->nmembers; i++) {
-        const DatMember* m = &a->s->members[t->members + i];
-        bool conditioned = m->cond != DAT_NONE;
+        const DatMember* m = &t->members[i];
+        bool conditioned = m->cond != NULL;
         Context c = { MODE_IF,     parent.some ? parent.record : DAT_NONE,
                       parent.base, u,
                       base,        a->env,
@@ -1826,8 +1836,8 @@ static void layout(DatArchive* a, uint32_t offset, int32_t type, void* native,
     if (type == DAT_NONE) {
         return;
     }
-    int32_t term = typedef_terminator(a, type);
-    if (term != DAT_NONE) {
+    const DatExpr* term = typedef_terminator(a, type);
+    if (term != NULL) {
         terminated(a, offset, type, native, term);
         return;
     }
@@ -1851,7 +1861,7 @@ static void layout(DatArchive* a, uint32_t offset, int32_t type, void* native,
     switch (t->kind) {
     case DAT_KIND_STRUCT:
         for (uint32_t i = 0; i < t->nmembers; i++) {
-            const DatMember* m = &a->s->members[t->members + i];
+            const DatMember* m = &t->members[i];
             if (m->bit_size) {
                 convert_bitfield(a, offset, m, native);
                 continue;
@@ -1866,15 +1876,15 @@ static void layout(DatArchive* a, uint32_t offset, int32_t type, void* native,
             a->env = bound(a, outer, m, r, offset, true, 0);
             uint64_t count;
             Context c = { MODE_COUNT, r, offset, DAT_NONE, 0, a->env, 0, 0 };
-            if (m->count != DAT_NONE && eval(a, &c, m->count, &count)) {
+            if (m->count != NULL && eval(a, &c, m->count, &count)) {
                 counted(a, at, m->type, m->type_tag, count, m, here, mnative);
             } else if (m->type_tag != DAT_NONE) {
                 typed(a, at, m->type_tag, mnative, m->native_size);
-            } else if (m->script != DAT_NONE) {
-                script(a, at, m->type, &a->s->scripts[m->script], mnative);
+            } else if (m->script != NULL) {
+                script(a, at, m->type, m->script, mnative);
             } else if (m->extent) {
                 extent(a, at, m->type, m, here, mnative);
-            } else if (m->terminator != DAT_NONE) {
+            } else if (m->terminator != NULL) {
                 terminated(a, at, m->type, mnative, m->terminator);
             } else if (m->nbinds > 0 &&
                        T(a, resolve(a, m->type))->kind == DAT_KIND_ARRAY)
@@ -1913,13 +1923,13 @@ static void layout(DatArchive* a, uint32_t offset, int32_t type, void* native,
                 VEC_PUSH(a->chosen, ch);
             }
             *seen = index + 1;
-            const DatMember* m = &a->s->members[t->members + index];
+            const DatMember* m = &t->members[index];
             if (m->type == DAT_NONE) {
                 break;
             }
-            if (m->script != DAT_NONE) {
-                script(a, offset, m->type, &a->s->scripts[m->script], native);
-            } else if (m->terminator != DAT_NONE) {
+            if (m->script != NULL) {
+                script(a, offset, m->type, m->script, native);
+            } else if (m->terminator != NULL) {
                 terminated(a, offset, m->type, native, m->terminator);
             } else {
                 layout(a, offset, m->type, native, parent);
@@ -1986,7 +1996,7 @@ static size_t extent_native_size(const DatArchive* a, uint32_t offset,
     if (!t->has_extent || t->nmembers == 0) {
         return size;
     }
-    const DatMember* m = &a->s->members[t->members + t->nmembers - 1];
+    const DatMember* m = &t->members[t->nmembers - 1];
     int32_t arr = resolve(a, m->type);
     if (arr == DAT_NONE || T(a, arr)->kind != DAT_KIND_ARRAY) {
         return size;
@@ -2068,7 +2078,7 @@ static const Scope* root_env(DatArchive* a, const DatRoot* root)
         return NULL;
     }
     for (uint32_t i = 0; i < root->nbinds; i++) {
-        const DatRootBind* b = &a->s->root_binds[root->binds + i];
+        const DatRootBind* b = &root->binds[i];
         Scope* s = arena_alloc(&a->arena, sizeof(Scope));
         s->name = b->name;
         s->value = b->value;
@@ -2167,7 +2177,7 @@ static void* walk(DatArchive* a, uint32_t offset, const DatRoot* root,
 void* dat_at(DatArchive* a, uint32_t offset, int32_t type, DatCount count,
              uint64_t n)
 {
-    if (type < 0 || (uint32_t) type >= a->s->ntypes) {
+    if (type <= DAT_NONE || (uint32_t) type >= a->s->ntypes) {
         return NULL;
     }
     return walk(a, offset, NULL, type, count, n);
@@ -2186,12 +2196,15 @@ void* dat_public(DatArchive* a, const char* name, int32_t type)
 int dat_load_roots(DatArchive* a, const char* file, uint32_t index)
 {
     const DatFileRoots* f = NULL;
-    for (uint32_t i = 0; i < a->s->nfiles; i++) {
-        if (a->s->files[i].archive == index &&
-            strcmp(a->s->files[i].file, file) == 0)
-        {
-            f = &a->s->files[i];
-            break;
+    for (uint32_t i = 0; i < a->s->nmodules && f == NULL; i++) {
+        const DatModule* mod = &a->s->modules[i];
+        for (uint32_t j = 0; j < mod->nfiles; j++) {
+            if (mod->files[j].archive == index &&
+                strcmp(mod->files[j].file, file) == 0)
+            {
+                f = &mod->files[j];
+                break;
+            }
         }
     }
     if (f == NULL) {
@@ -2201,7 +2214,7 @@ int dat_load_roots(DatArchive* a, const char* file, uint32_t index)
     /* Public symbols in the archive's order, then aliases */
     for (uint32_t i = 0; i < a->npublics; i++) {
         for (uint32_t j = 0; j < f->nroots; j++) {
-            const DatRoot* root = &a->s->roots[f->roots + j];
+            const DatRoot* root = &f->roots[j];
             if (root->alias || strcmp(root->name, a->publics[i].name) != 0) {
                 continue;
             }
@@ -2212,7 +2225,7 @@ int dat_load_roots(DatArchive* a, const char* file, uint32_t index)
         }
     }
     for (uint32_t j = 0; j < f->nroots; j++) {
-        const DatRoot* root = &a->s->roots[f->roots + j];
+        const DatRoot* root = &f->roots[j];
         if (root->alias) {
             walk(a, root->address, root, root->type,
                  (DatCount) root->count_kind, root->count);
@@ -2252,7 +2265,7 @@ static int compare_triple(const void* x, const void* y)
 static const char* type_name(const DatArchive* a, uint32_t id)
 {
     int32_t t = dat_type_by_id(a->s, id);
-    return t == DAT_NONE ? "?" : a->s->types[t].name;
+    return t == DAT_NONE ? "?" : a->s->types[t]->name;
 }
 
 void dat_trace(const DatArchive* a, FILE* out, unsigned what)
@@ -2432,7 +2445,7 @@ static void verify(Verify* v, uint32_t offset, int32_t type,
     }
     case DAT_KIND_STRUCT:
         for (uint32_t i = 0; i < t->nmembers; i++) {
-            const DatMember* m = &a->s->members[t->members + i];
+            const DatMember* m = &t->members[i];
             if (m->bit_size) {
                 if (m->get_bits != NULL) {
                     int32_t mr = resolve(a, m->type);
@@ -2451,7 +2464,7 @@ static void verify(Verify* v, uint32_t offset, int32_t type,
             /* Counted, typed and scripted members are checked as the
                objects they point to */
             if (!m->has_offset || m->type == DAT_NONE ||
-                m->type_tag != DAT_NONE || m->script != DAT_NONE || m->extent)
+                m->type_tag != DAT_NONE || m->script != NULL || m->extent)
             {
                 continue;
             }
@@ -2463,11 +2476,11 @@ static void verify(Verify* v, uint32_t offset, int32_t type,
         uint64_t index;
         const DatMember* m = NULL;
         if (map_get(&a->choices, key2(offset, t->id), &index)) {
-            m = &a->s->members[t->members + index - 1];
+            m = &t->members[index - 1];
         } else if (!t->has_pointers) {
             m = largest(a, t);
         }
-        if (m != NULL && m->script == DAT_NONE) {
+        if (m != NULL && m->script == NULL) {
             verify(v, offset, m->type, native, depth + 1);
         }
         break;

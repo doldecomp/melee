@@ -1,9 +1,10 @@
 # The native archive interface: reads the game's archives into its own C
 # types on the host, whatever its byte order and pointer size.
 #
-# The tables come from `melee-dat native codegen`, from the types the dat
-# build exports (`types.bin`), and the end-to-end test compares the
-# library's walk with `melee-dat native expect` over the game's files:
+# The schema comes from `melee-dat native codegen`, from the types the dat
+# build exports (`types.bin`): a descriptor for each type, in a file for
+# each header of the game's, in schema/ here. The end-to-end test compares
+# the library's walk with `melee-dat native expect` over the game's files:
 #
 #   cmake -S tools/dat-cli/native -B build/native/x86_64
 #   cmake --build build/native/x86_64 && ctest --test-dir build/native/x86_64
@@ -45,6 +46,12 @@ if(NOT EXISTS "${MELEE_DAT_TYPES}")
         "preset first, or point it at a types.bin")
 endif()
 
+set(_dat_config
+    "${MELEE_ROOT}/config/${MELEE_VERSION}/dat.yml"
+    "${MELEE_ROOT}/config/${MELEE_VERSION}/dat_symbols.txt")
+
+# The schema is generated when configuring, since which files it has depends
+# on the types; a change to what it is generated from configures again
 if(MELEE_DAT)
     set(_dat_tool "${MELEE_DAT}")
 else()
@@ -52,35 +59,32 @@ else()
     find_program(MELEE_CARGO cargo REQUIRED)
     file(GLOB_RECURSE _dat_sources CONFIGURE_DEPENDS
         "${MELEE_ROOT}/tools/dat-cli/src/*.rs")
-    add_custom_command(
-        OUTPUT "${_dat_tool}"
+    set_property(DIRECTORY APPEND PROPERTY CMAKE_CONFIGURE_DEPENDS
+        ${_dat_sources} "${MELEE_ROOT}/tools/dat-cli/Cargo.toml")
+    message(STATUS "Building melee-dat")
+    execute_process(
         COMMAND "${MELEE_CARGO}" build --release
             --manifest-path "${MELEE_ROOT}/tools/dat-cli/Cargo.toml"
             --target-dir "${CMAKE_CURRENT_BINARY_DIR}/cargo"
-        DEPENDS ${_dat_sources} "${MELEE_ROOT}/tools/dat-cli/Cargo.toml"
-        COMMENT "Building melee-dat"
-        VERBATIM
+        COMMAND_ERROR_IS_FATAL ANY
     )
 endif()
 
-set(_dat_config
-    "${MELEE_ROOT}/config/${MELEE_VERSION}/dat.yml"
-    "${MELEE_ROOT}/config/${MELEE_VERSION}/dat_symbols.txt")
-
-# The generated C isn't the repository's to tidy
-file(WRITE "${CMAKE_CURRENT_BINARY_DIR}/.clang-tidy" "Checks: '-*'\n")
-
-add_custom_command(
-    OUTPUT tables.c tables.h
+set(_dat_schema "${CMAKE_CURRENT_BINARY_DIR}/schema")
+message(STATUS "Generating the schema in ${_dat_schema}")
+execute_process(
     COMMAND "${_dat_tool}" native codegen
         "${MELEE_ROOT}/config/${MELEE_VERSION}/dat.yml"
         -p "${MELEE_ROOT}" --types "${MELEE_DAT_TYPES}"
-        --files "${MELEE_DAT_FILES}"
-        --out tables.c --header tables.h
-    DEPENDS "${_dat_tool}" "${MELEE_DAT_TYPES}" ${_dat_config}
-    COMMENT "Generating the archives' tables"
-    VERBATIM
+        --files "${MELEE_DAT_FILES}" --out-dir "${_dat_schema}"
+    COMMAND_ERROR_IS_FATAL ANY
 )
+set_property(DIRECTORY APPEND PROPERTY CMAKE_CONFIGURE_DEPENDS
+    "${_dat_tool}" "${MELEE_DAT_TYPES}" ${_dat_config})
+file(GLOB_RECURSE _dat_schema_sources "${_dat_schema}/*.c")
+
+# The generated C isn't the repository's to tidy
+file(WRITE "${_dat_schema}/.clang-tidy" "Checks: '-*'\n")
 
 add_library(dat_native STATIC src/archive.c)
 target_include_directories(dat_native PUBLIC include)
@@ -90,9 +94,9 @@ if(NOT MSVC)
     target_link_libraries(dat_native PUBLIC m)
 endif()
 
-# The tables, compiled against the game's headers as the port builds them
-add_library(dat_melee STATIC "${CMAKE_CURRENT_BINARY_DIR}/tables.c")
-target_include_directories(dat_melee PUBLIC "${CMAKE_CURRENT_BINARY_DIR}")
+# The schema, compiled against the game's headers as the port builds them
+add_library(dat_melee STATIC ${_dat_schema_sources})
+target_include_directories(dat_melee PUBLIC "${_dat_schema}")
 target_link_libraries(dat_melee PUBLIC dat_native PRIVATE melee_game_headers)
 target_compile_definitions(dat_melee PRIVATE
     VERSION_${MELEE_VERSION}

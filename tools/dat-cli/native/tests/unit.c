@@ -72,7 +72,7 @@ static uint64_t get_other(const void* o)
  */
 
 enum {
-    T_S8,
+    T_S8 = 1,
     T_S16,
     T_S32,
     T_F32,
@@ -85,94 +85,142 @@ enum {
     T_U8_P,
     T_CHOICE,
     T_UINT,
-};
-
-#define SCALAR(name, kind, sign, raw, size, native, self)                     \
-    { name,   self,     kind, sign, raw, 0, 0,        0,       size,          \
-      native, DAT_NONE, self, 0,    0,   0, DAT_NONE, DAT_NONE }
-#define POINTER(name, target, self)                                           \
-    { name, self,     DAT_KIND_POINTER, 0,      0,    0, 1,                   \
-      0,    4,        sizeof(void*),    target, self, 0, 0,                   \
-      0,    DAT_NONE, DAT_NONE }
-
-static const DatType types[] = {
-    SCALAR("s8", DAT_KIND_INT, 1, 0, 1, 1, T_S8),
-    SCALAR("s16", DAT_KIND_INT, 1, 0, 2, 2, T_S16),
-    SCALAR("s32", DAT_KIND_INT, 1, 0, 4, 4, T_S32),
-    SCALAR("f32", DAT_KIND_FLOAT, 0, 0, 4, 4, T_F32),
-    { "Leaf", T_LEAF, DAT_KIND_STRUCT, 0, 0, 0, 0, 0, 12, sizeof(Leaf),
-      DAT_NONE, T_LEAF, 0, 0, 4, DAT_NONE, DAT_NONE },
-    POINTER("Leaf*", T_LEAF, T_LEAF_P),
-    { "Node", T_NODE, DAT_KIND_STRUCT, 0, 0, 0, 1, 0, 0x20, sizeof(Node),
-      DAT_NONE, T_NODE, 0, 4, 9, DAT_NONE, DAT_NONE },
-    POINTER("Node*", T_NODE, T_NODE_P),
-    SCALAR("u32", DAT_KIND_INT, 0, 0, 4, 4, T_U32),
-    SCALAR("u8", DAT_KIND_INT, 0, 1, 1, 1, T_U8),
-    POINTER("u8*", T_U8, T_U8_P),
-    { "Choice", T_CHOICE, DAT_KIND_UNION, 0, 0, 0, 1, 0, 4,
-      sizeof(union Choice), DAT_NONE, T_CHOICE, 0, 13, 2, DAT_NONE, DAT_NONE },
-    SCALAR("unsigned int", DAT_KIND_INT, 0, 0, 4, sizeof(unsigned), T_UINT),
+    T_COUNT,
 };
 
 enum {
-    N_N,
-    N_KIND
+    DAT_NAME_n = 1,
+    DAT_NAME_kind,
+    DAT_NAME_COUNT,
 };
 
-static const char* const names[] = { "n", "kind", NULL };
-
-static const DatExpr exprs[] = {
-    /* 0: n */
-    { DAT_OP_NAME, N_N, DAT_NONE, 0 },
-    /* 1: kind, 2: 0, 3: kind == 0 */
-    { DAT_OP_NAME, N_KIND, DAT_NONE, 0 },
-    { DAT_OP_INT, DAT_NONE, DAT_NONE, 0 },
-    { DAT_OP_EQ, 1, 2, 0 },
-    /* 4: 1, 5: kind == 1 */
-    { DAT_OP_INT, DAT_NONE, DAT_NONE, 1 },
-    { DAT_OP_EQ, 1, 4, 0 },
+static const char* const names[DAT_NAME_COUNT] = {
+    [DAT_NAME_n] = "n",
+    [DAT_NAME_kind] = "kind",
 };
 
-#define FIELD(name, type, offset, native, nsize)                              \
-    { name,     type,     offset,   0,        0,    1,                        \
-      0,        native,   nsize,    NULL,     NULL, DAT_NONE,                 \
-      DAT_NONE, DAT_NONE, DAT_NONE, DAT_NONE, 0,    0 }
+#define SCALAR(self, type_name, type_kind, sign, bytes, native)               \
+    static const DatType type_##self = {                                      \
+        .name = type_name,                                                    \
+        .id = self,                                                           \
+        .kind = type_kind,                                                    \
+        .is_signed = sign,                                                    \
+        .raw = self == T_U8,                                                  \
+        .size = bytes,                                                        \
+        .native_size = native,                                                \
+        .resolved = self,                                                     \
+    }
+#define POINTER(self, type_name, to)                                          \
+    static const DatType type_##self = {                                      \
+        .name = type_name,                                                    \
+        .id = self,                                                           \
+        .kind = DAT_KIND_POINTER,                                             \
+        .has_pointers = 1,                                                    \
+        .size = 4,                                                            \
+        .native_size = sizeof(void*),                                         \
+        .target = to,                                                         \
+        .resolved = self,                                                     \
+    }
 
-static const DatMember members[] = {
-    /* Leaf */
-    FIELD(DAT_NONE, T_S8, 0, offsetof(Leaf, a), 1),
-    FIELD(DAT_NONE, T_S16, 2, offsetof(Leaf, b), 2),
-    FIELD(DAT_NONE, T_S32, 4, offsetof(Leaf, c), 4),
-    FIELD(DAT_NONE, T_F32, 8, offsetof(Leaf, f), 4),
-    /* Node */
-    FIELD(DAT_NONE, T_NODE_P, 0, offsetof(Node, next), sizeof(void*)),
-    FIELD(DAT_NONE, T_LEAF_P, 4, offsetof(Node, leaf), sizeof(void*)),
-    /* DAT_COUNT(n) */
-    { DAT_NONE, T_LEAF_P, 8, 0, 0, 1, 0, offsetof(Node, many), sizeof(void*),
-      NULL, NULL, 0, DAT_NONE, DAT_NONE, DAT_NONE, DAT_NONE, 0, 0 },
-    FIELD(N_N, T_U32, 0xC, offsetof(Node, n), 4),
-    FIELD(DAT_NONE, T_U8_P, 0x10, offsetof(Node, raw), sizeof(void*)),
-    FIELD(N_KIND, T_S32, 0x14, offsetof(Node, kind), 4),
-    FIELD(DAT_NONE, T_CHOICE, 0x18, offsetof(Node, u), sizeof(union Choice)),
-    { DAT_NONE, T_UINT, 0, 0x1C * 8, 3, 0, 0, 0, 0, set_flag, get_flag,
-      DAT_NONE, DAT_NONE, DAT_NONE, DAT_NONE, DAT_NONE, 0, 0 },
-    { DAT_NONE, T_UINT, 0, 0x1C * 8 + 3, 5, 0, 0, 0, 0, set_other, get_other,
-      DAT_NONE, DAT_NONE, DAT_NONE, DAT_NONE, DAT_NONE, 0, 0 },
-    /* Choice: DAT_IF(kind == 0), DAT_IF(kind == 1) */
-    { DAT_NONE, T_LEAF_P, 0, 0, 0, 1, 0, 0, sizeof(void*), NULL, NULL,
-      DAT_NONE, DAT_NONE, 3, DAT_NONE, DAT_NONE, 0, 0 },
-    { DAT_NONE, T_NODE_P, 0, 0, 0, 1, 0, 0, sizeof(void*), NULL, NULL,
-      DAT_NONE, DAT_NONE, 5, DAT_NONE, DAT_NONE, 0, 0 },
+SCALAR(T_S8, "s8", DAT_KIND_INT, 1, 1, 1);
+SCALAR(T_S16, "s16", DAT_KIND_INT, 1, 2, 2);
+SCALAR(T_S32, "s32", DAT_KIND_INT, 1, 4, 4);
+SCALAR(T_F32, "f32", DAT_KIND_FLOAT, 0, 4, 4);
+SCALAR(T_U32, "u32", DAT_KIND_INT, 0, 4, 4);
+SCALAR(T_U8, "u8", DAT_KIND_INT, 0, 1, 1);
+SCALAR(T_UINT, "unsigned int", DAT_KIND_INT, 0, 4, sizeof(unsigned));
+POINTER(T_LEAF_P, "Leaf*", T_LEAF);
+POINTER(T_NODE_P, "Node*", T_NODE);
+POINTER(T_U8_P, "u8*", T_U8);
+
+static const DatMember leaf_members[] = {
+    { .type = T_S8, DAT_AT(0), DAT_FIELD(Leaf, a) },
+    { .type = T_S16, DAT_AT(2), DAT_FIELD(Leaf, b) },
+    { .type = T_S32, DAT_AT(4), DAT_FIELD(Leaf, c) },
+    { .type = T_F32, DAT_AT(8), DAT_FIELD(Leaf, f) },
+};
+
+static const DatType type_T_LEAF = {
+    .name = "Leaf",
+    .id = T_LEAF,
+    .kind = DAT_KIND_STRUCT,
+    .size = 12,
+    .native_size = sizeof(Leaf),
+    .resolved = T_LEAF,
+    DAT_MEMBERS(leaf_members),
+};
+
+static const DatMember node_members[] = {
+    { .type = T_NODE_P, DAT_AT(0), DAT_FIELD(Node, next) },
+    { .type = T_LEAF_P, DAT_AT(4), DAT_FIELD(Node, leaf) },
+    { .type = T_LEAF_P,
+      DAT_AT(8),
+      DAT_FIELD(Node, many),
+      .count = DAT_NAME(n) },
+    { DAT_MEMBER(Node, n, 0xC, T_U32) },
+    { .type = T_U8_P, DAT_AT(0x10), DAT_FIELD(Node, raw) },
+    { DAT_MEMBER(Node, kind, 0x14, T_S32) },
+    { .type = T_CHOICE, DAT_AT(0x18), DAT_FIELD(Node, u) },
+    { .type = T_UINT,
+      .bit_offset = 0x1C * 8,
+      .bit_size = 3,
+      .set_bits = set_flag,
+      .get_bits = get_flag },
+    { .type = T_UINT,
+      .bit_offset = 0x1C * 8 + 3,
+      .bit_size = 5,
+      .set_bits = set_other,
+      .get_bits = get_other },
+};
+
+static const DatType type_T_NODE = {
+    .name = "Node",
+    .id = T_NODE,
+    .kind = DAT_KIND_STRUCT,
+    .has_pointers = 1,
+    .size = 0x20,
+    .native_size = sizeof(Node),
+    .resolved = T_NODE,
+    DAT_MEMBERS(node_members),
+};
+
+static const DatMember choice_members[] = {
+    { .type = T_LEAF_P,
+      DAT_AT(0),
+      .native_size = sizeof(void*),
+      .cond = DAT_BINARY(EQ, DAT_NAME(kind), DAT_INT(0)) },
+    { .type = T_NODE_P,
+      DAT_AT(0),
+      .native_size = sizeof(void*),
+      .cond = DAT_BINARY(EQ, DAT_NAME(kind), DAT_INT(1)) },
+};
+
+static const DatType type_T_CHOICE = {
+    .name = "Choice",
+    .id = T_CHOICE,
+    .kind = DAT_KIND_UNION,
+    .has_pointers = 1,
+    .size = 4,
+    .native_size = sizeof(union Choice),
+    .resolved = T_CHOICE,
+    DAT_MEMBERS(choice_members),
+};
+
+static const DatType* const types[T_COUNT] = {
+    [T_S8] = &type_T_S8,     [T_S16] = &type_T_S16,
+    [T_S32] = &type_T_S32,   [T_F32] = &type_T_F32,
+    [T_LEAF] = &type_T_LEAF, [T_LEAF_P] = &type_T_LEAF_P,
+    [T_NODE] = &type_T_NODE, [T_NODE_P] = &type_T_NODE_P,
+    [T_U32] = &type_T_U32,   [T_U8] = &type_T_U8,
+    [T_U8_P] = &type_T_U8_P, [T_CHOICE] = &type_T_CHOICE,
+    [T_UINT] = &type_T_UINT,
 };
 
 static const DatSchema schema = {
-    types,   sizeof types / sizeof *types,
-    members, exprs,
-    NULL,    NULL,
-    NULL,    names,
-    2,       NULL,
-    NULL,    NULL,
-    0,
+    .types = types,
+    .ntypes = T_COUNT,
+    .names = names,
+    .nnames = DAT_NAME_COUNT,
 };
 
 /* --- An archive -----------------------------------------------------------
@@ -310,12 +358,12 @@ static void test_walk(void)
         CHECK(false);
     }
     fclose(out);
-    CHECK(contains(text, "object 0x0 6 Node\n"));
-    CHECK(contains(text, "object 0x20 6 Node\n"));
-    CHECK(contains(text, "object 0x40 4 Leaf\n"));
-    CHECK(contains(text, "object 0x70 9 u8\n"));
-    CHECK(contains(text, "choice 0x18 11 0\n"));
-    CHECK(contains(text, "choice 0x38 11 1\n"));
+    CHECK(contains(text, "object 0x0 7 Node\n"));
+    CHECK(contains(text, "object 0x20 7 Node\n"));
+    CHECK(contains(text, "object 0x40 5 Leaf\n"));
+    CHECK(contains(text, "object 0x70 10 u8\n"));
+    CHECK(contains(text, "choice 0x18 12 0\n"));
+    CHECK(contains(text, "choice 0x38 12 1\n"));
     CHECK(contains(text, "pointer 0x30\n"));
     CHECK(contains(text, "extent 0x40 0x58\n"));
     CHECK(contains(text, "sentinels 1\n"));
