@@ -23,11 +23,10 @@
 #define DAT_TAG(tag)
 #endif
 
-/// The pointer refers to @p count elements: an expression of sibling
-/// fields (or their members, @c x0.count) and constants, which may call the
-/// functions the tool ports, e.g. @c GXGetTexBufferSize. On a pointer
-/// typedef, for lists of counted lists, names resolve to bindings
-/// (#DAT_BIND).
+/// The array holds, or the pointer refers to, @p count elements: an expression
+/// of sibling fields (or their members, @c x0.count) and constants, which may
+/// call the functions the tool ports, e.g. @c GXGetTexBufferSize. On a pointer
+/// typedef, for lists of counted lists, names resolve to bindings (#DAT_BIND).
 #define DAT_COUNT(count) DAT_TAG("count(" #count ")")
 
 /// The pointer refers to elements up to and including a terminator: the

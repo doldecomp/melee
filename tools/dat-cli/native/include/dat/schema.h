@@ -166,6 +166,8 @@ typedef struct DatType {
     uint8_t has_pointers;
     /// A struct whose last member is a `DAT_EXTENT` array.
     uint8_t has_extent;
+    /// An array with a dimension without a bound.
+    uint8_t unbounded;
     /// Its size in the archive.
     uint32_t size;
     /// Its size natively; 0 where the generator couldn't spell it.

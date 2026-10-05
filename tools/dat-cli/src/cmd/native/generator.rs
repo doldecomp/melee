@@ -66,6 +66,7 @@ pub struct TypeRow {
     pub blob: bool,
     pub has_pointers: bool,
     pub has_extent: bool,
+    pub unbounded: bool,
     pub size: u64,
     pub native_size: String,
     pub target: i32,
@@ -589,6 +590,7 @@ impl<'a> Generator<'a> {
                 row.kind = Kind::Array;
                 row.target = element.map_or(NONE, |e| self.type_index(e));
                 row.count = dims.iter().map(|d| d.unwrap_or(1)).product();
+                row.unbounded = dims.iter().any(Option::is_none);
             }
             TypeKind::Record {
                 union,

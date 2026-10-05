@@ -351,7 +351,7 @@ type instead.
 
 | Annotation | Meaning |
 | --- | --- |
-| `DAT_COUNT(n)` | Pointer to `n` elements. On a pointer typedef, `n` is in the bindings, for lists of counted lists. |
+| `DAT_COUNT(n)` | Array of, or pointer to, `n` elements. A fixed array's count must fit its declared bound. On a pointer typedef, `n` is in the bindings, for lists of counted lists. |
 | `DAT_IF(cond)` | Union member is valid when `cond` holds; the first match wins, so a last `DAT_IF(true)` is a catch-all. |
 | `DAT_TYPE(T)` | `void*` points to a `T`. Also on a `void*` typedef, for arrays of them. |
 | `DAT_EXTENT` | Array, or pointer to elements, that runs as far as the data does. Stopgap for lengths only the code knows. |

@@ -693,7 +693,7 @@ impl<'a> Walker<'a> {
         }
     }
 
-    /// The number of elements a `DAT_COUNT` pointer member refers to,
+    /// The number of elements a `DAT_COUNT` member holds or refers to,
     /// evaluated against the other fields of its record.
     fn count(&self, member: &Member, record: DieId, base: u32) -> Option<u64> {
         let count = member.annotations.iter().find_map(|a| {
@@ -707,8 +707,8 @@ impl<'a> Walker<'a> {
         })
     }
 
-    /// Follow a pointer to `count` consecutive elements, of the type it
-    /// points to or else `element` (from `DAT_TYPE`).
+    /// Walk an inline array or follow a pointer to `count` consecutive
+    /// elements, of its element type or else `element` (from `DAT_TYPE`).
     #[allow(clippy::too_many_arguments)]
     fn counted(
         &mut self,
@@ -725,6 +725,11 @@ impl<'a> Walker<'a> {
         };
         let target = match self.graph.types[&pointer].kind {
             TypeKind::Pointer { target } => target,
+            TypeKind::Array { .. } => {
+                return self.counted_array(
+                    offset, pointer, count, path, binds, parent,
+                );
+            }
             // A pointer-sized integer given a type
             _ if element.is_some() => None,
             _ => return self.layout(offset, pointer, path, None),
@@ -793,6 +798,46 @@ impl<'a> Walker<'a> {
                 env,
             ));
         }
+    }
+
+    /// An explicit count does not stop at symbols or pointer targets
+    /// inside the array, unlike `DAT_EXTENT`.
+    fn counted_array(
+        &mut self,
+        offset: u32,
+        array: DieId,
+        count: u64,
+        path: &str,
+        binds: &[(String, Expr)],
+        parent: Option<(DieId, u32)>,
+    ) {
+        let TypeKind::Array { element, dims } = &self.graph.types[&array].kind
+        else {
+            return;
+        };
+        let Some(raw) = *element else { return };
+        let Some(size) = self.canonical.byte_size(self.graph, raw) else {
+            return;
+        };
+        let room = (self.data.len() as u64).saturating_sub(offset.into());
+        let capacity: Option<u64> = dims.iter().copied().product();
+        if count > room / size.max(1)
+            || capacity.is_some_and(|capacity| count > capacity)
+        {
+            self.issue(Issue::OutOfBounds {
+                at: offset,
+                path: format!("{path}[{count}]"),
+            });
+            return;
+        }
+        let outer = self.env.clone();
+        for i in 0..count {
+            let at = offset + (i * size) as u32;
+            self.env = self.bound(&outer, binds, parent, i);
+            self.typed_extent(at, raw, 1);
+            self.layout(at, raw, &format!("{path}[{i}]"), parent);
+        }
+        self.env = outer;
     }
 
     fn untyped(&mut self, path: &str) {

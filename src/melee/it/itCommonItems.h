@@ -166,7 +166,7 @@ typedef struct itWstarAttributes {
     /* +1C */ f32 x1C;
     /* +20 */ f32 x20;
     /* +24 */ s32 x24_count;
-    /* +28 */ itWstarAttrEntry x28_entries[] DAT_EXTENT;
+    /* +28 */ itWstarAttrEntry x28_entries[] DAT_COUNT(x24_count);
 } itWstarAttributes;
 
 typedef struct itKyasarin_ItemVars {
@@ -598,7 +598,7 @@ typedef struct itFoodEntry {
 
 typedef struct itFoodsAttributes {
     /* +0 */ s32 count;
-    /* +4 */ itFoodEntry entries[] DAT_EXTENT;
+    /* +4 */ itFoodEntry entries[] DAT_COUNT(count);
 } itFoodsAttributes;
 
 typedef struct itWhispyApple_ItemVars {

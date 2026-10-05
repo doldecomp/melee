@@ -194,3 +194,83 @@ fn root_witnesses() {
     assert_eq!(ty.name.map(|n| graph.str(n)), Some("HSD_Joint"));
     assert!(root.location(&graph).starts_with("melee/mn/mnmain.c:"));
 }
+
+#[test]
+fn food_inline_count_from_dwarf_matches_the_archive() {
+    use melee_dat::{
+        hsd::Archive,
+        walk::{Walker, macros},
+    };
+    let Some(graph) = GRAPH.as_ref() else { return };
+    let files = std::env::var_os("MELEE_DAT_FILES")
+        .map(PathBuf::from)
+        .unwrap_or_else(|| {
+            PathBuf::from(env!("CARGO_MANIFEST_DIR"))
+                .join("../../orig/GALE01/files")
+        });
+    let path = files.join("ItCo.dat");
+    if !path.exists() {
+        eprintln!("skipping: {} not found", path.display());
+        return;
+    }
+    let bytes = std::fs::read(path).unwrap();
+    let archive = Archive::parse(&bytes).unwrap();
+    let public = archive
+        .publics
+        .iter()
+        .find(|p| {
+            archive.symbol_at(p.symbol) == Some(b"itPublicData".as_slice())
+        })
+        .unwrap();
+    let word = |at: u32| {
+        u32::from_be_bytes(
+            archive.data[at as usize..at as usize + 4]
+                .try_into()
+                .unwrap(),
+        )
+    };
+    let kind = graph
+        .types
+        .values()
+        .find_map(|ty| {
+            let TypeKind::Enum { enumerators, .. } = &ty.kind else {
+                return None;
+            };
+            enumerators
+                .iter()
+                .find(|e| e.name.map(|n| graph.str(n)) == Some("It_Kind_Foods"))
+                .map(|e| e.value as u32)
+        })
+        .unwrap();
+    let table = word(public.offset + 4);
+    let article = word(table + 4 * kind);
+    let attrs = word(article + 4);
+    let count = word(attrs);
+    assert!(count > 1);
+    let die = graph
+        .named("itFoodsAttributes")
+        .find_map(|(die, ty)| {
+            matches!(
+                ty.kind,
+                TypeKind::Record {
+                    declaration: false,
+                    ..
+                }
+            )
+            .then_some(die)
+        })
+        .unwrap();
+    let canonical = Canonical::new(graph);
+    let macros = macros(graph);
+    let mut walker = Walker::new(graph, &canonical, &macros, &archive);
+    walker.root(attrs, die, "foods", &[]);
+    let walked = walker.finish();
+    assert!(walked.issues.is_empty(), "{:?}", walked.issues);
+    for i in 0..count {
+        let entry = attrs + 4 + i * 16;
+        assert!(walked.pointers.contains(&entry), "food {i}");
+        assert_eq!(walked.extents[&entry], entry + 16);
+        assert!(walked.objects.contains_key(&word(entry)), "food {i} joint");
+    }
+    assert!(!walked.extents.contains_key(&(attrs + 4 + count * 16)));
+}

@@ -309,6 +309,7 @@ impl Emitter<'_, '_> {
             (row.blob, "blob"),
             (row.has_pointers, "has_pointers"),
             (row.has_extent, "has_extent"),
+            (row.unbounded, "unbounded"),
         ] {
             if set {
                 fields.push(format!(".{field} = 1"));
