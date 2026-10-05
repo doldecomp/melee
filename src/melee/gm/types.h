@@ -1003,7 +1003,7 @@ typedef struct TrainingModeState {
 
 struct gm_8049E548_t {
     /* 0x00 */ u8 c_kind[PAD_MAX_CONTROLLERS];
-    /* 0x04 */ u8 x4[4];
+    /* 0x04 */ u8 x4[PAD_MAX_CONTROLLERS];
     /* 0x08 */ u8 unk_8;
     /* 0x09 */ u8 unk_9;
     /* 0x0A */ u8 unk_A;
