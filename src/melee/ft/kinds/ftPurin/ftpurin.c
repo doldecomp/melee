@@ -2,7 +2,6 @@
 
 #include <melee/ft/kinds/ftCommon/forward.h>
 
-#include <placeholder.h>
 #include <stdbool.h>
 
 #include "forward.h"
@@ -465,10 +464,8 @@ void ftPr_Init_8013C360(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
 
     if (ftPr_Init_803D05B4[fp->costume_id]) {
-        /// @todo clean up memory accesses - this looks similar to
-        /// ftKb_SpecialN_800EFB4C
-        UNK_T* items = (UNK_T*) fp->ft_data->x48_items;
-        UNK_T* items_shifted = items[1];
+        union ftData_Item* items = fp->ft_data->x48_items;
+        struct ftData_x48_x4* parts = items[1].parts;
 
         if (!joints[fp->costume_id]) {
             UnkCostumeStruct* costume_list =
@@ -485,8 +482,8 @@ void ftPr_Init_8013C360(HSD_GObj* gobj)
         ftPartsPObjClearDefaultClass();
         ftParts_80075650(gobj, fp->u.pr.x223C, &fp->u.pr.x2240);
 
-        ftParts_8007487C((FtPartsDesc*) &items_shifted[1], &fp->u.pr.x2248,
-                         fp->costume_id, &fp->u.pr.x2240, &fp->u.pr.x2240);
+        ftParts_8007487C(&parts->x4, &fp->u.pr.x2248, fp->costume_id,
+                         &fp->u.pr.x2240, &fp->u.pr.x2240);
         ftCo_8009DC54(fp);
         return;
     }

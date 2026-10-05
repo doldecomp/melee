@@ -537,7 +537,7 @@ void ftGw_Init_OnLoad(HSD_GObj* gobj)
         fp->x34_scale.z = da->x0_GAMEWATCH_WIDTH;
         fp->x610_color_rgba[1] = da->x14_GAMEWATCH_OUTLINE;
         ftMaterial_800BFB4C(gobj, &da->x4_GAMEWATCH_COLOR[fp->costume_id]);
-        fp->x5AC.xC[4] = items[10].visibility;
+        fp->x5AC.xC[4] = *items[10].visibility;
 
         it_8026B3F8(items[0].article, It_Kind_GameWatch_Greenhouse);
         it_8026B3F8(items[1].article, It_Kind_GameWatch_Manhole);

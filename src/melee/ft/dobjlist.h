@@ -6,6 +6,8 @@
 #include <melee/ft/forward.h>
 #include <sysdolphin/baselib/forward.h>
 
+#include <dat_macros.h>
+
 /**
  * @todo This was split out of ft/types.h to break a circular dependency with
  * fighter-specific types.h headers. Figure out a better place for it.
@@ -24,12 +26,12 @@ struct CostumeTObjList {
 
 struct TempS {
     int x0;
-    u8* x4;
+    u8* x4 DAT_COUNT(x0);
 };
 
 struct FtPartsVisLookup {
     int x0;
-    TempS* x4;
+    TempS* x4 DAT_COUNT(x0);
 };
 
 struct FtPartsVis {
