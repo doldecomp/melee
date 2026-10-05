@@ -52,4 +52,28 @@
 /* 1CD2D4 */ void grIzumi_801CD2D4(void);
 /* 3E0E5C */ extern StageData grIz_StageData;
 
+struct grIzumi_YakumonoParam {
+    float x0;
+    int x4;
+    float x8;
+    float xC;
+    float x10;
+    float x14;
+    float x18;
+    float x1C;
+    float x20;
+    float x24;
+    float x28;
+    float x2C;
+    float x30;
+    float x34;
+    float x38;
+    float x3C;
+    float x40;
+    float x44;
+    float x48;
+    float x4C;
+    float x50;
+};
+
 #endif

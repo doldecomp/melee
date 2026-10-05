@@ -8,6 +8,7 @@
 #include <placeholder.h>
 
 #include <dolphin/mtx.h>
+#include <melee/ft/ftcpuattack.h>
 #include <melee/ft/inlines.h> // IWYU pragma: export
 #include <melee/ft/types.h>
 #include <melee/sfx/crowdsfx.h>
@@ -19,15 +20,23 @@
  */
 extern struct Fighter_804D64FC_t {
     u8** cmdscripts; ///< +00 per-character command script arrays
-    void** x4;       ///< +04 ground attack tables (per character)
-    void** x8;       ///< +08 air attack tables (per character)
-    UNK_T* xC;       ///< +0C ranged/projectile attack tables
-    void** x10;      ///< +10 smash attack tables (per character)
-    void** x14;      ///< +14 special action tables (per character)
-    void** x18;      ///< +18 weapon attack tables (per character)
-    void** x1C;      ///< +1C edge guard tables (per character)
-    float* x20;      ///< +20 distance thresholds (per character)
-    float* x24;      ///< +24 weapon reach bonus table
+    ftCo_AttackList* x4 DAT_COUNT(
+        Ft_Kind_Max - 1); ///< +04 ground attack tables (per character)
+    ftCo_AttackList* x8
+        DAT_COUNT(Ft_Kind_Max - 1); ///< +08 air attack tables (per character)
+    ftCo_AttackList* xC DAT_COUNT(Ft_Kind_Max -
+                                  1); ///< +0C ranged/projectile attack tables
+    ftCo_AttackList* x10 DAT_COUNT(
+        Ft_Kind_Max - 1); ///< +10 smash attack tables (per character)
+    ftCo_AttackList* x14 DAT_COUNT(
+        Ft_Kind_Max - 1); ///< +14 special action tables (per character)
+    ftCo_AttackList* x18 DAT_COUNT(
+        Ft_Kind_Max - 1); ///< +18 weapon attack tables (per character)
+    ftCo_AttackList* x1C
+        DAT_COUNT(Ft_Kind_Max - 1); ///< +1C edge guard tables (per character)
+    float* x20 DAT_COUNT(Ft_Kind_Max -
+                         1); ///< +20 distance thresholds (per character)
+    float* x24 DAT_COUNT(6); ///< +24 weapon reach bonus, by item kind
 }* Fighter_804D64FC;
 
 struct plAllocInfo;

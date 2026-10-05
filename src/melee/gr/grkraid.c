@@ -9,17 +9,6 @@
 #include <sysdolphin/baselib/controller.h>
 #include <sysdolphin/baselib/random.h>
 
-struct grKraid_YakumonoParam {
-    u32 map_time_min;
-    u32 map_time_max;
-    s32 map_time_acl;
-    float map_rot_spd_min;
-    float map_rot_spd_max;
-    u32 kraid_wait_time;
-    u32 kraid_wait_time_add;
-    float kraid_pos_x[6];
-};
-
 GrJoint grKr_803E4C78[] = { { 0, 3, 12 }, { 1, 3, 12 }, { 2, 3, 12 },
                             { 3, 3, 12 }, { 4, 3, 12 }, { 5, 3, 12 } };
 

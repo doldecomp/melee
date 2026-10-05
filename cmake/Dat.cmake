@@ -262,3 +262,33 @@ add_custom_command(
     VERBATIM
 )
 add_custom_target(dat-samples ALL DEPENDS ${_dat_bases} objdiff.json)
+
+# The native archive interface (tools/dat-cli/native): the archives read
+# into the game's own types on the host, from this build's types, with its
+# unit and end-to-end tests, which `ctest` runs from here. A project of its
+# own, since this one targets the GameCube
+set(MELEE_DAT_NATIVE ON CACHE BOOL "Build and test the native archive interface")
+if(MELEE_DAT_NATIVE)
+    include(ExternalProject)
+    find_program(MELEE_HOST_CC NAMES cc gcc clang REQUIRED
+        DOC "The host's C compiler, for the native archive interface")
+    add_custom_target(dat-types DEPENDS types.bin "${_dat_tool}")
+    ExternalProject_Add(dat-native
+        SOURCE_DIR "${CMAKE_SOURCE_DIR}/tools/dat-cli/native"
+        BINARY_DIR "${CMAKE_CURRENT_BINARY_DIR}/native"
+        CMAKE_ARGS
+            "-DCMAKE_C_COMPILER=${MELEE_HOST_CC}"
+            "-DMELEE_DAT=${_dat_tool}"
+            "-DMELEE_DAT_TYPES=${CMAKE_CURRENT_BINARY_DIR}/types.bin"
+            "-DMELEE_DAT_FILES=${MELEE_DAT_FILES}"
+            "-DMELEE_VERSION=${MELEE_VERSION}"
+            "-DMELEE_VERSION_NUM=${MELEE_VERSION_NUM}"
+            "-DAURORA_SRC=${AURORA_SRC}"
+        BUILD_ALWAYS ON
+        INSTALL_COMMAND ""
+        DEPENDS dat-types
+    )
+    enable_testing()
+    add_test(NAME dat-native
+        COMMAND "${CMAKE_CTEST_COMMAND}" --test-dir native --output-on-failure)
+endif()

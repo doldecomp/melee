@@ -19,7 +19,7 @@ use super::project::{Check, Project};
 use anyhow::{Context, Result, bail};
 use globset::{Glob, GlobSetBuilder};
 use melee_dat::{
-    coverage::{coverage, family},
+    coverage::{Kind, coverage, family},
     dwarf::{
         DieId, TypeGraph, TypeKind, cache::TypesFile, canonical::Canonical, render::Renderer,
     },
@@ -168,6 +168,10 @@ struct Report {
     /// largest first
     #[arg(long)]
     missing: bool,
+    /// Why units aren't complete: each reason, with how many units it keeps
+    /// from being complete, how many it alone does, and its total
+    #[arg(long)]
+    incomplete: bool,
     /// Rows for `--missing` (0 for all)
     #[arg(long, default_value_t = 30)]
     top: usize,
@@ -205,6 +209,9 @@ struct Sidecar {
     /// wrong. Every target symbol outside the samples must be inferred in
     /// the base. objdiff's `complete`, the analog of code linked into the game.
     complete: bool,
+    /// Why not, by reason: walk issues and unexplained relocations by kind,
+    /// untyped publics, and the bytes the base doesn't infer.
+    incomplete: BTreeMap<String, u64>,
     /// The archive's size, every packed archive in the file together.
     bytes: u64,
     /// Of those, the bytes the base infers.
@@ -714,6 +721,35 @@ fn slice(args: Slice) -> Result<()> {
         })
         .collect();
     let inferred_bytes = inferred.iter().map(|p| p.size).sum();
+    // Why the unit isn't complete, by reason, with how many of each
+    let mut incomplete: BTreeMap<String, u64> = BTreeMap::new();
+    for (at, archive) in &archives {
+        let walk = &walks[at];
+        for issue in &walk.issues {
+            *incomplete.entry(format!("walk: {}", issue.kind())).or_default() += 1;
+        }
+        let untyped = archive
+            .publics
+            .iter()
+            .filter(|p| !walk.objects.contains_key(&p.offset))
+            .count() as u64;
+        if untyped > 0 {
+            *incomplete.entry("untyped public".into()).or_default() += untyped;
+        }
+        for u in &coverages[at].unexplained {
+            let kind = match u.kind {
+                Kind::Gap => "relocation: gap",
+                Kind::Trailing => "relocation: trailing",
+                Kind::Unreferenced => "relocation: unreferenced",
+            };
+            *incomplete.entry(kind.into()).or_default() += 1;
+        }
+    }
+    let uninferred: u64 =
+        target_rest.iter().map(|p| p.size).sum::<u64>() - inferred_bytes;
+    if uninferred > 0 {
+        incomplete.insert("uninferred bytes".into(), uninferred);
+    }
     let sidecar = Sidecar {
         bytes: archives.iter().map(|(_, a)| a.data.len() as u64).sum(),
         inferred_bytes,
@@ -722,21 +758,8 @@ fn slice(args: Slice) -> Result<()> {
         samples: infos,
         elided,
         externs,
-        complete: inferred.len() == target_rest.len()
-            && inferred.iter().zip(&target_rest).all(|(base, target)| {
-                base.source.file_offset(base.offset)
-                    == target.source.file_offset(target.offset)
-                    && base.size == target.size
-            })
-            && archives.iter().all(|(at, archive)| {
-                let walk = &walks[at];
-                walk.issues.is_empty()
-                    && archive
-                        .publics
-                        .iter()
-                        .all(|p| walk.objects.contains_key(&p.offset))
-                    && coverages[at].unexplained.is_empty()
-            }),
+        complete: incomplete.is_empty(),
+        incomplete,
     };
     fs::write(sidecar_path(&args.output), postcard::to_stdvec(&sidecar)?)?;
     Ok(())
@@ -1088,6 +1111,38 @@ fn report(args: Report) -> Result<()> {
             unit.trim_start_matches('/').to_owned()
         })
         .collect();
+    if args.incomplete {
+        let mut out = io::stdout().lock();
+        let mut reasons: BTreeMap<String, (u64, u64)> = BTreeMap::new();
+        let mut only: BTreeMap<String, u64> = BTreeMap::new();
+        let mut incomplete = 0;
+        for name in &names {
+            let target = args.dir.join("target").join(format!("{name}.o"));
+            let sidecar = read_sidecar(&sidecar_path(&target))?;
+            if sidecar.incomplete.is_empty() {
+                continue;
+            }
+            incomplete += 1;
+            for (reason, &n) in &sidecar.incomplete {
+                let entry = reasons.entry(reason.clone()).or_default();
+                entry.0 += 1;
+                entry.1 += n;
+            }
+            if sidecar.incomplete.len() == 1 {
+                let reason = sidecar.incomplete.keys().next().unwrap();
+                *only.entry(reason.clone()).or_default() += 1;
+            }
+        }
+        writeln!(out, "{:>6} {:>6} {:>10}  reason", "units", "only", "total")?;
+        let mut rows: Vec<_> = reasons.into_iter().collect();
+        rows.sort_by_key(|(_, (units, _))| std::cmp::Reverse(*units));
+        for (reason, (units, total)) in rows {
+            let alone = only.get(&reason).copied().unwrap_or(0);
+            writeln!(out, "{units:>6} {alone:>6} {total:>10}  {reason}")?;
+        }
+        writeln!(out, "{incomplete} of {} units incomplete", names.len())?;
+        return Ok(());
+    }
     if args.missing {
         let mut out = io::stdout().lock();
         let missing: Vec<(String, Vec<(String, u64)>)> = names

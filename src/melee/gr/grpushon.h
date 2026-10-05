@@ -32,4 +32,27 @@
 /* 219528 */ bool grPushOn_80219528(Vec3*, int arg, HSD_JObj* jobj);
 /* 3E7B10 */ extern StageData grPushOn_StageData;
 
+struct grPushOn_Entry {
+    s32 x0;
+    s16 x4;
+    s16 x6;
+};
+
+struct grPushOn_Lookup {
+    s32 key;
+    s32 value;
+};
+
+struct grPushon_YakumonoParam {
+    void* x0;
+    lbColl_80008D30_arg1* x4;
+    lbColl_80008D30_arg1* x8;
+    lbColl_80008D30_arg1* xC;
+    lbColl_80008D30_arg1* x10;
+    lbColl_80008D30_arg1* x14;
+    bool x18;
+    struct grPushOn_Entry x1c[0x1E];
+    struct grPushOn_Lookup x10c[0x21];
+};
+
 #endif

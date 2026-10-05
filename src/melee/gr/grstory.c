@@ -14,13 +14,6 @@
 #include <sysdolphin/baselib/gobjproc.h>
 #include <sysdolphin/baselib/random.h>
 
-struct grStory_YakumonoParam {
-    float timer_min;
-    float timer_rand;
-    float spawnmany_rarity;
-    float vpos[6];
-};
-
 /* 1E302C */ static void grStory_801E302C(bool);
 /* 1E36D0 */ static lbColl_80008D30_arg1* grStory_801E36D0(enum_t);
 

@@ -63,4 +63,38 @@
 /* 216E6C */ bool grGreens_80216E6C(Vec3*, int arg, HSD_JObj* jobj);
 /* 3E76D0 */ extern StageData grGr_StageData;
 
+struct grGreens_YakumonoParam {
+    int x0_blockTimerMin;
+    int x4_blockTimerMax;
+    int x8_blockBombChance;
+    int xC;
+    int x10;
+    int x14;
+    int x18;
+    int x1C;
+    int x20;
+    int x24;
+    int x28;
+    float x2C;
+    float x30;
+    int x34_windTimerMin;
+    int x38_windTimerMax;
+    float x3C_windSpeed;
+    float x40_left;
+    float x44_right;
+    float x48_top;
+    float x4C_bottom;
+    float x50;
+    float x54;
+    float x58;
+    int x5C;
+    int x60;
+    int x64;
+    int x68;
+    float x6C;
+    float x70;
+    float x74;
+    float x78;
+};
+
 #endif

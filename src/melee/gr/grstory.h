@@ -28,4 +28,11 @@
 /* 1E36D8 */ bool grStory_801E36D8(Vec3*, int, HSD_JObj*);
 /* 3E274C */ extern StageData grSt_StageData;
 
+struct grStory_YakumonoParam {
+    float timer_min;
+    float timer_rand;
+    float spawnmany_rarity;
+    float vpos[6];
+};
+
 #endif

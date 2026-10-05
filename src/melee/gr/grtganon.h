@@ -25,4 +25,10 @@
 /* 224A4C */ bool grTGanon_80224A4C(Vec3*, int, HSD_JObj*);
 /* 3E98DC */ extern StageData grTGn_StageData;
 
+typedef struct grTGn_YakumonoParam {
+    lbColl_80008D30_arg1* x0;
+    lbColl_80008D30_arg1* x4;
+    lbColl_80008D30_arg1* x8;
+} grTGn_YakumonoParam;
+
 #endif

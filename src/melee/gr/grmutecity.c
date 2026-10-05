@@ -357,23 +357,6 @@ StageData grMc_StageData = {
     ARRAY_SIZE(grMc_803E30B0),
 };
 
-struct grMc_YakumonoParam {
-    void* x0;
-    void* x4;
-    lbColl_80008D30_arg1* x8;
-    lbColl_80008D30_arg1* xC;
-    u8 pad10[0x1C];
-    f32 x2C;
-    f32 x30;
-    f32 x34;
-    f32 x38;
-    f32 x3C;
-    f32 x40;
-    f32 x44;
-    f32 x48;
-    f32 x4C;
-};
-
 static struct grMc_YakumonoParam* yakumono_param;
 
 static s32 grMc_804D69D4;

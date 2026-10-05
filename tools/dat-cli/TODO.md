@@ -140,6 +140,21 @@ Not errors:
   the DAT build to our own dolphin headers instead. They need a lot of
   cleanup first to build with clang as C23.
 
+## Native archive interface
+
+- An element of an array that is also an object of its own is converted
+  twice: the array holds a copy, so pointers to the lone object and into the
+  array differ. Interior pointers should point into the array.
+- A pointer to plain data without `DAT_COUNT`, `DAT_EXTENT` or
+  `DAT_TERMINATED` is one element natively, as the walk types it.
+- Plain unions (no pointers) are converted as their largest member.
+- `DAT_TYPE` on an integer narrower than a native pointer keeps the offset.
+- Scripts stay big-endian words with offsets; their readers need
+  `dat_raw` to follow them.
+- Packed archives (`Pl??AJ.dat`) are opened by size, like the walk.
+- The host build is gcc; a pure clang toolchain needs a wrapped host clang
+  beside the unwrapped one the DWARF build uses, and a ppc32 sysroot.
+
 ## Objects
 
 - A sample whose type runs into the next one: `coll_data` in `GrBb.dat`

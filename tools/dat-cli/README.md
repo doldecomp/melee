@@ -31,6 +31,8 @@ melee-dat types dump -n HSD_Joint   # a type as the tool sees it
 melee-dat types duplicates  # records with the same layout under different names
 melee-dat types unhoisted   # dat types declared in .c files
 melee-dat types export -o types.bin # the types, for --types
+melee-dat native codegen --out-dir schema # native schema
+melee-dat native expect     # what the walk reaches, for native's tests
 ```
 
 Run with `cargo run -rqp melee-dat -- <command> --dwarf build/ppc-dwarf/melee.elf`,
@@ -154,7 +156,8 @@ relocated; a bitfield zero or not; and nonzero padding. Instances the walk
 found nothing wrong in come first. The rest of each archive is matched as
 inferred data.
 
-They build in their own CMake preset, in the dev shell:
+They build in their own CMake preset, in the native dev shell
+(`nix develop .#native`):
 
 ```sh
 cmake --preset dat
@@ -262,6 +265,81 @@ nix store add --name melee-GALE01-files orig/GALE01/files
 nix build .#melee-dat-samples
 ```
 
+## Native archive interface
+
+`native/` is a C library that reads archives into the game's own types on
+any platform: the boundary between the GameCube's data (big-endian, 32-bit
+pointers stored as offsets) and modern hardware and compilers.
+`melee-dat native codegen` writes its schema from the types: a descriptor
+for each type (`dat/schema.h`), as the archive lays it out, with where each
+member goes natively, by `offsetof` and `sizeof`, so the host's compiler
+decides the native layout. The library is a port of the walk
+(`src/walk.rs`) that converts as it goes:
+
+- scalars are byte-swapped and widened as their types say;
+- pointers point to the native objects they reach, which are shared;
+- counted, terminated and extent arrays are contiguous;
+- unions are chosen by `DAT_IF`, as the walk chooses them.
+
+Raw bytes and `DAT_BLOB` formats (texels, display lists, keyframes),
+command scripts and untyped pointers stay as the archive has them, pointing
+into a copy of its data (`dat_raw`). Externs are null, as the loader leaves
+them, and -1 stays -1.
+
+The schema is a directory of C, generated when configuring, in `schema/`
+of the build:
+
+- `melee_dat.h`: `melee_dat_schema`, and each type's index, `DAT_TYPE_*`
+- `types/<header>.c`: the types a header of the game's declares, each a
+  `dat_type_*` descriptor with its members, their annotations as written in
+  comments, and what refers to them (pointers, arrays); `types/base.c` the
+  types no header of the game's declares
+- `roots/<module>.c`: each archive's roots, by module (`Pl`, `Gr`)
+- `macros.c`, `scripts.c`: the macros the annotations use, and the code's
+  tables of script command lengths
+- `schema.c`: every type and name, by index
+
+```c
+static const DatMember struct_ftDynamics_x0_members[] = {
+    { DAT_MEMBER(struct ftDynamics_x0, dynamicsNum, 0x0, DAT_TYPE_int) },
+    /* dat:count(dynamicsNum) */
+    {
+        DAT_MEMBER(struct ftDynamics_x0, ftDynamicBones, 0x4, DAT_TYPE_BoneDynamicsTemplate_ptr),
+        .count = DAT_NAME(dynamicsNum),
+    },
+};
+```
+
+```c
+#include "melee_dat.h"
+
+DatArchive* archive = dat_open(&melee_dat_schema, bytes, size, &error);
+ftData* mario = dat_public(archive, "ftDataMario", DAT_TYPE_ftData);
+dat_load_roots(archive, "PlMr.dat", 0); // or every root dat-cli types
+dat_close(archive);
+```
+
+The dat preset builds it with the host's compiler and runs its tests from
+`ctest --test-dir build/GALE01/dat`; on its own, from the native dev shell:
+
+```sh
+cmake -S tools/dat-cli/native -B build/native/x86_64
+cmake --build build/native/x86_64 && ctest --test-dir build/native/x86_64
+```
+
+With `-DCMAKE_TOOLCHAIN_FILE=tools/dat-cli/native/toolchains/i686.cmake`
+for 32-bit little-endian, or `ppc32-linux.cmake` for 32-bit big-endian
+under qemu.
+
+- `tests/unit.c`: a hand-written schema over an archive built in the test.
+- `tests/types.c`: the game's own types through the schema: each fighter's
+  `ftData`, read by C member access, against the archive's bytes.
+- `tests/e2e.c`: every archive the walk has roots in. `melee-dat native
+  expect` prints what the walk reaches (objects, pointers, extents, union
+  choices, issues); the library's `dat_trace` prints the same of its own
+  walk, which must match line for line. Then `dat_verify` reads every
+  native object back against the data.
+
 ## Annotations
 
 For what C types can't express. From `libs/doldecomp/include/dat_macros.h`;
@@ -323,3 +401,6 @@ Known problems and coverage gaps are in `TODO.md`.
 - `src/coverage.rs`: gap, trailing and unreferenced relocations.
 - `src/symbols.rs`: `dat_symbols.txt`.
 - `src/samples.rs`: sample selection, target objects and C.
+- `src/cmd/native.rs`: the native archive interface's tables, and what it
+  should reach.
+- `native/`: the native archive interface (C), its tests and toolchains.

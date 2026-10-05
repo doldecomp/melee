@@ -40,12 +40,6 @@ StageData grTGn_StageData = {
     (1 << 0),
 };
 
-typedef struct grTGn_YakumonoParam {
-    lbColl_80008D30_arg1* x0;
-    lbColl_80008D30_arg1* x4;
-    lbColl_80008D30_arg1* x8;
-} grTGn_YakumonoParam;
-
 static grTGn_YakumonoParam* yakumono_param;
 
 void grTGanon_802246D8(bool unused)

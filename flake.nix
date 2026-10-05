@@ -152,6 +152,8 @@
               };
             }).config.build.wrapper;
 
+          # The DOL build and the native CMake preset's gcc smoke test; CI
+          # uses this one
           devShells.default = pkgs.mkShellNoCC {
             shellHook = self.packages.${system}.default.postPatch + ''
               export PRE_COMMIT_HOME="$PWD/build/pre-commit"
@@ -167,23 +169,38 @@
               m2c
               pkgs.cmake
               pkgs.ninja
-              pkgs.llvmPackages_22.clang-unwrapped
-              pkgs.llvmPackages_22.bintools-unwrapped
-              # For tools/dat-cli and the dat CMake preset
-              pkgs.cargo
-              pkgs.rustc
-              pkgs.clippy
-              objdiff
             ]
             # The native CMake preset builds 32-bit
             ++ lib.optionals pkgs.stdenv.hostPlatform.isx86_64 [ pkgs.gcc_multi ];
 
             # Used by the CMake presets
-            env = {
-              AURORA_SRC = "${aurora-src}";
+            env.AURORA_SRC = "${aurora-src}";
+          };
+
+          # The full native toolchain: the default shell, plus the DWARF and
+          # dat builds (clang for ppc32, tools/dat-cli, objdiff), and
+          # big-endian 32-bit Linux binaries run under qemu, for testing
+          # native code such as dat-cli's generated deserializer
+          devShells.native = self.devShells.${system}.default.overrideAttrs (old: {
+            nativeBuildInputs = old.nativeBuildInputs ++ [
+              pkgs.llvmPackages_22.clang-unwrapped
+              pkgs.llvmPackages_22.bintools-unwrapped
+              pkgs.cargo
+              pkgs.rustc
+              pkgs.clippy
+              objdiff
+              pkgs.qemu-user
+              # Only its binaries: as a package, its setup hook would make it
+              # the shell's CC
+              (pkgs.runCommand "powerpc-linux-gcc" { } ''
+                mkdir -p $out/bin
+                ln -s ${pkgs.pkgsCross.ppc32.stdenv.cc}/bin/powerpc-* $out/bin/
+              '')
+            ];
+            env = old.env // {
               NEWLIB_INCLUDE = "${pkgs.pkgsCross.ppc-embedded.newlib}/powerpc-none-eabi/include";
             };
-          };
+          });
         };
     in
     {

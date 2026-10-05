@@ -1,0 +1,3 @@
+# The repository's checks are for the game's source (src/); tools are
+# Rust, Python and host C that build and test it
+Checks: '-*'

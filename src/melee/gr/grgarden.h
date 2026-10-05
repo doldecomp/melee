@@ -48,4 +48,15 @@
 /* 203624 */ float grGarden_80203624(void);
 /* 3E52E0 */ extern StageData grGd_StageData;
 
+struct grGarden_YakumonoParam {
+    float x0;
+    float x4;
+    int x8;
+    int xC;
+    int x10;
+    int x14;
+    float x18;
+    float x1C;
+};
+
 #endif

@@ -29,19 +29,6 @@
 #include <sysdolphin/baselib/random.h>
 #include <sysdolphin/baselib/spline.h>
 
-struct grBigBlueRoute_YakumonoParam {
-    int x0;
-    f32 x4;
-    u8 pad_8[0x20 - 0x8];
-    f32 x20;
-    u8 pad_24[0x3C - 0x24];
-    f32 x3C;
-    f32 x40;
-    f32 x44;
-    f32 x48;
-    f32 x4C;
-};
-
 struct grBigBlueRoute_8020DA9C_t {
     /* +0 */ char pad_0[0x8];
     /* +8 */ int x8;

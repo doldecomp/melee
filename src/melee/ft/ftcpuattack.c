@@ -27,18 +27,6 @@
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/random.h>
 
-typedef struct ftCo_AttackEntry {
-    /* +00 */ s32 cmd;
-    /* +04 */ s32 x04;
-    /* +08 */ f32 x08;
-    /* +0C */ f32 x0C;
-    /* +10 */ f32 x10;
-    /* +14 */ f32 x14;
-    /* +18 */ f32 weight;
-    /* +1C */ s32 x1C;
-    /* +20 */ s32 x20;
-} ftCo_AttackEntry;
-
 typedef struct ftCo_CollData {
     /* +00 */ u8 pad0[4];
     /* +04 */ Vec3 p;

@@ -22,35 +22,12 @@
 #include <sysdolphin/baselib/lobj.h>
 #include <sysdolphin/baselib/random.h>
 
-struct grPushOn_Entry {
-    s32 x0;
-    s16 x4;
-    s16 x6;
-};
-
-struct grPushOn_Lookup {
-    s32 key;
-    s32 value;
-};
-
 struct grPushOn_LightConfig {
     GXColor color;
     Vec3 pos;
     f32 ref_br;
     f32 ref_dist;
     s32 dist_func;
-};
-
-struct grPushon_YakumonoParam {
-    s32 x0;
-    lbColl_80008D30_arg1* x4;
-    lbColl_80008D30_arg1* x8;
-    lbColl_80008D30_arg1* xC;
-    lbColl_80008D30_arg1* x10;
-    lbColl_80008D30_arg1* x14;
-    bool x18;
-    struct grPushOn_Entry x1c[0x1E];
-    struct grPushOn_Lookup x10c[0x21];
 };
 
 static struct grPushon_YakumonoParam* yakumono_param;
@@ -694,7 +671,7 @@ s32 fn_802192A4(void* arg0, HSD_GObj* gobj, s32* result)
             (scale * (-50.0f + grPushOn_803E7CCC[i * 3 + 2]) < sp14.y) &&
             (scale * grPushOn_803E7CCC[i * 3 + 2] > sp14.y))
         {
-            *result = yakumono_param->x0;
+            *result = (s32) yakumono_param->x0;
             return 1;
         }
     }

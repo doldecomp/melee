@@ -48,4 +48,21 @@
 /* 1FDFF0 */ bool grInishie2_801FDFF0(Vec3*, int arg, HSD_JObj* jobj);
 /* 3E4C00 */ extern StageData grI2_StageData;
 
+struct grInishie2_YakumonoParam {
+    s16 unk0;
+    s16 unk2;
+    s16 unk4;
+    s16 unk6;
+    s16 unk8;
+    s16 unkA;
+    s16 unkC;
+    s16 unkE;
+    s16 unk10[2];
+    Vec3 unk14[2];
+    f32 unk2C;
+    Vec3 unk30[2];
+    s16 unk48;
+    s16 unk4A;
+};
+
 #endif

@@ -25,29 +25,6 @@
 #include <sysdolphin/baselib/jobj.h>
 #include <sysdolphin/baselib/random.h>
 
-struct grFourside_YakumonoParam {
-    /* 00 */ int heli_wait;
-    /* 04 */ int heli_wait_add;
-    /* 08 */ int heli_stay_time;
-    /* 0C */ int crane_wait;
-    /* 10 */ int crane_wait_add;
-    /* 14 */ int crane_iron_wait;
-    /* 18 */ int crane_iron_wait_add;
-    /* 1C */ float crane_iron_up_min;
-    /* 20 */ float crane_iron_up_max;
-    /* 24 */ float crane_iron_down_min;
-    /* 28 */ float crane_iron_down_max;
-    /* 2C */ float crane_iron_spd;
-    /* 30 */ float crane_iron_stop_acl;
-    /* 34 */ int ufo_wait;
-    /* 38 */ float ufo_cs_offs;
-    /* 3C */ int ufo_stay_time;
-    /* 40 */ int ufo_stay_time_add;
-    /* 44 */ u16 ufo_challenge;
-    /* 46 */ u16 x46;
-    /* 48 */ u16 x48;
-};
-
 static struct grFourside_YakumonoParam* yakumono_param;
 
 /* 1F9338 */ static void grFourside_801F30A0(void* user_data, int joint_id,

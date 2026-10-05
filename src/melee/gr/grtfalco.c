@@ -2,8 +2,6 @@
 
 #include <melee/mp/forward.h>
 
-#include <placeholder.h>
-
 #include "granime.h"
 #include "ground.h"
 #include "grzakogenerator.h"
@@ -73,13 +71,6 @@ StageData grTFc_StageData = {
     (1 << 0),
     NULL,
     0,
-};
-
-struct grTFalco_YakumonoParam {
-    UNK_T unk_0;
-    UNK_T unk_4;
-    UNK_T unk_8;
-    UNK_T unk_C;
 };
 
 static struct grTFalco_YakumonoParam* yakumono_param;

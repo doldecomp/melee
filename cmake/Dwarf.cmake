@@ -15,7 +15,7 @@ if(MELEE_VERSION_NUM EQUAL -1)
 endif()
 
 if(NOT NEWLIB_INCLUDE)
-    message(FATAL_ERROR "NEWLIB_INCLUDE is not set: configure from the dev shell")
+    message(FATAL_ERROR "NEWLIB_INCLUDE is not set: configure from the native dev shell (nix develop .#native)")
 endif()
 
 target_compile_definitions(melee PRIVATE
