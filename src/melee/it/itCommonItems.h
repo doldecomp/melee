@@ -1197,6 +1197,7 @@ typedef struct itLeadeadAttributes {
     /* 0x1A */ s16 x1A;
     /* 0x1C */ s16 x1C;
     /* 0x1E */ s8 x1E;
+    /* 0x1F */ s8 x1F;
 } itLeadeadAttributes;
 
 typedef struct itChicorita_ItemVars {

@@ -2,17 +2,11 @@
 
 ## Samples
 
-- `PlGw` `dyn_descs_0_x78F0` (85.7%) doesn't match.
-- `types unhoisted` lists dat types declared in `.c` files: none left. The
-  stage `*_YakumonoParam` structs aren't reachable (`void*` in the stage
-  info) and differ per stage.
-- `PlFx` `x0_common_attr_x4018` is an `ItemAttr` sample, but two other
-  samples point to it as `HSD_ShapeAnimJoint*` and `HSD_AnimJoint*` (casts
-  in `ftDataFox.c`). Likely a field that is a union of those, chosen by
-  something the walk doesn't bind.
+- The stage `*_YakumonoParam` structs aren't reachable (`void*` in the
+  stage info) and differ per stage.
 - A union object whose tag chooses no member has no sample (`CmdUnion`,
-  which is a script; item attributes of fighter items, whose kind isn't
-  bound).
+  which is a script; item attributes of fighter and stage items, whose kind
+  isn't bound or has no variant).
 
 - objdiff can diff whole archives: the cost is the size of each symbol,
   not of the object, and blob data is understood and typed data is
@@ -30,27 +24,34 @@
 - `yakumono_param` has no type for about 40 stages, including every
   `GrT*` target test. Their code doesn't read it, or reads it locally.
 
-- `ItemStateDesc.x4_matanim_joint` and `x8_parameters` hold unrelocated
-  values in some items' first state (10 cases: `GrCn.dat`, `ItCo.dat`, ...).
-  They aren't always those pointer types.
-
 - Articles in Kirby's copies (`ftKbCopy*`) and in `ftData.x48_items` leave
   `x4_specialAttributes` ambiguous: their item kinds aren't bound. The
-  kinds are known per slot (`ftKb_SpecialN_800F16D0`).
+  kinds are known per slot (`ftKb_SpecialN_800F16D0`). So do stage items
+  (`GroundItemData`): every `GrT*` target, `GrTe`'s ten items, and one or
+  two in most other stages.
+- `ftDataFox.x48_items[4]` isn't an `Article`: its words are small integers.
+- Kirby's Game & Watch and Yoshi copies (`PlKbCpGw`, `PlKbCpYs`) have
+  `dynamics` that don't fit `ftDynamics`.
+- Some unused trees typed by address in `dat_symbols.txt` don't fit:
+  relocated scalars in `PlGn*`'s material animations, and `FObjDesc` data
+  running past the end in `PlCl`, `PlLk` and `PlSs`.
 - Fighters' part animations (`ftData_x1C.x8`) sit next to `HSD_AnimJoint`
   trees that nothing points to, whose subtrees the part animations reach.
   `dat_symbols.txt` types their heads by address.
 
 Not errors:
 
-- 23 objects reached as both `HSD_CameraAnim` and `HSD_WObjAnim`: the
-  exporter reuses identical bytes. The walker could recognize this.
+- About 1,500 objects are reached as several types: mostly HSD animation
+  records (`HSD_MatAnimJoint`, `_HSD_MatAnim`, `_HSD_RenderAnim`, ...)
+  whose identical bytes the exporter reuses, `HSD_CObjDesc` and its
+  perspective member, and `char`/`unsigned char`. The walker could
+  recognize these.
 - `-1` in pointer fields means none. Counted, not reported.
 
 - `ItCo.dat` 0x50A0-0x7DDC (right after `itPublicData.x8`) is a
   byte-for-byte copy of 0x2FC-0x303C whose pointers point to the
   originals. `dat_symbols.txt` types its structs and scripts by address; its
-  43 `ItemSpecialAttributes` (kinds unbound) remain.
+  `ItemSpecialAttributes` (kinds unbound) aren't typed.
 
 ## Stopgaps
 
@@ -146,8 +147,6 @@ Not errors:
 
 ## Objects
 
-- A sample whose type runs into the next one: `coll_data` in `GrBb.dat`
-  ends 4 bytes into `stage_params_xC6B98`. The type is probably too long.
 - Unit diffs scale with symbol count: the `Pl*AJ.dat` animation archives
   have ~44k symbols each and take ~4s to diff in objdiff.
 
