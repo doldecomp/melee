@@ -85,6 +85,9 @@ pub fn run(Args { command }: Args) -> Result<()> {
     }
 }
 
+/// Call sites, by the type they load a symbol as (`None` for `void`).
+type SitesByType = BTreeMap<Option<String>, Vec<String>>;
+
 fn list_roots(args: args::Roots) -> Result<()> {
     let graph = TypeGraph::load(dwarf_path(args.dwarf)?)?;
     let canonical = Canonical::new(&graph);
@@ -93,10 +96,8 @@ fn list_roots(args: args::Roots) -> Result<()> {
     // Call sites by name, then by the type they load the symbol as. The
     // same expression in different functions names unrelated symbols, so
     // expressions are also keyed by their function.
-    let mut by_name: BTreeMap<
-        (RootName, Option<String>),
-        BTreeMap<Option<String>, Vec<String>>,
-    > = BTreeMap::new();
+    let mut by_name: BTreeMap<(RootName, Option<String>), SitesByType> =
+        BTreeMap::new();
     for root in roots(&graph, &canonical) {
         let ty = root.ty.map(|ty| renderer.declare(Some(ty), ""));
         let site = match root.function(&graph) {

@@ -106,6 +106,12 @@ Not errors:
 
 - Only pointers are checked against relocations. Wrong scalar types go
   unnoticed.
+- The DWARF build compiles against aurora's console headers, not
+  `libs/dolphin`. So the SDK types the archives use come from aurora:
+  annotating them means redeclaring them in `dat_macros.h` (`MtxPtr`), and
+  aurora lacks pieces (the GXVert inlines, shimmed in `dat_macros.h`). Move
+  the DAT build to our own dolphin headers instead. They need a lot of
+  cleanup first to build with clang as C23.
 
 ## Objects
 

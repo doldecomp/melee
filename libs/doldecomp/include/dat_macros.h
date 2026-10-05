@@ -10,7 +10,9 @@
  * table.
  *
  * Union members are tested in declaration order; the first match is valid.
- * If every member has a condition and none holds, the union is unused.
+ * A condition that can't be evaluated stops the search, so a last member
+ * marked @c DAT_IF(true) is a catch-all for the others. If every member has a
+ * condition and none holds, the union is unused.
  */
 #ifndef DOLDECOMP_DAT_MACROS_H
 #define DOLDECOMP_DAT_MACROS_H
@@ -281,5 +283,19 @@ static inline void GXTexCoord1x16(const u16 index)
 }
 /// @}
 #endif
+
+/** @name SDK types
+ * The SDK's typedefs, declared again with annotations: its headers aren't
+ * the decomp's to annotate, and C23 allows the same typedef twice. Only for
+ * the DWARF build, whose clang reads them.
+ * @{
+ */
+#if defined(__clang__) && defined(DAT_ANNOTATIONS)
+/// Each points to its first row, but to a whole matrix.
+typedef float (*MtxPtr)[4] DAT_TYPE(Mtx);
+typedef float (*Mtx44Ptr)[4] DAT_TYPE(Mtx44);
+typedef float (*ROMtxPtr)[3] DAT_TYPE(ROMtx);
+#endif
+/// @}
 
 #endif

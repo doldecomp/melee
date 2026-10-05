@@ -172,6 +172,7 @@
               # For tools/dat-cli and the dat CMake preset
               pkgs.cargo
               pkgs.rustc
+              pkgs.clippy
               objdiff
             ]
             # The native CMake preset builds 32-bit
