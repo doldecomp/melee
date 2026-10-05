@@ -170,25 +170,28 @@ impl Project {
         Ok(())
     }
 
+    /// The type a public symbol of `file` is loaded as, and how many: from
+    /// its loader, or else from `dat_symbols.txt`.
+    pub fn root(&self, name: &str, file: &str) -> Option<(DieId, Count)> {
+        let entry = self.symbols.lookup(name, file);
+        if let Some(&ty) = self.root_types.get(name) {
+            // The loader gives the type; the symbol entry may add a count
+            // without repeating that type.
+            return Some((ty, entry.and_then(|e| e.count).unwrap_or(Count::One)));
+        }
+        let TypeSpec { name: ty, count } = entry.and_then(|e| e.ty.as_ref())?;
+        Some((self.symbol_types[ty], *count))
+    }
+
     pub fn walk(&self, file: &str, archive: &Archive) -> (bool, Walk) {
         let mut walker =
             Walker::new(&self.graph, &self.canonical, &self.macros, archive);
         let mut rooted = false;
         for (name, symbol) in archive.named_publics() {
             let name = String::from_utf8_lossy(name);
-            let entry = self.symbols.lookup(&name, file);
-            let (ty, count) =
-                if let Some(&ty) = self.root_types.get(name.as_ref()) {
-                    // The loader gives the type; the symbol entry may add a
-                    // count without repeating that type.
-                    (ty, entry.and_then(|e| e.count).unwrap_or(Count::One))
-                } else if let Some(TypeSpec { name: ty, count }) =
-                    entry.and_then(|e| e.ty.as_ref())
-                {
-                    (self.symbol_types[ty], *count)
-                } else {
-                    continue;
-                };
+            let Some((ty, count)) = self.root(&name, file) else {
+                continue;
+            };
             let bindings = self
                 .root_bindings
                 .get(name.as_ref())

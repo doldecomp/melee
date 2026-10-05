@@ -207,7 +207,7 @@ pub fn run(args: args::Coverage) -> Result<()> {
             }
         }
         let mut owners: Vec<Owner> = owners.into_values().collect();
-        owners.sort_by(|a, b| (b.gap, b.trailing).cmp(&(a.gap, a.trailing)));
+        owners.sort_by_key(|o| std::cmp::Reverse((o.gap, o.trailing)));
 
         let relocations = args.list.then(|| {
             cov.unexplained

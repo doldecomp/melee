@@ -712,13 +712,14 @@ typedef struct ftData_x34 {
 } ftData_x34;
 
 /// An entry of #ftData::x48_items: mostly an #Article, but some fighters
-/// keep joints or their own structs in certain slots.
+/// keep joints or their own structs in certain slots. Those slots come
+/// first; #article is the catch-all for the rest.
 /// @todo Annotate the other slots per fighter (Link 6, Kirby 4, Yoshi 3,
 ///       Sheik 4/5, Game & Watch 10, Jigglypuff 1).
 union ftData_Item {
     struct UNK_SAMUS_S1* samus_grapple DAT_IF(fighter_kind == Ft_Kind_Samus &&
                                               item_index == 4);
-    Article* article DAT_IF(fighter_kind != Ft_Kind_Samus || item_index != 4);
+    Article* article DAT_IF(true);
     HSD_Joint* joint;
     HSD_Joint** joints;
     FtPartsVisLookup* visibility;

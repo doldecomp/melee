@@ -18,6 +18,7 @@ use crate::{
         render::Renderer,
     },
     hsd::Archive,
+    symbols::Count,
     walk::Walk,
 };
 use anyhow::{Context, Result, bail};
@@ -79,7 +80,29 @@ pub struct Sample {
     /// Those choices by member name, in order: which variant of the type
     /// this is.
     pub variant: Vec<String>,
+    /// The value cases its fields show, which picking covers.
+    pub cases: BTreeSet<Case>,
 }
+
+/// A kind of value one field of a type holds, as `(field, kind)`: fields
+/// are numbered in declaration order, every element of an array sharing
+/// its element's numbers, and kinds are the `CASE_*` constants. Picking
+/// covers every case a type shows anywhere, not one instance of it.
+pub type Case = (u32, u8);
+
+const CASE_NULL: u8 = 0;
+const CASE_POINTER: u8 = 1;
+const CASE_UNRELOCATED: u8 = 2;
+const CASE_SENTINEL: u8 = 3;
+const CASE_ZERO: u8 = 4;
+const CASE_POSITIVE: u8 = 5;
+const CASE_NEGATIVE: u8 = 6;
+const CASE_RELOCATED_SCALAR: u8 = 7;
+const CASE_NEGATIVE_ZERO: u8 = 8;
+const CASE_SUBNORMAL: u8 = 9;
+const CASE_INFINITE: u8 = 10;
+const CASE_NAN: u8 = 11;
+const CASE_PADDING: u8 = 12;
 
 impl Sample {
     /// The unit it belongs to: its archive's file without the extension,
@@ -167,8 +190,10 @@ pub struct Picker<'a> {
     graph: &'a TypeGraph,
     canonical: &'a Canonical,
     renderer: Renderer<'a>,
-    /// By type and variant, and in [`Picker::all`] mode by location too.
-    best: BTreeMap<PickKey, Sample>,
+    /// By type and variant, and in [`Picker::all`] mode by location too:
+    /// the instances that showed a case none before them of the same
+    /// cleanliness did. [`Picker::finish`] chooses among them.
+    candidates: BTreeMap<PickKey, Candidates>,
     skipped: BTreeMap<String, &'static str>,
     /// Keep every instance, not the best of each type and variant.
     all: bool,
@@ -182,7 +207,7 @@ impl<'a> Picker<'a> {
             graph,
             canonical,
             renderer: Renderer::new(graph, canonical),
-            best: BTreeMap::new(),
+            candidates: BTreeMap::new(),
             skipped: BTreeMap::new(),
             all: false,
             exclude: GlobSet::empty(),
@@ -271,6 +296,20 @@ impl<'a> Picker<'a> {
                 .collect();
             let root = root_of(path).to_owned();
             let bytes = &archive.data[offset as usize..end as usize];
+            let mut cases = BTreeSet::new();
+            self.cases(
+                &Values {
+                    bytes,
+                    base: offset,
+                    relocs: &relocs,
+                    choices: &walk.choices,
+                },
+                die,
+                0,
+                &mut 0,
+                &mut cases,
+                0,
+            );
             let candidate = Sample {
                 die,
                 type_name: type_name.clone(),
@@ -289,19 +328,213 @@ impl<'a> Picker<'a> {
                 clean,
                 choices,
                 variant,
+                cases,
             };
-            // A clean instance if there is one, so that a sample fails
-            // only where its type is wrong everywhere; then the one that
-            // exercises the most: pointers, then data
             let at = self.all.then_some((archive_offset, offset));
             let key = (key_name, candidate.variant.clone(), at);
-            let better = self.best.get(&key).is_none_or(|best| {
-                (candidate.clean, candidate.relocs, candidate.nonzero)
-                    > (best.clean, best.relocs, best.nonzero)
-            });
-            if better {
-                self.best.insert(key, candidate);
+            self.candidates.entry(key).or_default().offer(candidate);
+        }
+    }
+
+    /// Add another picker's candidates, as if offered after this one's.
+    pub fn merge(&mut self, other: Picker) {
+        for (key, theirs) in other.candidates {
+            let ours = self.candidates.entry(key).or_default();
+            for candidate in theirs.kept {
+                ours.offer(candidate);
             }
+        }
+        for (name, reason) in other.skipped {
+            self.skipped.entry(name).or_insert(reason);
+        }
+    }
+
+    /// The value cases of the data of type `die` at `at` in a candidate,
+    /// numbering its fields from `field`.
+    #[allow(clippy::too_many_arguments)]
+    fn cases(
+        &self,
+        values: &Values,
+        die: DieId,
+        at: u32,
+        field: &mut u32,
+        out: &mut BTreeSet<Case>,
+        depth: usize,
+    ) {
+        let die = resolve(self.graph, self.canonical, die);
+        let size = self.canonical.byte_size(self.graph, die).unwrap_or(0);
+        if depth > 32 || u64::from(at) + size > values.bytes.len() as u64 {
+            return;
+        }
+        let ty = &self.graph.types[&die];
+        match &ty.kind {
+            TypeKind::Record {
+                union: false,
+                members,
+                ..
+            } => {
+                // Bytes no member covers: C writes them as zero
+                let mut covered = vec![false; size as usize];
+                for member in members {
+                    let Some(member_ty) = member.ty else { continue };
+                    let offset = member.offset.unwrap_or(0) as u32;
+                    if let Some(bits) = member.bit_size {
+                        let start = member
+                            .bit_offset
+                            .unwrap_or(u64::from(offset) * 8);
+                        for bit in start..start + bits {
+                            if let Some(c) = covered.get_mut((bit / 8) as usize)
+                            {
+                                *c = true;
+                            }
+                        }
+                        if member.name.is_some() {
+                            let value = bits_at(values.bytes, at, start, bits);
+                            let kind = match value {
+                                0 => CASE_ZERO,
+                                _ => CASE_POSITIVE,
+                            };
+                            out.insert((*field, kind));
+                        }
+                        *field += 1;
+                        continue;
+                    }
+                    let member_size = self
+                        .canonical
+                        .byte_size(
+                            self.graph,
+                            resolve(self.graph, self.canonical, member_ty),
+                        )
+                        .unwrap_or(0);
+                    for c in covered
+                        .iter_mut()
+                        .skip(offset as usize)
+                        .take(member_size as usize)
+                    {
+                        *c = true;
+                    }
+                    self.cases(
+                        values,
+                        member_ty,
+                        at + offset,
+                        field,
+                        out,
+                        depth + 1,
+                    );
+                }
+                for (i, &c) in covered.iter().enumerate() {
+                    if !c && values.bytes[at as usize + i] != 0 {
+                        out.insert((*field, CASE_PADDING));
+                    }
+                }
+                *field += 1;
+            }
+            TypeKind::Record {
+                union: true,
+                members,
+                ..
+            } => {
+                // The member its tag chose, else the largest, as codegen
+                // writes it. Candidates of one variant choose alike, so
+                // its fields number the same in each
+                let chosen = self
+                    .canonical
+                    .of(die)
+                    .and_then(|id| values.choices.get(&(values.base + at, id)))
+                    .and_then(|&i| Some((i, members.get(i)?)));
+                let largest = members
+                    .iter()
+                    .enumerate()
+                    .rev()
+                    .max_by_key(|(_, m)| {
+                        m.ty.map_or(0, |t| {
+                            self.canonical
+                                .byte_size(
+                                    self.graph,
+                                    resolve(self.graph, self.canonical, t),
+                                )
+                                .unwrap_or(0)
+                        })
+                    });
+                if let Some((_, member)) = chosen.or(largest)
+                    && let Some(member_ty) = member.ty
+                {
+                    self.cases(values, member_ty, at, field, out, depth + 1);
+                }
+            }
+            TypeKind::Array { element, dims } => {
+                let Some(element) = *element else { return };
+                let element_size = self
+                    .canonical
+                    .byte_size(
+                        self.graph,
+                        resolve(self.graph, self.canonical, element),
+                    )
+                    .unwrap_or(0);
+                let count: u64 = dims.iter().map(|d| d.unwrap_or(0)).product();
+                let start = *field;
+                let mut end = start;
+                for i in 0..count {
+                    let mut f = start;
+                    self.cases(
+                        values,
+                        element,
+                        at + (i * element_size) as u32,
+                        &mut f,
+                        out,
+                        depth + 1,
+                    );
+                    end = end.max(f);
+                }
+                *field = end.max(start + 1);
+            }
+            TypeKind::Pointer { .. } => {
+                let value = word_at(values.bytes, at);
+                let kind = if values.relocs.contains(&(values.base + at)) {
+                    CASE_POINTER
+                } else {
+                    match value {
+                        0 => CASE_NULL,
+                        u32::MAX => CASE_SENTINEL,
+                        _ => CASE_UNRELOCATED,
+                    }
+                };
+                out.insert((*field, kind));
+                *field += 1;
+            }
+            TypeKind::Base { encoding } => {
+                let bytes =
+                    &values.bytes[at as usize..(u64::from(at) + size) as usize];
+                let kind = if size == 4
+                    && values.relocs.contains(&(values.base + at))
+                {
+                    CASE_RELOCATED_SCALAR
+                } else {
+                    match (*encoding, size) {
+                        (FLOAT, 4) => float_case(f64::from(f32::from_be_bytes(
+                            bytes.try_into().unwrap(),
+                        )), bytes[0] & 0x80 != 0, size),
+                        (FLOAT, 8) => float_case(
+                            f64::from_be_bytes(bytes.try_into().unwrap()),
+                            bytes[0] & 0x80 != 0,
+                            size,
+                        ),
+                        _ => integer_case(
+                            bytes,
+                            matches!(*encoding, SIGNED | SIGNED_CHAR),
+                        ),
+                    }
+                };
+                out.insert((*field, kind));
+                *field += 1;
+            }
+            TypeKind::Enum { .. } => {
+                let bytes =
+                    &values.bytes[at as usize..(u64::from(at) + size) as usize];
+                out.insert((*field, integer_case(bytes, true)));
+                *field += 1;
+            }
+            _ => *field += 1,
         }
     }
 
@@ -382,6 +615,119 @@ impl<'a> Picker<'a> {
         })
     }
 
+    /// How C declares `size` bytes of elided data the walk typed as `id`:
+    /// one record, an array of them, or whatever else the pointers to it
+    /// say it is. `None` where C can't name its type.
+    pub fn elided_type(
+        &self,
+        id: CanonId,
+        offset: u32,
+        walk: &Walk,
+        size: u64,
+    ) -> Option<ElidedType> {
+        // As the pointers to it spell it, through typedefs
+        let spelled = walk
+            .spelled
+            .get(&(offset, id))
+            .copied()
+            .unwrap_or(self.canonical.get(id).rep);
+        let (declaration, headers, record, element) =
+            match self.describe(id, offset, walk) {
+                Ok(t) => (
+                    format!("{} {{}}", t.type_name),
+                    vec![t.header],
+                    Some((t.lookup, t.member)),
+                    t.size,
+                ),
+                // A union no tag chooses a member of is still its type
+                Err(Some(_)) => {
+                    let die = spelled;
+                    if !matches!(
+                        self.graph.types[&self.canonical.get(id).rep].kind,
+                        TypeKind::Record { union: true, .. }
+                    ) {
+                        return None;
+                    }
+                    let headers = self.headers_of(die)?;
+                    (
+                        self.renderer.declare(Some(die), "{}"),
+                        headers,
+                        None,
+                        self.member_size(die)?,
+                    )
+                }
+                Err(None) => {
+                    let die = spelled;
+                    let headers = self.headers_of(die)?;
+                    (
+                        self.renderer.declare(Some(die), "{}"),
+                        headers,
+                        None,
+                        self.member_size(die)?,
+                    )
+                }
+            };
+        if element == 0 || !size.is_multiple_of(element) {
+            return None;
+        }
+        Some(match size / element {
+            1 => ElidedType {
+                declaration,
+                headers,
+                record,
+            },
+            n => ElidedType {
+                declaration: declaration.replace("{}", &format!("{{}}[{n}]")),
+                headers,
+                record: None,
+            },
+        })
+    }
+
+    /// How C declares a public symbol loaded as `die`, `count` of it.
+    pub fn public_type(&self, die: DieId, count: Count) -> Option<ElidedType> {
+        let inner = match count {
+            Count::One => "{}".to_owned(),
+            Count::Exactly(n) => format!("{{}}[{n}]"),
+            Count::Unbounded => "{}[]".to_owned(),
+        };
+        Some(ElidedType {
+            declaration: self.renderer.declare(Some(die), &inner),
+            headers: self.headers_of(die)?,
+            record: None,
+        })
+    }
+
+    /// The headers declaring the named type C spells `die` with, through
+    /// pointers, arrays and qualifiers: none for a base type, `None` for one
+    /// no header declares or that has no name.
+    fn headers_of(&self, mut die: DieId) -> Option<Vec<String>> {
+        loop {
+            let ty = &self.graph.types[&die];
+            match ty.kind {
+                TypeKind::Pointer { target }
+                | TypeKind::Const { target }
+                | TypeKind::Volatile { target }
+                | TypeKind::Restrict { target } => match target {
+                    Some(target) => die = target,
+                    None => return Some(Vec::new()),
+                },
+                TypeKind::Array { element, .. } => die = element?,
+                TypeKind::Base { .. } => return Some(Vec::new()),
+                TypeKind::Typedef { .. }
+                | TypeKind::Record { .. }
+                | TypeKind::Enum { .. } => {
+                    ty.name?;
+                    let file = self.graph.str(ty.decl_file?);
+                    return Some(vec![header(file)?]);
+                }
+                TypeKind::Unspecified | TypeKind::Subroutine { .. } => {
+                    return None;
+                }
+            }
+        }
+    }
+
     /// What codegen needs to know about a sample, by name.
     pub fn info(
         &self,
@@ -440,12 +786,17 @@ impl<'a> Picker<'a> {
         })
     }
 
+    /// The samples: in [`Picker::all`] mode every instance; else, for each
+    /// type and variant, instances that together show every case it does
+    /// anywhere, chosen greedily by how many new cases each adds. Clean
+    /// instances come first, so that a sample fails only where its type is
+    /// wrong everywhere; unclean ones only for cases no clean one shows.
     pub fn finish(self) -> (Vec<Sample>, Vec<Skipped>) {
         let skipped = self
             .skipped
             .into_iter()
             .filter(|(name, _)| {
-                !self.best.keys().any(|(t, _, _)| {
+                !self.candidates.keys().any(|(t, _, _)| {
                     t == name
                         || t.strip_prefix(name.as_str())
                             .is_some_and(|m| m.starts_with('.'))
@@ -453,7 +804,134 @@ impl<'a> Picker<'a> {
             })
             .map(|(type_name, reason)| Skipped { type_name, reason })
             .collect();
-        (self.best.into_values().collect(), skipped)
+        let samples = self
+            .candidates
+            .into_values()
+            .flat_map(Candidates::cover)
+            .collect();
+        (samples, skipped)
+    }
+}
+
+/// One type and variant's candidates, kept as they're offered.
+#[derive(Default)]
+struct Candidates {
+    kept: Vec<Sample>,
+    /// The cases the kept clean candidates show.
+    clean: BTreeSet<Case>,
+    /// The cases every kept candidate shows.
+    any: BTreeSet<Case>,
+}
+
+impl Candidates {
+    /// Keep `candidate` if it shows a case no kept one of its cleanliness
+    /// does, or it's the first.
+    fn offer(&mut self, candidate: Sample) {
+        let seen = if candidate.clean { &self.clean } else { &self.any };
+        let new = self.kept.is_empty()
+            || (candidate.clean && self.kept.iter().all(|k| !k.clean))
+            || !candidate.cases.is_subset(seen);
+        if !new {
+            return;
+        }
+        if candidate.clean {
+            self.clean.extend(candidate.cases.iter().copied());
+        }
+        self.any.extend(candidate.cases.iter().copied());
+        self.kept.push(candidate);
+    }
+
+    /// The fewest kept candidates, roughly, that show every case.
+    fn cover(self) -> Vec<Sample> {
+        let mut uncovered = self.any;
+        let mut pool: Vec<Option<Sample>> =
+            self.kept.into_iter().map(Some).collect();
+        let mut chosen = Vec::new();
+        for clean in [true, false] {
+            loop {
+                let best = pool
+                    .iter()
+                    .enumerate()
+                    .filter_map(|(i, s)| Some((i, s.as_ref()?)))
+                    .filter(|(_, s)| s.clean == clean)
+                    .map(|(i, s)| {
+                        let new = s.cases.intersection(&uncovered).count();
+                        (new, s.relocs, s.nonzero, std::cmp::Reverse(i))
+                    })
+                    .max();
+                let Some((new, _, _, std::cmp::Reverse(i))) = best else {
+                    break;
+                };
+                // At least one sample of every type, cases or not
+                if new == 0 && !chosen.is_empty() {
+                    break;
+                }
+                let sample = pool[i].take().unwrap();
+                for case in &sample.cases {
+                    uncovered.remove(case);
+                }
+                chosen.push(sample);
+            }
+        }
+        chosen
+    }
+}
+
+/// A candidate's bytes and what the walk found in them, for its cases.
+struct Values<'v> {
+    bytes: &'v [u8],
+    /// Its offset in the archive, which relocations and choices are by.
+    base: u32,
+    relocs: &'v BTreeSet<u32>,
+    choices: &'v BTreeMap<(u32, CanonId), usize>,
+}
+
+fn float_case(value: f64, sign: bool, size: u64) -> u8 {
+    let min_normal = if size == 4 {
+        f64::from(f32::MIN_POSITIVE)
+    } else {
+        f64::MIN_POSITIVE
+    };
+    match value {
+        v if v.is_nan() => CASE_NAN,
+        v if v.is_infinite() => CASE_INFINITE,
+        0.0 if sign => CASE_NEGATIVE_ZERO,
+        0.0 => CASE_ZERO,
+        v if v.abs() < min_normal => CASE_SUBNORMAL,
+        v if v < 0.0 => CASE_NEGATIVE,
+        _ => CASE_POSITIVE,
+    }
+}
+
+fn integer_case(bytes: &[u8], signed: bool) -> u8 {
+    if bytes.iter().all(|&b| b == 0) {
+        CASE_ZERO
+    } else if signed && bytes.first().is_some_and(|&b| b & 0x80 != 0) {
+        CASE_NEGATIVE
+    } else {
+        CASE_POSITIVE
+    }
+}
+
+/// Look through typedefs and qualifiers, and from declarations to their
+/// definitions.
+fn resolve(graph: &TypeGraph, canonical: &Canonical, mut die: DieId) -> DieId {
+    loop {
+        match &graph.types[&die].kind {
+            TypeKind::Typedef { target: Some(t) }
+            | TypeKind::Const { target: Some(t) }
+            | TypeKind::Volatile { target: Some(t) }
+            | TypeKind::Restrict { target: Some(t) } => die = *t,
+            TypeKind::Record {
+                declaration: true, ..
+            } => {
+                return canonical
+                    .of(die)
+                    .and_then(|id| canonical.definition(graph, id))
+                    .map_or(die, |id| canonical.get(id).rep);
+            }
+            _ => return die,
+        }
     }
 }
 
@@ -898,29 +1376,37 @@ pub struct Elided {
     pub ty: Option<ElidedType>,
 }
 
-/// An elided object's type, declared like a sample's.
+/// How C declares data it doesn't define: an elided object's type, from the
+/// pointers that reach it, or a public symbol's, from its root.
 #[derive(serde::Serialize, serde::Deserialize)]
 pub struct ElidedType {
-    pub type_name: String,
-    pub lookup: String,
-    pub member: Option<String>,
-    pub header: String,
+    /// Its declaration, with `{}` for its name: `struct HSD_Joint {}`,
+    /// `struct HSD_Joint {}[2]`, `float {}[3][4]`.
+    pub declaration: String,
+    /// The headers that declaration needs.
+    pub headers: Vec<String>,
+    /// A single record's lookup name and union member, as a sample's, so
+    /// pointers to it need no cast.
+    pub record: Option<(String, Option<String>)>,
 }
 
-/// A root's samples, the archive externs it declares, and the elided data
-/// it declares.
-type RootParts<'i, 'n> =
-    (Vec<&'i Instance<'i>>, Vec<&'n str>, Vec<(&'n str, &'n Elided)>);
-
-/// A root's generated C, named after it.
-pub struct RootFiles {
+/// A public symbol of the archive that isn't a sample, which its unit's
+/// header declares.
+#[derive(serde::Serialize, serde::Deserialize)]
+pub struct Public {
     pub name: String,
+    /// `None` where no loader or `dat_symbols.txt` types it.
+    pub ty: Option<ElidedType>,
+}
+
+/// A unit's header, declaring its public symbols and what its samples point
+/// to, and its source, defining the samples: `None` without samples.
+pub struct UnitFiles {
     pub header: String,
-    /// None for a root with no samples, only data they point to.
     pub source: Option<String>,
 }
 
-/// A root name as a file name.
+/// A name as a file name.
 fn file_name(root: &str) -> String {
     root.chars()
         .map(|c| if c.is_ascii_alphanumeric() { c } else { '_' })
@@ -947,33 +1433,13 @@ impl<'a> CWriter<'a> {
         }
     }
 
-    /// A unit's C, one root at a time: its header, declaring the root's
-    /// samples, and its source, defining them.
-    /// `elided` is the other data in the archive the samples point to, by
-    /// name; `externs` are the archive's externs they point to, which the
-    /// first root pointing to each declares. Both are declared as `UNK_T`
-    /// unless the walk typed them.
-    pub fn unit(
+    /// The types of the samples and of elided records, by symbol, so that
+    /// pointers to them need no cast.
+    fn prepare(
         &self,
-        archive: &str,
         instances: &[Instance],
         elided: &BTreeMap<String, Elided>,
-        externs: &BTreeSet<String>,
-    ) -> Result<Vec<RootFiles>> {
-        let mut linked: BTreeMap<&str, &str> = BTreeMap::new();
-        for inst in instances {
-            for name in inst.relocs.values() {
-                if let Some(name) = externs.get(name) {
-                    linked.entry(name).or_insert(inst.info.root.as_str());
-                }
-            }
-        }
-        let owners: BTreeMap<&str, &str> = instances
-            .iter()
-            .map(|i| (i.info.symbol.as_str(), i.info.root.as_str()))
-            .chain(elided.iter().map(|(n, e)| (n.as_str(), e.root.as_str())))
-            .chain(linked.iter().map(|(&n, &r)| (n, r)))
-            .collect();
+    ) -> Result<()> {
         let mut samples = BTreeMap::new();
         let typed = instances
             .iter()
@@ -982,8 +1448,8 @@ impl<'a> CWriter<'a> {
                 (&info.symbol, &info.lookup, &info.member)
             })
             .chain(elided.iter().filter_map(|(name, e)| {
-                let ty = e.ty.as_ref()?;
-                Some((name, &ty.lookup, &ty.member))
+                let (lookup, member) = e.ty.as_ref()?.record.as_ref()?;
+                Some((name, lookup, member))
             }));
         for (symbol, lookup, member) in typed {
             let die = self.resolve(self.die_of(symbol, lookup, member)?);
@@ -992,79 +1458,114 @@ impl<'a> CWriter<'a> {
             }
         }
         *self.samples.borrow_mut() = samples;
-        let mut roots: BTreeMap<&str, RootParts> = BTreeMap::new();
-        for inst in instances {
-            roots
-                .entry(inst.info.root.as_str())
-                .or_default()
-                .0
-                .push(inst);
-        }
-        for (name, e) in elided {
-            roots
-                .entry(e.root.as_str())
-                .or_default()
-                .2
-                .push((name.as_str(), e));
-        }
-        for (&name, &root) in &linked {
-            roots.entry(root).or_default().1.push(name);
-        }
-        roots
-            .into_iter()
-            .map(|(root, (instances, linked, elided))| {
-                Ok(RootFiles {
-                    name: file_name(root),
-                    header: self
-                        .header(archive, root, &instances, &linked, &elided)?,
-                    source: if instances.is_empty() {
-                        None
-                    } else {
-                        Some(self.source(archive, root, &instances, &owners)?)
-                    },
-                })
-            })
-            .collect()
+        Ok(())
     }
 
-    /// A root's header: an extern declaration of each of its samples, and
-    /// of the other data in it that samples point to, as bytes.
-    fn header(
+    /// A unit's C as one header and one source, `<stem>.{h,c}`. The header
+    /// declares the archive's public symbols that aren't samples, then the
+    /// samples, the externs and the elided data they point to.
+    pub fn files(
         &self,
         archive: &str,
-        root: &str,
-        instances: &[&Instance],
-        linked: &[&str],
-        elided: &[(&str, &Elided)],
-    ) -> Result<String> {
-        let guard = format!("DAT_{}_H", file_name(root).to_uppercase());
-        let mut out = format!(
+        stem: &str,
+        instances: &[Instance],
+        elided: &BTreeMap<String, Elided>,
+        externs: &BTreeSet<String>,
+        publics: &[Public],
+    ) -> Result<UnitFiles> {
+        self.prepare(instances, elided)?;
+        let linked: BTreeSet<&str> = instances
+            .iter()
+            .flat_map(|i| i.relocs.values())
+            .filter_map(|name| externs.get(name).map(String::as_str))
+            .collect();
+        let instances: Vec<&Instance> = instances.iter().collect();
+        let linked: Vec<&str> = linked.into_iter().collect();
+        let elided: Vec<(&str, &Elided)> =
+            elided.iter().map(|(n, e)| (n.as_str(), e)).collect();
+        let guard = format!("DAT_{}_H", file_name(stem).to_uppercase());
+        let mut header = format!(
             concat!(
                 "/**\n",
                 " * @file\n",
-                " * The samples of `{root}` in `{archive}`, and the data they ",
-                "point to.\n",
+                " * The public symbols of `{archive}`, and its samples and the ",
+                "data they point to.\n",
                 " * Generated by `melee-dat samples codegen`.\n",
                 " */\n\n",
                 "#ifndef {guard}\n",
                 "#define {guard}\n\n",
-                "#include \"../../macros.h\"\n\n",
-                "#include <Runtime/platform.h>\n",
-                "#include <placeholder.h>\n",
             ),
-            root = root,
             archive = archive,
             guard = guard,
         );
+        self.declarations(
+            &mut header,
+            "../macros.h",
+            &format!("Defined in `{stem}.c`."),
+            &instances,
+            &linked,
+            &elided,
+            publics,
+        )?;
+        writeln!(header, "\n#endif")?;
+        let source = if instances.is_empty() {
+            None
+        } else {
+            let mut source = format!(
+                concat!(
+                    "/**\n",
+                    " * @file\n",
+                    " * The samples of `{archive}`.\n",
+                    " * Generated by `melee-dat samples codegen`.\n",
+                    " */\n\n",
+                    "#include \"{stem}.h\"\n\n",
+                ),
+                archive = archive,
+                stem = stem,
+            );
+            source += &self.definitions(archive, &instances)?;
+            Some(source)
+        };
+        Ok(UnitFiles { header, source })
+    }
+
+    /// The includes and declarations of a header, after its guard: the
+    /// macros at `macros`, the types' headers, then each kind of
+    /// declaration as a Doxygen member group.
+    #[allow(clippy::too_many_arguments)]
+    fn declarations(
+        &self,
+        out: &mut String,
+        macros: &str,
+        samples_doc: &str,
+        instances: &[&Instance],
+        linked: &[&str],
+        elided: &[(&str, &Elided)],
+        publics: &[Public],
+    ) -> Result<()> {
+        write!(
+            out,
+            concat!(
+                "#include \"{macros}\"\n\n",
+                "#include <Runtime/platform.h>\n",
+                "#include <placeholder.h>\n",
+            ),
+            macros = macros,
+        )?;
         let headers: BTreeSet<&str> = instances
             .iter()
             .map(|i| i.info.header.as_str())
-            .chain(elided.iter().filter_map(|(_, e)| Some(&*e.ty.as_ref()?.header)))
+            .chain(
+                elided
+                    .iter()
+                    .filter_map(|(_, e)| e.ty.as_ref())
+                    .chain(publics.iter().filter_map(|p| p.ty.as_ref()))
+                    .flat_map(|ty| ty.headers.iter().map(String::as_str)),
+            )
             .collect();
         for header in headers {
             writeln!(out, "#include <{header}>")?;
         }
-        // Each kind of declaration as a Doxygen member group
         let mut group = |name: &str, doc: &str, lines: Vec<String>| {
             if lines.is_empty() {
                 return Ok(());
@@ -1075,9 +1576,27 @@ impl<'a> CWriter<'a> {
             }
             writeln!(out, "/// @}}")
         };
+        // A public symbol the samples point to is declared as elided data,
+        // as the walk typed it
+        let elided_names: BTreeSet<&str> =
+            elided.iter().map(|&(n, _)| n).collect();
+        group(
+            "Public symbols",
+            "The archive's names for its roots, which the game looks up.",
+            publics
+                .iter()
+                .filter(|p| !elided_names.contains(p.name.as_str()))
+                .map(|p| match &p.ty {
+                    Some(ty) => {
+                        format!("extern {};", ty.declaration.replace("{}", &p.name))
+                    }
+                    None => format!("extern UNK_T {};", p.name),
+                })
+                .collect(),
+        )?;
         group(
             "Samples",
-            &format!("Defined in `{}.c`.", file_name(root)),
+            samples_doc,
             instances
                 .iter()
                 .map(|i| {
@@ -1103,39 +1622,26 @@ impl<'a> CWriter<'a> {
             elided
                 .iter()
                 .map(|(n, e)| match &e.ty {
-                    Some(ty) => format!("extern {} {n};", ty.type_name),
+                    Some(ty) => format!("extern {};", ty.declaration.replace("{}", n)),
                     None => format!("extern UNK_T {n}; // {:#X} bytes", e.size),
                 })
                 .collect(),
         )?;
-        writeln!(out, "\n#endif")?;
-        Ok(out)
+        Ok(())
     }
 
-    /// A root's source: its samples' definitions, after the headers of every
-    /// root they point into.
-    fn source(
+    /// Each sample's definition.
+    fn definitions(
         &self,
         archive: &str,
-        root: &str,
         instances: &[&Instance],
-        owners: &BTreeMap<&str, &str>,
     ) -> Result<String> {
-        // What the pointers name, in the order they first do
-        let mut referenced = Vec::new();
-        let mut seen = BTreeSet::new();
         let mut defs = String::new();
         for inst in instances {
-            for name in inst.relocs.values() {
-                if seen.insert(name.as_str()) {
-                    referenced.push(name.as_str());
-                }
-            }
             let info = inst.info;
             let die = self.die_of(&info.symbol, &info.lookup, &info.member)?;
             let mut init = String::new();
             self.value(&mut init, inst, die, 0, 0)?;
-            let info = inst.info;
             let at = match info.archive {
                 0 => format!("0x{:X}", info.offset),
                 archive => format!("0x{archive:X}+0x{:X}", info.offset),
@@ -1156,29 +1662,7 @@ impl<'a> CWriter<'a> {
                 info.type_name, info.symbol
             )?;
         }
-        let mut out = format!(
-            "/**\n * @file\n \
-             * The samples of `{root}` in `{archive}`.\n \
-             * Generated by `melee-dat samples codegen`.\n */\n\n"
-        );
-        // This root's declarations, then those of every other root it
-        // points into
-        let mut roots = vec![root];
-        for name in referenced {
-            let owner = owners
-                .get(name)
-                .with_context(|| format!("no root declares {name}"))?;
-            if !roots.contains(owner) {
-                roots.push(owner);
-            }
-        }
-        roots[1..].sort_unstable();
-        for root in roots {
-            writeln!(out, "#include \"{}.h\"", file_name(root))?;
-        }
-        out.push('\n');
-        out.push_str(&defs);
-        Ok(out)
+        Ok(defs)
     }
 
     /// A sample's type, looked up by name; for a union object, the member
@@ -1222,27 +1706,8 @@ impl<'a> CWriter<'a> {
 
     /// Look through typedefs and qualifiers, and from declarations to
     /// their definitions.
-    fn resolve(&self, mut die: DieId) -> DieId {
-        loop {
-            match &self.graph.types[&die].kind {
-                TypeKind::Typedef { target: Some(t) }
-                | TypeKind::Const { target: Some(t) }
-                | TypeKind::Volatile { target: Some(t) }
-                | TypeKind::Restrict { target: Some(t) } => die = *t,
-                TypeKind::Record {
-                    declaration: true, ..
-                } => {
-                    return self
-                        .canonical
-                        .of(die)
-                        .and_then(|id| {
-                            self.canonical.definition(self.graph, id)
-                        })
-                        .map_or(die, |id| self.canonical.get(id).rep);
-                }
-                _ => return die,
-            }
-        }
+    fn resolve(&self, die: DieId) -> DieId {
+        resolve(self.graph, self.canonical, die)
     }
 
     fn size(&self, die: DieId) -> u64 {
