@@ -27,6 +27,7 @@ melee-dat symbols coverage  # how much of the archives the walk explains
 melee-dat symbols walk    # walk every archive, print mismatches
 melee-dat symbols roots   # symbols loaded by name, with their types
 melee-dat symbols check   # root types against the archives' symbol sizes
+melee-dat symbols check-motions # packed animations against runtime motion tables
 melee-dat types dump -n HSD_Joint   # a type as the tool sees it
 melee-dat types duplicates  # records with the same layout under different names
 melee-dat types unhoisted   # dat types declared in .c files
@@ -267,6 +268,25 @@ store:
 nix store add --name melee-GALE01-files orig/GALE01/files
 nix build .#melee-dat-samples
 ```
+
+## Packed animation validation
+
+`symbols check-motions` reads the fighter filenames and motion counts from
+the linked game ELF, then checks each nonempty `ftData.xC` motion's file
+offset, exact size and public `FigaTree` name against its `Pl*AJ.dat` archive.
+It fails if a reference lands between archives, has the wrong size, or names
+a symbol absent from that archive. Empty motions and shared references are
+valid. Archives no motion references are reported and retained; padding need
+not be zero.
+
+```sh
+melee-dat symbols check-motions --elf build/GALE01/main.elf --files orig/GALE01/files
+```
+
+The ELF needs its symbols and initialized data, but no DWARF. Counts come
+from `ftData_Table_Unk0`, and the filenames from `ftData_803C1F40` and
+`ftData_803C23E4`. This checks normal fighter animations; demo motion tables
+and nested motion-file archives are separate follow-ups.
 
 ## Native archive interface
 

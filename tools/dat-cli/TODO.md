@@ -120,10 +120,8 @@ Not errors:
 
 ## Tool
 
-- `Archive::parse_packed` splits `Pl??AJ.dat` by each archive's size,
-  rounded up to 32 bytes; the padding between them is leftover bytes, not
-  zeros. The game finds each through the offsets and sizes in `ftData`'s
-  motion tables instead: split, or at least check the split, by those.
+- Demo motion tables (`ftData.x14`) and nested `ftDemo*MotionFile*` archives
+  still need the packed-range check used for `ftData.xC` animations.
 - One relocation is at a halfword (`TyMnInfo.dat` 0x25F6): the walk assumes
   pointers on words, so it's unexplained.
 
