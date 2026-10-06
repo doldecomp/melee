@@ -79,6 +79,8 @@ pub struct TypeRow {
     /// Pointer typedefs: `DAT_COUNT`.
     pub count_tag: Option<Expr>,
     pub type_tag: i32,
+    /// Pointer typedefs: `DAT_SCRIPT` or `DAT_BYTE_SCRIPT`.
+    pub script: Option<ScriptRow>,
     /// The headers its native spellings need.
     pub headers: BTreeSet<String>,
 }
@@ -120,6 +122,8 @@ pub enum ScriptRow {
     /// A table in the code, by its name, and its bytes.
     Table(String, Vec<u8>),
     Length(Expr),
+    /// `DAT_BYTE_SCRIPT`'s length.
+    Bytes(Expr),
 }
 
 pub struct RootRow {
@@ -574,6 +578,9 @@ impl<'a> Generator<'a> {
                         DatTag::Count(count) if row.count_tag.is_none() => {
                             row.count_tag = Some(count.clone());
                         }
+                        DatTag::Script(script) if row.script.is_none() => {
+                            row.script = Some(self.script(script.clone()));
+                        }
                         DatTag::Type(name) if row.type_tag == NONE => {
                             // As the walker's `typedef_type`: the type as
                             // named, unresolved
@@ -885,6 +892,7 @@ impl<'a> Generator<'a> {
                 ScriptRow::Table(table, bytes)
             }
             Script::Length(length) => ScriptRow::Length(length),
+            Script::Bytes(length) => ScriptRow::Bytes(length),
         }
     }
 

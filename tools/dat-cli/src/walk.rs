@@ -32,7 +32,8 @@ pub enum Issue {
     /// A union none of whose members could be chosen, so none was
     /// followed.
     AmbiguousUnion { at: u32, path: String },
-    /// A `DAT_SCRIPT` command whose opcode has no known length.
+    /// A script command whose opcode (a `DAT_BYTE_SCRIPT`'s whole byte) has
+    /// no known length.
     UnknownCommand { at: u32, opcode: u8, path: String },
 }
 
@@ -414,6 +415,9 @@ impl<'a> Walker<'a> {
         }
         if let Some(target) = self.typedef_type(die) {
             return self.typed(offset, target, path);
+        }
+        if let Some(script) = self.typedef_script(die) {
+            return self.script(offset, die, &script, path);
         }
         let Some(die) = self.resolve(Some(die)) else {
             return;
@@ -1057,11 +1061,42 @@ impl<'a> Walker<'a> {
         })
     }
 
-    /// How many words the command whose first word is `command` is: one of
-    /// the generic commands, or else one of the script's own.
-    fn command_length(&self, script: &Script, command: u32) -> Option<u64> {
-        let opcode = u64::from(command >> 26);
-        if let Some(length) = generic_command_length(opcode) {
+    /// A `DAT_SCRIPT` or `DAT_BYTE_SCRIPT` on a pointer typedef, or one it
+    /// names, for arrays of scripts.
+    fn typedef_script(&self, mut die: DieId) -> Option<Script> {
+        while let Some(ty) = self.graph.types.get(&die) {
+            let TypeKind::Typedef {
+                target: Some(target),
+            } = ty.kind
+            else {
+                return None;
+            };
+            let script = ty.annotations.iter().find_map(|a| {
+                match DatTag::parse(self.graph.str(a.value?))? {
+                    DatTag::Script(script) => Some(script),
+                    _ => None,
+                }
+            });
+            if script.is_some() {
+                return script;
+            }
+            die = target;
+        }
+        None
+    }
+
+    /// How long the command at `at` is, in the script's units: one of the
+    /// generic commands, or else one of the script's own.
+    fn command_length(&self, script: &Script, at: u32) -> Option<u64> {
+        // A byte script's command is its first byte, and none is generic
+        let bytes = matches!(script, Script::Bytes(_));
+        let command = if bytes {
+            u64::from(self.data[at as usize])
+        } else {
+            u64::from(self.word(at))
+        };
+        let opcode = command >> 26;
+        if !bytes && let Some(length) = generic_command_length(opcode) {
             return Some(length);
         }
         match script {
@@ -1079,9 +1114,11 @@ impl<'a> Walker<'a> {
                 }
                 Some(self.graph.bytes(table.address + index, 1)?[0].into())
             }
-            Script::Length(length) => eval_expr(self.macros, length, &|name| {
-                (name == "_command").then_some(u64::from(command))
-            }),
+            Script::Length(length) | Script::Bytes(length) => {
+                eval_expr(self.macros, length, &|name| {
+                    (name == "_command").then_some(command)
+                })
+            }
         }
     }
 
@@ -1129,6 +1166,8 @@ impl<'a> Walker<'a> {
         path: String,
     ) {
         let id = self.pointee(target).and_then(|t| self.canonical.of(t));
+        let bytes = matches!(script, Script::Bytes(_));
+        let unit = if bytes { 1 } else { 4 };
         let mut queue = vec![(value, path)];
         while let Some((start, path)) = queue.pop() {
             if !self.scripts.insert(start) {
@@ -1149,9 +1188,8 @@ impl<'a> Walker<'a> {
                     });
                     break;
                 };
-                let opcode = first >> 2;
-                let Some(length) = self.command_length(script, self.word(at))
-                else {
+                let opcode = if bytes { first } else { first >> 2 };
+                let Some(length) = self.command_length(script, at) else {
                     self.issue(Issue::UnknownCommand {
                         at,
                         opcode,
@@ -1159,7 +1197,7 @@ impl<'a> Walker<'a> {
                     });
                     break;
                 };
-                let end = at + (length.max(1) * 4) as u32;
+                let end = at + (length.max(1) * unit) as u32;
                 if end as usize > self.data.len() {
                     self.issue(Issue::OutOfBounds {
                         at,
@@ -1167,7 +1205,8 @@ impl<'a> Walker<'a> {
                     });
                     break;
                 }
-                for word in (at..end).step_by(4) {
+                // Byte scripts hold no pointers
+                for word in (at..end).step_by(4).filter(|_| !bytes) {
                     if self.relocs.contains(&word) {
                         self.walk.pointers.insert(word);
                         queue.push((
@@ -1176,9 +1215,10 @@ impl<'a> Walker<'a> {
                         ));
                     }
                 }
-                // A length expression ends the script with a command of 0 words
-                if opcode == 0
-                    || (length == 0 && matches!(script, Script::Length(_)))
+                // A length expression ends the script with a command of 0
+                // units
+                if (opcode == 0 && !bytes)
+                    || (length == 0 && !matches!(script, Script::Table(_)))
                 {
                     ended = Some(end);
                     break;

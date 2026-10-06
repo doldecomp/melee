@@ -104,10 +104,6 @@ Not errors:
 
 ## Coverage
 
-- `Fighter_804D64FC.cmdscripts` (PlCo.dat) are CPU command scripts: bytes
-  up to `CpuCmd_Done` (0x7F), each command followed by 0-2 argument bytes
-  by its value (`ftCo_800B4880`). An argument can be 0x7F, so they need a
-  byte-script sizer like `DAT_SCRIPT`'s; each is typed as one `u8` now.
 - `PlSb.dat` 0x75C-0x1444, after Sandbag's `FtSFX`, parses as subaction
   commands but has no end command before the next object: not standalone
   scripts. Nothing points into it.

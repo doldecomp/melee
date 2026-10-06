@@ -83,7 +83,18 @@
 ///   to a tool-side helper: @c DAT_SCRIPT(itCommandLength(_command)). A
 ///   length of 0 ends the script there, for scripts that stop at a command
 ///   of their own (a color animation's opcode 10).
+///
+/// On a member, or on a pointer typedef for arrays of scripts.
 #define DAT_SCRIPT(...) DAT_TAG("script(" #__VA_ARGS__ ")")
+
+/// The pointer refers to a command script of bytes: each command as many
+/// bytes long as @p length, an expression in @c _command, the command's
+/// first byte, such as a call to a tool-side helper:
+/// @c DAT_BYTE_SCRIPT(cpuCommandLength(_command)). A length of 0 ends the
+/// script with that byte. Unlike #DAT_SCRIPT, no commands are generic, and
+/// none points anywhere. On a member, or on a pointer typedef for arrays of
+/// scripts.
+#define DAT_BYTE_SCRIPT(length) DAT_TAG("bytescript(" #length ")")
 
 /// On a typedef of @c u8: the bytes are data of one format the archive
 /// doesn't break down further, such as an animation's keyframe stream. Raw

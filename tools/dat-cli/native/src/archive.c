@@ -596,6 +596,18 @@ static const DatExpr* typedef_count(const DatArchive* a, int32_t type)
     return NULL;
 }
 
+/// A script on a pointer typedef, or one it names.
+static const DatScript* typedef_script(const DatArchive* a, int32_t type)
+{
+    while (type != DAT_NONE && T(a, type)->kind == DAT_KIND_TYPEDEF) {
+        if (T(a, type)->script != NULL) {
+            return T(a, type)->script;
+        }
+        type = T(a, type)->target;
+    }
+    return NULL;
+}
+
 /// The type a `DAT_TYPE` typedef on the way to the type refers to.
 static int32_t typedef_type(const DatArchive* a, int32_t type)
 {
@@ -1037,6 +1049,13 @@ static bool col_anim_command_length(uint64_t command, uint64_t* out)
     }
 }
 
+/// See `cpu_command_length` in `expr.rs`.
+static uint64_t cpu_command_length(uint64_t command)
+{
+    uint8_t c = (uint8_t) command;
+    return c == 0x7F ? 0 : c >= 0xC0 ? 3 : c >= 0x80 ? 2 : 1;
+}
+
 static bool it_command_length(uint64_t command, uint64_t* out)
 {
     uint64_t opcode = (command >> 26) & 0x3F;
@@ -1160,6 +1179,12 @@ static bool eval_at(const DatArchive* a, const Context* c, const DatExpr* e,
             return e->nargs == 1 && it_command_length(args[0], out);
         case DAT_FN_COL_ANIM_COMMAND_LENGTH:
             return e->nargs == 1 && col_anim_command_length(args[0], out);
+        case DAT_FN_CPU_COMMAND_LENGTH:
+            if (e->nargs != 1) {
+                return false;
+            }
+            *out = cpu_command_length(args[0]);
+            return true;
         case DAT_FN_GX_GET_TEX_BUFFER_SIZE:
             return e->nargs == 5 && gx_get_tex_buffer_size(
                                         (uint16_t) args[0], (uint16_t) args[1],
@@ -1883,16 +1908,19 @@ static void typed(DatArchive* a, uint32_t offset, int32_t target, void* native,
     }
 }
 
-/// How many words a command is, from its first word.
+/// How long the command at `at` is, in the script's units: words, or for
+/// a byte script, bytes.
 static bool command_length(const DatArchive* a, const DatScript* s,
-                           uint32_t command, uint64_t* out)
+                           uint32_t at, uint64_t* out)
 {
+    /* A byte script's command is its first byte, and none is generic */
+    uint32_t command = s->bytes ? a->data[at] : word(a, at);
     uint64_t opcode = command >> 26;
-    if (opcode == 5 || opcode == 7) {
+    if (!s->bytes && (opcode == 5 || opcode == 7)) {
         *out = 2;
         return true;
     }
-    if (opcode < 10) {
+    if (!s->bytes && opcode < 10) {
         *out = 1;
         return true;
     }
@@ -1959,26 +1987,29 @@ static void script_at(DatArchive* a, uint32_t value, int32_t id,
                 issue(a, ISSUE_OUT_OF_BOUNDS, (uint32_t) at, 0);
                 break;
             }
-            uint8_t opcode = a->data[at] >> 2;
+            uint8_t opcode = s->bytes ? a->data[at] : a->data[at] >> 2;
             uint64_t length;
-            if (!command_length(a, s, word(a, at), &length)) {
+            if (!command_length(a, s, (uint32_t) at, &length)) {
                 issue(a, ISSUE_UNKNOWN_COMMAND, (uint32_t) at, opcode);
                 break;
             }
-            end = at + (length ? length : 1) * 4;
+            end = at + (length ? length : 1) * (s->bytes ? 1 : 4);
             if (end > a->size) {
                 issue(a, ISSUE_OUT_OF_BOUNDS, (uint32_t) at, 0);
                 break;
             }
-            for (uint64_t w = at; w < end; w += 4) {
+            /* Byte scripts hold no pointers */
+            for (uint64_t w = at; w < end && !s->bytes; w += 4) {
                 if (bits_has(&a->reloc, w, a->size)) {
                     bits_set(&a->pointer, w, a->size);
                     VEC_PUSH(queue, word(a, w));
                 }
             }
             /* A length expression ends the script with a command of 0
-             * words */
-            if (opcode == 0 || (length == 0 && s->table == NULL)) {
+             * units */
+            if ((opcode == 0 && !s->bytes) ||
+                (length == 0 && s->table == NULL))
+            {
                 ended = true;
                 break;
             }
@@ -2061,6 +2092,11 @@ static void layout(DatArchive* a, uint32_t offset, int32_t type, void* native,
     int32_t declared = typedef_type(a, type);
     if (declared != DAT_NONE) {
         typed(a, offset, declared, native, native_size(a, type));
+        return;
+    }
+    const DatScript* s = typedef_script(a, type);
+    if (s != NULL) {
+        script(a, offset, type, s, native);
         return;
     }
     int32_t r = resolve(a, type);

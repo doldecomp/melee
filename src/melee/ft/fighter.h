@@ -8,6 +8,7 @@
 #include <placeholder.h>
 
 #include <dolphin/mtx.h>
+#include <melee/ft/ftcmdscript.h>
 #include <melee/ft/ftcpuattack.h>
 #include <melee/ft/inlines.h> // IWYU pragma: export
 #include <melee/ft/types.h>
@@ -21,7 +22,7 @@
 extern struct Fighter_804D64FC_t {
     /// +00 CPU command scripts, by the index #ftCo_800B4880 runs (up to
     /// 0x3D); the first is null.
-    u8** cmdscripts DAT_COUNT(0x3E);
+    CpuCmdScript* cmdscripts DAT_COUNT(0x3E);
     ftCo_AttackList* x4 DAT_COUNT(
         Ft_Kind_Max - 1); ///< +04 ground attack tables (per character)
     ftCo_AttackList* x8

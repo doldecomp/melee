@@ -38,8 +38,8 @@ typedef enum DatKind {
     DAT_KIND_STRUCT,
     DAT_KIND_UNION,
     DAT_KIND_ARRAY,
-    /// A typedef, which may carry `DAT_TERMINATED`, `DAT_TYPE` or
-    /// `DAT_BLOB`.
+    /// A typedef, which may carry `DAT_TERMINATED`, `DAT_TYPE`, `DAT_BLOB`
+    /// or a script.
     DAT_KIND_TYPEDEF,
     /// `const`, `volatile` or `restrict`: transparent, but the end of a
     /// search for a typedef's annotations.
@@ -85,6 +85,7 @@ typedef enum DatFunction {
     DAT_FN_IT_COMMAND_LENGTH,
     DAT_FN_GX_GET_TEX_BUFFER_SIZE,
     DAT_FN_COL_ANIM_COMMAND_LENGTH,
+    DAT_FN_CPU_COMMAND_LENGTH,
 } DatFunction;
 
 /// An expression node. Arithmetic is unsigned 64-bit, as `melee-dat`
@@ -112,11 +113,14 @@ typedef struct DatBind {
 } DatBind;
 
 /// `DAT_SCRIPT`: the lengths of a script's own commands, from opcode 10,
-/// as a table of words or an expression in `_command`.
+/// as a table of words or an expression in `_command`. `DAT_BYTE_SCRIPT`
+/// (`bytes`): every command's length in bytes, the expression `length` in
+/// `_command`, its first byte.
 typedef struct DatScript {
     const uint8_t* table;
     uint32_t table_size;
     const DatExpr* length;
+    uint8_t bytes;
 } DatScript;
 
 typedef struct DatMember {
@@ -147,7 +151,7 @@ typedef struct DatMember {
     const DatExpr* cond;
     /// `DAT_TYPE`.
     int32_t type_tag;
-    /// `DAT_SCRIPT`.
+    /// `DAT_SCRIPT` or `DAT_BYTE_SCRIPT`.
     const DatScript* script;
     /// `DAT_BIND`s.
     const DatBind* binds;
@@ -195,6 +199,8 @@ typedef struct DatType {
     const DatExpr* count_tag;
     /// Typedefs: `DAT_TYPE`'s type.
     int32_t type_tag;
+    /// Pointer typedefs: `DAT_SCRIPT` or `DAT_BYTE_SCRIPT`.
+    const DatScript* script;
 } DatType;
 
 typedef enum DatCount {
