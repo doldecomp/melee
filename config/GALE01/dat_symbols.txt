@@ -108,6 +108,8 @@ sqEventInitDataLevelTbl = GmEvent.dat:*; // extent
 tournament_box?_array = TmBox.dat:*; // extent
 ty*Tbl = TyData?.dat:*; // extent
 gmKumiteSystemTable* = GmKumite.dat:*; // extent
+lbRumbleData = LbRb.dat:*; // extent
+lbBgFlashColAnimData = LbBf.dat:*; // extent
 
 // Every effect archive's table, as efAsync_DatEntries loads them; this also
 // types those no loader names, such as Kirby's unused copy of Pichu's

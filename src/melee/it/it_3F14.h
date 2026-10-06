@@ -41,7 +41,8 @@ typedef struct it_804D6D20_t {
         DAT_BIND(Article::kind, It_Kind_Section_Pokemon_Extended_Start +
                                     _index); // it_804D6D30
     it_804D6D40_t* x10;                      // it_804D6D40
-    Fighter_804D653C_t* x14;                 // it_804D6D04
+    /// Items' color animations, by #ColorOverlay::x28_colanim.
+    Fighter_804D653C_t* x14 DAT_EXTENT; // it_804D6D04
 } it_804D6D20_t;
 
 /* 3F1418 */ extern struct sdata_ItemGXLink
