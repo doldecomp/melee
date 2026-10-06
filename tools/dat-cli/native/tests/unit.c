@@ -498,6 +498,7 @@ static void test_walk(void)
     /* A counted array, its first element also an object of its own */
     CHECK(root->n == 2);
     CHECK(root->many != NULL);
+    CHECK(root->leaf == root->many);
     if (root->many != NULL) {
         CHECK(root->many[0].c == 0x12345678 && root->many[0].b == -2);
         CHECK(root->many[1].a == 7 && root->many[1].b == 300);

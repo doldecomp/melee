@@ -268,6 +268,10 @@ struct DatArchive {
     Map visited;
     /// (offset, type id) → native object.
     Map natives;
+    /// Native arrays' allocated element counts.
+    Map native_counts;
+    /// Native pointer slots → (target offset, type id), for array aliases.
+    Map references;
     /// Native object → offset, for dat_verify().
     Map offsets;
     /// offset → furthest end.
@@ -280,6 +284,7 @@ struct DatArchive {
     VEC(Issue) issues;
     VEC(Task) queue;
     VEC(Copy) copies;
+    bool native_moved;
     size_t untyped_pointers, sentinels;
     const Scope* env;
     /// Names the walk treats specially.
@@ -506,6 +511,8 @@ void dat_close(DatArchive* a)
     free(a->pointer.words);
     map_free(&a->visited);
     map_free(&a->natives);
+    map_free(&a->native_counts);
+    map_free(&a->references);
     map_free(&a->offsets);
     map_free(&a->extents);
     map_free(&a->choices);
@@ -1335,6 +1342,59 @@ static void copy_of(DatArchive* a, uint32_t offset, int32_t r, void* native)
         key2(offset, T(a, r)->id);
 }
 
+/// An array element or inline record owns this storage. References to a
+/// separately converted view must use it too, once its pointers are filled.
+static void place_native(DatArchive* a, uint32_t offset, int32_t r,
+                         void* native)
+{
+    if (native == NULL) {
+        return;
+    }
+    void* existing = native_of(a, offset, r);
+    if (existing != NULL && existing != native && existing != a->data + offset)
+    {
+        copy_of(a, offset, r, native);
+        a->native_moved = true;
+    }
+    *map_slot(&a->natives, key2(offset, T(a, r)->id), true) =
+        (uint64_t) (uintptr_t) native;
+    *map_slot(&a->offsets, (uint64_t) (uintptr_t) native, true) =
+        key2(offset, T(a, r)->id);
+}
+
+/// Keep converted references so an array discovered later can supply their
+/// final addresses. Raw, script and zero-count pointers are not registered.
+static void reference(DatArchive* a, void* slot, uint32_t offset, int32_t r)
+{
+    if (slot != NULL && r != DAT_NONE && !opaque(a, r)) {
+        r = resolve(a, r);
+        if (r == DAT_NONE) {
+            return;
+        }
+        *map_slot(&a->references, (uint64_t) (uintptr_t) slot, true) =
+            key2(offset, T(a, r)->id);
+    }
+}
+
+static void* native_array(DatArchive* a, uint32_t offset, int32_t e,
+                          uint64_t count)
+{
+    uint64_t key = key2(offset, T(a, e)->id), n;
+    void* existing = native_of(a, offset, e);
+    if (existing != NULL && map_get(&a->native_counts, key, &n) && n >= count)
+    {
+        return existing;
+    }
+    uint32_t ns = T(a, e)->native_size;
+    char* block = arena_alloc(&a->arena, (size_t) ns * (count ? count : 1));
+    for (uint64_t i = 0; i < count; i++) {
+        place_native(a, (uint32_t) (offset + i * T(a, e)->size), e,
+                     block + i * ns);
+    }
+    *map_slot(&a->native_counts, key, true) = count;
+    return block;
+}
+
 static void typed_extent(DatArchive* a, uint32_t offset, int32_t type,
                          uint64_t count)
 {
@@ -1478,7 +1538,7 @@ static void* plain_array(DatArchive* a, uint32_t offset, int32_t raw,
         return a->data + offset;
     }
     uint32_t ns = T(a, r)->native_size;
-    char* block = arena_alloc(&a->arena, (size_t) ns * count);
+    char* block = native_array(a, offset, r, count);
     for (uint64_t i = 0; i < count; i++) {
         convert(a, (uint32_t) (offset + i * T(a, r)->size), r, block + i * ns);
     }
@@ -1521,6 +1581,9 @@ static void counted_array(DatArchive* a, uint32_t offset, int32_t array,
             m ? bound(a, outer, m, parent.record, parent.base, parent.some, i)
               : outer;
         typed_extent(a, at, raw, 1);
+        place_native(a, at, e,
+                     native ? (char*) native + i * T(a, e)->native_size
+                            : NULL);
         layout(a, at, raw,
                native ? (char*) native + i * T(a, e)->native_size : NULL,
                parent);
@@ -1571,14 +1634,17 @@ static void counted(DatArchive* a, uint32_t offset, int32_t pointer,
         issue(a, ISSUE_OUT_OF_BOUNDS, value, 0);
         return;
     }
+    if (count > 0 && !opaque(a, raw)) {
+        reference(a, slot, value, e);
+    }
     if (count > 0 && !T(a, e)->has_pointers) {
+        void* block = plain_array(a, value, raw, e, count);
         if (!visit(a, value, e)) {
-            store_pointer(slot, native_of(a, value, e));
+            store_pointer(slot, block);
             return;
         }
         reached(a, value, e);
         typed_extent(a, value, raw, count);
-        void* block = plain_array(a, value, raw, e, count);
         set_native(a, value, e, block);
         store_pointer(slot, block);
         relocated_words(a, value, value + count * size);
@@ -1590,7 +1656,7 @@ static void counted(DatArchive* a, uint32_t offset, int32_t pointer,
         return;
     }
     uint32_t ns = native_size(a, raw);
-    char* block = arena_alloc(&a->arena, (size_t) ns * count);
+    char* block = native_array(a, value, e, count);
     store_pointer(slot, block);
     const Scope* outer = a->env;
     for (uint64_t i = 0; i < count; i++) {
@@ -1668,8 +1734,9 @@ static void terminated(DatArchive* a, uint32_t offset, int32_t pointer,
     if (opaque(a, ty)) {
         store_pointer(slot, a->data + value);
     } else {
-        block = arena_alloc(&a->arena, (size_t) ns * (n ? n : 1));
+        block = native_array(a, value, e, n);
         store_pointer(slot, block);
+        reference(a, slot, value, e);
     }
     const Scope* env = a->env;
     for (uint64_t i = 0; i < n; i++) {
@@ -1751,9 +1818,9 @@ static void extent(DatArchive* a, uint32_t offset, int32_t array,
             store_pointer(native, a->data + value);
         } else {
             uint64_t n = extent_bound(a, value, size);
-            base = arena_alloc(&a->arena, (size_t) T(a, target)->native_size *
-                                              (n ? n : 1));
+            base = native_array(a, value, target, n);
             store_pointer(native, base);
+            reference(a, native, value, target);
         }
         set_native(a, value, target, base);
         offset = value;
@@ -1784,6 +1851,7 @@ static void extent(DatArchive* a, uint32_t offset, int32_t array,
               : outer;
         int32_t ty = element != DAT_NONE ? element : e;
         typed_extent(a, (uint32_t) at, ty, 1);
+        place_native(a, (uint32_t) at, e, base ? base + i * ns : NULL);
         layout(a, (uint32_t) at, ty, base ? base + i * ns : NULL, parent);
     }
     a->env = outer;
@@ -1797,6 +1865,7 @@ static void typed(DatArchive* a, uint32_t offset, int32_t target, void* native,
         bits_set(&a->pointer, offset, a->size);
         /* A field too small for a native pointer keeps the offset */
         if (native_field >= sizeof(void*)) {
+            reference(a, native, word(a, offset), target);
             push(a, word(a, offset), target, a->env, NULL, native);
         } else {
             push(a, word(a, offset), target, a->env, NULL, NULL);
@@ -2001,6 +2070,11 @@ static void layout(DatArchive* a, uint32_t offset, int32_t type, void* native,
         issue(a, ISSUE_OUT_OF_BOUNDS, offset, 0);
         return;
     }
+    if (t->kind == DAT_KIND_STRUCT || t->kind == DAT_KIND_UNION ||
+        t->kind == DAT_KIND_ARRAY)
+    {
+        place_native(a, offset, r, native);
+    }
     switch (t->kind) {
     case DAT_KIND_STRUCT:
         for (uint32_t i = 0; i < t->nmembers; i++) {
@@ -2038,6 +2112,11 @@ static void layout(DatArchive* a, uint32_t offset, int32_t type, void* native,
                 if (e != DAT_NONE) {
                     for (uint32_t j = 0; j < arr->count; j++) {
                         a->env = bound(a, outer, m, r, offset, true, j);
+                        place_native(a, at + j * T(a, e)->size, e,
+                                     mnative
+                                         ? mnative + (size_t) j *
+                                                         T(a, e)->native_size
+                                         : NULL);
                         layout(a, at + j * T(a, e)->size, arr->target,
                                mnative ? mnative +
                                              (size_t) j * T(a, e)->native_size
@@ -2097,6 +2176,10 @@ static void layout(DatArchive* a, uint32_t offset, int32_t type, void* native,
         }
         for (uint32_t i = 0; i < t->count; i++) {
             /* Keep typedef tags, e.g. a counted list in each slot. */
+            place_native(a, offset + i * T(a, e)->size, e,
+                         native ? (char*) native +
+                                      (size_t) i * T(a, e)->native_size
+                                : NULL);
             layout(a, offset + i * T(a, e)->size, t->target,
                    native ? (char*) native + (size_t) i * T(a, e)->native_size
                           : NULL,
@@ -2109,6 +2192,7 @@ static void layout(DatArchive* a, uint32_t offset, int32_t type, void* native,
         if (bits_has(&a->reloc, offset, a->size)) {
             bits_set(&a->pointer, offset, a->size);
             if (pointee(a, t->target) != DAT_NONE) {
+                reference(a, native, value, t->target);
                 push(a, value, t->target, a->env, NULL, native);
             } else {
                 untyped(a);
@@ -2187,7 +2271,8 @@ static void object(DatArchive* a, Task task)
     /* Every object is made natively, even one reached through a field that
        can't point to it (DAT_TYPE on a narrow integer), so that pointers
        reaching it later can */
-    void* native = task.native;
+    void* native =
+        task.native != NULL ? task.native : native_of(a, task.offset, r);
     if (native == NULL) {
         if (opaque(a, task.type)) {
             native = a->data + task.offset;
@@ -2195,8 +2280,8 @@ static void object(DatArchive* a, Task task)
             native =
                 arena_alloc(&a->arena, extent_native_size(a, task.offset, r));
         }
-        store_pointer(task.slot, native);
     }
+    store_pointer(task.slot, native);
     /* Opaque objects also need an identity for subsequent references. They
        remain archive bytes: layout and verification must not convert them. */
     set_native(a, task.offset, r, native);
@@ -2225,9 +2310,33 @@ static void finish(DatArchive* a)
         Copy* c = &a->copies.items[i];
         if (c->src != NULL && c->dst != c->src) {
             memcpy(c->dst, c->src, c->size);
+            /* A copied record's pointer fields need the same fixups. Slots
+               may be unaligned, so do not assume a native pointer stride. */
+            for (size_t j = 0; j < c->size; j++) {
+                uint64_t target;
+                if (map_get(&a->references, (uint64_t) (uintptr_t) c->src + j,
+                            &target))
+                {
+                    *map_slot(&a->references,
+                              (uint64_t) (uintptr_t) c->dst + j, true) =
+                        target;
+                }
+            }
         }
     }
     a->copies.len = 0;
+    if (!a->native_moved) {
+        return;
+    }
+    a->native_moved = false;
+    for (size_t i = 0; i < a->references.cap; i++) {
+        uint64_t key = a->references.keys[i], native;
+        if (key != UINT64_MAX &&
+            map_get(&a->natives, a->references.values[i], &native))
+        {
+            store_pointer((void*) (uintptr_t) key, (void*) (uintptr_t) native);
+        }
+    }
 }
 
 static const Scope* root_env(DatArchive* a, const DatRoot* root)
@@ -2301,7 +2410,7 @@ static void* walk_root_array(DatArchive* a, uint32_t offset, int32_t element,
         return block;
     }
     uint32_t ns = T(a, e)->native_size;
-    char* block = arena_alloc(&a->arena, (size_t) ns * (count ? count : 1));
+    char* block = native_array(a, offset, e, count);
     set_native(a, offset, e, block);
     for (uint64_t i = 0; i < count; i++) {
         /* Each element starts with the root's bindings */
@@ -2548,6 +2657,7 @@ typedef struct Verify {
     const DatArchive* a;
     FILE* out;
     size_t mismatches;
+    Map checked;
 } Verify;
 
 static void mismatch(Verify* v, uint32_t at, const char* what, uint64_t want,
@@ -2576,6 +2686,13 @@ static void verify(Verify* v, uint32_t offset, int32_t type,
     if ((uint64_t) offset + t->size > a->size) {
         return;
     }
+    uint64_t key = key2(offset, t->id), previous;
+    if (map_get(&v->checked, key, &previous) &&
+        previous == (uint64_t) (uintptr_t) native)
+    {
+        return;
+    }
+    *map_slot(&v->checked, key, true) = (uint64_t) (uintptr_t) native;
     switch (t->kind) {
     case DAT_KIND_INT: {
         uint32_t ns = t->native_size ? t->native_size : t->size;
@@ -2715,7 +2832,7 @@ static void verify(Verify* v, uint32_t offset, int32_t type,
 
 size_t dat_verify(const DatArchive* a, FILE* out)
 {
-    Verify v = { a, out, 0 };
+    Verify v = { .a = a, .out = out };
     for (size_t i = 0; i < a->natives.cap; i++) {
         if (a->natives.keys[i] == UINT64_MAX) {
             continue;
@@ -2728,5 +2845,6 @@ size_t dat_verify(const DatArchive* a, FILE* out)
             verify(&v, offset, type, native, 0);
         }
     }
+    map_free(&v.checked);
     return v.mismatches;
 }

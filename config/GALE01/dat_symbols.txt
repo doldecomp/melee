@@ -118,6 +118,9 @@ eff*DataTable = Ef*.dat:*; // type:EffectDataTable
 map_ptcl = *:*; // extent
 map_texg = *:*; // extent
 ScGamRegStaffrollNames_scene_modelset = *:*; // count:10
+// Unused name roots: each holds one pointer to the empty name string.
+mnNameDefaultName = *:*; // type:u8*
+mnNameDefaultNameUs = *:*; // type:u8*
 mnNameAutoName = *:*; // count:684
 mnNameAutoNameUs = *:*; // count:168
 mnNameRefuseName = *:*; // count:200

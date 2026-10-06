@@ -14,9 +14,6 @@
   which is a script; item attributes of fighter items, whose kind isn't
   bound).
 
-- The generated C has some redundant parentheses (clang-tidy is off for
-  `src/` in the build directory, so nothing reports them). Find and drop
-  them in codegen.
 - objdiff can diff whole archives: the cost is the size of each symbol,
   not of the object, and blob data is understood and typed data is
   sliced. Sampling could become a choice rather than a necessity
@@ -110,7 +107,6 @@ Not errors:
   commands but has no end command before the next object: not standalone
   scripts. Nothing points into it.
 
-- Loaded into untyped destinations, types unknown: `mnNameDefaultName*`.
 - `toy.c` loads trophy symbols through `symbol_name` fields of its tables;
   those are covered by name patterns instead.
 - `ftDemo*MotionFile*` are `u8[]`: packed archives like `Pl??AJ.dat`,
@@ -120,10 +116,8 @@ Not errors:
 
 ## Tool
 
-- `Archive::parse_packed` splits `Pl??AJ.dat` by each archive's size,
-  rounded up to 32 bytes; the padding between them is leftover bytes, not
-  zeros. The game finds each through the offsets and sizes in `ftData`'s
-  motion tables instead: split, or at least check the split, by those.
+- Demo motion tables (`ftData.x14`) and nested `ftDemo*MotionFile*` archives
+  still need the packed-range check used for `ftData.xC` animations.
 - One relocation is at a halfword (`TyMnInfo.dat` 0x25F6): the walk assumes
   pointers on words, so it's unexplained.
 
@@ -138,9 +132,8 @@ Not errors:
 
 ## Native archive interface
 
-- An element of an array that is also an object of its own is converted
-  twice: the array holds a copy, so pointers to the lone object and into the
-  array differ. Interior pointers should point into the array.
+- An array root whose first element was already visited uses the walker's
+  existing one-object view, even when a later request gives a larger count.
 - A pointer to plain data without `DAT_COUNT`, `DAT_EXTENT` or
   `DAT_TERMINATED` is one element natively, as the walk types it.
 - Plain unions (no pointers) are converted as their largest member.
