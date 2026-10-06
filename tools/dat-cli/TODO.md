@@ -20,9 +20,6 @@
   `ftDevice_Callback0`'s `Vec3*` out parameter. That callback type is shared
   by two device tables with different outputs. `grZe_YakumonoParam` hides a
   pointer at 0x2C in `pad_14`.
-- `yakumono_param` has no type in 28 stages: every `GrT*` target test,
-  `GrTe`, the `GrEF*` trophy scenes, `GrHr`, `GrPu` and `GrSh`. Each is
-  one zero word, and their code reads none of it.
 - `GrMc.dat`'s `RObjAnimJoint`s at 0x301A4 and 0x301F4 have a third word
   pointing to an `HSD_AObjDesc` nothing else reaches; the code reads only
   two.
@@ -118,6 +115,9 @@ Not errors:
   fighters' `xC` scripts unexplained: the walker currently reaches that
   data by continuing past returns. That data would need address roots too.
 
+- The name entry lists (`mnNameAutoName*`, `mnNameRefuseName*`) are
+  counted in `dat_symbols.txt`: they end in a pointer to an empty string,
+  which `DAT_TERMINATED` can't express.
 - `toy.c` loads trophy symbols through `symbol_name` fields of its tables;
   those are covered by name patterns instead.
 - `ftDemo*MotionFile*` are `u8[]`: packed archives like `Pl??AJ.dat`,
