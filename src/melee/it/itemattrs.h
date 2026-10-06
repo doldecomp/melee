@@ -3,8 +3,6 @@
 
 #include <Runtime/platform.h>
 
-#include <melee/it/forward.h>
-
 #include <dat_macros.h>
 
 #include <dolphin/mtx.h>

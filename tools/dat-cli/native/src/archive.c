@@ -2156,8 +2156,8 @@ static void layout(DatArchive* a, uint32_t offset, int32_t type, void* native,
                 break;
             }
             const Scope* outer = a->env;
-            a->env = bound(a, outer, m, parent.record, parent.base,
-                           parent.some, 0);
+            a->env =
+                bound(a, outer, m, parent.record, parent.base, parent.some, 0);
             if (m->script != NULL) {
                 script(a, offset, m->type, m->script, native);
             } else if (m->terminator != NULL) {
