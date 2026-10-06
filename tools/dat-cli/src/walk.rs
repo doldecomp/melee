@@ -293,6 +293,9 @@ impl<'a> Walker<'a> {
         let Some(element) = self.resolve(Some(element)) else {
             return;
         };
+        if count == Some(1) && self.conditioned_union(element) {
+            return self.root(offset, raw, name, bindings);
+        }
         let (Some(id), Some(size)) = (
             self.canonical.of(element),
             self.canonical.byte_size(self.graph, element),
@@ -328,7 +331,7 @@ impl<'a> Walker<'a> {
         let count = count.min(room / size);
         self.typed_extent(offset, raw, count);
         // Plain data, such as a texture: only check it isn't relocated
-        if !self.has_pointers(element) {
+        if !self.has_pointers(element) && !self.conditioned_union(element) {
             let end = offset + (count * size) as u32;
             let mut words: Vec<_> = self
                 .relocs
@@ -423,7 +426,8 @@ impl<'a> Walker<'a> {
             return;
         };
         // A record ending in a `DAT_EXTENT` array has no fixed size
-        if !self.has_extent(die)
+        if !self.conditioned_union(die)
+            && !self.has_extent(die)
             && let Some(size) = self.canonical.byte_size(self.graph, die)
             && u64::from(offset) + size > self.data.len() as u64
         {
@@ -513,6 +517,16 @@ impl<'a> Walker<'a> {
                     }
                     Choice::Unused => return,
                     Choice::Ambiguous if plain => {
+                        let size =
+                            self.canonical.byte_size(graph, die).unwrap_or(0);
+                        if u64::from(offset) + size > self.data.len() as u64 {
+                            self.issue(Issue::OutOfBounds {
+                                at: offset,
+                                path: path.to_owned(),
+                            });
+                            return;
+                        }
+                        self.record_extent(offset, offset + size as u32);
                         return self.scalar(offset, die, path);
                     }
                     // Following a guess could misread everything behind it
@@ -525,6 +539,7 @@ impl<'a> Walker<'a> {
                     }
                 };
                 if let Some(ty) = member.ty {
+                    self.typed_extent(offset, ty, 1);
                     let path = field(path, member.name.map(|n| graph.str(n)));
                     let outer = self.env.clone();
                     self.env = self.bound(&outer, &self.binds(member), parent, 0);
@@ -765,7 +780,9 @@ impl<'a> Walker<'a> {
         // A count beyond the data means the count or the pointer is wrong:
         // one finding, and nothing followed
         let room = (self.data.len() as u64).saturating_sub(value.into());
-        if count > room / size.max(1) {
+        if count > room / size.max(1)
+            && !(count == 1 && self.conditioned_union(element))
+        {
             self.issue(Issue::OutOfBounds {
                 at: value,
                 path: format!("{path}->[{count}]"),
@@ -773,7 +790,10 @@ impl<'a> Walker<'a> {
             return;
         }
         // Plain data, such as texels: one object, nothing to follow
-        if count > 0 && !self.has_pointers(element) {
+        if count > 0
+            && !self.has_pointers(element)
+            && !self.conditioned_union(element)
+        {
             let Some(id) = self.canonical.of(element) else {
                 return;
             };
@@ -1272,7 +1292,9 @@ impl<'a> Walker<'a> {
     /// Record `count` elements of `die` at `offset` as typed data, unless
     /// they are raw bytes.
     fn typed_extent(&mut self, offset: u32, die: DieId, count: u64) {
-        if self.is_raw(die) {
+        // A separately reached polymorphic record holds only its selected
+        // member. Arrays still use the union's declared element stride.
+        if self.is_raw(die) || (count == 1 && self.conditioned_union(die)) {
             return;
         }
         let Some(size) = self
@@ -1282,8 +1304,20 @@ impl<'a> Walker<'a> {
             return;
         };
         let end = offset + (size * count) as u32;
+        self.record_extent(offset, end);
+    }
+
+    fn record_extent(&mut self, offset: u32, end: u32) {
         let furthest = self.walk.extents.entry(offset).or_insert(end);
         *furthest = end.max(*furthest);
+    }
+
+    fn conditioned_union(&self, die: DieId) -> bool {
+        let Some(die) = self.resolve(Some(die)) else {
+            return false;
+        };
+        matches!(&self.graph.types[&die].kind, TypeKind::Record { union: true, members, .. }
+            if members.iter().any(|m| self.condition(m).is_some()))
     }
 
     /// Whether `die` is raw bytes: `u8`, or arrays of it, not named by a

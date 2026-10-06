@@ -8,6 +8,70 @@ use melee_dat::{
 };
 use std::collections::HashMap;
 
+#[test]
+fn tagged_plain_union_uses_the_selected_record_size() {
+    let mut graph = graph(None);
+    ty(
+        &mut graph,
+        11,
+        None,
+        Some(8),
+        TypeKind::Array {
+            element: Some(1),
+            dims: vec![Some(2)],
+        },
+    );
+    let small = member(&mut graph, "small", 1, 0, &["dat:if(kind == 0)"]);
+    let large = member(&mut graph, "large", 11, 0, &["dat:if(kind == 1)"]);
+    ty(
+        &mut graph,
+        10,
+        Some("PlainChoice"),
+        Some(8),
+        TypeKind::Record {
+            union: true,
+            declaration: false,
+            members: vec![small, large],
+        },
+    );
+    let canonical = Canonical::new(&graph);
+    let macros = HashMap::new();
+    for (kind, size, relocs) in
+        [(0, 4, vec![]), (0, 8, vec![4]), (1, 8, vec![])]
+    {
+        let data = [123u32.to_be_bytes(), 456u32.to_be_bytes()].concat();
+        let archive = Archive {
+            header: ArchiveHeader {
+                file_size: 0,
+                data_size: size as u32,
+                reloc_count: relocs.len() as u32,
+                public_count: 0,
+                extern_count: 0,
+                version: [0; 12],
+            },
+            data: &data[..size],
+            relocs,
+            publics: vec![],
+            externs: vec![],
+            symbols: &[],
+        };
+        for array in [false, true] {
+            let mut walker = Walker::new(&graph, &canonical, &macros, &archive);
+            let binds = [("kind".into(), kind)];
+            if array {
+                walker.root_array(0, 10, Some(1), "root", &binds);
+            } else {
+                walker.root(0, 10, "root", &binds);
+            }
+            let walked = walker.finish();
+            assert!(walked.issues.is_empty(), "{:?}", walked.issues);
+            assert_eq!(walked.choices[&(0, canonical.of(10).unwrap())], kind as usize);
+            assert_eq!(walked.extents[&0], if kind == 0 { 4 } else { 8 });
+            assert!(walked.pointers.is_empty());
+        }
+    }
+}
+
 fn tag(graph: &mut TypeGraph, value: &str) -> Annotation {
     Annotation {
         name: Some(graph.strings.get_or_intern("btf_decl_tag")),
