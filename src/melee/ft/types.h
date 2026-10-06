@@ -730,146 +730,93 @@ struct ftData_x48_x4 {
 /// The item kind of each fighter's #ftData_Item::article, as its
 /// @c *_Init_OnLoad passes it to #it_8026B3F8 (some from the fighter's
 /// attributes, whose values are written here).
-#define ftData_ItemKind                                                        \
-    (fighter_kind == Ft_Kind_Mario && item_index == 0   ? It_Kind_Mario_Fire   \
-     : fighter_kind == Ft_Kind_Mario && item_index == 2 ? It_Kind_Mario_Cape   \
-     : fighter_kind == Ft_Kind_Fox && item_index == 0   ? It_Kind_Fox_Laser    \
-     : fighter_kind == Ft_Kind_Fox && item_index == 1   ? It_Kind_Fox_Blaster  \
-     : fighter_kind == Ft_Kind_Fox && item_index == 2   ? It_Kind_Fox_Illusion \
-     : fighter_kind == Ft_Kind_Kirby && item_index == 0 ? It_Kind_Kirby_CBeam  \
-     : fighter_kind == Ft_Kind_Kirby && item_index == 1                        \
-         ? It_Kind_Kirby_Hammer                                                \
-     : fighter_kind == Ft_Kind_Kirby && item_index == 2 ? It_Kind_Unk1         \
-     : fighter_kind == Ft_Kind_Kirby && item_index == 3 ? It_Kind_Unk2         \
-     : (fighter_kind == Ft_Kind_Koopa || fighter_kind == Ft_Kind_GKoops) &&    \
-             item_index == 0                                                   \
-         ? It_Kind_Koopa_Flame                                                 \
-     : fighter_kind == Ft_Kind_Link && item_index == 0 ? It_Kind_Link_Bomb     \
-     : fighter_kind == Ft_Kind_Link && item_index == 1                         \
-         ? It_Kind_Link_Boomerang                                              \
-     : fighter_kind == Ft_Kind_Link && item_index == 2 ? It_Kind_Link_HShot    \
-     : fighter_kind == Ft_Kind_Link && item_index == 3 ? It_Kind_Link_Arrow    \
-     : fighter_kind == Ft_Kind_Link && item_index == 4 ? It_Kind_Link_Bow      \
-     : fighter_kind == Ft_Kind_Seak && item_index == 0                         \
-         ? It_Kind_Seak_NeedleThrow                                            \
-     : fighter_kind == Ft_Kind_Seak && item_index == 1                         \
-         ? It_Kind_Seak_NeedleHeld                                             \
-     : fighter_kind == Ft_Kind_Seak && item_index == 2 ? It_Kind_Seak_Vanish   \
-     : fighter_kind == Ft_Kind_Seak && item_index == 3 ? It_Kind_Seak_Chain    \
-     : fighter_kind == Ft_Kind_Ness && item_index == 0 ? It_Kind_Ness_PKFire   \
-     : fighter_kind == Ft_Kind_Ness && item_index == 1                         \
-         ? It_Kind_Ness_PKFire_Flame                                           \
-     : fighter_kind == Ft_Kind_Ness && item_index == 2 ? It_Kind_Ness_PKFlush  \
-     : fighter_kind == Ft_Kind_Ness && item_index == 3                         \
-         ? It_Kind_Ness_PKThunder                                              \
-     : fighter_kind == Ft_Kind_Ness && item_index == 4                         \
-         ? It_Kind_Ness_PKThunder1                                             \
-     : fighter_kind == Ft_Kind_Ness && item_index == 5                         \
-         ? It_Kind_Ness_PKThunder2                                             \
-     : fighter_kind == Ft_Kind_Ness && item_index == 6                         \
-         ? It_Kind_Ness_PKThunder3                                             \
-     : fighter_kind == Ft_Kind_Ness && item_index == 7                         \
-         ? It_Kind_Ness_PKThunder4                                             \
-     : fighter_kind == Ft_Kind_Ness && item_index == 8                         \
-         ? It_Kind_Ness_PKFlush_Explode                                        \
-     : fighter_kind == Ft_Kind_Ness && item_index == 9  ? It_Kind_Ness_Bat     \
-     : fighter_kind == Ft_Kind_Ness && item_index == 10 ? It_Kind_Ness_Yoyo    \
-     : fighter_kind == Ft_Kind_Peach && item_index == 0                        \
-         ? It_Kind_Peach_Explode                                               \
-     : fighter_kind == Ft_Kind_Peach && item_index == 1                        \
-         ? It_Kind_Peach_Turnip                                                \
-     : fighter_kind == Ft_Kind_Peach && item_index == 2                        \
-         ? It_Kind_Peach_Parasol                                               \
-     : fighter_kind == Ft_Kind_Peach && item_index == 3 ? It_Kind_Peach_Toad   \
-     : fighter_kind == Ft_Kind_Peach && item_index == 4                        \
-         ? It_Kind_Peach_ToadSpore                                             \
-     : (fighter_kind == Ft_Kind_Popo || fighter_kind == Ft_Kind_Nana) &&       \
-             item_index == 0                                                   \
-         ? It_Kind_IceClimber_Ice                                              \
-     : (fighter_kind == Ft_Kind_Popo || fighter_kind == Ft_Kind_Nana) &&       \
-             item_index == 1                                                   \
-         ? It_Kind_IceClimber_Blizzard                                         \
-     : (fighter_kind == Ft_Kind_Popo || fighter_kind == Ft_Kind_Nana) &&       \
-             item_index == 2                                                   \
-         ? It_Kind_IceClimber_GumStrings                                       \
-     : fighter_kind == Ft_Kind_Pikachu && item_index == 0                      \
-         ? It_Kind_Pikachu_Thunder                                             \
-     : fighter_kind == Ft_Kind_Pikachu && item_index == 1                      \
-         ? It_Kind_Pikachu_TJolt_Ground                                        \
-     : fighter_kind == Ft_Kind_Pikachu && item_index == 2                      \
-         ? It_Kind_Pikachu_TJolt_Air                                           \
-     : fighter_kind == Ft_Kind_Samus && item_index == 0 ? It_Kind_Samus_Bomb   \
-     : fighter_kind == Ft_Kind_Samus && item_index == 1                        \
-         ? It_Kind_Samus_Charge                                                \
-     : fighter_kind == Ft_Kind_Samus && item_index == 2                        \
-         ? It_Kind_Samus_Missile                                               \
-     : fighter_kind == Ft_Kind_Samus && item_index == 3 ? It_Kind_Samus_GBeam  \
-     : fighter_kind == Ft_Kind_Yoshi && item_index == 0                        \
-         ? It_Kind_Yoshi_EggThrow                                              \
-     : fighter_kind == Ft_Kind_Yoshi && item_index == 1 ? It_Kind_Yoshi_Star   \
-     : fighter_kind == Ft_Kind_Yoshi && item_index == 2                        \
-         ? It_Kind_Yoshi_EggLay                                                \
-     : fighter_kind == Ft_Kind_Mewtwo && item_index == 0                       \
-         ? It_Kind_Mewtwo_Disable                                              \
-     : fighter_kind == Ft_Kind_Mewtwo && item_index == 1                       \
-         ? It_Kind_Mewtwo_ShadowBall                                           \
-     : fighter_kind == Ft_Kind_Luigi && item_index == 0 ? It_Kind_Luigi_Fire   \
-     : fighter_kind == Ft_Kind_Zelda && item_index == 0                        \
-         ? It_Kind_Zelda_DinFire                                               \
-     : fighter_kind == Ft_Kind_Zelda && item_index == 1                        \
-         ? It_Kind_Zelda_DinFire_Explode                                       \
-     : fighter_kind == Ft_Kind_CLink && item_index == 0 ? It_Kind_CLink_Bomb   \
-     : fighter_kind == Ft_Kind_CLink && item_index == 1                        \
-         ? It_Kind_CLink_Boomerang                                             \
-     : fighter_kind == Ft_Kind_CLink && item_index == 2 ? It_Kind_CLink_HShot  \
-     : fighter_kind == Ft_Kind_CLink && item_index == 3 ? It_Kind_CLink_Arrow  \
-     : fighter_kind == Ft_Kind_CLink && item_index == 4 ? It_Kind_CLink_Bow    \
-     : fighter_kind == Ft_Kind_DrMario && item_index == 1                      \
-         ? It_Kind_DrMario_Vitamin                                             \
-     : fighter_kind == Ft_Kind_DrMario && item_index == 3                      \
-         ? It_Kind_DrMario_Sheet                                               \
-     : fighter_kind == Ft_Kind_Falco && item_index == 0 ? It_Kind_Falco_Laser  \
-     : fighter_kind == Ft_Kind_Falco && item_index == 1                        \
-         ? It_Kind_Falco_Blaster                                               \
-     : fighter_kind == Ft_Kind_Falco && item_index == 3                        \
-         ? It_Kind_Falco_Phantasm                                              \
-     : fighter_kind == Ft_Kind_Pichu && item_index == 0                        \
-         ? It_Kind_Pichu_Thunder                                               \
-     : fighter_kind == Ft_Kind_Pichu && item_index == 1                        \
-         ? It_Kind_Pichu_TJolt_Ground                                          \
-     : fighter_kind == Ft_Kind_Pichu && item_index == 2                        \
-         ? It_Kind_Pichu_TJolt_Air                                             \
-     : fighter_kind == Ft_Kind_GameWatch && item_index == 0                    \
-         ? It_Kind_GameWatch_Greenhouse                                        \
-     : fighter_kind == Ft_Kind_GameWatch && item_index == 1                    \
-         ? It_Kind_GameWatch_Manhole                                           \
-     : fighter_kind == Ft_Kind_GameWatch && item_index == 2                    \
-         ? It_Kind_GameWatch_Fire                                              \
-     : fighter_kind == Ft_Kind_GameWatch && item_index == 3                    \
-         ? It_Kind_GameWatch_Parachute                                         \
-     : fighter_kind == Ft_Kind_GameWatch && item_index == 4                    \
-         ? It_Kind_GameWatch_Turtle                                            \
-     : fighter_kind == Ft_Kind_GameWatch && item_index == 5                    \
-         ? It_Kind_GameWatch_Breath                                            \
-     : fighter_kind == Ft_Kind_GameWatch && item_index == 6                    \
-         ? It_Kind_GameWatch_Judge                                             \
-     : fighter_kind == Ft_Kind_GameWatch && item_index == 7                    \
-         ? It_Kind_GameWatch_Panic                                             \
-     : fighter_kind == Ft_Kind_GameWatch && item_index == 8                    \
-         ? It_Kind_GameWatch_Chef                                              \
-     : fighter_kind == Ft_Kind_GameWatch && item_index == 9                    \
-         ? It_Kind_GameWatch_Rescue                                            \
-     : fighter_kind == Ft_Kind_MasterH && item_index == 0                      \
-         ? It_Kind_MasterHand_Laser                                            \
-     : fighter_kind == Ft_Kind_MasterH && item_index == 1                      \
-         ? It_Kind_MasterHand_Bullet                                           \
-     : fighter_kind == Ft_Kind_CrezyH && item_index == 0                       \
-         ? It_Kind_CrazyHand_Laser                                             \
-     : fighter_kind == Ft_Kind_CrezyH && item_index == 1                       \
-         ? It_Kind_CrazyHand_Bullet                                            \
-     : fighter_kind == Ft_Kind_CrezyH && item_index == 2                       \
-         ? It_Kind_CrazyHand_Bomb                                              \
-         : It_Kind_None)
+// clang-format off
+#define ftData_ItemKind                                                      \
+    match (fighter_kind, item_index) {                                       \
+        (Ft_Kind_Mario, 0) => It_Kind_Mario_Fire,                            \
+        (Ft_Kind_Mario, 2) => It_Kind_Mario_Cape,                            \
+        (Ft_Kind_Fox, 0) => It_Kind_Fox_Laser,                               \
+        (Ft_Kind_Fox, 1) => It_Kind_Fox_Blaster,                             \
+        (Ft_Kind_Fox, 2) => It_Kind_Fox_Illusion,                            \
+        (Ft_Kind_Kirby, 0) => It_Kind_Kirby_CBeam,                           \
+        (Ft_Kind_Kirby, 1) => It_Kind_Kirby_Hammer,                          \
+        (Ft_Kind_Kirby, 2) => It_Kind_Unk1,                                  \
+        (Ft_Kind_Kirby, 3) => It_Kind_Unk2,                                  \
+        (Ft_Kind_Koopa | Ft_Kind_GKoops, 0) => It_Kind_Koopa_Flame,          \
+        (Ft_Kind_Link, 0) => It_Kind_Link_Bomb,                              \
+        (Ft_Kind_Link, 1) => It_Kind_Link_Boomerang,                         \
+        (Ft_Kind_Link, 2) => It_Kind_Link_HShot,                             \
+        (Ft_Kind_Link, 3) => It_Kind_Link_Arrow,                             \
+        (Ft_Kind_Link, 4) => It_Kind_Link_Bow,                               \
+        (Ft_Kind_Seak, 0) => It_Kind_Seak_NeedleThrow,                       \
+        (Ft_Kind_Seak, 1) => It_Kind_Seak_NeedleHeld,                        \
+        (Ft_Kind_Seak, 2) => It_Kind_Seak_Vanish,                            \
+        (Ft_Kind_Seak, 3) => It_Kind_Seak_Chain,                             \
+        (Ft_Kind_Ness, 0) => It_Kind_Ness_PKFire,                            \
+        (Ft_Kind_Ness, 1) => It_Kind_Ness_PKFire_Flame,                      \
+        (Ft_Kind_Ness, 2) => It_Kind_Ness_PKFlush,                           \
+        (Ft_Kind_Ness, 3) => It_Kind_Ness_PKThunder,                         \
+        (Ft_Kind_Ness, 4) => It_Kind_Ness_PKThunder1,                        \
+        (Ft_Kind_Ness, 5) => It_Kind_Ness_PKThunder2,                        \
+        (Ft_Kind_Ness, 6) => It_Kind_Ness_PKThunder3,                        \
+        (Ft_Kind_Ness, 7) => It_Kind_Ness_PKThunder4,                        \
+        (Ft_Kind_Ness, 8) => It_Kind_Ness_PKFlush_Explode,                   \
+        (Ft_Kind_Ness, 9) => It_Kind_Ness_Bat,                               \
+        (Ft_Kind_Ness, 10) => It_Kind_Ness_Yoyo,                             \
+        (Ft_Kind_Peach, 0) => It_Kind_Peach_Explode,                         \
+        (Ft_Kind_Peach, 1) => It_Kind_Peach_Turnip,                          \
+        (Ft_Kind_Peach, 2) => It_Kind_Peach_Parasol,                         \
+        (Ft_Kind_Peach, 3) => It_Kind_Peach_Toad,                            \
+        (Ft_Kind_Peach, 4) => It_Kind_Peach_ToadSpore,                       \
+        (Ft_Kind_Popo | Ft_Kind_Nana, 0) => It_Kind_IceClimber_Ice,          \
+        (Ft_Kind_Popo | Ft_Kind_Nana, 1) => It_Kind_IceClimber_Blizzard,     \
+        (Ft_Kind_Popo | Ft_Kind_Nana, 2) => It_Kind_IceClimber_GumStrings,   \
+        (Ft_Kind_Pikachu, 0) => It_Kind_Pikachu_Thunder,                     \
+        (Ft_Kind_Pikachu, 1) => It_Kind_Pikachu_TJolt_Ground,                \
+        (Ft_Kind_Pikachu, 2) => It_Kind_Pikachu_TJolt_Air,                   \
+        (Ft_Kind_Samus, 0) => It_Kind_Samus_Bomb,                            \
+        (Ft_Kind_Samus, 1) => It_Kind_Samus_Charge,                          \
+        (Ft_Kind_Samus, 2) => It_Kind_Samus_Missile,                         \
+        (Ft_Kind_Samus, 3) => It_Kind_Samus_GBeam,                           \
+        (Ft_Kind_Yoshi, 0) => It_Kind_Yoshi_EggThrow,                        \
+        (Ft_Kind_Yoshi, 1) => It_Kind_Yoshi_Star,                            \
+        (Ft_Kind_Yoshi, 2) => It_Kind_Yoshi_EggLay,                          \
+        (Ft_Kind_Mewtwo, 0) => It_Kind_Mewtwo_Disable,                       \
+        (Ft_Kind_Mewtwo, 1) => It_Kind_Mewtwo_ShadowBall,                    \
+        (Ft_Kind_Luigi, 0) => It_Kind_Luigi_Fire,                            \
+        (Ft_Kind_Zelda, 0) => It_Kind_Zelda_DinFire,                         \
+        (Ft_Kind_Zelda, 1) => It_Kind_Zelda_DinFire_Explode,                 \
+        (Ft_Kind_CLink, 0) => It_Kind_CLink_Bomb,                            \
+        (Ft_Kind_CLink, 1) => It_Kind_CLink_Boomerang,                       \
+        (Ft_Kind_CLink, 2) => It_Kind_CLink_HShot,                           \
+        (Ft_Kind_CLink, 3) => It_Kind_CLink_Arrow,                           \
+        (Ft_Kind_CLink, 4) => It_Kind_CLink_Bow,                             \
+        (Ft_Kind_DrMario, 1) => It_Kind_DrMario_Vitamin,                     \
+        (Ft_Kind_DrMario, 3) => It_Kind_DrMario_Sheet,                       \
+        (Ft_Kind_Falco, 0) => It_Kind_Falco_Laser,                           \
+        (Ft_Kind_Falco, 1) => It_Kind_Falco_Blaster,                         \
+        (Ft_Kind_Falco, 3) => It_Kind_Falco_Phantasm,                        \
+        (Ft_Kind_Pichu, 0) => It_Kind_Pichu_Thunder,                         \
+        (Ft_Kind_Pichu, 1) => It_Kind_Pichu_TJolt_Ground,                    \
+        (Ft_Kind_Pichu, 2) => It_Kind_Pichu_TJolt_Air,                       \
+        (Ft_Kind_GameWatch, 0) => It_Kind_GameWatch_Greenhouse,              \
+        (Ft_Kind_GameWatch, 1) => It_Kind_GameWatch_Manhole,                 \
+        (Ft_Kind_GameWatch, 2) => It_Kind_GameWatch_Fire,                    \
+        (Ft_Kind_GameWatch, 3) => It_Kind_GameWatch_Parachute,               \
+        (Ft_Kind_GameWatch, 4) => It_Kind_GameWatch_Turtle,                  \
+        (Ft_Kind_GameWatch, 5) => It_Kind_GameWatch_Breath,                  \
+        (Ft_Kind_GameWatch, 6) => It_Kind_GameWatch_Judge,                   \
+        (Ft_Kind_GameWatch, 7) => It_Kind_GameWatch_Panic,                   \
+        (Ft_Kind_GameWatch, 8) => It_Kind_GameWatch_Chef,                    \
+        (Ft_Kind_GameWatch, 9) => It_Kind_GameWatch_Rescue,                  \
+        (Ft_Kind_MasterH, 0) => It_Kind_MasterHand_Laser,                    \
+        (Ft_Kind_MasterH, 1) => It_Kind_MasterHand_Bullet,                   \
+        (Ft_Kind_CrezyH, 0) => It_Kind_CrazyHand_Laser,                      \
+        (Ft_Kind_CrezyH, 1) => It_Kind_CrazyHand_Bullet,                     \
+        (Ft_Kind_CrezyH, 2) => It_Kind_CrazyHand_Bomb,                       \
+        _ => It_Kind_None,                                                   \
+    }
+// clang-format on
 
 union ftData_Item {
     struct UNK_SAMUS_S1* samus_grapple DAT_IF(fighter_kind == Ft_Kind_Samus &&
@@ -2173,56 +2120,40 @@ struct KirbyHatStruct {
 /// The item kind of each article of Kirby's copy abilities (by
 /// @c _index where there are two), as #ftKb_SpecialN_800F16D0's callers pass
 /// them to #it_8026B3F8.
-#define ftKbCopy_ItemKind                                                     \
-    (fighter_kind == Ft_Kind_Mario && _index == 0 ? It_Kind_Kirby_MarioFire   \
-     : fighter_kind == Ft_Kind_Fox && _index == 0 ? It_Kind_Kirby_FoxLaser    \
-     : fighter_kind == Ft_Kind_Fox && _index == 1 ? It_Kind_Kirby_FoxBlaster  \
-     : fighter_kind == Ft_Kind_Koopa && _index == 0                           \
-         ? It_Kind_Kirby_KoopaFlame                                           \
-     : fighter_kind == Ft_Kind_Link && _index == 0 ? It_Kind_Kirby_LinkArrow  \
-     : fighter_kind == Ft_Kind_Link && _index == 1 ? It_Kind_Kirby_LinkBow    \
-     : fighter_kind == Ft_Kind_Seak && _index == 0                            \
-         ? It_Kind_Kirby_SeakNeedleThrow                                      \
-     : fighter_kind == Ft_Kind_Seak && _index == 1                            \
-         ? It_Kind_Kirby_SeakNeedleHeld                                       \
-     : fighter_kind == Ft_Kind_Ness && _index == 0                            \
-         ? It_Kind_Kirby_NessPKFlush                                          \
-     : fighter_kind == Ft_Kind_Ness && _index == 1                            \
-         ? It_Kind_Kirby_NessPKFlush_Explode                                  \
-     : fighter_kind == Ft_Kind_Peach && _index == 0 ? It_Kind_Kirby_PeachToad \
-     : fighter_kind == Ft_Kind_Peach && _index == 1                           \
-         ? It_Kind_Kirby_PeachToadSpore                                       \
-     : fighter_kind == Ft_Kind_Popo && _index == 0                            \
-         ? It_Kind_Kirby_IceClimberIce                                        \
-     : fighter_kind == Ft_Kind_Pikachu && _index == 0                         \
-         ? It_Kind_Kirby_PikachuTJolt_Ground                                  \
-     : fighter_kind == Ft_Kind_Pikachu && _index == 1                         \
-         ? It_Kind_Kirby_PikachuTJolt_Air                                     \
-     : fighter_kind == Ft_Kind_Samus && _index == 0                           \
-         ? It_Kind_Kirby_SamusCharge                                          \
-     : fighter_kind == Ft_Kind_Yoshi && _index == 0                           \
-         ? It_Kind_Kirby_YoshiEggLay                                          \
-     : fighter_kind == Ft_Kind_Mewtwo && _index == 0                          \
-         ? It_Kind_Kirby_MewtwoShadowBall                                     \
-     : fighter_kind == Ft_Kind_Luigi && _index == 0 ? It_Kind_Kirby_LuigiFire \
-     : fighter_kind == Ft_Kind_CLink && _index == 0                           \
-         ? It_Kind_Kirby_CLinkArrow                                           \
-     : fighter_kind == Ft_Kind_CLink && _index == 1 ? It_Kind_Kirby_CLinkBow  \
-     : fighter_kind == Ft_Kind_DrMario && _index == 0                         \
-         ? It_Kind_Kirby_DrMarioVitamin                                       \
-     : fighter_kind == Ft_Kind_Falco && _index == 0                           \
-         ? It_Kind_Kirby_FalcoLaser                                           \
-     : fighter_kind == Ft_Kind_Falco && _index == 1                           \
-         ? It_Kind_Kirby_FalcoBlaster                                         \
-     : fighter_kind == Ft_Kind_Pichu && _index == 0                           \
-         ? It_Kind_Kirby_PichuTJolt_Ground                                    \
-     : fighter_kind == Ft_Kind_Pichu && _index == 1                           \
-         ? It_Kind_Kirby_PichuTJolt_Air                                       \
-     : fighter_kind == Ft_Kind_GameWatch && _index == 0                       \
-         ? It_Kind_Kirby_GameWatchChef                                        \
-     : fighter_kind == Ft_Kind_GameWatch && _index == 1                       \
-         ? It_Kind_Kirby_GameWatchChefPan                                     \
-         : It_Kind_None)
+// clang-format off
+#define ftKbCopy_ItemKind                                                    \
+    match (fighter_kind, _index) {                                           \
+        (Ft_Kind_Mario, 0) => It_Kind_Kirby_MarioFire,                       \
+        (Ft_Kind_Fox, 0) => It_Kind_Kirby_FoxLaser,                          \
+        (Ft_Kind_Fox, 1) => It_Kind_Kirby_FoxBlaster,                        \
+        (Ft_Kind_Koopa, 0) => It_Kind_Kirby_KoopaFlame,                      \
+        (Ft_Kind_Link, 0) => It_Kind_Kirby_LinkArrow,                        \
+        (Ft_Kind_Link, 1) => It_Kind_Kirby_LinkBow,                          \
+        (Ft_Kind_Seak, 0) => It_Kind_Kirby_SeakNeedleThrow,                  \
+        (Ft_Kind_Seak, 1) => It_Kind_Kirby_SeakNeedleHeld,                   \
+        (Ft_Kind_Ness, 0) => It_Kind_Kirby_NessPKFlush,                      \
+        (Ft_Kind_Ness, 1) => It_Kind_Kirby_NessPKFlush_Explode,              \
+        (Ft_Kind_Peach, 0) => It_Kind_Kirby_PeachToad,                       \
+        (Ft_Kind_Peach, 1) => It_Kind_Kirby_PeachToadSpore,                  \
+        (Ft_Kind_Popo, 0) => It_Kind_Kirby_IceClimberIce,                    \
+        (Ft_Kind_Pikachu, 0) => It_Kind_Kirby_PikachuTJolt_Ground,           \
+        (Ft_Kind_Pikachu, 1) => It_Kind_Kirby_PikachuTJolt_Air,              \
+        (Ft_Kind_Samus, 0) => It_Kind_Kirby_SamusCharge,                     \
+        (Ft_Kind_Yoshi, 0) => It_Kind_Kirby_YoshiEggLay,                     \
+        (Ft_Kind_Mewtwo, 0) => It_Kind_Kirby_MewtwoShadowBall,               \
+        (Ft_Kind_Luigi, 0) => It_Kind_Kirby_LuigiFire,                       \
+        (Ft_Kind_CLink, 0) => It_Kind_Kirby_CLinkArrow,                      \
+        (Ft_Kind_CLink, 1) => It_Kind_Kirby_CLinkBow,                        \
+        (Ft_Kind_DrMario, 0) => It_Kind_Kirby_DrMarioVitamin,                \
+        (Ft_Kind_Falco, 0) => It_Kind_Kirby_FalcoLaser,                      \
+        (Ft_Kind_Falco, 1) => It_Kind_Kirby_FalcoBlaster,                    \
+        (Ft_Kind_Pichu, 0) => It_Kind_Kirby_PichuTJolt_Ground,               \
+        (Ft_Kind_Pichu, 1) => It_Kind_Kirby_PichuTJolt_Air,                  \
+        (Ft_Kind_GameWatch, 0) => It_Kind_Kirby_GameWatchChef,               \
+        (Ft_Kind_GameWatch, 1) => It_Kind_Kirby_GameWatchChefPan,            \
+        _ => It_Kind_None,                                                   \
+    }
+// clang-format on
 
 /// @name Kirby's copy abilities
 /// The data of `ftDataKirbyCopy*`, one per fighter he can copy. Most give

@@ -125,6 +125,56 @@ fn macros_resolve_constants() {
 }
 
 #[test]
+fn item_kind_matches_from_dwarf() {
+    use melee_dat::{dwarf::expr::eval, walk::macros};
+
+    let Some(graph) = GRAPH.as_ref() else { return };
+    let macros = macros(graph);
+    for (table, fighter, index, item) in [
+        ("ftData_ItemKind", "Ft_Kind_Koopa", 0, "It_Kind_Koopa_Flame"),
+        (
+            "ftData_ItemKind",
+            "Ft_Kind_GKoops",
+            0,
+            "It_Kind_Koopa_Flame",
+        ),
+        (
+            "ftData_ItemKind",
+            "Ft_Kind_Nana",
+            1,
+            "It_Kind_IceClimber_Blizzard",
+        ),
+        ("ftData_ItemKind", "Ft_Kind_Mario", 1, "It_Kind_None"),
+        (
+            "ftKbCopy_ItemKind",
+            "Ft_Kind_Fox",
+            1,
+            "It_Kind_Kirby_FoxBlaster",
+        ),
+        (
+            "ftKbCopy_ItemKind",
+            "Ft_Kind_GameWatch",
+            1,
+            "It_Kind_Kirby_GameWatchChefPan",
+        ),
+        ("ftKbCopy_ItemKind", "Ft_Kind_Fox", 2, "It_Kind_None"),
+    ] {
+        assert!(macros[table].starts_with("match"));
+        let fighter = eval(&macros, fighter, &|_| None).unwrap();
+        let expected = eval(&macros, item, &|_| None).unwrap();
+        assert_eq!(
+            eval(&macros, table, &|name| match name {
+                "fighter_kind" => Some(fighter),
+                "item_index" | "_index" => Some(index),
+                _ => None,
+            }),
+            Some(expected),
+            "{table}, fighter {fighter}, slot {index}"
+        );
+    }
+}
+
+#[test]
 fn canonical_covers_every_die() {
     let Some(graph) = GRAPH.as_ref() else { return };
     let canonical = Canonical::new(graph);
@@ -238,7 +288,9 @@ fn food_inline_count_from_dwarf_matches_the_archive() {
             };
             enumerators
                 .iter()
-                .find(|e| e.name.map(|n| graph.str(n)) == Some("It_Kind_Foods"))
+                .find(|e| {
+                    e.name.map(|n| graph.str(n)) == Some("It_Kind_Foods")
+                })
                 .map(|e| e.value as u32)
         })
         .unwrap();
@@ -263,7 +315,12 @@ fn food_inline_count_from_dwarf_matches_the_archive() {
     let canonical = Canonical::new(graph);
     let macros = macros(graph);
     let mut walker = Walker::new(graph, &canonical, &macros, &archive);
-    walker.root(attrs, die, "foods", &[("Article::kind".into(), kind.into())]);
+    walker.root(
+        attrs,
+        die,
+        "foods",
+        &[("Article::kind".into(), kind.into())],
+    );
     let walked = walker.finish();
     assert!(walked.issues.is_empty(), "{:?}", walked.issues);
     for i in 0..count {

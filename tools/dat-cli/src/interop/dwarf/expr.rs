@@ -1,4 +1,4 @@
-//! C integer expressions, as found in `dat:if` conditions and macro bodies.
+//! C integer expressions and tuple matches in annotations and macro bodies.
 //!
 //! Parsing produces an [`Expr`]; evaluating it resolves names through the
 //! caller, typically as fields of a record in the data and then as macros
@@ -171,7 +171,10 @@ fn conditional(input: &mut &str) -> ModalResult<Expr> {
     let a = parser(0).parse_next(input)?;
     let branches = opt((
         preceded((multispace0, '?'), cut_err(expr)),
-        preceded(':', cut_err(delimited(multispace0, conditional, multispace0))),
+        preceded(
+            ':',
+            cut_err(delimited(multispace0, conditional, multispace0)),
+        ),
     ))
     .parse_next(input)?;
     Ok(match branches {
@@ -229,23 +232,118 @@ fn parser<'i>(
     }
 }
 
-/// A parenthesized expression, a name, a call, an integer literal, or
-/// `true` or `false`.
+/// A parenthesized expression, a name, a call, a tuple match, an integer
+/// literal, or `true` or `false`.
 fn operand(input: &mut &str) -> ModalResult<Expr> {
     dispatch! {peek(any);
         '(' => delimited('(', expr, cut_err(')')),
         '0'..='9' => integer.map(Expr::Int),
-        _ => (name, opt(preceded(multispace0, arguments))).map(
-            |(name, args): (&str, _)| match (name, args) {
-                (_, Some(args)) => Expr::Call(name.to_owned(), args),
-                // Keywords as of C23
-                ("true", None) => Expr::Int(1),
-                ("false", None) => Expr::Int(0),
-                (_, None) => Expr::Name(name.to_owned()),
-            },
-        ),
+        _ => named_operand,
     }
     .parse_next(input)
+}
+
+fn named_operand(input: &mut &str) -> ModalResult<Expr> {
+    let name = name.parse_next(input)?;
+    if name == "match" {
+        return cut_err(tuple_match).parse_next(input);
+    }
+    let args = opt(preceded(multispace0, arguments)).parse_next(input)?;
+    Ok(match (name, args) {
+        (_, Some(args)) => Expr::Call(name.to_owned(), args),
+        // Keywords as of C23
+        ("true", None) => Expr::Int(1),
+        ("false", None) => Expr::Int(0),
+        (_, None) => Expr::Name(name.to_owned()),
+    })
+}
+
+/// A tuple component: `None` is `_`, otherwise the alternatives to compare.
+type Pattern = Option<Vec<Expr>>;
+
+/// `match (a, b) { (A | B, 0) => x, (_, 1) => y, _ => z }`.
+/// Patterns are integers or names, alternatives (`|`), or a wildcard.
+/// Lower to the existing operators so both walkers use the same semantics:
+/// arms are tried in order and only the selected result is evaluated.
+fn tuple_match(input: &mut &str) -> ModalResult<Expr> {
+    let subjects = preceded(multispace0, arguments).parse_next(input)?;
+    let mut arms: Vec<(Option<Vec<Pattern>>, Expr)> = delimited(
+        (multispace0, '{', multispace0),
+        separated(
+            1..,
+            (
+                preceded(
+                    multispace0,
+                    alt((
+                        '_'.value(None),
+                        delimited(
+                            '(',
+                            separated(1.., pattern, ','),
+                            cut_err((multispace0, ')')),
+                        )
+                        .map(Some),
+                    )),
+                ),
+                preceded((multispace0, "=>"), expr),
+            ),
+            ',',
+        ),
+        (opt(','), multispace0, '}'),
+    )
+    .parse_next(input)?;
+    let Some((None, mut result)) = arms.pop() else {
+        return fail.parse_next(input);
+    };
+    if subjects.is_empty() {
+        return fail.parse_next(input);
+    }
+    for (patterns, value) in arms.into_iter().rev() {
+        let Some(patterns) = patterns else {
+            return fail.parse_next(input);
+        };
+        if patterns.len() != subjects.len() {
+            return fail.parse_next(input);
+        }
+        let condition = patterns
+            .into_iter()
+            .zip(&subjects)
+            .filter_map(|(pattern, subject)| {
+                let values = pattern?;
+                values
+                    .into_iter()
+                    .map(|value| binary(BinaryOp::Eq, subject.clone(), value))
+                    .reduce(|a, b| binary(BinaryOp::Or, a, b))
+            })
+            .reduce(|a, b| binary(BinaryOp::And, a, b))
+            .unwrap_or(Expr::Int(1));
+        result =
+            Expr::Cond(Box::new(condition), Box::new(value), Box::new(result));
+    }
+    Ok(result)
+}
+
+fn pattern(input: &mut &str) -> ModalResult<Pattern> {
+    let values: Vec<Expr> = separated(
+        1..,
+        delimited(
+            multispace0,
+            alt((
+                integer.map(Expr::Int),
+                name.map(|n: &str| Expr::Name(n.into())),
+            )),
+            multispace0,
+        ),
+        '|',
+    )
+    .parse_next(input)?;
+    let wildcard = |v: &Expr| matches!(v, Expr::Name(n) if n == "_");
+    if values.len() == 1 && wildcard(&values[0]) {
+        return Ok(None);
+    }
+    if values.iter().any(wildcard) {
+        return fail.parse_next(input);
+    }
+    Ok(Some(values))
 }
 
 /// A call's parenthesized, comma-separated arguments.
@@ -267,17 +365,16 @@ pub fn call(function: &str, args: &[u64]) -> Option<u64> {
         ("colAnimCommandLength", &[command]) => {
             col_anim_command_length(command)
         }
-        (
-            "GXGetTexBufferSize",
-            &[width, height, format, mipmap, max_lod],
-        ) => gx_get_tex_buffer_size(
-            width as u16,
-            height as u16,
-            format as u32,
-            mipmap as u8,
-            max_lod as u8,
-        )
-        .map(u64::from),
+        ("GXGetTexBufferSize", &[width, height, format, mipmap, max_lod]) => {
+            gx_get_tex_buffer_size(
+                width as u16,
+                height as u16,
+                format as u32,
+                mipmap as u8,
+                max_lod as u8,
+            )
+            .map(u64::from)
+        }
         _ => None,
     }
 }
@@ -473,6 +570,88 @@ mod tests {
         assert_eq!(e("0 ? UNKNOWN : 9"), Some(9));
         assert!(Expr::parse("1 ? 2").is_none());
         assert!(Expr::parse("1 ? : 3").is_none());
+    }
+
+    #[test]
+    fn tuple_matches() {
+        let text = "match (kind, _index) {
+            (A | B, 0) => 10,
+            (_, 1 | 2) => 20,
+            (B, _) => 30,
+            _ => 40,
+        }";
+        let expression = Expr::parse(text).unwrap();
+        let e = |kind, index| {
+            expression.eval(&mut |name| match name {
+                "A" => Some(3),
+                "B" => Some(4),
+                "kind" => Some(kind),
+                "_index" => Some(index),
+                _ => None,
+            })
+        };
+        assert_eq!(e(3, 0), Some(10));
+        assert_eq!(e(4, 0), Some(10));
+        assert_eq!(e(4, 2), Some(20));
+        assert_eq!(e(4, 3), Some(30));
+        assert_eq!(e(5, 0), Some(40));
+        // Lowering uses the existing tree, including first-arm precedence.
+        assert_eq!(
+            expression,
+            Expr::parse(
+                "(kind == A || kind == B) && _index == 0 ? 10 :
+                (_index == 1 || _index == 2) ? 20 : kind == B ? 30 : 40"
+            )
+            .unwrap()
+        );
+        assert_eq!(
+            Expr::parse("1 + match (0) { (1) => 8, _ => 2 } * 3")
+                .unwrap()
+                .eval(&mut |_| None),
+            Some(7)
+        );
+    }
+
+    #[test]
+    fn tuple_matches_short_circuit() {
+        let e = |text| Expr::parse(text).unwrap().eval(&mut |_| None);
+        assert_eq!(
+            e("match (0, UNKNOWN) {
+            (1, 2) => UNKNOWN, (0, _) => 7, _ => UNKNOWN
+        }"),
+            Some(7)
+        );
+        assert_eq!(
+            e("match (0) { (0 | UNKNOWN) => 8, _ => UNKNOWN }"),
+            Some(8)
+        );
+        assert_eq!(e("match (0) { (0) => UNKNOWN, _ => 8 }"), None);
+        assert_eq!(e("match (UNKNOWN) { (0) => 7, _ => 8 }"), None);
+        assert_eq!(
+            e("match (0) {
+            (0) => match (1) { (1) => 9, _ => UNKNOWN }, _ => UNKNOWN
+        }"),
+            Some(9)
+        );
+    }
+
+    #[test]
+    fn rejects_invalid_tuple_matches() {
+        for text in [
+            "match () { _ => 0 }",
+            "match (0) {}",
+            "match (0) { (0) => 1 }",
+            "match (0) { _ => 0, (0) => 1 }",
+            "match (0) { _ => 0, _ => 1 }",
+            "match (0, 1) { (0) => 1, _ => 0 }",
+            "match (0) { (0, 1) => 1, _ => 0 }",
+            "match (0) { (0 |) => 1, _ => 0 }",
+            "match (0) { (_ | 1) => 1, _ => 0 }",
+            "match (0) { (0) -> 1, _ => 0 }",
+            "match (0) { (0) => 1, _ => 0",
+        ] {
+            assert!(Expr::parse(text).is_none(), "{text}");
+        }
     }
 
     #[test]

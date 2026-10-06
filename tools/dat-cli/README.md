@@ -407,6 +407,22 @@ For what C types can't express. From `libs/doldecomp/include/dat_macros.h`;
 they compile to nothing outside the DWARF build. If a type is wrong, fix the
 type instead.
 
+Expressions also support tuple matches for tables of discriminator values:
+
+```c
+#define item_kind \
+    match (fighter_kind, item_index) { \
+        (Ft_Kind_Koopa | Ft_Kind_GKoops, 0) => It_Kind_Koopa_Flame, \
+        _ => It_Kind_None, \
+    }
+```
+
+Each tuple component is an integer or constant name, alternatives separated
+by `|`, or `_` to ignore that component. Arms are tested in order; the last
+must be `_ => value`. Only the selected result is evaluated. This syntax is
+for annotation expressions and their macros, which the tool reads from
+DWARF; it cannot be used in ordinary C code.
+
 | Annotation | Meaning |
 | --- | --- |
 | `DAT_COUNT(n)` | Array of, or pointer to, `n` elements. A fixed array's count must fit its declared bound. On a pointer typedef, `n` is in the bindings, for lists of counted lists. |
