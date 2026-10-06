@@ -20,6 +20,14 @@
   `ftDevice_Callback0`'s `Vec3*` out parameter. That callback type is shared
   by two device tables with different outputs. `grZe_YakumonoParam` hides a
   pointer at 0x2C in `pad_14`.
+- Some earlier by-address roots are misaligned inside data now reached
+  from its real root, e.g. `GrGb_unused_x8E4C8` (`HSD_MatAnimJoint`) in
+  the shapeanim list of the model desc at GrGb 0x8E4F0, and
+  `EfDkData_unused_x9B9C`. Leftover `HSD_ShapeAnimJoint` trees (8-byte
+  `_HSD_ShapeAnim`s that `HSD_MatAnimJoint` misreads) in `EfCoData`,
+  `EfDkData` and `EfMrData` have no root yet. The orphan model desc lists
+  in `PlCl`, `PlLk` and `PlSs` are left out: their animation trees have
+  the `FObjDesc`s noted below.
 - `GrMc.dat`'s `RObjAnimJoint`s at 0x301A4 and 0x301F4 have a third word
   pointing to an `HSD_AObjDesc` nothing else reaches; the code reads only
   two.
