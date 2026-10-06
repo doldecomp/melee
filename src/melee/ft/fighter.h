@@ -231,11 +231,11 @@ struct ftLoadCommonData {
     /* +0C */ float* xC DAT_COUNT(9);
     /* +10 */ FighterPartsTable** parts_table DAT_COUNT(Ft_Kind_Max + 1);
     /* +14 */ struct Fighter_804D6540_t** x14 DAT_COUNT(Ft_Kind_Max + 1);
-    /// Color animations, by id
-    /// @todo Count: the number of color animations.
-    /* +18 */ struct Fighter_804D653C_t* x18 DAT_EXTENT;
-    /// @todo Count.
-    /* +1C */ struct Fighter_804D653C_t* x1C DAT_EXTENT;
+    /// Color animations for IDs below #FtColAnim_SpycloakStart.
+    /* +18 */ struct Fighter_804D653C_t*
+        x18 DAT_COUNT(FtColAnim_SpycloakStart);
+    /// Spycloak animations, IDs 0x7B through 0x80 (#ft_800C0098).
+    /* +1C */ struct Fighter_804D653C_t* x1C DAT_COUNT(6);
     /* +20 */ UNK_T x20;
     /// By #Fighter::dmg's @c x18F8
     /* +24 */ struct ftDamageShifts* x24 DAT_COUNT(3);

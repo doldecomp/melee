@@ -938,9 +938,8 @@ struct ftData {
                                                                _index);
     /* +4C */ FtSFX* x4C_sfx;
     /* +50 */ Vec2* x50;
-    /// Bones, indexed by #Fighter::x2220_b0.
-    /// @todo Count: five in every fighter's data.
-    /* +54 */ int* x54 DAT_EXTENT;
+    /// Bones cycled by #ftCo_8009F834 using #Fighter::x2220_b0.
+    /* +54 */ int* x54 DAT_COUNT(5);
     /* +58 */ struct ftData_x58_t* x58;
     /* +5C */ HSD_Joint* x5C;
 };
