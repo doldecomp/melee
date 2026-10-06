@@ -57,14 +57,14 @@ void ftPk_SpecialN_Anim(Fighter_GObj* gobj)
 
         if (!fp->cmd_vars[ftPk_SpecialN_Cmd1]) {
             fp->cmd_vars[ftPk_SpecialN_Cmd1] = true;
-            pos.x = (fp->x34_scale.y *
-                     (pika_attr->specialn_spawn_offset.x * fp->facing_dir)) +
+            pos.x = (fp->x34_scale.y * (pika_attr->thunderjolt_spawn_offset.x *
+                                        fp->facing_dir)) +
                     fp->cur_pos.x;
-            pos.y = (pika_attr->specialn_spawn_offset.y * fp->x34_scale.y) +
+            pos.y = (pika_attr->thunderjolt_spawn_offset.y * fp->x34_scale.y) +
                     fp->cur_pos.y;
             pos.z = 0.0f;
             itPikachuThunderJolt_Spawn(gobj, &pos, fp->facing_dir,
-                                       pika_attr->specialn_itkind);
+                                       pika_attr->thunderjolt_itkind);
             switch (ftLib_GetKind(gobj)) {
             case Ft_Kind_Pikachu:
                 ft_PlaySFX(fp, 240076, 127, 64);
@@ -98,14 +98,14 @@ void ftPk_SpecialAirN_Anim(HSD_GObj* gobj)
             fp->cmd_vars[ftPk_SpecialN_Cmd1] = 1;
             it_pos.x =
                 (fp->x34_scale.y *
-                 (pika_attr->specialairn_spawn_offset.x * fp->facing_dir)) +
+                 (pika_attr->thunderjoltair_spawn_offset.x * fp->facing_dir)) +
                 fp->cur_pos.x;
             it_pos.y =
-                (pika_attr->specialairn_spawn_offset.y * fp->x34_scale.y) +
+                (pika_attr->thunderjoltair_spawn_offset.y * fp->x34_scale.y) +
                 fp->cur_pos.y;
             it_pos.z = 0.0f;
             itPikachuThunderJolt_Spawn(gobj, &it_pos, fp->facing_dir,
-                                       pika_attr->specialn_itkind);
+                                       pika_attr->thunderjolt_itkind);
             switch (ftLib_GetKind(gobj)) {
             case Ft_Kind_Pikachu:
                 ft_PlaySFX(fp, 240076, 127, 64);

@@ -58,15 +58,16 @@ bool it_802B5518(Item_GObj* gobj, CollData* cd)
     return ret;
 }
 
-HSD_GObj* it_802B55C8(Fighter_GObj* gobj, Vec3* pos, enum Fighter_Part arg2,
-                      s32 arg3, f32 facing_dir)
+// Spawn Samus Chargeshot item
+Item_GObj* it_802B55C8(Fighter_GObj* owner_gobj, Vec3* pos,
+                       Fighter_Part hold_part, ItemKind kind, float facing_dir)
 {
     SpawnItem si;
-    HSD_GObj* n;
+    Item_GObj* n;
 
-    si.kind = arg3;
-    Item_InitSpawnPositionFromParent(&si, gobj, pos);
-    Item_InitSpawnCommonFields(&si, gobj, facing_dir, true);
+    si.kind = kind;
+    Item_InitSpawnPositionFromParent(&si, owner_gobj, pos);
+    Item_InitSpawnCommonFields(&si, owner_gobj, facing_dir, true);
     n = Item_80268B18(&si);
     if (n != NULL) {
         Item* ip = GET_ITEM(n);
@@ -77,12 +78,13 @@ HSD_GObj* it_802B55C8(Fighter_GObj* gobj, Vec3* pos, enum Fighter_Part arg2,
         ip->xDD4_itemVar.samuschargeshot.xDE8 = 0;
         ip->xDD4_itemVar.samuschargeshot.xDE0 = 0.0f;
         ip->xDD4_itemVar.samuschargeshot.xDFC = 0.0f;
-        ip->xDD4_itemVar.samuschargeshot.xE00 = gobj;
-        ip->xDD4_itemVar.samuschargeshot.xE04 = ftLib_GetModelScale(gobj);
+        ip->xDD4_itemVar.samuschargeshot.xE00 = owner_gobj;
+        ip->xDD4_itemVar.samuschargeshot.xE04 =
+            ftLib_GetModelScale(owner_gobj);
         ip->xDD4_itemVar.samuschargeshot.xE2C = 0.0f;
         ip->xDD4_itemVar.samuschargeshot.xE30 = 0.0f;
         ip->xDD4_itemVar.samuschargeshot.xE34 = 0.0f;
-        Item_8026AB54(n, gobj, arg2);
+        Item_8026AB54(n, owner_gobj, hold_part);
     }
     return n;
 }

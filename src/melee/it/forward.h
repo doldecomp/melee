@@ -232,9 +232,9 @@ typedef enum ItemKind {
     It_Kind_Yoshi_EggThrow,            // Yoshi's Egg (thrown)
     It_Kind_Yoshi_EggLay,              // Yoshi's Egg Lay???
     It_Kind_Yoshi_Star,                // Yoshi's Star
-    It_Kind_Pikachu_TJolt_Ground,      // Pikachu's thunder (B)
+    It_Kind_Pikachu_TJolt_Ground,      // Pikachu's ThunderJolt (B)
     It_Kind_Pikachu_TJolt_Air,         // Pikachu's thunder (B)
-    It_Kind_Pichu_TJolt_Ground,        // Pichu's thunder (B)
+    It_Kind_Pichu_TJolt_Ground,        // Pichu's ThunderJolt (B)
     It_Kind_Pichu_TJolt_Air,           // Pichu's thunder (B)
     It_Kind_Samus_Bomb,                // Samus's bomb
     It_Kind_Samus_Charge,              // Samus's chargeshot
@@ -290,9 +290,9 @@ typedef enum ItemKind {
     It_Kind_Kirby_MewtwoShadowBall,    // Kirby copy Mewtwo's Shadowball (B)
     It_Kind_Kirby_NessPKFlush,         // Kirby copy PK Flash (B)
     It_Kind_Kirby_NessPKFlush_Explode, // Kirby copy PK Flash Explosion (B)
-    It_Kind_Kirby_PikachuTJolt_Ground, // Kirby copy Pikachu's Thunder (B)
+    It_Kind_Kirby_PikachuTJolt_Ground, // Kirby copy Pikachu's ThunderJolt (B)
     It_Kind_Kirby_PikachuTJolt_Air,    // Kirby copy Pikachu's Thunder (B)
-    It_Kind_Kirby_PichuTJolt_Ground,   // Kirby copy Pichu's Thunder (B)
+    It_Kind_Kirby_PichuTJolt_Ground,   // Kirby copy Pichu's ThunderJolt (B)
     It_Kind_Kirby_PichuTJolt_Air,      // Kirby copy Pichu's Thunder (B)
     It_Kind_Kirby_SamusCharge,         // Kirby copy Samus' Chargeshot (B)
     It_Kind_Kirby_SeakNeedleThrow, // Kirby copy Sheik's Needle (thrown) (B)

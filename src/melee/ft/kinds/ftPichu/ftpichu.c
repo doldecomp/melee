@@ -6,7 +6,6 @@
 
 #include <stdbool.h>
 
-#include "types.h"
 #include <melee/ft/fighter.h>
 #include <melee/ft/ftcamera.h>
 #include <melee/ft/ftparts.h>
@@ -349,10 +348,10 @@ void ftPc_Init_OnLoad(HSD_GObj* gobj)
     ftPk_Init_OnLoadForPichu(fp);
 
     {
-        ftPichuAttributes* attrs = fp->dat_attrs;
-        it_8026B3F8(items[0].article, attrs->xDC);
-        it_8026B3F8(items[1].article, attrs->x14);
-        it_8026B3F8(items[2].article, attrs->x18);
+        ftPikachuAttributes* attrs = fp->dat_attrs;
+        it_8026B3F8(items[0].article, attrs->thunder_itkind);
+        it_8026B3F8(items[1].article, attrs->thunderjolt_itkind);
+        it_8026B3F8(items[2].article, attrs->thunderjoltair_itkind);
     }
 }
 

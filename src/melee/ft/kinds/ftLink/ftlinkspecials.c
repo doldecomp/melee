@@ -175,9 +175,9 @@ void onAccessory4(HSD_GObj* gobj)
         lb_8000B1CC(fp->parts[ftParts_GetBoneIndex(fp, FtPart_LThumbNb)].joint,
                     NULL, &pos);
         {
-            HSD_GObj* boomerang_gobj = it_802A013C(
+            Item_GObj* boomerang_gobj = it_802A013C(
                 fp->facing_dir, gobj, &pos,
-                ftParts_GetBoneIndex(fp, FtPart_LThumbNb), da->x2C);
+                ftParts_GetBoneIndex(fp, FtPart_LThumbNb), da->boomerang_kind);
             fp->x1984_heldItemSpec = boomerang_gobj;
             fp->u.lk.boomerang_gobj = boomerang_gobj;
             if (boomerang_gobj != NULL) {

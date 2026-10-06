@@ -43,8 +43,9 @@ s32 it_802B1DEC(Item_GObj* arg0)
     return GET_ITEM(arg0)->xDD4_itemVar.pikachuthunder.x4;
 }
 
+// Spawn Thunder item
 Item_GObj* it_802B1DF8(Item_GObj* owner, Vec3* pos, Vec3* vel, s32 count,
-                       s32 delay, s32 kind)
+                       s32 delay, ItemKind kind)
 {
     SpawnItem spawn;
     u8 _pad[4];

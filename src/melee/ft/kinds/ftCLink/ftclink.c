@@ -308,13 +308,15 @@ void ftCl_Init_OnDeath(Fighter_GObj* gobj)
     ftParts_80074A4C(gobj, 2, 0);
     fp->u.lk.used_boomerang = false;
     fp->u.lk.boomerang_gobj = NULL;
-    fp->u.lk.xC = NULL;
+    fp->u.lk.hookshot_gobj = NULL;
     fp->u.lk.arrow_gobj = NULL;
-    fp->u.lk.x14 = NULL;
-    fp->u.lk.xC = NULL;
-    fp->u.lk.x18 = NULL;
+    fp->u.lk.bow_gobj = NULL;
+    fp->u.lk.hookshot_gobj = NULL;
+    fp->u.lk.milk_gobj = NULL;
 }
 
+/// @remark Similar to ftLk_Init_OnLoad, but not sure if code can/should be
+/// reused
 void ftCl_Init_OnLoad(HSD_GObj* gobj)
 {
     u8 _[8];
@@ -329,11 +331,11 @@ void ftCl_Init_OnLoad(HSD_GObj* gobj)
         lbAnim_8001E8F8(ftData_80085E50(fp, 72));
     ftLk_Init_OnLoadForCLink(fp);
     ea = fp->dat_attrs;
-    it_8026B3F8(items[0].article, ea->x48);
-    it_8026B3F8(items[1].article, ea->x2C);
-    it_8026B3F8(items[2].article, ea->xBC);
-    it_8026B3F8(items[3].article, ea->xC);
-    it_8026B3F8(items[4].article, ea->x10);
+    it_8026B3F8(items[0].article, ea->bomb_kind);
+    it_8026B3F8(items[1].article, ea->boomerang_kind);
+    it_8026B3F8(items[2].article, ea->hookshot_kind);
+    it_8026B3F8(items[3].article, ea->arrow_kind);
+    it_8026B3F8(items[4].article, ea->bow_kind);
     it_8026B3F8(items[5].article, It_Kind_CLink_Milk);
     ftParts_800753D4(fp, Fighter_804D6540[fp->kind]->x0, items[6].joint);
 }
@@ -447,7 +449,7 @@ bool ftCl_Init_8014920C(HSD_GObj* gobj)
     if (temp_r0 != 342 && temp_r0 != 343) {
         return true;
     }
-    if (fp->u.lk.x18 == NULL) {
+    if (fp->u.lk.milk_gobj == NULL) {
         return true;
     }
     return false;
@@ -464,8 +466,8 @@ void ftCl_Init_801492C4(HSD_GObj* gobj)
 {
     if (gobj != NULL) {
         Fighter* fp = GET_FIGHTER(gobj);
-        if (fp != NULL && fp->u.lk.x18 != NULL) {
-            fp->u.lk.x18 = NULL;
+        if (fp != NULL && fp->u.lk.milk_gobj != NULL) {
+            fp->u.lk.milk_gobj = NULL;
         };
 
         if (gobj == NULL) {

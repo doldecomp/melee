@@ -262,11 +262,11 @@ void ftSs_Init_OnDeath(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftParts_80074A4C(gobj, 0, 0);
-    fp->u.ss.x222C = NULL;
+    fp->u.ss.chargeshot_gobj = NULL;
     fp->u.ss.x2230 = 0;
     fp->u.ss.x2238 = 0;
     fp->u.ss.x2244 = 0;
-    fp->u.ss.x223C = NULL;
+    fp->u.ss.tether_gobj = NULL;
     fp->u.ss.x2240 = 0;
 }
 

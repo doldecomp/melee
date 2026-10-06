@@ -31,8 +31,8 @@ bool fn_800D9558(Fighter_GObj* gobj)
         grav = fp->mv.ca.specials.grav;
         if (grav == (f32) attrs->x9C) {
             lb_8000B1CC(fp->parts[51].joint, NULL, &bonePos);
-            fp->u.ss.x223C = it_802B7C18(gobj, &bonePos, fp->facing_dir);
-            if (fp->u.ss.x223C == NULL) {
+            fp->u.ss.tether_gobj = it_802B7C18(gobj, &bonePos, fp->facing_dir);
+            if (fp->u.ss.tether_gobj == NULL) {
                 ft_8008A2BC(gobj);
                 return 1;
             }
@@ -42,8 +42,8 @@ bool fn_800D9558(Fighter_GObj* gobj)
         } else if (grav > (f32) attrs->x9C) {
             if (grav <= (f32) attrs->xA8) {
                 Item* it;
-                it = fp->u.ss.x223C->user_data;
-                item = fp->u.ss.x223C;
+                it = fp->u.ss.tether_gobj->user_data;
+                item = fp->u.ss.tether_gobj;
                 grappleAttrs =
                     &it->xC4_article_data->x4_specialAttributes->samus_grapple;
                 if (item != NULL) {
@@ -77,7 +77,7 @@ bool fn_800D9558(Fighter_GObj* gobj)
                                             joint->mtx[0][3],
                                         my))
                     {
-                        it_802B7B84(fp->u.ss.x223C);
+                        it_802B7B84(fp->u.ss.tether_gobj);
                         ft_8008A2BC(gobj);
                         return 1;
                     }
@@ -89,7 +89,7 @@ bool fn_800D9558(Fighter_GObj* gobj)
                 } else if (grav == (f32) attrs->xA4) {
                     it_802BAA58(item);
                 } else if (grav == (f32) attrs->xA8) {
-                    it_802B7B84(fp->u.ss.x223C);
+                    it_802B7B84(fp->u.ss.tether_gobj);
                 }
             }
         }
@@ -121,8 +121,8 @@ bool fn_800D9930(Fighter_GObj* gobj)
         grav = fp->mv.ca.specials.grav;
         if (grav == (f32) attrs->xAC) {
             lb_8000B1CC(fp->parts[51].joint, NULL, &bonePos);
-            fp->u.ss.x223C = it_802B7C18(gobj, &bonePos, fp->facing_dir);
-            if (fp->u.ss.x223C == NULL) {
+            fp->u.ss.tether_gobj = it_802B7C18(gobj, &bonePos, fp->facing_dir);
+            if (fp->u.ss.tether_gobj == NULL) {
                 ft_8008A2BC(gobj);
                 return 1;
             }
@@ -132,8 +132,8 @@ bool fn_800D9930(Fighter_GObj* gobj)
         } else if (grav > (f32) attrs->xAC) {
             if (grav <= (f32) attrs->xB8) {
                 Item* it;
-                it = fp->u.ss.x223C->user_data;
-                item = fp->u.ss.x223C;
+                it = fp->u.ss.tether_gobj->user_data;
+                item = fp->u.ss.tether_gobj;
                 grappleAttrs =
                     &it->xC4_article_data->x4_specialAttributes->samus_grapple;
                 if (item != NULL) {
@@ -163,7 +163,7 @@ bool fn_800D9930(Fighter_GObj* gobj)
                 } else if (grav == (f32) attrs->xB4) {
                     it_802BAA58(item);
                 } else if (grav == (f32) attrs->xB8) {
-                    it_802B7B84(fp->u.ss.x223C);
+                    it_802B7B84(fp->u.ss.tether_gobj);
                 }
             }
         }
@@ -176,7 +176,7 @@ void fn_800D9C64(Fighter_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
 
     if (fp->kind == Ft_Kind_Samus) {
-        it_802B7B84(fp->u.ss.x223C);
+        it_802B7B84(fp->u.ss.tether_gobj);
     }
 }
 
@@ -184,9 +184,9 @@ void ftCo_800D9C98(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    if (fp->u.ss.x223C != NULL) {
-        it_802B7B84(fp->u.ss.x223C);
-        fp->u.ss.x223C = NULL;
+    if (fp->u.ss.tether_gobj != NULL) {
+        it_802B7B84(fp->u.ss.tether_gobj);
+        fp->u.ss.tether_gobj = NULL;
     }
 
     fp->death2_cb = NULL;

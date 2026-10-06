@@ -143,8 +143,8 @@ static inline HSD_JObj* it_802A013C_LoadAnim(itLinkBoomerangAttributes* attrs,
     return jobj;
 }
 
-HSD_GObj* it_802A013C(f32 facing_dir, Fighter_GObj* owner_gobj, Vec3* pos,
-                      Fighter_Part part, s32 kind)
+Item_GObj* it_802A013C(f32 facing_dir, Fighter_GObj* owner_gobj, Vec3* pos,
+                       Fighter_Part part, ItemKind kind)
 {
     Item_GObj* gobj;
     SpawnItem spawn;
@@ -248,8 +248,8 @@ void it_802A0534(Item_GObj* gobj, Vec3* arg1, f32 angle)
     ip->xDD4_itemVar.linkboomerang.xF74 = angle;
     norm_xF74_from_angle(ip, angle);
     ip->xB8_itemLogicTable->thrown(gobj);
-    mtx = (ftLib_GetPartJObj(ip->xDD4_itemVar.linkboomerang.xF98, ip->xDC4))
-              ->mtx;
+    mtx =
+        ftLib_GetPartJObj(ip->xDD4_itemVar.linkboomerang.xF98, ip->xDC4)->mtx;
     HSD_MtxGetRotation(mtx, (Vec3*) &stack.quad); // kinda sus
     it_8027429C(gobj, arg1);
     it_8026B3A8(gobj);

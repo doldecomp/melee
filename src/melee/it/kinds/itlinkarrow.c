@@ -1,5 +1,7 @@
 #include "itlinkarrow.h"
 
+#include <melee/it/forward.h>
+
 #include <math.h>
 
 #include "inlines.h"
@@ -176,30 +178,31 @@ void it_802A8398(Item_GObj* gobj, Vec3* pos, Vec3* pos2)
     }
 }
 
-HSD_GObj* it_802A83E0(f32 facing_dir, Fighter_GObj* arg1, Vec3* arg2,
-                      Fighter_Part arg3, s32 arg4)
+// Spawn Link arrow
+Item_GObj* it_802A83E0(f32 facing_dir, Fighter_GObj* owner_gobj,
+                       Vec3* init_pos, Fighter_Part hold_part, ItemKind kind)
 {
     SpawnItem spawn;
     Item_GObj* gobj;
     Item* item;
     itLinkArrowAttributes* attr;
 
-    arg2->z = 0.0f;
-    spawn.kind = (ItemKind) arg4;
-    Item_InitSpawnPosition(&spawn, arg2, false);
-    Item_InitSpawnCommonFields(&spawn, arg1, facing_dir, true);
+    init_pos->z = 0.0f;
+    spawn.kind = kind;
+    Item_InitSpawnPosition(&spawn, init_pos, false);
+    Item_InitSpawnCommonFields(&spawn, owner_gobj, facing_dir, true);
     gobj = Item_80268B18(&spawn);
 
     if (gobj != NULL) {
         item = GET_ITEM(gobj);
         attr = &item->xC4_article_data->x4_specialAttributes->link_arrow;
         Item_ClearCmdVars(item);
-        it_80275158(gobj, attr->x0);
+        it_80275158(gobj, attr->lifetime);
         item->xDD4_itemVar.linkarrow.xA0 = 0;
         item->xDD4_itemVar.linkarrow.xB0 = 0;
         item->xDD4_itemVar.linkarrow.xB4[1] = NULL;
         item->xDD4_itemVar.linkarrow.xB4[0] = NULL;
-        item->xDD4_itemVar.linkarrow.xE0 = arg1;
+        item->xDD4_itemVar.linkarrow.xE0 = owner_gobj;
         item->xDD4_itemVar.linkarrow.xC0 =
             ftLib_GetModelScale(item->xDD4_itemVar.linkarrow.xE0);
         item->xDD4_itemVar.linkarrow.xE4 = -1;
@@ -207,8 +210,8 @@ HSD_GObj* it_802A83E0(f32 facing_dir, Fighter_GObj* arg1, Vec3* arg2,
         item->xDD4_itemVar.linkarrow.xE8 = 0.0f;
         /// @todo Use Item_AttachToParent when it inlines here without growing
         /// the stack frame.
-        Item_8026AB54(gobj, arg1, arg3);
-        db_80225DD8(gobj, arg1);
+        Item_8026AB54(gobj, owner_gobj, hold_part);
+        db_80225DD8(gobj, owner_gobj);
     }
     return gobj;
 }
@@ -259,7 +262,7 @@ bool itLinkArrow_802A850C(Item_GObj* gobj, Vec3* arg1, Vec3* arg2, f32 arg3,
     PAD_STACK(12);
 
     ip->xDD4_itemVar.linkarrow.x94 = arg3;
-    it_80275158(gobj, attr->x0 + attr->x18);
+    it_80275158(gobj, attr->lifetime + attr->x18);
     ip->xDD4_itemVar.linkarrow.xAC = arg4;
 
     if ((ip->xDD4_itemVar.linkarrow.xE0 != NULL) &&
@@ -416,7 +419,7 @@ void it_802A8C7C(HSD_GObj* gobj)
     itLinkArrowAttributes* attr;
     item = GET_ITEM(gobj);
     attr = &item->xC4_article_data->x4_specialAttributes->link_arrow;
-    it_80275158(gobj, attr->x0);
+    it_80275158(gobj, attr->lifetime);
     Item_80268E5C(gobj, 1, ITEM_ANIM_UPDATE);
 }
 

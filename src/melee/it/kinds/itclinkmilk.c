@@ -14,7 +14,9 @@ ItemStateTable it_803F7A28[] = {
       itClinkmilk_UnkMotion1_Coll },
 };
 
-HSD_GObj* it_802C8B28(Item_GObj* parent, Vec3* pos, u32 bone, float facing_dir)
+// Spawn CLink Milk item
+Item_GObj* it_802C8B28(Item_GObj* parent, Vec3* pos, u32 bone,
+                       float facing_dir)
 {
     Item_GObj* item_gobj;
     SpawnItem spawn;

@@ -425,7 +425,7 @@ void it_802B7B84(Item_GObj* gobj)
                 Fighter* fp = GET_FIGHTER(ip->xDD4_itemVar.samusgrapple.x8);
                 if (fp != NULL) {
                     ip->xDD4_itemVar.samusgrapple.unk_10 = NULL;
-                    fp->u.ss.x223C = 0;
+                    fp->u.ss.tether_gobj = 0;
                     fp->accessory2_cb = 0;
                     fp->death1_cb = 0;
                     fp->accessory3_cb = 0;
@@ -1064,7 +1064,7 @@ s32 it_802B9328(ItemLink* link, Vec3* pos, itSamusGrappleAttributes* attrs,
     u8 _padA[0x10];
     ItemLink* cur;
     ItemLink* next;
-    Item* grapple_ip = fp->u.ss.x223C->user_data;
+    Item* grapple_ip = fp->u.ss.tether_gobj->user_data;
     ftSs_DatAttrs* da = fp->ft_data->ext_attr;
     Vec3 dir;
     Vec3 d2;
@@ -1183,7 +1183,7 @@ s32 it_802B99A0(ItemLink* link, Vec3* pos, itSamusGrappleAttributes* attrs,
 {
     u8 _pad[8];
     Vec3 dir;
-    Item* grapple_ip = fp->u.ss.x223C->user_data;
+    Item* grapple_ip = fp->u.ss.tether_gobj->user_data;
     ItemLink* cur;
     ItemLink* next;
     s32 result;
@@ -1263,7 +1263,7 @@ void it_802B9CE8(ItemLink* link, Vec3* pos, itSamusGrappleAttributes* attrs,
 {
     ItemLink* prev;
     f32 d;
-    Item* grapple_ip = fp->u.ss.x223C->user_data;
+    Item* grapple_ip = fp->u.ss.tether_gobj->user_data;
     Fighter* fp2; // permuterslop
     u8 _pad[4];
     Vec3* dir_ptr;
@@ -1693,8 +1693,8 @@ void it_802BABB8(Item_GObj* gobj)
 void it_802BAC3C(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if (fp->u.ss.x223C != NULL) {
-        it_802B7B84(fp->u.ss.x223C);
+    if (fp->u.ss.tether_gobj != NULL) {
+        it_802B7B84(fp->u.ss.tether_gobj);
         return;
     }
     fp->accessory2_cb = NULL;
@@ -1705,10 +1705,10 @@ void it_802BAC3C(Fighter_GObj* gobj)
 void it_802BAC80(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if (fp->u.ss.x223C != NULL) {
-        Item* ip = GET_ITEM(fp->u.ss.x223C);
+    if (fp->u.ss.tether_gobj != NULL) {
+        Item* ip = GET_ITEM(fp->u.ss.tether_gobj);
         if (ip->xDD4_itemVar.samusgrapple.unk_10) {
-            ip->xDD4_itemVar.samusgrapple.unk_10(fp->u.ss.x223C);
+            ip->xDD4_itemVar.samusgrapple.unk_10(fp->u.ss.tether_gobj);
         }
     }
 }
@@ -1721,8 +1721,8 @@ void it_802BACC4(Fighter_GObj* gobj)
     Mtx m;
     Mtx m2;
 
-    if (fp->u.ss.x223C != NULL) {
-        Item* ip = GET_ITEM(fp->u.ss.x223C);
+    if (fp->u.ss.tether_gobj != NULL) {
+        Item* ip = GET_ITEM(fp->u.ss.tether_gobj);
         itSamusGrappleAttributes* attrs =
             &ip->xC4_article_data->x4_specialAttributes->samus_grapple;
         ItemLink* link = ip->xDD4_itemVar.samusgrapple.x0;
@@ -1730,7 +1730,7 @@ void it_802BACC4(Fighter_GObj* gobj)
         samus_grapple_setup_pos(link, &pos, m);
 
         if (it_802BA760(link, &pos, attrs, fp)) {
-            fn_802B7E34_inline(fp->u.ss.x223C, ip, m2);
+            fn_802B7E34_inline(fp->u.ss.tether_gobj, ip, m2);
         } else {
             it_802A7168(ip, &pos, fp->x34_scale.y);
         }

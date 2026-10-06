@@ -51,13 +51,13 @@ void fn_800DB6C8(Fighter_GObj* gobj)
         break;
     case Ft_Kind_Link:
     case Ft_Kind_CLink:
-        if (victim_fp->u.lk.xC != NULL) {
-            it_802A7840((HSD_GObj*) victim_fp->u.lk.xC);
+        if (victim_fp->u.lk.hookshot_gobj != NULL) {
+            it_802A7840((HSD_GObj*) victim_fp->u.lk.hookshot_gobj);
         }
         break;
     case Ft_Kind_Samus:
-        if (victim_fp->u.ss.x223C != NULL) {
-            it_802BAA94(victim_fp->u.ss.x223C);
+        if (victim_fp->u.ss.tether_gobj != NULL) {
+            it_802BAA94(victim_fp->u.ss.tether_gobj);
         }
         break;
     default:

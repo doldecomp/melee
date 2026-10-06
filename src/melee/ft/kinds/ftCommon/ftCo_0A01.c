@@ -2811,6 +2811,7 @@ bool ftCo_800A59C0(Item* ip)
     return false;
 }
 
+// Check if the item is swingable
 bool ftCo_800A59E4(Item* ip)
 {
     if (ip == NULL) {

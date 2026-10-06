@@ -28,11 +28,11 @@
 /* 802A2474 */ void it_802A2474(void* arg0);
 /* 802A24A0 */ void it_802A24A0(HSD_GObj* gobj, intptr_t arg1);
 /* 802A24D0 */ void it_802A24D0(ItemLink* arg0, f32 arg8);
-/* 802A2568 */ HSD_JObj* it_802A2568(Item* arg0, HSD_JObj* arg1, s32 arg2,
+/* 802A2568 */ HSD_JObj* it_802A2568(Item* arg0, HSD_JObj* arg1, bool chk,
                                      f32 arg8);
 /* 802A2B10 */ void it_802A2B10(Item_GObj* gobj);
 /* 802A2BA4 */ Item_GObj* it_802A2BA4(Fighter_GObj* arg0, Vec3* arg1, f32 arg2,
-                                      s32 arg3);
+                                      ItemKind kind);
 /* 802A2D88 */ bool itLinkhookshot_UnkMotion8_Anim(Item_GObj* arg0);
 /* 802A2ED0 */ void itLinkhookshot_UnkMotion0_Phys(Item_GObj* arg0);
 /* 802A2EE4 */ void it_802A2EE4(Item_GObj* arg0);

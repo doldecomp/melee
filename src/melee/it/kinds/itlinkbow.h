@@ -6,8 +6,8 @@
 
 #include <melee/it/kinds/types.h>
 
-/* 2AF1A4 */ HSD_GObj* it_802AF1A4(f32, Fighter_GObj*, Vec3*, Fighter_Part,
-                                   int);
+/* 2AF1A4 */ Item_GObj* it_802AF1A4(f32, Fighter_GObj*, Vec3*, Fighter_Part,
+                                    ItemKind);
 /* 2AF298 */ void itLinkBow_Logic100_Destroyed(Item_GObj*);
 /* 2AF304 */ void it_802AF304(Item_GObj*);
 /* 2AF434 */ void itLinkBow_Logic100_PickedUp(Item_GObj*);

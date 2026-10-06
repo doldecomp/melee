@@ -18,7 +18,7 @@
 #include <sysdolphin/baselib/jobj.h>
 
 typedef struct itCLinkMilk_ItemVars {
-    /* +0 ip+DD4 */ Fighter_GObj* x0;
+    /* +0 ip+DD4 */ Fighter_GObj* x0; // owner GObj?
 } itCLinkMilk_ItemVars;
 
 typedef struct itClimbersBlizzard_ItemVars {
@@ -338,7 +338,7 @@ ASSERT_SIZE(struct ItemLink, 0x1D8);
 typedef struct {
     ItemLink* x0;
     ItemLink* x4;
-    HSD_GObj* x8;
+    HSD_GObj* x8; // Owner GObj?
     HSD_JObj* xC;
     void (*x10)(Item_GObj*);
     u8 x14;
@@ -405,7 +405,7 @@ typedef struct itLinkBombAttributes {
     /* x0 */ u32 lifetime;
     /* x4 */ f32 x4;
     /* x8 */ f32 x8;
-    /* xC */ u32 xC;
+    /* xC */ u32 xC; // time alive?
     /* x10 */ s32 x10;
     /* x14 */ f32 x14;
     /* x18 */ f32 x18;
@@ -494,7 +494,7 @@ typedef struct {
     f32 xAC;
     s32 xB0;
     HSD_JObj* xB4[3];
-    f32 xC0;
+    f32 xC0; // scale?
     HSD_GObj* xC4;
     f32 xC8;
     f32 xCC;
@@ -502,7 +502,7 @@ typedef struct {
     f32 xD4;
     f32 xD8;
     f32 xDC;
-    HSD_GObj* xE0;
+    HSD_GObj* xE0; // Owner's GObj?
     int xE4;
     f32 xE8;
     f32 xEC;
@@ -510,7 +510,7 @@ typedef struct {
 } itLinkArrow_ItemVars;
 
 typedef struct {
-    f32 x0;
+    f32 lifetime;
     f32 x4;
     f32 x8;
     f32 xC;
@@ -525,8 +525,8 @@ typedef struct {
 } itLinkArrowAttributes;
 
 typedef struct {
-    f32 x0;
-    HSD_GObj* x4;
+    f32 x0;       // scale?
+    HSD_GObj* x4; // Owner gobj?
 } itLinkBow_ItemVars;
 
 typedef struct itMasterHandBullet_ItemVars {
@@ -608,7 +608,7 @@ typedef struct itPikachuthunder_ItemVars {
 } itPikachuthunder_ItemVars;
 
 typedef struct itPikachutJoltGroundAttributes {
-    /* +0 */ f32 x0;
+    /* +0 */ f32 lifetime;
     /* +4 */ f32 x4;
     /* +8 */ f32 x8;
     /* +C */ f32 xC;
@@ -647,8 +647,8 @@ typedef struct itSamusChargeshot_ItemVars {
     /* +20 +DF4 */ s32 xDF4;
     /* +24 +DF8 */ s32 xDF8;
     /* +28 +DFC */ s32 xDFC;
-    /* +2C +E00 */ Fighter_GObj* xE00;
-    /* +30 +E04 */ f32 xE04;
+    /* +2C +E00 */ Fighter_GObj* xE00; // owner gobj?
+    /* +30 +E04 */ f32 xE04;           // scale?
     /* +34 +E08 */ u32 pad1[9];
     /* +78 +E2C */ f32 xE2C;
     /* +7C +E30 */ f32 xE30;

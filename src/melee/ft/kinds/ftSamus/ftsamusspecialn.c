@@ -45,8 +45,8 @@ void ftSs_SpecialN_801291F0(HSD_GObj* gobj)
 
     if (gobj) {
         Fighter* fp = GET_FIGHTER(gobj);
-        if (fp->u.ss.x222C) {
-            fp->u.ss.x222C = 0;
+        if (fp->u.ss.chargeshot_gobj) {
+            fp->u.ss.chargeshot_gobj = NULL;
         }
         ftSamus_destroyAllEF(gobj);
     }
@@ -74,7 +74,7 @@ static bool ftSs_SpecialN_801292E4(HSD_GObj* gobj)
 
     Fighter* fp = getFighter(gobj);
 
-    if ((fp->cmd_vars[0] == 1U) && (!fp->u.ss.x222C)) {
+    if ((fp->cmd_vars[0] == 1U) && (!fp->u.ss.chargeshot_gobj)) {
         fp->cmd_vars[0] = 0U;
         vec2.z = 4;
         vec2.y = 0;
@@ -83,11 +83,11 @@ static bool ftSs_SpecialN_801292E4(HSD_GObj* gobj)
         vec1.z = 0;
         result = it_802B55C8(gobj, &vec1, FtPart_RHandNb, It_Kind_Samus_Charge,
                              fp->facing_dir);
-        fp->u.ss.x222C = result;
+        fp->u.ss.chargeshot_gobj = result;
         if (result != NULL) {
             ftSamus_updateDamageDeathCBs(gobj);
         } else {
-            fp->u.ss.x222C = 0U;
+            fp->u.ss.chargeshot_gobj = NULL;
             return true;
         }
     }
@@ -105,7 +105,7 @@ static void ftSs_SpecialN_801293BC(HSD_GObj* gobj)
     fp = getFighterPlus(gobj);
     samus_attr = fp->dat_attrs;
 
-    if ((fp->cmd_vars[1] == 1) && (fp->u.ss.x222C)) {
+    if ((fp->cmd_vars[1] == 1) && fp->u.ss.chargeshot_gobj) {
         Vec3 vec1;
         u32 x2230;
 
@@ -119,7 +119,8 @@ static void ftSs_SpecialN_801293BC(HSD_GObj* gobj)
             var_f0 = M_PI;
         }
         x2230 = fp->u.ss.x2230;
-        it_802B56E4(fp->u.ss.x222C, &vec1, var_f0, x2230, samus_attr->x18);
+        it_802B56E4(fp->u.ss.chargeshot_gobj, &vec1, var_f0, x2230,
+                    samus_attr->x18);
         if ((fp->motion_id == 348) || (fp->ground_or_air == GA_Air)) {
             u8 unused1[28];
             ftSamus_801293BC_inner(gobj);
