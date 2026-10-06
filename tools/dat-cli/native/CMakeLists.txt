@@ -114,6 +114,11 @@ target_link_libraries(dat_unit PRIVATE dat_native)
 set_target_properties(dat_unit PROPERTIES C_STANDARD 11 C_EXTENSIONS ON)
 add_test(NAME unit COMMAND dat_unit)
 
+add_executable(dat_raw_refs tests/raw_refs.c)
+target_link_libraries(dat_raw_refs PRIVATE dat_native)
+set_target_properties(dat_raw_refs PROPERTIES C_STANDARD 11 C_EXTENSIONS ON)
+add_test(NAME raw_refs COMMAND dat_raw_refs)
+
 add_custom_command(
     OUTPUT expect.txt
     COMMAND "${_dat_tool}" native expect
