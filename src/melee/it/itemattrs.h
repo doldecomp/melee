@@ -14,6 +14,18 @@
 #include <melee/it/itPKThunder.h>
 #include <melee/it/itYoyo.h>
 
+/// Charizard's flames (#It_Kind_Lizardon_Flame1 to 4), which their code
+/// reads through #itLizardonAttributes.
+typedef struct itLizardonFlameAttributes {
+    /* +0 */ f32 x0; ///< Lifetime, for #it_80275158
+    /* +4 */ f32 x4; ///< Velocity multiplier
+} itLizardonFlameAttributes;
+
+/// Attributes no code reads: words, up to the next object.
+typedef struct itUnreadAttributes {
+    /* +0 */ s32 x0[1] DAT_EXTENT;
+} itUnreadAttributes;
+
 typedef struct ArwingLaserAttr {
     /* +0 */ itSpecialAttrsHead* x0;
     /* +4 */ f32 x4;
@@ -426,6 +438,11 @@ union ItemSpecialAttributes {
                          Article::kind == It_Kind_Matadogas_Gas1 ||
                          Article::kind == It_Kind_Matadogas_Gas2);
     itLizardonAttributes lizardon DAT_IF(Article::kind == It_PKind_Lizardon);
+    itLizardonFlameAttributes
+        lizardon_flame DAT_IF(Article::kind == It_Kind_Lizardon_Flame1 ||
+                              Article::kind == It_Kind_Lizardon_Flame2 ||
+                              Article::kind == It_Kind_Lizardon_Flame3 ||
+                              Article::kind == It_Kind_Lizardon_Flame4);
     itFireAttributes fire DAT_IF(Article::kind == It_PKind_Fire);
     itThunderPokemonAttributes thunder_pokemon DAT_IF(Article::kind ==
                                                       It_PKind_Thunder);
@@ -495,13 +512,39 @@ union ItemSpecialAttributes {
                                     Article::kind == It_Kind_Mato ||
                                     Article::kind == It_Kind_Klap ||
                                     Article::kind == It_Kind_ZRShell);
+    it_2E5A_Attrs unk_2e5a DAT_IF(Article::kind == It_Kind_Unk4);
+    /// Items whose code reads none of their attributes, and fighters' item
+    /// slots registered with no kind.
+    itUnreadAttributes unread DAT_IF(
+        Article::kind == It_Kind_ScBall || Article::kind == It_Kind_Spycloak ||
+        Article::kind == It_Kind_Mario_Cape ||
+        Article::kind == It_Kind_DrMario_Sheet ||
+        Article::kind == It_Kind_Fox_Blaster ||
+        Article::kind == It_Kind_Falco_Blaster ||
+        Article::kind == It_Kind_Link_Bow ||
+        Article::kind == It_Kind_CLink_Bow || Article::kind == It_Kind_Unk1 ||
+        Article::kind == It_Kind_Ness_PKThunder4 ||
+        Article::kind == It_Kind_Ness_Bat ||
+        Article::kind == It_Kind_Pikachu_TJolt_Air ||
+        Article::kind == It_Kind_Pichu_TJolt_Air ||
+        Article::kind == It_Kind_Peach_Parasol ||
+        Article::kind == It_Kind_Peach_Toad ||
+        Article::kind == It_Kind_Seak_NeedleHeld ||
+        Article::kind == It_Kind_Kirby_FoxBlaster ||
+        Article::kind == It_Kind_Kirby_FalcoBlaster ||
+        Article::kind == It_Kind_Kirby_LinkBow ||
+        Article::kind == It_Kind_Kirby_CLinkBow ||
+        Article::kind == It_Kind_Kirby_SeakNeedleHeld ||
+        Article::kind == It_Kind_Kirby_PeachToad ||
+        Article::kind == It_Kind_Kirby_PikachuTJolt_Air ||
+        Article::kind == It_Kind_Kirby_PichuTJolt_Air ||
+        Article::kind == It_Kind_Pokemon_Unk || Article::kind == It_Kind_None);
     // Other layouts and shared views used by item callers.
     struct itChainSegment chain_segment;
     itPokemonSpawn_DatAttrs pokemon_spawn;
     struct TetherAttributes tether;
     itUnkAttributes unk1;
     it_2728_DatAttrs unk_2728;
-    it_2E5A_Attrs unk_2e5a;
 };
 
 #endif
