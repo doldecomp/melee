@@ -5,8 +5,6 @@
 
 #include <sysdolphin/baselib/forward.h>
 
-#include <placeholder.h>
-
 #include <dolphin/mtx.h>
 #include <melee/ft/dobjlist.h> // IWYU pragma: keep
 

@@ -6,8 +6,6 @@
 #include <melee/ft/kinds/ftLink/forward.h> // IWYU pragma: export
 #include <melee/it/forward.h>
 
-#include <placeholder.h>
-
 #include <dolphin/mtx.h>
 #include <melee/ft/kinds/ftMars/types.h>
 #include <melee/lb/types.h>

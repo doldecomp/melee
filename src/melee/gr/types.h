@@ -11,7 +11,6 @@
 #include <sysdolphin/baselib/forward.h>
 
 #include <dat_macros.h>
-#include <placeholder.h>
 
 #include <dolphin/gx.h>
 #include <dolphin/gx/GXStruct.h>

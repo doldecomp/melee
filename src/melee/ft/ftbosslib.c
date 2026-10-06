@@ -5,13 +5,13 @@
 #include <math.h>
 
 #include "ft_0877.h"
+#include "ftdata.h"
 #include "ftlib.h"
 #include "inlines.h"
 #include "kinds/ftCommon/forward.h"
 #include "kinds/ftMasterHand/types.h"
 #include "types.h"
 #include <melee/cm/camera.h>
-#include <melee/ft/ftdata.h>
 #include <melee/it/it_26B1.h>
 #include <melee/lb/lbvector.h>
 #include <melee/mp/mplib.h>
