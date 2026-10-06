@@ -14,9 +14,6 @@
   which is a script; item attributes of fighter items, whose kind isn't
   bound).
 
-- The generated C has some redundant parentheses (clang-tidy is off for
-  `src/` in the build directory, so nothing reports them). Find and drop
-  them in codegen.
 - objdiff can diff whole archives: the cost is the size of each symbol,
   not of the object, and blob data is understood and typed data is
   sliced. Sampling could become a choice rather than a necessity

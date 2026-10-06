@@ -279,7 +279,8 @@ impl<'a> Generator<'a> {
                         continue;
                     };
                     let mut access =
-                        format!("((({parent}*)0)->{})", graph.str(name));
+                        format!("(({parent}*)0)->{}", graph.str(name));
+                    let mut dereferenced = false;
                     // Through arrays and pointers to the anonymous type
                     loop {
                         match &graph.types[&ty].kind {
@@ -287,13 +288,18 @@ impl<'a> Generator<'a> {
                                 element: Some(e),
                                 dims,
                             } => {
+                                if dereferenced {
+                                    access = format!("({access})");
+                                    dereferenced = false;
+                                }
                                 for _ in dims {
                                     access.push_str("[0]");
                                 }
                                 ty = *e;
                             }
                             TypeKind::Pointer { target: Some(t) } => {
-                                access = format!("(*{access})");
+                                access = format!("*{access}");
+                                dereferenced = true;
                                 ty = *t;
                             }
                             TypeKind::Const { target: Some(t) }
@@ -461,7 +467,9 @@ impl<'a> Generator<'a> {
             TypeKind::Array { element, dims } => {
                 let count: u64 = dims.iter().map(|d| d.unwrap_or(1)).product();
                 match element {
-                    Some(e) => format!("{count} * ({})", self.native_size(*e)),
+                    // Keep sizeof on the left so multiplication uses its
+                    // unsigned size_t width, including in nested arrays.
+                    Some(e) => format!("{} * {count}", self.native_size(*e)),
                     None => "0".into(),
                 }
             }
