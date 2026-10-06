@@ -41,10 +41,10 @@ struct ftLk_DatAttrs {
     /* +88 */ s32 x88;
     /* +8C */ s32 x8C;
     /* +90 */ s32 x90;
-    /* +94 */ UNK_T x94;
+    /* +94 */ s32 x94;
     /* +98 */ s32 x98;
-    /* +9C */ UNK_T x9C;
-    /* +A0 */ UNK_T xA0;
+    /* +9C */ s32 x9C;
+    /* +A0 */ s32 xA0;
     /* +A4 */ int xA4;
     /* +A8 */ s32 xA8;
     /* +AC */ int xAC;

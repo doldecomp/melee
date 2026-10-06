@@ -14,6 +14,7 @@
 #include <melee/ft/fighter.h>
 #include <melee/ft/ftanim.h>
 #include <melee/ft/ftcamera.h>
+#include <melee/ft/ftdata.h>
 #include <melee/ft/ftparts.h>
 #include <melee/ft/types.h>
 #include <melee/it/it_26B1.h>
@@ -354,7 +355,7 @@ void ftYs_Init_8012B6E8(Fighter* fp, struct S_UNK_YOSHI1* unk_struct_arg)
     s32 i;
     float zero_float;
 
-    attr_r26 = fp->ft_data->ext_attr;
+    attr_r26 = &fp->ft_data->ext_attr->yoshi;
     index = (unk_struct1 = unk_struct_arg)->unk_struct->xC_start_index;
     ptr2EndIndex = (&unk_struct1->unk_struct->x8_end_index);
     zero_float = 0.0f;
@@ -457,7 +458,7 @@ void ftYs_Init_OnLoad(HSD_GObj* gobj)
     ft = fp->ft_data;
     temp_r28 = (struct S_UNK_YOSHI1*) fp->x5AC.xC[1];
     item_list = ft->x48_items;
-    other_attr = ft->ext_attr;
+    other_attr = &ft->ext_attr->yoshi;
 
     if (!temp) {
         HSD_ASSERTREPORT(113, 0, "yoshi parts_model NULL!!\n");

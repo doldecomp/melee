@@ -12,6 +12,7 @@
 #include <melee/ft/fighter.h>
 #include <melee/ft/ft_084E.h>
 #include <melee/ft/ftbosslib.h>
+#include <melee/ft/ftdata.h>
 #include <melee/ft/inlines.h>
 #include <melee/ft/kinds/ftMasterHand/types.h>
 #include <melee/ft/types.h>
@@ -79,7 +80,7 @@ void ftCh_Slap_IASA(HSD_GObj* gobj)
 void ftCh_Slap_Phys(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    ftCrazyHand_DatAttrs* da = fp->ft_data->ext_attr;
+    ftCrazyHand_DatAttrs* da = &fp->ft_data->ext_attr->crazyhand;
     ft_80085134(gobj);
     fp->self_vel.x += da->x40;
 }
@@ -87,7 +88,7 @@ void ftCh_Slap_Phys(HSD_GObj* gobj)
 static void fn_801577B4(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    ftCrazyHand_DatAttrs* da = fp->ft_data->ext_attr;
+    ftCrazyHand_DatAttrs* da = &fp->ft_data->ext_attr->crazyhand;
 
     if (fp->cur_pos.x > da->x3C) {
         fp->self_vel.x = 0.0f;

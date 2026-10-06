@@ -11,6 +11,7 @@
 #include <melee/ft/ft_0881.h>
 #include <melee/ft/ftanim.h>
 #include <melee/ft/ftbosslib.h>
+#include <melee/ft/ftdata.h>
 #include <melee/ft/ftlib.h>
 #include <melee/ft/types.h>
 #include <melee/pl/player.h>
@@ -20,7 +21,7 @@ static void ftMh_MS_343_801511FC(HSD_GObj* gobj);
 void ftMh_MS_343_801510B0(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    ftMasterHand_SpecialAttrs* da = fp->ft_data->ext_attr;
+    ftMasterHand_SpecialAttrs* da = &fp->ft_data->ext_attr->masterhand;
     Fighter_ChangeMotionState(gobj, ftMh_MS_Entry, Ft_MF_None, 0, 1, 0, 0);
     ftAnim_8006EBA4(gobj);
     fp->cur_pos.x = da->x30_pos2.x;

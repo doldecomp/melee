@@ -198,9 +198,9 @@ void ftKb_SpecialN_800F5820(Fighter_GObj* gobj,
 
 void ftKb_SpecialN_800F5874(Vec2* arg0)
 {
-    ftCommonData* cd = gFtDataList[Ft_Kind_Kirby]->ext_attr;
-    arg0->x = cd->x9C_radians;
-    arg0->y = cd->xA0_radians;
+    ftKb_DatAttrs* ea = &gFtDataList[Ft_Kind_Kirby]->ext_attr->kirby;
+    arg0->x = ea->specialn_opponent_horizontal_velocity;
+    arg0->y = ea->specialn_opponent_vertical_velocity;
 }
 
 HSD_Joint* ftKb_SpecialN_800F5898(Fighter_GObj* gobj)

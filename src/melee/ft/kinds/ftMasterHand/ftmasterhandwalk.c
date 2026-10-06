@@ -10,6 +10,7 @@
 #include <melee/ft/ft_084E.h>
 #include <melee/ft/ftanim.h>
 #include <melee/ft/ftbosslib.h>
+#include <melee/ft/ftdata.h>
 #include <melee/ft/ftlib.h>
 #include <melee/ft/types.h>
 #include <melee/lb/lbvector.h>
@@ -108,7 +109,7 @@ void ftMh_WalkLoop_Anim(HSD_GObj* gobj)
 
     /// @todo #GET_FIGHTER uses slightly too much stack; inline issue.
     Fighter* fp = gobj->user_data;
-    ftMasterHand_SpecialAttrs* da = fp->ft_data->ext_attr;
+    ftMasterHand_SpecialAttrs* da = &fp->ft_data->ext_attr->masterhand;
 
     PAD_STACK(4);
 
@@ -143,7 +144,7 @@ void ftMh_WalkLoop_IASA(HSD_GObj* gobj)
 void ftMh_WalkLoop_Phys(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    ftMasterHand_SpecialAttrs* da = fp->ft_data->ext_attr;
+    ftMasterHand_SpecialAttrs* da = &fp->ft_data->ext_attr->masterhand;
     ft_80085134(gobj);
     fp->self_vel.x = da->x40_pos.z;
 }

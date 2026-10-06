@@ -12,13 +12,14 @@
 #include <melee/ft/ftanim.h>
 #include <melee/ft/ftbosslib.h>
 #include <melee/ft/ftcommon.h>
+#include <melee/ft/ftdata.h>
 #include <melee/ft/types.h>
 #include <melee/pl/player.h>
 
 void ftMh_MS_378_80154A78(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    ftMasterHand_SpecialAttrs* da = fp->ft_data->ext_attr;
+    ftMasterHand_SpecialAttrs* da = &fp->ft_data->ext_attr->masterhand;
     fp->cmd_vars[1] = 0;
     Fighter_ChangeMotionState(gobj, ftMh_MS_Squeeze, Ft_MF_None, 0, 1, 0, 0);
     ftAnim_8006EBA4(gobj);
@@ -61,7 +62,7 @@ void ftMh_Squeeze_IASA(HSD_GObj* gobj)
 void ftMh_Squeeze_Phys(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    ftMasterHand_SpecialAttrs* da = fp->ft_data->ext_attr;
+    ftMasterHand_SpecialAttrs* da = &fp->ft_data->ext_attr->masterhand;
     ftMh_UpdateBossMotion(gobj, fp, da);
 }
 

@@ -7,6 +7,7 @@
 #include <melee/ft/ft_084E.h>
 #include <melee/ft/ftanim.h>
 #include <melee/ft/ftbosslib.h>
+#include <melee/ft/ftdata.h>
 #include <melee/ft/types.h>
 #include <melee/pl/player.h>
 
@@ -35,7 +36,7 @@ void ftMh_BackAirplane3_Coll(HSD_GObj* gobj) {}
 void ftMh_MS_369_80153B90(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    ftMasterHand_SpecialAttrs* da = fp->ft_data->ext_attr;
+    ftMasterHand_SpecialAttrs* da = &fp->ft_data->ext_attr->masterhand;
     Vec3 pos;
 
     Fighter_ChangeMotionState(gobj, ftMh_MS_BackPunch, Ft_MF_None, 0, 1, 0, 0);
@@ -68,7 +69,7 @@ void ftMh_BackPunch_Phys(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (--fp->mv.mh.unk0.x0 > 0) {
-        ftMasterHand_SpecialAttrs* da = fp->ft_data->ext_attr;
+        ftMasterHand_SpecialAttrs* da = &fp->ft_data->ext_attr->masterhand;
         ftBossLib_8015BF74(gobj, da->x58);
     } else {
         fp->self_vel.x = 0;

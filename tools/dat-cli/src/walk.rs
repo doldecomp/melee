@@ -492,8 +492,11 @@ impl<'a> Walker<'a> {
                 members,
                 ..
             } => {
-                // Views of plain data need no condition: nothing to follow
-                if !self.has_pointers(die) {
+                // Views of plain data need no condition: nothing to follow.
+                // Conditions still choose among layouts of different sizes.
+                let plain = !self.has_pointers(die);
+                if plain && !members.iter().any(|m| self.condition(m).is_some())
+                {
                     return self.scalar(offset, die, path);
                 }
                 let member = match self.choose(members, offset, parent) {
@@ -509,6 +512,9 @@ impl<'a> Walker<'a> {
                         member
                     }
                     Choice::Unused => return,
+                    Choice::Ambiguous if plain => {
+                        return self.scalar(offset, die, path);
+                    }
                     // Following a guess could misread everything behind it
                     Choice::Ambiguous => {
                         self.issue(Issue::AmbiguousUnion {
@@ -1447,12 +1453,7 @@ impl<'a> Walker<'a> {
         }
         let mut decided = true;
         for member in members {
-            let condition = member.annotations.iter().find_map(|a| {
-                match DatTag::parse(self.graph.str(a.value?))? {
-                    DatTag::If(cond) => Some(cond),
-                    _ => None,
-                }
-            });
+            let condition = self.condition(member);
             let conditioned = condition.is_some();
             let holds = condition.and_then(|cond| {
                 eval_expr(self.macros, &cond, &|name| {
@@ -1483,6 +1484,16 @@ impl<'a> Walker<'a> {
         } else {
             Choice::Ambiguous
         }
+    }
+
+    /// A union member's `dat:if` condition.
+    fn condition(&self, member: &Member) -> Option<Expr> {
+        member.annotations.iter().find_map(|a| {
+            match DatTag::parse(self.graph.str(a.value?))? {
+                DatTag::If(cond) => Some(cond),
+                _ => None,
+            }
+        })
     }
 
     /// The value of a scalar field of the record at `base`.

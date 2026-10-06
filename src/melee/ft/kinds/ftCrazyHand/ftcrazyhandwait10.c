@@ -27,6 +27,7 @@
 #include <melee/ft/fighter.h>
 #include <melee/ft/ft_084E.h>
 #include <melee/ft/ftbosslib.h>
+#include <melee/ft/ftdata.h>
 #include <melee/ft/inlines.h>
 #include <melee/ft/kinds/ftMasterHand/types.h>
 #include <melee/ft/types.h>
@@ -125,7 +126,7 @@ void ftCh_Init_80156198(HSD_GObj* gobj)
 static void ftCh_Init_80156310(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    ftCrazyHand_DatAttrs* da = fp->ft_data->ext_attr;
+    ftCrazyHand_DatAttrs* da = &fp->ft_data->ext_attr->crazyhand;
     fp->cmd_vars[1] = 0;
     fp->u.mh.x2258 = ftMh_MS_Wait1_0;
     fp->motion_id = 0x183;
@@ -185,7 +186,7 @@ void ftCh_Wait1_0_Anim(HSD_GObj* gobj)
         }
     } else {
         if (--fp->u.mh.x223C < 0) {
-            ftCrazyHand_DatAttrs* da = fp->ft_data->ext_attr;
+            ftCrazyHand_DatAttrs* da = &fp->ft_data->ext_attr->crazyhand;
             Vec3 vec;
             PAD_STACK(4);
 
@@ -346,7 +347,7 @@ static void ftCh_Init_80156AD8(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     u32 button;
-    ftCrazyHand_DatAttrs* da = fp->ft_data->ext_attr;
+    ftCrazyHand_DatAttrs* da = &fp->ft_data->ext_attr->crazyhand;
     u32 button_tmp = HSD_PadMasterStatus[3].button;
     Vec3 pos;
     button = button_tmp;

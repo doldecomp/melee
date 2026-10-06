@@ -9,6 +9,7 @@
 #include <dolphin/mtx.h>
 #include <melee/ft/fighter.h>
 #include <melee/ft/ftbosslib.h>
+#include <melee/ft/ftdata.h>
 #include <melee/ft/inlines.h>
 #include <melee/ft/types.h>
 #include <melee/pl/player.h>
@@ -16,7 +17,7 @@
 void ftCh_Init_8015A030(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    ftCrazyHand_DatAttrs* da = fp->ft_data->ext_attr;
+    ftCrazyHand_DatAttrs* da = &fp->ft_data->ext_attr->crazyhand;
     Fighter_ChangeMotionState(gobj, 0x177, Ft_MF_None, 0.0f, 1.0f, 0.0f, NULL);
     ftAnim_8006EBA4(gobj);
     {
@@ -47,7 +48,7 @@ void ftCh_Cancel_IASA(HSD_GObj* gobj)
 void ftCh_Cancel_Phys(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    ftCrazyHand_DatAttrs* da = fp->ft_data->ext_attr;
+    ftCrazyHand_DatAttrs* da = &fp->ft_data->ext_attr->crazyhand;
     ftBossLib_8015BF74(gobj, da->xDC);
 }
 

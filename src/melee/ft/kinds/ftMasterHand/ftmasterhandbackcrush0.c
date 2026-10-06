@@ -8,6 +8,7 @@
 #include <melee/ft/fighter.h>
 #include <melee/ft/ftanim.h>
 #include <melee/ft/ftbosslib.h>
+#include <melee/ft/ftdata.h>
 #include <melee/ft/types.h>
 #include <melee/pl/player.h>
 #include <sysdolphin/baselib/jobj.h>
@@ -27,7 +28,7 @@ void ftMh_MS_370_80153D2C(HSD_GObj* gobj)
     Fighter* fp = gobj->user_data;
     HSD_JObj* jobj = get_jobj(gobj);
 
-    ftMasterHand_SpecialAttrs* da = fp->ft_data->ext_attr;
+    ftMasterHand_SpecialAttrs* da = &fp->ft_data->ext_attr->masterhand;
     Vec3 pos;
     Vec3 scl;
 
@@ -110,7 +111,7 @@ void ftMh_BackCrush_Phys(HSD_GObj* gobj)
     u8 _[8];
 
     if (--fp->mv.mh.unk0.x0 > 0) {
-        ftMasterHand_SpecialAttrs* da = fp->ft_data->ext_attr;
+        ftMasterHand_SpecialAttrs* da = &fp->ft_data->ext_attr->masterhand;
         ftBossLib_8015BF74(gobj, da->x58);
     } else {
         fp->self_vel.x = 0;

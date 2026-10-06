@@ -10,6 +10,7 @@
 #include <melee/ft/fighter.h>
 #include <melee/ft/ft_084E.h>
 #include <melee/ft/ftbosslib.h>
+#include <melee/ft/ftdata.h>
 #include <melee/ft/inlines.h>
 #include <melee/ft/kinds/ftMasterHand/types.h>
 #include <melee/ft/types.h>
@@ -42,7 +43,7 @@ void ftCh_Drill_IASA(HSD_GObj* gobj)
 void ftCh_Drill_Phys(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
-    ftCrazyHand_DatAttrs* da = fp->ft_data->ext_attr;
+    ftCrazyHand_DatAttrs* da = &fp->ft_data->ext_attr->crazyhand;
     ft_80085134(gobj);
     {
         float f = ++fp->mv.ch.unk0.x0;

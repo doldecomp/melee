@@ -145,7 +145,9 @@ pointer union selects Samus's grapple-beam accessory in slot 4, joints in
 Link/Young Link slot 6, Kirby slot 4, Yoshi slot 3 and Sheik slots 4/5,
 Game & Watch's visibility table in slot 10, Jigglypuff's costume parts in
 slot 1, and an `Article` in the other slots, whose `Article::kind` is
-bound by `DAT_MATCH_FTITEM`. Untyped roots keep their bindings for the type
+bound by `DAT_MATCH_FTITEM`; `ftData.ext_attr` selects the fighter's own
+attributes the same way, by `fighter_kind`. Untyped roots keep their bindings
+for the type
 `dat_symbols.txt` gives them: Kirby's copies bind `fighter_kind` the same
 way. A union member's `DAT_BIND` applies to the member when it's chosen.
 

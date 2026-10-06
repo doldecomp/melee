@@ -12,6 +12,7 @@
 #include <melee/ft/ft_0881.h>
 #include <melee/ft/ft_0D4D.h>
 #include <melee/ft/ftbosslib.h>
+#include <melee/ft/ftdata.h>
 #include <melee/ft/inlines.h>
 #include <melee/ft/kinds/ftMasterHand/types.h>
 #include <melee/ft/types.h>
@@ -22,7 +23,7 @@
 static inline void func_8015ADD0_inline(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
-    ftCrazyHand_DatAttrs* da = fp->ft_data->ext_attr;
+    ftCrazyHand_DatAttrs* da = &fp->ft_data->ext_attr->crazyhand;
     fp->self_vel.x = fp->self_vel.y = fp->self_vel.z = 0;
     it_802F046C(fp->mv.ch.grab.x28);
     it_802F046C(fp->mv.ch.grab.x2C);
@@ -63,7 +64,7 @@ void ftCh_TagGrab_Anim(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (fp->cmd_vars[0]) {
-        ftCrazyHand_DatAttrs* da = fp->ft_data->ext_attr;
+        ftCrazyHand_DatAttrs* da = &fp->ft_data->ext_attr->crazyhand;
         if (++fp->mv.ch.ch_dmg.x60 <= da->x124) {
             lbAudioAx_8002438C(0x81652);
         } else {
@@ -87,7 +88,7 @@ void ftCh_TagSqueeze_Anim(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (fp->cmd_vars[0]) {
-        ftCrazyHand_DatAttrs* da = fp->ft_data->ext_attr;
+        ftCrazyHand_DatAttrs* da = &fp->ft_data->ext_attr->crazyhand;
         if (++fp->mv.ch.ch_dmg.x60 <= da->x124) {
             lbAudioAx_8002438C(0x81652);
         } else {
@@ -118,7 +119,7 @@ void ftCh_TagGrab_IASA(HSD_GObj* gobj)
 void ftCh_TagGrab_Phys(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    ftCrazyHand_DatAttrs* da = fp->ft_data->ext_attr;
+    ftCrazyHand_DatAttrs* da = &fp->ft_data->ext_attr->crazyhand;
     fp->self_vel.y += da->x12C_pos.y;
     fp->self_vel.z += da->x134_pos.y;
 }

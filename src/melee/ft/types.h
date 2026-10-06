@@ -994,7 +994,7 @@ typedef struct Fighter_WaitAnimData {
 
 struct ftData {
     /*  +0 */ ftCo_DatAttrs* x0;
-    /*  +4 */ void* ext_attr;
+    /*  +4 */ union ftData_ExtAttr* ext_attr;
     /*  +8 */ struct ftData_x8 {
         /*  +0 */ FtPartsDesc x0;
         /*  +8 */ ftData_x8_x8 x8;

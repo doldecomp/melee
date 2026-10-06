@@ -10,6 +10,7 @@
 #include <melee/ft/ft_0D4D.h>
 #include <melee/ft/ftanim.h>
 #include <melee/ft/ftbosslib.h>
+#include <melee/ft/ftdata.h>
 #include <melee/ft/types.h>
 #include <melee/it/kinds/itmasterhandlaser.h>
 #include <melee/lb/lb_00B0.h>
@@ -30,7 +31,7 @@ static inline void func_80151484_inline1(HSD_GObj* gobj)
 {
     /// @todo #GET_FIGHTER
     Fighter* fp = gobj->user_data;
-    ftMasterHand_SpecialAttrs* da = fp->ft_data->ext_attr;
+    ftMasterHand_SpecialAttrs* da = &fp->ft_data->ext_attr->masterhand;
     fp->self_vel.x = fp->self_vel.y = fp->self_vel.z = 0;
     it_802F046C(fp->mv.mh.dmg0.x34);
     it_802F046C(fp->mv.mh.dmg0.x38);
@@ -70,7 +71,7 @@ void ftMh_Damage_Anim(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (fp->cmd_vars[0]) {
-        ftMasterHand_SpecialAttrs* da = fp->ft_data->ext_attr;
+        ftMasterHand_SpecialAttrs* da = &fp->ft_data->ext_attr->masterhand;
         if (++fp->mv.mh.unk0.x74 <= da->x144) {
             lbAudioAx_8002438C(530002);
         } else {
@@ -94,7 +95,7 @@ void ftMh_MS_345_Anim(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (fp->cmd_vars[0] != 0) {
-        ftMasterHand_SpecialAttrs* da = fp->ft_data->ext_attr;
+        ftMasterHand_SpecialAttrs* da = &fp->ft_data->ext_attr->masterhand;
         if (++fp->mv.mh.unk0.x74 <= da->x144) {
             lbAudioAx_8002438C(530002);
         } else if (++fp->mv.mh.unk0.x78 <= da->x148) {

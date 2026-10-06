@@ -40,10 +40,6 @@ Fighter_CostumeStrings ftSb_Init_CostumeStrings[] = {
     { ftSb_Init_803D39D4, ftSb_Init_803D39E0, ftSb_Init_803D39F8 },
 };
 
-typedef struct _ftSandbagAttributes {
-    u32 x0_pair[2];
-} ftSandbagAttributes;
-
 void ftSb_Init_OnDeath(HSD_GObj* arg0) {}
 
 void ftSb_Init_OnLoad(HSD_GObj* gobj)

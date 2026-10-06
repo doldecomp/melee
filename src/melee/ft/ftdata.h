@@ -4,9 +4,53 @@
 #include <Runtime/platform.h>
 
 #include <melee/ft/forward.h>
+#include <melee/ft/kinds/ftKirby/forward.h>
 #include <sysdolphin/baselib/forward.h>
 
+#include <dat_macros.h>
+
+#include <melee/ft/kinds/ftCrazyHand/types.h>
+#include <melee/ft/kinds/ftSandbag/ftsandbag.h>
 #include <melee/ft/types.h>
+
+/// #ftData::ext_attr: each fighter's own attributes, which its
+/// @c LoadSpecialAttrs copies into #Fighter::dat_attrs.
+union ftData_ExtAttr {
+    ftMario_DatAttrs mario DAT_IF(fighter_kind == Ft_Kind_Mario ||
+                                  fighter_kind == Ft_Kind_DrMario);
+    ftFox_DatAttrs fox DAT_IF(fighter_kind == Ft_Kind_Fox ||
+                              fighter_kind == Ft_Kind_Falco);
+    ftCaptain_DatAttrs captain DAT_IF(fighter_kind == Ft_Kind_Captain ||
+                                      fighter_kind == Ft_Kind_Ganon);
+    ftDonkeyAttributes donkey DAT_IF(fighter_kind == Ft_Kind_Donkey);
+    ftKb_DatAttrs kirby DAT_IF(fighter_kind == Ft_Kind_Kirby);
+    ftKoopaAttributes koopa DAT_IF(fighter_kind == Ft_Kind_Koopa ||
+                                   fighter_kind == Ft_Kind_GKoops);
+    ftLk_DatAttrs link DAT_IF(fighter_kind == Ft_Kind_Link ||
+                              fighter_kind == Ft_Kind_CLink);
+    ftSeakAttributes seak DAT_IF(fighter_kind == Ft_Kind_Seak);
+    ftNessAttributes ness DAT_IF(fighter_kind == Ft_Kind_Ness);
+    ftPe_DatAttrs peach DAT_IF(fighter_kind == Ft_Kind_Peach);
+    ftIceClimberAttributes ice_climber DAT_IF(fighter_kind == Ft_Kind_Popo ||
+                                              fighter_kind == Ft_Kind_Nana);
+    ftPikachuAttributes pikachu DAT_IF(fighter_kind == Ft_Kind_Pikachu ||
+                                       fighter_kind == Ft_Kind_Pichu);
+    ftSs_DatAttrs samus DAT_IF(fighter_kind == Ft_Kind_Samus);
+    ftYoshiAttributes yoshi DAT_IF(fighter_kind == Ft_Kind_Yoshi);
+    ftPurinAttributes purin DAT_IF(fighter_kind == Ft_Kind_Purin);
+    ftMewtwoAttributes mewtwo DAT_IF(fighter_kind == Ft_Kind_Mewtwo);
+    ftLuigiAttributes luigi DAT_IF(fighter_kind == Ft_Kind_Luigi);
+    MarsAttributes mars DAT_IF(fighter_kind == Ft_Kind_Mars ||
+                               fighter_kind == Ft_Kind_Emblem);
+    ftZelda_DatAttrs zelda DAT_IF(fighter_kind == Ft_Kind_Zelda);
+    ftGameWatchAttributes gamewatch DAT_IF(fighter_kind == Ft_Kind_GameWatch);
+    ftMasterHand_SpecialAttrs masterhand DAT_IF(fighter_kind ==
+                                                Ft_Kind_MasterH);
+    ftCrazyHand_DatAttrs crazyhand DAT_IF(fighter_kind == Ft_Kind_CrezyH);
+    ftZakoboyAttributes zako DAT_IF(fighter_kind == Ft_Kind_Boy ||
+                                    fighter_kind == Ft_Kind_Girl);
+    ftSandbagAttributes sandbag DAT_IF(fighter_kind == Ft_Kind_Sandbag);
+};
 
 /* 08521C */ void ft_8008521C(Fighter_GObj* gobj);
 /* 0852B0 */ void ft_800852B0(void);

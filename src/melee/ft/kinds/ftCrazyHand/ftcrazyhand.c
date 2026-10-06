@@ -40,6 +40,7 @@
 #include <melee/ft/fighter.h>
 #include <melee/ft/ftbosslib.h>
 #include <melee/ft/ftcamera.h>
+#include <melee/ft/ftdata.h>
 #include <melee/ft/inlines.h>
 #include <melee/ft/kinds/ftMasterHand/types.h>
 #include <melee/ft/types.h>
@@ -610,7 +611,7 @@ void ftCh_Init_OnLoad(HSD_GObj* gobj)
 
     fp = GET_FIGHTER(gobj);
     ftdata = fp->ft_data;
-    ftData_attr = ftdata->ext_attr;
+    ftData_attr = &ftdata->ext_attr->crazyhand;
     items = ftdata->x48_items;
 
     PUSH_ATTRS(fp, ftCrazyHand_DatAttrs);

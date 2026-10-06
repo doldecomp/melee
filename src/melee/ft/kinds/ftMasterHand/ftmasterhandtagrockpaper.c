@@ -14,6 +14,7 @@
 #include <melee/ft/ftanim.h>
 #include <melee/ft/ftbosslib.h>
 #include <melee/ft/ftcommon.h>
+#include <melee/ft/ftdata.h>
 #include <melee/ft/kinds/ftCommon/ftCo_Throw.h>
 #include <melee/ft/kinds/ftCommon/ftCo_Thrown.h>
 #include <melee/ft/types.h>
@@ -172,7 +173,7 @@ void ftMh_TagCancel_IASA(HSD_GObj* gobj)
 void ftMh_TagCancel_Phys(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    ftMasterHand_SpecialAttrs* da = fp->ft_data->ext_attr;
+    ftMasterHand_SpecialAttrs* da = &fp->ft_data->ext_attr->masterhand;
     ftMh_UpdateBossMotion(gobj, fp, da);
 }
 

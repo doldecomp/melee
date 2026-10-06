@@ -11,6 +11,7 @@
 #include <melee/ft/ft_084E.h>
 #include <melee/ft/ft_0877.h>
 #include <melee/ft/ftbosslib.h>
+#include <melee/ft/ftdata.h>
 #include <melee/ft/inlines.h>
 #include <melee/ft/kinds/ftMasterHand/types.h>
 #include <melee/ft/types.h>
@@ -47,7 +48,7 @@ void ftCh_Damage_Coll(HSD_GObj* gobj) {}
 void ftCh_Init_80157170(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    ftCrazyHand_DatAttrs* attrs = fp->ft_data->ext_attr;
+    ftCrazyHand_DatAttrs* attrs = &fp->ft_data->ext_attr->crazyhand;
     fp->mv.ch.unk0.xC.x = fp->cur_pos.x - attrs->x28;
     fp->mv.ch.unk0.xC.y = attrs->x24;
     Fighter_ChangeMotionState(gobj, ftMh_MS_Damage2, Ft_MF_None,
@@ -67,7 +68,7 @@ void ftCh_Damage2_Anim(HSD_GObj* gobj)
         } else {
             ftCrazyHand_DatAttrs* attrs;
             fp = GET_FIGHTER(gobj);
-            attrs = fp->ft_data->ext_attr;
+            attrs = &fp->ft_data->ext_attr->crazyhand;
             fp->mv.ch.unk0.xC.x = fp->cur_pos.x - attrs->x28;
             fp->mv.ch.unk0.xC.y = attrs->x24;
             Fighter_ChangeMotionState(gobj, ftMh_MS_Damage2, Ft_MF_None,
@@ -90,7 +91,7 @@ void ftCh_Damage2_IASA(HSD_GObj* gobj)
 void ftCh_Damage2_Phys(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    ftCrazyHand_DatAttrs* attrs = fp->ft_data->ext_attr;
+    ftCrazyHand_DatAttrs* attrs = &fp->ft_data->ext_attr->crazyhand;
     ft_80085134(gobj);
     ftBossLib_8015BE40(gobj, &fp->mv.ch.unk0.xC, &fp->mv.ch.unk0.x18,
                        attrs->x14, attrs->x10);

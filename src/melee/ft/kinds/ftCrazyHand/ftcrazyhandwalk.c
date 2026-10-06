@@ -10,6 +10,7 @@
 #include <melee/ft/fighter.h>
 #include <melee/ft/ft_084E.h>
 #include <melee/ft/ftbosslib.h>
+#include <melee/ft/ftdata.h>
 #include <melee/ft/inlines.h>
 #include <melee/ft/kinds/ftMasterHand/types.h>
 #include <melee/ft/types.h>
@@ -26,7 +27,7 @@ void ftCh_WalkLoop_Anim(HSD_GObj* gobj)
 {
     if (!ftAnim_IsFramesRemaining(gobj)) {
         Fighter* fp = gobj->user_data;
-        ftCrazyHand_DatAttrs* da = fp->ft_data->ext_attr;
+        ftCrazyHand_DatAttrs* da = &fp->ft_data->ext_attr->crazyhand;
         ftCh_Init_801579F4(gobj);
         fp->mv.ch.unk0.x8 = da->x64;
     }
@@ -79,7 +80,7 @@ void ftCh_WalkWait_Phys(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftData* data = fp->ft_data;
-    ftCrazyHand_DatAttrs* da = data->ext_attr;
+    ftCrazyHand_DatAttrs* da = &data->ext_attr->crazyhand;
     ft_80085134(gobj);
     ftBossLib_8015C010(gobj, da->x68);
     ftBossLib_8015C190(gobj);

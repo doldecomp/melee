@@ -2032,6 +2032,17 @@ typedef enum ChoiceKind {
     CHOICE_AMBIGUOUS,
 } ChoiceKind;
 
+/// Whether any member of a union has a `DAT_IF`.
+static bool conditioned(const DatType* u)
+{
+    for (uint32_t i = 0; i < u->nmembers; i++) {
+        if (u->members[i].cond != NULL) {
+            return true;
+        }
+    }
+    return false;
+}
+
 /// The first union member whose `DAT_IF` holds; see `Walker::choose`.
 static ChoiceKind choose(const DatArchive* a, int32_t u, uint32_t base,
                          Parent parent, uint32_t* index)
@@ -2173,14 +2184,22 @@ static void layout(DatArchive* a, uint32_t offset, int32_t type, void* native,
         }
         break;
     case DAT_KIND_UNION: {
-        /* Views of plain data need no condition: nothing to follow */
-        if (!t->has_pointers) {
+        /* Views of plain data need no condition: nothing to follow.
+         * Conditions still choose among layouts of different sizes. */
+        bool plain = !t->has_pointers;
+        if (plain && !conditioned(t)) {
             relocated_words(a, offset, (uint64_t) offset + t->size);
             convert(a, offset, r, native);
             break;
         }
         uint32_t index;
-        switch (choose(a, r, offset, parent, &index)) {
+        ChoiceKind choice = choose(a, r, offset, parent, &index);
+        if (choice == CHOICE_AMBIGUOUS && plain) {
+            relocated_words(a, offset, (uint64_t) offset + t->size);
+            convert(a, offset, r, native);
+            break;
+        }
+        switch (choice) {
         case CHOICE_MEMBER: {
             Choice ch = { offset, t->id, index };
             uint64_t* seen = map_slot(&a->choices, key2(offset, t->id), true);

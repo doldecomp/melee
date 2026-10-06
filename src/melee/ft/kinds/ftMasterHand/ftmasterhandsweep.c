@@ -6,6 +6,7 @@
 #include <melee/ft/ft_084E.h>
 #include <melee/ft/ftanim.h>
 #include <melee/ft/ftbosslib.h>
+#include <melee/ft/ftdata.h>
 #include <melee/ft/types.h>
 #include <melee/mp/mplib.h>
 #include <melee/pl/player.h>
@@ -21,7 +22,7 @@ void ftMh_Damage_IASA(HSD_GObj* gobj)
 void ftMh_Damage_Phys(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    ftMasterHand_SpecialAttrs* da = fp->ft_data->ext_attr;
+    ftMasterHand_SpecialAttrs* da = &fp->ft_data->ext_attr->masterhand;
     fp->self_vel.y += da->x150;
     fp->self_vel.z += da->x158;
 }
@@ -59,7 +60,7 @@ void ftMh_WaitSweep_Coll(HSD_GObj* gobj) {}
 void ftMh_MS_346_80151918(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    ftMasterHand_SpecialAttrs* da = fp->ft_data->ext_attr;
+    ftMasterHand_SpecialAttrs* da = &fp->ft_data->ext_attr->masterhand;
     fp->mv.mh.unk0.xC.x = fp->cur_pos.x - da->x3C;
     fp->mv.mh.unk0.xC.y = da->x38;
     fp->mv.mh.unk0.xC.z = 0;
@@ -95,7 +96,7 @@ void ftMh_SweepLoop_IASA(HSD_GObj* gobj)
 void ftMh_SweepLoop_Phys(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    ftMasterHand_SpecialAttrs* da = fp->ft_data->ext_attr;
+    ftMasterHand_SpecialAttrs* da = &fp->ft_data->ext_attr->masterhand;
     ftBossLib_8015BE40(gobj, &fp->mv.mh.unk0.xC, &fp->mv.mh.unk0.x18, da->x2C,
                        da->x28);
 }

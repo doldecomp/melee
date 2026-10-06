@@ -141,7 +141,7 @@ float ftKb_SpecialN_800F5A60(Fighter_GObj* gobj)
 
 float ftKb_SpecialN_800F5A70(void)
 {
-    ftKb_DatAttrs* ea = gFtDataList[Ft_Kind_Kirby]->ext_attr;
+    ftKb_DatAttrs* ea = &gFtDataList[Ft_Kind_Kirby]->ext_attr->kirby;
     return ea->specialn_gravity_of_inhaled;
 }
 
@@ -153,7 +153,7 @@ f32 ftKb_SpecialN_800F5A88(Fighter_GObj* gobj)
 
 f32 ftKb_SpecialN_800F5A98(void)
 {
-    ftKb_DatAttrs* ea = gFtDataList[Ft_Kind_Kirby]->ext_attr;
+    ftKb_DatAttrs* ea = &gFtDataList[Ft_Kind_Kirby]->ext_attr->kirby;
     return ea->specialn_spit_spin;
 }
 
@@ -165,13 +165,13 @@ f32 ftKb_SpecialN_800F5AB0(Fighter_GObj* gobj)
 
 f32 ftKb_SpecialN_800F5AC0(void)
 {
-    ftKb_DatAttrs* ea = gFtDataList[Ft_Kind_Kirby]->ext_attr;
+    ftKb_DatAttrs* ea = &gFtDataList[Ft_Kind_Kirby]->ext_attr->kirby;
     return ea->specialn_star_duration_divisor;
 }
 
 f32 ftKb_SpecialN_800F5AD8(void)
 {
-    ftKb_DatAttrs* ea = gFtDataList[Ft_Kind_Kirby]->ext_attr;
+    ftKb_DatAttrs* ea = &gFtDataList[Ft_Kind_Kirby]->ext_attr->kirby;
     return ea->specialn_star_deceleration_rate;
 }
 
