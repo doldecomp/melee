@@ -1,8 +1,11 @@
 //! Validate the ranges used by ftData_80085A14 and ftData_80085CD8.
 
-use anyhow::{Context, Result, bail, ensure};
-use melee_dat::hsd::{Archive, PackedMotion};
-use object::{Object, ObjectSection, ObjectSymbol};
+use anyhow::{Context, Result, ensure};
+use melee_dat::{
+    dol::Dol,
+    dtk::SymbolFile,
+    hsd::{Archive, PackedMotion},
+};
 use std::{
     fs,
     io::{self, Write},
@@ -11,58 +14,30 @@ use std::{
 
 #[derive(clap::Args)]
 pub struct Args {
-    /// Linked game ELF containing the fighter filename and count tables
-    #[arg(long, default_value = "build/GALE01/main.elf")]
-    elf: PathBuf,
+    /// Original DOL containing the fighter filename and count tables
+    #[arg(long, default_value = "orig/GALE01/sys/main.dol")]
+    dol: PathBuf,
+    /// DTK symbols.txt containing the table addresses and sizes
+    #[arg(long, default_value = "config/GALE01/symbols.txt")]
+    symbols: PathBuf,
     /// Extracted disc files
     #[arg(long, default_value = "orig/GALE01/files")]
     files: PathBuf,
 }
 
-struct Memory<'a> {
-    file: object::File<'a>,
-}
-
-impl<'a> Memory<'a> {
-    fn bytes(&self, address: u64, size: u64) -> Result<&'a [u8]> {
-        for section in self.file.sections() {
-            if let Some(bytes) = section.data_range(address, size)? {
-                return Ok(bytes);
-            }
-        }
-        bail!("ELF has no data at {address:#X} of size {size:#X}")
-    }
-
-    fn global(&self, name: &str) -> Result<&'a [u8]> {
-        let symbol = self
-            .file
-            .symbols()
-            .find(|s| s.name().ok() == Some(name))
-            .with_context(|| format!("ELF has no symbol `{name}`"))?;
-        ensure!(symbol.size() > 0, "ELF symbol `{name}` has no size");
-        self.bytes(symbol.address(), symbol.size())
-    }
-
-    fn string(&self, address: u32) -> Result<&'a str> {
-        let address = u64::from(address);
-        for section in self.file.sections() {
-            let Some(at) = address.checked_sub(section.address()) else {
-                continue;
-            };
-            let data = section.data()?;
-            let Some(rest) =
-                data.get(at as usize..).filter(|rest| !rest.is_empty())
-            else {
-                continue;
-            };
-            let end =
-                rest.iter().position(|&b| b == 0).with_context(|| {
-                    format!("unterminated ELF string at {address:#X}")
-                })?;
-            return Ok(std::str::from_utf8(&rest[..end])?);
-        }
-        bail!("ELF has no string at {address:#X}")
-    }
+fn global<'a>(
+    memory: &Dol<'a>,
+    symbols: &SymbolFile,
+    name: &str,
+) -> Result<&'a [u8]> {
+    let symbol = symbols.lookup(name)?;
+    let size = symbol
+        .size
+        .filter(|&s| s > 0)
+        .with_context(|| format!("symbol `{name}` needs a nonzero `size:`"))?;
+    memory
+        .bytes(symbol.address, size)
+        .with_context(|| format!("symbol `{name}`"))
 }
 
 fn word(bytes: &[u8], at: usize) -> Result<u32> {
@@ -84,7 +59,7 @@ fn motions<'a>(
         .with_context(|| format!("no public symbol `{symbol}`"))?;
     // ftData.xC points to Fighter_WaitAnimData[count]. The game uses x4
     // as the packed-file offset, x8 as the exact archive size, and x0 as
-    // the public FigaTree name. The linked ELF gives the runtime count.
+    // the public FigaTree name. The DOL gives the runtime count.
     let field = root
         .offset
         .checked_add(0xC)
@@ -136,18 +111,16 @@ fn motions<'a>(
 
 pub fn run(args: Args) -> Result<()> {
     let bytes =
-        fs::read(&args.elf).with_context(|| args.elf.display().to_string())?;
-    let memory = Memory {
-        file: object::File::parse(&*bytes)?,
-    };
-    ensure!(
-        memory.file.architecture() == object::Architecture::PowerPc
-            && !memory.file.is_little_endian(),
-        "expected a big-endian PowerPC game ELF"
-    );
-    let counts = memory.global("ftData_Table_Unk0")?;
-    let names = memory.global("ftData_803C1F40")?;
-    let packed = memory.global("ftData_803C23E4")?;
+        fs::read(&args.dol).with_context(|| args.dol.display().to_string())?;
+    let memory =
+        Dol::parse(&bytes).with_context(|| args.dol.display().to_string())?;
+    let text = fs::read_to_string(&args.symbols)
+        .with_context(|| args.symbols.display().to_string())?;
+    let symbols = SymbolFile::parse(&text)
+        .with_context(|| args.symbols.display().to_string())?;
+    let counts = global(&memory, &symbols, "ftData_Table_Unk0")?;
+    let names = global(&memory, &symbols, "ftData_803C1F40")?;
+    let packed = global(&memory, &symbols, "ftData_803C23E4")?;
     ensure!(
         counts.len() % 8 == 0
             && names.len() == counts.len()
