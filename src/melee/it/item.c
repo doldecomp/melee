@@ -1790,7 +1790,7 @@ static void EnterHitlagThink(HSD_GObj* gobj, Item* item_data)
         }
         item_data->xDC8_word.flags.x9 = 1;
 
-        if ((item_data->atk_victim) && it_80272D1C(item_data->atk_victim) &&
+        if (item_data->atk_victim && it_80272D1C(item_data->atk_victim) &&
             !item_data->xDC8_word.flags.x8)
         {
             func_8026A158_helper(item_data->atk_victim);
@@ -1811,7 +1811,7 @@ static void Item_8026A294(HSD_GObj* gobj)
 {
     Item* item_data = GET_ITEM(gobj);
 
-    if ((item_data->xCC8_knockback) || (item_data->xCA0)) {
+    if (item_data->xCC8_knockback || item_data->xCA0) {
         if (OnTakeDamageThink(gobj, item_data)) {
             return;
         }
@@ -1823,7 +1823,7 @@ static void Item_8026A294(HSD_GObj* gobj)
         if (OnClankThink(gobj, item_data)) {
             return;
         }
-    } else if ((item_data->xC34_damageDealt) || (item_data->xC4C)) {
+    } else if (item_data->xC34_damageDealt || item_data->xC4C) {
         if (OnGiveDamageThink(gobj, item_data)) {
             return;
         }
@@ -1843,7 +1843,7 @@ static void Item_8026A294(HSD_GObj* gobj)
         }
     }
 
-    if ((item_data->xDC8_word.flags.xD) && (item_data->xCC0 > 0.0f)) {
+    if (item_data->xDC8_word.flags.xD && (item_data->xCC0 > 0.0f)) {
         checkHitLag(item_data->xCC0, item_data);
 
         EnterHitlagThink(gobj, item_data);
@@ -1852,7 +1852,7 @@ static void Item_8026A294(HSD_GObj* gobj)
 
         EnterHitlagThink(gobj, item_data);
     }
-    if ((item_data->xDC8_word.flags.x4) || (item_data->xDC8_word.flags.x3)) {
+    if (item_data->xDC8_word.flags.x4 || item_data->xDC8_word.flags.x3) {
         EnterHitlagThink(gobj, item_data);
 
         if (item_data->xDC8_word.flags.x4) {
