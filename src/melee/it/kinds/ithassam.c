@@ -57,7 +57,7 @@ ItemStateTable it_803F7CF8[] = {
 void itHassam_802CDBE0(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
-    itHassam_ItemVars* attr =
+    itHassamAttributes* attr =
         &ip->xC4_article_data->x4_specialAttributes->hassam;
     PAD_STACK(12);
 
@@ -182,7 +182,7 @@ void itHassam_802CDF28(Item_GObj* gobj)
     Fighter_GObj* var_r3;
 
     Item* ip = GET_ITEM(gobj);
-    itHassam_ItemVars* attr =
+    itHassamAttributes* attr =
         &ip->xC4_article_data->x4_specialAttributes->hassam;
 
     var_r3 = itHassam_802CDE1C(&ip->pos, ip->owner);
@@ -206,7 +206,7 @@ void itHassam_802CDF28(Item_GObj* gobj)
 void itHassam_802CE008(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
-    itHassam_ItemVars* attr =
+    itHassamAttributes* attr =
         &ip->xC4_article_data->x4_specialAttributes->hassam;
 
     Item_80268E5C(gobj, 1, ITEM_ANIM_UPDATE);
@@ -222,7 +222,7 @@ bool itHassam_UnkMotion1_Anim(Item_GObj* gobj)
 {
     f32 prev_dir;
     Item* ip;
-    itHassam_ItemVars* attr;
+    itHassamAttributes* attr;
     HSD_JObj* jobj;
 
     ip = (Item*) gobj->user_data;
@@ -264,7 +264,7 @@ bool itHassam_UnkMotion1_Anim(Item_GObj* gobj)
 void itHassam_UnkMotion1_Phys(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
-    itHassam_ItemVars* attr =
+    itHassamAttributes* attr =
         &ip->xC4_article_data->x4_specialAttributes->hassam;
 
     it_8027A344(gobj);
@@ -307,7 +307,7 @@ void itHassam_802CE400(Item_GObj* gobj)
 {
     Item* ip;
     HSD_JObj* jobj;
-    itHassam_ItemVars* attr;
+    itHassamAttributes* attr;
     Vec3 cam_pos;
     Vec3 sp10;
 

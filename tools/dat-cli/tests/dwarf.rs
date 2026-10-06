@@ -274,3 +274,44 @@ fn food_inline_count_from_dwarf_matches_the_archive() {
     }
     assert!(!walked.extents.contains_key(&(attrs + 4 + count * 16)));
 }
+
+#[test]
+fn untyped_kirby_loader_keeps_bindings_in_the_type_cache() {
+    use melee_dat::dwarf::cache::TypesFile;
+
+    let Some(graph) = GRAPH.as_ref() else { return };
+    let canonical = Canonical::new(graph);
+    let witnesses = roots(graph, &canonical);
+    let root = witnesses.iter().find(|r| {
+        r.name == RootName::Literal("ftDataKirbyCopyCaptain".into())
+    });
+    let Some(root) = root else {
+        // The default single fighter.c object does not contain Kirby's loader.
+        assert!(std::env::var_os("MELEE_DWARF_ELF").is_none());
+        return;
+    };
+    assert!(root.ty.is_none());
+    let captain = graph
+        .types
+        .values()
+        .find_map(|ty| {
+            let TypeKind::Enum { enumerators, .. } = &ty.kind else {
+                return None;
+            };
+            enumerators.iter().find_map(|e| {
+                (e.name.map(|n| graph.str(n)) == Some("Ft_Kind_Captain"))
+                    .then_some(e.value as u64)
+            })
+        })
+        .unwrap();
+    assert_eq!(root.bindings, [("fighter_kind".into(), captain)]);
+
+    // dat_symbols.txt supplies this root's type; compacting the DWARF must
+    // still retain the discriminator needed by its item-attribute union.
+    let cached = TypesFile::build(graph);
+    assert!(!cached.roots.contains_key("ftDataKirbyCopyCaptain"));
+    assert_eq!(
+        cached.root_bindings["ftDataKirbyCopyCaptain"],
+        root.bindings
+    );
+}

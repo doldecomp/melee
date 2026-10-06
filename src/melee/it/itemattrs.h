@@ -149,6 +149,27 @@ typedef struct itGShell_Attrs {
     Vec x34;
 } itGShell_Attrs;
 
+typedef struct itHassamAttributes {
+    /* +00 */ f32 x0;
+    /* +04 */ f32 x4;
+    /* +08 */ f32 x8;
+    /* +0C */ f32 xC;
+    /* +10 */ f32 x10;
+    /* +14 */ f32 x14;
+    /* +18 */ s32 x18;
+    /* +1C */ s32 x1C;
+    /* +20 */ s32 x20;
+    /* +24 */ f32 x24;
+    /* +28 */ f32 x28;
+    /* +2C */ f32 x2C;
+    /* +30 */ f32 x30;
+    /* +34 */ f32 x34;
+    /* +38 */ f32 x38;
+    /* +3C */ s32 x3C;
+    /* +40 */ s32 x40;
+    /* +44 */ s32 x44;
+} itHassamAttributes;
+
 typedef struct itHammerData {
     u32 x0;
     u32 x4;
@@ -252,6 +273,7 @@ union ItemSpecialAttributes {
     itParasolAttributes parasol DAT_IF(Article::kind == It_Kind_Parasol);
     itGShell_Attrs g_shell DAT_IF(Article::kind == It_Kind_G_Shell);
     itRShell_Attrs r_shell DAT_IF(Article::kind == It_Kind_R_Shell);
+    itSwordAttributes sword DAT_IF(Article::kind == It_Kind_Sword);
     ItLGunAttr l_gun DAT_IF(Article::kind == It_Kind_L_Gun);
     itFreezeAttributes freeze DAT_IF(Article::kind == It_Kind_Freeze);
     itFoodsAttributes foods DAT_IF(Article::kind == It_Kind_Foods);

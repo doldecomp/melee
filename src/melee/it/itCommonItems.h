@@ -61,9 +61,9 @@ typedef struct itSword_UnkBytes {
 } itSword_UnkBytes;
 
 typedef struct itSwordAttributes {
-    /*  +0 */ UNK_T x0;
-    /*  +4 */ UNK_T x4;
-    /*  +8 */ UNK_T x8;
+    /*  +0 */ int x0;
+    /*  +4 */ int x4;
+    /*  +8 */ int x8;
     /*  +C */ float xC;
     /* +10 */ float x10;
     /* +14 */ float x14;
