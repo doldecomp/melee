@@ -82,7 +82,7 @@ typedef enum CPUCommand {
 STATIC_ASSERT(CpuCmd_Count <= U8_MAX);
 
 /// A script of #CPUCommand bytes, each followed by its arguments, up to
-/// #CpuCmd_Done, as #ftCo_800B4880 copies it.
+/// #CpuCmd_Done, as #ftCo_800B3E04 interprets it.
 typedef u8* CpuCmdScript DAT_BYTE_SCRIPT(cpuCommandLength(_command));
 
 #ifdef M2CTX

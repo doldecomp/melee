@@ -417,11 +417,10 @@ fn col_anim_command_length(command: u64) -> Option<u64> {
     })
 }
 
-/// How many bytes a CPU command is, from its first byte, as `ftCo_800B4880`
-/// copies them: one argument byte above `CpuCmd_ZeroArgEnd` (0x7F), two
+/// How many bytes a CPU command is, from its first byte, as `ftCo_800B3E04`
+/// interprets them: one argument byte above `CpuCmd_ZeroArgEnd` (0x7F), two
 /// above `CpuCmd_OneArgEnd` (0xBF). `CpuCmd_Done` (0x7F) is 0, the script's
-/// end. A tool-side helper, not a port. (The game reads the second argument
-/// only if the first is above 0x7F too; no script has such a command.)
+/// end. A tool-side helper, not a port.
 fn cpu_command_length(command: u64) -> u64 {
     match command & 0xFF {
         0x7F => 0,
