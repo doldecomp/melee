@@ -1032,7 +1032,7 @@ void grAnime_801C8138(HSD_GObj* gobj, enum_t arg1, bool arg2)
     HSD_JObjReqAnimAll(jobj, 0.0f);
     archive = grDatFiles_801C6330(arg1);
     HSD_ASSERT(0x148, archive);
-    flags = (u8*) archive->unk4->unk8[arg1].x28;
+    flags = archive->unk4->unk8[arg1].x28;
     if (flags != NULL) {
         flag = flags[arg2];
     } else {

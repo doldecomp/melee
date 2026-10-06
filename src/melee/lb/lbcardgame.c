@@ -42,7 +42,7 @@ typedef enum {
     /* +14 */ bool failed;
     /* +18 */ bool enable;
     /* +1C */ char comment[CARD_COMMENT_SIZE];
-    /* +5C */ void** icon_data;
+    /* +5C */ u8** icon_data;
 
     /// Always set to 0 by ::lbCardGame_LoadArchive
     /* +60 */ ssize_t jobj_translate_idx;

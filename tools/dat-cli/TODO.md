@@ -110,9 +110,7 @@ Not errors:
   commands but has no end command before the next object: not standalone
   scripts. Nothing points into it.
 
-- Loaded into untyped destinations, types unknown:
-  `mnNameDefaultName*`
-  (and `mnNameAutoName*`), `MemCardIconData`, `MemSnapIconData`.
+- Loaded into untyped destinations, types unknown: `mnNameDefaultName*`.
 - `toy.c` loads trophy symbols through `symbol_name` fields of its tables;
   those are covered by name patterns instead.
 - `ftDemo*MotionFile*` are `u8[]`: packed archives like `Pl??AJ.dat`,
