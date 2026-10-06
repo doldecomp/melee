@@ -1,4 +1,5 @@
 mod coverage;
+mod motions;
 
 use super::project::Project;
 
@@ -34,6 +35,9 @@ enum Command {
 
     /// Check the roots' types against the archives that define them
     Check(args::Check),
+
+    /// Check packed animations against the game's motion tables
+    CheckMotions(motions::Args),
 
     /// Type each archive's data by walking it from its roots
     Walk(args::Check),
@@ -80,6 +84,7 @@ pub fn run(Args { command }: Args) -> Result<()> {
     match command {
         Command::Roots(args) => list_roots(args),
         Command::Check(args) => check(args),
+        Command::CheckMotions(args) => motions::run(args),
         Command::Walk(args) => walk(args),
         Command::Coverage(args) => coverage::run(args),
     }
