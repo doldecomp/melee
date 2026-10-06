@@ -90,7 +90,7 @@ struct grPStadium_YakumonoParam {
     int x10;
     int x14;
     int x18;
-    u8 r, g, b;
+    u8 r, g, b, a;
     u32 x20;
     u32 x24;
     u32 x28;
