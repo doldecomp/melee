@@ -3,8 +3,13 @@
 
 #include <melee/ft/forward.h>
 
+#include <dat_macros.h>
+
+/// One of a fighter's wait animations: @c x is its animation, picked with
+/// odds of @c y in 100. Lists of them end in one whose @c x is -1.
 typedef struct WaitStruct {
     union WaitStruct_u {
+        /// The same words, as #ftCo_8008A7A8 reads the animation.
         struct WaitStruct_u_p {
             int* x;
             int* y;
@@ -12,7 +17,7 @@ typedef struct WaitStruct {
         struct WaitStruct_u_i {
             int x;
             int y;
-        } i;
+        } i DAT_IF(true);
     } u;
 } WaitStruct;
 
