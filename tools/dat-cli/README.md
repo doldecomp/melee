@@ -27,6 +27,7 @@ melee-dat symbols coverage  # how much of the archives the walk explains
 melee-dat symbols walk    # walk every archive, print mismatches
 melee-dat symbols roots   # symbols loaded by name, with their types
 melee-dat symbols check   # root types against the archives' symbol sizes
+melee-dat symbols check-motions # packed animations against runtime motion tables
 melee-dat types dump -n HSD_Joint   # a type as the tool sees it
 melee-dat types duplicates  # records with the same layout under different names
 melee-dat types unhoisted   # dat types declared in .c files
@@ -268,6 +269,25 @@ nix store add --name melee-GALE01-files orig/GALE01/files
 nix build .#melee-dat-samples
 ```
 
+## Packed animation validation
+
+`symbols check-motions` reads the fighter filenames and motion counts from
+the linked game ELF, then checks each nonempty `ftData.xC` motion's file
+offset, exact size and public `FigaTree` name against its `Pl*AJ.dat` archive.
+It fails if a reference lands between archives, has the wrong size, or names
+a symbol absent from that archive. Empty motions and shared references are
+valid. Archives no motion references are reported and retained; padding need
+not be zero.
+
+```sh
+melee-dat symbols check-motions --elf build/GALE01/main.elf --files orig/GALE01/files
+```
+
+The ELF needs its symbols and initialized data, but no DWARF. Counts come
+from `ftData_Table_Unk0`, and the filenames from `ftData_803C1F40` and
+`ftData_803C23E4`. This checks normal fighter animations; demo motion tables
+and nested motion-file archives are separate follow-ups.
+
 ## Native archive interface
 
 `native/` is a C library that reads archives into the game's own types on
@@ -281,7 +301,8 @@ decides the native layout. The library is a port of the walk
 
 - scalars are byte-swapped and widened as their types say;
 - pointers point to the native objects they reach, which are shared;
-- counted, terminated and extent arrays are contiguous;
+- counted, terminated and extent arrays are contiguous, with references to
+  individual elements sharing their storage;
 - unions are chosen by `DAT_IF`, as the walk chooses them.
 
 Raw bytes and `DAT_BLOB` formats (texels, display lists, keyframes),
@@ -317,10 +338,15 @@ static const DatMember struct_ftDynamics_x0_members[] = {
 #include "melee_dat.h"
 
 DatArchive* archive = dat_open(&melee_dat_schema, bytes, size, &error);
-ftData* mario = dat_public(archive, "ftDataMario", DAT_TYPE_ftData);
 dat_load_roots(archive, "PlMr.dat", 0); // or every root dat-cli types
+ftData* mario = dat_public(archive, "ftDataMario", DAT_TYPE_ftData);
 dat_close(archive);
 ```
+
+Load the roots before retaining native object pointers. Discovering an array
+after an element was converted on its own can move that element into the
+array's storage. Pointer fields in converted objects are updated; pointers
+already returned to the caller cannot be updated.
 
 The dat preset builds it with the host's compiler and runs its tests from
 `ctest --test-dir build/GALE01/dat`; on its own, from the native dev shell:
@@ -335,6 +361,11 @@ for 32-bit little-endian, or `ppc32-linux.cmake` for 32-bit big-endian
 under qemu.
 
 - `tests/unit.c`: a hand-written schema over an archive built in the test.
+- `tests/raw_refs.c`: shared raw references, relocated zero, externs and
+  unselected union members.
+- `tests/array_refs.c`: element identity in counted and nested arrays,
+  differing host strides, cycles and mutations through shared references,
+  with the array or its elements visited first.
 - `tests/types.c`: the game's own types through the schema: each fighter's
   `ftData`, read by C member access, against the archive's bytes.
 - `tests/e2e.c`: every archive the walk has roots in. `melee-dat native
