@@ -464,7 +464,9 @@ opcode). `HSD_PObjDesc` binds its display lists and descriptors, so each
 vertex array is as long as its largest index, and a vertex array shapes
 share is as long as the longest. A list element walked already (a
 descriptor list shapes share) recounts the plain data its counted pointers
-point to under the new bindings.
+point to under the new bindings. If a descriptor is reached without a
+display list (for example by a shape set), the vertex array keeps its
+`DAT_EXTENT` fallback; exact shape-animation index sizing remains a TODO.
 
 ```c
 void* unk0 DAT_COUNT(unk4);

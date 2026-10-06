@@ -67,9 +67,10 @@ struct HSD_VtxDescList {
     GXCompType comp_type;
     u8 frac;
     u16 stride;
-    /// As far as the largest index the shape's display lists give it.
+    /// As far as the largest index the shape's display lists give it;
+    /// shape-animation-only arrays retain extent inference for now.
     HSD_VertexArray* vertex DAT_COUNT((GXMaxIndex(dl, descs, attr) + 1) *
-                                      stride);
+                                      stride) DAT_EXTENT;
 };
 
 struct HSD_Envelope {

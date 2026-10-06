@@ -1257,7 +1257,7 @@ static bool gx_max_index(const uint8_t* dl, uint64_t dl_len,
         if (at_ == 0xFF) {
             break;
         }
-        uint32_t indices = at_ == 10 && cnt == 2 ? 3 : 1;
+        uint32_t indices = (at_ == 10 || at_ == 25) && cnt == 2 ? 3 : 1;
         uint32_t width, count;
         switch (ty) {
         case 0:
@@ -1752,6 +1752,8 @@ typedef struct Parent {
 
 static void layout(DatArchive* a, uint32_t offset, int32_t type, void* native,
                    Parent parent);
+static void extent(DatArchive* a, uint32_t offset, int32_t array,
+                   const DatMember* m, Parent parent, void* native);
 
 static bool fits(const DatArchive* a, uint32_t offset, int32_t type)
 {
@@ -1950,10 +1952,9 @@ static void counted(DatArchive* a, uint32_t offset, int32_t pointer,
     }
 }
 
-/// A list element already walked, reached again with other bindings (a
-/// vertex descriptor list shapes share): the plain data its counted pointers
-/// point to may reach further, as far as the longest count. Nothing else is
-/// walked again.
+/// An object already walked, reached again with other bindings (a shared
+/// vertex descriptor): its plain pointer fields may supply a longer count
+/// or an extent fallback. Nothing else is walked again.
 static void recount(DatArchive* a, uint32_t offset, int32_t type)
 {
     int32_t r = resolve(a, type);
@@ -1964,7 +1965,7 @@ static void recount(DatArchive* a, uint32_t offset, int32_t type)
     for (uint32_t i = 0; i < t->nmembers; i++) {
         const DatMember* m = &t->members[i];
         if (m->bit_size || m->type == DAT_NONE || !m->has_offset ||
-            m->count == NULL)
+            (m->count == NULL && !m->extent))
         {
             continue;
         }
@@ -1985,8 +1986,10 @@ static void recount(DatArchive* a, uint32_t offset, int32_t type)
         a->env = bound(a, outer, m, r, offset, true, 0);
         uint64_t count;
         Context c = { MODE_COUNT, r, offset, DAT_NONE, 0, a->env, 0, 0 };
-        if (eval(a, &c, m->count, &count)) {
+        if (m->count != NULL && eval(a, &c, m->count, &count)) {
             counted(a, at, m->type, m->type_tag, count, m, here, NULL);
+        } else if (m->extent) {
+            extent(a, at, m->type, m, here, NULL);
         }
         a->env = outer;
     }
@@ -2133,21 +2136,30 @@ static void extent(DatArchive* a, uint32_t offset, int32_t array,
             store_pointer(native, a->data + value);
             return;
         }
+        if (opaque(a, raw != DAT_NONE ? raw : target)) {
+            uint32_t size = T(a, target)->size;
+            uint64_t count = extent_bound(a, value, size);
+            for (uint64_t i = 1; i < count; i++) {
+                uint32_t at = (uint32_t) (value + i * size);
+                if (bits_has(&a->object, at, a->size) || !fits(a, at, target))
+                {
+                    count = i;
+                    break;
+                }
+            }
+            counted(a, offset, array, DAT_NONE, count, m, parent, native);
+            return;
+        }
         if (!visit(a, value, target)) {
             store_pointer(native, native_of(a, value, target));
             return;
         }
         reached(a, value, target);
         uint32_t size = T(a, target)->size;
-        if (opaque(a, raw != DAT_NONE ? raw : target)) {
-            base = NULL;
-            store_pointer(native, a->data + value);
-        } else {
-            uint64_t n = extent_bound(a, value, size);
-            base = native_array(a, value, target, n);
-            store_pointer(native, base);
-            reference(a, native, value, target);
-        }
+        uint64_t n = extent_bound(a, value, size);
+        base = native_array(a, value, target, n);
+        store_pointer(native, base);
+        reference(a, native, value, target);
         set_native(a, value, target, base);
         offset = value;
         element = raw;
@@ -2624,6 +2636,7 @@ static void object(DatArchive* a, Task task)
             store_pointer(task.slot, existing);
         }
         copy_of(a, task.offset, r, task.native);
+        recount(a, task.offset, task.type);
         return;
     }
     /* Every object is made natively, even one reached through a field that

@@ -969,6 +969,68 @@ static void test_vertex_arrays(void)
     }
 }
 
+static void test_vertex_extent_fallback(void)
+{
+    DatMember members[sizeof desc_members / sizeof *desc_members];
+    memcpy(members, desc_members, sizeof members);
+    members[5].extent = true;
+    DatType type = type_T_DESC;
+    type.members = members;
+    const DatType* local_types[T_COUNT];
+    memcpy(local_types, types, sizeof types);
+    local_types[T_DESC] = &type;
+    DatSchema local_schema = schema;
+    local_schema.types = local_types;
+    for (unsigned order = 0; order < 3; order++) {
+        unsigned char file[0x200];
+        size_t size = build_shapes(file, 1);
+        DatArchive* a = dat_open(&local_schema, file, size, NULL);
+        CHECK(a != NULL);
+        if (a == NULL) {
+            continue;
+        }
+        if (order == 1) {
+            CHECK(dat_public(a, "a", T_SHAPE) != NULL);
+        }
+        Desc* desc = dat_at(a, 0x20, T_DESC, DAT_COUNT_ONE, 0);
+        CHECK(desc != NULL && desc->vertex == dat_raw(a, 0xC0));
+        if (order == 2) {
+            CHECK(dat_public(a, "a", T_SHAPE) != NULL);
+        }
+        char* text = trace(a);
+        CHECK(!contains(text, "issue"));
+        CHECK(contains(text, "extent 0xC0 0x100\n"));
+        CHECK(dat_verify(a, NULL) == 0);
+        free(text);
+        dat_close(a);
+    }
+}
+
+static void test_nbt3_indices(void)
+{
+    for (unsigned attr = 10; attr <= 25; attr += 15) {
+        unsigned char file[0x200];
+        size_t size = build_shapes(file, 1);
+        unsigned char* d = file + 0x20;
+        put32(d + 8, 16);
+        put32(d + 0x20, attr);
+        put32(d + 0x28, 2);
+        static const unsigned char dl[16] = {
+            0x90, 0, 2, 1, 2, 7, 3, 4, 5, 0,
+        };
+        memcpy(d + 0x80, dl, sizeof dl);
+        DatArchive* a = dat_open(&schema, file, size, NULL);
+        CHECK(a != NULL);
+        CHECK(dat_public(a, "a", T_SHAPE) != NULL);
+        char* text = trace(a);
+        CHECK(!contains(text, "issue"));
+        CHECK(contains(text, "extent 0xC0 0xE0\n"));
+        CHECK(dat_verify(a, NULL) == 0);
+        free(text);
+        dat_close(a);
+    }
+}
+
 static void test_refuses(void)
 {
     unsigned char file[0x200];
@@ -1195,6 +1257,8 @@ int main(void)
     test_byte_scripts();
     test_tagged_plain_union_size();
     test_vertex_arrays();
+    test_vertex_extent_fallback();
+    test_nbt3_indices();
     test_refuses();
     test_packed();
     printf("%s (%zu-bit %s-endian)\n", failures ? "FAILED" : "ok",
