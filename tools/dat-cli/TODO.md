@@ -3,7 +3,7 @@
 ## Samples
 
 - The stage `*_YakumonoParam` structs aren't reachable (`void*` in the
-  stage info) and differ per stage.
+  stage info) and differ per stage: `dat_symbols.txt` types them by archive.
 - A union object whose tag chooses no member has no sample (`CmdUnion`,
   which is a script; item attributes of kinds with no variant).
 
@@ -20,14 +20,21 @@
   `ftDevice_Callback0`'s `Vec3*` out parameter. That callback type is shared
   by two device tables with different outputs. `grZe_YakumonoParam` hides a
   pointer at 0x2C in `pad_14`.
-- `yakumono_param` has no type for about 40 stages, including every
-  `GrT*` target test. Their code doesn't read it, or reads it locally.
+- `yakumono_param` has no type in 28 stages: every `GrT*` target test,
+  `GrTe`, the `GrEF*` trophy scenes, `GrHr`, `GrPu` and `GrSh`. Each is
+  one zero word, and their code reads none of it.
+- `GrMc.dat`'s `RObjAnimJoint`s at 0x301A4 and 0x301F4 have a third word
+  pointing to an `HSD_AObjDesc` nothing else reaches; the code reads only
+  two.
+- `GrIz.dat` 0xF86D0, after the light list at 0xF84B8, holds pointers to
+  0xD3980 and 0xD3B0C of unknown type.
 
 - `ftDataFox.x48_items[4]` isn't an `Article`: its words are small integers.
 - Kirby's Game & Watch and Yoshi copies (`PlKbCpGw`, `PlKbCpYs`) have
   `dynamics` that don't fit `ftDynamics`.
 - Some unused trees typed by address in `dat_symbols.txt` don't fit:
-  relocated scalars in `PlGn*`'s material animations. The trees at `PlCl`
+  `PlGn*` 0x5D7C8 and 0x5D978 aren't material animations (their `_HSD_MatAnim`s
+  overlap other nodes) and are left untyped. The trees at `PlCl`
   0x19428 and 0x1969C, `PlLk` 0x18BA8 and 0x18E1C, and `PlSs` 0x15898 are
   untyped: as `HSD_AnimJoint`s, an `FObjDesc`'s `ad` runs 0x80000 bytes
   past the data.

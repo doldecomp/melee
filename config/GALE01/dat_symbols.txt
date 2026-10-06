@@ -22,8 +22,10 @@ yakumono_param = GrCn.dat:*; // type:grCorneria_YakumonoParam
 yakumono_param = GrCs.dat:*; // type:grCastle_YakumonoParam
 yakumono_param = GrFs.dat:*; // type:grFourside_YakumonoParam
 yakumono_param = GrFz.dat:*; // type:grFlatzone_YakumonoParam
+yakumono_param = GrGb.dat:*; // type:grGreatBay_YakumonoParam
 yakumono_param = GrGd.dat:*; // type:grGarden_YakumonoParam
 yakumono_param = GrGr.dat:*; // type:grGreens_YakumonoParam
+yakumono_param = GrHe.dat:*; // type:grHeal_YakumonoParam
 yakumono_param = GrI1.dat:*; // type:grInishie1_YakumonoParam
 yakumono_param = GrI2.dat:*; // type:grInishie2_YakumonoParam
 yakumono_param = GrIm.dat:*; // type:grIceMt_YakumonoParam
@@ -33,11 +35,17 @@ yakumono_param = GrKr.dat:*; // type:grKraid_YakumonoParam
 yakumono_param = GrMc.dat:*; // type:grMc_YakumonoParam
 yakumono_param = GrNBa.dat:*; // type:grBattle_YakumonoParam
 yakumono_param = GrNBr.dat:*; // type:grBigBlueRoute_YakumonoParam
+yakumono_param = GrNFg.dat:*; // type:grFigureGet_YakumonoParam
+yakumono_param = GrNKr.dat:*; // type:grKinokoRoute_YakumonoParam
+yakumono_param = GrNLa.dat:*; // type:grLast_YakumonoParam
 yakumono_param = GrNPo.dat:*; // type:grPushon_YakumonoParam
 yakumono_param = GrNSr.dat:*; // type:grShrineRoute_YakumonoParam
 yakumono_param = GrNZr.dat:*; // type:grZebesRoute_YakumonoParam
 yakumono_param = GrOk.dat:*; // type:grOldKongo_YakumonoParam
 yakumono_param = GrOp.dat:*; // type:grOldpupupu_YakumonoParam
+yakumono_param = GrOt.dat:*; // type:grOnett_YakumonoParam
+yakumono_param = GrOy.dat:*; // type:grOldYoshi_YakumonoParam
+yakumono_param = GrPs.dat:*; // type:grPStadium_YakumonoParam
 yakumono_param = GrRc.dat:*; // type:grRCruise_YakumonoParam
 yakumono_param = GrSt.dat:*; // type:grStory_YakumonoParam
 yakumono_param = GrTFc.dat:*; // type:grTFalco_YakumonoParam
@@ -46,7 +54,14 @@ yakumono_param = GrTGn.dat:*; // type:grTGn_YakumonoParam
 yakumono_param = GrTMt.dat:*; // type:grTMewtwo_UnkStruct
 yakumono_param = GrTPr.dat:*; // type:grTPrSpecialParams
 yakumono_param = GrVe.dat:*; // type:grVenom_YakumonoParam
+yakumono_param = GrYt.dat:*; // type:grYorster_YakumonoParam
 yakumono_param = GrZe.dat:*; // type:grZe_YakumonoParam
+// Pokemon Stadium's transformations repeat its parameters; only GrPs.dat's
+// are read
+yakumono_param = GrPs1.dat:*; // type:grPStadium_YakumonoParam
+yakumono_param = GrPs2.dat:*; // type:grPStadium_YakumonoParam
+yakumono_param = GrPs3.dat:*; // type:grPStadium_YakumonoParam
+yakumono_param = GrPs4.dat:*; // type:grPStadium_YakumonoParam
 
 // Demo motions: packed archives the game relocates itself, like Pl??AJ
 ftDemo*MotionFile* = *:*; // type:u8 extent
@@ -1071,28 +1086,20 @@ PlPe_unused_x13FB8 = PlPe.dat:0x13FB8; // type:HSD_AnimJoint
 PlCa_unused_xCC00 = PlCa.dat:0xCC00; // type:HSD_AnimJoint
 PlCa_unused_xC264 = PlCa.dat:0xC264; // type:HSD_AnimJoint
 PlGnRe_unused_x5DAEC = PlGnRe.dat:0x5DAEC; // type:HSD_MatAnimJoint
-PlGnRe_unused_x5D978 = PlGnRe.dat:0x5D978; // type:HSD_MatAnimJoint
 PlGnRe_unused_x5D93C = PlGnRe.dat:0x5D93C; // type:HSD_MatAnimJoint
 PlGnRe_unused_x5D900 = PlGnRe.dat:0x5D900; // type:HSD_MatAnimJoint
-PlGnRe_unused_x5D7C8 = PlGnRe.dat:0x5D7C8; // type:HSD_MatAnimJoint
 PlGnRe_unused_x5D780 = PlGnRe.dat:0x5D780; // type:HSD_MatAnimJoint
 PlGnLa_unused_x5DAEC = PlGnLa.dat:0x5DAEC; // type:HSD_MatAnimJoint
-PlGnLa_unused_x5D978 = PlGnLa.dat:0x5D978; // type:HSD_MatAnimJoint
 PlGnLa_unused_x5D93C = PlGnLa.dat:0x5D93C; // type:HSD_MatAnimJoint
 PlGnLa_unused_x5D900 = PlGnLa.dat:0x5D900; // type:HSD_MatAnimJoint
-PlGnLa_unused_x5D7C8 = PlGnLa.dat:0x5D7C8; // type:HSD_MatAnimJoint
 PlGnLa_unused_x5D780 = PlGnLa.dat:0x5D780; // type:HSD_MatAnimJoint
 PlGnGr_unused_x5DAEC = PlGnGr.dat:0x5DAEC; // type:HSD_MatAnimJoint
-PlGnGr_unused_x5D978 = PlGnGr.dat:0x5D978; // type:HSD_MatAnimJoint
 PlGnGr_unused_x5D93C = PlGnGr.dat:0x5D93C; // type:HSD_MatAnimJoint
 PlGnGr_unused_x5D900 = PlGnGr.dat:0x5D900; // type:HSD_MatAnimJoint
-PlGnGr_unused_x5D7C8 = PlGnGr.dat:0x5D7C8; // type:HSD_MatAnimJoint
 PlGnGr_unused_x5D780 = PlGnGr.dat:0x5D780; // type:HSD_MatAnimJoint
 PlGnBu_unused_x5DAEC = PlGnBu.dat:0x5DAEC; // type:HSD_MatAnimJoint
-PlGnBu_unused_x5D978 = PlGnBu.dat:0x5D978; // type:HSD_MatAnimJoint
 PlGnBu_unused_x5D93C = PlGnBu.dat:0x5D93C; // type:HSD_MatAnimJoint
 PlGnBu_unused_x5D900 = PlGnBu.dat:0x5D900; // type:HSD_MatAnimJoint
-PlGnBu_unused_x5D7C8 = PlGnBu.dat:0x5D7C8; // type:HSD_MatAnimJoint
 PlGnBu_unused_x5D780 = PlGnBu.dat:0x5D780; // type:HSD_MatAnimJoint
 PlGnRe_unused_x5DAF0 = PlGnRe.dat:0x5DAF0; // type:HSD_MatAnimJoint
 PlGnLa_unused_x5DAF0 = PlGnLa.dat:0x5DAF0; // type:HSD_MatAnimJoint
@@ -4747,6 +4754,8 @@ GrOk_unused_x993C = GrOk.dat:0x993C; // type:SceneCameraDesc
 GrOp_unused_x11484 = GrOp.dat:0x11484; // type:SceneCameraDesc
 GrOp_unused_x13470 = GrOp.dat:0x13470; // type:SceneCameraDesc
 GrOp_unused_x3D4 = GrOp.dat:0x3D4; // type:SceneCameraDesc
+GrOp_unused_x2674 = GrOp.dat:0x2674; // type:SceneCameraDesc
+GrOp_unused_x69D4 = GrOp.dat:0x69D4; // type:SceneCameraDesc
 GrOp_unused_x6EF4 = GrOp.dat:0x6EF4; // type:SceneCameraDesc
 GrOt_unused_x31C = GrOt.dat:0x31C; // type:SceneCameraDesc
 GrOt_unused_x3A4 = GrOt.dat:0x3A4; // type:SceneFogDesc
@@ -6231,6 +6240,16 @@ GrCn_unused_x5F784 = GrCn.dat:0x5F784; // type:SceneCameraDesc
 GrKr_unused_x4D818 = GrKr.dat:0x4D818; // type:SceneCameraDesc
 GrKr_unused_x4D8A0 = GrKr.dat:0x4D8A0; // type:SceneFogDesc
 GrVe_unused_x110660 = GrVe.dat:0x110660; // type:SceneCameraDesc
+
+// Copies of stages' lights, by address, right after a LightList: a
+// LightDesc that repeats the list's desc and points where it points, then a
+// LightList of the original desc. Nothing points to them.
+GrTDk_unused_x28A08 = GrTDk.dat:0x28A08; // type:HSD_LightDesc
+GrTDk_unused_x28A24 = GrTDk.dat:0x28A24; // type:LightList
+GrTKp_unused_x274 = GrTKp.dat:0x274; // type:HSD_LightDesc
+GrTKp_unused_x290 = GrTKp.dat:0x290; // type:LightList
+GrTKp_unused_xE8A8 = GrTKp.dat:0xE8A8; // type:HSD_LightDesc
+GrTKp_unused_xE8C4 = GrTKp.dat:0xE8C4; // type:LightList
 
 // Stages' quake model sets, by address: a null-terminated list of
 // DynamicModelDesc pointers right after quake_model_set, holding only it.

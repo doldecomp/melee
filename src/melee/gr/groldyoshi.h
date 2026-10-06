@@ -40,4 +40,17 @@
 /* 20F40C */ bool grOldYoshi_8020F40C(Vec3*, int arg, HSD_JObj* jobj);
 /* 3E650C */ extern StageData grOy_StageData;
 
+struct grOldYoshi_YakumonoParam {
+    s16 x0;
+    s16 x2;
+    float x4;
+    float x8;
+    float xC;
+    s16 x10;
+    s16 x12;
+    s16 x14;
+    s16 x16;
+    s16 x18;
+};
+
 #endif

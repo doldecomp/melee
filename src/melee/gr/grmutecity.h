@@ -7,6 +7,8 @@
 #include <melee/sc/forward.h>
 #include <sysdolphin/baselib/forward.h>
 
+#include <dat_macros.h>
+
 #include <dolphin/mtx.h>
 #include <sysdolphin/baselib/spline.h>
 
@@ -108,8 +110,8 @@
 /* 3E33DC */ extern StageData grMc_StageData;
 
 struct grMc_YakumonoParam {
-    void* x0;
-    void* x4;
+    union ColorOverlay_x8_t* x0 DAT_SCRIPT(colAnimCommandLength(_command));
+    union ColorOverlay_x8_t* x4 DAT_SCRIPT(colAnimCommandLength(_command));
     lbColl_80008D30_arg1* x8;
     lbColl_80008D30_arg1* xC;
     u8 pad10[0x1C];

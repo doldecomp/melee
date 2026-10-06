@@ -2,6 +2,8 @@
 #define GALE01_20F468
 #include <melee/gr/forward.h>
 
+#include <dat_macros.h>
+
 /* 2105AC */ void grOldKongo_802105AC(Ground_GObj*);
 /* 2105C8 */ void grOldKongo_802105C8(HSD_GObj*);
 /* 3E65E8 */ extern StageData grOk_StageData;
@@ -40,7 +42,7 @@ struct grOldKongo_YakumonoParam {
     s32 rrfix_barrel_attack;
     s32 rradd_barrel_attack;
     s32 x68;
-    void* x6C;
+    union ColorOverlay_x8_t* x6C DAT_SCRIPT(colAnimCommandLength(_command));
 };
 
 #endif

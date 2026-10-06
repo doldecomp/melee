@@ -2017,12 +2017,13 @@ struct UnkStageDat_x8_t {
     /*  +8 */ HSD_MatAnimJoint** matanims DAT_TERMINATED(0);
     /*  +C */ HSD_ShapeAnimJoint** shapeanims DAT_TERMINATED(0);
     /* +10 */ HSD_CameraDescPerspective* x10;
-    /* +14 */ UNK_T x14;
+    /* +14 */ HSD_CameraAnim* camera_anim;
     /* +18 */ LightList** x18 DAT_TERMINATED(0);
     /* +1C */ HSD_FogDesc* x1C;
     /* +20 */ GrJoint* unk20 DAT_COUNT(unk24);
     /* +24 */ s32 unk24; // size of unk20 array
-    /* +28 */ u8* x28;   ///< Loop flags by animation ID (#grAnime_801C7C1C).
+    /// Per animation index: nonzero to loop that animation.
+    /* +28 */ u8* anim_loops DAT_EXTENT;
     /* +2C */ s16* x2C DAT_COUNT(x30); ///< #Ground_GetStageGObj indices.
     /* +30 */ int x30;
 };

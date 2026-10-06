@@ -43,4 +43,34 @@
 /* 1E5768 */ bool grOnett_801E5768(Vec3*, int, HSD_JObj*);
 /* 3E2858 */ extern StageData grOt_StageData;
 
+/// Onett stage yakumono parameters
+struct grOnett_YakumonoParam {
+    /* 0x00 */ f32 awning_initial;
+    /* 0x04 */ f32 max_velocity;
+    /* 0x08 */ f32 vel_threshold;
+    /* 0x0C */ f32 pos_threshold;
+    /* 0x10 */ f32 damping;
+    /* 0x14 */ f32 spring_force;
+    /* 0x18 */ f32 spring_constant;
+    /* 0x1C */ f32 max_displacement;
+    /* 0x20 */ f32 awning_delta;
+    /* 0x24 */ f32 x24;
+    /* 0x28 */ f32 x28;
+    /* 0x2C */ f32 x2C;
+    /* 0x30 */ f32 x30;
+    /* 0x34 */ f32 x34;
+    /* 0x38 */ f32 x38;
+    /* 0x3C */ f32 x3C;
+    /* 0x40 */ f32 x40;
+    /* 0x44 */ f32 x44;
+    /* 0x48 */ f32 x48;
+    /* 0x4C */ f32 x4C;
+    /* 0x50 */ f32 x50;
+    /* 0x54 */ f32 x54;
+    /* 0x58 */ f32 x58;
+    /* 0x5C */ f32 x5C;
+    /* 0x60 */ f32 x60;
+    /* 0x64 */ f32 x64;
+};
+
 #endif

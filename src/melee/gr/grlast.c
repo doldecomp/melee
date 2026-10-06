@@ -88,12 +88,7 @@ Vec3 const grLast_803B8480 = { 1.0f, 1.0f, 1.0f };
 Vec3 const grLast_803B848C = { 0.0f, 1.0f, 0.0f };
 Vec3 const grLast_803B8498 = { 0.0f, 0.0f, 1.0f };
 
-static struct grLast_YakumonoParam {
-    void* x0;
-    void* x4;
-    void* x8;
-    void* xC;
-}* yakumono_param;
+static struct grLast_YakumonoParam* yakumono_param;
 
 static void grLast_OnDemoInit(enum_t arg0)
 {

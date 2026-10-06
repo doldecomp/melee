@@ -6,6 +6,7 @@
 #include <melee/lb/forward.h>
 #include <sysdolphin/baselib/forward.h>
 
+#include <dat_macros.h>
 #include <placeholder.h>
 
 #include <dolphin/mtx.h>
@@ -127,7 +128,8 @@ struct grCastle_YakumonoParam {
     /* 0x05A */ u8 pad_x5A[2];
     /* 0x05C */ grCastleParams_Entry entries[9];
     /* 0x110 */ f32 x110;
-    /* 0x114 */ void* x114;
+    /* 0x114 */ union ColorOverlay_x8_t*
+        x114 DAT_SCRIPT(colAnimCommandLength(_command));
     /* 0x118 */ f32 x118;
     /* 0x11C */ f32 x11C;
     /* 0x120 */ f32 x120;

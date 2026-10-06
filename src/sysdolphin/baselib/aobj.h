@@ -5,6 +5,8 @@
 
 #include <sysdolphin/baselib/forward.h> // IWYU pragma: export
 
+#include <dat_macros.h>
+
 #include <sysdolphin/baselib/debug.h>
 #include <sysdolphin/baselib/fobj.h>
 #include <sysdolphin/baselib/objalloc.h>
@@ -55,7 +57,7 @@ struct HSD_AObjDesc {
     /// that object is registered under once loaded (#HSD_IDGetDataFromTable):
     /// a joint, a material, or another kind. Loaded as a joint if nothing is
     /// registered under it yet.
-    void* obj_id;
+    void* obj_id DAT_TYPE(HSD_Joint);
 };
 
 struct HSD_AnimJoint {

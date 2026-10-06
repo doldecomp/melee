@@ -10,6 +10,8 @@
 
 #include <sysdolphin/baselib/gobj.h>
 
+union ColorOverlay_x8_t;
+
 /* 1C8D44 */ Item_GObj*
 grMaterial_801C8D44(int arg0, int arg1, Ground* arg2, Vec3* arg3, int arg4,
                     void (*arg5)(Item_GObj*, Ground*),
@@ -40,7 +42,8 @@ grMaterial_801C8CFC(int, int, Ground*, HSD_JObj*,
 /* 1C9490 */ void grMaterial_801C9490(Item_GObj* gobj, CommandInfo* cmd);
 /* 1C94D8 */ void grMaterial_801C94D8(void*);
 /* 1C95C4 */ void grMaterial_801C95C4(HSD_GObj*);
-/* 1C9604 */ void grMaterial_801C9604(HSD_GObj* bg, void*, bool);
+/* 1C9604 */ void grMaterial_801C9604(HSD_GObj* bg,
+                                      union ColorOverlay_x8_t* script, bool);
 /* 1C9664 */ void fn_801C9664(Item_GObj* gobj, CommandInfo* cmd, int arg2);
 /* 1C9698 */ void grMaterial_801C9698(HSD_GObj*);
 

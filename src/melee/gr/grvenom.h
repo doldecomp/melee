@@ -3,6 +3,8 @@
 
 #include <melee/gr/forward.h>
 
+#include <dat_macros.h>
+
 /* 20362C */ void grVenom_8020362C(void);
 /* 203B14 */ void grVenom_80203B14(bool);
 /* 203B18 */ void grVenom_80203B18(void);
@@ -74,7 +76,7 @@ struct grVenom_YakumonoParam {
     f32 x2C;
     char x30[0x34 - 0x30];
     f32 x34;
-    void* x38;
+    union ColorOverlay_x8_t* x38 DAT_SCRIPT(colAnimCommandLength(_command));
 };
 
 #endif

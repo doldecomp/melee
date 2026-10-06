@@ -185,7 +185,7 @@ void grShrineRoute_OnLoad(void)
 void grShrineRoute_OnStart(void)
 {
     int val;
-    grZakoGenerator_801CAE04(&yakumono_param->spawn_desc);
+    grZakoGenerator_801CAE04(yakumono_param->spawn_descs);
     val = yakumono_param->x24;
     if (val != 0) {
         val = HSD_Randi(yakumono_param->x24);

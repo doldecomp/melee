@@ -29,4 +29,15 @@
 /* 202B64 */ bool grYorster_80202B64(Vec3*, int _, HSD_JObj*);
 /* 3E51CC */ extern StageData grYt_StageData;
 
+typedef struct grYorster_YakumonoParam {
+    f32 x00;
+    f32 x04;
+    f32 x08;
+    f32 x0C;
+    s32 x10;
+    s32 x14;
+    s32 x18;
+    s32 x1C;
+} grYorster_YakumonoParam;
+
 #endif

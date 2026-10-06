@@ -131,7 +131,8 @@ struct grCorneria_YakumonoParam {
     /* 0x78 */ s32 x78;
     /* 0x7C */ s32 x7C;
     /* 0x80 */ s32 x80;
-    /* 0x84 */ void* x84;
+    /* 0x84 */ union ColorOverlay_x8_t*
+        x84 DAT_SCRIPT(colAnimCommandLength(_command));
     /* 0x88 */ f32 x88;
 };
 
