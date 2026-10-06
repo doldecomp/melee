@@ -291,19 +291,24 @@ nix build .#melee-dat-samples
 ## Packed animation validation
 
 `symbols check-motions` reads the fighter filenames and motion counts from
-the linked game ELF, then checks each nonempty `ftData.xC` motion's file
-offset, exact size and public `FigaTree` name against its `Pl*AJ.dat` archive.
+the original DOL using the addresses and sizes in `symbols.txt`, then checks
+each nonempty `ftData.xC` motion's file offset, exact size and public
+`FigaTree` name against its `Pl*AJ.dat` archive.
 It fails if a reference lands between archives, has the wrong size, or names
 a symbol absent from that archive. Empty motions and shared references are
 valid. Archives no motion references are reported and retained; padding need
 not be zero.
 
 ```sh
-melee-dat symbols check-motions --elf build/GALE01/main.elf --files orig/GALE01/files
+melee-dat symbols check-motions
+# Override the GALE01 defaults if needed:
+melee-dat symbols check-motions --dol orig/GALE01/sys/main.dol \
+  --symbols config/GALE01/symbols.txt --files orig/GALE01/files
 ```
 
-The ELF needs its symbols and initialized data, but no DWARF. Counts come
-from `ftData_Table_Unk0`, and the filenames from `ftData_803C1F40` and
+This needs extracted disc files and the checked-in symbol configuration;
+no game build, MWCC, DWARF or DTK executable is needed. Counts come from
+`ftData_Table_Unk0`, and the filenames from `ftData_803C1F40` and
 `ftData_803C23E4`. This checks normal fighter animations; demo motion tables
 and nested motion-file archives are separate follow-ups.
 
