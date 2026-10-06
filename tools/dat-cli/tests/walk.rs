@@ -222,6 +222,24 @@ fn graph(bound: Option<u64>) -> TypeGraph {
     graph
 }
 
+#[test]
+fn void_pointer_type_names() {
+    let mut graph = graph(None);
+    ty(
+        &mut graph,
+        9,
+        None,
+        Some(4),
+        TypeKind::Pointer { target: Some(3) },
+    );
+    let canonical = Canonical::new(&graph);
+    assert_eq!(canonical.lookup(&graph, "void*"), [3]);
+    assert_eq!(canonical.lookup(&graph, "void *"), [3]);
+    assert_eq!(canonical.lookup(&graph, "void**"), [9]);
+    assert!(canonical.lookup(&graph, "Missing*").is_empty());
+    assert!(canonical.lookup(&graph, "Missing**").is_empty());
+}
+
 fn walk(graph: &TypeGraph, count: u32) -> Walk {
     let words = [count, 16, 20, 16, 123, 456];
     let data: Vec<_> = words.into_iter().flat_map(u32::to_be_bytes).collect();

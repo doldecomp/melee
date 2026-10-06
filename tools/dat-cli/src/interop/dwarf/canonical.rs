@@ -158,7 +158,7 @@ impl Canonical {
     }
 
     /// The representatives of the types a C type name refers to, e.g.
-    /// `HSD_Joint`, `struct HSD_Joint` or `u8*`.
+    /// `HSD_Joint`, `struct HSD_Joint`, `u8*` or `void*`.
     pub fn lookup(&self, graph: &TypeGraph, name: &str) -> Vec<DieId> {
         if let Some(target) = name.strip_suffix('*') {
             let targets: Vec<_> = self
@@ -172,8 +172,12 @@ impl Canonical {
                 .filter(|canon| {
                     matches!(
                         graph.types[&canon.rep].kind,
-                        TypeKind::Pointer { target: Some(t) }
-                            if self.of(t).is_some_and(|t| targets.contains(&t))
+                        TypeKind::Pointer { target: pointee }
+                            if match pointee {
+                                Some(t) => self.of(t).is_some_and(|t| targets.contains(&t)),
+                                // DWARF has no type DIE for void.
+                                None => target.trim() == "void",
+                            }
                     )
                 })
                 .map(|canon| canon.rep)
