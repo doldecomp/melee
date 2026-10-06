@@ -165,7 +165,10 @@ Not errors:
   version without touching `GALE01`'s numbers. Folding dats into the main
   report as REL-like units would lower `GALE01`'s data percentage:
   decomp.dev sums every unit and ignores `module_name`.
-- The report has to come from dat-cli: `objdiff-cli report` measures data
-  per combined section and misses relocation differences. Units per archive, `matched_data` as the bytes of objects
-  whose sample matches.
-- Unknown whether CI's `/orig` has `orig/GALE01/files`.
+- `samples report --objdiff` exports the report from dat-cli, including
+  sample relocation differences and whole-archive data totals. Build the
+  samples and upload its `report.json` as `GALE01-dat_report` in CI once
+  the inputs are available.
+- CI's current `melee-build:main` image has an empty
+  `/orig/GALE01/files` directory (checked on 2026-10-06): provide the
+  extracted archives before enabling DAT reporting.
