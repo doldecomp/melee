@@ -696,11 +696,16 @@ struct ftData_x8_x8 {
     /*  +C */ u16** xC;
 };
 
+/// A visibility lookup for each model of #FtPartsDesc.
+typedef FtPartsVisLookup*
+    FtPartsVisLookupList DAT_COUNT(FtPartsDesc::model_num);
+
 struct FtPartsDesc {
     /*  +0 */ u32 model_num;
     /// A row per costume, the default's (0) where an entry is NULL
     /// (#ftParts_8007487C).
-    /*  +4 */ FtPartsVisLookup* (*vis_table)[4] DAT_EXTENT;
+    /*  +4 */ FtPartsVisLookupList (*vis_table)[4] DAT_EXTENT
+        DAT_BIND(FtPartsDesc::model_num, model_num);
 };
 
 typedef struct ftData_x20 {
@@ -933,9 +938,8 @@ struct ftData {
                                                                _index);
     /* +4C */ FtSFX* x4C_sfx;
     /* +50 */ Vec2* x50;
-    /// Bones, indexed by #Fighter::x2220_b0.
-    /// @todo Count: five in every fighter's data.
-    /* +54 */ int* x54 DAT_EXTENT;
+    /// Bones cycled by #ftCo_8009F834 using #Fighter::x2220_b0.
+    /* +54 */ int* x54 DAT_COUNT(5);
     /* +58 */ struct ftData_x58_t* x58;
     /* +5C */ HSD_Joint* x5C;
 };
@@ -1135,7 +1139,7 @@ struct ftDeviceUnk4 {
 };
 ASSERT_SIZE(struct ftDeviceUnk4, 0x8);
 
-/// TODO same as ftDeviceUnk3
+/// @todo same as ftDeviceUnk3
 struct ftDeviceUnk5 {
     UNK_T x0;
     ftCommon_BuryType x4;

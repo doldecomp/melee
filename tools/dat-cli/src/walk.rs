@@ -526,7 +526,7 @@ impl<'a> Walker<'a> {
                 }
             }
             TypeKind::Array { element, dims } => {
-                let Some(element) = self.resolve(*element) else {
+                let Some(element) = *element else {
                     return;
                 };
                 let Some(size) = self.canonical.byte_size(graph, element)
@@ -537,6 +537,7 @@ impl<'a> Walker<'a> {
                 let count: u64 = dims.iter().map(|d| d.unwrap_or(1)).product();
                 for i in 0..count {
                     let path = format!("{path}[{i}]");
+                    // Keep typedef tags, e.g. a counted list in each slot.
                     self.layout(
                         offset + (i * size) as u32,
                         element,
@@ -965,7 +966,7 @@ impl<'a> Walker<'a> {
         else {
             return None;
         };
-        let element = self.resolve(*element)?;
+        let element = (*element)?;
         let size = self.canonical.byte_size(self.graph, element)?;
         Some((element, size, dims.iter().map(|d| d.unwrap_or(1)).product()))
     }

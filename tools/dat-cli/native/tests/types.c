@@ -13,8 +13,12 @@
 
 #include "melee_dat.h"
 #include <dat/archive.h>
+#include <melee/ft/dobjlist.h>
 #include <melee/ft/types.h>
+#include <melee/it/it_3F14.h>
 #include <melee/it/itCommonItems.h>
+#include <melee/it/itemattrs.h>
+#include <sysdolphin/baselib/aobj.h>
 #include <sysdolphin/baselib/jobj.h>
 
 static int failures;
@@ -100,9 +104,9 @@ static int public_offset(const uint8_t* file, const char* name,
     return 0;
 }
 
-/// Food's inline entries are counted by its own header, including the
-/// final entry. Read the native structs against their serialized offsets.
-static void test_foods(const char* dir)
+/// Load the item table through its public root so the kind bindings select
+/// the food and mushroom views, then check their nested native pointers.
+static void test_common_items(const char* dir)
 {
     char path[2048];
     snprintf(path, sizeof path, "%s/ItCo.dat", dir);
@@ -125,11 +129,15 @@ static void test_foods(const char* dir)
     uint32_t table = be32(data + root + 4);
     uint32_t article = be32(data + table + 4 * It_Kind_Foods);
     uint32_t attrs = be32(data + article + 4);
-    /* The item union still leaves foods unselected. Load its known type
-       directly to test the count without adding another discriminator. */
+    it_804D6D20_t* items =
+        a ? dat_public(a, "itPublicData", DAT_TYPE_it_804D6D20_t) : NULL;
+    CHECK(items != NULL && items->x4 != NULL, "%s", path);
+    Article* food_article =
+        items != NULL && items->x4 != NULL ? items->x4[It_Kind_Foods] : NULL;
     itFoodsAttributes* foods =
-        a ? dat_at(a, attrs, DAT_TYPE_itFoodsAttributes, DAT_COUNT_ONE, 0)
-          : NULL;
+        food_article != NULL && food_article->x4_specialAttributes != NULL
+            ? &food_article->x4_specialAttributes->foods
+            : NULL;
     CHECK(foods != NULL, "%s", path);
     if (foods != NULL) {
         CHECK(foods->count == (int32_t) be32(data + attrs), "%s", path);
@@ -149,10 +157,91 @@ static void test_foods(const char* dir)
                       "food %d", i);
             }
         }
+    }
+    if (items != NULL && items->x4 != NULL) {
+        static const ItemKind kinds[] = { It_Kind_Kinoko, It_Kind_DKinoko };
+        for (size_t i = 0; i < sizeof kinds / sizeof *kinds; i++) {
+            ItemKind kind = kinds[i];
+            uint32_t offset = be32(data + table + 4 * kind);
+            uint32_t special = be32(data + offset + 4);
+            Article* mushroom = items->x4[kind];
+            CHECK(mushroom != NULL && mushroom->x4_specialAttributes != NULL,
+                  "mushroom %u", kind);
+            if (mushroom == NULL || mushroom->x4_specialAttributes == NULL) {
+                continue;
+            }
+            const KinokoAttrs* native =
+                &mushroom->x4_specialAttributes->kinoko;
+            CHECK(native->x0 == befloat(data + special), "mushroom %u", kind);
+            CHECK(native->x4 == befloat(data + special + 4), "mushroom %u",
+                  kind);
+            for (uint32_t j = 0; j < 2; j++) {
+                uint32_t anim = be32(data + special + 8 + 4 * j);
+                CHECK(native->x8[j] != NULL, "mushroom %u anim %u", kind, j);
+                if (native->x8[j] != NULL) {
+                    CHECK(native->x8[j]->flags == be32(data + anim + 0x10),
+                          "mushroom %u anim %u", kind, j);
+                }
+            }
+        }
+    }
+    if (a != NULL) {
         CHECK(dat_verify(a, NULL) == 0, "%s", path);
     }
     dat_close(a);
     free(bytes);
+}
+
+/// Read every model in the default costume's four visibility lists, then
+/// their nested variants and display-object indices, at serialized offsets.
+static void test_visibility(const uint8_t* data, uint32_t root,
+                            const ftData* fd, const char* name)
+{
+    CHECK(fd->x8 != NULL, "%s", name);
+    if (fd->x8 == NULL) {
+        return;
+    }
+    const FtPartsDesc* desc = &fd->x8->x0;
+    uint32_t offset = be32(data + root + 8);
+    uint32_t count = be32(data + offset);
+    uint32_t table = be32(data + offset + 4);
+    CHECK(desc->model_num == count && count <= 11, "%s", name);
+    CHECK((desc->vis_table == NULL) == (table == 0), "%s", name);
+    if (desc->vis_table == NULL) {
+        return;
+    }
+    for (uint32_t column = 0; column < 4; column++) {
+        uint32_t lookup = be32(data + table + column * 4);
+        const FtPartsVisLookup* list = desc->vis_table[0][column];
+        CHECK((list == NULL) == (lookup == 0), "%s: column %u", name, column);
+        if (list == NULL) {
+            continue;
+        }
+        for (uint32_t model = 0; model < count; model++) {
+            const uint8_t* entry = data + lookup + model * 8;
+            CHECK(list[model].x0 == (int32_t) be32(entry), "%s: model %u",
+                  name, model);
+            uint32_t variants = be32(entry + 4);
+            CHECK((list[model].x4 == NULL) == (variants == 0), "%s: model %u",
+                  name, model);
+            if (list[model].x4 == NULL) {
+                continue;
+            }
+            for (int32_t j = 0; j < list[model].x0; j++) {
+                const uint8_t* variant = data + variants + j * 8;
+                const TempS* native = &list[model].x4[j];
+                CHECK(native->x0 == (int32_t) be32(variant), "%s: model %u",
+                      name, model);
+                uint32_t indices = be32(variant + 4);
+                CHECK((native->x4 == NULL) == (indices == 0), "%s: model %u",
+                      name, model);
+                if (native->x4 != NULL) {
+                    CHECK(memcmp(native->x4, data + indices, native->x0) == 0,
+                          "%s: model %u", name, model);
+                }
+            }
+        }
+    }
 }
 
 int main(int argc, char** argv)
@@ -161,7 +250,7 @@ int main(int argc, char** argv)
         fprintf(stderr, "usage: %s <files dir>\n", argv[0]);
         return 2;
     }
-    test_foods(argv[1]);
+    test_common_items(argv[1]);
     size_t checked = 0;
     for (size_t i = 0; i < sizeof fighters / sizeof *fighters; i++) {
         char path[2048];
@@ -196,6 +285,7 @@ int main(int argc, char** argv)
             /* The same native object however it's reached */
             CHECK(dat_public(a, fighters[i].name, DAT_TYPE_ftData) == fd, "%s",
                   fighters[i].name);
+            test_visibility(data, root, fd, fighters[i].name);
             checked++;
         }
         dat_close(a);

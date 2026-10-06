@@ -57,20 +57,17 @@ Not errors:
 
 ## Stopgaps
 
-- `FtPartsDesc.vis_table` uses `DAT_EXTENT` for its costume rows. Each
-  row's `FtPartsVisLookup*` entries point to `model_num` elements, but the
-  nested pointers currently walk only one; carry that count through the
-  rows. Game & Watch's extra visibility table is an explicit 11-element
-  array. `ftParts_8007487C` and `ftParts_80074B6C` show the bounds.
+- `FtPartsDesc.vis_table` uses `DAT_EXTENT` for its costume rows; their
+  number comes from the fighter's costume table in the DOL. Each row's
+  visibility lists are counted by `model_num`.
 - `ItemStateArray` uses `DAT_EXTENT`. Its length is the largest `anim_id` in
   the item kind's `ItemStateTable`, plus one. Replace with a `DAT_COUNT`
   based on `Article::kind` once the counts are available (item state enums,
   or reading the tables from the ELF).
-- `ItemSpecialAttributes` declares the layouts and shared views used by
-  item callers, but only 25 variants have `DAT_IF` conditions. Bind and
-  annotate the remaining common items, character items, and Pokémon,
-  and disambiguate shared views (R_Shell, Kinoko). ScBall and Spycloak
-  still lack layouts.
+- `ItemSpecialAttributes` selects common and related items except Sword,
+  ScBall and Spycloak. Sword's first three fields are pointer-typed but
+  hold unrelocated scalar values; ScBall and Spycloak still lack layouts.
+  Bind and annotate the remaining character items and Pokémon.
 - `ftData.xC`/`x14` (actions), `x1C` (part animations) and their `x8`,
   and `ftData_x20.x0` use `DAT_EXTENT`. The counts are in DOL tables per
   fighter kind (`ftData_Table_Unk0`, `ftData_UnkIntPairs`), or only in code.

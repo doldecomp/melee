@@ -48,6 +48,16 @@ typedef struct Node {
     unsigned other : 5;
 } Node;
 
+typedef struct CountedLists {
+    uint32_t n;
+    Leaf* (*rows)[2];
+} CountedLists;
+
+typedef struct InlineLists {
+    uint32_t n;
+    Leaf* rows[2];
+} InlineLists;
+
 static void set_flag(void* o, uint64_t v)
 {
     ((Node*) o)->flag = (unsigned) v & 7;
@@ -91,18 +101,27 @@ enum {
     T_LEAF_ARRAY,
     T_POINTER_ARRAY,
     T_FIXED_ARRAY,
+    T_COUNTED_LEAF_P,
+    T_COUNTED_ROW,
+    T_COUNTED_ROW_P,
+    T_COUNTED_LISTS,
+    T_INLINE_LISTS,
     T_COUNT,
 };
 
 enum {
     DAT_NAME_n = 1,
     DAT_NAME_kind,
+    DAT_NAME_lists_count,
+    DAT_NAME_rows,
     DAT_NAME_COUNT,
 };
 
 static const char* const names[DAT_NAME_COUNT] = {
     [DAT_NAME_n] = "n",
     [DAT_NAME_kind] = "kind",
+    [DAT_NAME_lists_count] = "Lists::count",
+    [DAT_NAME_rows] = "rows",
 };
 
 #define SCALAR(self, type_name, type_kind, sign, bytes, native)               \
@@ -295,6 +314,47 @@ static const DatType type_T_FIXED_ARRAY = {
     .count = 2,
 };
 
+static const DatType type_T_COUNTED_LEAF_P = {
+    .name = "CountedLeafPtr",
+    .id = T_COUNTED_LEAF_P,
+    .kind = DAT_KIND_TYPEDEF,
+    .has_pointers = 1,
+    .size = 4,
+    .native_size = sizeof(Leaf*),
+    .target = T_LEAF_P,
+    .resolved = T_LEAF_P,
+    .count_tag = DAT_NAME(lists_count),
+};
+
+static const DatType type_T_COUNTED_ROW = {
+    .name = "CountedLeafPtr[2]",
+    .id = T_COUNTED_ROW,
+    .kind = DAT_KIND_ARRAY,
+    .has_pointers = 1,
+    .size = 8,
+    .native_size = 2 * sizeof(Leaf*),
+    .target = T_COUNTED_LEAF_P,
+    .resolved = T_COUNTED_ROW,
+    .count = 2,
+};
+
+POINTER(T_COUNTED_ROW_P, "CountedLeafPtr(*)[2]", T_COUNTED_ROW);
+
+static const DatMember counted_lists_members[] = {
+    { DAT_MEMBER(CountedLists, n, 0, T_U32) },
+    { DAT_MEMBER(CountedLists, rows, 4, T_COUNTED_ROW_P), .extent = 1,
+      DAT_BINDS({ DAT_NAME_lists_count, DAT_NAME(n) }) },
+};
+
+static const DatMember inline_lists_members[] = {
+    { DAT_MEMBER(InlineLists, n, 0, T_U32) },
+    { DAT_MEMBER(InlineLists, rows, 4, T_COUNTED_ROW),
+      DAT_BINDS({ DAT_NAME_lists_count, DAT_NAME(n) }) },
+};
+
+INLINE_TYPE(T_COUNTED_LISTS, CountedLists, 8, counted_lists_members);
+INLINE_TYPE(T_INLINE_LISTS, InlineLists, 12, inline_lists_members);
+
 static const DatType* const types[T_COUNT] = {
     [T_S8] = &type_T_S8,
     [T_S16] = &type_T_S16,
@@ -315,6 +375,11 @@ static const DatType* const types[T_COUNT] = {
     [T_LEAF_ARRAY] = &type_T_LEAF_ARRAY,
     [T_POINTER_ARRAY] = &type_T_POINTER_ARRAY,
     [T_FIXED_ARRAY] = &type_T_FIXED_ARRAY,
+    [T_COUNTED_LEAF_P] = &type_T_COUNTED_LEAF_P,
+    [T_COUNTED_ROW] = &type_T_COUNTED_ROW,
+    [T_COUNTED_ROW_P] = &type_T_COUNTED_ROW_P,
+    [T_COUNTED_LISTS] = &type_T_COUNTED_LISTS,
+    [T_INLINE_LISTS] = &type_T_INLINE_LISTS,
 };
 
 static const DatSchema schema = {
@@ -585,6 +650,66 @@ static void test_inline_counts(void)
     }
 }
 
+static void test_array_typedef_counts(void)
+{
+    for (unsigned i = 0; i < 4; i++) {
+        unsigned char file[0x200];
+        uint32_t count = i < 2 ? 2 : 0;
+        bool inline_row = i % 2 != 0;
+        size_t size = build_inline(file, count, true);
+        unsigned char* d = file + 0x20;
+        /* Two lists of two leaves; the last leaf of each must be read. */
+        memcpy(d + 0x58, d + 0x40, 24);
+        put32(d + 0x5C, 111);
+        put32(d + 0x68, 222);
+        if (!inline_row) {
+            put32(d + 4, 16);
+            put32(d + 8, 0);
+            put32(d + 12, 0);
+            put32(d + 16, 0x40);
+            put32(d + 20, 0x58);
+            put32(d + DATA + 4, 16);
+            put32(d + DATA + 8, 20);
+        } else {
+            put32(d + 8, 0x58);
+        }
+        DatArchive* a = dat_open(&schema, file, size, NULL);
+        CHECK(a != NULL);
+        Leaf** row = NULL;
+        if (!inline_row) {
+            CountedLists* lists = dat_public(a, "root", T_COUNTED_LISTS);
+            CHECK(lists != NULL && lists->rows != NULL);
+            if (lists != NULL && lists->rows != NULL) {
+                row = lists->rows[0];
+            }
+        } else {
+            InlineLists* lists = dat_public(a, "root", T_INLINE_LISTS);
+            CHECK(lists != NULL);
+            if (lists != NULL) {
+                row = lists->rows;
+            }
+        }
+        CHECK(row != NULL && row[0] != NULL && row[1] != NULL);
+        char* text = trace(a);
+        CHECK(!contains(text, "issue"));
+        CHECK(contains(text, "extent 0x40 0x58") == (count > 0));
+        CHECK(contains(text, "extent 0x58 0x70") == (count > 0));
+        if (count > 0 && row != NULL && row[0] != NULL && row[1] != NULL) {
+            /* An incomplete list should fail without an out-of-bounds
+               access, so guard its last element with the traced extent. */
+            if (contains(text, "extent 0x40 0x58") &&
+                contains(text, "extent 0x58 0x70"))
+            {
+                CHECK(row[0][1].c == 456);
+                CHECK(row[1][1].c == 222);
+            }
+        }
+        CHECK(dat_verify(a, NULL) == 0);
+        free(text);
+        dat_close(a);
+    }
+}
+
 static void test_refuses(void)
 {
     unsigned char file[0x200];
@@ -630,6 +755,7 @@ int main(void)
 {
     test_walk();
     test_inline_counts();
+    test_array_typedef_counts();
     test_refuses();
     test_packed();
     printf("%s (%zu-bit %s-endian)\n", failures ? "FAILED" : "ok",
