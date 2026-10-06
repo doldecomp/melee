@@ -57,11 +57,9 @@ Not errors:
 
 ## Stopgaps
 
-- `FtPartsDesc.vis_table` uses `DAT_EXTENT` for its costume rows. Each
-  row's `FtPartsVisLookup*` entries point to `model_num` elements, but the
-  nested pointers currently walk only one; carry that count through the
-  rows. Game & Watch's extra visibility table is an explicit 11-element
-  array. `ftParts_8007487C` and `ftParts_80074B6C` show the bounds.
+- `FtPartsDesc.vis_table` uses `DAT_EXTENT` for its costume rows; their
+  number comes from the fighter's costume table in the DOL. Each row's
+  visibility lists are counted by `model_num`.
 - `ItemStateArray` uses `DAT_EXTENT`. Its length is the largest `anim_id` in
   the item kind's `ItemStateTable`, plus one. Replace with a `DAT_COUNT`
   based on `Article::kind` once the counts are available (item state enums,

@@ -121,7 +121,7 @@ void ft_80089460(Fighter* fp)
     }
 }
 
-// TODO: is arg1 not just a Struct2070?
+/// @TODO: is arg1 not just a Struct2070?
 void ft_800895E0(Fighter* fp, int arg1)
 {
     union Struct2070 val;
