@@ -99,13 +99,11 @@ Not errors:
   `HSD_TlutDesc` sizes (e.g. GrIz and GrPu, whose descs nothing reached
   points to).
 - Vertex arrays are sized by `GXMaxIndex` over the display lists of the
-  shapes that reach their descriptors. Shape animations
-  (`HSD_ShapeSetDesc.vertex_idx_list`, `nb_vertex_index` indices per shape)
-  index them too and aren't counted: 15 arrays end 32 or more bytes before
-  the next object (`PlCa??.dat` 0x4180, `GmRegClr.dat` 0x9660, `GrNSr.dat`
-  0x500, `MnSlMap.dat` 0x75360, `NtAppro.dat` 0, ...). A descriptor list
-  reached only through a shape set has no display list bound: its arrays
-  are one byte.
+  shapes that reach their descriptors. Shape-animation index lists
+  (`HSD_ShapeSetDesc.vertex_idx_list` and `normal_idx_list`) aren't sized
+  yet. Descriptors reached without a display list retain `DAT_EXTENT`
+  inference. Exact index-list lengths and the largest vertex index across
+  both display lists and shape-animation lists remain to be inferred.
 - The particle banks (`EffectDataTable.cmd_bank`/`tex_bank`, `map_ptcl`,
   `map_texg`) use `DAT_EXTENT`/`extent`. Their headers give their sizes, as
   `psInitDataBankLocate` reads them: a header struct with counted members,

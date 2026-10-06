@@ -651,3 +651,43 @@ fn vertex_arrays_reach_the_largest_index_of_every_shape() {
         assert_eq!(walked.extents.get(&0xC0), Some(&end), "{roots:?}");
     }
 }
+
+#[test]
+fn vertex_arrays_without_display_lists_keep_their_extent() {
+    let (mut graph, data, relocs) = shapes();
+    let extent = tag(&mut graph, "dat:extent");
+    if let TypeKind::Record { members, .. } =
+        &mut graph.types.get_mut(&5).unwrap().kind
+    {
+        members.last_mut().unwrap().annotations.push(extent);
+    }
+    let archive = Archive {
+        header: ArchiveHeader {
+            file_size: 0,
+            data_size: data.len() as u32,
+            reloc_count: relocs.len() as u32,
+            public_count: 0,
+            extern_count: 0,
+            version: [0; 12],
+        },
+        data: &data,
+        relocs,
+        publics: Vec::new(),
+        externs: Vec::new(),
+        symbols: &[],
+    };
+    let canonical = Canonical::new(&graph);
+    let macros = HashMap::new();
+    // A shape set reaches the descriptor alone, without a display list.
+    // It must retain the fallback even after a counted reference visited it.
+    for roots in [&[(0x20, 5)][..], &[(0, 7), (0x20, 5)], &[(0x20, 5), (0, 7)]]
+    {
+        let mut walker = Walker::new(&graph, &canonical, &macros, &archive);
+        for &(offset, ty) in roots {
+            walker.root(offset, ty, "shape", &[]);
+        }
+        let walked = walker.finish();
+        assert!(walked.issues.is_empty(), "{:?}", walked.issues);
+        assert_eq!(walked.extents.get(&0xC0), Some(&0x100), "{roots:?}");
+    }
+}

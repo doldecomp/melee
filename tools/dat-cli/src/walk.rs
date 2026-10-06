@@ -384,6 +384,7 @@ impl<'a> Walker<'a> {
             return;
         };
         if !self.visited.insert((offset, id)) {
+            self.recount(offset, raw, &path);
             return;
         }
         self.typed_extent(offset, raw, 1);
@@ -652,15 +653,47 @@ impl<'a> Walker<'a> {
                 let Some(id) = self.canonical.of(target) else {
                     return;
                 };
+                // Raw arrays need no conversion. Retain their full extent
+                // even if another reference supplied a shorter count first.
+                let raw = raw.unwrap_or(target);
+                if self.is_opaque(raw) {
+                    let size = self
+                        .canonical
+                        .byte_size(self.graph, target)
+                        .unwrap_or(0) as u32;
+                    if size == 0 {
+                        return;
+                    }
+                    let mut count = 0;
+                    for i in 0.. {
+                        let at = u64::from(value) + i * u64::from(size);
+                        if at + u64::from(size) > self.data.len() as u64 {
+                            break;
+                        }
+                        let at = at as u32;
+                        if i > 0
+                            && (self.publics.contains(&at)
+                                || self.targets.contains(&at)
+                                || self.walk.objects.contains_key(&at)
+                                || !self.fits(at, target))
+                        {
+                            break;
+                        }
+                        count += 1;
+                    }
+                    return self.counted(
+                        offset, array, None, count, path, binds, parent,
+                    );
+                }
                 if !self.visited.insert((value, id)) {
                     return;
                 }
-                self.reached(value, id, raw);
+                self.reached(value, id, Some(raw));
                 self.walk
                     .paths
                     .entry(value)
                     .or_insert_with(|| format!("{path}->"));
-                (value, raw, format!("{path}->"))
+                (value, Some(raw), format!("{path}->"))
             }
             _ => return self.layout(offset, array, path, parent),
         };
@@ -1363,6 +1396,29 @@ impl<'a> Walker<'a> {
         }
     }
 
+    /// Whether an object's native representation is its archive bytes.
+    fn is_opaque(&self, die: DieId) -> bool {
+        let Some(ty) = self.graph.types.get(&die) else {
+            return false;
+        };
+        if self.is_raw(die)
+            || ty.annotations.iter().any(|a| {
+                a.value.and_then(|v| DatTag::parse(self.graph.str(v)))
+                    == Some(DatTag::Blob)
+            })
+        {
+            return true;
+        }
+        match ty.kind {
+            TypeKind::Typedef { target }
+            | TypeKind::Const { target }
+            | TypeKind::Volatile { target } => {
+                target.is_some_and(|t| self.is_opaque(t))
+            }
+            _ => false,
+        }
+    }
+
     /// Follow a `DAT_TERMINATED` pointer: elements up to one whose first
     /// word is the terminator value, which is walked too, with the
     /// `length - 1` after it.
@@ -1450,10 +1506,9 @@ impl<'a> Walker<'a> {
         }
     }
 
-    /// A list element already walked, reached again with other bindings
-    /// (a vertex descriptor list shapes share): the plain data its counted
-    /// pointers point to may reach further, as far as the longest count.
-    /// Nothing else is walked again.
+    /// An object already walked, reached again with other bindings (a
+    /// shared vertex descriptor): its plain pointer fields may supply a
+    /// longer count or an extent fallback. Nothing else is walked again.
     fn recount(&mut self, offset: u32, die: DieId, path: &str) {
         let Some(die) = self.resolve(Some(die)) else {
             return;
@@ -1491,6 +1546,9 @@ impl<'a> Walker<'a> {
             if let Some(count) = self.count(member, die, offset) {
                 let path = field(path, member.name.map(|n| graph.str(n)));
                 self.counted(at, ty, declared, count, &path, &binds, parent);
+            } else if self.is_extent(member) {
+                let path = field(path, member.name.map(|n| graph.str(n)));
+                self.extent(at, ty, &path, &binds, parent);
             }
             self.env = outer;
         }

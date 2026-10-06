@@ -463,7 +463,7 @@ fn gx_max_index(dl: &[u8], descs: &[u8], attr: u64) -> Option<u64> {
         let order = if a == 25 { 10 } else { a };
         let indices = match (a, cnt) {
             // GX_NRM_NBT3: an index each for the normal, binormal and tangent
-            (10, 2) => 3,
+            (10 | 25, 2) => 3,
             _ => 1,
         };
         let (width, count) = match ty {
@@ -936,6 +936,16 @@ mod tests {
         assert_eq!(e("dl + 1"), None);
         assert_eq!(e("dl"), Some(Value::Bytes(&dl)));
         assert_eq!(e("GXMaxIndex(1, dl, 9)"), None);
+    }
+
+    #[test]
+    fn nbt3_uses_three_indices_for_both_normal_attributes() {
+        for attr in [10, 25] {
+            let descs = descs(&[(attr, 2, 2, 1), (13, 2, 1, 3)]);
+            let dl = [0x90, 0, 2, 1, 9, 3, 4, 2, 5, 8, 6, 0];
+            assert_eq!(gx_max_index(&dl, &descs, attr.into()), Some(9));
+            assert_eq!(gx_max_index(&dl, &descs, 13), Some(6));
+        }
     }
 
     #[test]
