@@ -411,7 +411,7 @@ pub fn call<'d>(function: &str, args: &[Value<'d>]) -> Option<Value<'d>> {
         ("colAnimCommandLength", &[Int(command)]) => {
             col_anim_command_length(command)?
         }
-        ("cpuCommandLength", &[Int(command)]) => Some(cpu_command_length(command)),
+        ("cpuCommandLength", &[Int(command)]) => cpu_command_length(command),
         (
             "GXGetTexBufferSize",
             &[

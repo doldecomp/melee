@@ -512,7 +512,8 @@ impl<'a> Walker<'a> {
                 // Views of plain data need no condition: nothing to follow.
                 // Conditions still choose among layouts of different sizes.
                 let plain = !self.has_pointers(die);
-                if plain && !members.iter().any(|m| self.condition(m).is_some())
+                if plain
+                    && !members.iter().any(|m| self.condition(m).is_some())
                 {
                     return self.scalar(offset, die, path);
                 }
@@ -840,8 +841,10 @@ impl<'a> Walker<'a> {
         }
         // Shared plain arrays retain the longest count. Selected unions
         // still need their selected member's layout and extent.
-        if count > 0 && !self.has_pointers(element)
-            && !self.conditioned_union(element) {
+        if count > 0
+            && !self.has_pointers(element)
+            && !self.conditioned_union(element)
+        {
             let Some(id) = self.canonical.of(element) else {
                 return;
             };
