@@ -56,7 +56,8 @@ fn tagged_plain_union_uses_the_selected_record_size() {
             symbols: &[],
         };
         for array in [false, true] {
-            let mut walker = Walker::new(&graph, &canonical, &macros, &archive);
+            let mut walker =
+                Walker::new(&graph, &canonical, &macros, &archive);
             let binds = [("kind".into(), kind)];
             if array {
                 walker.root_array(0, 10, Some(1), "root", &binds);
@@ -65,7 +66,10 @@ fn tagged_plain_union_uses_the_selected_record_size() {
             }
             let walked = walker.finish();
             assert!(walked.issues.is_empty(), "{:?}", walked.issues);
-            assert_eq!(walked.choices[&(0, canonical.of(10).unwrap())], kind as usize);
+            assert_eq!(
+                walked.choices[&(0, canonical.of(10).unwrap())],
+                kind as usize
+            );
             assert_eq!(walked.extents[&0], if kind == 0 { 4 } else { 8 });
             assert!(walked.pointers.is_empty());
         }

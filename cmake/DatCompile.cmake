@@ -17,8 +17,6 @@ if(EXISTS "${SOURCE}")
     # Each sample in its own section, then linked into .data in the target's
     # order: clang lays variables out where an initializer first points to
     # them
-    get_filename_component(_object_dir "${OBJECT}" DIRECTORY)
-    file(MAKE_DIRECTORY "${_object_dir}")
     execute_process(
         COMMAND "${C_COMPILER}" "@${FLAGS}" -fdata-sections
             -MD -MF "${DEPFILE}" -MT "${BASE}" -c "${SOURCE}" -o "${OBJECT}"
