@@ -4,11 +4,11 @@ use melee_dat::dtk::SymbolFile;
 fn reads_dtk_symbols_and_optional_sizes() {
     let symbols = SymbolFile::parse(
         "\n # comment\n // comment\n\
-         ftData_Table_Unk0 = .data:0x803C0FC8; // type:object size:0x108 scope:global data:4byte\n\
-         __dt__13mDoExt_bckAnmFv = .text:2147483648; // size:92 align:4\n\
-         label = extab:0X80300000; // hidden\n\
-         absolute = ABS:123;\n\
-         empty_comment = .data:0; //\n",
+        ftData_Table_Unk0 = .data:0x803C0FC8; // type:object size:0x108 scope:global data:4byte\n\
+        __dt__13mDoExt_bckAnmFv = .text:2147483648; // size:92 align:4\n\
+        label = extab:0X80300000; // hidden\n\
+        absolute = ABS:123;\n\
+        empty_comment = .data:0; //\n",
     )
     .unwrap();
     assert_eq!(symbols.entries.len(), 5);
@@ -28,8 +28,8 @@ fn reads_dtk_symbols_and_optional_sizes() {
 fn repeated_local_names_do_not_prevent_global_lookup() {
     let symbols = SymbolFile::parse(
         "@219 = .data:0x80000000; // scope:local\n\
-         @219 = .data:0x80000004; // scope:local\n\
-         global = .data:0x80000008; // size:4\n",
+        @219 = .data:0x80000004; // scope:local\n\
+        global = .data:0x80000008; // size:4\n",
     )
     .unwrap();
     assert_eq!(symbols.lookup("global").unwrap().address, 0x80000008);
