@@ -62,6 +62,8 @@ MemCardBanner_* = LbMcGame.dat:*; // type:u8 extent
 MemCardIcon_* = LbMcGame.dat:*; // type:u8 extent
 MemSnapBanner_* = LbMcSnap.dat:*; // type:u8 extent
 MemSnapIcon_* = LbMcSnap.dat:*; // type:u8 extent
+MemCardIconData = *:*; // terminated:0
+MemSnapIconData = *:*; // terminated:0
 
 // Kirby's copy abilities (see ft_80459B88_t)
 ftDataKirbyCopyCaptain = PlKbCpCa.dat:*; // type:ftKbCopyHat
@@ -115,7 +117,6 @@ eff*DataTable = Ef*.dat:*; // type:EffectDataTable
 // offsets into themselves, as far as the data runs.
 map_ptcl = *:*; // extent
 map_texg = *:*; // extent
-MemCardIconData = *:*; // extent
 ScGamRegStaffrollNames_scene_modelset = *:*; // count:10
 mnNameAutoName = *:*; // count:684
 mnNameAutoNameUs = *:*; // count:168

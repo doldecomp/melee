@@ -112,7 +112,7 @@ Not errors:
 
 - Loaded into untyped destinations, types unknown:
   `mnNameDefaultName*`
-  (and `mnNameAutoName*`), `MemCardIconData`, `MemSnapIconData`.
+  (and `mnNameAutoName*`).
 - `toy.c` loads trophy symbols through `symbol_name` fields of its tables;
   those are covered by name patterns instead.
 - `ftDemo*MotionFile*` are `u8[]`: packed archives like `Pl??AJ.dat`,
