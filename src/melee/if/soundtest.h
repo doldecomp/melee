@@ -23,12 +23,15 @@ struct SoundTestMenuData {
 struct SoundTestLoadData {
     /* 0x00 */ int x0;
     /* 0x04 */ char** x4 DAT_COUNT(x0);
-    /* 0x08 */ char** x8 DAT_EXTENT;
+    /// 55 sound-group names plus the final GRPSFX_END entry.
+    /* 0x08 */ char** x8 DAT_COUNT(56);
     /* 0x0C */ char** xC DAT_COUNT(x10);
     /* 0x10 */ int x10;
     /* 0x14 */ int* x14 DAT_COUNT(x10);
-    /* 0x18 */ int* x18 DAT_EXTENT;
-    /* 0x1C */ char** x1C DAT_EXTENT;
+    /// Per-group lengths, bounded by #un_803F9FA4's entry 6.
+    /* 0x18 */ int* x18 DAT_COUNT(55);
+    /// 98 music names plus the unused testnz.hps entry.
+    /* 0x1C */ char** x1C DAT_COUNT(99);
 };
 
 #endif

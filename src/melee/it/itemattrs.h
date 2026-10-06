@@ -244,24 +244,42 @@ union ItemSpecialAttributes {
     itKusudamaAttributes kusudama DAT_IF(Article::kind == It_Kind_Kusudama);
     itTaruCann_DatAttrs tarucann DAT_IF(Article::kind == It_Kind_TaruCann);
     itBombHeiAttributes bombhei DAT_IF(Article::kind == It_Kind_BombHei);
+    itDoseiAttributes dosei DAT_IF(Article::kind == It_Kind_Dosei);
     HeartContainerAttr heart DAT_IF(Article::kind == It_Kind_Heart);
     MaximTomatoSpecialAttr tomato DAT_IF(Article::kind == It_Kind_Tomato);
     itStar_ItemVars star DAT_IF(Article::kind == It_Kind_Star);
     itBatAttributes bat DAT_IF(Article::kind == It_Kind_Bat);
+    itParasolAttributes parasol DAT_IF(Article::kind == It_Kind_Parasol);
+    itGShell_Attrs g_shell DAT_IF(Article::kind == It_Kind_G_Shell);
+    itRShell_Attrs r_shell DAT_IF(Article::kind == It_Kind_R_Shell);
     ItLGunAttr l_gun DAT_IF(Article::kind == It_Kind_L_Gun);
     itFreezeAttributes freeze DAT_IF(Article::kind == It_Kind_Freeze);
+    itFoodsAttributes foods DAT_IF(Article::kind == It_Kind_Foods);
+    itMsBomb_Attrs ms_bomb DAT_IF(Article::kind == It_Kind_MSBomb);
     itFlipper_DatAttrs flipper DAT_IF(Article::kind == It_Kind_Flipper);
     itSScopeAttributes s_scope DAT_IF(Article::kind == It_Kind_S_Scope);
+    StarRodAttributes star_rod DAT_IF(Article::kind == It_Kind_StarRod);
     itLipstickAttributes lipstick DAT_IF(Article::kind == It_Kind_LipStick);
     itHarisen_DatAttrs harisen DAT_IF(Article::kind == It_Kind_Harisen);
     FFlowerAttr f_flower DAT_IF(Article::kind == It_Kind_F_Flower);
+    KinokoAttrs kinoko DAT_IF(Article::kind == It_Kind_Kinoko ||
+                              Article::kind == It_Kind_DKinoko);
+    itHammerData hammer_data DAT_IF(Article::kind == It_Kind_Hammer);
     itWstarAttributes wstar DAT_IF(Article::kind == It_Kind_WStar);
+    itRabbitCAttributes rabbit_c DAT_IF(Article::kind == It_Kind_RabbitC);
+    itMetalBAttributes metal_b DAT_IF(Article::kind == It_Kind_MetalB);
     itMBallAttributes m_ball DAT_IF(Article::kind == It_Kind_M_Ball);
     ItLGunRayAttr l_gun_ray DAT_IF(Article::kind == It_Kind_L_Gun_Ray);
+    StarRodStarAttrs star_rod_star DAT_IF(Article::kind ==
+                                          It_Kind_StarRod_Star);
+    itLipstickSporeAttributes lipstick_spore DAT_IF(Article::kind ==
+                                                    It_Kind_LipStick_Spore);
     ScopeBeamAttrs s_scope_beam DAT_IF(Article::kind == It_Kind_S_Scope_Beam);
     ItLGunBeamAttr l_gun_beam DAT_IF(Article::kind == It_Kind_L_Gun_Beam);
     itHammerheadAttributes hammer_head DAT_IF(Article::kind ==
                                               It_Kind_Hammer_Head);
+    itFFlowerFlameAttributes f_flower_flame DAT_IF(Article::kind ==
+                                                   It_Kind_F_Flower_Flame);
     itEvYoshiEgg_DatAttrs evyoshiegg DAT_IF(Article::kind ==
                                             It_Kind_EvYoshiEgg);
 
@@ -276,22 +294,17 @@ union ItemSpecialAttributes {
     itClimbersStringAttributes climbers_string;
     itCoinAttributes coin;
     itCrazyHandBombAttributes crazy_hand_bomb;
-    itDoseiAttributes dosei;
     itDrMarioPillAttributes dr_mario_pill;
-    itFFlowerFlameAttributes f_flower_flame;
     itFireAttributes fire;
     itFlashAttributes flash;
     itFlashExplAttributes flash_expl;
-    itFoodsAttributes foods;
     FoxIllusionAttr fox_illusion;
     FoxLaserAttr fox_laser;
     itFreezerAttributes freezer;
     itFushigibanaAttributes fushigibana;
-    itGShell_Attrs g_shell;
     itGamewatchAttributes gamewatch;
     itGamewatchchefAttributes gamewatchchef;
     itGreatFoxLaser_Attrs great_fox_laser;
-    itHammerData hammer_data;
     itHassam_ItemVars hassam;
     itHeihoAttributes heiho;
     itHinoarashiAttributes hinoarashi;
@@ -300,7 +313,6 @@ union ItemSpecialAttributes {
     itKabigonAttributes kabigon;
     itKamexAttributes kamex;
     itKamexHydroPumpAttributes kamex_hydro_pump;
-    KinokoAttrs kinoko;
     itKirbyCutterBeamAttributes kirby_cutter_beam;
     itkireihanaAttributes kireihana;
     itKoopaFlame_Attributes koopa_flame;
@@ -312,7 +324,6 @@ union ItemSpecialAttributes {
     itLinkBombAttributes link_bomb;
     itLinkBoomerangAttributes link_boomerang;
     itLinkHookshotAttributes link_hookshot;
-    itLipstickSporeAttributes lipstick_spore;
     itLizardonAttributes lizardon;
     itLuckyAttributes lucky;
     itLuckyEggAttributes lucky_egg;
@@ -325,18 +336,15 @@ union ItemSpecialAttributes {
     itMarioFireballAttributes mario_fireball;
     itMasterHandBulletAttributes master_hand_bullet;
     itMasterHandLaserAttributes master_hand_laser;
-    itMetalBAttributes metal_b;
     itMatadogasAttributes matadogas;
     ItMetamonVars metamon;
     MewVars mew;
     itMewtwoShadowball_DatAttrs mewtwo_shadowball;
-    itMsBomb_Attrs ms_bomb;
     itNessPKFirepillarAttributes ness_pk_firepillar;
     itNokoNoko_DatAttrs noko_noko;
     itOctarockAttributes octarock;
     itOldkuriAttributes oldkuri;
     itOldottoseaAttributes oldottosea;
-    itParasolAttributes parasol;
     itPatapataAttributes patapata;
     itPeachToadSporeAttributes peach_toad_spore;
     itPeachTurnipAttributes peach_turnip;
@@ -345,8 +353,6 @@ union ItemSpecialAttributes {
     itPKThunderAttributes pk_thunder;
     itPippiAttributes pippi;
     itPokemonSpawn_DatAttrs pokemon_spawn;
-    itRabbitCAttributes rabbit_c;
-    itRShell_Attrs r_shell;
     itSamusBombAttributes samus_bomb;
     itSamusChargeShot_Attributes samus_charge_shot;
     itSamusGrappleAttributes samus_grapple;
@@ -355,8 +361,6 @@ union ItemSpecialAttributes {
     itSeakChain_Attrs seak_chain;
     itSeakNeedleThrownAttributes seak_needle_thrown;
     itsonansAttributes sonans;
-    StarRodAttributes star_rod;
-    StarRodStarAttrs star_rod_star;
     itSwordAttributes sword;
     struct TetherAttributes tether;
     itThunderPokemonAttributes thunder_pokemon;

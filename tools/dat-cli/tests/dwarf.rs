@@ -248,7 +248,7 @@ fn food_inline_count_from_dwarf_matches_the_archive() {
     let count = word(attrs);
     assert!(count > 1);
     let die = graph
-        .named("itFoodsAttributes")
+        .named("ItemSpecialAttributes")
         .find_map(|(die, ty)| {
             matches!(
                 ty.kind,
@@ -263,7 +263,7 @@ fn food_inline_count_from_dwarf_matches_the_archive() {
     let canonical = Canonical::new(graph);
     let macros = macros(graph);
     let mut walker = Walker::new(graph, &canonical, &macros, &archive);
-    walker.root(attrs, die, "foods", &[]);
+    walker.root(attrs, die, "foods", &[("Article::kind".into(), kind.into())]);
     let walked = walker.finish();
     assert!(walked.issues.is_empty(), "{:?}", walked.issues);
     for i in 0..count {
