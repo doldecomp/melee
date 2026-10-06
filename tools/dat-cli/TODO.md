@@ -138,9 +138,8 @@ Not errors:
 
 ## Native archive interface
 
-- An element of an array that is also an object of its own is converted
-  twice: the array holds a copy, so pointers to the lone object and into the
-  array differ. Interior pointers should point into the array.
+- An array root whose first element was already visited uses the walker's
+  existing one-object view, even when a later request gives a larger count.
 - A pointer to plain data without `DAT_COUNT`, `DAT_EXTENT` or
   `DAT_TERMINATED` is one element natively, as the walk types it.
 - Plain unions (no pointers) are converted as their largest member.
