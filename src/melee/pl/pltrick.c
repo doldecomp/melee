@@ -382,7 +382,8 @@ void pl_800384DC(HSD_GObj* gobj, int arg1, void* arg2)
     PAD_STACK(20);
 
     fp = GET_FIGHTER(gobj);
-    ev_data = arg2;
+    ev_data =
+        arg2; // this is passing in Struct2074*, so types may need to change
     ev = *(union Struct2070*) &arg1;
 
     if (ev.x0.x2073 != 0 && ev.x0.x2073 < 0x64) {

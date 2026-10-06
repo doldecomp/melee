@@ -1892,7 +1892,8 @@ static void Item_8026A810(HSD_GObj* gobj)
     }
 }
 
-void Item_8026A848(HSD_GObj* gobj, HSD_GObj* fighter_gobj)
+// If this item is being held, stop holding the item
+void Item_8026A848(Item_GObj* gobj, HSD_GObj* owner_gobj)
 {
     Item* temp_item = GET_ITEM(gobj);
 
@@ -1902,31 +1903,34 @@ void Item_8026A848(HSD_GObj* gobj, HSD_GObj* fighter_gobj)
         temp_item->kind != It_Kind_Peach_Turnip &&
         temp_item->kind != It_Kind_Peach_Parasol)
     {
-        if (ftLib_GetHeldSpecialItem(fighter_gobj) == gobj) {
-            ftLib_ClearHeldSpecialItem(fighter_gobj);
+        if (ftLib_GetHeldSpecialItem(owner_gobj) == gobj) {
+            ftLib_ClearHeldSpecialItem(owner_gobj);
         }
-    } else if (ftLib_IsHoldingItem(fighter_gobj, gobj)) {
-        ftLib_ReleaseItem(fighter_gobj, gobj);
+    } else if (ftLib_IsHoldingItem(owner_gobj, gobj)) {
+        ftLib_ReleaseItem(owner_gobj, gobj);
     }
 }
 
-static void DestroyItemInline(HSD_GObj* gobj, Item* other_ip)
+// If this item is being held, stop holding the item
+// Does not take in owner_gobj and needs to look it up
+static inline void DestroyItemInline(Item_GObj* item_gobj, Item* item)
 {
-    Item* ip = GET_ITEM(gobj);
-    HSD_GObj* other = other_ip->owner;
+    Item* ip = GET_ITEM(item_gobj);
+    HSD_GObj* owner_gobj = item->owner;
 
     if (ip->hold_kind == ITEM_HOLD_8 && ip->kind != It_Kind_Link_Bomb &&
         ip->kind != It_Kind_CLink_Bomb && ip->kind != It_Kind_Peach_Turnip &&
         ip->kind != It_Kind_Peach_Parasol)
     {
-        if (ftLib_GetHeldSpecialItem(other) == gobj) {
-            ftLib_ClearHeldSpecialItem(other);
+        if (ftLib_GetHeldSpecialItem(owner_gobj) == item_gobj) {
+            ftLib_ClearHeldSpecialItem(owner_gobj);
         }
-    } else if (ftLib_IsHoldingItem(other, gobj)) {
-        ftLib_ReleaseItem(other, gobj);
+    } else if (ftLib_IsHoldingItem(owner_gobj, item_gobj)) {
+        ftLib_ReleaseItem(owner_gobj, item_gobj);
     }
 }
 
+// Check destroy type; based on that, spawn effect and sound
 static void ItemSwitch(HSD_GObj* gobj)
 {
     Item* ip = gobj->user_data;
@@ -1968,6 +1972,7 @@ static void func_8026A8EC_inline1(HSD_GObj* gobj)
     }
 }
 
+// Run item destroy callback
 static void func_8026A8EC_inline2(HSD_GObj* gobj)
 {
     Item* it = GET_ITEM(gobj);
@@ -2039,6 +2044,7 @@ void Item_8026AB54(Item_GObj* gobj, HSD_GObj* owner_gobj, Fighter_Part part)
     Item_8026B074(item_data);
 }
 
+// Related to item dropping
 void Item_8026ABD8(Item_GObj* gobj, Vec3* pos, f32 arg2)
 {
     Item* item_data = GET_ITEM(gobj);
@@ -2056,6 +2062,7 @@ void Item_8026ABD8(Item_GObj* gobj, Vec3* pos, f32 arg2)
     }
 }
 
+// Related to dropping an item
 void Item_8026AC74(HSD_GObj* gobj, Vec3* arg1, Vec3* arg2, f32 arg3)
 {
     Item* item_data = GetItemData(gobj);
@@ -2071,10 +2078,13 @@ void Item_8026AC74(HSD_GObj* gobj, Vec3* arg1, Vec3* arg2, f32 arg3)
     }
 }
 
+// Related to throwing an item
 void Item_8026AD20(HSD_GObj* gobj, Vec3* arg1, Vec3* arg2, f32 arg3, bool arg4)
 {
     // What is arg4 used for? Was looking at ftCo_ItemThrow and it seems to
     // correspond to some kind of flag
+    // Seems like this flag is for the type of throw (true for light, false for
+    // heavy)
     Item* item_data = GetItemData(gobj);
     it_802731E0(gobj);
     item_data->xC44 = arg3;

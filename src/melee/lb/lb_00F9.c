@@ -112,6 +112,7 @@ void lb_8000FCDC(void)
     lb_8000FA94();
 }
 
+// Involves clearing some dynamic data
 void lb_8000FD18(DynamicsDesc* desc)
 {
     struct DynamicsData *temp, *cur, *next;

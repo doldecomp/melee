@@ -50,7 +50,7 @@ void ftYs_SpecialS_8012DF18(HSD_GObj* gobj)
     }
 }
 
-void ftYs_SpecialS_8012DF8C(Fighter_GObj* gobj, Vec3* arg1)
+void ftYs_SpecialS_8012DF8C(Fighter_GObj* gobj, Vec3* vel)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftYs_DatAttrs* da = fp->dat_attrs;
@@ -74,16 +74,16 @@ void ftYs_SpecialS_8012DF8C(Fighter_GObj* gobj, Vec3* arg1)
         } else {
             angle = M_PI - da->specialhi_base_angle - mag;
         }
-        arg1->x = (fp->mv.ys.specialhi.x4 * da->x100 + da->xFC) * cosf(angle);
-        arg1->y = (fp->mv.ys.specialhi.x4 * da->x100 + da->xFC) * sinf(angle);
-        arg1->z = 0.0f;
+        vel->x = (fp->mv.ys.specialhi.x4 * da->x100 + da->xFC) * cosf(angle);
+        vel->y = (fp->mv.ys.specialhi.x4 * da->x100 + da->xFC) * sinf(angle);
+        vel->z = 0.0f;
     }
 }
 
 static inline void ftYs_SpecialS_8012DF8C_outline(Fighter_GObj* gobj,
-                                                  Vec3* vec)
+                                                  Vec3* vel)
 {
-    ftYs_SpecialS_8012DF8C(gobj, vec);
+    ftYs_SpecialS_8012DF8C(gobj, vel);
 }
 
 void fn_8012E110(Fighter_GObj* gobj)
@@ -101,17 +101,17 @@ void fn_8012E110(Fighter_GObj* gobj)
 
     if (fp->cmd_vars[0] != 0U && fp->u.ys.x2238 != NULL) {
         Vec3 sp24;
-        Vec3 sp18;
+        Vec3 vel;
         PAD_STACK(4);
         fp->cmd_vars[0] = 0;
         fp->mv.ys.specialhi.x0 = 1;
         sp24.x = da->x104 * fp->facing_dir;
         sp24.y = da->x108;
         sp24.z = 0.0F;
-        ftYs_SpecialS_8012DF8C_outline(gobj, &sp18);
+        ftYs_SpecialS_8012DF8C_outline(gobj, &vel);
         {
             float x4 = fp->mv.ys.specialhi.x4;
-            it_802B28C8(fp->u.ys.x2238, &sp18, &sp24, x4 * da->x110 + da->x10C,
+            it_802B28C8(fp->u.ys.x2238, &vel, &sp24, x4 * da->x110 + da->x10C,
                         x4);
         }
         fp->u.ys.x2238 = NULL;

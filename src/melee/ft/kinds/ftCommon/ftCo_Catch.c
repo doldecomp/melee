@@ -100,7 +100,7 @@ void fn_800D8BFC(Fighter_GObj* gobj)
     ftpickupitem_800948A8(gobj, fp->target_item_gobj);
     fp->x1A64 = NULL;
     fp->target_item_gobj = NULL;
-    ftpickupitem_80094694(gobj, 0x5D, 1);
+    ftpickupitem_80094694(gobj, ftCo_MS_HeavyGet, true);
 }
 
 void ftCo_800D8C54(Fighter_GObj* gobj, FtMotionId msid)

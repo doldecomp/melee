@@ -150,9 +150,17 @@ Item_GObj* ftpickupitem_800942A0(Fighter_GObj* gobj, u32 flags)
     }
 }
 
-bool ftpickupitem_8009447C(Fighter_GObj* gobj, Item_GObj* item_gobj)
+void inline ftpickupitem_helper(Fighter_GObj* owner_gobj, Item_GObj* item_gobj)
 {
-    Fighter* fp = GET_FIGHTER(gobj);
+}
+
+// Involves the item pickups that result in destroying that object (like using
+// a Heart) Similar to ftpickupitem_80094B6C
+/// @remark can code from ftpickupitem_80094B6C be reused here?
+bool ftpickupitem_8009447C(Fighter_GObj* owner_gobj, Item_GObj* item_gobj)
+{
+    // ftpickupitem_80094B6C(owner_gobj, item_gobj);
+    Fighter* fp = GET_FIGHTER(owner_gobj);
     HSD_ASSERTREPORT(174, item_gobj, "ftGetImmItem item_gobj is NULL!!\n");
     if (it_8026B30C(item_gobj) == 5) {
         switch (itGetKind(item_gobj)) {
@@ -177,20 +185,20 @@ bool ftpickupitem_8009447C(Fighter_GObj* gobj, Item_GObj* item_gobj)
             Item_8026A8EC(item_gobj);
             break;
         case It_Kind_WStar:
-            ftCo_800C4724(gobj);
+            ftCo_800C4724(owner_gobj);
             return true;
         case It_Kind_Hammer:
-            ftCo_800C52F4(gobj);
+            ftCo_800C52F4(owner_gobj);
             return true;
         case It_Kind_RabbitC:
-            ftCommon_8007FA58(gobj, item_gobj);
+            ftCommon_8007FA58(owner_gobj, item_gobj);
             break;
         case It_Kind_MetalB:
-            ftLib_ApplyMetalBox(gobj, item_gobj);
+            ftLib_ApplyMetalBox(owner_gobj, item_gobj);
             Item_8026A8EC(item_gobj);
             break;
         case It_Kind_Spycloak:
-            ftCo_800C88D4(gobj, p_ftCommonData->x7CC, true);
+            ftCo_800C88D4(owner_gobj, p_ftCommonData->x7CC, true);
             Item_8026A8EC(item_gobj);
             break;
         case It_Kind_Coin:
@@ -288,7 +296,7 @@ void ftpickupitem_800948A8(Fighter_GObj* gobj, Item_GObj* item_gobj)
         }
         pl_8003E854(fp->player_idx, fp->is_sub_fighter, item_gobj);
         Item_8026AB54(item_gobj, gobj, ret_part);
-        if (itIsHeavy(item_gobj) == 1) {
+        if (itIsHeavy(item_gobj) == true) {
             ft_800881D8(fp, fp->ft_data->x4C_sfx->x2C, 127, 64);
         }
     }
@@ -308,7 +316,9 @@ void ftpickupitem_Anim(Fighter_GObj* gobj)
         Item_GObj* item_gobj =
             fp->x1978 != NULL
                 ? fp->x1978
-                : fp->item_gobj; // set the held item if not already set
+                : fp->item_gobj; // use the item from the secondary slot if not
+                                 // empty, otherwise use the item from the
+                                 // primary slot
         if (item_gobj != NULL) {
             if (fp->motion_id == ftCo_MS_LightGet) {
                 if (ftpickupitem_8009447C(gobj, item_gobj)) {
@@ -339,10 +349,12 @@ void ftpickupitem_Coll(Fighter_GObj* gobj)
     ft_800841B8(gobj, ftpickupitem_80094D90);
 }
 
-void ftpickupitem_80094B6C(Fighter_GObj* gobj, Item_GObj* item_gobj)
+// Involves the item pickups that result in destroying that object (like using
+// a Heart) Similar to ftpickupitem_8009447C
+void ftpickupitem_80094B6C(Fighter_GObj* owner_gobj, Item_GObj* item_gobj)
 {
     Vec3 vec;
-    Fighter* fp = gobj->user_data;
+    Fighter* fp = owner_gobj->user_data;
     PAD_STACK(4);
     HSD_ASSERTREPORT(399, item_gobj, "ftGetImmItem item_gobj is NULL!!\n");
     if (it_8026B30C(item_gobj) == 5) {
@@ -372,17 +384,17 @@ void ftpickupitem_80094B6C(Fighter_GObj* gobj, Item_GObj* item_gobj)
             Item_8026ABD8(item_gobj, &vec, 1);
             return;
         case It_Kind_Hammer:
-            ftCo_800C5284(gobj);
+            ftCo_800C5284(owner_gobj);
             return;
         case It_Kind_RabbitC:
-            ftCommon_8007FA58(gobj, item_gobj);
+            ftCommon_8007FA58(owner_gobj, item_gobj);
             return;
         case It_Kind_MetalB:
-            ftLib_ApplyMetalBox(gobj, item_gobj);
+            ftLib_ApplyMetalBox(owner_gobj, item_gobj);
             Item_8026A8EC(item_gobj);
             return;
         case It_Kind_Spycloak:
-            ftCo_800C88D4(gobj, p_ftCommonData->x7CC, 1);
+            ftCo_800C88D4(owner_gobj, p_ftCommonData->x7CC, 1);
             Item_8026A8EC(item_gobj);
             return;
         case It_Kind_Coin:

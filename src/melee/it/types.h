@@ -496,6 +496,8 @@ struct Item {
     u32 xDC0;
     u32 xDC4;
     flag32 xDC8_word;
+    // flags.x0 - determines whether the owner is stored in owner or x51C
+    // field? flags.x13 - indicates if an item is/should be held/owned?
     struct Item_xDCC_flag {
         u8 b0 : 1;
         u8 b1 : 1;

@@ -2598,7 +2598,7 @@ void Fighter_procGrabColl(Fighter_GObj* gobj)
                 if (!fp->x2225_b1) {
                     ft_PlaySFX(fp, fp->ft_data->x4C_sfx->x30, 0x7F, 0x40);
                 }
-                ftColl_80078754(gobj, fp->victim_gobj, 0);
+                ftColl_80078754(gobj, fp->victim_gobj, false);
                 fp->grab_cb(gobj);
                 fp->grabbed_cb(fp->victim_gobj, gobj);
                 return;

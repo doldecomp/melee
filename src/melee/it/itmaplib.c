@@ -91,7 +91,9 @@ void it_802759DC(Item_GObj* item_gobj1, Item_GObj* item_gobj2)
     }
 }
 
-void it_80275BC8(Item_GObj* item_gobj, HSD_GObj* arg_gobj)
+// Checks owner gobj type, then sets collision stuff according to that and
+// current position
+void it_80275BC8(Item_GObj* item_gobj, HSD_GObj* owner_gobj)
 {
     Item* ip = GET_ITEM(item_gobj);
     itECB sp24;
@@ -101,15 +103,17 @@ void it_80275BC8(Item_GObj* item_gobj, HSD_GObj* arg_gobj)
     sp24 = ip->xBFC;
     it_802762BC(ip);
     ip->x378_itemColl.cur_pos = ip->pos;
-    if (arg_gobj != NULL) {
-        switch (it_80272D40(arg_gobj)) {
-        case 0:
-            it_8026BB68(arg_gobj, &sp14);
+    if (owner_gobj != NULL) {
+        switch (it_80272D40(owner_gobj)) {
+        case 0: // Owner is a fighter (HSD_GOBJ_CLASS_FIGHTER)
+            it_8026BB68(owner_gobj, &sp14);
             break;
-        case 1:
-            it_8026BB88(arg_gobj, &sp14);
+        case 1: // Owner is an item (HSD_GOBJ_CLASS_ITEM)
+            it_8026BB88(owner_gobj, &sp14);
             break;
-        default:
+        default: // Owner is neither a fighter nor an item
+            /// @remark should the various classifier types be an enum of
+            /// 'Owner_GObj_Kind'?
             HSD_ASSERTREPORT(0x7FU, 0, "couldn't get Owner_GObj_Kind!!");
             break;
         }
@@ -130,6 +134,7 @@ void it_80275BC8(Item_GObj* item_gobj, HSD_GObj* arg_gobj)
     it_80276100(item_gobj, &sp14);
 }
 
+// Collision/ECB-related
 void it_80275D5C(Item_GObj* item_gobj, itECB* arg_ecb)
 {
     f32 scale;
@@ -243,6 +248,7 @@ void it_80275E98(Item_GObj* item_gobj, SpawnItem* spawn)
     mpColl_80043670(coll);
 }
 
+// Collision data-related
 void it_80276100(Item_GObj* item_gobj, Vec3* pos)
 {
     Item* item = GET_ITEM(item_gobj);
@@ -299,6 +305,7 @@ void it_802762B0(Item* item)
     item->ground_or_air = GA_Ground;
 }
 
+// Sets item to air state, and sets a flag to false
 void it_802762BC(Item* item)
 {
     item->ground_or_air = GA_Air;
