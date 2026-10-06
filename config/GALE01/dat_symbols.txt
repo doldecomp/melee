@@ -6301,6 +6301,12 @@ GrVe_quake_model_sets = GrVe.dat:0x22B198; // type:DynamicModelDesc* terminated:
 GrYt_quake_model_sets = GrYt.dat:0x87B38; // type:DynamicModelDesc* terminated:0
 GrZe_quake_model_sets = GrZe.dat:0xC8A58; // type:DynamicModelDesc* terminated:0
 
+// Copies of item attributes' joint lists, by address, right after the
+// item's ItemModelDesc: Food's 28 (itFoodsAttributes) and Unown's 26
+// (itUnknownAttributes.x24). Nothing points to them.
+ItCo_foods_joints = ItCo.dat:0x3AA8; // type:HSD_Joint* count:28
+ItCo_unknown_joints = ItCo.dat:0xB138; // type:HSD_Joint* count:26
+
 // ItCo.dat 0x50A0-0x7DDC is a copy of 0x2FC-0x303C whose pointers point to
 // the originals: each object by address, as its original is typed.
 ItCo_copy_x50A0 = ItCo.dat:0x50A0; // type:ItemCommonData
@@ -6362,6 +6368,47 @@ ItCo_copy_x6C34 = ItCo.dat:0x6C34; // type:ItHurtBoneDesc
 ItCo_copy_x6C74 = ItCo.dat:0x6C74; // type:ItHurtBoneDesc
 ItCo_copy_x6D34 = ItCo.dat:0x6D34; // type:ItHurtBoneDesc
 ItCo_copy_x6D94 = ItCo.dat:0x6D94; // type:ItHurtBoneDesc
+ItCo_copy_x6DB4 = ItCo.dat:0x6DB4; // type:ItCapsuleAttr
+ItCo_copy_x6DBC = ItCo.dat:0x6DBC; // type:itBoxAttributes
+ItCo_copy_x6DDC = ItCo.dat:0x6DDC; // type:itTaruAttributes
+ItCo_copy_x6E14 = ItCo.dat:0x6E14; // type:itEgg_ItemVars
+ItCo_copy_x6E1C = ItCo.dat:0x6E1C; // type:itKusudamaAttributes
+ItCo_copy_x6E4C = ItCo.dat:0x6E4C; // type:itTaruCann_DatAttrs
+ItCo_copy_x6EA0 = ItCo.dat:0x6EA0; // type:itParasolAttributes
+ItCo_copy_x6EB0 = ItCo.dat:0x6EB0; // type:itBatAttributes
+ItCo_copy_x6EC0 = ItCo.dat:0x6EC0; // type:itSwordAttributes
+ItCo_copy_x6EF0 = ItCo.dat:0x6EF0; // type:itBombHeiAttributes
+ItCo_copy_x6F18 = ItCo.dat:0x6F18; // type:itDoseiAttributes
+ItCo_copy_x6F38 = ItCo.dat:0x6F38; // type:itMBallAttributes
+ItCo_copy_x6FEC = ItCo.dat:0x6FEC; // type:itGShell_Attrs
+ItCo_copy_x702C = ItCo.dat:0x702C; // type:itRShell_Attrs
+ItCo_copy_x7084 = ItCo.dat:0x7084; // type:itFreezeAttributes
+ItCo_copy_x7098 = ItCo.dat:0x7098; // type:itMsBomb_Attrs
+ItCo_copy_x70C8 = ItCo.dat:0x70C8; // type:itFlipper_DatAttrs
+ItCo_copy_x70F0 = ItCo.dat:0x70F0; // type:ItLGunAttr
+ItCo_copy_x7100 = ItCo.dat:0x7100; // type:itSScopeAttributes
+ItCo_copy_x7140 = ItCo.dat:0x7140; // type:StarRodAttributes
+ItCo_copy_x7150 = ItCo.dat:0x7150; // type:itLipstickAttributes
+ItCo_copy_x7160 = ItCo.dat:0x7160; // type:itHarisen_DatAttrs
+ItCo_copy_x7164 = ItCo.dat:0x7164; // type:itHammerData
+ItCo_copy_x7170 = ItCo.dat:0x7170; // type:itStar_ItemVars
+ItCo_copy_x7188 = ItCo.dat:0x7188; // type:HeartContainerAttr
+ItCo_copy_x71A4 = ItCo.dat:0x71A4; // type:MaximTomatoSpecialAttr
+ItCo_copy_x71BC = ItCo.dat:0x71BC; // type:itFoodsAttributes
+ItCo_copy_x7380 = ItCo.dat:0x7380; // type:KinokoAttrs
+ItCo_copy_x7390 = ItCo.dat:0x7390; // type:KinokoAttrs
+ItCo_copy_x73A0 = ItCo.dat:0x73A0; // type:itWstarAttributes
+ItCo_copy_x7404 = ItCo.dat:0x7404; // type:itRabbitCAttributes
+ItCo_copy_x7408 = ItCo.dat:0x7408; // type:itMetalBAttributes
+ItCo_copy_x7418 = ItCo.dat:0x7418; // type:ItLGunRayAttr
+ItCo_copy_x7424 = ItCo.dat:0x7424; // type:StarRodStarAttrs
+ItCo_copy_x7444 = ItCo.dat:0x7444; // type:itLipstickSporeAttributes
+ItCo_copy_x7460 = ItCo.dat:0x7460; // type:ScopeBeamAttrs
+ItCo_copy_x74E0 = ItCo.dat:0x74E0; // type:FFlowerAttr
+ItCo_copy_x74F8 = ItCo.dat:0x74F8; // type:ItLGunBeamAttr
+ItCo_copy_x750C = ItCo.dat:0x750C; // type:itHammerheadAttributes
+ItCo_copy_x7514 = ItCo.dat:0x7514; // type:itFFlowerFlameAttributes
+ItCo_copy_x7518 = ItCo.dat:0x7518; // type:itEvYoshiEgg_DatAttrs
 
 // Command scripts nothing points to, by address: fighters' subaction
 // scripts and items' item scripts, each as its loaders' DAT_SCRIPT reads

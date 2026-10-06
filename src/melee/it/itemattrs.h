@@ -412,7 +412,8 @@ union ItemSpecialAttributes {
     itFreezerAttributes freezer DAT_IF(Article::kind == It_PKind_Freezer);
     itsonansAttributes sonans DAT_IF(Article::kind == It_PKind_Sonans);
     itHassamAttributes hassam DAT_IF(Article::kind == It_PKind_Hassam);
-    itUnknownAttributes unknown DAT_IF(Article::kind == It_PKind_Unknown);
+    itUnknownAttributes unknown DAT_IF(Article::kind == It_PKind_Unknown ||
+                                       Article::kind == It_Kind_Unknown_Swarm);
     itSanseijuuAttributes sanseijuu DAT_IF(Article::kind == It_PKind_Entei ||
                                            Article::kind == It_PKind_Raikou ||
                                            Article::kind == It_PKind_Suikun);

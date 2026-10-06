@@ -19,7 +19,9 @@
  *       #Fighter_LoadCommonData, probably all pointers
  */
 extern struct Fighter_804D64FC_t {
-    u8** cmdscripts; ///< +00 per-character command script arrays
+    /// +00 CPU command scripts, by the index #ftCo_800B4880 runs (up to
+    /// 0x3D); the first is null.
+    u8** cmdscripts DAT_COUNT(0x3E);
     ftCo_AttackList* x4 DAT_COUNT(
         Ft_Kind_Max - 1); ///< +04 ground attack tables (per character)
     ftCo_AttackList* x8
