@@ -44,6 +44,22 @@ pub struct Archive<'a> {
     pub symbols: &'a [u8],
 }
 
+/// A motion table's archive range and the public symbol the game loads.
+/// A zero size means the motion has no archive.
+#[derive(Debug)]
+pub struct PackedMotion<'a> {
+    pub offset: u32,
+    pub size: u32,
+    pub symbol: &'a [u8],
+}
+
+#[derive(Debug)]
+pub struct PackedCheck {
+    pub checked: usize,
+    /// Valid archives that no nonempty motion references.
+    pub unreferenced: usize,
+}
+
 fn take_array<const N: usize>(input: &mut &[u8]) -> ModalResult<[u8; N]> {
     let slice: &[u8] = take(N).parse_next(input)?;
     slice.try_into().map_err(|_| {
@@ -150,6 +166,59 @@ impl<'a> Archive<'a> {
             offset += size.next_multiple_of(32);
         }
         Ok(archives)
+    }
+
+    /// Check the header-based split against the ranges and names the game
+    /// uses. Repeated references are valid, as are unreferenced archives;
+    /// neither changes the split or discards any archive.
+    pub fn check_packed_motions(
+        bytes: &'a [u8],
+        motions: &[PackedMotion<'_>],
+    ) -> Result<PackedCheck> {
+        use std::collections::{BTreeMap, BTreeSet};
+        let archives = Self::parse_packed(bytes)?;
+        let by_offset: BTreeMap<_, _> = archives
+            .iter()
+            .map(|(at, archive)| (*at, archive))
+            .collect();
+        let mut referenced = BTreeSet::new();
+        let mut checked = 0;
+        for (index, motion) in motions.iter().enumerate() {
+            if motion.size == 0 {
+                continue;
+            }
+            let Some(archive) = by_offset.get(&(motion.offset as usize))
+            else {
+                bail!(
+                    "motion {index}: {:#X} is not an archive boundary",
+                    motion.offset
+                );
+            };
+            if motion.size != archive.header.file_size {
+                bail!(
+                    "motion {index} at {:#X}: table size {:#X}, archive size {:#X}",
+                    motion.offset,
+                    motion.size,
+                    archive.header.file_size,
+                );
+            }
+            if !archive
+                .named_publics()
+                .any(|(name, _)| name == motion.symbol)
+            {
+                bail!(
+                    "motion {index} at {:#X}: no public symbol `{}`",
+                    motion.offset,
+                    String::from_utf8_lossy(motion.symbol),
+                );
+            }
+            referenced.insert(motion.offset);
+            checked += 1;
+        }
+        Ok(PackedCheck {
+            checked,
+            unreferenced: archives.len() - referenced.len(),
+        })
     }
 
     // TODO: Lookup based on next symbol table start
