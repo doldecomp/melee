@@ -63,7 +63,7 @@ yakumono_param = GrPs2.dat:*; // type:grPStadium_YakumonoParam
 yakumono_param = GrPs3.dat:*; // type:grPStadium_YakumonoParam
 yakumono_param = GrPs4.dat:*; // type:grPStadium_YakumonoParam
 // The other stages' code reads none of theirs: one zero word
-yakumono_param = Gr*.dat:*; // type:u32
+yakumono_param = Gr*.dat:*; // type:void*
 
 // Demo motions: packed archives the game relocates itself, like Pl??AJ
 ftDemo*MotionFile* = *:*; // type:u8 extent
