@@ -2019,8 +2019,8 @@ struct UnkStageDat_x8_t {
     /* +1C */ HSD_FogDesc* x1C;
     /* +20 */ GrJoint* unk20 DAT_COUNT(unk24);
     /* +24 */ s32 unk24; // size of unk20 array
-    /* +28 */ UNK_T x28;
-    /* +2C */ s16* x2C;
+    /* +28 */ u8* x28;   ///< Loop flags by animation ID (#grAnime_801C7C1C).
+    /* +2C */ s16* x2C DAT_COUNT(x30); ///< #Ground_GetStageGObj indices.
     /* +30 */ int x30;
 };
 
