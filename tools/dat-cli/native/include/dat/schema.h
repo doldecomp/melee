@@ -86,10 +86,14 @@ typedef enum DatFunction {
     DAT_FN_GX_GET_TEX_BUFFER_SIZE,
     DAT_FN_COL_ANIM_COMMAND_LENGTH,
     DAT_FN_CPU_COMMAND_LENGTH,
+    /// Takes bytes: names of pointer members whose `DAT_COUNT` or
+    /// `DAT_TERMINATED` says how much they point to.
+    DAT_FN_GX_MAX_INDEX,
 } DatFunction;
 
 /// An expression node. Arithmetic is unsigned 64-bit, as `melee-dat`
-/// evaluates it.
+/// evaluates it; a name can also be the bytes a pointer member points to,
+/// which only calls take.
 typedef struct DatExpr {
     uint8_t op;
     /// DAT_OP_NAME: an index into DatSchema::names.

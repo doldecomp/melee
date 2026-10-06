@@ -497,3 +497,157 @@ fn byte_scripts_end_by_command_length() {
         Some(Issue::OutOfBounds { at: 26, .. })
     ));
 }
+
+/// Shapes whose display lists index the vertex arrays their descriptor
+/// lists point to, as `HSD_PObjDesc` and `HSD_VtxDescList` do: at 0, 0x10
+/// and 0xA0, with descriptor lists at 0x20 (the first and third's) and 0x50
+/// pointing to one array of 4-byte positions at 0xC0, indexed up to 2, 5
+/// and 7.
+fn shapes() -> (TypeGraph, Vec<u8>, Vec<u32>) {
+    let mut graph = TypeGraph::default();
+    graph.units.push(Unit {
+        name: None,
+        address_size: 4,
+        macros: Vec::new(),
+    });
+    let unsigned = |graph: &mut TypeGraph, id, name, size| {
+        let encoding = gimli::DW_ATE_unsigned.0;
+        ty(
+            graph,
+            id,
+            Some(name),
+            Some(size),
+            TypeKind::Base { encoding },
+        );
+    };
+    unsigned(&mut graph, 1, "u32", 4);
+    unsigned(&mut graph, 2, "u8", 1);
+    ty(
+        &mut graph,
+        3,
+        Some("Blob"),
+        Some(1),
+        TypeKind::Typedef { target: Some(2) },
+    );
+    let blob = tag(&mut graph, "dat:blob");
+    graph.types.get_mut(&3).unwrap().annotations.push(blob);
+    let pointer = |graph: &mut TypeGraph, id, target| {
+        ty(
+            graph,
+            id,
+            None,
+            Some(4),
+            TypeKind::Pointer {
+                target: Some(target),
+            },
+        );
+    };
+    pointer(&mut graph, 4, 3);
+    let mut members = ["attr", "attr_type", "comp_cnt", "comp_type", "stride"]
+        .iter()
+        .zip((0..).step_by(4))
+        .map(|(name, offset)| member(&mut graph, name, 1, offset, &[]))
+        .collect::<Vec<_>>();
+    members.push(member(
+        &mut graph,
+        "vertex",
+        4,
+        0x14,
+        &["dat:count((GXMaxIndex(dl, descs, attr) + 1) * stride)"],
+    ));
+    let record = |graph: &mut TypeGraph, id, name, size, members| {
+        ty(
+            graph,
+            id,
+            Some(name),
+            Some(size),
+            TypeKind::Record {
+                union: false,
+                declaration: false,
+                members,
+            },
+        );
+    };
+    record(&mut graph, 5, "Desc", 0x18, members);
+    pointer(&mut graph, 6, 5);
+    let members = vec![
+        member(
+            &mut graph,
+            "descs",
+            6,
+            0,
+            &[
+                "dat:terminated(0xFF)",
+                "dat:bind(dl, list)",
+                "dat:bind(descs, descs)",
+            ],
+        ),
+        member(&mut graph, "list", 4, 4, &["dat:count(n)"]),
+        member(&mut graph, "n", 1, 8, &[]),
+    ];
+    record(&mut graph, 7, "Shape", 0xC, members);
+
+    let mut data = vec![0; 0x100];
+    let mut put = |at: usize, value: u32| {
+        data[at..at + 4].copy_from_slice(&value.to_be_bytes());
+    };
+    for (shape, descs, list) in
+        [(0, 0x20, 0x80), (0x10, 0x50, 0x88), (0xA0, 0x20, 0x90)]
+    {
+        put(shape, descs);
+        put(shape + 4, list);
+        put(shape + 8, 8);
+    }
+    for desc in [0x20, 0x50] {
+        // GX_VA_POS, GX_INDEX8, then GX_VA_NULL
+        put(desc, 9);
+        put(desc + 4, 2);
+        put(desc + 0x10, 4);
+        put(desc + 0x14, 0xC0);
+        put(desc + 0x18, 0xFF);
+    }
+    #[rustfmt::skip]
+    let lists = [
+        0x90, 0, 3, 0, 1, 2, 0, 0,
+        0x98, 0, 2, 5, 1, 0, 0, 0,
+        0x98, 0, 1, 7, 0, 0, 0, 0,
+    ];
+    data[0x80..0x98].copy_from_slice(&lists);
+    let relocs = vec![0, 4, 0x10, 0x14, 0x34, 0x64, 0xA0, 0xA4];
+    (graph, data, relocs)
+}
+
+#[test]
+fn vertex_arrays_reach_the_largest_index_of_every_shape() {
+    let (graph, data, relocs) = shapes();
+    let archive = Archive {
+        header: ArchiveHeader {
+            file_size: 0,
+            data_size: data.len() as u32,
+            reloc_count: relocs.len() as u32,
+            public_count: 0,
+            extern_count: 0,
+            version: [0; 12],
+        },
+        data: &data,
+        relocs,
+        publics: Vec::new(),
+        externs: Vec::new(),
+        symbols: &[],
+    };
+    let canonical = Canonical::new(&graph);
+    let macros = HashMap::new();
+    // The third shape shares the first's descriptor list, walked already
+    for (roots, end) in
+        [(&[0][..], 0xCC), (&[0, 0x10], 0xD8), (&[0, 0xA0], 0xE0)]
+    {
+        let mut walker = Walker::new(&graph, &canonical, &macros, &archive);
+        for &root in roots {
+            walker.root(root, 7, "shape", &[]);
+        }
+        let walked = walker.finish();
+        assert!(walked.issues.is_empty(), "{:?}", walked.issues);
+        assert!(walked.objects.contains_key(&0xC0));
+        assert_eq!(walked.extents.get(&0xC0), Some(&end), "{roots:?}");
+    }
+}

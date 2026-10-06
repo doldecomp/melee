@@ -11,7 +11,7 @@ use crate::{
         DieId, Member, TypeGraph, TypeKind,
         annotation::{DatTag, Script},
         canonical::{CanonId, Canonical},
-        expr::{Expr, eval_expr},
+        expr::{Expr, Value, eval_value},
     },
     hsd::Archive,
 };
@@ -125,15 +125,15 @@ pub struct Walk {
 /// Names bound by a root or `DAT_BIND`, for everything reached within
 /// that scope. Inner bindings shadow outer ones.
 #[derive(Debug)]
-struct Scope {
+struct Scope<'d> {
     name: String,
-    value: u64,
-    outer: Env,
+    value: Value<'d>,
+    outer: Env<'d>,
 }
 
-type Env = Option<Rc<Scope>>;
+type Env<'d> = Option<Rc<Scope<'d>>>;
 
-fn lookup(env: &Env, name: &str) -> Option<u64> {
+fn lookup<'d>(env: &Env<'d>, name: &str) -> Option<Value<'d>> {
     let mut scope = env.as_deref();
     while let Some(s) = scope {
         if s.name == name {
@@ -144,11 +144,11 @@ fn lookup(env: &Env, name: &str) -> Option<u64> {
     None
 }
 
-fn root_env(bindings: &[(String, u64)]) -> Env {
+fn root_env<'d>(bindings: &[(String, u64)]) -> Env<'d> {
     bindings.iter().fold(None, |outer, (name, value)| {
         Some(Rc::new(Scope {
             name: name.clone(),
-            value: *value,
+            value: Value::Int(*value),
             outer,
         }))
     })
@@ -188,8 +188,8 @@ pub struct Walker<'a> {
     scripts: HashSet<u32>,
     /// Objects still to walk, each with the bindings in effect where it
     /// was reached.
-    queue: Vec<(u32, DieId, String, Env)>,
-    env: Env,
+    queue: Vec<(u32, DieId, String, Env<'a>)>,
+    env: Env<'a>,
 }
 
 impl<'a> Walker<'a> {
@@ -271,7 +271,8 @@ impl<'a> Walker<'a> {
             let first = self.data[at..at + width]
                 .iter()
                 .fold(0, |v, &b| v << 8 | u64::from(b));
-            if first == terminator & mask && !self.relocs.contains(&(at as u32))
+            if first == terminator & mask
+                && !self.relocs.contains(&(at as u32))
             {
                 break;
             }
@@ -409,11 +410,20 @@ impl<'a> Walker<'a> {
             return self.terminated(offset, die, path, &value, length);
         }
         if let Some(count) = self.typedef_count(die) {
-            let count = eval_expr(self.macros, &count, &|name| {
+            let count = eval_value(self.macros, &count, &|name| {
                 lookup(&self.env, name)
-            });
+            })
+            .and_then(Value::int);
             if let Some(count) = count {
-                return self.counted(offset, die, None, count, path, &[], None);
+                return self.counted(
+                    offset,
+                    die,
+                    None,
+                    count,
+                    path,
+                    &[],
+                    None,
+                );
             }
         }
         if let Some(target) = self.typedef_type(die) {
@@ -470,7 +480,9 @@ impl<'a> Walker<'a> {
                         self.script(at, ty, &script, &path);
                     } else if self.is_extent(member) {
                         self.extent(at, ty, &path, &binds, parent);
-                    } else if let Some((value, length)) = self.terminator(member) {
+                    } else if let Some((value, length)) =
+                        self.terminator(member)
+                    {
                         self.terminated(at, ty, &path, &value, length);
                     } else if !binds.is_empty()
                         && let Some((element, size, count)) = self.array(ty)
@@ -542,10 +554,13 @@ impl<'a> Walker<'a> {
                     self.typed_extent(offset, ty, 1);
                     let path = field(path, member.name.map(|n| graph.str(n)));
                     let outer = self.env.clone();
-                    self.env = self.bound(&outer, &self.binds(member), parent, 0);
+                    self.env =
+                        self.bound(&outer, &self.binds(member), parent, 0);
                     if let Some(script) = self.script_tag(member) {
                         self.script(offset, ty, &script, &path);
-                    } else if let Some((value, length)) = self.terminator(member) {
+                    } else if let Some((value, length)) =
+                        self.terminator(member)
+                    {
                         self.terminated(offset, ty, &path, &value, length);
                     } else {
                         self.layout(offset, ty, &path, parent);
@@ -731,9 +746,10 @@ impl<'a> Walker<'a> {
                 _ => None,
             }
         })?;
-        eval_expr(self.macros, &count, &|name| {
+        eval_value(self.macros, &count, &|name| {
             self.name(Some((record, base)), name)
         })
+        .and_then(Value::int)
     }
 
     /// Walk an inline array or follow a pointer to `count` consecutive
@@ -789,14 +805,14 @@ impl<'a> Walker<'a> {
             });
             return;
         }
-        // Plain data, such as texels: one object, nothing to follow
-        if count > 0
-            && !self.has_pointers(element)
-            && !self.conditioned_union(element)
-        {
+        // Shared plain arrays retain the longest count. Selected unions
+        // still need their selected member's layout and extent.
+        if count > 0 && !self.has_pointers(element)
+            && !self.conditioned_union(element) {
             let Some(id) = self.canonical.of(element) else {
                 return;
             };
+            self.typed_extent(value, raw, count);
             if !self.visited.insert((value, id)) {
                 return;
             }
@@ -805,7 +821,6 @@ impl<'a> Walker<'a> {
                 .paths
                 .entry(value)
                 .or_insert_with(|| format!("{path}->"));
-            self.typed_extent(value, raw, count);
             let end = value + (count * size) as u32;
             let mut words: Vec<_> = self
                 .relocs
@@ -944,7 +959,11 @@ impl<'a> Walker<'a> {
 
     /// A name in an expression: a field of `record`, else a binding. Macros
     /// and enum constants are resolved by the evaluator after these.
-    fn name(&self, record: Option<(DieId, u32)>, name: &str) -> Option<u64> {
+    fn name(
+        &self,
+        record: Option<(DieId, u32)>,
+        name: &str,
+    ) -> Option<Value<'a>> {
         record
             .and_then(|(record, base)| self.field_value(record, base, name))
             .or_else(|| lookup(&self.env, name))
@@ -968,15 +987,15 @@ impl<'a> Walker<'a> {
     /// visible.
     fn bound(
         &self,
-        outer: &Env,
+        outer: &Env<'a>,
         binds: &[(String, Expr)],
         record: Option<(DieId, u32)>,
         index: u64,
-    ) -> Env {
+    ) -> Env<'a> {
         let mut env = outer.clone();
         for (name, value) in binds {
-            let value = eval_expr(self.macros, value, &|n| match n {
-                "_index" => Some(index),
+            let value = eval_value(self.macros, value, &|n| match n {
+                "_index" => Some(Value::Int(index)),
                 _ => record
                     .and_then(|(r, base)| self.field_value(r, base, n))
                     .or_else(|| lookup(outer, n)),
@@ -1127,10 +1146,8 @@ impl<'a> Walker<'a> {
         }
         match script {
             Script::Table(table) => {
-                let table = self
-                    .graph
-                    .globals
-                    .get(&self.graph.strings.get(table)?)?;
+                let table =
+                    self.graph.globals.get(&self.graph.strings.get(table)?)?;
                 let size = table
                     .ty
                     .and_then(|ty| self.canonical.byte_size(self.graph, ty))?;
@@ -1141,9 +1158,10 @@ impl<'a> Walker<'a> {
                 Some(self.graph.bytes(table.address + index, 1)?[0].into())
             }
             Script::Length(length) | Script::Bytes(length) => {
-                eval_expr(self.macros, length, &|name| {
-                    (name == "_command").then_some(command)
+                eval_value(self.macros, length, &|name| {
+                    (name == "_command").then_some(Value::Int(command))
                 })
+                .and_then(Value::int)
             }
         }
     }
@@ -1388,9 +1406,10 @@ impl<'a> Walker<'a> {
         // Unresolved elsewhere, a list's first element may already have
         // been reached alone (e.g. a vertex descriptor a shape set points
         // to): mark elements visited one by one, not the list
-        let Some(terminator) = eval_expr(self.macros, terminator, &|name| {
+        let Some(terminator) = eval_value(self.macros, terminator, &|name| {
             lookup(&self.env, name)
-        }) else {
+        })
+        .and_then(Value::int) else {
             return;
         };
         let env = self.env.clone();
@@ -1414,9 +1433,12 @@ impl<'a> Walker<'a> {
                 && !self.relocs.contains(&at);
             // Unresolved, so that typedef tags on the element still apply
             let ty = target.unwrap_or(element);
+            let path = format!("{path}->[{i}]");
             if self.visited.insert((at, id)) {
                 self.typed_extent(at, ty, 1);
-                self.layout(at, ty, &format!("{path}->[{i}]"), None);
+                self.layout(at, ty, &path, None);
+            } else {
+                self.recount(at, ty, &path);
             }
             self.env = env.clone();
             if end || ended > 0 {
@@ -1425,6 +1447,52 @@ impl<'a> Walker<'a> {
             if ended >= length.max(1) {
                 break;
             }
+        }
+    }
+
+    /// A list element already walked, reached again with other bindings
+    /// (a vertex descriptor list shapes share): the plain data its counted
+    /// pointers point to may reach further, as far as the longest count.
+    /// Nothing else is walked again.
+    fn recount(&mut self, offset: u32, die: DieId, path: &str) {
+        let Some(die) = self.resolve(Some(die)) else {
+            return;
+        };
+        let graph = self.graph;
+        let TypeKind::Record {
+            union: false,
+            members,
+            ..
+        } = &graph.types[&die].kind
+        else {
+            return;
+        };
+        for member in members {
+            let (Some(ty), Some(at)) = (member.ty, member.offset) else {
+                continue;
+            };
+            let at = offset + at as u32;
+            let TypeKind::Pointer { target } =
+                graph.types[&self.resolve(Some(ty)).unwrap_or(ty)].kind
+            else {
+                continue;
+            };
+            let declared = self.declared_type(member);
+            let plain = declared
+                .or_else(|| self.pointee(target))
+                .is_some_and(|e| !self.has_pointers(e));
+            if !plain || !self.relocs.contains(&at) {
+                continue;
+            }
+            let parent = Some((die, offset));
+            let binds = self.binds(member);
+            let outer = self.env.clone();
+            self.env = self.bound(&outer, &binds, parent, 0);
+            if let Some(count) = self.count(member, die, offset) {
+                let path = field(path, member.name.map(|n| graph.str(n)));
+                self.counted(at, ty, declared, count, &path, &binds, parent);
+            }
+            self.env = outer;
         }
     }
 
@@ -1490,7 +1558,7 @@ impl<'a> Walker<'a> {
             let condition = self.condition(member);
             let conditioned = condition.is_some();
             let holds = condition.and_then(|cond| {
-                eval_expr(self.macros, &cond, &|name| {
+                eval_value(self.macros, &cond, &|name| {
                     if let Some((record, at)) = parent
                         && let Some(value) = self.field_value(record, at, name)
                     {
@@ -1503,6 +1571,7 @@ impl<'a> Walker<'a> {
                         })
                         .or_else(|| lookup(&self.env, name))
                 })
+                .and_then(Value::int)
             });
             match (conditioned, holds) {
                 (_, Some(0)) => {}
@@ -1530,13 +1599,14 @@ impl<'a> Walker<'a> {
         })
     }
 
-    /// The value of a scalar field of the record at `base`.
+    /// The value of a field of the record at `base`: a scalar's, or the data
+    /// a relocated pointer whose annotation gives its length points to.
     fn field_value(
         &self,
         record: DieId,
         base: u32,
         name: &str,
-    ) -> Option<u64> {
+    ) -> Option<Value<'a>> {
         let TypeKind::Record { members, .. } = &self.graph.types[&record].kind
         else {
             return None;
@@ -1547,19 +1617,28 @@ impl<'a> Walker<'a> {
                 .iter()
                 .find(|m| m.name.map(|n| self.graph.str(n)) == Some(head))?;
             let inner = self.resolve(member.ty)?;
-            return self.field_value(inner, base + member.offset? as u32, rest);
+            return self.field_value(
+                inner,
+                base + member.offset? as u32,
+                rest,
+            );
         }
         let member = members
             .iter()
             .find(|m| m.name.map(|n| self.graph.str(n)) == Some(name))?;
         let at = base + member.offset? as u32;
+        if let Some(bytes) = self.pointed_bytes(member, record, base, at) {
+            return Some(Value::Bytes(bytes));
+        }
         let size = self.canonical.byte_size(self.graph, member.ty?)?;
         let bytes = self.data.get(at as usize..at as usize + size as usize)?;
         let value = bytes.iter().fold(0, |v, &b| v << 8 | u64::from(b));
         // Floats as the integers C would convert them to, toward zero
         let ty = self.resolve(member.ty)?;
-        Some(match self.graph.types[&ty].kind {
-            TypeKind::Base { encoding } if encoding == gimli::DW_ATE_float.0 => {
+        Some(Value::Int(match self.graph.types[&ty].kind {
+            TypeKind::Base { encoding }
+                if encoding == gimli::DW_ATE_float.0 =>
+            {
                 match size {
                     4 => f32::from_bits(value as u32) as i64 as u64,
                     8 => f64::from_bits(value) as i64 as u64,
@@ -1567,7 +1646,48 @@ impl<'a> Walker<'a> {
                 }
             }
             _ => value,
-        })
+        }))
+    }
+
+    /// The data the relocated pointer `member` (at `at`, of the record at
+    /// `base`) points to, if its `DAT_COUNT` or `DAT_TERMINATED` gives how
+    /// much, as the walk follows it.
+    fn pointed_bytes(
+        &self,
+        member: &Member,
+        record: DieId,
+        base: u32,
+        at: u32,
+    ) -> Option<&'a [u8]> {
+        let TypeKind::Pointer { target } =
+            self.graph.types[&self.resolve(member.ty)?].kind
+        else {
+            return None;
+        };
+        if !self.relocs.contains(&at) {
+            return None;
+        }
+        let value = self.word(at);
+        let element = self.pointee(target)?;
+        let size = self.canonical.byte_size(self.graph, element)?;
+        let count = match self.terminator(member) {
+            Some((terminator, length)) => {
+                let terminator =
+                    eval_value(self.macros, &terminator, &|name| {
+                        lookup(&self.env, name)
+                    })
+                    .and_then(Value::int)?;
+                let room = (self.data.len() as u64)
+                    .saturating_sub(value.into())
+                    / size.max(1);
+                let n = self.terminated_count(value, element, terminator)?;
+                (n + length.max(1) - 1).min(room)
+            }
+            None => self.count(member, record, base)?,
+        };
+        let start = value as usize;
+        self.data
+            .get(start..start + usize::try_from(count * size).ok()?)
     }
 
     /// The type a pointer points to, if it can be followed.

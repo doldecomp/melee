@@ -855,6 +855,7 @@ fn function_c(function: &str) -> Option<&'static str> {
         "colAnimCommandLength" => Some("COL_ANIM_COMMAND_LENGTH"),
         "cpuCommandLength" => Some("CPU_COMMAND_LENGTH"),
         "GXGetTexBufferSize" => Some("GX_GET_TEX_BUFFER_SIZE"),
+        "GXMaxIndex" => Some("GX_MAX_INDEX"),
         _ => None,
     }
 }
