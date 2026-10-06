@@ -80,6 +80,11 @@ Not errors:
   sixth item slots, which aren't registered with a kind, are
   `itUnreadAttributes`: `DAT_EXTENT` words. Their sizes are only where the
   next object starts.
+- Some fighters' items are followed by words nothing points to, between
+  the `Article` and the next item's `ItemStateArray` (`PlSs`, `PlSk`,
+  `PlNs`, `PlPp`, `PlLk`, `PlCl`): pointers to the animations the item's
+  own states use, sometimes with -1s, like `ItemStateDesc`s of states the
+  item kind's table doesn't index.
 - `itSpecialAttrsHead`, the record monsters' and stage items' attributes
   start with, has duplicates: `itNokoNoko_DatAttrs2`, `itPatapataDatAttrs`,
   `itOldkuriAttributes_x0`, `itOldottoseaAttributes_x0`,
