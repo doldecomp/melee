@@ -15,6 +15,8 @@
 //!
 //! `report` compares the built units.
 
+mod progress;
+
 use super::project::{Check, Project};
 use anyhow::{Context, Result, bail};
 use globset::{Glob, GlobSetBuilder};
@@ -164,6 +166,9 @@ struct Report {
     dir: PathBuf,
     #[arg(long)]
     json: bool,
+    /// An objdiff-format progress report, with the whole archives as data
+    #[arg(long, conflicts_with_all = ["json", "missing", "incomplete"])]
+    objdiff: bool,
     /// List the data the base doesn't infer, by the field that reaches it,
     /// largest first
     #[arg(long)]
@@ -960,6 +965,10 @@ struct UnitMatch {
     name: String,
     measures: MatchMeasures,
     samples: Vec<SampleMatch>,
+    #[serde(skip)]
+    inferred_bytes: u64,
+    #[serde(skip)]
+    complete: bool,
     /// The base object's contents outside its samples and inferred data,
     /// e.g. code or strings
     /// from headers, which the target doesn't have.
@@ -1194,6 +1203,8 @@ fn report(args: Report) -> Result<()> {
                 name: name.clone(),
                 measures,
                 samples,
+                inferred_bytes: sidecar.inferred_bytes,
+                complete: sidecar.complete,
                 extra: extra_sections(&args.dir, name)?,
             })
         })
@@ -1204,6 +1215,11 @@ fn report(args: Report) -> Result<()> {
     }
 
     let mut out = io::stdout().lock();
+    if args.objdiff {
+        serde_json::to_writer_pretty(&mut out, &progress::report(&units))?;
+        writeln!(out)?;
+        return Ok(());
+    }
     if args.json {
         let report =
             json!({ "version": 1, "measures": total, "units": units });

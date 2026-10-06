@@ -261,6 +261,25 @@ Use `samples report` for the verdict: objdiff's own report measures data
 per section and misses relocation differences. To check a type change, edit
 the header and rebuild the preset.
 
+For decomp.dev, export an objdiff version-2 report instead:
+
+```sh
+melee-dat samples report --objdiff > build/GALE01/dat/report.json
+```
+
+Each unit represents an archive file, including all archives in a packed
+file. `total_data` is its whole data region, rather than only its selected
+samples. `matched_data` counts inferred non-sample pieces plus the bytes of
+fully matching C samples, including their relocations. Partial sample scores
+contribute only to `fuzzy_match_percent`. `complete` and `complete_data` describe
+full inference, independently of sample matching. The existing `--json`
+report retains its sample and weighted coverage measures.
+
+Publish only this JSON as `GALE01-dat_report`, so DAT progress is a separate
+version from the game's `GALE01_report`. CI's current build image has no
+`.dat` files in `/orig/GALE01/files`; it needs extracted archives before it
+can build the samples and publish their report.
+
 In nix, `melee-dat-samples` is the same build, given the game's files in the
 store:
 
