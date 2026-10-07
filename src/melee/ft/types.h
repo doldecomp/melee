@@ -732,90 +732,89 @@ struct ftData_x48_x4 {
 /// attributes, whose values are written here).
 // clang-format off
 #define DAT_MATCH_FTITEM                                                    \
-    DAT_MATCH(Article::kind, (fighter_kind, item_index), {                  \
-        (Ft_Kind_Mario, 0): It_Kind_Mario_Fire;                             \
-        (Ft_Kind_Mario, 2): It_Kind_Mario_Cape;                             \
-        (Ft_Kind_Fox, 0): It_Kind_Fox_Laser;                                \
-        (Ft_Kind_Fox, 1): It_Kind_Fox_Blaster;                              \
-        (Ft_Kind_Fox, 2): It_Kind_Fox_Illusion;                             \
-        (Ft_Kind_Kirby, 0): It_Kind_Kirby_CBeam;                            \
-        (Ft_Kind_Kirby, 1): It_Kind_Kirby_Hammer;                           \
-        (Ft_Kind_Kirby, 2): It_Kind_Unk1;                                   \
-        (Ft_Kind_Kirby, 3): It_Kind_Unk2;                                   \
-        (Ft_Kind_Koopa | Ft_Kind_GKoops, 0): It_Kind_Koopa_Flame;           \
-        (Ft_Kind_Link, 0): It_Kind_Link_Bomb;                               \
-        (Ft_Kind_Link, 1): It_Kind_Link_Boomerang;                          \
-        (Ft_Kind_Link, 2): It_Kind_Link_HShot;                              \
-        (Ft_Kind_Link, 3): It_Kind_Link_Arrow;                              \
-        (Ft_Kind_Link, 4): It_Kind_Link_Bow;                                \
-        (Ft_Kind_Seak, 0): It_Kind_Seak_NeedleThrow;                        \
-        (Ft_Kind_Seak, 1): It_Kind_Seak_NeedleHeld;                         \
-        (Ft_Kind_Seak, 2): It_Kind_Seak_Vanish;                             \
-        (Ft_Kind_Seak, 3): It_Kind_Seak_Chain;                              \
-        (Ft_Kind_Ness, 0): It_Kind_Ness_PKFire;                             \
-        (Ft_Kind_Ness, 1): It_Kind_Ness_PKFire_Flame;                       \
-        (Ft_Kind_Ness, 2): It_Kind_Ness_PKFlush;                            \
-        (Ft_Kind_Ness, 3): It_Kind_Ness_PKThunder;                          \
-        (Ft_Kind_Ness, 4): It_Kind_Ness_PKThunder1;                         \
-        (Ft_Kind_Ness, 5): It_Kind_Ness_PKThunder2;                         \
-        (Ft_Kind_Ness, 6): It_Kind_Ness_PKThunder3;                         \
-        (Ft_Kind_Ness, 7): It_Kind_Ness_PKThunder4;                         \
-        (Ft_Kind_Ness, 8): It_Kind_Ness_PKFlush_Explode;                    \
-        (Ft_Kind_Ness, 9): It_Kind_Ness_Bat;                                \
-        (Ft_Kind_Ness, 10): It_Kind_Ness_Yoyo;                              \
-        (Ft_Kind_Peach, 0): It_Kind_Peach_Explode;                          \
-        (Ft_Kind_Peach, 1): It_Kind_Peach_Turnip;                           \
-        (Ft_Kind_Peach, 2): It_Kind_Peach_Parasol;                          \
-        (Ft_Kind_Peach, 3): It_Kind_Peach_Toad;                             \
-        (Ft_Kind_Peach, 4): It_Kind_Peach_ToadSpore;                        \
-        (Ft_Kind_Popo | Ft_Kind_Nana, 0): It_Kind_IceClimber_Ice;           \
-        (Ft_Kind_Popo | Ft_Kind_Nana, 1): It_Kind_IceClimber_Blizzard;      \
-        (Ft_Kind_Popo | Ft_Kind_Nana, 2): It_Kind_IceClimber_GumStrings;    \
-        (Ft_Kind_Pikachu, 0): It_Kind_Pikachu_Thunder;                      \
-        (Ft_Kind_Pikachu, 1): It_Kind_Pikachu_TJolt_Ground;                 \
-        (Ft_Kind_Pikachu, 2): It_Kind_Pikachu_TJolt_Air;                    \
-        (Ft_Kind_Samus, 0): It_Kind_Samus_Bomb;                             \
-        (Ft_Kind_Samus, 1): It_Kind_Samus_Charge;                           \
-        (Ft_Kind_Samus, 2): It_Kind_Samus_Missile;                          \
-        (Ft_Kind_Samus, 3): It_Kind_Samus_GBeam;                            \
-        (Ft_Kind_Yoshi, 0): It_Kind_Yoshi_EggThrow;                         \
-        (Ft_Kind_Yoshi, 1): It_Kind_Yoshi_Star;                             \
-        (Ft_Kind_Yoshi, 2): It_Kind_Yoshi_EggLay;                           \
-        (Ft_Kind_Mewtwo, 0): It_Kind_Mewtwo_Disable;                        \
-        (Ft_Kind_Mewtwo, 1): It_Kind_Mewtwo_ShadowBall;                     \
-        (Ft_Kind_Luigi, 0): It_Kind_Luigi_Fire;                             \
-        (Ft_Kind_Zelda, 0): It_Kind_Zelda_DinFire;                          \
-        (Ft_Kind_Zelda, 1): It_Kind_Zelda_DinFire_Explode;                  \
-        (Ft_Kind_CLink, 0): It_Kind_CLink_Bomb;                             \
-        (Ft_Kind_CLink, 1): It_Kind_CLink_Boomerang;                        \
-        (Ft_Kind_CLink, 2): It_Kind_CLink_HShot;                            \
-        (Ft_Kind_CLink, 3): It_Kind_CLink_Arrow;                            \
-        (Ft_Kind_CLink, 4): It_Kind_CLink_Bow;                              \
-        (Ft_Kind_DrMario, 1): It_Kind_DrMario_Vitamin;                      \
-        (Ft_Kind_DrMario, 3): It_Kind_DrMario_Sheet;                        \
-        (Ft_Kind_Falco, 0): It_Kind_Falco_Laser;                            \
-        (Ft_Kind_Falco, 1): It_Kind_Falco_Blaster;                          \
-        (Ft_Kind_Falco, 3): It_Kind_Falco_Phantasm;                         \
-        (Ft_Kind_Pichu, 0): It_Kind_Pichu_Thunder;                          \
-        (Ft_Kind_Pichu, 1): It_Kind_Pichu_TJolt_Ground;                     \
-        (Ft_Kind_Pichu, 2): It_Kind_Pichu_TJolt_Air;                        \
-        (Ft_Kind_GameWatch, 0): It_Kind_GameWatch_Greenhouse;               \
-        (Ft_Kind_GameWatch, 1): It_Kind_GameWatch_Manhole;                  \
-        (Ft_Kind_GameWatch, 2): It_Kind_GameWatch_Fire;                     \
-        (Ft_Kind_GameWatch, 3): It_Kind_GameWatch_Parachute;                \
-        (Ft_Kind_GameWatch, 4): It_Kind_GameWatch_Turtle;                   \
-        (Ft_Kind_GameWatch, 5): It_Kind_GameWatch_Breath;                   \
-        (Ft_Kind_GameWatch, 6): It_Kind_GameWatch_Judge;                    \
-        (Ft_Kind_GameWatch, 7): It_Kind_GameWatch_Panic;                    \
-        (Ft_Kind_GameWatch, 8): It_Kind_GameWatch_Chef;                     \
-        (Ft_Kind_GameWatch, 9): It_Kind_GameWatch_Rescue;                   \
-        (Ft_Kind_MasterH, 0): It_Kind_MasterHand_Laser;                     \
-        (Ft_Kind_MasterH, 1): It_Kind_MasterHand_Bullet;                    \
-        (Ft_Kind_CrezyH, 0): It_Kind_CrazyHand_Laser;                       \
-        (Ft_Kind_CrezyH, 1): It_Kind_CrazyHand_Bullet;                      \
-        (Ft_Kind_CrezyH, 2): It_Kind_CrazyHand_Bomb;                        \
-        _: It_Kind_None;                                                    \
-    })
+    DAT_MATCH(Article::kind, (fighter_kind, item_index),                    \
+        (Ft_Kind_Mario, 0): It_Kind_Mario_Fire,                             \
+        (Ft_Kind_Mario, 2): It_Kind_Mario_Cape,                             \
+        (Ft_Kind_Fox, 0): It_Kind_Fox_Laser,                                \
+        (Ft_Kind_Fox, 1): It_Kind_Fox_Blaster,                              \
+        (Ft_Kind_Fox, 2): It_Kind_Fox_Illusion,                             \
+        (Ft_Kind_Kirby, 0): It_Kind_Kirby_CBeam,                            \
+        (Ft_Kind_Kirby, 1): It_Kind_Kirby_Hammer,                           \
+        (Ft_Kind_Kirby, 2): It_Kind_Unk1,                                   \
+        (Ft_Kind_Kirby, 3): It_Kind_Unk2,                                   \
+        (Ft_Kind_Koopa | Ft_Kind_GKoops, 0): It_Kind_Koopa_Flame,           \
+        (Ft_Kind_Link, 0): It_Kind_Link_Bomb,                               \
+        (Ft_Kind_Link, 1): It_Kind_Link_Boomerang,                          \
+        (Ft_Kind_Link, 2): It_Kind_Link_HShot,                              \
+        (Ft_Kind_Link, 3): It_Kind_Link_Arrow,                              \
+        (Ft_Kind_Link, 4): It_Kind_Link_Bow,                                \
+        (Ft_Kind_Seak, 0): It_Kind_Seak_NeedleThrow,                        \
+        (Ft_Kind_Seak, 1): It_Kind_Seak_NeedleHeld,                         \
+        (Ft_Kind_Seak, 2): It_Kind_Seak_Vanish,                             \
+        (Ft_Kind_Seak, 3): It_Kind_Seak_Chain,                              \
+        (Ft_Kind_Ness, 0): It_Kind_Ness_PKFire,                             \
+        (Ft_Kind_Ness, 1): It_Kind_Ness_PKFire_Flame,                       \
+        (Ft_Kind_Ness, 2): It_Kind_Ness_PKFlush,                            \
+        (Ft_Kind_Ness, 3): It_Kind_Ness_PKThunder,                          \
+        (Ft_Kind_Ness, 4): It_Kind_Ness_PKThunder1,                         \
+        (Ft_Kind_Ness, 5): It_Kind_Ness_PKThunder2,                         \
+        (Ft_Kind_Ness, 6): It_Kind_Ness_PKThunder3,                         \
+        (Ft_Kind_Ness, 7): It_Kind_Ness_PKThunder4,                         \
+        (Ft_Kind_Ness, 8): It_Kind_Ness_PKFlush_Explode,                    \
+        (Ft_Kind_Ness, 9): It_Kind_Ness_Bat,                                \
+        (Ft_Kind_Ness, 10): It_Kind_Ness_Yoyo,                              \
+        (Ft_Kind_Peach, 0): It_Kind_Peach_Explode,                          \
+        (Ft_Kind_Peach, 1): It_Kind_Peach_Turnip,                           \
+        (Ft_Kind_Peach, 2): It_Kind_Peach_Parasol,                          \
+        (Ft_Kind_Peach, 3): It_Kind_Peach_Toad,                             \
+        (Ft_Kind_Peach, 4): It_Kind_Peach_ToadSpore,                        \
+        (Ft_Kind_Popo | Ft_Kind_Nana, 0): It_Kind_IceClimber_Ice,           \
+        (Ft_Kind_Popo | Ft_Kind_Nana, 1): It_Kind_IceClimber_Blizzard,      \
+        (Ft_Kind_Popo | Ft_Kind_Nana, 2): It_Kind_IceClimber_GumStrings,    \
+        (Ft_Kind_Pikachu, 0): It_Kind_Pikachu_Thunder,                      \
+        (Ft_Kind_Pikachu, 1): It_Kind_Pikachu_TJolt_Ground,                 \
+        (Ft_Kind_Pikachu, 2): It_Kind_Pikachu_TJolt_Air,                    \
+        (Ft_Kind_Samus, 0): It_Kind_Samus_Bomb,                             \
+        (Ft_Kind_Samus, 1): It_Kind_Samus_Charge,                           \
+        (Ft_Kind_Samus, 2): It_Kind_Samus_Missile,                          \
+        (Ft_Kind_Samus, 3): It_Kind_Samus_GBeam,                            \
+        (Ft_Kind_Yoshi, 0): It_Kind_Yoshi_EggThrow,                         \
+        (Ft_Kind_Yoshi, 1): It_Kind_Yoshi_Star,                             \
+        (Ft_Kind_Yoshi, 2): It_Kind_Yoshi_EggLay,                           \
+        (Ft_Kind_Mewtwo, 0): It_Kind_Mewtwo_Disable,                        \
+        (Ft_Kind_Mewtwo, 1): It_Kind_Mewtwo_ShadowBall,                     \
+        (Ft_Kind_Luigi, 0): It_Kind_Luigi_Fire,                             \
+        (Ft_Kind_Zelda, 0): It_Kind_Zelda_DinFire,                          \
+        (Ft_Kind_Zelda, 1): It_Kind_Zelda_DinFire_Explode,                  \
+        (Ft_Kind_CLink, 0): It_Kind_CLink_Bomb,                             \
+        (Ft_Kind_CLink, 1): It_Kind_CLink_Boomerang,                        \
+        (Ft_Kind_CLink, 2): It_Kind_CLink_HShot,                            \
+        (Ft_Kind_CLink, 3): It_Kind_CLink_Arrow,                            \
+        (Ft_Kind_CLink, 4): It_Kind_CLink_Bow,                              \
+        (Ft_Kind_DrMario, 1): It_Kind_DrMario_Vitamin,                      \
+        (Ft_Kind_DrMario, 3): It_Kind_DrMario_Sheet,                        \
+        (Ft_Kind_Falco, 0): It_Kind_Falco_Laser,                            \
+        (Ft_Kind_Falco, 1): It_Kind_Falco_Blaster,                          \
+        (Ft_Kind_Falco, 3): It_Kind_Falco_Phantasm,                         \
+        (Ft_Kind_Pichu, 0): It_Kind_Pichu_Thunder,                          \
+        (Ft_Kind_Pichu, 1): It_Kind_Pichu_TJolt_Ground,                     \
+        (Ft_Kind_Pichu, 2): It_Kind_Pichu_TJolt_Air,                        \
+        (Ft_Kind_GameWatch, 0): It_Kind_GameWatch_Greenhouse,               \
+        (Ft_Kind_GameWatch, 1): It_Kind_GameWatch_Manhole,                  \
+        (Ft_Kind_GameWatch, 2): It_Kind_GameWatch_Fire,                     \
+        (Ft_Kind_GameWatch, 3): It_Kind_GameWatch_Parachute,                \
+        (Ft_Kind_GameWatch, 4): It_Kind_GameWatch_Turtle,                   \
+        (Ft_Kind_GameWatch, 5): It_Kind_GameWatch_Breath,                   \
+        (Ft_Kind_GameWatch, 6): It_Kind_GameWatch_Judge,                    \
+        (Ft_Kind_GameWatch, 7): It_Kind_GameWatch_Panic,                    \
+        (Ft_Kind_GameWatch, 8): It_Kind_GameWatch_Chef,                     \
+        (Ft_Kind_GameWatch, 9): It_Kind_GameWatch_Rescue,                   \
+        (Ft_Kind_MasterH, 0): It_Kind_MasterHand_Laser,                     \
+        (Ft_Kind_MasterH, 1): It_Kind_MasterHand_Bullet,                    \
+        (Ft_Kind_CrezyH, 0): It_Kind_CrazyHand_Laser,                       \
+        (Ft_Kind_CrezyH, 1): It_Kind_CrazyHand_Bullet,                      \
+        (Ft_Kind_CrezyH, 2): It_Kind_CrazyHand_Bomb,                        \
+        _: It_Kind_None)
 // clang-format on
 
 union ftData_Item {
@@ -2122,37 +2121,36 @@ struct KirbyHatStruct {
 /// them to #it_8026B3F8.
 // clang-format off
 #define DAT_MATCH_KBCOPY                                                    \
-    DAT_MATCH(Article::kind, (fighter_kind, _index), {                      \
-        (Ft_Kind_Mario, 0): It_Kind_Kirby_MarioFire;                        \
-        (Ft_Kind_Fox, 0): It_Kind_Kirby_FoxLaser;                           \
-        (Ft_Kind_Fox, 1): It_Kind_Kirby_FoxBlaster;                         \
-        (Ft_Kind_Koopa, 0): It_Kind_Kirby_KoopaFlame;                       \
-        (Ft_Kind_Link, 0): It_Kind_Kirby_LinkArrow;                         \
-        (Ft_Kind_Link, 1): It_Kind_Kirby_LinkBow;                           \
-        (Ft_Kind_Seak, 0): It_Kind_Kirby_SeakNeedleThrow;                   \
-        (Ft_Kind_Seak, 1): It_Kind_Kirby_SeakNeedleHeld;                    \
-        (Ft_Kind_Ness, 0): It_Kind_Kirby_NessPKFlush;                       \
-        (Ft_Kind_Ness, 1): It_Kind_Kirby_NessPKFlush_Explode;               \
-        (Ft_Kind_Peach, 0): It_Kind_Kirby_PeachToad;                        \
-        (Ft_Kind_Peach, 1): It_Kind_Kirby_PeachToadSpore;                   \
-        (Ft_Kind_Popo, 0): It_Kind_Kirby_IceClimberIce;                     \
-        (Ft_Kind_Pikachu, 0): It_Kind_Kirby_PikachuTJolt_Ground;            \
-        (Ft_Kind_Pikachu, 1): It_Kind_Kirby_PikachuTJolt_Air;               \
-        (Ft_Kind_Samus, 0): It_Kind_Kirby_SamusCharge;                      \
-        (Ft_Kind_Yoshi, 0): It_Kind_Kirby_YoshiEggLay;                      \
-        (Ft_Kind_Mewtwo, 0): It_Kind_Kirby_MewtwoShadowBall;                \
-        (Ft_Kind_Luigi, 0): It_Kind_Kirby_LuigiFire;                        \
-        (Ft_Kind_CLink, 0): It_Kind_Kirby_CLinkArrow;                       \
-        (Ft_Kind_CLink, 1): It_Kind_Kirby_CLinkBow;                         \
-        (Ft_Kind_DrMario, 0): It_Kind_Kirby_DrMarioVitamin;                 \
-        (Ft_Kind_Falco, 0): It_Kind_Kirby_FalcoLaser;                       \
-        (Ft_Kind_Falco, 1): It_Kind_Kirby_FalcoBlaster;                     \
-        (Ft_Kind_Pichu, 0): It_Kind_Kirby_PichuTJolt_Ground;                \
-        (Ft_Kind_Pichu, 1): It_Kind_Kirby_PichuTJolt_Air;                   \
-        (Ft_Kind_GameWatch, 0): It_Kind_Kirby_GameWatchChef;                \
-        (Ft_Kind_GameWatch, 1): It_Kind_Kirby_GameWatchChefPan;             \
-        _: It_Kind_None;                                                    \
-    })
+    DAT_MATCH(Article::kind, (fighter_kind, _index),                        \
+        (Ft_Kind_Mario, 0): It_Kind_Kirby_MarioFire,                        \
+        (Ft_Kind_Fox, 0): It_Kind_Kirby_FoxLaser,                           \
+        (Ft_Kind_Fox, 1): It_Kind_Kirby_FoxBlaster,                         \
+        (Ft_Kind_Koopa, 0): It_Kind_Kirby_KoopaFlame,                       \
+        (Ft_Kind_Link, 0): It_Kind_Kirby_LinkArrow,                         \
+        (Ft_Kind_Link, 1): It_Kind_Kirby_LinkBow,                           \
+        (Ft_Kind_Seak, 0): It_Kind_Kirby_SeakNeedleThrow,                   \
+        (Ft_Kind_Seak, 1): It_Kind_Kirby_SeakNeedleHeld,                    \
+        (Ft_Kind_Ness, 0): It_Kind_Kirby_NessPKFlush,                       \
+        (Ft_Kind_Ness, 1): It_Kind_Kirby_NessPKFlush_Explode,               \
+        (Ft_Kind_Peach, 0): It_Kind_Kirby_PeachToad,                        \
+        (Ft_Kind_Peach, 1): It_Kind_Kirby_PeachToadSpore,                   \
+        (Ft_Kind_Popo, 0): It_Kind_Kirby_IceClimberIce,                     \
+        (Ft_Kind_Pikachu, 0): It_Kind_Kirby_PikachuTJolt_Ground,            \
+        (Ft_Kind_Pikachu, 1): It_Kind_Kirby_PikachuTJolt_Air,               \
+        (Ft_Kind_Samus, 0): It_Kind_Kirby_SamusCharge,                      \
+        (Ft_Kind_Yoshi, 0): It_Kind_Kirby_YoshiEggLay,                      \
+        (Ft_Kind_Mewtwo, 0): It_Kind_Kirby_MewtwoShadowBall,                \
+        (Ft_Kind_Luigi, 0): It_Kind_Kirby_LuigiFire,                        \
+        (Ft_Kind_CLink, 0): It_Kind_Kirby_CLinkArrow,                       \
+        (Ft_Kind_CLink, 1): It_Kind_Kirby_CLinkBow,                         \
+        (Ft_Kind_DrMario, 0): It_Kind_Kirby_DrMarioVitamin,                 \
+        (Ft_Kind_Falco, 0): It_Kind_Kirby_FalcoLaser,                       \
+        (Ft_Kind_Falco, 1): It_Kind_Kirby_FalcoBlaster,                     \
+        (Ft_Kind_Pichu, 0): It_Kind_Kirby_PichuTJolt_Ground,                \
+        (Ft_Kind_Pichu, 1): It_Kind_Kirby_PichuTJolt_Air,                   \
+        (Ft_Kind_GameWatch, 0): It_Kind_Kirby_GameWatchChef,                \
+        (Ft_Kind_GameWatch, 1): It_Kind_Kirby_GameWatchChefPan,             \
+        _: It_Kind_None)
 // clang-format on
 
 /// @name Kirby's copy abilities
