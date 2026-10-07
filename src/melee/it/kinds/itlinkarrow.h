@@ -13,8 +13,8 @@
 /* 2A81C4 */ s32 itLinkArrow_802A81C4(Item_GObj*);
 /* 2A8330 */ void it_802A8330(HSD_GObj*);
 /* 2A8398 */ void it_802A8398(Item_GObj*, Vec3*, Vec3*);
-/* 2A83E0 */ HSD_GObj* it_802A83E0(f32, Fighter_GObj*, Vec3*, Fighter_Part,
-                                   s32);
+/* 2A83E0 */ Item_GObj* it_802A83E0(f32, Fighter_GObj*, Vec3*, Fighter_Part,
+                                    ItemKind);
 /* 2A850C */ bool itLinkArrow_802A850C(Item_GObj*, Vec3*, Vec3*, f32, f32,
                                        f32);
 /* 2A8984 */ void itLinkArrow_Logic98_Destroyed(Item_GObj*);

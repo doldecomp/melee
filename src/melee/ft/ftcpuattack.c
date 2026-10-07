@@ -514,6 +514,9 @@ int ftCo_800B52AC(Fighter* fp, Fighter* target, void* arg2, f32 reach)
             relPredY = (tgtVy * t + tgtY) - fpPredY;
         }
         if (fp->facing_dir > 0.0f) {
+            /// @remark Seems like these are more akin to upper and lower like
+            /// the section below rather than x and y directions since they are
+            /// both compared against 'relx'
             dirx = list->x08 * fp->x34_scale.y;
             diry = list->x0C * fp->x34_scale.y + reach;
         } else {
@@ -1826,22 +1829,22 @@ bool ftCo_800B8A9C(Fighter* fp)
             } else {
                 switch (item->kind) {
                 case It_Kind_Harisen:
-                    weapon_reach = Fighter_804D64FC->x24[0];
+                    weapon_reach = Fighter_804D64FC->item_reach_bonus[0];
                     break;
                 case It_Kind_LipStick:
-                    weapon_reach = Fighter_804D64FC->x24[1];
+                    weapon_reach = Fighter_804D64FC->item_reach_bonus[1];
                     break;
                 case It_Kind_StarRod:
-                    weapon_reach = Fighter_804D64FC->x24[2];
+                    weapon_reach = Fighter_804D64FC->item_reach_bonus[2];
                     break;
                 case It_Kind_Sword:
-                    weapon_reach = Fighter_804D64FC->x24[3];
+                    weapon_reach = Fighter_804D64FC->item_reach_bonus[3];
                     break;
                 case It_Kind_Bat:
-                    weapon_reach = Fighter_804D64FC->x24[4];
+                    weapon_reach = Fighter_804D64FC->item_reach_bonus[4];
                     break;
                 case It_Kind_Parasol:
-                    weapon_reach = Fighter_804D64FC->x24[5];
+                    weapon_reach = Fighter_804D64FC->item_reach_bonus[5];
                     break;
                 default:
                     weapon_reach = 0.0f;

@@ -48,7 +48,7 @@ ftLk_SpecialNIndex ftLk_SpecialN_GetIndex(Fighter_GObj* gobj)
     ftLk_SpecialNIndex result = ftLk_SpecialNIndex_None;
     if (gobj != NULL) {
         Fighter* fp = GET_FIGHTER(gobj);
-        if (fp != NULL && fp->u.lk.x14 != NULL) {
+        if (fp != NULL && fp->u.lk.bow_gobj != NULL) {
             FtMotionId msid = fp->motion_id;
             switch (msid) {
             case ftLk_MS_SpecialNStart:
@@ -70,7 +70,7 @@ void ftLk_SpecialN_UnsetArrow(Fighter_GObj* gobj)
         Fighter* fp = GET_FIGHTER(gobj);
         if (fp != NULL && fp->u.lk.arrow_gobj != NULL) {
             fp->u.lk.arrow_gobj = NULL;
-            if (fp->u.lk.boomerang_gobj == NULL && fp->u.lk.x14 == NULL) {
+            if (fp->u.lk.boomerang_gobj == NULL && fp->u.lk.bow_gobj == NULL) {
                 /// @todo Does this actually do anything? Doesn't seem to
                 /// return @c bool.
                 ftLk_Init_BoomerangExists(gobj);
@@ -83,8 +83,8 @@ void ftLk_SpecialN_UnsetFv14(Fighter_GObj* gobj)
 {
     if (gobj != NULL) {
         Fighter* fp = GET_FIGHTER(gobj);
-        if (fp != NULL && fp->u.lk.x14 != NULL) {
-            fp->u.lk.x14 = NULL;
+        if (fp != NULL && fp->u.lk.bow_gobj != NULL) {
+            fp->u.lk.bow_gobj = NULL;
             if (fp->u.lk.boomerang_gobj == NULL && fp->u.lk.arrow_gobj == NULL)
             {
                 /// @todo Does this actually do anything? Doesn't seem to
@@ -127,9 +127,9 @@ void ftLk_SpecialN_ProcessFv14(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     FORCE_PAD_STACK_8;
-    if (fp->u.lk.x14 != NULL) {
-        it_802AF304(fp->u.lk.x14);
-        fp->u.lk.x14 = NULL;
+    if (fp->u.lk.bow_gobj != NULL) {
+        it_802AF304(fp->u.lk.bow_gobj);
+        fp->u.lk.bow_gobj = NULL;
         ftLk_Init_BoomerangExists(gobj);
     }
 }
@@ -141,15 +141,15 @@ static inline bool isDrawback(Fighter_GObj* gobj)
     FORCE_PAD_STACK_16;
     FORCE_PAD_STACK_8;
     FORCE_PAD_STACK_4;
-    if (fp->u.lk.x14 == NULL) {
+    if (fp->u.lk.bow_gobj == NULL) {
         Vec3 pos;
         lb_8000B1CC(fp->parts[ftParts_GetBoneIndex(fp, FtPart_RThumbNb)].joint,
                     NULL, &pos);
         {
             Item_GObj* fv_x14 = it_802AF1A4(
                 fp->facing_dir, gobj, &pos,
-                ftParts_GetBoneIndex(fp, FtPart_RThumbNb), da->x10);
-            fp->u.lk.x14 = fv_x14;
+                ftParts_GetBoneIndex(fp, FtPart_RThumbNb), da->bow_kind);
+            fp->u.lk.bow_gobj = fv_x14;
             if (fv_x14 != NULL) {
                 Fighter_SetDamageCallback(gobj, ftLk_800EAF58);
             } else {
@@ -176,9 +176,9 @@ static inline bool isDrawn(Fighter_GObj* gobj)
             lb_8000B1CC(
                 fp->parts[ftParts_GetBoneIndex(fp, FtPart_LThumbNb)].joint,
                 NULL, &pos);
-            fv_x10 =
-                it_802A83E0(fp->facing_dir, gobj, &pos,
-                            ftParts_GetBoneIndex(fp, FtPart_LThumbNb), da->xC);
+            fv_x10 = it_802A83E0(fp->facing_dir, gobj, &pos,
+                                 ftParts_GetBoneIndex(fp, FtPart_LThumbNb),
+                                 da->arrow_kind);
             fp->u.lk.arrow_gobj = fv_x10;
             if (fv_x10 != NULL) {
                 Fighter_SetDamageCallback(gobj, ftLk_800EAF58);

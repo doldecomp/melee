@@ -19,9 +19,9 @@ static inline void checkFighter2244(HSD_GObj* gobj)
     }
 
     fp = gobj->user_data;
-    if (fp != NULL && fp->u.lk.x18 != NULL) {
-        it_802C8C34(fp->u.lk.x18);
-        fp->u.lk.x18 = NULL;
+    if (fp != NULL && fp->u.lk.milk_gobj != NULL) {
+        it_802C8C34(fp->u.lk.milk_gobj);
+        fp->u.lk.milk_gobj = NULL;
     }
 
 #ifdef MUST_MATCH

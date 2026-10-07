@@ -27,10 +27,10 @@
 /* 086684 */ void ftLib_GetPrevPos(HSD_GObj*, Vec3*);
 /* 0866A4 */ void ftLib_SetScale(HSD_GObj*, float);
 /* 0866DC */ void ftLib_GetCameraBonePos(HSD_GObj*, Vec3*);
-/* 086724 */ void ftLib_ReleaseItem(HSD_GObj*, HSD_GObj*);
+/* 086724 */ void ftLib_ReleaseItem(HSD_GObj*, Item_GObj*);
 /* 086764 */ void ftLib_ClearHeldSpecialItem(HSD_GObj*);
 /* 086794 */ HSD_GObj* ftLib_GetItem(HSD_GObj*);
-/* 0867A0 */ bool ftLib_IsHoldingItem(HSD_GObj*, HSD_GObj*);
+/* 0867A0 */ bool ftLib_IsHoldingItem(HSD_GObj*, Item_GObj*);
 /* 0867CC */ HSD_GObj* ftLib_GetHeldSpecialItem(HSD_GObj*);
 /* 0867D8 */ bool ftLib_IsInputDisabled(HSD_GObj*);
 /* 0867E8 */ void ftLib_DisableInput(HSD_GObj*);

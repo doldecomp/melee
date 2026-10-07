@@ -1015,18 +1015,21 @@ extern void (*ftData_OnItemDropExt[])(HSD_GObj*, s32);
 extern void (*ftData_OnItemDrop[])(HSD_GObj*, s32); // OnItemDrop?
 extern void (*ftData_OnItemPickup[])(HSD_GObj*, s32);
 
-void ftCommon_8007E6DC(HSD_GObj* gobj, HSD_GObj* item_gobj, s32 arg2)
+// Drop the item (regardless of held slot)
+// Always clears primary slot, and clears secondary slot if it matches the item
+// being dropped
+void ftCommon_8007E6DC(HSD_GObj* owner_gobj, HSD_GObj* item_gobj, s32 arg2)
 {
-    Fighter* fp = gobj->user_data;
+    Fighter* fp = owner_gobj->user_data;
     if ((fp->x1978 != NULL) && (fp->x1978 == item_gobj)) {
         fp->x1978 = NULL;
         return;
     }
-    if (ftCo_800C5240(gobj)) {
-        ftCo_800C5500(gobj);
+    if (ftCo_800C5240(owner_gobj)) {
+        ftCo_800C5500(owner_gobj);
     }
     if (ftData_OnItemDropExt[fp->kind] != NULL) {
-        ftData_OnItemDropExt[fp->kind](gobj, arg2);
+        ftData_OnItemDropExt[fp->kind](owner_gobj, arg2);
     }
     pl_8003EA08(fp->player_idx, fp->is_sub_fighter);
     fp->item_gobj = NULL;

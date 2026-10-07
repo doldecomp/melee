@@ -1705,7 +1705,7 @@ struct Fighter {
     /* fp+2188 */ S32Vec2 x2188;
     /// callback struct. Not all of them used by fighter.c.
     /* fp+2190 */ HSD_GObjEvent grab_cb;
-    /* fp+2194 */ HSD_GObjEvent x2194;
+    /* fp+2194 */ HSD_GObjEvent x2194; // catch_cb?
     /* fp+2198 */ HSD_GObjInteraction grabbed_cb;
     /* fp+219C */ HSD_GObjEvent input_cb;
     /* fp+21A0 */ HSD_GObjEvent anim_cb;

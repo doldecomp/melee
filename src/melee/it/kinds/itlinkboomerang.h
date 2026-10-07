@@ -11,8 +11,8 @@
 /* 29FDBC */ bool it_8029FDBC(Item_GObj* gobj);
 /* 29FDDC */ void it_8029FDDC(Item_GObj*, intptr_t);
 /* 29FE64 */ void it_8029FE64(Item_GObj* gobj, s32 i);
-/* 2A013C */ HSD_GObj* it_802A013C(f32 facing_dir, Fighter_GObj* owner_gobj,
-                                   Vec3* pos, Fighter_Part, s32);
+/* 2A013C */ Item_GObj* it_802A013C(f32 facing_dir, Fighter_GObj* owner_gobj,
+                                    Vec3* pos, Fighter_Part, ItemKind);
 /* 2A0534 */ void it_802A0534(Item_GObj* gobj, Vec3*, f32 angle);
 /* 2A07B4 */ void it_802A07B4(Item_GObj* gobj);
 /* 2A0810 */ void it_802A0810(Item_GObj* gobj);

@@ -500,7 +500,7 @@ void ftCo_80095EFC(Fighter_GObj* gobj)
                             Item_8026AC74(fp->item_gobj, &vec2, &vec1,
                                           throw_speed);
                         } else if (msid >= (FtMoveId) ftCo_MS_LightThrowF4) {
-                            if (itIsHeavy(fp->item_gobj) == 1) {
+                            if (itIsHeavy(fp->item_gobj) == true) {
                                 ftCommon_8007EBAC(fp, 29, 0);
                             } else {
                                 ftCommon_8007EBAC(fp, 27, 0);
@@ -508,7 +508,7 @@ void ftCo_80095EFC(Fighter_GObj* gobj)
                             Item_8026AD20(fp->item_gobj, &vec2, &vec1,
                                           throw_speed, true);
                         } else {
-                            if (itIsHeavy(fp->item_gobj) == 1) {
+                            if (itIsHeavy(fp->item_gobj) == true) {
                                 ftCommon_8007EBAC(fp, 28, 0);
                             } else {
                                 ftCommon_8007EBAC(fp, 26, 0);

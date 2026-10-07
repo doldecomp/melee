@@ -271,7 +271,7 @@ int ftSs_SpecialLw_80129100(HSD_GObj* gobj, int* arg1, int* arg2)
 
         u8 _[4];
 
-        if (!fp->u.ss.x222C) {
+        if (!fp->u.ss.chargeshot_gobj) {
             return -1;
         }
 

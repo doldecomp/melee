@@ -44,13 +44,13 @@ void fn_800D9CE8(Fighter_GObj* gobj)
     switch (fp->kind) {
     case Ft_Kind_CLink:
     case Ft_Kind_Link:
-        item = fp->u.lk.xC;
+        item = fp->u.lk.hookshot_gobj;
         it = GET_ITEM(item);
         it_802A7840((HSD_GObj*) item);
         fp->mv.co.capturedamage.x18 = it->xDD4_itemVar.linkhookshot.xC;
         break;
     case Ft_Kind_Samus:
-        item = fp->u.ss.x223C;
+        item = fp->u.ss.tether_gobj;
         it = GET_ITEM(item);
         it_802BAA94(item);
         fp->mv.co.capturedamage.x18 = it->xDD4_itemVar.samusgrapple.xC;
@@ -76,7 +76,7 @@ void ftCo_CatchPull_Anim(Fighter_GObj* gobj)
     switch (fp->kind) {
     case Ft_Kind_Link:
     case Ft_Kind_CLink: {
-        Item_GObj* item_gobj = fp->u.lk.xC;
+        Item_GObj* item_gobj = fp->u.lk.hookshot_gobj;
         if (item_gobj == NULL) {
             should_transition = true;
         } else {
@@ -88,7 +88,7 @@ void ftCo_CatchPull_Anim(Fighter_GObj* gobj)
         break;
     }
     case Ft_Kind_Samus: {
-        Item_GObj* item_gobj = fp->u.ss.x223C;
+        Item_GObj* item_gobj = fp->u.ss.tether_gobj;
         if (item_gobj == NULL) {
             should_transition = true;
         } else {

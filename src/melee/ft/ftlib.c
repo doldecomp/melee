@@ -347,11 +347,13 @@ void ftLib_GetCameraBonePos(HSD_GObj* gobj, Vec3* v)
     lb_8000B1CC(ftLib_GetPartJObj(gobj, i), &r4->x170, v);
 }
 
-void ftLib_ReleaseItem(HSD_GObj* gobj, HSD_GObj* other)
+// If either hold slot has the item, drop it and clear them via
+// ftCommon_8007E6DC
+void ftLib_ReleaseItem(HSD_GObj* owner_gobj, Item_GObj* gobj)
 {
-    Fighter* fp = GET_FIGHTER(gobj);
+    Fighter* fp = GET_FIGHTER(owner_gobj);
     if (fp->item_gobj != NULL || fp->x1978 != NULL) {
-        ftCommon_8007E6DC(gobj, other, 1);
+        ftCommon_8007E6DC(owner_gobj, gobj, 1);
     }
 }
 
@@ -363,16 +365,18 @@ void ftLib_ClearHeldSpecialItem(HSD_GObj* gobj)
     }
 }
 
+// Checks primary slot
 HSD_GObj* ftLib_GetItem(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     return fp->item_gobj;
 }
 
-bool ftLib_IsHoldingItem(HSD_GObj* gobj, HSD_GObj* arg1)
+// Checks both primary and secondary slots
+bool ftLib_IsHoldingItem(HSD_GObj* owner_gobj, Item_GObj* gobj)
 {
-    Fighter* fp = GET_FIGHTER(gobj);
-    if (ftLib_GetItem(gobj) == arg1 || fp->x1978 == arg1) {
+    Fighter* fp = GET_FIGHTER(owner_gobj);
+    if (ftLib_GetItem(owner_gobj) == gobj || fp->x1978 == gobj) {
         return true;
     } else {
         return false;

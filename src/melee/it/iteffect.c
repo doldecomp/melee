@@ -26,6 +26,7 @@ void it_8027870C(s32 arg0)
     it_804D6D04 = it_804D6D20->x14;
 }
 
+// Has to do with spawning effects
 void it_802787B4(Item_GObj* item_gobj, s32 arg1)
 {
     Vec3 sp1C;

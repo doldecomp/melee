@@ -472,7 +472,7 @@ void ftFc_Init_OnLoad(HSD_GObj* gobj)
     ftData* ftdata = fp->ft_data;
     /// @todo: create a file and struct for Falco's attributes (same as
     /// ftFox_DatAttrs?) and replace this
-    s32* sa2;
+    ftFox_DatAttrs* sa2;
     union ftData_Item* items = ftdata->x48_items;
 
     u8 _[8];
@@ -481,8 +481,8 @@ void ftFc_Init_OnLoad(HSD_GObj* gobj)
     ftFx_Init_OnLoadForFalco(fp);
 
     sa2 = fp->dat_attrs;
-    it_8026B3F8(items[0].article, sa2[7]);
-    it_8026B3F8(items[1].article, sa2[8]);
+    it_8026B3F8(items[0].article, sa2->x1C_FOX_BLASTER_SHOT_ITKIND);
+    it_8026B3F8(items[1].article, sa2->x20_FOX_BLASTER_GUN_ITKIND);
     it_8026B3F8(items[3].article, It_Kind_Falco_Phantasm);
 }
 

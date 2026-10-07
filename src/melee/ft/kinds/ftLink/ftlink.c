@@ -316,11 +316,11 @@ void ftLk_Init_OnDeath(HSD_GObj* gobj)
 
     fp->u.lk.used_boomerang = false;
     fp->u.lk.boomerang_gobj = NULL;
-    fp->u.lk.xC = NULL;
+    fp->u.lk.hookshot_gobj = NULL;
     fp->u.lk.arrow_gobj = NULL;
-    fp->u.lk.x14 = NULL;
-    fp->u.lk.xC = NULL;
-    fp->u.lk.x18 = NULL;
+    fp->u.lk.bow_gobj = NULL;
+    fp->u.lk.hookshot_gobj = NULL;
+    fp->u.lk.milk_gobj = NULL;
 }
 
 void ftLk_Init_OnLoadForCLink(Fighter* fp)
@@ -337,11 +337,11 @@ void ftLk_Init_OnLoad(HSD_GObj* gobj)
         lbAnim_8001E8F8(ftData_80085E50(fp, 72));
     PUSH_ATTRS(fp, ftLk_DatAttrs);
     da = fp->dat_attrs;
-    it_8026B3F8(item_list[0].article, da->x48);
-    it_8026B3F8(item_list[1].article, da->x2C);
-    it_8026B3F8(item_list[2].article, da->xBC);
-    it_8026B3F8(item_list[3].article, da->xC);
-    it_8026B3F8(item_list[4].article, da->x10);
+    it_8026B3F8(item_list[0].article, da->bomb_kind);
+    it_8026B3F8(item_list[1].article, da->boomerang_kind);
+    it_8026B3F8(item_list[2].article, da->hookshot_kind);
+    it_8026B3F8(item_list[3].article, da->arrow_kind);
+    it_8026B3F8(item_list[4].article, da->bow_kind);
     ftParts_800753D4(fp, Fighter_804D6540[fp->kind]->x0, item_list[6].joint);
 }
 

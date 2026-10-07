@@ -74,7 +74,7 @@ struct ItemStateDesc;
 /* 269CA0 */ void Item_80269CA0(Item* item_data, s32 damage);
 
 /// Remove Item from Player
-/* 26A848 */ void Item_8026A848(HSD_GObj* gobj, HSD_GObj* fgobj);
+/* 26A848 */ void Item_8026A848(Item_GObj* gobj, HSD_GObj* owner_gobj);
 
 /// Destroy Item
 /* 26A8EC */ void Item_8026A8EC(Item_GObj* gobj);

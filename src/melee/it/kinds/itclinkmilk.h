@@ -6,7 +6,7 @@
 #include <dolphin/mtx.h>
 #include <melee/it/kinds/types.h>
 
-/* 2C8B28 */ HSD_GObj* it_802C8B28(Item_GObj*, Vec3*, u32, float);
+/* 2C8B28 */ Item_GObj* it_802C8B28(Item_GObj*, Vec3*, u32, float);
 /* 2C8C34 */ void it_802C8C34(Item_GObj*);
 /* 2C8C74 */ void it_2725_Logic80_PickedUp(Item_GObj*);
 /* 2C8CDC */ bool itClinkmilk_UnkMotion1_Anim(Item_GObj* gobj);

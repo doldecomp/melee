@@ -1477,6 +1477,7 @@ bool it_8027AF50(Item_GObj* item_gobj)
     return false;
 }
 
+// Set attack and other values from the fighter to the item
 void it_8027B070(Item_GObj* item_gobj, Fighter_GObj* owner_gobj)
 {
     Item* item = GET_ITEM(item_gobj);
@@ -1573,7 +1574,8 @@ void it_8027B330(Item_GObj* item_gobj, u32 arg1)
     }
 }
 
-void it_8027B378(Fighter_GObj* fighter_gobj, Item_GObj* item_gobj, f32 arg2)
+// float argument is a damage value?
+void it_8027B378(Fighter_GObj* owner_gobj, Item_GObj* item_gobj, f32 arg2)
 {
     s32 temp_r31;
     u8 temp_r30;
@@ -1581,9 +1583,9 @@ void it_8027B378(Fighter_GObj* fighter_gobj, Item_GObj* item_gobj, f32 arg2)
     PAD_STACK(4);
 
     if (it_8026B6C8(item_gobj)) {
-        temp_r30 = ft_80089884(fighter_gobj)->x0.x2073;
-        temp_r31 = ftLib_IsSubFighter(fighter_gobj);
-        temp_r3 = ftLib_GetPlayerIndex(fighter_gobj);
+        temp_r30 = ft_80089884(owner_gobj)->x0.x2073;
+        temp_r31 = ftLib_IsSubFighter(owner_gobj);
+        temp_r3 = ftLib_GetPlayerIndex(owner_gobj);
         pl_8003EB30(arg2, temp_r3, temp_r31, 6, 0, temp_r30);
     }
 }
@@ -1605,13 +1607,13 @@ void it_8027B408(Item_GObj* item_gobj1, Item_GObj* item_gobj2, f32 arg8)
     }
 }
 
-void it_8027B4A4(Fighter_GObj* item_gobj1, Item_GObj* item_gobj2)
+void it_8027B4A4(Fighter_GObj* owner_gobj, Item_GObj* item_gobj)
 {
     void* temp_r31;
 
-    if (it_8026B6C8(item_gobj2)) {
-        temp_r31 = (void*) ft_800898A8(item_gobj1);
-        pl_800384DC(item_gobj1, ft_80089884(item_gobj1)->x0.x2073, temp_r31);
+    if (it_8026B6C8(item_gobj)) {
+        temp_r31 = (void*) ft_800898A8(owner_gobj);
+        pl_800384DC(owner_gobj, ft_80089884(owner_gobj)->x0.x2073, temp_r31);
     }
 }
 

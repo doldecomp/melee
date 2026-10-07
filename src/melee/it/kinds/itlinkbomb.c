@@ -191,15 +191,16 @@ static inline void it_8029DD58_inline(Item* item, itLinkBombAttributes* attr,
     Item_8026AB54(temp_r3, fighter_gobj, arg2);
 }
 
-HSD_GObj* it_8029DD58(Item_GObj* fighter_gobj, Vec3* arg1, u32 arg2, int arg3,
-                      f32 arg4)
+// Spawn bomb item
+Item_GObj* it_8029DD58(Item_GObj* fighter_gobj, Vec3* arg1, u32 arg2,
+                       ItemKind kind, f32 arg4)
 {
-    Item_GObj* temp_r3;
+    Item_GObj* spawn_gobj;
     SpawnItem spawn;
     Item* item; // r26
     itLinkBombAttributes* attr;
 
-    spawn.kind = arg3;
+    spawn.kind = kind;
     spawn.prev_pos = *arg1;
     it_8026BB68(fighter_gobj, &spawn.pos);
     spawn.facing_dir = arg4;
@@ -211,13 +212,13 @@ HSD_GObj* it_8029DD58(Item_GObj* fighter_gobj, Vec3* arg1, u32 arg2, int arg3,
     spawn.x4_parent_gobj2 = spawn.x0_parent_gobj;
     spawn.x44_flag.x0.b0 = true;
     spawn.x40 = 0;
-    temp_r3 = Item_80268B18(&spawn);
-    if (temp_r3 != NULL) {
-        item = GET_ITEM(temp_r3);
+    spawn_gobj = Item_80268B18(&spawn);
+    if (spawn_gobj != NULL) {
+        item = GET_ITEM(spawn_gobj);
         attr = &item->xC4_article_data->x4_specialAttributes->link_bomb;
-        it_8029DD58_inline(item, attr, fighter_gobj, temp_r3, arg2);
+        it_8029DD58_inline(item, attr, fighter_gobj, spawn_gobj, arg2);
     }
-    return temp_r3;
+    return spawn_gobj;
 }
 
 void it_8029DEB0(HSD_GObj* gobj)

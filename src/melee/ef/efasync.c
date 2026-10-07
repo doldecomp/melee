@@ -1331,6 +1331,7 @@ void efAsync_QueueFlush(HSD_GObj* gobj, EF_QueuedEffect** head)
     *head = NULL;
 }
 
+// Stop effect queue
 void efAsync_QueueClear(EF_QueuedEffect** head)
 {
     EF_QueuedEffect* next;

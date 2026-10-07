@@ -123,7 +123,7 @@ void ftPk_SpecialLw_SpawnEffect(HSD_GObj* gobj)
                 vec.y = pika_attr->xC0;
                 fp->mv.pk.speciallw.x0 =
                     it_802B1DF8(gobj, &pos, &vec, pika_attr->xD4,
-                                pika_attr->xD8, pika_attr->xDC);
+                                pika_attr->xD8, pika_attr->thunder_itkind);
             }
         }
     }

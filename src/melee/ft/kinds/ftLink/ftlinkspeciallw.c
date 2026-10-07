@@ -70,14 +70,14 @@ static void spawnBomb(HSD_GObj* gobj)
         lb_8000B1CC(fp->parts[ftParts_GetBoneIndex(fp, FtPart_LThumbNb)].joint,
                     NULL, &pos);
         {
-            Fighter_Part part = da->x48;
+            ItemKind part = da->bomb_kind;
             float facing_dir = fp->facing_dir;
-            HSD_GObj* igobj = it_8029DD58(gobj, &pos, fp->ft_data->x8->x10,
-                                          part, facing_dir);
+            Item_GObj* igobj = it_8029DD58(gobj, &pos, fp->ft_data->x8->x10,
+                                           part, facing_dir);
             fp->item_gobj = igobj;
             ftParts_80074A4C(gobj, 2, 1);
             if (igobj != NULL) {
-                ftpickupitem_80094818(gobj, 1);
+                ftpickupitem_80094818(gobj, true);
             }
         }
     }

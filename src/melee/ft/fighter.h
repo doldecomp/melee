@@ -36,7 +36,8 @@ extern struct Fighter_804D64FC_t {
         DAT_COUNT(Ft_Kind_Max - 1); ///< +1C edge guard tables (per character)
     float* x20 DAT_COUNT(Ft_Kind_Max -
                          1); ///< +20 distance thresholds (per character)
-    float* x24 DAT_COUNT(6); ///< +24 weapon reach bonus, by item kind
+    float* item_reach_bonus
+        DAT_COUNT(6); ///< +24 weapon reach bonus, by item kind
 }* Fighter_804D64FC;
 
 struct plAllocInfo;

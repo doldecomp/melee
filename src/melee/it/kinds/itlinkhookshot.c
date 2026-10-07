@@ -1,5 +1,7 @@
 #include "itlinkhookshot.h"
 
+#include <melee/it/forward.h>
+
 #include <math.h>
 #include <placeholder.h>
 
@@ -170,12 +172,12 @@ static inline f32 it_link_lerp(f32 a, f32 b, f32 t)
     return t * a + (1.0F - t) * b;
 }
 
-static inline void it_link_attr_math(itLinkHookshotAttributes* attr, s32 arg2,
+static inline void it_link_attr_math(itLinkHookshotAttributes* attr, bool chk,
                                      f32 arg8)
 {
     f32 var_f0;
     f32 var_f1;
-    if (arg2 != 0) {
+    if (chk != false) {
         var_f0 = attr->x50;
     } else {
         var_f0 = attr->x4C;
@@ -196,7 +198,7 @@ static inline void it_link_attr_math(itLinkHookshotAttributes* attr, s32 arg2,
     attr->x2C = (var_f1 * var_f0) / attr->x30;
 }
 
-HSD_JObj* it_802A2568(Item* arg0, HSD_JObj* arg1, s32 arg2, f32 arg8)
+HSD_JObj* it_802A2568(Item* arg0, HSD_JObj* arg1, bool chk, f32 arg8)
 {
     itLinkHookshotAttributes* attr;
     CollData* first_coll;
@@ -214,7 +216,7 @@ HSD_JObj* it_802A2568(Item* arg0, HSD_JObj* arg1, s32 arg2, f32 arg8)
     attr = &arg0->xC4_article_data->x4_specialAttributes->link_hookshot;
     pos = *(const Vec3*) &it_803B8650;
 
-    it_link_attr_math(attr, arg2, arg8);
+    it_link_attr_math(attr, chk, arg8);
 
     prev_link = NULL;
     for (link_idx = 0; link_idx < attr->x2C; link_idx++) {
@@ -294,7 +296,7 @@ void it_802A2B10(Item_GObj* arg0)
                 fp = GET_FIGHTER(item->xDD4_itemVar.linkhookshot.x8);
                 if (fp != NULL) {
                     item->xDD4_itemVar.linkhookshot.x10 = NULL;
-                    fp->u.lk.xC = 0;
+                    fp->u.lk.hookshot_gobj = 0;
                     fp->accessory2_cb = 0;
                     fp->death1_cb = 0;
                     fp->accessory3_cb = 0;
@@ -311,49 +313,52 @@ void it_802A2B10(Item_GObj* arg0)
     }
 }
 
-Item_GObj* it_802A2BA4(Fighter_GObj* arg0, Vec3* arg1, f32 arg2, s32 arg3)
+// Spawn hookshot item
+Item_GObj* it_802A2BA4(Fighter_GObj* owner_gobj, Vec3* init_pos,
+                       f32 facing_dir, ItemKind kind)
 {
     Fighter* fp;
     Item* item;
     Item_GObj* gobj;
     SpawnItem spawn_item;
-    s32 var_r27;
+    bool chk;
     f32 pad[8];
 
-    fp = arg0->user_data;
-    if (link_fighter_compare(fp) == 0) {
+    fp = owner_gobj->user_data;
+    if (link_fighter_compare(fp) == false) {
         return NULL;
     }
 
-    spawn_item.kind = arg3;
-    Item_InitSpawnPosition(&spawn_item, arg1, false);
-    Item_InitSpawnCommonFields(&spawn_item, arg0, arg2, true);
+    spawn_item.kind = kind;
+    Item_InitSpawnPosition(&spawn_item, init_pos, false);
+    Item_InitSpawnCommonFields(&spawn_item, owner_gobj, facing_dir, true);
 
     gobj = Item_80268B18(&spawn_item);
     if (gobj != NULL) {
         item = gobj->user_data;
         item->xDD4_itemVar.linkhookshot.x14 = 0;
         if (fp->motion_id == 0x168) {
-            var_r27 = 1;
+            chk = true;
         } else {
-            var_r27 = 0;
+            chk = false;
         }
         if (it_802A2568(
                 item,
                 fp->parts[ftParts_GetBoneIndex(fp, FtPart_RThumbNb)].joint,
-                var_r27, fp->x34_scale.y) == NULL)
+                chk, fp->x34_scale.y) == NULL)
         {
             Item_8026A8EC(gobj);
             return NULL;
         }
-        item->xDD4_itemVar.linkhookshot.x8 = arg0;
+        item->xDD4_itemVar.linkhookshot.x8 = owner_gobj;
         item->xDD4_itemVar.linkhookshot.xC =
             item->xDD4_itemVar.linkhookshot.x0->gobj->hsd_obj;
         fp->parts[139].joint = item->xDD4_itemVar.linkhookshot.xC;
-        Item_8026AB54(gobj, arg0, ftParts_GetBoneIndex(fp, FtPart_RThumbNb));
+        Item_8026AB54(gobj, owner_gobj,
+                      ftParts_GetBoneIndex(fp, FtPart_RThumbNb));
         it_802A2428(gobj);
     }
-    if ((enum FighterKind) fp->kind == Ft_Kind_CLink) {
+    if (fp->kind == Ft_Kind_CLink) {
         it_804D6D48 = 6.0f;
     } else {
         it_804D6D48 = 6.0f;
@@ -2195,8 +2200,8 @@ void it_802A7AAC(HSD_GObj* arg0)
     Fighter* fp;
 
     fp = arg0->user_data;
-    if (fp->u.lk.xC != NULL) {
-        it_802A2B10(fp->u.lk.xC);
+    if (fp->u.lk.hookshot_gobj != NULL) {
+        it_802A2B10(fp->u.lk.hookshot_gobj);
         return;
     }
     fp->accessory2_cb = NULL;
@@ -2210,10 +2215,10 @@ void it_802A7AF0(HSD_GObj* arg0)
     Fighter* fp;
 
     fp = arg0->user_data;
-    if (fp->u.lk.xC != NULL) {
-        item = GET_ITEM(fp->u.lk.xC);
+    if (fp->u.lk.hookshot_gobj != NULL) {
+        item = GET_ITEM(fp->u.lk.hookshot_gobj);
         if (item->xDD4_itemVar.linkhookshot.x10) {
-            item->xDD4_itemVar.linkhookshot.x10(fp->u.lk.xC);
+            item->xDD4_itemVar.linkhookshot.x10(fp->u.lk.hookshot_gobj);
         }
     }
 }
@@ -2247,8 +2252,8 @@ void it_802A7B34(HSD_GObj* arg0)
     Vec3 vec;
 
     Fighter* fp = GET_FIGHTER(arg0);
-    if (fp->u.lk.xC != NULL) {
-        Item* item = GET_ITEM(fp->u.lk.xC);
+    if (fp->u.lk.hookshot_gobj != NULL) {
+        Item* item = GET_ITEM(fp->u.lk.hookshot_gobj);
         itLinkHookshotAttributes* attr =
             &item->xC4_article_data->x4_specialAttributes->link_hookshot;
         ItemLink* item_link = item->xDD4_itemVar.linkhookshot.x0;

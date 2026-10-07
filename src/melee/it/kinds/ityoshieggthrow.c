@@ -36,14 +36,14 @@ void it_802B2890(Item_GObj* gobj)
     Item_8026A8EC(gobj);
 }
 
-void it_802B28C8(Item_GObj* gobj, Vec3* pos, Vec3* offset, f32 facing_dir,
+void it_802B28C8(Item_GObj* gobj, Vec3* vel, Vec3* offset, f32 facing_dir,
                  f32 unused)
 {
     Item* ip = gobj->user_data;
     HSD_JObj* jobj = gobj->hsd_obj;
 
     it_802B2B08(gobj);
-    it_8027429C(gobj, pos);
+    it_8027429C(gobj, vel);
     ip->xDC8_word.flags.x14 = 0;
     it_8026B3A8(gobj);
     ip->pos.x += offset->x;

@@ -321,8 +321,8 @@ s32 it_80272D40(Item_GObj* item_gobj)
     if (ftLib_IsFighter(item_gobj)) {
         return 0;
     }
-    if ((item_gobj != NULL) &&
-        (item_gobj->classifier == HSD_GOBJ_CLASS_ITEM)) { // ITEM_UNK_ENEMY?
+    if ((item_gobj != NULL) && (item_gobj->classifier == HSD_GOBJ_CLASS_ITEM))
+    {
         chk = true;
     } else {
         chk = false;
@@ -408,6 +408,7 @@ bool it_80273130(Item_GObj* item_gobj)
     return false;
 }
 
+// Related to playing a sound
 void it_80273168(Item_GObj* item_gobj)
 {
     Item* item;
@@ -418,6 +419,7 @@ void it_80273168(Item_GObj* item_gobj)
     }
 }
 
+// Related to playing a sound
 void it_802731A4(Item_GObj* item_gobj)
 {
     Item* item;
@@ -428,6 +430,7 @@ void it_802731A4(Item_GObj* item_gobj)
     }
 }
 
+// Related to playing a sound
 void it_802731E0(Item_GObj* item_gobj)
 {
     Item* item;
@@ -438,6 +441,7 @@ void it_802731E0(Item_GObj* item_gobj)
     }
 }
 
+// Related to playing a sound
 void it_8027321C(Item_GObj* item_gobj)
 {
     Item* item;
@@ -452,6 +456,7 @@ void it_8027321C(Item_GObj* item_gobj)
     }
 }
 
+// Spawn effect and sound based on arguments
 void it_8027327C(Item_GObj* item_gobj, enum_t ID1, enum_t ID2)
 {
     Item* item;
@@ -468,6 +473,7 @@ void it_8027327C(Item_GObj* item_gobj, enum_t ID1, enum_t ID2)
     }
 }
 
+// Has to do with spawning sound effects
 void it_802732E4(Item* item, s32 arg1)
 {
     if (!item->xDCD_flag.x0.b2) {
@@ -601,6 +607,8 @@ void it_80273670(Item_GObj* item_gobj, int arg1, f32 arg8)
     item->x524_cmd.x8.u = NULL;
 }
 
+// Related to item dropping (Item_8026AC74) and throwing (Item_8026AD20)
+// Sets position and velocity stuff
 /// @todo: Looks like a bunch of code is shared with it_80273B50 that could be
 /// reused
 void it_80273748(Item_GObj* item_gobj, Vec3* pos, Vec3* vel)
@@ -707,6 +715,8 @@ static inline void getOwnerJointPosition(Item* item, HSD_GObj* owner_gobj,
     }
 }
 
+// Related to dropping an item through Item_8026ABD8 and other actions through
+// it_8027429C Sets position and velocity stuff
 void it_80273B50(Item_GObj* item_gobj, Vec3* vel)
 {
     s32 stack_top[9];
@@ -801,7 +811,8 @@ void it_80273B50(Item_GObj* item_gobj, Vec3* vel)
     }
 }
 
-void it_80273F34(Item_GObj* item_gobj, HSD_GObj* arg_gobj2)
+// Appears to be a helper function for flow of dropping/throwing items?
+void it_80273F34(Item_GObj* item_gobj, HSD_GObj* owner_gobj)
 {
     Item* item = GET_ITEM(item_gobj);
     HSD_JObj* item_jobj = GET_JOBJ(item_gobj);
@@ -814,7 +825,7 @@ void it_80273F34(Item_GObj* item_gobj, HSD_GObj* arg_gobj2)
     item->xD54_throwNum++;
     item->xD50_landNum = 0;
 
-    it_80275BC8(item_gobj, arg_gobj2);
+    it_80275BC8(item_gobj, owner_gobj);
     it_80274DAC(item_gobj);
 
     if (item->xDC8_word.flags.x19 == 1) {
@@ -822,9 +833,9 @@ void it_80273F34(Item_GObj* item_gobj, HSD_GObj* arg_gobj2)
         HSD_JObjSetRotationY(item_jobj, rotate);
     }
 
-    if (ftLib_IsFighter(arg_gobj2)) {
-        Item_8026A848(item_gobj, arg_gobj2);
-        it_8027B070(item_gobj, arg_gobj2);
+    if (ftLib_IsFighter(owner_gobj)) {
+        Item_8026A848(item_gobj, owner_gobj);
+        it_8027B070(item_gobj, owner_gobj);
     }
 
     if (-1.0f == item->facing_dir) {
@@ -838,10 +849,12 @@ void it_80273F34(Item_GObj* item_gobj, HSD_GObj* arg_gobj2)
     it_802762BC(item);
     HSD_JObjSetTranslate(item_jobj, &item->pos);
 
-    it_8027B4A4(arg_gobj2, item_gobj);
-    it_8027B378(arg_gobj2, item_gobj, it_802758D4(item_gobj));
+    it_8027B4A4(owner_gobj, item_gobj);
+    it_8027B378(owner_gobj, item_gobj, it_802758D4(item_gobj));
 }
 
+// Called in drop function Item_8026ABD8 (check arg always true)
+// This calls it_80273B50 on its own, not here
 void it_80274198(Item_GObj* item_gobj, bool chk)
 {
     Item* item;
@@ -863,6 +876,9 @@ void it_80274198(Item_GObj* item_gobj, bool chk)
     it_80273F34(item_gobj, owner_gobj);
 }
 
+// Called in item throwing (Item_8026AD20) and dropping (Item_8026AC74)
+// functions (check arg always true) These call it_80273748 (similar to
+// it_80273B50) on their own, not here
 void it_802741F4(Item_GObj* item_gobj, bool chk)
 {
     Item* item = GET_ITEM(item_gobj);
@@ -880,6 +896,9 @@ void it_802741F4(Item_GObj* item_gobj, bool chk)
     it_80273F34(item_gobj, owner_gobj);
 }
 
+// Related to ? an item (through it_80273B50)
+// Only called by electrode (itmarumine) function it_802D1204 that's involved
+// in the explosion
 void it_80274250(Item_GObj* item_gobj, Vec3* arg1)
 {
     HSD_GObj* owner_gobj;
@@ -895,13 +914,15 @@ void it_80274250(Item_GObj* item_gobj, Vec3* arg1)
     it_80273F34(item_gobj, owner_gobj);
 }
 
-void it_8027429C(Item_GObj* item_gobj, Vec3* arg1)
+// Related to ? an item (through it_80273B50?)
+// Called by many different items' functions
+void it_8027429C(Item_GObj* item_gobj, Vec3* vel)
 {
     HSD_GObj* owner_gobj;
     Item* item;
     PAD_STACK(16);
 
-    it_80273B50(item_gobj, arg1);
+    it_80273B50(item_gobj, vel);
     item = GET_ITEM(item_gobj);
     owner_gobj = item->owner;
     if (item->xDC8_word.flags.x0) {
@@ -913,7 +934,9 @@ void it_8027429C(Item_GObj* item_gobj, Vec3* arg1)
     it_80273F34(item_gobj, owner_gobj);
 }
 
-void it_802742F4(Item_GObj* item_gobj, HSD_GObj* gobj, Fighter_Part ftpart)
+// Related to giving an item to a fighter
+void it_802742F4(Item_GObj* item_gobj, HSD_GObj* owner_gobj,
+                 Fighter_Part ftpart)
 {
     Item* item;
     PAD_STACK(8);
@@ -921,23 +944,23 @@ void it_802742F4(Item_GObj* item_gobj, HSD_GObj* gobj, Fighter_Part ftpart)
     item = item_gobj->user_data;
     lb_8000B804(item_gobj->hsd_obj, item->xC8_joint);
     Item_8026849C(item_gobj);
-    if (ftLib_IsFighter(gobj)) {
-        u32 bit_idx = ftLib_GetPlayerIndex(gobj);
+    if (ftLib_IsFighter(owner_gobj)) {
+        u32 bit_idx = ftLib_GetPlayerIndex(owner_gobj);
         item->xDC8_word.flags.xF |= 1 << bit_idx;
         if (!item->xDC8_word.flags.x0) {
-            item->owner = gobj;
+            item->owner = owner_gobj;
         } else {
-            item->x51C = gobj;
+            item->x51C = owner_gobj;
         }
         item->xDC4 = ftpart;
-        item->x20_team_id = ftLib_GetTeam(gobj);
+        item->x20_team_id = ftLib_GetTeam(owner_gobj);
         item->xD50_landNum = 0;
         item->xDC8_word.flags.x13 = 1;
         HSD_JObjClearFlagsAll(HSD_JObjGetChild(item_gobj->hsd_obj),
                               JOBJ_HIDDEN);
         it_802756D0(item_gobj);
         it_8026B3A8(item_gobj);
-        db_80225DD8(item_gobj, (Fighter_GObj*) gobj);
+        db_80225DD8(item_gobj, (Fighter_GObj*) owner_gobj);
     }
     if (item->xDD0_flag.x0.b6) {
         item->xDD0_flag.x0.b6 = 0;
@@ -948,8 +971,8 @@ void it_802742F4(Item_GObj* item_gobj, HSD_GObj* gobj, Fighter_Part ftpart)
         it_80275158(item_gobj, it_804D6D28->x30_lifetime);
     }
     it_80274F48(item_gobj,
-                item->xC4_article_data->x10_modelDesc->x8_bone_attach_id, gobj,
-                ftpart);
+                item->xC4_article_data->x10_modelDesc->x8_bone_attach_id,
+                owner_gobj, ftpart);
     it_80274C88(item_gobj);
 }
 
@@ -1209,6 +1232,7 @@ void it_80274D6C(Item_GObj* gobj)
     ip->xB54.x8.z = right_y + ip->pos.y + top_y;
 }
 
+// Adjusts collision stuff
 void it_80274DAC(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
@@ -1311,12 +1335,13 @@ static inline HSD_JObj* get_bone_by_id(Item_GObj* item_gobj, int bone_id)
     return jobj;
 }
 
-void it_80274F48(Item_GObj* item_gobj, s32 bone_id, HSD_GObj* arg2_gobj,
+// Make owner hold the item (physically) at the specified part?
+void it_80274F48(Item_GObj* item_gobj, s32 bone_id, HSD_GObj* owner_gobj,
                  Fighter_Part part_idx)
 {
     u8 _[8];
     HSD_JObj* jobj = get_bone_by_id(item_gobj, bone_id);
-    lb_8000C2F8(jobj, ftLib_GetPartJObj(arg2_gobj, part_idx));
+    lb_8000C2F8(jobj, ftLib_GetPartJObj(owner_gobj, part_idx));
 }
 
 void it_80274FDC(Item_GObj* item_gobj, s32 bone_id, Fighter_GObj* arg2_gobj,

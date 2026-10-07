@@ -131,8 +131,9 @@ void ftCo_AirCatch_Anim(Fighter_GObj* gobj)
             lb_8000B1CC(
                 fp->parts[ftParts_GetBoneIndex(fp, FtPart_RThumbNb)].joint,
                 NULL, &pos);
-            fp->u.lk.xC = it_802A2BA4(gobj, &pos, fp->facing_dir, da->xBC);
-            if (fp->u.lk.xC == NULL) {
+            fp->u.lk.hookshot_gobj =
+                it_802A2BA4(gobj, &pos, fp->facing_dir, da->hookshot_kind);
+            if (fp->u.lk.hookshot_gobj == NULL) {
                 ftCo_800968C8(gobj);
             } else {
                 fp->accessory2_cb = it_802A7AF0;
@@ -141,8 +142,8 @@ void ftCo_AirCatch_Anim(Fighter_GObj* gobj)
             }
         } else if (fp->mv.co.aircatch.x0 > da->xA4) {
             if (fp->mv.co.aircatch.x0 <= da->xB0) {
-                Item_GObj* tether_gobj = fp->u.lk.xC;
-                Item* tether_ip = GET_ITEM(fp->u.lk.xC);
+                Item_GObj* tether_gobj = fp->u.lk.hookshot_gobj;
+                Item* tether_ip = GET_ITEM(fp->u.lk.hookshot_gobj);
                 struct TetherAttributes* tether_data =
                     &tether_ip->xC4_article_data->x4_specialAttributes->tether;
 
@@ -166,7 +167,7 @@ void ftCo_AirCatch_Anim(Fighter_GObj* gobj)
                                 0, 0, 0, 0, -1, -1, fp->coll_data.cur_pos.x,
                                 jobj->mtx[1][3], var_f3, jobj->mtx[1][3]) != 0)
                         {
-                            it_802A2B10(fp->u.lk.xC);
+                            it_802A2B10(fp->u.lk.hookshot_gobj);
                             ftCo_800968C8(gobj);
                             return;
                         }
@@ -188,7 +189,7 @@ void ftCo_AirCatch_Anim(Fighter_GObj* gobj)
                         ft_PlaySFX(fp, 0x2714C, 0x7F, 0x40);
                     }
                 } else if (fp->mv.co.aircatch.x0 == da->xB0) {
-                    it_802A2B10(fp->u.lk.xC);
+                    it_802A2B10(fp->u.lk.hookshot_gobj);
                 }
             }
         }
@@ -199,8 +200,8 @@ void ftCo_AirCatch_Anim(Fighter_GObj* gobj)
         if (fp->mv.co.aircatch.x0 == da->xBC) {
             Vec3 pos;
             lb_8000B1CC(fp->parts[FtPart_ThrowN].joint, NULL, &pos);
-            fp->u.ss.x223C = it_802B7C18(gobj, &pos, fp->facing_dir);
-            if (fp->u.ss.x223C == NULL) {
+            fp->u.ss.tether_gobj = it_802B7C18(gobj, &pos, fp->facing_dir);
+            if (fp->u.ss.tether_gobj == NULL) {
                 ftCo_800968C8(gobj);
             } else {
                 fp->accessory2_cb = it_802BAC80;
@@ -209,8 +210,8 @@ void ftCo_AirCatch_Anim(Fighter_GObj* gobj)
             }
         } else if (fp->mv.co.aircatch.x0 > da->xBC) {
             if (fp->mv.co.aircatch.x0 <= da->xC8) {
-                Item_GObj* temp_r29_2 = fp->u.ss.x223C;
-                Item* tether_ip = GET_ITEM(temp_r29_2);
+                Item_GObj* tether_gobj = fp->u.ss.tether_gobj;
+                Item* tether_ip = GET_ITEM(tether_gobj);
                 struct TetherAttributes* tether_data =
                     &tether_ip->xC4_article_data->x4_specialAttributes->tether;
                 if (fp->mv.co.aircatch.x0 == da->xC0) {
@@ -227,21 +228,21 @@ void ftCo_AirCatch_Anim(Fighter_GObj* gobj)
                                         jobj->mtx[0][3],
                                     jobj->mtx[1][3]))
                             {
-                                it_802B7B84(fp->u.ss.x223C);
+                                it_802B7B84(fp->u.ss.tether_gobj);
                                 ftCo_800968C8(gobj);
                                 return;
                             }
                             pos.x = tether_data->pos_x_1;
                             pos.x *= fp->facing_dir;
                             pos.x += fp->pos_delta.x;
-                            it_802BAAE4(temp_r29_2, &pos);
+                            it_802BAAE4(tether_gobj, &pos);
                         }
                     }
                 } else {
                     if (fp->mv.co.aircatch.x0 == da->xC4) {
-                        it_802BAA58(temp_r29_2);
+                        it_802BAA58(tether_gobj);
                     } else if (fp->mv.co.aircatch.x0 == da->xC8) {
-                        it_802B7B84(fp->u.ss.x223C);
+                        it_802B7B84(fp->u.ss.tether_gobj);
                     }
                 }
             }

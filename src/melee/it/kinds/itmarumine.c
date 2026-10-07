@@ -14,7 +14,7 @@
 #include <melee/lb/lb_00B0.h>
 #include <sysdolphin/baselib/gobj.h>
 
-static Vec3 const it_803B86C8 = { 0 };
+static Vec3 const it_803B86C8 = { 0, 0, 0 };
 
 /* 2D0AAC */ static void it_802D0AAC(Item_GObj* gobj);
 /* 2D0B04 */ static void it_802D0B04(Item_GObj* gobj);
@@ -64,6 +64,7 @@ ItemStateTable it_803F7E78[] = {
       itMarumine_UnkMotion6_Coll },
 };
 
+// This is or runs the item explosion callback (according to it_8026C368)
 void it_802D09D0(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);

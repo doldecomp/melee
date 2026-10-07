@@ -34,19 +34,21 @@ ItemStateTable it_803F6E98[] = {
       itLinkbow_UnkMotion6_Coll }
 };
 
-static s32 it_803F6F08[7] = { 0, 1, 2, 3, 4, 5, 6 };
-static s32 it_803F6F24[7] = { 3, 4, 5, 0, 1, 2, 6 };
+// Arrays of item state ID's, used in a check in it_802AF32C
+static enum_t it_803F6F08[7] = { 0, 1, 2, 3, 4, 5, 6 };
+static enum_t it_803F6F24[7] = { 3, 4, 5, 0, 1, 2, 6 };
 
-HSD_GObj* it_802AF1A4(f32 facing_dir, Fighter_GObj* owner_gobj, Vec3* vec,
-                      Fighter_Part arg3, int arg4)
+// Spawn bow item
+Item_GObj* it_802AF1A4(f32 facing_dir, Fighter_GObj* owner_gobj,
+                       Vec3* init_pos, Fighter_Part hold_part, ItemKind kind)
 {
     Item_GObj* gobj;
     Item* item;
     SpawnItem spawn;
     f32 pad[1];
 
-    spawn.kind = arg4;
-    Item_InitSpawnPosition(&spawn, vec, true);
+    spawn.kind = kind;
+    Item_InitSpawnPosition(&spawn, init_pos, true);
     Item_InitSpawnCommonFields(&spawn, (HSD_GObj*) owner_gobj, facing_dir,
                                true);
 
@@ -57,9 +59,9 @@ HSD_GObj* it_802AF1A4(f32 facing_dir, Fighter_GObj* owner_gobj, Vec3* vec,
         item->xDCC_flag.b3 = false;
         item->xDD4_itemVar.linkbow.x0 = ftLib_GetModelScale(item->owner);
         item->xDD4_itemVar.linkbow.x4 = owner_gobj;
-        Item_8026AB54((HSD_GObj*) gobj, (HSD_GObj*) owner_gobj, arg3);
+        Item_8026AB54((HSD_GObj*) gobj, (HSD_GObj*) owner_gobj, hold_part);
     }
-    return (HSD_GObj*) gobj;
+    return gobj;
 }
 
 void itLinkBow_Logic100_Destroyed(Item_GObj* arg0)

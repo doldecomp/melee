@@ -227,6 +227,7 @@ bool it_80275870(Item_GObj* item_gobj)
     return false;
 }
 
+// Returns the highest damage value of the item hitcapsule if not disabled
 f32 it_802758D4(Item_GObj* item_gobj)
 {
     Item* item;

@@ -351,9 +351,9 @@ void ftPk_Init_OnLoad(HSD_GObj* gobj)
 
     {
         ftPikachuAttributes* pika_attr = fp->dat_attrs;
-        it_8026B3F8(item_list[0].article, pika_attr->xDC);
-        it_8026B3F8(item_list[1].article, pika_attr->specialn_itkind);
-        it_8026B3F8(item_list[2].article, pika_attr->specialairn_itkind);
+        it_8026B3F8(item_list[0].article, pika_attr->thunder_itkind);
+        it_8026B3F8(item_list[1].article, pika_attr->thunderjolt_itkind);
+        it_8026B3F8(item_list[2].article, pika_attr->thunderjoltair_itkind);
     }
 }
 

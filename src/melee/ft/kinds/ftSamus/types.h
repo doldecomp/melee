@@ -13,11 +13,11 @@
 #include <melee/ft/kinds/ftCommon/types.h>
 
 struct ftSamus_FighterVars {
-    /* 0x222C */ Item_GObj* x222C;
+    /* 0x222C */ Item_GObj* chargeshot_gobj;
     /* 0x2230 */ s32 x2230;
     /* 0x2234 */ u32 x2234;
     /* 0x2238 */ u32 x2238;
-    /* 0x223C */ Item_GObj* x223C;
+    /* 0x223C */ Item_GObj* tether_gobj;
 
     /* 0x2240 */ u8 x2240;
     /* 0x2241 */ u8 x2241;
