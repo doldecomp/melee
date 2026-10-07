@@ -145,7 +145,7 @@ pointer union selects Samus's grapple-beam accessory in slot 4, joints in
 Link/Young Link slot 6, Kirby slot 4, Yoshi slot 3 and Sheik slots 4/5,
 Game & Watch's visibility table in slot 10, Jigglypuff's costume parts in
 slot 1, and an `Article` in the other slots, whose `Article::kind` is
-bound by `DAT_BIND_FTITEM`. Untyped roots keep their bindings for the type
+bound by `DAT_MATCH_FTITEM`. Untyped roots keep their bindings for the type
 `dat_symbols.txt` gives them: Kirby's copies bind `fighter_kind` the same
 way. A union member's `DAT_BIND` applies to the member when it's chosen.
 
@@ -412,13 +412,13 @@ wrap the complete annotation so each field only names the binding:
 
 ```c
 // clang-format off
-#define DAT_BIND_ITEM \
+#define DAT_MATCH_ITEM \
     DAT_MATCH(Article::kind, (fighter_kind, item_index), \
         (Ft_Kind_Koopa | Ft_Kind_GKoops, 0) => It_Kind_Koopa_Flame, \
         _ => It_Kind_None)
 // clang-format on
 
-Article* article DAT_IF(true) DAT_BIND_ITEM;
+Article* article DAT_IF(true) DAT_MATCH_ITEM;
 ```
 
 Each tuple component is an integer or constant name, alternatives separated

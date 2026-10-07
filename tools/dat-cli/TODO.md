@@ -60,7 +60,7 @@ Not errors:
   or reading the tables from the ELF).
 - `ItemSpecialAttributes` selects a variant by `Article::kind`, bound in
   `itPublicData`, stage items (`gr_itkind`), fighters' items
-  (`DAT_BIND_FTITEM`) and Kirby's copies (`DAT_BIND_KBCOPY`). Left
+  (`DAT_MATCH_FTITEM`) and Kirby's copies (`DAT_MATCH_KBCOPY`). Left
   ambiguous: ScBall and Spycloak (no layouts), `It_Kind_Unk4`,
   `Lizardon_Flame4`, `Unknown_Swarm`, `Pokemon_Unk`, and fighter items
   whose code reads no attributes (bows, blasters, capes, Peach's parasol
