@@ -413,20 +413,27 @@ wrap the complete annotation so each field only names the binding:
 ```c
 // clang-format off
 #define DAT_MATCH_ITEM \
-    DAT_MATCH(Article::kind, (fighter_kind, item_index), \
-        (Ft_Kind_Koopa | Ft_Kind_GKoops, 0) => It_Kind_Koopa_Flame, \
-        _ => It_Kind_None)
+    DAT_MATCH(Article::kind, (fighter_kind, item_index), { \
+        (Ft_Kind_Koopa | Ft_Kind_GKoops, 0): It_Kind_Koopa_Flame; \
+        _: It_Kind_None; \
+    })
 // clang-format on
 
 Article* article DAT_IF(true) DAT_MATCH_ITEM;
 ```
 
 Each tuple component is an integer or constant name, alternatives separated
-by `|`, or `_` to ignore that component. Arms are tested in order; the last
-must be `_ => value`. Only the selected result is evaluated. This is
-annotation syntax, stringified by the macro for the DWARF build; it cannot
-be used in ordinary C expressions. `DAT_MATCH` emits a `DAT_BIND` annotation
-whose expression is lowered to the same conditionals both walkers use.
+by `|`, or `_` to ignore that component. Cases are tested in order; the last
+must be `_: value;`. Only the selected result is evaluated. Each case ends
+with a semicolon and has one result expression, which can be braced for
+multiline formatting, e.g. `(Kind, 0): { flag ? a : b; };`. There is no
+`break` or execution continuing into the next case.
+
+The braced body is one macro argument: commas inside tuples and calls stay
+inside their parentheses. Its case separators remain semicolons in DWARF,
+where `DAT_MATCH` emits `dat:bind(name, (match (values...) { ... }))`.
+This is annotation syntax; it cannot be used in ordinary C expressions.
+The tool lowers the match to the same conditionals both walkers use.
 
 | Annotation | Meaning |
 | --- | --- |
@@ -435,7 +442,7 @@ whose expression is lowered to the same conditionals both walkers use.
 | `DAT_TYPE(T)` | `void*` points to a `T`. Also on a `void*` typedef, for arrays of them. |
 | `DAT_EXTENT` | Array, or pointer to elements, that runs as far as the data does. Stopgap for lengths only the code knows. |
 | `DAT_BIND(T::f, value)` | `T::f` is `value` for everything reached through this member. |
-| `DAT_MATCH(T::f, (values...), arms...)` | Bind `T::f` to the first matching arm’s result, with the same scope as `DAT_BIND`. |
+| `DAT_MATCH(T::f, (values...), { cases... })` | Bind `T::f` to the first matching case’s result, with the same scope as `DAT_BIND`. |
 | `DAT_SCRIPT(table)`, `DAT_SCRIPT(length)` | Pointer to a command script: opcode in the top 6 bits; opcodes 0-9 are the generic commands (`Command_Execute`), and the script's own from 10 are as long in words as `table` (an array in the code) says, or as `length`, an expression in `_command` (the command's first word), e.g. `itCommandLength(_command)`. Ends at opcode 0, or a command whose `length` is 0; relocated words point to more script. |
 | `DAT_TERMINATED(value)` | Pointer to elements up to one whose first word (or whole value, if smaller) is `value` and not a relocated pointer: `0` for null-terminated lists, `GX_VA_NULL` for vertex descriptors, `-1` for `s8` lists. On a member, or on a pointer typedef for nested lists. `DAT_TERMINATED(value, n)`: the terminator is `n` elements long, for lists that end in it more than once. |
 | `DAT_BLOB` | On a `u8` typedef: one format of bytes the archive doesn't break down: keyframe streams (`HSD_FObjData`), texels (`HSD_ImageData`), display lists (`HSD_DisplayList`). The size comes from the pointer, e.g. `DAT_COUNT(length)`. Raw `u8` data stays unexplained. |

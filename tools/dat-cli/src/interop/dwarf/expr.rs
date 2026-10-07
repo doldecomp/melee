@@ -11,7 +11,7 @@ use winnow::{
     ascii::{digit1, hex_digit1, multispace0, oct_digit1},
     combinator::{
         Infix, Prefix, alt, cut_err, delimited, dispatch, expression, fail,
-        opt, peek, preceded, repeat, separated,
+        opt, peek, preceded, repeat, separated, terminated,
     },
     token::{any, one_of, take_while},
 };
@@ -248,6 +248,9 @@ fn named_operand(input: &mut &str) -> ModalResult<Expr> {
     if name == "match" {
         return cut_err(tuple_match).parse_next(input);
     }
+    if name == "break" {
+        return fail.parse_next(input);
+    }
     let args = opt(preceded(multispace0, arguments)).parse_next(input)?;
     Ok(match (name, args) {
         (_, Some(args)) => Expr::Call(name.to_owned(), args),
@@ -261,34 +264,36 @@ fn named_operand(input: &mut &str) -> ModalResult<Expr> {
 /// A tuple component: `None` is `_`, otherwise the alternatives to compare.
 type Pattern = Option<Vec<Expr>>;
 
-/// `match (a, b) { (A | B, 0) => x, (_, 1) => y, _ => z }`.
+/// `match (a, b) { (A | B, 0): x; (_, 1): y; _: z; }`.
 /// Patterns are integers or names, alternatives (`|`), or a wildcard.
 /// Lower to the existing operators so both walkers use the same semantics:
-/// arms are tried in order and only the selected result is evaluated.
+/// cases are tried in order and only the selected result is evaluated.
 fn tuple_match(input: &mut &str) -> ModalResult<Expr> {
     let subjects = preceded(multispace0, arguments).parse_next(input)?;
     let mut arms: Vec<(Option<Vec<Pattern>>, Expr)> = delimited(
         (multispace0, '{', multispace0),
-        separated(
+        repeat(
             1..,
-            (
-                preceded(
-                    multispace0,
-                    alt((
-                        '_'.value(None),
-                        delimited(
-                            '(',
-                            separated(1.., pattern, ','),
-                            cut_err((multispace0, ')')),
-                        )
-                        .map(Some),
-                    )),
+            terminated(
+                (
+                    preceded(
+                        multispace0,
+                        alt((
+                            '_'.value(None),
+                            delimited(
+                                '(',
+                                separated(1.., pattern, ','),
+                                cut_err((multispace0, ')')),
+                            )
+                            .map(Some),
+                        )),
+                    ),
+                    preceded((multispace0, ':'), match_result),
                 ),
-                preceded((multispace0, "=>"), expr),
+                ';',
             ),
-            ',',
         ),
-        (opt(','), multispace0, '}'),
+        (multispace0, '}'),
     )
     .parse_next(input)?;
     let Some((None, mut result)) = arms.pop() else {
@@ -320,6 +325,23 @@ fn tuple_match(input: &mut &str) -> ModalResult<Expr> {
             Expr::Cond(Box::new(condition), Box::new(value), Box::new(result));
     }
     Ok(result)
+}
+
+/// One result expression, optionally braced for a multiline case.
+fn match_result(input: &mut &str) -> ModalResult<Expr> {
+    delimited(
+        multispace0,
+        alt((
+            delimited(
+                '{',
+                terminated(expr, opt(';')),
+                cut_err((multispace0, '}')),
+            ),
+            expr,
+        )),
+        multispace0,
+    )
+    .parse_next(input)
 }
 
 fn pattern(input: &mut &str) -> ModalResult<Pattern> {
@@ -575,10 +597,10 @@ mod tests {
     #[test]
     fn tuple_matches() {
         let text = "match (kind, _index) {
-            (A | B, 0) => 10,
-            (_, 1 | 2) => 20,
-            (B, _) => 30,
-            _ => 40,
+            (A | B, 0): 10;
+            (_, 1 | 2): 20;
+            (B, _): 30;
+            _: 40;
         }";
         let expression = Expr::parse(text).unwrap();
         let e = |kind, index| {
@@ -595,7 +617,7 @@ mod tests {
         assert_eq!(e(4, 2), Some(20));
         assert_eq!(e(4, 3), Some(30));
         assert_eq!(e(5, 0), Some(40));
-        // Lowering uses the existing tree, including first-arm precedence.
+        // Lowering uses the existing tree, including first-case precedence.
         assert_eq!(
             expression,
             Expr::parse(
@@ -605,7 +627,7 @@ mod tests {
             .unwrap()
         );
         assert_eq!(
-            Expr::parse("1 + match (0) { (1) => 8, _ => 2 } * 3")
+            Expr::parse("1 + (match (0) { (1): 8; _: 2; }) * 3")
                 .unwrap()
                 .eval(&mut |_| None),
             Some(7)
@@ -617,20 +639,36 @@ mod tests {
         let e = |text| Expr::parse(text).unwrap().eval(&mut |_| None);
         assert_eq!(
             e("match (0, UNKNOWN) {
-            (1, 2) => UNKNOWN, (0, _) => 7, _ => UNKNOWN
+            (1, 2): UNKNOWN; (0, _): 7; _: UNKNOWN;
         }"),
             Some(7)
         );
-        assert_eq!(
-            e("match (0) { (0 | UNKNOWN) => 8, _ => UNKNOWN }"),
-            Some(8)
-        );
-        assert_eq!(e("match (0) { (0) => UNKNOWN, _ => 8 }"), None);
-        assert_eq!(e("match (UNKNOWN) { (0) => 7, _ => 8 }"), None);
+        assert_eq!(e("match (0) { (0 | UNKNOWN): 8; _: UNKNOWN; }"), Some(8));
+        assert_eq!(e("match (0) { (0): UNKNOWN; _: 8; }"), None);
+        assert_eq!(e("match (UNKNOWN) { (0): 7; _: 8; }"), None);
         assert_eq!(
             e("match (0) {
-            (0) => match (1) { (1) => 9, _ => UNKNOWN }, _ => UNKNOWN
+            (0): match (1) { (1): 9; _: UNKNOWN; }; _: UNKNOWN;
         }"),
+            Some(9)
+        );
+    }
+
+    #[test]
+    fn braced_match_results() {
+        let e = |text| Expr::parse(text).unwrap().eval(&mut |_| None);
+        assert_eq!(
+            e("match (0) {
+                (0): { 1 ? 7 : UNKNOWN; };
+                _: { UNKNOWN };
+            }"),
+            Some(7)
+        );
+        assert_eq!(
+            e("match (0) {
+                (0): { match (1) { (1): { 9 }; _: UNKNOWN; }; };
+                _: UNKNOWN;
+            }"),
             Some(9)
         );
     }
@@ -638,17 +676,25 @@ mod tests {
     #[test]
     fn rejects_invalid_tuple_matches() {
         for text in [
-            "match () { _ => 0 }",
+            "match () { _: 0; }",
             "match (0) {}",
-            "match (0) { (0) => 1 }",
-            "match (0) { _ => 0, (0) => 1 }",
-            "match (0) { _ => 0, _ => 1 }",
-            "match (0, 1) { (0) => 1, _ => 0 }",
-            "match (0) { (0, 1) => 1, _ => 0 }",
-            "match (0) { (0 |) => 1, _ => 0 }",
-            "match (0) { (_ | 1) => 1, _ => 0 }",
-            "match (0) { (0) -> 1, _ => 0 }",
-            "match (0) { (0) => 1, _ => 0",
+            "match (0) { (0): 1; }",
+            "match (0) { _: 0; (0): 1; }",
+            "match (0) { _: 0; _: 1; }",
+            "match (0, 1) { (0): 1; _: 0; }",
+            "match (0) { (0, 1): 1; _: 0; }",
+            "match (0) { (0 |): 1; _: 0; }",
+            "match (0) { (_ | 1): 1; _: 0; }",
+            "match (0) { (0) => 1, _ => 0 }",
+            "match (0) { (0): 1, _: 0; }",
+            "match (0) { (0): 1 _: 0; }",
+            "match (0) { (0): 1; _: 0 }",
+            "match (0) { (0): 1; _: 0;",
+            "match (0) { (0): {}; _: 0; }",
+            "match (0) { (0): break; _: 0; }",
+            "match (0) { (0): { 1; 2; }; _: 0; }",
+            "match (0) { (0): { 1; break; }; _: 0; }",
+            "match (0) { (0): { 1; }; _: 0; } break",
         ] {
             assert!(Expr::parse(text).is_none(), "{text}");
         }
