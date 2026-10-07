@@ -39,14 +39,14 @@ When running under WSL, [objdiff](#diffing) is unable to get filesystem notifica
   ```
   brew install ninja
   ```
-- Install [wine-crossover](https://github.com/Gcenx/homebrew-wine):
+- Install [Game Porting Toolkit](https://github.com/Gcenx/homebrew-wine) (the `wine-crossover` cask was removed from this tap in favor of this one):
   ```
-  brew install --cask --no-quarantine gcenx/wine/wine-crossover
+  brew install --cask gcenx/wine/game-porting-toolkit
   ```
 
-After OS upgrades, if macOS complains about `Wine Crossover.app` being unverified, you can unquarantine it using:
+After OS upgrades, if macOS complains about `Game Porting Toolkit.app` being unverified, you can unquarantine it using:
 ```sh
-sudo xattr -rd com.apple.quarantine '/Applications/Wine Crossover.app'
+sudo xattr -rd com.apple.quarantine '/Applications/Game Porting Toolkit.app'
 ```
 
 ## Linux:
