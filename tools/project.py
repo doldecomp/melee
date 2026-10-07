@@ -277,7 +277,7 @@ class ProjectConfig:
         if self.use_wibo():
             wrapper = self.build_dir / "tools" / "wibo"
         if not is_windows() and wrapper is None:
-            wrapper = Path("wine")
+            wrapper = Path("wine64" if sys.platform == "darwin" else "wine")
 
         return wrapper
 
