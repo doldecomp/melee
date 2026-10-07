@@ -126,50 +126,78 @@ fn macros_resolve_constants() {
 
 #[test]
 fn item_kind_matches_from_dwarf() {
-    use melee_dat::{dwarf::expr::eval, walk::macros};
+    use melee_dat::{
+        dwarf::{
+            annotation::DatTag,
+            expr::{eval, eval_expr},
+        },
+        walk::macros,
+    };
 
     let Some(graph) = GRAPH.as_ref() else { return };
     let macros = macros(graph);
-    for (table, fighter, index, item) in [
-        ("ftData_ItemKind", "Ft_Kind_Koopa", 0, "It_Kind_Koopa_Flame"),
+    let binding = |ty, field| {
+        let TypeKind::Record { members, .. } = &record(graph, ty).kind else {
+            unreachable!()
+        };
+        let member = members
+            .iter()
+            .find(|m| m.name.map(|n| graph.str(n)) == Some(field))
+            .unwrap();
+        let bindings: Vec<_> = member
+            .annotations
+            .iter()
+            .filter_map(|a| a.value)
+            .filter_map(|value| DatTag::parse(graph.str(value)))
+            .filter_map(|tag| match tag {
+                DatTag::Bind(name, value) => Some((name, value)),
+                _ => None,
+            })
+            .collect();
+        assert_eq!(bindings.len(), 1, "{ty}.{field}");
+        assert_eq!(bindings[0].0, "Article::kind");
+        bindings.into_iter().next().unwrap().1
+    };
+    let fighter = binding("ftData_Item", "article");
+    let copy = binding("ftKbCopyHat_Item", "item");
+    // Every use of the shared macro must emit the complete binding, on
+    // both single pointers and arrays of pointers.
+    for (ty, field) in [
+        ("ftKbCopyHat_Items", "items"),
+        ("ftKbCopyHat_ItemsDynamics", "items"),
+        ("ftKbCopyHat_ItemDynamics", "item"),
+        ("ftKbCopyHat_Popo", "ice"),
+        ("ftKbCopyHat_Yoshi", "egg"),
+        ("ftKbCopyParts_ItemDynamics", "item"),
+        ("ftKbCopyParts_Items", "items"),
+        ("ftKbCopyParts_GameWatch", "items"),
+    ] {
+        assert_eq!(binding(ty, field), copy, "{ty}.{field}");
+    }
+    for (table, kind, index, item) in [
+        (&fighter, "Ft_Kind_Koopa", 0, "It_Kind_Koopa_Flame"),
+        (&fighter, "Ft_Kind_GKoops", 0, "It_Kind_Koopa_Flame"),
+        (&fighter, "Ft_Kind_Nana", 1, "It_Kind_IceClimber_Blizzard"),
+        (&fighter, "Ft_Kind_Mario", 1, "It_Kind_None"),
+        (&copy, "Ft_Kind_Fox", 1, "It_Kind_Kirby_FoxBlaster"),
         (
-            "ftData_ItemKind",
-            "Ft_Kind_GKoops",
-            0,
-            "It_Kind_Koopa_Flame",
-        ),
-        (
-            "ftData_ItemKind",
-            "Ft_Kind_Nana",
-            1,
-            "It_Kind_IceClimber_Blizzard",
-        ),
-        ("ftData_ItemKind", "Ft_Kind_Mario", 1, "It_Kind_None"),
-        (
-            "ftKbCopy_ItemKind",
-            "Ft_Kind_Fox",
-            1,
-            "It_Kind_Kirby_FoxBlaster",
-        ),
-        (
-            "ftKbCopy_ItemKind",
+            &copy,
             "Ft_Kind_GameWatch",
             1,
             "It_Kind_Kirby_GameWatchChefPan",
         ),
-        ("ftKbCopy_ItemKind", "Ft_Kind_Fox", 2, "It_Kind_None"),
+        (&copy, "Ft_Kind_Fox", 2, "It_Kind_None"),
     ] {
-        assert!(macros[table].starts_with("match"));
-        let fighter = eval(&macros, fighter, &|_| None).unwrap();
+        let kind = eval(&macros, kind, &|_| None).unwrap();
         let expected = eval(&macros, item, &|_| None).unwrap();
         assert_eq!(
-            eval(&macros, table, &|name| match name {
-                "fighter_kind" => Some(fighter),
+            eval_expr(&macros, table, &|name| match name {
+                "fighter_kind" => Some(kind),
                 "item_index" | "_index" => Some(index),
                 _ => None,
             }),
             Some(expected),
-            "{table}, fighter {fighter}, slot {index}"
+            "fighter {kind}, slot {index}"
         );
     }
 }

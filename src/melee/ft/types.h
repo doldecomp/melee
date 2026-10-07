@@ -731,8 +731,8 @@ struct ftData_x48_x4 {
 /// @c *_Init_OnLoad passes it to #it_8026B3F8 (some from the fighter's
 /// attributes, whose values are written here).
 // clang-format off
-#define ftData_ItemKind                                                      \
-    match (fighter_kind, item_index) {                                       \
+#define DAT_BIND_FTITEM                                                     \
+    DAT_MATCH(Article::kind, (fighter_kind, item_index),                    \
         (Ft_Kind_Mario, 0) => It_Kind_Mario_Fire,                            \
         (Ft_Kind_Mario, 2) => It_Kind_Mario_Cape,                            \
         (Ft_Kind_Fox, 0) => It_Kind_Fox_Laser,                               \
@@ -814,8 +814,7 @@ struct ftData_x48_x4 {
         (Ft_Kind_CrezyH, 0) => It_Kind_CrazyHand_Laser,                      \
         (Ft_Kind_CrezyH, 1) => It_Kind_CrazyHand_Bullet,                     \
         (Ft_Kind_CrezyH, 2) => It_Kind_CrazyHand_Bomb,                       \
-        _ => It_Kind_None,                                                   \
-    }
+        _ => It_Kind_None)
 // clang-format on
 
 union ftData_Item {
@@ -834,7 +833,7 @@ union ftData_Item {
                                               item_index == 10);
     struct ftData_x48_x4* parts DAT_IF(fighter_kind == Ft_Kind_Purin &&
                                        item_index == 1);
-    Article* article DAT_IF(true) DAT_BIND(Article::kind, ftData_ItemKind);
+    Article* article DAT_IF(true) DAT_BIND_FTITEM;
 };
 
 typedef struct ftData_x1C {
@@ -2121,8 +2120,8 @@ struct KirbyHatStruct {
 /// @c _index where there are two), as #ftKb_SpecialN_800F16D0's callers pass
 /// them to #it_8026B3F8.
 // clang-format off
-#define ftKbCopy_ItemKind                                                    \
-    match (fighter_kind, _index) {                                           \
+#define DAT_BIND_KBCOPY                                                     \
+    DAT_MATCH(Article::kind, (fighter_kind, _index),                        \
         (Ft_Kind_Mario, 0) => It_Kind_Kirby_MarioFire,                       \
         (Ft_Kind_Fox, 0) => It_Kind_Kirby_FoxLaser,                          \
         (Ft_Kind_Fox, 1) => It_Kind_Kirby_FoxBlaster,                        \
@@ -2151,8 +2150,7 @@ struct KirbyHatStruct {
         (Ft_Kind_Pichu, 1) => It_Kind_Kirby_PichuTJolt_Air,                  \
         (Ft_Kind_GameWatch, 0) => It_Kind_Kirby_GameWatchChef,               \
         (Ft_Kind_GameWatch, 1) => It_Kind_Kirby_GameWatchChefPan,            \
-        _ => It_Kind_None,                                                   \
-    }
+        _ => It_Kind_None)
 // clang-format on
 
 /// @name Kirby's copy abilities
@@ -2170,33 +2168,33 @@ typedef struct ftKbCopyHat {
 /// Mario, Samus, Luigi, Dr. Mario.
 typedef struct ftKbCopyHat_Item {
     /* +0 */ ftKbCopyHat hat;
-    /* +C */ Article* item DAT_BIND(Article::kind, ftKbCopy_ItemKind);
+    /* +C */ Article* item DAT_BIND_KBCOPY;
 } ftKbCopyHat_Item;
 
 /// Fox, Ness, Peach.
 typedef struct ftKbCopyHat_Items {
     /* +0 */ ftKbCopyHat hat;
-    /* +C */ Article* items[2] DAT_BIND(Article::kind, ftKbCopy_ItemKind);
+    /* +C */ Article* items[2] DAT_BIND_KBCOPY;
 } ftKbCopyHat_Items;
 
 /// Link, Sheik, Pikachu, Young Link, Pichu.
 typedef struct ftKbCopyHat_ItemsDynamics {
     /*  +0 */ ftKbCopyHat hat;
-    /*  +C */ Article* items[2] DAT_BIND(Article::kind, ftKbCopy_ItemKind);
+    /*  +C */ Article* items[2] DAT_BIND_KBCOPY;
     /* +14 */ ftDynamics* dynamics;
 } ftKbCopyHat_ItemsDynamics;
 
 /// Bowser.
 typedef struct ftKbCopyHat_ItemDynamics {
     /*  +0 */ ftKbCopyHat hat;
-    /*  +C */ Article* item DAT_BIND(Article::kind, ftKbCopy_ItemKind);
+    /*  +C */ Article* item DAT_BIND_KBCOPY;
     /* +10 */ ftDynamics* dynamics;
 } ftKbCopyHat_ItemDynamics;
 
 /// Ice Climbers.
 typedef struct ftKbCopyHat_Popo {
     /*  +0 */ ftKbCopyHat hat;
-    /*  +C */ Article* ice DAT_BIND(Article::kind, ftKbCopy_ItemKind);
+    /*  +C */ Article* ice DAT_BIND_KBCOPY;
     /* +10 */ HSD_Joint* x10;
 } ftKbCopyHat_Popo;
 
@@ -2218,7 +2216,7 @@ typedef struct ftKbCopyHat_Yoshi {
     /*  +0 */ ftKbCopyHat hat;
     /*  +C */ ftDynamics* dynamics;
     /* +10 */ HSD_AnimJoint* anims[4];
-    /* +20 */ Article* egg DAT_BIND(Article::kind, ftKbCopy_ItemKind);
+    /* +20 */ Article* egg DAT_BIND_KBCOPY;
 } ftKbCopyHat_Yoshi;
 
 /// Donkey Kong.
@@ -2238,14 +2236,14 @@ typedef struct ftKbCopyParts_Dynamics {
 /// Mewtwo.
 typedef struct ftKbCopyParts_ItemDynamics {
     /*  +0 */ ftKbCopyParts parts;
-    /* +18 */ Article* item DAT_BIND(Article::kind, ftKbCopy_ItemKind);
+    /* +18 */ Article* item DAT_BIND_KBCOPY;
     /* +1C */ ftDynamics* dynamics;
 } ftKbCopyParts_ItemDynamics;
 
 /// Falco.
 typedef struct ftKbCopyParts_Items {
     /*  +0 */ ftKbCopyParts parts;
-    /* +18 */ Article* items[2] DAT_BIND(Article::kind, ftKbCopy_ItemKind);
+    /* +18 */ Article* items[2] DAT_BIND_KBCOPY;
 } ftKbCopyParts_Items;
 
 /// Mr. Game & Watch.
@@ -2253,7 +2251,7 @@ typedef struct ftKbCopyParts_GameWatch {
     /*  +0 */ ftKbCopyParts parts;
     /* +18 */ FtPartsVisLookup* vis;
     /* +1C */ ftDynamics* dynamics;
-    /* +20 */ Article* items[2] DAT_BIND(Article::kind, ftKbCopy_ItemKind);
+    /* +20 */ Article* items[2] DAT_BIND_KBCOPY;
 } ftKbCopyParts_GameWatch;
 
 /// @}

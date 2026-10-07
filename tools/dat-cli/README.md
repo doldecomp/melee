@@ -145,7 +145,7 @@ pointer union selects Samus's grapple-beam accessory in slot 4, joints in
 Link/Young Link slot 6, Kirby slot 4, Yoshi slot 3 and Sheik slots 4/5,
 Game & Watch's visibility table in slot 10, Jigglypuff's costume parts in
 slot 1, and an `Article` in the other slots, whose `Article::kind` is
-bound from `ftData_ItemKind`. Untyped roots keep their bindings for the type
+bound by `DAT_BIND_FTITEM`. Untyped roots keep their bindings for the type
 `dat_symbols.txt` gives them: Kirby's copies bind `fighter_kind` the same
 way. A union member's `DAT_BIND` applies to the member when it's chosen.
 
@@ -407,21 +407,26 @@ For what C types can't express. From `libs/doldecomp/include/dat_macros.h`;
 they compile to nothing outside the DWARF build. If a type is wrong, fix the
 type instead.
 
-Expressions also support tuple matches for tables of discriminator values:
+`DAT_MATCH` binds a name to the result of a tuple match. Shared tables can
+wrap the complete annotation so each field only names the binding:
 
 ```c
-#define item_kind \
-    match (fighter_kind, item_index) { \
+// clang-format off
+#define DAT_BIND_ITEM \
+    DAT_MATCH(Article::kind, (fighter_kind, item_index), \
         (Ft_Kind_Koopa | Ft_Kind_GKoops, 0) => It_Kind_Koopa_Flame, \
-        _ => It_Kind_None, \
-    }
+        _ => It_Kind_None)
+// clang-format on
+
+Article* article DAT_IF(true) DAT_BIND_ITEM;
 ```
 
 Each tuple component is an integer or constant name, alternatives separated
 by `|`, or `_` to ignore that component. Arms are tested in order; the last
-must be `_ => value`. Only the selected result is evaluated. This syntax is
-for annotation expressions and their macros, which the tool reads from
-DWARF; it cannot be used in ordinary C code.
+must be `_ => value`. Only the selected result is evaluated. This is
+annotation syntax, stringified by the macro for the DWARF build; it cannot
+be used in ordinary C expressions. `DAT_MATCH` emits a `DAT_BIND` annotation
+whose expression is lowered to the same conditionals both walkers use.
 
 | Annotation | Meaning |
 | --- | --- |
@@ -430,14 +435,15 @@ DWARF; it cannot be used in ordinary C code.
 | `DAT_TYPE(T)` | `void*` points to a `T`. Also on a `void*` typedef, for arrays of them. |
 | `DAT_EXTENT` | Array, or pointer to elements, that runs as far as the data does. Stopgap for lengths only the code knows. |
 | `DAT_BIND(T::f, value)` | `T::f` is `value` for everything reached through this member. |
+| `DAT_MATCH(T::f, (values...), arms...)` | Bind `T::f` to the first matching arm’s result, with the same scope as `DAT_BIND`. |
 | `DAT_SCRIPT(table)`, `DAT_SCRIPT(length)` | Pointer to a command script: opcode in the top 6 bits; opcodes 0-9 are the generic commands (`Command_Execute`), and the script's own from 10 are as long in words as `table` (an array in the code) says, or as `length`, an expression in `_command` (the command's first word), e.g. `itCommandLength(_command)`. Ends at opcode 0, or a command whose `length` is 0; relocated words point to more script. |
 | `DAT_TERMINATED(value)` | Pointer to elements up to one whose first word (or whole value, if smaller) is `value` and not a relocated pointer: `0` for null-terminated lists, `GX_VA_NULL` for vertex descriptors, `-1` for `s8` lists. On a member, or on a pointer typedef for nested lists. `DAT_TERMINATED(value, n)`: the terminator is `n` elements long, for lists that end in it more than once. |
 | `DAT_BLOB` | On a `u8` typedef: one format of bytes the archive doesn't break down: keyframe streams (`HSD_FObjData`), texels (`HSD_ImageData`), display lists (`HSD_DisplayList`). The size comes from the pointer, e.g. `DAT_COUNT(length)`. Raw `u8` data stays unexplained. |
 
 Expressions are C integer expressions, including `?:`. Names resolve to
 fields of the enclosing record, then bindings, then macros and enum
-constants; a macro can hold a table as a chain of `?:`, like
-`ftData_ItemKind`. `_index` is the element index
+constants. `DAT_MATCH` expresses multi-key tables without chains of `?:`.
+`_index` is the element index
 inside arrays and counted pointers. Float fields convert to integers as C
 would. Calls are to functions of the code that the tool ports
 (`interop/dwarf/expr.rs`), so an annotation can say what the game itself
