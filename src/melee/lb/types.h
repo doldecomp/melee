@@ -317,6 +317,14 @@ struct lbCardNew_SnapshotEntry {
 };
 ASSERT_SIZE(lbCardNew_SnapshotEntry, 0x8);
 
+/// A rumble pattern in @c lbRumbleData (LbRb.dat), played by #lb_80014574.
+struct lbRumbleEntry {
+    /// A zero-terminated script passed to #HSD_PadRumbleAdd.
+    /* +0 */ union HSD_Rumble* list DAT_TERMINATED(0);
+    /* +4 */ u8 pri;
+    /* +5 */ u8 x5;
+};
+
 struct ColorOverlay_UnkInner {
     /*  +0 */ int x0;
     /*  +0 */ u8 x4[0x7B - 0x4];

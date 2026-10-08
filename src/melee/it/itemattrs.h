@@ -14,17 +14,17 @@
 #include <melee/it/itPKThunder.h>
 #include <melee/it/itYoyo.h>
 
-/// Charizard's flames (#It_Kind_Lizardon_Flame1 to 4), which their code
-/// reads through #itLizardonAttributes.
-typedef struct itLizardonFlameAttributes {
+/// Charizard flame attributes (#It_Kind_Lizardon_Flame1 through 4).
+/// Their code reads these fields through #itLizardonAttributes.
+struct itLizardonFlameAttributes {
     /* +0 */ f32 x0; ///< Lifetime, for #it_80275158
     /* +4 */ f32 x4; ///< Velocity multiplier
-} itLizardonFlameAttributes;
+};
 
-/// Attributes no code reads: words, up to the next object.
-typedef struct itUnreadAttributes {
+/// Unused attributes stored as words up to the next object.
+struct itUnreadAttributes {
     /* +0 */ s32 x0[1] DAT_EXTENT;
-} itUnreadAttributes;
+};
 
 typedef struct ArwingLaserAttr {
     /* +0 */ itSpecialAttrsHead* x0;
@@ -513,8 +513,8 @@ union ItemSpecialAttributes {
                                     Article::kind == It_Kind_Klap ||
                                     Article::kind == It_Kind_ZRShell);
     it_2E5A_Attrs unk_2e5a DAT_IF(Article::kind == It_Kind_Unk4);
-    /// Items whose code reads none of their attributes, and fighters' item
-    /// slots registered with no kind.
+    /// Unused item attributes, including fighter item slots registered with
+    /// no kind.
     itUnreadAttributes unread DAT_IF(
         Article::kind == It_Kind_ScBall || Article::kind == It_Kind_Spycloak ||
         Article::kind == It_Kind_Mario_Cape ||

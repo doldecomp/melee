@@ -3,6 +3,8 @@
 
 #include <melee/ft/kinds/ftCommon/forward.h>
 
+typedef struct _ftSandbagAttributes ftSandbagAttributes;
+
 typedef enum ftSb_MotionState {
     ftSb_MS_WaitReverse = ftCo_MS_Count,
     ftSb_MS_Count,

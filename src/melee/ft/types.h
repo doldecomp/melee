@@ -4,6 +4,7 @@
 
 #include <melee/ef/forward.h>
 #include <melee/ft/forward.h> // IWYU pragma: export
+#include <melee/ft/kinds/ftKirby/forward.h>
 #include <melee/it/forward.h>
 #include <sysdolphin/baselib/forward.h>
 
@@ -13,9 +14,9 @@
 #include <dolphin/gx.h>
 #include <dolphin/mtx.h>
 #include <melee/cm/types.h>
-#include <melee/ft/ftwaitanim.h>
 #include <melee/ft/kinds/ftCaptain/types.h>
 #include <melee/ft/kinds/ftCommon/types.h>
+#include <melee/ft/kinds/ftCrazyHand/types.h>
 #include <melee/ft/kinds/ftDonkey/types.h>
 #include <melee/ft/kinds/ftFox/types.h>
 #include <melee/ft/kinds/ftGameWatch/types.h>
@@ -991,6 +992,61 @@ typedef struct Fighter_WaitAnimData {
     s32 x10_animCurrFlags;
     uintptr_t x14;
 } Fighter_WaitAnimData;
+
+/// Fighter-specific attributes copied from #ftData::ext_attr into
+/// #Fighter::dat_attrs by @c LoadSpecialAttrs.
+union ftData_ExtAttr {
+    ftMario_DatAttrs mario DAT_IF(fighter_kind == Ft_Kind_Mario ||
+                                  fighter_kind == Ft_Kind_DrMario);
+    ftFox_DatAttrs fox DAT_IF(fighter_kind == Ft_Kind_Fox ||
+                              fighter_kind == Ft_Kind_Falco);
+    ftCaptain_DatAttrs captain DAT_IF(fighter_kind == Ft_Kind_Captain ||
+                                      fighter_kind == Ft_Kind_Ganon);
+    ftDonkeyAttributes donkey DAT_IF(fighter_kind == Ft_Kind_Donkey);
+    ftKb_DatAttrs kirby DAT_IF(fighter_kind == Ft_Kind_Kirby);
+    ftKoopaAttributes koopa DAT_IF(fighter_kind == Ft_Kind_Koopa ||
+                                   fighter_kind == Ft_Kind_GKoops);
+    ftLk_DatAttrs link DAT_IF(fighter_kind == Ft_Kind_Link ||
+                              fighter_kind == Ft_Kind_CLink);
+    ftSeakAttributes seak DAT_IF(fighter_kind == Ft_Kind_Seak);
+    ftNessAttributes ness DAT_IF(fighter_kind == Ft_Kind_Ness);
+    ftPe_DatAttrs peach DAT_IF(fighter_kind == Ft_Kind_Peach);
+    ftIceClimberAttributes ice_climber DAT_IF(fighter_kind == Ft_Kind_Popo ||
+                                              fighter_kind == Ft_Kind_Nana);
+    ftPikachuAttributes pikachu DAT_IF(fighter_kind == Ft_Kind_Pikachu ||
+                                       fighter_kind == Ft_Kind_Pichu);
+    ftSs_DatAttrs samus DAT_IF(fighter_kind == Ft_Kind_Samus);
+    ftYoshiAttributes yoshi DAT_IF(fighter_kind == Ft_Kind_Yoshi);
+    ftPurinAttributes purin DAT_IF(fighter_kind == Ft_Kind_Purin);
+    ftMewtwoAttributes mewtwo DAT_IF(fighter_kind == Ft_Kind_Mewtwo);
+    ftLuigiAttributes luigi DAT_IF(fighter_kind == Ft_Kind_Luigi);
+    MarsAttributes mars DAT_IF(fighter_kind == Ft_Kind_Mars ||
+                               fighter_kind == Ft_Kind_Emblem);
+    ftZelda_DatAttrs zelda DAT_IF(fighter_kind == Ft_Kind_Zelda);
+    ftGameWatchAttributes gamewatch DAT_IF(fighter_kind == Ft_Kind_GameWatch);
+    ftMasterHand_SpecialAttrs masterhand DAT_IF(fighter_kind ==
+                                                Ft_Kind_MasterH);
+    ftCrazyHand_DatAttrs crazyhand DAT_IF(fighter_kind == Ft_Kind_CrezyH);
+    ftZakoboyAttributes zako DAT_IF(fighter_kind == Ft_Kind_Boy ||
+                                    fighter_kind == Ft_Kind_Girl);
+    ftSandbagAttributes sandbag DAT_IF(fighter_kind == Ft_Kind_Sandbag);
+};
+
+/// A wait animation. @c x is the animation ID; @c y is its chance out of 100.
+/// An entry with @c x == -1 terminates the list.
+struct WaitStruct {
+    union WaitStruct_u {
+        /// Pointer view used by #ftCo_8008A7A8.
+        struct WaitStruct_u_p {
+            int* x;
+            int* y;
+        } p;
+        struct WaitStruct_u_i {
+            int x;
+            int y;
+        } i DAT_IF(true);
+    } u;
+};
 
 struct ftData {
     /*  +0 */ ftCo_DatAttrs* x0;

@@ -3,6 +3,7 @@
 #include "ftcommon.h"
 #include "ftdata.h"
 #include "ftlib.h"
+#include "ftwaitanim.h"
 #include "inlines.h"
 #include "kinds/ftCLink/ftclink.h"
 #include "kinds/ftCommon/ftCo_DownSpot.h"

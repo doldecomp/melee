@@ -7,10 +7,6 @@
 
 #include <melee/ft/types.h>
 
-typedef struct _ftSandbagAttributes {
-    u32 x0_pair[2];
-} ftSandbagAttributes;
-
 /* 14F9CC */ void ftSb_Init_OnDeath(HSD_GObj* gobj);
 /* 14F9D0 */ void ftSb_Init_OnLoad(HSD_GObj* gobj);
 /* 14FA30 */ void ftSb_Init_8014FA30(Fighter* fp);

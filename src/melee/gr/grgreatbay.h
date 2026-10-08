@@ -59,44 +59,4 @@
 /* 1F6814 */ bool grGreatBay_801F6814(Vec3*, int _, HSD_JObj*);
 /* 3E3F6C */ extern StageData grGb_StageData;
 
-typedef struct grGreatBay_YakumonoParam {
-    /* 0x00 */ s16 moon_fall_wait_a;
-    /* 0x02 */ s16 moon_fall_wait_b;
-    /* 0x04 */ f32 floatfloor_landing_rate;
-    /* 0x08 */ f32 floatfloor_slant_mul;
-    /* 0x0C */ f32 floatfloor_slant_add;
-    /* 0x10 */ f32 floatfloor_slant_limit;
-    /* 0x14 */ f32 floatfloor_slant_rate;
-    /* 0x18 */ f32 floatfloor_slant_reb_rate;
-    /* 0x1C */ f32 floatfloor_slide_mul;
-    /* 0x20 */ f32 floatfloor_slide_add;
-    /* 0x24 */ f32 floatfloor_slide_limit;
-    /* 0x28 */ f32 floatfloor_slide_rate;
-    /* 0x2C */ f32 floatfloor_slide_reb_rate;
-    /* 0x30 */ f32 floatfloor_down_mul;
-    /* 0x34 */ f32 floatfloor_down_add;
-    /* 0x38 */ f32 floatfloor_down_limit;
-    /* 0x3C */ f32 floatfloor_down_up_rate;
-    /* 0x40 */ f32 floatfloor_down_down_rate;
-    /* 0x44 */ s16 kame_wait_frame_a;
-    /* 0x46 */ s16 kame_wait_frame_b;
-    /* 0x48 */ s16 kame_rebirth_frame_a;
-    /* 0x4A */ s16 kame_rebirth_frame_b;
-    /* 0x4C */ f32 kame_x;
-    /* 0x50 */ f32 kame_y;
-    /* 0x54 */ f32 kame_x_offset_init;
-    /* 0x58 */ f32 kame_x_lr_offset_a;
-    /* 0x5C */ f32 kame_x_lr_offset_b;
-    /* 0x60 */ f32 kame_x_fb_offset_a;
-    /* 0x64 */ f32 kame_x_fb_offset_b;
-    /* 0x68 */ f32 kame_scale;
-    /* 0x6C */ f32 kame_ud_scale;
-    /* 0x70 */ s16 kame_dir_prob[4];
-    /* 0x78 */ f32 kame_item_prob;
-    /* 0x7C */ struct grGreatBay_YakumonoParam_Item {
-        s16 kind;
-        s16 weight;
-    } items[10];
-} grGreatBay_YakumonoParam;
-
 #endif

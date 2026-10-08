@@ -7,10 +7,7 @@
 #include <melee/gr/forward.h>
 #include <melee/lb/forward.h>
 
-#include <dat_macros.h>
-
 #include <dolphin/mtx.h>
-#include <melee/gr/types.h>
 
 /* 20741C */ void grKinokoRoute_8020741C(bool);
 /* 207420 */ void grKinokoRoute_80207420(void);
@@ -45,11 +42,5 @@
 /* 20875C */ bool grKinokoRoute_8020875C(Vec3*, int arg, HSD_JObj* jobj);
 /* 2087B0 */ float grKinokoRoute_802087B0(void);
 /* 3E584C */ extern StageData grNKr_StageData;
-
-struct grKinokoRoute_YakumonoParam {
-    int x0;
-    /// Indexed by enemy spawn point, from 0x20
-    grZakoGenerator_SpawnDesc spawn_descs[] DAT_EXTENT;
-};
 
 #endif

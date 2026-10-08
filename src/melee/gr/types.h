@@ -2105,4 +2105,152 @@ typedef struct {
     void* x28;
 } RouteEntry;
 
+struct grFigureGet_YakumonoParam {
+    s32 x0;
+    s32 x4;
+    s32 x8;
+    f32 xC;
+    f32 x10;
+    f32 x14;
+};
+
+struct grGreatBay_YakumonoParam {
+    /* 0x00 */ s16 moon_fall_wait_a;
+    /* 0x02 */ s16 moon_fall_wait_b;
+    /* 0x04 */ f32 floatfloor_landing_rate;
+    /* 0x08 */ f32 floatfloor_slant_mul;
+    /* 0x0C */ f32 floatfloor_slant_add;
+    /* 0x10 */ f32 floatfloor_slant_limit;
+    /* 0x14 */ f32 floatfloor_slant_rate;
+    /* 0x18 */ f32 floatfloor_slant_reb_rate;
+    /* 0x1C */ f32 floatfloor_slide_mul;
+    /* 0x20 */ f32 floatfloor_slide_add;
+    /* 0x24 */ f32 floatfloor_slide_limit;
+    /* 0x28 */ f32 floatfloor_slide_rate;
+    /* 0x2C */ f32 floatfloor_slide_reb_rate;
+    /* 0x30 */ f32 floatfloor_down_mul;
+    /* 0x34 */ f32 floatfloor_down_add;
+    /* 0x38 */ f32 floatfloor_down_limit;
+    /* 0x3C */ f32 floatfloor_down_up_rate;
+    /* 0x40 */ f32 floatfloor_down_down_rate;
+    /* 0x44 */ s16 kame_wait_frame_a;
+    /* 0x46 */ s16 kame_wait_frame_b;
+    /* 0x48 */ s16 kame_rebirth_frame_a;
+    /* 0x4A */ s16 kame_rebirth_frame_b;
+    /* 0x4C */ f32 kame_x;
+    /* 0x50 */ f32 kame_y;
+    /* 0x54 */ f32 kame_x_offset_init;
+    /* 0x58 */ f32 kame_x_lr_offset_a;
+    /* 0x5C */ f32 kame_x_lr_offset_b;
+    /* 0x60 */ f32 kame_x_fb_offset_a;
+    /* 0x64 */ f32 kame_x_fb_offset_b;
+    /* 0x68 */ f32 kame_scale;
+    /* 0x6C */ f32 kame_ud_scale;
+    /* 0x70 */ s16 kame_dir_prob[4];
+    /* 0x78 */ f32 kame_item_prob;
+    /* 0x7C */ struct grGreatBay_YakumonoParam_Item {
+        s16 kind;
+        s16 weight;
+    } items[10];
+};
+
+struct grHeal_YakumonoParam {
+    s32 x0;
+    s32 x4;
+};
+
+struct grKinokoRoute_YakumonoParam {
+    int x0;
+    /// Indexed by enemy spawn point, from 0x20
+    grZakoGenerator_SpawnDesc spawn_descs[] DAT_EXTENT;
+};
+
+/// Color animation scripts, played by #grMaterial_801C9604.
+struct grLast_YakumonoParam {
+    union ColorOverlay_x8_t* x0 DAT_SCRIPT(colAnimCommandLength(_command));
+    union ColorOverlay_x8_t* x4 DAT_SCRIPT(colAnimCommandLength(_command));
+    union ColorOverlay_x8_t* x8 DAT_SCRIPT(colAnimCommandLength(_command));
+    union ColorOverlay_x8_t* xC DAT_SCRIPT(colAnimCommandLength(_command));
+};
+
+struct grOldYoshi_YakumonoParam {
+    s16 x0;
+    s16 x2;
+    float x4;
+    float x8;
+    float xC;
+    s16 x10;
+    s16 x12;
+    s16 x14;
+    s16 x16;
+    s16 x18;
+};
+
+/// Onett stage yakumono parameters
+struct grOnett_YakumonoParam {
+    /* 0x00 */ f32 awning_initial;
+    /* 0x04 */ f32 max_velocity;
+    /* 0x08 */ f32 vel_threshold;
+    /* 0x0C */ f32 pos_threshold;
+    /* 0x10 */ f32 damping;
+    /* 0x14 */ f32 spring_force;
+    /* 0x18 */ f32 spring_constant;
+    /* 0x1C */ f32 max_displacement;
+    /* 0x20 */ f32 awning_delta;
+    /* 0x24 */ f32 x24;
+    /* 0x28 */ f32 x28;
+    /* 0x2C */ f32 x2C;
+    /* 0x30 */ f32 x30;
+    /* 0x34 */ f32 x34;
+    /* 0x38 */ f32 x38;
+    /* 0x3C */ f32 x3C;
+    /* 0x40 */ f32 x40;
+    /* 0x44 */ f32 x44;
+    /* 0x48 */ f32 x48;
+    /* 0x4C */ f32 x4C;
+    /* 0x50 */ f32 x50;
+    /* 0x54 */ f32 x54;
+    /* 0x58 */ f32 x58;
+    /* 0x5C */ f32 x5C;
+    /* 0x60 */ f32 x60;
+    /* 0x64 */ f32 x64;
+};
+
+struct grPStadium_YakumonoParam {
+    int x0;
+    int x4;
+    int x8;
+    int xC;
+    int x10;
+    int x14;
+    int x18;
+    u8 r, g, b, a;
+    u32 x20;
+    u32 x24;
+    u32 x28;
+    u32 x2C;
+    u32 x30;
+    u32 x34;
+    u32 x38;
+    u32 x3C;
+    u32 x40;
+    u32 x44;
+    s16 x48;
+    s16 x4A;
+    s16 x4C;
+    s16 x4E;
+    s16 x50;
+};
+
+struct grYorster_YakumonoParam {
+    f32 x00;
+    f32 x04;
+    f32 x08;
+    f32 x0C;
+    s32 x10;
+    s32 x14;
+    s32 x18;
+    s32 x1C;
+};
+
 #endif

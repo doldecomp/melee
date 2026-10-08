@@ -10,8 +10,6 @@
 
 #include <sysdolphin/baselib/gobj.h>
 
-union ColorOverlay_x8_t;
-
 /* 1C8D44 */ Item_GObj*
 grMaterial_801C8D44(int arg0, int arg1, Ground* arg2, Vec3* arg3, int arg4,
                     void (*arg5)(Item_GObj*, Ground*),

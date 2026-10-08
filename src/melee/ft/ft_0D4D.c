@@ -10,6 +10,7 @@
 #include "ftcoll.h"
 #include "ftcommon.h"
 #include "ftlib.h"
+#include "ftwaitanim.h"
 #include "ftwalkcommon.h"
 #include "kinds/ftCommon/ftCo_AirCatch.h"
 #include "kinds/ftCommon/ftCo_AppealS.h"
