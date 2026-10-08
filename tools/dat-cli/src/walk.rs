@@ -32,8 +32,8 @@ pub enum Issue {
     /// A union none of whose members could be chosen, so none was
     /// followed.
     AmbiguousUnion { at: u32, path: String },
-    /// A script command whose opcode (a `DAT_BYTE_SCRIPT`'s whole byte) has
-    /// no known length.
+    /// A script command with an unknown length. For byte scripts, the
+    /// opcode is the whole first byte.
     UnknownCommand { at: u32, opcode: u8, path: String },
 }
 
@@ -1061,8 +1061,8 @@ impl<'a> Walker<'a> {
         })
     }
 
-    /// A `DAT_SCRIPT` or `DAT_BYTE_SCRIPT` on a pointer typedef, or one it
-    /// names, for arrays of scripts.
+    /// Find `DAT_SCRIPT` or `DAT_BYTE_SCRIPT` on a pointer typedef,
+    /// following typedef aliases.
     fn typedef_script(&self, mut die: DieId) -> Option<Script> {
         while let Some(ty) = self.graph.types.get(&die) {
             let TypeKind::Typedef {
@@ -1085,10 +1085,10 @@ impl<'a> Walker<'a> {
         None
     }
 
-    /// How long the command at `at` is, in the script's units: one of the
-    /// generic commands, or else one of the script's own.
+    /// Return the command length at `at`: bytes for byte scripts, words
+    /// otherwise.
     fn command_length(&self, script: &Script, at: u32) -> Option<u64> {
-        // A byte script's command is its first byte, and none is generic
+        // Byte scripts use the full first byte and their own length expression.
         let bytes = matches!(script, Script::Bytes(_));
         let command = if bytes {
             u64::from(self.data[at as usize])
@@ -1122,7 +1122,7 @@ impl<'a> Walker<'a> {
         }
     }
 
-    /// Follow a `DAT_SCRIPT` pointer, and every script its commands point to.
+    /// Follow a script pointer and any scripts referenced by its commands.
     fn script(
         &mut self,
         offset: u32,
@@ -1157,7 +1157,7 @@ impl<'a> Walker<'a> {
         self.script_at(offset, Some(element), script, name.to_owned());
     }
 
-    /// Walk the script at `value`, and every script its commands point to.
+    /// Walk the script at `value` and any scripts its commands reference.
     fn script_at(
         &mut self,
         value: u32,
@@ -1217,8 +1217,8 @@ impl<'a> Walker<'a> {
                         }
                     }
                 }
-                // A length expression ends the script with a command of 0
-                // units
+                // Word scripts end at opcode 0. A zero length also ends
+                // scripts sized by expressions.
                 if (opcode == 0 && !bytes)
                     || (length == 0 && !matches!(script, Script::Table(_)))
                 {

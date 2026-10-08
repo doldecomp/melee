@@ -359,7 +359,7 @@ static const DatMember inline_lists_members[] = {
 INLINE_TYPE(T_COUNTED_LISTS, CountedLists, 8, counted_lists_members);
 INLINE_TYPE(T_INLINE_LISTS, InlineLists, 12, inline_lists_members);
 
-/* A row of byte scripts, through a `DAT_BYTE_SCRIPT` pointer typedef */
+/* An array of script pointers annotated with `DAT_BYTE_SCRIPT`. */
 static const DatType type_T_SCRIPT = {
     .name = "Script",
     .id = T_SCRIPT,
@@ -746,8 +746,7 @@ static void test_array_typedef_counts(void)
     }
 }
 
-/// Three byte scripts: one whose argument is the end command's byte, one
-/// with a two-argument command, and one that runs out of data.
+/// Test a 0x7F argument, a two-argument command, and an unterminated script.
 static void test_byte_scripts(void)
 {
     static const unsigned char scripts[] = {
@@ -777,7 +776,7 @@ static void test_byte_scripts(void)
     uint8_t** row = dat_public(a, "root", T_SCRIPT_ROW);
     CHECK(row != NULL);
     if (row != NULL) {
-        /* Scripts stay as they are in the data */
+        /* Script pointers refer to unchanged archive bytes. */
         CHECK(row[0] == dat_raw(a, 12) && row[2] == dat_raw(a, 24));
     }
     char* text = trace(a);

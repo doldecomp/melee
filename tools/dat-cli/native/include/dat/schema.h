@@ -112,14 +112,16 @@ typedef struct DatBind {
     const DatExpr* value;
 } DatBind;
 
-/// `DAT_SCRIPT`: the lengths of a script's own commands, from opcode 10,
-/// as a table of words or an expression in `_command`. `DAT_BYTE_SCRIPT`
-/// (`bytes`): every command's length in bytes, the expression `length` in
-/// `_command`, its first byte.
+/// Command lengths for `DAT_SCRIPT` and `DAT_BYTE_SCRIPT`.
 typedef struct DatScript {
+    /// Word-script lengths in words, starting at opcode 10.
     const uint8_t* table;
     uint32_t table_size;
+    /// Length expression, using the command's first word or byte as
+    /// `_command`.
     const DatExpr* length;
+    /// Set for byte scripts: lengths are in bytes and all commands use
+    /// `length`.
     uint8_t bytes;
 } DatScript;
 

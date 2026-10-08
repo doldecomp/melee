@@ -104,12 +104,12 @@ Not errors:
 
 ## Coverage
 
-- `PlSb.dat` 0x75C-0x1444, after Sandbag's `FtSFX`, is 33 subaction
-  subroutines back to back, each ending in a return (opcode 6) with no end
-  command, and nothing points into them. Address roots would need a return
-  to end a script; ending every script there loses about 10 KB of fighters'
-  `xC` scripts that only fall-through after a return reaches now (unpointed
-  subroutines after pointed ones), so those would need roots too.
+- `PlSb.dat` 0x75C-0x1444 contains 33 unreferenced subaction subroutines
+  after Sandbag's `FtSFX`. Each ends with a return (opcode 6), but none has
+  an end command. Address roots for these subroutines would need to stop
+  at a return. Stopping all scripts at returns would leave about 10 KB of
+  fighters' `xC` scripts unexplained: the walker currently reaches that
+  data by continuing past returns. That data would need address roots too.
 
 - `toy.c` loads trophy symbols through `symbol_name` fields of its tables;
   those are covered by name patterns instead.

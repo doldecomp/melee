@@ -596,7 +596,7 @@ static const DatExpr* typedef_count(const DatArchive* a, int32_t type)
     return NULL;
 }
 
-/// A script on a pointer typedef, or one it names.
+/// Find a script annotation on a pointer typedef, following typedef aliases.
 static const DatScript* typedef_script(const DatArchive* a, int32_t type)
 {
     while (type != DAT_NONE && T(a, type)->kind == DAT_KIND_TYPEDEF) {
@@ -1908,12 +1908,11 @@ static void typed(DatArchive* a, uint32_t offset, int32_t target, void* native,
     }
 }
 
-/// How long the command at `at` is, in the script's units: words, or for
-/// a byte script, bytes.
+/// Return the command length at `at`: bytes for byte scripts, words otherwise.
 static bool command_length(const DatArchive* a, const DatScript* s,
                            uint32_t at, uint64_t* out)
 {
-    /* A byte script's command is its first byte, and none is generic */
+    /* Byte scripts use the full first byte and their own length expression. */
     uint32_t command = s->bytes ? a->data[at] : word(a, at);
     uint64_t opcode = command >> 26;
     if (!s->bytes && (opcode == 5 || opcode == 7)) {
@@ -1936,9 +1935,9 @@ static bool command_length(const DatArchive* a, const DatScript* s,
     return eval(a, &c, s->length, out);
 }
 
-/// Follow a `DAT_SCRIPT` pointer, and every script its commands point to.
-/// Scripts stay as they are in the data: big-endian words, their pointers
-/// offsets.
+/// Follow a script pointer and any scripts referenced by its commands.
+/// Keep script bytes unchanged, including big-endian words and pointer
+/// offsets in word scripts.
 static void script_at(DatArchive* a, uint32_t value, int32_t id,
                       const DatScript* s);
 
@@ -1965,7 +1964,7 @@ static void script(DatArchive* a, uint32_t offset, int32_t pointer,
     script_at(a, value, pointee(a, T(a, p)->target), s);
 }
 
-/// Walk the script at `value`, and every script its commands point to.
+/// Walk the script at `value` and any scripts its commands reference.
 static void script_at(DatArchive* a, uint32_t value, int32_t id,
                       const DatScript* s)
 {
@@ -2007,8 +2006,8 @@ static void script_at(DatArchive* a, uint32_t value, int32_t id,
                     }
                 }
             }
-            /* A length expression ends the script with a command of 0
-             * units */
+            /* Word scripts end at opcode 0. A zero length also ends scripts
+             * sized by expressions. */
             if ((opcode == 0 && !s->bytes) ||
                 (length == 0 && s->table == NULL))
             {

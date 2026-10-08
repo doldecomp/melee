@@ -39,19 +39,18 @@ pub enum DatTag {
     Script(Script),
 }
 
-/// How long a command script's own commands are: for `DAT_SCRIPT`, those
-/// from opcode 10, after the generic ones every script shares
-/// (`Command_Execute`); for `DAT_BYTE_SCRIPT`, all of them.
+/// How command lengths are determined.
+///
+/// `DAT_SCRIPT` uses word lengths for opcodes 10 and above. Earlier opcodes
+/// use the shared `Command_Execute` rules. `DAT_BYTE_SCRIPT` uses byte
+/// lengths for every command.
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub enum Script {
-    /// `table`: an array in the code of their lengths in words, from
-    /// opcode 10.
+    /// An array in the game code of word lengths, indexed from opcode 10.
     Table(String),
-    /// `length`: an expression in `_command`, the command's first word,
-    /// e.g. a helper's call.
+    /// A word-length expression in `_command`, the command's first word.
     Length(Expr),
-    /// `DAT_BYTE_SCRIPT(length)`: commands of bytes, as many as `length`
-    /// says, an expression in `_command`, the command's first byte.
+    /// A byte-length expression in `_command`, the command's first byte.
     Bytes(Expr),
 }
 

@@ -329,9 +329,9 @@ fn array_elements_keep_pointer_typedef_counts() {
     }
 }
 
-/// A row of byte scripts through a `DAT_BYTE_SCRIPT` pointer typedef: an
-/// argument byte can be the end command's, and a script that runs out of
-/// data has no extent.
+/// Follow an array of pointers annotated with `DAT_BYTE_SCRIPT`.
+/// A 0x7F argument must not end the script. An unterminated script must not
+/// receive an inferred extent.
 #[test]
 fn byte_scripts_end_by_command_length() {
     let mut graph = TypeGraph::default();

@@ -52,8 +52,8 @@ typedef struct UnkCostumeStruct UnkCostumeStruct;
 typedef struct UnkFloat6_Camera UnkFloat6_Camera;
 typedef u32 MotionFlags;
 
-/// A script of #CPUCommand bytes, each followed by its arguments, up to
-/// #CpuCmd_Done, as #ftCo_800B3E04 interprets it.
+/// CPU bytecode interpreted by #ftCo_800B3E04. Each #CPUCommand is
+/// followed by its argument bytes; #CpuCmd_Done ends the script.
 typedef u8* CpuCmdScript DAT_BYTE_SCRIPT(cpuCommandLength(_command));
 
 #ifdef M2C

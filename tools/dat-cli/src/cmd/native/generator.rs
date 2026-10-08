@@ -122,7 +122,7 @@ pub enum ScriptRow {
     /// A table in the code, by its name, and its bytes.
     Table(String, Vec<u8>),
     Length(Expr),
-    /// `DAT_BYTE_SCRIPT`'s length.
+    /// A byte-script command-length expression.
     Bytes(Expr),
 }
 
