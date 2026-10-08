@@ -14,7 +14,6 @@
 #include <melee/ft/ftcliffcommon.h>
 #include <melee/ft/ftcoll.h>
 #include <melee/ft/ftcommon.h>
-#include <melee/ft/ftdata.h>
 #include <melee/ft/ftlib.h>
 #include <melee/ft/ftparts.h>
 #include <melee/ft/inlines.h>

@@ -10,7 +10,6 @@
 #include <melee/ft/ft_0877.h>
 #include <melee/ft/ftanim.h>
 #include <melee/ft/ftbosslib.h>
-#include <melee/ft/ftdata.h>
 #include <melee/ft/types.h>
 #include <melee/lb/lbvector.h>
 #include <melee/pl/player.h>

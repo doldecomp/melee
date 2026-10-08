@@ -11,7 +11,6 @@
 #include <melee/ft/ft_084E.h>
 #include <melee/ft/ft_0877.h>
 #include <melee/ft/ftbosslib.h>
-#include <melee/ft/ftdata.h>
 #include <melee/ft/inlines.h>
 #include <melee/ft/types.h>
 #include <melee/it/kinds/itcrazyhandbomb.h>

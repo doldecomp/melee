@@ -5,7 +5,6 @@
 #include <math.h>
 
 #include "ft_0877.h"
-#include "ftdata.h"
 #include "ftlib.h"
 #include "inlines.h"
 #include "kinds/ftCommon/forward.h"

@@ -14,7 +14,6 @@
 #include <melee/ft/fighter.h>
 #include <melee/ft/ftanim.h>
 #include <melee/ft/ftcamera.h>
-#include <melee/ft/ftdata.h>
 #include <melee/ft/ftparts.h>
 #include <melee/ft/types.h>
 #include <melee/it/it_26B1.h>

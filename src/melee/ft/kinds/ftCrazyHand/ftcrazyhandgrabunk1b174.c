@@ -11,7 +11,6 @@
 #include <melee/ft/fighter.h>
 #include <melee/ft/ft_0881.h>
 #include <melee/ft/ftbosslib.h>
-#include <melee/ft/ftdata.h>
 #include <melee/ft/ftlib.h>
 #include <melee/ft/inlines.h>
 #include <melee/ft/kinds/ftMasterHand/types.h>
