@@ -492,14 +492,14 @@ void Ground_801C0800(StageIdPair* pair)
         }
 
         if (stage_info.ald_yaku_all != NULL) {
-            for (i = 1; stage_info.ald_yaku_all[i] != NULL; i++) {
+            for (i = 1; stage_info.ald_yaku_all[i].script != NULL; i++) {
                 Article* a = it_804D6D38
                     [It_PKind_Random -
                      It_Kind_Section_Monster_Character_Misc_Start]; // Get item
                                                                     // data for
                                                                     // It_PKind_Random
                 a->xC_itemStates->x0_itemStateDesc[i].xC_script =
-                    stage_info.ald_yaku_all[i];
+                    stage_info.ald_yaku_all[i].script;
             }
         }
     }

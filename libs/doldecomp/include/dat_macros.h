@@ -62,6 +62,15 @@
 /// bindings shadow outer ones.
 #define DAT_BIND(name, value) DAT_TAG("bind(" #name ", " #value ")")
 
+/// Bind @p name to the result of matching the tuple @p values against the
+/// remaining arguments: @c (pattern, ...): value cases, ending with
+/// @c _: value. Cases are comma-separated.
+/// Patterns are constants, @c | alternatives, or @c _ to ignore a tuple
+/// component. The first matching case supplies the binding, with the same
+/// scope as #DAT_BIND.
+#define DAT_MATCH(name, values, ...)                                          \
+    DAT_TAG("bind(" #name ", (match " #values " { " #__VA_ARGS__ " }))")
+
 /// The pointer refers to a command script: commands of whole words, each
 /// with its opcode in the top 6 bits of its first byte, up to one with opcode
 /// 0. Relocated words within a command point to more script, such as a

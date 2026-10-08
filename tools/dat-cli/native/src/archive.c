@@ -1179,6 +1179,11 @@ static bool eval_at(const DatArchive* a, const Context* c, const DatExpr* e,
                : e->op == DAT_OP_BITNOT ? ~x
                                         : (uint64_t) 0 - x;
         return true;
+    case DAT_OP_COND:
+        if (!eval_at(a, c, e->cond, depth, &x)) {
+            return false;
+        }
+        return eval_at(a, c, x != 0 ? e->a : e->b, depth, out);
     default:
         break;
     }
@@ -2150,6 +2155,9 @@ static void layout(DatArchive* a, uint32_t offset, int32_t type, void* native,
             if (m->type == DAT_NONE) {
                 break;
             }
+            const Scope* outer = a->env;
+            a->env =
+                bound(a, outer, m, parent.record, parent.base, parent.some, 0);
             if (m->script != NULL) {
                 script(a, offset, m->type, m->script, native);
             } else if (m->terminator != NULL) {
@@ -2158,6 +2166,7 @@ static void layout(DatArchive* a, uint32_t offset, int32_t type, void* native,
             } else {
                 layout(a, offset, m->type, native, parent);
             }
+            a->env = outer;
             break;
         }
         case CHOICE_UNUSED:

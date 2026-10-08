@@ -517,6 +517,12 @@ impl Emitter<'_, '_> {
                 let b = self.expr(b);
                 format!("DAT_BINARY({}, {a}, {b})", binary_c(*op))
             }
+            Expr::Cond(cond, a, b) => {
+                let cond = self.expr(cond);
+                let a = self.expr(a);
+                let b = self.expr(b);
+                format!("DAT_COND({cond}, {a}, {b})")
+            }
         }
     }
 
@@ -558,6 +564,12 @@ impl Emitter<'_, '_> {
                 let a = self.expr(a);
                 let b = self.expr(b);
                 format!(".op = DAT_OP_{}, .a = {a}, .b = {b}", binary_c(*op))
+            }
+            Expr::Cond(cond, a, b) => {
+                let cond = self.expr(cond);
+                let a = self.expr(a);
+                let b = self.expr(b);
+                format!(".op = DAT_OP_COND, .cond = {cond}, .a = {a}, .b = {b}")
             }
         }
     }

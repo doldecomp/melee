@@ -729,6 +729,75 @@ static void test_refuses(void)
     CHECK(dat_open(&schema, bad, size, &error) == NULL);
 }
 
+static void test_conditional_counts(void)
+{
+    /* An unresolved inactive branch must not stop a count from being read. */
+    const DatExpr* counts[] = {
+        DAT_COND(DAT_INT(1), DAT_NAME(n), DAT_FAIL),
+        DAT_COND(DAT_INT(0), DAT_FAIL, DAT_NAME(n)),
+        DAT_COND(DAT_NAME(n), DAT_COND(DAT_INT(0), DAT_FAIL, DAT_NAME(n)),
+                 DAT_INT(0)),
+    };
+    for (size_t i = 0; i < sizeof counts / sizeof *counts; i++) {
+        DatMember members[2];
+        memcpy(members, inline_leaves_members, sizeof members);
+        members[1].count = counts[i];
+        DatType type = type_T_INLINE_LEAVES;
+        type.members = members;
+        const DatType* local_types[T_COUNT];
+        memcpy(local_types, types, sizeof types);
+        local_types[T_INLINE_LEAVES] = &type;
+        DatSchema local_schema = schema;
+        local_schema.types = local_types;
+        for (uint32_t count = 0; count <= 2; count += 2) {
+            unsigned char file[0x200];
+            size_t size = build_inline(file, count, false);
+            DatArchive* a = dat_open(&local_schema, file, size, NULL);
+            CHECK(a != NULL);
+            InlineLeaves* leaves = dat_public(a, "root", T_INLINE_LEAVES);
+            CHECK(leaves != NULL && leaves->n == (int32_t) count);
+            char* text = trace(a);
+            CHECK(!contains(text, "issue"));
+            CHECK(contains(text, "extent 0x10 0x1C") == (count == 2));
+            if (count == 2 && leaves != NULL) {
+                CHECK(leaves->entries[1].c == 456);
+            }
+            CHECK(dat_verify(a, NULL) == 0);
+            free(text);
+            dat_close(a);
+        }
+    }
+}
+
+static void test_union_member_binding(void)
+{
+    DatMember members[2];
+    memcpy(members, choice_members, sizeof members);
+    const DatBind binds[] = { { DAT_NAME_lists_count, DAT_NAME(n) } };
+    members[0].type = T_COUNTED_LEAF_P;
+    members[0].binds = binds;
+    members[0].nbinds = 1;
+    DatType type = type_T_CHOICE;
+    type.members = members;
+    const DatType* local_types[T_COUNT];
+    memcpy(local_types, types, sizeof types);
+    local_types[T_CHOICE] = &type;
+    DatSchema local_schema = schema;
+    local_schema.types = local_types;
+    unsigned char file[0x200];
+    size_t size = build(file);
+    DatArchive* a = dat_open(&local_schema, file, size, NULL);
+    CHECK(a != NULL);
+    Node* root = dat_public(a, "root", T_NODE);
+    CHECK(root != NULL && root->u.leaf != NULL);
+    char* text = trace(a);
+    CHECK(!contains(text, "issue"));
+    CHECK(contains(text, "extent 0x40 0x58"));
+    CHECK(dat_verify(a, NULL) == 0);
+    free(text);
+    dat_close(a);
+}
+
 static void test_packed(void)
 {
     unsigned char file[0x200];
@@ -757,6 +826,8 @@ int main(void)
     test_walk();
     test_inline_counts();
     test_array_typedef_counts();
+    test_conditional_counts();
+    test_union_member_binding();
     test_refuses();
     test_packed();
     printf("%s (%zu-bit %s-endian)\n", failures ? "FAILED" : "ok",

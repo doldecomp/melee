@@ -144,7 +144,10 @@ other roots. `ftData.x48_items` binds `item_index` to `_index`, so its C
 pointer union selects Samus's grapple-beam accessory in slot 4, joints in
 Link/Young Link slot 6, Kirby slot 4, Yoshi slot 3 and Sheik slots 4/5,
 Game & Watch's visibility table in slot 10, Jigglypuff's costume parts in
-slot 1, and an `Article` in the other slots.
+slot 1, and an `Article` in the other slots, whose `Article::kind` is
+bound by `DAT_MATCH_FTITEM`. Untyped roots keep their bindings for the type
+`dat_symbols.txt` gives them: Kirby's copies bind `fighter_kind` the same
+way. A union member's `DAT_BIND` applies to the member when it's chosen.
 
 ## Samples
 
@@ -404,6 +407,31 @@ For what C types can't express. From `libs/doldecomp/include/dat_macros.h`;
 they compile to nothing outside the DWARF build. If a type is wrong, fix the
 type instead.
 
+`DAT_MATCH` binds a name to the result of a tuple match. Shared tables can
+wrap the complete annotation so each field only names the binding:
+
+```c
+// clang-format off
+#define DAT_MATCH_ITEM \
+    DAT_MATCH(Article::kind, (fighter_kind, item_index), \
+        (Ft_Kind_Koopa | Ft_Kind_GKoops, 0): It_Kind_Koopa_Flame, \
+        _: It_Kind_None)
+// clang-format on
+
+Article* article DAT_IF(true) DAT_MATCH_ITEM;
+```
+
+Each tuple component is an integer or constant name, alternatives separated
+by `|`, or `_` to ignore that component. Cases are tested in order; the last
+must be `_: value`. Only the selected result is evaluated. Each case has
+one result expression; result blocks and statements are unsupported.
+
+Cases are variadic macro arguments: commas inside tuples and calls stay
+inside their parentheses. Case separators remain commas in DWARF,
+where `DAT_MATCH` emits `dat:bind(name, (match (values...) { ... }))`.
+This is annotation syntax; it cannot be used in ordinary C expressions.
+The tool lowers the match to the same conditionals both walkers use.
+
 | Annotation | Meaning |
 | --- | --- |
 | `DAT_COUNT(n)` | Array of, or pointer to, `n` elements. A fixed array's count must fit its declared bound. On a pointer typedef, `n` is in the bindings, for lists of counted lists. |
@@ -411,12 +439,15 @@ type instead.
 | `DAT_TYPE(T)` | `void*` points to a `T`. Also on a `void*` typedef, for arrays of them. |
 | `DAT_EXTENT` | Array, or pointer to elements, that runs as far as the data does. Stopgap for lengths only the code knows. |
 | `DAT_BIND(T::f, value)` | `T::f` is `value` for everything reached through this member. |
+| `DAT_MATCH(T::f, (values...), cases...)` | Bind `T::f` to the first matching case’s result, with the same scope as `DAT_BIND`. |
 | `DAT_SCRIPT(table)`, `DAT_SCRIPT(length)` | Pointer to a command script: opcode in the top 6 bits; opcodes 0-9 are the generic commands (`Command_Execute`), and the script's own from 10 are as long in words as `table` (an array in the code) says, or as `length`, an expression in `_command` (the command's first word), e.g. `itCommandLength(_command)`. Ends at opcode 0, or a command whose `length` is 0; relocated words point to more script. |
 | `DAT_TERMINATED(value)` | Pointer to elements up to one whose first word (or whole value, if smaller) is `value` and not a relocated pointer: `0` for null-terminated lists, `GX_VA_NULL` for vertex descriptors, `-1` for `s8` lists. On a member, or on a pointer typedef for nested lists. `DAT_TERMINATED(value, n)`: the terminator is `n` elements long, for lists that end in it more than once. |
 | `DAT_BLOB` | On a `u8` typedef: one format of bytes the archive doesn't break down: keyframe streams (`HSD_FObjData`), texels (`HSD_ImageData`), display lists (`HSD_DisplayList`). The size comes from the pointer, e.g. `DAT_COUNT(length)`. Raw `u8` data stays unexplained. |
 
-Expressions are C. Names resolve to fields of the enclosing record, then
-bindings, then macros and enum constants. `_index` is the element index
+Expressions are C integer expressions, including `?:`. Names resolve to
+fields of the enclosing record, then bindings, then macros and enum
+constants. `DAT_MATCH` expresses multi-key tables without chains of `?:`.
+`_index` is the element index
 inside arrays and counted pointers. Float fields convert to integers as C
 would. Calls are to functions of the code that the tool ports
 (`interop/dwarf/expr.rs`), so an annotation can say what the game itself

@@ -14,7 +14,7 @@
 
 typedef struct ftKirby_CopyName {
     char* filename;
-    char* name;
+    char* name DAT_BIND(fighter_kind, _index);
 } ftKirby_CopyName;
 
 /* 0EE528 */ void ftKb_Init_800EE528(void);
