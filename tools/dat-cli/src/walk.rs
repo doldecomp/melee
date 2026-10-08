@@ -1509,9 +1509,8 @@ impl<'a> Walker<'a> {
         }
     }
 
-    /// An object already walked, reached again with other bindings (a
-    /// shared vertex descriptor): its plain pointer fields may supply a
-    /// longer count or an extent fallback. Nothing else is walked again.
+    /// Recheck plain pointer fields when bindings change on a visited record.
+    /// Shared vertex descriptors can supply a longer count or an extent fallback.
     fn recount(&mut self, offset: u32, die: DieId, path: &str) {
         let Some(die) = self.resolve(Some(die)) else {
             return;
@@ -1660,8 +1659,7 @@ impl<'a> Walker<'a> {
         })
     }
 
-    /// The value of a field of the record at `base`: a scalar's, or the data
-    /// a relocated pointer whose annotation gives its length points to.
+    /// Read a scalar field or an annotated pointer's bytes from `base`.
     fn field_value(
         &self,
         record: DieId,
@@ -1710,9 +1708,8 @@ impl<'a> Walker<'a> {
         }))
     }
 
-    /// The data the relocated pointer `member` (at `at`, of the record at
-    /// `base`) points to, if its `DAT_COUNT` or `DAT_TERMINATED` gives how
-    /// much, as the walk follows it.
+    /// Return the bytes referenced by relocated pointer `member` at `at`.
+    /// Its `DAT_COUNT` or `DAT_TERMINATED` gives the length, as in the walk.
     fn pointed_bytes(
         &self,
         member: &Member,

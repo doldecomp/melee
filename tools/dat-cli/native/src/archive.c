@@ -215,9 +215,8 @@ typedef struct Issue {
     uint32_t value;
 } Issue;
 
-/// What an expression evaluates to: an integer, or, if `bytes` isn't
-/// `NULL`, the `len` bytes a pointer field whose annotation gives its length
-/// points to, which only calls take.
+/// An expression value. If `bytes` is NULL, `i` is an integer.
+/// Otherwise, `bytes` and `len` describe data for calls and bindings.
 typedef struct Value {
     uint64_t i;
     const uint8_t* bytes;
@@ -912,9 +911,8 @@ static bool eval(const DatArchive* a, const Context* c, const DatExpr* e,
 static uint64_t terminated_count(const DatArchive* a, uint32_t offset,
                                  int32_t type, uint64_t term);
 
-/// The data the relocated pointer `m` (at `at`, of the record at `base`)
-/// points to, if its `DAT_COUNT` or `DAT_TERMINATED` gives how much, as the
-/// walk follows it.
+/// Return the bytes referenced by relocated pointer member `m` at `at`.
+/// Its `DAT_COUNT` or `DAT_TERMINATED` gives the length, as in the walk.
 static bool pointed_bytes(const DatArchive* a, const DatMember* m,
                           int32_t record, uint32_t base, uint64_t at,
                           Value* out)
@@ -962,9 +960,9 @@ static bool pointed_bytes(const DatArchive* a, const DatMember* m,
     return true;
 }
 
-/// The value of a field of the record at `base`, by name, as the walk reads
-/// it: a scalar's, big-endian, floats as the integers C converts them to;
-/// or the data a pointer whose annotation gives its length points to.
+/// Read a field by name from the record at `base`.
+/// Scalars are big-endian; floats convert to integers as C would.
+/// Annotated pointers can resolve to the bytes they reference.
 static bool field_value(const DatArchive* a, int32_t record, uint32_t base,
                         int32_t name, Value* out)
 {
@@ -1952,9 +1950,8 @@ static void counted(DatArchive* a, uint32_t offset, int32_t pointer,
     }
 }
 
-/// An object already walked, reached again with other bindings (a shared
-/// vertex descriptor): its plain pointer fields may supply a longer count
-/// or an extent fallback. Nothing else is walked again.
+/// Recheck plain pointer fields when bindings change on a visited record.
+/// Shared vertex descriptors can supply a longer count or an extent fallback.
 static void recount(DatArchive* a, uint32_t offset, int32_t type)
 {
     int32_t r = resolve(a, type);

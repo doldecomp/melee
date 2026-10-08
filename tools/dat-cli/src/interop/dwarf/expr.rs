@@ -62,8 +62,7 @@ pub enum BinaryOp {
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub enum Value<'d> {
     Int(u64),
-    /// The data a pointer field whose annotation gives its length
-    /// (`DAT_COUNT`, `DAT_TERMINATED`) points to.
+    /// Bytes referenced by a pointer field with `DAT_COUNT` or `DAT_TERMINATED`.
     Bytes(&'d [u8]),
 }
 
@@ -436,15 +435,15 @@ pub fn call<'d>(function: &str, args: &[Value<'d>]) -> Option<Value<'d>> {
     }))
 }
 
-/// The largest index the display list `dl` gives the attribute `attr`, as
-/// the GameCube reads it, with the vertex descriptors `descs` (an
-/// `HSD_VtxDescList` list, up to `GX_VA_NULL`) describing each vertex. A
-/// tool-side helper, not a port: it sizes the vertex arrays the display
-/// list indexes. Primitives are an opcode, a `u16` vertex count, then each
-/// vertex's attributes in the order the hardware takes them (by `GXAttr`,
-/// `GX_VA_NBT` as the normal); the list ends at a 0 opcode (`GX_NOP`, its
-/// padding) or its end. `None` for anything else, an attribute that isn't
-/// indexed, or one no vertex uses.
+/// Return the largest index used for `attr` in display list `dl`.
+/// `descs` is an `HSD_VtxDescList` list terminated by `GX_VA_NULL`.
+/// This tool helper sizes the indexed vertex arrays.
+///
+/// Each primitive has an opcode, a `u16` vertex count, and vertex attributes.
+/// Attributes follow `GXAttr` order; `GX_VA_NBT` takes the normal's place.
+/// A zero opcode (`GX_NOP` padding) or the end of `dl` ends the list.
+/// Return `None` for an unsupported command, truncated data, or an attribute
+/// with no indices.
 fn gx_max_index(dl: &[u8], descs: &[u8], attr: u64) -> Option<u64> {
     const DESC_SIZE: usize = 0x18;
     const GX_VA_NULL: u32 = 0xFF;

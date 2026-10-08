@@ -874,10 +874,10 @@ static void test_byte_scripts(void)
     dat_close(a);
 }
 
-/// Shapes at 0, 0x10 and 0xA0, with descriptor lists at 0x20 (the first and
-/// third's) and 0x50 pointing to one vertex array at 0xC0 of 4-byte
-/// positions, indexed by their display lists (0x80, 0x88, 0x90) up to 2, 5
-/// and 7. The first `publics` of them are public, as "a", "b" and "c".
+/// Three shapes at 0, 0x10 and 0xA0. The first and third share descriptors
+/// at 0x20; the second uses 0x50. Both lists reference 4-byte positions at
+/// 0xC0. Display lists at 0x80, 0x88 and 0x90 use indices up to 2, 5 and 7.
+/// Export the first `publics` shapes as "a", "b" and "c".
 static size_t build_shapes(unsigned char* f, size_t publics)
 {
     static const uint32_t shape_relocs[] = { 0x00, 0x04, 0x10, 0x14,

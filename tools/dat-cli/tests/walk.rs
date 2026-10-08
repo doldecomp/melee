@@ -498,11 +498,10 @@ fn byte_scripts_end_by_command_length() {
     ));
 }
 
-/// Shapes whose display lists index the vertex arrays their descriptor
-/// lists point to, as `HSD_PObjDesc` and `HSD_VtxDescList` do: at 0, 0x10
-/// and 0xA0, with descriptor lists at 0x20 (the first and third's) and 0x50
-/// pointing to one array of 4-byte positions at 0xC0, indexed up to 2, 5
-/// and 7.
+/// Three shapes at 0, 0x10 and 0xA0, modeled on `HSD_PObjDesc`.
+/// The first and third share a descriptor list at 0x20; the second uses 0x50.
+/// Both lists reference 4-byte positions at 0xC0.
+/// The display lists use indices up to 2, 5 and 7, respectively.
 fn shapes() -> (TypeGraph, Vec<u8>, Vec<u32>) {
     let mut graph = TypeGraph::default();
     graph.units.push(Unit {
