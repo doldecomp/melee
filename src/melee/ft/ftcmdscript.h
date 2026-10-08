@@ -3,8 +3,6 @@
 
 #include <melee/ft/forward.h>
 
-#include <dat_macros.h>
-
 typedef enum CPUCommand {
     // These commands press or release buttons
     CpuCmd_PressA = 1,
@@ -80,10 +78,6 @@ typedef enum CPUCommand {
 
 /// CPU commands must fit in a u8!
 STATIC_ASSERT(CpuCmd_Count <= U8_MAX);
-
-/// A script of #CPUCommand bytes, each followed by its arguments, up to
-/// #CpuCmd_Done, as #ftCo_800B3E04 interprets it.
-typedef u8* CpuCmdScript DAT_BYTE_SCRIPT(cpuCommandLength(_command));
 
 #ifdef M2CTX
 typedef CPUCommand cmd_t;

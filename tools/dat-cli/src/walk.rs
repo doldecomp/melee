@@ -1206,13 +1206,15 @@ impl<'a> Walker<'a> {
                     break;
                 }
                 // Byte scripts hold no pointers
-                for word in (at..end).step_by(4).filter(|_| !bytes) {
-                    if self.relocs.contains(&word) {
-                        self.walk.pointers.insert(word);
-                        queue.push((
-                            self.word(word),
-                            format!("{path}+0x{:X}->", word - start),
-                        ));
+                if !bytes {
+                    for word in (at..end).step_by(4) {
+                        if self.relocs.contains(&word) {
+                            self.walk.pointers.insert(word);
+                            queue.push((
+                                self.word(word),
+                                format!("{path}+0x{:X}->", word - start),
+                            ));
+                        }
                     }
                 }
                 // A length expression ends the script with a command of 0

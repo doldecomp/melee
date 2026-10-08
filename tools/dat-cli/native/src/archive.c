@@ -1999,10 +1999,12 @@ static void script_at(DatArchive* a, uint32_t value, int32_t id,
                 break;
             }
             /* Byte scripts hold no pointers */
-            for (uint64_t w = at; w < end && !s->bytes; w += 4) {
-                if (bits_has(&a->reloc, w, a->size)) {
-                    bits_set(&a->pointer, w, a->size);
-                    VEC_PUSH(queue, word(a, w));
+            if (!s->bytes) {
+                for (uint64_t w = at; w < end; w += 4) {
+                    if (bits_has(&a->reloc, w, a->size)) {
+                        bits_set(&a->pointer, w, a->size);
+                        VEC_PUSH(queue, word(a, w));
+                    }
                 }
             }
             /* A length expression ends the script with a command of 0

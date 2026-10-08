@@ -8,7 +8,6 @@
 #include <placeholder.h>
 
 #include <dolphin/mtx.h>
-#include <melee/ft/ftcmdscript.h>
 #include <melee/ft/ftcpuattack.h>
 #include <melee/ft/inlines.h> // IWYU pragma: export
 #include <melee/ft/types.h>
