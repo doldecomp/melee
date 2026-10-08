@@ -365,6 +365,7 @@ pub fn call(function: &str, args: &[u64]) -> Option<u64> {
         ("colAnimCommandLength", &[command]) => {
             col_anim_command_length(command)
         }
+        ("cpuCommandLength", &[command]) => Some(cpu_command_length(command)),
         ("GXGetTexBufferSize", &[width, height, format, mipmap, max_lod]) => {
             gx_get_tex_buffer_size(
                 width as u16,
@@ -414,6 +415,19 @@ fn col_anim_command_length(command: u64) -> Option<u64> {
         23 => 1,
         _ => return None,
     })
+}
+
+/// Return a CPU command's length in bytes, following `ftCo_800B3E04`.
+/// Commands 0x80-0xBF take one argument byte; 0xC0-0xFF take two.
+/// `CpuCmd_Done` (0x7F) returns 0 to mark the script's end. This helper is
+/// used by the DAT tools.
+fn cpu_command_length(command: u64) -> u64 {
+    match command & 0xFF {
+        0x7F => 0,
+        0xC0.. => 3,
+        0x80.. => 2,
+        _ => 1,
+    }
 }
 
 /// `GXGetTexBufferSize` (`GXTexture.c`): the bytes a texture of `format`
@@ -687,6 +701,10 @@ mod tests {
         assert_eq!(e("colAnimCommandLength(0x54020000)"), Some(5));
         assert_eq!(e("itCommandLength(0x400C0000)"), Some(2));
         assert_eq!(e("itCommandLength(0x68000000)"), None);
+        assert_eq!(e("cpuCommandLength(0x7F)"), Some(0));
+        assert_eq!(e("cpuCommandLength(0x19)"), Some(1));
+        assert_eq!(e("cpuCommandLength(0x8E)"), Some(2));
+        assert_eq!(e("cpuCommandLength(0xC2)"), Some(3));
     }
 
     #[test]

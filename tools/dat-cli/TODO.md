@@ -104,13 +104,12 @@ Not errors:
 
 ## Coverage
 
-- `Fighter_804D64FC.cmdscripts` (PlCo.dat) are CPU command scripts: bytes
-  up to `CpuCmd_Done` (0x7F), each command followed by 0-2 argument bytes
-  by its value (`ftCo_800B4880`). An argument can be 0x7F, so they need a
-  byte-script sizer like `DAT_SCRIPT`'s; each is typed as one `u8` now.
-- `PlSb.dat` 0x75C-0x1444, after Sandbag's `FtSFX`, parses as subaction
-  commands but has no end command before the next object: not standalone
-  scripts. Nothing points into it.
+- `PlSb.dat` 0x75C-0x1444 contains 33 unreferenced subaction subroutines
+  after Sandbag's `FtSFX`. Each ends with a return (opcode 6), but none has
+  an end command. Address roots for these subroutines would need to stop
+  at a return. Stopping all scripts at returns would leave about 10 KB of
+  fighters' `xC` scripts unexplained: the walker currently reaches that
+  data by continuing past returns. That data would need address roots too.
 
 - `toy.c` loads trophy symbols through `symbol_name` fields of its tables;
   those are covered by name patterns instead.

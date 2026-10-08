@@ -106,6 +106,8 @@ enum {
     T_COUNTED_ROW_P,
     T_COUNTED_LISTS,
     T_INLINE_LISTS,
+    T_SCRIPT,
+    T_SCRIPT_ROW,
     T_COUNT,
 };
 
@@ -114,6 +116,7 @@ enum {
     DAT_NAME_kind,
     DAT_NAME_lists_count,
     DAT_NAME_rows,
+    DAT_NAME__command,
     DAT_NAME_COUNT,
 };
 
@@ -122,6 +125,7 @@ static const char* const names[DAT_NAME_COUNT] = {
     [DAT_NAME_kind] = "kind",
     [DAT_NAME_lists_count] = "Lists::count",
     [DAT_NAME_rows] = "rows",
+    [DAT_NAME__command] = "_command",
 };
 
 #define SCALAR(self, type_name, type_kind, sign, bytes, native)               \
@@ -355,6 +359,35 @@ static const DatMember inline_lists_members[] = {
 INLINE_TYPE(T_COUNTED_LISTS, CountedLists, 8, counted_lists_members);
 INLINE_TYPE(T_INLINE_LISTS, InlineLists, 12, inline_lists_members);
 
+/* An array of script pointers annotated with `DAT_BYTE_SCRIPT`. */
+static const DatType type_T_SCRIPT = {
+    .name = "Script",
+    .id = T_SCRIPT,
+    .kind = DAT_KIND_TYPEDEF,
+    .has_pointers = 1,
+    .size = 4,
+    .native_size = sizeof(uint8_t*),
+    .target = T_U8_P,
+    .resolved = T_U8_P,
+    .script =
+        &(const DatScript){
+            .length = DAT_CALL(CPU_COMMAND_LENGTH, DAT_NAME(_command)),
+            .bytes = 1,
+        },
+};
+
+static const DatType type_T_SCRIPT_ROW = {
+    .name = "Script[3]",
+    .id = T_SCRIPT_ROW,
+    .kind = DAT_KIND_ARRAY,
+    .has_pointers = 1,
+    .size = 12,
+    .native_size = 3 * sizeof(uint8_t*),
+    .target = T_SCRIPT,
+    .resolved = T_SCRIPT_ROW,
+    .count = 3,
+};
+
 static const DatType* const types[T_COUNT] = {
     [T_S8] = &type_T_S8,
     [T_S16] = &type_T_S16,
@@ -380,6 +413,8 @@ static const DatType* const types[T_COUNT] = {
     [T_COUNTED_ROW_P] = &type_T_COUNTED_ROW_P,
     [T_COUNTED_LISTS] = &type_T_COUNTED_LISTS,
     [T_INLINE_LISTS] = &type_T_INLINE_LISTS,
+    [T_SCRIPT] = &type_T_SCRIPT,
+    [T_SCRIPT_ROW] = &type_T_SCRIPT_ROW,
 };
 
 static const DatSchema schema = {
@@ -711,6 +746,49 @@ static void test_array_typedef_counts(void)
     }
 }
 
+/// Test a 0x7F argument, a two-argument command, and an unterminated script.
+static void test_byte_scripts(void)
+{
+    static const unsigned char scripts[] = {
+        0x80, 0x7F, 0x7F, 0, 0x01, 0xC0, 0x01, 0x02, 0x7F, 0, 0, 0, 0x01, 0x02,
+    };
+    unsigned char file[0x200];
+    memset(file, 0, sizeof file);
+    unsigned char* d = file + 0x20;
+    put32(d, 12), put32(d + 4, 16), put32(d + 8, 24);
+    memcpy(d + 12, scripts, sizeof scripts);
+    uint32_t data = 12 + sizeof scripts;
+    unsigned char* at = d + data;
+    put32(at, 0), put32(at + 4, 4), put32(at + 8, 8), at += 12;
+    put32(at, 0), put32(at + 4, 0), at += 8;
+    memcpy(at, "root", 5);
+    at += 5;
+    size_t size = (size_t) (at - file);
+    put32(file, (uint32_t) size);
+    put32(file + 4, data);
+    put32(file + 8, 3);
+    put32(file + 12, 1);
+    DatArchive* a = dat_open(&schema, file, size, NULL);
+    CHECK(a != NULL);
+    if (a == NULL) {
+        return;
+    }
+    uint8_t** row = dat_public(a, "root", T_SCRIPT_ROW);
+    CHECK(row != NULL);
+    if (row != NULL) {
+        /* Script pointers refer to unchanged archive bytes. */
+        CHECK(row[0] == dat_raw(a, 12) && row[2] == dat_raw(a, 24));
+    }
+    char* text = trace(a);
+    CHECK(contains(text, "extent 0xC 0xF\n"));
+    CHECK(contains(text, "extent 0x10 0x15\n"));
+    CHECK(!contains(text, "extent 0x18"));
+    CHECK(contains(text, "issue out-of-bounds 0x1A"));
+    CHECK(dat_verify(a, NULL) == 0);
+    free(text);
+    dat_close(a);
+}
+
 static void test_refuses(void)
 {
     unsigned char file[0x200];
@@ -828,6 +906,7 @@ int main(void)
     test_array_typedef_counts();
     test_conditional_counts();
     test_union_member_binding();
+    test_byte_scripts();
     test_refuses();
     test_packed();
     printf("%s (%zu-bit %s-endian)\n", failures ? "FAILED" : "ok",

@@ -348,6 +348,9 @@ impl Emitter<'_, '_> {
         if row.type_tag != NONE {
             fields.push(format!(".type_tag = {}", self.ty(row.type_tag)));
         }
+        if let Some(script) = &row.script {
+            fields.push(self.script(script));
+        }
         for field in fields {
             writeln!(c, "    {field},")?;
         }
@@ -449,6 +452,12 @@ impl Emitter<'_, '_> {
             ScriptRow::Length(length) => {
                 let length = self.expr(length);
                 format!(".script = &(const DatScript) {{ .length = {length} }}")
+            }
+            ScriptRow::Bytes(length) => {
+                let length = self.expr(length);
+                format!(
+                    ".script = &(const DatScript) {{ .length = {length}, .bytes = 1 }}"
+                )
             }
         }
     }
@@ -844,6 +853,7 @@ fn function_c(function: &str) -> Option<&'static str> {
     match function {
         "itCommandLength" => Some("IT_COMMAND_LENGTH"),
         "colAnimCommandLength" => Some("COL_ANIM_COMMAND_LENGTH"),
+        "cpuCommandLength" => Some("CPU_COMMAND_LENGTH"),
         "GXGetTexBufferSize" => Some("GX_GET_TEX_BUFFER_SIZE"),
         _ => None,
     }

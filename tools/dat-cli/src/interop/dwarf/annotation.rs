@@ -34,21 +34,24 @@ pub enum DatTag {
     /// `DAT_BIND`: a name given a value for everything reached through the
     /// member.
     Bind(String, Expr),
-    /// `DAT_SCRIPT`: the pointer refers to a command script.
+    /// `DAT_SCRIPT` or `DAT_BYTE_SCRIPT`: the pointer refers to a command
+    /// script.
     Script(Script),
 }
 
-/// How long a `DAT_SCRIPT` command script's own commands are: those from
-/// opcode 10, after the generic ones every script shares
-/// (`Command_Execute`).
+/// How command lengths are determined.
+///
+/// `DAT_SCRIPT` uses word lengths for opcodes 10 and above. Earlier opcodes
+/// use the shared `Command_Execute` rules. `DAT_BYTE_SCRIPT` uses byte
+/// lengths for every command.
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub enum Script {
-    /// `table`: an array in the code of their lengths in words, from
-    /// opcode 10.
+    /// An array in the game code of word lengths, indexed from opcode 10.
     Table(String),
-    /// `length`: an expression in `_command`, the command's first word,
-    /// e.g. a helper's call.
+    /// A word-length expression in `_command`, the command's first word.
     Length(Expr),
+    /// A byte-length expression in `_command`, the command's first byte.
+    Bytes(Expr),
 }
 
 /// The name argument of an archive loader call.
@@ -80,6 +83,7 @@ fn tag(input: &mut &str) -> ModalResult<DatTag> {
         "root" => root.map(DatTag::Root),
         "bind" => args(bind).map(|(name, value)| DatTag::Bind(name, value)),
         "script" => args(script).map(DatTag::Script),
+        "bytescript" => args(expr).map(|e| DatTag::Script(Script::Bytes(e))),
         _ => fail,
     }
     .parse_next(input)
@@ -253,6 +257,13 @@ mod tests {
             DatTag::parse("dat:script(itCommandLength(_command))"),
             Some(DatTag::Script(Script::Length(Expr::Call(
                 "itCommandLength".into(),
+                vec![Expr::Name("_command".into())],
+            ))))
+        );
+        assert_eq!(
+            DatTag::parse("dat:bytescript(cpuCommandLength(_command))"),
+            Some(DatTag::Script(Script::Bytes(Expr::Call(
+                "cpuCommandLength".into(),
                 vec![Expr::Name("_command".into())],
             ))))
         );

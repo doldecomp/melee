@@ -328,3 +328,86 @@ fn array_elements_keep_pointer_typedef_counts() {
         assert!(!walked.extents.contains_key(&48));
     }
 }
+
+/// Follow an array of pointers annotated with `DAT_BYTE_SCRIPT`.
+/// A 0x7F argument must not end the script. An unterminated script must not
+/// receive an inferred extent.
+#[test]
+fn byte_scripts_end_by_command_length() {
+    let mut graph = TypeGraph::default();
+    graph.units.push(Unit {
+        name: None,
+        address_size: 4,
+        macros: Vec::new(),
+    });
+    ty(
+        &mut graph,
+        1,
+        Some("u8"),
+        Some(1),
+        TypeKind::Base {
+            encoding: gimli::DW_ATE_unsigned_char.0,
+        },
+    );
+    ty(
+        &mut graph,
+        2,
+        None,
+        Some(4),
+        TypeKind::Pointer { target: Some(1) },
+    );
+    ty(
+        &mut graph,
+        3,
+        Some("Script"),
+        None,
+        TypeKind::Typedef { target: Some(2) },
+    );
+    let script = tag(&mut graph, "dat:bytescript(cpuCommandLength(_command))");
+    graph.types.get_mut(&3).unwrap().annotations = vec![script];
+    ty(
+        &mut graph,
+        4,
+        None,
+        Some(12),
+        TypeKind::Array {
+            element: Some(3),
+            dims: vec![Some(3)],
+        },
+    );
+    let mut data = Vec::new();
+    for word in [12u32, 16, 24] {
+        data.extend(word.to_be_bytes());
+    }
+    data.extend([0x80, 0x7F, 0x7F, 0, 0x01, 0xC0, 0x01, 0x02, 0x7F, 0, 0, 0]);
+    data.extend([0x01, 0x02]);
+    let archive = Archive {
+        header: ArchiveHeader {
+            file_size: 0,
+            data_size: data.len() as u32,
+            reloc_count: 3,
+            public_count: 0,
+            extern_count: 0,
+            version: [0; 12],
+        },
+        data: &data,
+        relocs: vec![0, 4, 8],
+        publics: Vec::new(),
+        externs: Vec::new(),
+        symbols: &[],
+    };
+    let canonical = Canonical::new(&graph);
+    let macros = HashMap::new();
+    let mut walker = Walker::new(&graph, &canonical, &macros, &archive);
+    walker.root(0, 4, "root", &[]);
+    let walked = walker.finish();
+    assert_eq!(walked.pointers.len(), 3);
+    assert_eq!(walked.extents.get(&12), Some(&15));
+    assert_eq!(walked.extents.get(&16), Some(&21));
+    assert!(!walked.extents.contains_key(&24));
+    assert_eq!(walked.issues.len(), 1);
+    assert!(matches!(
+        walked.issues.first(),
+        Some(Issue::OutOfBounds { at: 26, .. })
+    ));
+}
