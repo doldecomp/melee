@@ -5,8 +5,6 @@
 
 #include <sysdolphin/baselib/forward.h>
 
-#include <placeholder.h>
-
 #include <dolphin/mtx.h>
 #include <melee/ft/dobjlist.h> // IWYU pragma: keep
 
@@ -97,8 +95,8 @@ typedef struct _ftPurinAttributes {
     float xDC;
     float xE0;
     float xE4;
-    UNK_T xE8;
-    UNK_T xEC;
+    float xE8;
+    float xEC;
     float xF0;
     float xF4;
     u8 _F8[0x100 - 0xF8];

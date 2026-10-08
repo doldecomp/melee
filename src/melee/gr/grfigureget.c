@@ -27,15 +27,6 @@
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/gobjproc.h>
 
-typedef struct grFigureGet_Data {
-    s32 x0;
-    s32 x4;
-    s32 x8;
-    f32 xC;
-    f32 x10;
-    f32 x14;
-} grFigureGet_Params;
-
 static Vec3 const grFigureGet_803B8470 = { 0.0f, 0.0f, 0.0f };
 
 /* 219530 */ static void grFigureGet_OnDemoInit(int);
@@ -93,7 +84,7 @@ StageData grFigureGet_StageData = {
     0,
 };
 
-static grFigureGet_Params* yakumono_param;
+static grFigureGet_YakumonoParam* yakumono_param;
 
 void grFigureGet_OnDemoInit(int unused) {}
 

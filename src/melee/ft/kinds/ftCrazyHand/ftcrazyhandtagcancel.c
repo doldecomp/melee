@@ -69,7 +69,7 @@ void ftCh_TagCancel_Anim(HSD_GObj* gobj)
 void ftCh_TagCancel_Phys(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    ftCrazyHand_DatAttrs* da = fp->ft_data->ext_attr;
+    ftCrazyHand_DatAttrs* da = &fp->ft_data->ext_attr->crazyhand;
     ftCh_UpdateBossMotion(gobj, fp, da);
 }
 
@@ -87,7 +87,7 @@ void ftCh_TagCancel_Coll(HSD_GObj* gobj)
 void ftCh_GrabUnk1_8015BC88(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    ftCrazyHand_DatAttrs* da = fp->ft_data->ext_attr;
+    ftCrazyHand_DatAttrs* da = &fp->ft_data->ext_attr->crazyhand;
     Vec3 pos;
     u8 _[8];
     fp->mv.ch.unk0.x20 = 0;

@@ -3,7 +3,7 @@
 ## Samples
 
 - The stage `*_YakumonoParam` structs aren't reachable (`void*` in the
-  stage info) and differ per stage.
+  stage info) and differ per stage: `dat_symbols.txt` types them by archive.
 - A union object whose tag chooses no member has no sample (`CmdUnion`,
   which is a script; item attributes of kinds with no variant).
 
@@ -20,14 +20,26 @@
   `ftDevice_Callback0`'s `Vec3*` out parameter. That callback type is shared
   by two device tables with different outputs. `grZe_YakumonoParam` hides a
   pointer at 0x2C in `pad_14`.
-- `yakumono_param` has no type for about 40 stages, including every
-  `GrT*` target test. Their code doesn't read it, or reads it locally.
+- Some earlier by-address roots are misaligned inside data now reached
+  from its real root, e.g. `GrGb_unused_x8E4C8` (`HSD_MatAnimJoint`) in
+  the shapeanim list of the model desc at GrGb 0x8E4F0, and
+  `EfDkData_unused_x9B9C`. Leftover `HSD_ShapeAnimJoint` trees (8-byte
+  `_HSD_ShapeAnim`s that `HSD_MatAnimJoint` misreads) in `EfCoData`,
+  `EfDkData` and `EfMrData` have no root yet. The orphan model desc lists
+  in `PlCl`, `PlLk` and `PlSs` are left out: their animation trees have
+  the `FObjDesc`s noted below.
+- `GrMc.dat`'s `RObjAnimJoint`s at 0x301A4 and 0x301F4 have a third word
+  pointing to an `HSD_AObjDesc` nothing else reaches; the code reads only
+  two.
+- `GrIz.dat` 0xF86D0, after the light list at 0xF84B8, holds pointers to
+  0xD3980 and 0xD3B0C of unknown type.
 
 - `ftDataFox.x48_items[4]` isn't an `Article`: its words are small integers.
 - Kirby's Game & Watch and Yoshi copies (`PlKbCpGw`, `PlKbCpYs`) have
   `dynamics` that don't fit `ftDynamics`.
 - Some unused trees typed by address in `dat_symbols.txt` don't fit:
-  relocated scalars in `PlGn*`'s material animations. The trees at `PlCl`
+  `PlGn*` 0x5D7C8 and 0x5D978 aren't material animations (their `_HSD_MatAnim`s
+  overlap other nodes) and are left untyped. The trees at `PlCl`
   0x19428 and 0x1969C, `PlLk` 0x18BA8 and 0x18E1C, and `PlSs` 0x15898 are
   untyped: as `HSD_AnimJoint`s, an `FObjDesc`'s `ad` runs 0x80000 bytes
   past the data.
@@ -60,13 +72,19 @@ Not errors:
   or reading the tables from the ELF).
 - `ItemSpecialAttributes` selects a variant by `Article::kind`, bound in
   `itPublicData`, stage items (`gr_itkind`), fighters' items
-  (`DAT_MATCH_FTITEM`) and Kirby's copies (`DAT_MATCH_KBCOPY`). Left
-  ambiguous: ScBall and Spycloak (no layouts), `It_Kind_Unk4`,
-  `Lizardon_Flame4`, `Unknown_Swarm`, `Pokemon_Unk`, and fighter items
-  whose code reads no attributes (bows, blasters, capes, Peach's parasol
-  and Toad, Thunder Jolt in the air, Sheik's held needle, PK Thunder's
-  last trail, Ness's bat, Kirby's `It_Kind_Unk1`). Master Hand's third and
-  Young Link's sixth item slots aren't registered with a kind.
+  (`DAT_MATCH_FTITEM`) and Kirby's copies (`DAT_MATCH_KBCOPY`). Items
+  whose code reads none of their attributes (ScBall, Spycloak, bows,
+  blasters, capes, Peach's parasol and Toad, Thunder Jolt in the air,
+  Sheik's held needle, PK Thunder's last trail, Ness's bat, Kirby's
+  `It_Kind_Unk1`, `Pokemon_Unk`), and Master Hand's third and Young Link's
+  sixth item slots, which aren't registered with a kind, are
+  `itUnreadAttributes`: `DAT_EXTENT` words. Their sizes are only where the
+  next object starts.
+- Some fighters' items are followed by words nothing points to, between
+  the `Article` and the next item's `ItemStateArray` (`PlSs`, `PlSk`,
+  `PlNs`, `PlPp`, `PlLk`, `PlCl`): pointers to the animations the item's
+  own states use, sometimes with -1s, like `ItemStateDesc`s of states the
+  item kind's table doesn't index.
 - `itSpecialAttrsHead`, the record monsters' and stage items' attributes
   start with, has duplicates: `itNokoNoko_DatAttrs2`, `itPatapataDatAttrs`,
   `itOldkuriAttributes_x0`, `itOldottoseaAttributes_x0`,
@@ -111,6 +129,9 @@ Not errors:
   fighters' `xC` scripts unexplained: the walker currently reaches that
   data by continuing past returns. That data would need address roots too.
 
+- The name entry lists (`mnNameAutoName*`, `mnNameRefuseName*`) are
+  counted in `dat_symbols.txt`: they end in a pointer to an empty string,
+  which `DAT_TERMINATED` can't express.
 - `toy.c` loads trophy symbols through `symbol_name` fields of its tables;
   those are covered by name patterns instead.
 - `ftDemo*MotionFile*` are `u8[]`: packed archives like `Pl??AJ.dat`,

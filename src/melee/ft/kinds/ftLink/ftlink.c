@@ -331,7 +331,7 @@ void ftLk_Init_OnLoadForCLink(Fighter* fp)
 void ftLk_Init_OnLoad(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    ftLk_DatAttrs* da = fp->ft_data->ext_attr;
+    ftLk_DatAttrs* da = &fp->ft_data->ext_attr->link;
     union ftData_Item* item_list = fp->ft_data->x48_items;
     da->attackairlw_hit_anim_frame_end =
         lbAnim_8001E8F8(ftData_80085E50(fp, 72));
@@ -424,7 +424,7 @@ void ftLk_800EB334(HSD_GObj* gobj)
     float new_ground_vel;
 
     Fighter* fp = GET_FIGHTER(gobj);
-    ftLk_DatAttrs* link_attr = fp->ft_data->ext_attr;
+    ftLk_DatAttrs* link_attr = &fp->ft_data->ext_attr->link;
 
     float resultf = ftCo_80092ED8(fp->x19A4, link_attr->xD8);
     fp->gr_vel = resultf * p_ftCommonData->x294;

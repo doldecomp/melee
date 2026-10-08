@@ -23,6 +23,8 @@ typedef struct RandomItemSpawner RandomItemSpawner;
 typedef struct PokemonSelectionState PokemonSelectionState;
 typedef struct HSD_ObjAllocUnk5 HSD_ObjAllocUnk5;
 typedef struct ItemPickTable ItemPickTable;
+typedef struct itLizardonFlameAttributes itLizardonFlameAttributes;
+typedef struct itUnreadAttributes itUnreadAttributes;
 typedef struct itUnk2_DatAttrs itUnk2_DatAttrs;
 typedef struct Item Item;
 typedef struct Item_DynamicBones Item_DynamicBones;

@@ -3,19 +3,6 @@
 
 #include <melee/ft/forward.h>
 
-typedef struct WaitStruct {
-    union WaitStruct_u {
-        struct WaitStruct_u_p {
-            int* x;
-            int* y;
-        } p;
-        struct WaitStruct_u_i {
-            int x;
-            int y;
-        } i;
-    } u;
-} WaitStruct;
-
 /* 08A698 */ bool ftCo_8008A698(Fighter* fp);
 /* 08A6D8 */ void ftCo_8008A6D8(Fighter_GObj* gobj, s32 anim_id);
 /* 08A7A8 */ void ftCo_8008A7A8(Fighter_GObj* gobj, WaitStruct* arg1);

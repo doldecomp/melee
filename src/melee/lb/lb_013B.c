@@ -1,3 +1,5 @@
+#include "lb_013B.h"
+
 #include <melee/ft/forward.h>
 
 #include "forward.h"
@@ -13,7 +15,7 @@ typedef bool (*lb_803BA248_fn)(ColorOverlay*);
 /* 013FF0 */ static bool lb_80013FF0(ColorOverlay* arg);
 /* 014234 */ static bool lb_80014234(ColorOverlay* arg);
 
-static struct Fighter_804D653C_t* lb_804D63C0;
+static lbRumbleEntry* lb_804D63C0;
 
 bool lb_80013BB0(ColorOverlay* arg)
 {
@@ -243,8 +245,8 @@ void lb_80014534(void)
 
 void lb_80014574(u8 arg0, int arg1, int arg2, int arg3)
 {
-    HSD_PadRumbleAdd(arg0, arg1, arg3 != 0 ? arg3 : -2, lb_804D63C0[arg2].unk4,
-                     lb_804D63C0[arg2].unk);
+    HSD_PadRumbleAdd(arg0, arg1, arg3 != 0 ? arg3 : -2, lb_804D63C0[arg2].pri,
+                     lb_804D63C0[arg2].list);
 }
 
 void lb_800145C0(u8 slot)

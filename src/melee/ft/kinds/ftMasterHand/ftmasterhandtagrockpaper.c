@@ -172,7 +172,7 @@ void ftMh_TagCancel_IASA(HSD_GObj* gobj)
 void ftMh_TagCancel_Phys(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    ftMasterHand_SpecialAttrs* da = fp->ft_data->ext_attr;
+    ftMasterHand_SpecialAttrs* da = &fp->ft_data->ext_attr->masterhand;
     ftMh_UpdateBossMotion(gobj, fp, da);
 }
 

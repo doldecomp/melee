@@ -20,7 +20,7 @@ void ftMh_PaperCrush_Coll(HSD_GObj* gobj) {}
 void ftMh_MS_358_80152880(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    ftMasterHand_SpecialAttrs* da = fp->ft_data->ext_attr;
+    ftMasterHand_SpecialAttrs* da = &fp->ft_data->ext_attr->masterhand;
 
     u8 _[8];
 
@@ -101,7 +101,7 @@ void ftMh_Poke1_Phys(HSD_GObj* gobj)
 
     if (fp->mv.mh.unk13.x4) {
         ftData* ftData = fp->ft_data;
-        ftMasterHand_SpecialAttrs* da = ftData->ext_attr;
+        ftMasterHand_SpecialAttrs* da = &ftData->ext_attr->masterhand;
 
         {
             Vec3 pos;

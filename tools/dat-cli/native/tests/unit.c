@@ -899,6 +899,112 @@ static void test_packed(void)
     free(two);
 }
 
+static void test_tagged_plain_union_size(void)
+{
+    union PlainChoice {
+        uint32_t small;
+        Leaf large;
+    };
+    const DatMember members[] = {
+        { .type = T_U32,
+          DAT_AT(0),
+          DAT_FIELD(union PlainChoice, small),
+          .cond = DAT_BINARY(EQ, DAT_NAME(kind), DAT_INT(0)) },
+        { .type = T_LEAF,
+          DAT_AT(0),
+          DAT_FIELD(union PlainChoice, large),
+          .cond = DAT_BINARY(EQ, DAT_NAME(kind), DAT_INT(1)) },
+    };
+    DatType type = type_T_CHOICE;
+    type.has_pointers = 0;
+    type.size = 12;
+    type.native_size = sizeof(union PlainChoice);
+    type.members = members;
+    const DatType* local_types[T_COUNT];
+    memcpy(local_types, types, sizeof types);
+    local_types[T_CHOICE] = &type;
+    DatType pointer = type_T_LEAF_P;
+    pointer.target = T_CHOICE;
+    DatType counted_pointer = type_T_COUNTED_LEAF_P;
+    counted_pointer.count_tag = DAT_INT(1);
+    local_types[T_LEAF_P] = &pointer;
+    local_types[T_COUNTED_LEAF_P] = &counted_pointer;
+    for (unsigned i = 0; i < 9; i++) {
+        uint32_t kind = i % 3 == 2;
+        uint32_t offset = i >= 6 ? 4 : 0;
+        uint32_t data = (i % 3 == 0 ? 4 : 12) + offset;
+        bool foreign = i % 3 == 1;
+        unsigned char file[0x200] = { 0 };
+        unsigned char* d = file + 32;
+        put32(d, 4);
+        put32(d + offset, 123);
+        if (data - offset > 4) {
+            put32(d + offset + 4, 456);
+            put32(d + offset + 8, 0x3FC00000);
+        }
+        unsigned char* at = d + data;
+        if (offset) {
+            put32(at, 0);
+            at += 4;
+        }
+        if (foreign) {
+            put32(at, offset + 4);
+            at += 4;
+        }
+        put32(at, 0), put32(at + 4, 0), at += 8;
+        memcpy(at, "root", 5);
+        at += 5;
+        size_t size = (size_t) (at - file);
+        put32(file, (uint32_t) size);
+        put32(file + 4, data);
+        put32(file + 8, foreign + (offset != 0));
+        put32(file + 12, 1);
+        const DatRootBind bind = { DAT_NAME_kind, kind };
+        const DatRoot root = { .name = "root",
+                               .type = offset ? T_COUNTED_LEAF_P : T_CHOICE,
+                               .count_kind = i >= 3 && i < 6
+                                                 ? DAT_COUNT_EXACTLY
+                                                 : DAT_COUNT_ONE,
+                               .count = 1,
+                               .binds = &bind,
+                               .nbinds = 1 };
+        const DatFileRoots roots = { .file = "fixture",
+                                     .roots = &root,
+                                     .nroots = 1 };
+        const DatModule module = { .files = &roots, .nfiles = 1 };
+        DatSchema local_schema = schema;
+        local_schema.types = local_types;
+        local_schema.modules = &module;
+        local_schema.nmodules = 1;
+        DatArchive* a = dat_open(&local_schema, file, size, NULL);
+        CHECK(a != NULL);
+        CHECK(dat_load_roots(a, "fixture", 0) == 1);
+        void* loaded = dat_public(a, "root", root.type);
+        CHECK(loaded != NULL);
+        union PlainChoice* value =
+            offset && loaded != NULL ? *(union PlainChoice**) loaded : loaded;
+        CHECK(value != NULL);
+        char* text = trace(a);
+        CHECK(!contains(text, "issue"));
+        CHECK(contains(
+            text, offset ? (kind ? "extent 0x4 0x10\n" : "extent 0x4 0x8\n")
+                         : (kind ? "extent 0x0 0xC\n" : "extent 0x0 0x4\n")));
+        CHECK(dat_verify(a, NULL) == 0);
+        if (value != NULL) {
+            if (kind) {
+                CHECK(value->large.c == 456);
+                value->large.c++;
+            } else {
+                CHECK(value->small == 123);
+                value->small++;
+            }
+            CHECK(dat_verify(a, NULL) == 1);
+        }
+        free(text);
+        dat_close(a);
+    }
+}
+
 int main(void)
 {
     test_walk();
@@ -907,6 +1013,7 @@ int main(void)
     test_conditional_counts();
     test_union_member_binding();
     test_byte_scripts();
+    test_tagged_plain_union_size();
     test_refuses();
     test_packed();
     printf("%s (%zu-bit %s-endian)\n", failures ? "FAILED" : "ok",

@@ -22,8 +22,10 @@ yakumono_param = GrCn.dat:*; // type:grCorneria_YakumonoParam
 yakumono_param = GrCs.dat:*; // type:grCastle_YakumonoParam
 yakumono_param = GrFs.dat:*; // type:grFourside_YakumonoParam
 yakumono_param = GrFz.dat:*; // type:grFlatzone_YakumonoParam
+yakumono_param = GrGb.dat:*; // type:grGreatBay_YakumonoParam
 yakumono_param = GrGd.dat:*; // type:grGarden_YakumonoParam
 yakumono_param = GrGr.dat:*; // type:grGreens_YakumonoParam
+yakumono_param = GrHe.dat:*; // type:grHeal_YakumonoParam
 yakumono_param = GrI1.dat:*; // type:grInishie1_YakumonoParam
 yakumono_param = GrI2.dat:*; // type:grInishie2_YakumonoParam
 yakumono_param = GrIm.dat:*; // type:grIceMt_YakumonoParam
@@ -33,11 +35,17 @@ yakumono_param = GrKr.dat:*; // type:grKraid_YakumonoParam
 yakumono_param = GrMc.dat:*; // type:grMc_YakumonoParam
 yakumono_param = GrNBa.dat:*; // type:grBattle_YakumonoParam
 yakumono_param = GrNBr.dat:*; // type:grBigBlueRoute_YakumonoParam
+yakumono_param = GrNFg.dat:*; // type:grFigureGet_YakumonoParam
+yakumono_param = GrNKr.dat:*; // type:grKinokoRoute_YakumonoParam
+yakumono_param = GrNLa.dat:*; // type:grLast_YakumonoParam
 yakumono_param = GrNPo.dat:*; // type:grPushon_YakumonoParam
 yakumono_param = GrNSr.dat:*; // type:grShrineRoute_YakumonoParam
 yakumono_param = GrNZr.dat:*; // type:grZebesRoute_YakumonoParam
 yakumono_param = GrOk.dat:*; // type:grOldKongo_YakumonoParam
 yakumono_param = GrOp.dat:*; // type:grOldpupupu_YakumonoParam
+yakumono_param = GrOt.dat:*; // type:grOnett_YakumonoParam
+yakumono_param = GrOy.dat:*; // type:grOldYoshi_YakumonoParam
+yakumono_param = GrPs.dat:*; // type:grPStadium_YakumonoParam
 yakumono_param = GrRc.dat:*; // type:grRCruise_YakumonoParam
 yakumono_param = GrSt.dat:*; // type:grStory_YakumonoParam
 yakumono_param = GrTFc.dat:*; // type:grTFalco_YakumonoParam
@@ -46,7 +54,16 @@ yakumono_param = GrTGn.dat:*; // type:grTGn_YakumonoParam
 yakumono_param = GrTMt.dat:*; // type:grTMewtwo_UnkStruct
 yakumono_param = GrTPr.dat:*; // type:grTPrSpecialParams
 yakumono_param = GrVe.dat:*; // type:grVenom_YakumonoParam
+yakumono_param = GrYt.dat:*; // type:grYorster_YakumonoParam
 yakumono_param = GrZe.dat:*; // type:grZe_YakumonoParam
+// Pokemon Stadium's transformations repeat its parameters; only GrPs.dat's
+// are read
+yakumono_param = GrPs1.dat:*; // type:grPStadium_YakumonoParam
+yakumono_param = GrPs2.dat:*; // type:grPStadium_YakumonoParam
+yakumono_param = GrPs3.dat:*; // type:grPStadium_YakumonoParam
+yakumono_param = GrPs4.dat:*; // type:grPStadium_YakumonoParam
+// The other stages' code reads none of theirs: one zero word
+yakumono_param = Gr*.dat:*; // type:void*
 
 // Demo motions: packed archives the game relocates itself, like Pl??AJ
 ftDemo*MotionFile* = *:*; // type:u8 extent
@@ -108,6 +125,8 @@ sqEventInitDataLevelTbl = GmEvent.dat:*; // extent
 tournament_box?_array = TmBox.dat:*; // extent
 ty*Tbl = TyData?.dat:*; // extent
 gmKumiteSystemTable* = GmKumite.dat:*; // extent
+lbRumbleData = LbRb.dat:*; // extent
+lbBgFlashColAnimData = LbBf.dat:*; // extent
 
 // Every effect archive's table, as efAsync_DatEntries loads them; this also
 // types those no loader names, such as Kirby's unused copy of Pichu's
@@ -118,17 +137,22 @@ eff*DataTable = Ef*.dat:*; // type:EffectDataTable
 // offsets into themselves, as far as the data runs.
 map_ptcl = *:*; // extent
 map_texg = *:*; // extent
+
+// Fixed-count tables
 ScGamRegStaffrollNames_scene_modelset = *:*; // count:10
 // Unused name roots: each holds one pointer to the empty name string.
 mnNameDefaultName = *:*; // type:u8*
 mnNameDefaultNameUs = *:*; // type:u8*
-mnNameAutoName = *:*; // count:684
-mnNameAutoNameUs = *:*; // count:168
-mnNameRefuseName = *:*; // count:200
-mnNameRefuseNameUs = *:*; // count:22
 SIS_GrCorneriaData = *:*; // count:53
 SIS_GrPStadiumData = *:*; // count:22
 SIS_GrHomerunData = *:*; // count:4
+
+// Name entry's string lists, each ending in a pointer to an empty string. No
+// code loads the default names: each is just that terminator.
+mnNameAutoName = *:*; // count:484
+mnNameAutoNameUs = *:*; // count:146
+mnNameRefuseName = *:*; // count:31
+mnNameRefuseNameUs = *:*; // count:21
 
 // Roots no public symbol or pointer reaches, by address: export leftovers
 // the game can't use (only names and the pointers from them reach archive
@@ -1069,28 +1093,20 @@ PlPe_unused_x13FB8 = PlPe.dat:0x13FB8; // type:HSD_AnimJoint
 PlCa_unused_xCC00 = PlCa.dat:0xCC00; // type:HSD_AnimJoint
 PlCa_unused_xC264 = PlCa.dat:0xC264; // type:HSD_AnimJoint
 PlGnRe_unused_x5DAEC = PlGnRe.dat:0x5DAEC; // type:HSD_MatAnimJoint
-PlGnRe_unused_x5D978 = PlGnRe.dat:0x5D978; // type:HSD_MatAnimJoint
 PlGnRe_unused_x5D93C = PlGnRe.dat:0x5D93C; // type:HSD_MatAnimJoint
 PlGnRe_unused_x5D900 = PlGnRe.dat:0x5D900; // type:HSD_MatAnimJoint
-PlGnRe_unused_x5D7C8 = PlGnRe.dat:0x5D7C8; // type:HSD_MatAnimJoint
 PlGnRe_unused_x5D780 = PlGnRe.dat:0x5D780; // type:HSD_MatAnimJoint
 PlGnLa_unused_x5DAEC = PlGnLa.dat:0x5DAEC; // type:HSD_MatAnimJoint
-PlGnLa_unused_x5D978 = PlGnLa.dat:0x5D978; // type:HSD_MatAnimJoint
 PlGnLa_unused_x5D93C = PlGnLa.dat:0x5D93C; // type:HSD_MatAnimJoint
 PlGnLa_unused_x5D900 = PlGnLa.dat:0x5D900; // type:HSD_MatAnimJoint
-PlGnLa_unused_x5D7C8 = PlGnLa.dat:0x5D7C8; // type:HSD_MatAnimJoint
 PlGnLa_unused_x5D780 = PlGnLa.dat:0x5D780; // type:HSD_MatAnimJoint
 PlGnGr_unused_x5DAEC = PlGnGr.dat:0x5DAEC; // type:HSD_MatAnimJoint
-PlGnGr_unused_x5D978 = PlGnGr.dat:0x5D978; // type:HSD_MatAnimJoint
 PlGnGr_unused_x5D93C = PlGnGr.dat:0x5D93C; // type:HSD_MatAnimJoint
 PlGnGr_unused_x5D900 = PlGnGr.dat:0x5D900; // type:HSD_MatAnimJoint
-PlGnGr_unused_x5D7C8 = PlGnGr.dat:0x5D7C8; // type:HSD_MatAnimJoint
 PlGnGr_unused_x5D780 = PlGnGr.dat:0x5D780; // type:HSD_MatAnimJoint
 PlGnBu_unused_x5DAEC = PlGnBu.dat:0x5DAEC; // type:HSD_MatAnimJoint
-PlGnBu_unused_x5D978 = PlGnBu.dat:0x5D978; // type:HSD_MatAnimJoint
 PlGnBu_unused_x5D93C = PlGnBu.dat:0x5D93C; // type:HSD_MatAnimJoint
 PlGnBu_unused_x5D900 = PlGnBu.dat:0x5D900; // type:HSD_MatAnimJoint
-PlGnBu_unused_x5D7C8 = PlGnBu.dat:0x5D7C8; // type:HSD_MatAnimJoint
 PlGnBu_unused_x5D780 = PlGnBu.dat:0x5D780; // type:HSD_MatAnimJoint
 PlGnRe_unused_x5DAF0 = PlGnRe.dat:0x5DAF0; // type:HSD_MatAnimJoint
 PlGnLa_unused_x5DAF0 = PlGnLa.dat:0x5DAF0; // type:HSD_MatAnimJoint
@@ -4745,6 +4761,8 @@ GrOk_unused_x993C = GrOk.dat:0x993C; // type:SceneCameraDesc
 GrOp_unused_x11484 = GrOp.dat:0x11484; // type:SceneCameraDesc
 GrOp_unused_x13470 = GrOp.dat:0x13470; // type:SceneCameraDesc
 GrOp_unused_x3D4 = GrOp.dat:0x3D4; // type:SceneCameraDesc
+GrOp_unused_x2674 = GrOp.dat:0x2674; // type:SceneCameraDesc
+GrOp_unused_x69D4 = GrOp.dat:0x69D4; // type:SceneCameraDesc
 GrOp_unused_x6EF4 = GrOp.dat:0x6EF4; // type:SceneCameraDesc
 GrOt_unused_x31C = GrOt.dat:0x31C; // type:SceneCameraDesc
 GrOt_unused_x3A4 = GrOt.dat:0x3A4; // type:SceneFogDesc
@@ -5084,6 +5102,7 @@ GrGb_unused_x244A0 = GrGb.dat:0x244A0; // type:DynamicModelDesc* terminated:0
 GrGb_unused_x24F78 = GrGb.dat:0x24F78; // type:DynamicModelDesc* terminated:0
 GrGb_unused_x3103C = GrGb.dat:0x3103C; // type:DynamicModelDesc* terminated:0
 GrGb_unused_x8ECF4 = GrGb.dat:0x8ECF4; // type:DynamicModelDesc* terminated:0
+GrGb_unused_x8E500 = GrGb.dat:0x8E500; // type:DynamicModelDesc* terminated:0
 GrGd_unused_x1CD74 = GrGd.dat:0x1CD74; // type:DynamicModelDesc* terminated:0
 GrGd_unused_x1EC68 = GrGd.dat:0x1EC68; // type:DynamicModelDesc* terminated:0
 GrGd_unused_x2F07C = GrGd.dat:0x2F07C; // type:DynamicModelDesc* terminated:0
@@ -5383,6 +5402,8 @@ GrTe_unused_x2C7E0 = GrTe.dat:0x2C7E0; // type:DynamicModelDesc* terminated:0
 GrTe_unused_x35C38 = GrTe.dat:0x35C38; // type:DynamicModelDesc* terminated:0
 GrTe_unused_x4BE58 = GrTe.dat:0x4BE58; // type:DynamicModelDesc* terminated:0
 GrTe_unused_x6D374 = GrTe.dat:0x6D374; // type:DynamicModelDesc* terminated:0
+GrTe_unused_x54014 = GrTe.dat:0x54014; // type:DynamicModelDesc* terminated:0
+GrTe_unused_x6BDC0 = GrTe.dat:0x6BDC0; // type:DynamicModelDesc* terminated:0
 GrVe_unused_x189D0 = GrVe.dat:0x189D0; // type:DynamicModelDesc* terminated:0
 GrVe_unused_x18E58 = GrVe.dat:0x18E58; // type:DynamicModelDesc* terminated:0
 GrVe_unused_xF5F9C = GrVe.dat:0xF5F9C; // type:DynamicModelDesc* terminated:0
@@ -5500,6 +5521,12 @@ ItCo_unused_x26472C = ItCo.dat:0x26472C; // type:DynamicModelDesc* terminated:0
 ItCo_unused_x2775C4 = ItCo.dat:0x2775C4; // type:DynamicModelDesc* terminated:0
 ItCo_unused_x29294C = ItCo.dat:0x29294C; // type:DynamicModelDesc* terminated:0
 ItCo_unused_x29A5C0 = ItCo.dat:0x29A5C0; // type:DynamicModelDesc* terminated:0
+ItCo_unused_x51CFC = ItCo.dat:0x51CFC; // type:DynamicModelDesc* terminated:0
+ItCo_unused_x100CC4 = ItCo.dat:0x100CC4; // type:DynamicModelDesc* terminated:0
+ItCo_unused_x11E878 = ItCo.dat:0x11E878; // type:DynamicModelDesc* terminated:0
+ItCo_unused_x22CA1C = ItCo.dat:0x22CA1C; // type:DynamicModelDesc* terminated:0
+ItCo_unused_x24D398 = ItCo.dat:0x24D398; // type:DynamicModelDesc* terminated:0
+ItCo_unused_x24FA00 = ItCo.dat:0x24FA00; // type:DynamicModelDesc* terminated:0
 PlCh_unused_x9810 = PlCh.dat:0x9810; // type:DynamicModelDesc* terminated:0
 PlCh_unused_xA9F0 = PlCh.dat:0xA9F0; // type:DynamicModelDesc* terminated:0
 PlCh_unused_xD050 = PlCh.dat:0xD050; // type:DynamicModelDesc* terminated:0
@@ -5571,11 +5598,16 @@ PlNs_unused_x11450 = PlNs.dat:0x11450; // type:DynamicModelDesc* terminated:0
 PlNs_unused_x1D200 = PlNs.dat:0x1D200; // type:DynamicModelDesc* terminated:0
 PlNs_unused_x23FA4 = PlNs.dat:0x23FA4; // type:DynamicModelDesc* terminated:0
 PlNs_unused_x39D70 = PlNs.dat:0x39D70; // type:DynamicModelDesc* terminated:0
+PlNs_unused_x16728 = PlNs.dat:0x16728; // type:DynamicModelDesc* terminated:0
 PlPc_unused_x22EA8 = PlPc.dat:0x22EA8; // type:DynamicModelDesc* terminated:0
+PlPc_unused_x141C8 = PlPc.dat:0x141C8; // type:DynamicModelDesc* terminated:0
 PlPe_unused_x1D1A8 = PlPe.dat:0x1D1A8; // type:DynamicModelDesc* terminated:0
 PlPe_unused_x1F608 = PlPe.dat:0x1F608; // type:DynamicModelDesc* terminated:0
+PlPe_unused_x24D34 = PlPe.dat:0x24D34; // type:DynamicModelDesc* terminated:0
 PlPk_unused_x232E8 = PlPk.dat:0x232E8; // type:DynamicModelDesc* terminated:0
+PlPk_unused_x14608 = PlPk.dat:0x14608; // type:DynamicModelDesc* terminated:0
 PlPp_unused_xE7EC = PlPp.dat:0xE7EC; // type:DynamicModelDesc* terminated:0
+PlPp_unused_xE938 = PlPp.dat:0xE938; // type:DynamicModelDesc* terminated:0
 PlSk_unused_x10B50 = PlSk.dat:0x10B50; // type:DynamicModelDesc* terminated:0
 PlSk_unused_x11CB0 = PlSk.dat:0x11CB0; // type:DynamicModelDesc* terminated:0
 PlSk_unused_x11F50 = PlSk.dat:0x11F50; // type:DynamicModelDesc* terminated:0
@@ -5886,6 +5918,10 @@ TyZkMen_unused_xFC00 = TyZkMen.dat:0xFC00; // type:DynamicModelDesc* terminated:
 TyZkPair_unused_x1F1A0 = TyZkPair.dat:0x1F1A0; // type:DynamicModelDesc* terminated:0
 TyZkWmen_unused_xFC00 = TyZkWmen.dat:0xFC00; // type:DynamicModelDesc* terminated:0
 Tyandold_unused_x24B8 = Tyandold.dat:0x24B8; // type:DynamicModelDesc* terminated:0
+PlKbCpMt_unused_xAE80 = PlKbCpMt.dat:0xAE80; // type:DynamicModelDesc* terminated:0
+PlKbCpPe_unused_x8C54 = PlKbCpPe.dat:0x8C54; // type:DynamicModelDesc* terminated:0
+PlMt_unused_x1A120 = PlMt.dat:0x1A120; // type:DynamicModelDesc* terminated:0
+TyStand_unused_x14638 = TyStand.dat:0x14638; // type:DynamicModelDesc* terminated:0
 
 GrBb_unused_xC0338 = GrBb.dat:0xC0338; // type:DynamicModelDesc* terminated:0
 GrCs_unused_x80404 = GrCs.dat:0x80404; // type:DynamicModelDesc* terminated:0
@@ -6229,6 +6265,16 @@ GrCn_unused_x5F784 = GrCn.dat:0x5F784; // type:SceneCameraDesc
 GrKr_unused_x4D818 = GrKr.dat:0x4D818; // type:SceneCameraDesc
 GrKr_unused_x4D8A0 = GrKr.dat:0x4D8A0; // type:SceneFogDesc
 GrVe_unused_x110660 = GrVe.dat:0x110660; // type:SceneCameraDesc
+
+// Copies of stages' lights, by address, right after a LightList: a
+// LightDesc that repeats the list's desc and points where it points, then a
+// LightList of the original desc. Nothing points to them.
+GrTDk_unused_x28A08 = GrTDk.dat:0x28A08; // type:HSD_LightDesc
+GrTDk_unused_x28A24 = GrTDk.dat:0x28A24; // type:LightList
+GrTKp_unused_x274 = GrTKp.dat:0x274; // type:HSD_LightDesc
+GrTKp_unused_x290 = GrTKp.dat:0x290; // type:LightList
+GrTKp_unused_xE8A8 = GrTKp.dat:0xE8A8; // type:HSD_LightDesc
+GrTKp_unused_xE8C4 = GrTKp.dat:0xE8C4; // type:LightList
 
 // Stages' quake model sets, by address: a null-terminated list of
 // DynamicModelDesc pointers right after quake_model_set, holding only it.

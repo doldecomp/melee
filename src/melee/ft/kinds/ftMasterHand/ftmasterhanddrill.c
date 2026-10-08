@@ -63,7 +63,7 @@ void ftMh_Drill_IASA(HSD_GObj* gobj)
 void ftMh_Drill_Phys(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    ftMasterHand_SpecialAttrs* da = fp->ft_data->ext_attr;
+    ftMasterHand_SpecialAttrs* da = &fp->ft_data->ext_attr->masterhand;
     ft_80085134(gobj);
     if (--fp->mv.mh.unk0.x0 > da->x84 || fp->mv.mh.unk0.x0 < 0) {
         fp->self_vel.x = 0;

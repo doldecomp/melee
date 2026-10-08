@@ -321,7 +321,7 @@ void ftCl_Init_OnLoad(HSD_GObj* gobj)
 
     Fighter* fp = gobj->user_data;
     ftData* ftdata = fp->ft_data;
-    ftLk_DatAttrs* ea = ftdata->ext_attr;
+    ftLk_DatAttrs* ea = &ftdata->ext_attr->link;
     union ftData_Item* items = ftdata->x48_items;
 
     fp->can_walljump = true;
@@ -405,7 +405,7 @@ void ftCl_Init_OnKnockbackExit(HSD_GObj* gobj)
 void ftCl_Init_80149114(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
-    ftLk_DatAttrs* ea = fp->ft_data->ext_attr;
+    ftLk_DatAttrs* ea = &fp->ft_data->ext_attr->link;
     float ftmp = ftCo_80092ED8(fp->x19A4, ea->xD8);
     fp->gr_vel = ftmp * p_ftCommonData->x294;
     if (fp->specialn_facing_dir < 0.0f) {

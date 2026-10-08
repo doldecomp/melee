@@ -56,19 +56,8 @@ StageData grYt_StageData = {
     0,
 };
 
-typedef struct YorsterParams {
-    f32 x00;
-    f32 x04;
-    f32 x08;
-    f32 x0C;
-    s32 x10;
-    s32 x14;
-    s32 x18;
-    s32 x1C;
-} YorsterParams;
-
 typedef struct grYt_804D6A20_t {
-    YorsterParams* x0;
+    grYorster_YakumonoParam* x0;
     u8 pad_04[4];
 } grYt_804D6A20_t;
 grYt_804D6A20_t grYt_804D6A20;

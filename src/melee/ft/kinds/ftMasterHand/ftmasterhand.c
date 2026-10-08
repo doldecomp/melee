@@ -610,7 +610,7 @@ void ftMh_Init_OnLoad(HSD_GObj* gobj)
     ftMasterHand_SpecialAttrs* ftData_attr;
     Fighter* fp = gobj->user_data;
     ftData* ftdata = fp->ft_data;
-    ftData_attr = ftdata->ext_attr;
+    ftData_attr = &ftdata->ext_attr->masterhand;
     {
         union ftData_Item* items = ftdata->x48_items;
         PUSH_ATTRS(fp, ftMasterHand_SpecialAttrs);

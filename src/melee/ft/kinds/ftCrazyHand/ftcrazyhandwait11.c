@@ -25,7 +25,7 @@ void fn_80159AA4(HSD_GObj* gobj)
     Fighter* fp = gobj->user_data;
     HSD_JObj* jobj = get_jobj(gobj);
 
-    ftCrazyHand_DatAttrs* da = fp->ft_data->ext_attr;
+    ftCrazyHand_DatAttrs* da = &fp->ft_data->ext_attr->crazyhand;
     Vec3 pos;
     Vec3 scl;
 
@@ -105,7 +105,7 @@ void ftCh_Wait1_1_Phys(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (--fp->mv.ch.unk0.x0 > 0) {
-        ftCrazyHand_DatAttrs* da = fp->ft_data->ext_attr;
+        ftCrazyHand_DatAttrs* da = &fp->ft_data->ext_attr->crazyhand;
         ftBossLib_8015BF74(gobj, da->xDC);
     } else {
         fp->self_vel.x = 0;

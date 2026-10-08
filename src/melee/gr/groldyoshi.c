@@ -53,18 +53,7 @@ StageData grOy_StageData = {
     0,
 };
 
-static struct groldyoshi_yakumono_param_t {
-    s16 x0;
-    s16 x2;
-    float x4;
-    float x8;
-    float xC;
-    s16 x10;
-    s16 x12;
-    s16 x14;
-    s16 x16;
-    s16 x18;
-}* yakumono_param;
+static struct grOldYoshi_YakumonoParam* yakumono_param;
 
 void grOldYoshi_8020E798(bool arg) {}
 

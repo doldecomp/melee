@@ -46,7 +46,7 @@ void ftCh_RockCrushDown_Phys(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
     ftData* data = fp->ft_data;
-    ftCrazyHand_DatAttrs* da = data->ext_attr;
+    ftCrazyHand_DatAttrs* da = &data->ext_attr->crazyhand;
     ft_80085134(gobj);
     if (--fp->mv.ch.unk0.x0 > da->x48 || fp->mv.ch.unk0.x0 < 0) {
         fp->self_vel.x = 0;

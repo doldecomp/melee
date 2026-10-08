@@ -55,7 +55,7 @@ void ftCh_FingerBeamStart_Coll(HSD_GObj* gobj) {}
 static void fn_801588B8(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    ftCrazyHand_DatAttrs* da = fp->ft_data->ext_attr;
+    ftCrazyHand_DatAttrs* da = &fp->ft_data->ext_attr->crazyhand;
     Vec3 pos, prev;
     if (fp->cmd_vars[0] != 0) {
         lb_8000B1CC(fp->parts[FtPart_RLegJA].joint, NULL, &pos);

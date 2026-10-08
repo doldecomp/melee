@@ -22,7 +22,7 @@ void ftMh_RockCrushUp_Anim(HSD_GObj* gobj)
 {
     if (!ftAnim_IsFramesRemaining(gobj)) {
         Fighter* fp = gobj->user_data;
-        ftMasterHand_SpecialAttrs* da = fp->ft_data->ext_attr;
+        ftMasterHand_SpecialAttrs* da = &fp->ft_data->ext_attr->masterhand;
         ftMh_MS_355_8015247C(gobj);
         fp->mv.mh.unk0.x8 = da->xA0;
     }
@@ -75,7 +75,7 @@ void ftMh_RockCrushWait_Phys(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftData* data = fp->ft_data;
-    ftMasterHand_SpecialAttrs* da = data->ext_attr;
+    ftMasterHand_SpecialAttrs* da = &data->ext_attr->masterhand;
     ft_80085134(gobj);
     ftBossLib_8015C010(gobj, da->xA4);
     ftBossLib_8015C190(gobj);

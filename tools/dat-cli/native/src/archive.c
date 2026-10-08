@@ -1425,6 +1425,28 @@ static void* native_array(DatArchive* a, uint32_t offset, int32_t e,
     return block;
 }
 
+/// Whether any member of a union has a `DAT_IF`.
+static bool conditioned(const DatType* u)
+{
+    if (u->kind != DAT_KIND_UNION) {
+        return false;
+    }
+    for (uint32_t i = 0; i < u->nmembers; i++) {
+        if (u->members[i].cond != NULL) {
+            return true;
+        }
+    }
+    return false;
+}
+
+static void record_extent(DatArchive* a, uint32_t offset, uint64_t end)
+{
+    uint64_t* e = map_slot(&a->extents, offset, true);
+    if (end > *e) {
+        *e = end;
+    }
+}
+
 static void typed_extent(DatArchive* a, uint32_t offset, int32_t type,
                          uint64_t count)
 {
@@ -1435,11 +1457,11 @@ static void typed_extent(DatArchive* a, uint32_t offset, int32_t type,
     if (r == DAT_NONE) {
         return;
     }
-    uint64_t end = offset + (uint64_t) T(a, r)->size * count;
-    uint64_t* e = map_slot(&a->extents, offset, true);
-    if (end > *e) {
-        *e = end;
+    if (count == 1 && conditioned(T(a, r))) {
+        return;
     }
+    uint64_t end = offset + (uint64_t) T(a, r)->size * count;
+    record_extent(a, offset, end);
 }
 
 static void untyped(DatArchive* a)
@@ -1660,14 +1682,16 @@ static void counted(DatArchive* a, uint32_t offset, int32_t pointer,
     }
     uint64_t size = T(a, e)->size;
     uint64_t room = a->size > value ? a->size - value : 0;
-    if (count > room / (size ? size : 1)) {
+    if (count > room / (size ? size : 1) &&
+        !(count == 1 && conditioned(T(a, e))))
+    {
         issue(a, ISSUE_OUT_OF_BOUNDS, value, 0);
         return;
     }
     if (count > 0 && !opaque(a, raw)) {
         reference(a, slot, value, e);
     }
-    if (count > 0 && !T(a, e)->has_pointers) {
+    if (count > 0 && !T(a, e)->has_pointers && !conditioned(T(a, e))) {
         void* block = plain_array(a, value, raw, e, count);
         if (!visit(a, value, e)) {
             store_pointer(slot, block);
@@ -2108,7 +2132,9 @@ static void layout(DatArchive* a, uint32_t offset, int32_t type, void* native,
     if (t->kind == DAT_KIND_VOID) {
         return;
     }
-    if (!t->has_extent && (uint64_t) offset + t->size > a->size) {
+    if (!conditioned(t) && !t->has_extent &&
+        (uint64_t) offset + t->size > a->size)
+    {
         issue(a, ISSUE_OUT_OF_BOUNDS, offset, 0);
         return;
     }
@@ -2173,14 +2199,27 @@ static void layout(DatArchive* a, uint32_t offset, int32_t type, void* native,
         }
         break;
     case DAT_KIND_UNION: {
-        /* Views of plain data need no condition: nothing to follow */
-        if (!t->has_pointers) {
+        /* Views of plain data need no condition: nothing to follow.
+         * Conditions still choose among layouts of different sizes. */
+        bool plain = !t->has_pointers;
+        if (plain && !conditioned(t)) {
             relocated_words(a, offset, (uint64_t) offset + t->size);
             convert(a, offset, r, native);
             break;
         }
         uint32_t index;
-        switch (choose(a, r, offset, parent, &index)) {
+        ChoiceKind choice = choose(a, r, offset, parent, &index);
+        if (choice == CHOICE_AMBIGUOUS && plain) {
+            if ((uint64_t) offset + t->size > a->size) {
+                issue(a, ISSUE_OUT_OF_BOUNDS, offset, 0);
+                break;
+            }
+            record_extent(a, offset, (uint64_t) offset + t->size);
+            relocated_words(a, offset, (uint64_t) offset + t->size);
+            convert(a, offset, r, native);
+            break;
+        }
+        switch (choice) {
         case CHOICE_MEMBER: {
             Choice ch = { offset, t->id, index };
             uint64_t* seen = map_slot(&a->choices, key2(offset, t->id), true);
@@ -2192,6 +2231,7 @@ static void layout(DatArchive* a, uint32_t offset, int32_t type, void* native,
             if (m->type == DAT_NONE) {
                 break;
             }
+            typed_extent(a, offset, m->type, 1);
             const Scope* outer = a->env;
             a->env =
                 bound(a, outer, m, parent.record, parent.base, parent.some, 0);
@@ -2424,6 +2464,9 @@ static void* walk_root_array(DatArchive* a, uint32_t offset, int32_t element,
     if (e == DAT_NONE || T(a, e)->kind == DAT_KIND_VOID) {
         return NULL;
     }
+    if (bounded && count == 1 && conditioned(T(a, e))) {
+        return walk_root(a, offset, raw, env);
+    }
     uint64_t size = T(a, e)->size;
     if (size == 0 || !visit(a, offset, e)) {
         return native_of(a, offset, e);
@@ -2449,7 +2492,7 @@ static void* walk_root_array(DatArchive* a, uint32_t offset, int32_t element,
         count = room / size;
     }
     typed_extent(a, offset, raw, count);
-    if (!T(a, e)->has_pointers) {
+    if (!T(a, e)->has_pointers && !conditioned(T(a, e))) {
         void* block = plain_array(a, offset, raw, e, count);
         set_native(a, offset, e, block);
         relocated_words(a, offset, offset + count * size);
@@ -2729,7 +2772,7 @@ static void verify(Verify* v, uint32_t offset, int32_t type,
         return;
     }
     const DatType* t = T(a, r);
-    if ((uint64_t) offset + t->size > a->size) {
+    if (!conditioned(t) && (uint64_t) offset + t->size > a->size) {
         return;
     }
     uint64_t key = key2(offset, t->id), previous;

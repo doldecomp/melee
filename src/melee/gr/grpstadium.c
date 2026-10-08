@@ -37,31 +37,7 @@
 #include <sysdolphin/baselib/sislib.h>
 #include <sysdolphin/baselib/wobj.h>
 
-static struct grPStadium_YakumonoParam {
-    int x0;
-    int x4;
-    int x8;
-    int xC;
-    int x10;
-    int x14;
-    int x18;
-    u8 r, g, b;
-    u32 x20;
-    u32 x24;
-    u32 x28;
-    u32 x2C;
-    u32 x30;
-    u32 x34;
-    u32 x38;
-    u32 x3C;
-    u32 x40;
-    u32 x44;
-    s16 x48;
-    s16 x4A;
-    s16 x4C;
-    s16 x4E;
-    s16 x50;
-}* yakumono_param;
+static struct grPStadium_YakumonoParam* yakumono_param;
 
 GrJoint grPs_803E1248[] = {
     { 1, 3, 0 }, { 2, 3, 0 }, { 3, 4, 0 },

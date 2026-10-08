@@ -43,7 +43,7 @@ static inline float my_lbVector_Len(Vec3* vec)
 void ftCh_Init_80157DF8(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    ftCrazyHand_DatAttrs* da = fp->ft_data->ext_attr;
+    ftCrazyHand_DatAttrs* da = &fp->ft_data->ext_attr->crazyhand;
     PAD_STACK(8);
     Fighter_ChangeMotionState(gobj, 0x163, Ft_MF_None, 0.0f, 1.0f, 0.0f, NULL);
     ftAnim_8006EBA4(gobj);
@@ -95,7 +95,7 @@ void ftCh_RockCrushUp_Phys(HSD_GObj* gobj)
 
     if (fp->mv.ch.unk13.x4) {
         ftData* ftData = fp->ft_data;
-        ftCrazyHand_DatAttrs* da = ftData->ext_attr;
+        ftCrazyHand_DatAttrs* da = &ftData->ext_attr->crazyhand;
 
         {
             Vec3 pos;

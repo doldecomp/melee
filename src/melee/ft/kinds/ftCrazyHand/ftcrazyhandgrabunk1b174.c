@@ -23,7 +23,7 @@ bool fn_8015B4EC(Vec3* vec);
 void ftCh_GrabUnk1_8015B174(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    ftCrazyHand_DatAttrs* da = fp->ft_data->ext_attr;
+    ftCrazyHand_DatAttrs* da = &fp->ft_data->ext_attr->crazyhand;
     Fighter_ChangeMotionState(gobj, 0x183, Ft_MF_None, 0.0f, 1.0f, 0.0f, NULL);
     ftAnim_8006EBA4(gobj);
     fp->cur_pos.x = da->x18;

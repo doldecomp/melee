@@ -1065,7 +1065,7 @@ s32 it_802B9328(ItemLink* link, Vec3* pos, itSamusGrappleAttributes* attrs,
     ItemLink* cur;
     ItemLink* next;
     Item* grapple_ip = fp->u.ss.x223C->user_data;
-    ftSs_DatAttrs* da = fp->ft_data->ext_attr;
+    ftSs_DatAttrs* da = &fp->ft_data->ext_attr->samus;
     Vec3 dir;
     Vec3 d2;
     u8 _padB[4];
@@ -1566,7 +1566,7 @@ bool it_802BA760(ItemLink* link, Vec3* pos, itSamusGrappleAttributes* attrs,
     u8 _padA[16];
     Vec3 dir;
     Vec3* dir_ptr;
-    ftSs_DatAttrs* da = fp->ft_data->ext_attr;
+    ftSs_DatAttrs* da = &fp->ft_data->ext_attr->samus;
     ItemLink* cur;
     ItemLink* next;
 
@@ -1683,11 +1683,11 @@ void it_802BABB8(Item_GObj* gobj)
 {
     Item* ip = gobj->user_data;
     Fighter* fp = ip->owner->user_data;
-    ftSs_DatAttrs* da = fp->ft_data->ext_attr;
+    ftSs_DatAttrs* da = &fp->ft_data->ext_attr->samus;
     PAD_STACK(24);
     Item_80268E5C(gobj, 8, ITEM_ANIM_UPDATE);
     it_802A2428(gobj);
-    fp->mv.ss.grapple.x4 = (f32) (s32) da->xD0;
+    fp->mv.ss.grapple.x4 = (f32) da->xD0;
 }
 
 void it_802BAC3C(Fighter_GObj* gobj)

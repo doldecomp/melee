@@ -37,7 +37,7 @@ void ftMh_BackAirplane1_Coll(HSD_GObj* gobj) {}
 static void doAnim(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    ftMasterHand_SpecialAttrs* da = fp->ft_data->ext_attr;
+    ftMasterHand_SpecialAttrs* da = &fp->ft_data->ext_attr->masterhand;
 
     Fighter_ChangeMotionState(gobj, ftMh_MS_BackAirplane2, Ft_MF_None, 0, 1, 0,
                               0);
