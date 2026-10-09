@@ -1,5 +1,8 @@
-use melee_dat::hsd::Archive;
-use std::path::PathBuf;
+use melee_dat::{
+    hsd::{Archive, archive_name},
+    symbols::SymbolFile,
+};
+use std::{collections::BTreeMap, path::PathBuf};
 
 /// `MELEE_DAT_DIR`, or the project's extracted disc files. Read at run time
 /// so that a checkout without the disc still compiles.
@@ -45,4 +48,60 @@ fn size_matches_header() {
             bytes.len()
         );
     }
+}
+
+#[test]
+fn explicit_symbols_match_real_archive_locations() {
+    let paths = dat_paths();
+    if paths.is_empty() {
+        assert!(
+            std::env::var_os("MELEE_DAT_DIR").is_none(),
+            "no DAT files in MELEE_DAT_DIR"
+        );
+        eprintln!("skipping: no DAT files found");
+        return;
+    }
+    let repo = PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("../..");
+    let symbols = SymbolFile::parse(
+        &std::fs::read_to_string(repo.join("config/GALE01/dat_symbols.txt"))
+            .unwrap(),
+    )
+    .unwrap();
+    let mut entries = BTreeMap::<_, Vec<_>>::new();
+    for entry in symbols.entries() {
+        entries
+            .entry(entry.archive.as_str())
+            .or_default()
+            .push(entry);
+    }
+    let (mut publics, mut aliases) = (0, 0);
+    for path in paths {
+        let bytes = std::fs::read(&path).unwrap();
+        let file = path.file_name().unwrap().to_str().unwrap();
+        for (at, archive) in Archive::parse_packed(&bytes).unwrap() {
+            let name = archive_name(file, at);
+            for entry in entries.remove(name.as_str()).unwrap_or_default() {
+                if let Some((_, public)) = archive
+                    .named_publics()
+                    .find(|(name, _)| *name == entry.name.as_bytes())
+                {
+                    assert_eq!(entry.address, public.offset, "{entry}");
+                    publics += 1;
+                } else {
+                    assert!(entry.ty.is_some(), "alias needs a type: {entry}");
+                    assert!(
+                        entry.address < archive.header.data_size,
+                        "{entry}"
+                    );
+                    aliases += 1;
+                }
+            }
+        }
+    }
+    assert!(
+        entries.is_empty(),
+        "entries reference absent archives: {:?}",
+        entries.keys()
+    );
+    eprintln!("checked {publics} public entries and {aliases} aliases");
 }

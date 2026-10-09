@@ -1,40 +1,20 @@
-//! `dat_symbols.txt`: the types of the archive symbols the game looks up by
-//! name, which are the roots everything else in an archive is reached from.
-//!
-//! One line per root, in the style of `symbols.txt`:
-//!
-//! ```text
-//! ftDataMars = PlMs.dat:*; // type:ftData
-//! map_head = *:*; // type:MapHead
-//! *_figatree = Pl??AJ.dat:*; // type:FigaTree
-//! ```
-//!
-//! The location is `dat:address`. The dat is an archive path relative to
-//! the dat base, or `*` for every archive with a public symbol of that name.
-//! An address of `*` matches a public symbol by name; names and dats may use
-//! `*` and `?` wildcards, and the first line with a matching dat wins, then
-//! the first `*` line. An address instead names data no public symbol does,
-//! such as a root nothing points to, with a C alias:
-//!
-//! ```text
-//! ftDataEmblem_unused_joint = PlFe.dat:0x3AD70; // type:HSD_Joint
-//! ```
+//! `dat_symbols.txt`: explicit types and counts for public symbols and
+//! aliases. See `tools/dat-cli/symbols.md` for the format.
 
 use crate::dwarf::annotation::{DatTag, Script};
+use crate::hsd::Archive;
 use anyhow::{Context, Result, anyhow, bail};
-use std::{fmt, str::FromStr};
+use std::{
+    collections::{BTreeMap, BTreeSet},
+    fmt,
+    str::FromStr,
+};
 use winnow::{
     ModalResult, Parser,
     ascii::{digit1, hex_digit1, space0, space1},
     combinator::{alt, cut_err, delimited, eof, opt, preceded, separated},
     token::take_till,
 };
-
-#[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-pub enum Location {
-    Any,
-    Archive(String),
-}
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub enum Count {
@@ -48,18 +28,16 @@ pub enum Count {
     Terminated(u64),
 }
 
-/// `name = dat:address; // attrs`, like decomp-toolkit's `symbols.txt`
-/// with the dat in the section's place. With `*` for the address, `name`
-/// is a public symbol's, matched by name (and `*`/`?` globs); with an
-/// address, `name` is a C alias for data no public symbol names, such as
-/// a root nothing points to.
+/// `name = archive:address; // attrs`. A public symbol matches by name and
+/// address; another name gives a C alias for data no public symbol names.
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub struct Entry {
     pub name: String,
-    pub location: Location,
-    /// Where in the dat's data, for an alias; `None` (`*`) for a public
-    /// symbol. In a file packing several archives, in the first.
-    pub address: Option<u32>,
+    /// File relative to the archive base, with `@0xOFFSET` for a packed
+    /// archive after the first.
+    pub archive: String,
+    /// Offset from the start of this archive's data, after its header.
+    pub address: u32,
     /// `type:T`, like `DAT_TYPE(T)`: the type a root no loader types is.
     pub ty: Option<String>,
     /// How many of the root's type there are, whether its loader or `type:`
@@ -76,12 +54,13 @@ pub struct Entry {
 
 #[derive(Debug, Clone, Default, PartialEq, Eq)]
 pub struct SymbolFile {
-    pub entries: Vec<Entry>,
+    entries: Vec<Entry>,
+    by_archive: BTreeMap<String, Vec<usize>>,
 }
 
 impl SymbolFile {
     pub fn parse(text: &str) -> Result<Self> {
-        let entries = text
+        let entries: Vec<Entry> = text
             .lines()
             .enumerate()
             .filter(|(_, line)| {
@@ -93,79 +72,62 @@ impl SymbolFile {
                     .with_context(|| format!("line {}: {line}", index + 1))
             })
             .collect::<Result<_>>()?;
-        Ok(SymbolFile { entries })
+        let mut by_archive: BTreeMap<String, Vec<usize>> = BTreeMap::new();
+        let mut names = BTreeSet::new();
+        for (index, entry) in entries.iter().enumerate() {
+            if !names.insert((&entry.archive, &entry.name)) {
+                bail!("{}: duplicate symbol `{}`", entry.archive, entry.name);
+            }
+            by_archive
+                .entry(entry.archive.clone())
+                .or_default()
+                .push(index);
+        }
+        Ok(SymbolFile {
+            entries,
+            by_archive,
+        })
     }
 
-    /// Sorted by name, then `*` before archives, so output is stable.
-    pub fn sort(&mut self) {
-        self.entries.sort_by(|a, b| {
-            (&a.name, &a.location).cmp(&(&b.name, &b.location))
-        });
+    pub fn entries(&self) -> impl Iterator<Item = &Entry> {
+        self.entries.iter()
     }
 
-    /// The entry that applies to a symbol in an archive, if any.
-    /// The aliases for data at addresses in `archive`, by address.
-    pub fn aliases(&self, archive: &str) -> Vec<(u32, &Entry)> {
-        self.entries
-            .iter()
-            .filter_map(|e| match (&e.location, e.address) {
-                (Location::Archive(a), Some(address)) if glob(a, archive) => {
-                    Some((address, e))
-                }
-                _ => None,
+    fn in_archive(&self, archive: &str) -> impl Iterator<Item = &Entry> {
+        self.by_archive
+            .get(archive)
+            .into_iter()
+            .flatten()
+            .map(|&index| &self.entries[index])
+    }
+
+    /// Entries that do not name a public symbol in this archive.
+    pub fn aliases(
+        &self,
+        name: &str,
+        archive: &Archive,
+    ) -> Vec<(u32, &Entry)> {
+        let publics: BTreeSet<_> = archive
+            .named_publics()
+            .map(|(name, symbol)| (name, symbol.offset))
+            .collect();
+        self.in_archive(name)
+            .filter(|entry| {
+                !publics.contains(&(entry.name.as_bytes(), entry.address))
             })
+            .map(|entry| (entry.address, entry))
             .collect()
     }
 
-    pub fn lookup(&self, name: &str, archive: &str) -> Option<&Entry> {
-        let mut any = None;
-        for entry in self
-            .entries
-            .iter()
-            .filter(|e| e.address.is_none() && glob(&e.name, name))
-        {
-            match &entry.location {
-                Location::Archive(a) if glob(a, archive) => {
-                    return Some(entry);
-                }
-                Location::Any => {
-                    any.get_or_insert(entry);
-                }
-                Location::Archive(_) => {}
-            }
-        }
-        any
+    pub fn lookup(
+        &self,
+        name: &str,
+        archive: &str,
+        address: u32,
+    ) -> Option<&Entry> {
+        self.in_archive(archive)
+            .find(|entry| entry.name == name && entry.address == address)
     }
-}
-
-/// Whether `text` matches `pattern`, where `*` is any run of characters and
-/// `?` any one character.
-fn glob(pattern: &str, text: &str) -> bool {
-    let (pattern, text) = (pattern.as_bytes(), text.as_bytes());
-    let (mut p, mut t) = (0, 0);
-    // Where to resume after the last `*`: its position and the text it took
-    let mut star = None;
-    while t < text.len() {
-        match pattern.get(p) {
-            Some(b'*') => {
-                star = Some((p, t));
-                p += 1;
-            }
-            Some(&c) if c == b'?' || c == text[t] => {
-                p += 1;
-                t += 1;
-            }
-            _ => match star {
-                Some((sp, st)) => {
-                    star = Some((sp, st + 1));
-                    p = sp + 1;
-                    t = st + 1;
-                }
-                None => return false,
-            },
-        }
-    }
-    pattern[p..].iter().all(|&c| c == b'*')
 }
 
 impl fmt::Display for SymbolFile {
@@ -198,27 +160,24 @@ impl FromStr for Entry {
                 Attr::Other(attr) => other.push(attr.to_owned()),
             }
         }
-        // An alias names one place: a C identifier, in a dat, of a type
-        if entry.address.is_some() {
-            let identifier = entry
+        let identifier = entry
+            .name
+            .chars()
+            .next()
+            .is_some_and(|c| c.is_ascii_alphabetic() || c == '_')
+            && entry
                 .name
                 .chars()
-                .next()
-                .is_some_and(|c| c.is_ascii_alphabetic() || c == '_')
-                && entry.name.chars().all(|c| c.is_ascii_alphanumeric() || c == '_');
-            if !identifier {
-                bail!("`{}` at an address isn't a C identifier", entry.name);
-            }
-            if entry.location == Location::Any {
-                bail!("`{}` at an address needs a dat", entry.name);
-            }
-            if ty.is_none() {
-                bail!("`{}` at an address needs a `type:`", entry.name);
-            }
+                .all(|c| c.is_ascii_alphanumeric() || c == '_');
+        if !identifier {
+            bail!("`{}` isn't a C identifier", entry.name);
+        }
+        if entry.archive.contains(['*', '?']) {
+            bail!("`{}` needs an explicit archive", entry.name);
         }
         Ok(Entry {
             name: entry.name.to_owned(),
-            location: entry.location,
+            archive: entry.archive.to_owned(),
             address: entry.address,
             ty,
             count,
@@ -242,8 +201,8 @@ impl Entry {
 /// An entry as written, before its attributes are checked.
 struct RawEntry<'i> {
     name: &'i str,
-    location: Location,
-    address: Option<u32>,
+    archive: &'i str,
+    address: u32,
     attrs: Vec<Attr<'i>>,
 }
 
@@ -254,20 +213,14 @@ enum Attr<'i> {
     Other(&'i str),
 }
 
-/// `name = dat:address; // attr attr ...`, either part `*`.
+/// `name = archive:address; // attr attr ...`.
 fn entry<'i>(input: &mut &'i str) -> ModalResult<RawEntry<'i>> {
     let name = preceded(space0, word).parse_next(input)?;
-    let (location, address) = delimited(
+    let (archive, address) = delimited(
         (space0, '=', space0),
         (
-            alt((
-                '*'.value(Location::Any),
-                dat.map(|a: &str| Location::Archive(a.to_owned())),
-            )),
-            preceded(
-                cut_err(':'),
-                cut_err(alt(('*'.value(None), integer.map(|n| Some(n as u32))))),
-            ),
+            dat,
+            preceded(cut_err(':'), cut_err(integer.try_map(u32::try_from))),
         ),
         (space0, cut_err(';'), space0),
     )
@@ -278,13 +231,13 @@ fn entry<'i>(input: &mut &'i str) -> ModalResult<RawEntry<'i>> {
     (space0, eof).parse_next(input)?;
     Ok(RawEntry {
         name,
-        location,
+        archive,
         address,
         attrs,
     })
 }
 
-/// A dat's file name, or a glob of them: up to the `:` before the address.
+/// An archive name, up to the `:` before the address.
 fn dat<'i>(input: &mut &'i str) -> ModalResult<&'i str> {
     take_till(1.., |c: char| c.is_whitespace() || c == ':' || c == ';')
         .parse_next(input)
@@ -331,15 +284,7 @@ fn integer(input: &mut &str) -> ModalResult<u64> {
 
 impl fmt::Display for Entry {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
-        let location = match &self.location {
-            Location::Any => "*",
-            Location::Archive(archive) => archive,
-        };
-        let address = match self.address {
-            Some(address) => format!("{address:#X}"),
-            None => "*".to_owned(),
-        };
-        write!(f, "{} = {location}:{address};", self.name)?;
+        write!(f, "{} = {}:{:#X};", self.name, self.archive, self.address)?;
         let attrs: Vec<String> = self
             .ty
             .iter()
@@ -363,100 +308,136 @@ impl fmt::Display for Entry {
 #[cfg(test)]
 mod tests {
     use super::*;
+    use crate::hsd::{ArchiveHeader, NamedSymbol, archive_name};
 
     const TEXT: &str = "\
-ftDataMars = PlMs.dat:*; // type:ftData
-map_head = *:*; // type:MapHead extent
-grGroundParam = *:*; // type:grGroundParam count:2 data:4byte
-itemdata = GrI2.dat:*;
-map_plit = *:*; // extent
-ScGamRegStaffrollNames_scene_modelset = GmStRoll.dat:*; // count:10
-itemdata = GrOp.dat:*; // terminated:0x0
+ftDataMars = PlMs.dat:0x10; // type:ftData
+map_head = GrNLa.dat:0x20; // type:MapHead extent
+grGroundParam = GrNLa.dat:0x30; // type:grGroundParam count:2 data:4byte
+itemdata = GrI2.dat:0x0;
+map_plit = GrNLa.dat:0x40; // terminated:0x0
+ScGamRegStaffrollNames_scene_modelset = GmStRoll.dat:0x50; // count:10
 PlCo_unused_x10 = PlCo.dat:0x10; // type:CmdUnion script:ftAction_803C0870
 ";
+
+    fn archive() -> Archive<'static> {
+        Archive {
+            header: ArchiveHeader {
+                file_size: 80,
+                data_size: 32,
+                reloc_count: 0,
+                public_count: 1,
+                extern_count: 0,
+                version: [0; 12],
+            },
+            data: &[0; 32],
+            relocs: Vec::new(),
+            publics: vec![NamedSymbol {
+                offset: 0x10,
+                symbol: 0,
+            }],
+            externs: Vec::new(),
+            symbols: b"root\0",
+        }
+    }
 
     #[test]
     fn round_trip() {
         let file = SymbolFile::parse(TEXT).unwrap();
         assert_eq!(file.to_string(), TEXT);
-        assert_eq!(file.entries[1].ty.as_deref(), Some("MapHead"));
-        assert_eq!(file.entries[1].count, Some(Count::Unbounded));
-        assert_eq!(file.entries[2].count, Some(Count::Exactly(2)));
-        assert_eq!(file.entries[2].other, ["data:4byte"]);
-        assert_eq!(file.entries[4].count, Some(Count::Unbounded));
-        assert_eq!(file.entries[5].count, Some(Count::Exactly(10)));
-        assert_eq!(file.entries[6].count, Some(Count::Terminated(0)));
-        assert_eq!(file.entries[7].script.as_deref(), Some("ftAction_803C0870"));
+        let entries: Vec<_> = file.entries().collect();
+        assert_eq!(entries[1].ty.as_deref(), Some("MapHead"));
+        assert_eq!(entries[1].count, Some(Count::Unbounded));
+        assert_eq!(entries[2].count, Some(Count::Exactly(2)));
+        assert_eq!(entries[2].other, ["data:4byte"]);
+        assert_eq!(entries[3].address, 0);
+        assert_eq!(entries[3].ty, None);
+        assert_eq!(entries[4].count, Some(Count::Terminated(0)));
+        assert_eq!(entries[5].count, Some(Count::Exactly(10)));
+        assert_eq!(entries[6].script.as_deref(), Some("ftAction_803C0870"));
     }
 
     #[test]
-    fn aliases() {
+    fn aliases_preserve_order_and_exclude_publics() {
         let file = SymbolFile::parse(concat!(
-            "ftDataEmblem_unused_joint = PlFe.dat:0x3AD70; // type:HSD_Joint\n",
-            "ftDataEmblem = PlFe.dat:*; // type:ftData\n",
+            "last = PlCo.dat:0x18; // type:T\n",
+            "root = PlCo.dat:0x10; // count:2\n",
+            "first = PlCo.dat:0x8; // type:T\n",
+            "other = PlMs.dat:0x4; // type:T\n",
         ))
         .unwrap();
-        assert_eq!(file.to_string().lines().next(), Some(
-            "ftDataEmblem_unused_joint = PlFe.dat:0x3AD70; // type:HSD_Joint"
-        ));
-        let aliases = file.aliases("PlFe.dat");
-        assert_eq!(aliases.len(), 1);
-        assert_eq!(aliases[0].0, 0x3AD70);
-        assert!(file.aliases("PlMs.dat").is_empty());
-        // An alias isn't a public symbol's entry
+        let archive = archive();
+        let aliases = file.aliases("PlCo.dat", &archive);
         assert_eq!(
-            file.lookup("ftDataEmblem_unused_joint", "PlFe.dat"),
-            None
+            aliases
+                .iter()
+                .map(|(at, entry)| (*at, entry.name.as_str()))
+                .collect::<Vec<_>>(),
+            [(0x18, "last"), (8, "first")]
         );
-        // An alias needs a dat, a type and a C name
+        assert!(file.aliases("PlFe.dat", &archive).is_empty());
+        assert_eq!(
+            file.lookup("root", "PlCo.dat", 0x10).unwrap().count,
+            Some(Count::Exactly(2))
+        );
+    }
+
+    #[test]
+    fn exact_names_and_addresses() {
+        let file = SymbolFile::parse(TEXT).unwrap();
+        assert!(file.lookup("map_head", "GrNLa.dat", 0x20).is_some());
+        assert!(file.lookup("map_head", "GrMc.dat", 0x20).is_none());
+        assert!(file.lookup("map_head", "GrNLa.dat", 0x24).is_none());
+        assert!(file.lookup("map_head_extra", "GrNLa.dat", 0x20).is_none());
+    }
+
+    #[test]
+    fn packed_archives_keep_separate_entries_at_the_same_local_offset() {
+        let file = SymbolFile::parse(concat!(
+            "root = PlCoAJ.dat:0x10; // type:A count:1\n",
+            "root = PlCoAJ.dat@0x80:0x10; // type:B count:2\n",
+            "unused = PlCoAJ.dat@0x80:0x8; // type:C\n",
+        ))
+        .unwrap();
+        let first = archive_name("PlCoAJ.dat", 0);
+        let next = archive_name("PlCoAJ.dat", 0x80);
+        assert_eq!(
+            file.lookup("root", &first, 0x10).unwrap().ty.as_deref(),
+            Some("A")
+        );
+        assert_eq!(
+            file.lookup("root", &next, 0x10).unwrap().ty.as_deref(),
+            Some("B")
+        );
+        assert!(file.lookup("unused", &first, 8).is_none());
+        assert!(file.aliases(&first, &archive()).is_empty());
+        assert_eq!(file.aliases(&next, &archive())[0].1.name, "unused");
+    }
+
+    #[test]
+    fn rejects_wildcards_overflow_and_duplicate_names() {
         for bad in [
-            "x = *:0x10; // type:T",
-            "x = PlFe.dat:0x10;",
-            "x_* = PlFe.dat:0x10; // type:T",
+            "foo = ;",
+            "foo = *",
+            "foo = *:0x10; // type:T",
+            "foo = Pl??.dat:0x10; // type:T",
+            "foo = PlCo.dat:*; // type:T",
+            "foo_* = PlCo.dat:0x10; // type:T",
+            "1foo = PlCo.dat:0x10; // type:T",
+            "foo = PlCo.dat:0x100000000; // type:T",
+            "foo = PlCo.dat:4294967296; // type:T",
+            "foo = PlCo.dat:0x10; // type:A type:B",
+            "foo = PlCo.dat:0x10; // type:A[x]",
+            "foo = PlCo.dat:0x10;\nfoo = PlCo.dat:0x20;",
         ] {
             assert!(SymbolFile::parse(bad).is_err(), "{bad}");
         }
-    }
-
-    #[test]
-    fn archive_overrides_any() {
-        let file = SymbolFile::parse(
-            "map_head = *:*; // type:A\nmap_head = GrNLa.dat:*; // type:B\n",
-        )
-        .unwrap();
-        let ty = |archive| file.lookup("map_head", archive)?.ty.clone();
-        assert_eq!(ty("GrNLa.dat").as_deref(), Some("B"));
-        assert_eq!(ty("GrMc.dat").as_deref(), Some("A"));
-    }
-
-    #[test]
-    fn wildcards() {
-        let file = SymbolFile::parse(
-            "*_figatree = Pl??AJ.dat:*; // type:FigaTree\n\
-             *_joint = *:*; // type:HSD_JObjDesc\n",
-        )
-        .unwrap();
-        let ty = |name, archive| file.lookup(name, archive)?.ty.clone();
         assert_eq!(
-            ty("PlyCaptain5K_Share_ACTION_Wait1_figatree", "PlCaAJ.dat")
-                .as_deref(),
-            Some("FigaTree")
+            "foo = PlCo.dat:16; // count:0"
+                .parse::<Entry>()
+                .unwrap()
+                .address,
+            16
         );
-        assert_eq!(ty("x_figatree", "PlCaAJx.dat"), None);
-        assert_eq!(
-            ty("TyMario_joint", "TyMario.dat").as_deref(),
-            Some("HSD_JObjDesc")
-        );
-        assert_eq!(ty("joint", "TyMario.dat"), None);
-        assert!(glob("a*b*c", "aXbYbZc"));
-        assert!(!glob("a*b", "aXbY"));
-    }
-
-    #[test]
-    fn rejects_malformed() {
-        assert!("foo = ;".parse::<Entry>().is_err());
-        assert!("foo = *".parse::<Entry>().is_err());
-        assert!("foo = *; // type:A type:B".parse::<Entry>().is_err());
-        assert!("foo = *; // type:A[x]".parse::<Entry>().is_err());
     }
 }
