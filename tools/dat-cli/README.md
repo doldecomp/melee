@@ -98,30 +98,10 @@ destination is loaded into its first element. A root is
 untyped if its destination is `void*`, and skipped if its name isn't a
 string literal or a global string.
 
-Names the code builds at runtime go in `config/GALE01/dat_symbols.txt`,
-used for publics no loader types. Lines are `name = dat:address;`, like
-decomp-toolkit's `symbols.txt` with the dat in the section's place:
-
-```text
-*_figatree = Pl??AJ.dat:*; // type:FigaTree
-ftDataEmblem_unused_joint = PlFe.dat:0x3AD70; // type:HSD_Joint
-```
-
-An address of `*` matches a public symbol by name. An address instead
-gives a C alias for data no public symbol names, such as the root of data
-nothing points to: it needs a dat (in a packed file, the first archive) and
-a `type:`, and the walk starts there after the public symbols. Names and
-dats take `*` and `?`. The first line with a matching archive
-wins, then the first `*` line. The attributes mirror the annotations:
-`type:T` like `DAT_TYPE(T)` (`T` or `T*`), and a count like `DAT_COUNT` and
-`DAT_EXTENT`: `count:N`, or `extent` for as many as fit before the next
-public symbol or pointer target, and `terminated:V` like
-`DAT_TERMINATED(V)`. `script:TABLE`, like `DAT_SCRIPT(TABLE)`, makes an
-address's root a command script. A count also applies where the loader already gives
-the type, e.g. `map_plit = *:*; // terminated:0` for a null-terminated
-list of `LightList*`. Raw data (textures, palettes) is
-`type:u8 extent` or `type:u16 extent`, like the extracted blobs in
-`config.yml`.
+`config/GALE01/dat_symbols.txt` supplements loader-derived roots with
+explicit types, counts and aliases for unreferenced data. Every entry names
+its symbol, archive and numeric data offset. See [Symbol files](symbols.md)
+for the format and examples.
 
 When a loader names roots through a global table, `DAT_BIND` on its name
 field carries the table's context into each root's walk. For example, the

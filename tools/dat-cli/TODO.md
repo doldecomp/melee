@@ -133,7 +133,7 @@ Not errors:
   counted in `dat_symbols.txt`: they end in a pointer to an empty string,
   which `DAT_TERMINATED` can't express.
 - `toy.c` loads trophy symbols through `symbol_name` fields of its tables;
-  those are covered by name patterns instead.
+  those are covered by explicit symbol entries instead.
 - `ftDemo*MotionFile*` are `u8[]`: packed archives like `Pl??AJ.dat`,
   relocated by `ftData` at runtime. They could be read as nested archives.
 - About 15,000 `void*` fields aren't followed. Use `DAT_TYPE` where the type

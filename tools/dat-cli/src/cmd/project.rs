@@ -12,7 +12,7 @@ use melee_dat::{
         render::Renderer,
         roots::{RootName, roots},
     },
-    hsd::Archive,
+    hsd::{Archive, archive_name},
     symbols::{Count, Entry, SymbolFile},
     walk::{Walk, Walker, macros},
 };
@@ -108,7 +108,7 @@ impl Project {
             SymbolFile::parse(&fs::read_to_string(&symbols_path)?)
                 .with_context(|| format!("{}", symbols_path.display()))?;
         let mut symbol_types = BTreeMap::new();
-        for entry in &symbols.entries {
+        for entry in symbols.entries() {
             let Some(ty) = &entry.ty else { continue };
             let die = canonical
                 .lookup(&graph, ty)
@@ -154,10 +154,7 @@ impl Project {
             let archives = Archive::parse_packed(&bytes)
                 .with_context(|| format!("{}", path.display()))?;
             for (at, archive) in &archives {
-                let name = match at {
-                    0 => file.clone(),
-                    _ => format!("{file}@{at:#X}"),
-                };
+                let name = archive_name(&file, *at);
                 let (rooted, result) = self.walk(&file, *at, archive);
                 each(Walked {
                     file: &file,
@@ -173,8 +170,15 @@ impl Project {
 
     /// The type a public symbol of `file` is loaded as, and how many: from
     /// its loader, or else from `dat_symbols.txt`.
-    pub fn root(&self, name: &str, file: &str) -> Option<(DieId, Count)> {
-        let entry = self.symbols.lookup(name, file);
+    pub fn root(
+        &self,
+        name: &str,
+        file: &str,
+        at: usize,
+        address: u32,
+    ) -> Option<(DieId, Count)> {
+        let entry =
+            self.symbols.lookup(name, &archive_name(file, at), address);
         let count = entry.and_then(|e| e.count).unwrap_or(Count::One);
         // The loader gives the type; the symbol entry may add a count
         // without repeating that type
@@ -187,13 +191,19 @@ impl Project {
 
     /// Walk the archive at `at` in `file` from its public symbols, then from
     /// the aliases `dat_symbols.txt` gives at addresses in it.
-    pub fn walk(&self, file: &str, at: usize, archive: &Archive) -> (bool, Walk) {
+    pub fn walk(
+        &self,
+        file: &str,
+        at: usize,
+        archive: &Archive,
+    ) -> (bool, Walk) {
         let mut walker =
             Walker::new(&self.graph, &self.canonical, &self.macros, archive);
         let mut rooted = false;
         for (name, symbol) in archive.named_publics() {
             let name = String::from_utf8_lossy(name);
-            let Some((ty, count)) = self.root(&name, file) else {
+            let Some((ty, count)) = self.root(&name, file, at, symbol.offset)
+            else {
                 continue;
             };
             let bindings = self
@@ -223,8 +233,8 @@ impl Project {
             }
             rooted = true;
         }
-        // In a file packing several archives, aliases are in the first
-        for (address, entry) in self.aliases(file, at) {
+        // Public roots keep their loader bindings; aliases have their own scope.
+        for (address, entry) in self.aliases(file, at, archive) {
             let Some(ty) = &entry.ty else { continue };
             let ty = self.symbol_types[ty];
             if let Some(script) = entry.script() {
@@ -254,11 +264,13 @@ impl Project {
     }
 
     /// The aliases at addresses in the archive at `at` in `file`.
-    pub fn aliases(&self, file: &str, at: usize) -> Vec<(u32, &Entry)> {
-        match at {
-            0 => self.symbols.aliases(file),
-            _ => Vec::new(),
-        }
+    pub fn aliases(
+        &self,
+        file: &str,
+        at: usize,
+        archive: &Archive,
+    ) -> Vec<(u32, &Entry)> {
+        self.symbols.aliases(&archive_name(file, at), archive)
     }
 
     /// The type of the object at `offset`, for display.
@@ -362,25 +374,35 @@ mod tests {
         let grapple_type = project.canonical.of(grapple_die).unwrap();
         let ty = project.root_types["ftDataSamus"];
         project.symbol_types.insert("ftData".into(), ty);
-        project.symbols.entries.extend(
-            SymbolFile::parse("ftDataSamus = *:*; // type:ftData")
-                .unwrap()
-                .entries,
-        );
+        project.symbols = SymbolFile::parse(&format!(
+            "{}ftDataSamus = PlSs.dat:{root:#X}; // type:ftData\n",
+            project.symbols
+        ))
+        .unwrap();
 
         for loader in [true, false] {
             if !loader {
                 project.root_types.remove("ftDataSamus");
             }
             for count in [Count::One, Count::Exactly(1), Count::Unbounded] {
-                let entry = project
+                let mut entry = project
                     .symbols
-                    .entries
-                    .iter_mut()
-                    .find(|e| e.name == "ftDataSamus")
-                    .unwrap();
+                    .lookup("ftDataSamus", "PlSs.dat", root)
+                    .unwrap()
+                    .clone();
                 entry.count = Some(count);
                 entry.ty = Some("ftData".into());
+                let previous = project
+                    .symbols
+                    .lookup("ftDataSamus", "PlSs.dat", root)
+                    .unwrap();
+                project.symbols = SymbolFile::parse(
+                    &project
+                        .symbols
+                        .to_string()
+                        .replace(&previous.to_string(), &entry.to_string()),
+                )
+                .unwrap();
                 let (rooted, walk) = project.walk("PlSs.dat", 0, &archive);
                 assert!(rooted);
                 assert!(walk.objects[&grapple].contains(&grapple_type));
