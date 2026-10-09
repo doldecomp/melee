@@ -25,7 +25,7 @@ use melee_dat::{
     dwarf::{
         DieId, TypeGraph, TypeKind, cache::TypesFile, canonical::Canonical, render::Renderer,
     },
-    hsd::Archive,
+    hsd::{Archive, archive_name},
     samples::{
         CWriter, Elided, Instance, Picker, Public, SampleInfo, Source, Unnamed,
         Piece, SAMPLED, INFERRED, assign_names, rest_object, root_of,
@@ -249,13 +249,13 @@ fn types(args: TypesArgs) -> Result<()> {
     let mut text = String::new();
     let mut roots = Vec::new();
     for (at, archive) in &archives {
-        for (_, entry) in project.aliases(&args.archive, *at) {
+        for (_, entry) in project.aliases(&args.archive, *at, archive) {
             text += &format!("alias {entry}\n");
             if let Some(ty) = &entry.ty {
                 roots.push(project.symbol_types[ty]);
             }
         }
-        for (name, _) in archive.named_publics() {
+        for (name, symbol) in archive.named_publics() {
             let name = String::from_utf8_lossy(name);
             if let Some(bindings) = project.root_bindings.get(name.as_ref()) {
                 text += &format!("bindings {bindings:?}\n");
@@ -263,7 +263,11 @@ fn types(args: TypesArgs) -> Result<()> {
             if let Some(&ty) = project.root_types.get(name.as_ref()) {
                 let count = project
                     .symbols
-                    .lookup(&name, &args.archive)
+                    .lookup(
+                        &name,
+                        &archive_name(&args.archive, *at),
+                        symbol.offset,
+                    )
                     .and_then(|e| e.count);
                 text += &format!("count {count:?}\n");
                 text += &format!(
@@ -271,9 +275,11 @@ fn types(args: TypesArgs) -> Result<()> {
                     renderer.declare(Some(ty), "")
                 );
                 roots.push(ty);
-            } else if let Some(entry) =
-                project.symbols.lookup(&name, &args.archive)
-                && let Some(ty) = &entry.ty
+            } else if let Some(entry) = project.symbols.lookup(
+                &name,
+                &archive_name(&args.archive, *at),
+                symbol.offset,
+            ) && let Some(ty) = &entry.ty
             {
                 text += &format!("symbol {name}: {ty} {:?}\n", entry.count);
                 roots.push(project.symbol_types[ty]);
@@ -562,7 +568,9 @@ fn slice(args: Slice) -> Result<()> {
     assign_names(&mut sources, &wanted);
     // An alias names its root
     for (&at, source) in &mut sources {
-        for (address, entry) in project.aliases(&args.archive, at) {
+        for (address, entry) in
+            project.aliases(&args.archive, at, source.archive)
+        {
             source.alias(address, &entry.name);
         }
     }
@@ -710,7 +718,7 @@ fn slice(args: Slice) -> Result<()> {
             archive.named_publics().map(move |(name, symbol)| (*at, name, symbol))
         })
         .filter(|(at, _, symbol)| !sampled.contains(&(*at, symbol.offset)))
-        .filter_map(|(_, name, _)| {
+        .filter_map(|(at, name, symbol)| {
             let name = String::from_utf8_lossy(name).into_owned();
             let identifier = name
                 .chars()
@@ -719,8 +727,10 @@ fn slice(args: Slice) -> Result<()> {
                 && name.chars().all(|c| c.is_ascii_alphanumeric() || c == '_');
             identifier.then(|| {
                 let ty = project
-                    .root(&name, &args.archive)
-                    .and_then(|(die, count)| describer.public_type(die, count));
+                    .root(&name, &args.archive, at, symbol.offset)
+                    .and_then(|(die, count)| {
+                        describer.public_type(die, count)
+                    });
                 Public { name, ty }
             })
         })
