@@ -215,10 +215,18 @@ typedef struct Issue {
     uint32_t value;
 } Issue;
 
+/// An expression value. If `bytes` is NULL, `i` is an integer.
+/// Otherwise, `bytes` and `len` describe data for calls and bindings.
+typedef struct Value {
+    uint64_t i;
+    const uint8_t* bytes;
+    uint64_t len;
+} Value;
+
 /// Names bound by a root or `DAT_BIND`.
 typedef struct Scope {
     int32_t name;
-    uint64_t value;
+    Value value;
     const struct Scope* outer;
 } Scope;
 
@@ -887,7 +895,7 @@ typedef struct Context {
     uint64_t index, command;
 } Context;
 
-static bool lookup(const Scope* env, int32_t name, uint64_t* out)
+static bool lookup(const Scope* env, int32_t name, Value* out)
 {
     for (; env != NULL; env = env->outer) {
         if (env->name == name) {
@@ -898,10 +906,65 @@ static bool lookup(const Scope* env, int32_t name, uint64_t* out)
     return false;
 }
 
-/// The value of a scalar field of the record at `base`, by name, as the
-/// walk reads it: big-endian, floats as the integers C converts them to.
+static bool eval(const DatArchive* a, const Context* c, const DatExpr* e,
+                 uint64_t* out);
+static uint64_t terminated_count(const DatArchive* a, uint32_t offset,
+                                 int32_t type, uint64_t term);
+
+/// Return the bytes referenced by relocated pointer member `m` at `at`.
+/// Its `DAT_COUNT` or `DAT_TERMINATED` gives the length, as in the walk.
+static bool pointed_bytes(const DatArchive* a, const DatMember* m,
+                          int32_t record, uint32_t base, uint64_t at,
+                          Value* out)
+{
+    int32_t p = resolve(a, m->type);
+    if (p == DAT_NONE || T(a, p)->kind != DAT_KIND_POINTER ||
+        at + 4 > a->size || !bits_has(&a->reloc, at, a->size))
+    {
+        return false;
+    }
+    uint32_t value = word(a, at);
+    if (value > a->size) {
+        return false;
+    }
+    int32_t e = pointee(a, T(a, p)->target);
+    if (e == DAT_NONE) {
+        return false;
+    }
+    uint64_t size = T(a, e)->size;
+    uint64_t count;
+    if (m->terminator != NULL) {
+        Context c = {
+            MODE_TERMINATOR, DAT_NONE, 0, DAT_NONE, 0, a->env, 0, 0
+        };
+        uint64_t term;
+        if (size == 0 || !eval(a, &c, m->terminator, &term)) {
+            return false;
+        }
+        uint64_t room = a->size > value ? (a->size - value) / size : 0;
+        uint32_t length = m->terminator_length ? m->terminator_length : 1;
+        count = terminated_count(a, value, e, term) + length - 1;
+        count = count < room ? count : room;
+    } else {
+        Context c = { MODE_COUNT, record, base, DAT_NONE, 0, a->env, 0, 0 };
+        if (m->count == NULL || !eval(a, &c, m->count, &count)) {
+            return false;
+        }
+    }
+    if (size != 0 && count > (a->size - value) / size) {
+        return false;
+    }
+    out->i = 0;
+    out->bytes = a->data + value;
+    out->len = count * size;
+    return true;
+}
+
+/// Read a field by name from the record at `base`.
+/// Scalars are big-endian; floats convert to integers as C would.
+/// Annotated pointers can resolve to the bytes they reference.
 static bool field_value(const DatArchive* a, int32_t record, uint32_t base,
-                        int32_t name, uint64_t* out)
+                        int32_t name, Value* out)
 {
     if (record == DAT_NONE) {
         return false;
@@ -947,6 +1010,9 @@ static bool field_value(const DatArchive* a, int32_t record, uint32_t base,
         return false;
     }
     uint64_t at = (uint64_t) base + m->offset;
+    if (pointed_bytes(a, m, record, base, at, out)) {
+        return true;
+    }
     int32_t r = resolve(a, m->type);
     if (r == DAT_NONE) {
         return false;
@@ -981,12 +1047,12 @@ static bool field_value(const DatArchive* a, int32_t record, uint32_t base,
         }
         v = (uint64_t) i;
     }
-    *out = v;
+    *out = (Value){ v, NULL, 0 };
     return true;
 }
 
 static bool resolve_name(const DatArchive* a, const Context* c, int32_t name,
-                         uint64_t* out)
+                         Value* out)
 {
     switch (c->mode) {
     case MODE_COUNT:
@@ -1008,7 +1074,7 @@ static bool resolve_name(const DatArchive* a, const Context* c, int32_t name,
     }
     case MODE_BIND:
         if (name == a->name_index) {
-            *out = c->index;
+            *out = (Value){ c->index, NULL, 0 };
             return true;
         }
         return field_value(a, c->record, c->base, name, out) ||
@@ -1017,7 +1083,7 @@ static bool resolve_name(const DatArchive* a, const Context* c, int32_t name,
         return lookup(c->env, name, out);
     case MODE_SCRIPT:
         if (name == a->name_command) {
-            *out = c->command;
+            *out = (Value){ c->command, NULL, 0 };
             return true;
         }
         return false;
@@ -1144,20 +1210,167 @@ static bool gx_get_tex_buffer_size(uint16_t width, uint16_t height,
     return true;
 }
 
+/// The bytes a direct attribute takes in a vertex, by its `GXCompCnt` and
+/// `GXCompType`; 0 for one not known.
+static uint32_t gx_direct_size(uint32_t attr, uint32_t cnt, uint32_t comp)
+{
+    static const uint8_t colors[6] = { 2, 3, 4, 2, 3, 4 };
+    uint32_t scalar = comp <= 1 ? 1 : comp <= 3 ? 2 : comp == 4 ? 4 : 0;
+    if (attr <= 8) {
+        return 1;
+    }
+    switch (attr) {
+    case 9:
+        return scalar * (cnt == 0 ? 2 : 3);
+    case 10:
+    case 25:
+        return scalar * (cnt == 0 ? 3 : 9);
+    case 11:
+    case 12:
+        return comp < 6 ? colors[comp] : 0;
+    default:
+        return attr >= 13 && attr <= 20 ? scalar * (cnt == 0 ? 1 : 2) : 0;
+    }
+}
+
+/// See `gx_max_index` in `expr.rs`.
+static bool gx_max_index(const uint8_t* dl, uint64_t dl_len,
+                         const uint8_t* descs, uint64_t descs_len,
+                         uint64_t attr, uint64_t* out)
+{
+    enum {
+        DESC_SIZE = 0x18,
+        MAX_ATTRS = 32
+    };
+    /* Each attribute present: its place in a vertex, its bytes in a vertex,
+       and its indices' width and number, if indexed */
+    struct {
+        uint32_t order, width, count;
+        bool target;
+    } attrs[MAX_ATTRS];
+    uint32_t n = 0;
+    for (uint64_t at = 0; at + DESC_SIZE <= descs_len; at += DESC_SIZE) {
+        uint32_t at_ = be32(descs + at), ty = be32(descs + at + 4),
+                 cnt = be32(descs + at + 8), comp = be32(descs + at + 12);
+        if (at_ == 0xFF) {
+            break;
+        }
+        uint32_t indices = (at_ == 10 || at_ == 25) && cnt == 2 ? 3 : 1;
+        uint32_t width, count;
+        switch (ty) {
+        case 0:
+            continue;
+        case 1:
+            width = gx_direct_size(at_, cnt, comp);
+            count = 0;
+            if (width == 0) {
+                return false;
+            }
+            break;
+        case 2:
+        case 3:
+            width = ty - 1;
+            count = indices;
+            break;
+        default:
+            return false;
+        }
+        if (n == MAX_ATTRS) {
+            return false;
+        }
+        /* Stable, as Rust's sort */
+        uint32_t order = at_ == 25 ? 10 : at_;
+        uint32_t i = n++;
+        for (; i > 0 && attrs[i - 1].order > order; i--) {
+            attrs[i] = attrs[i - 1];
+        }
+        attrs[i].order = order;
+        attrs[i].width = width;
+        attrs[i].count = count;
+        attrs[i].target = at_ == attr;
+    }
+    bool found = false;
+    uint64_t max = 0;
+    uint64_t at = 0;
+    while (at < dl_len) {
+        uint8_t opcode = dl[at];
+        if (opcode == 0) {
+            break;
+        }
+        switch (opcode & 0xF8) {
+        case 0x80:
+        case 0x90:
+        case 0x98:
+        case 0xA0:
+        case 0xA8:
+        case 0xB0:
+        case 0xB8:
+            break;
+        default:
+            return false;
+        }
+        if (at + 3 > dl_len) {
+            return false;
+        }
+        uint32_t vertices = (uint32_t) dl[at + 1] << 8 | dl[at + 2];
+        at += 3;
+        for (uint32_t v = 0; v < vertices; v++) {
+            for (uint32_t i = 0; i < n; i++) {
+                uint64_t size = (uint64_t) attrs[i].width *
+                                (attrs[i].count > 0 ? attrs[i].count : 1);
+                if (at + size > dl_len) {
+                    return false;
+                }
+                for (uint32_t k = 0; attrs[i].target && k < attrs[i].count;
+                     k++)
+                {
+                    const uint8_t* p = dl + at + k * attrs[i].width;
+                    uint64_t index = attrs[i].width == 2
+                                         ? (uint64_t) p[0] << 8 | p[1]
+                                         : p[0];
+                    if (!found || index > max) {
+                        max = index;
+                    }
+                    found = true;
+                }
+                at += size;
+            }
+        }
+    }
+    *out = max;
+    return found;
+}
+
 /// How deep a name's macro is expanded within macros, as `melee-dat`
 /// expands them.
 #define MACRO_DEPTH 16
 
 static bool eval_at(const DatArchive* a, const Context* c, const DatExpr* e,
-                    unsigned depth, uint64_t* out)
+                    unsigned depth, Value* out);
+
+/// An operand, which must be an integer.
+static bool eval_int(const DatArchive* a, const Context* c, const DatExpr* e,
+                     unsigned depth, uint64_t* out)
+{
+    Value v;
+    if (!eval_at(a, c, e, depth, &v) || v.bytes != NULL) {
+        return false;
+    }
+    *out = v.i;
+    return true;
+}
+
+static bool eval_at(const DatArchive* a, const Context* c, const DatExpr* e,
+                    unsigned depth, Value* out)
 {
     if (e == NULL) {
         return false;
     }
+    *out = (Value){ 0, NULL, 0 };
     uint64_t x, y;
     switch (e->op) {
     case DAT_OP_INT:
-        *out = e->value;
+        out->i = e->value;
         return true;
     case DAT_OP_NAME:
         return resolve_name(a, c, e->name, out) ||
@@ -1165,7 +1378,7 @@ static bool eval_at(const DatArchive* a, const Context* c, const DatExpr* e,
     case DAT_OP_FAIL:
         return false;
     case DAT_OP_CALL: {
-        uint64_t args[8];
+        Value args[8];
         if (e->nargs > 8) {
             return false;
         }
@@ -1174,22 +1387,34 @@ static bool eval_at(const DatArchive* a, const Context* c, const DatExpr* e,
                 return false;
             }
         }
+        /* Which arguments are bytes, a bit each */
+        unsigned bytes = 0;
+        for (uint8_t i = 0; i < e->nargs; i++) {
+            bytes |= (args[i].bytes != NULL) << i;
+        }
         switch (e->function) {
         case DAT_FN_IT_COMMAND_LENGTH:
-            return e->nargs == 1 && it_command_length(args[0], out);
+            return e->nargs == 1 && bytes == 0 &&
+                   it_command_length(args[0].i, &out->i);
         case DAT_FN_COL_ANIM_COMMAND_LENGTH:
-            return e->nargs == 1 && col_anim_command_length(args[0], out);
+            return e->nargs == 1 && bytes == 0 &&
+                   col_anim_command_length(args[0].i, &out->i);
         case DAT_FN_CPU_COMMAND_LENGTH:
-            if (e->nargs != 1) {
+            if (e->nargs != 1 || bytes != 0) {
                 return false;
             }
-            *out = cpu_command_length(args[0]);
+            out->i = cpu_command_length(args[0].i);
             return true;
         case DAT_FN_GX_GET_TEX_BUFFER_SIZE:
-            return e->nargs == 5 && gx_get_tex_buffer_size(
-                                        (uint16_t) args[0], (uint16_t) args[1],
-                                        (uint32_t) args[2], (uint8_t) args[3],
-                                        (uint8_t) args[4], out);
+            return e->nargs == 5 && bytes == 0 &&
+                   gx_get_tex_buffer_size(
+                       (uint16_t) args[0].i, (uint16_t) args[1].i,
+                       (uint32_t) args[2].i, (uint8_t) args[3].i,
+                       (uint8_t) args[4].i, &out->i);
+        case DAT_FN_GX_MAX_INDEX:
+            return e->nargs == 3 && bytes == 3 &&
+                   gx_max_index(args[0].bytes, args[0].len, args[1].bytes,
+                                args[1].len, args[2].i, &out->i);
         default:
             return false;
         }
@@ -1197,110 +1422,111 @@ static bool eval_at(const DatArchive* a, const Context* c, const DatExpr* e,
     case DAT_OP_NOT:
     case DAT_OP_BITNOT:
     case DAT_OP_NEG:
-        if (!eval_at(a, c, e->a, depth, &x)) {
+        if (!eval_int(a, c, e->a, depth, &x)) {
             return false;
         }
-        *out = e->op == DAT_OP_NOT      ? (x == 0)
-               : e->op == DAT_OP_BITNOT ? ~x
-                                        : (uint64_t) 0 - x;
+        out->i = e->op == DAT_OP_NOT      ? (x == 0)
+                 : e->op == DAT_OP_BITNOT ? ~x
+                                          : (uint64_t) 0 - x;
         return true;
     case DAT_OP_COND:
-        if (!eval_at(a, c, e->cond, depth, &x)) {
+        if (!eval_int(a, c, e->cond, depth, &x)) {
             return false;
         }
         return eval_at(a, c, x != 0 ? e->a : e->b, depth, out);
     default:
         break;
     }
-    if (!eval_at(a, c, e->a, depth, &x)) {
+    if (!eval_int(a, c, e->a, depth, &x)) {
         return false;
     }
     /* Short-circuit like C, so the other side may be unresolved */
     if (e->op == DAT_OP_OR && x != 0) {
-        *out = 1;
+        out->i = 1;
         return true;
     }
     if (e->op == DAT_OP_AND && x == 0) {
-        *out = 0;
+        out->i = 0;
         return true;
     }
-    if (!eval_at(a, c, e->b, depth, &y)) {
+    if (!eval_int(a, c, e->b, depth, &y)) {
         return false;
     }
     switch (e->op) {
     case DAT_OP_OR:
     case DAT_OP_AND:
-        *out = y != 0;
+        out->i = y != 0;
         return true;
     case DAT_OP_BITOR:
-        *out = x | y;
+        out->i = x | y;
         return true;
     case DAT_OP_BITXOR:
-        *out = x ^ y;
+        out->i = x ^ y;
         return true;
     case DAT_OP_BITAND:
-        *out = x & y;
+        out->i = x & y;
         return true;
     case DAT_OP_EQ:
-        *out = x == y;
+        out->i = x == y;
         return true;
     case DAT_OP_NE:
-        *out = x != y;
+        out->i = x != y;
         return true;
     case DAT_OP_LT:
-        *out = x < y;
+        out->i = x < y;
         return true;
     case DAT_OP_GT:
-        *out = x > y;
+        out->i = x > y;
         return true;
     case DAT_OP_LE:
-        *out = x <= y;
+        out->i = x <= y;
         return true;
     case DAT_OP_GE:
-        *out = x >= y;
+        out->i = x >= y;
         return true;
     case DAT_OP_SHL:
         if (y >= 64) {
             return false;
         }
-        *out = x << y;
+        out->i = x << y;
         return true;
     case DAT_OP_SHR:
         if (y >= 64) {
             return false;
         }
-        *out = x >> y;
+        out->i = x >> y;
         return true;
     case DAT_OP_ADD:
-        *out = x + y;
+        out->i = x + y;
         return true;
     case DAT_OP_SUB:
-        *out = x - y;
+        out->i = x - y;
         return true;
     case DAT_OP_MUL:
-        *out = x * y;
+        out->i = x * y;
         return true;
     case DAT_OP_DIV:
         if (y == 0) {
             return false;
         }
-        *out = x / y;
+        out->i = x / y;
         return true;
     case DAT_OP_REM:
         if (y == 0) {
             return false;
         }
-        *out = x % y;
+        out->i = x % y;
         return true;
     default:
         return false;
     }
 }
 
+/// An expression whose value must be an integer.
 static bool eval(const DatArchive* a, const Context* c, const DatExpr* e,
                  uint64_t* out)
 {
-    return eval_at(a, c, e, 0, out);
+    return eval_int(a, c, e, 0, out);
 }
 
 /* --- The walk -------------------------------------------------------------
@@ -1503,8 +1729,8 @@ static const Scope* bound(DatArchive* a, const Scope* outer,
                       base,      DAT_NONE,
                       0,         outer,
                       index,     0 };
-        uint64_t value;
-        if (eval(a, &c, b->value, &value)) {
+        Value value;
+        if (eval_at(a, &c, b->value, 0, &value)) {
             Scope* s = arena_alloc(&a->arena, sizeof(Scope));
             s->name = b->name;
             s->value = value;
@@ -1524,6 +1750,8 @@ typedef struct Parent {
 
 static void layout(DatArchive* a, uint32_t offset, int32_t type, void* native,
                    Parent parent);
+static void extent(DatArchive* a, uint32_t offset, int32_t array,
+                   const DatMember* m, Parent parent, void* native);
 
 static bool fits(const DatArchive* a, uint32_t offset, int32_t type)
 {
@@ -1691,14 +1919,15 @@ static void counted(DatArchive* a, uint32_t offset, int32_t pointer,
     if (count > 0 && !opaque(a, raw)) {
         reference(a, slot, value, e);
     }
+    /* As long as the longest count, for data several pointers count */
     if (count > 0 && !T(a, e)->has_pointers && !conditioned(T(a, e))) {
+        typed_extent(a, value, raw, count);
         void* block = plain_array(a, value, raw, e, count);
         if (!visit(a, value, e)) {
             store_pointer(slot, block);
             return;
         }
         reached(a, value, e);
-        typed_extent(a, value, raw, count);
         set_native(a, value, e, block);
         store_pointer(slot, block);
         relocated_words(a, value, value + count * size);
@@ -1718,6 +1947,48 @@ static void counted(DatArchive* a, uint32_t offset, int32_t pointer,
             m ? bound(a, outer, m, parent.record, parent.base, parent.some, i)
               : outer;
         push(a, (uint32_t) (value + i * size), raw, env, block + i * ns, NULL);
+    }
+}
+
+/// Recheck plain pointer fields when bindings change on a visited record.
+/// Shared vertex descriptors can supply a longer count or an extent fallback.
+static void recount(DatArchive* a, uint32_t offset, int32_t type)
+{
+    int32_t r = resolve(a, type);
+    if (r == DAT_NONE || T(a, r)->kind != DAT_KIND_STRUCT) {
+        return;
+    }
+    const DatType* t = T(a, r);
+    for (uint32_t i = 0; i < t->nmembers; i++) {
+        const DatMember* m = &t->members[i];
+        if (m->bit_size || m->type == DAT_NONE || !m->has_offset ||
+            (m->count == NULL && !m->extent))
+        {
+            continue;
+        }
+        uint32_t at = offset + m->offset;
+        int32_t p = resolve(a, m->type);
+        if (p == DAT_NONE || T(a, p)->kind != DAT_KIND_POINTER ||
+            !bits_has(&a->reloc, at, a->size))
+        {
+            continue;
+        }
+        int32_t e = m->type_tag != DAT_NONE ? m->type_tag
+                                            : pointee(a, T(a, p)->target);
+        if (e == DAT_NONE || T(a, e)->has_pointers) {
+            continue;
+        }
+        Parent here = { r, offset, true };
+        const Scope* outer = a->env;
+        a->env = bound(a, outer, m, r, offset, true, 0);
+        uint64_t count;
+        Context c = { MODE_COUNT, r, offset, DAT_NONE, 0, a->env, 0, 0 };
+        if (m->count != NULL && eval(a, &c, m->count, &count)) {
+            counted(a, at, m->type, m->type_tag, count, m, here, NULL);
+        } else if (m->extent) {
+            extent(a, at, m->type, m, here, NULL);
+        }
+        a->env = outer;
     }
 }
 
@@ -1803,6 +2074,7 @@ static void terminated(DatArchive* a, uint32_t offset, int32_t pointer,
             layout(a, at, ty, native, none);
         } else {
             copy_of(a, at, e, native);
+            recount(a, at, ty);
         }
         a->env = env;
     }
@@ -1861,21 +2133,30 @@ static void extent(DatArchive* a, uint32_t offset, int32_t array,
             store_pointer(native, a->data + value);
             return;
         }
+        if (opaque(a, raw != DAT_NONE ? raw : target)) {
+            uint32_t size = T(a, target)->size;
+            uint64_t count = extent_bound(a, value, size);
+            for (uint64_t i = 1; i < count; i++) {
+                uint32_t at = (uint32_t) (value + i * size);
+                if (bits_has(&a->object, at, a->size) || !fits(a, at, target))
+                {
+                    count = i;
+                    break;
+                }
+            }
+            counted(a, offset, array, DAT_NONE, count, m, parent, native);
+            return;
+        }
         if (!visit(a, value, target)) {
             store_pointer(native, native_of(a, value, target));
             return;
         }
         reached(a, value, target);
         uint32_t size = T(a, target)->size;
-        if (opaque(a, raw != DAT_NONE ? raw : target)) {
-            base = NULL;
-            store_pointer(native, a->data + value);
-        } else {
-            uint64_t n = extent_bound(a, value, size);
-            base = native_array(a, value, target, n);
-            store_pointer(native, base);
-            reference(a, native, value, target);
-        }
+        uint64_t n = extent_bound(a, value, size);
+        base = native_array(a, value, target, n);
+        store_pointer(native, base);
+        reference(a, native, value, target);
         set_native(a, value, target, base);
         offset = value;
         element = raw;
@@ -2352,6 +2633,7 @@ static void object(DatArchive* a, Task task)
             store_pointer(task.slot, existing);
         }
         copy_of(a, task.offset, r, task.native);
+        recount(a, task.offset, task.type);
         return;
     }
     /* Every object is made natively, even one reached through a field that
@@ -2435,7 +2717,7 @@ static const Scope* root_env(DatArchive* a, const DatRoot* root)
         const DatRootBind* b = &root->binds[i];
         Scope* s = arena_alloc(&a->arena, sizeof(Scope));
         s->name = b->name;
-        s->value = b->value;
+        s->value = (Value){ b->value, NULL, 0 };
         s->outer = env;
         env = s;
     }

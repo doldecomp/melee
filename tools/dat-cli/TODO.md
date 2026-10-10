@@ -98,23 +98,12 @@ Not errors:
   next public or pointer target, for the ones no reached `HSD_ImageDesc` or
   `HSD_TlutDesc` sizes (e.g. GrIz and GrPu, whose descs nothing reached
   points to).
-- Vertex arrays (`HSD_VtxDescList.vertex`, an `HSD_VertexArray` blob) run
-  to the next object. Their length is (the largest index the display lists
-  use + 1) × `stride`. Plan:
-  - The evaluator gets a byte-slice value besides integers: a pointer
-    field whose own annotation gives its length (`DAT_COUNT`,
-    `DAT_TERMINATED`) evaluates to the data it points to. `DAT_BIND` scopes
-    and `call` take such values; functions stay pure over fixed bytes.
-  - `HSD_PObjDesc.verts` binds `DAT_BIND(dl, display) DAT_BIND(descs,
-    verts)`; `vertex` gets `DAT_COUNT((GXMaxIndex(dl, descs, attr) + 1) *
-    stride)`.
-  - `GXMaxIndex` is a tool-side helper, not a port: it decodes the display
-    list as the GameCube lays it out (opcode byte, `u16` vertex count, then
-    per vertex an entry per attribute in `verts` order: `GX_INDEX8` 1 byte,
-    `GX_INDEX16` 2, `GX_DIRECT` inline by `comp_cnt`/`comp_type`; up to the
-    0 opcode) and returns the largest index for `attr`.
-  - Arrays shared between PObjs already take the largest extent. Shape
-    animations (`HSD_ShapeSetDesc.vertex_idx_list`) index them too.
+- Vertex arrays are sized by `GXMaxIndex` over the display lists of the
+  shapes that reach their descriptors. Shape-animation index lists
+  (`HSD_ShapeSetDesc.vertex_idx_list` and `normal_idx_list`) aren't sized
+  yet. Descriptors reached without a display list retain `DAT_EXTENT`
+  inference. Exact index-list lengths and the largest vertex index across
+  both display lists and shape-animation lists remain to be inferred.
 - The particle banks (`EffectDataTable.cmd_bank`/`tex_bank`, `map_ptcl`,
   `map_texg`) use `DAT_EXTENT`/`extent`. Their headers give their sizes, as
   `psInitDataBankLocate` reads them: a header struct with counted members,
@@ -157,6 +146,11 @@ Not errors:
 
 ## Native archive interface
 
+- Refactor the runtime/codegen boundary in a separate PR. `archive.c`
+  should only handle archive loading, relocation and symbol lookup, as
+  `baselib/archive.c` and `lbarchive.c` do. Generate per-type parsing as C
+  during the build instead of interpreting DAT annotations in the runtime.
+  See [the maintainer review](https://github.com/doldecomp/melee/pull/3653#discussion_r4233506063).
 - An array root whose first element was already visited uses the walker's
   existing one-object view, even when a later request gives a larger count.
 - A pointer to plain data without `DAT_COUNT`, `DAT_EXTENT` or

@@ -456,6 +456,21 @@ would. Calls are to functions of the code that the tool ports
 (`interop/dwarf/expr.rs`), so an annotation can say what the game itself
 computes: `GXGetTexBufferSize`.
 
+A relocated pointer field with its own `DAT_COUNT` or `DAT_TERMINATED`
+evaluates to the bytes it points to. Calls and bindings accept these values;
+arithmetic does not. `GXMaxIndex(dl, descs, attr)` returns the largest index
+used for a vertex attribute. This tool helper decodes `GX_INDEX8`,
+`GX_INDEX16` and inline `GX_DIRECT` entries in hardware attribute order.
+A zero opcode or the end of the display list stops decoding.
+
+`HSD_PObjDesc` binds the display list and vertex descriptors. Each vertex
+array uses `(largest index + 1) * stride` bytes. Shared arrays retain the
+largest count across shapes, including shapes that share a descriptor list.
+The walker rechecks counted pointers under each shape's bindings. Without
+a display list, such as when a shape set reaches a descriptor, `DAT_EXTENT`
+keeps the fallback up to the next object. Exact shape-animation index sizing
+remains a TODO.
+
 ```c
 void* unk0 DAT_COUNT(unk4);
 s32 unk4;
@@ -464,6 +479,11 @@ HSD_Spline* spline DAT_IF((flags & JOBJ_SPLINE) != 0);
 
 HSD_ImageData* image_ptr DAT_COUNT(GXGetTexBufferSize(
     width, height, format, mipmap, maxLOD + 1));
+
+HSD_VtxDescList* verts DAT_TERMINATED(GX_VA_NULL) DAT_BIND(dl, display)
+    DAT_BIND(descs, verts);
+HSD_VertexArray* vertex DAT_COUNT((GXMaxIndex(dl, descs, attr) + 1) * stride)
+    DAT_EXTENT;
 
 Article** x4 DAT_COUNT(It_Kind_Section_Common_Extended_End) DAT_BIND(Article::kind, _index);
 ItCapsuleAttr capsule DAT_IF(Article::kind == It_Kind_Capsule);
