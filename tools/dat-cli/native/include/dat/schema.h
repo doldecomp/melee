@@ -45,6 +45,8 @@ struct DatScope;
 struct DatVerify;
 /// A compiled expression. Rust emits its evaluator as ordinary C.
 typedef struct DatExpr {
+    /// Return 1 with a value, or 0 for unresolved/undefined operations.
+    /// Arithmetic wraps at 64 bits. Depth counts macro expansion only.
     int (*evaluate)(const struct DatArchive*, const struct DatContext*,
                     unsigned, uint64_t*);
 } DatExpr;
@@ -68,13 +70,23 @@ typedef struct DatScript {
     uint8_t bytes;
 } DatScript;
 
+/// Generated implementation contract. All callbacks are present, including
+/// no-ops for inapplicable operations. Layout changes belong in Rust codegen.
 typedef struct DatType {
+    /// Apply this type's annotations and read at the archive offset. Native
+    /// may be NULL when only traversing; parent supplies union context.
     void (*read)(struct DatArchive*, uint32_t, void*, const struct DatParent*);
+    /// Convert the resolved plain layout into non-NULL native storage.
     void (*convert)(struct DatArchive*, uint32_t, void*);
+    /// Check relocation compatibility for the resolved layout.
     int (*fits)(const struct DatArchive*, uint32_t);
+    /// Resolve a field name at a record's archive base; return 0 if absent.
     int (*field)(const struct DatArchive*, uint32_t, int32_t, uint64_t*);
+    /// Search union members' fields in declaration order, for conditions.
     int (*union_field)(const struct DatArchive*, uint32_t, int32_t, uint64_t*);
+    /// Resolved native storage size, including a bounded flexible tail.
     size_t (*allocation_size)(struct DatArchive*, uint32_t);
+    /// Compare the resolved native layout with archive bytes.
     void (*verify)(struct DatVerify*, uint32_t, const void*, int);
     uint8_t conditioned;
     /// The type's name, for traces.

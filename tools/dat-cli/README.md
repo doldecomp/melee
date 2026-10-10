@@ -358,6 +358,20 @@ per-element bindings and typedef behavior. The shared helpers preserve
 array identity, cycles and deferred pointer fixups. `DatType` contains
 storage information and callbacks, rather than member annotation tables.
 
+The generator is split into type operations (`emit/readers.rs`), member
+annotations (`emit/members.rs`) and expressions (`emit/expressions.rs`).
+Each complete expression becomes one C function, with lazy branches and
+unsigned 64-bit arithmetic. Macro references call separate evaluators with
+a bounded expansion depth. Unresolved names and undefined operations return
+failure so the reader can retain the annotation's fallback behavior.
+
+Add type or annotation behavior in the generator. Keep shared storage,
+reference fixups and byte operations in `reader.c`; keep archive loading in
+`archive.c`. The callback contract in `dat/schema.h` and the helpers in
+`dat/reader-internal.h` connect the generated code to that runtime. Extend
+the contract when a concrete consumer needs a new value or operation, with
+fixtures compiled through the same emitter and real-archive parity checks.
+
 ```c
 #include "melee_dat.h"
 

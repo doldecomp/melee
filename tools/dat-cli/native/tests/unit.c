@@ -492,34 +492,45 @@ static void test_refuses(void)
     CHECK(dat_open(&schema, bad, size, &error) == NULL);
 }
 
+static void check_inline_count(const DatSchema* schema, uint32_t count,
+                               uint32_t expected)
+{
+    unsigned char file[0x200];
+    size_t size = build_inline(file, count, false);
+    DatArchive* a = dat_open(schema, file, size, NULL);
+    CHECK(a != NULL);
+    InlineLeaves* leaves = dat_public(a, "root", T_INLINE_LEAVES);
+    CHECK(leaves != NULL && leaves->n == (int32_t) count);
+    char* text = trace(a);
+    CHECK(!contains(text, "issue"));
+    CHECK(contains(text, "extent 0x10 0x1C") == (expected == 2));
+    if (expected != 0 && leaves != NULL) {
+        CHECK(leaves->entries[0].c == 123);
+    }
+    if (expected == 2 && leaves != NULL) {
+        CHECK(leaves->entries[1].c == 456);
+    }
+    CHECK(dat_verify(a, NULL) == 0);
+    free(text);
+    dat_close(a);
+}
+
 static void test_conditional_counts(void)
 {
-    /* An unresolved inactive branch must not stop a count from being read. */
+    /* Inactive unresolved or undefined branches must stay unevaluated. */
     const DatSchema* variants[] = {
         &fixture_conditional0_schema, &fixture_conditional1_schema,
         &fixture_conditional2_schema, &fixture_conditional3_schema,
-        &fixture_conditional4_schema, &fixture_conditional5_schema
+        &fixture_conditional4_schema, &fixture_conditional5_schema,
+        &fixture_conditional6_schema, &fixture_conditional7_schema
     };
     for (size_t i = 0; i < DAT_COUNTOF(variants); i++) {
-        const DatSchema local_schema = *variants[i];
-        for (uint32_t count = 0; count <= 2; count += 2) {
-            unsigned char file[0x200];
-            size_t size = build_inline(file, count, false);
-            DatArchive* a = dat_open(&local_schema, file, size, NULL);
-            CHECK(a != NULL);
-            InlineLeaves* leaves = dat_public(a, "root", T_INLINE_LEAVES);
-            CHECK(leaves != NULL && leaves->n == (int32_t) count);
-            char* text = trace(a);
-            CHECK(!contains(text, "issue"));
-            CHECK(contains(text, "extent 0x10 0x1C") == (count == 2));
-            if (count == 2 && leaves != NULL) {
-                CHECK(leaves->entries[1].c == 456);
-            }
-            CHECK(dat_verify(a, NULL) == 0);
-            free(text);
-            dat_close(a);
-        }
+        check_inline_count(variants[i], 0, 0);
+        check_inline_count(variants[i], 2, 2);
     }
+    /* Undefined active operations retain the default single element. */
+    check_inline_count(&fixture_invalid0_schema, 2, 1);
+    check_inline_count(&fixture_invalid1_schema, 2, 1);
 }
 
 static void test_union_member_binding(void)

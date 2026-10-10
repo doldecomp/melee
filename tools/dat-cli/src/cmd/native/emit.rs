@@ -16,10 +16,7 @@ use super::generator::{
 };
 use anyhow::{Result, bail};
 use melee_dat::{
-    dwarf::{
-        DieId, TypeKind,
-        expr::{BinaryOp, Expr, UnaryOp},
-    },
+    dwarf::{DieId, TypeKind, expr::Expr},
     symbols::Count,
 };
 use std::{
@@ -39,6 +36,7 @@ const LINE: usize = 100;
 /// The files, by path in the output directory.
 pub type Output = BTreeMap<String, String>;
 
+mod expressions;
 mod members;
 mod readers;
 
@@ -353,23 +351,21 @@ impl Emitter<'_, '_> {
         Ok(())
     }
 
-    /// A script's `.script` field.
+    /// A C expression pointing to a script descriptor.
     fn script(&mut self, script: &ScriptRow) -> String {
         match script {
             ScriptRow::Table(table, bytes) => {
                 self.scripts.insert(table.clone(), bytes.clone());
-                format!(".script = &dat_script_{}", identifier(table))
+                format!("&dat_script_{}", identifier(table))
             }
             ScriptRow::Length(length) => {
                 let length = self.expr(length);
-                format!(
-                    ".script = &(const DatScript) {{ .length = {length} }}"
-                )
+                format!("&(const DatScript) {{ .length = {length} }}")
             }
             ScriptRow::Bytes(length) => {
                 let length = self.expr(length);
                 format!(
-                    ".script = &(const DatScript) {{ .length = {length}, .bytes = 1 }}"
+                    "&(const DatScript) {{ .length = {length}, .bytes = 1 }}"
                 )
             }
         }
@@ -397,7 +393,7 @@ impl Emitter<'_, '_> {
             }
         }
         if let Some(script) = &root.script {
-            parts.push(self.script(script));
+            parts.push(format!(".script = {}", self.script(script)));
         }
         if !root.binds.is_empty() {
             let binds: Vec<String> = root
@@ -410,141 +406,6 @@ impl Emitter<'_, '_> {
             parts.push(format!("DAT_ROOT_BINDS({})", binds.join(", ")));
         }
         parts
-    }
-
-    /// Compile an expression to a function; there is no runtime operator AST.
-    fn expr(&mut self, expr: &Expr) -> String {
-        let id = self.next_expression;
-        self.next_expression += 1;
-        let name = format!("dat_expression_{id}");
-        let mut body = String::new();
-        match expr {
-            Expr::Int(value) => {
-                let _ = writeln!(body, "*out = {}; return 1;", int(*value));
-            }
-            Expr::Name(n) => {
-                let ident = self.name(n);
-                let _ = writeln!(
-                    body,
-                    "if (dat_reader_resolve_name(a, c, {ident}, out)) return 1;"
-                );
-                if self.macro_body(n) {
-                    let _ = writeln!(
-                        body,
-                        "return depth < MACRO_DEPTH && dat_reader_eval_at(a, c, &dat_macro_{}, depth + 1, out);",
-                        identifier(n)
-                    );
-                } else {
-                    body.push_str("return 0;\n");
-                }
-            }
-            Expr::Call(function, args) => {
-                let args: Vec<String> =
-                    args.iter().map(|a| self.expr(a)).collect();
-                for (i, arg) in args.iter().enumerate() {
-                    let _ = writeln!(
-                        body,
-                        "uint64_t arg{i}; if (!dat_reader_eval_at(a, c, {arg}, depth, &arg{i})) return 0;"
-                    );
-                }
-                match (function.as_str(), args.len()) {
-                    ("itCommandLength", 1) => body.push_str(
-                        "return dat_reader_it_command_length(arg0, out);\n",
-                    ),
-                    ("colAnimCommandLength", 1) => body.push_str(
-                        "return dat_reader_col_anim_command_length(arg0, out);\n",
-                    ),
-                    ("cpuCommandLength", 1) => body.push_str(
-                        "*out = dat_reader_cpu_command_length(arg0); return 1;\n",
-                    ),
-                    ("GXGetTexBufferSize", 5) => body.push_str(
-                        "return dat_reader_gx_get_tex_buffer_size((uint16_t) arg0, (uint16_t) arg1, (uint32_t) arg2, (uint8_t) arg3, (uint8_t) arg4, out);\n",
-                    ),
-                    _ => body.push_str("return 0;\n"),
-                }
-            }
-            Expr::Unary(op, a) => {
-                let a = self.expr(a);
-                let op = match op {
-                    UnaryOp::Not => "x == 0",
-                    UnaryOp::BitNot => "~x",
-                    UnaryOp::Neg => "(uint64_t) 0 - x",
-                };
-                let _ = writeln!(
-                    body,
-                    "uint64_t x; if (!dat_reader_eval_at(a, c, {a}, depth, &x)) return 0; *out = {op}; return 1;"
-                );
-            }
-            Expr::Cond(cond, a, b) => {
-                let cond = self.expr(cond);
-                let a = self.expr(a);
-                let b = self.expr(b);
-                let _ = writeln!(
-                    body,
-                    "uint64_t x; if (!dat_reader_eval_at(a, c, {cond}, depth, &x)) return 0; return dat_reader_eval_at(a, c, x ? {a} : {b}, depth, out);"
-                );
-            }
-            Expr::Binary(op, a, b) => {
-                let a = self.expr(a);
-                let b = self.expr(b);
-                let _ = writeln!(
-                    body,
-                    "uint64_t x, y; if (!dat_reader_eval_at(a, c, {a}, depth, &x)) return 0;"
-                );
-                match op {
-                    BinaryOp::Or => {
-                        body.push_str("if (x != 0) { *out = 1; return 1; }\n")
-                    }
-                    BinaryOp::And => {
-                        body.push_str("if (x == 0) { *out = 0; return 1; }\n")
-                    }
-                    _ => {}
-                }
-                let _ = writeln!(
-                    body,
-                    "if (!dat_reader_eval_at(a, c, {b}, depth, &y)) return 0;"
-                );
-                match op {
-                    BinaryOp::Div | BinaryOp::Rem => {
-                        body.push_str("if (y == 0) return 0;\n")
-                    }
-                    BinaryOp::Shl | BinaryOp::Shr => {
-                        body.push_str("if (y >= 64) return 0;\n")
-                    }
-                    _ => {}
-                }
-                let op = match op {
-                    BinaryOp::Or | BinaryOp::And => "y != 0",
-                    BinaryOp::BitOr => "x | y",
-                    BinaryOp::BitXor => "x ^ y",
-                    BinaryOp::BitAnd => "x & y",
-                    BinaryOp::Eq => "x == y",
-                    BinaryOp::Ne => "x != y",
-                    BinaryOp::Lt => "x < y",
-                    BinaryOp::Gt => "x > y",
-                    BinaryOp::Le => "x <= y",
-                    BinaryOp::Ge => "x >= y",
-                    BinaryOp::Shl => "x << y",
-                    BinaryOp::Shr => "x >> y",
-                    BinaryOp::Add => "x + y",
-                    BinaryOp::Sub => "x - y",
-                    BinaryOp::Mul => "x * y",
-                    BinaryOp::Div => "x / y",
-                    BinaryOp::Rem => "x % y",
-                };
-                let _ = writeln!(body, "*out = {op}; return 1;");
-            }
-        }
-        let _ = writeln!(
-            self.expression_code,
-            "static int {name}_eval(const DatArchive* a, const DatContext* c, unsigned depth, uint64_t* out) {{\n{body}}}\nstatic const DatExpr {name} = {{ .evaluate = {name}_eval }};\n"
-        );
-        format!("&{name}")
-    }
-
-    fn fields(&mut self, expr: &Expr) -> String {
-        let expr = self.expr(expr);
-        format!(".evaluate = {}_eval", expr.trim_start_matches('&'))
     }
 
     /// Whether a name has a macro to fall back on, noting it if so.

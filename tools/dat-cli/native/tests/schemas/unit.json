@@ -588,6 +588,82 @@
           }
         ]
       }
+    },
+    "conditional6": {
+      "T_INLINE_LEAVES": {
+        "members": [
+          {
+            "type": "T_S32",
+            "offset": 0,
+            "record": "InlineLeaves",
+            "field": "n",
+            "name": "n"
+          },
+          {
+            "type": "T_LEAF_ARRAY",
+            "offset": 4,
+            "native_offset": "offsetof(InlineLeaves, entries)",
+            "count": "(n ? n / n : 1) ? -(-n) : missing()"
+          }
+        ]
+      }
+    },
+    "conditional7": {
+      "T_INLINE_LEAVES": {
+        "members": [
+          {
+            "type": "T_S32",
+            "offset": 0,
+            "record": "InlineLeaves",
+            "field": "n",
+            "name": "n"
+          },
+          {
+            "type": "T_LEAF_ARRAY",
+            "offset": 4,
+            "native_offset": "offsetof(InlineLeaves, entries)",
+            "count": "(1 || (1 << 64)) && !(0 && (1 % 0)) ? n : missing()"
+          }
+        ]
+      }
+    },
+    "invalid0": {
+      "T_INLINE_LEAVES": {
+        "members": [
+          {
+            "type": "T_S32",
+            "offset": 0,
+            "record": "InlineLeaves",
+            "field": "n",
+            "name": "n"
+          },
+          {
+            "type": "T_LEAF_ARRAY",
+            "offset": 4,
+            "native_offset": "offsetof(InlineLeaves, entries)",
+            "count": "n / 0"
+          }
+        ]
+      }
+    },
+    "invalid1": {
+      "T_INLINE_LEAVES": {
+        "members": [
+          {
+            "type": "T_S32",
+            "offset": 0,
+            "record": "InlineLeaves",
+            "field": "n",
+            "name": "n"
+          },
+          {
+            "type": "T_LEAF_ARRAY",
+            "offset": 4,
+            "native_offset": "offsetof(InlineLeaves, entries)",
+            "count": "1 << 64"
+          }
+        ]
+      }
     }
   }
 }

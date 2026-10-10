@@ -64,7 +64,7 @@ impl Emitter<'_, '_> {
                 c,
                 "dat_reader_script(a, at, {}, {}, field);",
                 self.ty(m.ty),
-                script.strip_prefix(".script = ").unwrap()
+                script
             )?;
         } else if m.extent {
             writeln!(
@@ -276,7 +276,7 @@ impl Emitter<'_, '_> {
                     writeln!(
                         c,
                         "dat_reader_script(a, offset, {ty}, {}, native);",
-                        script.strip_prefix(".script = ").unwrap()
+                        script
                     )?;
                 } else if let Some(expr) = &m.terminator {
                     let expr = self.expr(expr);
