@@ -146,6 +146,11 @@ Not errors:
 
 ## Native archive interface
 
+- Refactor the runtime/codegen boundary in a separate PR. `archive.c`
+  should only handle archive loading, relocation and symbol lookup, as
+  `baselib/archive.c` and `lbarchive.c` do. Generate per-type parsing as C
+  during the build instead of interpreting DAT annotations in the runtime.
+  See [the maintainer review](https://github.com/doldecomp/melee/pull/3653#discussion_r4233506063).
 - An array root whose first element was already visited uses the walker's
   existing one-object view, even when a later request gives a larger count.
 - A pointer to plain data without `DAT_COUNT`, `DAT_EXTENT` or
