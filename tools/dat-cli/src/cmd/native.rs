@@ -2,12 +2,13 @@
 //! the game's own types on any platform, and what it should reach.
 //!
 //! - `codegen`: the schema, as C, from the DWARF and `dat_symbols.txt`: a
-//!   descriptor for each type, in a file for each header of the game's
+//!   compiled reader for each type, in a file for each game header
 //!   (see [`emit`])
 //! - `expect`: what the walk reaches in each archive, in the form the
 //!   library's `dat_trace` prints, for its end-to-end tests
 
 mod emit;
+mod fixtures;
 mod generator;
 
 use super::project::{Check, Project};
@@ -38,6 +39,10 @@ enum Command {
 
     /// Print what the walk reaches in each archive, as `dat_trace` does
     Expect(Expect),
+
+    /// Generate the native regression fixtures with the production emitter.
+    #[command(hide = true)]
+    Fixtures { out_dir: PathBuf },
 }
 
 #[derive(clap::Args)]
@@ -63,6 +68,7 @@ pub fn run(Args { command }: Args) -> Result<()> {
     match command {
         Command::Codegen(args) => codegen(args),
         Command::Expect(args) => expect(args),
+        Command::Fixtures { out_dir } => fixtures::generate(&out_dir),
     }
 }
 
