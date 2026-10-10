@@ -1,0 +1,422 @@
+{
+  "types": [
+    {
+      "key": "T_INT",
+      "name": "int",
+      "kind": "int",
+      "size": 4,
+      "native_size": "sizeof(int64_t)",
+      "is_signed": true
+    },
+    {
+      "key": "T_COUNT",
+      "name": "count",
+      "kind": "int",
+      "size": 4,
+      "native_size": "sizeof(uint32_t)"
+    },
+    {
+      "key": "T_ITEM",
+      "name": "Item",
+      "kind": "struct",
+      "size": 8,
+      "native_size": "sizeof(Item)",
+      "members": [
+        {
+          "type": "T_INT",
+          "offset": 0,
+          "record": "Item",
+          "field": "value",
+          "name": "value"
+        },
+        {
+          "type": "T_ITEM_P",
+          "offset": 4,
+          "record": "Item",
+          "field": "next",
+          "name": "next"
+        }
+      ],
+      "has_pointers": true
+    },
+    {
+      "key": "T_ITEM_P",
+      "name": "T_ITEM_P",
+      "kind": "pointer",
+      "size": 4,
+      "native_size": "sizeof(void*)",
+      "target": "T_ITEM",
+      "has_pointers": true
+    },
+    {
+      "key": "T_ROW",
+      "name": "Item[3]",
+      "kind": "array",
+      "size": 24,
+      "native_size": "sizeof(Item[3])",
+      "target": "T_ITEM",
+      "count": 3,
+      "has_pointers": true
+    },
+    {
+      "key": "T_MATRIX",
+      "name": "Item[2][3]",
+      "kind": "array",
+      "size": 48,
+      "native_size": "sizeof(Item[2][3])",
+      "target": "T_ROW",
+      "count": 2,
+      "has_pointers": true
+    },
+    {
+      "key": "T_MATRIX_P",
+      "name": "T_MATRIX_P",
+      "kind": "pointer",
+      "size": 4,
+      "native_size": "sizeof(void*)",
+      "target": "T_MATRIX",
+      "has_pointers": true
+    },
+    {
+      "key": "T_INLINE_ARRAY",
+      "name": "Item[]",
+      "kind": "array",
+      "size": 0,
+      "native_size": "sizeof(Item)",
+      "target": "T_ITEM",
+      "count": 1,
+      "has_pointers": true,
+      "unbounded": true
+    },
+    {
+      "key": "T_INLINE",
+      "name": "Inline",
+      "kind": "struct",
+      "size": 4,
+      "native_size": "sizeof(Inline)",
+      "members": [
+        {
+          "type": "T_COUNT",
+          "offset": 0,
+          "record": "Inline",
+          "field": "n",
+          "name": "n"
+        },
+        {
+          "type": "T_INLINE_ARRAY",
+          "offset": 4,
+          "native_offset": "offsetof(Inline, items)",
+          "count": "n"
+        }
+      ],
+      "has_pointers": true
+    },
+    {
+      "key": "T_INLINE_P",
+      "name": "T_INLINE_P",
+      "kind": "pointer",
+      "size": 4,
+      "native_size": "sizeof(void*)",
+      "target": "T_INLINE",
+      "has_pointers": true
+    },
+    {
+      "key": "T_COUNTED",
+      "name": "Counted",
+      "kind": "struct",
+      "size": 8,
+      "native_size": "sizeof(Counted)",
+      "members": [
+        {
+          "type": "T_COUNT",
+          "offset": 0,
+          "record": "Counted",
+          "field": "n",
+          "name": "n"
+        },
+        {
+          "type": "T_ITEM_P",
+          "offset": 4,
+          "count": "n",
+          "record": "Counted",
+          "field": "items",
+          "name": "items"
+        }
+      ],
+      "has_pointers": true
+    },
+    {
+      "key": "T_COUNTED_P",
+      "name": "T_COUNTED_P",
+      "kind": "pointer",
+      "size": 4,
+      "native_size": "sizeof(void*)",
+      "target": "T_COUNTED",
+      "has_pointers": true
+    },
+    {
+      "key": "T_ROOT",
+      "name": "Root",
+      "kind": "struct",
+      "size": 16,
+      "native_size": "sizeof(Root)",
+      "members": [
+        {
+          "type": "T_MATRIX_P",
+          "offset": 0,
+          "record": "Root",
+          "field": "array",
+          "name": "array"
+        },
+        {
+          "type": "T_ITEM_P",
+          "offset": 4,
+          "native_offset": "offsetof(Root, refs[0])"
+        },
+        {
+          "type": "T_ITEM_P",
+          "offset": 8,
+          "native_offset": "offsetof(Root, refs[1])"
+        },
+        {
+          "type": "T_ITEM_P",
+          "offset": 12,
+          "native_offset": "offsetof(Root, refs[2])"
+        }
+      ],
+      "has_pointers": true
+    }
+  ],
+  "variants": {
+    "matrix_0_0": {
+      "T_ROOT": {
+        "members": [
+          {
+            "type": "T_MATRIX_P",
+            "offset": 0,
+            "record": "Root",
+            "field": "array",
+            "name": "array"
+          },
+          {
+            "type": "T_ITEM_P",
+            "offset": 4,
+            "native_offset": "offsetof(Root, refs[0])"
+          },
+          {
+            "type": "T_ITEM_P",
+            "offset": 8,
+            "native_offset": "offsetof(Root, refs[1])"
+          },
+          {
+            "type": "T_ITEM_P",
+            "offset": 12,
+            "native_offset": "offsetof(Root, refs[2])"
+          }
+        ]
+      }
+    },
+    "matrix_1_0": {
+      "T_ROOT": {
+        "members": [
+          {
+            "type": "T_ITEM_P",
+            "offset": 12,
+            "native_offset": "offsetof(Root, refs[2])"
+          },
+          {
+            "type": "T_ITEM_P",
+            "offset": 4,
+            "native_offset": "offsetof(Root, refs[0])"
+          },
+          {
+            "type": "T_ITEM_P",
+            "offset": 8,
+            "native_offset": "offsetof(Root, refs[1])"
+          },
+          {
+            "type": "T_MATRIX_P",
+            "offset": 0,
+            "record": "Root",
+            "field": "array",
+            "name": "array"
+          }
+        ]
+      }
+    },
+    "counted_0_0": {
+      "T_ROOT": {
+        "members": [
+          {
+            "type": "T_COUNTED_P",
+            "offset": 0,
+            "record": "Root",
+            "field": "array",
+            "name": "array"
+          },
+          {
+            "type": "T_ITEM_P",
+            "offset": 4,
+            "native_offset": "offsetof(Root, refs[0])"
+          },
+          {
+            "type": "T_ITEM_P",
+            "offset": 8,
+            "native_offset": "offsetof(Root, refs[1])"
+          },
+          {
+            "type": "T_ITEM_P",
+            "offset": 12,
+            "native_offset": "offsetof(Root, refs[2])"
+          }
+        ]
+      }
+    },
+    "counted_0_1": {
+      "T_ROOT": {
+        "members": [
+          {
+            "type": "T_COUNTED_P",
+            "offset": 0,
+            "record": "Root",
+            "field": "array",
+            "name": "array"
+          },
+          {
+            "type": "T_ITEM_P",
+            "offset": 4,
+            "native_offset": "offsetof(Root, refs[0])"
+          },
+          {
+            "type": "T_ITEM_P",
+            "offset": 8,
+            "native_offset": "offsetof(Root, refs[1])"
+          },
+          {
+            "type": "T_ITEM_P",
+            "offset": 12,
+            "native_offset": "offsetof(Root, refs[2])"
+          }
+        ]
+      },
+      "T_ITEM_P": {
+        "target": "T_INT"
+      }
+    },
+    "counted_1_0": {
+      "T_ROOT": {
+        "members": [
+          {
+            "type": "T_ITEM_P",
+            "offset": 12,
+            "native_offset": "offsetof(Root, refs[2])"
+          },
+          {
+            "type": "T_ITEM_P",
+            "offset": 4,
+            "native_offset": "offsetof(Root, refs[0])"
+          },
+          {
+            "type": "T_ITEM_P",
+            "offset": 8,
+            "native_offset": "offsetof(Root, refs[1])"
+          },
+          {
+            "type": "T_COUNTED_P",
+            "offset": 0,
+            "record": "Root",
+            "field": "array",
+            "name": "array"
+          }
+        ]
+      }
+    },
+    "counted_1_1": {
+      "T_ROOT": {
+        "members": [
+          {
+            "type": "T_ITEM_P",
+            "offset": 12,
+            "native_offset": "offsetof(Root, refs[2])"
+          },
+          {
+            "type": "T_ITEM_P",
+            "offset": 4,
+            "native_offset": "offsetof(Root, refs[0])"
+          },
+          {
+            "type": "T_ITEM_P",
+            "offset": 8,
+            "native_offset": "offsetof(Root, refs[1])"
+          },
+          {
+            "type": "T_COUNTED_P",
+            "offset": 0,
+            "record": "Root",
+            "field": "array",
+            "name": "array"
+          }
+        ]
+      },
+      "T_ITEM_P": {
+        "target": "T_INT"
+      }
+    },
+    "inline_0_0": {
+      "T_ROOT": {
+        "members": [
+          {
+            "type": "T_INLINE_P",
+            "offset": 0,
+            "record": "Root",
+            "field": "array",
+            "name": "array"
+          },
+          {
+            "type": "T_ITEM_P",
+            "offset": 4,
+            "native_offset": "offsetof(Root, refs[0])"
+          },
+          {
+            "type": "T_ITEM_P",
+            "offset": 8,
+            "native_offset": "offsetof(Root, refs[1])"
+          },
+          {
+            "type": "T_ITEM_P",
+            "offset": 12,
+            "native_offset": "offsetof(Root, refs[2])"
+          }
+        ]
+      }
+    },
+    "inline_1_0": {
+      "T_ROOT": {
+        "members": [
+          {
+            "type": "T_ITEM_P",
+            "offset": 12,
+            "native_offset": "offsetof(Root, refs[2])"
+          },
+          {
+            "type": "T_ITEM_P",
+            "offset": 4,
+            "native_offset": "offsetof(Root, refs[0])"
+          },
+          {
+            "type": "T_ITEM_P",
+            "offset": 8,
+            "native_offset": "offsetof(Root, refs[1])"
+          },
+          {
+            "type": "T_INLINE_P",
+            "offset": 0,
+            "record": "Root",
+            "field": "array",
+            "name": "array"
+          }
+        ]
+      }
+    }
+  }
+}

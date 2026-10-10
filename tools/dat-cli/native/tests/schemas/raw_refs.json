@@ -1,0 +1,252 @@
+{
+  "types": [
+    {
+      "key": "BYTE",
+      "name": "byte",
+      "kind": "int",
+      "size": 1,
+      "native_size": "1",
+      "raw": true
+    },
+    {
+      "key": "WORD",
+      "name": "word",
+      "kind": "int",
+      "size": 4,
+      "native_size": "sizeof(unsigned int)"
+    },
+    {
+      "key": "BLOB",
+      "name": "Blob",
+      "kind": "typedef",
+      "size": 4,
+      "native_size": "sizeof(unsigned int)",
+      "target": "WORD",
+      "resolved": "WORD",
+      "blob": true
+    },
+    {
+      "key": "BYTE_P",
+      "name": "BYTE_P",
+      "kind": "pointer",
+      "size": 4,
+      "native_size": "sizeof(void*)",
+      "target": "BYTE",
+      "has_pointers": true
+    },
+    {
+      "key": "BLOB_P",
+      "name": "BLOB_P",
+      "kind": "pointer",
+      "size": 4,
+      "native_size": "sizeof(void*)",
+      "target": "BLOB",
+      "has_pointers": true
+    },
+    {
+      "key": "VOID_P",
+      "name": "VOID_P",
+      "kind": "pointer",
+      "size": 4,
+      "native_size": "sizeof(void*)",
+      "target": "",
+      "has_pointers": true
+    },
+    {
+      "key": "AMBIGUOUS",
+      "name": "Ambiguous",
+      "kind": "union",
+      "size": 4,
+      "native_size": "sizeof(Ambiguous)",
+      "has_pointers": true,
+      "members": [
+        {
+          "type": "BYTE_P",
+          "offset": 0,
+          "native_size": "sizeof(void*)"
+        },
+        {
+          "type": "BYTE_P",
+          "offset": 0,
+          "native_size": "sizeof(void*)"
+        }
+      ]
+    },
+    {
+      "key": "REFS",
+      "name": "REFS",
+      "kind": "struct",
+      "size": 44,
+      "native_size": "sizeof(Refs)",
+      "members": [
+        {
+          "type": "BYTE_P",
+          "offset": 0,
+          "record": "Refs",
+          "field": "zero_a",
+          "name": "zero_a"
+        },
+        {
+          "type": "BYTE_P",
+          "offset": 4,
+          "record": "Refs",
+          "field": "nonzero_a",
+          "name": "nonzero_a"
+        },
+        {
+          "type": "BYTE_P",
+          "offset": 8,
+          "record": "Refs",
+          "field": "zero_b",
+          "name": "zero_b"
+        },
+        {
+          "type": "BYTE_P",
+          "offset": 12,
+          "record": "Refs",
+          "field": "nonzero_b",
+          "name": "nonzero_b"
+        },
+        {
+          "type": "BLOB_P",
+          "offset": 16,
+          "record": "Refs",
+          "field": "blob_a",
+          "name": "blob_a"
+        },
+        {
+          "type": "BLOB_P",
+          "offset": 20,
+          "record": "Refs",
+          "field": "blob_b",
+          "name": "blob_b"
+        },
+        {
+          "type": "VOID_P",
+          "offset": 24,
+          "record": "Refs",
+          "field": "unknown",
+          "name": "unknown"
+        },
+        {
+          "type": "BYTE_P",
+          "offset": 28,
+          "count": "0",
+          "record": "Refs",
+          "field": "empty",
+          "name": "empty"
+        },
+        {
+          "type": "BYTE_P",
+          "offset": 32,
+          "record": "Refs",
+          "field": "external",
+          "name": "external"
+        },
+        {
+          "type": "AMBIGUOUS",
+          "offset": 36,
+          "record": "Refs",
+          "field": "ambiguous",
+          "name": "ambiguous"
+        },
+        {
+          "type": "BYTE_P",
+          "offset": 40,
+          "record": "Refs",
+          "field": "local_null",
+          "name": "local_null"
+        }
+      ],
+      "has_pointers": true
+    },
+    {
+      "key": "REVERSED",
+      "name": "REVERSED",
+      "kind": "struct",
+      "size": 44,
+      "native_size": "sizeof(Refs)",
+      "members": [
+        {
+          "type": "BLOB_P",
+          "offset": 20,
+          "record": "Refs",
+          "field": "blob_b",
+          "name": "blob_b"
+        },
+        {
+          "type": "BLOB_P",
+          "offset": 16,
+          "record": "Refs",
+          "field": "blob_a",
+          "name": "blob_a"
+        },
+        {
+          "type": "BYTE_P",
+          "offset": 12,
+          "record": "Refs",
+          "field": "nonzero_b",
+          "name": "nonzero_b"
+        },
+        {
+          "type": "BYTE_P",
+          "offset": 8,
+          "record": "Refs",
+          "field": "zero_b",
+          "name": "zero_b"
+        },
+        {
+          "type": "BYTE_P",
+          "offset": 4,
+          "record": "Refs",
+          "field": "nonzero_a",
+          "name": "nonzero_a"
+        },
+        {
+          "type": "BYTE_P",
+          "offset": 0,
+          "record": "Refs",
+          "field": "zero_a",
+          "name": "zero_a"
+        },
+        {
+          "type": "VOID_P",
+          "offset": 24,
+          "record": "Refs",
+          "field": "unknown",
+          "name": "unknown"
+        },
+        {
+          "type": "BYTE_P",
+          "offset": 28,
+          "count": "0",
+          "record": "Refs",
+          "field": "empty",
+          "name": "empty"
+        },
+        {
+          "type": "BYTE_P",
+          "offset": 32,
+          "record": "Refs",
+          "field": "external",
+          "name": "external"
+        },
+        {
+          "type": "AMBIGUOUS",
+          "offset": 36,
+          "record": "Refs",
+          "field": "ambiguous",
+          "name": "ambiguous"
+        },
+        {
+          "type": "BYTE_P",
+          "offset": 40,
+          "record": "Refs",
+          "field": "local_null",
+          "name": "local_null"
+        }
+      ],
+      "has_pointers": true
+    }
+  ]
+}

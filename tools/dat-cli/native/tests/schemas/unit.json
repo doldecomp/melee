@@ -1,0 +1,593 @@
+{
+  "types": [
+    {
+      "key": "T_S8",
+      "name": "s8",
+      "kind": "int",
+      "size": 1,
+      "native_size": "1",
+      "is_signed": true
+    },
+    {
+      "key": "T_S16",
+      "name": "s16",
+      "kind": "int",
+      "size": 2,
+      "native_size": "2",
+      "is_signed": true
+    },
+    {
+      "key": "T_S32",
+      "name": "s32",
+      "kind": "int",
+      "size": 4,
+      "native_size": "4",
+      "is_signed": true
+    },
+    {
+      "key": "T_F32",
+      "name": "f32",
+      "kind": "float",
+      "size": 4,
+      "native_size": "4"
+    },
+    {
+      "key": "T_LEAF",
+      "name": "Leaf",
+      "kind": "struct",
+      "size": 12,
+      "native_size": "sizeof(Leaf)",
+      "members": [
+        {
+          "type": "T_S8",
+          "offset": 0,
+          "record": "Leaf",
+          "field": "a",
+          "name": "a"
+        },
+        {
+          "type": "T_S16",
+          "offset": 2,
+          "record": "Leaf",
+          "field": "b",
+          "name": "b"
+        },
+        {
+          "type": "T_S32",
+          "offset": 4,
+          "record": "Leaf",
+          "field": "c",
+          "name": "c"
+        },
+        {
+          "type": "T_F32",
+          "offset": 8,
+          "record": "Leaf",
+          "field": "f",
+          "name": "f"
+        }
+      ]
+    },
+    {
+      "key": "T_LEAF_P",
+      "name": "Leaf*",
+      "kind": "pointer",
+      "size": 4,
+      "native_size": "sizeof(void*)",
+      "target": "T_LEAF",
+      "has_pointers": true
+    },
+    {
+      "key": "T_NODE",
+      "name": "Node",
+      "kind": "struct",
+      "size": 32,
+      "native_size": "sizeof(Node)",
+      "members": [
+        {
+          "type": "T_NODE_P",
+          "offset": 0,
+          "record": "Node",
+          "field": "next",
+          "name": "next"
+        },
+        {
+          "type": "T_LEAF_P",
+          "offset": 4,
+          "record": "Node",
+          "field": "leaf",
+          "name": "leaf"
+        },
+        {
+          "type": "T_LEAF_P",
+          "offset": 8,
+          "count": "n",
+          "record": "Node",
+          "field": "many",
+          "name": "many"
+        },
+        {
+          "type": "T_U32",
+          "offset": 12,
+          "record": "Node",
+          "field": "n",
+          "name": "n"
+        },
+        {
+          "type": "T_U8_P",
+          "offset": 16,
+          "record": "Node",
+          "field": "raw",
+          "name": "raw"
+        },
+        {
+          "type": "T_S32",
+          "offset": 20,
+          "record": "Node",
+          "field": "kind",
+          "name": "kind"
+        },
+        {
+          "type": "T_CHOICE",
+          "offset": 24,
+          "record": "Node",
+          "field": "u",
+          "name": "u"
+        },
+        {
+          "type": "T_UINT",
+          "record": "Node",
+          "field": "flag",
+          "name": "flag",
+          "bit_offset": 224,
+          "bit_size": 3
+        },
+        {
+          "type": "T_UINT",
+          "record": "Node",
+          "field": "other",
+          "name": "other",
+          "bit_offset": 227,
+          "bit_size": 5
+        }
+      ],
+      "has_pointers": true
+    },
+    {
+      "key": "T_NODE_P",
+      "name": "Node*",
+      "kind": "pointer",
+      "size": 4,
+      "native_size": "sizeof(void*)",
+      "target": "T_NODE",
+      "has_pointers": true
+    },
+    {
+      "key": "T_U32",
+      "name": "u32",
+      "kind": "int",
+      "size": 4,
+      "native_size": "4"
+    },
+    {
+      "key": "T_U8",
+      "name": "u8",
+      "kind": "int",
+      "size": 1,
+      "native_size": "1",
+      "raw": true
+    },
+    {
+      "key": "T_U8_P",
+      "name": "u8*",
+      "kind": "pointer",
+      "size": 4,
+      "native_size": "sizeof(void*)",
+      "target": "T_U8",
+      "has_pointers": true
+    },
+    {
+      "key": "T_CHOICE",
+      "name": "Choice",
+      "kind": "union",
+      "size": 4,
+      "native_size": "sizeof(union Choice)",
+      "has_pointers": true,
+      "members": [
+        {
+          "type": "T_LEAF_P",
+          "offset": 0,
+          "native_size": "sizeof(void*)",
+          "cond": "kind == 0"
+        },
+        {
+          "type": "T_NODE_P",
+          "offset": 0,
+          "native_size": "sizeof(void*)",
+          "cond": "kind == 1"
+        }
+      ]
+    },
+    {
+      "key": "T_UINT",
+      "name": "unsigned int",
+      "kind": "int",
+      "size": 4,
+      "native_size": "sizeof(unsigned)"
+    },
+    {
+      "key": "T_INLINE_LEAVES",
+      "name": "InlineLeaves",
+      "kind": "struct",
+      "size": 4,
+      "native_size": "sizeof(InlineLeaves)",
+      "members": [
+        {
+          "type": "T_S32",
+          "offset": 0,
+          "record": "InlineLeaves",
+          "field": "n",
+          "name": "n"
+        },
+        {
+          "type": "T_LEAF_ARRAY",
+          "offset": 4,
+          "native_offset": "offsetof(InlineLeaves, entries)",
+          "count": "n"
+        }
+      ],
+      "has_pointers": false
+    },
+    {
+      "key": "T_INLINE_POINTERS",
+      "name": "InlinePointers",
+      "kind": "struct",
+      "size": 4,
+      "native_size": "sizeof(InlinePointers)",
+      "members": [
+        {
+          "type": "T_S32",
+          "offset": 0,
+          "record": "InlinePointers",
+          "field": "n",
+          "name": "n"
+        },
+        {
+          "type": "T_POINTER_ARRAY",
+          "offset": 4,
+          "native_offset": "offsetof(InlinePointers, entries)",
+          "count": "n"
+        }
+      ],
+      "has_pointers": true
+    },
+    {
+      "key": "T_FIXED_POINTERS",
+      "name": "FixedPointers",
+      "kind": "struct",
+      "size": 12,
+      "native_size": "sizeof(FixedPointers)",
+      "members": [
+        {
+          "type": "T_S32",
+          "offset": 0,
+          "record": "FixedPointers",
+          "field": "n",
+          "name": "n"
+        },
+        {
+          "type": "T_FIXED_ARRAY",
+          "offset": 4,
+          "native_offset": "offsetof(FixedPointers, entries)",
+          "count": "n"
+        }
+      ],
+      "has_pointers": true
+    },
+    {
+      "key": "T_LEAF_ARRAY",
+      "name": "Leaf[]",
+      "kind": "array",
+      "size": 0,
+      "native_size": "sizeof(Leaf)",
+      "target": "T_LEAF",
+      "count": 1,
+      "unbounded": true
+    },
+    {
+      "key": "T_POINTER_ARRAY",
+      "name": "Leaf*[]",
+      "kind": "array",
+      "size": 0,
+      "native_size": "sizeof(Leaf*)",
+      "target": "T_LEAF_P",
+      "count": 1,
+      "unbounded": true,
+      "has_pointers": true
+    },
+    {
+      "key": "T_FIXED_ARRAY",
+      "name": "Leaf*[2]",
+      "kind": "array",
+      "size": 8,
+      "native_size": "2 * sizeof(Leaf*)",
+      "target": "T_LEAF_P",
+      "count": 2,
+      "has_pointers": true
+    },
+    {
+      "key": "T_COUNTED_LEAF_P",
+      "name": "CountedLeafPtr",
+      "kind": "typedef",
+      "size": 4,
+      "native_size": "sizeof(Leaf*)",
+      "has_pointers": true,
+      "target": "T_LEAF_P",
+      "resolved": "T_LEAF_P",
+      "count_tag": "Lists::count"
+    },
+    {
+      "key": "T_COUNTED_ROW",
+      "name": "CountedLeafPtr[2]",
+      "kind": "array",
+      "size": 8,
+      "native_size": "2 * sizeof(Leaf*)",
+      "target": "T_COUNTED_LEAF_P",
+      "count": 2,
+      "has_pointers": true
+    },
+    {
+      "key": "T_COUNTED_ROW_P",
+      "name": "CountedLeafPtr(*)[2]",
+      "kind": "pointer",
+      "size": 4,
+      "native_size": "sizeof(void*)",
+      "target": "T_COUNTED_ROW",
+      "has_pointers": true
+    },
+    {
+      "key": "T_COUNTED_LISTS",
+      "name": "CountedLists",
+      "kind": "struct",
+      "size": 8,
+      "native_size": "sizeof(CountedLists)",
+      "members": [
+        {
+          "type": "T_U32",
+          "offset": 0,
+          "record": "CountedLists",
+          "field": "n",
+          "name": "n"
+        },
+        {
+          "type": "T_COUNTED_ROW_P",
+          "offset": 4,
+          "extent": true,
+          "binds": {
+            "Lists::count": "n"
+          },
+          "record": "CountedLists",
+          "field": "rows",
+          "name": "rows"
+        }
+      ],
+      "has_pointers": true
+    },
+    {
+      "key": "T_INLINE_LISTS",
+      "name": "InlineLists",
+      "kind": "struct",
+      "size": 12,
+      "native_size": "sizeof(InlineLists)",
+      "members": [
+        {
+          "type": "T_U32",
+          "offset": 0,
+          "record": "InlineLists",
+          "field": "n",
+          "name": "n"
+        },
+        {
+          "type": "T_COUNTED_ROW",
+          "offset": 4,
+          "binds": {
+            "Lists::count": "n"
+          },
+          "record": "InlineLists",
+          "field": "rows",
+          "name": "rows"
+        }
+      ],
+      "has_pointers": true
+    },
+    {
+      "key": "T_SCRIPT",
+      "name": "Script",
+      "kind": "typedef",
+      "size": 4,
+      "native_size": "sizeof(uint8_t*)",
+      "has_pointers": true,
+      "target": "T_U8_P",
+      "resolved": "T_U8_P",
+      "byte_script": "cpuCommandLength(_command)"
+    },
+    {
+      "key": "T_SCRIPT_ROW",
+      "name": "Script[3]",
+      "kind": "array",
+      "size": 12,
+      "native_size": "3 * sizeof(uint8_t*)",
+      "target": "T_SCRIPT",
+      "count": 3,
+      "has_pointers": true
+    }
+  ],
+  "variants": {
+    "conditional0": {
+      "T_INLINE_LEAVES": {
+        "members": [
+          {
+            "type": "T_S32",
+            "offset": 0,
+            "record": "InlineLeaves",
+            "field": "n",
+            "name": "n"
+          },
+          {
+            "type": "T_LEAF_ARRAY",
+            "offset": 4,
+            "native_offset": "offsetof(InlineLeaves, entries)",
+            "count": "1 ? n : missing()"
+          }
+        ]
+      }
+    },
+    "conditional1": {
+      "T_INLINE_LEAVES": {
+        "members": [
+          {
+            "type": "T_S32",
+            "offset": 0,
+            "record": "InlineLeaves",
+            "field": "n",
+            "name": "n"
+          },
+          {
+            "type": "T_LEAF_ARRAY",
+            "offset": 4,
+            "native_offset": "offsetof(InlineLeaves, entries)",
+            "count": "0 ? missing() : n"
+          }
+        ]
+      }
+    },
+    "conditional2": {
+      "T_INLINE_LEAVES": {
+        "members": [
+          {
+            "type": "T_S32",
+            "offset": 0,
+            "record": "InlineLeaves",
+            "field": "n",
+            "name": "n"
+          },
+          {
+            "type": "T_LEAF_ARRAY",
+            "offset": 4,
+            "native_offset": "offsetof(InlineLeaves, entries)",
+            "count": "n ? (0 ? missing() : n) : 0"
+          }
+        ]
+      }
+    },
+    "binding": {
+      "T_CHOICE": {
+        "members": [
+          {
+            "type": "T_COUNTED_LEAF_P",
+            "offset": 0,
+            "native_size": "sizeof(void*)",
+            "cond": "kind == 0",
+            "binds": {
+              "Lists::count": "n"
+            }
+          },
+          {
+            "type": "T_NODE_P",
+            "offset": 0,
+            "native_size": "sizeof(void*)",
+            "cond": "kind == 1"
+          }
+        ]
+      }
+    },
+    "plain": {
+      "T_CHOICE": {
+        "has_pointers": false,
+        "size": 12,
+        "native_size": "sizeof(union PlainChoice)",
+        "members": [
+          {
+            "type": "T_U32",
+            "offset": 0,
+            "cond": "kind == 0",
+            "record": "union PlainChoice",
+            "field": "small",
+            "name": "small"
+          },
+          {
+            "type": "T_LEAF",
+            "offset": 0,
+            "cond": "kind == 1",
+            "record": "union PlainChoice",
+            "field": "large",
+            "name": "large"
+          }
+        ]
+      },
+      "T_LEAF_P": {
+        "target": "T_CHOICE"
+      },
+      "T_COUNTED_LEAF_P": {
+        "count_tag": "1"
+      }
+    },
+    "conditional3": {
+      "T_INLINE_LEAVES": {
+        "members": [
+          {
+            "type": "T_S32",
+            "offset": 0,
+            "record": "InlineLeaves",
+            "field": "n",
+            "name": "n"
+          },
+          {
+            "type": "T_LEAF_ARRAY",
+            "offset": 4,
+            "native_offset": "offsetof(InlineLeaves, entries)",
+            "count": "(1 || missing()) ? n : 0"
+          }
+        ]
+      }
+    },
+    "conditional4": {
+      "T_INLINE_LEAVES": {
+        "members": [
+          {
+            "type": "T_S32",
+            "offset": 0,
+            "record": "InlineLeaves",
+            "field": "n",
+            "name": "n"
+          },
+          {
+            "type": "T_LEAF_ARRAY",
+            "offset": 4,
+            "native_offset": "offsetof(InlineLeaves, entries)",
+            "count": "(0 && missing()) ? 0 : n"
+          }
+        ]
+      }
+    },
+    "conditional5": {
+      "T_INLINE_LEAVES": {
+        "members": [
+          {
+            "type": "T_S32",
+            "offset": 0,
+            "record": "InlineLeaves",
+            "field": "n",
+            "name": "n"
+          },
+          {
+            "type": "T_LEAF_ARRAY",
+            "offset": 4,
+            "native_offset": "offsetof(InlineLeaves, entries)",
+            "count": "(~0 + 1) ? missing() : n"
+          }
+        ]
+      }
+    }
+  }
+}

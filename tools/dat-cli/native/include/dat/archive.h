@@ -9,10 +9,10 @@
  * to the host's byte order and sizes, pointers to the native objects they
  * refer to.
  *
- * What it knows of the types comes from a schema (dat/schema.h) that
- * `melee-dat native codegen` generates from the DWARF, which describes each
- * type as the archive lays it out and says where its members go natively
- * (`offsetof`, `sizeof`), so the host compiler decides the native layout.
+ * Rust generates each type's reader and verifier from DWARF. The native
+ * compiler supplies its field offsets and sizes through `offsetof` and
+ * `sizeof`. Archive loading itself needs no schema; generated readers use
+ * shared storage and reference helpers to build native objects.
  *
  * Data with no type to convert by is left as the archive has it, in its
  * original byte order: pointers to raw bytes (`u8`, `DAT_BLOB` formats such
