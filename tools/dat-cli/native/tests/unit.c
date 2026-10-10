@@ -1,6 +1,6 @@
 /**
  * @file
- * The library on tables written by hand, over an archive built here: each
+ * Generated readers for independent layouts, over an archive built here: each
  * kind of field converted, pointers followed and shared, unions chosen by
  * `DAT_IF`, and malformed archives refused.
  */
@@ -58,27 +58,7 @@ typedef struct InlineLists {
     Leaf* rows[2];
 } InlineLists;
 
-static void set_flag(void* o, uint64_t v)
-{
-    ((Node*) o)->flag = (unsigned) v & 7;
-}
-
-static uint64_t get_flag(const void* o)
-{
-    return ((const Node*) o)->flag;
-}
-
-static void set_other(void* o, uint64_t v)
-{
-    ((Node*) o)->other = (unsigned) v & 31;
-}
-
-static uint64_t get_other(const void* o)
-{
-    return ((const Node*) o)->other;
-}
-
-/* --- Their tables, as the archive lays them out ---------------------------
+/* --- Their type indices and native declarations --------------------------
  */
 
 enum {
@@ -111,318 +91,23 @@ enum {
     T_COUNT,
 };
 
-enum {
-    DAT_NAME_n = 1,
-    DAT_NAME_kind,
-    DAT_NAME_lists_count,
-    DAT_NAME_rows,
-    DAT_NAME__command,
-    DAT_NAME_COUNT,
-};
-
-static const char* const names[DAT_NAME_COUNT] = {
-    [DAT_NAME_n] = "n",
-    [DAT_NAME_kind] = "kind",
-    [DAT_NAME_lists_count] = "Lists::count",
-    [DAT_NAME_rows] = "rows",
-    [DAT_NAME__command] = "_command",
-};
-
-#define SCALAR(self, type_name, type_kind, sign, bytes, native)               \
-    static const DatType type_##self = {                                      \
-        .name = type_name,                                                    \
-        .id = self,                                                           \
-        .kind = type_kind,                                                    \
-        .is_signed = sign,                                                    \
-        .raw = self == T_U8,                                                  \
-        .size = bytes,                                                        \
-        .native_size = native,                                                \
-        .resolved = self,                                                     \
-    }
-#define POINTER(self, type_name, to)                                          \
-    static const DatType type_##self = {                                      \
-        .name = type_name,                                                    \
-        .id = self,                                                           \
-        .kind = DAT_KIND_POINTER,                                             \
-        .has_pointers = 1,                                                    \
-        .size = 4,                                                            \
-        .native_size = sizeof(void*),                                         \
-        .target = to,                                                         \
-        .resolved = self,                                                     \
-    }
-
-SCALAR(T_S8, "s8", DAT_KIND_INT, 1, 1, 1);
-SCALAR(T_S16, "s16", DAT_KIND_INT, 1, 2, 2);
-SCALAR(T_S32, "s32", DAT_KIND_INT, 1, 4, 4);
-SCALAR(T_F32, "f32", DAT_KIND_FLOAT, 0, 4, 4);
-SCALAR(T_U32, "u32", DAT_KIND_INT, 0, 4, 4);
-SCALAR(T_U8, "u8", DAT_KIND_INT, 0, 1, 1);
-SCALAR(T_UINT, "unsigned int", DAT_KIND_INT, 0, 4, sizeof(unsigned));
-POINTER(T_LEAF_P, "Leaf*", T_LEAF);
-POINTER(T_NODE_P, "Node*", T_NODE);
-POINTER(T_U8_P, "u8*", T_U8);
-
-static const DatMember leaf_members[] = {
-    { .type = T_S8, DAT_AT(0), DAT_FIELD(Leaf, a) },
-    { .type = T_S16, DAT_AT(2), DAT_FIELD(Leaf, b) },
-    { .type = T_S32, DAT_AT(4), DAT_FIELD(Leaf, c) },
-    { .type = T_F32, DAT_AT(8), DAT_FIELD(Leaf, f) },
-};
-
-static const DatType type_T_LEAF = {
-    .name = "Leaf",
-    .id = T_LEAF,
-    .kind = DAT_KIND_STRUCT,
-    .size = 12,
-    .native_size = sizeof(Leaf),
-    .resolved = T_LEAF,
-    DAT_MEMBERS(leaf_members),
-};
-
-static const DatMember node_members[] = {
-    { .type = T_NODE_P, DAT_AT(0), DAT_FIELD(Node, next) },
-    { .type = T_LEAF_P, DAT_AT(4), DAT_FIELD(Node, leaf) },
-    { .type = T_LEAF_P,
-      DAT_AT(8),
-      DAT_FIELD(Node, many),
-      .count = DAT_NAME(n) },
-    { DAT_MEMBER(Node, n, 0xC, T_U32) },
-    { .type = T_U8_P, DAT_AT(0x10), DAT_FIELD(Node, raw) },
-    { DAT_MEMBER(Node, kind, 0x14, T_S32) },
-    { .type = T_CHOICE, DAT_AT(0x18), DAT_FIELD(Node, u) },
-    { .type = T_UINT,
-      .bit_offset = 0x1C * 8,
-      .bit_size = 3,
-      .set_bits = set_flag,
-      .get_bits = get_flag },
-    { .type = T_UINT,
-      .bit_offset = 0x1C * 8 + 3,
-      .bit_size = 5,
-      .set_bits = set_other,
-      .get_bits = get_other },
-};
-
-static const DatType type_T_NODE = {
-    .name = "Node",
-    .id = T_NODE,
-    .kind = DAT_KIND_STRUCT,
-    .has_pointers = 1,
-    .size = 0x20,
-    .native_size = sizeof(Node),
-    .resolved = T_NODE,
-    DAT_MEMBERS(node_members),
-};
-
-static const DatMember choice_members[] = {
-    { .type = T_LEAF_P,
-      DAT_AT(0),
-      .native_size = sizeof(void*),
-      .cond = DAT_BINARY(EQ, DAT_NAME(kind), DAT_INT(0)) },
-    { .type = T_NODE_P,
-      DAT_AT(0),
-      .native_size = sizeof(void*),
-      .cond = DAT_BINARY(EQ, DAT_NAME(kind), DAT_INT(1)) },
-};
-
-static const DatType type_T_CHOICE = {
-    .name = "Choice",
-    .id = T_CHOICE,
-    .kind = DAT_KIND_UNION,
-    .has_pointers = 1,
-    .size = 4,
-    .native_size = sizeof(union Choice),
-    .resolved = T_CHOICE,
-    DAT_MEMBERS(choice_members),
-};
-
-/* Counted inline arrays have no pointer slot. Flexible arrays need their
-   count's native storage, including the host's larger pointer stride. */
 typedef struct InlineLeaves {
     int32_t n;
     Leaf entries[];
 } InlineLeaves;
-
 typedef struct InlinePointers {
     int32_t n;
     Leaf* entries[];
 } InlinePointers;
-
 typedef struct FixedPointers {
     int32_t n;
     Leaf* entries[2];
 } FixedPointers;
-
-#define INLINE_MEMBERS(record, element_array)                                 \
-    { DAT_MEMBER(record, n, 0, T_S32) },                                      \
-    {                                                                         \
-        .type = element_array, DAT_AT(4),                                     \
-        .native_offset = offsetof(record, entries), .count = DAT_NAME(n)      \
-    }
-
-static const DatMember inline_leaves_members[] = {
-    INLINE_MEMBERS(InlineLeaves, T_LEAF_ARRAY),
+union PlainChoice {
+    uint32_t small;
+    Leaf large;
 };
-static const DatMember inline_pointers_members[] = {
-    INLINE_MEMBERS(InlinePointers, T_POINTER_ARRAY),
-};
-static const DatMember fixed_pointers_members[] = {
-    INLINE_MEMBERS(FixedPointers, T_FIXED_ARRAY),
-};
-
-#define INLINE_TYPE(self, record, bytes, members_array)                       \
-    static const DatType type_##self = {                                      \
-        .name = #record,                                                      \
-        .id = self,                                                           \
-        .kind = DAT_KIND_STRUCT,                                              \
-        .has_pointers = self != T_INLINE_LEAVES,                              \
-        .size = bytes,                                                        \
-        .native_size = sizeof(record),                                        \
-        .resolved = self,                                                     \
-        DAT_MEMBERS(members_array),                                           \
-    }
-
-INLINE_TYPE(T_INLINE_LEAVES, InlineLeaves, 4, inline_leaves_members);
-INLINE_TYPE(T_INLINE_POINTERS, InlinePointers, 4, inline_pointers_members);
-INLINE_TYPE(T_FIXED_POINTERS, FixedPointers, 12, fixed_pointers_members);
-
-static const DatType type_T_LEAF_ARRAY = {
-    .name = "Leaf[]",
-    .id = T_LEAF_ARRAY,
-    .kind = DAT_KIND_ARRAY,
-    .unbounded = 1,
-    .native_size = sizeof(Leaf),
-    .target = T_LEAF,
-    .resolved = T_LEAF_ARRAY,
-    .count = 1,
-};
-static const DatType type_T_POINTER_ARRAY = {
-    .name = "Leaf*[]",
-    .id = T_POINTER_ARRAY,
-    .kind = DAT_KIND_ARRAY,
-    .has_pointers = 1,
-    .unbounded = 1,
-    .native_size = sizeof(Leaf*),
-    .target = T_LEAF_P,
-    .resolved = T_POINTER_ARRAY,
-    .count = 1,
-};
-static const DatType type_T_FIXED_ARRAY = {
-    .name = "Leaf*[2]",
-    .id = T_FIXED_ARRAY,
-    .kind = DAT_KIND_ARRAY,
-    .has_pointers = 1,
-    .size = 8,
-    .native_size = 2 * sizeof(Leaf*),
-    .target = T_LEAF_P,
-    .resolved = T_FIXED_ARRAY,
-    .count = 2,
-};
-
-static const DatType type_T_COUNTED_LEAF_P = {
-    .name = "CountedLeafPtr",
-    .id = T_COUNTED_LEAF_P,
-    .kind = DAT_KIND_TYPEDEF,
-    .has_pointers = 1,
-    .size = 4,
-    .native_size = sizeof(Leaf*),
-    .target = T_LEAF_P,
-    .resolved = T_LEAF_P,
-    .count_tag = DAT_NAME(lists_count),
-};
-
-static const DatType type_T_COUNTED_ROW = {
-    .name = "CountedLeafPtr[2]",
-    .id = T_COUNTED_ROW,
-    .kind = DAT_KIND_ARRAY,
-    .has_pointers = 1,
-    .size = 8,
-    .native_size = 2 * sizeof(Leaf*),
-    .target = T_COUNTED_LEAF_P,
-    .resolved = T_COUNTED_ROW,
-    .count = 2,
-};
-
-POINTER(T_COUNTED_ROW_P, "CountedLeafPtr(*)[2]", T_COUNTED_ROW);
-
-static const DatMember counted_lists_members[] = {
-    { DAT_MEMBER(CountedLists, n, 0, T_U32) },
-    { DAT_MEMBER(CountedLists, rows, 4, T_COUNTED_ROW_P), .extent = 1,
-      DAT_BINDS({ DAT_NAME_lists_count, DAT_NAME(n) }) },
-};
-
-static const DatMember inline_lists_members[] = {
-    { DAT_MEMBER(InlineLists, n, 0, T_U32) },
-    { DAT_MEMBER(InlineLists, rows, 4, T_COUNTED_ROW),
-      DAT_BINDS({ DAT_NAME_lists_count, DAT_NAME(n) }) },
-};
-
-INLINE_TYPE(T_COUNTED_LISTS, CountedLists, 8, counted_lists_members);
-INLINE_TYPE(T_INLINE_LISTS, InlineLists, 12, inline_lists_members);
-
-/* An array of script pointers annotated with `DAT_BYTE_SCRIPT`. */
-static const DatType type_T_SCRIPT = {
-    .name = "Script",
-    .id = T_SCRIPT,
-    .kind = DAT_KIND_TYPEDEF,
-    .has_pointers = 1,
-    .size = 4,
-    .native_size = sizeof(uint8_t*),
-    .target = T_U8_P,
-    .resolved = T_U8_P,
-    .script =
-        &(const DatScript){
-            .length = DAT_CALL(CPU_COMMAND_LENGTH, DAT_NAME(_command)),
-            .bytes = 1,
-        },
-};
-
-static const DatType type_T_SCRIPT_ROW = {
-    .name = "Script[3]",
-    .id = T_SCRIPT_ROW,
-    .kind = DAT_KIND_ARRAY,
-    .has_pointers = 1,
-    .size = 12,
-    .native_size = 3 * sizeof(uint8_t*),
-    .target = T_SCRIPT,
-    .resolved = T_SCRIPT_ROW,
-    .count = 3,
-};
-
-static const DatType* const types[T_COUNT] = {
-    [T_S8] = &type_T_S8,
-    [T_S16] = &type_T_S16,
-    [T_S32] = &type_T_S32,
-    [T_F32] = &type_T_F32,
-    [T_LEAF] = &type_T_LEAF,
-    [T_LEAF_P] = &type_T_LEAF_P,
-    [T_NODE] = &type_T_NODE,
-    [T_NODE_P] = &type_T_NODE_P,
-    [T_U32] = &type_T_U32,
-    [T_U8] = &type_T_U8,
-    [T_U8_P] = &type_T_U8_P,
-    [T_CHOICE] = &type_T_CHOICE,
-    [T_UINT] = &type_T_UINT,
-    [T_INLINE_LEAVES] = &type_T_INLINE_LEAVES,
-    [T_INLINE_POINTERS] = &type_T_INLINE_POINTERS,
-    [T_FIXED_POINTERS] = &type_T_FIXED_POINTERS,
-    [T_LEAF_ARRAY] = &type_T_LEAF_ARRAY,
-    [T_POINTER_ARRAY] = &type_T_POINTER_ARRAY,
-    [T_FIXED_ARRAY] = &type_T_FIXED_ARRAY,
-    [T_COUNTED_LEAF_P] = &type_T_COUNTED_LEAF_P,
-    [T_COUNTED_ROW] = &type_T_COUNTED_ROW,
-    [T_COUNTED_ROW_P] = &type_T_COUNTED_ROW_P,
-    [T_COUNTED_LISTS] = &type_T_COUNTED_LISTS,
-    [T_INLINE_LISTS] = &type_T_INLINE_LISTS,
-    [T_SCRIPT] = &type_T_SCRIPT,
-    [T_SCRIPT_ROW] = &type_T_SCRIPT_ROW,
-};
-
-static const DatSchema schema = {
-    .types = types,
-    .ntypes = T_COUNT,
-    .names = names,
-    .nnames = DAT_NAME_COUNT,
-};
+#include "unit.h"
 
 /* --- An archive -----------------------------------------------------------
  */
@@ -810,23 +495,13 @@ static void test_refuses(void)
 static void test_conditional_counts(void)
 {
     /* An unresolved inactive branch must not stop a count from being read. */
-    const DatExpr* counts[] = {
-        DAT_COND(DAT_INT(1), DAT_NAME(n), DAT_FAIL),
-        DAT_COND(DAT_INT(0), DAT_FAIL, DAT_NAME(n)),
-        DAT_COND(DAT_NAME(n), DAT_COND(DAT_INT(0), DAT_FAIL, DAT_NAME(n)),
-                 DAT_INT(0)),
+    const DatSchema* variants[] = {
+        &fixture_conditional0_schema, &fixture_conditional1_schema,
+        &fixture_conditional2_schema, &fixture_conditional3_schema,
+        &fixture_conditional4_schema, &fixture_conditional5_schema
     };
-    for (size_t i = 0; i < sizeof counts / sizeof *counts; i++) {
-        DatMember members[2];
-        memcpy(members, inline_leaves_members, sizeof members);
-        members[1].count = counts[i];
-        DatType type = type_T_INLINE_LEAVES;
-        type.members = members;
-        const DatType* local_types[T_COUNT];
-        memcpy(local_types, types, sizeof types);
-        local_types[T_INLINE_LEAVES] = &type;
-        DatSchema local_schema = schema;
-        local_schema.types = local_types;
+    for (size_t i = 0; i < DAT_COUNTOF(variants); i++) {
+        const DatSchema local_schema = *variants[i];
         for (uint32_t count = 0; count <= 2; count += 2) {
             unsigned char file[0x200];
             size_t size = build_inline(file, count, false);
@@ -849,19 +524,7 @@ static void test_conditional_counts(void)
 
 static void test_union_member_binding(void)
 {
-    DatMember members[2];
-    memcpy(members, choice_members, sizeof members);
-    const DatBind binds[] = { { DAT_NAME_lists_count, DAT_NAME(n) } };
-    members[0].type = T_COUNTED_LEAF_P;
-    members[0].binds = binds;
-    members[0].nbinds = 1;
-    DatType type = type_T_CHOICE;
-    type.members = members;
-    const DatType* local_types[T_COUNT];
-    memcpy(local_types, types, sizeof types);
-    local_types[T_CHOICE] = &type;
-    DatSchema local_schema = schema;
-    local_schema.types = local_types;
+    const DatSchema local_schema = fixture_binding_schema;
     unsigned char file[0x200];
     size_t size = build(file);
     DatArchive* a = dat_open(&local_schema, file, size, NULL);
@@ -901,34 +564,6 @@ static void test_packed(void)
 
 static void test_tagged_plain_union_size(void)
 {
-    union PlainChoice {
-        uint32_t small;
-        Leaf large;
-    };
-    const DatMember members[] = {
-        { .type = T_U32,
-          DAT_AT(0),
-          DAT_FIELD(union PlainChoice, small),
-          .cond = DAT_BINARY(EQ, DAT_NAME(kind), DAT_INT(0)) },
-        { .type = T_LEAF,
-          DAT_AT(0),
-          DAT_FIELD(union PlainChoice, large),
-          .cond = DAT_BINARY(EQ, DAT_NAME(kind), DAT_INT(1)) },
-    };
-    DatType type = type_T_CHOICE;
-    type.has_pointers = 0;
-    type.size = 12;
-    type.native_size = sizeof(union PlainChoice);
-    type.members = members;
-    const DatType* local_types[T_COUNT];
-    memcpy(local_types, types, sizeof types);
-    local_types[T_CHOICE] = &type;
-    DatType pointer = type_T_LEAF_P;
-    pointer.target = T_CHOICE;
-    DatType counted_pointer = type_T_COUNTED_LEAF_P;
-    counted_pointer.count_tag = DAT_INT(1);
-    local_types[T_LEAF_P] = &pointer;
-    local_types[T_COUNTED_LEAF_P] = &counted_pointer;
     for (unsigned i = 0; i < 9; i++) {
         uint32_t kind = i % 3 == 2;
         uint32_t offset = i >= 6 ? 4 : 0;
@@ -972,8 +607,7 @@ static void test_tagged_plain_union_size(void)
                                      .roots = &root,
                                      .nroots = 1 };
         const DatModule module = { .files = &roots, .nfiles = 1 };
-        DatSchema local_schema = schema;
-        local_schema.types = local_types;
+        DatSchema local_schema = fixture_plain_schema;
         local_schema.modules = &module;
         local_schema.nmodules = 1;
         DatArchive* a = dat_open(&local_schema, file, size, NULL);

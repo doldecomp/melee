@@ -322,11 +322,12 @@ and nested motion-file archives are separate follow-ups.
 `native/` is a C library that reads archives into the game's own types on
 any platform: the boundary between the GameCube's data (big-endian, 32-bit
 pointers stored as offsets) and modern hardware and compilers.
-`melee-dat native codegen` writes its schema from the types: a descriptor
-for each type (`dat/schema.h`), as the archive lays it out, with where each
-member goes natively, by `offsetof` and `sizeof`, so the host's compiler
-decides the native layout. The library is a port of the walk
-(`src/walk.rs`) that converts as it goes:
+`archive.c` loads archive bytes and their relocation, public and extern
+tables. It has no knowledge of DWARF or DAT annotations.
+`melee-dat native codegen` compiles the types and annotations into C reader
+and verifier functions. Generated field accesses use `offsetof` and
+`sizeof`, so the host compiler decides the native layout. `reader.c`
+provides allocation, shared references, bounds and trace bookkeeping:
 
 - scalars are byte-swapped and widened as their types say;
 - pointers point to the native objects they reach, which are shared;
@@ -344,24 +345,18 @@ of the build:
 
 - `melee_dat.h`: `melee_dat_schema`, and each type's index, `DAT_TYPE_*`
 - `types/<header>.c`: the types a header of the game's declares, each a
-  `dat_type_*` descriptor with its members, their annotations as written in
-  comments, and what refers to them (pointers, arrays); `types/base.c` the
-  types no header of the game's declares
+  `dat_type_*` callback table with reader, converter and verifier functions.
+  Field decisions and expressions are ordinary C code; source annotations
+  remain in comments. `types/base.c` holds types no game header declares
 - `roots/<module>.c`: each archive's roots, by module (`Pl`, `Gr`)
-- `macros.c`, `scripts.c`: the macros the annotations use, and the code's
-  tables of script command lengths
+- `macros.c`, `scripts.c`: compiled macro evaluators and the code's tables
+  of script command lengths
 - `schema.c`: every type and name, by index
 
-```c
-static const DatMember struct_ftDynamics_x0_members[] = {
-    { DAT_MEMBER(struct ftDynamics_x0, dynamicsNum, 0x0, DAT_TYPE_int) },
-    /* dat:count(dynamicsNum) */
-    {
-        DAT_MEMBER(struct ftDynamics_x0, ftDynamicBones, 0x4, DAT_TYPE_BoneDynamicsTemplate_ptr),
-        .count = DAT_NAME(dynamicsNum),
-    },
-};
-```
+Generated readers retain first-match union selection, lazy expressions,
+per-element bindings and typedef behavior. The shared helpers preserve
+array identity, cycles and deferred pointer fixups. `DatType` contains
+storage information and callbacks, rather than member annotation tables.
 
 ```c
 #include "melee_dat.h"
@@ -389,7 +384,11 @@ With `-DCMAKE_TOOLCHAIN_FILE=tools/dat-cli/native/toolchains/i686.cmake`
 for 32-bit little-endian, or `ppc32-linux.cmake` for 32-bit big-endian
 under qemu.
 
-- `tests/unit.c`: a hand-written schema over an archive built in the test.
+- `tests/schemas/*.json`: independent type layouts and annotation expressions
+  for the synthetic archives. CMake compiles them with the same reader
+  emitter used for game types.
+- `tests/unit.c`: scalars, bitfields, unions, scripts, flexible arrays and
+  malformed archives, including inactive unresolved expression branches.
 - `tests/raw_refs.c`: shared raw references, relocated zero, externs and
   unselected union members.
 - `tests/array_refs.c`: element identity in counted and nested arrays,
