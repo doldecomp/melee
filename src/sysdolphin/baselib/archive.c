@@ -4,6 +4,8 @@
 
 #include <dolphin/os.h>
 
+// Native builds use the generated reader adapter in tools/dat-cli/native.
+#if !defined(TARGET_PC) || !defined(DAT_NATIVE_READERS)
 static inline void Locate(HSD_Archive* archive)
 {
     u32 i;
@@ -117,3 +119,5 @@ void HSD_ArchiveLocateExtern(HSD_Archive* archive, const char* symbols,
         offset = next;
     }
 }
+
+#endif

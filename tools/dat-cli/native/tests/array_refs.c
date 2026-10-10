@@ -8,7 +8,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include <dat/archive.h>
+#include <dat/test.h>
 
 static int failures;
 
@@ -40,6 +40,12 @@ typedef struct Inline {
     Item items[];
 } Inline;
 
+typedef struct Recursive {
+    int64_t value;
+    struct Recursive* array;
+    struct Recursive* next;
+} Recursive;
+
 enum {
     T_INT = 1,
     T_COUNT,
@@ -54,6 +60,10 @@ enum {
     T_COUNTED,
     T_COUNTED_P,
     T_ROOT,
+    T_RECURSIVE,
+    T_RECURSIVE_P,
+    T_RECURSIVE_ARRAY,
+    T_RECURSIVE_ARRAY_P,
     T_TYPES,
 };
 
@@ -214,9 +224,54 @@ static void test_root_array(bool nested, bool zero)
     dat_close(a);
 }
 
+/// The array is discovered while an element's recursive reader is active.
+static void test_recursive_move(bool reverse, uint32_t root_count)
+{
+    unsigned char bytes[0x20 + 24 + 4 * 4] = { 0 };
+    put32(bytes, sizeof bytes);
+    put32(bytes + 4, 24);
+    unsigned char* data = bytes + 0x20;
+    put32(data, 11);
+    put32(data + 8, 12);
+    put32(data + 12, 22);
+    const uint32_t relocs[] = { 4, 8, 16, 20 };
+    put32(bytes + 8, DAT_COUNTOF(relocs));
+    for (size_t i = 0; i < DAT_COUNTOF(relocs); i++) {
+        put32(data + 24 + 4 * i, relocs[i]);
+    }
+    put32(bytes, 0x20 + 24 + sizeof relocs);
+    const DatSchema* selected =
+        reverse ? &fixture_recursive_reverse_schema : &schema;
+    DatArchive* archive =
+        dat_open(selected, bytes, 0x20 + 24 + sizeof relocs, NULL);
+    CHECK(archive != NULL);
+    if (!archive) {
+        return;
+    }
+    Recursive* root =
+        dat_at(archive, 0, T_RECURSIVE,
+               root_count ? DAT_COUNT_EXACTLY : DAT_COUNT_ONE, root_count);
+    CHECK(root != NULL);
+    if (root) {
+        CHECK(root->array == root);
+        CHECK(root->next == &root->array[1]);
+        CHECK(root->value == 11 && root->next->value == 22);
+        CHECK(root->next->array == root && root->next->next == root);
+        CHECK(dat_at(archive, 12, T_RECURSIVE, DAT_COUNT_ONE, 0) ==
+              root->next);
+        CHECK(dat_verify(archive, stdout) == 0);
+        root->next->value = 33;
+        CHECK(root->array[1].value == 33);
+    }
+    dat_close(archive);
+}
+
 int main(void)
 {
     for (int reverse = 0; reverse < 2; reverse++) {
+        for (uint32_t root_count = 0; root_count <= 2; root_count++) {
+            test_recursive_move(reverse, root_count);
+        }
         test(T_MATRIX_P, reverse, false, false);
         test(T_MATRIX_P, reverse, true, false);
         test(T_COUNTED_P, reverse, false, false);

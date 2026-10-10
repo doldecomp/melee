@@ -41,6 +41,9 @@ impl Emitter<'_, '_> {
                 "allocation_size" => "size_t",
                 _ => "void",
             };
+            if what == "verify" {
+                c.push_str("#ifdef DAT_NATIVE_TESTING\n");
+            }
             writeln!(c, "static {ret} {ident}_{what}({signature}) {{")?;
             if what == "verify" {
                 c.push_str("    const DatArchive* a = v->a;\n");
@@ -68,6 +71,9 @@ impl Emitter<'_, '_> {
                     ""
                 };
                 writeln!(c, "    {ret}t->{what}({args});\n}}\n")?;
+                if what == "verify" {
+                    c.push_str("#endif\n");
+                }
                 continue;
             }
             c.push_str("do {\n");
@@ -82,6 +88,9 @@ impl Emitter<'_, '_> {
                 _ => unreachable!(),
             }
             c.push_str("} while (0);\n}\n\n");
+            if what == "verify" {
+                c.push_str("#endif\n");
+            }
         }
         Ok(())
     }
@@ -93,10 +102,21 @@ impl Emitter<'_, '_> {
         row: &TypeRow,
     ) -> Result<()> {
         match row.kind {
-            Kind::Int | Kind::Float => {
-                c.push_str(
-                    "dat_reader_convert_scalar(a, offset, r, native);\n",
-                );
+            Kind::Int => {
+                writeln!(
+                    c,
+                    "dat_reader_integer(a, offset, {}, {}, {}, native);",
+                    row.size,
+                    row.native_size,
+                    u8::from(row.is_signed)
+                )?;
+            }
+            Kind::Float => {
+                writeln!(
+                    c,
+                    "dat_reader_float(a, offset, {}, {}, native);",
+                    row.size, row.native_size
+                )?;
             }
             Kind::Struct => {
                 for m in &row.members {
@@ -294,7 +314,7 @@ impl Emitter<'_, '_> {
                 self.expr(self.generator.types[i].count_tag.as_ref().unwrap());
             writeln!(
                 c,
-                "DatContext ctx = {{ MODE_TERMINATOR, DAT_NONE, 0, DAT_NONE, 0, a->env, 0, 0 }};\nuint64_t n;\nif (dat_reader_eval(a, &ctx, {expr}, &n)) {{ DatParent none = {{ 0 }}; dat_reader_counted(a, offset, type, DAT_NONE, n, NULL, none, native); return; }}"
+                "DatContext ctx = {{ MODE_TERMINATOR, DAT_NONE, 0, DAT_NONE, 0, a->env, 0, 0 }};\nuint64_t n;\nif (dat_reader_eval(a, &ctx, {expr}, &n)) {{ DatParent none = {{ 0 }}; dat_reader_counted(a, offset, type, DAT_NONE, n, NULL, NULL, none, native); return; }}"
             )?;
         }
         if let Some(&i) = chain
@@ -389,14 +409,14 @@ impl Emitter<'_, '_> {
         }
         writeln!(
             c,
-            "static const DatScope* {ident}_bind_{i}(DatArchive* a, const DatScope* outer, const DatParent* parent, uint64_t index) {{\nconst DatScope* env = outer;\nDatContext ctx = {{ MODE_BIND, parent->some ? parent->record : DAT_NONE, parent->base, DAT_NONE, 0, outer, index, 0 }};"
+            "static const DatScope* {ident}_bind_{i}(DatArchive* a, const DatScope* outer, const DatParent* parent, uint64_t index, DatScope* storage) {{\nconst DatScope* env = outer;\nDatContext ctx = {{ MODE_BIND, parent->some ? parent->record : DAT_NONE, parent->base, DAT_NONE, 0, outer, index, 0 }};"
         )?;
-        for (name, expr) in &m.binds {
+        for (j, (name, expr)) in m.binds.iter().enumerate() {
             let name = self.name(name);
             let expr = self.expr(expr);
             writeln!(
                 c,
-                "{{ uint64_t value; if (dat_reader_eval(a, &ctx, {expr}, &value)) {{ DatScope* s = arena_alloc(&a->arena, sizeof(*s)); s->name = {name}; s->value = value; s->outer = env; env = s; }} }}"
+                "{{ uint64_t value; if (dat_reader_eval(a, &ctx, {expr}, &value)) {{ DatScope* s = &storage[{j}]; s->name = {name}; s->value = value; s->outer = env; env = s; }} }}"
             )?;
         }
         c.push_str("return env;\n}\n\n");

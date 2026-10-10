@@ -24,13 +24,15 @@ endif()
 if(NOT AURORA_SRC)
     message(FATAL_ERROR "AURORA_SRC is not set: configure from the native dev shell")
 endif()
-add_library(melee_game_headers INTERFACE)
-target_include_directories(melee_game_headers INTERFACE
-    ${AURORA_SRC}/include
-    ${MELEE_ROOT}/src
-    ${MELEE_ROOT}/libs/doldecomp/include
-)
-target_compile_definitions(melee_game_headers INTERFACE TARGET_PC bool=int)
+if(NOT TARGET melee_game_headers)
+    add_library(melee_game_headers INTERFACE)
+    target_include_directories(melee_game_headers INTERFACE
+        ${AURORA_SRC}/include
+        ${MELEE_ROOT}/src
+        ${MELEE_ROOT}/libs/doldecomp/include
+    )
+    target_compile_definitions(melee_game_headers INTERFACE TARGET_PC bool=int)
+endif()
 
 set(MELEE_VERSION GALE01 CACHE STRING "Game version")
 set(MELEE_VERSION_NUM 0 CACHE STRING "BUILD_VERSION for MELEE_VERSION")
@@ -106,6 +108,7 @@ endif()
 add_library(dat_melee STATIC ${_dat_schema_sources})
 target_include_directories(dat_melee PUBLIC "${_dat_schema}")
 target_link_libraries(dat_melee PUBLIC dat_native PRIVATE melee_game_headers)
+target_compile_definitions(dat_melee PUBLIC DAT_NATIVE_READERS)
 target_compile_definitions(dat_melee PRIVATE
     VERSION_${MELEE_VERSION}
     BUILD_VERSION=${MELEE_VERSION_NUM}
@@ -115,22 +118,53 @@ target_compile_definitions(dat_melee PRIVATE
 set_target_properties(dat_melee PROPERTIES C_STANDARD 23 C_EXTENSIONS ON)
 target_compile_options(dat_melee PRIVATE -w)
 
+# Link this adapter with the TARGET_PC game instead of the console loader.
+add_library(dat_hsd STATIC src/hsd.c)
+target_link_libraries(dat_hsd PUBLIC dat_melee melee_game_headers)
+target_compile_definitions(dat_hsd PUBLIC DAT_NATIVE_READERS)
+target_compile_definitions(dat_hsd PRIVATE
+    VERSION_${MELEE_VERSION}
+    BUILD_VERSION=${MELEE_VERSION_NUM}
+)
+set_target_properties(dat_hsd PROPERTIES C_STANDARD 23 C_EXTENSIONS ON)
+
+# Validation compiles the same readers with test-only recording callbacks.
+# The production libraries above have no trace/readback state or verifiers.
+add_library(dat_native_test STATIC src/archive.c src/reader.c tests/support.c)
+target_include_directories(dat_native_test PUBLIC include tests/include)
+target_compile_definitions(dat_native_test PUBLIC DAT_NATIVE_TESTING)
+set_target_properties(dat_native_test PROPERTIES C_STANDARD 11 C_EXTENSIONS ON)
+if(NOT MSVC)
+    target_compile_options(dat_native_test PRIVATE -Wall -Wextra)
+    target_link_libraries(dat_native_test PUBLIC m)
+endif()
+add_library(dat_melee_test STATIC ${_dat_schema_sources})
+target_include_directories(dat_melee_test PUBLIC "${_dat_schema}")
+target_link_libraries(dat_melee_test PUBLIC dat_native_test PRIVATE melee_game_headers)
+target_compile_definitions(dat_melee_test PUBLIC DAT_NATIVE_READERS)
+target_compile_definitions(dat_melee_test PRIVATE
+    VERSION_${MELEE_VERSION}
+    BUILD_VERSION=${MELEE_VERSION_NUM}
+)
+set_target_properties(dat_melee_test PROPERTIES C_STANDARD 23 C_EXTENSIONS ON)
+target_compile_options(dat_melee_test PRIVATE -w)
+
 enable_testing()
 
 add_executable(dat_unit tests/unit.c)
-target_link_libraries(dat_unit PRIVATE dat_native)
+target_link_libraries(dat_unit PRIVATE dat_native_test)
 target_include_directories(dat_unit PRIVATE "${_dat_fixtures}")
 set_target_properties(dat_unit PROPERTIES C_STANDARD 11 C_EXTENSIONS ON)
 add_test(NAME unit COMMAND dat_unit)
 
 add_executable(dat_raw_refs tests/raw_refs.c)
-target_link_libraries(dat_raw_refs PRIVATE dat_native)
+target_link_libraries(dat_raw_refs PRIVATE dat_native_test)
 target_include_directories(dat_raw_refs PRIVATE "${_dat_fixtures}")
 set_target_properties(dat_raw_refs PROPERTIES C_STANDARD 11 C_EXTENSIONS ON)
 add_test(NAME raw_refs COMMAND dat_raw_refs)
 
 add_executable(dat_array_refs tests/array_refs.c)
-target_link_libraries(dat_array_refs PRIVATE dat_native)
+target_link_libraries(dat_array_refs PRIVATE dat_native_test)
 target_include_directories(dat_array_refs PRIVATE "${_dat_fixtures}")
 set_target_properties(dat_array_refs PROPERTIES C_STANDARD 11 C_EXTENSIONS ON)
 add_test(NAME array_refs COMMAND dat_array_refs)
@@ -147,7 +181,7 @@ add_custom_command(
 add_custom_target(dat_expect ALL DEPENDS expect.txt)
 
 add_executable(dat_e2e tests/e2e.c)
-target_link_libraries(dat_e2e PRIVATE dat_melee)
+target_link_libraries(dat_e2e PRIVATE dat_melee_test)
 set_target_properties(dat_e2e PROPERTIES C_STANDARD 11 C_EXTENSIONS ON)
 add_test(NAME e2e
     COMMAND dat_e2e "${CMAKE_CURRENT_BINARY_DIR}/expect.txt"
@@ -155,7 +189,7 @@ add_test(NAME e2e
 
 # The game's own types, read through C's member access
 add_executable(dat_types tests/types.c)
-target_link_libraries(dat_types PRIVATE dat_melee melee_game_headers)
+target_link_libraries(dat_types PRIVATE dat_melee_test melee_game_headers)
 target_compile_definitions(dat_types PRIVATE
     VERSION_${MELEE_VERSION}
     BUILD_VERSION=${MELEE_VERSION_NUM}
@@ -163,3 +197,13 @@ target_compile_definitions(dat_types PRIVATE
 set_target_properties(dat_types PROPERTIES C_STANDARD 23 C_EXTENSIONS ON)
 target_compile_options(dat_types PRIVATE -w)
 add_test(NAME types COMMAND dat_types "${MELEE_DAT_FILES}")
+
+# Exercise the actual game macro using only the production libraries.
+add_executable(dat_hsd_test tests/hsd.c)
+target_link_libraries(dat_hsd_test PRIVATE dat_hsd)
+target_compile_definitions(dat_hsd_test PRIVATE
+    VERSION_${MELEE_VERSION}
+    BUILD_VERSION=${MELEE_VERSION_NUM}
+)
+set_target_properties(dat_hsd_test PROPERTIES C_STANDARD 23 C_EXTENSIONS ON)
+add_test(NAME hsd COMMAND dat_hsd_test "${MELEE_DAT_FILES}")

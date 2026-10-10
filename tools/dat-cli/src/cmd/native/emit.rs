@@ -288,7 +288,7 @@ impl Emitter<'_, '_> {
                     )?;
                     writeln!(
                         c,
-                        "static uint64_t {ident}_{field}_get(const void* o) {{ return (uint64_t) ((const {record}*) o)->{field}; }}\n"
+                        "#ifdef DAT_NATIVE_TESTING\nstatic uint64_t {ident}_{field}_get(const void* o) {{ return (uint64_t) ((const {record}*) o)->{field}; }}\n#endif\n"
                     )?;
                 }
             }
@@ -301,7 +301,10 @@ impl Emitter<'_, '_> {
         let mut fields = vec![
             format!(".name = {}", literal(&row.name)),
             format!(".id = {}", row.id),
-            format!(".kind = {}", row.kind.c()),
+            format!(
+                ".kind = {}",
+                self.generator.types[row.resolved as usize].kind.c()
+            ),
         ];
         for callback in [
             "read",
@@ -312,15 +315,14 @@ impl Emitter<'_, '_> {
             "allocation_size",
             "verify",
         ] {
-            fields.push(format!(".{callback} = {ident}_{callback}"));
+            if callback != "verify" {
+                fields.push(format!(".{callback} = {ident}_{callback}"));
+            }
         }
         if row.members.iter().any(|m| m.cond.is_some()) {
             fields.push(".conditioned = 1".into());
         }
         for (set, field) in [
-            (row.is_signed, "is_signed"),
-            (row.raw, "raw"),
-            (row.blob, "blob"),
             (row.has_pointers, "has_pointers"),
             (row.has_extent, "has_extent"),
             (row.unbounded, "unbounded"),
@@ -328,6 +330,22 @@ impl Emitter<'_, '_> {
             if set {
                 fields.push(format!(".{field} = 1"));
             }
+        }
+        let mut current = index;
+        while current != NONE as usize {
+            let ty = &self.generator.types[current];
+            if ty.raw || ty.blob {
+                fields.push(".opaque = 1".into());
+                break;
+            }
+            if !matches!(
+                ty.kind,
+                super::generator::Kind::Typedef
+                    | super::generator::Kind::Qualifier
+            ) {
+                break;
+            }
+            current = ty.target as usize;
         }
         if row.size != 0 {
             fields.push(format!(".size = 0x{:X}", row.size));
@@ -344,6 +362,17 @@ impl Emitter<'_, '_> {
         if row.count != 0 {
             fields.push(format!(".count = {}", row.count));
         }
+        writeln!(
+            c,
+            "#ifdef DAT_NATIVE_TESTING\n    .verify = {ident}_verify,"
+        )?;
+        if row.is_signed {
+            c.push_str("    .is_signed = 1,\n");
+        }
+        if row.raw {
+            c.push_str("    .raw = 1,\n");
+        }
+        c.push_str("#endif\n");
         for field in fields {
             writeln!(c, "    {field},")?;
         }
@@ -396,14 +425,14 @@ impl Emitter<'_, '_> {
             parts.push(format!(".script = {}", self.script(script)));
         }
         if !root.binds.is_empty() {
-            let binds: Vec<String> = root
-                .binds
-                .iter()
-                .map(|(name, value)| {
-                    format!("{{ {}, {value} }}", self.name(name))
-                })
-                .collect();
-            parts.push(format!("DAT_ROOT_BINDS({})", binds.join(", ")));
+            let mut env = "NULL".to_owned();
+            for (name, value) in &root.binds {
+                env = format!(
+                    "&(const DatScope) {{ {}, {value}, {env} }}",
+                    self.name(name)
+                );
+            }
+            parts.push(format!(".env = {env}"));
         }
         parts
     }
@@ -441,7 +470,8 @@ impl Emitter<'_, '_> {
         h.push_str(concat!(
             "    DAT_TYPE_COUNT\n",
             "} MeleeDatType;\n\n",
-            "extern const DatSchema melee_dat_schema;\n\n",
+            "extern const DatSchema melee_dat_schema;\n",
+            "int32_t melee_dat_type(const char* spelling);\n\n",
             "#endif\n",
         ));
         h
@@ -454,6 +484,27 @@ impl Emitter<'_, '_> {
     ) -> String {
         let mut c = preamble("The schema: every type and name, by index");
         let _ = writeln!(c, "#include \"{INTERNAL}\"\n");
+        let mut dispatch = BTreeMap::new();
+        for (index, row) in self.generator.types.iter().enumerate().skip(1) {
+            if row.native_size != "0"
+                && let Some(spelling) = row
+                    .die
+                    .and_then(|die| self.generator.dispatch_spelling(die))
+            {
+                dispatch.entry(spelling).or_insert(index as i32);
+            }
+        }
+        c.push_str("static const struct { const char* name; int32_t type; } dispatch[] = {\n");
+        for (name, index) in dispatch {
+            let _ = writeln!(
+                c,
+                "    {{ {}, {} }},",
+                literal(&name),
+                self.ty(index)
+            );
+        }
+        c.push_str("};\n\n");
+        c.push_str(include_str!("emit/templates/dispatch.c"));
         c.push_str("static const DatType* const types[DAT_TYPE_COUNT] = {\n");
         for ident in self.idents.iter().skip(1) {
             let _ = writeln!(c, "    [DAT_TYPE_{ident}] = &dat_type_{ident},");

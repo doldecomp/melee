@@ -5,7 +5,7 @@ uint32_t value = dat_reader_word(a, offset);
 if (bits_has(&a->archive->reloc, offset, a->archive->size)) {
     uint64_t key;
     bool ok = p == a->archive->data + value ||
-              (map_get(&a->offsets, (uint64_t) (uintptr_t) p, &key) &&
+              (map_get(&v->offsets, (uint64_t) (uintptr_t) p, &key) &&
                (uint32_t) (key >> 32) == value);
     /* Elements of a native array */
     if (!ok && p != NULL) {
@@ -20,7 +20,7 @@ if (bits_has(&a->archive->reloc, offset, a->archive->size)) {
                                              : "pointer",
                             value, (uint64_t) (uintptr_t) p);
         if (v->out != NULL &&
-            map_get(&a->offsets, (uint64_t) (uintptr_t) p, &key))
+            map_get(&v->offsets, (uint64_t) (uintptr_t) p, &key))
         {
             int32_t e = dat_reader_pointee(a, t->target);
             fprintf(v->out, "  (to %s, which is 0x%X as %s)\n",

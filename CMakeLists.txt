@@ -12,6 +12,8 @@ project(melee LANGUAGES C)
 
 include(GNUInstallDirs)
 
+option(MELEE_DAT_READERS "Use generated archive readers in the native game" OFF)
+
 option(MELEE_DWARF "Emit DWARF describing the original type layouts" OFF)
 option(MELEE_DAT_SAMPLES "Sample the .dat archives' types for objdiff (needs MELEE_DWARF)" OFF)
 
@@ -23,6 +25,14 @@ endif()
 
 if(MELEE_DAT_SAMPLES)
     include(cmake/Dat.cmake)
+endif()
+
+if(MELEE_DAT_READERS)
+    enable_testing()
+    add_subdirectory(tools/dat-cli/native dat-readers)
+    target_link_libraries(melee PUBLIC dat_hsd)
+    # Match the generated readers' bool=int header layout.
+    set_target_properties(melee PROPERTIES C_STANDARD 23 C_EXTENSIONS ON)
 endif()
 
 install(TARGETS melee LIBRARY DESTINATION "${CMAKE_INSTALL_LIBDIR}")

@@ -30,12 +30,6 @@ typedef enum DatKind {
     DAT_KIND_STRUCT,
     DAT_KIND_UNION,
     DAT_KIND_ARRAY,
-    /// A typedef, which may carry `DAT_TERMINATED`, `DAT_TYPE`, `DAT_BLOB`
-    /// or a script.
-    DAT_KIND_TYPEDEF,
-    /// `const`, `volatile` or `restrict`: transparent, but the end of a
-    /// search for a typedef's annotations.
-    DAT_KIND_QUALIFIER,
 } DatKind;
 
 struct DatArchive;
@@ -51,11 +45,17 @@ typedef struct DatExpr {
                     unsigned, uint64_t*);
 } DatExpr;
 
-/// An element's compiled binding function.
-typedef const struct DatScope* (*DatBinding)(struct DatArchive*,
-                                             const struct DatScope*,
-                                             const struct DatParent*,
-                                             uint64_t);
+/// Names bound by a loader or DAT_BIND. Generated readers own their storage.
+typedef struct DatScope {
+    int32_t name;
+    uint64_t value;
+    const struct DatScope* outer;
+} DatScope;
+
+/// An element's compiled binding function, using caller-provided storage.
+typedef const DatScope* (*DatBinding)(struct DatArchive*, const DatScope*,
+                                      const struct DatParent*, uint64_t,
+                                      DatScope*);
 
 /// Command lengths for `DAT_SCRIPT` and `DAT_BYTE_SCRIPT`.
 typedef struct DatScript {
@@ -70,8 +70,9 @@ typedef struct DatScript {
     uint8_t bytes;
 } DatScript;
 
-/// Generated implementation contract. All callbacks are present, including
-/// no-ops for inapplicable operations. Layout changes belong in Rust codegen.
+/// Generated storage/read callbacks include no-ops for inapplicable
+/// operations. Verification is test-only. Layout changes belong in Rust
+/// codegen.
 typedef struct DatType {
     /// Apply this type's annotations and read at the archive offset. Native
     /// may be NULL when only traversing; parent supplies union context.
@@ -86,20 +87,22 @@ typedef struct DatType {
     int (*union_field)(const struct DatArchive*, uint32_t, int32_t, uint64_t*);
     /// Resolved native storage size, including a bounded flexible tail.
     size_t (*allocation_size)(struct DatArchive*, uint32_t);
+#ifdef DAT_NATIVE_TESTING
     /// Compare the resolved native layout with archive bytes.
     void (*verify)(struct DatVerify*, uint32_t, const void*, int);
+#endif
     uint8_t conditioned;
     /// The type's name, for traces.
     const char* name;
     /// The generator's id for it, which traces print.
     uint32_t id;
     uint8_t kind;
-    /// `DAT_KIND_INT`: whether it is signed, which widening follows.
-    uint8_t is_signed;
-    /// Raw bytes: `u8`, or arrays of it, not named by a `DAT_BLOB` typedef.
-    uint8_t raw;
-    /// A `DAT_BLOB` typedef.
-    uint8_t blob;
+#ifdef DAT_NATIVE_TESTING
+    /// Readback widening and coverage exclusion.
+    uint8_t is_signed, raw;
+#endif
+    /// Precomputed through typedefs/qualifiers: keep serialized bytes.
+    uint8_t opaque;
     /// Whether any part of it is a pointer, not looking through pointers.
     uint8_t has_pointers;
     /// A struct whose last member is a `DAT_EXTENT` array.
@@ -130,12 +133,6 @@ typedef enum DatCount {
     DAT_COUNT_TERMINATED,
 } DatCount;
 
-/// A value a root's loader binds, for `DAT_IF` and `DAT_BIND` names.
-typedef struct DatRootBind {
-    int32_t name;
-    uint64_t value;
-} DatRootBind;
-
 /// A root of an archive: a public symbol by name, or an alias at an
 /// address.
 typedef struct DatRoot {
@@ -148,8 +145,7 @@ typedef struct DatRoot {
     uint64_t count;
     /// A command script nothing points to, for an alias; `NULL` otherwise.
     const DatScript* script;
-    const DatRootBind* binds;
-    uint32_t nbinds;
+    const DatScope* env;
 } DatRoot;
 
 /// The roots of one archive of a file, as `melee-dat` types them.
@@ -186,10 +182,7 @@ typedef struct DatSchema {
 
 #define DAT_COUNTOF(array) (sizeof(array) / sizeof *(array))
 
-/// A root's bindings, a file's roots and a module's files.
-#define DAT_ROOT_BINDS(...)                                                   \
-    .binds = (const DatRootBind[]) { __VA_ARGS__ },                           \
-    .nbinds = DAT_COUNTOF(((const DatRootBind[]) { __VA_ARGS__ }))
+/// A file's roots and a module's files.
 #define DAT_FILE_ROOTS(array) .roots = (array), .nroots = DAT_COUNTOF(array)
 #define DAT_MODULE(array) { .files = (array), .nfiles = DAT_COUNTOF(array) }
 

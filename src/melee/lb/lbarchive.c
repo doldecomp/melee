@@ -128,6 +128,9 @@ void lbArchive_80016EFC(HSD_Archive* archive)
 {
     HSD_ASSERT(0xFC, archive);
     HSD_ASSERT(0xFD, archive->flags & HSD_ARCHIVE_DONT_FREE);
+#if defined(TARGET_PC) && defined(DAT_NATIVE_READERS)
+    HSD_ArchiveReleaseNative(archive);
+#endif
     lbHeap_80015CA8(0, archive->data - sizeof(archive->header));
     lbHeap_80015CA8(0, archive);
 }

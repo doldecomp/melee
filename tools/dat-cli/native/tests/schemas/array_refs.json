@@ -185,6 +185,65 @@
         }
       ],
       "has_pointers": true
+    },
+    {
+      "key": "T_RECURSIVE",
+      "name": "Recursive",
+      "kind": "struct",
+      "size": 12,
+      "native_size": "sizeof(Recursive)",
+      "members": [
+        {
+          "type": "T_INT",
+          "offset": 0,
+          "record": "Recursive",
+          "field": "value",
+          "name": "value"
+        },
+        {
+          "type": "T_RECURSIVE_ARRAY_P",
+          "offset": 4,
+          "record": "Recursive",
+          "field": "array",
+          "name": "array"
+        },
+        {
+          "type": "T_RECURSIVE_P",
+          "offset": 8,
+          "record": "Recursive",
+          "field": "next",
+          "name": "next"
+        }
+      ],
+      "has_pointers": true
+    },
+    {
+      "key": "T_RECURSIVE_P",
+      "name": "Recursive*",
+      "kind": "pointer",
+      "size": 4,
+      "native_size": "sizeof(void*)",
+      "target": "T_RECURSIVE",
+      "has_pointers": true
+    },
+    {
+      "key": "T_RECURSIVE_ARRAY",
+      "name": "Recursive[2]",
+      "kind": "array",
+      "size": 24,
+      "native_size": "sizeof(Recursive[2])",
+      "target": "T_RECURSIVE",
+      "count": 2,
+      "has_pointers": true
+    },
+    {
+      "key": "T_RECURSIVE_ARRAY_P",
+      "name": "Recursive(*)[2]",
+      "kind": "pointer",
+      "size": 4,
+      "native_size": "sizeof(void*)",
+      "target": "T_RECURSIVE_ARRAY",
+      "has_pointers": true
     }
   ],
   "variants": {
@@ -414,6 +473,33 @@
             "record": "Root",
             "field": "array",
             "name": "array"
+          }
+        ]
+      }
+    },
+    "recursive_reverse": {
+      "T_RECURSIVE": {
+        "members": [
+          {
+            "type": "T_RECURSIVE_P",
+            "offset": 8,
+            "record": "Recursive",
+            "field": "next",
+            "name": "next"
+          },
+          {
+            "type": "T_RECURSIVE_ARRAY_P",
+            "offset": 4,
+            "record": "Recursive",
+            "field": "array",
+            "name": "array"
+          },
+          {
+            "type": "T_INT",
+            "offset": 0,
+            "record": "Recursive",
+            "field": "value",
+            "name": "value"
           }
         ]
       }

@@ -36,17 +36,19 @@ impl Emitter<'_, '_> {
             native_offset(m)
         )?;
         let binding = self.member_binding(ident, i, m);
+        let storage = scope_storage(c, m, "storage")?;
+        let elements = scope_storage(c, m, "elements")?;
         if !m.binds.is_empty() {
             writeln!(
                 c,
-                "a->env = dat_reader_bind_scope(a, outer, {binding}, here, 0);"
+                "a->env = dat_reader_bind_scope(a, outer, {binding}, here, 0, {storage});"
             )?;
         }
         let count = m.count.as_ref().map(|e| self.expr(e));
         if let Some(expr) = &count {
             writeln!(
                 c,
-                "uint64_t count; DatContext ctx = {{ MODE_COUNT, r, offset, DAT_NONE, 0, a->env, 0, 0 }}; if (dat_reader_eval(a, &ctx, {expr}, &count)) {{ dat_reader_counted(a, at, {}, {}, count, {binding}, here, field); }} else {{",
+                "uint64_t count; DatContext ctx = {{ MODE_COUNT, r, offset, DAT_NONE, 0, a->env, 0, 0 }}; if (dat_reader_eval(a, &ctx, {expr}, &count)) {{ dat_reader_counted(a, at, {}, {}, count, {binding}, {elements}, here, field); }} else {{",
                 self.ty(m.ty),
                 self.ty(m.type_tag)
             )?;
@@ -69,7 +71,7 @@ impl Emitter<'_, '_> {
         } else if m.extent {
             writeln!(
                 c,
-                "dat_reader_extent(a, at, {}, {binding}, here, field);",
+                "dat_reader_extent(a, at, {}, {binding}, {elements}, here, field);",
                 self.ty(m.ty)
             )?;
         } else if let Some(expr) = &m.terminator {
@@ -92,7 +94,7 @@ impl Emitter<'_, '_> {
                 if e != NONE {
                     writeln!(
                         c,
-                        "for (uint32_t j = 0; j < {}; j++) {{ a->env = dat_reader_bind_scope(a, outer, {binding}, here, j); uint32_t pos = at + j * dat_reader_T(a, {})->size; void* element = field ? (char*) field + (size_t) j * dat_reader_T(a, {})->native_size : NULL; dat_reader_place_native(a, pos, {}, element); dat_reader_layout(a, pos, {}, element, here); }}",
+                        "for (uint32_t j = 0; j < {}; j++) {{ a->env = dat_reader_bind_scope(a, outer, {binding}, here, j, {storage}); uint32_t pos = at + j * dat_reader_T(a, {})->size; void* element = field ? (char*) field + (size_t) j * dat_reader_T(a, {})->native_size : NULL; dat_reader_place_native(a, pos, {}, element); dat_reader_layout(a, pos, {}, element, here); }}",
                         row.count,
                         self.ty(e),
                         self.ty(e),
@@ -147,7 +149,7 @@ impl Emitter<'_, '_> {
             if e != NONE {
                 writeln!(
                     c,
-                    "{{ uint64_t count; if (map_get(&a->array_counts, key2(offset + {at}, dat_reader_T(a, {})->id), &count)) {{ for (uint64_t j = 0; j < count; j++) dat_reader_verify(v, offset + {at} + j * dat_reader_T(a, {})->size, {}, (const char*) native + {native} + j * dat_reader_T(a, {})->native_size, depth + 1); }} else {{ dat_reader_verify(v, offset + {at}, {}, (const char*) native + {native}, depth + 1); }} }}",
+                    "{{ uint64_t count; if (map_get(&a->validation->array_counts, key2(offset + {at}, dat_reader_T(a, {})->id), &count)) {{ for (uint64_t j = 0; j < count; j++) dat_reader_verify(v, offset + {at} + j * dat_reader_T(a, {})->size, {}, (const char*) native + {native} + j * dat_reader_T(a, {})->native_size, depth + 1); }} else {{ dat_reader_verify(v, offset + {at}, {}, (const char*) native + {native}, depth + 1); }} }}",
                     self.ty(arr),
                     self.ty(e),
                     self.ty(e),
@@ -182,6 +184,18 @@ impl Emitter<'_, '_> {
         u8::from(self.generator.types[r as usize].is_signed)
     }
 }
+fn scope_storage<'a>(
+    c: &mut String,
+    m: &MemberRow,
+    name: &'a str,
+) -> Result<&'a str> {
+    if m.binds.is_empty() {
+        return Ok("NULL");
+    }
+    writeln!(c, "DatScope {name}[{}];", m.binds.len())?;
+    Ok(name)
+}
+
 pub(super) fn native_offset(m: &MemberRow) -> String {
     match &m.place {
         Place::Field { record, field } => {
@@ -224,9 +238,10 @@ impl Emitter<'_, '_> {
                 if let Some(expr) = &m.count {
                     let expr = self.expr(expr);
                     let binding = self.member_binding(ident, i, m);
+                    let storage = scope_storage(c, m, "storage")?;
                     writeln!(
                         c,
-                        "DatParent here = {{ r, offset, 1 }}; const DatScope* env = dat_reader_bind_scope(a, a->env, {binding}, here, 0); DatContext ctx = {{ MODE_COUNT, r, offset, DAT_NONE, 0, env, 0, 0 }}; uint64_t n; if (!dat_reader_eval(a, &ctx, {expr}, &n)) n = {}; if (!dat_reader_array_count_fits(a, offset + {at}, {array_ty}, {elem}, n)) return {size};",
+                        "DatParent here = {{ r, offset, 1 }}; const DatScope* env = dat_reader_bind_scope(a, a->env, {binding}, here, 0, {storage}); DatContext ctx = {{ MODE_COUNT, r, offset, DAT_NONE, 0, env, 0, 0 }}; uint64_t n; if (!dat_reader_eval(a, &ctx, {expr}, &n)) n = {}; if (!dat_reader_array_count_fits(a, offset + {at}, {array_ty}, {elem}, n)) return {size};",
                         array.count
                     )?;
                 } else {
@@ -266,10 +281,11 @@ impl Emitter<'_, '_> {
             writeln!(c, "case {i}: {{")?;
             if m.ty != NONE {
                 let binding = self.member_binding(ident, i, m);
+                let storage = scope_storage(c, m, "storage")?;
                 let ty = self.ty(m.ty);
                 writeln!(
                     c,
-                    "dat_reader_typed_extent(a, offset, {ty}, 1); const DatScope* outer = a->env; a->env = dat_reader_bind_scope(a, outer, {binding}, parent, 0);"
+                    "dat_reader_typed_extent(a, offset, {ty}, 1); const DatScope* outer = a->env; a->env = dat_reader_bind_scope(a, outer, {binding}, parent, 0, {storage});"
                 )?;
                 if let Some(script) = &m.script {
                     let script = self.script(script);
@@ -310,7 +326,7 @@ impl Emitter<'_, '_> {
         };
         writeln!(
             c,
-            "uint64_t index = {fallback}; map_get(&a->choices, key2(offset, t->id), &index); switch (index) {{"
+            "uint64_t index = {fallback}; map_get(&a->validation->choices, key2(offset, t->id), &index); switch (index) {{"
         )?;
         for (i, m) in row.members.iter().enumerate() {
             if m.ty != NONE && m.script.is_none() {

@@ -4,12 +4,12 @@
  *
  * An archive is big-endian data laid out for a 32-bit target, whose
  * pointers are offsets the loader relocates (`lbarchive.c`). This library
- * walks it the way `melee-dat`'s walker does, from the roots the game loads
+ * reads it through generated callbacks, from the roots the game loads
  * by name, and writes what it reaches as native objects: scalars converted
  * to the host's byte order and sizes, pointers to the native objects they
  * refer to.
  *
- * Rust generates each type's reader and verifier from DWARF. The native
+ * Rust generates each type's reader from DWARF. The native
  * compiler supplies its field offsets and sizes through `offsetof` and
  * `sizeof`. Archive loading itself needs no schema; generated readers use
  * shared storage and reference helpers to build native objects.
@@ -27,7 +27,6 @@
 #include <stdbool.h>
 #include <stddef.h>
 #include <stdint.h>
-#include <stdio.h>
 
 #include <dat/schema.h>
 
@@ -36,18 +35,6 @@ extern "C" {
 #endif
 
 typedef struct DatArchive DatArchive;
-
-/// What a trace prints: everything, for comparing with `melee-dat native
-/// expect`.
-typedef enum DatTrace {
-    DAT_TRACE_OBJECTS = 1 << 0,
-    DAT_TRACE_POINTERS = 1 << 1,
-    DAT_TRACE_EXTENTS = 1 << 2,
-    DAT_TRACE_CHOICES = 1 << 3,
-    DAT_TRACE_ISSUES = 1 << 4,
-    DAT_TRACE_COUNTS = 1 << 5,
-    DAT_TRACE_ALL = (1 << 6) - 1,
-} DatTrace;
 
 /// Open one archive in `bytes`, which is copied. `NULL` if it is malformed
 /// in a way the game would misread, with why in `error` if given.
@@ -62,6 +49,9 @@ int dat_open_packed(const DatSchema* schema, const void* bytes, size_t size,
                     const char** error);
 
 void dat_close(DatArchive* archive);
+
+/// Link an external symbol before or after loading typed objects.
+void dat_link_extern(DatArchive* archive, const char* name, void* address);
 
 /// Walk and convert the roots `melee-dat` gives the `index`th archive of
 /// `file`. Returns how many roots it found.
@@ -81,15 +71,6 @@ const uint8_t* dat_raw(const DatArchive* archive, uint32_t offset);
 
 /// The data's size.
 uint32_t dat_size(const DatArchive* archive);
-
-/// Write what the walk reached, sorted, in the form `melee-dat native
-/// expect` does.
-void dat_trace(const DatArchive* archive, FILE* out, unsigned what);
-
-/// Check every converted object against the data it came from, reading it
-/// back natively. Returns the number of mismatches, writing each to `out`
-/// if given.
-size_t dat_verify(const DatArchive* archive, FILE* out);
 
 /// The index of a type by its trace id, or `DAT_NONE`.
 int32_t dat_type_by_id(const DatSchema* schema, uint32_t id);

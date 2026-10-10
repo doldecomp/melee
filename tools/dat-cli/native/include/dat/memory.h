@@ -4,69 +4,6 @@
 #include <stdint.h>
 #include <stdlib.h>
 #include <string.h>
-typedef struct DatChunk {
-    struct DatChunk* next;
-    size_t used, size;
-    /* Aligned for any object the tables describe */
-    _Alignas(16) unsigned char bytes[];
-} DatChunk;
-
-typedef struct DatArena {
-    DatChunk* chunks;
-} DatArena;
-
-/// Zeroed memory that lives as long as the arena.
-static inline void* arena_alloc(DatArena* arena, size_t size)
-{
-    size = (size + 15) & ~(size_t) 15;
-    if (size == 0) {
-        size = 16;
-    }
-    DatChunk* chunk = arena->chunks;
-    if (chunk == NULL || chunk->size - chunk->used < size) {
-        size_t want = size > (1 << 20) ? size : (1 << 20);
-        chunk = calloc(1, sizeof(DatChunk) + want);
-        if (chunk == NULL) {
-            abort();
-        }
-        chunk->size = want;
-        chunk->next = arena->chunks;
-        arena->chunks = chunk;
-    }
-    void* p = chunk->bytes + chunk->used;
-    chunk->used += size;
-    return p;
-}
-
-static inline void arena_free(DatArena* arena)
-{
-    for (DatChunk* c = arena->chunks; c != NULL;) {
-        DatChunk* next = c->next;
-        free(c);
-        c = next;
-    }
-    arena->chunks = NULL;
-}
-
-/// A growable array of `T`.
-#define VEC(T)                                                                \
-    struct {                                                                  \
-        T* items;                                                             \
-        size_t len, cap;                                                      \
-    }
-
-#define VEC_PUSH(v, item)                                                     \
-    do {                                                                      \
-        if ((v).len == (v).cap) {                                             \
-            (v).cap = (v).cap ? (v).cap * 2 : 16;                             \
-            (v).items = realloc((v).items, (v).cap * sizeof(*(v).items));     \
-            if ((v).items == NULL) {                                          \
-                abort();                                                      \
-            }                                                                 \
-        }                                                                     \
-        (v).items[(v).len++] = (item);                                        \
-    } while (0)
-
 /// A set of offsets in the data.
 typedef struct DatOffsets {
     uint32_t* words;

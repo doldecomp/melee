@@ -9,7 +9,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include <dat/archive.h>
+#include <dat/test.h>
 
 static int failures;
 
@@ -605,15 +605,14 @@ static void test_tagged_plain_union_size(void)
         put32(file + 4, data);
         put32(file + 8, foreign + (offset != 0));
         put32(file + 12, 1);
-        const DatRootBind bind = { DAT_NAME_kind, kind };
+        const DatScope bind = { DAT_NAME_kind, kind, NULL };
         const DatRoot root = { .name = "root",
                                .type = offset ? T_COUNTED_LEAF_P : T_CHOICE,
                                .count_kind = i >= 3 && i < 6
                                                  ? DAT_COUNT_EXACTLY
                                                  : DAT_COUNT_ONE,
                                .count = 1,
-                               .binds = &bind,
-                               .nbinds = 1 };
+                               .env = &bind };
         const DatFileRoots roots = { .file = "fixture",
                                      .roots = &root,
                                      .nroots = 1 };

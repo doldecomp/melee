@@ -3,7 +3,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include <dat/archive.h>
+#include <dat/test.h>
 
 static unsigned failures;
 #define CHECK(c)                                                              \
