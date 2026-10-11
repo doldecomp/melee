@@ -368,6 +368,11 @@ Each complete expression becomes one C function, with lazy branches and
 unsigned 64-bit arithmetic. Macro references call separate evaluators with
 a bounded expansion depth. Unresolved names and undefined operations return
 failure so the reader can retain the annotation's fallback behavior.
+Counted and terminated pointer fields can supply bounded archive byte views
+through `DatValue`; bindings retain these views, and arithmetic rejects them.
+`GXMaxIndex` scans display-list bytes with their vertex descriptors. Generated
+recount callbacks refresh plain pointer counts when shared descriptors are
+reached with another display list, retaining the largest extent.
 
 Add type or annotation behavior in the generator. Keep shared storage,
 reference fixups and byte operations in `reader.c`; keep archive loading in
