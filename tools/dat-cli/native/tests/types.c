@@ -12,7 +12,7 @@
 #include <string.h>
 
 #include "melee_dat.h"
-#include <dat/archive.h>
+#include <dat/test.h>
 #include <melee/ft/dobjlist.h>
 #include <melee/ft/types.h>
 #include <melee/it/it_3F14.h>
@@ -47,25 +47,7 @@ static float befloat(const uint8_t* p)
     return f;
 }
 
-static const struct {
-    const char* file;
-    const char* name;
-} fighters[] = {
-    { "PlMr.dat", "ftDataMario" },     { "PlFx.dat", "ftDataFox" },
-    { "PlCa.dat", "ftDataCaptain" },   { "PlDk.dat", "ftDataDonkey" },
-    { "PlKb.dat", "ftDataKirby" },     { "PlKp.dat", "ftDataKoopa" },
-    { "PlLk.dat", "ftDataLink" },      { "PlSk.dat", "ftDataSeak" },
-    { "PlNs.dat", "ftDataNess" },      { "PlPe.dat", "ftDataPeach" },
-    { "PlPp.dat", "ftDataPopo" },      { "PlNn.dat", "ftDataNana" },
-    { "PlPk.dat", "ftDataPikachu" },   { "PlSs.dat", "ftDataSamus" },
-    { "PlYs.dat", "ftDataYoshi" },     { "PlPr.dat", "ftDataPurin" },
-    { "PlMt.dat", "ftDataMewtwo" },    { "PlLg.dat", "ftDataLuigi" },
-    { "PlMs.dat", "ftDataMars" },      { "PlZd.dat", "ftDataZelda" },
-    { "PlCl.dat", "ftDataClink" },     { "PlDr.dat", "ftDataDrmario" },
-    { "PlFc.dat", "ftDataFalco" },     { "PlPc.dat", "ftDataPichu" },
-    { "PlGw.dat", "ftDataGamewatch" }, { "PlGn.dat", "ftDataGanon" },
-    { "PlFe.dat", "ftDataEmblem" },
-};
+#include "fighters.h"
 
 static unsigned char* read_file(const char* path, size_t* size)
 {

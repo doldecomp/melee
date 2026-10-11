@@ -1,7 +1,7 @@
 //! The schema as C, a directory of it:
 //!
 //! - `melee_dat.h`: the schema and the types' indices, `DAT_TYPE_*`
-//! - `types/<header>.c`: the descriptors of the types a header of the game's
+//! - `types/<header>.c`: compiled readers for the types a game header
 //!   declares, with what refers to them (pointers, arrays, qualifiers);
 //!   `types/base.c` those of the types no header declares
 //! - `roots/<module>.c`: the roots of the archives of a module, the first two
@@ -16,10 +16,7 @@ use super::generator::{
 };
 use anyhow::{Result, bail};
 use melee_dat::{
-    dwarf::{
-        DieId, TypeKind,
-        expr::{BinaryOp, Expr, UnaryOp},
-    },
+    dwarf::{DieId, TypeKind, expr::Expr},
     symbols::Count,
 };
 use std::{
@@ -39,6 +36,10 @@ const LINE: usize = 100;
 /// The files, by path in the output directory.
 pub type Output = BTreeMap<String, String>;
 
+mod expressions;
+mod members;
+mod readers;
+
 struct Emitter<'g, 'a> {
     generator: &'g Generator<'a>,
     /// Each type's identifier, by index.
@@ -50,6 +51,8 @@ struct Emitter<'g, 'a> {
     /// The macros referred to, which `macros.c` defines.
     used_macros: BTreeSet<String>,
     scripts: BTreeMap<String, Vec<u8>>,
+    expression_code: String,
+    next_expression: usize,
 }
 
 pub fn emit(generator: &Generator, files: &[FileRow]) -> Result<Output> {
@@ -60,6 +63,8 @@ pub fn emit(generator: &Generator, files: &[FileRow]) -> Result<Output> {
         macros: HashMap::new(),
         used_macros: BTreeSet::new(),
         scripts: BTreeMap::new(),
+        expression_code: String::new(),
+        next_expression: 0,
     };
     let mut out = Output::new();
     let mut declared: BTreeMap<String, Vec<String>> = BTreeMap::new();
@@ -93,6 +98,7 @@ pub fn emit(generator: &Generator, files: &[FileRow]) -> Result<Output> {
         if !headers.is_empty() {
             c.push('\n');
         }
+        c.push_str(&std::mem::take(&mut e.expression_code));
         c.push_str(&body);
         declared.insert(
             path.clone(),
@@ -117,6 +123,7 @@ pub fn emit(generator: &Generator, files: &[FileRow]) -> Result<Output> {
             "The roots of the archives of the `{module}` files"
         ));
         writeln!(c, "#include \"{INTERNAL}\"")?;
+        let mut body = String::new();
         let mut arrays = Vec::new();
         let mut used = BTreeSet::new();
         for file in files {
@@ -127,24 +134,24 @@ pub fn emit(generator: &Generator, files: &[FileRow]) -> Result<Output> {
             while !used.insert(array.clone()) {
                 array.push('_');
             }
-            writeln!(c, "\nstatic const DatRoot {array}[] = {{")?;
+            writeln!(body, "\nstatic const DatRoot {array}[] = {{")?;
             for root in &file.roots {
                 let parts = e.root(root);
-                c.push_str(&initializer(&parts, "    ", ","));
+                body.push_str(&initializer(&parts, "    ", ","));
             }
-            c.push_str("};\n");
+            body.push_str("};\n");
             arrays.push((file, array));
         }
-        writeln!(c, "\nconst DatFileRoots dat_files_{module}[] = {{")?;
+        writeln!(body, "\nconst DatFileRoots dat_files_{module}[] = {{")?;
         for (file, array) in &arrays {
             let mut parts = vec![format!(".file = {}", literal(&file.file))];
             if file.archive > 0 {
                 parts.push(format!(".archive = {}", file.archive));
             }
             parts.push(format!("DAT_FILE_ROOTS({array})"));
-            c.push_str(&initializer(&parts, "    ", ","));
+            body.push_str(&initializer(&parts, "    ", ","));
         }
-        c.push_str("};\n");
+        body.push_str("};\n");
         declared.insert(
             path.clone(),
             vec![format!(
@@ -152,6 +159,8 @@ pub fn emit(generator: &Generator, files: &[FileRow]) -> Result<Output> {
                 files.len()
             )],
         );
+        c.push_str(&std::mem::take(&mut e.expression_code));
+        c.push_str(&body);
         out.insert(path, c);
     }
 
@@ -178,6 +187,7 @@ pub fn emit(generator: &Generator, files: &[FileRow]) -> Result<Output> {
     if !defined.is_empty() {
         let mut c = preamble("The macros the annotations' expressions use");
         writeln!(c, "#include \"{INTERNAL}\"\n")?;
+        c.push_str(&std::mem::take(&mut e.expression_code));
         c.push_str(&macros);
         declared.insert(
             "macros.c".into(),
@@ -259,7 +269,7 @@ impl Emitter<'_, '_> {
         format!("DAT_NAME_{}", identifier(name))
     }
 
-    /// A type's descriptor, and its members' and their accessors before it.
+    /// A type's callbacks, native bitfield accessors and storage metadata.
     fn descriptor(
         &mut self,
         c: &mut String,
@@ -267,7 +277,6 @@ impl Emitter<'_, '_> {
         row: &TypeRow,
     ) -> Result<()> {
         let ident = self.idents[index].clone();
-        let members = format!("{ident}_members");
         if !row.members.is_empty() {
             for m in &row.members {
                 if let (Place::Bits { record, field }, Some(_)) =
@@ -279,34 +288,41 @@ impl Emitter<'_, '_> {
                     )?;
                     writeln!(
                         c,
-                        "static uint64_t {ident}_{field}_get(const void* o) {{ return (uint64_t) ((const {record}*) o)->{field}; }}\n"
+                        "#ifdef DAT_NATIVE_TESTING\nstatic uint64_t {ident}_{field}_get(const void* o) {{ return (uint64_t) ((const {record}*) o)->{field}; }}\n#endif\n"
                     )?;
                 }
             }
-            writeln!(c, "static const DatMember {members}[] = {{")?;
-            for m in &row.members {
-                let parts = self.member(&ident, m);
-                let one = initializer(&parts, "    ", ",");
-                // What isn't plain is easier read as written
-                if one.lines().count() > 1 {
-                    for annotation in &m.annotations {
-                        writeln!(c, "    /* {annotation} */")?;
-                    }
-                }
-                c.push_str(&one);
+            for (i, m) in row.members.iter().enumerate() {
+                self.binding(c, &ident, i, m)?;
             }
-            c.push_str("};\n\n");
         }
+        self.readers(c, index, row)?;
         writeln!(c, "const DatType dat_type_{ident} = {{")?;
         let mut fields = vec![
             format!(".name = {}", literal(&row.name)),
             format!(".id = {}", row.id),
-            format!(".kind = {}", row.kind.c()),
+            format!(
+                ".kind = {}",
+                self.generator.types[row.resolved as usize].kind.c()
+            ),
         ];
+        for callback in [
+            "read",
+            "convert",
+            "fits",
+            "field",
+            "union_field",
+            "allocation_size",
+            "verify",
+        ] {
+            if callback != "verify" {
+                fields.push(format!(".{callback} = {ident}_{callback}"));
+            }
+        }
+        if row.members.iter().any(|m| m.cond.is_some()) {
+            fields.push(".conditioned = 1".into());
+        }
         for (set, field) in [
-            (row.is_signed, "is_signed"),
-            (row.raw, "raw"),
-            (row.blob, "blob"),
             (row.has_pointers, "has_pointers"),
             (row.has_extent, "has_extent"),
             (row.unbounded, "unbounded"),
@@ -314,6 +330,22 @@ impl Emitter<'_, '_> {
             if set {
                 fields.push(format!(".{field} = 1"));
             }
+        }
+        let mut current = index;
+        while current != NONE as usize {
+            let ty = &self.generator.types[current];
+            if ty.raw || ty.blob {
+                fields.push(".opaque = 1".into());
+                break;
+            }
+            if !matches!(
+                ty.kind,
+                super::generator::Kind::Typedef
+                    | super::generator::Kind::Qualifier
+            ) {
+                break;
+            }
+            current = ty.target as usize;
         }
         if row.size != 0 {
             fields.push(format!(".size = 0x{:X}", row.size));
@@ -330,27 +362,17 @@ impl Emitter<'_, '_> {
         if row.count != 0 {
             fields.push(format!(".count = {}", row.count));
         }
-        if !row.members.is_empty() {
-            fields.push(format!("DAT_MEMBERS({members})"));
+        writeln!(
+            c,
+            "#ifdef DAT_NATIVE_TESTING\n    .verify = {ident}_verify,"
+        )?;
+        if row.is_signed {
+            c.push_str("    .is_signed = 1,\n");
         }
-        if let Some(terminator) = &row.terminator {
-            fields.push(format!(".terminator = {}", self.expr(terminator)));
+        if row.raw {
+            c.push_str("    .raw = 1,\n");
         }
-        if row.terminator_length > 1 {
-            fields.push(format!(
-                ".terminator_length = {}",
-                row.terminator_length
-            ));
-        }
-        if let Some(count) = &row.count_tag {
-            fields.push(format!(".count_tag = {}", self.expr(count)));
-        }
-        if row.type_tag != NONE {
-            fields.push(format!(".type_tag = {}", self.ty(row.type_tag)));
-        }
-        if let Some(script) = &row.script {
-            fields.push(self.script(script));
-        }
+        c.push_str("#endif\n");
         for field in fields {
             writeln!(c, "    {field},")?;
         }
@@ -358,105 +380,21 @@ impl Emitter<'_, '_> {
         Ok(())
     }
 
-    fn member(&mut self, ident: &str, m: &MemberRow) -> Vec<String> {
-        let mut parts = Vec::new();
-        // Most are their record's field of the same name
-        if let (Place::Field { record, field }, Some(name), Some(offset)) =
-            (&m.place, &m.name, m.offset)
-            && m.ty != NONE
-            && field == name
-            && identifier(name) == *name
-        {
-            self.name(name);
-            parts.push(format!(
-                "DAT_MEMBER({record}, {field}, 0x{offset:X}, {})",
-                self.ty(m.ty)
-            ));
-        } else {
-            self.member_place(m, &mut parts);
-        }
-        if m.bit_size != 0 {
-            parts.push(format!(".bit_offset = {}", m.bit_offset));
-            parts.push(format!(".bit_size = {}", m.bit_size));
-            if let (Place::Bits { field, .. }, Some(_)) = (&m.place, &m.name) {
-                parts.push(format!(".set_bits = {ident}_{field}_set"));
-                parts.push(format!(".get_bits = {ident}_{field}_get"));
-            }
-        }
-        if m.extent {
-            parts.push(".extent = 1".into());
-        }
-        if let Some(count) = &m.count {
-            parts.push(format!(".count = {}", self.expr(count)));
-        }
-        if let Some(terminator) = &m.terminator {
-            parts.push(format!(".terminator = {}", self.expr(terminator)));
-        }
-        if m.terminator_length > 1 {
-            parts.push(format!(".terminator_length = {}", m.terminator_length));
-        }
-        if let Some(cond) = &m.cond {
-            parts.push(format!(".cond = {}", self.expr(cond)));
-        }
-        if m.type_tag != NONE {
-            parts.push(format!(".type_tag = {}", self.ty(m.type_tag)));
-        }
-        if let Some(script) = &m.script {
-            parts.push(self.script(script));
-        }
-        if !m.binds.is_empty() {
-            let binds: Vec<String> = m
-                .binds
-                .iter()
-                .map(|(name, value)| {
-                    format!("{{ {}, {} }}", self.name(name), self.expr(value))
-                })
-                .collect();
-            parts.push(format!("DAT_BINDS({})", binds.join(", ")));
-        }
-        parts
-    }
-
-    /// A member's name, type and places, one by one.
-    fn member_place(&mut self, m: &MemberRow, parts: &mut Vec<String>) {
-        if let Some(name) = &m.name {
-            parts.push(format!(".name = {}", self.name(name)));
-        }
-        if m.ty != NONE {
-            parts.push(format!(".type = {}", self.ty(m.ty)));
-        }
-        if let Some(offset) = m.offset {
-            parts.push(format!("DAT_AT(0x{offset:X})"));
-        }
-        match &m.place {
-            Place::Field { record, field } => {
-                parts.push(format!("DAT_FIELD({record}, {field})"));
-            }
-            Place::At { offset, size } => {
-                parts.push(format!(".native_offset = {offset}"));
-                if size != "0" {
-                    parts.push(format!(".native_size = {size}"));
-                }
-            }
-            Place::Bits { .. } | Place::Unplaced => {}
-        }
-    }
-
-    /// A script's `.script` field.
+    /// A C expression pointing to a script descriptor.
     fn script(&mut self, script: &ScriptRow) -> String {
         match script {
             ScriptRow::Table(table, bytes) => {
                 self.scripts.insert(table.clone(), bytes.clone());
-                format!(".script = &dat_script_{}", identifier(table))
+                format!("&dat_script_{}", identifier(table))
             }
             ScriptRow::Length(length) => {
                 let length = self.expr(length);
-                format!(".script = &(const DatScript) {{ .length = {length} }}")
+                format!("&(const DatScript) {{ .length = {length} }}")
             }
             ScriptRow::Bytes(length) => {
                 let length = self.expr(length);
                 format!(
-                    ".script = &(const DatScript) {{ .length = {length}, .bytes = 1 }}"
+                    "&(const DatScript) {{ .length = {length}, .bytes = 1 }}"
                 )
             }
         }
@@ -484,103 +422,19 @@ impl Emitter<'_, '_> {
             }
         }
         if let Some(script) = &root.script {
-            parts.push(self.script(script));
+            parts.push(format!(".script = {}", self.script(script)));
         }
         if !root.binds.is_empty() {
-            let binds: Vec<String> = root
-                .binds
-                .iter()
-                .map(|(name, value)| {
-                    format!("{{ {}, {value} }}", self.name(name))
-                })
-                .collect();
-            parts.push(format!("DAT_ROOT_BINDS({})", binds.join(", ")));
+            let mut env = "NULL".to_owned();
+            for (name, value) in &root.binds {
+                env = format!(
+                    "&(const DatScope) {{ {}, {value}, {env} }}",
+                    self.name(name)
+                );
+            }
+            parts.push(format!(".env = {env}"));
         }
         parts
-    }
-
-    /// An expression, as a pointer to its node.
-    fn expr(&mut self, expr: &Expr) -> String {
-        match expr {
-            Expr::Int(value) => format!("DAT_INT({})", int(*value)),
-            Expr::Name(name) => {
-                self.name(name);
-                match self.macro_body(name) {
-                    true => format!("DAT_MACRO({})", identifier(name)),
-                    false => format!("DAT_NAME({})", identifier(name)),
-                }
-            }
-            Expr::Call(function, args) => match function_c(function) {
-                Some(function) => {
-                    let args: Vec<String> =
-                        args.iter().map(|a| self.expr(a)).collect();
-                    format!("DAT_CALL({function}, {})", args.join(", "))
-                }
-                None => "DAT_FAIL".into(),
-            },
-            Expr::Unary(op, a) => {
-                format!("DAT_UNARY({}, {})", unary_c(*op), self.expr(a))
-            }
-            Expr::Binary(op, a, b) => {
-                let a = self.expr(a);
-                let b = self.expr(b);
-                format!("DAT_BINARY({}, {a}, {b})", binary_c(*op))
-            }
-            Expr::Cond(cond, a, b) => {
-                let cond = self.expr(cond);
-                let a = self.expr(a);
-                let b = self.expr(b);
-                format!("DAT_COND({cond}, {a}, {b})")
-            }
-        }
-    }
-
-    /// An expression's node, as its fields, for a macro's definition.
-    fn fields(&mut self, expr: &Expr) -> String {
-        match expr {
-            Expr::Int(value) => {
-                format!(".op = DAT_OP_INT, .value = {}", int(*value))
-            }
-            Expr::Name(name) => {
-                let id = self.name(name);
-                match self.macro_body(name) {
-                    true => format!(
-                        ".op = DAT_OP_NAME, .name = {id}, .b = &dat_macro_{}",
-                        identifier(name)
-                    ),
-                    false => format!(".op = DAT_OP_NAME, .name = {id}"),
-                }
-            }
-            Expr::Call(function, args) => match function_c(function) {
-                Some(function) => {
-                    let args: Vec<String> =
-                        args.iter().map(|a| self.expr(a)).collect();
-                    let call = format!(
-                        ".op = DAT_OP_CALL, .function = DAT_FN_{function}"
-                    );
-                    format!(
-                        "{call}, .args = (const DatExpr* const[]) {{ {} }}, .nargs = {}",
-                        args.join(", "),
-                        args.len()
-                    )
-                }
-                None => ".op = DAT_OP_FAIL".into(),
-            },
-            Expr::Unary(op, a) => {
-                format!(".op = DAT_OP_{}, .a = {}", unary_c(*op), self.expr(a))
-            }
-            Expr::Binary(op, a, b) => {
-                let a = self.expr(a);
-                let b = self.expr(b);
-                format!(".op = DAT_OP_{}, .a = {a}, .b = {b}", binary_c(*op))
-            }
-            Expr::Cond(cond, a, b) => {
-                let cond = self.expr(cond);
-                let a = self.expr(a);
-                let b = self.expr(b);
-                format!(".op = DAT_OP_COND, .cond = {cond}, .a = {a}, .b = {b}")
-            }
-        }
     }
 
     /// Whether a name has a macro to fall back on, noting it if so.
@@ -616,7 +470,8 @@ impl Emitter<'_, '_> {
         h.push_str(concat!(
             "    DAT_TYPE_COUNT\n",
             "} MeleeDatType;\n\n",
-            "extern const DatSchema melee_dat_schema;\n\n",
+            "extern const DatSchema melee_dat_schema;\n",
+            "int32_t melee_dat_type(const char* spelling);\n\n",
             "#endif\n",
         ));
         h
@@ -629,6 +484,27 @@ impl Emitter<'_, '_> {
     ) -> String {
         let mut c = preamble("The schema: every type and name, by index");
         let _ = writeln!(c, "#include \"{INTERNAL}\"\n");
+        let mut dispatch = BTreeMap::new();
+        for (index, row) in self.generator.types.iter().enumerate().skip(1) {
+            if row.native_size != "0"
+                && let Some(spelling) = row
+                    .die
+                    .and_then(|die| self.generator.dispatch_spelling(die))
+            {
+                dispatch.entry(spelling).or_insert(index as i32);
+            }
+        }
+        c.push_str("static const struct { const char* name; int32_t type; } dispatch[] = {\n");
+        for (name, index) in dispatch {
+            let _ = writeln!(
+                c,
+                "    {{ {}, {} }},",
+                literal(&name),
+                self.ty(index)
+            );
+        }
+        c.push_str("};\n\n");
+        c.push_str(include_str!("emit/templates/dispatch.c"));
         c.push_str("static const DatType* const types[DAT_TYPE_COUNT] = {\n");
         for ident in self.idents.iter().skip(1) {
             let _ = writeln!(c, "    [DAT_TYPE_{ident}] = &dat_type_{ident},");
@@ -668,7 +544,7 @@ fn internal(
         "#define MELEE_DAT_INTERNAL_H\n\n",
         "#include <stddef.h>\n",
         "#include <stdint.h>\n\n",
-        "#include <dat/schema.h>\n\n",
+        "#include <dat/reader-internal.h>\n\n",
         "#include \"melee_dat.h\"\n\n",
         "/// The names members and expressions refer to, by index into\n",
         "/// melee_dat_schema.names.\n",
@@ -849,47 +725,6 @@ fn int(value: u64) -> String {
     }
 }
 
-fn function_c(function: &str) -> Option<&'static str> {
-    match function {
-        "itCommandLength" => Some("IT_COMMAND_LENGTH"),
-        "colAnimCommandLength" => Some("COL_ANIM_COMMAND_LENGTH"),
-        "cpuCommandLength" => Some("CPU_COMMAND_LENGTH"),
-        "GXGetTexBufferSize" => Some("GX_GET_TEX_BUFFER_SIZE"),
-        _ => None,
-    }
-}
-
-fn unary_c(op: UnaryOp) -> &'static str {
-    match op {
-        UnaryOp::Not => "NOT",
-        UnaryOp::BitNot => "BITNOT",
-        UnaryOp::Neg => "NEG",
-    }
-}
-
-fn binary_c(op: BinaryOp) -> &'static str {
-    match op {
-        BinaryOp::Or => "OR",
-        BinaryOp::And => "AND",
-        BinaryOp::BitOr => "BITOR",
-        BinaryOp::BitXor => "BITXOR",
-        BinaryOp::BitAnd => "BITAND",
-        BinaryOp::Eq => "EQ",
-        BinaryOp::Ne => "NE",
-        BinaryOp::Lt => "LT",
-        BinaryOp::Gt => "GT",
-        BinaryOp::Le => "LE",
-        BinaryOp::Ge => "GE",
-        BinaryOp::Shl => "SHL",
-        BinaryOp::Shr => "SHR",
-        BinaryOp::Add => "ADD",
-        BinaryOp::Sub => "SUB",
-        BinaryOp::Mul => "MUL",
-        BinaryOp::Div => "DIV",
-        BinaryOp::Rem => "REM",
-    }
-}
-
 /// Write the files to `dir`, each only if it changed, so that what didn't
 /// isn't rebuilt, and remove the sources it had that are no longer
 /// generated.
@@ -924,4 +759,77 @@ pub fn write(dir: &Path, output: &Output) -> Result<()> {
         }
     }
     Ok(())
+}
+
+/// Generate the independent fixture schemas with the same compiled readers.
+pub(super) fn fixture(groups: &[(String, Generator)]) -> Result<String> {
+    let mut names = BTreeSet::new();
+    let mut body = String::new();
+    let mut declarations = String::new();
+    let mut enumerators = String::new();
+    let mut next_expression = 0;
+    for (group, generator) in groups {
+        let idents = (0..generator.types.len())
+            .map(|i| format!("fixture_{group}_{i}"))
+            .collect::<Vec<_>>();
+        let mut e = Emitter {
+            generator,
+            idents,
+            names: BTreeSet::new(),
+            macros: HashMap::new(),
+            used_macros: BTreeSet::new(),
+            scripts: BTreeMap::new(),
+            expression_code: String::new(),
+            next_expression,
+        };
+        let mut types = String::new();
+        for (i, row) in generator.types.iter().enumerate().skip(1) {
+            writeln!(enumerators, "DAT_TYPE_{} = {i},", e.idents[i])?;
+            writeln!(
+                declarations,
+                "extern const DatType dat_type_{};",
+                e.idents[i]
+            )?;
+            e.descriptor(&mut types, i, row)?;
+        }
+        body.push_str(&e.expression_code);
+        body.push_str(&types);
+        let table = if group == "base" {
+            "types".to_owned()
+        } else {
+            format!("fixture_{group}_types")
+        };
+        writeln!(body, "static const DatType* const {table}[] = {{ NULL,")?;
+        for ident in e.idents.iter().skip(1) {
+            writeln!(body, "&dat_type_{ident},")?;
+        }
+        body.push_str("};\n");
+        let schema = if group == "base" {
+            "schema".to_owned()
+        } else {
+            format!("fixture_{group}_schema")
+        };
+        writeln!(
+            body,
+            "static const DatSchema {schema} = {{ .types = {table}, .ntypes = DAT_COUNTOF({table}), .names = names, .nnames = DAT_NAME_COUNT }};\n"
+        )?;
+        names.extend(e.names);
+        next_expression = e.next_expression;
+    }
+    let names = name_idents(&names)?;
+    let mut out = preamble("Synthetic fixture readers");
+    out.push_str("#include <dat/reader-internal.h>\nenum {\n");
+    out.push_str(&enumerators);
+    out.push_str("};\nenum {\n");
+    for (i, (_, ident)) in names.iter().enumerate() {
+        writeln!(out, "DAT_NAME_{ident} = {},", i + 1)?;
+    }
+    out.push_str("DAT_NAME_COUNT };\nstatic const char* const names[DAT_NAME_COUNT] = {\n");
+    for (name, ident) in names {
+        writeln!(out, "[DAT_NAME_{ident}] = {},", literal(&name))?;
+    }
+    out.push_str("};\n");
+    out.push_str(&declarations);
+    out.push_str(&body);
+    Ok(out)
 }

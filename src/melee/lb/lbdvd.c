@@ -55,6 +55,11 @@ void lbDvd_SetupVsPreloadCache(void)
 static inline void releaseEntry(PreloadEntry* entry)
 {
     if (entry->archive != NULL) {
+#ifdef TARGET_PC
+        if (entry->load_state == 2) {
+            HSD_ArchiveReleaseNative(entry->archive->addr);
+        }
+#endif
         lbHeap_80015CA8(entry->heap, entry->archive->addr);
     }
     if (entry->raw_data != NULL) {

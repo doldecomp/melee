@@ -322,11 +322,12 @@ and nested motion-file archives are separate follow-ups.
 `native/` is a C library that reads archives into the game's own types on
 any platform: the boundary between the GameCube's data (big-endian, 32-bit
 pointers stored as offsets) and modern hardware and compilers.
-`melee-dat native codegen` writes its schema from the types: a descriptor
-for each type (`dat/schema.h`), as the archive lays it out, with where each
-member goes natively, by `offsetof` and `sizeof`, so the host's compiler
-decides the native layout. The library is a port of the walk
-(`src/walk.rs`) that converts as it goes:
+`archive.c` loads archive bytes and their relocation, public and extern
+tables. It has no knowledge of DWARF or DAT annotations.
+`melee-dat native codegen` compiles the types and annotations into C reader
+and verifier functions. Generated field accesses use `offsetof` and
+`sizeof`, so the host compiler decides the native layout. `reader.c`
+provides allocation, shared references and bounds checks:
 
 - scalars are byte-swapped and widened as their types say;
 - pointers point to the native objects they reach, which are shared;
@@ -336,41 +337,82 @@ decides the native layout. The library is a port of the walk
 
 Raw bytes and `DAT_BLOB` formats (texels, display lists, keyframes),
 command scripts and untyped pointers stay as the archive has them, pointing
-into a copy of its data (`dat_raw`). Externs are null, as the loader leaves
-them, and -1 stays -1.
+into a copy of its data (`dat_raw`). Externs start null and can be linked
+through `HSD_ArchiveLocateExtern` or `dat_link_extern`; -1 stays -1.
 
 The schema is a directory of C, generated when configuring, in `schema/`
 of the build:
 
 - `melee_dat.h`: `melee_dat_schema`, and each type's index, `DAT_TYPE_*`
 - `types/<header>.c`: the types a header of the game's declares, each a
-  `dat_type_*` descriptor with its members, their annotations as written in
-  comments, and what refers to them (pointers, arrays); `types/base.c` the
-  types no header of the game's declares
+  `dat_type_*` callback table with compiled readers and layout operations.
+  Verifiers are included only when building the validation tests.
+  Field decisions and expressions are ordinary C code; source annotations
+  remain in comments. `types/base.c` holds types no game header declares
 - `roots/<module>.c`: each archive's roots, by module (`Pl`, `Gr`)
-- `macros.c`, `scripts.c`: the macros the annotations use, and the code's
-  tables of script command lengths
-- `schema.c`: every type and name, by index
+- `macros.c`, `scripts.c`: compiled macro evaluators and the code's tables
+  of script command lengths
+- `schema.c`: every type and name, by index, and a table mapping C type
+  spellings to reader indices
+
+Generated readers retain first-match union selection, lazy expressions,
+per-element bindings and typedef behavior. The shared helpers preserve
+array identity and cycles. Readers recurse directly; there is no work queue
+or private arena. Objects use ordinary allocations released with the archive.
+Bindings use generated local arrays or constant root scopes. `DatType` contains
+storage information and callbacks, rather than member annotation tables.
+
+The generator is split into type operations (`emit/readers.rs`), member
+annotations (`emit/members.rs`) and expressions (`emit/expressions.rs`).
+Each complete expression becomes one C function, with lazy branches and
+unsigned 64-bit arithmetic. Macro references call separate evaluators with
+a bounded expansion depth. Unresolved names and undefined operations return
+failure so the reader can retain the annotation's fallback behavior.
+
+Add type or annotation behavior in the generator. Keep shared storage,
+reference fixups and byte operations in `reader.c`; keep archive loading in
+`archive.c`. The callback contract in `dat/schema.h` and the helpers in
+`dat/reader-internal.h` connect the generated code to that runtime. Extend
+the contract when a concrete consumer needs a new value or operation, with
+fixtures compiled through the same emitter and real-archive parity checks.
+
+`TARGET_PC` uses the generated readers through the `dat_hsd` adapter.
+Native executables must link that library. Enable `MELEE_DAT_READERS` to
+generate and build it alongside the game, providing the existing
+`MELEE_DAT_TYPES` cache and original `MELEE_DAT_FILES`; otherwise supply the
+library from a separate native build. This CMake option controls generation,
+not the loader interface. The matching GameCube build uses its existing loader.
+
+On `TARGET_PC`, `HSD_Archive` has one extra pointer for native reader state.
+Existing declarations and `sizeof(HSD_Archive)` allocations work unchanged.
+Keep the archive alive until the last lookup; converted data lives until
+`HSD_ArchiveReleaseNative` releases it.
 
 ```c
-static const DatMember struct_ftDynamics_x0_members[] = {
-    { DAT_MEMBER(struct ftDynamics_x0, dynamicsNum, 0x0, DAT_TYPE_int) },
-    /* dat:count(dynamicsNum) */
-    {
-        DAT_MEMBER(struct ftDynamics_x0, ftDynamicBones, 0x4, DAT_TYPE_BoneDynamicsTemplate_ptr),
-        .count = DAT_NAME(dynamicsNum),
-    },
-};
+#include <sysdolphin/baselib/archive.h>
+#include <melee/ft/types.h>
+
+HSD_Archive archive;
+if (HSD_ArchiveParse(&archive, bytes, size) == 0) {
+    ftData* mario = HSD_ArchiveGetPublicAs(ftData, &archive, "ftDataMario");
+    // Use mario's native fields.
+    HSD_ArchiveReleaseNative(&archive);
+}
 ```
 
-```c
-#include "melee_dat.h"
+The macro passes the requested C type spelling and symbol name to a generated
+table. Pointer-type arguments such as `HSD_LightList*` are supported. The
+selected reader converts that symbol and its references, retaining constant
+loader bindings and counts from its root annotation. Missing symbols and
+unsupported types return `NULL`. Parsing decodes the archive tables without
+relocating 32-bit serialized words into host pointers. The adapter owns its
+converted objects and table copies; the caller still owns the input buffer.
+The normal archive free and preload-release paths release the adapter before
+freeing that buffer. Untyped lookups return serialized bytes; specialized
+`lbArchiveRelocate` consumers still require their own native integration.
 
-DatArchive* archive = dat_open(&melee_dat_schema, bytes, size, &error);
-dat_load_roots(archive, "PlMr.dat", 0); // or every root dat-cli types
-ftData* mario = dat_public(archive, "ftDataMario", DAT_TYPE_ftData);
-dat_close(archive);
-```
+Tools can use `dat_open`, `dat_public` and `dat_at` directly with
+`melee_dat_schema`. `dat_load_roots` loads all configured roots for validation.
 
 Load the roots before retaining native object pointers. Discovering an array
 after an element was converted on its own can move that element into the
@@ -389,12 +431,23 @@ With `-DCMAKE_TOOLCHAIN_FILE=tools/dat-cli/native/toolchains/i686.cmake`
 for 32-bit little-endian, or `ppc32-linux.cmake` for 32-bit big-endian
 under qemu.
 
-- `tests/unit.c`: a hand-written schema over an archive built in the test.
+- `tests/schemas/*.json`: independent type layouts and annotation expressions
+  for the synthetic archives. CMake compiles them with the same reader
+  emitter used for game types.
+- `tests/unit.c`: scalars, bitfields, unions, scripts, flexible arrays and
+  malformed archives, including inactive unresolved expression branches.
 - `tests/raw_refs.c`: shared raw references, relocated zero, externs and
   unselected union members.
+- `tests/support.c` and `tests/include/dat/`: trace vectors, choice/count
+  bookkeeping and readback live only in `dat_native_test` / `dat_melee_test`.
+  Production libraries contain neither that state nor verifier callbacks.
+- `tests/hsd.c`: the actual `HSD_ArchiveGetPublicAs` macro, compiled against
+  production libraries: type dispatch, pointer tokens, zero-offset cycles,
+  extern linking and native member access for 27 fighters.
 - `tests/array_refs.c`: element identity in counted and nested arrays,
   differing host strides, cycles and mutations through shared references,
-  with the array or its elements visited first.
+  with the array or its elements visited first, including an array discovered
+  while an element's recursive reader is still active.
 - `tests/types.c`: the game's own types through the schema: each fighter's
   `ftData`, read by C member access, against the archive's bytes.
 - `tests/e2e.c`: every archive the walk has roots in. `melee-dat native

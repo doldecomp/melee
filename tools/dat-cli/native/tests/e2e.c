@@ -13,7 +13,7 @@
 #include <string.h>
 
 #include "melee_dat.h"
-#include <dat/archive.h>
+#include <dat/test.h>
 
 #define MAX_ARCHIVES 256
 

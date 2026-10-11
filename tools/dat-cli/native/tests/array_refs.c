@@ -8,7 +8,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include <dat/archive.h>
+#include <dat/test.h>
 
 static int failures;
 
@@ -40,6 +40,22 @@ typedef struct Inline {
     Item items[];
 } Inline;
 
+typedef struct Recursive {
+    int64_t value;
+    struct Recursive* array;
+    struct Recursive* next;
+} Recursive;
+
+typedef struct AliasNode {
+    struct AliasNode* next;
+    int64_t value[];
+} AliasNode;
+
+typedef struct AliasRoot {
+    AliasNode** cell;
+    AliasNode* record;
+} AliasRoot;
+
 enum {
     T_INT = 1,
     T_COUNT,
@@ -54,144 +70,19 @@ enum {
     T_COUNTED,
     T_COUNTED_P,
     T_ROOT,
+    T_RECURSIVE,
+    T_RECURSIVE_P,
+    T_RECURSIVE_ARRAY,
+    T_RECURSIVE_ARRAY_P,
+    T_ALIAS_NODE,
+    T_ALIAS_NODE_P,
+    T_ALIAS_NODE_CELL,
+    T_ALIAS_ROOT,
+    T_ALIAS_VALUES,
     T_TYPES,
 };
 
-enum {
-    DAT_NAME_n = 1,
-    DAT_NAME_value,
-    DAT_NAME_next,
-    DAT_NAME_items,
-    DAT_NAME_array,
-    DAT_NAME_COUNT
-};
-static const char* const names[DAT_NAME_COUNT] = {
-    [DAT_NAME_n] = "n",         [DAT_NAME_value] = "value",
-    [DAT_NAME_next] = "next",   [DAT_NAME_items] = "items",
-    [DAT_NAME_array] = "array",
-};
-
-#define POINTER(self, to)                                                     \
-    static const DatType type_##self = {                                      \
-        .name = #self,                                                        \
-        .id = self,                                                           \
-        .kind = DAT_KIND_POINTER,                                             \
-        .has_pointers = 1,                                                    \
-        .size = 4,                                                            \
-        .native_size = sizeof(void*),                                         \
-        .target = to,                                                         \
-        .resolved = self,                                                     \
-    }
-
-static const DatType type_T_INT = {
-    .name = "int",
-    .id = T_INT,
-    .kind = DAT_KIND_INT,
-    .is_signed = 1,
-    .size = 4,
-    .native_size = sizeof(int64_t),
-    .resolved = T_INT,
-};
-static const DatType type_T_COUNT = {
-    .name = "count",
-    .id = T_COUNT,
-    .kind = DAT_KIND_INT,
-    .size = 4,
-    .native_size = sizeof(uint32_t),
-    .resolved = T_COUNT,
-};
-POINTER(T_ITEM_P, T_ITEM);
-POINTER(T_MATRIX_P, T_MATRIX);
-POINTER(T_INLINE_P, T_INLINE);
-POINTER(T_COUNTED_P, T_COUNTED);
-
-static const DatMember item_members[] = {
-    { DAT_MEMBER(Item, value, 0, T_INT) },
-    { DAT_MEMBER(Item, next, 4, T_ITEM_P) },
-};
-static const DatType type_T_ITEM = {
-    .name = "Item",
-    .id = T_ITEM,
-    .kind = DAT_KIND_STRUCT,
-    .has_pointers = 1,
-    .size = 8,
-    .native_size = sizeof(Item),
-    .resolved = T_ITEM,
-    DAT_MEMBERS(item_members),
-};
-static const DatType type_T_ROW = {
-    .name = "Item[3]",
-    .id = T_ROW,
-    .kind = DAT_KIND_ARRAY,
-    .has_pointers = 1,
-    .size = 24,
-    .native_size = sizeof(Item[3]),
-    .target = T_ITEM,
-    .resolved = T_ROW,
-    .count = 3,
-};
-static const DatType type_T_MATRIX = {
-    .name = "Item[2][3]",
-    .id = T_MATRIX,
-    .kind = DAT_KIND_ARRAY,
-    .has_pointers = 1,
-    .size = 48,
-    .native_size = sizeof(Item[2][3]),
-    .target = T_ROW,
-    .resolved = T_MATRIX,
-    .count = 2,
-};
-static const DatType type_T_INLINE_ARRAY = {
-    .name = "Item[]",
-    .id = T_INLINE_ARRAY,
-    .kind = DAT_KIND_ARRAY,
-    .has_pointers = 1,
-    .unbounded = 1,
-    .native_size = sizeof(Item),
-    .target = T_ITEM,
-    .resolved = T_INLINE_ARRAY,
-    .count = 1,
-};
-static const DatMember inline_members[] = {
-    { DAT_MEMBER(Inline, n, 0, T_COUNT) },
-    { .type = T_INLINE_ARRAY,
-      DAT_AT(4),
-      .native_offset = offsetof(Inline, items),
-      .count = DAT_NAME(n) },
-};
-static const DatType type_T_INLINE = {
-    .name = "Inline",
-    .id = T_INLINE,
-    .kind = DAT_KIND_STRUCT,
-    .has_pointers = 1,
-    .size = 4,
-    .native_size = sizeof(Inline),
-    .resolved = T_INLINE,
-    DAT_MEMBERS(inline_members),
-};
-static const DatMember counted_members[] = {
-    { DAT_MEMBER(Counted, n, 0, T_COUNT) },
-    { DAT_MEMBER(Counted, items, 4, T_ITEM_P), .count = DAT_NAME(n) },
-};
-static const DatType type_T_COUNTED = {
-    .name = "Counted",
-    .id = T_COUNTED,
-    .kind = DAT_KIND_STRUCT,
-    .has_pointers = 1,
-    .size = 8,
-    .native_size = sizeof(Counted),
-    .resolved = T_COUNTED,
-    DAT_MEMBERS(counted_members),
-};
-
-static const DatType* const types[T_TYPES] = {
-    [T_INT] = &type_T_INT,           [T_COUNT] = &type_T_COUNT,
-    [T_ITEM] = &type_T_ITEM,         [T_ITEM_P] = &type_T_ITEM_P,
-    [T_ROW] = &type_T_ROW,           [T_MATRIX] = &type_T_MATRIX,
-    [T_MATRIX_P] = &type_T_MATRIX_P, [T_INLINE_ARRAY] = &type_T_INLINE_ARRAY,
-    [T_INLINE] = &type_T_INLINE,     [T_INLINE_P] = &type_T_INLINE_P,
-    [T_COUNTED] = &type_T_COUNTED,   [T_COUNTED_P] = &type_T_COUNTED_P,
-};
+#include "array_refs.h"
 
 static void put32(unsigned char* p, uint32_t value)
 {
@@ -250,47 +141,17 @@ static size_t build(unsigned char* file, int kind, uint32_t base, bool plain)
 
 static void test(int kind, bool reverse, bool zero, bool plain)
 {
-    DatMember members[4] = {
-        { DAT_MEMBER(Root, array, 0, kind) },
-        { .type = T_ITEM_P,
-          DAT_AT(4),
-          .native_offset = offsetof(Root, refs[0]) },
-        { .type = T_ITEM_P,
-          DAT_AT(8),
-          .native_offset = offsetof(Root, refs[1]) },
-        { .type = T_ITEM_P,
-          DAT_AT(12),
-          .native_offset = offsetof(Root, refs[2]) },
+    const DatSchema* variants[4][2] = {
+        { &fixture_matrix_0_0_schema, &fixture_matrix_1_0_schema },
+        { &fixture_counted_0_0_schema, &fixture_counted_1_0_schema },
+        { &fixture_inline_0_0_schema, &fixture_inline_1_0_schema },
+        { &fixture_counted_0_1_schema, &fixture_counted_1_1_schema },
     };
-    if (reverse) {
-        DatMember swap = members[0];
-        members[0] = members[3];
-        members[3] = swap;
-    }
-    const DatType root_type = {
-        .name = "Root",
-        .id = T_ROOT,
-        .kind = DAT_KIND_STRUCT,
-        .has_pointers = 1,
-        .size = 16,
-        .native_size = sizeof(Root),
-        .resolved = T_ROOT,
-        DAT_MEMBERS(members),
-    };
-    const DatType* all[T_TYPES];
-    memcpy(all, types, sizeof all);
-    all[T_ROOT] = &root_type;
-    DatType pointer_type = type_T_ITEM_P;
-    if (plain) {
-        pointer_type.target = T_INT;
-        all[T_ITEM_P] = &pointer_type;
-    }
-    const DatSchema schema = {
-        .types = all,
-        .ntypes = T_TYPES,
-        .names = names,
-        .nnames = DAT_NAME_COUNT,
-    };
+    unsigned variant = plain                 ? 3
+                       : kind == T_MATRIX_P  ? 0
+                       : kind == T_COUNTED_P ? 1
+                                             : 2;
+    const DatSchema schema = *variants[variant][reverse];
     unsigned char file[0x200];
     uint32_t base = kind == T_INLINE_P ? CONTAINER + 4 : zero ? 0 : 0x40;
     size_t size = build(file, kind, base, plain);
@@ -378,9 +239,95 @@ static void test_root_array(bool nested, bool zero)
     dat_close(a);
 }
 
+/// The array is discovered while an element's recursive reader is active.
+static void test_recursive_move(bool reverse, uint32_t root_count)
+{
+    unsigned char bytes[0x20 + 24 + 4 * 4] = { 0 };
+    put32(bytes, sizeof bytes);
+    put32(bytes + 4, 24);
+    unsigned char* data = bytes + 0x20;
+    put32(data, 11);
+    put32(data + 8, 12);
+    put32(data + 12, 22);
+    const uint32_t relocs[] = { 4, 8, 16, 20 };
+    put32(bytes + 8, DAT_COUNTOF(relocs));
+    for (size_t i = 0; i < DAT_COUNTOF(relocs); i++) {
+        put32(data + 24 + 4 * i, relocs[i]);
+    }
+    put32(bytes, 0x20 + 24 + sizeof relocs);
+    const DatSchema* selected =
+        reverse ? &fixture_recursive_reverse_schema : &schema;
+    DatArchive* archive =
+        dat_open(selected, bytes, 0x20 + 24 + sizeof relocs, NULL);
+    CHECK(archive != NULL);
+    if (!archive) {
+        return;
+    }
+    Recursive* root =
+        dat_at(archive, 0, T_RECURSIVE,
+               root_count ? DAT_COUNT_EXACTLY : DAT_COUNT_ONE, root_count);
+    CHECK(root != NULL);
+    if (root) {
+        CHECK(root->array == root);
+        CHECK(root->next == &root->array[1]);
+        CHECK(root->value == 11 && root->next->value == 22);
+        CHECK(root->next->array == root && root->next->next == root);
+        CHECK(dat_at(archive, 12, T_RECURSIVE, DAT_COUNT_ONE, 0) ==
+              root->next);
+        CHECK(dat_verify(archive, stdout) == 0);
+        root->next->value = 33;
+        CHECK(root->array[1].value == 33);
+    }
+    dat_close(archive);
+}
+
+/// A pointer-cell view shares the first field of a larger record.
+static void test_first_field_alias(bool record_first)
+{
+    unsigned char bytes[0x20 + 24 + 12] = { 0 };
+    put32(bytes, sizeof bytes);
+    put32(bytes + 4, 24);
+    put32(bytes + 8, 3);
+    unsigned char* data = bytes + 0x20;
+    put32(data, 8);
+    put32(data + 4, 8);
+    put32(data + 8, 16);
+    put32(data + 12, 11);
+    put32(data + 20, 22);
+    put32(data + 24, 0);
+    put32(data + 28, 4);
+    put32(data + 32, 8);
+    const DatSchema* selected =
+        record_first ? &fixture_alias_record_first_schema : &schema;
+    DatArchive* archive = dat_open(selected, bytes, sizeof bytes, NULL);
+    CHECK(archive != NULL);
+    if (!archive) {
+        return;
+    }
+    AliasRoot* root = dat_at(archive, 0, T_ALIAS_ROOT, DAT_COUNT_ONE, 0);
+    CHECK(root != NULL);
+    if (root) {
+        CHECK(root->record->value[0] == 11 &&
+              root->record->next->value[0] == 22);
+        CHECK(root->cell == &root->record->next);
+        CHECK(dat_at(archive, 8, T_ALIAS_NODE, DAT_COUNT_ONE, 0) ==
+              root->record);
+        CHECK(dat_at(archive, 8, T_ALIAS_NODE_P, DAT_COUNT_ONE, 0) ==
+              root->cell);
+        CHECK(dat_verify(archive, stdout) == 0);
+        *root->cell = NULL;
+        CHECK(root->record->next == NULL);
+    }
+    dat_close(archive);
+}
+
 int main(void)
 {
     for (int reverse = 0; reverse < 2; reverse++) {
+        test_first_field_alias(reverse);
+        for (uint32_t root_count = 0; root_count <= 2; root_count++) {
+            test_recursive_move(reverse, root_count);
+        }
         test(T_MATRIX_P, reverse, false, false);
         test(T_MATRIX_P, reverse, true, false);
         test(T_COUNTED_P, reverse, false, false);
