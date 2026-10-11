@@ -70,7 +70,7 @@ static inline HSD_Archive* loadArchive(const char* filename)
     void* data;
 
     data = lbHeap_80015BD0(0, OSRoundUp32B(lbFileGetSize(filename)));
-    archive = lbHeap_80015BD0(0, sizeof(HSD_ArchiveStorage));
+    archive = lbHeap_80015BD0(0, sizeof(HSD_Archive));
     readArchive(filename, data, archive);
     return archive;
 }

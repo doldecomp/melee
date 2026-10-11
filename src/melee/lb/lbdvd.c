@@ -308,8 +308,8 @@ void lbDvd_CachePreloadedFile(s32 index)
         if (preloadEntry->type == 2 || preloadEntry->type == 3 ||
             preloadEntry->type == 4)
         {
-            preloadEntry->archive = lbHeap_80015BD0(
-                preloadEntry->heap, sizeof(HSD_ArchiveStorage));
+            preloadEntry->archive =
+                lbHeap_80015BD0(preloadEntry->heap, sizeof(HSD_Archive));
         }
         if (preloadEntry->raw_data == 0) {
             lbDvd_80017E64(0, index, 0, 1);

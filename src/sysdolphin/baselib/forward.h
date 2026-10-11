@@ -8,11 +8,6 @@ typedef struct HSD_AnimJoint HSD_AnimJoint;
 typedef struct HSD_AObj HSD_AObj;
 typedef struct HSD_AObjDesc HSD_AObjDesc;
 typedef struct HSD_Archive HSD_Archive;
-#ifdef TARGET_PC
-typedef struct HSD_ArchiveStorage HSD_ArchiveStorage;
-#else
-typedef struct HSD_Archive HSD_ArchiveStorage;
-#endif
 typedef struct HSD_ArchiveExternInfo HSD_ArchiveExternInfo;
 typedef struct HSD_ArchiveHeader HSD_ArchiveHeader;
 typedef struct HSD_ArchivePublicInfo HSD_ArchivePublicInfo;

@@ -383,22 +383,20 @@ generate and build it alongside the game, providing the existing
 library from a separate native build. This CMake option controls generation,
 not the loader interface. The matching GameCube build uses its existing loader.
 
-`HSD_ArchiveStorage` wraps the unchanged `HSD_Archive` with native reader state.
-On the GameCube it is an alias for `HSD_Archive`. Allocate this storage for
-parsed archives, including stack instances, and pass `HSD_ArchiveStoragePtr`
-to the archive functions. Keep the storage alive until the last native lookup;
-converted data lives until `HSD_ArchiveReleaseNative` releases it.
+On `TARGET_PC`, `HSD_Archive` has one extra pointer for native reader state.
+Existing declarations and `sizeof(HSD_Archive)` allocations work unchanged.
+Keep the archive alive until the last lookup; converted data lives until
+`HSD_ArchiveReleaseNative` releases it.
 
 ```c
 #include <sysdolphin/baselib/archive.h>
 #include <melee/ft/types.h>
 
-HSD_ArchiveStorage storage;
-HSD_Archive* archive = HSD_ArchiveStoragePtr(&storage);
-if (HSD_ArchiveParse(archive, bytes, size) == 0) {
-    ftData* mario = HSD_ArchiveGetPublicAs(ftData, archive, "ftDataMario");
+HSD_Archive archive;
+if (HSD_ArchiveParse(&archive, bytes, size) == 0) {
+    ftData* mario = HSD_ArchiveGetPublicAs(ftData, &archive, "ftDataMario");
     // Use mario's native fields.
-    HSD_ArchiveReleaseNative(archive);
+    HSD_ArchiveReleaseNative(&archive);
 }
 ```
 

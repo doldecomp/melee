@@ -45,21 +45,12 @@ struct HSD_Archive {
     char* name;                            /* 0x38 */
     u32 flags;                             /* 0x3C */
     void* top_ptr;                         /* 0x40 */
+#ifdef TARGET_PC
+    struct DatArchive* native_data;
+#endif
 };
 ASSERT_SIZE(struct HSD_Archive, 0x44);
 
-/// Storage for a parsed archive. Native state wraps the original struct.
-#ifdef TARGET_PC
-struct HSD_ArchiveStorage {
-    HSD_Archive archive;
-    struct DatArchive* native_data;
-};
-#define HSD_ArchiveStoragePtr(storage) (&(storage)->archive)
-#else
-#define HSD_ArchiveStoragePtr(storage) (storage)
-#endif
-
-/// On TARGET_PC, pass the archive member of an HSD_ArchiveStorage.
 s32 HSD_ArchiveParse(HSD_Archive*, u8*, size_t file_size);
 void* HSD_ArchiveGetPublicAddress(HSD_Archive*, const char*);
 
