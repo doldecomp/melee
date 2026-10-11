@@ -78,8 +78,8 @@ void hsd_8039D354(u32 unused)
     hsd_804D78DA = 0;
     hsd_804D78F4 = NULL;
     psCamera = NULL;
-    hsd_804D78E8 = 0;
-    hsd_804D78EC = 0;
+    hsd_804D78E8 = NULL;
+    hsd_804D78EC = NULL;
     hsd_804D78F8 = NULL;
     hsd_804D7900 = NULL;
 }
@@ -945,8 +945,8 @@ f32 hsd_8039DAD4(HSD_Generator* gen)
         }
 
         default: /* shape > 8 */
-            if ((void (*)(HSD_Generator*, Mtx)) hsd_804D78E8 != NULL) {
-                ((void (*)(HSD_Generator*, Mtx)) hsd_804D78E8)(gen, rot_mtx);
+            if (hsd_804D78E8 != NULL) {
+                hsd_804D78E8(gen, rot_mtx);
             }
             break;
         }
@@ -1195,8 +1195,8 @@ HSD_Generator* hsd_8039F05C(s32 linkNo, s32 bank, s32 idx)
             break;
         }
         default:
-            if ((void (*)(HSD_Generator*)) hsd_804D78EC != NULL) {
-                ((void (*)(HSD_Generator*)) hsd_804D78EC)(gen);
+            if (hsd_804D78EC != NULL) {
+                hsd_804D78EC(gen);
             }
             break;
         }
