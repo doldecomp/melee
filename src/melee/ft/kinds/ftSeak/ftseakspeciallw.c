@@ -2,6 +2,7 @@
 
 #include <melee/ft/forward.h>
 
+#include "forward.h"
 #include <melee/ef/efsync.h>
 #include <melee/ft/fighter.h>
 #include <melee/ft/ft_081B.h>
@@ -63,7 +64,8 @@ void ftSk_SpecialLw_Enter(Fighter_GObj* gobj)
 
     u8 _[16];
 
-    Fighter_ChangeMotionState(gobj, 0x169, Ft_MF_None, 0.0F, 1.0F, 0.0F, NULL);
+    Fighter_ChangeMotionState(gobj, ftSk_MS_SpecialLw, Ft_MF_None, 0.0F, 1.0F,
+                              0.0F, NULL);
     ftAnim_8006EBA4(gobj);
 
     fp = GET_FIGHTER(gobj);
@@ -86,7 +88,8 @@ void ftSk_SpecialAirLw_Enter(Fighter_GObj* gobj)
 
     u8 _[16];
 
-    Fighter_ChangeMotionState(gobj, 0x16B, Ft_MF_None, 0.0F, 1.0F, 0.0F, NULL);
+    Fighter_ChangeMotionState(gobj, ftSk_MS_SpecialAirLw, Ft_MF_None, 0.0F,
+                              1.0F, 0.0F, NULL);
     ftAnim_8006EBA4(gobj);
 
     fp = GET_FIGHTER(gobj);
@@ -158,7 +161,8 @@ void ftSk_SpecialLw_8011444C(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    ftCommon_GroundToAirStateChange(gobj, fp, 0x16B, ftSk_MF_SpecialLw_Coll);
+    ftCommon_GroundToAirStateChange(gobj, fp, ftSk_MS_SpecialAirLw,
+                                    ftSk_MF_SpecialLw_Coll);
     fp->accessory4_cb = fn_80114034;
 }
 
@@ -166,7 +170,8 @@ void ftSk_SpecialLw_801144B8(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    ftCommon_AirToGroundStateChange(gobj, fp, 0x169, ftSk_MF_SpecialLw_Coll);
+    ftCommon_AirToGroundStateChange(gobj, fp, ftSk_MS_SpecialLw,
+                                    ftSk_MF_SpecialLw_Coll);
     fp->accessory4_cb = fn_80114034;
 }
 
@@ -222,7 +227,8 @@ void ftSk_SpecialLw_80114680(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    ftCommon_GroundToAirStateChange(gobj, fp, 0x16C, ftSk_MF_SpecialLw_Coll);
+    ftCommon_GroundToAirStateChange(gobj, fp, ftSk_MS_SpecialAirLw2,
+                                    ftSk_MF_SpecialLw_Coll);
     fp->accessory4_cb = fn_801140B0;
 }
 
@@ -230,7 +236,8 @@ void ftSk_SpecialLw_801146EC(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    ftCommon_AirToGroundStateChange(gobj, fp, 0x16A, ftSk_MF_SpecialLw_Coll);
+    ftCommon_AirToGroundStateChange(gobj, fp, ftSk_MS_SpecialLw2,
+                                    ftSk_MF_SpecialLw_Coll);
     fp->accessory4_cb = fn_801140B0;
 }
 
@@ -244,9 +251,9 @@ void ftSk_SpecialLw_80114758(Fighter_GObj* gobj)
     u8 _[4];
 
     if (fp->ground_or_air == GA_Ground) {
-        var_r4 = 0x16A;
+        var_r4 = ftSk_MS_SpecialLw2;
     } else {
-        var_r4 = 0x16C;
+        var_r4 = ftSk_MS_SpecialAirLw2;
     }
     Fighter_ChangeMotionState(gobj, var_r4, Ft_MF_None, attributes->x70, 1.0F,
                               0.0F, NULL);
