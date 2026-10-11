@@ -244,6 +244,83 @@
       "native_size": "sizeof(void*)",
       "target": "T_RECURSIVE_ARRAY",
       "has_pointers": true
+    },
+    {
+      "key": "T_ALIAS_NODE",
+      "name": "AliasNode",
+      "kind": "struct",
+      "size": 4,
+      "native_size": "sizeof(AliasNode)",
+      "members": [
+        {
+          "type": "T_ALIAS_NODE_P",
+          "offset": 0,
+          "record": "AliasNode",
+          "field": "next",
+          "name": "next"
+        },
+        {
+          "type": "T_ALIAS_VALUES",
+          "offset": 4,
+          "record": "AliasNode",
+          "field": "value",
+          "name": "value",
+          "count": "1"
+        }
+      ],
+      "has_pointers": true
+    },
+    {
+      "key": "T_ALIAS_NODE_P",
+      "name": "AliasNode*",
+      "kind": "pointer",
+      "size": 4,
+      "native_size": "sizeof(void*)",
+      "target": "T_ALIAS_NODE",
+      "has_pointers": true
+    },
+    {
+      "key": "T_ALIAS_NODE_CELL",
+      "name": "AliasNode**",
+      "kind": "pointer",
+      "size": 4,
+      "native_size": "sizeof(void*)",
+      "target": "T_ALIAS_NODE_P",
+      "has_pointers": true
+    },
+    {
+      "key": "T_ALIAS_ROOT",
+      "name": "AliasRoot",
+      "kind": "struct",
+      "size": 8,
+      "native_size": "sizeof(AliasRoot)",
+      "members": [
+        {
+          "type": "T_ALIAS_NODE_CELL",
+          "offset": 0,
+          "record": "AliasRoot",
+          "field": "cell",
+          "name": "cell"
+        },
+        {
+          "type": "T_ALIAS_NODE_P",
+          "offset": 4,
+          "record": "AliasRoot",
+          "field": "record",
+          "name": "record"
+        }
+      ],
+      "has_pointers": true
+    },
+    {
+      "key": "T_ALIAS_VALUES",
+      "name": "int[]",
+      "kind": "array",
+      "size": 0,
+      "native_size": "sizeof(int64_t)",
+      "target": "T_INT",
+      "count": 1,
+      "unbounded": true
     }
   ],
   "variants": {
@@ -500,6 +577,26 @@
             "record": "Recursive",
             "field": "value",
             "name": "value"
+          }
+        ]
+      }
+    },
+    "alias_record_first": {
+      "T_ALIAS_ROOT": {
+        "members": [
+          {
+            "type": "T_ALIAS_NODE_P",
+            "offset": 4,
+            "record": "AliasRoot",
+            "field": "record",
+            "name": "record"
+          },
+          {
+            "type": "T_ALIAS_NODE_CELL",
+            "offset": 0,
+            "record": "AliasRoot",
+            "field": "cell",
+            "name": "cell"
           }
         ]
       }

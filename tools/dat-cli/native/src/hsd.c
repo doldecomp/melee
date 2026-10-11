@@ -3,6 +3,14 @@
 #include <dat/reader-internal.h>
 #include <sysdolphin/baselib/archive.h>
 
+/* Only parsed wrappers have top_ptr. Plain relocation views leave it null. */
+static HSD_ArchiveStorage* storage_of(HSD_Archive* archive)
+{
+    return archive != NULL && archive->top_ptr != NULL
+               ? (HSD_ArchiveStorage*) archive
+               : NULL;
+}
+
 static uint32_t be32(const u8* p)
 {
     return (uint32_t) p[0] << 24 | (uint32_t) p[1] << 16 |
@@ -14,13 +22,14 @@ s32 HSD_ArchiveParse(HSD_Archive* archive, u8* src, size_t size)
     if (archive == NULL) {
         return -1;
     }
-    memset(archive, 0, sizeof(*archive));
+    HSD_ArchiveStorage* storage = (HSD_ArchiveStorage*) archive;
+    memset(storage, 0, sizeof(*storage));
     DatArchive* native = dat_open(&melee_dat_schema, src, size, NULL);
     if (native == NULL) {
         return -1;
     }
     DatArchiveData* raw = native->archive;
-    archive->native_data = native;
+    storage->native_data = native;
     archive->header.file_size = be32(src);
     archive->header.data_size = raw->size;
     archive->header.nb_reloc = raw->nrelocs;
@@ -61,11 +70,13 @@ s32 HSD_ArchiveParse(HSD_Archive* archive, u8* src, size_t size)
 
 void HSD_ArchiveReleaseNative(HSD_Archive* archive)
 {
-    if (archive->native_data == NULL) {
+    HSD_ArchiveStorage* storage = storage_of(archive);
+    if (storage == NULL || storage->native_data == NULL) {
         return;
     }
-    dat_close(archive->native_data);
-    archive->native_data = NULL;
+    dat_close(storage->native_data);
+    storage->native_data = NULL;
+    archive->top_ptr = NULL;
     free(archive->reloc_info);
     free(archive->public_info);
     free(archive->extern_info);
@@ -77,10 +88,11 @@ void HSD_ArchiveReleaseNative(HSD_Archive* archive)
 
 void* HSD_ArchiveGetPublicAddress(HSD_Archive* archive, const char* name)
 {
-    if (archive->native_data == NULL) {
+    HSD_ArchiveStorage* storage = storage_of(archive);
+    if (storage == NULL || storage->native_data == NULL) {
         return NULL;
     }
-    const DatArchiveData* raw = archive->native_data->archive;
+    const DatArchiveData* raw = storage->native_data->archive;
     const DatSymbol* symbol = dat_archive_public(raw, name);
     return symbol ? raw->data + symbol->offset : NULL;
 }
@@ -88,20 +100,22 @@ void* HSD_ArchiveGetPublicAddress(HSD_Archive* archive, const char* name)
 void* HSD_ArchiveGetPublicTyped(HSD_Archive* archive, const char* name,
                                 const char* type)
 {
-    if (archive->native_data == NULL) {
+    HSD_ArchiveStorage* storage = storage_of(archive);
+    if (storage == NULL || storage->native_data == NULL) {
         return NULL;
     }
     int32_t index = melee_dat_type(type);
     return index == DAT_NONE ? NULL
-                             : dat_public(archive->native_data, name, index);
+                             : dat_public(storage->native_data, name, index);
 }
 
 char* HSD_ArchiveGetExtern(HSD_Archive* archive, int index)
 {
-    if (archive->native_data == NULL) {
+    HSD_ArchiveStorage* storage = storage_of(archive);
+    if (storage == NULL || storage->native_data == NULL) {
         return NULL;
     }
-    const DatArchiveData* raw = archive->native_data->archive;
+    const DatArchiveData* raw = storage->native_data->archive;
     return index < 0 || (uint32_t) index >= raw->nexterns
                ? NULL
                : (char*) raw->externs[index].name;
@@ -110,7 +124,8 @@ char* HSD_ArchiveGetExtern(HSD_Archive* archive, int index)
 void HSD_ArchiveLocateExtern(HSD_Archive* archive, const char* name,
                              void* address)
 {
-    if (archive->native_data != NULL) {
-        dat_link_extern(archive->native_data, name, address);
+    HSD_ArchiveStorage* storage = storage_of(archive);
+    if (storage != NULL && storage->native_data != NULL) {
+        dat_link_extern(storage->native_data, name, address);
     }
 }

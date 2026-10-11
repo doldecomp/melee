@@ -47,29 +47,50 @@ static void test_dispatch(void)
     put32(data + 0x58, 6);
     put32(data + 0x60, 12); /* external name */
     memcpy(data + 0x64, "joint\0links\0external\0", 21);
-    HSD_Archive archive;
-    CHECK(HSD_ArchiveParse(&archive, bytes, sizeof bytes) == 0);
-    CHECK(archive.header.data_size == 0x44);
-    CHECK(archive.public_info[1].offset == 0x40);
-    CHECK(strcmp(HSD_ArchiveGetExtern(&archive, 0), "external") == 0);
-    CHECK(HSD_ArchiveGetExtern(&archive, 1) == NULL);
+    struct {
+        uint64_t before;
+        HSD_ArchiveStorage storage;
+        uint64_t after;
+    } guarded = { .before = 123, .after = 456 };
+    HSD_Archive* archive = HSD_ArchiveStoragePtr(&guarded.storage);
+    CHECK(offsetof(HSD_ArchiveStorage, archive) == 0);
+    CHECK(HSD_ArchiveParse(archive, bytes, sizeof bytes) == 0);
+    CHECK(guarded.before == 123 && guarded.after == 456);
+    CHECK(guarded.storage.native_data != NULL);
+    CHECK(archive->data == data && archive->top_ptr == bytes);
+    CHECK(archive->header.data_size == 0x44);
+    CHECK(archive->public_info[1].offset == 0x40);
+    CHECK(strcmp(HSD_ArchiveGetExtern(archive, 0), "external") == 0);
+    CHECK(HSD_ArchiveGetExtern(archive, 1) == NULL);
     char first[] = "first", second[] = "second";
-    HSD_ArchiveLocateExtern(&archive, "external", first);
-    HSD_Joint* joint = HSD_ArchiveGetPublicAs(HSD_Joint, &archive, "joint");
+    HSD_ArchiveLocateExtern(archive, "external", first);
+    HSD_Joint* joint = HSD_ArchiveGetPublicAs(HSD_Joint, archive, "joint");
     CHECK(joint && joint->child == joint && joint->rotation.x == 1.5f);
     CHECK(joint->class_name == first);
-    HSD_Joint** links = HSD_ArchiveGetPublicAs(HSD_Joint*, &archive, "links");
+    HSD_Joint** links = HSD_ArchiveGetPublicAs(HSD_Joint*, archive, "links");
     CHECK(links && *links == joint);
-    CHECK(HSD_ArchiveGetPublicAs(HSD_Joint, &archive, "joint") == joint);
-    HSD_ArchiveLocateExtern(&archive, "external", second);
+    CHECK(HSD_ArchiveGetPublicAs(HSD_Joint, archive, "joint") == joint);
+    HSD_ArchiveLocateExtern(archive, "external", second);
     CHECK(joint->class_name == second);
-    HSD_ArchiveLocateExtern(&archive, "external", NULL);
+    HSD_ArchiveLocateExtern(archive, "external", NULL);
     CHECK(joint->class_name == NULL);
-    CHECK(HSD_ArchiveGetPublicAs(HSD_Joint, &archive, "missing") == NULL);
-    CHECK(HSD_ArchiveGetPublicTyped(&archive, "joint", "unknown") == NULL);
+    CHECK(HSD_ArchiveGetPublicAs(HSD_Joint, archive, "missing") == NULL);
+    CHECK(HSD_ArchiveGetPublicTyped(archive, "joint", "unknown") == NULL);
     CHECK(be32(data) == UINT32_MAX); /* input stays serialized */
-    HSD_ArchiveReleaseNative(&archive);
-    CHECK(HSD_ArchiveParse(&archive, bytes, 8) == -1);
+    HSD_ArchiveReleaseNative(archive);
+    CHECK(guarded.storage.native_data == NULL && archive->top_ptr == NULL);
+    CHECK(archive->data == data); /* the caller still owns the input */
+    HSD_ArchiveReleaseNative(archive);
+    CHECK(HSD_ArchiveParse(archive, bytes, 8) == -1);
+    CHECK(guarded.before == 123 && guarded.after == 456);
+    HSD_ArchiveReleaseNative(archive);
+
+    /* A vanilla relocation view has no enclosing native storage. */
+    HSD_Archive view = { 0 };
+    CHECK(HSD_ArchiveGetPublicAs(HSD_Joint, &view, "joint") == NULL);
+    CHECK(HSD_ArchiveGetExtern(&view, 0) == NULL);
+    HSD_ArchiveLocateExtern(&view, "external", first);
+    HSD_ArchiveReleaseNative(&view);
 }
 
 static void test_fighters(const char* dir)
@@ -85,10 +106,11 @@ static void test_fighters(const char* dir)
         u8* bytes = malloc(size);
         CHECK(bytes && fread(bytes, 1, size, file) == size);
         fclose(file);
-        HSD_Archive archive;
-        CHECK(HSD_ArchiveParse(&archive, bytes, size) == 0);
+        HSD_ArchiveStorage storage;
+        HSD_Archive* archive = HSD_ArchiveStoragePtr(&storage);
+        CHECK(HSD_ArchiveParse(archive, bytes, size) == 0);
         ftData* fighter =
-            HSD_ArchiveGetPublicAs(ftData, &archive, fighters[i].name);
+            HSD_ArchiveGetPublicAs(ftData, archive, fighters[i].name);
         CHECK(fighter && fighter->x0);
         /* Read the original archive tables independently of the adapter. */
         const u8* table = bytes + 0x20 + be32(bytes + 4) + 4 * be32(bytes + 8);
@@ -112,9 +134,9 @@ static void test_fighters(const char* dir)
             CHECK(fighter->ext_attr &&
                   fighter->ext_attr->mario.specials.vel_x_decay == want);
         }
-        CHECK(HSD_ArchiveGetPublicAs(ftData, &archive, fighters[i].name) ==
+        CHECK(HSD_ArchiveGetPublicAs(ftData, archive, fighters[i].name) ==
               fighter);
-        HSD_ArchiveReleaseNative(&archive);
+        HSD_ArchiveReleaseNative(archive);
         free(bytes);
     }
 }

@@ -46,6 +46,16 @@ typedef struct Recursive {
     struct Recursive* next;
 } Recursive;
 
+typedef struct AliasNode {
+    struct AliasNode* next;
+    int64_t value[];
+} AliasNode;
+
+typedef struct AliasRoot {
+    AliasNode** cell;
+    AliasNode* record;
+} AliasRoot;
+
 enum {
     T_INT = 1,
     T_COUNT,
@@ -64,6 +74,11 @@ enum {
     T_RECURSIVE_P,
     T_RECURSIVE_ARRAY,
     T_RECURSIVE_ARRAY_P,
+    T_ALIAS_NODE,
+    T_ALIAS_NODE_P,
+    T_ALIAS_NODE_CELL,
+    T_ALIAS_ROOT,
+    T_ALIAS_VALUES,
     T_TYPES,
 };
 
@@ -266,9 +281,50 @@ static void test_recursive_move(bool reverse, uint32_t root_count)
     dat_close(archive);
 }
 
+/// A pointer-cell view shares the first field of a larger record.
+static void test_first_field_alias(bool record_first)
+{
+    unsigned char bytes[0x20 + 24 + 12] = { 0 };
+    put32(bytes, sizeof bytes);
+    put32(bytes + 4, 24);
+    put32(bytes + 8, 3);
+    unsigned char* data = bytes + 0x20;
+    put32(data, 8);
+    put32(data + 4, 8);
+    put32(data + 8, 16);
+    put32(data + 12, 11);
+    put32(data + 20, 22);
+    put32(data + 24, 0);
+    put32(data + 28, 4);
+    put32(data + 32, 8);
+    const DatSchema* selected =
+        record_first ? &fixture_alias_record_first_schema : &schema;
+    DatArchive* archive = dat_open(selected, bytes, sizeof bytes, NULL);
+    CHECK(archive != NULL);
+    if (!archive) {
+        return;
+    }
+    AliasRoot* root = dat_at(archive, 0, T_ALIAS_ROOT, DAT_COUNT_ONE, 0);
+    CHECK(root != NULL);
+    if (root) {
+        CHECK(root->record->value[0] == 11 &&
+              root->record->next->value[0] == 22);
+        CHECK(root->cell == &root->record->next);
+        CHECK(dat_at(archive, 8, T_ALIAS_NODE, DAT_COUNT_ONE, 0) ==
+              root->record);
+        CHECK(dat_at(archive, 8, T_ALIAS_NODE_P, DAT_COUNT_ONE, 0) ==
+              root->cell);
+        CHECK(dat_verify(archive, stdout) == 0);
+        *root->cell = NULL;
+        CHECK(root->record->next == NULL);
+    }
+    dat_close(archive);
+}
+
 int main(void)
 {
     for (int reverse = 0; reverse < 2; reverse++) {
+        test_first_field_alias(reverse);
         for (uint32_t root_count = 0; root_count <= 2; root_count++) {
             test_recursive_move(reverse, root_count);
         }

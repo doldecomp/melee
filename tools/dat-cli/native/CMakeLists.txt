@@ -108,7 +108,6 @@ endif()
 add_library(dat_melee STATIC ${_dat_schema_sources})
 target_include_directories(dat_melee PUBLIC "${_dat_schema}")
 target_link_libraries(dat_melee PUBLIC dat_native PRIVATE melee_game_headers)
-target_compile_definitions(dat_melee PUBLIC DAT_NATIVE_READERS)
 target_compile_definitions(dat_melee PRIVATE
     VERSION_${MELEE_VERSION}
     BUILD_VERSION=${MELEE_VERSION_NUM}
@@ -121,7 +120,6 @@ target_compile_options(dat_melee PRIVATE -w)
 # Link this adapter with the TARGET_PC game instead of the console loader.
 add_library(dat_hsd STATIC src/hsd.c)
 target_link_libraries(dat_hsd PUBLIC dat_melee melee_game_headers)
-target_compile_definitions(dat_hsd PUBLIC DAT_NATIVE_READERS)
 target_compile_definitions(dat_hsd PRIVATE
     VERSION_${MELEE_VERSION}
     BUILD_VERSION=${MELEE_VERSION_NUM}
@@ -141,7 +139,6 @@ endif()
 add_library(dat_melee_test STATIC ${_dat_schema_sources})
 target_include_directories(dat_melee_test PUBLIC "${_dat_schema}")
 target_link_libraries(dat_melee_test PUBLIC dat_native_test PRIVATE melee_game_headers)
-target_compile_definitions(dat_melee_test PUBLIC DAT_NATIVE_READERS)
 target_compile_definitions(dat_melee_test PRIVATE
     VERSION_${MELEE_VERSION}
     BUILD_VERSION=${MELEE_VERSION_NUM}

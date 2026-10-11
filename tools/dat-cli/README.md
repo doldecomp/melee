@@ -376,21 +376,29 @@ reference fixups and byte operations in `reader.c`; keep archive loading in
 the contract when a concrete consumer needs a new value or operation, with
 fixtures compiled through the same emitter and real-archive parity checks.
 
-In a native game build, enable `MELEE_DAT_READERS` and provide the existing
-`MELEE_DAT_TYPES` cache and original `MELEE_DAT_FILES`. The `dat_hsd` adapter
-links the generated readers with the game's `TARGET_PC` archive interface.
-`DAT_NATIVE_READERS` enables the typed macro branch only for builds linked to
-that adapter; the matching GameCube build uses its existing loader.
+`TARGET_PC` uses the generated readers through the `dat_hsd` adapter.
+Native executables must link that library. Enable `MELEE_DAT_READERS` to
+generate and build it alongside the game, providing the existing
+`MELEE_DAT_TYPES` cache and original `MELEE_DAT_FILES`; otherwise supply the
+library from a separate native build. This CMake option controls generation,
+not the loader interface. The matching GameCube build uses its existing loader.
+
+`HSD_ArchiveStorage` wraps the unchanged `HSD_Archive` with native reader state.
+On the GameCube it is an alias for `HSD_Archive`. Allocate this storage for
+parsed archives, including stack instances, and pass `HSD_ArchiveStoragePtr`
+to the archive functions. Keep the storage alive until the last native lookup;
+converted data lives until `HSD_ArchiveReleaseNative` releases it.
 
 ```c
 #include <sysdolphin/baselib/archive.h>
 #include <melee/ft/types.h>
 
-HSD_Archive archive;
-if (HSD_ArchiveParse(&archive, bytes, size) == 0) {
-    ftData* mario = HSD_ArchiveGetPublicAs(ftData, &archive, "ftDataMario");
+HSD_ArchiveStorage storage;
+HSD_Archive* archive = HSD_ArchiveStoragePtr(&storage);
+if (HSD_ArchiveParse(archive, bytes, size) == 0) {
+    ftData* mario = HSD_ArchiveGetPublicAs(ftData, archive, "ftDataMario");
     // Use mario's native fields.
-    HSD_ArchiveReleaseNative(&archive);
+    HSD_ArchiveReleaseNative(archive);
 }
 ```
 
@@ -401,8 +409,8 @@ loader bindings and counts from its root annotation. Missing symbols and
 unsupported types return `NULL`. Parsing decodes the archive tables without
 relocating 32-bit serialized words into host pointers. The adapter owns its
 converted objects and table copies; the caller still owns the input buffer.
-The normal `lbArchive_80016EFC` path releases the adapter before freeing that
-buffer. Untyped lookups return serialized bytes; specialized
+The normal archive free and preload-release paths release the adapter before
+freeing that buffer. Untyped lookups return serialized bytes; specialized
 `lbArchiveRelocate` consumers still require their own native integration.
 
 Tools can use `dat_open`, `dat_public` and `dat_at` directly with

@@ -619,7 +619,15 @@ static void dat_reader_move(DatArchive* a, void* previous, void* native,
         }
         uintptr_t value = (uintptr_t) a->natives.values[i];
         if (value >= begin && value < end) {
-            a->natives.values[i] = (uintptr_t) native + value - begin;
+            int32_t view = dat_type_by_id(a->s, (uint32_t) a->natives.keys[i]);
+            /* A first field shares its address with the enclosing record.
+               Moving the field must not move that larger record. */
+            uint32_t offset = (uint32_t) (a->natives.keys[i] >> 32);
+            if (dat_reader_T(a, view)->allocation_size(a, offset) <=
+                end - value)
+            {
+                a->natives.values[i] = (uintptr_t) native + value - begin;
+            }
         }
     }
     memmove(native, previous, size);
@@ -629,7 +637,7 @@ static void dat_reader_move(DatArchive* a, void* previous, void* native,
             continue;
         }
         uintptr_t slot = (uintptr_t) a->references.keys[i];
-        if (slot >= begin && slot < end) {
+        if (slot >= begin && slot < end && sizeof(void*) <= end - slot) {
             slot = (uintptr_t) native + slot - begin;
         }
         *map_slot(&references, slot, true) = a->references.values[i];
@@ -1245,8 +1253,15 @@ void dat_reader_layout(DatArchive* a, uint32_t offset, int32_t type,
                        void* native, DatParent parent)
 {
     if (type != DAT_NONE) {
-        dat_reader_T(a, type)->read(a, offset, native, &parent);
         int32_t r = dat_reader_resolve(a, type);
+        /* Publish inline storage when this address is referenced elsewhere. */
+        if (native != NULL && !dat_reader_opaque(a, type) &&
+            (bits_has(&a->archive->target, offset, a->archive->size) ||
+             dat_reader_native_of(a, offset, r) != NULL))
+        {
+            dat_reader_place_native(a, offset, r, native);
+        }
+        dat_reader_T(a, type)->read(a, offset, native, &parent);
         void* final = dat_reader_native_of(a, offset, r);
         if (native != NULL && final != NULL && final != native &&
             final != a->archive->data + offset)

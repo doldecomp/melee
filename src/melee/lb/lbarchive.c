@@ -70,7 +70,7 @@ static inline HSD_Archive* loadArchive(const char* filename)
     void* data;
 
     data = lbHeap_80015BD0(0, OSRoundUp32B(lbFileGetSize(filename)));
-    archive = lbHeap_80015BD0(0, sizeof(HSD_Archive));
+    archive = lbHeap_80015BD0(0, sizeof(HSD_ArchiveStorage));
     readArchive(filename, data, archive);
     return archive;
 }
@@ -128,7 +128,7 @@ void lbArchive_80016EFC(HSD_Archive* archive)
 {
     HSD_ASSERT(0xFC, archive);
     HSD_ASSERT(0xFD, archive->flags & HSD_ARCHIVE_DONT_FREE);
-#if defined(TARGET_PC) && defined(DAT_NATIVE_READERS)
+#ifdef TARGET_PC
     HSD_ArchiveReleaseNative(archive);
 #endif
     lbHeap_80015CA8(0, archive->data - sizeof(archive->header));

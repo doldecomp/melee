@@ -1733,7 +1733,7 @@ void ftData_80085B98(Fighter* fp, int arg1, int arg2)
 
 void ftData_80085CD8(Fighter* fp, Fighter* arg1, int msid)
 {
-    HSD_Archive sp14;
+    HSD_ArchiveStorage sp14;
     Fighter* temp_r3_3;
     s32 temp_ret;
     s32 temp_ret_2;
@@ -1752,7 +1752,7 @@ void ftData_80085CD8(Fighter* fp, Fighter* arg1, int msid)
                     memcpy(fp->x59C, temp_r3_3->x59C, temp_r3->x8);
                     temp_r4 = fp->x59C;
                     temp_ret = lbArchiveRelocate(
-                        &sp14, temp_r4->x0, temp_r3->x8,
+                        HSD_ArchiveStoragePtr(&sp14), temp_r4->x0, temp_r3->x8,
                         (intptr_t) temp_r4 - (intptr_t) temp_r3_3->x59C);
                     if (temp_ret == -1) {
                         HSD_ASSERTREPORT(
@@ -1766,15 +1766,15 @@ void ftData_80085CD8(Fighter* fp, Fighter* arg1, int msid)
                     } else {
                         memcpy(fp->x59C, (void*) temp_r4_2, temp_r3->x8);
                     }
-                    temp_ret_2 =
-                        HSD_ArchiveParse(&sp14, fp->x59C->x0, temp_r3->x8);
+                    temp_ret_2 = HSD_ArchiveParse(HSD_ArchiveStoragePtr(&sp14),
+                                                  fp->x59C->x0, temp_r3->x8);
                     if (temp_ret_2 == -1) {
                         HSD_ASSERTREPORT(0xA0F, 0,
                                          "HSD_ArchiveParse error! %x\n", msid);
                     }
                 }
-                fp->x590 =
-                    HSD_ArchiveGetPublicAs(FigaTree, &sp14, temp_r3->x0);
+                fp->x590 = HSD_ArchiveGetPublicAs(
+                    FigaTree, HSD_ArchiveStoragePtr(&sp14), temp_r3->x0);
             } else {
                 fp->x590 = NULL;
             }
@@ -1785,7 +1785,7 @@ void ftData_80085CD8(Fighter* fp, Fighter* arg1, int msid)
 
 FigaTree* ftData_80085E50(Fighter* arg0, int msid)
 {
-    HSD_Archive sp10;
+    HSD_ArchiveStorage sp10;
     Fighter* temp_r3_3;
     int temp_ret;
     int temp_ret_2;
@@ -1804,7 +1804,7 @@ FigaTree* ftData_80085E50(Fighter* arg0, int msid)
                     memcpy(arg0->x59C, temp_r3_3->x59C, temp_r3->x8);
                     temp_r4 = arg0->x59C;
                     temp_ret = lbArchiveRelocate(
-                        &sp10, temp_r4->x0, temp_r3->x8,
+                        HSD_ArchiveStoragePtr(&sp10), temp_r4->x0, temp_r3->x8,
                         (intptr_t) temp_r4 - (intptr_t) temp_r3_3->x59C);
                     if (temp_ret == -1) {
                         HSD_ASSERTREPORT(
@@ -1818,15 +1818,15 @@ FigaTree* ftData_80085E50(Fighter* arg0, int msid)
                     } else {
                         memcpy(arg0->x5A0, (void*) temp_r4_2, temp_r3->x8);
                     }
-                    temp_ret_2 =
-                        HSD_ArchiveParse(&sp10, arg0->x5A0->x0, temp_r3->x8);
+                    temp_ret_2 = HSD_ArchiveParse(HSD_ArchiveStoragePtr(&sp10),
+                                                  arg0->x5A0->x0, temp_r3->x8);
                     if (temp_ret_2 == -1) {
                         HSD_ASSERTREPORT(0xA45, 0,
                                          "HSD_ArchiveParse error! %x\n", msid);
                     }
                 }
-                arg0->x598 =
-                    HSD_ArchiveGetPublicAs(FigaTree, &sp10, temp_r3->x0);
+                arg0->x598 = HSD_ArchiveGetPublicAs(
+                    FigaTree, HSD_ArchiveStoragePtr(&sp10), temp_r3->x0);
             } else {
                 arg0->x598 = 0;
             }

@@ -55,6 +55,11 @@ void lbDvd_SetupVsPreloadCache(void)
 static inline void releaseEntry(PreloadEntry* entry)
 {
     if (entry->archive != NULL) {
+#ifdef TARGET_PC
+        if (entry->load_state == 2) {
+            HSD_ArchiveReleaseNative(entry->archive->addr);
+        }
+#endif
         lbHeap_80015CA8(entry->heap, entry->archive->addr);
     }
     if (entry->raw_data != NULL) {
@@ -303,8 +308,8 @@ void lbDvd_CachePreloadedFile(s32 index)
         if (preloadEntry->type == 2 || preloadEntry->type == 3 ||
             preloadEntry->type == 4)
         {
-            preloadEntry->archive =
-                lbHeap_80015BD0(preloadEntry->heap, sizeof(HSD_Archive));
+            preloadEntry->archive = lbHeap_80015BD0(
+                preloadEntry->heap, sizeof(HSD_ArchiveStorage));
         }
         if (preloadEntry->raw_data == 0) {
             lbDvd_80017E64(0, index, 0, 1);
