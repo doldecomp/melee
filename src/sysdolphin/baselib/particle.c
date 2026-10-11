@@ -49,14 +49,14 @@ typedef struct {
 /* 4D78E4 */ static u16 hsd_804D78E4 = 0;
 #pragma pop
 #endif
-/* 4D78E8 */ u32 hsd_804D78E8 = 0;
-/* 4D78EC */ u32 hsd_804D78EC = 0;
+/* 4D78E8 */ void (*hsd_804D78E8)(HSD_Generator*, Mtx) = NULL;
+/* 4D78EC */ void (*hsd_804D78EC)(HSD_Generator*) = NULL;
 /* 4D78F0 */ HSD_CObj* psCamera = NULL;
 /* 4D78F4 */ HSD_SList* hsd_804D78F4 = NULL;
 static HSD_JObj* psPointJObj[8];
 /* 4D0908 */ HSD_Particle* hsd_804D0908[16];
 /* 4D0948 */ u32* hsd_804D0948[65];
-/* 4D0A4C */ HSD_PSFormGroup** psFormGroupArray[65];
+/* 4D0A4C */ int psFormGroupArray[65];
 /* 4D0B50 */ HSD_PSTexGroup** psTexGroupArray[65];
 /* 4D0C54 */ HSD_PSFormGroup** psNumCmdList[65];
 /* 4D0D58 */ int psCmdListArray[65];
@@ -132,7 +132,7 @@ void psInitDataBankLoad(int bank, const int* cmdBank, const int* texBank,
     }
 
     hsd_804D0948[bank] = (u32*) ref;
-    ((s32*) psFormGroupArray)[bank] = *texBank;
+    psFormGroupArray[bank] = *texBank;
     psTexGroupArray[bank] = (HSD_PSTexGroup**) (texBank + 1);
 
     if (formBank != NULL) {
@@ -347,7 +347,7 @@ void hsd_80398A08(u32 unused)
     numPeakParticles = 0;
     for (i = 0; i < 0x41; i++) {
         psCmdListArray[i] = 0;
-        psFormGroupArray[i] = NULL;
+        psFormGroupArray[i] = 0;
         ptclref_804D0E5C[i] = NULL;
         psTexGroupArray[i] = NULL;
         psNumCmdList[i] = NULL;

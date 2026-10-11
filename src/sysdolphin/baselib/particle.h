@@ -32,6 +32,7 @@ psGenerateParticle0(HSD_Particle** head, int linkNo, int bank, u32 kind,
 /* 39CEAC */ void hsd_8039CEAC(u32);
 /* 39CF4C */ void hsd_8039CF4C(s32, HSD_JObj*);
 /* 39D048 */ void hsd_8039D048(void* particle);
+/* 4D0A4C */ extern int psFormGroupArray[65];
 /* 4D0B50 */ extern HSD_PSTexGroup** psTexGroupArray[65];
 /* 4D0C54 */ extern HSD_PSFormGroup** psNumCmdList[65];
 /* 4D0D58 */ extern int psCmdListArray[65];
@@ -40,8 +41,8 @@ psGenerateParticle0(HSD_Particle** head, int linkNo, int bank, u32 kind,
 /* 4D78DA */ extern u16 hsd_804D78DA;
 /* 4D78DE */ extern u16 hsd_804D78DE;
 /* 4D78E0 */ extern u16 hsd_804D78E0;
-/* 4D78E8 */ extern u32 hsd_804D78E8;
-/* 4D78EC */ extern u32 hsd_804D78EC;
+/* 4D78E8 */ extern void (*hsd_804D78E8)(HSD_Generator*, Mtx);
+/* 4D78EC */ extern void (*hsd_804D78EC)(HSD_Generator*);
 /* 4D78F0 */ extern HSD_CObj* psCamera;
 /* 4D78F4 */ extern HSD_SList* hsd_804D78F4;
 
