@@ -57,7 +57,8 @@ void ftKp_SpecialS_Enter(HSD_GObj* gobj)
         fp->mv.kp.unk1.xC = 0;
     }
 
-    Fighter_ChangeMotionState(gobj, 347, Ft_MF_None, 0.0F, 1.0F, 0.0F, 0);
+    Fighter_ChangeMotionState(gobj, ftKp_MS_SpecialSStart, Ft_MF_None, 0.0F,
+                              1.0F, 0.0F, 0);
 
     ftAnim_8006EBA4(gobj);
 
@@ -82,7 +83,8 @@ void ftKp_SpecialAirS_Enter(HSD_GObj* gobj)
         fp->mv.kp.unk1.xC = 0;
     }
 
-    Fighter_ChangeMotionState(gobj, 353, Ft_MF_None, 0.0F, 1.0F, 0.0F, 0);
+    Fighter_ChangeMotionState(gobj, ftKp_MS_SpecialAirSStart, Ft_MF_None, 0.0F,
+                              1.0F, 0.0F, 0);
 
     ftAnim_8006EBA4(gobj);
 
@@ -103,10 +105,11 @@ void ftKp_SpecialS_8013302C(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
 
     if ((signed) fp->mv.kp.unk1.x4 != 0) {
-        Fighter_ChangeMotionState(gobj, 349, transition_flags0, 0.0F, 1.0F,
-                                  0.0F, 0);
+        Fighter_ChangeMotionState(gobj, ftKp_MS_SpecialSHit1,
+                                  transition_flags0, 0.0F, 1.0F, 0.0F, 0);
     } else {
-        Fighter_ChangeMotionState(gobj, 348, Ft_MF_None, 0.0F, 1.0F, 0.0F, 0);
+        Fighter_ChangeMotionState(gobj, ftKp_MS_SpecialSHit0_0, Ft_MF_None,
+                                  0.0F, 1.0F, 0.0F, 0);
     }
 
     fp->x2222_b2 = true;
@@ -122,10 +125,11 @@ void ftKp_SpecialS_801330E4(HSD_GObj* gobj)
 
     fp = gobj->user_data;
     if ((signed) fp->mv.kp.unk1.x4 != 0) {
-        Fighter_ChangeMotionState(gobj, 355, transition_flags0, 0.0F, 1.0F,
-                                  0.0F, 0);
+        Fighter_ChangeMotionState(gobj, ftKp_MS_SpecialAirSHit1,
+                                  transition_flags0, 0.0F, 1.0F, 0.0F, 0);
     } else {
-        Fighter_ChangeMotionState(gobj, 354, Ft_MF_None, 0.0F, 1.0F, 0.0F, 0);
+        Fighter_ChangeMotionState(gobj, ftKp_MS_SpecialAirSHit0_0, Ft_MF_None,
+                                  0.0F, 1.0F, 0.0F, 0);
     }
 
     fp->x2222_b2 = true;
@@ -161,7 +165,8 @@ void ftKp_SpecialS_8013322C(HSD_GObj* gobj)
     Fighter* fp0;
     Fighter* fp1 = GET_FIGHTER(gobj);
 
-    ftCommon_AirToGroundStateChange(gobj, fp1, 347, transition_flags1);
+    ftCommon_AirToGroundStateChange(gobj, fp1, ftKp_MS_SpecialSStart,
+                                    transition_flags1);
 
     {
         fp0 = GET_FIGHTER(gobj);
@@ -193,7 +198,8 @@ void ftKp_SpecialS_80133324(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    ftCommon_AirToGroundStateChange(gobj, fp, 348, transition_flags1);
+    ftCommon_AirToGroundStateChange(gobj, fp, ftKp_MS_SpecialSHit0_0,
+                                    transition_flags1);
 
     ftCommon_8007E2F4(fp, 511);
     ftCommon_8007E2FC(gobj);
@@ -213,16 +219,16 @@ void ftKp_SpecialS_80133398(HSD_GObj* gobj)
 
     ftCo_Fall_Enter(gobj);
 }
-/// @todo Combine common flags with #transition_flags0.
 static u32 const transition_flags2 =
-    Ft_MF_SkipMatAnim | Ft_MF_SkipColAnim | Ft_MF_SkipItemVis | Ft_MF_Unk19 |
+    transition_flags0 | Ft_MF_SkipColAnim | Ft_MF_SkipItemVis | Ft_MF_Unk19 |
     Ft_MF_SkipModelPartVis | Ft_MF_SkipModelFlags;
 
 void ftKp_SpecialS_801333F8(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    ftCommon_AirToGroundStateChange(gobj, fp, 350, transition_flags2);
+    ftCommon_AirToGroundStateChange(gobj, fp, ftKp_MS_SpecialSHit0_1,
+                                    transition_flags2);
 
     ftCommon_8007E2F4(fp, 511);
     ftCommon_8007E2FC(gobj);
@@ -256,8 +262,8 @@ void ftKp_SpecialS_801334E4(HSD_GObj* gobj)
         fp->facing_dir = -fp->facing_dir;
     }
 
-    Fighter_ChangeMotionState(gobj, 351, transition_flags1, fp->cur_anim_frame,
-                              1.0F, 0.0F, 0);
+    Fighter_ChangeMotionState(gobj, ftKp_MS_SpecialSEndF, transition_flags1,
+                              fp->cur_anim_frame, 1.0F, 0.0F, 0);
 
     if ((s32) fp->mv.kp.unk1.xC != 0) {
         fp->facing_dir = -fp->facing_dir;
@@ -281,8 +287,8 @@ void ftKp_SpecialS_8013359C(HSD_GObj* gobj)
         fp->facing_dir = -fp->facing_dir;
     }
 
-    Fighter_ChangeMotionState(gobj, 352, transition_flags1, fp->cur_anim_frame,
-                              1.0F, 0.0F, 0);
+    Fighter_ChangeMotionState(gobj, ftKp_MS_SpecialSEndB, transition_flags1,
+                              fp->cur_anim_frame, 1.0F, 0.0F, 0);
 
     if ((signed) fp->mv.kp.unk1.xC != 0) {
         fp->facing_dir = -fp->facing_dir;
@@ -342,11 +348,12 @@ void ftKp_SpecialSHit_Anim(HSD_GObj* gobj)
                 fp0 = GET_FIGHTER(gobj);
 
                 if ((signed) fp0->mv.kp.unk1.x4 != false) {
-                    Fighter_ChangeMotionState(gobj, 349, transition_flags0,
-                                              0.0F, 1.0F, 0.0F, 0);
+                    Fighter_ChangeMotionState(gobj, ftKp_MS_SpecialSHit1,
+                                              transition_flags0, 0.0F, 1.0F,
+                                              0.0F, 0);
                 } else {
-                    Fighter_ChangeMotionState(gobj, 348, Ft_MF_None, 0.0F,
-                                              1.0F, 0.0F, 0);
+                    Fighter_ChangeMotionState(gobj, ftKp_MS_SpecialSHit0_0,
+                                              Ft_MF_None, 0.0F, 1.0F, 0.0F, 0);
                 }
 
                 fp0->x2222_b2 = true;
@@ -361,8 +368,9 @@ void ftKp_SpecialSHit_Anim(HSD_GObj* gobj)
         } else {
             /// @todo Combine @c fp0 with other branch somehow
             fp0 = GET_FIGHTER(gobj);
-            Fighter_ChangeMotionState(gobj, 350, transition_flags3,
-                                      fp0->cur_anim_frame, 1.0F, 0.0F, 0);
+            Fighter_ChangeMotionState(gobj, ftKp_MS_SpecialSHit0_1,
+                                      transition_flags3, fp0->cur_anim_frame,
+                                      1.0F, 0.0F, 0);
 
             ftAnim_8006F0FC(gobj, 0.0F);
             fp0->mv.kp.unk1.x0 = 0;
