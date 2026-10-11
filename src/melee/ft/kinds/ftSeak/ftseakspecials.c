@@ -5,6 +5,7 @@
 
 #include <math.h>
 
+#include "forward.h"
 #include "ftseak.h"
 #include "types.h"
 #include <melee/ft/fighter.h>
@@ -496,7 +497,8 @@ void ftSk_SpecialS_80110F70(HSD_GObj* gobj)
 
 void ftSk_SpecialS_Enter(HSD_GObj* gobj)
 {
-    Fighter_ChangeMotionState(gobj, 349, Ft_MF_None, 0.0, 1, 0, NULL);
+    Fighter_ChangeMotionState(gobj, ftSk_MS_SpecialSStart, Ft_MF_None, 0.0, 1,
+                              0, NULL);
     ftAnim_8006EBA4(gobj);
     ftSk_SpecialS_80110F70(gobj);
 }
@@ -506,7 +508,8 @@ void ftSk_SpecialAirS_Enter(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     fp->self_vel.y = 0;
 
-    Fighter_ChangeMotionState(gobj, 352, Ft_MF_None, 0.0, 1, 0, NULL);
+    Fighter_ChangeMotionState(gobj, ftSk_MS_SpecialAirSStart, Ft_MF_None, 0.0,
+                              1, 0, NULL);
     ftAnim_8006EBA4(gobj);
     ftSk_SpecialS_80110F70(gobj);
 }
@@ -637,8 +640,9 @@ void ftSk_SpecialS_80111440(HSD_GObj* gobj)
 
     ftCommon_8007D5D4(fp);
     {
-        Fighter_ChangeMotionState(gobj, 352, transition_flags,
-                                  fp->cur_anim_frame, 1, 0, NULL);
+        Fighter_ChangeMotionState(gobj, ftSk_MS_SpecialAirSStart,
+                                  transition_flags, fp->cur_anim_frame, 1, 0,
+                                  NULL);
     }
 
     {
@@ -659,7 +663,8 @@ void ftSk_SpecialS_801114E4(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    ftCommon_AirToGroundStateChange(gobj, fp, 349, transition_flags);
+    ftCommon_AirToGroundStateChange(gobj, fp, ftSk_MS_SpecialSStart,
+                                    transition_flags);
 
     {
         Fighter* fp2 = GET_FIGHTER(gobj);
@@ -791,7 +796,8 @@ void ftSk_SpecialS_80111830(HSD_GObj* gobj)
 
     Fighter* fp = gobj->user_data;
 
-    Fighter_ChangeMotionState(gobj, 350, Ft_MF_SkipHit, 0.0, 1, 0, NULL);
+    Fighter_ChangeMotionState(gobj, ftSk_MS_SpecialS, Ft_MF_SkipHit, 0.0, 1, 0,
+                              NULL);
     ftSk_SpecialS_80110610(gobj, 305, 0);
 
     fp2 = gobj->user_data;
@@ -836,7 +842,8 @@ void ftSk_SpecialS_80111830(HSD_GObj* gobj)
 
 void ftSk_SpecialS_80111988(HSD_GObj* gobj)
 {
-    Fighter_ChangeMotionState(gobj, 353, Ft_MF_SkipHit, 0.0, 1.0, 0.0, NULL);
+    Fighter_ChangeMotionState(gobj, ftSk_MS_SpecialAirS, Ft_MF_SkipHit, 0.0,
+                              1.0, 0.0, NULL);
     ftSk_SpecialS_80110610(gobj, 308, 0.0);
 
     {
@@ -945,7 +952,8 @@ void ftSk_SpecialS_80111CB0(HSD_GObj* gobj)
     u8 _[8];
 
     Fighter* fp = GET_FIGHTER(gobj);
-    ftCommon_GroundToAirStateChange(gobj, fp, 354, transition_flags);
+    ftCommon_GroundToAirStateChange(gobj, fp, ftSk_MS_SpecialAirSEnd,
+                                    transition_flags);
 
     {
         Fighter* fp2 = gobj->user_data;
@@ -965,7 +973,8 @@ void ftSk_SpecialS_80111CB0(HSD_GObj* gobj)
 void ftSk_SpecialS_80111D54(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    ftCommon_AirToGroundStateChange(gobj, fp, 351, transition_flags);
+    ftCommon_AirToGroundStateChange(gobj, fp, ftSk_MS_SpecialSEnd,
+                                    transition_flags);
 
     {
         Fighter* fp2 = GET_FIGHTER(gobj);
@@ -983,7 +992,8 @@ void ftSk_SpecialS_80111D54(HSD_GObj* gobj)
 
 void ftSk_SpecialS_80111DF8(HSD_GObj* gobj)
 {
-    Fighter_ChangeMotionState(gobj, 351, Ft_MF_SkipHit, 0, 1, 0, NULL);
+    Fighter_ChangeMotionState(gobj, ftSk_MS_SpecialSEnd, Ft_MF_SkipHit, 0, 1,
+                              0, NULL);
 
     {
         Fighter* fp = GET_FIGHTER(gobj);
@@ -1007,7 +1017,8 @@ void ftSk_SpecialS_80111DF8(HSD_GObj* gobj)
 
 void ftSk_SpecialS_80111EB4(HSD_GObj* gobj)
 {
-    Fighter_ChangeMotionState(gobj, 354, Ft_MF_SkipHit, 0, 1, 0, NULL);
+    Fighter_ChangeMotionState(gobj, ftSk_MS_SpecialAirSEnd, Ft_MF_SkipHit, 0,
+                              1, 0, NULL);
 
     {
         Fighter* fp = gobj->user_data;
