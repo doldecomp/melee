@@ -616,8 +616,8 @@ void ftKb_SpecialLw1_Coll(Fighter_GObj* gobj)
         fp->self_vel.x = 0.0f;
         ftCommon_8007D5D4(fp);
         temp = fp->x221C_b4;
-        Fighter_ChangeMotionState(gobj, 0x18C, 0x0C4C5092U, fp->cur_anim_frame,
-                                  1.0f, 0.0f, NULL);
+        Fighter_ChangeMotionState(gobj, ftKb_MS_SpecialAirLwStart, 0x0C4C5092U,
+                                  fp->cur_anim_frame, 1.0f, 0.0f, NULL);
         fp->x221C_b4 = temp;
         fp3 = GET_FIGHTER(gobj);
         Fighter_SetDamageCallbacks(fp3, ftKb_Init_800EE7B8,
@@ -723,8 +723,8 @@ void ftKb_SpecialAirLwStart_Coll(Fighter_GObj* gobj)
         fp->self_vel.y = 0.0f;
         ftCommon_8007D7FC(fp);
         temp = fp->x221C_b4;
-        Fighter_ChangeMotionState(gobj, 0x189, 0x0C4C5092U, fp->cur_anim_frame,
-                                  1.0f, 0.0f, NULL);
+        Fighter_ChangeMotionState(gobj, ftKb_MS_SpecialLw1, 0x0C4C5092U,
+                                  fp->cur_anim_frame, 1.0f, 0.0f, NULL);
         fp->x221C_b4 = temp;
         fp2 = GET_FIGHTER(gobj);
         Fighter_SetDamageCallbacks(fp2, ftKb_Init_800EE7B8,
@@ -773,8 +773,8 @@ void ftKb_SpecialAirLw_Coll(Fighter_GObj* gobj)
         fp->self_vel.y = 0.0f;
         ftCommon_8007D7FC(fp);
         temp = fp->x221C_b4;
-        Fighter_ChangeMotionState(gobj, 0x18A, 0x0C4C5092U, 0.0f, 0.0f, 0.0f,
-                                  NULL);
+        Fighter_ChangeMotionState(gobj, ftKb_MS_SpecialLw, 0x0C4C5092U, 0.0f,
+                                  0.0f, 0.0f, NULL);
         fp->x221C_b4 = temp;
         ftAnim_SetAnimRate(gobj, 0.0f);
         fp2 = GET_FIGHTER(gobj);

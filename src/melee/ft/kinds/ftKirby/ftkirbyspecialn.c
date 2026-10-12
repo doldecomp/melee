@@ -1134,8 +1134,8 @@ static inline bool ftKb_EatWait_ItemEat(Fighter_GObj* gobj)
         ((fp->input.lstick[0].y < -da->specialn_y_axis_range_jump) &&
          fp->target_item_gobj != NULL))
     {
-        Fighter_ChangeMotionState(gobj, 0x170, Ft_MF_KeepGfx, 0.0f, 1.0f, 0.0f,
-                                  NULL);
+        Fighter_ChangeMotionState(gobj, ftKb_MS_SpecialNDrink1, Ft_MF_KeepGfx,
+                                  0.0f, 1.0f, 0.0f, NULL);
         fp->x2222_b2 = true;
         ftKb_SpecialN_800F9070(gobj);
         ftAnim_8006EBA4(gobj);
@@ -1150,7 +1150,8 @@ static inline bool ftKb_EatWait_ItemSpit(Fighter_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
 
     if ((fp->input.pressed_buttons & 0x100) && fp->target_item_gobj != NULL) {
-        Fighter_ChangeMotionState(gobj, 0x172, 0x12, 0.0f, 1.0f, 0.0f, NULL);
+        Fighter_ChangeMotionState(gobj, ftKb_MS_SpecialNSpit1, 0x12, 0.0f,
+                                  1.0f, 0.0f, NULL);
         fp->x2222_b2 = true;
         ftKb_SpecialN_800F9070(gobj);
         ftAnim_8006EBA4(gobj);
@@ -1169,8 +1170,8 @@ static inline bool ftKb_EatWait_FighterEat(Fighter_GObj* gobj)
         ((fp->input.lstick[0].y < -da->specialn_y_axis_range_jump) &&
          fp->victim_gobj != NULL))
     {
-        Fighter_ChangeMotionState(gobj, 0x16F, Ft_MF_KeepGfx, 0.0f, 1.0f, 0.0f,
-                                  NULL);
+        Fighter_ChangeMotionState(gobj, ftKb_MS_SpecialNDrink0, Ft_MF_KeepGfx,
+                                  0.0f, 1.0f, 0.0f, NULL);
         fp->x2222_b2 = true;
         ftKb_SpecialN_800F9070(gobj);
         ftAnim_8006EBA4(gobj);
@@ -1185,7 +1186,8 @@ static inline bool ftKb_EatWait_FighterSpit(Fighter_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
 
     if ((fp->input.pressed_buttons & 0x100) && fp->victim_gobj != NULL) {
-        Fighter_ChangeMotionState(gobj, 0x171, 0x12, 0.0f, 1.0f, 0.0f, NULL);
+        Fighter_ChangeMotionState(gobj, ftKb_MS_SpecialNSpit0, 0x12, 0.0f,
+                                  1.0f, 0.0f, NULL);
         fp->x2222_b2 = true;
         ftKb_SpecialN_800F9070(gobj);
         ftAnim_8006EBA4(gobj);
@@ -1213,7 +1215,8 @@ static inline bool ftKb_EatWait_Turn(Fighter_GObj* gobj)
     if (((stick_x < 0.0f) && (fp->facing_dir == 1.0f)) ||
         ((stick_x > 0.0f) && (fp->facing_dir == -1.0f)))
     {
-        Fighter_ChangeMotionState(gobj, 0x16B, 0x92, 0.0f, 1.0f, 0.0f, NULL);
+        Fighter_ChangeMotionState(gobj, ftKb_MS_EatTurn, 0x92, 0.0f, 1.0f,
+                                  0.0f, NULL);
         ftKb_SpecialN_800F9070(gobj);
         ftAnim_8006EBA4(gobj);
         ftCommon_8007E2F4(fp, 0x1FF);
@@ -1250,8 +1253,8 @@ void ftKb_EatWait_IASA(Fighter_GObj* gobj)
             Fighter* fp3 = GET_FIGHTER(gobj);
             fp3->mv.kb.specialhi.x4 = jump;
             fp3->mv.kb.specialhi.x0 = 0;
-            Fighter_ChangeMotionState(gobj, 0x16C, 0x92, 0.0f, 1.0f, 0.0f,
-                                      NULL);
+            Fighter_ChangeMotionState(gobj, ftKb_MS_EatJump1, 0x92, 0.0f, 1.0f,
+                                      0.0f, NULL);
             ftKb_SpecialN_800F9070(gobj);
             ftAnim_8006EBA4(gobj);
             ftCommon_8007E2F4(fp3, 0x1FF);
@@ -1262,8 +1265,8 @@ void ftKb_EatWait_IASA(Fighter_GObj* gobj)
         if (r0_2 == 0 && ftWalkCommon_800DFC70(gobj)) {
             Fighter* fp4 = GET_FIGHTER(gobj);
             ftWalkCommon_800DFCA4(
-                gobj, 0x168, 0x10, 0.0f, fp4->u.kb.xE8, fp4->u.kb.xEC,
-                fp4->u.kb.xF0, fp4->co_attrs.slow_walk_max,
+                gobj, ftKb_MS_EatWalkSlow, 0x10, 0.0f, fp4->u.kb.xE8,
+                fp4->u.kb.xEC, fp4->u.kb.xF0, fp4->co_attrs.slow_walk_max,
                 fp4->co_attrs.mid_walk_point, fp4->co_attrs.fast_walk_min,
                 ((ftKb_DatAttrs*) fp4->dat_attrs)->specialn_walk_speed);
             ftCommon_8007E2F4(fp4, 0x1FF);
@@ -1281,8 +1284,8 @@ static inline bool ftKb_SpecialAirNCaptureWait_ItemEat(Fighter_GObj* gobj)
         ((fp->input.lstick[0].y < -da->specialn_y_axis_range_jump) &&
          fp->target_item_gobj != NULL))
     {
-        Fighter_ChangeMotionState(gobj, 0x17B, Ft_MF_KeepGfx, 0.0f, 1.0f, 0.0f,
-                                  NULL);
+        Fighter_ChangeMotionState(gobj, ftKb_MS_SpecialAirNDrink1,
+                                  Ft_MF_KeepGfx, 0.0f, 1.0f, 0.0f, NULL);
         fp->x2222_b2 = true;
         ftKb_SpecialN_800F9070(gobj);
         ftAnim_8006EBA4(gobj);
@@ -1297,7 +1300,8 @@ static inline bool ftKb_SpecialAirNCaptureWait_ItemSpit(Fighter_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
 
     if ((fp->input.pressed_buttons & 0x100) && fp->target_item_gobj != NULL) {
-        Fighter_ChangeMotionState(gobj, 0x17D, 0x12, 0.0f, 1.0f, 0.0f, NULL);
+        Fighter_ChangeMotionState(gobj, ftKb_MS_SpecialAirNSpit1, 0x12, 0.0f,
+                                  1.0f, 0.0f, NULL);
         fp->x2222_b2 = true;
         ftKb_SpecialN_800F9070(gobj);
         ftAnim_8006EBA4(gobj);
@@ -1316,8 +1320,8 @@ static inline bool ftKb_SpecialAirNCaptureWait_FighterEat(Fighter_GObj* gobj)
         ((fp->input.lstick[0].y < -da->specialn_y_axis_range_jump) &&
          fp->victim_gobj != NULL))
     {
-        Fighter_ChangeMotionState(gobj, 0x17A, Ft_MF_KeepGfx, 0.0f, 1.0f, 0.0f,
-                                  NULL);
+        Fighter_ChangeMotionState(gobj, ftKb_MS_SpecialAirNDrink0,
+                                  Ft_MF_KeepGfx, 0.0f, 1.0f, 0.0f, NULL);
         fp->x2222_b2 = true;
         ftKb_SpecialN_800F9070(gobj);
         ftAnim_8006EBA4(gobj);
@@ -1332,7 +1336,8 @@ static inline bool ftKb_SpecialAirNCaptureWait_FighterSpit(Fighter_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
 
     if ((fp->input.pressed_buttons & 0x100) && fp->victim_gobj != NULL) {
-        Fighter_ChangeMotionState(gobj, 0x17C, 0x12, 0.0f, 1.0f, 0.0f, NULL);
+        Fighter_ChangeMotionState(gobj, ftKb_MS_SpecialAirNSpit0, 0x12, 0.0f,
+                                  1.0f, 0.0f, NULL);
         fp->x2222_b2 = true;
         ftKb_SpecialN_800F9070(gobj);
         ftAnim_8006EBA4(gobj);
@@ -1360,7 +1365,8 @@ static inline bool ftKb_SpecialAirNCaptureWait_Turn(Fighter_GObj* gobj)
     if (((stick_x < 0.0f) && (fp->facing_dir == 1.0f)) ||
         ((stick_x > 0.0f) && (fp->facing_dir == -1.0f)))
     {
-        Fighter_ChangeMotionState(gobj, 0x17E, 0x92, 0.0f, 1.0f, 0.0f, NULL);
+        Fighter_ChangeMotionState(gobj, ftKb_MS_EatTurnAir, 0x92, 0.0f, 1.0f,
+                                  0.0f, NULL);
         ftKb_SpecialN_800F9070(gobj);
         ftAnim_8006EBA4(gobj);
         ftCommon_8007E2F4(fp, 0x1FF);
