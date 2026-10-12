@@ -1,6 +1,7 @@
 #include <Runtime/platform.h>
 
 #include <melee/ft/forward.h>
+#include <melee/ft/kinds/ftPopo/forward.h>
 
 #include "ftnana.h"
 #include <dolphin/mtx.h>
@@ -109,8 +110,8 @@ bool ftNn_Init_80123B10(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     switch (fp->motion_id) {
-    case 359:
-    case 360:
+    case ftPp_MS_SpecialS_0:
+    case ftPp_MS_SpecialS_1:
         return false;
     default:
         return true;
@@ -131,7 +132,8 @@ void ftNn_Init_80123B3C(Fighter_GObj* gobj)
     PAD_STACK(8);
     Fighter_ClearCmdVars(fp);
     ftNn_Init_80123B3C_inline(gobj);
-    Fighter_ChangeMotionState(gobj, 359, Ft_MF_None, 0.0f, 1.0f, 0.0f, NULL);
+    Fighter_ChangeMotionState(gobj, ftPp_MS_SpecialS_0, Ft_MF_None, 0.0f, 1.0f,
+                              0.0f, NULL);
     ftNn_Init_80123B3C_inline(gobj);
     ftAnim_8006EBA4(gobj);
     fp->x74_self_accel.y = 0.0f;
@@ -144,7 +146,8 @@ void ftNn_Init_80123BF0(Fighter_GObj* gobj)
     PAD_STACK(8);
     Fighter_ClearCmdVars(fp);
     ftNn_Init_80123B3C_inline(gobj);
-    Fighter_ChangeMotionState(gobj, 360, Ft_MF_None, 0.0f, 1.0f, 0.0f, NULL);
+    Fighter_ChangeMotionState(gobj, ftPp_MS_SpecialS_1, Ft_MF_None, 0.0f, 1.0f,
+                              0.0f, NULL);
     ftNn_Init_80123B3C_inline(gobj);
     ftAnim_8006EBA4(gobj);
     fp->x74_self_accel.y = 0.0f;
@@ -260,8 +263,8 @@ static inline void ftPp_SpecialS_0_Coll_inline3(Fighter_GObj* gobj)
         Fighter* fp2 = fp;
         ftCommon_8007D5D4(fp2);
     }
-    Fighter_ChangeMotionState(gobj, 360, 0x0C4C528A, fp->cur_anim_frame, 1.0f,
-                              0.0f, NULL);
+    Fighter_ChangeMotionState(gobj, ftPp_MS_SpecialS_1, ftPp_MF_SpecialS_Coll,
+                              fp->cur_anim_frame, 1.0f, 0.0f, NULL);
     ftNn_Init_80123B3C_inline(gobj);
 }
 
@@ -277,9 +280,9 @@ static inline void ftPp_SpecialS_0_Coll_inline4(Fighter_GObj* nana_gobj,
         nana_fp->cur_pos = popo_fp->cur_pos;
         ft_800849EC(popo_fp, nana_fp);
         if (nana_fp->ground_or_air != popo_fp->ground_or_air) {
-            Fighter_ChangeMotionState(nana_gobj, 360, 0x0C4C528A,
-                                      nana_fp->cur_anim_frame, 1.0f, 0.0f,
-                                      NULL);
+            Fighter_ChangeMotionState(
+                nana_gobj, ftPp_MS_SpecialS_1, ftPp_MF_SpecialS_Coll,
+                nana_fp->cur_anim_frame, 1.0f, 0.0f, NULL);
         }
         nana_fp->ground_or_air = popo_fp->ground_or_air;
     } else {
@@ -316,8 +319,8 @@ static inline void ftPp_SpecialS_1_Coll_inline3(Fighter_GObj* gobj)
         ftCommon_8007D7FC(fp2);
     }
     fp->self_vel.y = 0.0f;
-    Fighter_ChangeMotionState(gobj, 359, 0x0C4C528A, fp->cur_anim_frame, 1.0f,
-                              0.0f, NULL);
+    Fighter_ChangeMotionState(gobj, ftPp_MS_SpecialS_0, ftPp_MF_SpecialS_Coll,
+                              fp->cur_anim_frame, 1.0f, 0.0f, NULL);
     ftNn_Init_80123B3C_inline(gobj);
 }
 
@@ -333,9 +336,9 @@ static inline void ftPp_SpecialS_1_Coll_inline4(Fighter_GObj* nana_gobj,
         nana_fp->cur_pos = popo_fp->cur_pos;
         ft_800849EC(popo_fp, nana_fp);
         if (nana_fp->ground_or_air != popo_fp->ground_or_air) {
-            Fighter_ChangeMotionState(nana_gobj, 359, 0x0C4C528A,
-                                      nana_fp->cur_anim_frame, 1.0f, 0.0f,
-                                      NULL);
+            Fighter_ChangeMotionState(
+                nana_gobj, ftPp_MS_SpecialS_0, ftPp_MF_SpecialS_Coll,
+                nana_fp->cur_anim_frame, 1.0f, 0.0f, NULL);
         }
         nana_fp->ground_or_air = popo_fp->ground_or_air;
     } else {
