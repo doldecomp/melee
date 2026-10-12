@@ -32,7 +32,7 @@ void HSD_RenderInitAllocData(void)
 {
     HSD_ObjAllocInit(&render_alloc_data, 28, 4);
     HSD_ObjAllocInit(&tevreg_alloc_data, 20, 4);
-    HSD_ObjAllocInit(&chan_alloc_data, 48, 4);
+    HSD_ObjAllocInit(&chan_alloc_data, sizeof(HSD_Chan), 4);
 }
 
 HSD_ObjAllocData* HSD_RenderGetAllocData(void)
