@@ -91,7 +91,8 @@ static void ftZelda_SpecialLw_StartAction_Helper(HSD_GObj* gobj)
 /// 8013AEE0 - 8013AFA4 (196 bytes)
 void ftZd_SpecialLw_Enter(HSD_GObj* gobj)
 {
-    Fighter_ChangeMotionState(gobj, 355, Ft_MF_None, 0, 1, 0, NULL);
+    Fighter_ChangeMotionState(gobj, ftZd_MS_SpecialLw, Ft_MF_None, 0, 1, 0,
+                              NULL);
 
     ftAnim_8006EBA4(gobj);
 
@@ -102,7 +103,8 @@ void ftZd_SpecialLw_Enter(HSD_GObj* gobj)
 /// 8013AFA4 - 8013B068 (196 bytes)
 void ftZd_SpecialAirLw_Enter(HSD_GObj* gobj)
 {
-    Fighter_ChangeMotionState(gobj, 357, Ft_MF_None, 0, 1.0, 0, NULL);
+    Fighter_ChangeMotionState(gobj, ftZd_MS_SpecialAirLw, Ft_MF_None, 0, 1.0,
+                              0, NULL);
 
     ftAnim_8006EBA4(gobj);
 
@@ -183,7 +185,8 @@ void ftZd_SpecialLw_8013B1CC(HSD_GObj* gobj)
     Fighter* fp;
 
     fp = GET_FIGHTER(gobj);
-    ftCommon_GroundToAirStateChange(gobj, fp, 357, ftZd_MF_SpecialLw_Coll);
+    ftCommon_GroundToAirStateChange(gobj, fp, ftZd_MS_SpecialAirLw,
+                                    ftZd_MF_SpecialLw_Coll);
     fp->accessory4_cb = &ftZd_SpecialLw_8013ADB4;
 }
 
@@ -193,7 +196,8 @@ void ftZd_SpecialLw_8013B238(HSD_GObj* gobj)
     Fighter* fp;
 
     fp = GET_FIGHTER(gobj);
-    ftCommon_AirToGroundStateChange(gobj, fp, 355, ftZd_MF_SpecialLw_Coll);
+    ftCommon_AirToGroundStateChange(gobj, fp, ftZd_MS_SpecialLw,
+                                    ftZd_MF_SpecialLw_Coll);
     fp->accessory4_cb = &ftZd_SpecialLw_8013ADB4;
 }
 
@@ -265,7 +269,8 @@ void ftZd_SpecialLw_8013B400(HSD_GObj* gobj)
     Fighter* fp;
 
     fp = GET_FIGHTER(gobj);
-    ftCommon_GroundToAirStateChange(gobj, fp, 358, ftZd_MF_SpecialLw_Coll);
+    ftCommon_GroundToAirStateChange(gobj, fp, ftZd_MS_SpecialAirLw2,
+                                    ftZd_MF_SpecialLw_Coll);
     fp->accessory4_cb = &ftZd_SpecialLw_8013AE30;
 }
 
@@ -275,7 +280,8 @@ void ftZd_SpecialLw_8013B46C(HSD_GObj* gobj)
     Fighter* fp;
 
     fp = GET_FIGHTER(gobj);
-    ftCommon_AirToGroundStateChange(gobj, fp, 356, ftZd_MF_SpecialLw_Coll);
+    ftCommon_AirToGroundStateChange(gobj, fp, ftZd_MS_SpecialLw2,
+                                    ftZd_MF_SpecialLw_Coll);
     fp->accessory4_cb = &ftZd_SpecialLw_8013AE30;
 }
 
