@@ -82,7 +82,7 @@ void ftSs_SpecialLw_Enter(HSD_GObj* gobj)
     ftSs_DatAttrs* samus_attr = fp->dat_attrs;
 
     fp->gr_vel *= samus_attr->x6C;
-    if (fp->motion_id == 0x28) {
+    if (fp->motion_id == ftCo_MS_SquatWait) {
         Fighter_ChangeMotionState(gobj, ftSs_MS_SpecialLwBomb, Ft_MF_None,
                                   3.0f, 1.0f, 0.0f, NULL);
         ftSamus_SpecialLw_StartAction_inner(gobj);
