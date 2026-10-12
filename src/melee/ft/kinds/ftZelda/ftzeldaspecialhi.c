@@ -6,6 +6,7 @@
 
 #include <math.h>
 
+#include "forward.h"
 #include "types.h"
 #include <dolphin/mtx.h>
 #include <melee/ef/efsync.h>
@@ -99,7 +100,8 @@ void ftZd_SpecialHi_Enter(HSD_GObj* gobj)
     fp->self_vel.y = 0;
     fp->self_vel.x = 0;
 
-    Fighter_ChangeMotionState(gobj, 349, Ft_MF_None, 0, 1, 0, NULL);
+    Fighter_ChangeMotionState(gobj, ftZd_MS_SpecialHiStart_0, Ft_MF_None, 0, 1,
+                              0, NULL);
     ftAnim_8006EBA4(gobj);
 
     fp = getFighterPlus(gobj);
@@ -120,7 +122,8 @@ void ftZd_SpecialAirHi_Enter(HSD_GObj* gobj)
         fp->self_vel.x = fp->self_vel.x / attributes->x38;
         fp->self_vel.y = fp->self_vel.y / attributes->x3C;
 
-        Fighter_ChangeMotionState(gobj, 352, Ft_MF_None, 0, 1, 0, NULL);
+        Fighter_ChangeMotionState(gobj, ftZd_MS_SpecialAirHiStart_0,
+                                  Ft_MF_None, 0, 1, 0, NULL);
         ftAnim_8006EBA4(gobj);
     }
 
@@ -212,8 +215,9 @@ void ftZd_SpecialHi_80139B44(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     ftCommon_8007D60C(fp);
 
-    Fighter_ChangeMotionState(gobj, 352, transition_flags1, fp->cur_anim_frame,
-                              1, 0, NULL);
+    Fighter_ChangeMotionState(gobj, ftZd_MS_SpecialAirHiStart_0,
+                              transition_flags1, fp->cur_anim_frame, 1, 0,
+                              NULL);
 
     fp->accessory4_cb = &ftZd_SpecialHi_801396AC;
 }
@@ -221,7 +225,8 @@ void ftZd_SpecialHi_80139B44(HSD_GObj* gobj)
 void ftZd_SpecialHi_80139BB0(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    ftCommon_AirToGroundStateChange(gobj, fp, 349, transition_flags1);
+    ftCommon_AirToGroundStateChange(gobj, fp, ftZd_MS_SpecialHiStart_0,
+                                    transition_flags1);
 
     fp->accessory4_cb = &ftZd_SpecialHi_801396AC;
 }
@@ -338,8 +343,9 @@ void ftZd_SpecialHi_80139F6C(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     ftCommon_8007D60C(fp);
 
-    Fighter_ChangeMotionState(gobj, 353, transition_flags1, fp->cur_anim_frame,
-                              0, 0, NULL);
+    Fighter_ChangeMotionState(gobj, ftZd_MS_SpecialAirHiStart_1,
+                              transition_flags1, fp->cur_anim_frame, 0, 0,
+                              NULL);
 
     fp->x2223_b4 = true;
     fp->invisible = true;
@@ -350,8 +356,9 @@ void ftZd_SpecialHi_80139FE8(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     ftCommon_8007D7FC(fp);
 
-    Fighter_ChangeMotionState(gobj, 350, transition_flags1, fp->cur_anim_frame,
-                              0, 0, NULL);
+    Fighter_ChangeMotionState(gobj, ftZd_MS_SpecialHiStart_1,
+                              transition_flags1, fp->cur_anim_frame, 0, 0,
+                              NULL);
 
     fp->invisible = true;
 }
@@ -428,8 +435,8 @@ void ftZd_SpecialHi_8013A058(HSD_GObj* gobj)
                           cosf(temp_f5);
                 fp->gr_vel = fp->facing_dir * temp_f6;
 
-                Fighter_ChangeMotionState(gobj, 350, Ft_MF_None, 35.0, 1.0, 0,
-                                          NULL);
+                Fighter_ChangeMotionState(gobj, ftZd_MS_SpecialHiStart_1,
+                                          Ft_MF_None, 35.0, 1.0, 0, NULL);
                 ftAnim_8006EBA4(gobj);
                 ftAnim_SetAnimRate(gobj, 0);
 
@@ -521,7 +528,8 @@ void ftZd_SpecialHi_8013A244(HSD_GObj* gobj)
     fp->self_vel.y =
         ((attributes->x54 * var_f31) + attributes->x58) * sinf(var_f30);
 
-    Fighter_ChangeMotionState(gobj, 353, Ft_MF_None, 35.0, 1.0, 0, NULL);
+    Fighter_ChangeMotionState(gobj, ftZd_MS_SpecialAirHiStart_1, Ft_MF_None,
+                              35.0, 1.0, 0, NULL);
     ftAnim_8006EBA4(gobj);
     ftAnim_SetAnimRate(gobj, 0);
 
@@ -616,8 +624,8 @@ void ftZd_SpecialHi_8013A648(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftCommon_8007D60C(fp);
-    Fighter_ChangeMotionState(gobj, 354, transition_flags0, fp->cur_anim_frame,
-                              1, 0, NULL);
+    Fighter_ChangeMotionState(gobj, ftZd_MS_SpecialAirHi, transition_flags0,
+                              fp->cur_anim_frame, 1, 0, NULL);
 }
 
 void ftZd_SpecialHi_8013A6A8(HSD_GObj* gobj)
@@ -625,7 +633,8 @@ void ftZd_SpecialHi_8013A6A8(HSD_GObj* gobj)
     Fighter* fp0 = GET_FIGHTER(gobj);
     ftZelda_DatAttrs* attributes = fp0->dat_attrs;
 
-    Fighter_ChangeMotionState(gobj, 351, Ft_MF_None, 0, 1, 0, NULL);
+    Fighter_ChangeMotionState(gobj, ftZd_MS_SpecialHi, Ft_MF_None, 0, 1, 0,
+                              NULL);
     ftAnim_8006EBA4(gobj);
 
     {
@@ -648,7 +657,8 @@ void ftZd_SpecialHi_8013A764(HSD_GObj* gobj)
     Fighter* fp0 = GET_FIGHTER(gobj);
     ftZelda_DatAttrs* sa = fp0->dat_attrs;
 
-    Fighter_ChangeMotionState(gobj, 354, Ft_MF_None, 0, 1, 0, NULL);
+    Fighter_ChangeMotionState(gobj, ftZd_MS_SpecialAirHi, Ft_MF_None, 0, 1, 0,
+                              NULL);
     ftAnim_8006EBA4(gobj);
 
     {
