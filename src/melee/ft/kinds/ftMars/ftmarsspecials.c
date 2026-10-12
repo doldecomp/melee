@@ -4,6 +4,7 @@
 
 #include <melee/ft/forward.h>
 
+#include "forward.h"
 #include "types.h"
 #include <dolphin/mtx.h>
 #include <melee/ft/fighter.h>
@@ -35,9 +36,9 @@ void ftMs_SpecialS_Enter(HSD_GObj* gobj)
         {
             enum_t msid;
             if (fp->ground_or_air == GA_Ground) {
-                msid = 349;
+                msid = ftMs_MS_SpecialS1;
             } else {
-                msid = 358;
+                msid = ftMs_MS_SpecialAirS1;
             }
 
             Fighter_ChangeMotionState(gobj, msid, Ft_MF_None, 0, 1, 0, 0);
@@ -69,9 +70,9 @@ void ftMs_SpecialAirS_Enter(HSD_GObj* gobj)
         {
             enum_t msid;
             if (fp1->ground_or_air == GA_Ground) {
-                msid = 349;
+                msid = ftMs_MS_SpecialS1;
             } else {
-                msid = 358;
+                msid = ftMs_MS_SpecialAirS1;
             }
 
             Fighter_ChangeMotionState(gobj, msid, Ft_MF_None, 0, 1, 0, 0);
@@ -157,7 +158,8 @@ void ftMs_SpecialS_801376E8(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
 
     // Air_StoreBool_LoseGroundJump_NoECBfor10Frames
-    ftCommon_GroundToAirStateChange(gobj, fp, 358, transition_flags);
+    ftCommon_GroundToAirStateChange(gobj, fp, ftMs_MS_SpecialAirS1,
+                                    transition_flags);
 }
 
 void ftMs_SpecialS_80137748(HSD_GObj* gobj)
@@ -166,7 +168,8 @@ void ftMs_SpecialS_80137748(HSD_GObj* gobj)
     fp->u.ms.x222C = 0;
 
     // Air_SetAsGrounded2
-    ftCommon_AirToGroundStateChange(gobj, fp, 349, transition_flags);
+    ftCommon_AirToGroundStateChange(gobj, fp, ftMs_MS_SpecialS1,
+                                    transition_flags);
 }
 
 void ftMs_SpecialS2_Anim(HSD_GObj* gobj)
@@ -243,11 +246,11 @@ void ftMs_SpecialS_80137940(HSD_GObj* gobj)
     ftCommon_8007D5D4(fp);
 
     switch (fp->motion_id) {
-    case 350:
-        msid = 359;
+    case ftMs_MS_SpecialS2Hi:
+        msid = ftMs_MS_SpecialAirS2Hi;
         break;
-    case 351:
-        msid = 360;
+    case ftMs_MS_SpecialS2Lw:
+        msid = ftMs_MS_SpecialAirS2Lw;
         break;
     }
 
@@ -264,11 +267,11 @@ void ftMs_SpecialS_801379D0(HSD_GObj* gobj)
     ftCommon_8007D7FC(fp);
 
     switch (fp->motion_id) {
-    case 359:
-        msid = 350;
+    case ftMs_MS_SpecialAirS2Hi:
+        msid = ftMs_MS_SpecialS2Hi;
         break;
-    case 360:
-        msid = 351;
+    case ftMs_MS_SpecialAirS2Lw:
+        msid = ftMs_MS_SpecialS2Lw;
         break;
     }
 
@@ -293,15 +296,15 @@ void ftMs_SpecialS_80137A9C(HSD_GObj* gobj)
 
     if (fp->input.lstick[0].y > p_ftCommonData->x21C) {
         if (fp->ground_or_air == GA_Ground) {
-            msid = 350;
+            msid = ftMs_MS_SpecialS2Hi;
         } else {
-            msid = 359;
+            msid = ftMs_MS_SpecialAirS2Hi;
         }
     } else {
         if (fp->ground_or_air == GA_Ground) {
-            msid = 351;
+            msid = ftMs_MS_SpecialS2Lw;
         } else {
-            msid = 360;
+            msid = ftMs_MS_SpecialAirS2Lw;
         }
     }
     Fighter_ChangeMotionState(gobj, msid, Ft_MF_SkipAttackCount, 0, 1, 0, 0);
@@ -382,14 +385,14 @@ void ftMs_SpecialS_80137CBC(HSD_GObj* gobj)
     // Air_StoreBool_LoseGroundJump_NoECBfor10Frames
     ftCommon_8007D5D4(fp);
     switch (fp->motion_id) {
-    case 352:
-        msid = 361;
+    case ftMs_MS_SpecialS3Hi:
+        msid = ftMs_MS_SpecialAirS3Hi;
         break;
-    case 354:
-        msid = 363;
+    case ftMs_MS_SpecialS3Lw:
+        msid = ftMs_MS_SpecialAirS3Lw;
         break;
-    case 353:
-        msid = 362;
+    case ftMs_MS_SpecialS3S:
+        msid = ftMs_MS_SpecialAirS3S;
         break;
     }
 
@@ -407,14 +410,14 @@ void ftMs_SpecialS_80137D60(HSD_GObj* gobj)
     ftCommon_8007D7FC(fp);
 
     switch (fp->motion_id) {
-    case 361:
-        msid = 352;
+    case ftMs_MS_SpecialAirS3Hi:
+        msid = ftMs_MS_SpecialS3Hi;
         break;
-    case 363:
-        msid = 354;
+    case ftMs_MS_SpecialAirS3Lw:
+        msid = ftMs_MS_SpecialS3Lw;
         break;
-    case 362:
-        msid = 353;
+    case ftMs_MS_SpecialAirS3S:
+        msid = ftMs_MS_SpecialS3S;
         break;
     }
 
@@ -433,22 +436,22 @@ void ftMs_SpecialS_80137E0C(HSD_GObj* gobj)
 
     if (fp->input.lstick[0].y > p_ftCommonData->x21C) {
         if (fp->ground_or_air == GA_Ground) {
-            msid = 352;
+            msid = ftMs_MS_SpecialS3Hi;
         } else {
-            msid = 361;
+            msid = ftMs_MS_SpecialAirS3Hi;
         }
     } else {
         if (fp->input.lstick[0].y < -p_ftCommonData->x21C) {
             if (fp->ground_or_air == GA_Ground) {
-                msid = 354;
+                msid = ftMs_MS_SpecialS3Lw;
             } else {
-                msid = 363;
+                msid = ftMs_MS_SpecialAirS3Lw;
             }
         } else {
             if (fp->ground_or_air == GA_Ground) {
-                msid = 353;
+                msid = ftMs_MS_SpecialS3S;
             } else {
-                msid = 362;
+                msid = ftMs_MS_SpecialAirS3S;
             }
         }
     }
@@ -516,14 +519,14 @@ void ftMs_SpecialS_80137FF8(HSD_GObj* gobj)
     ftCommon_8007D5D4(fp);
 
     switch (fp->motion_id) {
-    case 355:
-        msid = 364;
+    case ftMs_MS_SpecialS4Hi:
+        msid = ftMs_MS_SpecialAirS4Hi;
         break;
-    case 357:
-        msid = 366;
+    case ftMs_MS_SpecialS4Lw:
+        msid = ftMs_MS_SpecialAirS4Lw;
         break;
-    case 356:
-        msid = 365;
+    case ftMs_MS_SpecialS4S:
+        msid = ftMs_MS_SpecialAirS4S;
         break;
     }
 
@@ -542,14 +545,14 @@ void ftMs_SpecialS_8013809C(HSD_GObj* gobj)
     ftCommon_8007D7FC(fp);
 
     switch (fp->motion_id) {
-    case 364:
-        msid = 355;
+    case ftMs_MS_SpecialAirS4Hi:
+        msid = ftMs_MS_SpecialS4Hi;
         break;
-    case 366:
-        msid = 357;
+    case ftMs_MS_SpecialAirS4Lw:
+        msid = ftMs_MS_SpecialS4Lw;
         break;
-    case 365:
-        msid = 356;
+    case ftMs_MS_SpecialAirS4S:
+        msid = ftMs_MS_SpecialS4S;
         break;
     }
 
@@ -568,22 +571,22 @@ void ftMs_SpecialS_80138148(HSD_GObj* gobj)
 
     if (fp->input.lstick[0].y > p_ftCommonData->x21C) {
         if (fp->ground_or_air == GA_Ground) {
-            msid = 355;
+            msid = ftMs_MS_SpecialS4Hi;
         } else {
-            msid = 364;
+            msid = ftMs_MS_SpecialAirS4Hi;
         }
     } else {
         if (fp->input.lstick[0].y < -p_ftCommonData->x21C) {
             if (fp->ground_or_air == GA_Ground) {
-                msid = 357;
+                msid = ftMs_MS_SpecialS4Lw;
             } else {
-                msid = 366;
+                msid = ftMs_MS_SpecialAirS4Lw;
             }
         } else {
             if (fp->ground_or_air == GA_Ground) {
-                msid = 356;
+                msid = ftMs_MS_SpecialS4S;
             } else {
-                msid = 365;
+                msid = ftMs_MS_SpecialAirS4S;
             }
         }
     }
