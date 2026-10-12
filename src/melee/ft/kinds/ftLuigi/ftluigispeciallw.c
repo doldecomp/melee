@@ -163,8 +163,9 @@ static inline void ftLuigi_SpecialLw_GroundToAir(HSD_GObj* gobj)
     ftLuigiAttributes* luigiAttrs = getFtSpecialAttrs(fp);
     fp->cmd_vars[2] = 0;
     ftCommon_8007D5D4(fp);
-    Fighter_ChangeMotionState(gobj, 0x166, 0x0C4C508A, fp->cur_anim_frame,
-                              1.0f, 0.0f, NULL);
+    Fighter_ChangeMotionState(gobj, ftLg_MS_SpecialAirLw,
+                              FTLUIGI_SPECIALLW_FLAG, fp->cur_anim_frame, 1.0f,
+                              0.0f, NULL);
     ftCommon_ClampFallSpeed(fp, luigiAttrs->x90_LUIGI_CYCLONE_TAP_GRAVITY);
     ftCommon_ClampSelfVelX(fp, luigiAttrs->x78_LUIGI_CYCLONE_MOMENTUM_X_AIR);
     Fighter_SetEffectHitlagCallbacks(fp);
