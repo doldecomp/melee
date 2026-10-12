@@ -938,7 +938,8 @@ void ftCo_800939B4(Fighter_GObj* gobj)
 void ftCo_80093A50(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    Fighter_ChangeMotionState(gobj, 182, Ft_MF_SkipAnim, 0, 1, 0, NULL);
+    Fighter_ChangeMotionState(gobj, ftCo_MS_GuardReflect, Ft_MF_SkipAnim, 0, 1,
+                              0, NULL);
     ftAnim_8006EBA4(gobj);
     fp->active_timer.trigger = 0xFE;
     fp->x221C_b3 = true;
