@@ -40,6 +40,9 @@ pub struct Entry {
     pub address: u32,
     /// `type:T`, like `DAT_TYPE(T)`: the type a root no loader types is.
     pub ty: Option<String>,
+    /// Byte span to the next named location or the end of the archive data.
+    /// Metadata only; counts still determine how the root is walked.
+    pub size: Option<u32>,
     /// How many of the root's type there are, whether its loader or `type:`
     /// gives it: `count:N`, like `DAT_COUNT(N)`, or `extent`, like
     /// `DAT_EXTENT`, for as many as fit before the next symbol or pointer
@@ -48,7 +51,7 @@ pub struct Entry {
     /// `script:S`, like `DAT_SCRIPT(S)`: the root is a command script, its
     /// commands from opcode 10 as long as the table or expression `S` says.
     pub script: Option<String>,
-    /// Attributes other than `type` and `count`, kept verbatim and in order.
+    /// Unrecognized attributes, kept verbatim and in order.
     pub other: Vec<String>,
 }
 
@@ -148,13 +151,24 @@ impl FromStr for Entry {
         if types.count() > 1 {
             bail!("more than one `type`");
         }
+        if entry
+            .attrs
+            .iter()
+            .filter(|a| matches!(a, Attr::Size(_)))
+            .count()
+            > 1
+        {
+            bail!("more than one `size`");
+        }
         let mut ty = None;
+        let mut size = None;
         let mut count = None;
         let mut script = None;
         let mut other = Vec::new();
         for attr in entry.attrs {
             match attr {
                 Attr::Type(spec) => ty = Some(spec),
+                Attr::Size(bytes) => size = Some(bytes),
                 Attr::Count(n) => count = Some(n),
                 Attr::Script(table) => script = Some(table.to_owned()),
                 Attr::Other(attr) => other.push(attr.to_owned()),
@@ -180,6 +194,7 @@ impl FromStr for Entry {
             archive: entry.archive.to_owned(),
             address: entry.address,
             ty,
+            size,
             count,
             script,
             other,
@@ -208,6 +223,7 @@ struct RawEntry<'i> {
 
 enum Attr<'i> {
     Type(String),
+    Size(u32),
     Count(Count),
     Script(&'i str),
     Other(&'i str),
@@ -246,6 +262,8 @@ fn dat<'i>(input: &mut &'i str) -> ModalResult<&'i str> {
 fn attr<'i>(input: &mut &'i str) -> ModalResult<Attr<'i>> {
     alt((
         preceded("type:", cut_err(type_name)).map(Attr::Type),
+        preceded("size:", cut_err(integer.try_map(u32::try_from)))
+            .map(Attr::Size),
         preceded("count:", cut_err(integer))
             .map(|n| Attr::Count(Count::Exactly(n))),
         preceded("terminated:", cut_err(integer))
@@ -289,6 +307,7 @@ impl fmt::Display for Entry {
             .ty
             .iter()
             .map(|ty| format!("type:{ty}"))
+            .chain(self.size.map(|size| format!("size:{size:#X}")))
             .chain(self.count.map(|count| match count {
                 Count::One => "count:1".to_owned(),
                 Count::Exactly(n) => format!("count:{n}"),
@@ -311,7 +330,7 @@ mod tests {
     use crate::hsd::{ArchiveHeader, NamedSymbol, archive_name};
 
     const TEXT: &str = "\
-ftDataMars = PlMs.dat:0x10; // type:ftData
+ftDataMars = PlMs.dat:0x10; // type:ftData size:0x8
 map_head = GrNLa.dat:0x20; // type:MapHead extent
 grGroundParam = GrNLa.dat:0x30; // type:grGroundParam count:2 data:4byte
 itemdata = GrI2.dat:0x0;
@@ -346,6 +365,8 @@ PlCo_unused_x10 = PlCo.dat:0x10; // type:CmdUnion script:ftAction_803C0870
         let file = SymbolFile::parse(TEXT).unwrap();
         assert_eq!(file.to_string(), TEXT);
         let entries: Vec<_> = file.entries().collect();
+        assert_eq!(entries[0].size, Some(8));
+        assert_eq!(entries[1].size, None);
         assert_eq!(entries[1].ty.as_deref(), Some("MapHead"));
         assert_eq!(entries[1].count, Some(Count::Unbounded));
         assert_eq!(entries[2].count, Some(Count::Exactly(2)));
@@ -427,6 +448,8 @@ PlCo_unused_x10 = PlCo.dat:0x10; // type:CmdUnion script:ftAction_803C0870
             "foo = PlCo.dat:0x100000000; // type:T",
             "foo = PlCo.dat:4294967296; // type:T",
             "foo = PlCo.dat:0x10; // type:A type:B",
+            "foo = PlCo.dat:0x10; // size:0x100000000",
+            "foo = PlCo.dat:0x10; // size:0x4 size:0x8",
             "foo = PlCo.dat:0x10; // type:A[x]",
             "foo = PlCo.dat:0x10;\nfoo = PlCo.dat:0x20;",
         ] {
@@ -438,6 +461,14 @@ PlCo_unused_x10 = PlCo.dat:0x10; // type:CmdUnion script:ftAction_803C0870
                 .unwrap()
                 .address,
             16
+        );
+        let zero = "foo = PlCo.dat:0x10; // size:0 count:0"
+            .parse::<Entry>()
+            .unwrap();
+        assert_eq!(zero.size, Some(0));
+        assert_eq!(
+            zero.to_string(),
+            "foo = PlCo.dat:0x10; // size:0x0 count:0"
         );
     }
 }

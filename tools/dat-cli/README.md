@@ -100,8 +100,8 @@ string literal or a global string.
 
 `config/GALE01/dat_symbols.txt` supplements loader-derived roots with
 explicit types, counts and aliases for unreferenced data. Every entry names
-its symbol, archive and numeric data offset. See [Symbol files](symbols.md)
-for the format and examples.
+its symbol, archive, numeric data offset and byte size. See
+[Symbol files](symbols.md) for the format and examples.
 
 When a loader names roots through a global table, `DAT_BIND` on its name
 field carries the table's context into each root's walk. For example, the
