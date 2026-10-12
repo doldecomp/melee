@@ -1,5 +1,44 @@
-use melee_dat::hsd::Archive;
-use std::path::PathBuf;
+use melee_dat::{
+    hsd::{Archive, archive_name},
+    symbols::SymbolFile,
+};
+use std::{
+    collections::{BTreeMap, BTreeSet},
+    ops::Bound,
+    path::PathBuf,
+};
+
+#[test]
+fn symbol_entries_sort_by_case_sensitive_filename_and_numeric_location() {
+    let repo = PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("../..");
+    let symbols = SymbolFile::parse(
+        &std::fs::read_to_string(repo.join("config/GALE01/dat_symbols.txt"))
+            .unwrap(),
+    )
+    .unwrap();
+    let entries: Vec<_> = symbols.entries().collect();
+    let location = |entry: &melee_dat::symbols::Entry| {
+        let (file, at) = entry.archive.rsplit_once('@').map_or(
+            (entry.archive.as_str(), 0),
+            |(file, at)| {
+                (
+                    file,
+                    u64::from_str_radix(at.strip_prefix("0x").unwrap(), 16)
+                        .unwrap(),
+                )
+            },
+        );
+        (file.to_owned(), at + 32 + u64::from(entry.address))
+    };
+    for pair in entries.windows(2) {
+        assert!(
+            location(pair[0]) <= location(pair[1]),
+            "{} precedes {}",
+            pair[0],
+            pair[1]
+        );
+    }
+}
 
 /// `MELEE_DAT_DIR`, or the project's extracted disc files. Read at run time
 /// so that a checkout without the disc still compiles.
@@ -45,4 +84,74 @@ fn size_matches_header() {
             bytes.len()
         );
     }
+}
+
+#[test]
+fn explicit_symbols_match_real_archive_locations() {
+    let paths = dat_paths();
+    if paths.is_empty() {
+        assert!(
+            std::env::var_os("MELEE_DAT_DIR").is_none(),
+            "no DAT files in MELEE_DAT_DIR"
+        );
+        eprintln!("skipping: no DAT files found");
+        return;
+    }
+    let repo = PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("../..");
+    let symbols = SymbolFile::parse(
+        &std::fs::read_to_string(repo.join("config/GALE01/dat_symbols.txt"))
+            .unwrap(),
+    )
+    .unwrap();
+    let mut entries = BTreeMap::<_, Vec<_>>::new();
+    for entry in symbols.entries() {
+        entries
+            .entry(entry.archive.as_str())
+            .or_default()
+            .push(entry);
+    }
+    let (mut publics, mut aliases) = (0, 0);
+    for path in paths {
+        let bytes = std::fs::read(&path).unwrap();
+        let file = path.file_name().unwrap().to_str().unwrap();
+        for (at, archive) in Archive::parse_packed(&bytes).unwrap() {
+            let name = archive_name(file, at);
+            let group = entries.remove(name.as_str()).unwrap_or_default();
+            let boundaries: BTreeSet<_> = archive
+                .publics
+                .iter()
+                .map(|p| p.offset)
+                .chain(group.iter().map(|e| e.address))
+                .chain([archive.header.data_size])
+                .collect();
+            for entry in group {
+                let end = boundaries
+                    .range((Bound::Excluded(entry.address), Bound::Unbounded))
+                    .next()
+                    .copied()
+                    .unwrap_or(archive.header.data_size);
+                assert_eq!(entry.size, Some(end - entry.address), "{entry}");
+                if let Some((_, public)) = archive
+                    .named_publics()
+                    .find(|(name, _)| *name == entry.name.as_bytes())
+                {
+                    assert_eq!(entry.address, public.offset, "{entry}");
+                    publics += 1;
+                } else {
+                    assert!(entry.ty.is_some(), "alias needs a type: {entry}");
+                    assert!(
+                        entry.address < archive.header.data_size,
+                        "{entry}"
+                    );
+                    aliases += 1;
+                }
+            }
+        }
+    }
+    assert!(
+        entries.is_empty(),
+        "entries reference absent archives: {:?}",
+        entries.keys()
+    );
+    eprintln!("checked {publics} public entries and {aliases} aliases");
 }
