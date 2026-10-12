@@ -193,7 +193,7 @@ void fn_8012E44C(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    ftCommon_AirToGroundStateChange(gobj, fp, 0x16C, motion_flags);
+    ftCommon_AirToGroundStateChange(gobj, fp, ftYs_MS_SpecialHi, motion_flags);
     setDamageCallbacks(gobj);
     setAccessory4Callback(gobj);
 }
