@@ -60,6 +60,14 @@ pub struct PackedCheck {
     pub unreferenced: usize,
 }
 
+/// The identity of an archive within a file, as used in DAT reports.
+pub fn archive_name(file: &str, at: usize) -> String {
+    match at {
+        0 => file.to_owned(),
+        _ => format!("{file}@{at:#X}"),
+    }
+}
+
 fn take_array<const N: usize>(input: &mut &[u8]) -> ModalResult<[u8; N]> {
     let slice: &[u8] = take(N).parse_next(input)?;
     slice.try_into().map_err(|_| {

@@ -42,7 +42,9 @@ bool ftNn_Init_801230D0(Fighter_GObj* nana_gobj)
     float z;
     if (popo_gobj != NULL) {
         Fighter* popo_fp = GET_FIGHTER(popo_gobj);
-        if (popo_fp->motion_id < 347 || popo_fp->motion_id > 352) {
+        if (popo_fp->motion_id < ftPp_MS_SpecialHiStart_0 ||
+            popo_fp->motion_id > ftPp_MS_SpecialAirHiStart_0)
+        {
             return false;
         }
         if (nana_fp->facing_dir != popo_fp->facing_dir) {
@@ -157,7 +159,8 @@ void ftPp_SpecialHi_3_Coll(Fighter_GObj* gobj)
 void ftNn_Init_801233F8(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    Fighter_ChangeMotionState(gobj, 0x169, Ft_MF_None, 0.0f, 1.0f, 0.0f, NULL);
+    Fighter_ChangeMotionState(gobj, ftPp_MS_SpecialHi_0, Ft_MF_None, 0.0f,
+                              1.0f, 0.0f, NULL);
     fp->accessory4_cb = fn_80123218;
 }
 
@@ -249,7 +252,8 @@ void ftNn_Init_80123720(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftCommon_8007D60C(fp);
-    Fighter_ChangeMotionState(gobj, 365, 0x0C4C508A, fp->cur_anim_frame, 1.0f,
+    Fighter_ChangeMotionState(gobj, ftPp_MS_SpecialHi_4,
+                              ftPp_MF_SpecialHi_Coll, fp->cur_anim_frame, 1.0f,
                               0.0f, NULL);
     fp->accessory4_cb = fn_80123218;
 }
@@ -257,7 +261,8 @@ void ftNn_Init_80123720(Fighter_GObj* gobj)
 void ftNn_Init_8012378C(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    ftCommon_AirToGroundStateChange(gobj, fp, 362, ftPp_MF_SpecialHi_Coll);
+    ftCommon_AirToGroundStateChange(gobj, fp, ftPp_MS_SpecialHi_1,
+                                    ftPp_MF_SpecialHi_Coll);
     fp->accessory4_cb = fn_80123218;
 }
 
@@ -276,7 +281,7 @@ void ftNn_Init_801237F8(Fighter_GObj* nana_gobj)
     nana_fp->self_vel.y = attrs->x13C * sinf(attrs->x140);
     nana_fp->cur_pos.x += 4.0f * nana_fp->facing_dir * nana_fp->x34_scale.y;
     nana_fp->cur_pos.y += 7.0f * nana_fp->x34_scale.y;
-    Fighter_ChangeMotionState(nana_gobj, 365, Ft_MF_None, 0.0f, 1.0f, 0.0f,
-                              NULL);
+    Fighter_ChangeMotionState(nana_gobj, ftPp_MS_SpecialHi_4, Ft_MF_None, 0.0f,
+                              1.0f, 0.0f, NULL);
     nana_fp->accessory4_cb = fn_80123218;
 }

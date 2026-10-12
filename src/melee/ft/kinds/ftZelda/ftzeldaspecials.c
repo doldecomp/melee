@@ -4,6 +4,7 @@
 
 #include <melee/ft/forward.h>
 
+#include "forward.h"
 #include "ftzelda.h"
 #include "types.h"
 #include <dolphin/mtx.h>
@@ -38,8 +39,8 @@ void ftZd_SpecialS_Enter(HSD_GObj* gobj)
 
     temp_f1 = 0;
     fp = GET_FIGHTER(gobj);
-    Fighter_ChangeMotionState(gobj, 343, Ft_MF_None, temp_f1, 1.0, temp_f1,
-                              NULL);
+    Fighter_ChangeMotionState(gobj, ftZd_MS_SpecialSStart, Ft_MF_None, temp_f1,
+                              1.0, temp_f1, NULL);
     Fighter_ClearCmdVars(fp);
     fighter2 = GET_FIGHTER(gobj);
     attributes = fighter2->dat_attrs;
@@ -65,8 +66,8 @@ void ftZd_SpecialAirS_Enter(HSD_GObj* gobj)
 
     temp_f1 = 0;
     fp = GET_FIGHTER(gobj);
-    Fighter_ChangeMotionState(gobj, 346, Ft_MF_None, temp_f1, 1.0, temp_f1,
-                              NULL);
+    Fighter_ChangeMotionState(gobj, ftZd_MS_SpecialAirSStart, Ft_MF_None,
+                              temp_f1, 1.0, temp_f1, NULL);
     Fighter_ClearCmdVars(fp);
     fp->self_vel.y = 0.0F;
     fighter2 = GET_FIGHTER(gobj);
@@ -117,8 +118,8 @@ void ftZd_SpecialSStart_Anim(HSD_GObj* gobj)
 
     if (!ftAnim_IsFramesRemaining(gobj)) {
         temp_f1 = 0;
-        Fighter_ChangeMotionState(gobj, 344, Ft_MF_None, temp_f1, 1.0, temp_f1,
-                                  NULL);
+        Fighter_ChangeMotionState(gobj, ftZd_MS_SpecialSLoop, Ft_MF_None,
+                                  temp_f1, 1.0, temp_f1, NULL);
         fp->x1968_jumpsUsed = fp->co_attrs.max_jumps;
     }
 }
@@ -170,8 +171,8 @@ void ftZd_SpecialSLoop_Anim(HSD_GObj* gobj)
     if (temp_r3_u32 == NULL) {
         if (fp->mv.zd.specials.x0 <= 0 && fp->mv.zd.specials.x4 <= 0) {
             temp_f1 = 0;
-            Fighter_ChangeMotionState(gobj, 345, Ft_MF_None, temp_f1, 1.0,
-                                      temp_f1, NULL);
+            Fighter_ChangeMotionState(gobj, ftZd_MS_SpecialSEnd, Ft_MF_None,
+                                      temp_f1, 1.0, temp_f1, NULL);
         }
     } else {
         temp_r3 = itZeldaDinFire_GetOwner(fp->u.zd.x222C);
@@ -243,8 +244,8 @@ void ftZd_SpecialAirSStart_Anim(HSD_GObj* gobj)
 
     if (!ftAnim_IsFramesRemaining(gobj)) {
         temp_f1 = 0;
-        Fighter_ChangeMotionState(gobj, 347, Ft_MF_None, temp_f1, 1.0, temp_f1,
-                                  NULL);
+        Fighter_ChangeMotionState(gobj, ftZd_MS_SpecialAirSLoop, Ft_MF_None,
+                                  temp_f1, 1.0, temp_f1, NULL);
         fp->x1968_jumpsUsed = fp->co_attrs.max_jumps;
     }
 }
@@ -294,8 +295,8 @@ void ftZd_SpecialAirSLoop_Anim(HSD_GObj* gobj)
     if (fp->u.zd.x222C == 0U) {
         if (fp->mv.zd.specials.x0 <= 0 && fp->mv.zd.specials.x4 <= 0) {
             temp_f1 = 0;
-            Fighter_ChangeMotionState(gobj, 348, Ft_MF_None, temp_f1, 1.0,
-                                      temp_f1, NULL);
+            Fighter_ChangeMotionState(gobj, ftZd_MS_SpecialAirSEnd, Ft_MF_None,
+                                      temp_f1, 1.0, temp_f1, NULL);
         }
     } else {
         temp_r3 = itZeldaDinFire_GetOwner(fp->u.zd.x222C);
@@ -359,8 +360,8 @@ void ftZd_SpecialSLoop_IASA(HSD_GObj* gobj)
 
     if ((var_r0 == 1) && !(fp->input.held_buttons[0] & 512)) {
         temp_f1 = 0;
-        Fighter_ChangeMotionState(gobj, 345, Ft_MF_None, temp_f1, 1.0, temp_f1,
-                                  NULL);
+        Fighter_ChangeMotionState(gobj, ftZd_MS_SpecialSEnd, Ft_MF_None,
+                                  temp_f1, 1.0, temp_f1, NULL);
     }
 }
 
@@ -387,8 +388,8 @@ void ftZd_SpecialAirSLoop_IASA(HSD_GObj* gobj)
 
     if (var_r0 == 1 && !(fp->input.held_buttons[0] & 512)) {
         temp_f1 = 0;
-        Fighter_ChangeMotionState(gobj, 348, Ft_MF_None, temp_f1, 1.0, temp_f1,
-                                  NULL);
+        Fighter_ChangeMotionState(gobj, ftZd_MS_SpecialAirSEnd, Ft_MF_None,
+                                  temp_f1, 1.0, temp_f1, NULL);
     }
 }
 
@@ -510,7 +511,7 @@ void ftZd_SpecialSStart_Coll(HSD_GObj* gobj)
 
     fp = GET_FIGHTER(gobj);
     if (ft_80082708(gobj) == 0) {
-        ftCommon_GroundToAirStateChange(gobj, fp, 346,
+        ftCommon_GroundToAirStateChange(gobj, fp, ftZd_MS_SpecialAirSStart,
                                         ftZd_MF_SpecialSStart_Coll);
     }
 }
@@ -522,7 +523,7 @@ void ftZd_SpecialSLoop_Coll(HSD_GObj* gobj)
 
     fp = GET_FIGHTER(gobj);
     if (ft_80082708(gobj) == 0) {
-        ftCommon_GroundToAirStateChange(gobj, fp, 347,
+        ftCommon_GroundToAirStateChange(gobj, fp, ftZd_MS_SpecialAirSLoop,
                                         ftCommon_GroundAirColl_MF);
     }
 }
@@ -534,7 +535,7 @@ void ftZd_SpecialSEnd_Coll(HSD_GObj* gobj)
 
     fp = GET_FIGHTER(gobj);
     if (ft_80082708(gobj) == 0) {
-        ftCommon_GroundToAirStateChange(gobj, fp, 348,
+        ftCommon_GroundToAirStateChange(gobj, fp, ftZd_MS_SpecialAirSEnd,
                                         ftCommon_GroundAirColl_MF);
     }
 }
@@ -546,7 +547,7 @@ void ftZd_SpecialAirSStart_Coll(HSD_GObj* gobj)
 
     fp = GET_FIGHTER(gobj);
     if (ft_80081D0C(gobj) != 0) {
-        ftCommon_AirToGroundStateChange(gobj, fp, 343,
+        ftCommon_AirToGroundStateChange(gobj, fp, ftZd_MS_SpecialSStart,
                                         ftZd_MF_SpecialSStart_Coll);
     }
 }
@@ -558,7 +559,7 @@ void ftZd_SpecialAirSLoop_Coll(HSD_GObj* gobj)
 
     fp = GET_FIGHTER(gobj);
     if (ft_80081D0C(gobj) != 0) {
-        ftCommon_AirToGroundStateChange(gobj, fp, 344,
+        ftCommon_AirToGroundStateChange(gobj, fp, ftZd_MS_SpecialSLoop,
                                         ftCommon_GroundAirColl_MF);
     }
 }
@@ -570,7 +571,7 @@ void ftZd_SpecialAirSEnd_Coll(HSD_GObj* gobj)
 
     fp = GET_FIGHTER(gobj);
     if (ft_80081D0C(gobj) != 0) {
-        ftCommon_AirToGroundStateChange(gobj, fp, 345,
+        ftCommon_AirToGroundStateChange(gobj, fp, ftZd_MS_SpecialSEnd,
                                         ftCommon_GroundAirColl_MF);
     }
 }

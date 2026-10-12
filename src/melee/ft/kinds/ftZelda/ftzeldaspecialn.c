@@ -65,8 +65,8 @@ void ftZd_SpecialN_Enter(HSD_GObj* gobj)
     temp_f1 = 0;
     fp = GET_FIGHTER(gobj);
 
-    Fighter_ChangeMotionState(gobj, 341, Ft_MF_None, temp_f1, 1.0, temp_f1,
-                              NULL);
+    Fighter_ChangeMotionState(gobj, ftZd_MS_SpecialN, Ft_MF_None, temp_f1, 1.0,
+                              temp_f1, NULL);
     ftAnim_8006EBA4(gobj);
     startActionHelper(gobj);
     fp->accessory4_cb = &ftZd_SpecialN_8013A830;
@@ -82,7 +82,8 @@ void ftZd_SpecialAirN_Enter(HSD_GObj* gobj)
     fp->self_vel.y = 0;
     fp->self_vel.x = fp->self_vel.x / sa->x8;
 
-    Fighter_ChangeMotionState(gobj, 342, Ft_MF_None, 0, 1.0, 0, NULL);
+    Fighter_ChangeMotionState(gobj, ftZd_MS_SpecialAirN, Ft_MF_None, 0, 1.0, 0,
+                              NULL);
     ftAnim_8006EBA4(gobj);
 
     startActionHelper(gobj);
@@ -204,7 +205,8 @@ void ftZd_SpecialN_8013AC88(HSD_GObj* gobj)
     u8 _[12];
 
     fp = GET_FIGHTER(gobj);
-    ftCommon_GroundToAirStateChange(gobj, fp, 342, ftZd_MF_SpecialN_Coll);
+    ftCommon_GroundToAirStateChange(gobj, fp, ftZd_MS_SpecialAirN,
+                                    ftZd_MF_SpecialN_Coll);
 
     fighter2 = GET_FIGHTER(gobj);
     attributes = fighter2->dat_attrs;
@@ -225,7 +227,8 @@ void ftZd_SpecialN_8013AD1C(HSD_GObj* gobj)
     u8 _[12];
 
     fp = GET_FIGHTER(gobj);
-    ftCommon_AirToGroundStateChange(gobj, fp, 341, ftZd_MF_SpecialN_Coll);
+    ftCommon_AirToGroundStateChange(gobj, fp, ftZd_MS_SpecialN,
+                                    ftZd_MF_SpecialN_Coll);
 
     fighter2 = GET_FIGHTER(gobj);
     attributes = fighter2->dat_attrs;

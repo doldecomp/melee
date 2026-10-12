@@ -4,6 +4,7 @@
 
 #include <melee/ft/forward.h>
 
+#include "forward.h"
 #include "types.h"
 #include <dolphin/mtx.h>
 #include <melee/ft/fighter.h>
@@ -26,7 +27,8 @@ void ftMs_SpecialHi_Enter(HSD_GObj* gobj)
     fp->cmd_vars[0] = 0;
     fp->x2210.throw_flags = 0;
     // MotionStateChange
-    Fighter_ChangeMotionState(gobj, 0x16F, Ft_MF_None, 0.0f, 1.0f, 0.0f, NULL);
+    Fighter_ChangeMotionState(gobj, ftMs_MS_SpecialHi, Ft_MF_None, 0.0f, 1.0f,
+                              0.0f, NULL);
     // MS_AnimationFrameUpdate&More
     ftAnim_8006EBA4(gobj);
 }
@@ -46,7 +48,8 @@ void ftMs_SpecialAirHi_Enter(HSD_GObj* gobj)
     fp->self_vel.y = 0.0f;
     fp->self_vel.x *= da->x3C;
     // MotionStateChange
-    Fighter_ChangeMotionState(gobj, 0x170, Ft_MF_None, 0.0f, 1.0f, 0.0f, NULL);
+    Fighter_ChangeMotionState(gobj, ftMs_MS_SpecialAirHi, Ft_MF_None, 0.0f,
+                              1.0f, 0.0f, NULL);
     // MS_AnimationFrameUpdate&More
     ftAnim_8006EBA4(gobj);
 }

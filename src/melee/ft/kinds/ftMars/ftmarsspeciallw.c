@@ -5,6 +5,7 @@
 #include <melee/ft/forward.h>
 #include <melee/lb/forward.h>
 
+#include "forward.h"
 #include "types.h"
 #include <dolphin/mtx.h>
 #include <melee/ef/efsync.h>
@@ -33,7 +34,8 @@ void ftMs_SpecialLw_Enter(HSD_GObj* gobj)
     Fighter* fp0 = GET_FIGHTER(gobj);
     fp0->self_vel.y = 0;
 
-    Fighter_ChangeMotionState(gobj, 369, Ft_MF_None, 0, 1, 0, NULL);
+    Fighter_ChangeMotionState(gobj, ftMs_MS_SpecialLw, Ft_MF_None, 0, 1, 0,
+                              NULL);
     ftAnim_8006EBA4(gobj);
 
     {
@@ -54,7 +56,8 @@ void ftMs_SpecialAirLw_Enter(HSD_GObj* gobj)
         fp->self_vel.y = 0;
     }
 
-    Fighter_ChangeMotionState(gobj, 371, Ft_MF_None, 0, 1, 0, NULL);
+    Fighter_ChangeMotionState(gobj, ftMs_MS_SpecialAirLw, Ft_MF_None, 0, 1, 0,
+                              NULL);
     ftAnim_8006EBA4(gobj);
 
     {
@@ -154,7 +157,8 @@ void ftMs_SpecialLw_80138D38(HSD_GObj* gobj)
 
     {
         Fighter* fp = gobj->user_data;
-        ftCommon_GroundToAirStateChange(gobj, fp, 371, ftMs_MF_SpecialLw_Coll);
+        ftCommon_GroundToAirStateChange(gobj, fp, ftMs_MS_SpecialAirLw,
+                                        ftMs_MF_SpecialLw_Coll);
     }
 
     {
@@ -175,7 +179,7 @@ void ftMs_SpecialLw_80138DD0(HSD_GObj* gobj)
 
     {
         Fighter* fp0 = gobj->user_data;
-        ftCommon_AirToGroundStateChange(gobj, fp0, 369,
+        ftCommon_AirToGroundStateChange(gobj, fp0, ftMs_MS_SpecialLw,
                                         ftMs_MF_SpecialLw_Coll);
     }
 
@@ -265,14 +269,16 @@ void ftMs_SpecialAirLwHit_Coll(HSD_GObj* gobj)
 void ftMs_SpecialLw_80139080(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
-    ftCommon_GroundToAirStateChange(gobj, fp, 372, ftMs_MF_SpecialLwHit_Coll);
+    ftCommon_GroundToAirStateChange(gobj, fp, ftMs_MS_SpecialAirLwHit,
+                                    ftMs_MF_SpecialLwHit_Coll);
 }
 
 /// 801390E0 00135CC0
 void ftMs_SpecialLw_801390E0(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
-    ftCommon_AirToGroundStateChange(gobj, fp, 370, ftMs_MF_SpecialLwHit_Coll);
+    ftCommon_AirToGroundStateChange(gobj, fp, ftMs_MS_SpecialLwHit,
+                                    ftMs_MF_SpecialLwHit_Coll);
 }
 
 static inline void ftMs_SpecialLw_80139140_inline(HSD_GObj* gobj)
@@ -331,9 +337,9 @@ void ftMs_SpecialLw_80139140(HSD_GObj* gobj)
             enum_t msid;
 
             if (fp->ground_or_air == GA_Ground) {
-                msid = 370;
+                msid = ftMs_MS_SpecialLwHit;
             } else {
-                msid = 372;
+                msid = ftMs_MS_SpecialAirLwHit;
             }
 
             Fighter_ChangeMotionState(gobj, msid, Ft_MF_None, 0, 1, 0, NULL);
