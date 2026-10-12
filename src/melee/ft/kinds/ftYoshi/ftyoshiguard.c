@@ -226,7 +226,8 @@ void ftYs_GuardHold_Coll(HSD_GObj* arg0)
 void ftYs_Shield_8012C49C(HSD_GObj* gobj)
 {
     PAD_STACK(8);
-    Fighter_ChangeMotionState(gobj, 343, Ft_MF_None, 0, 1.0F, 0, NULL);
+    Fighter_ChangeMotionState(gobj, ftYs_MS_GuardOff, Ft_MF_None, 0, 1.0F, 0,
+                              NULL);
     ftYs_Init_8012BE3C(gobj);
 }
 
@@ -264,7 +265,8 @@ void ftYs_Shield_8012C600(Fighter_GObj* gobj, bool arg1)
 
     Fighter* fp = GET_FIGHTER(gobj);
 
-    Fighter_ChangeMotionState(gobj, 0x158, 0U, 0.0F, 1.0F, 0.0F, NULL);
+    Fighter_ChangeMotionState(gobj, ftYs_MS_GuardDamage, 0U, 0.0F, 1.0F, 0.0F,
+                              NULL);
     fp->hitlag_cb = (void (*)(HSD_GObj*)) ftCo_80093240;
     fp->active_timer.lstick.x = 0xFE;
     fp->post_hitlag_cb = (void (*)(HSD_GObj*)) ftCo_800932DC;
