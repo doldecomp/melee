@@ -47,7 +47,7 @@
                                           u32 type, void* param, int arg5);
 ///* 1C7B24 */ static void grAnime_801C7B24(HSD_GObj* gobj, int arg1, u32 arg2,
 ///                                          f32 arg8);
-/* 1C82E8 */ static void fn_801C82E8(int arg0, int* arg1);
+/* 1C82E8 */ static void fn_801C82E8(HSD_AObj* arg0, void* arg1);
 /* 4D6958 */ static float grAnime_804D6958;
 /* 4D695C */ static float grAnime_804D695C;
 
@@ -504,40 +504,41 @@ void grAnime_801C6F50(HSD_AObj* aobj, void* obj, u32 flags, void* func,
                       u32 type, void* param)
 {
     switch (type) {
-    case 0:
+    case AOBJ_ARG_A:
         ((Event) func)();
         break;
-    case 1:
+    case AOBJ_ARG_AF:
         ((Callback1) func)(aobj, obj, flags, *(float*) param);
         break;
-    case 2:
+    case AOBJ_ARG_AV:
+        ((void (*)(HSD_AObj*, void*)) func)(aobj, *(void**) param);
+        break;
+    case AOBJ_ARG_AU:
         ((Callback2) func)(aobj, *(int*) param);
         break;
-    case 3:
-        ((Callback2) func)(aobj, *(int*) param);
-        break;
-    case 4:
+    case AOBJ_ARG_AO:
         ((Event) func)();
         break;
-    case 8:
+    case AOBJ_ARG_AOT:
         ((Event) func)();
         break;
-    case 5:
+    case AOBJ_ARG_AOF:
         ((Callback1) func)(aobj, obj, flags, *(float*) param);
         break;
-    case 6:
+    case AOBJ_ARG_AOV:
+        ((void (*)(HSD_AObj*, void*, void*)) func)(aobj, obj, *(void**) param);
+        break;
+    case AOBJ_ARG_AOU:
         ((Callback3) func)(aobj, obj, *(int*) param);
         break;
-    case 7:
-        ((Callback3) func)(aobj, obj, *(int*) param);
-        break;
-    case 9:
+    case AOBJ_ARG_AOTF:
         ((Callback1) func)(aobj, obj, flags, *(float*) param);
         break;
-    case 10:
-        ((Callback4) func)(aobj, obj, flags, *(int*) param);
+    case AOBJ_ARG_AOTV:
+        ((void (*)(HSD_AObj*, void*, u32, void*)) func)(aobj, obj, flags,
+                                                        *(void**) param);
         break;
-    case 11:
+    case AOBJ_ARG_AOTU:
         ((Callback4) func)(aobj, obj, flags, *(int*) param);
         break;
     }
@@ -1044,9 +1045,10 @@ void grAnime_801C8138(HSD_GObj* gobj, enum_t arg1, bool arg2)
     HSD_JObjAnimAll(jobj);
 }
 
-void fn_801C82E8(int arg0, int* arg1)
+void fn_801C82E8(HSD_AObj* arg0, void* arg1)
 {
-    *arg1 = arg0;
+    HSD_AObj* volatile* result = arg1;
+    *result = arg0;
     longjmp(grAnime_8049EE40, 1);
 }
 
@@ -1054,7 +1056,8 @@ HSD_AObj* grAnime_801C8318(HSD_GObj* gobj, int arg1, u32 arg2)
 {
     HSD_JObj* jobj;
     enum _HSD_TypeMask var_r30 = 0;
-    HSD_AObj* sp14 = NULL;
+    // Preserve the callback's result across longjmp.
+    HSD_AObj* volatile sp14 = NULL;
     jobj = Ground_801C3FA4(gobj, arg1);
     if (jobj == NULL) {
         return 0;
