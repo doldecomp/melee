@@ -16,7 +16,25 @@
 #include <dolphin/gx/GXStruct.h>
 #include <dolphin/mtx.h>
 #include <melee/lb/types.h>
+#include <sysdolphin/baselib/object.h>
 #include <sysdolphin/baselib/spline.h>
+
+/// Callback signatures selected by AObj_Arg_Type.
+union grAnimeCallback {
+    void* ptr;
+    void (*a)(HSD_AObj*);
+    void (*af)(HSD_AObj*, f32);
+    void (*av)(HSD_AObj*, void*);
+    void (*au)(HSD_AObj*, u32);
+    void (*ao)(HSD_AObj*, void*);
+    void (*aot)(HSD_AObj*, void*, HSD_Type);
+    void (*aof)(HSD_AObj*, void*, f32);
+    void (*aov)(HSD_AObj*, void*, void*);
+    void (*aou)(HSD_AObj*, void*, u32);
+    void (*aotf)(HSD_AObj*, void*, HSD_Type, f32);
+    void (*aotv)(HSD_AObj*, void*, HSD_Type, void*);
+    void (*aotu)(HSD_AObj*, void*, HSD_Type, u32);
+};
 
 typedef struct StageBlastZone {
     f32 left;   // 0x74
