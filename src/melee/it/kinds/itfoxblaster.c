@@ -180,8 +180,8 @@ void it_802ADF10(HSD_GObj* item_gobj)
             itFoxBlaster_SetShotAngle(item, &ft_hold_joint_pos,
                                       &it_hold_joint_pos);
             item->xDD4_itemVar.foxblaster.xDE4[0] =
-                (s32) efSync_Spawn(1166, item_gobj, &ft_hold_joint_pos,
-                                   &item->xDD4_itemVar.foxblaster.angle[0]);
+                efSync_Spawn(1166, item_gobj, &ft_hold_joint_pos,
+                             &item->xDD4_itemVar.foxblaster.angle[0]);
             break;
         case It_Kind_Kirby_FoxBlaster:
         case It_Kind_Kirby_FalcoBlaster:
@@ -193,8 +193,8 @@ void it_802ADF10(HSD_GObj* item_gobj)
             itFoxBlaster_SetShotAngle(item, &ft_hold_joint_pos,
                                       &it_hold_joint_pos);
             item->xDD4_itemVar.foxblaster.xDE4[0] =
-                (s32) efSync_Spawn(1196, item_gobj, &ft_hold_joint_pos,
-                                   &item->xDD4_itemVar.foxblaster.angle[0]);
+                efSync_Spawn(1196, item_gobj, &ft_hold_joint_pos,
+                             &item->xDD4_itemVar.foxblaster.angle[0]);
             break;
         default:
             break;
@@ -215,7 +215,7 @@ void it_802ADF10(HSD_GObj* item_gobj)
         }
 
         item = GET_ITEM(item_gobj);
-        item->xDD4_itemVar.foxblaster.xDE4[0] = 0;
+        item->xDD4_itemVar.foxblaster.xDE4[0] = NULL;
         item->xDD4_itemVar.foxblaster.xDFC[0] = 0;
         item->xDD4_itemVar.foxblaster.angle[0] =
             item->xDD4_itemVar.foxblaster.xE14[0].x =
@@ -434,7 +434,7 @@ static inline void itFoxBlaster_ClearShot(Item_GObj* item_gobj, int index)
 {
     Item* item = GET_ITEM(item_gobj);
 
-    item->xDD4_itemVar.foxblaster.xDE4[index] = 0;
+    item->xDD4_itemVar.foxblaster.xDE4[index] = NULL;
     item->xDD4_itemVar.foxblaster.xDFC[index] = 0;
     item->xDD4_itemVar.foxblaster.xE14[index].z = 0.0F;
     item->xDD4_itemVar.foxblaster.xE14[index].y = 0.0F;

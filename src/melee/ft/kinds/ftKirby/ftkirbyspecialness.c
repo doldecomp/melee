@@ -113,7 +113,8 @@ void ftKb_NsSpecialNStart_Anim(HSD_GObj* gobj)
     Vec3 flash_pos;
     PAD_STACK(20);
     if (!ftAnim_IsFramesRemaining(gobj)) {
-        Fighter_ChangeMotionState(gobj, 436, Ft_MF_None, 0, 1, 0, NULL);
+        Fighter_ChangeMotionState(gobj, ftKb_MS_NsSpecialNHold0, Ft_MF_None, 0,
+                                  1, 0, NULL);
         ftKb_NsSpecialNStart_Anim_inline(gobj, &flash_pos);
         fp->x1968_jumpsUsed = fp->co_attrs.max_jumps;
     }

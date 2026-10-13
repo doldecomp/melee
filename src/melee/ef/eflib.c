@@ -115,7 +115,7 @@ void efLib_Init(void)
 
     HSD_JObjSetSPtclCallback(efLib_Cb_SPtcl);
     HSD_JObjSetDPtclCallback(efLib_Cb_DPtcl);
-    psInitAppSRT(0, 0xA4);
+    psInitAppSRT(0, sizeof(HSD_psAppSRT));
     efAsync_QueueInit();
 
     for (i = 0; i < 8; i++) {

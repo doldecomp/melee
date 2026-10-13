@@ -5,6 +5,7 @@
 
 #include <Runtime/platform.h>
 
+#include <melee/ef/forward.h>
 #include <melee/it/forward.h>
 #include <melee/lb/forward.h>
 #include <sysdolphin/baselib/forward.h>
@@ -146,14 +147,12 @@ typedef struct {
                        // ____but not yet invisible)
                        // 0: when xDD8 <= 0 or xDD8 >= 5
                        // 1: when cmd_var3 = 1 (when gun shooting sfx starts)
-    /* xC */ bool xDE0;    // false when not shot yet; true after shot (in this
-                           // spawn instance of the blaster - not put away)
-    /* x10 */ s32 xDE4[6]; // group 1; gets set to 0 in func (it_802ADF10)
-                           // that sets item joint locations from
-                           // corresponding fighter joint locations
-    /* x28 */ s32 xDFC[6]; // group 2; gets set to 0 in func (it_802ADF10)
-                           // that sets item joint locations from
-                           // corresponding fighter joint locations
+    /* xC */ bool xDE0; // false when not shot yet; true after shot (in this
+                        // spawn instance of the blaster - not put away)
+    /* x10 */ EF_Effect* xDE4[6]; // group 1; shot effect history
+    /* x28 */ s32 xDFC[6];  // group 2; gets set to 0 in func (it_802ADF10)
+                            // that sets item joint locations from
+                            // corresponding fighter joint locations
     /* x40 */ Vec3 xE14[6]; // group 3; gets set as the vector from fighter's
                             // current position to the joint holding the
                             // blaster on the frame blaster its shot
