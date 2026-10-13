@@ -9,6 +9,7 @@
 #include "grmaterial.h"
 #include "ground.h"
 #include "inlines.h"
+#include "types.h"
 #include <melee/lb/lb_00B0.h>
 #include <melee/lb/lbarchive.h>
 #include <melee/lb/lbheap.h>
@@ -494,52 +495,49 @@ enum CALL_ON {
     CALL_ON_TOBJ = 1 << (ARG_TYPE_TOBJ - 1),
 };
 
-typedef void (*Callback1)(HSD_AObj* aobj, HSD_TObj* obj, u32 flags,
-                          float param);
-typedef void (*Callback2)(HSD_AObj* aobj, int param);
-typedef void (*Callback4)(HSD_AObj* aobj, HSD_TObj* obj, u32 flags, int param);
-typedef void (*Callback3)(HSD_AObj* aobj, HSD_TObj* obj, int param);
-
 void grAnime_801C6F50(HSD_AObj* aobj, void* obj, u32 flags, void* func,
                       u32 type, void* param)
 {
+    grAnimeCallback callback;
+    callbackArg* arg = param;
+
+    callback.ptr = func;
     switch (type) {
     case AOBJ_ARG_A:
-        ((Event) func)();
+        callback.a(aobj);
         break;
     case AOBJ_ARG_AF:
-        ((Callback1) func)(aobj, obj, flags, *(float*) param);
+        callback.af(aobj, arg->f);
         break;
     case AOBJ_ARG_AV:
-        ((void (*)(HSD_AObj*, void*)) func)(aobj, *(void**) param);
+        callback.av(aobj, arg->v);
         break;
     case AOBJ_ARG_AU:
-        ((Callback2) func)(aobj, *(int*) param);
+        callback.au(aobj, arg->d);
         break;
     case AOBJ_ARG_AO:
-        ((Event) func)();
+        callback.ao(aobj, obj);
         break;
     case AOBJ_ARG_AOT:
-        ((Event) func)();
+        callback.aot(aobj, obj, flags);
         break;
     case AOBJ_ARG_AOF:
-        ((Callback1) func)(aobj, obj, flags, *(float*) param);
+        callback.aof(aobj, obj, arg->f);
         break;
     case AOBJ_ARG_AOV:
-        ((void (*)(HSD_AObj*, void*, void*)) func)(aobj, obj, *(void**) param);
+        callback.aov(aobj, obj, arg->v);
         break;
     case AOBJ_ARG_AOU:
-        ((Callback3) func)(aobj, obj, *(int*) param);
+        callback.aou(aobj, obj, arg->d);
         break;
     case AOBJ_ARG_AOTF:
-        ((Callback1) func)(aobj, obj, flags, *(float*) param);
+        callback.aotf(aobj, obj, flags, arg->f);
         break;
     case AOBJ_ARG_AOTV:
-        ((void (*)(HSD_AObj*, void*, u32, void*)) func)(aobj, obj, flags,
-                                                        *(void**) param);
+        callback.aotv(aobj, obj, flags, arg->v);
         break;
     case AOBJ_ARG_AOTU:
-        ((Callback4) func)(aobj, obj, flags, *(int*) param);
+        callback.aotu(aobj, obj, flags, arg->d);
         break;
     }
 }
