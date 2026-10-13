@@ -290,14 +290,12 @@ void ftAction_8007121C(Fighter_GObj* gobj, CommandInfo* cmd)
     HitCapsule* hitbox;
     u32 hit_group;
     u32 idx;
-    struct spawn_hitbox_skip* skip;
     PAD_STACK(8);
 
     fp = GET_FIGHTER(gobj);
-    /// @todo this matches but isnt pretty. maybe an inline/macro as
-    // we dont have enough stack in general?
-    skip = (struct spawn_hitbox_skip*) cmd->x8.u;
-    if ((skip->xF_b4) && (fp->x1064_thrownHitbox.x134.owner == NULL)) {
+    if (cmd->x8.u[3].create_hitbox_3.ignore_thrown_fighters &&
+        fp->x1064_thrownHitbox.x134.owner == NULL)
+    {
         ftAction_800715EC(gobj, cmd);
     } else {
         hit_group = cmd->x8.u->create_hitbox_0.hit_group;
@@ -1145,7 +1143,7 @@ void ftAction_80072CD8(Fighter_GObj* gobj, CommandInfo* cmd)
     int sp60;
     int gfx_id;
     CommandInfo _cmd;
-    u32 cmd_words[3];
+    union CmdUnion cmd_words[3];
     Vec3 offset;
     Vec3 range;
     u32 part;
@@ -1157,10 +1155,10 @@ void ftAction_80072CD8(Fighter_GObj* gobj, CommandInfo* cmd)
 
     if (ft_80084BFC(gobj, &sp64, &sp60, &gfx_id) != false) {
         if (sp64 != -1) {
-            _cmd.x8.u = (union CmdUnion*) cmd_words;
-            cmd_words[0] = *(u32*) cmd->x8.u;
-            cmd_words[1] = sp64;
-            cmd_words[2] = *(u32*) ((u8*) cmd->x8.u + 8);
+            _cmd.x8.u = cmd_words;
+            cmd_words[0] = cmd->x8.u[0];
+            cmd_words[1].sound_effect_1.sfx_id = sp64;
+            cmd_words[2] = cmd->x8.u[2];
             ftAction_80071B50(gobj, &_cmd);
         }
 
@@ -1202,7 +1200,7 @@ void ftAction_80072E4C(Fighter_GObj* gobj, CommandInfo* cmd)
     int sp60;
     int gfx_id;
     CommandInfo _cmd;
-    u32 cmd_words[3];
+    union CmdUnion cmd_words[3];
     Vec3 offset;
     Vec3 range;
     Fighter* fp;
@@ -1217,15 +1215,15 @@ void ftAction_80072E4C(Fighter_GObj* gobj, CommandInfo* cmd)
     if ((ft_80084C38(gobj, &sp64, &sp60, &gfx_id) != false) &&
         (cmd_flag == 0) && (sp64 != -1))
     {
-        _cmd.x8.u = (union CmdUnion*) cmd_words;
-        cmd_words[0] = *(u32*) cmd->x8.u;
-        cmd_words[1] = sp64;
-        cmd_words[2] = ((u32*) cmd->x8.u)[2];
+        _cmd.x8.u = cmd_words;
+        cmd_words[0] = cmd->x8.u[0];
+        cmd_words[1].sound_effect_1.sfx_id = sp64;
+        cmd_words[2] = cmd->x8.u[2];
         ftAction_80071B50(gobj, &_cmd);
     }
 
     if (gfx_id == -1) {
-        gfx_id = ((u16*) cmd->x8.u)[1];
+        gfx_id = cmd->x8.u->unk_fx_0.gfx_id;
     }
     offset.z = 0.0f;
     range.z = 0.0f;
