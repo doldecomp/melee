@@ -113,7 +113,8 @@ void ftKb_SpecialHi2_Anim(Fighter_GObj* gobj)
 
     if (!ftAnim_IsFramesRemaining(gobj)) {
         ftCommon_8007D5D4(fp);
-        Fighter_ChangeMotionState(gobj, 0x187, 0xA, 0.0f, 1.0f, 0.0f, NULL);
+        Fighter_ChangeMotionState(gobj, ftKb_MS_SpecialAirHi3, 0xA, 0.0f, 1.0f,
+                                  0.0f, NULL);
         Fighter_SetEffectHitlagCallbacks(fp);
     }
 }

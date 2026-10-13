@@ -848,14 +848,6 @@ struct it_create_hitbox_4 {
     u32 x40_b3 : 1;
     u32 x40_b2 : 1;
 };
-struct spawn_hitbox_skip {
-    u8 _0[0xF];
-    u32 xF_b0 : 1;
-    u32 xF_b1 : 1;
-    u32 xF_b2 : 1;
-    u32 xF_b3 : 1;
-    u32 xF_b4 : 1;
-};
 struct sound_effect_0 {
     u32 opcode : 6;
     u32 behavior : 8;
@@ -909,8 +901,7 @@ struct unk_fx_0 {
     u32 opcode : 6;
     u32 x0_b6_7 : 2;
     u32 x1_b0_7 : 8;
-    u32 x2_b0_7 : 8;
-    u32 x3_b0_7 : 8;
+    u32 gfx_id : 16;
 };
 struct smash_charge_0 {
     u32 opcode : 6;
