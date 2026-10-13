@@ -291,12 +291,12 @@ s32 ftSs_SpecialLw_80129158(HSD_GObj* gobj)
         Fighter* fp = GET_FIGHTER(gobj);
         s32 motion_state_index = fp->motion_id;
         switch (motion_state_index) {
-        case 0x157:
-        case 0x158:
-        case 0x159:
-        case 0x15A:
-        case 0x15B:
-        case 0x15C:
+        case ftSs_MS_SpecialNStart:
+        case ftSs_MS_SpecialNHold:
+        case ftSs_MS_SpecialNCancel:
+        case ftSs_MS_SpecialN:
+        case ftSs_MS_SpecialAirNStart:
+        case ftSs_MS_SpecialAirN:
             if (fp->x2070.x0.x2071_b6) {
                 return 1;
             }
@@ -315,11 +315,11 @@ s32 ftSs_SpecialN_801291A8(HSD_GObj* gobj)
         s32 motion_state_index = fp->motion_id;
 
         switch (motion_state_index) {
-        case 0x157:
-        case 0x158:
-        case 0x15A:
-        case 0x15B:
-        case 0x15C:
+        case ftSs_MS_SpecialNStart:
+        case ftSs_MS_SpecialNHold:
+        case ftSs_MS_SpecialN:
+        case ftSs_MS_SpecialAirNStart:
+        case ftSs_MS_SpecialAirN:
             return 0;
         }
 
