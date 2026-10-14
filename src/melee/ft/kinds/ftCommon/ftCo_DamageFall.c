@@ -101,8 +101,8 @@ void ftCo_80090780(HSD_GObj* gobj)
     if (ftGetParasolStatus(gobj) != -1) {
         ftCo_800CF4DC(gobj);
     } else {
-        Fighter_ChangeMotionState(gobj, 0x26, 0x18001U, 0.0f, 1.0f, 0.0f,
-                                  NULL);
+        Fighter_ChangeMotionState(gobj, ftCo_MS_DamageFall, 0x18001U, 0.0f,
+                                  1.0f, 0.0f, NULL);
         ftCommon_ClampAirDrift(fp);
         ftCommon_8007EBAC(fp, 8U, 0U);
     }

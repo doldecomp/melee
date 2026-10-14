@@ -164,7 +164,8 @@ void ftCo_LiftTurn_Anim(HSD_GObj* gobj)
     }
     if (fp->mv.co.lift.x4 <= 0) {
         Fighter* fp = gobj->user_data;
-        Fighter_ChangeMotionState(gobj, 174, Ft_MF_Unk24, 0, 1, 0, NULL);
+        Fighter_ChangeMotionState(gobj, ftCo_MS_LiftWait, Ft_MF_Unk24, 0, 1, 0,
+                                  NULL);
         fp->take_dmg_cb = ftCo_800974C4;
     }
 }
