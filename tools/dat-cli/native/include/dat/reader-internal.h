@@ -111,9 +111,9 @@ void* dat_reader_unrelocated_value(const DatArchive* a, uint32_t offset,
 void dat_reader_convert(DatArchive* a, uint32_t offset, int32_t type,
                         void* native);
 int dat_reader_field_value(const DatArchive* a, int32_t record, uint32_t base,
-                           int32_t name, uint64_t* out);
+                           int32_t name, DatValue* out);
 int dat_reader_resolve_name(const DatArchive* a, const DatContext* c,
-                            int32_t name, uint64_t* out);
+                            int32_t name, DatValue* out);
 int dat_reader_col_anim_command_length(uint64_t command, uint64_t* out);
 uint64_t dat_reader_cpu_command_length(uint64_t command);
 int dat_reader_it_command_length(uint64_t command, uint64_t* out);
@@ -121,7 +121,17 @@ int dat_reader_gx_get_tex_buffer_size(uint16_t width, uint16_t height,
                                       uint32_t format, uint8_t mipmap,
                                       uint8_t max_lod, uint64_t* out);
 int dat_reader_eval_at(const DatArchive* a, const DatContext* c,
-                       const DatExpr* e, unsigned depth, uint64_t* out);
+                       const DatExpr* e, unsigned depth, DatValue* out);
+int dat_reader_eval_value(const DatArchive* a, const DatContext* c,
+                          const DatExpr* e, DatValue* out);
+/// A byte view from a relocated field, bounded by a compiled element count.
+int dat_reader_pointed_bytes(const DatArchive* a, uint64_t at, uint32_t size,
+                             uint64_t count, DatValue* out);
+uint64_t dat_reader_terminated_count(const DatArchive* a, uint32_t offset,
+                                     int32_t type, uint64_t term);
+int dat_reader_gx_max_index(const uint8_t* dl, uint64_t dl_len,
+                            const uint8_t* descs, uint64_t descs_len,
+                            uint64_t attr, uint64_t* out);
 int dat_reader_eval(const DatArchive* a, const DatContext* c, const DatExpr* e,
                     uint64_t* out);
 void* dat_reader_native_of(const DatArchive* a, uint32_t offset, int32_t r);

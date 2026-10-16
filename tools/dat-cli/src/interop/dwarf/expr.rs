@@ -3,7 +3,9 @@
 //! Parsing produces an [`Expr`]; evaluating it resolves names through the
 //! caller, typically as fields of a record in the data and then as macros
 //! from the DWARF macro table. Calls are to the functions of the code that
-//! [`call`] ports, such as `GXGetTexBufferSize`.
+//! [`call`] ports, such as `GXGetTexBufferSize`. Values are integers, or
+//! the bytes a counted pointer field points to ([`Value`]), which only
+//! calls take.
 
 use std::collections::HashMap;
 use winnow::{
@@ -56,6 +58,23 @@ pub enum BinaryOp {
     Rem,
 }
 
+/// What an expression evaluates to.
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+pub enum Value<'d> {
+    Int(u64),
+    /// Bytes referenced by a pointer field with `DAT_COUNT` or `DAT_TERMINATED`.
+    Bytes(&'d [u8]),
+}
+
+impl Value<'_> {
+    pub fn int(self) -> Option<u64> {
+        match self {
+            Value::Int(value) => Some(value),
+            Value::Bytes(_) => None,
+        }
+    }
+}
+
 impl Expr {
     /// Parse a whole expression; `None` if any of it is not understood.
     pub fn parse(text: &str) -> Option<Self> {
@@ -69,37 +88,52 @@ impl Expr {
         &self,
         name: &mut dyn FnMut(&str) -> Option<u64>,
     ) -> Option<u64> {
-        Some(match self {
+        self.value(&mut |n| name(n).map(Value::Int))?.int()
+    }
+
+    /// Like [`Expr::eval`], with names that may resolve to bytes. Only
+    /// calls take bytes; operators fail on them.
+    pub fn value<'d>(
+        &self,
+        name: &mut dyn FnMut(&str) -> Option<Value<'d>>,
+    ) -> Option<Value<'d>> {
+        fn int<'d>(
+            e: &Expr,
+            name: &mut dyn FnMut(&str) -> Option<Value<'d>>,
+        ) -> Option<u64> {
+            e.value(name)?.int()
+        }
+        Some(Value::Int(match self {
             Expr::Int(value) => *value,
-            Expr::Name(ident) => name(ident)?,
+            Expr::Name(ident) => return name(ident),
             Expr::Call(function, args) => {
                 let args = args
                     .iter()
-                    .map(|a| a.eval(name))
+                    .map(|a| a.value(name))
                     .collect::<Option<Vec<_>>>()?;
-                call(function, &args)?
+                return call(function, &args);
             }
             Expr::Unary(op, a) => {
-                let a = a.eval(name)?;
+                let a = int(a, name)?;
                 match op {
                     UnaryOp::Not => u64::from(a == 0),
                     UnaryOp::BitNot => !a,
                     UnaryOp::Neg => a.wrapping_neg(),
                 }
             }
-            Expr::Cond(a, b, c) => match a.eval(name)? {
-                0 => c.eval(name)?,
-                _ => b.eval(name)?,
+            Expr::Cond(a, b, c) => match int(a, name)? {
+                0 => return c.value(name),
+                _ => return b.value(name),
             },
             Expr::Binary(op, a, b) => {
-                let a = a.eval(name)?;
+                let a = int(a, name)?;
                 // Short-circuit like C, so the other side may be unresolved
                 match (op, a != 0) {
-                    (BinaryOp::Or, true) => return Some(1),
-                    (BinaryOp::And, false) => return Some(0),
+                    (BinaryOp::Or, true) => return Some(Value::Int(1)),
+                    (BinaryOp::And, false) => return Some(Value::Int(0)),
                     _ => {}
                 }
-                let b = b.eval(name)?;
+                let b = int(b, name)?;
                 match op {
                     BinaryOp::Or | BinaryOp::And => u64::from(b != 0),
                     BinaryOp::BitOr => a | b,
@@ -120,7 +154,7 @@ impl Expr {
                     BinaryOp::Rem => a.checked_rem(b)?,
                 }
             }
-        })
+        }))
     }
 }
 
@@ -140,19 +174,28 @@ pub fn eval_expr(
     expr: &Expr,
     field: &dyn Fn(&str) -> Option<u64>,
 ) -> Option<u64> {
+    eval_value(macros, expr, &|name| field(name).map(Value::Int))?.int()
+}
+
+/// Like [`eval_expr`], with names that may resolve to bytes.
+pub fn eval_value<'d>(
+    macros: &HashMap<String, String>,
+    expr: &Expr,
+    field: &dyn Fn(&str) -> Option<Value<'d>>,
+) -> Option<Value<'d>> {
     eval_depth(macros, expr, field, 0)
 }
 
-fn eval_depth(
+fn eval_depth<'d>(
     macros: &HashMap<String, String>,
     expr: &Expr,
-    field: &dyn Fn(&str) -> Option<u64>,
+    field: &dyn Fn(&str) -> Option<Value<'d>>,
     depth: usize,
-) -> Option<u64> {
+) -> Option<Value<'d>> {
     if depth > 16 {
         return None;
     }
-    expr.eval(&mut |name| {
+    expr.value(&mut |name| {
         field(name).or_else(|| {
             let body = Expr::parse(macros.get(name)?)?;
             eval_depth(macros, &body, field, depth + 1)
@@ -356,28 +399,143 @@ fn arguments(input: &mut &str) -> ModalResult<Vec<Expr>> {
     .parse_next(input)
 }
 
-/// Call a function of the code, ported. Arguments are converted to the
-/// parameter types as C would; `None` for a function not ported, the wrong
-/// number of arguments, or an argument the function rejects.
-pub fn call(function: &str, args: &[u64]) -> Option<u64> {
-    match (function, args) {
-        ("itCommandLength", &[command]) => it_command_length(command),
-        ("colAnimCommandLength", &[command]) => {
-            col_anim_command_length(command)
+/// Call a function of the code, ported, or a tool-side helper. Arguments
+/// are converted to the parameter types as C would; `None` for a function
+/// not ported, the wrong number or kind of arguments, or an argument the
+/// function rejects.
+pub fn call<'d>(function: &str, args: &[Value<'d>]) -> Option<Value<'d>> {
+    use Value::{Bytes, Int};
+    Some(Int(match (function, args) {
+        ("itCommandLength", &[Int(command)]) => it_command_length(command)?,
+        ("colAnimCommandLength", &[Int(command)]) => {
+            col_anim_command_length(command)?
         }
-        ("cpuCommandLength", &[command]) => Some(cpu_command_length(command)),
-        ("GXGetTexBufferSize", &[width, height, format, mipmap, max_lod]) => {
-            gx_get_tex_buffer_size(
-                width as u16,
-                height as u16,
-                format as u32,
-                mipmap as u8,
-                max_lod as u8,
-            )
-            .map(u64::from)
+        ("cpuCommandLength", &[Int(command)]) => cpu_command_length(command),
+        (
+            "GXGetTexBufferSize",
+            &[
+                Int(width),
+                Int(height),
+                Int(format),
+                Int(mipmap),
+                Int(max_lod),
+            ],
+        ) => gx_get_tex_buffer_size(
+            width as u16,
+            height as u16,
+            format as u32,
+            mipmap as u8,
+            max_lod as u8,
+        )
+        .map(u64::from)?,
+        ("GXMaxIndex", &[Bytes(dl), Bytes(descs), Int(attr)]) => {
+            gx_max_index(dl, descs, attr)?
         }
-        _ => None,
+        _ => return None,
+    }))
+}
+
+/// Return the largest index used for `attr` in display list `dl`.
+/// `descs` is an `HSD_VtxDescList` list terminated by `GX_VA_NULL`.
+/// This tool helper sizes the indexed vertex arrays.
+///
+/// Each primitive has an opcode, a `u16` vertex count, and vertex attributes.
+/// Attributes follow `GXAttr` order; `GX_VA_NBT` takes the normal's place.
+/// A zero opcode (`GX_NOP` padding) or the end of `dl` ends the list.
+/// Return `None` for an unsupported command, truncated data, or an attribute
+/// with no indices.
+fn gx_max_index(dl: &[u8], descs: &[u8], attr: u64) -> Option<u64> {
+    const DESC_SIZE: usize = 0x18;
+    const GX_VA_NULL: u32 = 0xFF;
+    let word = |b: &[u8], at: usize| {
+        u32::from_be_bytes(b[at..at + 4].try_into().unwrap())
+    };
+    // Each attribute present: its place in a vertex, its bytes in a
+    // vertex, and its indices' width and number, if indexed
+    let mut attrs = Vec::new();
+    for desc in descs.chunks_exact(DESC_SIZE) {
+        let (a, ty, cnt, comp) =
+            (word(desc, 0), word(desc, 4), word(desc, 8), word(desc, 12));
+        if a == GX_VA_NULL {
+            break;
+        }
+        let order = if a == 25 { 10 } else { a };
+        let indices = match (a, cnt) {
+            // GX_NRM_NBT3: an index each for the normal, binormal and tangent
+            (10 | 25, 2) => 3,
+            _ => 1,
+        };
+        let (width, count) = match ty {
+            // GX_NONE
+            0 => continue,
+            // GX_DIRECT
+            1 => (gx_direct_size(a, cnt, comp)?, 0),
+            // GX_INDEX8, GX_INDEX16
+            2 => (1, indices),
+            3 => (2, indices),
+            _ => return None,
+        };
+        attrs.push((order, u64::from(a) == attr, width, count));
     }
+    attrs.sort_by_key(|&(order, ..)| order);
+    let mut max = None;
+    let mut at = 0;
+    while let Some(&opcode) = dl.get(at) {
+        // GX_NOP
+        if opcode == 0 {
+            break;
+        }
+        // GX_QUADS to GX_POINTS, with any vertex format
+        if !matches!(
+            opcode & 0xF8,
+            0x80 | 0x90 | 0x98 | 0xA0 | 0xA8 | 0xB0 | 0xB8
+        ) {
+            return None;
+        }
+        let vertices =
+            u16::from_be_bytes(dl.get(at + 1..at + 3)?.try_into().ok()?);
+        at += 3;
+        for _ in 0..vertices {
+            for &(_, target, width, count) in &attrs {
+                let bytes = dl.get(at..at + width * count.max(1))?;
+                if target {
+                    for index in bytes.chunks_exact(width).take(count) {
+                        let index = index
+                            .iter()
+                            .fold(0, |v, &b| v << 8 | u64::from(b));
+                        max = max.max(Some(index));
+                    }
+                }
+                at += bytes.len();
+            }
+        }
+    }
+    max
+}
+
+/// The bytes a direct attribute takes in a vertex, by its `GXCompCnt` and
+/// `GXCompType`.
+fn gx_direct_size(attr: u32, cnt: u32, comp: u32) -> Option<usize> {
+    let scalar = || match comp {
+        // GX_U8, GX_S8, GX_U16, GX_S16, GX_F32
+        0 | 1 => Some(1),
+        2 | 3 => Some(2),
+        4 => Some(4),
+        _ => None,
+    };
+    Some(match attr {
+        // GX_VA_PNMTXIDX, GX_VA_TEX0MTXIDX to GX_VA_TEX7MTXIDX
+        0..=8 => 1,
+        // GX_VA_POS: GX_POS_XY or GX_POS_XYZ
+        9 => scalar()? * if cnt == 0 { 2 } else { 3 },
+        // GX_VA_NRM, GX_VA_NBT: GX_NRM_XYZ, or the NBT forms
+        10 | 25 => scalar()? * if cnt == 0 { 3 } else { 9 },
+        // GX_VA_CLR0, GX_VA_CLR1: RGB565, RGB8, RGBX8, RGBA4, RGBA6, RGBA8
+        11 | 12 => [2, 3, 4, 2, 3, 4].get(comp as usize).copied()?,
+        // GX_VA_TEX0 to GX_VA_TEX7: GX_TEX_S or GX_TEX_ST
+        13..=20 => scalar()? * if cnt == 0 { 1 } else { 2 },
+        _ => return None,
+    })
 }
 
 /// How many words an item's own script command is (from opcode 10), from
@@ -722,6 +880,71 @@ mod tests {
         assert_eq!(e("1 + GXGetTexBufferSize( 8 , 8 , 0 , 0 , 1 )"), Some(33));
         assert_eq!(e("GXGetTexBufferSize(8, 8, 0x40, 0, 0)"), None);
         assert_eq!(e("Unknown(1)"), None);
+    }
+
+    /// `HSD_VtxDescList`s of (attr, attr_type, comp_cnt, comp_type), up to
+    /// `GX_VA_NULL`.
+    fn descs(attrs: &[(u32, u32, u32, u32)]) -> Vec<u8> {
+        let mut bytes = Vec::new();
+        for &(attr, ty, cnt, comp) in attrs.iter().chain(&[(0xFF, 0, 0, 0)]) {
+            for word in [attr, ty, cnt, comp, 0, 0] {
+                bytes.extend(word.to_be_bytes());
+            }
+        }
+        bytes
+    }
+
+    #[test]
+    fn vertex_indices() {
+        // Out of the hardware's order: TEX0 (GX_INDEX16), NRM (GX_INDEX8),
+        // POS (GX_INDEX16), PNMTXIDX (GX_DIRECT)
+        let descs =
+            descs(&[(13, 3, 1, 3), (10, 2, 0, 1), (9, 3, 1, 3), (0, 1, 0, 0)]);
+        // Triangles of 2 vertices, each matrix, position, normal and
+        // texture coordinate, then a strip of 1, then padding
+        #[rustfmt::skip]
+        let dl = [
+            0x90, 0, 2,
+            0x1E, 0, 7, 3, 0, 1,
+            0x21, 1, 2, 9, 0, 0,
+            0x98, 0, 1,
+            0x00, 0, 4, 4, 0, 2,
+            0, 0, 0,
+        ];
+        let max = |attr| {
+            call(
+                "GXMaxIndex",
+                &[Value::Bytes(&dl), Value::Bytes(&descs), Value::Int(attr)],
+            )
+        };
+        assert_eq!(max(9), Some(Value::Int(0x102)));
+        assert_eq!(max(10), Some(Value::Int(9)));
+        assert_eq!(max(13), Some(Value::Int(2)));
+        // Direct, and absent
+        assert_eq!(max(0), None);
+        assert_eq!(max(11), None);
+        // A vertex past the end, and an opcode that isn't a primitive
+        assert_eq!(gx_max_index(&dl[..10], &descs, 9), None);
+        assert_eq!(gx_max_index(&[0x61, 0, 0], &descs, 9), None);
+        // Bytes only as arguments
+        let e = |text| {
+            Expr::parse(text)
+                .unwrap()
+                .value(&mut |name| (name == "dl").then_some(Value::Bytes(&dl)))
+        };
+        assert_eq!(e("dl + 1"), None);
+        assert_eq!(e("dl"), Some(Value::Bytes(&dl)));
+        assert_eq!(e("GXMaxIndex(1, dl, 9)"), None);
+    }
+
+    #[test]
+    fn nbt3_uses_three_indices_for_both_normal_attributes() {
+        for attr in [10, 25] {
+            let descs = descs(&[(attr, 2, 2, 1), (13, 2, 1, 3)]);
+            let dl = [0x90, 0, 2, 1, 9, 3, 4, 2, 5, 8, 6, 0];
+            assert_eq!(gx_max_index(&dl, &descs, attr.into()), Some(9));
+            assert_eq!(gx_max_index(&dl, &descs, 13), Some(6));
+        }
     }
 
     #[test]
