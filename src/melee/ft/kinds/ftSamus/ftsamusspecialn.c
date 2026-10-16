@@ -120,7 +120,9 @@ static void ftSs_SpecialN_801293BC(HSD_GObj* gobj)
         }
         x2230 = fp->u.ss.x2230;
         it_802B56E4(fp->u.ss.x222C, &vec1, var_f0, x2230, samus_attr->x18);
-        if ((fp->motion_id == 348) || (fp->ground_or_air == GA_Air)) {
+        if ((fp->motion_id == ftSs_MS_SpecialAirN) ||
+            (fp->ground_or_air == GA_Air))
+        {
             u8 unused1[28];
             ftSamus_801293BC_inner(gobj);
         }
