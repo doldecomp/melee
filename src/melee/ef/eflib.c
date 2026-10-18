@@ -952,7 +952,7 @@ int efLib_Cb_ParticleRender(HSD_Particle* particle)
     }
 }
 
-HSD_PSUserFunc particleCallbacks = { efLib_Cb_ParticleRender, NULL, NULL };
+static HSD_PSUserFunc particleCallbacks = { efLib_Cb_ParticleRender, NULL, NULL };
 
 // Global particle callback. Checks if the particle cmdList matches
 // bank 0 refs (0x96, 0x97, 0x98, 0x21B). If matched, attaches an
