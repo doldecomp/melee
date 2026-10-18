@@ -21,12 +21,12 @@
 
 static u16 lbl_804D6368 = 0x100;
 
-void hsd_8039D1E4(HSD_Generator* gen, void* userfunc)
+void psSetUserFunc(HSD_Generator* gen, HSD_PSUserFunc* userfunc)
 {
     gen->userfunc = userfunc;
 }
 
-u16 hsd_8039D1EC(void)
+u16 psGetNewIDNum(void)
 {
     lbl_804D6368++;
     if (lbl_804D6368 < 256) {
@@ -74,8 +74,8 @@ void hsd_8039D354(u32 unused)
 {
     HSD_ObjAllocInit(&hsd_804D0F90.alloc_data, sizeof(HSD_Generator), 4);
     hsd_804D78FC = NULL;
-    hsd_804D78E0 = 0;
-    hsd_804D78DA = 0;
+    numActiveGenerators = 0;
+    numPeakGenerators = 0;
     hsd_804D78F4 = NULL;
     psCamera = NULL;
     hsd_804D78E8 = NULL;
@@ -123,7 +123,7 @@ HSD_Generator* hsd_8039D3AC(HSD_Generator* gen, HSD_Generator* prev)
         gen->jobj = NULL;
     }
     HSD_ObjFree(&hsd_804D0F90.alloc_data, gen);
-    hsd_804D78E0--;
+    numActiveGenerators--;
     return prev;
 }
 
@@ -308,7 +308,6 @@ void hsd_8039D71C(HSD_Generator* gen)
 HSD_Generator* hsd_8039D9C8(void)
 {
     HSD_Generator* gen;
-    PAD_STACK(8);
 
     gen = HSD_ObjAlloc(&hsd_804D0F90.alloc_data);
     if (gen != NULL) {
@@ -318,9 +317,9 @@ HSD_Generator* hsd_8039D9C8(void)
         return NULL;
     }
 
-    hsd_804D78E0++;
-    if (hsd_804D78E0 > hsd_804D78DA) {
-        hsd_804D78DA = hsd_804D78E0;
+    numActiveGenerators++;
+    if (numActiveGenerators > numPeakGenerators) {
+        numPeakGenerators = numActiveGenerators;
     }
 
     if (hsd_804D78F8 == NULL || hsd_804D78F8->next == NULL) {
@@ -336,11 +335,7 @@ HSD_Generator* hsd_8039D9C8(void)
         hsd_804D78F8->next->next = gen;
     }
 
-    lbl_804D6368++;
-    if (lbl_804D6368 < 0x100) {
-        lbl_804D6368 = 0x100;
-    }
-    gen->idnum = lbl_804D6368;
+    gen->idnum = psGetNewIDNum();
     gen->appsrt = NULL;
     gen->userfunc = NULL;
     return gen;
@@ -1031,8 +1026,6 @@ HSD_Generator* hsd_8039EFAC(s32 linkNo, s32 bank, s32 gfx_id, HSD_JObj* jobj)
     return gen;
 }
 
-/// @todo The bound check reads the .bss array named `psCmdListArray`, not
-/// `psNumCmdList`; the two names look swapped against their addresses.
 HSD_Generator* hsd_8039F05C(s32 linkNo, s32 bank, s32 idx)
 {
     HSD_Generator* gen;
@@ -1043,7 +1036,7 @@ HSD_Generator* hsd_8039F05C(s32 linkNo, s32 bank, s32 idx)
     if (linkNo >= 8) {
         return NULL;
     }
-    if (idx >= psCmdListArray[bank]) {
+    if (idx >= psNumCmdList[bank]) {
         return NULL;
     }
 

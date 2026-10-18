@@ -926,7 +926,7 @@ void efLib_Cb_DPtcl(int linkNo, int bank, int gfx_id, HSD_JObj* jobj)
     efLib_SpawnParticleEffect(bank, gfx_id, jobj, 1);
 }
 
-void efLib_Cb_ParticleRender(HSD_Particle* particle)
+int efLib_Cb_ParticleRender(HSD_Particle* particle)
 {
     Vec3 translate;
     Vec3 scale;
@@ -952,11 +952,7 @@ void efLib_Cb_ParticleRender(HSD_Particle* particle)
     }
 }
 
-static void (*particleCallbacks[3])(HSD_Particle* particle) = {
-    efLib_Cb_ParticleRender,
-    NULL,
-    NULL,
-};
+HSD_PSUserFunc particleCallbacks = { efLib_Cb_ParticleRender, NULL, NULL };
 
 // Global particle callback. Checks if the particle cmdList matches
 // bank 0 refs (0x96, 0x97, 0x98, 0x21B). If matched, attaches an
@@ -965,16 +961,16 @@ static void (*particleCallbacks[3])(HSD_Particle* particle) = {
 void efLib_Cb_PtclAppSRTHook(HSD_Generator* gen)
 {
     if (gen->cmdList == ptclref_804D0E5C[0][0x96]->cmdList) {
-        hsd_8039D1E4(gen, particleCallbacks);
+        psSetUserFunc(gen, &particleCallbacks);
     }
     if (gen->cmdList == ptclref_804D0E5C[0][0x97]->cmdList) {
-        hsd_8039D1E4(gen, particleCallbacks);
+        psSetUserFunc(gen, &particleCallbacks);
     }
     if (gen->cmdList == ptclref_804D0E5C[0][0x98]->cmdList) {
-        hsd_8039D1E4(gen, particleCallbacks);
+        psSetUserFunc(gen, &particleCallbacks);
     }
     if (gen->cmdList == ptclref_804D0E5C[0][0x21B]->cmdList) {
-        hsd_8039D1E4(gen, particleCallbacks);
+        psSetUserFunc(gen, &particleCallbacks);
     }
 }
 

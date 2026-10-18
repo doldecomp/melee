@@ -7,14 +7,16 @@
 
 #include <sysdolphin/baselib/objalloc.h>
 
+#include <sysdolphin/baselib/psstructs.h>
+
 struct hsd_804D0F60_t {
     HSD_ObjAllocData alloc_data;
     UNK_T pad;
 };
 
 /* 39D0A0 */ void hsd_8039D0A0(HSD_Generator*);
-/* 39D1E4 */ void hsd_8039D1E4(HSD_Generator*, void*);
-/* 39D1EC */ u16 hsd_8039D1EC(void);
+/* 39D1E4 */ void psSetUserFunc(HSD_Generator*, HSD_PSUserFunc*);
+/* 39D1EC */ u16 psGetNewIDNum(void);
 /* 39D214 */ void hsd_8039D214(HSD_Generator*);
 /* 39D354 */ void hsd_8039D354(u32);
 /* 39D3AC */ HSD_Generator* hsd_8039D3AC(HSD_Generator*, HSD_Generator*);
