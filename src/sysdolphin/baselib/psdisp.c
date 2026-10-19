@@ -2030,8 +2030,8 @@ void psDispParticles(u32 target_link, u32 sw)
                     }
 
                     if (psCmdListArray[pp->bank] != NULL &&
-                        (form_group = psCmdListArray[pp->bank][pp->texGroup]) !=
-                            NULL
+                        (form_group =
+                             psCmdListArray[pp->bank][pp->texGroup]) != NULL
 #ifdef MUST_MATCH
                         && form_group->formTable != NULL
 #endif

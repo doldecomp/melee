@@ -6,7 +6,6 @@
 #include <placeholder.h>
 
 #include <sysdolphin/baselib/objalloc.h>
-
 #include <sysdolphin/baselib/psstructs.h>
 
 struct hsd_804D0F60_t {
