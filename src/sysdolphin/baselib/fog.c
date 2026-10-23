@@ -229,10 +229,7 @@ static void FogRelease(HSD_Fog* fog)
     if (fog->fog_adj != NULL) {
         HSD_FogAdj* adj = fog->fog_adj;
         if (ref_DEC(adj)) {
-            if (adj != NULL) {
-                HSD_OBJECT_METHOD(adj)->release((HSD_Class*) adj);
-                HSD_OBJECT_METHOD(adj)->destroy((HSD_Class*) adj);
-            }
+            hsdDelete(adj);
         }
     }
     HSD_AObjRemove(fog->aobj);

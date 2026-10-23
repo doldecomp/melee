@@ -46,7 +46,7 @@ struct HSD_AObj {
     f32 end_frame;
     f32 framerate;
     HSD_FObj* fobj;
-    struct HSD_Obj* hsd_obj;
+    HSD_JObj* jobj;
 };
 
 struct HSD_AObjDesc {

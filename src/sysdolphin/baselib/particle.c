@@ -576,7 +576,7 @@ void hsd_80398F8C(HSD_Particle* pp, f32 angle)
                 (sin_e * (-cos_rand * cos_a) - sin_rand * sin_a);
 }
 
-s32 hsd_803991D8(HSD_Generator* gen, HSD_JObj* jobj, f32 force, f32 range)
+s32 applyForceJObj(HSD_Generator* gen, HSD_JObj* jobj, f32 force, f32 range)
 {
     f32 dx, dy, dz;
     f32 dist_sq;
@@ -1625,8 +1625,8 @@ void* hsd_8039930C(HSD_Particle* pp, HSD_Particle* prev)
 
                         {
                             HSD_JObj* jobj = psPointJObj[idx];
-                            if (hsd_803991D8((HSD_Generator*) pp, jobj, force,
-                                             range) != 0)
+                            if (applyForceJObj((HSD_Generator*) pp, jobj,
+                                               force, range) != 0)
                             {
                                 pp->life = 1;
                                 goto exit_loop;

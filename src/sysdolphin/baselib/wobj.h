@@ -45,10 +45,7 @@ static inline void HSD_WObjUnref(HSD_WObj* wobj)
     }
 
     if (ref_DEC(wobj) != 0) {
-        if (wobj != NULL) {
-            HSD_OBJECT_METHOD(wobj)->release((HSD_Class*) wobj);
-            HSD_OBJECT_METHOD(wobj)->destroy((HSD_Class*) wobj);
-        }
+        hsdDelete(wobj);
     }
 }
 

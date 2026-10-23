@@ -184,10 +184,10 @@ void HSD_JObjMakeMatrix(HSD_JObj* jobj)
     if (jobj->parent != NULL) {
         PSMTXConcat(jobj->parent->mtx, jobj->mtx, jobj->mtx);
     }
-    if (jobj->aobj != NULL && jobj->aobj->hsd_obj != NULL) {
+    if (jobj->aobj != NULL && jobj->aobj->jobj != NULL) {
         Vec3 vec;
-        HSD_JObj* aobj_jobj = (HSD_JObj*) jobj->aobj->hsd_obj;
-        HSD_JObjSetupMatrix((HSD_JObj*) jobj->aobj->hsd_obj);
+        HSD_JObj* aobj_jobj = jobj->aobj->jobj;
+        HSD_JObjSetupMatrix(jobj->aobj->jobj);
         MTXMultVec(aobj_jobj->mtx, &jobj->translate, &vec);
         jobj->mtx[0][3] = vec.x;
         jobj->mtx[1][3] = vec.y;
@@ -367,7 +367,7 @@ void JObjUpdateFunc(void* obj, enum_t type, HSD_ObjData* val)
                 val->fv = 1.0F;
             }
             HSD_ASSERT(0x24B, jobj->aobj);
-            jp = (HSD_JObj*) jobj->aobj->hsd_obj;
+            jp = jobj->aobj->jobj;
             HSD_ASSERT(0x24D, jp);
             HSD_ASSERT(0x24E, jp->u.spline);
             splArcLengthPoint(&p, jp->u.spline, val->fv);
