@@ -2806,7 +2806,7 @@ void Fighter_8006D10C(Fighter_GObj* gobj)
 void Fighter_procCollResolve(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    bool bool1 = 0;
+    int hitlag_damage = 0;
     s32 motion_state_index = fp->motion_id;
     bool bool2 = 0;
     bool bool3 = 0;
@@ -2852,7 +2852,7 @@ void Fighter_procCollResolve(Fighter_GObj* gobj)
         forceAppliedOnHit = fp->dmg.kb_applied;
         if (forceAppliedOnHit) {
             s32 ground_or_air = fp->ground_or_air;
-            bool damage_bool;
+            int damage_taken;
 
             fp->dmg.x189C_unk_num_frames = 0.0f;
             Fighter_UnkTakeDamage_8006CC30(fp, fp->dmg.x1838_percentTemp);
@@ -2882,13 +2882,13 @@ void Fighter_procCollResolve(Fighter_GObj* gobj)
                     break;
                 }
 
-                damage_bool = fp->dmg.x183C_applied;
+                damage_taken = fp->dmg.x183C_applied;
                 bool2 = 1;
-                ftCo_80090594(fp, fp->dmg.x1860_element, damage_bool,
+                ftCo_80090594(fp, fp->dmg.x1860_element, damage_taken,
                               motion_state_index, ground_or_air,
                               fp->x1960_vibrateMult);
                 ftCommon_8007ED50(fp, fp->dmg.x1838_percentTemp);
-                bool1 = damage_bool;
+                hitlag_damage = damage_taken;
 
             } else {
                 switch (fp->kind) {
@@ -2905,7 +2905,7 @@ void Fighter_procCollResolve(Fighter_GObj* gobj)
                 ftCo_8008E9D0(gobj);
             }
         } else if (fp->dmg.x18a0) {
-            bool1 = fp->dmg.x1840;
+            hitlag_damage = fp->dmg.x1840;
             bool4 = 1;
         } else if (fp->x19A4) {
             if (bool3) {
@@ -2916,7 +2916,7 @@ void Fighter_procCollResolve(Fighter_GObj* gobj)
                     fp->shield_hit_cb(gobj);
                 }
             }
-            bool1 = fp->x19A4;
+            hitlag_damage = fp->x19A4;
         } else if (fp->dmg.int_value) {
             if ((fp->dmg.x191C) && (!fp->victim_gobj) &&
                 (!fp->target_item_gobj))
@@ -2924,12 +2924,12 @@ void Fighter_procCollResolve(Fighter_GObj* gobj)
                 ftCommon_8007DB58(gobj);
                 ftCo_80099D9C(gobj);
             }
-            bool1 = fp->dmg.int_value;
+            hitlag_damage = fp->dmg.int_value;
         } else if (fp->dmg.x1914) {
             if (fp->deal_dmg_cb) {
                 fp->deal_dmg_cb(gobj);
             }
-            bool1 = fp->dmg.x1914;
+            hitlag_damage = fp->dmg.x1914;
             if (fp->x2070.x0.x2073 == 0x46U) {
                 ftCommon_8007EBAC(fp, 0xE, 0);
             } else {
@@ -2937,7 +2937,7 @@ void Fighter_procCollResolve(Fighter_GObj* gobj)
             }
         } else {
             if (fp->dmg.x1924) {
-                bool1 = fp->dmg.x1924;
+                hitlag_damage = fp->dmg.x1924;
             } else if (fp->ReflectAttr.x1A3C_damageOver) {
                 ftCo_80098C9C(gobj);
             } else if (fp->ReflectAttr.x1A2C_reflectHitDirection) {
@@ -2962,9 +2962,9 @@ void Fighter_procCollResolve(Fighter_GObj* gobj)
         }
         ftCo_800C8D00(gobj);
 
-        if (bool1) {
+        if (hitlag_damage) {
             fp->dmg.x195c_hitlag_frames = ftCommon_CalcHitlag(
-                bool1, motion_state_index, fp->x1960_vibrateMult);
+                hitlag_damage, motion_state_index, fp->x1960_vibrateMult);
             if (fp->dmg.x195c_hitlag_frames < fp->x1964) {
                 fp->dmg.x195c_hitlag_frames = fp->x1964;
             }
