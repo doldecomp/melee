@@ -619,10 +619,7 @@ void HSD_LObjAddCurrent(HSD_LObj* lobj)
 void HSD_LObjUnrefThis(HSD_LObj* lobj)
 {
     if (lobj != NULL && ref_DEC(lobj)) {
-        if (lobj != NULL) {
-            HSD_OBJECT_METHOD(lobj)->release((HSD_Class*) lobj);
-            HSD_OBJECT_METHOD(lobj)->destroy((HSD_Class*) lobj);
-        }
+        hsdDelete(lobj);
     }
 }
 

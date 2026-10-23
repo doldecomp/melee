@@ -178,7 +178,7 @@ HSD_AObj* HSD_AObjLoadDesc(HSD_AObjDesc* aobjdesc)
 
     HSD_FObj* fobj;
     HSD_IDKey id;
-    HSD_Obj* phi_r30;
+    HSD_JObj* phi_r30;
 
     if (aobjdesc != NULL) {
         aobj = HSD_AObjAlloc();
@@ -190,19 +190,18 @@ HSD_AObj* HSD_AObjLoadDesc(HSD_AObjDesc* aobjdesc)
         HSD_AObjSetFObj(aobj, fobj);
         id = (HSD_IDKey) aobjdesc->obj_id;
         if (id != 0U) {
-            HSD_Obj* hsd_obj = HSD_IDGetDataFromTable(0, id, 0);
+            HSD_JObj* hsd_obj = HSD_IDGetDataFromTable(0, id, 0);
             phi_r30 = hsd_obj;
             if (hsd_obj != NULL) {
                 ref_INC(hsd_obj);
             } else {
-                phi_r30 = (HSD_Obj*) HSD_JObjLoadJoint(
-                    (HSD_Joint*) aobjdesc->obj_id);
+                phi_r30 = HSD_JObjLoadJoint((HSD_Joint*) aobjdesc->obj_id);
             }
             if (aobj != NULL) {
-                if (aobj->hsd_obj != NULL) {
-                    HSD_JObjUnref((HSD_JObj*) aobj->hsd_obj);
+                if (aobj->jobj != NULL) {
+                    HSD_JObjUnref(aobj->jobj);
                 }
-                aobj->hsd_obj = phi_r30;
+                aobj->jobj = phi_r30;
             }
         }
         return aobj;
@@ -224,10 +223,10 @@ void HSD_AObjRemove(HSD_AObj* aobj)
     }
 
     if (aobj) {
-        if (aobj->hsd_obj != NULL) {
-            HSD_JObjUnref((HSD_JObj*) aobj->hsd_obj);
+        if (aobj->jobj != NULL) {
+            HSD_JObjUnref(aobj->jobj);
         }
-        aobj->hsd_obj = NULL;
+        aobj->jobj = NULL;
     }
     HSD_AObjFree(aobj);
 }
