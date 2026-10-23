@@ -198,7 +198,7 @@ void fn_8002113C(HSD_JObj* jobj, Vec3* axis, f32 angle)
         HSD_JObjGetRotation(jobj, (Quaternion*) &rot);
         HSD_MkRotationMtx(tmpMtx, &rot);
         PSMTXConcat(tmpMtx, rotMtx, result);
-        HSD_QuatLib_8037EB28(result, &rot);
+        MatToEuler(result, &rot);
         HSD_JObjSetRotation(jobj, (Quaternion*) &rot);
     } else {
         HSD_JObjGetRotation(jobj, &rot2);

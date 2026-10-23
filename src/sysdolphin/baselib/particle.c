@@ -37,12 +37,12 @@ typedef struct {
 /* 4D78D0 */ static u32 hsd_804D78D0;
 /* 4D78D4 */ static int (**psCallback)(HSD_Particle* part);
 
-/* 4D78D8 */ u16 hsd_804D78D8 = 0;
-/* 4D78DA */ u16 hsd_804D78DA = 0;
+/* 4D78D8 */ u16 numPeakPSAppSRT = 0;
+/* 4D78DA */ u16 numPeakGenerators = 0;
 /* 4D78DC */ static u16 numPeakParticles;
-/* 4D78DE */ u16 hsd_804D78DE = 0;
-/* 4D78E0 */ u16 hsd_804D78E0 = 0;
-/* 4D78E2 */ static u16 hsd_804D78E2;
+/* 4D78DE */ u16 numActivePSAppSRT = 0;
+/* 4D78E0 */ u16 numActiveGenerators = 0;
+/* 4D78E2 */ static u16 numActiveParticles;
 #ifdef MUST_MATCH
 #pragma push
 #pragma force_active on
@@ -58,8 +58,8 @@ static HSD_JObj* psPointJObj[8];
 /* 4D0948 */ u32* hsd_804D0948[65];
 /* 4D0A4C */ int psFormGroupArray[65];
 /* 4D0B50 */ HSD_PSTexGroup** psTexGroupArray[65];
-/* 4D0C54 */ HSD_PSFormGroup** psNumCmdList[65];
-/* 4D0D58 */ int psCmdListArray[65];
+/* 4D0C54 */ HSD_PSFormGroup** psCmdListArray[65];
+/* 4D0D58 */ int psNumCmdList[65];
 /* 4D0E5C */ HSD_PSCmdList** ptclref_804D0E5C[65];
 /* 4D0F60 */ struct hsd_804D0F60_t hsd_804D0F60;
 
@@ -136,15 +136,15 @@ void psInitDataBankLoad(int bank, const int* cmdBank, const int* texBank,
     psTexGroupArray[bank] = (HSD_PSTexGroup**) (texBank + 1);
 
     if (formBank != NULL) {
-        psNumCmdList[bank] = (HSD_PSFormGroup**) (formBank + 1);
+        psCmdListArray[bank] = (HSD_PSFormGroup**) (formBank + 1);
     } else {
-        psNumCmdList[bank] = NULL;
+        psCmdListArray[bank] = NULL;
     }
 
     version = *(u16*) cmdBank;
     switch (version) {
     case 0:
-        psCmdListArray[bank] = cmdBank[1];
+        psNumCmdList[bank] = cmdBank[1];
         ptclref_804D0E5C[bank] = (HSD_PSCmdList**) (cmdBank + 2);
         break;
     case 0x40:
@@ -152,7 +152,7 @@ void psInitDataBankLoad(int bank, const int* cmdBank, const int* texBank,
     case 0x42:
     case 0x43: {
         s32 count = cmdBank[1];
-        psCmdListArray[bank] = cmdBank[2] + count;
+        psNumCmdList[bank] = cmdBank[2] + count;
         ptclref_804D0E5C[bank] = (HSD_PSCmdList**) (cmdBank + 3 - count);
         break;
     }
@@ -333,8 +333,8 @@ void hsd_80398A08(u32 unused)
     (void) hsd_804D0948;
     (void) psFormGroupArray;
     (void) psTexGroupArray;
-    (void) psNumCmdList;
     (void) psCmdListArray;
+    (void) psNumCmdList;
     (void) ptclref_804D0E5C;
 
     HSD_ObjAllocInit(&hsd_804D0F60.alloc_data, sizeof(HSD_Particle), 4);
@@ -343,14 +343,14 @@ void hsd_80398A08(u32 unused)
     for (i = 0; i < 16; i++) {
         hsd_804D0908[i] = NULL;
     }
-    hsd_804D78E2 = 0;
+    numActiveParticles = 0;
     numPeakParticles = 0;
     for (i = 0; i < 0x41; i++) {
-        psCmdListArray[i] = 0;
+        psNumCmdList[i] = 0;
         psFormGroupArray[i] = 0;
         ptclref_804D0E5C[i] = NULL;
         psTexGroupArray[i] = NULL;
-        psNumCmdList[i] = NULL;
+        psCmdListArray[i] = NULL;
         hsd_804D0948[i] = NULL;
     }
     psCallback = NULL;
@@ -377,15 +377,15 @@ HSD_Particle* psGenerateParticle0(HSD_Particle** head, int linkNo, int bank,
         return NULL;
     }
 
-    hsd_804D78E2 += 1;
-    if (hsd_804D78E2 > numPeakParticles) {
-        numPeakParticles = hsd_804D78E2;
+    numActiveParticles += 1;
+    if (numActiveParticles > numPeakParticles) {
+        numPeakParticles = numActiveParticles;
     }
 
     if (gp != NULL) {
         pp->idnum = gp->idnum;
     } else {
-        pp->idnum = hsd_8039D1EC();
+        pp->idnum = psGetNewIDNum();
     }
 
     pp->appsrt = NULL;
@@ -636,7 +636,7 @@ static inline HSD_Particle* psSpawnChild(HSD_Particle** head, int linkNo,
         child = NULL;
     } else if (bank >= 65) {
         child = NULL;
-    } else if (idx >= psCmdListArray[bank]) {
+    } else if (idx >= psNumCmdList[bank]) {
         child = NULL;
     } else {
         cl = ptclref_804D0E5C[bank][idx];
@@ -1004,7 +1004,7 @@ void* hsd_8039930C(HSD_Particle* pp, HSD_Particle* prev)
                             child = NULL;
                         } else if (bank >= 65) {
                             child = NULL;
-                        } else if (idx >= psCmdListArray[bank]) {
+                        } else if (idx >= psNumCmdList[bank]) {
                             child = NULL;
                         } else {
                             cl = ptclref_804D0E5C[bank][idx];
@@ -1327,7 +1327,7 @@ void* hsd_8039930C(HSD_Particle* pp, HSD_Particle* prev)
                             child = NULL;
                         } else if (bank >= 65) {
                             child = NULL;
-                        } else if (idx >= psCmdListArray[bank]) {
+                        } else if (idx >= psNumCmdList[bank]) {
                             child = NULL;
                         } else {
                             cl = ptclref_804D0E5C[bank][idx];
@@ -1652,7 +1652,7 @@ void* hsd_8039930C(HSD_Particle* pp, HSD_Particle* prev)
                             child = NULL;
                         } else if (bank >= 65) {
                             child = NULL;
-                        } else if (idx >= psCmdListArray[bank]) {
+                        } else if (idx >= psNumCmdList[bank]) {
                             child = NULL;
                         } else {
                             cl = ptclref_804D0E5C[bank][idx];
@@ -1718,7 +1718,7 @@ void* hsd_8039930C(HSD_Particle* pp, HSD_Particle* prev)
                             child = NULL;
                         } else if (bank >= 65) {
                             child = NULL;
-                        } else if (idx >= psCmdListArray[bank]) {
+                        } else if (idx >= psNumCmdList[bank]) {
                             child = NULL;
                         } else {
                             cl = ptclref_804D0E5C[bank][idx];
@@ -2839,9 +2839,9 @@ void* hsd_8039930C(HSD_Particle* pp, HSD_Particle* prev)
             }
 
             /* Free particle */
-            hsd_8039D048(pp);
+            psClearPointJObj(pp);
             HSD_ObjFree(&hsd_804D0F60.alloc_data, pp);
-            hsd_804D78E2--;
+            numActiveParticles--;
             return next_pp;
         }
     }
@@ -2905,7 +2905,7 @@ void* hsd_8039930C(HSD_Particle* pp, HSD_Particle* prev)
         if (psPointJObj[jobj_idx] == NULL) {
             HSD_JObj* new_jobj = HSD_JObjAlloc();
             if (new_jobj != NULL) {
-                hsd_8039CF4C(jobj_idx + 1, new_jobj);
+                psSetPointJObj(jobj_idx + 1, new_jobj);
                 HSD_JObjUnref(new_jobj);
             }
         }
@@ -2971,7 +2971,7 @@ void hsd_8039CEAC(u32 mask)
     }
 }
 
-void hsd_8039CF4C(s32 index, HSD_JObj* jobj)
+void psSetPointJObj(int index, HSD_JObj* jobj)
 {
     if (index < 0 || index > 8) {
         return;
@@ -3000,9 +3000,9 @@ void hsd_8039CF4C(s32 index, HSD_JObj* jobj)
     }
 }
 
-void hsd_8039D048(void* particle)
+void psClearPointJObj(HSD_Particle* particle)
 {
-    u32 flags = ((HSD_Particle*) particle)->kind;
+    u32 flags = particle->kind;
     if (flags & 0x8000) {
         HSD_JObj** p = &psPointJObj[(flags >> 12) & 7];
         if (*p != NULL) {
@@ -3065,7 +3065,7 @@ void hsd_8039D0A0(HSD_Generator* gen)
             }
 
             HSD_ObjFree(&data->alloc_data, prt);
-            hsd_804D78E2--;
+            numActiveParticles--;
         } else {
             prev = prt;
         }

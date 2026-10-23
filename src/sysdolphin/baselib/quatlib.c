@@ -56,7 +56,7 @@ s32 MatToQuat(Mtx m, Quaternion* q)
     return 0;
 }
 
-s32 HSD_QuatLib_8037EB28(Mtx m, Vec3* euler)
+s32 MatToEuler(Mtx m, Vec3* euler)
 {
     f32 len;
 
@@ -74,7 +74,7 @@ s32 HSD_QuatLib_8037EB28(Mtx m, Vec3* euler)
     return 0;
 }
 
-s32 HSD_QuatLib_8037EC4C(Quaternion* p, Quaternion* q, Quaternion* out)
+s32 QuatMul(Quaternion* p, Quaternion* q, Quaternion* out)
 {
     f32 x;
     f32 y;
@@ -95,7 +95,7 @@ s32 HSD_QuatLib_8037EC4C(Quaternion* p, Quaternion* q, Quaternion* out)
     return 0;
 }
 
-s32 HSD_QuatLib_8037ECE0(Vec3* axis, Quaternion* q, f32 angle)
+s32 AngleAxisToQuat(Vec3* axis, Quaternion* q, f32 angle)
 {
     f32 len;
     f32 half_angle;
@@ -145,7 +145,7 @@ s32 EulerToQuat(Vec3* euler, Quaternion* q)
     return 0;
 }
 
-s32 HSD_QuatLib_8037EF28(Quaternion* p, Quaternion* q, Quaternion* out, f32 t)
+s32 QuatSlerp(Quaternion* p, Quaternion* q, Quaternion* out, f32 t)
 {
     f32 cosom;
     f32 t2;

@@ -11,8 +11,8 @@
 
 bool psInitAppSRT(int num, int size)
 {
-    hsd_804D78DE = 0;
-    hsd_804D78D8 = 0;
+    numActivePSAppSRT = 0;
+    numPeakPSAppSRT = 0;
     HSD_PSAppSrt_804D7958[0] = (u16) size;
     HSD_ObjAllocInit(&HSD_PSAppSrt_804D10B0, size, 4U);
     return 0;
@@ -44,9 +44,9 @@ HSD_psAppSRT* psAddGeneratorAppSRT(s32 status, u16 idnum)
         srt->xA2 = 0;
         srt->gp = NULL;
         srt->idnum = idnum;
-        hsd_804D78DE += 1;
-        if (hsd_804D78DE > hsd_804D78D8) {
-            hsd_804D78D8 = hsd_804D78DE;
+        numActivePSAppSRT += 1;
+        if (numActivePSAppSRT > numPeakPSAppSRT) {
+            numPeakPSAppSRT = numActivePSAppSRT;
         }
     }
     return srt;
@@ -96,7 +96,7 @@ int psRemoveParticleAppSRT(HSD_Particle* pp)
             srt->freefunc(srt);
         }
         HSD_ObjFree(&HSD_PSAppSrt_804D10B0, srt);
-        hsd_804D78DE--;
+        numActivePSAppSRT--;
     }
     pp->appsrt = NULL;
     return count;
@@ -125,7 +125,7 @@ int psRemoveGeneratorSRT(HSD_Generator* gp)
             srt->freefunc(srt);
         }
         HSD_ObjFree(&HSD_PSAppSrt_804D10B0, srt);
-        hsd_804D78DE--;
+        numActivePSAppSRT--;
     }
     gp->appsrt = NULL;
     return count;

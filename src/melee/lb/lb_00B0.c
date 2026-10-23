@@ -539,7 +539,7 @@ void lb_8000C490(HSD_JObj* jobj1, HSD_JObj* jobj2, HSD_JObj* arg2, float arg8,
         quat2.z = -quat2.z;
         quat2.w = -quat2.w;
     }
-    HSD_QuatLib_8037EF28(&quat1, &quat2, &arg2->rotate, arg9);
+    QuatSlerp(&quat1, &quat2, &arg2->rotate, arg9);
     HSD_JObjSetFlags(arg2, 0x20000U);
     HSD_JObjSetFlags(arg2, 0x40U);
 }
@@ -641,7 +641,7 @@ void lb_8000C868(HSD_Joint* arg0, HSD_JObj* arg1, HSD_JObj* arg2, float arg8,
         sp94.z = -sp94.z;
         sp94.w = -sp94.w;
     }
-    HSD_QuatLib_8037EF28(&spA4, &sp94, &arg2->rotate, arg9);
+    QuatSlerp(&spA4, &sp94, &arg2->rotate, arg9);
     HSD_JObjSetFlags(arg2, 0x20000U);
     HSD_JObjSetFlags(arg2, 0x40U);
 }
