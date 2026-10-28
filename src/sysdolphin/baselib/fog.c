@@ -16,18 +16,13 @@ HSD_ClassInfo hsdFogAdj = { FogAdjInfoInit };
 
 const GXColor HSD_Fog_804DE6F0 = { 0 };
 
-struct HSD_FogSet_proj {
-    f32 x0;
-    f32 v[6];
-};
-
 void HSD_FogSet(HSD_Fog* fog)
 {
     GXFogAdjTable tbl;
     f32 v[6];
     HSD_CObj* cobj;
     s32 range;
-    struct HSD_FogSet_proj proj;
+    f32 proj[7];
 
     if (fog == NULL) {
         GXSetFog(0, 0.0F, 0.0F, 0.0F, 0.0F, HSD_Fog_804DE6F0);
@@ -54,26 +49,25 @@ void HSD_FogSet(HSD_Fog* fog)
         } else {
             Mtx44 mtx = { 0 };
 
-            /// @todo Eliminate cast
-            GXGetProjectionv((f32*) &proj);
+            GXGetProjectionv(proj);
 
-            switch ((s32) proj.x0) {
+            switch ((s32) proj[0]) {
             case 0:
-                mtx[0][0] = proj.v[0];
-                mtx[0][2] = proj.v[1];
-                mtx[1][1] = proj.v[2];
-                mtx[1][2] = proj.v[3];
-                mtx[2][2] = proj.v[4];
-                mtx[2][3] = proj.v[5];
+                mtx[0][0] = proj[1];
+                mtx[0][2] = proj[2];
+                mtx[1][1] = proj[3];
+                mtx[1][2] = proj[4];
+                mtx[2][2] = proj[5];
+                mtx[2][3] = proj[6];
                 mtx[3][2] = -1.0F;
                 break;
             case 1:
-                mtx[0][0] = proj.v[0];
-                mtx[0][3] = proj.v[1];
-                mtx[1][1] = proj.v[2];
-                mtx[1][3] = proj.v[3];
-                mtx[2][2] = proj.v[4];
-                mtx[2][3] = proj.v[5];
+                mtx[0][0] = proj[1];
+                mtx[0][3] = proj[2];
+                mtx[1][1] = proj[3];
+                mtx[1][3] = proj[4];
+                mtx[2][2] = proj[5];
+                mtx[2][3] = proj[6];
                 mtx[3][3] = 1.0F;
                 break;
             }

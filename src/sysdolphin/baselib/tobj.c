@@ -1122,13 +1122,13 @@ s32 HSD_TObjAssignResources(HSD_TObj* tobj_top)
     return (int) texcoord_no;
 }
 
-static int DifferentTluts(HSD_Tlut* t0, HSD_Tlut* t1)
+static bool DifferentTluts(HSD_Tlut* t0, HSD_Tlut* t1)
 {
-    return
-#ifdef MUST_MATCH
-        (t0->lut != t0->lut) ||
-#endif
-        (t0->n_entries != t1->n_entries);
+    bool diff_tluts = true;
+    if (t0->n_entries == t1->n_entries) {
+        diff_tluts = false;
+    }
+    return diff_tluts;
 }
 
 void HSD_TObjSetup(HSD_TObj* tobj)

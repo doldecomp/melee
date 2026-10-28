@@ -63,12 +63,10 @@ HSD_RObj* HSD_RObjGetByType(HSD_RObj* robj, u32 type, u32 subtype)
             has_type = false;
         }
 
-        if (has_type) {
-            if ((curr->flags & ROBJ_TYPE_MASK) == type &&
-                (!subtype || subtype == (curr->flags & 0xFFFFFFF)))
-            {
-                return curr;
-            }
+        if (has_type && (curr->flags & ROBJ_TYPE_MASK) == type &&
+            (!subtype || subtype == (curr->flags & 0xFFFFFFF)))
+        {
+            return curr;
         }
     }
 
@@ -89,10 +87,10 @@ static void RObjUpdateFunc(void* obj, enum_t type, HSD_ObjData* val)
 
     robj = (HSD_RObj*) obj;
     if (val->fv >= 0.5) {
-        robj->flags = robj->flags | 0x80000000;
+        robj->flags |= 0x80000000;
         return;
     }
-    robj->flags = robj->flags & 0x7fffffff;
+    robj->flags &= ~0x80000000;
 }
 
 void HSD_RObjAnim(HSD_RObj* robj)
@@ -218,17 +216,16 @@ int HSD_RObjGetGlobalPosition(HSD_RObj* robj, int type, Vec3* p)
         return 0;
     }
     for (rp = robj; rp != NULL; rp = rp->next) {
-        if (((rp->flags & ROBJ_TYPE_MASK) == REFTYPE_JOBJ ? 1 : 0) != 0) {
-            if (((rp->flags & 0x80000000) ? 1 : 0) != 0 &&
-                (unsigned) type == HSD_RObjGetConstraintType(rp))
-            {
-                HSD_ASSERT(498, rp->u.jobj);
-                HSD_JObjSetupMatrix(rp->u.jobj);
-                n += 1;
-                v.x += rp->u.jobj->mtx[0][3];
-                v.y += rp->u.jobj->mtx[1][3];
-                v.z += rp->u.jobj->mtx[2][3];
-            }
+        if (((rp->flags & ROBJ_TYPE_MASK) == REFTYPE_JOBJ ? 1 : 0) != 0 &&
+            ((rp->flags & 0x80000000) ? 1 : 0) != 0 &&
+            (unsigned) type == HSD_RObjGetConstraintType(rp))
+        {
+            HSD_ASSERT(498, rp->u.jobj);
+            HSD_JObjSetupMatrix(rp->u.jobj);
+            n += 1;
+            v.x += rp->u.jobj->mtx[0][3];
+            v.y += rp->u.jobj->mtx[1][3];
+            v.z += rp->u.jobj->mtx[2][3];
         }
     }
     if (n != 0) {
@@ -241,7 +238,7 @@ int HSD_RObjGetGlobalPosition(HSD_RObj* robj, int type, Vec3* p)
 }
 
 static void set_dirup_matrix(Vec3* dir_ptr, Vec3* uv_ptr, Vec3* scale_ptr,
-                             void* obj, HSD_ObjUpdateFunc update_func)
+                             HSD_JObj* obj, HSD_ObjUpdateFunc update_func)
 {
     Vec3 z_vec;
     Vec3 v;
@@ -270,7 +267,7 @@ static void set_dirup_matrix(Vec3* dir_ptr, Vec3* uv_ptr, Vec3* scale_ptr,
     update_func(obj, 55, NULL);
 }
 
-static void resolveCnsDirUp(HSD_RObj* robj, void* obj,
+static void resolveCnsDirUp(HSD_RObj* robj, HSD_JObj* obj,
                             HSD_ObjUpdateFunc update_func)
 {
     Vec3 this_scale = { 1.0f, 1.0f, 1.0f };
@@ -280,9 +277,9 @@ static void resolveCnsDirUp(HSD_RObj* robj, void* obj,
     f32 k;
 
     if (HSD_RObjGetGlobalPosition(robj, 2, &this_pos) != 0) {
-        dir.x = ((HSD_JObj*) obj)->mtx[0][3];
-        dir.y = ((HSD_JObj*) obj)->mtx[1][3];
-        dir.z = ((HSD_JObj*) obj)->mtx[2][3];
+        dir.x = obj->mtx[0][3];
+        dir.y = obj->mtx[1][3];
+        dir.z = obj->mtx[2][3];
         PSVECSubtract(&this_pos, &dir, &this_pos);
         if (HSD_RObjGetGlobalPosition(robj, 3, &up) != 0) {
             PSVECSubtract(&up, &dir, &up);
@@ -295,8 +292,8 @@ static void resolveCnsDirUp(HSD_RObj* robj, void* obj,
             }
         }
 
-        if (((HSD_JObj*) obj)->scl != NULL) {
-            this_scale = *((HSD_JObj*) obj)->scl;
+        if (obj->scl != NULL) {
+            this_scale = *obj->scl;
         }
         set_dirup_matrix(&this_pos, &up, &this_scale, obj, update_func);
     }
@@ -329,19 +326,17 @@ static inline HSD_RObj* inlined_HSD_RObjGetByType(HSD_RObj* robj, u32 type,
             has_type = false;
         }
 
-        if (has_type) {
-            if ((curr->flags & ROBJ_TYPE_MASK) == type &&
-                (!subtype || subtype == (curr->flags & 0xFFFFFFF)))
-            {
-                return curr;
-            }
+        if (has_type && (curr->flags & ROBJ_TYPE_MASK) == type &&
+            (!subtype || subtype == (curr->flags & 0xFFFFFFF)))
+        {
+            return curr;
         }
     }
 
     return NULL;
 }
 
-static void resolveCnsOrientation(HSD_RObj* robj, void* obj,
+static void resolveCnsOrientation(HSD_RObj* robj, HSD_JObj* obj,
                                   void (*update_func)(void*, int,
                                                       HSD_ObjData*))
 {
@@ -355,7 +350,7 @@ static void resolveCnsOrientation(HSD_RObj* robj, void* obj,
 
     HSD_ASSERT(0x276, obj);
 
-    robj = inlined_HSD_RObjGetByType(robj, 0x10000000, 4);
+    robj = inlined_HSD_RObjGetByType(robj, REFTYPE_JOBJ, 4);
     if (robj == NULL) {
         return;
     }
@@ -454,116 +449,119 @@ static void resolveLimits(HSD_RObj* robj, void* obj,
         rp = rp->next;
     }
 
-    if (rp != NULL) {
-        for (rp = robj; rp != NULL; rp = rp->next) {
-            if (RObjHasLimitReftype(rp)) {
-                switch (rp->flags & 0xFFFFFFF) {
-                default:
-                    continue;
-                case 1:
-                    if (jobj->rotate.x < rp->u.limit) {
-                        jobj->rotate.x = rp->u.limit;
-                    }
-                    break;
+    if (rp == NULL) {
+        return;
+    }
 
-                case 2:
-                    if (jobj->rotate.x > rp->u.limit) {
-                        jobj->rotate.x = rp->u.limit;
-                    }
-                    break;
-
-                case 3:
-                    if (jobj->rotate.y < rp->u.limit) {
-                        jobj->rotate.y = rp->u.limit;
-                    }
-                    break;
-
-                case 4:
-                    if (jobj->rotate.y > rp->u.limit) {
-                        jobj->rotate.y = rp->u.limit;
-                    }
-                    break;
-
-                case 5:
-                    if (jobj->rotate.z < rp->u.limit) {
-                        jobj->rotate.z = rp->u.limit;
-                    }
-                    break;
-
-                case 6:
-                    if (jobj->rotate.z > rp->u.limit) {
-                        jobj->rotate.z = rp->u.limit;
-                    }
-                    break;
-
-                case 7:
-                    if (jobj->translate.x < rp->u.limit) {
-                        jobj->translate.x = rp->u.limit;
-                    }
-                    break;
-
-                case 8:
-                    if (jobj->translate.x > rp->u.limit) {
-                        jobj->translate.x = rp->u.limit;
-                    }
-                    break;
-
-                case 9:
-                    if (jobj->translate.y < rp->u.limit) {
-                        jobj->translate.y = rp->u.limit;
-                    }
-                    break;
-
-                case 10:
-                    if (jobj->translate.y > rp->u.limit) {
-                        jobj->translate.y = rp->u.limit;
-                    }
-                    break;
-
-                case 11:
-                    if (jobj->translate.y < rp->u.limit) {
-                        jobj->translate.y = rp->u.limit;
-                    }
-                    break;
-
-                case 12:
-                    if (jobj->translate.y > rp->u.limit) {
-                        jobj->translate.y = rp->u.limit;
-                    }
-                    break;
+    for (rp = robj; rp != NULL; rp = rp->next) {
+        if (RObjHasLimitReftype(rp)) {
+            switch (rp->flags & 0xFFFFFFF) {
+            default:
+                continue;
+            case 1:
+                if (jobj->rotate.x < rp->u.limit) {
+                    jobj->rotate.x = rp->u.limit;
                 }
-                update_mtx = true;
+                break;
+
+            case 2:
+                if (jobj->rotate.x > rp->u.limit) {
+                    jobj->rotate.x = rp->u.limit;
+                }
+                break;
+
+            case 3:
+                if (jobj->rotate.y < rp->u.limit) {
+                    jobj->rotate.y = rp->u.limit;
+                }
+                break;
+
+            case 4:
+                if (jobj->rotate.y > rp->u.limit) {
+                    jobj->rotate.y = rp->u.limit;
+                }
+                break;
+
+            case 5:
+                if (jobj->rotate.z < rp->u.limit) {
+                    jobj->rotate.z = rp->u.limit;
+                }
+                break;
+
+            case 6:
+                if (jobj->rotate.z > rp->u.limit) {
+                    jobj->rotate.z = rp->u.limit;
+                }
+                break;
+
+            case 7:
+                if (jobj->translate.x < rp->u.limit) {
+                    jobj->translate.x = rp->u.limit;
+                }
+                break;
+
+            case 8:
+                if (jobj->translate.x > rp->u.limit) {
+                    jobj->translate.x = rp->u.limit;
+                }
+                break;
+
+            case 9:
+                if (jobj->translate.y < rp->u.limit) {
+                    jobj->translate.y = rp->u.limit;
+                }
+                break;
+
+            case 10:
+                if (jobj->translate.y > rp->u.limit) {
+                    jobj->translate.y = rp->u.limit;
+                }
+                break;
+
+            case 11:
+                if (jobj->translate.y < rp->u.limit) {
+                    jobj->translate.y = rp->u.limit;
+                }
+                break;
+
+            case 12:
+                if (jobj->translate.y > rp->u.limit) {
+                    jobj->translate.y = rp->u.limit;
+                }
+                break;
             }
+            update_mtx = true;
         }
-        if (update_mtx) {
-            HSD_JObjMakeMatrix(jobj);
-        }
+    }
+    if (update_mtx) {
+        HSD_JObjMakeMatrix(jobj);
     }
 }
 
-static void expEvaluate(HSD_Exp* exp, u32 type, void* obj,
+static void expEvaluate(HSD_Exp* exp, u32 type, HSD_JObj* obj,
                         HSD_ObjUpdateFunc update_func);
 
-void HSD_RObjUpdateAll(HSD_RObj* robj, void* obj,
+void HSD_RObjUpdateAll(HSD_RObj* robj, HSD_JObj* obj,
                        HSD_ObjUpdateFunc update_func)
 {
     HSD_RObj* rp;
     Vec3 vec;
 
-    if (robj != NULL) {
-        if (HSD_RObjGetGlobalPosition(robj, 1, &vec) != 0) {
-            update_func(obj, 0x35, (HSD_ObjData*) &vec);
-            update_func(obj, 0x38, NULL);
-        }
-        resolveCnsDirUp(robj, obj, update_func);
-        resolveCnsOrientation(robj, obj, update_func);
-        resolveLimits(robj, obj, update_func);
+    if (robj == NULL) {
+        return;
+    }
 
-        for (rp = robj; rp != NULL; rp = rp->next) {
-            if (RObjHasFlags(rp) && RObjHasFlags2(rp)) {
-                expEvaluate(&rp->u.exp, rp->flags & 0xFFFFFFF, obj,
-                            update_func);
-            }
+    if (HSD_RObjGetGlobalPosition(robj, 1, &vec) != 0) {
+        update_func(obj, 0x35, (HSD_ObjData*) &vec);
+        update_func(obj, 0x38, NULL);
+    }
+    resolveCnsDirUp(robj, obj, update_func);
+    resolveCnsOrientation(robj, obj, update_func);
+    resolveLimits(robj, obj, update_func);
+
+    for (rp = robj; rp != NULL; rp = rp->next) {
+        if (RObjHasFlags(rp) && RObjHasFlags2(rp)) {
+            expEvaluate(&rp->u.exp, rp->flags & 0xFFFFFFF, obj, update_func);
         }
     }
 }
@@ -615,7 +613,7 @@ HSD_RObj* HSD_RObjLoadDesc(HSD_RObjDesc* robjdesc)
             case 4:
             case 5:
             case 6:
-                robj->u.limit = 0.017453292f * robjdesc->u.limit;
+                robj->u.limit = MTXDegToRad(1) * robjdesc->u.limit;
                 break;
             default:
                 robj->u.limit = robjdesc->u.limit;
@@ -685,7 +683,7 @@ void HSD_RObjFree(HSD_RObj* robj)
 
 static char HSD_RObj_80406F14[] = "(ptr && nitems) || !ptr";
 
-static void expEvaluate(HSD_Exp* exp, u32 type, void* obj,
+static void expEvaluate(HSD_Exp* exp, u32 type, HSD_JObj* obj,
                         HSD_ObjUpdateFunc update_func)
 {
     HSD_Rvalue* rvalue;
@@ -802,7 +800,7 @@ static void expEvaluate(HSD_Exp* exp, u32 type, void* obj,
         sp1C.fv = exp->expr.func(arg_buf);
     }
     if (type - 1 <= 2) {
-        sp1C.fv = sp1C.fv * 0.017453292F;
+        sp1C.fv = sp1C.fv * MTXDegToRad(1);
     }
     update_func(obj, type, &sp1C);
 }
@@ -908,7 +906,7 @@ void HSD_RvalueResolveRefsAll(HSD_Rvalue* rvalue, HSD_RvalueList* list)
     }
 }
 
-void HSD_RObjSetConstraintObj(HSD_RObj* robj, void* o)
+void HSD_RObjSetConstraintObj(HSD_RObj* robj, HSD_JObj* o)
 {
     bool isDesc;
     HSD_JObj* jobj = o;
@@ -919,8 +917,7 @@ void HSD_RObjSetConstraintObj(HSD_RObj* robj, void* o)
             robj->u.jobj = NULL;
         }
 
-        if (isDesc = hsdObjIsDescendantOf(&((HSD_JObj*) o)->object,
-                                          &hsdJObj.parent.parent),
+        if (isDesc = hsdObjIsDescendantOf(&o->object, &hsdJObj.parent.parent),
             isDesc != 0)
         {
             robj->u.jobj = o;

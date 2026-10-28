@@ -1313,8 +1313,8 @@ void resolveIKJoint2(HSD_JObj* jobj)
     VECSubtract(&var_r29->translate, &sp94, &sp7C);
     VECScale(&sp7C, &sp7C,
              sqrtf(1.0F / (1e-10F + VECDotProduct(&sp7C, &sp7C))));
-    temp_r28 = HSD_RObjGetByType(jobj->robj, 0x20000000, 5);
-    temp_r29 = HSD_RObjGetByType(jobj->robj, 0x20000000, 6);
+    temp_r28 = HSD_RObjGetByType(jobj->robj, REFTYPE_LIMIT, 5);
+    temp_r29 = HSD_RObjGetByType(jobj->robj, REFTYPE_LIMIT, 6);
     if ((temp_r28 != NULL) || (temp_r29 != NULL)) {
         var_r27 = 0;
         robj = HSD_RObjGetByType(jobj->robj, REFTYPE_IKHINT, 0);
@@ -1538,9 +1538,6 @@ void JObjAmnesia(HSD_ClassInfo* info)
     HSD_OBJECT_PARENT_INFO(&hsdJObj)->amnesia(info);
 }
 
-#ifdef MUST_MATCH
-#pragma push
-#pragma force_active on
 static char unused3[] = "jobj[%d,%d]";
 static char unused4[] = "SKELETON_ROOT ";
 static char unused5[] = "SKELETON ";
@@ -1552,8 +1549,6 @@ static char unused10[] = "  tra(L): ";
 static char unused11[] = "  rot(G): ";
 static char unused12[] = "  sca(G): ";
 static char unused13[] = "  tra(G): ";
-#pragma pop
-#endif
 
 void JObjInfoInit(void)
 {
@@ -1570,9 +1565,4 @@ void JObjInfoInit(void)
     HSD_JOBJ_INFO(&hsdJObj)->release_child = JObjReleaseChild;
 }
 
-#ifdef MUST_MATCH
-#pragma push
-#pragma force_active on
 static u32 unused14[6] = { 0 };
-#pragma pop
-#endif
