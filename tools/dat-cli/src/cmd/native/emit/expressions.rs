@@ -27,12 +27,12 @@ impl Emitter<'_, '_> {
         let _ = writeln!(body, "    *out = {value};\n    return 1;");
         let _ = writeln!(
             self.expression_code,
-            "static int {name}_eval(const DatArchive* a, const DatContext* c, unsigned depth, uint64_t* out) {{\n{body}}}"
+            "static int {name}_eval(const DatArchive* a, const DatContext* c, unsigned depth, DatValue* out) {{\n{body}}}"
         );
         name
     }
 
-    /// Emit statements that produce a uint64_t, or return failure from the
+    /// Emit statements that produce an integer or byte view, or fail the
     /// enclosing evaluator. Branches contain their own operand evaluation.
     fn expression_value(
         &mut self,
@@ -46,11 +46,16 @@ impl Emitter<'_, '_> {
         let pad = "    ".repeat(indent);
         match expr {
             Expr::Int(n) => {
-                let _ = writeln!(c, "{pad}uint64_t {value} = {};", int(*n));
+                let _ = writeln!(
+                    c,
+                    "{pad}DatValue {value} = {{ {}, NULL, 0 }};",
+                    int(*n)
+                );
             }
             Expr::Name(name) => {
                 let ident = self.name(name);
-                let _ = writeln!(c, "{pad}uint64_t {value};");
+                let _ =
+                    writeln!(c, "{pad}DatValue {value} = {{ 0, NULL, 0 }};");
                 let _ = writeln!(
                     c,
                     "{pad}if (!dat_reader_resolve_name(a, c, {ident}, &{value})) {{"
@@ -71,54 +76,73 @@ impl Emitter<'_, '_> {
                     .iter()
                     .map(|arg| self.expression_value(c, arg, next, indent))
                     .collect();
-                let _ = writeln!(c, "{pad}uint64_t {value};");
-                let call = match (function.as_str(), args.as_slice()) {
-                    ("itCommandLength", [command]) => {
-                        format!(
-                            "dat_reader_it_command_length({command}, &{value})"
-                        )
-                    }
-                    ("colAnimCommandLength", [command]) => {
-                        format!(
-                            "dat_reader_col_anim_command_length({command}, &{value})"
-                        )
-                    }
-                    ("cpuCommandLength", [command]) => {
+                let _ =
+                    writeln!(c, "{pad}DatValue {value} = {{ 0, NULL, 0 }};");
+                let call = if function == "GXMaxIndex" && args.len() == 3 {
+                    let [dl, descs, attr] = args.as_slice() else {
+                        unreachable!()
+                    };
+                    let _ = writeln!(
+                        c,
+                        "{pad}if ({dl}.bytes == NULL || {descs}.bytes == NULL || {attr}.bytes != NULL) return 0;"
+                    );
+                    format!(
+                        "dat_reader_gx_max_index({dl}.bytes, {dl}.len, {descs}.bytes, {descs}.len, {attr}.i, &{value}.i)"
+                    )
+                } else {
+                    for arg in &args {
                         let _ = writeln!(
                             c,
-                            "{pad}{value} = dat_reader_cpu_command_length({command});"
+                            "{pad}if ({arg}.bytes != NULL) return 0;"
                         );
-                        return value;
                     }
-                    (
-                        "GXGetTexBufferSize",
-                        [width, height, format, mipmap, lod],
-                    ) => {
-                        format!(
-                            "dat_reader_gx_get_tex_buffer_size((uint16_t) {width}, (uint16_t) {height}, (uint32_t) {format}, (uint8_t) {mipmap}, (uint8_t) {lod}, &{value})"
-                        )
-                    }
-                    _ => {
-                        let _ = writeln!(c, "{pad}return 0;");
-                        return value;
+                    let ints: Vec<String> =
+                        args.iter().map(|arg| format!("{arg}.i")).collect();
+                    match (function.as_str(), ints.as_slice()) {
+                        ("itCommandLength", [command]) => format!(
+                            "dat_reader_it_command_length({command}, &{value}.i)"
+                        ),
+                        ("colAnimCommandLength", [command]) => format!(
+                            "dat_reader_col_anim_command_length({command}, &{value}.i)"
+                        ),
+                        ("cpuCommandLength", [command]) => {
+                            let _ = writeln!(
+                                c,
+                                "{pad}{value}.i = dat_reader_cpu_command_length({command});"
+                            );
+                            return value;
+                        }
+                        (
+                            "GXGetTexBufferSize",
+                            [width, height, format, mipmap, lod],
+                        ) => format!(
+                            "dat_reader_gx_get_tex_buffer_size((uint16_t) {width}, (uint16_t) {height}, (uint32_t) {format}, (uint8_t) {mipmap}, (uint8_t) {lod}, &{value}.i)"
+                        ),
+                        _ => {
+                            let _ = writeln!(c, "{pad}return 0;");
+                            return value;
+                        }
                     }
                 };
                 let _ = writeln!(c, "{pad}if (!{call}) return 0;");
             }
             Expr::Unary(op, arg) => {
-                let arg = self.expression_value(c, arg, next, indent);
+                let arg = self.expression_int(c, arg, next, indent);
                 let operation = match op {
                     UnaryOp::Not => format!("{arg} == 0"),
                     UnaryOp::BitNot => format!("~{arg}"),
                     UnaryOp::Neg => format!("(uint64_t) 0 - {arg}"),
                 };
-                let _ = writeln!(c, "{pad}uint64_t {value} = {operation};");
-            }
-            Expr::Cond(cond, yes, no) => {
-                let cond = self.expression_value(c, cond, next, indent);
                 let _ = writeln!(
                     c,
-                    "{pad}uint64_t {value};\n{pad}if ({cond} != 0) {{"
+                    "{pad}DatValue {value} = {{ {operation}, NULL, 0 }};"
+                );
+            }
+            Expr::Cond(cond, yes, no) => {
+                let cond = self.expression_int(c, cond, next, indent);
+                let _ = writeln!(
+                    c,
+                    "{pad}DatValue {value};\n{pad}if ({cond} != 0) {{"
                 );
                 let yes = self.expression_value(c, yes, next, indent + 1);
                 let _ =
@@ -127,19 +151,19 @@ impl Emitter<'_, '_> {
                 let _ = writeln!(c, "{pad}    {value} = {no};\n{pad}}}");
             }
             Expr::Binary(op @ (BinaryOp::Or | BinaryOp::And), left, right) => {
-                let left = self.expression_value(c, left, next, indent);
+                let left = self.expression_int(c, left, next, indent);
                 let condition = if *op == BinaryOp::Or { "==" } else { "!=" };
                 let _ = writeln!(
                     c,
-                    "{pad}uint64_t {value} = {left} != 0;\n{pad}if ({value} {condition} 0) {{"
+                    "{pad}DatValue {value} = {{ {left} != 0, NULL, 0 }};\n{pad}if ({value}.i {condition} 0) {{"
                 );
-                let right = self.expression_value(c, right, next, indent + 1);
+                let right = self.expression_int(c, right, next, indent + 1);
                 let _ =
-                    writeln!(c, "{pad}    {value} = {right} != 0;\n{pad}}}");
+                    writeln!(c, "{pad}    {value}.i = {right} != 0;\n{pad}}}");
             }
             Expr::Binary(op, left, right) => {
-                let left = self.expression_value(c, left, next, indent);
-                let right = self.expression_value(c, right, next, indent);
+                let left = self.expression_int(c, left, next, indent);
+                let right = self.expression_int(c, right, next, indent);
                 match op {
                     BinaryOp::Div | BinaryOp::Rem => {
                         let _ =
@@ -172,10 +196,23 @@ impl Emitter<'_, '_> {
                 };
                 let _ = writeln!(
                     c,
-                    "{pad}uint64_t {value} = {left} {operator} {right};"
+                    "{pad}DatValue {value} = {{ {left} {operator} {right}, NULL, 0 }};"
                 );
             }
         }
         value
+    }
+    /// Arithmetic, tests and integer-only calls reject serialized byte views.
+    fn expression_int(
+        &mut self,
+        c: &mut String,
+        expr: &Expr,
+        next: &mut usize,
+        indent: usize,
+    ) -> String {
+        let value = self.expression_value(c, expr, next, indent);
+        let pad = "    ".repeat(indent);
+        let _ = writeln!(c, "{pad}if ({value}.bytes != NULL) return 0;");
+        format!("{value}.i")
     }
 }

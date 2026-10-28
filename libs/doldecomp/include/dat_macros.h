@@ -27,6 +27,11 @@
 /// of sibling fields (or their members, @c x0.count) and constants, which may
 /// call the functions the tool ports, e.g. @c GXGetTexBufferSize. On a pointer
 /// typedef, for lists of counted lists, names resolve to bindings (#DAT_BIND).
+/// A relocated pointer field can evaluate to the bytes it points to. Its own
+/// #DAT_COUNT or #DAT_TERMINATED gives their length. Calls and bindings accept
+/// these bytes; arithmetic does not. The tool helper
+/// @c GXMaxIndex(dl, descs, attr) returns the largest index used for @c attr
+/// in display list @c dl, using vertex descriptors @c descs.
 #define DAT_COUNT(count) DAT_TAG("count(" #count ")")
 
 /// The pointer refers to elements up to and including a terminator: the
