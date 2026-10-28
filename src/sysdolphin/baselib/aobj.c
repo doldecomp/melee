@@ -131,7 +131,7 @@ void HSD_AObjInterpretAnim(HSD_AObj* aobj, void* obj,
     }
 
     if (aobj->flags & AOBJ_FIRST_PLAY) {
-        aobj->flags &= 0xF7FFFFFF;
+        aobj->flags &= ~AOBJ_FIRST_PLAY;
         rate = 0.0F;
     } else {
         rate = aobj->framerate;
@@ -149,7 +149,7 @@ void HSD_AObjInterpretAnim(HSD_AObj* aobj, void* obj,
         rate = 0.0F;
         aobj->flags |= AOBJ_REWINDED;
     } else {
-        aobj->flags &= 0xFBFFFFFF;
+        aobj->flags &= ~AOBJ_REWINDED;
     }
 
     if (aobj->flags & AOBJ_NO_UPDATE) {
@@ -531,7 +531,7 @@ void HSD_AObjSetCurrentFrame(HSD_AObj* aobj, f32 frame)
 
     if (!(aobj->flags & AOBJ_NO_ANIM) && aobj) {
         aobj->curr_frame = frame;
-        aobj->flags = (aobj->flags & 0xBFFFFFFF) | AOBJ_FIRST_PLAY;
+        aobj->flags = (aobj->flags & ~AOBJ_NO_ANIM) | AOBJ_FIRST_PLAY;
         HSD_FObjReqAnimAll(aobj->fobj, frame);
     }
 }
