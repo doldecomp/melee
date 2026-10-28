@@ -238,7 +238,7 @@ int HSD_RObjGetGlobalPosition(HSD_RObj* robj, int type, Vec3* p)
 }
 
 static void set_dirup_matrix(Vec3* dir_ptr, Vec3* uv_ptr, Vec3* scale_ptr,
-                             HSD_JObj* obj, HSD_ObjUpdateFunc update_func)
+                             void* obj, HSD_ObjUpdateFunc update_func)
 {
     Vec3 z_vec;
     Vec3 v;
@@ -267,7 +267,7 @@ static void set_dirup_matrix(Vec3* dir_ptr, Vec3* uv_ptr, Vec3* scale_ptr,
     update_func(obj, 55, NULL);
 }
 
-static void resolveCnsDirUp(HSD_RObj* robj, HSD_JObj* obj,
+static void resolveCnsDirUp(HSD_RObj* robj, void* obj,
                             HSD_ObjUpdateFunc update_func)
 {
     Vec3 this_scale = { 1.0f, 1.0f, 1.0f };
@@ -277,9 +277,9 @@ static void resolveCnsDirUp(HSD_RObj* robj, HSD_JObj* obj,
     f32 k;
 
     if (HSD_RObjGetGlobalPosition(robj, 2, &this_pos) != 0) {
-        dir.x = obj->mtx[0][3];
-        dir.y = obj->mtx[1][3];
-        dir.z = obj->mtx[2][3];
+        dir.x = ((HSD_JObj*) obj)->mtx[0][3];
+        dir.y = ((HSD_JObj*) obj)->mtx[1][3];
+        dir.z = ((HSD_JObj*) obj)->mtx[2][3];
         PSVECSubtract(&this_pos, &dir, &this_pos);
         if (HSD_RObjGetGlobalPosition(robj, 3, &up) != 0) {
             PSVECSubtract(&up, &dir, &up);
@@ -292,8 +292,8 @@ static void resolveCnsDirUp(HSD_RObj* robj, HSD_JObj* obj,
             }
         }
 
-        if (obj->scl != NULL) {
-            this_scale = *obj->scl;
+        if (((HSD_JObj*) obj)->scl != NULL) {
+            this_scale = *((HSD_JObj*) obj)->scl;
         }
         set_dirup_matrix(&this_pos, &up, &this_scale, obj, update_func);
     }
@@ -336,7 +336,7 @@ static inline HSD_RObj* inlined_HSD_RObjGetByType(HSD_RObj* robj, u32 type,
     return NULL;
 }
 
-static void resolveCnsOrientation(HSD_RObj* robj, HSD_JObj* obj,
+static void resolveCnsOrientation(HSD_RObj* robj, void* obj,
                                   void (*update_func)(void*, int,
                                                       HSD_ObjData*))
 {
@@ -538,10 +538,10 @@ static void resolveLimits(HSD_RObj* robj, void* obj,
     }
 }
 
-static void expEvaluate(HSD_Exp* exp, u32 type, HSD_JObj* obj,
+static void expEvaluate(HSD_Exp* exp, u32 type, void* obj,
                         HSD_ObjUpdateFunc update_func);
 
-void HSD_RObjUpdateAll(HSD_RObj* robj, HSD_JObj* obj,
+void HSD_RObjUpdateAll(HSD_RObj* robj, void* obj,
                        HSD_ObjUpdateFunc update_func)
 {
     HSD_RObj* rp;
@@ -683,7 +683,7 @@ void HSD_RObjFree(HSD_RObj* robj)
 
 static char HSD_RObj_80406F14[] = "(ptr && nitems) || !ptr";
 
-static void expEvaluate(HSD_Exp* exp, u32 type, HSD_JObj* obj,
+static void expEvaluate(HSD_Exp* exp, u32 type, void* obj,
                         HSD_ObjUpdateFunc update_func)
 {
     HSD_Rvalue* rvalue;
@@ -906,7 +906,7 @@ void HSD_RvalueResolveRefsAll(HSD_Rvalue* rvalue, HSD_RvalueList* list)
     }
 }
 
-void HSD_RObjSetConstraintObj(HSD_RObj* robj, HSD_JObj* o)
+void HSD_RObjSetConstraintObj(HSD_RObj* robj, void* o)
 {
     bool isDesc;
     HSD_JObj* jobj = o;
@@ -917,7 +917,8 @@ void HSD_RObjSetConstraintObj(HSD_RObj* robj, HSD_JObj* o)
             robj->u.jobj = NULL;
         }
 
-        if (isDesc = hsdObjIsDescendantOf(&o->object, &hsdJObj.parent.parent),
+        if (isDesc = hsdObjIsDescendantOf(&((HSD_JObj*) o)->object,
+                                          &hsdJObj.parent.parent),
             isDesc != 0)
         {
             robj->u.jobj = o;
