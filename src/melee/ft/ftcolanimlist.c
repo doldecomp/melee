@@ -1,4 +1,4 @@
-#include "ftcolanim.h"
+#include "ftcolanimlist.h"
 
 #include "fighter.h"
 #include "ft_0D4D.h"
@@ -172,8 +172,7 @@ static inline void resetColAnimX408(Fighter* fp)
 void ftCo_800C0200(Fighter* fp, int arg1)
 {
     if (arg1 >= FtColAnim_SpycloakStart) {
-        OSReport("don't reset spycloak colanim!\n");
-        __assert("ftcolanimlist.c", 0xC1, "0");
+        HSD_ASSERTREPORT(193, 0, "don't reset spycloak colanim!\n");
         return;
     }
     if (Fighter_804D653C[arg1].unk5 != 0) {
@@ -186,8 +185,7 @@ void ftCo_800C0200(Fighter* fp, int arg1)
 void ftCo_800C0358(Fighter* fp, Fighter* arg1, s32 arg2)
 {
     if (arg2 >= FtColAnim_SpycloakStart) {
-        OSReport("don't reset spycloak colanim!\n");
-        __assert("ftcolanimlist.c", 0xDE, "0");
+        HSD_ASSERTREPORT(222, 0, "don't reset spycloak colanim!\n");
         return;
     }
     if (Fighter_804D653C[arg2].unk5 != 0) {

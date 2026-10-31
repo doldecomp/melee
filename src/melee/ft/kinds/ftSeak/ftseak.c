@@ -7,7 +7,7 @@
 #include "ftseakspecials.h"
 #include "types.h"
 #include <melee/ft/ftcamera.h>
-#include <melee/ft/ftcolanim.h>
+#include <melee/ft/ftcolanimlist.h>
 #include <melee/ft/ftparts.h>
 #include <melee/ft/inlines.h>
 #include <melee/ft/types.h>

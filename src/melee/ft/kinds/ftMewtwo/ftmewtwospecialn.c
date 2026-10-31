@@ -19,7 +19,7 @@
 #include <melee/ft/ft_0892.h>
 #include <melee/ft/ft_0C8C.h>
 #include <melee/ft/ftanim.h>
-#include <melee/ft/ftcolanim.h>
+#include <melee/ft/ftcolanimlist.h>
 #include <melee/ft/ftcommon.h>
 #include <melee/ft/kinds/ftCommon/ftCo_Escape.h>
 #include <melee/ft/kinds/ftCommon/ftCo_Fall.h>

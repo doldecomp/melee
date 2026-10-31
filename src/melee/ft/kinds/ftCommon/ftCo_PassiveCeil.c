@@ -12,7 +12,7 @@
 #include <melee/ft/ft_0877.h>
 #include <melee/ft/ft_0881.h>
 #include <melee/ft/ftanim.h>
-#include <melee/ft/ftcolanim.h>
+#include <melee/ft/ftcolanimlist.h>
 #include <melee/ft/ftcommon.h>
 #include <melee/ft/kinds/ftKirby/ftkirby.h>
 #include <melee/ft/types.h>

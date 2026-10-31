@@ -23,11 +23,6 @@
 #include <sysdolphin/baselib/debug.h>
 #include <sysdolphin/baselib/gobj.h>
 
-char ftKb_Init_803CB510[] = "Other Dead_Proc Existence";
-char ftKb_Init_803CB52C[] = "ftkirbyspecials.c";
-
-char ftKb_Init_804D3DB0[2] = "0";
-
 void ftKb_SpecialAirLw_800F539C(Fighter_GObj* gobj)
 {
     GET_FIGHTER(gobj)->u.kb.hat.x0 = 0;
@@ -72,8 +67,7 @@ void fn_800F53AC(HSD_GObj* gobj)
         fp->cmd_vars[0] = 0;
         if (fp->u.kb.hat.x0 != NULL) {
             if (fp->death2_cb != NULL && fp->death2_cb != ftKb_Init_800EE74C) {
-                OSReport(ftKb_Init_803CB510);
-                __assert(ftKb_Init_803CB52C, 0x66, ftKb_Init_804D3DB0);
+                HSD_ASSERTREPORT(102, 0, "Other Dead_Proc Existence");
             }
             fp->death2_cb = ftKb_Init_800EE74C;
             fp->take_dmg_cb = ftKb_Init_800EE7B8;

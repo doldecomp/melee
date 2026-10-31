@@ -21,7 +21,7 @@
 #include <melee/ft/ftcamera.h>
 #include <melee/ft/ftCo_800C7220.h>
 #include <melee/ft/ftCo_800C739C.h>
-#include <melee/ft/ftcolanim.h>
+#include <melee/ft/ftcolanimlist.h>
 #include <melee/ft/ftdynamics.h>
 #include <melee/ft/ftmaterial.h>
 #include <melee/ft/ftparts.h>

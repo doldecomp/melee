@@ -10,7 +10,7 @@
 #include "ftCo_800C7590.h"
 #include "ftCo_800C78B0.h"
 #include "ftCo_800C7CA0.h"
-#include "ftcolanim.h"
+#include "ftcolanimlist.h"
 #include "ftlipstickswing.h"
 #include "ftstarrodswing.h"
 #include "ftswing.h"

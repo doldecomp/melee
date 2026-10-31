@@ -523,10 +523,7 @@ typedef struct ftKirby_CopyName {
 /* 3CA9D0 */ extern ftKirby_CopyName ftKb_Init_803CA9D0[];
 /* 3CB3E8 */ extern Fighter_CostumeStrings* ftKb_Init_803CB3E8[];
 /* 3CB46C */ extern u8 ftKb_Init_803CB46C[];
-/* 3CB510 */ extern char ftKb_Init_803CB510[];
-/* 3CB52C */ extern char ftKb_Init_803CB52C[];
 /* 3CB540 */ extern enum_t ftKb_Init_803CB540[];
-/* 4D3DB0 */ extern char ftKb_Init_804D3DB0[2];
 /* 459B88 */ extern struct ft_80459B88_t ft_80459B88;
 /* 459C10 */ extern UnkCostumeStruct ftKb_CostumeList[6];
 

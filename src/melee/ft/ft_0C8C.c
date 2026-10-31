@@ -5,7 +5,7 @@
 #include "ft_0877.h"
 #include "ft_0D4D.h"
 #include "ftCo_800C7CA0.h"
-#include "ftcolanim.h"
+#include "ftcolanimlist.h"
 #include "ftcommon.h"
 #include "inlines.h"
 #include "kinds/ftCommon/ftCo_Attack100.h"

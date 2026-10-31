@@ -226,8 +226,7 @@ static inline void ftFox_SpecialN_SpawnBlaster(HSD_GObj* gobj, Fighter* fp,
         return;
     }
 
-    OSReport("ftToSpecialNFox::Caution!!!\n");
-    __assert("ftfoxspecialn.c", assert_line, "0");
+    HSD_ASSERTREPORT(assert_line, 0, "ftToSpecialNFox::Caution!!!\n");
 }
 
 static inline void ftFox_SpecialN_InitializeState(HSD_GObj* gobj, Fighter* fp)

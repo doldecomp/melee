@@ -15,7 +15,7 @@
 #include "ft_0C88.h"
 #include "ft_0DF0.h"
 #include "ftanim.h"
-#include "ftcolanim.h"
+#include "ftcolanimlist.h"
 #include "ftcoll.h"
 #include "ftcommon.h"
 #include "ftdynamics.h"

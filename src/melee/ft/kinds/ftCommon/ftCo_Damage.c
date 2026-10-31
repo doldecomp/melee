@@ -42,7 +42,7 @@
 #include <melee/ft/ftanim.h>
 #include <melee/ft/ftchangeparam.h>
 #include <melee/ft/ftCo_800C7434.h>
-#include <melee/ft/ftcolanim.h>
+#include <melee/ft/ftcolanimlist.h>
 #include <melee/ft/ftcoll.h>
 #include <melee/ft/ftcommon.h>
 #include <melee/ft/ftparts.h>

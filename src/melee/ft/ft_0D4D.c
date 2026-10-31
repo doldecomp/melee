@@ -6,7 +6,7 @@
 #include "ft_0892.h"
 #include "ft_0D31.h"
 #include "ftcamera.h"
-#include "ftcolanim.h"
+#include "ftcolanimlist.h"
 #include "ftcoll.h"
 #include "ftcommon.h"
 #include "ftlib.h"
