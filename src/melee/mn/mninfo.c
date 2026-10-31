@@ -142,34 +142,19 @@ void mnInfo_80251AFC(void)
     }
 }
 
-static AnimLoopSettings mnInfo_803EFC08[0x12] = {
+static MnInfoDataLayout mnInfo_803EFC08 = {
     { 0.0f, 199.0f, 0.0f },
-    { 1.8e-42f, 1.802e-42f, 1.803e-42f },
-    { 1.805e-42f, 2.1092525e-16f, 1.379729e31f },
-    { 0.0f, 2.109659e-16f, 1.4748028e31f },
-    { 0.0f, 225.43028f, 5.083402e31f },
-    { 5.085142e31f, 7.153577e22f, 2.817505e20f },
-    { 6.162976e-33f, 4.6115556e27f, 2.8237532e23f },
-    { 0.0f, 3.0854143e32f, 1.6456562e19f },
-    { 1.4757395e20f, 2.405757e8f, 2.6912729e20f },
-    { 7.3738955e28f, 1.5307577e19f, 1.6892836e19f },
-    { 1.8878586e28f, 2.405757e8f, 2.6912729e20f },
-    { 7.3738955e28f, 1.5307577e19f, 1.6244036e19f },
-    { 4.5346362e27f, 1.8878586e28f, 2.405757e8f },
-    { 2.6912729e20f, 7.3738955e28f, 1.5307577e19f },
-    { 1.710508e19f, 2.7487011e20f, 1.6892836e19f },
-    { 1.8878586e28f, 2.405757e8f, 2.6912729e20f },
-    { 7.3738955e28f, 1.5307577e19f, 1.7539375e19f },
-    { 2.8395941e29f, 1.7935375e25f, 7.2243537e28f },
+    { 1285, 1286, 1287, 1288 },
+    "%s.%s.%s",
+    "%s:%s:%s",
+    "Can't get user_data.\n",
+    "mninfo.c",
+    "user_data",
+    "MenMainConCo_Top_joint",
+    "MenMainConCo_Top_animjoint",
+    "MenMainConCo_Top_matanim_joint",
+    "MenMainConCo_Top_shapeanim_joint",
 };
-#ifdef MUST_MATCH
-#pragma push
-#pragma force_active on
-#endif
-DATA char gap_07_803EFCE0_data[8] = "";
-#ifdef MUST_MATCH
-#pragma pop
-#endif
 
 s32 mnInfo_80251D58(mnInfo_GObj* arg0, s32 arg1, u32 arg2, u32 arg3)
 {
@@ -186,7 +171,7 @@ s32 mnInfo_80251D58(mnInfo_GObj* arg0, s32 arg1, u32 arg2, u32 arg3)
     MnInfoDataLayout* layout;
 
     data = arg0->user_data;
-    layout = (MnInfoDataLayout*) mnInfo_803EFC08;
+    layout = &mnInfo_803EFC08;
     slot = (HSD_Text**) ((u8*) data + (arg1 * 4));
     if (*(slot += 2) != NULL) {
         HSD_SisLib_803A5CC4(data->left_column[arg1]);
@@ -356,7 +341,7 @@ void mnInfo_802522B8(HSD_GObj* gobj)
     } else {
         HSD_JObjSetFlagsAll(child, JOBJ_HIDDEN);
     }
-    mn_8022ED6C(jobj, mnInfo_803EFC08);
+    mn_8022ED6C(jobj, &mnInfo_803EFC08.anim);
 }
 
 void fn_802523B8(HSD_GObj* gobj)
@@ -411,7 +396,7 @@ static inline void fn_802523D8_inline(MnInfoData* data, HSD_GObj* gobj)
             HSD_JObjSetFlagsAll(child, JOBJ_HIDDEN);
         }
 
-        mn_8022ED6C(jobj, mnInfo_803EFC08);
+        mn_8022ED6C(jobj, &mnInfo_803EFC08.anim);
     }
 }
 
@@ -518,7 +503,7 @@ s32 mnInfo_80252758(void)
     HSD_GObj* gobj;
     HSD_Archive* archive;
     StaticModelDesc* model = &mnInfo_804A0958;
-    MnInfoDataLayout* layout = (MnInfoDataLayout*) mnInfo_803EFC08;
+    MnInfoDataLayout* layout = &mnInfo_803EFC08;
     char* top_joint = layout->top_joint;
     HSD_AnimJoint** animjoint = &model->animjoint;
     PAD_STACK(8);

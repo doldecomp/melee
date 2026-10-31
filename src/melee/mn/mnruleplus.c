@@ -77,10 +77,6 @@ struct mn_803ED2E8_t {
     { 0x00, 0x00 },
 };
 
-char mn_803ED308[0x18] = "Can't get user_data.\n";
-char mn_803ED320[0x10] = "mnruleplus.c";
-char mn_803ED330[0x10] = "user_data";
-
 typedef union {
     s32 packed;
     u8 idx[4];
@@ -819,10 +815,7 @@ HSD_GObj* mn_80233218(MenuState state)
     HSD_JObjAnimAll(root_jobj);
 
     user_data = HSD_MemAlloc(sizeof(MenuRulesPlusData));
-    if (user_data == NULL) {
-        OSReport(mn_803ED308);
-        __assert(mn_803ED320, 0x3DFU, mn_803ED330);
-    }
+    HSD_ASSERTREPORT(0x3DFU, user_data, "Can't get user_data.\n");
 
     GObj_InitUserData(gobj, 0, HSD_Free, user_data);
     user_data->menu_kind = mn_804A04F0.cur_menu;
