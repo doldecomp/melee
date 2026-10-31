@@ -279,7 +279,7 @@ void forceStringAllocation(
                   "can not find specified pobj in link.\n");
     HSD_ASSERTMSG(702, dobj->pobj == NULL,
                   "can not find specified pobj in link.");
-    HSD_ASSERTMSG(704, dobj->mobj != mobj, "dobj->mobj == mobj");
+    HSD_ASSERT(704, dobj->mobj == mobj);
 }
 
 void HSD_DObjDisp(HSD_DObj* dobj, Mtx vmtx, Mtx pmtx, u32 rendermode)
