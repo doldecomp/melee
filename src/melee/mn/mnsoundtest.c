@@ -798,7 +798,7 @@ void mnSoundTest_8024BCA0(int arg0)
                               0U);
     proc->flags_3 = HSD_GObj_804D783C;
     user_data = HSD_MemAlloc(sizeof(*user_data));
-    HSD_ASSERTREPORT(0x5F4U, user_data, "Can't get user_data.\n");
+    HSD_ASSERTREPORT(1524, user_data, "Can't get user_data.\n");
     user_data->unk1 = 0;
     user_data->unk2 = 0x50;
     user_data->unk4 = 0;

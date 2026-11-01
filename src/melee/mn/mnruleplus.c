@@ -815,7 +815,7 @@ HSD_GObj* mn_80233218(MenuState state)
     HSD_JObjAnimAll(root_jobj);
 
     user_data = HSD_MemAlloc(sizeof(MenuRulesPlusData));
-    HSD_ASSERTREPORT(0x3DFU, user_data, "Can't get user_data.\n");
+    HSD_ASSERTREPORT(991, user_data, "Can't get user_data.\n");
 
     GObj_InitUserData(gobj, 0, HSD_Free, user_data);
     user_data->menu_kind = mn_804A04F0.cur_menu;
