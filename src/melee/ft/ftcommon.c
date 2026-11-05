@@ -16,7 +16,7 @@
 #include "ft_0DF0.h"
 #include "ftcamera.h"
 #include "ftchangeparam.h"
-#include "ftcolanim.h"
+#include "ftcolanimlist.h"
 #include "ftcoll.h"
 #include "ftlib.h"
 #include "ftmetal.h"

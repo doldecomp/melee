@@ -14,7 +14,6 @@
 #include "inlines.h"
 #include "mnmain.h"
 #include "types.h"
-#include <dolphin/os.h>
 #include <melee/gm/gm_1A36.h>
 #include <melee/gm/gmmain_lib.h>
 #include <melee/lb/lb_00B0.h>
@@ -1017,7 +1016,7 @@ void mnVibration_CreateScreen(s32 arg0)
     HSD_JObj* jobj;
     HSD_Text* text;
     s32 i;
-    MnVibrationData* data;
+    MnVibrationData* user_data;
 
     (void) arg0;
     PAD_STACK(20);
@@ -1030,40 +1029,37 @@ void mnVibration_CreateScreen(s32 arg0)
     HSD_JObjAddAnimAll(jobj, assets->animjoint, assets->matanim,
                        assets->shapeanim);
     HSD_JObjReqAnimAll(jobj, 0.0f);
-    data = HSD_MemAlloc(sizeof(MnVibrationData));
-    if (data == NULL) {
-        OSReport("Can't get user_data.\n");
-        __assert("mnvibration.c", 0x3A7, "user_data");
-    }
-    data->x0[0] = 0;
-    data->x0[1] = 0;
+    user_data = HSD_MemAlloc(sizeof(MnVibrationData));
+    HSD_ASSERTREPORT(0x3A7, user_data, "Can't get user_data.\n");
+    user_data->x0[0] = 0;
+    user_data->x0[1] = 0;
     for (i = 0; i < 4; i++) {
-        data->x0[i + 2] = 0;
-        data->x6[i] = HSD_PadCopyStatus[(u8) i].err != 0 ? 0 : 1;
+        user_data->x0[i + 2] = 0;
+        user_data->x6[i] = HSD_PadCopyStatus[(u8) i].err != 0 ? 0 : 1;
     }
-    data->scroll_offset = 0;
+    user_data->scroll_offset = 0;
     for (i = 0; i < 8; i++) {
-        data->texts[i] = NULL;
+        user_data->texts[i] = NULL;
     }
-    GObj_InitUserData(gobj, 0, HSD_Free, data);
+    GObj_InitUserData(gobj, 0, HSD_Free, user_data);
     {
         s32 k;
         for (k = 0; k < 0x19; k++) {
-            lb_80011E24(jobj, &data->jobjs[k], k, -1);
+            lb_80011E24(jobj, &user_data->jobjs[k], k, -1);
         }
     }
-    HSD_JObjSetFlagsAll(data->jobjs[22], JOBJ_HIDDEN);
-    HSD_JObjSetFlagsAll(data->jobjs[21], JOBJ_HIDDEN);
-    HSD_JObjSetFlagsAll(data->jobjs[20], JOBJ_HIDDEN);
-    HSD_JObjSetFlagsAll(data->jobjs[19], JOBJ_HIDDEN);
+    HSD_JObjSetFlagsAll(user_data->jobjs[22], JOBJ_HIDDEN);
+    HSD_JObjSetFlagsAll(user_data->jobjs[21], JOBJ_HIDDEN);
+    HSD_JObjSetFlagsAll(user_data->jobjs[20], JOBJ_HIDDEN);
+    HSD_JObjSetFlagsAll(user_data->jobjs[19], JOBJ_HIDDEN);
     HSD_GObj_SetupProc(gobj, (void (*)(HSD_GObj*)) mnVibration_IntroProc, 0);
     mnVibration_CreatePortPanels(gobj);
-    if (data->title_text != NULL) {
-        HSD_SisLib_803A5CC4(data->title_text);
+    if (user_data->title_text != NULL) {
+        HSD_SisLib_803A5CC4(user_data->title_text);
     }
     text =
         HSD_SisLib_803A5ACC(0, 1, -9.5f, 9.1f, 17.0f, 364.68332f, 38.38772f);
-    data->title_text = text;
+    user_data->title_text = text;
     text->font_size.x = 0.0521f;
     text->font_size.y = 0.0521f;
     HSD_SisLib_803A6368(text, 0xA7);

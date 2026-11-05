@@ -16,7 +16,7 @@
 #include "ft_0881.h"
 #include "ft_0DF0.h"
 #include "ftchangeparam.h"
-#include "ftcolanim.h"
+#include "ftcolanimlist.h"
 #include "ftcommon.h"
 #include "ftdevice.h"
 #include "ftlib.h"

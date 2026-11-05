@@ -17,7 +17,7 @@
 #include <melee/ft/ft_0881.h>
 #include <melee/ft/ft_0892.h>
 #include <melee/ft/ftcliffcommon.h>
-#include <melee/ft/ftcolanim.h>
+#include <melee/ft/ftcolanimlist.h>
 #include <melee/ft/ftcoll.h>
 #include <melee/ft/ftcommon.h>
 #include <melee/ft/ftparts.h>

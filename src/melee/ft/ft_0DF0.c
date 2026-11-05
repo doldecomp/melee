@@ -8,7 +8,7 @@
 #include "fighter.h"
 #include "forward.h"
 #include "ft_0877.h"
-#include "ftcolanim.h"
+#include "ftcolanimlist.h"
 #include "ftcommon.h"
 #include "inlines.h"
 #include "types.h"

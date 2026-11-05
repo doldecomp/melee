@@ -5,7 +5,7 @@
 #include "fighter.h"
 #include "forward.h"
 #include "ft_081B.h"
-#include "ftcolanim.h"
+#include "ftcolanimlist.h"
 #include "ftcoll.h"
 #include "ftcommon.h"
 #include "kinds/ftCommon/forward.h"

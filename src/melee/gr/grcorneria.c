@@ -1965,21 +1965,6 @@ bool grCorneria_801E1058(Ground_GObj* arg)
     return false;
 }
 
-static inline void Fake_HSD_JObjSetTranslateX(HSD_JObj* jobj, f32 x)
-{
-    if (!jobj) {
-        return;
-    }
-    if (!jobj) {
-        __assert("jobj.h", 932, "jobj");
-    }
-
-    jobj->translate.x = x;
-    if (!(jobj->flags & JOBJ_MTX_INDEP_SRT)) {
-        HSD_JObjSetMtxDirty(jobj);
-    }
-}
-
 void grCorneria_801E1060(Ground_GObj* gobj)
 {
     HSD_GObj* bg;
@@ -1993,22 +1978,22 @@ void grCorneria_801E1060(Ground_GObj* gobj)
             2400.0f);
 
     bg = Ground_GetMapGObj(8);
-    if (bg != NULL) {
-        Fake_HSD_JObjSetTranslateX(bg->hsd_obj, pos);
+    if (bg != NULL && bg->hsd_obj != NULL) {
+        HSD_JObjSetTranslateX(bg->hsd_obj, pos);
     }
     pos = pos -
           (3200.0f * Ground_801C0498() / 2 + 3200.0f * Ground_801C0498() / 2);
 
     bg = Ground_GetMapGObj(9);
-    if (bg != NULL) {
-        Fake_HSD_JObjSetTranslateX(bg->hsd_obj, pos);
+    if (bg != NULL && bg->hsd_obj != NULL) {
+        HSD_JObjSetTranslateX(bg->hsd_obj, pos);
     }
     pos = pos -
           (3200.0f * Ground_801C0498() / 2 + 4800.0f * Ground_801C0498() / 2);
 
     bg = Ground_GetMapGObj(4);
-    if (bg != NULL) {
-        Fake_HSD_JObjSetTranslateX(bg->hsd_obj, pos);
+    if (bg != NULL && bg->hsd_obj != NULL) {
+        HSD_JObjSetTranslateX(bg->hsd_obj, pos);
     }
 }
 

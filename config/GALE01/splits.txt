@@ -791,7 +791,7 @@ melee/ft/ftmaterial.c:
 	.data       start:0x803C6980 end:0x803C6AD0
 	.sdata      start:0x804D3C00 end:0x804D3C10
 
-melee/ft/ftcolanim.c:
+melee/ft/ftcolanimlist.c:
 	.text       start:0x800BFD04 end:0x800C0658
 	.data       start:0x803C6AD0 end:0x803C6B18
 	.sdata      start:0x804D3C10 end:0x804D3C18

@@ -127,15 +127,7 @@ void itMatadogas_UnkMotion2_Phys(Item_GObj* gobj)
         jobj = gobj->hsd_obj;
         Item_80268E5C(gobj, 1, ITEM_ANIM_UPDATE);
         Item_SetEffectHitlagCallbacks(item2);
-        (jobj ? ((void) 0) : __assert("jobj.h", 660, "jobj"));
-        ((!(jobj->flags & JOBJ_USE_QUATERNION))
-             ? ((void) 0)
-             : __assert("jobj.h", 661,
-                        "!(jobj->flags & JOBJ_USE_QUATERNION)"));
-        jobj->rotate.y = 0.0f;
-        if (!(jobj->flags & JOBJ_MTX_INDEP_SRT)) {
-            (HSD_JObjSetMtxDirty)(jobj);
-        }
+        HSD_JObjSetRotationYWithMtxDirty(jobj, 0.0f);
         item2->on_accessory = (HSD_GObjEvent) it_802CB2B0;
         item->xDD1_flag.x0.b1 = 1;
     }

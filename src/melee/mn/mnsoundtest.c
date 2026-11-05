@@ -7,7 +7,6 @@
 #include "forward.h"
 #include "inlines.h"
 #include "types.h"
-#include <dolphin/os.h>
 #include <melee/gm/gm_unsplit.h>
 #include <melee/gm/gmmain_lib.h>
 #include <melee/lb/lbarchive.h>
@@ -109,10 +108,6 @@ s32 data_4[] = { 25, 8,  1,  6,  16, 17, 4,  2,  13, 0,  11, 5,  12, 14, 18,
                  7,  15, 10, 9,  3,  21, 20, 24, 19, 23, 22, 29, 28, 26, 27,
                  6,  8,  11, 18, 14, 15, 16, 17, 18, 19, 20, 21, 22, 24, 13,
                  25, 26, 28, 27, 10, 7,  9,  31, 23, 30, 4,  0,  39, 3,  32 };
-
-static char mnSoundTest_803EF4F4[] = "Can't get user_data.\n";
-static char mnSoundTest_803EF50C[] = "mnsoundtest.c";
-static char mnSoundTest_803EF51C[] = "user_data";
 
 void mnSoundTest_8024A790(mnSoundTest_GObj* arg0)
 {
@@ -803,10 +798,7 @@ void mnSoundTest_8024BCA0(int arg0)
                               0U);
     proc->flags_3 = HSD_GObj_804D783C;
     user_data = HSD_MemAlloc(sizeof(*user_data));
-    if (user_data == NULL) {
-        OSReport(mnSoundTest_803EF4F4);
-        __assert(mnSoundTest_803EF50C, 0x5F4U, mnSoundTest_803EF51C);
-    }
+    HSD_ASSERTREPORT(1524, user_data, "Can't get user_data.\n");
     user_data->unk1 = 0;
     user_data->unk2 = 0x50;
     user_data->unk4 = 0;

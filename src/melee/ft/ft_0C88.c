@@ -3,7 +3,7 @@
 #include "fighter.h"
 #include "forward.h"
 #include "ftCo_800C7CA0.h"
-#include "ftcolanim.h"
+#include "ftcolanimlist.h"
 #include "ftmetal.h"
 #include "ftparts.h"
 #include "inlines.h"

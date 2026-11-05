@@ -22,7 +22,7 @@
 #include "ftcamera.h"
 #include "ftchangeparam.h"
 #include "ftCo_800C7CA0.h"
-#include "ftcolanim.h"
+#include "ftcolanimlist.h"
 #include "ftcoll.h"
 #include "ftcommon.h"
 #include "ftdata.h"
