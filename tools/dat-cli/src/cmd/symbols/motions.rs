@@ -1,4 +1,6 @@
-//! Validate the ranges used by ftData_80085A14 and ftData_80085CD8.
+//! Validate the normal and demo motion ranges loaded by ftData.
+
+mod demo;
 
 use anyhow::{Context, Result, ensure};
 use melee_dat::{
@@ -51,31 +53,32 @@ fn word(bytes: &[u8], at: usize) -> Result<u32> {
 fn motions<'a>(
     archive: &Archive<'a>,
     symbol: &str,
+    field: u32,
     count: usize,
 ) -> Result<Vec<PackedMotion<'a>>> {
     let (_, root) = archive
         .named_publics()
         .find(|(name, _)| *name == symbol.as_bytes())
         .with_context(|| format!("no public symbol `{symbol}`"))?;
-    // ftData.xC points to Fighter_WaitAnimData[count]. The game uses x4
+    // ftData.xC and x14 point to Fighter_WaitAnimData[count]. The game uses x4
     // as the packed-file offset, x8 as the exact archive size, and x0 as
     // the public FigaTree name. The DOL gives the runtime count.
-    let field = root
+    let offset = root
         .offset
-        .checked_add(0xC)
+        .checked_add(field)
         .context("ftData offset overflow")?;
     ensure!(
-        archive.relocs.contains(&field),
-        "{symbol}.xC is not relocated"
+        archive.relocs.contains(&offset),
+        "{symbol}.x{field:X} is not relocated"
     );
-    let at = word(archive.data, field as usize)? as usize;
+    let at = word(archive.data, offset as usize)? as usize;
     let end = count
         .checked_mul(24)
         .and_then(|size| at.checked_add(size))
         .context("motion table size overflow")?;
     ensure!(
         end <= archive.data.len(),
-        "{symbol}.xC has fewer than {count} motions"
+        "{symbol}.x{field:X} has fewer than {count} motions"
     );
     let mut entries = Vec::with_capacity(count);
     for i in 0..count {
@@ -142,7 +145,7 @@ pub fn run(args: Args) -> Result<()> {
         let result = (|| {
             let dat_bytes = fs::read(args.files.join(dat))?;
             let archive = Archive::parse(&dat_bytes)?;
-            let entries = motions(&archive, symbol, count)?;
+            let entries = motions(&archive, symbol, 0xC, count)?;
             let packed_bytes = fs::read(args.files.join(aj))?;
             Archive::check_packed_motions(&packed_bytes, &entries)
         })()
@@ -161,5 +164,5 @@ pub fn run(args: Args) -> Result<()> {
         out,
         "{tables} fighter tables: {checked} motions checked, {unreferenced} unreferenced archive instances"
     )?;
-    Ok(())
+    demo::run(&args, &memory, &symbols, names, &mut out)
 }
