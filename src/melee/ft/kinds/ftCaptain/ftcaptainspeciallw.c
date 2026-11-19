@@ -56,10 +56,10 @@ void ftCa_SpecialHi_800E3EAC(HSD_GObj* gobj)
     PAD_STACK(12);
     if (ftCa_Special_Inline_Check_Flag(fp) != 0) {
         if (!fp->x2219_b0) {
-            if (fp->motion_id == 0x165) {
+            if (fp->motion_id == ftCa_MS_SpecialLw) {
                 sp1C = 0.0F;
                 var_r29 = ftParts_GetBoneIndex(fp, FtPart_RFootJA);
-            } else if (fp->motion_id == 0x167) {
+            } else if (fp->motion_id == ftCa_MS_SpecialAirLw) {
                 sp1C = 0.017453292f * da->speciallw_flame_particle_angle;
                 var_r29 = ftParts_GetBoneIndex(fp, FtPart_LFootJA);
             }

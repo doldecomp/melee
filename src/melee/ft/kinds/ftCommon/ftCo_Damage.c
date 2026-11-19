@@ -458,7 +458,7 @@ void ftCo_8008DCE0(Fighter_GObj* gobj, int arg1, float facing_dir)
         }
     }
     ftCommon_8007F824(gobj);
-    if (fp->motion_id == 0x145) {
+    if (fp->motion_id == ftCo_MS_DamageIce) {
         return;
     }
     if (kb_level_base < 2) {
@@ -629,10 +629,14 @@ void ftCo_8008E9D0(Fighter_GObj* gobj)
     Fighter* fp = gobj->user_data;
     float scaled_kb;
     ftCo_800C8D00(gobj);
-    if (fp->motion_id == 0xe0 || fp->motion_id == 0xe1) {
+    if (fp->motion_id == ftCo_MS_CaptureWaitHi ||
+        fp->motion_id == ftCo_MS_CaptureDamageHi)
+    {
         ftCo_800DC284(gobj);
     }
-    if (fp->motion_id == 0xe3 || fp->motion_id == 0xe4) {
+    if (fp->motion_id == ftCo_MS_CaptureWaitLw ||
+        fp->motion_id == ftCo_MS_CaptureDamageLw)
+    {
         ftCo_800DC3A4(gobj);
     }
     scaled_kb = ftCo_ScaleBy154(fp->dmg.kb_applied);
@@ -678,10 +682,14 @@ static inline void inlineB2(Fighter_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
     ftCo_800C8D00(gobj);
-    if (fp->motion_id == 0xe0 || fp->motion_id == 0xe1) {
+    if (fp->motion_id == ftCo_MS_CaptureWaitHi ||
+        fp->motion_id == ftCo_MS_CaptureDamageHi)
+    {
         ftCo_800DC284(gobj);
     }
-    if (fp->motion_id == 0xe3 || fp->motion_id == 0xe4) {
+    if (fp->motion_id == ftCo_MS_CaptureWaitLw ||
+        fp->motion_id == ftCo_MS_CaptureDamageLw)
+    {
         ftCo_800DC3A4(gobj);
     }
     if (ftCo_8008DA4C(

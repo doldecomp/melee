@@ -1493,7 +1493,7 @@ s32 ftCo_800A2C80(Fighter* fp)
     if (fp->ground_or_air == GA_Ground) {
         return ftCo_800A2C80_inline0(fp);
     }
-    if (fp->motion_id == 0xF4) {
+    if (fp->motion_id == ftCo_MS_Pass) {
         return 0;
     }
     dir = fp->pos_delta;
@@ -1722,7 +1722,7 @@ bool ftCo_800A3234(Fighter* fp)
     if (fp->pos_delta.y > 0.0) {
         return false;
     }
-    if (fp->motion_id == 0xF4) {
+    if (fp->motion_id == ftCo_MS_Pass) {
         return false;
     }
     if (fp->kind == Ft_Kind_Yoshi && fp->x34_scale.y > 1.0F &&
@@ -5371,7 +5371,7 @@ void ftCo_800ABBA8(Fighter* fp)
 
     if (data->level < 5) {
         ok = 0;
-    } else if (fp->motion_id == 0x26) {
+    } else if (fp->motion_id == ftCo_MS_DamageFall) {
         ok = 1;
     } else {
         ok = 0;
@@ -5457,7 +5457,9 @@ void ftCo_800ABBA8(Fighter* fp)
         if (dyy < below->cpu.x568 + data->x568) {
             dxx = ABS(below->cur_pos.x - fp->cur_pos.x);
             if (dxx < 5.0 + (below->cpu.x564 + data->x564)) {
-                if (below->motion_id == 0x38 || below->motion_id == 0x3F) {
+                if (below->motion_id == ftCo_MS_AttackHi3 ||
+                    below->motion_id == ftCo_MS_AttackHi4)
+                {
                     ok = 1;
                 } else {
                     ok = 0;
@@ -6283,7 +6285,7 @@ static bool ftCo_800ADE48(Fighter* fp)
     if (cur_cmd != 0xF) {
         if (fp->cpu.level < 5) {
             switch_cmd = 0;
-        } else if (fp->motion_id == 0x26) {
+        } else if (fp->motion_id == ftCo_MS_DamageFall) {
             switch_cmd = 1;
         } else {
             switch_cmd = 0;
@@ -7988,9 +7990,9 @@ void ftCo_800B2790(Fighter* fp)
                 ftCo_800AC434(fp);
                 break;
             case 19:
-                if (fp->motion_id == 0x131) {
+                if (fp->motion_id == ftCo_MS_WarpStarJump) {
                     special_floor = 1;
-                } else if (fp->motion_id == 0x132) {
+                } else if (fp->motion_id == ftCo_MS_WarpStarFall) {
                     special_floor = 2;
                 }
                 if (special_floor == 0) {
