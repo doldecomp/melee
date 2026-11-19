@@ -34,7 +34,7 @@ bool ftCo_800D730C(Fighter_GObj* gobj, bool arg1)
 
     fp = GET_FIGHTER(gobj);
     x2d0 = fp->x2D0;
-    if (fp->motion_id == 0x9B) {
+    if (fp->motion_id == ftCo_MS_ItemScrewAir) {
         if (ft_did_jump(fp, arg1)) {
             ftCo_800D74A4(gobj);
             return 1;

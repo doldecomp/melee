@@ -373,8 +373,9 @@ void ftCo_8009DD94(Fighter_GObj* gobj, bool arg1)
             ret_B0 = false;
         } else {
             kind = fp->kind;
-            if (kind == Ft_Kind_Mewtwo && fp->motion_id >= 0xDF &&
-                fp->motion_id <= 0xE8)
+            if (kind == Ft_Kind_Mewtwo &&
+                fp->motion_id >= ftCo_MS_CapturePulledHi &&
+                fp->motion_id <= ftCo_MS_CaptureFoot)
             {
                 ret_B0 = true;
             } else if (fp->ground_or_air == GA_Air || kind == Ft_Kind_Koopa ||

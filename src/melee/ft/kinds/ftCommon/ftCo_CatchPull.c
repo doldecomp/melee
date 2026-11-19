@@ -26,7 +26,7 @@ void fn_800D9CE8(Fighter_GObj* gobj)
     fp->gr_vel = 0.0f;
     frame = fp->cur_anim_frame;
     startFrame = frame;
-    if (fp->motion_id == 0xD4) {
+    if (fp->motion_id == ftCo_MS_Catch) {
         nextMotion = 0xD5;
         if (fp->kind == Ft_Kind_Yoshi) {
             yattrs = fp->dat_attrs;

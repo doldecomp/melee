@@ -2682,7 +2682,8 @@ void Fighter_8006CDA4(Fighter* fp, s32 arg1)
     temp_bool = !(fp->x2220_b3 || fp->x2220_b4 || ftCo_8008E984(fp));
     vec = vec3_803B7494;
 
-    if (fp->motion_id != 0x145 && (unsigned) fp->motion_id - 0x122 > 1 &&
+    if (fp->motion_id != ftCo_MS_DamageIce &&
+        (unsigned) fp->motion_id - ftCo_MS_ThrownKirbyStar > 1 &&
         fp->dmg.x1860_element != HitElement_Cape && !fp->x2226_b2)
     {
         if ( ///// giant if condition

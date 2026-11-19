@@ -275,7 +275,7 @@ void ftCo_800DD724(Fighter_GObj* gobj)
             pl_80040614(fp->player_idx, fp->is_sub_fighter,
                         GET_FIGHTER(victim)->grab_timer);
             ftCo_800DE2A8(gobj, victim);
-            ftCo_800DE7C0(victim, gobj, fp->motion_id == 222);
+            ftCo_800DE7C0(victim, gobj, fp->motion_id == ftCo_MS_ThrowLw);
         }
     }
     if (fp->cmd_vars[0] != 0 && fp->mv.co.fighterthrow.x4 == 0) {
@@ -286,7 +286,7 @@ void ftCo_800DD724(Fighter_GObj* gobj)
         if (fp->victim_gobj != NULL) {
             ftCo_800DE920(fp->victim_gobj, fp->cur_anim_frame);
         }
-        if (fp->kind == Ft_Kind_Kirby && fp->motion_id == 221) {
+        if (fp->kind == Ft_Kind_Kirby && fp->motion_id == ftCo_MS_ThrowHi) {
             fp->x2219_b2 = 0;
             if (fp->victim_gobj != NULL) {
                 GET_FIGHTER(fp->victim_gobj)->x2219_b2 = 0;
@@ -440,7 +440,7 @@ void ftCo_ThrowHi_Coll(Fighter_GObj* gobj)
 void ftCo_ThrowHi_Cam(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if (fp->kind == Ft_Kind_Kirby && fp->motion_id == 221) {
+    if (fp->kind == Ft_Kind_Kirby && fp->motion_id == ftCo_MS_ThrowHi) {
         ftCamera_800762F4(gobj);
     } else {
         ftCamera_UpdateCameraBox(gobj);
