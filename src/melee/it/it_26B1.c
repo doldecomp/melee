@@ -32,6 +32,7 @@
 #include <melee/ft/types.h>
 #include <melee/gm/gm_unsplit.h>
 #include <melee/lb/lb_00B0.h>
+#include <Runtime/fma.h>
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/jobj.h>
 
@@ -65,11 +66,12 @@ f32 it_8026B1D4(HSD_GObj* gobj, HitCapsule* itemHitboxUnk)
     f32 ret = itemHitboxUnk->damage;
     const Item* ip = gobj->user_data;
     if (ip->xDC8_word.flags.x14 != 0) {
-        f32 itemSpeed = my_sqrtf(ip->x40_vel.x * ip->x40_vel.x +
-                                 ip->x40_vel.y * ip->x40_vel.y +
-                                 ip->x40_vel.z * ip->x40_vel.z);
+        f32 itemSpeed =
+            my_sqrtf(FMA_ADD_MUL(FMA_MUL_ADD(ip->x40_vel.x, ip->x40_vel.x,
+                                             ip->x40_vel.y * ip->x40_vel.y),
+                                 ip->x40_vel.z, ip->x40_vel.z));
 
-        ret += itemSpeed * it_804D6D28->x80_float[5];
+        FMA_ADD_TO(ret, itemSpeed, it_804D6D28->x80_float[5]);
         ret += it_804D6D28->x80_float[6];
         if (ret <= 1.0) {
             return ret = 1;
@@ -143,7 +145,7 @@ void it_8026B344(HSD_GObj* gobj, Vec3* pos)
     Item* ip;
 
     ip = gobj->user_data;
-    pos->x = ((ip->facing_dir * ip->xBCC_unk.x) + ip->pos.x);
+    pos->x = (FMA_MUL_ADD(ip->facing_dir, ip->xBCC_unk.x, ip->pos.x));
     pos->y = (ip->pos.y + ip->xBCC_unk.y);
     pos->z = ip->pos.z;
 }
@@ -217,7 +219,7 @@ void it_8026B40C(Article* article, ItemKind kind)
 float it_8026B424(int damage)
 {
     ItemCommonData* itCommonData = it_804D6D28;
-    return (int) ((damage * itCommonData->xB8) + itCommonData->xBC);
+    return (int) (FMA_MUL_ADD(damage, itCommonData->xB8, itCommonData->xBC));
 }
 
 /// Get heal value of healing items
@@ -1092,7 +1094,7 @@ HSD_GObj* it_8026C258(Vec3* pos, f32 facing_dir)
         {
             f32 dist_x = pos->x - ip->pos.x;
             f32 dist_y = pos->y - ip->pos.y;
-            f32 sq_dist = dist_x * dist_x + dist_y * dist_y;
+            f32 sq_dist = FMA_MUL_ADD(dist_x, dist_x, dist_y * dist_y);
 
             if (sq_dist < min_sq_dist) {
                 min_sq_dist = sq_dist;

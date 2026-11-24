@@ -18,6 +18,7 @@
 #include <melee/ft/types.h>
 #include <melee/lb/lbvector.h>
 #include <melee/pl/player.h>
+#include <Runtime/fma.h>
 #include <sysdolphin/baselib/random.h>
 
 static inline float my_sqrtf(float x)
@@ -26,9 +27,9 @@ static inline float my_sqrtf(float x)
 
     if (x > 0) {
         double guess = __frsqrte((double) x);
-        guess = .5 * guess * (3.0 - guess * guess * x);
-        guess = .5 * guess * (3.0 - guess * guess * x);
-        guess = .5 * guess * (3.0 - guess * guess * x);
+        guess = .5 * guess * (FMA_SUB_MUL(3.0, guess * guess, x));
+        guess = .5 * guess * (FMA_SUB_MUL(3.0, guess * guess, x));
+        guess = .5 * guess * (FMA_SUB_MUL(3.0, guess * guess, x));
         y = (float) (x * guess);
         return y;
     }
@@ -37,7 +38,8 @@ static inline float my_sqrtf(float x)
 
 static inline float my_lbVector_Len(Vec3* vec)
 {
-    return my_sqrtf(vec->x * vec->x + vec->y * vec->y + vec->z * vec->z);
+    return my_sqrtf(
+        FMA_ADD_MUL(vec->x * vec->x + vec->y * vec->y, vec->z, vec->z));
 }
 
 void ftCh_Init_80157DF8(HSD_GObj* gobj)

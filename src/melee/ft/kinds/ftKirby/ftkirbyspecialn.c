@@ -38,6 +38,7 @@
 #include <melee/lb/lb_00B0.h>
 #include <melee/lb/lbanim.h>
 #include <melee/mp/mpcoll.h>
+#include <Runtime/fma.h>
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/random.h>
 
@@ -223,7 +224,7 @@ void ftKb_SpecialN_800F5B5C(Fighter_GObj* gobj, Vec3* output)
     Fighter* fp = getFighterPlus(gobj);
     ftKb_DatAttrs* da = fp->dat_attrs;
     *output = fp->cur_pos;
-    output->x += da->specialn_x_offset_inhaled * fp->facing_dir;
+    FMA_ADD_TO(output->x, da->specialn_x_offset_inhaled, fp->facing_dir);
     output->y += da->specialn_y_offset_inhaled;
 }
 

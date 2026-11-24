@@ -26,6 +26,7 @@
 #include <melee/it/item.h>
 #include <melee/lb/lb_00B0.h>
 #include <melee/pl/plbonuslib.h>
+#include <Runtime/fma.h>
 
 /* 09549C */ static void ftCo_800958FC(Fighter_GObj* gobj, int);
 /* 0955D0 */ static void ftCo_80095A30(Fighter_GObj* gobj);
@@ -485,11 +486,11 @@ void ftCo_80095EFC(Fighter_GObj* gobj)
                         throw_speed_arr[fp->motion_id - ftCo_MS_LightThrowF]
                             .x8;
                     throw_speed = scale.value;
-                    interpolation =
-                        fsm * (fp->mv.co.itemthrow4.x8.x - vec0.x) + vec0.x;
+                    interpolation = FMA_MUL_ADD(
+                        fsm, (fp->mv.co.itemthrow4.x8.x - vec0.x), vec0.x);
                     vec2.x = interpolation;
-                    interpolation =
-                        fsm * (fp->mv.co.itemthrow4.x8.y - vec0.y) + vec0.y;
+                    interpolation = FMA_MUL_ADD(
+                        fsm, (fp->mv.co.itemthrow4.x8.y - vec0.y), vec0.y);
                     vec2.y = interpolation;
                     vec2.z = 0;
                     pl_8003E978(fp->player_idx, fp->is_sub_fighter,

@@ -10,6 +10,7 @@
 #include <melee/ft/ftanim.h>
 #include <melee/ft/ftcommon.h>
 #include <melee/ft/types.h>
+#include <Runtime/fma.h>
 
 /* 099E44 */ static void ftCo_80099E44(Fighter_GObj* gobj);
 
@@ -24,8 +25,8 @@ void ftCo_80099D9C(Fighter_GObj* gobj)
         fp->mv.co.rebound.anim_speed =
             (fp->co_attrs.clank_animation_length + 0.1f) / fp_x191C;
         fp->mv.co.rebound.x0 =
-            -fp->dmg.facing_dir *
-            (fp_x191C * p_ftCommonData->x3D8 + p_ftCommonData->x3DC);
+            -fp->dmg.facing_dir * (FMA_MUL_ADD(fp_x191C, p_ftCommonData->x3D8,
+                                               p_ftCommonData->x3DC));
     }
     ftCommon_800804A0(fp, fp->mv.co.rebound.x0);
 }

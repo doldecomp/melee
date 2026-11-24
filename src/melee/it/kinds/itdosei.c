@@ -7,6 +7,7 @@
 #include <melee/it/itgroundcoll.h>
 #include <melee/it/itmaplib.h>
 #include <melee/lb/lb_00B0.h>
+#include <Runtime/fma.h>
 #include <sysdolphin/baselib/random.h>
 
 #ifdef MUST_MATCH
@@ -76,7 +77,7 @@ static inline void HSD_JObjSetRotationZeroWithMtxDirty(Item_GObj* gobj)
 static inline f32 itDosei_FacingAngle(Item_GObj* gobj, f32 m)
 {
     f32 facing_dir = GET_ITEM(gobj)->facing_dir;
-    f32 angle = (facing_dir * M_PI_2) + (facing_dir * m);
+    f32 angle = FMA_MUL_ADD(facing_dir, M_PI_2, (facing_dir * m));
     return angle;
 }
 
@@ -185,8 +186,8 @@ bool itDosei_UnkMotion1_Anim(Item_GObj* gobj)
     ip = gobj->user_data;
     ip->xDD4_itemVar.dosei.xDE4 = ip->pos;
     ip2 = gobj->user_data;
-    frame_speed =
-        0.5F * (ip2->x378_itemColl.floor.normal.x * ip2->facing_dir) + 1.0F;
+    frame_speed = FMA_MUL_ADD(
+        0.5F, (ip2->x378_itemColl.floor.normal.x * ip2->facing_dir), 1.0F);
     jobj = gobj->hsd_obj;
     ip->x5D0_animFrameSpeed = frame_speed;
     lb_8000BA0C(jobj, frame_speed);

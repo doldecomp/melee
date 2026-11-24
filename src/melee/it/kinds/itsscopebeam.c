@@ -10,6 +10,7 @@
 #include <melee/it/item.h>
 #include <melee/it/itgroundcoll.h>
 #include <melee/lb/lbvector.h>
+#include <Runtime/fma.h>
 #include <sysdolphin/baselib/random.h>
 
 ItemStateTable it_803F6568[] = {
@@ -166,7 +167,8 @@ bool itSscopebeam_UnkMotion9_Coll(Item_GObj* gobj)
             rand = HSD_Randf();
             lbVector_RotateAboutUnitAxis(
                 &vel, &axis,
-                (2.0f * angle) + (ip->facing_dir * (attrs->x78 * rand)));
+                FMA_MUL_ADD(2.0f, angle,
+                            (ip->facing_dir * (attrs->x78 * rand))));
             ip->x40_vel.x = vel.x;
             ip->x40_vel.y = vel.y;
             if (ip->x40_vel.y <= 0.0f) {

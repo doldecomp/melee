@@ -19,6 +19,7 @@
 #include <melee/ft/types.h>
 #include <melee/it/kinds/itmewtwodisable.h>
 #include <melee/lb/lb_00B0.h>
+#include <Runtime/fma.h>
 
 /// SpecialLw/SpecialAirLw
 
@@ -219,7 +220,8 @@ void ftMt_SpecialLw_CreateDisable(HSD_GObj* gobj)
 
         lb_8000B1CC(fp->parts[FtPart_L3rdNb].joint, NULL, &sp18);
 
-        sp18.x += (mewtwoAttrs->x80_MEWTWO_DISABLE_OFFSET_X * fp->facing_dir);
+        FMA_ADD_TO(sp18.x, mewtwoAttrs->x80_MEWTWO_DISABLE_OFFSET_X,
+                   fp->facing_dir);
         sp18.y += mewtwoAttrs->x84_MEWTWO_DISABLE_OFFSET_Y;
 
         fp->u.mt.x222C_disableGObj =

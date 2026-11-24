@@ -18,6 +18,7 @@
 #include <melee/ft/kinds/ftCommon/inlines.h>
 #include <melee/it/kinds/itseakneedleheld.h>
 #include <melee/it/kinds/itseakneedlethrown.h>
+#include <Runtime/fma.h>
 #include <sysdolphin/baselib/random.h>
 
 /* 1120D4 */ static void ftSk_SpecialN_801120D4(Fighter_GObj* gobj);
@@ -44,7 +45,7 @@ void ftSk_SpecialN_80111FBC(HSD_GObj* gobj)
                 } else {
                     y_scale = da->xC;
                 }
-                pos.y += fp->x34_scale.y * y_scale;
+                FMA_ADD_TO(pos.y, fp->x34_scale.y, y_scale);
             }
             pos.z = 0;
             {
@@ -435,16 +436,16 @@ void shootNeedles(Fighter_GObj* gobj)
             int rand;
             if (fp->ground_or_air == GA_Ground) {
                 x_scale = da->x0 * fp->facing_dir;
-                pos.x += fp->x34_scale.y * x_scale;
+                FMA_ADD_TO(pos.x, fp->x34_scale.y, x_scale);
                 rand = HSD_Randi(9);
                 y_scale = da->x4 + needleYPosScale[rand];
-                pos.y += fp->x34_scale.y * y_scale;
+                FMA_ADD_TO(pos.y, fp->x34_scale.y, y_scale);
             } else {
                 x_scale = da->x8 * fp->facing_dir;
-                pos.x += fp->x34_scale.y * x_scale;
+                FMA_ADD_TO(pos.x, fp->x34_scale.y, x_scale);
                 rand = HSD_Randi(9);
-                y_scale = (2.0f * needleYPosScale[rand]) + da->xC;
-                pos.y += fp->x34_scale.y * y_scale;
+                y_scale = FMA_MUL_ADD(2.0f, needleYPosScale[rand], da->xC);
+                FMA_ADD_TO(pos.y, fp->x34_scale.y, y_scale);
             }
             pos.z = 0;
 

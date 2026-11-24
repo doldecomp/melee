@@ -14,6 +14,7 @@
 #include <melee/ty/toy.h>
 #include <melee/ty/tydisplay.h>
 #include <melee/ty/types.h>
+#include <Runtime/fma.h>
 #include <sysdolphin/baselib/archive.h>
 #include <sysdolphin/baselib/cobj.h>
 #include <sysdolphin/baselib/debug.h>
@@ -162,10 +163,11 @@ void gm_801A85E4(HSD_JObj* jobj, s32 arg1, s32 arg2)
             arg2 = 4 - idx;
             idx = arg2 + 2;
         }
-        angle =
-            0.017453292f * ((45.0f * (f32) idx) + (2.0f * HSD_Randf()) - 1.0f);
+        angle = 0.017453292f *
+                (FMA_MUL_ADD(45.0f, (f32) idx, (2.0f * HSD_Randf())) - 1.0f);
         HSD_JObjSetTranslateX(jobj, 25.0f * cosf(angle));
-        HSD_JObjSetTranslateZ(jobj, 0.9f * ((25.0f * -sinf(angle)) + -18.0f));
+        HSD_JObjSetTranslateZ(
+            jobj, 0.9f * (FMA_MUL_ADD(25.0f, -sinf(angle), -18.0f)));
     } else if (arg1 <= 0xC) {
         arg2 = 0xC - arg1;
         temp_idx = arg2 + 8;
@@ -174,10 +176,12 @@ void gm_801A85E4(HSD_JObj* jobj, s32 arg1, s32 arg2)
             arg2 = 0xC - idx;
             idx = arg2 + 8;
         }
-        angle = 0.017453292f *
-                ((25.714285f * (f32) (idx - 5)) + (4.0f * HSD_Randf()) - 2.0f);
+        angle = 0.017453292f * (FMA_MUL_ADD(25.714285f, (f32) (idx - 5),
+                                            (4.0f * HSD_Randf())) -
+                                2.0f);
         HSD_JObjSetTranslateX(jobj, 50.0f * cosf(angle));
-        HSD_JObjSetTranslateZ(jobj, 0.9f * ((50.0f * -sinf(angle)) + -18.0f));
+        HSD_JObjSetTranslateZ(
+            jobj, 0.9f * (FMA_MUL_ADD(50.0f, -sinf(angle), -18.0f)));
     } else if (arg1 <= 0x15) {
         arg2 = 0x15 - arg1;
         temp_idx = arg2 + 0x11;
@@ -186,10 +190,11 @@ void gm_801A85E4(HSD_JObj* jobj, s32 arg1, s32 arg2)
             arg2 = 0x15 - idx;
             idx = arg2 + 0x11;
         }
-        angle =
-            0.017453292f * ((22.5f * (f32) (idx - 0xD)) + HSD_Randf() - 0.5f);
+        angle = 0.017453292f *
+                (FMA_MUL_ADD(22.5f, (f32) (idx - 0xD), HSD_Randf()) - 0.5f);
         HSD_JObjSetTranslateX(jobj, 75.0f * cosf(angle));
-        HSD_JObjSetTranslateZ(jobj, 0.8f * ((75.0f * -sinf(angle)) + -18.0f));
+        HSD_JObjSetTranslateZ(
+            jobj, 0.8f * (FMA_MUL_ADD(75.0f, -sinf(angle), -18.0f)));
     } else if (arg1 == 0x16) {
         HSD_JObjSetTranslateX(jobj, -80.0f);
         HSD_JObjSetTranslateZ(jobj, -70.0f);

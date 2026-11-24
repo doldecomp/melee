@@ -19,6 +19,7 @@
 #include <melee/lb/lbshadow.h>
 #include <melee/lb/lbvector.h>
 #include <melee/mp/mplib.h>
+#include <Runtime/fma.h>
 #include <sysdolphin/baselib/debug.h>
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/gobjproc.h>
@@ -1076,10 +1077,12 @@ void grMuteCity_801F0D20(Ground_GObj* gobj)
         angle = atan2f(sp1C.y - sp28.y, sp1C.x - sp28.x);
         angle_back = (3.1415927f + angle) - 0.2617994f;
         angle_fwd = 0.2617994f + angle;
-        mpLineSetPos(0x31, (10.0f * cosf(angle_back)) + sp28.x,
-                     (10.0f * sinf(angle_back)) + sp28.y, sp28.x, sp28.y);
-        mpLineSetPos(0x35, sp1C.x, sp1C.y, (10.0f * cosf(angle_fwd)) + sp1C.x,
-                     (10.0f * sinf(angle_fwd)) + sp1C.y);
+        mpLineSetPos(0x31, FMA_MUL_ADD(10.0f, cosf(angle_back), sp28.x),
+                     FMA_MUL_ADD(10.0f, sinf(angle_back), sp28.y), sp28.x,
+                     sp28.y);
+        mpLineSetPos(0x35, sp1C.x, sp1C.y,
+                     FMA_MUL_ADD(10.0f, cosf(angle_fwd), sp1C.x),
+                     FMA_MUL_ADD(10.0f, sinf(angle_fwd), sp1C.y));
     } else {
         mpLineSetPos(0x31, sp28.x - 5.0f, sp28.y, sp28.x, sp28.y);
         mpLineSetPos(0x35, sp1C.x, sp1C.y, 5.0f + sp1C.x, sp1C.y);
@@ -1088,8 +1091,10 @@ void grMuteCity_801F0D20(Ground_GObj* gobj)
     gp->u.mutecity.xE4 = sp28;
     gp->u.mutecity.xF0 = sp1C;
     lbVector_Diff(&sp1C, &sp28, &sp10);
-    mpLineSetPos(0x33, sp28.x + (0.35f * sp10.x), sp28.y + (0.35f * sp10.y),
-                 sp28.x + (0.65f * sp10.x), sp28.y + (0.65f * sp10.y));
+    mpLineSetPos(0x33, FMA_ADD_MUL(sp28.x, 0.35f, sp10.x),
+                 FMA_ADD_MUL(sp28.y, 0.35f, sp10.y),
+                 FMA_ADD_MUL(sp28.x, 0.65f, sp10.x),
+                 FMA_ADD_MUL(sp28.y, 0.65f, sp10.y));
     mpLib_80055E24(4);
     mpLib_8005667C(4);
 }
@@ -1501,7 +1506,7 @@ static inline f32 grMc_SmokeAge(void)
 
 static inline f32 grMc_RandomWreckOffset(void)
 {
-    return (1.0471976f * HSD_Randf()) - 0.5235988f;
+    return FMA_MUL_SUB(1.0471976f, HSD_Randf(), 0.5235988f);
 }
 
 void grMuteCity_801F1A34(HSD_GObj* arg0, Ground_GObj* arg1)
@@ -1591,12 +1596,18 @@ void grMuteCity_801F1A34(HSD_GObj* arg0, Ground_GObj* arg1)
         PSVECCrossProduct(&spB4, &sp90, &spA8);
         lbVector_Normalize(&spA8);
 
-        car_pos.x = (3.0 * sp90.x) +
-                    (((spC0.x - spCC.x) * grMc_8049F4B8[car_idx].xC) + spCC.x);
-        car_pos.y = (3.0 * sp90.y) +
-                    (((spC0.y - spCC.y) * grMc_8049F4B8[car_idx].xC) + spCC.y);
-        car_pos.z = (3.0 * sp90.z) +
-                    (((spC0.z - spCC.z) * grMc_8049F4B8[car_idx].xC) + spCC.z);
+        car_pos.x =
+            FMA_MUL_ADD(3.0, sp90.x,
+                        (FMA_MUL_ADD((spC0.x - spCC.x),
+                                     grMc_8049F4B8[car_idx].xC, spCC.x)));
+        car_pos.y =
+            FMA_MUL_ADD(3.0, sp90.y,
+                        (FMA_MUL_ADD((spC0.y - spCC.y),
+                                     grMc_8049F4B8[car_idx].xC, spCC.y)));
+        car_pos.z =
+            FMA_MUL_ADD(3.0, sp90.z,
+                        (FMA_MUL_ADD((spC0.z - spCC.z),
+                                     grMc_8049F4B8[car_idx].xC, spCC.z)));
         grMc_8049F4B8[car_idx].pos = car_pos;
 
         HSD_JObjSetTranslate(jobj, &car_pos);
@@ -1613,9 +1624,9 @@ void grMuteCity_801F1A34(HSD_GObj* arg0, Ground_GObj* arg1)
                 grLib_801C96F8(0x11A, 0, &car_pos);
                 if (sound_count < 1) {
                     if (car_pos.z < 0.0f) {
-                        spline_t = (car_pos.z * car_pos.z) +
-                                   ((car_pos.x * car_pos.x) +
-                                    (car_pos.y * car_pos.y));
+                        spline_t = FMA_MUL_ADD(car_pos.z, car_pos.z,
+                                               ((car_pos.x * car_pos.x) +
+                                                (car_pos.y * car_pos.y)));
                         distance = sqrtf(spline_t);
                         spline_t = distance;
                         if (spline_t < 300.0f) {
@@ -1956,7 +1967,7 @@ bool grMuteCity_801F2C10(Vec3* pos, int arg, HSD_JObj* jobj)
                 }
                 slope = (gp->u.mutecity.xF0.y - gp->u.mutecity.xE4.y) /
                         (x_max - x_min);
-                y = slope * (x - x_min) + gp->u.mutecity.xE4.y;
+                y = FMA_MUL_ADD(slope, (x - x_min), gp->u.mutecity.xE4.y);
                 if (pos->y > y - 3.0F) {
                     return true;
                 }

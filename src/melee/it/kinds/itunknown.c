@@ -11,6 +11,7 @@
 #include <melee/it/it_279C.h>
 #include <melee/it/item.h>
 #include <melee/lb/lbvector.h>
+#include <Runtime/fma.h>
 #include <sysdolphin/baselib/random.h>
 
 ItemStateTable it_803F7D60[] = {
@@ -84,7 +85,7 @@ void itUnknown_UnkMotion0_Phys(Item_GObj* gobj)
     itUnknownAttributes* attr =
         &ip->xC4_article_data->x4_specialAttributes->unknown;
     it_80272860(gobj, attr->xC, attr->x10);
-    ip->x40_vel.x += attr->x4 * ip->xDD4_itemVar.unknown.x60;
+    FMA_ADD_TO(ip->x40_vel.x, attr->x4, ip->xDD4_itemVar.unknown.x60);
 }
 
 bool itUnknown_UnkMotion0_Coll(Item_GObj* gobj)

@@ -20,6 +20,7 @@
 #include <melee/it/item.h>
 #include <melee/it/itgroundcoll.h>
 #include <melee/lb/lbvector.h>
+#include <Runtime/fma.h>
 #include <sysdolphin/baselib/random.h>
 
 #define itkpf_Floor 1
@@ -143,11 +144,12 @@ Item_GObj* itKoopaFlame_Spawn(Fighter_GObj* parent, Vec* pos, f32 facing_dir,
         min = attrs->x8_min_speed;
         range = attrs->xC_max_speed - min;
         it->xDD4_itemVar.koopaflame.x28_speed =
-            it->xDD4_itemVar.koopaflame.x38_base_speed * (range * rng + min);
+            it->xDD4_itemVar.koopaflame.x38_base_speed *
+            (FMA_MUL_ADD(range, rng, min));
         rng = HSD_Randf();
         range = attrs->x14_max_angle - attrs->x10_min_angle;
         it->xDD4_itemVar.koopaflame.x24_angle =
-            range * rng + attrs->x10_min_angle;
+            FMA_MUL_ADD(range, rng, attrs->x10_min_angle);
         it->xDD4_itemVar.koopaflame.x24_angle =
             (it->facing_dir == 1.0f) ? it->xDD4_itemVar.koopaflame.x24_angle
                                      : -it->xDD4_itemVar.koopaflame.x24_angle;

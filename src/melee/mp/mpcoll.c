@@ -17,6 +17,7 @@
 #include <melee/lb/lb_00B0.h>
 #include <melee/lb/lbvector.h>
 #include <melee/lb/types.h>
+#include <Runtime/fma.h>
 #include <sysdolphin/baselib/debug.h>
 #include <sysdolphin/baselib/gobj.h>
 
@@ -536,13 +537,13 @@ void mpColl_LoadECB_Fixed(CollData* coll)
         update_min_max_2(&left_x, &right_x, rot_bot_x);
         update_min_max_2(&bottom_y, &top_y, rot_bot_y);
 
-        rot_right_x = (orig_right_x * cos) - (midpoint_x * sin);
-        rot_right_y = (orig_right_x * sin) + (midpoint_x * cos);
+        rot_right_x = FMA_SUB_MUL((orig_right_x * cos), midpoint_x, sin);
+        rot_right_y = FMA_ADD_MUL((orig_right_x * sin), midpoint_x, cos);
         update_min_max_2(&left_x, &right_x, rot_right_x);
         update_min_max_2(&bottom_y, &top_y, rot_right_y);
 
-        rot_left_x = (orig_left_x * cos) - (midpoint_x * sin);
-        rot_left_y = (orig_left_x * sin) + (midpoint_x * cos);
+        rot_left_x = FMA_MUL_SUB(orig_left_x, cos, (midpoint_x * sin));
+        rot_left_y = FMA_MUL_ADD(orig_left_x, sin, (midpoint_x * cos));
         update_min_max_2(&left_x, &right_x, rot_left_x);
         update_min_max_2(&bottom_y, &top_y, rot_left_y);
     }
@@ -642,8 +643,8 @@ void mpColl_LoadECB(CollData* coll)
 
 static inline void Vec2_Interpolate(float time, Vec2* dest, Vec2* src)
 {
-    dest->x += time * (src->x - dest->x);
-    dest->y += time * (src->y - dest->y);
+    FMA_ADD_TO(dest->x, time, (src->x - dest->x));
+    FMA_ADD_TO(dest->y, time, (src->y - dest->y));
 }
 
 void mpCollInterpolateECB(CollData* coll, float time)
@@ -972,7 +973,7 @@ void mpColl_800439FC(CollData* coll)
     right_dx = ABS(coll->ecb.right.x);
 
     // recalculate ceiling direction from its normal
-    probe_x = (coll->ceiling.normal.y * right_dx) + right_x;
+    probe_x = FMA_MUL_ADD(coll->ceiling.normal.y, right_dx, right_x);
     probe_y = -(coll->ceiling.normal.x * right_dx) + right_y;
     if (!mpCheckLeftWall(probe_x, probe_y, right_x, right_y, &coll->contact,
                          NULL, NULL, NULL, coll->joint_id_skip,
@@ -1008,7 +1009,7 @@ void mpColl_80043ADC(CollData* coll)
 
     // recalculate ceiling direction from its normal
     probe_x = -(coll->ceiling.normal.y * left_dx) + left_x;
-    probe_y = (coll->ceiling.normal.x * left_dx) + left_y;
+    probe_y = FMA_MUL_ADD(coll->ceiling.normal.x, left_dx, left_y);
     if (!mpCheckRightWall(probe_x, probe_y, left_x, left_y, &coll->contact,
                           NULL, NULL, NULL, coll->joint_id_skip,
                           coll->joint_id_only))
@@ -1064,7 +1065,7 @@ void mpColl_80043C6C(CollData* coll, int line_id, bool ignore_bottom)
     if (mpLib_8004E398_LeftWall(line_id, &pos, NULL, NULL, NULL) != -1) {
         // recalculate floor direction from its normal
         float floor_x = -(coll->floor.normal.y * right_dx) + pos.x;
-        float floor_y = (coll->floor.normal.x * right_dx) + pos.y;
+        float floor_y = FMA_MUL_ADD(coll->floor.normal.x, right_dx, pos.y);
         if (mpCheckLeftWall(floor_x, floor_y, pos.x, pos.y, &coll->contact,
                             &wall_id, NULL, NULL, coll->joint_id_skip,
                             coll->joint_id_only))
@@ -1087,8 +1088,9 @@ void mpColl_80043C6C(CollData* coll, int line_id, bool ignore_bottom)
         mpLeftWallGetTop(line_id, &pos);
         probe_x = pos.x - 2.0F;
         probe_y = pos.y;
-        pos.x = -((2.0F * right_dx) - probe_x);
-        pos.y = -((2.0F * (coll->ecb.right.y - coll->ecb.bottom.y)) - probe_y);
+        pos.x = -(FMA_MUL_SUB(2.0F, right_dx, probe_x));
+        pos.y = -(FMA_MUL_SUB(2.0F, (coll->ecb.right.y - coll->ecb.bottom.y),
+                              probe_y));
         if (mpCheckFloor(probe_x, probe_y, pos.x, pos.y, 0.0F, &coll->contact,
                          NULL, NULL, NULL, coll->floor_skip,
                          coll->joint_id_skip, coll->joint_id_only, NULL, NULL))
@@ -1144,7 +1146,7 @@ void mpColl_80043F40(CollData* coll, int line_id, bool ignore_bottom)
     pos.y = coll->cur_pos.y + coll->ecb.left.y;
     if (mpLib_8004E684_RightWall(line_id, &pos, NULL, NULL, NULL) != -1) {
         // recalculate floor direction from its normal
-        float floor_x = (coll->floor.normal.y * left_dx) + pos.x;
+        float floor_x = FMA_MUL_ADD(coll->floor.normal.y, left_dx, pos.x);
         float floor_y = -(coll->floor.normal.x * left_dx) + pos.y;
         if (mpCheckRightWall(floor_x, floor_y, pos.x, pos.y, &coll->contact,
                              &wall_id, NULL, NULL, coll->joint_id_skip,
@@ -1169,7 +1171,7 @@ void mpColl_80043F40(CollData* coll, int line_id, bool ignore_bottom)
         probe_x = 2.0F + pos.x;
         probe_y = pos.y;
         // 2.0 * (ecb bottom -> ecb left).normal() + ecb left
-        pos.x = 2.0F * left_dx + probe_x;
+        pos.x = FMA_MUL_ADD(2.0F, left_dx, probe_x);
         pos.y = -(2.0F * (coll->ecb.left.y - coll->ecb.bottom.y)) + probe_y;
         if (mpCheckFloor(probe_x, probe_y, pos.x, pos.y, 0.0F, &coll->contact,
                          NULL, NULL, NULL, coll->floor_skip,
@@ -1819,8 +1821,8 @@ bool mpColl_800454A4_RightWall(CollData* coll)
                     mpLineGetKind(line_id) & CollLine_RightWall)
                 {
                     mpLineGetNormal(line_id, &nrm);
-                    x = (pos.y - top.y) / nrm.x * -nrm.y + top.x - pos.x +
-                        0.5F;
+                    x = FMA_MUL_ADD((pos.y - top.y) / nrm.x, -nrm.y, top.x) -
+                        pos.x + 0.5F;
                     if (mpColl_804D6490_max_x < coll->cur_pos.x + x) {
                         u32 temp = mpLineGetFlags(line_id);
                         mpColl_804D6490_max_x = coll->cur_pos.x + x;
@@ -1849,9 +1851,10 @@ bool mpColl_800454A4_RightWall(CollData* coll)
             mpLineGetV1Pos(j, &pos);
 
             if (bot <= pos.y && pos.y <= mid) {
-                x = lower_slope * (pos.y - bot) + coll->ecb.bottom.x;
+                x = FMA_MUL_ADD(lower_slope, (pos.y - bot),
+                                coll->ecb.bottom.x);
             } else if (mid <= pos.y && pos.y <= top) {
-                x = upper_slope * (pos.y - top) + coll->ecb.top.x;
+                x = FMA_MUL_ADD(upper_slope, (pos.y - top), coll->ecb.top.x);
             } else if (pos.y < bot) {
                 break;
             } else {
@@ -1876,9 +1879,10 @@ bool mpColl_800454A4_RightWall(CollData* coll)
             mpLineGetV0Pos(wall_id, &pos);
 
             if (bot <= pos.y && pos.y <= mid) {
-                x = lower_slope * (pos.y - bot) + coll->ecb.bottom.x;
+                x = FMA_MUL_ADD(lower_slope, (pos.y - bot),
+                                coll->ecb.bottom.x);
             } else if (mid <= pos.y && pos.y <= top) {
-                x = upper_slope * (pos.y - top) + coll->ecb.top.x;
+                x = FMA_MUL_ADD(upper_slope, (pos.y - top), coll->ecb.top.x);
             } else if (pos.y > top) {
                 break;
             } else {
@@ -2132,8 +2136,8 @@ bool mpColl_80046224_LeftWall(CollData* coll)
                     Vec3 nrm;
                     PAD_STACK(0x44);
                     mpLineGetNormal(line_id2, &nrm);
-                    x = (pos.y - vec.y) / -nrm.x * nrm.y + vec.x - pos.x -
-                        0.5F;
+                    x = FMA_MUL_ADD((pos.y - vec.y) / -nrm.x, nrm.y, vec.x) -
+                        pos.x - 0.5F;
                     if (mpColl_804D6490_max_x > coll->cur_pos.x + x) {
                         u32 temp = mpLineGetFlags(line_id2);
                         mpColl_804D6490_max_x = coll->cur_pos.x + x;
@@ -2166,9 +2170,11 @@ bool mpColl_80046224_LeftWall(CollData* coll)
                 mpLineGetV0Pos(line_id2, &pos);
 
                 if (bot <= pos.y && pos.y <= mid) {
-                    x = lower_slope * (pos.y - bot) + coll->ecb.bottom.x;
+                    x = FMA_MUL_ADD(lower_slope, (pos.y - bot),
+                                    coll->ecb.bottom.x);
                 } else if (mid <= pos.y && pos.y <= top) {
-                    x = upper_slope * (pos.y - top) + coll->ecb.top.x;
+                    x = FMA_MUL_ADD(upper_slope, (pos.y - top),
+                                    coll->ecb.top.x);
                 } else if (pos.y < bot) {
                     break;
                 } else {
@@ -2194,9 +2200,10 @@ bool mpColl_80046224_LeftWall(CollData* coll)
             mpLineGetV1Pos(wall_id, &pos);
 
             if (bot <= pos.y && pos.y <= mid) {
-                x = lower_slope * (pos.y - bot) + coll->ecb.bottom.x;
+                x = FMA_MUL_ADD(lower_slope, (pos.y - bot),
+                                coll->ecb.bottom.x);
             } else if (mid <= pos.y && pos.y <= top) {
-                x = upper_slope * (pos.y - top) + coll->ecb.top.x;
+                x = FMA_MUL_ADD(upper_slope, (pos.y - top), coll->ecb.top.x);
             } else if (pos.y > top) {
                 break;
             } else {
@@ -3138,9 +3145,9 @@ bool mpColl_800491C8_RightWall(CollData* coll)
             mpLineGetV1Pos(j, &pos);
 
             if (bot <= pos.y && pos.y <= mid) {
-                x = bot_y_to_x * (pos.y - bot) + coll->ecb.bottom.x;
+                x = FMA_MUL_ADD(bot_y_to_x, (pos.y - bot), coll->ecb.bottom.x);
             } else if (mid <= pos.y && pos.y <= top) {
-                x = top_y_to_x * (pos.y - top) + coll->ecb.top.x;
+                x = FMA_MUL_ADD(top_y_to_x, (pos.y - top), coll->ecb.top.x);
             } else if (pos.y < bot) {
                 break;
             } else {
@@ -3165,9 +3172,9 @@ bool mpColl_800491C8_RightWall(CollData* coll)
             mpLineGetV0Pos(wall_id, &pos);
 
             if (bot <= pos.y && pos.y <= mid) {
-                x = bot_y_to_x * (pos.y - bot) + coll->ecb.bottom.x;
+                x = FMA_MUL_ADD(bot_y_to_x, (pos.y - bot), coll->ecb.bottom.x);
             } else if (mid <= pos.y && pos.y <= top) {
-                x = top_y_to_x * (pos.y - top) + coll->ecb.top.x;
+                x = FMA_MUL_ADD(top_y_to_x, (pos.y - top), coll->ecb.top.x);
             } else if (pos.y > top) {
                 break;
             } else {
@@ -3428,9 +3435,9 @@ bool mpColl_80049EAC_LeftWall(CollData* coll)
             mpLineGetV0Pos(j, &pos);
 
             if (bot <= pos.y && pos.y <= mid) {
-                x = bot_y_to_x * (pos.y - bot) + coll->ecb.bottom.x;
+                x = FMA_MUL_ADD(bot_y_to_x, (pos.y - bot), coll->ecb.bottom.x);
             } else if (mid <= pos.y && pos.y <= top) {
-                x = top_y_to_x * (pos.y - top) + coll->ecb.top.x;
+                x = FMA_MUL_ADD(top_y_to_x, (pos.y - top), coll->ecb.top.x);
             } else if (pos.y < bot) {
                 break;
             } else {
@@ -3455,9 +3462,9 @@ bool mpColl_80049EAC_LeftWall(CollData* coll)
             mpLineGetV1Pos(wall_id, &pos);
 
             if (bot <= pos.y && pos.y <= mid) {
-                x = bot_y_to_x * (pos.y - bot) + coll->ecb.bottom.x;
+                x = FMA_MUL_ADD(bot_y_to_x, (pos.y - bot), coll->ecb.bottom.x);
             } else if (mid <= pos.y && pos.y <= top) {
-                x = top_y_to_x * (pos.y - top) + coll->ecb.top.x;
+                x = FMA_MUL_ADD(top_y_to_x, (pos.y - top), coll->ecb.top.x);
             } else if (pos.y > top) {
                 break;
             } else {
@@ -3668,8 +3675,9 @@ bool mpColl_8004A908_Floor(CollData* coll, int line_id)
         coll->floor.normal = normal;
         return true;
     }
-    prev_bottom_y = 0.5F * (coll->prev_ecb.top.y + coll->prev_ecb.bottom.y) +
-                    coll->prev_pos.y;
+    prev_bottom_y =
+        FMA_MUL_ADD(0.5F, (coll->prev_ecb.top.y + coll->prev_ecb.bottom.y),
+                    coll->prev_pos.y);
     if (coll->x38 != mpColl_804D64AC) {
         hit_floor = mpCheckFloorRemap(
             prev_bottom_x, prev_bottom_y, bottom_x, bottom_y, 0.0F, NULL,

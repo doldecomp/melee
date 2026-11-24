@@ -20,6 +20,7 @@
 #include <melee/it/ithitbox.h>
 #include <melee/mp/mpcoll.h>
 #include <melee/mp/mplib.h>
+#include <Runtime/fma.h>
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/mtx.h>
 #include <sysdolphin/baselib/random.h>
@@ -126,7 +127,8 @@ s32 itLinkArrow_802A81C4(Item_GObj* gobj)
     case 6:
         rand = HSD_Randf();
         lookup_table = &it_803F6A84[ip->xDD4_itemVar.linkarrow.x9C];
-        temp = MTXDegToRad((lookup_table[8] * rand) + lookup_table[0]);
+        temp =
+            MTXDegToRad(FMA_MUL_ADD(lookup_table[8], rand, lookup_table[0]));
         z = ip->xDD4_itemVar.linkarrow.x94 + temp;
         break;
     case 1:
@@ -134,7 +136,8 @@ s32 itLinkArrow_802A81C4(Item_GObj* gobj)
     case 5:
         rand = HSD_Randf();
         lookup_table = &it_803F6A84[ip->xDD4_itemVar.linkarrow.x9C];
-        temp = MTXDegToRad((lookup_table[8] * rand) + lookup_table[0]);
+        temp =
+            MTXDegToRad(FMA_MUL_ADD(lookup_table[8], rand, lookup_table[0]));
         z = ip->xDD4_itemVar.linkarrow.x94 - temp;
         break;
     default:
@@ -274,9 +277,9 @@ bool itLinkArrow_802A850C(Item_GObj* gobj, Vec3* arg1, Vec3* arg2, f32 arg3,
         ip->xDC8_word.flags.x14 = 0;
         it_8026B3A8(gobj);
         ip->xDD4_itemVar.linkarrow.xA8 =
-            (arg4 * ((attr->x8 - attr->x4) / arg5)) + attr->x4;
+            FMA_MUL_ADD(arg4, ((attr->x8 - attr->x4) / arg5), attr->x4);
         ip->xDD4_itemVar.linkarrow.xA4 =
-            (arg4 * ((attr->x10 - attr->xC) / arg5)) + attr->xC;
+            FMA_MUL_ADD(arg4, ((attr->x10 - attr->xC) / arg5), attr->xC);
         ip->facing_dir = ftLib_GetFacingDir(ip->xDD4_itemVar.linkarrow.xE0);
         HSD_JObjSetRotationY(jobj, M_PI_2 * ip->facing_dir);
         ip->pos = *arg1;
@@ -570,12 +573,12 @@ void itLinkarrow_UnkMotion2_Phys(HSD_GObj* gobj)
         (ftCo_80094098(item->xDD4_itemVar.linkarrow.xC4,
                        &item->xDD4_itemVar.linkarrow.xC8) *
          ftLib_GetModelScale(item->xDD4_itemVar.linkarrow.xC4));
-    item->pos.x = (item->xDD4_itemVar.linkarrow.xD4 *
-                   cosf(item->xDD4_itemVar.linkarrow.xD8)) +
-                  item->xDD4_itemVar.linkarrow.xC8;
-    item->pos.y = (item->xDD4_itemVar.linkarrow.xD4 *
-                   sinf(item->xDD4_itemVar.linkarrow.xD8)) +
-                  item->xDD4_itemVar.linkarrow.xCC;
+    item->pos.x = FMA_MUL_ADD(item->xDD4_itemVar.linkarrow.xD4,
+                              cosf(item->xDD4_itemVar.linkarrow.xD8),
+                              item->xDD4_itemVar.linkarrow.xC8);
+    item->pos.y = FMA_MUL_ADD(item->xDD4_itemVar.linkarrow.xD4,
+                              sinf(item->xDD4_itemVar.linkarrow.xD8),
+                              item->xDD4_itemVar.linkarrow.xCC);
     item->pos.z = 0.0f;
 }
 
@@ -676,7 +679,7 @@ bool itLinkarrow_UnkMotion4_Anim(Item_GObj* gobj)
     case 6:
         rand = HSD_Randf();
         temp_r3 = (f32*) &it_803F6A28 + ip->xDD4_itemVar.linkarrow.x9C;
-        var_f32 = MTXDegToRad((temp_r3[31] * rand) + temp_r3[23]);
+        var_f32 = MTXDegToRad(FMA_MUL_ADD(temp_r3[31], rand, temp_r3[23]));
         var_f31 = ip->xDD4_itemVar.linkarrow.x94 + var_f32;
         break;
     case 1:
@@ -684,7 +687,7 @@ bool itLinkarrow_UnkMotion4_Anim(Item_GObj* gobj)
     case 5:
         rand = HSD_Randf();
         temp_r3 = (f32*) &it_803F6A28 + ip->xDD4_itemVar.linkarrow.x9C;
-        var_f32 = MTXDegToRad((temp_r3[31] * rand) + temp_r3[23]);
+        var_f32 = MTXDegToRad(FMA_MUL_ADD(temp_r3[31], rand, temp_r3[23]));
         var_f31 = ip->xDD4_itemVar.linkarrow.x94 - var_f32;
         break;
     default:
@@ -805,12 +808,12 @@ bool itLinkArrow_Logic98_HitShield(Item_GObj* gobj)
                     atan2f(half_y - ip->xDD4_itemVar.linkarrow.xCC,
                            half_x - ip->xDD4_itemVar.linkarrow.xC8);
             }
-            ip->pos.x = ip->xDD4_itemVar.linkarrow.xD4 *
-                            cosf(ip->xDD4_itemVar.linkarrow.xD8) +
-                        ip->xDD4_itemVar.linkarrow.xC8;
-            ip->pos.y = ip->xDD4_itemVar.linkarrow.xD4 *
-                            sinf(ip->xDD4_itemVar.linkarrow.xD8) +
-                        ip->xDD4_itemVar.linkarrow.xCC;
+            ip->pos.x = FMA_MUL_ADD(ip->xDD4_itemVar.linkarrow.xD4,
+                                    cosf(ip->xDD4_itemVar.linkarrow.xD8),
+                                    ip->xDD4_itemVar.linkarrow.xC8);
+            ip->pos.y = FMA_MUL_ADD(ip->xDD4_itemVar.linkarrow.xD4,
+                                    sinf(ip->xDD4_itemVar.linkarrow.xD8),
+                                    ip->xDD4_itemVar.linkarrow.xCC);
             ip->pos.z = 0.0f;
         } else {
             return true;

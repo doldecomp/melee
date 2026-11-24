@@ -20,6 +20,7 @@
 #include <melee/it/ithitbox.h>
 #include <melee/it/itmaplib.h>
 #include <melee/it/itspawn.h>
+#include <Runtime/fma.h>
 #include <sysdolphin/baselib/random.h>
 
 ItemStateTable it_803F59F8[] = {
@@ -172,8 +173,8 @@ static inline void it_80289BE8_inline(Item_GObj* gobj, f32 vel_scale,
     Item* ip = GET_ITEM(gobj);
     *pos = ip->pos;
     pos->y -= 5.0f;
-    vel->x = (vel_scale * HSD_Randf()) - (vel_scale * 0.5f);
-    vel->y = ((vel_scale * 0.5f) * HSD_Randf()) - (vel_scale * 0.25f);
+    vel->x = FMA_MUL_SUB(vel_scale, HSD_Randf(), (vel_scale * 0.5f));
+    vel->y = FMA_MUL_SUB((vel_scale * 0.5f), HSD_Randf(), (vel_scale * 0.25f));
     vel->z = 0.0f;
 }
 

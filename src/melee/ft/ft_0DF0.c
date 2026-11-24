@@ -12,6 +12,7 @@
 #include "ftcommon.h"
 #include "inlines.h"
 #include "types.h"
+#include <Runtime/fma.h>
 
 void ftCo_800DEE84(Fighter_GObj* gobj, u32 arg1, float arg2, float dmg_mult)
 {
@@ -36,9 +37,9 @@ f32 ftCo_800DEEB8(Fighter* fp, f32 arg1)
     if (attrs->state != SmashState_Release) {
         return arg1;
     }
-    return arg1 * ((attrs->x2120_damageMul - 1.0F) *
-                       (attrs->x2118_frames / attrs->x211C_holdFrame) +
-                   1.0F);
+    return arg1 *
+           (FMA_MUL_ADD((attrs->x2120_damageMul - 1.0F),
+                        (attrs->x2118_frames / attrs->x211C_holdFrame), 1.0F));
 }
 
 Vec2* ftCo_800DEEE8(Fighter* fp, Vec2* shift)

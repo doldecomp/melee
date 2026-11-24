@@ -38,6 +38,7 @@
 #include <melee/ft/types.h>
 #include <melee/lb/lb_00B0.h>
 #include <melee/lb/lbvector.h>
+#include <Runtime/fma.h>
 #include <sysdolphin/baselib/jobj.h>
 #include <sysdolphin/baselib/mtx.h>
 #include <sysdolphin/baselib/random.h>
@@ -193,7 +194,7 @@ void ftCo_DamageIce_Init(Fighter_GObj* gobj)
     rot_min = p_ftCommonData->damageice_rot_speed_min;
     rot_max = p_ftCommonData->damageice_rot_speed_max;
     rand_range = rot_max - rot_min;
-    fp->mv.co.damageice.rot_speed = rand_range * rand + rot_min;
+    fp->mv.co.damageice.rot_speed = FMA_MUL_ADD(rand_range, rand, rot_min);
     ftCo_800909D0(fp);
 
     effect_joint = fp->parts[ftParts_GetBoneIndex(fp, FtPart_XRotN)].joint;
@@ -262,7 +263,7 @@ void ftCo_DamageIce_HitWhileFrozen(Fighter_GObj* gobj)
     rot_min = p_ftCommonData->damageice_rot_speed_min;
     rot_max = p_ftCommonData->damageice_rot_speed_max;
     rand_range = rot_max - rot_min;
-    fp->mv.co.damageice.rot_speed = rand_range * rand + rot_min;
+    fp->mv.co.damageice.rot_speed = FMA_MUL_ADD(rand_range, rand, rot_min);
     ftCo_800909D0(fp);
 
     effect_joint = fp->parts[ftParts_GetBoneIndex(fp, FtPart_XRotN)].joint;
@@ -294,8 +295,8 @@ void ftCo_DamageIce_HitWhileFrozen(Fighter_GObj* gobj)
 void ftCo_DamageIce_OnHit2(Fighter_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
-    fp->grab_timer -= fp->dmg.x1838_percentTemp *
-                      p_ftCommonData->damageice_dmg_time_reduction_mult;
+    FMA_SUB_FROM(fp->grab_timer, fp->dmg.x1838_percentTemp,
+                 p_ftCommonData->damageice_dmg_time_reduction_mult);
     if (fp->dmg.x1860_element == HitElement_Fire) {
         fp->grab_timer = 0;
     }
@@ -406,9 +407,9 @@ static inline void ftCo_SpawnEffect_x406(Fighter_GObj* gobj, Vec3* vec, f32 f)
 
 static inline f32 ftCo_Speed(Fighter* fp)
 {
-    return sqrtf((fp->self_vel.x * fp->self_vel.x) +
-                 (fp->self_vel.y * fp->self_vel.y) +
-                 (fp->self_vel.z * fp->self_vel.z));
+    return sqrtf(FMA_ADD_MUL((fp->self_vel.x * fp->self_vel.x) +
+                                 (fp->self_vel.y * fp->self_vel.y),
+                             fp->self_vel.z, fp->self_vel.z));
 }
 
 void ftCo_DamageIce_Collide(Fighter_GObj* gobj, Vec3* normal, Vec3* vec)

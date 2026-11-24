@@ -10,6 +10,7 @@
 #include "psstructs.h"
 #include "random.h"
 #include "wobj.h"
+#include <Runtime/fma.h>
 
 /* 4D0E5C */
 
@@ -287,9 +288,9 @@ void hsd_8039D71C(HSD_Generator* gen)
         f32 vx = gen->vel.x;
         f32 vy = gen->vel.y;
         f32 vz = gen->vel.z;
-        gen->vel.x = col0_x * vx + col1_x * vy + cx * vz;
-        gen->vel.y = col0_y * vx + col1_y * vy + cy * vz;
-        gen->vel.z = col0_z * vx + col1_z * vy + cz * vz;
+        gen->vel.x = FMA_ADD_MUL(FMA_MUL_ADD(col0_x, vx, col1_x * vy), cx, vz);
+        gen->vel.y = FMA_ADD_MUL(FMA_MUL_ADD(col0_y, vx, col1_y * vy), cy, vz);
+        gen->vel.z = FMA_ADD_MUL(FMA_MUL_ADD(col0_z, vx, col1_z * vy), cz, vz);
     }
 
     if ((gen->type & 0xF) == 1) {
@@ -297,11 +298,14 @@ void hsd_8039D71C(HSD_Generator* gen)
         f32 ay = gen->aux.line.y2;
         f32 az = gen->aux.line.z2;
         gen->aux.line.x2 =
-            jobj->mtx[0][0] * ax + jobj->mtx[0][1] * ay + jobj->mtx[0][2] * az;
+            FMA_ADD_MUL(FMA_MUL_ADD(jobj->mtx[0][0], ax, jobj->mtx[0][1] * ay),
+                        jobj->mtx[0][2], az);
         gen->aux.line.y2 =
-            jobj->mtx[1][0] * ax + jobj->mtx[1][1] * ay + jobj->mtx[1][2] * az;
+            FMA_ADD_MUL(FMA_MUL_ADD(jobj->mtx[1][0], ax, jobj->mtx[1][1] * ay),
+                        jobj->mtx[1][2], az);
         gen->aux.line.z2 =
-            jobj->mtx[2][0] * ax + jobj->mtx[2][1] * ay + jobj->mtx[2][2] * az;
+            FMA_ADD_MUL(FMA_MUL_ADD(jobj->mtx[2][0], ax, jobj->mtx[2][1] * ay),
+                        jobj->mtx[2][2], az);
     }
 }
 
@@ -383,8 +387,9 @@ f32 hsd_8039DAD4(HSD_Generator* gen)
     vel_copy.z = gen->vel.z;
 
     /* Compute velocity magnitude */
-    vel_mag_sq = sqrtf(vel_copy.z * vel_copy.z +
-                       (vel_copy.x * vel_copy.x + vel_copy.y * vel_copy.y));
+    vel_mag_sq = sqrtf(FMA_MUL_ADD(
+        vel_copy.z, vel_copy.z,
+        (FMA_MUL_ADD(vel_copy.x, vel_copy.x, vel_copy.y * vel_copy.y))));
 
     /* Initialize rotation matrix */
     PSMTXIdentity(rot_mtx);
@@ -469,7 +474,8 @@ f32 hsd_8039DAD4(HSD_Generator* gen)
         sin_az = cosf(sin_az);
 
         {
-            f32 projected_z = vel_norm.y * cos_az + vel_norm.z * sin_az;
+            f32 projected_z =
+                FMA_MUL_ADD(vel_norm.y, cos_az, vel_norm.z * sin_az);
             if (fabsf_bitwise(projected_z) < 1.1754944e-38F) {
                 if (vel_norm.x >= 0.0F) {
                     elevation = 1.5707964F;
@@ -515,7 +521,7 @@ f32 hsd_8039DAD4(HSD_Generator* gen)
         }
         {
             f32 first = rot_mtx[2][2] * cosf(angle1);
-            f32 comb = first + rot_mtx[1][2] * sinf(angle1);
+            f32 comb = FMA_ADD_MUL(first, rot_mtx[1][2], sinf(angle1));
             if (fabsf_bitwise(comb) < 1.1754944e-38F) {
                 if (rot_mtx[0][2] >= 0.0F) {
                     angle3 = 1.5707964F;
@@ -538,7 +544,7 @@ f32 hsd_8039DAD4(HSD_Generator* gen)
             f32 rnd = HSD_Randf();
             angle_step =
                 (gen->aux.disc.maxAngle - min_a) / (f32) (s32) gen->count;
-            cur_angle = angle_step * rnd + min_a;
+            cur_angle = FMA_MUL_ADD(angle_step, rnd, min_a);
             break;
         }
         case 6:
@@ -547,7 +553,7 @@ f32 hsd_8039DAD4(HSD_Generator* gen)
             f32 rnd = HSD_Randf();
             angle_step =
                 (gen->aux.cone.maxAngle - min_a) / (f32) (s32) gen->count;
-            cur_angle = angle_step * rnd + min_a;
+            cur_angle = FMA_MUL_ADD(angle_step, rnd, min_a);
             break;
         }
         default: {
@@ -607,7 +613,7 @@ f32 hsd_8039DAD4(HSD_Generator* gen)
                     {
                         f32 rnd = HSD_Randf();
                         cone_angle = gen->aux.cone.maxAngle - cur_angle;
-                        cur_angle = cone_angle * rnd + cur_angle;
+                        cur_angle = FMA_MUL_ADD(cone_angle, rnd, cur_angle);
                         cone_angle = radius * gen->angle;
                     }
                     if (fabsf_bitwise(sin_az) < 1.1754944e-38F) {
@@ -637,7 +643,7 @@ f32 hsd_8039DAD4(HSD_Generator* gen)
                     {
                         f32 rnd = HSD_Randf();
                         cone_angle = gen->aux.disc.maxAngle - cur_angle;
-                        cur_angle = cone_angle * rnd + cur_angle;
+                        cur_angle = FMA_MUL_ADD(cone_angle, rnd, cur_angle);
                         cone_angle = (f32) (M_PI_2 + gen->angle);
                     }
                 }
@@ -653,7 +659,7 @@ f32 hsd_8039DAD4(HSD_Generator* gen)
                         f32 rnd = HSD_Randf();
                         cone_angle = radius * gen->angle;
                         sin_el = gen->aux.disc.maxAngle - cur_angle;
-                        cur_angle = sin_el * rnd + cur_angle;
+                        cur_angle = FMA_MUL_ADD(sin_el, rnd, cur_angle);
                     }
                 }
                 break;
@@ -808,11 +814,11 @@ f32 hsd_8039DAD4(HSD_Generator* gen)
                 f32 a2 = gen->aux.rect.z;
                 f32 b2 = gen->aux.rect.y;
                 f32 c2 = gen->aux.rect.x;
-                f32 r0 = 1.0F / (c2 * (b2 + a2) + b2 * a2);
+                f32 r0 = 1.0F / (FMA_MUL_ADD(c2, (b2 + a2), b2 * a2));
                 if (rnd < r0 * (c2 * b2)) {
                     emit_pos.z = emit_pos.z > 0.5F ? 1.0F : 0.0F;
                 } else {
-                    if (rnd > 1.0F - r0 * (c2 * a2)) {
+                    if (rnd > FMA_SUB_MUL(1.0F, r0, (c2 * a2))) {
                         emit_pos.y = emit_pos.y > 0.5F ? 1.0F : 0.0F;
                     } else {
                         emit_pos.x = emit_pos.x > 0.5F ? 1.0F : 0.0F;
@@ -830,15 +836,15 @@ f32 hsd_8039DAD4(HSD_Generator* gen)
             emit_pos.z -= 0.5F;
 
             /* Multiply by rect's 3x3 matrix */
-            tmpvec.x = gen->aux.rect.xx * emit_pos.x +
-                       gen->aux.rect.yx * emit_pos.y +
-                       gen->aux.rect.zx * emit_pos.z;
-            tmpvec.y = gen->aux.rect.xy * emit_pos.x +
-                       gen->aux.rect.yy * emit_pos.y +
-                       gen->aux.rect.zy * emit_pos.z;
-            tmpvec.z = gen->aux.rect.xz * emit_pos.x +
-                       gen->aux.rect.yz * emit_pos.y +
-                       gen->aux.rect.zz * emit_pos.z;
+            tmpvec.x = FMA_ADD_MUL(gen->aux.rect.xx * emit_pos.x +
+                                       gen->aux.rect.yx * emit_pos.y,
+                                   gen->aux.rect.zx, emit_pos.z);
+            tmpvec.y = FMA_ADD_MUL(gen->aux.rect.xy * emit_pos.x +
+                                       gen->aux.rect.yy * emit_pos.y,
+                                   gen->aux.rect.zy, emit_pos.z);
+            tmpvec.z = FMA_ADD_MUL(gen->aux.rect.xz * emit_pos.x +
+                                       gen->aux.rect.yz * emit_pos.y,
+                                   gen->aux.rect.zz, emit_pos.z);
 
             PSMTXMultVec(rot_mtx, &tmpvec, &emit_pos);
             emit_pos.x += gen->pos.x;
@@ -847,9 +853,9 @@ f32 hsd_8039DAD4(HSD_Generator* gen)
 
             /* Compute velocity from rect axes */
             {
-                f32 mag = gen->aux.rect.zx * gen->aux.rect.zx +
-                          gen->aux.rect.zy * gen->aux.rect.zy +
-                          gen->aux.rect.zz * gen->aux.rect.zz;
+                f32 mag = FMA_ADD_MUL(gen->aux.rect.zx * gen->aux.rect.zx +
+                                          gen->aux.rect.zy * gen->aux.rect.zy,
+                                      gen->aux.rect.zz, gen->aux.rect.zz);
                 mag = sqrtf(mag);
                 {
                     f32 scale = elevation / mag;
@@ -928,9 +934,9 @@ f32 hsd_8039DAD4(HSD_Generator* gen)
                 vec.z *= scale;
             }
 
-            emit_pos.x = sin_az * emit_pos.x + gen->pos.x;
-            emit_pos.y = sin_az * emit_pos.y + gen->pos.y;
-            emit_pos.z = sin_az * emit_pos.z + gen->pos.z;
+            emit_pos.x = FMA_MUL_ADD(sin_az, emit_pos.x, gen->pos.x);
+            emit_pos.y = FMA_MUL_ADD(sin_az, emit_pos.y, gen->pos.y);
+            emit_pos.z = FMA_MUL_ADD(sin_az, emit_pos.z, gen->pos.z);
 
             hsd_80398F0C(gen->linkNo, gen->bank, gen->kind, gen->texGroup,
                          gen->cmdList, gen->life, 0, gen, emit_pos.x,
@@ -985,7 +991,7 @@ void hsd_8039EE24(u32 mask)
         if (gen->random < 0.0F) {
             gen->count -= gen->random;
         } else {
-            gen->count += gen->random * HSD_Randf();
+            FMA_ADD_TO(gen->count, gen->random, HSD_Randf());
         }
         if (gen->count >= 1.0F) {
             gen->count = hsd_8039DAD4(gen);

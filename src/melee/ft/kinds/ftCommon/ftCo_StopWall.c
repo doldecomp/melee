@@ -10,6 +10,7 @@
 #include <melee/ft/ftcommon.h>
 #include <melee/ft/kinds/ftKirby/ftkirby.h>
 #include <melee/ft/types.h>
+#include <Runtime/fma.h>
 
 /* 09EE30 */ static void ftCo_8009EE30(Fighter_GObj* gobj);
 
@@ -49,8 +50,8 @@ void ftCo_8009EE30(Fighter_GObj* gobj)
         ftKb_SpecialN_800F1F1C(gobj, &vec);
         Fighter_ChangeMotionState(gobj, ftCo_MS_StopWall, Ft_MF_None, 0, 1, 0,
                                   NULL);
-        fp->cur_pos.x = -(fp->x68C_transNPos.z * -fp->facing_dir -
-                          (fp->cur_pos.x + vec.x));
+        fp->cur_pos.x = -(FMA_MUL_SUB(fp->x68C_transNPos.z, -fp->facing_dir,
+                                      (fp->cur_pos.x + vec.x)));
     }
     ft_800843FC(gobj);
     ftCommon_8007E2FC(gobj);

@@ -14,6 +14,7 @@
 #include <melee/lb/lb_00B0.h>
 #include <melee/lb/lbaudio_ax.h>
 #include <melee/lb/lbspdisplay.h>
+#include <Runtime/fma.h>
 #include <sysdolphin/baselib/debug.h>
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/gobjgxlink.h>
@@ -664,8 +665,9 @@ void mnDiagram2_CreateStatRow(HSD_GObj* gobj, u8 is_name_mode, u8 stat_type,
                                                     entity),
                             0);
                         HSD_JObjSetTranslateX(jobj, base->icon_pos.x);
-                        HSD_JObjSetTranslateY(jobj, (f30 * (f32) row_idx) +
-                                                        base->icon_pos.y);
+                        HSD_JObjSetTranslateY(
+                            jobj,
+                            FMA_MUL_ADD(f30, (f32) row_idx, base->icon_pos.y));
                         HSD_JObjSetTranslateZ(jobj, base->icon_pos.z);
 
                         HSD_JObjAddChild(data->icon_parent, jobj);

@@ -41,6 +41,7 @@
 #include <melee/pl/plbonuslib.h>
 #include <melee/pl/plstale.h>
 #include <melee/pl/pltrick.h>
+#include <Runtime/fma.h>
 #include <sysdolphin/baselib/debug.h>
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/random.h>
@@ -209,8 +210,8 @@ static inline void updateClankDamage(Fighter* fp, HitCapsule* hit, int int_dmg,
     if (int_dmg > fp->dmg.int_value) {
         fp->dmg.int_value = int_dmg;
         if (hit->x40_b1 == true && fp->ground_or_air == GA_Ground) {
-            fp->dmg.x191C =
-                int_dmg * p_ftCommonData->x3D0 + p_ftCommonData->x3D4;
+            fp->dmg.x191C = FMA_MUL_ADD(int_dmg, p_ftCommonData->x3D0,
+                                        p_ftCommonData->x3D4);
             {
                 float facing_dir;
                 if (compare_other_first ? other_pos->x > fp->cur_pos.x
@@ -2075,12 +2076,13 @@ static inline s32 ftColl_GetDamageCount(Fighter* fp, ftCommonData* ftd)
 #define KNOCKBACK(defense, attack, arg3, one, ftd, hit, w, inner)             \
     ((defense) *                                                              \
      ((attack) *                                                              \
-      ((arg3) * ((0.01F * (hit)->x24 *                                        \
-                  ((ftd)->x11C *                                              \
-                       (((ftd)->xF8 - (((w) * (ftd)->xF8) / ((one) + (w)))) * \
-                        (inner)) +                                            \
-                   (ftd)->x120)) +                                            \
-                 (hit)->x2C))))
+      ((arg3) * FMA_MUL_ADD(0.01F * (hit)->x24,                               \
+                            FMA_MUL_ADD((ftd)->x11C,                          \
+                                        (((ftd)->xF8 - (((w) * (ftd)->xF8) /  \
+                                                        ((one) + (w)))) *     \
+                                         (inner)),                            \
+                                        (ftd)->x120),                         \
+                            (hit)->x2C))))
 
 float ftColl_80079AB0(Fighter* fp, HitCapsule* hit, u32 unk_count, float arg3,
                       float attack, float defense, float weight)
@@ -2097,8 +2099,9 @@ float ftColl_80079AB0(Fighter* fp, HitCapsule* hit, u32 unk_count, float arg3,
         decay = ftd->xF8;
         x118 = ftd->x118;
 
-        result = KNOCKBACK(defense, attack, arg3, 1.0F, ftd, hit, w,
-                           x118 * ftd->x110 + ftd->x114 * (x118 * hit->x28));
+        result = KNOCKBACK(
+            defense, attack, arg3, 1.0F, ftd, hit, w,
+            FMA_MUL_ADD(x118, ftd->x110, ftd->x114 * (x118 * hit->x28)));
     } else {
         s32 count;
 
@@ -2106,8 +2109,9 @@ float ftColl_80079AB0(Fighter* fp, HitCapsule* hit, u32 unk_count, float arg3,
 
         result = KNOCKBACK(
             defense, attack, arg3, 1.0F, ftd, hit, w,
-            ftd->x110 * (count + fp->dmg.x1838_percentTemp) +
-                ftd->x114 * (unk_count * (count + fp->dmg.x1838_percentTemp)));
+            FMA_MUL_ADD(ftd->x110, (count + fp->dmg.x1838_percentTemp),
+                        ftd->x114 * (unk_count *
+                                     (count + fp->dmg.x1838_percentTemp))));
     }
 
     if (result >= ftd->x108) {
@@ -2141,8 +2145,9 @@ float ftColl_80079EA8(Fighter* fp, HitCapsule* hit, u32 unk_count)
         decay = ftd->xF8;
         x118 = ftd->x118;
 
-        result = KNOCKBACK(one, one, one, one, ftd, hit, w,
-                           x118 * ftd->x110 + ftd->x114 * (x118 * hit->x28));
+        result = KNOCKBACK(
+            one, one, one, one, ftd, hit, w,
+            FMA_MUL_ADD(x118, ftd->x110, ftd->x114 * (x118 * hit->x28)));
     } else {
         s32 count;
 
@@ -2153,9 +2158,10 @@ float ftColl_80079EA8(Fighter* fp, HitCapsule* hit, u32 unk_count)
 
             result = KNOCKBACK(
                 one, one, one, one, ftd, hit, w,
-                ftd->x110 * (count + fp->dmg.x1838_percentTemp) +
+                FMA_MUL_ADD(
+                    ftd->x110, (count + fp->dmg.x1838_percentTemp),
                     ftd->x114 *
-                        (unk_count * (count + fp->dmg.x1838_percentTemp)));
+                        (unk_count * (count + fp->dmg.x1838_percentTemp))));
         }
     }
 
@@ -2362,10 +2368,10 @@ void ftColl_8007A06C(Fighter_GObj* gobj, void* dmg_ptr, void* log, size_t idx,
         FighterHurtCapsule* hurt = best_entry->x10.hurt1;
         float dx, dy, abs_dx;
 
-        dx = 0.5F * (hurt->capsule.a_pos.x + hurt->capsule.b_pos.x) -
-             best_entry->pos.x;
-        dy = 0.5F * (hurt->capsule.a_pos.y + hurt->capsule.b_pos.y) -
-             best_entry->pos.y;
+        dx = FMA_MUL_SUB(0.5F, (hurt->capsule.a_pos.x + hurt->capsule.b_pos.x),
+                         best_entry->pos.x);
+        dy = FMA_MUL_SUB(0.5F, (hurt->capsule.a_pos.y + hurt->capsule.b_pos.y),
+                         best_entry->pos.y);
 
         dir = (dx < 0.0F) ? 1.0F : -1.0F;
 

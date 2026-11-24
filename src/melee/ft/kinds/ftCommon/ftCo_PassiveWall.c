@@ -29,6 +29,7 @@
 #include <melee/ft/ftcommon.h>
 #include <melee/ft/kinds/ftKirby/ftkirby.h>
 #include <melee/ft/types.h>
+#include <Runtime/fma.h>
 
 bool ftCo_800C1D38(Fighter_GObj* gobj)
 {
@@ -99,8 +100,8 @@ void ftCo_800C1E64(Fighter_GObj* gobj, int msid, int timer, int vel_y_exponent,
         efAsync_Spawn(gobj, &GET_FIGHTER(gobj)->x60C, 2,
                       (1 << 0) | (1 << 2) | (1 << 3) | (1 << 4) | (1 << 10),
                       NULL, &ef_pos);
-        fp->cur_pos.x =
-            -(fp->x68C_transNPos.z * -fp->facing_dir - pos_x_offset);
+        fp->cur_pos.x = -(
+            FMA_MUL_SUB(fp->x68C_transNPos.z, -fp->facing_dir, pos_x_offset));
     }
     ft_80081F2C(gobj);
     ft_800881D8(fp, fp->ft_data->x4C_sfx->x24, 0x7F, 0x40);

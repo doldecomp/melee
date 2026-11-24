@@ -13,6 +13,7 @@
 #include <melee/it/it_26B1.h>
 #include <melee/it/it_2725.h>
 #include <melee/it/item.h>
+#include <Runtime/fma.h>
 #include <sysdolphin/baselib/random.h>
 
 ItemStateTable it_803F7548[] = { {
@@ -56,12 +57,12 @@ void it_802BE2E8(Item_GObj* item_gobj, HSD_GObj* arg1)
     item_1->xDAC_itcmd_var0 = 0;
 
     rand = HSD_Randf();
-    speed = attr->x0_min_speed + attr->x4_max_speed_offset * rand;
+    speed = FMA_ADD_MUL(attr->x0_min_speed, attr->x4_max_speed_offset, rand);
 
     rand = HSD_Randf();
     double_angle = ((f32) M_PI) - attr->xc_angle;
     angle_offset = attr->xc_angle * rand;
-    angle = 0.5F * double_angle + angle_offset;
+    angle = FMA_MUL_ADD(0.5F, double_angle, angle_offset);
 
     item_1->x40_vel.x = item_1->facing_dir * (speed * sinf(angle));
     item_1->x40_vel.y = speed * cosf(angle);

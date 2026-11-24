@@ -22,6 +22,7 @@
 #include <melee/ft/types.h>
 #include <melee/lb/lb_00B0.h>
 #include <melee/pl/player.h>
+#include <Runtime/fma.h>
 
 /* 1230D0 */ static bool ftNn_Init_801230D0(Fighter_GObj* nana_gobj);
 /* 123218 */ static void fn_80123218(Fighter_GObj* nana_gobj);
@@ -136,7 +137,7 @@ void ftPp_SpecialHi_0_Phys(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (!ftNn_Init_801230D0(gobj)) {
-        fp->cur_pos.x = -((8.0f * fp->facing_dir) - fp->cur_pos.x);
+        fp->cur_pos.x = -(FMA_MUL_SUB(8.0f, fp->facing_dir, fp->cur_pos.x));
         ftCo_Fall_Enter(gobj);
     }
 }
@@ -279,8 +280,9 @@ void ftNn_Init_801237F8(Fighter_GObj* nana_gobj)
     nana_fp->self_vel.x =
         nana_fp->facing_dir * (attrs->x13C * cosf(attrs->x140));
     nana_fp->self_vel.y = attrs->x13C * sinf(attrs->x140);
-    nana_fp->cur_pos.x += 4.0f * nana_fp->facing_dir * nana_fp->x34_scale.y;
-    nana_fp->cur_pos.y += 7.0f * nana_fp->x34_scale.y;
+    FMA_ADD_TO(nana_fp->cur_pos.x, 4.0f * nana_fp->facing_dir,
+               nana_fp->x34_scale.y);
+    FMA_ADD_TO(nana_fp->cur_pos.y, 7.0f, nana_fp->x34_scale.y);
     Fighter_ChangeMotionState(nana_gobj, ftPp_MS_SpecialHi_4, Ft_MF_None, 0.0f,
                               1.0f, 0.0f, NULL);
     nana_fp->accessory4_cb = fn_80123218;

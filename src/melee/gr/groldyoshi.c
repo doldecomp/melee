@@ -11,6 +11,7 @@
 #include <melee/lb/lb_00B0.h>
 #include <melee/lb/lb_00F9.h>
 #include <melee/mp/mplib.h>
+#include <Runtime/fma.h>
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/gobjproc.h>
 #include <sysdolphin/baselib/random.h>
@@ -345,7 +346,7 @@ void grOldYoshi_8020F088(Ground_GObj* arg)
         }
         grAnime_801C8138(arg, gp->map_id, 0);
         dVar10 = HSD_Randf();
-        dVar9 = yakumono_param->x18 * (dVar10 * 2.0f - 1.0f);
+        dVar9 = yakumono_param->x18 * (FMA_MUL_SUB(dVar10, 2.0f, 1.0f));
         HSD_JObjSetTranslateY(arg->hsd_obj, dVar9);
     } else {
         HSD_JObj* jobj = Ground_801C3FA4(arg, gp->u.oldyoshiguest.xC6);
@@ -435,7 +436,7 @@ float grOldYoshi_8020F31C(float param1, float param2, float param3,
     } else {
         fVar2 = param1;
     }
-    fVar4 = fVar3 * (-param2 * 0.5f * fVar3) + (fVar3 * fVar2);
+    fVar4 = FMA_MUL_ADD(fVar3, (-param2 * 0.5f * fVar3), (fVar3 * fVar2));
     param1 = grOldYoshi_8020F31C_inline(param1, param2, param3, param4, fVar4);
     if (param1 > param5) {
         return param5;

@@ -9,6 +9,7 @@
 #include <melee/if/textlib.h>
 #include <melee/lb/lbshadow.h>
 #include <melee/lb/lbvector.h>
+#include <Runtime/fma.h>
 #include <sysdolphin/baselib/controller.h>
 
 /* 2270C4 */ static void fn_802270C4(int arg0);
@@ -468,7 +469,8 @@ static void fn_80227CAC(HSD_GObj* camera, f32 cstick_y)
         HSD_CObjGetEyeVector(cobj, &forward);
         {
             float dist = HSD_CObjGetEyeDistance(cobj);
-            VECScale(&forward, &forward, dist * (1.0F - 0.05F * cstick_y));
+            VECScale(&forward, &forward,
+                     dist * (FMA_SUB_MUL(1.0F, 0.05F, cstick_y)));
         }
         VECSubtract(&cm_80453004.free_int_pos, &forward,
                     &cm_80453004.free_eye_pos);
@@ -489,7 +491,7 @@ void fn_80227D38(HSD_GObj* camera, Vec3* arg1, f32 arg2)
             cobj = GET_COBJ(camera);
             HSD_CObjGetEyeVector(cobj, &sp28);
             dist = HSD_CObjGetEyeDistance(cobj);
-            PSVECScale(&sp28, &sp28, dist * -(0.05F * arg2 - 1.0F));
+            PSVECScale(&sp28, &sp28, dist * -(FMA_MUL_SUB(0.05F, arg2, 1.0F)));
             PSVECSubtract(&cm_80453004.follow_int_offset, &sp28,
                           &cm_80453004.follow_eye_offset);
         }
@@ -504,7 +506,7 @@ void fn_80227D38(HSD_GObj* camera, Vec3* arg1, f32 arg2)
             cobj = GET_COBJ(camera);
             HSD_CObjGetEyeVector(cobj, &sp1C);
             dist = HSD_CObjGetEyeDistance(cobj);
-            PSVECScale(&sp1C, &sp1C, dist * -(0.05F * arg2 - 1.0F));
+            PSVECScale(&sp1C, &sp1C, dist * -(FMA_MUL_SUB(0.05F, arg2, 1.0F)));
             PSVECSubtract(&cm_80453004.free_int_pos, &sp1C,
                           &cm_80453004.free_eye_pos);
         }

@@ -15,6 +15,7 @@
 #include "types.h"
 #include <dolphin/mtx.h>
 #include <melee/mp/mplib.h>
+#include <Runtime/fma.h>
 #include <sysdolphin/baselib/cobj.h>
 #include <sysdolphin/baselib/displayfunc.h>
 #include <sysdolphin/baselib/dobj.h>
@@ -198,12 +199,17 @@ void lb_8000FD48(HSD_JObj* jobj, DynamicsDesc* desc, size_t max_count)
             dx = prev->desc.lb_unk0.unk_2C.x - next->desc.lb_unk0.unk_2C.x;
             dy = prev->desc.lb_unk0.unk_2C.y - next->desc.lb_unk0.unk_2C.y;
             dz = prev->desc.lb_unk0.unk_2C.z - next->desc.lb_unk0.unk_2C.z;
-            if ((dist_sq = dz * dz + (dx * dx + dy * dy)) > 0.0f) {
+            if ((dist_sq = FMA_MUL_ADD(dz, dz,
+                                       (FMA_MUL_ADD(dx, dx, dy * dy)))) > 0.0f)
+            {
                 volatile float y;
                 double guess = __frsqrte((double) dist_sq);
-                guess = .5 * guess * (3.0 - guess * guess * dist_sq);
-                guess = .5 * guess * (3.0 - guess * guess * dist_sq);
-                guess = .5 * guess * (3.0 - guess * guess * dist_sq);
+                guess =
+                    .5 * guess * (FMA_SUB_MUL(3.0, guess * guess, dist_sq));
+                guess =
+                    .5 * guess * (FMA_SUB_MUL(3.0, guess * guess, dist_sq));
+                guess =
+                    .5 * guess * (FMA_SUB_MUL(3.0, guess * guess, dist_sq));
                 y = (float) (dist_sq * guess);
                 dist_sq = y;
             }
@@ -311,9 +317,9 @@ float lb_800101C8(Vec3* arg0, Vec3* arg1)
         if (var_r30->x0 == 1) {
             if (arg0->x > var_r30->x10 && arg0->x < var_r30->x18) {
                 if (arg0->y < var_r30->x14 && arg0->y > var_r30->x1C) {
-                    arg1->x += var_r30->x4.x * scale0;
-                    arg1->y += var_r30->x4.y * scale0;
-                    arg1->z += var_r30->x4.z * scale0;
+                    FMA_ADD_TO(arg1->x, var_r30->x4.x, scale0);
+                    FMA_ADD_TO(arg1->y, var_r30->x4.y, scale0);
+                    FMA_ADD_TO(arg1->z, var_r30->x4.z, scale0);
                 }
             }
         } else {
@@ -328,9 +334,9 @@ float lb_800101C8(Vec3* arg0, Vec3* arg1)
                     var_f0 = 1.0f;
                 }
                 scale1 = 1.0 / (var_f0 * var_f0);
-                arg1->x += scale1 * (delta.x * scale0);
-                arg1->y += scale1 * (delta.y * scale0);
-                arg1->z += scale1 * (delta.z * scale0);
+                FMA_ADD_TO(arg1->x, scale1, (delta.x * scale0));
+                FMA_ADD_TO(arg1->y, scale1, (delta.y * scale0));
+                FMA_ADD_TO(arg1->z, scale1, (delta.z * scale0));
             }
         }
     }
@@ -354,7 +360,7 @@ bool lb_800103D8(Vec3* vec, float x0, float x1, float x2, float x3,
             return false;
         }
     } else if ((double) dist0 > 0.0 && (double) dist1 < 0.0) {
-        vec->x = -dist1 / (dist0 - dist1) * (x0 - x2) + x2;
+        vec->x = FMA_MUL_ADD(-dist1 / (dist0 - dist1), (x0 - x2), x2);
         vec->y = offset;
         vec->z = 0.0f;
         return true;
@@ -634,14 +640,14 @@ void lb_8001044C(DynamicsDesc* desc, void* colliders_raw, int num_colliders,
                     s32 ci;
                     for (ci = 0; ci < num_colliders; ci++) {
                         next_bone_pos.x =
-                            link_dir.x * cur->desc.lb_unk0.unk_48 +
-                            cur->desc.lb_unk0.unk_2C.x;
+                            FMA_MUL_ADD(link_dir.x, cur->desc.lb_unk0.unk_48,
+                                        cur->desc.lb_unk0.unk_2C.x);
                         next_bone_pos.y =
-                            link_dir.y * cur->desc.lb_unk0.unk_48 +
-                            cur->desc.lb_unk0.unk_2C.y;
+                            FMA_MUL_ADD(link_dir.y, cur->desc.lb_unk0.unk_48,
+                                        cur->desc.lb_unk0.unk_2C.y);
                         next_bone_pos.z =
-                            link_dir.z * cur->desc.lb_unk0.unk_48 +
-                            cur->desc.lb_unk0.unk_2C.z;
+                            FMA_MUL_ADD(link_dir.z, cur->desc.lb_unk0.unk_48,
+                                        cur->desc.lb_unk0.unk_2C.z);
 
                         coll_dir.x =
                             collider->position.x - cur->desc.lb_unk0.unk_2C.x;
@@ -651,9 +657,10 @@ void lb_8001044C(DynamicsDesc* desc, void* colliders_raw, int num_colliders,
                             collider->position.z - cur->desc.lb_unk0.unk_2C.z;
 
                         {
-                            f32 coll_dist = sqrtf(coll_dir.z * coll_dir.z +
+                            f32 coll_dist =
+                                sqrtf(FMA_MUL_ADD(coll_dir.z, coll_dir.z,
                                                   (coll_dir.x * coll_dir.x +
-                                                   coll_dir.y * coll_dir.y));
+                                                   coll_dir.y * coll_dir.y)));
 
                             if (coll_dist > collider->radius &&
                                 lbColl_80005C44(
@@ -666,9 +673,9 @@ void lb_8001044C(DynamicsDesc* desc, void* colliders_raw, int num_colliders,
                                 if (0.0 != coll_angle) {
                                     f32 adj_radius =
                                         (f32) (0.1 + (f64) collider->radius);
-                                    f32 side_sq =
-                                        sqrtf(coll_dist * coll_dist -
-                                              adj_radius * adj_radius);
+                                    f32 side_sq = sqrtf(
+                                        FMA_MUL_SUB(coll_dist, coll_dist,
+                                                    adj_radius * adj_radius));
                                     {
                                         f32 avoidance_angle =
                                             atan2f(adj_radius, side_sq);
@@ -709,10 +716,12 @@ void lb_8001044C(DynamicsDesc* desc, void* colliders_raw, int num_colliders,
                     gnd_norm = lb_803B7280.v1;
                     lbVector_Normalize(&link_dir);
                     {
-                        f32 end_x = link_dir.x * cur->desc.lb_unk0.unk_48 +
-                                    cur->desc.lb_unk0.unk_2C.x;
-                        f32 end_y = link_dir.y * cur->desc.lb_unk0.unk_48 +
-                                    cur->desc.lb_unk0.unk_2C.y;
+                        f32 end_x =
+                            FMA_MUL_ADD(link_dir.x, cur->desc.lb_unk0.unk_48,
+                                        cur->desc.lb_unk0.unk_2C.x);
+                        f32 end_y =
+                            FMA_MUL_ADD(link_dir.y, cur->desc.lb_unk0.unk_48,
+                                        cur->desc.lb_unk0.unk_2C.y);
                         s32 floor_hit;
                         if (use_floor_fn != 0) {
                             floor_hit = lb_800103D8(
@@ -774,12 +783,12 @@ void lb_8001044C(DynamicsDesc* desc, void* colliders_raw, int num_colliders,
                             on_ground = 1;
                             link_dir = gnd_norm2;
                         } else {
-                            f32 end_x2 =
-                                link_dir.x * cur->desc.lb_unk0.unk_48 +
-                                cur->desc.lb_unk0.unk_2C.x;
-                            f32 end_y2 =
-                                link_dir.y * cur->desc.lb_unk0.unk_48 +
-                                cur->desc.lb_unk0.unk_2C.y;
+                            f32 end_x2 = FMA_MUL_ADD(
+                                link_dir.x, cur->desc.lb_unk0.unk_48,
+                                cur->desc.lb_unk0.unk_2C.x);
+                            f32 end_y2 = FMA_MUL_ADD(
+                                link_dir.y, cur->desc.lb_unk0.unk_48,
+                                cur->desc.lb_unk0.unk_2C.y);
                             s32 floor_hit3;
                             if (use_floor_fn != 0) {
                                 floor_hit3 = lb_800103D8(

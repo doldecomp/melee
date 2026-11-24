@@ -22,6 +22,7 @@
 #include <melee/ft/types.h>
 #include <melee/it/kinds/itgamewatchrescue.h>
 #include <melee/lb/lb_00B0.h>
+#include <Runtime/fma.h>
 
 static void ftGw_SpecialHi_ItemRescueEnterHitlag(HSD_GObj* gobj);
 static void ftGw_SpecialHi_ItemRescueExitHitlag(HSD_GObj* gobj);
@@ -37,7 +38,7 @@ void ftGw_SpecialHi_ItemRescueSetup(HSD_GObj* gobj)
     fp = GET_FIGHTER(gobj);
     if (fp->u.gw.x226C_rescueGObj == NULL) {
         lb_8000B1CC(fp->parts[FtPart_TopN].joint, NULL, &sp10);
-        sp10.y = -((2.5f * ftCommon_GetModelScale(fp)) - sp10.y);
+        sp10.y = -(FMA_MUL_SUB(2.5f, ftCommon_GetModelScale(fp), sp10.y));
         rescueGObj = it_802C8038(gobj, &sp10, FtPart_TopN,
                                  fp->motion_id - ftGw_MS_SpecialHi,
                                  fp->facing_dir, 2.5f);

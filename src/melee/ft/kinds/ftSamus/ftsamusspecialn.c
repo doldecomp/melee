@@ -27,6 +27,7 @@
 #include <melee/ft/types.h>
 #include <melee/it/kinds/itsamusmissile.h>
 #include <melee/lb/lb_00B0.h>
+#include <Runtime/fma.h>
 
 static void ftSamus_801293BC_inner(HSD_GObj* gobj)
 {
@@ -430,7 +431,7 @@ void ftSs_SpecialS_8012A074(Fighter_GObj* gobj)
         Vec3 position;
         fp->u.ss.x2238++;
         lb_8000B1CC(fp->parts[FtPart_56].joint, NULL, &position);
-        position.x += samus_attr->x34 * fp->facing_dir;
+        FMA_ADD_TO(position.x, samus_attr->x34, fp->facing_dir);
 
         if (fp->motion_id == ftSs_MS_SpecialS ||
             fp->motion_id == ftSs_MS_SpecialAirS)

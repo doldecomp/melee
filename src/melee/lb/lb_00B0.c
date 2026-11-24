@@ -2,6 +2,7 @@
 
 #include <dolphin/mtx.h>
 #include <melee/sc/types.h> // IWYU pragma: keep
+#include <Runtime/fma.h>
 #include <sysdolphin/baselib/aobj.h>
 #include <sysdolphin/baselib/dobj.h> // IWYU pragma: keep
 #include <sysdolphin/baselib/jobj.h>
@@ -482,14 +483,14 @@ void lb_8000C490(HSD_JObj* jobj1, HSD_JObj* jobj2, HSD_JObj* arg2, float arg8,
     float sum_square_sums;
 
     arg2->translate.x =
-        (jobj1->translate.x * arg8) + (jobj2->translate.x * arg9);
+        FMA_MUL_ADD(jobj1->translate.x, arg8, (jobj2->translate.x * arg9));
     arg2->translate.y =
-        (jobj1->translate.y * arg8) + (jobj2->translate.y * arg9);
+        FMA_MUL_ADD(jobj1->translate.y, arg8, (jobj2->translate.y * arg9));
     arg2->translate.z =
-        (jobj1->translate.z * arg8) + (jobj2->translate.z * arg9);
-    arg2->scale.x = (jobj1->scale.x * arg8) + (jobj2->scale.x * arg9);
-    arg2->scale.y = (jobj1->scale.y * arg8) + (jobj2->scale.y * arg9);
-    arg2->scale.z = (jobj1->scale.z * arg8) + (jobj2->scale.z * arg9);
+        FMA_MUL_ADD(jobj1->translate.z, arg8, (jobj2->translate.z * arg9));
+    arg2->scale.x = FMA_MUL_ADD(jobj1->scale.x, arg8, (jobj2->scale.x * arg9));
+    arg2->scale.y = FMA_MUL_ADD(jobj1->scale.y, arg8, (jobj2->scale.y * arg9));
+    arg2->scale.z = FMA_MUL_ADD(jobj1->scale.z, arg8, (jobj2->scale.z * arg9));
     is_quat_1 = HSD_JObjGetFlags(jobj1) & 0x20000;
     is_quat_2 = HSD_JObjGetFlags(jobj2) & 0x20000;
     if (!is_quat_1 && !is_quat_2) {
@@ -585,12 +586,15 @@ void lb_8000C868(HSD_Joint* arg0, HSD_JObj* arg1, HSD_JObj* arg2, float arg8,
     float phi_f1_2;
     float phi_f1_3;
 
-    arg2->translate.x = (arg0->position.x * arg8) + (arg1->translate.x * arg9);
-    arg2->translate.y = (arg0->position.y * arg8) + (arg1->translate.y * arg9);
-    arg2->translate.z = (arg0->position.z * arg8) + (arg1->translate.z * arg9);
-    arg2->scale.x = (arg0->scale.x * arg8) + (arg1->scale.x * arg9);
-    arg2->scale.y = (arg0->scale.y * arg8) + (arg1->scale.y * arg9);
-    arg2->scale.z = (arg0->scale.z * arg8) + (arg1->scale.z * arg9);
+    arg2->translate.x =
+        FMA_MUL_ADD(arg0->position.x, arg8, (arg1->translate.x * arg9));
+    arg2->translate.y =
+        FMA_MUL_ADD(arg0->position.y, arg8, (arg1->translate.y * arg9));
+    arg2->translate.z =
+        FMA_MUL_ADD(arg0->position.z, arg8, (arg1->translate.z * arg9));
+    arg2->scale.x = FMA_MUL_ADD(arg0->scale.x, arg8, (arg1->scale.x * arg9));
+    arg2->scale.y = FMA_MUL_ADD(arg0->scale.y, arg8, (arg1->scale.y * arg9));
+    arg2->scale.z = FMA_MUL_ADD(arg0->scale.z, arg8, (arg1->scale.z * arg9));
     temp_r31 = HSD_JObjGetFlags(arg1) & 0x20000;
     if (temp_r31 == 0) {
         temp_f5 = arg0->rotation.x - arg1->rotate.x;

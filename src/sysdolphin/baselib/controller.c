@@ -5,6 +5,7 @@
 #include "rumble.h"
 #include <dolphin/os.h>
 #include <dolphin/pad.h>
+#include <Runtime/fma.h>
 
 HSD_PadStatus default_status_data = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
                                       0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1 };
@@ -223,7 +224,7 @@ static inline f32 sq(f32 x)
 static inline f32 vec2DSqDist(f32 x, f32 y)
 {
     f32 ret;
-    ret = (x * x) + (y * y);
+    ret = FMA_MUL_ADD(x, x, (y * y));
     return ret;
 }
 

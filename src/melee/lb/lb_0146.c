@@ -6,6 +6,7 @@
 #include <dolphin/gx/GXTev.h>
 #include <dolphin/gx/GXTransform.h>
 #include <dolphin/gx/GXVert.h>
+#include <Runtime/fma.h>
 #include <sysdolphin/baselib/cobj.h>
 #include <sysdolphin/baselib/displayfunc.h>
 #include <sysdolphin/baselib/dobj.h>
@@ -41,10 +42,10 @@ bool lb_80014638(struct lb_80014638_arg0_t* arg0,
         } else {
             z = (z - sp30.z) / (sp24.z - sp30.z);
         }
-        if (z * (sp24.x - sp30.x) + sp30.x > sp18.y) {
+        if (FMA_MUL_ADD(z, (sp24.x - sp30.x), sp30.x) > sp18.y) {
             return false;
         }
-        if (z * (sp24.y - sp30.y) + sp30.y < sp18.x) {
+        if (FMA_MUL_ADD(z, (sp24.y - sp30.y), sp30.y) < sp18.x) {
             return false;
         }
     }

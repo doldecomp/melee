@@ -18,6 +18,7 @@
 #include <melee/ef/efasync.h>
 #include <melee/mp/mplib.h>
 #include <melee/pl/plbonuslib.h>
+#include <Runtime/fma.h>
 
 bool ftCliffCommon_80081298(Fighter_GObj* gobj)
 {
@@ -119,7 +120,8 @@ void ftCo_CliffCatch_Phys(Fighter_GObj* gobj)
         } else {
             mpLib_80053DA4_Floor(fp->mv.co.cliff.ledge_id, &vec);
         }
-        fp->cur_pos.x = fp->x68C_transNPos.z * fp->facing_dir + vec.x;
+        fp->cur_pos.x =
+            FMA_MUL_ADD(fp->x68C_transNPos.z, fp->facing_dir, vec.x);
         fp->cur_pos.y = vec.y + fp->x68C_transNPos.y;
     } else {
         ftCo_Fall_Enter(gobj);

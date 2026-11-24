@@ -11,6 +11,7 @@
 #include <melee/lb/lb_00B0.h>
 #include <melee/lb/lbarchive.h>
 #include <melee/lb/lbdvd.h>
+#include <Runtime/fma.h>
 #include <sysdolphin/baselib/generator.h>
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/gobjproc.h>
@@ -74,7 +75,7 @@ void* efAsync_Dispatch(s32 gfx_id, HSD_GObj* gobj, va_list vlist)
         if (ret_obj != NULL) {
             effect = ret_obj;
             effect->state_flags |= EF_STATE_ASYNC;
-            f32_1 = (0.04f * (*va_arg(vlist, f32*))) + 0.3f;
+            f32_1 = FMA_MUL_ADD(0.04f, (*va_arg(vlist, f32*)), 0.3f);
             if (f32_1 < 0.3f) {
                 f32_1 = 0.3f;
             }
@@ -530,7 +531,7 @@ void* efAsync_Dispatch(s32 gfx_id, HSD_GObj* gobj, va_list vlist)
             }
             node->update = efLib_Cb_Fall_FromParamY;
             node->lifetime = 0x28;
-            node->params.y = (0.4f * HSD_Randf()) + 2.8f;
+            node->params.y = FMA_MUL_ADD(0.4f, HSD_Randf(), 2.8f);
             f32_1 = (M_TAU * HSD_Randf());
             jobj_1 = GET_JOBJ(node->gobj);
             HSD_JObjSetRotationY(jobj_1, f32_1);

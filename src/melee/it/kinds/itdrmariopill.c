@@ -25,6 +25,7 @@
 #include <melee/it/itgroundcoll.h>
 #include <melee/it/ithitbox.h>
 #include <melee/it/itmaplib.h>
+#include <Runtime/fma.h>
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/jobj.h>
 #include <sysdolphin/baselib/mtx.h>
@@ -70,10 +71,10 @@ static inline float my_sqrtf(float x)
     volatile float y;
     if (x > 0) {
         double guess = __frsqrte((double) x);
-        guess = _half * guess * (_three - guess * guess * x);
-        guess = _half * guess * (_three - guess * guess * x);
-        guess = _half * guess * (_three - guess * guess * x);
-        guess = _half * guess * (_three - guess * guess * x);
+        guess = _half * guess * (FMA_SUB_MUL(_three, guess * guess, x));
+        guess = _half * guess * (FMA_SUB_MUL(_three, guess * guess, x));
+        guess = _half * guess * (FMA_SUB_MUL(_three, guess * guess, x));
+        guess = _half * guess * (FMA_SUB_MUL(_three, guess * guess, x));
         y = (float) (x * guess);
         return y;
     }

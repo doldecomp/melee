@@ -4,6 +4,7 @@
 
 #include <dolphin/gx.h>
 #include <dolphin/mtx.h>
+#include <Runtime/fma.h>
 #include <sysdolphin/baselib/cobj.h>
 
 bool lbGx_8001E2F8(Vec4* arg0, Vec3* arg1, U8Vec4* arg2, u32 arg3, float argf1)
@@ -44,7 +45,7 @@ bool lbGx_8001E2F8(Vec4* arg0, Vec3* arg1, U8Vec4* arg2, u32 arg3, float argf1)
                 float temp_f5;
                 PAD_STACK(16);
 
-                temp_f4 = arg0->x * argf1 + arg1->x;
+                temp_f4 = FMA_MUL_ADD(arg0->x, argf1, arg1->x);
                 temp_f2 = arg0->z;
                 temp_f1 = arg1->y + arg0->y;
                 temp_f3 = arg0->w;

@@ -13,6 +13,7 @@
 #include <melee/lb/lbcollision.h>
 #include <melee/mp/mpcoll.h>
 #include <melee/pl/player.h>
+#include <Runtime/fma.h>
 
 /* 0C7890 */ void fn_800C7890(Fighter_GObj* gobj);
 
@@ -44,11 +45,12 @@ void ftCo_800C78B0(HSD_GObj* gobj, HSD_GObj* owner)
     {
         f32 tmp1 = cd->x74C *
                    (cd->x750 - (f32) (Player_80033BB8(fp->player_idx) + 1));
-        f32 tmp2 =
-            (cd->x744 * (cd->x748 - Player_GetHandicap(fp->player_idx)) +
-             cd->x740);
+        f32 tmp2 = (FMA_MUL_ADD(
+            cd->x744, (cd->x748 - Player_GetHandicap(fp->player_idx)),
+            cd->x740));
         tmp2 += tmp1;
-        ftCommon_InitGrab(fp, 0, fp->dmg.x1830_percent * cd->x754 + tmp2);
+        ftCommon_InitGrab(fp, 0,
+                          FMA_MUL_ADD(fp->dmg.x1830_percent, cd->x754, tmp2));
     }
     fp->x1988 = 2;
     fp->invisible = true;

@@ -12,6 +12,7 @@
 #include <melee/it/item.h>
 #include <melee/lb/lbaudio_ax.h>
 #include <melee/lb/lbvector.h>
+#include <Runtime/fma.h>
 #include <sysdolphin/baselib/random.h>
 
 ItemStateTable it_803F8128[] = {
@@ -109,11 +110,11 @@ void it_802D43EC(Item_GObj* gobj)
     randf = HSD_Randf();
     diff = attrs->x8;
     diff = attrs->x4 - diff;
-    ip->xDD4_itemVar.hitodeman.x60 = diff * randf + attrs->x8;
+    ip->xDD4_itemVar.hitodeman.x60 = FMA_MUL_ADD(diff, randf, attrs->x8);
 
     randf = HSD_Randf();
     diff = attrs->xC - attrs->x10;
-    ip->xDD4_itemVar.hitodeman.x64 = diff * randf + attrs->x10;
+    ip->xDD4_itemVar.hitodeman.x64 = FMA_MUL_ADD(diff, randf, attrs->x10);
 
     if (HSD_Randi(2) != 0) {
         ip->xDD4_itemVar.hitodeman.x60 *= -1.0f;
@@ -313,7 +314,8 @@ void itHitodeman_UnkMotion1_Phys(Item_GObj* gobj)
     itHitodemanAttributes* attrs =
         &ip->xC4_article_data->x4_specialAttributes->hitodeman;
     if (ip->xDB0_itcmd_var1 != 0) {
-        ip->x40_vel.x = -((-ip->facing_dir * attrs->x4C) - ip->x40_vel.x);
+        ip->x40_vel.x =
+            -(FMA_MUL_SUB(-ip->facing_dir, attrs->x4C, ip->x40_vel.x));
     }
 }
 
@@ -360,7 +362,7 @@ void it_802D4C74(Item_GObj* gobj)
     Item_GObj* item_gobj;
 
     spawn.prev_pos = ip->pos;
-    spawn.prev_pos.x += ip->facing_dir * attrs->x54;
+    FMA_ADD_TO(spawn.prev_pos.x, ip->facing_dir, attrs->x54);
     spawn.prev_pos.y += attrs->x58;
     it_8026BB88(gobj, &spawn.pos);
     spawn.facing_dir = ip->facing_dir;

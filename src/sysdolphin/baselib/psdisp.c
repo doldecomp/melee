@@ -14,6 +14,7 @@
 #include "tobj.h"
 #include "util.h"
 #include <dolphin/gx.h>
+#include <Runtime/fma.h>
 
 // MSL/math.h defines a non-IEEE FLT_EPSILON
 #undef FLT_EPSILON
@@ -135,15 +136,19 @@ static void calcTornadoLastPos(HSD_Particle* pp, f32* x, f32* y, f32* z)
     vx0 = pp->vel.x - gp->grav;
 
     radius = ABS(gp->radius);
-    radius += vz0 * tanf(ABS(gp->angle));
+    FMA_ADD_TO(radius, vz0, tanf(ABS(gp->angle)));
     radius *= pp->vel.y;
     px = radius * cosf(vx0);
     py = radius * sinf(vx0);
     pz = vz0;
 
-    *x = px * cosb + pz * sinb + gp->pos.x;
-    *y = -px * sina * sinb + py * cosa + pz * sina * cosb + gp->pos.y;
-    *z = -px * cosa * sinb - py * sina + pz * cosa * cosb + gp->pos.z;
+    *x = FMA_MUL_ADD(px, cosb, pz * sinb) + gp->pos.x;
+    *y = FMA_ADD_MUL(FMA_MUL_ADD(-px * sina, sinb, py * cosa), pz * sina,
+                     cosb) +
+         gp->pos.y;
+    *z = FMA_ADD_MUL(FMA_MUL_SUB(-px * cosa, sinb, py * sina), pz * cosa,
+                     cosb) +
+         gp->pos.z;
 }
 
 static void getColorPrimEnv(HSD_Particle* pp, GXColor* primCol,
@@ -853,7 +858,8 @@ static inline void psDispSubMakePolygon(HSD_Particle* pp, u8* texform, f32 x,
             }
         } else {
             f32 trail_alpha = 255.0f * (1.0f - pp->trail);
-            f32 up_len = sqrtf(up.x * up.x + up.y * up.y + up_z * up_z);
+            f32 up_len = sqrtf(
+                FMA_ADD_MUL(FMA_MUL_ADD(up.x, up.x, up.y * up.y), up_z, up_z));
 
             if (up_len != 0.0f) {
                 f32 dz = z - (*prev_z);
@@ -896,8 +902,9 @@ static inline void psDispSubMakePolygon(HSD_Particle* pp, u8* texform, f32 x,
                         }
                         t = *(f32*) &it[4];
                         it += 8;
-                        alpha = (s32) (255.0f - t * trail_alpha);
-                        converted_alpha = (s32) (255.0f - t * trail_alpha);
+                        alpha = (s32) (FMA_SUB_MUL(255.0f, t, trail_alpha));
+                        converted_alpha =
+                            (s32) (FMA_SUB_MUL(255.0f, t, trail_alpha));
                         if (converted_alpha < 0) {
                             alpha = 0;
                         }
@@ -908,9 +915,12 @@ static inline void psDispSubMakePolygon(HSD_Particle* pp, u8* texform, f32 x,
                         if (pp->kind & TexFlipT) {
                             t = 1.0f - t;
                         }
-                        GXWGFifo.f32 = up.x * tx + (right.x * sx + x);
-                        GXWGFifo.f32 = up.y * tx + (right.y * sx + y);
-                        GXWGFifo.f32 = up_z * tx + (right_z * sx + z);
+                        GXWGFifo.f32 = FMA_MUL_ADD(
+                            up.x, tx, (FMA_MUL_ADD(right.x, sx, x)));
+                        GXWGFifo.f32 = FMA_MUL_ADD(
+                            up.y, tx, (FMA_MUL_ADD(right.y, sx, y)));
+                        GXWGFifo.f32 = FMA_MUL_ADD(
+                            up_z, tx, (FMA_MUL_ADD(right_z, sx, z)));
                         GXColor4u8(color->r, color->g, color->b, alpha);
                         if (pp->kind & DispTexture) {
                             GXWGFifo.f32 = s;
@@ -975,9 +985,10 @@ static inline void psDispSubMakePolygon(HSD_Particle* pp, u8* texform, f32 x,
                 if (pp->kind & TexFlipT) {
                     t = 1.0f - t;
                 }
-                GXPosition3f32(x + right.x * sx + up.x * tx,
-                               y + right.y * sx + up.y * tx,
-                               z + right_z * sx + up_z * tx);
+                GXPosition3f32(
+                    FMA_ADD_MUL(FMA_ADD_MUL(x, right.x, sx), up.x, tx),
+                    FMA_ADD_MUL(FMA_ADD_MUL(y, right.y, sx), up.y, tx),
+                    FMA_ADD_MUL(FMA_ADD_MUL(z, right_z, sx), up_z, tx));
                 if (pp->kind & DispTexture) {
                     GXWGFifo.f32 = s;
                     GXWGFifo.f32 = t;
@@ -1087,32 +1098,41 @@ static inline void psDispSub(HSD_Particle* pp, u8* texform)
                 prev_z = pp->pos.z - pp->vel.z;
             }
             w0 = vmtx[2][3] +
-                 (vmtx[2][2] * pp->pos.z +
-                  (vmtx[2][0] * pp->pos.x + vmtx[2][1] * pp->pos.y));
+                 (FMA_MUL_ADD(vmtx[2][2], pp->pos.z,
+                              (FMA_MUL_ADD(vmtx[2][0], pp->pos.x,
+                                           vmtx[2][1] * pp->pos.y))));
             if (0.0f == w0) {
                 return;
             }
             w0inv = -1.0f / w0;
-            w1 = vmtx[2][3] + (vmtx[2][2] * prev_z +
-                               (vmtx[2][0] * prev_x + vmtx[2][1] * prev_y));
+            w1 = vmtx[2][3] +
+                 (FMA_MUL_ADD(
+                     vmtx[2][2], prev_z,
+                     (FMA_MUL_ADD(vmtx[2][0], prev_x, vmtx[2][1] * prev_y))));
             if (0.0f == w1) {
                 return;
             }
             w1inv = -1.0f / w1;
             pv03 = pvmtx[0][3];
             pv13 = pvmtx[1][3];
-            x = w0inv * (pv03 + (pvmtx[0][2] * pp->pos.z +
-                                 (pvmtx[0][0] * pp->pos.x +
-                                  pvmtx[0][1] * pp->pos.y))) -
-                w1inv *
-                    (pv03 + (pvmtx[0][2] * prev_z +
-                             (pvmtx[0][0] * prev_x + pvmtx[0][1] * prev_y)));
-            y = w0inv * (pv13 + (pvmtx[1][2] * pp->pos.z +
-                                 (pvmtx[1][0] * pp->pos.x +
-                                  pvmtx[1][1] * pp->pos.y))) -
-                w1inv *
-                    (pv13 + (pvmtx[1][2] * prev_z +
-                             (pvmtx[1][0] * prev_x + pvmtx[1][1] * prev_y)));
+            x = FMA_MUL_SUB(
+                w0inv,
+                (pv03 + (FMA_MUL_ADD(pvmtx[0][2], pp->pos.z,
+                                     (FMA_MUL_ADD(pvmtx[0][0], pp->pos.x,
+                                                  pvmtx[0][1] * pp->pos.y))))),
+                w1inv * (pv03 +
+                         (FMA_MUL_ADD(pvmtx[0][2], prev_z,
+                                      (FMA_MUL_ADD(pvmtx[0][0], prev_x,
+                                                   pvmtx[0][1] * prev_y))))));
+            y = FMA_MUL_SUB(
+                w0inv,
+                (pv13 + (FMA_MUL_ADD(pvmtx[1][2], pp->pos.z,
+                                     (FMA_MUL_ADD(pvmtx[1][0], pp->pos.x,
+                                                  pvmtx[1][1] * pp->pos.y))))),
+                w1inv * (pv13 +
+                         (FMA_MUL_ADD(pvmtx[1][2], prev_z,
+                                      (FMA_MUL_ADD(pvmtx[1][0], prev_x,
+                                                   pvmtx[1][1] * prev_y))))));
             /* The second read pools the y-row product into a shared temp,
              * which is what keeps it out of the spill pair. */
             (void) (pvmtx[1][1] * prev_y);
@@ -1128,13 +1148,17 @@ static inline void psDispSub(HSD_Particle* pp, u8* texform)
             dx = pp->pos.x - prev_x;
             dy = pp->pos.y - prev_y;
             dz = pp->pos.z - prev_z;
-            x = pvmtx[0][2] * dz + (pvmtx[0][0] * dx + pvmtx[0][1] * dy);
-            y = pvmtx[1][2] * dz + (pvmtx[1][0] * dx + pvmtx[1][1] * dy);
+            x = FMA_MUL_ADD(pvmtx[0][2], dz,
+                            (FMA_MUL_ADD(pvmtx[0][0], dx, pvmtx[0][1] * dy)));
+            y = FMA_MUL_ADD(pvmtx[1][2], dz,
+                            (FMA_MUL_ADD(pvmtx[1][0], dx, pvmtx[1][1] * dy)));
         } else {
-            x = pvmtx[0][2] * pp->vel.z +
-                (pvmtx[0][0] * pp->vel.x + pvmtx[0][1] * pp->vel.y);
-            y = pvmtx[1][2] * pp->vel.z +
-                (pvmtx[1][0] * pp->vel.x + pvmtx[1][1] * pp->vel.y);
+            x = FMA_MUL_ADD(pvmtx[0][2], pp->vel.z,
+                            (FMA_MUL_ADD(pvmtx[0][0], pp->vel.x,
+                                         pvmtx[0][1] * pp->vel.y)));
+            y = FMA_MUL_ADD(pvmtx[1][2], pp->vel.z,
+                            (FMA_MUL_ADD(pvmtx[1][0], pp->vel.x,
+                                         pvmtx[1][1] * pp->vel.y)));
         }
         if (psDispSubAbsLtF32(y, FLT_MIN)) {
             angle = (x >= 0.0f) ? 1.5707964f : -1.5707964f;
@@ -1161,22 +1185,28 @@ static inline void psDispSub(HSD_Particle* pp, u8* texform)
         f32 ay;
         f32 az;
 
-        ax = ry * uz - rz * uy;
+        ax = FMA_MUL_SUB(ry, uz, rz * uy);
         {
             f32 axis_y_product = rx * uz;
-            ay = rz * ux - axis_y_product;
+            ay = FMA_MUL_SUB(rz, ux, axis_y_product);
         }
-        az = rx * uy - ry * ux;
+        az = FMA_MUL_SUB(rx, uy, ry * ux);
         axis.x = ax;
         axis.y = ay;
         axis.z = az;
         PSMTXRotAxisRad(mtx, &axis, angle);
-        right_x = mtx[0][2] * rz + (mtx[0][0] * rx + mtx[0][1] * ry);
-        right_y = mtx[1][2] * rz + (mtx[1][0] * rx + mtx[1][1] * ry);
-        right_z = mtx[2][2] * rz + (mtx[2][0] * rx + mtx[2][1] * ry);
-        up_x = mtx[0][2] * uz + (mtx[0][0] * ux + mtx[0][1] * uy);
-        up_y = mtx[1][2] * uz + (mtx[1][0] * ux + mtx[1][1] * uy);
-        up_z = mtx[2][2] * uz + (mtx[2][0] * ux + mtx[2][1] * uy);
+        right_x = FMA_MUL_ADD(mtx[0][2], rz,
+                              (FMA_MUL_ADD(mtx[0][0], rx, mtx[0][1] * ry)));
+        right_y = FMA_MUL_ADD(mtx[1][2], rz,
+                              (FMA_MUL_ADD(mtx[1][0], rx, mtx[1][1] * ry)));
+        right_z = FMA_MUL_ADD(mtx[2][2], rz,
+                              (FMA_MUL_ADD(mtx[2][0], rx, mtx[2][1] * ry)));
+        up_x = FMA_MUL_ADD(mtx[0][2], uz,
+                           (FMA_MUL_ADD(mtx[0][0], ux, mtx[0][1] * uy)));
+        up_y = FMA_MUL_ADD(mtx[1][2], uz,
+                           (FMA_MUL_ADD(mtx[1][0], ux, mtx[1][1] * uy)));
+        up_z = FMA_MUL_ADD(mtx[2][2], uz,
+                           (FMA_MUL_ADD(mtx[2][0], ux, mtx[2][1] * uy)));
     }
     {
         GXColor color;
@@ -1233,14 +1263,16 @@ static inline void psDispSubAPPSRTPoint(HSD_Particle* pp)
                 pp->appsrt->status = PS_APPSTATUS_STILL;
             }
             PSMTXConcat(vmtx, pp->appsrt->mmtx, (MtxPtr) &pp->appsrt->ssx);
-            scale_x = pp->appsrt->ssx * pp->appsrt->ssx +
-                      pp->appsrt->x74 * pp->appsrt->x74 +
-                      pp->appsrt->x84 * pp->appsrt->x84;
+            scale_x =
+                FMA_ADD_MUL(FMA_MUL_ADD(pp->appsrt->ssx, pp->appsrt->ssx,
+                                        pp->appsrt->x74 * pp->appsrt->x74),
+                            pp->appsrt->x84, pp->appsrt->x84);
             scale_x = sqrtf(scale_x);
             pp->appsrt->x94 = scale_x;
-            scale_y = pp->appsrt->ssy * pp->appsrt->ssy +
-                      pp->appsrt->x78 * pp->appsrt->x78 +
-                      pp->appsrt->x88 * pp->appsrt->x88;
+            scale_y =
+                FMA_ADD_MUL(FMA_MUL_ADD(pp->appsrt->ssy, pp->appsrt->ssy,
+                                        pp->appsrt->x78 * pp->appsrt->x78),
+                            pp->appsrt->x88, pp->appsrt->x88);
             scale_y = sqrtf(scale_y);
             pp->appsrt->x98 = scale_y;
             if (pp->appsrt->xA2 != 0) {
@@ -1260,14 +1292,17 @@ static inline void psDispSubAPPSRTPoint(HSD_Particle* pp)
         pp->appsrt->frameNum = psFrameNum;
     }
     cur_x = pp->appsrt->x70 +
-            (pp->appsrt->x6C * pp->pos.z +
-             (pp->appsrt->ssx * pp->pos.x + pp->appsrt->ssy * pp->pos.y));
+            (FMA_MUL_ADD(pp->appsrt->x6C, pp->pos.z,
+                         (FMA_MUL_ADD(pp->appsrt->ssx, pp->pos.x,
+                                      pp->appsrt->ssy * pp->pos.y))));
     cur_y = pp->appsrt->x80 +
-            (pp->appsrt->x7C * pp->pos.z +
-             (pp->appsrt->x74 * pp->pos.x + pp->appsrt->x78 * pp->pos.y));
+            (FMA_MUL_ADD(pp->appsrt->x7C, pp->pos.z,
+                         (FMA_MUL_ADD(pp->appsrt->x74, pp->pos.x,
+                                      pp->appsrt->x78 * pp->pos.y))));
     cur_z = pp->appsrt->x90 +
-            (pp->appsrt->x8C * pp->pos.z +
-             (pp->appsrt->x84 * pp->pos.x + pp->appsrt->x88 * pp->pos.y));
+            (FMA_MUL_ADD(pp->appsrt->x8C, pp->pos.z,
+                         (FMA_MUL_ADD(pp->appsrt->x84, pp->pos.x,
+                                      pp->appsrt->x88 * pp->pos.y))));
     (void) (pp->pos.x, pp->pos.y);
     (void) (pp->pos.z, pp->size);
     if (pp->kind & Tornado) {
@@ -1276,28 +1311,37 @@ static inline void psDispSubAPPSRTPoint(HSD_Particle* pp)
         f32 z;
 
         calcTornadoLastPos(pp, &x, &y, &z);
-        prev_x =
-            pp->appsrt->x70 + (pp->appsrt->x6C * z +
-                               (pp->appsrt->ssx * x + pp->appsrt->ssy * y));
-        prev_y =
-            pp->appsrt->x80 + (pp->appsrt->x7C * z +
-                               (pp->appsrt->x74 * x + pp->appsrt->x78 * y));
-        prev_z =
-            pp->appsrt->x90 + (pp->appsrt->x8C * z +
-                               (pp->appsrt->x84 * x + pp->appsrt->x88 * y));
+        prev_x = pp->appsrt->x70 +
+                 (FMA_MUL_ADD(
+                     pp->appsrt->x6C, z,
+                     (FMA_MUL_ADD(pp->appsrt->ssx, x, pp->appsrt->ssy * y))));
+        prev_y = pp->appsrt->x80 +
+                 (FMA_MUL_ADD(
+                     pp->appsrt->x7C, z,
+                     (FMA_MUL_ADD(pp->appsrt->x74, x, pp->appsrt->x78 * y))));
+        prev_z = pp->appsrt->x90 +
+                 (FMA_MUL_ADD(
+                     pp->appsrt->x8C, z,
+                     (FMA_MUL_ADD(pp->appsrt->x84, x, pp->appsrt->x88 * y))));
     } else {
         prev_x =
-            pp->appsrt->x70 + (pp->appsrt->x6C * (pp->pos.z - pp->vel.z) +
-                               (pp->appsrt->ssx * (pp->pos.x - pp->vel.x) +
-                                pp->appsrt->ssy * (pp->pos.y - pp->vel.y)));
+            pp->appsrt->x70 +
+            (FMA_MUL_ADD(
+                pp->appsrt->x6C, (pp->pos.z - pp->vel.z),
+                (FMA_MUL_ADD(pp->appsrt->ssx, (pp->pos.x - pp->vel.x),
+                             pp->appsrt->ssy * (pp->pos.y - pp->vel.y)))));
         prev_y =
-            pp->appsrt->x80 + (pp->appsrt->x7C * (pp->pos.z - pp->vel.z) +
-                               (pp->appsrt->x74 * (pp->pos.x - pp->vel.x) +
-                                pp->appsrt->x78 * (pp->pos.y - pp->vel.y)));
+            pp->appsrt->x80 +
+            (FMA_MUL_ADD(
+                pp->appsrt->x7C, (pp->pos.z - pp->vel.z),
+                (FMA_MUL_ADD(pp->appsrt->x74, (pp->pos.x - pp->vel.x),
+                             pp->appsrt->x78 * (pp->pos.y - pp->vel.y)))));
         prev_z =
-            pp->appsrt->x90 + (pp->appsrt->x8C * (pp->pos.z - pp->vel.z) +
-                               (pp->appsrt->x84 * (pp->pos.x - pp->vel.x) +
-                                pp->appsrt->x88 * (pp->pos.y - pp->vel.y)));
+            pp->appsrt->x90 +
+            (FMA_MUL_ADD(
+                pp->appsrt->x8C, (pp->pos.z - pp->vel.z),
+                (FMA_MUL_ADD(pp->appsrt->x84, (pp->pos.x - pp->vel.x),
+                             pp->appsrt->x88 * (pp->pos.y - pp->vel.y)))));
     }
 
     w = (pp->size > 42.5) ? 255.0f : 6.0f * pp->size;
@@ -1404,14 +1448,14 @@ static inline void psDispSubAppSRT(HSD_Particle* pp, u8* texform)
             pp->appsrt->status = PS_APPSTATUS_STILL;
         }
         PSMTXConcat(vmtx, pp->appsrt->mmtx, (MtxPtr) &pp->appsrt->ssx);
-        scale_x = pp->appsrt->ssx * pp->appsrt->ssx +
-                  pp->appsrt->x74 * pp->appsrt->x74 +
-                  pp->appsrt->x84 * pp->appsrt->x84;
+        scale_x = FMA_ADD_MUL(FMA_MUL_ADD(pp->appsrt->ssx, pp->appsrt->ssx,
+                                          pp->appsrt->x74 * pp->appsrt->x74),
+                              pp->appsrt->x84, pp->appsrt->x84);
         scale_x = sqrtf(scale_x);
         pp->appsrt->x94 = scale_x;
-        scale_y = pp->appsrt->ssy * pp->appsrt->ssy +
-                  pp->appsrt->x78 * pp->appsrt->x78 +
-                  pp->appsrt->x88 * pp->appsrt->x88;
+        scale_y = FMA_ADD_MUL(FMA_MUL_ADD(pp->appsrt->ssy, pp->appsrt->ssy,
+                                          pp->appsrt->x78 * pp->appsrt->x78),
+                              pp->appsrt->x88, pp->appsrt->x88);
         scale_y = sqrtf(scale_y);
         pp->appsrt->x98 = scale_y;
         if (pp->appsrt->xA2 != 0) {
@@ -1434,44 +1478,54 @@ static inline void psDispSubAppSRT(HSD_Particle* pp, u8* texform)
         f32 pos_y;
 
         PSMTXCopy((MtxPtr) &pp->appsrt->ssx, draw_mtx);
-        cur_x = draw_mtx[0][3] + (draw_mtx[0][2] * pp->pos.z +
-                                  (draw_mtx[0][0] * (pos_x = pp->pos.x) +
-                                   draw_mtx[0][1] * (pos_y = pp->pos.y)));
+        cur_x =
+            draw_mtx[0][3] +
+            (FMA_MUL_ADD(draw_mtx[0][2], pp->pos.z,
+                         (FMA_MUL_ADD(draw_mtx[0][0], (pos_x = pp->pos.x),
+                                      draw_mtx[0][1] * (pos_y = pp->pos.y)))));
         cur_y = draw_mtx[1][3] +
-                (draw_mtx[1][2] * pp->pos.z +
-                 (draw_mtx[1][0] * pos_x + draw_mtx[1][1] * pos_y));
+                (FMA_MUL_ADD(draw_mtx[1][2], pp->pos.z,
+                             (FMA_MUL_ADD(draw_mtx[1][0], pos_x,
+                                          draw_mtx[1][1] * pos_y))));
         cur_z = draw_mtx[2][3] +
-                (draw_mtx[2][2] * pp->pos.z +
-                 (draw_mtx[2][0] * pos_x + draw_mtx[2][1] * pos_y));
+                (FMA_MUL_ADD(draw_mtx[2][2], pp->pos.z,
+                             (FMA_MUL_ADD(draw_mtx[2][0], pos_x,
+                                          draw_mtx[2][1] * pos_y))));
         if (pp->kind & Tornado) {
             f32 x;
             f32 y;
             f32 z;
 
             calcTornadoLastPos(pp, &x, &y, &z);
-            prev_pos_x =
-                draw_mtx[0][3] + (draw_mtx[0][2] * z +
-                                  (draw_mtx[0][0] * x + draw_mtx[0][1] * y));
-            prev_pos_y =
-                draw_mtx[1][3] + (draw_mtx[1][2] * z +
-                                  (draw_mtx[1][0] * x + draw_mtx[1][1] * y));
-            prev_pos_z =
-                draw_mtx[2][3] + (draw_mtx[2][2] * z +
-                                  (draw_mtx[2][0] * x + draw_mtx[2][1] * y));
+            prev_pos_x = draw_mtx[0][3] +
+                         (FMA_MUL_ADD(draw_mtx[0][2], z,
+                                      (FMA_MUL_ADD(draw_mtx[0][0], x,
+                                                   draw_mtx[0][1] * y))));
+            prev_pos_y = draw_mtx[1][3] +
+                         (FMA_MUL_ADD(draw_mtx[1][2], z,
+                                      (FMA_MUL_ADD(draw_mtx[1][0], x,
+                                                   draw_mtx[1][1] * y))));
+            prev_pos_z = draw_mtx[2][3] +
+                         (FMA_MUL_ADD(draw_mtx[2][2], z,
+                                      (FMA_MUL_ADD(draw_mtx[2][0], x,
+                                                   draw_mtx[2][1] * y))));
         } else {
             f32 dz = pp->pos.z - pp->vel.z;
             f32 dx = pp->pos.x - pp->vel.x;
             f32 dy = pp->pos.y - pp->vel.y;
 
-            prev_pos_x =
-                draw_mtx[0][3] + (draw_mtx[0][2] * dz +
-                                  (draw_mtx[0][0] * dx + draw_mtx[0][1] * dy));
-            prev_pos_y =
-                draw_mtx[1][3] + (draw_mtx[1][2] * dz +
-                                  (draw_mtx[1][0] * dx + draw_mtx[1][1] * dy));
-            prev_pos_z =
-                draw_mtx[2][3] + (draw_mtx[2][2] * dz +
-                                  (draw_mtx[2][0] * dx + draw_mtx[2][1] * dy));
+            prev_pos_x = draw_mtx[0][3] +
+                         (FMA_MUL_ADD(draw_mtx[0][2], dz,
+                                      (FMA_MUL_ADD(draw_mtx[0][0], dx,
+                                                   draw_mtx[0][1] * dy))));
+            prev_pos_y = draw_mtx[1][3] +
+                         (FMA_MUL_ADD(draw_mtx[1][2], dz,
+                                      (FMA_MUL_ADD(draw_mtx[1][0], dx,
+                                                   draw_mtx[1][1] * dy))));
+            prev_pos_z = draw_mtx[2][3] +
+                         (FMA_MUL_ADD(draw_mtx[2][2], dz,
+                                      (FMA_MUL_ADD(draw_mtx[2][0], dx,
+                                                   draw_mtx[2][1] * dy))));
         }
         psScaleAppSRTAxes(pp, draw_mtx);
         (void) &pad;
@@ -1518,12 +1572,16 @@ static inline void psDispSubAppSRT(HSD_Particle* pp, u8* texform)
                 prev_z = pp->pos.z - pp->vel.z;
             }
             w0 = pp->appsrt->x90 +
-                 (pp->appsrt->x8C * pp->pos.z +
-                  (pp->appsrt->x84 * pp->pos.x + pp->appsrt->x88 * pp->pos.y));
-            s808 = prj[1] * pp->appsrt->ssx + prj[2] * pp->appsrt->x84;
-            s804 = prj[1] * pp->appsrt->ssy + prj[2] * pp->appsrt->x88;
+                 (FMA_MUL_ADD(pp->appsrt->x8C, pp->pos.z,
+                              (FMA_MUL_ADD(pp->appsrt->x84, pp->pos.x,
+                                           pp->appsrt->x88 * pp->pos.y))));
+            s808 =
+                FMA_MUL_ADD(prj[1], pp->appsrt->ssx, prj[2] * pp->appsrt->x84);
+            s804 =
+                FMA_MUL_ADD(prj[1], pp->appsrt->ssy, prj[2] * pp->appsrt->x88);
             f16 = prj[1] * pp->appsrt->x6C + prj[2] * pp->appsrt->x8C;
-            f20 = prj[1] * pp->appsrt->x70 + prj[2] * pp->appsrt->x90;
+            f20 =
+                FMA_ADD_MUL(prj[1] * pp->appsrt->x70, prj[2], pp->appsrt->x90);
             f12 = prj[3] * pp->appsrt->x74 + prj[4] * pp->appsrt->x84;
             f8 = prj[3] * pp->appsrt->x78 + prj[4] * pp->appsrt->x88;
             f11 = prj[3] * pp->appsrt->x7C + prj[4] * pp->appsrt->x8C;
@@ -1532,28 +1590,35 @@ static inline void psDispSubAppSRT(HSD_Particle* pp, u8* texform)
                 return;
             }
             w0inv = -1.0f / w0;
-            w1 = pp->appsrt->x90 +
-                 (pp->appsrt->x8C * prev_z +
-                  (pp->appsrt->x84 * prev_x + pp->appsrt->x88 * prev_y));
+            w1 = pp->appsrt->x90 + (FMA_MUL_ADD(pp->appsrt->x8C, prev_z,
+                                                (pp->appsrt->x84 * prev_x +
+                                                 pp->appsrt->x88 * prev_y)));
             if (0.0f == w1) {
                 return;
             }
             w1inv = -1.0f / w1;
-            vf1 = w0inv * (f20 + (f16 * pp->pos.z +
-                                  (s808 * pp->pos.x + s804 * pp->pos.y))) -
-                  w1inv *
-                      (f20 + (f16 * prev_z + (s808 * prev_x + s804 * prev_y)));
-            vf2 =
-                w0inv * (f13 + (f11 * pp->pos.z +
-                                (f12 * pp->pos.x + f8 * pp->pos.y))) -
-                w1inv * (f13 + (f11 * prev_z + (f12 * prev_x + f8 * prev_y)));
+            vf1 = FMA_MUL_SUB(
+                w0inv,
+                (f20 + (FMA_MUL_ADD(f16, pp->pos.z,
+                                    (s808 * pp->pos.x + s804 * pp->pos.y)))),
+                w1inv *
+                    (f20 + (FMA_MUL_ADD(f16, prev_z,
+                                        (s808 * prev_x + s804 * prev_y)))));
+            vf2 = FMA_MUL_SUB(
+                w0inv,
+                (f13 +
+                 (FMA_MUL_ADD(f11, pp->pos.z,
+                              (FMA_MUL_ADD(f12, pp->pos.x, f8 * pp->pos.y))))),
+                w1inv * (f13 + (FMA_MUL_ADD(
+                                   f11, prev_z,
+                                   (FMA_MUL_ADD(f12, prev_x, f8 * prev_y))))));
         } else {
-            s800 = prj[1] * pp->appsrt->ssx + prj[2];
-            s7FC = prj[1] * pp->appsrt->ssy + prj[2];
-            s7F8 = prj[1] * pp->appsrt->x6C + prj[2];
-            f17 = prj[3] * pp->appsrt->x74 + prj[4];
-            f18 = prj[3] * pp->appsrt->x78 + prj[4];
-            f20b = prj[3] * pp->appsrt->x7C + prj[4];
+            s800 = FMA_MUL_ADD(prj[1], pp->appsrt->ssx, prj[2]);
+            s7FC = FMA_MUL_ADD(prj[1], pp->appsrt->ssy, prj[2]);
+            s7F8 = FMA_MUL_ADD(prj[1], pp->appsrt->x6C, prj[2]);
+            f17 = FMA_MUL_ADD(prj[3], pp->appsrt->x74, prj[4]);
+            f18 = FMA_MUL_ADD(prj[3], pp->appsrt->x78, prj[4]);
+            f20b = FMA_MUL_ADD(prj[3], pp->appsrt->x7C, prj[4]);
             if (pp->kind & Tornado) {
                 f32 tx;
                 f32 ty;
@@ -1567,8 +1632,10 @@ static inline void psDispSubAppSRT(HSD_Particle* pp, u8* texform)
                     dy = pp->pos.y - ty;
                     dx = pp->pos.x - tx;
                     dz = pp->pos.z - tz;
-                    vf1 = s7F8 * dz + (s800 * dx + s7FC * dy);
-                    vf2 = f20b * dz + (f17 * dx + f18 * dy);
+                    vf1 = FMA_MUL_ADD(s7F8, dz,
+                                      (FMA_MUL_ADD(s800, dx, s7FC * dy)));
+                    vf2 = FMA_MUL_ADD(f20b, dz,
+                                      (FMA_MUL_ADD(f17, dx, f18 * dy)));
                 }
             } else {
                 f32 vz;
@@ -1578,8 +1645,9 @@ static inline void psDispSubAppSRT(HSD_Particle* pp, u8* texform)
                 vy = pp->vel.y;
                 vx = pp->vel.x;
                 vz = pp->vel.z;
-                vf1 = s7F8 * vz + (s800 * vx + s7FC * vy);
-                vf2 = f20b * vz + (f17 * vx + f18 * vy);
+                vf1 =
+                    FMA_MUL_ADD(s7F8, vz, (FMA_MUL_ADD(s800, vx, s7FC * vy)));
+                vf2 = FMA_MUL_ADD(f20b, vz, (FMA_MUL_ADD(f17, vx, f18 * vy)));
             }
         }
         if (psMaskAbsLtF32(vf2, FLT_MIN)) {
@@ -1597,11 +1665,11 @@ static inline void psDispSubAppSRT(HSD_Particle* pp, u8* texform)
         f32 c = cosf(angle);
         f32 s = sinf(angle);
         f32 old_x = ax;
-        ax = c * ax - s * ay;
-        ay = s * old_x + c * ay;
+        ax = FMA_MUL_SUB(c, ax, s * ay);
+        ay = FMA_MUL_ADD(s, old_x, c * ay);
         old_x = bx;
-        bx = c * bx - s * by;
-        by = s * old_x + c * by;
+        bx = FMA_MUL_SUB(c, bx, s * by);
+        by = FMA_MUL_ADD(s, old_x, c * by);
     }
     psSetCurrentMtx(GX_PNMTX1);
     /** @todo Later HSD shares this emission with the polygon path; Melee's
@@ -1648,7 +1716,7 @@ static inline void psDispSubAppSRT(HSD_Particle* pp, u8* texform)
             }
         } else {
             f32 trail_alpha = 255.0f * (1.0f - pp->trail);
-            f32 axis_len = sqrtf(bx * bx + by * by);
+            f32 axis_len = sqrtf(FMA_MUL_ADD(bx, bx, by * by));
 
             if (axis_len != 0.0f) {
                 f32 dx = cur_x - prev_pos_x;
@@ -1691,8 +1759,9 @@ static inline void psDispSubAppSRT(HSD_Particle* pp, u8* texform)
                         }
                         t = *(f32*) &it[4];
                         it += 8;
-                        alpha = (s32) (255.0f - t * trail_alpha);
-                        converted_alpha = (s32) (255.0f - t * trail_alpha);
+                        alpha = (s32) (FMA_SUB_MUL(255.0f, t, trail_alpha));
+                        converted_alpha =
+                            (s32) (FMA_SUB_MUL(255.0f, t, trail_alpha));
                         if (converted_alpha < 0) {
                             alpha = 0;
                         }
@@ -1703,8 +1772,10 @@ static inline void psDispSubAppSRT(HSD_Particle* pp, u8* texform)
                         if (pp->kind & TexFlipT) {
                             t = 1.0f - t;
                         }
-                        GXPosition3f32(cur_x + ax * sx + bx * tx,
-                                       cur_y + ay * sx + by * tx, cur_z);
+                        GXPosition3f32(
+                            FMA_ADD_MUL(FMA_ADD_MUL(cur_x, ax, sx), bx, tx),
+                            FMA_ADD_MUL(FMA_ADD_MUL(cur_y, ay, sx), by, tx),
+                            cur_z);
                         GXColor4u8(draw_color.r, draw_color.g, draw_color.b,
                                    (u8) alpha);
                         if (pp->kind & DispTexture) {
@@ -1778,8 +1849,9 @@ static inline void psDispSubAppSRT(HSD_Particle* pp, u8* texform)
                 if (pp->kind & TexFlipT) {
                     t = 1.0f - t;
                 }
-                GXPosition3f32(cur_x + ax * sx + bx * tx,
-                               cur_y + ay * sx + by * tx, cur_z);
+                GXPosition3f32(FMA_ADD_MUL(FMA_ADD_MUL(cur_x, ax, sx), bx, tx),
+                               FMA_ADD_MUL(FMA_ADD_MUL(cur_y, ay, sx), by, tx),
+                               cur_z);
                 if (pp->kind & DispTexture) {
                     GXWGFifo.f32 = s;
                     GXWGFifo.f32 = t;
@@ -1926,36 +1998,47 @@ void psDispParticles(u32 target_link, u32 sw)
                                 x_scale = prj[1];
                                 x_offset = prj[2];
                                 w0 = vmtx[2][0];
-                                pvmtx[0][0] =
-                                    x_scale * vmtx[0][0] + x_offset * w0;
+                                pvmtx[0][0] = FMA_MUL_ADD(x_scale, vmtx[0][0],
+                                                          x_offset * w0);
                                 w1 = vmtx[2][1];
-                                pvmtx[0][1] =
-                                    x_scale * vmtx[0][1] + x_offset * w1;
+                                pvmtx[0][1] = FMA_MUL_ADD(x_scale, vmtx[0][1],
+                                                          x_offset * w1);
                                 w2 = vmtx[2][2];
-                                pvmtx[0][2] =
-                                    x_scale * vmtx[0][2] + x_offset * w2;
+                                pvmtx[0][2] = FMA_MUL_ADD(x_scale, vmtx[0][2],
+                                                          x_offset * w2);
                                 w3 = vmtx[2][3];
-                                pvmtx[0][3] =
-                                    x_scale * vmtx[0][3] + x_offset * w3;
+                                pvmtx[0][3] = FMA_MUL_ADD(x_scale, vmtx[0][3],
+                                                          x_offset * w3);
                                 y_scale = prj[3];
                                 y_offset = prj[4];
                                 y0 = y_offset * w0;
                                 y1 = y_offset * w1;
                                 y2 = y_offset * w2;
-                                pvmtx[1][0] = y_scale * vmtx[1][0] + y0;
-                                pvmtx[1][1] = y_scale * vmtx[1][1] + y1;
-                                pvmtx[1][2] = y_scale * vmtx[1][2] + y2;
-                                pvmtx[1][3] =
-                                    y_scale * vmtx[1][3] + (y_offset * w3);
+                                pvmtx[1][0] =
+                                    FMA_MUL_ADD(y_scale, vmtx[1][0], y0);
+                                pvmtx[1][1] =
+                                    FMA_MUL_ADD(y_scale, vmtx[1][1], y1);
+                                pvmtx[1][2] =
+                                    FMA_MUL_ADD(y_scale, vmtx[1][2], y2);
+                                pvmtx[1][3] = FMA_MUL_ADD(y_scale, vmtx[1][3],
+                                                          (y_offset * w3));
                             } else {
-                                pvmtx[0][0] = prj[1] * vmtx[0][0] + prj[2];
-                                pvmtx[0][1] = prj[1] * vmtx[0][1] + prj[2];
-                                pvmtx[0][2] = prj[1] * vmtx[0][2] + prj[2];
-                                pvmtx[0][3] = prj[1] * vmtx[0][3] + prj[2];
-                                pvmtx[1][0] = prj[3] * vmtx[1][0] + prj[4];
-                                pvmtx[1][1] = prj[3] * vmtx[1][1] + prj[4];
-                                pvmtx[1][2] = prj[3] * vmtx[1][2] + prj[4];
-                                pvmtx[1][3] = prj[3] * vmtx[1][3] + prj[4];
+                                pvmtx[0][0] =
+                                    FMA_MUL_ADD(prj[1], vmtx[0][0], prj[2]);
+                                pvmtx[0][1] =
+                                    FMA_MUL_ADD(prj[1], vmtx[0][1], prj[2]);
+                                pvmtx[0][2] =
+                                    FMA_MUL_ADD(prj[1], vmtx[0][2], prj[2]);
+                                pvmtx[0][3] =
+                                    FMA_MUL_ADD(prj[1], vmtx[0][3], prj[2]);
+                                pvmtx[1][0] =
+                                    FMA_MUL_ADD(prj[3], vmtx[1][0], prj[4]);
+                                pvmtx[1][1] =
+                                    FMA_MUL_ADD(prj[3], vmtx[1][1], prj[4]);
+                                pvmtx[1][2] =
+                                    FMA_MUL_ADD(prj[3], vmtx[1][2], prj[4]);
+                                pvmtx[1][3] =
+                                    FMA_MUL_ADD(prj[3], vmtx[1][3], prj[4]);
                             }
                             /// @todo Passing @c rvmtx directly swaps the first
                             /// two axis loads.

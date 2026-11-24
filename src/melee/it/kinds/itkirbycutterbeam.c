@@ -12,6 +12,7 @@
 #include <melee/it/itgroundcoll.h>
 #include <melee/it/itmaplib.h>
 #include <melee/lb/lbvector.h>
+#include <Runtime/fma.h>
 
 ItemStateTable it_803F6798[] = {
     0,
@@ -87,7 +88,7 @@ void itKirbycutterbeam_UnkMotion0_Phys(Item_GObj* gobj)
                     sinf(ip->xDD4_itemVar.kirbycutterbeam.angle);
     if (ip->ground_or_air == GA_Ground) {
         if (ip->x40_vel.y < 0.0f) {
-            ip->x40_vel.y += (0.05f * ip->x40_vel.y);
+            FMA_ADD_TO(ip->x40_vel.y, 0.05f, ip->x40_vel.y);
         }
     }
     ip->x40_vel.z = 0.0f;

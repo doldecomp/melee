@@ -19,6 +19,7 @@
 #include <melee/mn/inlines.h>
 #include <melee/mn/mnmain.h>
 #include <melee/sc/types.h>
+#include <Runtime/fma.h>
 #include <sysdolphin/baselib/controller.h>
 #include <sysdolphin/baselib/dobj.h>
 #include <sysdolphin/baselib/fog.h>
@@ -221,11 +222,11 @@ void fn_8019C048(HSD_GObj* gobj)
 
     players = tmd->x30;
     if ((s32) players == 4) {
-        x = (13.0f * (f32) idx) + -19.5f;
+        x = FMA_MUL_ADD(13.0f, (f32) idx, -19.5f);
     } else if ((s32) players == 3) {
-        x = 6.5f + ((13.0f * (f32) idx) - 19.5f);
+        x = 6.5f + (FMA_MUL_SUB(13.0f, (f32) idx, 19.5f));
     } else {
-        x = 6.5f + ((13.0f * (2.0f * (f32) idx)) - 19.5f);
+        x = 6.5f + (FMA_MUL_SUB(13.0f, (2.0f * (f32) idx), 19.5f));
     }
 
     HSD_JObjSetTranslateX(jobj, x);
@@ -444,7 +445,7 @@ void fn_8019CDBC(HSD_GObj* gobj)
 
     sp28 = HSD_JObjGetTranslationX(jobj);
     temp_r27 = tmd->x37[idx].xE;
-    sp24 = (5.999997f * temp_r27) - 21.5f;
+    sp24 = FMA_MUL_SUB(5.999997f, temp_r27, 21.5f);
     mn_8022F410(&sp28, &sp24, 0.4f);
 
     switch (mn_8022F410(&sp28, &sp24, 0.2f)) {
@@ -561,15 +562,15 @@ void fn_8019D1BC(void)
         }
 
         if (tmd->x30 == 4) {
-            pos = 73.0f + (240.0f * (f32) i + 152.0f);
+            pos = 73.0f + (FMA_MUL_ADD(240.0f, (f32) i, 152.0f));
         } else if (tmd->x30 == 3) {
-            pos = 73.0f + (240.0f * (f32) i + 270.0f);
+            pos = 73.0f + (FMA_MUL_ADD(240.0f, (f32) i, 270.0f));
         } else {
-            pos = 73.0f + (480.0f * (f32) i + 270.0f);
+            pos = 73.0f + (FMA_MUL_ADD(480.0f, (f32) i, 270.0f));
         }
 
         fn_8018ECA8((s32) tmd->x4B8[i].x6, (s32) tmd->x4B8[i].x0, 5,
-                    0.99f * (pos - 320.0f) - 261.0f, -11.0f, 5);
+                    FMA_MUL_SUB(0.99f, (pos - 320.0f), 261.0f), -11.0f, 5);
         tmd->x524[2]->hidden = 1;
 
         gobj = fn_8019035C(0, lbl_804D6694->models[10], 0, 0x1A, 2, 1,
@@ -664,8 +665,8 @@ void fn_8019D1BC(void)
         gobj = fn_8019035C(0, lbl_804D6694->models[3], 0, 0x1A, 2, 1,
                            fn_8019CDBC, 0.0f);
         jobj = GET_JOBJ(gobj);
-        fn_8018FDC4(jobj, (5.999997f * (f32) tmd->x37[i].xF) - 21.5f, 17.0f,
-                    0.01f);
+        fn_8018FDC4(jobj, FMA_MUL_SUB(5.999997f, (f32) tmd->x37[i].xF, 21.5f),
+                    17.0f, 0.01f);
 
         if (tmd->x37[i].x5 != 0) {
             fn_8019044C(jobj, 201.0f);
@@ -689,8 +690,8 @@ void fn_8019D1BC(void)
         }
         tmd->x534[i]->default_alignment = 1;
         HSD_SisLib_803A6B98(tmd->x534[i],
-                            10.0f * ((5.999997f * (f32) i) - 21.5f), -172.0f,
-                            name_buf[i]);
+                            10.0f * (FMA_MUL_SUB(5.999997f, (f32) i, 21.5f)),
+                            -172.0f, name_buf[i]);
         HSD_SisLib_803A7548(tmd->x534[i], 0, 0.35f, 0.6f);
     }
 }

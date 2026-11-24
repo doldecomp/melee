@@ -17,6 +17,7 @@
 #include <melee/lb/lb_00F9.h>
 #include <melee/lb/lbspdisplay.h>
 #include <melee/mp/mplib.h>
+#include <Runtime/fma.h>
 #include <sysdolphin/baselib/debug.h>
 #include <sysdolphin/baselib/dobj.h>
 #include <sysdolphin/baselib/gobj.h>
@@ -468,9 +469,9 @@ void stageGObj1_GObjProc(Ground_GObj* arg0)
         cur = gp->u.pura.xC8;
         t = (f32) cur / 3600.0f;
         gp->u.pura.xC8 = cur + 1;
-        sp18.r = (s8) (t * (f32) (spilC.r - sp18.r) + (f32) sp18.r);
-        sp18.g = (s8) (t * (f32) (spilC.g - sp18.g) + (f32) sp18.g);
-        sp18.b = (s8) (t * (f32) (spilC.b - sp18.b) + (f32) sp18.b);
+        sp18.r = (s8) (FMA_MUL_ADD(t, (f32) (spilC.r - sp18.r), (f32) sp18.r));
+        sp18.g = (s8) (FMA_MUL_ADD(t, (f32) (spilC.g - sp18.g), (f32) sp18.g));
+        sp18.b = (s8) (FMA_MUL_ADD(t, (f32) (spilC.b - sp18.b), (f32) sp18.b));
         Ground_801C205C(&sp18);
         Camera_SetBackgroundColor(sp18.r, sp18.g, sp18.b);
         return;

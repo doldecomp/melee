@@ -6,6 +6,7 @@
 #include <melee/it/it_2725.h>
 #include <melee/it/item.h>
 #include <melee/it/itgroundcoll.h>
+#include <Runtime/fma.h>
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/jobj.h>
 
@@ -92,7 +93,7 @@ bool itParasol_UnkMotion2_Anim(Item_GObj* item_gobj)
         ry = HSD_JObjGetRotationY(jobj);
         fm = attrs->x8 + ABS(item->x40_vel.y * attrs->xC);
         fm *= item->facing_dir;
-        ry = deg_to_rad * fm + ry;
+        ry = FMA_MUL_ADD(deg_to_rad, fm, ry);
         HSD_JObjSetRotationY(jobj, ry);
     }
     return false;

@@ -6,6 +6,7 @@
 #include <melee/ft/inlines.h>
 #include <melee/lb/lb_00B0.h>
 #include <melee/pl/player.h>
+#include <Runtime/fma.h>
 
 /* 0DAECC */ static void fn_800DAECC(Fighter_GObj* gobj);
 /* 0DAEEC */ static void fn_800DAEEC(Fighter_GObj* gobj);
@@ -27,9 +28,9 @@ float ftCo_800DA824(Fighter* fp)
     handicap = Player_GetHandicap(fp->player_idx);
     temp = (f32) handicap;
     temp = co->x35C - temp;
-    temp = co->x358 * temp + co->x354;
+    temp = FMA_MUL_ADD(co->x358, temp, co->x354);
     temp += value;
-    return fp->dmg.x1830_percent * co->x368 + temp;
+    return FMA_MUL_ADD(fp->dmg.x1830_percent, co->x368, temp);
 }
 
 void fn_800DA8E4(Fighter_GObj* gobj, Fighter_GObj* victim_gobj, s32 arg2)
@@ -51,9 +52,10 @@ void fn_800DA8E4(Fighter_GObj* gobj, Fighter_GObj* victim_gobj, s32 arg2)
     v = (*cd2) * (cd->x364 - ((f32) (Player_80033BB8(fp->player_idx) + 1)));
     {
         f32 s3 = (cd->x35C - (f32) Player_GetHandicap(fp->player_idx));
-        s3 = cd->x358 * s3 + cd->x354;
+        s3 = FMA_MUL_ADD(cd->x358, s3, cd->x354);
         s3 = s3 + v;
-        ftCommon_InitGrab(fp, 0, (fp->dmg.x1830_percent * cd->x368) + s3);
+        ftCommon_InitGrab(fp, 0,
+                          FMA_MUL_ADD(fp->dmg.x1830_percent, cd->x368, s3));
     }
     fp->mv.ca.specials.grav = 0.0f;
     fp->mv._[0xC] = 0;
@@ -356,8 +358,9 @@ void ftCo_800DB464(Fighter_GObj* gobj)
     Vec3 pos;
     lb_8000B1CC(fp->parts[ftParts_GetBoneIndex(fp, FtPart_XRotN)].joint, NULL,
                 &pos);
-    pos.x = (fp->facing_dir * (fp->x1A70.z * fp->x34_scale.y)) + pos.x;
-    pos.y += fp->x1A70.y * fp->x34_scale.y;
+    pos.x =
+        FMA_MUL_ADD(fp->facing_dir, (fp->x1A70.z * fp->x34_scale.y), pos.x);
+    FMA_ADD_TO(pos.y, fp->x1A70.y, fp->x34_scale.y);
     pos.z = 0.0f;
     fp->cur_pos = pos;
 }

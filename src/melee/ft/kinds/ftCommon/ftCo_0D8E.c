@@ -7,6 +7,7 @@
 #include <melee/it/inlines.h>
 #include <melee/it/kinds/itlinkhookshot.h>
 #include <melee/lb/lb_00B0.h>
+#include <Runtime/fma.h>
 
 typedef struct {
     u8 pad_0[0x84];
@@ -68,11 +69,11 @@ bool fn_800D8EC8(Fighter_GObj* gobj)
                                .joint;
                     HSD_JObjSetupMatrix(jobj);
                     if (fp->kind == Ft_Kind_Link) {
-                        var_f3 = 8.0 * fp->facing_dir * fp->x34_scale.y +
-                                 jobj->mtx[0][3];
+                        var_f3 = FMA_MUL_ADD(8.0 * fp->facing_dir,
+                                             fp->x34_scale.y, jobj->mtx[0][3]);
                     } else {
-                        var_f3 = 8.0 * fp->facing_dir * fp->x34_scale.y +
-                                 jobj->mtx[0][3];
+                        var_f3 = FMA_MUL_ADD(8.0 * fp->facing_dir,
+                                             fp->x34_scale.y, jobj->mtx[0][3]);
                     }
                     mtxY = jobj->mtx[1][3];
                     if (mpCheckAllRemap(NULL, NULL, NULL, NULL, -1, -1,

@@ -27,6 +27,7 @@
 #include <melee/ft/kinds/ftCommon/ftCo_SquatWait.h>
 #include <melee/ft/types.h>
 #include <melee/lb/lbcollision.h>
+#include <Runtime/fma.h>
 
 void ftSs_Init_80128944(HSD_GObj* gobj, float farg1, float farg2)
 {
@@ -82,7 +83,7 @@ float ftSs_Init_80128AC8(HSD_GObj* gobj, float farg1, float farg2)
     if (value <= -1.0f) {
         value = -1.0f;
     }
-    return (-da->x4 * value) + 1.5707963705062866f;
+    return FMA_MUL_ADD(-da->x4, value, 1.5707963705062866f);
 }
 
 static inline void ftSamus_80128B1C_inner(HSD_GObj* gobj, float angle)

@@ -17,6 +17,7 @@
 #include <melee/it/it_2725.h>
 #include <melee/it/item.h>
 #include <melee/it/itgroundcoll.h>
+#include <Runtime/fma.h>
 #include <sysdolphin/baselib/jobj.h>
 
 /* 2C4434 */ static bool itZeldadinfire_UnkMotion1_Coll(Item_GObj* gobj);
@@ -174,9 +175,9 @@ bool itZeldadinfire_UnkMotion0_Anim(Item_GObj* gobj)
             itZeldadinfire_UnkMotion0_Anim_inline(gobj);
         }
     }
-    v.x = v.y = v.z = ip->xDD4_itemVar.zeldadinfire.xDD8 *
-                          ((attrs->xC - attrs->x8) / attrs->x4) +
-                      attrs->x8;
+    v.x = v.y = v.z =
+        FMA_MUL_ADD(ip->xDD4_itemVar.zeldadinfire.xDD8,
+                    ((attrs->xC - attrs->x8) / attrs->x4), attrs->x8);
     HSD_JObjSetScale(jobj, &v);
     if (it_80273130(gobj) == 1) {
         itZeldadinfire_UnkMotion0_Anim_inline(gobj);
@@ -191,9 +192,9 @@ bool itZeldadinfire_UnkMotion1_Anim(Item_GObj* gobj)
     ItZeldaDinFire_ItemVars* attrs =
         &ip->xC4_article_data->x4_specialAttributes->zelda_din_fire;
     Vec v;
-    v.x = v.y = v.z = ip->xDD4_itemVar.zeldadinfire.xDD8 *
-                          ((attrs->xC - attrs->x8) / attrs->x4) +
-                      attrs->x8;
+    v.x = v.y = v.z =
+        FMA_MUL_ADD(ip->xDD4_itemVar.zeldadinfire.xDD8,
+                    ((attrs->xC - attrs->x8) / attrs->x4), attrs->x8);
     HSD_JObjSetScale(jobj, &v);
     if (it_80273130(gobj) == 1) {
         if (ip->xDD4_itemVar.zeldadinfire.xDF4 != 0) {
@@ -231,8 +232,8 @@ void itZeldadinfire_UnkMotion0_Phys(Item_GObj* gobj)
             ftLib_GetLStick(ip->xDD4_itemVar.zeldadinfire.xDE0, f4, f3);
             if (ABS(f1) > attrs->x20) {
                 ip->xDD4_itemVar.zeldadinfire.xDE8 =
-                    ip->facing_dir * (attrs->x24 * f1) +
-                    ip->xDD4_itemVar.zeldadinfire.xDE8;
+                    FMA_MUL_ADD(ip->facing_dir, (attrs->x24 * f1),
+                                ip->xDD4_itemVar.zeldadinfire.xDE8);
                 if (ABS(ip->xDD4_itemVar.zeldadinfire.xDE8) > attrs->x28) {
                     ip->xDD4_itemVar.zeldadinfire.xDE8 =
                         ip->xDD4_itemVar.zeldadinfire.xDE8 > 0.0f

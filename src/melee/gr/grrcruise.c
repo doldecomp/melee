@@ -19,6 +19,7 @@
 #include <melee/lb/lb_00F9.h>
 #include <melee/lb/lbvector.h>
 #include <melee/mp/mplib.h>
+#include <Runtime/fma.h>
 #include <sysdolphin/baselib/archive.h>
 #include <sysdolphin/baselib/debug.h>
 #include <sysdolphin/baselib/dobj.h>
@@ -395,8 +396,8 @@ static inline void grRCruise_801FFADC_inline(HSD_GObj* gobj, Vec3* sp64)
     lb_8000B1CC(cam_jobj, NULL, &sp18);
     lb_8000B1CC(int_jobj, NULL, &sp24);
     lbVector_Diff(&sp24, &sp18, &diff);
-    sp64->x = -(diff.x * (sp18.z / diff.z) - sp18.x);
-    sp64->y = -(diff.y * (sp18.z / diff.z) - sp18.y);
+    sp64->x = -(FMA_MUL_SUB(diff.x, (sp18.z / diff.z), sp18.x));
+    sp64->y = -(FMA_MUL_SUB(diff.y, (sp18.z / diff.z), sp18.y));
     sp64->z = 0.0f;
     lbVector_Sub(sp64, &cam_offset2);
     sp64->y += 10.0f;
@@ -644,12 +645,12 @@ void grRCruise_80200578(void* user_data, int joint_id, CollData* coll,
         lb_8000B1CC(jobj, NULL, &pos);
         dx = pos.x - coll->cur_pos.x;
         dy = pos.y - coll->cur_pos.y;
-        dist = sqrtf(dy * dy + dx * dx);
+        dist = sqrtf(FMA_MUL_ADD(dy, dy, dx * dx));
         if (dist > 4.0f) {
             if (pos.x < coll->cur_pos.x) {
-                gp->u.rcruise.x24 += dist * (coll_x50 / 1000.0f);
+                FMA_ADD_TO(gp->u.rcruise.x24, dist, (coll_x50 / 1000.0f));
             } else {
-                gp->u.rcruise.x28 += dist * (coll_x50 / 1000.0f);
+                FMA_ADD_TO(gp->u.rcruise.x28, dist, (coll_x50 / 1000.0f));
             }
         }
         gp->u.rcruise.x34++;
@@ -662,7 +663,7 @@ void grRCruise_8020071C(Ground_GObj* gobj)
     HSD_JObj* jobj = Ground_801C3FA4(gobj, 8);
     HSD_JObj* jobj5 = Ground_801C3FA4(Ground_GetMapGObj(5), 8);
     f32 abs_rot = ABS(gp->u.rcruise.x18);
-    f32 wrapped = abs_rot - (360.0f * (s32) (abs_rot / 360.0f));
+    f32 wrapped = FMA_SUB_MUL(abs_rot, 360.0f, (s32) (abs_rot / 360.0f));
 
     switch (gp->u.rcruise.x2C) {
     case 0:
@@ -703,7 +704,7 @@ void grRCruise_8020071C(Ground_GObj* gobj)
             }
         } else {
             gp->u.rcruise.x38--;
-            gp->u.rcruise.x20 += 0.008f * -gp->u.rcruise.x1C;
+            FMA_ADD_TO(gp->u.rcruise.x20, 0.008f, -gp->u.rcruise.x1C);
             if ((gp->u.rcruise.x20 < 0.0f ? -gp->u.rcruise.x20
                                           : gp->u.rcruise.x20) <= 0.008f)
             {
@@ -902,9 +903,9 @@ void grRCruise_80201110(Ground_GObj* gobj)
         }
     }
     if (gp->u.rcruise.xC != 0) {
-        gp->u.rcruise.x4->unk_scale = 0.3 * HSD_Randf() + 0.2;
+        gp->u.rcruise.x4->unk_scale = FMA_MUL_ADD(0.3, HSD_Randf(), 0.2);
     } else {
-        gp->u.rcruise.x4->unk_scale = 0.2 * HSD_Randf() + 0.1;
+        gp->u.rcruise.x4->unk_scale = FMA_MUL_ADD(0.2, HSD_Randf(), 0.1);
     }
 }
 

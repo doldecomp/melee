@@ -15,6 +15,7 @@
 #include "lbvector.h"
 #include <dolphin/mtx.h>
 #include <melee/ft/types.h>
+#include <Runtime/fma.h>
 #include <sysdolphin/baselib/jobj.h>
 #include <sysdolphin/baselib/mtx.h>
 #include <sysdolphin/baselib/quatlib.h>
@@ -61,9 +62,9 @@ void fn_80020AEC(HSD_JObj* jobj, Mtx out)
 
         if (scale_sq > 0.0f) {
             f64 e = __frsqrte(scale_sq);
-            e = 0.5 * e * -(((f64) scale_sq * (e * e)) - 3.0);
-            e = 0.5 * e * -(((f64) scale_sq * (e * e)) - 3.0);
-            e = 0.5 * e * -(((f64) scale_sq * (e * e)) - 3.0);
+            e = 0.5 * e * -(FMA_MUL_SUB((f64) scale_sq, (e * e), 3.0));
+            e = 0.5 * e * -(FMA_MUL_SUB((f64) scale_sq, (e * e), 3.0));
+            e = 0.5 * e * -(FMA_MUL_SUB((f64) scale_sq, (e * e), 3.0));
             scale_mag = (f32) ((f64) scale_sq * e);
             scale_sq = scale_mag;
         }
@@ -142,9 +143,9 @@ void lbBgFlash_80020E38(HSD_JObj* jobj, Vec3* dir, f32 max_angle,
     mag_sq = SQ(z_col_z) + mag_sq;
     if (mag_sq > 0.0f) {
         f64 e = __frsqrte(mag_sq);
-        e = 0.5 * e * -(((f64) mag_sq * (e * e)) - 3.0);
-        e = 0.5 * e * -(((f64) mag_sq * (e * e)) - 3.0);
-        e = 0.5 * e * -(((f64) mag_sq * (e * e)) - 3.0);
+        e = 0.5 * e * -(FMA_MUL_SUB((f64) mag_sq, (e * e), 3.0));
+        e = 0.5 * e * -(FMA_MUL_SUB((f64) mag_sq, (e * e), 3.0));
+        e = 0.5 * e * -(FMA_MUL_SUB((f64) mag_sq, (e * e), 3.0));
         tmp = (f32) ((f64) mag_sq * e);
         mag_sq = tmp;
     }
@@ -218,9 +219,9 @@ static inline f32 sqrtf_store(f32 x, volatile f32* y)
 {
     if (x > 0.0f) {
         f64 guess = __frsqrte((f64) x);
-        guess = 0.5 * guess * (3.0 - guess * guess * x);
-        guess = 0.5 * guess * (3.0 - guess * guess * x);
-        guess = 0.5 * guess * (3.0 - guess * guess * x);
+        guess = 0.5 * guess * (FMA_SUB_MUL(3.0, guess * guess, x));
+        guess = 0.5 * guess * (FMA_SUB_MUL(3.0, guess * guess, x));
+        guess = 0.5 * guess * (FMA_SUB_MUL(3.0, guess * guess, x));
         *y = (f32) (x * guess);
         return *y;
     }
@@ -283,38 +284,43 @@ void lbBgFlash_80021410(IKState* data)
         f32 x;
 
         nx = *(f32*) &axis;
-        dot = -((nz * data->pos1.z) +
-                ((nx * data->pos1.x) + (ny * data->pos1.y)));
+        dot = -(
+            FMA_MUL_ADD(nz, data->pos1.z,
+                        (FMA_MUL_ADD(nx, data->pos1.x, (ny * data->pos1.y)))));
 
         x = data->pos4.x;
 
-        d = -(dot + ((data->pos4.z * nz) + ((x * nx) + (data->pos4.y * ny))));
-        data->pos4.x = (d * nx) + x;
-        data->pos4.y = (d * ny) + data->pos4.y;
-        data->pos4.z = (d * nz) + data->pos4.z;
+        d = -(dot + (FMA_MUL_ADD(data->pos4.z, nz,
+                                 (FMA_MUL_ADD(x, nx, (data->pos4.y * ny))))));
+        data->pos4.x = FMA_MUL_ADD(d, nx, x);
+        data->pos4.y = FMA_MUL_ADD(d, ny, data->pos4.y);
+        data->pos4.z = FMA_MUL_ADD(d, nz, data->pos4.z);
 
         {
             f32 x = data->pos0.x;
             d = -(dot +
-                  ((data->pos0.z * nz) + ((x * nx) + (data->pos0.y * ny))));
-            data->pos0.x = (d * nx) + x;
+                  (FMA_MUL_ADD(data->pos0.z, nz,
+                               (FMA_MUL_ADD(x, nx, (data->pos0.y * ny))))));
+            data->pos0.x = FMA_MUL_ADD(d, nx, x);
         }
-        data->pos0.y = (d * ny) + data->pos0.y;
-        data->pos0.z = (d * nz) + data->pos0.z;
+        data->pos0.y = FMA_MUL_ADD(d, ny, data->pos0.y);
+        data->pos0.z = FMA_MUL_ADD(d, nz, data->pos0.z);
 
         {
             f32 x = data->pos1.x;
             d = -(dot +
-                  ((data->pos1.z * nz) + ((x * nx) + (data->pos1.y * ny))));
-            data->pos1.x = (d * nx) + x;
+                  (FMA_MUL_ADD(data->pos1.z, nz,
+                               (FMA_MUL_ADD(x, nx, (data->pos1.y * ny))))));
+            data->pos1.x = FMA_MUL_ADD(d, nx, x);
         }
-        data->pos1.y = (d * ny) + data->pos1.y;
-        data->pos1.z = (d * nz) + data->pos1.z;
+        data->pos1.y = FMA_MUL_ADD(d, ny, data->pos1.y);
+        data->pos1.z = FMA_MUL_ADD(d, nz, data->pos1.z);
     }
 
     pDiff = lbVector_Diff(&data->pos0, &data->pos1, &diff_pos0_pos1);
-    dot = (axis.z * pDiff->z) + ((axis.x * pDiff->x) + (axis.y * pDiff->y));
-    sin_val = sqrtf_store(1.0f - (dot * dot), &sin_mag);
+    dot = FMA_MUL_ADD(axis.z, pDiff->z,
+                      (FMA_MUL_ADD(axis.x, pDiff->x, (axis.y * pDiff->y))));
+    sin_val = sqrtf_store(FMA_SUB_MUL(1.0f, dot, dot), &sin_mag);
     data->len0 = data->len0 * sin_val;
 
     lbVector_Diff(&data->pos4, &data->pos0, &temp_delta);

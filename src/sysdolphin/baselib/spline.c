@@ -3,6 +3,8 @@
 #include <math.h> // IWYU pragma: keep
 #include <placeholder.h>
 
+#include <Runtime/fma.h>
+
 static void splGetCardinalPoint(Vec3*, Vec3*, f32, f32);
 static void splGetBezierPoint(Vec3*, Vec3*, f32);
 
@@ -22,27 +24,38 @@ f32 splGetHelmite(f32 fterm, f32 time, f32 p0, f32 p1, f32 d0, f32 d1)
     _2t3_T3 = 2.0f * t3_T2 * fterm;
     _3t2_T2 = 3.0f * _1_T2 * t2;
 
-    return (d1 * (t3_T2 - t2_T)) + ((d0 * (time + ((t3_T2 - t2_T) - t2_T))) +
-                                    ((p0 * (1.0f + (_2t3_T3 - _3t2_T2))) +
-                                     (p1 * (-_2t3_T3 + _3t2_T2))));
+    return FMA_MUL_ADD(
+        d1, (t3_T2 - t2_T),
+        (FMA_MUL_ADD(d0, (time + ((t3_T2 - t2_T) - t2_T)),
+                     (FMA_MUL_ADD(p0, (1.0f + (_2t3_T3 - _3t2_T2)),
+                                  (p1 * (-_2t3_T3 + _3t2_T2)))))));
 }
 
 static inline void splGetCardinalPoint(Vec3* p, Vec3* cp, f32 tension, f32 u)
 {
     f32 u2 = u * u;
     f32 u3 = u2 * u;
-    f32 car0 = tension * (-u3 + 2.0F * u2 - u);
-    f32 car1 = ((2.0F - tension) * u3) + ((tension - 3.0F) * u2) + 1.0F;
-    f32 car2 = ((tension - 2.0F) * u3) + ((3.0F - (2.0F * tension)) * u2) +
-               (tension * u);
+    f32 car0 = tension * (FMA_ADD_MUL(-u3, 2.0F, u2) - u);
+    f32 car1 =
+        FMA_MUL_ADD((2.0F - tension), u3, ((tension - 3.0F) * u2)) + 1.0F;
+    f32 car2 =
+        FMA_ADD_MUL(FMA_MUL_ADD((tension - 2.0F), u3,
+                                ((FMA_SUB_MUL(3.0F, 2.0F, tension)) * u2)),
+                    tension, u);
     f32 car3 = tension * (u3 - u2);
 
-    p->x = (cp[0].x * car0) + (cp[1].x * car1) + (cp[2].x * car2) +
-           (cp[3].x * car3);
-    p->y = (cp[0].y * car0) + (cp[1].y * car1) + (cp[2].y * car2) +
-           (cp[3].y * car3);
-    p->z = (cp[0].z * car0) + (cp[1].z * car1) + (cp[2].z * car2) +
-           (cp[3].z * car3);
+    p->x =
+        FMA_ADD_MUL(FMA_ADD_MUL(FMA_MUL_ADD(cp[0].x, car0, (cp[1].x * car1)),
+                                cp[2].x, car2),
+                    cp[3].x, car3);
+    p->y =
+        FMA_ADD_MUL(FMA_ADD_MUL(FMA_MUL_ADD(cp[0].y, car0, (cp[1].y * car1)),
+                                cp[2].y, car2),
+                    cp[3].y, car3);
+    p->z =
+        FMA_ADD_MUL(FMA_ADD_MUL(FMA_MUL_ADD(cp[0].z, car0, (cp[1].z * car1)),
+                                cp[2].z, car2),
+                    cp[3].z, car3);
 }
 
 static void splGetBSplinePoint(Vec3* p, Vec3* cp, f32 u)
@@ -52,13 +65,19 @@ static void splGetBSplinePoint(Vec3* p, Vec3* cp, f32 u)
     f32 u_1 = 1.0F - u;
     f32 k1_6 = (1.0F / 6.0F);
     f32 b0 = k1_6 * u_1 * u_1 * u_1;
-    f32 b1 = k1_6 * (4.0F + (3.0F * u3 - 6.0F * u2));
-    f32 b2 = k1_6 * (3.0F * (-u3 + u2 + u) + 1.0F);
+    f32 b1 = k1_6 * (4.0F + (FMA_MUL_SUB(3.0F, u3, 6.0F * u2)));
+    f32 b2 = k1_6 * (FMA_MUL_ADD(3.0F, (-u3 + u2 + u), 1.0F));
     f32 b3 = k1_6 * u3;
 
-    p->x = (cp[0].x * b0) + (cp[1].x * b1) + (cp[2].x * b2) + (cp[3].x * b3);
-    p->y = (cp[0].y * b0) + (cp[1].y * b1) + (cp[2].y * b2) + (cp[3].y * b3);
-    p->z = (cp[0].z * b0) + (cp[1].z * b1) + (cp[2].z * b2) + (cp[3].z * b3);
+    p->x = FMA_ADD_MUL(
+        FMA_ADD_MUL(FMA_MUL_ADD(cp[0].x, b0, (cp[1].x * b1)), cp[2].x, b2),
+        cp[3].x, b3);
+    p->y = FMA_ADD_MUL(
+        FMA_ADD_MUL(FMA_MUL_ADD(cp[0].y, b0, (cp[1].y * b1)), cp[2].y, b2),
+        cp[3].y, b3);
+    p->z = FMA_ADD_MUL(
+        FMA_ADD_MUL(FMA_MUL_ADD(cp[0].z, b0, (cp[1].z * b1)), cp[2].z, b2),
+        cp[3].z, b3);
 }
 
 static inline void splGetBezierPoint(Vec3* p, Vec3* cp, f32 u)
@@ -71,12 +90,18 @@ static inline void splGetBezierPoint(Vec3* p, Vec3* cp, f32 u)
     f32 bez2 = 3.0F * u2 * u_1;
     f32 bez3 = u2 * u;
 
-    p->x = (cp[0].x * bez0) + (cp[1].x * bez1) + (cp[2].x * bez2) +
-           (cp[3].x * bez3);
-    p->y = (cp[0].y * bez0) + (cp[1].y * bez1) + (cp[2].y * bez2) +
-           (cp[3].y * bez3);
-    p->z = (cp[0].z * bez0) + (cp[1].z * bez1) + (cp[2].z * bez2) +
-           (cp[3].z * bez3);
+    p->x =
+        FMA_ADD_MUL(FMA_ADD_MUL(FMA_MUL_ADD(cp[0].x, bez0, (cp[1].x * bez1)),
+                                cp[2].x, bez2),
+                    cp[3].x, bez3);
+    p->y =
+        FMA_ADD_MUL(FMA_ADD_MUL(FMA_MUL_ADD(cp[0].y, bez0, (cp[1].y * bez1)),
+                                cp[2].y, bez2),
+                    cp[3].y, bez3);
+    p->z =
+        FMA_ADD_MUL(FMA_ADD_MUL(FMA_MUL_ADD(cp[0].z, bez0, (cp[1].z * bez1)),
+                                cp[2].z, bez2),
+                    cp[3].z, bez3);
 }
 
 void splGetSplinePoint(Vec3* p, HSD_Spline* spline, f32 u)
@@ -95,8 +120,8 @@ void splGetSplinePoint(Vec3* p, HSD_Spline* spline, f32 u)
         case 0:
             // lerp
             cp = &spline->cv[idx];
-            p->x = (t * (cp[1].x - cp[0].x)) + cp[0].x;
-            p->y = (t * (cp[1].y - cp[0].y)) + cp[0].y;
+            p->x = FMA_MUL_ADD(t, (cp[1].x - cp[0].x), cp[0].x);
+            p->y = FMA_MUL_ADD(t, (cp[1].y - cp[0].y), cp[0].y);
             p->z = (t * (cp[1].z - cp[0].z)) + cp[0].z;
             return;
         case 1:
@@ -139,8 +164,11 @@ static f32 splArcLengthPolynomial(const f32 coeffs[5], f32 t)
     f32 t2 = t * t;
     f32 t3 = t2 * t;
     f32 t4 = t3 * t;
-    f32 result = (coeffs[0] * t4) + (coeffs[1] * t3) + (coeffs[2] * t2) +
-                 (coeffs[3] * t) + coeffs[4];
+    f32 result =
+        FMA_ADD_MUL(FMA_ADD_MUL(FMA_MUL_ADD(coeffs[0], t4, (coeffs[1] * t3)),
+                                coeffs[2], t2),
+                    coeffs[3], t) +
+        coeffs[4];
 
     if ((result < 0.0F) && (result > -0.001F)) {
         result = 0.0F;
@@ -161,9 +189,9 @@ static inline f32 spl_IterateSimpsonsMiddle(const f32 coeffs[5], const f32 dx,
     s32 i;
     for (i = 2; i <= 8; ++i) {
         if (!(i & 1)) {
-            var_f24 += 4.0F * splArcLengthPolynomial(coeffs, t);
+            FMA_ADD_TO(var_f24, 4.0F, splArcLengthPolynomial(coeffs, t));
         } else {
-            var_f24 += 2.0F * splArcLengthPolynomial(coeffs, t);
+            FMA_ADD_TO(var_f24, 2.0F, splArcLengthPolynomial(coeffs, t));
         }
         t += dx;
     }

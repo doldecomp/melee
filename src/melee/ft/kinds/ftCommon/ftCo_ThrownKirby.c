@@ -21,6 +21,7 @@
 #include <melee/ft/types.h>
 #include <melee/lb/lb_00B0.h>
 #include <melee/lb/lbvector.h>
+#include <Runtime/fma.h>
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/jobj.h>
 
@@ -191,7 +192,9 @@ void ftCo_ThrownKirbyStar_Coll(Fighter_GObj* gobj)
     if (normal.x || normal.y || normal.z) {
         self_vel = fp->self_vel;
         lbVector_Mirror(&fp->self_vel, &normal);
-        if (self_vel.x * fp->self_vel.x + self_vel.y * fp->self_vel.y < 0) {
+        if (FMA_MUL_ADD(self_vel.x, fp->self_vel.x,
+                        self_vel.y * fp->self_vel.y) < 0)
+        {
             ftCo_800BE494(gobj);
             fp->mv.co.thrownkirby.x8 = normal.x < 0 ? -1 : +1;
         }
@@ -241,7 +244,9 @@ void ftCo_ThrownCopyStar_Coll(Fighter_GObj* gobj)
     if (normal.x || normal.y || normal.z) {
         self_vel = fp->self_vel;
         lbVector_Mirror(&fp->self_vel, &normal);
-        if (self_vel.x * fp->self_vel.x + self_vel.y * fp->self_vel.y < 0) {
+        if (FMA_MUL_ADD(self_vel.x, fp->self_vel.x,
+                        self_vel.y * fp->self_vel.y) < 0)
+        {
             ftCo_800BE494(gobj);
             fp->mv.co.thrownkirby.x8 = normal.x < 0 ? -1 : +1;
         }

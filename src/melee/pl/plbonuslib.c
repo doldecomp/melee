@@ -18,6 +18,7 @@
 #include <melee/gr/stage.h>
 #include <melee/if/ifmagnify.h>
 #include <melee/it/it_26B1.h>
+#include <Runtime/fma.h>
 
 /// @todo Lots of 6s in here
 /// pl_8004049C seems to indicate it might have actually been
@@ -741,7 +742,8 @@ void pl_8003ED0C(int arg0, int arg1, int r5, int arg3, float arg2)
     temp_r3 = Player_GetStaleMoveTableIndexPtr2(arg0);
     temp_r3->x0_staleMoveTable.xCA4++;
     temp_r4 = temp_r3->x0_staleMoveTable.xCA4;
-    temp_f30 = temp_r3->x0_staleMoveTable.xCA0 * (temp_r4 - 1) + arg2;
+    temp_f30 =
+        FMA_MUL_ADD(temp_r3->x0_staleMoveTable.xCA0, (temp_r4 - 1), arg2);
 
     total = temp_r4;
     temp_r3->x0_staleMoveTable.xCA0 = pl_CalculateAverage(temp_f30, total);
@@ -920,9 +922,9 @@ void fn_8003F294(int slot, int index)
 
     {
         pl_StaleMoveTableExt_t* t2 = Player_GetStaleMoveTableIndexPtr2(slot);
-        f32 mag =
-            sqrtf__Ff(t2->x0_staleMoveTable.xCDC * t2->x0_staleMoveTable.xCDC +
-                      t2->x0_staleMoveTable.xCE0 * t2->x0_staleMoveTable.xCE0);
+        f32 mag = sqrtf__Ff(FMA_MUL_ADD(
+            t2->x0_staleMoveTable.xCDC, t2->x0_staleMoveTable.xCDC,
+            t2->x0_staleMoveTable.xCE0 * t2->x0_staleMoveTable.xCE0));
         f32 x8c = *((f32*) &pl_804D6470->x8C);
         pl_80039238(slot, 0x44, 0L, pl_804D6470->x88, &table->xDC0, x8c, mag);
     }
@@ -1003,8 +1005,9 @@ void fn_8003F654(int slot, int index, Vec3* pos, Vec3* prevPos)
         b34_result = ft_80087B34(entity);
         b34 = b34_result;
         if (b34 == 1) {
-            dist = my_sqrtf(((prevPos->x - pos->x) * (prevPos->x - pos->x)) +
-                            ((prev_pos2->y - pos->y) * (prevPos->y - pos->y)));
+            dist = my_sqrtf(FMA_MUL_ADD(
+                (prevPos->x - pos->x), (prevPos->x - pos->x),
+                ((prev_pos2->y - pos->y) * (prevPos->y - pos->y))));
             teammate_slot = ftLib_GetLastAttackerSlot(entity);
             table->xD80 += dist;
             if (dist > table->xD84) {
@@ -1073,7 +1076,7 @@ void fn_8003F654(int slot, int index, Vec3* pos, Vec3* prevPos)
         if (count != 0) {
             table->xD90++;
             avg_sum = pl_CalculateAverage(sum, count);
-            avg_sum = (table->xD8C * (table->xD90 - 1)) + avg_sum;
+            avg_sum = FMA_MUL_ADD(table->xD8C, (table->xD90 - 1), avg_sum);
             table->xD8C = pl_CalculateAverage(avg_sum, table->xD90);
         }
 
@@ -1083,7 +1086,7 @@ void fn_8003F654(int slot, int index, Vec3* pos, Vec3* prevPos)
         if (abs < 0.0f) {
             abs = -abs;
         }
-        dist = (table->xD94 * (table->xD98 - 1)) + (new_var = abs);
+        dist = FMA_MUL_ADD(table->xD94, (table->xD98 - 1), (new_var = abs));
         table->xD94 = pl_CalculateAverage(dist, table->xD98);
     }
 }
@@ -1103,9 +1106,8 @@ void pl_8003FAA8(int slot, int index, Vec3* pos, Vec3* prevPos)
 
     if (pl_Verify_gm_8016AEDC() && index == 0) {
         temp_r31 = ftLib_GetPercent(Player_GetEntityAtIndex(slot, index));
-        temp_f30 =
-            temp_r30->x0_staleMoveTable.xC9C * (gm_GetFrameCount() - 1) +
-            temp_r31;
+        temp_f30 = FMA_MUL_ADD(temp_r30->x0_staleMoveTable.xC9C,
+                               (gm_GetFrameCount() - 1), temp_r31);
 
         temp_r30->x0_staleMoveTable.xC9C =
             pl_CalculateAverage(temp_f30, gm_GetFrameCount());

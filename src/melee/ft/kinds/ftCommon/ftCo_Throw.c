@@ -33,6 +33,7 @@
 #include <melee/mp/types.h>
 #include <melee/pl/player.h>
 #include <melee/pl/plbonuslib.h>
+#include <Runtime/fma.h>
 #include <sysdolphin/baselib/jobj.h>
 
 void fn_800DD568(Fighter_GObj* gobj);
@@ -559,8 +560,9 @@ void ftCo_800DDDE4(Fighter_GObj* gobj, Fighter_GObj* gobj2, bool arg)
         fp4->x2226_b2 = 0;
         HSD_JObjSetTranslate(jobj2, &fp4->x2174);
         if (arg) {
-            vec.x += fp4->facing_dir * (fp4->x1A70.z * fp4->x34_scale.y);
-            vec.y += fp4->x1A70.y * fp4->x34_scale.y;
+            FMA_ADD_TO(vec.x, fp4->facing_dir,
+                       (fp4->x1A70.z * fp4->x34_scale.y));
+            FMA_ADD_TO(vec.y, fp4->x1A70.y, fp4->x34_scale.y);
             vec.z = 0.0f;
         }
         cd = &fp4->coll_data;

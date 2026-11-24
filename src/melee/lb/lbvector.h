@@ -6,10 +6,12 @@
 #include <math.h>
 
 #include <dolphin/mtx.h>
+#include <Runtime/fma.h>
 
 static inline float lbVector_Len(Vec3* vec)
 {
-    return sqrtf(vec->x * vec->x + vec->y * vec->y + vec->z * vec->z);
+    return sqrtf(
+        FMA_ADD_MUL(vec->x * vec->x + vec->y * vec->y, vec->z, vec->z));
 }
 
 static inline float lbVector_Len_xy(Vec3* vec)

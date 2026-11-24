@@ -6,6 +6,7 @@
 #include <melee/lb/lbaudio_ax.h>
 #include <melee/lb/lbvector.h>
 #include <melee/mp/mplib.h>
+#include <Runtime/fma.h>
 #include <sysdolphin/baselib/debug.h>
 #include <sysdolphin/baselib/random.h>
 
@@ -188,8 +189,8 @@ void Stage_80224CAC(Vec3* arg0)
         Vec3 last_vec;
         f32 temp_f4 = (arg0->z / -another_vec.z);
 
-        last_vec.x = (another_vec.x * temp_f4) + arg0->x;
-        last_vec.y = (another_vec.y * temp_f4) + arg0->y;
+        last_vec.x = FMA_MUL_ADD(another_vec.x, temp_f4, arg0->x);
+        last_vec.y = FMA_MUL_ADD(another_vec.y, temp_f4, arg0->y);
         last_vec.z = 0.0F;
         *arg0 = last_vec;
     }

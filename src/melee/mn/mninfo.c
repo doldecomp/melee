@@ -12,6 +12,7 @@
 #include <melee/lb/lblanguage.h>
 #include <melee/lb/lbspdisplay.h>
 #include <melee/sc/types.h>
+#include <Runtime/fma.h>
 #include <sysdolphin/baselib/debug.h>
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/gobjgxlink.h>
@@ -179,7 +180,7 @@ s32 mnInfo_80251D58(mnInfo_GObj* arg0, s32 arg1, u32 arg2, u32 arg3)
     text = HSD_SisLib_803A6754(0, 1);
     *slot = text;
     text->pos_x = -7.5f;
-    text->pos_y = (3.45f * (f32) arg1) + -5.8f;
+    text->pos_y = FMA_MUL_ADD(3.45f, (f32) arg1, -5.8f);
     text->pos_z = 17.0f;
     text->text_color = mn_804D4B64;
     text->default_alignment = 2;
@@ -216,8 +217,9 @@ void mnInfo_80251F04(mnInfo_GObj* arg0, s32 arg1, u32 arg2)
     if (*(slot += 6) != NULL) {
         HSD_SisLib_803A5CC4(data->right_column[arg1]);
     }
-    text = HSD_SisLib_803A5ACC(0, 0, -5.0f, (3.45f * (f32) arg1) + -5.9f,
-                               17.0f, 514.2857f, 142.85715f);
+    text =
+        HSD_SisLib_803A5ACC(0, 0, -5.0f, FMA_MUL_ADD(3.45f, (f32) arg1, -5.9f),
+                            17.0f, 514.2857f, 142.85715f);
     *slot = text;
     text->font_size.x = 0.035f;
     text->font_size.y = 0.035f;

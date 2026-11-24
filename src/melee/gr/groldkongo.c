@@ -18,6 +18,7 @@
 #include <melee/ft/kinds/ftCommon/ftCo_BarrelWait.h>
 #include <melee/lb/lb_00B0.h>
 #include <melee/lb/lb_00F9.h>
+#include <Runtime/fma.h>
 #include <sysdolphin/baselib/debug.h>
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/jobj.h>
@@ -438,9 +439,9 @@ void stageGObj2_GObjProc(Ground_GObj* arg0)
 
             grAnime_801C8138(arg0, gp->map_id, 0);
             HSD_JObjSetTranslateY(
-                jobj, (yakumono_param->rrange_bird_random_offset_y *
-                       ((2.0f * (0, HSD_Randf())) - 1.0f)) +
-                          70.0f);
+                jobj, FMA_MUL_ADD(yakumono_param->rrange_bird_random_offset_y,
+                                  (FMA_MUL_SUB(2.0f, (0, HSD_Randf()), 1.0f)),
+                                  70.0f));
             HSD_JObjSetTranslateZ(jobj, -200.0f);
             Camera_800307D0(&left, &center, &right);
             if (HSD_Randi(2) != 0) {
@@ -497,9 +498,9 @@ bool grOldKongo_80210454(Ground_GObj* ground_gobj, Fighter_GObj* keep)
     if (gp->u.taru.xC6 == 0) {
         Ground_801C4DA0(&pos_gnd, &unk);
         ftLib_GetPos(keep, &pos_ft);
-        if ((pos_gnd.x - pos_ft.x) * (pos_gnd.x - pos_ft.x) +
-                (pos_gnd.y - pos_ft.y) * (pos_gnd.y - pos_ft.y) +
-                (pos_gnd.z - pos_ft.z) * (pos_gnd.z - pos_ft.z) <
+        if (FMA_ADD_MUL((pos_gnd.x - pos_ft.x) * (pos_gnd.x - pos_ft.x) +
+                            (pos_gnd.y - pos_ft.y) * (pos_gnd.y - pos_ft.y),
+                        (pos_gnd.z - pos_ft.z), (pos_gnd.z - pos_ft.z)) <
             yakumono_param->rframe_barrel_in *
                 yakumono_param->rframe_barrel_in)
         {

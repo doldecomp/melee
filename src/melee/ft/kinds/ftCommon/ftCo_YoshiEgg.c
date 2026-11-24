@@ -25,6 +25,7 @@
 #include <melee/ft/kinds/ftYoshi/ftyoshispecialn.h>
 #include <melee/ft/types.h>
 #include <melee/lb/lb_00B0.h>
+#include <Runtime/fma.h>
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/jobj.h>
 
@@ -197,8 +198,8 @@ void ftCo_800BC3AC(Fighter_GObj* gobj)
 void ftCo_800BC3D0(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    fp->grab_timer = -(fp->dmg.x1838_percentTemp * ftYs_SpecialN_8012CDB4() -
-                       fp->grab_timer);
+    fp->grab_timer = -(FMA_MUL_SUB(fp->dmg.x1838_percentTemp,
+                                   ftYs_SpecialN_8012CDB4(), fp->grab_timer));
     if (fp->dmg.x18CC == 3 && ftCo_800C0C88(fp->dmg.x18D0)) {
         fp->grab_timer = 0;
     }

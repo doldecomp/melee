@@ -15,6 +15,7 @@
 #include <melee/ft/ftcommon.h>
 #include <melee/ft/inlines.h>
 #include <melee/ft/types.h>
+#include <Runtime/fma.h>
 
 bool fn_800C9CEC(Fighter_GObj* gobj)
 {
@@ -95,16 +96,17 @@ void ftCo_TurnRun_Phys(Fighter_GObj* gobj)
     } else if (fp->mv.co.turnrun.accel_mul * accel < 0) {
         if (accel > 0) {
             if (fp->gr_vel + accel > target_vel) {
-                accel -= co_attrs->ground_friction *
-                         p_ftCommonData->run_dash_turn_friction_multiplier;
+                FMA_SUB_FROM(
+                    accel, co_attrs->ground_friction,
+                    p_ftCommonData->run_dash_turn_friction_multiplier);
                 if (fp->gr_vel + accel < target_vel) {
                     accel = target_vel - fp->gr_vel;
                 }
             }
         } else {
             if (fp->gr_vel + accel < target_vel) {
-                accel += co_attrs->ground_friction *
-                         p_ftCommonData->run_dash_turn_friction_multiplier;
+                FMA_ADD_TO(accel, co_attrs->ground_friction,
+                           p_ftCommonData->run_dash_turn_friction_multiplier);
                 if (fp->gr_vel + accel > target_vel) {
                     accel = target_vel - fp->gr_vel;
                 }

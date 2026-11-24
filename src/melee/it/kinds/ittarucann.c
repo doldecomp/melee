@@ -21,6 +21,7 @@
 #include <melee/it/itmaplib.h>
 #include <melee/lb/lb_00B0.h>
 #include <melee/lb/lbvector.h>
+#include <Runtime/fma.h>
 #include <sysdolphin/baselib/jobj.h>
 #include <sysdolphin/baselib/random.h>
 
@@ -103,8 +104,8 @@ void it_80295F38(Item_GObj* gobj)
             angle -= 2.0 * M_PI;
         }
         launch_pos = ip->pos;
-        launch_pos.x += 8.0f * cosf(angle);
-        launch_pos.y += 8.0f * sinf(angle);
+        FMA_ADD_TO(launch_pos.x, 8.0f, cosf(angle));
+        FMA_ADD_TO(launch_pos.y, 8.0f, sinf(angle));
         ftCo_800C92E4(ip->xDD4_itemVar.tarucann.x20, &launch_pos, &ip->pos,
                       &params, (f32) (180.0 / M_PI) * angle);
         it_802975F4(gobj);
@@ -223,7 +224,7 @@ void it_802962E0(Item_GObj* gobj)
                 var_f1 = -var_f1;
             }
             if (var_f1 < da->x18) {
-                ip->xDD4_itemVar.tarucann.x10 += temp_f2 * da->x10;
+                FMA_ADD_TO(ip->xDD4_itemVar.tarucann.x10, temp_f2, da->x10);
             }
         } else {
             temp_f1 = ip->xDD4_itemVar.tarucann.x10;
@@ -263,14 +264,13 @@ void it_802962E0(Item_GObj* gobj)
         if (var_f2 < 0.0f) {
             var_f2 = -var_f2;
         }
-        ip->xDD4_itemVar.tarucann.xC +=
-            ip->xDD4_itemVar.tarucann.x28 *
-            (0.12217305f * var_f2 * -ip->facing_dir);
+        FMA_ADD_TO(ip->xDD4_itemVar.tarucann.xC, ip->xDD4_itemVar.tarucann.x28,
+                   (0.12217305f * var_f2 * -ip->facing_dir));
     } else {
-        ip->xDD4_itemVar.tarucann.xC +=
-            0.10471976f * -ip->facing_dir * ip->xDD4_itemVar.tarucann.x28;
+        FMA_ADD_TO(ip->xDD4_itemVar.tarucann.xC, 0.10471976f * -ip->facing_dir,
+                   ip->xDD4_itemVar.tarucann.x28);
     }
-    ip->xDD4_itemVar.tarucann.xC += da->x50 * -ip->facing_dir;
+    FMA_ADD_TO(ip->xDD4_itemVar.tarucann.xC, da->x50, -ip->facing_dir);
 }
 
 bool itTarucann_UnkMotion0_Anim(Item_GObj* gobj)

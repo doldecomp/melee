@@ -11,6 +11,7 @@
 #include <melee/lb/lbcardnew.h>
 #include <melee/lb/lblanguage.h>
 #include <melee/lb/lbsnap.h>
+#include <Runtime/fma.h>
 #include <sysdolphin/baselib/aobj.h>
 #include <sysdolphin/baselib/debug.h>
 #include <sysdolphin/baselib/dobj.h>
@@ -2309,9 +2310,9 @@ static inline void mnSnap_CreateThumbnails(mnSnap_State* snap,
         jobj2 = HSD_JObjLoadJoint((*photo_joint));
         HSD_JObjAddAnimAll(jobj2, (*sub_animjoint), (*sub_matanim),
                            (*sub_shapeanim));
-        end_pos.x = step_x * (f32) i + start_pos.x;
-        end_pos.y = step_y * (f32) i + start_pos.y;
-        end_pos.z = step_z * (f32) i + start_pos.z;
+        end_pos.x = FMA_MUL_ADD(step_x, (f32) i, start_pos.x);
+        end_pos.y = FMA_MUL_ADD(step_y, (f32) i, start_pos.y);
+        end_pos.z = FMA_MUL_ADD(step_z, (f32) i, start_pos.z);
         HSD_JObjSetTranslate(jobj2, &end_pos);
         snap->option_jobjs[i] = jobj2;
         HSD_JObjAddChild(*thumb_root_ptr, jobj2);

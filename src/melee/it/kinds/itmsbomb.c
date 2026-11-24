@@ -13,6 +13,7 @@
 #include <melee/it/itmaplib.h>
 #include <melee/lb/lb_00F9.h>
 #include <melee/mp/mpcoll.h>
+#include <Runtime/fma.h>
 #include <sysdolphin/baselib/jobj.h>
 
 ASSERT_SIZE(itMsBomb_Attrs, 24);
@@ -126,7 +127,7 @@ void it_80290238(Item_GObj* gobj)
     ip->xDCE_flag.x0.b3 = 1;
     if (it_802763B8(gobj) != 1) {
         if (it_802763E0(gobj) == 2) {
-            ip->pos.y += ip->scl * (attrs->x8.top - attrs->x8.bottom);
+            FMA_ADD_TO(ip->pos.y, ip->scl, (attrs->x8.top - attrs->x8.bottom));
         } else {
             int x = it_80276308(gobj);
             if (x == 8) {

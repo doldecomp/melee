@@ -5,6 +5,8 @@
 #include <math.h>
 #include <placeholder.h>
 
+#include <Runtime/fma.h>
+
 /* 022DF8 */ static float lb_sqrtf(float x);
 /* 400770 */ extern float MSL_TrigF_80400770[];
 /* 400774 */ extern float MSL_TrigF_80400774[];
@@ -44,13 +46,13 @@ float atan2f(float y, float x)
 
 float acosf(float x)
 {
-    float result = 1.0F - x * x;
+    float result = FMA_SUB_MUL(1.0F, x, x);
     if (result > 0) {
         float guess;
         guess = __frsqrte(result);
-        guess = 0.5f * guess * (3.0f - guess * guess * result);
-        guess = 0.5f * guess * (3.0f - guess * guess * result);
-        guess = 0.5f * guess * (3.0f - guess * guess * result);
+        guess = 0.5f * guess * (FMA_SUB_MUL(3.0f, guess * guess, result));
+        guess = 0.5f * guess * (FMA_SUB_MUL(3.0f, guess * guess, result));
+        guess = 0.5f * guess * (FMA_SUB_MUL(3.0f, guess * guess, result));
         result = guess;
     } else if (result) {
         result = NAN;
@@ -62,7 +64,7 @@ float acosf(float x)
 
 float asinf(float x)
 {
-    return atanf(x * lb_sqrtf(-(x * x - 1.0f)));
+    return atanf(x * lb_sqrtf(-(FMA_MUL_SUB(x, x, 1.0f))));
 }
 
 static float lb_sqrtf(float x)
@@ -70,9 +72,9 @@ static float lb_sqrtf(float x)
     if (x > 0.0f) {
         float guess;
         guess = __frsqrte(x);
-        guess = 0.5f * guess * (3.0f - guess * guess * x);
-        guess = 0.5f * guess * (3.0f - guess * guess * x);
-        guess = 0.5f * guess * (3.0f - guess * guess * x);
+        guess = 0.5f * guess * (FMA_SUB_MUL(3.0f, guess * guess, x));
+        guess = 0.5f * guess * (FMA_SUB_MUL(3.0f, guess * guess, x));
+        guess = 0.5f * guess * (FMA_SUB_MUL(3.0f, guess * guess, x));
         return guess;
     }
 

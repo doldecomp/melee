@@ -27,6 +27,7 @@
 #include <melee/ft/kinds/ftCommon/ftCo_Landing.h>
 #include <melee/ft/types.h>
 #include <melee/mp/mplib.h>
+#include <Runtime/fma.h>
 #include <sysdolphin/baselib/archive.h>
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/jobj.h>
@@ -389,8 +390,8 @@ void ftPr_SpecialNLoop_Anim(HSD_GObj* gobj)
         Fighter_ChangeMotionState(gobj, ftPr_MS_SpecialNFull, mf,
                                   fp->cur_anim_frame, 0, 0, NULL);
     }
-    fp->mv.pr.specialn.x14 += fp->mv.pr.specialn.x34.x *
-                              (fp->mv.pr.specialn.x2C * MTXDegToRad(da->xAC));
+    FMA_ADD_TO(fp->mv.pr.specialn.x14, fp->mv.pr.specialn.x34.x,
+               (fp->mv.pr.specialn.x2C * MTXDegToRad(da->xAC)));
     ftPr_NormalizeAndSetRollAngle(gobj);
     ftPartSetRotY(fp, FtPart_TopN, M_PI_2);
 }
@@ -406,8 +407,8 @@ void ftPr_SpecialNFull_Anim(HSD_GObj* gobj)
         fp->mv.pr.specialn.x2C = da->xA4;
         fp->mv.pr.specialn.x30 = 1;
     }
-    fp->mv.pr.specialn.x14 += fp->mv.pr.specialn.x34.x *
-                              (fp->mv.pr.specialn.x2C * MTXDegToRad(da->xAC));
+    FMA_ADD_TO(fp->mv.pr.specialn.x14, fp->mv.pr.specialn.x34.x,
+               (fp->mv.pr.specialn.x2C * MTXDegToRad(da->xAC)));
     ftPr_NormalizeAndSetRollAngle(gobj);
     ftPartSetRotY(fp, FtPart_TopN, M_PI_2);
 }
@@ -534,8 +535,8 @@ void ftPr_SpecialAirNChargeLoop_Anim(HSD_GObj* gobj)
         Fighter_ChangeMotionState(gobj, ftPr_MS_SpecialAirNChargeFull, mf,
                                   fp->cur_anim_frame, 0, 0, NULL);
     }
-    fp->mv.pr.specialn.x14 += fp->mv.pr.specialn.x34.x *
-                              (fp->mv.pr.specialn.x2C * MTXDegToRad(da->xAC));
+    FMA_ADD_TO(fp->mv.pr.specialn.x14, fp->mv.pr.specialn.x34.x,
+               (fp->mv.pr.specialn.x2C * MTXDegToRad(da->xAC)));
     ftPr_NormalizeAndSetRollAngle(gobj);
     ftPartSetRotY(fp, FtPart_TopN, M_PI_2);
 }
@@ -551,8 +552,8 @@ void ftPr_SpecialAirNChargeFull_Anim(HSD_GObj* gobj)
         fp->mv.pr.specialn.x2C = da->xA4;
         fp->mv.pr.specialn.x30 = 1;
     }
-    fp->mv.pr.specialn.x14 += fp->mv.pr.specialn.x34.x *
-                              (fp->mv.pr.specialn.x2C * MTXDegToRad(da->xAC));
+    FMA_ADD_TO(fp->mv.pr.specialn.x14, fp->mv.pr.specialn.x34.x,
+               (fp->mv.pr.specialn.x2C * MTXDegToRad(da->xAC)));
     ftPr_NormalizeAndSetRollAngle(gobj);
     ftPartSetRotY(fp, FtPart_TopN, M_PI_2);
 }
@@ -635,8 +636,8 @@ void ftPr_SpecialAirNStartTurn_Anim(HSD_GObj* gobj)
     PAD_STACK(4);
     ftPr_SpecialS_8013DD54(gobj, true);
     scaleAnimStep(gobj, &scale);
-    fp->mv.pr.specialn.x14 +=
-        da->xBC * (f32) (0.2 * da->x6C * -fp->mv.pr.specialn.x34.x);
+    FMA_ADD_TO(fp->mv.pr.specialn.x14, da->xBC,
+               (f32) (0.2 * da->x6C * -fp->mv.pr.specialn.x34.x));
     ftPr_NormalizeAndSetRollAngle(gobj);
     fp->mv.pr.specialn.x0 -= 1;
     if (fp->mv.pr.specialn.x0 <= 0) {
@@ -676,8 +677,8 @@ void ftPr_SpecialNHit_Anim(HSD_GObj* gobj)
     Vec3 scale;
     PAD_STACK(4);
     scaleAnimStep(gobj, &scale);
-    fp->mv.pr.specialn.x14 +=
-        da->xBC * (f32) (0.2 * da->x6C * -fp->mv.pr.specialn.x34.x);
+    FMA_ADD_TO(fp->mv.pr.specialn.x14, da->xBC,
+               (f32) (0.2 * da->x6C * -fp->mv.pr.specialn.x34.x));
     ftPr_NormalizeAndSetRollAngle(gobj);
     ftPartSetRotY(fp, FtPart_TopN, M_PI_2);
 }
@@ -890,15 +891,15 @@ void ftPr_SpecialNTurn_Phys(HSD_GObj* gobj)
     f32 influence = da->xC8 * (x1C * slope);
     if (fp->coll_data.floor.normal.x > 0.0f) {
         if (x1C > 0.0f) {
-            fp->gr_vel += scale * (x1C + influence);
+            FMA_ADD_TO(fp->gr_vel, scale, (x1C + influence));
         } else {
-            fp->gr_vel += scale * (x1C + influence);
+            FMA_ADD_TO(fp->gr_vel, scale, (x1C + influence));
         }
     } else {
         if (x1C > 0.0f) {
-            fp->gr_vel += scale * (x1C - influence);
+            FMA_ADD_TO(fp->gr_vel, scale, (x1C - influence));
         } else {
-            fp->gr_vel += scale * (x1C - influence);
+            FMA_ADD_TO(fp->gr_vel, scale, (x1C - influence));
         }
     }
     fp->x74_self_accel.y = 0;
@@ -1110,8 +1111,8 @@ static inline void wallBounceEffect(HSD_GObj* gobj, Fighter* fp, f32 dir,
     } else {
         pos->x -= ABS(fp2->coll_data.ecb.left.x);
     }
-    pos->y +=
-        0.5f * ABS(fp2->coll_data.ecb.top.y + fp2->coll_data.ecb.bottom.y);
+    FMA_ADD_TO(pos->y, 0.5f,
+               ABS(fp2->coll_data.ecb.top.y + fp2->coll_data.ecb.bottom.y));
     efSync_Spawn(0x406, gobj, pos, angle);
     Camera_RequestQuake(QuakeKind_Medium, pos);
     ftCommon_8007EBAC(fp2, 0xC, 0xA);

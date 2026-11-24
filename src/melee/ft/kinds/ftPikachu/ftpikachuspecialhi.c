@@ -27,6 +27,7 @@
 #include <melee/ft/types.h>
 #include <melee/lb/lb_00B0.h>
 #include <melee/lb/lbvector.h>
+#include <Runtime/fma.h>
 #include <sysdolphin/baselib/jobj.h>
 #include <sysdolphin/baselib/random.h>
 
@@ -200,9 +201,9 @@ void ftPk_SpecialHiStart1_Anim(HSD_GObj* gobj)
                 fp->parts[ftParts_GetBoneIndex(fp, FtPart_XRotN)].joint, 0,
                 &vec2);
             tempf = HSD_Randf();
-            vec2.x += 6 * tempf - 3;
+            vec2.x += FMA_MUL_SUB(6, tempf, 3);
             tempf = HSD_Randf();
-            vec2.y += 6 * tempf - 3;
+            vec2.y += FMA_MUL_SUB(6, tempf, 3);
             efSync_Spawn(1012, gobj, &vec2);
             fp->x2219_b0 = true;
             Fighter_SetEffectHitlagCallbacks(fp);
@@ -239,9 +240,9 @@ void ftPk_SpecialAirHiStart1_Anim(HSD_GObj* gobj)
                 fp->parts[ftParts_GetBoneIndex(fp, FtPart_XRotN)].joint, 0,
                 &vec2);
             tempf = HSD_Randf();
-            vec2.x += (10 * tempf) - 5;
+            vec2.x += FMA_MUL_SUB(10, tempf, 5);
             tempf = HSD_Randf();
-            vec2.y += (10 * tempf) - 5;
+            vec2.y += FMA_MUL_SUB(10, tempf, 5);
             efSync_Spawn(1012, gobj, &vec2);
             fp->x2219_b0 = true;
             Fighter_SetEffectHitlagCallbacks(fp);
@@ -264,7 +265,8 @@ void ftPk_SpecialHi_8012642C(HSD_GObj* gobj)
 
     float half_pi = (float) M_PI_2;
     float angle = atan2f(fp->self_vel.x, fp->self_vel.y);
-    float tempf = (fp->facing_dir * angle) + (pika_attr->x78 - half_pi);
+    float tempf =
+        FMA_MUL_ADD(fp->facing_dir, angle, (pika_attr->x78 - half_pi));
 
     ftPartSetRotX(fp, ftParts_GetBoneIndex(fp, FtPart_XRotN), tempf);
     scl.x = pika_attr->x7C_scale.x;
@@ -329,7 +331,8 @@ void ftPk_SpecialHiStart1_Coll(HSD_GObj* gobj)
         if (collData->env_flags & Collide_FloorMask) {
             float angle =
                 atan2f(collData->floor.normal.x, collData->floor.normal.y);
-            float angle2 = (fighter2->facing_dir * angle) + pika_attr->x68;
+            float angle2 =
+                FMA_MUL_ADD(fighter2->facing_dir, angle, pika_attr->x68);
             ftPartSetRotX(fighter2,
                           ftParts_GetBoneIndex(fighter2, FtPart_XRotN),
                           angle2);
@@ -433,9 +436,10 @@ void ftPk_SpecialHi_ChangeMotion_Unk03(HSD_GObj* gobj)
     collData = &fp->coll_data;
     pika_attr = fp->dat_attrs;
     if (fp->coll_data.env_flags & Collide_FloorMask) {
-        float angle = (fp->facing_dir * atan2f(collData->floor.normal.x,
-                                               collData->floor.normal.y)) +
-                      pika_attr->x68;
+        float angle = FMA_MUL_ADD(
+            fp->facing_dir,
+            atan2f(collData->floor.normal.x, collData->floor.normal.y),
+            pika_attr->x68);
         ftPartSetRotX(fp, ftParts_GetBoneIndex(fp, FtPart_XRotN), angle);
     }
 
@@ -500,7 +504,8 @@ void ftPk_SpecialHi_80126C0C(HSD_GObj* gobj)
 
             // set ground velocity to (zip_slope * stick_mag) + zip_intercept
             // and then flip based on facing direction
-            fp->gr_vel = (pika_attr->x90 * stick_mag) + pika_attr->x94;
+            fp->gr_vel =
+                FMA_MUL_ADD(pika_attr->x90, stick_mag, pika_attr->x94);
             fp->gr_vel *= fp->facing_dir;
 
             // if second zip
@@ -585,11 +590,13 @@ void ftPk_SpecialHi_80126E1C(HSD_GObj* gobj)
 
     // compute velocity as (zip slope * stick_mag) + zip intercept
     // x velocity is the same but flips based on facing direction
-    temp_f2_2 = ((pika_attr->x90 * final_stick_mag) + pika_attr->x94) *
-                cosf(some_angle);
+    temp_f2_2 =
+        (FMA_MUL_ADD(pika_attr->x90, final_stick_mag, pika_attr->x94)) *
+        cosf(some_angle);
     fp->self_vel.x = fp->facing_dir * temp_f2_2;
-    fp->self_vel.y = ((pika_attr->x90 * final_stick_mag) + pika_attr->x94) *
-                     sinf(some_angle);
+    fp->self_vel.y =
+        (FMA_MUL_ADD(pika_attr->x90, final_stick_mag, pika_attr->x94)) *
+        sinf(some_angle);
 
     // if second zip
     if (fp->mv.pk.specialhi.x8) {

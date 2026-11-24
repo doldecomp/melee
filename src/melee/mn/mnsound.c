@@ -10,6 +10,7 @@
 #include <melee/lb/lbarchive.h>
 #include <melee/lb/lbcardgame.h>
 #include <melee/sc/types.h>
+#include <Runtime/fma.h>
 #include <sysdolphin/baselib/debug.h>
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/gobjgxlink.h>
@@ -36,9 +37,8 @@ static AnimLoopSettings volume_right = { 4.0F, 7.0F, -0.1F };
 static f32 getVolumePosition(u8 sound_music_mix, const Vec3* pos_0,
                              const Vec3* pos_1)
 {
-    return (((f32) ((s8) sound_music_mix + 100) / 200.0F) *
-            (pos_1->x - pos_0->x)) +
-           pos_0->x;
+    return FMA_MUL_ADD(((f32) ((s8) sound_music_mix + 100) / 200.0F),
+                       (pos_1->x - pos_0->x), pos_0->x);
 }
 
 static inline void updateVolumeAnim(HSD_JObj* jobj, u8 sound_music_mix,

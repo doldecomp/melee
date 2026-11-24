@@ -14,6 +14,7 @@
 #include <melee/it/ithitbox.h>
 #include <melee/it/itmaplib.h>
 #include <melee/it/itzako.h>
+#include <Runtime/fma.h>
 #include <sysdolphin/baselib/jobj.h>
 #include <sysdolphin/baselib/random.h>
 
@@ -370,7 +371,7 @@ bool itKyasarin_UnkMotion7_Anim(Item_GObj* gobj)
         itKyasarinAttributes* attr =
             &ip->xC4_article_data->x4_specialAttributes->kyasarin;
         spawn_pos = ip->pos;
-        spawn_pos.x += attr->x38 * ip->facing_dir;
+        FMA_ADD_TO(spawn_pos.x, attr->x38, ip->facing_dir);
         spawn_pos.y += attr->x3C;
         spawn_pos.z = 0;
         it_802EFA44(gobj, &spawn_pos, ip->facing_dir);

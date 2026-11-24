@@ -26,6 +26,7 @@
 #include <melee/mn/types.h>
 #include <melee/pl/player.h>
 #include <melee/pl/plbonuslib.h>
+#include <Runtime/fma.h>
 #include <sysdolphin/baselib/cobj.h>
 #include <sysdolphin/baselib/debug.h>
 #include <sysdolphin/baselib/gobj.h>
@@ -160,7 +161,7 @@ HSD_GObj* ftLib_FindNearestOpponent(Vec3* pos, HSD_GObj* gobj)
         ftLib_GetCameraBonePos(cur, &cur_v);
         dx = pos->x - cur_v.x;
         dy = pos->y - cur_v.y;
-        dist = (dx * dx) + (dy * dy);
+        dist = FMA_MUL_ADD(dx, dx, (dy * dy));
 
         if (dist < min_dist) {
             min_dist = dist;
@@ -216,7 +217,7 @@ Fighter_GObj* ftLib_FindNearestOpponentInDir(Vec3* v, Fighter_GObj* gobj,
 
         dx = v->x - sp24.x;
         dy = v->y - sp24.y;
-        diff = dx * dx + dy * dy;
+        diff = FMA_MUL_ADD(dx, dx, dy * dy);
 
         if (diff < min_diff) {
             min_diff = diff;

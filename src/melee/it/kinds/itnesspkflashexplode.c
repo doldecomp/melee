@@ -14,6 +14,7 @@
 #include <melee/it/it_2725.h>
 #include <melee/it/itcoll.h>
 #include <melee/it/item.h>
+#include <Runtime/fma.h>
 #include <sysdolphin/baselib/jobj.h>
 
 /* 2AFD44 */ static bool itNessPKFlashExplode_UnkMotion0_Coll(Item_GObj* gobj);
@@ -98,20 +99,21 @@ bool itNessPKFlashExplode_UnkMotion0_Anim(Item_GObj* gobj)
         &ip->xC4_article_data->x4_specialAttributes->flash_expl;
     HSD_JObj* jobj = GET_JOBJ(gobj);
     Vec3 scale;
-    scale.x = scale.y = scale.z = (ip->xDD4_itemVar.pkflushexplode.xDD4 *
-                                   ((attr->x8_FLASH_EXPL_GRAPHIC_SIZE_GROWTH -
-                                     attr->x4_FLASH_EXPL_GRAPHIC_SIZE_INIT) /
-                                    attr->x0_FLASH_EXPL_HITBOX_SIZE_MUL)) +
-                                  attr->x4_FLASH_EXPL_GRAPHIC_SIZE_INIT;
+    scale.x = scale.y = scale.z =
+        FMA_MUL_ADD(ip->xDD4_itemVar.pkflushexplode.xDD4,
+                    ((attr->x8_FLASH_EXPL_GRAPHIC_SIZE_GROWTH -
+                      attr->x4_FLASH_EXPL_GRAPHIC_SIZE_INIT) /
+                     attr->x0_FLASH_EXPL_HITBOX_SIZE_MUL),
+                    attr->x4_FLASH_EXPL_GRAPHIC_SIZE_INIT);
     HSD_JObjSetScale(jobj, &scale);
 
     if (ip->xDB4_itcmd_var2 == 0 &&
         ip->x5D4_hitboxes[0].hit.state != HitCapsule_Disabled)
     {
         it_80272460(&ip->x5D4_hitboxes[0].hit,
-                    (ip->xDD4_itemVar.pkflushexplode.xDD4 *
-                     attr->x10_FLASH_EXPL_DAMAGE_MUL) +
-                        attr->xC_FLASH_EXPL_BASE_DAMAGE,
+                    FMA_MUL_ADD(ip->xDD4_itemVar.pkflushexplode.xDD4,
+                                attr->x10_FLASH_EXPL_DAMAGE_MUL,
+                                attr->xC_FLASH_EXPL_BASE_DAMAGE),
                     gobj);
         ip->xDB4_itcmd_var2 = 1;
     }

@@ -11,6 +11,7 @@
 #include <melee/it/kinds/itheiho.h>
 #include <melee/lb/lb_00B0.h>
 #include <melee/lb/lb_00F9.h>
+#include <Runtime/fma.h>
 #include <sysdolphin/baselib/gobjproc.h>
 #include <sysdolphin/baselib/random.h>
 
@@ -270,7 +271,8 @@ void grStory_801E3418(Ground_GObj* gobj)
             it_802D8618(i, &pos, temp_r29, 25.0F * i);
 
             // Jitter the vertical position of the each subsequent shy guy
-            pos.y = 3.0F * frand_amp1() + yakumono_param->vpos[spawn_pattern];
+            pos.y = FMA_MUL_ADD(3.0F, frand_amp1(),
+                                yakumono_param->vpos[spawn_pattern]);
         }
     }
 }

@@ -22,6 +22,7 @@
 #include "kinds/ftCommon/ftCo_Lift.h"
 #include "types.h"
 #include <melee/it/kinds/itkinoko.h>
+#include <Runtime/fma.h>
 #include <sysdolphin/baselib/jobj.h>
 
 void ftCo_800D2770(Fighter_GObj* gobj, f32 arg8)
@@ -141,7 +142,7 @@ bool fn_800D2A3C(HSD_GObj* gobj)
         f32 scale = HSD_JObjGetScaleX(fp->x2184);
         f32 mid = fp->mv.co.walk.middle_anim_frame;
         f32 fast = fp->mv.co.walk.fast_anim_frame;
-        ftLib_SetScale(gobj, (fast - mid) * scale + mid);
+        ftLib_SetScale(gobj, FMA_MUL_ADD((fast - mid), scale, mid));
     }
     if (HSD_AObjGetFlags(fp->x2184->aobj) & 0x40000000) {
         return false;

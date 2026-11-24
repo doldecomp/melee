@@ -16,6 +16,7 @@
 #include <melee/ft/types.h>
 #include <melee/it/kinds/itnesspkfire.h>
 #include <melee/lb/lb_00B0.h>
+#include <Runtime/fma.h>
 
 void ftNs_SpecialS_ItemPKFireSpawn(
     HSD_GObj* gobj) //* Ness's PK Fire spawn function, stored as Accessory4
@@ -44,7 +45,8 @@ void ftNs_SpecialS_ItemPKFireSpawn(
     if (FlagResult != false) {
         lb_8000B1CC(fp->parts[FtPart_R2ndNa].joint, NULL, &ItemBonePos);
 
-        ItemBonePos.x += ness_attr->x30_PKFIRE_SPAWN_X * fp->facing_dir;
+        FMA_ADD_TO(ItemBonePos.x, ness_attr->x30_PKFIRE_SPAWN_X,
+                   fp->facing_dir);
         ItemBonePos.y += ness_attr->x34_PKFIRE_SPAWN_Y;
         ItemBonePos.z = 0.0f;
 

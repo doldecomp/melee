@@ -7,6 +7,7 @@
 #include <melee/lb/lbaudio_ax.h>
 #include <melee/pl/player.h>
 #include <melee/sc/types.h>
+#include <Runtime/fma.h>
 #include <sysdolphin/baselib/dobj.h>
 #include <sysdolphin/baselib/fog.h>
 #include <sysdolphin/baselib/gobj.h>
@@ -104,7 +105,7 @@ static inline void setDiffuse(HSD_MObj* mobj, GXColor* color)
 
 static inline f32 getOffsetY(float* v, u8 j, u8 k)
 {
-    return 2.6f * j + v[k != 0 ? k - 1 : 0];
+    return FMA_MUL_ADD(2.6f, j, v[k != 0 ? k - 1 : 0]);
 }
 
 void fn_802FDA78(HSD_GObj* gobj)

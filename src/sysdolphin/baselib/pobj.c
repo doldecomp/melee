@@ -19,6 +19,7 @@
 #include <dolphin/gx.h>
 #include <dolphin/mtx.h>
 #include <dolphin/os.h>
+#include <Runtime/fma.h>
 
 static void PObjInfoInit(void);
 
@@ -864,9 +865,9 @@ static void drawShapeAnim(HSD_PObj* pobj)
             get_shape_vertex_xyz(
                 shape_set, pobj_min(shape_id + 1, shape_set->nb_shape - 1), i,
                 s1);
-            vertex_buffer[i][0] = (s1[0] - s0[0]) * blend + s0[0];
-            vertex_buffer[i][1] = (s1[1] - s0[1]) * blend + s0[1];
-            vertex_buffer[i][2] = (s1[2] - s0[2]) * blend + s0[2];
+            vertex_buffer[i][0] = FMA_MUL_ADD((s1[0] - s0[0]), blend, s0[0]);
+            vertex_buffer[i][1] = FMA_MUL_ADD((s1[1] - s0[1]), blend, s0[1]);
+            vertex_buffer[i][2] = FMA_MUL_ADD((s1[2] - s0[2]), blend, s0[2]);
         }
         if (shape_set->nb_normal_index) {
             if (blend_nbt) {
@@ -881,7 +882,7 @@ static void drawShapeAnim(HSD_PObj* pobj)
                         s1);
                     for (j = 0; j < 9; j++) {
                         normal_buffer[idx][j] =
-                            (s1[j] - s0[j]) * blend + s0[j];
+                            FMA_MUL_ADD((s1[j] - s0[j]), blend, s0[j]);
                     }
                 }
             } else {
@@ -893,9 +894,12 @@ static void drawShapeAnim(HSD_PObj* pobj)
                         shape_set,
                         pobj_min(shape_id + 1, shape_set->nb_shape - 1), i,
                         s1);
-                    normal_buffer[i][0] = (s1[0] - s0[0]) * blend + s0[0];
-                    normal_buffer[i][1] = (s1[1] - s0[1]) * blend + s0[1];
-                    normal_buffer[i][2] = (s1[2] - s0[2]) * blend + s0[2];
+                    normal_buffer[i][0] =
+                        FMA_MUL_ADD((s1[0] - s0[0]), blend, s0[0]);
+                    normal_buffer[i][1] =
+                        FMA_MUL_ADD((s1[1] - s0[1]), blend, s0[1]);
+                    normal_buffer[i][2] =
+                        FMA_MUL_ADD((s1[2] - s0[2]), blend, s0[2]);
                 }
             }
         }
@@ -910,9 +914,9 @@ static void drawShapeAnim(HSD_PObj* pobj)
                 f32 s[3];
 
                 get_shape_vertex_xyz(shape_set, j + 1, i, s);
-                vertex_buffer[i][0] += s[0] * b;
-                vertex_buffer[i][1] += s[1] * b;
-                vertex_buffer[i][2] += s[2] * b;
+                FMA_ADD_TO(vertex_buffer[i][0], s[0], b);
+                FMA_ADD_TO(vertex_buffer[i][1], s[1], b);
+                FMA_ADD_TO(vertex_buffer[i][2], s[2], b);
             }
         }
         if (shape_set->nb_normal_index) {
@@ -927,7 +931,7 @@ static void drawShapeAnim(HSD_PObj* pobj)
 
                         get_shape_nbt_xyz(shape_set, j + 1, i, s);
                         for (k = 0; k < 9; k++) {
-                            normal_buffer[idx][k] += s[k] * b;
+                            FMA_ADD_TO(normal_buffer[idx][k], s[k], b);
                         }
                     }
                 }
@@ -939,9 +943,9 @@ static void drawShapeAnim(HSD_PObj* pobj)
                         f32 s[3];
 
                         get_shape_normal_xyz(shape_set, j + 1, i, s);
-                        normal_buffer[i][0] += s[0] * b;
-                        normal_buffer[i][1] += s[1] * b;
-                        normal_buffer[i][2] += s[2] * b;
+                        FMA_ADD_TO(normal_buffer[i][0], s[0], b);
+                        FMA_ADD_TO(normal_buffer[i][1], s[1], b);
+                        FMA_ADD_TO(normal_buffer[i][2], s[2], b);
                     }
                 }
             }

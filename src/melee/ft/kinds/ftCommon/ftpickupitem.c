@@ -30,6 +30,7 @@
 #include <melee/it/it_26B1.h>
 #include <melee/it/item.h>
 #include <melee/pl/plbonuslib.h>
+#include <Runtime/fma.h>
 #include <sysdolphin/baselib/debug.h>
 #include <sysdolphin/baselib/gobj.h>
 
@@ -62,7 +63,8 @@ bool ftpickupitem_80094150(Fighter_GObj* gobj, Item_GObj* item_gobj)
                 float y_range = itGetGrabRangeY(item_gobj);
                 Vec4* offset1 = !b ? offset0 : &pickup->gr_heavy_offset;
                 float x1 = offset1->z;
-                float x0 = (fp->facing_dir * offset1->x) + fp->cur_pos.x;
+                float x0 =
+                    FMA_MUL_ADD(fp->facing_dir, offset1->x, fp->cur_pos.x);
                 float y0 = fp->cur_pos.y + offset1->y;
                 float y1 = offset1->w;
                 if (x0 - x1 - x_range < it_pos.x &&
@@ -122,8 +124,8 @@ Item_GObj* ftpickupitem_800942A0(Fighter_GObj* gobj, u32 flags)
                                                     : &pickup->gr_heavy_offset;
                             {
                                 float x1 = vec->z;
-                                float x0 =
-                                    fp->facing_dir * vec->x + fp->cur_pos.x;
+                                float x0 = FMA_MUL_ADD(fp->facing_dir, vec->x,
+                                                       fp->cur_pos.x);
                                 float y0 = fp->cur_pos.y + vec->y;
                                 float y1 = vec->w;
                                 if (x0 - x1 - x_range < it_pos.x &&

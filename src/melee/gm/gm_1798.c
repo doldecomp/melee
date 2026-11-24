@@ -23,6 +23,7 @@
 #include <melee/mp/mpcoll.h>
 #include <melee/pl/player.h>
 #include <melee/sc/types.h>
+#include <Runtime/fma.h>
 #include <sysdolphin/baselib/aobj.h>
 #include <sysdolphin/baselib/cobj.h>
 #include <sysdolphin/baselib/controller.h>
@@ -334,9 +335,10 @@ void fn_8017A078(s32 arg0)
     cobj = HSD_CObjLoadDesc((HSD_CObjDesc*) &gmResultCameraDesc);
     HSD_GObjObject_80390A70(gobj, HSD_GObj_CameraKind, cobj);
 
-    eye.y = (eye.y * (f32) (arg0 + 1)) + (0.7f * Player_800360D8(arg0));
-    interest.y =
-        (interest.y * (f32) (arg0 + 1)) + (0.7f * Player_800360D8(arg0));
+    eye.y =
+        FMA_MUL_ADD(eye.y, (f32) (arg0 + 1), (0.7f * Player_800360D8(arg0)));
+    interest.y = FMA_MUL_ADD(interest.y, (f32) (arg0 + 1),
+                             (0.7f * Player_800360D8(arg0)));
 
     mode = fn_801795D4();
     idx = fn_801796F0(arg0);
@@ -345,7 +347,7 @@ void fn_8017A078(s32 arg0)
     eye.x -= (f32) val;
     interest.y -= 10.0f;
     eye.y -= 10.0f;
-    eye.z += (20.0f * (f32) (mode - 2)) + 110.0f;
+    eye.z += FMA_MUL_ADD(20.0f, (f32) (mode - 2), 110.0f);
 
     if (mode == 0) {
         s32 kind = disp->state.char_kind[arg0];
@@ -448,10 +450,10 @@ HSD_GObj* fn_8017A318(s32 arg0)
     vi = ((s32) variant <= 2) ? variant : 3;
     if ((1.0f - data->kind[kind_data].z_scale[vi]) < 0.0f) {
         vi = ((s32) variant <= 2) ? variant : 3;
-        eye.z += 100.0f * (1.0f - data->kind[kind_data].z_scale[vi]);
+        FMA_ADD_TO(eye.z, 100.0f, (1.0f - data->kind[kind_data].z_scale[vi]));
     } else {
         vi = ((s32) variant <= 2) ? variant : 3;
-        eye.z += 300.0f * (1.0f - data->kind[kind_data].z_scale[vi]);
+        FMA_ADD_TO(eye.z, 300.0f, (1.0f - data->kind[kind_data].z_scale[vi]));
     }
 
     HSD_CObjSetEyePosition(cobj, &eye);

@@ -17,6 +17,7 @@
 #include <melee/it/item.h>
 #include <melee/it/itgroundcoll.h>
 #include <melee/it/types.h>
+#include <Runtime/fma.h>
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/jobj.h>
 
@@ -82,7 +83,8 @@ void it_80284E30(Item_GObj* gobj)
     {
         Vec3 scale;
         if (ip->msid == 2) {
-            float temp_scale = 1.5f * ip->xDD4_itemVar.sword.x40 + scale_y;
+            float temp_scale =
+                FMA_MUL_ADD(1.5f, ip->xDD4_itemVar.sword.x40, scale_y);
             scale.x = temp_scale;
             scale.y = scale_y + ip->xDD4_itemVar.sword.x40;
             scale.z = temp_scale;

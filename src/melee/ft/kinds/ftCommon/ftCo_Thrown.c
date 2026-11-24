@@ -15,6 +15,7 @@
 #include <melee/ft/types.h>
 #include <melee/lb/lb_00B0.h>
 #include <melee/pl/plbonuslib.h>
+#include <Runtime/fma.h>
 
 /* 0DE5A4 */ static void ftCo_800DE5A4(Fighter_GObj*);
 
@@ -52,8 +53,9 @@ void ftCo_800DE508(Fighter_GObj* gobj)
 
     lb_8000B1CC(fp->parts[ftParts_GetBoneIndex(fp, FtPart_XRotN)].joint, NULL,
                 &pos);
-    pos.x = (fp->facing_dir * (fp->x1A70.z * fp->x34_scale.y)) + pos.x;
-    pos.y += fp->x1A70.y * fp->x34_scale.y;
+    pos.x =
+        FMA_MUL_ADD(fp->facing_dir, (fp->x1A70.z * fp->x34_scale.y), pos.x);
+    FMA_ADD_TO(pos.y, fp->x1A70.y, fp->x34_scale.y);
     pos.z = 0.0f;
     fp->cur_pos = pos;
 }

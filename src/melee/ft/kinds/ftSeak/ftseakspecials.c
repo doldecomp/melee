@@ -25,6 +25,7 @@
 #include <melee/it/types.h>
 #include <melee/lb/lb_00B0.h>
 #include <melee/lb/lbcollision.h>
+#include <Runtime/fma.h>
 #include <sysdolphin/baselib/jobj.h>
 
 /// @todo Fix common data struct
@@ -59,7 +60,7 @@ void ftSk_SpecialS_80110490(Fighter* fp)
         v5 += 360;
     }
 
-    v6 = v5 * COMMON_DATA_F32[275] + fp->mv.sk.specials.x18;
+    v6 = FMA_MUL_ADD(v5, COMMON_DATA_F32[275], fp->mv.sk.specials.x18);
 
     if (v6 > 360) {
         v6 -= 360;
@@ -76,8 +77,8 @@ void ftSk_SpecialS_80110490(Fighter* fp)
         v8 = 1;
     }
 
-    fp->mv.sk.specials.x14 +=
-        COMMON_DATA_F32[275] * (v8 - fp->mv.sk.specials.x14);
+    FMA_ADD_TO(fp->mv.sk.specials.x14, COMMON_DATA_F32[275],
+               (v8 - fp->mv.sk.specials.x14));
 }
 
 void ftSk_SpecialS_80110610(HSD_GObj* gobj, s32 arg1, float arg2)
@@ -98,7 +99,7 @@ void ftSk_SpecialS_80110610(HSD_GObj* gobj, s32 arg1, float arg2)
     ftSk_SpecialS_80110490(fp);
 
     {
-        float f = 0.0556F * fp->mv.sk.specials.x18 + 4;
+        float f = FMA_MUL_ADD(0.0556F, fp->mv.sk.specials.x18, 4);
 
         if (fp->mv.sk.specials.x14) {
             HSD_JObj* bone = fp->x8AC_animSkeleton;

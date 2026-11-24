@@ -16,6 +16,7 @@
 #include <melee/lb/lbspdisplay.h>
 #include <melee/sc/types.h>
 #include <melee/ty/toy.h>
+#include <Runtime/fma.h>
 #include <sysdolphin/baselib/cobj.h>
 #include <sysdolphin/baselib/controller.h>
 #include <sysdolphin/baselib/debug.h>
@@ -826,9 +827,9 @@ void fn_801AB200(HSD_GObj* gobj)
     }
 
     vel_y = (f32) adj_val;
-    sq_x = sqrtf(vel_x * vel_x + 6400.0f);
+    sq_x = sqrtf(FMA_MUL_ADD(vel_x, vel_x, 6400.0f));
     vel_x *= 0.00038461538f * sq_x;
-    sq_y = sqrtf(vel_y * vel_y + 6400.0f);
+    sq_y = sqrtf(FMA_MUL_ADD(vel_y, vel_y, 6400.0f));
 
     vel_y *= 0.00038461538f * sq_y;
     if (vel_y < -2.6f) {
@@ -978,7 +979,8 @@ void fn_801AB200(HSD_GObj* gobj)
                 } else {
                     *text_arr = HSD_SisLib_803A5ACC(
                         0, 0, 1.45f + gm_801AB200_GetXPos(gm_804D6810),
-                        (0.19f * (f32) text_idx) + 0.67f, 0.0f, 0.0f, 100.0f);
+                        FMA_MUL_ADD(0.19f, (f32) text_idx, 0.67f), 0.0f, 0.0f,
+                        100.0f);
                 }
 
                 (*text_arr)->default_kerning = 1;
@@ -1050,7 +1052,7 @@ void fn_801AB200(HSD_GObj* gobj)
                     gm_801AB200_ptcl(selected, &gm_804D42C8);
                 }
 
-                gm_804D6828 = (0.5f * gm_804D6828) + 1.7f;
+                gm_804D6828 = FMA_MUL_ADD(0.5f, gm_804D6828, 1.7f);
             }
         }
     }

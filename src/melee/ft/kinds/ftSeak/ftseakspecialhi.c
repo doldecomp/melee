@@ -24,6 +24,7 @@
 #include <melee/it/kinds/itseakvanish.h>
 #include <melee/lb/lb_00B0.h>
 #include <melee/lb/lbvector.h>
+#include <Runtime/fma.h>
 #include <sysdolphin/baselib/gobj.h>
 
 static MotionFlags const ftSk_MF_SpecialHi_Coll =
@@ -380,9 +381,9 @@ static inline float my_sqrtf(float x)
 
         if (x > 0.0f) {
             double guess = __frsqrte(x);
-            guess = 0.5 * guess * (3.0 - guess * guess * x);
-            guess = 0.5 * guess * (3.0 - guess * guess * x);
-            guess = 0.5 * guess * (3.0 - guess * guess * x);
+            guess = 0.5 * guess * (FMA_SUB_MUL(3.0, guess * guess, x));
+            guess = 0.5 * guess * (FMA_SUB_MUL(3.0, guess * guess, x));
+            guess = 0.5 * guess * (FMA_SUB_MUL(3.0, guess * guess, x));
             y = (float) (x * guess);
             return y;
         }
@@ -425,9 +426,9 @@ void ftSk_SpecialHi_80113838(Fighter_GObj* gobj)
                     fp->mv.sk.specialhi.vel.y = lstick.y;
                     {
                         f32 temp_f6;
-                        temp_f6 =
-                            ((attributes->x44 * stick_mag) + attributes->x48) *
-                            cosf(temp_f1_5);
+                        temp_f6 = (FMA_MUL_ADD(attributes->x44, stick_mag,
+                                               attributes->x48)) *
+                                  cosf(temp_f1_5);
                         fp->gr_vel = fp->facing_dir * temp_f6;
                     }
                     Fighter_ChangeMotionState(gobj, ftSk_MS_SpecialHiStart_1,
@@ -489,9 +490,10 @@ void ftSk_SpecialHi_80113A30(Fighter_GObj* gobj)
     }
     fp->self_vel.x =
         fp->facing_dir *
-        (((attributes->x44 * var_f31) + attributes->x48) * cosf(var_f30));
-    fp->self_vel.y =
-        ((attributes->x44 * var_f31) + attributes->x48) * sinf(var_f30);
+        ((FMA_MUL_ADD(attributes->x44, var_f31, attributes->x48)) *
+         cosf(var_f30));
+    fp->self_vel.y = (FMA_MUL_ADD(attributes->x44, var_f31, attributes->x48)) *
+                     sinf(var_f30);
     Fighter_ChangeMotionState(gobj, ftSk_MS_SpecialAirHiStart_1, 0U, 35.0f,
                               1.0f, 0.0f, NULL);
     ftAnim_8006EBA4(gobj);

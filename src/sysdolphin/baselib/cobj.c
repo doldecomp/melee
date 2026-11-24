@@ -16,6 +16,7 @@
 #include <dolphin/gx/GXTransform.h>
 #include <dolphin/mtx.h>
 #include <dolphin/vi.h> // IWYU pragma: keep
+#include <Runtime/fma.h>
 
 static HSD_ClassInfo* default_class;
 static HSD_CObj* current;
@@ -343,25 +344,27 @@ static bool setupTopHalfCamera(HSD_CObj* cobj)
             t = cobj->near *
                 tanf(DegToRad(0.5 * cobj->projection_param.perspective.fov));
             w = t * cobj->projection_param.perspective.aspect;
-            b = t * -(2.0f * h_scale - 1.0f);
+            b = t * -(FMA_MUL_SUB(2.0f, h_scale, 1.0f));
             MTXFrustum(p, t, b, -w, w, cobj->near, cobj->far);
             break;
         case PROJ_FRUSTUM:
             projection_type = GX_PERSPECTIVE;
             MTXFrustum(
                 p, cobj->projection_param.perspective.fov,
-                -(h_scale * (cobj->projection_param.perspective.fov -
-                             cobj->projection_param.perspective.aspect) -
-                  cobj->projection_param.perspective.fov),
+                -(FMA_MUL_SUB(h_scale,
+                              (cobj->projection_param.perspective.fov -
+                               cobj->projection_param.perspective.aspect),
+                              cobj->projection_param.perspective.fov)),
                 cobj->projection_param.frustum.left,
                 cobj->projection_param.frustum.right, cobj->near, cobj->far);
             break;
         case PROJ_ORTHO:
             projection_type = GX_ORTHOGRAPHIC;
             MTXOrtho(p, cobj->projection_param.perspective.fov,
-                     -(h_scale * (cobj->projection_param.perspective.fov -
-                                  cobj->projection_param.perspective.aspect) -
-                       cobj->projection_param.perspective.fov),
+                     -(FMA_MUL_SUB(h_scale,
+                                   (cobj->projection_param.perspective.fov -
+                                    cobj->projection_param.perspective.aspect),
+                                   cobj->projection_param.perspective.fov)),
                      cobj->projection_param.frustum.left,
                      cobj->projection_param.frustum.right, cobj->near,
                      cobj->far);
@@ -428,14 +431,15 @@ static bool setupBottomHalfCamera(HSD_CObj* cobj)
             b = cobj->near *
                 tanf(DegToRad(0.5 * cobj->projection_param.perspective.fov));
             w = b * cobj->projection_param.perspective.aspect;
-            t = b * (2.0f * hscale + -1.0f);
+            t = b * (FMA_MUL_ADD(2.0f, hscale, -1.0f));
             MTXFrustum(p, t, -b, -w, w, cobj->near, cobj->far);
             break;
         case PROJ_FRUSTUM:
             projection_type = GX_PERSPECTIVE;
-            h = (hscale * (cobj->projection_param.perspective.fov -
-                           cobj->projection_param.perspective.aspect) +
-                 cobj->projection_param.perspective.aspect);
+            h = (FMA_MUL_ADD(hscale,
+                             (cobj->projection_param.perspective.fov -
+                              cobj->projection_param.perspective.aspect),
+                             cobj->projection_param.perspective.aspect));
             MTXFrustum(p, h, cobj->projection_param.perspective.aspect,
                        cobj->projection_param.frustum.left,
                        cobj->projection_param.frustum.right, cobj->near,
@@ -444,9 +448,10 @@ static bool setupBottomHalfCamera(HSD_CObj* cobj)
         case PROJ_ORTHO:
             projection_type = GX_ORTHOGRAPHIC;
             MTXOrtho(p,
-                     (hscale * (cobj->projection_param.perspective.fov -
-                                cobj->projection_param.perspective.aspect) +
-                      cobj->projection_param.perspective.aspect),
+                     (FMA_MUL_ADD(hscale,
+                                  (cobj->projection_param.perspective.fov -
+                                   cobj->projection_param.perspective.aspect),
+                                  cobj->projection_param.perspective.aspect)),
                      cobj->projection_param.perspective.aspect,
                      cobj->projection_param.frustum.left,
                      cobj->projection_param.frustum.right, cobj->near,

@@ -102,6 +102,7 @@
 #include <melee/sc/types.h>
 #include <melee/ty/toy.h>
 #include <melee/ty/tydisplay.h>
+#include <Runtime/fma.h>
 #include <sysdolphin/baselib/cobj.h>
 #include <sysdolphin/baselib/debug.h>
 #include <sysdolphin/baselib/fog.h>
@@ -2994,9 +2995,9 @@ void Ground_801C4FAC(HSD_CObj* cobj)
             sp44 = stage_info.x16C;
         }
         if (sp74.z < 0) {
-            xz_inv_len =
-                1.0f / sqrtf_store((sp74.x * sp74.x) + (sp74.z * sp74.z),
-                                   &sqrt_tmp[2]);
+            xz_inv_len = 1.0f / sqrtf_store(FMA_MUL_ADD(sp74.x, sp74.x,
+                                                        (sp74.z * sp74.z)),
+                                            &sqrt_tmp[2]);
             xz_x_weight = xz_inv_len * ABS(sp74.x);
             xz_z_weight = xz_inv_len * ABS(sp74.z);
             sp50.x *= xz_x_weight;

@@ -33,6 +33,7 @@
 #include <melee/mn/inlines.h>
 #include <melee/mn/mnmain.h>
 #include <melee/sc/types.h>
+#include <Runtime/fma.h>
 #include <sysdolphin/baselib/archive.h>
 #include <sysdolphin/baselib/cobj.h>
 #include <sysdolphin/baselib/controller.h>
@@ -3106,13 +3107,13 @@ f32 _Toy_80309338(Vec3* arg0, Vec3* arg1)
     temp_f4 = var_r3->x - var_r4->x;
     temp_f2 = var_r3->z - var_r4->z;
     var_f1 = var_f1 * var_f1;
-    var_f1 = temp_f4 * temp_f4 + var_f1;
-    var_f1 = temp_f2 * temp_f2 + var_f1;
+    var_f1 = FMA_MUL_ADD(temp_f4, temp_f4, var_f1);
+    var_f1 = FMA_MUL_ADD(temp_f2, temp_f2, var_f1);
     if (var_f1 > 0.0f) {
         guess = __frsqrte((f64) var_f1);
-        guess = 0.5 * guess * (3.0 - guess * guess * var_f1);
-        guess = 0.5 * guess * (3.0 - guess * guess * var_f1);
-        guess = 0.5 * guess * (3.0 - guess * guess * var_f1);
+        guess = 0.5 * guess * (FMA_SUB_MUL(3.0, guess * guess, var_f1));
+        guess = 0.5 * guess * (FMA_SUB_MUL(3.0, guess * guess, var_f1));
+        guess = 0.5 * guess * (FMA_SUB_MUL(3.0, guess * guess, var_f1));
         sp10 = (f32) (var_f1 * guess);
         var_f1 = sp10;
     }
@@ -3220,7 +3221,7 @@ void _Toy_80309404(HSD_GObj* gobj)
         } else {
             sign = -1;
         }
-        state->x30 = (f32) (-((0.2f * (f32) sign) - tmp) / 0.8f);
+        state->x30 = (f32) (-(FMA_MUL_SUB(0.2f, (f32) sign, tmp)) / 0.8f);
     }
 
     tmp = state->x34;
@@ -3232,7 +3233,7 @@ void _Toy_80309404(HSD_GObj* gobj)
         } else {
             sign = -1;
         }
-        state->x34 = (f32) (-((0.2f * (f32) sign) - tmp) / 0.8f);
+        state->x34 = (f32) (-(FMA_MUL_SUB(0.2f, (f32) sign, tmp)) / 0.8f);
     }
 
     state->x40 = Toy_80305EB4();
@@ -3248,7 +3249,7 @@ void _Toy_80309404(HSD_GObj* gobj)
         } else {
             sign = -1;
         }
-        state->x40 = (f32) (-((0.2f * (f32) sign) - tmp) / 0.8f);
+        state->x40 = (f32) (-(FMA_MUL_SUB(0.2f, (f32) sign, tmp)) / 0.8f);
     }
 
     tmp = state->x44;
@@ -3260,7 +3261,7 @@ void _Toy_80309404(HSD_GObj* gobj)
         } else {
             sign = -1;
         }
-        state->x44 = (f32) (-((0.2f * (f32) sign) - tmp) / 0.8f);
+        state->x44 = (f32) (-(FMA_MUL_SUB(0.2f, (f32) sign, tmp)) / 0.8f);
     }
 
     {
@@ -3501,18 +3502,19 @@ void _Toy_80309404(HSD_GObj* gobj)
         if (!movement_update) {
             button = Toy_80305C44();
             if (button & HSD_PAD_Y) {
-                state->x20 = (f32) - ((0.025f * dist) - state->x20);
+                state->x20 = (f32) - (FMA_MUL_SUB(0.025f, dist, state->x20));
                 zoom_update = 1.0f;
             } else {
                 button = Toy_80305C44();
                 if (button & HSD_PAD_X) {
-                    state->x20 = (f32) - ((-0.025f * dist) - state->x20);
+                    state->x20 =
+                        (f32) - (FMA_MUL_SUB(-0.025f, dist, state->x20));
                     zoom_update = 1.0f;
                 } else {
                     tmp = state->x34;
                     if (tmp) {
-                        state->x20 =
-                            (f32) - ((dist * (0.025f * tmp)) - state->x20);
+                        state->x20 = (f32) - (FMA_MUL_SUB(dist, (0.025f * tmp),
+                                                          state->x20));
                         zoom_update = 1.0f;
                     }
                 }
@@ -3529,8 +3531,8 @@ void _Toy_80309404(HSD_GObj* gobj)
     }
 
     if (rotate_update) {
-        state->x1C = (f32) - ((3.0f * state->x40) - state->x1C);
-        state->x18 = (f32) - ((3.0f * state->x44) - state->x18);
+        state->x1C = (f32) - (FMA_MUL_SUB(3.0f, state->x40, state->x1C));
+        state->x18 = (f32) - (FMA_MUL_SUB(3.0f, state->x44, state->x18));
         if (state->x18 < -89.0f) {
             state->x18 = -89.0f;
         }
@@ -3918,7 +3920,7 @@ void _Toy_8030B530(HSD_GObj* arg0)
             } else {
                 sign = -1;
             }
-            adj_x = -((0.2f * (f32) sign) - stick_x) / 0.8f;
+            adj_x = -(FMA_MUL_SUB(0.2f, (f32) sign, stick_x)) / 0.8f;
         }
 
         if ((stick_y > -0.2f) && (stick_y < 0.2f)) {
@@ -3930,7 +3932,7 @@ void _Toy_8030B530(HSD_GObj* arg0)
             } else {
                 sign = -1;
             }
-            adj_y = -((0.2f * (f32) sign) - stick_y) / 0.8f;
+            adj_y = -(FMA_MUL_SUB(0.2f, (f32) sign, stick_y)) / 0.8f;
         }
 
         substick_x = Toy_80305EB4();
@@ -3945,7 +3947,7 @@ void _Toy_8030B530(HSD_GObj* arg0)
             } else {
                 sign = -1;
             }
-            adj_sx = -((0.2f * (f32) sign) - substick_x) / 0.8f;
+            adj_sx = -(FMA_MUL_SUB(0.2f, (f32) sign, substick_x)) / 0.8f;
         }
 
         if ((substick_y > -0.2f) && (substick_y < 0.2f)) {
@@ -3957,7 +3959,7 @@ void _Toy_8030B530(HSD_GObj* arg0)
             } else {
                 sign = -1;
             }
-            adj_sy = -((0.2f * (f32) sign) - substick_y) / 0.8f;
+            adj_sy = -(FMA_MUL_SUB(0.2f, (f32) sign, substick_y)) / 0.8f;
         }
 
         {
@@ -4055,7 +4057,8 @@ void _Toy_8030B530(HSD_GObj* arg0)
                 f32 abs_y = ABS(adj_y);
                 if (abs_y > 0.8f) {
                     f32 dist = state->x20;
-                    state->x20 = (f32) - ((dist * (0.025f * adj_y)) - dist);
+                    state->x20 =
+                        (f32) - (FMA_MUL_SUB(dist, (0.025f * adj_y), dist));
                     if (state->x20 < 5.0f) {
                         state->x20 = 5.0f;
                     }
@@ -4208,8 +4211,10 @@ void _Toy_8030B530(HSD_GObj* arg0)
                             }
                         }
                     }
-                    state->x1C = (f32) - ((3.0f * adj_x) - state->x1C);
-                    state->x18 = (f32) - ((3.0f * adj_y) - state->x18);
+                    state->x1C =
+                        (f32) - (FMA_MUL_SUB(3.0f, adj_x, state->x1C));
+                    state->x18 =
+                        (f32) - (FMA_MUL_SUB(3.0f, adj_y, state->x18));
                     if (state->x18 < -89.0f) {
                         state->x18 = -89.0f;
                     }
@@ -4545,7 +4550,7 @@ void _Toy_8030E110(HSD_GObj* arg0)
         } else {
             sign = -1;
         }
-        state->x30 = (f32) (-((0.2f * (f32) sign) - tmp) / 0.8f);
+        state->x30 = (f32) (-(FMA_MUL_SUB(0.2f, (f32) sign, tmp)) / 0.8f);
     }
     tmp = state->x34;
     if ((tmp > -0.2f) && (tmp < 0.2f)) {
@@ -4556,7 +4561,7 @@ void _Toy_8030E110(HSD_GObj* arg0)
         } else {
             sign = -1;
         }
-        state->x34 = (f32) (-((0.2f * (f32) sign) - tmp) / 0.8f);
+        state->x34 = (f32) (-(FMA_MUL_SUB(0.2f, (f32) sign, tmp)) / 0.8f);
     }
 
     state->x40 = Toy_80305EB4();
@@ -4572,7 +4577,7 @@ void _Toy_8030E110(HSD_GObj* arg0)
         } else {
             sign = -1;
         }
-        state->x40 = (f32) (-((0.2f * (f32) sign) - tmp) / 0.8f);
+        state->x40 = (f32) (-(FMA_MUL_SUB(0.2f, (f32) sign, tmp)) / 0.8f);
     }
     tmp = state->x44;
     if ((tmp > -0.2f) && (tmp < 0.2f)) {
@@ -4583,7 +4588,7 @@ void _Toy_8030E110(HSD_GObj* arg0)
         } else {
             sign = -1;
         }
-        state->x44 = (f32) (-((0.2f * (f32) sign) - tmp) / 0.8f);
+        state->x44 = (f32) (-(FMA_MUL_SUB(0.2f, (f32) sign, tmp)) / 0.8f);
     }
 
     {
@@ -4725,7 +4730,7 @@ void _Toy_8030E110(HSD_GObj* arg0)
             if (!moved_x) {
                 f32 sy = state->x34;
                 if (sy) {
-                    state->x20 -= state->x20 * (0.025f * sy);
+                    FMA_SUB_FROM(state->x20, state->x20, (0.025f * sy));
                     moved_y = 1.0f;
                 }
                 if (state->x20 < 5.0f) {
@@ -4743,8 +4748,8 @@ void _Toy_8030E110(HSD_GObj* arg0)
             _Toy_sbss_804D6E54 ^= 1;
         }
 
-        state->x1C = (f32) - ((3.0f * state->x40) - state->x1C);
-        state->x18 = (f32) - ((3.0f * state->x44) - state->x18);
+        state->x1C = (f32) - (FMA_MUL_SUB(3.0f, state->x40, state->x1C));
+        state->x18 = (f32) - (FMA_MUL_SUB(3.0f, state->x44, state->x18));
         if (state->x18 < -89.0f) {
             state->x18 = -89.0f;
         }

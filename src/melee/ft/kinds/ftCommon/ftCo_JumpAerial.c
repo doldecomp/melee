@@ -27,6 +27,7 @@
 #include <melee/ft/inlines.h>
 #include <melee/ft/kinds/ftPeach/ftpeachfloat.h>
 #include <melee/ft/types.h>
+#include <Runtime/fma.h>
 #include <sysdolphin/baselib/jobj.h>
 
 /* 0CC3C4 */ static void ftYs_JumpAerial_Anim_Cb(Fighter_GObj* gobj);
@@ -313,8 +314,8 @@ void ftNs_JumpAerial_Phys_Cb(Fighter_GObj* gobj)
     ftCommon_CalcSelfAccel_DriftFrom(fp, fp->mv.co.jumpaerial.init_h_vel);
     fp->mv.co.jumpaerial.init_h_vel += fp->x74_self_accel.x;
     fp->x74_self_accel.x = 0.0F;
-    fp->self_vel.x = fp->x6A4_transNOffset.z * fp->facing_dir +
-                     fp->mv.co.jumpaerial.init_h_vel;
+    fp->self_vel.x = FMA_MUL_ADD(fp->x6A4_transNOffset.z, fp->facing_dir,
+                                 fp->mv.co.jumpaerial.init_h_vel);
     ft_800851D0(gobj);
 }
 

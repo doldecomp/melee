@@ -21,6 +21,7 @@
 #include <melee/lb/lbspdisplay.h>
 #include <melee/lb/types.h>
 #include <melee/mp/mplib.h>
+#include <Runtime/fma.h>
 #include <sysdolphin/baselib/archive.h>
 #include <sysdolphin/baselib/debug.h>
 #include <sysdolphin/baselib/fog.h>
@@ -358,14 +359,14 @@ void grHomeRun_8021D680(Ground_GObj* gobj)
         lb_8000B1CC(jobj2, NULL, &pos2);
 
         scale = Ground_801C0498();
-        z = pos2.z + 0.0F * (grHr_804D6AE4 * scale);
+        z = FMA_ADD_MUL(pos2.z, 0.0F, (grHr_804D6AE4 * scale));
 
         scale = Ground_801C0498();
-        y = -pos2.y + 0.0F * (grHr_804D6AE4 * scale);
+        y = FMA_ADD_MUL(-pos2.y, 0.0F, (grHr_804D6AE4 * scale));
 
         scale = Ground_801C0498();
         text = (HSD_Text*) (intptr_t) gp->u.unk.xCC;
-        text->pos_x = pos2.x + (-1.0F) * (grHr_804D6AE4 * scale);
+        text->pos_x = FMA_ADD_MUL(pos2.x, (-1.0F), (grHr_804D6AE4 * scale));
         text->pos_y = y;
         text->pos_z = z;
     }
@@ -415,9 +416,9 @@ void grHomeRun_8021D680(Ground_GObj* gobj)
     while (true) {
         f32 diff = x - cam_interest.x;
         if (diff < 0.5F * -(2150.99F * Ground_801C0498())) {
-            x += 2150.99F * Ground_801C0498();
+            FMA_ADD_TO(x, 2150.99F, Ground_801C0498());
         } else if (diff > 0.5F * (2150.99F * Ground_801C0498())) {
-            x -= 2150.99F * Ground_801C0498();
+            FMA_SUB_FROM(x, 2150.99F, Ground_801C0498());
         } else {
             break;
         }
@@ -426,12 +427,14 @@ void grHomeRun_8021D680(Ground_GObj* gobj)
     jobj2 = (HSD_JObj*) gp->u.homerun.bg_gobj[0]->hsd_obj;
     jobj = jobj2;
     HSD_ASSERT(0x257, jobj);
-    HSD_JObjSetTranslateX(jobj, x - 1.5F * (2150.99F * Ground_801C0498()));
+    HSD_JObjSetTranslateX(
+        jobj, FMA_SUB_MUL(x, 1.5F, (2150.99F * Ground_801C0498())));
 
     jobj = GET_JOBJ(gp->u.homerun.bg_gobj[1]);
     HSD_ASSERT(0x259, jobj);
 
-    HSD_JObjSetTranslateX(jobj, x - 0.5F * (2150.99F * Ground_801C0498()));
+    HSD_JObjSetTranslateX(
+        jobj, FMA_SUB_MUL(x, 0.5F, (2150.99F * Ground_801C0498())));
 
     jobj = GET_JOBJ(gp->u.homerun.bg_gobj[2]);
     HSD_ASSERT(0x25B, jobj);
@@ -493,7 +496,7 @@ void grHomeRun_8021DF50(Ground_GObj* gobj)
             lb_8000B1CC((HSD_JObj*) gp->u.unk.xCC, NULL, &pos);
 
             scale = Ground_801C0498();
-            z = pos.z + 0.0F * (grHr_804D6AE4 * scale);
+            z = FMA_ADD_MUL(pos.z, 0.0F, (grHr_804D6AE4 * scale));
 
             scale = Ground_801C0498();
             y = -pos.y + 0.0F * (grHr_804D6AE4 * scale);
@@ -557,7 +560,7 @@ void grHomeRun_8021E0D4(Ground_GObj* gobj)
             lb_8000B1CC((HSD_JObj*) gp->u.unk.xCC, NULL, &pos);
 
             scale = Ground_801C0498();
-            z = pos.z + 0.0F * (grHr_804D6AE4 * scale);
+            z = FMA_ADD_MUL(pos.z, 0.0F, (grHr_804D6AE4 * scale));
 
             scale = Ground_801C0498();
             y = -pos.y + 0.0F * (grHr_804D6AE4 * scale);
@@ -621,7 +624,7 @@ void grHomeRun_8021E258(Ground_GObj* gobj)
             lb_8000B1CC((HSD_JObj*) gp->u.unk.xCC, NULL, &pos);
 
             scale = Ground_801C0498();
-            z = pos.z + 0.0F * (grHr_804D6AE4 * scale);
+            z = FMA_ADD_MUL(pos.z, 0.0F, (grHr_804D6AE4 * scale));
 
             scale = Ground_801C0498();
             y = -pos.y + 0.0F * (grHr_804D6AE4 * scale);
@@ -685,7 +688,7 @@ void grHomeRun_8021E3DC(Ground_GObj* gobj)
             lb_8000B1CC((HSD_JObj*) gp->u.unk.xCC, NULL, &pos);
 
             scale = Ground_801C0498();
-            z = pos.z + 0.0F * (grHr_804D6AE4 * scale);
+            z = FMA_ADD_MUL(pos.z, 0.0F, (grHr_804D6AE4 * scale));
 
             scale = Ground_801C0498();
             y = -pos.y + 0.0F * (grHr_804D6AE4 * scale);
@@ -782,7 +785,7 @@ HSD_GObj* grHomeRun_8021E500(int arg0)
 
     offset = grHr_804D6AE4 * ((f32) arg0 * (160.0F * Ground_801C0498()));
     gp->u.homerun2.xD0 =
-        (160.0F * (grHr_804D6AE4 * Ground_801C0498())) + offset;
+        FMA_MUL_ADD(160.0F, (grHr_804D6AE4 * Ground_801C0498()), offset);
     HSD_JObjSetTranslateX(jobj, gp->u.homerun2.xD0);
 
     gp->u.homerun2.xC6 =
@@ -822,7 +825,7 @@ void grHomeRun_8021EA30(const f32* pos)
     f32 time;
 
     time = Ground_801C0498();
-    result = *pos - 70.0F * (grHr_804D6AE4 * time);
+    result = FMA_SUB_MUL(*pos, 70.0F, (grHr_804D6AE4 * time));
 
     time = Ground_801C0498();
     new_var = 160.0F * time;

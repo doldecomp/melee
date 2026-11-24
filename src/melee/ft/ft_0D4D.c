@@ -30,6 +30,7 @@
 #include <melee/mp/mpcoll.h>
 #include <melee/pl/player.h>
 #include <melee/pl/plbonuslib.h>
+#include <Runtime/fma.h>
 
 void fn_800D4DD4(Fighter_GObj* gobj)
 {
@@ -113,14 +114,14 @@ void ftCo_800D4FF4(Fighter_GObj* gobj)
     if (fp->smash_attrs.x2135 == -1) {
         Player_GetSpawnPlatformPos(fp->player_idx, &sp44);
         fp->mv.co.turn.facing_after =
-            fp->facing_dir * ftCommon_800804EC(fp) + sp44.x;
+            FMA_MUL_ADD(fp->facing_dir, ftCommon_800804EC(fp), sp44.x);
         fp->mv.co.turn.x8 = sp44.y;
         fp->mv.co.walk.middle_anim_frame = 0.0f;
     } else {
         Stage_80224E38(&sp14, fp->smash_attrs.x2135);
         Player_GetSomePos(fp->player_idx, &sp20);
-        fp->mv.co.turn.facing_after =
-            fp->facing_dir * ftCommon_800804EC(fp) + (sp14.x + sp20.x);
+        fp->mv.co.turn.facing_after = FMA_MUL_ADD(
+            fp->facing_dir, ftCommon_800804EC(fp), (sp14.x + sp20.x));
         fp->mv.co.turn.x8 = sp14.y + sp20.y;
         fp->mv.co.walk.middle_anim_frame = 0.0f;
     }
@@ -148,7 +149,8 @@ void ftCo_800D4FF4(Fighter_GObj* gobj)
 
         ftCommon_8007E690(fp, ((void**) Fighter_804D6534)[1]);
 
-        pos_vec.x = -(fp->facing_dir * ftCommon_800804EC(fp) - fp->cur_pos.x);
+        pos_vec.x = -(
+            FMA_MUL_SUB(fp->facing_dir, ftCommon_800804EC(fp), fp->cur_pos.x));
         pos_vec.y = fp->cur_pos.y;
         pos_vec.z = fp->cur_pos.z;
         HSD_JObjSetTranslate(fp->x20A0_accessory, &pos_vec);
@@ -186,8 +188,8 @@ void ftCo_Rebirth_Phys(Fighter_GObj* gobj)
             Stage_80224E38(&stage_pos, new_var->smash_attrs.x2135);
             Player_GetSomePos(new_var->player_idx, &player_pos);
             new_var->mv.co.common.x4.x =
-                stage_pos.x + player_pos.x +
-                new_var->facing_dir * ftCommon_800804EC(new_var);
+                FMA_ADD_MUL(stage_pos.x + player_pos.x, new_var->facing_dir,
+                            ftCommon_800804EC(new_var));
             new_var->mv.co.common.x4.y = stage_pos.y + player_pos.y;
             new_var->mv.co.common.x4.z = 0.0f;
         }
@@ -232,7 +234,8 @@ void fn_800D54A4(Fighter_GObj* gobj)
         }
     }
 
-    sp.x = -(fp->facing_dir * ftCommon_800804EC(fp) - fp->cur_pos.x);
+    sp.x =
+        -(FMA_MUL_SUB(fp->facing_dir, ftCommon_800804EC(fp), fp->cur_pos.x));
     sp.y = fp->cur_pos.y;
     sp.z = fp->cur_pos.z;
 
@@ -340,8 +343,8 @@ void ftCo_RebirthWait_Phys(Fighter_GObj* gobj)
             Stage_80224E38(&sp18, new_var->smash_attrs.x2135);
             Player_GetSomePos(new_var->player_idx, &sp24);
             new_var->mv.co.common.x4.x =
-                new_var->facing_dir * ftCommon_800804EC(new_var) +
-                (sp18.x + sp24.x);
+                FMA_MUL_ADD(new_var->facing_dir, ftCommon_800804EC(new_var),
+                            (sp18.x + sp24.x));
             new_var->mv.co.common.x4.y = sp18.y + sp24.y;
             new_var->mv.co.common.x4.z = 0.0f;
         }

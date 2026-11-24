@@ -16,6 +16,7 @@
 #include <melee/it/itgroundcoll.h>
 #include <melee/it/types.h>
 #include <melee/lb/lbvector.h>
+#include <Runtime/fma.h>
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/random.h>
 
@@ -130,13 +131,13 @@ Item_GObj* it_802996D0(HSD_GObj* owner_gobj, Vec3* pos, u32 arg2,
                 f32 r = HSD_Randf();
                 f32 lo = item_spec_attr->x4;
                 diff = item_spec_attr->x8 - lo;
-                item->xDD4_itemVar.lgunbeam.angle1 = diff * r + lo;
+                item->xDD4_itemVar.lgunbeam.angle1 = FMA_MUL_ADD(diff, r, lo);
             }
             {
                 f32 r = HSD_Randf();
                 f32 lo = item_spec_attr->xC;
                 diff = item_spec_attr->x10 - lo;
-                item->xDD4_itemVar.lgunbeam.angle0 = diff * r + lo;
+                item->xDD4_itemVar.lgunbeam.angle0 = FMA_MUL_ADD(diff, r, lo);
             }
             {
                 f32 angle;

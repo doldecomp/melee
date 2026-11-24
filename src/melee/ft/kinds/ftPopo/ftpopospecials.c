@@ -14,6 +14,7 @@
 #include <melee/ft/kinds/ftCommon/inlines.h>
 #include <melee/ft/kinds/ftNana/ftnana.h>
 #include <melee/pl/player.h>
+#include <Runtime/fma.h>
 
 static inline void setRefGObjFlagAndClear(Fighter* fp)
 {
@@ -357,8 +358,8 @@ void ftPp_SpecialS1_Phys(Fighter_GObj* gobj)
         temp_r5 = GET_FIGHTER(gobj);
         {
             ftIceClimberAttributes* da = temp_r5->dat_attrs;
-            temp_r5->xE4_ground_accel_1 +=
-                da->x6C * temp_r5->coll_data.floor.normal.x;
+            FMA_ADD_TO(temp_r5->xE4_ground_accel_1, da->x6C,
+                       temp_r5->coll_data.floor.normal.x);
         }
         ftCommon_ClampGroundVel(fp, temp_r30->x38);
         ftCommon_SetSelfMovementFromGroundedMovement_NoFriction(gobj);
@@ -416,8 +417,8 @@ void ftPp_SpecialS2_Phys(Fighter_GObj* gobj)
         temp_r5 = GET_FIGHTER(gobj);
         {
             ftIceClimberAttributes* da = temp_r5->dat_attrs;
-            temp_r5->xE4_ground_accel_1 +=
-                da->x6C * temp_r5->coll_data.floor.normal.x;
+            FMA_ADD_TO(temp_r5->xE4_ground_accel_1, da->x6C,
+                       temp_r5->coll_data.floor.normal.x);
         }
         ftCommon_ClampGroundVel(temp_r31, temp_r30->x38);
         ftCommon_SetSelfMovementFromGroundedMovement_NoFriction(gobj);

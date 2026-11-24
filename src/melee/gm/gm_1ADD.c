@@ -5,6 +5,7 @@
 #include <melee/lb/lbarchive.h>
 #include <melee/lb/lblanguage.h>
 #include <melee/sc/types.h>
+#include <Runtime/fma.h>
 #include <sysdolphin/baselib/cobj.h>
 #include <sysdolphin/baselib/controller.h>
 #include <sysdolphin/baselib/dobj.h>
@@ -133,8 +134,9 @@ bool gm_801AE050(int arg0, int arg1, int arg2, float arg3, float arg4)
                     HSD_JObjSetTranslateY(GET_JOBJ(temp_r3_3), temp_r3->unk14);
                 }
                 temp_r3->unk24 = HSD_SisLib_803A5ACC(
-                    3, gm_804D686C, 2.2F * temp_r3->unk10 - 1.0F,
-                    2.232143F * -temp_r3->unk14 - 1.3F, 0.0F, 2.0F, 2.0F);
+                    3, gm_804D686C, FMA_MUL_SUB(2.2F, temp_r3->unk10, 1.0F),
+                    FMA_MUL_SUB(2.232143F, -temp_r3->unk14, 1.3F), 0.0F, 2.0F,
+                    2.0F);
                 temp_r3_4 = temp_r3->unk24;
                 temp_r3_4->x34.x = 0.1F;
                 temp_r3_4->x34.y = 0.1F;
@@ -160,8 +162,9 @@ bool gm_801AE050(int arg0, int arg1, int arg2, float arg3, float arg4)
                                           temp_r3->unk14);
                 }
                 temp_r3->unk24 = HSD_SisLib_803A5ACC(
-                    3, gm_804D686C, 2.2F * temp_r3->unk10 - 1.0F,
-                    2.232143F * -temp_r3->unk14 - 1.3F, 0.0F, 2.0F, 2.0F);
+                    3, gm_804D686C, FMA_MUL_SUB(2.2F, temp_r3->unk10, 1.0F),
+                    FMA_MUL_SUB(2.232143F, -temp_r3->unk14, 1.3F), 0.0F, 2.0F,
+                    2.0F);
                 temp_r3_7 = temp_r3->unk24;
                 temp_r3_7->x34.x = 0.1F;
                 temp_r3_7->x34.y = 0.1F;

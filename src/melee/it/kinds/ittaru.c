@@ -19,6 +19,7 @@
 #include <melee/lb/lb_00B0.h>
 #include <melee/lb/lb_00F9.h>
 #include <melee/lb/lbvector.h>
+#include <Runtime/fma.h>
 #include <sysdolphin/baselib/jobj.h>
 #include <sysdolphin/baselib/random.h>
 
@@ -107,7 +108,7 @@ void it_802874F0(Item_GObj* gobj)
                 var_f1 = -var_f1;
             }
             if (var_f1 < attr->x2C) {
-                ip->xDD4_itemVar.taru.xDE4 += temp_f2 * attr->x24;
+                FMA_ADD_TO(ip->xDD4_itemVar.taru.xDE4, temp_f2, attr->x24);
             }
         } else {
             temp_f1 = ip->xDD4_itemVar.taru.xDE4;
@@ -139,11 +140,11 @@ void it_802874F0(Item_GObj* gobj)
         ip->x40_vel.x =
             ip->xDD4_itemVar.taru.xDE4 * ip->xDD4_itemVar.taru.xDE8.y;
         var_f2 = inline_fabsf(ip->xDD4_itemVar.taru.xDE4);
-        ip->xDD4_itemVar.taru.xDE0 = (0.12217305f * var_f2 * -ip->facing_dir) +
-                                     ip->xDD4_itemVar.taru.xDE0;
+        ip->xDD4_itemVar.taru.xDE0 = FMA_MUL_ADD(
+            0.12217305f * var_f2, -ip->facing_dir, ip->xDD4_itemVar.taru.xDE0);
     } else {
-        ip->xDD4_itemVar.taru.xDE0 =
-            (0.10471976f * -ip->facing_dir) + ip->xDD4_itemVar.taru.xDE0;
+        ip->xDD4_itemVar.taru.xDE0 = FMA_MUL_ADD(0.10471976f, -ip->facing_dir,
+                                                 ip->xDD4_itemVar.taru.xDE0);
     }
 }
 
@@ -690,9 +691,9 @@ bool it_3F14_Logic2_DmgReceived(Item_GObj* gobj)
                     Item_80268E5C(gobj, 5, ITEM_ANIM_UPDATE);
                 }
             } else if ((u32) (ip->msid - 4) <= 1u) {
-                ip->xDD4_itemVar.taru.xDE4 =
-                    (-ip->xCCC_incDamageDirection * (ip->xCA0 * attr->x10)) +
-                    ip->xDD4_itemVar.taru.xDE4;
+                ip->xDD4_itemVar.taru.xDE4 = FMA_MUL_ADD(
+                    -ip->xCCC_incDamageDirection, (ip->xCA0 * attr->x10),
+                    ip->xDD4_itemVar.taru.xDE4);
                 it_8027236C(gobj);
                 it_80275444(gobj);
             }

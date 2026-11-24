@@ -19,6 +19,7 @@
 #include <melee/ft/ftcommon.h>
 #include <melee/ft/types.h>
 #include <melee/mp/mplib.h>
+#include <Runtime/fma.h>
 
 /* 09AAFC */ static bool ftCo_8009AAFC(Fighter_GObj* gobj, bool arg1,
                                        float stick_x, float stick_angle);
@@ -103,7 +104,8 @@ void ftCo_CliffClimb_Phys(Fighter_GObj* gobj)
             } else {
                 mpLib_80053DA4_Floor(fp->mv.co.cliff.ledge_id, &vec);
             }
-            fp->cur_pos.x = fp->x68C_transNPos.z * fp->facing_dir + vec.x;
+            fp->cur_pos.x =
+                FMA_MUL_ADD(fp->x68C_transNPos.z, fp->facing_dir, vec.x);
             fp->cur_pos.y = vec.y + fp->x68C_transNPos.y;
             if (fp->ground_or_air == GA_Air && fp->x68C_transNPos.z >= 0 &&
                 fp->x68C_transNPos.y >= 0)

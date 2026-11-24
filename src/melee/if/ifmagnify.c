@@ -16,6 +16,7 @@
 #include <melee/lb/lbspdisplay.h>
 #include <melee/pl/player.h>
 #include <melee/sc/types.h>
+#include <Runtime/fma.h>
 #include <sysdolphin/baselib/cobj.h>
 #include <sysdolphin/baselib/displayfunc.h>
 #include <sysdolphin/baselib/dobj.h>
@@ -357,17 +358,19 @@ void ifMagnify_802FBBDC(HSD_GObj* gobj, intptr_t code)
                 if (((s32) x_class - 1) == 0) {
                     x_blend = 1.0f -
                               ((world_pos.x - Stage_GetCamBoundsLeftOffset()) /
-                               ((0.5f * (Stage_GetCamBoundsLeftOffset() +
-                                         Stage_GetCamBoundsRightOffset())) -
-                                Stage_GetCamBoundsLeftOffset()));
+                               (FMA_MUL_SUB(0.5f,
+                                            (Stage_GetCamBoundsLeftOffset() +
+                                             Stage_GetCamBoundsRightOffset()),
+                                            Stage_GetCamBoundsLeftOffset())));
                 } else {
                     x_blend =
-                        1.0f - ((world_pos.x -
-                                 (0.5f * (Stage_GetCamBoundsLeftOffset() +
-                                          Stage_GetCamBoundsRightOffset()))) /
-                                (Stage_GetCamBoundsRightOffset() -
-                                 (0.5f * (Stage_GetCamBoundsLeftOffset() +
-                                          Stage_GetCamBoundsRightOffset()))));
+                        1.0f -
+                        ((FMA_SUB_MUL(world_pos.x, 0.5f,
+                                      (Stage_GetCamBoundsLeftOffset() +
+                                       Stage_GetCamBoundsRightOffset()))) /
+                         (FMA_SUB_MUL(Stage_GetCamBoundsRightOffset(), 0.5f,
+                                      (Stage_GetCamBoundsLeftOffset() +
+                                       Stage_GetCamBoundsRightOffset()))));
                 }
             }
             x_inv = 1.0f - x_blend;
@@ -394,18 +397,23 @@ void ifMagnify_802FBBDC(HSD_GObj* gobj, intptr_t code)
                 }
                 if (((s32) y_class - 1) == 0) {
                     y_blend =
-                        1.0f - ((Stage_GetCamBoundsTopOffset() - world_pos.y) /
-                                -((0.5f * (Stage_GetCamBoundsTopOffset() +
-                                           Stage_GetCamBoundsBottomOffset())) -
-                                  Stage_GetCamBoundsTopOffset()));
+                        1.0f -
+                        ((Stage_GetCamBoundsTopOffset() - world_pos.y) /
+                         -(FMA_MUL_SUB(0.5f,
+                                       (Stage_GetCamBoundsTopOffset() +
+                                        Stage_GetCamBoundsBottomOffset()),
+                                       Stage_GetCamBoundsTopOffset())));
                 } else {
                     y_blend =
-                        1.0f - (((0.5f * (Stage_GetCamBoundsTopOffset() +
-                                          Stage_GetCamBoundsBottomOffset())) -
-                                 world_pos.y) /
-                                ((0.5f * (Stage_GetCamBoundsTopOffset() +
-                                          Stage_GetCamBoundsBottomOffset())) -
-                                 Stage_GetCamBoundsBottomOffset()));
+                        1.0f -
+                        ((FMA_MUL_SUB(0.5f,
+                                      (Stage_GetCamBoundsTopOffset() +
+                                       Stage_GetCamBoundsBottomOffset()),
+                                      world_pos.y)) /
+                         (FMA_MUL_SUB(0.5f,
+                                      (Stage_GetCamBoundsTopOffset() +
+                                       Stage_GetCamBoundsBottomOffset()),
+                                      Stage_GetCamBoundsBottomOffset())));
                 }
             }
             y_inv = 1.0f - y_blend;
@@ -418,14 +426,26 @@ void ifMagnify_802FBBDC(HSD_GObj* gobj, intptr_t code)
             mix1 = x_blend * y_blend;
             mix2 = x_blend * y_inv;
             mix3 = x_inv * y_inv;
-            result.a = (u8) ((colors[0].a * mix1) + (colors[1].a * mix0) +
-                             (colors[2].a * mix2) + (colors[3].a * mix3));
-            result.r = (u8) ((colors[0].r * mix1) + (colors[1].r * mix0) +
-                             (colors[2].r * mix2) + (colors[3].r * mix3));
-            result.g = (u8) ((colors[0].g * mix1) + (colors[1].g * mix0) +
-                             (colors[2].g * mix2) + (colors[3].g * mix3));
-            result.b = (u8) ((colors[0].b * mix1) + (colors[1].b * mix0) +
-                             (colors[2].b * mix2) + (colors[3].b * mix3));
+            result.a = (u8) (FMA_ADD_MUL(
+                FMA_ADD_MUL(
+                    FMA_MUL_ADD(colors[0].a, mix1, (colors[1].a * mix0)),
+                    colors[2].a, mix2),
+                colors[3].a, mix3));
+            result.r = (u8) (FMA_ADD_MUL(
+                FMA_ADD_MUL(
+                    FMA_MUL_ADD(colors[0].r, mix1, (colors[1].r * mix0)),
+                    colors[2].r, mix2),
+                colors[3].r, mix3));
+            result.g = (u8) (FMA_ADD_MUL(
+                FMA_ADD_MUL(
+                    FMA_MUL_ADD(colors[0].g, mix1, (colors[1].g * mix0)),
+                    colors[2].g, mix2),
+                colors[3].g, mix3));
+            result.b = (u8) (FMA_ADD_MUL(
+                FMA_ADD_MUL(
+                    FMA_MUL_ADD(colors[0].b, mix1, (colors[1].b * mix0)),
+                    colors[2].b, mix2),
+                colors[3].b, mix3));
 
             HSD_SetEraseColor(result.r, result.g, result.b, result.a);
             HSD_CObjEraseScreen(cobj, 1, 0, 1);

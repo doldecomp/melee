@@ -13,6 +13,7 @@
 #include <melee/it/itCharItems.h>
 #include <melee/it/itcoll.h>
 #include <melee/it/item.h>
+#include <Runtime/fma.h>
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/jobj.h>
 
@@ -103,13 +104,13 @@ bool itZeldadinfireexplode_UnkMotion0_Anim(Item_GObj* gobj)
         &ip->xC4_article_data->x4_specialAttributes->zelda_din_fire_explode;
 
     temp_f1 = (attrs->x8 - attrs->x4) / attrs->x0;
-    scale.x = scale.y = scale.z =
-        ip->xDD4_itemVar.zeldadinfireexplode.xDD4 * temp_f1 + attrs->x4;
+    scale.x = scale.y = scale.z = FMA_MUL_ADD(
+        ip->xDD4_itemVar.zeldadinfireexplode.xDD4, temp_f1, attrs->x4);
     HSD_JObjSetScale(jobj, &scale);
 
     if (ip->x5D4_hitboxes[0].hit.state != HitCapsule_Disabled) {
-        temp_f1 = (ip->xDD4_itemVar.zeldadinfireexplode.xDD4 * attrs->x10 +
-                   attrs->xC);
+        temp_f1 = (FMA_MUL_ADD(ip->xDD4_itemVar.zeldadinfireexplode.xDD4,
+                               attrs->x10, attrs->xC));
         it_80272460(&ip->x5D4_hitboxes[0].hit, temp_f1, gobj);
 
         if (ip->xDD4_itemVar.zeldadinfireexplode.xDD8 == 0.0f) {

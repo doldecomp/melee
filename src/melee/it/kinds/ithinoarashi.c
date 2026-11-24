@@ -16,6 +16,7 @@
 #include <melee/it/itmaplib.h>
 #include <melee/lb/lb_00B0.h>
 #include <melee/lb/lbvector.h>
+#include <Runtime/fma.h>
 #include <sysdolphin/baselib/random.h>
 
 /* 2D60C8 */ static bool itHinoarashi_UnkMotion2_Anim(Item_GObj* gobj);
@@ -291,7 +292,8 @@ void it_802D64B8(HSD_GObj* gobj, Vec3* pos, u32 arg2, f32 facing_dir)
             {
                 f32 rand = HSD_Randf();
                 f32 new_var; // permuterslop
-                f32 a = (attr->x14 - attr->x10) * (new_var = rand) + attr->x10;
+                f32 a = FMA_MUL_ADD((attr->x14 - attr->x10), (new_var = rand),
+                                    attr->x10);
                 angle = ((new_ip->facing_dir == 1.0f) ? a : -a) - M_PI_2;
             }
 
@@ -306,7 +308,8 @@ void it_802D64B8(HSD_GObj* gobj, Vec3* pos, u32 arg2, f32 facing_dir)
             {
                 f32 rand = HSD_Randf();
                 f32 new_var;
-                speed = ((attr->x8 - attr->x4) * (new_var = rand)) + attr->x4;
+                speed = FMA_MUL_ADD((attr->x8 - attr->x4), (new_var = rand),
+                                    attr->x4);
             }
             new_ip->x40_vel.x = speed * cosf(angle);
             new_ip->x40_vel.y = speed * sinf(angle);

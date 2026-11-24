@@ -11,6 +11,7 @@
 #include <melee/lb/lb_00B0.h>
 #include <melee/lb/lbaudio_ax.h>
 #include <melee/lb/lbspdisplay.h>
+#include <Runtime/fma.h>
 #include <sysdolphin/baselib/debug.h>
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/gobjgxlink.h>
@@ -266,8 +267,8 @@ void mnDiagram3_PopulateRankings(HSD_GObj* gobj)
                         HSD_Text* icon_text;
                         icon_text = HSD_SisLib_803A5ACC(
                             0, 1, 1.5f + position.x,
-                            neg_spacing * (f32) i + -position.y, position.z,
-                            1.0f, 1.0f);
+                            FMA_MUL_ADD(neg_spacing, (f32) i, -position.y),
+                            position.z, 1.0f, 1.0f);
                         data->row_icons[i] = icon_text;
                         icon_text->default_alignment = 1;
                         icon_text->text_color = mn_804D4B64;
@@ -334,8 +335,8 @@ static inline void mnDiagram3_RebuildRowLabels(Diagram3* data, char* base,
     lb_8000B1CC(data->jobjs[8], (Vec3*) (base + 0x18), pos);
     for (i = 0; i < count; i++) {
         text = HSD_SisLib_803A5ACC(0, 1, pos->x - 6.5f,
-                                   -spacing * (f32) i + -pos->y, pos->z, 6.5f,
-                                   240.0f);
+                                   FMA_MUL_ADD(-spacing, (f32) i, -pos->y),
+                                   pos->z, 6.5f, 240.0f);
         data->row_labels[i] = text;
         HSD_SisLib_803A6368(
             text,
@@ -355,8 +356,9 @@ static inline void mnDiagram3_PositionPopup(HSD_JObj* popup, u8 n,
     f32 spacing;
     spacing = mnDiagram3_GetRowSpacing(cur);
     HSD_JObjSetTranslateX(popup, HSD_JObjGetTranslationX(cur->jobjs[8]));
-    HSD_JObjSetTranslateY(popup, spacing * (f32) n +
-                                     HSD_JObjGetTranslationY(cur->jobjs[8]));
+    HSD_JObjSetTranslateY(
+        popup,
+        FMA_MUL_ADD(spacing, (f32) n, HSD_JObjGetTranslationY(cur->jobjs[8])));
     HSD_JObjSetTranslateZ(popup, HSD_JObjGetTranslationZ(cur->jobjs[8]));
 }
 
@@ -658,8 +660,8 @@ static inline void mnDiagram3_SetupRows(HSD_JObj* jobj, Diagram3* popup_data,
     for (i = 0; i < count; i++) {
         f32 fi = (f32) i;
         HSD_Text* text = HSD_SisLib_803A5ACC(0, 1, pos.x - row_spacing,
-                                             -spacing * fi + -pos.y, pos.z,
-                                             row_spacing, 240.0f);
+                                             FMA_MUL_ADD(-spacing, fi, -pos.y),
+                                             pos.z, row_spacing, 240.0f);
 
         data->row_labels[i] = text;
         {
@@ -705,7 +707,8 @@ static inline f32 mnDiagram3_GetPopupSpacing(HSD_JObj* popup_row,
 static inline f32 mnDiagram3_GetPopupY(HSD_JObj* popup_row, f32 row_spacing,
                                        u8 index)
 {
-    return row_spacing * (f32) index + HSD_JObjGetTranslationY(popup_row);
+    return FMA_MUL_ADD(row_spacing, (f32) index,
+                       HSD_JObjGetTranslationY(popup_row));
 }
 
 static inline HSD_JObj* mnDiagram3_CreatePopup(Diagram3* data,

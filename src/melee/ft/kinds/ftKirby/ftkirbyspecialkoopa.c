@@ -14,6 +14,7 @@
 #include <melee/it/item.h>
 #include <melee/it/kinds/itkoopaflame.h>
 #include <melee/lb/lb_00B0.h>
+#include <Runtime/fma.h>
 #include <sysdolphin/baselib/random.h>
 
 enum_t ftKb_Init_803CB540[] = {
@@ -38,9 +39,9 @@ void ftKb_SpecialNKp_800FA588(Fighter_GObj* gobj)
     offset.y = 0.5f;
     offset.z = 3.0f;
     lb_8000B1CC(fp->parts[12].joint, &offset, &pos);
-    pos.x +=
-        fp->x34_scale.y * (da->specialn_kp_breath_x_offset * fp->facing_dir);
-    pos.y += da->specialn_kp_breath_y_offset * fp->x34_scale.y;
+    FMA_ADD_TO(pos.x, fp->x34_scale.y,
+               (da->specialn_kp_breath_x_offset * fp->facing_dir));
+    FMA_ADD_TO(pos.y, da->specialn_kp_breath_y_offset, fp->x34_scale.y);
 
     {
         Fighter* fp2 = GET_FIGHTER(gobj);

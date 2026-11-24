@@ -17,6 +17,7 @@
 #include <melee/lb/lbvector.h>
 #include <melee/pl/player.h>
 #include <melee/sc/types.h>
+#include <Runtime/fma.h>
 #include <sysdolphin/baselib/aobj.h>
 #include <sysdolphin/baselib/dobj.h>
 #include <sysdolphin/baselib/gobj.h>
@@ -98,7 +99,7 @@ int ifStock_802F7EFC(int arg0, int arg1)
     HSD_JObjAnimAll(stock->player[arg0].x4[j]);
     HSD_JObjGetTranslation(stock->player[arg0].x4[1],
                            &arg1_data->steal[slot - 5].end);
-    arg1_data->steal[slot - 5].end.x += (2.4f * j) + pos.x;
+    arg1_data->steal[slot - 5].end.x += FMA_MUL_ADD(2.4f, j, pos.x);
     arg1_data->steal[slot - 5].end.y = arg1_data->steal[slot - 5].start.y;
     arg1_data->steal[slot - 5].end.z += pos.z;
     arg1_data->steal[slot - 5].mid.x =
@@ -922,8 +923,8 @@ void fn_802FAC34(HSD_GObj* arg)
                 }
                 ifStock_804A1ACC.x10C[n[0]] = ifStock_802F96D0(
                     ifStock_804A1ACC.x1[n[0]], ifStock_804A1ACC.x83[n[0]],
-                    2.45f * (n[0] % 5) + -21.0f,
-                    -(2.45f * (n[0] / 5) - 11.0f));
+                    FMA_MUL_ADD(2.45f, (n[0] % 5), -21.0f),
+                    -(FMA_MUL_SUB(2.45f, (n[0] / 5), 11.0f)));
                 if (n[0] == 0) {
                     HSD_GObj_SetupProc(ifStock_804A1ACC.x10C[n[0]],
                                        fn_802FA8C0, 17);

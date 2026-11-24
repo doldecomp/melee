@@ -21,6 +21,7 @@
 #include <melee/ft/kinds/ftCommon/ftCo_ItemThrow.h>
 #include <melee/ft/kinds/ftCommon/ftCo_Pass.h>
 #include <melee/ft/types.h>
+#include <Runtime/fma.h>
 #include <sysdolphin/baselib/jobj.h>
 
 void ftYs_Init_8012BDA0(Fighter_GObj* gobj)
@@ -274,9 +275,9 @@ void ftYs_Shield_8012C600(Fighter_GObj* gobj, bool arg1)
         ftParts_80074B0C(gobj, 0, 1);
     }
     inlineA0(gobj);
-    temp = (p_ftCommonData->x28C *
-            (fp->x19A4 * (1.0F - fp->lightshield_amount))) +
-           p_ftCommonData->x290;
+    temp = FMA_MUL_ADD(p_ftCommonData->x28C,
+                       (fp->x19A4 * (1.0F - fp->lightshield_amount)),
+                       p_ftCommonData->x290);
     if (arg1 == false) {
         fp->gr_vel = temp * p_ftCommonData->x294;
         if (fp->specialn_facing_dir < 0.0F) {

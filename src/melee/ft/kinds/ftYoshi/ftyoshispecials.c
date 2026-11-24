@@ -31,6 +31,7 @@
 #include <melee/ft/types.h>
 #include <melee/lb/lb_00B0.h>
 #include <melee/mp/mplib.h>
+#include <Runtime/fma.h>
 #include <sysdolphin/baselib/gobj.h>
 
 /* 3CED48 */ static bool ftYs_Unk3_803CED48[] = {
@@ -72,7 +73,8 @@ static inline void ftYs_SpecialS_SpawnWallBounceEffect(Fighter_GObj* gobj,
                        cd->right_facing_wall.normal.y);
         pos.x -= ABS(fp->coll_data.ecb.left.x);
     }
-    pos.y += 0.5F * ABS(fp->coll_data.ecb.top.y + fp->coll_data.ecb.bottom.y);
+    FMA_ADD_TO(pos.y, 0.5F,
+               ABS(fp->coll_data.ecb.top.y + fp->coll_data.ecb.bottom.y));
     efSync_Spawn(0x406, gobj, &pos, &angle);
     Camera_RequestQuake(QuakeKind_Medium, &pos);
     ftCommon_8007EBAC(fp, 0xC, 0xA);
@@ -500,22 +502,22 @@ static inline void ftYs_SpecialS_UpdateLoop1Rotation(Fighter* fp,
     if (fp->mv.ys.specials.x10 > 0.0F) {
         if (perm_vel_inline(fp) > 0.0F) {
             fp->mv.ys.specials.x18 =
-                abs_xE4 * (abs_vel / abs_x10) + -attrs->xE4;
+                FMA_MUL_ADD(abs_xE4, (abs_vel / abs_x10), -attrs->xE4);
         } else {
             f32 scaled_abs_x10 = abs_x10;
             scaled_abs_x10 *= 0.7F;
             fp->mv.ys.specials.x18 =
-                abs_xE4 * (abs_vel / scaled_abs_x10) + -attrs->xE4;
+                FMA_MUL_ADD(abs_xE4, (abs_vel / scaled_abs_x10), -attrs->xE4);
         }
     } else {
         if (perm_vel_inline(fp) < 0.0F) {
             fp->mv.ys.specials.x18 =
-                abs_xE4 * (abs_vel / abs_x10) + -attrs->xE4;
+                FMA_MUL_ADD(abs_xE4, (abs_vel / abs_x10), -attrs->xE4);
         } else {
             f32 scaled_abs_x10 = abs_x10;
             scaled_abs_x10 *= 0.7F;
             fp->mv.ys.specials.x18 =
-                abs_xE4 * (abs_vel / scaled_abs_x10) + -attrs->xE4;
+                FMA_MUL_ADD(abs_xE4, (abs_vel / scaled_abs_x10), -attrs->xE4);
         }
     }
 
@@ -532,7 +534,7 @@ static inline void ftYs_SpecialS_UpdateLoop1Rotation2(Fighter* fp, f32* angle,
         } else {
             delta = ABS(fp->mv.ys.specials.x10) + ABS(fp->gr_vel);
         }
-        *angle = delta / total * M_PI + M_PI_2;
+        *angle = FMA_MUL_ADD(delta / total, M_PI, M_PI_2);
     } else {
         f32 delta;
         if (fp->gr_vel < 0.0F) {
@@ -540,7 +542,7 @@ static inline void ftYs_SpecialS_UpdateLoop1Rotation2(Fighter* fp, f32* angle,
         } else {
             delta = ABS(fp->mv.ys.specials.x10) + ABS(fp->gr_vel);
         }
-        *angle = delta / total * M_PI + 3.0 * M_PI_2;
+        *angle = FMA_MUL_ADD(delta / total, M_PI, 3.0 * M_PI_2);
     }
 
     while (*angle < 0.0F) {
@@ -562,15 +564,15 @@ void ftYs_SpecialAirSLoop_1_Anim(Fighter_GObj* gobj)
     ftYs_SpecialS_8012EB48(gobj);
     ftYs_SpecialS_UpdateScale2(gobj);
 
-    fp->mv.ys.specials.x14 =
-        2.0 * M_PI / 25.0 * attributes->xA0 + fp->mv.ys.specials.x14;
+    fp->mv.ys.specials.x14 = FMA_MUL_ADD(2.0 * M_PI / 25.0, attributes->xA0,
+                                         fp->mv.ys.specials.x14);
 
     ftYs_SpecialS_WrapAndSetRotX(gobj);
     ftYs_SpecialS_UpdateLoop1Rotation(fp, attributes);
 
     {
-        f32 total =
-            ABS(fp->mv.ys.specials.x10) + 0.7F * ABS(fp->mv.ys.specials.x10);
+        f32 total = FMA_ADD_MUL(ABS(fp->mv.ys.specials.x10), 0.7F,
+                                ABS(fp->mv.ys.specials.x10));
         ftYs_SpecialS_UpdateLoop1Rotation2(fp, &angle, total);
     }
 
@@ -642,8 +644,8 @@ void ftYs_SpecialAirSLoop_2_Anim(Fighter_GObj* gobj)
     ftYs_SpecialS_8012EB48(gobj);
     ftYs_SpecialS_UpdateScale(gobj, &scale);
 
-    fp->mv.ys.specials.x14 = (f32) ((f64) (M_PI / 30.0) * attributes->x60 +
-                                    (f64) fp->mv.ys.specials.x14);
+    fp->mv.ys.specials.x14 = (f32) (FMA_MUL_ADD(
+        (f64) (M_PI / 30.0), attributes->x60, (f64) fp->mv.ys.specials.x14));
 
     ftYs_SpecialS_WrapAndSetRotX(gobj);
 
@@ -709,9 +711,9 @@ void ftYs_SpecialAirSLoop_3_Anim(Fighter_GObj* gobj)
         if (abs_speed < 0.0F) {
             abs_speed = -abs_speed;
         }
-        fp->mv.ys.specials.x14 =
-            (f32) ((f64) (2.0 * M_PI / 25.0) * (attributes->xD8 * abs_speed) +
-                   (f64) fp->mv.ys.specials.x14);
+        fp->mv.ys.specials.x14 = (f32) (FMA_MUL_ADD(
+            (f64) (2.0 * M_PI / 25.0), (attributes->xD8 * abs_speed),
+            (f64) fp->mv.ys.specials.x14));
     }
 
     ftYs_SpecialS_WrapAndSetRotX(gobj);
@@ -909,8 +911,8 @@ void ftYs_SpecialAirSLoop_0_Phys(Fighter_GObj* gobj)
     if (vel > 0.0F) {
         if (floor_nx > 0.0F) {
             f32 slope = 1.0F - fp->coll_data.floor.normal.y;
-            f5 = slope * (dir * attributes->x94) + 1.0F;
-            f6 = -(slope * dir - 1.0F);
+            f5 = FMA_MUL_ADD(slope, (dir * attributes->x94), 1.0F);
+            f6 = -(FMA_MUL_SUB(slope, dir, 1.0F));
         } else {
             f32 temp = (1.0F - fp->coll_data.floor.normal.y) * dir;
             f5 = 1.0F + temp;
@@ -920,8 +922,8 @@ void ftYs_SpecialAirSLoop_0_Phys(Fighter_GObj* gobj)
         if (floor_nx < 0.0F) {
             f32 neg_dir = -dir;
             f32 slope = 1.0F - fp->coll_data.floor.normal.y;
-            f5 = slope * (neg_dir * attributes->x94) + 1.0F;
-            f6 = -(slope * neg_dir - 1.0F);
+            f5 = FMA_MUL_ADD(slope, (neg_dir * attributes->x94), 1.0F);
+            f6 = -(FMA_MUL_SUB(slope, neg_dir, 1.0F));
         } else {
             f32 temp = (1.0F - fp->coll_data.floor.normal.y) * -dir;
             f5 = 1.0F + temp;
@@ -953,7 +955,7 @@ void ftYs_SpecialAirSLoop_0_Phys(Fighter_GObj* gobj)
         delta = -delta;
     }
 
-    fp->gr_vel += delta * mpLib_800569EC(fp->coll_data.floor.flags);
+    FMA_ADD_TO(fp->gr_vel, delta, mpLib_800569EC(fp->coll_data.floor.flags));
     if (ABS(fp->gr_vel) > f31) {
         fp->gr_vel = (fp->gr_vel < 0.0F) ? -f31 : f31;
     }
@@ -968,8 +970,8 @@ void ftYs_SpecialAirSLoop_1_Phys(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     PAD_STACK(8);
-    fp->gr_vel +=
-        fp->mv.ys.specials.x20 * mpLib_800569EC(fp->coll_data.floor.flags);
+    FMA_ADD_TO(fp->gr_vel, fp->mv.ys.specials.x20,
+               mpLib_800569EC(fp->coll_data.floor.flags));
     fp->x74_self_accel.y = 0.0F;
     fp->self_vel.y = 0.0F;
     ftCommon_SetSelfMovementFromGroundedMovement(gobj);
@@ -1351,11 +1353,10 @@ void ftYs_SpecialAirSLoop_3_Coll(Fighter_GObj* gobj)
             ;
             fp->self_vel.z = 0.0F;
             fp->self_vel.y = 0.0F;
-            fp->mv.ys.specials.x14 =
-                ((2.0 * M_PI / 25.0) *
-                     perm_mul_inline(attributes->xD8,
-                                     ABS(fp->mv.ys.specials.x1C)) +
-                 fp->mv.ys.specials.x14);
+            fp->mv.ys.specials.x14 = (FMA_MUL_ADD(
+                (2.0 * M_PI / 25.0),
+                perm_mul_inline(attributes->xD8, ABS(fp->mv.ys.specials.x1C)),
+                fp->mv.ys.specials.x14));
             ftYs_SpecialS_WrapAndSetRotX(gobj);
             ftCommon_8007EBAC(fp, 1, 0);
         } else {

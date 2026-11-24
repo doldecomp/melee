@@ -18,6 +18,7 @@
 #include <melee/lb/lbaudio_ax.h>
 #include <melee/lb/lbvector.h>
 #include <melee/mp/mpcoll.h>
+#include <Runtime/fma.h>
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/gobjproc.h>
 #include <sysdolphin/baselib/jobj.h>
@@ -41,9 +42,9 @@ static inline float sqrtf_store(float x, volatile float* y)
 {
     if (x > 0.0f) {
         double guess = __frsqrte((double) x);
-        guess = 0.5 * guess * (3.0 - guess * guess * x);
-        guess = 0.5 * guess * (3.0 - guess * guess * x);
-        guess = 0.5 * guess * (3.0 - guess * guess * x);
+        guess = 0.5 * guess * (FMA_SUB_MUL(3.0, guess * guess, x));
+        guess = 0.5 * guess * (FMA_SUB_MUL(3.0, guess * guess, x));
+        guess = 0.5 * guess * (FMA_SUB_MUL(3.0, guess * guess, x));
         *y = (float) (x * guess);
         return *y;
     }
@@ -54,10 +55,10 @@ static inline float sqrtf_accurate_store(float x, volatile float* y)
 {
     if (x > 0.0f) {
         double guess = __frsqrte((double) x);
-        guess = 0.5 * guess * (3.0 - guess * guess * x);
-        guess = 0.5 * guess * (3.0 - guess * guess * x);
-        guess = 0.5 * guess * (3.0 - guess * guess * x);
-        guess = 0.5 * guess * (3.0 - guess * guess * x);
+        guess = 0.5 * guess * (FMA_SUB_MUL(3.0, guess * guess, x));
+        guess = 0.5 * guess * (FMA_SUB_MUL(3.0, guess * guess, x));
+        guess = 0.5 * guess * (FMA_SUB_MUL(3.0, guess * guess, x));
+        guess = 0.5 * guess * (FMA_SUB_MUL(3.0, guess * guess, x));
         *y = (float) (x * guess);
         return *y;
     }
@@ -112,8 +113,9 @@ bool it_802E5AC4(Item_GObj* item_gobj, bool arg_check)
             sp28 = it_803B8724;
             var_f31 = sqrtf_accurate_store(
                 SQ(item->x40_vel.x) + SQ(item->x40_vel.y), &sqrt_0);
-            if (((item->x40_vel.x * coll_data->floor.normal.x) +
-                 (item->x40_vel.y * coll_data->floor.normal.y)) < 0.0f)
+            if ((FMA_MUL_ADD(item->x40_vel.x, coll_data->floor.normal.x,
+                             (item->x40_vel.y * coll_data->floor.normal.y))) <
+                0.0f)
             {
                 sp40 = item->x40_vel;
                 lbVector_Mirror(&sp40, &coll_data->floor.normal);
@@ -265,7 +267,7 @@ s32 it_802E61C4(Item_GObj* item_gobj, s32 arg1, s32 arg2)
     var_r29 = arg1 * attr->x2C[arg2];
     new_var = HSD_Randf();
     temp_f1 = attr->x24 * new_var;
-    var_r29 *= (0.01F * temp_f1) + 1.0F;
+    var_r29 *= FMA_MUL_ADD(0.01F, temp_f1, 1.0F);
     if (var_r29 < 1) {
         do {
             var_r29 = 1;
@@ -296,7 +298,7 @@ void it_802E628C(Item_GObj* item_gobj, f32 arg8, f32 arg9)
     if (((arg8 >= (temp_f0 / 3)) && (arg8 <= (2 * (temp_f0 / 3)))) ||
         ((arg8 >= (4 * (temp_f0 / 3))) && (arg8 <= (5 * (temp_f0 / 3)))))
     {
-        var_f30 += attr->x10 * cosf(temp_f1);
+        FMA_ADD_TO(var_f30, attr->x10, cosf(temp_f1));
     }
     item->x40_vel.x = var_f30;
     temp_f0 = attr->x20;
@@ -462,7 +464,7 @@ void it_802E66A0(HSD_GObj* item_gobj)
 bool it_2E5A_UnkMotion1_Anim(HSD_GObj* item_gobj)
 {
     Item* item = GET_ITEM(item_gobj);
-    item->x5D0_animFrameSpeed = (0.1 * ABS(item->x40_vel.y)) + 1.0;
+    item->x5D0_animFrameSpeed = FMA_MUL_ADD(0.1, ABS(item->x40_vel.y), 1.0);
     return it_802E657C(item_gobj);
 }
 

@@ -28,6 +28,7 @@
 #include <melee/ft/types.h>
 #include <melee/lb/lb_00B0.h>
 #include <melee/lb/lbvector.h>
+#include <Runtime/fma.h>
 /// Create Teleport Start GFX
 void ftMt_SpecialHi_CreateGFX(HSD_GObj* gobj)
 {
@@ -431,8 +432,9 @@ void ftMt_SpecialHi_Enter(HSD_GObj* gobj)
             fp->mv.mt.SpecialHi.stickY = stickVec.y;
             fp->gr_vel =
                 fp->facing_dir *
-                (((mewtwoAttrs->x5C_MEWTWO_TELEPORT_MOMENTUM * sqrt_stick) +
-                  mewtwoAttrs->x60_MEWTWO_TELEPORT_MOMENTUM_ADD) *
+                ((FMA_MUL_ADD(mewtwoAttrs->x5C_MEWTWO_TELEPORT_MOMENTUM,
+                              sqrt_stick,
+                              mewtwoAttrs->x60_MEWTWO_TELEPORT_MOMENTUM_ADD)) *
                  cosf(vel));
 
             Fighter_ChangeMotionState(gobj, ftMt_MS_SpecialHiLost, Ft_MF_None,
@@ -501,14 +503,16 @@ void ftMt_SpecialAirHi_Enter(HSD_GObj* gobj)
         sqrt_stick = fp->mv.mt.SpecialHi.stickY = 1;
     }
 
-    fp->self_vel.x = fp->facing_dir *
-                     ((mewtwoAttrs->x5C_MEWTWO_TELEPORT_MOMENTUM * sqrt_stick +
-                       mewtwoAttrs->x60_MEWTWO_TELEPORT_MOMENTUM_ADD) *
-                      cosf(floatVar));
+    fp->self_vel.x =
+        fp->facing_dir *
+        ((FMA_MUL_ADD(mewtwoAttrs->x5C_MEWTWO_TELEPORT_MOMENTUM, sqrt_stick,
+                      mewtwoAttrs->x60_MEWTWO_TELEPORT_MOMENTUM_ADD)) *
+         cosf(floatVar));
 
-    fp->self_vel.y = (mewtwoAttrs->x5C_MEWTWO_TELEPORT_MOMENTUM * sqrt_stick +
-                      mewtwoAttrs->x60_MEWTWO_TELEPORT_MOMENTUM_ADD) *
-                     sinf(floatVar);
+    fp->self_vel.y =
+        (FMA_MUL_ADD(mewtwoAttrs->x5C_MEWTWO_TELEPORT_MOMENTUM, sqrt_stick,
+                     mewtwoAttrs->x60_MEWTWO_TELEPORT_MOMENTUM_ADD)) *
+        sinf(floatVar);
 
     Fighter_ChangeMotionState(gobj, ftMt_MS_SpecialAirHiLost, Ft_MF_None, 35,
                               1, 0, NULL);
