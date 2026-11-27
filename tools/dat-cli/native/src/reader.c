@@ -15,7 +15,7 @@ static void dat_reader_counted_array(DatArchive* a, uint32_t offset,
 static size_t dat_reader_extent_native_size(DatArchive* a, uint32_t offset,
                                             int32_t r);
 static void dat_reader_finish(DatArchive* a);
-static int dat_reader_lookup(const DatScope* env, int32_t name, uint64_t* out);
+static int dat_reader_lookup(const DatScope* env, int32_t name, DatValue* out);
 static void* dat_reader_native_array(DatArchive* a, uint32_t offset, int32_t e,
                                      uint64_t count);
 static void dat_reader_object(DatArchive* a, uint32_t offset, int32_t type,
@@ -29,9 +29,6 @@ static void dat_reader_script_at(DatArchive* a, uint32_t value, int32_t id,
 static void dat_reader_set_native(DatArchive* a, uint32_t offset, int32_t r,
                                   void* native);
 static void dat_reader_store_uint(void* dst, uint32_t size, uint64_t v);
-static uint64_t dat_reader_terminated_count(const DatArchive* a,
-                                            uint32_t offset, int32_t type,
-                                            uint64_t term);
 static int dat_reader_visit(DatArchive* a, uint32_t offset, int32_t r);
 static void* dat_reader_walk(DatArchive* a, uint32_t offset,
                              const DatRoot* root, int32_t type, DatCount count,
@@ -374,7 +371,7 @@ void dat_link_extern(DatArchive* a, const char* name, void* address)
 /* --- Expressions ----------------------------------------------------------
  */
 
-static int dat_reader_lookup(const DatScope* env, int32_t name, uint64_t* out)
+static int dat_reader_lookup(const DatScope* env, int32_t name, DatValue* out)
 {
     for (; env != NULL; env = env->outer) {
         if (env->name == name) {
@@ -385,17 +382,16 @@ static int dat_reader_lookup(const DatScope* env, int32_t name, uint64_t* out)
     return false;
 }
 
-/// The value of a scalar field of the record at `base`, by name, as the
-/// walk reads it: big-endian, floats as the integers C converts them to.
+/// A scalar or bounded byte view from a compiled record field.
 int dat_reader_field_value(const DatArchive* a, int32_t record, uint32_t base,
-                           int32_t name, uint64_t* out)
+                           int32_t name, DatValue* out)
 {
     return record != DAT_NONE &&
            dat_reader_T(a, record)->field(a, base, name, out);
 }
 
 int dat_reader_resolve_name(const DatArchive* a, const DatContext* c,
-                            int32_t name, uint64_t* out)
+                            int32_t name, DatValue* out)
 {
     switch (c->mode) {
     case MODE_COUNT:
@@ -415,7 +411,7 @@ int dat_reader_resolve_name(const DatArchive* a, const DatContext* c,
     }
     case MODE_BIND:
         if (name == a->name_index) {
-            *out = c->index;
+            *out = (DatValue){ c->index, NULL, 0 };
             return true;
         }
         return dat_reader_field_value(a, c->record, c->base, name, out) ||
@@ -424,7 +420,7 @@ int dat_reader_resolve_name(const DatArchive* a, const DatContext* c,
         return dat_reader_lookup(c->env, name, out);
     case MODE_SCRIPT:
         if (name == a->name_command) {
-            *out = c->command;
+            *out = (DatValue){ c->command, NULL, 0 };
             return true;
         }
         return false;
@@ -551,8 +547,141 @@ int dat_reader_gx_get_tex_buffer_size(uint16_t width, uint16_t height,
     return true;
 }
 
+/// The bytes a direct attribute takes in a vertex, by its `GXCompCnt` and
+/// `GXCompType`; 0 for one not known.
+static uint32_t gx_direct_size(uint32_t attr, uint32_t cnt, uint32_t comp)
+{
+    static const uint8_t colors[6] = { 2, 3, 4, 2, 3, 4 };
+    uint32_t scalar = comp <= 1 ? 1 : comp <= 3 ? 2 : comp == 4 ? 4 : 0;
+    if (attr <= 8) {
+        return 1;
+    }
+    switch (attr) {
+    case 9:
+        return scalar * (cnt == 0 ? 2 : 3);
+    case 10:
+    case 25:
+        return scalar * (cnt == 0 ? 3 : 9);
+    case 11:
+    case 12:
+        return comp < 6 ? colors[comp] : 0;
+    default:
+        return attr >= 13 && attr <= 20 ? scalar * (cnt == 0 ? 1 : 2) : 0;
+    }
+}
+
+/// See `gx_max_index` in `expr.rs`.
+int dat_reader_gx_max_index(const uint8_t* dl, uint64_t dl_len,
+                            const uint8_t* descs, uint64_t descs_len,
+                            uint64_t attr, uint64_t* out)
+{
+    enum {
+        DESC_SIZE = 0x18,
+        MAX_ATTRS = 32
+    };
+    /* Each attribute present: its place in a vertex, its bytes in a vertex,
+       and its indices' width and number, if indexed */
+    struct {
+        uint32_t order, width, count;
+        bool target;
+    } attrs[MAX_ATTRS];
+    uint32_t n = 0;
+    for (uint64_t at = 0; at + DESC_SIZE <= descs_len; at += DESC_SIZE) {
+        uint32_t at_ = dat_reader_be32(descs + at),
+                 ty = dat_reader_be32(descs + at + 4),
+                 cnt = dat_reader_be32(descs + at + 8),
+                 comp = dat_reader_be32(descs + at + 12);
+        if (at_ == 0xFF) {
+            break;
+        }
+        uint32_t indices = (at_ == 10 || at_ == 25) && cnt == 2 ? 3 : 1;
+        uint32_t width, count;
+        switch (ty) {
+        case 0:
+            continue;
+        case 1:
+            width = gx_direct_size(at_, cnt, comp);
+            count = 0;
+            if (width == 0) {
+                return false;
+            }
+            break;
+        case 2:
+        case 3:
+            width = ty - 1;
+            count = indices;
+            break;
+        default:
+            return false;
+        }
+        if (n == MAX_ATTRS) {
+            return false;
+        }
+        /* Stable, as Rust's sort */
+        uint32_t order = at_ == 25 ? 10 : at_;
+        uint32_t i = n++;
+        for (; i > 0 && attrs[i - 1].order > order; i--) {
+            attrs[i] = attrs[i - 1];
+        }
+        attrs[i].order = order;
+        attrs[i].width = width;
+        attrs[i].count = count;
+        attrs[i].target = at_ == attr;
+    }
+    bool found = false;
+    uint64_t max = 0;
+    uint64_t at = 0;
+    while (at < dl_len) {
+        uint8_t opcode = dl[at];
+        if (opcode == 0) {
+            break;
+        }
+        switch (opcode & 0xF8) {
+        case 0x80:
+        case 0x90:
+        case 0x98:
+        case 0xA0:
+        case 0xA8:
+        case 0xB0:
+        case 0xB8:
+            break;
+        default:
+            return false;
+        }
+        if (at + 3 > dl_len) {
+            return false;
+        }
+        uint32_t vertices = (uint32_t) dl[at + 1] << 8 | dl[at + 2];
+        at += 3;
+        for (uint32_t v = 0; v < vertices; v++) {
+            for (uint32_t i = 0; i < n; i++) {
+                uint64_t size = (uint64_t) attrs[i].width *
+                                (attrs[i].count > 0 ? attrs[i].count : 1);
+                if (at + size > dl_len) {
+                    return false;
+                }
+                for (uint32_t k = 0; attrs[i].target && k < attrs[i].count;
+                     k++)
+                {
+                    const uint8_t* p = dl + at + k * attrs[i].width;
+                    uint64_t index = attrs[i].width == 2
+                                         ? (uint64_t) p[0] << 8 | p[1]
+                                         : p[0];
+                    if (!found || index > max) {
+                        max = index;
+                    }
+                    found = true;
+                }
+                at += size;
+            }
+        }
+    }
+    *out = max;
+    return found;
+}
+
 int dat_reader_eval_at(const DatArchive* a, const DatContext* c,
-                       const DatExpr* e, unsigned depth, uint64_t* out)
+                       const DatExpr* e, unsigned depth, DatValue* out)
 {
     return e != NULL && e->evaluate(a, c, depth, out);
 }
@@ -560,7 +689,36 @@ int dat_reader_eval_at(const DatArchive* a, const DatContext* c,
 int dat_reader_eval(const DatArchive* a, const DatContext* c, const DatExpr* e,
                     uint64_t* out)
 {
+    DatValue value;
+    if (!dat_reader_eval_value(a, c, e, &value) || value.bytes != NULL) {
+        return false;
+    }
+    *out = value.i;
+    return true;
+}
+
+int dat_reader_eval_value(const DatArchive* a, const DatContext* c,
+                          const DatExpr* e, DatValue* out)
+{
     return dat_reader_eval_at(a, c, e, 0, out);
+}
+
+int dat_reader_pointed_bytes(const DatArchive* a, uint64_t at, uint32_t size,
+                             uint64_t count, DatValue* out)
+{
+    if (at + 4 > a->archive->size ||
+        !bits_has(&a->archive->reloc, at, a->archive->size))
+    {
+        return false;
+    }
+    uint32_t value = dat_reader_word(a, at);
+    if (value > a->archive->size ||
+        (size != 0 && count > (a->archive->size - value) / size))
+    {
+        return false;
+    }
+    *out = (DatValue){ 0, a->archive->data + value, count * size };
+    return true;
 }
 
 /* --- The walk -------------------------------------------------------------
@@ -877,15 +1035,12 @@ void dat_reader_counted(DatArchive* a, uint32_t offset, int32_t pointer,
         !dat_reader_conditioned(dat_reader_T(a, e)))
     {
         void* block = dat_reader_plain_array(a, value, raw, e, count);
+        dat_reader_typed_extent(a, value, raw, count);
         if (!dat_reader_visit(a, value, e)) {
-            if (!dat_reader_opaque(a, raw)) {
-                dat_reader_typed_extent(a, value, raw, count);
-            }
             dat_reader_store_pointer(slot, block);
             return;
         }
         dat_reader_reached(a, value, e);
-        dat_reader_typed_extent(a, value, raw, count);
         dat_reader_set_native(a, value, e, block);
         dat_reader_store_pointer(slot, block);
         dat_reader_relocated_words(a, value, value + count * size);
@@ -990,6 +1145,7 @@ void dat_reader_terminated(DatArchive* a, uint32_t offset, int32_t pointer,
             dat_reader_layout(a, at, ty, native, none);
         } else {
             dat_reader_place_native(a, at, e, native);
+            dat_reader_T(a, e)->recount(a, at, dat_reader_native_of(a, at, e));
         }
         a->env = env;
     }
@@ -1049,6 +1205,28 @@ void dat_reader_extent(DatArchive* a, uint32_t offset, int32_t array,
             dat_reader_store_pointer(native, a->archive->data + value);
             return;
         }
+        int32_t opaque = raw != DAT_NONE ? raw : target;
+        if (dat_reader_opaque(a, opaque)) {
+            uint32_t size = dat_reader_T(a, target)->size;
+            if (size != 0) {
+                uint64_t count = 0;
+                for (uint64_t at = value; at + size <= a->archive->size;
+                     at += size, count++)
+                {
+                    if (count > 0 &&
+                        (bits_has(&a->archive->public, at, a->archive->size) ||
+                         bits_has(&a->archive->target, at, a->archive->size) ||
+                         bits_has(&a->object, at, a->archive->size) ||
+                         !dat_reader_fits(a, (uint32_t) at, target)))
+                    {
+                        break;
+                    }
+                }
+                dat_reader_counted(a, offset, array, DAT_NONE, count, binding,
+                                   storage, parent, native);
+            }
+            return;
+        }
         if (!dat_reader_visit(a, value, target)) {
             dat_reader_store_pointer(native,
                                      dat_reader_native_of(a, value, target));
@@ -1056,15 +1234,10 @@ void dat_reader_extent(DatArchive* a, uint32_t offset, int32_t array,
         }
         dat_reader_reached(a, value, target);
         uint32_t size = dat_reader_T(a, target)->size;
-        if (dat_reader_opaque(a, raw != DAT_NONE ? raw : target)) {
-            base = NULL;
-            dat_reader_store_pointer(native, a->archive->data + value);
-        } else {
-            uint64_t n = dat_reader_extent_bound(a, value, size);
-            base = dat_reader_native_array(a, value, target, n);
-            dat_reader_store_pointer(native, base);
-            dat_reader_reference(a, native, value, target);
-        }
+        uint64_t n = dat_reader_extent_bound(a, value, size);
+        base = dat_reader_native_array(a, value, target, n);
+        dat_reader_store_pointer(native, base);
+        dat_reader_reference(a, native, value, target);
         dat_reader_set_native(a, value, target, base);
         offset = value;
         element = raw;
@@ -1293,6 +1466,8 @@ static void dat_reader_object(DatArchive* a, uint32_t offset, int32_t type,
             dat_reader_store_pointer(slot, existing);
         }
         dat_reader_place_native(a, offset, r, native_arg);
+        dat_reader_T(a, r)->recount(a, offset,
+                                    dat_reader_native_of(a, offset, r));
         return;
     }
     /* Every object is made natively, even one reached through a field that
@@ -1431,9 +1606,8 @@ static void* dat_reader_walk_root_array(DatArchive* a, uint32_t offset,
 
 /// How many elements of `type` a list at `offset` holds, up to and
 /// including the first whose first word is `term` and not relocated.
-static uint64_t dat_reader_terminated_count(const DatArchive* a,
-                                            uint32_t offset, int32_t type,
-                                            uint64_t term)
+uint64_t dat_reader_terminated_count(const DatArchive* a, uint32_t offset,
+                                     int32_t type, uint64_t term)
 {
     int32_t e = dat_reader_resolve(a, type);
     if (e == DAT_NONE || dat_reader_T(a, e)->size == 0) {

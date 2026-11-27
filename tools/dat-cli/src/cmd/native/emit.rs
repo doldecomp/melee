@@ -308,6 +308,7 @@ impl Emitter<'_, '_> {
         ];
         for callback in [
             "read",
+            "recount",
             "convert",
             "fits",
             "field",
@@ -428,7 +429,7 @@ impl Emitter<'_, '_> {
             let mut env = "NULL".to_owned();
             for (name, value) in &root.binds {
                 env = format!(
-                    "&(const DatScope) {{ {}, {value}, {env} }}",
+                    "&(const DatScope) {{ {}, {{ {value}, NULL, 0 }}, {env} }}",
                     self.name(name)
                 );
             }

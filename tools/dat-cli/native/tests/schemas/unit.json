@@ -420,6 +420,125 @@
       "target": "T_SCRIPT",
       "count": 3,
       "has_pointers": true
+    },
+    {
+      "key": "T_BLOB",
+      "name": "Blob",
+      "kind": "typedef",
+      "blob": true,
+      "size": 1,
+      "native_size": "1",
+      "target": "T_U8",
+      "resolved": "T_U8"
+    },
+    {
+      "key": "T_BLOB_P",
+      "name": "Blob*",
+      "kind": "pointer",
+      "size": 4,
+      "native_size": "sizeof(void*)",
+      "target": "T_BLOB",
+      "has_pointers": true
+    },
+    {
+      "key": "T_DESC",
+      "name": "Desc",
+      "kind": "struct",
+      "size": 24,
+      "native_size": "sizeof(Desc)",
+      "has_pointers": true,
+      "members": [
+        {
+          "type": "T_U32",
+          "offset": 0,
+          "record": "Desc",
+          "field": "attr",
+          "name": "attr"
+        },
+        {
+          "type": "T_U32",
+          "offset": 4,
+          "record": "Desc",
+          "field": "attr_type",
+          "name": "attr_type"
+        },
+        {
+          "type": "T_U32",
+          "offset": 8,
+          "record": "Desc",
+          "field": "comp_cnt",
+          "name": "comp_cnt"
+        },
+        {
+          "type": "T_U32",
+          "offset": 12,
+          "record": "Desc",
+          "field": "comp_type",
+          "name": "comp_type"
+        },
+        {
+          "type": "T_U32",
+          "offset": 16,
+          "record": "Desc",
+          "field": "stride",
+          "name": "stride"
+        },
+        {
+          "type": "T_BLOB_P",
+          "offset": 20,
+          "record": "Desc",
+          "field": "vertex",
+          "name": "vertex",
+          "count": "(GXMaxIndex(dl, descs, attr) + 1) * stride",
+          "extent": true
+        }
+      ]
+    },
+    {
+      "key": "T_DESC_P",
+      "name": "Desc*",
+      "kind": "pointer",
+      "size": 4,
+      "native_size": "sizeof(void*)",
+      "target": "T_DESC",
+      "has_pointers": true
+    },
+    {
+      "key": "T_SHAPE",
+      "name": "Shape",
+      "kind": "struct",
+      "size": 12,
+      "native_size": "sizeof(Shape)",
+      "has_pointers": true,
+      "members": [
+        {
+          "type": "T_DESC_P",
+          "offset": 0,
+          "record": "Shape",
+          "field": "descs",
+          "name": "descs",
+          "terminator": "0xFF",
+          "binds": {
+            "dl": "list",
+            "descs": "descs"
+          }
+        },
+        {
+          "type": "T_BLOB_P",
+          "offset": 4,
+          "record": "Shape",
+          "field": "list",
+          "name": "list",
+          "count": "n"
+        },
+        {
+          "type": "T_U32",
+          "offset": 8,
+          "record": "Shape",
+          "field": "n",
+          "name": "n"
+        }
+      ]
     }
   ],
   "variants": {
@@ -661,6 +780,239 @@
             "offset": 4,
             "native_offset": "offsetof(InlineLeaves, entries)",
             "count": "1 << 64"
+          }
+        ]
+      }
+    },
+    "vertex_lazy": {
+      "T_SHAPE": {
+        "members": [
+          {
+            "type": "T_DESC_P",
+            "offset": 0,
+            "record": "Shape",
+            "field": "descs",
+            "name": "descs",
+            "terminator": "0xFF",
+            "binds": {
+              "dl": "1 ? list : missing()",
+              "descs": "0 ? missing() : descs"
+            }
+          },
+          {
+            "type": "T_BLOB_P",
+            "offset": 4,
+            "record": "Shape",
+            "field": "list",
+            "name": "list",
+            "count": "n"
+          },
+          {
+            "type": "T_U32",
+            "offset": 8,
+            "record": "Shape",
+            "field": "n",
+            "name": "n"
+          }
+        ]
+      }
+    },
+    "vertex_invalid0": {
+      "T_DESC": {
+        "members": [
+          {
+            "type": "T_U32",
+            "offset": 0,
+            "record": "Desc",
+            "field": "attr",
+            "name": "attr"
+          },
+          {
+            "type": "T_U32",
+            "offset": 4,
+            "record": "Desc",
+            "field": "attr_type",
+            "name": "attr_type"
+          },
+          {
+            "type": "T_U32",
+            "offset": 8,
+            "record": "Desc",
+            "field": "comp_cnt",
+            "name": "comp_cnt"
+          },
+          {
+            "type": "T_U32",
+            "offset": 12,
+            "record": "Desc",
+            "field": "comp_type",
+            "name": "comp_type"
+          },
+          {
+            "type": "T_U32",
+            "offset": 16,
+            "record": "Desc",
+            "field": "stride",
+            "name": "stride"
+          },
+          {
+            "type": "T_BLOB_P",
+            "offset": 20,
+            "record": "Desc",
+            "field": "vertex",
+            "name": "vertex",
+            "count": "dl + 1",
+            "extent": true
+          }
+        ]
+      }
+    },
+    "vertex_invalid1": {
+      "T_DESC": {
+        "members": [
+          {
+            "type": "T_U32",
+            "offset": 0,
+            "record": "Desc",
+            "field": "attr",
+            "name": "attr"
+          },
+          {
+            "type": "T_U32",
+            "offset": 4,
+            "record": "Desc",
+            "field": "attr_type",
+            "name": "attr_type"
+          },
+          {
+            "type": "T_U32",
+            "offset": 8,
+            "record": "Desc",
+            "field": "comp_cnt",
+            "name": "comp_cnt"
+          },
+          {
+            "type": "T_U32",
+            "offset": 12,
+            "record": "Desc",
+            "field": "comp_type",
+            "name": "comp_type"
+          },
+          {
+            "type": "T_U32",
+            "offset": 16,
+            "record": "Desc",
+            "field": "stride",
+            "name": "stride"
+          },
+          {
+            "type": "T_BLOB_P",
+            "offset": 20,
+            "record": "Desc",
+            "field": "vertex",
+            "name": "vertex",
+            "count": "cpuCommandLength(dl)",
+            "extent": true
+          }
+        ]
+      }
+    },
+    "vertex_invalid2": {
+      "T_DESC": {
+        "members": [
+          {
+            "type": "T_U32",
+            "offset": 0,
+            "record": "Desc",
+            "field": "attr",
+            "name": "attr"
+          },
+          {
+            "type": "T_U32",
+            "offset": 4,
+            "record": "Desc",
+            "field": "attr_type",
+            "name": "attr_type"
+          },
+          {
+            "type": "T_U32",
+            "offset": 8,
+            "record": "Desc",
+            "field": "comp_cnt",
+            "name": "comp_cnt"
+          },
+          {
+            "type": "T_U32",
+            "offset": 12,
+            "record": "Desc",
+            "field": "comp_type",
+            "name": "comp_type"
+          },
+          {
+            "type": "T_U32",
+            "offset": 16,
+            "record": "Desc",
+            "field": "stride",
+            "name": "stride"
+          },
+          {
+            "type": "T_BLOB_P",
+            "offset": 20,
+            "record": "Desc",
+            "field": "vertex",
+            "name": "vertex",
+            "count": "GXMaxIndex(0, descs, attr)",
+            "extent": true
+          }
+        ]
+      }
+    },
+    "vertex_invalid3": {
+      "T_DESC": {
+        "members": [
+          {
+            "type": "T_U32",
+            "offset": 0,
+            "record": "Desc",
+            "field": "attr",
+            "name": "attr"
+          },
+          {
+            "type": "T_U32",
+            "offset": 4,
+            "record": "Desc",
+            "field": "attr_type",
+            "name": "attr_type"
+          },
+          {
+            "type": "T_U32",
+            "offset": 8,
+            "record": "Desc",
+            "field": "comp_cnt",
+            "name": "comp_cnt"
+          },
+          {
+            "type": "T_U32",
+            "offset": 12,
+            "record": "Desc",
+            "field": "comp_type",
+            "name": "comp_type"
+          },
+          {
+            "type": "T_U32",
+            "offset": 16,
+            "record": "Desc",
+            "field": "stride",
+            "name": "stride"
+          },
+          {
+            "type": "T_BLOB_P",
+            "offset": 20,
+            "record": "Desc",
+            "field": "vertex",
+            "name": "vertex",
+            "count": "GXMaxIndex(dl, descs, descs)",
+            "extent": true
           }
         ]
       }

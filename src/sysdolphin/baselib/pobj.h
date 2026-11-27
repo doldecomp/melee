@@ -45,7 +45,9 @@ typedef u8 HSD_VertexArray DAT_BLOB;
 struct HSD_PObjDesc {
     char* class_name;
     HSD_PObjDesc* next;
-    HSD_VtxDescList* verts DAT_TERMINATED(GX_VA_NULL);
+    /// Its display lists index the vertex arrays it describes.
+    HSD_VtxDescList* verts DAT_TERMINATED(GX_VA_NULL) DAT_BIND(dl, display)
+        DAT_BIND(descs, verts);
     u16 flags;
     u16 n_display;
     /// As #GXCallDisplayList takes it (#PObjDispSimplePrimitive).
@@ -65,8 +67,10 @@ struct HSD_VtxDescList {
     GXCompType comp_type;
     u8 frac;
     u16 stride;
-    /// @todo Its length is the largest index the display lists use.
-    HSD_VertexArray* vertex;
+    /// Byte count: (largest display-list index + 1) * stride.
+    /// Without a display list, infer the extent up to the next object.
+    HSD_VertexArray* vertex DAT_COUNT((GXMaxIndex(dl, descs, attr) + 1) *
+                                      stride) DAT_EXTENT;
 };
 
 struct HSD_Envelope {

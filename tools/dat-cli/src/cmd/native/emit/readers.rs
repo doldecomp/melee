@@ -1,7 +1,7 @@
 //! Emit executable conversion and traversal for each DWARF type.
-use super::*;
-use super::members::native_offset;
 use super::super::generator::Kind;
+use super::members::native_offset;
+use super::*;
 
 impl Emitter<'_, '_> {
     pub(super) fn readers(
@@ -17,14 +17,15 @@ impl Emitter<'_, '_> {
 
         for (what, signature) in [
             ("convert", "DatArchive* a, uint32_t offset, void* native"),
+            ("recount", "DatArchive* a, uint32_t offset, void* native"),
             ("fits", "const DatArchive* a, uint32_t offset"),
             (
                 "field",
-                "const DatArchive* a, uint32_t base, int32_t name, uint64_t* out",
+                "const DatArchive* a, uint32_t base, int32_t name, DatValue* out",
             ),
             (
                 "union_field",
-                "const DatArchive* a, uint32_t base, int32_t name, uint64_t* out",
+                "const DatArchive* a, uint32_t base, int32_t name, DatValue* out",
             ),
             ("allocation_size", "DatArchive* a, uint32_t offset"),
             (
@@ -57,11 +58,15 @@ impl Emitter<'_, '_> {
             if r != index as i32
                 && matches!(
                     what,
-                    "convert" | "fits" | "allocation_size" | "verify"
+                    "convert"
+                        | "recount"
+                        | "fits"
+                        | "allocation_size"
+                        | "verify"
                 )
             {
                 let args = match what {
-                    "convert" => "a, offset, native",
+                    "convert" | "recount" => "a, offset, native",
                     "fits" | "allocation_size" => "a, offset",
                     _ => "v, offset, native, depth",
                 };
@@ -79,6 +84,7 @@ impl Emitter<'_, '_> {
             c.push_str("do {\n");
             match what {
                 "convert" => self.convert_reader(c, &ident, resolved)?,
+                "recount" => self.recount_reader(c, &ident, resolved)?,
                 "fits" => self.fits_reader(c, resolved)?,
                 "field" => self.field_reader(c, row)?,
                 "union_field" => self.union_field_reader(c, row)?,
@@ -189,6 +195,45 @@ impl Emitter<'_, '_> {
         Ok(())
     }
 
+    fn recount_reader(
+        &mut self,
+        c: &mut String,
+        ident: &str,
+        row: &TypeRow,
+    ) -> Result<()> {
+        if row.kind == Kind::Struct {
+            for (i, member) in row.members.iter().enumerate() {
+                if member.ty == NONE
+                    || (member.count.is_none() && !member.extent)
+                {
+                    continue;
+                }
+                let pointer = &self.generator.types[self.generator.types
+                    [member.ty as usize]
+                    .resolved
+                    as usize];
+                let element = if member.type_tag != NONE {
+                    member.type_tag
+                } else {
+                    pointer.target
+                };
+                if pointer.kind == Kind::Pointer
+                    && element != NONE
+                    && !self.generator.types[element as usize].has_pointers
+                    && let Some(at) = member.offset
+                {
+                    writeln!(
+                        c,
+                        "if (bits_has(&a->archive->reloc, offset + {at}, a->archive->size)) {{"
+                    )?;
+                    self.read_member(c, ident, i, member)?;
+                    c.push_str("}\n");
+                }
+            }
+        }
+        Ok(())
+    }
+
     fn field_reader(&mut self, c: &mut String, row: &TypeRow) -> Result<()> {
         if matches!(row.kind, Kind::Struct | Kind::Union) {
             for m in &row.members {
@@ -201,9 +246,11 @@ impl Emitter<'_, '_> {
                 let raw = &self.generator.types[m.ty as usize];
                 let resolved = &self.generator.types[raw.resolved as usize];
                 let floating = u8::from(resolved.kind == Kind::Float);
+                writeln!(c, "if (name == {n}) {{")?;
+                self.field_bytes(c, m, at)?;
                 writeln!(
                     c,
-                    "if (name == {n}) return dat_reader_read_field(a, (uint64_t) base + {at}, {}, {floating}, out);",
+                    "uint64_t value; if (!dat_reader_read_field(a, (uint64_t) base + {at}, {}, {floating}, &value)) return 0; *out = (DatValue){{ value, NULL, 0 }}; return 1; }}",
                     raw.size
                 )?;
                 // Preserve the caller's lookup order for nested paths.
@@ -416,7 +463,7 @@ impl Emitter<'_, '_> {
             let expr = self.expr(expr);
             writeln!(
                 c,
-                "{{ uint64_t value; if (dat_reader_eval(a, &ctx, {expr}, &value)) {{ DatScope* s = &storage[{j}]; s->name = {name}; s->value = value; s->outer = env; env = s; }} }}"
+                "{{ DatValue value; if (dat_reader_eval_value(a, &ctx, {expr}, &value)) {{ DatScope* s = &storage[{j}]; s->name = {name}; s->value = value; s->outer = env; env = s; }} }}"
             )?;
         }
         c.push_str("return env;\n}\n\n");

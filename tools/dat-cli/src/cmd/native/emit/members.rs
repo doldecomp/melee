@@ -1,8 +1,75 @@
 //! Field operations are selected during generation, not from runtime tags.
-use super::*;
 use super::super::generator::Kind;
+use super::*;
 
 impl Emitter<'_, '_> {
+    /// Compile annotated pointer fields as bounded serialized byte views.
+    pub(super) fn field_bytes(
+        &mut self,
+        c: &mut String,
+        m: &MemberRow,
+        at: u64,
+    ) -> Result<()> {
+        let pointer = &self.generator.types
+            [self.generator.types[m.ty as usize].resolved as usize];
+        if pointer.kind != Kind::Pointer || pointer.target == NONE {
+            return Ok(());
+        }
+        let elem = self.generator.types[pointer.target as usize].resolved;
+        if elem == NONE
+            || self.generator.types[elem as usize].kind == Kind::Void
+        {
+            return Ok(());
+        }
+        let size = self.generator.types[elem as usize].size;
+        if m.count.is_none() && m.terminator.is_none() {
+            return Ok(());
+        }
+        writeln!(
+            c,
+            "uint64_t at = (uint64_t) base + {at}; if (at + 4 <= a->archive->size && bits_has(&a->archive->reloc, at, a->archive->size)) {{"
+        )?;
+        if let Some(term) = &m.terminator {
+            if size != 0 {
+                let expr = self.expr(term);
+                writeln!(
+                    c,
+                    "DatContext ctx = {{ MODE_TERMINATOR, DAT_NONE, 0, DAT_NONE, 0, a->env, 0, 0 }}; uint64_t term;"
+                )?;
+                writeln!(
+                    c,
+                    "if (dat_reader_eval(a, &ctx, {expr}, &term)) {{"
+                )?;
+                writeln!(
+                    c,
+                    "uint32_t start = dat_reader_word(a, at); uint64_t room = start <= a->archive->size ? (a->archive->size - start) / {size} : 0;"
+                )?;
+                writeln!(
+                    c,
+                    "uint64_t count = dat_reader_terminated_count(a, start, {}, term) + {}; if (count > room) count = room;",
+                    self.ty(elem),
+                    m.terminator_length.max(1) - 1
+                )?;
+                writeln!(
+                    c,
+                    "if (dat_reader_pointed_bytes(a, at, {size}, count, out)) return 1; }}"
+                )?;
+            }
+        } else if let Some(count) = &m.count {
+            let expr = self.expr(count);
+            writeln!(
+                c,
+                "DatContext ctx = {{ MODE_COUNT, r, base, DAT_NONE, 0, a->env, 0, 0 }}; uint64_t count;"
+            )?;
+            writeln!(
+                c,
+                "if (dat_reader_eval(a, &ctx, {expr}, &count) && dat_reader_pointed_bytes(a, at, {size}, count, out)) return 1;"
+            )?;
+        }
+        c.push_str("}\n");
+        Ok(())
+    }
+
     pub(super) fn read_member(
         &mut self,
         c: &mut String,

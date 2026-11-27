@@ -37,18 +37,26 @@ struct DatContext;
 struct DatParent;
 struct DatScope;
 struct DatVerify;
+/// Integers or serialized byte views used by compiled expressions.
+/// A NULL bytes pointer identifies an integer; byte views borrow the archive.
+typedef struct DatValue {
+    uint64_t i;
+    const uint8_t* bytes;
+    uint64_t len;
+} DatValue;
+
 /// A compiled expression. Rust emits its evaluator as ordinary C.
 typedef struct DatExpr {
     /// Return 1 with a value, or 0 for unresolved/undefined operations.
     /// Arithmetic wraps at 64 bits. Depth counts macro expansion only.
     int (*evaluate)(const struct DatArchive*, const struct DatContext*,
-                    unsigned, uint64_t*);
+                    unsigned, DatValue*);
 } DatExpr;
 
 /// Names bound by a loader or DAT_BIND. Generated readers own their storage.
 typedef struct DatScope {
     int32_t name;
-    uint64_t value;
+    DatValue value;
     const struct DatScope* outer;
 } DatScope;
 
@@ -77,14 +85,16 @@ typedef struct DatType {
     /// Apply this type's annotations and read at the archive offset. Native
     /// may be NULL when only traversing; parent supplies union context.
     void (*read)(struct DatArchive*, uint32_t, void*, const struct DatParent*);
+    /// Recheck plain pointer counts and extents under the current bindings.
+    void (*recount)(struct DatArchive*, uint32_t, void*);
     /// Convert the resolved plain layout into non-NULL native storage.
     void (*convert)(struct DatArchive*, uint32_t, void*);
     /// Check relocation compatibility for the resolved layout.
     int (*fits)(const struct DatArchive*, uint32_t);
     /// Resolve a field name at a record's archive base; return 0 if absent.
-    int (*field)(const struct DatArchive*, uint32_t, int32_t, uint64_t*);
+    int (*field)(const struct DatArchive*, uint32_t, int32_t, DatValue*);
     /// Search union members' fields in declaration order, for conditions.
-    int (*union_field)(const struct DatArchive*, uint32_t, int32_t, uint64_t*);
+    int (*union_field)(const struct DatArchive*, uint32_t, int32_t, DatValue*);
     /// Resolved native storage size, including a bounded flexible tail.
     size_t (*allocation_size)(struct DatArchive*, uint32_t);
 #ifdef DAT_NATIVE_TESTING
