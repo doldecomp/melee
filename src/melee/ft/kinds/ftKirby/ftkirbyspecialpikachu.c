@@ -19,6 +19,7 @@
 #include <melee/ft/kinds/ftCommon/ftCo_FallSpecial.h>
 #include <melee/ft/types.h>
 #include <melee/it/kinds/itpikachutjoltground.h>
+#include <Runtime/fma.h>
 
 static void doEnter(Fighter_GObj* gobj, ftKirby_MotionState pk_msid,
                     ftKirby_MotionState pc_msid)
@@ -67,22 +68,24 @@ void ftKb_PkSpecialN_Anim(Fighter_GObj* gobj)
             fp->cmd_vars[ftPk_SpecialN_Cmd1] = true;
             switch (fp->u.kb.hat.kind) {
             case Ft_Kind_Pikachu:
-                it_pos.x = (fp->x34_scale.y * (da->specialn_pk_spawn_offset.x *
-                                               fp->facing_dir)) +
-                           fp->cur_pos.x;
-                it_pos.y = (da->specialn_pk_spawn_offset.y * fp->x34_scale.y) +
-                           fp->cur_pos.y;
+                it_pos.x = FMA_MUL_ADD(
+                    fp->x34_scale.y,
+                    (da->specialn_pk_spawn_offset.x * fp->facing_dir),
+                    fp->cur_pos.x);
+                it_pos.y = FMA_MUL_ADD(da->specialn_pk_spawn_offset.y,
+                                       fp->x34_scale.y, fp->cur_pos.y);
                 it_pos.z = 0.0f;
                 itPikachuThunderJolt_Spawn(gobj, &it_pos, fp->facing_dir,
                                            da->specialn_pk_itkind);
                 ft_PlaySFX(fp, 240076, 127, 64);
                 break;
             case Ft_Kind_Pichu:
-                it_pos.x = (fp->x34_scale.y * (da->specialn_pc_spawn_offset.x *
-                                               fp->facing_dir)) +
-                           fp->cur_pos.x;
-                it_pos.y = (da->specialn_pc_spawn_offset.y * fp->x34_scale.y) +
-                           fp->cur_pos.y;
+                it_pos.x = FMA_MUL_ADD(
+                    fp->x34_scale.y,
+                    (da->specialn_pc_spawn_offset.x * fp->facing_dir),
+                    fp->cur_pos.x);
+                it_pos.y = FMA_MUL_ADD(da->specialn_pc_spawn_offset.y,
+                                       fp->x34_scale.y, fp->cur_pos.y);
                 it_pos.z = 0.0f;
                 itPikachuThunderJolt_Spawn(gobj, &it_pos, fp->facing_dir,
                                            da->specialn_pc_itkind);
@@ -113,26 +116,24 @@ void ftKb_PkSpecialAirN_Anim(Fighter_GObj* gobj)
             fp->cmd_vars[ftPk_SpecialN_Cmd1] = true;
             switch (fp->u.kb.hat.kind) {
             case Ft_Kind_Pikachu:
-                it_pos.x =
-                    (fp->x34_scale.y *
-                     (da->specialairn_pk_spawn_offset.x * fp->facing_dir)) +
-                    fp->cur_pos.x;
-                it_pos.y =
-                    (da->specialairn_pk_spawn_offset.y * fp->x34_scale.y) +
-                    fp->cur_pos.y;
+                it_pos.x = FMA_MUL_ADD(
+                    fp->x34_scale.y,
+                    (da->specialairn_pk_spawn_offset.x * fp->facing_dir),
+                    fp->cur_pos.x);
+                it_pos.y = FMA_MUL_ADD(da->specialairn_pk_spawn_offset.y,
+                                       fp->x34_scale.y, fp->cur_pos.y);
                 it_pos.z = 0.0f;
                 itPikachuThunderJolt_Spawn(gobj, &it_pos, fp->facing_dir,
                                            da->specialn_pk_itkind);
                 ft_PlaySFX(fp, 240076, 127, 64);
                 break;
             case Ft_Kind_Pichu:
-                it_pos.x =
-                    (fp->x34_scale.y *
-                     (da->specialairn_pc_spawn_offset.x * fp->facing_dir)) +
-                    fp->cur_pos.x;
-                it_pos.y =
-                    (da->specialairn_pc_spawn_offset.y * fp->x34_scale.y) +
-                    fp->cur_pos.y;
+                it_pos.x = FMA_MUL_ADD(
+                    fp->x34_scale.y,
+                    (da->specialairn_pc_spawn_offset.x * fp->facing_dir),
+                    fp->cur_pos.x);
+                it_pos.y = FMA_MUL_ADD(da->specialairn_pc_spawn_offset.y,
+                                       fp->x34_scale.y, fp->cur_pos.y);
                 it_pos.z = 0.0f;
                 itPikachuThunderJolt_Spawn(gobj, &it_pos, fp->facing_dir,
                                            da->specialn_pc_itkind);

@@ -26,6 +26,7 @@
 #include <melee/ft/kinds/ftMasterHand/ftmasterhandwait12.h>
 #include <melee/ft/kinds/ftPeach/ftpeachfloat.h>
 #include <melee/ft/types.h>
+#include <Runtime/fma.h>
 #include <sysdolphin/baselib/jobj.h>
 
 static inline bool ftCo_Fall_inline(Fighter_GObj* gobj)
@@ -182,7 +183,7 @@ void ftCo_Fall_Anim_Inner(Fighter_GObj* gobj, f32* mv_x4,
         var_f0 = 0.0F;
     }
 
-    *mv_x4 += p_ftCommonData->x448 * (var_f0 - *mv_x4);
+    FMA_ADD_TO(*mv_x4, p_ftCommonData->x448, (var_f0 - *mv_x4));
     if (*mv_x4 && smid != fp->mv.co.fall.smid) {
         ftAnim_8006EDD0(fp, smid, fp->cur_anim_frame, 1.0F);
         HSD_JObjAnimAll(fp->x8AC_animSkeleton);

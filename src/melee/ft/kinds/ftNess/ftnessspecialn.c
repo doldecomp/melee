@@ -22,6 +22,7 @@
 #include <melee/ft/types.h>
 #include <melee/it/kinds/itnesspkflash.h>
 #include <melee/lb/lb_00B0.h>
+#include <Runtime/fma.h>
 
 /// SpecialN/SpecialAirN (PK Flash)
 #define FTNESS_SPECIALN_COLL_FLAG                                             \
@@ -104,7 +105,7 @@ void ftNs_PKFlash_Init(HSD_GObj* gobj)
 
         lb_8000B1CC(fighter_data2->parts[FtPart_L2ndNa].joint, NULL, &vec);
         vec.z = 0.0f;
-        vec.y += 3.0f * fighter_data2->x34_scale.y;
+        FMA_ADD_TO(vec.y, 3.0f, fighter_data2->x34_scale.y);
 
         {
             HSD_GObj* flash_GObj = it_802AA8C0(

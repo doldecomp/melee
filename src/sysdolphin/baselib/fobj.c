@@ -4,6 +4,7 @@
 
 #include "debug.h"
 #include "spline.h"
+#include <Runtime/fma.h>
 
 HSD_ObjAllocData fobj_alloc_data;
 
@@ -370,7 +371,7 @@ void FObjUpdateAnim(HSD_FObj* fobj, void* obj, HSD_ObjUpdateFunc obj_update)
                 fobj->p0 = fobj->p1;
             }
         }
-        fobjdata.fv = fobj->d0 * fobj->time + fobj->p0;
+        fobjdata.fv = FMA_MUL_ADD(fobj->d0, fobj->time, fobj->p0);
         break;
     case HSD_A_OP_SPL0:
     case HSD_A_OP_SPL:

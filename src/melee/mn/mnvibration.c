@@ -1,6 +1,7 @@
 #include "mnvibration.h"
 
 #include <dolphin/pad.h>
+#include <Runtime/fma.h>
 #include <sysdolphin/baselib/debug.h>
 #undef HSD_ASSERT
 #define HSD_ASSERT(line, cond)                                                \
@@ -504,9 +505,10 @@ void mnVibration_HandleInput(HSD_GObj* gobj)
                 jobj17 = data2->jobjs[17];
                 setCursorTranslateX(cursor_jobj,
                                     HSD_JObjGetTranslationX(jobj17));
-                setCursorTranslateY(cursor_jobj, (spacing * (f32) cursor_row) +
-                                                     HSD_JObjGetTranslationY(
-                                                         data2->jobjs[17]));
+                setCursorTranslateY(
+                    cursor_jobj,
+                    FMA_MUL_ADD(spacing, (f32) cursor_row,
+                                HSD_JObjGetTranslationY(data2->jobjs[17])));
                 setCursorTranslateZ(cursor_jobj,
                                     HSD_JObjGetTranslationZ(data2->jobjs[17]));
             }
@@ -547,9 +549,10 @@ void mnVibration_HandleInput(HSD_GObj* gobj)
                 jobj17 = data2->jobjs[17];
                 setCursorTranslateX(cursor_jobj,
                                     HSD_JObjGetTranslationX(jobj17));
-                setCursorTranslateY(cursor_jobj, (spacing * (f32) cursor_row) +
-                                                     HSD_JObjGetTranslationY(
-                                                         data2->jobjs[17]));
+                setCursorTranslateY(
+                    cursor_jobj,
+                    FMA_MUL_ADD(spacing, (f32) cursor_row,
+                                HSD_JObjGetTranslationY(data2->jobjs[17])));
                 setCursorTranslateZ(cursor_jobj,
                                     HSD_JObjGetTranslationZ(data2->jobjs[17]));
             }
@@ -676,7 +679,7 @@ void mnVibration_CreateNameRow(HSD_GObj* arg0, u8 arg1, u8 arg2)
     lb_8000B1CC(data->jobjs[17], &mnVibration_803EED04, &sp20);
     text = HSD_SisLib_803A6754(0, 1);
     data->texts[arg2] = text;
-    pos_y = -(spacing * (f32) arg2 + sp20.y);
+    pos_y = -(FMA_MUL_ADD(spacing, (f32) arg2, sp20.y));
     pos_z = sp20.z;
     pos_x = sp20.x;
     text->pos_x = pos_x;
@@ -982,8 +985,9 @@ void mnVibration_IntroProc(HSD_GObj* arg0)
 #endif
                         data3->jobjs[17];
                 base_y = spacing;
-                base_y = (base_y * (f32) cursor_row) +
-                         mnVibration_JObjGetTranslationY(position_jobj);
+                base_y = FMA_MUL_ADD(
+                    base_y, (f32) cursor_row,
+                    mnVibration_JObjGetTranslationY(position_jobj));
                 (void) base_y;
                 dirty_jobj = cursor_jobj;
                 mnVibration_JObjSetTranslateY(cursor_jobj, base_y, dirty_jobj);

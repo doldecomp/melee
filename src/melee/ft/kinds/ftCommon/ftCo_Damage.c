@@ -55,6 +55,7 @@
 #include <melee/lb/types.h>
 #include <melee/pl/plbonuslib.h>
 #include <melee/sfx/crowdsfx.h>
+#include <Runtime/fma.h>
 #include <sysdolphin/baselib/mtx.h>
 #include <sysdolphin/baselib/random.h>
 
@@ -90,11 +91,11 @@ float ftCo_Damage_CalcAngle(Fighter* fp, float f)
     } else if (f < p_ftCommonData->x14C) {
         return 0;
     } else {
-        float result =
-            MTXDegToRad(p_ftCommonData->x148 *
-                            ((f - p_ftCommonData->x14C) /
-                             (p_ftCommonData->x150 - p_ftCommonData->x14C)) +
-                        1);
+        float result = MTXDegToRad(
+            FMA_MUL_ADD(p_ftCommonData->x148,
+                        ((f - p_ftCommonData->x14C) /
+                         (p_ftCommonData->x150 - p_ftCommonData->x14C)),
+                        1));
         if (result > MTXDegToRad(p_ftCommonData->x148)) {
             result = MTXDegToRad(p_ftCommonData->x148);
         }
@@ -236,7 +237,7 @@ static float calcAngle(float angle)
     float sm = M_PI_2_F;
     float x = ca + cm;
     float y = sinf(angle) + sinf(sm);
-    if (x * x + y * y <= 0.0001f) {
+    if (FMA_MUL_ADD(x, x, y * y) <= 0.0001f) {
         return 0;
     }
     return atan2f(y, x);
@@ -525,10 +526,10 @@ void ftCo_8008E5A4(Fighter* fp)
         float kb_x = fp->x8c_kb_vel.x;
         float kb_y = fp->x8c_kb_vel.y;
         float kb_vel_x_neg = -kb_x;
-        float kb_mag = kb_vel_x_neg * kb_vel_x_neg + kb_y * kb_y;
+        float kb_mag = FMA_MUL_ADD(kb_vel_x_neg, kb_vel_x_neg, kb_y * kb_y);
         if (!(kb_mag < 0.00001f)) {
-            float f3 = kb_y * fp->input.lstick[0].x +
-                       kb_vel_x_neg * fp->input.lstick[0].y;
+            float f3 = FMA_MUL_ADD(kb_y, fp->input.lstick[0].x,
+                                   kb_vel_x_neg * fp->input.lstick[0].y);
             float f30 = f3 * f3 / kb_mag;
             Vec3 lstick_vec3, kb_vel_cross_lstick;
             lstick_vec3.x = fp->input.lstick[0].x;
@@ -542,9 +543,9 @@ void ftCo_8008E5A4(Fighter* fp)
             {
                 float angle = atan2f(kb_y, kb_x);
                 float scale;
-                kb_mag = sqrtf(kb_x * kb_x + kb_y * kb_y);
+                kb_mag = sqrtf(FMA_MUL_ADD(kb_x, kb_x, kb_y * kb_y));
                 scale = MTXDegToRad(p_ftCommonData->x1A8);
-                angle += scale * f30;
+                FMA_ADD_TO(angle, scale, f30);
                 fp->x8c_kb_vel.x = kb_mag * cosf(angle);
                 fp->x8c_kb_vel.y = kb_mag * sinf(angle);
             }
@@ -588,8 +589,8 @@ void ftCo_Damage_OnExitHitlag(Fighter_GObj* gobj)
         float kb_y = fp->x8c_kb_vel.y;
         if (kb_x || kb_y) {
             float kb_angle = atan2f(kb_y, kb_x);
-            float scaled_kb_mag =
-                sqrtf(kb_x * kb_x + kb_y * kb_y) * p_ftCommonData->x1AC;
+            float scaled_kb_mag = sqrtf(FMA_MUL_ADD(kb_x, kb_x, kb_y * kb_y)) *
+                                  p_ftCommonData->x1AC;
             fp->x8c_kb_vel.x = scaled_kb_mag * cosf(kb_angle);
             fp->x8c_kb_vel.y = scaled_kb_mag * sinf(kb_angle);
         }

@@ -11,6 +11,7 @@
 #include "kinds/ftCommon/types.h"
 #include "types.h"
 #include <dolphin/mtx.h>
+#include <Runtime/fma.h>
 #include <sysdolphin/baselib/debug.h>
 
 FtWalkType ftWalkCommon_GetWalkType(HSD_GObj* gobj)
@@ -163,7 +164,8 @@ void ftWalkCommon_800DFEC8(HSD_GObj* gobj, void (*arg_cb)(HSD_GObj*, float))
         float_result = ftAnim_8006F484(gobj);
         init_animFrame = fp->cur_anim_frame;
         quotient = init_animFrame / float_result;
-        adjusted_animFrame = fp->cur_anim_frame - float_result * quotient;
+        adjusted_animFrame =
+            FMA_SUB_MUL(fp->cur_anim_frame, float_result, quotient);
         final_animFrame = frame * (adjusted_animFrame / float_result);
         arg_cb(gobj, final_animFrame);
     }

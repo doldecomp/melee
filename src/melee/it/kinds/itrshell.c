@@ -15,6 +15,7 @@
 #include <melee/it/itgroundcoll.h>
 #include <melee/it/ithitbox.h>
 #include <melee/it/itmaplib.h>
+#include <Runtime/fma.h>
 #include <sysdolphin/baselib/jobj.h>
 #include <sysdolphin/baselib/random.h>
 
@@ -88,8 +89,8 @@ void it_8028D100(Item_GObj* gobj)
     case 5:
     case 6:
         it_8028D390(gobj);
-        ip->x40_vel.x +=
-            -ip->xCCC_incDamageDirection * (ip->xCA0 * attrs->x24);
+        FMA_ADD_TO(ip->x40_vel.x, -ip->xCCC_incDamageDirection,
+                   (ip->xCA0 * attrs->x24));
         break;
     }
 
@@ -127,7 +128,7 @@ void it_8028D26C(Item_GObj* gobj)
     case 5:
     case 6:
         it_8028D390(gobj);
-        ip->x40_vel.x += attrs->x2C * -ip->xCD0;
+        FMA_ADD_TO(ip->x40_vel.x, attrs->x2C, -ip->xCD0);
         break;
     }
 
@@ -253,7 +254,7 @@ f32 it_8028D56C(Item_GObj* gobj, f32 f1, f32 f2)
 {
     itRShell_Attrs* attrs =
         &GET_ITEM(gobj)->xC4_article_data->x4_specialAttributes->r_shell;
-    f32 f = (f1 * -attrs->x14.x) + (-attrs->x14.y * f2);
+    f32 f = FMA_MUL_ADD(f1, -attrs->x14.x, (-attrs->x14.y * f2));
     return f * attrs->x14.z;
 }
 

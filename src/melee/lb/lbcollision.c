@@ -13,6 +13,7 @@
 #include <dolphin/gx.h>
 #include <dolphin/mtx.h>
 #include <melee/ft/types.h>
+#include <Runtime/fma.h>
 #include <sysdolphin/baselib/cobj.h>
 #include <sysdolphin/baselib/jobj.h>
 #include <sysdolphin/baselib/mtx.h>
@@ -316,8 +317,10 @@ bool lbColl_80005C44(const Vec3* arg0, const Vec3* arg1, const Vec3* arg2,
     d2_z = sp38.z - sp2C.z;
 
     {
-        float d1_dot_d1 = d1.x * d1.x + d1.y * d1.y + d1.z * d1.z;
-        float d1_dot_d2 = d1.x * d2_x + d1.y * d2_y + d1.z * d2_z;
+        float d1_dot_d1 =
+            FMA_ADD_MUL(FMA_MUL_ADD(d1.x, d1.x, d1.y * d1.y), d1.z, d1.z);
+        float d1_dot_d2 =
+            FMA_ADD_MUL(FMA_MUL_ADD(d1.x, d2_x, d1.y * d2_y), d1.z, d2_z);
         float scale;
 
         if (approximatelyZero(d1_dot_d1)) {
@@ -331,16 +334,18 @@ bool lbColl_80005C44(const Vec3* arg0, const Vec3* arg1, const Vec3* arg2,
             }
         }
 
-        arg3->x = d1.x * scale + sp38.x;
-        arg3->y = d1.y * scale + sp38.y;
-        arg3->z = d1.z * scale + sp38.z;
+        arg3->x = FMA_MUL_ADD(d1.x, scale, sp38.x);
+        arg3->y = FMA_MUL_ADD(d1.y, scale, sp38.y);
+        arg3->z = FMA_MUL_ADD(d1.z, scale, sp38.z);
     }
 
     d2_x = arg3->x - sp2C.x;
     d2_y = arg3->y - sp2C.y;
     d2_z = arg3->z - sp2C.z;
 
-    if (SQ(temp_f2) < SQ(d2_x) + SQ(d2_y) + SQ(d2_z)) {
+    if (SQ(temp_f2) <
+        FMA_ADD_MUL(FMA_MUL_ADD(d2_x, d2_x, SQ(d2_y)), d2_z, d2_z))
+    {
         return false;
     } else {
         return true;
@@ -371,8 +376,8 @@ float lbColl_80005EBC(const Vec3* arg0, const Vec3* arg1, const Vec3* arg2,
     d2.y = sp50.y - sp38.y;
     d2.z = sp50.z - sp38.z;
 
-    d1_dot_d1 = d1.x * d1.x + d1.y * d1.y + d1.z * d1.z;
-    d1_dot_d2 = d1.x * d2.x + d1.y * d2.y + d1.z * d2.z;
+    d1_dot_d1 = FMA_ADD_MUL(FMA_MUL_ADD(d1.x, d1.x, d1.y * d1.y), d1.z, d1.z);
+    d1_dot_d2 = FMA_ADD_MUL(FMA_MUL_ADD(d1.x, d2.x, d1.y * d2.y), d1.z, d2.z);
 
     scale = -d1_dot_d2 / d1_dot_d1;
     if (scale > 1.0) {
@@ -381,12 +386,12 @@ float lbColl_80005EBC(const Vec3* arg0, const Vec3* arg1, const Vec3* arg2,
         scale = 0.0F;
     }
 
-    x = d1.x * scale + sp50.x - arg2->x;
-    y = d1.y * scale + sp50.y - arg2->y;
-    z = d1.z * scale + sp50.z - arg2->z;
+    x = FMA_MUL_ADD(d1.x, scale, sp50.x) - arg2->x;
+    y = FMA_MUL_ADD(d1.y, scale, sp50.y) - arg2->y;
+    z = FMA_MUL_ADD(d1.z, scale, sp50.z) - arg2->z;
 
     *arg3 = scale;
-    return x * x + y * y + z * z;
+    return FMA_ADD_MUL(FMA_MUL_ADD(x, x, y * y), z, z);
 }
 
 float lbColl_80005FC0(Vec3* arg0, Vec3* arg1, Vec3* arg2, float* arg3)
@@ -410,8 +415,8 @@ float lbColl_80005FC0(Vec3* arg0, Vec3* arg1, Vec3* arg2, float* arg3)
     d2.x = sp50.x - sp38.x;
     d2.y = sp50.y - sp38.y;
 
-    d1_dot_d1 = d1.x * d1.x + d1.y * d1.y;
-    d1_dot_d2 = d1.x * d2.x + d1.y * d2.y;
+    d1_dot_d1 = FMA_MUL_ADD(d1.x, d1.x, d1.y * d1.y);
+    d1_dot_d2 = FMA_MUL_ADD(d1.x, d2.x, d1.y * d2.y);
 
     scale = -d1_dot_d2 / d1_dot_d1;
     if (scale > 1.0) {
@@ -420,11 +425,11 @@ float lbColl_80005FC0(Vec3* arg0, Vec3* arg1, Vec3* arg2, float* arg3)
         scale = 0.0F;
     }
 
-    x = d1.x * scale + sp50.x - arg2->x;
-    y = d1.y * scale + sp50.y - arg2->y;
+    x = FMA_MUL_ADD(d1.x, scale, sp50.x) - arg2->x;
+    y = FMA_MUL_ADD(d1.y, scale, sp50.y) - arg2->y;
 
     *arg3 = scale;
-    return x * x + y * y;
+    return FMA_MUL_ADD(x, x, y * y);
 }
 
 static inline bool end(Vec3* a, Vec3* b, float unk_sum)
@@ -433,7 +438,7 @@ static inline bool end(Vec3* a, Vec3* b, float unk_sum)
     float y = a->y - b->y;
     float z = a->z - b->z;
 
-    if (unk_sum * unk_sum < z * z + (x * x + y * y)) {
+    if (unk_sum * unk_sum < FMA_MUL_ADD(z, z, (FMA_MUL_ADD(x, x, y * y)))) {
         return false;
     }
 
@@ -610,21 +615,26 @@ bool lbColl_80006094(Vec3* arg0, Vec3* arg1, Vec3* arg2, Vec3* arg3,
                         }
                         d2_z = arg3_z - arg5_offset.z;
                         offset_delta_x = arg4_offset.x - arg5_offset.x;
-                        d1_len_sq =
-                            (d1_z * d1_z) + ((d1_x * d1_x) + (d1_y * d1_y));
-                        d2_len_sq =
-                            (d2_z * d2_z) + ((d2_x * d2_x) + (d2_y * d2_y));
-                        d1_dot_d2 =
-                            (d1_z * d2_z) + ((d1_x * d2_x) + (d1_y * d2_y));
+                        d1_len_sq = FMA_MUL_ADD(
+                            d1_z, d1_z,
+                            (FMA_MUL_ADD(d1_x, d1_x, (d1_y * d1_y))));
+                        d2_len_sq = FMA_MUL_ADD(
+                            d2_z, d2_z,
+                            (FMA_MUL_ADD(d2_x, d2_x, (d2_y * d2_y))));
+                        d1_dot_d2 = FMA_MUL_ADD(
+                            d1_z, d2_z,
+                            (FMA_MUL_ADD(d1_x, d2_x, (d1_y * d2_y))));
                         offset_delta_z = arg4_offset.z - arg5_offset.z;
-                        d2_dot_offset_delta = (d2_z * offset_delta_z) +
-                                              ((d2_x * offset_delta_x) +
-                                               (d2_y * offset_delta_y));
-                        d1_dot_offset_delta = (d1_z * offset_delta_z) +
-                                              ((d1_x * offset_delta_x) +
-                                               (d1_y * offset_delta_y));
-                        denom =
-                            (d1_len_sq * d2_len_sq) - (d1_dot_d2 * d1_dot_d2);
+                        d2_dot_offset_delta = FMA_MUL_ADD(
+                            d2_z, offset_delta_z,
+                            (FMA_MUL_ADD(d2_x, offset_delta_x,
+                                         (d2_y * offset_delta_y))));
+                        d1_dot_offset_delta = FMA_MUL_ADD(
+                            d1_z, offset_delta_z,
+                            (FMA_MUL_ADD(d1_x, offset_delta_x,
+                                         (d1_y * offset_delta_y))));
+                        denom = FMA_MUL_SUB(d1_len_sq, d2_len_sq,
+                                            (d1_dot_d2 * d1_dot_d2));
 
                         {
                             float arg5_scl;
@@ -654,23 +664,30 @@ bool lbColl_80006094(Vec3* arg0, Vec3* arg1, Vec3* arg2, Vec3* arg3,
                                     float arg1_mid_x;
                                     float arg1_mid_y;
 
-                                    mid.y = 0.5 * d2_y + arg5_offset.y;
-                                    mid.x = 0.5 * d2_x + arg5_offset.x;
+                                    mid.y =
+                                        FMA_MUL_ADD(0.5, d2_y, arg5_offset.y);
+                                    mid.x =
+                                        FMA_MUL_ADD(0.5, d2_x, arg5_offset.x);
                                     arg4_mid_y = arg4_offset.y - mid.y;
                                     arg1_mid_y = arg1->y - mid.y;
-                                    mid.z = 0.5 * d2_z + arg5_offset.z;
+                                    mid.z =
+                                        FMA_MUL_ADD(0.5, d2_z, arg5_offset.z);
                                     arg4_mid_x = arg4_offset.x - mid.x;
                                     arg1_mid_x = arg1_x - mid.x;
                                     arg4_offset_z = arg4_offset.z - mid.z;
                                     arg1_mid_z = arg1->z - mid.z;
 
                                     // lhs and rhs each the same inline
-                                    if ((arg4_offset_z * arg4_offset_z +
-                                         ((arg4_mid_x * arg4_mid_x) +
-                                          (arg4_mid_y * arg4_mid_y))) <
-                                        ((arg1_mid_z * arg1_mid_z) +
-                                         ((arg1_mid_x * arg1_mid_x) +
-                                          (arg1_mid_y * arg1_mid_y))))
+                                    if ((FMA_MUL_ADD(
+                                            arg4_offset_z, arg4_offset_z,
+                                            (FMA_MUL_ADD(
+                                                arg4_mid_x, arg4_mid_x,
+                                                (arg4_mid_y * arg4_mid_y))))) <
+                                        (FMA_MUL_ADD(
+                                            arg1_mid_z, arg1_mid_z,
+                                            (FMA_MUL_ADD(
+                                                arg1_mid_x, arg1_mid_x,
+                                                (arg1_mid_y * arg1_mid_y))))))
                                     {
                                         float scale;
 
@@ -681,12 +698,17 @@ bool lbColl_80006094(Vec3* arg0, Vec3* arg1, Vec3* arg2, Vec3* arg3,
                                         d1.z = arg3_z - arg2->z;
                                         {
                                             a2 = vec4;
-                                            dot0 = (d1.z * (c3.z - a2.z)) +
-                                                   ((d1.x * (c3.x - a2.x)) +
-                                                    (d1.y * (c3.y - a2.y)));
-                                            scale = -dot0 / ((d1.z * d1.z) +
-                                                             ((d1.x * d1.x) +
-                                                              (d1.y * d1.y)));
+                                            dot0 = FMA_MUL_ADD(
+                                                d1.z, (c3.z - a2.z),
+                                                (FMA_MUL_ADD(
+                                                    d1.x, (c3.x - a2.x),
+                                                    (d1.y * (c3.y - a2.y)))));
+                                            scale = -dot0 /
+                                                    (FMA_MUL_ADD(
+                                                        d1.z, d1.z,
+                                                        (FMA_MUL_ADD(
+                                                            d1.x, d1.x,
+                                                            (d1.y * d1.y)))));
                                         }
                                         if (scale > 1.0) {
                                             scale = 1.0F;
@@ -704,12 +726,17 @@ bool lbColl_80006094(Vec3* arg0, Vec3* arg1, Vec3* arg2, Vec3* arg3,
                                             float scale;
 
                                             b0 = *arg1;
-                                            dot1 = (d2.z * (c2.z - b0.z)) +
-                                                   ((d2.x * (c2.x - b0.x)) +
-                                                    (d2.y * (c2.y - b0.y)));
-                                            scale = -dot1 / ((d2.z * d2.z) +
-                                                             ((d2.x * d2.x) +
-                                                              (d2.y * d2.y)));
+                                            dot1 = FMA_MUL_ADD(
+                                                d2.z, (c2.z - b0.z),
+                                                (FMA_MUL_ADD(
+                                                    d2.x, (c2.x - b0.x),
+                                                    (d2.y * (c2.y - b0.y)))));
+                                            scale = -dot1 /
+                                                    (FMA_MUL_ADD(
+                                                        d2.z, d2.z,
+                                                        (FMA_MUL_ADD(
+                                                            d2.x, d2.x,
+                                                            (d2.y * d2.y)))));
 
                                             if (scale > 1.0) {
                                                 scale = 1.0F;
@@ -722,12 +749,16 @@ bool lbColl_80006094(Vec3* arg0, Vec3* arg1, Vec3* arg2, Vec3* arg3,
                                     }
                                 } else {
                                     arg4_scl =
-                                        ((d1_dot_d2 * d2_dot_offset_delta) -
-                                         (d2_len_sq * d1_dot_offset_delta)) /
+                                        (FMA_MUL_SUB(d1_dot_d2,
+                                                     d2_dot_offset_delta,
+                                                     (d2_len_sq *
+                                                      d1_dot_offset_delta))) /
                                         denom;
                                     arg5_scl =
-                                        ((d1_len_sq * d2_dot_offset_delta) -
-                                         (d1_dot_d2 * d1_dot_offset_delta)) /
+                                        (FMA_MUL_SUB(d1_len_sq,
+                                                     d2_dot_offset_delta,
+                                                     (d1_dot_d2 *
+                                                      d1_dot_offset_delta))) /
                                         denom;
                                     if (arg4_scl > 1.0 || arg4_scl < 0.0 ||
                                         arg5_scl > 1.0 || arg5_scl < 0.0)
@@ -780,13 +811,19 @@ bool lbColl_80006094(Vec3* arg0, Vec3* arg1, Vec3* arg2, Vec3* arg3,
                                 }
                             }
 
-                            arg4->x = d1_x * arg4_scl + arg4_offset.x;
-                            arg4->y = d1_y * arg4_scl + arg4_offset.y;
-                            arg4->z = d1_z * arg4_scl + arg4_offset.z;
+                            arg4->x =
+                                FMA_MUL_ADD(d1_x, arg4_scl, arg4_offset.x);
+                            arg4->y =
+                                FMA_MUL_ADD(d1_y, arg4_scl, arg4_offset.y);
+                            arg4->z =
+                                FMA_MUL_ADD(d1_z, arg4_scl, arg4_offset.z);
 
-                            arg5->x = d2_x * arg5_scl + arg5_offset.x;
-                            arg5->y = d2_y * arg5_scl + arg5_offset.y;
-                            arg5->z = d2_z * arg5_scl + arg5_offset.z;
+                            arg5->x =
+                                FMA_MUL_ADD(d2_x, arg5_scl, arg5_offset.x);
+                            arg5->y =
+                                FMA_MUL_ADD(d2_y, arg5_scl, arg5_offset.y);
+                            arg5->z =
+                                FMA_MUL_ADD(d2_z, arg5_scl, arg5_offset.z);
                         }
                     }
                     return end(arg4, arg5, unk_sum);
@@ -930,27 +967,27 @@ bool lbColl_800067F8(Vec3* a, Vec3* b, Vec3* c, Vec3* d, Vec3* e, Vec3* f,
                         diff_dc.x = d_x - c1.x;
                         diff_dc.y = d_y - c1_y;
 
-                        sqdist2_ba =
-                            diff_ba.x * diff_ba.x + diff_ba.y * diff_ba.y;
-                        sqdist2_dc =
-                            diff_dc.x * diff_dc.x + diff_dc.y * diff_dc.y;
-                        dot2_diff_ba_dc =
-                            diff_ba.x * diff_dc.x + diff_ba.y * diff_dc.y;
+                        sqdist2_ba = FMA_MUL_ADD(diff_ba.x, diff_ba.x,
+                                                 diff_ba.y * diff_ba.y);
+                        sqdist2_dc = FMA_MUL_ADD(diff_dc.x, diff_dc.x,
+                                                 diff_dc.y * diff_dc.y);
+                        dot2_diff_ba_dc = FMA_MUL_ADD(diff_ba.x, diff_dc.x,
+                                                      diff_ba.y * diff_dc.y);
                         diff_ac_x = a1.x - c1.x;
 
-                        dot2_diff_dc_ac =
-                            diff_dc.x * diff_ac_x + diff_dc.y * diff_ac_y;
+                        dot2_diff_dc_ac = FMA_MUL_ADD(diff_dc.x, diff_ac_x,
+                                                      diff_dc.y * diff_ac_y);
 
                         {
                             y_product = diff_ba.y * diff_ac_y;
                             dot2_diff_ba_ac =
-                                diff_ba.x * diff_ac_x + y_product;
+                                FMA_MUL_ADD(diff_ba.x, diff_ac_x, y_product);
                         }
 
                         {
                             dot_squared = dot2_diff_ba_dc * dot2_diff_ba_dc;
-                            determinant =
-                                sqdist2_ba * sqdist2_dc - dot_squared;
+                            determinant = FMA_MUL_SUB(sqdist2_ba, sqdist2_dc,
+                                                      dot_squared);
                         }
 
                         {
@@ -973,17 +1010,17 @@ bool lbColl_800067F8(Vec3* a, Vec3* b, Vec3* c, Vec3* d, Vec3* e, Vec3* f,
                                 float a_mid_y;
                                 float b_mid_y;
 
-                                mid.y = 0.5 * diff_dc.y + c1_y;
-                                mid.x = 0.5 * diff_dc.x + c1.x;
+                                mid.y = FMA_MUL_ADD(0.5, diff_dc.y, c1_y);
+                                mid.x = FMA_MUL_ADD(0.5, diff_dc.x, c1.x);
                                 a_mid_y = a1_y - mid.y;
                                 b_mid_y = b_y - mid.y;
                                 {
                                     float a_mid_x = a1.x - mid.x;
                                     float b_mid_x = b_x - mid.x;
-                                    if ((a_mid_x * a_mid_x +
-                                         a_mid_y * a_mid_y) <
-                                        (b_mid_x * b_mid_x +
-                                         b_mid_y * b_mid_y))
+                                    if ((FMA_MUL_ADD(a_mid_x, a_mid_x,
+                                                     a_mid_y * a_mid_y)) <
+                                        (FMA_MUL_ADD(b_mid_x, b_mid_x,
+                                                     b_mid_y * b_mid_y)))
                                     {
                                         float scale;
 
@@ -994,12 +1031,17 @@ bool lbColl_800067F8(Vec3* a, Vec3* b, Vec3* c, Vec3* d, Vec3* e, Vec3* f,
                                         d1.z = d->z - c->z;
                                         {
                                             a2 = a0;
-                                            dot0 = d1.z * (c3.z - a2.z) +
-                                                   ((d1.x * (c3.x - a2.x)) +
-                                                    (d1.y * (c3.y - a2.y)));
-                                            scale = -dot0 / ((d1.z * d1.z) +
-                                                             ((d1.x * d1.x) +
-                                                              (d1.y * d1.y)));
+                                            dot0 = FMA_MUL_ADD(
+                                                d1.z, (c3.z - a2.z),
+                                                (FMA_MUL_ADD(
+                                                    d1.x, (c3.x - a2.x),
+                                                    (d1.y * (c3.y - a2.y)))));
+                                            scale = -dot0 /
+                                                    (FMA_MUL_ADD(
+                                                        d1.z, d1.z,
+                                                        (FMA_MUL_ADD(
+                                                            d1.x, d1.x,
+                                                            (d1.y * d1.y)))));
                                         }
                                         if (scale > 1.0) {
                                             scale = 1.0F;
@@ -1017,12 +1059,17 @@ bool lbColl_800067F8(Vec3* a, Vec3* b, Vec3* c, Vec3* d, Vec3* e, Vec3* f,
                                             float scale;
 
                                             b0 = *b;
-                                            dot1 = d2.z * (c2.z - b0.z) +
-                                                   ((d2.x * (c2.x - b0.x)) +
-                                                    (d2.y * (c2.y - b0.y)));
-                                            scale = -dot1 / ((d2.z * d2.z) +
-                                                             ((d2.x * d2.x) +
-                                                              (d2.y * d2.y)));
+                                            dot1 = FMA_MUL_ADD(
+                                                d2.z, (c2.z - b0.z),
+                                                (FMA_MUL_ADD(
+                                                    d2.x, (c2.x - b0.x),
+                                                    (d2.y * (c2.y - b0.y)))));
+                                            scale = -dot1 /
+                                                    (FMA_MUL_ADD(
+                                                        d2.z, d2.z,
+                                                        (FMA_MUL_ADD(
+                                                            d2.x, d2.x,
+                                                            (d2.y * d2.y)))));
                                             if (scale > 1.0) {
                                                 scale = 1.0F;
                                             } else if (scale < 0.0) {
@@ -1033,12 +1080,15 @@ bool lbColl_800067F8(Vec3* a, Vec3* b, Vec3* c, Vec3* d, Vec3* e, Vec3* f,
                                     }
                                 }
                             } else {
-                                scl_e = ((dot2_diff_ba_dc * dot2_diff_dc_ac) -
-                                         (sqdist2_dc * dot2_diff_ba_ac)) /
+                                scl_e = (FMA_MUL_SUB(
+                                            dot2_diff_ba_dc, dot2_diff_dc_ac,
+                                            (sqdist2_dc * dot2_diff_ba_ac))) /
                                         determinant;
-                                scl_f = ((sqdist2_ba * dot2_diff_dc_ac) -
-                                         (dot2_diff_ba_dc * dot2_diff_ba_ac)) /
-                                        determinant;
+                                scl_f =
+                                    (FMA_MUL_SUB(
+                                        sqdist2_ba, dot2_diff_dc_ac,
+                                        (dot2_diff_ba_dc * dot2_diff_ba_ac))) /
+                                    determinant;
                                 if ((scl_e > 1.0) || (scl_e < 0.0) ||
                                     (scl_f > 1.0) || (scl_f < 0.0))
                                 {
@@ -1077,12 +1127,12 @@ bool lbColl_800067F8(Vec3* a, Vec3* b, Vec3* c, Vec3* d, Vec3* e, Vec3* f,
                                 }
                             }
 
-                            e->x = diff_ba.x * scl_e + a1.x;
-                            e->y = diff_ba.y * scl_e + a1_y;
+                            e->x = FMA_MUL_ADD(diff_ba.x, scl_e, a1.x);
+                            e->y = FMA_MUL_ADD(diff_ba.y, scl_e, a1_y);
                             e->z = 0.0f;
 
-                            f->x = diff_dc.x * scl_f + c1.x;
-                            f->y = diff_dc.y * scl_f + c1_y;
+                            f->x = FMA_MUL_ADD(diff_dc.x, scl_f, c1.x);
+                            f->y = FMA_MUL_ADD(diff_dc.y, scl_f, c1_y);
                             f->z = 0.0f;
                         }
                     }
@@ -1093,7 +1143,7 @@ bool lbColl_800067F8(Vec3* a, Vec3* b, Vec3* c, Vec3* d, Vec3* e, Vec3* f,
     {
         float x = e->x - f->x;
         float y = e->y - f->y;
-        distance_sq = x * x + y * y;
+        distance_sq = FMA_MUL_ADD(x, x, y * y);
         if (sum_pq * sum_pq < distance_sq) {
             return false;
         }
@@ -1164,7 +1214,7 @@ bool lbColl_80006E58(Vec3* hit_start, Vec3* hit_end, Vec3* hurt_start,
     PAD_STACK(4);
     // Fast reject when the expanded hit segment AABB misses both hurt
     // endpoints.
-    broadphase_radius = (hurt_radius * broadphase_scale) + hit_radius;
+    broadphase_radius = FMA_MUL_ADD(hurt_radius, broadphase_scale, hit_radius);
     hit_start_copy = *hit_start;
     hurt_start_copy = *hurt_start;
     hit_end_x = hit_end->x;
@@ -1252,21 +1302,24 @@ bool lbColl_80006E58(Vec3* hit_start, Vec3* hit_end, Vec3* hurt_start,
     offset.y = hit_start_copy.y - hurt_start_y;
     (void) hurt_end_z;
     offset.z = hit_start_copy.z - hurt_start_z;
-    hurt_start_dot =
-        axis.z * offset.z + (axis.x * offset.x + axis.y * offset.y);
+    hurt_start_dot = FMA_MUL_ADD(
+        axis.z, offset.z, (FMA_MUL_ADD(axis.x, offset.x, axis.y * offset.y)));
     (void) hurt_end_y;
     (void) hurt_end_x;
     segment_dot =
-        hit_delta.z * axis.z + (hit_delta.x * axis.x + midpoint.y * axis.y);
+        FMA_MUL_ADD(hit_delta.z, axis.z,
+                    (FMA_MUL_ADD(hit_delta.x, axis.x, midpoint.y * axis.y)));
     {
         PAD_STACK(4);
-        hit_start_dot = hit_delta.z * offset.z +
-                        (hit_delta.x * offset.x + midpoint.y * offset.y);
+        hit_start_dot = FMA_MUL_ADD(
+            hit_delta.z, offset.z,
+            (FMA_MUL_ADD(hit_delta.x, offset.x, midpoint.y * offset.y)));
     }
     hurt_len_sq = axis.y * axis.y;
-    hurt_len_sq = axis.x * axis.x + hurt_len_sq;
-    hurt_len_sq = axis.z * axis.z + hurt_len_sq;
-    closest_denom = (hit_len_sq * hurt_len_sq) - (segment_dot * segment_dot);
+    hurt_len_sq = FMA_MUL_ADD(axis.x, axis.x, hurt_len_sq);
+    hurt_len_sq = FMA_MUL_ADD(axis.z, axis.z, hurt_len_sq);
+    closest_denom =
+        FMA_MUL_SUB(hit_len_sq, hurt_len_sq, (segment_dot * segment_dot));
     (void) hit_len_sq;
     if (approximatelyZero(hurt_len_sq)) {
         if (approximatelyZero(hit_len_sq)) {
@@ -1283,20 +1336,21 @@ bool lbColl_80006E58(Vec3* hit_start, Vec3* hit_end, Vec3* hurt_start,
         }
     } else {
         if (approximatelyZero(closest_denom)) {
-            midpoint.x = 0.5 * axis.x + hurt_start_copy.x;
-            midpoint.y = 0.5 * axis.y + hurt_start_y;
-            midpoint.z = 0.5 * axis.z + hurt_start_z;
+            midpoint.x = FMA_MUL_ADD(0.5, axis.x, hurt_start_copy.x);
+            midpoint.y = FMA_MUL_ADD(0.5, axis.y, hurt_start_y);
+            midpoint.z = FMA_MUL_ADD(0.5, axis.z, hurt_start_z);
             separation.x = hit_start_copy.x - midpoint.x;
             midpoint.x = hit_end->x - midpoint.x;
             separation.y = hit_start_copy.y - midpoint.y;
             midpoint.y = hit_end->y - midpoint.y;
             separation.z = hit_start_copy.z - midpoint.z;
             midpoint.z = hit_end->z - midpoint.z;
-            if (((separation.z * separation.z) +
-                 ((separation.x * separation.x) +
-                  (separation.y * separation.y))) <
-                ((midpoint.z * midpoint.z) +
-                 ((midpoint.x * midpoint.x) + (midpoint.y * midpoint.y))))
+            if ((FMA_MUL_ADD(separation.z, separation.z,
+                             (FMA_MUL_ADD(separation.x, separation.x,
+                                          (separation.y * separation.y))))) <
+                (FMA_MUL_ADD(midpoint.z, midpoint.z,
+                             (FMA_MUL_ADD(midpoint.x, midpoint.x,
+                                          (midpoint.y * midpoint.y))))))
             {
                 Vec3 a2;
                 Vec3 d1;
@@ -1311,11 +1365,13 @@ bool lbColl_80006E58(Vec3* hit_start, Vec3* hit_end, Vec3* hurt_start,
                     float dot;
 
                     a2 = *hit_start;
-                    dot = (d1.z * (c3.z - a2.z)) +
-                          ((d1.x * (c3.x - a2.x)) + (d1.y * (c3.y - a2.y)));
+                    dot = FMA_MUL_ADD(d1.z, (c3.z - a2.z),
+                                      (FMA_MUL_ADD(d1.x, (c3.x - a2.x),
+                                                   (d1.y * (c3.y - a2.y)))));
                     hurt_param_from_hit_start =
-                        -dot /
-                        ((d1.z * d1.z) + ((d1.x * d1.x) + (d1.y * d1.y)));
+                        -dot / (FMA_MUL_ADD(
+                                   d1.z, d1.z,
+                                   (FMA_MUL_ADD(d1.x, d1.x, (d1.y * d1.y)))));
                 }
                 if (hurt_param_from_hit_start > 1.0) {
                     hurt_param_from_hit_start = 1.0F;
@@ -1335,11 +1391,13 @@ bool lbColl_80006E58(Vec3* hit_start, Vec3* hit_end, Vec3* hurt_start,
                 d1.z = hurt_end_z - hurt_start->z;
                 {
                     b0 = *hit_end;
-                    dot = (d1.z * (c2.z - b0.z)) +
-                          ((d1.x * (c2.x - b0.x)) + (d1.y * (c2.y - b0.y)));
+                    dot = FMA_MUL_ADD(d1.z, (c2.z - b0.z),
+                                      (FMA_MUL_ADD(d1.x, (c2.x - b0.x),
+                                                   (d1.y * (c2.y - b0.y)))));
                     hurt_param_from_hit_end =
-                        -dot /
-                        ((d1.z * d1.z) + ((d1.x * d1.x) + (d1.y * d1.y)));
+                        -dot / (FMA_MUL_ADD(
+                                   d1.z, d1.z,
+                                   (FMA_MUL_ADD(d1.x, d1.x, (d1.y * d1.y)))));
                 }
                 if (hurt_param_from_hit_end > 1.0) {
                     hurt_param_from_hit_end = hit_param;
@@ -1349,11 +1407,11 @@ bool lbColl_80006E58(Vec3* hit_start, Vec3* hit_end, Vec3* hurt_start,
                 hurt_param = hurt_param_from_hit_end;
             }
         } else {
-            hit_param = ((segment_dot * hurt_start_dot) -
-                         (hurt_len_sq * hit_start_dot)) /
+            hit_param = (FMA_MUL_SUB(segment_dot, hurt_start_dot,
+                                     (hurt_len_sq * hit_start_dot))) /
                         closest_denom;
-            hurt_param = ((hit_len_sq * hurt_start_dot) -
-                          (segment_dot * hit_start_dot)) /
+            hurt_param = (FMA_MUL_SUB(hit_len_sq, hurt_start_dot,
+                                      (segment_dot * hit_start_dot))) /
                          closest_denom;
             if ((hit_param > 1.0) || (hit_param < 0.0) || (hurt_param > 1.0) ||
                 (hurt_param < 0.0))
@@ -1394,18 +1452,19 @@ bool lbColl_80006E58(Vec3* hit_start, Vec3* hit_end, Vec3* hurt_start,
             }
         }
     }
-    hit_closest->x = (hit_delta.x * hit_param) + hit_start_copy.x;
-    hit_closest->y = (hit_delta.y * hit_param) + hit_start_copy.y;
-    hit_closest->z = (hit_delta.z * hit_param) + hit_start_copy.z;
-    hurt_closest->x = (axis.x * hurt_param) + hurt_start_copy.x;
-    hurt_closest->y = (axis.y * hurt_param) + hurt_start_y;
-    hurt_closest->z = (axis.z * hurt_param) + hurt_start_z;
+    hit_closest->x = FMA_MUL_ADD(hit_delta.x, hit_param, hit_start_copy.x);
+    hit_closest->y = FMA_MUL_ADD(hit_delta.y, hit_param, hit_start_copy.y);
+    hit_closest->z = FMA_MUL_ADD(hit_delta.z, hit_param, hit_start_copy.z);
+    hurt_closest->x = FMA_MUL_ADD(axis.x, hurt_param, hurt_start_copy.x);
+    hurt_closest->y = FMA_MUL_ADD(axis.y, hurt_param, hurt_start_y);
+    hurt_closest->z = FMA_MUL_ADD(axis.z, hurt_param, hurt_start_z);
     separation.x = hit_closest->x - hurt_closest->x;
     separation.y = hit_closest->y - hurt_closest->y;
     separation.z = hit_closest->z - hurt_closest->z;
     closest_dist_sq =
-        (separation.z * separation.z) +
-        ((separation.x * separation.x) + (separation.y * separation.y));
+        FMA_MUL_ADD(separation.z, separation.z,
+                    (FMA_MUL_ADD(separation.x, separation.x,
+                                 (separation.y * separation.y))));
     axis.x = sqrtf(closest_dist_sq);
     if (approximatelyZero(axis.x)) {
         *out_overlap = (hit_radius + hurt_radius) - axis.x;
@@ -1420,23 +1479,23 @@ bool lbColl_80006E58(Vec3* hit_start, Vec3* hit_end, Vec3* hurt_start,
     separation.x = hit_start_copy.x - hit_delta.x;
     separation.y = hit_start_copy.y - hit_delta.y;
     separation.z = hit_start_copy.z - hit_delta.z;
-    local_dist_sq =
-        (separation.z * separation.z) +
-        ((separation.x * separation.x) + (separation.y * separation.y));
+    local_dist_sq = FMA_MUL_ADD(separation.z, separation.z,
+                                (FMA_MUL_ADD(separation.x, separation.x,
+                                             (separation.y * separation.y))));
     local_dist_sq = sqrtf(local_dist_sq);
     scaled_hurt_radius = (hurt_radius * axis.x) / local_dist_sq;
     contact_lerp = scaled_hurt_radius / axis.x;
     allowed_distance = hit_radius + scaled_hurt_radius;
     *out_overlap = allowed_distance - axis.x;
     hurt_closest_x = hurt_closest->x;
-    out_contact_pos->x =
-        (contact_lerp * (hit_closest->x - hurt_closest_x)) + hurt_closest_x;
+    out_contact_pos->x = FMA_MUL_ADD(
+        contact_lerp, (hit_closest->x - hurt_closest_x), hurt_closest_x);
     hurt_closest_y = hurt_closest->y;
-    out_contact_pos->y =
-        (contact_lerp * (hit_closest->y - hurt_closest_y)) + hurt_closest_y;
+    out_contact_pos->y = FMA_MUL_ADD(
+        contact_lerp, (hit_closest->y - hurt_closest_y), hurt_closest_y);
     hurt_closest_z = hurt_closest->z;
-    out_contact_pos->z =
-        (contact_lerp * (hit_closest->z - hurt_closest_z)) + hurt_closest_z;
+    out_contact_pos->z = FMA_MUL_ADD(
+        contact_lerp, (hit_closest->z - hurt_closest_z), hurt_closest_z);
     if (allowed_distance < axis.x) {
         return false;
     }
@@ -1448,16 +1507,16 @@ static inline float sqrDistance(Vec3* a, Vec3* b)
     float x = a->x - b->x;
     float y = a->y - b->y;
     float z = a->z - b->z;
-    return x * x + y * y + z * z;
+    return FMA_ADD_MUL(FMA_MUL_ADD(x, x, y * y), z, z);
 }
 
 static inline float sqrtf_store(float x, volatile float* y)
 {
     if (x > 0.0f) {
         double guess = __frsqrte((double) x);
-        guess = 0.5 * guess * (3.0 - guess * guess * x);
-        guess = 0.5 * guess * (3.0 - guess * guess * x);
-        guess = 0.5 * guess * (3.0 - guess * guess * x);
+        guess = 0.5 * guess * (FMA_SUB_MUL(3.0, guess * guess, x));
+        guess = 0.5 * guess * (FMA_SUB_MUL(3.0, guess * guess, x));
+        guess = 0.5 * guess * (FMA_SUB_MUL(3.0, guess * guess, x));
         *y = (float) (x * guess);
         return *y;
     }
@@ -1511,14 +1570,18 @@ void lbColl_800077A0(Vec3* a, MtxPtr arg1, Vec3* b, Vec3* c, Vec3* d, Vec3* e,
         if (approximatelyZero(dot_diff_cb)) {
             scl = 0.0f;
         } else {
-            n0 = 2.0f * diff_cb.x * diff_ba.x + 2.0f * diff_cb.y * diff_ba.y +
-                 2.0f * diff_cb.z * diff_ba.z;
+            n0 = FMA_ADD_MUL(FMA_MUL_ADD(2.0f * diff_cb.x, diff_ba.x,
+                                         2.0f * diff_cb.y * diff_ba.y),
+                             2.0f * diff_cb.z, diff_ba.z);
 
-            ba_dot = diff_ba.x * diff_ba.x + diff_ba.y * diff_ba.y +
-                     diff_ba.z * diff_ba.z;
+            ba_dot = FMA_ADD_MUL(
+                FMA_MUL_ADD(diff_ba.x, diff_ba.x, diff_ba.y * diff_ba.y),
+                diff_ba.z, diff_ba.z);
 
-            n1 = n0 * n0 -
-                 (4.0f * dot_diff_cb * -(offset_dist * offset_dist - ba_dot));
+            n1 = FMA_MUL_SUB(
+                n0, n0,
+                (4.0f * dot_diff_cb *
+                 -(FMA_MUL_SUB(offset_dist, offset_dist, ba_dot))));
 
             if (n1 < 0.0f) {
                 n1 = 0.0f;
@@ -1529,16 +1592,16 @@ void lbColl_800077A0(Vec3* a, MtxPtr arg1, Vec3* b, Vec3* c, Vec3* d, Vec3* e,
             scl = (-n0 - sqrtf_store(n1, sqrt_tmp - 1)) / (2.0f * dot_diff_cb);
         }
 
-        normalize_e.x = scl * diff_cb.x + b->x - a->x;
-        normalize_e.y = scl * diff_cb.y + b->y - a->y;
-        normalize_e.z = scl * diff_cb.z + b->z - a->z;
+        normalize_e.x = FMA_MUL_ADD(scl, diff_cb.x, b->x) - a->x;
+        normalize_e.y = FMA_MUL_ADD(scl, diff_cb.y, b->y) - a->y;
+        normalize_e.z = FMA_MUL_ADD(scl, diff_cb.z, b->z) - a->z;
 
         PSVECNormalize(&normalize_e, e);
 
         *angle = lbVector_AngleXY(e, &diff_cb);
-        d->x = dist * e->x + a->x;
-        d->y = dist * e->y + a->y;
-        d->z = dist * e->z + a->z;
+        d->x = FMA_MUL_ADD(dist, e->x, a->x);
+        d->y = FMA_MUL_ADD(dist, e->y, a->y);
+        d->z = FMA_MUL_ADD(dist, e->z, a->z);
     } else {
         *angle = M_PI;
         e->z = 0.0f;

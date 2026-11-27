@@ -22,6 +22,7 @@
 #include <melee/lb/lb_00B0.h>
 #include <melee/mp/mpcoll.h>
 #include <melee/mp/mplib.h>
+#include <Runtime/fma.h>
 #include <sysdolphin/baselib/jobj.h>
 #include <sysdolphin/baselib/random.h>
 
@@ -982,7 +983,7 @@ s32 it_802EA6F4(Item_GObj* gobj)
 
 static inline f32 neg_dot(Vec3* a, Vec3* b)
 {
-    return -(a->x * b->x) - (a->y * b->y) - (a->z * b->z);
+    return FMA_SUB_MUL(FMA_SUB_MUL(-(a->x * b->x), a->y, b->y), a->z, b->z);
 }
 
 bool it_802EA804(Item_GObj* gobj, f32 range)

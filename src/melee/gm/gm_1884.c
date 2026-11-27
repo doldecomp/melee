@@ -25,6 +25,7 @@
 #include <melee/pl/pl_040D.h>
 #include <melee/pl/player.h>
 #include <melee/sc/types.h>
+#include <Runtime/fma.h>
 #include <sysdolphin/baselib/aobj.h>
 #include <sysdolphin/baselib/dobj.h>
 #include <sysdolphin/baselib/fog.h>
@@ -441,9 +442,9 @@ void fn_80188EE8(HSD_GObj* gobj)
     HSD_JObjReqAnimAll(sub->jobjs[1], (f32) (u32) sub->anim_frames[1]);
     HSD_JObjAnimAll(sub->jobjs[1]);
 
-    sub->text->pos_x =
-        (12.0f * (9.798828f + HSD_JObjGetTranslationX(jobj = sub->jobjs[1]))) +
-        50.0f;
+    sub->text->pos_x = FMA_MUL_ADD(
+        12.0f, (9.798828f + HSD_JObjGetTranslationX(jobj = sub->jobjs[1])),
+        50.0f);
     sub->text->pos_y = 150.0f;
 
     fn_80188738(sub->jobjs[9]);
@@ -914,8 +915,9 @@ HSD_Text* fn_8018A000(void)
 
     *(text_ptr = &gm_80473814.text) = HSD_SisLib_803A5ACC(
         0, 0,
-        (12.0f * (HSD_JObjGetTranslationX(gm_80473814.jobjs[1]) + 9.798828f)) +
-            50.0f,
+        FMA_MUL_ADD(
+            12.0f, (HSD_JObjGetTranslationX(gm_80473814.jobjs[1]) + 9.798828f),
+            50.0f),
         150.0f, 0.1f, 167.0f, 16.0f);
     text = *text_ptr;
     lbLang_IsSettingUS();

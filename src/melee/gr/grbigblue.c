@@ -23,6 +23,7 @@
 #include <melee/lb/lb_00F9.h>
 #include <melee/lb/lbvector.h>
 #include <melee/mp/mplib.h>
+#include <Runtime/fma.h>
 #include <sysdolphin/baselib/debug.h>
 #include <sysdolphin/baselib/gobjgxlink.h>
 #include <sysdolphin/baselib/gobjproc.h>
@@ -1258,7 +1259,7 @@ void fn_801E8560(void* user_data, int joint_id, CollData* coll, int coll_x50,
     {
         f32 dx = pos.x - coll->cur_pos.x;
         f32 dy = pos.y - coll->cur_pos.y;
-        dist = sqrtf(dy * dy + dx * dx);
+        dist = sqrtf(FMA_MUL_ADD(dy, dy, dx * dx));
     }
 
     if (dist > 2.0F) {
@@ -1272,11 +1273,11 @@ void fn_801E8560(void* user_data, int joint_id, CollData* coll, int coll_x50,
         }
 
         if (pos.x < coll->cur_pos.x) {
-            gp->u.bigblue.x0_u.x0_s.data[active_joint].x24 +=
-                dist * ((f32) coll_x50 / 1000.0F);
+            FMA_ADD_TO(gp->u.bigblue.x0_u.x0_s.data[active_joint].x24, dist,
+                       ((f32) coll_x50 / 1000.0F));
         } else {
-            gp->u.bigblue.x0_u.x0_s.data[active_joint].x28 +=
-                dist * ((f32) coll_x50 / 1000.0F);
+            FMA_ADD_TO(gp->u.bigblue.x0_u.x0_s.data[active_joint].x28, dist,
+                       ((f32) coll_x50 / 1000.0F));
         }
 
         gp->u.bigblue.x0_u.x0_s.data[active_joint].x2C++;
@@ -1708,11 +1709,12 @@ void grBigBlue_801E93D8(Ground_GObj* gobj)
 
                     velocity = 140.0f * Ground_801C0498();
                     range_scale = Ground_801C0498();
-                    range = (60.0f * range_scale) + 30.0f;
+                    range = FMA_MUL_ADD(60.0f, range_scale, 30.0f);
                     if (grBigBlue_801E8794(jobj, &pos, 1, range, velocity) !=
                             0 ||
                         grBigBlue_801EAB50(
-                            &pos, 1, (60.0f * Ground_801C0498()) + 30.0f,
+                            &pos, 1,
+                            FMA_MUL_ADD(60.0f, Ground_801C0498(), 30.0f),
                             next_velocity = 140.0f * Ground_801C0498()) != 0)
                     {
                         *(f32*) (bp + 0xD8) = 0.0f;
@@ -2564,8 +2566,8 @@ void grBigBlue_801EB4AC(Ground_GObj* gobj)
                                           .cur_lane]
                         .delta.y +
                     entry->delta.y <
-                yakumono_param->x8 * Ground_801C0498() +
-                    gp->u.bigblue.x0_u.road.position.y)
+                FMA_MUL_ADD(yakumono_param->x8, Ground_801C0498(),
+                            gp->u.bigblue.x0_u.road.position.y))
             {
                 continue;
             }
@@ -2833,12 +2835,12 @@ void grBigBlue_801EBAF8(Ground_GObj* gobj)
 
         if (-3.4028235e38f != target_y) {
             gp->u.bigblue.x0_u.road.lateral_drift =
-                -(3.0F * (yakumono_param->x78 * Ground_801C0498()) -
-                  gp->u.bigblue.x0_u.road.lateral_drift);
+                -(FMA_MUL_SUB(3.0F, (yakumono_param->x78 * Ground_801C0498()),
+                              gp->u.bigblue.x0_u.road.lateral_drift));
         } else {
             gp->u.bigblue.x0_u.road.lateral_drift =
-                -(yakumono_param->x78 * Ground_801C0498() -
-                  gp->u.bigblue.x0_u.road.lateral_drift);
+                -(FMA_MUL_SUB(yakumono_param->x78, Ground_801C0498(),
+                              gp->u.bigblue.x0_u.road.lateral_drift));
         }
 
         target.x = center.x;
@@ -2869,8 +2871,9 @@ void grBigBlue_801EBAF8(Ground_GObj* gobj)
     if (angular_vel != 0.0F) {
         f32 s = sinf(angular_vel);
         f32 c = (f32) cosf(angular_vel);
-        f64 new_y = (f64) vel.x * (f64) s + (f64) vel.y * (f64) c;
-        vel.x = (f32) ((f64) vel.x * (f64) c - (f64) vel.y * (f64) s);
+        f64 new_y = FMA_MUL_ADD((f64) vel.x, (f64) s, (f64) vel.y * (f64) c);
+        vel.x =
+            (f32) (FMA_MUL_SUB((f64) vel.x, (f64) c, (f64) vel.y * (f64) s));
         vel.y = (f32) new_y;
     }
 
@@ -2902,8 +2905,8 @@ void grBigBlue_801EBAF8(Ground_GObj* gobj)
     }
 
     gp->u.bigblue.x0_u.road.position.x =
-        -(yakumono_param->x6C * Ground_801C0498() -
-          gp->u.bigblue.x0_u.road.position.x);
+        -(FMA_MUL_SUB(yakumono_param->x6C, Ground_801C0498(),
+                      gp->u.bigblue.x0_u.road.position.x));
 
     {
         f32 lat_adj = (entry->delta.z / entry->delta.x) *
@@ -3012,7 +3015,7 @@ static inline void grBigBlue_801EC6C0_inline(Ground* gp, s32 car_idx,
     scale = Ground_801C0498();
     params = yakumono_param;
     gp->u.bigblue.x0_u.car.lanes[car_idx].pos.x =
-        lerp + 0.5F * -((f32) params->x1C * scale);
+        FMA_ADD_MUL(lerp, 0.5F, -((f32) params->x1C * scale));
 
     scale = Ground_801C0498();
     params = yakumono_param;
@@ -3020,7 +3023,8 @@ static inline void grBigBlue_801EC6C0_inline(Ground* gp, s32 car_idx,
 
     scale = Ground_801C0498();
     params = yakumono_param;
-    gp->u.bigblue.x0_u.car.lanes[car_idx].pos.y = params->x0 * scale + lerp;
+    gp->u.bigblue.x0_u.car.lanes[car_idx].pos.y =
+        FMA_MUL_ADD(params->x0, scale, lerp);
 
     gp->u.bigblue.x0_u.car.lanes[car_idx].pos.z = 0.0F;
 
@@ -3032,7 +3036,7 @@ static inline void grBigBlue_801EC6C0_inline(Ground* gp, s32 car_idx,
     scale = Ground_801C0498();
     params = yakumono_param;
     gp->u.bigblue.x0_u.car.lanes[car_idx].target =
-        lerp + 0.5F * -((f32) params->x1C * scale);
+        FMA_ADD_MUL(lerp, 0.5F, -((f32) params->x1C * scale));
 
     gp->u.bigblue.x0_u.car.lanes[car_idx].delta = 0.0F;
 
@@ -3595,8 +3599,9 @@ void grBigBlue_801ED694(Ground_GObj* gobj, s32 lane)
             rank_factor =
                 (f32) (behind + 1) * ((f32) yakumono_param->x1C *
                                       Ground_801C0498() / (f32) (active + 1));
-            target = 0.5F * -((f32) yakumono_param->x1C * Ground_801C0498()) +
-                     rank_factor;
+            target = FMA_MUL_ADD(
+                0.5F, -((f32) yakumono_param->x1C * Ground_801C0498()),
+                rank_factor);
         } else {
             target = gp->data.lanes[lane].target;
         }
@@ -3648,8 +3653,8 @@ void grBigBlue_801ED694(Ground_GObj* gobj, s32 lane)
 
     /* Height/bounce simulation */
     if (!((lane_flags[0] >> 1) & 1)) {
-        gp->data.lanes[lane].gravity +=
-            yakumono_param->x48 * Ground_801C0498();
+        FMA_ADD_TO(gp->data.lanes[lane].gravity, yakumono_param->x48,
+                   Ground_801C0498());
         gp->data.lanes[lane].height += gp->data.lanes[lane].gravity;
 
         if (gp->data.lanes[lane].height > 0.0F) {
@@ -3675,21 +3680,21 @@ void grBigBlue_801ED694(Ground_GObj* gobj, s32 lane)
         if (vel > 0.0F) {
             ground_y = yakumono_param->x24 * Ground_801C0498();
             rank_factor = yakumono_param->x34 * Ground_801C0498();
-            rank_factor =
-                gp->data.lanes[lane].velocity *
-                ((yakumono_param->x38 * Ground_801C0498() - rank_factor) /
-                 ground_y);
-            heading_val =
-                yakumono_param->x34 * Ground_801C0498() + rank_factor;
+            rank_factor = gp->data.lanes[lane].velocity *
+                          ((FMA_MUL_SUB(yakumono_param->x38, Ground_801C0498(),
+                                        rank_factor)) /
+                           ground_y);
+            heading_val = FMA_MUL_ADD(yakumono_param->x34, Ground_801C0498(),
+                                      rank_factor);
         } else if (vel < 0.0F) {
             ground_y = yakumono_param->x24 * Ground_801C0498();
             rank_factor = yakumono_param->x34 * Ground_801C0498();
-            rank_factor =
-                gp->data.lanes[lane].velocity *
-                ((yakumono_param->x30 * Ground_801C0498() - rank_factor) /
-                 ground_y);
-            heading_val =
-                yakumono_param->x34 * Ground_801C0498() + rank_factor;
+            rank_factor = gp->data.lanes[lane].velocity *
+                          ((FMA_MUL_SUB(yakumono_param->x30, Ground_801C0498(),
+                                        rank_factor)) /
+                           ground_y);
+            heading_val = FMA_MUL_ADD(yakumono_param->x34, Ground_801C0498(),
+                                      rank_factor);
         } else {
             heading_val = yakumono_param->x34 * Ground_801C0498();
         }
@@ -3698,11 +3703,12 @@ void grBigBlue_801ED694(Ground_GObj* gobj, s32 lane)
     }
 
     /* Heading target interpolation */
-    gp->data.lanes[lane].amplitude +=
-        yakumono_param->x3C * (heading_val - gp->data.lanes[lane].amplitude);
+    FMA_ADD_TO(gp->data.lanes[lane].amplitude, yakumono_param->x3C,
+               (heading_val - gp->data.lanes[lane].amplitude));
 
     /* Rotation angle update */
-    gp->data.lanes[lane].rotation += 0.017453292F * yakumono_param->x40;
+    FMA_ADD_TO(gp->data.lanes[lane].rotation, 0.017453292F,
+               yakumono_param->x40);
     if (gp->data.lanes[lane].rotation > M_TAU) {
         gp->data.lanes[lane].rotation =
             (f32) ((f64) gp->data.lanes[lane].rotation - M_TAU);
@@ -3712,8 +3718,8 @@ void grBigBlue_801ED694(Ground_GObj* gobj, s32 lane)
         gp->data.lanes[lane].amplitude * sinf(gp->data.lanes[lane].rotation);
 
     /* Compute ground reference level */
-    rank_factor = (gp->data.lanes[lane].pos.y -
-                   yakumono_param->x2C * Ground_801C0498()) -
+    rank_factor = (FMA_SUB_MUL(gp->data.lanes[lane].pos.y, yakumono_param->x2C,
+                               Ground_801C0498())) -
                   gp->data.lanes[lane].height - heading_osc;
 
     /* Collision/grounding check */
@@ -3728,11 +3734,11 @@ void grBigBlue_801ED694(Ground_GObj* gobj, s32 lane)
             ((grBb_ByteBits*) lane_flags)->b6 = 0;
         } else {
             if (-F32_MAX != ground_y) {
-                gp->data.lanes[lane].angular_velocity -=
-                    3.0F * (yakumono_param->x80 * Ground_801C0498());
+                FMA_SUB_FROM(gp->data.lanes[lane].angular_velocity, 3.0F,
+                             (yakumono_param->x80 * Ground_801C0498()));
             } else {
-                gp->data.lanes[lane].angular_velocity -=
-                    yakumono_param->x80 * Ground_801C0498();
+                FMA_SUB_FROM(gp->data.lanes[lane].angular_velocity,
+                             yakumono_param->x80, Ground_801C0498());
             }
 
             /* Lateral position += angular velocity */
@@ -3759,9 +3765,9 @@ void grBigBlue_801ED694(Ground_GObj* gobj, s32 lane)
 
         if (-F32_MAX != ground_y) {
             gp->data.lanes[lane].pos.y =
-                heading_osc +
-                (gp->data.lanes[lane].height +
-                 (yakumono_param->x2C * Ground_801C0498() + ground_y));
+                heading_osc + (gp->data.lanes[lane].height +
+                               (FMA_MUL_ADD(yakumono_param->x2C,
+                                            Ground_801C0498(), ground_y)));
         } else {
             ((grBb_ByteBits*) lane_flags)->b6 = 1;
             rank_factor = yakumono_param->x84 * Ground_801C0498();
@@ -3773,10 +3779,10 @@ void grBigBlue_801ED694(Ground_GObj* gobj, s32 lane)
     /* Update rotation: smooth toward target angle */
     if (-F32_MAX != ground_y && !((lane_flags[0] >> 1) & 1)) {
         f32 angle = atan2f(-sp_vec.x, sp_vec.y);
-        f31_rot += yakumono_param->x50 * (angle - f31_rot);
+        FMA_ADD_TO(f31_rot, yakumono_param->x50, (angle - f31_rot));
     } else {
         f31_rot += yakumono_param->x54 *
-                   (0.017453292F * yakumono_param->x58 - f31_rot);
+                   (FMA_MUL_SUB(0.017453292F, yakumono_param->x58, f31_rot));
     }
 
     /* Update jobj transform */
@@ -3806,7 +3812,7 @@ s32 grBigBlue_801EDF44(Ground_GObj* gobj, s32 index)
         f32 blast = Stage_GetBlastZoneRightOffset();
         f32 scale = Ground_801C0498();
 
-        blast += yakumono_param->x68 * scale;
+        FMA_ADD_TO(blast, yakumono_param->x68, scale);
         if (gp->u.bigblue.x0_u.car.lanes[index].pos.x > blast) {
             if (0.0F != gp->u.bigblue.x0_u.car.lanes[index].alpha) {
                 result = 9;
@@ -3820,7 +3826,7 @@ s32 grBigBlue_801EDF44(Ground_GObj* gobj, s32 index)
         f32 blast = Stage_GetBlastZoneLeftOffset();
         f32 scale = Ground_801C0498();
 
-        blast -= yakumono_param->x68 * scale;
+        FMA_SUB_FROM(blast, yakumono_param->x68, scale);
         if (gp->u.bigblue.x0_u.car.lanes[index].pos.x < blast) {
             if (0.0F != gp->u.bigblue.x0_u.car.lanes[index].alpha) {
                 result = 9;
@@ -4020,7 +4026,7 @@ static inline void grBigBlue_801EE398_inline(Ground* gp, s32 arg1, s32 arg2,
     case 5: {
         f32 blast = Stage_GetBlastZoneRightOffset();
 
-        pos->x = (yakumono_param->x68 * Ground_801C0498()) + blast;
+        pos->x = FMA_MUL_ADD(yakumono_param->x68, Ground_801C0498(), blast);
         pos->z = 0.0f;
         pos->y = 0.0f;
         pos->y = grBigBlue_801EC58C(pos, NULL, 1000.0f);
@@ -4057,8 +4063,8 @@ static inline void grBigBlue_801EE398_inline(Ground* gp, s32 arg1, s32 arg2,
                 gp->u.bigblue.x0_u.car.lanes[arg1].x0.x0.direction = 0;
 
                 gp->u.bigblue.x0_u.car.lanes[arg1].pos.x = pos->x;
-                gp->u.bigblue.x0_u.car.lanes[arg1].pos.y =
-                    (yakumono_param->x2C * Ground_801C0498()) + pos->y;
+                gp->u.bigblue.x0_u.car.lanes[arg1].pos.y = FMA_MUL_ADD(
+                    yakumono_param->x2C, Ground_801C0498(), pos->y);
                 gp->u.bigblue.x0_u.car.lanes[arg1].pos.z = 0.0f;
                 gp->u.bigblue.x0_u.car.lanes[arg1].target = pos->x;
                 gp->u.bigblue.x0_u.car.lanes[arg1].delta = 0.0f;
@@ -4108,7 +4114,7 @@ static inline void grBigBlue_801EE398_inline(Ground* gp, s32 arg1, s32 arg2,
     case 6: {
         f32 blast = Stage_GetBlastZoneLeftOffset();
 
-        pos->x = -((yakumono_param->x68 * Ground_801C0498()) - blast);
+        pos->x = -(FMA_MUL_SUB(yakumono_param->x68, Ground_801C0498(), blast));
         pos->z = 0.0f;
         pos->y = 0.0f;
         pos->y = grBigBlue_801EC58C(pos, NULL, 1000.0f);
@@ -4149,8 +4155,8 @@ static inline void grBigBlue_801EE398_inline(Ground* gp, s32 arg1, s32 arg2,
                 gp->u.bigblue.x0_u.car.lanes[arg1].x0.x0.direction = 0;
 
                 gp->u.bigblue.x0_u.car.lanes[arg1].pos.x = pos->x;
-                gp->u.bigblue.x0_u.car.lanes[arg1].pos.y =
-                    (yakumono_param->x2C * Ground_801C0498()) + pos->y;
+                gp->u.bigblue.x0_u.car.lanes[arg1].pos.y = FMA_MUL_ADD(
+                    yakumono_param->x2C, Ground_801C0498(), pos->y);
                 gp->u.bigblue.x0_u.car.lanes[arg1].pos.z = 0.0f;
                 gp->u.bigblue.x0_u.car.lanes[arg1].target = pos->x;
                 gp->u.bigblue.x0_u.car.lanes[arg1].delta = 0.0f;
@@ -4341,10 +4347,10 @@ bool grBigBlue_801EEF00(Ground_GObj* gobj, s32 index)
                 gp->typed.cars[index].accel = yakumono_param->x28 * scale;
             } else {
                 scale = Ground_801C0498();
-                predicted =
-                    gp->typed.cars[index].velocity * norm +
-                    gp->typed.cars[index].pos.x -
-                    norm * (0.5F * (yakumono_param->x28 * scale) * norm);
+                predicted = FMA_SUB_MUL(
+                    FMA_MUL_ADD(gp->typed.cars[index].velocity, norm,
+                                gp->typed.cars[index].pos.x),
+                    norm, (0.5F * (yakumono_param->x28 * scale) * norm));
 
                 if (predicted < target) {
                     scale = Ground_801C0498();
@@ -4361,10 +4367,10 @@ bool grBigBlue_801EEF00(Ground_GObj* gobj, s32 index)
                 gp->typed.cars[index].accel = -(yakumono_param->x28 * scale);
             } else {
                 scale = Ground_801C0498();
-                predicted =
-                    gp->typed.cars[index].velocity * norm +
-                    gp->typed.cars[index].pos.x -
-                    norm * (0.5F * -(yakumono_param->x28 * scale) * norm);
+                predicted = FMA_SUB_MUL(
+                    FMA_MUL_ADD(gp->typed.cars[index].velocity, norm,
+                                gp->typed.cars[index].pos.x),
+                    norm, (0.5F * -(yakumono_param->x28 * scale) * norm));
 
                 if (predicted < target) {
                     scale = Ground_801C0498();

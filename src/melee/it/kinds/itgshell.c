@@ -17,6 +17,7 @@
 #include <melee/it/itgroundcoll.h>
 #include <melee/it/ithitbox.h>
 #include <melee/it/itmaplib.h>
+#include <Runtime/fma.h>
 #include <sysdolphin/baselib/jobj.h>
 #include <sysdolphin/baselib/random.h>
 
@@ -121,8 +122,8 @@ void it_8028BAD8(Item_GObj* gobj)
     case 6:
     case 7:
     case 8:
-        ip->x40_vel.x +=
-            -ip->xCCC_incDamageDirection * (ip->xCA0 * attrs->x14);
+        FMA_ADD_TO(ip->x40_vel.x, -ip->xCCC_incDamageDirection,
+                   (ip->xCA0 * attrs->x14));
         ip->xDD4_itemVar.gshell.xDEC_b2 = 1;
         break;
     default:

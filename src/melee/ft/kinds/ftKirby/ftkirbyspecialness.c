@@ -20,6 +20,7 @@
 #include <melee/ft/types.h>
 #include <melee/it/kinds/itnesspkflash.h>
 #include <melee/lb/lb_00B0.h>
+#include <Runtime/fma.h>
 #include <sysdolphin/baselib/gobj.h>
 
 static void ftKb_NsSpecialNStart_Anim_inline(HSD_GObj* gobj, Vec3* flash_pos)
@@ -28,7 +29,7 @@ static void ftKb_NsSpecialNStart_Anim_inline(HSD_GObj* gobj, Vec3* flash_pos)
     if (fp->u.kb.ns_flash_gobj == NULL) {
         lb_8000B1CC(fp->parts[FtPart_WaistN].joint, NULL, flash_pos);
         flash_pos->z = 0;
-        flash_pos->y += fp->x34_scale.y * 3.0f;
+        FMA_ADD_TO(flash_pos->y, fp->x34_scale.y, 3.0f);
         {
             HSD_GObj* flash_gobj = it_802AA8C0(
                 gobj, flash_pos, It_Kind_Kirby_NessPKFlush, fp->facing_dir);

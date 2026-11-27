@@ -8,6 +8,7 @@
 #include <melee/it/item.h>
 #include <melee/it/itgroundcoll.h>
 #include <melee/lb/lbaudio_ax.h>
+#include <Runtime/fma.h>
 #include <sysdolphin/baselib/jobj.h>
 
 ItemStateTable it_803F7B08[] = {
@@ -133,7 +134,8 @@ void itKamex_UnkMotion1_Phys(Item_GObj* gobj)
         if ((ip->x40_vel.x > 0.0f && ip->facing_dir <= 0.0f) ||
             (ip->x40_vel.x <= 0.0f && ip->facing_dir > 0.0f))
         {
-            ip->x40_vel.x += ip->xDD4_itemVar.pokemon.x6C * ip->facing_dir;
+            FMA_ADD_TO(ip->x40_vel.x, ip->xDD4_itemVar.pokemon.x6C,
+                       ip->facing_dir);
         }
     }
     if (ip->ground_or_air == GA_Air) {
@@ -225,12 +227,12 @@ void it_802CAB10(Item_GObj* gobj)
         &ip->xC4_article_data->x4_specialAttributes->kamex;
 
     spawn.prev_pos = ip->pos;
-    spawn.prev_pos.x += attrs->x8 * ip->facing_dir;
+    FMA_ADD_TO(spawn.prev_pos.x, attrs->x8, ip->facing_dir);
     spawn.prev_pos.y += attrs->xC;
     if (ip->xDD4_itemVar.pokemon.x64 != 0) {
-        spawn.prev_pos.z += -1.0f * (attrs->x10 * ip->facing_dir);
+        FMA_ADD_TO(spawn.prev_pos.z, -1.0f, (attrs->x10 * ip->facing_dir));
     } else {
-        spawn.prev_pos.z += attrs->x10 * ip->facing_dir;
+        FMA_ADD_TO(spawn.prev_pos.z, attrs->x10, ip->facing_dir);
     }
     it_8026BB88(gobj, &spawn.pos);
     spawn.facing_dir = ip->facing_dir;

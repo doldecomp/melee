@@ -19,6 +19,7 @@
 #include <melee/mp/mpcoll.h>
 #include <melee/pl/player.h>
 #include <melee/sc/types.h>
+#include <Runtime/fma.h>
 #include <sysdolphin/baselib/aobj.h>
 #include <sysdolphin/baselib/cobj.h>
 #include <sysdolphin/baselib/dobj.h>
@@ -617,10 +618,10 @@ double fn_801855BC(double x)
 {
     if (x > 0.0) {
         double guess = __frsqrte(x);
-        guess = 0.5 * guess * (3.0 - guess * guess * x);
-        guess = 0.5 * guess * (3.0 - guess * guess * x);
-        guess = 0.5 * guess * (3.0 - guess * guess * x);
-        guess = 0.5 * guess * (3.0 - guess * guess * x);
+        guess = 0.5 * guess * (FMA_SUB_MUL(3.0, guess * guess, x));
+        guess = 0.5 * guess * (FMA_SUB_MUL(3.0, guess * guess, x));
+        guess = 0.5 * guess * (FMA_SUB_MUL(3.0, guess * guess, x));
+        guess = 0.5 * guess * (FMA_SUB_MUL(3.0, guess * guess, x));
         return x * guess;
     } else if (x == 0) {
         return 0;
@@ -697,13 +698,14 @@ void fn_801857C4(HSD_GObj* arg0)
             total_tiles = 10;
             num_cols = (s32) fn_801855BC(total_tiles);
             row = (u8) i / (u8) num_cols;
-            pos.x =
-                (40.0f * HSD_Randf()) +
+            pos.x = FMA_MUL_ADD(
+                40.0f, HSD_Randf(),
                 (280.0f +
-                 ((290.0f / (f32) (u8) (((u8) num_cols + 9) / (u8) num_cols)) *
-                  (f32) ((u8) i % (u8) num_cols)));
-            pos.y = (40.0f * HSD_Randf()) +
-                    (((160.0f / (f32) (u8) num_cols) * (f32) row) + -60.0f);
+                 (290.0f / (f32) (u8) (((u8) num_cols + 9) / (u8) num_cols)) *
+                     (f32) ((u8) i % (u8) num_cols)));
+            pos.y = FMA_MUL_ADD(40.0f, HSD_Randf(),
+                                (FMA_MUL_ADD((160.0f / (f32) (u8) num_cols),
+                                             (f32) row, -60.0f)));
             pos_copy = pos;
             sobj->x10 = pos_copy.x;
             sobj->x14 = pos_copy.y;

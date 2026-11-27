@@ -1,6 +1,7 @@
 #include "particle.h"
 
 #include "generator.h"
+#include <Runtime/fma.h>
 
 typedef struct {
     /* 0x00 */ void* next;
@@ -534,7 +535,7 @@ void hsd_80398F8C(HSD_Particle* pp, f32 angle)
     {
         f32 azimuth;
 
-        temp = vy * sin_a + vz * cos_a;
+        temp = FMA_MUL_ADD(vy, sin_a, vz * cos_a);
         abs_temp = temp;
         *(s32*) &abs_temp &= 0x7FFFFFFF;
         if (abs_temp < 1.1754944e-38F) {
@@ -551,12 +552,12 @@ void hsd_80398F8C(HSD_Particle* pp, f32 angle)
         cos_e = cosf(azimuth);
     }
 
-    vx = (vx * vx + vy * vy) + vz * vz;
+    vx = FMA_ADD_MUL((FMA_MUL_ADD(vx, vx, vy * vy)), vz, vz);
     if (vx > 0.0F) {
         f64 x = __frsqrte((f64) vx);
-        x = 0.5 * x * -(((f64) vx * (x * x)) - 3.0);
-        x = 0.5 * x * -(((f64) vx * (x * x)) - 3.0);
-        x = 0.5 * x * -(((f64) vx * (x * x)) - 3.0);
+        x = 0.5 * x * -(FMA_MUL_SUB((f64) vx, (x * x), 3.0));
+        x = 0.5 * x * -(FMA_MUL_SUB((f64) vx, (x * x), 3.0));
+        x = 0.5 * x * -(FMA_MUL_SUB((f64) vx, (x * x), 3.0));
         magnitude = (f32) ((f64) vx * x);
         vx = magnitude;
     }
@@ -569,11 +570,13 @@ void hsd_80398F8C(HSD_Particle* pp, f32 angle)
     sin_rand = sin_angle * sinf(rand_angle);
     cos_angle = vx * cosf(angle_copy);
 
-    pp->vel.x = cos_rand * cos_e + cos_angle * sin_e;
-    pp->vel.y = cos_e * (cos_angle * sin_a) +
-                (sin_e * (-cos_rand * sin_a) + sin_rand * cos_a);
-    pp->vel.z = cos_e * (cos_angle * cos_a) +
-                (sin_e * (-cos_rand * cos_a) - sin_rand * sin_a);
+    pp->vel.x = FMA_MUL_ADD(cos_rand, cos_e, cos_angle * sin_e);
+    pp->vel.y = FMA_MUL_ADD(
+        cos_e, (cos_angle * sin_a),
+        (FMA_MUL_ADD(sin_e, (-cos_rand * sin_a), sin_rand * cos_a)));
+    pp->vel.z = FMA_MUL_ADD(
+        cos_e, (cos_angle * cos_a),
+        (FMA_MUL_SUB(sin_e, (-cos_rand * cos_a), sin_rand * sin_a)));
 }
 
 s32 applyForceJObj(HSD_Generator* gen, HSD_JObj* jobj, f32 force, f32 range)
@@ -591,7 +594,7 @@ s32 applyForceJObj(HSD_Generator* gen, HSD_JObj* jobj, f32 force, f32 range)
     dx = jobj->mtx[0][3] - gen->fric;
     dy = jobj->mtx[1][3] - gen->size;
     dz = jobj->mtx[2][3] - gen->radius;
-    dist_sq = dx * dx + dy * dy + dz * dz;
+    dist_sq = FMA_ADD_MUL(FMA_MUL_ADD(dx, dx, dy * dy), dz, dz);
 
     if (dist_sq <= range * range) {
         return 1;
@@ -602,9 +605,9 @@ s32 applyForceJObj(HSD_Generator* gen, HSD_JObj* jobj, f32 force, f32 range)
     }
 
     scale = force / dist_sq;
-    gen->pos.z += scale * dx;
-    gen->vel.x += scale * dy;
-    gen->vel.y += scale * dz;
+    FMA_ADD_TO(gen->pos.z, scale, dx);
+    FMA_ADD_TO(gen->vel.x, scale, dy);
+    FMA_ADD_TO(gen->vel.y, scale, dz);
     return 0;
 }
 
@@ -1273,19 +1276,22 @@ void* hsd_8039930C(HSD_Particle* pp, HSD_Particle* prev)
                             psReadFloat(&q);
                             pc = q;
                         }
-                        pp->pos.x += 2.0F * fval * HSD_Randf() - fval;
+                        pp->pos.x +=
+                            FMA_MUL_SUB(2.0F * fval, HSD_Randf(), fval);
                         {
                             u8* q = pc;
                             psReadFloat(&q);
                             pc = q;
                         }
-                        pp->pos.y += 2.0F * fval * HSD_Randf() - fval;
+                        pp->pos.y +=
+                            FMA_MUL_SUB(2.0F * fval, HSD_Randf(), fval);
                         {
                             u8* q = pc;
                             psReadFloat(&q);
                             pc = q;
                         }
-                        pp->pos.z += 2.0F * fval * HSD_Randf() - fval;
+                        pp->pos.z +=
+                            FMA_MUL_SUB(2.0F * fval, HSD_Randf(), fval);
                     }
                     break;
 
@@ -1402,7 +1408,7 @@ void* hsd_8039930C(HSD_Particle* pp, HSD_Particle* prev)
                             range = fval;
                             pc = p;
                         }
-                        pp->sizeTarget += range * HSD_Randf();
+                        FMA_ADD_TO(pp->sizeTarget, range, HSD_Randf());
                         if (pp->sizeCount == 0) {
                             pp->size = pp->sizeTarget;
                         }
@@ -1459,18 +1465,27 @@ void* hsd_8039930C(HSD_Particle* pp, HSD_Particle* prev)
                             mtx = srt->mmtx;
                             HSD_MtxSRT(mtx, scale, rot, translate, NULL);
                         }
-                        pp->pos.x = pp->appsrt->mmtx[0][0] * pp->pos.x +
-                                    pp->appsrt->mmtx[0][1] * pp->pos.y +
-                                    pp->appsrt->mmtx[0][2] * pp->pos.z +
-                                    pp->appsrt->mmtx[0][3];
-                        pp->pos.y = pp->appsrt->mmtx[1][0] * pp->pos.x +
-                                    pp->appsrt->mmtx[1][1] * pp->pos.y +
-                                    pp->appsrt->mmtx[1][2] * pp->pos.z +
-                                    pp->appsrt->mmtx[1][3];
-                        pp->pos.z = pp->appsrt->mmtx[2][0] * pp->pos.x +
-                                    pp->appsrt->mmtx[2][1] * pp->pos.y +
-                                    pp->appsrt->mmtx[2][2] * pp->pos.z +
-                                    pp->appsrt->mmtx[2][3];
+                        pp->pos.x =
+                            FMA_ADD_MUL(FMA_MUL_ADD(pp->appsrt->mmtx[0][0],
+                                                    pp->pos.x,
+                                                    pp->appsrt->mmtx[0][1] *
+                                                        pp->pos.y),
+                                        pp->appsrt->mmtx[0][2], pp->pos.z) +
+                            pp->appsrt->mmtx[0][3];
+                        pp->pos.y =
+                            FMA_ADD_MUL(FMA_MUL_ADD(pp->appsrt->mmtx[1][0],
+                                                    pp->pos.x,
+                                                    pp->appsrt->mmtx[1][1] *
+                                                        pp->pos.y),
+                                        pp->appsrt->mmtx[1][2], pp->pos.z) +
+                            pp->appsrt->mmtx[1][3];
+                        pp->pos.z =
+                            FMA_ADD_MUL(FMA_MUL_ADD(pp->appsrt->mmtx[2][0],
+                                                    pp->pos.x,
+                                                    pp->appsrt->mmtx[2][1] *
+                                                        pp->pos.y),
+                                        pp->appsrt->mmtx[2][2], pp->pos.z) +
+                            pp->appsrt->mmtx[2][3];
                         psRemoveParticleAppSRT(pp);
                     }
                     break;
@@ -1578,27 +1593,30 @@ void* hsd_8039930C(HSD_Particle* pp, HSD_Particle* prev)
                         dz = matrix[2][3] - pp->pos.z;
                         if (vel_mag_sq > 0.0F) {
                             double guess = __frsqrte((double) vel_mag_sq);
-                            guess = 0.5 * guess *
-                                    (3.0 - guess * guess * vel_mag_sq);
-                            guess = 0.5 * guess *
-                                    (3.0 - guess * guess * vel_mag_sq);
-                            guess = 0.5 * guess *
-                                    (3.0 - guess * guess * vel_mag_sq);
+                            guess =
+                                0.5 * guess *
+                                (FMA_SUB_MUL(3.0, guess * guess, vel_mag_sq));
+                            guess =
+                                0.5 * guess *
+                                (FMA_SUB_MUL(3.0, guess * guess, vel_mag_sq));
+                            guess =
+                                0.5 * guess *
+                                (FMA_SUB_MUL(3.0, guess * guess, vel_mag_sq));
                             vel_res = (f32) (vel_mag_sq * guess);
                             vel_mag_sq = vel_res;
                         }
-                        val = dx * dx + dy * dy;
-                        if ((dist_sq = dz * dz + val) == 0.0F) {
+                        val = FMA_MUL_ADD(dx, dx, dy * dy);
+                        if ((dist_sq = FMA_MUL_ADD(dz, dz, val)) == 0.0F) {
                             break;
                         }
                         if (dist_sq > 0.0F) {
                             double guess = __frsqrte((double) dist_sq);
-                            guess =
-                                0.5 * guess * (3.0 - guess * guess * dist_sq);
-                            guess =
-                                0.5 * guess * (3.0 - guess * guess * dist_sq);
-                            guess =
-                                0.5 * guess * (3.0 - guess * guess * dist_sq);
+                            guess = 0.5 * guess *
+                                    (FMA_SUB_MUL(3.0, guess * guess, dist_sq));
+                            guess = 0.5 * guess *
+                                    (FMA_SUB_MUL(3.0, guess * guess, dist_sq));
+                            guess = 0.5 * guess *
+                                    (FMA_SUB_MUL(3.0, guess * guess, dist_sq));
                             dist_res = (f32) (dist_sq * guess);
                             dist_sq = dist_res;
                         }
@@ -1946,8 +1964,8 @@ void* hsd_8039930C(HSD_Particle* pp, HSD_Particle* prev)
 
                         pp->poseNum = *pc++;
                         randRange = *pc++;
-                        pp->poseNum = (u8) (s32) (randRange * HSD_Randf() +
-                                                  (f32) pp->poseNum);
+                        pp->poseNum = (u8) (s32) (FMA_MUL_ADD(
+                            randRange, HSD_Randf(), (f32) pp->poseNum));
                         {
                             u8 bank = pp->bank;
                             u8 tgIdx = pp->texGroup;
@@ -1983,14 +2001,17 @@ void* hsd_8039930C(HSD_Particle* pp, HSD_Particle* prev)
                             }
                             random_range = fval;
                         }
-                        base_speed += random_range * HSD_Randf();
+                        FMA_ADD_TO(base_speed, random_range, HSD_Randf());
                         mag = pp->vel.x * pp->vel.x + pp->vel.y * pp->vel.y +
                               pp->vel.z * pp->vel.z;
                         if (mag > 0.0F) {
                             double guess = __frsqrte((double) mag);
-                            guess = 0.5 * guess * (3.0 - guess * guess * mag);
-                            guess = 0.5 * guess * (3.0 - guess * guess * mag);
-                            guess = 0.5 * guess * (3.0 - guess * guess * mag);
+                            guess = 0.5 * guess *
+                                    (FMA_SUB_MUL(3.0, guess * guess, mag));
+                            guess = 0.5 * guess *
+                                    (FMA_SUB_MUL(3.0, guess * guess, mag));
+                            guess = 0.5 * guess *
+                                    (FMA_SUB_MUL(3.0, guess * guess, mag));
                             sqrt_res = (f32) (mag * guess);
                             mag = sqrt_res;
                         }
@@ -2751,7 +2772,8 @@ void* hsd_8039930C(HSD_Particle* pp, HSD_Particle* prev)
                             base_val = base_val +
                                        range_val * (f32) randi / (f32) timing;
                         } else {
-                            base_val = base_val + range_val * HSD_Randf();
+                            base_val =
+                                FMA_ADD_MUL(base_val, range_val, HSD_Randf());
                         }
                         pp->rotateTarget += base_val;
                         pp->rotate += base_val;
@@ -2867,7 +2889,7 @@ void* hsd_8039930C(HSD_Particle* pp, HSD_Particle* prev)
             if ((ang = gp->angle) < particle_zero) {
                 ang = -ang;
             }
-            R += pp->vel.z * tanf(ang);
+            FMA_ADD_TO(R, pp->vel.z, tanf(ang));
             R *= pp->vel.y;
         }
         pp->vel.x += gp->grav;
@@ -2877,11 +2899,13 @@ void* hsd_8039930C(HSD_Particle* pp, HSD_Particle* prev)
         nd = -d;
         vz = pp->vel.z;
 
-        pp->pos.x = gp->pos.x + (d * cosB + vz * sinB);
-        pp->pos.y =
-            gp->pos.y + (cosB * (vz * sinA) + (sinB * (nd * sinA) + e * cosA));
-        pp->pos.z =
-            gp->pos.z + (cosB * (vz * cosA) + (sinB * (nd * cosA) - e * sinA));
+        pp->pos.x = gp->pos.x + (FMA_MUL_ADD(d, cosB, vz * sinB));
+        pp->pos.y = gp->pos.y +
+                    (FMA_MUL_ADD(cosB, (vz * sinA),
+                                 (FMA_MUL_ADD(sinB, (nd * sinA), e * cosA))));
+        pp->pos.z = gp->pos.z +
+                    (FMA_MUL_ADD(cosB, (vz * cosA),
+                                 (FMA_MUL_SUB(sinB, (nd * cosA), e * sinA))));
     } else {
         /* Simple physics */
         if (pp->kind & 1) {

@@ -80,6 +80,7 @@
 #include <melee/pl/plbonuslib.h>
 #include <melee/pl/pltrick.h>
 #include <melee/sfx/crowdsfx.h>
+#include <Runtime/fma.h>
 #include <sysdolphin/baselib/controller.h>
 #include <sysdolphin/baselib/debug.h>
 #include <sysdolphin/baselib/gobj.h>
@@ -238,7 +239,8 @@ void Fighter_UnkInitReset_80067C98(Fighter* fp)
     Player_LoadPlayerCoords(fp->player_idx, &player_coords);
     fp->facing_dir = Player_GetFacingDirection(fp->player_idx);
 
-    player_coords.x = fp->facing_dir * ftCommon_800804EC(fp) + player_coords.x;
+    player_coords.x =
+        FMA_MUL_ADD(fp->facing_dir, ftCommon_800804EC(fp), player_coords.x);
     x = player_coords.x;
     fp->cur_pos.x = x;
     fp->prev_pos.x = x;
@@ -2193,17 +2195,18 @@ void Fighter_procUpdate(Fighter_GObj* gobj)
                 } else {
                     float kb_angle = atan2f(kb_vel_y, kb_vel_x);
 
-                    if (sqrtf(kb_vel_x * kb_vel_x + kb_vel_y * kb_vel_y) <
+                    if (sqrtf(FMA_MUL_ADD(kb_vel_x, kb_vel_x,
+                                          kb_vel_y * kb_vel_y)) <
                         p_ftCommonData->x204_knockbackFrameDecay)
                     {
                         p_kb_vel->x = p_kb_vel->y = 0;
                     } else {
-                        p_kb_vel->x -=
-                            p_ftCommonData->x204_knockbackFrameDecay *
-                            cosf(kb_angle);
-                        p_kb_vel->y -=
-                            p_ftCommonData->x204_knockbackFrameDecay *
-                            sinf(kb_angle);
+                        FMA_SUB_FROM(p_kb_vel->x,
+                                     p_ftCommonData->x204_knockbackFrameDecay,
+                                     cosf(kb_angle));
+                        FMA_SUB_FROM(p_kb_vel->y,
+                                     p_ftCommonData->x204_knockbackFrameDecay,
+                                     sinf(kb_angle));
                     }
                 }
 
@@ -2239,7 +2242,7 @@ void Fighter_procUpdate(Fighter_GObj* gobj)
                 float kb_y = pAtkShieldKB->y;
                 float atkShieldKBAngle = atan2f(kb_y, kb_x);
 
-                if (sqrtf(kb_x * kb_x + kb_y * kb_y) <
+                if (sqrtf(FMA_MUL_ADD(kb_x, kb_x, kb_y * kb_y)) <
                     p_ftCommonData->x3E8_shieldKnockbackFrameDecay)
                 {
                     /// @bug IN THE MELEE CODE THAT CAUSES THE INVISIBLE
@@ -2252,12 +2255,14 @@ void Fighter_procUpdate(Fighter_GObj* gobj)
                     // p_stc_ftcommon->x3e8_shield_kb_frameDecay)/atkShieldKB_len
                     // float atkShieldKBAngle = atan2_80022C30(pAtkShieldKB->y,
                     // pAtkShieldKB->x);
-                    pAtkShieldKB->x -=
-                        p_ftCommonData->x3E8_shieldKnockbackFrameDecay *
-                        cosf(atkShieldKBAngle);
-                    pAtkShieldKB->y -=
-                        p_ftCommonData->x3E8_shieldKnockbackFrameDecay *
-                        sinf(atkShieldKBAngle);
+                    FMA_SUB_FROM(
+                        pAtkShieldKB->x,
+                        p_ftCommonData->x3E8_shieldKnockbackFrameDecay,
+                        cosf(atkShieldKBAngle));
+                    FMA_SUB_FROM(
+                        pAtkShieldKB->y,
+                        p_ftCommonData->x3E8_shieldKnockbackFrameDecay,
+                        sinf(atkShieldKBAngle));
                 }
                 fp->xF4_ground_attacker_shield_kb_vel = 0;
             } else {
@@ -2311,10 +2316,10 @@ void Fighter_procUpdate(Fighter_GObj* gobj)
             float C1 = 1.0f;
             float C2 = C1 - (float) fp->dmg.x194C / (float) fp->dmg.x1948;
 
-            selfVel.x =
-                C2 * (fp->self_vel.x - fp->xA4_unk_vel.x) + fp->xA4_unk_vel.x;
-            selfVel.y =
-                C2 * (fp->self_vel.y - fp->xA4_unk_vel.y) + fp->xA4_unk_vel.y;
+            selfVel.x = FMA_MUL_ADD(C2, (fp->self_vel.x - fp->xA4_unk_vel.x),
+                                    fp->xA4_unk_vel.x);
+            selfVel.y = FMA_MUL_ADD(C2, (fp->self_vel.y - fp->xA4_unk_vel.y),
+                                    fp->xA4_unk_vel.y);
 
             fp->dmg.x194C--;
             if (fp->dmg.x194C == 0) {
@@ -2825,13 +2830,14 @@ void Fighter_procCollResolve(Fighter_GObj* gobj)
         }
 
         if (fp->x221A_b7) {
-            fp->shield_health -=
-                (p_ftCommonData->x284 *
-                 ((fp->x19A0_shieldDamageTaken) *
-                  (1.0f - ((fp->lightshield_amount *
-                            (p_ftCommonData->x2E0 - p_ftCommonData->x2DC)) +
-                           p_ftCommonData->x2DC)))) +
-                p_ftCommonData->x288;
+            fp->shield_health -= FMA_MUL_ADD(
+                p_ftCommonData->x284,
+                ((fp->x19A0_shieldDamageTaken) *
+                 (1.0f -
+                  (FMA_MUL_ADD(fp->lightshield_amount,
+                               (p_ftCommonData->x2E0 - p_ftCommonData->x2DC),
+                               p_ftCommonData->x2DC)))),
+                p_ftCommonData->x288);
             if (fp->shield_health < 0.0f) {
                 bool3 = 1;
                 fp->shield_health = p_ftCommonData->x280_unkShieldHealth;
@@ -3007,8 +3013,8 @@ void Fighter_procCollResolve(Fighter_GObj* gobj)
         }
 
         if (fp->dmg.x1928) {
-            float eval =
-                (fp->dmg.x1928 * p_ftCommonData->x3E0) + p_ftCommonData->x3E4;
+            float eval = FMA_MUL_ADD(fp->dmg.x1928, p_ftCommonData->x3E0,
+                                     p_ftCommonData->x3E4);
             fp->xF4_ground_attacker_shield_kb_vel =
                 (fp->dmg.x192c < 0.0f) ? eval : -eval;
             ftCommon_8007E2A4(gobj);

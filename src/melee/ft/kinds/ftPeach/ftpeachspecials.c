@@ -18,6 +18,7 @@
 #include <melee/ft/types.h>
 #include <melee/it/kinds/itpeachexplode.h>
 #include <melee/lb/lb_00B0.h>
+#include <Runtime/fma.h>
 
 /* 11C2F4 */ static void reset(HSD_GObj* gobj);
 /* 11C430 */ static void doAirEnd0(HSD_GObj* gobj);
@@ -121,8 +122,8 @@ void ftPe_SpecialSStart_Anim(HSD_GObj* gobj)
         enterEndSmash(gobj);
     } else {
         ftCommon_8007D5D4(fp);
-        fp->cur_pos.x += -4 * fp->facing_dir * fp->x34_scale.y;
-        fp->cur_pos.y += 3.5f * fp->x34_scale.y;
+        FMA_ADD_TO(fp->cur_pos.x, -4 * fp->facing_dir, fp->x34_scale.y);
+        FMA_ADD_TO(fp->cur_pos.y, 3.5f, fp->x34_scale.y);
         enterAirJump(gobj);
     }
 }

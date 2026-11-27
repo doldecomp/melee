@@ -10,6 +10,7 @@
 #include <melee/it/itgroundcoll.h>
 #include <melee/it/ithitbox.h>
 #include <melee/it/itmaplib.h>
+#include <Runtime/fma.h>
 #include <sysdolphin/baselib/random.h>
 
 ItemStateTable it_803F8E90[] = {
@@ -148,8 +149,8 @@ void it_802E89D0(Item_GObj* gobj, f32 horiz_speed, f32 min_vy, f32 max_vy)
         x = (new_var = ip->xCC_item_attr->x10_fall_speed * (speed * speed));
         x *= 0.5f;
         ip->x40_vel.y = x / speed;
-        ip->x40_vel.y =
-            HSD_Randf() * ((pos.y - ip->pos.y) / 10.0f) + ip->x40_vel.y;
+        ip->x40_vel.y = FMA_MUL_ADD(HSD_Randf(), ((pos.y - ip->pos.y) / 10.0f),
+                                    ip->x40_vel.y);
 
         if (ip->x40_vel.y > max_vy) {
             ip->x40_vel.y = max_vy;

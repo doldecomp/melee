@@ -11,6 +11,7 @@
 #include <melee/it/item.h>
 #include <melee/it/itgroundcoll.h>
 #include <melee/it/ithitbox.h>
+#include <Runtime/fma.h>
 #include <sysdolphin/baselib/jobj.h>
 
 ItemStateTable it_803F9260[] = {
@@ -129,7 +130,8 @@ bool itTools_UnkMotion4_Anim(Item_GObj* gobj)
     itToolsAttributes* attrs =
         &ip->xC4_article_data->x4_specialAttributes->tools;
     f32 rz = HSD_JObjGetRotationZ(jobj);
-    rz += attrs->motions[ip->xDD4_itemVar.tools.x0].xC * ip->facing_dir;
+    FMA_ADD_TO(rz, attrs->motions[ip->xDD4_itemVar.tools.x0].xC,
+               ip->facing_dir);
     HSD_JObjSetRotationZ(jobj, rz);
     ip->xD44_lifeTimer -= 1.0f;
     if (ip->xD44_lifeTimer <= 0.0f) {

@@ -14,6 +14,7 @@
 #include <melee/gr/ground.h>
 #include <melee/gr/stage.h>
 #include <melee/mp/mpcoll.h>
+#include <Runtime/fma.h>
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/gobjproc.h>
 #include <sysdolphin/baselib/memory.h>
@@ -191,7 +192,7 @@ static inline void it_8026C88C_inline(RandomItemSpawner* alloc)
                 s32* range = &it_804D6D28->xFC[gm_8016AE80() * 2];
                 f32 randf = HSD_Randf();
                 f32 diff = range[1] - range[0];
-                alloc->x0 = diff * randf + range[0];
+                alloc->x0 = FMA_MUL_ADD(diff, randf, range[0]);
                 alloc->x0 *= Ground_801C2AE8(Stage_80225194());
             }
         }
@@ -213,7 +214,7 @@ void it_8026CA4C(ItemPickTable* alloc, s32* arg1, u64 arg2, s32 arg3, f32 arg4)
 
     while (i < It_Kind_Common_End) {
         if (mask & 1) {
-            sum += arg4 * *p + 0.99f;
+            sum += FMA_MUL_ADD(arg4, *p, 0.99f);
         }
         p++;
         i++;
@@ -277,7 +278,7 @@ void it_8026CB9C(s32* counts, u64 mask, f32 weight)
             (*weights)[idx] = cumulative;
             cnt2++;
             idx++;
-            cumulative = (cumulative + ((weight * *p2) + 0.99f));
+            cumulative = (cumulative + (FMA_MUL_ADD(weight, *p2, 0.99f)));
         }
         p2++;
         it_kind2++;
@@ -339,7 +340,7 @@ void it_8026CD50(s32* counts, u64 mask, f32 weight)
             (*weights)[idx] = cumulative;
             cnt2++;
             idx++;
-            cumulative = (cumulative + ((weight * *p2) + 0.99f));
+            cumulative = (cumulative + (FMA_MUL_ADD(weight, *p2, 0.99f)));
         }
         p2++;
         it_kind2++;
@@ -427,7 +428,7 @@ static inline void it_8026D018_inline3(f32 randf, const s32* range)
     s32 diff = range[1] - range[0];
 
     (void) diff;
-    it_804A0E30.x0 = diff * randf + range[0];
+    it_804A0E30.x0 = FMA_MUL_ADD(diff, randf, range[0]);
     it_804A0E30.x0 *= Ground_801C2AE8(Stage_80225194());
 }
 

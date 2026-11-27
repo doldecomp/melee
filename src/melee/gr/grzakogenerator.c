@@ -18,6 +18,7 @@
 #include <melee/it/kinds/itpatapata.h>
 #include <melee/it/types.h>
 #include <melee/lb/lb_00B0.h>
+#include <Runtime/fma.h>
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/gobjproc.h>
 #include <sysdolphin/baselib/memory.h>
@@ -67,9 +68,9 @@ static inline void
 grZakoGenerator_801CA43C_inline(f32 t, grZakoGenerator_Spawn* spawns,
                                 f32 height, Vec3* pos)
 {
-    pos->x = t * (spawns->pos1.x - spawns->pos0.x) + spawns->pos0.x;
+    pos->x = FMA_MUL_ADD(t, (spawns->pos1.x - spawns->pos0.x), spawns->pos0.x);
     pos->y = height,
-    pos->z = t * (spawns->pos1.z - spawns->pos0.z) + spawns->pos0.z;
+    pos->z = FMA_MUL_ADD(t, (spawns->pos1.z - spawns->pos0.z), spawns->pos0.z);
 }
 
 s32 grZakoGenerator_801CA43C(grZakoGenerator_Config* config, HSD_JObj* jobj,

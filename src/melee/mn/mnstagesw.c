@@ -9,6 +9,7 @@
 #include <melee/lb/lbcardgame.h>
 #include <melee/lb/lbspdisplay.h>
 #include <melee/sc/types.h>
+#include <Runtime/fma.h>
 #include <sysdolphin/baselib/debug.h>
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/gobjgxlink.h>
@@ -110,7 +111,7 @@ static void mnStageSw_802359C8(MnStageSwData* data)
     for (i = 0; i < 15; i++) {
         text = HSD_SisLib_803A5ACC(
             0, mn_804D6BB5, 1.0f + HSD_JObjGetTranslationX(data->x2C),
-            -((delta_y * (f32) i) + start_y), 17.5f, 160.0f, 300.0f);
+            -(FMA_MUL_ADD(delta_y, (f32) i, start_y)), 17.5f, 160.0f, 300.0f);
         data->x40[i] = text;
         text->font_size.x = 0.0521f;
         text->font_size.y = 0.0521f;
@@ -127,7 +128,8 @@ static void mnStageSw_802359C8(MnStageSwData* data)
     for (i = 15; i < NUM_STAGES; i++) {
         text = HSD_SisLib_803A5ACC(
             0, mn_804D6BB5, 1.0f + HSD_JObjGetTranslationX(data->x34),
-            -((delta_y * (f32) (i - 15)) + start_y), 17.5f, 160.0f, 300.0f);
+            -(FMA_MUL_ADD(delta_y, (f32) (i - 15), start_y)), 17.5f, 160.0f,
+            300.0f);
         data->x40[i] = text;
         text->font_size.x = 0.0521f;
         text->font_size.y = 0.0521f;
@@ -381,13 +383,15 @@ static void mnStageSw_80236178(MnStageSwData* data, u8 idx)
     if (idx < 15) {
         ref_jobj = data->x2C;
         HSD_JObjSetTranslateX(jobj, HSD_JObjGetTranslationX(ref_jobj));
-        HSD_JObjSetTranslateY(jobj, delta * (f32) idx +
-                                        HSD_JObjGetTranslationY(data->x2C));
+        HSD_JObjSetTranslateY(
+            jobj,
+            FMA_MUL_ADD(delta, (f32) idx, HSD_JObjGetTranslationY(data->x2C)));
     } else {
         ref_jobj = data->x34;
         HSD_JObjSetTranslateX(jobj, HSD_JObjGetTranslationX(ref_jobj));
-        HSD_JObjSetTranslateY(jobj, delta * (f32) (idx - 15) +
-                                        HSD_JObjGetTranslationY(data->x2C));
+        HSD_JObjSetTranslateY(jobj,
+                              FMA_MUL_ADD(delta, (f32) (idx - 15),
+                                          HSD_JObjGetTranslationY(data->x2C)));
     }
 }
 static HSD_JObj* mnStageSw_802364A0_noinline(MnStageSwData* data, u8 idx);
@@ -451,16 +455,16 @@ static void mnStageSw_80236548(HSD_GObj* gobj, u8 arg1, u8 arg2)
             x = HSD_JObjGetTranslationX(data->x2C);
             (void) x;
             HSD_JObjSetTranslateX(cursor_jobj, x);
-            HSD_JObjSetTranslateY(cursor_jobj,
-                                  delta_y * (f32) sel +
-                                      HSD_JObjGetTranslationY(data->x2C));
+            HSD_JObjSetTranslateY(
+                cursor_jobj, FMA_MUL_ADD(delta_y, (f32) sel,
+                                         HSD_JObjGetTranslationY(data->x2C)));
         } else {
             x = HSD_JObjGetTranslationX(data->x34);
             (void) x;
             HSD_JObjSetTranslateX(cursor_jobj, x);
-            HSD_JObjSetTranslateY(cursor_jobj,
-                                  delta_y * (f32) (sel - 15) +
-                                      HSD_JObjGetTranslationY(data->x2C));
+            HSD_JObjSetTranslateY(
+                cursor_jobj, FMA_MUL_ADD(delta_y, (f32) (sel - 15),
+                                         HSD_JObjGetTranslationY(data->x2C)));
         }
     }
     if (arg2 != 0) {
@@ -639,14 +643,14 @@ static inline void mnStageSw_SetCursorPosition(MnStageSwData* user_data)
                 HSD_JObjGetTranslationY(user_data->x2C);
     if (hovered < 15) {
         HSD_JObjSetTranslateX(cursor, HSD_JObjGetTranslationX(user_data->x2C));
-        HSD_JObjSetTranslateY(cursor,
-                              y_spacing * (f32) hovered +
-                                  HSD_JObjGetTranslationY(user_data->x2C));
+        HSD_JObjSetTranslateY(
+            cursor, FMA_MUL_ADD(y_spacing, (f32) hovered,
+                                HSD_JObjGetTranslationY(user_data->x2C)));
     } else {
         HSD_JObjSetTranslateX(cursor, HSD_JObjGetTranslationX(user_data->x34));
-        HSD_JObjSetTranslateY(cursor,
-                              y_spacing * (f32) (hovered - 15) +
-                                  HSD_JObjGetTranslationY(user_data->x2C));
+        HSD_JObjSetTranslateY(
+            cursor, FMA_MUL_ADD(y_spacing, (f32) (hovered - 15),
+                                HSD_JObjGetTranslationY(user_data->x2C)));
     }
     HSD_JObjSetFlagsAll(user_data->x28, JOBJ_HIDDEN);
 }

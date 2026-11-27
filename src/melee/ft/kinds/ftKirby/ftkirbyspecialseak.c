@@ -23,6 +23,7 @@
 #include <melee/ft/types.h>
 #include <melee/it/kinds/itseakneedleheld.h>
 #include <melee/it/kinds/itseakneedlethrown.h>
+#include <Runtime/fma.h>
 #include <sysdolphin/baselib/random.h>
 
 /* 106DB0 */ static void fn_80106DB0(Fighter_GObj*);
@@ -71,7 +72,7 @@ void ftKb_SpecialNSk_8010603C(Fighter_GObj* gobj)
                 } else {
                     y_offset = da->specialn_sk_graphic_y_offset_air;
                 }
-                pos.y += fp->x34_scale.y * y_offset;
+                FMA_ADD_TO(pos.y, fp->x34_scale.y, y_offset);
             }
             pos.z = 0.0f;
             {
@@ -474,19 +475,20 @@ void fn_80106DB0(Fighter_GObj* gobj)
             Vec3 pos = fp->cur_pos;
             PAD_STACK(4);
             if (fp->ground_or_air == GA_Ground) {
-                pos.x +=
-                    fp->x34_scale.y *
-                    (da->specialn_sk_graphic_x_offset_ground * fp->facing_dir);
-                pos.y += fp->x34_scale.y *
-                         (da->specialn_sk_graphic_y_offset_ground +
-                          ftKb_Init_803CB770[perm_randi(9)]);
+                FMA_ADD_TO(pos.x, fp->x34_scale.y,
+                           (da->specialn_sk_graphic_x_offset_ground *
+                            fp->facing_dir));
+                FMA_ADD_TO(pos.y, fp->x34_scale.y,
+                           (da->specialn_sk_graphic_y_offset_ground +
+                            ftKb_Init_803CB770[perm_randi(9)]));
             } else {
-                pos.x +=
-                    fp->x34_scale.y *
-                    (da->specialn_sk_graphic_x_offset_air * fp->facing_dir);
-                pos.y += fp->x34_scale.y *
-                         (2.0f * ftKb_Init_803CB770[perm_randi(9)] +
-                          da->specialn_sk_graphic_y_offset_air);
+                FMA_ADD_TO(
+                    pos.x, fp->x34_scale.y,
+                    (da->specialn_sk_graphic_x_offset_air * fp->facing_dir));
+                FMA_ADD_TO(
+                    pos.y, fp->x34_scale.y,
+                    (FMA_MUL_ADD(2.0f, ftKb_Init_803CB770[perm_randi(9)],
+                                 da->specialn_sk_graphic_y_offset_air)));
             }
             pos.z = 0.0f;
             {

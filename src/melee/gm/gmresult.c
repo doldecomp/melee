@@ -2,6 +2,7 @@
 
 #include "types.h"
 #include <melee/lb/lb_013B.h>
+#include <Runtime/fma.h>
 
 /// @todo .sdata order hack
 #ifdef MUST_MATCH
@@ -538,7 +539,7 @@ void fn_80174B4C(ResultsData* data, s32 slot)
 
     offset = pdata->scroll_offset;
     start_entry = (s32) (10.0F * offset) / 10;
-    pos.y += 1.75F * (offset - (f32) (start_entry - 1));
+    FMA_ADD_TO(pos.y, 1.75F, (offset - (f32) (start_entry - 1)));
 
     /// Set flags
     pdata->x0_3 = 1;
@@ -665,19 +666,19 @@ GXColor fn_8017507C(s32 slot)
             }
         }
 
-        current_color = (0.9f * (f32) color.r) + 100.0f;
+        current_color = FMA_MUL_ADD(0.9f, (f32) color.r, 100.0f);
         if (current_color > 255.0f) {
             current_color = 255.0f;
         }
         color.r = current_color;
 
-        current_color = (0.9f * (f32) color.g) + 100.0f;
+        current_color = FMA_MUL_ADD(0.9f, (f32) color.g, 100.0f);
         if (current_color > 255.0f) {
             current_color = 255.0f;
         }
         color.g = (s8) current_color;
 
-        current_color = (0.9f * (f32) color.b) + 100.0f;
+        current_color = FMA_MUL_ADD(0.9f, (f32) color.b, 100.0f);
         if (current_color > 255.0f) {
             current_color = 255.0f;
         }

@@ -31,6 +31,7 @@
 #include <melee/lb/lbvector.h>
 #include <melee/mp/mplib.h>
 #include <melee/pl/player.h>
+#include <Runtime/fma.h>
 #include <sysdolphin/baselib/cobj.h>
 #include <sysdolphin/baselib/controller.h>
 #include <sysdolphin/baselib/displayfunc.h>
@@ -157,7 +158,7 @@ static inline void camera_sdata2_order(void)
 static inline float vec_len(Vec3* offset)
 {
     return sqrtf((offset->x * offset->x) + (offset->y * offset->y) +
-                 (offset->z * offset->z));
+                 offset->z * offset->z);
 }
 
 void Camera_Init(int n_subjects)
@@ -536,8 +537,8 @@ void Camera_8002958C(CameraBounds* bounds, CameraTransformState* transform)
                                 : base_ground;
                     }
                 }
-                test_pos.x =
-                    (subject->ext.h.x * tracking_multiplier) + base_pos.x;
+                test_pos.x = FMA_MUL_ADD(subject->ext.h.x, tracking_multiplier,
+                                         base_pos.x);
                 cam_bounds_flags = Camera_80029124(&test_pos, 0);
                 if (cam_bounds_flags != CAM_BOUNDS_INSIDE) {
                     Ground_801C4368(&x_extent_ground, &x_extent_intercept);
@@ -564,8 +565,8 @@ void Camera_8002958C(CameraBounds* bounds, CameraTransformState* transform)
                 if (test_pos.x > max_x) {
                     max_x = test_pos.x;
                 }
-                test_pos.x =
-                    (subject->ext.h.y * tracking_multiplier) + base_pos.x;
+                test_pos.x = FMA_MUL_ADD(subject->ext.h.y, tracking_multiplier,
+                                         base_pos.x);
                 cam_bounds_flags = Camera_80029124(&test_pos, 0);
                 if (cam_bounds_flags != CAM_BOUNDS_INSIDE) {
                     Ground_801C4368(&alt_x_ground, &alt_x_intercept);
@@ -592,8 +593,8 @@ void Camera_8002958C(CameraBounds* bounds, CameraTransformState* transform)
                 if (test_pos.x > max_x) {
                     max_x = test_pos.x;
                 }
-                test_pos.y =
-                    (subject->ext.v.y * tracking_multiplier) + base_pos.y;
+                test_pos.y = FMA_MUL_ADD(subject->ext.v.y, tracking_multiplier,
+                                         base_pos.y);
                 cam_bounds_flags = Camera_80029124(&test_pos, 0);
                 if (cam_bounds_flags != CAM_BOUNDS_INSIDE) {
                     Ground_801C4368(&y_extent_ground, &y_extent_intercept);
@@ -620,8 +621,8 @@ void Camera_8002958C(CameraBounds* bounds, CameraTransformState* transform)
                 if (test_pos.y > max_y) {
                     max_y = test_pos.y;
                 }
-                test_pos.y =
-                    (subject->ext.v.x * tracking_multiplier) + base_pos.y;
+                test_pos.y = FMA_MUL_ADD(subject->ext.v.x, tracking_multiplier,
+                                         base_pos.y);
                 cam_bounds_flags = Camera_80029124(&test_pos, 0);
                 if (cam_bounds_flags != CAM_BOUNDS_INSIDE) {
                     Ground_801C4368(&alt_y_ground, &alt_y_intercept);
@@ -669,7 +670,7 @@ void Camera_8002958C(CameraBounds* bounds, CameraTransformState* transform)
         z_factor = (z_pos - 80.0f) / 4920.0f;
     }
     new_bounds->x_min = min_x;
-    new_bounds->y_min = min_y - ((390.0f * z_factor) + 10.0f);
+    new_bounds->y_min = min_y - (FMA_MUL_ADD(390.0f, z_factor, 10.0f));
     new_bounds->x_max = max_x;
     new_bounds->y_max = max_y;
     new_bounds->total_subjects = subject_count;
@@ -684,9 +685,9 @@ static inline float get_follow_speed(float temp_f4, float spread,
     } else if (spread < globals->x34) {
         return globals->x2C;
     } else {
-        return (((spread - globals->x34) / (temp_f4 - globals->x34)) *
-                (globals->x30 - globals->x2C)) +
-               globals->x2C;
+        return FMA_MUL_ADD(
+            ((spread - globals->x34) / (temp_f4 - globals->x34)),
+            (globals->x30 - globals->x2C), globals->x2C);
     }
 }
 
@@ -739,8 +740,8 @@ void Camera_80029AAC(CameraBounds* bounds, CameraTransformState* transform,
         lerp_factor = 0.0001f;
     }
 
-    transform->interest.x += offset_x * lerp_factor;
-    transform->interest.y += offset_y * lerp_factor;
+    FMA_ADD_TO(transform->interest.x, offset_x, lerp_factor);
+    FMA_ADD_TO(transform->interest.y, offset_y, lerp_factor);
 }
 
 void Camera_80029BC4(CameraBounds* bounds, CameraTransformState* transform)
@@ -778,9 +779,9 @@ void Camera_80029C88(CameraBounds* unused, CameraTransformState* transform,
         scale = 1.0f;
     }
 
-    transform->position.x += dist.x * scale;
-    transform->position.y += dist.y * scale;
-    transform->position.z += dist.z * scale;
+    FMA_ADD_TO(transform->position.x, dist.x, scale);
+    FMA_ADD_TO(transform->position.y, dist.y, scale);
+    FMA_ADD_TO(transform->position.z, dist.z, scale);
 }
 
 static inline f32 get_y_bias(f32 spread)
@@ -790,10 +791,10 @@ static inline f32 get_y_bias(f32 spread)
     } else if (spread < cm_803BCCA0.x24) {
         return cm_803BCCA0.x1C;
     } else {
-        return (cm_803BCCA0.x20 - cm_803BCCA0.x1C) *
-                   ((spread - cm_803BCCA0.x24) /
-                    (cm_803BCCA0.x28 - cm_803BCCA0.x24)) +
-               cm_803BCCA0.x1C;
+        return FMA_MUL_ADD(
+            (cm_803BCCA0.x20 - cm_803BCCA0.x1C),
+            ((spread - cm_803BCCA0.x24) / (cm_803BCCA0.x28 - cm_803BCCA0.x24)),
+            cm_803BCCA0.x1C);
     }
 }
 
@@ -839,7 +840,7 @@ void Camera_80029CF8(CameraBounds* bounds, CameraTransformState* transform)
 
     t = get_y_bias(spread);
     y_sum = (bounds->y_min - sp24.y) + (bounds->y_max - sp24.y);
-    base = y_sum * (0.5f - t) + sp24.y;
+    base = FMA_MUL_ADD(y_sum, (0.5f - t), sp24.y);
     angle = -MTXDegToRad((base + cm_803BCCA0.x8) * Stage_GetCamInfoX24());
 
     if (angle > MTXDegToRad(cm_803BCCA0.xC)) {
@@ -851,9 +852,9 @@ void Camera_80029CF8(CameraBounds* bounds, CameraTransformState* transform)
 
     angle += Stage_GetCamPanAngleRadians();
     y_angle = angle;
-    fov_u = 0.5f * MTXDegToRad(transform->fov) + angle;
+    fov_u = FMA_MUL_ADD(0.5f, MTXDegToRad(transform->fov), angle);
     HSD_ASSERT(1274, fov_u<MTXDegToRad(90.0F));
-    fov_d = 0.5f * MTXDegToRad(transform->fov) - angle;
+    fov_d = FMA_MUL_SUB(0.5f, MTXDegToRad(transform->fov), angle);
     HSD_ASSERT(1275, fov_d<MTXDegToRad(90.0F));
     tan_u = tanf(fov_u);
     tan_d = tanf(fov_d);
@@ -861,7 +862,8 @@ void Camera_80029CF8(CameraBounds* bounds, CameraTransformState* transform)
     Stage_GetCamBoundsBottomOffset();
     Stage_GetCamBoundsTopOffset();
     y_off = dist_y * tanf(y_angle);
-    transform->target_interest.y = y_off + (bounds->y_max - dist_y * tan_u);
+    transform->target_interest.y =
+        y_off + (FMA_SUB_MUL(bounds->y_max, dist_y, tan_u));
     Stage_UnkSetVec3TCam_Offset(&sp14);
     x_center = 0.5f * (bounds->x_min + bounds->x_max);
     angle = -MTXDegToRad((x_center - sp14.x) * Stage_GetCamInfoX20());
@@ -873,9 +875,9 @@ void Camera_80029CF8(CameraBounds* bounds, CameraTransformState* transform)
         angle = MTXDegToRad(cm_803BCCA0.x18);
     }
 
-    fov_r = 0.5f * MTXDegToRad(transform->fov) - angle;
+    fov_r = FMA_MUL_SUB(0.5f, MTXDegToRad(transform->fov), angle);
     HSD_ASSERT(1288, fov_r<MTXDegToRad(90.0F));
-    fov_l = 0.5f * MTXDegToRad(transform->fov) + angle;
+    fov_l = FMA_MUL_ADD(0.5f, MTXDegToRad(transform->fov), angle);
     HSD_ASSERT(1289, fov_l<MTXDegToRad(90.0F));
     scaled_tan = cm_803BCB64.aspect * tanf(fov_r);
     tan_r = scaled_tan;
@@ -884,7 +886,8 @@ void Camera_80029CF8(CameraBounds* bounds, CameraTransformState* transform)
     Stage_GetCamBoundsLeftOffset();
     Stage_GetCamBoundsRightOffset();
     x_off = cm_803BCB64.aspect * (dist_x * tanf(angle));
-    transform->target_interest.x = (bounds->x_max - dist_x * tan_r) - x_off;
+    transform->target_interest.x =
+        (FMA_SUB_MUL(bounds->x_max, dist_x, tan_r)) - x_off;
     transform->target_interest.z = 0.0f;
     dist_y = (dist_y > dist_x) ? dist_y : dist_x;
     cam_dist = dist_y;
@@ -951,10 +954,10 @@ void Camera_ApplyQuake(CameraBounds* bounds, CameraTransformState* state)
             (bounds->z_pos - Stage_GetCamZoomRate()) / depth_factor_x;
     }
 
-    depth_factor_y =
-        (depth_ratio * (cm_803BCCA0.x5C - cm_803BCCA0.x54)) + cm_803BCCA0.x54;
-    depth_factor_x =
-        (depth_ratio * (cm_803BCCA0.x60 - cm_803BCCA0.x58)) + cm_803BCCA0.x58;
+    depth_factor_y = FMA_MUL_ADD(
+        depth_ratio, (cm_803BCCA0.x5C - cm_803BCCA0.x54), cm_803BCCA0.x54);
+    depth_factor_x = FMA_MUL_ADD(
+        depth_ratio, (cm_803BCCA0.x60 - cm_803BCCA0.x58), cm_803BCCA0.x58);
     Camera_80030DE4(depth_factor_x * (input_x * viewport_x_scale),
                     depth_factor_y * (input_y * viewport_y_scale));
     game_camera.quake_offset.x = 0.0f;
@@ -1402,7 +1405,7 @@ void Camera_8002B0E0(void)
         } else {
             game_camera.x2BA = cm_803BCCA0.xE0;
         }
-        game_camera.x2BC -= var_f2 * cm_803BCCA0.xD4;
+        FMA_SUB_FROM(game_camera.x2BC, var_f2, cm_803BCCA0.xD4);
         if (game_camera.x2BC < cm_803BCCA0.xDC) {
             game_camera.x2BC = cm_803BCCA0.xDC;
             return;
@@ -1509,7 +1512,7 @@ static inline void update_transform(CameraBounds* bounds,
     Camera_8002958C(bounds, ts);
     ts->target_fov = cm_803BCCA0.x40;
     delta = ts->target_fov - ts->fov;
-    ts->fov += delta * cm_803BCCA0.x44;
+    FMA_ADD_TO(ts->fov, delta, cm_803BCCA0.x44);
     Camera_80029BC4(bounds, ts);
 
     if (!fighter_z_out_of_range(&fighter_pos)) {
@@ -1736,9 +1739,9 @@ void Camera_8002BAA8(f32 zoom_amt)
         game_camera.pause_eye_distance = 10.0F;
     }
 
-    game_camera.pause_eye_distance =
-        ((zoom_amt * ((offset_len * cm_803BCCA0.x9C) + cm_803BCCA0.xA0)) +
-         game_camera.pause_eye_distance);
+    game_camera.pause_eye_distance = (FMA_MUL_ADD(
+        zoom_amt, (FMA_MUL_ADD(offset_len, cm_803BCCA0.x9C, cm_803BCCA0.xA0)),
+        game_camera.pause_eye_distance));
 
     if (game_camera.pause_eye_distance < game_camera.x2D0.unk28) {
         game_camera.pause_eye_distance = game_camera.x2D0.unk28;
@@ -1834,7 +1837,7 @@ void Camera_8002BD88(f32 x, f32 y)
     game_camera.pause_up = up;
 
     if (y != 0.0F) {
-        scale = y * ((view_dir * cm_803BCCA0.xBC) + cm_803BCCA0.xC0);
+        scale = y * (FMA_MUL_ADD(view_dir, cm_803BCCA0.xBC, cm_803BCCA0.xC0));
         up.x *= scale;
         up.y *= scale;
         up.z *= scale;
@@ -1842,7 +1845,7 @@ void Camera_8002BD88(f32 x, f32 y)
     }
 
     if (x != 0.0F) {
-        scale = x * ((view_dir * cm_803BCCA0.xBC) + cm_803BCCA0.xC0);
+        scale = x * (FMA_MUL_ADD(view_dir, cm_803BCCA0.xBC, cm_803BCCA0.xC0));
         right.x *= -scale;
         right.y *= -scale;
         right.z *= -scale;
@@ -1884,7 +1887,8 @@ void Camera_8002C010(f32 farg0, f32 farg1)
     Camera_8002BC78(&forward, &up, &right);
 
     if (farg1 != 0.0f) {
-        movement_scale = (eye_dist * cm_803BCCA0.xB4) + cm_803BCCA0.xB8;
+        movement_scale =
+            FMA_MUL_ADD(eye_dist, cm_803BCCA0.xB4, cm_803BCCA0.xB8);
         scale = farg1 * movement_scale;
         up.x *= scale;
         up.y *= scale;
@@ -1893,7 +1897,8 @@ void Camera_8002C010(f32 farg0, f32 farg1)
     }
 
     if (farg0 != 0.0f) {
-        scale = farg0 * ((eye_dist * cm_803BCCA0.xB4) + cm_803BCCA0.xB8);
+        scale =
+            farg0 * (FMA_MUL_ADD(eye_dist, cm_803BCCA0.xB4, cm_803BCCA0.xB8));
         right.x *= -scale;
         right.y *= -scale;
         right.z *= -scale;
@@ -1910,7 +1915,7 @@ static inline void Camera_8002C1A8_inline(void)
 
 static inline f32 getPauseScale(void)
 {
-    return game_camera.x32C * cm_803BCCA0.x8C + cm_803BCCA0.x90;
+    return FMA_MUL_ADD(game_camera.x32C, cm_803BCCA0.x8C, cm_803BCCA0.x90);
 }
 
 void Camera_8002C1A8(void)
@@ -2037,7 +2042,7 @@ void Camera_8002C1A8(void)
 
 static inline float eye_offset_len(Vec3* offset)
 {
-    return sqrtf((offset->z * offset->z) +
+    return sqrtf(offset->z * offset->z +
                  (offset->x * offset->x + offset->y * offset->y));
 }
 
@@ -2289,7 +2294,7 @@ void Camera_8002C908(void* arg0)
 
     game_camera.transform.target_fov = game_camera.x32C;
     delta = game_camera.transform.target_fov - game_camera.transform.fov;
-    game_camera.transform.fov += delta * cm_803BCCA0.x88;
+    FMA_ADD_TO(game_camera.transform.fov, delta, cm_803BCCA0.x88);
 
     Camera_UpdateQuakes(&bounds);
     Camera_ApplyQuake(&bounds, &game_camera.transform);
@@ -2440,7 +2445,7 @@ void Camera_8002CDDC(void* unused)
         track_subject(transform, &interest_diff, &eye_diff);
         game_camera.transform.target_fov = cm_803BCCA0.x6C;
         delta = game_camera.transform.target_fov - game_camera.transform.fov;
-        game_camera.transform.fov += delta * cm_803BCCA0.x70;
+        FMA_ADD_TO(game_camera.transform.fov, delta, cm_803BCCA0.x70);
         return;
     }
 
@@ -2518,10 +2523,10 @@ void Camera_8002D318(void* unused)
             pos = get_subject_x1C(subject);
             half_z = 0.5f * subject->ext.v.z;
             game_camera.transform.target_interest.x =
-                -((half_z * cosf(game_camera.yaw_offset)) - pos->x);
+                -(FMA_MUL_SUB(half_z, cosf(game_camera.yaw_offset), pos->x));
             game_camera.transform.target_interest.y = pos->y;
             game_camera.transform.target_interest.z =
-                (half_z * sinf(game_camera.yaw_offset)) + pos->z;
+                FMA_MUL_ADD(half_z, sinf(game_camera.yaw_offset), pos->z);
             dx = game_camera.transform.target_interest.x -
                  game_camera.transform.interest.x;
             smooth = cm_803BCCA0.x64;
@@ -2529,14 +2534,14 @@ void Camera_8002D318(void* unused)
                  game_camera.transform.interest.y;
             dz = game_camera.transform.target_interest.z -
                  game_camera.transform.interest.z;
-            game_camera.transform.interest.x += dx * smooth;
-            game_camera.transform.interest.y += dy * smooth;
-            game_camera.transform.interest.z += dz * smooth;
+            FMA_ADD_TO(game_camera.transform.interest.x, dx, smooth);
+            FMA_ADD_TO(game_camera.transform.interest.y, dy, smooth);
+            FMA_ADD_TO(game_camera.transform.interest.z, dz, smooth);
         }
 
         game_camera.transform.target_fov = cm_803BCCA0.x6C;
         delta = game_camera.transform.target_fov - game_camera.transform.fov;
-        game_camera.transform.fov += delta * cm_803BCCA0.x70;
+        FMA_ADD_TO(game_camera.transform.fov, delta, cm_803BCCA0.x70);
 
         {
             s32 slot = game_camera.x2C4;
@@ -2554,14 +2559,14 @@ void Camera_8002D318(void* unused)
 
         horiz_dist = distance * cosf(game_camera.pitch_offset);
         game_camera.transform.target_position.x =
-            horiz_dist * sinf(game_camera.yaw_offset) +
-            game_camera.transform.target_interest.x;
+            FMA_MUL_ADD(horiz_dist, sinf(game_camera.yaw_offset),
+                        game_camera.transform.target_interest.x);
         game_camera.transform.target_position.y =
-            distance * sinf(game_camera.pitch_offset) +
-            game_camera.transform.target_interest.y;
+            FMA_MUL_ADD(distance, sinf(game_camera.pitch_offset),
+                        game_camera.transform.target_interest.y);
         game_camera.transform.target_position.z =
-            horiz_dist * cosf(game_camera.yaw_offset) +
-            game_camera.transform.target_interest.z;
+            FMA_MUL_ADD(horiz_dist, cosf(game_camera.yaw_offset),
+                        game_camera.transform.target_interest.z);
         dx2 = game_camera.transform.target_position.x -
               game_camera.transform.position.x;
         smooth2 = cm_803BCCA0.x68;
@@ -2569,9 +2574,9 @@ void Camera_8002D318(void* unused)
               game_camera.transform.position.y;
         dz2 = game_camera.transform.target_position.z -
               game_camera.transform.position.z;
-        game_camera.transform.position.x += dx2 * smooth2;
-        game_camera.transform.position.y += dy2 * smooth2;
-        game_camera.transform.position.z += dz2 * smooth2;
+        FMA_ADD_TO(game_camera.transform.position.x, dx2, smooth2);
+        FMA_ADD_TO(game_camera.transform.position.y, dy2, smooth2);
+        FMA_ADD_TO(game_camera.transform.position.z, dz2, smooth2);
         return;
     }
 
@@ -2624,14 +2629,14 @@ void Camera_8002D85C(void* unused)
                  game_camera.transform.interest.y;
             dz = game_camera.transform.target_interest.z -
                  game_camera.transform.interest.z;
-            game_camera.transform.interest.x += dx * smooth;
-            game_camera.transform.interest.y += dy * smooth;
-            game_camera.transform.interest.z += dz * smooth;
+            FMA_ADD_TO(game_camera.transform.interest.x, dx, smooth);
+            FMA_ADD_TO(game_camera.transform.interest.y, dy, smooth);
+            FMA_ADD_TO(game_camera.transform.interest.z, dz, smooth);
         }
 
         game_camera.transform.target_fov = cm_803BCCA0.x6C;
         delta = game_camera.transform.target_fov - game_camera.transform.fov;
-        game_camera.transform.fov += delta * cm_803BCCA0.x70;
+        FMA_ADD_TO(game_camera.transform.fov, delta, cm_803BCCA0.x70);
 
         {
             s32 slot = game_camera.x2C4;
@@ -2662,14 +2667,14 @@ void Camera_8002D85C(void* unused)
 
         horiz_dist = distance * cosf(game_camera.pitch_offset);
         game_camera.transform.target_position.x =
-            horiz_dist * sinf(game_camera.yaw_offset) +
-            game_camera.transform.target_interest.x;
+            FMA_MUL_ADD(horiz_dist, sinf(game_camera.yaw_offset),
+                        game_camera.transform.target_interest.x);
         game_camera.transform.target_position.y =
-            distance * sinf(game_camera.pitch_offset) +
-            game_camera.transform.target_interest.y;
+            FMA_MUL_ADD(distance, sinf(game_camera.pitch_offset),
+                        game_camera.transform.target_interest.y);
         game_camera.transform.target_position.z =
-            horiz_dist * cosf(game_camera.yaw_offset) +
-            game_camera.transform.target_interest.z;
+            FMA_MUL_ADD(horiz_dist, cosf(game_camera.yaw_offset),
+                        game_camera.transform.target_interest.z);
         dx2 = game_camera.transform.target_position.x -
               game_camera.transform.position.x;
         smooth2 = cm_803BCCA0.x68;
@@ -2677,9 +2682,9 @@ void Camera_8002D85C(void* unused)
               game_camera.transform.position.y;
         dz2 = game_camera.transform.target_position.z -
               game_camera.transform.position.z;
-        game_camera.transform.position.x += dx2 * smooth2;
-        game_camera.transform.position.y += dy2 * smooth2;
-        game_camera.transform.position.z += dz2 * smooth2;
+        FMA_ADD_TO(game_camera.transform.position.x, dx2, smooth2);
+        FMA_ADD_TO(game_camera.transform.position.y, dy2, smooth2);
+        FMA_ADD_TO(game_camera.transform.position.z, dz2, smooth2);
         return;
     }
 
@@ -2715,9 +2720,9 @@ smooth_fixed_camera_interest(CameraTransformState* transform_copy, Camera* cam,
         cam->transform_copy.target_interest.y - cam->transform_copy.interest.y;
     dz =
         cam->transform_copy.target_interest.z - cam->transform_copy.interest.z;
-    cam->transform_copy.interest.x += dx * globals->x74;
-    cam->transform_copy.interest.y += dy * globals->x74;
-    cam->transform_copy.interest.z += dz * globals->x74;
+    FMA_ADD_TO(cam->transform_copy.interest.x, dx, globals->x74);
+    FMA_ADD_TO(cam->transform_copy.interest.y, dy, globals->x74);
+    FMA_ADD_TO(cam->transform_copy.interest.z, dz, globals->x74);
 }
 
 void Camera_8002DDC4(void* unused)
@@ -2749,9 +2754,12 @@ void Camera_8002DDC4(void* unused)
         smooth = globals->x74;
         dy = cam->transform.target_interest.y - cam->transform.interest.y;
         dz = cam->transform.target_interest.z - cam->transform.interest.z;
-        cam->transform.interest.x = dx * smooth + cam->transform.interest.x;
-        cam->transform.interest.y = dy * smooth + cam->transform.interest.y;
-        cam->transform.interest.z = dz * smooth + cam->transform.interest.z;
+        cam->transform.interest.x =
+            FMA_MUL_ADD(dx, smooth, cam->transform.interest.x);
+        cam->transform.interest.y =
+            FMA_MUL_ADD(dy, smooth, cam->transform.interest.y);
+        cam->transform.interest.z =
+            FMA_MUL_ADD(dz, smooth, cam->transform.interest.z);
     }
     smooth_fixed_camera_interest(transform_copy, cam, globals);
     cam->transform.target_fov = Stage_GetCamFixedFov();
@@ -2759,7 +2767,7 @@ void Camera_8002DDC4(void* unused)
         f32 delta;
 
         delta = cam->transform.target_fov - cam->transform.fov;
-        cam->transform.fov += delta * globals->x7C;
+        FMA_ADD_TO(cam->transform.fov, delta, globals->x7C);
     }
     cam->transform_copy.target_fov = Stage_GetCamFixedFov();
     target_position = &transform->target_position;
@@ -2767,7 +2775,7 @@ void Camera_8002DDC4(void* unused)
         f32 delta;
 
         delta = cam->transform_copy.target_fov - cam->transform_copy.fov;
-        cam->transform_copy.fov += delta * globals->x7C;
+        FMA_ADD_TO(cam->transform_copy.fov, delta, globals->x7C);
     }
     Stage_SetVecToFixedCamPos(target_position);
     {
@@ -2775,9 +2783,12 @@ void Camera_8002DDC4(void* unused)
         smooth = globals->x78;
         dy = cam->transform.target_position.y - cam->transform.position.y;
         dz = cam->transform.target_position.z - cam->transform.position.z;
-        cam->transform.position.x = dx * smooth + cam->transform.position.x;
-        cam->transform.position.y = dy * smooth + cam->transform.position.y;
-        cam->transform.position.z = dz * smooth + cam->transform.position.z;
+        cam->transform.position.x =
+            FMA_MUL_ADD(dx, smooth, cam->transform.position.x);
+        cam->transform.position.y =
+            FMA_MUL_ADD(dy, smooth, cam->transform.position.y);
+        cam->transform.position.z =
+            FMA_MUL_ADD(dz, smooth, cam->transform.position.z);
     }
     Stage_SetVecToFixedCamPos(&transform_copy->target_position);
     {
@@ -2789,11 +2800,11 @@ void Camera_8002DDC4(void* unused)
         dz = cam->transform_copy.target_position.z -
              cam->transform_copy.position.z;
         cam->transform_copy.position.x =
-            dx * smooth + cam->transform_copy.position.x;
+            FMA_MUL_ADD(dx, smooth, cam->transform_copy.position.x);
         cam->transform_copy.position.y =
-            dy * smooth + cam->transform_copy.position.y;
+            FMA_MUL_ADD(dy, smooth, cam->transform_copy.position.y);
         cam->transform_copy.position.z =
-            dz * smooth + cam->transform_copy.position.z;
+            FMA_MUL_ADD(dz, smooth, cam->transform_copy.position.z);
     }
     set_bounds_z(&bounds, target_interest, target_position);
     Camera_UpdateQuakes(&bounds);
@@ -2871,7 +2882,7 @@ bool Camera_8002E158(f32* arg0, f32 farg0, f32 farg1)
     if (ret) {
         *arg0 = farg1;
     } else {
-        *arg0 = (var_f4 * (farg1 - farg0)) + farg0;
+        *arg0 = FMA_MUL_ADD(var_f4, (farg1 - farg0), farg0);
     }
 
     return ret;
@@ -3014,8 +3025,8 @@ void Camera_8002E490(void* unused)
         }
         break;
     case 2:
-        game_camera.x378.f32_v +=
-            (1.0f - game_camera.x378.f32_v) * game_camera.x37C.f32_v;
+        FMA_ADD_TO(game_camera.x378.f32_v, (1.0f - game_camera.x378.f32_v),
+                   game_camera.x37C.f32_v);
         if (getX378() > 0.999f) {
             game_camera.x378.f32_v = 1.0f;
         }
@@ -3599,14 +3610,16 @@ void Camera_8002F7AC(s8 slot)
             randf = HSD_Randf();
             // pitch between +-pi/16
             // (M_PI_8 * randf) - M_PI_16
-            game_camera.pitch_offset = (((M_PI / 8) * randf) - (M_PI / 16));
+            game_camera.pitch_offset =
+                (FMA_MUL_SUB((M_PI / 8), randf, (M_PI / 16)));
             return;
         }
     }
     // random pitch and yaw if no player or cambox
-    game_camera.pitch_offset = (((M_PI / 8) * HSD_Randf()) - (M_PI / 16));
+    game_camera.pitch_offset =
+        (FMA_MUL_SUB((M_PI / 8), HSD_Randf(), (M_PI / 16)));
     randf = HSD_Randf();
-    game_camera.yaw_offset = ((M_TAU * randf) - M_PI);
+    game_camera.yaw_offset = (FMA_MUL_SUB(M_TAU, randf, M_PI));
 }
 
 void Camera_SetModeToFixed(void)
@@ -3744,7 +3757,7 @@ void Camera_8002FC7C(s8 arg0, s8 arg1)
     game_camera.x2D0.angle_down = Stage_GetCamAngleRadiansDown();
     game_camera.x2D0.angle_right = Stage_GetCamAngleRadiansRight();
     game_camera.x2D0.angle_left = Stage_GetCamAngleRadiansLeft();
-    temp_f2 = (game_camera.x32C * (*new_var).x8C) + (*new_var).x90;
+    temp_f2 = FMA_MUL_ADD(game_camera.x32C, (*new_var).x8C, (*new_var).x90);
     game_camera.x2D0.unk28 = temp_f2 * (*new_var).x94;
     game_camera.x2D0.unk2C = temp_f2 * (*new_var).x98;
     game_camera.x2D0.callback = (void (*)(Camera_x2D0*))(Event) fn_8002FBA0;
@@ -4105,7 +4118,7 @@ void Camera_GetTransformInterest(Vec* arg0)
 static inline void project_ground_x(f32* value, Vec3* eye_pos, f32 dir_x,
                                     f32 dir_z)
 {
-    *value = -((dir_x * (eye_pos->z / dir_z)) - eye_pos->x);
+    *value = -(FMA_MUL_SUB(dir_x, (eye_pos->z / dir_z), eye_pos->x));
 }
 
 static inline bool same_side(f32 fwd_z, f32 dir_z)
@@ -4149,8 +4162,8 @@ bool Camera_800307D0(f32* left, f32* center, f32* right)
         /// @todo would make more sense if these two blocks were the inlines
         s = sinf(half_fov);
         c = cosf(half_fov);
-        edge_x = (forward.x * c) + (forward.z * s);
-        edge_z = (forward.z * c) - (forward.x * s);
+        edge_x = FMA_MUL_ADD(forward.x, c, (forward.z * s));
+        edge_z = FMA_MUL_SUB(forward.z, c, (forward.x * s));
         if ((ABS(edge_z) > 0.0001L) && same_side(forward.z, edge_z)) {
             project_ground_x(left, &eye_pos, edge_x, edge_z);
         } else if (edge_x > 0.0f) {
@@ -4161,8 +4174,8 @@ bool Camera_800307D0(f32* left, f32* center, f32* right)
 
         s2 = sinf(-half_fov);
         c2 = cosf(-half_fov);
-        edge_x2 = (forward.x * c2) + (forward.z * s2);
-        edge_z2 = (forward.z * c2) - (forward.x * s2);
+        edge_x2 = FMA_MUL_ADD(forward.x, c2, (forward.z * s2));
+        edge_z2 = FMA_MUL_SUB(forward.z, c2, (forward.x * s2));
         if ((ABS(edge_z2) > 0.0001L) && same_side(forward.z, edge_z2)) {
             project_ground_x(right, &eye_pos, edge_x2, edge_z2);
         } else if (edge_x2 > 0.0f) {

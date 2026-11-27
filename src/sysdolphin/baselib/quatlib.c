@@ -3,6 +3,8 @@
 #include <math.h>
 #include <placeholder.h>
 
+#include <Runtime/fma.h>
+
 s32 MatToQuat(Mtx m, Quaternion* q)
 {
     f32 q3[3];
@@ -81,10 +83,15 @@ s32 QuatMul(Quaternion* p, Quaternion* q, Quaternion* out)
     f32 z;
     f32 w;
 
-    x = q->w * p->x + p->w * q->x + (p->y * q->z - q->y * p->z);
-    y = q->w * p->y + p->w * q->y + (q->x * p->z - p->x * q->z);
-    z = q->w * p->z + p->w * q->z + (p->x * q->y - q->x * p->y);
-    w = p->w * q->w - (p->z * q->z + (p->x * q->x + p->y * q->y));
+    x = FMA_MUL_ADD(q->w, p->x, p->w * q->x) +
+        (FMA_MUL_SUB(p->y, q->z, q->y * p->z));
+    y = FMA_MUL_ADD(q->w, p->y, p->w * q->y) +
+        (FMA_MUL_SUB(q->x, p->z, p->x * q->z));
+    z = FMA_MUL_ADD(q->w, p->z, p->w * q->z) +
+        (FMA_MUL_SUB(p->x, q->y, q->x * p->y));
+    w = FMA_MUL_SUB(
+        p->w, q->w,
+        (FMA_MUL_ADD(p->z, q->z, (FMA_MUL_ADD(p->x, q->x, p->y * q->y)))));
 
     out->x = x;
     out->y = y;
@@ -137,10 +144,10 @@ s32 EulerToQuat(Vec3* euler, Quaternion* q)
 
     ss = sy * sz;
     cc = cy * cz;
-    q->w = cx * cc + sx * ss;
-    q->x = sx * cc - cx * ss;
-    q->y = cz * (cx * sy) + sz * (sx * cy);
-    q->z = sz * (cx * cy) - cz * (sx * sy);
+    q->w = FMA_MUL_ADD(cx, cc, sx * ss);
+    q->x = FMA_MUL_SUB(sx, cc, cx * ss);
+    q->y = FMA_MUL_ADD(cz, (cx * sy), sz * (sx * cy));
+    q->z = FMA_MUL_SUB(sz, (cx * cy), cz * (sx * sy));
 
     return 0;
 }
@@ -154,7 +161,9 @@ s32 QuatSlerp(Quaternion* p, Quaternion* q, Quaternion* out, f32 t)
     f32 sp;
     f32 sq;
 
-    cosom = p->x * q->x + p->y * q->y + p->z * q->z + p->w * q->w;
+    cosom = FMA_ADD_MUL(
+        FMA_ADD_MUL(FMA_MUL_ADD(p->x, q->x, p->y * q->y), p->z, q->z), p->w,
+        q->w);
 
     if ((1.0F + cosom) > 1e-10F) {
         if ((1.0F - cosom) > 1e-10F) {
@@ -166,10 +175,10 @@ s32 QuatSlerp(Quaternion* p, Quaternion* q, Quaternion* out, f32 t)
             sq = t;
             sp = (f32) (1.0 - (f64) t);
         }
-        out->x = sp * p->x + sq * q->x;
-        out->y = sp * p->y + sq * q->y;
-        out->z = sp * p->z + sq * q->z;
-        out->w = sp * p->w + sq * q->w;
+        out->x = FMA_MUL_ADD(sp, p->x, sq * q->x);
+        out->y = FMA_MUL_ADD(sp, p->y, sq * q->y);
+        out->z = FMA_MUL_ADD(sp, p->z, sq * q->z);
+        out->w = FMA_MUL_ADD(sp, p->w, sq * q->w);
     } else {
         out->x = -p->y;
         out->y = p->x;
@@ -177,21 +186,21 @@ s32 QuatSlerp(Quaternion* p, Quaternion* q, Quaternion* out, f32 t)
         out->w = p->z;
 
         if (t < 0.5F) {
-            sp = sinf((f32) (M_PI_2 * (1.0F - (2.0F * t))));
+            sp = sinf((f32) (M_PI_2 * (1.0F - 2.0F * t)));
             sq = sinf((f32) (M_PI_2 * (2.0F * t)));
-            out->x = sp * p->x + sq * q->x;
-            out->y = sp * p->y + sq * q->y;
-            out->z = sp * p->z + sq * q->z;
-            out->w = sp * p->w + sq * q->w;
+            out->x = FMA_MUL_ADD(sp, p->x, sq * q->x);
+            out->y = FMA_MUL_ADD(sp, p->y, sq * q->y);
+            out->z = FMA_MUL_ADD(sp, p->z, sq * q->z);
+            out->w = FMA_MUL_ADD(sp, p->w, sq * q->w);
         } else {
             t -= 0.5F;
             t2 = 2.0F * t;
             sp = sinf((f32) (M_PI_2 * (1.0F - t2)));
             sq = sinf((f32) (M_PI_2 * t2));
-            out->x = sp * p->x + sq * q->x;
-            out->y = sp * p->y + sq * q->y;
-            out->z = sp * p->z + sq * q->z;
-            out->w = sp * p->w + sq * q->w;
+            out->x = FMA_MUL_ADD(sp, p->x, sq * q->x);
+            out->y = FMA_MUL_ADD(sp, p->y, sq * q->y);
+            out->z = FMA_MUL_ADD(sp, p->z, sq * q->z);
+            out->w = FMA_MUL_ADD(sp, p->w, sq * q->w);
         }
     }
 

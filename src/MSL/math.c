@@ -1,5 +1,7 @@
 #include "math.h"
 
+#include <Runtime/fma.h>
+
 #define EXP_MASK 0x7F800000
 #define EXP_ZERO 0x3F800000 // hex representation of (float)0.0f
 #define MANT_MASK 0x007FFFFF
@@ -95,10 +97,11 @@ float logf(float x)
 
             H = F32_BIT_CAST(raw_fM) - F32_BIT_CAST(raw_fm);
             H = H * __one_over_F[m];
-            h2_poly = H * H * (H * *(float*) &coef[1] + *(float*) &coef[0]);
-            return (LN2 * (float) E + __ln_F[m]) + (H + h2_poly);
+            h2_poly = H * H *
+                      (FMA_MUL_ADD(H, *(float*) &coef[1], *(float*) &coef[0]));
+            return (FMA_MUL_ADD(LN2, (float) E, __ln_F[m])) + (H + h2_poly);
         }
-        return LN2 * (float) E + __ln_F[m];
+        return FMA_MUL_ADD(LN2, (float) E, __ln_F[m]);
     }
     case EXP_MASK: {
         if (*(u32*) &x & MANT_MASK) {

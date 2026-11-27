@@ -12,6 +12,7 @@
 #include <melee/ft/ftcommon.h>
 #include <melee/ft/types.h>
 #include <melee/pl/player.h>
+#include <Runtime/fma.h>
 
 bool ftCo_800C44CC(Fighter_GObj* gobj)
 {
@@ -35,12 +36,14 @@ static void commonCall(Fighter* fp)
 {
     ftCommon_InitGrab(
         fp, 0,
-        (fp->dmg.x1830_percent * p_ftCommonData->released_inputs) +
-            (p_ftCommonData->x65C *
-                 (p_ftCommonData->x660 - Player_GetHandicap(fp->player_idx)) +
-             p_ftCommonData->x658 +
+        FMA_MUL_ADD(
+            fp->dmg.x1830_percent, p_ftCommonData->released_inputs,
+            (FMA_MUL_ADD(
+                 p_ftCommonData->x65C,
+                 (p_ftCommonData->x660 - Player_GetHandicap(fp->player_idx)),
+                 p_ftCommonData->x658) +
              p_ftCommonData->x664 * (p_ftCommonData->pressed_inputs -
-                                     (Player_80033BB8(fp->player_idx) + 1))));
+                                     (Player_80033BB8(fp->player_idx) + 1)))));
 }
 
 void ftCo_800C4550(Fighter_GObj* gobj)

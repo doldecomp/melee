@@ -8,6 +8,7 @@
 #include <melee/ft/ftlib.h>
 #include <melee/ft/types.h>
 #include <melee/gr/ground.h>
+#include <Runtime/fma.h>
 #include <sysdolphin/baselib/cobj.h>
 #include <sysdolphin/baselib/debug.h>
 #include <sysdolphin/baselib/gobj.h>
@@ -27,18 +28,26 @@ static void splGetCardinalTangent(Vec3* p, Vec3* cp, f32 tension, f32 u)
     f32 u2 = u * u;
     f32 car0, car1, car2, car3;
 
-    car0 = tension * (((-3.0F * u2) + (4.0F * u)) - 1.0F);
-    car1 = (3.0F * (2.0F - tension) * u2) + (2.0F * (tension - 3.0F) * u);
-    car2 = tension + ((3.0F * (tension - 2.0F) * u2) +
-                      (2.0F * -((2.0F * tension) - 3.0F) * u));
-    car3 = tension * ((3.0F * u2) - (2.0F * u));
+    car0 = tension * ((FMA_MUL_ADD(-3.0F, u2, (4.0F * u))) - 1.0F);
+    car1 = FMA_MUL_ADD(3.0F * (2.0F - tension), u2,
+                       (2.0F * (tension - 3.0F) * u));
+    car2 = tension +
+           (FMA_MUL_ADD(3.0F * (tension - 2.0F), u2,
+                        (2.0F * -(FMA_MUL_SUB(2.0F, tension, 3.0F)) * u)));
+    car3 = tension * (FMA_MUL_SUB(3.0F, u2, (2.0F * u)));
 
-    p->x = (cp[0].x * car0) + (cp[1].x * car1) + (cp[2].x * car2) +
-           (cp[3].x * car3);
-    p->y = (cp[0].y * car0) + (cp[1].y * car1) + (cp[2].y * car2) +
-           (cp[3].y * car3);
-    p->z = (cp[0].z * car0) + (cp[1].z * car1) + (cp[2].z * car2) +
-           (cp[3].z * car3);
+    p->x =
+        FMA_ADD_MUL(FMA_ADD_MUL(FMA_MUL_ADD(cp[0].x, car0, (cp[1].x * car1)),
+                                cp[2].x, car2),
+                    cp[3].x, car3);
+    p->y =
+        FMA_ADD_MUL(FMA_ADD_MUL(FMA_MUL_ADD(cp[0].y, car0, (cp[1].y * car1)),
+                                cp[2].y, car2),
+                    cp[3].y, car3);
+    p->z =
+        FMA_ADD_MUL(FMA_ADD_MUL(FMA_MUL_ADD(cp[0].z, car0, (cp[1].z * car1)),
+                                cp[2].z, car2),
+                    cp[3].z, car3);
 }
 
 static void splGetBSplineTangent(Vec3* p, Vec3* cp, f32 u)
@@ -47,13 +56,19 @@ static void splGetBSplineTangent(Vec3* p, Vec3* cp, f32 u)
     f32 u_1 = 1.0F - u;
     f32 half = 0.5F;
     f32 b0 = u_1 * (-half * u_1);
-    f32 b1 = half * ((3.0F * u2) - (4.0F * u));
-    f32 b2 = half * (1.0F + ((-3.0F * u2) + (2.0F * u)));
+    f32 b1 = half * (FMA_MUL_SUB(3.0F, u2, (4.0F * u)));
+    f32 b2 = half * (1.0F + (FMA_MUL_ADD(-3.0F, u2, (2.0F * u))));
     f32 b3 = half * u2;
 
-    p->x = (cp[0].x * b0) + (cp[1].x * b1) + (cp[2].x * b2) + (cp[3].x * b3);
-    p->y = (cp[0].y * b0) + (cp[1].y * b1) + (cp[2].y * b2) + (cp[3].y * b3);
-    p->z = (cp[0].z * b0) + (cp[1].z * b1) + (cp[2].z * b2) + (cp[3].z * b3);
+    p->x = FMA_ADD_MUL(
+        FMA_ADD_MUL(FMA_MUL_ADD(cp[0].x, b0, (cp[1].x * b1)), cp[2].x, b2),
+        cp[3].x, b3);
+    p->y = FMA_ADD_MUL(
+        FMA_ADD_MUL(FMA_MUL_ADD(cp[0].y, b0, (cp[1].y * b1)), cp[2].y, b2),
+        cp[3].y, b3);
+    p->z = FMA_ADD_MUL(
+        FMA_ADD_MUL(FMA_MUL_ADD(cp[0].z, b0, (cp[1].z * b1)), cp[2].z, b2),
+        cp[3].z, b3);
 }
 
 static void splGetBezierTangent(Vec3* p, Vec3* cp, f32 u)
@@ -61,16 +76,22 @@ static void splGetBezierTangent(Vec3* p, Vec3* cp, f32 u)
     f32 u_1 = u - 1.0F;
     f32 u2 = u * u;
     f32 bez0 = -3.0F * u_1 * u_1;
-    f32 bez1 = 3.0F * ((1.0F - (4.0F * u)) + (3.0F * u2));
-    f32 bez2 = 3.0F * ((2.0F * u) - (3.0F * u2));
+    f32 bez1 = 3.0F * ((FMA_SUB_MUL(1.0F, 4.0F, u)) + 3.0F * u2);
+    f32 bez2 = 3.0F * (FMA_MUL_SUB(2.0F, u, (3.0F * u2)));
     f32 bez3 = 3.0F * u2;
 
-    p->x = (cp[0].x * bez0) + (cp[1].x * bez1) + (cp[2].x * bez2) +
-           (cp[3].x * bez3);
-    p->y = (cp[0].y * bez0) + (cp[1].y * bez1) + (cp[2].y * bez2) +
-           (cp[3].y * bez3);
-    p->z = (cp[0].z * bez0) + (cp[1].z * bez1) + (cp[2].z * bez2) +
-           (cp[3].z * bez3);
+    p->x =
+        FMA_ADD_MUL(FMA_ADD_MUL(FMA_MUL_ADD(cp[0].x, bez0, (cp[1].x * bez1)),
+                                cp[2].x, bez2),
+                    cp[3].x, bez3);
+    p->y =
+        FMA_ADD_MUL(FMA_ADD_MUL(FMA_MUL_ADD(cp[0].y, bez0, (cp[1].y * bez1)),
+                                cp[2].y, bez2),
+                    cp[3].y, bez3);
+    p->z =
+        FMA_ADD_MUL(FMA_ADD_MUL(FMA_MUL_ADD(cp[0].z, bez0, (cp[1].z * bez1)),
+                                cp[2].z, bez2),
+                    cp[3].z, bez3);
 }
 
 void lbShadow_8000E9F0(Vec3* p, HSD_Spline* spline, f32 u)
@@ -301,11 +322,11 @@ static inline f32 my_sqrtf(f32 x)
     if (x > lbShadow_804D7B70) {
         f64 guess = __frsqrte((f64) x);
         guess = lbShadow_804D7B78 * guess *
-                (lbShadow_804D7B80 - guess * guess * x);
+                (FMA_SUB_MUL(lbShadow_804D7B80, guess * guess, x));
         guess = lbShadow_804D7B78 * guess *
-                (lbShadow_804D7B80 - guess * guess * x);
+                (FMA_SUB_MUL(lbShadow_804D7B80, guess * guess, x));
         guess = lbShadow_804D7B78 * guess *
-                (lbShadow_804D7B80 - guess * guess * x);
+                (FMA_SUB_MUL(lbShadow_804D7B80, guess * guess, x));
         y = (f32) (x * guess);
         return y;
     }
@@ -426,12 +447,12 @@ void lbShadow_8000F38C(s32 arg0)
                 upVec.y = lbShadow_804D7B88;
                 lbVector_Diff(&lightDir, &lightPos, &normDir);
                 if (lbVector_Normalize(&normDir) < lbShadow_804D7B90) {
-                    lightPos.x =
-                        -((lbShadow_804D7B90 * normDir.x) - lightDir.x);
-                    lightPos.y =
-                        -((lbShadow_804D7B90 * normDir.y) - lightDir.y);
-                    lightPos.z =
-                        -((lbShadow_804D7B90 * normDir.z) - lightDir.z);
+                    lightPos.x = -(
+                        FMA_MUL_SUB(lbShadow_804D7B90, normDir.x, lightDir.x));
+                    lightPos.y = -(
+                        FMA_MUL_SUB(lbShadow_804D7B90, normDir.y, lightDir.y));
+                    lightPos.z = -(
+                        FMA_MUL_SUB(lbShadow_804D7B90, normDir.z, lightDir.z));
                 }
                 lbVector_CrossprodNormalized(&upVec, &normDir, &rightVec);
                 lbVector_CrossprodNormalized(&normDir, &rightVec, &upVec);

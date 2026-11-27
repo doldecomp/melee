@@ -23,6 +23,7 @@
 #include <melee/ft/kinds/ftCommon/inlines.h>
 #include <melee/ft/types.h>
 #include <melee/lb/lbvector.h>
+#include <Runtime/fma.h>
 
 #define FTFOX_SPECIALHI_COLL_FLAG                                             \
     Ft_MF_KeepGfx | Ft_MF_SkipMatAnim | Ft_MF_UpdateCmd | Ft_MF_SkipColAnim | \
@@ -104,7 +105,7 @@ static void ftFox_SpecialHi_RotateModel(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftPartSetRotX(fp, ftParts_GetBoneIndex(fp, FtPart_XRotN),
-                  (2 * (float) M_PI) - fp->mv.fx.SpecialHi.rotateModel);
+                  2 * (float) M_PI - fp->mv.fx.SpecialHi.rotateModel);
 }
 
 void ftFx_SpecialHiHold_Anim(HSD_GObj* gobj)
@@ -280,13 +281,13 @@ void ftFx_SpecialAirHi_Phys(HSD_GObj* gobj)
     fp->mv.fx.SpecialHi.unk++;
 
     if (fp->mv.fx.SpecialHi.unk >= da->x70_FOX_FIREFOX_DURATION_END) {
-        fp->self_vel.x =
-            -((fp->facing_dir * (da->x78_FOX_FIREFOX_REVERSE_ACCEL *
-                                 cosf(fp->mv.fx.SpecialHi.rotateModel))) -
-              fp->self_vel.x);
-        fp->self_vel.y = -((da->x78_FOX_FIREFOX_REVERSE_ACCEL *
-                            sinf(fp->mv.fx.SpecialHi.rotateModel)) -
-                           fp->self_vel.y);
+        fp->self_vel.x = -(FMA_MUL_SUB(fp->facing_dir,
+                                       (da->x78_FOX_FIREFOX_REVERSE_ACCEL *
+                                        cosf(fp->mv.fx.SpecialHi.rotateModel)),
+                                       fp->self_vel.x));
+        fp->self_vel.y = -(FMA_MUL_SUB(da->x78_FOX_FIREFOX_REVERSE_ACCEL,
+                                       sinf(fp->mv.fx.SpecialHi.rotateModel),
+                                       fp->self_vel.y));
     }
 }
 

@@ -13,6 +13,7 @@
 #include <melee/it/itgroundcoll.h>
 #include <melee/lb/lb_00B0.h>
 #include <melee/lb/lbvector.h>
+#include <Runtime/fma.h>
 #include <sysdolphin/baselib/jobj.h>
 #include <sysdolphin/baselib/mtx.h>
 #include <sysdolphin/baselib/random.h>
@@ -94,14 +95,14 @@ u32 it_802C4D10(Item_GObj* gobj)
         ip->xDD4_itemVar.mewtwoshadowball.x40 +=
             ip->xDD4_itemVar.mewtwoshadowball.x44;
         ip->xDD4_itemVar.mewtwoshadowball.x30.x = 0.0f;
-        ip->xDD4_itemVar.mewtwoshadowball.x30.y +=
-            ip->xDD4_itemVar.mewtwoshadowball.x40 *
-            ip->xDD4_itemVar.mewtwoshadowball.x50 *
-            sinf(ip->xDD4_itemVar.mewtwoshadowball.x3C);
-        ip->xDD4_itemVar.mewtwoshadowball.x30.z +=
-            ip->xDD4_itemVar.mewtwoshadowball.x40 *
-            ip->xDD4_itemVar.mewtwoshadowball.x50 *
-            cosf(ip->xDD4_itemVar.mewtwoshadowball.x3C);
+        FMA_ADD_TO(ip->xDD4_itemVar.mewtwoshadowball.x30.y,
+                   ip->xDD4_itemVar.mewtwoshadowball.x40 *
+                       ip->xDD4_itemVar.mewtwoshadowball.x50,
+                   sinf(ip->xDD4_itemVar.mewtwoshadowball.x3C));
+        FMA_ADD_TO(ip->xDD4_itemVar.mewtwoshadowball.x30.z,
+                   ip->xDD4_itemVar.mewtwoshadowball.x40 *
+                       ip->xDD4_itemVar.mewtwoshadowball.x50,
+                   cosf(ip->xDD4_itemVar.mewtwoshadowball.x3C));
     } else {
         ip->xDD4_itemVar.mewtwoshadowball.x30.z = 0.0f;
         ip->xDD4_itemVar.mewtwoshadowball.x30.y = 0.0f;
@@ -227,19 +228,17 @@ Item_GObj* it_802C519C(Item_GObj* parent, Vec3* pos, s32 kind, s32 max_charge,
         ip->xDD4_itemVar.mewtwoshadowball.x20 = 0;
         {
             f32 base = attr->x18;
-            ip->xDD4_itemVar.mewtwoshadowball.x10 =
-                (ip->xDD4_itemVar.mewtwoshadowball.x18 *
-                 ((attr->x1C - base) /
-                  ip->xDD4_itemVar.mewtwoshadowball.x1C)) +
-                base;
+            ip->xDD4_itemVar.mewtwoshadowball.x10 = FMA_MUL_ADD(
+                ip->xDD4_itemVar.mewtwoshadowball.x18,
+                ((attr->x1C - base) / ip->xDD4_itemVar.mewtwoshadowball.x1C),
+                base);
         }
         {
             f32 base = attr->x10;
-            ip->xDD4_itemVar.mewtwoshadowball.x24 =
-                ((ip->xDD4_itemVar.mewtwoshadowball.x18 *
-                  ((attr->x14 - base) /
-                   ip->xDD4_itemVar.mewtwoshadowball.x1C)) +
-                 base);
+            ip->xDD4_itemVar.mewtwoshadowball.x24 = (FMA_MUL_ADD(
+                ip->xDD4_itemVar.mewtwoshadowball.x18,
+                ((attr->x14 - base) / ip->xDD4_itemVar.mewtwoshadowball.x1C),
+                base));
         }
         ip->x40_vel.x = ip->xDD4_itemVar.mewtwoshadowball.x4.y *
                         cosf(ip->xDD4_itemVar.mewtwoshadowball.x4.x);
@@ -289,21 +288,20 @@ void it_802C53F0(Item_GObj* gobj, Vec3* pos, float angle, float charge,
         {
             f32 base = attr->x8;
             ip->xDD4_itemVar.mewtwoshadowball.x4.y =
-                base + (charge * ((attr->xC - base) / max_charge));
+                FMA_ADD_MUL(base, charge, ((attr->xC - base) / max_charge));
         }
         {
             f32 base = attr->x10;
-            ip->xDD4_itemVar.mewtwoshadowball.x24 =
-                (u32) ((charge * ((attr->x14 - base) / max_charge)) + base);
+            ip->xDD4_itemVar.mewtwoshadowball.x24 = (u32) (FMA_MUL_ADD(
+                charge, ((attr->x14 - base) / max_charge), base));
         }
         ip->xDD4_itemVar.mewtwoshadowball.x4.z = 0.0f;
         {
             f32 base = attr->x18;
-            ip->xDD4_itemVar.mewtwoshadowball.x10 =
-                (ip->xDD4_itemVar.mewtwoshadowball.x18 *
-                 ((attr->x1C - base) /
-                  ip->xDD4_itemVar.mewtwoshadowball.x1C)) +
-                base;
+            ip->xDD4_itemVar.mewtwoshadowball.x10 = FMA_MUL_ADD(
+                ip->xDD4_itemVar.mewtwoshadowball.x18,
+                ((attr->x1C - base) / ip->xDD4_itemVar.mewtwoshadowball.x1C),
+                base);
         }
         ip->xDD4_itemVar.mewtwoshadowball.x20 = 0;
         ip->facing_dir =
@@ -429,10 +427,10 @@ bool itMewtwoshadowball_UnkMotion0_Anim(Item_GObj* gobj)
             break;
         }
     }
-    scale.x = scale.y = scale.z =
-        (ip->xDD4_itemVar.mewtwoshadowball.x18 *
-         ((attr->x1C - attr->x18) / ip->xDD4_itemVar.mewtwoshadowball.x1C)) +
-        attr->x18;
+    scale.x = scale.y = scale.z = FMA_MUL_ADD(
+        ip->xDD4_itemVar.mewtwoshadowball.x18,
+        ((attr->x1C - attr->x18) / ip->xDD4_itemVar.mewtwoshadowball.x1C),
+        attr->x18);
     HSD_JObjSetScale(grandchild, &scale);
     if (ip->xDD4_itemVar.mewtwoshadowball.x58.x == 0.0f &&
         ip->xDD4_itemVar.mewtwoshadowball.x58.y == 0.0f &&
@@ -479,9 +477,10 @@ void it_802C5B18(Item_GObj* gobj, Item_GObj* arg1)
                   ITEM_ANIM_UPDATE);
     ip->on_accessory = fn_802C5E18;
     ip->xDD4_itemVar.mewtwoshadowball.x50 =
-        0.5F * ((f32) ip->xDD4_itemVar.mewtwoshadowball.x18 /
-                ip->xDD4_itemVar.mewtwoshadowball.x1C) +
-        0.5F;
+        FMA_MUL_ADD(0.5F,
+                    ((f32) ip->xDD4_itemVar.mewtwoshadowball.x18 /
+                     ip->xDD4_itemVar.mewtwoshadowball.x1C),
+                    0.5F);
 }
 
 bool itMewtwoshadowball_UnkMotion8_Anim(Item_GObj* gobj)

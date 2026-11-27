@@ -9,6 +9,7 @@
 #include <melee/ft/ftparts.h>
 #include <melee/ft/inlines.h>
 #include <melee/ft/types.h>
+#include <Runtime/fma.h>
 #include <sysdolphin/baselib/random.h>
 
 struct _m2c_stack_ftCo_8009F834 {
@@ -80,12 +81,12 @@ void ftCo_8009F834(Fighter_GObj* gobj, int arg1, enum Fighter_Part part,
     if (gfx_id < 0x250 || gfx_id / 1000 == 0x1E) {
         spA8 = *arg5;
         rand_val = HSD_Randf();
-        spA8.x += 2.0f * arg6->x * (rand_val - 0.5f);
+        FMA_ADD_TO(spA8.x, 2.0f * arg6->x, (rand_val - 0.5f));
         rand_val = HSD_Randf();
-        spA8.y += 2.0f * arg6->y * (rand_val - 0.5f);
+        FMA_ADD_TO(spA8.y, 2.0f * arg6->y, (rand_val - 0.5f));
         rand_val = HSD_Randf();
         z_spread = 2.0f * arg6->z;
-        spA8.z += z_spread * (rand_val - 0.5f);
+        FMA_ADD_TO(spA8.z, z_spread, (rand_val - 0.5f));
         efAsync_Spawn(gobj, &GET_FIGHTER(gobj)->x60C, 2, gfx_id,
                       fp->parts[part].joint, &spA8);
         return;
@@ -167,12 +168,12 @@ void ftCo_8009F834(Fighter_GObj* gobj, int arg1, enum Fighter_Part part,
     default:
         sp84 = *arg5;
         random_or_angle = HSD_Randf();
-        sp84.x += 2.0f * arg6->x * (random_or_angle - 0.5f);
+        FMA_ADD_TO(sp84.x, 2.0f * arg6->x, (random_or_angle - 0.5f));
         random_or_angle = HSD_Randf();
-        sp84.y += 2.0f * arg6->y * (random_or_angle - 0.5f);
+        FMA_ADD_TO(sp84.y, 2.0f * arg6->y, (random_or_angle - 0.5f));
         random_or_angle = HSD_Randf();
         z_range = 2.0f * arg6->z;
-        sp84.z += z_range * (random_or_angle - 0.5f);
+        FMA_ADD_TO(sp84.z, z_range, (random_or_angle - 0.5f));
         switch (gfx_id) {
         case 0x3E8: {
             HSD_JObj* joint = fp->parts[part].joint;

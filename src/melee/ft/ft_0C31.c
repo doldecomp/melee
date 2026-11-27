@@ -15,6 +15,7 @@
 #include <melee/ef/efasync.h>
 #include <melee/lb/lbaudio_ax.h>
 #include <melee/pl/player.h>
+#include <Runtime/fma.h>
 #include <sysdolphin/baselib/dobj.h>
 #include <sysdolphin/baselib/jobj.h>
 
@@ -119,8 +120,9 @@ void ftCo_800C6408(Fighter_GObj* gobj)
         temp_r31->mv.co.entry.x28 = temp_f0_2;
         temp_r31->mv.co.entry.x20 = temp_f0_2;
         temp_r29_3 = gobj->user_data;
-        sp20.x = -(temp_r29_3->facing_dir * ftCommon_800804EC(temp_r29_3) -
-                   temp_r29_3->cur_pos.x);
+        sp20.x = -(FMA_MUL_SUB(temp_r29_3->facing_dir,
+                               ftCommon_800804EC(temp_r29_3),
+                               temp_r29_3->cur_pos.x));
         sp20.y = temp_r29_3->cur_pos.y;
         sp20.z = temp_r29_3->cur_pos.z;
 
@@ -164,7 +166,7 @@ void ftCo_EntryStart_Phys(Fighter_GObj* gobj)
     temp_f4 = p_ftCommonData->x6C4;
     temp_f31 = (f32) (temp_r6 - temp_r31->mv.co.entry.timer) / temp_r6;
     temp_r31->mv.co.entry.x14.y =
-        (temp_f31 * (temp_r31->mv.co.entry.x8.y - temp_f4)) + temp_f4;
+        FMA_MUL_ADD(temp_f31, (temp_r31->mv.co.entry.x8.y - temp_f4), temp_f4);
 
     HSD_JObjSetScale(gobj->hsd_obj, &temp_r31->mv.co.entry.x14);
 
@@ -222,8 +224,9 @@ void fn_800C69F4(Fighter_GObj* gobj)
             }
         }
         temp_r31_2 = GET_FIGHTER(gobj);
-        sp20.x = -(temp_r31_2->facing_dir * ftCommon_800804EC(temp_r31_2) -
-                   temp_r31_2->cur_pos.x);
+        sp20.x = -(FMA_MUL_SUB(temp_r31_2->facing_dir,
+                               ftCommon_800804EC(temp_r31_2),
+                               temp_r31_2->cur_pos.x));
         sp20.y = temp_r31_2->cur_pos.y;
         sp20.z = temp_r31_2->cur_pos.z;
         HSD_JObjSetTranslateWithMtxDirtyOutOfLine(temp_r31_2->x20A0_accessory,
@@ -342,7 +345,8 @@ void fn_800C6F34(Fighter_GObj* gobj)
             }
         }
         fp = GET_FIGHTER(gobj);
-        sp20.x = -((fp->facing_dir * ftCommon_800804EC(fp)) - fp->cur_pos.x);
+        sp20.x = -(
+            FMA_MUL_SUB(fp->facing_dir, ftCommon_800804EC(fp), fp->cur_pos.x));
         sp20.y = fp->cur_pos.y;
         sp20.z = fp->cur_pos.z;
 

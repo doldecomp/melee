@@ -10,6 +10,7 @@
 #include <melee/it/item.h>
 #include <melee/it/itgroundcoll.h>
 #include <melee/it/itmaplib.h>
+#include <Runtime/fma.h>
 
 ItemStateTable it_803F7A98[] = {
     { 0, itChicorita_UnkMotion0_Anim, itChicorita_UnkMotion0_Phys,
@@ -229,7 +230,7 @@ void it_802C9B20(Item_GObj* chicorita_gobj)
     chicorita = GET_ITEM((HSD_GObj*) chicorita_gobj);
     attr = &chicorita->xC4_article_data->x4_specialAttributes->chicorita_leaf;
     spawn.prev_pos = chicorita->pos;
-    spawn.prev_pos.x += attr->x8 * chicorita->facing_dir;
+    FMA_ADD_TO(spawn.prev_pos.x, attr->x8, chicorita->facing_dir);
     spawn.prev_pos.y += attr->xC;
     it_8026BB88(chicorita_gobj, &spawn.pos);
     spawn.facing_dir = chicorita->facing_dir;

@@ -3,6 +3,8 @@
 
 #include <Runtime/platform.h>
 
+#include <Runtime/fma.h>
+
 #ifdef MWERKS_GEKKO
 #include <math_ppc.h>
 
@@ -91,7 +93,7 @@ static inline float fmodf(float a, float b)
         return a;
     }
     quotient = a / b;
-    return a - b * quotient;
+    return FMA_SUB_MUL(a, b, quotient);
 }
 
 #endif

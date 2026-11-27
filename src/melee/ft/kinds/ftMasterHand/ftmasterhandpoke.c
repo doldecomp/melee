@@ -13,6 +13,7 @@
 #include <melee/ft/types.h>
 #include <melee/lb/lbvector.h>
 #include <melee/pl/player.h>
+#include <Runtime/fma.h>
 #include <sysdolphin/baselib/random.h>
 
 void ftMh_PaperCrush_Coll(HSD_GObj* gobj) {}
@@ -77,12 +78,15 @@ static inline float my_sqrtf(float x)
     volatile float y;
     if (x > 0) {
         double guess = __frsqrte((double) x); // returns an approximation to
-        guess = _half * guess *
-                (_three - guess * guess * x); // now have 12 sig bits
-        guess = _half * guess *
-                (_three - guess * guess * x); // now have 24 sig bits
-        guess = _half * guess *
-                (_three - guess * guess * x); // now have 32 sig bits
+        guess =
+            _half * guess *
+            (FMA_SUB_MUL(_three, guess * guess, x)); // now have 12 sig bits
+        guess =
+            _half * guess *
+            (FMA_SUB_MUL(_three, guess * guess, x)); // now have 24 sig bits
+        guess =
+            _half * guess *
+            (FMA_SUB_MUL(_three, guess * guess, x)); // now have 32 sig bits
         y = (float) (x * guess);
         return y;
     }

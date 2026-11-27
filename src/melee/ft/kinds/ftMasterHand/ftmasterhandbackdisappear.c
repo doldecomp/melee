@@ -17,6 +17,7 @@
 #include <melee/ft/types.h>
 #include <melee/lb/lbvector.h>
 #include <melee/pl/player.h>
+#include <Runtime/fma.h>
 
 void ftMh_BackDisappear_Anim(HSD_GObj* gobj)
 {
@@ -88,9 +89,9 @@ static inline float my_sqrtf(float x)
     volatile float y;
     if (x > 0) {
         double guess = __frsqrte((double) x);
-        guess = _half * guess * (_three - guess * guess * x);
-        guess = _half * guess * (_three - guess * guess * x);
-        guess = _half * guess * (_three - guess * guess * x);
+        guess = _half * guess * (FMA_SUB_MUL(_three, guess * guess, x));
+        guess = _half * guess * (FMA_SUB_MUL(_three, guess * guess, x));
+        guess = _half * guess * (FMA_SUB_MUL(_three, guess * guess, x));
         y = (float) (x * guess);
         return y;
     }

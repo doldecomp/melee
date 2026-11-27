@@ -14,6 +14,7 @@
 #include <melee/it/kinds/itsword.h>
 #include <melee/lb/lb_00B0.h>
 #include <melee/lb/lbvector.h>
+#include <Runtime/fma.h>
 #include <sysdolphin/baselib/cobj.h>
 #include <sysdolphin/baselib/debug.h>
 #include <sysdolphin/baselib/state.h>
@@ -149,9 +150,12 @@ void ftCo_800C2600(Fighter_GObj* gobj, u32 arg1)
             for (i = fp->x2100 - 1; i >= 0; i--) {
                 struct Fighter_x20B0_t* entry = &fp->x20B0[curIdx];
 
-                delta.x = entry->xC.x * x20FC + entry->x0.x - prevPos.x;
-                delta.y = entry->xC.y * x20FC + entry->x0.y - prevPos.y;
-                delta.z = entry->xC.z * x20FC + entry->x0.z - prevPos.z;
+                delta.x =
+                    FMA_MUL_ADD(entry->xC.x, x20FC, entry->x0.x) - prevPos.x;
+                delta.y =
+                    FMA_MUL_ADD(entry->xC.y, x20FC, entry->x0.y) - prevPos.y;
+                delta.z =
+                    FMA_MUL_ADD(entry->xC.z, x20FC, entry->x0.z) - prevPos.z;
 
                 if (i != fp->x2100 - 1) {
                     d2 = delta.z * delta.z +
@@ -189,9 +193,9 @@ void ftCo_800C2600(Fighter_GObj* gobj, u32 arg1)
 
             scaleDiff = x20FC - x20F8;
             idx2 = fp->x2101_bits_0to6;
-            blendedInner = params->x0 * scaleDiff + x20F8;
+            blendedInner = FMA_MUL_ADD(params->x0, scaleDiff, x20F8);
             vp = vtx_buf;
-            blendedOuter = params->x4 * scaleDiff + x20F8;
+            blendedOuter = FMA_MUL_ADD(params->x4, scaleDiff, x20F8);
             numVerts = 0;
 
             if (idx2 != 0) {
@@ -213,25 +217,34 @@ void ftCo_800C2600(Fighter_GObj* gobj, u32 arg1)
                 s32 numSubdiv;
 
                 curEntry = &fp->x20B0[curIdx2];
-                outerScale = interpFactor * outerDiff + blendedOuter;
-                innerScale = interpFactor * innerDiff + blendedInner;
+                outerScale =
+                    FMA_MUL_ADD(interpFactor, outerDiff, blendedOuter);
+                innerScale =
+                    FMA_MUL_ADD(interpFactor, innerDiff, blendedInner);
                 numVerts += 2;
                 distIdx++;
 
-                alpha = (s32) (interpFactor * (f32) (params->x8 - params->x9) +
-                               (f32) params->x9);
+                alpha = (s32) (FMA_MUL_ADD(interpFactor,
+                                           (f32) (params->x8 - params->x9),
+                                           (f32) params->x9));
 
-                vp->x = curEntry->xC.x * innerScale + curEntry->x0.x;
-                vp->y = curEntry->xC.y * innerScale + curEntry->x0.y;
-                vp->z = curEntry->xC.z * innerScale + curEntry->x0.z;
+                vp->x =
+                    FMA_MUL_ADD(curEntry->xC.x, innerScale, curEntry->x0.x);
+                vp->y =
+                    FMA_MUL_ADD(curEntry->xC.y, innerScale, curEntry->x0.y);
+                vp->z =
+                    FMA_MUL_ADD(curEntry->xC.z, innerScale, curEntry->x0.z);
                 vp->r = params->xA;
                 vp->g = params->xB;
                 vp->b = params->xC;
                 vp->a = alpha;
 
-                vp[1].x = curEntry->xC.x * outerScale + curEntry->x0.x;
-                vp[1].y = curEntry->xC.y * outerScale + curEntry->x0.y;
-                vp[1].z = curEntry->xC.z * outerScale + curEntry->x0.z;
+                vp[1].x =
+                    FMA_MUL_ADD(curEntry->xC.x, outerScale, curEntry->x0.x);
+                vp[1].y =
+                    FMA_MUL_ADD(curEntry->xC.y, outerScale, curEntry->x0.y);
+                vp[1].z =
+                    FMA_MUL_ADD(curEntry->xC.z, outerScale, curEntry->x0.z);
                 vp[1].r = params->xE;
                 vp[1].g = params->xF;
                 vp[1].b = params->x10;
@@ -273,9 +286,9 @@ void ftCo_800C2600(Fighter_GObj* gobj, u32 arg1)
                             angle *= frac;
                             tempDir = curEntry->xC;
                             interpInner2 =
-                                frac *
-                                ((interpFactor * innerDiff + blendedInner) -
-                                 innerScale);
+                                frac * ((FMA_MUL_ADD(interpFactor, innerDiff,
+                                                     blendedInner)) -
+                                        innerScale);
                             basePosX = curEntry->x0.x;
                             basePosY = curEntry->x0.y;
                             basePosZ = curEntry->x0.z;
@@ -286,15 +299,16 @@ void ftCo_800C2600(Fighter_GObj* gobj, u32 arg1)
 
                             alphaStep =
                                 (s32) (frac *
-                                       ((interpFactor *
-                                             (f32) (params->x8 - params->x9) +
-                                         (f32) params->x9) -
+                                       ((FMA_MUL_ADD(
+                                            interpFactor,
+                                            (f32) (params->x8 - params->x9),
+                                            (f32) params->x9)) -
                                         (f32) alpha));
 
                             interpOuter2 =
-                                frac *
-                                ((interpFactor * outerDiff + blendedOuter) -
-                                 outerScale);
+                                frac * ((FMA_MUL_ADD(interpFactor, outerDiff,
+                                                     blendedOuter)) -
+                                        outerScale);
 
                             for (j = 0; j < numSubdiv; j++) {
                                 cumAngle += angle;
@@ -310,16 +324,22 @@ void ftCo_800C2600(Fighter_GObj* gobj, u32 arg1)
                                     &tempDir, &crossProd, cumAngle);
 
                                 numVerts += 2;
-                                vp->x = tempDir.x * innerScale + basePosX;
-                                vp->y = tempDir.y * innerScale + basePosY;
-                                vp->z = tempDir.z * innerScale + basePosZ;
+                                vp->x = FMA_MUL_ADD(tempDir.x, innerScale,
+                                                    basePosX);
+                                vp->y = FMA_MUL_ADD(tempDir.y, innerScale,
+                                                    basePosY);
+                                vp->z = FMA_MUL_ADD(tempDir.z, innerScale,
+                                                    basePosZ);
                                 vp->r = params->xA;
                                 vp->g = params->xB;
                                 vp->b = params->xC;
                                 vp->a = alpha;
-                                vp[1].x = tempDir.x * outerScale + basePosX;
-                                vp[1].y = tempDir.y * outerScale + basePosY;
-                                vp[1].z = tempDir.z * outerScale + basePosZ;
+                                vp[1].x = FMA_MUL_ADD(tempDir.x, outerScale,
+                                                      basePosX);
+                                vp[1].y = FMA_MUL_ADD(tempDir.y, outerScale,
+                                                      basePosY);
+                                vp[1].z = FMA_MUL_ADD(tempDir.z, outerScale,
+                                                      basePosZ);
                                 vp[1].r = params->xE;
                                 vp[1].g = params->xF;
                                 vp[1].b = params->x10;

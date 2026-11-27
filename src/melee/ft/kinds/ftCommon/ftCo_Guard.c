@@ -36,6 +36,7 @@
 #include <melee/lb/lb_00CE.h>
 #include <melee/pl/player.h>
 #include <melee/pl/plbonuslib.h>
+#include <Runtime/fma.h>
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/jobj.h>
 
@@ -153,7 +154,7 @@ void ftCo_80091BC4(Fighter* fp)
         deg_delta += 360;
     }
 
-    smoothed_deg = deg_delta * p_ftCommonData->x44C + guard_deg;
+    smoothed_deg = FMA_MUL_ADD(deg_delta, p_ftCommonData->x44C, guard_deg);
     if (smoothed_deg > 360) {
         guard_deg = smoothed_deg;
         guard_deg -= 360;
@@ -170,8 +171,8 @@ void ftCo_80091BC4(Fighter* fp)
     if (stick_mag > 1) {
         stick_mag = 1;
     }
-    fp->mv.co.guard.x4 +=
-        p_ftCommonData->x44C * (stick_mag - fp->mv.co.guard.x4);
+    FMA_ADD_TO(fp->mv.co.guard.x4, p_ftCommonData->x44C,
+               (stick_mag - fp->mv.co.guard.x4));
 }
 
 static inline float inlineB0(Fighter* fp)
@@ -181,11 +182,11 @@ static inline float inlineB0(Fighter* fp)
     } else {
         float n1 =
             (fp->shield_health / p_ftCommonData->x260_startShieldHealth) *
-            (fp->lightshield_amount *
-                 (p_ftCommonData->x2D8 - p_ftCommonData->x2D4) +
-             p_ftCommonData->x2D4);
+            (FMA_MUL_ADD(fp->lightshield_amount,
+                         (p_ftCommonData->x2D8 - p_ftCommonData->x2D4),
+                         p_ftCommonData->x2D4));
         float n2 = 1 - p_ftCommonData->x264;
-        float n3 = n2 * n1 + p_ftCommonData->x264;
+        float n3 = FMA_MUL_ADD(n2, n1, p_ftCommonData->x264);
         return n3 * fp->co_attrs.initial_shield_size;
     }
 }
@@ -414,10 +415,11 @@ bool ftCo_800925A4(HSD_GObj* gobj)
                        p_ftCommonData->analog_shoulder_deadzone) /
                           (1 - p_ftCommonData->analog_shoulder_deadzone);
         }
-        fp->shield_health -= p_ftCommonData->x278 *
-                             ((fp->lightshield_amount *
-                               (p_ftCommonData->x2F0 - p_ftCommonData->x2EC)) +
-                              p_ftCommonData->x2EC);
+        fp->shield_health -=
+            p_ftCommonData->x278 *
+            (FMA_MUL_ADD(fp->lightshield_amount,
+                         (p_ftCommonData->x2F0 - p_ftCommonData->x2EC),
+                         p_ftCommonData->x2EC));
         if (fp->shield_health < 0) {
             fp->shield_health = 0;
             fp->x221A_b7 = false;
@@ -652,11 +654,12 @@ void ftCo_80092E50(Fighter_GObj* gobj)
 
 float ftCo_80092ED8(int arg0, float arg1)
 {
-    return p_ftCommonData->x28C *
-               (arg0 *
-                (1 - (arg1 * (p_ftCommonData->x2E8 - p_ftCommonData->x2E4) +
-                      p_ftCommonData->x2E4))) +
-           p_ftCommonData->x290;
+    return FMA_MUL_ADD(
+        p_ftCommonData->x28C,
+        (arg0 *
+         (1 - (FMA_MUL_ADD(arg1, (p_ftCommonData->x2E8 - p_ftCommonData->x2E4),
+                           p_ftCommonData->x2E4)))),
+        p_ftCommonData->x290);
 }
 
 void ftCo_80092F2C(HSD_GObj* gobj, bool arg1)
@@ -677,12 +680,13 @@ void ftCo_80092F2C(HSD_GObj* gobj, bool arg1)
         fp->x2219_b0 = true;
     }
     {
-        float f = (p_ftCommonData->x28C *
-                   (fp->x19A4 *
-                    (1.0f - ((fp->lightshield_amount *
-                              (p_ftCommonData->x2E8 - p_ftCommonData->x2E4)) +
-                             p_ftCommonData->x2E4)))) +
-                  p_ftCommonData->x290;
+        float f = FMA_MUL_ADD(
+            p_ftCommonData->x28C,
+            (fp->x19A4 * (1.0f - (FMA_MUL_ADD(fp->lightshield_amount,
+                                              (p_ftCommonData->x2E8 -
+                                               p_ftCommonData->x2E4),
+                                              p_ftCommonData->x2E4)))),
+            p_ftCommonData->x290);
         ftAnim_SetAnimRate(gobj,
                            (0.1f + lbGetJObjEndFrame(GET_JOBJ(gobj))) / f);
         if (!arg1) {
@@ -725,8 +729,8 @@ void ftCo_80093240(Fighter_GObj* gobj)
         {
             float scl = p_ftCommonData->x4C0 * (fp->input.lstick[0].x *
                                                 p_ftCommonData->sdi_pos_scale);
-            fp->cur_pos.x += fp->coll_data.floor.normal.y * scl;
-            fp->cur_pos.y += -fp->coll_data.floor.normal.x * scl;
+            FMA_ADD_TO(fp->cur_pos.x, fp->coll_data.floor.normal.y, scl);
+            FMA_ADD_TO(fp->cur_pos.y, -fp->coll_data.floor.normal.x, scl);
             fp->active_timer.lstick.x = 254;
         }
     }
@@ -742,8 +746,8 @@ void ftCo_800932DC(Fighter_GObj* gobj)
         {
             float scl = p_ftCommonData->x4C0 *
                         (fp->input.lstick[0].x * p_ftCommonData->x4BC);
-            fp->cur_pos.x += fp->coll_data.floor.normal.y * scl;
-            fp->cur_pos.y += -fp->coll_data.floor.normal.x * scl;
+            FMA_ADD_TO(fp->cur_pos.x, fp->coll_data.floor.normal.y, scl);
+            FMA_ADD_TO(fp->cur_pos.y, -fp->coll_data.floor.normal.x, scl);
 
             /// @todo Fake.
             !gobj;

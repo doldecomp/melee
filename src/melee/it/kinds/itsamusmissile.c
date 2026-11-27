@@ -12,6 +12,7 @@
 #include <melee/it/item.h>
 #include <melee/it/itgroundcoll.h>
 #include <melee/lb/lbvector.h>
+#include <Runtime/fma.h>
 #include <sysdolphin/baselib/mtx.h>
 
 ItemStateTable it_803F7340[] = {
@@ -292,7 +293,7 @@ void itSamusmissile_UnkMotion1_Phys(Item_GObj* gobj)
         &ip->xC4_article_data->x4_specialAttributes->samus_missile;
 
     if (ip->xDB0_itcmd_var1 != 0) {
-        ip->x40_vel.x = attrs->x30 * ip->facing_dir + ip->x40_vel.x;
+        ip->x40_vel.x = FMA_MUL_ADD(attrs->x30, ip->facing_dir, ip->x40_vel.x);
         {
             float xvel = ABS(ip->x40_vel.x);
             float maxSpeed = attrs->x34;

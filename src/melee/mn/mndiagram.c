@@ -18,6 +18,7 @@
 #include <melee/lb/lbaudio_ax.h>
 #include <melee/lb/lblanguage.h>
 #include <melee/lb/lbspdisplay.h>
+#include <Runtime/fma.h>
 #include <sysdolphin/baselib/debug.h>
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/gobjgxlink.h>
@@ -2051,10 +2052,11 @@ void mnDiagram_DrawCellValue(HSD_GObj* arg0, u8 col, u8 row, int arg3)
         requestIntegerAnimFrame(jobj, digit);
         HSD_JObjAnimAll(jobj);
         if (col < 7) {
-            HSD_JObjSetTranslateX(jobj, (x_spacing * (f32) i) + col_offset);
-        } else {
             HSD_JObjSetTranslateX(jobj,
-                                  (x_spacing * (f32) i) + col_offset + 0.4f);
+                                  FMA_MUL_ADD(x_spacing, (f32) i, col_offset));
+        } else {
+            HSD_JObjSetTranslateX(
+                jobj, FMA_MUL_ADD(x_spacing, (f32) i, col_offset) + 0.4f);
         }
         if (row < 10) {
             HSD_JObjSetTranslateY(jobj, row_offset);
@@ -2377,11 +2379,11 @@ void mnDiagram_CursorProc(HSD_GObj* gobj)
     row = *selection & 0xFF;
     y_spacing = getRowReferenceY(data);
     y_spacing = HSD_JObjGetTranslationY(data->jobjs[10]) - y_spacing;
-    HSD_JObjSetTranslateY(sp_jobj, y_spacing * (row - 4.5) - 0.1F);
+    HSD_JObjSetTranslateY(sp_jobj, FMA_MUL_SUB(y_spacing, (row - 4.5), 0.1F));
 
     lb_80011E24(gobj->hsd_obj, &sp_jobj, 2, -1);
     HSD_JObjSetTranslateX(sp_jobj, x_spacing * (col - 3));
-    HSD_JObjSetTranslateY(sp_jobj, y_spacing * (row - 4.5) - 0.1F);
+    HSD_JObjSetTranslateY(sp_jobj, FMA_MUL_SUB(y_spacing, (row - 4.5), 0.1F));
 }
 
 void mnDiagram_CreateCursor(void)

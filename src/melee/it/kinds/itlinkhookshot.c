@@ -25,6 +25,7 @@
 #include <melee/mp/mpisland.h>
 #include <melee/mp/mplib.h>
 #include <melee/mp/types.h>
+#include <Runtime/fma.h>
 #include <sysdolphin/baselib/gobjgxlink.h>
 #include <sysdolphin/baselib/gobjobject.h>
 #include <sysdolphin/baselib/gobjplink.h>
@@ -167,7 +168,7 @@ static inline HSD_JObj* it_link_get_joint_c(Item* arg0)
 
 static inline f32 it_link_lerp(f32 a, f32 b, f32 t)
 {
-    return t * a + (1.0F - t) * b;
+    return FMA_MUL_ADD(t, a, (1.0F - t) * b);
 }
 
 static inline void it_link_attr_math(itLinkHookshotAttributes* attr, s32 arg2,
@@ -383,8 +384,8 @@ bool itLinkhookshot_UnkMotion8_Anim(Item_GObj* arg0)
     }
     temp_f1 = (f32) var_r5 / (f32) attr->x2C;
     jobj->child->child->rotate.z = 6.2831855f * temp_f1;
-    temp_f0 = (f32) ((0.6499999761581421 * (1.0 - (f64) temp_f1)) +
-                     0.3499999940395355);
+    temp_f0 = (f32) (FMA_MUL_ADD(0.6499999761581421, (1.0 - (f64) temp_f1),
+                                 0.3499999940395355));
     jobj->child->child->scale.x = temp_f0;
     jobj->child->child->scale.y = temp_f0;
     return 0;
@@ -872,7 +873,8 @@ float it_802A3C98(Vec3* arg0, Vec3* arg1, Vec3* arg2)
     arg2->y = arg0->y - arg1->y;
     arg2->z = arg0->z - arg1->z;
 
-    len = sqrtf(arg2->x * arg2->x + arg2->y * arg2->y + arg2->z * arg2->z);
+    len = sqrtf(FMA_ADD_MUL(FMA_ADD_MUL(arg2->x * arg2->x, arg2->y, arg2->y),
+                            arg2->z, arg2->z));
     if (len == (f64) 0.0F) {
         inv = (f64) 0.0F;
     } else {
@@ -1109,9 +1111,9 @@ void it_802A44CC(ItemLink* link_0, Vec3* arg1, itLinkHookshotAttributes* arg2,
 
     it_802A3C98(&link_0->pos, arg1, &vec);
 
-    link_0->pos.x = (vec.x * arg8) + arg1->x;
-    link_0->pos.y = (vec.y * arg8) + arg1->y;
-    link_0->pos.z = (vec.z * arg8) + arg1->z;
+    link_0->pos.x = FMA_MUL_ADD(vec.x, arg8, arg1->x);
+    link_0->pos.y = FMA_MUL_ADD(vec.y, arg8, arg1->y);
+    link_0->pos.z = FMA_MUL_ADD(vec.z, arg8, arg1->z);
 
     while (link_1 != NULL) {
         link_1->vel.y -= arg2->x3C;
@@ -1122,9 +1124,9 @@ void it_802A44CC(ItemLink* link_0, Vec3* arg1, itLinkHookshotAttributes* arg2,
 
         len = it_802A3C98(&link_1->pos, &link_0->pos, &vec);
         if (len > arg2->x30) {
-            link_1->pos.x = (vec.x * arg2->x30) + link_0->pos.x;
-            link_1->pos.y = (vec.y * arg2->x30) + link_0->pos.y;
-            link_1->pos.z = (vec.z * arg2->x30) + link_0->pos.z;
+            link_1->pos.x = FMA_MUL_ADD(vec.x, arg2->x30, link_0->pos.x);
+            link_1->pos.y = FMA_MUL_ADD(vec.y, arg2->x30, link_0->pos.y);
+            link_1->pos.z = FMA_MUL_ADD(vec.z, arg2->x30, link_0->pos.z);
         }
         link_0 = link_1;
         link_1 = link_1->prev;
@@ -1134,9 +1136,9 @@ void it_802A44CC(ItemLink* link_0, Vec3* arg1, itLinkHookshotAttributes* arg2,
 static inline void test_comp(Vec3* vec0, Vec3* vec1, Vec3* vec2,
                              const f32* arg2)
 {
-    vec0->x = (vec2->x * *arg2) + vec1->x;
-    vec0->y = (vec2->y * *arg2) + vec1->y;
-    vec0->z = (vec2->z * *arg2) + vec1->z;
+    vec0->x = FMA_MUL_ADD(vec2->x, *arg2, vec1->x);
+    vec0->y = FMA_MUL_ADD(vec2->y, *arg2, vec1->y);
+    vec0->z = FMA_MUL_ADD(vec2->z, *arg2, vec1->z);
 }
 
 static inline Vec3* it_802A4758_permuterslop(ItemLink* link_0)
@@ -1185,18 +1187,18 @@ void it_802A49B0(ItemLink* link_0, Vec3* arg1, itLinkHookshotAttributes* arg2,
 
     it_802A3C98(&link_0->pos, arg1, &vec);
 
-    link_0->pos.x = (vec.x * arg8) + arg1->x;
-    link_0->pos.y = (vec.y * arg8) + arg1->y;
-    link_0->pos.z = (vec.z * arg8) + arg1->z;
+    link_0->pos.x = FMA_MUL_ADD(vec.x, arg8, arg1->x);
+    link_0->pos.y = FMA_MUL_ADD(vec.y, arg8, arg1->y);
+    link_0->pos.z = FMA_MUL_ADD(vec.z, arg8, arg1->z);
 
     while (link_1 != NULL) {
         it_802A40D0(link_1, arg2->x30);
 
         len = it_802A3C98(&link_1->pos, &link_0->pos, &vec);
         if (len > arg2->x30) {
-            link_1->pos.x = (vec.x * arg2->x30) + link_0->pos.x;
-            link_1->pos.y = (vec.y * arg2->x30) + link_0->pos.y;
-            link_1->pos.z = (vec.z * arg2->x30) + link_0->pos.z;
+            link_1->pos.x = FMA_MUL_ADD(vec.x, arg2->x30, link_0->pos.x);
+            link_1->pos.y = FMA_MUL_ADD(vec.y, arg2->x30, link_0->pos.y);
+            link_1->pos.z = FMA_MUL_ADD(vec.z, arg2->x30, link_0->pos.z);
         }
         link_0 = link_1;
         link_1 = link_1->prev;
@@ -1210,7 +1212,8 @@ static inline f64 it_802A6A78_normalize_diff(Vec3* a, Vec3* b, Vec3* vec)
     vec->x = a->x - b->x;
     vec->y = a->y - b->y;
     vec->z = a->z - b->z;
-    len = sqrtf(vec->x * vec->x + vec->y * vec->y + vec->z * vec->z);
+    len = sqrtf(FMA_ADD_MUL(FMA_ADD_MUL(vec->x * vec->x, vec->y, vec->y),
+                            vec->z, vec->z));
     if (len == 0.0F) {
         inv = 0.0F;
     } else {
@@ -1229,9 +1232,9 @@ static inline f32 it_802A4BFC_sqrtf_offset(f32 x)
 
     if (x > 0.0F) {
         f64 guess = __frsqrte((f64) x);
-        guess = 0.5 * guess * (3.0 - guess * guess * x);
-        guess = 0.5 * guess * (3.0 - guess * guess * x);
-        guess = 0.5 * guess * (3.0 - guess * guess * x);
+        guess = 0.5 * guess * (FMA_SUB_MUL(3.0, guess * guess, x));
+        guess = 0.5 * guess * (FMA_SUB_MUL(3.0, guess * guess, x));
+        guess = 0.5 * guess * (FMA_SUB_MUL(3.0, guess * guess, x));
         *(&y + 6) = (f32) (x * guess);
         return *(&y + 6);
     }
@@ -1246,8 +1249,8 @@ static inline f64 it_802A4BFC_normalize_diff(Vec3* a, Vec3* b, Vec3* vec)
     vec->x = a->x - b->x;
     vec->y = a->y - b->y;
     vec->z = a->z - b->z;
-    len = it_802A4BFC_sqrtf_offset(vec->x * vec->x + vec->y * vec->y +
-                                   vec->z * vec->z);
+    len = it_802A4BFC_sqrtf_offset(FMA_ADD_MUL(
+        FMA_ADD_MUL(vec->x * vec->x, vec->y, vec->y), vec->z, vec->z));
     if (len == 0.0F) {
         inv = 0.0F;
     } else {
@@ -1315,18 +1318,18 @@ s32 it_802A4BFC(ItemLink* link_0, Vec3* arg1, itLinkHookshotAttributes* attr,
         if (link_1->x2C_b0) {
             len = it_802A4BFC_normalize_diff(&link_1->pos, &link_0->pos, &vec);
             if (len > attr->x30) {
-                link_1->pos.x = (vec.x * attr->x30) + link_0->pos.x;
-                link_1->pos.y = (vec.y * attr->x30) + link_0->pos.y;
-                link_1->pos.z = (vec.z * attr->x30) + link_0->pos.z;
+                link_1->pos.x = FMA_MUL_ADD(vec.x, attr->x30, link_0->pos.x);
+                link_1->pos.y = FMA_MUL_ADD(vec.y, attr->x30, link_0->pos.y);
+                link_1->pos.z = FMA_MUL_ADD(vec.z, attr->x30, link_0->pos.z);
             }
             link_1->coll_data.last_pos = link_1->coll_data.cur_pos;
             link_1->coll_data.cur_pos = link_1->pos;
         } else {
             len = it_802A4BFC_normalize_diff(arg1, &link_0->pos, &vec);
             if (len > attr->x30) {
-                link_1->pos.x = (vec.x * attr->x30) + link_0->pos.x;
-                link_1->pos.y = (vec.y * attr->x30) + link_0->pos.y;
-                link_1->pos.z = (vec.z * attr->x30) + link_0->pos.z;
+                link_1->pos.x = FMA_MUL_ADD(vec.x, attr->x30, link_0->pos.x);
+                link_1->pos.y = FMA_MUL_ADD(vec.y, attr->x30, link_0->pos.y);
+                link_1->pos.z = FMA_MUL_ADD(vec.z, attr->x30, link_0->pos.z);
                 link_1->x2C_b0 = 1;
                 link_1->coll_data.cur_pos = link_1->pos;
                 link_1->coll_data.last_pos = link_1->coll_data.cur_pos;
@@ -1397,18 +1400,18 @@ s32 it_802A5320(ItemLink* link_0, Vec3* arg1, itLinkHookshotAttributes* attr,
             }
             len = it_802A3C98(&link_1->pos, &cur->pos, &vec);
             if (len > attr->x30) {
-                link_1->pos.x = (vec.x * attr->x30) + cur->pos.x;
-                link_1->pos.y = (vec.y * attr->x30) + cur->pos.y;
-                link_1->pos.z = (vec.z * attr->x30) + cur->pos.z;
+                link_1->pos.x = FMA_MUL_ADD(vec.x, attr->x30, cur->pos.x);
+                link_1->pos.y = FMA_MUL_ADD(vec.y, attr->x30, cur->pos.y);
+                link_1->pos.z = FMA_MUL_ADD(vec.z, attr->x30, cur->pos.z);
             }
             link_1->coll_data.last_pos = link_1->coll_data.cur_pos;
             link_1->coll_data.cur_pos = link_1->pos;
         } else {
             len = it_802A3C98(arg1, &cur->pos, &vec);
             if (len > attr->x30) {
-                link_1->pos.x = (vec.x * attr->x30) + cur->pos.x;
-                link_1->pos.y = (vec.y * attr->x30) + cur->pos.y;
-                link_1->pos.z = (vec.z * attr->x30) + cur->pos.z;
+                link_1->pos.x = FMA_MUL_ADD(vec.x, attr->x30, cur->pos.x);
+                link_1->pos.y = FMA_MUL_ADD(vec.y, attr->x30, cur->pos.y);
+                link_1->pos.z = FMA_MUL_ADD(vec.z, attr->x30, cur->pos.z);
                 link_1->x2C_b0 = 1;
                 link_1->coll_data.cur_pos = link_1->pos;
                 link_1->coll_data.last_pos = link_1->coll_data.cur_pos;
@@ -1471,9 +1474,9 @@ void it_802A5770(ItemLink* link_0, Vec3* arg1, itLinkHookshotAttributes* arg2,
 
     len = it_802A3C98(&cur->pos, anchor, &vec);
     if (len > attr->x30) {
-        cur->pos.x = (vec.x * attr->x30) + anchor->x;
-        cur->pos.y = (vec.y * attr->x30) + anchor->y;
-        cur->pos.z = (vec.z * attr->x30) + anchor->z;
+        cur->pos.x = FMA_MUL_ADD(vec.x, attr->x30, anchor->x);
+        cur->pos.y = FMA_MUL_ADD(vec.y, attr->x30, anchor->y);
+        cur->pos.z = FMA_MUL_ADD(vec.z, attr->x30, anchor->z);
     }
 
     var_r29 = 0;
@@ -1487,10 +1490,11 @@ void it_802A5770(ItemLink* link_0, Vec3* arg1, itLinkHookshotAttributes* arg2,
 
         len = it_802A3C98(&link_1->pos, &cur->pos, &vec);
         if (len > attr->x30) {
-            link_1->pos.x = (vec.x * attr->x30) + cur->pos.x;
-            link_1->pos.y = (vec.y * attr->x30) + cur->pos.y;
+            link_1->pos.x = FMA_MUL_ADD(vec.x, attr->x30, cur->pos.x);
+            link_1->pos.y = FMA_MUL_ADD(vec.y, attr->x30, cur->pos.y);
             {
-                f32 z = (vec.z * attr->x30) + cur->pos.z; // permuterslop
+                f32 z =
+                    FMA_MUL_ADD(vec.z, attr->x30, cur->pos.z); // permuterslop
                 (void) z;
                 link_1->pos.z = z;
             }
@@ -1540,16 +1544,16 @@ s32 it_802A5AE0(ItemLink* link_0, Vec3* arg1, itLinkHookshotAttributes* arg2)
 
             len = it_802A3C98(&link_1->pos, &cur->pos, &vec);
             if (len > arg2->x30) {
-                link_1->pos.x = (vec.x * arg2->x30) + cur->pos.x;
-                link_1->pos.y = (vec.y * arg2->x30) + cur->pos.y;
-                link_1->pos.z = (vec.z * arg2->x30) + cur->pos.z;
+                link_1->pos.x = FMA_MUL_ADD(vec.x, arg2->x30, cur->pos.x);
+                link_1->pos.y = FMA_MUL_ADD(vec.y, arg2->x30, cur->pos.y);
+                link_1->pos.z = FMA_MUL_ADD(vec.z, arg2->x30, cur->pos.z);
             }
         } else {
             len = it_802A3C98(arg1, &cur->pos, &vec);
             if (len > arg2->x30) {
-                link_1->pos.x = (vec.x * arg2->x30) + cur->pos.x;
-                link_1->pos.y = (vec.y * arg2->x30) + cur->pos.y;
-                link_1->pos.z = (vec.z * arg2->x30) + cur->pos.z;
+                link_1->pos.x = FMA_MUL_ADD(vec.x, arg2->x30, cur->pos.x);
+                link_1->pos.y = FMA_MUL_ADD(vec.y, arg2->x30, cur->pos.y);
+                link_1->pos.z = FMA_MUL_ADD(vec.z, arg2->x30, cur->pos.z);
                 link_1->x2C_b0 = 1;
                 link_1->coll_data.cur_pos = link_1->pos;
                 link_1->coll_data.last_pos = link_1->coll_data.cur_pos;
@@ -1656,18 +1660,18 @@ s32 it_802A5FE0(ItemLink* link_0, ItemLink* link_0_2, Vec3* arg2,
         var_r31 += 1;
         len = it_802A3C98(&link_1->pos, &link_2->pos, &vec);
         if (len > arg3->x30) {
-            link_1->pos.x = (vec.x * arg3->x30) + link_2->pos.x;
-            link_1->pos.y = (vec.y * arg3->x30) + link_2->pos.y;
-            link_1->pos.z = (vec.z * arg3->x30) + link_2->pos.z;
+            link_1->pos.x = FMA_MUL_ADD(vec.x, arg3->x30, link_2->pos.x);
+            link_1->pos.y = FMA_MUL_ADD(vec.y, arg3->x30, link_2->pos.y);
+            link_1->pos.z = FMA_MUL_ADD(vec.z, arg3->x30, link_2->pos.z);
         }
         link_2 = link_1;
         link_1 = link_1->next;
     }
     len = it_802A3C98(arg2, &link_2->pos, &vec);
     if (len > arg3->x30) {
-        arg2->x = (vec.x * arg3->x30) + link_2->pos.x;
-        arg2->y = (vec.y * arg3->x30) + link_2->pos.y;
-        arg2->z = (vec.z * arg3->x30) + link_2->pos.z;
+        arg2->x = FMA_MUL_ADD(vec.x, arg3->x30, link_2->pos.x);
+        arg2->y = FMA_MUL_ADD(vec.y, arg3->x30, link_2->pos.y);
+        arg2->z = FMA_MUL_ADD(vec.z, arg3->x30, link_2->pos.z);
     }
     if (var_r31 != 0) {
         return 0;
@@ -1719,9 +1723,9 @@ void it_802A6474(ItemLink* tail, ItemLink* head, Vec3* pos,
             if (it_802A6A78_normalize_diff(&next->pos, &cur->pos, &dir) >
                 attrs->x30)
             {
-                next->pos.x = dir.x * attrs->x30 + cur->pos.x;
-                next->pos.y = dir.y * attrs->x30 + cur->pos.y;
-                next->pos.z = dir.z * attrs->x30 + cur->pos.z;
+                next->pos.x = FMA_MUL_ADD(dir.x, attrs->x30, cur->pos.x);
+                next->pos.y = FMA_MUL_ADD(dir.y, attrs->x30, cur->pos.y);
+                next->pos.z = FMA_MUL_ADD(dir.z, attrs->x30, cur->pos.z);
             } else {
                 retracted = true;
             }
@@ -1731,9 +1735,9 @@ void it_802A6474(ItemLink* tail, ItemLink* head, Vec3* pos,
     }
 
     if (it_802A6A78_normalize_diff(pos, &cur->pos, &dir) > attrs->x30) {
-        pos->x = dir.x * attrs->x30 + cur->pos.x;
-        pos->y = dir.y * attrs->x30 + cur->pos.y;
-        pos->z = dir.z * attrs->x30 + cur->pos.z;
+        pos->x = FMA_MUL_ADD(dir.x, attrs->x30, cur->pos.x);
+        pos->y = FMA_MUL_ADD(dir.y, attrs->x30, cur->pos.y);
+        pos->z = FMA_MUL_ADD(dir.z, attrs->x30, cur->pos.z);
     }
 }
 
@@ -1811,7 +1815,8 @@ static inline f64 it_802A6A78_normalize_diff_rev(Vec3* b, Vec3* a, Vec3* vec)
     vec->x = a->x - b->x;
     vec->y = a->y - b->y;
     vec->z = a->z - b->z;
-    len = sqrtf(vec->x * vec->x + vec->y * vec->y + vec->z * vec->z);
+    len = sqrtf(FMA_ADD_MUL(FMA_MUL_ADD(vec->x, vec->x, vec->y * vec->y),
+                            vec->z, vec->z));
     if (len == 0.0F) {
         inv = 0.0F;
     } else {
@@ -1853,18 +1858,18 @@ bool it_802A6A78(ItemLink* link_0, Vec3* arg1, itLinkHookshotAttributes* arg2,
             len = it_802A6A78_normalize_diff_rev(it_802A6A78_get_pos(link_0),
                                                  &link_1->pos, &vec);
             if (len > arg2->x30) {
-                link_1->pos.x = (vec.x * arg2->x30) + link_0->pos.x;
-                link_1->pos.y = (vec.y * arg2->x30) + link_0->pos.y;
-                link_1->pos.z = (vec.z * arg2->x30) + link_0->pos.z;
+                link_1->pos.x = FMA_MUL_ADD(vec.x, arg2->x30, link_0->pos.x);
+                link_1->pos.y = FMA_MUL_ADD(vec.y, arg2->x30, link_0->pos.y);
+                link_1->pos.z = FMA_MUL_ADD(vec.z, arg2->x30, link_0->pos.z);
             }
             link_1->coll_data.last_pos = link_1->coll_data.cur_pos;
             link_1->coll_data.cur_pos = link_1->pos;
         } else {
             len = it_802A6A78_normalize_diff(arg1, &link_0->pos, &vec);
             if (len > arg2->x30) {
-                link_1->pos.x = (vec.x * arg2->x30) + link_0->pos.x;
-                link_1->pos.y = (vec.y * arg2->x30) + link_0->pos.y;
-                link_1->pos.z = (vec.z * arg2->x30) + link_0->pos.z;
+                link_1->pos.x = FMA_MUL_ADD(vec.x, arg2->x30, link_0->pos.x);
+                link_1->pos.y = FMA_MUL_ADD(vec.y, arg2->x30, link_0->pos.y);
+                link_1->pos.z = FMA_MUL_ADD(vec.z, arg2->x30, link_0->pos.z);
                 link_1->x2C_b0 = 1;
                 link_1->coll_data.cur_pos = link_1->pos;
                 link_1->coll_data.last_pos = link_1->coll_data.cur_pos;

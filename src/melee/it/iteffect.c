@@ -9,6 +9,7 @@
 #include <melee/lb/lb_00B0.h>
 #include <melee/lb/lbarchive.h>
 #include <melee/lb/lblanguage.h>
+#include <Runtime/fma.h>
 #include <sysdolphin/baselib/random.h>
 
 void it_8027870C(s32 arg0)
@@ -38,11 +39,11 @@ void it_802787B4(Item_GObj* item_gobj, s32 arg1)
 static inline void it_80278800_rand_vec(Vec3* out, Vec3* v)
 {
     f32 f = HSD_Randf();
-    out->x += 2.0f * v->x * (f - 0.5f);
+    FMA_ADD_TO(out->x, 2.0f * v->x, (f - 0.5f));
     f = HSD_Randf();
-    out->y += 2.0f * v->y * (f - 0.5f);
+    FMA_ADD_TO(out->y, 2.0f * v->y, (f - 0.5f));
     f = HSD_Randf();
-    out->z += 2.0f * v->z * (f - 0.5f);
+    FMA_ADD_TO(out->z, 2.0f * v->z, (f - 0.5f));
 }
 
 void it_80278800(Item_GObj* item_gobj, s32 ef_id, s32 arg2, Vec3* arg3,

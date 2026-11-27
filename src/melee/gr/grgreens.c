@@ -23,6 +23,7 @@
 #include <melee/lb/lb_00F9.h>
 #include <melee/lb/lbaudio_ax.h>
 #include <melee/mp/mplib.h>
+#include <Runtime/fma.h>
 #include <sysdolphin/baselib/debug.h>
 #include <sysdolphin/baselib/gobjgxlink.h>
 #include <sysdolphin/baselib/gobjproc.h>
@@ -644,7 +645,7 @@ void grGreens_80213C10(Ground_GObj* gobj)
                 apple_pos.x = sign * (40.0f * rand);
                 rand = HSD_Randf();
                 diff = yakumono_param->x70 - yakumono_param->x6C;
-                apple_pos.y = (diff * rand) + yakumono_param->x6C;
+                apple_pos.y = FMA_MUL_ADD(diff, rand, yakumono_param->x6C);
                 apple_pos.z = -40.0f;
                 lbAudioAx_800237A8(0x68FB3, 0x7F, 0x40);
                 it_802EE200(gobj, &apple_pos, yakumono_param->x74,
@@ -789,9 +790,10 @@ void grGreens_8021483C(Ground_GObj* gobj)
     y_scale = (left_top - left_bottom) / 4;
     for (i = 0; i < 5; i++) {
         for (j = 0; j < 3; j++) {
-            ((Vec(*)[6]) gp->u.greens.x4)[i][j].x = (x_scale * j) + left_min;
+            ((Vec(*)[6]) gp->u.greens.x4)[i][j].x =
+                FMA_MUL_ADD(x_scale, j, left_min);
             ((Vec(*)[6]) gp->u.greens.x4)[i][j].y =
-                (y_scale * i) + left_bottom;
+                FMA_MUL_ADD(y_scale, i, left_bottom);
             ((Vec(*)[6]) gp->u.greens.x4)[i][j].z = 0.0f;
         }
     }
@@ -800,7 +802,7 @@ void grGreens_8021483C(Ground_GObj* gobj)
     for (i = 0; i < 5; i++) {
         for (j = 3; j < 6; j++) {
             ((Vec(*)[6]) gp->u.greens.x4)[i][j].x =
-                (x_scale * (j - 3)) + right_min;
+                FMA_MUL_ADD(x_scale, (j - 3), right_min);
             ((Vec(*)[6]) gp->u.greens.x4)[i][j].y =
                 (y_scale * i) + right_bottom;
             ((Vec(*)[6]) gp->u.greens.x4)[i][j].z = 0.0f;
@@ -1062,14 +1064,14 @@ void grGreens_802159B8(Ground* gp, int i, int j, HSD_GObj* gobj)
             it_80275414(item_gobj);
             gp->u.greens.x8_blocks[j][i].x1_2 = 1;
             HSD_JObjGetTranslation(item_gobj->hsd_obj, &vec);
-            vec.y += 5.0f * Ground_801C0498();
+            FMA_ADD_TO(vec.y, 5.0f, Ground_801C0498());
             efSync_Spawn(1039, item_gobj, &vec);
         } else {
             f = 0.0f;
             gp->u.greens.x8_blocks[j][i].x1_3 = 1;
             Camera_RequestQuake(QuakeKind_Small, NULL);
             HSD_JObjGetTranslation(item_gobj->hsd_obj, &vec);
-            vec.y += 5.0f * Ground_801C0498();
+            FMA_ADD_TO(vec.y, 5.0f, Ground_801C0498());
             efSync_Spawn(1032, item_gobj, &vec, &f);
             Ground_801C5414(430007, 186);
         }

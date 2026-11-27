@@ -16,6 +16,7 @@
 #include <melee/it/itmaplib.h>
 #include <melee/lb/lb_00F9.h>
 #include <melee/mp/mpcoll.h>
+#include <Runtime/fma.h>
 #include <sysdolphin/baselib/jobj.h>
 #include <sysdolphin/baselib/random.h>
 
@@ -517,7 +518,7 @@ void itLinkbomb_UnkMotion4_Phys(HSD_GObj* gobj)
         temp_f2 = item->x40_vel.x;
         if (temp_f2 != zero) {
             item->x40_vel.x =
-                (sa->x2C * item->xDD4_itemVar.linkbomb.x4) + temp_f2;
+                FMA_MUL_ADD(sa->x2C, item->xDD4_itemVar.linkbomb.x4, temp_f2);
         }
         if (ABS(item->x40_vel.x) < sa->x30) {
             item->x40_vel.x = zero;

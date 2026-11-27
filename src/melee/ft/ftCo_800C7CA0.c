@@ -14,6 +14,7 @@
 #include "types.h"
 #include <melee/cm/camera.h>
 #include <melee/ef/efasync.h>
+#include <Runtime/fma.h>
 #include <sysdolphin/baselib/dobj.h>
 #include <sysdolphin/baselib/jobj.h>
 
@@ -107,8 +108,8 @@ void fn_800C7DC4(HSD_GObj* gobj, s32 motion_state, Vec3* normal, Vec3* offset)
         goto t2;
     }
 t1:
-    fp->cur_pos.x = -(fp->x68C_transNPos.z * -fp->facing_dir -
-                      (fp->cur_pos.x + offset->x));
+    fp->cur_pos.x = -(FMA_MUL_SUB(fp->x68C_transNPos.z, -fp->facing_dir,
+                                  (fp->cur_pos.x + offset->x)));
     goto end;
 t2:
     fp->cur_pos.y = fp->x68C_transNPos.y + (fp->cur_pos.y + offset->y);

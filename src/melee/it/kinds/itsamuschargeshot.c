@@ -13,6 +13,7 @@
 #include <melee/it/item.h>
 #include <melee/it/itgroundcoll.h>
 #include <melee/lb/lbvector.h>
+#include <Runtime/fma.h>
 #include <sysdolphin/baselib/mtx.h>
 
 ItemStateTable it_803F7288[] = {
@@ -123,15 +124,14 @@ void it_802B56E4(Item_GObj* gobj, Vec3* vec, f32 farg0, f32 farg1, f32 farg2)
         ip->xDC8_word.flags.x14 = 0;
         it_8026B3A8(gobj);
         ip->xDD4_itemVar.samuschargeshot.xDDC =
-            (farg1 * ((attr->xC - attr->x8) / farg2)) + attr->x8;
-        ip->xDD4_itemVar.samuschargeshot.xDF8 =
-            (u32) ((farg1 * ((attr->x14 - attr->x10) / farg2)) + attr->x10);
+            FMA_MUL_ADD(farg1, ((attr->xC - attr->x8) / farg2), attr->x8);
+        ip->xDD4_itemVar.samuschargeshot.xDF8 = (u32) (FMA_MUL_ADD(
+            farg1, ((attr->x14 - attr->x10) / farg2), attr->x10));
         ip->xDD4_itemVar.samuschargeshot.xDE0 = 0.0f;
-        ip->xDD4_itemVar.samuschargeshot.xDE4 =
-            (ip->xDD4_itemVar.samuschargeshot.xDEC *
-             ((attr->x1C - attr->x18) /
-              ip->xDD4_itemVar.samuschargeshot.xDF0)) +
-            attr->x18;
+        ip->xDD4_itemVar.samuschargeshot.xDE4 = FMA_MUL_ADD(
+            ip->xDD4_itemVar.samuschargeshot.xDEC,
+            ((attr->x1C - attr->x18) / ip->xDD4_itemVar.samuschargeshot.xDF0),
+            attr->x18);
         ip->xDD4_itemVar.samuschargeshot.xDF4 = 0;
         ip->facing_dir =
             ftLib_GetFacingDir(ip->xDD4_itemVar.samuschargeshot.xE00);
@@ -267,10 +267,10 @@ bool itSamuschargeshot_UnkMotion0_Anim(Item_GObj* gobj)
         }
     }
 
-    scale.x = scale.y = scale.z =
-        (ip->xDD4_itemVar.samuschargeshot.xDEC *
-         ((attr->x1C - attr->x18) / ip->xDD4_itemVar.samuschargeshot.xDF0)) +
-        attr->x18;
+    scale.x = scale.y = scale.z = FMA_MUL_ADD(
+        ip->xDD4_itemVar.samuschargeshot.xDEC,
+        ((attr->x1C - attr->x18) / ip->xDD4_itemVar.samuschargeshot.xDF0),
+        attr->x18);
     HSD_JObjSetScale(grandchild, &scale);
     return false;
 }

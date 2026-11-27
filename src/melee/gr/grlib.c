@@ -15,6 +15,7 @@
 #include <melee/lb/lb_00F9.h>
 #include <melee/lb/types.h> // IWYU pragma: keep
 #include <melee/sc/types.h>
+#include <Runtime/fma.h>
 #include <sysdolphin/baselib/generator.h>
 #include <sysdolphin/baselib/gobjobject.h>
 #include <sysdolphin/baselib/gobjplink.h>
@@ -305,8 +306,8 @@ static inline bool PointInsideColl(CollData* cd, Vec3* point, float offset)
     bottom = cd->ecb.bottom.y;
     topn = cd->cur_pos.y;
     height = top - bottom;
-    comp = 0.5f * height + offset;
-    y = 0.5f * (top + bottom) + topn - point->y;
+    comp = FMA_MUL_ADD(0.5f, height, offset);
+    y = FMA_MUL_ADD(0.5f, (top + bottom), topn) - point->y;
     if (ABS(y) > comp) {
         return false;
     }
@@ -315,8 +316,8 @@ static inline bool PointInsideColl(CollData* cd, Vec3* point, float offset)
     left = cd->ecb.left.x;
     topn = cd->cur_pos.x;
     width = right - left;
-    comp = 0.5f * width + offset;
-    x = 0.5f * (left + right) + topn - point->x;
+    comp = FMA_MUL_ADD(0.5f, width, offset);
+    x = FMA_MUL_ADD(0.5f, (left + right), topn) - point->x;
     if (ABS(x) > comp) {
         return false;
     }

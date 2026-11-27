@@ -22,6 +22,7 @@
 #include <melee/it/kinds/ityoshieggthrow.h>
 #include <melee/it/kinds/ityoshitongue.h>
 #include <melee/lb/lb_00B0.h>
+#include <Runtime/fma.h>
 #include <sysdolphin/baselib/gobj.h>
 
 static void setDamageCallbacks(Fighter_GObj* gobj)
@@ -74,8 +75,10 @@ void ftYs_SpecialS_8012DF8C(Fighter_GObj* gobj, Vec3* arg1)
         } else {
             angle = M_PI - da->specialhi_base_angle - mag;
         }
-        arg1->x = (fp->mv.ys.specialhi.x4 * da->x100 + da->xFC) * cosf(angle);
-        arg1->y = (fp->mv.ys.specialhi.x4 * da->x100 + da->xFC) * sinf(angle);
+        arg1->x = (FMA_MUL_ADD(fp->mv.ys.specialhi.x4, da->x100, da->xFC)) *
+                  cosf(angle);
+        arg1->y = (FMA_MUL_ADD(fp->mv.ys.specialhi.x4, da->x100, da->xFC)) *
+                  sinf(angle);
         arg1->z = 0.0f;
     }
 }
@@ -111,8 +114,8 @@ void fn_8012E110(Fighter_GObj* gobj)
         ftYs_SpecialS_8012DF8C_outline(gobj, &sp18);
         {
             float x4 = fp->mv.ys.specialhi.x4;
-            it_802B28C8(fp->u.ys.x2238, &sp18, &sp24, x4 * da->x110 + da->x10C,
-                        x4);
+            it_802B28C8(fp->u.ys.x2238, &sp18, &sp24,
+                        FMA_MUL_ADD(x4, da->x110, da->x10C), x4);
         }
         fp->u.ys.x2238 = NULL;
         fp->take_dmg_cb = NULL;

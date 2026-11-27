@@ -22,6 +22,7 @@
 #include <melee/ft/ft_0881.h>
 #include <melee/ft/ftcommon.h>
 #include <melee/ft/types.h>
+#include <Runtime/fma.h>
 
 void ftCo_80090574(Fighter_GObj* gobj)
 {
@@ -31,7 +32,8 @@ void ftCo_80090574(Fighter_GObj* gobj)
 static u16 calcShift(float hitlag_mul, FtMotionId msid, int dmg)
 {
     ftCommonData* fcp = p_ftCommonData;
-    return fcp->x168 * ftCommon_CalcHitlag(dmg, msid, hitlag_mul) + fcp->x16C;
+    return FMA_MUL_ADD(fcp->x168, ftCommon_CalcHitlag(dmg, msid, hitlag_mul),
+                       fcp->x16C);
 }
 
 void ftCo_80090594(Fighter* fp, HitElement element, int dmg, FtMotionId msid,
@@ -70,7 +72,7 @@ Vec2* ftCo_80090690(Fighter* fp, Vec2* shift)
         if (fp_x18F8 == 1) {
             float x = vec->x * fp->facing_dir;
             shift->x = fp->dmg.x1904 * x;
-            shift->y = -fp->dmg.x1900 * x + vec->y;
+            shift->y = FMA_MUL_ADD(-fp->dmg.x1900, x, vec->y);
         } else {
             shift->x = vec->x * fp->facing_dir;
             shift->y = vec->y;

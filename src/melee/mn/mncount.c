@@ -14,6 +14,7 @@
 #include <melee/lb/lbspdisplay.h>
 #include <melee/sc/types.h>
 #include <melee/ty/toy.h>
+#include <Runtime/fma.h>
 #include <sysdolphin/baselib/debug.h>
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/gobjgxlink.h>
@@ -527,7 +528,8 @@ void mnCount_CreateRow(HSD_GObj* gobj, int visible_row, mnCount_row data_row)
         HSD_SisLib_803A5CC4(userdata->labels[visible_row]);
         *label_text = NULL;
     }
-    text = HSD_SisLib_803A5ACC(0, 1, -13.0f, y = (1.4f * visible_row) + -6.4f,
+    text = HSD_SisLib_803A5ACC(0, 1, -13.0f,
+                               y = FMA_MUL_ADD(1.4f, visible_row, -6.4f),
                                17.0f, 500.0f, 38.38772f);
     *label_text = text;
     text->font_size.x = 0.03f;

@@ -1,6 +1,7 @@
 #include <setjmp.h>
 
 #include "hsd_3B34.h"
+#include <Runtime/fma.h>
 
 jmp_buf hsd_804D2E70;
 u8 hsd_804D2F68[0x70C];
@@ -360,10 +361,14 @@ void fn_803B61B4(s32* block)
         row5 = row[5];
         row0 = row[0];
         row4 = row[4];
-        odd0 = (f32) ((0.980785 * (f64) row7) - (0.19509 * (f64) row1));
-        odd1 = (f32) ((0.83147 * (f64) row5) - (0.55557 * (f64) row3));
-        odd2 = (f32) ((0.55557 * (f64) row5) + (0.83147 * (f64) row3));
-        odd3 = (f32) ((0.19509 * (f64) row7) + (0.980785 * (f64) row1));
+        odd0 =
+            (f32) (FMA_MUL_SUB(0.980785, (f64) row7, (0.19509 * (f64) row1)));
+        odd1 =
+            (f32) (FMA_MUL_SUB(0.83147, (f64) row5, (0.55557 * (f64) row3)));
+        odd2 =
+            (f32) (FMA_MUL_ADD(0.55557, (f64) row5, (0.83147 * (f64) row3)));
+        odd3 =
+            (f32) (FMA_MUL_ADD(0.19509, (f64) row7, (0.980785 * (f64) row1)));
         even_sum = (f32) (0.707107 * (f64) (row0 + row4));
         even_diff = (f32) (0.707107 * (f64) (row0 - row4));
         row2 = row[2];
@@ -372,9 +377,9 @@ void fn_803B61B4(s32* block)
         odd_pair_diff = -odd2 + odd3;
         odd_sum = odd2 + odd3;
         even_rotation_diff =
-            (f32) ((-0.92388 * (f64) row6) + (0.382683 * (f64) row2));
+            (f32) (FMA_MUL_ADD(-0.92388, (f64) row6, (0.382683 * (f64) row2)));
         even_rotation_sum =
-            (f32) ((0.382683 * (f64) row6) + (0.92388 * (f64) row2));
+            (f32) (FMA_MUL_ADD(0.382683, (f64) row6, (0.92388 * (f64) row2)));
         odd_rotation_diff =
             (f32) (0.707107 * (f64) (-odd_pair_sum + odd_pair_diff));
         even0 = even_sum + even_rotation_sum;
@@ -403,10 +408,14 @@ void fn_803B61B4(s32* block)
         col5 = column[40];
         col0 = column[0];
         col4 = column[32];
-        odd0 = (f32) ((0.980785 * (f64) col7) - (0.19509 * (f64) col1));
-        odd1 = (f32) ((0.83147 * (f64) col5) - (0.55557 * (f64) col3));
-        odd2 = (f32) ((0.55557 * (f64) col5) + (0.83147 * (f64) col3));
-        odd3 = (f32) ((0.19509 * (f64) col7) + (0.980785 * (f64) col1));
+        odd0 =
+            (f32) (FMA_MUL_SUB(0.980785, (f64) col7, (0.19509 * (f64) col1)));
+        odd1 =
+            (f32) (FMA_MUL_SUB(0.83147, (f64) col5, (0.55557 * (f64) col3)));
+        odd2 =
+            (f32) (FMA_MUL_ADD(0.55557, (f64) col5, (0.83147 * (f64) col3)));
+        odd3 =
+            (f32) (FMA_MUL_ADD(0.19509, (f64) col7, (0.980785 * (f64) col1)));
         even_sum = (f32) (0.707107 * (f64) (col0 + col4));
         even_diff = (f32) (0.707107 * (f64) (col0 - col4));
         col2 = column[16];
@@ -415,9 +424,9 @@ void fn_803B61B4(s32* block)
         odd_pair_diff = -odd2 + odd3;
         odd_sum = odd2 + odd3;
         even_rotation_diff =
-            (f32) ((-0.92388 * (f64) col6) + (0.382683 * (f64) col2));
+            (f32) (FMA_MUL_ADD(-0.92388, (f64) col6, (0.382683 * (f64) col2)));
         even_rotation_sum =
-            (f32) ((0.382683 * (f64) col6) + (0.92388 * (f64) col2));
+            (f32) (FMA_MUL_ADD(0.382683, (f64) col6, (0.92388 * (f64) col2)));
         {
             f32 odd_rotation_sum =
                 (f32) (0.707107 * (f64) (-odd_pair_sum + odd_pair_diff));
@@ -477,16 +486,17 @@ static inline void jpeg_store_rgb565(JpegOutput* out, s32 offset,
     u8 green;
     struct jpeg_store_rgb565_pixel pixel;
 
-    red_value = (f32) ((f64) luminance + (1.402 * (f64) cr));
+    red_value = (f32) (FMA_ADD_MUL((f64) luminance, 1.402, (f64) cr));
     pixel.red = jpeg_clamp(red_value);
 
-    green_value =
-        ((f32) luminance - (0.3441f * (f32) cb)) - (0.7139f * (f32) cr);
+    green_value = FMA_SUB_MUL(
+        (FMA_SUB_MUL((f32) luminance, 0.3441f, (f32) cb)), 0.7139f, (f32) cr);
     green = jpeg_clamp(green_value);
     pixel.green = green;
 
-    blue_value = (f32) ((f64) ((1.7718f * (f32) cb) + (f32) luminance) -
-                        (0.0012 * (f64) cr));
+    blue_value = (f32) (FMA_SUB_MUL(
+        (f64) (FMA_MUL_ADD(1.7718f, (f32) cb, (f32) luminance)), 0.0012,
+        (f64) cr));
     pixel.blue = jpeg_clamp(blue_value);
 
     out->pixels[offset] = ((pixel.red << 8) & 0xF800) |

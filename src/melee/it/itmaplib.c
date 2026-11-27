@@ -9,6 +9,7 @@
 #include <melee/lb/lbvector.h>
 #include <melee/mp/mpcoll.h>
 #include <melee/mp/mplib.h>
+#include <Runtime/fma.h>
 
 #ifdef MUST_MATCH
 static void sdata2_order(void)
@@ -731,10 +732,10 @@ static inline float sqrtf_accurate_store(float x, volatile float* y)
 {
     if (x > 0.0f) {
         double guess = __frsqrte((double) x);
-        guess = 0.5 * guess * (3.0 - guess * guess * x);
-        guess = 0.5 * guess * (3.0 - guess * guess * x);
-        guess = 0.5 * guess * (3.0 - guess * guess * x);
-        guess = 0.5 * guess * (3.0 - guess * guess * x);
+        guess = 0.5 * guess * (FMA_SUB_MUL(3.0, guess * guess, x));
+        guess = 0.5 * guess * (FMA_SUB_MUL(3.0, guess * guess, x));
+        guess = 0.5 * guess * (FMA_SUB_MUL(3.0, guess * guess, x));
+        guess = 0.5 * guess * (FMA_SUB_MUL(3.0, guess * guess, x));
         *y = (float) (x * guess);
         return *y;
     }
@@ -803,10 +804,10 @@ static inline float sqrtf_accurate_sp18(float x)
 
     if (x > 0.0f) {
         double guess = __frsqrte((double) x);
-        guess = 0.5 * guess * (3.0 - guess * guess * x);
-        guess = 0.5 * guess * (3.0 - guess * guess * x);
-        guess = 0.5 * guess * (3.0 - guess * guess * x);
-        guess = 0.5 * guess * (3.0 - guess * guess * x);
+        guess = 0.5 * guess * (FMA_SUB_MUL(3.0, guess * guess, x));
+        guess = 0.5 * guess * (FMA_SUB_MUL(3.0, guess * guess, x));
+        guess = 0.5 * guess * (FMA_SUB_MUL(3.0, guess * guess, x));
+        guess = 0.5 * guess * (FMA_SUB_MUL(3.0, guess * guess, x));
         y[1] = (float) (x * guess);
         return y[1];
     }
@@ -858,8 +859,9 @@ bool it_8027770C(Item_GObj* item_gobj)
         sp38 = coll->right_facing_wall.normal;
     }
     if (var_r5 != 0) {
-        if (((item->x40_vel.z * sp38.z) +
-             ((item->x40_vel.x * sp38.x) + (item->x40_vel.y * sp38.y))) < 0.0f)
+        if ((FMA_MUL_ADD(item->x40_vel.z, sp38.z,
+                         (FMA_MUL_ADD(item->x40_vel.x, sp38.x,
+                                      (item->x40_vel.y * sp38.y))))) < 0.0f)
         {
             lbVector_Mirror(&item->x40_vel, &sp38);
         }
@@ -883,10 +885,10 @@ static inline float sqrtf_accurate_local(float x)
 
     if (x > 0.0f) {
         double guess = __frsqrte((double) x);
-        guess = 0.5 * guess * (3.0 - guess * guess * x);
-        guess = 0.5 * guess * (3.0 - guess * guess * x);
-        guess = 0.5 * guess * (3.0 - guess * guess * x);
-        guess = 0.5 * guess * (3.0 - guess * guess * x);
+        guess = 0.5 * guess * (FMA_SUB_MUL(3.0, guess * guess, x));
+        guess = 0.5 * guess * (FMA_SUB_MUL(3.0, guess * guess, x));
+        guess = 0.5 * guess * (FMA_SUB_MUL(3.0, guess * guess, x));
+        guess = 0.5 * guess * (FMA_SUB_MUL(3.0, guess * guess, x));
         y = (float) (x * guess);
         return y;
     }

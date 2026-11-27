@@ -22,6 +22,7 @@
 #include <melee/lb/lb_00B0.h>
 #include <melee/lb/lbvector.h>
 #include <melee/pl/player.h>
+#include <Runtime/fma.h>
 
 #ifdef MUST_MATCH
 static void sdata2_order(void)
@@ -41,9 +42,9 @@ static inline float my_sqrtf(float x, volatile float* y)
 {
     if (x > 0) {
         double guess = __frsqrte(x);
-        guess = 0.5f * guess * (3.0f - guess * guess * x);
-        guess = 0.5f * guess * (3.0f - guess * guess * x);
-        guess = 0.5f * guess * (3.0f - guess * guess * x);
+        guess = 0.5f * guess * (FMA_SUB_MUL(3.0f, guess * guess, x));
+        guess = 0.5f * guess * (FMA_SUB_MUL(3.0f, guess * guess, x));
+        guess = 0.5f * guess * (FMA_SUB_MUL(3.0f, guess * guess, x));
         *y = (x * guess);
         return *y;
     }
@@ -66,7 +67,7 @@ void ftPp_SpecialS_80120E68(Fighter_GObj* gobj)
         fp->self_vel.x = fp2->cur_pos.x - fp->cur_pos.x;
         fp->self_vel.y = fp2->cur_pos.y - fp->cur_pos.y;
         fp->self_vel.z = 0.0F;
-        fp->self_vel.x = -(3.0F * fp2->facing_dir - fp->self_vel.x);
+        fp->self_vel.x = -(FMA_MUL_SUB(3.0F, fp2->facing_dir, fp->self_vel.x));
         fp->self_vel.y += 5.0F;
         lbVector_Normalize(&fp->self_vel);
         dx = SQ(fp->cur_pos.x - fp2->cur_pos.x);

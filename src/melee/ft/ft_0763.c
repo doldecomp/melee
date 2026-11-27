@@ -6,6 +6,7 @@
 #include "inlines.h"
 #include "types.h"
 #include <melee/it/it_26B1.h>
+#include <Runtime/fma.h>
 #include <sysdolphin/baselib/gobj.h>
 
 /// Combo Count Logic
@@ -78,8 +79,8 @@ static inline void comboCount_Push(Fighter* fp)
         var_f2 = p_ftCommonData->x4D4;
     }
     temp_f2 = fp->facing_dir * var_f2;
-    fp->cur_pos.x = -(pos->y * temp_f2 - fp->cur_pos.x);
-    fp->cur_pos.y = -(-pos->x * temp_f2 - fp->cur_pos.y);
+    fp->cur_pos.x = -(FMA_MUL_SUB(pos->y, temp_f2, fp->cur_pos.x));
+    fp->cur_pos.y = -(FMA_MUL_SUB(-pos->x, temp_f2, fp->cur_pos.y));
 }
 
 /// Combo count something + adjust FtPart_TopN

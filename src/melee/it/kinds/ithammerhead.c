@@ -14,6 +14,7 @@
 #include <melee/it/item.h>
 #include <melee/it/itgroundcoll.h>
 #include <melee/it/itmaplib.h>
+#include <Runtime/fma.h>
 
 ItemStateTable it_803F6640[] = {
     {
@@ -60,7 +61,8 @@ void it_80299C48(Item_GObj* parent_gobj, Vec3* pos, Vec3* velocity,
         it_80299D7C(gobj);
         it->facing_dir = facing_dir;
         it->x40_vel.x = velocity->x * attrs->initial_velocity * it->facing_dir;
-        it->x40_vel.y = velocity->y * attrs->initial_velocity + 0.5f;
+        it->x40_vel.y =
+            FMA_MUL_ADD(velocity->y, attrs->initial_velocity, 0.5f);
         db_80225DD8(gobj, parent_gobj);
     }
 }

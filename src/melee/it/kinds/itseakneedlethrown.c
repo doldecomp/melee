@@ -17,6 +17,7 @@
 #include <melee/lb/lbvector.h>
 #include <melee/mp/mpcoll.h>
 #include <melee/mp/mplib.h>
+#include <Runtime/fma.h>
 #include <sysdolphin/baselib/jobj.h>
 #include <sysdolphin/baselib/random.h>
 
@@ -126,14 +127,14 @@ void it_802AFF08(Item_GObj* gobj, Fighter_GObj* owner)
         angle_factor = 1.5707964f;
     }
     ip->xDD4_itemVar.seakneedlethrown.xDF0 =
-        (ip->facing_dir * angle_factor) + 1.5707964f;
+        FMA_MUL_ADD(ip->facing_dir, angle_factor, 1.5707964f);
     ip->x40_vel.x = -attr->x8 * cosf(ip->xDD4_itemVar.seakneedlethrown.xDF0);
     ip->x40_vel.y = attr->x8 * sinf(ip->xDD4_itemVar.seakneedlethrown.xDF0);
     ip->x40_vel.z = 0.0f;
     ip->xDD4_itemVar.seakneedlethrown.xDE4.x =
-        ip->pos.x - 3.0f * ip->x40_vel.x;
+        FMA_SUB_MUL(ip->pos.x, 3.0f, ip->x40_vel.x);
     ip->xDD4_itemVar.seakneedlethrown.xDE4.y =
-        ip->pos.y - 3.0f * ip->x40_vel.y;
+        FMA_SUB_MUL(ip->pos.y, 3.0f, ip->x40_vel.y);
     ip->xDD4_itemVar.seakneedlethrown.xDE4.z = 0.0f;
     HSD_JObjSetRotationX(
         child,

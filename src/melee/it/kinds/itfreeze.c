@@ -13,6 +13,7 @@
 #include <melee/it/item.h>
 #include <melee/it/itgroundcoll.h>
 #include <melee/it/itmaplib.h>
+#include <Runtime/fma.h>
 #include <sysdolphin/baselib/jobj.h>
 
 ItemStateTable it_803F5D28[] = {
@@ -145,8 +146,8 @@ void it_8028EDBC(Item_GObj* gobj)
                 ip->xDD4_itemVar.freeze.x0 = attrs->x4_float * ip->facing_dir;
             } else {
                 ip->xDD4_itemVar.freeze.x0 =
-                    (ip->xDD4_itemVar.freeze.x4.x * attrs->xC) +
-                    ip->xDD4_itemVar.freeze.x0;
+                    FMA_MUL_ADD(ip->xDD4_itemVar.freeze.x4.x, attrs->xC,
+                                ip->xDD4_itemVar.freeze.x0);
             }
         } else {
             if (ABS(ip->xDD4_itemVar.freeze.x0) < attrs->x4_float) {

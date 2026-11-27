@@ -17,6 +17,7 @@
 #include <melee/ft/kinds/ftCommon/inlines.h>
 #include <melee/it/kinds/itclimbersblizzard.h>
 #include <melee/lb/lb_00B0.h>
+#include <Runtime/fma.h>
 
 void ftPp_SpecialHi_80122898(Fighter_GObj* gobj)
 {
@@ -181,7 +182,7 @@ void fn_80122D2C(Fighter_GObj* gobj)
         if (fp->mv.pp.speciallw.x0 == 0) {
             ftIceClimberAttributes* da = fp->dat_attrs;
             lb_8000B1CC(fp->parts[FtPart_L3rdNa].joint, NULL, &pos);
-            pos.x += da->xBC * fp->facing_dir;
+            FMA_ADD_TO(pos.x, da->xBC, fp->facing_dir);
             pos.y += da->xC0;
             itClimbersBlizzard_Spawn(gobj, &pos, fp->facing_dir);
             fp->mv.pp.speciallw.x0 = da->xB8;

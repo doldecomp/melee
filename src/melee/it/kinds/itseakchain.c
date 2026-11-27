@@ -22,6 +22,7 @@
 #include <melee/lb/lbaudio_ax.h>
 #include <melee/lb/lbvector.h>
 #include <melee/mp/mpcoll.h>
+#include <Runtime/fma.h>
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/gobjgxlink.h>
 #include <sysdolphin/baselib/gobjobject.h>
@@ -461,18 +462,18 @@ void it_802BBB0C(ItemLink* link, Vec3* offset, itSeakChain_Attrs* sa,
     ItemLink* prev = link->prev;
 
     it_802A3C98(&link->pos, offset, &pos);
-    link->pos.x = pos.x * scale + offset->x;
-    link->pos.y = pos.y * scale + offset->y;
-    link->pos.z = pos.z * scale + offset->z;
+    link->pos.x = FMA_MUL_ADD(pos.x, scale, offset->x);
+    link->pos.y = FMA_MUL_ADD(pos.y, scale, offset->y);
+    link->pos.z = FMA_MUL_ADD(pos.z, scale, offset->z);
     for (; prev != NULL; link = prev, prev = prev->prev) {
         prev->vel.y -= sa->x18;
         it_802A4420(prev);
         it_802A43EC(prev);
         it_802BB938(prev, 0, sa->x4);
         if (it_802A3C98(&prev->pos, &link->pos, &pos) > sa->x4) {
-            prev->pos.x = pos.x * sa->x4 + link->pos.x;
-            prev->pos.y = pos.y * sa->x4 + link->pos.y;
-            prev->pos.z = pos.z * sa->x4 + link->pos.z;
+            prev->pos.x = FMA_MUL_ADD(pos.x, sa->x4, link->pos.x);
+            prev->pos.y = FMA_MUL_ADD(pos.y, sa->x4, link->pos.y);
+            prev->pos.z = FMA_MUL_ADD(pos.z, sa->x4, link->pos.z);
         }
     }
 }
@@ -486,18 +487,18 @@ void it_802BBC38(ItemLink* link, Vec3* offset, itSeakChain_Attrs* sa,
     ItemLink* prev = link->prev;
 
     it_802A3C98(&link->pos, offset, &origin);
-    link->pos.x = origin.x * scale + offset->x;
-    link->pos.y = origin.y * scale + offset->y;
-    link->pos.z = origin.z * scale + offset->z;
+    link->pos.x = FMA_MUL_ADD(origin.x, scale, offset->x);
+    link->pos.y = FMA_MUL_ADD(origin.y, scale, offset->y);
+    link->pos.z = FMA_MUL_ADD(origin.z, scale, offset->z);
     for (; prev != NULL; link = prev, prev = prev->prev) {
         prev->vel.y -= sa->x18;
         it_802A4420(prev);
         it_802A43EC(prev);
         it_802BB938(prev, 0, sa->x4);
         if (it_802A3C98(&prev->pos, &link->pos, &origin) > sa->x4) {
-            prev->pos.x = origin.x * sa->x4 + link->pos.x;
-            prev->pos.y = origin.y * sa->x4 + link->pos.y;
-            prev->pos.z = origin.z * sa->x4 + link->pos.z;
+            prev->pos.x = FMA_MUL_ADD(origin.x, sa->x4, link->pos.x);
+            prev->pos.y = FMA_MUL_ADD(origin.y, sa->x4, link->pos.y);
+            prev->pos.z = FMA_MUL_ADD(origin.z, sa->x4, link->pos.z);
         }
     }
 }
@@ -516,16 +517,16 @@ enum_t it_802BBD64(ItemLink* link, Vec3* arg1, itSeakChain_Attrs* sa)
     while (prev != NULL) {
         if (prev->x2C_b0) {
             if (it_802A3C98(&prev->pos, &cur->pos, &vec) > sa->x4) {
-                prev->pos.x = vec.x * sa->x4 + cur->pos.x;
-                prev->pos.y = vec.y * sa->x4 + cur->pos.y;
-                prev->pos.z = vec.z * sa->x4 + cur->pos.z;
+                prev->pos.x = FMA_MUL_ADD(vec.x, sa->x4, cur->pos.x);
+                prev->pos.y = FMA_MUL_ADD(vec.y, sa->x4, cur->pos.y);
+                prev->pos.z = FMA_MUL_ADD(vec.z, sa->x4, cur->pos.z);
             }
             it_802A43EC(prev);
         } else {
             if (it_802A3C98(arg1, &cur->pos, &vec) > sa->x4) {
-                prev->pos.x = vec.x * sa->x4 + cur->pos.x;
-                prev->pos.y = vec.y * sa->x4 + cur->pos.y;
-                prev->pos.z = vec.z * sa->x4 + cur->pos.z;
+                prev->pos.x = FMA_MUL_ADD(vec.x, sa->x4, cur->pos.x);
+                prev->pos.y = FMA_MUL_ADD(vec.y, sa->x4, cur->pos.y);
+                prev->pos.z = FMA_MUL_ADD(vec.z, sa->x4, cur->pos.z);
                 prev->x2C_b0 = true;
                 it_802A43B8(prev);
             } else {
@@ -556,20 +557,20 @@ enum_t it_802BBED0(ItemLink* link, Point3d* arg1, itSeakChain_Attrs* sa)
         float vel_scale = 1.0f;
         while (prev != NULL) {
             if (prev->x2C_b0) {
-                prev->vel.y = -((sa->x18 * vel_scale) - prev->vel.y);
+                prev->vel.y = -(FMA_MUL_SUB(sa->x18, vel_scale, prev->vel.y));
                 vel_scale *= sa->x34;
                 it_802A4420(prev);
                 if (it_802A3C98(&prev->pos, &cur->pos, &pos) > sa->x4) {
-                    prev->pos.x = pos.x * sa->x4 + cur->pos.x;
-                    prev->pos.y = pos.y * sa->x4 + cur->pos.y;
-                    prev->pos.z = pos.z * sa->x4 + cur->pos.z;
+                    prev->pos.x = FMA_MUL_ADD(pos.x, sa->x4, cur->pos.x);
+                    prev->pos.y = FMA_MUL_ADD(pos.y, sa->x4, cur->pos.y);
+                    prev->pos.z = FMA_MUL_ADD(pos.z, sa->x4, cur->pos.z);
                 }
                 it_802A43EC(prev);
             } else {
                 if (it_802A3C98(arg1, &cur->pos, &pos) > sa->x4) {
-                    prev->pos.x = pos.x * sa->x4 + cur->pos.x;
-                    prev->pos.y = pos.y * sa->x4 + cur->pos.y;
-                    prev->pos.z = pos.z * sa->x4 + cur->pos.z;
+                    prev->pos.x = FMA_MUL_ADD(pos.x, sa->x4, cur->pos.x);
+                    prev->pos.y = FMA_MUL_ADD(pos.y, sa->x4, cur->pos.y);
+                    prev->pos.z = FMA_MUL_ADD(pos.z, sa->x4, cur->pos.z);
                     prev->x2C_b0 = true;
                     it_802A43B8(prev);
                 } else {
@@ -630,7 +631,7 @@ void it_802BC080(ItemLink* link, Vec3* target, Item* ip)
     ItemLink* cur = link;
     itSeakChain_Attrs* attrs =
         &ip->xC4_article_data->x4_specialAttributes->seak_chain;
-    s32 last_idx = (s32) (0.5f * attrs->x0 - 1.0f);
+    s32 last_idx = (s32) (FMA_MUL_SUB(0.5f, attrs->x0, 1.0f));
     Fighter* fp;
     s32 env_flags;
     s32 use_arg = 0;
@@ -688,8 +689,10 @@ void it_802BC080(ItemLink* link, Vec3* target, Item* ip)
 
     ip->xDD4_itemVar.seakchain.x18 = *(s32*) &fp->mv.co.common.x1C;
 
-    cur->vel.x += ip->xDD4_itemVar.seakchain.history[0].x * attrs->x1C;
-    cur->vel.y += ip->xDD4_itemVar.seakchain.history[0].y * attrs->x20;
+    FMA_ADD_TO(cur->vel.x, ip->xDD4_itemVar.seakchain.history[0].x,
+               attrs->x1C);
+    FMA_ADD_TO(cur->vel.y, ip->xDD4_itemVar.seakchain.history[0].y,
+               attrs->x20);
     itSeakChain_clamp_x10(cur, attrs);
     if (ABS(cur->vel.x) > attrs->x24) {
         if (cur->vel.x > 0.0f) {
@@ -716,9 +719,9 @@ void it_802BC080(ItemLink* link, Vec3* target, Item* ip)
     scale = 1.0f;
     scale *= attrs->x34;
     if (it_802A3C98(&cur->pos, target, &stack.dir) > attrs->x4) {
-        cur->pos.x = stack.dir.x * attrs->x4 + target->x;
-        cur->pos.y = stack.dir.y * attrs->x4 + target->y;
-        cur->pos.z = stack.dir.z * attrs->x4 + target->z;
+        cur->pos.x = FMA_MUL_ADD(stack.dir.x, attrs->x4, target->x);
+        cur->pos.y = FMA_MUL_ADD(stack.dir.y, attrs->x4, target->y);
+        cur->pos.z = FMA_MUL_ADD(stack.dir.z, attrs->x4, target->z);
     }
 
     use_arg = ip->xDD4_itemVar.seakchain.x10;
@@ -769,7 +772,9 @@ void it_802BC080(ItemLink* link, Vec3* target, Item* ip)
             f32 vy_lim = attrs->x18 * scale;
             if (iter->vel.y > vy_lim - attrs->x28) {
                 iter->vel.y -= vy_lim;
-            } else if (iter->vel.y < -attrs->x18 * scale - attrs->x28) {
+            } else if (iter->vel.y <
+                       FMA_MUL_SUB(-attrs->x18, scale, attrs->x28))
+            {
                 iter->vel.y += vy_lim;
             }
         }
@@ -807,9 +812,9 @@ void it_802BC080(ItemLink* link, Vec3* target, Item* ip)
         }
 
         if (it_802A3C98(&iter->pos, &cur->pos, &stack.dir) > attrs->x4) {
-            iter->pos.x = stack.dir.x * attrs->x4 + cur->pos.x;
-            iter->pos.y = stack.dir.y * attrs->x4 + cur->pos.y;
-            iter->pos.z = stack.dir.z * attrs->x4 + cur->pos.z;
+            iter->pos.x = FMA_MUL_ADD(stack.dir.x, attrs->x4, cur->pos.x);
+            iter->pos.y = FMA_MUL_ADD(stack.dir.y, attrs->x4, cur->pos.y);
+            iter->pos.z = FMA_MUL_ADD(stack.dir.z, attrs->x4, cur->pos.z);
         }
 
         cur = iter;

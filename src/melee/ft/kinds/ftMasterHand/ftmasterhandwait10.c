@@ -31,6 +31,7 @@
 #include <melee/gr/stage.h>
 #include <melee/mp/mplib.h>
 #include <melee/pl/player.h>
+#include <Runtime/fma.h>
 #include <sysdolphin/baselib/controller.h>
 #include <sysdolphin/baselib/random.h>
 
@@ -331,11 +332,13 @@ void ftMh_Wait1_0_Anim(HSD_GObj* gobj)
                     break;
                 case ftMh_MS_FingerBeamLoop: // Lasers
                     rand = HSD_Randf();
-                    vec.x = da->xCC_pos.x * rand * 2 + da->xC4_pos.x -
-                            da->xCC_pos.x;
+                    vec.x =
+                        FMA_MUL_ADD(da->xCC_pos.x * rand, 2, da->xC4_pos.x) -
+                        da->xCC_pos.x;
                     rand = HSD_Randf();
-                    vec.y = da->xCC_pos.y * rand * 2 + da->xC4_pos.y -
-                            da->xCC_pos.y;
+                    vec.y =
+                        FMA_MUL_ADD(da->xCC_pos.y * rand, 2, da->xC4_pos.y) -
+                        da->xCC_pos.y;
                     vec.z = 0;
                     ftMh_MS_389_80150DC4(gobj, &ftMh_MS_359_80152BCC, &vec);
                     break;
@@ -433,9 +436,11 @@ void ftMh_MS_341_80150894(HSD_GObj* gobj)
     } else if ((buttons & HSD_PAD_B) && (buttons & HSD_PAD_DPADUP)) {
         // Lasers
         float rand = HSD_Randf();
-        pos.x = da->xCC_pos.x * rand * 2 + da->xC4_pos.x - da->xCC_pos.x;
+        pos.x = FMA_MUL_ADD(da->xCC_pos.x * rand, 2, da->xC4_pos.x) -
+                da->xCC_pos.x;
         rand = HSD_Randf();
-        pos.y = da->xCC_pos.y * rand * 2 + da->xC4_pos.y - da->xCC_pos.y;
+        pos.y = FMA_MUL_ADD(da->xCC_pos.y * rand, 2, da->xC4_pos.y) -
+                da->xCC_pos.y;
         pos.z = 0;
         ftMh_MS_389_80150DC4(gobj, &ftMh_MS_359_80152BCC, &pos);
     } else if ((buttons & HSD_PAD_B) && (buttons & HSD_PAD_DPADRIGHT)) {

@@ -19,6 +19,7 @@
 #include <melee/ft/kinds/ftCommon/ftCo_Fall.h>
 #include <melee/ft/kinds/ftCommon/inlines.h>
 #include <melee/ft/types.h>
+#include <Runtime/fma.h>
 
 void ftPk_SpecialS_Enter(HSD_GObj* gobj)
 {
@@ -267,7 +268,7 @@ void ftPk_SpecialS0_Anim(HSD_GObj* gobj)
     ftPikachuAttributes* sa = fp->dat_attrs;
 
     if (fp->x914[0].state == HitCapsule_Enabled) {
-        float damage_amount = fp->mv.pk.unk3.x0 * sa->x2C + sa->x28;
+        float damage_amount = FMA_MUL_ADD(fp->mv.pk.unk3.x0, sa->x2C, sa->x28);
         ftColl_8007ABD0(&fp->x914[0], damage_amount, gobj);
     }
 
@@ -285,7 +286,7 @@ void ftPk_SpecialAirS0_Anim(HSD_GObj* gobj)
     ftPikachuAttributes* sa = fp->dat_attrs;
 
     if (fp->x914[0].state == HitCapsule_Enabled) {
-        float damage_amount = fp->mv.pk.unk3.x0 * sa->x2C + sa->x28;
+        float damage_amount = FMA_MUL_ADD(fp->mv.pk.unk3.x0, sa->x2C, sa->x28);
         ftColl_8007ABD0(&fp->x914[0], damage_amount, gobj);
     }
 
@@ -430,12 +431,12 @@ void ftPk_SpecialS_ChangeMotion_Unk10(HSD_GObj* gobj)
 
     fp->cmd_vars[0] = 0;
 
-    fp->self_vel.x = sa->x40 * fp->mv.pk.unk3.x0 + sa->x3C;
+    fp->self_vel.x = FMA_MUL_ADD(sa->x40, fp->mv.pk.unk3.x0, sa->x3C);
     fp->self_vel.x *= fp->facing_dir;
 
     {
         float temp = 0.5f * fp->mv.pk.unk3.x0 / sa->x24;
-        fp->self_vel.y = 0.5f * sa->x44 + sa->x44 * temp;
+        fp->self_vel.y = FMA_MUL_ADD(0.5f, sa->x44, sa->x44 * temp);
     }
 
     Fighter_ChangeMotionState(gobj, ftPk_MS_SpecialAirS1, transition_flags3,

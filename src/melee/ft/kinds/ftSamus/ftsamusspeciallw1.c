@@ -21,6 +21,7 @@
 #include <melee/ft/types.h>
 #include <melee/it/kinds/itsamusbomb.h>
 #include <melee/lb/lb_00B0.h>
+#include <Runtime/fma.h>
 
 static MotionFlags const ftSs_MF_SpecialLw_Coll =
     ftCommon_GroundAirColl_MF | Ft_MF_KeepColAnimHitStatus | Ft_MF_SkipHit |
@@ -34,7 +35,7 @@ void ftSs_SpecialLw_8012ADF0(Fighter_GObj* gobj)
         Vec3 vec;
         PAD_STACK(4);
         lb_8000B1CC(fp->parts[FtPart_TopN].joint, NULL, &vec);
-        vec.x += samus_attr->x74_vec.x * fp->facing_dir;
+        FMA_ADD_TO(vec.x, samus_attr->x74_vec.x, fp->facing_dir);
         vec.y += samus_attr->x74_vec.y;
         vec.z += samus_attr->x74_vec.z;
         it_802B4AC8(gobj, &vec, fp->facing_dir);

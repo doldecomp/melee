@@ -20,6 +20,7 @@
 #include <melee/mn/inlines.h>
 #include <melee/pl/player.h>
 #include <melee/sc/types.h>
+#include <Runtime/fma.h>
 #include <sysdolphin/baselib/aobj.h>
 #include <sysdolphin/baselib/controller.h>
 #include <sysdolphin/baselib/dobj.h>
@@ -260,7 +261,7 @@ s32 fn_8017F2A4(HSD_Text** arg0, f32 farg0, f32 farg1)
     (*arg0)->default_alignment = 2;
     x_end = 281.0f + farg0;
     for (i = 0; i < 7; i++) {
-        y = (0.6f * (32.0f * (f32) i)) + farg1;
+        y = FMA_MUL_ADD(0.6f, (32.0f * (f32) i), farg1);
         ptr[1] = HSD_SisLib_803A5ACC(3, 0, farg0, y, 0.0f, 2.0f, 2.0f);
         text = ptr[1];
         text->x34.x = 0.56f;
@@ -609,7 +610,7 @@ void fn_8017FE54(HSD_GObj* gobj)
     lb_800122C8(ev->x1C, 0, 0, 1);
     lb_800138D8(state->x2C, (int) (120.0F * state->x10C) + 1);
 
-    ev->x20 = 0.0225F * (f32) state->x110 - 0.175F;
+    ev->x20 = FMA_MUL_SUB(0.0225F, (f32) state->x110, 0.175F);
 
     if (ev->x20 < 0.05F) {
         ev->x20 = 0.0F;

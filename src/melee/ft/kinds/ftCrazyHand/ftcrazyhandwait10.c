@@ -33,6 +33,7 @@
 #include <melee/gr/stage.h>
 #include <melee/mp/mplib.h>
 #include <melee/pl/player.h>
+#include <Runtime/fma.h>
 #include <sysdolphin/baselib/controller.h>
 #include <sysdolphin/baselib/random.h>
 
@@ -265,9 +266,11 @@ void ftCh_Wait1_0_Anim(HSD_GObj* gobj)
                     break;
                 case ftMh_MS_Poke1:
                     rand = HSD_Randf();
-                    vec.x = da->x90 * rand * 2 + da->x88_pos.x - da->x90;
+                    vec.x = FMA_MUL_ADD(da->x90 * rand, 2, da->x88_pos.x) -
+                            da->x90;
                     rand = HSD_Randf();
-                    vec.y = da->x94 * rand * 2 + da->x88_pos.y - da->x94;
+                    vec.y = FMA_MUL_ADD(da->x94 * rand, 2, da->x88_pos.y) -
+                            da->x94;
                     vec.z = 0;
                     ftCh_GrabUnk1_8015BA34(gobj, fn_801582D8, &vec);
                     break;
@@ -388,9 +391,9 @@ static void ftCh_Init_80156AD8(HSD_GObj* gobj)
         ftCh_GrabUnk1_8015BA34(gobj, fn_80158144, &pos);
     } else if (button_tmp & (HSD_PAD_B) && button_tmp & (HSD_PAD_DPADUP)) {
         float rand = HSD_Randf();
-        pos.x = da->x90 * rand * 2 + da->x88_pos.x - da->x90;
+        pos.x = FMA_MUL_ADD(da->x90 * rand, 2, da->x88_pos.x) - da->x90;
         rand = HSD_Randf();
-        pos.y = da->x94 * rand * 2 + da->x88_pos.y - da->x94;
+        pos.y = FMA_MUL_ADD(da->x94 * rand, 2, da->x88_pos.y) - da->x94;
         pos.z = 0;
         ftCh_GrabUnk1_8015BA34(gobj, fn_801582D8, &pos);
     } else if (button_tmp & (HSD_PAD_B) && button_tmp & (HSD_PAD_DPADRIGHT)) {

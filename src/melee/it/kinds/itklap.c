@@ -13,6 +13,7 @@
 #include <melee/it/itzako.h>
 #include <melee/lb/lb_00B0.h>
 #include <melee/lb/lbcollision.h>
+#include <Runtime/fma.h>
 #include <sysdolphin/baselib/random.h>
 
 ItemStateTable it_803F8940[] = {
@@ -290,8 +291,8 @@ void it_802E215C(Item_GObj* gobj)
     Quaternion quat;
 
     Ground_801C4DA0(&pos, &angle);
-    pos.x += 6.0f * -sinf(angle);
-    pos.y += 6.0f * cosf(angle);
+    FMA_ADD_TO(pos.x, 6.0f, -sinf(angle));
+    FMA_ADD_TO(pos.y, 6.0f, cosf(angle));
     ip->pos = pos;
     HSD_JObjSetTranslate(jobj, &ip->pos);
     quat.x = 1.5707964f;

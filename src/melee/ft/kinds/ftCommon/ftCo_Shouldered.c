@@ -18,6 +18,7 @@
 #include <melee/ft/ftparts.h>
 #include <melee/ft/types.h>
 #include <melee/lb/lb_00B0.h>
+#include <Runtime/fma.h>
 
 #ifdef MUST_MATCH
 #pragma force_active on
@@ -44,9 +45,10 @@ void ftCo_8009C640(Fighter_GObj* gobj, FtMotionId msid)
 {
     Fighter* fp = gobj->user_data;
     PAD_STACK(8);
-    ftCommon_InitGrab(fp, 0,
-                      (int) (fp->dmg.x1830_percent * p_ftCommonData->x4A0 +
-                             p_ftCommonData->x4A4));
+    ftCommon_InitGrab(
+        fp, 0,
+        (int) (FMA_MUL_ADD(fp->dmg.x1830_percent, p_ftCommonData->x4A0,
+                           p_ftCommonData->x4A4)));
     fp->mv.co.shouldered.x0 = 0;
     fp->mv.co.shouldered.x4 = 0;
     ftCo_8009C5A4(gobj, msid);

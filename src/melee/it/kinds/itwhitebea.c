@@ -18,6 +18,7 @@
 #include <melee/it/itzako.h>
 #include <melee/mp/mpcoll.h>
 #include <melee/mp/mplib.h>
+#include <Runtime/fma.h>
 #include <sysdolphin/baselib/random.h>
 
 ItemStateTable it_803F8A88[] = {
@@ -260,7 +261,7 @@ bool it_802E35CC(Item_GObj* gobj)
         dx = pos->x - sp30.x;
         dy = pos->y - sp30.y;
         dz = pos->z - sp30.z;
-        dist = sqrtf__Ff(dx * dx + dy * dy + dz * dz);
+        dist = sqrtf__Ff(FMA_ADD_MUL(FMA_MUL_ADD(dx, dx, dy * dy), dz, dz));
         if (dist > attrs->x18) {
             it_8028ECE0(ip->xDD4_itemVar.whitebea.x20);
             it_802E37A4(gobj);

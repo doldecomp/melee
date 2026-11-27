@@ -20,6 +20,7 @@
 #include <melee/it/types.h>
 #include <melee/lb/lb_00B0.h>
 #include <melee/mp/mplib.h>
+#include <Runtime/fma.h>
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/jobj.h>
 
@@ -39,9 +40,9 @@ static inline float sqrtf_store(float x, volatile float* y)
 
     if (x > 0.0f) {
         double guess = __frsqrte((double) x);
-        guess = _half * guess * (_three - guess * guess * x);
-        guess = _half * guess * (_three - guess * guess * x);
-        guess = _half * guess * (_three - guess * guess * x);
+        guess = _half * guess * (FMA_SUB_MUL(_three, guess * guess, x));
+        guess = _half * guess * (FMA_SUB_MUL(_three, guess * guess, x));
+        guess = _half * guess * (FMA_SUB_MUL(_three, guess * guess, x));
         *y = (float) (x * guess);
         return *y;
     }

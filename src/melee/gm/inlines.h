@@ -3,6 +3,7 @@
 
 #include <melee/gm/gmregtyfall.h>
 #include <melee/ty/toy.h>
+#include <Runtime/fma.h>
 
 static inline s32 gmClampResultStat(s32 value)
 {
@@ -44,22 +45,22 @@ static inline s32 fn_801A7FB4_inline2(void)
 static inline f32 gmTournament_GetPlayerX(u8 player_count, s32 player)
 {
     if ((s32) player_count == 4) {
-        return (13.0f * (f32) player) + -19.5f;
+        return FMA_MUL_ADD(13.0f, (f32) player, -19.5f);
     }
     if ((s32) player_count == 3) {
-        return 6.5f + ((13.0f * (f32) player) - 19.5f);
+        return 6.5f + (FMA_MUL_SUB(13.0f, (f32) player, 19.5f));
     }
-    return 6.5f + ((13.0f * (2.0f * (f32) player)) - 19.5f);
+    return 6.5f + (FMA_MUL_SUB(13.0f, (2.0f * (f32) player), 19.5f));
 }
 
 static inline void gmTournament_SetPlayerX(f32* x, u8 player_count, s32 player)
 {
     if ((s32) player_count == 4) {
-        *x = (13.0f * (f32) player) + -19.5f;
+        *x = FMA_MUL_ADD(13.0f, (f32) player, -19.5f);
     } else if ((s32) player_count == 3) {
-        *x = 6.5f + ((13.0f * (f32) player) - 19.5f);
+        *x = 6.5f + (FMA_MUL_SUB(13.0f, (f32) player, 19.5f));
     } else {
-        *x = 6.5f + ((13.0f * (2.0f * (f32) player)) - 19.5f);
+        *x = 6.5f + (FMA_MUL_SUB(13.0f, (2.0f * (f32) player), 19.5f));
     }
 }
 

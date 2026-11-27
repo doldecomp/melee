@@ -14,6 +14,7 @@
 #include <melee/lb/lb_00B0.h>
 #include <melee/lb/lbcollision.h>
 #include <melee/lb/lbvector.h>
+#include <Runtime/fma.h>
 
 ItemStateTable ItemStateTable_Flipper[] = {
     {
@@ -486,7 +487,8 @@ static inline void bounce(Item_GObj* gobj, Item* ip)
         itColl_BounceOffVictim(gobj);
     } else {
         ip->x40_vel.x = -1.0f * ip->x40_vel.x;
-        ip->x40_vel.y = -1.0f * ip->x40_vel.y + it_804D6D28->x60_float;
+        ip->x40_vel.y =
+            FMA_MUL_ADD(-1.0f, ip->x40_vel.y, it_804D6D28->x60_float);
     }
 }
 

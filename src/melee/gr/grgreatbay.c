@@ -23,6 +23,7 @@
 #include <melee/lb/lb_00F9.h>
 #include <melee/lb/types.h>
 #include <melee/mp/mplib.h>
+#include <Runtime/fma.h>
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/gobjgxlink.h>
 #include <sysdolphin/baselib/gobjproc.h>
@@ -851,7 +852,7 @@ void grGreatBay_801F5E28(HSD_GObj* gobj)
         } else {
             factor = grGb_804D69E0.x0->floatfloor_slant_reb_rate;
         }
-        gp->u.greatbay3.xD8 += delta * factor;
+        FMA_ADD_TO(gp->u.greatbay3.xD8, delta, factor);
 
         delta = gp->u.greatbay3.xD0 - gp->u.greatbay3.xDC;
         if (-gp->u.greatbay3.xDC * delta < 0.0f) {
@@ -859,7 +860,7 @@ void grGreatBay_801F5E28(HSD_GObj* gobj)
         } else {
             factor = grGb_804D69E0.x0->floatfloor_slide_reb_rate;
         }
-        gp->u.greatbay3.xDC += delta * factor;
+        FMA_ADD_TO(gp->u.greatbay3.xDC, delta, factor);
 
         delta = gp->u.greatbay3.xD4 - gp->u.greatbay3.xE0;
         if (delta < 0.0f) {
@@ -867,7 +868,7 @@ void grGreatBay_801F5E28(HSD_GObj* gobj)
         } else {
             factor = grGb_804D69E0.x0->floatfloor_down_up_rate;
         }
-        gp->u.greatbay3.xE0 += delta * factor;
+        FMA_ADD_TO(gp->u.greatbay3.xE0, delta, factor);
 
         HSD_JObjSetRotationZ(jobj, gp->u.greatbay3.xD8);
         HSD_JObjSetTranslateX(jobj, gp->u.greatbay3.translation.x +
@@ -908,14 +909,17 @@ void grGreatBay_801F60C4(void* user_data, int joint_id, CollData* coll,
                 t = 1.0f;
             }
             rot_amount =
-                t * (0.017453292f *
-                     (coll_x50 * grGb_804D69E0.x0->floatfloor_slant_mul +
-                      grGb_804D69E0.x0->floatfloor_slant_add));
+                t *
+                (0.017453292f *
+                 (FMA_MUL_ADD(coll_x50, grGb_804D69E0.x0->floatfloor_slant_mul,
+                              grGb_804D69E0.x0->floatfloor_slant_add)));
             disp_amount =
-                t * (coll_x50 * grGb_804D69E0.x0->floatfloor_slide_mul +
-                     grGb_804D69E0.x0->floatfloor_slide_add);
-            y_amount = coll_x50 * grGb_804D69E0.x0->floatfloor_down_mul +
-                       grGb_804D69E0.x0->floatfloor_down_add;
+                t *
+                (FMA_MUL_ADD(coll_x50, grGb_804D69E0.x0->floatfloor_slide_mul,
+                             grGb_804D69E0.x0->floatfloor_slide_add));
+            y_amount =
+                FMA_MUL_ADD(coll_x50, grGb_804D69E0.x0->floatfloor_down_mul,
+                            grGb_804D69E0.x0->floatfloor_down_add);
             if (dx < 0.0f) {
                 gp->u.greatbay3.translation.z += rot_amount;
                 {

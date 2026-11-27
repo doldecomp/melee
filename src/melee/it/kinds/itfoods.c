@@ -7,6 +7,7 @@
 #include <melee/it/item.h>
 #include <melee/it/itgroundcoll.h>
 #include <melee/it/itspawn.h>
+#include <Runtime/fma.h>
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/random.h>
 
@@ -40,8 +41,8 @@ void it_8028F9D8(Item_GObj* arg0, Vec3* arg1, f32 arg8)
         &temp_r30->xC4_article_data->x4_specialAttributes->foods;
     f32 var_2;
     temp_r30->pos.x =
-        arg1->x +
-        (arg8 * attrs->entries[temp_r30->xDD4_itemVar.foods.x0].offset.x);
+        FMA_ADD_MUL(arg1->x, arg8,
+                    attrs->entries[temp_r30->xDD4_itemVar.foods.x0].offset.x);
     var_2 = attrs->entries[temp_r30->xDD4_itemVar.foods.x0].offset.y;
     temp_r30->pos.y = var_2 + arg1->y;
     temp_r30->pos.z = arg1->z;

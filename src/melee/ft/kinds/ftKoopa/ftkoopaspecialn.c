@@ -19,6 +19,7 @@
 #include <melee/it/item.h>
 #include <melee/it/kinds/itkoopaflame.h>
 #include <melee/lb/lb_00B0.h>
+#include <Runtime/fma.h>
 #include <sysdolphin/baselib/random.h>
 
 static MotionFlags const ftKp_MF_SpecialN_Coll =
@@ -63,8 +64,8 @@ void ftKp_SpecialLw_80134ACC(Fighter_GObj* gobj)
     enum_t* dirs = ftKp_Init_803CF2A0;
     PAD_STACK(12);
     lb_8000B1CC(fp->parts[48].joint, NULL, &v);
-    v.x += fp->x34_scale.y * (da->x24 * fp->facing_dir);
-    v.y += da->x28 * fp->x34_scale.y;
+    FMA_ADD_TO(v.x, fp->x34_scale.y, (da->x24 * fp->facing_dir));
+    FMA_ADD_TO(v.y, da->x28, fp->x34_scale.y);
     itKoopaFlame_Spawn(gobj, &v, fp->facing_dir, fp->mv.kp.specialn.x4,
                        ftKp_SpecialN_80134ACC_inline(gobj, dirs),
                        fp->u.kp.x222C, fp->u.kp.x2230, It_Kind_Koopa_Flame);

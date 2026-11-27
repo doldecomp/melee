@@ -23,6 +23,7 @@
 #include <melee/ft/types.h>
 #include <melee/it/kinds/itclimbersice.h>
 #include <melee/lb/lb_00B0.h>
+#include <Runtime/fma.h>
 #include <sysdolphin/baselib/gobj.h>
 
 /* 11F500 */ static void ftPp_SpecialN_8011F500(Fighter_GObj* gobj);
@@ -162,7 +163,7 @@ void ftPp_SpecialN_8011F500(Fighter_GObj* gobj)
         Vec3 pos;
         PAD_STACK(4 * 2);
         lb_8000B1CC(fp->parts[0].joint, NULL, &pos);
-        pos.x = da->xC * fp->facing_dir + pos.x;
+        pos.x = FMA_MUL_ADD(da->xC, fp->facing_dir, pos.x);
         pos.y += da->x10 + fp->u.pp.x2250;
         fp->u.pp.x222C =
             it_802C1590(gobj, &pos, It_Kind_IceClimber_Ice, fp->facing_dir);

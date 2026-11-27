@@ -14,6 +14,7 @@
 #include <melee/cm/camera.h>
 #include <melee/it/kinds/itleadead.h>
 #include <melee/pl/player.h>
+#include <Runtime/fma.h>
 
 /* 0C77E0 */ static void fn_800C77E0(Fighter_GObj* gobj);
 
@@ -42,11 +43,12 @@ void ftCo_800C7590(Fighter_GObj* gobj)
     {
         f32 tmp1 = cd->x728 *
                    (cd->x72C - (f32) (Player_80033BB8(fp->player_idx) + 1));
-        f32 tmp2 =
-            (cd->x720 * (cd->x724 - Player_GetHandicap(fp->player_idx)) +
-             cd->x71C);
+        f32 tmp2 = (FMA_MUL_ADD(
+            cd->x720, (cd->x724 - Player_GetHandicap(fp->player_idx)),
+            cd->x71C));
         tmp2 += tmp1;
-        ftCommon_InitGrab(fp, 1, fp->dmg.x1830_percent * cd->x730 + tmp2);
+        ftCommon_InitGrab(fp, 1,
+                          FMA_MUL_ADD(fp->dmg.x1830_percent, cd->x730, tmp2));
     }
     ftCommon_8007E2F4(fp, 0x1FF);
     fp->x221D_b5 = true;

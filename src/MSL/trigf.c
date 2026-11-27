@@ -1,4 +1,5 @@
 #include "math.h"
+#include <Runtime/fma.h>
 
 #define __epsilon 3.45266983e-4f
 
@@ -31,35 +32,39 @@ f32 sinf(f32 x)
     z = (2.0f / (f32) M_PI) * x;
     n = (__HI(x) & 0x80000000) ? (int) (z - 0.5f) : (int) (z + 0.5f);
 
-    y = x - n * 2 + __four_over_pi_m1[0] * x + __four_over_pi_m1[1] * x +
-        __four_over_pi_m1[2] * x + __four_over_pi_m1[3] * x;
+    y = FMA_ADD_MUL(
+        FMA_ADD_MUL(
+            FMA_ADD_MUL(FMA_ADD_MUL(x - n * 2, __four_over_pi_m1[0], x),
+                        __four_over_pi_m1[1], x),
+            __four_over_pi_m1[2], x),
+        __four_over_pi_m1[3], x);
     n &= 3;
 
     if (fabsf__Ff(y) < __epsilon) {
         n <<= 1;
-        return __sincos_on_quadrant[n] +
-               (__sincos_on_quadrant[n + 1] * y * __sincos_poly[9]);
+        return FMA_ADD_MUL(__sincos_on_quadrant[n],
+                           __sincos_on_quadrant[n + 1] * y, __sincos_poly[9]);
     }
 
     ysq = y * y;
     if (n & 1) {
         n <<= 1;
-        z = (((__sincos_poly[0] * ysq + __sincos_poly[2]) * ysq +
-              __sincos_poly[4]) *
-                 ysq +
-             __sincos_poly[6]) *
-                ysq +
-            __sincos_poly[8];
+        z = FMA_MUL_ADD(
+            (FMA_MUL_ADD((FMA_MUL_ADD((FMA_MUL_ADD(__sincos_poly[0], ysq,
+                                                   __sincos_poly[2])),
+                                      ysq, __sincos_poly[4])),
+                         ysq, __sincos_poly[6])),
+            ysq, __sincos_poly[8]);
 
         return z * __sincos_on_quadrant[n];
     } else {
         n <<= 1;
-        z = ((((__sincos_poly[1] * ysq + __sincos_poly[3]) * ysq +
-               __sincos_poly[5]) *
-                  ysq +
-              __sincos_poly[7]) *
-                 ysq +
-             __sincos_poly[9]) *
+        z = (FMA_MUL_ADD(
+                (FMA_MUL_ADD((FMA_MUL_ADD((FMA_MUL_ADD(__sincos_poly[1], ysq,
+                                                       __sincos_poly[3])),
+                                          ysq, __sincos_poly[5])),
+                             ysq, __sincos_poly[7])),
+                ysq, __sincos_poly[9])) *
             y;
         return z * __sincos_on_quadrant[n + 1];
     }
@@ -75,33 +80,38 @@ f32 cosf(f32 x)
     z = (2.0f / (f32) M_PI) * x;
     n = (__HI(x) & 0x80000000) ? (int) (z - 0.5f) : (int) (z + 0.5f);
 
-    y = x - n * 2 + __four_over_pi_m1[0] * x + __four_over_pi_m1[1] * x +
-        __four_over_pi_m1[2] * x + __four_over_pi_m1[3] * x;
+    y = FMA_ADD_MUL(
+        FMA_ADD_MUL(
+            FMA_ADD_MUL(FMA_ADD_MUL(x - n * 2, __four_over_pi_m1[0], x),
+                        __four_over_pi_m1[1], x),
+            __four_over_pi_m1[2], x),
+        __four_over_pi_m1[3], x);
     n &= 3;
     if (fabsf__Ff(y) < __epsilon) {
         n <<= 1;
-        return __sincos_on_quadrant[n + 1] - y * __sincos_on_quadrant[n];
+        return FMA_SUB_MUL(__sincos_on_quadrant[n + 1], y,
+                           __sincos_on_quadrant[n]);
     }
 
     ysq = y * y;
     if (n & 1) {
         n <<= 1;
-        z = -((((__sincos_poly[1] * ysq + __sincos_poly[3]) * ysq +
-                __sincos_poly[5]) *
-                   ysq +
-               __sincos_poly[7]) *
-                  ysq +
-              __sincos_poly[9]) *
+        z = -(FMA_MUL_ADD(
+                (FMA_MUL_ADD((FMA_MUL_ADD((FMA_MUL_ADD(__sincos_poly[1], ysq,
+                                                       __sincos_poly[3])),
+                                          ysq, __sincos_poly[5])),
+                             ysq, __sincos_poly[7])),
+                ysq, __sincos_poly[9])) *
             y;
         return z * __sincos_on_quadrant[n];
     } else {
         n <<= 1;
-        z = (((__sincos_poly[0] * ysq + __sincos_poly[2]) * ysq +
-              __sincos_poly[4]) *
-                 ysq +
-             __sincos_poly[6]) *
-                ysq +
-            __sincos_poly[8];
+        z = FMA_MUL_ADD(
+            (FMA_MUL_ADD((FMA_MUL_ADD((FMA_MUL_ADD(__sincos_poly[0], ysq,
+                                                   __sincos_poly[2])),
+                                      ysq, __sincos_poly[4])),
+                         ysq, __sincos_poly[6])),
+            ysq, __sincos_poly[8]);
         return z * __sincos_on_quadrant[n + 1];
     }
 }

@@ -23,6 +23,7 @@
 #include <melee/mn/inlines.h>
 #include <melee/mn/mnmain.h>
 #include <melee/sc/types.h>
+#include <Runtime/fma.h>
 #include <sysdolphin/baselib/archive.h>
 #include <sysdolphin/baselib/cobj.h>
 #include <sysdolphin/baselib/controller.h>
@@ -245,8 +246,8 @@ void _tyFigupon_80314C5C(HSD_GObj* gobj)
             float temp_f28 = HSD_JObjGetTranslationX(temp_r29->jobjs[2]);
             float temp_f27 = HSD_JObjGetTranslationY(temp_r29->jobjs[2]);
             float temp_f26 = HSD_JObjGetTranslationZ(temp_r29->jobjs[2]);
-            temp_f30 = (3.0f * HSD_Randf()) + temp_f30;
-            temp_f29 = (3.0f * HSD_Randf()) + temp_f29;
+            temp_f30 = FMA_MUL_ADD(3.0f, HSD_Randf(), temp_f30);
+            temp_f29 = FMA_MUL_ADD(3.0f, HSD_Randf(), temp_f29);
             {
                 float var_f3 = ABS(temp_f28 - temp_f30);
                 tp->translate.x = -0.74f * (var_f3 / 30.0f);
@@ -981,7 +982,7 @@ void _tyFigupon_80316C24(HSD_GObj* arg0)
             } else {
                 dir = -1;
             }
-            stick_scroll = -((0.2f * (f32) dir) - stick) / 0.8f;
+            stick_scroll = -(FMA_MUL_SUB(0.2f, (f32) dir, stick)) / 0.8f;
         }
     }
 

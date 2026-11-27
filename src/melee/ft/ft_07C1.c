@@ -15,6 +15,7 @@
 #include <melee/it/it_26B1.h>
 #include <melee/lb/lb_00B0.h>
 #include <melee/lb/lbcollision.h>
+#include <Runtime/fma.h>
 #include <sysdolphin/baselib/gobj.h>
 
 void ft_8007C114(HSD_GObj* gobj)
@@ -92,16 +93,20 @@ void ft_8007C2E0(Fighter* fp0, HitCapsule* hit0, Fighter* fp1,
             }
             weight_ratio *= p_ftCommonData->hit_weight_mul;
             if (fp0->pos_delta.x * fp1->pos_delta.x >= 0) {
-                fp1->x98_atk_shield_kb.x +=
-                    (fp0->pos_delta.x - fp1->pos_delta.x) * weight_ratio;
+                FMA_ADD_TO(fp1->x98_atk_shield_kb.x,
+                           (fp0->pos_delta.x - fp1->pos_delta.x),
+                           weight_ratio);
             } else {
-                fp1->x98_atk_shield_kb.x += fp0->pos_delta.x * weight_ratio;
+                FMA_ADD_TO(fp1->x98_atk_shield_kb.x, fp0->pos_delta.x,
+                           weight_ratio);
             }
             if (fp0->pos_delta.y * fp1->pos_delta.y >= 0) {
-                fp1->x98_atk_shield_kb.y +=
-                    (fp0->pos_delta.y - fp1->pos_delta.y) * weight_ratio;
+                FMA_ADD_TO(fp1->x98_atk_shield_kb.y,
+                           (fp0->pos_delta.y - fp1->pos_delta.y),
+                           weight_ratio);
             } else {
-                fp1->x98_atk_shield_kb.y += fp0->pos_delta.y * weight_ratio;
+                FMA_ADD_TO(fp1->x98_atk_shield_kb.y, fp0->pos_delta.y,
+                           weight_ratio);
             }
         }
     }
@@ -115,16 +120,20 @@ void ft_8007C2E0(Fighter* fp0, HitCapsule* hit0, Fighter* fp1,
             }
             weight_ratio *= p_ftCommonData->hit_weight_mul;
             if (fp0->pos_delta.x * fp1->pos_delta.x >= 0) {
-                fp0->x98_atk_shield_kb.x +=
-                    (fp1->pos_delta.x - fp0->pos_delta.x) * weight_ratio;
+                FMA_ADD_TO(fp0->x98_atk_shield_kb.x,
+                           (fp1->pos_delta.x - fp0->pos_delta.x),
+                           weight_ratio);
             } else {
-                fp0->x98_atk_shield_kb.x += fp1->pos_delta.x * weight_ratio;
+                FMA_ADD_TO(fp0->x98_atk_shield_kb.x, fp1->pos_delta.x,
+                           weight_ratio);
             }
             if (fp0->pos_delta.y * fp1->pos_delta.y >= 0) {
-                fp0->x98_atk_shield_kb.y +=
-                    (fp1->pos_delta.y - fp0->pos_delta.y) * weight_ratio;
+                FMA_ADD_TO(fp0->x98_atk_shield_kb.y,
+                           (fp1->pos_delta.y - fp0->pos_delta.y),
+                           weight_ratio);
             } else {
-                fp0->x98_atk_shield_kb.y += fp1->pos_delta.y * weight_ratio;
+                FMA_ADD_TO(fp0->x98_atk_shield_kb.y, fp1->pos_delta.y,
+                           weight_ratio);
             }
         }
     }

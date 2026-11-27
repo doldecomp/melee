@@ -7,6 +7,7 @@
 
 #include <dolphin/gx/GXTransform.h>
 #include <dolphin/mtx.h>
+#include <Runtime/fma.h>
 #include <sysdolphin/baselib/cobj.h>
 #include <sysdolphin/baselib/debug.h>
 
@@ -88,7 +89,9 @@ float lbVector_Angle(Vec3* a, Vec3* b)
     float lena_lenb = lbVector_Len(a) * lbVector_Len(b);
 
     if (lena_lenb > 0.0000000001f) {
-        float cosine = (a->x * b->x + a->y * b->y + a->z * b->z) / lena_lenb;
+        float cosine =
+            (FMA_ADD_MUL(FMA_MUL_ADD(a->x, b->x, a->y * b->y), a->z, b->z)) /
+            lena_lenb;
         if (cosine > 1.0f) {
             cosine = 1.0f;
         }
@@ -108,7 +111,7 @@ float lbVector_AngleXY(Vec3* a, Vec3* b)
         lbVector_Len_xy_accurate(a) * lbVector_Len_xy_accurate(b);
 
     if (lena_lenb) {
-        float cosine = (a->x * b->x + a->y * b->y) / lena_lenb;
+        float cosine = (FMA_MUL_ADD(a->x, b->x, a->y * b->y)) / lena_lenb;
         if (cosine > 1.0f) {
             cosine = 1.0f;
         }
@@ -132,9 +135,10 @@ static float lbvector_sin(float angle)
     } else if (angle < -M_PI) {
         angle += M_TAU;
     }
-    return 0.9878619909286499f * angle -
-           0.15527099370956421f * angle * angle * angle +
-           0.0056429998949170113f * angle * angle * angle * angle * angle;
+    return FMA_ADD_MUL(
+        FMA_MUL_SUB(0.9878619909286499f, angle,
+                    0.15527099370956421f * angle * angle * angle),
+        0.0056429998949170113f * angle * angle * angle * angle, angle);
 }
 
 static float lbvector_cos(float angle)
@@ -145,9 +149,10 @@ static float lbvector_cos(float angle)
     } else if (angle < -M_PI) {
         angle += M_TAU;
     }
-    return 0.9878619909286499f * angle -
-           0.15527099370956421f * angle * angle * angle +
-           0.0056429998949170113f * angle * angle * angle * angle * angle;
+    return FMA_ADD_MUL(
+        FMA_MUL_SUB(0.9878619909286499f, angle,
+                    0.15527099370956421f * angle * angle * angle),
+        0.0056429998949170113f * angle * angle * angle * angle, angle);
 }
 
 /// 8000D8F4
@@ -178,8 +183,8 @@ void lbVector_RotateAboutUnitAxis(Vec3* v, Vec3* axis, float angle)
         unit_axis_yz_z = axis->y / len_axis_yz;
 
         x = v->x;
-        y = v->y * unit_axis_yz_y - v->z * unit_axis_yz_z;
-        z = v->y * unit_axis_yz_z + v->z * unit_axis_yz_y;
+        y = FMA_MUL_SUB(v->y, unit_axis_yz_y, v->z * unit_axis_yz_z);
+        z = FMA_MUL_ADD(v->y, unit_axis_yz_z, v->z * unit_axis_yz_y);
     } else {
         x = v->x;
         y = v->y;
@@ -188,26 +193,26 @@ void lbVector_RotateAboutUnitAxis(Vec3* v, Vec3* axis, float angle)
 
     // rotation (2) about the y-axis: rotate everything such that the rotation
     // axis aligns with the z-axis new v is then (x2,y2,z2)
-    x2 = x * len_axis_yz - z * axis->x;
+    x2 = FMA_MUL_SUB(x, len_axis_yz, z * axis->x);
     // y2 = y
-    z2 = x * axis->x + z * len_axis_yz;
+    z2 = FMA_MUL_ADD(x, axis->x, z * len_axis_yz);
 
     // rotate by 'angle' about the z axis, which now aligns with the rotation
     // axis
-    x3 = x2 * c - y * s; // remember that y2=y
-    y3 = x2 * s + y * c;
+    x3 = FMA_MUL_SUB(x2, c, y * s); // remember that y2=y
+    y3 = FMA_MUL_ADD(x2, s, y * c);
     // z3 = z2
 
     // opposite of rotation (2). We overwrite (x,y,z) with the resulting new v.
-    x = x3 * len_axis_yz + z2 * axis->x; // remember that z3=z2
+    x = FMA_MUL_ADD(x3, len_axis_yz, z2 * axis->x); // remember that z3=z2
     y = y3;
-    z = -x3 * axis->x + z2 * len_axis_yz;
+    z = FMA_MUL_ADD(-x3, axis->x, z2 * len_axis_yz);
 
     // opposite of rotation (1)
     if (len_axis_yz > 0.0000000001f) {
         v->x = x;
-        v->y = y * unit_axis_yz_y + z * unit_axis_yz_z;
-        v->z = -y * unit_axis_yz_z + z * unit_axis_yz_y;
+        v->y = FMA_MUL_ADD(y, unit_axis_yz_y, z * unit_axis_yz_z);
+        v->z = FMA_MUL_ADD(-y, unit_axis_yz_z, z * unit_axis_yz_y);
     } else {
         v->x = x;
         v->y = y;
@@ -226,17 +231,17 @@ void lbVector_Rotate(Vec3* v, int axis, float angle)
     switch (axis) {
     case 1: // rotate about x axis
         x = v->x;
-        y = v->y * c - v->z * s;
-        z = v->y * s + v->z * c;
+        y = FMA_MUL_SUB(v->y, c, v->z * s);
+        z = FMA_MUL_ADD(v->y, s, v->z * c);
         break;
     case 2: // rotate about y axis
-        x = v->x * c + v->z * s;
+        x = FMA_MUL_ADD(v->x, c, v->z * s);
         y = v->y;
-        z = v->z * c - v->x * s;
+        z = FMA_MUL_SUB(v->z, c, v->x * s);
         break;
     case 4: // rotate about z axis
-        x = v->x * c - v->y * s;
-        y = v->x * s + v->y * c;
+        x = FMA_MUL_SUB(v->x, c, v->y * s);
+        y = FMA_MUL_ADD(v->x, s, v->y * c);
         z = v->z;
         break;
     }
@@ -257,18 +262,20 @@ static void order_sdata2(void)
 void lbVector_Mirror(Vec3* a, Vec3* unit_mirror_axis)
 {
     float f =
-        (unit_mirror_axis->x * a->x + unit_mirror_axis->y * a->y) * -2.0f;
+        (FMA_MUL_ADD(unit_mirror_axis->x, a->x, unit_mirror_axis->y * a->y)) *
+        -2.0f;
 
-    a->x += unit_mirror_axis->x * f;
-    a->y += unit_mirror_axis->y * f;
+    FMA_ADD_TO(a->x, unit_mirror_axis->x, f);
+    FMA_ADD_TO(a->y, unit_mirror_axis->y, f);
 }
 
 /// 8000DCA8 - returns <a/|a|, b/|b|>, which is the cosine of the angle between
 /// a and b.
 float lbVector_CosAngle(Vec3* a, Vec3* b)
 {
-    return (a->x * b->x + a->y * b->y) / (sqrtf(a->x * a->x + a->y * a->y) *
-                                          sqrtf(b->x * b->x + b->y * b->y));
+    return (FMA_MUL_ADD(a->x, b->x, a->y * b->y)) /
+           (sqrtf(a->x * a->x + a->y * a->y) *
+            sqrtf(b->x * b->x + b->y * b->y));
 }
 
 /// 8000DDAC - linearly interpolates between a and b as f goes from 0 to 1,
@@ -295,17 +302,20 @@ Vec3* lbVector_8000DE38(const Vec3 points[3], Vec3* v, float c)
         c = 0.0f;
     }
 
-    var1 = points[0].x * 2.0f - points[1].x * 4.0f + points[2].x * 2.0f;
-    var2 = points[0].x * -3.0f + points[1].x * 4.0f - points[2].x;
-    v->x = points[0].x + (var1 * c * c + var2 * c);
+    var1 = FMA_ADD_MUL(FMA_MUL_SUB(points[0].x, 2.0f, points[1].x * 4.0f),
+                       points[2].x, 2.0f);
+    var2 = FMA_MUL_ADD(points[0].x, -3.0f, points[1].x * 4.0f) - points[2].x;
+    v->x = points[0].x + (FMA_MUL_ADD(var1 * c, c, var2 * c));
 
-    var1 = points[0].y * 2.0f - points[1].y * 4.0f + points[2].y * 2.0f;
-    var2 = points[0].y * -3.0f + points[1].y * 4.0f - points[2].y;
-    v->y = points[0].y + (var1 * c * c + var2 * c);
+    var1 = FMA_ADD_MUL(FMA_MUL_SUB(points[0].y, 2.0f, points[1].y * 4.0f),
+                       points[2].y, 2.0f);
+    var2 = FMA_MUL_ADD(points[0].y, -3.0f, points[1].y * 4.0f) - points[2].y;
+    v->y = points[0].y + (FMA_MUL_ADD(var1 * c, c, var2 * c));
 
-    var1 = points[0].z * 2.0f - points[1].z * 4.0f + points[2].z * 2.0f;
-    var2 = points[0].z * -3.0f + points[1].z * 4.0f - points[2].z;
-    v->z = points[0].z + (var1 * c * c + var2 * c);
+    var1 = FMA_ADD_MUL(FMA_MUL_SUB(points[0].z, 2.0f, points[1].z * 4.0f),
+                       points[2].z, 2.0f);
+    var2 = FMA_MUL_ADD(points[0].z, -3.0f, points[1].z * 4.0f) - points[2].z;
+    v->z = points[0].z + (FMA_MUL_ADD(var1 * c, c, var2 * c));
 
     return v;
 }
@@ -432,13 +442,15 @@ Vec3* lbVector_WorldToScreen(HSD_CObj* cobj, const Vec3* pos3d,
         mvMtx = HSD_CObjGetViewingMtxPtr(cobj);
     }
 
-    f1 = mvMtx[2][0] * pos3d->x + mvMtx[2][1] * pos3d->y +
-         mvMtx[2][2] * pos3d->z + mvMtx[2][3];
+    f1 =
+        FMA_ADD_MUL(FMA_MUL_ADD(mvMtx[2][0], pos3d->x, mvMtx[2][1] * pos3d->y),
+                    mvMtx[2][2], pos3d->z) +
+        mvMtx[2][3];
     if (f1 > -0.01f) {
         f1 = -f1 - 0.01f;
-        point.x += mvMtx[2][0] * f1;
-        point.y += mvMtx[2][1] * f1;
-        point.z += mvMtx[2][2] * f1;
+        FMA_ADD_TO(point.x, mvMtx[2][0], f1);
+        FMA_ADD_TO(point.y, mvMtx[2][1], f1);
+        FMA_ADD_TO(point.z, mvMtx[2][2], f1);
     }
 
     GXProject(point.x, point.y, point.z, mvMtx, projection, viewport,
@@ -469,13 +481,13 @@ void lbVector_CreateEulerMatrix(Mtx m, Quaternion* angles)
     m[2][0] = -sy;
 
     // column 2
-    m[0][1] = cz * sxsy - cx * sz;
-    m[1][1] = sz * sxsy + cx * cz;
+    m[0][1] = FMA_MUL_SUB(cz, sxsy, cx * sz);
+    m[1][1] = FMA_MUL_ADD(sz, sxsy, cx * cz);
     m[2][1] = sx * cy;
 
     // column 3
-    m[0][2] = cz * cxsy + sx * sz;
-    m[1][2] = sz * cxsy - sx * cz;
+    m[0][2] = FMA_MUL_ADD(cz, cxsy, sx * sz);
+    m[1][2] = FMA_MUL_SUB(sz, cxsy, sx * cz);
     m[2][2] = cx * cy;
 
     // column 4 - no translational component
@@ -498,7 +510,8 @@ float lbVector_8000E838(Vec3* a, Vec3* b, Vec3* c, Vec3* d)
     int tooSmall;
 
     lbVector_Diff(b, a, &b_a);
-    sqrlen_b_a = b_a.x * b_a.x + b_a.y * b_a.y + b_a.z * b_a.z;
+    sqrlen_b_a =
+        FMA_ADD_MUL(FMA_MUL_ADD(b_a.x, b_a.x, b_a.y * b_a.y), b_a.z, b_a.z);
     lbVector_Diff(c, a, &c_a);
     if (sqrlen_b_a < 9.9999997473787516e-06f &&
         sqrlen_b_a > -9.9999997473787516e-06f)
@@ -512,12 +525,13 @@ float lbVector_8000E838(Vec3* a, Vec3* b, Vec3* c, Vec3* d)
         return lbVector_Len(&c_a);
     } else {
         Vec3 v3;
-        float f1 =
-            (b_a.x * c_a.x + b_a.y * c_a.y + b_a.z * c_a.z) / sqrlen_b_a;
+        float f1 = (FMA_ADD_MUL(FMA_MUL_ADD(b_a.x, c_a.x, b_a.y * c_a.y),
+                                b_a.z, c_a.z)) /
+                   sqrlen_b_a;
 
-        d->x = a->x + b_a.x * f1;
-        d->y = a->y + b_a.y * f1;
-        d->z = a->z + b_a.z * f1;
+        d->x = FMA_ADD_MUL(a->x, b_a.x, f1);
+        d->y = FMA_ADD_MUL(a->y, b_a.y, f1);
+        d->z = FMA_ADD_MUL(a->z, b_a.z, f1);
         lbVector_Diff(c, d, &v3);
         return lbVector_Len(&v3);
     }

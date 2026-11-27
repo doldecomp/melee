@@ -16,6 +16,7 @@
 #include "robj.h"
 #include "spline.h"
 #include <dolphin/mtx.h>
+#include <Runtime/fma.h>
 
 void JObjInfoInit(void);
 HSD_JObjInfo hsdJObj = { JObjInfoInit };
@@ -1208,8 +1209,9 @@ void resolveIKJoint1(HSD_JObj* jobj)
             temp_f5 = temp_f30 * temp_f30;
             var_f28 = var_f29 * var_f29;
             temp_f1_7 = temp_f5 - var_f28;
-            temp_f1_8 = 0.25F * (((2.0F * (temp_f5 + var_f28)) - temp_f31) -
-                                 ((temp_f1_7 * temp_f1_7) / temp_f31));
+            temp_f1_8 =
+                0.25F * ((FMA_MUL_SUB(2.0F, (temp_f5 + var_f28), temp_f31)) -
+                         ((temp_f1_7 * temp_f1_7) / temp_f31));
             var_f27 = temp_f1_8;
             if (temp_f1_8 < 0.0F) {
                 var_f27 = 0.0F;

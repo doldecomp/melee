@@ -12,6 +12,7 @@
 #include <dolphin/mtx.h>
 #include <dolphin/types.h>
 #include <melee/lb/lbarchive.h> ///< @todo Circular include
+#include <Runtime/fma.h>
 
 /// Bytes in a saved cursor record, not counting its type byte.
 enum SIS_SAVED_CURSOR {
@@ -412,28 +413,28 @@ void HSD_SisLib_803A8134(u8* cursor, HSD_Text* text, f32* out_width,
             kern_enabled = 0;
             continue;
         case 26:
-            *out_width += text->x80.x * (16.0F + text->x78.x);
+            FMA_ADD_TO(*out_width, text->x80.x, (16.0F + text->x78.x));
             if (*out_height < (32.0F * text->x80.y)) {
                 *out_height = 32.0F * text->x80.y;
             }
             continue;
         default:
             if (opcode >= 0x20U) {
-                *out_width += text->x80.x * (32.0F + text->x78.x);
+                FMA_ADD_TO(*out_width, text->x80.x, (32.0F + text->x78.x));
                 if (kern_enabled != 0) {
                     glyph_code = SIS_GET_U16(cursor);
                     if (glyph_code < 0x4000U) {
                         TextGlyphMetrics* pair =
                             &default_widths[(u16) (glyph_code - 0x2000)];
                         kern_width = pair->left + pair->right - 2;
-                        *out_width =
-                            -((text->x80.x * (f32) kern_width) - *out_width);
+                        *out_width = -(FMA_MUL_SUB(
+                            text->x80.x, (f32) kern_width, *out_width));
                     } else {
                         TextGlyphMetrics* pair =
                             &glyph_widths[(u16) (glyph_code - 0x4000)];
                         kern_width = pair->left + pair->right - 2;
-                        *out_width =
-                            -((text->x80.x * (f32) kern_width) - *out_width);
+                        *out_width = -(FMA_MUL_SUB(
+                            text->x80.x, (f32) kern_width, *out_width));
                     }
                 }
                 if (*out_height < (32.0F * text->x80.y)) {
@@ -593,9 +594,9 @@ void HSD_SisLib_803A84BC(HSD_GObj* gobj, intptr_t pass)
             min_x = text->pos_x;
             min_y = text->pos_y;
             max_x =
-                (text->box_size_x * text->font_size.x) + text->pos_x;
+                FMA_MUL_ADD(text->box_size_x, text->font_size.x, text->pos_x);
             max_y =
-                (text->box_size_y * text->font_size.y) + text->pos_y;
+                FMA_MUL_ADD(text->box_size_y, text->font_size.y, text->pos_y);
             GXSetTevAlphaIn(GX_TEVSTAGE0, GX_CA_ZERO, GX_CA_ZERO, GX_CA_ZERO, GX_CA_A0);
             GXSetTevColor(GX_TEVREG0, text->bg_color);
             GXBegin(GX_QUADS, GX_VTXFMT0, 4U);
@@ -617,10 +618,10 @@ void HSD_SisLib_803A84BC(HSD_GObj* gobj, intptr_t pass)
         }
         GXSetTevAlphaIn(GX_TEVSTAGE0, GX_CA_ZERO, GX_CA_TEXA, GX_CA_A0, GX_CA_ZERO);
         if (text->x4E != 0) {
-            min_x = (text->x14.z * text->font_size.x) + text->pos_x;
-            max_x = (text->font_size.x * (text->box_size_x - text->x14.w)) + text->pos_x;
-            min_y = (text->x14.x * text->font_size.y) + text->pos_y;
-            max_y = (text->font_size.y * (text->box_size_y - text->x14.y)) + text->pos_y;
+            min_x = FMA_MUL_ADD(text->x14.z, text->font_size.x, text->pos_x);
+            max_x = FMA_MUL_ADD(text->font_size.x, (text->box_size_x - text->x14.w), text->pos_x);
+            min_y = FMA_MUL_ADD(text->x14.x, text->font_size.y, text->pos_y);
+            max_y = FMA_MUL_ADD(text->font_size.y, (text->box_size_y - text->x14.y), text->pos_y);
         }
         if (text->alloc_data != NULL) {
             text->x78.x = text->x3C.x;
@@ -702,7 +703,7 @@ void HSD_SisLib_803A84BC(HSD_GObj* gobj, intptr_t pass)
                                 line_height_out = 32.0F * text->x80.y;
                             }
                             line_started = 0U;
-                            text->current_height = ((text->font_size.y * ((text->x80.y * text->x78.y) + line_height_out)) + text->current_height);
+                            text->current_height = (FMA_MUL_ADD(text->font_size.y, (FMA_MUL_ADD(text->x80.y, text->x78.y, line_height_out)), text->current_height));
                             if (skip_count != 0U) {
                                 skip_count -= 1;
                             } else {
@@ -746,10 +747,10 @@ void HSD_SisLib_803A84BC(HSD_GObj* gobj, intptr_t pass)
                             }
                             switch ((s32) text->alignment) {
                             case 1:
-                                text->current_width = (f32) -((0.5F * (line_width_out * text->x88)) - x_origin);
+                                text->current_width = (f32) -(FMA_MUL_SUB(0.5F, (line_width_out * text->x88), x_origin));
                                 break;
                             case 2:
-                                text->current_width = (-((line_width_out * text->x88) - x_origin));
+                                text->current_width = (-(FMA_MUL_SUB(line_width_out, text->x88, x_origin)));
                                 break;
                             default:
                                 text->current_width = x_origin;
@@ -835,8 +836,8 @@ void HSD_SisLib_803A84BC(HSD_GObj* gobj, intptr_t pass)
                                 measured_width = line_width_out;
                                 sisFitLineToBox(text, measured_width);
                             }
-                            text->current_width = (f32) (((f64) text->x88 * ((f64) text->x80.x *
-                                            (16.0 + (f64) text->x78.x))) + (f64) text->current_width);
+                            text->current_width = (f32) (FMA_MUL_ADD((f64) text->x88, ((f64) text->x80.x *
+                                            (16.0 + (f64) text->x78.x)), (f64) text->current_width));
                             if (skip_count != 0U) {
                                 skip_count -= 1;
                             } else {
@@ -864,21 +865,21 @@ void HSD_SisLib_803A84BC(HSD_GObj* gobj, intptr_t pass)
                                 } else {
                                     tex_offset = glyph_idx - 0x4000;
                                 }
-                                glyph_x = (text->current_width * text->font_size.x) + text->pos_x;
+                                glyph_x = FMA_MUL_ADD(text->current_width, text->font_size.x, text->pos_x);
                                 scale_x = text->font_size.x;
                                 if ( text->kerning != 0) {
                                     if (glyph_idx < 0x4000U) {
-                                        glyph_x = -((scale_x * (text->x80.x * (f32) (default_widths[tex_offset].left - 1))) - glyph_x);
+                                        glyph_x = -(FMA_MUL_SUB(scale_x, (text->x80.x * (f32) (default_widths[tex_offset].left - 1)), glyph_x));
                                     } else {
-                                        glyph_x = -((scale_x * (text->x80.x * (f32) (glyph_widths[tex_offset].left - 1))) - glyph_x);
+                                        glyph_x = -(FMA_MUL_SUB(scale_x, (text->x80.x * (f32) (glyph_widths[tex_offset].left - 1)), glyph_x));
                                     }
                                 }
                                 {
                                     f32 scale_y = text->font_size.y;
                                     f32 glyph_size = 32.0F * text->x80.y;
                                     f32 uv_top = 0.0F;
-                                    f32 quad_right = (text->x88 * (32.0F * text->x80.x * scale_x)) + glyph_x;
-                                    f32 quad_top = (scale_y * (line_height_out - glyph_size)) + (text->pos_y + text->current_height);
+                                    f32 quad_right = FMA_MUL_ADD(text->x88, (32.0F * text->x80.x * scale_x), glyph_x);
+                                    f32 quad_top = FMA_MUL_ADD(scale_y, (line_height_out - glyph_size), (text->pos_y + text->current_height));
                                     f32 glyph_h = glyph_size * scale_y;
                                     f32 uv_bottom = 1.0F;
                                     f32 uv_left = 0.0F;
@@ -937,14 +938,14 @@ void HSD_SisLib_803A84BC(HSD_GObj* gobj, intptr_t pass)
                                         GXEnd();
                                     }
                                 glyph_draw_done:
-                                    text->current_width = (f32) ((text->x88 * (text->x80.x * (32.0F + text->x78.x))) + text->current_width);
+                                    text->current_width = (f32) (FMA_MUL_ADD(text->x88, (text->x80.x * (32.0F + text->x78.x)), text->current_width));
                                     if ( text->kerning != 0) {
                                         if (glyph_idx < 0x4000U) {
                                             TextGlyphMetrics *kern_pair = &default_widths[tex_offset];
-                                            text->current_width = (-((text->x88 * (text->x80.x * (f32) (kern_pair->left + kern_pair->right - 2))) - text->current_width));
+                                            text->current_width = (-(FMA_MUL_SUB(text->x88, (text->x80.x * (f32) (kern_pair->left + kern_pair->right - 2)), text->current_width)));
                                         } else {
                                             TextGlyphMetrics *kern_pair = &glyph_widths[tex_offset];
-                                            text->current_width = (-((text->x88 * (text->x80.x * (f32) (kern_pair->left + kern_pair->right - 2))) - text->current_width));
+                                            text->current_width = (-(FMA_MUL_SUB(text->x88, (text->x80.x * (f32) (kern_pair->left + kern_pair->right - 2)), text->current_width)));
                                         }
                                     }
                                     if (skip_count != 0U) {

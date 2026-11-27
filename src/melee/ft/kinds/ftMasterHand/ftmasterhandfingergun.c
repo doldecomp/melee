@@ -15,6 +15,7 @@
 #include <melee/lb/lb_00B0.h>
 #include <melee/lb/lbvector.h>
 #include <melee/pl/player.h>
+#include <Runtime/fma.h>
 #include <sysdolphin/baselib/random.h>
 
 void ftMh_FingerBeamEnd_Anim(HSD_GObj* gobj)
@@ -106,9 +107,9 @@ static inline float my_sqrtf(float x)
     volatile float y;
     if (x > 0) {
         double guess = __frsqrte((double) x);
-        guess = _half * guess * (_three - guess * guess * x);
-        guess = _half * guess * (_three - guess * guess * x);
-        guess = _half * guess * (_three - guess * guess * x);
+        guess = _half * guess * (FMA_SUB_MUL(_three, guess * guess, x));
+        guess = _half * guess * (FMA_SUB_MUL(_three, guess * guess, x));
+        guess = _half * guess * (FMA_SUB_MUL(_three, guess * guess, x));
         y = (float) (x * guess);
         return y;
     }

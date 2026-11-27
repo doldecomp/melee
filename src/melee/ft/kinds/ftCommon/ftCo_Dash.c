@@ -23,6 +23,7 @@
 #include <melee/ft/ftcommon.h>
 #include <melee/ft/inlines.h>
 #include <melee/ft/types.h>
+#include <Runtime/fma.h>
 
 bool ftCo_Dash_CheckInput(Fighter_GObj* gobj)
 {
@@ -137,7 +138,7 @@ void ftCo_Dash_IASA(Fighter_GObj* gobj)
     {
         float friction = ft_GetGroundFrictionMultiplier(fp);
         float temp_f0 = fp->gr_vel * p_ftCommonData->x54;
-        fp->gr_vel += -temp_f0 * friction;
+        FMA_ADD_TO(fp->gr_vel, -temp_f0, friction);
     }
 }
 

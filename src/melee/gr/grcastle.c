@@ -24,6 +24,7 @@
 #include <melee/lb/lbvector.h>
 #include <melee/lb/types.h>
 #include <melee/mp/mplib.h>
+#include <Runtime/fma.h>
 #include <sysdolphin/baselib/archive.h>
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/gobjgxlink.h>
@@ -552,7 +553,8 @@ void grCastle_801CDC44(Ground_GObj* gobj)
                 f32 max_val;
                 f32 cur;
 
-                move_speed = wind * yakumono_param->x20 + yakumono_param->x24;
+                move_speed = FMA_MUL_ADD(wind, yakumono_param->x20,
+                                         yakumono_param->x24);
                 if (move_speed > yakumono_param->x28) {
                     move_speed = yakumono_param->x28;
                 }
@@ -577,7 +579,8 @@ void grCastle_801CDC44(Ground_GObj* gobj)
                 gp->u.castle8.plat[0].timer = 0;
                 gp->u.castle8.plat[0].state = 0;
             } else {
-                move_speed = wind * yakumono_param->x2C + yakumono_param->x30;
+                move_speed = FMA_MUL_ADD(wind, yakumono_param->x2C,
+                                         yakumono_param->x30);
                 if (move_speed > yakumono_param->x34) {
                     move_speed = yakumono_param->x34;
                 }
@@ -1877,7 +1880,7 @@ void grCastle_801D0BBC(void)
         }
     }
     if (grCs_804D45E4 != 0) {
-        grCs_804D6974->unk_scale = 0.3 * HSD_Randf() + 0.2;
+        grCs_804D6974->unk_scale = FMA_MUL_ADD(0.3, HSD_Randf(), 0.2);
         return;
     }
     grCs_804D6974->unk_scale = 0.05 * HSD_Randf();
@@ -1887,7 +1890,7 @@ void grCastle_801D0BBC(void)
 void grCastle_801D0D24(void)
 {
     if (grCs_804D45E4 != 0) {
-        grCs_804D6974->unk_scale = 0.3 * HSD_Randf() + 0.2;
+        grCs_804D6974->unk_scale = FMA_MUL_ADD(0.3, HSD_Randf(), 0.2);
     } else {
         grCs_804D6974->unk_scale = 0.05 * HSD_Randf();
     }

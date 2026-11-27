@@ -25,6 +25,7 @@
 #include <melee/lb/lblanguage.h>
 #include <melee/lb/lbspdisplay.h>
 #include <melee/lb/types.h>
+#include <Runtime/fma.h>
 #include <sysdolphin/baselib/aobj.h>
 #include <sysdolphin/baselib/cobj.h>
 #include <sysdolphin/baselib/controller.h>
@@ -431,7 +432,7 @@ static inline void getStickDelta(int port, f32* dx, f32* dy)
 {
     f32 stick_x = loadStickValue(&HSD_PadCopyStatus[(u8) port].stickX);
     f32 stick_y = (f32) HSD_PadCopyStatus[(u8) port].stickY;
-    f32 mag_sq = (stick_x * stick_x) + (stick_y * stick_y);
+    f32 mag_sq = FMA_MUL_ADD(stick_x, stick_x, (stick_y * stick_y));
     if (mag_sq < 200.0f) {
         *dy = 0.0f;
         *dx = 0.0f;
@@ -798,7 +799,8 @@ void mnCharSel_8025D1C4(int port, int mode)
         HSD_JObjClearFlagsAll(sp10, JOBJ_HIDDEN);
         if (star_count < 6) {
             text->hidden = 1;
-            HSD_JObjSetTranslateX(sp10, 0.9f * star_count + star_x - 4.5f);
+            HSD_JObjSetTranslateX(sp10, FMA_MUL_ADD(0.9f, star_count, star_x) -
+                                            4.5f);
             if (sp10 == NULL) {
                 child = NULL;
             } else {
@@ -1860,7 +1862,8 @@ void fn_8025F0E0(HSD_GObj* gobj)
                 {
                     mnCharSel_803F0EBC.cpu_slider_x += 31.0f;
                     if (mnCharSel_803F0EBC.cpu_slider_x >=
-                        124.0f - 248.0f * (f32) mnCharSel_803F0EBC.cpu_level)
+                        FMA_SUB_MUL(124.0f, 248.0f,
+                                    (f32) mnCharSel_803F0EBC.cpu_level))
                     {
                         mnCharSel_803F0EBC.cpu_level_shown =
                             mnCharSel_803F0EBC.cpu_level;
@@ -1869,7 +1872,8 @@ void fn_8025F0E0(HSD_GObj* gobj)
                     mnCharSel_803F0EBC.cpu_slider_x =
                         mnCharSel_803F0EBC.cpu_slider_x - 31.0f;
                     if (mnCharSel_803F0EBC.cpu_slider_x <=
-                        124.0f - 248.0f * (f32) mnCharSel_803F0EBC.cpu_level)
+                        FMA_SUB_MUL(124.0f, 248.0f,
+                                    (f32) mnCharSel_803F0EBC.cpu_level))
                     {
                         mnCharSel_803F0EBC.cpu_level_shown =
                             mnCharSel_803F0EBC.cpu_level;
@@ -1880,16 +1884,17 @@ void fn_8025F0E0(HSD_GObj* gobj)
                 mnCharSel_803F0EBC.cpu_level_shown)
             {
                 mnCharSel_803F0EBC.scroll_flag = 0;
-                mnCharSel_803F0EBC.cpu_slider_x =
-                    124.0f - 248.0f * (f32) mnCharSel_803F0EBC.cpu_level;
+                mnCharSel_803F0EBC.cpu_slider_x = FMA_SUB_MUL(
+                    124.0f, 248.0f, (f32) mnCharSel_803F0EBC.cpu_level);
             }
             {
                 int j;
                 for (j = 0; j < 5; j++) {
-                    HSD_SisLib_803A746C(mnCharSel_803F0EBC.xd3, j,
-                                        248.0f * (f32) j +
-                                            mnCharSel_803F0EBC.cpu_slider_x,
-                                        0.0f);
+                    HSD_SisLib_803A746C(
+                        mnCharSel_803F0EBC.xd3, j,
+                        FMA_MUL_ADD(248.0f, (f32) j,
+                                    mnCharSel_803F0EBC.cpu_slider_x),
+                        0.0f);
                 }
             }
         }
@@ -2314,12 +2319,12 @@ static inline void updateGrabbedSlider(struct CSSCursorData* cursor,
 
     if (is_handicap) {
         mnCharSel_804D6CB0->vs.start.players[door_idx].handicap =
-            (s32) ((0.8f * pos->x) + 0.5f) + 1;
+            (s32) (FMA_MUL_ADD(0.8f, pos->x, 0.5f)) + 1;
         anim_frame =
             (u8) mnCharSel_804D6CB0->vs.start.players[door_idx].handicap;
     } else {
         mnCharSel_804D6CB0->vs.start.players[door_idx].cpu_level =
-            (s32) ((0.8f * pos->x) + 0.5f) + 1;
+            (s32) (FMA_MUL_ADD(0.8f, pos->x, 0.5f)) + 1;
         anim_frame = mnCharSel_804D6CB0->vs.start.players[door_idx].cpu_level;
     }
 
@@ -2411,7 +2416,7 @@ void mnCharSel_CursorThink(HSD_GObj* gobj)
 
             if (HSD_PadCopyStatus[cursor->x4].err != 0) {
                 if (cursor->x5 != 3) {
-                    cursor->xC = (f32) ((15.0f * cursor->x4) - 31.0f);
+                    cursor->xC = (f32) (FMA_MUL_SUB(15.0f, cursor->x4, 31.0f));
                     cursor->x10 = -21.5f;
                     cursor->xA = 0;
                     if (cursor->x5 == 1) {
@@ -2463,8 +2468,8 @@ void mnCharSel_CursorThink(HSD_GObj* gobj)
             updateBackHold(cursor, buttons);
         }
 
-        cursor->xC = (f32) ((0.0002f * dx) + cursor->xC);
-        cursor->x10 = (f32) ((0.0002f * dy) + cursor->x10);
+        cursor->xC = (f32) (FMA_MUL_ADD(0.0002f, dx, cursor->xC));
+        cursor->x10 = (f32) (FMA_MUL_ADD(0.0002f, dy, cursor->x10));
 
         mnCharSel_803F0E8C[cursor->x4].data->scroll_amt = 0.0f;
 
@@ -3069,7 +3074,8 @@ void mnCharSel_CursorThink(HSD_GObj* gobj)
                                                              (-2.9f + sp88.x);
                                                     f32 dy = cursor->x10 -
                                                              (1.7f + sp88.y);
-                                                    if ((dx * dx + dy * dy) <
+                                                    if ((FMA_MUL_ADD(
+                                                            dx, dx, dy * dy)) <
                                                         5.0f)
                                                     {
                                                         cursor->x5 = 1;
@@ -3124,8 +3130,10 @@ void mnCharSel_CursorThink(HSD_GObj* gobj)
                                                                 cursor->x10 -
                                                                 (1.7f +
                                                                  sp88.y);
-                                                            if ((hdx * hdx +
-                                                                 hdy * hdy) <
+                                                            if ((FMA_MUL_ADD(
+                                                                    hdx, hdx,
+                                                                    hdy *
+                                                                        hdy)) <
                                                                 5.0f)
                                                             {
                                                                 cursor->x5 = 1;
@@ -3245,8 +3253,8 @@ void mnCharSel_CursorThink(HSD_GObj* gobj)
                                                         (cursor->xC - mc->x8);
                                                     f32 ddy =
                                                         -2.6f + (cy7 - mc->xC);
-                                                    f32 dist = (ddx * ddx) +
-                                                               (ddy * ddy);
+                                                    f32 dist = FMA_MUL_ADD(
+                                                        ddx, ddx, (ddy * ddy));
                                                     if (dist < closest_dist) {
                                                         closest_dist = dist;
                                                         closest = ci;
@@ -3511,17 +3519,17 @@ void fn_80262648(HSD_GObj* gobj)
                         f32 dy;
                         f32 angle;
                         do {
-                            dx = (0.1f * (HSD_Randf() - 0.5f)) +
-                                 (model->x8 - (*bdp)->x8);
+                            dx = FMA_MUL_ADD(0.1f, (HSD_Randf() - 0.5f),
+                                             (model->x8 - (*bdp)->x8));
                         } while (dx == 0.0f);
 
                         do {
                             f32 rand = HSD_Randf();
-                            dy = (0.1f * (rand - 0.5f)) +
-                                 (model->xC - (*bdp)->xC);
+                            dy = FMA_MUL_ADD(0.1f, (rand - 0.5f),
+                                             (model->xC - (*bdp)->xC));
                         } while (dy == 0.0f);
 
-                        if ((dx * dx + dy * dy) < 8.0f) {
+                        if ((FMA_MUL_ADD(dx, dx, dy * dy)) < 8.0f) {
                             if (dy < 0.01f && dy > -0.01f) {
                                 angle =
                                     (f32) (dx < 0.0f ? 1.5707963267948966
@@ -3532,8 +3540,10 @@ void fn_80262648(HSD_GObj* gobj)
                                                       : 3.141592653589793) +
                                            atanf(dx / dy));
                             }
-                            model->x8 = -((0.01f * sinf(angle)) - model->x8);
-                            model->xC = -((0.01f * cosf(angle)) - model->xC);
+                            model->x8 =
+                                -(FMA_MUL_SUB(0.01f, sinf(angle), model->x8));
+                            model->xC =
+                                -(FMA_MUL_SUB(0.01f, cosf(angle), model->xC));
                         }
                     }
                     bdp++;
@@ -3628,7 +3638,7 @@ void fn_80262648(HSD_GObj* gobj)
         dx = model->x10 - (tx = model->x8);
         dy = model->x14 - model->xC;
 
-        if ((dx * dx + dy * dy) < 4.0f) {
+        if ((FMA_MUL_ADD(dx, dx, dy * dy)) < 4.0f) {
             model->x10 = tx;
             model->x14 = model->xC;
         } else {
@@ -3640,8 +3650,8 @@ void fn_80262648(HSD_GObj* gobj)
                 angle = (f32) ((dy < 0.0f ? 0.0 : 3.141592653589793) +
                                atanf(dx / dy));
             }
-            model->x10 = (3.0f * sinf(angle)) + model->x10;
-            model->x14 = (3.0f * cosf(angle)) + model->x14;
+            model->x10 = FMA_MUL_ADD(3.0f, sinf(angle), model->x10);
+            model->x14 = FMA_MUL_ADD(3.0f, cosf(angle), model->x14);
         }
     }
 
@@ -3925,7 +3935,8 @@ void fn_802633B0(HSD_GObj* gobj)
     case 3:
         vel = tag->scroll_amt;
         if (vel) {
-            tag->scroll_force = (10.0f * vel) + (vel < 0.0f ? -1.0f : 1.0f);
+            tag->scroll_force =
+                FMA_MUL_ADD(10.0f, vel, (vel < 0.0f ? -1.0f : 1.0f));
         }
         if (tag->scroll_force) {
             scroll_pos = tag->x8;
@@ -3988,7 +3999,7 @@ void fn_802633B0(HSD_GObj* gobj)
 
         HSD_SisLib_803A746C(tag->name_ls, 0, 0.0f, tag->x8);
         HSD_SisLib_803A746C(tag->name_ls, 1, 0.0f,
-                            (32.0f * (f32) tag->next_tag) + tag->x8);
+                            FMA_MUL_ADD(32.0f, (f32) tag->next_tag, tag->x8));
         {
             int row_idx;
             name_color = &row_color;
@@ -4018,9 +4029,10 @@ void fn_802633B0(HSD_GObj* gobj)
                         }
                     }
                 }
-                HSD_SisLib_803A746C(tag->name_ls, j + 2, 10.0f,
-                                    (32.0f * (f32) (j + 1)) +
-                                        (f32) (((s32) tag->x8 % 32) - 0x20));
+                HSD_SisLib_803A746C(
+                    tag->name_ls, j + 2, 10.0f,
+                    FMA_MUL_ADD(32.0f, (f32) (j + 1),
+                                (f32) (((s32) tag->x8 % 32) - 0x20)));
             }
         }
 
@@ -4033,9 +4045,10 @@ void fn_802633B0(HSD_GObj* gobj)
                             mnCharSel_803F0E8C[tag->port].list_joint, -1);
             }
             lb_8000B1CC(list_origin_jobj, NULL, &list_origin);
-            cursor_row = 0.5f * (0.8f + (list_origin.y -
-                                         mnCharSel_804A0BC0[tag->port]->x10)) -
-                         (tag->x8 / 32.0f);
+            cursor_row = FMA_MUL_SUB(
+                0.5f,
+                (0.8f + (list_origin.y - mnCharSel_804A0BC0[tag->port]->x10)),
+                (tag->x8 / 32.0f));
             row = (s32) cursor_row;
 
             if ((s32) cursor_row == 0) {
@@ -4509,7 +4522,7 @@ s32 mnCharSel_802640A0(void)
         cursor->x7 = 0;
         cursor->x6 = 0;
         cursor->x5 = 2;
-        cursor->xC = (f32) ((15.0f * (f32) i) - 31.0f);
+        cursor->xC = (f32) (FMA_MUL_SUB(15.0f, (f32) i, 31.0f));
         cursor->x10 = -21.5f;
     }
 

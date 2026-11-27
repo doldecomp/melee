@@ -26,6 +26,7 @@
 #include <melee/mn/inlines.h>
 #include <melee/mn/mnmain.h>
 #include <melee/sc/types.h>
+#include <Runtime/fma.h>
 #include <sysdolphin/baselib/archive.h>
 #include <sysdolphin/baselib/cobj.h>
 #include <sysdolphin/baselib/debug.h>
@@ -725,7 +726,7 @@ static inline void _tyDisplay_80318CB4_sort_pos(TyDspGrid* grid, s32 n2)
 
 static inline f32 _tyDisplay_80318CB4_calc_dist_sq(f32 dz, f32 dx)
 {
-    return dx * dx + dz * dz;
+    return FMA_MUL_ADD(dx, dx, dz * dz);
 }
 
 static inline void _tyDisplay_80318CB4_place_toys(TyDspGrid* grid,
@@ -755,9 +756,9 @@ static inline f32 _tyDisplay_80318CB4_sqrt_store(f32 x, volatile f32* rounded)
 {
     if (x > 0.0f) {
         double guess = __frsqrte((double) x);
-        guess = 0.5F * guess * (3.0F - guess * guess * x);
-        guess = 0.5F * guess * (3.0F - guess * guess * x);
-        guess = 0.5F * guess * (3.0F - guess * guess * x);
+        guess = 0.5F * guess * (FMA_SUB_MUL(3.0F, guess * guess, x));
+        guess = 0.5F * guess * (FMA_SUB_MUL(3.0F, guess * guess, x));
+        guess = 0.5F * guess * (FMA_SUB_MUL(3.0F, guess * guess, x));
         *rounded = (f32) (x * guess);
         x = *rounded;
     }
@@ -822,8 +823,10 @@ void _tyDisplay_80318CB4(s32 arg0)
             grid->pos[i].x = radius * cosf(rad);
             grid->pos[i].z = radius * sinf(rad);
             if (arg0 == 0) {
-                grid->pos[i].x = 2.0f * HSD_Randf() + grid->pos[i].x;
-                grid->pos[i].z = 2.0f * HSD_Randf() + grid->pos[i].z;
+                grid->pos[i].x =
+                    FMA_MUL_ADD(2.0f, HSD_Randf(), grid->pos[i].x);
+                grid->pos[i].z =
+                    FMA_MUL_ADD(2.0f, HSD_Randf(), grid->pos[i].z);
             }
             if (HSD_Randi(3) != 0) {
                 theta = atan2f(grid->pos[i].z, grid->pos[i].x);
@@ -1063,7 +1066,7 @@ void _tyDisplay_80319994(s32 arg0)
                     cur->pos[0].x = 0.0f;
                     cur->pos[0].z = 0.0f;
                 } else {
-                    cur->pos[0].x = 9.0f * (f32) col + xoff;
+                    cur->pos[0].x = FMA_MUL_ADD(9.0f, (f32) col, xoff);
                     if (pivot != 0) {
                         cur->pos[0].z = -9.0f * (f32) row;
                     } else {
@@ -1190,7 +1193,7 @@ void _tyDisplay_80319EF0(void)
     HSD_CObjSetFov(cobj, cfg->x44);
 
     range = 0.0033333334f;
-    cfg->x4C = (f32) cfg->x08 * range + 3.0f;
+    cfg->x4C = FMA_MUL_ADD((f32) cfg->x08, range, 3.0f);
     {
         f32 fov2 = cfg->x44;
         cfg->x50 = fov2 + fov2 / 5.0f;
@@ -1304,7 +1307,7 @@ void _tyDisplay_8031A4EC(HSD_GObj* arg0)
         } else {
             sign = -1;
         }
-        cfg->x20 = -(0.2f * (f32) sign - val) / 0.8f;
+        cfg->x20 = -(FMA_MUL_SUB(0.2f, (f32) sign, val)) / 0.8f;
     }
 
     zero = 0;
@@ -1317,7 +1320,7 @@ void _tyDisplay_8031A4EC(HSD_GObj* arg0)
         } else {
             sign = -1;
         }
-        cfg->x24 = -(0.2f * (f32) sign - val) / 0.8f;
+        cfg->x24 = -(FMA_MUL_SUB(0.2f, (f32) sign, val)) / 0.8f;
     }
 
     cfg->x30 = Toy_80305EB4();
@@ -1332,7 +1335,7 @@ void _tyDisplay_8031A4EC(HSD_GObj* arg0)
         } else {
             sign = -1;
         }
-        cfg->x30 = -(0.2f * (f32) sign - val) / 0.8f;
+        cfg->x30 = -(FMA_MUL_SUB(0.2f, (f32) sign, val)) / 0.8f;
     }
 
     val = cfg->x34;
@@ -1344,7 +1347,7 @@ void _tyDisplay_8031A4EC(HSD_GObj* arg0)
         } else {
             sign = -1;
         }
-        cfg->x34 = -(0.2f * (f32) sign - val) / 0.8f;
+        cfg->x34 = -(FMA_MUL_SUB(0.2f, (f32) sign, val)) / 0.8f;
     }
 
     if (cfg->x74 != 0) {
@@ -1368,7 +1371,7 @@ void _tyDisplay_8031A4EC(HSD_GObj* arg0)
     {
         stick = cfg->x20;
         if (stick != zero) {
-            cfg->x10 = -(stick * (0.02f * fov) - cfg->x10);
+            cfg->x10 = -(FMA_MUL_SUB(stick, (0.02f * fov), cfg->x10));
             if (cfg->x10 < -cfg->x1C) {
                 cfg->x10 = -cfg->x1C;
             }
@@ -1381,7 +1384,7 @@ void _tyDisplay_8031A4EC(HSD_GObj* arg0)
     {
         stick = cfg->x24;
         if (stick != zero) {
-            cfg->x0C = (stick * (0.02f * fov)) + cfg->x0C;
+            cfg->x0C = FMA_MUL_ADD(stick, (0.02f * fov), cfg->x0C);
             if (cfg->x0C < -cfg->x18) {
                 cfg->x0C = -cfg->x18;
             }
@@ -1465,7 +1468,7 @@ void _tyDisplay_8031A94C(HSD_GObj* arg0)
         } else {
             sign = -1;
         }
-        cfg->x20 = -(0.2f * (f32) sign - val) / 0.8f;
+        cfg->x20 = -(FMA_MUL_SUB(0.2f, (f32) sign, val)) / 0.8f;
     }
 
     val = cfg->x24;
@@ -1477,7 +1480,7 @@ void _tyDisplay_8031A94C(HSD_GObj* arg0)
         } else {
             sign = -1;
         }
-        cfg->x24 = -(0.2f * (f32) sign - val) / 0.8f;
+        cfg->x24 = -(FMA_MUL_SUB(0.2f, (f32) sign, val)) / 0.8f;
     }
 
     cfg->x30 = Toy_80305EB4();
@@ -1492,7 +1495,7 @@ void _tyDisplay_8031A94C(HSD_GObj* arg0)
         } else {
             sign = -1;
         }
-        cfg->x30 = -(0.2f * (f32) sign - val) / 0.8f;
+        cfg->x30 = -(FMA_MUL_SUB(0.2f, (f32) sign, val)) / 0.8f;
     }
 
     val = cfg->x34;
@@ -1504,7 +1507,7 @@ void _tyDisplay_8031A94C(HSD_GObj* arg0)
         } else {
             sign = -1;
         }
-        cfg->x34 = -(0.2f * (f32) sign - val) / 0.8f;
+        cfg->x34 = -(FMA_MUL_SUB(0.2f, (f32) sign, val)) / 0.8f;
     }
 
     if (cfg->x74 != 0) {
@@ -1572,7 +1575,7 @@ void _tyDisplay_8031A94C(HSD_GObj* arg0)
             f32 stick = cfg->x20;
             f32 zero = 0.0f;
             if (stick != zero) {
-                cfg->x10 = -(stick * (0.02f * fov) - cfg->x10);
+                cfg->x10 = -(FMA_MUL_SUB(stick, (0.02f * fov), cfg->x10));
                 if (cfg->x10 < -cfg->x1C) {
                     cfg->x10 = -cfg->x1C;
                 }
@@ -1583,7 +1586,7 @@ void _tyDisplay_8031A94C(HSD_GObj* arg0)
             {
                 f32 stick2 = cfg->x24;
                 if (stick2 != zero) {
-                    cfg->x0C = (stick2 * (0.02f * fov)) + cfg->x0C;
+                    cfg->x0C = FMA_MUL_ADD(stick2, (0.02f * fov), cfg->x0C);
                     if (cfg->x0C < -cfg->x18) {
                         cfg->x0C = -cfg->x18;
                     }

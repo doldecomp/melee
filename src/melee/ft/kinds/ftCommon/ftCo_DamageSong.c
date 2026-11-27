@@ -12,19 +12,21 @@
 #include <melee/ft/ftcommon.h>
 #include <melee/ft/types.h>
 #include <melee/pl/player.h>
+#include <Runtime/fma.h>
 
 /* 0C3390 */ static void ftCo_800C3390(Fighter_GObj* gobj);
 /* 0C3480 */ static void ftCo_800C3480(Fighter_GObj* gobj);
 
 static float inlineA0(Fighter* fp, bool arg1)
 {
-    float result =
-        (fp->dmg.x1830_percent * p_ftCommonData->x638) +
-        ((p_ftCommonData->x628 *
-          (p_ftCommonData->x62C - Player_GetHandicap(fp->player_idx))) +
-         p_ftCommonData->x624 +
-         p_ftCommonData->x630 *
-             (p_ftCommonData->x634 - ((Player_80033BB8(fp->player_idx)) + 1)));
+    float result = FMA_MUL_ADD(
+        fp->dmg.x1830_percent, p_ftCommonData->x638,
+        (FMA_MUL_ADD(
+             p_ftCommonData->x628,
+             (p_ftCommonData->x62C - Player_GetHandicap(fp->player_idx)),
+             p_ftCommonData->x624) +
+         p_ftCommonData->x630 * (p_ftCommonData->x634 -
+                                 ((Player_80033BB8(fp->player_idx)) + 1))));
     if (arg1) {
         result *= p_ftCommonData->x644;
     }

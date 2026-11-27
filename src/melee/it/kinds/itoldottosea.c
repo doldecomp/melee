@@ -16,6 +16,7 @@
 #include <melee/it/itzako.h>
 #include <melee/lb/lblanguage.h>
 #include <melee/mp/mpcoll.h>
+#include <Runtime/fma.h>
 #include <sysdolphin/baselib/random.h>
 
 ItemStateTable it_803F89C8[] = {
@@ -159,7 +160,7 @@ void it_802E27B4(Item_GObj* gobj)
 
     if (ip->xDD4_itemVar.oldottosea.x2C != 0) {
         pos = ip->pos;
-        pos.x += attr->x14 * ip->facing_dir;
+        FMA_ADD_TO(pos.x, attr->x14, ip->facing_dir);
         ip->xDD4_itemVar.oldottosea.x20 =
             it_8028EB88(gobj, &pos, ip->facing_dir, attr->x24);
         if (ip->xDD4_itemVar.oldottosea.x20 != NULL) {
@@ -411,7 +412,7 @@ void itOldottosea_UnkMotion7_Phys(Item_GObj* gobj)
             threshold = 0x19;
         }
         if (ip->xDD4_itemVar.oldottosea.x24 > threshold) {
-            ip->x40_vel.x += -ip->facing_dir * attr->xC;
+            FMA_ADD_TO(ip->x40_vel.x, -ip->facing_dir, attr->xC);
         }
     }
     ip->xDD4_itemVar.oldottosea.x24++;

@@ -13,6 +13,7 @@
 #include <melee/it/itgroundcoll.h>
 #include <melee/it/ithitbox.h>
 #include <melee/it/types.h>
+#include <Runtime/fma.h>
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/jobj.h>
 
@@ -170,7 +171,8 @@ bool it_27CF_Logic114_DmgReceived(Item_GObj* item_gobj)
     Item* item;
 
     item = GET_ITEM(item_gobj);
-    item->xD44_lifeTimer -= item->xCA0 * item->xDD4_itemVar.yoshiegglay.x0;
+    FMA_SUB_FROM(item->xD44_lifeTimer, item->xCA0,
+                 item->xDD4_itemVar.yoshiegglay.x0);
     return false;
 }
 

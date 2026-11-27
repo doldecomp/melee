@@ -14,6 +14,7 @@
 #include <melee/it/itgroundcoll.h>
 #include <melee/lb/lb_00B0.h>
 #include <melee/lb/lbvector.h>
+#include <Runtime/fma.h>
 #include <sysdolphin/baselib/random.h>
 
 ItemStateTable it_803F7EE8[] = {
@@ -41,9 +42,9 @@ static inline float my_sqrtf(float x)
     volatile float y;
     if (x > 0) {
         double guess = __frsqrte((double) x);
-        guess = .5 * guess * (3.0 - guess * guess * x);
-        guess = .5 * guess * (3.0 - guess * guess * x);
-        guess = .5 * guess * (3.0 - guess * guess * x);
+        guess = .5 * guess * (FMA_SUB_MUL(3.0, guess * guess, x));
+        guess = .5 * guess * (FMA_SUB_MUL(3.0, guess * guess, x));
+        guess = .5 * guess * (FMA_SUB_MUL(3.0, guess * guess, x));
         y = (float) (x * guess);
         return y;
     }
@@ -55,13 +56,14 @@ static inline float my_sqrtf_accurate(float x)
     volatile float y;
     if (x > 0.0f) {
         double guess = __frsqrte((double) x); // returns an approximation to
-        guess =
-            0.5 * guess * (3.0 - guess * guess * x); // now have 12 sig bits
-        guess =
-            0.5 * guess * (3.0 - guess * guess * x); // now have 24 sig bits
-        guess =
-            0.5 * guess * (3.0 - guess * guess * x); // now have 32 sig bits
-        guess = 0.5 * guess * (3.0 - guess * guess * x); // extra iteration
+        guess = 0.5 * guess *
+                (FMA_SUB_MUL(3.0, guess * guess, x)); // now have 12 sig bits
+        guess = 0.5 * guess *
+                (FMA_SUB_MUL(3.0, guess * guess, x)); // now have 24 sig bits
+        guess = 0.5 * guess *
+                (FMA_SUB_MUL(3.0, guess * guess, x)); // now have 32 sig bits
+        guess = 0.5 * guess *
+                (FMA_SUB_MUL(3.0, guess * guess, x)); // extra iteration
         y = (float) (x * guess);
         return y;
     }
@@ -233,7 +235,7 @@ void it_802D1830(Item_GObj* gobj)
     disc = ip->pos.y - ip->xDD4_itemVar.lugia.x64.y;
     x18 = attrs->x18;
     prod = 8.0f * x18;
-    sqrtval = my_sqrtf_accurate(-((prod * -disc) - (x18 * x18)));
+    sqrtval = my_sqrtf_accurate(-(FMA_MUL_SUB(prod, -disc, (x18 * x18))));
     ip->xDD4_itemVar.lugia.xE50.x = -((-x18 + sqrtval) / 2);
 }
 
@@ -469,8 +471,8 @@ void it_802D208C(Item_GObj* gobj)
 
         target = ip->xDD4_itemVar.lugia.x8C;
         angle = MTXDegToRad(new_angle);
-        target.x += attrs->x3C * cosf(angle);
-        target.y += attrs->x3C * sinf(angle);
+        FMA_ADD_TO(target.x, attrs->x3C, cosf(angle));
+        FMA_ADD_TO(target.y, attrs->x3C, sinf(angle));
 
         // permuterslop
         dx = dz = ip->xDD4_itemVar.lugia.x64.x - target.x;

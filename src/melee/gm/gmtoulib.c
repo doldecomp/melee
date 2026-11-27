@@ -20,6 +20,7 @@
 #include <melee/mn/mnstagesel.h>
 #include <melee/pl/player.h>
 #include <melee/sc/types.h>
+#include <Runtime/fma.h>
 #include <sysdolphin/baselib/cobj.h>
 #include <sysdolphin/baselib/controller.h>
 #include <sysdolphin/baselib/debug.h>
@@ -535,12 +536,12 @@ void fn_8018AA74(HSD_JObj* jobj, s32 entry_idx, s32 slot_idx)
 
 static inline f32 gmTournament_GetBracketSlideYForward(BracketEntrySlot* slot)
 {
-    return -(0.3f * (f32) lbl_804D6630 + (f32) slot->x48);
+    return -(FMA_MUL_ADD(0.3f, (f32) lbl_804D6630, (f32) slot->x48));
 }
 
 static inline f32 gmTournament_GetBracketSlideYReverse(BracketEntrySlot* slot)
 {
-    return -((f32) slot->x48 - 0.3f * (f32) lbl_804D6630);
+    return -(FMA_SUB_MUL((f32) slot->x48, 0.3f, (f32) lbl_804D6630));
 }
 
 static inline HSD_JObj* fn_8018B090_inline0(BracketEntry* bracket_entries,
@@ -780,21 +781,24 @@ void fn_8018B090(HSD_GObj* arg0)
                     HSD_JObj* jobj = entries[idx].slots[k].x2C->hsd_obj;
                     if (entries[idx].x2 != 0) {
                         HSD_JObjSetTranslateY(
-                            jobj, -((f32) entries[idx].slots[k].x40 -
-                                    (0.1f * (f32) arr[lbl_804D6630 % 10])));
+                            jobj, -(FMA_SUB_MUL(
+                                      (f32) entries[idx].slots[k].x40, 0.1f,
+                                      (f32) arr[lbl_804D6630 % 10])));
                     } else {
                         switch (entries[idx].x4) {
                         case 1:
                             if (k == 0) {
                                 HSD_JObjSetTranslateY(
                                     jobj,
-                                    -((0.1f * (f32) arr[lbl_804D6630 % 10]) +
-                                      (f32) entries[idx].slots[k].x40));
+                                    -(FMA_MUL_ADD(
+                                        0.1f, (f32) arr[lbl_804D6630 % 10],
+                                        (f32) entries[idx].slots[k].x40)));
                             } else {
                                 HSD_JObjSetTranslateY(
                                     jobj,
-                                    -((f32) entries[idx].slots[k].x40 -
-                                      (0.1f * (f32) arr[lbl_804D6630 % 10])));
+                                    -(FMA_SUB_MUL(
+                                        (f32) entries[idx].slots[k].x40, 0.1f,
+                                        (f32) arr[lbl_804D6630 % 10])));
                             }
                             break;
                         case 2:
@@ -802,19 +806,22 @@ void fn_8018B090(HSD_GObj* arg0)
                             if (k <= 1) {
                                 HSD_JObjSetTranslateY(
                                     jobj,
-                                    -((0.1f * (f32) arr[lbl_804D6630 % 10]) +
-                                      (f32) entries[idx].slots[k].x40));
+                                    -(FMA_MUL_ADD(
+                                        0.1f, (f32) arr[lbl_804D6630 % 10],
+                                        (f32) entries[idx].slots[k].x40)));
                             } else {
                                 HSD_JObjSetTranslateY(
                                     jobj,
-                                    -((f32) entries[idx].slots[k].x40 -
-                                      (0.1f * (f32) arr[lbl_804D6630 % 10])));
+                                    -(FMA_SUB_MUL(
+                                        (f32) entries[idx].slots[k].x40, 0.1f,
+                                        (f32) arr[lbl_804D6630 % 10])));
                             }
                             break;
                         default:
                             HSD_JObjSetTranslateY(
-                                jobj, -((0.1f * (f32) arr[lbl_804D6630 % 10]) +
-                                        (f32) entries[idx].slots[k].x40));
+                                jobj, -(FMA_MUL_ADD(
+                                          0.1f, (f32) arr[lbl_804D6630 % 10],
+                                          (f32) entries[idx].slots[k].x40)));
                             break;
                         }
                     }
@@ -1848,11 +1855,11 @@ void fn_8018E85C(DynamicModelDesc* model, s32 flag)
                 pos_multiplier = 7.0f;
             }
 
-            pos = 0.0083f * (f32) (0x40 - (s32) td->x2E) + 1.0f;
+            pos = FMA_MUL_ADD(0.0083f, (f32) (0x40 - (s32) td->x2E), 1.0f);
             final_pos = pos_multiplier * pos;
             HSD_JObjSetScaleX(jobj, final_pos);
 
-            pos = 0.0083f * (f32) (0x40 - (s32) td->x2E) + 1.0f;
+            pos = FMA_MUL_ADD(0.0083f, (f32) (0x40 - (s32) td->x2E), 1.0f);
             final_pos = pos_multiplier * pos;
             HSD_JObjSetScaleY(jobj, final_pos);
 

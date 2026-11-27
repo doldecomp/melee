@@ -14,6 +14,7 @@
 #include <melee/lb/lbdvd.h>
 #include <melee/lb/lblanguage.h>
 #include <melee/lb/types.h>
+#include <Runtime/fma.h>
 #include <sysdolphin/baselib/cobj.h> // IWYU pragma: keep
 #include <sysdolphin/baselib/controller.h>
 #include <sysdolphin/baselib/fog.h>
@@ -354,14 +355,14 @@ void fn_8025A310(HSD_GObj* gobj)
         return;
     }
     HSD_JObjGetTranslation(jobj, &sp1C);
-    sp1C.x = 0.03f * mnStageSel_804D6CAC + sp1C.x;
+    sp1C.x = FMA_MUL_ADD(0.03f, mnStageSel_804D6CAC, sp1C.x);
     if (-27.0F > sp1C.x) {
         sp1C.x = -27.0F;
     }
     if (27.0F < sp1C.x) {
         sp1C.x = 27.0F;
     }
-    sp1C.y = 0.03f * mnStageSel_804D6CAD + sp1C.y;
+    sp1C.y = FMA_MUL_ADD(0.03f, mnStageSel_804D6CAD, sp1C.y);
     if (-19.0F > sp1C.y) {
         sp1C.y = -19.0F;
     }

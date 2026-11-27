@@ -18,6 +18,7 @@
 #include <melee/ft/kinds/ftPopo/types.h>
 #include <melee/ft/types.h>
 #include <melee/pl/player.h>
+#include <Runtime/fma.h>
 
 /* 123B3C */ static void ftNn_Init_80123B3C(Fighter_GObj* nana_gobj);
 /* 123BF0 */ static void ftNn_Init_80123BF0(Fighter_GObj* gobj);
@@ -290,9 +291,9 @@ static inline void ftPp_SpecialS_0_Coll_inline4(Fighter_GObj* nana_gobj,
         if (nana_fp->mv.pp.unk_80123954.x0 > 5) {
             nana_fp->mv.pp.unk_80123954.x0 = 5;
         }
-        nana_fp->cur_pos.x =
-            -((1.5f * (nana_fp->mv.pp.unk_80123954.x0 * nana_fp->facing_dir)) -
-              popo_fp->cur_pos.x);
+        nana_fp->cur_pos.x = -(FMA_MUL_SUB(
+            1.5f, (nana_fp->mv.pp.unk_80123954.x0 * nana_fp->facing_dir),
+            popo_fp->cur_pos.x));
         if (!ft_80082888(nana_gobj, &ftNn_Unk2_803CDD60)) {
             ftPp_SpecialS_0_Coll_inline3(nana_gobj);
         }
@@ -346,9 +347,9 @@ static inline void ftPp_SpecialS_1_Coll_inline4(Fighter_GObj* nana_gobj,
         if (nana_fp->mv.pp.unk_80123954.x0 > 5) {
             nana_fp->mv.pp.unk_80123954.x0 = 5;
         }
-        nana_fp->cur_pos.x =
-            -((1.5f * (nana_fp->mv.pp.unk_80123954.x0 * nana_fp->facing_dir)) -
-              popo_fp->cur_pos.x);
+        nana_fp->cur_pos.x = -(FMA_MUL_SUB(
+            1.5f, (nana_fp->mv.pp.unk_80123954.x0 * nana_fp->facing_dir),
+            popo_fp->cur_pos.x));
         if (ft_800824A0(nana_gobj, &ftNn_Unk2_803CDD60)) {
             ftPp_SpecialS_1_Coll_inline3(nana_gobj);
         }

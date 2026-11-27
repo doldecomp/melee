@@ -19,6 +19,7 @@
 #include <melee/ft/types.h>
 #include <melee/it/kinds/ityoshistar.h>
 #include <melee/lb/lb_00B0.h>
+#include <Runtime/fma.h>
 #include <sysdolphin/baselib/gobj.h>
 
 /* 12E644 */ static void fn_8012E644(Fighter_GObj*);
@@ -32,7 +33,7 @@ void fn_8012E644(Fighter_GObj* gobj)
     PAD_STACK(4);
 
     lb_8000B1CC(fp->parts[FtPart_TransN].joint, NULL, &transn_pos);
-    star_pos.x = (-1.0f * da->speciallw_star_offset.x) + transn_pos.x;
+    star_pos.x = FMA_MUL_ADD(-1.0f, da->speciallw_star_offset.x, transn_pos.x);
     star_pos.y = transn_pos.y + da->speciallw_star_offset.y;
     star_pos.z = transn_pos.z;
     it_802B2FC8(gobj, &star_pos, -1.0f);

@@ -17,6 +17,7 @@
 #include <melee/it/itzako.h>
 #include <melee/lb/lb_00B0.h>
 #include <melee/mp/mpcoll.h>
+#include <Runtime/fma.h>
 #include <sysdolphin/baselib/random.h>
 
 /* 2DFFA0 */ static void it_802DFFA0(Item_GObj* gobj);
@@ -125,8 +126,8 @@ void it_802DDD38(Item_GObj* gobj)
     case 6:
     case 7:
     case 8:
-        ip->x40_vel.x +=
-            -ip->xCCC_incDamageDirection * ((f32) ip->xCA0 * attrs->x14);
+        FMA_ADD_TO(ip->x40_vel.x, -ip->xCCC_incDamageDirection,
+                   ((f32) ip->xCA0 * attrs->x14));
         ip->xDD4_itemVar.zgshell.xE08_b1 = 1;
         break;
     }
