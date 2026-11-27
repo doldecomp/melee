@@ -1032,7 +1032,8 @@ void grRCruise_80201410(Ground_GObj* gobj)
     Ground* gp = GET_GROUND(gobj);
     int i;
 
-    gp->u.map.vanish = HSD_MemAlloc(sizeof(lbl_803E5014));
+    gp->u.map.vanish =
+        HSD_MemAlloc(ARRAY_SIZE(lbl_803E5014) * sizeof(*gp->u.map.vanish));
     HSD_ASSERT(1453, gp->u.map.vanish);
 
     for (i = 0; i < ARRAY_SIZE(lbl_803E5014); i++) {
