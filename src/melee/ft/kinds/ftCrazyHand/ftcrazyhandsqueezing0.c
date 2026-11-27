@@ -18,7 +18,8 @@ void ftCh_Init_8015A184(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftCrazyHand_DatAttrs* da = &fp->ft_data->ext_attr->crazyhand;
-    Fighter_ChangeMotionState(gobj, 0x178, Ft_MF_None, 0.0f, 1.0f, 0.0f, NULL);
+    Fighter_ChangeMotionState(gobj, ftMh_MS_Squeezing0, Ft_MF_None, 0.0f, 1.0f,
+                              0.0f, NULL);
     ftAnim_8006EBA4(gobj);
     fp->cur_pos.x = da->xE4;
     fp->cur_pos.y = da->xE8;
