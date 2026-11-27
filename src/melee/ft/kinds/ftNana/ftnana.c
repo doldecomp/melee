@@ -423,7 +423,9 @@ bool ftNn_Init_8012309C(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (!fp->is_sleeping) {
-        if (fp->motion_id >= 362 && fp->motion_id <= 366) {
+        if (fp->motion_id >= ftPp_MS_SpecialHi_1 &&
+            fp->motion_id <= ftPp_MS_SpecialHi_5)
+        {
             return true;
         }
     }

@@ -1022,8 +1022,8 @@ void ftCo_800B683C(Fighter* fp)
         return;
     }
     var_r30 = false;
-    if (fp->kind == Ft_Kind_Donkey && fp->motion_id >= 0x15F &&
-        fp->motion_id <= 0x164)
+    if (fp->kind == Ft_Kind_Donkey && fp->motion_id >= ftDk_MS_ThrowFWait0 &&
+        fp->motion_id <= ftDk_MS_ThrowFKneebend)
     {
         temp_r3_2 = mpIsland_8005AC14(&fp->cur_pos, -10.0f);
         if (temp_r3_2 == NULL) {
@@ -1050,11 +1050,12 @@ void ftCo_800B683C(Fighter* fp)
         }
         return;
     } else if ((fp->kind == Ft_Kind_Koopa || fp->kind == Ft_Kind_GKoops) &&
-               fp->motion_id == 0x15E)
+               fp->motion_id == ftKp_MS_SpecialSHit0_1)
     {
         var_r30 = true;
-    } else if (fp->kind == Ft_Kind_Kirby && fp->motion_id >= 0x164 &&
-               fp->motion_id <= 0x17E)
+    } else if (fp->kind == Ft_Kind_Kirby &&
+               fp->motion_id >= ftKb_MS_SpecialNCapture0 &&
+               fp->motion_id <= ftKb_MS_EatTurnAir)
     {
         if (fp->victim_gobj != NULL) {
             var_r3 = GET_FIGHTER(fp->victim_gobj);
