@@ -875,9 +875,8 @@ void grZebes_801D99E0(HSD_GObj* gobj)
 
             diff = ABS(gp->u.zebes5.xD4 - gp->u.zebes5.xD8);
 
-            discriminant =
-                FMA_MUL_SUB(yakumono_param->x98, yakumono_param->x98,
-                            (4.0f * diff) / yakumono_param->x9C);
+            discriminant = yakumono_param->x98 * yakumono_param->x98 -
+                           (4.0f * diff) / yakumono_param->x9C;
             if (discriminant < 0.0f) {
                 gp->u.zebes5.xCC = 999.0f;
             } else {
@@ -921,8 +920,8 @@ void grZebes_801D99E0(HSD_GObj* gobj)
             f32 temp = vel / accel;
             t = temp;
         }
-        threshold =
-            (f32) ((f64) (vel * t) - (0.5 * (f64) accel * (f64) (t * t)));
+        threshold = (f32) (FMA_SUB_MUL((f64) (vel * t), 0.5 * (f64) accel,
+                                       (f64) (t * t)));
         target_level = gp->u.zebes5.xD4;
         delta = target_level - gp->u.zebes5.xD8;
 
@@ -1977,11 +1976,10 @@ bool grZebes_801DBB60(Item_GObj* yaku)
                 (void) ei_size;
                 for (j = i + 1; j < 20; j++) {
                     if (grZe_8049F170[j].x00_active == 1 && j != 0 && j != 6) {
-                        dist_sq =
-                            FMA_MUL_ADD((ei_x - grZe_8049F170[j].x08_x),
-                                        (ei_x - grZe_8049F170[j].x08_x),
-                                        (ei_y - grZe_8049F170[j].x0C_y) *
-                                            (ei_y - grZe_8049F170[j].x0C_y));
+                        dist_sq = (ei_x - grZe_8049F170[j].x08_x) *
+                                      (ei_x - grZe_8049F170[j].x08_x) +
+                                  (ei_y - grZe_8049F170[j].x0C_y) *
+                                      (ei_y - grZe_8049F170[j].x0C_y);
                         if (max_dist_sq < dist_sq) {
                             max_dist_sq = dist_sq;
                             x1 = ei->x08_x;
@@ -2100,7 +2098,8 @@ bool grZebes_801DBB60(Item_GObj* yaku)
                                 dpy2 = y2 - y1;
                                 dpx2 = x2 - x1;
                                 t = (new_width - width) /
-                                    sqrtf(dpx2 * dpx2 + dpy2 * dpy2);
+                                    sqrtf(
+                                        FMA_MUL_ADD(dpx2, dpx2, dpy2 * dpy2));
                                 width = new_width;
                                 FMA_ADD_TO(x1, dpx2, t);
                                 FMA_ADD_TO(y1, dpy2, t);
@@ -2287,7 +2286,7 @@ void grZebes_801DC744(s32 arg0, u8 arg1)
         grZebes_801DAE70(13, arg1, (f32) (0.5 * x_range + x_base),
                          (f32) (0.9 * y_range + y_start), 1.3f);
 
-        grZebes_801DAE70(14, arg1, (f32) (0.6 * x_range + x_base),
+        grZebes_801DAE70(14, arg1, (f32) (FMA_MUL_ADD(0.6, x_range, x_base)),
                          (f32) ((f64) y_start + (f64) y_range), 1.1f);
 
         grZebes_801DAE70(15, arg1, (f32) (0.2 * x_range + x_base),

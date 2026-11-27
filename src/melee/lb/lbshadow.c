@@ -76,7 +76,7 @@ static void splGetBezierTangent(Vec3* p, Vec3* cp, f32 u)
     f32 u_1 = u - 1.0F;
     f32 u2 = u * u;
     f32 bez0 = -3.0F * u_1 * u_1;
-    f32 bez1 = 3.0F * (FMA_ADD_MUL((FMA_SUB_MUL(1.0F, 4.0F, u)), 3.0F, u2));
+    f32 bez1 = 3.0F * ((FMA_SUB_MUL(1.0F, 4.0F, u)) + 3.0F * u2);
     f32 bez2 = 3.0F * (FMA_MUL_SUB(2.0F, u, (3.0F * u2)));
     f32 bez3 = 3.0F * u2;
 
@@ -322,11 +322,11 @@ static inline f32 my_sqrtf(f32 x)
     if (x > lbShadow_804D7B70) {
         f64 guess = __frsqrte((f64) x);
         guess = lbShadow_804D7B78 * guess *
-                (lbShadow_804D7B80 - guess * guess * x);
+                (FMA_SUB_MUL(lbShadow_804D7B80, guess * guess, x));
         guess = lbShadow_804D7B78 * guess *
-                (lbShadow_804D7B80 - guess * guess * x);
+                (FMA_SUB_MUL(lbShadow_804D7B80, guess * guess, x));
         guess = lbShadow_804D7B78 * guess *
-                (lbShadow_804D7B80 - guess * guess * x);
+                (FMA_SUB_MUL(lbShadow_804D7B80, guess * guess, x));
         y = (f32) (x * guess);
         return y;
     }
@@ -426,8 +426,7 @@ void lbShadow_8000F38C(s32 arg0)
 #ifdef MUST_MATCH
                    dist =
 #endif
-                       FMA_MUL_ADD(lightVec.x, lightVec.x,
-                                   (lightVec.y * lightVec.y)));
+                       (lightVec.x * lightVec.x) + (lightVec.y * lightVec.y));
         dist = my_sqrtf(dist);
 
         if (dist < 0.001f) {
@@ -441,8 +440,7 @@ void lbShadow_8000F38C(s32 arg0)
             lightDir.z = lbShadow_804D7B70;
             upVec.z = lbShadow_804D7B70;
         } else {
-            f32 xz_sq =
-                FMA_MUL_ADD(lightVec.x, lightVec.x, (lightVec.z * lightVec.z));
+            f32 xz_sq = (lightVec.x * lightVec.x) + (lightVec.z * lightVec.z);
             if (xz_sq > lbShadow_804D7B8C) {
                 upVec.z = lbShadow_804D7B70;
                 upVec.x = lbShadow_804D7B70;

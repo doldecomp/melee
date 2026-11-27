@@ -207,7 +207,7 @@ void ftCo_800C18A8(Fighter_GObj* gobj, ftCommon_MotionState msid, Vec3* normal,
     {
         float vel_x = fp->self_vel.x + fp->x8c_kb_vel.x;
         float vel_y = fp->self_vel.y + fp->x8c_kb_vel.y;
-        float mag = sqrtf(SQ(vel_x) + SQ(vel_y));
+        float mag = sqrtf(FMA_MUL_ADD(vel_x, vel_x, SQ(vel_y)));
         ftCo_80097630(fp, ftCo_DownBound_SfxIds, mag * fp->co_attrs.weight);
     }
 }

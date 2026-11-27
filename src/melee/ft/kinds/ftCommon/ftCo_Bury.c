@@ -243,14 +243,14 @@ void ftCo_800C0D0C(Fighter_GObj* gobj)
     ftCommon_8007E2FC(gobj);
     ftCommon_InitGrab(
         fp, 0,
-        FMA_MUL_ADD(fp->dmg.x1830_percent, p_ftCommonData->x60C,
-                    (FMA_ADD_MUL((p_ftCommonData->x5FC *
-                                  (p_ftCommonData->x600 -
-                                   Player_GetHandicap(fp->player_idx))) +
-                                     p_ftCommonData->x5F8,
-                                 p_ftCommonData->x604,
-                                 (p_ftCommonData->x608 -
-                                  (Player_80033BB8(fp->player_idx) + 1))))));
+        FMA_MUL_ADD(
+            fp->dmg.x1830_percent, p_ftCommonData->x60C,
+            (FMA_MUL_ADD(
+                 p_ftCommonData->x5FC,
+                 (p_ftCommonData->x600 - Player_GetHandicap(fp->player_idx)),
+                 p_ftCommonData->x5F8) +
+             p_ftCommonData->x604 * (p_ftCommonData->x608 -
+                                     (Player_80033BB8(fp->player_idx) + 1)))));
     ftCommon_8007E2F4(fp, 0x1FF);
     fp->x221D_b5 = true;
     fp->x2220_b3 = true;

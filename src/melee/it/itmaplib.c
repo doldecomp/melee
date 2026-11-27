@@ -876,7 +876,7 @@ bool it_8027770C(Item_GObj* item_gobj)
 
 static inline float product_xy(Vec3* a, Vec3* b)
 {
-    return (FMA_MUL_ADD(a->x, b->x, a->y * b->y));
+    return (a->x * b->x + a->y * b->y);
 }
 
 static inline float sqrtf_accurate_local(float x)

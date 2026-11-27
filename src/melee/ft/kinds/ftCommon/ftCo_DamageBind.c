@@ -38,13 +38,12 @@ static void commonCall(Fighter* fp)
         fp, 0,
         FMA_MUL_ADD(
             fp->dmg.x1830_percent, p_ftCommonData->released_inputs,
-            (FMA_ADD_MUL(FMA_MUL_ADD(p_ftCommonData->x65C,
-                                     (p_ftCommonData->x660 -
-                                      Player_GetHandicap(fp->player_idx)),
-                                     p_ftCommonData->x658),
-                         p_ftCommonData->x664,
-                         (p_ftCommonData->pressed_inputs -
-                          (Player_80033BB8(fp->player_idx) + 1))))));
+            (FMA_MUL_ADD(
+                 p_ftCommonData->x65C,
+                 (p_ftCommonData->x660 - Player_GetHandicap(fp->player_idx)),
+                 p_ftCommonData->x658) +
+             p_ftCommonData->x664 * (p_ftCommonData->pressed_inputs -
+                                     (Player_80033BB8(fp->player_idx) + 1)))));
 }
 
 void ftCo_800C4550(Fighter_GObj* gobj)

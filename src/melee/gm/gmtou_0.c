@@ -1294,13 +1294,13 @@ void fn_80192BB0(void)
                            fn_801913BC, 0.0f);
         jobj = (HSD_JObj*) gobj->hsd_obj;
         fn_8018FBD8((void*) gobj, i);
-        HSD_JObjSetTranslateY(jobj, -((3.5f * (f32) i) - 11.5f));
+        HSD_JObjSetTranslateY(jobj, -(FMA_MUL_SUB(3.5f, (f32) i, 11.5f)));
 
         gobj = fn_8019035C(1, lbl_804D664C->models[1], 0, 0x1A, 2, 1,
                            fn_80191678, 0.0f);
         jobj = (HSD_JObj*) gobj->hsd_obj;
         fn_8018FBD8((void*) gobj, i);
-        HSD_JObjSetTranslateY(jobj, -((3.5f * (f32) i) - 11.5f));
+        HSD_JObjSetTranslateY(jobj, -(FMA_MUL_SUB(3.5f, (f32) i, 11.5f)));
     }
 }
 

@@ -281,12 +281,12 @@ void lb_800122F0(HSD_ImageDesc* img, GXTexObj* tex, f32 factor)
     color0.b = (u8) (s8) (60.8f * factor);
 
     color1.r = (u8) (s8) (150.0f * factor);
-    color1.g = (u8) (s8) (FMA_SUB_MUL(255.0f, 120.0f, factor));
+    color1.g = (u8) (s8) (255.0f - 120.0f * factor);
     color1.b = (u8) (s8) (120.0f * factor);
 
     color2.r = (u8) (s8) (29.0f * factor);
     color2.g = (u8) (s8) (26.099998f * factor);
-    color2.b = (u8) (s8) (255.0f - (231.8f * factor));
+    color2.b = (u8) (s8) (FMA_SUB_MUL(255.0f, 231.8f, factor));
 
     GXInitTexObj(tex, img->image_ptr, img->width, img->height, img->format,
                  GX_CLAMP, GX_CLAMP, (u8) img->mipmap);

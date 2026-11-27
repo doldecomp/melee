@@ -135,7 +135,7 @@ void ftCo_80091BC4(Fighter* fp)
     stick_rad = lb_8000D008(fp->input.lstick[0].y,
                             fp->input.lstick[0].x * fp->facing_dir);
     if (stick_rad < 0) {
-        FMA_ADD_TO(stick_rad, 2, (float) M_PI);
+        stick_rad += 2 * (float) M_PI;
     }
 
     stick_deg = MTXRadToDeg(stick_rad);
@@ -171,8 +171,8 @@ void ftCo_80091BC4(Fighter* fp)
     if (stick_mag > 1) {
         stick_mag = 1;
     }
-    fp->mv.co.guard.x4 +=
-        p_ftCommonData->x44C * (stick_mag - fp->mv.co.guard.x4);
+    FMA_ADD_TO(fp->mv.co.guard.x4, p_ftCommonData->x44C,
+               (stick_mag - fp->mv.co.guard.x4));
 }
 
 static inline float inlineB0(Fighter* fp)
@@ -415,10 +415,11 @@ bool ftCo_800925A4(HSD_GObj* gobj)
                        p_ftCommonData->analog_shoulder_deadzone) /
                           (1 - p_ftCommonData->analog_shoulder_deadzone);
         }
-        FMA_SUB_FROM(fp->shield_health, p_ftCommonData->x278,
-                     ((fp->lightshield_amount *
-                       (p_ftCommonData->x2F0 - p_ftCommonData->x2EC)) +
-                      p_ftCommonData->x2EC));
+        fp->shield_health -=
+            p_ftCommonData->x278 *
+            (FMA_MUL_ADD(fp->lightshield_amount,
+                         (p_ftCommonData->x2F0 - p_ftCommonData->x2EC),
+                         p_ftCommonData->x2EC));
         if (fp->shield_health < 0) {
             fp->shield_health = 0;
             fp->x221A_b7 = false;

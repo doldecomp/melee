@@ -498,17 +498,17 @@ bool grOldKongo_80210454(Ground_GObj* ground_gobj, Fighter_GObj* keep)
     if (gp->u.taru.xC6 == 0) {
         Ground_801C4DA0(&pos_gnd, &unk);
         ftLib_GetPos(keep, &pos_ft);
-        if (FMA_ADD_MUL((pos_gnd.x - pos_ft.x) * (pos_gnd.x - pos_ft.x) +
-                            (pos_gnd.y - pos_ft.y) * (pos_gnd.y - pos_ft.y),
-                        (pos_gnd.z - pos_ft.z), (pos_gnd.z - pos_ft.z)) <
+        if (((pos_gnd.x - pos_ft.x) * (pos_gnd.x - pos_ft.x) +
+             (pos_gnd.y - pos_ft.y) * (pos_gnd.y - pos_ft.y) +
+             (pos_gnd.z - pos_ft.z) * (pos_gnd.z - pos_ft.z)) <
             yakumono_param->rframe_barrel_in *
                 yakumono_param->rframe_barrel_in)
         {
             rand_val = HSD_Randf();
             diff = yakumono_param->rframe_barrel_shoot_b -
                    yakumono_param->rframe_barrel_shoot_a;
-            gp->u.taru.xCA = (s16) (diff * rand_val +
-                                    yakumono_param->rframe_barrel_shoot_a);
+            gp->u.taru.xCA = (s16) (FMA_MUL_ADD(
+                diff, rand_val, yakumono_param->rframe_barrel_shoot_a));
             gp->u.taru.keep = keep;
             gp->u.taru.xC6 = 1;
             Ground_801C5440(gp, 0, 0x129U);

@@ -343,7 +343,9 @@ bool lbColl_80005C44(const Vec3* arg0, const Vec3* arg1, const Vec3* arg2,
     d2_y = arg3->y - sp2C.y;
     d2_z = arg3->z - sp2C.z;
 
-    if (SQ(temp_f2) < SQ(d2_x) + SQ(d2_y) + SQ(d2_z)) {
+    if (SQ(temp_f2) <
+        FMA_ADD_MUL(FMA_MUL_ADD(d2_x, d2_x, SQ(d2_y)), d2_z, d2_z))
+    {
         return false;
     } else {
         return true;
@@ -1562,9 +1564,8 @@ void lbColl_800077A0(Vec3* a, MtxPtr arg1, Vec3* b, Vec3* c, Vec3* d, Vec3* e,
         diff_ba.y = b->y - a->y;
         diff_ba.z = b->z - a->z;
 
-        dot_diff_cb = FMA_ADD_MUL(
-            FMA_MUL_ADD(diff_cb.x, diff_cb.x, diff_cb.y * diff_cb.y),
-            diff_cb.z, diff_cb.z);
+        dot_diff_cb = diff_cb.x * diff_cb.x + diff_cb.y * diff_cb.y +
+                      diff_cb.z * diff_cb.z;
 
         if (approximatelyZero(dot_diff_cb)) {
             scl = 0.0f;
@@ -1573,11 +1574,14 @@ void lbColl_800077A0(Vec3* a, MtxPtr arg1, Vec3* b, Vec3* c, Vec3* d, Vec3* e,
                                          2.0f * diff_cb.y * diff_ba.y),
                              2.0f * diff_cb.z, diff_ba.z);
 
-            ba_dot = FMA_ADD_MUL(diff_ba.x * diff_ba.x + diff_ba.y * diff_ba.y,
-                                 diff_ba.z, diff_ba.z);
+            ba_dot = FMA_ADD_MUL(
+                FMA_MUL_ADD(diff_ba.x, diff_ba.x, diff_ba.y * diff_ba.y),
+                diff_ba.z, diff_ba.z);
 
-            n1 = n0 * n0 - (4.0f * dot_diff_cb *
-                            -(FMA_MUL_SUB(offset_dist, offset_dist, ba_dot)));
+            n1 = FMA_MUL_SUB(
+                n0, n0,
+                (4.0f * dot_diff_cb *
+                 -(FMA_MUL_SUB(offset_dist, offset_dist, ba_dot))));
 
             if (n1 < 0.0f) {
                 n1 = 0.0f;

@@ -387,9 +387,8 @@ f32 hsd_8039DAD4(HSD_Generator* gen)
     vel_copy.z = gen->vel.z;
 
     /* Compute velocity magnitude */
-    vel_mag_sq = sqrtf(FMA_MUL_ADD(
-        vel_copy.z, vel_copy.z,
-        (FMA_MUL_ADD(vel_copy.x, vel_copy.x, vel_copy.y * vel_copy.y))));
+    vel_mag_sq = sqrtf(vel_copy.z * vel_copy.z +
+                       (vel_copy.x * vel_copy.x + vel_copy.y * vel_copy.y));
 
     /* Initialize rotation matrix */
     PSMTXIdentity(rot_mtx);
@@ -836,14 +835,14 @@ f32 hsd_8039DAD4(HSD_Generator* gen)
             emit_pos.z -= 0.5F;
 
             /* Multiply by rect's 3x3 matrix */
-            tmpvec.x = FMA_ADD_MUL(gen->aux.rect.xx * emit_pos.x +
-                                       gen->aux.rect.yx * emit_pos.y,
+            tmpvec.x = FMA_ADD_MUL(FMA_MUL_ADD(gen->aux.rect.xx, emit_pos.x,
+                                               gen->aux.rect.yx * emit_pos.y),
                                    gen->aux.rect.zx, emit_pos.z);
-            tmpvec.y = FMA_ADD_MUL(gen->aux.rect.xy * emit_pos.x +
-                                       gen->aux.rect.yy * emit_pos.y,
+            tmpvec.y = FMA_ADD_MUL(FMA_MUL_ADD(gen->aux.rect.xy, emit_pos.x,
+                                               gen->aux.rect.yy * emit_pos.y),
                                    gen->aux.rect.zy, emit_pos.z);
-            tmpvec.z = FMA_ADD_MUL(gen->aux.rect.xz * emit_pos.x +
-                                       gen->aux.rect.yz * emit_pos.y,
+            tmpvec.z = FMA_ADD_MUL(FMA_MUL_ADD(gen->aux.rect.xz, emit_pos.x,
+                                               gen->aux.rect.yz * emit_pos.y),
                                    gen->aux.rect.zz, emit_pos.z);
 
             PSMTXMultVec(rot_mtx, &tmpvec, &emit_pos);
@@ -853,9 +852,9 @@ f32 hsd_8039DAD4(HSD_Generator* gen)
 
             /* Compute velocity from rect axes */
             {
-                f32 mag = FMA_ADD_MUL(gen->aux.rect.zx * gen->aux.rect.zx +
-                                          gen->aux.rect.zy * gen->aux.rect.zy,
-                                      gen->aux.rect.zz, gen->aux.rect.zz);
+                f32 mag = gen->aux.rect.zx * gen->aux.rect.zx +
+                          gen->aux.rect.zy * gen->aux.rect.zy +
+                          gen->aux.rect.zz * gen->aux.rect.zz;
                 mag = sqrtf(mag);
                 {
                     f32 scale = elevation / mag;

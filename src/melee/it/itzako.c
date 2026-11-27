@@ -489,7 +489,7 @@ void it_2725_Logic9_Destroyed(Item_GObj* item_gobj)
 
 static inline float product_xyz(Vec3* a, Vec3* b)
 {
-    return (FMA_ADD_MUL(a->x * b->x + a->y * b->y, a->z, b->z));
+    return (a->x * b->x + a->y * b->y + a->z * b->z);
 }
 
 static inline float itzako_sqrtf(float x)
@@ -535,7 +535,7 @@ void it_8027C8D0(Vec3* arg0, Vec3* arg1, f32 arg8)
     }
 
     arg0->x = vec_mag * (FMA_MUL_SUB(sp1C.x, var_f6, (sp1C.y * dir)));
-    arg0->y = vec_mag * ((sp1C.x * dir) + (sp1C.y * var_f6));
+    arg0->y = vec_mag * (FMA_MUL_ADD(sp1C.x, dir, (sp1C.y * var_f6)));
     arg0->z = 0.0f;
 }
 

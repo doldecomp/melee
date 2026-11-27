@@ -1585,7 +1585,8 @@ static inline void psDispSubAppSRT(HSD_Particle* pp, u8* texform)
             f12 = prj[3] * pp->appsrt->x74 + prj[4] * pp->appsrt->x84;
             f8 = prj[3] * pp->appsrt->x78 + prj[4] * pp->appsrt->x88;
             f11 = prj[3] * pp->appsrt->x7C + prj[4] * pp->appsrt->x8C;
-            f13 = prj[3] * pp->appsrt->x80 + prj[4] * pp->appsrt->x90;
+            f13 =
+                FMA_MUL_ADD(prj[3], pp->appsrt->x80, prj[4] * pp->appsrt->x90);
             if (0.0f == w0) {
                 return;
             }

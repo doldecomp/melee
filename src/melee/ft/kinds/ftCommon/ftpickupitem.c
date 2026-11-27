@@ -135,7 +135,8 @@ Item_GObj* ftpickupitem_800942A0(Fighter_GObj* gobj, u32 flags)
                                 {
                                     float y_diff = it_pos.y - y0;
                                     float x_diff = it_pos.x - x0;
-                                    float dist_sq = SQ(x_diff) + SQ(y_diff);
+                                    float dist_sq = FMA_MUL_ADD(x_diff, x_diff,
+                                                                SQ(y_diff));
                                     if (dist_sq < min_dist_sq) {
                                         result = cur;
                                         min_dist_sq = dist_sq;

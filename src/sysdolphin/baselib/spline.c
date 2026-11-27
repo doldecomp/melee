@@ -122,7 +122,7 @@ void splGetSplinePoint(Vec3* p, HSD_Spline* spline, f32 u)
             cp = &spline->cv[idx];
             p->x = FMA_MUL_ADD(t, (cp[1].x - cp[0].x), cp[0].x);
             p->y = FMA_MUL_ADD(t, (cp[1].y - cp[0].y), cp[0].y);
-            p->z = (t * (cp[1].z - cp[0].z)) + cp[0].z;
+            p->z = FMA_MUL_ADD(t, (cp[1].z - cp[0].z), cp[0].z);
             return;
         case 1:
             cp = &spline->cv[idx * 3];

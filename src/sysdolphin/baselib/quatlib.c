@@ -161,8 +161,9 @@ s32 QuatSlerp(Quaternion* p, Quaternion* q, Quaternion* out, f32 t)
     f32 sp;
     f32 sq;
 
-    cosom = FMA_ADD_MUL(FMA_ADD_MUL(p->x * q->x + p->y * q->y, p->z, q->z),
-                        p->w, q->w);
+    cosom = FMA_ADD_MUL(
+        FMA_ADD_MUL(FMA_MUL_ADD(p->x, q->x, p->y * q->y), p->z, q->z), p->w,
+        q->w);
 
     if ((1.0F + cosom) > 1e-10F) {
         if ((1.0F - cosom) > 1e-10F) {
@@ -185,7 +186,7 @@ s32 QuatSlerp(Quaternion* p, Quaternion* q, Quaternion* out, f32 t)
         out->w = p->z;
 
         if (t < 0.5F) {
-            sp = sinf((f32) (M_PI_2 * (FMA_SUB_MUL(1.0F, 2.0F, t))));
+            sp = sinf((f32) (M_PI_2 * (1.0F - 2.0F * t)));
             sq = sinf((f32) (M_PI_2 * (2.0F * t)));
             out->x = FMA_MUL_ADD(sp, p->x, sq * q->x);
             out->y = FMA_MUL_ADD(sp, p->y, sq * q->y);

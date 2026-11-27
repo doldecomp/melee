@@ -177,7 +177,7 @@ f32 DrawASCII(int chr, float x, float y, GXColor* color)
                        FMA_MUL_ADD(lbl_804D6074, (0.11F * (p0 & 0xF)), y));
         GXColor4u8(color->r, color->g, color->b, color->a);
         GXPosition2f32(FMA_MUL_ADD(lbl_804D6070, (0.11F * (p1 >> 4)), x),
-                       lbl_804D6074 * (0.11F * (p1 & 0xF)) + y);
+                       FMA_MUL_ADD(lbl_804D6074, (0.11F * (p1 & 0xF)), y));
         GXColor4u8(color->r, color->g, color->b, color->a);
     }
     return lbl_804D6070;

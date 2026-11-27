@@ -407,9 +407,9 @@ static inline void ftCo_SpawnEffect_x406(Fighter_GObj* gobj, Vec3* vec, f32 f)
 
 static inline f32 ftCo_Speed(Fighter* fp)
 {
-    return sqrtf(FMA_ADD_MUL((fp->self_vel.x * fp->self_vel.x) +
-                                 (fp->self_vel.y * fp->self_vel.y),
-                             fp->self_vel.z, fp->self_vel.z));
+    return sqrtf((fp->self_vel.x * fp->self_vel.x) +
+                 (fp->self_vel.y * fp->self_vel.y) +
+                 fp->self_vel.z * fp->self_vel.z);
 }
 
 void ftCo_DamageIce_Collide(Fighter_GObj* gobj, Vec3* normal, Vec3* vec)
@@ -448,8 +448,9 @@ void ftCo_DamageIce_Collide(Fighter_GObj* gobj, Vec3* normal, Vec3* vec)
         if ((coll_data->env_flags & Collide_RightWallHug) != 0 ||
             (coll_data->env_flags & Collide_RightWallHug) != 0)
         {
-            fp->cur_pos.x = -((fp->x68C_transNPos.z * -fp->facing_dir) -
-                              (fp->cur_pos.x + vec->x));
+            fp->cur_pos.x =
+                -(FMA_MUL_SUB(fp->x68C_transNPos.z, -fp->facing_dir,
+                              (fp->cur_pos.x + vec->x)));
         } else {
             fp->cur_pos.y = fp->cur_pos.y + vec->y + fp->x68C_transNPos.y;
         }

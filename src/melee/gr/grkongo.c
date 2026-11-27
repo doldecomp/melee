@@ -1411,14 +1411,15 @@ static int fn_801D8134(HSD_GObj* arg0, HSD_GObj* arg1)
         Ground_801C4DA0(&pos_gnd, &unk);
         ftLib_GetPos(arg1, &pos_ft);
 
-        if (FMA_ADD_MUL((pos_gnd.x - pos_ft.x) * (pos_gnd.x - pos_ft.x) +
-                            (pos_gnd.y - pos_ft.y) * (pos_gnd.y - pos_ft.y),
-                        (pos_gnd.z - pos_ft.z), (pos_gnd.z - pos_ft.z)) <
+        if (((pos_gnd.x - pos_ft.x) * (pos_gnd.x - pos_ft.x) +
+             (pos_gnd.y - pos_ft.y) * (pos_gnd.y - pos_ft.y) +
+             (pos_gnd.z - pos_ft.z) * (pos_gnd.z - pos_ft.z)) <
             yakumono_param->unk28 * yakumono_param->unk28)
         {
             rand_val = HSD_Randf();
             diff = yakumono_param->unk24 - yakumono_param->unk20;
-            gp->u.kongo3.xCA = (s16) (diff * rand_val + yakumono_param->unk20);
+            gp->u.kongo3.xCA =
+                (s16) (FMA_MUL_ADD(diff, rand_val, yakumono_param->unk20));
             gp->u.kongo3.xD0 = (HSD_JObj*) arg1;
             gp->u.kongo3.xC6 = 1;
             Ground_801C5440(gp, 0, 0x129U);

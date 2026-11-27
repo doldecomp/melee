@@ -873,7 +873,7 @@ f32 ftCo_800A1AB4(Fighter* fp0, Fighter* fp1)
 {
     float dx = fp0->cur_pos.x - fp1->cur_pos.x;
     float dy = fp0->cur_pos.y - fp1->cur_pos.y;
-    return sqrtf(SQ(dx) + SQ(dy));
+    return sqrtf(FMA_MUL_ADD(dx, dx, SQ(dy)));
 }
 
 bool ftCo_800A1B38_noinline(enum_t arg0);
@@ -1219,12 +1219,9 @@ s32 ftCo_800A229C(Fighter* fp, Vec3* arg1)
             *arg1 = fp->cur_pos;
             return 2;
         }
-        if (fp->cur_pos.x <
-                FMA_MUL_ADD(0.2f, w, Stage_GetBlastZoneLeftOffset()) ||
-            fp->cur_pos.x >
-                FMA_SUB_MUL(Stage_GetBlastZoneRightOffset(), 0.2f, w) ||
-            fp->cur_pos.y >
-                FMA_SUB_MUL(Stage_GetBlastZoneTopOffset(), 0.2f, h) ||
+        if (fp->cur_pos.x < (0.2f * w + Stage_GetBlastZoneLeftOffset()) ||
+            fp->cur_pos.x > (Stage_GetBlastZoneRightOffset() - 0.2f * w) ||
+            fp->cur_pos.y > (Stage_GetBlastZoneTopOffset() - 0.2f * h) ||
             fp->cur_pos.y < 0.2f * h + Stage_GetBlastZoneBottomOffset())
         {
             *arg1 = fp->cur_pos;
@@ -1245,13 +1242,16 @@ s32 ftCo_800A229C(Fighter* fp, Vec3* arg1)
         h = Stage_GetBlastZoneTopOffset() - Stage_GetBlastZoneBottomOffset();
         grLib_801C9E60(&sp20);
         mag = ABS(sp20.y);
-        frac = 0.4 * mag + 0.4;
+        frac = FMA_MUL_ADD(0.4, mag, 0.4);
         if (sp20.y < 0.0) {
-            if (fp->cur_pos.y < h * frac + Stage_GetBlastZoneBottomOffset()) {
+            if (fp->cur_pos.y <
+                FMA_MUL_ADD(h, frac, Stage_GetBlastZoneBottomOffset()))
+            {
                 *arg1 = fp->cur_pos;
                 return 2;
             }
-        } else if (fp->cur_pos.y > -(h * frac - Stage_GetBlastZoneTopOffset()))
+        } else if (fp->cur_pos.y >
+                   -(FMA_MUL_SUB(h, frac, Stage_GetBlastZoneTopOffset())))
         {
             *arg1 = fp->cur_pos;
             return 2;
@@ -1425,11 +1425,11 @@ float ftCo_800A2A70(Fighter* fp, bool arg1)
             if (arg1) {
                 float x = data->pos0.x - fp->cur_pos.x,
                       y = data->pos0.y - fp->cur_pos.y;
-                r = sqrtf(SQ(x) + SQ(y));
+                r = sqrtf(FMA_MUL_ADD(x, x, SQ(y)));
             } else {
                 float x = data->pos1.x - fp->cur_pos.x,
                       y = data->pos1.y - fp->cur_pos.y;
-                r = sqrtf(SQ(x) + SQ(y));
+                r = sqrtf(FMA_MUL_ADD(x, x, SQ(y)));
             }
             return r;
         }
@@ -1828,7 +1828,7 @@ bool ftCo_800A3554(Fighter* fp, float arg1)
     }
     {
         float x = data->x54.x - fp->cur_pos.x, y = data->x54.y - fp->cur_pos.y;
-        if (sqrtf(SQ(x) + SQ(y)) < data->x38 + arg1) {
+        if (sqrtf(FMA_MUL_ADD(x, x, SQ(y))) < data->x38 + arg1) {
             if (data->x60 != 0) {
                 data->x60 = 0;
                 data->x54.x = data->x64.x;
@@ -1930,9 +1930,9 @@ static inline float sqrtf_store(float x, volatile float* y)
 {
     if (x > 0.0f) {
         double guess = __frsqrte((double) x);
-        guess = 0.5 * guess * (3.0 - guess * guess * x);
-        guess = 0.5 * guess * (3.0 - guess * guess * x);
-        guess = 0.5 * guess * (3.0 - guess * guess * x);
+        guess = 0.5 * guess * (FMA_SUB_MUL(3.0, guess * guess, x));
+        guess = 0.5 * guess * (FMA_SUB_MUL(3.0, guess * guess, x));
+        guess = 0.5 * guess * (FMA_SUB_MUL(3.0, guess * guess, x));
         *y = (float) (x * guess);
         return *(volatile float*) y;
     }
@@ -7477,14 +7477,14 @@ bool ftCo_800B0E98(Fighter* fp0, Fighter* fp1)
             float x = fp0->pos_delta.x - fp1->pos_delta.x,
                   y = fp0->pos_delta.y - fp1->pos_delta.y,
                   r = fp0->co_attrs.mid_walk_point;
-            if (SQ(x) + SQ(y) > SQ(r)) {
+            if (FMA_MUL_ADD(x, x, SQ(y)) > SQ(r)) {
                 return false;
             }
         }
         {
             float x = fp0->cur_pos.x - fp1->cur_pos.x,
                   y = fp1->cur_pos.y - fp0->cur_pos.y;
-            if (SQ(x) + SQ(y) < SQ(25.0)) {
+            if (FMA_MUL_ADD(x, x, SQ(y)) < SQ(25.0)) {
                 return true;
             }
         }
@@ -7511,7 +7511,7 @@ static inline bool ftCo_800B101C_inline0(Fighter* fp, Fighter* other)
     } else {
         float dx = fp->cur_pos.x - other->cur_pos.x;
         float dy = other->cur_pos.y - fp->cur_pos.y;
-        if (SQ(dx) + SQ(dy) > SQ(25.0)) {
+        if (FMA_MUL_ADD(dx, dx, SQ(dy)) > SQ(25.0)) {
             return true;
         } else if (ftCo_800B0CA8(fp, other)) {
             return false;

@@ -158,8 +158,8 @@ void ftCo_800C2600(Fighter_GObj* gobj, u32 arg1)
                     FMA_MUL_ADD(entry->xC.z, x20FC, entry->x0.z) - prevPos.z;
 
                 if (i != fp->x2100 - 1) {
-                    d2 = FMA_MUL_ADD(delta.z, delta.z,
-                                     (delta.x * delta.x + delta.y * delta.y));
+                    d2 = delta.z * delta.z +
+                         (delta.x * delta.x + delta.y * delta.y);
                     d2 = sqrtf(d2);
                     totalDist += d2;
                     *dp = totalDist;
@@ -338,7 +338,8 @@ void ftCo_800C2600(Fighter_GObj* gobj, u32 arg1)
                                                       basePosX);
                                 vp[1].y = FMA_MUL_ADD(tempDir.y, outerScale,
                                                       basePosY);
-                                vp[1].z = tempDir.z * outerScale + basePosZ;
+                                vp[1].z = FMA_MUL_ADD(tempDir.z, outerScale,
+                                                      basePosZ);
                                 vp[1].r = params->xE;
                                 vp[1].g = params->xF;
                                 vp[1].b = params->x10;

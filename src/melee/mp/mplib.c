@@ -2926,7 +2926,7 @@ bool mpLib_800511A4_RightWall(float ax, float ay, float bx, float by, float cx,
                     vdx = x0 - x;
                     vdy = y0 - y;
 
-                    if (SQ(vdx) + SQ(vdy) > 0.001F) {
+                    if (FMA_MUL_ADD(vdx, vdx, SQ(vdy)) > 0.001F) {
                         if (mpLineIntersection(cx, cy, dx, dy, x, y, x0, y0,
                                                &int_x, &int_y))
                         {
@@ -2958,7 +2958,7 @@ bool mpLib_800511A4_RightWall(float ax, float ay, float bx, float by, float cx,
                     vdx = x0 - x;
                     vdy = y0 - y;
 
-                    if (SQ(vdx) + SQ(vdy) > 0.001F) {
+                    if (FMA_MUL_ADD(vdx, vdx, SQ(vdy)) > 0.001F) {
                         if (mpLineIntersection(cx, cy, dx, dy, x, y, x0, y0,
                                                &int_x, &int_y))
                         {
@@ -3066,7 +3066,7 @@ bool mpLib_800515A0_LeftWall(float a0x, float a0y, float a1x, float a1y,
                     vdx = x0 - x;
                     vdy = y0 - y;
 
-                    if (SQ(vdx) + SQ(vdy) > 0.001F) {
+                    if (FMA_MUL_ADD(vdx, vdx, SQ(vdy)) > 0.001F) {
                         if (mpLineIntersection(b0x, b0y, b1x, b1y, x, y, x0,
                                                y0, &int_x, &int_y))
                         {
@@ -3099,7 +3099,7 @@ bool mpLib_800515A0_LeftWall(float a0x, float a0y, float a1x, float a1y,
                     vdx = x0 - x;
                     vdy = y0 - y;
 
-                    if (SQ(vdx) + SQ(vdy) > 0.001F) {
+                    if (FMA_MUL_ADD(vdx, vdx, SQ(vdy)) > 0.001F) {
                         if (mpLineIntersection(b0x, b0y, b1x, b1y, x, y, x0,
                                                y0, &int_x, &int_y))
                         {

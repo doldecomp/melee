@@ -46,11 +46,11 @@ static inline float my_sqrtf(float x)
         // returns an approximation to
         f64 guess = __frsqrte(x);
         // now have 12 sig bits
-        guess = 0.5 * guess * (3.0 - guess * guess * x);
+        guess = 0.5 * guess * (FMA_SUB_MUL(3.0, guess * guess, x));
         // now have 24 sig bits
-        guess = 0.5 * guess * (3.0 - guess * guess * x);
+        guess = 0.5 * guess * (FMA_SUB_MUL(3.0, guess * guess, x));
         // now have 32 sig bits
-        guess = 0.5 * guess * (3.0 - guess * guess * x);
+        guess = 0.5 * guess * (FMA_SUB_MUL(3.0, guess * guess, x));
         y = x * guess;
         return y;
     }
@@ -66,10 +66,9 @@ f32 it_8026B1D4(HSD_GObj* gobj, HitCapsule* itemHitboxUnk)
     f32 ret = itemHitboxUnk->damage;
     const Item* ip = gobj->user_data;
     if (ip->xDC8_word.flags.x14 != 0) {
-        f32 itemSpeed =
-            my_sqrtf(FMA_ADD_MUL(FMA_MUL_ADD(ip->x40_vel.x, ip->x40_vel.x,
-                                             ip->x40_vel.y * ip->x40_vel.y),
-                                 ip->x40_vel.z, ip->x40_vel.z));
+        f32 itemSpeed = my_sqrtf(ip->x40_vel.x * ip->x40_vel.x +
+                                 ip->x40_vel.y * ip->x40_vel.y +
+                                 ip->x40_vel.z * ip->x40_vel.z);
 
         FMA_ADD_TO(ret, itemSpeed, it_804D6D28->x80_float[5]);
         ret += it_804D6D28->x80_float[6];

@@ -34,9 +34,9 @@ static inline float my_sqrtf(float x)
 
     if (x > 0.0f) {
         double guess = __frsqrte((double) x);
-        guess = half * guess * (three - guess * guess * x);
-        guess = half * guess * (three - guess * guess * x);
-        guess = half * guess * (three - guess * guess * x);
+        guess = half * guess * (FMA_SUB_MUL(three, guess * guess, x));
+        guess = half * guess * (FMA_SUB_MUL(three, guess * guess, x));
+        guess = half * guess * (FMA_SUB_MUL(three, guess * guess, x));
         y = (float) (x * guess);
         return y;
     }
@@ -922,9 +922,9 @@ void fn_8003F294(int slot, int index)
 
     {
         pl_StaleMoveTableExt_t* t2 = Player_GetStaleMoveTableIndexPtr2(slot);
-        f32 mag = sqrtf__Ff(FMA_MUL_ADD(
-            t2->x0_staleMoveTable.xCDC, t2->x0_staleMoveTable.xCDC,
-            t2->x0_staleMoveTable.xCE0 * t2->x0_staleMoveTable.xCE0));
+        f32 mag =
+            sqrtf__Ff(t2->x0_staleMoveTable.xCDC * t2->x0_staleMoveTable.xCDC +
+                      t2->x0_staleMoveTable.xCE0 * t2->x0_staleMoveTable.xCE0);
         f32 x8c = *((f32*) &pl_804D6470->x8C);
         pl_80039238(slot, 0x44, 0L, pl_804D6470->x88, &table->xDC0, x8c, mag);
     }
@@ -1005,9 +1005,8 @@ void fn_8003F654(int slot, int index, Vec3* pos, Vec3* prevPos)
         b34_result = ft_80087B34(entity);
         b34 = b34_result;
         if (b34 == 1) {
-            dist = my_sqrtf(FMA_MUL_ADD(
-                (prevPos->x - pos->x), (prevPos->x - pos->x),
-                ((prev_pos2->y - pos->y) * (prevPos->y - pos->y))));
+            dist = my_sqrtf((prevPos->x - pos->x) * (prevPos->x - pos->x) +
+                            ((prev_pos2->y - pos->y) * (prevPos->y - pos->y)));
             teammate_slot = ftLib_GetLastAttackerSlot(entity);
             table->xD80 += dist;
             if (dist > table->xD84) {

@@ -3781,8 +3781,8 @@ void grBigBlue_801ED694(Ground_GObj* gobj, s32 lane)
         f32 angle = atan2f(-sp_vec.x, sp_vec.y);
         FMA_ADD_TO(f31_rot, yakumono_param->x50, (angle - f31_rot));
     } else {
-        FMA_ADD_TO(f31_rot, yakumono_param->x54,
-                   (0.017453292F * yakumono_param->x58 - f31_rot));
+        f31_rot += yakumono_param->x54 *
+                   (FMA_MUL_SUB(0.017453292F, yakumono_param->x58, f31_rot));
     }
 
     /* Update jobj transform */

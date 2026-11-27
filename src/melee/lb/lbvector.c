@@ -89,7 +89,9 @@ float lbVector_Angle(Vec3* a, Vec3* b)
     float lena_lenb = lbVector_Len(a) * lbVector_Len(b);
 
     if (lena_lenb > 0.0000000001f) {
-        float cosine = (a->x * b->x + a->y * b->y + a->z * b->z) / lena_lenb;
+        float cosine =
+            (FMA_ADD_MUL(FMA_MUL_ADD(a->x, b->x, a->y * b->y), a->z, b->z)) /
+            lena_lenb;
         if (cosine > 1.0f) {
             cosine = 1.0f;
         }
@@ -164,8 +166,7 @@ void lbVector_RotateAboutUnitAxis(Vec3* v, Vec3* axis, float angle)
     // by using two initial rotations, then the new v is rotated about the
     // z-axis by angle, and finally the first two rotations are reversed.
 
-    float len_axis_yz =
-        sqrtf(FMA_MUL_ADD(axis->y, axis->y, axis->z * axis->z));
+    float len_axis_yz = sqrtf(axis->y * axis->y + axis->z * axis->z);
     float s = lbvector_sin(angle);
     float c = lbvector_cos(angle);
     float unit_axis_yz_y;
@@ -182,7 +183,7 @@ void lbVector_RotateAboutUnitAxis(Vec3* v, Vec3* axis, float angle)
         unit_axis_yz_z = axis->y / len_axis_yz;
 
         x = v->x;
-        y = v->y * unit_axis_yz_y - v->z * unit_axis_yz_z;
+        y = FMA_MUL_SUB(v->y, unit_axis_yz_y, v->z * unit_axis_yz_z);
         z = FMA_MUL_ADD(v->y, unit_axis_yz_z, v->z * unit_axis_yz_y);
     } else {
         x = v->x;

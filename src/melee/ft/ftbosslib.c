@@ -15,7 +15,6 @@
 #include <melee/lb/lbvector.h>
 #include <melee/mp/mplib.h>
 #include <melee/pl/player.h>
-#include <Runtime/fma.h>
 #include <sysdolphin/baselib/debug.h>
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/jobj.h>
@@ -52,8 +51,7 @@ void ftBossLib_ReportGObjSlotType(HSD_GObj* gobj)
 
 static inline float my_lbvector_Len(Vec3* vec)
 {
-    return sqrtf(
-        FMA_ADD_MUL(vec->x * vec->x + vec->y * vec->y, vec->z, vec->z));
+    return sqrtf(vec->x * vec->x + vec->y * vec->y + vec->z * vec->z);
 }
 
 void ftBossLib_8015BE40(HSD_GObj* gobj, Vec3* arg1, float* arg2, float arg3,

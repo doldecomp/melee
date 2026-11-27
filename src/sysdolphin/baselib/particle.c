@@ -2002,9 +2002,8 @@ void* hsd_8039930C(HSD_Particle* pp, HSD_Particle* prev)
                             random_range = fval;
                         }
                         FMA_ADD_TO(base_speed, random_range, HSD_Randf());
-                        mag = FMA_ADD_MUL(pp->vel.x * pp->vel.x +
-                                              pp->vel.y * pp->vel.y,
-                                          pp->vel.z, pp->vel.z);
+                        mag = pp->vel.x * pp->vel.x + pp->vel.y * pp->vel.y +
+                              pp->vel.z * pp->vel.z;
                         if (mag > 0.0F) {
                             double guess = __frsqrte((double) mag);
                             guess = 0.5 * guess *
@@ -2904,8 +2903,9 @@ void* hsd_8039930C(HSD_Particle* pp, HSD_Particle* prev)
         pp->pos.y = gp->pos.y +
                     (FMA_MUL_ADD(cosB, (vz * sinA),
                                  (FMA_MUL_ADD(sinB, (nd * sinA), e * cosA))));
-        pp->pos.z = gp->pos.z + (FMA_MUL_ADD(cosB, (vz * cosA),
-                                             (sinB * (nd * cosA) - e * sinA)));
+        pp->pos.z = gp->pos.z +
+                    (FMA_MUL_ADD(cosB, (vz * cosA),
+                                 (FMA_MUL_SUB(sinB, (nd * cosA), e * sinA))));
     } else {
         /* Simple physics */
         if (pp->kind & 1) {

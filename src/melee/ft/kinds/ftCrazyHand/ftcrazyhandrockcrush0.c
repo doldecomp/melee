@@ -38,8 +38,7 @@ static inline float my_sqrtf(float x)
 
 static inline float my_lbVector_Len(Vec3* vec)
 {
-    return my_sqrtf(
-        FMA_ADD_MUL(vec->x * vec->x + vec->y * vec->y, vec->z, vec->z));
+    return my_sqrtf(vec->x * vec->x + vec->y * vec->y + vec->z * vec->z);
 }
 
 void ftCh_Init_80157DF8(HSD_GObj* gobj)

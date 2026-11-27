@@ -756,9 +756,9 @@ static inline f32 _tyDisplay_80318CB4_sqrt_store(f32 x, volatile f32* rounded)
 {
     if (x > 0.0f) {
         double guess = __frsqrte((double) x);
-        guess = 0.5F * guess * (3.0F - guess * guess * x);
-        guess = 0.5F * guess * (3.0F - guess * guess * x);
-        guess = 0.5F * guess * (3.0F - guess * guess * x);
+        guess = 0.5F * guess * (FMA_SUB_MUL(3.0F, guess * guess, x));
+        guess = 0.5F * guess * (FMA_SUB_MUL(3.0F, guess * guess, x));
+        guess = 0.5F * guess * (FMA_SUB_MUL(3.0F, guess * guess, x));
         *rounded = (f32) (x * guess);
         x = *rounded;
     }
@@ -832,8 +832,8 @@ void _tyDisplay_80318CB4(s32 arg0)
                 theta = atan2f(grid->pos[i].z, grid->pos[i].x);
                 {
                     f32 mag = _tyDisplay_80318CB4_sqrt_store(
-                        FMA_MUL_ADD(grid->pos[i].x, grid->pos[i].x,
-                                    grid->pos[i].z * grid->pos[i].z),
+                        grid->pos[i].x * grid->pos[i].x +
+                            grid->pos[i].z * grid->pos[i].z,
                         &rounded.value);
                     s32 collided;
                     s32 tries;

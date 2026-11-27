@@ -2383,7 +2383,7 @@ void mnDiagram_CursorProc(HSD_GObj* gobj)
 
     lb_80011E24(gobj->hsd_obj, &sp_jobj, 2, -1);
     HSD_JObjSetTranslateX(sp_jobj, x_spacing * (col - 3));
-    HSD_JObjSetTranslateY(sp_jobj, y_spacing * (row - 4.5) - 0.1F);
+    HSD_JObjSetTranslateY(sp_jobj, FMA_MUL_SUB(y_spacing, (row - 4.5), 0.1F));
 }
 
 void mnDiagram_CreateCursor(void)

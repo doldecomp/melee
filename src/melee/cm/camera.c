@@ -157,8 +157,8 @@ static inline void camera_sdata2_order(void)
 
 static inline float vec_len(Vec3* offset)
 {
-    return sqrtf(FMA_ADD_MUL((offset->x * offset->x) + (offset->y * offset->y),
-                             offset->z, offset->z));
+    return sqrtf((offset->x * offset->x) + (offset->y * offset->y) +
+                 offset->z * offset->z);
 }
 
 void Camera_Init(int n_subjects)
@@ -1740,7 +1740,7 @@ void Camera_8002BAA8(f32 zoom_amt)
     }
 
     game_camera.pause_eye_distance = (FMA_MUL_ADD(
-        zoom_amt, ((offset_len * cm_803BCCA0.x9C) + cm_803BCCA0.xA0),
+        zoom_amt, (FMA_MUL_ADD(offset_len, cm_803BCCA0.x9C, cm_803BCCA0.xA0)),
         game_camera.pause_eye_distance));
 
     if (game_camera.pause_eye_distance < game_camera.x2D0.unk28) {
@@ -2042,8 +2042,8 @@ void Camera_8002C1A8(void)
 
 static inline float eye_offset_len(Vec3* offset)
 {
-    return sqrtf(FMA_MUL_ADD(offset->z, offset->z,
-                             (offset->x * offset->x + offset->y * offset->y)));
+    return sqrtf(offset->z * offset->z +
+                 (offset->x * offset->x + offset->y * offset->y));
 }
 
 void Camera_8002C5B4(Camera_x2D0* arg0)
