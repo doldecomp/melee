@@ -279,6 +279,11 @@ nix build .#melee-dat-samples
 the original DOL using the addresses and sizes in `symbols.txt`, then checks
 each nonempty `ftData.xC` motion's file offset, exact size and public
 `FigaTree` name against its `Pl*AJ.dat` archive.
+It also checks `ftData.x14` demo motions against the packed archives inside
+the `ftDemo*MotionFile*` public symbols. The four common groups are result,
+intro, ending and vi-wait; the movie getters supply extra groups for Mario,
+Luigi, Kirby and Giga Bowser. Every copy of a named payload is checked,
+including shared payloads such as Popo's and Nana's vi-wait animations.
 It fails if a reference lands between archives, has the wrong size, or names
 a symbol absent from that archive. Empty motions and shared references are
 valid. Archives no motion references are reported and retained; padding need
@@ -294,8 +299,12 @@ melee-dat symbols check-motions --dol orig/GALE01/sys/main.dol \
 This needs extracted disc files and the checked-in symbol configuration;
 no game build, MWCC, DWARF or DTK executable is needed. Counts come from
 `ftData_Table_Unk0`, and the filenames from `ftData_803C1F40` and
-`ftData_803C23E4`. This checks normal fighter animations; demo motion tables
-and nested motion-file archives are separate follow-ups.
+`ftData_803C23E4`. Demo counts come from `ftData_UnkIntPairs`; their public
+names come from `ftData_803C2468` and the tables used by `ftData_803C24EC`'s
+movie getters. The tool scans the extracted `.dat` files for those names and
+checks each payload within its containing archive's public-symbol span.
+This validates nested archive ranges and names; their typed contents remain
+a separate coverage task.
 
 ## Native archive interface
 
